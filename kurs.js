@@ -7038,7 +7038,7 @@
    ============================================================ */
 (function(){
   if(window.__tsmacGk) return; window.__tsmacGk=true;
-  var POSTER="https://cdn.jsdelivr.net/gh/Tastyrob123/kurs@main/img/gemeinkosten-mac/pc.png";
+  var POSTER="https://tastyrob123.github.io/kurs/img/gemeinkosten-mac/pc.png";
   (function(){ var pre=new Image(); pre.src=POSTER; })();
   var VID='#block-39cb9546553480c8a4d0e1fc54cfcb87';
   var PHRASE='Wir bauen zwei Datenbanken';

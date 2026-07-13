@@ -26,8 +26,10 @@ fi
 git push origin main
 
 # 4) jsDelivr purgen  => sofort live, KEIN GitHub-Pages-Build, der abgewuergt wird
+#    Loader nutzt die UNVERSIONIERTE URL (gh/Tastyrob123/kurs-code/...), darum beide Pfade purgen.
 for f in kurs.js kurs.css; do
-  curl -s "https://purge.jsdelivr.net/gh/Tastyrob123/kurs@main/$f" >/dev/null || true
+  curl -s "https://purge.jsdelivr.net/gh/Tastyrob123/kurs-code/$f" >/dev/null || true
+  curl -s "https://purge.jsdelivr.net/gh/Tastyrob123/kurs-code@main/$f" >/dev/null || true
 done
 
 # 5) Verifizieren, dass die neue Datei wirklich ausgeliefert wird
