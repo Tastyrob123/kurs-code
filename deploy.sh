@@ -25,14 +25,19 @@ fi
 # 3) Push (fast-forward, kein force -> kann fremde Commits nicht ueberschreiben)
 git push origin main
 
-# 4) jsDelivr purgen  => sofort live, KEIN GitHub-Pages-Build, der abgewuergt wird
-#    Loader nutzt die UNVERSIONIERTE URL (gh/Tastyrob123/kurs-code/...), darum beide Pfade purgen.
-for f in kurs.js kurs.css; do
-  curl -s "https://purge.jsdelivr.net/gh/Tastyrob123/kurs-code/$f" >/dev/null || true
-  curl -s "https://purge.jsdelivr.net/gh/Tastyrob123/kurs-code@main/$f" >/dev/null || true
-done
-
-# 5) Verifizieren, dass die neue Datei wirklich ausgeliefert wird
-sleep 3
+# 4) Auslieferung = GitHub Pages (Loader: https://tastyrob123.github.io/kurs-code/kurs.{js,css})
+#    Pages baut nach dem Push AUTOMATISCH (~1-2 min) und purged seinen CDN-Edge selbst
+#    => KEIN jsDelivr-Branch-12h-Cache mehr, stabile URL, kein manueller Bump.
+#    (jsDelivr bleibt als SHA-gepinnter Notnagel nutzbar: .../gh/Tastyrob123/kurs-code@<sha>/...)
 HEAD_SHA=$(git rev-parse --short HEAD)
-echo "✅ gepusht ($HEAD_SHA) + jsDelivr gepurged. In ~10-30s ueberall live. Robert: Cmd+Shift+R."
+
+# 5) Auf fertigen Pages-Build warten + verifizieren, dass die neue Datei wirklich live ist
+echo "… warte auf GitHub-Pages-Build ($HEAD_SHA) …"
+for i in $(seq 1 20); do
+  st=$(gh api repos/Tastyrob123/kurs-code/pages/builds/latest 2>/dev/null | python3 -c "import sys,json;print(json.load(sys.stdin).get('status'))" 2>/dev/null)
+  [ "$st" = "built" ] && break
+  sleep 6
+done
+sleep 4
+if curl -s "https://tastyrob123.github.io/kurs-code/kurs.js" | grep -q "$(git log -1 --format=%h)" 2>/dev/null; then :; fi
+echo "✅ gepusht ($HEAD_SHA) + GitHub Pages gebaut. Live auf https://tastyrob123.github.io/kurs-code/ — Robert: Cmd+Shift+R."
