@@ -2531,6 +2531,38 @@
 
 /* ---- */
 
+/* allergene-bersicht — Hero "DB IX–X : Allergene & Packaging" (Muster: gemeinkosten-Hero).
+   Bild = 3-Laptop-Cover (Allergene-DB) freigestellt auf Transparenz (aus Allergene Hero.png). Text = HTML/CSS-Overlay. */
+(function(){
+  var IMG="https://files.catbox.moe/850o43.webp";
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc || sc.querySelector(".ts-hero")) return;
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="DB IX–X — Allergene & Packaging" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Lektion 2.6</div>'+
+        '<h1 class="ts-hero__title">DB IX – X :<br><span class="ts-gold">Allergene &amp; Packaging</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
 /* ============================================================
    gemeinkosten-mitarbeiterlhne — "Was sind Gemeinkosten?"
    Animiertes Kostenblock-Grid (#tsgk) ersetzt die 8er-Bullet-
