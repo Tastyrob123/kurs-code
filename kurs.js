@@ -1719,7 +1719,7 @@
     { re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, href:'/zutatenliste' },
     { re:/\/zutatenliste\/?$/,       href:'/rezepturen' },
     { re:/\/rezepturen\/?$/,         href:'/gemeinkosten-mitarbeiterlhne' },
-    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/gerichte-getrnke-finaler-schritt' }
+    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
