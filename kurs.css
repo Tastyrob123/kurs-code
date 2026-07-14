@@ -1213,3 +1213,16 @@ details > summary {
 .page__gemeinkosten-mitarbeiterlhne .notion-text.ts-gkintro{
   text-align:center !important; max-width:820px; margin-left:auto !important; margin-right:auto !important;
 }
+
+/* ===== Gemeinkosten & Löhne (Lektion 2.5) · Exkurs "Eine Zahl, drei Brillen" hochgezogen =====
+   Der komplette Exkurs-Abschnitt (H2 "Exkurs: Die drei Brillen …" + Erklärtext + #tsbrille-Widget)
+   wird von kurs.js aus dem Seitenende nach oben verschoben — direkt UNTER die Gemeinkostenannahmen,
+   also vor "Abschnitt B — Mitarbeiterlöhne". Bis der Move erfolgt ist, wird der Abschnitt an seiner
+   alten Position (Seitenende) versteckt, damit beim Laden nichts aufblitzt/springt.
+   Fail-open: kurs.js setzt <html>.ts-brille-moved nach dem Move ODER spätestens per Sicherheits-Timeout
+   (nach 4 s) — der Abschnitt bleibt also nie dauerhaft unsichtbar, selbst wenn die Anker fehlschlagen.
+   (Scope-Klasse .page__… sitzt auf <main>, die Freigabe-Klasse auf <html> — daher :root + Descendant.) */
+:root:not(.ts-brille-moved) .page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870,
+:root:not(.ts-brille-moved) .page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870 ~ *{
+  visibility:hidden !important;
+}

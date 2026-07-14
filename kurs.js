@@ -7526,7 +7526,32 @@
     var poll=setInterval(function(){ if(!document.body.contains(root)){ clearInterval(poll); return; } if(inView(root)){ play(root); clearInterval(poll); } },250);
     setTimeout(function(){ clearInterval(poll); },20000);
   }
-  mount();
-  document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  // Exkurs-Abschnitt ("Eine Zahl, drei Brillen") vom Seitenende nach oben ziehen:
+  // direkt vor "Abschnitt B — Mitarbeiterlöhne" = unter die Gemeinkostenannahmen.
+  // Loop-sicher (bewegt nur, solange das Widget noch NACH dem Ziel steht) + fail-open (gibt
+  // den per CSS versteckten Abschnitt immer frei, notfalls unverschoben).
+  function relocateSection(){
+    var root=document.getElementById('tsbrille'); if(!root) return;
+    var target=document.getElementById('block-df216f66494644348800173f8b49dd66'); // H1 "Abschnitt B — Mitarbeiterlöhne"
+    if(!target){ var h1=document.querySelectorAll('h1'); for(var i=0;i<h1.length;i++){ var t=(h1[i].textContent||''); if(t.indexOf('Abschnitt B')>-1||t.indexOf('Mitarbeiterlöhne')>-1){ target=h1[i].closest('[id^="block-"]')||h1[i]; break; } } }
+    if(!target){ document.documentElement.classList.add('ts-brille-moved'); return; }
+    // schon verschoben? Widget steht bereits VOR dem Ziel -> nur freigeben, nicht erneut bewegen
+    if(target.compareDocumentPosition(root) & Node.DOCUMENT_POSITION_PRECEDING){ document.documentElement.classList.add('ts-brille-moved'); return; }
+    var h2=document.getElementById('block-d91675b926df462994844a6fb00a4870'); // H2 "Exkurs: Die drei Brillen …"
+    if(!h2){ var hh=document.querySelectorAll('h2'); for(var j=0;j<hh.length;j++){ if((hh[j].textContent||'').indexOf('Exkurs: Die drei Brillen')>-1){ h2=hh[j].closest('[id^="block-"]')||hh[j]; break; } } }
+    if(!h2){ document.documentElement.classList.add('ts-brille-moved'); return; }
+    var start=h2, prev=h2.previousElementSibling;
+    if(prev && prev.querySelector && prev.querySelector('.notion-divider')) start=prev; // führenden Divider mitnehmen
+    var nodes=[], n=start;
+    while(n && n!==target){ nodes.push(n); n=n.nextElementSibling; }
+    if(nodes.indexOf(root)===-1) return; // Widget noch nicht Teil des Bereichs -> nächster Tick
+    var tp=target.parentNode;
+    for(var k=0;k<nodes.length;k++){ tp.insertBefore(nodes[k], target); }
+    document.documentElement.classList.add('ts-brille-moved');
+  }
+  function tick(){ mount(); relocateSection(); }
+  tick();
+  document.addEventListener("DOMContentLoaded", tick);
+  new MutationObserver(tick).observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(function(){ document.documentElement.classList.add('ts-brille-moved'); }, 4000); // Fail-open: nie dauerhaft verstecken
 })();
