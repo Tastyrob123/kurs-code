@@ -4543,6 +4543,17 @@
       eyebrow:'Der Warenkorb · DB V · Finance',
       title:'Erweiterung nach <span>Finance</span>',
       sub:'Wenn du Gemeinkosten & Mitarbeiterlöhne angelegt hast, können wir diese Tabelle erweitern. Wir wollen jetzt wissen: Was kostet es uns, eine Charge zuzubereiten? Wareneinsatz + Personalkosten pro Arbeitsvorgang (Gemeinkosten sind optional ebenfalls verknüpfbar). Dafür ergänzen wir weitere Spalten in der Rezepturen-Liste.',
+      /* keepSteps: Finance-Schritt 7 „Verwendet in" (→ DB Gerichte) ist keine hier baubare Spalte —
+         DB Gerichte (DB VIII, finaler Schritt) existiert zu diesem Zeitpunkt noch nicht. Sie erscheint
+         automatisch als Gegenspalte, sobald du in DB VIII die „Produkte Inhouse Production"-Verknüpfung
+         (Rezepturen/Homemade-Ansicht) wechselseitig anlegst → Ghost (unten). Muster wie db0 „Packaging / Co.". */
+      keepSteps:6,
+      relations:[
+        { type:'ghost', name:'Verwendet in', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+          desc:'Gegenspalte der Inhouse-Production-Verknüpfung aus den Gerichten — erscheint von allein.',
+          img:'https://tastyrob123.github.io/kurs/img/gerichte/rote-bete-risotto.jpg',
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „Produkte Inhouse Production" (deine Rezepturen als Inhouse-Production-Ansicht) mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Verwendet in</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Rezeptur als Baustein steckt.</p>' }
+      ],
       summary:'Portionsmenge', chain:true },
     /* DB VI Gemeinkosten + DB VII Mitarbeiterlöhne — DB VII liegt als eigenes Tab-Widget
        (.notion-tabs, marker /Mitarbeiter/). DB VI ist selbst in ZWEI Sub-Tabs geteilt:
@@ -4560,12 +4571,35 @@
       eyebrow:'Der Warenkorb · DB VI · Annahmen',
       title:'Deine <span>Gemeinkostenannahmen</span>.',
       sub:'Aus deinen Fixkosten wird die Rechen-Ebene: Monat, Kostenfaktoren, GK-Kosten pro Monat, Absatz pro Monat und am Ende die Gemeinkosten pro Produkt.',
+      /* Relation-Kachel (Ableitung, zu bestätigen): DB VIII rollt „GK Monat für DB III" auf
+         „GK pro Produkt" — die Eigenschaft liegt in DIESER Annahmen-Tabelle. Ist die
+         DB-VIII-Verknüpfung wechselseitig, erscheint hier die Gegenspalte „Gerichte". */
+      relations:[
+        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+          desc:'Gegenspalte der GK-Verknüpfung aus den Gerichten — erscheint von allein.',
+          img:'https://tastyrob123.github.io/kurs/img/gerichte/lammkarree.jpg',
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „GK Monat für DB III" mit <b>wechselseitiger Verbindung</b> anlegst — über die legen deine Gerichte anteilig Gemeinkosten um.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte auf diese Gemeinkosten-Annahme umgelegt werden.</p>' }
+      ],
       summary:'Annahmen', chain:true },
     { path:/\/gemeinkosten-mitarbeiterlhne\/?$/, kachel:'db7_mitarbeiterloehne',
       container:'.notion-tabs', marker:/Mitarbeiter/,
       eyebrow:'Der Warenkorb · DB VII',
       title:'Deine Mitarbeiterlöhne. <span>Netto für Netto</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VII ist das Nettogehalt.',
+      /* Relation-Kacheln: DB VII hat selbst keine Verknüpfungs-Schritte. Zwei Gegenspalten
+         erscheinen automatisch, sobald spätere Tabellen auf die Mitarbeiter-DB verknüpfen —
+         DB V-Finance („Mitarbeiter Zubereitung") und DB VIII („Mitarbeiter"). Namens-Konvention
+         wie DB IV (Ghost = benannt nach der Quell-Tabelle: Rezepturen / Gerichte). */
+      relations:[
+        { type:'ghost', name:'Rezepturen', target:'Gegenspalte · aus DB V Finance', flag:'erscheint automatisch',
+          desc:'Gegenspalte der Mitarbeiter-Verknüpfung aus der Finance-Erweiterung — erscheint von allein.',
+          img:'https://tastyrob123.github.io/kurs/img/rezepturen/curry-mango-dip.jpg',
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB V : Rezepturen</b> (Finance-Erweiterung) die Verknüpfung „Mitarbeiter Zubereitung" mit <b>wechselseitiger Verbindung</b> zu deinen Mitarbeitern anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Rezepturen</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Rezeptur-Zubereitungen diesem Mitarbeiter zugeordnet sind.</p>' },
+        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+          desc:'Gegenspalte der Mitarbeiter-Verknüpfung aus den Gerichten — erscheint von allein.',
+          img:'https://tastyrob123.github.io/kurs/img/gerichte/entenbrust.jpg',
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „Mitarbeiter" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte dieser Mitarbeiter zubereitet.</p>' }
+      ],
       summary:'Lohnsumme', chain:true },
     /* DB VIII Gerichte & Getränke — 4 getrennte Phasen-Tab-Widgets (.notion-tabs) zu EINEM
        Regal gebündelt (multi:true, expect:4). marker /Phase/ trifft alle vier. 37 Schritte. */
@@ -4628,6 +4662,11 @@
     /* Zweites Regal auf derselben Seite: DB II Ansprechpartner (Marker eindeutig = Hauptansprechpartner) */
     { path:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, kachel:'db13_ansprechpartner',
       marker:/Hauptansprechpartner/,
+      /* keepSteps: DB II hat nur 7 eigene Spalten. Die Lektions-Schritte 8-10
+         (Rollup Kontaktinfos, Ansprechpartner Lieferant, Hauptkontakt Visitenkarte)
+         bauen real Spalten in DB I / Inventurliste (Cross-Reference) und sind dort
+         bereits als Relation-Kacheln abgebildet (db0 + db13_lieferanten) → hier raus. */
+      keepSteps:7,
       eyebrow:'DB II - Ansprechpartner',
       title:'Deine Ansprechpartner. <span>In einer Übersicht</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB II ist die Jahresrückvergütung.<br>Um zu starten: / → neue Tabellenansicht / Datenbank → DB II : Ansprechpartner Übersicht.',
@@ -4916,7 +4955,7 @@
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:10, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:7, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37 };
+  var BACKOFFICE={ db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37 };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -5227,6 +5266,9 @@
     }
     var steps=[];
     for(var m=0;m<srcs.length;m++){ steps=steps.concat(collectSteps(srcs[m])); }
+    /* keepSteps: nur die ersten N Schritte ins Regal (Rest = Cross-Reference-Schritte,
+       die real in anderen Tabellen gebaut werden und dort schon als Relation-Kacheln stehen). */
+    if(page.keepSteps && steps.length>page.keepSteps) steps=steps.slice(0,page.keepSteps);
     steps.forEach(function(st,idx){ st.i=idx; });
     if(!steps.length) return;
     injectCSS();
@@ -7089,7 +7131,7 @@
    ============================================================ */
 (function(){
   if(window.__tsmacGk) return; window.__tsmacGk=true;
-  var POSTER="https://tastyrob123.github.io/kurs/img/gemeinkosten-mac/pc.png";
+  var POSTER="https://cdn.jsdelivr.net/gh/Tastyrob123/kurs@main/img/gemeinkosten-mac/pc.png";
   (function(){ var pre=new Image(); pre.src=POSTER; })();
   var VID='#block-39cb9546553480c8a4d0e1fc54cfcb87';
   var PHRASE='Wir bauen zwei Datenbanken';
