@@ -1226,3 +1226,13 @@ details > summary {
 :root:not(.ts-brille-moved) .page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870 ~ *{
   visibility:hidden !important;
 }
+
+/* Native Notion-Überschrift „Exkurs: Die drei Brillen …" (block-d916…) + Intro-Absatz „Die spätere
+   Absatz-/Break-Even-Tabelle …" (block-e0117…) dauerhaft ausblenden: Das #tsbrille-Widget bringt seine
+   eigene Kopfzeile („Exkurs · Absatzplanung / Eine Zahl, drei Brillen") + Intro mit — die native H2 +
+   der Absatz wären doppelt. Bleiben in Notion (SSOT + dienen dem Widget als Anker/Sektionskopf), nur
+   visuell entfernt. NICHT in Notion löschen, sonst brechen findAnchor()/relocateSection(). */
+.page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870,
+.page__gemeinkosten-mitarbeiterlhne #block-e0117226860f406fb4ab5c7de84ee1a1{
+  display:none !important;
+}

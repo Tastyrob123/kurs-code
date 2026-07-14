@@ -7324,14 +7324,14 @@
   }
 
   var CSS=
-  '#tsbrille{width:min(880px,94vw);margin:30px auto 58px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;opacity:0;transform:translateY(20px);transition:opacity .8s '+EASE+',transform .9s '+EASE+'}'+
+  '#tsbrille{width:min(880px,94vw);margin:14px auto 58px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;opacity:0;transform:translateY(20px);transition:opacity .8s '+EASE+',transform .9s '+EASE+'}'+
   '#tsbrille.in{opacity:1;transform:none}'+
   '#tsbrille *{box-sizing:border-box}'+
   '#tsbrille .tb-head{text-align:center;margin:0 0 6px}'+
   '#tsbrille .tb-eye{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:'+GOLD+';margin:0 0 12px}'+
   '#tsbrille .tb-title{margin:0;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;line-height:1.06;letter-spacing:-.02em;font-size:clamp(1.9rem,4.6vw,2.9rem)}'+
   '#tsbrille .tb-title .g{color:'+GOLD+'}'+
-  '#tsbrille .tb-sub{max-width:600px;margin:16px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.66)}'+
+  '#tsbrille .tb-sub{max-width:600px;margin:16px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.92)}'+
   /* Bühne */
   '#tsbrille .tb-stage{position:relative;margin:26px 0 0;border-radius:26px;padding:30px 30px 26px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid rgba(199,180,137,.22);box-shadow:0 40px 100px -34px rgba(0,0,0,.78),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}'+
   '#tsbrille .tb-gaugewrap{position:relative;width:100%;max-width:440px;margin:0 auto}'+
@@ -7361,7 +7361,7 @@
   '#tsbrille .tb-story .win{color:#9FD3B9;font-weight:600}'+
   /* Szenario Segmented-Control */
   '#tsbrille .tb-seg-ctrl{display:flex;gap:6px;justify-content:center;margin:22px auto 0;max-width:460px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:5px}'+
-  '#tsbrille .tb-seg-btn{flex:1;border:0;background:transparent;color:rgba(255,255,255,.6);font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:600;letter-spacing:.01em;padding:10px 6px;border-radius:999px;cursor:pointer;transition:color .2s ease,background .3s '+EASE+',box-shadow .3s ease}'+
+  '#tsbrille .tb-seg-btn{flex:1;border:0;background:transparent;color:rgba(255,255,255,.6);font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:600;letter-spacing:.01em;padding:10px 6px;border-radius:999px;cursor:pointer;text-align:center;transition:color .2s ease,background .3s '+EASE+',box-shadow .3s ease}'+
   '#tsbrille .tb-seg-btn .pc{display:block;font-size:10.5px;font-weight:500;color:rgba(255,255,255,.38);margin-top:3px}'+
   '#tsbrille .tb-seg-btn:hover{color:#fff}'+
   '#tsbrille .tb-seg-btn.on{background:linear-gradient(180deg,rgba(199,180,137,.26),rgba(199,180,137,.09));color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 4px 14px rgba(0,0,0,.4)}'+
@@ -7408,7 +7408,7 @@
       '<div class="tb-head">'+
         '<p class="tb-eye">Exkurs · Absatzplanung</p>'+
         '<h3 class="tb-title">Eine Zahl, <span class="g">drei Brillen</span></h3>'+
-        '<p class="tb-sub">Lohnt sich der Laden? Break-Even sagt, was du <b>musst</b>. Kapazität, was du <b>kannst</b>. Das Szenario zeigt, wo du realistisch <b>landest</b>.</p>'+
+        '<p class="tb-sub">Deine Gemeinkosten-Annahmen stehen — jetzt die Gegenprobe: Lohnt sich der Laden überhaupt? Break-Even sagt, was du <b>musst</b>. Kapazität, was du <b>kannst</b>. Das Szenario zeigt, wo du realistisch <b>landest</b>.</p>'+
       '</div>'+
       '<div class="tb-stage">'+
         '<div class="tb-gaugewrap">'+
@@ -7543,7 +7543,7 @@
     var start=h2, prev=h2.previousElementSibling;
     if(prev && prev.querySelector && prev.querySelector('.notion-divider')) start=prev; // führenden Divider mitnehmen
     var nodes=[], n=start;
-    while(n && n!==target){ nodes.push(n); n=n.nextElementSibling; }
+    while(n && n!==target && n.id!=='ts-next-wrap'){ nodes.push(n); n=n.nextElementSibling; } // ts-next-wrap (Pager "Nächste Lektion") NICHT mitnehmen -> bleibt ganz unten
     if(nodes.indexOf(root)===-1) return; // Widget noch nicht Teil des Bereichs -> nächster Tick
     var tp=target.parentNode;
     for(var k=0;k<nodes.length;k++){ tp.insertBefore(nodes[k], target); }
