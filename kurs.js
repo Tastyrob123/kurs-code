@@ -2864,18 +2864,15 @@
   var CSS=`
   #tslohn{--g:${G};width:100vw;max-width:100vw;margin:52px 0;margin-left:calc(50% - 50vw);color:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;
-    background:
-      radial-gradient(70% 120% at 82% 12%,rgba(var(--g),.10),rgba(var(--g),0) 60%),
-      radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%);
-    border-top:1px solid rgba(255,255,255,0);border-bottom:1px solid rgba(255,255,255,0);
-    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px,#000 calc(100% - 48px),transparent 100%);
-    mask-image:linear-gradient(to bottom,transparent 0,#000 48px,#000 calc(100% - 48px),transparent 100%)}
+    background:radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%);
+    border-top:1px solid rgba(255,255,255,0);border-bottom:1px solid rgba(255,255,255,0)}
   /* Abschnittstrenner (Gradient-Linie) oben+unten auf Robert-Wunsch entfernt (15.07.2026).
-     Zusaetzlich (2. Fund, 15.07.2026): die harte Kante kam vom eigenen Hintergrund-Verlauf
-     (radial-gradient mit --g/gold-Farbe), der abrupt an der Box-Kante beginnt/endet, nicht von
-     einem expliziten Trenner-Element. Fix: mask-image blendet Hintergrund UND Rand weich an
-     Ober-/Unterkante aus (48px < 64/68px Wrap-Padding -> Ueberschrift/Text bleiben unangetastet
-     voll sichtbar, nur der Rand-Bereich ohne Inhalt wird ausgeblendet). */
+     2. Fund (selber Tag): ein mask-image-Fade reichte nicht - Robert wollte die Kante GANZ WEG,
+     nicht nur weicher. 3. Fund: die eigentliche Ursache war der goldene radial-gradient
+     (rgba(var(--g),.10) at 82% 12%, oben rechts) - der erzeugte den warmen Glow-Streifen an der
+     Box-Oberkante. Fix: dieser Gradient-Layer komplett entfernt (nicht nur weichgezeichnet).
+     Der blaue Bottom-Left-Glow bleibt (andere Farbe, nicht Teil der Beschwerde, sitzt am
+     unteren Rand ohne sichtbare Kante). */
   #tslohn *{box-sizing:border-box}
   #tslohn .tsl-wrap{width:min(1120px,90vw);margin:0 auto;padding:64px 0 68px}
 
