@@ -2864,15 +2864,18 @@
   var CSS=`
   #tslohn{--g:${G};width:100vw;max-width:100vw;margin:52px 0;margin-left:calc(50% - 50vw);color:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;
-    background:radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%);
-    border-top:1px solid rgba(255,255,255,0);border-bottom:1px solid rgba(255,255,255,0)}
+    background:radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%)}
   /* Abschnittstrenner (Gradient-Linie) oben+unten auf Robert-Wunsch entfernt (15.07.2026).
      2. Fund (selber Tag): ein mask-image-Fade reichte nicht - Robert wollte die Kante GANZ WEG,
      nicht nur weicher. 3. Fund: die eigentliche Ursache war der goldene radial-gradient
      (rgba(var(--g),.10) at 82% 12%, oben rechts) - der erzeugte den warmen Glow-Streifen an der
      Box-Oberkante. Fix: dieser Gradient-Layer komplett entfernt (nicht nur weichgezeichnet).
      Der blaue Bottom-Left-Glow bleibt (andere Farbe, nicht Teil der Beschwerde, sitzt am
-     unteren Rand ohne sichtbare Kante). */
+     unteren Rand ohne sichtbare Kante). 4. Fund: selbst danach blieb eine hauchduenne Linie -
+     Ursache war border-top/border-bottom:1px solid rgba(255,255,255,0) auf #tslohn. Technisch
+     unsichtbar (Alpha 0), aber bei einer 100vw-Full-Bleed-Box kann ein deklarierter 1px-Rand
+     durch Subpixel-/Compositing-Rundung trotzdem als feine Naht durchscheinen. Fix: die Zeile
+     komplett gestrichen statt nur transparent zu setzen. */
   #tslohn *{box-sizing:border-box}
   #tslohn .tsl-wrap{width:min(1120px,90vw);margin:0 auto;padding:64px 0 68px}
 
