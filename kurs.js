@@ -7618,3 +7618,1000 @@
   new MutationObserver(tick).observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(function(){ document.documentElement.classList.add('ts-brille-moved'); }, 4000); // Fail-open: nie dauerhaft verstecken
 })();
+
+/* ============================================================
+   menkalkulation-catering-rechner — Hero "Menükalkulation & Catering-Rechner" (Lektion 11)
+   Muster: rezepturen-Hero (BLOCK 12). Titel höher (-21% statt -16%, siehe CSS BLOCK 13).
+   Cover: 3-Laptop Catering-Screens, freigestellt + Farb-Boost im Asset (kein img-Filter).
+   ============================================================ */
+(function(){
+  var IMG="https://tastyrob123.github.io/kurs/img/menuekalkulation/hero.webp"; /* freigestellt (Rand-Flood-Fill), Alpha-BBox-Crop, 3x Lanczos + saturate 1.20 + UnsharpMask 1.8/85 + Kontrast-Pointe 1.05@118 (Live-Rezept) */
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/menkalkulation-catering-rechner\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")) return;
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Menükalkulation & Catering-Rechner" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Lektion 11</div>'+
+        '<h1 class="ts-hero__title">Menükalkulation & <span class="ts-gold">Catering&#8209;Rechner</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   menkalkulation-catering-rechner — Seiten-Modul Lektion 11 (#ts11page)
+   Komplette Lektionsseite aus dem freigegebenen Artifact (15.07.2026):
+   Einleitung, Kalkulationsketten-Animation (#ts11chain), Schlussstein-
+   PC/Text-Block, 3 Warenkorb-Sektionen (Menürechner/Kunden/Angebot,
+   statische Vorstufe: Karten aus den echten Notion-Eigenschaften,
+   Higgsfield-Bilder + echtes tsshop-Modul folgen), Bilanz-Balken,
+   Empfehlung zur Nutzung (#ts11emp, Signal-Puls), Learnings (#ts11l).
+   Alles ts11-genamespaced + CSS auf #ts11page gescoped (kollisionssicher).
+   Mount: wartet auf den Lektion-11-Hero (.ts-hero), fügt sich direkt
+   dahinter ein. Kein Notion-Inhalt nötig (Seite in Notion noch leer).
+   ============================================================ */
+(function(){
+  if(window.__ts11page) return; window.__ts11page=true;
+  var SLUG=/\/menkalkulation-catering-rechner\/?$/;
+  function on(){ return SLUG.test(location.pathname); }
+
+  var CSS=`#ts11page{--bg:#04050a;--gold:#c7b489;--pulse:#fbe6c2;--ink:#fff;--muted:rgba(255,255,255,.62);--card:rgba(255,255,255,.04);--line:rgba(255,255,255,.08);--gborder:rgba(199,180,137,.28);--later:#b49bd6;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","Segoe UI",sans-serif;--serifd:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;width:100%;color:#fff;font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
+#ts11page *,#ts11page *::before,#ts11page *::after{box-sizing:border-box}
+#ts11page .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+#ts11page .eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+#ts11page .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(199,180,137,.7)}
+#ts11page .ts-gold{color:var(--gold)}
+#ts11page p{margin-top:0}
+#ts11page /* ============ 2) EINLEITUNG — weiß,#ts11page zentriert ============ */
+  .intro{max-width:880px;margin:26px auto 0;text-align:center;color:#fff;font-size:18.5px;line-height:1.68;padding:0 24px}
+#ts11page section{padding:76px 0 0}
+#ts11page .sec-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+#ts11page .sec-head .eyebrow{justify-content:center;margin-bottom:12px;text-shadow:none;animation:none}
+#ts11page .sec-head h2{font-family:var(--serifd);font-weight:600;color:#fff;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;margin:6px 0 12px;text-wrap:balance}
+#ts11page .sec-head p{color:var(--muted);font-size:16.5px;margin:0}
+#ts11page /* ============ 3) ANIMATION — Die Kalkulationskette (#ts11chain) ============ */
+  #ts11chain{width:min(1150px,95vw);margin:0 auto;position:relative}
+#ts11page #ts11chain .ch-stage{position:relative;display:grid;grid-template-columns:1.02fr 1.06fr 1.06fr 1.5fr;
+    gap:54px;align-items:center;min-height:400px}
+#ts11page #ts11chain svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+#ts11page /* Linien erscheinen MIT ihren Ziel-Kacheln (transition-delay je Link,#ts11page per JS gesetzt) */
+  #ts11chain .ch-line{fill:none;stroke:var(--gold);stroke-width:1.5;stroke-linecap:round;opacity:0;transition:opacity .6s ease}
+#ts11page #ts11chain.go .ch-line{opacity:.34}
+#ts11page #ts11chain .ch-line.dashed{stroke-dasharray:3 6;stroke-width:1.2}
+#ts11page #ts11chain.go .ch-line.dashed{opacity:.22}
+#ts11page #ts11chain .ch-pulse{fill:none;stroke:var(--pulse);stroke-width:3;stroke-linecap:round;opacity:0}
+#ts11page #ts11chain .ch-pulseglow{fill:none;stroke:rgba(251,230,194,.32);stroke-width:9;stroke-linecap:round;opacity:0}
+#ts11page #ts11chain .ch-col{position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;min-width:0}
+#ts11page #ts11chain .ch-collbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.42);margin:0 0 2px;opacity:0;transform:translateY(8px)}
+#ts11page #ts11chain.go .ch-collbl{animation:ts11Up .6s cubic-bezier(.16,1,.3,1) both}
+@keyframes ts11Up{to{opacity:1;transform:none}
+}
+@keyframes ts11Node{from{opacity:0;transform:translateY(12px)}
+to{opacity:1;transform:none}
+}
+#ts11page #ts11chain .ch-card{position:relative;border-radius:13px;background:var(--card);border:1px solid var(--gborder);
+    padding:12px 14px;opacity:0;transition:border-color .45s ease,box-shadow .5s ease}
+#ts11page #ts11chain .ch-card.on{animation:ts11Node .55s cubic-bezier(.16,1,.3,1) both}
+#ts11page #ts11chain .ch-card.flash{border-color:#f2e2b8;box-shadow:0 0 24px rgba(251,230,194,.4),0 10px 24px rgba(0,0,0,.3)}
+#ts11page #ts11chain .ch-eye{font-size:8.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 4px;opacity:.85}
+#ts11page #ts11chain .ch-name{font-family:var(--serifd);font-weight:600;font-size:14.5px;letter-spacing:-.01em;color:#fff;margin:0 0 6px;line-height:1.2}
+#ts11page #ts11chain .ch-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#ts11page #ts11chain .ch-k{font-size:10px;color:rgba(255,255,255,.5)}
+#ts11page #ts11chain .ch-v{font-size:14px;font-weight:700;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums;transition:color .35s ease}
+#ts11page #ts11chain .ch-card.tick .ch-v{color:var(--pulse)}
+#ts11page #ts11chain .ch-chg{position:absolute;top:-11px;right:10px;font-size:8.5px;font-weight:600;letter-spacing:.05em;
+    color:#05060b;background:var(--gold);border-radius:999px;padding:3px 8px;opacity:0;transform:translateY(5px) scale(.9);
+    box-shadow:0 6px 16px rgba(199,180,137,.35)}
+#ts11page #ts11chain .ch-chg.on{animation:ts11Chg .5s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes ts11Chg{to{opacity:1;transform:none}
+}
+#ts11page #ts11chain .ch-upd{display:block;font-size:7.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);margin-top:3px;opacity:0;transition:opacity .4s ease}
+#ts11page #ts11chain .ch-card.tick .ch-upd{opacity:1}
+#ts11page /* Mini-Gänge (Vorspeise/Dessert) — gedimmt */
+  @keyframes ts11NodeMini{#ts11page from{opacity:0;transform:translateY(12px)}
+#ts11page to{opacity:.55;transform:none}
+}
+#ts11page #ts11chain .ch-card.mini{padding:9px 12px;opacity:0}
+#ts11page #ts11chain .ch-card.mini.on{animation:ts11NodeMini .55s cubic-bezier(.16,1,.3,1) both}
+#ts11page #ts11chain .ch-card.mini .ch-name{font-size:12px;margin:0 0 3px}
+#ts11page #ts11chain .ch-card.mini .ch-v{font-size:12px}
+#ts11page /* Menükarte — Finale */
+  #ts11chain .ch-menu{position:relative;border-radius:18px;padding:22px 24px 20px;opacity:0;
+    background:linear-gradient(180deg,#12141d,#0a0c14);border:1px solid rgba(199,180,137,.45);
+    box-shadow:0 0 0 1px rgba(199,180,137,.12),0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(199,180,137,.10);
+    transition:border-color .45s ease,box-shadow .5s ease}
+#ts11page #ts11chain .ch-menu.on{animation:ts11Node .7s cubic-bezier(.16,1,.3,1) both}
+#ts11page #ts11chain .ch-menu.flash{border-color:#f2e2b8;box-shadow:0 0 0 1px rgba(251,230,194,.3),0 0 44px rgba(251,230,194,.35),0 30px 80px rgba(0,0,0,.55)}
+#ts11page #ts11chain .ch-menu .m-eye{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 4px}
+#ts11page #ts11chain .ch-menu .m-title{font-family:var(--serifd);font-weight:600;font-size:20px;letter-spacing:-.01em;color:#fff;margin:0 0 3px}
+#ts11page #ts11chain .ch-menu .m-meta{font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.55);margin:0 0 14px}
+#ts11page #ts11chain .ch-menu .m-course{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:rgba(255,255,255,.78);margin:0 0 7px}
+#ts11page #ts11chain .ch-menu .m-course .dots{flex:1;border-bottom:1px dotted rgba(255,255,255,.22);transform:translateY(-3px)}
+#ts11page #ts11chain .ch-menu .m-course .p{font-weight:600;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .35s ease}
+#ts11page #ts11chain .ch-menu .m-course.tick .p{color:var(--pulse)}
+#ts11page #ts11chain .ch-menu .m-div{height:1px;background:rgba(255,255,255,.1);margin:12px 0}
+#ts11page #ts11chain .ch-menu .m-sum{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:rgba(255,255,255,.6);margin:0 0 10px}
+#ts11page #ts11chain .ch-menu .m-sum b{font-size:19px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;transition:color .35s ease}
+#ts11page #ts11chain .ch-menu .m-sum.tick b{color:var(--pulse)}
+#ts11page #ts11chain .ch-menu .m-fc{margin:0 0 4px}
+#ts11page #ts11chain .ch-menu .m-fcrow{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;color:rgba(255,255,255,.55);margin-bottom:6px}
+#ts11page #ts11chain .ch-menu .m-fcrow b{color:var(--gold);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+#ts11page #ts11chain .ch-menu .m-bar{height:4px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+#ts11page #ts11chain .ch-menu .m-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--pulse));
+    box-shadow:0 0 10px rgba(199,180,137,.5)}
+#ts11page #ts11chain .ch-menu .m-price{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:11px;
+    border-top:1px solid rgba(255,255,255,.1);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+#ts11page #ts11chain .ch-menu .m-price b{font-family:var(--serifd);font-size:22px;letter-spacing:0;text-transform:none;color:var(--gold);
+    font-variant-numeric:tabular-nums;font-weight:600}
+#ts11page #ts11chain .ch-note{max-width:560px;margin:34px auto 0;text-align:center;font-size:clamp(.95rem,1.2vw,1.05rem);
+    line-height:1.6;color:#fff;opacity:0;transform:translateY(10px)}
+#ts11page #ts11chain.go .ch-note{animation:ts11Up .8s cubic-bezier(.16,1,.3,1) .6s both}
+#ts11page #ts11chain .ch-note b{color:var(--gold);font-weight:600}
+@media(max-width:820px){#ts11page #ts11chain .ch-stage{grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+#ts11page #ts11chain svg{display:none}
+#ts11page #ts11chain .ch-col.ts11menucol{grid-column:1 / -1}
+
+  }
+@media(max-width:520px){#ts11page #ts11chain .ch-stage{grid-template-columns:1fr}
+
+  }
+#ts11page /* ============ 4) PC links / Text rechts — 50/50 ============ */
+  .split{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:center;max-width:1180px;margin:0 auto;padding:0 24px}
+@media(max-width:820px){#ts11page .split{grid-template-columns:1fr;gap:30px}
+}
+#ts11page .tsmac{position:relative;cursor:pointer;display:block;width:100%;line-height:0;background:transparent}
+#ts11page .tsmac img{width:100%;height:auto;display:block;transition:transform .5s ease}
+#ts11page .tsmac:hover img{transform:scale(1.02)}
+#ts11page .tsmac__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#ts11page .tsmac__play span{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
+#ts11page .tsmac__play span::after{content:"";border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:5px}
+#ts11page .tsmac:hover .tsmac__play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
+#ts11page .split__text h3{font-family:var(--serifd);font-weight:600;font-size:clamp(1.3rem,2.05vw,1.9rem);margin:0 0 18px;line-height:1.12;letter-spacing:-.01em}
+@media(min-width:821px){#ts11page .split__text h3{white-space:nowrap}
+}
+#ts11page .split__text p{color:rgba(255,255,255,.8);font-size:16px;margin:0 0 15px;max-width:52ch}
+#ts11page .split__text p:last-child{margin-bottom:0}
+#ts11page /* ============ 5) WARENKORB ============ */
+  .shelfwrap{overflow-x:auto;padding:8px 0 8px}
+#ts11page .shelf{display:flex;gap:20px;padding:8px 24px 22px;width:max-content;margin:0 auto}
+#ts11page .card{flex:0 0 246px;background:#0a0c14;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;
+    transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+#ts11page .card:hover{transform:translateY(-6px);border-color:rgba(199,180,137,.5);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(199,180,137,.12)}
+#ts11page .card__imgwrap{position:relative;aspect-ratio:3/2;overflow:hidden;background:#07080d;display:flex;align-items:center;justify-content:center}
+#ts11page .ph{color:rgba(199,180,137,.5);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:0 14px}
+#ts11page .ph .hf{display:block;margin-top:6px;color:rgba(255,255,255,.3);font-size:10px;letter-spacing:.06em;text-transform:none}
+#ts11page .card__num{position:absolute;top:10px;right:12px;font-size:12px;color:var(--gold);letter-spacing:.1em;font-weight:600;z-index:2}
+#ts11page .card__body{padding:15px 16px 16px}
+#ts11page .card__eye{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+#ts11page .card__name{font-family:var(--serifd);font-weight:600;font-size:1.08rem;margin:0 0 11px;color:#fff}
+#ts11page .card__desc{color:var(--muted);font-size:12.5px;margin:0 0 12px;line-height:1.5}
+#ts11page .pill{display:inline-flex;align-items:center;gap:7px;background:rgba(199,180,137,.1);border:1px solid rgba(199,180,137,.3);
+    color:var(--gold);border-radius:30px;padding:6px 13px;font-size:12.5px;font-weight:600}
+#ts11page .pill .lbl{color:var(--muted);font-weight:500;font-size:10px;letter-spacing:.04em;text-transform:uppercase}
+#ts11page .card.ghost{border-style:dashed;border-color:rgba(199,180,137,.45)}
+#ts11page .card.later{border-color:rgba(180,155,214,.5)}
+#ts11page .card.later .badge{color:var(--later)}
+#ts11page .card.ghost .badge{color:var(--gold)}
+#ts11page .badge{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;padding:5px 11px;border-radius:30px;
+    border:1px solid currentColor;opacity:.9}
+#ts11page .shelf-hint{text-align:center;color:rgba(255,255,255,.35);font-size:12.5px;margin:2px 0 0}
+#ts11page .shelf-hint .g{color:var(--gold)}
+#ts11page .shelf-hint .l{color:var(--later)}
+#ts11page .card__tail{flex:0 0 200px;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:transparent;border:1px dashed rgba(255,255,255,.14);border-radius:18px;color:var(--muted);font-size:13px;padding:0 18px}
+#ts11page .card__tail b{color:var(--gold);font-weight:600}
+#ts11page /* Bilanz-Balken unter dem Warenkorb (Muster live .tss-bar): links Währung · Mitte Diese Lektion · rechts Backoffice */
+  .tssbar{max-width:1120px;margin:14px auto 0;display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:18px;align-items:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid var(--line);
+    border-radius:16px;padding:16px 22px}
+#ts11page .tssbar__side{display:flex;flex-direction:column;gap:3px}
+#ts11page .tssbar__side.right{text-align:right}
+#ts11page .tssbar__val{font-family:var(--serifd);font-weight:600;font-size:1.35rem;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+#ts11page .tssbar__glob{font-family:var(--serifd);font-weight:600;font-size:1.35rem;color:#e0517a;font-variant-numeric:tabular-nums;line-height:1}
+#ts11page .tssbar__cap{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#ts11page .tssbar__mid{display:flex;flex-direction:column;gap:7px}
+#ts11page .tssbar__track{height:6px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+#ts11page .tssbar__fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 12px rgba(95,174,136,.45)}
+#ts11page .tssbar__midcap{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)}
+#ts11page .tssbar__midcap b{color:#8FCBAA;font-weight:600}
+#ts11page /* Alternierende PC/Text-Blöcke — exakt gleiche PC-Größe über alle Blöcke */
+  .pcrow{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;max-width:1120px;margin:0 auto;padding:0 24px}
+#ts11page /* Standard: Text links / PC rechts. .rev kehrt um: PC links / Text rechts. */
+  .pcrow.rev .pcrow__pc{order:1}
+#ts11page .pcrow.rev .pcrow__text{order:2}
+@media(max-width:820px){#ts11page .pcrow{grid-template-columns:1fr;gap:30px}
+#ts11page .pcrow.rev .pcrow__pc,#ts11page .pcrow.rev .pcrow__text{order:0}
+}
+#ts11page .pcrow__text h3{font-family:var(--serifd);font-weight:600;font-size:clamp(1.5rem,2.6vw,2rem);margin:0 0 18px;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+#ts11page .pcrow__text p{color:rgba(255,255,255,.8);font-size:15.5px;margin:0 0 14px;max-width:52ch}
+#ts11page .pcrow__text p:last-child{margin-bottom:0}
+#ts11page /* MacBook-Rahmen (CSS) — identische Maße für alle DB-PCs */
+  .dbpc{width:100%;max-width:560px;margin:0 auto}
+#ts11page .dbpc__mac{position:relative;cursor:pointer;filter:drop-shadow(0 40px 80px rgba(0,0,0,.55))}
+#ts11page .dbpc__screen{position:relative;background:#05060b;border:9px solid #15161c;border-bottom:0;border-radius:15px 15px 0 0;aspect-ratio:16/10;overflow:hidden}
+#ts11page .dbpc__ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;padding-top:16%;
+    background:radial-gradient(120% 100% at 50% 0%,rgba(40,52,92,.25),rgba(4,5,10,0) 60%),#07080d}
+#ts11page .dbpc__logo{width:30px;height:auto;opacity:.85;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+#ts11page .dbpc__phname{font-family:var(--serifd);font-weight:600;font-size:1.15rem;color:#fff}
+#ts11page .dbpc__phnote{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(199,180,137,.6)}
+#ts11page .dbpc__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#ts11page .dbpc__play span{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
+#ts11page .dbpc__mac:hover .dbpc__play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
+#ts11page .dbpc__play span::after{content:"";border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff;margin-left:4px}
+#ts11page .dbpc__base{height:15px;background:linear-gradient(#20222a,#0d0e12);border-radius:0 0 12px 12px;box-shadow:inset 0 3px 6px rgba(0,0,0,.6);position:relative}
+#ts11page .dbpc__base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:6px;background:#0a0b0f;border-radius:0 0 8px 8px}
+#ts11page .dbpc__cap{text-align:center;margin:16px 0 0}
+#ts11page .dbpc__cap .t{font-size:14px;color:#fff;font-weight:500}
+#ts11page .dbpc__cap .t b{color:var(--gold);font-weight:600}
+#ts11page .dbpc__cap .z{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px}
+#ts11page /* ============ 6) EMPFEHLUNG ZUR NUTZUNG (Muster #tslpemp) ============ */
+  #ts11emp{--g:199,180,137;--rx:0deg;--ry:0deg;position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.35fr;
+    gap:clamp(28px,4.5vw,56px);align-items:center;width:min(1040px,92vw);margin:64px auto 0;
+    padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 14px rgba(var(--g),.08);
+    font-family:var(--sans);color:#fff;transform-style:preserve-3d;will-change:transform;
+    opacity:0;transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97)}
+#ts11page #ts11emp,#ts11page #ts11emp *{box-sizing:border-box}
+#ts11page #ts11emp.on{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+#ts11page #ts11emp.live{transition:transform .16s ease-out,box-shadow .5s ease,border-color .4s ease}
+#ts11page #ts11emp.live:hover{border-color:rgba(var(--g),.4);animation:ts11Beat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+#ts11page #ts11emp::before{content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;
+    background:radial-gradient(560px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.055),transparent 46%);
+    opacity:0;transition:opacity .5s ease}
+#ts11page #ts11emp.live:hover::before{opacity:1}
+#ts11page #ts11emp::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.4),transparent);pointer-events:none}
+#ts11page #ts11emp .col{min-width:0;position:relative;z-index:1;transform:translateZ(22px)}
+#ts11page #ts11emp .db-hd{font-family:var(--serifd);font-size:1.35rem;font-weight:600;letter-spacing:-.01em;line-height:1.2;margin:0 0 14px;color:#fff;
+    opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+#ts11page #ts11emp.on .db-hd{opacity:1;transform:none}
+#ts11page #ts11emp .db-hd .g{color:var(--gold)}
+#ts11page /* Signal-Puls statt Wander-Punkt/Sprung-Highlight: die Zeilen selbst bleiben ruhig und unbewegt (kein Hintergrund-
+     Flash,#ts11page keine Schiene). Jedes DB-Icon sendet reihum einen sanften,#ts11page sich ausdehnenden Ring aus — wie drei parallel
+     aktive,#ts11page gelegentlich "meldende" Datenbanken,#ts11page kein Auswahl-/Fluss-Zeiger. Reines CSS-@keyframes,#ts11page kein JS-Zustand. */
+  #ts11emp .db-row{position:relative;display:flex;flex-direction:column;gap:6px;max-width:300px;
+    opacity:0;transform:translateY(10px)}
+#ts11page #ts11emp.on .db-row{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1) .1s,transform .55s cubic-bezier(.16,1,.3,1) .1s}
+#ts11page #ts11emp .tb{display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:12px;font-size:.94rem;font-weight:600;
+    white-space:nowrap;color:rgba(255,255,255,.68);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+#ts11page #ts11emp .ic-wrap{position:relative;width:15px;height:15px;flex:none;display:flex;align-items:center;justify-content:center}
+#ts11page #ts11emp .tb .ic{width:15px;height:15px;flex:none;position:relative;z-index:1;
+    animation:ts11IcFlash 4.8s ease-in-out infinite}
+#ts11page #ts11emp .ping{position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(199,180,137,.6);
+    opacity:0;animation:ts11Ping 4.8s ease-out infinite}
+#ts11page #ts11emp .tb:nth-child(1) .ic,#ts11page #ts11emp .tb:nth-child(1) .ping{animation-delay:0s}
+#ts11page #ts11emp .tb:nth-child(2) .ic,#ts11page #ts11emp .tb:nth-child(2) .ping{animation-delay:1.6s}
+#ts11page #ts11emp .tb:nth-child(3) .ic,#ts11page #ts11emp .tb:nth-child(3) .ping{animation-delay:3.2s}
+#ts11page #ts11emp .tb .num{color:var(--gold);font-variant-numeric:tabular-nums;opacity:.9}
+@keyframes ts11Ping{0%{ transform:scale(.4); opacity:0 }
+8%{ opacity:.85 }
+45%{ transform:scale(1.9); opacity:0 }
+100%{ transform:scale(1.9); opacity:0 }
+
+  }
+@keyframes ts11IcFlash{0%,100%{ opacity:.7; filter:none }
+8%{ opacity:1;  filter:drop-shadow(0 0 6px rgba(199,180,137,.75)) }
+24%{ opacity:.7; filter:none }
+
+  }
+#ts11page #ts11emp .emph{font-family:var(--serifd);font-size:1.4rem;font-weight:600;letter-spacing:-.01em;color:#fff;margin:0 0 14px;
+    opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .05s,transform .6s cubic-bezier(.16,1,.3,1) .05s}
+#ts11page #ts11emp.on .emph{opacity:1;transform:none}
+#ts11page #ts11emp .emph .eg{color:var(--gold)}
+#ts11page #ts11emp .p{color:rgba(255,255,255,.7);font-size:.98rem;line-height:1.72;margin:0 0 10px;
+    opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+#ts11page #ts11emp.on .p{opacity:1;transform:none}
+#ts11page #ts11emp.on .p:nth-of-type(1){transition-delay:.12s}
+#ts11page #ts11emp.on .p:nth-of-type(2){transition-delay:.2s}
+#ts11page #ts11emp .p:last-child{margin-bottom:0}
+@keyframes ts11Beat{0%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}
+18%{box-shadow:0 6px 22px rgba(var(--g),.30),0 0 46px rgba(var(--g),.34)}
+32%{box-shadow:0 5px 18px rgba(var(--g),.16),0 0 26px rgba(var(--g),.18)}
+46%{box-shadow:0 6px 20px rgba(var(--g),.26),0 0 40px rgba(var(--g),.28)}
+72%,100%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}
+}
+@media(max-width:900px){#ts11page #ts11emp{grid-template-columns:1fr;gap:26px}
+#ts11page #ts11emp .db-row{max-width:none}
+}
+#ts11page /* ============ 7) LEARNINGS (Muster #tsl) ============ */
+  #ts11l{width:100%;margin:64px auto 0;text-align:center}
+#ts11page #ts11l .tsl-head{margin:0 auto 46px}
+#ts11page #ts11l .tsl-eyebrow{display:inline-block;font-family:var(--serifd);font-size:.62rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+#ts11page #ts11l .tsl-title{font-family:var(--serifd);font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.02em;margin:0}
+#ts11page #ts11l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1160px;margin:0 auto;justify-items:center}
+#ts11page #ts11l .tsl-cell{opacity:0;transform:translateY(22px);width:100%;max-width:246px}
+#ts11page #ts11l .tsl-cell.on{animation:ts11lIn .9s cubic-bezier(.16,1,.3,1) both}
+@keyframes ts11lIn{to{opacity:1;transform:none}
+}
+#ts11page #ts11l .tsl-orb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:clamp(20px,2.6vw,32px);
+    background:radial-gradient(120% 120% at 38% 28%,rgba(199,180,137,.20),rgba(255,255,255,.035) 46%,rgba(10,12,20,.85) 78%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 44px -18px rgba(0,0,0,.75),inset 0 1px 1px rgba(255,255,255,.10)}
+#ts11page #ts11l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+@media(max-width:1079px){#ts11page #ts11l .tsl-grid{grid-template-columns:repeat(2,1fr);gap:32px 26px;max-width:560px}
+}
+@media(max-width:520px){#ts11page #ts11l .tsl-grid{grid-template-columns:1fr;max-width:300px}
+}
+#ts11page .cta-wrap{text-align:center;margin:46px 0 0}
+#ts11page .cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1406;font-weight:600;font-size:14.5px;
+    padding:14px 30px;border-radius:999px;text-decoration:none}
+@media (prefers-reduced-motion: reduce){#ts11page #ts11emp,#ts11page #ts11emp *,#ts11page #ts11l .tsl-cell{animation:none !important;transition:none !important;opacity:1 !important;transform:none !important}
+#ts11page #ts11emp .ping{display:none}
+#ts11page #ts11emp .tb .ic{opacity:.85 !important;filter:none !important}
+
+  }
+#ts11page /* Lightbox-Hinweis (Vorschau: kein Video verdrahtet) */
+  #ts11hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);z-index:99;
+    background:#12141d;border:1px solid rgba(199,180,137,.4);color:#fff;font-size:13px;border-radius:12px;
+    padding:11px 18px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.16,1,.3,1);pointer-events:none}
+#ts11page #ts11hint.on{transform:translateX(-50%) translateY(0)}
+#ts11page #ts11hint b{color:var(--gold)}
+
+`;
+
+  var HTML=`<!-- 2) EINLEITUNG -->
+<p class="intro">
+  Jetzt laufen alle Bausteine zusammen. Aus Zutaten, Rezepturen und Gerichten kalkulierst du
+  komplette Menüs und Catering-Positionen — bis auf den Cent. Du siehst pro Menü den Foodcost,
+  den Deckungsbeitrag und einen Preisvorschlag, und wenn sich ein Einkaufspreis ändert, rechnet
+  sich die ganze Kalkulation von selbst neu.
+</p>
+
+<!-- 3) ANIMATION — Die Kalkulationskette -->
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">So läuft alles zusammen</div>
+    <h2>Eine Kette, <span class="ts-gold">ein Preis</span>.</h2>
+    <p>Vom Einkaufspreis der Zutat bis zum fertigen Menü rechnet jede Stufe auf der vorherigen. Schau, was passiert, wenn sich links ein Preis ändert.</p>
+  </div>
+  <div id="ts11chain">
+    <div class="ch-stage" id="ts11stage">
+      <svg id="ts11svg" aria-hidden="true"></svg>
+      <div class="ch-col" data-col="0">
+        <p class="ch-collbl">DB IV · Zutaten</p>
+        <div class="ch-card" id="ts11z0">
+          <span class="ch-chg" id="ts11z0chg">+1,20&nbsp;€</span>
+          <p class="ch-eye">Zutat</p><p class="ch-name">Rinderfilet</p>
+          <div class="ch-row"><span class="ch-k">Einkauf / kg</span><span class="ch-v" id="ts11z0v">28,90&nbsp;€</span></div>
+          <span class="ch-upd">Preis aktualisiert</span>
+        </div>
+        <div class="ch-card" id="ts11z1">
+          <span class="ch-chg" id="ts11z1chg">+0,20&nbsp;€</span>
+          <p class="ch-eye">Zutat</p><p class="ch-name">Kartoffeln</p>
+          <div class="ch-row"><span class="ch-k">Einkauf / kg</span><span class="ch-v" id="ts11z1v">1,80&nbsp;€</span></div>
+          <span class="ch-upd">Preis aktualisiert</span>
+        </div>
+        <div class="ch-card" id="ts11z2">
+          <span class="ch-chg" id="ts11z2chg">+0,30&nbsp;€</span>
+          <p class="ch-eye">Zutat</p><p class="ch-name">Sahne</p>
+          <div class="ch-row"><span class="ch-k">Einkauf / l</span><span class="ch-v" id="ts11z2v">2,40&nbsp;€</span></div>
+          <span class="ch-upd">Preis aktualisiert</span>
+        </div>
+      </div>
+      <div class="ch-col" data-col="1">
+        <p class="ch-collbl">DB V · Rezepturen</p>
+        <div class="ch-card" id="ts11r0">
+          <p class="ch-eye">Rezeptur</p><p class="ch-name">Rinderfilet 180&nbsp;g</p>
+          <div class="ch-row"><span class="ch-k">Pro Portion</span><span class="ch-v" id="ts11r0v">5,20&nbsp;€</span></div>
+          <span class="ch-upd">Neu berechnet</span>
+        </div>
+        <div class="ch-card" id="ts11r1">
+          <p class="ch-eye">Rezeptur</p><p class="ch-name">Kartoffelgratin</p>
+          <div class="ch-row"><span class="ch-k">Pro Portion</span><span class="ch-v" id="ts11r1v">1,12&nbsp;€</span></div>
+          <span class="ch-upd">Neu berechnet</span>
+        </div>
+      </div>
+      <div class="ch-col" data-col="2">
+        <p class="ch-collbl">DB VIII · Gerichte</p>
+        <div class="ch-card" id="ts11g0">
+          <p class="ch-eye">Hauptgang</p><p class="ch-name">Rinderfilet mit Gratin</p>
+          <div class="ch-row"><span class="ch-k">Wareneinsatz</span><span class="ch-v" id="ts11g0v">7,84&nbsp;€</span></div>
+          <span class="ch-upd">Neu berechnet</span>
+        </div>
+        <div class="ch-card mini" id="ts11g1">
+          <p class="ch-name">Vorspeise · Velouté</p>
+          <div class="ch-row"><span class="ch-k">Wareneinsatz</span><span class="ch-v">2,74&nbsp;€</span></div>
+        </div>
+        <div class="ch-card mini" id="ts11g2">
+          <p class="ch-name">Dessert · Tarte</p>
+          <div class="ch-row"><span class="ch-k">Wareneinsatz</span><span class="ch-v">1,92&nbsp;€</span></div>
+        </div>
+      </div>
+      <div class="ch-col ts11menucol" data-col="3">
+        <p class="ch-collbl">Menükalkulation</p>
+        <div class="ch-menu" id="ts11menu">
+          <span class="ch-chg" id="ts11mchg">Neu berechnet</span>
+          <p class="m-eye">DB I&#8211;III · Catering-Position</p>
+          <p class="m-title">Menü &raquo;Herbstabend&laquo;</p>
+          <p class="m-meta">3 Gänge &middot; 80 Personen</p>
+          <div class="m-course"><span>Velouté</span><span class="dots"></span><span class="p">2,74&nbsp;€</span></div>
+          <div class="m-course" id="ts11mHaupt"><span>Rinderfilet mit Gratin</span><span class="dots"></span><span class="p" id="ts11mHauptV">7,84&nbsp;€</span></div>
+          <div class="m-course"><span>Tarte au Chocolat</span><span class="dots"></span><span class="p">1,92&nbsp;€</span></div>
+          <div class="m-div"></div>
+          <div class="m-sum" id="ts11mSum"><span>Wareneinsatz pro Gast</span><b id="ts11mSumV">0,00&nbsp;€</b></div>
+          <div class="m-fc">
+            <div class="m-fcrow"><span>Foodcost</span><b id="ts11mFcV">0&nbsp;%</b></div>
+            <div class="m-bar"><div class="m-fill" id="ts11mBar"></div></div>
+          </div>
+          <div class="m-price"><span>Preisvorschlag</span><b id="ts11mPreis">0,00&nbsp;€</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="ch-note"><b>Ein Preis ändert sich, alles rechnet nach.</b> Genau diese Kette baust du in dieser Lektion zu Ende: vom Einkaufspreis bis zum Angebot.</p>
+  </div>
+</section>
+
+<!-- 4) PC LINKS / TEXT RECHTS -->
+<section>
+  <div class="split">
+    <div class="tsmac" id="ts11pcmac" role="button" tabindex="0" aria-label="Video abspielen (folgt)">
+      <img alt="Lektion 11 — Menükalkulation, Video-Cover" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy">
+      <div class="tsmac__play"><span></span></div>
+    </div>
+    <div class="split__text">
+      <h3>Menükalkulation als <span class="ts-gold">Schlussstein</span></h3>
+      <p>Hier zahlt sich die Vorarbeit aus. Zutaten, Rezepturen und Gerichte liegen als saubere
+         Bausteine bereit, die Menükalkulation setzt sie nur noch zusammen.</p>
+      <p>Ob festes 3-Gänge-Menü oder Catering für 200 Personen: Du ziehst die Positionen per
+         Verknüpfung zusammen und siehst sofort Wareneinsatz, Foodcost und einen Preisvorschlag,
+         der zu deiner Zielmarge passt.</p>
+      <p>Ändert sich später ein Einkaufspreis, rechnet die ganze Kette von selbst neu. Nichts wird
+         doppelt gepflegt, nichts von Hand nachgerechnet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5) WARENKORB-SEKTION — drei Datenbanken -->
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">Die Warenkörbe · Lektion 11</div>
+    <h2>Drei Datenbanken, <span class="ts-gold">ein Angebot</span>.</h2>
+    <p>Die Menükalkulation läuft über drei verknüpfte Datenbanken: den Menürechner, die Kunden und das Angebot. Jede baust du als eigenen Warenkorb, jede Eigenschaft wird eine Karte.</p>
+  </div>
+  </section>
+
+<!-- Warenkorb 1 · Menürechner -->
+<section style="padding-top:24px">
+  <div class="sec-head" style="margin-bottom:22px">
+    <div class="eyebrow">Warenkorb 1 · DB I — Menürechner</div>
+    <h2>Der <span class="ts-gold">Menürechner</span>.</h2>
+    <p>Hier entsteht das Menü: pro Position ein Gericht oder Getränk, die Anzahl im Menü, und der Wareneinsatz zieht sich von allein.</p>
+  </div>
+  <div class="shelfwrap"><div class="shelf" id="ts11shelf1"></div></div>
+  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
+  <div class="tssbar" id="ts11bar1"></div>
+</section>
+<section style="padding-top:44px">
+  <div class="pcrow">
+    <div class="pcrow__text">
+      <h3>Das Menü als <span class="ts-gold">Bausatz</span></h3>
+      <p>Der Menürechner ist der Ort, an dem dein Menü entsteht. Du legst pro Position fest, welches Gericht oder Getränk draufkommt und wie oft es im Menü gezählt wird.</p>
+      <p>Aus der Verknüpfung zur Gerichte-Datenbank zieht sich der Wareneinsatz pro Position von allein, und die Summe steht sofort. Ändert sich eine Zutat, läuft die Änderung bis hierher durch, ohne dass du eine Zahl anfasst.</p>
+    </div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" aria-label="Menürechner – DB-Ansicht vergrößern"><div class="dbpc__screen"><div class="dbpc__ph"><img class="dbpc__logo" src="https://files.catbox.moe/au80tp.png" alt="Tasty Studios" loading="lazy"><span class="dbpc__phname">Menürechner</span><span class="dbpc__phnote">PC-Cover folgt</span></div><div class="dbpc__play"><span></span></div></div><div class="dbpc__base"></div></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+  </div>
+</section>
+
+<!-- Warenkorb 2 · Kunden -->
+<section style="padding-top:64px">
+  <div class="sec-head" style="margin-bottom:22px">
+    <div class="eyebrow">Warenkorb 2 · DB II — Kunden</div>
+    <h2>Die <span class="ts-gold">Kunden-Datenbank</span>.</h2>
+    <p>Jeder Auftraggeber mit Kontakt, Typ und Status. Vom Lead bis zur Abrechnung siehst du, wo eine Anfrage gerade steht.</p>
+  </div>
+  <div class="shelfwrap"><div class="shelf" id="ts11shelf2"></div></div>
+  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
+  <div class="tssbar" id="ts11bar2"></div>
+</section>
+<section style="padding-top:44px">
+  <div class="pcrow rev">
+    <div class="pcrow__text">
+      <h3>Jeder Kunde an <span class="ts-gold">einem Ort</span></h3>
+      <p>In der Kunden-Datenbank liegt jeder Auftraggeber mit Kontakt, Typ und Status. Du siehst auf einen Blick, ob eine Anfrage offen ist, ein Angebot rausging oder der Auftrag schon abgerechnet wurde.</p>
+      <p>Umsatz, Ansprechpartner und Event-Termine hängen direkt am Kunden. Über die Verknüpfung zum Menürechner weißt du zu jedem Kunden, welche Menüs für ihn kalkuliert wurden.</p>
+    </div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" aria-label="Kunden Master – DB-Ansicht vergrößern"><div class="dbpc__screen"><div class="dbpc__ph"><img class="dbpc__logo" src="https://files.catbox.moe/au80tp.png" alt="Tasty Studios" loading="lazy"><span class="dbpc__phname">Kunden Master</span><span class="dbpc__phnote">PC-Cover folgt</span></div><div class="dbpc__play"><span></span></div></div><div class="dbpc__base"></div></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+  </div>
+</section>
+
+<!-- Warenkorb 3 · Angebot -->
+<section style="padding-top:64px">
+  <div class="sec-head" style="margin-bottom:22px">
+    <div class="eyebrow">Warenkorb 3 · DB III — Angebot Master</div>
+    <h2>Das <span class="ts-gold">Angebot</span>.</h2>
+    <p>Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen und rechnet daraus Deckungsbeitrag und Preisvorschlag.</p>
+  </div>
+  <div class="shelfwrap"><div class="shelf" id="ts11shelf3"></div></div>
+  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
+  <div class="tssbar" id="ts11bar3"></div>
+</section>
+<section style="padding-top:44px">
+  <div class="pcrow">
+    <div class="pcrow__text">
+      <h3>Alles wird zum <span class="ts-gold">Preisvorschlag</span></h3>
+      <p>Die Angebot-Datenbank ist der Rechenkern. Sie zieht das Menü, die eingeplanten Mitarbeiter, den Kunden und die Gemeinkosten zusammen und rechnet daraus das fertige Angebot.</p>
+      <p>Du siehst Deckungsbeitrag I, II und III, den Wareneinsatz in Prozent, die Personalkosten pro Produkt und einen Verkaufspreis für jede Wareneinsatz-Stufe. Am Ende steht der Preisvorschlag, mit dem du beim Kunden rausgehst.</p>
+    </div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" aria-label="Angebot Master – DB-Ansicht vergrößern"><div class="dbpc__screen"><div class="dbpc__ph"><img class="dbpc__logo" src="https://files.catbox.moe/au80tp.png" alt="Tasty Studios" loading="lazy"><span class="dbpc__phname">Angebot Master</span><span class="dbpc__phnote">PC-Cover folgt</span></div><div class="dbpc__play"><span></span></div></div><div class="dbpc__base"></div></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+  </div>
+</section>
+
+<!-- 6) EMPFEHLUNG ZUR NUTZUNG -->
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div id="ts11emp">
+      <div class="col">
+        <div class="db-hd">DB I – III : <span class="g">Menükalkulation</span></div>
+        <div class="db-row">
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB I</span>&nbsp;Menürechner</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB II</span>&nbsp;Kunden</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB III</span>&nbsp;Angebot</span>
+        </div>
+      </div>
+      <div class="col">
+        <p class="emph">Empfehlung zur <span class="eg">Nutzung</span></p>
+        <p class="p">Sobald deine Gerichte und dein Menü stehen, musst du das Angebot nicht mehr von Hand zusammenschreiben. Wareneinsatz, Deckungsbeitrag und Preisvorschlag liegen ja schon in der Datenbank.</p>
+        <p class="p">Lass Claude Code die fertigen Menüpositionen direkt auswerten und daraus ein Angebot für den Kunden formulieren — inklusive Personenzahl, Positionen und Preis. Du prüfst nur noch, bevor es rausgeht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7) LEARNINGS -->
+<section style="padding-top:12px">
+  <div id="ts11l">
+    <div class="tsl-head">
+      <span class="tsl-eyebrow">Was du mitnimmst</span>
+      <h2 class="tsl-title">Learnings</h2>
+    </div>
+    <div class="tsl-grid">
+      <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du hast Menürechner, Kunden und Angebot zu einer Kette verknüpft und weißt, wie ein Preis von der Zutat bis zum fertigen Angebot durchläuft.</p></div></div>
+      <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du stellst aus fertigen Gerichten in Minuten ein komplettes Catering-Menü zusammen und siehst sofort Foodcost und Deckungsbeitrag.</p></div></div>
+      <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du verstehst, wie die Angebot-Datenbank aus Menü, Personal und Gemeinkosten einen Preisvorschlag errechnet, der zu deiner Zielmarge passt.</p></div></div>
+      <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du hast gesehen, wie Claude Code dir aus den fertigen Zahlen direkt ein Angebot für den Kunden formuliert.</p></div></div>
+    </div>
+    <div class="cta-wrap"><span class="cta-btn">Zur Einrichtung</span></div>
+  </div>
+</section>
+
+
+<div id="ts11hint"><b>Kommt in Kürze:</b> Die vergrößerte Ansicht zu diesem Baustein wird gerade produziert.</div>
+`;
+
+  function injectCSS(){
+    if(document.getElementById('ts11page-css')) return;
+    var s=document.createElement('style'); s.id='ts11page-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function init(){
+    "use strict";
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Warenkörbe: Karten aus den echten Notion-Eigenschaften ---------- */
+  /* type: reg = reguläre Produkt-Karte · later = Safe-for-Later (Rollup/Relation, selbst gebaut, lila) */
+  var CART1 = {  /* 🍽️ Menürechner Master Database */
+    pill:'Wareneinsatz', total:'12,50 €', done:5, denom:8, pct:62,
+    cards:[
+      {t:'reg', eye:'Titel',        name:'Menüposition',        val:'Text'},
+      {t:'reg', eye:'Verknüpfung',  name:'Gericht / Getränk',   val:'→ Gerichte'},
+      {t:'reg', eye:'Auswahl',      name:'Food / Beverage',     val:'2 Optionen'},
+      {t:'reg', eye:'Zahl',         name:'Anzahl im Menü',      val:'z. B. 80'},
+      {t:'reg', eye:'Formel',       name:'WE pro Gericht (€)',  val:'7,84 €'},
+      {t:'reg', eye:'Formel',       name:'WE gesamt (€)',       val:'12,50 €'},
+      {t:'reg', eye:'Verknüpfung',  name:'Packaging / Co.',     val:'→ Packaging'},
+      {t:'later', name:'Kunden Master DB', badge:'später verknüpfen', desc:'Relation zur Kunden-DB, die du nach dem Anlegen selbst verbindest.'}
+    ],
+    more:'+ 2 weitere (Aufschlüsselung, Recent)'
+  };
+  var CART2 = {  /* 🧑‍🍳 Kunden Master Database */
+    pill:'Umsatz', total:'—', done:4, denom:8, pct:50,
+    cards:[
+      {t:'reg', eye:'Titel',        name:'Name',            val:'Text'},
+      {t:'reg', eye:'Auswahl',      name:'Kundentyp',       val:'Catering · Private Chef · Location'},
+      {t:'reg', eye:'Status',       name:'Status',          val:'Lead → Abgerechnet'},
+      {t:'reg', eye:'Multi-Select', name:'Tags',            val:'VIP · Vegan · High-End …'},
+      {t:'reg', eye:'Zahl (€)',     name:'Umsatz',          val:'6.850 €'},
+      {t:'reg', eye:'Text',         name:'Ansprechpartner', val:'Kontakt'},
+      {t:'reg', eye:'Datum',        name:'Nächstes Event',  val:'Termin'},
+      {t:'later', name:'Menürechner Master DB', badge:'später verknüpfen', desc:'Relation zum Menürechner: welche Menüs für diesen Kunden kalkuliert wurden.'}
+    ],
+    more:'+ 11 weitere (E-Mail, Telefon, Firma, Owner, Adressen, Website …)'
+  };
+  var CART3 = {  /* Angebot Master Database — der Rechenkern */
+    pill:'Preisvorschlag', total:'45,00 €', done:5, denom:10, pct:50,
+    cards:[
+      {t:'reg', eye:'Titel',        name:'Name',              val:'Text'},
+      {t:'reg', eye:'Verknüpfung',  name:'Menü Element',      val:'→ Menürechner'},
+      {t:'reg', eye:'Verknüpfung',  name:'Kunden',            val:'→ Kunden'},
+      {t:'reg', eye:'Verknüpfung',  name:'Mitarbeiter',       val:'→ Team'},
+      {t:'reg', eye:'Formel',       name:'Summe Wareneinsatz',val:'12,50 €'},
+      {t:'reg', eye:'Formel',       name:'Wareneinsatz (%)',  val:'27,8 %'},
+      {t:'reg', eye:'Formel',       name:'DB I · II · III',   val:'Deckungsbeitrag'},
+      {t:'reg', eye:'Zahl (€)',     name:'VK Wunschpreis',    val:'45,00 €'},
+      {t:'later', name:'GK Kosten / Monate', badge:'später verknüpfen', desc:'Rollup auf die Gemeinkosten, den du nach der Relation selbst aufsetzt.'}
+    ],
+    more:'+ 26 weitere (VK bei 10–30 % WE, Zeiten, Nährwerte, Allergene …)'
+  };
+
+  function buildCart(shelfId, barId, data){
+    var shelf = document.getElementById(shelfId);
+    data.cards.forEach(function(c){
+      var el = document.createElement('div');
+      el.className = 'card' + (c.t==='later' ? ' later' : '');
+      var media = (c.t==='reg')
+        ? '<div class="ph">Higgsfield-Bild<span class="hf">Motiv-Thema folgt</span></div>'
+        : '<div class="ph">Higgsfield-Bild<span class="hf">Sonderkachel</span></div>';
+      var foot = (c.t==='reg')
+        ? '<span class="pill"><span class="lbl">'+c.eye+'</span><b>'+c.val+'</b></span>'
+        : '<span class="badge">◷ '+c.badge+'</span>';
+      el.innerHTML = '<div class="card__imgwrap">'+media+'</div>'+
+        '<div class="card__body"><p class="card__eye">Eigenschaft · '+(c.t==='later'?'Später':c.eye)+'</p>'+
+        '<p class="card__name">'+c.name+'</p>'+
+        (c.desc ? '<p class="card__desc">'+c.desc+'</p>' : '') + foot + '</div>';
+      shelf.appendChild(el);
+    });
+    if(data.more){
+      var tail = document.createElement('div');
+      tail.className = 'card__tail';
+      tail.innerHTML = '<span><b>'+data.more+'</b><br>je eine Karte</span>';
+      shelf.appendChild(tail);
+    }
+    var bar = document.getElementById(barId);
+    bar.innerHTML =
+      '<div class="tssbar__side"><div class="tssbar__val">'+data.total+'</div><div class="tssbar__cap">Preisvorschlag</div></div>'+
+      '<div class="tssbar__mid"><div class="tssbar__track"><div class="tssbar__fill" style="width:'+data.pct+'%"></div></div>'+
+        '<div class="tssbar__midcap"><span>Diese Lektion</span><span><b>'+data.pct+' %</b> · '+data.done+'/'+data.denom+'</span></div></div>'+
+      '<div class="tssbar__side right"><div class="tssbar__glob">64 %</div><div class="tssbar__cap">Backoffice</div></div>';
+  }
+  buildCart('ts11shelf1','ts11bar1',CART1);
+  buildCart('ts11shelf2','ts11bar2',CART2);
+  buildCart('ts11shelf3','ts11bar3',CART3);
+
+  /* ---------- PC-Blöcke: Klick-Hinweis (Scroll-Lightbox folgt) ---------- */
+  var hint = document.getElementById('ts11hint'), hintT;
+  function showHint(){
+    hint.classList.add('on');
+    clearTimeout(hintT);
+    hintT = setTimeout(function(){ hint.classList.remove('on'); }, 3200);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tsmac, .dbpc__mac'), function(mac){
+    mac.addEventListener('click', showHint);
+    mac.setAttribute('role','button'); mac.setAttribute('tabindex','0');
+    mac.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showHint(); } });
+  });
+
+  /* ---------- Kalkulationskette ---------- */
+  var stage = document.getElementById('ts11stage');
+  var svg = document.getElementById('ts11svg');
+  var chain = document.getElementById('ts11chain');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  /* Verbindungen: [vonId, zuId, klasse, erscheinen-mit-Ziel-Kachel (s)] */
+  var LINKS = [
+    ['ts11z0','ts11r0','',.48], ['ts11z1','ts11r1','',.57], ['ts11z2','ts11r1','',.62],
+    ['ts11r0','ts11g0','',.94], ['ts11r1','ts11g0','',1.0],
+    ['ts11g0','ts11menu','',1.45], ['ts11g1','ts11menu','dashed',1.5], ['ts11g2','ts11menu','dashed',1.55]
+  ];
+  var paths = {}, pulses = {};
+
+  function anchor(el, side){
+    var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return {
+      x: (side==='r' ? r.right : r.left) - s.left,
+      y: r.top + r.height/2 - s.top
+    };
+  }
+  function drawLines(){
+    if (window.innerWidth <= 820) { svg.innerHTML=''; paths={}; pulses={}; return; }
+    svg.setAttribute('viewBox', '0 0 ' + stage.clientWidth + ' ' + stage.clientHeight);
+    svg.innerHTML = ''; paths = {}; pulses = {};
+    LINKS.forEach(function(L){
+      var a = anchor(document.getElementById(L[0]), 'r');
+      var b = anchor(document.getElementById(L[1]), 'l');
+      var dx = (b.x - a.x) * 0.55;
+      var d = 'M'+a.x+','+a.y+' C'+(a.x+dx)+','+a.y+' '+(b.x-dx)+','+b.y+' '+b.x+','+b.y;
+      var p = document.createElementNS(NS,'path');
+      p.setAttribute('d', d); p.setAttribute('class','ch-line '+L[2]);
+      /* Linie erscheint erst mit ihrer Ziel-Kachel, nie davor */
+      p.style.transitionDelay = (built ? 0 : L[3]) + 's';
+      svg.appendChild(p); paths[L[0]+'>'+L[1]] = p;
+      if (!L[2]) {
+        var glow = document.createElementNS(NS,'path');
+        glow.setAttribute('d', d); glow.setAttribute('class','ch-pulseglow');
+        var q = document.createElementNS(NS,'path');
+        q.setAttribute('d', d); q.setAttribute('class','ch-pulse');
+        svg.appendChild(glow); svg.appendChild(q);
+        pulses[L[0]+'>'+L[1]] = [glow, q];
+      }
+    });
+  }
+
+  /* Puls: Lichtimpuls läuft den Pfad entlang (rAF, deterministisch) */
+  function runPulse(key, dur, done){
+    var pair = pulses[key];
+    var finished = false;
+    function finish(){
+      if (finished) return; finished = true;
+      if (pair) pair.forEach(function(q){ q.style.opacity='0'; });
+      if (done) done();
+    }
+    if (!pair) { finish(); return; }
+    var len = pair[1].getTotalLength(), seg = 12, t0 = null;
+    pair.forEach(function(q){
+      q.style.strokeDasharray = seg + ' ' + (len + seg);
+      q.style.opacity = '1';
+    });
+    function step(now){
+      if (finished) return;
+      if (t0===null) t0 = now;
+      var p = Math.min(1, (now-t0)/dur);
+      var e = p<.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+      var off = String(seg - e*(len+seg));
+      pair[0].style.strokeDashoffset = off;
+      pair[1].style.strokeDashoffset = off;
+      if (p<1) requestAnimationFrame(step); else finish();
+    }
+    requestAnimationFrame(step);
+    /* Abschluss nie animationsabhängig */
+    setTimeout(finish, dur + 200);
+  }
+
+  /* Zahlen-Ticker */
+  function fmtEur(v){ return v.toFixed(2).replace('.', ',') + ' €'; }
+  function tickNum(el, from, to, dur, fmt){
+    if (reduced || dur===0) { el.textContent = fmt(to); return; }
+    var t0=null, ended=false;
+    function step(now){
+      if(ended) return;
+      if(t0===null) t0=now;
+      var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent = fmt(from + (to-from)*e);
+      if(p<1) requestAnimationFrame(step); else ended=true;
+    }
+    requestAnimationFrame(step);
+    /* Endzustand nie animationsabhängig */
+    setTimeout(function(){ ended=true; el.textContent = fmt(to); }, dur + 120);
+  }
+
+  /* Zustand der Kette (Basiswerte + Deltas je Preis-Update) */
+  var S = {
+    z: [28.90, 1.80, 2.40],  /* €/kg Rinderfilet · €/kg Kartoffeln · €/l Sahne */
+    r: [5.20, 1.12],         /* €/Portion Filet 180g · Gratin */
+    ger: 7.84,               /* € Wareneinsatz Hauptgang */
+    sonst: 2.74+1.92,        /* Vorspeise + Dessert */
+    ziel: 0.28               /* Ziel-Foodcost */
+  };
+  /* Deltas: Filet +1,20/kg -> 180g = +0,22 · Kartoffeln +0,20/kg (250g) + Sahne +0,30/l (100ml) -> Gratin +0,08 */
+  var D = { z: [1.20, 0.20, 0.30], r: [0.22, 0.08], ger: 0.30 };
+  function menuSum(ger){ return ger + S.sonst; }
+  function preis(sum){ return Math.ceil((sum/S.ziel)*2)/2; } /* auf 50 Cent gerundet */
+  function fcPct(sum, pr){ return sum/pr*100; }
+
+  var el = {
+    zv: [document.getElementById('ts11z0v'), document.getElementById('ts11z1v'), document.getElementById('ts11z2v')],
+    rv: [document.getElementById('ts11r0v'), document.getElementById('ts11r1v')],
+    ts11g0v: document.getElementById('ts11g0v'), ts11mHauptV: document.getElementById('ts11mHauptV'),
+    ts11mSumV: document.getElementById('ts11mSumV'), ts11mFcV: document.getElementById('ts11mFcV'),
+    ts11mBar: document.getElementById('ts11mBar'), ts11mPreis: document.getElementById('ts11mPreis'),
+    menu: document.getElementById('ts11menu')
+  };
+
+  function setMenu(ger, dur){
+    var sum = menuSum(ger), pr = preis(sum), fc = fcPct(sum, pr);
+    tickNum(el.ts11mHauptV, parseFloat(el.ts11mHauptV.textContent.replace(',','.'))||0, ger, dur, fmtEur);
+    tickNum(el.ts11mSumV, parseFloat(el.ts11mSumV.textContent.replace(',','.'))||0, sum, dur, fmtEur);
+    tickNum(el.ts11mFcV, parseFloat(el.ts11mFcV.textContent.replace(',','.'))||0, fc, dur, function(v){ return v.toFixed(1).replace('.',',')+' %'; });
+    tickNum(el.ts11mPreis, parseFloat(el.ts11mPreis.textContent.replace(',','.'))||0, pr, dur, fmtEur);
+    el.ts11mBar.style.transition = 'width '+dur+'ms cubic-bezier(.16,1,.3,1)';
+    el.ts11mBar.style.width = Math.min(100, fc/40*100) + '%';  /* Skala: 40 % = voll */
+  }
+
+  function flash(id){
+    var n = document.getElementById(id);
+    n.classList.add('flash','tick');
+    setTimeout(function(){ n.classList.remove('flash'); }, 900);
+    setTimeout(function(){ n.classList.remove('tick'); }, 2400);
+  }
+
+  /* -------- Aufbau-Sequenz -------- */
+  var built = false;
+  function build(){
+    if (built) return; built = true;
+    chain.classList.add('go');
+    var order = [
+      ['ts11z0',0],['ts11z1',90],['ts11z2',180],
+      ['ts11r0',480],['ts11r1',570],
+      ['ts11g0',940],['ts11g1',1030],['ts11g2',1120],
+      ['ts11menu',1450]
+    ];
+    if (reduced) {
+      order.forEach(function(o){ document.getElementById(o[0]).classList.add('on'); });
+      setMenu(S.ger, 0);
+      return;
+    }
+    order.forEach(function(o){
+      setTimeout(function(){ document.getElementById(o[0]).classList.add('on'); }, o[1]);
+    });
+    setTimeout(function(){ runPulse('ts11z0>ts11r0', 600); runPulse('ts11z1>ts11r1', 700); runPulse('ts11z2>ts11r1', 800); }, 780);
+    setTimeout(function(){ runPulse('ts11r0>ts11g0', 600); runPulse('ts11r1>ts11g0', 700); }, 1250);
+    setTimeout(function(){ runPulse('ts11g0>ts11menu', 650); }, 1700);
+    setTimeout(function(){ setMenu(S.ger, 1100); }, 2000);
+    setTimeout(function(){ loopTimer = setTimeout(update, 1500); }, 3100);
+  }
+
+  /* -------- Update-Zyklus: ALLE Zutaten-Preise ändern sich, Kette rechnet nach -------- */
+  var up = true, loopTimer = null;
+  function update(){
+    if (!document.getElementById('ts11chain')) return;
+    if (document.hidden) { loopTimer = setTimeout(update, 4000); return; }
+    var s = up ? 1 : -1;
+    var zNeu = S.z.map(function(v,i){ return v + s*D.z[i]; });
+    var rNeu = S.r.map(function(v,i){ return v + s*D.r[i]; });
+    var gNeu = S.ger + s*D.ger;
+
+    /* 1) Alle drei Zutaten: Badge + Preis-Tick */
+    ['ts11z0','ts11z1','ts11z2'].forEach(function(id,i){
+      var chg = document.getElementById(id+'chg');
+      chg.textContent = (s>0 ? '+' : '\u2212') + fmtEur(D.z[i]);
+      chg.classList.add('on');
+      flash(id);
+      tickNum(el.zv[i], S.z[i], zNeu[i], 700, fmtEur);
+    });
+
+    /* 2) Pulse zu beiden Rezepturen, dann weiter durch die Kette */
+    var toR = 0;
+    function stufe2(){
+      if (++toR < 3) return;                    /* alle 3 Zutaten-Pulse fertig */
+      flash('ts11r0'); flash('ts11r1');
+      tickNum(el.rv[0], S.r[0], rNeu[0], 600, fmtEur);
+      tickNum(el.rv[1], S.r[1], rNeu[1], 600, fmtEur);
+      var toG = 0;
+      function stufe3(){
+        if (++toG < 2) return;                  /* beide Rezeptur-Pulse fertig */
+        flash('ts11g0');
+        tickNum(el.ts11g0v, S.ger, gNeu, 600, fmtEur);
+        runPulse('ts11g0>ts11menu', 650, function(){
+          el.menu.classList.add('flash');
+          document.getElementById('ts11mHaupt').classList.add('tick');
+          document.getElementById('ts11mSum').classList.add('tick');
+          var mc = document.getElementById('ts11mchg'); mc.classList.add('on');
+          setMenu(gNeu, 900);
+          setTimeout(function(){
+            el.menu.classList.remove('flash');
+            document.getElementById('ts11mHaupt').classList.remove('tick');
+            document.getElementById('ts11mSum').classList.remove('tick');
+            mc.classList.remove('on');
+            ['ts11z0chg','ts11z1chg','ts11z2chg'].forEach(function(id){ document.getElementById(id).classList.remove('on'); });
+          }, 2100);
+          S.z = zNeu; S.r = rNeu; S.ger = gNeu; up = !up;
+          loopTimer = setTimeout(update, 6800);
+        });
+      }
+      runPulse('ts11r0>ts11g0', 620, stufe3);
+      runPulse('ts11r1>ts11g0', 620, stufe3);
+    }
+    runPulse('ts11z0>ts11r0', 620, stufe2);
+    runPulse('ts11z1>ts11r1', 660, stufe2);
+    runPulse('ts11z2>ts11r1', 700, stufe2);
+  }
+
+  drawLines();
+  var rT; window.addEventListener('resize', function(){ clearTimeout(rT); rT = setTimeout(drawLines, 150); });
+
+  /* inView-Polling statt IntersectionObserver (Reveal-Rezept des Design-Systems) */
+  var poll = setInterval(function(){
+    if (built || !document.getElementById('ts11chain')) { clearInterval(poll); return; }
+    var r = chain.getBoundingClientRect(), vh = window.innerHeight || 800;
+    if (r.top < vh * .72 && r.bottom > vh * .12) { clearInterval(poll); build(); }
+  }, 250);
+
+  /* ---------- Empfehlung + Learnings: gleiches Reveal-Rezept (Keyframe + inView-Polling) ---------- */
+  function revealOnce(el, className){
+    if (!el || el.__revealed) return;
+    var done = false;
+    var iv = setInterval(function(){
+      if (done) { clearInterval(iv); return; }
+      var r = el.getBoundingClientRect(), vh = window.innerHeight || 800;
+      if (r.top < vh * .82 && r.bottom > 0) {
+        done = true; clearInterval(iv); el.__revealed = true;
+        if (reduced) { el.classList.add(className); el.style.opacity = '1'; el.style.transform = 'none'; }
+        else el.classList.add(className);
+      }
+    }, 250);
+  }
+  /* Die DB-Zeilen animieren rein per CSS-@keyframes (Signal-Puls je Icon, s. #ts11emp .ping/.ic) —
+     keine JS-Zustandsmaschine, kann also nicht mehr desynchronisieren. */
+  /* Pointer-Tilt (Muster #tslpemp: leichte 3D-Neigung + Glow-Punkt folgt der Maus) */
+  function tiltPanel(wrap){
+    if (!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+    if (reduced) return;
+    var raf = null, cx = 0, cy = 0;
+    wrap.addEventListener('mousemove', function(e){
+      cx = e.clientX; cy = e.clientY;
+      if (!wrap.classList.contains('live') || raf) return;
+      raf = requestAnimationFrame(function(){
+        raf = null;
+        var r = wrap.getBoundingClientRect();
+        var px = (cx-r.left)/r.width, py = (cy-r.top)/r.height;
+        wrap.style.setProperty('--ry', ((px-.5)*5).toFixed(2)+'deg');
+        wrap.style.setProperty('--rx', ((.5-py)*4).toFixed(2)+'deg');
+        wrap.style.setProperty('--mx', (px*100).toFixed(1)+'%');
+        wrap.style.setProperty('--my', (py*100).toFixed(1)+'%');
+      });
+    });
+    wrap.addEventListener('mouseleave', function(){
+      wrap.style.setProperty('--rx','0deg'); wrap.style.setProperty('--ry','0deg');
+    });
+  }
+  var ts11emp = document.getElementById('ts11emp');
+  revealOnce(ts11emp, 'on');
+  var ts11empArmed = false; /* Guard: Setup darf nur EINMAL laufen, sonst Doppel-Listener beim späteren .live-Toggle */
+  new MutationObserver(function(){
+    if (!ts11empArmed && ts11emp.classList.contains('on')) {
+      ts11empArmed = true;
+      tiltPanel(ts11emp);
+      setTimeout(function(){ ts11emp.classList.add('live'); }, 950);
+    }
+  }).observe(ts11emp, {attributes:true, attributeFilter:['class']});
+
+  var tslCells = document.querySelectorAll('#ts11l .tsl-cell');
+  Array.prototype.forEach.call(tslCells, function(cell, i){
+    cell.style.animationDelay = (i * 0.12) + 's';
+  });
+  revealOnce(document.getElementById('ts11l'), 'ts11l-armed');
+  /* ts11l-armed triggert die Orb-Cells gestaffelt */
+  var tslRoot = document.getElementById('ts11l');
+  var tslObs = new MutationObserver(function(){
+    if (tslRoot.classList.contains('ts11l-armed')) {
+      Array.prototype.forEach.call(tslCells, function(cell){ cell.classList.add('on'); });
+      tslObs.disconnect();
+    }
+  });
+  tslObs.observe(tslRoot, {attributes:true, attributeFilter:['class']});
+
+  }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('ts11page'); if(e&&e.parentNode) e.parentNode.removeChild(e); return; }
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    if(document.getElementById('ts11page')) return;
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return; /* Hero-IIFE mountet zuerst */
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts11page';
+    root.innerHTML=HTML;
+    if(hero.nextSibling) sc.insertBefore(root, hero.nextSibling); else sc.appendChild(root);
+    try{ init(); }catch(err){ /* Endzustand nie animationsabhängig: Inhalt steht auch ohne init */ }
+  }
+  function boot(){
+    var tries=0;
+    var iv=setInterval(function(){ tries++; mount(); if(tries>80) clearInterval(iv); },300);
+    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  if(document.readyState==='complete') boot(); else window.addEventListener('load', boot);
+})();
