@@ -2868,8 +2868,7 @@
       radial-gradient(70% 120% at 82% 12%,rgba(var(--g),.10),rgba(var(--g),0) 60%),
       radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%);
     border-top:1px solid rgba(255,255,255,0);border-bottom:1px solid rgba(255,255,255,0)}
-  #tslohn::before,#tslohn::after{content:"";display:block;height:1px;width:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent)}
+  /* Abschnittstrenner (Gradient-Linie) oben+unten auf Robert-Wunsch entfernt (15.07.2026) */
   #tslohn *{box-sizing:border-box}
   #tslohn .tsl-wrap{width:min(1120px,90vw);margin:0 auto;padding:64px 0 68px}
 
@@ -3101,6 +3100,27 @@
     new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
+})();
+
+/* gemeinkosten-mitarbeiterlhne — Warenkorb "Deine Mitarbeiterlöhne. Netto für Netto." (#tsshop--db7_mitarbeiterloehne)
+   ueber "Was eine Arbeitsstunde wirklich kostet" (#tslohn) ziehen (Robert-Wunsch 15.07.2026).
+   Beide Widgets mounten unabhaengig (tsshop.js bzw. dieses File) und koennen in beliebiger
+   Reihenfolge zuerst da sein -> reiner DOM-Move sobald BEIDE existieren, kein Anti-Flash noetig
+   (keine Rohtexte, nur zwei bereits fertig gestylte Widgets). Loop-sicher: bewegt nur, solange
+   der Warenkorb noch NACH #tslohn steht. */
+(function(){
+  if(window.__tslohnReorder) return; window.__tslohnReorder=true;
+  function reorder(){
+    if(!/\/gemeinkosten-mitarbeiterlhne\/?$/.test(location.pathname)) return;
+    var shop=document.getElementById('tsshop--db7_mitarbeiterloehne');
+    var lohn=document.getElementById('tslohn');
+    if(!shop||!lohn||!lohn.parentNode) return;
+    if(lohn.compareDocumentPosition(shop) & Node.DOCUMENT_POSITION_PRECEDING) return; // shop steht schon davor
+    lohn.parentNode.insertBefore(shop, lohn);
+  }
+  reorder();
+  document.addEventListener('DOMContentLoaded', reorder);
+  new MutationObserver(reorder).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
