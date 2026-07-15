@@ -1279,12 +1279,49 @@ details > summary {
   visibility:hidden !important;
 }
 
-/* Native Notion-Überschrift „Exkurs: Die drei Brillen …" (block-d916…) + Intro-Absatz „Die spätere
-   Absatz-/Break-Even-Tabelle …" (block-e0117…) dauerhaft ausblenden: Das #tsbrille-Widget bringt seine
-   eigene Kopfzeile („Exkurs · Absatzplanung / Eine Zahl, drei Brillen") + Intro mit — die native H2 +
-   der Absatz wären doppelt. Bleiben in Notion (SSOT + dienen dem Widget als Anker/Sektionskopf), nur
-   visuell entfernt. NICHT in Notion löschen, sonst brechen findAnchor()/relocateSection(). */
-.page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870,
-.page__gemeinkosten-mitarbeiterlhne #block-e0117226860f406fb4ab5c7de84ee1a1{
+/* Native Notion-Roh-Texte dauerhaft ausblenden — die beiden gestylten Widgets #tsbrille
+   („Exkurs · Absatzplanung / Eine Zahl, drei Brillen") und #tslohn („Mitarbeiterlöhne")
+   bringen denselben Inhalt in schöner Form mit. Ohne diese Regel blitzt der native Fließtext
+   (Break-Even / Kapazität / Szenario + Methoden-Tabelle sowie Abschnitt B + Arbeitgeberkosten-
+   Erklärung) nach dem JS-Reveal (.ts-brille-moved) doppelt auf. Alles bleibt in Notion (SSOT +
+   dient den Widgets als Anker/Sektionskopf), nur visuell entfernt.
+   NICHT in Notion löschen, sonst brechen findAnchor()/relocateSection(). */
+
+/* — Exkurs-Kopf + „drei Brillen"-Fließtext (ersetzt durch #tsbrille) — */
+.page__gemeinkosten-mitarbeiterlhne #block-d91675b926df462994844a6fb00a4870,   /* H2 „Exkurs: Die drei Brillen …" */
+.page__gemeinkosten-mitarbeiterlhne #block-e0117226860f406fb4ab5c7de84ee1a1,   /* Intro „Die spätere Absatz-/Break-Even-Tabelle …" */
+.page__gemeinkosten-mitarbeiterlhne #block-463ce58262c741f0be2f5ac07665b019,   /* 1. Break-Even */
+.page__gemeinkosten-mitarbeiterlhne #block-b22b1b3d921b4ce39a63ca8c9543519b,   /* Rechnet von den Kosten her */
+.page__gemeinkosten-mitarbeiterlhne #block-323133fb1e37464e8fa17e8ef587f687,   /* Zitat (Fixkosten + Personal) … */
+.page__gemeinkosten-mitarbeiterlhne #block-93b3f90769e94d3a870bf4f775d4d77f,   /* Ergebnis ist eine Untergrenze … */
+.page__gemeinkosten-mitarbeiterlhne #block-50a542580fc14d81ae57598505b0a822,   /* 2. Kapazität */
+.page__gemeinkosten-mitarbeiterlhne #block-f9c575d591b14c86b761594b69b4c822,   /* Rechnet von deinem Laden her … */
+.page__gemeinkosten-mitarbeiterlhne #block-2d21dbe29ed74ae983814d7cc52242af,   /* Zitat Einheiten/Tag × … */
+.page__gemeinkosten-mitarbeiterlhne #block-6c18fa4e777743bca050d738e7aff645,   /* Beispiel 80 Einheiten … */
+.page__gemeinkosten-mitarbeiterlhne #block-3c147221bbd841ef8251e862b8f00144,   /* 3. Szenario */
+.page__gemeinkosten-mitarbeiterlhne #block-27499754dc6041c78241f85e11066281,   /* Ein Durchspielen … */
+.page__gemeinkosten-mitarbeiterlhne #block-36da94a587c040ddbbb99716868e7d92,   /* Pessimistisch = 50 % */
+.page__gemeinkosten-mitarbeiterlhne #block-062948e850f547b28c72da3485f0ee54,   /* Realistisch = 70 % */
+.page__gemeinkosten-mitarbeiterlhne #block-888cb3dffbe04c58a029f9c6168d88be,   /* Optimistisch = 90 % */
+.page__gemeinkosten-mitarbeiterlhne #block-807997af455c4321ab7b26efbc97bc9c,   /* Für jede Stufe … */
+.page__gemeinkosten-mitarbeiterlhne #block-d100e33d5150464eafe80f987a2b7515,   /* Wie die drei zusammenspielen … */
+.page__gemeinkosten-mitarbeiterlhne #block-d100e33d5150464eafe80f987a2b7515 + .notion-table__wrapper, /* Methode/Frage/Liefert-Tabelle */
+/* — Abschnitt B + Arbeitgeberkosten-Erklärung (ersetzt durch #tslohn) — */
+.page__gemeinkosten-mitarbeiterlhne #block-df216f66494644348800173f8b49dd66,   /* H2 „Abschnitt B — Mitarbeiterlöhne" */
+.page__gemeinkosten-mitarbeiterlhne #block-d65a1e262a3b47a194743732b70d9898,   /* Wir hinterlegen die Löhne … */
+.page__gemeinkosten-mitarbeiterlhne #block-82a977fb6cbe45c9b1723ce6af7245cb,   /* Wie berechnen wir … drei Lohn-Ebenen */
+.page__gemeinkosten-mitarbeiterlhne #block-3613ab9234c140d48c7eefb3fa768478,   /* Nettolohn … */
+.page__gemeinkosten-mitarbeiterlhne #block-f1c612ca7dbc4dd68332917a6599f39e,   /* Bruttolohn … */
+.page__gemeinkosten-mitarbeiterlhne #block-d21ef336dcea4dc5845bd059af93949f,   /* Arbeitgeber-Bruttokosten … */
+.page__gemeinkosten-mitarbeiterlhne #block-c813e194e6314b77901b2f1428da4d5f,   /* Für deine Kalkulation zählt … */
+.page__gemeinkosten-mitarbeiterlhne #block-8b93e03102be4803852d8ffc1ee5bfde,   /* Arbeitgeberkosten = Bruttolohn + … */
+.page__gemeinkosten-mitarbeiterlhne #block-013b4224d1d84ac79342006fdbe84fe7,   /* Der Arbeitgeber trägt zusätzlich … */
+.page__gemeinkosten-mitarbeiterlhne #block-402f8ba8825543098533058a3eb62686,   /* Rentenversicherung ca. 9,3 % */
+.page__gemeinkosten-mitarbeiterlhne #block-3939426cf1f7407ebadbe1f258aeac9b,   /* Krankenversicherung ca. 7,3 % */
+.page__gemeinkosten-mitarbeiterlhne #block-fb463ce80c3449c1945d5e5796e99c5b,   /* Pflegeversicherung ca. 1,8 % */
+.page__gemeinkosten-mitarbeiterlhne #block-e5f2cc1f91414dc585bb8fc82797b30d,   /* Arbeitslosenversicherung ca. 1,3 % */
+.page__gemeinkosten-mitarbeiterlhne #block-7347a75518aa49ffa68c9f679303e00c,   /* Unfallversicherung / Umlagen … */
+.page__gemeinkosten-mitarbeiterlhne #block-1355c05c9b8e42958a4d74beb3a2a8e3,   /* In Summe grob +21 % bis +23 % … */
+.page__gemeinkosten-mitarbeiterlhne #block-0bdcd9bac5c54acb846fa2a913c83f60{   /* Starten wir mit dem Bau der Datenbank … DB VII */
   display:none !important;
 }
