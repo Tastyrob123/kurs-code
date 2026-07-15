@@ -7557,6 +7557,10 @@
     if(inView(root)) play(root);
     var poll=setInterval(function(){ if(!document.body.contains(root)){ clearInterval(poll); return; } if(inView(root)){ play(root); clearInterval(poll); } },250);
     setTimeout(function(){ clearInterval(poll); },20000);
+    // Garantierte Einblendung: Falls der Scroll-/Viewport-Trigger nie greift (z. B. sehr lange
+    // Seite, Scroll-Position oben, oder ein Render-Glitch verfälscht inView()), das Widget nach
+    // kurzer Zeit trotzdem sicher einblenden. play() hat __played-Guard -> läuft nie doppelt.
+    setTimeout(function(){ if(document.body.contains(root)) play(root); }, 1500);
   }
   // Exkurs-Abschnitt ("Eine Zahl, drei Brillen") vom Seitenende nach oben ziehen:
   // direkt vor "Abschnitt B — Mitarbeiterlöhne" = unter die Gemeinkostenannahmen.
