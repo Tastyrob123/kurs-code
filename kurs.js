@@ -595,10 +595,10 @@
   #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;font-size:clamp(30px,3.6vw,46px);margin:0 0 18px}
   #tsbau .bau-title span{color:#c7b489}
   #tsbau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
-  #tsbau .bau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(32px,4.5vw,80px);max-width:1220px;margin:0 auto;align-items:start}
+  #tsbau .bau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,50px);max-width:1300px;margin:0 auto;align-items:start}
   #tsbau .bau-act{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .9s cubic-bezier(.22,1,.36,1);text-align:center}
   #tsbau .bau-act.on{opacity:1;transform:none}
-  #tsbau .bau-stage{position:relative;height:262px;display:flex;align-items:center;justify-content:center;margin-bottom:32px}
+  #tsbau .bau-stage{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:32px}
   #tsbau .bau-med{border-radius:50%;object-fit:cover;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);background:#0b0d14;display:block}
   #tsbau .bau-cap{font-size:15px;line-height:1.62;color:rgba(255,255,255,.78);margin:0 auto;max-width:340px}
   #tsbau .bau-cap b{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em;color:#efe6d2;margin-bottom:8px}
@@ -617,10 +617,10 @@
 
   /* Act B — Mehrfach verwenden: eine Quelle, drei Ziele */
   #tsbau .bau-stage--fan{flex-direction:column;justify-content:flex-start;gap:0}
-  #tsbau .bau-med--src{width:98px;height:98px;z-index:2}
-  #tsbau .bau-fanline{width:1.6px;height:30px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:10px 0 13px}
-  #tsbau .bau-targets{display:flex;gap:16px;justify-content:center}
-  #tsbau .bau-med--t{width:106px;height:106px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-med--src{width:140px;height:140px;z-index:2;margin-top:-28px}
+  #tsbau .bau-fanline{width:1.6px;height:32px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:12px 0 15px}
+  #tsbau .bau-targets{display:flex;gap:10px;justify-content:center}
+  #tsbau .bau-med--t{width:118px;height:118px;opacity:0;transform:translateY(12px) scale(.78)}
   #tsbau .bau-act.on .bau-med--t{animation:bauPop .6s cubic-bezier(.22,1,.36,1) both}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(1){animation-delay:.3s}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(2){animation-delay:.48s}
@@ -628,16 +628,16 @@
   @keyframes bauPop{to{opacity:1;transform:none}}
 
   /* Act C — Schachteln: verschachtelte Medaillons */
-  #tsbau .bau-med--g{position:absolute;left:calc(50% - 112px);top:16px;width:162px;height:162px;z-index:1}
-  #tsbau .bau-med--s{position:absolute;left:calc(50% + 2px);top:78px;width:102px;height:102px;z-index:2}
-  #tsbau .bau-med--z{position:absolute;left:calc(50% + 74px);top:142px;width:68px;height:68px;z-index:3}
+  #tsbau .bau-med--g{position:absolute;left:calc(50% - 112px);top:48px;width:162px;height:162px;z-index:1}
+  #tsbau .bau-med--s{position:absolute;left:calc(50% + 2px);top:110px;width:102px;height:102px;z-index:2}
+  #tsbau .bau-med--z{position:absolute;left:calc(50% + 74px);top:174px;width:68px;height:68px;z-index:3}
   #tsbau .bau-med--g,#tsbau .bau-med--s,#tsbau .bau-med--z{opacity:0;transform:scale(.72)}
   #tsbau .bau-act.on .bau-med--g{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .1s both}
   #tsbau .bau-act.on .bau-med--s{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .3s both}
   #tsbau .bau-act.on .bau-med--z{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .5s both}
   @keyframes bauNest{to{opacity:1;transform:scale(1)}}
 
-  @media(max-width:1200px){#tsbau .bau-grid{grid-template-columns:1fr;gap:52px;max-width:470px}}
+  @media(max-width:1360px){#tsbau .bau-grid{grid-template-columns:1fr;gap:52px;max-width:480px}}
   @media(prefers-reduced-motion:reduce){
     #tsbau .bau-act{opacity:1;transform:none;transition:none}
     #tsbau .bau-swap,#tsbau .bau-med--a1,#tsbau .bau-med--a2{animation:none!important}
