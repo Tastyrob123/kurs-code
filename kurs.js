@@ -10776,7 +10776,12 @@
       var r=wrap.getBoundingClientRect();
       var p=total>0?(-r.top/total):0; if(p<0)p=0; if(p>1)p=1;
       var ff=p*(N-1);
-      for(var i=0;i<N;i++){ var o=1-Math.abs(ff-i); imgs[i].style.opacity=o<0?0:(o>1?1:o); }
+      var base=Math.floor(ff); if(base>N-1)base=N-1;
+      var frac=ff-base;
+      // Deckende Basis (<=base = 1) + darueber sanft einblendender naechster
+      // Frame (base+1 = frac). So blendet NIE der dunkle Hintergrund durch
+      // => echte Ueberblendung ohne Abdunkeln, ohne Cut, wie ein Video.
+      for(var i=0;i<N;i++){ imgs[i].style.opacity = (i<=base) ? 1 : (i===base+1 ? frac : 0); }
       var act=Math.round(ff);
       if(act!==lastAct){ for(var j=0;j<dots.length;j++){ dots[j].className=(j===act)?"on":""; } lastAct=act; }
       if(bar) bar.style.width=(p*100).toFixed(1)+"%";
