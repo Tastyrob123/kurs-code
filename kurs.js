@@ -604,7 +604,7 @@
   #tsbau .bau-cap b{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em;color:#efe6d2;margin-bottom:8px}
 
   /* Act A — Austauschen: zwei Medaillons + Swap-Glyph */
-  #tsbau .bau-med--a1,#tsbau .bau-med--a2{width:108px;height:108px}
+  #tsbau .bau-med--a1,#tsbau .bau-med--a2{width:134px;height:134px}
   #tsbau .bau-med--a1{margin-right:-16px;z-index:2}
   #tsbau .bau-med--a2{margin-left:-16px;z-index:1}
   #tsbau .bau-swap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,13,20,.92);border:1px solid rgba(199,180,137,.65);color:#d8c9ab;box-shadow:0 8px 22px rgba(0,0,0,.65)}
