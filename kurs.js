@@ -10262,7 +10262,7 @@
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev4 2026-07-17) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev5 2026-07-17) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -10335,9 +10335,10 @@
     #tsIface .ph-pill{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--beige);background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.32);border-radius:999px;padding:4px 10px;font-weight:600}
     #tsIface .ph-cap{display:block;margin-top:8px;color:var(--tx2);font-size:11.5px}
 
-    /* views chips */
-    #tsIface .views{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:820px;margin:34px auto 0}
-    #tsIface .chip{padding:9px 16px;border-radius:999px;font-size:14px;background:var(--card);border:1px solid var(--bd);color:#fff;transition:transform .3s,border-color .3s}
+    /* views chips — eine Reihe, direkt unter dem Intro */
+    #tsIface .viewbar{padding:6px 0 40px}
+    #tsIface .views{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:1080px;margin:0 auto}
+    #tsIface .chip{padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:#fff;transition:transform .3s,border-color .3s}
     #tsIface .chip:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
     #tsIface .chip.star{background:linear-gradient(160deg,rgba(199,180,137,.22),rgba(199,180,137,.05));border-color:rgba(199,180,137,.5);color:var(--beige-hi);font-weight:600;box-shadow:0 0 30px -8px rgba(199,180,137,.4)}
     #tsIface .chip.star::before{content:"\\2605  ";color:var(--beige)}
@@ -10357,12 +10358,20 @@
     #tsIface .split.rev-order .s-media{order:1}
     #tsIface .s-txt p{color:var(--tx);margin:0}
     #tsIface .s-txt .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
-    #tsIface .s-txt.ar{text-align:right}
+    #tsIface .s-txt.ar{text-align:center}
+    #tsIface .split.viewsplit .s-txt .tsif-kick{justify-content:center}
 
-    /* view-switch animation */
-    #tsIface .vframe{width:100%}
-    #tsIface .vswitch{position:relative;width:100%;aspect-ratio:1180/850;background:#0b0d16;overflow:hidden}
-    #tsIface .vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;transition:opacity .7s ease}
+    /* view-switch animation — edler Fenster-Rahmen mit Glow */
+    #tsIface .vstage{position:relative;width:100%}
+    #tsIface .vstage::before{content:"";position:absolute;inset:2% -4% -8%;background:radial-gradient(58% 62% at 50% 46%,rgba(199,180,137,.16),rgba(46,64,120,.10) 46%,transparent 74%);filter:blur(26px);z-index:0;pointer-events:none}
+    #tsIface .vframe{position:relative;z-index:1;width:100%;border:1px solid rgba(199,180,137,.24);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.012));box-shadow:0 44px 100px -46px rgba(0,0,0,.98),0 0 0 1px rgba(255,255,255,.03),0 0 70px -26px rgba(199,180,137,.22);}
+    #tsIface .vframe::after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 0 0 1px rgba(255,255,255,.02)}
+    #tsIface .vframe .bar{position:relative;padding:12px 15px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0))}
+    #tsIface .vframe .bar i{width:9px;height:9px}
+    #tsIface .vtitle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--disp);font-size:11px;letter-spacing:.08em;color:var(--tx2)}
+    #tsIface .vtitle b{color:var(--beige);font-weight:600}
+    #tsIface .vswitch{position:relative;width:100%;aspect-ratio:1180/838;background:#17181e;overflow:hidden;border-radius:0 0 15px 15px}
+    #tsIface .vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;opacity:0;transition:opacity .7s ease}
     #tsIface .vslide.on{opacity:1}
 
     /* compare carousel (Gemini/Higgsfield/Midjourney) */
@@ -10379,6 +10388,22 @@
     #tsIface .cmp-dots{display:flex;gap:7px}
     #tsIface .cmp-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0;transition:background .25s}
     #tsIface .cmp-dot.on{background:var(--beige)}
+
+    /* Galerie-Trio (3 nebeneinander, mit Covern) */
+    #tsIface .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:38px auto 0}
+    #tsIface .tcard{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:0 34px 78px -44px rgba(0,0,0,.96);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s}
+    #tsIface .tcard:hover{transform:translateY(-5px);border-color:rgba(199,180,137,.32)}
+    #tsIface .tvisual{position:relative;aspect-ratio:3/2;overflow:hidden;background:#17181e;border-bottom:1px solid var(--bd)}
+    #tsIface .tvisual>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+    #tsIface .tvisual .cmp-stage{position:absolute;inset:0}
+    #tsIface .tvisual .cmp-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+    #tsIface .tvisual .cmp-slide.on{opacity:1;position:absolute}
+    #tsIface .tvisual .cmp-slide .ph{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
+    #tsIface .tcap{padding:22px 22px 24px}
+    #tsIface .tcap .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
+    #tsIface .tcap h3{margin:0 0 8px;font-size:clamp(17px,1.7vw,20px)}
+    #tsIface .tcap p{color:var(--tx);font-size:14px;line-height:1.62;margin:0}
+    #tsIface .tcard .cmp-foot{margin-top:16px}
 
     /* use-case cards */
     #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:34px auto 0}
@@ -10466,7 +10491,8 @@
       #tsIface .split.rev-order .s-txt{order:1}#tsIface .split.rev-order .s-media{order:2}
       #tsIface .split.viewsplit .s-txt{order:2}#tsIface .split.viewsplit .s-media{order:1}
       #tsIface .s-txt.ar{text-align:left}
-      #tsIface .cards,#tsIface .gal{grid-template-columns:1fr}
+      #tsIface .cards,#tsIface .gal,#tsIface .trio{grid-template-columns:1fr}
+      #tsIface .trio{max-width:440px}
       #tsIface .learn{grid-template-columns:repeat(2,1fr);gap:34px 28px;max-width:560px}
       .page__interface-bau-grundstruktur-widgets .ts-hero__text{margin-top:-22%}
     }
@@ -10505,26 +10531,35 @@
 
   /* helpers */
   function frameSm(cap){ return '<div class="frame sm"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
-  function frameImg(src,alt){ return '<div class="frame sm"><div class="bar"><i></i><i></i><i></i></div><img src="'+src+'" alt="'+alt+'" style="display:block;width:100%;height:auto"></div>'; }
   function viewSwitch(){
     var slides='';
     for(var i=0;i<VIEWS.length;i++){ slides+='<img class="vslide'+(i===0?' on':'')+'" src="'+VIEWS[i].src+'" alt="Ansicht: '+VIEWS[i].n+'" loading="lazy">'; }
-    return '<div class="frame vframe"><div class="bar"><i></i><i></i><i></i></div><div class="vswitch">'+slides+'</div></div>';
+    return '<div class="vstage"><div class="frame vframe"><div class="bar"><i></i><i></i><i></i><span class="vtitle">Ansicht: <b>Tabelle</b></span></div><div class="vswitch">'+slides+'</div></div></div>';
   }
-  function compare(subject){
+  function cmpSlides(subject){
     var provs=['Gemini','Higgsfield','Midjourney'];
     var slides='',dots='';
     for(var i=0;i<provs.length;i++){
       slides+='<div class="cmp-slide'+(i===0?' on':'')+'" data-p="'+provs[i]+'"><div class="ph"><div class="ph-in"><span class="ph-pill">'+provs[i]+'</span><span class="ph-cap">'+subject+' · 3:2</span></div></div></div>';
       dots+='<button class="cmp-dot'+(i===0?' on':'')+'" aria-label="'+provs[i]+'"></button>';
     }
-    return '<div class="compare"><div class="frame"><div class="bar"><i></i><i></i><i></i></div>'+
-      '<div class="cmp-stage">'+slides+
+    return {slides:slides,dots:dots};
+  }
+  /* Trio-Karte mit statischem Bild-Cover */
+  function trioImg(src,alt,eye,title,text){
+    return '<div class="tcard"><div class="tvisual"><img src="'+src+'" alt="'+alt+'" loading="lazy"></div>'+
+      '<div class="tcap"><span class="st-eye">'+eye+'</span><h3>'+title+'</h3><p>'+text+'</p></div></div>';
+  }
+  /* Trio-Karte mit 3-Anbieter-Vergleich (klickbar) */
+  function trioCompare(eye,title,text,subject){
+    var c=cmpSlides(subject);
+    return '<div class="tcard compare"><div class="tvisual"><div class="cmp-stage">'+c.slides+
         '<button class="cmp-nav cmp-prev" aria-label="Vorheriger Anbieter">‹</button>'+
         '<button class="cmp-nav cmp-next" aria-label="Nächster Anbieter">›</button>'+
       '</div></div>'+
-      '<div class="cmp-foot"><span class="cmp-label">Gemini</span><span class="cmp-dots">'+dots+'</span></div>'+
-    '</div>';
+      '<div class="tcap"><span class="st-eye">'+eye+'</span><h3>'+title+'</h3><p>'+text+'</p>'+
+        '<div class="cmp-foot"><span class="cmp-label">Gemini</span><span class="cmp-dots">'+c.dots+'</span></div>'+
+      '</div></div>';
   }
   function toolcard(tools,cat,desc,flow,who,whoSelf,req){
     var tr='';
@@ -10541,41 +10576,38 @@
       '<p class="tsif-sub">Praktisch sieht das Ganze aber noch aus wie eine nüchterne Tabelle. Es fehlt das gewisse Etwas, das aus deinen Zahlen ein visuell ansprechendes Interface macht — ein System, das du gerne öffnest. Genau das bauen wir jetzt. Dafür nutzen wir verschiedene Tools und Möglichkeiten, und wir fangen mit dem wichtigsten Baukasten an: Notion selbst.</p>'+
     '</section>'+
 
-    /* 01 · Bausteinprinzip — Animation links, Text rechts */
+    /* Ansichten-Chips — eine Reihe, direkt unter dem Intro */
+    '<div class="viewbar rev">'+
+      '<div class="views">'+
+        '<span class="chip">Tabelle</span><span class="chip">Board</span><span class="chip star">Galerie</span>'+
+        '<span class="chip">Liste</span><span class="chip">Diagramm</span><span class="chip">Dashboard</span>'+
+        '<span class="chip">Zeitleiste</span><span class="chip">Feed</span><span class="chip">Kalender</span>'+
+      '</div>'+
+    '</div>'+
+
+    /* 01 · Bausteinprinzip — Animation links, Text mittig */
     '<section class="rev">'+
       '<div class="split viewsplit">'+
         '<div class="s-media">'+viewSwitch()+'</div>'+
         '<div class="s-txt ar">'+
           '<div class="tsif-kick"><span class="kn">01</span>Das Bausteinprinzip</div>'+
           '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
-          '<p>Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm. Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier links: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
+          '<p>Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm. Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
         '</div>'+
-      '</div>'+
-      '<div class="views">'+
-        '<span class="chip">Tabelle</span><span class="chip">Board</span><span class="chip star">Galerie</span>'+
-        '<span class="chip">Liste</span><span class="chip">Diagramm</span><span class="chip">Dashboard</span>'+
-        '<span class="chip">Zeitleiste</span><span class="chip">Feed</span><span class="chip">Kalender</span>'+
       '</div>'+
     '</section>'+
 
-    /* 02 · Galerie + Bilder + Vergleich */
+    /* 02 · Galerie — 3 nebeneinander mit Covern */
     '<section class="rev">'+
       '<div class="tsif-col center" style="margin-bottom:14px">'+
         '<div class="tsif-kick" style="justify-content:center"><span class="kn">02</span>Unser Main Character</div>'+
         '<h2>Die <span class="gold">Galerie mit Covern</span></h2>'+
         '<p class="tsif-sub">Von allen Ansichten ist eine unser Star: die Galerie mit Covern. Sie zeigt jeden Eintrag als Kachel mit eigenem Titelbild — dadurch wirkt dein Backoffice wie ein hochwertiges Produkt statt wie eine Tabelle. Genau das hebt dein System von allem ab, was aktuell auf dem Markt erhältlich ist.</p>'+
       '</div>'+
-      '<div class="split">'+
-        '<div class="s-media">'+frameImg(GALERIE_SHOT,'Galerie mit Covern')+'</div>'+
-        '<div class="s-txt"><span class="st-eye">Der Effekt</span><h3>Aus Zeilen werden Karten</h3><p>Statt grauer Tabellenzeilen siehst du jeden Eintrag als Karte mit Titelbild. Gerichte, Zutaten oder Inventar erkennst du auf einen Blick — wie in einer Speisekarte oder einem Online-Shop. Das ist der Unterschied zwischen „Datenbank“ und „System“.</p></div>'+
-      '</div>'+
-      '<div class="split rev-order">'+
-        '<div class="s-txt"><span class="st-eye">Die Bilder — dasselbe Motiv, drei Tools</span><h3>Cover erstellen wir mit KI</h3><p>Die Bilder für diese Cover erzeugen wir mit KI-Tools. Klick dich rechts durch: dieselbe Zutat, einmal von Gemini, Higgsfield und Midjourney erstellt. So siehst du direkt, welches Tool welchen Look liefert — die Wahl klären wir gleich Schritt für Schritt.</p></div>'+
-        '<div class="s-media">'+compare('Zutat')+'</div>'+
-      '</div>'+
-      '<div class="split">'+
-        '<div class="s-media">'+compare('Gericht')+'</div>'+
-        '<div class="s-txt"><span class="st-eye">Der Feinschliff</span><h3>Veredeln in Canva Pro</h3><p>Für die Nachbearbeitung empfehle ich ein Canva-Pro-Abo. Dort legst du Texte, dein Logo oder Formate wie Mockups und Schattierungen über das Rohbild — damit alles einheitlich und professionell aussieht. Auch hier: dasselbe Gericht bei drei Anbietern, klick dich durch.</p></div>'+
+      '<div class="trio">'+
+        trioImg(GALERIE_SHOT,'Galerie mit Covern','Der Effekt','Aus Zeilen werden Karten','Statt grauer Tabellenzeilen siehst du jeden Eintrag als Karte mit Titelbild — wie in einer Speisekarte oder einem Online-Shop. Das ist der Unterschied zwischen „Datenbank“ und „System“.')+
+        trioCompare('Die Bilder','Dasselbe Motiv, drei Tools','Die Cover erzeugen wir mit KI. Klick dich durch: dieselbe Zutat von Gemini, Higgsfield und Midjourney — so siehst du direkt, welches Tool welchen Look liefert.','Zutat')+
+        trioCompare('Der Feinschliff','Veredeln in Canva Pro','Für die Nachbearbeitung empfehle ich Canva Pro: Texte, dein Logo, Mockups und Schattierungen übers Rohbild. Auch hier dasselbe Gericht bei drei Anbietern — klick dich durch.','Gericht')+
       '</div>'+
     '</section>'+
 
@@ -10708,6 +10740,7 @@
 
   function startViewCycle(root){
     var slides=root.querySelectorAll('.vslide'); if(slides.length<2) return;
+    var title=root.querySelector('.vtitle');
     if(window.__tsIfaceIv){ clearInterval(window.__tsIfaceIv); }
     var i=0;
     window.__tsIfaceIv=setInterval(function(){
@@ -10715,6 +10748,7 @@
       slides[i].classList.remove('on');
       i=(i+1)%slides.length;
       slides[i].classList.add('on');
+      if(title){ var n=slides[i].getAttribute('alt')||''; title.innerHTML='Ansicht: <b>'+n.replace('Ansicht: ','')+'</b>'; }
     },2100);
   }
 
