@@ -5076,7 +5076,7 @@
       anchorSel:'#ts11wk2', steps:TS11_STEPS_W2,
       eyebrow:'Warenkorb 2 · DB II — Kunden',
       title:'Die <span>Kunden-Datenbank</span>.',
-      sub:'Jeder Auftraggeber mit Kontakt, Typ und Status — die Währung von DB II ist die Personenanzahl.',
+      sub:'Jeder Auftraggeber mit Kontakt, Typ und Status — die Währung von DB II ist die Personenanzahl ( Pax ).',
       summary:'Personen ( Pax )', chain:true,
       relations:[
         { type:'ghost', name:'Menürechner Master Database', target:'Gegenspalte · aus dem Menürechner',
@@ -8316,9 +8316,12 @@
 @media(max-width:820px){#ts11page .pcrow{grid-template-columns:1fr;gap:30px}
 #ts11page .pcrow.rev .pcrow__pc,#ts11page .pcrow.rev .pcrow__text{order:0}
 }
+#ts11page .pcrow__text{transform:translateY(-26px)}
 #ts11page .pcrow__text h3{font-family:var(--serifd);font-weight:600;font-size:clamp(1.5rem,2.6vw,2rem);margin:0 0 18px;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
-#ts11page .pcrow__text p{color:rgba(255,255,255,.8);font-size:15.5px;margin:0 0 14px;max-width:52ch}
+#ts11page .pcrow__text p{color:rgba(255,255,255,.8);font-size:16px;line-height:1.7;margin:0 0 15px;max-width:56ch}
 #ts11page .pcrow__text p:last-child{margin-bottom:0}
+@media(max-width:820px){#ts11page .pcrow__text{transform:none}
+}
 #ts11page .dbpc{width:100%;max-width:560px;margin:0 auto}
 #ts11page .dbpc__mac{position:relative;cursor:pointer;display:block;line-height:0}
 #ts11page .dbpc__mac img{width:100%;height:auto;display:block;transition:transform .5s ease}
@@ -8423,6 +8426,22 @@
 #ts11page #ts11emp .tb .ic{opacity:.85 !important;filter:none !important}
 
   }
+#ts11page #ts11slb{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
+    background:rgba(5,6,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:3vw;
+    opacity:0;transition:opacity .3s ease}
+#ts11page #ts11slb.open{opacity:1}
+#ts11page #ts11slb .slb-panel{position:relative;width:min(92vw,1060px);max-height:88vh;border-radius:16px;overflow:hidden;
+    background:#0b0d14;border:1px solid rgba(199,180,137,.3);box-shadow:0 40px 120px rgba(0,0,0,.65);
+    transform:scale(.95);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+#ts11page #ts11slb.open .slb-panel{transform:scale(1)}
+#ts11page #ts11slb .slb-scroll{max-height:88vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(199,180,137,.4) transparent}
+#ts11page #ts11slb .slb-scroll img{display:block;width:100%;height:auto}
+#ts11page #ts11slb .slb-close{position:absolute;top:14px;right:16px;z-index:2;width:42px;height:42px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);background:rgba(10,12,20,.72);color:#fff;font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+#ts11page #ts11slb .slb-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:2;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);
+    background:rgba(10,12,20,.72);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 14px;pointer-events:none}
 #ts11page #ts11hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);z-index:99;
     background:#12141d;border:1px solid rgba(199,180,137,.4);color:#fff;font-size:13px;border-radius:12px;
     padding:11px 18px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.16,1,.3,1);pointer-events:none}
@@ -8555,8 +8574,9 @@
       <h3>Das Menü als <span class="ts-gold">Bausatz</span></h3>
       <p>Der Menürechner ist der Ort, an dem dein Menü entsteht. Du legst pro Position fest, welches Gericht oder Getränk draufkommt und wie oft es im Menü gezählt wird.</p>
       <p>Aus der Verknüpfung zur Gerichte-Datenbank zieht sich der Wareneinsatz pro Position von allein, und die Summe steht sofort. Ändert sich eine Zutat, läuft die Änderung bis hierher durch, ohne dass du eine Zahl anfasst.</p>
+          <p>Dazu listet dir jede Position die benötigten Mengen pro Zutat auf. Du siehst also nicht nur, was das Menü kostet, sondern auch, was du dafür einkaufen und produzieren musst. Die halbe Einkaufsliste schreibt sich mit.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w1.webp" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8568,8 +8588,9 @@
       <h3>Jeder Kunde an <span class="ts-gold">einem Ort</span></h3>
       <p>In der Kunden-Datenbank liegt jeder Auftraggeber mit Kontakt, Typ und Status. Du siehst auf einen Blick, ob eine Anfrage offen ist, ein Angebot rausging oder der Auftrag schon abgerechnet wurde.</p>
       <p>Umsatz, Ansprechpartner und Event-Termine hängen direkt am Kunden. Über die Verknüpfung zum Menürechner weißt du zu jedem Kunden, welche Menüs für ihn kalkuliert wurden.</p>
+          <p>Und weil der Status als Pipeline geführt wird, ersetzt dir die Tabelle das halbe CRM: Vom Lead über das Angebot bis zur Abrechnung wandert jeder Kunde durch dieselben Stationen, und nichts bleibt im Posteingang liegen.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w2.webp" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8581,8 +8602,9 @@
       <h3>Alles wird zum <span class="ts-gold">Preisvorschlag</span></h3>
       <p>Die Angebot-Datenbank ist der Rechenkern. Sie zieht das Menü, die eingeplanten Mitarbeiter, den Kunden und die Gemeinkosten zusammen und rechnet daraus das fertige Angebot.</p>
       <p>Du siehst Deckungsbeitrag I, II und III, den Wareneinsatz in Prozent, die Personalkosten pro Produkt und einen Verkaufspreis für jede Wareneinsatz-Stufe. Am Ende steht der Preisvorschlag, mit dem du beim Kunden rausgehst.</p>
+          <p>Auch die Zeiten stecken mit drin: Produktion, Verpackung, Logistik, Event und Nachbereitung laufen als Minuten in die Personalkosten ein. Damit kalkulierst du ein Catering nicht nur über die Ware, sondern über den kompletten Einsatz.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w3.webp" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8648,10 +8670,37 @@
     clearTimeout(hintT);
     hintT = setTimeout(function(){ hint.classList.remove('on'); }, 3200);
   }
+  /* Schlussstein-PC: Toast (Video folgt). DB-PCs: Scroll-Lightbox mit der echten DB-Ansicht. */
+  function openScrollLb(src, label){
+    if (document.getElementById('ts11slb')) return;
+    var lb = document.createElement('div'); lb.id = 'ts11slb';
+    lb.innerHTML = '<div class="slb-panel">'
+      + '<button type="button" class="slb-close" aria-label="Schließen">✕</button>'
+      + '<div class="slb-scroll"><img src="' + src + '" alt="' + label + ' — DB-Ansicht"></div>'
+      + '<div class="slb-hint">Scrollen für die ganze Seite</div>'
+      + '</div>';
+    document.body.appendChild(lb);
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function(){ lb.classList.add('open'); });
+    function close(){
+      lb.classList.remove('open');
+      setTimeout(function(){ lb.remove(); document.body.style.overflow=''; }, 280);
+      document.removeEventListener('keydown', esc);
+    }
+    function esc(e){ if (e.key === 'Escape') close(); }
+    lb.querySelector('.slb-close').addEventListener('click', close);
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    document.addEventListener('keydown', esc);
+  }
   Array.prototype.forEach.call(document.querySelectorAll('.tsmac, .dbpc__mac'), function(mac){
-    mac.addEventListener('click', showHint);
+    var scroll = mac.getAttribute('data-scroll');
+    function act(){
+      if (scroll) openScrollLb(scroll, mac.getAttribute('aria-label') || 'DB-Ansicht');
+      else showHint();
+    }
+    mac.addEventListener('click', act);
     mac.setAttribute('role','button'); mac.setAttribute('tabindex','0');
-    mac.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showHint(); } });
+    mac.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); act(); } });
   });
 
   /* ---------- Kalkulationskette ---------- */
