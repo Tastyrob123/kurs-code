@@ -3189,16 +3189,18 @@
 
 /* ============================================================
    allergene-bersicht — Text-links / Laptop-rechts (gespiegelt) #tsalgpc2
-   Text links, MacBook rechts (PC2-DB-Galerie-Cover), ~470px (30% kleiner).
-   KEIN Play-Button. Klick auf den MacBook -> Scroll-Lightbox, die den
-   langen DB-Screenshot „Gluten longshot" durchscrollt (Scroll-Animation).
-   Mountet nach #tsalgcart bzw. #tsalgpc. Kein neuer Font/keine neue Farbe.
+   Text links, MacBook rechts (PC2-DB-Galerie-Cover), ~470px. KEIN Play-Button.
+   Klick auf den MacBook -> große MacBook-Scroll-Lightbox (Muster #tsmb:
+   Rahmen oj1wa9.png + scrollbarer Screen im Screen-Rect), zeigt den langen
+   DB-Screenshot „Gluten longshot", scrollt beim Öffnen sanft durch (Auto-Scroll),
+   Vollbild-Toggle, „Klicke daneben oder ESC zum Schließen". Eigener Namespace.
    ============================================================ */
 (function(){
   if(window.__tsalgpc2) return; window.__tsalgpc2=true;
   var POSTER="https://files.catbox.moe/z0dt0j.png";
-  var SCROLL="https://files.catbox.moe/1xvr23.webp";
-  (function(){ [POSTER,SCROLL].forEach(function(u){ var p=new Image(); p.src=u; }); })();
+  var FRAME="https://files.catbox.moe/oj1wa9.png";
+  var SHOT="https://files.catbox.moe/1xvr23.webp";
+  (function(){ [POSTER,FRAME,SHOT].forEach(function(u){ var p=new Image(); p.src=u; }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3216,21 +3218,35 @@
   #tsalgpc2 .apc2-txt p{margin:0 0 16px;font-size:16px;line-height:24px;color:#e1e1e1}
   #tsalgpc2 .apc2-txt p:last-child{margin-bottom:0}
 
-  #tsalgpc2-lb{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,6,11,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:clamp(16px,4vh,40px);opacity:0;transition:opacity .35s ease}
+  /* ---- große MacBook-Scroll-Lightbox (Muster #tsmb) ---- */
+  #tsalgpc2-lb{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,6,11,.92);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:32px;opacity:0;transition:opacity .24s cubic-bezier(.16,1,.3,1);font-family:${SANS}}
   #tsalgpc2-lb.open{display:flex;opacity:1}
-  #tsalgpc2-lb .apc2-screen{position:relative;width:min(680px,92vw);height:min(86vh,900px);border-radius:16px;overflow-y:auto;overflow-x:hidden;background:#05060b;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px -30px rgba(0,0,0,.95);scrollbar-width:thin;transform:scale(.96);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
-  #tsalgpc2-lb.open .apc2-screen{transform:scale(1)}
-  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar{width:8px}
-  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar-thumb{background:rgba(199,180,137,.3);border-radius:99px}
-  #tsalgpc2-lb .apc2-screen img{display:block;width:100%;height:auto}
-  #tsalgpc2-lb .apc2-x{position:absolute;top:20px;right:24px;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(10,12,20,.7);backdrop-filter:blur(6px);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-  #tsalgpc2-lb .apc2-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(10,12,20,.7);border:1px solid rgba(255,255,255,.14);padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .4s ease}
+  #tsalgpc2-lb .apc2-mbinner{position:relative;width:100%;max-width:min(1000px,calc(100vw - 64px));transform:scale(.92) translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsalgpc2-lb.open .apc2-mbinner{transform:scale(1) translateY(0)}
+  #tsalgpc2-lb.full{padding:0}
+  #tsalgpc2-lb.full .apc2-mbinner{max-width:100vw}
+  #tsalgpc2-lb .apc2-mockup{position:relative;width:100%;aspect-ratio:1366/768;filter:drop-shadow(0 30px 80px rgba(0,0,0,.6)) drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+  #tsalgpc2-lb .apc2-frame{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;user-select:none}
+  #tsalgpc2-lb .apc2-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:3;border-radius:3px;background:#191919;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar{width:5px}
+  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:4px}
+  #tsalgpc2-lb .apc2-screen img{width:100%;display:block}
+  #tsalgpc2-lb .apc2-closehint{margin-top:22px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.4);text-align:center;transition:opacity .4s ease}
+  #tsalgpc2-lb.full .apc2-closehint{display:none}
+  #tsalgpc2-lb .apc2-btn{position:absolute;top:16px;z-index:10;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .2s,color .2s}
+  #tsalgpc2-lb .apc2-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+  #tsalgpc2-lb .apc2-expand{left:16px}
+  #tsalgpc2-lb .apc2-closex{right:16px}
 
   @media (max-width:820px){
     #tsalgpc2 .apc2-grid{grid-template-columns:1fr;gap:26px}
     #tsalgpc2 .apc2-tile{order:-1}
     #tsalgpc2 .apc2-h{font-size:26px}
-  }`;
+  }
+  @media (prefers-reduced-motion:reduce){#tsalgpc2-lb *{animation:none!important;transition-duration:.01ms!important}}`;
+
+  var EXP='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function build(){
     var sec=document.createElement('section');
@@ -3243,48 +3259,69 @@
           '<p>Von dort ziehst du die Spur weiter: Alle Rezepte und Gerichte, in denen diese Zutaten stecken, erscheinen gefiltert im selben Fenster. Eine Seite zeigt die volle Reichweite eines Allergens.</p>'+
           '<p>Kommt die Frage vom Gast oder die Kontrolle vom Amt, öffnest du das Allergen und hast sofort alles Betroffene vor dir, statt Karten und Rezepte einzeln durchzugehen.</p>'+
         '</div>'+
-        '<button type="button" class="apc2-tile" aria-label="Live-Ansicht durchscrollen">'+
+        '<button type="button" class="apc2-tile" aria-label="Live-Ansicht im großen MacBook öffnen">'+
           '<img src="'+POSTER+'" alt="Allergene-Datenbank — Galerieansicht" loading="eager">'+
         '</button>'+
       '</div></div>';
     return sec;
   }
 
+  function shut(){ var lb=document.getElementById('tsalgpc2-lb'); if(!lb) return; lb.classList.remove('open','full'); document.body.style.overflow=''; if(lb.__raf) cancelAnimationFrame(lb.__raf); }
+
   function ensureLb(){
-    var lb=document.getElementById('tsalgpc2-lb');
-    if(lb) return lb;
+    var lb=document.getElementById('tsalgpc2-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsalgpc2-lb';
-    lb.innerHTML='<button class="apc2-x" aria-label="Schließen">&times;</button>'+
-      '<div class="apc2-screen"><img src="'+SCROLL+'" alt="Allergen „Gluten“ — Zutaten, Rezepte und Gerichte"></div>'+
-      '<div class="apc2-hint">Scrollen</div>';
-    var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-hint');
-    function close(){ lb.classList.remove('open'); document.body.style.overflow=''; if(lb.__raf) cancelAnimationFrame(lb.__raf); }
-    lb.__close=close;
-    lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('apc2-x')) close(); });
-    screen.addEventListener('wheel', function(){ hint.style.opacity='0'; }, {passive:true});
-    screen.addEventListener('touchstart', function(){ hint.style.opacity='0'; }, {passive:true});
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+    lb.innerHTML='<button class="apc2-btn apc2-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
+      '<button class="apc2-btn apc2-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
+      '<div class="apc2-mbinner"><div class="apc2-mockup"><img class="apc2-frame" src="'+FRAME+'" alt="MacBook">'+
+        '<div class="apc2-screen"><img src="'+SHOT+'" alt="Allergen „Gluten“ — Zutaten, Rezepte und Gerichte"></div>'+
+      '</div></div>'+
+      '<div class="apc2-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
+    var inner=lb.querySelector('.apc2-mbinner'), screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-closehint');
+    lb.querySelector('.apc2-closex').addEventListener('click',shut);
+    lb.querySelector('.apc2-expand').addEventListener('click',function(e){ e.stopPropagation(); lb.classList.toggle('full'); });
+    inner.addEventListener('click',function(e){ e.stopPropagation(); });
+    lb.addEventListener('click',function(e){ if(e.target===lb) shut(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
+    screen.addEventListener('wheel', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
+    screen.addEventListener('touchstart', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
     return lb;
   }
 
-  function openLb(){
-    var lb=ensureLb(); var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-hint');
-    screen.scrollTop=0; hint.style.opacity='1';
-    lb.classList.add('open'); document.body.style.overflow='hidden';
+  function autoScroll(lb){
     if(reduced) return;
-    // sanfte Auto-Scroll-Animation nach dem Öffnen (dann übernimmt der Nutzer)
-    var start=null, dur=9000;
-    function step(ts){
-      if(!start) start=ts;
-      var max=screen.scrollHeight-screen.clientHeight; if(max<=0) return;
-      var t=Math.min(1,(ts-start)/dur);
-      var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; // easeInOut
-      screen.scrollTop=e*max;
-      if(t<1 && lb.classList.contains('open')) lb.__raf=requestAnimationFrame(step);
-      else if(t>=1) hint.style.opacity='0';
+    var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-closehint');
+    var start=null, dur=11000;
+    function run(){
+      function step(ts){
+        if(!lb.classList.contains('open')) return;
+        if(!start) start=ts;
+        var max=screen.scrollHeight-screen.clientHeight;
+        if(max<=4){ lb.__raf=requestAnimationFrame(step); return; } // Bild noch nicht geladen -> warten
+        var t=Math.min(1,(ts-start)/dur);
+        var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+        screen.scrollTop=e*max;
+        if(t<1) lb.__raf=requestAnimationFrame(step);
+        else hint.style.opacity='0';
+      }
+      lb.__raf=requestAnimationFrame(step);
     }
-    setTimeout(function(){ if(lb.classList.contains('open')) lb.__raf=requestAnimationFrame(step); }, 600);
+    var img=screen.querySelector('img');
+    setTimeout(function(){
+      if(!lb.classList.contains('open')) return;
+      if(img && img.complete && img.naturalHeight) run();
+      else if(img){ img.addEventListener('load', function(){ start=null; run(); }, {once:true}); run(); }
+      else run();
+    }, 650);
+  }
+
+  function openLb(){
+    var lb=ensureLb();
+    var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-closehint');
+    screen.scrollTop=0; hint.style.opacity='1';
+    lb.classList.add('open'); lb.classList.remove('full'); document.body.style.overflow='hidden';
+    autoScroll(lb);
   }
 
   function mount(){
@@ -3333,7 +3370,7 @@
     zeit:"Minuten bis Stunden, teils verzögert.",
     versteckt:"Sojasauce mit Weizen, Gewürzmischungen, Fertigsoßen, Brühen, „crispy toppings“, Seitan.",
     hinweis:"Glutenfrei ist nur glaubwürdig mit Prozessen: separate Tools, separate Lagerung, klare Kommunikation."},
-   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/3yr5uf.webp",
+   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/dg9pzt.webp",
     wasistes:"Garnelen, Krabben, Hummer, Krebs und alle daraus hergestellten Produkte.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich. Bereits kleinste Mengen können Anaphylaxie auslösen.",
     kreuz:"Hoch. Grillplatten, Woks, Fritteusen und Pfannen sind häufige Kontaminationsquellen.",
@@ -3405,7 +3442,7 @@
     zeit:"Meist Minuten.",
     versteckt:"Hummus, Tahini, Burger-Buns, Brot-Toppings, asiatische Dressings, Sesamöl.",
     hinweis:"Brot und Toppings aktiv abfragen. Bei Sesamallergie sind Spuren kritisch."},
-   {name:"Sulfite", intoleranz:"Sulfitintoleranz", img:"https://files.catbox.moe/y8azl2.webp",
+   {name:"Sulfite", intoleranz:"Sulfitintoleranz", img:"https://files.catbox.moe/61ymxr.webp",
     wasistes:"Konservierungsstoffe und natürliche Bestandteile, häufig in Wein, Sekt, Essig, Trockenfrüchten.",
     kennz:"Pflicht ab 10 mg/kg oder 10 mg/L.", gefahr:"Mittel. Bei Asthma kann es ernst werden.",
     kreuz:"Niedrig. Eher eine Zutatenfrage als eine Flächenfrage.",
@@ -3563,7 +3600,7 @@
           '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'"></div>'+
           '<div class="tsacd-info">'+
             '<div class="tsacd-eyebrow">DB IX · Allergene</div>'+
-            '<h2 class="tsacd-title">'+esc(it.name)+'</h2>'+
+            '<h2 class="tsacd-title">'+(idx+1)+'. '+esc(it.name)+'</h2>'+
             '<div class="tsacd-content">'+rows+'</div>'+
             '<div class="tsacd-buy">'+
               '<div class="tsacd-price"><b>'+esc(it.intoleranz)+'</b><span>Unverträglichkeit</span></div>'+
@@ -3592,7 +3629,7 @@
     var cards=ITEMS.map(function(it,i){
       return '<article class="tsac-card'+(isIn(it.name)?' in':'')+'" data-i="'+i+'" role="button" tabindex="0" aria-label="'+esc(it.name)+' öffnen">'+
         '<div class="tsac-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'" loading="lazy"><span class="tsac-badge">'+CHECK+'</span></div>'+
-        '<div class="tsac-body"><h4 class="tsac-name">'+esc(it.name)+'</h4><p class="tsac-desc">'+esc(it.wasistes)+'</p><div class="tsac-val">'+esc(it.intoleranz)+'</div></div>'+
+        '<div class="tsac-body"><h4 class="tsac-name">'+(i+1)+'. '+esc(it.name)+'</h4><p class="tsac-desc">'+esc(it.wasistes)+'</p><div class="tsac-val">'+esc(it.intoleranz)+'</div></div>'+
       '</article>';
     }).join('');
     var sec=document.createElement('section'); sec.id='tsalgcart';
