@@ -3033,7 +3033,7 @@
    ============================================================ */
 (function(){
   if(window.__tsalgpc) return; window.__tsalgpc=true;
-  var POSTER="https://files.catbox.moe/w0hrum.png";
+  var POSTER="https://files.catbox.moe/z0dt0j.png";
   (function(){ var p=new Image(); p.src=POSTER; })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
