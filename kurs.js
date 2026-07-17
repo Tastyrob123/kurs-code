@@ -617,10 +617,10 @@
 
   /* Act B — Mehrfach verwenden: eine Quelle, drei Ziele */
   #tsbau .bau-stage--fan{flex-direction:column;justify-content:flex-start;gap:0}
-  #tsbau .bau-med--src{width:140px;height:140px;z-index:2;margin-top:-28px}
-  #tsbau .bau-fanline{width:1.6px;height:32px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:12px 0 15px}
-  #tsbau .bau-targets{display:flex;gap:10px;justify-content:center}
-  #tsbau .bau-med--t{width:118px;height:118px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-med--src{width:98px;height:98px;z-index:2;margin-top:-12px}
+  #tsbau .bau-fanline{width:1.6px;height:28px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:10px 0 13px}
+  #tsbau .bau-targets{display:flex;gap:14px;justify-content:center}
+  #tsbau .bau-med--t{width:106px;height:106px;opacity:0;transform:translateY(12px) scale(.78)}
   #tsbau .bau-act.on .bau-med--t{animation:bauPop .6s cubic-bezier(.22,1,.36,1) both}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(1){animation-delay:.3s}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(2){animation-delay:.48s}
