@@ -9350,13 +9350,23 @@
   `;
   function on(){ return PATH.test(location.pathname); }
   function injectCSS(){ if(document.getElementById('tsgkflow-css'))return; var s=document.createElement('style'); s.id='tsgkflow-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function chain(items, startIdx){
+  function chain(items, startIdx, badgeText){
     var out='', i=startIdx;
     items.forEach(function(it, idx){
       if(idx>0){ out+='<div class="link" style="--i:'+i+'"><span class="link-line"></span></div>'; i++; }
-      out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
-        +'<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
-        +'<div class="node-lbl">'+it.t+'</div></div>';
+      var inner='<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
+        +'<div class="node-lbl">'+it.t+'</div>';
+      if(it.result){
+        /* Pfeil+Badge haengt DIREKT am Ergebnis-Knoten (nicht als eigenes,
+           unter der Zeilenmitte zentriertes Element) — sonst wirkt die
+           Herkunft ("wie haengt X mit DB II zusammen?") unklar/beliebig.
+           Robert-Feedback 17.07.2026. */
+        out += '<div class="node result" style="--i:'+i+'">'+inner
+          +'<div class="down-wrap"><span class="down-line" style="--i:'+(i+1)+'"></span>'
+          +'<span class="badge" style="--i:'+(i+1)+'">'+badgeText+'</span></div></div>';
+        i+=2; return;
+      }
+      out += '<div class="node" style="--i:'+i+'">'+inner+'</div>';
       i++;
     });
     return {html:out, next:i};
@@ -9364,24 +9374,18 @@
   function build(){
     var root=document.createElement('div'); root.id='tsgkflow';
     var i=0;
-    var gk=chain(GK_CHAIN, i); i=gk.next;
-    var db2i=i; i++;
-    var pk=chain(PK_CHAIN, i); i=pk.next;
-    var db3i=i; i++;
+    var gk=chain(GK_CHAIN, i, '= Deckungsbeitrag II'); i=gk.next;
+    var pk=chain(PK_CHAIN, i, '= Deckungsbeitrag III'); i=pk.next;
     root.innerHTML=
       '<div class="hd">Von den Kosten zum <span class="g">Deckungsbeitrag</span></div>'+
       '<p class="sub">Zwei Rechenketten, ein Ziel — so verdichten sich deine Kosten Schritt für Schritt zu Deckungsbeitrag II und III.</p>'+
       '<div class="row row-gk">'+
         '<span class="row-lbl">Gemeinkosten-Kette</span>'+
         '<div class="chain">'+gk.html+'</div>'+
-        '<div class="down-wrap"><span class="down-line" style="--i:'+db2i+'"></span>'+
-        '<span class="badge" style="--i:'+db2i+'">= Deckungsbeitrag II</span></div>'+
       '</div>'+
       '<div class="row row-pk">'+
         '<span class="row-lbl">Personalkosten-Kette</span>'+
         '<div class="chain">'+pk.html+'</div>'+
-        '<div class="down-wrap"><span class="down-line" style="--i:'+db3i+'"></span>'+
-        '<span class="badge" style="--i:'+db3i+'">= Deckungsbeitrag III</span></div>'+
       '</div>';
     return root;
   }
