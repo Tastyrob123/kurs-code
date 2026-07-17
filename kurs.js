@@ -9009,10 +9009,9 @@
     {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg', result:true}
   ];
   var CSS=`
-  #tsgkflow{--g:199,180,137;width:min(1000px,94vw);margin:18px auto 50px;padding:clamp(34px,5vw,54px) clamp(24px,4.5vw,50px);border-radius:22px;position:relative;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 60px -30px rgba(0,0,0,.85),0 0 18px rgba(var(--g),.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  #tsgkflow{--g:199,180,137;width:min(1000px,94vw);margin:56px auto 60px;position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   #tsgkflow.in{opacity:1;transform:none}
   #tsgkflow *{box-sizing:border-box}
-  #tsgkflow::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.4),transparent);pointer-events:none}
   #tsgkflow .hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.55rem,2.7vw,2.05rem);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 10px}
   #tsgkflow .hd .g{color:#c7b489}
   #tsgkflow .sub{font-size:.98rem;line-height:1.65;color:rgba(255,255,255,.5);max-width:54ch;margin:0 auto 46px}
