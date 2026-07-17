@@ -2019,7 +2019,7 @@
   function injectCSS(){
     if(document.getElementById('tsgkdb2-css')) return;
     var s=document.createElement('style'); s.id='tsgkdb2-css';
-    s.textContent='#'+ID+'{margin-bottom:20px !important}';
+    s.textContent='#'+ID+'{margin-bottom:20px !important;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif !important;font-weight:600 !important}';
     document.head.appendChild(s);
   }
   function norm(s){ return (s||'').replace(/\s+/g,' ').trim(); }
@@ -3114,7 +3114,10 @@
    Beide Widgets mounten unabhaengig (tsshop.js bzw. dieses File) und koennen in beliebiger
    Reihenfolge zuerst da sein -> reiner DOM-Move sobald BEIDE existieren, kein Anti-Flash noetig
    (keine Rohtexte, nur zwei bereits fertig gestylte Widgets). Loop-sicher: bewegt nur, solange
-   der Warenkorb noch NACH #tslohn steht. */
+   der Warenkorb noch NACH #tslohn steht.
+   17.07.2026: die #ts2mac-Kachel "ts2mac--tsshop--db7_mitarbeiterloehne" (PC+Text unter diesem
+   Warenkorb) haengt sich per shop.nextSibling an den Warenkorb -> muss beim Move MIT, sonst
+   reisst es die Kachel vom Warenkorb los (ts2mac mountet ggf. NACH diesem Reorder erneut). */
 (function(){
   if(window.__tslohnReorder) return; window.__tslohnReorder=true;
   function reorder(){
@@ -3122,8 +3125,12 @@
     var shop=document.getElementById('tsshop--db7_mitarbeiterloehne');
     var lohn=document.getElementById('tslohn');
     if(!shop||!lohn||!lohn.parentNode) return;
-    if(lohn.compareDocumentPosition(shop) & Node.DOCUMENT_POSITION_PRECEDING) return; // shop steht schon davor
+    var row=document.getElementById('ts2mac--tsshop--db7_mitarbeiterloehne');
+    var shopOk=(lohn.compareDocumentPosition(shop) & Node.DOCUMENT_POSITION_PRECEDING);
+    var rowOk=!row||(lohn.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_PRECEDING);
+    if(shopOk && rowOk) return; // schon korrekt
     lohn.parentNode.insertBefore(shop, lohn);
+    if(row) lohn.parentNode.insertBefore(row, lohn);
   }
   reorder();
   document.addEventListener('DOMContentLoaded', reorder);
@@ -5703,22 +5710,51 @@
    ============================================================ */
 (function(){
   if(window.__ts2mac) return; window.__ts2mac=true;
-  var PATH=/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/;
+  var PATH=/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$|\/gemeinkosten-mitarbeiterlhne\/?$/;
   var BASE='https://tastyrob123.github.io/kurs/img/lieferpartner-mac/';
   var SCROLL=BASE+'scroll/';
+  /* gemeinkosten-mitarbeiterlhne — eigener Bild-Ordner (Robert-Assets, freigestellt + Alpha-Bbox-
+     Crop, 15.07./17.07.2026). NICHT img/gemeinkosten-mac/pc.png anfassen — das ist der Poster
+     des ANDEREN Widgets (#tsmac Video-Lightbox, Anker "Wir bauen zwei Datenbanken"). */
+  var GK_BASE='https://tastyrob123.github.io/kurs/img/gemeinkosten-mac/';
+  var GK_SCROLL=GK_BASE+'scroll/';
   var FRAME='https://files.catbox.moe/oj1wa9.png'; /* leerer MacBook-Rahmen wie #tsmb */
   /* col: leere Notion-Spalte im 2-Spalten-Layout neben dem Erklärtext — der PC wird DORT platziert
      (echter Nachbar, gleiche Höhe, mittig). Ohne col (Verträge = kein 2-Spalten-Layout, Text volle
-     Breite): Fallback = eigenes volles Band via side. */
+     Breite; ebenso alle drei gemeinkosten-mitarbeiterlhne-Kacheln = kein 2-Spalten-Layout dort):
+     Fallback = eigenes volles Band via side + html (Text wird von diesem Modul selbst gebaut,
+     kein natives Notion-Pendant). */
   var MACS=[
     { after:'tsshop--db13_lieferanten',     col:'block-39bb954655348092b69cec1441abcc6e', img:BASE+'lieferpartner-uebersicht.png', shot:SCROLL+'lieferpartner.jpg',   cap:'Lieferpartner-Übersicht' },
     { after:'tsshop--db13_ansprechpartner', col:'block-39bb95465534801e9c8add95f1979a5e', img:BASE+'ansprechpartner-galerie.png',   shot:SCROLL+'ansprechpartner.jpg', cap:'Ansprechpartner-Galerie' },
-    { after:'tsshop--db13_vertraege',       col:'block-39bb954655348006934fff07a63c709c', img:BASE+'vertraege-datenbank.png',        shot:SCROLL+'vertraege.jpg',      cap:'Verträge-Datenbank' }
+    { after:'tsshop--db13_vertraege',       col:'block-39bb954655348006934fff07a63c709c', img:BASE+'vertraege-datenbank.png',        shot:SCROLL+'vertraege.jpg',      cap:'Verträge-Datenbank' },
+    /* Unter „Deine Gemeinkosten. Posten für Posten.“ (DB VI) — PC rechts, Text links. */
+    { after:'tsshop--db6_gemeinkosten', side:'right', img:GK_BASE+'gk-kosten-pc.png', shot:GK_SCROLL+'gk-kosten.jpg', cap:'Gemeinkosten nach Monat',
+      html:'<h3 class="ts2mac-h">Saubere Gemeinkosten-Erfassung <span class="g">ist die Basis.</span></h3>'
+        +'<p class="ts2mac-p">Miete, Versicherungen, Reinigung, Marketing — jede Gemeinkosten-Position bekommt hier eine eigene Zeile mit Kategorie, Zeitraum und Betrag.</p>'
+        +'<p class="ts2mac-p">Diese Zahlen sind die Berechnungsgrundlage für Deckungsbeitrag II. Ohne sie kennst du nur deinen Rohertrag, nicht deinen tatsächlichen Gewinn.</p>' },
+    /* Unter „Deine Gemeinkostenannahmen.“ — PC links, Text rechts. */
+    { after:'tsshop--db6_gemeinkostenannahmen', img:GK_BASE+'gk-annahmen-pc.png', shot:GK_SCROLL+'gk-annahmen.jpg', cap:'GK Kosten Annahmen',
+      html:'<h3 class="ts2mac-h">Die Rechen-Ebene <span class="g">macht den Unterschied.</span></h3>'
+        +'<p class="ts2mac-p">Aus den Fixkosten wird hier die Rechen-Ebene: Monat, verknüpfte Kostenfaktoren, GK-Kosten pro Monat und dein geplanter Absatz.</p>'
+        +'<p class="ts2mac-p">Am Ende steht eine einzige Zahl — die Gemeinkosten pro Produkt. Sie zeigt, wie viel jedes verkaufte Gericht an Fixkosten mitträgt.</p>' },
+    /* Unter „Deine Mitarbeiterlöhne. Netto für Netto.“ (DB VII) — PC rechts, Text links. */
+    { after:'tsshop--db7_mitarbeiterloehne', side:'right', img:GK_BASE+'ma-loehne-pc.png', shot:GK_SCROLL+'ma-loehne.jpg', cap:'Mitarbeitergehälter',
+      html:'<h3 class="ts2mac-h">Echte Arbeitgeberkosten <span class="g">statt Bauchgefühl.</span></h3>'
+        +'<p class="ts2mac-p">Für jeden Mitarbeiter hinterlegst du Rolle, Monatsgehalt und den AG-Kosten-Faktor — daraus errechnet die Datenbank automatisch deine echten Arbeitgeberkosten.</p>'
+        +'<p class="ts2mac-p">Am Ende steht der Stundensatz, mit dem du kalkulierst — nicht der Bruttolohn aus dem Vertrag.</p>' }
   ];
   var CSS = `
   .ts2mac-row{width:100%;max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-sizing:border-box}
   .ts2mac-row.right{flex-direction:row-reverse}
   .ts2mac-row .ts2mac-cell{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center}
+  /* Text-Zelle (Fallback-Modus mit eigenem html, kein natives Notion-2-Spalten-Pendant):
+     linksbündig statt zentriert, Überschrift wie die drei Lieferpartner-Sektionsköpfe. */
+  .ts2mac-row .ts2mac-cell.ts2mac-txt{align-items:flex-start;text-align:left}
+  .ts2mac-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;font-size:clamp(24px,2.4vw,30px);letter-spacing:-.02em;line-height:1.15;color:#fff;margin:0 0 16px}
+  .ts2mac-h .g{color:#c7b489}
+  .ts2mac-p{font-size:15px;line-height:1.65;color:rgba(255,255,255,.6);margin:0 0 12px;max-width:52ch}
+  .ts2mac-p:last-child{margin-bottom:0}
   /* PC direkt in einer leeren Notion-Spalte (neben dem Erklärtext) */
   .ts2mac-incol{display:flex;flex-direction:column;justify-content:center;align-items:center}
   .ts2mac-incol .ts2mac-pc{width:100%;display:flex;flex-direction:column;align-items:center}
@@ -5782,6 +5818,7 @@
   function buildRow(m){
     var row=document.createElement('div'); row.className='ts2mac-row'+(m.side==='right'?' right':''); row.id='ts2mac--'+m.after;
     var txt=document.createElement('div'); txt.className='ts2mac-cell ts2mac-txt';
+    if(m.html) txt.innerHTML=m.html;
     row.appendChild(buildPc(m)); row.appendChild(txt);
     return row;
   }
