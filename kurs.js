@@ -10724,14 +10724,13 @@
 /* ============================================================
    food-drinksquartier-inhalte-interface — Lektion 2.4
    Hero "Food- und Drinksquartier" + zentrierte Einleitung +
-   SCROLL-REVEAL der kompletten fertigen Foodquartier-Seite (ein langer
-   Full-Page-Screenshot, in 26 nahtlose Baender geschnitten; beim Runter-
-   scrollen blendet Abschnitt fuer Abschnitt via IntersectionObserver ein
-   und BLEIBT — die Oberflaeche waechst nach unten, kein Verschwinden) +
+   ZWEI MacBooks nebeneinander (links Food-Quartier, rechts Drinks-Quartier):
+   im Screen sitzt jeweils das Cover/der Seitenkopf; Klick -> Lightbox, in der
+   der Screen die KOMPLETTE Seite scrollt (langer Screenshot). Muster = das
+   bestehende .tsmb "Live Beispiel"-Laptop (mehrwert-zielbild), 1:1. +
    Cover-Block (links Cover / rechts Text, Muster #tsalgpc-Rezepturen).
-   IntersectionObserver ist unabhaengig von rAF/Energiesparmodus (robust).
    Assets auf GitHub Pages (kurs-code/img/food-drinks/). Titel-Font "Lineal Web".
-   Eigene keyframes (fdq…) + eigene Klassen (fdq-/fdqb-/fdqr- Praefixe).
+   Eigene Klassen (fdq-/fdqb-/fdqm- Praefixe) -> kollisionsfrei.
    ============================================================ */
 (function(){
   if(window.__tsfdq) return; window.__tsfdq=true;
@@ -10739,8 +10738,11 @@
   var HERO=BASE+"hero.webp";
   var COVER=BASE+"cover.webp";
   var LOGO="https://files.catbox.moe/au80tp.png";
-  var NTILES=26, TILES=[];
-  for(var t=1;t<=NTILES;t++){ TILES.push(BASE+"page/p"+("0"+t).slice(-2)+".webp"); }
+  var FRAME=BASE+"macbook.webp";
+  var ITEMS=[
+    { page:BASE+"food-page.webp",   label:"Food-Quartier",   cjk:"食" },
+    { page:BASE+"drinks-page.webp", label:"Drinks-Quartier", cjk:"饮" }
+  ];
   function on(){ return /\/food-drinksquartier-inhalte-interface\/?$/.test(location.pathname); }
 
   var CSS = `
@@ -10773,24 +10775,52 @@
   #tsfdq .fdq-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:var(--fdq-muted);}
   #tsfdq .fdq-intro p .em{color:#fff;}
 
-  /* ---- LEAD (Ueberschrift ueber der Enthuellung) ---- */
+  /* ---- LEAD ---- */
   #tsfdq .fdqb-lead{width:min(820px,92vw);margin:66px auto 0;text-align:center;}
   #tsfdq .fdqb-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 12px/1 var(--fdq-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--fdq-beige);margin-bottom:14px;}
   #tsfdq .fdqb-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fdq-beige);box-shadow:0 0 12px rgba(199,180,137,.7);}
   #tsfdq .fdqb-h{margin:0 0 12px;font-family:var(--fdq-display);font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.14;letter-spacing:-.02em;color:#fff;}
   #tsfdq .fdqb-h .g{color:var(--fdq-beige);}
-  #tsfdq .fdqb-sub{margin:0;font-size:1.02rem;line-height:1.6;color:var(--fdq-muted2);}
+  #tsfdq .fdqb-sub{margin:0 auto;max-width:680px;font-size:1.02rem;line-height:1.6;color:var(--fdq-muted2);}
 
-  /* ---- SCROLL-REVEAL (komplette Seite, Abschnitt fuer Abschnitt) ---- */
-  #tsfdq .fdqr{width:min(1120px,94vw);margin:26px auto 30px;}
-  #tsfdq .fdqr-window{position:relative;border:1px solid var(--fdq-line);border-radius:16px;overflow:hidden;background:#0b0d16;font-size:0;line-height:0;box-shadow:0 44px 120px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);}
-  #tsfdq .fdqr-tile{display:block;width:100%;height:auto;opacity:0;transition:opacity .9s ease;}
-  #tsfdq .fdqr-tile.in{opacity:1;}
-  #tsfdq .fdqr-hint{width:100%;text-align:center;margin:16px auto 0;font-size:12.5px;letter-spacing:.02em;color:var(--fdq-muted2);}
-  #tsfdq .fdqr-hint b{color:#e9e9ee;font-weight:600;}
+  /* ---- ZWEI MACBOOKS ---- */
+  #tsfdq .fdqm{width:min(1180px,94vw);margin:34px auto 26px;}
+  #tsfdq .fdqm-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.5vw,50px);align-items:start;}
+  #tsfdq .fdqm-item{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  #tsfdq .fdqm-tile{position:relative;width:100%;max-width:560px;cursor:pointer;border-radius:12px;filter:drop-shadow(0 12px 34px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.16,1,.3,1),filter .5s cubic-bezier(.16,1,.3,1);}
+  #tsfdq .fdqm-tile:hover{transform:translateY(-5px) scale(1.02);filter:drop-shadow(0 22px 54px rgba(0,0,0,.6)) drop-shadow(0 8px 26px rgba(199,180,137,.22));}
+  #tsfdq .fdqm-tile:active{transform:scale(.99);transition-duration:.12s;}
+  #tsfdq .fdqm-frame{width:100%;height:auto;display:block;position:relative;z-index:2;pointer-events:none;user-select:none;}
+  #tsfdq .fdqm-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;overflow:hidden;z-index:1;border-radius:3px;background:#0d0f16;}
+  #tsfdq .fdqm-screen img{position:absolute;top:0;left:0;width:100%;height:auto;display:block;}
+  #tsfdq .fdqm-caption{width:100%;text-align:center;font-size:15px;font-weight:600;letter-spacing:.005em;color:#fff;margin-top:6px;}
+  #tsfdq .fdqm-caption .g{color:var(--fdq-beige);}
+  #tsfdq .fdqm-hint{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.34);animation:fdqmHint 2.6s ease-in-out infinite;}
+  @keyframes fdqmHint{0%,100%{opacity:.42}50%{opacity:.82}}
+
+  /* Lightbox */
+  #fdqm-lb{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,6,11,.92);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);padding:32px;opacity:0;transition:opacity .24s cubic-bezier(.16,1,.3,1);font-family:${"-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif"};}
+  #fdqm-lb.open{display:flex;opacity:1;}
+  #fdqm-lb .fdqm-lb-inner{position:relative;width:100%;max-width:min(980px,calc(100vw - 64px));transform:scale(.92) translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  #fdqm-lb.open .fdqm-lb-inner{transform:scale(1) translateY(0);}
+  #fdqm-lb.full{padding:0;}
+  #fdqm-lb.full .fdqm-lb-inner{max-width:100vw;}
+  #fdqm-lb .fdqm-mock{position:relative;width:100%;aspect-ratio:1366/768;filter:drop-shadow(0 30px 80px rgba(0,0,0,.6)) drop-shadow(0 10px 30px rgba(0,0,0,.5));}
+  #fdqm-lb .fdqm-mock-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;user-select:none;}
+  #fdqm-lb .fdqm-mock-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:1;border-radius:3px;background:#0d0f16;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent;}
+  #fdqm-lb .fdqm-mock-screen::-webkit-scrollbar{width:6px;}
+  #fdqm-lb .fdqm-mock-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px;}
+  #fdqm-lb .fdqm-mock-screen img{width:100%;display:block;}
+  #fdqm-lb .fdqm-lb-cap{margin-top:20px;font-size:13px;letter-spacing:.02em;color:#fff;text-align:center;}
+  #fdqm-lb .fdqm-lb-cap .g{color:var(--fdq-beige);}
+  #fdqm-lb .fdqm-lb-hint{margin-top:6px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.34);text-align:center;}
+  #fdqm-lb.full .fdqm-lb-hint,#fdqm-lb.full .fdqm-lb-cap{display:none;}
+  #fdqm-lb .fdqm-btn{position:absolute;top:16px;z-index:10;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:background .2s,color .2s;}
+  #fdqm-lb .fdqm-btn:hover{background:rgba(255,255,255,.18);color:#fff;}
+  #fdqm-lb .fdqm-expand{left:16px;} #fdqm-lb .fdqm-x{right:16px;}
 
   /* ---- COVER-BLOCK ---- */
-  #tsfdq .fdq-pc{width:min(1088px,92vw);margin:64px auto 88px;}
+  #tsfdq .fdq-pc{width:min(1088px,92vw);margin:70px auto 88px;}
   #tsfdq .fdq-pc-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:46px;align-items:center;}
   #tsfdq .fdq-pc-tile{position:relative;display:block;width:100%;line-height:0;}
   #tsfdq .fdq-pc-tile img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));}
@@ -10800,6 +10830,7 @@
   #tsfdq .fdq-pc-txt p:last-child{margin-bottom:0;}
 
   @media (max-width:820px){
+    #tsfdq .fdqm-row{grid-template-columns:1fr;gap:34px;max-width:520px;margin:0 auto;}
     #tsfdq .fdq-pc-grid{grid-template-columns:1fr;gap:26px}
     #tsfdq .fdq-pc-h{font-size:26px}
     #tsfdq .fdq-intro p{font-size:1.06rem}
@@ -10812,8 +10843,8 @@
     .page__food-drinksquartier-inhalte-interface .ts-hero__img,
     .page__food-drinksquartier-inhalte-interface .ts-hero__logo,
     .page__food-drinksquartier-inhalte-interface .ts-hero__eyebrow,
-    .page__food-drinksquartier-inhalte-interface .ts-hero__title{animation:none!important}
-    #tsfdq .fdqr-tile{opacity:1!important;transition:none!important}
+    .page__food-drinksquartier-inhalte-interface .ts-hero__title,
+    #tsfdq .fdqm-hint{animation:none!important}
   }`;
 
   function injectCSS(){
@@ -10836,20 +10867,55 @@
     if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
   }
 
+  var lbEl=null;
+  function ensureLb(){
+    if(lbEl) return lbEl;
+    lbEl=document.createElement("div"); lbEl.id="fdqm-lb";
+    lbEl.innerHTML=
+      '<button class="fdqm-btn fdqm-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
+      '<button class="fdqm-btn fdqm-x" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'+
+      '<div class="fdqm-lb-inner"><div class="fdqm-mock"><img class="fdqm-mock-frame" src="'+FRAME+'" alt="MacBook"><div class="fdqm-mock-screen"><img alt=""></div></div>'+
+        '<div class="fdqm-lb-cap"></div><div class="fdqm-lb-hint">Scroll im Screen · ESC oder Klick daneben zum Schließen</div></div>';
+    document.body.appendChild(lbEl);
+    var inner=lbEl.querySelector(".fdqm-lb-inner");
+    lbEl.querySelector(".fdqm-x").addEventListener("click",shutLb);
+    lbEl.querySelector(".fdqm-expand").addEventListener("click",function(e){ e.stopPropagation(); lbEl.classList.toggle("full"); });
+    inner.addEventListener("click",function(e){ e.stopPropagation(); });
+    lbEl.addEventListener("click",function(e){ if(e.target===lbEl) shutLb(); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape") shutLb(); });
+    return lbEl;
+  }
+  function shutLb(){ if(!lbEl) return; lbEl.classList.remove("open","full"); document.body.style.overflow=""; }
+  function openLb(page,label){
+    var lb=ensureLb();
+    lb.querySelector(".fdqm-mock-screen img").src=page;
+    lb.querySelector(".fdqm-lb-cap").innerHTML=label+'<span class="g"> – Live Beispiel</span>';
+    lb.classList.add("open"); lb.classList.remove("full");
+    document.body.style.overflow="hidden";
+    var sc=lb.querySelector(".fdqm-mock-screen"); if(sc) sc.scrollTop=0;
+  }
+
   function buildBody(sc){
     if(document.getElementById("tsfdq")) return;
     var box=document.createElement("div"); box.id="tsfdq";
-    var tiles=TILES.map(function(u,i){ return '<img class="fdqr-tile" alt="Foodquartier Abschnitt '+(i+1)+'" src="'+u+'">'; }).join("");
+    var macs=ITEMS.map(function(it){
+      return '<div class="fdqm-item">'+
+        '<div class="fdqm-tile" data-page="'+it.page+'" data-label="'+it.label+'" role="button" tabindex="0" aria-label="'+it.label+' vergrößern">'+
+          '<div class="fdqm-screen"><img src="'+it.page+'" alt="'+it.label+'"></div>'+
+          '<img class="fdqm-frame" src="'+FRAME+'" alt="MacBook">'+
+        '</div>'+
+        '<div class="fdqm-caption">'+it.label+'<span class="g"> – Live Beispiel</span></div>'+
+        '<div class="fdqm-hint">Klicke zum Vergrößern</div>'+
+      '</div>';
+    }).join("");
     box.innerHTML=
       '<div class="fdq-intro"><p>Das <span class="em">Food- und Drinksquartier</span> ist das Herzstück deines Backoffice. Hier laufen alle Fäden zusammen: Jede Zutat, jede Rezeptur, jeder Preis und jede Kennzahl aus den Datenbanken davor werden an einem einzigen Ort sichtbar. Speisen und Getränke folgen dabei derselben Logik — was in der Küche als Gericht entsteht und was an der Bar im Glas landet, wird nach denselben Regeln kalkuliert, bewertet und gesteuert. Du siehst auf einen Blick, was ein Produkt kostet, was es einbringt und wo Marge verloren geht. Kein Suchen in endlosen Tabellen, kein Rechnen im Kopf. Die Oberfläche bereitet alles auf und macht es von jeder Stelle aus mit KI auswertbar. So wird aus vielen einzelnen Datenbanken ein Betriebssystem, das mitdenkt.</p></div>'+
       '<div class="fdqb-lead">'+
-        '<div class="fdqb-eyebrow">Interface-Bau</div>'+
-        '<h2 class="fdqb-h">Und so baust du es <span class="g">zusammen</span></h2>'+
-        '<p class="fdqb-sub">Scroll nach unten — deine echte Foodquartier-Seite entsteht Abschnitt für Abschnitt: Banner, Speisekarte, Galerien, Kennzahlen, Zutaten. Jeder Block bleibt stehen, die Oberfläche wächst mit.</p>'+
+        '<div class="fdqb-eyebrow">Live Beispiel</div>'+
+        '<h2 class="fdqb-h">Food & Drinks — <span class="g">zwei fertige Quartiere</span></h2>'+
+        '<p class="fdqb-sub">Zwei getrennte Oberflächen, dieselbe Logik. Klick auf einen der beiden Rechner und scroll durch die komplette, fertige Seite — vom Cover über Speise- bzw. Getränkekarte, Galerien und Kennzahlen bis zu Zutaten und Lieferanten.</p>'+
       '</div>'+
-      '<section class="fdqr"><div class="fdqr-window" id="fdqrWin">'+tiles+'</div>'+
-        '<div class="fdqr-hint"><b>Scroll</b> — das komplette Interface baut sich auf</div>'+
-      '</section>'+
+      '<section class="fdqm"><div class="fdqm-row">'+macs+'</div></section>'+
       '<section class="fdq-pc"><div class="fdq-pc-grid">'+
         '<div class="fdq-pc-tile"><img alt="Food- &amp; Drinksquartier — Interface" src="'+COVER+'"></div>'+
         '<div class="fdq-pc-txt">'+
@@ -10862,35 +10928,16 @@
     var hero=sc.querySelector(".ts-hero");
     if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
     else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
-    startReveal();
+    wireTiles(box);
   }
 
-  function startReveal(){
-    if(window.__tsfdqReveal) return;
-    var win=document.getElementById("fdqrWin"); if(!win) return;
-    var tiles=[].slice.call(win.querySelectorAll(".fdqr-tile")); if(!tiles.length) return;
-    window.__tsfdqReveal=true;
-    // Jeder Abschnitt blendet ein sobald er in Sicht kommt und BLEIBT.
-    // 1) IntersectionObserver (saubere Timing, unabh. von rAF) …
-    if("IntersectionObserver" in window){
-      var io=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
-      }, { root:null, rootMargin:"0px 0px -8% 0px", threshold:0.04 });
-      tiles.forEach(function(t){ io.observe(t); });
-    }
-    // 2) … PLUS direkter scroll-Fallback: garantiert, dass nie ein Abschnitt
-    //    unsichtbar bleibt (auch wenn IO gedrosselt/nicht verfuegbar ist).
-    function revealVisible(){
-      var vh=window.innerHeight||800;
-      for(var i=0;i<tiles.length;i++){
-        if(tiles[i].className.indexOf("in")>-1) continue;
-        var r=tiles[i].getBoundingClientRect();
-        if(r.top < vh*0.92 && r.bottom > -40){ tiles[i].classList.add("in"); }
-      }
-    }
-    window.addEventListener("scroll", revealVisible, {passive:true});
-    window.addEventListener("resize", revealVisible, {passive:true});
-    revealVisible();
+  function wireTiles(box){
+    var tiles=[].slice.call(box.querySelectorAll(".fdqm-tile"));
+    tiles.forEach(function(t){
+      function go(){ openLb(t.getAttribute("data-page"), t.getAttribute("data-label")); }
+      t.addEventListener("click", go);
+      t.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } });
+    });
   }
 
   function mount(){
