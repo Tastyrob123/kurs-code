@@ -8971,6 +8971,15 @@
 /* ============================================================
    gemeinkosten-mitarbeiterlhne — #tsgkflow  "Von den Kosten zum
    Deckungsbeitrag" (Robert-Wunsch 17.07.2026, direkt unter #tsgkemp).
+   v2 (selber Tag, "luxuriöser eleganter und mit Bildern"): von reinen
+   Text-Pills auf fotografische Medaillon-Knoten umgebaut — jedes
+   Kettenglied bekommt ein rundes Foto aus der bereits bestehenden
+   Tasty-Studios-Bildbibliothek (img/gemeinkosten/, img/mitarbeiterloehne/,
+   SSOT-Wiederverwendung: "GK pro Produkt" nutzt exakt dasselbe Bild
+   (telefon.jpg), das im Warenkorb DB VI-Annahmen bereits für das
+   Feld "GK / Produkt" steht). EINE Glaskarte (Sprache wie #tsgkemp),
+   Gold-Ring um jedes Medaillon, Verbindungslinien mit Shimmer-Sweep
+   (Muster wie .tss-bar__fill::after), Ergebnis-Badges größer + Glow.
    Zwei Rechenketten, EIN Abschnitt: GK-Kette zuerst (Gemeinkosten →
    Gemeinkostenannahmen → GK pro Produkt → = Deckungsbeitrag II),
    danach PK-Kette (Mitarbeiterlöhne × AG-Faktor → Lohn pro Stunde →
@@ -8986,39 +8995,65 @@
 (function(){
   if(window.__tsgkflow) return; window.__tsgkflow=true;
   var PATH=/\/gemeinkosten-mitarbeiterlhne\/?$/;
-  var GK_CHAIN=['Gemeinkosten','Gemeinkostenannahmen','GK pro Produkt'];
-  var PK_CHAIN=['Mitarbeiterlöhne × AG-Faktor','Lohn pro Stunde','Zubereitungszeit pro Minute','PK pro Produkt'];
+  var GK_IMG='https://tastyrob123.github.io/kurs/img/gemeinkosten/';
+  var MA_IMG='https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/';
+  var GK_CHAIN=[
+    {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
+    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg'},
+    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg', result:true}
+  ];
+  var PK_CHAIN=[
+    {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
+    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg'},
+    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg'},
+    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg', result:true}
+  ];
   var CSS=`
-  #tsgkflow{width:min(940px,92vw);margin:14px auto 46px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
+  #tsgkflow{--g:199,180,137;width:min(1000px,94vw);margin:18px auto 50px;padding:clamp(34px,5vw,54px) clamp(24px,4.5vw,50px);border-radius:22px;position:relative;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 60px -30px rgba(0,0,0,.85),0 0 18px rgba(var(--g),.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  #tsgkflow.in{opacity:1;transform:none}
   #tsgkflow *{box-sizing:border-box}
-  #tsgkflow .hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.5rem,2.6vw,2rem);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 10px}
+  #tsgkflow::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.4),transparent);pointer-events:none}
+  #tsgkflow .hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.55rem,2.7vw,2.05rem);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 10px}
   #tsgkflow .hd .g{color:#c7b489}
-  #tsgkflow .sub{font-size:.98rem;line-height:1.6;color:rgba(255,255,255,.55);max-width:56ch;margin:0 auto 40px}
-  #tsgkflow .row{margin-bottom:38px}
+  #tsgkflow .sub{font-size:.98rem;line-height:1.65;color:rgba(255,255,255,.5);max-width:54ch;margin:0 auto 46px}
+  #tsgkflow .row{margin-bottom:44px}
   #tsgkflow .row:last-child{margin-bottom:0}
-  #tsgkflow .row-lbl{display:inline-block;font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+  #tsgkflow .row+.row{padding-top:44px;position:relative}
+  #tsgkflow .row+.row::before{content:"";position:absolute;top:0;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent)}
+  #tsgkflow .row-lbl{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c7b489;margin-bottom:24px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
   #tsgkflow.in .row-lbl{opacity:1;transform:none}
-  #tsgkflow .chain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 6px}
-  #tsgkflow .chip{padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);font-size:.88rem;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 160ms)}
-  #tsgkflow.in .chip{opacity:1;transform:none}
-  #tsgkflow .chip.result{color:#efe6d2;border-color:rgba(199,180,137,.4);background:rgba(199,180,137,.08);box-shadow:0 0 20px rgba(199,180,137,.10)}
-  #tsgkflow .arrow{color:rgba(255,255,255,.24);font-size:1rem;flex:none;opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--i) * 160ms)}
-  #tsgkflow.in .arrow{opacity:1}
-  #tsgkflow .down{display:block;margin:14px auto 0;font-size:1.1rem;color:rgba(199,180,137,.5);opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--i) * 160ms)}
-  #tsgkflow.in .down{opacity:1}
-  #tsgkflow .badge{display:inline-block;margin-top:10px;padding:12px 26px;border-radius:999px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.02rem;font-weight:600;letter-spacing:-.005em;color:#05060b;background:linear-gradient(180deg,#efe6d2,#c7b489);box-shadow:0 10px 28px -10px rgba(199,180,137,.5);opacity:0;transform:translateY(10px) scale(.94);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 160ms)}
-  #tsgkflow.in .badge{opacity:1;transform:none}
-  @media(max-width:640px){#tsgkflow .chip{font-size:.8rem;padding:9px 14px}#tsgkflow .hd{font-size:1.35rem}}
-  @media(prefers-reduced-motion:reduce){#tsgkflow .chip,#tsgkflow .arrow,#tsgkflow .down,#tsgkflow .badge,#tsgkflow .row-lbl{opacity:1;transform:none;transition:none}}
+  #tsgkflow .chain{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:0}
+  #tsgkflow .node{display:flex;flex-direction:column;align-items:center;width:118px;opacity:0;filter:blur(6px);transform:translateY(16px) scale(.94);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow.in .node{opacity:1;filter:blur(0);transform:none}
+  #tsgkflow .node-med{position:relative;width:78px;height:78px;border-radius:50%;overflow:hidden;box-shadow:0 10px 26px -10px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08),0 0 0 4px rgba(var(--g),.14)}
+  #tsgkflow .node.result .node-med{width:92px;height:92px;box-shadow:0 12px 32px -10px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.1),0 0 0 5px rgba(var(--g),.32),0 0 30px rgba(var(--g),.22)}
+  #tsgkflow .node-med img{width:100%;height:100%;object-fit:cover;display:block}
+  #tsgkflow .node-lbl{margin-top:12px;font-size:.78rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.62);max-width:118px}
+  #tsgkflow .node.result .node-lbl{color:#efe6d2}
+  #tsgkflow .link{display:flex;align-items:center;width:clamp(30px,4.2vw,58px);height:78px;flex:0 0 auto;position:relative;top:0}
+  #tsgkflow .link-line{position:relative;width:100%;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(var(--g),.05),rgba(var(--g),.4),rgba(var(--g),.05));overflow:hidden;opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow.in .link-line{opacity:1;transform:scaleX(1)}
+  #tsgkflow .link-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:translateX(-120%);opacity:0}
+  #tsgkflow.in .link-line::after{animation:tsgkflow-sheen 1.4s ease .1s 1 forwards;animation-delay:calc(var(--i) * 180ms + 400ms)}
+  #tsgkflow .down-wrap{display:flex;flex-direction:column;align-items:center;margin-top:26px}
+  #tsgkflow .down-line{width:2px;height:30px;border-radius:2px;background:linear-gradient(180deg,rgba(var(--g),.05),rgba(var(--g),.5));opacity:0;transform:scaleY(0);transform-origin:top center;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow.in .down-line{opacity:1;transform:scaleY(1)}
+  #tsgkflow .badge{margin-top:10px;padding:14px 30px;border-radius:999px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.08rem;font-weight:600;letter-spacing:-.005em;color:#05060b;background:linear-gradient(180deg,#efe6d2,#c7b489);box-shadow:0 12px 32px -10px rgba(199,180,137,.55);opacity:0;transform:translateY(10px) scale(.9);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow.in .badge{opacity:1;transform:none;animation:tsgkflow-pulse 3.4s ease calc(var(--i) * 180ms + 900ms) infinite}
+  @keyframes tsgkflow-sheen{0%{transform:translateX(-120%);opacity:0}15%{opacity:1}100%{transform:translateX(120%);opacity:0}}
+  @keyframes tsgkflow-pulse{0%,100%{box-shadow:0 12px 32px -10px rgba(199,180,137,.55)}50%{box-shadow:0 12px 40px -8px rgba(199,180,137,.8),0 0 26px rgba(199,180,137,.3)}}
+  @media(max-width:760px){#tsgkflow .chain{gap:14px 8px}#tsgkflow .link{width:0;height:0;flex:0 0 100%}#tsgkflow .link-line{display:none}#tsgkflow .node{width:96px}#tsgkflow .node-med{width:66px;height:66px}#tsgkflow .node.result .node-med{width:78px;height:78px}#tsgkflow .hd{font-size:1.4rem}}
+  @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-line,#tsgkflow .down-line,#tsgkflow .badge,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none;animation:none}#tsgkflow .link-line::after{display:none}}
   `;
   function on(){ return PATH.test(location.pathname); }
   function injectCSS(){ if(document.getElementById('tsgkflow-css'))return; var s=document.createElement('style'); s.id='tsgkflow-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function chain(items, startIdx, resultClass){
+  function chain(items, startIdx){
     var out='', i=startIdx;
-    items.forEach(function(t, idx){
-      if(idx>0){ out+='<span class="arrow" style="--i:'+i+'">→</span>'; i++; }
-      var cls = (idx===items.length-1 && resultClass) ? ' result' : '';
-      out += '<span class="chip'+cls+'" style="--i:'+i+'">'+t+'</span>';
+    items.forEach(function(it, idx){
+      if(idx>0){ out+='<div class="link" style="--i:'+i+'"><span class="link-line"></span></div>'; i++; }
+      out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
+        +'<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
+        +'<div class="node-lbl">'+it.t+'</div></div>';
       i++;
     });
     return {html:out, next:i};
@@ -9026,9 +9061,9 @@
   function build(){
     var root=document.createElement('div'); root.id='tsgkflow';
     var i=0;
-    var gk=chain(GK_CHAIN, i, true); i=gk.next;
+    var gk=chain(GK_CHAIN, i); i=gk.next;
     var db2i=i; i++;
-    var pk=chain(PK_CHAIN, i, true); i=pk.next;
+    var pk=chain(PK_CHAIN, i); i=pk.next;
     var db3i=i; i++;
     root.innerHTML=
       '<div class="hd">Von den Kosten zum <span class="g">Deckungsbeitrag</span></div>'+
@@ -9036,14 +9071,14 @@
       '<div class="row row-gk">'+
         '<span class="row-lbl">Gemeinkosten-Kette</span>'+
         '<div class="chain">'+gk.html+'</div>'+
-        '<span class="down" style="--i:'+db2i+'">↓</span><br>'+
-        '<span class="badge" style="--i:'+db2i+'">= Deckungsbeitrag II</span>'+
+        '<div class="down-wrap"><span class="down-line" style="--i:'+db2i+'"></span>'+
+        '<span class="badge" style="--i:'+db2i+'">= Deckungsbeitrag II</span></div>'+
       '</div>'+
       '<div class="row row-pk">'+
         '<span class="row-lbl">Personalkosten-Kette</span>'+
         '<div class="chain">'+pk.html+'</div>'+
-        '<span class="down" style="--i:'+db3i+'">↓</span><br>'+
-        '<span class="badge" style="--i:'+db3i+'">= Deckungsbeitrag III</span>'+
+        '<div class="down-wrap"><span class="down-line" style="--i:'+db3i+'"></span>'+
+        '<span class="badge" style="--i:'+db3i+'">= Deckungsbeitrag III</span></div>'+
       '</div>';
     return root;
   }
