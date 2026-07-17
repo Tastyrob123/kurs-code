@@ -3144,18 +3144,20 @@
 /* ---- */
 
 /* ============================================================
-   allergene-bersicht — Text-links / Laptop-rechts (50/50-Split, gespiegelt)
-   Gegenstück zu #tsalgpc: Text links, MacBook rechts (PC 1 Cover),
-   Play-Button -> Lightbox. Maße = #tsalgpc (Container 1180, PC ~670,
-   Lineal TS 30px, Text 16px/24px). Mountet nach dem Warenkorb
-   (#tsalgcart) bzw. nach #tsalgpc. Kein neuer Font/keine neue Farbe.
+   allergene-bersicht — Text-links / Laptop-rechts (gespiegelt) #tsalgpc2
+   Text links, MacBook rechts (PC2-DB-Galerie-Cover), ~470px (30% kleiner).
+   KEIN Play-Button. Klick auf den MacBook -> Scroll-Lightbox, die den
+   langen DB-Screenshot „Gluten longshot" durchscrollt (Scroll-Animation).
+   Mountet nach #tsalgcart bzw. #tsalgpc. Kein neuer Font/keine neue Farbe.
    ============================================================ */
 (function(){
   if(window.__tsalgpc2) return; window.__tsalgpc2=true;
   var POSTER="https://files.catbox.moe/z0dt0j.png";
-  (function(){ var p=new Image(); p.src=POSTER; })();
+  var SCROLL="https://files.catbox.moe/1xvr23.webp";
+  (function(){ [POSTER,SCROLL].forEach(function(u){ var p=new Image(); p.src=u; }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
   #tsalgpc2{width:100%;margin:26px 0 60px;font-family:${SANS};color:#fff}
@@ -3165,21 +3167,20 @@
   #tsalgpc2 .apc2-tile{position:relative;display:block;width:100%;line-height:0;cursor:pointer;background:transparent;border:0;padding:0}
   #tsalgpc2 .apc2-tile img{width:100%;height:auto;display:block;transition:transform .5s ease;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
   #tsalgpc2 .apc2-tile:hover img{transform:scale(1.02)}
-  #tsalgpc2 .apc2-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-  #tsalgpc2 .apc2-play span{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
-  #tsalgpc2 .apc2-play span::after{content:"";border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:5px}
-  #tsalgpc2 .apc2-tile:hover .apc2-play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
   #tsalgpc2 .apc2-h{margin:0 0 20px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:30px;line-height:1.12;letter-spacing:-.01em;color:#fff}
   #tsalgpc2 .apc2-h .g{color:#c7b489}
   #tsalgpc2 .apc2-txt p{margin:0 0 16px;font-size:16px;line-height:24px;color:#e1e1e1}
   #tsalgpc2 .apc2-txt p:last-child{margin-bottom:0}
 
-  #tsalgpc2-lb{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,6,11,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:4vw;opacity:0;transition:opacity .35s ease}
+  #tsalgpc2-lb{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,6,11,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:clamp(16px,4vh,40px);opacity:0;transition:opacity .35s ease}
   #tsalgpc2-lb.open{display:flex;opacity:1}
-  #tsalgpc2-lb .apc2-stage{transform:scale(.94);transition:transform .4s cubic-bezier(.2,.7,.2,1);width:min(92vw,1180px)}
-  #tsalgpc2-lb.open .apc2-stage{transform:scale(1)}
-  #tsalgpc2-lb img{width:100%;height:auto;display:block;border-radius:8px}
-  #tsalgpc2-lb .apc2-x{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  #tsalgpc2-lb .apc2-screen{position:relative;width:min(680px,92vw);height:min(86vh,900px);border-radius:16px;overflow-y:auto;overflow-x:hidden;background:#05060b;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px -30px rgba(0,0,0,.95);scrollbar-width:thin;transform:scale(.96);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  #tsalgpc2-lb.open .apc2-screen{transform:scale(1)}
+  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar{width:8px}
+  #tsalgpc2-lb .apc2-screen::-webkit-scrollbar-thumb{background:rgba(199,180,137,.3);border-radius:99px}
+  #tsalgpc2-lb .apc2-screen img{display:block;width:100%;height:auto}
+  #tsalgpc2-lb .apc2-x{position:absolute;top:20px;right:24px;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(10,12,20,.7);backdrop-filter:blur(6px);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  #tsalgpc2-lb .apc2-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(10,12,20,.7);border:1px solid rgba(255,255,255,.14);padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .4s ease}
 
   @media (max-width:820px){
     #tsalgpc2 .apc2-grid{grid-template-columns:1fr;gap:26px}
@@ -3198,9 +3199,8 @@
           '<p>Von dort ziehst du die Spur weiter: Alle Rezepte und Gerichte, in denen diese Zutaten stecken, erscheinen gefiltert im selben Fenster. Eine Seite zeigt die volle Reichweite eines Allergens.</p>'+
           '<p>Kommt die Frage vom Gast oder die Kontrolle vom Amt, öffnest du das Allergen und hast sofort alles Betroffene vor dir, statt Karten und Rezepte einzeln durchzugehen.</p>'+
         '</div>'+
-        '<button type="button" class="apc2-tile" aria-label="Vorschau öffnen">'+
-          '<img src="'+POSTER+'" alt="Allergene &amp; Packaging — Lektion 2.6" loading="eager">'+
-          '<span class="apc2-play"><span></span></span>'+
+        '<button type="button" class="apc2-tile" aria-label="Live-Ansicht durchscrollen">'+
+          '<img src="'+POSTER+'" alt="Allergene-Datenbank — Galerieansicht" loading="eager">'+
         '</button>'+
       '</div></div>';
     return sec;
@@ -3210,12 +3210,37 @@
     var lb=document.getElementById('tsalgpc2-lb');
     if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsalgpc2-lb';
-    lb.innerHTML='<button class="apc2-x" aria-label="Schließen">&times;</button><div class="apc2-stage"><img src="'+POSTER+'" alt="Allergene &amp; Packaging"></div>';
-    function close(){ lb.classList.remove('open'); }
+    lb.innerHTML='<button class="apc2-x" aria-label="Schließen">&times;</button>'+
+      '<div class="apc2-screen"><img src="'+SCROLL+'" alt="Allergen „Gluten“ — Zutaten, Rezepte und Gerichte"></div>'+
+      '<div class="apc2-hint">Scrollen</div>';
+    var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-hint');
+    function close(){ lb.classList.remove('open'); document.body.style.overflow=''; if(lb.__raf) cancelAnimationFrame(lb.__raf); }
+    lb.__close=close;
     lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('apc2-x')) close(); });
+    screen.addEventListener('wheel', function(){ hint.style.opacity='0'; }, {passive:true});
+    screen.addEventListener('touchstart', function(){ hint.style.opacity='0'; }, {passive:true});
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
     document.body.appendChild(lb);
     return lb;
+  }
+
+  function openLb(){
+    var lb=ensureLb(); var screen=lb.querySelector('.apc2-screen'), hint=lb.querySelector('.apc2-hint');
+    screen.scrollTop=0; hint.style.opacity='1';
+    lb.classList.add('open'); document.body.style.overflow='hidden';
+    if(reduced) return;
+    // sanfte Auto-Scroll-Animation nach dem Öffnen (dann übernimmt der Nutzer)
+    var start=null, dur=9000;
+    function step(ts){
+      if(!start) start=ts;
+      var max=screen.scrollHeight-screen.clientHeight; if(max<=0) return;
+      var t=Math.min(1,(ts-start)/dur);
+      var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; // easeInOut
+      screen.scrollTop=e*max;
+      if(t<1 && lb.classList.contains('open')) lb.__raf=requestAnimationFrame(step);
+      else if(t>=1) hint.style.opacity='0';
+    }
+    setTimeout(function(){ if(lb.classList.contains('open')) lb.__raf=requestAnimationFrame(step); }, 600);
   }
 
   function mount(){
@@ -3229,7 +3254,7 @@
     else if(anchor){ anchor.parentNode.appendChild(sec); }
     else { var nr=sc.querySelector('.notion-root'); if(nr) nr.parentNode.insertBefore(sec, nr); else sc.appendChild(sec); }
     var tile=sec.querySelector('.apc2-tile');
-    if(tile) tile.addEventListener('click', function(){ ensureLb().classList.add('open'); });
+    if(tile) tile.addEventListener('click', openLb);
   }
 
   mount();
@@ -3240,14 +3265,13 @@
 /* ---- */
 
 /* ============================================================
-   allergene-bersicht — Allergen-Warenkorb "In den Kolben" (#tsalgcart)
-   Eigenständige 1:1-Nachbildung des globalen .tsshop-Regals inkl.
-   Klick -> Detail-Overlay (alle DB-Eigenschaften) + Tron-Neon-Sweep +
-   Kolben-Fortschritt. Eigener Namespace (.tsac-*, #tsac-detail) —
-   berührt das globale .tsshop NICHT.
-   Unterschiede zum Original: „Preis" = chemische Formel (Leit-Baustein);
-   „In den Warenkorb" -> „In den Kolben" (Erlenmeyer-Icon).
-   Champagner-Gold + Erledigt-Grün (bestehende Muster). Kein neuer Font.
+   allergene-bersicht — Allergen-Warenkorb (#tsalgcart) — v4
+   1:1-Nachbildung des globalen .tsshop-Regals (Größen exakt an
+   /inventurliste gemessen: Titel 52px, Container 1280, Karten 4-spaltig
+   Cover 1/1, Name/Desc/Preis). Klick -> großes zentriertes Detail-Overlay
+   (Anleitung im „→ Label : Wert"-Stil, wie /inventurliste) + Tron-Neon-Sweep.
+   Eigener Namespace (.tsac-*, #tsac-detail) — globales .tsshop unberührt.
+   „Währung" = Krankheit/Unverträglichkeit; „In den Warenkorb" -> „Check".
    ============================================================ */
 (function(){
   if(window.__tsalgcart) return; window.__tsalgcart=true;
@@ -3257,7 +3281,7 @@
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
 
   var ITEMS=[
-   {name:"Glutenhaltiges Getreide", formel:"C₅H₁₀N₂O₃", molekuel:"Glutamin", img:"https://files.catbox.moe/t6ysos.webp",
+   {name:"Glutenhaltiges Getreide", intoleranz:"Zöliakie", img:"https://files.catbox.moe/t6ysos.webp",
     wasistes:"Proteine aus bestimmten Getreidesorten: Weizen, Roggen, Gerste, Hafer, Dinkel, Kamut.",
     kennz:"Pflicht bei Zutaten oder Bestandteilen.", gefahr:"Mittel bis hoch.",
     kreuz:"Hoch: gleiche Toaster, Fritteuse, Schneidebretter, Mehlstaub.",
@@ -3265,7 +3289,7 @@
     zeit:"Minuten bis Stunden, teils verzögert.",
     versteckt:"Sojasauce mit Weizen, Gewürzmischungen, Fertigsoßen, Brühen, „crispy toppings“, Seitan.",
     hinweis:"Glutenfrei ist nur glaubwürdig mit Prozessen: separate Tools, separate Lagerung, klare Kommunikation."},
-   {name:"Krebstiere", formel:"(C₈H₁₃NO₅)ₙ", molekuel:"Chitin", img:"https://files.catbox.moe/3yr5uf.webp",
+   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/3yr5uf.webp",
     wasistes:"Garnelen, Krabben, Hummer, Krebs und alle daraus hergestellten Produkte.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich. Bereits kleinste Mengen können Anaphylaxie auslösen.",
     kreuz:"Hoch. Grillplatten, Woks, Fritteusen und Pfannen sind häufige Kontaminationsquellen.",
@@ -3273,7 +3297,7 @@
     zeit:"Oft innerhalb von Minuten, selten bis zu 2 Stunden.",
     versteckt:"Fisch- und Meeresfrüchtesaucen, Meeresfrüchtebrühen, asiatische Pasten, „Seafood Mix“.",
     hinweis:"Nie raten. Bei Unsicherheit ablehnen. Separate Tools und klare Reinigung sind Pflicht."},
-   {name:"Eier", formel:"C₃H₇NO₂S", molekuel:"Cystein", img:"https://files.catbox.moe/z4gmmr.webp",
+   {name:"Eier", intoleranz:"Hühnereiweißallergie", img:"https://files.catbox.moe/z4gmmr.webp",
     wasistes:"Eier von Geflügel und alle Produkte, die Ei oder Ei-Bestandteile enthalten.",
     kennz:"Pflicht.", gefahr:"Mittel bis hoch. Bei manchen Betroffenen schwere Reaktionen möglich.",
     kreuz:"Mittel. Besonders bei Frühstücks- und Backstationen.",
@@ -3281,7 +3305,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Mayonnaise, Remoulade, Dressings, Aioli, Panaden, Teige, Backwaren, Nudelteig, Glasuren.",
     hinweis:"Dressings immer aktiv prüfen. Bei Backwaren ist Ei sehr häufig. Klare Rezeptdatenbank verhindert Fehler."},
-   {name:"Fisch", formel:"C₃H₉N", molekuel:"Trimethylamin", img:"https://files.catbox.moe/sctqws.webp",
+   {name:"Fisch", intoleranz:"Fischallergie", img:"https://files.catbox.moe/sctqws.webp",
     wasistes:"Alle Fischarten und daraus hergestellte Produkte.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich bei stark allergischen Personen.",
     kreuz:"Hoch. Grill, Pfanne, Fritteuse, gleiche Zange, gleiche Schneidebretter.",
@@ -3289,7 +3313,7 @@
     zeit:"Meist Minuten bis 2 Stunden.",
     versteckt:"Worcester-Sauce, Caesar-Dressing (Anchovis), Fischsauce, Fischfond, asiatische Saucen.",
     hinweis:"Nicht nur das Filet zählt, auch Fond und Sauce. Bei Unsicherheit keine Zusage."},
-   {name:"Erdnüsse", formel:"C₁₈H₃₂O₂", molekuel:"Linolsäure", img:"https://files.catbox.moe/vfrlnd.webp",
+   {name:"Erdnüsse", intoleranz:"Erdnussallergie", img:"https://files.catbox.moe/vfrlnd.webp",
     wasistes:"Erdnüsse und alle Produkte aus Erdnüssen.",
     kennz:"Pflicht.", gefahr:"Sehr hoch, potenziell lebensbedrohlich.",
     kreuz:"Hoch. Besonders an Dessertstationen, bei Toppings und Nussmischungen.",
@@ -3297,7 +3321,7 @@
     zeit:"Oft Minuten.",
     versteckt:"Satay-Saucen, asiatische Dressings, Desserts, Nussmischungen, Erdnussöl, Schokoladen/Backwaren mit Spuren.",
     hinweis:"Bei Erdnussallergie niemals „wahrscheinlich frei“. Nur zusagen, wenn die Kette sicher ist."},
-   {name:"Soja", formel:"C₁₅H₁₀O₅", molekuel:"Genistein", img:"https://files.catbox.moe/5up0dj.webp",
+   {name:"Soja", intoleranz:"Sojaallergie", img:"https://files.catbox.moe/5up0dj.webp",
     wasistes:"Sojabohnen und Produkte daraus, inklusive Tofu, Tempeh, Sojamilch, Sojasauce.",
     kennz:"Pflicht.", gefahr:"Mittel. Schwere Reaktionen möglich, aber seltener als bei Erdnüssen.",
     kreuz:"Mittel. Besonders an Wok- oder Asia-Stationen.",
@@ -3305,7 +3329,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Sojasauce, Marinaden, Dressings, Fleischersatz, Fertigprodukte, teilweise Lecithin.",
     hinweis:"Saucen sind der Hauptfehler. Soja ist oft „unsichtbar“ enthalten."},
-   {name:"Milch", formel:"C₁₂H₂₂O₁₁", molekuel:"Laktose", img:"https://files.catbox.moe/3pkqvs.webp",
+   {name:"Milch", intoleranz:"Laktoseintoleranz", img:"https://files.catbox.moe/3pkqvs.webp",
     wasistes:"Milch und Milchprodukte. Relevant sind Milchproteine. Laktoseintoleranz ist keine Allergie, aber oft mit gemeint.",
     kennz:"Pflicht.", gefahr:"Mittel bis hoch. Bei echter Milchallergie auch schwere Reaktionen möglich.",
     kreuz:"Mittel. Milchprodukte sind in Küchen allgegenwärtig.",
@@ -3313,7 +3337,7 @@
     zeit:"Allergie oft Minuten. Intoleranz eher 30 Minuten bis mehrere Stunden.",
     versteckt:"Butter, Sahne, Käse, Joghurt, Molke, Milchpulver, viele Desserts, Cremes, Saucen, Schokolade.",
     hinweis:"Immer klären, ob Allergie oder Intoleranz. Laktosefrei ist nicht automatisch milchfrei."},
-   {name:"Schalenfrüchte", formel:"C₁₈H₃₄O₂", molekuel:"Ölsäure", img:"https://files.catbox.moe/ar3kvg.webp",
+   {name:"Schalenfrüchte", intoleranz:"Nussallergie", img:"https://files.catbox.moe/ar3kvg.webp",
     wasistes:"Mandel, Haselnuss, Walnuss, Cashew, Pecannuss, Paranuss, Pistazie, Macadamia.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
     kreuz:"Hoch. Nüsse sind häufig als Topping oder in Desserts.",
@@ -3321,7 +3345,7 @@
     zeit:"Meist Minuten.",
     versteckt:"Pesto, Nussmilch, Desserts, Toppings, Backwaren, Saucen, Nussmischungen.",
     hinweis:"Bei Nussallergie sind Toppings und Dessertstationen kritisch. Nur zusagen, wenn Prozesse sauber sind."},
-   {name:"Senf", formel:"C₄H₅NS", molekuel:"Allylsenföl", img:"https://files.catbox.moe/5tg513.webp",
+   {name:"Senf", intoleranz:"Senfallergie", img:"https://files.catbox.moe/5tg513.webp",
     wasistes:"Senf und senfhaltige Produkte wie Dressings, Marinaden und Saucen.",
     kennz:"Pflicht.", gefahr:"Mittel, bei manchen hoch.",
     kreuz:"Mittel. Senf wird häufig als Grundzutat genutzt.",
@@ -3329,7 +3353,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Mayonnaise, Dressings, BBQ-Sauce, Marinaden, Gewürzmischungen, Wurstwaren, Ketchup je nach Rezeptur.",
     hinweis:"Dressings sind Hauptfehler. Rezeptdatenbank muss Senf sauber markieren."},
-   {name:"Sesam", formel:"C₂₀H₁₈O₆", molekuel:"Sesamin", img:"https://files.catbox.moe/z0ntai.webp",
+   {name:"Sesam", intoleranz:"Sesamallergie", img:"https://files.catbox.moe/z0ntai.webp",
     wasistes:"Sesamsamen und Sesamprodukte wie Tahini, Sesamöl, Sesampasten.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
     kreuz:"Mittel bis hoch. Sesam verteilt sich leicht über Arbeitsflächen.",
@@ -3337,7 +3361,7 @@
     zeit:"Meist Minuten.",
     versteckt:"Hummus, Tahini, Burger-Buns, Brot-Toppings, asiatische Dressings, Sesamöl.",
     hinweis:"Brot und Toppings aktiv abfragen. Bei Sesamallergie sind Spuren kritisch."},
-   {name:"Sulfite", formel:"SO₂", molekuel:"Schwefeldioxid", img:"https://files.catbox.moe/y8azl2.webp",
+   {name:"Sulfite", intoleranz:"Sulfitintoleranz", img:"https://files.catbox.moe/y8azl2.webp",
     wasistes:"Konservierungsstoffe und natürliche Bestandteile, häufig in Wein, Sekt, Essig, Trockenfrüchten.",
     kennz:"Pflicht ab 10 mg/kg oder 10 mg/L.", gefahr:"Mittel. Bei Asthma kann es ernst werden.",
     kreuz:"Niedrig. Eher eine Zutatenfrage als eine Flächenfrage.",
@@ -3352,27 +3376,27 @@
     ['versteckt','Versteckte Quellen'],['hinweis','Hinweis Küche / Service']
   ];
 
-  var FLASK='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5.4 9.2A1.4 1.4 0 0 0 5.8 20.5h12.4a1.4 1.4 0 0 0 1.2-2.3L14 9V3"/><path d="M7.6 14.5h8.8"/></svg>';
-  var CHECK='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5 10-11"/></svg>';
+  var CHECK='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5 10-11"/></svg>';
+  var CLIP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5V3.5h6v1"/><path d="M8.5 13l2.4 2.4 4.6-5"/></svg>';
   var XICON='<svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9"/></svg>';
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function key(n){ return 'tsalgkolben-'+n.slice(0,40); }
+  function key(n){ return 'tsalgcheck-'+n.slice(0,40); }
   function isIn(n){ try{ return localStorage.getItem(key(n))==='1'; }catch(e){ return false; } }
   function setIn(n,v){ try{ localStorage.setItem(key(n), v?'1':'0'); }catch(e){} }
 
   var CSS=`
-  #tsalgcart{width:100%;margin:30px 0 60px;font-family:${SANS};color:#fff}
+  #tsalgcart{width:100%;margin:34px 0 64px;font-family:${SANS};color:#fff}
   #tsalgcart *{box-sizing:border-box}
-  #tsalgcart .tsac-inner{width:min(1180px,94vw);margin:0 auto}
-  #tsalgcart .tsac-head{text-align:center;margin:0 0 26px}
-  #tsalgcart .tsac-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 12px}
+  #tsalgcart .tsac-inner{width:min(1280px,92vw);margin:0 auto}
+  #tsalgcart .tsac-head{text-align:center;margin:0 0 30px}
+  #tsalgcart .tsac-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
   #tsalgcart .tsac-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GOLD},.7)}
-  #tsalgcart .tsac-title{margin:0 0 10px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:clamp(1.7rem,3.4vw,2.15rem);line-height:1.12;letter-spacing:-.02em;color:#fff}
+  #tsalgcart .tsac-title{margin:0 0 12px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:clamp(30px,4.1vw,52px);line-height:1.06;letter-spacing:-.02em;color:#fff}
   #tsalgcart .tsac-title .g{color:#c7b489}
-  #tsalgcart .tsac-sub{margin:0 auto;max-width:640px;font-size:16px;line-height:1.6;color:#e1e1e1}
+  #tsalgcart .tsac-sub{margin:0 auto;max-width:680px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.72)}
 
-  #tsalgcart .tsac-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 22px;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
+  #tsalgcart .tsac-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 24px;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
   #tsalgcart .tsac-track::-webkit-scrollbar{display:none}
   #tsalgcart .tsac-card{--g:${GOLD};position:relative;flex:0 0 calc((100% - 3*22px)/4);scroll-snap-align:start;display:flex;flex-direction:column;border-radius:16px;overflow:visible;cursor:pointer;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
   #tsalgcart .tsac-card.on{opacity:1;transform:none}
@@ -3383,17 +3407,17 @@
   #tsalgcart .tsac-card:hover .tsac-imgwrap img{transform:scale(1.04)}
   #tsalgcart .tsac-badge{position:absolute;top:12px;right:12px;z-index:3;width:28px;height:28px;border-radius:50%;display:none;align-items:center;justify-content:center;background:rgba(${GRN},.92);border:1px solid rgba(255,255,255,.25);color:#0b1512;box-shadow:0 4px 16px rgba(${GRN},.4)}
   #tsalgcart .tsac-card.in .tsac-badge{display:flex}
-  #tsalgcart .tsac-body{position:relative;padding:14px 16px 16px}
+  #tsalgcart .tsac-body{position:relative;padding:16px 18px 18px}
   #tsalgcart .tsac-body::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:0 0 16px 16px;background:linear-gradient(180deg,rgba(${GRN},.12),rgba(${GRN},.22));opacity:0;transition:opacity .55s ease}
   #tsalgcart .tsac-card.in .tsac-body::after{opacity:1}
-  #tsalgcart .tsac-name{margin:0 0 8px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.02rem;line-height:1.18;color:#fff}
-  #tsalgcart .tsac-lbl{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:0 0 3px}
-  #tsalgcart .tsac-val{font-size:1rem;font-weight:700;color:#d8c9ab;font-variant-numeric:tabular-nums}
+  #tsalgcart .tsac-name{margin:0 0 6px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.02rem;line-height:1.2;color:#fff}
+  #tsalgcart .tsac-desc{margin:0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.52);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #tsalgcart .tsac-val{text-align:right;margin-top:14px;font-size:1rem;font-weight:700;color:#d8c9ab;line-height:1.2}
   #tsalgcart .tsac-card.in .tsac-val{color:#9FD3B9}
 
   #tsalgcart .tsac-neon{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 5px rgba(${GRN},.95)) drop-shadow(0 0 16px rgba(${GRN},.5));transition:opacity .5s ease}
 
-  #tsalgcart .tsac-bar{display:flex;align-items:center;gap:clamp(16px,3vw,40px);max-width:760px;margin:6px auto 0;padding:16px 22px;border-radius:16px;background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 44px -34px rgba(0,0,0,.9);opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  #tsalgcart .tsac-bar{display:flex;align-items:center;gap:clamp(16px,3vw,40px);max-width:820px;margin:8px auto 0;padding:16px 24px;border-radius:16px;background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 44px -34px rgba(0,0,0,.9);opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
   #tsalgcart .tsac-bar.on{opacity:1;transform:none}
   #tsalgcart .tsac-bar__ico{flex:none;color:#c7b489}
   #tsalgcart .tsac-bar__ico svg{width:30px;height:30px}
@@ -3408,43 +3432,42 @@
 
   @media(max-width:1024px){#tsalgcart .tsac-card{flex-basis:calc((100% - 2*22px)/3)}}
   @media(max-width:820px){#tsalgcart .tsac-card{flex-basis:calc((100% - 22px)/2)}}
-  @media(max-width:540px){#tsalgcart .tsac-card{flex-basis:80%}#tsalgcart .tsac-track{gap:16px}#tsalgcart .tsac-bar{flex-wrap:wrap}}
+  @media(max-width:540px){#tsalgcart .tsac-card{flex-basis:82%}#tsalgcart .tsac-track{gap:16px}#tsalgcart .tsac-bar{flex-wrap:wrap}}
 
-  /* ---- Detail-Overlay (#tsac-detail) — Optik wie #tsshop-detail ---- */
+  /* ---- Detail-Overlay (#tsac-detail) — groß, zentriert, Anleitungs-Stil ---- */
   #tsac-detail{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vh,32px);overscroll-behavior:contain;font-family:${SANS};color:#fff}
   #tsac-detail *{box-sizing:border-box}
   #tsac-detail .tsacd-back{position:fixed;inset:0;background:rgba(4,5,10,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  #tsac-detail .tsacd-panel{position:relative;width:min(1020px,94vw);max-height:88vh;padding:clamp(20px,2.6vw,32px);border-radius:20px;background:linear-gradient(165deg,rgba(20,23,34,.97),rgba(9,11,18,.97));border:1px solid rgba(255,255,255,.10);box-shadow:0 40px 120px -40px rgba(0,0,0,.95);animation:tsacUp .55s cubic-bezier(.22,1,.36,1) both}
+  #tsac-detail .tsacd-panel{position:relative;width:min(1080px,94vw);max-height:90vh;padding:clamp(22px,2.8vw,38px);border-radius:22px;background:linear-gradient(165deg,rgba(20,23,34,.97),rgba(9,11,18,.97));border:1px solid rgba(255,255,255,.10);box-shadow:0 40px 120px -40px rgba(0,0,0,.95);animation:tsacUp .55s cubic-bezier(.22,1,.36,1) both}
   @keyframes tsacUp{from{opacity:0;transform:translateY(42px) scale(.97)}to{opacity:1;transform:none}}
-  #tsac-detail .tsacd-close{position:absolute;top:14px;right:14px;z-index:5;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.8);cursor:pointer;padding:0;transition:border-color .25s ease,color .25s ease,transform .25s ease}
+  #tsac-detail .tsacd-close{position:absolute;top:16px;right:16px;z-index:5;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.8);cursor:pointer;padding:0;transition:border-color .25s ease,color .25s ease,transform .25s ease}
   #tsac-detail .tsacd-close:hover{border-color:rgba(${GOLD},.55);color:#d8c9ab;transform:scale(1.06)}
-  #tsac-detail .tsacd-grid{display:grid;grid-template-columns:minmax(0,23fr) minmax(0,22fr);gap:clamp(18px,2.4vw,32px);height:min(58vh,540px)}
-  #tsac-detail .tsacd-imgwrap{height:100%;border-radius:14px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08)}
+  #tsac-detail .tsacd-grid{display:grid;grid-template-columns:minmax(0,23fr) minmax(0,25fr);gap:clamp(20px,2.8vw,40px);height:min(62vh,580px)}
+  #tsac-detail .tsacd-imgwrap{height:100%;border-radius:16px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08)}
   #tsac-detail .tsacd-imgwrap img{display:block;width:100%;height:100%;object-fit:cover}
   #tsac-detail .tsacd-info{display:flex;flex-direction:column;min-height:0;height:100%}
-  #tsac-detail .tsacd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:2px 0 6px}
-  #tsac-detail .tsacd-title{font-family:"Lineal TS", var(--font-sans, ${SANS});font-size:clamp(22px,2.8vw,32px);font-weight:600;letter-spacing:-.02em;line-height:1.1;color:#fff;margin:8px 0 12px;flex:none}
-  #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:8px;scrollbar-width:thin}
+  #tsac-detail .tsacd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c7b489;margin:2px 0 10px}
+  #tsac-detail .tsacd-title{font-family:"Lineal TS", var(--font-sans, ${SANS});font-size:clamp(26px,3.2vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.06;color:#fff;margin:0 0 20px;flex:none}
+  #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:10px;scrollbar-width:thin}
   #tsac-detail .tsacd-content::-webkit-scrollbar{width:7px}
   #tsac-detail .tsacd-content::-webkit-scrollbar-thumb{background:rgba(${GOLD},.22);border-radius:99px}
-  #tsac-detail .tsacd-row{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)}
-  #tsac-detail .tsacd-row:last-child{border-bottom:0}
-  #tsac-detail .tsacd-k{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(${GOLD},.85);margin:0 0 3px}
-  #tsac-detail .tsacd-v{font-size:.86rem;line-height:1.5;color:rgba(255,255,255,.78)}
-  #tsac-detail .tsacd-buy{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
-  #tsac-detail .tsacd-price{display:flex;flex-direction:column;gap:2px}
-  #tsac-detail .tsacd-price b{font-size:1.6rem;font-weight:800;color:#efe6d2;line-height:1;font-variant-numeric:tabular-nums}
-  #tsac-detail .tsacd-price span{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
-  #tsac-detail .tsacd-done{flex:none;display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:12px;border:1px solid rgba(239,230,210,.9);background:#efe6d2;color:#0c0e16;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .25s ease,border-color .25s ease,color .25s ease,transform .2s ease}
+  #tsac-detail .tsacd-row{margin:0 0 15px;font-size:1rem;line-height:1.55;color:rgba(255,255,255,.82)}
+  #tsac-detail .tsacd-row .ar{color:#c7b489;margin-right:7px}
+  #tsac-detail .tsacd-row b{color:#fff;font-weight:600}
+  #tsac-detail .tsacd-buy{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+  #tsac-detail .tsacd-price{display:flex;flex-direction:column;gap:3px}
+  #tsac-detail .tsacd-price b{font-family:"Lineal TS", var(--font-sans, ${SANS});font-size:1.5rem;font-weight:600;color:#efe6d2;line-height:1.05;letter-spacing:-.01em}
+  #tsac-detail .tsacd-price span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+  #tsac-detail .tsacd-done{flex:none;display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:12px;border:1px solid rgba(239,230,210,.9);background:#efe6d2;color:#0c0e16;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .25s ease,border-color .25s ease,color .25s ease,transform .2s ease}
   #tsac-detail .tsacd-done:hover{background:#e2d5b8;transform:translateY(-1px)}
   #tsac-detail .tsacd-done.is-done{background:rgba(${GRN},.14);border-color:rgba(${GRN},.5);color:#9FD3B9}
   @media(max-width:820px){
     #tsac-detail{align-items:flex-end;padding:0}
-    #tsac-detail .tsacd-panel{width:100%;max-height:94vh;border-radius:20px 20px 0 0;overflow-y:auto}
+    #tsac-detail .tsacd-panel{width:100%;max-height:94vh;border-radius:22px 22px 0 0;overflow-y:auto}
     #tsac-detail .tsacd-grid{grid-template-columns:1fr;height:auto}
     #tsac-detail .tsacd-imgwrap{height:auto;max-height:34vh}
     #tsac-detail .tsacd-imgwrap img{aspect-ratio:4/3}
-    #tsac-detail .tsacd-content{max-height:40vh}
+    #tsac-detail .tsacd-content{max-height:42vh}
     #tsac-detail .tsacd-buy{flex-direction:column;align-items:stretch}
     #tsac-detail .tsacd-done{justify-content:center}
   }
@@ -3487,7 +3510,7 @@
     if(document.getElementById('tsac-detail')) return;
     var it=ITEMS[idx];
     var card=root.querySelector('.tsac-card[data-i="'+idx+'"]');
-    var rows=FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-row"><div class="tsacd-k">'+esc(f[1])+'</div><div class="tsacd-v">'+esc(val)+'</div></div>'; }).join('');
+    var rows=FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-row"><span class="ar">→</span><b>'+esc(f[1])+' :</b> '+esc(val)+'</div>'; }).join('');
     var ov=document.createElement('div'); ov.id='tsac-detail';
     ov.innerHTML='<div class="tsacd-back"></div>'+
       '<div class="tsacd-panel">'+
@@ -3495,12 +3518,12 @@
         '<div class="tsacd-grid">'+
           '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'"></div>'+
           '<div class="tsacd-info">'+
-            '<div class="tsacd-eyebrow">Allergen · '+esc(it.molekuel)+'</div>'+
+            '<div class="tsacd-eyebrow">DB IX · Allergene</div>'+
             '<h2 class="tsacd-title">'+esc(it.name)+'</h2>'+
             '<div class="tsacd-content">'+rows+'</div>'+
             '<div class="tsacd-buy">'+
-              '<div class="tsacd-price"><b>'+it.formel+'</b><span>Zusammensetzung · '+esc(it.molekuel)+'</span></div>'+
-              '<button type="button" class="tsacd-done'+(isIn(it.name)?' is-done':'')+'">'+(isIn(it.name)?CHECK:FLASK)+'<span>'+(isIn(it.name)?'Im Kolben':'In den Kolben')+'</span></button>'+
+              '<div class="tsacd-price"><b>'+esc(it.intoleranz)+'</b><span>Unverträglichkeit</span></div>'+
+              '<button type="button" class="tsacd-done'+(isIn(it.name)?' is-done':'')+'">'+CHECK+'<span>'+(isIn(it.name)?'Gecheckt':'Check')+'</span></button>'+
             '</div>'+
           '</div>'+
         '</div>'+
@@ -3513,7 +3536,7 @@
       if(card) card.classList.toggle('in',val);
       updBar(root);
       if(val){ close(); setTimeout(function(){ neonSweep(card); },420); }
-      else { doneBtn.classList.remove('is-done'); doneBtn.innerHTML=FLASK+'<span>In den Kolben</span>'; }
+      else { doneBtn.classList.remove('is-done'); doneBtn.innerHTML=CHECK+'<span>Check</span>'; }
     });
     ov.querySelector('.tsacd-close').addEventListener('click',close);
     ov.querySelector('.tsacd-back').addEventListener('click',close);
@@ -3525,20 +3548,20 @@
     var cards=ITEMS.map(function(it,i){
       return '<article class="tsac-card'+(isIn(it.name)?' in':'')+'" data-i="'+i+'" role="button" tabindex="0" aria-label="'+esc(it.name)+' öffnen">'+
         '<div class="tsac-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'" loading="lazy"><span class="tsac-badge">'+CHECK+'</span></div>'+
-        '<div class="tsac-body"><h4 class="tsac-name">'+esc(it.name)+'</h4><div class="tsac-lbl">Zusammensetzung</div><div class="tsac-val">'+it.formel+'</div></div>'+
+        '<div class="tsac-body"><h4 class="tsac-name">'+esc(it.name)+'</h4><p class="tsac-desc">'+esc(it.wasistes)+'</p><div class="tsac-val">'+esc(it.intoleranz)+'</div></div>'+
       '</article>';
     }).join('');
     var sec=document.createElement('section'); sec.id='tsalgcart';
     sec.innerHTML='<div class="tsac-inner">'+
       '<div class="tsac-head">'+
         '<div class="tsac-eyebrow">DB IX · Allergene</div>'+
-        '<h3 class="tsac-title">Der Allergen-<span class="g">Baukasten</span></h3>'+
-        '<p class="tsac-sub">Öffne ein Allergen für alle Eigenschaften. Nimm es in den Kolben, um zu sehen, wie viele deine Karte betreffen.</p>'+
+        '<h3 class="tsac-title">Deine Allergen-Liste. <span class="g">Schritt für Schritt.</span></h3>'+
+        '<p class="tsac-sub">Jedes Allergen liegt als Karte im Regal. Klick es auf, lies die Anleitung, hak es ab — die „Währung" ist die Unverträglichkeit, die dahintersteht.</p>'+
       '</div>'+
       '<div class="tsac-shelf"><div class="tsac-track">'+cards+'</div></div>'+
       '<div class="tsac-bar">'+
-        '<div class="tsac-bar__ico">'+FLASK.replace('width="16" height="16"','')+'</div>'+
-        '<div class="tsac-bar__mid"><div class="tsac-bar__cap">Im Kolben: <b class="tsac-cnt">0</b> von '+ITEMS.length+' Allergenen</div><div class="tsac-bar__track"><div class="tsac-bar__fill"></div></div></div>'+
+        '<div class="tsac-bar__ico">'+CLIP+'</div>'+
+        '<div class="tsac-bar__mid"><div class="tsac-bar__cap">Gecheckt: <b class="tsac-cnt">0</b> von '+ITEMS.length+' Allergenen</div><div class="tsac-bar__track"><div class="tsac-bar__fill"></div></div></div>'+
         '<div class="tsac-bar__num"><span class="tsac-cnt2">0</span>/'+ITEMS.length+'</div>'+
       '</div>'+
     '</div>';
