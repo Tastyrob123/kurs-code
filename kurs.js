@@ -3303,17 +3303,17 @@
 
   // Reihenfolge = DB-Galerie. img wird nach Cover-Beschaffung gefüllt; leer -> Platzhalter.
   var ITEMS=[
-    {name:'Glutenhaltiges Getreide', formel:'Gliadin + Glutenin', img:'https://files.catbox.moe/en0s2q.png'},
-    {name:'Krebstiere', formel:'Tropomyosin', img:'https://files.catbox.moe/24751s.png'},
-    {name:'Eier', formel:'Ovalbumin / Ovomucoid', img:'https://files.catbox.moe/4cq3ze.png'},
-    {name:'Fisch', formel:'Parvalbumin', img:'https://files.catbox.moe/wx4zhu.png'},
-    {name:'Erdnüsse', formel:'Ara h 1–3', img:'https://files.catbox.moe/6ttxoq.png'},
-    {name:'Soja', formel:'Glycinin / β-Conglycinin', img:'https://files.catbox.moe/d49t5t.png'},
-    {name:'Milch', formel:'Casein / β-Lactoglobulin', img:'https://files.catbox.moe/qf982t.png'},
-    {name:'Schalenfrüchte', formel:'Speicherproteine (Cor a 9)', img:'https://files.catbox.moe/dva5w6.png'},
-    {name:'Senf', formel:'Sin a 1', img:'https://files.catbox.moe/ljs9wt.png'},
-    {name:'Sesam', formel:'Ses i 1', img:'https://files.catbox.moe/07zrq4.png'},
-    {name:'Sulfite', formel:'SO₂', img:'https://files.catbox.moe/b3m6nr.png'}
+    {name:'Glutenhaltiges Getreide', formel:'Gliadin + Glutenin', img:'https://files.catbox.moe/3iy7bw.webp'},
+    {name:'Krebstiere', formel:'Tropomyosin', img:'https://files.catbox.moe/nuqd7u.webp'},
+    {name:'Eier', formel:'Ovalbumin / Ovomucoid', img:'https://files.catbox.moe/x3es30.webp'},
+    {name:'Fisch', formel:'Parvalbumin', img:'https://files.catbox.moe/yr0kya.webp'},
+    {name:'Erdnüsse', formel:'Ara h 1–3', img:'https://files.catbox.moe/1zkjyb.webp'},
+    {name:'Soja', formel:'Glycinin / β-Conglycinin', img:'https://files.catbox.moe/ztn7fx.webp'},
+    {name:'Milch', formel:'Casein / β-Lactoglobulin', img:'https://files.catbox.moe/9ide9k.webp'},
+    {name:'Schalenfrüchte', formel:'Speicherproteine (Cor a 9)', img:'https://files.catbox.moe/iy8dke.webp'},
+    {name:'Senf', formel:'Sin a 1', img:'https://files.catbox.moe/p0km11.webp'},
+    {name:'Sesam', formel:'Ses i 1', img:'https://files.catbox.moe/nb3c39.webp'},
+    {name:'Sulfite', formel:'SO₂', img:'https://files.catbox.moe/bxqlff.webp'}
   ];
 
   var FLASK='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5.4 9.2A1.4 1.4 0 0 0 5.8 20.5h12.4a1.4 1.4 0 0 0 1.2-2.3L14 9V3"/><path d="M7.6 14.5h8.8"/></svg>';
@@ -3344,7 +3344,7 @@
   #tsalgcart .tsac-card.on{opacity:1;transform:none}
   #tsalgcart .tsac-card:hover{transform:translateY(-4px);border-color:rgba(var(--g),.5);box-shadow:0 22px 50px -28px rgba(0,0,0,.9),0 0 26px -6px rgba(var(--g),.35)}
   #tsalgcart .tsac-card.in{--g:${GRN};border-color:rgba(${GRN},.55);background:linear-gradient(165deg,rgba(160,208,180,.22),rgba(160,208,180,.05) 60%,rgba(255,255,255,0));box-shadow:0 18px 44px -28px rgba(0,0,0,.85),0 0 34px -8px rgba(${GRN},.32)}
-  #tsalgcart .tsac-imgwrap{position:relative;aspect-ratio:1/1;overflow:hidden;background:#0b0d14}
+  #tsalgcart .tsac-imgwrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0b0d14}
   #tsalgcart .tsac-imgwrap img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}
   #tsalgcart .tsac-card:hover .tsac-imgwrap img{transform:scale(1.04)}
   #tsalgcart .tsac-imgwrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,5,10,0) 58%,rgba(6,7,13,.72) 100%);pointer-events:none}
@@ -3383,7 +3383,7 @@
       return '<article class="tsac-card'+(inn?' in':'')+'" data-i="'+i+'">'+
         '<div class="tsac-imgwrap"><img src="'+img+'" alt="'+it.name+'" loading="lazy"><span class="tsac-badge">'+CHECK+'</span></div>'+
         '<div class="tsac-body">'+
-          '<h4 class="tsac-name">'+it.name+'</h4>'+
+          
           '<div class="tsac-lbl">Zusammensetzung</div>'+
           '<div class="tsac-val">'+it.formel+'</div>'+
           '<button type="button" class="tsac-add">'+(inn?CHECK:FLASK)+'<span>'+(inn?'Im Kolben':'In den Kolben')+'</span></button>'+
