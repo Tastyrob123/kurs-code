@@ -10956,13 +10956,27 @@
     var win=document.getElementById("fdqrWin"); if(!win) return;
     var tiles=[].slice.call(win.querySelectorAll(".fdqr-tile")); if(!tiles.length) return;
     window.__tsfdqReveal=true;
-    if(!("IntersectionObserver" in window)){ tiles.forEach(function(t){ t.classList.add("in"); }); return; }
     // Jeder Abschnitt blendet ein sobald er in Sicht kommt und BLEIBT.
-    // IntersectionObserver laeuft unabhaengig von rAF/Energiesparmodus.
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { root:null, rootMargin:"0px 0px -8% 0px", threshold:0.04 });
-    tiles.forEach(function(t){ io.observe(t); });
+    // 1) IntersectionObserver (saubere Timing, unabh. von rAF) …
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { root:null, rootMargin:"0px 0px -8% 0px", threshold:0.04 });
+      tiles.forEach(function(t){ io.observe(t); });
+    }
+    // 2) … PLUS direkter scroll-Fallback: garantiert, dass nie ein Abschnitt
+    //    unsichtbar bleibt (auch wenn IO gedrosselt/nicht verfuegbar ist).
+    function revealVisible(){
+      var vh=window.innerHeight||800;
+      for(var i=0;i<tiles.length;i++){
+        if(tiles[i].className.indexOf("in")>-1) continue;
+        var r=tiles[i].getBoundingClientRect();
+        if(r.top < vh*0.92 && r.bottom > -40){ tiles[i].classList.add("in"); }
+      }
+    }
+    window.addEventListener("scroll", revealVisible, {passive:true});
+    window.addEventListener("resize", revealVisible, {passive:true});
+    revealVisible();
   }
 
   function mount(){
