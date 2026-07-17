@@ -3928,13 +3928,14 @@
   #tslohn *{box-sizing:border-box}
   #tslohn .tsl-wrap{width:min(1120px,90vw);margin:0 auto;padding:64px 0 68px}
 
-  /* -------- Kopf -------- */
+  /* -------- Kopf (mittig, ganze Breite — Robert-Wunsch 17.07.2026) -------- */
+  #tslohn .tsl-head{text-align:center}
   #tslohn .tsl-eyebrow{display:inline-block;font-size:.66rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
     color:#c7b489;padding:6px 14px;border:1px solid rgba(var(--g),.34);border-radius:99px;background:rgba(var(--g),.06);margin-bottom:22px}
   #tslohn .tsl-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.6vw,3.1rem);line-height:1.04;letter-spacing:-.025em;color:#fff;margin:0 0 16px;max-width:16ch}
+    font-size:clamp(1.9rem,4.6vw,3.1rem);line-height:1.04;letter-spacing:-.025em;color:#fff;margin:0 auto 16px;max-width:20ch}
   #tslohn .tsl-h em{font-style:normal;color:#c7b489}
-  #tslohn .tsl-lead{font-size:clamp(1rem,1.6vw,1.14rem);line-height:1.6;color:rgba(255,255,255,.6);margin:0 0 52px;max-width:56ch}
+  #tslohn .tsl-lead{font-size:clamp(1rem,1.6vw,1.14rem);line-height:1.6;color:rgba(255,255,255,.6);margin:0 auto 52px;max-width:60ch}
 
   /* -------- Timeline der 3 Ebenen -------- */
   #tslohn .tsl-line{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin:0 0 60px}
@@ -4061,9 +4062,11 @@
     var root=document.createElement('div'); root.id='tslohn';
     root.innerHTML=
       '<div class="tsl-wrap">'
+      +'<div class="tsl-head">'
       +'<span class="tsl-eyebrow tsl-rise">Mitarbeiterlöhne</span>'
       +'<h2 class="tsl-h tsl-rise">Was eine Arbeitsstunde <em>wirklich</em> kostet</h2>'
       +'<p class="tsl-lead tsl-rise">Netto, Brutto, Arbeitgeberkosten — drei Zahlen, die oft verwechselt werden. Für deine Kalkulation zählt nur die dritte. Hier siehst du, warum sie höher liegt, als im Vertrag steht.</p>'
+      +'</div>'
 
       /* Timeline */
       +'<div class="tsl-line tsl-rise">'
@@ -10096,6 +10099,9 @@
     var root=document.createElement('div'); root.id='ts11page';
     root.innerHTML=HTML;
     if(hero.nextSibling) sc.insertBefore(root, hero.nextSibling); else sc.appendChild(root);
+    /* Robuste Navigation: super.so (Next.js-SPA) fängt Klicks auf injizierte <a> ab -> harte Navigation erzwingen */
+    var cta=root.querySelector('.cta-btn');
+    if(cta) cta.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.location.assign('https://gastronomie-ai-masterclass.super.site/key-metrics'); });
     try{ init(); }catch(err){ /* Endzustand nie animationsabhängig: Inhalt steht auch ohne init */ }
   }
   function boot(){
