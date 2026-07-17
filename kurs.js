@@ -4153,6 +4153,127 @@
 /* ---- */
 
 /* ============================================================
+   gemeinkosten-mitarbeiterlhne — #tsgkemp  "Empfehlung zur Nutzung"
+   Self-contained Klon des Empfehlungskastens (#tslpemp-Muster, Robert-
+   Wunsch 17.07.2026): links EINE zyklische Glas-Liste (3 Kurz-Labels,
+   Sprache wie #tsdb0/#tslpemp — keine 3 getrennten Animationen), rechts
+   Lineal-Heading (letztes Wort beige) + 3 nummerierte Karten. Kein
+   natives Notion-Pendant auf dieser Seite -> komplett selbst gebaut
+   (kein Klonen wie bei #tsmiss/#tslpemp), Anker: direkt NACH #tslohn.
+   ============================================================ */
+(function(){
+  if(window.__tsgkemp) return; window.__tsgkemp=true;
+  var PATH=/\/gemeinkosten-mitarbeiterlhne\/?$/;
+  var ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M1.5 6.5h13M6.5 6.5v7"/></svg>';
+  var TABS=[['GK Kosten','Claude + Kontoauszüge'],['GK Annahmen','Kassensystem'],['Mitarbeiterlöhne','AG-Kosten-Faktor']];
+  var STEPS=[
+    'GK Kosten mit Claude ausarbeiten und Kontoauszüge hochladen.',
+    'GK Kosten Annahmen aus den Verkaufszahlen des Kassensystems ziehen.',
+    'Mitarbeiterlöhne immer mit AG-Kosten-Faktor berechnen.'
+  ];
+  var CSS=`
+  #tsgkemp{--g:199,180,137;--rx:0deg;--ry:0deg;position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.35fr;gap:clamp(28px,4.5vw,56px);align-items:center;width:min(1000px,95vw);margin:52px auto 30px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 14px rgba(var(--g),.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;transform-style:preserve-3d;will-change:transform;opacity:0;transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+  #tsgkemp,#tsgkemp *{box-sizing:border-box}
+  #tsgkemp.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #tsgkemp.live{transition:transform .16s ease-out,box-shadow .5s ease,border-color .4s ease}
+  #tsgkemp.live:hover{border-color:rgba(var(--g),.4);animation:tsgkemp-heartbeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  #tsgkemp::before{content:"";position:absolute;inset:0;border-radius:20px;background:radial-gradient(560px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.055),transparent 46%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+  #tsgkemp.live:hover::before{opacity:1}
+  #tsgkemp::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.4),transparent);pointer-events:none}
+  #tsgkemp .col{min-width:0;position:relative;z-index:1;transform:translateZ(22px)}
+  #tsgkemp .db-hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.4rem;font-weight:600;letter-spacing:-.01em;line-height:1.2;margin:0 0 14px;color:#fff;opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsgkemp .db-hd .g{color:#c7b489}
+  #tsgkemp.in .db-hd{opacity:1;transform:none}
+  #tsgkemp .db-row{display:flex;flex-direction:column;align-items:stretch;gap:6px;max-width:300px}
+  #tsgkemp .tb{display:flex;align-items:center;gap:9px;padding:11px 15px;border-radius:12px;font-size:.94rem;font-weight:600;color:rgba(255,255,255,.5);white-space:nowrap;opacity:0;transform:translateY(10px) scale(.97);transition:color .45s ease,background .5s ease,box-shadow .5s ease,opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+  #tsgkemp .tb svg{width:15px;height:15px;flex:none;opacity:.7}
+  #tsgkemp .tb .sub{color:rgba(255,255,255,.35);font-weight:500;font-size:.78rem;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #tsgkemp.in .tb{opacity:1;transform:none}
+  #tsgkemp.in .tb:nth-child(2){transition-delay:.10s}
+  #tsgkemp.in .tb:nth-child(3){transition-delay:.20s}
+  #tsgkemp .tb.on{color:#fff;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(var(--g),.10)}
+  #tsgkemp .tb.on svg{opacity:1}
+  #tsgkemp .tb.on .sub{color:rgba(216,201,171,.75)}
+  #tsgkemp .emph{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.45rem;font-weight:600;letter-spacing:-.012em;color:#fff;margin:0 0 18px;padding:0;opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsgkemp.in .emph{opacity:1;transform:none}
+  #tsgkemp .emph .eg{color:#c7b489}
+  #tsgkemp .steps{display:flex;flex-direction:column;gap:10px}
+  #tsgkemp .step{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsgkemp.in .step{opacity:1;transform:none}
+  #tsgkemp.in .step:nth-child(1){transition-delay:.14s}
+  #tsgkemp.in .step:nth-child(2){transition-delay:.26s}
+  #tsgkemp.in .step:nth-child(3){transition-delay:.38s}
+  #tsgkemp .step-num{flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:#05060b;background:linear-gradient(180deg,#efe6d2,#c7b489)}
+  #tsgkemp .step-t{color:rgba(255,255,255,.72);font-size:.94rem;line-height:1.55;padding-top:3px}
+  @keyframes tsgkemp-heartbeat{0%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}18%{box-shadow:0 6px 22px rgba(var(--g),.30),0 0 46px rgba(var(--g),.34)}32%{box-shadow:0 5px 18px rgba(var(--g),.16),0 0 26px rgba(var(--g),.18)}46%{box-shadow:0 6px 20px rgba(var(--g),.26),0 0 40px rgba(var(--g),.28)}72%,100%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}}
+  @media(max-width:900px){#tsgkemp{grid-template-columns:1fr;gap:26px}#tsgkemp .db-row{max-width:none}}
+  @media(max-width:720px){#tsgkemp .db-hd{font-size:1.25rem}#tsgkemp .tb{padding:10px 13px;font-size:.88rem}#tsgkemp .emph{font-size:1.3rem}}
+  @media(prefers-reduced-motion:reduce){#tsgkemp,#tsgkemp.in{opacity:1;transform:none;transition:none}#tsgkemp .db-hd,#tsgkemp .tb,#tsgkemp .emph,#tsgkemp .step{opacity:1;transform:none;transition:none}#tsgkemp.live:hover{animation:none;box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 26px rgba(var(--g),.22)}}
+  `;
+  function on(){ return PATH.test(location.pathname); }
+  function injectCSS(){ if(document.getElementById('tsgkemp-css'))return; var s=document.createElement('style'); s.id='tsgkemp-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function tilt(wrap){
+    if(!(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var raf=null, cx=0, cy=0;
+    wrap.addEventListener('mousemove',function(e){
+      cx=e.clientX; cy=e.clientY;
+      if(!wrap.classList.contains('live')||raf) return;
+      raf=requestAnimationFrame(function(){
+        raf=null;
+        var r=wrap.getBoundingClientRect();
+        var px=(cx-r.left)/r.width, py=(cy-r.top)/r.height;
+        wrap.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg');
+        wrap.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        wrap.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+        wrap.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      });
+    });
+    wrap.addEventListener('mouseleave',function(){
+      wrap.style.setProperty('--rx','0deg'); wrap.style.setProperty('--ry','0deg');
+    });
+  }
+  function cycle(wrap){
+    var tabs=[].slice.call(wrap.querySelectorAll('.tb')), idx=0, timer=null;
+    function move(){ tabs.forEach(function(x,i){ x.classList.toggle('on',i===idx); }); }
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var io=new IntersectionObserver(function(e){
+      if(e[0].isIntersecting){ move(); if(!reduce&&!timer) timer=setInterval(function(){ idx=(idx+1)%tabs.length; move(); },2400); }
+      else if(timer){ clearInterval(timer); timer=null; }
+    },{threshold:.3});
+    io.observe(wrap);
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsgkemp'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    var lohn=document.getElementById('tslohn'); if(!lohn) return;
+    if(document.getElementById('tsgkemp')) return;
+    injectCSS();
+    var wrap=document.createElement('div'); wrap.id='tsgkemp';
+    var L=document.createElement('div'); L.className='col';
+    var R=document.createElement('div'); R.className='col';
+    L.innerHTML='<div class="db-hd">Drei <span class="g">Routinen</span></div>'+
+      '<div class="db-row">'+TABS.map(function(t){ return '<span class="tb">'+ICON+t[0]+'<span class="sub">'+t[1]+'</span></span>'; }).join('')+'</div>';
+    R.innerHTML='<div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
+      '<div class="steps">'+STEPS.map(function(s,i){ return '<div class="step"><span class="step-num">'+(i+1)+'</span><span class="step-t">'+s+'</span></div>'; }).join('')+'</div>';
+    wrap.appendChild(L); wrap.appendChild(R);
+    lohn.parentNode.insertBefore(wrap, lohn.nextSibling);
+    var io=new IntersectionObserver(function(e){
+      if(e[0].isIntersecting){ wrap.classList.add('in'); setTimeout(function(){ wrap.classList.add('live'); },950); io.disconnect(); }
+    },{threshold:.25});
+    io.observe(wrap);
+    cycle(wrap); tilt(wrap);
+  }
+  function boot(){
+    var tries=0;
+    var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
+    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+  if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
+})();
+
+/* ---- */
+
+/* ============================================================
    zutatenliste — #tszein  "Empfehlung zur Einrichtung"
    Self-contained Klon des Empfehlungskastens (#tsmiss/#tslpemp)
    für /zutatenliste, direkt UNTER Block B (#tscb-B). Linke Spalte
@@ -8647,4 +8768,105 @@
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   if(document.readyState==='complete') boot(); else window.addEventListener('load', boot);
+})();
+
+/* ---- */
+
+/* ============================================================
+   gemeinkosten-mitarbeiterlhne — #tsgkflow  "Von den Kosten zum
+   Deckungsbeitrag" (Robert-Wunsch 17.07.2026, direkt unter #tsgkemp).
+   Zwei Rechenketten, EIN Abschnitt: GK-Kette zuerst (Gemeinkosten →
+   Gemeinkostenannahmen → GK pro Produkt → = Deckungsbeitrag II),
+   danach PK-Kette (Mitarbeiterlöhne × AG-Faktor → Lohn pro Stunde →
+   Zubereitungszeit pro Minute → PK pro Produkt → = Deckungsbeitrag III).
+   Mapping bestätigt gegen die SSOT-Treppe #tsdb (mehrwert-zielbild,
+   von Robert bestätigt 2026-07-10): DB II = DB I − Gemeinkostenanteil,
+   DB III = DB II − Personalkostenanteil → GK-Kette produziert DB II,
+   PK-Kette DB III. Reveal-Reihenfolge zeigt daher GK/DB II ZUERST,
+   PK/DB III DANACH — deckt sich mit "dreh es um: erst DB II dann DB III".
+   Reiner Konzept-Flow (Ketten/Formeln), KEINE erfundenen Euro-Beträge
+   (Niemals-schätzen-Regel). Anker: direkt NACH #tsgkemp.
+   ============================================================ */
+(function(){
+  if(window.__tsgkflow) return; window.__tsgkflow=true;
+  var PATH=/\/gemeinkosten-mitarbeiterlhne\/?$/;
+  var GK_CHAIN=['Gemeinkosten','Gemeinkostenannahmen','GK pro Produkt'];
+  var PK_CHAIN=['Mitarbeiterlöhne × AG-Faktor','Lohn pro Stunde','Zubereitungszeit pro Minute','PK pro Produkt'];
+  var CSS=`
+  #tsgkflow{width:min(940px,92vw);margin:14px auto 46px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
+  #tsgkflow *{box-sizing:border-box}
+  #tsgkflow .hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.5rem,2.6vw,2rem);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 10px}
+  #tsgkflow .hd .g{color:#c7b489}
+  #tsgkflow .sub{font-size:.98rem;line-height:1.6;color:rgba(255,255,255,.55);max-width:56ch;margin:0 auto 40px}
+  #tsgkflow .row{margin-bottom:38px}
+  #tsgkflow .row:last-child{margin-bottom:0}
+  #tsgkflow .row-lbl{display:inline-block;font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+  #tsgkflow.in .row-lbl{opacity:1;transform:none}
+  #tsgkflow .chain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 6px}
+  #tsgkflow .chip{padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);font-size:.88rem;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 160ms)}
+  #tsgkflow.in .chip{opacity:1;transform:none}
+  #tsgkflow .chip.result{color:#efe6d2;border-color:rgba(199,180,137,.4);background:rgba(199,180,137,.08);box-shadow:0 0 20px rgba(199,180,137,.10)}
+  #tsgkflow .arrow{color:rgba(255,255,255,.24);font-size:1rem;flex:none;opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--i) * 160ms)}
+  #tsgkflow.in .arrow{opacity:1}
+  #tsgkflow .down{display:block;margin:14px auto 0;font-size:1.1rem;color:rgba(199,180,137,.5);opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--i) * 160ms)}
+  #tsgkflow.in .down{opacity:1}
+  #tsgkflow .badge{display:inline-block;margin-top:10px;padding:12px 26px;border-radius:999px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.02rem;font-weight:600;letter-spacing:-.005em;color:#05060b;background:linear-gradient(180deg,#efe6d2,#c7b489);box-shadow:0 10px 28px -10px rgba(199,180,137,.5);opacity:0;transform:translateY(10px) scale(.94);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 160ms)}
+  #tsgkflow.in .badge{opacity:1;transform:none}
+  @media(max-width:640px){#tsgkflow .chip{font-size:.8rem;padding:9px 14px}#tsgkflow .hd{font-size:1.35rem}}
+  @media(prefers-reduced-motion:reduce){#tsgkflow .chip,#tsgkflow .arrow,#tsgkflow .down,#tsgkflow .badge,#tsgkflow .row-lbl{opacity:1;transform:none;transition:none}}
+  `;
+  function on(){ return PATH.test(location.pathname); }
+  function injectCSS(){ if(document.getElementById('tsgkflow-css'))return; var s=document.createElement('style'); s.id='tsgkflow-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function chain(items, startIdx, resultClass){
+    var out='', i=startIdx;
+    items.forEach(function(t, idx){
+      if(idx>0){ out+='<span class="arrow" style="--i:'+i+'">→</span>'; i++; }
+      var cls = (idx===items.length-1 && resultClass) ? ' result' : '';
+      out += '<span class="chip'+cls+'" style="--i:'+i+'">'+t+'</span>';
+      i++;
+    });
+    return {html:out, next:i};
+  }
+  function build(){
+    var root=document.createElement('div'); root.id='tsgkflow';
+    var i=0;
+    var gk=chain(GK_CHAIN, i, true); i=gk.next;
+    var db2i=i; i++;
+    var pk=chain(PK_CHAIN, i, true); i=pk.next;
+    var db3i=i; i++;
+    root.innerHTML=
+      '<div class="hd">Von den Kosten zum <span class="g">Deckungsbeitrag</span></div>'+
+      '<p class="sub">Zwei Rechenketten, ein Ziel — so verdichten sich deine Kosten Schritt für Schritt zu Deckungsbeitrag II und III.</p>'+
+      '<div class="row row-gk">'+
+        '<span class="row-lbl">Gemeinkosten-Kette</span>'+
+        '<div class="chain">'+gk.html+'</div>'+
+        '<span class="down" style="--i:'+db2i+'">↓</span><br>'+
+        '<span class="badge" style="--i:'+db2i+'">= Deckungsbeitrag II</span>'+
+      '</div>'+
+      '<div class="row row-pk">'+
+        '<span class="row-lbl">Personalkosten-Kette</span>'+
+        '<div class="chain">'+pk.html+'</div>'+
+        '<span class="down" style="--i:'+db3i+'">↓</span><br>'+
+        '<span class="badge" style="--i:'+db3i+'">= Deckungsbeitrag III</span>'+
+      '</div>';
+    return root;
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsgkflow'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    var anchor=document.getElementById('tsgkemp'); if(!anchor) return;
+    if(document.getElementById('tsgkflow')) return;
+    injectCSS();
+    var root=build();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    var io=new IntersectionObserver(function(e){
+      if(e[0].isIntersecting){ root.classList.add('in'); io.disconnect(); }
+    },{threshold:.2});
+    io.observe(root);
+  }
+  function boot(){
+    var tries=0;
+    var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
+    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+  if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
