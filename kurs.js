@@ -1771,6 +1771,14 @@
     "Du kannst die Rezeptur um Personalkosten erweitern und siehst, was dich eine Portion in der Zubereitung wirklich kostet."
   ];
 
+  /* /gemeinkosten-mitarbeiterlhne (DB VI–VII) — feste Learnings (keine Notion-"Learnings"-Überschrift auf der Seite) */
+  var GK = [
+    "Du hast die Gemeinkosten-Datenbank gebaut — jede Fixkosten-Position landet als eigene Zeile mit Kategorie, Zeitraum und Betrag.",
+    "Du verstehst die Rechen-Ebene der GK-Annahmen: aus Monat, Kostenfaktoren und Absatz entsteht automatisch die Gemeinkosten pro Produkt.",
+    "Du kennst den Unterschied zwischen Netto-, Brutto- und Arbeitgeber-Bruttokosten und weißt, warum nur die dritte Zahl für deine Kalkulation zählt.",
+    "Du kannst für jeden Mitarbeiter den Stundensatz auf AG-Kosten-Basis berechnen — die reale Zahl, mit der Personalkosten pro Produkt entstehen."
+  ];
+
   var CSS = `
   #tsl{width:100vw;max-width:100vw;margin:44px 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff}
   #tsl *{box-sizing:border-box}
@@ -1820,7 +1828,8 @@
     { re:/\/inventurliste\/?$/,     items:null },
     { re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, items:null },
     { re:/\/zutatenliste\/?$/,      items:null },
-    { re:/\/rezepturen\/?$/,        items:REZ }
+    { re:/\/rezepturen\/?$/,        items:REZ },
+    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, items:GK }
   ];
   function pageCfg(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i]; }
@@ -2863,19 +2872,23 @@
 
   var CSS=`
   #tslohn{--g:${G};width:100vw;max-width:100vw;margin:52px 0;margin-left:calc(50% - 50vw);color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;
-    background:radial-gradient(60% 100% at 12% 100%,rgba(70,90,150,.12),rgba(70,90,150,0) 60%)}
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
   /* Abschnittstrenner (Gradient-Linie) oben+unten auf Robert-Wunsch entfernt (15.07.2026).
      2. Fund (selber Tag): ein mask-image-Fade reichte nicht - Robert wollte die Kante GANZ WEG,
      nicht nur weicher. 3. Fund: die eigentliche Ursache war der goldene radial-gradient
      (rgba(var(--g),.10) at 82% 12%, oben rechts) - der erzeugte den warmen Glow-Streifen an der
      Box-Oberkante. Fix: dieser Gradient-Layer komplett entfernt (nicht nur weichgezeichnet).
-     Der blaue Bottom-Left-Glow bleibt (andere Farbe, nicht Teil der Beschwerde, sitzt am
-     unteren Rand ohne sichtbare Kante). 4. Fund: selbst danach blieb eine hauchduenne Linie -
+     4. Fund (selber Tag): selbst danach blieb eine hauchduenne Linie -
      Ursache war border-top/border-bottom:1px solid rgba(255,255,255,0) auf #tslohn. Technisch
      unsichtbar (Alpha 0), aber bei einer 100vw-Full-Bleed-Box kann ein deklarierter 1px-Rand
      durch Subpixel-/Compositing-Rundung trotzdem als feine Naht durchscheinen. Fix: die Zeile
-     komplett gestrichen statt nur transparent zu setzen. */
+     komplett gestrichen statt nur transparent zu setzen.
+     5. Fund (17.07.2026): der blaue Bottom-Left-Glow (rgba(70,90,150,...) at 12% 100%), der beim
+     3. Fund bewusst stehen gelassen wurde, erzeugte GENAU dasselbe Problem an der UNTERKANTE -
+     Robert sah eine harte Kante, wo #tslohns eigener Blau-Verlauf abrupt an der Box-Unterkante
+     endet und auf den naechsten Abschnitt trifft ("wenn beide Blaubereiche aufeinandertreffen").
+     Fix: komplett entfernt, #tslohn hat jetzt GAR KEINEN Hintergrund-Gradienten mehr - nur noch
+     die reine Seiten-Hintergrundfarbe, kein Box-Rand kann mehr als Kante durchscheinen. */
   #tslohn *{box-sizing:border-box}
   #tslohn .tsl-wrap{width:min(1120px,90vw);margin:0 auto;padding:64px 0 68px}
 
