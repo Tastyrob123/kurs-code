@@ -10604,22 +10604,25 @@
   new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
-
 /* ============================================================
    food-drinksquartier-inhalte-interface — Lektion 2.4
    Hero "Food- und Drinksquartier" + zentrierte Einleitung +
-   Interface-Bau-Animation (Notion baut sich Block fuer Block auf) +
+   SCROLL-BUILD-Animation (12 echte Notion-Screenshots: leere Seite ->
+   fertiges Foodquartier, per Scroll-Scrubbing 1:1 zusammengebaut) +
    Cover-Block (links Cover / rechts Text, Muster #tsalgpc-Rezepturen).
-   Titel-/Display-Font = "Lineal Web" (volle Glyph-Abdeckung; das
-   "Lineal TS"-Subset hat kein F/q). Bilder freigestellt (Edge-Flood-Fill,
-   transparent RGBA) + eng auf die Laptops beschnitten, wie die anderen Heroes.
-   Eigene keyframes (fdq*) + eigene Klassen (.fdq-*) -> kollisionsfrei.
+   Titel-/Display-Font = "Lineal Web" (volle Glyph-Abdeckung; "Lineal TS"
+   hat kein F/q). Hero/Cover freigestellt (Edge-Flood-Fill) + geschärft
+   (Lanczos 2x + 2-stufige UnsharpMask). Build-Frames = 2000px WebP.
+   Sticky-Pinning in super.so verifiziert; Scrubbing via rAF-Loop.
+   Eigene keyframes (fdq…) + eigene Klassen (fdq- und fdqb- Praefixe) -> kollisionsfrei.
    ============================================================ */
 (function(){
   if(window.__tsfdq) return; window.__tsfdq=true;
   var HERO="https://files.catbox.moe/20fi21.png";
   var COVER="https://files.catbox.moe/6yc8x3.png";
   var LOGO="https://files.catbox.moe/au80tp.png";
+  var FRAMES=["cdu8mh","gyoqxk","pm5ay0","nin23v","0wy3dv","lz4264","myq6gt","ux2kn8","owfskl","gtg2ap","ulfhuw","k2rad9"]
+             .map(function(x){return "https://files.catbox.moe/"+x+".webp";});
   function on(){ return /\/food-drinksquartier-inhalte-interface\/?$/.test(location.pathname); }
 
   var CSS = `
@@ -10652,66 +10655,25 @@
   #tsfdq .fdq-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:var(--fdq-muted);}
   #tsfdq .fdq-intro p .em{color:#fff;}
 
-  /* ---- ANIMATION ---- */
-  #tsfdq .fdq-anim{width:min(1040px,92vw);margin:62px auto 8px;}
-  #tsfdq .fdq-win{position:relative;border:1px solid var(--fdq-line);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#0b0d16,#070810);box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04);}
-  #tsfdq .fdq-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--fdq-line);background:rgba(255,255,255,.02);}
-  #tsfdq .fdq-bar .dot{width:11px;height:11px;border-radius:50%;background:#2a2d3a;}
-  #tsfdq .fdq-bar .dot:nth-child(1){background:#e05a63}
-  #tsfdq .fdq-bar .dot:nth-child(2){background:#d6a94a}
-  #tsfdq .fdq-bar .dot:nth-child(3){background:#5aa564}
-  #tsfdq .fdq-bar .crumb{margin-left:14px;font-size:12.5px;color:var(--fdq-muted2);letter-spacing:.02em;}
-  #tsfdq .fdq-bar .crumb b{color:#e9e9ee;font-weight:600;}
-  #tsfdq .fdq-stage{position:relative;padding:26px clamp(18px,3vw,34px) 30px;min-height:378px;}
-  #tsfdq .fdq-cursor{position:absolute;left:0;top:0;width:22px;height:22px;z-index:9;pointer-events:none;transition:transform .55s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));}
-  #tsfdq .fdq-cursor svg{display:block}
-  #tsfdq .fdq-blk{opacity:0;transform:translateY(12px) scale(.985);transition:opacity .55s ease,transform .55s cubic-bezier(.16,1,.3,1);}
-  #tsfdq .fdq-blk.in{opacity:1;transform:none;}
-  #tsfdq .fdq-cover{height:92px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:18px;background:linear-gradient(120deg,#1a2340,#0e1526 60%,#0a0f1e);border:1px solid rgba(255,255,255,.06);}
-  #tsfdq .fdq-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 78% 20%,rgba(199,180,137,.22),transparent 60%);}
-  #tsfdq .fdq-cover .lab{position:absolute;left:18px;bottom:14px;display:flex;align-items:center;gap:12px;font-family:var(--fdq-display);font-weight:600;font-size:19px;color:#fff;}
-  #tsfdq .fdq-cover .lab .cjk{color:var(--fdq-beige);font-size:15px;opacity:.9;}
-  #tsfdq .fdq-cover .lab .sep{width:5px;height:5px;border-radius:50%;background:var(--fdq-beige);opacity:.7;}
-  #tsfdq .fdq-atitle{font-family:var(--fdq-display);font-weight:600;font-size:24px;letter-spacing:-.01em;color:#fff;margin:0 0 18px;}
-  #tsfdq .fdq-atitle .g{color:var(--fdq-beige);}
-  #tsfdq .fdq-cols{display:grid;grid-template-columns:1.32fr 1fr;gap:16px;margin-bottom:18px;}
-  #tsfdq .fdq-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  #tsfdq .fdq-card{border:1px solid var(--fdq-line);border-radius:11px;overflow:hidden;background:#0c0f19;}
-  #tsfdq .fdq-card .thumb{height:58px;background:linear-gradient(135deg,#20283f,#121828);position:relative;}
-  #tsfdq .fdq-card:nth-child(2) .thumb{background:linear-gradient(135deg,#2a2438,#171322);}
-  #tsfdq .fdq-card:nth-child(3) .thumb{background:linear-gradient(135deg,#1e2c33,#101a1e);}
-  #tsfdq .fdq-card:nth-child(4) .thumb{background:linear-gradient(135deg,#332a20,#1c1710);}
-  #tsfdq .fdq-card .thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 30% 20%,rgba(255,255,255,.10),transparent 55%);}
-  #tsfdq .fdq-card .meta{padding:8px 10px;}
-  #tsfdq .fdq-card .meta .l1{height:7px;width:72%;border-radius:4px;background:rgba(255,255,255,.22);margin-bottom:6px;}
-  #tsfdq .fdq-card .meta .l2{height:6px;width:44%;border-radius:4px;background:var(--fdq-beige);opacity:.55;}
-  #tsfdq .fdq-widget{border:1px solid var(--fdq-line);border-radius:11px;background:#0c0f19;padding:14px;display:flex;flex-direction:column;gap:12px;}
-  #tsfdq .fdq-widget .wrow{display:flex;align-items:center;justify-content:space-between;}
-  #tsfdq .fdq-widget .wtemp{font-family:var(--fdq-display);font-weight:600;font-size:22px;color:#fff;}
-  #tsfdq .fdq-widget .wsky{font-size:11px;color:var(--fdq-muted2);}
-  #tsfdq .fdq-widget .wsun{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#f4dfa6,#c7b489);box-shadow:0 0 18px rgba(199,180,137,.45);}
-  #tsfdq .fdq-widget .clock{display:flex;gap:6px;}
-  #tsfdq .fdq-widget .clock span{font-variant-numeric:tabular-nums;font-family:var(--fdq-display);font-weight:600;font-size:18px;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--fdq-line);border-radius:7px;padding:5px 8px;letter-spacing:.02em;}
-  #tsfdq .fdq-widget .days{display:flex;justify-content:space-between;gap:6px;}
-  #tsfdq .fdq-widget .days i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.12);font-style:normal;}
-  #tsfdq .fdq-widget .days i:nth-child(-n+3){background:var(--fdq-beige);opacity:.6;}
-  #tsfdq .fdq-table{border:1px solid var(--fdq-line);border-radius:11px;overflow:hidden;background:#0b0e17;margin-bottom:18px;}
-  #tsfdq .fdq-table .trow{display:grid;grid-template-columns:1.6fr 1fr 1fr .7fr;padding:10px 14px;border-bottom:1px solid var(--fdq-line);align-items:center;}
-  #tsfdq .fdq-table .trow:last-child{border-bottom:0;}
-  #tsfdq .fdq-table .thead{background:rgba(255,255,255,.03);}
-  #tsfdq .fdq-table .thead span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fdq-muted2);}
-  #tsfdq .fdq-table .cell{height:8px;border-radius:4px;background:rgba(255,255,255,.16);width:70%;}
-  #tsfdq .fdq-table .cell.n{background:var(--fdq-beige);opacity:.6;width:52%;}
-  #tsfdq .fdq-table .cell.g{background:#8FCBAA;opacity:.7;width:46%;}
-  #tsfdq .fdq-table .pill{justify-self:start;font-size:10px;padding:3px 9px;border-radius:999px;background:rgba(143,203,170,.14);color:#9fd3b9;border:1px solid rgba(143,203,170,.25);}
-  #tsfdq .fdq-kpi{border:1px solid var(--fdq-line);border-radius:11px;background:#0c0f19;padding:14px 16px;display:flex;align-items:center;gap:16px;}
-  #tsfdq .fdq-kpi .klab{font-size:12px;color:var(--fdq-muted2);white-space:nowrap;}
-  #tsfdq .fdq-kpi .ktrack{flex:1;height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;}
-  #tsfdq .fdq-kpi .kfill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#c7b489,#efe6d2);transition:width 1.1s cubic-bezier(.16,1,.3,1) .1s;}
-  #tsfdq .fdq-kpi.grow .kfill{width:72%;}
-  #tsfdq .fdq-kpi .kval{font-family:var(--fdq-display);font-weight:600;font-size:15px;color:#fff;font-variant-numeric:tabular-nums;}
-  #tsfdq .fdq-cap{width:min(760px,92vw);margin:22px auto 0;text-align:center;font-size:1rem;line-height:1.62;color:var(--fdq-muted2);}
-  #tsfdq .fdq-cap b{color:#e9e9ee;font-weight:600;}
+  /* ---- SCROLL-BUILD ---- */
+  #tsfdq .fdqb-lead{width:min(820px,92vw);margin:66px auto 0;text-align:center;}
+  #tsfdq .fdqb-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 12px/1 var(--fdq-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--fdq-beige);margin-bottom:14px;}
+  #tsfdq .fdqb-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fdq-beige);box-shadow:0 0 12px rgba(199,180,137,.7);}
+  #tsfdq .fdqb-h{margin:0 0 12px;font-family:var(--fdq-display);font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.14;letter-spacing:-.02em;color:#fff;}
+  #tsfdq .fdqb-h .g{color:var(--fdq-beige);}
+  #tsfdq .fdqb-sub{margin:0;font-size:1.02rem;line-height:1.6;color:var(--fdq-muted2);}
+  #tsfdq .fdqb{position:relative;width:100%;height:360vh;margin:14px 0 6px;}
+  #tsfdq .fdqb-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 16px;}
+  #tsfdq .fdqb-frame{position:relative;width:min(1080px,94vw);aspect-ratio:2000/1210;border:1px solid var(--fdq-line);border-radius:16px;overflow:hidden;background:#0b0d16;box-shadow:0 44px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.05);}
+  #tsfdq .fdqb-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;will-change:opacity;}
+  #tsfdq .fdqb-frame img:first-child{opacity:1;}
+  #tsfdq .fdqb-bar{width:min(1080px,94vw);height:3px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden;}
+  #tsfdq .fdqb-bar span{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#c7b489,#efe6d2);}
+  #tsfdq .fdqb-dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
+  #tsfdq .fdqb-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .2s ease,transform .2s ease;}
+  #tsfdq .fdqb-dots i.on{background:var(--fdq-beige);transform:scale(1.3);}
+  #tsfdq .fdqb-hint{font-size:12.5px;letter-spacing:.02em;color:var(--fdq-muted2);}
+  #tsfdq .fdqb-hint b{color:#e9e9ee;font-weight:600;}
 
   /* ---- COVER-BLOCK ---- */
   #tsfdq .fdq-pc{width:min(1088px,92vw);margin:58px auto 88px;}
@@ -10724,12 +10686,10 @@
   #tsfdq .fdq-pc-txt p:last-child{margin-bottom:0;}
 
   @media (max-width:820px){
-    #tsfdq .fdq-cols{grid-template-columns:1fr}
+    #tsfdq .fdqb{height:300vh}
     #tsfdq .fdq-pc-grid{grid-template-columns:1fr;gap:26px}
     #tsfdq .fdq-pc-h{font-size:26px}
     #tsfdq .fdq-intro p{font-size:1.06rem}
-    #tsfdq .fdq-cap{font-size:.95rem}
-    #tsfdq .fdq-stage{min-height:0}
   }
   @media (max-width:640px){
     .page__food-drinksquartier-inhalte-interface .ts-hero__text{margin-top:-13%;}
@@ -10740,8 +10700,9 @@
     .page__food-drinksquartier-inhalte-interface .ts-hero__logo,
     .page__food-drinksquartier-inhalte-interface .ts-hero__eyebrow,
     .page__food-drinksquartier-inhalte-interface .ts-hero__title{animation:none!important}
-    #tsfdq .fdq-blk{opacity:1!important;transform:none!important}
-    #tsfdq .fdq-cursor{display:none!important}
+    #tsfdq .fdqb{height:auto}
+    #tsfdq .fdqb-sticky{position:static;height:auto;padding:24px 16px}
+    #tsfdq .fdqb-frame img:last-child{opacity:1}
   }`;
 
   function injectCSS(){
@@ -10767,38 +10728,22 @@
   function buildBody(sc){
     if(document.getElementById("tsfdq")) return;
     var box=document.createElement("div"); box.id="tsfdq";
+    var frameImgs=FRAMES.map(function(u,i){ return '<img alt="Aufbau-Schritt '+(i+1)+'" src="'+u+'" '+(i?'loading="lazy"':'')+'>'; }).join("");
+    var dots=FRAMES.map(function(){ return '<i></i>'; }).join("");
     box.innerHTML=
       '<div class="fdq-intro"><p>Das <span class="em">Food- und Drinksquartier</span> ist das Herzstück deines Backoffice. Hier laufen alle Fäden zusammen: Jede Zutat, jede Rezeptur, jeder Preis und jede Kennzahl aus den Datenbanken davor werden an einem einzigen Ort sichtbar. Speisen und Getränke folgen dabei derselben Logik — was in der Küche als Gericht entsteht und was an der Bar im Glas landet, wird nach denselben Regeln kalkuliert, bewertet und gesteuert. Du siehst auf einen Blick, was ein Produkt kostet, was es einbringt und wo Marge verloren geht. Kein Suchen in endlosen Tabellen, kein Rechnen im Kopf. Die Oberfläche bereitet alles auf und macht es von jeder Stelle aus mit KI auswertbar. So wird aus vielen einzelnen Datenbanken ein Betriebssystem, das mitdenkt.</p></div>'+
-      '<section class="fdq-anim">'+
-        '<div class="fdq-win">'+
-          '<div class="fdq-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="crumb">Vol. 1 &nbsp;·&nbsp; <b>Food- &amp; Drinksquartier</b></span></div>'+
-          '<div class="fdq-stage" id="fdqStage">'+
-            '<div class="fdq-cursor" id="fdqCursor"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M2 2 L2 17 L6.2 13 L9 19 L11.6 17.8 L8.8 12 L14 12 Z" fill="#fff" stroke="#05060b" stroke-width="1.2" stroke-linejoin="round"/></svg></div>'+
-            '<div class="fdq-blk fdq-cover"><div class="lab"><span class="cjk">食</span> Food <span class="sep"></span> <span class="cjk">饮</span> Drinks <span style="opacity:.55;font-weight:400">— Quartier</span></div></div>'+
-            '<h3 class="fdq-blk fdq-atitle">Übersicht <span class="g">Quartier</span></h3>'+
-            '<div class="fdq-cols">'+
-              '<div class="fdq-blk fdq-gallery">'+
-                '<div class="fdq-card"><div class="thumb"></div><div class="meta"><div class="l1"></div><div class="l2"></div></div></div>'+
-                '<div class="fdq-card"><div class="thumb"></div><div class="meta"><div class="l1"></div><div class="l2"></div></div></div>'+
-                '<div class="fdq-card"><div class="thumb"></div><div class="meta"><div class="l1"></div><div class="l2"></div></div></div>'+
-                '<div class="fdq-card"><div class="thumb"></div><div class="meta"><div class="l1"></div><div class="l2"></div></div></div>'+
-              '</div>'+
-              '<div class="fdq-blk fdq-widget">'+
-                '<div class="wrow"><div><div class="wtemp">29&nbsp;°C</div><div class="wsky">Berlin · clear sky</div></div><div class="wsun"></div></div>'+
-                '<div class="clock"><span>23</span><span>15</span><span>30</span></div>'+
-                '<div class="days"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>'+
-              '</div>'+
-            '</div>'+
-            '<div class="fdq-blk fdq-table">'+
-              '<div class="trow thead"><span>Produkt</span><span>Preis</span><span>Wareneinsatz</span><span>Status</span></div>'+
-              '<div class="trow"><div class="cell"></div><div class="cell n"></div><div class="cell g"></div><div class="pill">aktiv</div></div>'+
-              '<div class="trow"><div class="cell"></div><div class="cell n"></div><div class="cell g"></div><div class="pill">aktiv</div></div>'+
-              '<div class="trow"><div class="cell"></div><div class="cell n"></div><div class="cell g"></div><div class="pill">aktiv</div></div>'+
-            '</div>'+
-            '<div class="fdq-blk fdq-kpi"><span class="klab">Ø Wareneinsatz</span><div class="ktrack"><div class="kfill"></div></div><span class="kval">28&nbsp;%</span></div>'+
-          '</div>'+
+      '<div class="fdqb-lead">'+
+        '<div class="fdqb-eyebrow">Interface-Bau</div>'+
+        '<h2 class="fdqb-h">Und so baust du es <span class="g">zusammen</span></h2>'+
+        '<p class="fdqb-sub">Scroll nach unten — deine echte Notion-Seite entsteht Stück für Stück, vom leeren Blatt bis zum fertigen Foodquartier.</p>'+
+      '</div>'+
+      '<section class="fdqb" id="fdqbWrap">'+
+        '<div class="fdqb-sticky">'+
+          '<div class="fdqb-frame">'+frameImgs+'</div>'+
+          '<div class="fdqb-bar"><span id="fdqbBar"></span></div>'+
+          '<div class="fdqb-dots">'+dots+'</div>'+
+          '<div class="fdqb-hint"><b>Scroll</b> — das Foodquartier baut sich auf</div>'+
         '</div>'+
-        '<p class="fdq-cap">So entsteht dein Interface: Aus einer leeren Notion-Seite wird <b>Block für Block ein Dashboard</b> — Cover, Kennzahlen, Galerien und verknüpfte Datenbanken greifen ineinander.</p>'+
       '</section>'+
       '<section class="fdq-pc"><div class="fdq-pc-grid">'+
         '<div class="fdq-pc-tile"><img alt="Food- &amp; Drinksquartier — Interface" src="'+COVER+'"></div>'+
@@ -10812,27 +10757,32 @@
     var hero=sc.querySelector(".ts-hero");
     if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
     else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
-    startAnim();
+    startBuild();
   }
 
-  function startAnim(){
-    if(window.__tsfdqAnim) return;
-    var stage=document.getElementById("fdqStage"); if(!stage) return;
-    window.__tsfdqAnim=true;
-    var blocks=[].slice.call(stage.querySelectorAll(".fdq-blk"));
-    var cursor=document.getElementById("fdqCursor");
-    var kpi=stage.querySelector(".fdq-kpi");
+  function startBuild(){
+    if(window.__tsfdqBuild) return;
+    var wrap=document.getElementById("fdqbWrap"); if(!wrap) return;
+    var imgs=[].slice.call(wrap.querySelectorAll(".fdqb-frame img"));
+    if(!imgs.length) return;
+    window.__tsfdqBuild=true;
+    var dots=[].slice.call(wrap.querySelectorAll(".fdqb-dots i"));
+    var bar=document.getElementById("fdqbBar");
+    var N=imgs.length, lastAct=-1;
     var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-    if(reduce){ blocks.forEach(function(b){b.classList.add("in")}); if(kpi)kpi.classList.add("grow"); return; }
-    var i=0;
-    function reset(){ blocks.forEach(function(b){b.classList.remove("in")}); if(kpi)kpi.classList.remove("grow"); i=0; }
-    function step(){
-      if(i>=blocks.length){ setTimeout(function(){ reset(); setTimeout(step,700); }, 2600); return; }
-      var b=blocks[i];
-      if(cursor) cursor.style.transform="translate("+(b.offsetLeft+16)+"px,"+(b.offsetTop+10)+"px)";
-      setTimeout(function(){ b.classList.add("in"); if(b===kpi&&kpi)kpi.classList.add("grow"); i++; setTimeout(step,860); }, 380);
+    if(reduce){ imgs.forEach(function(im,i){ im.style.opacity=(i===N-1)?1:0; }); if(bar)bar.style.width="100%"; return; }
+    function frame(){
+      var total=wrap.offsetHeight-window.innerHeight;
+      var r=wrap.getBoundingClientRect();
+      var p=total>0?(-r.top/total):0; if(p<0)p=0; if(p>1)p=1;
+      var ff=p*(N-1);
+      for(var i=0;i<N;i++){ var o=1-Math.abs(ff-i); imgs[i].style.opacity=o<0?0:(o>1?1:o); }
+      var act=Math.round(ff);
+      if(act!==lastAct){ for(var j=0;j<dots.length;j++){ dots[j].className=(j===act)?"on":""; } lastAct=act; }
+      if(bar) bar.style.width=(p*100).toFixed(1)+"%";
+      requestAnimationFrame(frame);
     }
-    setTimeout(step,650);
+    requestAnimationFrame(frame);
   }
 
   function mount(){
