@@ -3122,7 +3122,7 @@
    ============================================================ */
 (function(){
   if(window.__tsalgpc) return; window.__tsalgpc=true;
-  var POSTER="https://files.catbox.moe/z0dt0j.png";
+  var POSTER="https://files.catbox.moe/8xy3px.png";
   (function(){ var p=new Image(); p.src=POSTER; })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
@@ -3220,7 +3220,7 @@
    ============================================================ */
 (function(){
   if(window.__tsalgpc2) return; window.__tsalgpc2=true;
-  var POSTER="https://files.catbox.moe/8xy3px.png";
+  var POSTER="https://files.catbox.moe/z0dt0j.png";
   (function(){ var p=new Image(); p.src=POSTER; })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
@@ -3229,7 +3229,7 @@
   #tsalgpc2{width:100%;margin:26px 0 60px;font-family:${SANS};color:#fff}
   #tsalgpc2 *{box-sizing:border-box}
   #tsalgpc2 .apc2-inner{width:min(1180px,94vw);margin:0 auto}
-  #tsalgpc2 .apc2-grid{display:grid;grid-template-columns:0.82fr 1.18fr;gap:44px;align-items:center}
+  #tsalgpc2 .apc2-grid{display:grid;grid-template-columns:1.42fr 1fr;gap:44px;align-items:center}
   #tsalgpc2 .apc2-tile{position:relative;display:block;width:100%;line-height:0;cursor:pointer;background:transparent;border:0;padding:0}
   #tsalgpc2 .apc2-tile img{width:100%;height:auto;display:block;transition:transform .5s ease;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
   #tsalgpc2 .apc2-tile:hover img{transform:scale(1.02)}
