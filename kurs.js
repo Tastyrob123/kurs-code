@@ -9648,18 +9648,21 @@
   var PATH=/\/gemeinkosten-mitarbeiterlhne\/?$/;
   var GK_IMG='https://tastyrob123.github.io/kurs/img/gemeinkosten/';
   var MA_IMG='https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/';
+  /* op/cap = Operator-Symbol + Mini-Erklaerung fuer die Verbindung VOR diesem Knoten
+     (Robert-Feedback 17.07.2026: "striche zu symbolen die erklaeren was wie zusammenhaengt").
+     Liest sich als Gleichung: Gemeinkosten Σ/Monat → ÷ je Stueck → GK pro Produkt → − von DB I → DB II. */
   var GK_CHAIN=[
     {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
-    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg'},
-    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg'},
-    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg', result:true}
+    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'je Monat'},
+    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'je Stück'},
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'−', cap:'von DB I', result:true}
   ];
   var PK_CHAIN=[
     {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
-    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg'},
-    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg'},
-    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg'},
-    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg', result:true}
+    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'je Stunde'},
+    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zeit'},
+    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt'},
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'−', cap:'von DB II', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -9672,24 +9675,27 @@
   #tsgkflow .row:last-child{margin-bottom:0}
   #tsgkflow .row+.row{padding-top:44px;position:relative}
   #tsgkflow .row+.row::before{content:"";position:absolute;top:0;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent)}
-  #tsgkflow .row-lbl{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c7b489;margin-bottom:24px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+  #tsgkflow .row-lbl{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.3rem,2.1vw,1.7rem);font-weight:600;letter-spacing:-.01em;color:#fff;text-align:center;margin-bottom:30px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
   #tsgkflow.in .row-lbl{opacity:1;transform:none}
   #tsgkflow .chain{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:0}
   #tsgkflow .node{display:flex;flex-direction:column;align-items:center;width:118px;opacity:0;filter:blur(6px);transform:translateY(16px) scale(.94);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 180ms)}
   #tsgkflow.in .node{opacity:1;filter:blur(0);transform:none}
   #tsgkflow .node-med{position:relative;width:78px;height:78px;border-radius:50%;overflow:hidden;box-shadow:0 10px 26px -10px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08),0 0 0 4px rgba(var(--g),.14)}
-  #tsgkflow .node.result .node-med{width:92px;height:92px;box-shadow:0 12px 32px -10px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.1),0 0 0 5px rgba(var(--g),.32),0 0 30px rgba(var(--g),.22)}
   #tsgkflow .node-med img{width:100%;height:100%;object-fit:cover;display:block}
   #tsgkflow .node-lbl{margin-top:12px;font-size:.78rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.62);max-width:118px}
-  #tsgkflow .node.result .node-lbl{color:#efe6d2}
-  #tsgkflow .link{display:flex;align-items:center;width:clamp(30px,4.2vw,58px);height:78px;flex:0 0 auto;position:relative;top:0}
-  #tsgkflow .link-line{position:relative;width:100%;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(var(--g),.05),rgba(var(--g),.4),rgba(var(--g),.05));overflow:hidden;opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
-  #tsgkflow.in .link-line{opacity:1;transform:scaleX(1)}
-  #tsgkflow .link-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:translateX(-120%);opacity:0}
-  #tsgkflow.in .link-line::after{animation:tsgkflow-sheen 1.4s ease .1s 1 forwards;animation-delay:calc(var(--i) * 180ms + 400ms)}
-  @keyframes tsgkflow-sheen{0%{transform:translateX(-120%);opacity:0}15%{opacity:1}100%{transform:translateX(120%);opacity:0}}
-  @media(max-width:760px){#tsgkflow .chain{gap:14px 8px}#tsgkflow .link{width:0;height:0;flex:0 0 100%}#tsgkflow .link-line{display:none}#tsgkflow .node{width:96px}#tsgkflow .node-med{width:66px;height:66px}#tsgkflow .node.result .node-med{width:78px;height:78px}#tsgkflow .hd{font-size:1.4rem}}
-  @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-line,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none;animation:none}#tsgkflow .link-line::after{display:none}}
+  /* Ergebnis-Knoten (Deckungsbeitrag II/III) deutlich groesser + staerker leuchtend (Robert 17.07.2026) */
+  #tsgkflow .node.result{width:170px}
+  #tsgkflow .node.result .node-med{width:150px;height:150px;box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4);animation:tsgkflow-glow 3.4s ease-in-out infinite}
+  #tsgkflow .node.result .node-lbl{margin-top:18px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.12rem;font-weight:600;letter-spacing:-.01em;color:#efe6d2;max-width:170px}
+  @keyframes tsgkflow-glow{0%,100%{box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4)}50%{box-shadow:0 20px 52px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.14),0 0 0 6px rgba(var(--g),.7),0 0 62px rgba(var(--g),.6)}}
+  /* Verbindung = Operator-Symbol-Chip + Mini-Caption statt reiner Strich */
+  #tsgkflow .link{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:clamp(56px,5.5vw,84px);flex:0 0 auto;position:relative;padding-top:24px}
+  #tsgkflow .link-op{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;line-height:1;color:#efe6d2;background:radial-gradient(circle at 50% 35%,rgba(var(--g),.28),rgba(var(--g),.08));border:1px solid rgba(var(--g),.55);box-shadow:0 6px 18px -8px rgba(0,0,0,.7),0 0 16px rgba(var(--g),.22);opacity:0;transform:scale(.5);transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow.in .link-op{opacity:1;transform:none}
+  #tsgkflow .link-cap{margin-top:9px;font-size:.62rem;font-weight:500;letter-spacing:.02em;line-height:1.2;color:rgba(255,255,255,.42);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i) * 180ms + 130ms)}
+  #tsgkflow.in .link-cap{opacity:1;transform:none}
+  @media(max-width:760px){#tsgkflow .chain{gap:16px 8px}#tsgkflow .link{width:100%;flex:0 0 100%;padding-top:0;flex-direction:row;gap:10px}#tsgkflow .link-cap{margin-top:0}#tsgkflow .node{width:120px}#tsgkflow .node-med{width:72px;height:72px}#tsgkflow .node.result{width:150px}#tsgkflow .node.result .node-med{width:120px;height:120px}#tsgkflow .hd{font-size:1.4rem}}
+  @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-op,#tsgkflow .link-cap,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none}#tsgkflow .node.result .node-med{animation:none}}
   `;
   function on(){ return PATH.test(location.pathname); }
   function injectCSS(){ if(document.getElementById('tsgkflow-css'))return; var s=document.createElement('style'); s.id='tsgkflow-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -9702,7 +9708,11 @@
   function chain(items, startIdx){
     var out='', i=startIdx;
     items.forEach(function(it, idx){
-      if(idx>0){ out+='<div class="link" style="--i:'+i+'"><span class="link-line"></span></div>'; i++; }
+      if(idx>0){
+        out+='<div class="link" style="--i:'+i+'"><span class="link-op">'+(it.op||'→')+'</span>'
+          +(it.cap?'<span class="link-cap">'+it.cap+'</span>':'')+'</div>';
+        i++;
+      }
       out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
         +'<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
         +'<div class="node-lbl">'+it.t+'</div></div>';
