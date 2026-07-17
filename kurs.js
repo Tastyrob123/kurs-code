@@ -2593,7 +2593,7 @@
   #tsalg .tsalg-lead{max-width:820px;margin:0 auto 30px;text-align:center}
   #tsalg .tsalg-lead p{margin:0 0 14px;font-size:1.05rem;line-height:1.65;color:#e6e6e6}
   #tsalg .tsalg-lead p:last-child{margin-bottom:0}
-  #tsalg .tsalg-title{margin:0 0 6px;text-align:center;font-family:"Lineal TS",inherit;font-weight:600;
+  #tsalg .tsalg-title{margin:0 0 6px;text-align:center;font-family:"Lineal TS", var(--font-sans, -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif);font-weight:600;
     letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.7rem,3.6vw,2.15rem)}
   #tsalg .tsalg-title .g{color:#c7b489}
   #tsalg .tsalg-sub{margin:0 auto 26px;text-align:center;color:rgba(255,255,255,.5);font-size:14px;letter-spacing:.02em}
@@ -2612,7 +2612,7 @@
     box-shadow:0 22px 50px -32px rgba(0,0,0,.9);opacity:0;transition:opacity .5s ease}
   #tsalg .tsalg-card.lit{border-color:rgba(${GOLD},.42);box-shadow:0 0 0 1px rgba(${GOLD},.18),0 22px 50px -30px rgba(0,0,0,.9),0 0 34px -8px rgba(${GOLD},.4)}
   #tsalg .tc-type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 7px}
-  #tsalg .tc-name{font-family:"Lineal TS",inherit;font-weight:600;font-size:1.06rem;line-height:1.15;margin:0 0 12px;color:#fff}
+  #tsalg .tc-name{font-family:"Lineal TS", var(--font-sans, -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif);font-weight:600;font-size:1.06rem;line-height:1.15;margin:0 0 12px;color:#fff}
   #tsalg .tc-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 10px 5px 8px;border-radius:999px;
     background:rgba(${GOLD},.12);border:1px solid rgba(${GOLD},.4);color:#ece1c7;font-size:12.5px;font-weight:600;
     opacity:0;transform:translateY(6px) scale(.9);transition:opacity .45s ease,transform .45s cubic-bezier(.16,1,.3,1)}
