@@ -3191,6 +3191,102 @@
 /* ---- */
 
 /* ============================================================
+   allergene-bersicht — Text-links / Laptop-rechts (50/50-Split, gespiegelt)
+   Gegenstück zu #tsalgpc: Text links, MacBook rechts (PC 1 Cover),
+   Play-Button -> Lightbox. Maße = #tsalgpc (Container 1180, PC ~670,
+   Lineal TS 30px, Text 16px/24px). Mountet nach dem Warenkorb
+   (#tsalgcart) bzw. nach #tsalgpc. Kein neuer Font/keine neue Farbe.
+   ============================================================ */
+(function(){
+  if(window.__tsalgpc2) return; window.__tsalgpc2=true;
+  var POSTER="https://files.catbox.moe/8xy3px.png";
+  (function(){ var p=new Image(); p.src=POSTER; })();
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+
+  var CSS = `
+  #tsalgpc2{width:100%;margin:26px 0 60px;font-family:${SANS};color:#fff}
+  #tsalgpc2 *{box-sizing:border-box}
+  #tsalgpc2 .apc2-inner{width:min(1180px,94vw);margin:0 auto}
+  #tsalgpc2 .apc2-grid{display:grid;grid-template-columns:0.82fr 1.18fr;gap:44px;align-items:center}
+  #tsalgpc2 .apc2-tile{position:relative;display:block;width:100%;line-height:0;cursor:pointer;background:transparent;border:0;padding:0}
+  #tsalgpc2 .apc2-tile img{width:100%;height:auto;display:block;transition:transform .5s ease;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
+  #tsalgpc2 .apc2-tile:hover img{transform:scale(1.02)}
+  #tsalgpc2 .apc2-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  #tsalgpc2 .apc2-play span{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
+  #tsalgpc2 .apc2-play span::after{content:"";border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:5px}
+  #tsalgpc2 .apc2-tile:hover .apc2-play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
+  #tsalgpc2 .apc2-h{margin:0 0 20px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:30px;line-height:1.12;letter-spacing:-.01em;color:#fff}
+  #tsalgpc2 .apc2-h .g{color:#c7b489}
+  #tsalgpc2 .apc2-txt p{margin:0 0 16px;font-size:16px;line-height:24px;color:#e1e1e1}
+  #tsalgpc2 .apc2-txt p:last-child{margin-bottom:0}
+
+  #tsalgpc2-lb{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,6,11,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:4vw;opacity:0;transition:opacity .35s ease}
+  #tsalgpc2-lb.open{display:flex;opacity:1}
+  #tsalgpc2-lb .apc2-stage{transform:scale(.94);transition:transform .4s cubic-bezier(.2,.7,.2,1);width:min(92vw,1180px)}
+  #tsalgpc2-lb.open .apc2-stage{transform:scale(1)}
+  #tsalgpc2-lb img{width:100%;height:auto;display:block;border-radius:8px}
+  #tsalgpc2-lb .apc2-x{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+  @media (max-width:820px){
+    #tsalgpc2 .apc2-grid{grid-template-columns:1fr;gap:26px}
+    #tsalgpc2 .apc2-tile{order:-1}
+    #tsalgpc2 .apc2-h{font-size:26px}
+  }`;
+
+  function build(){
+    var sec=document.createElement('section');
+    sec.id='tsalgpc2';
+    sec.innerHTML =
+      '<div class="apc2-inner"><div class="apc2-grid">'+
+        '<div class="apc2-txt">'+
+          '<h2 class="apc2-h">Jedes Allergen auf <span class="g">einen Blick</span></h2>'+
+          '<p>Das Allergen lebt in der Zutat. Öffnest du in der Datenbank ein Allergen, siehst du in der Galerieansicht jede Zutat, die es trägt, mit Bild und Namen.</p>'+
+          '<p>Von dort ziehst du die Spur weiter: Alle Rezepte und Gerichte, in denen diese Zutaten stecken, erscheinen gefiltert im selben Fenster. Eine Seite zeigt die volle Reichweite eines Allergens.</p>'+
+          '<p>Kommt die Frage vom Gast oder die Kontrolle vom Amt, öffnest du das Allergen und hast sofort alles Betroffene vor dir, statt Karten und Rezepte einzeln durchzugehen.</p>'+
+        '</div>'+
+        '<button type="button" class="apc2-tile" aria-label="Vorschau öffnen">'+
+          '<img src="'+POSTER+'" alt="Allergene &amp; Packaging — Lektion 2.6" loading="eager">'+
+          '<span class="apc2-play"><span></span></span>'+
+        '</button>'+
+      '</div></div>';
+    return sec;
+  }
+
+  function ensureLb(){
+    var lb=document.getElementById('tsalgpc2-lb');
+    if(lb) return lb;
+    lb=document.createElement('div'); lb.id='tsalgpc2-lb';
+    lb.innerHTML='<button class="apc2-x" aria-label="Schließen">&times;</button><div class="apc2-stage"><img src="'+POSTER+'" alt="Allergene &amp; Packaging"></div>';
+    function close(){ lb.classList.remove('open'); }
+    lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('apc2-x')) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+    document.body.appendChild(lb);
+    return lb;
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    if(document.getElementById('tsalgpc2')) return;
+    if(!document.getElementById('tsalgpc2-css')){ var st=document.createElement('style'); st.id='tsalgpc2-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    var anchor=document.getElementById('tsalgcart') || document.getElementById('tsalgpc');
+    if(anchor && anchor.nextSibling){ anchor.parentNode.insertBefore(sec, anchor.nextSibling); }
+    else if(anchor){ anchor.parentNode.appendChild(sec); }
+    else { var nr=sc.querySelector('.notion-root'); if(nr) nr.parentNode.insertBefore(sec, nr); else sc.appendChild(sec); }
+    var tile=sec.querySelector('.apc2-tile');
+    if(tile) tile.addEventListener('click', function(){ ensureLb().classList.add('open'); });
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    gemeinkosten-mitarbeiterlhne — "Was sind Gemeinkosten?"
    Animiertes Kostenblock-Grid (#tsgk) ersetzt die 8er-Bullet-
    liste (Muster: #tslink/inventurliste — Glaskarten, Champagner-
