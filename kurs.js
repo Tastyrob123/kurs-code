@@ -2734,8 +2734,8 @@
   var CSS = `
   #tsalgpc{width:100%;margin:26px 0 60px;font-family:${SANS};color:#fff}
   #tsalgpc *{box-sizing:border-box}
-  #tsalgpc .apc-inner{width:min(1088px,92vw);margin:0 auto}
-  #tsalgpc .apc-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+  #tsalgpc .apc-inner{width:min(1180px,94vw);margin:0 auto}
+  #tsalgpc .apc-grid{display:grid;grid-template-columns:1.18fr 0.82fr;gap:44px;align-items:center}
   #tsalgpc .apc-tile{position:relative;display:block;width:100%;line-height:0;cursor:pointer;background:transparent;border:0;padding:0}
   #tsalgpc .apc-tile img{width:100%;height:auto;display:block;transition:transform .5s ease;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
   #tsalgpc .apc-tile:hover img{transform:scale(1.02)}
