@@ -3533,7 +3533,10 @@
   #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:10px;scrollbar-width:thin}
   #tsac-detail .tsacd-content::-webkit-scrollbar{width:7px}
   #tsac-detail .tsacd-content::-webkit-scrollbar-thumb{background:rgba(${GOLD},.22);border-radius:99px}
-  #tsac-detail .tsacd-block{margin:0 0 22px}
+  #tsac-detail .tsacd-eig{margin:0 0 18px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.72)}
+  #tsac-detail .tsacd-eig .ar{color:#c7b489;margin-right:7px}
+  #tsac-detail .tsacd-eig b{color:#fff;font-weight:600}
+  #tsac-detail .tsacd-block{margin:0 0 18px}
   #tsac-detail .tsacd-block > div{margin:0 0 7px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.72)}
   #tsac-detail .tsacd-block > div:last-child{margin-bottom:0}
   #tsac-detail .tsacd-block .ar{color:#c7b489;margin-right:7px}
@@ -3594,8 +3597,8 @@
     if(document.getElementById('tsac-detail')) return;
     var it=ITEMS[idx];
     var card=root.querySelector('.tsac-card[data-i="'+idx+'"]');
-    var rows=FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-block">'+
-      '<div><span class="ar">→</span> <b>Eigenschaft:</b> Text</div>'+
+    var rows='<div class="tsacd-eig"><span class="ar">→</span> <b>Eigenschaft:</b> Text</div>'+
+    FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-block">'+
       '<div><span class="ar">→</span> <b>Name der Spalte:</b> '+esc(f[1])+'</div>'+
       '<div><span class="ar">→</span> <b>Du trägst hier ein:</b> '+esc(val)+'</div>'+
     '</div>'; }).join('');
