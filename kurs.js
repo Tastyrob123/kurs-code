@@ -2886,11 +2886,16 @@
   #tsalg .tsalg-stage{display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;max-width:1000px;margin:0 auto}
   #tsalg .tsalg-card{flex:1 1 0;min-width:0;max-width:250px;
     background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:15px 15px 16px;
+    border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:0;overflow:hidden;
     box-shadow:0 22px 50px -32px rgba(0,0,0,.9);opacity:0;transform:translateY(12px);
     transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1),border-color .4s ease,box-shadow .5s ease}
   #tsalg .tsalg-card.in{opacity:1;transform:none}
   #tsalg .tsalg-card.lit{border-color:rgba(${GOLD},.42);box-shadow:0 0 0 1px rgba(${GOLD},.18),0 22px 50px -30px rgba(0,0,0,.9),0 0 34px -8px rgba(${GOLD},.4)}
+  #tsalg .tc-img{width:100%;aspect-ratio:16/10;background:#000;overflow:hidden;position:relative}
+  #tsalg .tc-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,5,10,0) 55%,rgba(6,7,13,.85) 100%)}
+  #tsalg .tc-img img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsalg .tsalg-card.lit .tc-img img{transform:scale(1)}
+  #tsalg .tc-body{padding:14px 15px 16px}
   #tsalg .tc-type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 7px}
   #tsalg .tc-name{font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.06rem;line-height:1.15;margin:0 0 12px;color:#fff}
   #tsalg .tc-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 10px 5px 8px;border-radius:999px;
@@ -2938,6 +2943,19 @@
   }
   function conn(){ return '<div class="tsalg-conn"><span class="ln"></span><span class="hd"></span></div>'; }
 
+  var IMG={
+    mehl:"https://files.catbox.moe/rdk2ux.png",
+    teig:"https://files.catbox.moe/wn29tf.png",
+    pizza:"https://files.catbox.moe/0uk9xg.png"
+  };
+  (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
+  function card(n, img, alt, type, name, tag, tagCls){
+    return '<div class="tsalg-card" data-n="'+n+'">'+
+      '<div class="tc-img"><img src="'+img+'" alt="'+alt+'" loading="eager"></div>'+
+      '<div class="tc-body"><p class="tc-type">'+type+'</p><p class="tc-name">'+name+'</p>'+badge(tag,tagCls)+'</div>'+
+    '</div>';
+  }
+
   function build(){
     var sec=document.createElement('section');
     sec.id='tsalg';
@@ -2948,11 +2966,11 @@
           '<p>Zwei Datenbanken drehen das um. Ein Allergen pflegst du einmal an der Zutat, die Verpackung einmal am Gericht. Von dort erbt sich beides automatisch dorthin, wo es gebraucht wird. Du pflegst die Quelle, Kennzeichnung und Verpackungsangaben schreiben sich selbst.</p>'+
         '</div>'+
         '<div class="tsalg-stage">'+
-          '<div class="tsalg-card" data-n="a"><p class="tc-type">Zutat</p><p class="tc-name">Weizenmehl</p>'+badge('einmal gepflegt','src')+'</div>'+
+          card('a', IMG.mehl, 'Weizenmehl', 'Zutat', 'Weizenmehl', 'einmal gepflegt', 'src')+
           conn()+
-          '<div class="tsalg-card" data-n="b"><p class="tc-type">Rezept</p><p class="tc-name">Pizzateig</p>'+badge('automatisch')+'</div>'+
+          card('b', IMG.teig, 'Pizzateig', 'Rezept', 'Pizzateig', 'automatisch')+
           conn()+
-          '<div class="tsalg-card" data-n="c"><p class="tc-type">Gericht</p><p class="tc-name">Pizza Margherita</p>'+badge('automatisch')+'</div>'+
+          card('c', IMG.pizza, 'Pizza Margherita', 'Gericht', 'Pizza Margherita', 'automatisch')+
         '</div>'+
         '<p class="tsalg-cap">Ein Eintrag an der Quelle, <b>überall korrekt gekennzeichnet</b>.</p>'+
       '</div>';
