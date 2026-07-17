@@ -586,6 +586,41 @@
     background:#c7b489;
   }
   .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  #tsbau{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:8px auto 20px;text-align:left}
+  .tsbau-card{background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 60%);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:18px 16px 16px;opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .65s cubic-bezier(.22,1,.36,1)}
+  .tsbau-card.on{opacity:1;transform:none}
+  .tsbau-vis{height:68px;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:14px}
+  .tsbau-t{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.8);margin:0}
+  .tsbau-t b{color:#c7b489;font-weight:600}
+  .tsbau-chip{font-size:11px;font-weight:600;padding:6px 11px;border-radius:999px;background:rgba(199,180,137,.14);border:1px solid rgba(199,180,137,.4);color:#efe6d2;white-space:nowrap}
+  .tsbau-swap{margin:0 10px;color:#c7b489;flex:none}
+  .tsbau-card.on .tsbau-chip--b{animation:tsbauFade 2.6s ease-in-out infinite}
+  .tsbau-card.on .tsbau-chip--a{animation:tsbauFadeOut 2.6s ease-in-out infinite}
+  @keyframes tsbauFade{0%,40%{opacity:.25;transform:scale(.94)}55%,90%{opacity:1;transform:scale(1)}100%{opacity:.25;transform:scale(.94)}}
+  @keyframes tsbauFadeOut{0%,40%{opacity:1;transform:scale(1)}55%,90%{opacity:.25;transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
+  .tsbau-card.on .tsbau-swap svg{animation:tsbauSpin 2.6s ease-in-out infinite}
+  @keyframes tsbauSpin{0%,40%{transform:rotate(0)}50%{transform:rotate(180deg)}90%,100%{transform:rotate(180deg)}}
+  .tsbau-fan{display:flex;flex-direction:column;gap:4px;margin-left:12px}
+  .tsbau-mini{font-size:9.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.75);opacity:0;transform:translateX(-6px)}
+  .tsbau-card.on .tsbau-mini{animation:tsbauPop .5s cubic-bezier(.22,1,.36,1) both}
+  .tsbau-card.on .m1{animation-delay:.15s}
+  .tsbau-card.on .m2{animation-delay:.35s}
+  .tsbau-card.on .m3{animation-delay:.55s}
+  @keyframes tsbauPop{to{opacity:1;transform:none}}
+  .tsbau-nest{display:flex;align-items:flex-start;justify-content:center;font-size:9.5px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.55);text-transform:uppercase;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);padding:8px;opacity:0;transform:scale(.85)}
+  .tsbau-card.on .tsbau-nest{animation:tsbauNest .55s cubic-bezier(.22,1,.36,1) both}
+  .n1{width:100%;height:68px}
+  .n2{margin-top:14px;margin-left:6px;color:#c7b489;border-color:rgba(199,180,137,.35);background:rgba(199,180,137,.06)}
+  .n3{margin-top:12px;margin-left:6px;color:#efe6d2;border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.12)}
+  .tsbau-card.on .n2{animation-delay:.18s}
+  .tsbau-card.on .n3{animation-delay:.36s}
+  @keyframes tsbauNest{to{opacity:1;transform:none}}
+  @media(max-width:640px){#tsbau{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){
+    .tsbau-card{opacity:1;transform:none;transition:none}
+    .tsbau-card.on .tsbau-chip--a,.tsbau-card.on .tsbau-chip--b,.tsbau-card.on .tsbau-swap svg{animation:none}
+    .tsbau-card.on .tsbau-mini,.tsbau-card.on .tsbau-nest{animation:none;opacity:1;transform:none}
+  }
 #tsarc{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsarc .arc-inner{max-width:1180px;margin:0 auto;text-align:center}
   #tsarc .arc-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
@@ -601,35 +636,40 @@
 
   #tsarc .arc-tile{
     position:relative;border-radius:16px;overflow:hidden;z-index:2;
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.16);
     box-shadow:0 18px 40px -26px rgba(0,0,0,.9);
     min-height:104px;
-    background:linear-gradient(155deg,var(--tc1),var(--tc2) 70%);
+    background-size:cover;background-position:center;
     opacity:0;transform:scale(.92);
     transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1),border-color .35s ease,box-shadow .35s ease;
   }
+  #tsarc .arc-tile::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(5,6,11,.42) 0%,rgba(5,6,11,.62) 55%,rgba(5,6,11,.82) 100%);
+  }
   #tsarc .arc-tile.in{opacity:1;transform:scale(1)}
-  #tsarc .arc-tile-1{--tc1:rgba(95,120,174,.30);--tc2:rgba(95,120,174,.05)}
-  #tsarc .arc-tile-2{--tc1:rgba(163,120,199,.30);--tc2:rgba(163,120,199,.05)}
-  #tsarc .arc-tile-3{--tc1:rgba(199,150,110,.30);--tc2:rgba(199,150,110,.05)}
-  #tsarc .arc-tile-4{--tc1:rgba(110,164,150,.30);--tc2:rgba(110,164,150,.05)}
+  #tsarc .arc-tile-1{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg)}
+  #tsarc .arc-tile-2{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg)}
+  #tsarc .arc-tile-3{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg)}
+  #tsarc .arc-tile-4{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg)}
   #tsarc .arc-tile-1,#tsarc .arc-tile-2,#tsarc .arc-tile-3,#tsarc .arc-tile-4{min-height:118px}
   #tsarc .arc-tile-1{grid-column:1;grid-row:1}
   #tsarc .arc-tile-2{grid-column:1;grid-row:2}
   #tsarc .arc-tile-3{grid-column:3;grid-row:1}
   #tsarc .arc-tile-4{grid-column:3;grid-row:2}
-  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:280px;--tc1:rgba(199,180,137,.22);--tc2:rgba(199,180,137,.04)}
+  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:280px;background-image:linear-gradient(180deg,rgba(5,6,11,.2),rgba(5,6,11,.68)),url(https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg)}
 
-  #tsarc .arc-icon{font-size:1.5rem;line-height:1;margin-bottom:8px;opacity:.9}
-  #tsarc .arc-tile-body{position:relative;z-index:2;padding:18px 18px 16px;text-align:left;height:100%;display:flex;flex-direction:column;justify-content:center}
-  #tsarc .arc-tile-final .arc-tile-body{text-align:center;padding:20px;align-items:center}
-  #tsarc .arc-label{font-size:.86rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px}
-  #tsarc .arc-tile-final .arc-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-  #tsarc .arc-val{font-size:1.14rem;font-weight:700;color:#d8c9ab;font-variant-numeric:tabular-nums;margin-bottom:5px}
-  #tsarc .arc-tile-final .arc-val{font-size:clamp(1.8rem,3vw,2.5rem);color:#efe6d2;margin-top:6px;order:2}
-  #tsarc .arc-desc{font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.62)}
-  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.76rem;color:rgba(255,255,255,.55)}
-  #tsarc .arc-tile-final .arc-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:6px;order:3}
+  #tsarc .arc-logo{position:relative;z-index:2;width:20px;height:auto;margin:0 auto 9px;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.85))}
+  #tsarc .arc-tile-final .arc-logo{width:26px;margin-bottom:11px}
+  #tsarc .arc-tile-body{position:relative;z-index:2;padding:18px 16px 16px;text-align:center;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  #tsarc .arc-tile-final .arc-tile-body{padding:20px}
+  #tsarc .arc-label{position:relative;z-index:2;font-size:.86rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#e8dcc0}
+  #tsarc .arc-val{position:relative;z-index:2;font-size:1.14rem;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-val{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff;margin-top:6px;order:2}
+  #tsarc .arc-desc{position:relative;z-index:2;font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.95),0 1px 2px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.76rem;color:rgba(255,255,255,.8)}
+  #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-size:.72rem;color:rgba(255,255,255,.65);margin-top:6px;order:3;text-shadow:0 1px 6px rgba(0,0,0,.9)}
 
   #tsarc .arc-tile.pulse{animation:tsarc-pulse 900ms cubic-bezier(.4,0,.3,1)}
   #tsarc .arc-tile.charging{animation:tsarc-charge 700ms ease-in-out}
@@ -717,34 +757,62 @@
 
   <h3>Warum wir es genau so machen</h3>
   <p>Der Sinn dahinter ist Flexibilität. Weil jede Zutat ein eigenständiger Baustein mit eigenem Preis ist, können wir:</p>
-  <ul>
-    <li><b>Zutaten leicht austauschen.</b> Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt.</li>
-    <li><b>Bausteine mehrfach verwenden.</b> Eine einmal angelegte Sauce wandert in beliebig viele Rezepte. Du baust sie einmal, nutzt sie überall.</li>
-    <li><b>Bausteine schachteln.</b> Eine Sauce kann selbst Teil eines Gerichts sein und gleichzeitig aus eigenen Zutaten-Bausteinen bestehen.</li>
-  </ul>
+  <div id="tsbau">
+    <div class="tsbau-card" id="tsbauA">
+      <div class="tsbau-vis">
+        <div class="tsbau-chip tsbau-chip--a">Tomaten</div>
+        <div class="tsbau-swap">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg>
+        </div>
+        <div class="tsbau-chip tsbau-chip--b">Kürbis</div>
+      </div>
+      <p class="tsbau-t"><b>Zutaten leicht austauschen.</b> Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt.</p>
+    </div>
+    <div class="tsbau-card" id="tsbauB">
+      <div class="tsbau-vis">
+        <div class="tsbau-chip tsbau-chip--src">Pesto</div>
+        <div class="tsbau-fan">
+          <div class="tsbau-mini m1">Gericht 1</div>
+          <div class="tsbau-mini m2">Gericht 2</div>
+          <div class="tsbau-mini m3">Gericht 3</div>
+        </div>
+      </div>
+      <p class="tsbau-t"><b>Bausteine mehrfach verwenden.</b> Eine einmal angelegte Sauce wandert in beliebig viele Rezepte. Du baust sie einmal, nutzt sie überall.</p>
+    </div>
+    <div class="tsbau-card" id="tsbauC">
+      <div class="tsbau-vis">
+        <div class="tsbau-nest n1">Gericht
+          <div class="tsbau-nest n2">Sauce
+            <div class="tsbau-nest n3">Zutat</div>
+          </div>
+        </div>
+      </div>
+      <p class="tsbau-t"><b>Bausteine schachteln.</b> Eine Sauce kann selbst Teil eines Gerichts sein und gleichzeitig aus eigenen Zutaten-Bausteinen bestehen.</p>
+    </div>
+  </div>
   <p>Das ist das Bausteinprinzip: Wir bauen einmal sauber von unten auf — vom Lieferschein über die Grundeinheit zur portionierten Zutat — und können oben dann frei und schnell kombinieren. Ändert sich unten ein Preis, zieht er sich automatisch durch alle Gerichte, die diesen Baustein nutzen.</p>
   <p><b>Kurz gesagt:</b> Die Formeln sind das Fundament. Sie verwandeln chaotische Lieferanten-Angaben in saubere Grundpreise. Auf diesem Fundament bauen wir einen Zutatenpool aus austauschbaren Bausteinen — und aus diesen Bausteinen lassen sich Gerichte schnell, flexibel und mit immer korrekter Kalkulation zusammensetzen.</p>
 </div>
 <div id="tsarc">
   <div class="arc-inner">
     <div class="arc-eyebrow">Vier Bausteine · ein Gericht</div>
-    <h3 class="arc-title">Wie sich dein Gericht <span>auflädt.</span></h3>
+    <h3 class="arc-title">Alles läuft in deinem <span>Gericht zusammen.</span></h3>
     <div class="arc-stage" id="arcStage">
       <svg class="arc-lines" id="arcLines"></svg>
       <div class="arc-tile arc-tile-1" id="arcT1">
-        <div class="arc-tile-body"><div class="arc-icon">🥕</div><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div><div class="arc-desc">Direkt eingekaufte Produkte aus DB IV.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div><div class="arc-desc">Direkt eingekaufte Produkte aus DB IV.</div></div>
       </div>
       <div class="arc-tile arc-tile-2" id="arcT2">
-        <div class="arc-tile-body"><div class="arc-icon">🥣</div><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div><div class="arc-desc">Selbst hergestellte Saucen & Sirupe aus DB V.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div><div class="arc-desc">Selbst hergestellte Saucen & Sirupe aus DB V.</div></div>
       </div>
       <div class="arc-tile arc-tile-final" id="arcFinal">
-        <div class="arc-tile-body"><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal">— €</div><div class="arc-sub">Kosten pro Portion</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal">— €</div><div class="arc-sub">Kosten pro Portion</div></div>
       </div>
       <div class="arc-tile arc-tile-3" id="arcT3">
-        <div class="arc-tile-body"><div class="arc-icon">👤</div><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div><div class="arc-desc">Zubereitungszeit × Stundensatz aus DB VII.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div><div class="arc-desc">Zubereitungszeit × Stundensatz aus DB VII.</div></div>
       </div>
       <div class="arc-tile arc-tile-4" id="arcT4">
-        <div class="arc-tile-body"><div class="arc-icon">🏢</div><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div><div class="arc-desc">Anteiliger Fixkosten-Betrag aus DB VI.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div><div class="arc-desc">Anteiliger Fixkosten-Betrag aus DB VI.</div></div>
       </div>
     </div>
     <p class="arc-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laden sich einmal nacheinander auf — dann fließen alle vier gemeinsam in dein Gericht. Alle Zahlen sind Beispielwerte.</p>
