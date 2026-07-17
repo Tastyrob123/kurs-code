@@ -8501,11 +8501,6 @@
 #ts11page .dbpc__mac{position:relative;cursor:pointer;display:block;line-height:0}
 #ts11page .dbpc__mac img{width:100%;height:auto;display:block;transition:transform .5s ease}
 #ts11page .dbpc__mac:hover img{transform:scale(1.02)}
-#ts11page .dbpc__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-#ts11page .dbpc__play span{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
-#ts11page .dbpc__mac:hover .dbpc__play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
-#ts11page .dbpc__play span::after{content:"";border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff;margin-left:4px}
 #ts11page .dbpc__cap{text-align:center;margin:16px 0 0;line-height:1.5}
 #ts11page .dbpc__cap .t{font-size:14px;color:#fff;font-weight:500}
 #ts11page .dbpc__cap .t b{color:var(--gold);font-weight:600}
@@ -8751,7 +8746,7 @@
       <p>Aus der Verknüpfung zur Gerichte-Datenbank zieht sich der Wareneinsatz pro Position von allein, und die Summe steht sofort. Ändert sich eine Zutat, läuft die Änderung bis hierher durch, ohne dass du eine Zahl anfasst.</p>
           <p>Dazu listet dir jede Position die benötigten Mengen pro Zutat auf. Du siehst also nicht nur, was das Menü kostet, sondern auch, was du dafür einkaufen und produzieren musst. Die halbe Einkaufsliste schreibt sich mit.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w1.webp" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w1.webp" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp"></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8765,7 +8760,7 @@
       <p>Umsatz, Ansprechpartner und Event-Termine hängen direkt am Kunden. Über die Verknüpfung zum Menürechner weißt du zu jedem Kunden, welche Menüs für ihn kalkuliert wurden.</p>
           <p>Und weil der Status als Pipeline geführt wird, ersetzt dir die Tabelle das halbe CRM: Vom Lead über das Angebot bis zur Abrechnung wandert jeder Kunde durch dieselben Stationen, und nichts bleibt im Posteingang liegen.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w2.webp" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w2.webp" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp"></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8779,7 +8774,7 @@
       <p>Du siehst Deckungsbeitrag I, II und III, den Wareneinsatz in Prozent, die Personalkosten pro Produkt und einen Verkaufspreis für jede Wareneinsatz-Stufe. Am Ende steht der Preisvorschlag, mit dem du beim Kunden rausgehst.</p>
           <p>Auch die Zeiten stecken mit drin: Produktion, Verpackung, Logistik, Event und Nachbereitung laufen als Minuten in die Personalkosten ein. Damit kalkulierst du ein Catering nicht nur über die Ware, sondern über den kompletten Einsatz.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w3.webp" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp"><div class="dbpc__play"><span></span></div></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w3.webp" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp"></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -8854,7 +8849,12 @@
       + '<div class="slb-scroll"><img src="' + src + '" alt="' + label + ' — DB-Ansicht"></div>'
       + '<div class="slb-hint">Scrollen für die ganze Seite</div>'
       + '</div>';
-    document.body.appendChild(lb);
+    /* Failsafe-Grundstyles inline: Overlay funktioniert selbst dann, wenn das gescopte CSS
+       nicht greift (Bug-Lektion 17.07.: an body angehängt entkam die Lightbox dem #ts11page-Scope
+       -> unsichtbares Overlay + overflow:hidden = "eingefrorene" Seite). */
+    lb.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,6,11,.86);padding:3vw';
+    var host = document.getElementById('ts11page') || document.body;
+    host.appendChild(lb);
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(function(){ lb.classList.add('open'); });
     function close(){
