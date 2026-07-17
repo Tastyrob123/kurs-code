@@ -616,11 +616,11 @@
   @keyframes bauSwapOut{0%,40%{opacity:1;filter:none}56%,92%{opacity:.3;filter:grayscale(.55) brightness(.8)}100%{opacity:1;filter:none}}
 
   /* Act B — Mehrfach verwenden: eine Quelle, drei Ziele */
-  #tsbau .bau-stage--fan{flex-direction:column;gap:0}
-  #tsbau .bau-med--src{width:92px;height:92px;z-index:2}
-  #tsbau .bau-fanline{width:1.6px;height:28px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:8px 0 10px}
-  #tsbau .bau-targets{display:flex;gap:20px;justify-content:center}
-  #tsbau .bau-med--t{width:64px;height:64px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-stage--fan{flex-direction:column;justify-content:flex-start;gap:0}
+  #tsbau .bau-med--src{width:94px;height:94px;z-index:2}
+  #tsbau .bau-fanline{width:1.6px;height:36px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:11px 0 15px}
+  #tsbau .bau-targets{display:flex;gap:18px;justify-content:center}
+  #tsbau .bau-med--t{width:86px;height:86px;opacity:0;transform:translateY(12px) scale(.78)}
   #tsbau .bau-act.on .bau-med--t{animation:bauPop .6s cubic-bezier(.22,1,.36,1) both}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(1){animation-delay:.3s}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(2){animation-delay:.48s}
@@ -652,9 +652,10 @@
 
   #tsarc .arc-stage{position:relative;display:grid;grid-template-columns:.82fr 1.3fr .82fr;grid-template-rows:1fr 1fr;gap:clamp(38px,6vw,80px) clamp(46px,7vw,96px);}
   #tsarc svg.arc-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
-  #tsarc .arc-line{fill:none;stroke:rgba(199,180,137,.5);stroke-width:1.4;stroke-dasharray:5 6;opacity:0;transition:opacity .3s ease}
+  #tsarc .arc-line{fill:none;stroke:rgba(199,180,137,.20);stroke-width:1.3;stroke-linecap:square;stroke-linejoin:miter;opacity:0;transition:opacity .4s ease}
   #tsarc .arc-line.on{opacity:1}
-  #tsarc .arc-comet{fill:#efe6d2;filter:drop-shadow(0 0 6px rgba(199,180,137,.95)) drop-shadow(0 0 14px rgba(199,180,137,.6));opacity:0}
+  #tsarc .arc-line.trace{stroke:rgba(251,230,194,.85);stroke-width:1.6;filter:drop-shadow(0 0 5px rgba(251,230,194,.9)) drop-shadow(0 0 12px rgba(199,180,137,.6))}
+  #tsarc .arc-comet{fill:#fff;filter:drop-shadow(0 0 6px rgba(251,230,194,1)) drop-shadow(0 0 16px rgba(199,180,137,.85));opacity:0}
 
   #tsarc .arc-tile{
     position:relative;border-radius:18px;overflow:hidden;z-index:2;
@@ -685,23 +686,23 @@
   #tsarc .arc-tile-final .arc-logo{width:26px;margin-bottom:11px}
   #tsarc .arc-tile-body{position:relative;z-index:2;padding:16px 16px 16px;text-align:center;display:flex;flex-direction:column;align-items:center}
   #tsarc .arc-tile-final .arc-tile-body{padding:24px 24px 26px;justify-content:center;height:100%}
-  #tsarc .arc-label{position:relative;z-index:2;font-size:.9rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1)}
-  #tsarc .arc-tile-final .arc-label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#e8dcc0}
-  #tsarc .arc-val{position:relative;z-index:2;font-size:1.3rem;font-weight:800;color:#efe6d2;font-variant-numeric:tabular-nums;margin-bottom:5px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1);transition:transform .2s ease}
+  #tsarc .arc-label{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.94rem;font-weight:600;letter-spacing:-.005em;color:#fff;margin:0 0 3px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-label{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.32rem;font-weight:600;letter-spacing:-.01em;text-transform:none;color:#efe6d2;margin-bottom:5px;text-shadow:0 2px 16px rgba(0,0,0,.98),0 1px 4px rgba(0,0,0,1)}
+  #tsarc .arc-val{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.24rem;font-weight:500;color:#efe6d2;font-variant-numeric:tabular-nums;letter-spacing:.005em;margin-bottom:4px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1);transition:transform .2s ease}
   #tsarc .arc-val.pop{animation:tsarc-pop .45s cubic-bezier(.34,1.56,.64,1)}
-  @keyframes tsarc-pop{0%{transform:scale(1)}50%{transform:scale(1.24)}100%{transform:scale(1)}}
-  #tsarc .arc-tile-final .arc-val{font-size:clamp(2.1rem,3.6vw,3rem);color:#fff;margin-top:8px;order:2;min-height:1.2em;text-shadow:0 2px 22px rgba(199,180,137,.55),0 2px 10px rgba(0,0,0,.92)}
-  #tsarc .arc-desc{position:relative;z-index:2;font-size:.74rem;line-height:1.46;color:rgba(255,255,255,.82);text-shadow:0 1px 7px rgba(0,0,0,.98)}
-  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.8rem;color:rgba(255,255,255,.8);max-width:240px}
-  #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-size:.72rem;color:rgba(255,255,255,.62);margin-top:8px;order:3;text-shadow:0 1px 7px rgba(0,0,0,.95)}
+  @keyframes tsarc-pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+  #tsarc .arc-tile-final .arc-val{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(2.2rem,3.8vw,3.1rem);font-weight:500;letter-spacing:-.012em;color:#fff;margin-top:6px;order:2;min-height:1.2em;text-shadow:0 2px 24px rgba(199,180,137,.5),0 2px 12px rgba(0,0,0,.95)}
+  #tsarc .arc-desc{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.74rem;line-height:1.46;color:rgba(255,255,255,.82);text-shadow:0 1px 7px rgba(0,0,0,.98)}
+  #tsarc .arc-tile-final .arc-desc{order:1;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.84rem;line-height:1.5;color:rgba(255,255,255,.88);max-width:250px;text-shadow:0 2px 12px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.76rem;color:rgba(255,255,255,.72);margin-top:9px;order:3;text-shadow:0 2px 12px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
   #tsarc .arc-tile.charging{animation:tsarc-charge 700ms ease-in-out}
   #tsarc .arc-tile-final.impact{animation:tsarc-impact 520ms cubic-bezier(.22,1,.36,1)}
-  #tsarc .arc-tile-final.charged{animation:tsarc-final 1500ms cubic-bezier(.19,1,.22,1)}
+  #tsarc .arc-tile-final.charged{animation:tsarc-final 900ms cubic-bezier(.19,1,.22,1)}
   #tsarc .arc-tile-final.charged::after{
     content:"";position:absolute;inset:-1px;z-index:3;pointer-events:none;border-radius:16px;
     background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 48%,transparent 66%);
     background-size:220% 100%;background-position:120% 0;
-    animation:tsarc-sweep 1500ms cubic-bezier(.19,1,.22,1);
+    animation:tsarc-sweep 900ms cubic-bezier(.19,1,.22,1);
   }
   @keyframes tsarc-charge{
     0%{border-color:rgba(199,180,137,.3);box-shadow:0 0 0 rgba(199,180,137,0)}
@@ -720,6 +721,15 @@
     100%{box-shadow:0 0 30px rgba(199,180,137,.32);border-color:rgba(199,180,137,.6);transform:scale(1)}
   }
   @keyframes tsarc-sweep{0%{background-position:120% 0}100%{background-position:-40% 0}}
+  #tsarc .arc-tile.beat{animation:arc-beat 1.5s cubic-bezier(.4,0,.2,1)}
+  @keyframes arc-beat{
+    0%{transform:scale(1);box-shadow:0 26px 60px -30px rgba(0,0,0,.95)}
+    12%{transform:scale(1.045);box-shadow:0 26px 60px -30px rgba(0,0,0,.95),0 0 32px rgba(199,180,137,.4)}
+    24%{transform:scale(1)}
+    40%{transform:scale(1.075);box-shadow:0 26px 60px -30px rgba(0,0,0,.95),0 0 56px rgba(199,180,137,.62)}
+    62%{transform:scale(1);box-shadow:0 26px 60px -30px rgba(0,0,0,.95)}
+    100%{transform:scale(1)}
+  }
   #tsarc .arc-caption{max-width:640px;margin:34px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
 
   @media(max-width:900px){
@@ -834,19 +844,19 @@
     <div class="arc-stage" id="arcStage">
       <svg class="arc-lines" id="arcLines"></svg>
       <div class="arc-tile arc-tile-1" id="arcT1">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div><div class="arc-desc">Direkt eingekaufte Produkte aus DB IV.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div></div>
       </div>
       <div class="arc-tile arc-tile-2" id="arcT2">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div><div class="arc-desc">Selbst hergestellte Saucen & Sirupe aus DB V.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div></div>
       </div>
       <div class="arc-tile arc-tile-final" id="arcFinal">
         <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal"></div><div class="arc-sub">Kosten pro Portion</div></div>
       </div>
       <div class="arc-tile arc-tile-3" id="arcT3">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div><div class="arc-desc">Zubereitungszeit × Stundensatz aus DB VII.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div></div>
       </div>
       <div class="arc-tile arc-tile-4" id="arcT4">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div><div class="arc-desc">Anteiliger Fixkosten-Betrag aus DB VI.</div></div>
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div></div>
       </div>
     </div>
     <p class="arc-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laden sich einmal nacheinander auf — dann fließen alle vier gemeinsam in dein Gericht. Alle Zahlen sind Beispielwerte.</p>
@@ -894,8 +904,8 @@
     svg.innerHTML='';
     paths = tiles.map(function(t){
       var a = center(t.el), b = center(final);
-      var mx = (a.x+b.x)/2;
-      var d = 'M '+a.x+' '+a.y+' C '+mx+' '+a.y+', '+mx+' '+b.y+', '+b.x+' '+b.y;
+      var mx = a.x + (b.x - a.x)*0.42;
+      var d = 'M '+a.x+' '+a.y+' H '+mx+' V '+b.y+' H '+b.x;
       var p = document.createElementNS('http://www.w3.org/2000/svg','path');
       p.setAttribute('class','arc-line');
       p.setAttribute('d', d);
@@ -906,10 +916,10 @@
 
   function fireComet(path, duration, cb){
     if(reduced){ if(cb) cb(); return; }
-    path.classList.add('on');
+    path.classList.add('on'); path.classList.add('trace');
     var len = path.getTotalLength();
     var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    c.setAttribute('r','4.5'); c.setAttribute('class','arc-comet');
+    c.setAttribute('r','4'); c.setAttribute('class','arc-comet');
     svg.appendChild(c);
     var start = null;
     function frame(ts){
@@ -919,7 +929,7 @@
       c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y);
       c.style.opacity = t < 0.06 ? (t/0.06) : (t > 0.92 ? (1-(t-0.92)/0.08) : 1);
       if(t < 1) requestAnimationFrame(frame);
-      else { c.remove(); path.classList.remove('on'); if(cb) cb(); }
+      else { c.remove(); path.classList.remove('trace'); if(cb) cb(); }
     }
     requestAnimationFrame(frame);
   }
@@ -931,39 +941,42 @@
     tiles.forEach(function(t){ t.el.classList.add('in'); });
     final.classList.add('in');
 
-    var chargeAt = reduced ? 0 : 450;
+    /* 1) alle 4 Kacheln zusammen — ein langsamer, luxuriöser Herzschlag */
+    var beatAt = reduced ? 0 : 600;
     setTimeout(function(){
-      tiles.forEach(function(t){ t.el.classList.add('charging'); });
-      setTimeout(function(){ tiles.forEach(function(t){ t.el.classList.remove('charging'); }); }, 700);
-    }, chargeAt);
+      tiles.forEach(function(t){ t.el.classList.add('beat'); });
+      setTimeout(function(){ tiles.forEach(function(t){ t.el.classList.remove('beat'); }); }, 1500);
+    }, beatAt);
 
-    var beamAt = chargeAt + (reduced?0:850);
+    /* 2) danach: Tron-Linien mit Ecken zur Mitte, Wert baut sich auf */
+    var beamAt = beatAt + (reduced ? 0 : 1850);
     var total = tiles.reduce(function(s,t){ return s+t.val; }, 0);
     var acc = 0;
     function landed(t, isLast){
       acc += t.val;
       finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
       finalVal.classList.remove('pop'); void finalVal.offsetWidth; finalVal.classList.add('pop');
-      final.classList.add('impact');
-      setTimeout(function(){ final.classList.remove('impact'); }, 520);
       if(isLast){
+        /* 3) Ankunft: Mitte lädt kurz auf und schlägt dann einmal (Herzschlag) */
+        final.classList.add('charged');
         setTimeout(function(){
-          final.classList.add('charged');
-          setTimeout(function(){ final.classList.remove('charged'); }, 1500);
-        }, 260);
+          final.classList.remove('charged');
+          final.classList.add('beat');
+          setTimeout(function(){ final.classList.remove('beat'); }, 1500);
+        }, 900);
       }
     }
     setTimeout(function(){
       if(!paths.length){
-        acc = total;
-        finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+        finalVal.textContent = total.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
         final.classList.add('charged');
+        setTimeout(function(){ final.classList.remove('charged'); final.classList.add('beat'); setTimeout(function(){ final.classList.remove('beat'); }, 1500); }, 900);
         return;
       }
       tiles.forEach(function(t,i){
         setTimeout(function(){
-          fireComet(paths[i], 650, function(){ landed(t, i===tiles.length-1); });
-        }, i*650);
+          fireComet(paths[i], 950, function(){ landed(t, i===tiles.length-1); });
+        }, i*180);
       });
     }, beamAt);
   }
