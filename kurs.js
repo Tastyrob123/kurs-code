@@ -8565,22 +8565,32 @@
 #ts11page #ts11emp .tb .ic{opacity:.85 !important;filter:none !important}
 
   }
-#ts11page #ts11slb{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
-    background:rgba(5,6,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:3vw;
-    opacity:0;transition:opacity .3s ease}
-#ts11page #ts11slb.open{opacity:1}
-#ts11page #ts11slb .slb-panel{position:relative;width:min(92vw,1060px);max-height:88vh;border-radius:16px;overflow:hidden;
-    background:#0b0d14;border:1px solid rgba(199,180,137,.3);box-shadow:0 40px 120px rgba(0,0,0,.65);
-    transform:scale(.95);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-#ts11page #ts11slb.open .slb-panel{transform:scale(1)}
-#ts11page #ts11slb .slb-scroll{max-height:88vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(199,180,137,.4) transparent}
-#ts11page #ts11slb .slb-scroll img{display:block;width:100%;height:auto}
-#ts11page #ts11slb .slb-close{position:absolute;top:14px;right:16px;z-index:2;width:42px;height:42px;border-radius:50%;
-    border:1px solid rgba(255,255,255,.35);background:rgba(10,12,20,.72);color:#fff;font-size:18px;cursor:pointer;
-    display:flex;align-items:center;justify-content:center}
-#ts11page #ts11slb .slb-hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:2;
-    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);
-    background:rgba(10,12,20,.72);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 14px;pointer-events:none}
+#ts11page #ts11slb{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(5,6,11,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    padding:clamp(16px,4vw,40px);opacity:0;transition:opacity .3s ease}
+#ts11page #ts11slb.open{display:flex;opacity:1}
+#ts11page #ts11slb .slb-inner{position:relative;width:100%;max-width:min(960px,calc(100vw - 48px));
+    transform:scale(.92) translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+#ts11page #ts11slb.open .slb-inner{transform:none}
+#ts11page #ts11slb.full .slb-inner{max-width:100vw}
+#ts11page #ts11slb .slb-mockup{position:relative;width:100%;aspect-ratio:1366/768;
+    filter:drop-shadow(0 30px 80px rgba(0,0,0,.6)) drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+#ts11page #ts11slb .slb-fr{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;user-select:none}
+#ts11page #ts11slb .slb-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;
+    overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:3;
+    border-radius:3px;background:#191919;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent}
+#ts11page #ts11slb .slb-screen::-webkit-scrollbar{width:5px}
+#ts11page #ts11slb .slb-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px}
+#ts11page #ts11slb .slb-screen img{width:100%;display:block}
+#ts11page #ts11slb .slb-closehint{margin-top:20px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.32);text-align:center}
+#ts11page #ts11slb.full .slb-closehint{display:none}
+#ts11page #ts11slb .slb-btn{position:absolute;top:16px;z-index:10;width:36px;height:36px;border-radius:10px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    transition:background .2s,color .2s}
+#ts11page #ts11slb .slb-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+#ts11page #ts11slb .slb-expand{left:16px}
+#ts11page #ts11slb .slb-closex{right:16px}
 #ts11page #ts11hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);z-index:99;
     background:#12141d;border:1px solid rgba(199,180,137,.4);color:#fff;font-size:13px;border-radius:12px;
     padding:11px 18px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.16,1,.3,1);pointer-events:none}
@@ -8810,31 +8820,33 @@
     hintT = setTimeout(function(){ hint.classList.remove('on'); }, 3200);
   }
   /* Schlussstein-PC: Toast (Video folgt). DB-PCs: Scroll-Lightbox mit der echten DB-Ansicht. */
-  function openScrollLb(src, label){
-    if (document.getElementById('ts11slb')) return;
-    var lb = document.createElement('div'); lb.id = 'ts11slb';
-    lb.innerHTML = '<div class="slb-panel">'
-      + '<button type="button" class="slb-close" aria-label="Schließen">✕</button>'
-      + '<div class="slb-scroll"><img src="' + src + '" alt="' + label + ' — DB-Ansicht"></div>'
-      + '<div class="slb-hint">Scrollen für die ganze Seite</div>'
-      + '</div>';
-    /* Failsafe-Grundstyles inline: Overlay funktioniert selbst dann, wenn das gescopte CSS
-       nicht greift (Bug-Lektion 17.07.: an body angehängt entkam die Lightbox dem #ts11page-Scope
-       -> unsichtbares Overlay + overflow:hidden = "eingefrorene" Seite). */
-    lb.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,6,11,.86);padding:3vw';
+  var SLB_FRAME = 'https://files.catbox.moe/oj1wa9.png'; /* leerer MacBook-Rahmen (wie #ts2mac/#tsmb) */
+  function ensureSlb(){
+    var lb = document.getElementById('ts11slb');
+    if (lb) return lb;
+    lb = document.createElement('div'); lb.id = 'ts11slb';
+    /* Failsafe-Grundstyles inline (Bug-Lektion 17.07.: Scope-Miss = unsichtbares Overlay) */
+    lb.style.cssText = 'position:fixed;inset:0;z-index:99999';
+    lb.innerHTML = '<button type="button" class="slb-btn slb-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+      + '<button type="button" class="slb-btn slb-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'
+      + '<div class="slb-inner"><div class="slb-mockup"><img class="slb-fr" src="' + SLB_FRAME + '" alt="MacBook"><div class="slb-screen"><img alt=""></div></div></div>'
+      + '<div class="slb-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     var host = document.getElementById('ts11page') || document.body;
     host.appendChild(lb);
+    function shut(){ lb.classList.remove('open','full'); document.body.style.overflow=''; }
+    lb.querySelector('.slb-expand').addEventListener('click', function(e){ e.stopPropagation(); lb.classList.toggle('full'); });
+    lb.querySelector('.slb-closex').addEventListener('click', function(e){ e.stopPropagation(); shut(); });
+    lb.addEventListener('click', function(e){ if (!lb.querySelector('.slb-inner').contains(e.target)) shut(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') shut(); });
+    return lb;
+  }
+  function openScrollLb(src, label){
+    var lb = ensureSlb();
+    var img = lb.querySelector('.slb-screen img');
+    img.src = src; img.alt = (label || '') + ' — DB-Ansicht';
+    lb.classList.add('open'); lb.classList.remove('full');
+    var sc = lb.querySelector('.slb-screen'); if (sc) sc.scrollTop = 0;
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(function(){ lb.classList.add('open'); });
-    function close(){
-      lb.classList.remove('open');
-      setTimeout(function(){ lb.remove(); document.body.style.overflow=''; }, 280);
-      document.removeEventListener('keydown', esc);
-    }
-    function esc(e){ if (e.key === 'Escape') close(); }
-    lb.querySelector('.slb-close').addEventListener('click', close);
-    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
-    document.addEventListener('keydown', esc);
   }
   Array.prototype.forEach.call(document.querySelectorAll('.tsmac, .dbpc__mac'), function(mac){
     var scroll = mac.getAttribute('data-scroll');
