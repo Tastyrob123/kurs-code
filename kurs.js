@@ -557,11 +557,135 @@
   var IMG="https://files.catbox.moe/sceu4c.png"; /* 3-Laptop-Cover Gerichte & Getränke: weisser Hintergrund per Edge-Flood-Fill entfernt (transparent RGBA, kein AI), Farben knallig (Saettigung +24%), Feinradius-Schaerfung (2-stufig r1.0/r0.5, Kantenschaerfe OHNE Kontrast-Halo), eng auf die Laptops beschnitten -> groesser+hoeher wie Referenz, 2700px (aus Gerichte.png) */
   var LOGO="https://files.catbox.moe/au80tp.png";
   function on(){ return /\/gerichte-getrnke-finaler-schritt\/?$/.test(location.pathname); }
+
+  var CSS=`
+.ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .ts-body h3{
+    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(19px,1.9vw,23px);line-height:1.25;
+    margin:32px 0 12px;
+  }
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+#tsarc{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsarc .arc-inner{max-width:1180px;margin:0 auto;text-align:center}
+  #tsarc .arc-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsarc .arc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tsarc .arc-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(26px,3.2vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin:0 0 46px}
+  #tsarc .arc-title span{color:#c7b489}
+
+  #tsarc .arc-stage{position:relative;display:grid;grid-template-columns:.82fr 1.3fr .82fr;grid-template-rows:1fr 1fr;gap:clamp(38px,6vw,80px) clamp(46px,7vw,96px);}
+  #tsarc svg.arc-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+  #tsarc .arc-line{fill:none;stroke:rgba(199,180,137,.5);stroke-width:1.4;stroke-dasharray:5 6;opacity:0;transition:opacity .3s ease}
+  #tsarc .arc-line.on{opacity:1}
+  #tsarc .arc-comet{fill:#efe6d2;filter:drop-shadow(0 0 6px rgba(199,180,137,.95)) drop-shadow(0 0 14px rgba(199,180,137,.6));opacity:0}
+
+  #tsarc .arc-tile{
+    position:relative;border-radius:16px;overflow:hidden;z-index:2;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 18px 40px -26px rgba(0,0,0,.9);
+    min-height:104px;
+    background:linear-gradient(155deg,var(--tc1),var(--tc2) 70%);
+    opacity:0;transform:scale(.92);
+    transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1),border-color .35s ease,box-shadow .35s ease;
+  }
+  #tsarc .arc-tile.in{opacity:1;transform:scale(1)}
+  #tsarc .arc-tile-1{--tc1:rgba(95,120,174,.30);--tc2:rgba(95,120,174,.05)}
+  #tsarc .arc-tile-2{--tc1:rgba(163,120,199,.30);--tc2:rgba(163,120,199,.05)}
+  #tsarc .arc-tile-3{--tc1:rgba(199,150,110,.30);--tc2:rgba(199,150,110,.05)}
+  #tsarc .arc-tile-4{--tc1:rgba(110,164,150,.30);--tc2:rgba(110,164,150,.05)}
+  #tsarc .arc-tile-1,#tsarc .arc-tile-2,#tsarc .arc-tile-3,#tsarc .arc-tile-4{min-height:118px}
+  #tsarc .arc-tile-1{grid-column:1;grid-row:1}
+  #tsarc .arc-tile-2{grid-column:1;grid-row:2}
+  #tsarc .arc-tile-3{grid-column:3;grid-row:1}
+  #tsarc .arc-tile-4{grid-column:3;grid-row:2}
+  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:280px;--tc1:rgba(199,180,137,.22);--tc2:rgba(199,180,137,.04)}
+
+  #tsarc .arc-icon{font-size:1.5rem;line-height:1;margin-bottom:8px;opacity:.9}
+  #tsarc .arc-tile-body{position:relative;z-index:2;padding:18px 18px 16px;text-align:left;height:100%;display:flex;flex-direction:column;justify-content:center}
+  #tsarc .arc-tile-final .arc-tile-body{text-align:center;padding:20px;align-items:center}
+  #tsarc .arc-label{font-size:.86rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px}
+  #tsarc .arc-tile-final .arc-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  #tsarc .arc-val{font-size:1.14rem;font-weight:700;color:#d8c9ab;font-variant-numeric:tabular-nums;margin-bottom:5px}
+  #tsarc .arc-tile-final .arc-val{font-size:clamp(1.8rem,3vw,2.5rem);color:#efe6d2;margin-top:6px;order:2}
+  #tsarc .arc-desc{font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.62)}
+  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.76rem;color:rgba(255,255,255,.55)}
+  #tsarc .arc-tile-final .arc-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:6px;order:3}
+
+  #tsarc .arc-tile.pulse{animation:tsarc-pulse 900ms cubic-bezier(.4,0,.3,1)}
+  #tsarc .arc-tile.charging{animation:tsarc-charge 700ms ease-in-out}
+  #tsarc .arc-tile-final.charged{animation:tsarc-final 900ms cubic-bezier(.22,1,.36,1)}
+  @keyframes tsarc-pulse{
+    0%{border-color:rgba(255,255,255,.12);box-shadow:0 18px 40px -26px rgba(0,0,0,.9)}
+    45%{border-color:rgba(199,180,137,.85);box-shadow:0 18px 40px -26px rgba(0,0,0,.9),0 0 34px rgba(199,180,137,.55);transform:scale(1.045)}
+    100%{border-color:rgba(255,255,255,.12);box-shadow:0 18px 40px -26px rgba(0,0,0,.9);transform:scale(1)}
+  }
+  @keyframes tsarc-charge{
+    0%{border-color:rgba(199,180,137,.3);box-shadow:0 0 0 rgba(199,180,137,0)}
+    50%{border-color:rgba(199,180,137,1);box-shadow:0 0 46px rgba(199,180,137,.85),0 0 90px rgba(199,180,137,.35);transform:scale(1.05)}
+    100%{border-color:rgba(199,180,137,.55);box-shadow:0 0 20px rgba(199,180,137,.4);transform:scale(1.01)}
+  }
+  @keyframes tsarc-final{
+    0%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9)}
+    40%{box-shadow:0 0 70px rgba(199,180,137,.85),0 0 140px rgba(199,180,137,.4);transform:scale(1.035)}
+    100%{box-shadow:0 0 34px rgba(199,180,137,.35);transform:scale(1)}
+  }
+  #tsarc .arc-caption{max-width:640px;margin:34px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
+
+  @media(max-width:900px){
+    #tsarc .arc-stage{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:18px}
+    #tsarc .arc-tile-1{grid-column:1;grid-row:1}
+    #tsarc .arc-tile-2{grid-column:2;grid-row:1}
+    #tsarc .arc-tile-final{grid-column:1 / 3;grid-row:2;min-height:200px}
+    #tsarc .arc-tile-3{grid-column:1;grid-row:3}
+    #tsarc .arc-tile-4{grid-column:2;grid-row:3}
+    #tsarc svg.arc-lines{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #tsarc .arc-tile{opacity:1;transform:none;transition:none;animation:none !important}
+  }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts8intro-css')) return;
+    var s=document.createElement('style'); s.id='ts8intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function hideOldPhaseTabs(sc){
+    var tabs=sc.querySelectorAll('.notion-tabs');
+    Array.prototype.forEach.call(tabs, function(t){
+      if(/Phase/.test(t.textContent||'') && t.style.display!=='none') t.style.display='none';
+    });
+  }
+
   function mount(){
     if(!on()) return;
     var sc=document.querySelector(".super-content");
     if(!sc) return;
-    if(document.querySelector(".ts-hero")) return;
+    hideOldPhaseTabs(sc);
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts8intro')) mountBody(sc);
+      return;
+    }
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
@@ -576,7 +700,172 @@
     Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
       function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
     var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
   }
+
+  function mountBody(sc){
+    if(document.getElementById('ts8intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts8intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <h3>Wie aus Bausteinen Gerichte werden</h3>
+  <p>Mit diesen Bausteinen bauen wir die Gerichte zusammen. Jede Zutat im Rezept ist ein Baustein mit bekanntem Portionspreis. Zählst du die Bausteine eines Gerichts zusammen, hast du automatisch den kompletten Wareneinsatz — und damit die Grundlage für deine Kalkulation.</p>
+  <p>Eine Sauce ist dabei selbst wieder ein Baustein, der aus mehreren Zutaten-Bausteinen besteht. Und diese Sauce kannst du dann in mehreren Gerichten einsetzen.</p>
+
+  <h3>Warum wir es genau so machen</h3>
+  <p>Der Sinn dahinter ist Flexibilität. Weil jede Zutat ein eigenständiger Baustein mit eigenem Preis ist, können wir:</p>
+  <ul>
+    <li><b>Zutaten leicht austauschen.</b> Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt.</li>
+    <li><b>Bausteine mehrfach verwenden.</b> Eine einmal angelegte Sauce wandert in beliebig viele Rezepte. Du baust sie einmal, nutzt sie überall.</li>
+    <li><b>Bausteine schachteln.</b> Eine Sauce kann selbst Teil eines Gerichts sein und gleichzeitig aus eigenen Zutaten-Bausteinen bestehen.</li>
+  </ul>
+  <p>Das ist das Bausteinprinzip: Wir bauen einmal sauber von unten auf — vom Lieferschein über die Grundeinheit zur portionierten Zutat — und können oben dann frei und schnell kombinieren. Ändert sich unten ein Preis, zieht er sich automatisch durch alle Gerichte, die diesen Baustein nutzen.</p>
+  <p><b>Kurz gesagt:</b> Die Formeln sind das Fundament. Sie verwandeln chaotische Lieferanten-Angaben in saubere Grundpreise. Auf diesem Fundament bauen wir einen Zutatenpool aus austauschbaren Bausteinen — und aus diesen Bausteinen lassen sich Gerichte schnell, flexibel und mit immer korrekter Kalkulation zusammensetzen.</p>
+</div>
+<div id="tsarc">
+  <div class="arc-inner">
+    <div class="arc-eyebrow">Vier Bausteine · ein Gericht</div>
+    <h3 class="arc-title">Wie sich dein Gericht <span>auflädt.</span></h3>
+    <div class="arc-stage" id="arcStage">
+      <svg class="arc-lines" id="arcLines"></svg>
+      <div class="arc-tile arc-tile-1" id="arcT1">
+        <div class="arc-tile-body"><div class="arc-icon">🥕</div><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div><div class="arc-desc">Direkt eingekaufte Produkte aus DB IV.</div></div>
+      </div>
+      <div class="arc-tile arc-tile-2" id="arcT2">
+        <div class="arc-tile-body"><div class="arc-icon">🥣</div><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div><div class="arc-desc">Selbst hergestellte Saucen & Sirupe aus DB V.</div></div>
+      </div>
+      <div class="arc-tile arc-tile-final" id="arcFinal">
+        <div class="arc-tile-body"><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal">— €</div><div class="arc-sub">Kosten pro Portion</div></div>
+      </div>
+      <div class="arc-tile arc-tile-3" id="arcT3">
+        <div class="arc-tile-body"><div class="arc-icon">👤</div><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div><div class="arc-desc">Zubereitungszeit × Stundensatz aus DB VII.</div></div>
+      </div>
+      <div class="arc-tile arc-tile-4" id="arcT4">
+        <div class="arc-tile-body"><div class="arc-icon">🏢</div><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div><div class="arc-desc">Anteiliger Fixkosten-Betrag aus DB VI.</div></div>
+      </div>
+    </div>
+    <p class="arc-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laden sich einmal nacheinander auf — dann fließen alle vier gemeinsam in dein Gericht. Alle Zahlen sind Beispielwerte.</p>
+  </div>
+</div>
+<div class="ts8wk" id="ts8wk"></div>
+    `;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+    try{ initArc(); }catch(e){}
+  }
+
+  var arcPlayed=false;
+  function initArc(){
+
+  var stage = document.getElementById('arcStage');
+  var svg = document.getElementById('arcLines');
+  var tiles = [
+    {el: document.getElementById('arcT1'), val: 3.20},
+    {el: document.getElementById('arcT2'), val: 4.10},
+    {el: document.getElementById('arcT3'), val: 1.80},
+    {el: document.getElementById('arcT4'), val: 2.10}
+  ];
+  var final = document.getElementById('arcFinal');
+  var finalVal = document.getElementById('arcFinalVal');
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function center(el){
+    var r = el.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    return { x: r.left - s.left + r.width/2, y: r.top - s.top + r.height/2 };
+  }
+
+  var paths = [];
+  function buildLines(){
+    if(window.innerWidth <= 900){ svg.innerHTML=''; paths=[]; return; }
+    svg.innerHTML='';
+    paths = tiles.map(function(t){
+      var a = center(t.el), b = center(final);
+      var mx = (a.x+b.x)/2;
+      var d = 'M '+a.x+' '+a.y+' C '+mx+' '+a.y+', '+mx+' '+b.y+', '+b.x+' '+b.y;
+      var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('class','arc-line');
+      p.setAttribute('d', d);
+      svg.appendChild(p);
+      return p;
+    });
+  }
+
+  function fireComet(path, duration, cb){
+    if(reduced){ if(cb) cb(); return; }
+    path.classList.add('on');
+    var len = path.getTotalLength();
+    var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('r','4.5'); c.setAttribute('class','arc-comet');
+    svg.appendChild(c);
+    var start = null;
+    function frame(ts){
+      if(!start) start = ts;
+      var t = Math.min(1, (ts-start)/duration);
+      var pt = path.getPointAtLength(t*len);
+      c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y);
+      c.style.opacity = t < 0.06 ? (t/0.06) : (t > 0.92 ? (1-(t-0.92)/0.08) : 1);
+      if(t < 1) requestAnimationFrame(frame);
+      else { c.remove(); path.classList.remove('on'); if(cb) cb(); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var played = false;
+  function play(){
+    if(played) return; played = true;
+    buildLines();
+    tiles.forEach(function(t){ t.el.classList.add('in'); });
+    final.classList.add('in');
+
+    var stepDelay = reduced ? 0 : 480;
+    tiles.forEach(function(t,i){
+      setTimeout(function(){
+        t.el.classList.add('pulse');
+        setTimeout(function(){ t.el.classList.remove('pulse'); }, 900);
+      }, i*stepDelay);
+    });
+
+    var chargeAt = reduced ? 0 : stepDelay*tiles.length + 250;
+    setTimeout(function(){
+      tiles.forEach(function(t){ t.el.classList.add('charging'); });
+      setTimeout(function(){ tiles.forEach(function(t){ t.el.classList.remove('charging'); }); }, 700);
+    }, chargeAt);
+
+    var beamAt = chargeAt + (reduced?0:500);
+    var total = tiles.reduce(function(s,t){ return s+t.val; }, 0);
+    var acc = 0;
+    setTimeout(function(){
+      if(!paths.length){
+        acc = total;
+        finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+        final.classList.add('charged');
+        return;
+      }
+      tiles.forEach(function(t,i){
+        setTimeout(function(){
+          fireComet(paths[i], 650, function(){
+            acc += t.val;
+            finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+            if(i === tiles.length-1){
+              final.classList.add('charged');
+              setTimeout(function(){ final.classList.remove('charged'); }, 900);
+            }
+          });
+        }, i*140);
+      });
+    }, beamAt);
+  }
+
+  window.addEventListener('resize', buildLines);
+  var io = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ play(); io.disconnect(); }
+  }, {threshold:.35});
+  io.observe(stage);
+
+  }
+
   mount();
   document.addEventListener("DOMContentLoaded", mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
@@ -4923,46 +5212,46 @@
       ]},
     { kachel_id:'db8_gerichte', kachel_name:'Gerichte & Getränke', ist_produkt_kachel:true,
       einheit:'Kosten (€)', einheit_typ:'preis',
-      /* 37 Tasty-Studios-Menü-Bilder (Fine-Dining-Teller/Gläser/Tassen, schwarzes Studio, img/gerichte, GitHub Pages)
-         — Kosten pro Gericht/Getränk/Dessert (Wareneinsatz) = Beispielwerte. Reihenfolge = Menü-Gänge. */
+      /* Engine-generiert aus Notion-DB-Schema DB Gerichte (37 Spalten, inkl. Formel-Code, 17.07.2026).
+         Kein img -> ph()-Platzhalter (BILD FOLGT). Werte = Beispielwerte (Kosten-Bausteine pro Portion). */
       objekt_varianten:[
-        { name:'Jakobsmuscheln',   wert:6.50,  img:'https://tastyrob123.github.io/kurs/img/gerichte/jakobsmuscheln.jpg' },
-        { name:'Rindertatar',      wert:5.80,  img:'https://tastyrob123.github.io/kurs/img/gerichte/rindertatar.jpg' },
-        { name:'Burrata',          wert:4.20,  img:'https://tastyrob123.github.io/kurs/img/gerichte/burrata.jpg' },
-        { name:'Thunfisch-Tataki', wert:6.90,  img:'https://tastyrob123.github.io/kurs/img/gerichte/thunfisch-tataki.jpg' },
-        { name:'Kürbis-Velouté',   wert:2.40,  img:'https://tastyrob123.github.io/kurs/img/gerichte/kuerbis-veloute.jpg' },
-        { name:'Rinderfilet',      wert:11.50, img:'https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg' },
-        { name:'Lachs',            wert:7.80,  img:'https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg' },
-        { name:'Lammkarree',       wert:10.20, img:'https://tastyrob123.github.io/kurs/img/gerichte/lammkarree.jpg' },
-        { name:'Rote-Bete-Risotto',wert:3.60,  img:'https://tastyrob123.github.io/kurs/img/gerichte/rote-bete-risotto.jpg' },
-        { name:'Entenbrust',       wert:8.40,  img:'https://tastyrob123.github.io/kurs/img/gerichte/entenbrust.jpg' },
-        { name:'Wolfsbarsch',      wert:9.10,  img:'https://tastyrob123.github.io/kurs/img/gerichte/wolfsbarsch.jpg' },
-        { name:'Pilz-Ravioli',     wert:3.90,  img:'https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg' },
-        { name:'Short Rib',        wert:8.90,  img:'https://tastyrob123.github.io/kurs/img/gerichte/short-rib.jpg' },
-        { name:'Gemüse-Steak',     wert:3.20,  img:'https://tastyrob123.github.io/kurs/img/gerichte/gemuese-steak.jpg' },
-        { name:'Schoko-Fondant',   wert:2.10,  img:'https://tastyrob123.github.io/kurs/img/gerichte/schoko-fondant.jpg' },
-        { name:'Crème-Brûlée',     wert:1.80,  img:'https://tastyrob123.github.io/kurs/img/gerichte/creme-brulee.jpg' },
-        { name:'Beeren-Pavlova',   wert:2.60,  img:'https://tastyrob123.github.io/kurs/img/gerichte/beeren-pavlova.jpg' },
-        { name:'Tiramisu',         wert:2.20,  img:'https://tastyrob123.github.io/kurs/img/gerichte/tiramisu.jpg' },
-        { name:'Zitronentarte',    wert:1.90,  img:'https://tastyrob123.github.io/kurs/img/gerichte/zitronentarte.jpg' },
-        { name:'Panna-Cotta',      wert:1.70,  img:'https://tastyrob123.github.io/kurs/img/gerichte/panna-cotta.jpg' },
-        { name:'Cheesecake',       wert:2.30,  img:'https://tastyrob123.github.io/kurs/img/gerichte/cheesecake.jpg' },
-        { name:'Negroni',          wert:2.80,  img:'https://tastyrob123.github.io/kurs/img/gerichte/negroni.jpg' },
-        { name:'Aperol-Spritz',    wert:2.20,  img:'https://tastyrob123.github.io/kurs/img/gerichte/aperol-spritz.jpg' },
-        { name:'Mojito',           wert:2.40,  img:'https://tastyrob123.github.io/kurs/img/gerichte/mojito.jpg' },
-        { name:'Margarita',        wert:2.60,  img:'https://tastyrob123.github.io/kurs/img/gerichte/margarita.jpg' },
-        { name:'Espresso-Martini', wert:2.90,  img:'https://tastyrob123.github.io/kurs/img/gerichte/espresso-martini.jpg' },
-        { name:'Cosmopolitan',     wert:2.70,  img:'https://tastyrob123.github.io/kurs/img/gerichte/cosmopolitan.jpg' },
-        { name:'Piña-Colada',      wert:2.50,  img:'https://tastyrob123.github.io/kurs/img/gerichte/pina-colada.jpg' },
-        { name:'Gin-Basil-Smash',  wert:3.10,  img:'https://tastyrob123.github.io/kurs/img/gerichte/gin-basil-smash.jpg' },
-        { name:'Espresso',         wert:0.45,  img:'https://tastyrob123.github.io/kurs/img/gerichte/espresso.jpg' },
-        { name:'Cappuccino',       wert:0.65,  img:'https://tastyrob123.github.io/kurs/img/gerichte/cappuccino.jpg' },
-        { name:'Flat-White',       wert:0.75,  img:'https://tastyrob123.github.io/kurs/img/gerichte/flat-white.jpg' },
-        { name:'Latte-Macchiato',  wert:0.80,  img:'https://tastyrob123.github.io/kurs/img/gerichte/latte-macchiato.jpg' },
-        { name:'Caramel-Macchiato',wert:0.95,  img:'https://tastyrob123.github.io/kurs/img/gerichte/caramel-macchiato.jpg' },
-        { name:'Cortado',          wert:0.60,  img:'https://tastyrob123.github.io/kurs/img/gerichte/cortado.jpg' },
-        { name:'Affogato',         wert:1.40,  img:'https://tastyrob123.github.io/kurs/img/gerichte/affogato.jpg' },
-        { name:'Irish-Coffee',     wert:2.20,  img:'https://tastyrob123.github.io/kurs/img/gerichte/irish-coffee.jpg' }
+        { name:'1. Button anlegen', wert:0.15 },
+        { name:'2. Datenbank anlegen', wert:0.2 },
+        { name:'3. Gericht', wert:0 },
+        { name:'4. Kategorie', wert:0 },
+        { name:'5. Teller / Glas / Tasse', wert:0 },
+        { name:'6. Verkaufspreis ( Eur )', wert:0 },
+        { name:'7. Eingeben : VK Wunschpreis', wert:0 },
+        { name:'8. Zubereitungszeit ( min )', wert:0 },
+        { name:'9. Link Video Zubereitung Schulung Plattform', wert:0 },
+        { name:'10. Zutaten', wert:0 },
+        { name:'11. Produkte Inhouse Production', wert:0 },
+        { name:'12. Packaging', wert:0 },
+        { name:'13. 👤 Mitarbeiter', wert:0 },
+        { name:'14. GK Monat für DB III', wert:0 },
+        { name:'15. Ø Break-Even Referenz 1', wert:1.2 },
+        { name:'16. Wareinsatz Ready to Use in Eur', wert:0.9 },
+        { name:'17. Wareneinsatz Inhouse Production  in Eur', wert:0.35 },
+        { name:'18. Summe Packaging / Co.', wert:0.6 },
+        { name:'19. GK Anteil pro Produkt', wert:2.45 },
+        { name:'20. Wareneinsatz ( Eur )', wert:0.38 },
+        { name:'21. Wareneinsatz ( % )', wert:4.85 },
+        { name:'22. WE (%) Wunschpreis', wert:7.3 },
+        { name:'23. DB I', wert:7.85 },
+        { name:'24. Lohn €/h', wert:3.1 },
+        { name:'25. PK Pro Produkt', wert:3.1 },
+        { name:'26. DB II', wert:10.95 },
+        { name:'27. DB III', wert:9.4 },
+        { name:'28. VK bei 30% Wareneinsatz', wert:12.15 },
+        { name:'29. VK bei 25% Wareneinsatz', wert:14.6 },
+        { name:'30. VK bei 20% Wareneinsatz', wert:17.5 },
+        { name:'31. VK bei 15% Wareneinsatz', wert:24.33 },
+        { name:'32. VK bei 10% Wareneinsatz', wert:290 },
+        { name:'33. Kcal', wert:220 },
+        { name:'34. Protein', wert:95 },
+        { name:'35. Fat', wert:18 },
+        { name:'36. Carbs', wert:5.2 },
+        { name:'37. Allergene', wert:0 }
       ]},
     { kachel_id:'db7_allergene', kachel_name:'Allergene', ist_produkt_kachel:true,
       einheit:'EU-Ziffer (1–14)', einheit_typ:'code',
@@ -5305,6 +5594,46 @@
      desc:'Eigenschaft : Rollup → Verknüpfung : ? → Eigenschaft : ? → Berechnen : Originale zeigen → Name der Spalte',
      html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ?</p><p class="notion-text">→ <b>Eigenschaft :</b> ?</p><p class="notion-text">→ <b>Berechnen :</b> Originale zeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Einkaufsliste </p><p class="notion-text">Dir wird hier die komplette Einkaufsliste aus den Menü-Positionen angezeigt.</p>'},
   ];
+  var TS8_STEPS=[
+    {title:'1. Button anlegen', desc:'Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen Butto', html:'<p class="notion-text">Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen', desc:'Drücke / und wähle „Tabellenansicht – Datenbank“. → Name der Datenbank : DB Gerichte Damit steht der Rahm', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> DB Gerichte</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+    {title:'3. Gericht', desc:'Eigenschaft : Titel → Name der Spalte : Gericht → Du trägst hier ein : den Namen des Gerichts oder Geträn', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Gericht</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen des Gerichts oder Getränks, bspw. Rinderfilet mit Gratin.</p>'},
+    {title:'4. Kategorie', desc:'Eigenschaft : Auswählen → Name der Spalte : Kategorie Trage diese Auswahlmöglichkeiten ein : Lunch · Dinn', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Kategorie</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Lunch · Dinner · Breakfast · Sweet Treats · Coffee · Juice&amp;Tea · Matcha&amp;Sweet · Softdrinks · Wein / Alkohol · Longdrinks</p><p class="notion-text">die Karten-Kategorie — Lunch, Dinner, Breakfast, Sweet Treats, Coffee, Juice&amp;Tea, Matcha&amp;Sweet, Softdrinks, Wein / Alkohol oder Longdrinks.</p>'},
+    {title:'5. Teller / Glas / Tasse', desc:'Eigenschaft : Auswählen → Name der Spalte : Teller / Glas / Tasse Trage diese Auswahlmöglichkeiten ein : ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Teller / Glas / Tasse</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Tasse XS · Tasse S · Tasse M · Tasse L · Glas S · Glas L · Glastasse · Weinglas</p><p class="notion-text">das Serviergefäß — davon hängt später ab, mit welchem Geschirr du kalkulierst und servierst.</p>'},
+    {title:'6. Verkaufspreis ( Eur )', desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro → Name der Spalte : Verkaufspreis ( E', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text">→ <b>Name der Spalte :</b> Verkaufspreis ( Eur )</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Verkaufspreis, den der Gast auf der Karte sieht.</p>'},
+    {title:'7. Eingeben : VK Wunschpreis', desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro → Name der Spalte : Eingeben : VK Wun', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text">→ <b>Name der Spalte :</b> Eingeben : VK Wunschpreis </p><p class="notion-text">→ <b>Du trägst hier ein :</b> einen Wunsch-Verkaufspreis, falls du testen willst, wie sich ein anderer Preis auf den Wareneinsatz auswirkt.</p>'},
+    {title:'8. Zubereitungszeit ( min )', desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Zubereitungszeit ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Zubereitungszeit ( min )</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Zubereitungszeit in Minuten — Grundlage für die Personalkosten pro Portion.</p>'},
+    {title:'9. Link Video Zubereitung Schulung Plattform', desc:'Eigenschaft : URL → Name der Spalte : Link Video Zubereitung Schulung Plattform → Du trägst hier ein : ei', html:'<p class="notion-text">→ <b>Eigenschaft :</b> URL</p><p class="notion-text">→ <b>Name der Spalte :</b> Link Video Zubereitung Schulung Plattform</p><p class="notion-text">→ <b>Du trägst hier ein :</b> einen Link zu einem Zubereitungs-Video, falls du deine Mitarbeiter darüber schulst.</p>'},
+    {title:'10. Zutaten', desc:'Eigenschaft : Verknüpfung → DB IV : Zutaten → → Name der Spalte : Zutaten Du verknüpfst hier die einzeln ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB IV : Zutaten →</p><p class="notion-text">→ <b>Name der Spalte :</b> Zutaten</p><p class="notion-text">Du verknüpfst hier die einzeln eingekauften Zutaten aus deiner Zutaten-Datenbank, die direkt — ohne eigenes Rezept — in dieses Gericht wandern.</p>'},
+    {title:'11. Produkte Inhouse Production', desc:'Eigenschaft : Verknüpfung → TB V : Rezepturen → → Name der Spalte : Produkte Inhouse Production Du verknü', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → TB V : Rezepturen →</p><p class="notion-text">→ <b>Name der Spalte :</b> Produkte Inhouse Production </p><p class="notion-text">Du verknüpfst hier die selbst hergestellten Rezepturen (Saucen, Dips, Sirupe), die in diesem Gericht stecken.</p>'},
+    {title:'12. Packaging', desc:'Eigenschaft : Verknüpfung → Packaging Database → → Name der Spalte : Packaging Du verknüpfst hier das Ver', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Packaging Database →</p><p class="notion-text">→ <b>Name der Spalte :</b> Packaging</p><p class="notion-text">Du verknüpfst hier das Verpackungsmaterial, falls das Gericht geliefert oder to-go verkauft wird.</p>'},
+    {title:'13. 👤 Mitarbeiter', desc:'Eigenschaft : Verknüpfung → Mitarbeiter Database (DB VII) → → Name der Spalte : 👤 Mitarbeiter Du verknüpf', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Mitarbeiter Database (DB VII) →</p><p class="notion-text">→ <b>Name der Spalte :</b> 👤 Mitarbeiter</p><p class="notion-text">Du verknüpfst hier die Mitarbeiter, die für die Zubereitung dieses Gerichts eingeplant sind — daraus zieht das System den Stundensatz.</p>'},
+    {title:'14. GK Monat für DB III', desc:'Eigenschaft : Verknüpfung → GK Kosten Database (DB VI) → → Name der Spalte : GK Monat für DB III Du verkn', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → GK Kosten Database (DB VI) →</p><p class="notion-text">→ <b>Name der Spalte :</b> GK Monat für DB III</p><p class="notion-text">Du verknüpfst hier den Gemeinkosten-Monat aus deiner GK-Datenbank, der für die Deckungsbeitrags-Rechnung dieses Gerichts gilt.</p>'},
+    {title:'15. Ø Break-Even Referenz 1', desc:'Eigenschaft : Verknüpfung → Break-Even Referenz Database → → Name der Spalte : Ø Break-Even Referenz 1 Du', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Break-Even Referenz Database →</p><p class="notion-text">→ <b>Name der Spalte :</b> Ø Break-Even Referenz 1</p><p class="notion-text">Du verknüpfst hier die Break-Even-Referenz, falls du dieses Gericht in der Szenario-Rechnung mit auswertest.</p>'},
+    {title:'16. Wareinsatz Ready to Use in Eur', desc:'Eigenschaft : Rollup → Verknüpfung : Zutaten → Eigenschaft : Preis / Portion → Berechnen : Summe → Name d', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Zutaten</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Portion</p><p class="notion-text">→ <b>Berechnen :</b> Summe</p><p class="notion-text">→ <b>Name der Spalte :</b> Wareinsatz Ready to Use in Eur</p><p class="notion-text">Dir wird hier den Wareneinsatz aller direkt eingekauften Zutaten — automatisch aus deiner Zutaten-Datenbank gezogen. angezeigt.</p>'},
+    {title:'17. Wareneinsatz Inhouse Production  in Eur', desc:'Eigenschaft : Rollup → Verknüpfung : Produkte Inhouse Production → Eigenschaft : Portionspreise / Summe →', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Produkte Inhouse Production </p><p class="notion-text">→ <b>Eigenschaft :</b> Portionspreise / Summe</p><p class="notion-text">→ <b>Berechnen :</b> Eindeutige Werte zeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Wareneinsatz Inhouse Production  in Eur</p><p class="notion-text">Dir wird hier den Wareneinsatz aller selbst hergestellten Rezepturen — automatisch aus deiner Rezepturen-Datenbank gezogen. angezeigt.</p>'},
+    {title:'18. Summe Packaging / Co.', desc:'Eigenschaft : Rollup → Verknüpfung : Packaging → Eigenschaft : Verfication Sum → Berechnen : Originale ze', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Packaging</p><p class="notion-text">→ <b>Eigenschaft :</b> Verfication Sum</p><p class="notion-text">→ <b>Berechnen :</b> Originale zeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Packaging / Co.</p><p class="notion-text">Dir wird hier die Kosten des ausgewählten Verpackungsmaterials — automatisch aus der Packaging-Datenbank gezogen. angezeigt.</p>'},
+    {title:'19. GK Anteil pro Produkt', desc:'Eigenschaft : Rollup → Verknüpfung : GK Monat für DB III → Eigenschaft : GK pro Produkt → Berechnen : Dur', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> GK Monat für DB III</p><p class="notion-text">→ <b>Eigenschaft :</b> GK pro Produkt</p><p class="notion-text">→ <b>Berechnen :</b> Durchschnitt</p><p class="notion-text">→ <b>Name der Spalte :</b> GK Anteil pro Produkt</p><p class="notion-text">Dir wird hier den anteiligen Gemeinkosten-Betrag für dieses Gericht aus deiner GK-Datenbank. angezeigt.</p>'},
+    {title:'20. Wareneinsatz ( Eur )', desc:'Eigenschaft : Formel → Name der Spalte : Wareneinsatz ( Eur ) Trage diese Formel ein : /* Base cost: read', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Wareneinsatz ( Eur )</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Base cost: ready-to-use ingredients */<br>if(empty(prop(&quot;Wareinsatz Ready to Use in Eur&quot;)), 0, prop(&quot;Wareinsatz Ready to Use in Eur&quot;))<br>+<br>/* In-house production cost: parse text values, skip invalid entries like &quot;Kein Preis verfügbar&quot; */<br>prop(&quot;Wareneinsatz Inhouse Production&nbsp;&nbsp;in Eur&quot;)<br>&nbsp;&nbsp;.map(format(current).replaceAll(&quot;[^0-9,.]&quot;, &quot;&quot;).replaceAll(&quot;,&quot;, &quot;.&quot;))<br>&nbsp;&nbsp;.filter(current.length() &gt; 0 and current != &quot;.&quot;)<br>&nbsp;&nbsp;.map(toNumber(current))<br>&nbsp;&nbsp;.sum()<br>+<br>/* Packaging cost: selected packaging sets are included like products */<br>prop(&quot;Summe Packaging / Co.&quot;)<br>&nbsp;&nbsp;.map(format(current).replaceAll(&quot;[^0-9,.]&quot;, &quot;&quot;).replaceAll(&quot;,&quot;, &quot;.&quot;))<br>&nbsp;&nbsp;.filter(current.length() &gt; 0 and current != &quot;.&quot;)<br>&nbsp;&nbsp;.map(toNumber(current))<br>&nbsp;&nbsp;.sum()</div><p class="notion-text">→ Die eingetragene Formel rechnet den kompletten Wareneinsatz zusammen: eingekaufte Zutaten, Rezepturen und Verpackung.</p>'},
+    {title:'21. Wareneinsatz ( % )', desc:'Eigenschaft : Formel → Name der Spalte : Wareneinsatz ( % ) Trage diese Formel ein : prop("Wareneinsatz (', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Wareneinsatz ( % )</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/prop(&quot;Verkaufspreis ( Eur )&quot;)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Wareneinsatz im Verhältnis zum Verkaufspreis — deine Foodcost-Quote.</p>'},
+    {title:'22. WE (%) Wunschpreis', desc:'Eigenschaft : Formel → Name der Spalte : WE (%) Wunschpreis Trage diese Formel ein : prop("Wareneinsatz (', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> WE (%) Wunschpreis</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/prop(&quot;Eingeben : VK Wunschpreis &quot;)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Wareneinsatz im Verhältnis zu deinem Wunschpreis von oben.</p>'},
+    {title:'23. DB I', desc:'Eigenschaft : Formel → Name der Spalte : DB I Trage diese Formel ein : if(empty(prop("Verkaufspreis ( Eur', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB I</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">if(empty(prop(&quot;Verkaufspreis ( Eur )&quot;)), 0, prop(&quot;Verkaufspreis ( Eur )&quot;))<br>- if(empty(prop(&quot;Wareneinsatz ( Eur )&quot;)), 0, prop(&quot;Wareneinsatz ( Eur )&quot;))</div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag I: Verkaufspreis minus Wareneinsatz.</p>'},
+    {title:'24. Lohn €/h', desc:'Eigenschaft : Formel → Name der Spalte : Lohn €/h Trage diese Formel ein : /* Calculate average hourly ra', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Lohn €/h</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Calculate average hourly rate from related employees */<br>if(empty(prop(&quot;👤 Mitarbeiter&quot;)),<br>&nbsp;&nbsp;&quot;Keine Mitarbeiter&quot;,<br>&nbsp;&nbsp;let(<br>&nbsp;&nbsp;&nbsp;&nbsp;hourlyRates, prop(&quot;👤 Mitarbeiter&quot;).map(current.prop(&quot;Stundensatz (AG-Kosten)&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Filter out empty values before calculating average */<br>&nbsp;&nbsp;&nbsp;&nbsp;validRates, hourlyRates.filter(not empty(current)),<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;if(validRates.length() == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Stundensätze&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Calculate and format average */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;round(mean(validRates), 2) + &quot; €/h&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel ermittelt den durchschnittlichen Stundensatz der für dieses Gericht eingeplanten Mitarbeiter.</p>'},
+    {title:'25. PK Pro Produkt', desc:'Eigenschaft : Formel → Name der Spalte : PK Pro Produkt Trage diese Formel ein : /* Calculate personnel c', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> PK Pro Produkt</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Calculate personnel cost based on preparation time and hourly wage */<br>if(empty(prop(&quot;Zubereitungszeit ( min )&quot;)) or empty(prop(&quot;Lohn €/h&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Convert minutes to hours and multiply by hourly wage */<br>&nbsp;&nbsp;(prop(&quot;Zubereitungszeit ( min )&quot;) / 60) * toNumber(prop(&quot;Lohn €/h&quot;))<br>)</div><p class="notion-text">→ Die eingetragene Formel rechnet die Zubereitungszeit in Personalkosten pro Portion um.</p>'},
+    {title:'26. DB II', desc:'Eigenschaft : Formel → Name der Spalte : DB II Trage diese Formel ein : if(empty(prop("DB I")), 0, prop("', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB II</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">if(empty(prop(&quot;DB I&quot;)), 0, prop(&quot;DB I&quot;)) - <br>if(empty(prop(&quot;GK Anteil pro Produkt&quot;)), 0, prop(&quot;GK Anteil pro Produkt&quot;))</div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag II: DB I minus Personalkosten.</p>'},
+    {title:'27. DB III', desc:'Eigenschaft : Formel → Name der Spalte : DB III Trage diese Formel ein : prop("DB II") - if(empty(prop("P', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB III</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;DB II&quot;) - if(empty(prop(&quot;PK Pro Produkt&quot;)), 0, prop(&quot;PK Pro Produkt&quot;)) </div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag III: DB II minus Gemeinkosten-Anteil — dein Ergebnis pro Portion.</p>'},
+    {title:'28. VK bei 30% Wareneinsatz', desc:'Eigenschaft : Formel → Name der Spalte : VK bei 30% Wareneinsatz Trage diese Formel ein : prop("Wareneins', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 30% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/ 0.30</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis, wenn du mit 30 % Wareneinsatz kalkulierst.</p>'},
+    {title:'29. VK bei 25% Wareneinsatz', desc:'Eigenschaft : Formel → Name der Spalte : VK bei 25% Wareneinsatz Trage diese Formel ein : prop("Wareneins', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 25% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/ 0.25</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 25 % Wareneinsatz.</p>'},
+    {title:'30. VK bei 20% Wareneinsatz', desc:'Eigenschaft : Formel → Name der Spalte : VK bei 20% Wareneinsatz Trage diese Formel ein : prop("Wareneins', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 20% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/ 0.20</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 20 % Wareneinsatz.</p>'},
+    {title:'31. VK bei 15% Wareneinsatz', desc:'Eigenschaft : Formel → Name der Spalte : VK bei 15% Wareneinsatz Trage diese Formel ein : prop("Wareneins', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 15% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">prop(&quot;Wareneinsatz ( Eur )&quot;)/ 0.15</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 15 % Wareneinsatz.</p>'},
+    {title:'32. VK bei 10% Wareneinsatz', desc:'Eigenschaft : Formel → Name der Spalte : VK bei 10% Wareneinsatz Trage diese Formel ein : /* Calculate se', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 10% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Calculate selling price when cost of goods is 10% */<br>if(empty(prop(&quot;Wareneinsatz ( Eur )&quot;)), <br>&nbsp;&nbsp;empty(), <br>&nbsp;&nbsp;prop(&quot;Wareneinsatz ( Eur )&quot;) / 0.10<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 10 % Wareneinsatz.</p>'},
+    {title:'33. Kcal', desc:'Eigenschaft : Formel → Name der Spalte : Kcal Trage diese Formel ein : /* Get calories from ready-to-use ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Kcal </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Get calories from ready-to-use products */<br>sum(prop(&quot;Zutaten&quot;).map(current.prop(&quot;Kalorien &quot;))) + <br>/* Add calories from homemade products */<br>sum(prop(&quot;Produkte Inhouse Production &quot;).map(current.prop(&quot;Kalorien / Portion&quot;)))</div><p class="notion-text">→ Die eingetragene Formel summiert die Kalorien aus den verknüpften Zutaten und Rezepturen.</p>'},
+    {title:'34. Protein', desc:'Eigenschaft : Formel → Name der Spalte : Protein Trage diese Formel ein : /* Get protein from ready-to-us', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Protein </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Get protein from ready-to-use products */<br>sum(prop(&quot;Zutaten&quot;).map(current.prop(&quot;Protein ( g ) &quot;))) +<br>/* Add protein from homemade products */<br>sum(prop(&quot;Produkte Inhouse Production &quot;).map(current.prop(&quot;Protein / Portion&quot;)))</div><p class="notion-text">→ Die eingetragene Formel summiert das Protein aus den verknüpften Zutaten und Rezepturen.</p>'},
+    {title:'35. Fat', desc:'Eigenschaft : Formel → Name der Spalte : Fat Trage diese Formel ein : /* Calculate total fat from both pr', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fat </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Calculate total fat from both product types */<br>if(<br>&nbsp;&nbsp;/* Check if there are any products at all */<br>&nbsp;&nbsp;empty(prop(&quot;Zutaten&quot;)) and empty(prop(&quot;Produkte Inhouse Production &quot;)),<br>&nbsp;&nbsp;&quot;&quot;,<br>&nbsp;&nbsp;/* Calculate sum of fat from ready-to-use products */<br>&nbsp;&nbsp;sum(<br>&nbsp;&nbsp;&nbsp;&nbsp;prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Fett ( g )&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>&nbsp;&nbsp;) + <br>&nbsp;&nbsp;/* Add fat from in-house products */<br>&nbsp;&nbsp;sum(<br>&nbsp;&nbsp;&nbsp;&nbsp;prop(&quot;Produkte Inhouse Production &quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Fett / Portion&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel summiert das Fett aus den verknüpften Zutaten und Rezepturen.</p>'},
+    {title:'36. Carbs', desc:'Eigenschaft : Formel → Name der Spalte : Carbs Trage diese Formel ein : /* Calculate sum of carbs from Re', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Carbs</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Calculate sum of carbs from Ready to Use products */<br>sum(<br>&nbsp;&nbsp;prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Kohlenhydrate ( g )&nbsp;&nbsp;&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Filter out empty values before summing */<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>) + <br>/* Calculate sum of carbs from Homemade products */<br>sum(<br>&nbsp;&nbsp;prop(&quot;Produkte Inhouse Production &quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Kohlenhydrate / Portion&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Filter out empty values before summing */<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>)</div><p class="notion-text">→ Die eingetragene Formel summiert die Kohlenhydrate aus den verknüpften Zutaten und Rezepturen.</p>'},
+    {title:'37. Allergene', desc:'Eigenschaft : Formel → Name der Spalte : Allergene Trage diese Formel ein : /* Get allergens from both da', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Allergene</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Get allergens from both databases and combine them */<br>lets(<br>&nbsp;&nbsp;/* Extract allergens from ready-to-use products */<br>&nbsp;&nbsp;readyToUseAllergens, prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Allergene ( ausfüllen )&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat(),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Extract allergens from inhouse production products */<br>&nbsp;&nbsp;inhouseAllergens, prop(&quot;Produkte Inhouse Production &quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Allergene&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat(),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Combine all allergens and remove duplicates */<br>&nbsp;&nbsp;allUniqueAllergens, unique(concat(readyToUseAllergens, inhouseAllergens)),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Return formatted allergene list or message if none found */<br>&nbsp;&nbsp;if(allUniqueAllergens.length() &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;allUniqueAllergens.sort().join(&quot;, &quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Allergene&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel sammelt die Allergene aus allen verknüpften Zutaten und Rezepturen ein.</p>'},
+  ];
+
   var PAGES=[
     /* Lektion 11 — drei Config-Steps-Regale (Engine): Notion-Seite ist leer, Steps kommen aus
        der Config (Quelle: echte Notion-DB-Schemas + extrahierte Formeln, 17.07.2026).
@@ -5446,11 +5775,11 @@
     /* DB VIII Gerichte & Getränke — 4 getrennte Phasen-Tab-Widgets (.notion-tabs) zu EINEM
        Regal gebündelt (multi:true, expect:4). marker /Phase/ trifft alle vier. 37 Schritte. */
     { path:/\/gerichte-getrnke-finaler-schritt\/?$/, kachel:'db8_gerichte',
-      container:'.notion-tabs', multi:true, expect:4, marker:/Phase/,
+      anchorSel:'#ts8wk', steps:TS8_STEPS,
       eyebrow:'Der Warenkorb · DB VIII',
-      title:'Deine Gerichte & Getränke. <span>Teller für Teller</span>.',
+      title:'Deine Gerichte & Getränke. <span>Spalte für Spalte</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VIII sind die Kosten pro Gericht, Getränk oder Dessert.',
-      summary:'Menükosten', chain:true },
+      summary:'Kosten pro Portion', chain:true },
     { path:/\/inventurliste\/?$/, kachel:'db0_inventurliste',
       eyebrow:'Der Warenkorb · DB 0',
       title:'Deine Inventurliste. <span>Schritt für Schritt</span>.',
