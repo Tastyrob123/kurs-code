@@ -10424,8 +10424,8 @@
    ============================================================ */
 (function(){
   if(window.__tsfdq) return; window.__tsfdq=true;
-  var HERO="https://files.catbox.moe/ptp53e.png";
-  var COVER="https://files.catbox.moe/93jl6k.png";
+  var HERO="https://files.catbox.moe/20fi21.png";
+  var COVER="https://files.catbox.moe/6yc8x3.png";
   var LOGO="https://files.catbox.moe/au80tp.png";
   function on(){ return /\/food-drinksquartier-inhalte-interface\/?$/.test(location.pathname); }
 
