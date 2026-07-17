@@ -10700,9 +10700,6 @@
     .page__food-drinksquartier-inhalte-interface .ts-hero__logo,
     .page__food-drinksquartier-inhalte-interface .ts-hero__eyebrow,
     .page__food-drinksquartier-inhalte-interface .ts-hero__title{animation:none!important}
-    #tsfdq .fdqb{height:auto}
-    #tsfdq .fdqb-sticky{position:static;height:auto;padding:24px 16px}
-    #tsfdq .fdqb-frame img:last-child{opacity:1}
   }`;
 
   function injectCSS(){
@@ -10769,10 +10766,10 @@
     var dots=[].slice.call(wrap.querySelectorAll(".fdqb-dots i"));
     var bar=document.getElementById("fdqbBar");
     var N=imgs.length, lastAct=-1;
-    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
     // alle Frames vorladen (kein Pop-in beim Scrubben)
     FRAMES.forEach(function(u){ var im=new Image(); im.src=u; });
-    if(reduce){ imgs.forEach(function(im,i){ im.style.opacity=(i===N-1)?1:0; }); if(bar)bar.style.width="100%"; return; }
+    // Hinweis: KEIN prefers-reduced-motion-Gate — Scroll-Scrubbing ist
+    // nutzergesteuert (kein Autoplay) und bleibt daher immer aktiv.
     function update(){
       var total=wrap.offsetHeight-window.innerHeight;
       var r=wrap.getBoundingClientRect();
