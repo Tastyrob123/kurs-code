@@ -9304,13 +9304,15 @@
   var GK_CHAIN=[
     {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
     {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg'},
-    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg', result:true}
+    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg'},
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg', result:true}
   ];
   var PK_CHAIN=[
     {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
     {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg'},
     {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg'},
-    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg', result:true}
+    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg'},
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -9338,35 +9340,25 @@
   #tsgkflow.in .link-line{opacity:1;transform:scaleX(1)}
   #tsgkflow .link-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:translateX(-120%);opacity:0}
   #tsgkflow.in .link-line::after{animation:tsgkflow-sheen 1.4s ease .1s 1 forwards;animation-delay:calc(var(--i) * 180ms + 400ms)}
-  #tsgkflow .down-wrap{display:flex;flex-direction:column;align-items:center;margin-top:26px}
-  #tsgkflow .down-line{width:2px;height:30px;border-radius:2px;background:linear-gradient(180deg,rgba(var(--g),.05),rgba(var(--g),.5));opacity:0;transform:scaleY(0);transform-origin:top center;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
-  #tsgkflow.in .down-line{opacity:1;transform:scaleY(1)}
-  #tsgkflow .badge{margin-top:10px;padding:14px 30px;border-radius:999px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.08rem;font-weight:600;letter-spacing:-.005em;color:#05060b;background:linear-gradient(180deg,#efe6d2,#c7b489);box-shadow:0 12px 32px -10px rgba(199,180,137,.55);opacity:0;transform:translateY(10px) scale(.9);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 180ms)}
-  #tsgkflow.in .badge{opacity:1;transform:none;animation:tsgkflow-pulse 3.4s ease calc(var(--i) * 180ms + 900ms) infinite}
   @keyframes tsgkflow-sheen{0%{transform:translateX(-120%);opacity:0}15%{opacity:1}100%{transform:translateX(120%);opacity:0}}
-  @keyframes tsgkflow-pulse{0%,100%{box-shadow:0 12px 32px -10px rgba(199,180,137,.55)}50%{box-shadow:0 12px 40px -8px rgba(199,180,137,.8),0 0 26px rgba(199,180,137,.3)}}
   @media(max-width:760px){#tsgkflow .chain{gap:14px 8px}#tsgkflow .link{width:0;height:0;flex:0 0 100%}#tsgkflow .link-line{display:none}#tsgkflow .node{width:96px}#tsgkflow .node-med{width:66px;height:66px}#tsgkflow .node.result .node-med{width:78px;height:78px}#tsgkflow .hd{font-size:1.4rem}}
-  @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-line,#tsgkflow .down-line,#tsgkflow .badge,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none;animation:none}#tsgkflow .link-line::after{display:none}}
+  @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-line,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none;animation:none}#tsgkflow .link-line::after{display:none}}
   `;
   function on(){ return PATH.test(location.pathname); }
   function injectCSS(){ if(document.getElementById('tsgkflow-css'))return; var s=document.createElement('style'); s.id='tsgkflow-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function chain(items, startIdx, badgeText){
+  /* "Deckungsbeitrag II/III" ist ein GANZ NORMALER Kettenglied-Knoten am Ende
+     der jeweiligen Kette (Foto + Label, .result nur fuer den Gold-Ring) —
+     KEIN separates Pill/Badge-Element mehr. Robert-Feedback 17.07.2026:
+     das Pill brach in 3 Zeilen um ("=" / "Deckungsbeitrag" / "II" wirkte wie
+     falsche Gleichzeichen) UND hing unter der Zeile statt darin — beides
+     durch "ist einfach der letzte Knoten der Kette" strukturell erledigt. */
+  function chain(items, startIdx){
     var out='', i=startIdx;
     items.forEach(function(it, idx){
       if(idx>0){ out+='<div class="link" style="--i:'+i+'"><span class="link-line"></span></div>'; i++; }
-      var inner='<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
-        +'<div class="node-lbl">'+it.t+'</div>';
-      if(it.result){
-        /* Pfeil+Badge haengt DIREKT am Ergebnis-Knoten (nicht als eigenes,
-           unter der Zeilenmitte zentriertes Element) — sonst wirkt die
-           Herkunft ("wie haengt X mit DB II zusammen?") unklar/beliebig.
-           Robert-Feedback 17.07.2026. */
-        out += '<div class="node result" style="--i:'+i+'">'+inner
-          +'<div class="down-wrap"><span class="down-line" style="--i:'+(i+1)+'"></span>'
-          +'<span class="badge" style="--i:'+(i+1)+'">'+badgeText+'</span></div></div>';
-        i+=2; return;
-      }
-      out += '<div class="node" style="--i:'+i+'">'+inner+'</div>';
+      out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
+        +'<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
+        +'<div class="node-lbl">'+it.t+'</div></div>';
       i++;
     });
     return {html:out, next:i};
@@ -9374,8 +9366,8 @@
   function build(){
     var root=document.createElement('div'); root.id='tsgkflow';
     var i=0;
-    var gk=chain(GK_CHAIN, i, '= Deckungsbeitrag II'); i=gk.next;
-    var pk=chain(PK_CHAIN, i, '= Deckungsbeitrag III'); i=pk.next;
+    var gk=chain(GK_CHAIN, i); i=gk.next;
+    var pk=chain(PK_CHAIN, i); i=pk.next;
     root.innerHTML=
       '<div class="hd">Von den Kosten zum <span class="g">Deckungsbeitrag</span></div>'+
       '<p class="sub">Zwei Rechenketten, ein Ziel — so verdichten sich deine Kosten Schritt für Schritt zu Deckungsbeitrag II und III.</p>'+
