@@ -10306,15 +10306,14 @@
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev5 2026-07-17) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev6 2026-07-17) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
    Append-only Modul (parallel-sicher). Guard: window.__tsIface
-   Rev 4: Intro einheitlich, Trennstriche raus, Ansichten-Sektion
-   mit Wechsel-Animation (echte Screenshots) links + Text rechts,
-   3-Anbieter-Vergleich (klickbar) bei Zutat & Gericht,
-   große zentrierte Tool-Namen mit + in Lineal.
+   Rev 6: Kapitel-Kicker raus; Ansichten-Animation groß auf
+   Laptop-Mockup; 3 Tool-Karten mit echten Logos (Gemini/Higgsfield/
+   Midjourney) je 3-Bild-Swipe nach Stärke; eigene Canva-Sektion.
    ============================================================ */
 (function(){
   if(window.__tsIface) return; window.__tsIface = true;
@@ -10330,7 +10329,11 @@
     {src:"https://files.catbox.moe/07xpp4.png",n:"Feed"},
     {src:"https://files.catbox.moe/feoto4.png",n:"Diagramm"}
   ];
-  var GALERIE_SHOT="https://files.catbox.moe/xeriqo.png";
+  /* echte Tool-Logos */
+  var LG_GEMINI="https://files.catbox.moe/xvdtd5.svg";
+  var LG_HIGGS="https://files.catbox.moe/nork7u.png";
+  var LG_MIDJOURNEY="https://files.catbox.moe/dpjfgb.svg";
+  var LG_CANVA="https://files.catbox.moe/qm931y.svg";
   function on(){ return SLUG.test(location.pathname); }
 
   /* ---------- STYLES ---------- */
@@ -10350,15 +10353,11 @@
     @keyframes tsRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
     #tsIface{--bg:#05060b;--beige:#c7b489;--beige-hi:#efe6d2;--beige-lo:#d8c9ab;--green:#8FCBAA;--red:#e32552;--tx:rgba(255,255,255,.96);--tx2:rgba(255,255,255,.9);--card:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0));--bd:rgba(255,255,255,.10);--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;--disp:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-      width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);color:#fff;font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+      width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);color:#fff;font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
     #tsIface *{box-sizing:border-box}
     #tsIface .tsif-wrap{max-width:1120px;margin:0 auto}
     #tsIface .tsif-col{max-width:760px;margin:0 auto}
     #tsIface section{margin:0 auto;padding:60px 0}
-    #tsIface .tsif-kick{display:inline-flex;align-items:baseline;gap:11px;font-family:var(--disp);font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--beige);margin:0 0 16px}
-    #tsIface .tsif-kick .kn{font-variant-numeric:tabular-nums;font-size:.7rem;letter-spacing:.05em;color:var(--beige);opacity:.55}
-    #tsIface .tsif-eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin:0 0 14px}
-    #tsIface .tsif-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
     #tsIface h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.2vw,44px);letter-spacing:-.02em;line-height:1.09;margin:0 0 16px;text-wrap:balance;color:#fff}
     #tsIface h3{font-family:var(--disp);font-weight:600;font-size:clamp(18px,1.9vw,22px);letter-spacing:-.015em;line-height:1.22;margin:0 0 10px;color:#fff}
     #tsIface .gold{color:var(--beige)}
@@ -10380,46 +10379,30 @@
     #tsIface .ph-cap{display:block;margin-top:8px;color:var(--tx2);font-size:11.5px}
 
     /* views chips — eine Reihe, direkt unter dem Intro */
-    #tsIface .viewbar{padding:6px 0 40px}
+    #tsIface .viewbar{padding:6px 0 44px}
     #tsIface .views{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:1080px;margin:0 auto}
     #tsIface .chip{padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:#fff;transition:transform .3s,border-color .3s}
     #tsIface .chip:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
     #tsIface .chip.star{background:linear-gradient(160deg,rgba(199,180,137,.22),rgba(199,180,137,.05));border-color:rgba(199,180,137,.5);color:var(--beige-hi);font-weight:600;box-shadow:0 0 30px -8px rgba(199,180,137,.4)}
     #tsIface .chip.star::before{content:"\\2605  ";color:var(--beige)}
 
-    /* frame (App-Fenster) */
-    #tsIface .frame{margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.01));box-shadow:0 30px 70px -42px rgba(0,0,0,.95);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s}
-    #tsIface .frame .bar{display:flex;gap:6px;align-items:center;padding:10px 13px;border-bottom:1px solid var(--bd)}
-    #tsIface .frame .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)}
-    #tsIface .frame.sm{max-width:420px}
-    #tsIface .frame.sm:hover{transform:translateY(-4px);border-color:rgba(199,180,137,.3)}
-    #tsIface .frame.sm .ph{border-radius:0;aspect-ratio:3/2}
-
-    /* split rows */
-    #tsIface .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center;margin:0 auto;max-width:1000px}
-    #tsIface .split + .split{margin-top:clamp(44px,5vw,64px)}
-    #tsIface .split.rev-order .s-txt{order:2}
-    #tsIface .split.rev-order .s-media{order:1}
-    #tsIface .s-txt p{color:var(--tx);margin:0}
-    #tsIface .s-txt .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
-    #tsIface .s-txt.ar{text-align:center}
-    #tsIface .split.viewsplit .s-txt .tsif-kick{justify-content:center}
-
-    /* view-switch animation — edler Fenster-Rahmen mit Glow */
-    #tsIface .vstage{position:relative;width:100%}
-    #tsIface .vstage::before{content:"";position:absolute;inset:2% -4% -8%;background:radial-gradient(58% 62% at 50% 46%,rgba(199,180,137,.16),rgba(46,64,120,.10) 46%,transparent 74%);filter:blur(26px);z-index:0;pointer-events:none}
-    #tsIface .vframe{position:relative;z-index:1;width:100%;border:1px solid rgba(199,180,137,.24);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.012));box-shadow:0 44px 100px -46px rgba(0,0,0,.98),0 0 0 1px rgba(255,255,255,.03),0 0 70px -26px rgba(199,180,137,.22);}
-    #tsIface .vframe::after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 0 0 1px rgba(255,255,255,.02)}
-    #tsIface .vframe .bar{position:relative;padding:12px 15px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0))}
-    #tsIface .vframe .bar i{width:9px;height:9px}
-    #tsIface .vtitle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--disp);font-size:11px;letter-spacing:.08em;color:var(--tx2)}
-    #tsIface .vtitle b{color:var(--beige);font-weight:600}
-    #tsIface .vswitch{position:relative;width:100%;aspect-ratio:1180/838;background:#17181e;overflow:hidden;border-radius:0 0 15px 15px}
+    /* Laptop-Mockup (Ansichten-Animation + Canva) */
+    #tsIface .macwrap{position:relative;max-width:940px;margin:36px auto 0}
+    #tsIface .macwrap::before{content:"";position:absolute;inset:-2% -5% -12%;background:radial-gradient(56% 62% at 50% 44%,rgba(199,180,137,.16),rgba(46,64,120,.12) 46%,transparent 74%);filter:blur(32px);z-index:0;pointer-events:none}
+    #tsIface .mac{position:relative;z-index:1}
+    #tsIface .mac-screen{position:relative;border:11px solid #1b1c22;border-bottom:0;border-radius:18px 18px 0 0;background:#0b0c11;overflow:hidden;box-shadow:0 46px 100px -50px rgba(0,0,0,.98),inset 0 0 0 1px rgba(255,255,255,.04)}
+    #tsIface .mac-top{height:24px;display:flex;align-items:center;justify-content:center;background:#0b0c11}
+    #tsIface .mac-top .cam{width:6px;height:6px;border-radius:50%;background:#2b2c33;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+    #tsIface .mac-base{position:relative;width:102%;left:-1%;height:15px;background:linear-gradient(180deg,#26272e,#111218);border-radius:0 0 13px 13px;box-shadow:0 34px 54px -32px rgba(0,0,0,.9)}
+    #tsIface .mac-base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:14%;height:7px;background:#0b0c11;border-radius:0 0 8px 8px}
+    #tsIface .vswitch{position:relative;width:100%;aspect-ratio:16/10;background:#17181e;overflow:hidden}
     #tsIface .vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;opacity:0;transition:opacity .7s ease}
     #tsIface .vslide.on{opacity:1}
+    #tsIface .vswitch .ph{position:absolute;inset:0;width:100%;height:100%;border-radius:0}
+    #tsIface .vbadge{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--disp);font-size:11px;letter-spacing:.08em;color:var(--tx2);background:rgba(5,6,11,.55);border:1px solid var(--bd);border-radius:999px;padding:5px 12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+    #tsIface .vbadge b{color:var(--beige);font-weight:600}
 
-    /* compare carousel (Gemini/Higgsfield/Midjourney) */
-    #tsIface .compare{max-width:420px;margin:0 auto;width:100%}
+    /* compare / swipe carousel */
     #tsIface .cmp-stage{position:relative}
     #tsIface .cmp-slide{opacity:0;position:absolute;inset:0;transition:opacity .45s ease}
     #tsIface .cmp-slide.on{opacity:1;position:relative}
@@ -10427,27 +10410,36 @@
     #tsIface .cmp-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:rgba(5,6,11,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .25s,color .25s,border-color .25s,transform .25s;z-index:3}
     #tsIface .cmp-nav:hover{background:rgba(199,180,137,.9);color:#05060b;border-color:transparent;transform:translateY(-50%) scale(1.06)}
     #tsIface .cmp-prev{left:10px}#tsIface .cmp-next{right:10px}
-    #tsIface .cmp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:0 2px}
+    #tsIface .cmp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:0 2px}
     #tsIface .cmp-label{font-family:var(--disp);font-size:13px;letter-spacing:.02em;color:var(--beige-hi)}
     #tsIface .cmp-dots{display:flex;gap:7px}
     #tsIface .cmp-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0;transition:background .25s}
     #tsIface .cmp-dot.on{background:var(--beige)}
 
-    /* Galerie-Trio (3 nebeneinander, mit Covern) */
+    /* Tool-Showcase-Trio (Gemini/Higgsfield/Midjourney) */
     #tsIface .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:38px auto 0}
     #tsIface .tcard{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:0 34px 78px -44px rgba(0,0,0,.96);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s}
     #tsIface .tcard:hover{transform:translateY(-5px);border-color:rgba(199,180,137,.32)}
-    #tsIface .tvisual{position:relative;aspect-ratio:3/2;overflow:hidden;background:#17181e;border-bottom:1px solid var(--bd)}
-    #tsIface .tvisual>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+    #tsIface .tlogo{display:flex;align-items:center;justify-content:center;height:74px;padding:24px 20px 8px}
+    #tsIface .tlogo img{max-height:40px;max-width:66%;width:auto;height:auto;object-fit:contain;border-radius:9px;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
+    #tsIface .tvisual{position:relative;aspect-ratio:3/2;overflow:hidden;background:#17181e;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
     #tsIface .tvisual .cmp-stage{position:absolute;inset:0}
     #tsIface .tvisual .cmp-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
     #tsIface .tvisual .cmp-slide.on{opacity:1;position:absolute}
     #tsIface .tvisual .cmp-slide .ph{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
-    #tsIface .tcap{padding:22px 22px 24px}
-    #tsIface .tcap .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
+    #tsIface .tcap{padding:22px 22px 24px;text-align:center}
     #tsIface .tcap h3{margin:0 0 8px;font-size:clamp(17px,1.7vw,20px)}
-    #tsIface .tcap p{color:var(--tx);font-size:14px;line-height:1.62;margin:0}
-    #tsIface .tcard .cmp-foot{margin-top:16px}
+    #tsIface .tcap p{color:var(--tx);font-size:14px;line-height:1.62;margin:0 auto;max-width:34ch}
+    #tsIface .tcard .cmp-foot{margin-top:16px;justify-content:center;gap:16px}
+
+    /* Canva-Sektion */
+    #tsIface .canva-logo{height:30px;width:auto;margin:0 auto 16px;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+    #tsIface .bullets{list-style:none;margin:6px 0 0;padding:0;max-width:420px}
+    #tsIface .bullets li{position:relative;padding:0 0 0 32px;margin-bottom:15px;color:var(--tx);font-size:15.5px;line-height:1.5}
+    #tsIface .bullets li::before{content:"";position:absolute;left:0;top:2px;width:19px;height:19px;border-radius:50%;background:rgba(199,180,137,.13);border:1px solid rgba(199,180,137,.42)}
+    #tsIface .bullets li::after{content:"";position:absolute;left:6px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 10px rgba(199,180,137,.7)}
+    #tsIface .canva-split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,60px);align-items:center;max-width:1040px;margin:34px auto 0}
+    #tsIface .canva-split .macwrap{margin:0}
 
     /* use-case cards */
     #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:34px auto 0}
@@ -10458,7 +10450,7 @@
     #tsIface .toolrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin:2px 0 16px}
     #tsIface .tname{font-family:var(--disp);font-weight:600;font-size:clamp(1.15rem,1.7vw,1.5rem);letter-spacing:-.01em;color:#fff;line-height:1.1}
     #tsIface .tplus{font-family:var(--disp);font-size:1.15rem;color:var(--beige);font-weight:600}
-    #tsIface .card h3{font-size:clamp(15px,1.5vw,17px);color:var(--beige-hi);letter-spacing:.02em;text-transform:uppercase;font-size:12px;margin:0 0 12px}
+    #tsIface .card h3{color:var(--beige-hi);letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin:0 0 12px}
     #tsIface .card p.k{color:var(--tx);margin:0 auto;max-width:34ch}
     #tsIface .flow{font-size:13.5px;color:var(--tx);margin:14px auto 0;line-height:1.55;max-width:36ch}
     #tsIface .flow .arw{color:var(--beige);padding:0 4px;font-weight:600}
@@ -10466,7 +10458,16 @@
     #tsIface .req b{color:var(--beige-hi)}
     #tsIface .who{display:inline-block;margin-top:14px;font-size:12px;font-weight:600;color:#05060b;background:var(--beige);border-radius:7px;padding:6px 12px}
     #tsIface .who.self{background:transparent;color:#fff;border:1px solid var(--bd)}
-    #tsIface .cards-note{text-align:center;font-size:12.5px;color:var(--tx2);margin:18px auto 0;max-width:640px}
+
+    /* split rows (Ordner-Sektion) */
+    #tsIface .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center;margin:0 auto;max-width:1000px}
+    #tsIface .s-txt p{color:var(--tx);margin:0}
+    #tsIface .s-txt .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
+    #tsIface .frame{margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.01));box-shadow:0 30px 70px -42px rgba(0,0,0,.95);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s;max-width:420px}
+    #tsIface .frame:hover{transform:translateY(-4px);border-color:rgba(199,180,137,.3)}
+    #tsIface .frame .bar{display:flex;gap:6px;align-items:center;padding:10px 13px;border-bottom:1px solid var(--bd)}
+    #tsIface .frame .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)}
+    #tsIface .frame .ph{border-radius:0;aspect-ratio:3/2}
 
     /* table */
     #tsIface .tbl{overflow-x:auto;border-radius:16px;border:1px solid var(--bd);max-width:880px;margin:26px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,0))}
@@ -10531,12 +10532,9 @@
 
     @media(max-width:860px){
       #tsIface section{padding:48px 0}
-      #tsIface .split{grid-template-columns:1fr;gap:26px;max-width:440px}
-      #tsIface .split.rev-order .s-txt{order:1}#tsIface .split.rev-order .s-media{order:2}
-      #tsIface .split.viewsplit .s-txt{order:2}#tsIface .split.viewsplit .s-media{order:1}
-      #tsIface .s-txt.ar{text-align:left}
+      #tsIface .split,#tsIface .canva-split{grid-template-columns:1fr;gap:26px;max-width:460px}
       #tsIface .cards,#tsIface .gal,#tsIface .trio{grid-template-columns:1fr}
-      #tsIface .trio{max-width:440px}
+      #tsIface .trio{max-width:420px}
       #tsIface .learn{grid-template-columns:repeat(2,1fr);gap:34px 28px;max-width:560px}
       .page__interface-bau-grundstruktur-widgets .ts-hero__text{margin-top:-22%}
     }
@@ -10574,35 +10572,32 @@
   }
 
   /* helpers */
-  function frameSm(cap){ return '<div class="frame sm"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
-  function viewSwitch(){
+  function laptop(inner){
+    return '<div class="macwrap"><div class="mac"><div class="mac-screen"><div class="mac-top"><span class="cam"></span></div>'+inner+'</div><div class="mac-base"></div></div></div>';
+  }
+  function viewMock(){
     var slides='';
     for(var i=0;i<VIEWS.length;i++){ slides+='<img class="vslide'+(i===0?' on':'')+'" src="'+VIEWS[i].src+'" alt="Ansicht: '+VIEWS[i].n+'" loading="lazy">'; }
-    return '<div class="vstage"><div class="frame vframe"><div class="bar"><i></i><i></i><i></i><span class="vtitle">Ansicht: <b>Tabelle</b></span></div><div class="vswitch">'+slides+'</div></div></div>';
+    return laptop('<div class="vswitch"><span class="vbadge">Ansicht: <b>Tabelle</b></span>'+slides+'</div>');
   }
-  function cmpSlides(subject){
-    var provs=['Gemini','Higgsfield','Midjourney'];
+  function canvaMock(){
+    return laptop('<div class="vswitch"><div class="ph"><div class="ph-in"><span class="ph-pill">Canva</span><span class="ph-cap">Canva-Ansicht · Bild folgt</span></div></div></div>');
+  }
+  /* Tool-Showcase-Karte: großes Logo, 3-Bild-Swipe der Stärke, Text */
+  function toolShow(logo,name,spec,text,motif){
     var slides='',dots='';
-    for(var i=0;i<provs.length;i++){
-      slides+='<div class="cmp-slide'+(i===0?' on':'')+'" data-p="'+provs[i]+'"><div class="ph"><div class="ph-in"><span class="ph-pill">'+provs[i]+'</span><span class="ph-cap">'+subject+' · 3:2</span></div></div></div>';
-      dots+='<button class="cmp-dot'+(i===0?' on':'')+'" aria-label="'+provs[i]+'"></button>';
+    for(var i=1;i<=3;i++){
+      slides+='<div class="cmp-slide'+(i===1?' on':'')+'" data-p="Beispiel '+i+'"><div class="ph"><div class="ph-in"><span class="ph-pill">'+motif+'</span><span class="ph-cap">Beispiel '+i+' · folgt</span></div></div></div>';
+      dots+='<button class="cmp-dot'+(i===1?' on':'')+'" aria-label="Beispiel '+i+'"></button>';
     }
-    return {slides:slides,dots:dots};
-  }
-  /* Trio-Karte mit statischem Bild-Cover */
-  function trioImg(src,alt,eye,title,text){
-    return '<div class="tcard"><div class="tvisual"><img src="'+src+'" alt="'+alt+'" loading="lazy"></div>'+
-      '<div class="tcap"><span class="st-eye">'+eye+'</span><h3>'+title+'</h3><p>'+text+'</p></div></div>';
-  }
-  /* Trio-Karte mit 3-Anbieter-Vergleich (klickbar) */
-  function trioCompare(eye,title,text,subject){
-    var c=cmpSlides(subject);
-    return '<div class="tcard compare"><div class="tvisual"><div class="cmp-stage">'+c.slides+
-        '<button class="cmp-nav cmp-prev" aria-label="Vorheriger Anbieter">‹</button>'+
-        '<button class="cmp-nav cmp-next" aria-label="Nächster Anbieter">›</button>'+
+    return '<div class="tcard compare">'+
+      '<div class="tlogo"><img src="'+logo+'" alt="'+name+'"></div>'+
+      '<div class="tvisual"><div class="cmp-stage">'+slides+
+        '<button class="cmp-nav cmp-prev" aria-label="Vorheriges Beispiel">‹</button>'+
+        '<button class="cmp-nav cmp-next" aria-label="Nächstes Beispiel">›</button>'+
       '</div></div>'+
-      '<div class="tcap"><span class="st-eye">'+eye+'</span><h3>'+title+'</h3><p>'+text+'</p>'+
-        '<div class="cmp-foot"><span class="cmp-label">Gemini</span><span class="cmp-dots">'+c.dots+'</span></div>'+
+      '<div class="tcap"><h3>'+spec+'</h3><p>'+text+'</p>'+
+        '<div class="cmp-foot"><span class="cmp-label">Beispiel 1</span><span class="cmp-dots">'+dots+'</span></div>'+
       '</div></div>';
   }
   function toolcard(tools,cat,desc,flow,who,whoSelf,req){
@@ -10610,6 +10605,7 @@
     for(var i=0;i<tools.length;i++){ if(i) tr+='<span class="tplus">+</span>'; tr+='<span class="tname">'+tools[i]+'</span>'; }
     return '<div class="card"><div class="toolrow">'+tr+'</div><h3>'+cat+'</h3><p class="k">'+desc+'</p><div class="flow">'+flow+'</div>'+(req?'<div class="req">'+req+'</div>':'')+'<span class="who'+(whoSelf?' self':'')+'">'+who+'</span></div>';
   }
+  function frameSm(cap){ return '<div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
 
   /* ---------- CONTENT ---------- */
   function contentHTML(){
@@ -10629,38 +10625,53 @@
       '</div>'+
     '</div>'+
 
-    /* 01 · Bausteinprinzip — Animation links, Text mittig */
-    '<section class="rev">'+
-      '<div class="split viewsplit">'+
-        '<div class="s-media">'+viewSwitch()+'</div>'+
-        '<div class="s-txt ar">'+
-          '<div class="tsif-kick"><span class="kn">01</span>Das Bausteinprinzip</div>'+
-          '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
-          '<p>Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm. Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
-        '</div>'+
-      '</div>'+
-    '</section>'+
-
-    /* 02 · Galerie — 3 nebeneinander mit Covern */
-    '<section class="rev">'+
-      '<div class="tsif-col center" style="margin-bottom:14px">'+
-        '<div class="tsif-kick" style="justify-content:center"><span class="kn">02</span>Unser Main Character</div>'+
-        '<h2>Die <span class="gold">Galerie mit Covern</span></h2>'+
-        '<p class="tsif-sub">Von allen Ansichten ist eine unser Star: die Galerie mit Covern. Sie zeigt jeden Eintrag als Kachel mit eigenem Titelbild — dadurch wirkt dein Backoffice wie ein hochwertiges Produkt statt wie eine Tabelle. Genau das hebt dein System von allem ab, was aktuell auf dem Markt erhältlich ist.</p>'+
-      '</div>'+
-      '<div class="trio">'+
-        trioImg(GALERIE_SHOT,'Galerie mit Covern','Der Effekt','Aus Zeilen werden Karten','Statt grauer Tabellenzeilen siehst du jeden Eintrag als Karte mit Titelbild — wie in einer Speisekarte oder einem Online-Shop. Das ist der Unterschied zwischen „Datenbank“ und „System“.')+
-        trioCompare('Die Bilder','Dasselbe Motiv, drei Tools','Die Cover erzeugen wir mit KI. Klick dich durch: dieselbe Zutat von Gemini, Higgsfield und Midjourney — so siehst du direkt, welches Tool welchen Look liefert.','Zutat')+
-        trioCompare('Der Feinschliff','Veredeln in Canva Pro','Für die Nachbearbeitung empfehle ich Canva Pro: Texte, dein Logo, Mockups und Schattierungen übers Rohbild. Auch hier dasselbe Gericht bei drei Anbietern — klick dich durch.','Gericht')+
-      '</div>'+
-    '</section>'+
-
-    /* 03 · Werkzeug-Wahl */
+    /* Bausteinprinzip — Text mittig, große Laptop-Animation darunter */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<div class="tsif-kick" style="justify-content:center"><span class="kn">03</span>Werkzeug-Wahl</div>'+
+        '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
+        '<p class="tsif-sub">Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm. Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
+      '</div>'+
+      viewMock()+
+    '</section>'+
+
+    /* Galerie mit Covern — 3 Tool-Karten mit echten Logos */
+    '<section class="rev">'+
+      '<div class="tsif-col center" style="margin-bottom:14px">'+
+        '<h2>Die <span class="gold">Galerie mit Covern</span></h2>'+
+        '<p class="tsif-sub">Von allen Ansichten ist eine unser Star: die Galerie mit Covern. Sie zeigt jeden Eintrag als Kachel mit eigenem Titelbild — dadurch wirkt dein Backoffice wie ein hochwertiges Produkt statt wie eine Tabelle. Diese Cover erstellen drei KI-Tools — jedes stark in seinem eigenen Bereich.</p>'+
+      '</div>'+
+      '<div class="trio">'+
+        toolShow(LG_GEMINI,'Gemini','Lebensmittel &amp; Food','Gemini ist am stärksten bei realistischem Essen — einzelnen Zutaten und fertig angerichteten Gerichten.','Food')+
+        toolShow(LG_HIGGS,'Higgsfield','Fotorealistische 3D-Objekte','Higgsfield glänzt bei Produkten und Inventar, die täuschend echt wirken — Verpackungen, Geschirr, Ausstattung.','Objekt')+
+        toolShow(LG_MIDJOURNEY,'Midjourney','Abstrakte Welten &amp; Landscapes','Midjourney ist die erste Wahl für Stimmung: abstrakte Cover, Hintergründe und weite Landschaften.','Landscape')+
+      '</div>'+
+    '</section>'+
+
+    /* Veredeln in Canva Pro — Logo + Überschrift mittig, Bullets links, PC rechts */
+    '<section class="rev">'+
+      '<div class="tsif-col center">'+
+        '<img class="canva-logo" src="'+LG_CANVA+'" alt="Canva">'+
+        '<h2>Veredeln in <span class="gold">Canva Pro</span></h2>'+
+        '<p class="tsif-sub">Manche Bilder gehen vor Notion noch kurz durch Canva Pro. Dort machst du aus einem Rohbild ein fertiges, verkaufsstarkes Cover.</p>'+
+      '</div>'+
+      '<div class="canva-split">'+
+        '<div class="s-txt"><ul class="bullets">'+
+          '<li>Texte einfügen</li>'+
+          '<li>Texthintergründe setzen</li>'+
+          '<li>Schatten erstellen</li>'+
+          '<li>Logos &amp; Symbole einfügen</li>'+
+          '<li>Bildteile ausschneiden &amp; freistellen</li>'+
+          '<li>… und vieles mehr</li>'+
+        '</ul></div>'+
+        '<div class="s-media">'+canvaMock()+'</div>'+
+      '</div>'+
+    '</section>'+
+
+    /* Werkzeug-Wahl */
+    '<section class="rev">'+
+      '<div class="tsif-col center">'+
         '<h2>Wofür benutzen wir <span class="gold">welches Tool</span>?</h2>'+
-        '<p class="tsif-sub">Kein Tool kann alles gleich gut. Das eine ist stark bei Essen, das andere bei Produkten, das dritte bei Hintergründen. Hier siehst du für jede Bild-Art das passende Werkzeug — und wer das Bild am Ende in Notion einsetzt: du selbst oder Claude für dich.</p>'+
+        '<p class="tsif-sub">Kein Tool kann alles gleich gut. Hier siehst du für jede Bild-Art das passende Werkzeug — und wer das Bild am Ende in Notion einsetzt: du selbst oder Claude für dich.</p>'+
       '</div>'+
       '<div class="cards">'+
         toolcard(['ChatGPT','Gemini'],'Zutaten','Einzelne Zutaten, fotorealistisch — Tomaten, Mehl, Kräuter, Öl.','Erstellen <span class="arw">&rarr;</span> selbst in Notion einsetzen','Machst du selbst',true,'')+
@@ -10668,13 +10679,11 @@
         toolcard(['Claude Code','Higgsfield'],'Fotorealistische Objekte','Produkte und Inventar, die täuschend echt aussehen — Verpackungen, Geschirr, Festwert-Inventar.','Claude erstellt das Bild und setzt es direkt für dich in Notion ein','Claude macht’s für dich',false,'Voraussetzung: zwei MCP-Verbindungen — <b>Higgsfield</b> + <b>Notion</b>')+
         toolcard(['Midjourney','Canva Pro'],'Banner · Cover · Landscapes','Stimmungsvolle Hintergründe und breite Banner — z.&nbsp;B. der Streifen oben auf einer Seite.','Erstellen <span class="arw">&rarr;</span> in Canva veredeln <span class="arw">&rarr;</span> in Notion einsetzen','Machst du selbst',true,'')+
       '</div>'+
-      '<p class="cards-note">Die animierte Übersicht dieser vier Anwendungsfälle — mit echten Motiven und Tool-Logos — folgt an dieser Stelle.</p>'+
     '</section>'+
 
-    /* 04 · Kosten / Abos */
+    /* Kosten / Abos */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<div class="tsif-kick" style="justify-content:center"><span class="kn">04</span>Die Werkzeug-Kosten</div>'+
         '<h2>Klingt nach <span class="gold">vielen Abos</span></h2>'+
         '<p class="tsif-sub">Auf den ersten Blick sind das einige Abos pro Monat — und dauerhaft laufen gelassen würde das mittelfristig den Rahmen sprengen. Erst der Überblick, welche du brauchst, dann der Trick, es günstig zu halten.</p>'+
       '</div>'+
@@ -10692,12 +10701,11 @@
       '<div class="box beige"><div class="bh">Keine Lust auf die Abo-Runde? Der Tasty-Studios-Shop</div><p>Parallel baue ich einen Shop, in dem du fertige Designs einfach bestellen kannst — Gerichte, Zutaten, Festwert-Inventar und mehr: entweder als fertiges Bildmaterial oder gleich als komplette Notion-Datenbank. Hast du spezielle Wünsche, die du im Shop nicht findest? Schreib mir gerne an <a href="mailto:robert@tasty-studios.com">robert@tasty-studios.com</a>.</p></div>'+
     '</section>'+
 
-    /* 05 · Prompt-Vorlagen */
+    /* Prompt-Vorlagen */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<div class="tsif-kick" style="justify-content:center"><span class="kn">05</span>Prompt-Vorlagen</div>'+
         '<h2>Wie erstellen wir die <span class="gold">verschiedenen Bild-Arten</span>?</h2>'+
-        '<p class="tsif-sub">Jetzt weißt du, welches Tool wofür. Bleibt die Frage: Wie sag ich dem Tool, was ich will? Jedes „versteht“ deine Anweisung ein bisschen anders. Damit du nicht bei null anfängst, bekommst du fertige Prompt-Vorlagen — Textbausteine, die du nur noch anpasst und einfügst. Für jedes Tool eine eigene.</p>'+
+        '<p class="tsif-sub">Jedes Tool „versteht“ deine Anweisung ein bisschen anders. Damit du nicht bei null anfängst, bekommst du fertige Prompt-Vorlagen — Textbausteine, die du nur noch anpasst und einfügst. Für jedes Tool eine eigene.</p>'+
       '</div>'+
       '<div class="gal">'+
         '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Gemini-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Gemini</div><h3>Zutaten &amp; Gerichte</h3><div class="prompt">[ Prompt-Vorlage folgt ]</div></div></div>'+
@@ -10706,10 +10714,9 @@
       '</div>'+
     '</section>'+
 
-    /* 06 · Formate */
+    /* Formate */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<div class="tsif-kick" style="justify-content:center"><span class="kn">06</span>Formate &amp; Größen</div>'+
         '<h2>Jedes Bild ins <span class="gold">richtige Format</span></h2>'+
         '<p class="tsif-sub">Ein Bild muss die richtige Größe haben, sonst wirkt es in Notion abgeschnitten oder verzerrt. Für jede Bild-Art gibt es deshalb einen festen Weg und ein festes Format. Einmal gemerkt, machst du es danach immer gleich.</p>'+
       '</div>'+
@@ -10730,10 +10737,10 @@
       '</div>'+
     '</section>'+
 
-    /* 07 · Ordner + Links */
+    /* Ordner + Links */
     '<section class="rev">'+
       '<div class="split">'+
-        '<div class="s-txt"><div class="tsif-kick"><span class="kn">07</span>Ordnung von Anfang an</div><h3>Ordner auf dem Rechner anlegen</h3><p>Bevor du loslegst, leg dir ein paar Ordner an — je einen für Zutaten, Gerichte und Banner. Klingt banal, spart dir aber viel Sucherei: So findest du jedes Bild sofort wieder und kannst in Ruhe Material sammeln, bis der nächste Schwung dran ist.</p></div>'+
+        '<div class="s-txt"><h3>Ordner auf dem Rechner anlegen</h3><p>Bevor du loslegst, leg dir ein paar Ordner an — je einen für Zutaten, Gerichte und Banner. Klingt banal, spart dir aber viel Sucherei: So findest du jedes Bild sofort wieder und kannst in Ruhe Material sammeln, bis der nächste Schwung dran ist.</p></div>'+
         '<div class="s-media">'+frameSm('Ordner-Baum · Zutaten / Gerichte / Banner')+'</div>'+
       '</div>'+
       '<div class="cards" style="max-width:840px;margin-top:44px">'+
@@ -10744,10 +10751,10 @@
 
     /* Learnings */
     '<section class="rev">'+
-      '<div class="tsif-col center"><div class="tsif-eyebrow" style="justify-content:center">Was du mitnimmst</div><h2>4 <span class="gold">Learnings</span></h2></div>'+
+      '<div class="tsif-col center"><h2>4 <span class="gold">Learnings</span></h2></div>'+
       '<div class="learn">'+
         '<div class="lcell"><div class="lorb"><span class="lnum">1</span><p class="lt">Eine Datenbank, viele Ansichten — die <b>Galerie mit Covern</b> macht aus deiner Tabelle ein System, das aussieht wie eine App.</p></div></div>'+
-        '<div class="lcell"><div class="lorb"><span class="lnum">2</span><p class="lt">Für jede Bild-Art das passende Tool: <b>Gemini</b> fürs Essen, <b>Higgsfield</b> für Objekte, <b>Midjourney</b> für Banner.</p></div></div>'+
+        '<div class="lcell"><div class="lorb"><span class="lnum">2</span><p class="lt">Jedes Tool hat seine Stärke: <b>Gemini</b> fürs Essen, <b>Higgsfield</b> für Objekte, <b>Midjourney</b> für Welten &amp; Banner.</p></div></div>'+
         '<div class="lcell"><div class="lorb"><span class="lnum">3</span><p class="lt">Abos nicht dauerhaft laufen lassen: in <b>4 Wochen</b> einmal alles bauen, danach nur bei Bedarf für einen Monat nachbuchen.</p></div></div>'+
         '<div class="lcell"><div class="lorb"><span class="lnum">4</span><p class="lt">Sehr breite Banner immer <b>breit erstellen und dann zuschneiden</b> — nie stauchen.</p></div></div>'+
       '</div>'+
@@ -10784,7 +10791,7 @@
 
   function startViewCycle(root){
     var slides=root.querySelectorAll('.vslide'); if(slides.length<2) return;
-    var title=root.querySelector('.vtitle');
+    var badge=root.querySelector('.vbadge');
     if(window.__tsIfaceIv){ clearInterval(window.__tsIfaceIv); }
     var i=0;
     window.__tsIfaceIv=setInterval(function(){
@@ -10792,7 +10799,7 @@
       slides[i].classList.remove('on');
       i=(i+1)%slides.length;
       slides[i].classList.add('on');
-      if(title){ var n=slides[i].getAttribute('alt')||''; title.innerHTML='Ansicht: <b>'+n.replace('Ansicht: ','')+'</b>'; }
+      if(badge){ var n=(slides[i].getAttribute('alt')||'').replace('Ansicht: ',''); badge.innerHTML='Ansicht: <b>'+n+'</b>'; }
     },2100);
   }
 
