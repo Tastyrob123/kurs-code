@@ -10209,14 +10209,14 @@
     {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
     {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'je Monat'},
     {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'je Stück'},
-    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'−', sub:'DB I − GK pro Produkt', result:true}
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'→', sub:'DB I − GK pro Produkt', result:true}
   ];
   var PK_CHAIN=[
     {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
     {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'je Stunde'},
     {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zeit'},
     {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt'},
-    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'−', sub:'DB II − PK pro Produkt', result:true}
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'→', sub:'DB II − PK pro Produkt', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
