@@ -6493,6 +6493,9 @@
   #tsshop .tss-body{position:relative}
   #tsshop .tss-body::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:0 0 16px 16px;background:linear-gradient(180deg,rgba(143,203,170,.12),rgba(143,203,170,.22));opacity:0;transition:opacity .55s ease}
   #tsshop .tss-card.is-done .tss-body::after{opacity:1}
+  /* Erledigt: grüner Schleier steigt vom Textbereich in die untere Bildhälfte -> Karte wirkt durchgehend grün (nicht halb schwarz) */
+  #tsshop .tss-imgwrap::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(143,203,170,.30));opacity:0;transition:opacity .55s ease;z-index:2}
+  #tsshop .tss-card.is-done .tss-imgwrap::after{opacity:1}
   #tsshop .tss-card.is-done{--tss-g:143,203,170;background:linear-gradient(165deg,rgba(160,208,180,.30),rgba(160,208,180,.12) 55%,rgba(160,208,180,.05));border-color:rgba(160,208,180,.6);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 38px rgba(143,203,170,.24)}
   #tsshop .tss-card.is-done .tss-val{color:#9FD3B9}
   /* ── Relation-Kacheln: Ghost (erscheint automatisch) + Safe-for-Later (Lila) ── */
@@ -9804,7 +9807,7 @@
       <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du verstehst, wie die Angebot-Datenbank aus Menü, Personal und Gemeinkosten einen Preisvorschlag errechnet, der zu deiner Zielmarge passt.</p></div></div>
       <div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">Du hast gesehen, wie Claude Code dir aus den fertigen Zahlen direkt ein Angebot für den Kunden formuliert.</p></div></div>
     </div>
-    <div class="cta-wrap"><span class="cta-btn">Zur Einrichtung</span></div>
+    <div class="cta-wrap"><a class="cta-btn" href="/key-metrics">Nächste Lektion</a></div>
   </div>
 </section>
 
