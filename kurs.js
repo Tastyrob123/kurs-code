@@ -3287,6 +3287,178 @@
 /* ---- */
 
 /* ============================================================
+   allergene-bersicht — Allergen-Warenkorb "In den Kolben" (#tsalgcart)
+   Eigenständige Variante des .tsshop-Regals (Optik gespiegelt: Glas-
+   karten, Champagner-Gold, Cover 1/1, Hover-Heartbeat, Shelf-Scroll),
+   ABER: „Währung" = chemische Formel/Zusammensetzung des Allergens,
+   „In den Warenkorb" -> „In den Kolben" (Erlenmeyer statt Einkaufswagen).
+   Eigener Guard/Namespace — berührt das globale .tsshop NICHT.
+   Mountet zwischen #tsalgpc und #tsalgpc2. Kein neuer Font/keine neue Farbe.
+   ============================================================ */
+(function(){
+  if(window.__tsalgcart) return; window.__tsalgcart=true;
+  var GOLD='199,180,137', GRN='143,203,170';
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+
+  // Reihenfolge = DB-Galerie. img wird nach Cover-Beschaffung gefüllt; leer -> Platzhalter.
+  var ITEMS=[
+    {name:'Glutenhaltiges Getreide', formel:'Gliadin + Glutenin', img:'https://files.catbox.moe/en0s2q.png'},
+    {name:'Krebstiere', formel:'Tropomyosin', img:'https://files.catbox.moe/24751s.png'},
+    {name:'Eier', formel:'Ovalbumin / Ovomucoid', img:'https://files.catbox.moe/4cq3ze.png'},
+    {name:'Fisch', formel:'Parvalbumin', img:'https://files.catbox.moe/wx4zhu.png'},
+    {name:'Erdnüsse', formel:'Ara h 1–3', img:'https://files.catbox.moe/6ttxoq.png'},
+    {name:'Soja', formel:'Glycinin / β-Conglycinin', img:'https://files.catbox.moe/d49t5t.png'},
+    {name:'Milch', formel:'Casein / β-Lactoglobulin', img:'https://files.catbox.moe/qf982t.png'},
+    {name:'Schalenfrüchte', formel:'Speicherproteine (Cor a 9)', img:'https://files.catbox.moe/dva5w6.png'},
+    {name:'Senf', formel:'Sin a 1', img:'https://files.catbox.moe/ljs9wt.png'},
+    {name:'Sesam', formel:'Ses i 1', img:'https://files.catbox.moe/07zrq4.png'},
+    {name:'Sulfite', formel:'SO₂', img:'https://files.catbox.moe/b3m6nr.png'}
+  ];
+
+  var FLASK='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5.4 9.2A1.4 1.4 0 0 0 5.8 20.5h12.4a1.4 1.4 0 0 0 1.2-2.3L14 9V3"/><path d="M7.6 14.5h8.8"/></svg>';
+  var CHECK='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+
+  function ph(name){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="400" height="400" fill="#0b0d14"/><circle cx="200" cy="175" r="46" fill="none" stroke="rgba('+GOLD+',.5)" stroke-width="2"/><text x="200" y="300" fill="rgba('+GOLD+',.75)" font-family="'+SANS+'" font-size="20" text-anchor="middle">'+name+'</text></svg>';
+    return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
+  }
+  function key(n){ return 'tsalgkolben-'+n.slice(0,40); }
+  function isIn(n){ try{ return localStorage.getItem(key(n))==='1'; }catch(e){ return false; } }
+  function setIn(n,v){ try{ v?localStorage.setItem(key(n),'1'):localStorage.removeItem(key(n)); }catch(e){} }
+
+  var CSS=`
+  #tsalgcart{width:100%;margin:30px 0 60px;font-family:${SANS};color:#fff}
+  #tsalgcart *{box-sizing:border-box}
+  #tsalgcart .tsac-inner{width:min(1180px,94vw);margin:0 auto}
+  #tsalgcart .tsac-head{text-align:center;margin:0 0 26px}
+  #tsalgcart .tsac-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 12px}
+  #tsalgcart .tsac-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GOLD},.7)}
+  #tsalgcart .tsac-title{margin:0 0 10px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:clamp(1.7rem,3.4vw,2.15rem);line-height:1.12;letter-spacing:-.02em;color:#fff}
+  #tsalgcart .tsac-title .g{color:#c7b489}
+  #tsalgcart .tsac-sub{margin:0 auto;max-width:640px;font-size:16px;line-height:1.6;color:#e1e1e1}
+
+  #tsalgcart .tsac-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 22px;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
+  #tsalgcart .tsac-track::-webkit-scrollbar{display:none}
+  #tsalgcart .tsac-card{--g:${GOLD};flex:0 0 calc((100% - 3*22px)/4);scroll-snap-align:start;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
+  #tsalgcart .tsac-card.on{opacity:1;transform:none}
+  #tsalgcart .tsac-card:hover{transform:translateY(-4px);border-color:rgba(var(--g),.5);box-shadow:0 22px 50px -28px rgba(0,0,0,.9),0 0 26px -6px rgba(var(--g),.35)}
+  #tsalgcart .tsac-card.in{--g:${GRN};border-color:rgba(${GRN},.55);background:linear-gradient(165deg,rgba(160,208,180,.22),rgba(160,208,180,.05) 60%,rgba(255,255,255,0));box-shadow:0 18px 44px -28px rgba(0,0,0,.85),0 0 34px -8px rgba(${GRN},.32)}
+  #tsalgcart .tsac-imgwrap{position:relative;aspect-ratio:1/1;overflow:hidden;background:#0b0d14}
+  #tsalgcart .tsac-imgwrap img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+  #tsalgcart .tsac-card:hover .tsac-imgwrap img{transform:scale(1.04)}
+  #tsalgcart .tsac-imgwrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,5,10,0) 58%,rgba(6,7,13,.72) 100%);pointer-events:none}
+  #tsalgcart .tsac-badge{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;display:none;align-items:center;justify-content:center;background:rgba(${GRN},.95);border:1px solid rgba(255,255,255,.25);color:#0b1512;z-index:2}
+  #tsalgcart .tsac-card.in .tsac-badge{display:flex}
+  #tsalgcart .tsac-body{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px}
+  #tsalgcart .tsac-name{margin:0 0 4px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.02rem;line-height:1.18;color:#fff}
+  #tsalgcart .tsac-lbl{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:2px 0 3px}
+  #tsalgcart .tsac-val{font-size:.98rem;font-weight:700;color:#d8c9ab;font-variant-numeric:tabular-nums;margin:0 0 14px;min-height:1.2em}
+  #tsalgcart .tsac-card.in .tsac-val{color:#bfe0cd}
+  #tsalgcart .tsac-add{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;border-radius:11px;cursor:pointer;font-size:.86rem;font-weight:700;font-family:${SANS};border:1px solid rgba(239,230,210,.9);background:#efe6d2;color:#0c0e16;transition:background .3s,transform .2s,color .3s,border-color .3s}
+  #tsalgcart .tsac-add:hover{background:#e2d5b8;transform:translateY(-1px)}
+  #tsalgcart .tsac-add svg{flex:none}
+  #tsalgcart .tsac-card.in .tsac-add{background:rgba(${GRN},.14);border-color:rgba(${GRN},.5);color:#bfe0cd}
+
+  #tsalgcart .tsac-bar{display:flex;align-items:center;gap:clamp(16px,3vw,40px);max-width:760px;margin:6px auto 0;padding:16px 22px;border-radius:16px;background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 44px -34px rgba(0,0,0,.9);opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  #tsalgcart .tsac-bar.on{opacity:1;transform:none}
+  #tsalgcart .tsac-bar__ico{flex:none;color:#c7b489}
+  #tsalgcart .tsac-bar__ico svg{width:30px;height:30px}
+  #tsalgcart .tsac-bar__mid{flex:1;min-width:0}
+  #tsalgcart .tsac-bar__cap{font-size:12.5px;letter-spacing:.05em;color:rgba(255,255,255,.6);margin:0 0 8px}
+  #tsalgcart .tsac-bar__cap b{color:#fff}
+  #tsalgcart .tsac-bar__track{height:8px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+  #tsalgcart .tsac-bar__fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 10px rgba(${GRN},.5),inset 0 1px 0 rgba(255,255,255,.3);transition:width .7s cubic-bezier(.22,1,.36,1)}
+  #tsalgcart .tsac-bar__num{flex:none;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.3rem;color:#efe6d2;font-variant-numeric:tabular-nums}
+
+  @media(max-width:1024px){#tsalgcart .tsac-card{flex-basis:calc((100% - 2*22px)/3)}}
+  @media(max-width:820px){#tsalgcart .tsac-card{flex-basis:calc((100% - 22px)/2)}}
+  @media(max-width:540px){#tsalgcart .tsac-card{flex-basis:80%}#tsalgcart .tsac-track{gap:16px}#tsalgcart .tsac-bar{flex-wrap:wrap}}
+  @media(prefers-reduced-motion:reduce){#tsalgcart *{transition:none!important;animation:none!important}}`;
+
+  function build(){
+    var cards=ITEMS.map(function(it,i){
+      var img=(it.img && it.img.indexOf('__IMG_')!==0)? it.img : ph(it.name);
+      var inn=isIn(it.name);
+      return '<article class="tsac-card'+(inn?' in':'')+'" data-i="'+i+'">'+
+        '<div class="tsac-imgwrap"><img src="'+img+'" alt="'+it.name+'" loading="lazy"><span class="tsac-badge">'+CHECK+'</span></div>'+
+        '<div class="tsac-body">'+
+          '<h4 class="tsac-name">'+it.name+'</h4>'+
+          '<div class="tsac-lbl">Zusammensetzung</div>'+
+          '<div class="tsac-val">'+it.formel+'</div>'+
+          '<button type="button" class="tsac-add">'+(inn?CHECK:FLASK)+'<span>'+(inn?'Im Kolben':'In den Kolben')+'</span></button>'+
+        '</div>'+
+      '</article>';
+    }).join('');
+    var sec=document.createElement('section'); sec.id='tsalgcart';
+    sec.innerHTML='<div class="tsac-inner">'+
+      '<div class="tsac-head">'+
+        '<div class="tsac-eyebrow">DB IX · Allergene</div>'+
+        '<h3 class="tsac-title">Der Allergen-<span class="g">Baukasten</span></h3>'+
+        '<p class="tsac-sub">Jedes kennzeichnungspflichtige Allergen mit seiner Zusammensetzung. Nimm sie in den Kolben, um zu sehen, wie viele deine Karte betreffen.</p>'+
+      '</div>'+
+      '<div class="tsac-shelf"><div class="tsac-track">'+cards+'</div></div>'+
+      '<div class="tsac-bar">'+
+        '<div class="tsac-bar__ico">'+FLASK.replace('width="16" height="16"','')+'</div>'+
+        '<div class="tsac-bar__mid"><div class="tsac-bar__cap">Im Kolben: <b class="tsac-cnt">0</b> von '+ITEMS.length+' Allergenen</div><div class="tsac-bar__track"><div class="tsac-bar__fill"></div></div></div>'+
+        '<div class="tsac-bar__num"><span class="tsac-cnt2">0</span>/'+ITEMS.length+'</div>'+
+      '</div>'+
+    '</div>';
+    return sec;
+  }
+
+  function updBar(sec){
+    var n=sec.querySelectorAll('.tsac-card.in').length, total=ITEMS.length;
+    var fill=sec.querySelector('.tsac-bar__fill'); if(fill) fill.style.width=(n/total*100)+'%';
+    sec.querySelectorAll('.tsac-cnt').forEach(function(e){ e.textContent=n; });
+    sec.querySelectorAll('.tsac-cnt2').forEach(function(e){ e.textContent=n; });
+  }
+
+  function wire(sec){
+    sec.addEventListener('click', function(e){
+      var btn=e.target.closest('.tsac-add'); if(!btn) return;
+      var card=btn.closest('.tsac-card'); var it=ITEMS[+card.dataset.i];
+      var now=!card.classList.contains('in');
+      card.classList.toggle('in', now); setIn(it.name, now);
+      btn.innerHTML=(now?CHECK:FLASK)+'<span>'+(now?'Im Kolben':'In den Kolben')+'</span>';
+      updBar(sec);
+    });
+  }
+
+  function reveal(sec){
+    var cards=sec.querySelectorAll('.tsac-card'), bar=sec.querySelector('.tsac-bar');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(reduce){ cards.forEach(function(c){ c.classList.add('on'); }); if(bar) bar.classList.add('on'); return; }
+    var done=false;
+    function go(){ if(done) return; done=true;
+      cards.forEach(function(c,i){ setTimeout(function(){ c.classList.add('on'); }, (i%4)*120); });
+      setTimeout(function(){ if(bar) bar.classList.add('on'); }, 420);
+    }
+    try{ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&e.intersectionRatio>0.12) go(); }); },{threshold:[0,.12,.3]}); io.observe(sec); }catch(e){}
+    var t=0; (function poll(){ if(done) return; var r=sec.getBoundingClientRect(); if(r.top<window.innerHeight*0.88&&r.bottom>0){ go(); return; } if(t++<40) setTimeout(poll,250); })();
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    if(document.getElementById('tsalgcart')) return;
+    if(!document.getElementById('tsalgcart-css')){ var st=document.createElement('style'); st.id='tsalgcart-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    var anchor=document.getElementById('tsalgpc');
+    if(anchor && anchor.nextSibling){ anchor.parentNode.insertBefore(sec, anchor.nextSibling); }
+    else if(anchor){ anchor.parentNode.appendChild(sec); }
+    else { var nr=sc.querySelector('.notion-root'); if(nr) nr.parentNode.insertBefore(sec, nr); else sc.appendChild(sec); }
+    wire(sec); updBar(sec); reveal(sec);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    gemeinkosten-mitarbeiterlhne — "Was sind Gemeinkosten?"
    Animiertes Kostenblock-Grid (#tsgk) ersetzt die 8er-Bullet-
    liste (Muster: #tslink/inventurliste — Glaskarten, Champagner-
