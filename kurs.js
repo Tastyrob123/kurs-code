@@ -567,8 +567,8 @@
   .ts-body h3{
     font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
     font-weight:600;letter-spacing:-.015em;color:#fff;
-    font-size:clamp(19px,1.9vw,23px);line-height:1.25;
-    margin:32px 0 12px;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
   }
   .ts-body h3:first-child{margin-top:0}
   .ts-body p{
@@ -636,59 +636,68 @@
 
   #tsarc .arc-tile{
     position:relative;border-radius:16px;overflow:hidden;z-index:2;
+    display:flex;flex-direction:column;
     border:1px solid rgba(255,255,255,.16);
     box-shadow:0 18px 40px -26px rgba(0,0,0,.9);
     min-height:104px;
-    background-size:cover;background-position:center;
     opacity:0;transform:scale(.92);
     transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1),border-color .35s ease,box-shadow .35s ease;
   }
-  #tsarc .arc-tile::before{
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(5,6,11,.42) 0%,rgba(5,6,11,.62) 55%,rgba(5,6,11,.82) 100%);
-  }
   #tsarc .arc-tile.in{opacity:1;transform:scale(1)}
-  #tsarc .arc-tile-1{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg)}
-  #tsarc .arc-tile-2{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg)}
-  #tsarc .arc-tile-3{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg)}
-  #tsarc .arc-tile-4{background-image:linear-gradient(180deg,rgba(5,6,11,.15),rgba(5,6,11,.55)),url(https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg)}
+  #tsarc .arc-tile-img{display:block;width:100%;height:58px;object-fit:cover;flex:none}
+  #tsarc .arc-tile-final .arc-tile-img{height:118px}
+  #tsarc .arc-tile-1 .arc-tile-body{background:linear-gradient(165deg,rgba(95,120,174,.24),rgba(95,120,174,.05) 70%)}
+  #tsarc .arc-tile-2 .arc-tile-body{background:linear-gradient(165deg,rgba(163,120,199,.24),rgba(163,120,199,.05) 70%)}
+  #tsarc .arc-tile-3 .arc-tile-body{background:linear-gradient(165deg,rgba(199,150,110,.24),rgba(199,150,110,.05) 70%)}
+  #tsarc .arc-tile-4 .arc-tile-body{background:linear-gradient(165deg,rgba(110,164,150,.24),rgba(110,164,150,.05) 70%)}
+  #tsarc .arc-tile-final .arc-tile-body{background:linear-gradient(165deg,rgba(199,180,137,.2),rgba(199,180,137,.04) 70%)}
   #tsarc .arc-tile-1,#tsarc .arc-tile-2,#tsarc .arc-tile-3,#tsarc .arc-tile-4{min-height:118px}
   #tsarc .arc-tile-1{grid-column:1;grid-row:1}
   #tsarc .arc-tile-2{grid-column:1;grid-row:2}
   #tsarc .arc-tile-3{grid-column:3;grid-row:1}
   #tsarc .arc-tile-4{grid-column:3;grid-row:2}
-  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:280px;background-image:linear-gradient(180deg,rgba(5,6,11,.2),rgba(5,6,11,.68)),url(https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg)}
+  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:280px}
 
-  #tsarc .arc-logo{position:relative;z-index:2;width:20px;height:auto;margin:0 auto 9px;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.85))}
-  #tsarc .arc-tile-final .arc-logo{width:26px;margin-bottom:11px}
-  #tsarc .arc-tile-body{position:relative;z-index:2;padding:18px 16px 16px;text-align:center;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  #tsarc .arc-tile-final .arc-tile-body{padding:20px}
-  #tsarc .arc-label{position:relative;z-index:2;font-size:.86rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1)}
+  #tsarc .arc-logo{width:18px;height:auto;margin:0 auto 8px;display:block;opacity:.92}
+  #tsarc .arc-tile-final .arc-logo{width:24px;margin-bottom:10px}
+  #tsarc .arc-tile-body{flex:1;padding:14px 14px 15px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  #tsarc .arc-tile-final .arc-tile-body{padding:18px 20px}
+  #tsarc .arc-label{font-size:.86rem;font-weight:700;letter-spacing:.01em;color:#fff;margin:0 0 4px}
   #tsarc .arc-tile-final .arc-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#e8dcc0}
-  #tsarc .arc-val{position:relative;z-index:2;font-size:1.14rem;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1)}
-  #tsarc .arc-tile-final .arc-val{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff;margin-top:6px;order:2}
-  #tsarc .arc-desc{position:relative;z-index:2;font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.95),0 1px 2px rgba(0,0,0,1)}
-  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.76rem;color:rgba(255,255,255,.8)}
-  #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-size:.72rem;color:rgba(255,255,255,.65);margin-top:6px;order:3;text-shadow:0 1px 6px rgba(0,0,0,.9)}
+  #tsarc .arc-val{font-size:1.14rem;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;margin-bottom:5px;transition:transform .2s ease}
+  #tsarc .arc-val.pop{animation:tsarc-pop .4s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes tsarc-pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+  #tsarc .arc-tile-final .arc-val{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff;margin-top:6px;order:2;min-height:1.2em}
+  #tsarc .arc-desc{font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.68)}
+  #tsarc .arc-tile-final .arc-desc{order:1;font-size:.76rem;color:rgba(255,255,255,.6)}
+  #tsarc .arc-tile-final .arc-sub{font-size:.72rem;color:rgba(255,255,255,.42);margin-top:6px;order:3}
 
-  #tsarc .arc-tile.pulse{animation:tsarc-pulse 900ms cubic-bezier(.4,0,.3,1)}
   #tsarc .arc-tile.charging{animation:tsarc-charge 700ms ease-in-out}
-  #tsarc .arc-tile-final.charged{animation:tsarc-final 900ms cubic-bezier(.22,1,.36,1)}
-  @keyframes tsarc-pulse{
-    0%{border-color:rgba(255,255,255,.12);box-shadow:0 18px 40px -26px rgba(0,0,0,.9)}
-    45%{border-color:rgba(199,180,137,.85);box-shadow:0 18px 40px -26px rgba(0,0,0,.9),0 0 34px rgba(199,180,137,.55);transform:scale(1.045)}
-    100%{border-color:rgba(255,255,255,.12);box-shadow:0 18px 40px -26px rgba(0,0,0,.9);transform:scale(1)}
+  #tsarc .arc-tile-final.impact{animation:tsarc-impact 520ms cubic-bezier(.22,1,.36,1)}
+  #tsarc .arc-tile-final.charged{animation:tsarc-final 1500ms cubic-bezier(.19,1,.22,1)}
+  #tsarc .arc-tile-final.charged::after{
+    content:"";position:absolute;inset:-1px;z-index:3;pointer-events:none;border-radius:16px;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 48%,transparent 66%);
+    background-size:220% 100%;background-position:120% 0;
+    animation:tsarc-sweep 1500ms cubic-bezier(.19,1,.22,1);
   }
   @keyframes tsarc-charge{
     0%{border-color:rgba(199,180,137,.3);box-shadow:0 0 0 rgba(199,180,137,0)}
     50%{border-color:rgba(199,180,137,1);box-shadow:0 0 46px rgba(199,180,137,.85),0 0 90px rgba(199,180,137,.35);transform:scale(1.05)}
     100%{border-color:rgba(199,180,137,.55);box-shadow:0 0 20px rgba(199,180,137,.4);transform:scale(1.01)}
   }
-  @keyframes tsarc-final{
-    0%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9)}
-    40%{box-shadow:0 0 70px rgba(199,180,137,.85),0 0 140px rgba(199,180,137,.4);transform:scale(1.035)}
-    100%{box-shadow:0 0 34px rgba(199,180,137,.35);transform:scale(1)}
+  @keyframes tsarc-impact{
+    0%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9),0 0 0 rgba(199,180,137,0);border-color:rgba(255,255,255,.16)}
+    38%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9),0 0 52px rgba(199,180,137,.75);border-color:rgba(199,180,137,.85);transform:scale(1.018)}
+    100%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9),0 0 0 rgba(199,180,137,0);border-color:rgba(255,255,255,.16);transform:scale(1)}
   }
+  @keyframes tsarc-final{
+    0%{box-shadow:0 18px 40px -26px rgba(0,0,0,.9);border-color:rgba(255,255,255,.16)}
+    30%{box-shadow:0 0 110px rgba(199,180,137,.95),0 0 200px rgba(199,180,137,.5);border-color:rgba(199,180,137,1);transform:scale(1.05)}
+    60%{box-shadow:0 0 70px rgba(199,180,137,.6),0 0 130px rgba(199,180,137,.3);transform:scale(1.018)}
+    100%{box-shadow:0 0 30px rgba(199,180,137,.32);border-color:rgba(199,180,137,.6);transform:scale(1)}
+  }
+  @keyframes tsarc-sweep{0%{background-position:120% 0}100%{background-position:-40% 0}}
   #tsarc .arc-caption{max-width:640px;margin:34px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
 
   @media(max-width:900px){
@@ -751,7 +760,6 @@
     wrap.id='ts8intro';
     wrap.innerHTML=`
 <div class="ts-body">
-  <h3>Wie aus Bausteinen Gerichte werden</h3>
   <p>Mit diesen Bausteinen bauen wir die Gerichte zusammen. Jede Zutat im Rezept ist ein Baustein mit bekanntem Portionspreis. Zählst du die Bausteine eines Gerichts zusammen, hast du automatisch den kompletten Wareneinsatz — und damit die Grundlage für deine Kalkulation.</p>
   <p>Eine Sauce ist dabei selbst wieder ein Baustein, der aus mehreren Zutaten-Bausteinen besteht. Und diese Sauce kannst du dann in mehreren Gerichten einsetzen.</p>
 
@@ -800,18 +808,23 @@
     <div class="arc-stage" id="arcStage">
       <svg class="arc-lines" id="arcLines"></svg>
       <div class="arc-tile arc-tile-1" id="arcT1">
+        <img class="arc-tile-img" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="">
         <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div><div class="arc-desc">Direkt eingekaufte Produkte aus DB IV.</div></div>
       </div>
       <div class="arc-tile arc-tile-2" id="arcT2">
+        <img class="arc-tile-img" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="">
         <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div><div class="arc-desc">Selbst hergestellte Saucen & Sirupe aus DB V.</div></div>
       </div>
       <div class="arc-tile arc-tile-final" id="arcFinal">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal">— €</div><div class="arc-sub">Kosten pro Portion</div></div>
+        <img class="arc-tile-img" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="">
+        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal"></div><div class="arc-sub">Kosten pro Portion</div></div>
       </div>
       <div class="arc-tile arc-tile-3" id="arcT3">
+        <img class="arc-tile-img" src="https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg" alt="">
         <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div><div class="arc-desc">Zubereitungszeit × Stundensatz aus DB VII.</div></div>
       </div>
       <div class="arc-tile arc-tile-4" id="arcT4">
+        <img class="arc-tile-img" src="https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg" alt="">
         <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div><div class="arc-desc">Anteiliger Fixkosten-Betrag aus DB VI.</div></div>
       </div>
     </div>
@@ -822,6 +835,16 @@
     `;
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
     try{ initArc(); }catch(e){}
+    try{ initBaustein(); }catch(e){}
+  }
+
+  function initBaustein(){
+    var cards = document.querySelectorAll('#tsbau .tsbau-card');
+    if(!cards.length) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('on'); });
+    }, {threshold:.3});
+    cards.forEach(function(c){ io.observe(c); });
   }
 
   var arcPlayed=false;
@@ -887,23 +910,28 @@
     tiles.forEach(function(t){ t.el.classList.add('in'); });
     final.classList.add('in');
 
-    var stepDelay = reduced ? 0 : 480;
-    tiles.forEach(function(t,i){
-      setTimeout(function(){
-        t.el.classList.add('pulse');
-        setTimeout(function(){ t.el.classList.remove('pulse'); }, 900);
-      }, i*stepDelay);
-    });
-
-    var chargeAt = reduced ? 0 : stepDelay*tiles.length + 250;
+    var chargeAt = reduced ? 0 : 450;
     setTimeout(function(){
       tiles.forEach(function(t){ t.el.classList.add('charging'); });
       setTimeout(function(){ tiles.forEach(function(t){ t.el.classList.remove('charging'); }); }, 700);
     }, chargeAt);
 
-    var beamAt = chargeAt + (reduced?0:500);
+    var beamAt = chargeAt + (reduced?0:850);
     var total = tiles.reduce(function(s,t){ return s+t.val; }, 0);
     var acc = 0;
+    function landed(t, isLast){
+      acc += t.val;
+      finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+      finalVal.classList.remove('pop'); void finalVal.offsetWidth; finalVal.classList.add('pop');
+      final.classList.add('impact');
+      setTimeout(function(){ final.classList.remove('impact'); }, 520);
+      if(isLast){
+        setTimeout(function(){
+          final.classList.add('charged');
+          setTimeout(function(){ final.classList.remove('charged'); }, 1500);
+        }, 260);
+      }
+    }
     setTimeout(function(){
       if(!paths.length){
         acc = total;
@@ -913,15 +941,8 @@
       }
       tiles.forEach(function(t,i){
         setTimeout(function(){
-          fireComet(paths[i], 650, function(){
-            acc += t.val;
-            finalVal.textContent = acc.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
-            if(i === tiles.length-1){
-              final.classList.add('charged');
-              setTimeout(function(){ final.classList.remove('charged'); }, 900);
-            }
-          });
-        }, i*140);
+          fireComet(paths[i], 650, function(){ landed(t, i===tiles.length-1); });
+        }, i*650);
       });
     }, beamAt);
   }
