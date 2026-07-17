@@ -2573,6 +2573,181 @@
 /* ---- */
 
 /* ============================================================
+   allergene-bersicht — Einleitung + Erklär-Animation "Der Weg eines Allergens"
+   Zutat -> Rezept -> Gericht: ein Allergen wird EINMAL an der Zutat
+   gepflegt und erbt sich automatisch ins Rezept und ins Gericht
+   (Gericht bekommt es von Zutat UND Rezept). Muster: #tsFlowRoot
+   (Line-Draw + Scroll-Reveal), Champagner-Gold, Glas-Karten, Lineal TS.
+   Full-Width, mittig. Kein neuer Font/keine neue Farbe.
+   ============================================================ */
+(function(){
+  if(window.__tsalg) return; window.__tsalg=true;
+  var GOLD='199,180,137';
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+
+  var CSS = `
+  #tsalg{width:100vw;max-width:100vw;margin:20px 0 60px;margin-left:calc(50% - 50vw);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsalg *{box-sizing:border-box}
+  #tsalg .tsalg-inner{width:min(1040px,92vw);margin:0 auto}
+  #tsalg .tsalg-lead{max-width:820px;margin:0 auto 30px;text-align:center}
+  #tsalg .tsalg-lead p{margin:0 0 14px;font-size:1.05rem;line-height:1.65;color:#e6e6e6}
+  #tsalg .tsalg-lead p:last-child{margin-bottom:0}
+  #tsalg .tsalg-title{margin:0 0 6px;text-align:center;font-family:"Lineal TS",inherit;font-weight:600;
+    letter-spacing:-.02em;line-height:1.1;font-size:clamp(1.7rem,3.6vw,2.15rem)}
+  #tsalg .tsalg-title .g{color:#c7b489}
+  #tsalg .tsalg-sub{margin:0 auto 26px;text-align:center;color:rgba(255,255,255,.5);font-size:14px;letter-spacing:.02em}
+
+  /* ---- Stage (Desktop-DAG) ---- */
+  #tsalg .tsalg-stage{position:relative;width:100%;aspect-ratio:1000/430;max-width:1000px;margin:0 auto}
+  #tsalg .tsalg-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #tsalg .tsalg-path{fill:none;stroke:rgba(${GOLD},.55);stroke-width:2.4;stroke-linecap:round;
+    stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px rgba(${GOLD},.35))}
+  #tsalg .tsalg-head{fill:rgba(${GOLD},.9);opacity:0;transform:scale(0);transform-origin:center;
+    filter:drop-shadow(0 0 6px rgba(${GOLD},.5))}
+
+  #tsalg .tsalg-card{position:absolute;transform:translate(-50%,-50%);width:clamp(150px,17vw,196px);
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:15px 15px 16px;
+    box-shadow:0 22px 50px -32px rgba(0,0,0,.9);opacity:0;transition:opacity .5s ease}
+  #tsalg .tsalg-card.lit{border-color:rgba(${GOLD},.42);box-shadow:0 0 0 1px rgba(${GOLD},.18),0 22px 50px -30px rgba(0,0,0,.9),0 0 34px -8px rgba(${GOLD},.4)}
+  #tsalg .tc-type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 7px}
+  #tsalg .tc-name{font-family:"Lineal TS",inherit;font-weight:600;font-size:1.06rem;line-height:1.15;margin:0 0 12px;color:#fff}
+  #tsalg .tc-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 10px 5px 8px;border-radius:999px;
+    background:rgba(${GOLD},.12);border:1px solid rgba(${GOLD},.4);color:#ece1c7;font-size:12.5px;font-weight:600;
+    opacity:0;transform:translateY(6px) scale(.9);transition:opacity .45s ease,transform .45s cubic-bezier(.16,1,.3,1)}
+  #tsalg .tc-badge svg{width:14px;height:14px;flex:none;stroke:#c7b489}
+  #tsalg .tc-badge.show{opacity:1;transform:none}
+  #tsalg .tc-tag{display:block;margin-top:9px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(${GOLD},.85);opacity:0;transition:opacity .4s ease .1s}
+  #tsalg .tc-tag.src{color:rgba(255,255,255,.4)}
+  #tsalg .tc-tag.show{opacity:1}
+
+  #tsalg .tsalg-cap{max-width:640px;margin:30px auto 0;text-align:center;font-size:16px;line-height:1.6;color:#fff}
+  #tsalg .tsalg-cap b{color:#c7b489;font-weight:600}
+
+  /* ---- Mobile: vertikaler Stapel ---- */
+  @media (max-width:760px){
+    #tsalg .tsalg-stage{aspect-ratio:auto;max-width:340px;display:flex;flex-direction:column;align-items:center;gap:14px}
+    #tsalg .tsalg-svg{display:none}
+    #tsalg .tsalg-card{position:static;transform:none;width:100%;opacity:0;transform:translateY(10px)}
+    #tsalg .tsalg-card.in{opacity:1;transform:none;transition:all .5s cubic-bezier(.16,1,.3,1)}
+    #tsalg .tsalg-conn{width:2px;height:26px;background:linear-gradient(180deg,rgba(${GOLD},.6),rgba(${GOLD},.15));border-radius:2px;opacity:0;transition:opacity .4s ease}
+    #tsalg .tsalg-conn.in{opacity:1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #tsalg *{transition:none!important;animation:none!important}
+  }`;
+
+  var WHEAT = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c0-2 1.5-3.5 3.5-3.5C15.5 6.5 14 8 12 8Z"/><path d="M12 8c0-2-1.5-3.5-3.5-3.5C8.5 6.5 10 8 12 8Z"/><path d="M12 14c0-2 1.5-3.5 3.5-3.5C15.5 12.5 14 14 12 14Z"/><path d="M12 14c0-2-1.5-3.5-3.5-3.5C8.5 12.5 10 14 12 14Z"/></svg>';
+
+  function badge(tag, tagCls){
+    return '<span class="tc-badge">'+WHEAT+'Gluten</span>'+
+           '<span class="tc-tag '+(tagCls||'')+'">'+tag+'</span>';
+  }
+
+  function build(){
+    var sec=document.createElement('section');
+    sec.id='tsalg';
+    sec.innerHTML =
+      '<div class="tsalg-inner">'+
+        '<div class="tsalg-lead">'+
+          '<p>Allergene sauber zu kennzeichnen ist Pflicht, und in den meisten Betrieben läuft es von Hand. Dieselbe Angabe trägst du an jeder Stelle neu ein, in der Karte wie im Rezept. Ändert sich eine Zutat, ziehst du alles einzeln nach. Genau da passieren die Fehler.</p>'+
+          '<p>Die Datenbank dreht das um. Ein Allergen pflegst du einmal an der Zutat. Von dort erbt es sich in jedes Rezept und jedes Gericht, das sie nutzt. Du pflegst die Quelle, die Kennzeichnung schreibt sich selbst.</p>'+
+        '</div>'+
+        '<h2 class="tsalg-title">Der Weg eines <span class="g">Allergens</span></h2>'+
+        '<p class="tsalg-sub">Einmal gepflegt, automatisch überall dort, wo die Zutat landet.</p>'+
+        '<div class="tsalg-stage">'+
+          '<svg class="tsalg-svg" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">'+
+            '<path class="tsalg-path" data-c="0" d="M242 150 L410 150"/>'+
+            '<path class="tsalg-path" data-c="1" d="M590 150 L768 150"/>'+
+            '<path class="tsalg-path" data-c="2" d="M150 232 Q500 400 850 232"/>'+
+            '<path class="tsalg-head" data-h="0" d="M410 144 L422 150 L410 156 Z"/>'+
+            '<path class="tsalg-head" data-h="1" d="M768 144 L780 150 L768 156 Z"/>'+
+            '<path class="tsalg-head" data-h="2" d="M842 226 L854 234 L840 238 Z"/>'+
+          '</svg>'+
+          '<div class="tsalg-card" data-n="a" style="left:15%;top:35%">'+
+            '<p class="tc-type">Zutat</p><p class="tc-name">Weizenmehl</p>'+badge('einmal gepflegt','src')+
+          '</div>'+
+          '<div class="tsalg-conn" data-cm="0"></div>'+
+          '<div class="tsalg-card" data-n="b" style="left:50%;top:35%">'+
+            '<p class="tc-type">Rezept</p><p class="tc-name">Pizzateig</p>'+badge('automatisch')+
+          '</div>'+
+          '<div class="tsalg-conn" data-cm="1"></div>'+
+          '<div class="tsalg-card" data-n="c" style="left:85%;top:35%">'+
+            '<p class="tc-type">Gericht</p><p class="tc-name">Pizza Margherita</p>'+badge('automatisch')+
+          '</div>'+
+        '</div>'+
+        '<p class="tsalg-cap">Ein Eintrag an der Quelle, <b>überall korrekt gekennzeichnet</b>.</p>'+
+      '</div>';
+    return sec;
+  }
+
+  function setLen(p){ try{ var L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L; return L; }catch(e){ return 0; } }
+
+  function play(sec){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var paths = sec.querySelectorAll('.tsalg-path');
+    var heads = sec.querySelectorAll('.tsalg-head');
+    var cards = { a:sec.querySelector('[data-n="a"]'), b:sec.querySelector('[data-n="b"]'), c:sec.querySelector('[data-n="c"]') };
+    var conns = sec.querySelectorAll('.tsalg-conn');
+    var lens = []; paths.forEach(function(p){ lens.push(setLen(p)); });
+
+    function drawPath(i, dur){ var p=paths[i]; p.style.transition='stroke-dashoffset '+dur+'ms cubic-bezier(.16,1,.3,1)'; p.style.strokeDashoffset='0';
+      var h=heads[i]; setTimeout(function(){ h.style.transition='opacity .3s ease,transform .3s cubic-bezier(.34,1.56,.64,1)'; h.style.opacity='1'; h.style.transform='scale(1)'; }, dur*0.72); }
+    function badgeOn(card){ var b=card.querySelector('.tc-badge'), t=card.querySelector('.tc-tag'); if(b)b.classList.add('show'); if(t)t.classList.add('show'); }
+
+    if(reduce){
+      Object.keys(cards).forEach(function(k){ cards[k].style.opacity=1; cards[k].classList.add('in','lit'); badgeOn(cards[k]); });
+      paths.forEach(function(p){ p.style.strokeDashoffset='0'; }); heads.forEach(function(h){ h.style.opacity=1; h.style.transform='scale(1)'; });
+      conns.forEach(function(c){ c.classList.add('in'); }); return;
+    }
+
+    // Quelle (Zutat) sofort
+    cards.a.style.opacity=1; cards.a.classList.add('in','lit'); badgeOn(cards.a);
+    if(conns[0]) setTimeout(function(){ conns[0].classList.add('in'); }, 350);
+    // -> Rezept
+    setTimeout(function(){ cards.b.style.opacity=1; cards.b.classList.add('in'); }, 450);
+    setTimeout(function(){ drawPath(0, 700); }, 500);
+    setTimeout(function(){ cards.b.classList.add('lit'); badgeOn(cards.b); }, 1250);
+    if(conns[1]) setTimeout(function(){ conns[1].classList.add('in'); }, 1400);
+    // -> Gericht (von Rezept UND Zutat)
+    setTimeout(function(){ cards.c.style.opacity=1; cards.c.classList.add('in'); }, 1500);
+    setTimeout(function(){ drawPath(1, 780); drawPath(2, 900); }, 1550);
+    setTimeout(function(){ cards.c.classList.add('lit'); badgeOn(cards.c); }, 2450);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    if(document.getElementById('tsalg')) return;
+    var hero=sc.querySelector('.ts-hero');
+    var nr=sc.querySelector('.notion-root');
+    if(!hero && !nr) return;
+    if(!document.getElementById('tsalg-css')){ var st=document.createElement('style'); st.id='tsalg-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    if(hero && hero.nextSibling){ hero.parentNode.insertBefore(sec, hero.nextSibling); }
+    else if(nr){ nr.parentNode.insertBefore(sec, nr); }
+    else sc.appendChild(sec);
+
+    var done=false;
+    function go(){ if(done) return; done=true; play(sec); }
+    try{
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio>0.18) go(); }); },{threshold:[0,.18,.4]});
+      io.observe(sec);
+    }catch(e){}
+    // Poll-Fallback (busy super.so-Seite)
+    var tries=0; (function poll(){ if(done) return; var r=sec.getBoundingClientRect(); if(r.top < window.innerHeight*0.85 && r.bottom>0){ go(); return; } if(tries++<40) setTimeout(poll,250); })();
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    gemeinkosten-mitarbeiterlhne — "Was sind Gemeinkosten?"
    Animiertes Kostenblock-Grid (#tsgk) ersetzt die 8er-Bullet-
    liste (Muster: #tslink/inventurliste — Glaskarten, Champagner-
