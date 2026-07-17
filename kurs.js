@@ -4727,9 +4727,89 @@
     { kachel_id:'db7_gerichte', kachel_name:'Gerichte', ist_produkt_kachel:true,
       einheit:'Verkaufspreis (€)', einheit_typ:'preis',
       objekt_varianten:[{name:'Hauptgang'},{name:'Vorspeise'},{name:'Dessert'},{name:'Bowl'},{name:'Pizza'}]},
-    { kachel_id:'menue_kalkulation', kachel_name:'Menü Kalkulation', ist_produkt_kachel:true,
-      einheit:'Foodcost (%)', einheit_typ:'prozent',
-      objekt_varianten:[{name:'Taschenrechner'},{name:'Abakus'},{name:'Kassenbon'},{name:'Waage'}]},
+    /* Lektion 11 — Menükalkulation & Catering-Rechner (Engine-generiert, 17.07.2026).
+       Werte = BEISPIELWERTE (Währungs-Demo je Karte), Bilder folgen per Higgsfield (img fehlt -> ph()-Platzhalter). */
+    { kachel_id:'menue_rechner', kachel_name:'Menürechner Master Database', ist_produkt_kachel:true,
+      einheit:'Menüpreis (€)', einheit_typ:'preis',
+      objekt_varianten:[
+      {name:'Button anlegen', wert:800},
+      {name:'Datenbank anlegen', wert:1200},
+      {name:'Menüposition', wert:2000},
+      {name:'Gericht / Getränk', wert:2500},
+      {name:'Food / Beverage', wert:3200},
+      {name:'Anzahl im Menü', wert:4000},
+      {name:'WE pro Gericht / Drink (EUR)', wert:4500},
+      {name:'WE gesamt (EUR)', wert:5200},
+      {name:'Benötigte Menge pro Zutat', wert:6000},
+      {name:'Packaging / Co.', wert:6800},
+      {name:'Kunden Master Database', wert:7500}
+      ]},
+    { kachel_id:'kunden_master', kachel_name:'Kunden Master Database', ist_produkt_kachel:true,
+      einheit:'Personen ( Pax )', einheit_typ:'anzahl',
+      objekt_varianten:[
+      {name:'Button anlegen', wert:12},
+      {name:'Datenbank anlegen', wert:25},
+      {name:'Name', wert:40},
+      {name:'Kundentyp', wert:50},
+      {name:'Status', wert:65},
+      {name:'Tags', wert:80},
+      {name:'Ansprechpartner', wert:100},
+      {name:'Firma', wert:120},
+      {name:'E-Mail', wert:150},
+      {name:'Telefon', wert:180},
+      {name:'Website / Social', wert:200},
+      {name:'Rechnungsadresse', wert:220},
+      {name:'Lieferadresse / Location', wert:250},
+      {name:'Erstes Event', wert:280},
+      {name:'Nächstes Event', wert:300},
+      {name:'Umsatz (EUR)', wert:320},
+      {name:'Verloren Grund', wert:350},
+      {name:'Owner', wert:400}
+      ]},
+    { kachel_id:'kostenaufstellung', kachel_name:'Kostenaufstellung (Angebot Master)', ist_produkt_kachel:true,
+      einheit:'Wareneinsatz (%)', einheit_typ:'prozent',
+      objekt_varianten:[
+      {name:'Button anlegen', wert:10},
+      {name:'Datenbank anlegen', wert:12},
+      {name:'Name', wert:15},
+      {name:'Datum', wert:18},
+      {name:'Personen Anzahl', wert:20},
+      {name:'Menüpreis', wert:22},
+      {name:'VK Wunschpreis', wert:24},
+      {name:'Menü Element', wert:25},
+      {name:'Kunden (Catering & Private Chef)', wert:26},
+      {name:'Mitarbeiter', wert:27},
+      {name:'GK Kosten / Monate', wert:28},
+      {name:'Produktionszeit (Minuten)', wert:29},
+      {name:'Verpackungszeit (Minuten)', wert:30},
+      {name:'Logistikzeit (Minuten)', wert:31},
+      {name:'Eventzeit vor Ort (Minuten)', wert:32},
+      {name:'Nachbereitung / Reinigung (Minuten)', wert:33},
+      {name:'Zubereitungszeit (min)', wert:34},
+      {name:'Summe Wareneinsatz', wert:35},
+      {name:'Wareneinsatz (%)', wert:36},
+      {name:'WE (%) Wunschpreis', wert:37},
+      {name:'DB I', wert:38},
+      {name:'Durchschnittlicher Stundenlohn', wert:39},
+      {name:'PK Kosten / Produkt', wert:40},
+      {name:'PK Kosten Gesamt', wert:18},
+      {name:'DB II', wert:20},
+      {name:'GK Kosten / Produkt', wert:22},
+      {name:'GK Kosten Summe', wert:24},
+      {name:'DB III', wert:25},
+      {name:'VK bei 30% Wareneinsatz', wert:26},
+      {name:'VK bei 25% Wareneinsatz', wert:27},
+      {name:'VK bei 20% Wareneinsatz', wert:28},
+      {name:'VK bei 15% Wareneinsatz', wert:29},
+      {name:'VK bei 10% Wareneinsatz', wert:30},
+      {name:'Summe Anzahl Food / Bev', wert:31},
+      {name:'Kcal', wert:32},
+      {name:'Protein', wert:33},
+      {name:'Fett', wert:34},
+      {name:'Kohlenhydrate', wert:35},
+      {name:'Allergene', wert:36},
+      {name:'Einkaufsliste', wert:37}
+      ]},
     { kachel_id:'food_drinks_quartier', kachel_name:'Food / Drinks', ist_produkt_kachel:true,
       einheit:'Menge (ml)', einheit_typ:'menge_ml',
       objekt_varianten:[{name:'Cocktailglas'},{name:'Weinflasche'},{name:'Bierkrug'},{name:'Kaffeetasse'},{name:'Wasserkaraffe'}]},
@@ -4768,7 +4848,248 @@
      marker (optional): RegExp, der die richtige Phasen-Sektion wählt,
      wenn eine Seite MEHRERE Phase-I/II-Bereiche hat (z. B. Lieferpartner-
      Seite: DB I + DB II + DB III — "Kundennummer" gibt es nur in DB I). */
+  /* Lektion-11-Steps (Engine-generiert aus den echten Notion-DB-Schemas, 17.07.2026) */
+  var TS11_STEPS_W1=[
+    {title:'1. Button anlegen',
+     desc:'Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen Butto',
+     html:'<p class="notion-text">Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen',
+     desc:'Drücke / und wähle „Tabellenansicht – Datenbank“. → Name der Datenbank : Menürechner Master Database Dami',
+     html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Menürechner Master Database</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+    {title:'3. Menüposition',
+     desc:'Eigenschaft : Titel → Name der Spalte : Menüposition → Du trägst hier ein : den Namen der Menü-Position, ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Menüposition</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen der Menü-Position, bspw. Hauptgang — Rinderfilet mit Gratin.</p>'},
+    {title:'4. Gericht / Getränk',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : Gericht / Getränk Du verknüpfst hier das',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> Gericht / Getränk</p><p class="notion-text">Du verknüpfst hier das fertige Gericht oder Getränk aus deiner Gerichte-Datenbank, das auf diese Menü-Position kommt.</p>'},
+    {title:'5. Food / Beverage',
+     desc:'Eigenschaft : Auswählen → Name der Spalte : Auswählen Trage diese Auswahlmöglichkeiten ein : Food · Bever',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Auswählen</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Food · Beverage</p><p class="notion-text">Ordne die Position als Food oder Beverage ein — danach kannst du später filtern und zählen.</p>'},
+    {title:'6. Anzahl im Menü',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : 0 → Name der Spalt',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> 0</p><p class="notion-text">→ <b>Name der Spalte :</b> Anzahl im Menü</p><p class="notion-text">→ <b>Du trägst hier ein :</b> wie oft dieses Gericht in der Menü-Kalkulation gezählt wird, bspw. 80 Portionen.</p>'},
+    {title:'7. WE pro Gericht / Drink (EUR)',
+     desc:'Eigenschaft : Formel → Name der Spalte : WE pro Gericht / Drink (EUR) Trage diese Formel ein : if(empty(p',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> WE pro Gericht / Drink (EUR)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Gericht / Getränk&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Get the cost value from the related dish */<br>&nbsp;&nbsp;if(empty(prop(&quot;Gericht / Getränk&quot;).first().prop(&quot;Wareneinsatz ( Eur )&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;0,<br>&nbsp;&nbsp;&nbsp;&nbsp;prop(&quot;Gericht / Getränk&quot;).first().prop(&quot;Wareneinsatz ( Eur )&quot;)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel zieht den Wareneinsatz des verknüpften Gerichts automatisch in diese Zeile.</p>'},
+    {title:'8. WE gesamt (EUR)',
+     desc:'Eigenschaft : Formel → Name der Spalte : WE gesamt (EUR) Trage diese Formel ein : if(empty(prop("WE pro G',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> WE gesamt (EUR)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;WE pro Gericht / Drink (EUR)&quot;)) or empty(prop(&quot;Anzahl im Menü&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;prop(&quot;WE pro Gericht / Drink (EUR)&quot;) * prop(&quot;Anzahl im Menü&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel rechnet Wareneinsatz mal Anzahl im Menü — der Warenwert der ganzen Position.</p>'},
+    {title:'9. Benötigte Menge pro Zutat',
+     desc:'Eigenschaft : Formel → Name der Spalte : Benötige Menge pro Zutat ( g / stck / ml ) Trage diese Formel ei',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Benötige Menge pro Zutat ( g / stck / ml )</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">lets(<br>&nbsp;&nbsp;menuCount, if(empty(prop(&quot;Anzahl im Menü&quot;)), 1, prop(&quot;Anzahl im Menü&quot;)),<br>&nbsp;&nbsp;/* Collect Ready to Use ingredients from dishes */<br>&nbsp;&nbsp;readyToUseData, prop(&quot;Gericht / Getränk&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodName, current.prop(&quot;Name&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portionSizeText, current.prop(&quot;Portionsgröße ( G / Ltr / Stck )&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portionSize, toNumber(portionSizeText),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Only process if we have valid data */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(not empty(foodName) and portionSize &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Extract clean name by removing leading numbers and units */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cleanName, foodName.replaceAll(&quot;^[0-9.]+[a-zA-Z]+\\\\s*&quot;, &quot;&quot;).trim(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Extract unit from food name */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unit, foodName.replaceAll(&quot;^[0-9.]+&quot;, &quot;&quot;).replaceAll(&quot;[^a-zA-Z]+.*$&quot;, &quot;&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cleanName + &quot;|&quot; + unit + &quot;|&quot; + format(portionSize * menuCount)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current)),<br>&nbsp;&nbsp;/* Collect ingredients from Inhouse Production products */<br>&nbsp;&nbsp;inhouseIngredientsData, prop(&quot;Gericht / Getränk&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Produkte Inhouse Production &quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;homemadeProduct, current,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portionCountText, homemadeProduct.prop(&quot;Portionsgröße ( G / Ltr / Stck )&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portionCount, if(empty(portionCountText), 1, toNumber(portionCountText)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Get base ingredients from homemade product */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;homemadeProduct.prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodName, current.prop(&quot;Name&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ingredientAmountText, current.prop(&quot;Portionsgröße ( G / Ltr / Stck )&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ingredientAmount, toNumber(ingredientAmountText),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Only process if we have valid data */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(not empty(foodName) and ingredientAmount &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Calculate per-portion amount */<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perPortionAmount, if(portionCount &gt; 0, ingredientAmount / portionCount, ingredientAmount),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cleanName, foodName.replaceAll(&quot;^[0-9.]+[a-zA-Z]+\\\\s*&quot;, &quot;&quot;).trim(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unit, foodName.replaceAll(&quot;^[0-9.]+&quot;, &quot;&quot;).replaceAll(&quot;[^a-zA-Z]+.*$&quot;, &quot;&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cleanName + &quot;|&quot; + unit + &quot;|&quot; + format(perPortionAmount * menuCount)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current)),<br>&nbsp;&nbsp;/* Combine all ingredient sources */<br>&nbsp;&nbsp;allIngredientsData, readyToUseData.concat(inhouseIngredientsData),<br>&nbsp;&nbsp;/* Get unique ingredient names */<br>&nbsp;&nbsp;uniqueNames, allIngredientsData<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.split(&quot;|&quot;).first())<br>&nbsp;&nbsp;&nbsp;&nbsp;.unique()<br>&nbsp;&nbsp;&nbsp;&nbsp;.sort(),<br>&nbsp;&nbsp;/* Sum quantities for each unique ingredient */<br>&nbsp;&nbsp;aggregatedIngredients, uniqueNames<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ingredientName, current,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matchingItems, allIngredientsData.filter(current.split(&quot;|&quot;).first() == ingredientName),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firstItem, matchingItems.first(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unit, if(not empty(firstItem), firstItem.split(&quot;|&quot;).at(1), &quot;&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalQty, matchingItems.map(toNumber(current.split(&quot;|&quot;).last())).sum(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(round(totalQty, 1)) + unit + &quot; &quot; + ingredientName<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;/* Return result */<br>&nbsp;&nbsp;if(aggregatedIngredients.length() &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;aggregatedIngredients.join(&quot;\\n&quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Zutaten gefunden&quot;<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel listet automatisch auf, welche Menge jeder Zutat du für diese Position brauchst.</p>'},
+    {title:'10. Packaging / Co.',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : Packaging / Co. Du verknüpfst hier das V',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> Packaging / Co.</p><p class="notion-text">Du verknüpfst hier das Verpackungsmaterial aus deiner Packaging-Datenbank, falls die Position geliefert wird.</p>'},
+    {title:'11. Kunden Master Database',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → Wechselseitige Verbindung hinzufügen. → Name der Spalte : 🧑‍',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → Wechselseitige Verbindung hinzufügen.</p><p class="notion-text">→ <b>Name der Spalte :</b> 🧑‍🍳 Kunden Master Database</p><p class="notion-text">Du verknüpfst hier den Kunden, für den dieses Menü kalkuliert wird.</p><p class="notion-text">In deiner Ziel-Datenbank taucht jetzt eine neue Spalte auf, nenne sie &bdquo;🍽️ Menürechner Master Database&ldquo;.</p>'},
+  ];
+  var TS11_STEPS_W2=[
+    {title:'1. Button anlegen',
+     desc:'Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen Butto',
+     html:'<p class="notion-text">Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen',
+     desc:'Drücke / und wähle „Tabellenansicht – Datenbank“. → Name der Datenbank : Kunden Master Database Damit ste',
+     html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Kunden Master Database</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+    {title:'3. Name',
+     desc:'Eigenschaft : Titel → Name der Spalte : Name → Du trägst hier ein : den Namen des Kunden oder des Events,',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Name</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen des Kunden oder des Events, bspw. Motel Riverside Hamburg.</p>'},
+    {title:'4. Kundentyp',
+     desc:'Eigenschaft : Auswählen → Name der Spalte : Kundentyp Trage diese Auswahlmöglichkeiten ein : Catering · P',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Kundentyp</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Catering · Private Chef zuhause · Event Location</p><p class="notion-text">So trennst du Catering-Aufträge, Private-Chef-Termine und Event-Locations sauber.</p>'},
+    {title:'5. Status',
+     desc:'Eigenschaft : Status → Name der Spalte : Status Trage diese Auswahlmöglichkeiten ein : To-do : Lead · Anf',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Status</p><p class="notion-text">→ <b>Name der Spalte :</b> Status</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text"><b>To-do :</b> Lead · Anfrage</p><p class="notion-text"><b>In Bearbeitung :</b> Angebot · Bestätigt</p><p class="notion-text"><b>Abgeschlossen :</b> Durchgeführt · Abgerechnet · Verloren</p><p class="notion-text">Damit siehst du auf einen Blick, wo jede Anfrage in deiner Pipeline steht.</p>'},
+    {title:'6. Tags',
+     desc:'Eigenschaft : Mehrfachauswahl → Name der Spalte : Tags Trage diese Auswahlmöglichkeiten ein : VIP · Wiede',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Mehrfachauswahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Tags</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">VIP · Wiederkehrend · Allergien beachten · Vegetarisch · Vegan · High-End · Budget</p><p class="notion-text">Merkmale, nach denen du später filterst — bspw. VIP oder Allergien beachten.</p>'},
+    {title:'7. Ansprechpartner',
+     desc:'Eigenschaft : Text → Name der Spalte : Ansprechpartner → Du trägst hier ein : Primärer Kontakt (Name)',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Ansprechpartner</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Primärer Kontakt (Name)</p>'},
+    {title:'8. Firma',
+     desc:'Eigenschaft : Text → Name der Spalte : Firma → Du trägst hier ein : Für Geschäftskunden',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Firma</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Für Geschäftskunden</p>'},
+    {title:'9. E-Mail',
+     desc:'Eigenschaft : E-Mail → Name der Spalte : E-Mail → Du trägst hier ein : die E-Mail-Adresse deines Ansprech',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> E-Mail</p><p class="notion-text">→ <b>Name der Spalte :</b> E-Mail</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die E-Mail-Adresse deines Ansprechpartners.</p>'},
+    {title:'10. Telefon',
+     desc:'Eigenschaft : Telefon → Name der Spalte : Telefon → Du trägst hier ein : die Telefonnummer deines Ansprec',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Telefon</p><p class="notion-text">→ <b>Name der Spalte :</b> Telefon</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Telefonnummer deines Ansprechpartners.</p>'},
+    {title:'11. Website / Social',
+     desc:'Eigenschaft : URL → Name der Spalte : Website / Social → Du trägst hier ein : Website oder Social-Profil ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> URL</p><p class="notion-text">→ <b>Name der Spalte :</b> Website / Social</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Website oder Social-Profil des Kunden.</p>'},
+    {title:'12. Rechnungsadresse',
+     desc:'Eigenschaft : Text → Name der Spalte : Rechnungsadresse → Du trägst hier ein : die Rechnungsadresse für A',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Rechnungsadresse</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Rechnungsadresse für Angebot und Abrechnung.</p>'},
+    {title:'13. Lieferadresse / Location',
+     desc:'Eigenschaft : Text → Name der Spalte : Lieferadresse / Location → Du trägst hier ein : Freitext-Adresse, ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Lieferadresse / Location</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Freitext-Adresse, falls abweichend</p>'},
+    {title:'14. Erstes Event',
+     desc:'Eigenschaft : Datum → Name der Spalte : Erstes Event → Du trägst hier ein : Datum des ersten Events',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Erstes Event</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Datum des ersten Events</p>'},
+    {title:'15. Nächstes Event',
+     desc:'Eigenschaft : Datum → Name der Spalte : Nächstes Event → Du trägst hier ein : Datum des nächsten Events',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Nächstes Event</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Datum des nächsten Events</p>'},
+    {title:'16. Umsatz (EUR)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro Nachkommastellen : 2 → Name der Spalt',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text"><b>Nachkommastellen :</b> 2</p><p class="notion-text">→ <b>Name der Spalte :</b> Umsatz (EUR)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Gesamtumsatz in EUR</p>'},
+    {title:'17. Verloren Grund',
+     desc:'Eigenschaft : Auswählen → Name der Spalte : Verloren Grund Trage diese Auswahlmöglichkeiten ein : Preis ·',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Verloren Grund</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Preis · Kein Bedarf · Termin passt nicht · Andere Lösung · Keine Rückmeldung</p><p class="notion-text">Optionaler Grund, falls Status = Verloren</p>'},
+    {title:'18. Owner',
+     desc:'Eigenschaft : Person → Name der Spalte : Owner → Du trägst hier ein : die intern verantwortliche Person f',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Person</p><p class="notion-text">→ <b>Name der Spalte :</b> Owner</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die intern verantwortliche Person für diesen Kunden.</p>'},
+  ];
+  var TS11_STEPS_W3=[
+    {title:'1. Button anlegen',
+     desc:'Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen Butto',
+     html:'<p class="notion-text">Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen',
+     desc:'Drücke / und wähle „Tabellenansicht – Datenbank“. → Name der Datenbank : Angebot Master Database Damit st',
+     html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Angebot Master Database</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+    {title:'3. Name',
+     desc:'Eigenschaft : Titel → Name der Spalte : Name → Du trägst hier ein : den Namen des Angebots, bspw. 1.0.2 B',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Name</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen des Angebots, bspw. 1.0.2 Business Catering.</p>'},
+    {title:'4. Datum',
+     desc:'Eigenschaft : Datum → Name der Spalte : Datum → Du trägst hier ein : das Angebots- oder Eventdatum.',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Datum</p><p class="notion-text">→ <b>Du trägst hier ein :</b> das Angebots- oder Eventdatum.</p>'},
+    {title:'5. Personen Anzahl',
+     desc:'Eigenschaft : Text → Name der Spalte : Personen Anzahl → Du trägst hier ein : die Personenzahl des Events',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Personen Anzahl </p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Personenzahl des Events, bspw. 200 Pax.</p>'},
+    {title:'6. Menüpreis',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Menüpreis</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den kalkulierten Menüpreis für das gesamte Event.</p>'},
+    {title:'7. VK Wunschpreis',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> VK Wunschpreis </p><p class="notion-text">→ <b>Du trägst hier ein :</b> deinen Wunsch-Verkaufspreis für das Angebot.</p>'},
+    {title:'8. Menü Element',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : 🍽️ Menü Element Du verknüpfst hier die M',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> 🍽️ Menü Element</p><p class="notion-text">Du verknüpfst hier die Menü-Positionen aus deinem Menürechner, die zu diesem Angebot gehören.</p>'},
+    {title:'9. Kunden (Catering & Private Chef)',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : 🧑‍🍳 Kunden (Catering & Private Chef) Du ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> 🧑‍🍳 Kunden (Catering &amp; Private Chef)</p><p class="notion-text">Du verknüpfst hier den Kunden aus deiner Kunden Master Database.</p>'},
+    {title:'10. Mitarbeiter',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : 👤 Mitarbeiter Du verknüpfst hier die Mit',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> 👤 Mitarbeiter</p><p class="notion-text">Du verknüpfst hier die Mitarbeiter, die du für dieses Event einplanst.</p>'},
+    {title:'11. GK Kosten / Monate',
+     desc:'Eigenschaft : Verknüpfung → Ziel-Datenbank → → Name der Spalte : GK Kosten / Monate Du verknüpfst hier de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank →</p><p class="notion-text">→ <b>Name der Spalte :</b> GK Kosten / Monate </p><p class="notion-text">Du verknüpfst hier den Gemeinkosten-Monat, auf den dieses Event fällt.</p>'},
+    {title:'12. Produktionszeit (Minuten)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Produktionszeit (Minuten)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die geplante Produktionszeit in Minuten.</p>'},
+    {title:'13. Verpackungszeit (Minuten)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Verpackungszeit (Minuten)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die geplante Verpackungszeit in Minuten.</p>'},
+    {title:'14. Logistikzeit (Minuten)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Logistikzeit (Minuten)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die geplante Logistikzeit in Minuten.</p>'},
+    {title:'15. Eventzeit vor Ort (Minuten)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Eventzeit vor Ort (Minuten)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die geplante Zeit vor Ort in Minuten.</p>'},
+    {title:'16. Nachbereitung / Reinigung (Minuten)',
+     desc:'Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Nachbereitung / Reinigung (Minuten)</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die geplante Nachbereitungszeit in Minuten.</p>'},
+    {title:'17. Zubereitungszeit (min)',
+     desc:'Eigenschaft : Formel → Name der Spalte : Zubereitungszeit ( min ) Trage diese Formel ein : prop("Produkti',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Zubereitungszeit ( min )</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;Produktionszeit (Minuten)&quot;)+prop(&quot;Verpackungszeit (Minuten)&quot;)+prop(&quot;Logistikzeit (Minuten)&quot;)+prop(&quot;Eventzeit vor Ort (Minuten)&quot;)+prop(&quot;Nachbereitung / Reinigung (Minuten)&quot;)</div><p class="notion-text">→ Die eingetragene Formel summiert alle Zeit-Spalten zur Gesamtzeit des Events.</p>'},
+    {title:'18. Summe Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : Summe Wareneinsatz Trage diese Formel ein : if(prop("🍽️ Menü Ele',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Wareneinsatz</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(prop(&quot;🍽️ Menü Element&quot;).length() == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Sum up all WE gesamt values from related menu calculator records */<br>&nbsp;&nbsp;prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;WE gesamt (EUR)&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.sum()<br>)</div><p class="notion-text">→ Die eingetragene Formel summiert den Wareneinsatz aller verknüpften Menü-Positionen.</p>'},
+    {title:'19. Wareneinsatz (%)',
+     desc:'Eigenschaft : Formel → Name der Spalte : Wareneinsatz ( % ) Trage diese Formel ein : if(empty(prop("Menüp',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Wareneinsatz ( % )</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Menüpreis&quot;)) or prop(&quot;Menüpreis&quot;) == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate cost ratio as decimal */<br>&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / prop(&quot;Menüpreis&quot;), 4)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Wareneinsatz im Verhältnis zum Menüpreis.</p>'},
+    {title:'20. WE (%) Wunschpreis',
+     desc:'Eigenschaft : Formel → Name der Spalte : WE (%) Wunschpreis Trage diese Formel ein : if(empty(prop("Summe',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> WE (%) Wunschpreis</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)) or empty(prop(&quot;VK Wunschpreis &quot;)) or prop(&quot;VK Wunschpreis &quot;) == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate cost of goods as percentage of desired price */<br>&nbsp;&nbsp;prop(&quot;Summe Wareneinsatz&quot;) / prop(&quot;VK Wunschpreis &quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Wareneinsatz im Verhältnis zu deinem Wunschpreis.</p>'},
+    {title:'21. DB I',
+     desc:'Eigenschaft : Formel → Name der Spalte : DB I Trage diese Formel ein : if(empty(prop("Menüpreis")) or emp',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB I</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Menüpreis&quot;)) or empty(prop(&quot;Summe Wareneinsatz&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate contribution margin: sales price minus cost of goods */<br>&nbsp;&nbsp;prop(&quot;Menüpreis&quot;) - prop(&quot;Summe Wareneinsatz&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag I: Menüpreis minus Wareneinsatz.</p>'},
+    {title:'22. Durchschnittlicher Stundenlohn',
+     desc:'Eigenschaft : Formel → Name der Spalte : Durchschnittlicher Stundenlohn Trage diese Formel ein : if(empty',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Durchschnittlicher Stundenlohn</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;👤 Mitarbeiter&quot;)),<br>&nbsp;&nbsp;&quot;Keine Mitarbeiter&quot;,<br>&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Get all hourly rates from related employees */<br>&nbsp;&nbsp;&nbsp;&nbsp;hourlyRates, prop(&quot;👤 Mitarbeiter&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Stundensatz (AG-Kosten)&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current) and current &gt; 0),<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Return result based on valid rates */<br>&nbsp;&nbsp;&nbsp;&nbsp;if(hourlyRates.length() == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Stundensätze&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(round(sum(hourlyRates) / hourlyRates.length(), 2)) + &quot; €/h&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel ermittelt den Durchschnittslohn deiner eingeplanten Mitarbeiter.</p>'},
+    {title:'23. PK Kosten / Produkt',
+     desc:'Eigenschaft : Formel → Name der Spalte : PK Kosten / Produkt Trage diese Formel ein : if(empty(prop("Summ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> PK Kosten / Produkt</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Anzahl Food / Bev&quot;)) or prop(&quot;Summe Anzahl Food / Bev&quot;) == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Divide total personnel costs by total quantity */<br>&nbsp;&nbsp;round(toNumber(prop(&quot;PK Kosten Gesamt&quot;)) / prop(&quot;Summe Anzahl Food / Bev&quot;), 2)<br>)</div><p class="notion-text">→ Die eingetragene Formel rechnet die Personalkosten auf das Event herunter.</p>'},
+    {title:'24. PK Kosten Gesamt',
+     desc:'Eigenschaft : Formel → Name der Spalte : PK Kosten Gesamt Trage diese Formel ein : lets( employeeCount, p',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> PK Kosten Gesamt</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">lets(<br>&nbsp;&nbsp;employeeCount, prop(&quot;👤 Mitarbeiter&quot;).length(),<br>&nbsp;&nbsp;/* Get hourly rates of all assigned employees */<br>&nbsp;&nbsp;hourlyRates, prop(&quot;👤 Mitarbeiter&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Stundensatz (AG-Kosten)&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(current &gt; 0),<br>&nbsp;&nbsp;/* Calculate average hourly rate */<br>&nbsp;&nbsp;avgHourlyRate, if(hourlyRates.length() &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;sum(hourlyRates) / hourlyRates.length(),<br>&nbsp;&nbsp;&nbsp;&nbsp;0<br>&nbsp;&nbsp;),<br>&nbsp;&nbsp;/* Sum all time phases, treating empty values as 0 */<br>&nbsp;&nbsp;totalMinutes, <br>&nbsp;&nbsp;&nbsp;&nbsp;(if(empty(prop(&quot;Produktionszeit (Minuten)&quot;)), 0, prop(&quot;Produktionszeit (Minuten)&quot;))) +<br>&nbsp;&nbsp;&nbsp;&nbsp;(if(empty(prop(&quot;Verpackungszeit (Minuten)&quot;)), 0, prop(&quot;Verpackungszeit (Minuten)&quot;))) +<br>&nbsp;&nbsp;&nbsp;&nbsp;(if(empty(prop(&quot;Logistikzeit (Minuten)&quot;)), 0, prop(&quot;Logistikzeit (Minuten)&quot;))) +<br>&nbsp;&nbsp;&nbsp;&nbsp;(if(empty(prop(&quot;Eventzeit vor Ort (Minuten)&quot;)), 0, prop(&quot;Eventzeit vor Ort (Minuten)&quot;))) +<br>&nbsp;&nbsp;&nbsp;&nbsp;(if(empty(prop(&quot;Nachbereitung / Reinigung (Minuten)&quot;)), 0, prop(&quot;Nachbereitung / Reinigung (Minuten)&quot;))),<br>&nbsp;&nbsp;/* Total labor minutes = employees × total time */<br>&nbsp;&nbsp;totalLaborMinutes, employeeCount * totalMinutes,<br>&nbsp;&nbsp;/* Convert to hours and multiply by rate */<br>&nbsp;&nbsp;totalCost, round((totalLaborMinutes / 60) * avgHourlyRate, 2),<br>&nbsp;&nbsp;/* Return result with clear formatting */<br>&nbsp;&nbsp;ifs(<br>&nbsp;&nbsp;&nbsp;&nbsp;employeeCount == 0, &quot;Keine Mitarbeiter zugewiesen&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;hourlyRates.length() == 0, &quot;Keine Stundensätze gefunden&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;totalMinutes == 0, &quot;Keine Zeitangaben vorhanden&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;format(totalCost) + &quot; € (&quot; + format(employeeCount) + &quot; MA × &quot; + format(totalMinutes) + &quot; min)&quot;<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel summiert die gesamten Personalkosten des Events.</p>'},
+    {title:'25. DB II',
+     desc:'Eigenschaft : Formel → Name der Spalte : DB II Trage diese Formel ein : format( round( if(empty(prop("DB ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB II</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">format(<br>&nbsp;&nbsp;round(<br>&nbsp;&nbsp;&nbsp;&nbsp;if(empty(prop(&quot;DB I&quot;)), 0, prop(&quot;DB I&quot;)) - <br>&nbsp;&nbsp;&nbsp;&nbsp;if(empty(prop(&quot;PK Kosten Gesamt&quot;)), 0, toNumber(prop(&quot;PK Kosten Gesamt&quot;))),<br>&nbsp;&nbsp;&nbsp;&nbsp;2<br>&nbsp;&nbsp;)<br>).replaceAll(&quot;\\.&quot;, &quot;,&quot;) + &quot; €&quot;</div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag II: DB I minus Personalkosten.</p>'},
+    {title:'26. GK Kosten / Produkt',
+     desc:'Eigenschaft : Rollup → Verknüpfung : ? → Eigenschaft : ? → Berechnen : Durchschnitt → Name der Spalte : G',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ?</p><p class="notion-text">→ <b>Eigenschaft :</b> ?</p><p class="notion-text">→ <b>Berechnen :</b> Durchschnitt</p><p class="notion-text">→ <b>Name der Spalte :</b> GK Kosten / Produkt</p><p class="notion-text">Dir wird hier der Gemeinkosten-Anteil aus deiner GK-Datenbank angezeigt.</p>'},
+    {title:'27. GK Kosten Summe',
+     desc:'Eigenschaft : Formel → Name der Spalte : GK Kosten Summe Trage diese Formel ein : if(empty(prop("GK Koste',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> GK Kosten Summe</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;GK Kosten / Produkt&quot;)) or empty(prop(&quot;Summe Anzahl Food / Bev&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Multiply overhead cost per product by total quantity */<br>&nbsp;&nbsp;prop(&quot;GK Kosten / Produkt&quot;) * prop(&quot;Summe Anzahl Food / Bev&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel rechnet die Gemeinkosten auf dieses Event um.</p>'},
+    {title:'28. DB III',
+     desc:'Eigenschaft : Formel → Name der Spalte : DB III Trage diese Formel ein : /* Calculate DB III by subtracti',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB III</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">/* Calculate DB III by subtracting total GK costs from DB II */<br>round(<br>&nbsp;&nbsp;if(empty(prop(&quot;DB II&quot;)), 0, toNumber(prop(&quot;DB II&quot;))) -<br>&nbsp;&nbsp;if(empty(prop(&quot;GK Kosten Summe&quot;)), 0, prop(&quot;GK Kosten Summe&quot;)),<br>&nbsp;&nbsp;2<br>) + &quot; €&quot;</div><p class="notion-text">→ Die eingetragene Formel berechnet Deckungsbeitrag III: DB II minus Gemeinkosten — dein Ergebnis pro Event.</p>'},
+    {title:'29. VK bei 30% Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : VK bei 30% Wareneinsatz Trage diese Formel ein : if(empty(prop("',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 30% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)) or prop(&quot;Summe Wareneinsatz&quot;) &lt;= 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate selling price at 30% cost ratio */<br>&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / 0.30, 2)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis, wenn du mit 30 % Wareneinsatz kalkulierst.</p>'},
+    {title:'30. VK bei 25% Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : VK bei 25% Wareneinsatz Trage diese Formel ein : if(empty(prop("',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 25% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)) or prop(&quot;Summe Wareneinsatz&quot;) &lt;= 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / 0.25, 2)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 25 % Wareneinsatz.</p>'},
+    {title:'31. VK bei 20% Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : VK bei 20% Wareneinsatz Trage diese Formel ein : if(empty(prop("',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 20% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)) or prop(&quot;Summe Wareneinsatz&quot;) &lt;= 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate selling price where cost is 20% of final price */<br>&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / 0.20, 2)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 20 % Wareneinsatz.</p>'},
+    {title:'32. VK bei 15% Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : VK bei 15% Wareneinsatz Trage diese Formel ein : if(empty(prop("',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 15% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)) or prop(&quot;Summe Wareneinsatz&quot;) &lt;= 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;/* Calculate selling price where cost is 15% */<br>&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / 0.15, 2)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 15 % Wareneinsatz.</p>'},
+    {title:'33. VK bei 10% Wareneinsatz',
+     desc:'Eigenschaft : Formel → Name der Spalte : VK bei 10% Wareneinsatz Trage diese Formel ein : if(empty(prop("',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> VK bei 10% Wareneinsatz </p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;Summe Wareneinsatz&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;if(prop(&quot;Summe Wareneinsatz&quot;) &lt;= 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;0,<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Calculate selling price where cost is 10% of final price */<br>&nbsp;&nbsp;&nbsp;&nbsp;round(prop(&quot;Summe Wareneinsatz&quot;) / 0.10, 2)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt den Verkaufspreis bei 10 % Wareneinsatz.</p>'},
+    {title:'34. Summe Anzahl Food / Bev',
+     desc:'Eigenschaft : Formel → Name der Spalte : Summe Anzahl Food / Bev Trage diese Formel ein : prop("🍽️ Menü E',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Anzahl Food / Bev</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;/* Get the menu position text from each related menu item */<br>&nbsp;&nbsp;.map(current.prop(&quot;Name&quot;))<br>&nbsp;&nbsp;/* Extract the number at the start of each position */<br>&nbsp;&nbsp;.map(toNumber(current.split(&quot; &quot;).first()))<br>&nbsp;&nbsp;/* Sum all the numbers */<br>&nbsp;&nbsp;.sum()</div><p class="notion-text">→ Die eingetragene Formel zählt, wie viele Food- und Beverage-Positionen im Menü stecken.</p>'},
+    {title:'35. Kcal',
+     desc:'Eigenschaft : Formel → Name der Spalte : Kcal Trage diese Formel ein : prop("🍽️ Menü Element") /* Get rel',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Kcal</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;/* Get related dishes from each menu element */<br>&nbsp;&nbsp;.map(current.prop(&quot;Gericht / Getränk&quot;))<br>&nbsp;&nbsp;/* Flatten nested lists into single list */<br>&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;/* Format each dish with name and calories */<br>&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Name&quot;) + &quot;: &quot; + <br>&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Kcal &quot;)), <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;keine Angabe&quot;, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(current.prop(&quot;Kcal &quot;)) + &quot; kcal&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>&nbsp;&nbsp;/* Combine all entries with line breaks */<br>&nbsp;&nbsp;.join(&quot;\\n&quot;)</div><p class="notion-text">→ Die eingetragene Formel summiert die Kalorien des gesamten Menüs.</p>'},
+    {title:'36. Protein',
+     desc:'Eigenschaft : Formel → Name der Spalte : Protein Trage diese Formel ein : if(empty(prop("🍽️ Menü Element"',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Protein</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;🍽️ Menü Element&quot;)),<br>&nbsp;&nbsp;&quot;Keine Menüelemente vorhanden&quot;,<br>&nbsp;&nbsp;prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Get dishes from each menu element */<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Gericht / Getränk&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Flatten nested lists into single list */<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Filter out empty entries */<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Format each dish with name and protein */<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Name&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Unbenanntes Gericht&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Name&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) + &quot;: &quot; +<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Protein &quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;keine Angabe&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(round(current.prop(&quot;Protein &quot;), 1)) + &quot;g Protein&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Join all entries with line breaks */<br>&nbsp;&nbsp;&nbsp;&nbsp;.join(&quot;\\n&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel summiert das Protein des gesamten Menüs.</p>'},
+    {title:'37. Fett',
+     desc:'Eigenschaft : Formel → Name der Spalte : Fett Trage diese Formel ein : if(empty(prop("🍽️ Menü Element")),',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fett</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;🍽️ Menü Element&quot;)),<br>&nbsp;&nbsp;&quot;Keine Menüelemente&quot;,<br>&nbsp;&nbsp;prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Get dishes from each menu element */<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Gericht / Getränk&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Flatten nested lists into single list */<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Filter out empty dish entries */<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(not empty(current))<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Format each dish with name and fat content */<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(not empty(current.prop(&quot;Name&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Name&quot;) + &quot;: &quot; +<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Fat &quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;keine Angabe&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(current.prop(&quot;Fat &quot;)) + &quot;g&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Remove empty strings */<br>&nbsp;&nbsp;&nbsp;&nbsp;.filter(current != &quot;&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Join with line breaks or show message */<br>&nbsp;&nbsp;&nbsp;&nbsp;.join(&quot;\\n&quot;)<br>).replaceAll(&quot;^$&quot;, &quot;Keine Daten verfügbar&quot;)</div><p class="notion-text">→ Die eingetragene Formel summiert das Fett des gesamten Menüs.</p>'},
+    {title:'38. Kohlenhydrate',
+     desc:'Eigenschaft : Formel → Name der Spalte : Kohlenhydrate Trage diese Formel ein : /* Get all menu elements ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Kohlenhydrate</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">/* Get all menu elements and their related dishes */<br>prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;.map(current.prop(&quot;Gericht / Getränk&quot;))<br>&nbsp;&nbsp;/* Flatten nested lists into single list of dishes */<br>&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;/* Format each dish with its name and carbohydrate content */<br>&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Name&quot;) + &quot;: &quot; +<br>&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Carbs&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;keine Angabe&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(current.prop(&quot;Carbs&quot;)) + &quot;g&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>&nbsp;&nbsp;/* Join all entries with line breaks */<br>&nbsp;&nbsp;.join(&quot;\\n&quot;)</div><p class="notion-text">→ Die eingetragene Formel summiert die Kohlenhydrate des gesamten Menüs.</p>'},
+    {title:'39. Allergene',
+     desc:'Eigenschaft : Formel → Name der Spalte : Allergene Trage diese Formel ein : if(empty(prop("🍽️ Menü Elemen',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Allergene</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(empty(prop(&quot;🍽️ Menü Element&quot;)),<br>&nbsp;&nbsp;&quot;Keine Menü Elemente vorhanden&quot;,<br>&nbsp;&nbsp;/* Get all dishes from all menu elements and format them */<br>&nbsp;&nbsp;prop(&quot;🍽️ Menü Element&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Gericht / Getränk&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat()<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Name&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Unbenanntes Gericht&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Name&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) + &quot;: &quot; + <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(empty(current.prop(&quot;Allergene&quot;)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Allergene&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current.prop(&quot;Allergene&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.join(&quot;\\n\\n&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel sammelt die Allergene aller Menü-Positionen ein.</p>'},
+    {title:'40. Einkaufsliste',
+     desc:'Eigenschaft : Rollup → Verknüpfung : ? → Eigenschaft : ? → Berechnen : Originale zeigen → Name der Spalte',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ?</p><p class="notion-text">→ <b>Eigenschaft :</b> ?</p><p class="notion-text">→ <b>Berechnen :</b> Originale zeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Einkaufsliste </p><p class="notion-text">Dir wird hier die komplette Einkaufsliste aus den Menü-Positionen angezeigt.</p>'},
+  ];
   var PAGES=[
+    /* Lektion 11 — drei Config-Steps-Regale (Engine): Notion-Seite ist leer, Steps kommen aus
+       der Config (Quelle: echte Notion-DB-Schemas + extrahierte Formeln, 17.07.2026).
+       Anker = leere Divs im #ts11page-Modul. */
+    { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'menue_rechner',
+      anchorSel:'#ts11wk1', steps:TS11_STEPS_W1,
+      eyebrow:'Warenkorb 1 · DB I — Menürechner',
+      title:'Der <span>Menürechner</span>.',
+      sub:'Jede Karte ist eine Spalte der Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung von DB I ist der Menüpreis.',
+      summary:'Menüpreis', chain:true },
+    { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'kunden_master',
+      anchorSel:'#ts11wk2', steps:TS11_STEPS_W2,
+      eyebrow:'Warenkorb 2 · DB II — Kunden',
+      title:'Die <span>Kunden-Datenbank</span>.',
+      sub:'Jeder Auftraggeber mit Kontakt, Typ und Status — die Währung von DB II ist die Personenanzahl.',
+      summary:'Personen ( Pax )', chain:true,
+      relations:[
+        { type:'ghost', name:'Menürechner Master Database', target:'Gegenspalte · aus dem Menürechner',
+          flag:'erscheint automatisch',
+          desc:'Erscheint von allein, sobald du im Menürechner die wechselseitige Kunden-Verknüpfung anlegst.',
+          content:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung (Gegenspalte)</p><p class="notion-text">→ <b>Name der Spalte :</b> 🍽️ Menürechner Master Database</p><p class="notion-text">Diese Spalte legst du NICHT selbst an: Sie erscheint automatisch in deiner Kunden Master Database, sobald du im Menürechner (Warenkorb 1, Schritt 11) die Verknüpfung mit wechselseitiger Verbindung anlegst.</p><p class="notion-text">Ab dann siehst du an jedem Kunden, welche Menü-Positionen für ihn kalkuliert wurden.</p>' }
+      ] },
+    { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'kostenaufstellung',
+      anchorSel:'#ts11wk3', steps:TS11_STEPS_W3,
+      eyebrow:'Warenkorb 3 · DB III — Kostenaufstellung',
+      title:'Die <span>Kostenaufstellung</span>.',
+      sub:'Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen — die Währung von DB III ist der Wareneinsatz in Prozent.',
+      summary:'Wareneinsatz', chain:true },
     { path:/\/zutatenliste\/?$/, kachel:'db4_zutaten',
       eyebrow:'Der Warenkorb · DB IV',
       title:'Deine Zutaten. <span>Gramm für Gramm</span>.',
@@ -5122,7 +5443,8 @@
 
   /* Platzhalter-Bild (SVG data-URI) — bis echte Produktbilder eingetragen sind */
   function ph(name){
-    var initial=(name||'').trim().charAt(0).toUpperCase();
+    /* Array.from splittet nach Codepoints — charAt(0) zerreißt Emoji-Surrogatpaare (URIError, Befund 17.07.2026) */
+    var initial=(Array.from((name||'').trim())[0]||'?').toUpperCase();
     var svg='<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">'
       +'<rect width="600" height="600" fill="#0b0d14"/>'
       +'<circle cx="300" cy="262" r="170" fill="rgba(199,180,137,0.045)"/>'
@@ -5177,9 +5499,11 @@
   function isDone(step){ return localStorage.getItem(step.key)==='1'; }
   function setDone(step,val){
     localStorage.setItem(step.key, val?'1':'0');
-    /* Original-Toggle-System synchron halten (gleiche Keys, gleiche Attribute) */
-    step.toggle.setAttribute('data-done', val?'1':'0');
-    var box=step.toggle.querySelector('.done-check'); if(box) box.checked=val;
+    /* Original-Toggle-System synchron halten (gleiche Keys, gleiche Attribute); Config-Steps haben kein Toggle */
+    if(step.toggle){
+      step.toggle.setAttribute('data-done', val?'1':'0');
+      var box=step.toggle.querySelector('.done-check'); if(box) box.checked=val;
+    }
   }
 
   /* ---- Markup ---- */
@@ -5200,7 +5524,7 @@
       relCards=page.relations.map(function(r,ri){
         var done=(r.type==='later'&&localStorage.getItem(relKey(page,r))==='1')||(r.mirrorKey&&localStorage.getItem(r.mirrorKey)==='1');
         return '<article class="tss-card tss-rel tss-'+r.type+(r.fit==='contain'?' tss-fit-contain':'')+(done?' is-done':'')+'" data-rel="'+ri+'" role="button" tabindex="0" aria-label="'+r.name+' — '+r.flag+'">'
-          +'<div class="tss-imgwrap"><img src="'+r.img+'" alt="'+r.name+'" loading="lazy"><span class="tss-flag">'+r.flag+'</span><span class="tss-donebadge">'+CHECK+'</span></div>'
+          +'<div class="tss-imgwrap"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'" loading="lazy"><span class="tss-flag">'+r.flag+'</span><span class="tss-donebadge">'+CHECK+'</span></div>'
           +'<div class="tss-body"><h4 class="tss-name">'+r.name+'</h4><p class="tss-desc">'+r.desc+'</p><div class="tss-val tss-val--rel">'+r.target+'</div></div>'
         +'</article>';
       }).join('');
@@ -5229,7 +5553,7 @@
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37 };
+  var BACKOFFICE={ menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37 };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -5339,6 +5663,21 @@
       });
       target.appendChild(clone);
     }
+    else if(st.contentHTML){
+      /* Config-Steps (Engine): Overlay-Inhalt als HTML-String (Pfeil-Schema) + Copy-Button je Formelblock */
+      target.innerHTML=st.contentHTML;
+      [].slice.call(target.querySelectorAll('.notion-code')).forEach(function(code){
+        var btn=document.createElement('button'); btn.type='button'; btn.className='tsd-copy'; btn.textContent='Copy';
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          var src=code.cloneNode(true); var b=src.querySelector('.tsd-copy'); if(b) b.remove();
+          var txt=src.textContent.trim();
+          if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt);
+          btn.textContent='Kopiert'; setTimeout(function(){ btn.textContent='Copy'; },1600);
+        });
+        code.insertBefore(btn,code.firstChild);
+      });
+    }
     return ov;
   }
   /* Relation-Kachel-Overlay: Ghost = Info + „erscheint automatisch"-Chip (kein Done-Button);
@@ -5355,7 +5694,7 @@
       +'<div class="tsd-panel">'
         +'<button type="button" class="tsd-close" aria-label="Schließen">'+XICON+'</button>'
         +'<div class="tsd-grid">'
-          +'<div class="tsd-imgwrap'+(contain?' tsd-imgwrap--contain':'')+'"><img src="'+r.img+'" alt="'+r.name+'"></div>'
+          +'<div class="tsd-imgwrap'+(contain?' tsd-imgwrap--contain':'')+'"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'"></div>'
           +'<div class="tsd-info">'
             +'<div class="tsd-eyebrow">'+(isLater?'Safe for Later':'Ghost · erscheint automatisch')+'</div>'
             +'<h2 class="tsd-title">'+r.name+'</h2>'
@@ -5498,6 +5837,22 @@
   }
   function rootIdFor(page){ return 'tsshop--'+(page.kachel||'x'); }
   function mountPage(page){
+    /* Config-Steps (Engine, seit 17.07.2026): Seiten ohne Notion-Inhalt — die Schritte kommen
+       direkt aus PAGES.steps, Mount-Punkt = page.anchorSel (leeres Anker-Div eines Seiten-Moduls).
+       done-Keys mit Kachel-Präfix (Titel wie „1. Button anlegen" sonst seitenübergreifend kollidierend). */
+    if(page.steps){
+      var anchorEl=document.querySelector(page.anchorSel||''); if(!anchorEl) return;
+      if(document.getElementById(rootIdFor(page))) return;
+      var ck=kachel(page.kachel); if(!ck||!ck.ist_produkt_kachel) return;
+      var csteps=page.steps.map(function(s,i){
+        return { i:i, toggle:null, title:s.title, key:doneKey(page.kachel+'·'+s.title), content:null, contentHTML:s.html, desc:s.desc||'' };
+      });
+      injectCSS();
+      var croot=build(page,ck,csteps);
+      anchorEl.appendChild(croot);
+      setup(page,ck,csteps,croot);
+      return;
+    }
     var lists;
     if(page.multi){
       /* Mehrere getrennte Container zu EINEM Regal bündeln (z. B. 4 einzelne
@@ -5557,7 +5912,7 @@
       var d=document.getElementById('tsshop-detail'); if(d){ d.remove(); document.body.style.overflow=''; }
       return;
     }
-    for(var i=0;i<pages.length;i++) mountPage(pages[i]);
+    for(var i=0;i<pages.length;i++){ try{ mountPage(pages[i]); }catch(err){ /* Regal-Fehler isolieren */ } }
   }
   function boot(){
     var tries=0;
@@ -7954,61 +8309,7 @@
 }
 #ts11page .split__text p{color:rgba(255,255,255,.8);font-size:16px;margin:0 0 15px;max-width:52ch}
 #ts11page .split__text p:last-child{margin-bottom:0}
-#ts11page .shelfwrap{max-width:1280px;margin:0 auto;padding:0 24px}
-#ts11page .shelf{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 22px;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
-#ts11page .shelf::-webkit-scrollbar{display:none}
-#ts11page .card{--tss-g:104,134,196;flex:0 0 calc((100% - 3*22px)/4);min-width:0;scroll-snap-align:start;position:relative;border-radius:16px;overflow:visible;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));
-    border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);
-    transition:transform .75s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
-#ts11page .card:hover{transform:translateY(-4px);border-color:rgba(var(--tss-g),.5);animation:tsCardBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-@keyframes tsCardBeat{
-    0%{box-shadow:0 4px 14px rgba(var(--tss-g),.10),0 0 14px rgba(var(--tss-g),.10)}
-    18%{box-shadow:0 6px 22px rgba(var(--tss-g),.30),0 0 46px rgba(var(--tss-g),.34)}
-    32%{box-shadow:0 5px 18px rgba(var(--tss-g),.16),0 0 26px rgba(var(--tss-g),.18)}
-    46%{box-shadow:0 6px 20px rgba(var(--tss-g),.26),0 0 40px rgba(var(--tss-g),.28)}
-    72%,100%{box-shadow:0 4px 14px rgba(var(--tss-g),.10),0 0 14px rgba(var(--tss-g),.10)}}
-#ts11page .card__imgwrap{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:16px 16px 0 0;background:#0b0d14;display:flex;align-items:center;justify-content:center}
-#ts11page .ph{color:rgba(199,180,137,.5);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:0 14px}
-#ts11page .ph .hf{display:block;margin-top:6px;color:rgba(255,255,255,.3);font-size:10px;letter-spacing:.06em;text-transform:none}
-#ts11page .card__flag{position:absolute;left:12px;top:12px;z-index:2;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-    color:#fff;background:rgba(150,120,224,.88);border-radius:999px;padding:5px 11px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
-#ts11page .card__body{padding:16px 18px 18px}
-#ts11page .card__name{font-size:1.02rem;font-weight:600;letter-spacing:-.012em;color:#fff;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#ts11page .card__desc{font-size:.82rem;color:rgba(255,255,255,.52);line-height:1.5;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#ts11page .card__val{text-align:right;margin-top:14px;font-size:1rem;font-weight:700;font-variant-numeric:tabular-nums;color:#d8c9ab}
-#ts11page .card__val--rel{font-family:var(--serifd);font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:rgba(216,201,171,.92)}
-#ts11page .card.later{--tss-g:150,120,224}
-#ts11page .card--tail{display:flex;align-items:center;justify-content:center;text-align:center;background:transparent;
-    border:1px dashed rgba(255,255,255,.14);color:var(--muted);font-size:13px;padding:18px}
-#ts11page .card--tail b{color:var(--gold);font-weight:600}
-#ts11page .shelf-hint{text-align:center;color:rgba(255,255,255,.35);font-size:12.5px;margin:2px 0 0}
-#ts11page .shelf-hint .g{color:var(--gold)}
-#ts11page .shelf-hint .l{color:var(--later)}
-@media(max-width:980px){#ts11page .card{flex-basis:calc((100% - 22px)/2)}
-}
-@media(max-width:560px){#ts11page .card{flex-basis:86%}
-}
-#ts11page .tssbar{display:flex;align-items:center;gap:clamp(18px,3vw,44px);max-width:880px;margin:clamp(28px,3.6vh,52px) auto 0;
-    padding:20px clamp(22px,2.6vw,32px);border-radius:18px;
-    background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.018) 60%,rgba(255,255,255,.006));
-    border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 60px -34px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.07);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-#ts11page .tssbar__side{flex:0 0 auto;min-width:112px}
-#ts11page .tssbar__side.right{text-align:right}
-#ts11page .tssbar__val,#ts11page .tssbar__glob{font-family:var(--sans);font-size:clamp(23px,2.7vw,33px);font-weight:700;letter-spacing:-.012em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-#ts11page .tssbar__cap{font-size:11px;font-weight:600;letter-spacing:.01em;color:var(--gold);margin-top:10px;white-space:nowrap}
-#ts11page .tssbar__mid{flex:1 1 auto;min-width:0}
-#ts11page .tssbar__track{position:relative;height:6px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 1px 2px rgba(0,0,0,.45);overflow:hidden}
-#ts11page .tssbar__fill{position:relative;height:100%;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 10px rgba(143,203,170,.5),inset 0 1px 0 rgba(255,255,255,.3)}
-#ts11page .tssbar__fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:translateX(-100%);animation:tsBarSheen 3.4s ease-in-out infinite}
-@keyframes tsBarSheen{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
-#ts11page .tssbar__midcap{display:flex;justify-content:space-between;gap:12px;margin-top:11px;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-#ts11page .tssbar__midcap b{color:rgba(216,201,171,.9);font-weight:700}
-@media(max-width:640px){#ts11page .tssbar{flex-direction:column;align-items:stretch;gap:18px;text-align:center}
-#ts11page .tssbar__side,#ts11page .tssbar__side.right{text-align:center;min-width:0}
-#ts11page .tssbar__cap{white-space:normal}
-}
+#ts11page .ts11wk{width:100%;margin:24px 0 0}
 #ts11page .pcrow{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;max-width:1120px;margin:0 auto;padding:0 24px}
 #ts11page .pcrow.rev .pcrow__pc{order:1}
 #ts11page .pcrow.rev .pcrow__text{order:2}
@@ -8246,17 +8547,8 @@
   </div>
 </section>
 
-<!-- Warenkorb 1 · Menürechner -->
-<section style="padding-top:24px">
-  <div class="sec-head" style="margin-bottom:22px">
-    <div class="eyebrow">Warenkorb 1 · DB I — Menürechner</div>
-    <h2>Der <span class="ts-gold">Menürechner</span>.</h2>
-    <p>Hier entsteht das Menü: pro Position ein Gericht oder Getränk, die Anzahl im Menü, und der Wareneinsatz zieht sich von allein.</p>
-  </div>
-  <div class="shelfwrap"><div class="shelf" id="ts11shelf1"></div></div>
-  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
-  <div class="tssbar" id="ts11bar1"></div>
-</section>
+<!-- Warenkorb 1 — echtes tsshop-Regal (Config-Steps-Engine), mountet an diesem Anker -->
+<div class="ts11wk" id="ts11wk1"></div>
 <section style="padding-top:44px">
   <div class="pcrow">
     <div class="pcrow__text">
@@ -8268,17 +8560,8 @@
   </div>
 </section>
 
-<!-- Warenkorb 2 · Kunden -->
-<section style="padding-top:64px">
-  <div class="sec-head" style="margin-bottom:22px">
-    <div class="eyebrow">Warenkorb 2 · DB II — Kunden</div>
-    <h2>Die <span class="ts-gold">Kunden-Datenbank</span>.</h2>
-    <p>Jeder Auftraggeber mit Kontakt, Typ und Status. Vom Lead bis zur Abrechnung siehst du, wo eine Anfrage gerade steht.</p>
-  </div>
-  <div class="shelfwrap"><div class="shelf" id="ts11shelf2"></div></div>
-  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
-  <div class="tssbar" id="ts11bar2"></div>
-</section>
+<!-- Warenkorb 2 — echtes tsshop-Regal (Config-Steps-Engine), mountet an diesem Anker -->
+<div class="ts11wk" id="ts11wk2"></div>
 <section style="padding-top:44px">
   <div class="pcrow rev">
     <div class="pcrow__text">
@@ -8290,17 +8573,8 @@
   </div>
 </section>
 
-<!-- Warenkorb 3 · Angebot -->
-<section style="padding-top:64px">
-  <div class="sec-head" style="margin-bottom:22px">
-    <div class="eyebrow">Warenkorb 3 · DB III — Angebot Master</div>
-    <h2>Das <span class="ts-gold">Angebot</span>.</h2>
-    <p>Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen und rechnet daraus Deckungsbeitrag und Preisvorschlag.</p>
-  </div>
-  <div class="shelfwrap"><div class="shelf" id="ts11shelf3"></div></div>
-  <p class="shelf-hint">◂ horizontal scrollen ▸ &nbsp;·&nbsp; reguläre Karten &nbsp;·&nbsp; <span class="l">Später</span> (selbst verknüpfen)</p>
-  <div class="tssbar" id="ts11bar3"></div>
-</section>
+<!-- Warenkorb 3 — echtes tsshop-Regal (Config-Steps-Engine), mountet an diesem Anker -->
+<div class="ts11wk" id="ts11wk3"></div>
 <section style="padding-top:44px">
   <div class="pcrow">
     <div class="pcrow__text">
@@ -8365,85 +8639,7 @@
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Warenkörbe: Karten aus den echten Notion-Eigenschaften ---------- */
-  /* type: reg = reguläre Produkt-Karte · later = Safe-for-Later (Rollup/Relation, selbst gebaut, lila) */
-  var CART1 = {  /* 🍽️ Menürechner Master Database */
-    pill:'Wareneinsatz', total:'12,50 €', done:5, denom:8, pct:62,
-    cards:[
-      {t:'reg', eye:'Titel',        name:'Menüposition',        val:'Text'},
-      {t:'reg', eye:'Verknüpfung',  name:'Gericht / Getränk',   val:'→ Gerichte'},
-      {t:'reg', eye:'Auswahl',      name:'Food / Beverage',     val:'2 Optionen'},
-      {t:'reg', eye:'Zahl',         name:'Anzahl im Menü',      val:'z. B. 80'},
-      {t:'reg', eye:'Formel',       name:'WE pro Gericht (€)',  val:'7,84 €'},
-      {t:'reg', eye:'Formel',       name:'WE gesamt (€)',       val:'12,50 €'},
-      {t:'reg', eye:'Verknüpfung',  name:'Packaging / Co.',     val:'→ Packaging'},
-      {t:'later', name:'Kunden Master DB', badge:'später verknüpfen', desc:'Relation zur Kunden-DB, die du selbst verbindest.', target:'→ Kunden Master Database'}
-    ],
-    more:'+ 2 weitere (Aufschlüsselung, Recent)'
-  };
-  var CART2 = {  /* 🧑‍🍳 Kunden Master Database */
-    pill:'Umsatz', total:'—', done:4, denom:8, pct:50,
-    cards:[
-      {t:'reg', eye:'Titel',        name:'Name',            val:'Text'},
-      {t:'reg', eye:'Auswahl',      name:'Kundentyp',       val:'Catering · Private Chef · Location'},
-      {t:'reg', eye:'Status',       name:'Status',          val:'Lead → Abgerechnet'},
-      {t:'reg', eye:'Multi-Select', name:'Tags',            val:'VIP · Vegan · High-End …'},
-      {t:'reg', eye:'Zahl (€)',     name:'Umsatz',          val:'6.850 €'},
-      {t:'reg', eye:'Text',         name:'Ansprechpartner', val:'Kontakt'},
-      {t:'reg', eye:'Datum',        name:'Nächstes Event',  val:'Termin'},
-      {t:'later', name:'Menürechner Master DB', badge:'später verknüpfen', desc:'Relation zum Menürechner: kalkulierte Menüs je Kunde.', target:'→ Menürechner Master Database'}
-    ],
-    more:'+ 11 weitere (E-Mail, Telefon, Firma, Owner, Adressen, Website …)'
-  };
-  var CART3 = {  /* Angebot Master Database — der Rechenkern */
-    pill:'Preisvorschlag', total:'45,00 €', done:5, denom:10, pct:50,
-    cards:[
-      {t:'reg', eye:'Titel',        name:'Name',              val:'Text'},
-      {t:'reg', eye:'Verknüpfung',  name:'Menü Element',      val:'→ Menürechner'},
-      {t:'reg', eye:'Verknüpfung',  name:'Kunden',            val:'→ Kunden'},
-      {t:'reg', eye:'Verknüpfung',  name:'Mitarbeiter',       val:'→ Team'},
-      {t:'reg', eye:'Formel',       name:'Summe Wareneinsatz',val:'12,50 €'},
-      {t:'reg', eye:'Formel',       name:'Wareneinsatz (%)',  val:'27,8 %'},
-      {t:'reg', eye:'Formel',       name:'DB I · II · III',   val:'Deckungsbeitrag'},
-      {t:'reg', eye:'Zahl (€)',     name:'VK Wunschpreis',    val:'45,00 €'},
-      {t:'later', name:'GK Kosten / Monate', badge:'später verknüpfen', desc:'Rollup auf die Gemeinkosten, baust du nach der Relation.', target:'→ Gemeinkosten (DB VI)'}
-    ],
-    more:'+ 26 weitere (VK bei 10–30 % WE, Zeiten, Nährwerte, Allergene …)'
-  };
-
-  /* Karten-Aufbau = 1:1 Live-.tss-card-Struktur: imgwrap(img) + body(h4.name + p.desc + .val) */
-  function buildCart(shelfId, barId, data){
-    var shelf = document.getElementById(shelfId);
-    data.cards.forEach(function(c){
-      var el = document.createElement('article');
-      el.className = 'card' + (c.t==='later' ? ' later' : '');
-      var media = '<div class="ph">Higgsfield-Bild<span class="hf">Motiv-Thema folgt</span></div>'
-        + (c.t==='later' ? '<span class="card__flag">später verknüpfen</span>' : '');
-      var desc = (c.t==='later') ? c.desc : ('Eigenschaft · ' + c.eye);
-      var val  = (c.t==='later')
-        ? '<div class="card__val card__val--rel">'+c.target+'</div>'
-        : '<div class="card__val">'+c.val+'</div>';
-      el.innerHTML = '<div class="card__imgwrap">'+media+'</div>'+
-        '<div class="card__body"><h4 class="card__name">'+c.name+'</h4>'+
-        '<p class="card__desc">'+desc+'</p>'+val+'</div>';
-      shelf.appendChild(el);
-    });
-    if(data.more){
-      var tail = document.createElement('article');
-      tail.className = 'card card--tail';
-      tail.innerHTML = '<span><b>'+data.more+'</b><br>je eine Karte</span>';
-      shelf.appendChild(tail);
-    }
-    var bar = document.getElementById(barId);
-    bar.innerHTML =
-      '<div class="tssbar__side"><div class="tssbar__val">'+data.total+'</div><div class="tssbar__cap">Preisvorschlag</div></div>'+
-      '<div class="tssbar__mid"><div class="tssbar__track"><div class="tssbar__fill" style="width:'+data.pct+'%"></div></div>'+
-        '<div class="tssbar__midcap"><span>Diese Lektion</span><span><b>'+data.pct+' %</b> · '+data.done+'/'+data.denom+'</span></div></div>'+
-      '<div class="tssbar__side right"><div class="tssbar__glob">64 %</div><div class="tssbar__cap">Backoffice</div></div>';
-  }
-  buildCart('ts11shelf1','ts11bar1',CART1);
-  buildCart('ts11shelf2','ts11bar2',CART2);
-  buildCart('ts11shelf3','ts11bar3',CART3);
+  /* Warenkörbe = echtes tsshop-Modul (Config-Steps, kurs.js) — mountet an #ts11wk1..3 */
 
   /* ---------- PC-Blöcke: Klick-Hinweis (Scroll-Lightbox folgt) ---------- */
   var hint = document.getElementById('ts11hint'), hintT;
