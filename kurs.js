@@ -10618,11 +10618,12 @@
    ============================================================ */
 (function(){
   if(window.__tsfdq) return; window.__tsfdq=true;
-  var HERO="https://files.catbox.moe/20fi21.png";
-  var COVER="https://files.catbox.moe/6yc8x3.png";
+  var BASE="https://tastyrob123.github.io/kurs-code/img/food-drinks/";
+  var HERO=BASE+"hero.webp";
+  var COVER=BASE+"cover.webp";
   var LOGO="https://files.catbox.moe/au80tp.png";
-  var FRAMES=["cdu8mh","gyoqxk","pm5ay0","nin23v","0wy3dv","lz4264","myq6gt","ux2kn8","owfskl","gtg2ap","ulfhuw","k2rad9"]
-             .map(function(x){return "https://files.catbox.moe/"+x+".webp";});
+  var FRAMES=["f01","f02","f03","f04","f05","f06","f07","f08","f09","f10","f11","f12"]
+             .map(function(x){return BASE+x+".webp";});
   function on(){ return /\/food-drinksquartier-inhalte-interface\/?$/.test(location.pathname); }
 
   var CSS = `
@@ -10781,11 +10782,10 @@
       if(bar) bar.style.width=(p*100).toFixed(1)+"%";
     }
     window.__fdqbUpdate=update;
-    // rAF fuer fluessiges Scrubben + scroll/resize als Fallback (robust ueber alle Browser)
-    var ticking=false;
-    function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(function(){ update(); ticking=false; }); } }
-    window.addEventListener("scroll", onScroll, {passive:true});
-    window.addEventListener("resize", onScroll, {passive:true});
+    // Scroll-Update DIREKT (garantiert, unabhaengig von rAF-Throttling) +
+    // rAF-Loop fuer fluessiges Scrubben bei sichtbarem Tab.
+    window.addEventListener("scroll", update, {passive:true});
+    window.addEventListener("resize", update, {passive:true});
     (function raf(){ update(); requestAnimationFrame(raf); })();
     update();
   }
