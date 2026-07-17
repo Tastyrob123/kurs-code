@@ -9520,36 +9520,32 @@
 #ts11page #ts11emp .db-row{position:relative;display:flex;flex-direction:column;gap:9px;max-width:300px;
     opacity:0;transform:translateY(10px)}
 #ts11page #ts11emp.on .db-row{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1) .1s,transform .55s cubic-bezier(.16,1,.3,1) .1s}
-/* Cineastischer Daten-Fluss: Gold-Rail + wanderndes Energie-Licht DB I->II->III, Reihen aktivieren beim Durchlauf, DB III = Kulmination */
-#ts11page #ts11emp .db-rail{position:absolute;left:24px;top:22px;bottom:22px;width:2px;border-radius:2px;z-index:0;pointer-events:none;
-    background:linear-gradient(180deg,rgba(199,180,137,.06),rgba(199,180,137,.30),rgba(199,180,137,.06))}
-#ts11page #ts11emp .db-flow{position:absolute;left:20px;width:9px;height:9px;border-radius:50%;z-index:3;pointer-events:none;top:22px;opacity:0;
-    background:radial-gradient(circle,#fff,#fbe6c2 45%,#c7b489 68%,transparent 74%);
-    box-shadow:0 0 12px 3px rgba(251,230,194,.75),0 0 26px 8px rgba(199,180,137,.45);
-    animation:ts11Flow 6s cubic-bezier(.65,0,.35,1) infinite}
-@keyframes ts11Flow{0%{top:12%;opacity:0}5%{opacity:1}9%{top:12%}27%{top:50%}31%{top:50%}55%{top:88%}61%{top:88%;opacity:1}67%{opacity:0}100%{top:88%;opacity:0}}
-#ts11page #ts11emp .tb{position:relative;overflow:hidden;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:12px;font-size:.94rem;font-weight:600;
-    white-space:nowrap;color:rgba(255,255,255,.68);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
-    animation:ts11Row 6s ease-in-out infinite}
-#ts11page #ts11emp .tb::after{content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;z-index:2;transform:translateX(-130%);
-    background:linear-gradient(100deg,transparent 34%,rgba(251,230,194,.18) 50%,transparent 66%);animation:ts11Sweep 6s ease-in-out infinite}
-#ts11page #ts11emp .tb:nth-child(2),#ts11page #ts11emp .tb:nth-child(2)::after{animation-delay:1.5s}
-#ts11page #ts11emp .tb:nth-child(3),#ts11page #ts11emp .tb:nth-child(3)::after{animation-delay:3s}
-#ts11page #ts11emp .tb:nth-child(3){animation-name:ts11RowFin}
-@keyframes ts11Row{0%,22%,100%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}
-    5%{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.22),0 8px 30px -8px rgba(199,180,137,.45)}}
-@keyframes ts11RowFin{0%,28%,100%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}
-    6%{background:rgba(199,180,137,.16);border-color:rgba(199,180,137,.78);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.4),0 0 42px rgba(199,180,137,.5),0 10px 34px -6px rgba(199,180,137,.55)}
-    17%{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.5)}}
-@keyframes ts11Sweep{0%,3%{transform:translateX(-130%)}11%{transform:translateX(130%)}11.01%,100%{transform:translateX(130%)}}
+/* Cineastischer Energie-Fill: Rail füllt sich von oben, jede DB rastet ein wenn der leuchtende Kopf sie erreicht, DB III = Kulmination.
+   KEIN animation-delay -> alles auf einer 6s-Uhr, Timing in den Keyframe-% -> Kopf & aktive Reihe können NICHT desynchronisieren. */
+#ts11page #ts11emp .db-rail{position:absolute;left:24px;top:20px;bottom:20px;width:2px;border-radius:2px;z-index:0;pointer-events:none;background:rgba(199,180,137,.14)}
+#ts11page #ts11emp .db-fill{position:absolute;left:24px;top:20px;width:2px;height:0;border-radius:2px;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg,rgba(199,180,137,.45),#fbe6c2);box-shadow:0 0 9px 1.5px rgba(251,230,194,.5);
+    animation:ts11Fill 6s cubic-bezier(.6,0,.4,1) infinite}
+#ts11page #ts11emp .db-fill::after{content:"";position:absolute;bottom:-4px;left:-3.5px;width:9px;height:9px;border-radius:50%;
+    background:radial-gradient(circle,#fff,#fbe6c2 45%,#c7b489 70%,transparent 76%);box-shadow:0 0 12px 3px rgba(251,230,194,.8),0 0 24px 7px rgba(199,180,137,.4)}
+@keyframes ts11Fill{0%{height:0;opacity:0}5%{opacity:1}8%{height:0}34%{height:calc(50% - 20px)}40%{height:calc(50% - 20px)}60%{height:calc(100% - 40px)}86%{height:calc(100% - 40px);opacity:1}96%{opacity:0}100%{height:calc(100% - 40px);opacity:0}}
+#ts11page #ts11emp .tb{position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:12px;font-size:.94rem;font-weight:600;
+    white-space:nowrap;color:rgba(255,255,255,.68);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+#ts11page #ts11emp .tb:nth-child(3){animation:ts11Db1 6s ease-in-out infinite}
+#ts11page #ts11emp .tb:nth-child(4){animation:ts11Db2 6s ease-in-out infinite}
+#ts11page #ts11emp .tb:nth-child(5){animation:ts11DbFin 6s ease-in-out infinite}
+@keyframes ts11Db1{0%,5%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}9%,86%{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.22),0 8px 26px -8px rgba(199,180,137,.4)}95%,100%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}}
+@keyframes ts11Db2{0%,31%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}35%,86%{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.22),0 8px 26px -8px rgba(199,180,137,.4)}95%,100%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}}
+@keyframes ts11DbFin{0%,57%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}61%{background:rgba(199,180,137,.17);border-color:rgba(199,180,137,.8);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.42),0 0 40px rgba(199,180,137,.5),0 10px 30px -6px rgba(199,180,137,.5)}70%,86%{background:rgba(199,180,137,.11);border-color:rgba(199,180,137,.55);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.28),0 8px 26px -8px rgba(199,180,137,.4)}95%,100%{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.68);box-shadow:none}}
 #ts11page #ts11emp .ic-wrap{position:relative;width:15px;height:15px;flex:none;display:flex;align-items:center;justify-content:center;z-index:1}
-#ts11page #ts11emp .tb .ic{width:15px;height:15px;flex:none;position:relative;z-index:1;color:var(--gold);
-    animation:ts11IcFlash 6s ease-in-out infinite}
-#ts11page #ts11emp .tb:nth-child(2) .ic{animation-delay:1.5s}
-#ts11page #ts11emp .tb:nth-child(3) .ic{animation-delay:3s}
+#ts11page #ts11emp .tb .ic{width:15px;height:15px;flex:none;position:relative;z-index:1;color:var(--gold)}
+#ts11page #ts11emp .tb:nth-child(3) .ic{animation:ts11Ic1 6s ease-in-out infinite}
+#ts11page #ts11emp .tb:nth-child(4) .ic{animation:ts11Ic2 6s ease-in-out infinite}
+#ts11page #ts11emp .tb:nth-child(5) .ic{animation:ts11IcFin 6s ease-in-out infinite}
+@keyframes ts11Ic1{0%,5%{color:#c7b489;filter:none}9%,86%{color:#fbe6c2;filter:drop-shadow(0 0 6px rgba(251,230,194,.85))}95%,100%{color:#c7b489;filter:none}}
+@keyframes ts11Ic2{0%,31%{color:#c7b489;filter:none}35%,86%{color:#fbe6c2;filter:drop-shadow(0 0 6px rgba(251,230,194,.85))}95%,100%{color:#c7b489;filter:none}}
+@keyframes ts11IcFin{0%,57%{color:#c7b489;filter:none}61%,86%{color:#fbe6c2;filter:drop-shadow(0 0 8px rgba(251,230,194,.95))}95%,100%{color:#c7b489;filter:none}}
 #ts11page #ts11emp .tb .num{color:var(--gold);font-variant-numeric:tabular-nums;opacity:.9;position:relative;z-index:1}
-@keyframes ts11IcFlash{0%,22%,100%{opacity:.7;filter:none;color:#c7b489}
-    5%{opacity:1;filter:drop-shadow(0 0 7px rgba(251,230,194,.9));color:#fbe6c2}}
 #ts11page #ts11emp .emph{font-family:var(--serifd);font-size:1.4rem;font-weight:600;letter-spacing:-.01em;color:#fff;margin:0 0 14px;
     opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .05s,transform .6s cubic-bezier(.16,1,.3,1) .05s}
 #ts11page #ts11emp.on .emph{opacity:1;transform:none}
@@ -9590,7 +9586,7 @@
 #ts11page .cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1406;font-weight:600;font-size:14.5px;
     padding:14px 30px;border-radius:999px;text-decoration:none}
 @media (prefers-reduced-motion: reduce){#ts11page #ts11emp,#ts11page #ts11emp *,#ts11page #ts11l .tsl-cell{animation:none !important;transition:none !important;opacity:1 !important;transform:none !important}
-#ts11page #ts11emp .db-flow{display:none !important}
+#ts11page #ts11emp .db-fill{display:none !important}
 #ts11page #ts11emp .db-rail{opacity:.5}
 #ts11page #ts11emp .tb .ic{opacity:.85 !important;filter:none !important}
 
@@ -9793,7 +9789,7 @@
     <div id="ts11emp">
       <div class="col">
         <div class="db-hd">DB I – III : <span class="g">Menükalkulation</span></div>
-        <div class="db-row"><span class="db-rail"></span><span class="db-flow"></span>
+        <div class="db-row"><span class="db-rail"></span><span class="db-fill"></span>
           <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB I</span>&nbsp;Menürechner</span>
           <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB II</span>&nbsp;Kunden</span>
           <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB III</span>&nbsp;Angebot</span>
