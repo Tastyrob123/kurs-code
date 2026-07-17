@@ -10209,14 +10209,14 @@
     {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
     {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'je Monat'},
     {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'je Stück'},
-    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'−', cap:'senkt DB I', result:true}
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'−', sub:'DB I − GK pro Produkt', result:true}
   ];
   var PK_CHAIN=[
     {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
     {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'je Stunde'},
     {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zeit'},
     {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt'},
-    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'−', cap:'senkt DB II', result:true}
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'−', sub:'DB II − PK pro Produkt', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -10245,6 +10245,7 @@
   #tsgkflow .node.result{width:190px}
   #tsgkflow .node.result .node-med{width:150px;height:150px;box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4);animation:tsgkflow-glow 3.4s ease-in-out infinite}
   #tsgkflow .node.result .node-lbl{margin-top:14px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.12rem;font-weight:600;letter-spacing:-.01em;color:#efe6d2;max-width:190px}
+  #tsgkflow .node-sub{margin-top:7px;font-size:.72rem;font-weight:500;line-height:1.3;letter-spacing:.01em;color:rgba(199,180,137,.85);max-width:200px}
   @keyframes tsgkflow-glow{0%,100%{box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4)}50%{box-shadow:0 20px 52px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.14),0 0 0 6px rgba(var(--g),.7),0 0 62px rgba(var(--g),.6)}}
   /* Verbindung = Operator-Chip (absolut auf der Medaillon-Mittellinie 75px zentriert) + Caption darunter */
   #tsgkflow .link{position:relative;width:clamp(58px,5.5vw,88px);height:150px;flex:0 0 auto}
@@ -10273,7 +10274,8 @@
       }
       out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
         +'<div class="node-box"><div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div></div>'
-        +'<div class="node-lbl">'+it.t+'</div></div>';
+        +'<div class="node-lbl">'+it.t+'</div>'
+        +(it.sub?'<div class="node-sub">'+it.sub+'</div>':'')+'</div>';
       i++;
     });
     return {html:out, next:i};
