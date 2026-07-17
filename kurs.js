@@ -652,6 +652,9 @@
 
   #tsarc .arc-stage{position:relative;display:grid;grid-template-columns:.82fr 1.3fr .82fr;grid-template-rows:1fr 1fr;gap:clamp(38px,6vw,80px) clamp(46px,7vw,96px);}
   #tsarc svg.arc-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+  #tsarc .arc-line{fill:none;stroke:rgba(199,180,137,.28);stroke-width:1;opacity:0;transition:opacity .5s ease}
+  #tsarc .arc-line.on{opacity:1}
+  #tsarc .arc-flow{fill:rgba(216,201,171,.95);filter:drop-shadow(0 0 4px rgba(199,180,137,.5));opacity:0}
 
   #tsarc .arc-tile{
     position:relative;border-radius:18px;overflow:hidden;z-index:2;
@@ -666,6 +669,7 @@
   #tsarc .arc-tile.in{opacity:1;transform:none}
   #tsarc .arc-tile::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(180deg,rgba(5,6,11,.22) 0%,rgba(5,6,11,.5) 44%,rgba(5,6,11,.92) 100%)}
+  #tsarc .arc-tile-final::before{background:radial-gradient(118% 100% at 50% 46%,rgba(5,6,11,.72) 0%,rgba(5,6,11,.48) 52%,rgba(5,6,11,.84) 100%)}
   #tsarc .arc-tile-1{background-image:url(https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg)}
   #tsarc .arc-tile-2{background-image:url(https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg)}
   #tsarc .arc-tile-3{background-image:url(https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg)}
@@ -683,11 +687,11 @@
   #tsarc .arc-tile-body{position:relative;z-index:2;padding:16px 16px 16px;text-align:center;display:flex;flex-direction:column;align-items:center}
   #tsarc .arc-tile-final .arc-tile-body{padding:24px 24px 26px;justify-content:center;height:100%}
   #tsarc .arc-label{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.94rem;font-weight:600;letter-spacing:-.005em;color:#fff;margin:0 0 3px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1)}
-  #tsarc .arc-tile-final .arc-label{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.32rem;font-weight:600;letter-spacing:-.01em;text-transform:none;color:#efe6d2;margin-bottom:5px;text-shadow:0 2px 16px rgba(0,0,0,.98),0 1px 4px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-label{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.75rem,2.7vw,2.2rem);font-weight:600;letter-spacing:-.015em;text-transform:none;color:#efe6d2;margin-bottom:8px;text-shadow:0 2px 18px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
   #tsarc .arc-val{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.24rem;font-weight:500;color:#efe6d2;font-variant-numeric:tabular-nums;letter-spacing:.005em;margin-bottom:4px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1);transition:transform .2s ease}
   #tsarc .arc-tile-final .arc-val{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(2.2rem,3.8vw,3.1rem);font-weight:500;letter-spacing:-.012em;color:#fff;margin-top:6px;order:2;min-height:1.2em;text-shadow:0 2px 24px rgba(199,180,137,.5),0 2px 12px rgba(0,0,0,.95)}
   #tsarc .arc-desc{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.74rem;line-height:1.46;color:rgba(255,255,255,.82);text-shadow:0 1px 7px rgba(0,0,0,.98)}
-  #tsarc .arc-tile-final .arc-desc{order:1;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.84rem;line-height:1.5;color:rgba(255,255,255,.88);max-width:250px;text-shadow:0 2px 12px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
+  #tsarc .arc-tile-final .arc-desc{order:1;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.94rem;line-height:1.55;color:#fff;max-width:270px;text-shadow:0 2px 14px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1),0 0 24px rgba(0,0,0,.85)}
   #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.76rem;color:rgba(255,255,255,.72);margin-top:9px;order:3;text-shadow:0 2px 12px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
   #tsarc .arc-caption{max-width:640px;margin:34px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
 
@@ -857,29 +861,69 @@
     return { x: r.left - s.left + r.width/2, y: r.top - s.top + r.height/2 };
   }
 
+  var NS = 'http://www.w3.org/2000/svg';
+  var paths = [];
+  function buildLines(){
+    if(window.innerWidth <= 900){ svg.innerHTML=''; paths=[]; return; }
+    svg.innerHTML='';
+    paths = tiles.map(function(t){
+      var a = center(t.el), b = center(final);
+      var p = document.createElementNS(NS,'path');
+      p.setAttribute('class','arc-line');
+      p.setAttribute('d','M '+a.x+' '+a.y+' L '+b.x+' '+b.y);
+      svg.appendChild(p);
+      return p;
+    });
+  }
+  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
+  function drawLine(path, cb){
+    if(!path){ if(cb) cb(); return; }
+    path.classList.add('on');
+    var len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.getBoundingClientRect();
+    path.style.transition = 'stroke-dashoffset .75s cubic-bezier(.4,0,.2,1)';
+    path.style.strokeDashoffset = '0';
+    var dot = document.createElementNS(NS,'circle');
+    dot.setAttribute('r','2.6'); dot.setAttribute('class','arc-flow');
+    svg.appendChild(dot);
+    var t0 = null, dur = 820;
+    function fr(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var pt = path.getPointAtLength(p*len);
+      dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
+      dot.style.opacity = p < 0.12 ? (p/0.12) : (p > 0.85 ? (1-(p-0.85)/0.15) : 1);
+      if(p < 1) requestAnimationFrame(fr); else { dot.remove(); if(cb) cb(); }
+    }
+    requestAnimationFrame(fr);
+  }
   var played = false;
   function play(){
     if(played) return; played = true;
-    /* Edel & ruhig: die Mitte erscheint zuerst, dann setzen sich die vier
-       Bausteine nacheinander sanft dazu — kein Blitzen, kein Puls. */
+    /* Edel & ruhig: Mitte zuerst, dann setzen sich die vier Bausteine sanft dazu
+       und eine dezente Linie läuft von jedem zur Mitte und bringt ihren Wert mit. */
     final.classList.add('in');
-    tiles.forEach(function(t,i){
-      setTimeout(function(){ t.el.classList.add('in'); }, 260 + i*240);
-    });
     var total = tiles.reduce(function(s,t){ return s + t.val; }, 0);
-    function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
-    if(reduced){ finalVal.textContent = money(total); return; }
-    /* der Gesamtwert zählt sich weich hoch, während die Bausteine erscheinen */
-    var dur = 1700, t0 = null;
-    function ease(x){ return 1 - Math.pow(1 - x, 3); }
-    function tick(ts){
-      if(t0 === null) t0 = ts;
-      var p = Math.min(1, (ts - t0) / dur);
-      finalVal.textContent = money(total * ease(p));
-      if(p < 1) requestAnimationFrame(tick);
+    if(reduced){ tiles.forEach(function(t){ t.el.classList.add('in'); }); finalVal.textContent = money(total); return; }
+    buildLines();
+    var acc = 0;
+    function addValue(v){
+      var from = acc, to = acc + v; acc = to;
+      var d = 460, t0 = null;
+      function e(x){ return 1 - Math.pow(1 - x, 3); }
+      function tk(ts){ if(t0===null) t0=ts; var p=Math.min(1,(ts-t0)/d); finalVal.textContent = money(from + (to-from)*e(p)); if(p<1) requestAnimationFrame(tk); }
+      requestAnimationFrame(tk);
     }
-    setTimeout(function(){ requestAnimationFrame(tick); }, 640);
+    tiles.forEach(function(t,i){
+      setTimeout(function(){
+        t.el.classList.add('in');
+        drawLine(paths[i], function(){ addValue(t.val); });
+      }, 420 + i*300);
+    });
   }
+  window.addEventListener('resize', function(){ if(!played) buildLines(); });
   var io = new IntersectionObserver(function(entries){
     if(entries[0].isIntersecting){ play(); io.disconnect(); }
   }, {threshold:.3});
