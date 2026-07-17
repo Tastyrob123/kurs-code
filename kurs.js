@@ -3370,14 +3370,14 @@
     zeit:"Minuten bis Stunden, teils verzögert.",
     versteckt:"Sojasauce mit Weizen, Gewürzmischungen, Fertigsoßen, Brühen, „crispy toppings“, Seitan.",
     hinweis:"Glutenfrei ist nur glaubwürdig mit Prozessen: separate Tools, separate Lagerung, klare Kommunikation."},
-   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/dg9pzt.webp",
-    wasistes:"Garnelen, Krabben, Hummer, Krebs und alle daraus hergestellten Produkte.",
-    kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich. Bereits kleinste Mengen können Anaphylaxie auslösen.",
-    kreuz:"Hoch. Grillplatten, Woks, Fritteusen und Pfannen sind häufige Kontaminationsquellen.",
-    symptome:"Juckreiz, Quaddeln, Schwellungen (Lippen, Gesicht), Atemnot, Kreislaufabfall, Anaphylaxie.",
-    zeit:"Oft innerhalb von Minuten, selten bis zu 2 Stunden.",
-    versteckt:"Fisch- und Meeresfrüchtesaucen, Meeresfrüchtebrühen, asiatische Pasten, „Seafood Mix“.",
-    hinweis:"Nie raten. Bei Unsicherheit ablehnen. Separate Tools und klare Reinigung sind Pflicht."},
+   {name:"Schalenfrüchte", intoleranz:"Nussallergie", img:"https://files.catbox.moe/ar3kvg.webp",
+    wasistes:"Mandel, Haselnuss, Walnuss, Cashew, Pecannuss, Paranuss, Pistazie, Macadamia.",
+    kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
+    kreuz:"Hoch. Nüsse sind häufig als Topping oder in Desserts.",
+    symptome:"Schwellungen, Nesselsucht, Atemnot, Anaphylaxie.",
+    zeit:"Meist Minuten.",
+    versteckt:"Pesto, Nussmilch, Desserts, Toppings, Backwaren, Saucen, Nussmischungen.",
+    hinweis:"Bei Nussallergie sind Toppings und Dessertstationen kritisch. Nur zusagen, wenn Prozesse sauber sind."},
    {name:"Eier", intoleranz:"Hühnereiweißallergie", img:"https://files.catbox.moe/z4gmmr.webp",
     wasistes:"Eier von Geflügel und alle Produkte, die Ei oder Ei-Bestandteile enthalten.",
     kennz:"Pflicht.", gefahr:"Mittel bis hoch. Bei manchen Betroffenen schwere Reaktionen möglich.",
@@ -3418,14 +3418,14 @@
     zeit:"Allergie oft Minuten. Intoleranz eher 30 Minuten bis mehrere Stunden.",
     versteckt:"Butter, Sahne, Käse, Joghurt, Molke, Milchpulver, viele Desserts, Cremes, Saucen, Schokolade.",
     hinweis:"Immer klären, ob Allergie oder Intoleranz. Laktosefrei ist nicht automatisch milchfrei."},
-   {name:"Schalenfrüchte", intoleranz:"Nussallergie", img:"https://files.catbox.moe/ar3kvg.webp",
-    wasistes:"Mandel, Haselnuss, Walnuss, Cashew, Pecannuss, Paranuss, Pistazie, Macadamia.",
-    kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
-    kreuz:"Hoch. Nüsse sind häufig als Topping oder in Desserts.",
-    symptome:"Schwellungen, Nesselsucht, Atemnot, Anaphylaxie.",
-    zeit:"Meist Minuten.",
-    versteckt:"Pesto, Nussmilch, Desserts, Toppings, Backwaren, Saucen, Nussmischungen.",
-    hinweis:"Bei Nussallergie sind Toppings und Dessertstationen kritisch. Nur zusagen, wenn Prozesse sauber sind."},
+   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/dg9pzt.webp",
+    wasistes:"Garnelen, Krabben, Hummer, Krebs und alle daraus hergestellten Produkte.",
+    kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich. Bereits kleinste Mengen können Anaphylaxie auslösen.",
+    kreuz:"Hoch. Grillplatten, Woks, Fritteusen und Pfannen sind häufige Kontaminationsquellen.",
+    symptome:"Juckreiz, Quaddeln, Schwellungen (Lippen, Gesicht), Atemnot, Kreislaufabfall, Anaphylaxie.",
+    zeit:"Oft innerhalb von Minuten, selten bis zu 2 Stunden.",
+    versteckt:"Fisch- und Meeresfrüchtesaucen, Meeresfrüchtebrühen, asiatische Pasten, „Seafood Mix“.",
+    hinweis:"Nie raten. Bei Unsicherheit ablehnen. Separate Tools und klare Reinigung sind Pflicht."},
    {name:"Senf", intoleranz:"Senfallergie", img:"https://files.catbox.moe/5tg513.webp",
     wasistes:"Senf und senfhaltige Produkte wie Dressings, Marinaden und Saucen.",
     kennz:"Pflicht.", gefahr:"Mittel, bei manchen hoch.",
@@ -3450,6 +3450,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Wein, Sekt, Essig, Trockenfrüchte, Zitronensaft aus Konzentrat, Fertigsaucen, manche Kartoffelprodukte.",
     hinweis:"Bei Getränken konsequent markieren. Bei Essig und Weinreduktionen ebenfalls. Grenzwert beachten."}
+  
   ];
   var FIELDS=[
     ['wasistes','Was ist es?'],['kennz','Kennzeichnung'],['gefahr','Wie gefährlich?'],
@@ -3532,9 +3533,11 @@
   #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:10px;scrollbar-width:thin}
   #tsac-detail .tsacd-content::-webkit-scrollbar{width:7px}
   #tsac-detail .tsacd-content::-webkit-scrollbar-thumb{background:rgba(${GOLD},.22);border-radius:99px}
-  #tsac-detail .tsacd-row{margin:0 0 15px;font-size:1rem;line-height:1.55;color:rgba(255,255,255,.82)}
-  #tsac-detail .tsacd-row .ar{color:#c7b489;margin-right:7px}
-  #tsac-detail .tsacd-row b{color:#fff;font-weight:600}
+  #tsac-detail .tsacd-block{margin:0 0 22px}
+  #tsac-detail .tsacd-block > div{margin:0 0 7px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.72)}
+  #tsac-detail .tsacd-block > div:last-child{margin-bottom:0}
+  #tsac-detail .tsacd-block .ar{color:#c7b489;margin-right:7px}
+  #tsac-detail .tsacd-block b{color:#fff;font-weight:600}
   #tsac-detail .tsacd-buy{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
   #tsac-detail .tsacd-price{display:flex;flex-direction:column;gap:3px}
   #tsac-detail .tsacd-price b{font-family:"Lineal TS", var(--font-sans, ${SANS});font-size:1.5rem;font-weight:600;color:#efe6d2;line-height:1.05;letter-spacing:-.01em}
@@ -3591,7 +3594,11 @@
     if(document.getElementById('tsac-detail')) return;
     var it=ITEMS[idx];
     var card=root.querySelector('.tsac-card[data-i="'+idx+'"]');
-    var rows=FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-row"><span class="ar">→</span><b>'+esc(f[1])+' :</b> '+esc(val)+'</div>'; }).join('');
+    var rows=FIELDS.map(function(f){ var val=it[f[0]]; if(!val) return ''; return '<div class="tsacd-block">'+
+      '<div><span class="ar">→</span> <b>Eigenschaft:</b> Text</div>'+
+      '<div><span class="ar">→</span> <b>Name der Spalte:</b> '+esc(f[1])+'</div>'+
+      '<div><span class="ar">→</span> <b>Du trägst hier ein:</b> '+esc(val)+'</div>'+
+    '</div>'; }).join('');
     var ov=document.createElement('div'); ov.id='tsac-detail';
     ov.innerHTML='<div class="tsacd-back"></div>'+
       '<div class="tsacd-panel">'+
@@ -3599,7 +3606,7 @@
         '<div class="tsacd-grid">'+
           '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'"></div>'+
           '<div class="tsacd-info">'+
-            '<div class="tsacd-eyebrow">DB IX · Allergene</div>'+
+            '<div class="tsacd-eyebrow">Der Warenkorb · DB IX</div>'+
             '<h2 class="tsacd-title">'+(idx+1)+'. '+esc(it.name)+'</h2>'+
             '<div class="tsacd-content">'+rows+'</div>'+
             '<div class="tsacd-buy">'+
