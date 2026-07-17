@@ -10034,24 +10034,28 @@
   #tsgkflow .row+.row::before{content:"";position:absolute;top:0;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent)}
   #tsgkflow .row-lbl{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.3rem,2.1vw,1.7rem);font-weight:600;letter-spacing:-.01em;color:#fff;text-align:center;margin-bottom:30px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
   #tsgkflow.in .row-lbl{opacity:1;transform:none}
+  #tsgkflow .row-lbl .g{color:#c7b489}
   #tsgkflow .chain{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:0}
   #tsgkflow .node{display:flex;flex-direction:column;align-items:center;width:118px;opacity:0;filter:blur(6px);transform:translateY(16px) scale(.94);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 180ms)}
   #tsgkflow.in .node{opacity:1;filter:blur(0);transform:none}
+  /* Feste 150px-Medaillon-Zone -> ALLE Bubbles (klein wie gross) auf EINER Mittellinie (75px)
+     zentriert, Labels darunter auf gemeinsamer Grundlinie (Robert 17.07.2026: "alles mittig, elegant"). */
+  #tsgkflow .node-box{width:100%;height:150px;display:flex;align-items:center;justify-content:center}
   #tsgkflow .node-med{position:relative;width:78px;height:78px;border-radius:50%;overflow:hidden;box-shadow:0 10px 26px -10px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08),0 0 0 4px rgba(var(--g),.14)}
   #tsgkflow .node-med img{width:100%;height:100%;object-fit:cover;display:block}
-  #tsgkflow .node-lbl{margin-top:12px;font-size:.78rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.62);max-width:118px}
+  #tsgkflow .node-lbl{margin-top:14px;font-size:.78rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.62);max-width:118px}
   /* Ergebnis-Knoten (Deckungsbeitrag II/III) deutlich groesser + staerker leuchtend (Robert 17.07.2026) */
-  #tsgkflow .node.result{width:170px}
+  #tsgkflow .node.result{width:190px}
   #tsgkflow .node.result .node-med{width:150px;height:150px;box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4);animation:tsgkflow-glow 3.4s ease-in-out infinite}
-  #tsgkflow .node.result .node-lbl{margin-top:18px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.12rem;font-weight:600;letter-spacing:-.01em;color:#efe6d2;max-width:170px}
+  #tsgkflow .node.result .node-lbl{margin-top:14px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.12rem;font-weight:600;letter-spacing:-.01em;color:#efe6d2;max-width:190px}
   @keyframes tsgkflow-glow{0%,100%{box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4)}50%{box-shadow:0 20px 52px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.14),0 0 0 6px rgba(var(--g),.7),0 0 62px rgba(var(--g),.6)}}
-  /* Verbindung = Operator-Symbol-Chip + Mini-Caption statt reiner Strich */
-  #tsgkflow .link{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:clamp(56px,5.5vw,84px);flex:0 0 auto;position:relative;padding-top:24px}
-  #tsgkflow .link-op{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;line-height:1;color:#efe6d2;background:radial-gradient(circle at 50% 35%,rgba(var(--g),.28),rgba(var(--g),.08));border:1px solid rgba(var(--g),.55);box-shadow:0 6px 18px -8px rgba(0,0,0,.7),0 0 16px rgba(var(--g),.22);opacity:0;transform:scale(.5);transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
+  /* Verbindung = Operator-Chip (absolut auf der Medaillon-Mittellinie 75px zentriert) + Caption darunter */
+  #tsgkflow .link{position:relative;width:clamp(58px,5.5vw,88px);height:150px;flex:0 0 auto}
+  #tsgkflow .link-op{position:absolute;top:56px;left:50%;margin-left:-19px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;line-height:1;color:#efe6d2;background:radial-gradient(circle at 50% 35%,rgba(var(--g),.28),rgba(var(--g),.08));border:1px solid rgba(var(--g),.55);box-shadow:0 6px 18px -8px rgba(0,0,0,.7),0 0 16px rgba(var(--g),.22);opacity:0;transform:scale(.5);transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
   #tsgkflow.in .link-op{opacity:1;transform:none}
-  #tsgkflow .link-cap{margin-top:9px;font-size:.62rem;font-weight:500;letter-spacing:.02em;line-height:1.2;color:rgba(255,255,255,.42);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i) * 180ms + 130ms)}
+  #tsgkflow .link-cap{position:absolute;top:102px;left:0;right:0;text-align:center;font-size:.62rem;font-weight:500;letter-spacing:.02em;line-height:1.2;color:rgba(255,255,255,.42);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i) * 180ms + 130ms)}
   #tsgkflow.in .link-cap{opacity:1;transform:none}
-  @media(max-width:760px){#tsgkflow .chain{gap:16px 8px}#tsgkflow .link{width:100%;flex:0 0 100%;padding-top:0;flex-direction:row;gap:10px}#tsgkflow .link-cap{margin-top:0}#tsgkflow .node{width:120px}#tsgkflow .node-med{width:72px;height:72px}#tsgkflow .node.result{width:150px}#tsgkflow .node.result .node-med{width:120px;height:120px}#tsgkflow .hd{font-size:1.4rem}}
+  @media(max-width:760px){#tsgkflow .chain{gap:16px 8px}#tsgkflow .node{width:120px}#tsgkflow .node-box{height:auto}#tsgkflow .node-med{width:72px;height:72px}#tsgkflow .node.result{width:150px}#tsgkflow .node.result .node-med{width:120px;height:120px}#tsgkflow .link{width:100%;flex:0 0 100%;height:auto;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:10px}#tsgkflow .link-op{position:static;margin:0}#tsgkflow .link-cap{position:static}#tsgkflow .hd{font-size:1.4rem}}
   @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-op,#tsgkflow .link-cap,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none}#tsgkflow .node.result .node-med{animation:none}}
   `;
   function on(){ return PATH.test(location.pathname); }
@@ -10071,7 +10075,7 @@
         i++;
       }
       out += '<div class="node'+(it.result?' result':'')+'" style="--i:'+i+'">'
-        +'<div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div>'
+        +'<div class="node-box"><div class="node-med"><img src="'+it.img+'" alt="'+it.t+'" loading="lazy" decoding="async"></div></div>'
         +'<div class="node-lbl">'+it.t+'</div></div>';
       i++;
     });
@@ -10086,11 +10090,11 @@
       '<div class="hd">Von den Kosten zum <span class="g">Deckungsbeitrag</span></div>'+
       '<p class="sub">Zwei Rechenketten, ein Ziel — so verdichten sich deine Kosten Schritt für Schritt zu Deckungsbeitrag II und III.</p>'+
       '<div class="row row-gk">'+
-        '<span class="row-lbl">Gemeinkosten-Kette</span>'+
+        '<span class="row-lbl">Gemein<span class="g">kosten</span></span>'+
         '<div class="chain">'+gk.html+'</div>'+
       '</div>'+
       '<div class="row row-pk">'+
-        '<span class="row-lbl">Personalkosten-Kette</span>'+
+        '<span class="row-lbl">Personal<span class="g">kosten</span></span>'+
         '<div class="chain">'+pk.html+'</div>'+
       '</div>';
     return root;
