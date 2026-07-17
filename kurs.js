@@ -595,7 +595,7 @@
   #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;font-size:clamp(30px,3.6vw,46px);margin:0 0 18px}
   #tsbau .bau-title span{color:#c7b489}
   #tsbau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
-  #tsbau .bau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,50px);max-width:1300px;margin:0 auto;align-items:start}
+  #tsbau .bau-grid{display:grid;grid-template-columns:0.82fr 1.45fr 0.82fr;gap:clamp(24px,3vw,44px);max-width:1300px;margin:0 auto;align-items:start}
   #tsbau .bau-act{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .9s cubic-bezier(.22,1,.36,1);text-align:center}
   #tsbau .bau-act.on{opacity:1;transform:none}
   #tsbau .bau-stage{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:32px}
@@ -617,10 +617,10 @@
 
   /* Act B — Mehrfach verwenden: eine Quelle, drei Ziele */
   #tsbau .bau-stage--fan{flex-direction:column;justify-content:flex-start;gap:0}
-  #tsbau .bau-med--src{width:140px;height:140px;z-index:2;margin-top:-28px}
-  #tsbau .bau-fanline{width:1.6px;height:32px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:12px 0 15px}
-  #tsbau .bau-targets{display:flex;gap:10px;justify-content:center}
-  #tsbau .bau-med--t{width:118px;height:118px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-med--src{width:120px;height:120px;z-index:2;margin-top:-22px}
+  #tsbau .bau-fanline{width:1.6px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:10px 0 12px}
+  #tsbau .bau-targets{display:flex;gap:12px;justify-content:center}
+  #tsbau .bau-med--t{width:150px;height:150px;opacity:0;transform:translateY(12px) scale(.82)}
   #tsbau .bau-act.on .bau-med--t{animation:bauPop .6s cubic-bezier(.22,1,.36,1) both}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(1){animation-delay:.3s}
   #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(2){animation-delay:.48s}
