@@ -10728,7 +10728,7 @@
   function buildBody(sc){
     if(document.getElementById("tsfdq")) return;
     var box=document.createElement("div"); box.id="tsfdq";
-    var frameImgs=FRAMES.map(function(u,i){ return '<img alt="Aufbau-Schritt '+(i+1)+'" src="'+u+'" '+(i?'loading="lazy"':'')+'>'; }).join("");
+    var frameImgs=FRAMES.map(function(u,i){ return '<img alt="Aufbau-Schritt '+(i+1)+'" src="'+u+'"'+(i===0?' fetchpriority="high"':'')+'>'; }).join("");
     var dots=FRAMES.map(function(){ return '<i></i>'; }).join("");
     box.innerHTML=
       '<div class="fdq-intro"><p>Das <span class="em">Food- und Drinksquartier</span> ist das Herzstück deines Backoffice. Hier laufen alle Fäden zusammen: Jede Zutat, jede Rezeptur, jeder Preis und jede Kennzahl aus den Datenbanken davor werden an einem einzigen Ort sichtbar. Speisen und Getränke folgen dabei derselben Logik — was in der Küche als Gericht entsteht und was an der Bar im Glas landet, wird nach denselben Regeln kalkuliert, bewertet und gesteuert. Du siehst auf einen Blick, was ein Produkt kostet, was es einbringt und wo Marge verloren geht. Kein Suchen in endlosen Tabellen, kein Rechnen im Kopf. Die Oberfläche bereitet alles auf und macht es von jeder Stelle aus mit KI auswertbar. So wird aus vielen einzelnen Datenbanken ein Betriebssystem, das mitdenkt.</p></div>'+
@@ -10770,8 +10770,10 @@
     var bar=document.getElementById("fdqbBar");
     var N=imgs.length, lastAct=-1;
     var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+    // alle Frames vorladen (kein Pop-in beim Scrubben)
+    FRAMES.forEach(function(u){ var im=new Image(); im.src=u; });
     if(reduce){ imgs.forEach(function(im,i){ im.style.opacity=(i===N-1)?1:0; }); if(bar)bar.style.width="100%"; return; }
-    function frame(){
+    function update(){
       var total=wrap.offsetHeight-window.innerHeight;
       var r=wrap.getBoundingClientRect();
       var p=total>0?(-r.top/total):0; if(p<0)p=0; if(p>1)p=1;
@@ -10780,9 +10782,15 @@
       var act=Math.round(ff);
       if(act!==lastAct){ for(var j=0;j<dots.length;j++){ dots[j].className=(j===act)?"on":""; } lastAct=act; }
       if(bar) bar.style.width=(p*100).toFixed(1)+"%";
-      requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    window.__fdqbUpdate=update;
+    // rAF fuer fluessiges Scrubben + scroll/resize als Fallback (robust ueber alle Browser)
+    var ticking=false;
+    function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(function(){ update(); ticking=false; }); } }
+    window.addEventListener("scroll", onScroll, {passive:true});
+    window.addEventListener("resize", onScroll, {passive:true});
+    (function raf(){ update(); requestAnimationFrame(raf); })();
+    update();
   }
 
   function mount(){
