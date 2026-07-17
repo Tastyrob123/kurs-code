@@ -6027,6 +6027,7 @@
       summary:'Menüpreis', chain:true,
       relations:[
         { type:'ghost', name:'Menürechner Master Database', target:'Gegenspalte · aus dem Menürechner',
+          img:'https://tastyrob123.github.io/kurs/img/menuekalkulation/menu-03.webp',
           flag:'erscheint automatisch',
           desc:'Erscheint von allein, sobald du im Menürechner die wechselseitige Kunden-Verknüpfung anlegst.',
           content:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung (Gegenspalte)</p><p class="notion-text">→ <b>Name der Spalte :</b> 🍽️ Menürechner Master Database</p><p class="notion-text">Diese Spalte legst du NICHT selbst an: Sie erscheint automatisch in deiner Kunden Master Database, sobald du im Menürechner (Warenkorb 1, Schritt 11) die Verknüpfung mit wechselseitiger Verbindung anlegst.</p><p class="notion-text">Ab dann siehst du an jedem Kunden, welche Menü-Positionen für ihn kalkuliert wurden.</p>' }
