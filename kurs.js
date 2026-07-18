@@ -3356,10 +3356,10 @@
 /* ---- */
 
 /* ============================================================
-   allergene-bersicht — DB X : Packaging
-   (Überschrift + Einleitung + cineastische 4-Viertel-Animation)
-   Mount direkt UNTER #tsalgpc2 ("Jedes Allergen auf einen Blick").
-   Bilder: GitHub Pages (kurs-code/img/packaging).
+   allergene-bersicht — DB X : Packaging  (überarbeitet 18.07.2026)
+   Überschrift + Einleitung(1) + frei-schwebende Cutout-Animation +
+   Einleitung(2) unter der Animation + Anker #ts10wk für den Warenkorb.
+   Mount direkt UNTER #tsalgpc2. Cutouts: kurs-code/img/packaging/*-cut.webp
    ============================================================ */
 (function(){
   if(window.__tspk) return; window.__tspk=true;
@@ -3368,126 +3368,109 @@
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var B='https://tastyrob123.github.io/kurs-code/img/packaging/';
-  var IMG={bowl:B+'bowl.webp',deckel:B+'deckel.webp',tuete:B+'tuete.webp',rpet:B+'rpet.webp',
-    kugeldeckel:B+'kugeldeckel.webp',serviette:B+'serviette.webp',
-    karton_zu:B+'karton-zu.webp',karton_offen:B+'karton-offen.webp',salat:B+'salat-bowl.webp'};
+  var IMG={bowl:B+'bowl-cut.webp',deckel:B+'deckel-cut.webp',tuete:B+'tuete-cut.webp',rpet:B+'rpet-cut.webp',
+    kugeldeckel:B+'kugeldeckel-cut.webp',serviette:B+'serviette-cut.webp',salat:B+'salat-cut.webp',
+    karton_zu:B+'karton-zu-cut.webp',karton_offen:B+'karton-offen-cut.webp'};
   (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
 
-  /* DB I-III vorher/nachher — ECHTE WERTE (Platzhalter bis Notion-Zahlen bestätigt) */
-  var NUM={
-    cap:'Caesar Salad · nach dem Verknüpfen',
-    rows:[
-      ['Wareneinsatz','2,39 €','2,97 €'],
-      ['DB I','9,11 €','8,53 €'],
-      ['DB II','7,39 €','6,81 €'],
-      ['DB III','4,83 €','4,25 €']
-    ]
-  };
+  /* DB I–III vorher/nachher — ECHTE Notion-Werte: Caesar Salad Reloaded (VK 11,50 €)
+     + Paket "Bowl To-Go Standard" 0,58 € (Bowl 0,26 + Deckel 0,12 + Serviette 0,01 + Besteck 0,19) */
+  var NUM={ cap:'Caesar Salad · nach dem Verknüpfen', rows:[
+    ['Wareneinsatz','2,39 €','2,97 €'],['DB I','9,11 €','8,53 €'],['DB II','7,39 €','6,81 €'],['DB III','4,83 €','4,25 €']] };
 
   var CSS = `
-  #tspk{width:100%;margin:78px 0 0;font-family:${SANS};color:#fff}
+  #tspk{width:100%;margin:52px 0 0;font-family:${SANS};color:#fff}
   #tspk .pk-head{width:min(1180px,94vw);margin:0 auto;text-align:center}
-  #tspk .pk-eyebrow{font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:#c7b489;margin:0 0 16px;opacity:.9}
-  #tspk .pk-h{margin:0 auto;font-family:${LIN};font-weight:600;font-size:clamp(32px,5.4vw,58px);line-height:1.05;letter-spacing:-.015em;color:#fff;text-wrap:balance}
+  #tspk .pk-eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#c7b489;margin:0 0 14px;opacity:.85}
+  #tspk .pk-h{margin:0 auto;font-family:${LIN};font-weight:600;font-size:clamp(32px,5.4vw,58px);line-height:1.02;letter-spacing:-.015em;color:#fff;text-wrap:balance}
   #tspk .pk-h .g{color:#c7b489}
-  #tspk .pk-lead{width:min(1180px,94vw);margin:30px auto 0;text-align:center}
-  #tspk .pk-lead p{margin:0;font-size:clamp(15px,1.15vw,17.5px);line-height:1.72;color:#e1e1e1}
-  #tspk .pk-lead .hl{color:#fff}
-  #tspk .pk-lead .gld{color:#c7b489}
+  #tspk .pk-lead{width:min(980px,92vw);margin:22px auto 0;text-align:center}
+  #tspk .pk-lead p{margin:0;font-size:clamp(15px,1.1vw,17px);line-height:1.68;color:#e1e1e1}
+  #tspk .pk-lead .hl{color:#fff} #tspk .pk-lead .gld{color:#c7b489}
+  #tspklead2{width:min(980px,92vw);margin:26px auto 0;text-align:center;font-family:${SANS}}
+  #tspklead2 p{margin:0;font-size:clamp(15px,1.1vw,17px);line-height:1.68;color:#e1e1e1}
+  #tspklead2 .gld{color:#c7b489}
 
-  #tspkflow{width:100vw;max-width:100vw;margin:56px 0 10px;margin-left:calc(50% - 50vw);font-family:${SANS};color:#fff}
+  #tspkflow{width:100vw;max-width:100vw;margin:18px 0 0;margin-left:calc(50% - 50vw);font-family:${SANS};color:#fff}
   #tspkflow *{box-sizing:border-box}
-  #tspkflow .fl-wrap{width:min(1320px,96vw);margin:0 auto}
-  #tspkflow .fl-stage{position:relative;width:100%;height:clamp(400px,52vw,600px);border-radius:18px;overflow:hidden;
-    background:radial-gradient(120% 90% at 12% 40%,rgba(199,180,137,.05),transparent 60%),radial-gradient(120% 90% at 88% 55%,rgba(199,180,137,.04),transparent 60%),linear-gradient(180deg,#080910,#05060b 70%);
-    border:1px solid rgba(255,255,255,.08);box-shadow:0 40px 90px -50px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.03)}
+  #tspkflow .fl-wrap{width:min(1340px,96vw);margin:0 auto}
+  #tspkflow .fl-stage{position:relative;width:100%;height:clamp(400px,50vw,560px);overflow:hidden}
+  #tspkflow .fl-amb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;opacity:.55}
+  #tspkflow .fl-amb.a1{left:8%;top:38%;width:34%;height:52%;background:radial-gradient(closest-side,rgba(199,180,137,.14),transparent 70%)}
+  #tspkflow .fl-amb.a2{left:56%;top:30%;width:40%;height:60%;background:radial-gradient(closest-side,rgba(120,140,210,.10),transparent 70%)}
+  #tspkflow .fl-line{position:absolute;left:6%;right:6%;top:50%;height:1px;transform:translateY(-.5px);background:linear-gradient(90deg,transparent,rgba(199,180,137,0));pointer-events:none;overflow:visible}
+  #tspkflow .fl-line i{position:absolute;left:0;top:-.5px;height:2px;width:0;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.55),rgba(199,180,137,.9));box-shadow:0 0 14px rgba(199,180,137,.5);transition:width .2s linear}
+  #tspkflow .fl-line i::after{content:"";position:absolute;right:-3px;top:-2px;width:6px;height:6px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px 2px rgba(199,180,137,.8)}
   #tspkflow .fl-q{position:absolute;top:0;bottom:0;width:25%;pointer-events:none}
-  #tspkflow .fl-q + .fl-q{border-left:1px dashed rgba(255,255,255,.055)}
   #tspkflow .fl-q.q1{left:0} #tspkflow .fl-q.q2{left:25%} #tspkflow .fl-q.q3{left:50%} #tspkflow .fl-q.q4{left:75%}
-  #tspkflow .fl-qlabel{position:absolute;top:16px;left:0;right:0;text-align:center;opacity:0;transform:translateY(-6px);transition:opacity .6s ease,transform .6s ease}
+  #tspkflow .fl-qlabel{position:absolute;top:14px;left:0;right:0;text-align:center;opacity:0;transform:translateY(-6px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
   #tspkflow .fl-qlabel.on{opacity:1;transform:none}
-  #tspkflow .fl-qlabel .k{display:block;font-family:${LIN};font-weight:600;font-size:clamp(13px,1.35vw,17px);color:#fff;letter-spacing:.01em}
+  #tspkflow .fl-qlabel .k{display:block;font-family:${LIN};font-weight:600;font-size:clamp(12.5px,1.3vw,16px);color:#fff;letter-spacing:.01em}
   #tspkflow .fl-qlabel .k .g{color:#c7b489}
-  #tspkflow .fl-qlabel .s{display:block;margin-top:3px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #tspkflow .sp{position:absolute;left:0;top:0;will-change:transform,opacity;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    width:var(--w,108px);height:var(--h,108px);margin-left:calc(var(--w,108px)/-2);margin-top:calc(var(--h,108px)/-2);opacity:0;pointer-events:none}
-  #tspkflow .sp .ph{width:100%;height:100%;border-radius:14px;position:relative;overflow:hidden;
-    background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);
-    box-shadow:0 18px 40px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center}
-  #tspkflow .sp .ph.img{background:transparent;border:0;box-shadow:none}
-  #tspkflow .sp .ph.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
-    -webkit-mask:radial-gradient(circle at 50% 47%, #000 52%, transparent 88%);mask:radial-gradient(circle at 50% 47%, #000 52%, transparent 88%);
-    filter:drop-shadow(0 16px 30px rgba(0,0,0,.7))}
-  #tspkflow .sp.box .ph.img img{-webkit-mask:radial-gradient(circle at 50% 50%, #000 62%, transparent 92%);mask:radial-gradient(circle at 50% 50%, #000 62%, transparent 92%)}
-  #tspkflow .sp.box .ph .box-open{opacity:0;transition:opacity .5s ease}
-  #tspkflow .sp .cap{margin-top:8px;font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.82);white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:500}
-  #tspkflow .sp.box{--w:150px;--h:150px}
-  #tspkflow .fl-ticket{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);opacity:0;transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);
-    background:rgba(10,12,18,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(199,180,137,.4);border-radius:12px;padding:10px 16px;
-    font-size:12px;letter-spacing:.03em;color:#fff;box-shadow:0 20px 50px -24px rgba(0,0,0,.9);z-index:6}
+  #tspkflow .fl-qlabel .s{display:block;margin-top:2px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+  #tspkflow .sp{position:absolute;left:0;top:0;will-change:transform,opacity;display:flex;flex-direction:column;align-items:center;justify-content:center;width:var(--w,116px);height:var(--h,116px);margin-left:calc(var(--w,116px)/-2);margin-top:calc(var(--h,116px)/-2);opacity:0;pointer-events:none}
+  #tspkflow .sp .ph{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  #tspkflow .sp .ph::before{content:"";position:absolute;left:50%;top:54%;width:82%;height:70%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(199,180,137,.16),transparent 72%);filter:blur(10px);opacity:.9;z-index:0}
+  #tspkflow .sp .ph img{position:relative;z-index:1;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 20px 26px rgba(0,0,0,.6)) drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+  #tspkflow .sp .ph .box-open{position:absolute;inset:0;margin:auto;opacity:0;transition:opacity .5s ease}
+  #tspkflow .sp.floaty{animation:flbob 6s ease-in-out infinite}
+  #tspkflow .sp .cap{margin-top:6px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.9);font-weight:500}
+  #tspkflow .sp.box{--w:168px;--h:168px}
+  @keyframes flbob{0%,100%{translate:0 0}50%{translate:0 -7px}}
+  #tspkflow .fl-ticket{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) scale(.92);opacity:0;transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);background:rgba(10,12,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(199,180,137,.34);border-radius:11px;padding:9px 15px;font-size:12px;letter-spacing:.03em;color:#fff;box-shadow:0 20px 50px -26px rgba(0,0,0,.9);z-index:7}
   #tspkflow .fl-ticket.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
   #tspkflow .fl-ticket b{color:#c7b489;font-weight:600}
-  #tspkflow .fl-db{position:absolute;left:87.5%;top:72%;transform:translate(-50%,-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
-    width:min(210px,20vw);background:rgba(9,11,17,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 13px;z-index:6;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  #tspkflow .fl-db{position:absolute;left:87.5%;top:74%;transform:translate(-50%,-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);width:min(216px,21vw);background:rgba(9,11,17,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 14px;z-index:7;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
   #tspkflow .fl-db.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
   #tspkflow .fl-db .dbrow{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.06)}
   #tspkflow .fl-db .dbrow:last-child{border-bottom:0}
-  #tspkflow .fl-db .dbk{color:rgba(255,255,255,.62);letter-spacing:.04em}
+  #tspkflow .fl-db .dbk{color:rgba(255,255,255,.6);letter-spacing:.04em}
   #tspkflow .fl-db .dbv{font-variant-numeric:tabular-nums;font-weight:600}
-  #tspkflow .fl-db .dbv .old{color:rgba(255,255,255,.4);text-decoration:line-through;margin-right:6px;font-weight:400}
+  #tspkflow .fl-db .dbv .old{color:rgba(255,255,255,.38);text-decoration:line-through;margin-right:6px;font-weight:400}
   #tspkflow .fl-db .dbv .new{color:#c7b489}
-  #tspkflow .fl-db .dbcap{margin:2px 0 8px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
-  #tspkflow .fl-replay{width:min(1320px,96vw);margin:14px auto 0;text-align:center}
-  #tspkflow .fl-replay button{background:transparent;border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.7);font:inherit;font-size:12px;letter-spacing:.06em;padding:8px 18px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
+  #tspkflow .fl-db .dbcap{margin:1px 0 8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
+  #tspkflow .fl-replay{width:min(1340px,96vw);margin:6px auto 0;text-align:center}
+  #tspkflow .fl-replay button{background:transparent;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.62);font:inherit;font-size:11.5px;letter-spacing:.08em;padding:7px 17px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
   #tspkflow .fl-replay button:hover{border-color:rgba(199,180,137,.55);color:#fff}
-  @media (max-width:720px){
-    #tspkflow .fl-stage{height:clamp(360px,88vw,520px)}
-    #tspkflow .sp{--w:74px;--h:74px}
-    #tspkflow .sp.box{--w:104px;--h:104px}
-    #tspkflow .sp .cap{font-size:9px}
-    #tspkflow .fl-db{width:44vw}
-    #tspk .pk-lead p{font-size:15px}
-  }
-  @media (prefers-reduced-motion:reduce){#tspkflow .sp,#tspkflow .fl-ticket,#tspkflow .fl-db,#tspkflow .fl-qlabel{transition:none!important}}`;
+  @media (max-width:720px){#tspkflow .fl-stage{height:clamp(340px,86vw,480px)}#tspkflow .sp{--w:76px;--h:76px}#tspkflow .sp.box{--w:112px;--h:112px}#tspkflow .sp .cap{font-size:8.5px}#tspkflow .fl-db{width:44vw}}
+  @media (prefers-reduced-motion:reduce){#tspkflow .sp,#tspkflow .fl-ticket,#tspkflow .fl-db,#tspkflow .fl-qlabel{transition:none!important}#tspkflow .sp.floaty{animation:none}}`;
 
   function headSection(){
     var s=document.createElement('section'); s.id='tspk';
-    s.innerHTML=
-      '<div class="pk-head">'+
-        '<p class="pk-eyebrow">Der zweite Baustein · Lektion 2.6</p>'+
-        '<h2 class="pk-h">DB X : <span class="g">Packaging</span></h2>'+
-      '</div>'+
-      '<div class="pk-lead"><p>'+
-        'Das Packaging lebt zunächst direkt in der <span class="hl">Inventurliste</span>. Anders als bei den Inventarprodukten, die wir zu Zutaten weiterverarbeiten, könnten wir mit dem Packaging theoretisch direkt weiterarbeiten. Praktisch sieht die Realität anders aus: Wir wollen nicht in jedem Gericht automatisch das Packaging inkludiert haben, weil wir einen Teil des Umsatzes auch <span class="hl">In-House</span> machen. Auf der anderen Seite wollen wir uns aber auch nicht jedes Mal daran erinnern müssen, welches Packaging bei welchem Produkt verwendet wird. Deshalb bauen wir die <span class="gld">DB Packaging</span>. Hier wird das Packaging in einzelne Pakete zusammengefasst (z. B. Salat = Bowl + Deckel + Serviette + Besteck + Tüte), die dann optional mit den einzelnen Gerichten verbunden werden. Die DB zieht sich die Preise pro Stück aus der Inventurliste — und der Wareneinsatz sowie <span class="gld">DB I–III</span> aktualisieren sich automatisch im Gericht.'+
-      '</p></div>';
+    s.innerHTML='<div class="pk-head"><p class="pk-eyebrow">Der zweite Baustein · Lektion 2.6</p><h2 class="pk-h">DB X : <span class="g">Packaging</span></h2></div>'+
+      '<div class="pk-lead"><p>Das Packaging lebt zunächst direkt in der <span class="hl">Inventurliste</span>. Anders als bei den Inventarprodukten, die wir zu Zutaten weiterverarbeiten, könnten wir mit dem Packaging theoretisch direkt weiterarbeiten. Praktisch sieht die Realität anders aus: Wir wollen nicht in jedem Gericht automatisch das Packaging inkludiert haben, weil wir einen Teil des Umsatzes auch <span class="hl">In-House</span> machen. Auf der anderen Seite wollen wir uns aber auch nicht jedes Mal daran erinnern müssen, welches Packaging bei welchem Produkt verwendet wird. Deshalb bauen wir die <span class="gld">DB Packaging</span>.</p></div>';
+    return s;
+  }
+  function lead2Section(){
+    var s=document.createElement('section'); s.id='tspklead2';
+    s.innerHTML='<p>Hier wird das Packaging in einzelne Pakete zusammengefasst (z.&nbsp;B. Salat = Bowl + Deckel + Serviette + Besteck + Tüte), die dann optional mit den einzelnen Gerichten verbunden werden. Die <span class="gld">DB</span> zieht sich die Preise pro Stück aus der Inventurliste — und der Wareneinsatz sowie <span class="gld">DB I–III</span> aktualisieren sich automatisch im Gericht.</p>';
     return s;
   }
 
   var SPRITES=[
     {id:'box',cls:'box',cap:'Karton',img:'karton_zu',img2:'karton_offen'},
-    {id:'bowl',cls:'',cap:'Bowl',img:'bowl'},
-    {id:'deckel',cls:'',cap:'Deckel',img:'deckel'},
-    {id:'tuete',cls:'',cap:'Tüte',img:'tuete'},
-    {id:'rpet',cls:'',cap:'RPET',img:'rpet'},
-    {id:'kugel',cls:'',cap:'Kugeldeckel',img:'kugeldeckel'},
-    {id:'serv',cls:'',cap:'Serviette',img:'serviette'},
-    {id:'salad',cls:'salad',cap:'Salat',img:'salat'},
-    {id:'bag',cls:'bag',cap:'Paket',img:'tuete'}
+    {id:'bowl',cls:'floaty',cap:'Bowl',img:'bowl'},
+    {id:'deckel',cls:'floaty',cap:'Deckel',img:'deckel'},
+    {id:'tuete',cls:'floaty',cap:'Tüte',img:'tuete'},
+    {id:'rpet',cls:'floaty',cap:'RPET',img:'rpet'},
+    {id:'kugel',cls:'floaty',cap:'Kugeldeckel',img:'kugeldeckel'},
+    {id:'serv',cls:'floaty',cap:'Serviette',img:'serviette'},
+    {id:'salad',cls:'floaty',cap:'Salat',img:'salat'},
+    {id:'bag',cls:'',cap:'Paket',img:'tuete'}
   ];
 
   function flowSection(){
     var s=document.createElement('section'); s.id='tspkflow';
-    var dbrows=NUM.rows.map(function(r){
-      return '<div class="dbrow"><span class="dbk">'+r[0]+'</span><span class="dbv"><span class="old">'+r[1]+'</span><span class="new">'+r[2]+'</span></span></div>';
-    }).join('');
-    s.innerHTML=
-      '<div class="fl-wrap"><div class="fl-stage" id="flStage">'+
-        '<div class="fl-q q1"></div>'+
-        '<div class="fl-q q2"><div class="fl-qlabel" data-q="2"><span class="k">DB 0 : <span class="g">Inventurliste</span></span><span class="s">Lieferung</span></div></div>'+
-        '<div class="fl-q q3"><div class="fl-qlabel" data-q="3"><span class="k">DB X : <span class="g">Packaging</span></span><span class="s">Pakete schnüren</span></div></div>'+
-        '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB VIII : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
-        '<div class="fl-ticket" id="flTicket">Bestellung <b>Caesar Salad</b> — To Go</div>'+
-        '<div class="fl-db" id="flDb"><div class="dbcap">'+NUM.cap+'</div>'+dbrows+'</div>'+
+    var dbrows=NUM.rows.map(function(r){ return '<div class="dbrow"><span class="dbk">'+r[0]+'</span><span class="dbv"><span class="old">'+r[1]+'</span><span class="new">'+r[2]+'</span></span></div>'; }).join('');
+    s.innerHTML='<div class="fl-wrap"><div class="fl-stage" id="flStage">'+
+      '<div class="fl-amb a1"></div><div class="fl-amb a2"></div>'+
+      '<div class="fl-line"><i id="flLine"></i></div>'+
+      '<div class="fl-q q1"></div>'+
+      '<div class="fl-q q2"><div class="fl-qlabel" data-q="2"><span class="k">DB 0 : <span class="g">Inventurliste</span></span><span class="s">Lieferung</span></div></div>'+
+      '<div class="fl-q q3"><div class="fl-qlabel" data-q="3"><span class="k">DB X : <span class="g">Packaging</span></span><span class="s">Pakete schnüren</span></div></div>'+
+      '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB VIII : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
+      '<div class="fl-ticket" id="flTicket">Bestellung <b>Caesar Salad</b> — To Go</div>'+
+      '<div class="fl-db" id="flDb"><div class="dbcap">'+NUM.cap+'</div>'+dbrows+'</div>'+
       '</div></div>'+
       '<div class="fl-replay"><button type="button" id="flReplay">▷ Ablauf erneut abspielen</button></div>';
     return s;
@@ -3497,98 +3480,65 @@
     var els={};
     SPRITES.forEach(function(sp){
       var d=document.createElement('div'); d.className='sp '+sp.cls;
-      var inner;
-      if(sp.img && IMG[sp.img]){
-        var second=(sp.img2 && IMG[sp.img2])?'<img class="box-open" src="'+IMG[sp.img2]+'" alt="">':'';
-        inner='<div class="ph img"><img class="box-closed" src="'+IMG[sp.img]+'" alt="">'+second+'</div>';
-      } else { inner='<div class="ph"></div>'; }
+      var second=(sp.img2&&IMG[sp.img2])?'<img class="box-open" src="'+IMG[sp.img2]+'" alt="">':'';
+      var inner=(sp.img&&IMG[sp.img])?'<div class="ph"><img class="box-closed" src="'+IMG[sp.img]+'" alt="">'+second+'</div>':'<div class="ph"></div>';
       d.innerHTML=inner+'<div class="cap">'+sp.cap+'</div>';
       stage.appendChild(d); els[sp.id]=d;
     });
-    var ticket=stage.parentNode.parentNode.querySelector('#flTicket')||document.getElementById('flTicket');
-    var dbPanel=document.getElementById('flDb');
-    var qlabels={};
-    [].forEach.call(stage.querySelectorAll('.fl-qlabel'),function(l){ qlabels[l.getAttribute('data-q')]=l; });
-
+    var ticket=document.getElementById('flTicket'), dbPanel=document.getElementById('flDb'), line=document.getElementById('flLine');
+    var qlabels={}; [].forEach.call(stage.querySelectorAll('.fl-qlabel'),function(l){ qlabels[l.getAttribute('data-q')]=l; });
     var INV_POS={bowl:{x:.285,y:.40},deckel:{x:.375,y:.40},tuete:{x:.465,y:.40},rpet:{x:.285,y:.72},kugel:{x:.375,y:.72},serv:{x:.465,y:.72}};
-    var BOX={x:.125,y:.60},BOX_MOUTH={x:.125,y:.40},PACK_CENTER={x:.625,y:.50},GERICHTE={x:.875,y:.42};
+    var BOX={x:.125,y:.58},BOX_MOUTH={x:.125,y:.40},PACK_CENTER={x:.625,y:.50},GERICHTE={x:.875,y:.40};
     var W=0,H=0;
     function measure(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height;
-      if(W<100){ W=Math.min(1320,(window.innerWidth||1280)*0.96); }
-      if(H<100){ H=Math.max(400,Math.min(600,(window.innerWidth||1280)*0.52)); } }
+      if(W<100){ W=Math.min(1340,(window.innerWidth||1280)*0.96); } if(H<100){ H=Math.max(400,Math.min(560,(window.innerWidth||1280)*0.50)); } }
     measure(); window.addEventListener('resize',measure);
-    function clamp(v,a,b){return v<a?a:v>b?b:v;}
-    function lerp(a,b,t){return a+(b-a)*t;}
+    function clamp(v,a,b){return v<a?a:v>b?b:v;} function lerp(a,b,t){return a+(b-a)*t;}
     function ease(t){t=clamp(t,0,1);return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
     function eOut(t){t=clamp(t,0,1);return 1-Math.pow(1-t,3);}
     function seg(t,t0,t1){ if(t<=t0)return 0; if(t>=t1)return 1; return (t-t0)/(t1-t0); }
     function place(el,nx,ny,scale,rot,op){ el.style.transform='translate('+(nx*W)+'px,'+(ny*H)+'px) scale('+scale+') rotate('+rot+'deg)'; el.style.opacity=op; }
-
     var T={boxIn:[0.2,1.2],boxOpen:[1.2,2.4],itemsOut:[2.4,6.6],q2label:2.6,order:[6.6,8.4],q3label:8.8,toPack:[8.8,12.4],assemble:[11.8,15.4],q4label:15.2,bagOut:[15.4,18.2],dbShow:16.6,end:20.0};
-    var DUR=T.end;
-    var ITEM_IDS=['bowl','deckel','tuete','rpet','kugel','serv'];
-    var PACK_IDS=['bowl','deckel','serv','tuete'];
-
+    var DUR=T.end, ITEM_IDS=['bowl','deckel','tuete','rpet','kugel','serv'], PACK_IDS=['bowl','deckel','serv','tuete'];
     function frame(t){
-      var bi=eOut(seg(t,T.boxIn[0],T.boxIn[1]));
-      var openP=ease(seg(t,T.boxOpen[0],T.boxOpen[1]));
-      place(els.box, BOX.x, lerp(BOX.y+.06,BOX.y,bi), lerp(.6,1,bi), lerp(0,-4,openP), bi);
+      var lp=clamp(seg(t,1.0,T.bagOut[1]),0,1); if(line) line.style.width=(lp*100)+'%';
+      var bi=eOut(seg(t,T.boxIn[0],T.boxIn[1])); var openP=ease(seg(t,T.boxOpen[0],T.boxOpen[1]));
+      place(els.box, BOX.x, lerp(BOX.y+.06,BOX.y,bi), lerp(.6,1,bi), 0, bi);
       var __bo=els.box.querySelector('.box-open'); if(__bo) __bo.style.opacity=openP;
-
       if(t>=T.q2label-0.01) qlabels['2'].classList.add('on');
-      ITEM_IDS.forEach(function(id,i){
-        var t0=T.itemsOut[0]+i*0.42,t1=t0+1.5,p=seg(t,t0,t1),el=els[id],tgt=INV_POS[id];
+      ITEM_IDS.forEach(function(id,i){ var t0=T.itemsOut[0]+i*0.42,t1=t0+1.5,p=seg(t,t0,t1),el=els[id],tgt=INV_POS[id];
         if(p<=0){ el.style.opacity=0; return; }
-        var pe=eOut(p),x=lerp(BOX_MOUTH.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.14,y=lerp(BOX_MOUTH.y,tgt.y,pe)-arc;
-        place(el,x,y,lerp(.5,1,pe),lerp(-12,0,pe),clamp(p*2,0,1));
-      });
-
+        var pe=eOut(p),x=lerp(BOX_MOUTH.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.16,y=lerp(BOX_MOUTH.y,tgt.y,pe)-arc;
+        place(el,x,y,lerp(.5,1,pe),0,clamp(p*2,0,1)); });
       var op0=seg(t,T.order[0],T.order[1]);
-      if(op0>0.02) ticket.classList.add('on'); else ticket.classList.remove('on');
-      var salIn=eOut(seg(t,T.order[0]+0.5,T.order[1]));
-      var salToBowl=ease(seg(t,T.assemble[0],T.assemble[0]+1.2));
-      var salX=lerp(.5,PACK_CENTER.x,salToBowl),salY=lerp(.42,.46,salToBowl);
+      if(op0>0.02 && t<13.6) ticket.classList.add('on'); else ticket.classList.remove('on');
+      var salIn=eOut(seg(t,T.order[0]+0.5,T.order[1])); var salToBowl=ease(seg(t,T.assemble[0],T.assemble[0]+1.2));
+      var salX=lerp(.5,PACK_CENTER.x,salToBowl),salY=lerp(.42,.47,salToBowl);
       var salOp = salIn>0 ? (t>T.assemble[0]+1.1 ? clamp(1-seg(t,T.assemble[0]+1.0,T.assemble[0]+1.5),0,1) : salIn) : 0;
-      place(els.salad, salX, salY, lerp(.6,.92,salIn)*lerp(1,.7,salToBowl), 0, salOp);
-
+      place(els.salad, salX, salY, lerp(.55,.92,salIn)*lerp(1,.65,salToBowl), 0, salOp);
       if(t>=T.q3label-0.01) qlabels['3'].classList.add('on');
-      var PACK_SLOT={bowl:{x:PACK_CENTER.x,y:PACK_CENTER.y+.02,s:1.02},deckel:{x:PACK_CENTER.x,y:PACK_CENTER.y-.14,s:.9},serv:{x:PACK_CENTER.x-.085,y:PACK_CENTER.y+.05,s:.7},tuete:{x:PACK_CENTER.x+.02,y:PACK_CENTER.y,s:1.15}};
-      PACK_IDS.forEach(function(id,i){
-        var t0=T.toPack[0]+i*0.5,t1=t0+1.6,p=seg(t,t0,t1);
-        if(p<=0) return;
-        var pe=eOut(p),from=INV_POS[id],to=PACK_SLOT[id],x=lerp(from.x,to.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.10,y=lerp(from.y,to.y,pe)-arc;
-        place(els[id],x,y,lerp(1,to.s,pe),0,1);
-      });
+      var PACK_SLOT={bowl:{x:PACK_CENTER.x,y:PACK_CENTER.y+.04,s:1.05},deckel:{x:PACK_CENTER.x,y:PACK_CENTER.y-.16,s:.85},serv:{x:PACK_CENTER.x-.09,y:PACK_CENTER.y+.06,s:.62},tuete:{x:PACK_CENTER.x+.015,y:PACK_CENTER.y,s:1.2}};
+      PACK_IDS.forEach(function(id,i){ var t0=T.toPack[0]+i*0.5,t1=t0+1.6,p=seg(t,t0,t1); if(p<=0) return;
+        var pe=eOut(p),from=INV_POS[id],to=PACK_SLOT[id],x=lerp(from.x,to.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.12,y=lerp(from.y,to.y,pe)-arc;
+        place(els[id],x,y,lerp(1,to.s,pe),0,1); });
       var asm=ease(seg(t,T.assemble[0]+1.3,T.assemble[1]));
-      if(asm>0){
-        ['bowl','deckel','serv'].forEach(function(id){
-          var slot=PACK_SLOT[id],x=lerp(slot.x,PACK_CENTER.x,asm),y=lerp(slot.y,PACK_CENTER.y,asm),sc=lerp(slot.s,0.15,asm),op=lerp(1,0,clamp((asm-0.55)/0.45,0,1));
-          place(els[id],x,y,sc,0,op);
-        });
-        els.tuete.style.opacity=String(lerp(1,0,clamp((asm-0.6)/0.4,0,1)));
-      }
-      var bagP=seg(t,T.bagOut[0],T.bagOut[1]);
-      var bagIn=eOut(seg(t,T.assemble[1]-0.6,T.assemble[1]));
-      if(bagIn>0){
-        if(t>=T.q4label-0.01) qlabels['4'].classList.add('on');
-        var bx=lerp(PACK_CENTER.x,GERICHTE.x,eOut(bagP)),arc=Math.sin(Math.min(bagP,1)*Math.PI)*0.12,by=lerp(PACK_CENTER.y,GERICHTE.y,eOut(bagP))-arc;
-        place(els.bag,bx,by,lerp(.7,1.05,bagIn),0,bagIn);
-      } else { els.bag.style.opacity=0; }
+      if(asm>0){ ['bowl','deckel','serv'].forEach(function(id){ var slot=PACK_SLOT[id],x=lerp(slot.x,PACK_CENTER.x,asm),y=lerp(slot.y,PACK_CENTER.y,asm),sc=lerp(slot.s,0.12,asm),op=lerp(1,0,clamp((asm-0.55)/0.45,0,1)); place(els[id],x,y,sc,0,op); });
+        els.tuete.style.opacity=String(lerp(1,0,clamp((asm-0.6)/0.4,0,1))); }
+      var bagP=seg(t,T.bagOut[0],T.bagOut[1]); var bagIn=eOut(seg(t,T.assemble[1]-0.6,T.assemble[1]));
+      if(bagIn>0){ if(t>=T.q4label-0.01) qlabels['4'].classList.add('on');
+        var bx=lerp(PACK_CENTER.x,GERICHTE.x,eOut(bagP)),arc=Math.sin(Math.min(bagP,1)*Math.PI)*0.14,by=lerp(PACK_CENTER.y,GERICHTE.y,eOut(bagP))-arc;
+        place(els.bag,bx,by,lerp(.65,1.05,bagIn),0,bagIn); } else { els.bag.style.opacity=0; }
       if(t>=T.dbShow-0.01) dbPanel.classList.add('on');
     }
-
     var raf=0,startTs=0;
     function tick(ts){ if(!startTs) startTs=ts; var t=(ts-startTs)/1000; frame(Math.min(t,DUR)); if(t<DUR) raf=requestAnimationFrame(tick); }
-    function resetLabels(){ ['2','3','4'].forEach(function(q){ qlabels[q].classList.remove('on'); }); ticket.classList.remove('on'); dbPanel.classList.remove('on'); }
+    function resetLabels(){ ['2','3','4'].forEach(function(q){ qlabels[q].classList.remove('on'); }); ticket.classList.remove('on'); dbPanel.classList.remove('on'); if(line) line.style.width='0%'; }
     function play(){ if(reduced){ measure(); frame(DUR); return; } cancelAnimationFrame(raf); resetLabels(); startTs=0; measure(); raf=requestAnimationFrame(tick); }
     var rb=document.getElementById('flReplay'); if(rb) rb.addEventListener('click',play);
     if(window.__PKDEBUG){ window.__pkFrame=function(t){ measure(); resetLabels(); frame(t); }; }
-
     var started=false;
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; setTimeout(play,250);} }); },{threshold:.35});
-      io.observe(stage);
-    } else { play(); }
+    if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; setTimeout(play,250);} }); },{threshold:.35}); io.observe(stage); }
+    else { play(); }
   }
 
   function mount(){
@@ -3596,19 +3546,17 @@
     var sc=document.querySelector('.super-content')||document.querySelector('main'); if(!sc) return;
     if(document.getElementById('tspk')) return;
     if(!document.getElementById('tspk-css')){ var st=document.createElement('style'); st.id='tspk-css'; st.textContent=CSS; document.head.appendChild(st); }
-    var head=headSection(), flow=flowSection();
-    var wk=document.createElement('div'); wk.className='ts10wk'; wk.id='ts10wk';  // Anker für tsshop-Regal DB X
+    var head=headSection(), flow=flowSection(), lead2=lead2Section();
+    var wk=document.createElement('div'); wk.className='ts10wk'; wk.id='ts10wk';
     var anchor=document.getElementById('tsalgpc2')||document.getElementById('tsalgcart')||document.getElementById('tsalgpc')||document.getElementById('tsalg');
     if(anchor && anchor.parentNode){
       anchor.parentNode.insertBefore(head, anchor.nextSibling);
       head.parentNode.insertBefore(flow, head.nextSibling);
-      flow.parentNode.insertBefore(wk, flow.nextSibling);
-    } else {
-      var nr=sc.querySelector('.notion-root')||sc; nr.appendChild(head); nr.appendChild(flow); nr.appendChild(wk);
-    }
+      flow.parentNode.insertBefore(lead2, flow.nextSibling);
+      lead2.parentNode.insertBefore(wk, lead2.nextSibling);
+    } else { var nr=sc.querySelector('.notion-root')||sc; nr.appendChild(head); nr.appendChild(flow); nr.appendChild(lead2); nr.appendChild(wk); }
     initFlow(document.getElementById('flStage'));
   }
-
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
@@ -6128,12 +6076,12 @@
       /* DB X Packaging (Lektion 2.6) — 6 Bau-Schritte. Bilder: 3 Kacheln zyklisch
          (Karton-Foodbox, Bechersleeve, Bowl — kurs-code/img/packaging). Werte = Beispielwerte. */
       objekt_varianten:[
-        { name:'1. Button anlegen', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-foodbox.webp' },
-        { name:'2. Datenbank anlegen', wert:0.42, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-sleeve.webp' },
-        { name:'3. Beezeichnung', wert:0.26, img:'https://tastyrob123.github.io/kurs-code/img/packaging/bowl.webp' },
-        { name:'4. Inventory Product', wert:0.31, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-foodbox.webp' },
-        { name:'5. Preis / Stck', wert:0.19, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-sleeve.webp' },
-        { name:'6. Verfication Sum', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/bowl.webp' },
+        { name:'1. Button anlegen', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-box.webp' },
+        { name:'2. Datenbank anlegen', wert:0.42, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-bowl.webp' },
+        { name:'3. Beezeichnung', wert:0.26, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-bag.webp' },
+        { name:'4. Inventory Product', wert:0.31, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-rpet.webp' },
+        { name:'5. Preis / Stck', wert:0.19, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-cup.webp' },
+        { name:'6. Verfication Sum', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-napkin.webp' },
       ]},
     { kachel_id:'db7_allergene', kachel_name:'Allergene', ist_produkt_kachel:true,
       einheit:'EU-Ziffer (1–14)', einheit_typ:'code',
