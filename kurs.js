@@ -2073,7 +2073,8 @@
     { re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, href:'/zutatenliste' },
     { re:/\/zutatenliste\/?$/,       href:'/rezepturen' },
     { re:/\/rezepturen\/?$/,         href:'/gemeinkosten-mitarbeiterlhne' },
-    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' }
+    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' },
+    { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -2133,6 +2134,14 @@
     "Du kannst für jeden Mitarbeiter den Stundensatz auf AG-Kosten-Basis berechnen — die reale Zahl, mit der Personalkosten pro Produkt entstehen."
   ];
 
+  /* /allergene-bersicht (DB IX–X) — feste Learnings (keine Notion-"Learnings"-Ueberschrift auf der Seite) */
+  var ALLERGENE = [
+    "Du pflegst jedes Allergen einmal an der Zutat — Kennzeichnung, Rezept und Gericht erben es automatisch.",
+    "Du kennst die vierzehn kennzeichnungspflichtigen Allergene und weisst, wie du Spuren und Kreuzkontakte sauber ergaenzt.",
+    "Du hast die Packaging-Datenbank gebaut: einzelne Artikel aus der Inventurliste zu fertigen Paketen geschnuert.",
+    "Du kannst ein Paket optional mit einem Gericht verbinden — Wareneinsatz und DB I bis III aktualisieren sich von selbst."
+  ];
+
   var CSS = `
   #tsl{width:100vw;max-width:100vw;margin:44px 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff}
   #tsl *{box-sizing:border-box}
@@ -2183,7 +2192,8 @@
     { re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, items:null },
     { re:/\/zutatenliste\/?$/,      items:null },
     { re:/\/rezepturen\/?$/,        items:REZ },
-    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, items:GK }
+    { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, items:GK },
+    { re:/\/allergene-bersicht\/?$/, items:ALLERGENE }
   ];
   function pageCfg(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i]; }
@@ -3336,6 +3346,267 @@
     else { var nr=sc.querySelector('.notion-root'); if(nr) nr.parentNode.insertBefore(sec, nr); else sc.appendChild(sec); }
     var tile=sec.querySelector('.apc2-tile');
     if(tile) tile.addEventListener('click', openLb);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
+   allergene-bersicht — DB X : Packaging
+   (Überschrift + Einleitung + cineastische 4-Viertel-Animation)
+   Mount direkt UNTER #tsalgpc2 ("Jedes Allergen auf einen Blick").
+   Bilder: GitHub Pages (kurs-code/img/packaging).
+   ============================================================ */
+(function(){
+  if(window.__tspk) return; window.__tspk=true;
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var LIN='"Lineal TS","Lineal Web",'+SANS;
+  var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+  var B='https://tastyrob123.github.io/kurs-code/img/packaging/';
+  var IMG={bowl:B+'bowl.webp',deckel:B+'deckel.webp',tuete:B+'tuete.webp',rpet:B+'rpet.webp',
+    kugeldeckel:B+'kugeldeckel.webp',serviette:B+'serviette.webp',
+    karton_zu:B+'karton-zu.webp',karton_offen:B+'karton-offen.webp',salat:B+'salat-bowl.webp'};
+  (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
+
+  /* DB I-III vorher/nachher — ECHTE WERTE (Platzhalter bis Notion-Zahlen bestätigt) */
+  var NUM={
+    cap:'Caesar Salad · nach dem Verknüpfen',
+    rows:[
+      ['Wareneinsatz','2,39 €','2,97 €'],
+      ['DB I','9,11 €','8,53 €'],
+      ['DB II','7,39 €','6,81 €'],
+      ['DB III','4,83 €','4,25 €']
+    ]
+  };
+
+  var CSS = `
+  #tspk{width:100%;margin:78px 0 0;font-family:${SANS};color:#fff}
+  #tspk .pk-head{width:min(1180px,94vw);margin:0 auto;text-align:center}
+  #tspk .pk-eyebrow{font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:#c7b489;margin:0 0 16px;opacity:.9}
+  #tspk .pk-h{margin:0 auto;font-family:${LIN};font-weight:600;font-size:clamp(32px,5.4vw,58px);line-height:1.05;letter-spacing:-.015em;color:#fff;text-wrap:balance}
+  #tspk .pk-h .g{color:#c7b489}
+  #tspk .pk-lead{width:min(1180px,94vw);margin:30px auto 0;text-align:center}
+  #tspk .pk-lead p{margin:0;font-size:clamp(15px,1.15vw,17.5px);line-height:1.72;color:#e1e1e1}
+  #tspk .pk-lead .hl{color:#fff}
+  #tspk .pk-lead .gld{color:#c7b489}
+
+  #tspkflow{width:100vw;max-width:100vw;margin:56px 0 10px;margin-left:calc(50% - 50vw);font-family:${SANS};color:#fff}
+  #tspkflow *{box-sizing:border-box}
+  #tspkflow .fl-wrap{width:min(1320px,96vw);margin:0 auto}
+  #tspkflow .fl-stage{position:relative;width:100%;height:clamp(400px,52vw,600px);border-radius:18px;overflow:hidden;
+    background:radial-gradient(120% 90% at 12% 40%,rgba(199,180,137,.05),transparent 60%),radial-gradient(120% 90% at 88% 55%,rgba(199,180,137,.04),transparent 60%),linear-gradient(180deg,#080910,#05060b 70%);
+    border:1px solid rgba(255,255,255,.08);box-shadow:0 40px 90px -50px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.03)}
+  #tspkflow .fl-q{position:absolute;top:0;bottom:0;width:25%;pointer-events:none}
+  #tspkflow .fl-q + .fl-q{border-left:1px dashed rgba(255,255,255,.055)}
+  #tspkflow .fl-q.q1{left:0} #tspkflow .fl-q.q2{left:25%} #tspkflow .fl-q.q3{left:50%} #tspkflow .fl-q.q4{left:75%}
+  #tspkflow .fl-qlabel{position:absolute;top:16px;left:0;right:0;text-align:center;opacity:0;transform:translateY(-6px);transition:opacity .6s ease,transform .6s ease}
+  #tspkflow .fl-qlabel.on{opacity:1;transform:none}
+  #tspkflow .fl-qlabel .k{display:block;font-family:${LIN};font-weight:600;font-size:clamp(13px,1.35vw,17px);color:#fff;letter-spacing:.01em}
+  #tspkflow .fl-qlabel .k .g{color:#c7b489}
+  #tspkflow .fl-qlabel .s{display:block;margin-top:3px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #tspkflow .sp{position:absolute;left:0;top:0;will-change:transform,opacity;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    width:var(--w,108px);height:var(--h,108px);margin-left:calc(var(--w,108px)/-2);margin-top:calc(var(--h,108px)/-2);opacity:0;pointer-events:none}
+  #tspkflow .sp .ph{width:100%;height:100%;border-radius:14px;position:relative;overflow:hidden;
+    background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 18px 40px -22px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center}
+  #tspkflow .sp .ph.img{background:transparent;border:0;box-shadow:none}
+  #tspkflow .sp .ph.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+    -webkit-mask:radial-gradient(circle at 50% 47%, #000 52%, transparent 88%);mask:radial-gradient(circle at 50% 47%, #000 52%, transparent 88%);
+    filter:drop-shadow(0 16px 30px rgba(0,0,0,.7))}
+  #tspkflow .sp.box .ph.img img{-webkit-mask:radial-gradient(circle at 50% 50%, #000 62%, transparent 92%);mask:radial-gradient(circle at 50% 50%, #000 62%, transparent 92%)}
+  #tspkflow .sp.box .ph .box-open{opacity:0;transition:opacity .5s ease}
+  #tspkflow .sp .cap{margin-top:8px;font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.82);white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:500}
+  #tspkflow .sp.box{--w:150px;--h:150px}
+  #tspkflow .fl-ticket{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);opacity:0;transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);
+    background:rgba(10,12,18,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(199,180,137,.4);border-radius:12px;padding:10px 16px;
+    font-size:12px;letter-spacing:.03em;color:#fff;box-shadow:0 20px 50px -24px rgba(0,0,0,.9);z-index:6}
+  #tspkflow .fl-ticket.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  #tspkflow .fl-ticket b{color:#c7b489;font-weight:600}
+  #tspkflow .fl-db{position:absolute;left:87.5%;top:72%;transform:translate(-50%,-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
+    width:min(210px,20vw);background:rgba(9,11,17,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 13px;z-index:6;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  #tspkflow .fl-db.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  #tspkflow .fl-db .dbrow{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.06)}
+  #tspkflow .fl-db .dbrow:last-child{border-bottom:0}
+  #tspkflow .fl-db .dbk{color:rgba(255,255,255,.62);letter-spacing:.04em}
+  #tspkflow .fl-db .dbv{font-variant-numeric:tabular-nums;font-weight:600}
+  #tspkflow .fl-db .dbv .old{color:rgba(255,255,255,.4);text-decoration:line-through;margin-right:6px;font-weight:400}
+  #tspkflow .fl-db .dbv .new{color:#c7b489}
+  #tspkflow .fl-db .dbcap{margin:2px 0 8px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
+  #tspkflow .fl-replay{width:min(1320px,96vw);margin:14px auto 0;text-align:center}
+  #tspkflow .fl-replay button{background:transparent;border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.7);font:inherit;font-size:12px;letter-spacing:.06em;padding:8px 18px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
+  #tspkflow .fl-replay button:hover{border-color:rgba(199,180,137,.55);color:#fff}
+  @media (max-width:720px){
+    #tspkflow .fl-stage{height:clamp(360px,88vw,520px)}
+    #tspkflow .sp{--w:74px;--h:74px}
+    #tspkflow .sp.box{--w:104px;--h:104px}
+    #tspkflow .sp .cap{font-size:9px}
+    #tspkflow .fl-db{width:44vw}
+    #tspk .pk-lead p{font-size:15px}
+  }
+  @media (prefers-reduced-motion:reduce){#tspkflow .sp,#tspkflow .fl-ticket,#tspkflow .fl-db,#tspkflow .fl-qlabel{transition:none!important}}`;
+
+  function headSection(){
+    var s=document.createElement('section'); s.id='tspk';
+    s.innerHTML=
+      '<div class="pk-head">'+
+        '<p class="pk-eyebrow">Der zweite Baustein · Lektion 2.6</p>'+
+        '<h2 class="pk-h">DB X : <span class="g">Packaging</span></h2>'+
+      '</div>'+
+      '<div class="pk-lead"><p>'+
+        'Das Packaging lebt zunächst direkt in der <span class="hl">Inventurliste</span>. Anders als bei den Inventarprodukten, die wir zu Zutaten weiterverarbeiten, könnten wir mit dem Packaging theoretisch direkt weiterarbeiten. Praktisch sieht die Realität anders aus: Wir wollen nicht in jedem Gericht automatisch das Packaging inkludiert haben, weil wir einen Teil des Umsatzes auch <span class="hl">In-House</span> machen. Auf der anderen Seite wollen wir uns aber auch nicht jedes Mal daran erinnern müssen, welches Packaging bei welchem Produkt verwendet wird. Deshalb bauen wir die <span class="gld">DB Packaging</span>. Hier wird das Packaging in einzelne Pakete zusammengefasst (z. B. Salat = Bowl + Deckel + Serviette + Besteck + Tüte), die dann optional mit den einzelnen Gerichten verbunden werden. Die DB zieht sich die Preise pro Stück aus der Inventurliste — und der Wareneinsatz sowie <span class="gld">DB I–III</span> aktualisieren sich automatisch im Gericht.'+
+      '</p></div>';
+    return s;
+  }
+
+  var SPRITES=[
+    {id:'box',cls:'box',cap:'Karton',img:'karton_zu',img2:'karton_offen'},
+    {id:'bowl',cls:'',cap:'Bowl',img:'bowl'},
+    {id:'deckel',cls:'',cap:'Deckel',img:'deckel'},
+    {id:'tuete',cls:'',cap:'Tüte',img:'tuete'},
+    {id:'rpet',cls:'',cap:'RPET',img:'rpet'},
+    {id:'kugel',cls:'',cap:'Kugeldeckel',img:'kugeldeckel'},
+    {id:'serv',cls:'',cap:'Serviette',img:'serviette'},
+    {id:'salad',cls:'salad',cap:'Salat',img:'salat'},
+    {id:'bag',cls:'bag',cap:'Paket',img:'tuete'}
+  ];
+
+  function flowSection(){
+    var s=document.createElement('section'); s.id='tspkflow';
+    var dbrows=NUM.rows.map(function(r){
+      return '<div class="dbrow"><span class="dbk">'+r[0]+'</span><span class="dbv"><span class="old">'+r[1]+'</span><span class="new">'+r[2]+'</span></span></div>';
+    }).join('');
+    s.innerHTML=
+      '<div class="fl-wrap"><div class="fl-stage" id="flStage">'+
+        '<div class="fl-q q1"></div>'+
+        '<div class="fl-q q2"><div class="fl-qlabel" data-q="2"><span class="k">DB 0 : <span class="g">Inventurliste</span></span><span class="s">Lieferung</span></div></div>'+
+        '<div class="fl-q q3"><div class="fl-qlabel" data-q="3"><span class="k">DB X : <span class="g">Packaging</span></span><span class="s">Pakete schnüren</span></div></div>'+
+        '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB VIII : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
+        '<div class="fl-ticket" id="flTicket">Bestellung <b>Caesar Salad</b> — To Go</div>'+
+        '<div class="fl-db" id="flDb"><div class="dbcap">'+NUM.cap+'</div>'+dbrows+'</div>'+
+      '</div></div>'+
+      '<div class="fl-replay"><button type="button" id="flReplay">▷ Ablauf erneut abspielen</button></div>';
+    return s;
+  }
+
+  function initFlow(stage){
+    var els={};
+    SPRITES.forEach(function(sp){
+      var d=document.createElement('div'); d.className='sp '+sp.cls;
+      var inner;
+      if(sp.img && IMG[sp.img]){
+        var second=(sp.img2 && IMG[sp.img2])?'<img class="box-open" src="'+IMG[sp.img2]+'" alt="">':'';
+        inner='<div class="ph img"><img class="box-closed" src="'+IMG[sp.img]+'" alt="">'+second+'</div>';
+      } else { inner='<div class="ph"></div>'; }
+      d.innerHTML=inner+'<div class="cap">'+sp.cap+'</div>';
+      stage.appendChild(d); els[sp.id]=d;
+    });
+    var ticket=stage.parentNode.parentNode.querySelector('#flTicket')||document.getElementById('flTicket');
+    var dbPanel=document.getElementById('flDb');
+    var qlabels={};
+    [].forEach.call(stage.querySelectorAll('.fl-qlabel'),function(l){ qlabels[l.getAttribute('data-q')]=l; });
+
+    var INV_POS={bowl:{x:.285,y:.40},deckel:{x:.375,y:.40},tuete:{x:.465,y:.40},rpet:{x:.285,y:.72},kugel:{x:.375,y:.72},serv:{x:.465,y:.72}};
+    var BOX={x:.125,y:.60},BOX_MOUTH={x:.125,y:.40},PACK_CENTER={x:.625,y:.50},GERICHTE={x:.875,y:.42};
+    var W=0,H=0;
+    function measure(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height;
+      if(W<100){ W=Math.min(1320,(window.innerWidth||1280)*0.96); }
+      if(H<100){ H=Math.max(400,Math.min(600,(window.innerWidth||1280)*0.52)); } }
+    measure(); window.addEventListener('resize',measure);
+    function clamp(v,a,b){return v<a?a:v>b?b:v;}
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function ease(t){t=clamp(t,0,1);return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    function eOut(t){t=clamp(t,0,1);return 1-Math.pow(1-t,3);}
+    function seg(t,t0,t1){ if(t<=t0)return 0; if(t>=t1)return 1; return (t-t0)/(t1-t0); }
+    function place(el,nx,ny,scale,rot,op){ el.style.transform='translate('+(nx*W)+'px,'+(ny*H)+'px) scale('+scale+') rotate('+rot+'deg)'; el.style.opacity=op; }
+
+    var T={boxIn:[0.2,1.2],boxOpen:[1.2,2.4],itemsOut:[2.4,6.6],q2label:2.6,order:[6.6,8.4],q3label:8.8,toPack:[8.8,12.4],assemble:[11.8,15.4],q4label:15.2,bagOut:[15.4,18.2],dbShow:16.6,end:20.0};
+    var DUR=T.end;
+    var ITEM_IDS=['bowl','deckel','tuete','rpet','kugel','serv'];
+    var PACK_IDS=['bowl','deckel','serv','tuete'];
+
+    function frame(t){
+      var bi=eOut(seg(t,T.boxIn[0],T.boxIn[1]));
+      var openP=ease(seg(t,T.boxOpen[0],T.boxOpen[1]));
+      place(els.box, BOX.x, lerp(BOX.y+.06,BOX.y,bi), lerp(.6,1,bi), lerp(0,-4,openP), bi);
+      var __bo=els.box.querySelector('.box-open'); if(__bo) __bo.style.opacity=openP;
+
+      if(t>=T.q2label-0.01) qlabels['2'].classList.add('on');
+      ITEM_IDS.forEach(function(id,i){
+        var t0=T.itemsOut[0]+i*0.42,t1=t0+1.5,p=seg(t,t0,t1),el=els[id],tgt=INV_POS[id];
+        if(p<=0){ el.style.opacity=0; return; }
+        var pe=eOut(p),x=lerp(BOX_MOUTH.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.14,y=lerp(BOX_MOUTH.y,tgt.y,pe)-arc;
+        place(el,x,y,lerp(.5,1,pe),lerp(-12,0,pe),clamp(p*2,0,1));
+      });
+
+      var op0=seg(t,T.order[0],T.order[1]);
+      if(op0>0.02) ticket.classList.add('on'); else ticket.classList.remove('on');
+      var salIn=eOut(seg(t,T.order[0]+0.5,T.order[1]));
+      var salToBowl=ease(seg(t,T.assemble[0],T.assemble[0]+1.2));
+      var salX=lerp(.5,PACK_CENTER.x,salToBowl),salY=lerp(.42,.46,salToBowl);
+      var salOp = salIn>0 ? (t>T.assemble[0]+1.1 ? clamp(1-seg(t,T.assemble[0]+1.0,T.assemble[0]+1.5),0,1) : salIn) : 0;
+      place(els.salad, salX, salY, lerp(.6,.92,salIn)*lerp(1,.7,salToBowl), 0, salOp);
+
+      if(t>=T.q3label-0.01) qlabels['3'].classList.add('on');
+      var PACK_SLOT={bowl:{x:PACK_CENTER.x,y:PACK_CENTER.y+.02,s:1.02},deckel:{x:PACK_CENTER.x,y:PACK_CENTER.y-.14,s:.9},serv:{x:PACK_CENTER.x-.085,y:PACK_CENTER.y+.05,s:.7},tuete:{x:PACK_CENTER.x+.02,y:PACK_CENTER.y,s:1.15}};
+      PACK_IDS.forEach(function(id,i){
+        var t0=T.toPack[0]+i*0.5,t1=t0+1.6,p=seg(t,t0,t1);
+        if(p<=0) return;
+        var pe=eOut(p),from=INV_POS[id],to=PACK_SLOT[id],x=lerp(from.x,to.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.10,y=lerp(from.y,to.y,pe)-arc;
+        place(els[id],x,y,lerp(1,to.s,pe),0,1);
+      });
+      var asm=ease(seg(t,T.assemble[0]+1.3,T.assemble[1]));
+      if(asm>0){
+        ['bowl','deckel','serv'].forEach(function(id){
+          var slot=PACK_SLOT[id],x=lerp(slot.x,PACK_CENTER.x,asm),y=lerp(slot.y,PACK_CENTER.y,asm),sc=lerp(slot.s,0.15,asm),op=lerp(1,0,clamp((asm-0.55)/0.45,0,1));
+          place(els[id],x,y,sc,0,op);
+        });
+        els.tuete.style.opacity=String(lerp(1,0,clamp((asm-0.6)/0.4,0,1)));
+      }
+      var bagP=seg(t,T.bagOut[0],T.bagOut[1]);
+      var bagIn=eOut(seg(t,T.assemble[1]-0.6,T.assemble[1]));
+      if(bagIn>0){
+        if(t>=T.q4label-0.01) qlabels['4'].classList.add('on');
+        var bx=lerp(PACK_CENTER.x,GERICHTE.x,eOut(bagP)),arc=Math.sin(Math.min(bagP,1)*Math.PI)*0.12,by=lerp(PACK_CENTER.y,GERICHTE.y,eOut(bagP))-arc;
+        place(els.bag,bx,by,lerp(.7,1.05,bagIn),0,bagIn);
+      } else { els.bag.style.opacity=0; }
+      if(t>=T.dbShow-0.01) dbPanel.classList.add('on');
+    }
+
+    var raf=0,startTs=0;
+    function tick(ts){ if(!startTs) startTs=ts; var t=(ts-startTs)/1000; frame(Math.min(t,DUR)); if(t<DUR) raf=requestAnimationFrame(tick); }
+    function resetLabels(){ ['2','3','4'].forEach(function(q){ qlabels[q].classList.remove('on'); }); ticket.classList.remove('on'); dbPanel.classList.remove('on'); }
+    function play(){ if(reduced){ measure(); frame(DUR); return; } cancelAnimationFrame(raf); resetLabels(); startTs=0; measure(); raf=requestAnimationFrame(tick); }
+    var rb=document.getElementById('flReplay'); if(rb) rb.addEventListener('click',play);
+    if(window.__PKDEBUG){ window.__pkFrame=function(t){ measure(); resetLabels(); frame(t); }; }
+
+    var started=false;
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; setTimeout(play,250);} }); },{threshold:.35});
+      io.observe(stage);
+    } else { play(); }
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector('.super-content')||document.querySelector('main'); if(!sc) return;
+    if(document.getElementById('tspk')) return;
+    if(!document.getElementById('tspk-css')){ var st=document.createElement('style'); st.id='tspk-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var head=headSection(), flow=flowSection();
+    var wk=document.createElement('div'); wk.className='ts10wk'; wk.id='ts10wk';  // Anker für tsshop-Regal DB X
+    var anchor=document.getElementById('tsalgpc2')||document.getElementById('tsalgcart')||document.getElementById('tsalgpc')||document.getElementById('tsalg');
+    if(anchor && anchor.parentNode){
+      anchor.parentNode.insertBefore(head, anchor.nextSibling);
+      head.parentNode.insertBefore(flow, head.nextSibling);
+      flow.parentNode.insertBefore(wk, flow.nextSibling);
+    } else {
+      var nr=sc.querySelector('.notion-root')||sc; nr.appendChild(head); nr.appendChild(flow); nr.appendChild(wk);
+    }
+    initFlow(document.getElementById('flStage'));
   }
 
   mount();
@@ -5852,6 +6123,18 @@
         { name:'36. Carbs', wert:5.2, img:'https://tastyrob123.github.io/kurs/img/gerichte/affogato.jpg' },
         { name:'37. Allergene', wert:0, img:'https://tastyrob123.github.io/kurs/img/gerichte/irish-coffee.jpg' }
       ]},
+    { kachel_id:'db10_packaging', kachel_name:'Packaging / Co.', ist_produkt_kachel:true,
+      einheit:'Preis / Unit (€)', einheit_typ:'preis',
+      /* DB X Packaging (Lektion 2.6) — 6 Bau-Schritte. Bilder: 3 Kacheln zyklisch
+         (Karton-Foodbox, Bechersleeve, Bowl — kurs-code/img/packaging). Werte = Beispielwerte. */
+      objekt_varianten:[
+        { name:'1. Button anlegen', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-foodbox.webp' },
+        { name:'2. Datenbank anlegen', wert:0.42, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-sleeve.webp' },
+        { name:'3. Beezeichnung', wert:0.26, img:'https://tastyrob123.github.io/kurs-code/img/packaging/bowl.webp' },
+        { name:'4. Inventory Product', wert:0.31, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-foodbox.webp' },
+        { name:'5. Preis / Stck', wert:0.19, img:'https://tastyrob123.github.io/kurs-code/img/packaging/wk-sleeve.webp' },
+        { name:'6. Verfication Sum', wert:0.58, img:'https://tastyrob123.github.io/kurs-code/img/packaging/bowl.webp' },
+      ]},
     { kachel_id:'db7_allergene', kachel_name:'Allergene', ist_produkt_kachel:true,
       einheit:'EU-Ziffer (1–14)', einheit_typ:'code',
       objekt_varianten:[{name:'Weizenähre'},{name:'Erdnuss'},{name:'Milchkanne'},{name:'Fisch'},{name:'Ei'},{name:'Sellerie'}]},
@@ -6233,6 +6516,14 @@
     {title:'37. Allergene', desc:'Eigenschaft : Formel → Name der Spalte : Allergene Trage diese Formel ein : /* Get allergens from both da', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Allergene</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">/* Get allergens from both databases and combine them */<br>lets(<br>&nbsp;&nbsp;/* Extract allergens from ready-to-use products */<br>&nbsp;&nbsp;readyToUseAllergens, prop(&quot;Zutaten&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Allergene ( ausfüllen )&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat(),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Extract allergens from inhouse production products */<br>&nbsp;&nbsp;inhouseAllergens, prop(&quot;Produkte Inhouse Production &quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;.map(current.prop(&quot;Allergene&quot;))<br>&nbsp;&nbsp;&nbsp;&nbsp;.flat(),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Combine all allergens and remove duplicates */<br>&nbsp;&nbsp;allUniqueAllergens, unique(concat(readyToUseAllergens, inhouseAllergens)),<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;/* Return formatted allergene list or message if none found */<br>&nbsp;&nbsp;if(allUniqueAllergens.length() &gt; 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;allUniqueAllergens.sort().join(&quot;, &quot;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;Keine Allergene&quot;)<br>)</div><p class="notion-text">→ Die eingetragene Formel sammelt die Allergene aus allen verknüpften Zutaten und Rezepturen ein.</p>'},
   ];
 
+  var TS_PK_STEPS=[
+    {title:'1. Button anlegen', desc:'Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Se', html:'<p class="notion-text">Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: Lege auf deiner Backoffice-Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen', desc:'Drücke / und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;. → Name der Datenbank :', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Packaging / Co.</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+    {title:'3. Beezeichnung', desc:'→ Eigenschaft : Titel → Name der Spalte : Beezeichnung → Du trägst hier ein : den Namen de', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Beezeichnung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen des Pakets, bspw. Bowl To-Go Standard oder Cold Drink To-Go.</p>'},
+    {title:'4. Inventory Product', desc:'→ Eigenschaft : Verknüpfung → DB 0 : Inventurliste → → Name der Spalte : Inventory Product', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB 0 : Inventurliste →</p><p class="notion-text">→ <b>Name der Spalte :</b> Inventory Product</p><p class="notion-text">Du verknüpfst hier die einzelnen Verpackungs-Artikel aus deiner Inventurliste, die zusammen dieses Paket ergeben — bspw. Bowl + Deckel + Serviette + Besteck.</p>'},
+    {title:'5. Preis / Stck', desc:'→ Eigenschaft : Rollup → Verknüpfung : Inventory Product → Eigenschaft : Preis / Stück → B', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Inventory Product</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Stück</p><p class="notion-text">→ <b>Berechnen :</b> Originale zeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Stck</p><p class="notion-text">Dir werden hier die Einzelpreise der verknüpften Artikel — automatisch aus der Inventurliste gezogen. angezeigt.</p>'},
+    {title:'6. Verfication Sum', desc:'→ Eigenschaft : Formel → Name der Spalte : Verfication Sum Trage diese Formel ein : if(emp', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Verfication Sum</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code">if(empty([Preis / Stck]), &quot;0,00 €&quot;,<br>&nbsp;&nbsp;lets(<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Jeden Preis-String parsen: Euro/Leerzeichen entfernen, Tausenderpunkte weg, Dezimalkomma zu Punkt */<br>&nbsp;&nbsp;&nbsp;&nbsp;prices, [Preis / Stck]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toNumber(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(current)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replaceAll(&quot;[€\\\\s]&quot;, &quot;&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replaceAll(&quot;\\\\.&quot;, &quot;&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replace(&quot;,&quot;, &quot;.&quot;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;/* In ganzen Cent rechnen, um Rundungsfehler zu vermeiden */<br>&nbsp;&nbsp;&nbsp;&nbsp;totalCents, round(sum(prices) * 100, 0),<br>&nbsp;&nbsp;&nbsp;&nbsp;/* Deutsche Ausgabe bauen: Euro,Cent € */<br>&nbsp;&nbsp;&nbsp;&nbsp;format(floor(totalCents / 100)) + &quot;,&quot; +<br>&nbsp;&nbsp;&nbsp;&nbsp;if(mod(totalCents, 100) &lt; 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;0&quot; + format(mod(totalCents, 100)),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(mod(totalCents, 100))<br>&nbsp;&nbsp;&nbsp;&nbsp;) + &quot; €&quot;<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die Formel liest die einzelnen Stückpreise aus, summiert sie und gibt den Gesamtpreis des Pakets pro Stück in Euro aus.</p>'},
+  ];
   var PAGES=[
     /* Lektion 11 — drei Config-Steps-Regale (Engine): Notion-Seite ist leer, Steps kommen aus
        der Config (Quelle: echte Notion-DB-Schemas + extrahierte Formeln, 17.07.2026).
@@ -6380,6 +6671,12 @@
       title:'Deine Gerichte & Getränke. <span>Spalte für Spalte</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VIII sind die Kosten pro Gericht, Getränk oder Dessert.',
       summary:'Kosten pro Portion', chain:true },
+    { path:/\/allergene-bersicht\/?$/, kachel:'db10_packaging',
+      anchorSel:'#ts10wk', steps:TS_PK_STEPS,
+      eyebrow:'Der Warenkorb · DB X',
+      title:'Dein Packaging. <span>Paket für Paket</span>.',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB X ist der Preis pro Unit in Euro.',
+      summary:'Preis pro Unit', chain:true },
     { path:/\/inventurliste\/?$/, kachel:'db0_inventurliste',
       eyebrow:'Der Warenkorb · DB 0',
       title:'Deine Inventurliste. <span>Schritt für Schritt</span>.',
@@ -6728,7 +7025,7 @@
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37 };
+  var BACKOFFICE={ menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6 };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
