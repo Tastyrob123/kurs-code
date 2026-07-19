@@ -733,11 +733,11 @@
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB VIII — Gerichte & Getränke" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB XI — Gerichte & Getränke" src="'+IMG+'">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">L 2.7</div>'+
-        '<h1 class="ts-hero__title">DB VIII : <span class="ts-gold">Gerichte &amp; Getränke</span></h1>'+
+        '<h1 class="ts-hero__title">DB XI : <span class="ts-gold">Gerichte &amp; Getränke</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
     if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
@@ -2889,7 +2889,7 @@
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Lektion 2.5</div>'+
-        '<h1 class="ts-hero__title">DB VI – VII :<br><span class="ts-gold">GK und Löhne</span></h1>'+
+        '<h1 class="ts-hero__title">DB VI – VIII :<br><span class="ts-gold">GK und Löhne</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
     if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
@@ -3691,7 +3691,7 @@
   #tsalgcart *{box-sizing:border-box}
   #tsalgcart .tsac-inner{width:min(1280px,92vw);margin:0 auto}
   #tsalgcart .tsac-head{text-align:center;margin:0 0 30px}
-  #tsalgcart .tsac-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
+  #tsalgcart .tsac-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.06em;text-transform:none;color:#c7b489;margin:0 0 14px}
   #tsalgcart .tsac-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GOLD},.7)}
   #tsalgcart .tsac-title{margin:0 0 12px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:clamp(30px,4.1vw,52px);line-height:1.06;letter-spacing:-.02em;color:#fff}
   #tsalgcart .tsac-title .g{color:#c7b489}
@@ -3747,7 +3747,7 @@
   #tsac-detail .tsacd-imgwrap{height:100%;border-radius:16px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08)}
   #tsac-detail .tsacd-imgwrap img{display:block;width:100%;height:100%;object-fit:cover}
   #tsac-detail .tsacd-info{display:flex;flex-direction:column;min-height:0;height:100%}
-  #tsac-detail .tsacd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c7b489;margin:2px 0 10px}
+  #tsac-detail .tsacd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:none;color:#c7b489;margin:2px 0 10px}
   #tsac-detail .tsacd-title{font-family:"Lineal TS", var(--font-sans, ${SANS});font-size:clamp(26px,3.2vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.06;color:#fff;margin:0 0 20px;flex:none}
   #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:10px;scrollbar-width:thin}
   #tsac-detail .tsacd-content::-webkit-scrollbar{width:7px}
@@ -3828,7 +3828,7 @@
         '<div class="tsacd-grid">'+
           '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'"></div>'+
           '<div class="tsacd-info">'+
-            '<div class="tsacd-eyebrow">Der Warenkorb · DB IX</div>'+
+            '<div class="tsacd-eyebrow">DB IX : Allergene</div>'+
             '<h2 class="tsacd-title">'+(idx+1)+'. '+esc(it.name)+'</h2>'+
             '<div class="tsacd-content">'+rows+'</div>'+
             '<div class="tsacd-buy">'+
@@ -3864,7 +3864,7 @@
     var sec=document.createElement('section'); sec.id='tsalgcart';
     sec.innerHTML='<div class="tsac-inner">'+
       '<div class="tsac-head">'+
-        '<div class="tsac-eyebrow">DB IX · Allergene</div>'+
+        '<div class="tsac-eyebrow">DB IX : Allergene</div>'+
         '<h3 class="tsac-title">Deine Allergen-Liste. <span class="g">Schritt für Schritt.</span></h3>'+
         '<p class="tsac-sub">Jedes Allergen liegt als Karte im Regal. Klick es auf, lies die Anleitung, hak es ab — die „Währung" ist die Unverträglichkeit, die dahintersteht.</p>'+
       '</div>'+
@@ -6478,15 +6478,15 @@
        Anker = leere Divs im #ts11page-Modul. */
     { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'menue_rechner',
       anchorSel:'#ts11wk1', steps:TS11_STEPS_W1,
-      eyebrow:'Warenkorb 1 · DB I — Menürechner',
+      eyebrow:'DB XII : Menürechner',
       title:'Der <span>Menürechner</span>.',
-      sub:'Jede Karte ist eine Spalte der Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung von DB I ist der Menüpreis.',
+      sub:'Jede Karte ist eine Spalte der Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung von DB XII ist der Menüpreis.',
       summary:'Menüpreis', chain:true },
     { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'kunden_master',
       anchorSel:'#ts11wk2', steps:TS11_STEPS_W2,
-      eyebrow:'Warenkorb 2 · DB II — Kunden',
+      eyebrow:'DB XIII : Kunden Datenbank',
       title:'Die <span>Kunden-Datenbank</span>.',
-      sub:'Jeder Auftraggeber mit Kontakt, Typ und Status — die Währung von DB II ist der Menüpreis.',
+      sub:'Jeder Auftraggeber mit Kontakt, Typ und Status — die Währung von DB XIII ist der Menüpreis.',
       summary:'Menüpreis', chain:true,
       relations:[
         { type:'ghost', name:'Menürechner Master Database', target:'Gegenspalte · aus dem Menürechner',
@@ -6497,12 +6497,12 @@
       ] },
     { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'kostenaufstellung',
       anchorSel:'#ts11wk3', steps:TS11_STEPS_W3,
-      eyebrow:'Warenkorb 3 · DB III — Kostenaufstellung',
+      eyebrow:'DB IXX : Kostenaufstellung',
       title:'Die <span>Kostenaufstellung</span>.',
-      sub:'Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen — die Währung von DB III ist der Stückpreis in Euro.',
+      sub:'Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen — die Währung von DB IXX ist der Stückpreis in Euro.',
       summary:'Stückpreis', chain:true },
     { path:/\/zutatenliste\/?$/, kachel:'db4_zutaten',
-      eyebrow:'Der Warenkorb · DB IV',
+      eyebrow:'DB IV : Zutaten',
       title:'Deine Zutaten. <span>Gramm für Gramm</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB IV ist die Portionsgröße.',
       /* Relation-Kacheln (erscheinen im Nachgang). DB IV baut die „Inventar Produkt"-Verknüpfung
@@ -6515,10 +6515,10 @@
           desc:'Gegenspalte der Zutaten-Verknüpfung aus den Rezepturen — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg',
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB V : Rezepturen</b> die Verknüpfung „Zutaten" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Rezepturen</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Rezepturen diese Zutat als Baustein steckt.</p>' },
-        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Zutaten-Verknüpfung aus den Gerichten — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg',
-          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „Zutaten" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Zutat direkt (Ready-to-Use) eingehängt ist.</p>' }
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB XI : Gerichte &amp; Getränke</b> die Verknüpfung „Zutaten" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Zutat direkt (Ready-to-Use) eingehängt ist.</p>' }
       ],
       summary:'Einwaage', chain:true },
     /* DB V Rezepturen — Phasen liegen hier in einem Tab-Widget (.notion-tabs, 4 Phasen),
@@ -6526,7 +6526,7 @@
        Tabs tragen "Grundgerüst", die zweite Finance-Erweiterung-Tabgruppe nicht). */
     { path:/\/rezepturen\/?$/, kachel:'db5_rezepturen',
       container:'.notion-tabs', marker:/Grundgerüst/,
-      eyebrow:'Der Warenkorb · DB V',
+      eyebrow:'DB V : Rezepturen',
       title:'Deine Rezepturen. <span>Portion für Portion</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB V ist die Portionsgröße.',
       summary:'Portionsmenge', chain:true },
@@ -6535,7 +6535,7 @@
        trägt kein "Finance". Zweites Regal unter DB V auf derselben Seite (eigene kachel_id → eigene rootId). */
     { path:/\/rezepturen\/?$/, kachel:'db5_finance_personal',
       container:'.notion-tabs', marker:/Finance/,
-      eyebrow:'Der Warenkorb · DB V · Finance',
+      eyebrow:'DB V : Rezepturen · Finance',
       title:'Erweiterung nach <span>Finance</span>',
       sub:'Wenn du Gemeinkosten & Mitarbeiterlöhne angelegt hast, können wir diese Tabelle erweitern. Wir wollen jetzt wissen: Was kostet es uns, eine Charge zuzubereiten? Wareneinsatz + Personalkosten pro Arbeitsvorgang (Gemeinkosten sind optional ebenfalls verknüpfbar). Dafür ergänzen wir weitere Spalten in der Rezepturen-Liste.',
       /* keepSteps: Finance-Schritt 7 „Verwendet in" (→ DB Gerichte) ist keine hier baubare Spalte —
@@ -6544,10 +6544,10 @@
          (Rezepturen/Homemade-Ansicht) wechselseitig anlegst → Ghost (unten). Muster wie db0 „Packaging / Co.". */
       keepSteps:6,
       relations:[
-        { type:'ghost', name:'Verwendet in', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+        { type:'ghost', name:'Verwendet in', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Inhouse-Production-Verknüpfung aus den Gerichten — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/gerichte/rote-bete-risotto.jpg',
-          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „Produkte Inhouse Production" (deine Rezepturen als Inhouse-Production-Ansicht) mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Verwendet in</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Rezeptur als Baustein steckt.</p>' }
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB XI : Gerichte &amp; Getränke</b> die Verknüpfung „Produkte Inhouse Production" (deine Rezepturen als Inhouse-Production-Ansicht) mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Verwendet in</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Rezeptur als Baustein steckt.</p>' }
       ],
       summary:'Portionsmenge', chain:true },
     /* DB VI Gemeinkosten + DB VII Mitarbeiterlöhne — DB VII liegt als eigenes Tab-Widget
@@ -6557,13 +6557,13 @@
        Widget, panel trennt den jeweiligen Sub-Tab → zwei getrennte Warenkörbe untereinander. */
     { path:/\/gemeinkosten-mitarbeiterlhne\/?$/, kachel:'db6_gemeinkosten',
       container:'.notion-tabs', marker:/Gemeinkosten/, panel:/GK Position/,
-      eyebrow:'Der Warenkorb · DB VI',
+      eyebrow:'DB VI : Gemeinkosten',
       title:'Deine Gemeinkosten. <span>Posten für Posten</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VI ist der Euro.',
       summary:'Fixkosten', chain:true },
     { path:/\/gemeinkosten-mitarbeiterlhne\/?$/, kachel:'db6_gemeinkostenannahmen',
       container:'.notion-tabs', marker:/Gemeinkosten/, panel:/Kostenfaktoren/,
-      eyebrow:'Der Warenkorb · DB VI · Annahmen',
+      eyebrow:'DB VII : Gemeinkostenannahmen',
       title:'Deine <span>Gemeinkostenannahmen</span>.',
       sub:'Aus deinen Fixkosten wird die Rechen-Ebene: Monat, Kostenfaktoren, GK-Kosten pro Monat, Absatz pro Monat und am Ende die Gemeinkosten pro Produkt.',
       /* Relation-Kacheln (bestätigt Robert 2026-07-14): zwei Gegenspalten erscheinen im Nachgang.
@@ -6572,10 +6572,10 @@
          (2) „Master Overview" — die 📊 Kostenauswertung Master (Key Metrics) verknüpft per „GK Monat"
              wechselseitig auf die Annahmen → Gegenspalte „Master Overview" erscheint hier von allein. */
       relations:[
-        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der GK-Verknüpfung aus den Gerichten — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/gerichte/lammkarree.jpg',
-          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „GK Monat für DB III" mit <b>wechselseitiger Verbindung</b> anlegst — über die legen deine Gerichte anteilig Gemeinkosten um.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte auf diese Gemeinkosten-Annahme umgelegt werden.</p>' },
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB XI : Gerichte &amp; Getränke</b> die Verknüpfung „GK Monat für DB III" mit <b>wechselseitiger Verbindung</b> anlegst — über die legen deine Gerichte anteilig Gemeinkosten um.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte auf diese Gemeinkosten-Annahme umgelegt werden.</p>' },
         { type:'ghost', name:'Master Overview', target:'Gegenspalte · aus Key Metrics', flag:'erscheint automatisch',
           desc:'Gegenspalte der „GK Monat"-Verknüpfung aus der Kostenauswertung Master — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/buchhaltung-rechner.jpg',
@@ -6584,19 +6584,19 @@
       summary:'Annahmen', chain:true },
     { path:/\/gemeinkosten-mitarbeiterlhne\/?$/, kachel:'db7_mitarbeiterloehne',
       container:'.notion-tabs', marker:/Mitarbeiter/,
-      eyebrow:'Der Warenkorb · DB VII',
+      eyebrow:'DB VIII : Mitarbeiterlöhne',
       title:'Deine Mitarbeiterlöhne. <span>Netto für Netto</span>.',
-      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VII ist das Nettogehalt.',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VIII ist das Nettogehalt.',
       /* Relation-Kachel: „Gerichte" = Gegenspalte der DB-VIII-„Mitarbeiter"-Verknüpfung
          (real in Roberts 👤-Mitarbeiter-DB heißt sie „Bereitet zu"), erscheint automatisch.
          Der frühere „Rezepturen"-Ghost (DB V-Finance) wurde 2026-07-14 ENTFERNT — Robert hat
          die „Mitarbeiter Zubereitung"→Mitarbeiter-Verknüpfung real nicht eingerichtet
          (gegen die echte 👤-Mitarbeiter-DB verifiziert: keine Rezepturen-Gegenspalte). */
       relations:[
-        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+        { type:'ghost', name:'Gerichte', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Mitarbeiter-Verknüpfung aus den Gerichten — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/gerichte/entenbrust.jpg',
-          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB VIII : Gerichte &amp; Getränke</b> die Verknüpfung „Mitarbeiter" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte dieser Mitarbeiter zubereitet.</p>' },
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB XI : Gerichte &amp; Getränke</b> die Verknüpfung „Mitarbeiter" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Gerichte dieser Mitarbeiter zubereitet.</p>' },
         { type:'later', name:'Mitarbeiterkleidung', target:'Verknüpfung · Arbeitskleidung', flag:'später verknüpfen',
           desc:'Verknüpfung zur Arbeitskleidung des Mitarbeiters — baust du selbst.',
           img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/serviceschuerze.jpg',
@@ -6615,18 +6615,18 @@
        Regal gebündelt (multi:true, expect:4). marker /Phase/ trifft alle vier. 37 Schritte. */
     { path:/\/gerichte-getrnke-finaler-schritt\/?$/, kachel:'db8_gerichte',
       anchorSel:'#ts8wk', steps:TS8_STEPS,
-      eyebrow:'Der Warenkorb · DB VIII',
+      eyebrow:'DB XI : Gerichte & Getränke',
       title:'Deine Gerichte & Getränke. <span>Spalte für Spalte</span>.',
-      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB VIII sind die Kosten pro Gericht, Getränk oder Dessert.',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB XI sind die Kosten pro Gericht, Getränk oder Dessert.',
       summary:'Kosten pro Portion', chain:true },
     { path:/\/allergene-bersicht\/?$/, kachel:'db10_packaging',
       anchorSel:'#ts10wk', steps:TS_PK_STEPS,
-      eyebrow:'Der Warenkorb · DB X',
+      eyebrow:'DB X : Packaging',
       title:'Dein Packaging. <span>Paket für Paket</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB X ist der Preis pro Unit in Euro.',
       summary:'Preis pro Unit', chain:true },
     { path:/\/inventurliste\/?$/, kachel:'db0_inventurliste',
-      eyebrow:'Der Warenkorb · DB 0',
+      eyebrow:'DB 0 : Inventurliste',
       title:'Deine Inventurliste. <span>Schritt für Schritt</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB 0 ist der Preis.',
       /* Relation-Kacheln (erscheinen im Nachgang) — ans Ende des Regals, zählen gesondert.
@@ -6649,15 +6649,15 @@
           desc:'Spiegelspalte der Zutaten-Verknüpfung — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg',
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> selbst an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB IV : Zutaten</b> die Verknüpfung „Inventar Produkt" mit <b>wechselseitiger Verbindung</b> zur Inventurliste anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Ist Zutat</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Zutaten dieses Inventarprodukt verwenden.</p>' },
-        { type:'ghost', name:'Packaging / Co.', target:'Gegenspalte · aus DB VIII Gerichte', flag:'erscheint automatisch',
+        { type:'ghost', name:'Packaging / Co.', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Packaging-Verknüpfung aus den Gerichten — erscheint von allein.',
           img:'https://tastyrob123.github.io/kurs/img/packaging/kuchenbox.jpg',
-          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie ist die <b>Gegenspalte</b> der Verknüpfung „Packaging", die du erst in <b>DB VIII : Gerichte &amp; Getränke</b> anlegst — dort wählst du je Gericht die passende Verpackung, und ihr Preis fließt in den Wareneinsatz. Ist die Verbindung wechselseitig, taucht „Packaging / Co." hier automatisch auf und zeigt, welche Gerichte diese Verpackung nutzen.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Die Verpackung selbst liegt als normales Produkt in deiner Inventurliste — die „Packaging"-Seite ist nur eine gefilterte Ansicht davon.</p>' }
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie ist die <b>Gegenspalte</b> der Verknüpfung „Packaging", die du erst in <b>DB XI : Gerichte &amp; Getränke</b> anlegst — dort wählst du je Gericht die passende Verpackung, und ihr Preis fließt in den Wareneinsatz. Ist die Verbindung wechselseitig, taucht „Packaging / Co." hier automatisch auf und zeigt, welche Gerichte diese Verpackung nutzen.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Die Verpackung selbst liegt als normales Produkt in deiner Inventurliste — die „Packaging"-Seite ist nur eine gefilterte Ansicht davon.</p>' }
       ],
       summary:'Stückpreis', chain:true },
     { path:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, kachel:'db13_lieferanten',
       marker:/Kundennummer/,
-      eyebrow:'DB I - Lieferpartner',
+      eyebrow:'DB I : Lieferpartner',
       title:'Deine Lieferpartner. <span>An einem Ort</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB I ist die Mindestbelieferung.<br>Um zu starten: / → neue Tabellenansicht / Datenbank → DB I : Lieferpartner Übersicht.',
       relations:[
@@ -6683,14 +6683,14 @@
          bauen real Spalten in DB I / Inventurliste (Cross-Reference) und sind dort
          bereits als Relation-Kacheln abgebildet (db0 + db13_lieferanten) → hier raus. */
       keepSteps:7,
-      eyebrow:'DB II - Ansprechpartner',
+      eyebrow:'DB II : Ansprechpartner',
       title:'Deine Ansprechpartner. <span>In einer Übersicht</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB II ist die Jahresrückvergütung.<br>Um zu starten: / → neue Tabellenansicht / Datenbank → DB II : Ansprechpartner Übersicht.',
       summary:'Jahresrückvergütung', cta:'Paket auswählen', ctaDone:'Paket gewählt', chain:true },
     /* Drittes Regal auf derselben Seite: DB III Lieferverträge (Marker eindeutig = Vertragsbezeichnung) */
     { path:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, kachel:'db13_vertraege',
       marker:/Vertragsbezeichnung/,
-      eyebrow:'DB III - Lieferantenverträge',
+      eyebrow:'DB III : Lieferantenverträge',
       title:'Deine Lieferverträge. <span>Sauber dokumentiert</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB III ist der Vertragswert.<br>Um zu starten: / → neue Tabellenansicht / Datenbank → DB III : Lieferverträge Übersicht.',
       /* DB III „Kontakt" ist ein NORMALER Lektions-Schritt (#3, Rollup über die in Schritt 2
@@ -6705,7 +6705,7 @@
   #tsshop *{box-sizing:border-box}
   #tsshop .tss-inner{max-width:1280px;margin:0 auto}
   #tsshop .tss-head{text-align:center;margin-bottom:30px}
-  #tsshop .tss-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsshop .tss-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:none;color:#c7b489;margin-bottom:12px}
   #tsshop .tss-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   #tsshop .tss-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(32px,4.4vw,52px);font-weight:600;letter-spacing:-.02em;line-height:1.1;color:#fff;margin:0 0 12px}
   #tsshop .tss-title span{color:#c7b489}
@@ -6826,7 +6826,7 @@
   #tsshop-detail .tsd-imgwrap{height:100%;border-radius:14px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08)}
   #tsshop-detail .tsd-imgwrap img{display:block;width:100%;height:100%;object-fit:cover}
   #tsshop-detail .tsd-info{display:flex;flex-direction:column;min-height:0;height:100%}
-  #tsshop-detail .tsd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:2px 0 8px}
+  #tsshop-detail .tsd-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:none;color:#c7b489;margin:2px 0 8px}
   #tsshop-detail .tsd-title{font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:#fff;margin:22px 0 12px;flex:none}
   #tsshop-detail .tsd-content{flex:1;min-height:0;overflow-y:auto;padding-right:8px;font-size:.84rem;line-height:1.55;color:rgba(255,255,255,.72);scrollbar-width:thin}
   #tsshop-detail .tsd-content::-webkit-scrollbar{width:7px}
@@ -9094,7 +9094,7 @@
     ['inv', 7.9,  65.8, 'st',  'Inventarprodukt', 'DB 0',       'below'],
     ['zut', 30,   65.8, 'zt',  'Zutat',           'DB IV',      'below'],
     ['rez', 52,   21.6, 'rez', 'Rezept',          'DB V',       'above'],
-    ['gg',  74.2, 65.8, 'dn',  'Gericht / Getränk','DB VIII',   'below'],
+    ['gg',  74.2, 65.8, 'dn',  'Gericht / Getränk','DB XI',   'below'],
     ['men', 93.3, 65.8, 'dn',  'Menü',            'Kalkulation','below']
   ];
   function build(){
@@ -9271,7 +9271,7 @@
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.6 – DB VI–VII: GK & Löhne" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.6 – DB VI–VIII: GK & Löhne" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -9933,7 +9933,7 @@
         </div>
       </div>
       <div class="ch-col" data-col="2">
-        <p class="ch-collbl">DB VIII · Gerichte</p>
+        <p class="ch-collbl">DB XI · Gerichte</p>
         <div class="ch-card" id="ts11g0">
           <p class="ch-eye">Hauptgang</p><p class="ch-name">Rinderfilet mit Gratin</p>
           <div class="ch-row"><span class="ch-k">Wareneinsatz</span><span class="ch-v" id="ts11g0v">7,84&nbsp;€</span></div>
@@ -9952,7 +9952,7 @@
         <p class="ch-collbl">Menükalkulation</p>
         <div class="ch-menu" id="ts11menu">
           <span class="ch-chg" id="ts11mchg">Neu berechnet</span>
-          <p class="m-eye">DB I&#8211;III · Catering-Position</p>
+          <p class="m-eye">DB XII&#8211;IXX · Catering-Position</p>
           <p class="m-title">Menü &raquo;Herbstabend&laquo;</p>
           <p class="m-meta">3 Gänge &middot; 80 Personen</p>
           <div class="m-course"><span>Velouté</span><span class="dots"></span><span class="p">2,74&nbsp;€</span></div>
@@ -10043,11 +10043,11 @@
   <div class="wrap">
     <div id="ts11emp">
       <div class="col">
-        <div class="db-hd">DB I – III : <span class="g">Menükalkulation</span></div>
+        <div class="db-hd">DB XII – IXX : <span class="g">Menükalkulation</span></div>
         <div class="db-row"><span class="db-rail"></span><span class="db-fill"></span>
-          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB I</span>&nbsp;Menürechner</span>
-          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB II</span>&nbsp;Kunden</span>
-          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB III</span>&nbsp;Angebot</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB XII</span>&nbsp;Menürechner</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB XIII</span>&nbsp;Kunden</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB IXX</span>&nbsp;Angebot</span>
         </div>
       </div>
       <div class="col">
