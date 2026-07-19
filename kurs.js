@@ -13665,14 +13665,14 @@ var TSISL_ZUG_SCHLUESSEL=[
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function ph(icon,label){ return '<div class="vfl-card__ph"><span class="ic">'+(icon||'🖼')+'</span>'+(label?'<span>'+esc(label)+'</span>':'<span>Bild folgt</span>')+'</div>'; }
 
-  /* backoffice: alle registrierten Lektionen ergeben den Modul-Gesamtnenner */
+  /* backoffice: alle registrierten Lektionen (alle Warenkörbe) ergeben den Modul-Gesamtnenner */
+  function shopsOf(L){ return L?(L.shops||(L.shop?[L.shop]:[])):[]; }
   function backoffice(){
     var keys=Object.keys(LESSONS), done=0, total=0;
     keys.forEach(function(k){
-      var L=LESSONS[k]; if(!L||!L.shop) return;
-      var cards=(L.shop.cards||[]).filter(function(c){return !c.ghost;}); /* Ghost zählt nicht */
-      total+=cards.length;
-      cards.forEach(function(c,i){ if(localStorage.getItem('done-vfl-'+k+'-'+i)==='1') done++; });
+      shopsOf(LESSONS[k]).forEach(function(s,si){
+        (s.cards||[]).forEach(function(c,i){ if(c.ghost) return; total++; if(localStorage.getItem('done-vfl-'+k+'-'+si+'-'+i)==='1') done++; });
+      });
     });
     return total?Math.round(done/total*100):0;
   }
@@ -13710,11 +13710,11 @@ var TSISL_ZUG_SCHLUESSEL=[
     var nxt=L.next?'<div class="vfl-next"><a href="'+L.next.href+'"><span><small>Nächste Insel</small>'+esc(L.next.label)+'</span> →</a></div>':'';
     return '<section class="vfl-sec vfl-end"><h2 class="vfl-h2">'+(L.endTitle||'Was du <span class="g">mitnimmst</span>')+'</h2><ul class="vfl-learn">'+lis+'</ul>'+nxt+'</section>';
   }
-  function shopSec(L,slug){
-    var s=L.shop; if(!s) return '';
+  function shopSec(s,slug,si){
+    if(!s) return '';
     var cards=s.cards.map(function(c,i){
       var cls='vfl-card'+(c.ghost?' ghost':'')+(c.later?' later':'');
-      var done=localStorage.getItem('done-vfl-'+slug+'-'+i)==='1';
+      var done=localStorage.getItem('done-vfl-'+slug+'-'+si+'-'+i)==='1';
       if(done) cls+=' done';
       return '<div class="'+cls+'" data-i="'+i+'">'+
         '<div class="vfl-sweep"></div>'+
@@ -13722,7 +13722,7 @@ var TSISL_ZUG_SCHLUESSEL=[
         '<div class="vfl-card__b"><p class="vfl-card__name">'+esc(c.name)+'</p><p class="vfl-card__desc">'+esc((c.overlay||'').split('. ')[0])+'</p><span class="vfl-card__val">'+esc(c.val||'')+'</span></div>'+
       '</div>';
     }).join('');
-    return '<section class="vfl-sec vfl-shop" id="vfl-shop-'+slug+'">'+
+    return '<section class="vfl-sec vfl-shop" id="vfl-shop-'+slug+'-'+si+'">'+
       '<div class="vfl-shop__head"><span class="vfl-shop__eye">'+esc(s.eyebrow)+'</span>'+
       '<h2 class="vfl-shop__title">'+s.title+'</h2><p class="vfl-shop__sub">'+esc(s.sub)+'</p></div>'+
       '<div class="vfl-nav"><button data-d="-1">‹</button><button data-d="1">›</button></div>'+
@@ -13734,12 +13734,12 @@ var TSISL_ZUG_SCHLUESSEL=[
   }
 
   /* ---------- Warenkorb interaction ---------- */
-  function wireShop(root,L,slug){
-    var s=L.shop; if(!s) return;
-    var sec=root.querySelector('#vfl-shop-'+slug); if(!sec) return;
+  function wireShop(root,s,slug,si){
+    if(!s) return;
+    var sec=root.querySelector('#vfl-shop-'+slug+'-'+si); if(!sec) return;
     var track=sec.querySelector('.vfl-track');
     var buildable=s.cards.filter(function(c){return !c.ghost;}).length;
-    function key(i){ return 'done-vfl-'+slug+'-'+i; }
+    function key(i){ return 'done-vfl-'+slug+'-'+si+'-'+i; }
     function refresh(){
       var doneCount=0, localSum=0;
       s.cards.forEach(function(c,i){ if(!c.ghost && localStorage.getItem(key(i))==='1'){ doneCount++; localSum+=(typeof c.num==='number'?c.num:1); } });
@@ -13816,18 +13816,19 @@ var TSISL_ZUG_SCHLUESSEL=[
     sc.classList.add('vfl-scope');
     if(document.getElementById('vfl')) return;
     var box=document.createElement('div'); box.id='vfl';
+    var shopsHtml=shopsOf(L).map(function(s,si){return shopSec(s,slug,si);}).join('');
     box.innerHTML =
       heroSec(L) +
       animSec(L.anim1) +
       (L.video?macSec(L.video,false):'') +
-      shopSec(L,slug) +
+      shopsHtml +
       (L.ergebnis?macSec(L.ergebnis,true):'') +
       animSec(L.anim2) +
       tipSec(L.tip) +
       endSec(L);
     var nr=sc.querySelector('.notion-root');
     if(nr) sc.insertBefore(box,nr); else sc.appendChild(box);
-    wireShop(box,L,slug);
+    shopsOf(L).forEach(function(s,si){ wireShop(box,s,slug,si); });
     reveal(box);
     // native Notion-Header + leere Platzhalter ausblenden
     var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
@@ -14030,5 +14031,171 @@ var TSISL_ZUG_SCHLUESSEL=[
       'Ein Katalog ist eine Übergabe — mit Name, Kategorie und Herkunft reichst du das Konzept weiter, ohne etwas zu erklären.'
     ],
     next:{ href:'/zielgruppenanalyse', label:'Zielgruppenanalyse' }
+  };
+})();
+
+/* VFL Insel — Zielgruppenanalyse */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['zielgruppenanalyse']={
+    hero:{ eyebrow:'Vision Frame · Markt & Positionierung', titleHtml:'Ziel<span class="g">gruppenanalyse</span>' },
+    intro:[
+      'Du kannst kein Angebot schärfen, das du für „alle" baust. Solange deine Zielgruppe ein vages Gefühl bleibt, entscheidest du bei Preis, Kanal und Ansprache im Nebel. In dieser Insel machst du aus dem Gefühl eine Struktur: eine Datenbank, in der jedes Segment ein Gesicht, einen Alltag und klare Merkmale bekommt.',
+      'Du baust jede <b>Persona</b> von außen nach innen — wer die Person ist, was sie braucht, woran sie ihre Entscheidung festmacht und über welchen Kanal du sie triffst. Am Ende steht die Priorität: Welches Segment bedienst du zuerst? Damit wird aus einer langen Wunschliste eine Reihenfolge, an der du wirklich arbeiten kannst.'
+    ],
+    anim1:{ title:'Von der Statistik <span class="g">zur Persona</span>', lead:'Dieselben Daten — aber erst mit Gesicht und Alltag werden sie zu etwas, mit dem du arbeiten kannst.', nodes:[
+      {ic:'📊',t:'Datenzeile',s:'„25–35 · mittleres Einkommen" — leblos.'},
+      {ic:'🙂',t:'Name & Gesicht',s:'„Lisa die Marketing-Managerin".'},
+      {ic:'🎯',t:'Vollständige Karte',s:'Bedürfnisse, Pain Points, Kanäle.'}
+    ]},
+    video:{ heading:'Die Persona-DB <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst und eine Persona von der Beschreibung über die Bedürfnisse bis zu den Kanälen füllst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🎯 Zielgruppenanalyse',
+      title:'Deine Zielgruppe. <span class="g">Persona für Persona.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Lege oben auf der Seite einen Button an, der beim Klick einen neuen Eintrag erzeugt. So legst du jede neue Zielgruppe mit einem Klick an. In Notion: /Button → Aktion „Seite hinzufügen zu" → diese Datenbank.',ex:'„＋ Neue Zielgruppe"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🎯',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstelle die Datenbank als Inline-Tabelle. Sie ist das Gefäß für alle deine Zielgruppen und Personas. In Notion: /Datenbank – Inline → Titel „Zielgruppenanalyse" → Icon 🎯.',ex:'„Zielgruppenanalyse"'},
+        {tag:'3',name:'Zielgruppe',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titelspalte trägt den Namen des Segments. Halte ihn beschreibend, nicht generisch: nicht „Kunden", sondern „Berufstätige Urban Professionals".',ex:'„Berufstätige Urban Professionals"'},
+        {tag:'4',name:'Persona Name',typeLabel:'Text',icon:'🙂',imgLabel:'Text',val:'Text',overlay:'Gib der Zielgruppe ein Gesicht und einen Namen, damit aus einer Statistik eine vorstellbare Person wird. Das schärft jede spätere Entscheidung.',ex:'„Lisa die Marketing-Managerin"'},
+        {tag:'5',name:'Beschreibung',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Zwei bis drei Sätze zum Alltag der Person: wer sie ist, wie sie lebt, was sie umtreibt. Der Kontext, aus dem alle weiteren Felder folgen.',ex:'„Anfang 30, Marketing, wohnt innenstadtnah, viel unterwegs."'},
+        {tag:'6',name:'Altersgruppe',typeLabel:'Auswahl · 5',icon:'◧',imgLabel:'Auswahl',val:'5 Optionen',overlay:'Fünf Stufen: 18-25, 25-35, 35-45, 45-55, 55+. Eine Auswahl pro Eintrag — das Alter grenzt Ansprache und Kanäle grob ein.',ex:'25-35'},
+        {tag:'7',name:'Demografische Merkmale',typeLabel:'Text',icon:'📇',imgLabel:'Text',val:'Text',overlay:'Halte die harten Rahmendaten fest: Beruf, Haushalt, Bildung, Lebensphase. Nüchterne Fakten, keine Interpretation.',ex:'„Vollzeit angestellt, ledig, Hochschulabschluss."'},
+        {tag:'8',name:'Wohnort/Region',typeLabel:'Text',icon:'📍',imgLabel:'Text',val:'Text',overlay:'Beschreibe, wo die Zielgruppe lebt und wie sie sich bewegt — das entscheidet über Standort und Erreichbarkeit.',ex:'„Innenstadtnah, arbeitet im Büroviertel, ÖPNV."'},
+        {tag:'9',name:'Durchschnittseinkommen',typeLabel:'Auswahl · 6',icon:'◧',imgLabel:'Auswahl',val:'6 Optionen',overlay:'Sechs Stufen von < 30.000 € bis > 100.000 € plus „Unternehmen variabel". Ordnet grob ein, was finanziell möglich ist — Grundlage fürs Budget-Feld.',ex:'50.000 - 75.000 €'},
+        {tag:'10',name:'Bedürfnisse',typeLabel:'Text',icon:'💜',imgLabel:'Text',val:'Text',overlay:'Benenne, was die Zielgruppe im Kern sucht — den Wunsch hinter dem Kauf, nicht das Produkt. Hier trennt sich Verständnis von Vermutung.',ex:'„Verlässliche Qualität ohne Reibung, kurz durchatmen."'},
+        {tag:'11',name:'Pain Points',typeLabel:'Text',icon:'⚡',imgLabel:'Text',val:'Text',overlay:'Das Gegenstück zu den Bedürfnissen: Welche konkreten Frustrationen löst dein Angebot? Je präziser, desto besser die Ansprache.',ex:'„Lange Wartezeiten, unübersichtliche Angebote."'},
+        {tag:'12',name:'Entscheidungskriterien',typeLabel:'Text',icon:'⚖',imgLabel:'Text',val:'Text',overlay:'Woran macht diese Person eine Kaufentscheidung fest — Preis, Qualität, Vertrauen, Empfehlung, Bequemlichkeit? Das lenkt, worauf du dein Angebot ausrichtest.',ex:'„Empfehlung, Nähe zum Büro, verlässliche Qualität."'},
+        {tag:'13',name:'Kaufverhalten',typeLabel:'Text',icon:'🛒',imgLabel:'Text',val:'Text',overlay:'Wie wird gekauft: spontan oder geplant, wie oft, über welchen Kanal, wie preissensibel, wie loyal.',ex:'„Mehrmals pro Woche, spontan, wird schnell Stammgast."'},
+        {tag:'14',name:'Budget/Zahlungsbereitschaft',typeLabel:'Auswahl · 4',icon:'◧',imgLabel:'Auswahl',val:'4 Optionen',overlay:'Vier Stufen von Niedrig bis Premium. Übersetzt das Einkommen in das, was die Person tatsächlich ausgibt — die realistische Zahlungsbereitschaft.',ex:'Mittel (50-200 €/Monat)'},
+        {tag:'15',name:'Erreichbarkeit',typeLabel:'Mehrfachauswahl · 12',icon:'📡',imgLabel:'Status',val:'12 Kanäle',overlay:'Wähle die Kanäle, über die du diese Zielgruppe wirklich erreichst (Instagram, Content Marketing, Empfehlungen …). Mehrfachauswahl ist bewusst — die meisten Segmente laufen über mehrere Kanäle.',ex:'Instagram, LinkedIn, Empfehlungen'},
+        {tag:'16',name:'Priorität',typeLabel:'Status · 4',icon:'◔',imgLabel:'Status',val:'4 Optionen',overlay:'Status-Feld in drei Gruppen: To-do (Niedrig), In Arbeit (Mittel, Hoch), Fertig (Primärzielgruppe). So siehst du auf einen Blick, welches Segment du zuerst bedienst.',ex:'Primärzielgruppe'},
+        {tag:'17',name:'Datum',typeLabel:'Datum',icon:'📅',imgLabel:'Datum',val:'Datum',overlay:'Halte fest, wann du die Analyse erstellt oder zuletzt überarbeitet hast — so erkennst du, welche Persona veraltet.',ex:'28.06.2026'},
+        {tag:'18',name:'Place',typeLabel:'Ort',icon:'🗺',imgLabel:'Ort',val:'Ort',overlay:'Eine Ort-Spalte (Notion-Typ „Ort"). Verankert die Zielgruppe optional an einem geografischen Punkt, etwa dem Einzugsgebiet. Leer lassen, wenn dein Angebot ortsunabhängig ist.',ex:'„Innenstadt (Einzugsgebiet Café)"'}
+      ]
+    },
+    ergebnis:{ heading:'Die Zielgruppe <span class="g">mit Reihenfolge</span>', text:'Am Ende hast du mehrere Personas, jede mit Alltag, Bedürfnissen und Kanälen — und genau eine als Primärzielgruppe markiert. Aus einer Wunschliste wird eine Reihenfolge, an der du wirklich arbeitest.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Eine <span class="g">Primärzielgruppe</span>', lead:'Nicht möglichst viele Segmente sammeln, sondern sich für eines entscheiden, an dem du zuerst arbeitest.', nodes:[
+      {ic:'🃏',t:'Vier Personas',s:'Gleich groß nebeneinander.'},
+      {ic:'⚖',t:'Priorität setzen',s:'Drei rutschen nach hinten.'},
+      {ic:'⭐',t:'Fokus',s:'Eine bekommt „Primärzielgruppe".'}
+    ]},
+    tip:{ icon:'💡', heading:'Zwei echte statt sechs erfundene', text:'Bau lieber zwei Personas, die du wirklich kennst, als sechs, die du dir ausdenkst. Fülle immer zuerst „Pain Points" und „Bedürfnisse" — wenn dir dort nichts Konkretes einfällt, kennst du das Segment noch nicht gut genug und rätst nur. Setze am Ende bewusst genau eine „Primärzielgruppe".' },
+    learnings:[
+      'Eine Zielgruppe wird erst nutzbar, wenn sie ein Gesicht und einen Alltag hat — nicht nur eine Altersspanne.',
+      'Bedürfnisse und Pain Points sind zwei Seiten derselben Sache: was die Person will und was ihr im Weg steht.',
+      'Einkommen und Zahlungsbereitschaft sind nicht dasselbe — was jemand hat, ist nicht, was er ausgibt.',
+      'Die Kanäle unter „Erreichbarkeit" entscheiden, ob dein bestes Angebot die Person überhaupt erreicht.',
+      'Ohne gesetzte Priorität bleibt jede Zielgruppe gleich wichtig — und damit keine.'
+    ],
+    next:{ href:'/konkurrenzanalyse', label:'Konkurrenzanalyse' }
+  };
+})();
+
+/* VFL Insel — Konkurrenzanalyse */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['konkurrenzanalyse']={
+    hero:{ eyebrow:'Vision Frame · Markt & Positionierung', titleHtml:'Konkurrenz<span class="g">analyse</span>' },
+    intro:[
+      'Die meisten kennen ihre Konkurrenz nur aus dem Bauch. „Die um die Ecke laufen gut" — mehr steht selten fest. In dieser Insel baust du daraus eine Datenbank, in der jeder Wettbewerber einen sauberen Steckbrief bekommt: Kategorie, Preis, Service, Atmosphäre, Bewertung.',
+      'Aber der Steckbrief ist nur die halbe Arbeit. Der Wert entsteht in den <b>Analyse-Spalten</b>: Wo ist der Betrieb stark, wo schwach, und was folgt daraus für dich? Am Ende steht kein hübsches Datenblatt, sondern eine Handlungsempfehlung. Über den Status trennst du dabei die drei Gegner, die zählen, von den zwanzig, die dich nur ablenken.'
+    ],
+    anim1:{ title:'Von der Beobachtung <span class="g">zur Handlung</span>', lead:'Die Fakten oben sind nur das Fundament — die Entscheidung entsteht darunter.', nodes:[
+      {ic:'🪪',t:'Steckbrief',s:'Kategorie, Preis, Atmosphäre, Bewertung.'},
+      {ic:'🔍',t:'Analyse',s:'Stärke, Schwäche, deine Überlegenheit.'},
+      {ic:'➡',t:'Handlung',s:'Eine klare Handlungsempfehlung.'}
+    ]},
+    video:{ heading:'Das Wettbewerbs-Radar <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du den Steckbrief anlegst und aus Stärken und Schwächen eine konkrete Handlungsempfehlung ableitest.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🎯 Konkurrenzanalyse',
+      title:'Dein Wettbewerbs-Radar. <span class="g">Betrieb für Betrieb.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Lege oben auf der Seite einen Button an, der beim Klick einen neuen Konkurrenten-Eintrag erzeugt. In Notion: /Button → Aktion „Seite hinzufügen zu" → diese Datenbank.',ex:'„＋ Neuer Wettbewerber"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🎯',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstelle die Datenbank als Inline-Tabelle. Sie ist das Gefäß, in dem jeder Konkurrent als eigener Eintrag liegt. In Notion: /Datenbank – Inline → Titel „Konkurrenzanalyse" → Icon 🎯.',ex:'„Konkurrenzanalyse"'},
+        {tag:'3',name:'Name',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titelspalte trägt den Betrieb, den du analysierst. Ein Eintrag pro Wettbewerber, klar benannt.',ex:'„Ristorante Da Vinci"'},
+        {tag:'4',name:'Standort',typeLabel:'Text',icon:'📍',imgLabel:'Text',val:'Text',overlay:'Halte fest, wo der Betrieb sitzt — Adresse oder Stadtteil reicht. So siehst du, wer wirklich in deinem Einzugsgebiet konkurriert.',ex:'„Schanzenviertel, Hamburg"'},
+        {tag:'5',name:'Kategorie',typeLabel:'Auswahl · 8',icon:'◧',imgLabel:'Auswahl',val:'8 Optionen',overlay:'Acht Optionen von Fine Dining bis Catering. Ordnet den Betriebstyp ein und macht vergleichbar, wer im selben Segment spielt wie du.',ex:'Casual Dining'},
+        {tag:'6',name:'Preisniveau',typeLabel:'Auswahl · 4',icon:'◧',imgLabel:'Auswahl',val:'4 Stufen',overlay:'Vier Stufen von € Budget bis €€€€ Premium. Zeigt, in welcher Preisklasse der Wettbewerber liegt — und ob ihr um dieselben Gäste kämpft.',ex:'€€ Moderat'},
+        {tag:'7',name:'Service-Konzept',typeLabel:'Auswahl · 6',icon:'◧',imgLabel:'Auswahl',val:'6 Optionen',overlay:'Sechs Optionen von Full Service bis Hybrid. Hält fest, wie der Betrieb bedient — das entscheidet über Personalkosten, Tempo und Gästeerlebnis.',ex:'Full Service'},
+        {tag:'8',name:'Atmosphäre',typeLabel:'Auswahl · 6',icon:'◧',imgLabel:'Auswahl',val:'6 Optionen',overlay:'Sechs Stimmungen von Gemütlich/Cozy bis Rustikal/Traditional. Beschreibt, welches Gefühl der Ort verkauft — oft der eigentliche Grund, warum Gäste wiederkommen.',ex:'Lebendig/Trendy'},
+        {tag:'9',name:'Menü-Fokus',typeLabel:'Mehrfachauswahl · 9',icon:'📡',imgLabel:'Status',val:'9 Optionen',overlay:'Neun Optionen von Regional bis Fine Dining Küche. Ein Betrieb kann mehrere Schwerpunkte haben — deshalb Mehrfachauswahl.',ex:'Regional, Saisonal'},
+        {tag:'10',name:'Zielgruppe',typeLabel:'Mehrfachauswahl · 8',icon:'📡',imgLabel:'Status',val:'8 Typen',overlay:'Acht Gästetypen von Familien bis Casual Diners. Zeigt, wen der Wettbewerber anspricht — und wo sich seine Gäste mit deinen überschneiden.',ex:'Business, Millennials/Gen Z'},
+        {tag:'11',name:'Marketing-Stärke',typeLabel:'Mehrfachauswahl · 9',icon:'📡',imgLabel:'Status',val:'9 Kanäle',overlay:'Neun Kanäle von Instagram bis Influencer. Halte fest, wo der Betrieb sichtbar ist — und welche Kanäle er auslässt.',ex:'Instagram, Google'},
+        {tag:'12',name:'Online-Bewertung',typeLabel:'Auswahl · 6',icon:'⭐',imgLabel:'Auswahl',val:'6 Stufen',overlay:'Sechs Stufen von Exzellent bis Schwach. Fasst das öffentliche Urteil in einer Note zusammen — die härteste unbezahlte Meinung über einen Betrieb.',ex:'⭐⭐⭐⭐ Sehr gut (4.0–4.4)'},
+        {tag:'13',name:'Ø Bon-Wert',typeLabel:'Zahl · €',icon:'€',imgLabel:'Zahl',val:'€ / Gast',overlay:'Zahlenspalte mit Euro-Format. Trage den geschätzten Durchschnittsbon pro Gast ein. Zusammen mit dem Preisniveau ergibt das ein Gefühl für den Umsatz pro Tisch.',ex:'34,50 €'},
+        {tag:'14',name:'Marktführerrelevanz',typeLabel:'Status · 3 Gruppen',icon:'◔',imgLabel:'Status',val:'Status',overlay:'Status-Feld in drei Gruppen: zu prüfen (Hoch), aktiv beobachtet (Direkter Wettbewerber, Marktführer), abgehakt (Niedrig, Randbereich, Irrelevant). So trennst du die wenigen ernsten Gegner vom Rauschen.',ex:'Direkter Wettbewerber'},
+        {tag:'15',name:'Stärken / USPs',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Schreib ehrlich auf, was der Betrieb gut macht und warum Gäste hingehen. Nur wer die Stärke des Gegners nüchtern benennt, findet die echte Lücke.',ex:'„Beste Lage, eingespieltes Stammpublikum."'},
+        {tag:'16',name:'Schwächen / Chancen',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Halte fest, wo der Betrieb schwächelt und welche Chance daraus für dich entsteht. Aus jeder Schwäche wird hier eine konkrete Öffnung.',ex:'„Langsamer Service zur Stoßzeit — Chance für schnelleres Konzept."'},
+        {tag:'17',name:'Unsere Überlegenheit',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Formuliere, womit du diesen Wettbewerber konkret schlägst — nicht als Wunsch, sondern als belegbarer Unterschied.',ex:'„Digitale Bestellung ohne Wartezeit, transparente Herkunft."'},
+        {tag:'18',name:'Handlungsempfehlung',typeLabel:'Text',icon:'➡',imgLabel:'Text',val:'Text',overlay:'Zieh aus der Analyse eine klare Ableitung: Was tust du als Nächstes? Ohne diesen Schritt bleibt die Analyse ein hübsches Datenblatt.',ex:'„Mittagsangebot, das ihre Wartezeit unterbietet."'},
+        {tag:'19',name:'Notizen',typeLabel:'Text',icon:'🗒',imgLabel:'Text',val:'Text',overlay:'Platz für alles, was nicht in ein festes Feld passt — Beobachtungen vom Vor-Ort-Besuch, Personalwechsel, Gerüchte.',ex:'„Neuer Küchenchef, Karte im Umbruch."'},
+        {tag:'20',name:'Website/Social',typeLabel:'URL',icon:'🔗',imgLabel:'URL',val:'Link',overlay:'Hinterlege den Link zur Online-Präsenz, damit du bei jeder Aktualisierung mit einem Klick nachschaust, statt neu zu suchen.',ex:'https://da-vinci-hamburg.de'},
+        {tag:'21',name:'Letztes Update',typeLabel:'Datum',icon:'📅',imgLabel:'Datum',val:'Datum',overlay:'Trage ein, wann du die Analyse zuletzt geprüft hast. Eine Konkurrenzanalyse veraltet schnell — das Datum verrät, welcher Eintrag eine Auffrischung braucht.',ex:'20.07.2026'}
+      ]
+    },
+    ergebnis:{ heading:'Das Radar <span class="g">mit Fokus</span>', text:'Am Ende steht eine Tabelle, in der jeder Wettbewerber seinen Steckbrief, seine Schwachstellen und deine Handlungsempfehlung trägt — und der Status hebt die zwei, drei Gegner heraus, die wirklich zählen.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Die wenigen, <span class="g">die zählen</span>', lead:'Aus einer unübersichtlichen Menge die herausheben, die deine Aufmerksamkeit wirklich verdienen.', nodes:[
+      {ic:'▦',t:'Viele Karten',s:'Alle Konkurrenten gleichwertig.'},
+      {ic:'◔',t:'Relevanz-Status',s:'Die meisten dimmen ab.'},
+      {ic:'⭐',t:'Ernste Gegner',s:'Zwei, drei treten nach vorn.'}
+    ]},
+    tip:{ icon:'💡', heading:'Der Nutzen sitzt in zwei Feldern', text:'Fülle nie einen Eintrag komplett aus, bevor du „Schwächen / Chancen" und „Handlungsempfehlung" stehen hast — der Rest ist nur Steckbrief. Setze bei jedem Eintrag ehrlich den Status: Wer alles zum „Direkten Wettbewerber" erklärt, hat am Ende keine Priorität. Und pflege „Letztes Update", sonst arbeitest du mit einem Bild, das es so nicht mehr gibt.' },
+    learnings:[
+      'Konkurrenz im Kopf ist Bauchgefühl — erst als Datenbank wird sie vergleichbar.',
+      'Der Steckbrief ordnet ein, aber der Wert steckt in der Ableitung: Schwäche → Chance → eigene Überlegenheit.',
+      'Eine Analyse ohne Handlungsempfehlung bleibt ein Datenblatt.',
+      'Der Status „Marktführerrelevanz" trennt die wenigen ernsten Gegner vom Rauschen.',
+      '„Letztes Update" hält die Analyse ehrlich — ein alter Eintrag führt in die Irre.'
+    ],
+    next:{ href:'/gastronomie-lexikon', label:'Gastronomie Lexikon' }
+  };
+})();
+
+/* VFL Insel — Gastronomie Lexikon */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['gastronomie-lexikon']={
+    hero:{ eyebrow:'Vision Frame · Markt & Positionierung', titleHtml:'Gastronomie <span class="g">Lexikon</span>' },
+    intro:[
+      'Jeder Betrieb hat seine eigenen Begriffe — Wareneinsatzquote, HACCP, Mise en place. Die meisten stehen nirgends, sie leben im Kopf von zwei, drei Leuten. Genau das ändert diese Insel: Du baust ein Lexikon, in dem jeder Begriff einmal sauber erklärt ist, sortiert nach Bereich und nach Schwierigkeit.',
+      'Klingt banal, ist aber die ideale Übung. Denn ein Lexikon braucht nur die <b>drei Grundbausteine</b> jeder Notion-Datenbank: eine Titel-Spalte für den Begriff, Auswahlfelder zum Einordnen, Textfelder für die Erklärung. Wer das hier versteht, versteht später jede Datenbank. Oben setzt du dazu einen Button, der neue Einträge mit einem Klick anlegt.'
+    ],
+    anim1:{ title:'Titel, Auswahl, <span class="g">Text</span>', lead:'Drei Feldtypen, drei Aufgaben — mehr braucht eine Datenbank im Kern nicht.', nodes:[
+      {ic:'🏷',t:'Titel',s:'Der Begriff selbst, Pflichtfeld.'},
+      {ic:'◧',t:'Auswahl',s:'Ein Klick, feste Optionen, filterbar.'},
+      {ic:'✎',t:'Text',s:'Frei, für die Erklärung.'}
+    ]},
+    video:{ heading:'Das Lexikon <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du Button und Tabelle anlegst und einen Begriff mit Kategorie, Schwierigkeit und Erklärung füllst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'📖 Gastro Lexikon',
+      title:'Dein Nachschlagewerk. <span class="g">Begriff für Begriff.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Setz oben auf die Seite einen Button, der per Klick einen neuen Lexikon-Eintrag erzeugt. Als Aktion wählst du „Seite hinzufügen zu" und zeigst auf die Gastro-Lexikon-Datenbank. So legst du jeden Begriff mit einem Klick an, statt in der Tabelle zu scrollen.',ex:'„+ Neuer Begriff"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'📖',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstelle die Datenbank „Gastro Lexikon" als Inline-Tabelle auf derselben Seite. Sie ist der Speicher hinter dem Button und trägt am Ende alle Begriffe. Vergib das Icon 📖 und den Namen.',ex:'„Gastro Lexikon"'},
+        {tag:'3',name:'Begriff',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titel-Spalte heißt „Begriff" und hält den Fachbegriff selbst. Sie ist Pflicht und lässt sich nicht löschen, nur umbenennen. Jeder Eintrag steht und fällt mit diesem Feld.',ex:'„Wareneinsatzquote"'},
+        {tag:'4',name:'Kategorie',typeLabel:'Auswahl · 9',icon:'◧',imgLabel:'Auswahl',val:'9 Optionen',overlay:'Ein Auswahlfeld mit neun festen Themenfeldern, damit sich das Lexikon nach Bereich filtern lässt: Finanzen & Controlling, Küche & Produktion, Service & Gast, Hygiene & HACCP, Recht & Compliance, Personal & Team, Marketing & Vertrieb, Warenwirtschaft, Getränke.',ex:'„Finanzen & Controlling"'},
+        {tag:'5',name:'Schwierigkeit',typeLabel:'Auswahl · 3',icon:'◧',imgLabel:'Auswahl',val:'3 Stufen',overlay:'Ein zweites Auswahlfeld mit drei Stufen: Grundlagen, Fortgeschritten, Experte. Es ordnet jeden Begriff nach Lerntiefe ein, sodass Einsteiger zuerst die Grundlagen sehen.',ex:'„Grundlagen"'},
+        {tag:'6',name:'Kurzbeschreibung',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Ein Textfeld für die Ein-Satz-Definition. Das ist die Zeile, die in der Karten- und Listenansicht direkt sichtbar ist, ohne den Eintrag zu öffnen. Halt sie knapp und trennscharf.',ex:'„Anteil des Warenwerts am Umsatz."'},
+        {tag:'7',name:'Ausführliche Beschreibung',typeLabel:'Text · lang',icon:'📄',imgLabel:'Langtext',val:'Text',overlay:'Das Langtextfeld für die volle Erklärung: Kontext, Rechenweg und ein Praxisbeispiel aus dem Betrieb. Es erscheint erst, wenn man den Eintrag anklickt. Hier steckt der eigentliche Lernwert.',ex:'„Setzt den Wareneinsatz ins Verhältnis zum Netto-Umsatz …"'}
+      ]
+    },
+    ergebnis:{ heading:'Ein Nachschlagewerk, <span class="g">das wächst</span>', text:'Am Ende hast du ein durchsuchbares Lexikon, sortiert nach Bereich und Schwierigkeit, das mit jedem neuen Begriff wertvoller wird — und nebenbei die drei Grundbausteine jeder Datenbank verstanden.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Der Button <span class="g">erzeugt einen Eintrag</span>', lead:'Der Button ist die Eingabetür, die Datenbank der Speicher — dieselbe Trennung nutzt du später in jedem größeren System.', nodes:[
+      {ic:'＋',t:'Klick',s:'„+ Neuer Begriff" wird gedrückt.'},
+      {ic:'📥',t:'Neue Zeile',s:'Eine leere Zeile schiebt sich ins Bild.'},
+      {ic:'📖',t:'Eingereiht',s:'Gefüllt und sauber in die Liste sortiert.'}
+    ]},
+    tip:{ icon:'💡', heading:'Erst füllen, dann verfeinern', text:'Bau die Datenbank nicht leer und perfekt, sondern trag sofort zehn, fünfzehn Begriffe ein, die du wirklich täglich benutzt. Ein Lexikon lebt vom Inhalt, nicht von der Struktur. Die Kategorien ordnest du danach — an echten Einträgen siehst du sofort, ob deine Aufteilung trägt.' },
+    learnings:[
+      'Die Titel-Spalte kannst du umbenennen, aber nicht löschen — sie ist das Rückgrat jeder Notion-Datenbank.',
+      'Ein Auswahlfeld lohnt sich da, wo Werte sich wiederholen: feste Optionen halten die Daten sauber und filterbar.',
+      'Kurzbeschreibung und ausführliche Beschreibung trennst du bewusst — eine Zeile zum Überfliegen, ein Langtext zum Nachschlagen.',
+      'Ein Button trennt das Erfassen von der Anzeige: du klickst statt zu scrollen, die Tabelle bleibt der ruhige Speicher.',
+      'Titel, zweimal Auswahl, zweimal Text sind das Fundament — jede spätere Datenbank ist nur diese Bausteine plus Relationen und Formeln.'
+    ],
+    next:{ href:'/standortanalyse', label:'Standortanalyse' }
   };
 })();
