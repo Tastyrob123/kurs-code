@@ -1081,7 +1081,7 @@
   #tsreuse{width:100%;max-width:1120px;margin:46px auto 44px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsreuse .rz-wrap{display:flex;align-items:center;gap:clamp(28px,4vw,60px)}
   #tsreuse .rz-left{flex:0 0 39%;max-width:39%;min-width:0}
-  #tsreuse .rz-para{font-size:15.5px;line-height:1.72;color:rgba(255,255,255,.82);margin:0 0 16px}
+  #tsreuse .rz-para{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 16px}
   #tsreuse .rz-para:last-child{margin-bottom:0}
   #tsreuse .rz-left{opacity:0;transform:translateY(14px)}
   #tsreuse.go .rz-left{animation:rzUp .8s cubic-bezier(.16,1,.3,1) both}
@@ -2670,7 +2670,7 @@
   #tsdb .tsdb-head{text-align:center;margin-bottom:28px}
   #tsdb .tsdb-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(24px,3.2vw,36px);font-weight:600;letter-spacing:-.02em;line-height:1.12;color:#fff;margin:0 0 10px}
   #tsdb .tsdb-title span{color:#c7b489}
-  #tsdb .tsdb-sub{font-size:15px;color:rgba(255,255,255,.42);max-width:520px;margin:0 auto;line-height:1.6}
+  #tsdb .tsdb-sub{font-size:15px;color:rgba(255,255,255,.86);max-width:520px;margin:0 auto;line-height:1.62}
   #tsdb .tsdb-chart{position:relative;padding:4px 0}
   #tsdb .tsdb-guides{position:absolute;z-index:0;top:2px;bottom:2px;left:216px;right:100px;pointer-events:none}
   #tsdb .tsdb-guide{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed rgba(216,201,171,.16);opacity:0;transition:opacity .8s ease}
@@ -3695,7 +3695,7 @@
   #tsalgcart .tsac-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GOLD},.7)}
   #tsalgcart .tsac-title{margin:0 0 12px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:clamp(30px,4.1vw,52px);line-height:1.06;letter-spacing:-.02em;color:#fff}
   #tsalgcart .tsac-title .g{color:#c7b489}
-  #tsalgcart .tsac-sub{margin:0 auto;max-width:680px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.72)}
+  #tsalgcart .tsac-sub{margin:0 auto;max-width:680px;font-size:15px;line-height:1.62;color:rgba(255,255,255,.86)}
 
   #tsalgcart .tsac-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 24px;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain}
   #tsalgcart .tsac-track::-webkit-scrollbar{display:none}
@@ -3978,7 +3978,7 @@
   .tsgk-ov__h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:2.15rem;letter-spacing:-.015em;line-height:1.06;color:#fff;margin:0;text-shadow:0 2px 20px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.9)}
   .tsgk-ov__body{flex:1 1 auto;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:28px 40px 40px}
   .tsgk-ov__body::-webkit-scrollbar{width:8px}.tsgk-ov__body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px}
-  .tsgk-ov__intro{font-size:1.06rem;line-height:1.64;font-weight:300;color:#cbd1dd;margin:0 0 32px}
+  .tsgk-ov__intro{font-size:1.06rem;line-height:1.62;font-weight:400;color:rgba(255,255,255,.86);margin:0 0 32px}
   .tsgk-ov__sec{margin:0 0 32px}
   .tsgk-ov__sec h4{display:flex;align-items:center;gap:12px;font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#7f8698;margin:0 0 16px}
   .tsgk-ov__sec h4::before{content:"";width:24px;height:1px;background:linear-gradient(90deg,#c7b489,rgba(199,180,137,.15));flex:none}
@@ -4245,7 +4245,7 @@
   #tslohn .tsl-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;
     font-size:clamp(1.9rem,4.6vw,3.1rem);line-height:1.04;letter-spacing:-.025em;color:#fff;margin:0 auto 16px;max-width:20ch}
   #tslohn .tsl-h em{font-style:normal;color:#c7b489}
-  #tslohn .tsl-lead{font-size:clamp(1rem,1.6vw,1.14rem);line-height:1.6;color:rgba(255,255,255,.6);margin:0 auto 52px;max-width:60ch}
+  #tslohn .tsl-lead{font-size:clamp(1rem,1.6vw,1.14rem);line-height:1.62;color:rgba(255,255,255,.86);margin:0 auto 52px;max-width:60ch}
 
   /* -------- Timeline der 3 Ebenen -------- */
   #tslohn .tsl-line{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin:0 0 60px}
@@ -4843,7 +4843,7 @@
   #tslink .tsl-logo{display:block;height:34px;width:auto;margin:2px auto 18px}
   #tslink .tsl-k{display:block;font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:8px}
   #tslink .tsl-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.32rem;font-weight:600;letter-spacing:-.012em;line-height:1.15;color:#fff;margin:0 0 12px;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.95),0 3px 14px rgba(0,0,0,.9),0 6px 34px rgba(0,0,0,.8)}
-  #tslink .tsl-t{color:rgba(255,255,255,.66);font-size:.88rem;line-height:1.62;margin:0 auto;max-width:34ch;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.85),0 4px 22px rgba(0,0,0,.7)}
+  #tslink .tsl-t{color:rgba(255,255,255,.86);font-size:15.5px;line-height:1.62;margin:0 auto;max-width:34ch;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.85),0 4px 22px rgba(0,0,0,.7)}
   #tslink .tsl-k{text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 8px rgba(0,0,0,.8)}
   #tslink .tsl-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding-top:15px;border-top:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.42);font-size:.76rem;letter-spacing:.03em}
   #tslink .tsl-foot svg{flex:none;opacity:.7}
@@ -5216,7 +5216,7 @@
   #tsmiss #tsdb0 .tb.on{background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(199,180,137,.10)}
   #tsmiss .tsm-item{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
   #tsmiss.in .tsm-item{opacity:1;transform:none}
-  #tsmiss .tsm-p{color:rgba(255,255,255,.62);font-size:.95rem;line-height:1.7;margin:0 0 14px;max-width:none}
+  #tsmiss .tsm-p{color:rgba(255,255,255,.86);font-size:15.5px;line-height:1.62;margin:0 0 14px;max-width:none}
   #tsmiss .tsm-emph2{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.45rem;font-weight:600;letter-spacing:-.012em;text-align:center;color:#fff;margin:2px 0 16px !important;padding:0}
   #tsmiss .tsm-emph2 .tsm-eg{color:#c7b489}
   #tsmiss .tsm-ol{margin:0;padding-left:1.6em}
@@ -7666,7 +7666,7 @@
   .ts2mac-row .ts2mac-cell.ts2mac-pc{align-self:center}
   .ts2mac-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;font-size:clamp(24px,2.4vw,30px);letter-spacing:-.02em;line-height:1.15;color:#fff;margin:0 0 16px}
   .ts2mac-h .g{color:#c7b489}
-  .ts2mac-p{font-size:15px;line-height:1.65;color:rgba(255,255,255,.6);margin:0 0 12px;max-width:52ch}
+  .ts2mac-p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 12px;max-width:52ch}
   .ts2mac-p:last-child{margin-bottom:0}
   /* PC direkt in einer leeren Notion-Spalte (neben dem Erklärtext) */
   .ts2mac-incol{display:flex;flex-direction:column;justify-content:center;align-items:center}
@@ -10508,7 +10508,7 @@
   #tsgkflow *{box-sizing:border-box}
   #tsgkflow .hd{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.55rem,2.7vw,2.05rem);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 10px}
   #tsgkflow .hd .g{color:#c7b489}
-  #tsgkflow .sub{font-size:.98rem;line-height:1.65;color:rgba(255,255,255,.5);max-width:54ch;margin:0 auto 46px}
+  #tsgkflow .sub{font-size:.98rem;line-height:1.62;color:rgba(255,255,255,.86);max-width:54ch;margin:0 auto 46px}
   #tsgkflow .row{margin-bottom:44px}
   #tsgkflow .row:last-child{margin-bottom:0}
   #tsgkflow .row+.row{padding-top:44px;position:relative}
@@ -11192,7 +11192,7 @@
   #tsfdq .fdqb-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fdq-beige);box-shadow:0 0 12px rgba(199,180,137,.7);}
   #tsfdq .fdqb-h{margin:0 0 12px;font-family:var(--fdq-display);font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.14;letter-spacing:-.02em;color:#fff;}
   #tsfdq .fdqb-h .g{color:var(--fdq-beige);}
-  #tsfdq .fdqb-sub{margin:0 auto;max-width:680px;font-size:1.02rem;line-height:1.6;color:var(--fdq-muted2);}
+  #tsfdq .fdqb-sub{margin:0 auto;max-width:680px;font-size:1.02rem;line-height:1.62;color:rgba(255,255,255,.86);}
 
   /* ---- ZWEI MACBOOKS ---- */
   #tsfdq .fdqm{width:min(1180px,94vw);margin:34px auto 26px;}
