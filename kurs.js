@@ -2528,7 +2528,8 @@
     { re:/\/zutatenliste\/?$/,       href:'/rezepturen' },
     { re:/\/rezepturen\/?$/,         href:'/gemeinkosten-mitarbeiterlhne' },
     { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' },
-    { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' }
+    { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' },
+    { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/operations-area' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -11896,6 +11897,163 @@
       t.addEventListener("click", go);
       t.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } });
     });
+  }
+
+  function mount(){
+    if(!on()) return;
+    injectCSS();
+    var sc=document.querySelector(".super-content"); if(!sc) return;
+    buildHero(sc);
+    buildBody(sc);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   operations-area — Verteiler-/Landing-Ebene (Modul 2, Betrieb)
+   Anders als die DB-Lektionen ist Operations Area kein einzelner
+   Informationsfluss, sondern mehrere Informationsinseln. Diese
+   Seite ist die Zwischenebene: Hero mit "Operations-Puls"-Animation
+   (greift die Heartbeat-Glow-Sprache der Kacheln auf) + Einleitung +
+   6 Insel-Kacheln (CSS-Cover-Treatment, Bilder folgen). Klick auf
+   eine Kachel -> jeweilige Insel-Lektionsseite (Slugs folgen beim Bau).
+   Muster: Hero = food-drinks (.ts-hero), Grid = #tslmod (geklont, ts-ops-).
+   Eigene Praefixe (tsops/ops-) -> kollisionsfrei. Font Titel "Lineal Web".
+   ============================================================ */
+(function(){
+  if(window.__tsops) return; window.__tsops=true;
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var GLOW="199,180,137";
+  function on(){ return /\/operations-area\/?$/.test(location.pathname); }
+
+  /* [num, kicker, titel, beschreibung, meta, href] */
+  var CARDS=[
+   ['01','Personal','Team & Onboarding','Onboarding neuer Mitarbeiter, Team-Infos, Kleidungs-Ausgabe und Urlaubsplanung — sauber an einem Ort.','4 Bereiche','/operations-team'],
+   ['02','Abläufe','Checklisten & Produktion','Audit- und Tages-Checklisten, wöchentliche Produktionslisten und Waste-Erfassung — der tägliche Takt.','4 Bereiche','/operations-checklisten'],
+   ['03','Compliance','Hygiene, Behörden & Handbücher','Hygienehandbuch, Behörden-Unterlagen, Pflichtdokumente und Management-Handbücher — prüfungssicher.','4 + Verweis','/operations-hygiene'],
+   ['04','Bestand','Inventur & Bestand','Festwert- und Jahresinventur — mit Verweis auf DB 0 Inventurliste und die Packaging-Datenbank.','1 + 2 Verweise','/operations-inventur'],
+   ['05','Partner','Partner & Verträge','Dienstleister- und Vertragsübersicht im Blick — plus Verweis auf DB I–III Lieferanten.','2 + Verweis','/operations-partner'],
+   ['06','Zugänge','Zugänge & Werte','Passwortablage, Bankeinzahlungen und Schlüssellisten — sensible Zugänge sicher verwaltet.','3 Bereiche','/operations-zugaenge']
+  ];
+
+  var CSS=`
+  .page__operations-area{--ops-beige:#c7b489;--ops-display:"Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--ops-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;--ops-muted:#e1e1e1;}
+  /* ---- HERO ---- */
+  .page__operations-area .ops-hero{position:relative;width:min(1180px,94vw);margin:74px auto 4px;text-align:center;isolation:isolate;}
+  .page__operations-area .ops-hero__logo{display:block;width:58px;height:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:opsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;}
+  .page__operations-area .ops-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--ops-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ops-beige);margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95);animation:opsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;}
+  .page__operations-area .ops-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ops-beige);box-shadow:0 0 12px rgba(${GLOW},.7);animation:opsBeat 3.2s ease-in-out infinite;}
+  .page__operations-area .ops-hero__title{margin:0;font-family:var(--ops-display);font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-wrap:balance;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9);animation:opsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both;}
+  .page__operations-area .ops-hero__title .ops-gold{color:var(--ops-beige);}
+  .page__operations-area .ops-hero__sub{margin:18px auto 0;max-width:640px;font:400 1.06rem/1.6 var(--ops-sans);color:rgba(255,255,255,.72);animation:opsRise 850ms cubic-bezier(.16,1,.3,1) 300ms both;}
+  /* ---- OPERATIONS-PULS ---- */
+  .page__operations-area .ops-pulse{position:relative;width:min(1180px,94vw);margin:22px auto 2px;height:74px;opacity:0;animation:opsRise 1s ease 420ms both;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+  .page__operations-area .ops-pulse svg{display:block;width:100%;height:100%;}
+  .page__operations-area .ops-pulse .ops-base{fill:none;stroke:rgba(${GLOW},.16);stroke-width:2;}
+  .page__operations-area .ops-pulse .ops-run{fill:none;stroke:var(--ops-beige);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:66 2400;filter:drop-shadow(0 0 6px rgba(${GLOW},.65));animation:opsDash 3.2s linear infinite;}
+  .page__operations-area .ops-pulse .ops-dot{fill:#fff;filter:drop-shadow(0 0 7px rgba(${GLOW},.95));}
+  /* ---- CHIP-TICKER (greift die 6 Themen auf) ---- */
+  .page__operations-area .ops-chips{display:flex;flex-wrap:wrap;gap:8px 10px;justify-content:center;width:min(860px,92vw);margin:6px auto 0;opacity:0;animation:opsRise 1s ease 520ms both;}
+  .page__operations-area .ops-chip{font:600 11px/1 var(--ops-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:7px 13px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(255,255,255,.02);animation:opsChip 6s ease-in-out infinite;}
+  .page__operations-area .ops-chip:nth-child(1){animation-delay:0s}
+  .page__operations-area .ops-chip:nth-child(2){animation-delay:.5s}
+  .page__operations-area .ops-chip:nth-child(3){animation-delay:1s}
+  .page__operations-area .ops-chip:nth-child(4){animation-delay:1.5s}
+  .page__operations-area .ops-chip:nth-child(5){animation-delay:2s}
+  .page__operations-area .ops-chip:nth-child(6){animation-delay:2.5s}
+  /* ---- INTRO ---- */
+  .page__operations-area .ops-intro{width:min(820px,92vw);margin:40px auto 6px;text-align:center;}
+  .page__operations-area .ops-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:var(--ops-muted);}
+  .page__operations-area .ops-intro p .em{color:#fff;}
+  /* ---- GRID (Klon #tslmod, CSS-Cover) ---- */
+  #tsops{width:min(1320px,95vw);margin:44px auto 30px;font-family:var(--ops-sans);color:#fff}
+  #tsops *{box-sizing:border-box}
+  #tsops .ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  #tsops a.ops-card{position:relative;display:block;overflow:hidden;text-align:center;text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;border-radius:16px;padding:32px 24px 28px;min-height:230px;background:#04050a;border:1px solid rgba(255,255,255,.06);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);will-change:transform,box-shadow;transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
+  #tsops .ops-cover{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;background:radial-gradient(120% 92% at 50% 0%,rgba(${GLOW},.10) 0%,rgba(${GLOW},.03) 34%,rgba(4,5,10,0) 62%),#04050a;pointer-events:none}
+  #tsops .ops-cover::before{content:attr(data-n);position:absolute;right:-6px;bottom:-30px;font:600 8.4rem/1 var(--ops-display);color:rgba(255,255,255,.035);letter-spacing:-.04em;pointer-events:none}
+  #tsops .ops-cover::after{content:"";position:absolute;top:0;left:22px;right:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(${GLOW},.5),transparent)}
+  #tsops .ops-num,#tsops .ops-logo,#tsops .ops-k,#tsops .ops-h,#tsops .ops-t,#tsops .ops-meta{position:relative;z-index:2}
+  #tsops a.ops-card.on{opacity:1;transform:translateY(0)}
+  #tsops a.ops-card:hover{transform:translateY(-4px);border-color:rgba(${GLOW},.28);box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16)}
+  #tsops a.ops-card:focus-visible{outline:2px solid rgba(${GLOW},.7);outline-offset:4px}
+  #tsops .ops-num{position:absolute;top:24px;right:24px;font-size:.7rem;font-weight:500;letter-spacing:.2em;color:rgba(${GLOW},.55)}
+  #tsops .ops-logo{display:block;height:32px;width:auto;margin:2px auto 16px}
+  #tsops .ops-k{display:block;font-size:.56rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:9px}
+  #tsops .ops-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.22rem;font-weight:600;letter-spacing:-.012em;line-height:1.16;color:#fff;margin:0 0 11px}
+  #tsops .ops-t{color:rgba(255,255,255,.66);font-size:.84rem;line-height:1.55;margin:0 auto 14px;max-width:32ch}
+  #tsops .ops-meta{display:inline-block;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(${GLOW},.72);border:1px solid rgba(${GLOW},.22);border-radius:999px;padding:5px 11px}
+  #tsops a.ops-card:hover{animation:opsHb 3.2s ease-in-out infinite}
+  @keyframes opsHb{0%{box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16)}20%{box-shadow:0 8px 26px rgba(${GLOW},.34),0 0 52px rgba(${GLOW},.34)}40%{box-shadow:0 6px 20px rgba(${GLOW},.18),0 0 30px rgba(${GLOW},.18)}60%{box-shadow:0 7px 24px rgba(${GLOW},.28),0 0 44px rgba(${GLOW},.26)}100%{box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16)}}
+  @keyframes opsRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes opsBeat{0%,72%,100%{transform:scale(1);opacity:.85}12%{transform:scale(1.5);opacity:1}30%{transform:scale(1.05);opacity:.9}}
+  @keyframes opsDash{from{stroke-dashoffset:2466}to{stroke-dashoffset:0}}
+  @keyframes opsChip{0%,100%{color:rgba(255,255,255,.42);border-color:rgba(255,255,255,.09)}50%{color:var(--ops-beige);border-color:rgba(${GLOW},.34)}}
+  @media(max-width:980px){#tsops .ops-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){#tsops .ops-grid{grid-template-columns:1fr}.page__operations-area .ops-hero__title{font-size:clamp(1.9rem,10vw,2.8rem)}}
+  @media(prefers-reduced-motion:reduce){
+    .page__operations-area .ops-hero__logo,.page__operations-area .ops-hero__eyebrow,.page__operations-area .ops-hero__eyebrow::before,.page__operations-area .ops-hero__title,.page__operations-area .ops-hero__sub,.page__operations-area .ops-pulse,.page__operations-area .ops-chips,.page__operations-area .ops-chip,#tsops .ops-run,#tsops a.ops-card{animation:none!important}
+    #tsops a.ops-card{opacity:1;transform:none}
+    .page__operations-area .ops-pulse{opacity:1}
+  }`;
+
+  function injectCSS(){ if(document.getElementById("tsops-css"))return; var s=document.createElement("style"); s.id="tsops-css"; s.textContent=CSS; document.head.appendChild(s); }
+
+  var PULSE_D="M0 37 H440 l18 -22 l20 42 l16 -30 l14 10 H1180";
+  function buildHero(sc){
+    if(sc.querySelector(".ops-hero")) return;
+    var hero=document.createElement("div"); hero.className="ops-hero";
+    hero.innerHTML=
+      '<img class="ops-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+      '<div class="ops-hero__eyebrow">Modul 2 · Der operative Kern</div>'+
+      '<h1 class="ops-hero__title">Operations <span class="ops-gold">Area</span></h1>'+
+      '<p class="ops-hero__sub">Der Bereich, in dem dein Betrieb auch ohne dich läuft — Abläufe, Checklisten, Dokumente und Zugänge, gebündelt in klaren Inseln.</p>'+
+      '<div class="ops-pulse"><svg viewBox="0 0 1180 74" preserveAspectRatio="none" aria-hidden="true">'+
+        '<path class="ops-base" d="'+PULSE_D+'"/>'+
+        '<path class="ops-run" id="opsPulsePath" d="'+PULSE_D+'"/>'+
+        '<circle class="ops-dot" r="3.4"><animateMotion dur="3.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#opsPulsePath"/></animateMotion></circle>'+
+      '</svg></div>'+
+      '<div class="ops-chips">'+CARDS.map(function(c){ return '<span class="ops-chip">'+c[2].replace(/\s*&.*$/,'').trim()+'</span>'; }).join('')+'</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+  }
+
+  function buildBody(sc){
+    if(document.getElementById("tsops")) return;
+    var box=document.createElement("div"); box.id="tsops";
+    var cards=CARDS.map(function(c){
+      return '<a class="ops-card" href="'+c[5]+'">'+
+        '<span class="ops-cover" data-n="'+c[0]+'" aria-hidden="true"></span>'+
+        '<span class="ops-num">'+c[0]+'</span>'+
+        '<img class="ops-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy">'+
+        '<span class="ops-k">'+c[1]+'</span>'+
+        '<h3 class="ops-h">'+c[2]+'</h3>'+
+        '<p class="ops-t">'+c[3]+'</p>'+
+        '<span class="ops-meta">'+c[4]+'</span>'+
+      '</a>';
+    }).join('');
+    box.innerHTML=
+      '<div class="ops-intro"><p>Anders als die Datenbanken davor ist die <span class="em">Operations Area</span> kein einzelner Datenstrom, sondern eine Sammlung eigenständiger Inseln: Checklisten, Handbücher, Pflichtdokumente, Zugänge und Übersichten. Jede Insel bündelt die Tabellen, die im Tagesgeschäft zusammengehören. Wähle einen Bereich, um tiefer einzusteigen.</p></div>'+
+      '<div class="ops-grid">'+cards+'</div>';
+    var hero=sc.querySelector(".ops-hero");
+    if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
+    else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
+    stagger(box);
+  }
+
+  function stagger(box){
+    var cards=[].slice.call(box.querySelectorAll(".ops-card"));
+    var io=new IntersectionObserver(function(e){
+      if(!e[0].isIntersecting) return;
+      cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.06)+'s'; c.classList.add('on'); setTimeout(function(){ c.style.transitionDelay=''; }, i*60+900); });
+      io.disconnect();
+    },{threshold:.05});
+    io.observe(box);
   }
 
   function mount(){
