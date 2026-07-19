@@ -592,7 +592,7 @@
   #tsbau .bau-head{max-width:780px;margin:0 auto 52px;text-align:center}
   #tsbau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:14px}
   #tsbau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;font-size:clamp(30px,3.6vw,46px);margin:0 0 18px}
+  #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
   #tsbau .bau-title span{color:#c7b489}
   #tsbau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
   #tsbau .bau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,50px);max-width:1300px;margin:0 auto;align-items:start}
@@ -647,7 +647,7 @@
   #tsarc .arc-inner{max-width:1180px;margin:0 auto;text-align:center}
   #tsarc .arc-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
   #tsarc .arc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsarc .arc-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(26px,3.2vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin:0 0 46px}
+  #tsarc .arc-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;margin:0 0 46px}
   #tsarc .arc-title span{color:#c7b489}
 
   #tsarc .arc-stage{position:relative;display:grid;grid-template-columns:.82fr 1.3fr .82fr;grid-template-rows:1fr 1fr;gap:clamp(38px,6vw,80px) clamp(46px,7vw,96px);}
@@ -954,7 +954,7 @@
   #tsd4 .tsd4-head{text-align:center;margin:0 0 104px}
   #tsd4 .tsd4-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#c7b489;margin:0 0 12px}
   #tsd4 .tsd4-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsd4 .tsd4-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin:0;color:#fff}
+  #tsd4 .tsd4-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;margin:0;color:#fff}
   #tsd4 .tsd4-title .g{color:#c7b489}
   #tsd4 .tsd4-stage{display:grid;grid-template-columns:1fr auto 1.15fr auto 1fr;align-items:center;gap:0}
   #tsd4 .tsd4-card{position:relative;border-radius:14px;padding:66px 20px 20px;background:rgba(255,255,255,.035);border:1px solid rgba(199,180,137,.28);opacity:0;transform:translateY(14px) scale(.97);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),border-color .6s ease,box-shadow .6s ease}
