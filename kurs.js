@@ -586,63 +586,118 @@
     background:#c7b489;
   }
   .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
-  /* ===== #tsbau — Bausteinprinzip: bildreich, rahmenlos, grosszuegig ===== */
+  /* ===== #tsbau — Bausteinprinzip: EIN Teller, drei Freiheiten (Cross-Fade-Beats) ===== */
   #tsbau{width:100vw;max-width:100vw;margin:52px 0 12px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsbau *{box-sizing:border-box}
-  #tsbau .bau-head{max-width:780px;margin:0 auto 52px;text-align:center}
+  #tsbau .bau-head{max-width:820px;margin:0 auto 34px;text-align:center}
   #tsbau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:14px}
   #tsbau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
   #tsbau .bau-title span{color:#c7b489}
   #tsbau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
-  #tsbau .bau-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,50px);max-width:1300px;margin:0 auto;align-items:start}
-  #tsbau .bau-act{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .9s cubic-bezier(.22,1,.36,1);text-align:center}
-  #tsbau .bau-act.on{opacity:1;transform:none}
-  #tsbau .bau-stage{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:32px}
-  #tsbau .bau-med{border-radius:50%;object-fit:cover;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);background:#0b0d14;display:block}
-  #tsbau .bau-cap{font-size:15px;line-height:1.62;color:rgba(255,255,255,.78);margin:0 auto;max-width:340px}
-  #tsbau .bau-cap b{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em;color:#efe6d2;margin-bottom:8px}
 
-  /* Act A — Austauschen: zwei Medaillons + Swap-Glyph */
-  #tsbau .bau-med--a1,#tsbau .bau-med--a2{width:134px;height:134px}
-  #tsbau .bau-med--a1{margin-right:-16px;z-index:2}
-  #tsbau .bau-med--a2{margin-left:-16px;z-index:1}
-  #tsbau .bau-swap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,13,20,.92);border:1px solid rgba(199,180,137,.65);color:#d8c9ab;box-shadow:0 8px 22px rgba(0,0,0,.65)}
-  #tsbau .bau-act.on .bau-swap{animation:bauSwapSpin 3.2s ease-in-out infinite}
-  #tsbau .bau-act.on .bau-med--a2{animation:bauSwapIn 3.2s ease-in-out infinite}
-  #tsbau .bau-act.on .bau-med--a1{animation:bauSwapOut 3.2s ease-in-out infinite}
-  @keyframes bauSwapSpin{0%,40%{transform:translate(-50%,-50%) rotate(0)}52%,100%{transform:translate(-50%,-50%) rotate(180deg)}}
-  @keyframes bauSwapIn{0%,40%{opacity:.3;filter:grayscale(.55) brightness(.8)}56%,92%{opacity:1;filter:none}100%{opacity:.3;filter:grayscale(.55) brightness(.8)}}
-  @keyframes bauSwapOut{0%,40%{opacity:1;filter:none}56%,92%{opacity:.3;filter:grayscale(.55) brightness(.8)}100%{opacity:1;filter:none}}
+  #tsbau .bau-wrap{max-width:980px;margin:0 auto;opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .95s cubic-bezier(.16,1,.3,1)}
+  #tsbau .bau-wrap.on{opacity:1;transform:none}
 
-  /* Act B — Mehrfach verwenden: eine Quelle, drei Ziele */
-  #tsbau .bau-stage--fan{flex-direction:column;justify-content:flex-start;gap:0}
-  #tsbau .bau-med--src{width:98px;height:98px;z-index:2;margin-top:-12px}
-  #tsbau .bau-fanline{width:1.6px;height:28px;background:linear-gradient(180deg,rgba(199,180,137,.75),rgba(199,180,137,.12));margin:10px 0 13px}
-  #tsbau .bau-targets{display:flex;gap:14px;justify-content:center}
-  #tsbau .bau-med--t{width:106px;height:106px;opacity:0;transform:translateY(12px) scale(.78)}
-  #tsbau .bau-act.on .bau-med--t{animation:bauPop .6s cubic-bezier(.22,1,.36,1) both}
-  #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(1){animation-delay:.3s}
-  #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(2){animation-delay:.48s}
-  #tsbau .bau-act.on .bau-targets .bau-med--t:nth-child(3){animation-delay:.66s}
+  /* step rail */
+  #tsbau .bau-steps{display:flex;justify-content:center;gap:clamp(9px,1.6vw,18px);margin-bottom:34px;flex-wrap:wrap}
+  #tsbau .bau-step{display:inline-flex;align-items:center;gap:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:9px 20px 9px 11px;color:rgba(255,255,255,.6);cursor:pointer;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s ease,color .5s ease,box-shadow .5s ease;font-family:inherit}
+  #tsbau .bau-step-n{font-size:11px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.42);background:rgba(255,255,255,.06);border-radius:50%;width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;transition:background .5s ease,color .5s ease;font-variant-numeric:tabular-nums}
+  #tsbau .bau-step-l{font-size:13.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+  #tsbau .bau-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.16),0 14px 34px -14px rgba(199,180,137,.45)}
+  #tsbau .bau-step.on .bau-step-n{background:#c7b489;color:#05060b}
+
+  /* stage */
+  #tsbau .bau-stage{position:relative;height:392px;margin:0 auto}
+  #tsbau .bau-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,20px);opacity:0;pointer-events:none;transition:opacity .6s ease}
+  #tsbau .bau-scene.on{opacity:1;pointer-events:auto}
+
+  /* medallions */
+  #tsbau .bau-med{border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}
+  #tsbau .bau-hero{width:196px;height:196px;border-width:1.5px}
+  #tsbau .bau-node{display:flex;flex-direction:column;align-items:center;gap:12px}
+  #tsbau .bau-tag{font-size:11px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62)}
+  #tsbau .bau-tag b{color:#efe6d2;font-weight:700}
+
+  /* price chip */
+  #tsbau .bau-chip{display:inline-flex;align-items:center;gap:9px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.34);border-radius:999px;padding:7px 15px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #tsbau .bau-chip-k{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  #tsbau .bau-chip-v{font-size:15px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;min-width:58px;text-align:right}
+
+  /* connectors */
+  #tsbau .bau-conn{position:relative;width:clamp(34px,5.5vw,80px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.04))}
+  #tsbau .bau-conn::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
+  #tsbau .bau-scene.on .bau-conn::after{animation:bauPulse 1.9s cubic-bezier(.45,0,.25,1) infinite}
+
+  /* SCENE 1 — Tauschen */
+  #tsbau .bau-swap{position:relative;display:flex;align-items:center;gap:14px}
+  #tsbau .bau-swap .bau-med{width:96px;height:96px}
+  #tsbau .bau-swapicon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,13,20,.92);border:1px solid rgba(199,180,137,.6);color:#d8c9ab;box-shadow:0 8px 22px rgba(0,0,0,.65);flex:0 0 auto}
+  #tsbau .bau-scene.on .bau-swapicon{animation:bauSpin 3.4s ease-in-out infinite}
+  #tsbau .bau-old{position:relative}
+  #tsbau .bau-old::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(5,6,11,.55);opacity:0;transition:opacity .7s ease}
+  #tsbau .bau-scene.on .bau-old::after{animation:bauDim 3.4s ease-in-out infinite}
+  #tsbau .bau-new{opacity:.35;transform:scale(.9);transition:none}
+  #tsbau .bau-scene.on .bau-new{animation:bauGlow 3.4s ease-in-out infinite}
+
+  /* SCENE 3 — Schachteln */
+  #tsbau .bau-nest{display:flex;flex-direction:column;align-items:center;gap:0}
+  #tsbau .bau-nest .bau-med.bau-src{width:140px;height:140px;z-index:2}
+  #tsbau .bau-vline{width:2px;height:34px;background:linear-gradient(180deg,rgba(199,180,137,.7),rgba(199,180,137,.12));margin:14px 0}
+  #tsbau .bau-nest-row{display:flex;gap:16px;justify-content:center}
+  #tsbau .bau-nest-row .bau-med{width:80px;height:80px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-scene.on .bau-nest-row .bau-med{animation:bauPop .62s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(1){animation-delay:.35s}
+  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(2){animation-delay:.52s}
+  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(3){animation-delay:.69s}
+  #tsbau .bau-scene.on .bau-nest .bau-src{animation:bauBreath 3.6s ease-in-out infinite}
+
+  /* SCENE 2 — Mehrfach nutzen */
+  #tsbau .bau-sat .bau-med{width:104px;height:104px;opacity:0;transform:scale(.8)}
+  #tsbau .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau .bau-scene.on .bau-sat.s1 .bau-med{animation-delay:.3s}
+  #tsbau .bau-scene.on .bau-sat.s2 .bau-med{animation-delay:.5s}
+  #tsbau .bau-center .bau-med{width:150px;height:150px}
+  #tsbau .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s ease-in-out infinite}
+
+  /* replay */
+  #tsbau .bau-foot{display:flex;justify-content:center;margin-top:30px}
+  #tsbau .bau-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .4s ease}
+  #tsbau .bau-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tsbau .bau-replay svg{width:15px;height:15px}
+
+  @keyframes bauPulse{0%{left:0;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:100%;opacity:0}}
+  @keyframes bauSpin{0%,44%{transform:rotate(0)}56%,100%{transform:rotate(180deg)}}
+  @keyframes bauDim{0%,40%{opacity:0}60%,100%{opacity:.55}}
+  @keyframes bauGlow{0%,40%{opacity:.32;transform:scale(.9)}60%,100%{opacity:1;transform:scale(1)}}
   @keyframes bauPop{to{opacity:1;transform:none}}
+  @keyframes bauSatIn{to{opacity:1;transform:none}}
+  @keyframes bauBreath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}50%{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.14),0 0 34px rgba(199,180,137,.28)}}
 
-  /* Act C — Schachteln: verschachtelte Medaillons */
-  #tsbau .bau-med--g{position:absolute;left:calc(50% - 112px);top:48px;width:162px;height:162px;z-index:1}
-  #tsbau .bau-med--s{position:absolute;left:calc(50% + 2px);top:110px;width:102px;height:102px;z-index:2}
-  #tsbau .bau-med--z{position:absolute;left:calc(50% + 74px);top:174px;width:68px;height:68px;z-index:3}
-  #tsbau .bau-med--g,#tsbau .bau-med--s,#tsbau .bau-med--z{opacity:0;transform:scale(.72)}
-  #tsbau .bau-act.on .bau-med--g{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .1s both}
-  #tsbau .bau-act.on .bau-med--s{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .3s both}
-  #tsbau .bau-act.on .bau-med--z{animation:bauNest .62s cubic-bezier(.22,1,.36,1) .5s both}
-  @keyframes bauNest{to{opacity:1;transform:scale(1)}}
-
-  @media(max-width:1360px){#tsbau .bau-grid{grid-template-columns:1fr;gap:52px;max-width:480px}}
-  @media(prefers-reduced-motion:reduce){
-    #tsbau .bau-act{opacity:1;transform:none;transition:none}
-    #tsbau .bau-swap,#tsbau .bau-med--a1,#tsbau .bau-med--a2{animation:none!important}
-    #tsbau .bau-med--t,#tsbau .bau-med--g,#tsbau .bau-med--s,#tsbau .bau-med--z{animation:none!important;opacity:1;transform:none}
+  @media(max-width:820px){
+    #tsbau .bau-stage{height:auto;min-height:470px;display:flex;align-items:center;justify-content:center}
+    #tsbau .bau-scene{position:relative;inset:auto;width:100%;display:none;flex-direction:column;gap:14px}
+    #tsbau .bau-scene.on{display:flex}
+    #tsbau .bau-hero{width:150px;height:150px}
+    #tsbau .bau-center .bau-med{width:128px;height:128px}
+    #tsbau .bau-sat .bau-med{width:94px;height:94px}
+    #tsbau .bau-swap{flex-direction:row}
+    #tsbau .bau-swap .bau-med{width:78px;height:78px}
+    #tsbau .bau-nest .bau-med.bau-src{width:120px;height:120px}
+    #tsbau .bau-nest-row .bau-med{width:66px;height:66px}
+    #tsbau .bau-conn{width:2px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.5),rgba(199,180,137,.05))}
+    #tsbau .bau-conn::after{display:none}
+    #tsbau .bau-step-l{font-size:12px}
+    #tsbau .bau-steps{gap:8px}
   }
+  @media(prefers-reduced-motion:reduce){
+    #tsbau .bau-wrap{opacity:1;transform:none}
+    #tsbau .bau-scene *{animation:none!important}
+    #tsbau .bau-new{opacity:1;transform:none}
+    #tsbau .bau-nest-row .bau-med,#tsbau .bau-sat .bau-med{opacity:1;transform:none}
+    #tsbau .bau-conn::after{display:none}
+  }
+
   #tsarc{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsarc .arc-inner{max-width:1180px;margin:0 auto;text-align:center}
   #tsarc .arc-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
@@ -765,34 +820,56 @@
     <h3 class="bau-title">Warum wir es <span>genau so</span> machen</h3>
     <p class="bau-sub">Der Sinn dahinter ist Flexibilität. Weil jede Zutat ein eigenständiger Baustein mit eigenem Preis ist, kannst du drei Dinge tun:</p>
   </div>
-  <div class="bau-grid">
-    <div class="bau-act" id="bauA">
-      <div class="bau-stage bau-stage--swap">
-        <img class="bau-med bau-med--a1" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="">
-        <span class="bau-swap"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg></span>
-        <img class="bau-med bau-med--a2" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.jpg" alt="">
-      </div>
-      <p class="bau-cap"><b>Zutaten leicht austauschen</b>Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt.</p>
+
+  <div class="bau-wrap">
+    <div class="bau-steps">
+      <button class="bau-step on" data-i="0"><span class="bau-step-n">01</span><span class="bau-step-l">Tauschen</span></button>
+      <button class="bau-step" data-i="1"><span class="bau-step-n">02</span><span class="bau-step-l">Mehrfach nutzen</span></button>
+      <button class="bau-step" data-i="2"><span class="bau-step-n">03</span><span class="bau-step-l">Schachteln</span></button>
     </div>
-    <div class="bau-act" id="bauB">
-      <div class="bau-stage bau-stage--fan">
-        <img class="bau-med bau-med--src" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="">
-        <div class="bau-fanline"></div>
-        <div class="bau-targets">
-          <img class="bau-med bau-med--t" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="">
-          <img class="bau-med bau-med--t" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="">
-          <img class="bau-med bau-med--t" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg" alt="">
+
+    <div class="bau-stage">
+      <!-- SCENE 1 — Tauschen -->
+      <div class="bau-scene" data-i="0">
+        <div class="bau-swap">
+          <img class="bau-med bau-old" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="Tomate">
+          <span class="bau-swapicon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg></span>
+          <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.jpg" alt="Paprika">
+        </div>
+        <span class="bau-conn"></span>
+        <div class="bau-node">
+          <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht">
+          <div class="bau-chip"><span class="bau-chip-k">Wareneinsatz</span><span class="bau-chip-v" id="bauChip">4,80 €</span></div>
         </div>
       </div>
-      <p class="bau-cap"><b>Bausteine mehrfach verwenden</b>Eine einmal angelegte Sauce wandert in beliebig viele Rezepte. Du baust sie einmal, nutzt sie überall.</p>
-    </div>
-    <div class="bau-act" id="bauC">
-      <div class="bau-stage bau-stage--nest">
-        <img class="bau-med bau-med--g" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="">
-        <img class="bau-med bau-med--s" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="">
-        <img class="bau-med bau-med--z" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="">
+
+      <!-- SCENE 2 — Mehrfach nutzen -->
+      <div class="bau-scene" data-i="1">
+        <div class="bau-sat s1 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht"><span class="bau-tag">Pilz-Ravioli</span></div>
+        <span class="bau-conn"></span>
+        <div class="bau-center bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b></span></div>
+        <span class="bau-conn"></span>
+        <div class="bau-sat s2 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg" alt="Gericht"><span class="bau-tag">Lachsfilet</span></div>
       </div>
-      <p class="bau-cap"><b>Bausteine schachteln</b>Eine Sauce kann selbst Teil eines Gerichts sein und gleichzeitig aus eigenen Zutaten-Bausteinen bestehen.</p>
+
+      <!-- SCENE 3 — Schachteln -->
+      <div class="bau-scene" data-i="2">
+        <div class="bau-nest">
+          <img class="bau-med bau-src" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto">
+          <span class="bau-vline"></span>
+          <div class="bau-nest-row">
+            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
+            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
+            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg" alt="Walnüsse">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bau-sub" id="bauCap" style="max-width:660px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center"></p>
+
+    <div class="bau-foot">
+      <button class="bau-replay" id="bauReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
     </div>
   </div>
 </div>
@@ -833,12 +910,56 @@
   }
 
   function initBaustein(){
-    var cards = document.querySelectorAll('#tsbau .bau-act');
-    if(!cards.length) return;
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('on'); });
-    }, {threshold:.3});
-    cards.forEach(function(c){ io.observe(c); });
+    var wrap=document.querySelector('#tsbau .bau-wrap'); if(!wrap) return;
+    var steps=[].slice.call(wrap.querySelectorAll('.bau-step'));
+    var scenes=[].slice.call(wrap.querySelectorAll('.bau-scene'));
+    var chip=document.getElementById('bauChip');
+    var cap=document.getElementById('bauCap');
+    var replay=document.getElementById('bauReplay');
+    var CAPS=[
+      'Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt, der Preis rechnet sich neu.',
+      'Eine einmal gebaute Sauce wandert in beliebig viele Gerichte. Du legst sie einmal an und nutzt sie überall.',
+      'Ein Baustein kann selbst aus Bausteinen bestehen: Das Pesto ist wieder aus eigenen Zutaten zusammengesetzt.'
+    ];
+    var ADV=3600, reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var params=new URLSearchParams(location.search);
+    var forced=params.has('scene'), noauto=params.has('noauto')||forced;
+    var timer=null, cur=-1;
+
+    function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+    function countChip(from,to){
+      if(!chip) return;
+      if(reduced){ chip.textContent=money(to); return; }
+      var t0=null,d=1100;
+      function tk(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); chip.textContent=money(from+(to-from)*e); if(p<1) requestAnimationFrame(tk); }
+      requestAnimationFrame(tk);
+    }
+    function show(i,manual){
+      cur=i;
+      steps.forEach(function(s,k){ s.classList.toggle('on',k===i); });
+      scenes.forEach(function(s,k){
+        if(k===i){ s.classList.remove('on'); void s.offsetWidth; s.classList.add('on'); }
+        else s.classList.remove('on');
+      });
+      if(cap) cap.textContent=CAPS[i];
+      if(chip){ if(i===0){ chip.textContent='4,80 €'; setTimeout(function(){ if(cur===0) countChip(4.80,4.55); },1500); } else chip.textContent=(i===0?'4,80 €':'4,55 €'); }
+      if(!noauto && !manual){
+        clearTimeout(timer);
+        if(i<scenes.length-1) timer=setTimeout(function(){ show(i+1); }, ADV);
+      }
+    }
+    function play(){ clearTimeout(timer); show(forced?(parseInt(params.get('scene'),10)||0):0); }
+
+    steps.forEach(function(s){ s.addEventListener('click',function(){ clearTimeout(timer); show(parseInt(s.dataset.i,10),true); }); });
+    if(replay) replay.addEventListener('click', play);
+
+    if(reduced){ wrap.classList.add('on'); show(0,true); return; }
+    if(forced || params.has('reveal')){ wrap.classList.add('on'); play(); return; }
+
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ wrap.classList.add('on'); play(); io.disconnect(); } });
+    },{threshold:.3});
+    io.observe(wrap);
   }
 
   var arcPlayed=false;
