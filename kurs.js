@@ -12057,7 +12057,7 @@
 
   /* [num, kicker, titel, beschreibung, meta, href] */
   var CARDS=[
-   ['01','Personal','Team & Onboarding','Onboarding neuer Mitarbeiter, Team-Infos, Kleidungs-Ausgabe und Urlaubsplanung — sauber an einem Ort.','4 Bereiche','/operations-team'],
+   ['01','Personal','Team & Onboarding','Onboarding neuer Mitarbeiter, Team-Infos, Kleidungs-Ausgabe und Urlaubsplanung — sauber an einem Ort.','4 Bereiche','/lektionen/team-onboarding'],
    ['02','Abläufe','Checklisten & Produktion','Audit- und Tages-Checklisten, wöchentliche Produktionslisten und Waste-Erfassung — der tägliche Takt.','4 Bereiche','/operations-checklisten'],
    ['03','Compliance','Hygiene, Behörden & Handbücher','Hygienehandbuch, Behörden-Unterlagen, Pflichtdokumente und Management-Handbücher — prüfungssicher.','4 + Verweis','/operations-hygiene'],
    ['04','Bestand','Inventur & Bestand','Festwert- und Jahresinventur — mit Verweis auf DB 0 Inventurliste und die Packaging-Datenbank.','1 + 2 Verweise','/operations-inventur'],
@@ -12376,6 +12376,153 @@
     var r=box.getBoundingClientRect(), vh=window.innerHeight||800;
     if(r.top < vh && r.bottom > 0){ requestAnimationFrame(reveal); }
     setTimeout(reveal, 1200);
+  }
+
+  function mount(){
+    if(!on()) return;
+    injectCSS();
+    var sc=document.querySelector(".super-content"); if(!sc) return;
+    buildHero(sc);
+    buildBody(sc);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   lektionen/team-onboarding — Insel 01 der Operations Area
+   Volle Lektion: Hero + Einleitung + 4 Bereich-Blöcke
+   (Onboarding, Team-Infos, Kleidung, Urlaub) + Learnings.
+   Muster: Hero = operations-area/food-drinks (.ts-hero),
+   Learnings = #tsl-Orbs. Prefix tsteam/tm- -> kollisionsfrei.
+   Live-Beispiel (MacBook) folgt separat (Screenshot-Asset).
+   ============================================================ */
+(function(){
+  if(window.__tsteam) return; window.__tsteam=true;
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var GLOW="199,180,137";
+  function on(){ return /\/lektionen\/team-onboarding\/?$/.test(location.pathname); }
+
+  /* [num, titel, text] */
+  var AREAS=[
+   ['01','Onboarding neuer Mitarbeiter','Jeder neue Mitarbeiter startet mit derselben Checkliste. Sie geht jeden Schritt durch: Papierkram, Einweisung an den Stationen, am Ende die Unterschrift, dass alles gezeigt wurde. Du siehst auf einen Blick, wo jemand steht und was noch fehlt. Auch wenn zwei Neue gleichzeitig anfangen, geht nichts unter.'],
+   ['02','Team-Informationen','Alle Stammdaten deines Teams an einer Stelle: Kontakt, Position, Eintrittsdatum, Notfallkontakt. Wenn du eine Info brauchst, hast du sie sofort zur Hand, statt in alten Nachrichten zu suchen.'],
+   ['03','Kleidungs-Ausgabe','Wer hat welche Teile in welcher Größe bekommen. Die Ausgabeliste hält fest, was rausgegangen ist und was zurückkommt, wenn jemand geht. So weißt du jederzeit, was im Umlauf ist und wann du nachbestellen musst.'],
+   ['04','Urlaubsübersichten','Alle Urlaube in einer Übersicht. Du erkennst früh, wann es eng wird, und legst die Schichten drumherum, bevor es kurzfristig wird. Anträge stehen an einem Ort, genehmigt oder noch offen.']
+  ];
+  var LEARN=[
+   'Du hast die Personal-Insel deiner Operations Area gebaut, mit Onboarding, Team-Infos, Kleidung und Urlaub an einem Ort.',
+   'Du weißt, wie eine Onboarding-Checkliste neue Mitarbeiter Schritt für Schritt startklar macht, ohne dass etwas untergeht.',
+   'Du pflegst die Stammdaten deines Teams so, dass du jede Info sofort findest.',
+   'Du behältst Kleidung im Umlauf und Urlaube im Blick, bevor Engpässe entstehen.'
+  ];
+
+  var S='.page__lektionen-team-onboarding';
+  var CSS=`
+  ${S}{--tm-beige:#c7b489;--tm-display:"Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--tm-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;}
+  /* ---- HERO ---- */
+  ${S} .tm-hero{position:relative;width:min(1180px,94vw);margin:74px auto 4px;text-align:center;isolation:isolate;}
+  ${S} .tm-hero__back{display:inline-flex;align-items:center;gap:7px;font:600 11px/1 var(--tm-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:20px;transition:color .3s ease;animation:tmRise 600ms cubic-bezier(.16,1,.3,1) both;}
+  ${S} .tm-hero__back:hover{color:var(--tm-beige);}
+  ${S} .tm-hero__back svg{width:13px;height:13px;}
+  ${S} .tm-hero__logo{display:block;width:56px;height:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tmRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;}
+  ${S} .tm-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--tm-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--tm-beige);margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95);animation:tmRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;}
+  ${S} .tm-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tm-beige);box-shadow:0 0 12px rgba(${GLOW},.7);}
+  ${S} .tm-hero__title{margin:0;font-family:var(--tm-display);font-weight:600;color:#fff;line-height:1.03;letter-spacing:-.02em;font-size:clamp(2.4rem,7vw,4.8rem);text-wrap:balance;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9);animation:tmRise 800ms cubic-bezier(.16,1,.3,1) 220ms both;}
+  ${S} .tm-hero__title .tm-gold{color:var(--tm-beige);}
+  ${S} .tm-hero__sub{margin:18px auto 0;max-width:600px;font:400 1.06rem/1.6 var(--tm-sans);color:rgba(255,255,255,.74);animation:tmRise 850ms cubic-bezier(.16,1,.3,1) 300ms both;}
+  /* ---- CONTAINER ---- */
+  #tsteam{width:100%;font-family:var(--tm-sans);color:#fff;}
+  #tsteam *{box-sizing:border-box}
+  /* ---- INTRO ---- */
+  #tsteam .tm-intro{width:min(760px,92vw);margin:44px auto 0;text-align:center;}
+  #tsteam .tm-intro .tm-lead{margin:0 0 20px;font-family:var(--tm-display);font-weight:600;font-size:clamp(20px,2.6vw,26px);line-height:1.28;letter-spacing:-.01em;color:#fff;}
+  #tsteam .tm-intro p{margin:0 auto 16px;max-width:680px;font-size:1.04rem;line-height:1.7;color:rgba(255,255,255,.86);}
+  #tsteam .tm-intro p:last-child{margin-bottom:0;}
+  /* ---- BEREICH-GRID ---- */
+  #tsteam .tm-areas{width:min(1080px,92vw);margin:56px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  #tsteam .tm-card{position:relative;overflow:hidden;border-radius:16px;padding:30px 28px 28px;background:#04050a;border:1px solid rgba(255,255,255,.07);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease;}
+  #tsteam .tm-card.on{opacity:1;transform:translateY(0);}
+  #tsteam .tm-card:hover{border-color:rgba(${GLOW},.26);box-shadow:0 6px 22px rgba(${GLOW},.14),0 0 40px rgba(${GLOW},.10);}
+  #tsteam .tm-card::before{content:attr(data-n);position:absolute;top:22px;right:26px;font:600 .72rem/1 var(--tm-sans);letter-spacing:.2em;color:rgba(${GLOW},.5);}
+  #tsteam .tm-card::after{content:"";position:absolute;top:0;left:28px;width:34px;height:2px;background:linear-gradient(90deg,var(--tm-beige),transparent);}
+  #tsteam .tm-card h3{margin:14px 0 12px;font-family:"Lineal TS",var(--tm-display);font-weight:600;font-size:1.24rem;letter-spacing:-.012em;line-height:1.15;color:#fff;}
+  #tsteam .tm-card p{margin:0;font-size:.94rem;line-height:1.62;color:rgba(255,255,255,.86);}
+  /* ---- LEARNINGS ---- */
+  #tsteam .tm-learn{width:100vw;max-width:100vw;margin:72px 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);}
+  #tsteam .tm-learn-head{text-align:center;margin:0 auto 52px;}
+  #tsteam .tm-learn-eyebrow{display:inline-block;font-family:"Lineal TS",var(--tm-display);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tm-beige);margin:0 0 14px;}
+  #tsteam .tm-learn-title{font-family:"Lineal TS",var(--tm-display);font-size:clamp(28px,4.4vw,42px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0;color:#fff;}
+  #tsteam .tm-learn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto;justify-items:center;}
+  #tsteam .tm-orb-cell{opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 140ms);width:100%;max-width:250px;}
+  #tsteam .tm-orb-cell.in{opacity:1;transform:translateY(0);filter:blur(0);}
+  #tsteam .tm-orb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(20px,2.6vw,32px);background:radial-gradient(120% 120% at 38% 28%,rgba(${GLOW},.20),rgba(255,255,255,.035) 46%,rgba(10,12,20,.85) 78%);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 44px -18px rgba(0,0,0,.75),inset 0 1px 1px rgba(255,255,255,.10),inset 0 0 60px rgba(${GLOW},.06);animation:tm-float 7s ease-in-out infinite;will-change:transform;transition:border-color .45s ease,box-shadow .45s ease;}
+  #tsteam .tm-orb-cell:nth-child(1) .tm-orb{animation-delay:0s}
+  #tsteam .tm-orb-cell:nth-child(2) .tm-orb{animation-delay:-1.6s}
+  #tsteam .tm-orb-cell:nth-child(3) .tm-orb{animation-delay:-3.2s}
+  #tsteam .tm-orb-cell:nth-child(4) .tm-orb{animation-delay:-4.8s}
+  #tsteam .tm-orb::before{content:"";position:absolute;top:10%;left:16%;width:34%;height:24%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.16),rgba(255,255,255,0));pointer-events:none}
+  #tsteam .tm-orb:hover{border-color:rgba(${GLOW},.5);box-shadow:0 22px 50px -18px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.12),0 0 40px rgba(${GLOW},.22)}
+  #tsteam .tm-orb p{position:relative;margin:0;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,14.5px);font-weight:500;line-height:1.5;letter-spacing:-.005em;max-width:22ch}
+  @keyframes tm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tmRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @media(max-width:820px){#tsteam .tm-areas{grid-template-columns:1fr;max-width:520px}}
+  @media(max-width:1079px){#tsteam .tm-learn-grid{grid-template-columns:repeat(2,1fr);gap:36px 30px;max-width:580px}}
+  @media(max-width:520px){#tsteam .tm-learn-grid{grid-template-columns:1fr;max-width:320px}${S} .tm-hero__title{font-size:clamp(1.9rem,10vw,2.8rem)}}
+  @media(prefers-reduced-motion:reduce){
+    ${S} .tm-hero__back,${S} .tm-hero__logo,${S} .tm-hero__eyebrow,${S} .tm-hero__title,${S} .tm-hero__sub{animation:none!important}
+    #tsteam .tm-card,#tsteam .tm-orb-cell{opacity:1;transform:none;filter:none}
+    #tsteam .tm-orb{animation:none}
+  }`;
+
+  function injectCSS(){ if(document.getElementById("tsteam-css"))return; var s=document.createElement("style"); s.id="tsteam-css"; s.textContent=CSS; document.head.appendChild(s); }
+
+  function buildHero(sc){
+    if(sc.querySelector(".tm-hero")) return;
+    var hero=document.createElement("div"); hero.className="tm-hero";
+    hero.innerHTML=
+      '<a class="tm-hero__back" href="/operations-area"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Operations Area</a>'+
+      '<img class="tm-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+      '<div class="tm-hero__eyebrow">Operations Area · Personal</div>'+
+      '<h1 class="tm-hero__title">Team & <span class="tm-gold">Onboarding</span></h1>'+
+      '<p class="tm-hero__sub">Alles rund um dein Team an einem Ort: vom Onboarding neuer Mitarbeiter bis zur Urlaubsplanung.</p>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+  }
+
+  function buildBody(sc){
+    if(document.getElementById("tsteam")) return;
+    var box=document.createElement("div"); box.id="tsteam";
+    var areas=AREAS.map(function(a){
+      return '<article class="tm-card" data-n="'+a[0]+'"><h3>'+a[1]+'</h3><p>'+a[2]+'</p></article>';
+    }).join('');
+    var orbs=LEARN.map(function(t,i){
+      return '<div class="tm-orb-cell" style="--i:'+i+'"><div class="tm-orb"><p>'+t+'</p></div></div>';
+    }).join('');
+    box.innerHTML=
+      '<div class="tm-intro">'+
+        '<p class="tm-lead">Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.</p>'+
+        '<p>In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.</p>'+
+        '<p>Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.</p>'+
+      '</div>'+
+      '<section class="tm-areas">'+areas+'</section>'+
+      '<section class="tm-learn"><div class="tm-learn-head"><span class="tm-learn-eyebrow">Was du mitnimmst</span><h2 class="tm-learn-title">Learnings</h2></div><div class="tm-learn-grid">'+orbs+'</div></section>';
+    var hero=sc.querySelector(".tm-hero");
+    if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
+    else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
+    reveal(box);
+  }
+
+  function reveal(box){
+    var cards=[].slice.call(box.querySelectorAll(".tm-card"));
+    var io1=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.08)+'s'; c.classList.add('on'); setTimeout(function(){c.style.transitionDelay='';}, i*80+900); }); io1.disconnect(); },{threshold:.05});
+    if(cards[0]) io1.observe(cards[0]);
+    var grid=box.querySelector('.tm-learn-grid');
+    if(grid){ var io2=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; [].slice.call(grid.querySelectorAll('.tm-orb-cell')).forEach(function(c){c.classList.add('in');}); io2.disconnect(); },{threshold:.15}); io2.observe(grid); }
   }
 
   function mount(){
