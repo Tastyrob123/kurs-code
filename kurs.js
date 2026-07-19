@@ -639,6 +639,225 @@
 })();
 
 /* ============================================================
+   key-metrics — #tskm Erkläranimation "Aus dem Tagesgeschäft wird dein Cockpit"
+   Konzept (Abschnitts-Katalog 02, Doktrin): Rohwerte (links) -> Master-Auswertung (Mitte) -> Kennzahlen-Cockpit (rechts).
+   Clean/datengetrieben, SVG-Fan-in/-out (Draw-on = Fluss) + Core-Puls + KPI-Count-up. One-Shot + Replay.
+   ============================================================ */
+(function(){
+  if(window.__tskm) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+
+  var INPUTS=[
+    {k:'Umsatz Netto', v:'2.480 €'},
+    {k:'Wareneinsatz', v:'704 €'},
+    {k:'Personalkosten', v:'620 €'},
+    {k:'Geleistete Stunden', v:'52 h'},
+    {k:'Transaktionen', v:'253'}
+  ];
+  /* Beispielwerte, in sich stimmig: WE 704/2480=28,4% · Bon 2480/253=9,80€ · DB I (2480-704)/2480=71,6% ·
+     DB II (1776-620)/2480=46,6% · DB III (1156-300)/2480=34,5% · Produktivität 2480/52≈48€/h */
+  var KPIS=[
+    {k:'Wareneinsatz', to:28.4, fmt:'pct'},
+    {k:'Durchschnittsbon', to:9.80, fmt:'eur'},
+    {k:'Deckungsbeitrag I', to:71.6, fmt:'pct'},
+    {k:'Deckungsbeitrag II', to:46.6, fmt:'pct'},
+    {k:'Deckungsbeitrag III', to:34.5, fmt:'pct'},
+    {k:'Produktivität', to:48, fmt:'eurh'}
+  ];
+  function fmtv(n,f){ if(f==='pct') return n.toFixed(1).replace('.',',')+' %'; if(f==='eur') return n.toFixed(2).replace('.',',')+' €'; return Math.round(n)+' €/h'; }
+
+  var CSS=`
+  #tskm{width:100vw;max-width:100vw;margin:60px 0 16px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskm *{box-sizing:border-box}
+  #tskm .km-head{max-width:860px;margin:0 auto 44px;text-align:center}
+  #tskm .km-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tskm .km-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tskm .km-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 16px}
+  #tskm .km-title span{color:#c7b489}
+  #tskm .km-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
+
+  #tskm .km-wrap{max-width:1080px;margin:0 auto;opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .95s cubic-bezier(.16,1,.3,1)}
+  #tskm .km-wrap.on{opacity:1;transform:none}
+
+  #tskm .km-stage{position:relative;display:grid;grid-template-columns:minmax(160px,1fr) minmax(150px,.95fr) minmax(280px,1.55fr);align-items:center;gap:clamp(26px,4.4vw,72px)}
+  #tskm svg.km-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+  #tskm .km-line{fill:none;stroke:rgba(199,180,137,.32);stroke-width:1.4;stroke-linecap:round;opacity:0}
+  #tskm .km-line.on{opacity:1}
+
+  #tskm .km-col{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #tskm .km-col-lbl{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;margin-bottom:3px}
+  #tskm .km-in{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 14px;opacity:0;transform:translateX(-14px) scale(.96)}
+  #tskm .km-wrap.on .km-in{animation:kmIn .6s cubic-bezier(.34,1.56,.64,1) both}
+  #tskm .km-in-k{font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  #tskm .km-in-v{font-size:14px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+
+  #tskm .km-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(199,180,137,.07);border:1px solid rgba(199,180,137,.4);border-radius:20px;padding:24px 16px;box-shadow:0 26px 60px -30px rgba(0,0,0,.92);opacity:0;transform:scale(.9)}
+  #tskm .km-wrap.on .km-core{animation:kmCore .7s cubic-bezier(.16,1,.3,1) .5s both}
+  #tskm .km-core.pulse{animation:kmPulse 1.5s cubic-bezier(.16,1,.3,1)}
+  #tskm .km-core-ico{width:46px;height:46px;border-radius:13px;background:rgba(199,180,137,.14);border:1px solid rgba(199,180,137,.4);display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+  #tskm .km-core-ico svg{width:24px;height:24px}
+  #tskm .km-core-name{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#efe6d2;text-align:center;line-height:1.15}
+  #tskm .km-core-tag{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+  #tskm .km-kpis{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  #tskm .km-kpi{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 15px;opacity:.38;transform:translateY(8px);transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1),border-color .5s ease,box-shadow .5s ease}
+  #tskm .km-kpi.lit{opacity:1;transform:none;border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -16px rgba(199,180,137,.42)}
+  #tskm .km-kpi-k{font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px}
+  #tskm .km-kpi-v{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(18px,2vw,22px);color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums;letter-spacing:-.01em;transition:color .5s ease}
+  #tskm .km-kpi.lit .km-kpi-v{color:#efe6d2}
+
+  #tskm .km-note{max-width:660px;margin:22px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
+  #tskm .km-foot{display:flex;justify-content:center;margin-top:26px}
+  #tskm .km-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .4s ease}
+  #tskm .km-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tskm .km-replay svg{width:15px;height:15px}
+
+  @keyframes kmIn{to{opacity:1;transform:none}}
+  @keyframes kmCore{to{opacity:1;transform:none}}
+  @keyframes kmPulse{0%{box-shadow:0 26px 60px -30px rgba(0,0,0,.92),0 0 0 0 rgba(199,180,137,0)}42%{box-shadow:0 26px 60px -30px rgba(0,0,0,.92),0 0 36px 4px rgba(199,180,137,.36)}100%{box-shadow:0 26px 60px -30px rgba(0,0,0,.92),0 0 0 0 rgba(199,180,137,0)}}
+
+  @media(max-width:820px){
+    #tskm .km-stage{grid-template-columns:1fr;gap:20px}
+    #tskm svg.km-lines{display:none}
+    #tskm .km-col{flex-direction:row;flex-wrap:wrap;justify-content:center}
+    #tskm .km-in{flex:1 1 40%;min-width:140px}
+    #tskm .km-core{max-width:280px;margin:0 auto}
+    #tskm .km-col-lbl{flex-basis:100%}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #tskm .km-wrap{opacity:1;transform:none}
+    #tskm .km-in,#tskm .km-core{animation:none!important;opacity:1!important;transform:none!important}
+  }
+  `;
+
+  var root=null, leftPaths=[], rightPaths=[], timers=[];
+  function reduced(){ return window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches; }
+  function T(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function clearT(){ timers.forEach(clearTimeout); timers=[]; }
+
+  function build(){
+    var el=document.createElement('div'); el.id='tskm';
+    var s=document.createElement('style'); s.textContent=CSS; el.appendChild(s);
+    var inHTML=INPUTS.map(function(o){ return '<div class="km-in"><span class="km-in-k">'+o.k+'</span><span class="km-in-v">'+o.v+'</span></div>'; }).join('');
+    var kpiHTML=KPIS.map(function(o){ return '<div class="km-kpi" data-to="'+o.to+'" data-fmt="'+o.fmt+'"><div class="km-kpi-k">'+o.k+'</div><div class="km-kpi-v">'+fmtv(0,o.fmt)+'</div></div>'; }).join('');
+    var wrap=document.createElement('div');
+    wrap.innerHTML=`
+<div class="km-head">
+  <div class="km-eyebrow">So entsteht dein Cockpit</div>
+  <h2 class="km-title">Aus dem Tagesgeschäft wird dein <span>Cockpit</span>.</h2>
+  <p class="km-sub">Du trägst die rohen Werte eines Tages ein — die Auswertung rechnet daraus live die Kennzahlen, mit denen du deinen Laden steuerst.</p>
+</div>
+<div class="km-wrap">
+  <div class="km-stage">
+    <svg class="km-lines" preserveAspectRatio="none"></svg>
+    <div class="km-col">
+      <div class="km-col-lbl">Deine Rohwerte</div>
+      ${inHTML}
+    </div>
+    <div class="km-core">
+      <div class="km-core-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c7b489" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M9 20V4M14 20v-7M19 20V8"/></svg></div>
+      <div class="km-core-name">Kostenauswertung</div>
+      <div class="km-core-tag">Master · DB XX</div>
+    </div>
+    <div class="km-kpis">${kpiHTML}</div>
+  </div>
+  <p class="km-note">Beispielwerte eines Betriebstags — die echten Zahlen rechnet deine Datenbank selbst.</p>
+  <div class="km-foot">
+    <button class="km-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
+  </div>
+</div>`;
+    while(wrap.firstChild) el.appendChild(wrap.firstChild);
+    // stagger input pop-in
+    var ins=el.querySelectorAll('.km-in');
+    Array.prototype.forEach.call(ins,function(n,i){ n.style.animationDelay=(200+i*130)+'ms'; });
+    el.querySelector('.km-replay').addEventListener('click',function(){ replay(); });
+    return el;
+  }
+
+  function pathEl(x1,y1,x2,y2){
+    var dx=(x2-x1)*0.5;
+    var d='M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2;
+    var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',d); p.setAttribute('class','km-line');
+    return p;
+  }
+  function drawLines(){
+    var stage=root.querySelector('.km-stage'), svg=root.querySelector('.km-lines');
+    if(!stage||!svg) return;
+    var sr=stage.getBoundingClientRect();
+    if(!sr.width) return;
+    svg.setAttribute('viewBox','0 0 '+sr.width+' '+sr.height);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    leftPaths=[]; rightPaths=[];
+    var coreEl=root.querySelector('.km-core'); var cr=coreEl.getBoundingClientRect();
+    var cx0=cr.left-sr.left, cx1=cr.right-sr.left, cyc=cr.top-sr.top+cr.height/2;
+    Array.prototype.forEach.call(root.querySelectorAll('.km-in'),function(el){ var r=el.getBoundingClientRect(); var p=pathEl(r.right-sr.left, r.top-sr.top+r.height/2, cx0, cyc); svg.appendChild(p); leftPaths.push(p); });
+    Array.prototype.forEach.call(root.querySelectorAll('.km-kpi'),function(el){ var r=el.getBoundingClientRect(); var p=pathEl(cx1, cyc, r.left-sr.left, r.top-sr.top+r.height/2); svg.appendChild(p); rightPaths.push(p); });
+  }
+  function prime(p){ var L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.style.transition='none'; p.getBoundingClientRect(); }
+  function drawOn(p,delay){ p.style.transition='stroke-dashoffset .62s cubic-bezier(.16,1,.3,1) '+delay+'ms, opacity .3s ease '+delay+'ms'; p.classList.add('on'); p.style.strokeDashoffset='0'; }
+  function lineFinal(p){ p.style.transition='none'; p.style.strokeDasharray='none'; p.style.strokeDashoffset='0'; p.classList.add('on'); }
+
+  function animVal(el,to,f){
+    var dur=1050, start=null;
+    function step(ts){ if(!start)start=ts; var pr=Math.min(1,(ts-start)/dur); var e=1-Math.pow(1-pr,3); el.textContent=fmtv(to*e,f); if(pr<1) requestAnimationFrame(step); else el.textContent=fmtv(to,f); }
+    requestAnimationFrame(step);
+  }
+
+  function finalState(){
+    root.querySelector('.km-wrap').classList.add('on');
+    drawLines(); leftPaths.concat(rightPaths).forEach(lineFinal);
+    Array.prototype.forEach.call(root.querySelectorAll('.km-kpi'),function(el){ el.classList.add('lit'); var v=el.querySelector('.km-kpi-v'); v.textContent=fmtv(parseFloat(el.getAttribute('data-to')), el.getAttribute('data-fmt')); });
+  }
+
+  function play(){
+    if(root.__playing) return; root.__playing=true; root.__played=true;
+    if(reduced()){ finalState(); root.__playing=false; return; }
+    var wrap=root.querySelector('.km-wrap'); wrap.classList.add('on');
+    drawLines(); leftPaths.concat(rightPaths).forEach(prime);
+    leftPaths.forEach(function(p,i){ drawOn(p, 900+i*90); });
+    var core=root.querySelector('.km-core');
+    T(function(){ core.classList.add('pulse'); }, 1500);
+    T(function(){ core.classList.remove('pulse'); }, 3050);
+    rightPaths.forEach(function(p,i){ drawOn(p, 1780+i*110); });
+    Array.prototype.forEach.call(root.querySelectorAll('.km-kpi'),function(el,i){
+      T(function(){ el.classList.add('lit'); animVal(el.querySelector('.km-kpi-v'), parseFloat(el.getAttribute('data-to')), el.getAttribute('data-fmt')); }, 1980+i*175);
+    });
+    T(function(){ root.__playing=false; }, 3600);
+  }
+
+  function replay(){
+    clearT(); root.__playing=false;
+    var wrap=root.querySelector('.km-wrap');
+    Array.prototype.forEach.call(root.querySelectorAll('.km-kpi'),function(el){ el.classList.remove('lit'); el.querySelector('.km-kpi-v').textContent=fmtv(0, el.getAttribute('data-fmt')); });
+    root.querySelector('.km-core').classList.remove('pulse');
+    var svg=root.querySelector('.km-lines'); while(svg.firstChild) svg.removeChild(svg.firstChild); leftPaths=[]; rightPaths=[];
+    wrap.classList.remove('on'); void wrap.offsetWidth;
+    requestAnimationFrame(function(){ play(); });
+  }
+
+  var rz=null;
+  function onResize(){ if(!root) return; clearTimeout(rz); rz=setTimeout(function(){ if(root.__played){ drawLines(); leftPaths.concat(rightPaths).forEach(lineFinal); } },160); }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskm'); if(e&&e.parentNode)e.parentNode.removeChild(e); root=null; return; }
+    if(document.getElementById('tskm')) return;
+    var intro=document.getElementById('tskm-intro'); if(!intro) return;
+    root=build();
+    intro.parentNode.insertBefore(root, intro.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(); io.disconnect(); } },{threshold:.28});
+    io.observe(root);
+    var r=root.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0){ play(); io.disconnect(); }
+  }
+
+  window.__tskm=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('resize', onResize);
+})();
+
+/* ============================================================
    gerichte-getrnke-finaler-schritt — Hero "DB XI : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
    ============================================================ */
 (function(){
