@@ -12519,10 +12519,18 @@
 
   function reveal(box){
     var cards=[].slice.call(box.querySelectorAll(".tm-card"));
-    var io1=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.08)+'s'; c.classList.add('on'); setTimeout(function(){c.style.transitionDelay='';}, i*80+900); }); io1.disconnect(); },{threshold:.05});
-    if(cards[0]) io1.observe(cards[0]);
+    function showCards(){ cards.forEach(function(c,i){ if(c.classList.contains('on'))return; c.style.transitionDelay=(i*0.08)+'s'; c.classList.add('on'); setTimeout(function(){c.style.transitionDelay='';}, i*80+900); }); }
+    var io1=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; showCards(); io1.disconnect(); },{threshold:.05});
+    if(cards[0]) io1.observe(cards[0]); else showCards();
+    setTimeout(showCards, 1400);
     var grid=box.querySelector('.tm-learn-grid');
-    if(grid){ var io2=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; [].slice.call(grid.querySelectorAll('.tm-orb-cell')).forEach(function(c){c.classList.add('in');}); io2.disconnect(); },{threshold:.15}); io2.observe(grid); }
+    if(grid){
+      var orbs=[].slice.call(grid.querySelectorAll('.tm-orb-cell'));
+      function showOrbs(){ orbs.forEach(function(c){ c.classList.add('in'); }); }
+      var io2=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; showOrbs(); io2.disconnect(); },{threshold:.1});
+      io2.observe(grid);
+      setTimeout(showOrbs, 1400);
+    }
   }
 
   function mount(){
