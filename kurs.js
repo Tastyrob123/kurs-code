@@ -14263,3 +14263,117 @@ var TSISL_ZUG_SCHLUESSEL=[
     next:{ href:'/expansioncenter', label:'Expansioncenter' }
   };
 })();
+
+/* VFL Insel — Expansioncenter (6 Warenkörbe) */
+(function(){
+  var C=function(tag,name,typeLabel,icon,val,overlay,ex,extra){var o={tag:tag,name:name,typeLabel:typeLabel,icon:icon,imgLabel:typeLabel,val:val,overlay:overlay,ex:ex};if(extra)for(var k in extra)o[k]=extra[k];return o;};
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['expansioncenter']={
+    hero:{ eyebrow:'Vision Frame · Standort & Skalierung', titleHtml:'Expansion<span class="g">center</span>' },
+    intro:[
+      'Wachsen klingt einfach: noch ein Standort, noch einer. In der Realität zerfällt genau da die Kontrolle. Du weißt nicht mehr, welcher Laden im Bau steckt, wer welchen Vertrag hat, welche Genehmigung fehlt und wo das Budget aus dem Ruder läuft.',
+      'Genau dafür baust du jetzt das Expansioncenter — <b>sechs Datenbanken</b>, die zusammen den Maschinenraum deiner Expansion bilden. Standorte sind die Nabe. Daran hängen deine Projekte, Partner, Meilensteine, Risiken und Kosten. Kein Standort geht mehr live, ohne dass du vorher siehst, ob er es wirklich ist. Du tauschst Bauchgefühl gegen einen Blick auf eine Zahl.'
+    ],
+    anim1:{ title:'Von einem Standort <span class="g">zum Netz</span>', lead:'Skalierung heißt nicht Chaos, sondern dasselbe Muster wieder und wieder — die Speichen bleiben identisch, nur die Nabe multipliziert sich.', nodes:[
+      {ic:'🏪',t:'Nabe: Standort',s:'HH-01 in der Mitte.'},
+      {ic:'🕸',t:'Fünf Speichen',s:'Projekt, Partner, Meilensteine, Risiken, Kosten.'},
+      {ic:'🔲',t:'Netz',s:'Aus zwei werden vier — dasselbe Raster.'}
+    ]},
+    video:{ heading:'Der Maschinenraum <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie die sechs Datenbanken zusammenspielen — von der Standorte-Nabe bis zu den Relationen, die Projekte, Risiken und Kosten daran hängen.', icon:'▷', phLabel:'Video folgt' },
+    shops:[
+      { eyebrow:'🏪 Standorte Pipeline · Datenbank 1 von 6', title:'Die Nabe. <span class="g">Standort für Standort.</span>', sub:'Bau zuerst die Standorte-Pipeline — alle anderen fünf Datenbanken hängen daran. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für diese Datenbank an. Ein Klick auf den Button erzeugt später eine neue Standort-Zeile. So startet jeder neue Standort aus einer festen Vorlage statt aus dem Nichts.','„+ Neuer Standort"'),
+        C('2','Datenbank + Site-ID','Titel-Spalte','🏪','1 DB','Erstellt die Standorte-Pipeline mit dem Titelfeld „Site-ID". Die Site-ID ist der eindeutige Kurzname jedes Standorts und zieht sich durch alle anderen fünf Datenbanken. Halte sie knapp und stabil.','HH-01'),
+        C('3','Adresse','Text','✎','Text','Die vollständige Anschrift des Standorts. Ein Textfeld reicht, du brauchst hier keine Struktur. Dient der schnellen Orientierung in der Übersicht.','Schulterblatt 58, 20357 Hamburg'),
+        C('4','Stadt','Text','🏙','Text','Die Stadt als eigenes Feld, damit du später nach Städten filtern und gruppieren kannst. Getrennt von der Adresse, weil du danach sortierst.','Hamburg'),
+        C('5','Region','Text','🧭','Text','Das Vertriebs-Cluster, dem der Standort zugeordnet ist. Bündelt mehrere Städte zu einer Steuerungsebene. Frei wählbar, aber konsistent halten.','Nord'),
+        C('6','Betreiber / Partner','Text','👤','Text','Anzeigename des Betreibers vor Ort. Bewusst ein Textfeld — die belastbare Zuordnung passiert in der Partner-Datenbank. Hier steht nur, wer den Laden führt.','Team Nord GmbH'),
+        C('7','Store-Modell','Auswahl · 4','◧','4 Optionen','Legt fest, in welcher Betriebsform der Standort läuft: Single Store, Multi-Unit, Ghost Kitchen, Private Chef. Das Modell entscheidet über Capex, Personal und Fläche.','Ghost Kitchen'),
+        C('8','Status','Status · 8','◔','Status','Die Pipeline-Stufe von Scouting bis Live, gruppiert in To-do, In Arbeit und Fertig. Ein Standort wandert genau eine Richtung durch diese Stufen.','Umbau'),
+        C('9','Capex geplant','Zahl · €','€','€','Der geplante Investitionsbedarf für die Eröffnung, in Euro. Bildet die Basis, gegen die du die Ist-Kosten misst.','85.000 €'),
+        C('10','Capex aktuell','Zahl · €','€','€','Die bis heute tatsächlich gebundenen Investitionskosten. Steht neben dem Plan, damit die Abweichung sofort sichtbar wird.','72.400 €'),
+        C('11','Fixkosten-Forecast','Zahl · €','€','€/Monat','Der erwartete monatliche Fixkostenblock nach Eröffnung — Miete, Personalgrundlast, Technik. Zeigt, ab welchem Umsatz der Standort trägt.','9.800 €'),
+        C('12','Readiness-Score','Zahl · %','◎','%','Wie startklar der Standort ist, als Prozentwert von 0 bis 100. Manuell gepflegt. Macht den Reifegrad über alle Standorte vergleichbar.','65 %'),
+        C('13','Risiko-Score','Zahl · Ring 0–10','◎','0–10','Das Standort-Risiko auf einer Skala bis 10, als roter Ring. Höher heißt heikler. Schneller Ampel-Ersatz in der Galerie-Ansicht.','4'),
+        C('14','Ziel-Eröffnungsdatum','Datum','📅','Datum','Das angepeilte Eröffnungsdatum als Einzeldatum. Anker für Meilensteine und Countdown-Ansichten.','15.09.2026'),
+        C('15','Verknüpfte Lieferanten','Relation · später','🔗','Verknüpfung','Verbindet den Standort mit seinen Lieferanten. Das Ziel liegt auf der Lieferanten-Insel, die hier noch nicht gebaut ist. Wird nachträglich verdrahtet und zählt nicht in den Fortschritt.','→ Lieferanten-Insel',{later:true}),
+        C('16','Verknüpfte SOP-Pakete','Relation · später','🔗','Verknüpfung','Hängt die Standard-Arbeitsanweisungen an den Standort. Ziel ist die SOP-Insel, ebenfalls noch nicht vorhanden. Deshalb später verknüpfen, nicht fortschrittsrelevant.','→ SOP-Insel',{later:true})
+      ]},
+      { eyebrow:'🚀 Expansionsprojekte · Datenbank 2 von 6', title:'Das Vorhaben. <span class="g">Projekt für Projekt.</span>', sub:'Jedes Wachstumsvorhaben als eigener Eintrag, verknüpft mit seinem Standort. Um die Tabelle anzulegen: / drücken → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für neue Expansionsprojekte an. Ein Klick erzeugt ein Projekt aus fester Vorlage. So beginnt jedes Vorhaben mit denselben Feldern.','„+ Neues Projekt"'),
+        C('2','Datenbank + Projekt-ID','Titel-Spalte','🚀','1 DB','Erstellt die Projekt-Datenbank mit dem Titelfeld „Projekt-ID". Die ID verknüpft das Projekt mit Meilensteinen, Risiken und Kosten. Kurz und sprechend halten.','EXP-HH-01'),
+        C('3','Typ','Auswahl · 5','◧','5 Optionen','Die Art des Vorhabens: Neueröffnung, Übernahme, Umbau, Re-Launch, Pop-Up. Der Typ bestimmt Aufwand und welche Meilensteine anfallen.','Neueröffnung'),
+        C('4','Phase','Status · 7','◔','Status','Der Projektfortschritt von Analyse bis Stabilisierung, gruppiert für die Board-Ansicht. Läuft parallel zum Standort-Status, ist aber projektbezogen.','Bau'),
+        C('5','Ampelstatus','Auswahl · 3','🚦','3 Optionen','Die Gesundheit des Projekts auf einen Blick: grün, gelb, rot. Trennt Termin-Fortschritt (Phase) von Zustand (Ampel).','🟡 Gelb'),
+        C('6','Entscheidungsbedarf','Auswahl · 3','⏱','3 Optionen','Zeigt, ob und wie dringend eine Entscheidung ansteht: keiner, diese Woche, sofort. Filtert die Projekte heraus, die gerade dich brauchen.','diese Woche'),
+        C('7','Budget geplant','Zahl · €','€','€','Das genehmigte Gesamtbudget des Projekts in Euro. Referenzwert für die laufende Kostenkontrolle. Getrennt vom Capex des Einzelstandorts.','120.000 €'),
+        C('8','Budget aktuell','Zahl · €','€','€','Die bereits verbrauchten Projektkosten in Euro. Neben dem Plan zeigt es sofort, wie viel Luft noch ist.','98.500 €'),
+        C('9','Starttermin','Datum','📅','Datum','Der offizielle Projektstart als Einzeldatum. Anker für die Laufzeit und den Vergleich mit dem Zieltermin.','01.06.2026'),
+        C('10','Zieltermin','Datum','📅','Datum','Der angepeilte Abschluss- bzw. Launch-Termin. Zusammen mit dem Starttermin ergibt sich die geplante Dauer.','15.09.2026'),
+        C('11','Projektverantwortlicher','Person','👤','Person','Die Person, die das Projekt führt — ein Notion-Nutzer, kein Text. Macht Zuständigkeit eindeutig und filterbar.','@Robert'),
+        C('12','Verknüpfter Standort','Relation','🔗','Verknüpfung','Verbindet das Projekt mit seinem Standort aus DB 1. Das Ziel existiert bereits, die Karte ist direkt baubar. Einseitig — im Standort taucht sie bewusst nicht auf.','→ HH-01')
+      ]},
+      { eyebrow:'🤝 Partner & Betreiber · Datenbank 3 von 6', title:'Die Menschen dahinter. <span class="g">Partner für Partner.</span>', sub:'Wer betreibt, investiert oder als Franchise-Partner mitzieht — mit klarem Beteiligungsmodell. / drücken → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für neue Partner-Einträge an. Ein Klick erzeugt eine Partner-Zeile aus Vorlage. Jeder neue Partner startet gleich strukturiert.','„+ Neuer Partner"'),
+        C('2','Datenbank + Name','Titel-Spalte','🤝','1 DB','Erstellt die Partner-Datenbank mit dem Titelfeld „Name". Der Name ist die Anzeige-Identität des Partners und Ankerpunkt der Standort-Verknüpfung.','Team Nord GmbH'),
+        C('3','Rolle','Auswahl · 3','◧','3 Optionen','Die Funktion des Partners: Betreiber, Investor oder Franchise-Partner. Steuert, welche Rechte und Pflichten gelten.','Betreiber'),
+        C('4','Beteiligungsmodell','Text','✎','Text','Wie der Partner am Standort beteiligt ist, als Freitext. Bewusst offen, weil jedes Modell anders geschnitten ist. Kurze, klare Formel eintragen.','20 % Umsatzbeteiligung'),
+        C('5','Verantwortungsumfang','Text','✎','Text','Was der Partner konkret verantwortet — Betrieb, Personal, Einkauf. Freitext, damit du den Zuschnitt exakt abbilden kannst.','Tagesbetrieb, Personal, Einkauf'),
+        C('6','Performance-Score','Zahl · Ring 0–100','◎','0–100','Die Leistungsbewertung des Partners von 0 bis 100, als grüner Ring. Manuell gepflegt. Macht Partner über Standorte hinweg vergleichbar.','82'),
+        C('7','Vertragsstatus','Status · 5','◔','Status','Wo der Vertrag steht — von In Verhandlung über Aktiv bis Gekündigt. Trennt die Vertrags-Realität von der Rolle.','Aktiv'),
+        C('8','Verknüpfte Standorte','Relation','🔗','Verknüpfung','Verbindet den Partner mit einem oder mehreren Standorten aus DB 1. Dies ist die tragende Standort↔Partner-Verbindung — im Standort steht dazu nur der Textname.','→ HH-01')
+      ]},
+      { eyebrow:'🎯 Meilensteine · Datenbank 4 von 6', title:'Was fehlt bis zum Start. <span class="g">Meilenstein für Meilenstein.</span>', sub:'Jede Vorbedingung als erreichbarer Zustand, verknüpft mit dem Projekt. / drücken → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für neue Meilensteine an. Ein Klick erzeugt einen Meilenstein aus Vorlage. Hält die Liste einheitlich.','„+ Neuer Meilenstein"'),
+        C('2','Datenbank + Meilenstein','Titel-Spalte','🎯','1 DB','Erstellt die Meilenstein-Datenbank mit dem Titelfeld „Meilenstein". Formuliere den Titel als erreichbaren Zustand, nicht als Aufgabe.','Gaststättenerlaubnis erteilt'),
+        C('3','Kategorie','Auswahl · 7','◧','7 Optionen','Ordnet den Meilenstein einem Gewerk zu, von Recht bis Finanzen. So filterst du z. B. alle rechtlichen Hürden eines Projekts.','Recht'),
+        C('4','Status','Status · 5','◔','Status','Der Bearbeitungsstand von Offen bis Erledigt, inklusive „Blockiert" und „Nicht relevant". Zeigt sofort, was hängt.','In Arbeit'),
+        C('5','Kritisch für Launch','Checkbox','☑','Ja/Nein','Markiert, ob der Launch ohne diesen Meilenstein nicht stattfinden darf. Damit filterst du die echten Show-Stopper heraus.','☑ Ja'),
+        C('6','Fälligkeitsdatum','Datum','📅','Datum','Der Termin, bis zu dem der Meilenstein stehen muss. Basis für Timeline- und Countdown-Ansichten.','20.08.2026'),
+        C('7','Abhängigkeiten','Text','✎','Text','Was erledigt sein muss, bevor dieser Meilenstein starten kann. Freitext, weil Abhängigkeiten selten sauber verlinkbar sind.','Bauabnahme abgeschlossen'),
+        C('8','Verantwortlich','Person','👤','Person','Die Person, die den Meilenstein liefert — ein Notion-Nutzer. Macht Verantwortung eindeutig.','@Robert'),
+        C('9','Verknüpftes Projekt','Relation','🔗','Verknüpfung','Hängt den Meilenstein an sein Projekt aus DB 2. Ziel existiert bereits, direkt baubar. Einseitig.','→ EXP-HH-01')
+      ]},
+      { eyebrow:'⚠️ Risiken · Datenbank 5 von 6', title:'Was schiefgehen kann. <span class="g">Risiko für Risiko.</span>', sub:'Jedes Risiko mit Wahrscheinlichkeit, Schaden und automatischem Score. Die zwei Zahlen baust du vor der Formel. / → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für neue Risiken an. Ein Klick erzeugt einen Risiko-Eintrag aus Vorlage. Sorgt dafür, dass jedes Risiko gleich bewertet wird.','„+ Neues Risiko"'),
+        C('2','Datenbank + Risiko','Titel-Spalte','⚠️','1 DB','Erstellt die Risiko-Datenbank mit dem Titelfeld „Risiko". Beschreibe das Risiko in einem Satz, konkret genug zum Handeln.','Bauverzug durch Lieferengpass Küchentechnik'),
+        C('3','Kategorie','Auswahl · 6','◧','6 Optionen','Ordnet das Risiko einem Feld zu, von Rechtlich bis Lieferkette. So erkennst du Häufungen in einer Kategorie.','Lieferkette'),
+        C('4','Eintrittswahrscheinlichkeit','Zahl · Ring 1–5','◎','1–5','Wie wahrscheinlich das Risiko eintritt, Skala 1 bis 5, als oranger Ring. Erster Faktor des Risiko-Scores — deshalb VOR der Formel anlegen.','3'),
+        C('5','Schadenshöhe','Zahl · Ring 1–5','◎','1–5','Wie schwer der Schaden wäre, Skala 1 bis 5, als roter Ring. Zweiter Faktor des Risiko-Scores — ebenfalls vor der Formel.','4'),
+        C('6','Risiko-Score','Formel','∑','1–25','Multipliziert Wahrscheinlichkeit mit Schadenshöhe zur Prioritätszahl (bis 25). Rechnet automatisch, sobald die zwei Felder oben stehen. Damit sortierst du Risiken nach echter Dringlichkeit.','12'),
+        C('7','Status','Status · 5','◔','Status','Der Bearbeitungsstand von Identifiziert bis Mitigiert oder Akzeptiert. Zeigt, welche Risiken noch offen an dir hängen.','In Bearbeitung'),
+        C('8','Gegenmaßnahme','Text','✎','Text','Was du gegen das Risiko unternimmst, als Freitext. Kurz und handlungsorientiert. Macht aus einer Sorge einen Plan.','Zweitlieferant angefragt, Puffer 2 Wochen'),
+        C('9','Verantwortlich','Person','👤','Person','Die Person, die das Risiko steuert — ein Notion-Nutzer. Verhindert, dass ein Risiko herrenlos liegen bleibt.','@Robert'),
+        C('10','Verknüpfter Standort','Relation','🔗','Verknüpfung','Hängt das Risiko an seinen Standort aus DB 1. Ziel existiert, direkt baubar. Einseitig.','→ HH-01'),
+        C('11','Verknüpftes Projekt','Relation','🔗','Verknüpfung','Hängt das Risiko zusätzlich an sein Projekt aus DB 2. So kann ein Risiko gleichzeitig standort- und projektbezogen ausgewertet werden.','→ EXP-HH-01')
+      ]},
+      { eyebrow:'💰 Kosten & Capex · Datenbank 6 von 6', title:'Was es kostet. <span class="g">Position für Position.</span>', sub:'Jede Ausgabe mit Plan, Ist und automatischer Abweichung. Geplant und Ist baust du vor der Formel. / → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Auslöser für neue Kostenpositionen an. Ein Klick erzeugt eine Zeile aus Vorlage. Jede Ausgabe landet gleich strukturiert in der DB.','„+ Neue Kostenposition"'),
+        C('2','Datenbank + Kostenart','Titel-Spalte','💰','1 DB','Erstellt die Kosten-Datenbank mit dem Titelfeld „Kostenart". Benenne die Position konkret, nicht als Sammelbegriff.','Küchenzeile Edelstahl'),
+        C('3','Kostenart Detail','Auswahl · 5','◧','5 Optionen','Ordnet die Position einer Kostengruppe zu, von Bau bis Beratung. So summierst du Capex sauber nach Gewerk.','Ausstattung'),
+        C('4','Geplant','Zahl · €','€','€','Der budgetierte Betrag für diese Position in Euro. Erster Eingang der Abweichungsformel — deshalb vor ihr anlegen.','24.000 €'),
+        C('5','Ist','Zahl · €','€','€','Der tatsächlich gezahlte Betrag in Euro. Zweiter Formel-Eingang. Vor der Formel anlegen.','26.800 €'),
+        C('6','Abweichung €','Formel','∑','€','Rechnet Ist minus Geplant und zeigt die Budgetabweichung in Euro. Positiv heißt Überschreitung. Läuft automatisch, sobald Geplant und Ist stehen.','2.800 €'),
+        C('7','Zahlungsstatus','Status · 4','◔','Status','Wo die Zahlung steht — Offen, Angefordert, Bezahlt oder Storniert. Trennt geplante von wirklich abgeflossenen Kosten.','Bezahlt'),
+        C('8','Zahlungsdatum','Datum','📅','Datum','Wann die Position gezahlt wurde bzw. fällig ist. Basis für Liquiditäts- und Monatsauswertungen.','10.07.2026'),
+        C('9','Verknüpfter Standort','Relation','🔗','Verknüpfung','Hängt die Kostenposition an ihren Standort aus DB 1. Ziel existiert, direkt baubar. Einseitig.','→ HH-01'),
+        C('10','Verknüpftes Projekt','Relation','🔗','Verknüpfung','Hängt die Kostenposition zusätzlich an ihr Projekt aus DB 2. So laufen dieselben Kosten in Standort- und Projekt-Summen ein.','→ EXP-HH-01')
+      ]}
+    ],
+    ergebnis:{ heading:'Live ist ein <span class="g">Ergebnis</span>', text:'Am Ende hängt an jedem Standort alles zusammen: Projekt, Partner, offene Meilensteine, Risiken und Kosten. Der Live-Status ist kein Datum im Kalender, sondern das Ergebnis aus vier Datenbanken, die gleichzeitig grün stehen.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Grün heißt <span class="g">Start</span>', lead:'Erledigte Meilensteine, kleine Risiken, gedeckte Kosten, voller Readiness-Score — erst wenn diese vier Zahlen stimmen, geht ein Standort an den Start.', nodes:[
+      {ic:'✅',t:'Meilensteine',s:'3 von 5 kippen auf grün.'},
+      {ic:'⚠️',t:'Risiken',s:'Der Ring schrumpft.'},
+      {ic:'◎',t:'Readiness',s:'Zählt von 65 auf 100.'},
+      {ic:'🟢',t:'Live',s:'Der Status springt auf „Live".'}
+    ]},
+    tip:{ icon:'💡', heading:'Erst die Nabe, dann die Speichen', text:'Bau die Standorte-Pipeline zuerst und vollständig, bevor du die anderen fünf Datenbanken anfässt. Alles hängt an ihr — verknüpfst du Projekte, Risiken oder Kosten, bevor der Standort existiert, hast du nichts, worauf du zeigen kannst. Zwei Regeln reichen: Ziel vor Relation, Eingangsfeld vor Formel.' },
+    learnings:[
+      'Eine Nabe, fünf Speichen: Die Standorte-Pipeline trägt die ganze Insel — wer sie sauber baut, hängt den Rest mühelos an.',
+      'Relationen brauchen ein Ziel — eine Verknüpfung lässt sich erst bauen, wenn die Ziel-Datenbank existiert.',
+      'Einseitig ist eine Entscheidung, kein Versehen: Der Standort bleibt schlank, die Detail-Datenbank trägt die Relation.',
+      'Formeln kommen zuletzt — Risiko-Score und Abweichung rechnen nur, wenn ihre Eingangsfelder schon stehen.',
+      'Live ist ein Ergebnis, kein Wunsch: erst wenn Meilensteine, Risiken, Kosten und Readiness stimmen, geht ein Standort an den Start.'
+    ],
+    next:{ href:'/franchise-rulebook', label:'Franchise Rulebook' }
+  };
+})();
