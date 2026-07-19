@@ -13886,3 +13886,149 @@ var TSISL_ZUG_SCHLUESSEL=[
     next:{ href:'/markenidentitaet', label:'Unternehmen & Markenidentität' }
   };
 })();
+
+/* VFL Insel 02 — Unternehmen & Markenidentität */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['markenidentitaet']={
+    hero:{ eyebrow:'Vision Frame · Identität & Marke', titleHtml:'Unternehmen & <span class="g">Markenidentität</span>' },
+    intro:[
+      'Diese Datenbank hält alles, was deine Marke ausmacht, an einer einzigen Stelle: Vision und Werte, deine Positionierung, für wen du da bist, wie du sprichst und wie du aussiehst. Solange das nur in deinem Kopf liegt, entscheidet jeden Tag das Bauchgefühl — mal so, mal anders.',
+      'Hier legst du es fest. Jeder Aspekt bekommt eine <b>Kategorie</b>, eine kurze Beschreibung und eine ausführliche Ausarbeitung. Fertig sein musst du nicht sofort: Über den Status siehst du, was steht und was offen ist. Ab jetzt zieht alles Sichtbare — von der Speisekarte bis zum Schild an der Tür — aus derselben Quelle.'
+    ],
+    anim1:{ title:'Aus Bauchgefühl wird <span class="g">Fundament</span>', lead:'Alles, was deine Marke ausmacht, sammelt sich an einer Stelle — und von dort zieht jeder Berührungspunkt dieselbe Linie.', nodes:[
+      {ic:'🧩',t:'Lose Fragmente',s:'Farbe, Schrift, ein Wert, ein Slogan — ungeordnet.'},
+      {ic:'🎯',t:'Markenidentität',s:'Alles rastet im Kern ein und bekommt seine Kategorie.'},
+      {ic:'✨',t:'Berührungspunkte',s:'Karte, Website, Verpackung — dieselbe Handschrift.'}
+    ]},
+    video:{ heading:'Die Marken-DB <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst, die sieben Kategorien setzt und den ersten Aspekt ausarbeitest — von der kurzen Beschreibung bis zum vollen Text.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🎯 Markenidentität',
+      title:'Dein Marken-Fundament. <span class="g">Aspekt für Aspekt.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Aspekte', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Der Button legt mit einem Klick eine fertig vorstrukturierte Aspekt-Seite an. Du baust ihn einmal — danach kommt jeder neue Markenaspekt per Knopfdruck dazu, statt dass du die Felder jedes Mal von Hand setzt. So hat jeder Eintrag dieselbe Struktur.',ex:'Button-Label „+ Neuer Aspekt"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🎯',imgLabel:'Datenbank',val:'1 DB',overlay:'Hier entsteht die Tabelle selbst — „Markenidentität", in der jede Zeile für einen Aspekt deiner Marke steht. Gib ihr das Zielscheiben-Icon und den Namen, danach füllst du sie mit den folgenden Karten Spalte für Spalte.',ex:'DB-Name „🎯 Markenidentität"'},
+        {tag:'3',name:'Aspekt',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Das ist der Name des Eintrags — der eine Aspekt deiner Marke, den diese Zeile beschreibt. Jede Zeile trägt genau einen Aspekt, damit du später gezielt suchen und filtern kannst. Halte ihn kurz und eindeutig.',ex:'„Vision" (weitere: Kernwerte · Farbpalette · Tone of Voice)'},
+        {tag:'4',name:'Kategorie',typeLabel:'Auswahl · 7 Optionen',icon:'◧',imgLabel:'Auswahl',val:'7 Optionen',overlay:'Ordne jeden Aspekt einem der sieben Bereiche zu — so sortiert sich die DB von allein. Optionen: Vision & Mission · Werte · Positionierung · Zielgruppe · Markenversprechen · Tonalität & Kommunikation · Visuell & Design. Jeder Eintrag bekommt genau eine.',ex:'„Vision & Mission"'},
+        {tag:'5',name:'Status',typeLabel:'Mehrfachauswahl',icon:'◪',imgLabel:'Status',val:'4 Optionen',overlay:'Der Status zeigt, wie weit ein Aspekt ausgearbeitet ist — von Entwurf über In Bearbeitung und Freigegeben bis Zu überarbeiten. So siehst du sofort, wo noch Arbeit liegt, und musst nicht alles auf einmal fertig haben.',ex:'„In Bearbeitung"'},
+        {tag:'6',name:'Beschreibung',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Ein bis zwei Sätze, die den Aspekt auf den Punkt bringen. Die Beschreibung ist der schnelle Blick — in der Tabellenansicht siehst du sofort, worum es geht, ohne die Zeile zu öffnen.',ex:'„Wohin wir als Unternehmen langfristig streben."'},
+        {tag:'7',name:'Detaillierte Ausarbeitung',typeLabel:'Text · lang',icon:'📄',imgLabel:'Langtext',val:'Text',overlay:'Hier steht der Aspekt in voller Länge — die Substanz, auf die sich alles andere stützt. Von hier ziehst du später Formulierungen für Website, Speisekarte oder Team-Briefing. Nimm dir Raum: Das ist die Quelle, kein Zettel.',ex:'„Warm Earth #C1785A – Hauptfarbe … Deep Charcoal #2C2C2C – Basis …"'}
+      ]
+    },
+    ergebnis:{ heading:'Die Marke <span class="g">auf einen Blick</span>', text:'Am Ende hast du eine Tabelle, in der jeder Aspekt seiner Kategorie zugeordnet ist und seinen Reifegrad zeigt. Von hier zieht jeder Berührungspunkt — Speisekarte, Website, Verpackung — dieselbe Linie.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Sieben Kategorien, <span class="g">ein Bild</span>', lead:'Die Kategorie ordnet, der Status reift — Struktur statt Zettelwirtschaft.', nodes:[
+      {ic:'🧭',t:'Vision & Werte',s:'Wofür du stehst und wohin du willst.'},
+      {ic:'🎯',t:'Position & Zielgruppe',s:'Wo du stehst und für wen.'},
+      {ic:'💬',t:'Sprache',s:'Markenversprechen und Tonalität.'},
+      {ic:'🎨',t:'Optik',s:'Visuelles und Design.'}
+    ]},
+    tip:{ icon:'💡', heading:'Fang oben an', text:'Schreib zuerst auf, wofür du stehst und für wen — erst danach, wie es aussieht. Die Optik ist die Folge der Haltung, nicht der Startpunkt. Wer mit der Farbpalette beginnt, dekoriert eine Marke, die es noch gar nicht gibt.' },
+    learnings:[
+      'Deine Marke gehört an eine Stelle, nicht in den Kopf — sonst entscheidet jeden Tag die Tagesform.',
+      'Sieben Kategorien decken das Fundament ab: von Vision und Werten bis zu Sprache und Optik.',
+      'Jeder Aspekt trägt zwei Ebenen — eine kurze Beschreibung für den schnellen Blick, eine Ausarbeitung fürs Detail.',
+      'Der Status macht sichtbar, was steht und was offen ist; du arbeitest die Marke Stück für Stück aus.',
+      'Sobald das Fundament steht, zieht jeder Berührungspunkt aus derselben Quelle — das trennt Marke von Bauchgefühl.'
+    ],
+    next:{ href:'/team-kultur', label:'Team & Kultur Guidelines' }
+  };
+})();
+
+/* VFL Insel 03 — Team & Kultur Guidelines */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['team-kultur']={
+    hero:{ eyebrow:'Vision Frame · Identität & Marke', titleHtml:'Team & <span class="g">Kultur Guidelines</span>' },
+    intro:[
+      'Kultur ist der Teil deines Betriebs, den du am schwersten anfassen kannst und der trotzdem jeden Tag über die Qualität entscheidet. Solange deine Erwartungen nur in deinem Kopf liegen, misst jeder im Team an einem anderen Maßstab.',
+      'Diese Insel macht daraus eine Datenbank: Jede <b>Guideline</b> ist ein eigener Eintrag mit klarer Beschreibung, einem konkreten Beispiel und der Angabe, für wen sie gilt. Küche, Service und Management lesen dieselbe Wahrheit. Du baust hier kein Regelbuch für die Schublade, sondern eine Struktur, die du in der Einarbeitung und im Alltag wirklich benutzt.'
+    ],
+    anim1:{ title:'Vom Kopf <span class="g">in die Datenbank</span>', lead:'Nichts Neues wird erfunden — das Wissen war schon da. Es bekommt nur zum ersten Mal einen festen Ort.', nodes:[
+      {ic:'💭',t:'Lose Regeln',s:'„Pünktlich sein", „sauber arbeiten" — nur im Kopf.'},
+      {ic:'＋',t:'Neue Guideline',s:'Ein Klick zieht die Regel in die Tabelle.'},
+      {ic:'🤝',t:'Strukturierter Eintrag',s:'Mit Kategorie, Beispiel und Zielgruppe.'}
+    ]},
+    video:{ heading:'Die Guideline-DB <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du den Button, die Tabelle und die sieben Felder anlegst und die erste Guideline mit Beschreibung und Beispiel füllst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🤝 Team Kultur Guidelines',
+      title:'Deine Kultur. <span class="g">Guideline für Guideline.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Setz oben auf die Seite einen Button „Neue Guideline". Ein Klick legt einen neuen Eintrag an, ohne dass jemand die Tabelle öffnen muss. So trägt das Team Regeln im Vorbeigehen nach, statt sie im Kopf zu behalten. Optional kann der Button Status = Entwurf vorbelegen.',ex:'Button-Label „Neue Guideline"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🤝',imgLabel:'Datenbank',val:'1 DB',overlay:'Leg die Inline-Datenbank „Team Kultur Guidelines" auf der Seite an. Sie ist das Zuhause aller Guidelines und der einzige Ort, an dem sie als Wahrheit stehen. Jede Zeile ist später eine Regel, jede Spalte eine Eigenschaft.',ex:'DB-Name „🤝 Team Kultur Guidelines"'},
+        {tag:'3',name:'Guideline',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titel-Spalte trägt die Guideline in einem einzigen, klaren Satz. Kein Absatz, keine Erklärung — die kommt gleich ins nächste Feld. Ein guter Titel ist so formuliert, dass man ihn ohne Kontext versteht.',ex:'„Mise en place vor jedem Service abgeschlossen"'},
+        {tag:'4',name:'Beschreibung',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Freitext',overlay:'Hier steht, was die Guideline konkret bedeutet und warum sie existiert. Zwei bis vier Sätze reichen. Der „Warum"-Teil ist entscheidend: Eine Regel, deren Grund man kennt, hält länger als eine Ansage.',ex:'„Jede Station ist 15 Minuten vor Servicebeginn einsatzbereit."'},
+        {tag:'5',name:'Beispiele',typeLabel:'Text',icon:'💬',imgLabel:'Text',val:'Freitext',overlay:'Ein bis zwei greifbare Situationen, die zeigen, wie die Guideline im Alltag aussieht — gern auch das Gegenbeispiel. Beispiele machen aus einer abstrakten Regel etwas, das man am Pass wiedererkennt.',ex:'„Richtig: Station gewischt. Falsch: erst beim ersten Bon anfangen zu schneiden."'},
+        {tag:'6',name:'Kategorie',typeLabel:'Auswahl · 6 Optionen',icon:'◧',imgLabel:'Auswahl',val:'1 von 6',overlay:'Ordne jede Guideline genau einem der sechs Bereiche zu. Die Kategorie sortiert die Sammlung und macht sichtbar, wo dein Betrieb viele Regeln hat. Optionen: Kommunikation, Zusammenarbeit, Arbeitsweise, Werte & Haltung, Führung, Qualität & Standards.',ex:'„Qualität & Standards"'},
+        {tag:'7',name:'Priorität',typeLabel:'Auswahl · 3 Optionen',icon:'▲',imgLabel:'Auswahl',val:'1 von 3',overlay:'Nicht jede Guideline wiegt gleich schwer. Priorität trennt das, was den Betrieb trägt, von dem, was nett ist. Neue Leute lesen zuerst alles auf „Hoch". Optionen: Hoch, Mittel, Niedrig.',ex:'„Hoch"'},
+        {tag:'8',name:'Status',typeLabel:'Auswahl · 3 Optionen',icon:'◔',imgLabel:'Auswahl',val:'1 von 3',overlay:'Der Status zeigt den Lebenszyklus. „Entwurf" ist noch in Arbeit, „In Überprüfung" wartet auf Freigabe, „Aktiv" gilt für alle. So bleibt sichtbar, was schon verbindlich ist und was noch diskutiert wird.',ex:'„Aktiv"'},
+        {tag:'9',name:'Betrifft',typeLabel:'Mehrfachauswahl',icon:'◪',imgLabel:'Status',val:'0–5',overlay:'Leg fest, für wen die Guideline gilt — eine Gruppe oder mehrere. Damit filtert jeder auf genau seine Regeln, und die Einarbeitung zeigt neuen Leuten nur, was sie wirklich betrifft. Optionen: Alle Mitarbeitende, Küche, Service, Management, Neue Mitarbeitende.',ex:'„Küche, Neue Mitarbeitende"'}
+      ]
+    },
+    ergebnis:{ heading:'Eine Kultur, <span class="g">die jeder liest</span>', text:'Am Ende steht eine Liste, die mit jedem anders spricht: Über den Betrifft-Filter sieht die Küche nur ihre Regeln, neue Leute nur die vom ersten Tag. Aus ungeschriebenen Erwartungen wird ein gemeinsamer Maßstab.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Eine Liste, <span class="g">viele Sichten</span>', lead:'Dieselbe Datenbank spricht mit jedem anders — niemand muss 40 Regeln lesen, um die vier zu finden, die ihn heute betreffen.', nodes:[
+      {ic:'📋',t:'Volle Liste',s:'Alle Guidelines, gemischte Zielgruppen.'},
+      {ic:'🔎',t:'Betrifft-Filter',s:'„Neue Mitarbeitende — erster Tag".'},
+      {ic:'✅',t:'Nur das Relevante',s:'Vier Regeln, die heute zählen.'}
+    ]},
+    tip:{ icon:'💡', heading:'Fang mit acht an, nicht mit vierzig', text:'Der häufigste Fehler ist, die Insel in einem Rutsch mit jeder denkbaren Regel zu füllen. Eine Liste, die niemand liest, verändert nichts. Nimm die acht bis zehn Punkte, an denen es im Alltag am häufigsten hakt, setz sie auf „Hoch" und „Aktiv" und lass das Team eine Woche damit arbeiten. Was fehlt, ergänzt du danach.' },
+    learnings:[
+      'Ungeschriebene Regeln sind trotzdem Regeln — ohne festen Ort misst jeder an seinem eigenen Maßstab.',
+      'Das „Warum" in der Beschreibung entscheidet über die Haltbarkeit: Eine Regel mit Grund wird gelebt, eine reine Ansage umgangen.',
+      'Ein konkretes Beispiel ersetzt drei Absätze Erklärung — am Pass erkennt man Situationen wieder, keine Definitionen.',
+      'Das „Betrifft"-Feld verwandelt eine lange Liste in mehrere kurze — jede Gruppe sieht nur ihre Regeln.',
+      'Der Status trennt Verbindliches von Diskussion: sichtbar, was gilt und worüber noch geredet wird.'
+    ],
+    next:{ href:'/interieur-design', label:'Interieur Design' }
+  };
+})();
+
+/* VFL Insel 04 — Interieur Design */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['interieur-design']={
+    hero:{ eyebrow:'Vision Frame · Identität & Marke', titleHtml:'Interieur <span class="g">Design</span>' },
+    intro:[
+      'Wenn du einen Raum einrichtest, triffst du hundert kleine Entscheidungen — und die meisten davon verschwinden, sobald der Laden läuft. Welcher Stuhl war das, wo kam der Vorhang her, wer hat den Boden verlegt.',
+      'Diese Datenbank ist der Ort, an dem nichts davon verloren geht. Du legst jedes Produkt einmal an: Name, <b>Kategorie</b>, Beschreibung, Bezugsquelle, Link, Bild. Ab dann ist dein Einrichtungskonzept nicht mehr im Kopf, sondern in einer Tabelle, die du filtern, nachbestellen und an jeden Betrieb übergeben kannst. Wir bauen sie Feld für Feld — vom Titel bis zur Verknüpfung mit den Dienstleistern.'
+    ],
+    anim1:{ title:'Die Kategorie <span class="g">färbt den Katalog</span>', lead:'Die eine Auswahl pro Zeile macht aus einer Liste eine sortierbare Übersicht — ohne feste Kategorien filterst du nichts.', nodes:[
+      {ic:'📝',t:'Rohe Liste',s:'Produktnamen ohne Ordnung.'},
+      {ic:'🎨',t:'Kategorie gesetzt',s:'Jede Zeile bekommt ihre Farbe.'},
+      {ic:'🔎',t:'Gefiltert',s:'Nur die Leuchten, nur die Möbel.'}
+    ]},
+    video:{ heading:'Der Einrichtungs-Katalog <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst, die sieben Gewerke-Kategorien setzt und ein Produkt mit Bezugsquelle und Link vervollständigst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🛋️ Interior Design Produkte',
+      title:'Dein Einrichtungs-Katalog. <span class="g">Stück für Stück.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Leg den Auslöser an, über den der Eintrag später entsteht. Der Button erzeugt eine neue Produktzeile und öffnet sie direkt zum Ausfüllen. So legst du im Betrieb ein Produkt an, ohne die Ansicht zu wechseln.',ex:'Button-Label „+ Produkt hinzufügen"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🛋️',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstell die Datenbank „Interior Design Produkte" als Sammelort für alles, was in den Raum kommt. Sie ist die eine Wahrheit für deinen Einrichtungs-Katalog. Alle folgenden Karten hängen Felder an genau diese Tabelle.',ex:'DB-Name „🛋️ Interior Design Produkte"'},
+        {tag:'3',name:'Produkt',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titelspalte trägt den Produktnamen. Sie ist das, was du in jeder Ansicht zuerst siehst. Schreib den Namen so, wie du das Stück im Betrieb ansprichst.',ex:'„Vitra Panton Chair"'},
+        {tag:'4',name:'Kategorie',typeLabel:'Auswahl · 7 Optionen',icon:'◧',imgLabel:'Auswahl',val:'1 von 7',overlay:'Sortiere jedes Produkt in eine der sieben Gewerke-Kategorien. Über die Farben erkennst du die Art des Stücks auf einen Blick. Optionen: Möbel, Beleuchtung, Textilien, Dekoration, Bodenbeläge, Wandgestaltung, Accessoires.',ex:'„Möbel"'},
+        {tag:'5',name:'Beschreibung',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Freitext',overlay:'Halt in ein bis zwei Sätzen fest, was das Produkt ausmacht — Material, Wirkung, Einsatz. Das spart die Rückfrage, wenn jemand anders den Katalog liest. Kurz halten, kein Fließtext.',ex:'„Freischwinger-Stuhl aus einem Guss, Design-Klassiker."'},
+        {tag:'6',name:'Bezugsquelle',typeLabel:'Text',icon:'🏬',imgLabel:'Text',val:'Freitext',overlay:'Notiere, wo das Stück herkommt — Fachhandel, Hersteller, Online. Das ist der Text, den du brauchst, wenn du nachbestellst oder das Konzept an einen Betrieb übergibst. Kein Link hier, der kommt in die nächste Karte.',ex:'„Vitra-Händler, Design-Möbelhäuser"'},
+        {tag:'7',name:'Produkt-Link',typeLabel:'URL',icon:'🔗',imgLabel:'URL',val:'Link',overlay:'Hinterleg die direkte Adresse zur Produkt- oder Herstellerseite. Ein Klick führt zur Quelle, ohne dass jemand suchen muss. Ergänzt die Bezugsquelle um das Konkrete.',ex:'https://www.vitra.com/panton'},
+        {tag:'8',name:'Bilder',typeLabel:'Datei & Medien',icon:'🖼',imgLabel:'Datei',val:'Datei',ghost:true,overlay:'Das Feld nimmt Produktfotos und Referenzbilder auf. Du legst es jetzt an, füllst es aber pro Produkt einzeln — deshalb kein Beispielwert. Diese Karte erscheint automatisch als Feld, sobald du es anlegst; sie zählt nicht in den Fortschritt.',ex:'—'},
+        {tag:'9',name:'Dienstleister',typeLabel:'Relation · später',icon:'🤝',imgLabel:'Relation',val:'Verknüpfung',later:true,overlay:'Verknüpfe jedes Produkt mit dem Lieferanten oder Handwerker, der es liefert oder einbaut. Diese Karte baust du erst, wenn die Dienstleister-Datenbank steht — sonst gibt es kein Gegenstück zum Verlinken. Danach hängen Produkt und Bezugsperson zusammen.',ex:'„Tischlerei Musterbau"'}
+      ]
+    },
+    ergebnis:{ heading:'Der Katalog <span class="g">als Übergabe</span>', text:'Am Ende trägt jedes Stück Name, Kategorie und Herkunft — und lässt sich nach Gewerk filtern. Damit kannst du das ganze Einrichtungskonzept an einen Betrieb oder Handwerker weiterreichen, ohne etwas erklären zu müssen.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Drei Ebenen <span class="g">der Herkunft</span>', lead:'Der Text sagt wo, der Link sagt genau wo, die Relation sagt wer.', nodes:[
+      {ic:'🏬',t:'Bezugsquelle',s:'Der Händlertyp als Text.'},
+      {ic:'🔗',t:'Produkt-Link',s:'Die genaue Adresse.'},
+      {ic:'🤝',t:'Dienstleister',s:'Die Person dahinter — verknüpft.'}
+    ]},
+    tip:{ icon:'💡', heading:'Erst sortieren, dann schmücken', text:'Fang mit Kategorie und Bezugsquelle an, bevor du dich um Bilder und die Dienstleister-Verknüpfung kümmerst. Ein Katalog, in dem jedes Stück sauber sortiert ist und eine Herkunft hat, trägt dich schon durch die halbe Planung. Bilder und Relation machen ihn danach vollständig — aber sie sind die Kür, nicht das Fundament.' },
+    learnings:[
+      'Kategorie ist der Filter, nicht die Deko — die sieben festen Optionen entscheiden, ob du später nach Gewerk suchen kannst.',
+      'Bezugsquelle und Link sind zwei Paar Schuhe: der Text hält den Händlertyp fest, der Link die genaue Adresse.',
+      'Relationen baust du zuletzt — das Feld Dienstleister braucht die andere Datenbank als Gegenstück.',
+      'Das Bildfeld lebt von der Pflege: angelegt ist es schnell, aber es zeigt erst etwas, wenn du pro Produkt ein Bild hochlädst.',
+      'Ein Katalog ist eine Übergabe — mit Name, Kategorie und Herkunft reichst du das Konzept weiter, ohne etwas zu erklären.'
+    ],
+    next:{ href:'/zielgruppenanalyse', label:'Zielgruppenanalyse' }
+  };
+})();
