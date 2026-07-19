@@ -551,7 +551,7 @@
 })();
 
 /* ============================================================
-   gerichte-getrnke-finaler-schritt — Hero "DB VIII : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
+   gerichte-getrnke-finaler-schritt — Hero "DB XI : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
    ============================================================ */
 (function(){
   var IMG="https://files.catbox.moe/sceu4c.png"; /* 3-Laptop-Cover Gerichte & Getränke: weisser Hintergrund per Edge-Flood-Fill entfernt (transparent RGBA, kein AI), Farben knallig (Saettigung +24%), Feinradius-Schaerfung (2-stufig r1.0/r0.5, Kantenschaerfe OHNE Kontrast-Halo), eng auf die Laptops beschnitten -> groesser+hoeher wie Referenz, 2700px (aus Gerichte.png) */
@@ -3468,7 +3468,7 @@
       '<div class="fl-q q1"></div>'+
       '<div class="fl-q q2"><div class="fl-qlabel" data-q="2"><span class="k">DB 0 : <span class="g">Inventurliste</span></span><span class="s">Lieferung</span></div></div>'+
       '<div class="fl-q q3"><div class="fl-qlabel" data-q="3"><span class="k">DB X : <span class="g">Packaging</span></span><span class="s">Pakete schnüren</span></div></div>'+
-      '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB VIII : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
+      '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB XI : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
       '<div class="fl-ticket" id="flTicket">Bestellung <b>Caesar Salad</b> — To Go</div>'+
       '<div class="fl-db" id="flDb"><div class="dbcap">'+NUM.cap+'</div>'+dbrows+'</div>'+
       '</div></div>'+
@@ -6497,9 +6497,9 @@
       ] },
     { path:/\/menkalkulation-catering-rechner\/?$/, kachel:'kostenaufstellung',
       anchorSel:'#ts11wk3', steps:TS11_STEPS_W3,
-      eyebrow:'DB IXX : Kostenaufstellung',
+      eyebrow:'DB XIV : Kostenaufstellung',
       title:'Die <span>Kostenaufstellung</span>.',
-      sub:'Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen — die Währung von DB IXX ist der Stückpreis in Euro.',
+      sub:'Der Rechenkern: zieht Menü, Mitarbeiter, Kunde und Gemeinkosten zusammen — die Währung von DB XIV ist der Stückpreis in Euro.',
       summary:'Stückpreis', chain:true },
     { path:/\/zutatenliste\/?$/, kachel:'db4_zutaten',
       eyebrow:'DB IV : Zutaten',
@@ -6535,7 +6535,7 @@
        trägt kein "Finance". Zweites Regal unter DB V auf derselben Seite (eigene kachel_id → eigene rootId). */
     { path:/\/rezepturen\/?$/, kachel:'db5_finance_personal',
       container:'.notion-tabs', marker:/Finance/,
-      eyebrow:'DB V : Rezepturen · Finance',
+      eyebrow:'DB V : Rezepturen',
       title:'Erweiterung nach <span>Finance</span>',
       sub:'Wenn du Gemeinkosten & Mitarbeiterlöhne angelegt hast, können wir diese Tabelle erweitern. Wir wollen jetzt wissen: Was kostet es uns, eine Charge zuzubereiten? Wareneinsatz + Personalkosten pro Arbeitsvorgang (Gemeinkosten sind optional ebenfalls verknüpfbar). Dafür ergänzen wir weitere Spalten in der Rezepturen-Liste.',
       /* keepSteps: Finance-Schritt 7 „Verwendet in" (→ DB Gerichte) ist keine hier baubare Spalte —
@@ -7824,9 +7824,9 @@
    ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner & Verträge — die Quelle jeder Einkaufszeile.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.jpg'],
    ['04','Datenbank','DB IV · Zutaten','Zieht ihre Preise direkt aus deiner Inventurliste.','/zutatenliste','zutaten.jpg'],
    ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus den Zutaten — automatisch.','/rezepturen','rezepturen.jpg'],
-   ['06','Datenbank','DB VI · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.jpg'],
-   ['07','Datenbank','DB VII · Allergene','Jede Zutat kennt ihre Allergene — die Kennzeichnung schreibt sich selbst.','/allergene-bersicht','allergene.jpg'],
-   ['08','Datenbank','DB VIII · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.jpg'],
+   ['06','Datenbank','DB VI–VIII · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.jpg'],
+   ['07','Datenbank','DB IX · Allergene','Jede Zutat kennt ihre Allergene — die Kennzeichnung schreibt sich selbst.','/allergene-bersicht','allergene.jpg'],
+   ['08','Datenbank','DB XI · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.jpg'],
    ['09','Interface','Interface-Bau','Grundstruktur & Widgets — dein System bekommt ein Gesicht.','/interface-bau-grundstruktur-widgets','interface.jpg'],
    ['10','Interface','Food-/Drinksquartier','Inhalte und Interface für Speisen und Getränke an einem Ort.','/food-drinksquartier-inhalte-interface','food-drinks.jpg'],
    ['11','Kalkulation','Menükalkulation','Menüs und Catering — kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.jpg'],
@@ -9952,7 +9952,7 @@
         <p class="ch-collbl">Menükalkulation</p>
         <div class="ch-menu" id="ts11menu">
           <span class="ch-chg" id="ts11mchg">Neu berechnet</span>
-          <p class="m-eye">DB XII&#8211;IXX · Catering-Position</p>
+          <p class="m-eye">DB XII&#8211;XIV · Catering-Position</p>
           <p class="m-title">Menü &raquo;Herbstabend&laquo;</p>
           <p class="m-meta">3 Gänge &middot; 80 Personen</p>
           <div class="m-course"><span>Velouté</span><span class="dots"></span><span class="p">2,74&nbsp;€</span></div>
@@ -10043,11 +10043,11 @@
   <div class="wrap">
     <div id="ts11emp">
       <div class="col">
-        <div class="db-hd">DB XII – IXX : <span class="g">Menükalkulation</span></div>
+        <div class="db-hd">DB XII – XIV : <span class="g">Menükalkulation</span></div>
         <div class="db-row"><span class="db-rail"></span><span class="db-fill"></span>
           <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB XII</span>&nbsp;Menürechner</span>
           <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB XIII</span>&nbsp;Kunden</span>
-          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB IXX</span>&nbsp;Angebot</span>
+          <span class="tb"><span class="ic-wrap"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"></rect><path d="M1.5 6.5h13M6.5 6.5v7"></path></svg><span class="ping"></span></span><span class="num">DB XIV</span>&nbsp;Angebot</span>
         </div>
       </div>
       <div class="col">
