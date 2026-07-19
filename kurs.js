@@ -14453,3 +14453,183 @@ var TSISL_ZUG_SCHLUESSEL=[
     next:{ href:'/eventkonzepte', label:'Eventkonzepte' }
   };
 })();
+
+/* VFL Insel — Eventkonzepte */
+(function(){
+  var C=function(tag,name,typeLabel,icon,val,overlay,ex,extra){var o={tag:tag,name:name,typeLabel:typeLabel,icon:icon,imgLabel:typeLabel,val:val,overlay:overlay,ex:ex};if(extra)for(var k in extra)o[k]=extra[k];return o;};
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['eventkonzepte']={
+    hero:{ eyebrow:'Vision Frame · Angebot & Umsatz', titleHtml:'Event<span class="g">konzepte</span>' },
+    intro:[
+      'Gute Eventideen sterben meistens nicht an der Idee, sondern daran, dass sie nirgends festgehalten sind. Ein Gespräch, eine Serviette, ein halber Gedanke — und beim nächsten Mal fängst du wieder bei null an. In dieser Insel baust du einen <b>Katalog</b>, in dem jedes Eventkonzept als eigener Eintrag liegt.',
+      'Jeder Eintrag bekommt mehr als einen Namen: eine Kategorie, eine Zielgruppe, einen Preis pro Person, eine grobe Marge und die Ressourcen, die du vorher organisieren musst. Über den Status siehst du, was nur Idee ist und was schon läuft. So wird aus einer losen Sammlung ein System, aus dem du jedes Event schneller planst und sauberer bepreist.'
+    ],
+    anim1:{ title:'Von der Idee <span class="g">zum verkaufbaren Konzept</span>', lead:'Erst die Felder machen aus einer Idee etwas Planbares.', nodes:[
+      {ic:'💡',t:'Nackter Name',s:'„Business-Lunch Catering".'},
+      {ic:'🏷',t:'Chips docken an',s:'Kategorie, Zielgruppe, Preis, Marge.'},
+      {ic:'🎉',t:'Volle Event-Karte',s:'Planbar und verkaufbar.'}
+    ]},
+    video:{ heading:'Der Event-Katalog <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst und ein Konzept von der Beschreibung über Preis und Marge bis zu den Ressourcen füllst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🎉 Event Konzepte',
+      title:'Dein Event-Katalog. <span class="g">Konzept für Konzept.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Lege oben auf der Seite einen Button an, der beim Klick einen neuen Eintrag erzeugt. So legst du jedes neue Eventkonzept mit einem Klick an. In Notion: /Button → Aktion „Seite hinzufügen zu" → diese Datenbank.','„＋ Neues Eventkonzept"'),
+        C('2','Datenbank anlegen','Container','🎉','1 DB','Erstelle die Datenbank als Inline-Tabelle. Sie ist das Gefäß, in dem alle deine Eventkonzepte liegen. In Notion: /Datenbank – Inline → Titel „Event Konzepte" → Icon 🎉.','„Event Konzepte"'),
+        C('3','Event Name','Titel-Spalte','🏷','Text','Die Titelspalte trägt den Namen jedes Konzepts. Halte ihn kurz und wiedererkennbar, damit du in der Liste sofort weißt, worum es geht.','„Business-Lunch Catering"'),
+        C('4','Beschreibung','Text','✎','Text','In wenigen Sätzen: worum das Event geht und wie es abläuft. Das ist die Kurzfassung, die du auch einem Kunden erzählen würdest.','„Warmes Mittagsbuffet für Firmen, geliefert und aufgebaut."'),
+        C('5','Kategorie','Auswahl · 9','◧','9 Optionen','Neun Optionen von Workshop bis Saisonale Events. So filterst du nach Event-Format und siehst auf einen Blick, welche Richtung ein Konzept hat.','Catering'),
+        C('6','Zielgruppe','Mehrfachauswahl · 7','📡','7 Optionen','Weil ein Event mehrere Gruppen ansprechen kann, wählst du hier mehrere. Das hilft beim Zuschneiden von Werbung und Ansprache.','Firmen/B2B, Gruppen'),
+        C('7','Status','Status · 6','◔','Status','Ordne die Werte drei Gruppen zu: Zu erledigen (Idee, In Planung), In Arbeit (Aktiv, Wird getestet), Fertig (Pausiert, Archiviert). So trennst du bloße Ideen von laufenden Konzepten.','In Planung'),
+        C('8','Min. Teilnehmer','Zahl','👥','Personen','Die Untergrenze, ab der sich das Event trägt oder überhaupt stattfindet. Format: einfache Zahl.','8'),
+        C('9','Max. Teilnehmer','Zahl','👥','Personen','Die Obergrenze, die durch Platz, Küche oder Betreuung vorgegeben ist. So siehst du sofort die Spanne, in der ein Event läuft.','40'),
+        C('10','Dauer (Std.)','Zahl','⏱','Stunden','Wie lange das Event dauert. Das brauchst du für Personalplanung und Preis-Kalkulation.','3'),
+        C('11','Preis pro Person (€)','Zahl · €','€','€/Person','Zahlenspalte mit Euro-Format. Der Verkaufspreis pro Kopf, mit dem du nach außen gehst.','24,50 €'),
+        C('12','Geschätzte Marge (%)','Zahl · %','◎','%','Zahlenspalte mit Prozent-Format. Deine grobe Deckungs-Einschätzung — Notion zeigt 0,3 als 30 %. Eine Schätzung zur Priorisierung, keine belastbare Kalkulation.','35 %'),
+        C('13','Nächster Termin','Datum','📅','Datum','Wann das Event als Nächstes läuft — als Einzeltag oder Zeitraum, bei Bedarf mit Uhrzeit. So wird aus dem Konzept ein planbarer Punkt.','12.09.2026'),
+        C('14','Benötigte Ressourcen','Mehrfachauswahl · 6','📡','6 Optionen','Sechs Optionen von Küche über Externe Location bis Marketing Support. Damit hältst du fest, was vor jedem Event vorab organisiert werden muss.','Küche, Extra Personal, Lieferanten'),
+        C('15','Besondere Anforderungen','Text','⚠','Text','Sonderfälle: Allergien, Technik, Genehmigungen, Auf- und Abbau. Das ist die Spalte, die im Stress den Unterschied macht.','„Zwei vegane Gäste, Strom für Warmhaltebrücke."'),
+        C('16','Marketing Highlights','Text','📣','Text','Die Argumente, mit denen du das Event bewirbst — das, was einen Gast klicken oder buchen lässt.','„Frisch vor Ort zubereitet, regionale Zutaten."')
+      ]
+    },
+    ergebnis:{ heading:'Ein Katalog, <span class="g">aus dem du planst</span>', text:'Am Ende hast du deine Eventkonzepte als steuerbare Pipeline: jedes mit Preis, Marge, Zielgruppe und Ressourcen, sortierbar nach Status und Kategorie. Aus verstreuten Ideen wird ein System, aus dem du schneller planst und sauberer bepreist.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Der Lebensweg <span class="g">eines Events</span>', lead:'Die Datenbank speichert nicht nur, sie bildet den Weg jedes Events ab — von der ersten Notiz bis zum abgelegten Konzept.', nodes:[
+      {ic:'💡',t:'Idee',s:'Zu erledigen.'},
+      {ic:'🛠',t:'Aktiv',s:'In Arbeit, läuft.'},
+      {ic:'📦',t:'Archiviert',s:'Fertig, abgelegt.'}
+    ]},
+    tip:{ icon:'💡', heading:'Preis und Ressourcen zuerst', text:'Trag nie ein Eventkonzept ein, ohne den Preis pro Person und die benötigten Ressourcen zu füllen — sonst hast du eine schöne Idee, aber keine Entscheidungsgrundlage. Fang mit drei bis fünf Konzepten an, die du realistisch anbieten würdest, statt die Liste mit Wunschideen zu überladen.' },
+    learnings:[
+      'Eine Eventidee wird erst brauchbar, wenn sie als Eintrag mit Feldern existiert und nicht nur im Kopf.',
+      'Preis pro Person und geschätzte Marge machen aus einem Konzept eine Entscheidung, die du prüfen kannst.',
+      'Die Zielgruppe als Mehrfachauswahl zeigt, dass ein Event mehrere Käufer ansprechen darf.',
+      'Über den Status wird aus einer Sammlung eine Pipeline, in der du den Fortschritt siehst.',
+      'Das Feld „Benötigte Ressourcen" verhindert, dass du erst kurz vor dem Event merkst, was fehlt.'
+    ],
+    next:{ href:'/catering', label:'Catering' }
+  };
+})();
+
+/* VFL Insel — Catering */
+(function(){
+  var C=function(tag,name,typeLabel,icon,val,overlay,ex,extra){var o={tag:tag,name:name,typeLabel:typeLabel,icon:icon,imgLabel:typeLabel,val:val,overlay:overlay,ex:ex};if(extra)for(var k in extra)o[k]=extra[k];return o;};
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['catering']={
+    hero:{ eyebrow:'Vision Frame · Angebot & Umsatz', titleHtml:'Cate<span class="g">ring</span>' },
+    intro:[
+      'Catering ist der Bereich, in dem viele Betriebe Geld verlieren, ohne es zu merken. Der Preis klingt gut, am Ende bleibt trotzdem nichts hängen. Der Grund ist fast immer, dass niemand mitrechnet, was ein Event <b>unter</b> dem Verkaufspreis kostet.',
+      'Diese Insel baut dir eine Datenbank, die genau das übernimmt. Du legst den Auftrag an, trägst Kundendaten, Verkaufspreis und die drei Kostenblöcke ein — Ware, Personal, Sonstiges. Den Rest macht die Datenbank: Preis pro Gast, Foodcost-Quote und den Deckungsbeitrag in drei Stufen. Danach siehst du bei jedem Auftrag auf einen Blick, ob er sich lohnt oder ob du nachverhandeln musst.'
+    ],
+    anim1:{ title:'Von der Anfrage <span class="g">zur Zeile</span>', lead:'Eine Anfrage, ein Klick, eine Zeile — alle Daten an einem Ort statt in Mail, Notiz und Kopf verteilt.', nodes:[
+      {ic:'＋',t:'Neuer Auftrag',s:'Der Button öffnet die leere Karte.'},
+      {ic:'📇',t:'Kundendaten',s:'Kunde, Kontakt, Mail, Telefon.'},
+      {ic:'🍽️',t:'Event-Rahmen',s:'Datum, Art, Gäste, Menü, Status.'}
+    ]},
+    video:{ heading:'Der Catering-Rechner <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du Kundendaten und Kostenblöcke einträgst und die Datenbank Pro-Person-Werte und Deckungsbeitrag automatisch rechnet.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🍽️ Catering',
+      title:'Dein Catering-Rechner. <span class="g">Auftrag für Auftrag.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Die violetten Karten sind Formeln — sie kommen zuletzt, weil sie die Eingabefelder brauchen. / drücken → „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Der Button legt mit einem Klick einen neuen Catering-Auftrag an und öffnet die leere Karte. So startet jede Anfrage an derselben Stelle.','„+ Neuer Auftrag"'),
+        C('2','Datenbank anlegen','Container','🍽️','1 DB','Die Datenbank ist der Container für alle Aufträge — eine Zeile pro Event. Alles Weitere sind Spalten, die du Schritt für Schritt hinzufügst.','„Catering"'),
+        C('3','Event Name','Titel-Spalte','🏷','Text','Der Titel benennt den Auftrag eindeutig. Nimm ein Muster aus Anlass, Kunde und Monat, dann findest du jede Zeile wieder.','„Hochzeit Meyer 08/26"'),
+        C('4','Kunde','Text','🏢','Text','Auftraggeber oder Firma. Getrennt vom Ansprechpartner, weil Rechnung und Kontakt oft nicht dieselbe Person sind.','„Meyer GmbH"'),
+        C('5','Kontaktperson','Text','👤','Text','Wer beim Kunden entscheidet und abstimmt. Ein Feld, damit Rückfragen sofort an die richtige Person gehen.','„Frau Meyer"'),
+        C('6','E-Mail','E-Mail','✉','Link','Kontakt-Mail als klickbarer Link. Angebote und Bestätigungen laufen von hier.','meyer@firma.de'),
+        C('7','Telefon','Telefon','📞','Link','Telefonnummer als klickbarer Call-Link. Für kurzfristige Absprachen am Event-Tag.','+49 170 1234567'),
+        C('8','Location/Lieferadresse','Text','📍','Text','Wohin geliefert oder wo aufgebaut wird. Steht direkt bei den Kontaktdaten, damit die Fahrt planbar ist.','„Gut Basthorst, 21493"'),
+        C('9','Datum','Datum','📅','Datum','Der Event-Termin. Als Einzeldatum geführt; ein Zeitfenster gehört in Besondere Anforderungen.','15.08.2026'),
+        C('10','Event-Art','Auswahl · 7','◧','7 Optionen','Ordnet den Auftrag einer Kategorie zu — Hochzeit, Firmenevent, Messe und weitere. Farbige Auswahl für die Übersicht auf einen Blick.','Hochzeit'),
+        C('11','Anzahl Personen','Zahl','👥','Personen','Gästezahl. Dieses Feld ist der Divisor für alle Pro-Person-Werte, also sauber pflegen.','80'),
+        C('12','Menü-Optionen','Mehrfachauswahl','📡','mehrfach','Mehrfachauswahl der Verpflegungsformen von Frühstück bis Flying Buffet, inklusive Vegetarisch und Vegan. Mehrere Haken sind erlaubt, weil ein Event oft mehrere Bausteine hat.','Buffet, Vegetarisch'),
+        C('13','Allergien & Unverträglichkeiten','Text','⚠','Text','Freitext für Restriktionen der Gäste. Steht bewusst getrennt, damit die Küche es nicht übersieht.','„2× Nussallergie, 1× glutenfrei"'),
+        C('14','Besondere Anforderungen','Text','✎','Text','Sonderwünsche wie Deko, Technik oder feste Zeitfenster. Alles, was nicht in ein Auswahlfeld passt.','„Aufbau ab 14 Uhr"'),
+        C('15','Status','Status','◔','Status','Führt den Auftrag durch die Phasen von Anfrage bis Abgerechnet. Die Gruppen To-do, In Arbeit und Fertig machen die Pipeline lesbar.','In Planung'),
+        C('16','Verantwortlich','Person · Ghost','👤','Person','Ordnet den Auftrag einem Teammitglied zu. Braucht eingeladene Workspace-Mitglieder, daher im Kurs nur gezeigt, nicht selbst gebaut — die Karte erscheint automatisch als Feld und zählt nicht in den Fortschritt.','(Teammitglied)',{ghost:true}),
+        C('17','Budget (EUR)','Zahl · €','€','€','Das vom Kunden genannte Budget als Orientierung. Getrennt vom späteren Verkaufspreis, damit du Anspruch und Ergebnis vergleichen kannst.','6.000 €'),
+        C('18','Angebotspreis (EUR)','Zahl · €','€','€','Der Preis im ersten Angebot. Bleibt stehen, auch wenn nachverhandelt wird — so siehst du die Differenz zum finalen Preis.','5.800 €'),
+        C('19','Finaler Verkaufspreis (EUR)','Zahl · €','€','€','Der tatsächlich vereinbarte Preis. Bezugsgröße für jede Prozent-Kennzahl, deshalb das wichtigste Zahlenfeld.','5.600 €'),
+        C('20','Wareneinsatz gesamt (EUR)','Zahl · €','€','€','Summe aller Lebensmittel- und Materialkosten. Grundlage für Foodcost-Quote und DB I.','1.680 €'),
+        C('21','Personalkosten geschätzt (EUR)','Zahl · €','€','€','Geschätzte Kosten für Service und Küche. Zieht sich in DB II vom Rohertrag ab.','900 €'),
+        C('22','Sonstige Kosten (EUR)','Zahl · €','€','€','Logistik, Miete, Anfahrt und Ähnliches. Letzter Kostenblock vor dem Netto-Deckungsbeitrag.','400 €'),
+        C('23','Notizen','Text','🗒','Text','Interne Bemerkungen, die den Kunden nichts angehen. Der Platz für alles, was sonst nirgends passt.','„Zahlt per Rechnung, 14 Tage"'),
+        C('24','Preis pro Person (EUR)','Formel · später','∑','€','Finaler Verkaufspreis geteilt durch Anzahl Personen — was jeder Gast kostet. Braucht beide Felder, kommt daher nach den Eingaben.','70,00 €',{later:true}),
+        C('25','Wareneinsatz pro Person (EUR)','Formel · später','∑','€','Wareneinsatz gesamt geteilt durch Anzahl Personen. Zeigt den Materialaufwand je Gast. Braucht beide Felder, kommt daher nach den Eingaben.','21,00 €',{later:true}),
+        C('26','Wareneinsatz %','Formel · später','∑','%','Wareneinsatz gesamt geteilt durch Finaler Verkaufspreis — die Foodcost-Quote. Faustregel: unter 30 %.','30 %',{later:true}),
+        C('27','DB I (EUR)','Formel · später','∑','€','Finaler Verkaufspreis minus Wareneinsatz gesamt. Der Rohertrag nach Materialkosten.','3.920 €',{later:true}),
+        C('28','DB I %','Formel · später','∑','%','DB I geteilt durch Finaler Verkaufspreis. Anteil, der nach dem Wareneinsatz bleibt.','70 %',{later:true}),
+        C('29','DB II (EUR)','Formel · später','∑','€','DB I minus Personalkosten geschätzt. Deckungsbeitrag nach Ware und Personal.','3.020 €',{later:true}),
+        C('30','DB II %','Formel · später','∑','%','DB II geteilt durch Finaler Verkaufspreis.','53,9 %',{later:true}),
+        C('31','DB III (EUR)','Formel · später','∑','€','DB II minus Sonstige Kosten. Der Netto-Deckungsbeitrag, der wirklich übrig bleibt.','2.620 €',{later:true}),
+        C('32','DB III %','Formel · später','∑','%','DB III geteilt durch Finaler Verkaufspreis. Die Kennzahl, an der du den Auftrag misst.','46,8 %',{later:true})
+      ]
+    },
+    ergebnis:{ heading:'Der grüne Rest <span class="g">ganz unten</span>', text:'Am Ende trägt jeder Auftrag seine Kundendaten und seine komplette Kalkulation in einer Zeile — und der Deckungsbeitrag in drei Stufen zeigt, was nach Ware, Personal und Nebenkosten wirklich übrig bleibt.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Die drei Stufen <span class="g">des Deckungsbeitrags</span>', lead:'Der Verkaufspreis ist der Anfang, nicht das Ergebnis — was zählt, ist der grüne Rest ganz unten.', nodes:[
+      {ic:'💶',t:'Verkaufspreis',s:'5.600 € stehen als Balken.'},
+      {ic:'🥕',t:'DB I',s:'− Ware → 3.920 € (70 %).'},
+      {ic:'👥',t:'DB II',s:'− Personal → 3.020 €.'},
+      {ic:'✅',t:'DB III',s:'− Sonstiges → 2.620 € (46,8 %).'}
+    ]},
+    tip:{ icon:'💡', heading:'Foodcost im Blick behalten', text:'Die Foodcost-Quote ist deine schnellste Warnlampe. Bleibt der Wareneinsatz unter 30 % vom Verkaufspreis, hast du Luft für Personal und Nebenkosten. Klettert er darüber, wird der Auftrag eng, egal wie voll der Saal ist. Prüf die Quote, bevor du das Angebot rausschickst, nicht danach.' },
+    learnings:[
+      'Ein Auftrag ist eine Zeile — Kundendaten und Kalkulation liegen zusammen, nicht in getrennten Listen.',
+      'Der finale Verkaufspreis ist die Bezugsgröße für jede Prozentzahl; trägst du ihn falsch ein, stimmt die ganze Marge nicht.',
+      'Deckungsbeitrag in drei Stufen: DB I nach Ware, DB II nach Personal, DB III nach allem anderen — erst DB III sagt, was übrig bleibt.',
+      'Pro-Person-Werte machen Events unterschiedlicher Größe vergleichbar — 70 € pro Gast sind eine Zahl, mit der du kalkulierst.',
+      'Zahlen eingeben reicht: Die Formeln rechnen bei jeder Änderung neu, damit du beim Nachverhandeln sofort die Grenze siehst.'
+    ],
+    next:{ href:'/merch-produkte', label:'Merch // Produkte' }
+  };
+})();
+
+/* VFL Insel — Merch // Produkte */
+(function(){
+  var C=function(tag,name,typeLabel,icon,val,overlay,ex,extra){var o={tag:tag,name:name,typeLabel:typeLabel,icon:icon,imgLabel:typeLabel,val:val,overlay:overlay,ex:ex};if(extra)for(var k in extra)o[k]=extra[k];return o;};
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['merch-produkte']={
+    hero:{ eyebrow:'Vision Frame · Angebot & Umsatz', titleHtml:'Merch // <span class="g">Produkte</span>' },
+    intro:[
+      'Bis hierhin hast du Datenbanken gebaut, die aufeinander zeigen. Diese hier steht für sich. Sie hält alles, was dein Betrieb neben dem Teller verkauft: eigenen Kaffee, zugekaufte Weine, das Schneidebrett mit deinem Logo. Sieben Spalten reichen dafür.',
+      'Ein Name, ein Preis, ein Typ, ein Status, ein paar Tags, eine Beschreibung, ein Bild. Keine Formel, keine Verknüpfung. Genau darin liegt der Wert: Du siehst hier in Reinform, was eine <b>Notion-Spalte</b> kann, wenn sie den richtigen Typ hat. Ein Preis rechnet im Euro-Format, ein Status führt durch den Lebenszyklus, ein Tag macht filterbar.'
+    ],
+    anim1:{ title:'Eine Zeile <span class="g">ist ein Produkt</span>', lead:'Du füllst nie „die Tabelle" aus — du beschreibst immer ein konkretes Produkt, und die Tabelle sammelt sie ein.', nodes:[
+      {ic:'＋',t:'Neues Produkt',s:'Der Button öffnet eine leere Karte.'},
+      {ic:'✏',t:'Felder füllen',s:'Name, Typ, Preis, Status, Tags.'},
+      {ic:'🛍️',t:'Eine Zeile',s:'Ein vollständiges Ding in der Tabelle.'}
+    ]},
+    video:{ heading:'Der Produkt-Katalog <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst, ein Produkt mit Typ, Preis, Status und Tags füllst und zwischen Tabelle und Galerie umschaltest.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'🛍️ Merch // Produkte',
+      title:'Dein Produkt-Katalog. <span class="g">Produkt für Produkt.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Der Startknopf der Insel. Ein Klick legt eine neue Produktzeile an und öffnet sie direkt zum Ausfüllen. So wird aus einer leeren Tabelle mit einem Griff ein neuer Eintrag.','„Neues Produkt"'),
+        C('2','Datenbank anlegen','Container','🛍️','1 DB','Das Fundament: die Tabelle „Merch // Produkte" selbst. Sie hält jede Zeile als ein Produkt. Alles Folgende sind die Spalten, die diese Tabelle beschreiben.','„Merch // Produkte"'),
+        C('3','Name','Titel-Spalte','🏷','Text','Die Pflicht-Spalte jeder Notion-Datenbank. Hier steht der Produktname, unter dem die Karte in der Galerie erscheint. Ohne Namen gibt es keine Karte.','„Chef Edition Coffee"'),
+        C('4','Produkttyp','Auswahl · 4','◧','4 Optionen','Legt fest, in welche Schublade das Produkt gehört: eigenes Produkt, zugekaufte Handelsware, selbst produziert oder Merchandise. Genau eine Option je Zeile.','Produkt'),
+        C('5','Preis','Zahl · €','€','€','Der Verkaufspreis in Euro. Das Euro-Format zeigt den Wert automatisch als „16,90 €". Reine Zahl, keine Rechnung dahinter.','16,90 €'),
+        C('6','Status','Status','◔','Status','Der Lebenszyklus des Produkts: von „Geplant" über „In Entwicklung" und „Verfügbar" bis „Ausverkauft". Drei Gruppen bilden ab, ob etwas noch Idee, schon im Verkauf oder durch ist.','In Entwicklung'),
+        C('7','Tags','Mehrfachauswahl · 7','📡','7 Optionen','Grobe Einordnung nach Warengruppe. Mehrere Tags erlaubt — ein Kaffee trägt „Kaffee & Tee" und „Drinks" zugleich. Macht die Datenbank filter- und gruppierbar.','Kaffee & Tee, Drinks'),
+        C('8','Beschreibung','Text','✎','Text','Ein bis zwei Sätze, die das Produkt greifbar machen: woraus es besteht, was es besonders macht. Kein Marketing-Text, sondern klare Beschreibung.','„Speziell geröstete Bohnen, Fair Trade und Bio-zertifiziert."'),
+        C('9','Bild','Datei · später','🖼','Datei','Das Produktfoto. Es wird zum Cover der Galerie-Karte und macht aus der Tabelle einen Katalog. Kommt zuletzt, weil ein Foto erst sinnvoll ist, wenn das Produkt real existiert.','produkt-foto.jpg',{later:true})
+      ]
+    },
+    ergebnis:{ heading:'Ein Katalog, <span class="g">zwei Ansichten</span>', text:'Am Ende liegen dieselben Daten einmal — und du entscheidest pro Ansicht, wie sie erscheinen: die Tabelle zum Pflegen, weil du alle Felder auf einen Blick hast, die Galerie zum Zeigen, weil das Bild zieht.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Derselbe Datensatz, <span class="g">zwei Ansichten</span>', lead:'Die Daten liegen nur einmal — die Ansicht entscheidet, wie du sie siehst.', nodes:[
+      {ic:'▦',t:'Tabelle',s:'Alle Felder auf einen Blick — zum Pflegen.'},
+      {ic:'🖼',t:'Galerie',s:'Bild als Cover — zum Zeigen und Verkaufen.'},
+      {ic:'🔁',t:'Ein Datensatz',s:'Einmal pflegen, in jeder Form zeigen.'}
+    ]},
+    tip:{ icon:'💡', heading:'Warengruppe und Produkttyp sauber trennen', text:'Es ist verlockend, alles in eine Spalte zu werfen. Widersteh dem. Der Produkttyp sagt, woher das Produkt kommt (selbst gemacht, zugekauft, Merchandise) — wichtig für die Kalkulation. Die Tags sagen, was es ist (Drinks, Backwaren, Saucen) — wichtig für die Sortierung im Verkauf. Zwei Fragen, zwei Spalten.' },
+    learnings:[
+      'Eine Zeile ist ein Produkt, eine Spalte ist eine Frage — so funktioniert jede Notion-Datenbank.',
+      'Der Feld-Typ macht die Arbeit: ein Preis als „Number" mit Euro-Format rechnet und formatiert von selbst.',
+      'Status ist ein Weg, kein Etikett — von „Geplant" bis „Ausverkauft" bildest du den echten Lebenszyklus ab.',
+      'Select für „eins davon", Multi-Select für „mehreres davon" — ein Typ, aber mehrere Warengruppen-Tags.',
+      'Dieselben Daten, mehrere Ansichten: Tabelle zum Pflegen, Galerie zum Zeigen — einmal halten, pro Ansicht entscheiden.'
+    ]
+  };
+})();
