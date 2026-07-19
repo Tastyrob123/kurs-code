@@ -13502,3 +13502,387 @@ var TSISL_ZUG_SCHLUESSEL=[
   document.addEventListener('DOMContentLoaded',mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   VFL — Vision-Frame-Lesson-Engine (Ebene 2, Insel-Lektionen)
+   Eine gescopte Engine rendert für JEDE Vision-Frame-Insel die
+   komplette Premium-Anatomie aus einem Config-Objekt:
+   01 Hero+Einleitung · 02 Erkläranimation · 03 Erklärvideo-Mockup ·
+   04 Warenkorb (interaktiv: Karten→Overlay→Einkaufswagen→Grün-Sweep+
+   Chain→Bilanz-Balken+Backoffice-%) · 05 Ergebnis-Blick · 06 Zweit-
+   Animation · 07 Empfehlungs-Kachel · 09 Seitenabschluss (Learnings+
+   Weiter-Button). Struktur in JEDER Insel identisch (Premium-Template).
+   Namespace vfl/#vfl -> kollisionsfrei. Registry: window.VFL_LESSONS
+   (Slug -> Config). Config-Blöcke pushen ihre Insel selbst hinein.
+   Bilder = Platzhalter (vfl-ph). Titel-Font "Lineal Web"/"Lineal TS".
+   ============================================================ */
+(function(){
+  if(window.__vfl) return; window.__vfl=true;
+  window.VFL_LESSONS = window.VFL_LESSONS || {};
+  var LESSONS = window.VFL_LESSONS;
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var GLOW="199,180,137";
+
+  function activeSlug(){
+    var p=location.pathname.replace(/\/+$/,'');
+    var keys=Object.keys(LESSONS);
+    for(var i=0;i<keys.length;i++){ if(new RegExp('/'+keys[i]+'$').test(p)) return keys[i]; }
+    return null;
+  }
+
+  /* ---------- CSS ---------- */
+  var CSS=`
+  .vfl-scope{--vfl-beige:#c7b489;--vfl-display:"Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--vfl-title:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--vfl-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;}
+  #vfl{width:100%;font-family:var(--vfl-sans);color:#fff}
+  #vfl *{box-sizing:border-box}
+  #vfl .vfl-sec{position:relative}
+  /* ---- 01 HERO ---- */
+  #vfl .vfl-hero{position:relative;width:min(1180px,94vw);margin:74px auto 6px;text-align:center;isolation:isolate}
+  #vfl .vfl-hero__img{position:relative;width:min(920px,92vw);margin:0 auto;display:block;border-radius:18px}
+  #vfl .vfl-hero__logo{display:block;width:58px;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:vflRise 650ms cubic-bezier(.16,1,.3,1) 60ms both}
+  #vfl .vfl-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--vfl-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--vfl-beige);margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95);animation:vflRise 700ms cubic-bezier(.16,1,.3,1) 120ms both}
+  #vfl .vfl-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--vfl-beige);box-shadow:0 0 12px rgba(${GLOW},.7)}
+  #vfl .vfl-hero__title{margin:0;font-family:var(--vfl-display);font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-wrap:balance;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9);animation:vflRise 800ms cubic-bezier(.16,1,.3,1) 220ms both}
+  #vfl .vfl-hero__title .g{color:var(--vfl-beige)}
+  #vfl .vfl-intro{width:min(860px,92vw);margin:40px auto 0;text-align:center}
+  #vfl .vfl-intro p{margin:0 0 13px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #vfl .vfl-intro b{color:var(--vfl-beige);font-weight:600}
+  /* ---- Sektions-Kopf (wiederkehrend) ---- */
+  #vfl .vfl-h2{font-family:var(--vfl-title);font-weight:600;color:#fff;text-align:center;font-size:clamp(25px,2.8vw,32px);line-height:1.2;letter-spacing:-.015em;margin:0 0 8px}
+  #vfl .vfl-h2 .g{color:var(--vfl-beige)}
+  #vfl .vfl-lead{width:min(720px,92vw);margin:0 auto 26px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  /* ---- 02/06 ANIMATION (Konzept-Diagramm) ---- */
+  #vfl .vfl-anim{width:min(1060px,94vw);margin:64px auto 0}
+  #vfl .vfl-flow{position:relative;display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:nowrap;margin-top:10px}
+  #vfl .vfl-node{position:relative;flex:1 1 0;min-width:0;max-width:280px;background:radial-gradient(120% 90% at 50% 0%,rgba(${GLOW},.09),rgba(4,5,10,0) 62%),#080a12;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 16px 18px;text-align:center;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+  #vfl .vfl-node.on{opacity:1;transform:none}
+  #vfl .vfl-node__ic{width:38px;height:38px;margin:0 auto 12px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(${GLOW},.12);border:1px solid rgba(${GLOW},.32);box-shadow:0 0 20px rgba(${GLOW},.22)}
+  #vfl .vfl-node__t{font-family:var(--vfl-title);font-weight:600;font-size:1.02rem;color:#fff;margin:0 0 5px;letter-spacing:-.01em}
+  #vfl .vfl-node__s{font-size:.82rem;line-height:1.5;color:rgba(255,255,255,.62);margin:0}
+  #vfl .vfl-link{flex:0 0 46px;align-self:center;height:2px;position:relative;background:linear-gradient(90deg,rgba(${GLOW},0),rgba(${GLOW},.5));opacity:0;transition:opacity .5s ease}
+  #vfl .vfl-link.on{opacity:1}
+  #vfl .vfl-link::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--vfl-beige);box-shadow:0 0 10px rgba(${GLOW},.9)}
+  @media(max-width:760px){#vfl .vfl-flow{flex-direction:column;align-items:center}#vfl .vfl-node{max-width:420px;width:100%}#vfl .vfl-link{flex-basis:26px;width:2px;height:26px;background:linear-gradient(180deg,rgba(${GLOW},0),rgba(${GLOW},.5))}#vfl .vfl-link::after{right:50%;top:auto;bottom:-1px;transform:translateX(50%)}}
+  /* ---- 03 ERKLÄRVIDEO / 05 ERGEBNIS-BLICK (PC-Mockup + Text) ---- */
+  #vfl .vfl-macrow{width:min(1120px,94vw);margin:60px auto 0;display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
+  #vfl .vfl-macrow.rev{grid-template-columns:.85fr 1.15fr}
+  #vfl .vfl-macrow.rev .vfl-mactext{order:2}
+  #vfl .vfl-mac{position:relative;border-radius:14px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 70px -40px rgba(0,0,0,.9)}
+  #vfl .vfl-mac__bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#12141d;border-bottom:1px solid rgba(255,255,255,.06)}
+  #vfl .vfl-mac__bar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18)}
+  #vfl .vfl-mac__body{aspect-ratio:16/10;position:relative;background:radial-gradient(130% 100% at 50% 0%,rgba(${GLOW},.06),rgba(4,5,10,0) 60%),#05060b;display:flex;align-items:center;justify-content:center}
+  #vfl .vfl-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:rgba(255,255,255,.4);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+  #vfl .vfl-ph__ic{width:44px;height:44px;border-radius:12px;border:1px dashed rgba(${GLOW},.4);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--vfl-beige)}
+  #vfl .vfl-mactext .vfl-h2,#vfl .vfl-mactext .vfl-lead{text-align:left;margin-left:0;margin-right:0;width:auto}
+  #vfl .vfl-mactext .vfl-lead{color:rgba(255,255,255,.78)}
+  @media(max-width:820px){#vfl .vfl-macrow,#vfl .vfl-macrow.rev{grid-template-columns:1fr;gap:20px}#vfl .vfl-macrow.rev .vfl-mactext{order:0}}
+  /* ---- 04 WARENKORB ---- */
+  #vfl .vfl-shop{width:min(1180px,95vw);margin:66px auto 0}
+  #vfl .vfl-shop__eye{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--vfl-sans);letter-spacing:.06em;color:var(--vfl-beige);margin:0 0 14px}
+  #vfl .vfl-shop__eye::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--vfl-beige);box-shadow:0 0 12px rgba(${GLOW},.7)}
+  #vfl .vfl-shop__head{text-align:center}
+  #vfl .vfl-shop__title{font-family:var(--vfl-title);font-weight:600;font-size:clamp(32px,4.4vw,52px);line-height:1.1;letter-spacing:-.02em;color:#fff;margin:0}
+  #vfl .vfl-shop__title .g{color:var(--vfl-beige)}
+  #vfl .vfl-shop__sub{font-size:15px;color:#e1e1e1;max-width:640px;margin:14px auto 0;line-height:1.6}
+  #vfl .vfl-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:30px 4px 8px;scrollbar-width:none}
+  #vfl .vfl-track::-webkit-scrollbar{display:none}
+  #vfl .vfl-card{scroll-snap-align:start;flex:0 0 208px;width:208px;background:#0b0d14;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;cursor:pointer;position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .4s}
+  #vfl .vfl-card:hover{transform:translateY(-4px);border-color:rgba(${GLOW},.3);box-shadow:0 10px 30px rgba(${GLOW},.14),0 0 40px rgba(${GLOW},.12);animation:vflHb 3.2s ease-in-out infinite}
+  #vfl .vfl-card__img{aspect-ratio:1/1;background:radial-gradient(120% 100% at 50% 0%,rgba(${GLOW},.08),rgba(4,5,10,0) 60%),#0b0d14;display:flex;align-items:center;justify-content:center;position:relative}
+  #vfl .vfl-card__ph{display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(255,255,255,.32);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+  #vfl .vfl-card__ph .ic{width:40px;height:40px;border-radius:11px;border:1px dashed rgba(${GLOW},.35);display:flex;align-items:center;justify-content:center;font-size:19px;color:rgba(${GLOW},.75)}
+  #vfl .vfl-card__n{position:absolute;top:10px;left:12px;font:700 .74rem/1 var(--vfl-sans);color:rgba(${GLOW},.7);letter-spacing:.05em}
+  #vfl .vfl-card__b{padding:13px 14px 15px}
+  #vfl .vfl-card__name{font-size:1.02rem;font-weight:600;color:#fff;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #vfl .vfl-card__desc{font-size:.82rem;color:rgba(255,255,255,.52);margin:4px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #vfl .vfl-card__val{display:block;text-align:right;font-size:1rem;font-weight:700;color:#d8c9ab;margin-top:9px;font-variant-numeric:tabular-nums}
+  #vfl .vfl-card.ghost{border-style:dashed;opacity:.62}
+  #vfl .vfl-card.later{border-color:rgba(150,120,224,.5)}
+  #vfl .vfl-card.later .vfl-card__n{color:#b49ff0}
+  #vfl .vfl-card.done .vfl-card__img{filter:saturate(1.05)}
+  #vfl .vfl-card.done::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(143,203,170,0) 40%,rgba(95,174,136,.22));pointer-events:none}
+  #vfl .vfl-card.done .vfl-card__b::after{content:"✓ erledigt";display:block;margin-top:8px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8FCBAA}
+  #vfl .vfl-card .vfl-sweep{position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(60deg,rgba(95,174,136,0) 40%,rgba(159,211,185,.75) 50%,rgba(95,174,136,0) 60%);mix-blend-mode:screen}
+  #vfl .vfl-card.sweeping .vfl-sweep{opacity:1;animation:vflSweep .8s cubic-bezier(.22,1,.36,1)}
+  #vfl .vfl-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+  #vfl .vfl-nav button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:#fff;font-size:16px;cursor:pointer;transition:background .3s,border-color .3s}
+  #vfl .vfl-nav button:hover{border-color:rgba(${GLOW},.5);background:rgba(${GLOW},.1)}
+  /* Bilanz-Balken */
+  #vfl .vfl-bar{margin:22px auto 0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;backdrop-filter:blur(8px)}
+  #vfl .vfl-bar__val{font-family:var(--vfl-title);font-weight:600;font-size:1.4rem;color:var(--vfl-beige);font-variant-numeric:tabular-nums;white-space:nowrap}
+  #vfl .vfl-bar__val small{display:block;font-family:var(--vfl-sans);font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
+  #vfl .vfl-bar__mid{min-width:0}
+  #vfl .vfl-bar__meta{display:flex;justify-content:space-between;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:7px}
+  #vfl .vfl-bar__track{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+  #vfl .vfl-bar__fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 18px rgba(95,174,136,.5);transition:width .7s cubic-bezier(.22,1,.36,1)}
+  #vfl .vfl-bar__glob{text-align:right;font-family:var(--vfl-title);font-weight:600;font-size:1.15rem;color:#e6a6b4;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #vfl .vfl-bar__glob small{display:block;font-family:var(--vfl-sans);font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:3px}
+  @media(max-width:640px){#vfl .vfl-bar{grid-template-columns:1fr;gap:12px}}
+  /* Overlay */
+  #vfl-ov{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(3,4,8,.72);backdrop-filter:blur(9px)}
+  #vfl-ov.open{display:flex}
+  #vfl-ov .vfl-ov__box{width:min(880px,96vw);max-height:88vh;overflow:auto;background:#0b0d14;border:1px solid rgba(255,255,255,.1);border-radius:20px;display:grid;grid-template-columns:1fr 1.15fr;box-shadow:0 40px 120px -30px rgba(0,0,0,.9);animation:vflUp .5s cubic-bezier(.16,1,.3,1)}
+  #vfl-ov .vfl-ov__img{background:radial-gradient(120% 100% at 50% 0%,rgba(${GLOW},.1),rgba(4,5,10,0) 60%),#080a12;display:flex;align-items:center;justify-content:center;min-height:260px}
+  #vfl-ov .vfl-ov__r{padding:30px 30px 26px;display:flex;flex-direction:column}
+  #vfl-ov .vfl-ov__eye{font:600 12px/1 var(--vfl-sans);letter-spacing:.06em;color:var(--vfl-beige);margin-bottom:12px}
+  #vfl-ov .vfl-ov__t{font-family:var(--vfl-title);font-weight:600;font-size:1.7rem;color:#fff;margin:0 0 8px;letter-spacing:-.015em}
+  #vfl-ov .vfl-ov__type{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(${GLOW},.8);border:1px solid rgba(${GLOW},.28);border-radius:999px;padding:4px 10px;margin-bottom:14px;align-self:flex-start}
+  #vfl-ov .vfl-ov__body{font-size:15px;line-height:1.62;color:rgba(255,255,255,.84);margin:0 0 14px}
+  #vfl-ov .vfl-ov__ex{font-size:.86rem;color:rgba(255,255,255,.6);border-left:2px solid rgba(${GLOW},.4);padding-left:12px;margin:0 0 20px}
+  #vfl-ov .vfl-ov__ex b{color:var(--vfl-beige);font-weight:600}
+  #vfl-ov .vfl-ov__foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  #vfl-ov .vfl-ov__val{font-size:1.05rem;font-weight:700;color:#d8c9ab;font-variant-numeric:tabular-nums}
+  #vfl-ov .vfl-ov__add{border:none;cursor:pointer;background:linear-gradient(90deg,#c7b489,#d8c9ab);color:#05060b;font-family:var(--vfl-sans);font-weight:700;font-size:.92rem;padding:12px 20px;border-radius:11px;transition:transform .2s,box-shadow .3s}
+  #vfl-ov .vfl-ov__add:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(${GLOW},.4)}
+  #vfl-ov .vfl-ov__add.is-done{background:linear-gradient(90deg,#5FAE88,#9FD3B9)}
+  #vfl-ov .vfl-ov__x{position:absolute;top:18px;right:22px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:#fff;font-size:18px;cursor:pointer}
+  @media(max-width:720px){#vfl-ov .vfl-ov__box{grid-template-columns:1fr}#vfl-ov .vfl-ov__img{min-height:160px}}
+  /* ---- 07 EMPFEHLUNGS-KACHEL ---- */
+  #vfl .vfl-tip{width:min(900px,94vw);margin:64px auto 0;background:radial-gradient(120% 120% at 0% 0%,rgba(${GLOW},.1),rgba(4,5,10,0) 55%),#0b0d14;border:1px solid rgba(${GLOW},.22);border-radius:18px;padding:26px 28px;display:flex;gap:20px;align-items:flex-start}
+  #vfl .vfl-tip__ic{flex:0 0 auto;width:46px;height:46px;border-radius:13px;background:rgba(${GLOW},.14);border:1px solid rgba(${GLOW},.34);display:flex;align-items:center;justify-content:center;font-size:22px}
+  #vfl .vfl-tip__h{font-family:var(--vfl-title);font-weight:600;font-size:1.12rem;color:#fff;margin:2px 0 6px}
+  #vfl .vfl-tip__t{font-size:15px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
+  /* ---- 09 SEITENABSCHLUSS ---- */
+  #vfl .vfl-end{width:min(900px,94vw);margin:68px auto 0}
+  #vfl .vfl-learn{list-style:none;padding:0;margin:22px auto 0;max-width:680px;display:grid;gap:12px}
+  #vfl .vfl-learn li{position:relative;padding:14px 16px 14px 44px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;font-size:15px;line-height:1.55;color:rgba(255,255,255,.86)}
+  #vfl .vfl-learn li::before{content:"✓";position:absolute;left:16px;top:14px;color:#8FCBAA;font-weight:700}
+  #vfl .vfl-next{display:flex;justify-content:center;margin:34px auto 40px}
+  #vfl .vfl-next a{display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(90deg,#c7b489,#d8c9ab);color:#05060b;font-family:var(--vfl-title);font-weight:600;font-size:1.02rem;padding:15px 26px;border-radius:14px;transition:transform .2s,box-shadow .3s}
+  #vfl .vfl-next a:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(${GLOW},.4)}
+  #vfl .vfl-next a small{font-family:var(--vfl-sans);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;display:block}
+  /* Anim + Keyframes */
+  @keyframes vflRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes vflHb{0%,100%{box-shadow:0 10px 30px rgba(${GLOW},.14),0 0 40px rgba(${GLOW},.12)}50%{box-shadow:0 12px 34px rgba(${GLOW},.3),0 0 52px rgba(${GLOW},.3)}}
+  @keyframes vflSweep{from{transform:translateX(-60%)}to{transform:translateX(60%)}}
+  @keyframes vflUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){#vfl *{animation:none!important}#vfl .vfl-node,#vfl .vfl-link{opacity:1!important;transform:none!important}}
+  `;
+  function injectCSS(){ if(document.getElementById("vfl-css"))return; var s=document.createElement("style"); s.id="vfl-css"; s.textContent=CSS; document.head.appendChild(s); }
+
+  /* ---------- Helpers ---------- */
+  function el(html){ var d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function ph(icon,label){ return '<div class="vfl-card__ph"><span class="ic">'+(icon||'🖼')+'</span>'+(label?'<span>'+esc(label)+'</span>':'<span>Bild folgt</span>')+'</div>'; }
+
+  /* backoffice: alle registrierten Lektionen ergeben den Modul-Gesamtnenner */
+  function backoffice(){
+    var keys=Object.keys(LESSONS), done=0, total=0;
+    keys.forEach(function(k){
+      var L=LESSONS[k]; if(!L||!L.shop) return;
+      var cards=(L.shop.cards||[]).filter(function(c){return !c.ghost;}); /* Ghost zählt nicht */
+      total+=cards.length;
+      cards.forEach(function(c,i){ if(localStorage.getItem('done-vfl-'+k+'-'+i)==='1') done++; });
+    });
+    return total?Math.round(done/total*100):0;
+  }
+
+  /* ---------- Section builders ---------- */
+  function heroSec(L){
+    return '<section class="vfl-sec vfl-hero">'+
+      '<img class="vfl-hero__logo" src="'+LOGO+'" alt="Tasty Studios">'+
+      '<div class="vfl-hero__eyebrow">'+esc(L.hero.eyebrow)+'</div>'+
+      '<h1 class="vfl-hero__title">'+L.hero.titleHtml+'</h1>'+
+      '</section>'+
+      '<section class="vfl-sec vfl-intro">'+(L.intro||[]).map(function(p){return '<p>'+p+'</p>';}).join('')+'</section>';
+  }
+  function animSec(a){
+    if(!a) return '';
+    var nodes=a.nodes.map(function(n){ return '<div class="vfl-node"><div class="vfl-node__ic">'+(n.ic||'◆')+'</div><h3 class="vfl-node__t">'+esc(n.t)+'</h3><p class="vfl-node__s">'+esc(n.s)+'</p></div>'; });
+    var flow=''; nodes.forEach(function(nn,i){ flow+=nn; if(i<nodes.length-1) flow+='<div class="vfl-link"></div>'; });
+    return '<section class="vfl-sec vfl-anim">'+
+      '<h2 class="vfl-h2">'+a.title+'</h2>'+
+      (a.lead?'<p class="vfl-lead">'+esc(a.lead)+'</p>':'')+
+      '<div class="vfl-flow">'+flow+'</div></section>';
+  }
+  function macSec(m,rev){
+    return '<section class="vfl-sec vfl-macrow'+(rev?' rev':'')+'">'+
+      '<div class="vfl-mac"><div class="vfl-mac__bar"><i></i><i></i><i></i></div><div class="vfl-mac__body"><div class="vfl-ph"><span class="vfl-ph__ic">'+(m.icon||'▷')+'</span><span>'+esc(m.phLabel||'Mockup folgt')+'</span></div></div></div>'+
+      '<div class="vfl-mactext"><h2 class="vfl-h2">'+m.heading+'</h2><p class="vfl-lead">'+esc(m.text)+'</p></div>'+
+      '</section>';
+  }
+  function tipSec(t){
+    if(!t) return '';
+    return '<section class="vfl-sec vfl-tip"><div class="vfl-tip__ic">'+(t.icon||'💡')+'</div><div><h3 class="vfl-tip__h">'+esc(t.heading||'Empfehlung')+'</h3><p class="vfl-tip__t">'+esc(t.text)+'</p></div></section>';
+  }
+  function endSec(L){
+    var lis=(L.learnings||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+    var nxt=L.next?'<div class="vfl-next"><a href="'+L.next.href+'"><span><small>Nächste Insel</small>'+esc(L.next.label)+'</span> →</a></div>':'';
+    return '<section class="vfl-sec vfl-end"><h2 class="vfl-h2">'+(L.endTitle||'Was du <span class="g">mitnimmst</span>')+'</h2><ul class="vfl-learn">'+lis+'</ul>'+nxt+'</section>';
+  }
+  function shopSec(L,slug){
+    var s=L.shop; if(!s) return '';
+    var cards=s.cards.map(function(c,i){
+      var cls='vfl-card'+(c.ghost?' ghost':'')+(c.later?' later':'');
+      var done=localStorage.getItem('done-vfl-'+slug+'-'+i)==='1';
+      if(done) cls+=' done';
+      return '<div class="'+cls+'" data-i="'+i+'">'+
+        '<div class="vfl-sweep"></div>'+
+        '<div class="vfl-card__img"><span class="vfl-card__n">'+esc(c.tag||(i+1))+'</span>'+ph(c.icon,c.imgLabel)+'</div>'+
+        '<div class="vfl-card__b"><p class="vfl-card__name">'+esc(c.name)+'</p><p class="vfl-card__desc">'+esc((c.overlay||'').split('. ')[0])+'</p><span class="vfl-card__val">'+esc(c.val||'')+'</span></div>'+
+      '</div>';
+    }).join('');
+    return '<section class="vfl-sec vfl-shop" id="vfl-shop-'+slug+'">'+
+      '<div class="vfl-shop__head"><span class="vfl-shop__eye">'+esc(s.eyebrow)+'</span>'+
+      '<h2 class="vfl-shop__title">'+s.title+'</h2><p class="vfl-shop__sub">'+esc(s.sub)+'</p></div>'+
+      '<div class="vfl-nav"><button data-d="-1">‹</button><button data-d="1">›</button></div>'+
+      '<div class="vfl-track">'+cards+'</div>'+
+      '<div class="vfl-bar"><div class="vfl-bar__val" data-role="local">0<small>'+esc(s.unit||'')+'</small></div>'+
+      '<div class="vfl-bar__mid"><div class="vfl-bar__meta"><span>Diese Lektion</span><span data-role="pct">0 % · 0/'+s.cards.filter(function(c){return !c.ghost;}).length+'</span></div><div class="vfl-bar__track"><div class="vfl-bar__fill"></div></div></div>'+
+      '<div class="vfl-bar__glob" data-role="glob">0 %<small>Backoffice</small></div></div>'+
+      '</section>';
+  }
+
+  /* ---------- Warenkorb interaction ---------- */
+  function wireShop(root,L,slug){
+    var s=L.shop; if(!s) return;
+    var sec=root.querySelector('#vfl-shop-'+slug); if(!sec) return;
+    var track=sec.querySelector('.vfl-track');
+    var buildable=s.cards.filter(function(c){return !c.ghost;}).length;
+    function key(i){ return 'done-vfl-'+slug+'-'+i; }
+    function refresh(){
+      var doneCount=0, localSum=0;
+      s.cards.forEach(function(c,i){ if(!c.ghost && localStorage.getItem(key(i))==='1'){ doneCount++; localSum+=(typeof c.num==='number'?c.num:1); } });
+      var pct=buildable?Math.round(doneCount/buildable*100):0;
+      sec.querySelector('.vfl-bar__fill').style.width=pct+'%';
+      sec.querySelector('[data-role="pct"]').textContent=pct+' % · '+doneCount+'/'+buildable;
+      var lv=sec.querySelector('[data-role="local"]');
+      lv.innerHTML=(s.money?localSum.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' ':doneCount+' ')+'<small>'+esc(s.unit||'')+'</small>';
+      var g=backoffice();
+      document.querySelectorAll('#vfl [data-role="glob"]').forEach(function(x){ x.innerHTML=g+' %<small>Backoffice</small>'; });
+    }
+    function markDone(i){
+      var card=track.querySelector('.vfl-card[data-i="'+i+'"]'); if(!card||card.classList.contains('ghost')) return;
+      localStorage.setItem(key(i),'1');
+      card.classList.add('sweeping'); setTimeout(function(){ card.classList.remove('sweeping'); },820);
+      card.classList.add('done');
+      refresh();
+      // chain: nächste nicht erledigte
+      var order=[]; for(var j=i+1;j<s.cards.length;j++) order.push(j); for(var k=0;k<i;k++) order.push(k);
+      for(var q=0;q<order.length;q++){ var idx=order[q]; if(!s.cards[idx].ghost && localStorage.getItem(key(idx))!=='1'){ setTimeout(function(x){ return function(){ openOverlay(x); }; }(idx),620); break; } }
+    }
+    function openOverlay(i){
+      var c=s.cards[i]; if(!c) return;
+      var ov=document.getElementById('vfl-ov');
+      var done=localStorage.getItem(key(i))==='1';
+      ov.querySelector('.vfl-ov__img').innerHTML=ph(c.icon,c.imgLabel);
+      ov.querySelector('.vfl-ov__eye').textContent=s.eyebrow;
+      ov.querySelector('.vfl-ov__t').textContent=c.name;
+      ov.querySelector('.vfl-ov__type').textContent=c.typeLabel||'Baustein';
+      ov.querySelector('.vfl-ov__body').innerHTML=c.overlay||'';
+      ov.querySelector('.vfl-ov__ex').innerHTML=c.ex?('<b>Beispiel:</b> '+esc(c.ex)):'';
+      ov.querySelector('.vfl-ov__val').textContent=c.val||'';
+      var add=ov.querySelector('.vfl-ov__add');
+      add.textContent=done?'✓ erledigt':(c.ghost?'erscheint automatisch':(s.cta||'In den Einkaufswagen'));
+      add.className='vfl-ov__add'+(done?' is-done':'');
+      add.disabled=!!c.ghost;
+      add.onclick=function(){ closeOverlay(); if(!c.ghost) markDone(i); };
+      ov.classList.add('open');
+    }
+    function closeOverlay(){ document.getElementById('vfl-ov').classList.remove('open'); }
+    window.__vflClose=closeOverlay;
+    track.addEventListener('click',function(e){ var card=e.target.closest('.vfl-card'); if(card) openOverlay(+card.dataset.i); });
+    sec.querySelectorAll('.vfl-nav button').forEach(function(b){ b.addEventListener('click',function(){ track.scrollBy({left:(+b.dataset.d)*240,behavior:'smooth'}); }); });
+    refresh();
+  }
+
+  function ensureOverlay(){
+    if(document.getElementById('vfl-ov')) return;
+    var ov=el('<div id="vfl-ov"><div class="vfl-ov__box"><div class="vfl-ov__img"></div><div class="vfl-ov__r"><button class="vfl-ov__x" aria-label="Schließen">✕</button><div class="vfl-ov__eye"></div><h3 class="vfl-ov__t"></h3><span class="vfl-ov__type"></span><div class="vfl-ov__body"></div><p class="vfl-ov__ex"></p><div class="vfl-ov__foot"><span class="vfl-ov__val"></span><button class="vfl-ov__add"></button></div></div></div></div>');
+    document.body.appendChild(ov);
+    ov.addEventListener('click',function(e){ if(e.target===ov||e.target.classList.contains('vfl-ov__x')) window.__vflClose&&window.__vflClose(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') window.__vflClose&&window.__vflClose(); });
+  }
+
+  /* ---------- Reveal ---------- */
+  function reveal(root){
+    var groups=[].slice.call(root.querySelectorAll('.vfl-anim'));
+    groups.forEach(function(g){
+      var items=[].slice.call(g.querySelectorAll('.vfl-node,.vfl-link'));
+      function go(){ items.forEach(function(it,i){ setTimeout(function(){ it.classList.add('on'); }, i*140); }); }
+      var io=new IntersectionObserver(function(e){ if(e[0].isIntersecting){ go(); io.disconnect(); } },{threshold:.2});
+      io.observe(g);
+      var r=g.getBoundingClientRect(); if(r.top<(window.innerHeight||800)&&r.bottom>0){ requestAnimationFrame(go); }
+      setTimeout(go,1500);
+    });
+  }
+
+  /* ---------- Mount ---------- */
+  function mount(){
+    var slug=activeSlug(); if(!slug) return;
+    var L=LESSONS[slug]; if(!L) return;
+    injectCSS(); ensureOverlay();
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    sc.classList.add('vfl-scope');
+    if(document.getElementById('vfl')) return;
+    var box=document.createElement('div'); box.id='vfl';
+    box.innerHTML =
+      heroSec(L) +
+      animSec(L.anim1) +
+      (L.video?macSec(L.video,false):'') +
+      shopSec(L,slug) +
+      (L.ergebnis?macSec(L.ergebnis,true):'') +
+      animSec(L.anim2) +
+      tipSec(L.tip) +
+      endSec(L);
+    var nr=sc.querySelector('.notion-root');
+    if(nr) sc.insertBefore(box,nr); else sc.appendChild(box);
+    wireShop(box,L,slug);
+    reveal(box);
+    // native Notion-Header + leere Platzhalter ausblenden
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded',mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* VFL Insel 01 — Vision & Werte */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['vision-werte']={
+    hero:{ eyebrow:'Vision Frame · Identität & Marke', titleHtml:'Vision <span class="g">& Werte</span>' },
+    intro:[
+      'Bevor du Systeme, Angebote oder Tagesabläufe baust, brauchst du einen Bezugspunkt. Woran misst du, ob eine Entscheidung richtig ist? In dieser Insel baust du dein <b>Wertefundament</b> als Datenbank — nicht als vage Notiz, sondern als klare Struktur, auf die du immer wieder zurückgreifst.',
+      'Du trennst dabei zwei Dinge: die <b>Vision</b>, also die Richtung, in die du willst, und den <b>Wert</b>, also das Prinzip, nach dem du handelst. Jeder Eintrag bekommt eine Essenz in einem Satz, eine Wirkung im Alltag und einen Bezug zu deinem System. So wird aus einem Gefühl etwas, das du prüfen kannst.'
+    ],
+    anim1:{ title:'Aus einer Idee wird ein <span class="g">überprüfbarer Eintrag</span>', lead:'Jede Spalte fügt eine Ebene hinzu — vom Namen bis zur Verankerung im echten Aufbau.', nodes:[
+      {ic:'🏷',t:'Titel',s:'Der Name der Vision oder des Werts — kurz und eindeutig.'},
+      {ic:'✎',t:'Essenz',s:'Der Kern in einem Satz, ohne Beiwerk.'},
+      {ic:'⚙',t:'Wirkung im Alltag',s:'Woran du den Punkt im täglichen Handeln merkst.'},
+      {ic:'🔗',t:'Bezug zum System',s:'Wo die Idee in deinem Aufbau verankert ist.'}
+    ]},
+    video:{ heading:'Sieh dir den Aufbau <span class="g">im System</span> an', text:'Ein kurzer Durchlauf zeigt, wie du die Datenbank in Notion anlegst und den ersten Eintrag füllst — Feld für Feld, bis das Fundament steht.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'DB · Visionen & Werte',
+      title:'Dein Wertefundament. <span class="g">Baustein für Baustein.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — jede gebaute Karte ist ein Baustein deines Fundaments. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Interaktion',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Lege oben auf der Seite einen Button an, der beim Klick einen neuen Eintrag in dieser Datenbank erzeugt. So legst du später jede Vision oder jeden Wert mit einem Klick an, statt eine leere Zeile zu suchen. In Notion: /Button → Aktion „Seite hinzufügen zu" → diese Datenbank.',ex:'Button-Label „＋ Neue Vision / neuen Wert"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'🎯',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstelle die Datenbank als Inline-Tabelle auf der Seite. Sie ist das Gefäß, in dem alle deine Visionen und Werte als einzelne Einträge liegen. In Notion: /Datenbank – Inline → Titel „Visionen & Werte" → Icon 🎯.',ex:'DB-Name „Visionen & Werte"'},
+        {tag:'3',name:'Titel',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titelspalte ist automatisch da und lässt sich nicht löschen. Benenne sie in „Titel" um — hier steht der Name jeder Vision bzw. jedes Werts. Halte ihn kurz und eindeutig.',ex:'„Gastronomische Vielfalt bewahren"'},
+        {tag:'4',name:'Art',typeLabel:'Auswahl',icon:'◧',imgLabel:'Auswahl',val:'2 Optionen',overlay:'Füge eine Auswahl-Spalte „Art" hinzu und lege zwei Optionen an: Vision (blau) und Wert (orange). So trennst du auf einen Blick das große Richtungsbild vom konkreten Prinzip. Neue Spalte → Typ „Auswahl" → beide Optionen mit Farbe.',ex:'Vision'},
+        {tag:'5',name:'Essenz',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Lege eine Textspalte „Essenz" an. Hier bringst du die Vision oder den Wert auf einen einzigen Satz — den harten Kern, ohne Beiwerk. Das zwingt dich, das Wesentliche zu benennen.',ex:'„Kleinen Betrieben die KI-Welt zugänglich machen."'},
+        {tag:'6',name:'Wirkung im Alltag',typeLabel:'Text',icon:'⚙',imgLabel:'Text',val:'Text',overlay:'Füge eine Textspalte „Wirkung im Alltag" hinzu. Sie beantwortet: Woran merke ich diesen Punkt im täglichen Handeln? Damit wird aus dem Prinzip eine überprüfbare Praxis.',ex:'„Ich baue jedes Angebot so, dass ein Einzelbetrieb es allein umsetzen kann."'},
+        {tag:'7',name:'Bezug zum System',typeLabel:'Text',icon:'🔗',imgLabel:'Text',val:'Text',overlay:'Lege eine Textspalte „Bezug zum System" an. Hier hältst du fest, wo diese Vision/dieser Wert in deinem Aufbau verankert ist — im Vault, im Angebot, in der Marke. So bleibt die Idee mit der Struktur verbunden.',ex:'„Verankert in der Positionierung von Tasty Studios."'},
+        {tag:'8',name:'Gedanken',typeLabel:'Text',icon:'💭',imgLabel:'Text',val:'Text',overlay:'Füge die letzte Textspalte „Gedanken" hinzu. Sie ist dein offener Denkraum für Zweifel, Fragen und Weiterentwicklungen zum Eintrag — nichts muss hier fertig sein.',ex:'„Noch offen, ob das eher Vision oder Wert ist."'}
+      ]
+    },
+    ergebnis:{ heading:'Dein Fundament <span class="g">auf einen Blick</span>', text:'Am Ende steht eine Tabelle, in der Vision und Wert sauber getrennt sind und jeder Eintrag seine Essenz, seine Wirkung und seinen Bezug trägt. Genau daran misst du später jede größere Entscheidung.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Vision oder <span class="g">Wert</span>?', lead:'Beide liegen im selben Gefäß — das Feld „Art" gibt jedem Eintrag seine Rolle.', nodes:[
+      {ic:'◆',t:'Ein Eintrag',s:'Eine Idee kommt in die Datenbank.'},
+      {ic:'◧',t:'Feld „Art"',s:'Du entscheidest: Richtung oder Prinzip?'},
+      {ic:'🧭',t:'Vision',s:'Das langfristige Richtungsbild.'},
+      {ic:'⚓',t:'Wert',s:'Das handlungsleitende Prinzip.'}
+    ]},
+    tip:{ icon:'💡', heading:'So bleibt es lebendig', text:'Fang mit drei bis fünf Einträgen an, nicht mit einer langen Liste. Ein Wert, den du nicht im Alltag wiederfindest, ist nur ein schöner Satz — fülle deshalb immer zuerst „Wirkung im Alltag", bevor du den nächsten Eintrag anlegst.' },
+    learnings:[
+      'Ein Wertefundament wirkt erst, wenn es als Struktur existiert und nicht nur im Kopf.',
+      'Vision beschreibt die Richtung, Wert beschreibt das Prinzip — die Trennung schafft Klarheit.',
+      'Die Essenz in einem Satz zwingt dich, das Wesentliche zu benennen.',
+      '„Wirkung im Alltag" macht aus einem Prinzip etwas Überprüfbares.',
+      'Der Bezug zum System hält deine Werte mit deinem echten Aufbau verbunden.'
+    ],
+    next:{ href:'/markenidentitaet', label:'Unternehmen & Markenidentität' }
+  };
+})();
