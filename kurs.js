@@ -3477,9 +3477,11 @@
 /* ---- */
 
 /* ============================================================
-   allergene-bersicht — DB X : Packaging  (überarbeitet 18.07.2026)
-   Überschrift + Einleitung(1) + frei-schwebende Cutout-Animation +
-   Einleitung(2) unter der Animation + Anker #ts10wk für den Warenkorb.
+   allergene-bersicht — DB X : Packaging  (Ebenen-Rebuild 20.07.2026)
+   Überschrift + Einleitung(1) + EBENEN-Animation (vertikal, 5 Ebenen:
+   Karton → DB 0 Inventurliste → DB Packaging → Poof/Drink → DB Gerichte)
+   + Einleitung(2) unter der Animation + Anker #ts10wk für den Warenkorb.
+   Öffnet sich wie die Startseite (Zoom-Fade 1.05→1 + Stagger-Rise).
    Mount direkt UNTER #tsalgpc2. Cutouts: kurs-code/img/packaging/*-cut.webp
    ============================================================ */
 (function(){
@@ -3489,14 +3491,14 @@
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var B='https://tastyrob123.github.io/kurs-code/img/packaging/';
-  var IMG={bowl:B+'bowl-cut.webp',deckel:B+'deckel-cut.webp',tuete:B+'tuete-cut.webp',rpet:B+'rpet-cut.webp',
-    kugeldeckel:B+'kugeldeckel-cut.webp',serviette:B+'serviette-cut.webp',salat:B+'salat-cut.webp',
+  var IMG={bowl:B+'bowl-cut.webp',deckel:B+'deckel-cut.webp',becher:B+'becher-cut.webp',
+    kugeldeckel:B+'kugeldeckel-cut.webp',serviette:B+'serviette-cut.webp',halter:B+'halter-cut.webp',
+    strohhalm:B+'strohhalm-cut.webp',drink:B+'drink-cut.webp',
     karton_zu:B+'karton-zu-cut.webp',karton_offen:B+'karton-offen-cut.webp'};
   (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
 
-  /* DB I–III vorher/nachher — ECHTE Notion-Werte: Caesar Salad Reloaded (VK 11,50 €)
-     + Paket "Bowl To-Go Standard" 0,58 € (Bowl 0,26 + Deckel 0,12 + Serviette 0,01 + Besteck 0,19) */
-  var NUM={ cap:'Caesar Salad · nach dem Verknüpfen', rows:[
+  /* Vorher/Nachher-Werte = die von Robert vorgegebenen Beispielwerte (SSOT kurs.js) */
+  var NUM={ cap:'Detox Hipster Drink · nach dem Verknüpfen', rows:[
     ['Wareneinsatz','2,39 €','2,97 €'],['DB I','9,11 €','8,53 €'],['DB II','7,39 €','6,81 €'],['DB III','4,83 €','4,25 €']] };
 
   var CSS = `
@@ -3514,34 +3516,52 @@
 
   #tspkflow{width:100vw;max-width:100vw;margin:18px 0 0;margin-left:calc(50% - 50vw);font-family:${SANS};color:#fff}
   #tspkflow *{box-sizing:border-box}
-  #tspkflow .fl-wrap{width:min(1340px,96vw);margin:0 auto}
-  #tspkflow .fl-stage{position:relative;width:100%;height:clamp(400px,50vw,560px);overflow:hidden}
-  #tspkflow .fl-amb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;opacity:.55}
-  #tspkflow .fl-amb.a1{left:8%;top:38%;width:34%;height:52%;background:radial-gradient(closest-side,rgba(199,180,137,.14),transparent 70%)}
-  #tspkflow .fl-amb.a2{left:56%;top:30%;width:40%;height:60%;background:radial-gradient(closest-side,rgba(120,140,210,.10),transparent 70%)}
-  #tspkflow .fl-line{position:absolute;left:6%;right:6%;top:50%;height:1px;transform:translateY(-.5px);background:linear-gradient(90deg,transparent,rgba(199,180,137,0));pointer-events:none;overflow:visible}
-  #tspkflow .fl-line i{position:absolute;left:0;top:-.5px;height:2px;width:0;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.55),rgba(199,180,137,.9));box-shadow:0 0 14px rgba(199,180,137,.5);transition:width .2s linear}
-  #tspkflow .fl-line i::after{content:"";position:absolute;right:-3px;top:-2px;width:6px;height:6px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px 2px rgba(199,180,137,.8)}
-  #tspkflow .fl-q{position:absolute;top:0;bottom:0;width:25%;pointer-events:none}
-  #tspkflow .fl-q.q1{left:0} #tspkflow .fl-q.q2{left:25%} #tspkflow .fl-q.q3{left:50%} #tspkflow .fl-q.q4{left:75%}
-  #tspkflow .fl-qlabel{position:absolute;top:14px;left:0;right:0;text-align:center;opacity:0;transform:translateY(-6px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
-  #tspkflow .fl-qlabel.on{opacity:1;transform:none}
-  #tspkflow .fl-qlabel .k{display:block;font-family:${LIN};font-weight:600;font-size:clamp(12.5px,1.3vw,16px);color:#fff;letter-spacing:.01em}
-  #tspkflow .fl-qlabel .k .g{color:#c7b489}
-  #tspkflow .fl-qlabel .s{display:block;margin-top:2px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.38)}
-  #tspkflow .sp{position:absolute;left:0;top:0;will-change:transform,opacity;display:flex;flex-direction:column;align-items:center;justify-content:center;width:var(--w,116px);height:var(--h,116px);margin-left:calc(var(--w,116px)/-2);margin-top:calc(var(--h,116px)/-2);opacity:0;pointer-events:none}
+  #tspkflow .fl-wrap{width:min(1180px,94vw);margin:0 auto}
+  /* Öffnen wie die Startseite: Zoom-Fade 1.05→1 + Fade, 1200ms (.16,1,.3,1) */
+  #tspkflow .fl-stage{position:relative;width:100%;height:clamp(860px,76vw,1020px);overflow:hidden;
+    opacity:0;transform:scale(1.05);transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1)}
+  #tspkflow .fl-stage.open{opacity:1;transform:scale(1)}
+  #tspkflow .fl-amb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;opacity:.5}
+  #tspkflow .fl-amb.a1{left:22%;top:8%;width:56%;height:26%;background:radial-gradient(closest-side,rgba(199,180,137,.13),transparent 70%)}
+  #tspkflow .fl-amb.a2{left:10%;top:56%;width:44%;height:34%;background:radial-gradient(closest-side,rgba(120,140,210,.09),transparent 70%)}
+  #tspkflow .fl-amb.a3{left:52%;top:74%;width:42%;height:26%;background:radial-gradient(closest-side,rgba(199,180,137,.10),transparent 70%)}
+  /* Ebenen-Linien (waagerecht) — ziehen sich von links auf, gestaffeltes Rise wie Startseite */
+  #tspkflow .fl-lv{position:absolute;left:4%;right:4%;height:1px;pointer-events:none}
+  #tspkflow .fl-lv i{position:absolute;left:0;top:-.5px;height:1.5px;width:0;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.05),rgba(199,180,137,.34) 30%,rgba(199,180,137,.16));transition:none}
+  #tspkflow .fl-lv i::after{content:"";position:absolute;right:-3px;top:-1.75px;width:5px;height:5px;border-radius:50%;background:#c7b489;box-shadow:0 0 10px 2px rgba(199,180,137,.7);opacity:.9}
+  #tspkflow .fl-lv.done i::after{opacity:0;transition:opacity .6s ease}
+  #tspkflow .fl-lvlab{position:absolute;left:1.5%;bottom:12px;opacity:0;transform:translateY(14px);filter:blur(5px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),filter .85s cubic-bezier(.16,1,.3,1)}
+  #tspkflow .fl-lvlab.on{opacity:1;transform:none;filter:blur(0)}
+  #tspkflow .fl-lvlab .k{display:block;font-family:${LIN};font-weight:600;font-size:clamp(13px,1.35vw,17px);color:#fff;letter-spacing:.01em}
+  #tspkflow .fl-lvlab .k .g{color:#c7b489}
+  /* Sprites */
+  #tspkflow .sp{position:absolute;left:0;top:0;will-change:transform,opacity;display:flex;flex-direction:column;align-items:center;justify-content:center;width:var(--w,112px);height:var(--h,112px);margin-left:calc(var(--w,112px)/-2);margin-top:calc(var(--h,112px)/-2);opacity:0;pointer-events:none}
   #tspkflow .sp .ph{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-  #tspkflow .sp .ph::before{content:"";position:absolute;left:50%;top:54%;width:82%;height:70%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(199,180,137,.16),transparent 72%);filter:blur(10px);opacity:.9;z-index:0}
+  #tspkflow .sp .ph::before{content:"";position:absolute;left:50%;top:54%;width:82%;height:70%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(199,180,137,.15),transparent 72%);filter:blur(10px);opacity:.9;z-index:0}
   #tspkflow .sp .ph img{position:relative;z-index:1;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 20px 26px rgba(0,0,0,.6)) drop-shadow(0 3px 8px rgba(0,0,0,.5))}
-  #tspkflow .sp .ph .box-open{position:absolute;inset:0;margin:auto;opacity:0;transition:opacity .5s ease}
+  #tspkflow .sp .ph .box-open{position:absolute;inset:0;margin:auto;opacity:0}
   #tspkflow .sp.floaty{animation:flbob 6s ease-in-out infinite}
   #tspkflow .sp .cap{margin-top:6px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.9);font-weight:500}
-  #tspkflow .sp.box{--w:168px;--h:168px}
+  #tspkflow .sp.box{--w:172px;--h:172px}
+  #tspkflow .sp.big{--w:150px;--h:170px}
   @keyframes flbob{0%,100%{translate:0 0}50%{translate:0 -7px}}
-  #tspkflow .fl-ticket{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) scale(.92);opacity:0;transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);background:rgba(10,12,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(199,180,137,.34);border-radius:11px;padding:9px 15px;font-size:12px;letter-spacing:.03em;color:#fff;box-shadow:0 20px 50px -26px rgba(0,0,0,.9);z-index:7}
-  #tspkflow .fl-ticket.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  #tspkflow .fl-ticket b{color:#c7b489;font-weight:600}
-  #tspkflow .fl-db{position:absolute;left:87.5%;top:74%;transform:translate(-50%,-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);width:min(216px,21vw);background:rgba(9,11,17,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 14px;z-index:7;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  /* Sprechblase — kommt von der rechten Kante */
+  #tspkflow .fl-bubble{position:absolute;right:3%;top:44%;transform:translate(60px,-50%);opacity:0;transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1);background:rgba(10,12,18,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(199,180,137,.38);border-radius:14px;border-bottom-right-radius:3px;padding:11px 17px;font-size:12.5px;letter-spacing:.02em;color:#fff;box-shadow:0 20px 50px -26px rgba(0,0,0,.9);z-index:8;max-width:min(300px,40vw)}
+  #tspkflow .fl-bubble.on{opacity:1;transform:translate(0,-50%)}
+  #tspkflow .fl-bubble b{color:#c7b489;font-weight:600}
+  /* Poof */
+  #tspkflow .fl-poof{position:absolute;width:0;height:0;pointer-events:none;z-index:6}
+  #tspkflow .fl-poof .pf-flash{position:absolute;left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;background:radial-gradient(closest-side,rgba(233,220,184,.85),rgba(199,180,137,.25) 55%,transparent 72%);opacity:0;transform:scale(.3)}
+  #tspkflow .fl-poof .pf-ring{position:absolute;left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;border:1.5px solid rgba(199,180,137,.8);opacity:0;transform:scale(.25)}
+  #tspkflow .fl-poof .pf-p{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#e9dcb8;box-shadow:0 0 10px 2px rgba(199,180,137,.75);opacity:0}
+  #tspkflow .fl-poof.go .pf-flash{animation:pfFlash .65s cubic-bezier(.22,1,.36,1) both}
+  #tspkflow .fl-poof.go .pf-ring{animation:pfRing .8s cubic-bezier(.22,1,.36,1) both}
+  #tspkflow .fl-poof.go .pf-p{animation:pfP .85s cubic-bezier(.22,1,.36,1) both}
+  @keyframes pfFlash{0%{opacity:0;transform:scale(.3)}22%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+  @keyframes pfRing{0%{opacity:.9;transform:scale(.25)}100%{opacity:0;transform:scale(1.5)}}
+  @keyframes pfP{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+  /* Vorher/Nachher-Panel */
+  #tspkflow .fl-db{position:absolute;left:66%;top:89%;transform:translate(-50%,-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);width:min(250px,24vw);background:rgba(9,11,17,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 14px;z-index:7;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
   #tspkflow .fl-db.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
   #tspkflow .fl-db .dbrow{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.06)}
   #tspkflow .fl-db .dbrow:last-child{border-bottom:0}
@@ -3549,12 +3569,22 @@
   #tspkflow .fl-db .dbv{font-variant-numeric:tabular-nums;font-weight:600}
   #tspkflow .fl-db .dbv .old{color:rgba(255,255,255,.38);text-decoration:line-through;margin-right:6px;font-weight:400}
   #tspkflow .fl-db .dbv .new{color:#c7b489}
-  #tspkflow .fl-db .dbcap{margin:1px 0 8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
-  #tspkflow .fl-replay{width:min(1340px,96vw);margin:6px auto 0;text-align:center}
+  #tspkflow .fl-db .dbcap{margin:1px 0 8px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
+  #tspkflow .fl-replay{width:min(1180px,94vw);margin:8px auto 0;text-align:center}
   #tspkflow .fl-replay button{background:transparent;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.62);font:inherit;font-size:11.5px;letter-spacing:.08em;padding:7px 17px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
   #tspkflow .fl-replay button:hover{border-color:rgba(199,180,137,.55);color:#fff}
-  @media (max-width:720px){#tspkflow .fl-stage{height:clamp(340px,86vw,480px)}#tspkflow .sp{--w:76px;--h:76px}#tspkflow .sp.box{--w:112px;--h:112px}#tspkflow .sp .cap{font-size:8.5px}#tspkflow .fl-db{width:44vw}}
-  @media (prefers-reduced-motion:reduce){#tspkflow .sp,#tspkflow .fl-ticket,#tspkflow .fl-db,#tspkflow .fl-qlabel{transition:none!important}#tspkflow .sp.floaty{animation:none}}`;
+  @media (max-width:720px){
+    #tspkflow .fl-stage{height:clamp(720px,178vw,900px)}
+    #tspkflow .sp{--w:52px;--h:52px} #tspkflow .sp.box{--w:96px;--h:96px} #tspkflow .sp.big{--w:82px;--h:98px}
+    #tspkflow .sp .cap{display:none}
+    #tspkflow .sp.box .cap{display:block;font-size:8px;letter-spacing:.04em}
+    #tspkflow .fl-lvlab .k{font-size:10.5px}
+    #tspkflow .fl-bubble{font-size:11px;padding:9px 12px;max-width:56vw}
+    #tspkflow .fl-db{width:50vw;left:72%}
+    #tspkflow .fl-db .dbrow{font-size:10.5px}
+    #tspkflow .fl-db .dbcap{font-size:8px;letter-spacing:.12em}
+  }
+  @media (prefers-reduced-motion:reduce){#tspkflow .fl-stage{opacity:1;transform:none;transition:none}#tspkflow .sp,#tspkflow .fl-bubble,#tspkflow .fl-db,#tspkflow .fl-lvlab{transition:none!important}#tspkflow .sp.floaty{animation:none}#tspkflow .fl-poof.go .pf-flash,#tspkflow .fl-poof.go .pf-ring,#tspkflow .fl-poof.go .pf-p{animation:none}}`;
 
   function headSection(){
     var s=document.createElement('section'); s.id='tspk';
@@ -3568,29 +3598,35 @@
     return s;
   }
 
+  /* Ebenen (Y-Anteile der Stage): Linie + Standhöhe der Objekte */
+  var LV={ l1:.16, l2:.36, l3:.56, l4:.76, l5:.985,
+           y1:.07, y2:.302, y3:.502, y4:.675, y5:.895 };
   var SPRITES=[
-    {id:'box',cls:'box',cap:'Karton',img:'karton_zu',img2:'karton_offen'},
-    {id:'bowl',cls:'floaty',cap:'Bowl',img:'bowl'},
-    {id:'deckel',cls:'floaty',cap:'Deckel',img:'deckel'},
-    {id:'tuete',cls:'floaty',cap:'Tüte',img:'tuete'},
-    {id:'rpet',cls:'floaty',cap:'RPET',img:'rpet'},
-    {id:'kugel',cls:'floaty',cap:'Kugeldeckel',img:'kugeldeckel'},
-    {id:'serv',cls:'floaty',cap:'Serviette',img:'serviette'},
-    {id:'salad',cls:'floaty',cap:'Salat',img:'salat'},
-    {id:'bag',cls:'',cap:'Paket',img:'tuete'}
+    {id:'box',   cls:'box',    cap:'Karton',        img:'karton_zu',img2:'karton_offen'},
+    {id:'becher',cls:'floaty', cap:'RPET Becher',   img:'becher'},
+    {id:'kugel', cls:'floaty', cap:'Kugeldeckel',   img:'kugeldeckel'},
+    {id:'halter',cls:'floaty', cap:'Becherhalter',  img:'halter'},
+    {id:'serv',  cls:'floaty', cap:'Serviette',     img:'serviette'},
+    {id:'bowl',  cls:'floaty', cap:'Bowl',          img:'bowl'},
+    {id:'deckel',cls:'floaty', cap:'Deckel',        img:'deckel'},
+    {id:'straw', cls:'floaty', cap:'Strohhalm',     img:'strohhalm'},
+    {id:'drink', cls:'big',    cap:'Detox Hipster Drink', img:'drink'}
   ];
 
   function flowSection(){
     var s=document.createElement('section'); s.id='tspkflow';
     var dbrows=NUM.rows.map(function(r){ return '<div class="dbrow"><span class="dbk">'+r[0]+'</span><span class="dbv"><span class="old">'+r[1]+'</span><span class="new">'+r[2]+'</span></span></div>'; }).join('');
+    var poofP=''; for(var i=0;i<12;i++){ var a=i*30*Math.PI/180, r=78+(i%3)*22;
+      poofP+='<span class="pf-p" style="--dx:'+Math.round(Math.cos(a)*r)+'px;--dy:'+Math.round(Math.sin(a)*r)+'px"></span>'; }
     s.innerHTML='<div class="fl-wrap"><div class="fl-stage" id="flStage">'+
-      '<div class="fl-amb a1"></div><div class="fl-amb a2"></div>'+
-      '<div class="fl-line"><i id="flLine"></i></div>'+
-      '<div class="fl-q q1"></div>'+
-      '<div class="fl-q q2"><div class="fl-qlabel" data-q="2"><span class="k">DB 0 : <span class="g">Inventurliste</span></span><span class="s">Lieferung</span></div></div>'+
-      '<div class="fl-q q3"><div class="fl-qlabel" data-q="3"><span class="k">DB X : <span class="g">Packaging</span></span><span class="s">Pakete schnüren</span></div></div>'+
-      '<div class="fl-q q4"><div class="fl-qlabel" data-q="4"><span class="k">DB XI : <span class="g">Gerichte</span></span><span class="s">Kalkulation</span></div></div>'+
-      '<div class="fl-ticket" id="flTicket">Bestellung <b>Caesar Salad</b> — To Go</div>'+
+      '<div class="fl-amb a1"></div><div class="fl-amb a2"></div><div class="fl-amb a3"></div>'+
+      '<div class="fl-lv" data-lv="1" style="top:'+(LV.l1*100)+'%"><i></i></div>'+
+      '<div class="fl-lv" data-lv="2" style="top:'+(LV.l2*100)+'%"><div class="fl-lvlab"><span class="k">DB 0 · <span class="g">Inventurliste</span></span></div><i></i></div>'+
+      '<div class="fl-lv" data-lv="3" style="top:'+(LV.l3*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Packaging</span></span></div><i></i></div>'+
+      '<div class="fl-lv" data-lv="4" style="top:'+(LV.l4*100)+'%"><i></i></div>'+
+      '<div class="fl-lv" data-lv="5" style="top:'+(LV.l5*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Gerichte</span></span></div><i></i></div>'+
+      '<div class="fl-bubble" id="flBubble">„Einmal den <b>Detox Hipster Drink</b>, bitte."</div>'+
+      '<div class="fl-poof" id="flPoof" style="left:50%;top:'+(LV.y4*100)+'%"><span class="pf-flash"></span><span class="pf-ring"></span>'+poofP+'</div>'+
       '<div class="fl-db" id="flDb"><div class="dbcap">'+NUM.cap+'</div>'+dbrows+'</div>'+
       '</div></div>'+
       '<div class="fl-replay"><button type="button" id="flReplay">▷ Ablauf erneut abspielen</button></div>';
@@ -3606,60 +3642,93 @@
       d.innerHTML=inner+'<div class="cap">'+sp.cap+'</div>';
       stage.appendChild(d); els[sp.id]=d;
     });
-    var ticket=document.getElementById('flTicket'), dbPanel=document.getElementById('flDb'), line=document.getElementById('flLine');
-    var qlabels={}; [].forEach.call(stage.querySelectorAll('.fl-qlabel'),function(l){ qlabels[l.getAttribute('data-q')]=l; });
-    var INV_POS={bowl:{x:.285,y:.40},deckel:{x:.375,y:.40},tuete:{x:.465,y:.40},rpet:{x:.285,y:.72},kugel:{x:.375,y:.72},serv:{x:.465,y:.72}};
-    var BOX={x:.125,y:.58},BOX_MOUTH={x:.125,y:.40},PACK_CENTER={x:.625,y:.50},GERICHTE={x:.875,y:.40};
+    var bubble=document.getElementById('flBubble'), dbPanel=document.getElementById('flDb'), poof=document.getElementById('flPoof');
+    var lvEls={}, lvLines={}, lvLabs={};
+    [].forEach.call(stage.querySelectorAll('.fl-lv'),function(l){ var n=l.getAttribute('data-lv'); lvEls[n]=l; lvLines[n]=l.querySelector('i'); var lab=l.querySelector('.fl-lvlab'); if(lab) lvLabs[n]=lab; });
+    /* Ebene 2 — exakte Reihenfolge: RPET Becher, Kugeldeckel, Becherhalter, Serviette, Bowl, Deckel */
+    var E2={becher:{x:.25,y:LV.y2},kugel:{x:.362,y:LV.y2},halter:{x:.474,y:LV.y2},serv:{x:.586,y:LV.y2},bowl:{x:.698,y:LV.y2},deckel:{x:.81,y:LV.y2}};
+    var E2IDS=['becher','kugel','halter','serv','bowl','deckel'];
+    var DESKX=[.25,.362,.474,.586,.698,.81], MOBX=[.32,.436,.552,.668,.784,.90];
+    var E3={becher:{x:.35,y:LV.y3},kugel:{x:.5,y:LV.y3},straw:{x:.65,y:LV.y3}};
+    var BOX={x:.5,y:LV.y1},BOX_MOUTH={x:.5,y:LV.y1+.02},E4={x:.5,y:LV.y4},E5={x:.5,y:LV.y5},E5L={x:.38,y:LV.y5};
     var W=0,H=0;
     function measure(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height;
-      if(W<100){ W=Math.min(1340,(window.innerWidth||1280)*0.96); } if(H<100){ H=Math.max(400,Math.min(560,(window.innerWidth||1280)*0.50)); } }
+      if(W<100){ W=Math.min(1180,(window.innerWidth||1280)*0.94); } if(H<100){ H=Math.max(860,Math.min(1020,(window.innerWidth||1280)*0.76)); }
+      var mob=W<=560, xs=mob?MOBX:DESKX;
+      E2IDS.forEach(function(id,i){ E2[id].x=xs[i]; });
+      E5L.x=mob?.34:.38; }
     measure(); window.addEventListener('resize',measure);
     function clamp(v,a,b){return v<a?a:v>b?b:v;} function lerp(a,b,t){return a+(b-a)*t;}
     function ease(t){t=clamp(t,0,1);return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
     function eOut(t){t=clamp(t,0,1);return 1-Math.pow(1-t,3);}
+    function eBack(t){t=clamp(t,0,1);var c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);}
     function seg(t,t0,t1){ if(t<=t0)return 0; if(t>=t1)return 1; return (t-t0)/(t1-t0); }
     function place(el,nx,ny,scale,rot,op){ el.style.transform='translate('+(nx*W)+'px,'+(ny*H)+'px) scale('+scale+') rotate('+rot+'deg)'; el.style.opacity=op; }
-    var T={boxIn:[0.2,1.2],boxOpen:[1.2,2.4],itemsOut:[2.4,6.6],q2label:2.6,order:[6.6,8.4],q3label:8.8,toPack:[8.8,12.4],assemble:[11.8,15.4],q4label:15.2,bagOut:[15.4,18.2],dbShow:16.6,end:20.0};
-    var DUR=T.end, ITEM_IDS=['bowl','deckel','tuete','rpet','kugel','serv'], PACK_IDS=['bowl','deckel','serv','tuete'];
+    /* Timeline (Sekunden) */
+    var T={boxIn:[0.0,0.9],boxOpen:[1.0,1.9],itemsOut:[2.1,6.9],lab2:3.4,
+           bubbleIn:7.2,bubbleOut:11.0,trioDown:[8.7,11.2],lab3:9.9,
+           converge:[11.6,12.9],poofAt:12.9,drinkIn:[13.0,13.9],
+           drinkDown:[14.6,15.7],drinkLeft:[15.9,16.7],lab5:15.8,dbShow:16.9,end:18.6};
+    var DUR=T.end;
+    var ITEM_IDS=['becher','kugel','halter','serv','bowl','deckel'];
+    var LINE_T={1:[0.0,0.8],2:[2.1,2.9],3:[8.7,9.5],4:[11.6,12.4],5:[14.6,15.4]};
+    var poofFired=false;
     function frame(t){
-      var lp=clamp(seg(t,1.0,T.bagOut[1]),0,1); if(line) line.style.width=(lp*100)+'%';
+      for(var lv in LINE_T){ var lp=eOut(seg(t,LINE_T[lv][0],LINE_T[lv][1])); lvLines[lv].style.width=(lp*100)+'%';
+        if(lp>=1) lvEls[lv].classList.add('done'); }
+      /* Ebene 1 — Karton fällt ein, öffnet sich (zu-Bild verschwindet KOMPLETT), wackelt beim Ausschütten */
       var bi=eOut(seg(t,T.boxIn[0],T.boxIn[1])); var openP=ease(seg(t,T.boxOpen[0],T.boxOpen[1]));
-      place(els.box, BOX.x, lerp(BOX.y+.06,BOX.y,bi), lerp(.6,1,bi), 0, bi);
-      var __bo=els.box.querySelector('.box-open'); if(__bo) __bo.style.opacity=openP;
-      if(t>=T.q2label-0.01) qlabels['2'].classList.add('on');
-      ITEM_IDS.forEach(function(id,i){ var t0=T.itemsOut[0]+i*0.42,t1=t0+1.5,p=seg(t,t0,t1),el=els[id],tgt=INV_POS[id];
+      var spill=seg(t,T.itemsOut[0],T.itemsOut[1]);
+      var rot=(spill>0&&spill<1)?Math.sin(spill*Math.PI*4)*9*(1-spill):0;
+      place(els.box, BOX.x, lerp(BOX.y-.05,BOX.y,bi), lerp(.6,1,bi), rot, bi);
+      var boxImgs=els.box.querySelectorAll('img');
+      if(boxImgs.length>1){ boxImgs[0].style.opacity=String(1-openP); boxImgs[1].style.opacity=String(openP); }
+      /* Ebene 2 — 6 Objekte fallen nacheinander heraus und reihen sich exakt auf */
+      ITEM_IDS.forEach(function(id,i){ var t0=T.itemsOut[0]+i*0.55,t1=t0+1.5,p=seg(t,t0,t1),el=els[id],tgt=E2[id];
         if(p<=0){ el.style.opacity=0; return; }
-        var pe=eOut(p),x=lerp(BOX_MOUTH.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.16,y=lerp(BOX_MOUTH.y,tgt.y,pe)-arc;
-        place(el,x,y,lerp(.5,1,pe),0,clamp(p*2,0,1)); });
-      var op0=seg(t,T.order[0],T.order[1]);
-      if(op0>0.02 && t<13.6) ticket.classList.add('on'); else ticket.classList.remove('on');
-      var salIn=eOut(seg(t,T.order[0]+0.5,T.order[1])); var salToBowl=ease(seg(t,T.assemble[0],T.assemble[0]+1.2));
-      var salX=lerp(.5,PACK_CENTER.x,salToBowl),salY=lerp(.42,.47,salToBowl);
-      var salOp = salIn>0 ? (t>T.assemble[0]+1.1 ? clamp(1-seg(t,T.assemble[0]+1.0,T.assemble[0]+1.5),0,1) : salIn) : 0;
-      place(els.salad, salX, salY, lerp(.55,.92,salIn)*lerp(1,.65,salToBowl), 0, salOp);
-      if(t>=T.q3label-0.01) qlabels['3'].classList.add('on');
-      var PACK_SLOT={bowl:{x:PACK_CENTER.x,y:PACK_CENTER.y+.04,s:1.05},deckel:{x:PACK_CENTER.x,y:PACK_CENTER.y-.16,s:.85},serv:{x:PACK_CENTER.x-.09,y:PACK_CENTER.y+.06,s:.62},tuete:{x:PACK_CENTER.x+.015,y:PACK_CENTER.y,s:1.2}};
-      PACK_IDS.forEach(function(id,i){ var t0=T.toPack[0]+i*0.5,t1=t0+1.6,p=seg(t,t0,t1); if(p<=0) return;
-        var pe=eOut(p),from=INV_POS[id],to=PACK_SLOT[id],x=lerp(from.x,to.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.12,y=lerp(from.y,to.y,pe)-arc;
-        place(els[id],x,y,lerp(1,to.s,pe),0,1); });
-      var asm=ease(seg(t,T.assemble[0]+1.3,T.assemble[1]));
-      if(asm>0){ ['bowl','deckel','serv'].forEach(function(id){ var slot=PACK_SLOT[id],x=lerp(slot.x,PACK_CENTER.x,asm),y=lerp(slot.y,PACK_CENTER.y,asm),sc=lerp(slot.s,0.12,asm),op=lerp(1,0,clamp((asm-0.55)/0.45,0,1)); place(els[id],x,y,sc,0,op); });
-        els.tuete.style.opacity=String(lerp(1,0,clamp((asm-0.6)/0.4,0,1))); }
-      var bagP=seg(t,T.bagOut[0],T.bagOut[1]); var bagIn=eOut(seg(t,T.assemble[1]-0.6,T.assemble[1]));
-      if(bagIn>0){ if(t>=T.q4label-0.01) qlabels['4'].classList.add('on');
-        var bx=lerp(PACK_CENTER.x,GERICHTE.x,eOut(bagP)),arc=Math.sin(Math.min(bagP,1)*Math.PI)*0.14,by=lerp(PACK_CENTER.y,GERICHTE.y,eOut(bagP))-arc;
-        place(els.bag,bx,by,lerp(.65,1.05,bagIn),0,bagIn); } else { els.bag.style.opacity=0; }
+        if(id==='becher'&&t>=T.trioDown[0]) return;
+        if(id==='kugel'&&t>=T.trioDown[0]+0.5) return;
+        var pe=eOut(p),x=lerp(BOX_MOUTH.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.05,y=lerp(BOX_MOUTH.y,tgt.y,pe)-arc,
+            r=lerp((i%2?18:-18),0,pe);
+        place(el,x,y,lerp(.45,1,pe),r,clamp(p*2,0,1)); });
+      if(t>=T.lab2-0.01 && lvLabs['2']) lvLabs['2'].classList.add('on');
+      /* Sprechblase von rechts */
+      if(t>=T.bubbleIn && t<T.bubbleOut) bubble.classList.add('on'); else bubble.classList.remove('on');
+      /* Ebene 3 — Becher + Kugeldeckel von Ebene 2, Strohhalm frisch aus dem Karton */
+      var TRIO=[{id:'becher',from:E2.becher,t0:T.trioDown[0]},{id:'kugel',from:E2.kugel,t0:T.trioDown[0]+0.5},{id:'straw',from:BOX_MOUTH,t0:T.trioDown[0]+1.0}];
+      TRIO.forEach(function(o){ var p=seg(t,o.t0,o.t0+1.5); if(p<=0){ if(o.id==='straw') els.straw.style.opacity=0; return; }
+        if(t>=T.converge[0]) return;
+        var pe=eOut(p),tgt=E3[o.id],x=lerp(o.from.x,tgt.x,pe),arc=Math.sin(Math.min(p,1)*Math.PI)*0.04,y=lerp(o.from.y,tgt.y,pe)-arc;
+        place(els[o.id],x,y,1,0,o.id==='straw'?clamp(p*2,0,1):1); });
+      if(t>=T.lab3-0.01 && lvLabs['3']) lvLabs['3'].classList.add('on');
+      /* Ebene 4 — zusammenlaufen, Poof, fertiger Drink */
+      var cv=ease(seg(t,T.converge[0],T.converge[1]));
+      if(cv>0){ ['becher','kugel','straw'].forEach(function(id){ var from=E3[id],x=lerp(from.x,E4.x,cv),y=lerp(from.y,E4.y,cv),
+          sc=lerp(1,.15,cv),op=lerp(1,0,clamp((cv-.6)/.4,0,1));
+        place(els[id],x,y,sc,0,op); }); }
+      if(t>=T.poofAt&&!poofFired){ poofFired=true; poof.classList.add('go'); }
+      var di=seg(t,T.drinkIn[0],T.drinkIn[1]);
+      var dd=seg(t,T.drinkDown[0],T.drinkDown[1]); var dl=seg(t,T.drinkLeft[0],T.drinkLeft[1]);
+      if(di>0){ var dx=lerp(E4.x,E5.x,eOut(dd)); dx=lerp(dx,E5L.x,ease(dl));
+        var dy=lerp(E4.y,E5.y,ease(dd));
+        place(els.drink,dx,dy,dd>0?1:eBack(di),0,clamp(di*1.6,0,1)); }
+      else els.drink.style.opacity=0;
+      if(t>=T.lab5-0.01 && lvLabs['5']) lvLabs['5'].classList.add('on');
       if(t>=T.dbShow-0.01) dbPanel.classList.add('on');
     }
     var raf=0,startTs=0;
     function tick(ts){ if(!startTs) startTs=ts; var t=(ts-startTs)/1000; frame(Math.min(t,DUR)); if(t<DUR) raf=requestAnimationFrame(tick); }
-    function resetLabels(){ ['2','3','4'].forEach(function(q){ qlabels[q].classList.remove('on'); }); ticket.classList.remove('on'); dbPanel.classList.remove('on'); if(line) line.style.width='0%'; }
-    function play(){ if(reduced){ measure(); frame(DUR); return; } cancelAnimationFrame(raf); resetLabels(); startTs=0; measure(); raf=requestAnimationFrame(tick); }
+    function resetAll(){ ['2','3','5'].forEach(function(q){ if(lvLabs[q]) lvLabs[q].classList.remove('on'); });
+      bubble.classList.remove('on'); dbPanel.classList.remove('on'); poofFired=false; poof.classList.remove('go'); void poof.offsetWidth;
+      for(var lv in lvLines){ lvLines[lv].style.width='0%'; lvEls[lv].classList.remove('done'); } }
+    function play(){ if(reduced){ measure(); stage.classList.add('open'); frame(DUR); poof.classList.remove('go'); return; }
+      cancelAnimationFrame(raf); resetAll(); startTs=0; measure(); raf=requestAnimationFrame(tick); }
     var rb=document.getElementById('flReplay'); if(rb) rb.addEventListener('click',play);
-    if(window.__PKDEBUG){ window.__pkFrame=function(t){ measure(); resetLabels(); frame(t); }; }
+    if(window.__PKDEBUG){ window.__pkFrame=function(t){ measure(); resetAll(); frame(t); }; }
     var started=false;
-    if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; setTimeout(play,250);} }); },{threshold:.35}); io.observe(stage); }
-    else { play(); }
+    function openThenPlay(){ stage.classList.add('open'); setTimeout(play,650); }
+    if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; setTimeout(openThenPlay,150);} }); },{threshold:.25}); io.observe(stage); }
+    else { openThenPlay(); }
   }
 
   function mount(){
