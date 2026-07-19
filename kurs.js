@@ -14199,3 +14199,67 @@ var TSISL_ZUG_SCHLUESSEL=[
     next:{ href:'/standortanalyse', label:'Standortanalyse' }
   };
 })();
+
+/* VFL Insel — Standortanalyse */
+(function(){
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['standortanalyse']={
+    hero:{ eyebrow:'Vision Frame · Standort & Skalierung', titleHtml:'Standort<span class="g">analyse</span>' },
+    intro:[
+      'Ein Standort entscheidet mit über Erfolg oder Schließung, und trotzdem wird er oft aus dem Bauch heraus gewählt. In dieser Insel baust du ein System, das jeden Standort nach denselben Kriterien prüft — Lage, Miete, Frequenz, Konkurrenz, Zielgruppe. So vergleichst du Objekte nüchtern, statt dich vom ersten Eindruck tragen zu lassen.',
+      'Jeder Eintrag verbindet harte Zahlen mit deiner Einschätzung vor Ort. Am Ende steht eine <b>Gesamtbewertung</b> von 0 bis 100 — die setzt du selbst, aus allem, was du gesehen hast. Notion rechnet sie nicht für dich. Genau das ist der Punkt: Das System ordnet deine Beobachtungen, die Entscheidung bleibt bei dir.'
+    ],
+    anim1:{ title:'Von der Begehung <span class="g">zum Vergleich</span>', lead:'Gleiche Kriterien machen ungleiche Standorte vergleichbar.', nodes:[
+      {ic:'🚶',t:'Begehung',s:'Drei Standorte, jeder anders.'},
+      {ic:'📊',t:'Gleiche Felder',s:'Miete, Frequenz, Sichtbarkeit gesetzt.'},
+      {ic:'🏆',t:'Gesamtbewertung',s:'82, 64, 47 — der Beste rückt vor.'}
+    ]},
+    video:{ heading:'Das Bewertungssystem <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie du die Tabelle anlegst und einen Standort von den Stammdaten über die Lage-Bewertungen bis zur Gesamtnote füllst.', icon:'▷', phLabel:'Video folgt' },
+    shop:{
+      eyebrow:'📍 Standortanalyse Restaurant-Kette',
+      title:'Dein Standort-Check. <span class="g">Kriterium für Kriterium.</span>',
+      sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst „Datenbank – Inline".',
+      unit:'Bausteine', money:false, cta:'In den Einkaufswagen',
+      cards:[
+        {tag:'1',name:'Button anlegen',typeLabel:'Setup',icon:'＋',imgLabel:'Button',val:'Aktion',overlay:'Lege oben auf der Seite einen Button an, der beim Klick einen neuen Standort-Eintrag erzeugt. In Notion: /Button → Aktion „Seite hinzufügen zu" → diese Datenbank.',ex:'„＋ Neuen Standort prüfen"'},
+        {tag:'2',name:'Datenbank anlegen',typeLabel:'Container',icon:'📍',imgLabel:'Datenbank',val:'1 DB',overlay:'Erstelle die Datenbank als Inline-Tabelle. Sie ist das Gefäß, in dem jeder potenzielle Standort als eigener Eintrag liegt. In Notion: /Datenbank – Inline → Titel „Standortanalyse Restaurant-Kette" → Icon 📍.',ex:'„Standortanalyse Restaurant-Kette"'},
+        {tag:'3',name:'Standortname',typeLabel:'Titel-Spalte',icon:'🏷',imgLabel:'Titel',val:'Text',overlay:'Die Titelspalte trägt den eindeutigen Namen jedes Standorts — Straße plus Lagehinweis reicht.',ex:'„Ecklokal Prenzlauer Allee 12"'},
+        {tag:'4',name:'Stadt',typeLabel:'Auswahl · 11',icon:'◧',imgLabel:'Auswahl',val:'11 Optionen',overlay:'Eine Option je Stadt, die du prüfst (Berlin, München, Hamburg …), plus „Andere". So filterst du später alle Standorte einer Region auf einen Blick.',ex:'Berlin'},
+        {tag:'5',name:'Adresse',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Die vollständige Anschrift — Straße, Hausnummer, PLZ, Ort. Damit ist jeder Eintrag eindeutig auf der Karte auffindbar.',ex:'„Prenzlauer Allee 12, 10405 Berlin"'},
+        {tag:'6',name:'Analysedatum',typeLabel:'Datum',icon:'📅',imgLabel:'Datum',val:'Datum',overlay:'Hält fest, wann du den Standort geprüft hast. Wichtig, weil Miete, Umfeld und Konkurrenz sich ändern — eine alte Analyse ist nur eine Momentaufnahme.',ex:'20.07.2026'},
+        {tag:'7',name:'Status',typeLabel:'Status · 6',icon:'◔',imgLabel:'Status',val:'Status',overlay:'Zeigt, wo der Standort im Prüfprozess steht: von „Neu eingegangen" über „Analyse läuft" bis zum Urteil „Empfohlen", „Bedingt empfohlen" oder „Nicht empfohlen".',ex:'Analyse läuft'},
+        {tag:'8',name:'Priorität',typeLabel:'Auswahl · 3',icon:'▲',imgLabel:'Auswahl',val:'3 Stufen',overlay:'Hoch, Mittel, Niedrig. Sortiert, welche Standorte du zuerst besichtigst, wenn mehrere gleichzeitig offen sind.',ex:'Hoch'},
+        {tag:'9',name:'Verantwortlich',typeLabel:'Person · später',icon:'👤',imgLabel:'Person',val:'Person',later:true,overlay:'Diese Karte wird erst relevant, wenn du im Team arbeitest. Eine Person-Spalte hält fest, welcher Analyst einen Standort betreut. Solange du allein prüfst, kannst du sie überspringen und später ergänzen.',ex:'„Robert R." (sobald Team steht)'},
+        {tag:'10',name:'Fläche m²',typeLabel:'Zahl',icon:'📐',imgLabel:'Zahl',val:'m²',overlay:'Die Größe des Objekts in Quadratmetern — die Basis, um Miete pro m² und mögliche Sitzplätze abzuschätzen.',ex:'85 m²'},
+        {tag:'11',name:'Miete/Monat',typeLabel:'Zahl · €',icon:'€',imgLabel:'Zahl',val:'€ / Monat',overlay:'Zahlen-Spalte mit Euro-Format. Die monatliche Kaltmiete. Zusammen mit der Fläche siehst du sofort, ob der Standort im Rahmen liegt.',ex:'3.200 €'},
+        {tag:'12',name:'Laufkundschaft',typeLabel:'Auswahl · 5',icon:'◧',imgLabel:'Auswahl',val:'5 Stufen',overlay:'Von Sehr hoch bis Sehr niedrig. Schätzt, wie viele Passanten täglich vorbeikommen — der wichtigste Frequenz-Faktor für spontane Gäste.',ex:'Hoch'},
+        {tag:'13',name:'Einkommensniveau',typeLabel:'Auswahl · 4',icon:'◧',imgLabel:'Auswahl',val:'4 Stufen',overlay:'Hoch, Gehoben, Mittel, Niedrig. Bewertet die Kaufkraft im Einzugsgebiet — sie entscheidet mit, welches Preisniveau der Standort trägt.',ex:'Gehoben'},
+        {tag:'14',name:'Bevölkerungsdichte',typeLabel:'Auswahl · 4',icon:'◧',imgLabel:'Auswahl',val:'4 Stufen',overlay:'Von Sehr hoch bis Niedrig. Sagt, wie viele Menschen im Umfeld wohnen — die Grundmenge potenzieller Stammgäste.',ex:'Hoch'},
+        {tag:'15',name:'Erreichbarkeit',typeLabel:'Mehrfachauswahl · 5',icon:'📡',imgLabel:'Status',val:'5 Optionen',overlay:'ÖPNV-Anbindung, Parkplätze, Fußgängerzone, Hauptstraße, Bahnhofsnähe. Kreuze alles an, was zutrifft — je mehr Zugänge, desto breiter das Einzugsgebiet.',ex:'ÖPNV-Anbindung, Hauptstraße'},
+        {tag:'16',name:'Sichtbarkeit',typeLabel:'Auswahl · 5',icon:'◧',imgLabel:'Auswahl',val:'5 Stufen',overlay:'Von Exzellent bis Schlecht. Ein unsichtbarer Standort kostet dich dauerhaft Werbebudget, um überhaupt gefunden zu werden.',ex:'Sehr gut'},
+        {tag:'17',name:'Wettbewerb',typeLabel:'Mehrfachauswahl · 5',icon:'📡',imgLabel:'Status',val:'5 Optionen',overlay:'Von Keine Konkurrenz bis Übersättigt. Wenig Konkurrenz ist Chance, ein übersättigtes Umfeld ein Warnsignal.',ex:'Moderate Konkurrenz'},
+        {tag:'18',name:'Ankermieter',typeLabel:'Text',icon:'🧲',imgLabel:'Text',val:'Text',overlay:'Starke Nachbarn, die Frequenz bringen — Supermarkt, Kino, Fitnessstudio, Bürokomplex. Sie ziehen Menschen an, von denen du profitierst.',ex:'„Rewe im Haus, Kino gegenüber"'},
+        {tag:'19',name:'Zielgruppen-Fit',typeLabel:'Zahl · Ring 0–10',icon:'◎',imgLabel:'Ring',val:'0–10',overlay:'Zahlen-Spalte mit Ring-Anzeige, Maximum 10. Du vergibst 0 bis 10, wie gut Standort und Wunsch-Zielgruppe zusammenpassen. Der Ring macht schwache Treffer sofort sichtbar.',ex:'8'},
+        {tag:'20',name:'Gesamtbewertung',typeLabel:'Zahl · Balken 0–100',icon:'▮',imgLabel:'Balken',val:'0–100',overlay:'Zahlen-Spalte mit Balken-Anzeige, Maximum 100. Hier bündelst du dein Urteil aus allen Faktoren zu einer Punktzahl. Notion rechnet nicht automatisch — die Zahl setzt du bewusst selbst.',ex:'82'},
+        {tag:'21',name:'Chancen',typeLabel:'Text',icon:'✎',imgLabel:'Text',val:'Text',overlay:'Was diesen Standort stark macht — Lücke im Umfeld, wachsender Kiez, besondere Lage. Das ist die Argumentation für ein Ja.',ex:'„Keine vergleichbare Küche im Umkreis von 800 m."'},
+        {tag:'22',name:'Risiken',typeLabel:'Text',icon:'⚠',imgLabel:'Text',val:'Text',overlay:'Was gegen den Standort spricht — hohe Miete, Baustelle, saisonale Frequenz. Ehrlich notierte Risiken verhindern teure Fehlentscheidungen.',ex:'„Miete am oberen Limit, Straße wird 2027 saniert."'},
+        {tag:'23',name:'Nächste Schritte',typeLabel:'Text',icon:'➡',imgLabel:'Text',val:'Text',overlay:'Die konkrete Handlungsempfehlung — Besichtigung, Verhandlung, Absage. So bleibt kein Standort ohne klare Folge-Entscheidung liegen.',ex:'„Besichtigung mit Makler vereinbaren, Mietspiegel prüfen."'},
+        {tag:'24',name:'Notizen',typeLabel:'Text',icon:'🗒',imgLabel:'Text',val:'Text',overlay:'Freier Raum für alles, was in kein anderes Feld passt — Eindrücke von der Begehung, Gesprächsnotizen, offene Fragen.',ex:'„Vermieter wirkt flexibel bei Laufzeit."'}
+      ]
+    },
+    ergebnis:{ heading:'Standorte, <span class="g">nebeneinandergelegt</span>', text:'Am Ende hast du mehrere Standorte nach denselben Kriterien bewertet — harte Zahlen und weiche Einschätzungen in einem Eintrag, gebündelt zu einer Gesamtnote, die die Objekte direkt vergleichbar macht.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Die Zahl kommt <span class="g">von dir</span>', lead:'Kein Zahnrad, keine Formel — du setzt das Urteil, die Grafik übersetzt es nur.', nodes:[
+      {ic:'✍',t:'Eingabe',s:'Du tippst „8" in Zielgruppen-Fit.'},
+      {ic:'◎',t:'Anzeige',s:'Der Ring füllt sich zu 80 %.'},
+      {ic:'▮',t:'Bewusstes Urteil',s:'Notion rechnet nicht — du entscheidest.'}
+    ]},
+    tip:{ icon:'💡', heading:'Nie einen Standort isoliert prüfen', text:'Leg immer mindestens drei nebeneinander an, sonst fehlt dir der Maßstab. Fülle bei jedem zuerst die harten Felder (Fläche, Miete, Adresse), bevor du die weichen Einschätzungen setzt — so verankerst du dein Urteil an Fakten. Die Gesamtbewertung vergibst du erst ganz zum Schluss.' },
+    learnings:[
+      'Ein Standort gehört nach festen Kriterien geprüft, nicht nach Bauchgefühl — die Datenbank erzwingt das.',
+      'Gleiche Felder für jeden Standort machen unterschiedliche Objekte erst vergleichbar.',
+      'Harte Zahlen und weiche Einschätzungen gehören in einen Eintrag: Miete allein sagt so wenig wie Sichtbarkeit allein.',
+      'Die Gesamtbewertung ist dein bewusstes Urteil, keine automatische Rechnung — die Verantwortung bleibt bei dir.',
+      'Ein Standort ohne „Nächste Schritte" bleibt liegen; jede Analyse braucht eine klare Folge-Entscheidung.'
+    ],
+    next:{ href:'/expansioncenter', label:'Expansioncenter' }
+  };
+})();
