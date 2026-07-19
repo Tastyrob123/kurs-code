@@ -3069,7 +3069,13 @@
     { re:/\/rezepturen\/?$/,         href:'/gemeinkosten-mitarbeiterlhne' },
     { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' },
     { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' },
-    { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/operations-area' }
+    { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/operations-area' },
+    { re:/\/operations-area\/?$/, href:'/lektionen/team-onboarding' },
+    { re:/\/lektionen\/team-onboarding\/?$/, href:'/lektionen/checklisten-produktion' },
+    { re:/\/lektionen\/checklisten-produktion\/?$/, href:'/lektionen/hygiene-behrden-handbcher' },
+    { re:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, href:'/lektionen/inventur-bestand' },
+    { re:/\/lektionen\/inventur-bestand\/?$/, href:'/lektionen/partner-vertrge' },
+    { re:/\/lektionen\/partner-vertr[a-z-]*\/?$/, href:'/lektionen/zugnge-werte' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -12589,11 +12595,11 @@
   /* [num, kicker, titel, beschreibung, meta, href] */
   var CARDS=[
    ['01','Personal','Team & Onboarding','Onboarding neuer Mitarbeiter, Team-Infos, Kleidungs-Ausgabe und Urlaubsplanung — sauber an einem Ort.','4 Bereiche','/lektionen/team-onboarding'],
-   ['02','Abläufe','Checklisten & Produktion','Audit- und Tages-Checklisten, wöchentliche Produktionslisten und Waste-Erfassung — der tägliche Takt.','4 Bereiche','/operations-checklisten'],
-   ['03','Compliance','Hygiene, Behörden & Handbücher','Hygienehandbuch, Behörden-Unterlagen, Pflichtdokumente und Management-Handbücher — prüfungssicher.','4 + Verweis','/operations-hygiene'],
-   ['04','Bestand','Inventur & Bestand','Festwert- und Jahresinventur — mit Verweis auf DB 0 Inventurliste und die Packaging-Datenbank.','1 + 2 Verweise','/operations-inventur'],
-   ['05','Partner','Partner & Verträge','Dienstleister- und Vertragsübersicht im Blick — plus Verweis auf DB I–III Lieferanten.','2 + Verweis','/operations-partner'],
-   ['06','Zugänge','Zugänge & Werte','Passwortablage, Bankeinzahlungen und Schlüssellisten — sensible Zugänge sicher verwaltet.','3 Bereiche','/operations-zugaenge']
+   ['02','Abläufe','Checklisten & Produktion','Audit- und Tages-Checklisten, wöchentliche Produktionslisten und Waste-Erfassung — der tägliche Takt.','4 Bereiche','/lektionen/checklisten-produktion'],
+   ['03','Compliance','Hygiene, Behörden & Handbücher','Hygienehandbuch, Behörden-Unterlagen, Pflichtdokumente und Management-Handbücher — prüfungssicher.','4 + Verweis','/lektionen/hygiene-behrden-handbcher'],
+   ['04','Bestand','Inventur & Bestand','Festwert- und Jahresinventur — mit Verweis auf DB 0 Inventurliste und die Packaging-Datenbank.','1 + 2 Verweise','/lektionen/inventur-bestand'],
+   ['05','Partner','Partner & Verträge','Dienstleister- und Vertragsübersicht im Blick — plus Verweis auf DB I–III Lieferanten.','2 + Verweis','/lektionen/partner-vertrge'],
+   ['06','Zugänge','Zugänge & Werte','Passwortablage, Bankeinzahlungen und Schlüssellisten — sensible Zugänge sicher verwaltet.','3 Bereiche','/lektionen/zugnge-werte']
   ];
 
   var CSS=`
@@ -12925,156 +12931,399 @@
 })();
 
 /* ============================================================
-   lektionen/team-onboarding — Insel 01 der Operations Area
-   Volle Lektion: Hero + Einleitung + 4 Bereich-Blöcke
-   (Onboarding, Team-Infos, Kleidung, Urlaub) + Learnings.
-   Muster: Hero = operations-area/food-drinks (.ts-hero),
-   Learnings = #tsl-Orbs. Prefix tsteam/tm- -> kollisionsfrei.
-   Live-Beispiel (MacBook) folgt separat (Screenshot-Asset).
+   #tsisl — Insel-Lektionen der Operations Area (config-getrieben)
+   Rendert die volle 9-Abschnitt-Anatomie (Hero+Einleitung,
+   Erkläranimation, Erklärvideo-Mockup, Warenkorb-Anker, Ergebnis-
+   Blick, Zweit-Animation, Empfehlungs-Kachel, Duo-Video, Learnings
+   + Weiter-Button via ts-next-Map) für alle 6 Inseln aus ISLANDS.
+   Warenkörbe = echtes #tsshop (Anker-Divs hier, Config im tsshop-Modul).
+   Bilder/Videos/Mockups = saubere Platzhalter. Prefix tsisl/il-.
    ============================================================ */
 (function(){
-  if(window.__tsteam) return; window.__tsteam=true;
+  if(window.__tsisl) return; window.__tsisl=true;
   var LOGO="https://files.catbox.moe/au80tp.png";
-  var GLOW="199,180,137";
-  function on(){ return /\/lektionen\/team-onboarding\/?$/.test(location.pathname); }
+  var G="199,180,137";
 
-  /* [num, titel, text] */
-  var AREAS=[
-   ['01','Onboarding neuer Mitarbeiter','Jeder neue Mitarbeiter startet mit derselben Checkliste. Sie geht jeden Schritt durch: Papierkram, Einweisung an den Stationen, am Ende die Unterschrift, dass alles gezeigt wurde. Du siehst auf einen Blick, wo jemand steht und was noch fehlt. Auch wenn zwei Neue gleichzeitig anfangen, geht nichts unter.'],
-   ['02','Team-Informationen','Alle Stammdaten deines Teams an einer Stelle: Kontakt, Position, Eintrittsdatum, Notfallkontakt. Wenn du eine Info brauchst, hast du sie sofort zur Hand, statt in alten Nachrichten zu suchen.'],
-   ['03','Kleidungs-Ausgabe','Wer hat welche Teile in welcher Größe bekommen. Die Ausgabeliste hält fest, was rausgegangen ist und was zurückkommt, wenn jemand geht. So weißt du jederzeit, was im Umlauf ist und wann du nachbestellen musst.'],
-   ['04','Urlaubsübersichten','Alle Urlaube in einer Übersicht. Du erkennst früh, wann es eng wird, und legst die Schichten drumherum, bevor es kurzfristig wird. Anträge stehen an einem Ort, genehmigt oder noch offen.']
-  ];
-  var LEARN=[
-   'Du hast die Personal-Insel deiner Operations Area gebaut, mit Onboarding, Team-Infos, Kleidung und Urlaub an einem Ort.',
-   'Du weißt, wie eine Onboarding-Checkliste neue Mitarbeiter Schritt für Schritt startklar macht, ohne dass etwas untergeht.',
-   'Du pflegst die Stammdaten deines Teams so, dass du jede Info sofort findest.',
-   'Du behältst Kleidung im Umlauf und Urlaube im Blick, bevor Engpässe entstehen.'
+  /* ---------- CONTENT: alle 6 Inseln ---------- */
+  var ISLANDS=[
+   {
+    slug:/\/lektionen\/team-onboarding\/?$/, key:'team',
+    eyebrow:'Lektion 2.12.1', kicker:'Operations Area · Personal',
+    titleHTML:'Team & <span class="il-g">Onboarding</span>',
+    lead:'Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.',
+    intro:['In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.','Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.'],
+    anim:{type:'checklist', head:{eyebrow:'Wie Onboarding wirklich läuft', h:'Vom ersten Tag bis <span class="il-g">startklar</span>', sub:'Jeder neue Mitarbeiter geht dieselbe Checkliste durch. Nichts hängt am Zufall.'}, unit:'Schritte', rows:['Willkommen & Orientierung','Hygiene-Grundlagen','Rollen & Verantwortung','Wichtigste SOPs','Erste Einweisung (unter Aufsicht)','§43 IfSG-Belehrung','Buddy zuweisen','Sicherheits-Rundgang']},
+    video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungs-Ausgabe und Urlaub greifen ineinander. Jeder neue Mitarbeiter wird einmal als Zeile angelegt, danach hängt alles daran: welche Kleidung er bekommen hat, wann er Urlaub nimmt, welche Nachweise gültig sind.','So wird aus vier losen Listen ein Personal-System, das mitdenkt.'], close:'In den nächsten Schritten baust du dieses System Stück für Stück selbst auf. Wir starten mit der Warenkorb-Ansicht: jede Karte ist ein Baustein deiner Personal-Tabelle.'},
+    wk:[
+      {id:'ops_team_onb', eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.'},
+      {id:'ops_team_mitarbeiter', eyebrow:'Team · Mitarbeiter-Stammdaten', title:'Dein <span>Team</span>. An einem Ort.'}
+    ],
+    ergebnis:[
+      {h:'Das Team auf <span class="il-g">einen Blick</span>', p:'Eine Zeile pro Person: Rolle, Anstellung, Kontakt, Eintritt. Aus Gehalt und Arbeitgeber-Faktor rechnet die Tabelle sogar die echten Personalkosten pro Stunde mit.', side:'left'},
+      {h:'Urlaub, bevor es <span class="il-g">eng wird</span>', p:'Dieselben Anträge erscheinen als Timeline, Monatskalender und Freigabe-Board. Du erkennst Engpässe Wochen vorher und planst Schichten drumherum.', side:'right'}
+    ],
+    zweit:{type:'stack', head:{eyebrow:'Kleidung mit Pfand', h:'Jedes Teil hat einen <span class="il-g">Wert</span>', sub:'Arbeitskleidung ist Betriebseigentum. Der hinterlegte Pfand summiert sich pro Mitarbeiter.'}, unit:'€', rows:[{label:'Cap Schwarz',val:10},{label:'Kochhose L (Leiber)',val:30},{label:'Kochschuhe 42 (Abeba)',val:40}], totalLabel:'Pfand im Umlauf'},
+    empf:{emph:'Verbinde Onboarding mit den <span class="il-eg">Pflichtdokumenten</span>', p:'Sobald ein Nachweis wie die §43-Belehrung ein Ablaufdatum hat, erinnert dich Notion vierzehn Tage vorher. Kein Mitarbeiter arbeitet mehr mit abgelaufenem Nachweis.', points:['Gesundheitszeugnis','Hygienebelehrung','§43 IfSG','Brandschutzhelfer']},
+    duo:{h:'So legst du es in <span class="il-g">Notion</span> an', items:[{chips:['Tabelle','Spalte','Auswahl'], h:'Mitarbeiter <span class="il-g">anlegen</span>', p:['Eine neue Datenbank, eine Zeile pro Person. Rolle und Anstellung als Auswahl, damit du später filtern und Kosten rechnen kannst.','Drücke Schrägstrich, wähle neue Tabelle, und leg die erste Spalte an.']},{chips:['Status','Board','Vertretung'], h:'Urlaub als <span class="il-g">Board</span>', p:['Ein Status-Feld macht aus Anträgen einen Freigabe-Stapel: beantragt, genehmigt, abgelehnt. Das Feld Vertretung sorgt dafür, dass keine Abwesenheit ohne Übergabe durchgeht.','Gruppiere die Ansicht nach Status, fertig ist dein Freigabe-Board.']}]},
+    learn:['Du hast die Personal-Insel deiner Operations Area gebaut, mit Onboarding, Team, Kleidung und Urlaub an einem Ort.','Du weißt, wie eine Onboarding-Checkliste neue Mitarbeiter sicher startklar macht, inklusive der rechtlich zwingenden §43-Belehrung.','Du pflegst die Stammdaten deines Teams so, dass daraus automatisch die echten Personalkosten pro Stunde entstehen.','Du behältst Kleidung im Umlauf, Pfand und Urlaube im Blick, bevor daraus Engpässe oder Streit werden.']
+   },
+   {
+    slug:/\/lektionen\/checklisten-produktion\/?$/, key:'check',
+    eyebrow:'Lektion 2.12.2', kicker:'Operations Area · Abläufe',
+    titleHTML:'Checklisten & <span class="il-g">Produktion</span>',
+    lead:'Der Unterschied zwischen gutem und chaotischem Betrieb ist nicht Talent, sondern Wiederholbarkeit.',
+    intro:['Im Kopf ist alles klar. Bis der Laden voll ist, zwei Leute krank sind und die neue Kraft zum ersten Mal allein schließt. Dann zeigt sich, was wirklich dokumentiert war und was nur Gewohnheit.','Diese Insel macht aus dem Bauchgefühl ein System: Checklisten für den Takt, Audits für die Kontrolle, Produktionslisten für die Küche und eine Waste-Erfassung, die jeden Verlust in Euro sichtbar macht.'],
+    anim:{type:'checklist', head:{eyebrow:'Das Store-Audit am iPad', h:'Aus Bauchgefühl wird eine <span class="il-g">Mängelliste</span>', sub:'Jede Frage hat eine Antwort: Ja oder Nein. Was auf Nein steht, landet automatisch in der Optimierungsliste.'}, unit:'Prüfpunkte', rows:['Store-Eindruck & Grundordnung','Service & Auftreten','Küche & Produktion','Hygiene','Waren & Bestand','Allergene & Sicherheit','Führung & Team','Prozesse & Alltag']},
+    video:{h:'Checkliste oder <span class="il-g">SOP</span>?', p:['Eine Checkliste sagt dir, was abzuhaken ist. Eine SOP sagt dir, wie genau du es machst. Beide hängen über eine Verknüpfung zusammen: Zur Checkliste Kassenabschluss gehört die SOP mit dem genauen Ablauf.','Jede Aufgabe bekommt einen Turnus, eine Wichtigkeit und einen Namen. Nichts geht unter, weil alles einen Platz hat.'], close:'Wir bauen die Checklisten-Datenbank Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Liste steuerbar macht.'},
+    wk:[
+      {id:'ops_check_audit', eyebrow:'Audit · Store-Check', title:'Dein <span>Audit</span>. Frage für Frage.'},
+      {id:'ops_check_prod', eyebrow:'Produktion · Wochenliste', title:'Deine <span>Produktion</span>. Tag für Tag.'}
+    ],
+    ergebnis:[
+      {h:'Die Woche im <span class="il-g">Voraus</span>', p:'Was wird produziert, wie viel, an welchem Tag, mit welchem Vorlauf. Der Pizzateig braucht zwei Tage, also zeigt die Liste den Startpunkt von selbst. Ein Status-Feld macht die Mise en Place schichtübergreifend sichtbar.', side:'left'},
+      {h:'Waste als <span class="il-g">Zahl</span>', p:'Der teuerste Ort in der Küche ist der Mülleimer. Über die Verknüpfung zu den Zutaten rechnet jeder Eintrag den Verlust automatisch in Euro. Die Gründe zeigen, ob das Problem im Einkauf, in der Produktion oder im Handling liegt.', side:'right'}
+    ],
+    zweit:null,
+    empf:{emph:'Koppel Produktion an die <span class="il-eg">Waste-Erfassung</span>', p:'Überproduktion ist der häufigste Waste-Grund. Wenn beide Tabellen zusammenhängen, siehst du sofort, welches Gericht du zu großzügig kalkulierst, und ziehst die Menge nach.', points:['Abgelaufen','Überproduktion','Qualität','Handling-Fehler']},
+    duo:{h:'So baust du den <span class="il-g">Takt</span>', items:[{chips:['Typ','Turnus','Rolle'], h:'Checkliste <span class="il-g">takten</span>', p:['Jede Checkliste bekommt einen Typ (täglich, wöchentlich, monatlich), eine Kritikalität und eine Zielrolle. So weiß jeder, was wann in seiner Verantwortung liegt.','Die Verknüpfung zur SOP hält die genaue Anleitung eine Ebene tiefer bereit.']},{chips:['iPad','Foto','Filter'], h:'Audit am <span class="il-g">Gerät</span>', p:['Große Tap-Checkboxen, direkt am iPad, ein Foto als Beweis. Der Filter zeigt am Ende nur die Nein-Antworten, deine Mängelliste für heute.','Das Diagramm zeigt die Erfüllungsquote je Besuch, ideal für den Vergleich mehrerer Standorte.']}]},
+    learn:['Du hast die Abläufe-Insel gebaut, mit Audit, Checklisten, Produktion und Waste an einem Ort.','Du kennst den Unterschied zwischen Checkliste und SOP und weißt, wie beide über eine Verknüpfung zusammenhängen.','Du planst Wochenproduktion mit Vorlaufzeit und Status, sodass nie etwas kurzfristig fehlt.','Du erfasst Waste als Euro-Wert und erkennst an den Gründen, wo im Betrieb das Geld verloren geht.']
+   },
+   {
+    slug:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, key:'hyg',
+    eyebrow:'Lektion 2.12.3', kicker:'Operations Area · Compliance',
+    titleHTML:'Hygiene, Behörden & <span class="il-g">Handbücher</span>',
+    lead:'Eine Kontrolle ist kein Problem, wenn du vorbereitet bist. Sie ist ein Problem, wenn du suchst.',
+    intro:['Das Gesundheitsamt kommt unangekündigt. Das Finanzamt und der Zoll können dich existenziell treffen. Wer dann in Ordnern blättert, hat schon verloren.','Diese Insel macht aus Angst vor Kontrolle ein planbares Spielfeld: Das Hygienehandbuch dokumentiert jedes Mittel, die Behörden-Übersicht zeigt wer wann kommt, die Pflichtdokumente laufen nie unbemerkt ab, und das Management-Handbuch hält die Antworten für den Ernstfall bereit.'],
+    anim:{type:'grid', head:{eyebrow:'Wer kann bei dir klingeln', h:'Neun Behörden, <span class="il-g">ein Überblick</span>', sub:'Für jede weißt du vorab: wie oft, ob unangekündigt, und wie hoch das Risiko bei einem Verstoß ist.'}, label:'Kontrollbereiche', nodes:['Gesundheitsamt','Finanzamt','Zoll','Gewerbeaufsicht','Brandschutz','Bauamt','Umweltamt','Arbeitsschutz','Ordnungsamt']},
+    video:{h:'Pflicht ist <span class="il-g">nachweisbar</span>', p:['Jeder im Lebensmittelbereich braucht eine gültige §43-Belehrung und eine Hygienebelehrung. Die Pflichtdokumente-Logik verbindet zwei Ebenen: welcher Nachweis Pflicht ist und wie lange er gilt, und welche Person ihn hat und wann er abläuft.','Bei einer Kontrolle ziehst du die Datei mit einem Klick, statt im Ordner zu suchen.'], close:'Wir bauen die Hygiene- und Nachweis-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Prüfungssicherheit erhöht.'},
+    wk:[
+      {id:'ops_hyg_produkte', eyebrow:'Hygiene · Reinigungsmittel', title:'Dein <span>Hygienehandbuch</span>. Mittel für Mittel.'},
+      {id:'ops_hyg_pflicht', eyebrow:'Pflichtnachweise · Dokumenttypen', title:'Deine <span>Pflichtdokumente</span>. Lückenlos.'}
+    ],
+    ergebnis:[
+      {h:'Die Ampel für <span class="il-g">jeden Nachweis</span>', p:'Pro Mitarbeiter ein Trio aus Häkchen, Ablaufdatum und Datei. Vierzehn Tage vor Ablauf erinnert dich Notion. Der teuerste Fall, ein Mitarbeiter mit abgelaufenem Nachweis, passiert nicht mehr.', side:'left'},
+      {h:'Das Playbook für den <span class="il-g">Ernstfall</span>', p:'Personalausfall, Beschwerde, Kontrolle: Zu jeder Situation hält das Management-Handbuch drei Dinge bereit, die Sofortmaßnahme, die Follow-up-Aktion und die Warnsignale. Führungswissen wird abrufbar statt an eine Person gebunden.', side:'right'}
+    ],
+    zweit:null,
+    empf:{emph:'Verbinde Behörden mit deinen <span class="il-eg">Dokumenttypen</span>', p:'Jede Behörde will bestimmte Nachweise sehen. Wenn Behörde und Dokumenttyp verknüpft sind, hast du für jeden Besuch die richtige Mappe schon zusammengestellt, bevor geklingelt wird.', points:['Gesundheitsamt','Finanzamt','Zoll','Brandschutz']},
+    duo:{h:'So wird es <span class="il-g">prüfungssicher</span>', items:[{chips:['Pflicht','Gültigkeit','Erinnerung'], h:'Nachweise <span class="il-g">tracken</span>', p:['Ein Dokumenttyp trägt, ob er Pflicht ist und wie viele Monate er gilt. Daraus rechnet Notion pro Person das Ablaufdatum und die Erinnerung.','So wird aus Papierstapeln eine Liste, die selbst Alarm schlägt.']},{chips:['Fall','Sofort','Follow-up'], h:'Wissen <span class="il-g">sichern</span>', p:['Jeder kritische Fall bekommt einen Eintrag mit Sofortmaßnahme, Follow-up und Warnsignalen. Verknüpft mit der passenden SOP.','Aus dem Kopf des Inhabers wird ein Standard, den die Schichtleitung abrufen kann.']}]},
+    learn:['Du hast die Compliance-Insel gebaut, mit Hygiene, Behörden, Pflichtdokumenten und Management-Handbuch.','Du weißt vorab, welche Behörde wie oft kommt, ob unangekündigt, und wie hoch das Risiko bei einem Verstoß ist.','Du trackst jeden Pflichtnachweis mit Ablaufdatum und Erinnerung, sodass nie ein Nachweis unbemerkt abläuft.','Du hast Führungswissen als abrufbares Playbook gesichert, delegierbar an Betriebs- und Schichtleitung.']
+   },
+   {
+    slug:/\/lektionen\/inventur-bestand\/?$/, key:'inv',
+    eyebrow:'Lektion 2.12.4', kicker:'Operations Area · Bestand',
+    titleHTML:'Inventur & <span class="il-g">Bestand</span>',
+    lead:'Dein Lager ist Geld, das nur anders aussieht.',
+    intro:['Zwei Dinge werden ständig verwechselt. Der laufende Wareneinsatz, also alles, was du verbrauchst und nachkaufst, und der Festwert, also das langlebige Inventar, das Jahr für Jahr im Betrieb bleibt. Beide zählst du anders.','Diese Insel baut die Festwert-Inventur sauber auf und zeigt klar, wo die monatliche Inventurliste und das Packaging andocken, ohne dass du dieselbe Zahl doppelt pflegst.'],
+    anim:{type:'stack', head:{eyebrow:'Was der Festwert wirklich ist', h:'Menge mal Preis, <span class="il-g">Zeile für Zeile</span>', sub:'Jeder Posten trägt seinen eigenen Wert. Summiert ergibt das den Festwert, der in den Jahresabschluss geht.'}, unit:'€', rows:[{label:'Tafelmesser · 180 Stück',val:324},{label:'Bratpfanne 28cm · 6 Stück',val:270},{label:'Wasserkaraffe · 10 Stück',val:80}], totalLabel:'Festwert gesamt'},
+    video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt seinen aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, springt die Zeile auf ein Nachbestell-Signal, mit hinterlegtem Lieferanten und Link.','So wird aus der Jahresinventur ein System, das dich das ganze Jahr über warnt, bevor etwas ausgeht.'], close:'Wir bauen die Festwert-Liste Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deinen Bestand steuerbar macht.'},
+    wk:[
+      {id:'ops_inv_festwert', eyebrow:'Festwert · Jahresinventur', title:'Dein <span>Festwert</span>. Stück für Stück.'}
+    ],
+    ergebnis:[
+      {h:'Zwei Inventuren, <span class="il-g">ein System</span>', p:'Die monatliche Inventurliste (DB 0) zählt den Verbrauch in Kilo und Liter. Die Festwert-Liste zählt langlebiges Inventar in Stück. Sie ergänzen sich, statt sich zu überschneiden, und du pflegst jede Zahl nur einmal.', side:'left'},
+      {h:'Verpackung, <span class="il-g">sauber verknüpft</span>', p:'Die Packaging-Datenbank zieht ihre Preise direkt aus der Inventurliste. Kein doppeltes Pflegen, keine veralteten Werte. Ein Verweis genügt, um alles verbunden zu halten.', side:'right'}
+    ],
+    zweit:null,
+    empf:{emph:'Halte deinen Bestand mit einem <span class="il-eg">Nachbestell-Signal</span> lebendig', p:'Der Mindestbestand ist die eigentliche Intelligenz der Tabelle. Sobald ein Posten darunter fällt, siehst du es sofort, mit Lieferant und Bestell-Link direkt an der Zeile. Aus Zählen wird Steuern.', points:['Aktueller Bestand','Sollbestand','Mindestbestand','Nachbestellen']},
+    duo:{h:'So zählst du <span class="il-g">richtig</span>', items:[{chips:['Kategorie','Menge','Preis'], h:'Festwert <span class="il-g">erfassen</span>', p:['Jeder Posten bekommt Kategorie, Bereich, Menge und einen Stückpreis. Die Tabelle rechnet Menge mal Preis zum Zeilenwert und summiert den Festwert von selbst.','Genau die Zahl, die dein Steuerberater zur Jahresinventur braucht.']},{chips:['Soll','Minimum','Signal'], h:'Bestand <span class="il-g">steuern</span>', p:['Neben dem aktuellen Bestand trägst du Soll- und Mindestbestand ein. Die Tabelle zeigt, was nachbestellt werden muss, bevor es leer ist.','Der hinterlegte Lieferant macht aus der Warnung direkt eine Bestellung.']}]},
+    learn:['Du hast die Bestands-Insel gebaut und trennst sauber laufenden Wareneinsatz von langlebigem Festwert.','Du erfasst die Festwert-Liste so, dass Menge mal Preis automatisch den Inventurwert für den Jahresabschluss ergibt.','Du steuerst deinen Bestand über Soll- und Mindestbestand, statt ihn nur einmal im Jahr zu zählen.','Du weißt, wie die monatliche Inventurliste und das Packaging andocken, ohne dass du eine Zahl doppelt pflegst.']
+   },
+   {
+    slug:/\/lektionen\/partner-vertr[a-z-]*\/?$/, key:'part',
+    eyebrow:'Lektion 2.12.5', kicker:'Operations Area · Partner',
+    titleHTML:'Partner & <span class="il-g">Verträge</span>',
+    lead:'Der teuerste Vertrag ist der, dessen Kündigungsfrist du verpasst.',
+    intro:['Jeder Betrieb sammelt über die Jahre Dutzende laufende Verträge: Wartung, Software, Versicherung, Miete. Und ein Netz aus Dienstleistern, die man genau dann sucht, wenn etwas kaputt ist.','Diese Insel bringt beides an einen Ort. Die Dienstleister-Übersicht als schnelles Verzeichnis, die Vertragsübersicht mit Wert, Laufzeit und Frist, damit keine Verlängerung und keine Kündigung mehr durchrutscht.'],
+    anim:{type:'stack', head:{eyebrow:'Was in deinen Verträgen steckt', h:'Jeder Vertrag hat einen <span class="il-g">Wert</span>', sub:'Summiert zeigt sich schnell, wie viel Geld pro Jahr über laufende Verträge gebunden ist.'}, unit:'€', rows:[{label:'Metro Cash & Carry · Lieferant',val:48000},{label:'Barausstattung Bartscher',val:16500},{label:'Spülmaschinen-Service Hobart',val:7600}], totalLabel:'Vertragsvolumen'},
+    video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt, was läuft, was zur Unterschrift ansteht und was gekündigt ist.','Die Verknüpfung zum Lieferpartner holt den passenden Kontakt automatisch dazu, ohne dass du ihn erneut eintippst.'], close:'Wir bauen die Verträge- und Dienstleister-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir Kontrolle über deine Partner gibt.'},
+    wk:[
+      {id:'ops_part_vertraege', eyebrow:'Verträge · Übersicht', title:'Deine <span>Verträge</span>. Frist im Blick.'},
+      {id:'ops_part_dienstleister', eyebrow:'Dienstleister · Verzeichnis', title:'Deine <span>Dienstleister</span>. Griffbereit.'}
+    ],
+    ergebnis:[
+      {h:'Jeder Partner in <span class="il-g">einer Kategorie</span>', p:'Vom Kassenanbieter über die Schädlingsbekämpfung bis zur Reinigung. Wenn nachts die Kühlung ausfällt, findest du den Wartungsdienst in Sekunden, statt alte Rechnungen zu durchsuchen.', side:'left'},
+      {h:'Kein <span class="il-g">Vertrag im Blindflug</span>', p:'Die Vertragsübersicht zeigt Wert, Laufzeit und Frist auf einen Blick. Du siehst früh, welcher Vertrag ausläuft, und entscheidest bewusst zu verlängern oder zu wechseln, statt automatisch weiterzuzahlen.', side:'right'}
+    ],
+    zweit:null,
+    empf:{emph:'Verknüpfe Verträge mit deinen <span class="il-eg">Lieferpartnern</span>', p:'Die Lieferpartner-Datenbank aus Modul zwei kennt deine Kontakte schon. Über eine Verknüpfung zieht die Vertragskarte den richtigen Ansprechpartner automatisch heran, du pflegst ihn nur einmal.', points:['Vertragswert','Laufzeit','Kündigungsfrist','Kontakt']},
+    duo:{h:'So behältst du die <span class="il-g">Kontrolle</span>', items:[{chips:['Wert','Status','Frist'], h:'Verträge <span class="il-g">führen</span>', p:['Jeder Vertrag bekommt Wert, Typ, Beginn, Ende und Kündigungsfrist. Das Status-Feld macht aus der Sammlung einen Arbeitsstapel: in Prüfung, laufend, gekündigt.','So entscheidest du über jede Verlängerung bewusst, mit Frist im Blick.']},{chips:['Kategorie','Kontakt','Notiz'], h:'Dienstleister <span class="il-g">ordnen</span>', p:['Ein Verzeichnis nach Kategorie: wer macht was, wie erreichst du ihn, was ist wichtig. Kein Warenlieferant, sondern die Partner, die den Laden am Laufen halten.','Im Ernstfall ist der richtige Kontakt einen Klick entfernt.']}]},
+    learn:['Du hast die Partner-Insel gebaut, mit Dienstleister-Verzeichnis und Vertragsübersicht an einem Ort.','Du führst jeden Vertrag mit Wert, Laufzeit und Kündigungsfrist, sodass keine Frist mehr durchrutscht.','Du erkennst über das Status-Feld, welcher Vertrag ansteht, läuft oder gekündigt ist.','Du verknüpfst Verträge mit deinen Lieferpartnern und ziehst den richtigen Kontakt automatisch heran.']
+   },
+   {
+    slug:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, key:'zug',
+    eyebrow:'Lektion 2.12.6', kicker:'Operations Area · Zugänge',
+    titleHTML:'Zugänge & <span class="il-g">Werte</span>',
+    lead:'Kontrolle über einen Betrieb heißt Kontrolle darüber, wer worauf Zugriff hat.',
+    intro:['Passwörter im Kopf, Schlüssel in der Schublade, Bareinzahlungen auf Zetteln. Solange nichts passiert, geht das gut. Beim ersten Personalwechsel oder der ersten Nachfrage vom Steuerberater wird es teuer.','Diese Insel bringt das Sensible in geordnete Bahnen: eine nachvollziehbare Zugangs-Hoheit, eine lückenlose Einzahlungs-Doku und eine Schlüsselliste, die im Verlustfall sofort Antwort gibt.'],
+    anim:{type:'grid', head:{eyebrow:'Wer hat Zugriff worauf', h:'Zugänge unter <span class="il-g">Kontrolle</span>', sub:'Nicht das Passwort ist der Wert, sondern die Übersicht: welcher Zugang, welcher Status, ist die Zwei-Faktor-Sicherung aktiv.'}, label:'Zugänge', nodes:['Kasse / POS','Payment','Banking','Shop','Portal','Social','Tech','Behörden','Intern']},
+    video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage speichert nicht das Geheimnis selbst, sondern die Übersicht: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv, wann zuletzt geändert. Beim Personalwechsel sperrst du gezielt, statt zu raten.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index, der die Hoheit sichtbar macht.'], close:'Wir bauen die Zugangs- und Werte-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles kontrollierbar macht.'},
+    wk:[
+      {id:'ops_zug_bank', eyebrow:'Bankeinzahlungen · Nachweis', title:'Deine <span>Einzahlungen</span>. Lückenlos belegt.'},
+      {id:'ops_zug_schluessel', eyebrow:'Schlüssel · Ausgabe', title:'Deine <span>Schlüssel</span>. Jeder zugeordnet.'}
+    ],
+    ergebnis:[
+      {h:'Jede Einzahlung <span class="il-g">belegt</span>', p:'Betrag, Datum, Referenz und ein Beleg-Scan. Die Statuskette von geplant über eingezahlt bis verbucht macht offene Posten sichtbar. Das ist die Brücke zwischen Tageskasse und Steuerberater, sauber nachweisbar.', side:'left'},
+      {h:'Im Verlustfall sofort <span class="il-g">handlungsfähig</span>', p:'Die Schlüsselliste beantwortet in Sekunden, wer welchen Schlüssel zu welchem Bereich hat. Steht ein Schlüssel auf verloren, weißt du, ob der Schließzylinder getauscht werden muss. Bei Kündigung hältst du die Rückgabe nach.', side:'right'}
+    ],
+    zweit:{type:'stack', head:{eyebrow:'Einzahlungen summiert', h:'Aus Belegen wird eine <span class="il-g">Zahl</span>', sub:'Jede dokumentierte Einzahlung zählt in die Gesamtsumme, die deine Buchhaltung erwartet.'}, unit:'€', rows:[{label:'Einzahlung 02.04.',val:995},{label:'Einzahlung 06.05.',val:1326},{label:'Einzahlung 20.08.',val:506}], totalLabel:'Belegt eingezahlt'},
+    empf:{emph:'Verknüpfe Zugänge mit dem <span class="il-eg">Personalwechsel</span>', p:'Wenn jemand geht, ist die entscheidende Frage: worauf hatte diese Person Zugriff. Mit Passwort- und Schlüsselliste an einem Ort sperrst und sammelst du gezielt ein, statt hinterher zu hoffen.', points:['Zugang sperren','Schlüssel zurück','Status prüfen','2FA aktiv']},
+    duo:{h:'So sicherst du das <span class="il-g">Sensible</span>', items:[{chips:['Kategorie','2FA','Status'], h:'Zugänge <span class="il-g">ordnen</span>', p:['Jeder Zugang bekommt eine Kategorie, einen Status und die Info, ob die Zwei-Faktor-Sicherung aktiv ist. Das Passwort selbst bleibt im Passwort-Manager.','So siehst du auf einen Blick, welche Zugänge unsicher sind, ohne ein Geheimnis preiszugeben.']},{chips:['Bereich','Verantwortlich','Status'], h:'Schlüssel <span class="il-g">zuordnen</span>', p:['Jeder Schlüssel bekommt einen Bereich, einen Verantwortlichen und einen Status. Ausgegeben, verfügbar, verloren.','Im Verlustfall ist sofort klar, wer Zugang hatte und ob gehandelt werden muss.']}]},
+    learn:['Du hast die Zugänge-Insel gebaut, mit Passwortablage, Bankeinzahlungen und Schlüsselliste an einem Ort.','Du verwaltest Zugänge über Status und Zwei-Faktor-Sicherung, ohne echte Passwörter in Notion zu speichern.','Du dokumentierst jede Einzahlung lückenlos mit Beleg, als saubere Brücke zur Buchhaltung.','Du weißt im Verlust- oder Kündigungsfall sofort, wer welchen Schlüssel und welchen Zugang hatte.']
+   }
   ];
 
-  var S='.page__lektionen-team-onboarding';
+  function cfg(){ for(var i=0;i<ISLANDS.length;i++){ if(ISLANDS[i].slug.test(location.pathname)) return ISLANDS[i]; } return null; }
+
+  /* ---------- CSS ---------- */
   var CSS=`
-  ${S}{--tm-beige:#c7b489;--tm-display:"Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--tm-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;}
-  /* ---- HERO ---- */
-  ${S} .tm-hero{position:relative;width:min(1180px,94vw);margin:74px auto 4px;text-align:center;isolation:isolate;}
-  ${S} .tm-hero__back{display:inline-flex;align-items:center;gap:7px;font:600 11px/1 var(--tm-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:20px;transition:color .3s ease;animation:tmRise 600ms cubic-bezier(.16,1,.3,1) both;}
-  ${S} .tm-hero__back:hover{color:var(--tm-beige);}
-  ${S} .tm-hero__back svg{width:13px;height:13px;}
-  ${S} .tm-hero__logo{display:block;width:56px;height:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tmRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;}
-  ${S} .tm-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--tm-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--tm-beige);margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95);animation:tmRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;}
-  ${S} .tm-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tm-beige);box-shadow:0 0 12px rgba(${GLOW},.7);}
-  ${S} .tm-hero__title{margin:0;font-family:var(--tm-display);font-weight:600;color:#fff;line-height:1.03;letter-spacing:-.02em;font-size:clamp(2.4rem,7vw,4.8rem);text-wrap:balance;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9);animation:tmRise 800ms cubic-bezier(.16,1,.3,1) 220ms both;}
-  ${S} .tm-hero__title .tm-gold{color:var(--tm-beige);}
-  ${S} .tm-hero__sub{margin:18px auto 0;max-width:600px;font:400 1.06rem/1.6 var(--tm-sans);color:rgba(255,255,255,.74);animation:tmRise 850ms cubic-bezier(.16,1,.3,1) 300ms both;}
-  /* ---- CONTAINER ---- */
-  #tsteam{width:100%;font-family:var(--tm-sans);color:#fff;}
-  #tsteam *{box-sizing:border-box}
-  /* ---- INTRO ---- */
-  #tsteam .tm-intro{width:min(760px,92vw);margin:44px auto 0;text-align:center;}
-  #tsteam .tm-intro .tm-lead{margin:0 0 20px;font-family:var(--tm-display);font-weight:600;font-size:clamp(20px,2.6vw,26px);line-height:1.28;letter-spacing:-.01em;color:#fff;}
-  #tsteam .tm-intro p{margin:0 auto 16px;max-width:680px;font-size:1.04rem;line-height:1.7;color:rgba(255,255,255,.86);}
-  #tsteam .tm-intro p:last-child{margin-bottom:0;}
-  /* ---- BEREICH-GRID ---- */
-  #tsteam .tm-areas{width:min(1080px,92vw);margin:56px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  #tsteam .tm-card{position:relative;overflow:hidden;border-radius:16px;padding:30px 28px 28px;background:#04050a;border:1px solid rgba(255,255,255,.07);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease;}
-  #tsteam .tm-card.on{opacity:1;transform:translateY(0);}
-  #tsteam .tm-card:hover{border-color:rgba(${GLOW},.26);box-shadow:0 6px 22px rgba(${GLOW},.14),0 0 40px rgba(${GLOW},.10);}
-  #tsteam .tm-card::before{content:attr(data-n);position:absolute;top:22px;right:26px;font:600 .72rem/1 var(--tm-sans);letter-spacing:.2em;color:rgba(${GLOW},.5);}
-  #tsteam .tm-card::after{content:"";position:absolute;top:0;left:28px;width:34px;height:2px;background:linear-gradient(90deg,var(--tm-beige),transparent);}
-  #tsteam .tm-card h3{margin:14px 0 12px;font-family:"Lineal TS",var(--tm-display);font-weight:600;font-size:1.24rem;letter-spacing:-.012em;line-height:1.15;color:#fff;}
-  #tsteam .tm-card p{margin:0;font-size:.94rem;line-height:1.62;color:rgba(255,255,255,.86);}
-  /* ---- LEARNINGS ---- */
-  #tsteam .tm-learn{width:100vw;max-width:100vw;margin:72px 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);}
-  #tsteam .tm-learn-head{text-align:center;margin:0 auto 52px;}
-  #tsteam .tm-learn-eyebrow{display:inline-block;font-family:"Lineal TS",var(--tm-display);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tm-beige);margin:0 0 14px;}
-  #tsteam .tm-learn-title{font-family:"Lineal TS",var(--tm-display);font-size:clamp(28px,4.4vw,42px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0;color:#fff;}
-  #tsteam .tm-learn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto;justify-items:center;}
-  #tsteam .tm-orb-cell{opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 140ms);width:100%;max-width:250px;}
-  #tsteam .tm-orb-cell.in{opacity:1;transform:translateY(0);filter:blur(0);}
-  #tsteam .tm-orb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(20px,2.6vw,32px);background:radial-gradient(120% 120% at 38% 28%,rgba(${GLOW},.20),rgba(255,255,255,.035) 46%,rgba(10,12,20,.85) 78%);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 44px -18px rgba(0,0,0,.75),inset 0 1px 1px rgba(255,255,255,.10),inset 0 0 60px rgba(${GLOW},.06);animation:tm-float 7s ease-in-out infinite;will-change:transform;transition:border-color .45s ease,box-shadow .45s ease;}
-  #tsteam .tm-orb-cell:nth-child(1) .tm-orb{animation-delay:0s}
-  #tsteam .tm-orb-cell:nth-child(2) .tm-orb{animation-delay:-1.6s}
-  #tsteam .tm-orb-cell:nth-child(3) .tm-orb{animation-delay:-3.2s}
-  #tsteam .tm-orb-cell:nth-child(4) .tm-orb{animation-delay:-4.8s}
-  #tsteam .tm-orb::before{content:"";position:absolute;top:10%;left:16%;width:34%;height:24%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.16),rgba(255,255,255,0));pointer-events:none}
-  #tsteam .tm-orb:hover{border-color:rgba(${GLOW},.5);box-shadow:0 22px 50px -18px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.12),0 0 40px rgba(${GLOW},.22)}
-  #tsteam .tm-orb p{position:relative;margin:0;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,14.5px);font-weight:500;line-height:1.5;letter-spacing:-.005em;max-width:22ch}
-  @keyframes tm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
-  @keyframes tmRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-  @media(max-width:820px){#tsteam .tm-areas{grid-template-columns:1fr;max-width:520px}}
-  @media(max-width:1079px){#tsteam .tm-learn-grid{grid-template-columns:repeat(2,1fr);gap:36px 30px;max-width:580px}}
-  @media(max-width:520px){#tsteam .tm-learn-grid{grid-template-columns:1fr;max-width:320px}${S} .tm-hero__title{font-size:clamp(1.9rem,10vw,2.8rem)}}
-  @media(prefers-reduced-motion:reduce){
-    ${S} .tm-hero__back,${S} .tm-hero__logo,${S} .tm-hero__eyebrow,${S} .tm-hero__title,${S} .tm-hero__sub{animation:none!important}
-    #tsteam .tm-card,#tsteam .tm-orb-cell{opacity:1;transform:none;filter:none}
-    #tsteam .tm-orb{animation:none}
-  }`;
+  #tsisl-hero{position:relative;width:min(1180px,94vw);margin:74px auto 4px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsisl-hero .il-back{display:inline-flex;align-items:center;gap:7px;font:600 11px/1 inherit;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:20px;transition:color .3s}
+  #tsisl-hero .il-back:hover{color:#c7b489} #tsisl-hero .il-back svg{width:13px;height:13px}
+  #tsisl-hero .il-logo{display:block;width:56px;height:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95))}
+  #tsisl-hero .il-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1)}
+  #tsisl-hero .il-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${G},.7)}
+  #tsisl-hero .il-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;color:#fff;line-height:1.03;letter-spacing:-.02em;font-size:clamp(2.4rem,7vw,4.8rem);text-shadow:0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98)}
+  #tsisl-hero .il-title .il-g{color:#c7b489}
+  #tsisl-hero .il-lead{margin:20px auto 0;max-width:660px;font:600 clamp(18px,2.4vw,23px)/1.4 "Lineal Web","Lineal TS",sans-serif;color:#fff}
+  #tsisl{width:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsisl *{box-sizing:border-box}
+  #tsisl .il-intro{width:min(760px,92vw);margin:24px auto 0;text-align:center}
+  #tsisl .il-intro p{margin:0 auto 15px;max-width:700px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  /* sec-head */
+  #tsisl .il-head{text-align:center;max-width:860px;margin:0 auto 40px;padding:0 24px}
+  #tsisl .il-head .eb{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 inherit;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsisl .il-head .eb::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${G},.7)}
+  #tsisl .il-head h2{margin:0 0 10px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #tsisl .il-head h2 .il-g{color:#c7b489}
+  #tsisl .il-head .sub{margin:0 auto;max-width:640px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8)}
+  #tsisl section.il-sec{width:min(1180px,94vw);margin:clamp(64px,8vh,104px) auto 0}
+  /* ANIM shared */
+  #tsisl .il-stage{width:min(760px,92vw);margin:0 auto;position:relative}
+  #tsisl .il-replay{display:block;margin:26px auto 0;background:transparent;border:1px solid rgba(${G},.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font:600 13px/1 inherit;cursor:pointer;transition:background .3s,border-color .3s,transform .3s}
+  #tsisl .il-replay:hover{background:rgba(${G},.12);border-color:rgba(${G},.7);transform:translateY(-1px)}
+  /* checklist */
+  #tsisl .il-cl{display:flex;flex-direction:column;gap:10px}
+  #tsisl .il-cl-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 16px;opacity:.35;transform:translateY(8px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),border-color .5s}
+  #tsisl .il-cl-row.on{opacity:1;transform:none;border-color:rgba(${G},.35)}
+  #tsisl .il-cl-box{flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;transition:background .4s,border-color .4s}
+  #tsisl .il-cl-row.on .il-cl-box{background:#5FAE88;border-color:#5FAE88}
+  #tsisl .il-cl-box svg{width:13px;height:13px;opacity:0;transition:opacity .3s .1s}
+  #tsisl .il-cl-row.on .il-cl-box svg{opacity:1}
+  #tsisl .il-cl-t{font-size:15px;color:#fff;letter-spacing:-.005em}
+  #tsisl .il-cl-num{margin-left:auto;font:700 .72rem/1 inherit;letter-spacing:.14em;color:rgba(${G},.55)}
+  #tsisl .il-cl-bar{margin-top:20px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  #tsisl .il-cl-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#5FAE88,#9FD3B9);transition:width .5s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-cl-cap{text-align:center;margin-top:12px;font:600 13px/1 inherit;color:#d8c9ab;letter-spacing:.02em}
+  /* stack */
+  #tsisl .il-st-row{display:grid;grid-template-columns:minmax(120px,220px) 1fr 92px;align-items:center;gap:16px;margin-bottom:12px}
+  #tsisl .il-st-lab{font-size:14px;color:rgba(255,255,255,.82);text-align:right;letter-spacing:-.005em}
+  #tsisl .il-st-track{height:30px;border-radius:8px;background:rgba(255,255,255,.05);overflow:hidden}
+  #tsisl .il-st-bar{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,rgba(${G},.55),rgba(${G},.9));transition:width .85s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-st-val{font:700 14px/1 inherit;color:#d8c9ab;font-variant-numeric:tabular-nums;text-align:left}
+  #tsisl .il-st-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:22px;padding-top:18px;border-top:1px solid rgba(${G},.24)}
+  #tsisl .il-st-total .l{font:600 14px/1 inherit;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+  #tsisl .il-st-total .v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(28px,4vw,40px);color:#efe6d2;font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(${G},.35)}
+  /* grid */
+  #tsisl .il-gd{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  #tsisl .il-gd-node{position:relative;aspect-ratio:1.9/1;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;opacity:.4;transform:scale(.96);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
+  #tsisl .il-gd-node.on{opacity:1;transform:none;border-color:rgba(${G},.45);box-shadow:0 0 0 1px rgba(${G},.14),0 16px 34px -16px rgba(${G},.42)}
+  #tsisl .il-gd-node span{font-size:13px;font-weight:600;color:#fff;letter-spacing:-.01em}
+  #tsisl .il-gd-node::before{content:"";position:absolute;top:9px;left:11px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .4s,box-shadow .4s}
+  #tsisl .il-gd-node.on::before{background:#c7b489;box-shadow:0 0 10px rgba(${G},.8)}
+  #tsisl .il-gd-cap{text-align:center;margin-top:18px;font:600 13px/1 inherit;color:#d8c9ab;letter-spacing:.02em}
+  /* mockup placeholder */
+  #tsisl .il-mock{position:relative;width:100%;border-radius:14px;overflow:hidden;background:#0b0d14;border:1px solid rgba(255,255,255,.08);aspect-ratio:16/10;display:flex;align-items:center;justify-content:center}
+  #tsisl .il-mock .ph{font:600 12px/1.5 inherit;letter-spacing:.16em;text-transform:uppercase;color:rgba(${G},.7);text-align:center}
+  #tsisl .il-mock .ph small{display:block;margin-top:6px;color:rgba(255,255,255,.3);letter-spacing:.1em}
+  #tsisl .il-mock::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 0%,rgba(${G},.06),transparent 60%);pointer-events:none}
+  /* erklärvideo section: mock left, text right */
+  #tsisl .il-vid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;width:min(1120px,94vw);margin:0 auto}
+  #tsisl .il-vid .il-vtext h3{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(24px,3vw,38px);line-height:1.15;letter-spacing:-.02em;color:#fff}
+  #tsisl .il-vid .il-vtext h3 .il-g{color:#c7b489}
+  #tsisl .il-vid .il-vtext p{margin:0 0 14px;font-size:15.5px;line-height:1.68;color:rgba(255,255,255,.86)}
+  #tsisl .il-vidclose{width:min(900px,92vw);margin:34px auto 0;text-align:center;font-size:15.5px;line-height:1.7;color:rgba(255,255,255,.86)}
+  /* ergebnis-blick rows */
+  #tsisl .il-erg{display:flex;align-items:center;gap:clamp(20px,4vw,64px);width:min(1120px,94vw);margin:clamp(40px,5vh,64px) auto 0}
+  #tsisl .il-erg.right{flex-direction:row-reverse}
+  #tsisl .il-erg .il-erg-cell{flex:1 1 0;min-width:0}
+  #tsisl .il-erg .il-erg-txt h3{margin:0 0 12px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(21px,2.6vw,30px);line-height:1.18;letter-spacing:-.015em;color:#fff}
+  #tsisl .il-erg .il-erg-txt h3 .il-g{color:#c7b489}
+  #tsisl .il-erg .il-erg-txt p{margin:0;font-size:15.5px;line-height:1.68;color:rgba(255,255,255,.86)}
+  #tsisl .il-erg .il-mock{max-width:520px}
+  /* warenkorb anchor spacing */
+  #tsisl .il-wkwrap{width:100%;margin:clamp(56px,7vh,88px) 0 0}
+  /* empfehlung */
+  #tsisl .il-empf{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;width:min(1000px,95vw);margin:0 auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 14px rgba(${G},.08)}
+  #tsisl .il-empf::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(${G},.4),transparent)}
+  #tsisl .il-empf .il-emph{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;line-height:1.25;color:#fff}
+  #tsisl .il-empf .il-emph .il-eg{color:#c7b489}
+  #tsisl .il-empf .il-ep{margin:0 0 18px;font-size:.98rem;line-height:1.7;color:rgba(255,255,255,.68)}
+  #tsisl .il-empf .il-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  #tsisl .il-empf .il-ol li{display:flex;align-items:center;gap:11px;font-size:14.5px;color:rgba(255,255,255,.82);transition:color .4s}
+  #tsisl .il-empf .il-ol li::before{content:"";width:9px;height:9px;border-radius:50%;background:rgba(${G},.35);box-shadow:0 0 0 3px rgba(${G},.08);transition:background .4s,box-shadow .4s}
+  #tsisl .il-empf .il-ol li.lit{color:#fff} #tsisl .il-empf .il-ol li.lit::before{background:#c7b489;box-shadow:0 0 12px rgba(${G},.7)}
+  #tsisl .il-empf .il-eanim{position:relative;aspect-ratio:1/1;max-width:240px;margin:0 auto;border-radius:18px;background:radial-gradient(120% 120% at 38% 28%,rgba(${G},.18),rgba(255,255,255,.03) 48%,rgba(10,12,20,.85) 80%);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+  #tsisl .il-empf .il-eanim .ring{position:absolute;inset:16%;border-radius:50%;border:1px dashed rgba(${G},.4);animation:ilSpin 14s linear infinite}
+  #tsisl .il-empf .il-eanim .dot{width:14px;height:14px;border-radius:50%;background:#c7b489;box-shadow:0 0 18px rgba(${G},.9);animation:ilPulse 2.6s ease-in-out infinite}
+  /* duo-video */
+  #tsisl .il-duo{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(28px,4vw,60px);row-gap:22px;width:min(1200px,94vw);margin:0 auto}
+  #tsisl .il-duo .il-dsteps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  #tsisl .il-duo .il-dchip{font:600 11.5px/1 inherit;letter-spacing:.04em;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.7);background:rgba(255,255,255,.02)}
+  #tsisl .il-duo .il-dtext{text-align:center;margin-top:16px}
+  #tsisl .il-duo .il-dtext h3{margin:0 0 10px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(19px,1.9vw,26px);letter-spacing:-.02em;color:#fff}
+  #tsisl .il-duo .il-dtext h3 .il-g{color:#c7b489}
+  #tsisl .il-duo .il-dtext p{margin:0 auto 12px;max-width:520px;font-size:15.5px;line-height:1.7;color:#dcdcdc}
+  #tsisl .il-duo .il-play{display:inline-flex;align-items:center;gap:9px;margin-top:14px;background:#c7b489;color:#05060b;border:none;border-radius:999px;padding:11px 20px;font:600 13px/1 inherit;cursor:pointer;transition:filter .3s,transform .3s}
+  #tsisl .il-duo .il-play:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  #tsisl .il-duo .il-play::before{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #05060b}
+  /* learnings (tsl clone) */
+  #tsisl .il-learn{width:100vw;max-width:100vw;margin:clamp(64px,8vh,96px) 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px)}
+  #tsisl .il-learn-head{text-align:center;margin:0 auto 52px}
+  #tsisl .il-learn-eb{display:inline-block;font-family:"Lineal Web","Lineal TS",sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
+  #tsisl .il-learn-h{font-family:"Lineal Web","Lineal TS",sans-serif;font-size:clamp(28px,4.4vw,42px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0;color:#fff}
+  #tsisl .il-learn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto;justify-items:center}
+  #tsisl .il-orb-cell{width:100%;max-width:250px}
+  #tsisl .il-orb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(20px,2.6vw,32px);background:radial-gradient(120% 120% at 38% 28%,rgba(${G},.2),rgba(255,255,255,.035) 46%,rgba(10,12,20,.85) 78%);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 44px -18px rgba(0,0,0,.75),inset 0 0 60px rgba(${G},.06);animation:ilFloat 7s ease-in-out infinite}
+  #tsisl .il-orb-cell:nth-child(2) .il-orb{animation-delay:-1.6s}#tsisl .il-orb-cell:nth-child(3) .il-orb{animation-delay:-3.2s}#tsisl .il-orb-cell:nth-child(4) .il-orb{animation-delay:-4.8s}
+  #tsisl .il-orb p{position:relative;margin:0;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,14.5px);font-weight:500;line-height:1.5;max-width:22ch}
+  @keyframes ilFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ilSpin{to{transform:rotate(360deg)}}
+  @keyframes ilPulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.35);opacity:1}}
+  @media(max-width:900px){#tsisl .il-vid,#tsisl .il-duo{grid-template-columns:1fr}#tsisl .il-erg{flex-direction:column!important}#tsisl .il-erg .il-erg-txt{text-align:center}#tsisl .il-empf{grid-template-columns:1fr}#tsisl .il-empf .il-eanim{margin-bottom:8px}}
+  @media(max-width:1079px){#tsisl .il-learn-grid{grid-template-columns:repeat(2,1fr);gap:36px 30px;max-width:580px}#tsisl .il-gd{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){#tsisl-hero .il-title{font-size:clamp(1.9rem,10vw,2.8rem)}#tsisl .il-learn-grid{grid-template-columns:1fr;max-width:320px}#tsisl .il-st-row{grid-template-columns:1fr 2fr 64px;gap:8px}#tsisl .il-st-lab{font-size:12px}}
+  @media(prefers-reduced-motion:reduce){#tsisl *{animation:none!important;transition:none!important}#tsisl .il-cl-row,#tsisl .il-gd-node{opacity:1;transform:none}}
+  `;
+  function injectCSS(){ if(document.getElementById('tsisl-css'))return; var s=document.createElement('style'); s.id='tsisl-css'; s.textContent=CSS; document.head.appendChild(s); }
 
-  function injectCSS(){ if(document.getElementById("tsteam-css"))return; var s=document.createElement("style"); s.id="tsteam-css"; s.textContent=CSS; document.head.appendChild(s); }
+  var CHK='<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="#05221a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function esc(s){return s;}
 
-  function buildHero(sc){
-    if(sc.querySelector(".tm-hero")) return;
-    var hero=document.createElement("div"); hero.className="tm-hero";
-    hero.innerHTML=
-      '<a class="tm-hero__back" href="/operations-area"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Operations Area</a>'+
-      '<img class="tm-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-      '<div class="tm-hero__eyebrow">Operations Area · Personal</div>'+
-      '<h1 class="tm-hero__title">Team & <span class="tm-gold">Onboarding</span></h1>'+
-      '<p class="tm-hero__sub">Alles rund um dein Team an einem Ort: vom Onboarding neuer Mitarbeiter bis zur Urlaubsplanung.</p>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-  }
+  /* ---------- section builders ---------- */
+  function secHead(h){ if(!h)return ''; return '<div class="il-head">'+(h.eyebrow?'<span class="eb">'+h.eyebrow+'</span>':'')+(h.h?'<h2>'+h.h+'</h2>':'')+(h.sub?'<p class="sub">'+h.sub+'</p>':'')+'</div>'; }
 
-  function buildBody(sc){
-    if(document.getElementById("tsteam")) return;
-    var box=document.createElement("div"); box.id="tsteam";
-    var areas=AREAS.map(function(a){
-      return '<article class="tm-card" data-n="'+a[0]+'"><h3>'+a[1]+'</h3><p>'+a[2]+'</p></article>';
-    }).join('');
-    var orbs=LEARN.map(function(t,i){
-      return '<div class="tm-orb-cell" style="--i:'+i+'"><div class="tm-orb"><p>'+t+'</p></div></div>';
-    }).join('');
-    box.innerHTML=
-      '<div class="tm-intro">'+
-        '<p class="tm-lead">Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.</p>'+
-        '<p>In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.</p>'+
-        '<p>Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.</p>'+
-      '</div>'+
-      '<section class="tm-areas">'+areas+'</section>'+
-      '<section class="tm-learn"><div class="tm-learn-head"><span class="tm-learn-eyebrow">Was du mitnimmst</span><h2 class="tm-learn-title">Learnings</h2></div><div class="tm-learn-grid">'+orbs+'</div></section>';
-    var hero=sc.querySelector(".tm-hero");
-    if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
-    else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
-    reveal(box);
-  }
-
-  function reveal(box){
-    var cards=[].slice.call(box.querySelectorAll(".tm-card"));
-    function showCards(){ cards.forEach(function(c,i){ if(c.classList.contains('on'))return; c.style.transitionDelay=(i*0.08)+'s'; c.classList.add('on'); setTimeout(function(){c.style.transitionDelay='';}, i*80+900); }); }
-    var io1=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; showCards(); io1.disconnect(); },{threshold:.05});
-    if(cards[0]) io1.observe(cards[0]); else showCards();
-    setTimeout(showCards, 1400);
-    var grid=box.querySelector('.tm-learn-grid');
-    if(grid){
-      var orbs=[].slice.call(grid.querySelectorAll('.tm-orb-cell'));
-      function showOrbs(){ orbs.forEach(function(c){ c.classList.add('in'); }); }
-      var io2=new IntersectionObserver(function(e){ if(!e[0].isIntersecting)return; showOrbs(); io2.disconnect(); },{threshold:.1});
-      io2.observe(grid);
-      setTimeout(showOrbs, 1400);
+  function animHTML(a){
+    if(!a) return '';
+    var inner='';
+    if(a.type==='checklist'){
+      inner='<div class="il-cl">'+a.rows.map(function(r,i){return '<div class="il-cl-row" data-i="'+i+'"><span class="il-cl-box">'+CHK+'</span><span class="il-cl-t">'+r+'</span><span class="il-cl-num">'+('0'+(i+1)).slice(-2)+'</span></div>';}).join('')+'</div>'
+        +'<div class="il-cl-bar"><span class="il-cl-fill"></span></div><div class="il-cl-cap">0 / '+a.rows.length+' '+a.unit+'</div>';
+    } else if(a.type==='stack'){
+      var tot=a.rows.reduce(function(s,r){return s+r.val;},0);
+      inner='<div class="il-stk" data-total="'+tot+'">'+a.rows.map(function(r,i){return '<div class="il-st-row" data-i="'+i+'" data-v="'+r.val+'"><span class="il-st-lab">'+r.label+'</span><span class="il-st-track"><span class="il-st-bar"></span></span><span class="il-st-val">0</span></div>';}).join('')
+        +'<div class="il-st-total"><span class="l">'+a.totalLabel+'</span><span class="v" data-t="'+tot+'">0</span></div></div>';
+    } else if(a.type==='grid'){
+      inner='<div class="il-gd">'+a.nodes.map(function(n,i){return '<div class="il-gd-node" data-i="'+i+'"><span>'+n+'</span></div>';}).join('')+'</div><div class="il-gd-cap">0 / '+a.nodes.length+' '+a.label+'</div>';
     }
+    return '<section class="il-sec">'+secHead(a.head)+'<div class="il-stage">'+inner+'<button class="il-replay" type="button">Neu abspielen</button></div></section>';
+  }
+
+  function playAnim(sec){
+    if(!sec) return;
+    var cl=sec.querySelector('.il-cl');
+    if(cl){
+      var rows=[].slice.call(cl.querySelectorAll('.il-cl-row')), n=rows.length, unit=sec.querySelector('.il-cl-cap').textContent.split(' ').slice(-1)[0];
+      var fill=sec.querySelector('.il-cl-fill'), cap=sec.querySelector('.il-cl-cap'), done=0;
+      rows.forEach(function(r){r.classList.remove('on');}); fill.style.width='0'; cap.textContent='0 / '+n+' '+unit;
+      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); done++; fill.style.width=(done/n*100)+'%'; cap.textContent=done+' / '+n+' '+unit; if(done===n) cap.textContent='Onboarding abgeschlossen'; }, 300+i*260); });
+      return;
+    }
+    var stk=sec.querySelector('.il-stk');
+    if(stk){
+      var srows=[].slice.call(stk.querySelectorAll('.il-st-row')), total=+stk.getAttribute('data-total'), tEl=stk.querySelector('.v'), run=0;
+      srows.forEach(function(r){ r.querySelector('.il-st-bar').style.width='0'; r.querySelector('.il-st-val').textContent='0'; }); tEl.textContent='0';
+      var max=Math.max.apply(null,srows.map(function(r){return +r.getAttribute('data-v');}));
+      srows.forEach(function(r,i){ var v=+r.getAttribute('data-v'); setTimeout(function(){ r.querySelector('.il-st-bar').style.width=(v/max*100)+'%'; countTo(r.querySelector('.il-st-val'),0,v,700); run+=v; countTo(tEl,run-v,run,750); }, 300+i*320); });
+      return;
+    }
+    var gd=sec.querySelector('.il-gd');
+    if(gd){
+      var nodes=[].slice.call(gd.querySelectorAll('.il-gd-node')), gn=nodes.length, gcap=sec.querySelector('.il-gd-cap'), lab=gcap.textContent.split(' ').slice(-1)[0], gdone=0;
+      nodes.forEach(function(x){x.classList.remove('on');}); gcap.textContent='0 / '+gn+' '+lab;
+      nodes.forEach(function(x,i){ setTimeout(function(){ x.classList.add('on'); gdone++; gcap.textContent=gdone+' / '+gn+' '+lab; }, 300+i*180); });
+    }
+  }
+  function countTo(el,from,to,dur){ var start=null, fmt=(to>=1000); function fr(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1); var val=Math.round(from+(to-from)*p); el.textContent=fmt?val.toLocaleString('de-DE'):val; if(p<1) requestAnimationFrame(fr); } requestAnimationFrame(fr); }
+
+  function mockPH(txt){ return '<div class="il-mock"><div class="ph">'+txt+'<small>Screenshot folgt</small></div></div>'; }
+
+  function videoHTML(v){
+    return '<section class="il-sec"><div class="il-vid"><div class="il-vmock">'+mockPH('Live-Ansicht')+'</div><div class="il-vtext"><h3>'+v.h+'</h3>'+v.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div><p class="il-vidclose">'+v.close+'</p></section>';
+  }
+  function ergHTML(rows){
+    return rows.map(function(r){ return '<div class="il-erg'+(r.side==='right'?' right':'')+'"><div class="il-erg-cell">'+mockPH('Beispiel-Ansicht')+'</div><div class="il-erg-cell il-erg-txt"><h3>'+r.h+'</h3><p>'+r.p+'</p></div></div>'; }).join('');
+  }
+  function empfHTML(e){
+    return '<section class="il-sec"><div class="il-empf"><div class="il-eanim"><span class="ring"></span><span class="dot"></span></div><div class="il-etext"><p class="il-emph">'+e.emph+'</p><p class="il-ep">'+e.p+'</p><ul class="il-ol">'+e.points.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul></div></div></section>';
+  }
+  function duoHTML(d){
+    return '<section class="il-sec">'+secHead({eyebrow:'Schritt für Schritt in Notion', h:d.h})+'<div class="il-duo">'+d.items.map(function(it){ return '<div class="il-dcard"><div class="il-dsteps">'+it.chips.map(function(c){return '<span class="il-dchip">'+c+'</span>';}).join('')+'</div>'+mockPH('Walkthrough')+'<button class="il-play" type="button">Abspielen</button><div class="il-dtext"><h3>'+it.h+'</h3>'+it.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div>'; }).join('')+'</div></section>';
+  }
+  function learnHTML(items){
+    return '<section class="il-learn"><div class="il-learn-head"><span class="il-learn-eb">Was du mitnimmst</span><h2 class="il-learn-h">Learnings</h2></div><div class="il-learn-grid">'+items.map(function(t){return '<div class="il-orb-cell"><div class="il-orb"><p>'+t+'</p></div></div>';}).join('')+'</div></section>';
+  }
+  function wkHTML(wk){
+    return wk.map(function(w){ return '<div class="il-wkwrap"><div id="tsisl-wk-'+w.id+'"></div></div>'; }).join('');
+  }
+
+  function buildHero(sc,c){
+    if(sc.querySelector('#tsisl-hero')) return;
+    var hero=document.createElement('div'); hero.id='tsisl-hero';
+    hero.innerHTML='<a class="il-back" href="/operations-area"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Operations Area</a>'
+      +'<img class="il-logo" alt="Tasty Studios" src="'+LOGO+'">'
+      +'<div class="il-eyebrow">'+c.kicker+'</div>'
+      +'<h1 class="il-title">'+c.titleHTML+'</h1>'
+      +'<p class="il-lead">'+c.lead+'</p>';
+    var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(hero,nr); else sc.appendChild(hero);
+  }
+  function buildBody(sc,c){
+    if(document.getElementById('tsisl')) return;
+    var box=document.createElement('div'); box.id='tsisl';
+    var html='<div class="il-intro">'+c.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
+    html+=animHTML(c.anim);
+    html+=videoHTML(c.video);
+    html+=wkHTML(c.wk);
+    html+='<section class="il-sec">'+secHead({eyebrow:'Das Ergebnis', h:'So sieht es <span class="il-g">fertig</span> aus'})+ergHTML(c.ergebnis)+'</section>';
+    if(c.zweit) html+=animHTML(c.zweit);
+    html+=empfHTML(c.empf);
+    html+=duoHTML(c.duo);
+    html+=learnHTML(c.learn);
+    box.innerHTML=html;
+    var hero=sc.querySelector('#tsisl-hero');
+    if(hero&&hero.nextSibling) sc.insertBefore(box,hero.nextSibling); else { var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(box,nr); else sc.appendChild(box); }
+    wireReveal(box);
+    wireEmpf(box);
+    wireDuo(box);
+  }
+  function inView(el){ var r=el.getBoundingClientRect(); return r.top<window.innerHeight*.85 && r.bottom>0; }
+  function wireReveal(box){
+    [].slice.call(box.querySelectorAll('.il-sec')).forEach(function(sec){
+      var hasAnim=sec.querySelector('.il-cl,.il-stk,.il-gd');
+      var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ if(hasAnim) playAnim(sec); io.disconnect(); } },{threshold:.25});
+      io.observe(sec);
+      if(hasAnim){ setTimeout(function(){ if(inView(sec)) playAnim(sec); },600); var rp=sec.querySelector('.il-replay'); if(rp) rp.addEventListener('click',function(){playAnim(sec);}); }
+    });
+    // learnings orbs fade handled by float anim (always visible)
+  }
+  function wireEmpf(box){
+    var e=box.querySelector('.il-empf'); if(!e) return; var lis=[].slice.call(e.querySelectorAll('.il-ol li')); if(!lis.length) return; var idx=0;
+    setInterval(function(){ lis.forEach(function(l){l.classList.remove('lit');}); lis[idx%lis.length].classList.add('lit'); idx++; },2600);
+  }
+  function wireDuo(box){
+    [].slice.call(box.querySelectorAll('.il-duo .il-play')).forEach(function(btn){ btn.addEventListener('click',function(){ var card=btn.closest('.il-dcard'); var chips=[].slice.call(card.querySelectorAll('.il-dchip')); var i=0; chips.forEach(function(c){c.classList.remove('il-dchip--on');}); var iv=setInterval(function(){ if(i>=chips.length){clearInterval(iv);return;} chips[i].style.background='rgba(199,180,137,.16)'; chips[i].style.color='#efe6d2'; chips[i].style.borderColor='rgba(199,180,137,.4)'; i++; },500); }); });
   }
 
   function mount(){
-    if(!on()) return;
+    var c=cfg();
+    if(!c){ var ex=document.getElementById('tsisl'); if(ex&&ex.parentNode)ex.parentNode.removeChild(ex); var h=document.getElementById('tsisl-hero'); if(h&&h.parentNode)h.parentNode.removeChild(h); return; }
     injectCSS();
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    buildHero(sc);
-    buildBody(sc);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    buildHero(sc,c); buildBody(sc,c);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),function(img){var b=img.closest('.notion-image'); if(b)b.style.display='none';});
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
   }
   mount();
-  document.addEventListener("DOMContentLoaded", mount);
+  document.addEventListener('DOMContentLoaded',mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
