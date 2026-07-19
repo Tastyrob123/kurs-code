@@ -147,8 +147,8 @@ def emit_steps(var, steps):
     out.append("  ];")
     return "\n".join(out)
 
-# Beispielwerte: Balken zaehlt Kennzahlen -> jede Karte wert:1
-varianten = ",\n".join("      {name:" + js_str(re.sub(r'^\d+\.\s*', '', st["title"])) + ", wert:1}" for st in steps)
+# Balken zaehlt KENNZAHLEN: die 2 Setup-Karten (Button, DB anlegen) wert:0, die 48 echten Spalten wert:1 -> Balken 0..48
+varianten = ",\n".join("      {name:" + js_str(re.sub(r'^\d+\.\s*', '', st["title"])) + ", wert:" + ("0" if i < 2 else "1") + "}" for i, st in enumerate(steps))
 
 kacheln = f"""    /* Key Metrics — Kostenauswertung Master (DB XX), Engine-generiert 2026-07-20.
        Balken zaehlt KENNZAHLEN (Spalten-Fortschritt), einheit_typ:'anzahl', wert:1 je Karte. Bilder folgen -> ph(). */
