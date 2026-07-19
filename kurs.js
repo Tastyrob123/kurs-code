@@ -551,6 +551,94 @@
 })();
 
 /* ============================================================
+   key-metrics — Hero "Key Metrics" + Einleitung (Muster: gerichte-Hero DB XI; Werte 1:1 aus Abschnitts-Katalog 01)
+   Cover = PLATZHALTER (echtes 3-Laptop-Cover folgt von Robert -> nur die IMG-Zeile tauschen)
+   ============================================================ */
+(function(){
+  var IMG="https://tastyrob123.github.io/kurs-code/img/key-metrics/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Key Metrics: sauberer 3-Laptop-SVG (Position/Struktur final), echtes Cover kommt spaeter -> nur diese Zeile ersetzen */
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .ts-body h3{
+    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('tskm-intro-css')) return;
+    var s=document.createElement('style'); s.id='tskm-intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('tskm-intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Key Metrics — Kostenauswertung Master" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Modul 2 · Ausbau</div>'+
+        '<h1 class="ts-hero__title">Key <span class="ts-gold">Metrics</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('tskm-intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='tskm-intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Diese Datenbank — <b>DB XX, die Kostenauswertung Master</b> — ist die Landkarte über alle Zahlen, die dein Betrieb täglich produziert. Du fütterst sie mit den rohen Werten aus dem Tagesgeschäft, den Rest rechnet sie selbst: Aus einzelnen Buchungen werden <b>belastbare Kennzahlen</b>, die du lesen kannst.</p>
+  <p>Hier stehen sie beieinander: <b>Umsatz</b>, Durchschnittsbon und Umsatz pro Tag, dazu Wareneinsatz und die <b>Deckungsbeiträge I bis III</b> in Euro und Prozent. Daneben deine <b>Personalkosten und die Produktivität pro Stunde</b> — und die Kanäle drumherum: Lieferando, Wolt, Online-Rate, Google- und Mystery-Shopper-Score.</p>
+</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    gerichte-getrnke-finaler-schritt — Hero "DB XI : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
    ============================================================ */
 (function(){

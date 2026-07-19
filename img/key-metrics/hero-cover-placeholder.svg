@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 1180" width="2600" height="1180" fill="none">
+  <defs>
+    <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1d2b"/>
+      <stop offset="1" stop-color="#0a0c14"/>
+    </linearGradient>
+    <linearGradient id="scrC" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#20232f"/>
+      <stop offset="1" stop-color="#0b0e17"/>
+    </linearGradient>
+    <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2d3a"/>
+      <stop offset="1" stop-color="#14161f"/>
+    </linearGradient>
+  </defs>
+  <g opacity="0.9">
+    <!-- left laptop -->
+    <g transform="translate(150,360)">
+      <rect x="0" y="0" width="640" height="400" rx="20" fill="url(#scr)" stroke="#c7b489" stroke-opacity="0.28" stroke-width="2"/>
+      <rect x="26" y="30" width="300" height="18" rx="9" fill="#c7b489" fill-opacity="0.22"/>
+      <rect x="26" y="70" width="588" height="10" rx="5" fill="#ffffff" fill-opacity="0.08"/>
+      <rect x="26" y="98" width="520" height="10" rx="5" fill="#ffffff" fill-opacity="0.06"/>
+      <rect x="26" y="150" width="180" height="120" rx="12" fill="#ffffff" fill-opacity="0.05"/>
+      <rect x="224" y="150" width="180" height="120" rx="12" fill="#ffffff" fill-opacity="0.05"/>
+      <rect x="422" y="150" width="192" height="120" rx="12" fill="#c7b489" fill-opacity="0.10"/>
+      <rect x="26" y="300" width="588" height="70" rx="10" fill="#ffffff" fill-opacity="0.04"/>
+      <path d="M-40 400 h720 l70 74 h-860 z" fill="url(#deck)" stroke="#c7b489" stroke-opacity="0.18" stroke-width="2"/>
+    </g>
+    <!-- right laptop -->
+    <g transform="translate(1810,360)">
+      <rect x="0" y="0" width="640" height="400" rx="20" fill="url(#scr)" stroke="#c7b489" stroke-opacity="0.28" stroke-width="2"/>
+      <rect x="26" y="30" width="300" height="18" rx="9" fill="#c7b489" fill-opacity="0.22"/>
+      <rect x="26" y="70" width="588" height="10" rx="5" fill="#ffffff" fill-opacity="0.08"/>
+      <rect x="26" y="98" width="520" height="10" rx="5" fill="#ffffff" fill-opacity="0.06"/>
+      <rect x="26" y="150" width="588" height="120" rx="12" fill="#ffffff" fill-opacity="0.05"/>
+      <rect x="26" y="300" width="280" height="70" rx="10" fill="#c7b489" fill-opacity="0.10"/>
+      <rect x="322" y="300" width="292" height="70" rx="10" fill="#ffffff" fill-opacity="0.04"/>
+      <path d="M-40 400 h720 l70 74 h-860 z" fill="url(#deck)" stroke="#c7b489" stroke-opacity="0.18" stroke-width="2"/>
+    </g>
+    <!-- center laptop (front, larger) -->
+    <g transform="translate(760,250)">
+      <rect x="0" y="0" width="1080" height="620" rx="26" fill="url(#scrC)" stroke="#c7b489" stroke-opacity="0.40" stroke-width="3"/>
+      <rect x="40" y="44" width="360" height="26" rx="13" fill="#c7b489" fill-opacity="0.30"/>
+      <rect x="40" y="104" width="1000" height="14" rx="7" fill="#ffffff" fill-opacity="0.10"/>
+      <rect x="40" y="140" width="860" height="14" rx="7" fill="#ffffff" fill-opacity="0.07"/>
+      <!-- kpi tiles -->
+      <rect x="40" y="210" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+      <rect x="390" y="210" width="300" height="150" rx="16" fill="#c7b489" fill-opacity="0.12"/>
+      <rect x="740" y="210" width="300" height="150" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+      <rect x="66" y="240" width="120" height="16" rx="8" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="66" y="288" width="180" height="30" rx="8" fill="#c7b489" fill-opacity="0.38"/>
+      <rect x="416" y="240" width="120" height="16" rx="8" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="416" y="288" width="180" height="30" rx="8" fill="#c7b489" fill-opacity="0.48"/>
+      <rect x="766" y="240" width="120" height="16" rx="8" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="766" y="288" width="180" height="30" rx="8" fill="#c7b489" fill-opacity="0.38"/>
+      <rect x="40" y="400" width="1000" height="170" rx="16" fill="#ffffff" fill-opacity="0.035"/>
+      <path d="M40 545 L200 500 L360 520 L520 460 L680 485 L840 430 L1000 455" fill="none" stroke="#c7b489" stroke-opacity="0.55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-56 620 h1192 l86 84 h-1364 z" fill="url(#deck)" stroke="#c7b489" stroke-opacity="0.28" stroke-width="3"/>
+      <rect x="470" y="636" width="140" height="12" rx="6" fill="#ffffff" fill-opacity="0.12"/>
+    </g>
+  </g>
+  <!-- "Cover folgt" chip -->
+  <g transform="translate(1300,975)">
+    <rect x="-180" y="-42" width="360" height="84" rx="42" fill="#0b0d14" fill-opacity="0.86" stroke="#c7b489" stroke-opacity="0.5" stroke-width="2"/>
+    <circle cx="-118" cy="0" r="9" fill="#c7b489"/>
+    <text x="-92" y="9" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="1" fill="#efe6d2">Cover folgt</text>
+  </g>
+</svg>
