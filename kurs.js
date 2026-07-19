@@ -608,7 +608,7 @@
   #tsbau .bau-step.on .bau-step-n{background:#c7b489;color:#05060b}
 
   /* stage */
-  #tsbau .bau-stage{position:relative;height:392px;margin:0 auto}
+  #tsbau .bau-stage{position:relative;height:420px;margin:0 auto}
   #tsbau .bau-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,20px);opacity:0;pointer-events:none;transition:opacity .6s ease}
   #tsbau .bau-scene.on{opacity:1;pointer-events:auto}
 
@@ -616,7 +616,7 @@
   #tsbau .bau-med{border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}
   #tsbau .bau-hero{width:196px;height:196px;border-width:1.5px}
   #tsbau .bau-node{display:flex;flex-direction:column;align-items:center;gap:12px}
-  #tsbau .bau-tag{font-size:11px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62)}
+  #tsbau .bau-tag{font-size:11px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62);text-align:center}
   #tsbau .bau-tag b{color:#efe6d2;font-weight:700}
 
   /* price chip */
@@ -628,6 +628,7 @@
   #tsbau .bau-conn{position:relative;width:clamp(34px,5.5vw,80px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.04))}
   #tsbau .bau-conn::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
   #tsbau .bau-scene.on .bau-conn::after{animation:bauPulse 1.9s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau .bau-scene.on .bau-conn.rev::after{animation:bauPulseRev 1.9s cubic-bezier(.45,0,.25,1) infinite}
 
   /* SCENE 1 — Tauschen */
   #tsbau .bau-swap{position:relative;display:flex;align-items:center;gap:14px}
@@ -640,18 +641,6 @@
   #tsbau .bau-new{opacity:.35;transform:scale(.9);transition:none}
   #tsbau .bau-scene.on .bau-new{animation:bauGlow 3.4s ease-in-out infinite}
 
-  /* SCENE 3 — Schachteln */
-  #tsbau .bau-nest{display:flex;flex-direction:column;align-items:center;gap:0}
-  #tsbau .bau-nest .bau-med.bau-src{width:140px;height:140px;z-index:2}
-  #tsbau .bau-vline{width:2px;height:34px;background:linear-gradient(180deg,rgba(199,180,137,.7),rgba(199,180,137,.12));margin:14px 0}
-  #tsbau .bau-nest-row{display:flex;gap:16px;justify-content:center}
-  #tsbau .bau-nest-row .bau-med{width:80px;height:80px;opacity:0;transform:translateY(12px) scale(.78)}
-  #tsbau .bau-scene.on .bau-nest-row .bau-med{animation:bauPop .62s cubic-bezier(.34,1.56,.64,1) both}
-  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(1){animation-delay:.35s}
-  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(2){animation-delay:.52s}
-  #tsbau .bau-scene.on .bau-nest-row .bau-med:nth-child(3){animation-delay:.69s}
-  #tsbau .bau-scene.on .bau-nest .bau-src{animation:bauBreath 3.6s ease-in-out infinite}
-
   /* SCENE 2 — Mehrfach nutzen */
   #tsbau .bau-sat .bau-med{width:104px;height:104px;opacity:0;transform:scale(.8)}
   #tsbau .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
@@ -660,13 +649,30 @@
   #tsbau .bau-center .bau-med{width:150px;height:150px}
   #tsbau .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s ease-in-out infinite}
 
+  /* SCENE 3 — Schachteln (Fluss: Zutaten -> Pesto -> Gericht) */
+  #tsbau .bau-flow{flex-direction:column;gap:0}
+  #tsbau .bau-flow-row{display:flex;gap:14px;justify-content:center;align-items:center}
+  #tsbau .bau-flow .bau-nm{width:60px;height:60px;opacity:0;transform:translateY(12px) scale(.78)}
+  #tsbau .bau-scene.on .bau-nm{animation:bauPop .6s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(1){animation-delay:.25s}
+  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(2){animation-delay:.4s}
+  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(3){animation-delay:.55s}
+  #tsbau .bau-vline{width:2px;background:linear-gradient(180deg,rgba(199,180,137,.7),rgba(199,180,137,.12));height:22px;margin:9px 0}
+  #tsbau .bau-pesto{width:90px;height:90px}
+  #tsbau .bau-scene.on .bau-pesto{animation:bauBreath 3.6s ease-in-out infinite}
+  #tsbau .bau-assemble{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.3vw,15px)}
+  #tsbau .bau-dish{width:120px;height:120px}
+  #tsbau .bau-sm{width:54px;height:54px;opacity:0;transform:scale(.8)}
+  #tsbau .bau-scene.on .bau-side .bau-sm{animation:bauSatIn .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.75s}
+
   /* replay */
-  #tsbau .bau-foot{display:flex;justify-content:center;margin-top:30px}
+  #tsbau .bau-foot{display:flex;justify-content:center;margin-top:28px}
   #tsbau .bau-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .4s ease}
   #tsbau .bau-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
   #tsbau .bau-replay svg{width:15px;height:15px}
 
   @keyframes bauPulse{0%{left:0;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:100%;opacity:0}}
+  @keyframes bauPulseRev{0%{left:100%;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:0;opacity:0}}
   @keyframes bauSpin{0%,44%{transform:rotate(0)}56%,100%{transform:rotate(180deg)}}
   @keyframes bauDim{0%,40%{opacity:0}60%,100%{opacity:.55}}
   @keyframes bauGlow{0%,40%{opacity:.32;transform:scale(.9)}60%,100%{opacity:1;transform:scale(1)}}
@@ -675,7 +681,7 @@
   @keyframes bauBreath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}50%{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.14),0 0 34px rgba(199,180,137,.28)}}
 
   @media(max-width:820px){
-    #tsbau .bau-stage{height:auto;min-height:470px;display:flex;align-items:center;justify-content:center}
+    #tsbau .bau-stage{height:auto;min-height:480px;display:flex;align-items:center;justify-content:center}
     #tsbau .bau-scene{position:relative;inset:auto;width:100%;display:none;flex-direction:column;gap:14px}
     #tsbau .bau-scene.on{display:flex}
     #tsbau .bau-hero{width:150px;height:150px}
@@ -683,10 +689,13 @@
     #tsbau .bau-sat .bau-med{width:94px;height:94px}
     #tsbau .bau-swap{flex-direction:row}
     #tsbau .bau-swap .bau-med{width:78px;height:78px}
-    #tsbau .bau-nest .bau-med.bau-src{width:120px;height:120px}
-    #tsbau .bau-nest-row .bau-med{width:66px;height:66px}
+    #tsbau .bau-pesto{width:86px;height:86px}
+    #tsbau .bau-dish{width:110px;height:110px}
+    #tsbau .bau-flow .bau-nm{width:54px;height:54px}
+    #tsbau .bau-sm{width:50px;height:50px}
     #tsbau .bau-conn{width:2px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.5),rgba(199,180,137,.05))}
     #tsbau .bau-conn::after{display:none}
+    #tsbau .bau-assemble{gap:10px}
     #tsbau .bau-step-l{font-size:12px}
     #tsbau .bau-steps{gap:8px}
   }
@@ -694,7 +703,7 @@
     #tsbau .bau-wrap{opacity:1;transform:none}
     #tsbau .bau-scene *{animation:none!important}
     #tsbau .bau-new{opacity:1;transform:none}
-    #tsbau .bau-nest-row .bau-med,#tsbau .bau-sat .bau-med{opacity:1;transform:none}
+    #tsbau .bau-flow .bau-nm,#tsbau .bau-sm,#tsbau .bau-sat .bau-med{opacity:1;transform:none}
     #tsbau .bau-conn::after{display:none}
   }
 
@@ -838,7 +847,7 @@
         </div>
         <span class="bau-conn"></span>
         <div class="bau-node">
-          <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht">
+          <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.jpg" alt="Gericht">
           <div class="bau-chip"><span class="bau-chip-k">Wareneinsatz</span><span class="bau-chip-v" id="bauChip">4,80 €</span></div>
         </div>
       </div>
@@ -846,27 +855,33 @@
       <!-- SCENE 2 — Mehrfach nutzen -->
       <div class="bau-scene" data-i="1">
         <div class="bau-sat s1 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht"><span class="bau-tag">Pilz-Ravioli</span></div>
-        <span class="bau-conn"></span>
+        <span class="bau-conn rev"></span>
         <div class="bau-center bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b></span></div>
         <span class="bau-conn"></span>
         <div class="bau-sat s2 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg" alt="Gericht"><span class="bau-tag">Lachsfilet</span></div>
       </div>
 
-      <!-- SCENE 3 — Schachteln -->
-      <div class="bau-scene" data-i="2">
-        <div class="bau-nest">
-          <img class="bau-med bau-src" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto">
-          <span class="bau-vline"></span>
-          <div class="bau-nest-row">
-            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
-            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
-            <img class="bau-med" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg" alt="Walnüsse">
-          </div>
+      <!-- SCENE 3 — Schachteln: Zutaten -> Pesto (neuer Baustein) -> Gericht -->
+      <div class="bau-scene bau-flow" data-i="2">
+        <div class="bau-flow-row">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg" alt="Walnüsse">
+        </div>
+        <span class="bau-vline"></span>
+        <div class="bau-node"><img class="bau-med bau-pesto" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b> · neuer Baustein</span></div>
+        <span class="bau-vline"></span>
+        <div class="bau-assemble">
+          <div class="bau-node bau-side"><img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum"></div>
+          <span class="bau-conn"></span>
+          <div class="bau-node"><img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht"><span class="bau-tag"><b>Pilz-Ravioli</b> · Gericht</span></div>
+          <span class="bau-conn"></span>
+          <div class="bau-node bau-side"><img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan"></div>
         </div>
       </div>
     </div>
 
-    <p class="bau-sub" id="bauCap" style="max-width:660px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center"></p>
+    <p class="bau-sub" id="bauCap" style="max-width:720px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center"></p>
 
     <div class="bau-foot">
       <button class="bau-replay" id="bauReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
@@ -919,7 +934,7 @@
     var CAPS=[
       'Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt, der Preis rechnet sich neu.',
       'Eine einmal gebaute Sauce wandert in beliebig viele Gerichte. Du legst sie einmal an und nutzt sie überall.',
-      'Ein Baustein kann selbst aus Bausteinen bestehen: Das Pesto ist wieder aus eigenen Zutaten zusammengesetzt.'
+      'Ein Baustein kann selbst aus Bausteinen bestehen: Das Pesto ist wieder aus eigenen Zutaten zusammengesetzt und wird damit ein neuer Baustein. Aus allen Bausteinen kann man dann die Gerichte bauen.'
     ];
     var ADV=3600, reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
     var params=new URLSearchParams(location.search);
@@ -942,7 +957,7 @@
         else s.classList.remove('on');
       });
       if(cap) cap.textContent=CAPS[i];
-      if(chip){ if(i===0){ chip.textContent='4,80 €'; setTimeout(function(){ if(cur===0) countChip(4.80,4.55); },1500); } else chip.textContent=(i===0?'4,80 €':'4,55 €'); }
+      if(chip){ if(i===0){ chip.textContent='4,80 €'; setTimeout(function(){ if(cur===0) countChip(4.80,4.55); },1500); } else chip.textContent='4,55 €'; }
       if(!noauto && !manual){
         clearTimeout(timer);
         if(i<scenes.length-1) timer=setTimeout(function(){ show(i+1); }, ADV);
