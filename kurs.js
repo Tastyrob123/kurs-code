@@ -5312,7 +5312,7 @@
 (function(){
   if(window.__tsmiss) return; window.__tsmiss=true;
   var CSS=`
-  .page__inventurliste .tsm-h{text-align:center !important;color:#fff !important;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif !important;font-size:clamp(1.7rem,2.6vw,2.2rem) !important;font-weight:600 !important;letter-spacing:-.01em !important;line-height:1.2 !important;margin-top:72px !important;margin-bottom:16px !important}
+  .page__inventurliste .tsm-h{text-align:center !important;color:#fff !important;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif !important;font-size:clamp(1.9rem,4.4vw,2.9rem) !important;font-weight:600 !important;letter-spacing:-.01em !important;line-height:1.2 !important;margin-top:72px !important;margin-bottom:16px !important}
   .page__inventurliste .tsm-h .tsm-hg{color:#c7b489 !important}
   .page__inventurliste .tsm-i{max-width:820px;margin-left:auto !important;margin-right:auto !important;text-align:center !important;color:rgba(255,255,255,.62) !important}
   .page__inventurliste .tsm-mid{max-width:820px;margin-left:auto !important;margin-right:auto !important;margin-top:10px !important;text-align:center !important;color:#fff !important}
@@ -7558,7 +7558,7 @@
     #tsFlowRoot .tsflow-canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
     #tsFlowRoot .tsflow-inner{ position:relative; z-index:1; max-width:1080px; margin:0 auto; }
     #tsFlowRoot .tsflow-header{ text-align:center; margin-bottom:46px; }
-    #tsFlowRoot .tsflow-title{ font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif; font-size:clamp(27px,3.5vw,41px); font-weight:600; letter-spacing:-.02em; color:#fff; line-height:1.14; margin:0 0 54px; }
+    #tsFlowRoot .tsflow-title{ font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif; font-size:clamp(1.9rem,4.4vw,2.9rem); font-weight:600; letter-spacing:-.02em; color:#fff; line-height:1.14; margin:0 0 54px; }
     /* Intro-Textblock der Seite darueber: zentriert + etwas nach unten in den Zwischenraum */
     .tsflow-intro-block{ margin-top:70px !important; }
     .tsflow-intro-block, .tsflow-intro-block .notion-text, .tsflow-intro-block p, .tsflow-intro-block .notion-semantic-string{ text-align:center !important; }
@@ -9165,7 +9165,7 @@
   #tsrezsys .rs-head{text-align:center;margin:0 0 clamp(30px,4vw,50px)}
   #tsrezsys .rs-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
   #tsrezsys .rs-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsrezsys .rs-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.55rem,3.4vw,2.25rem);font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0;color:#fff}
+  #tsrezsys .rs-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0;color:#fff}
   #tsrezsys .rs-title .g{color:#c7b489}
   #tsrezsys .stage{position:relative;width:100%;aspect-ratio:1200/380}
   #tsrezsys svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -9459,7 +9459,7 @@
   '#tsbrille *{box-sizing:border-box}'+
   '#tsbrille .tb-head{text-align:center;margin:0 0 6px}'+
   '#tsbrille .tb-eye{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:'+GOLD+';margin:0 0 12px}'+
-  '#tsbrille .tb-title{margin:0;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;line-height:1.06;letter-spacing:-.02em;font-size:clamp(1.9rem,4.6vw,2.9rem)}'+
+  '#tsbrille .tb-title{margin:0;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;line-height:1.06;letter-spacing:-.02em;font-size:clamp(1.9rem,4.4vw,2.9rem)}'+
   '#tsbrille .tb-title .g{color:'+GOLD+'}'+
   '#tsbrille .tb-sub{max-width:600px;margin:16px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.92)}'+
   /* Bühne */
@@ -9749,7 +9749,7 @@
 #ts11page .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(199,180,137,.7)}
 #ts11page .ts-gold{color:var(--gold)}
 #ts11page p{margin-top:0}
-#ts11page .intro{max-width:880px;margin:26px auto 0;text-align:center;color:#fff;font-size:18.5px;line-height:1.68;padding:0 24px}
+#ts11page .intro{max-width:880px;margin:26px auto 0;text-align:center;color:rgba(255,255,255,.86);font-size:15.5px;line-height:1.62;padding:0 24px}
 #ts11page section{padding:76px 0 0}
 #ts11page .sec-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
 #ts11page .sec-head .eyebrow{justify-content:center;margin-bottom:12px;text-shadow:none;animation:none}
