@@ -14377,3 +14377,79 @@ var TSISL_ZUG_SCHLUESSEL=[
     next:{ href:'/franchise-rulebook', label:'Franchise Rulebook' }
   };
 })();
+
+/* VFL Insel — Franchise Rulebook (3 Warenkörbe) */
+(function(){
+  var C=function(tag,name,typeLabel,icon,val,overlay,ex,extra){var o={tag:tag,name:name,typeLabel:typeLabel,icon:icon,imgLabel:typeLabel,val:val,overlay:overlay,ex:ex};if(extra)for(var k in extra)o[k]=extra[k];return o;};
+  (window.VFL_LESSONS=window.VFL_LESSONS||{})['franchise-rulebook']={
+    hero:{ eyebrow:'Vision Frame · Standort & Skalierung', titleHtml:'Franchise <span class="g">Rulebook</span>' },
+    intro:[
+      'Ein Franchise-System entsteht in dem Moment, in dem dein Betrieb zur <b>Blaupause</b> wird — aufgeschrieben so präzise, dass ein Fremder ihn an einem anderen Ort identisch aufbaut. Genau das baust du hier: kein Ordner mit Absichtserklärungen, sondern ein Regelwerk, das prüfbar ist.',
+      'Drei Datenbanken bilden den ganzen Kreislauf ab. Das Regelwerk legt fest, was gilt. Die Prüfungen halten fest, ob es eingehalten wird. Die Verstöße-Datenbank regelt, was bei einem Bruch passiert — in klaren Stufen statt aus dem Bauch. Der Trick liegt in der Verkettung: Jeder Verstoß hängt an einer konkreten Regel und an einer konkreten Prüfung. So wird aus deinem Wissen im Kopf ein System, das ohne dich funktioniert.'
+    ],
+    anim1:{ title:'Die Kette der <span class="g">drei Datenbanken</span>', lead:'Kein loser Stapel, sondern ein geschlossener Kreis — von der Regel über die Kontrolle zur Konsequenz und per Referenz zurück zur Regel.', nodes:[
+      {ic:'⚖️',t:'Regelwerk',s:'KUE-001 — was gilt.'},
+      {ic:'✅',t:'Prüfung',s:'Greift die Regel-ID auf.'},
+      {ic:'⚠️',t:'Verstoß',s:'Koppelt zurück an Regel und Prüfung.'}
+    ]},
+    video:{ heading:'Das Regelwerk <span class="g">in Notion</span>', text:'Ein kurzer Durchlauf zeigt, wie die drei Datenbanken über Text-Referenzen zusammenhängen — von der Regel-ID über die Prüfung bis zum abgestuften Verstoß.', icon:'▷', phLabel:'Video folgt' },
+    shops:[
+      { eyebrow:'⚖️ Datenbank 1 von 3 · Das Regelwerk', title:'Deine Verfassung. <span class="g">Regel für Regel.</span>', sub:'Die verbindliche Sammlung aller Regeln — messbar formuliert, mit eindeutiger ID. Um die Tabelle anzulegen: / drücken → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Aktions-Button an, über den du die Regelwerk-Datenbank in dein Handbuch einfügst. Ein Klick, und das Grundgerüst steht.','„⚖️ Regelwerk anlegen"'),
+        C('2','Datenbank + Regel-ID','Titel-Spalte','⚖️','1 DB','Erstellt die Datenbank „Franchise-Regelwerk" mit der Titelspalte „Regel-ID". Jede Regel bekommt einen kurzen, eindeutigen Code, damit Prüfungen und Verstöße sauber darauf verweisen. Halte das Schema knapp und konsistent.','KUE-001'),
+        C('3','Regeltext','Text','✎','Text','Der volle Wortlaut. Formuliere so, dass ein Prüfer ohne Rückfrage entscheiden kann, ob die Regel erfüllt ist. Messbar statt vage.','„Fritteuse bei 175 °C, Öl-Wechsel alle 3 Tage."'),
+        C('4','Regeltyp','Auswahl · 3','◧','3 Optionen','Legt fest, wie die Regel wirkt: Pflicht (muss getan werden), Verbot (darf nie), Genehmigungspflichtig (nur mit Freigabe).','Pflicht'),
+        C('5','Kategorie','Auswahl · 8','◧','8 Optionen','Ordnet die Regel einem Betriebsbereich zu — Küche, Hygiene, Service und so weiter. So filterst du das Regelwerk nach Verantwortungsbereich.','Küche'),
+        C('6','Kontrollart','Auswahl · 3','◧','3 Optionen','Wie prüfst du die Einhaltung: per Audit, über eine KPI-Kennzahl oder per Sichtprüfung vor Ort. Bestimmt, wer wie kontrolliert.','Sichtprüfung'),
+        C('7','Konsequenz bei Verstoß','Text','✎','Text','Die kurze Ansage, was ein Bruch dieser Regel auslöst. Die volle Eskalation mit Stufen steht später in der Verstöße-Datenbank.','„Verwarnung, bei Wiederholung Nachschulung"'),
+        C('8','Gilt für Store-Typ','Text','🏬','Text','Für welche Betriebstypen die Regel greift. Bei „Alle" gilt sie systemweit; bei Sonderfällen trägst du die konkreten Typen ein.','Alle'),
+        C('9','Verknüpfte SOPs','Text','📄','Text','Verweis auf die Arbeitsanweisung, die im Detail erklärt, wie die Regel umgesetzt wird. Verbindet die Regel mit dem Wie.','„SOP-Küche-04: Fritteuse"')
+      ]},
+      { eyebrow:'✅ Datenbank 2 von 3 · Die Prüfungen', title:'Die Kontrolle. <span class="g">Prüfung für Prüfung.</span>', sub:'Jede Standort-Prüfung mit Datum, Prüfer, Compliance-Wert und Rückverweis aufs Regelwerk. / drücken → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Button an, mit dem du die Prüfungs-Datenbank ins Handbuch einsetzt. Damit startet dein Kontroll-Protokoll.','„✅ Prüfungen anlegen"'),
+        C('2','Datenbank + Standort','Titel-Spalte','✅','1 DB','Erstellt die Datenbank „Franchise-Prüfungen" mit der Titelspalte „Standort". Verstöße verweisen später auf genau diese Prüfung, also benenne sie eindeutig.','Hamburg-Altona'),
+        C('3','Status','Status · 5','◔','Status','Der Fortschritt der Prüfung — von Geplant über In Prüfung bis Freigegeben. Die Gruppen To-do / In Arbeit / Abgeschlossen ordnen deinen Prüf-Workflow.','In Prüfung'),
+        C('4','Prüfungsart','Auswahl · 3','◧','3 Optionen','Der Anlass: Onboarding beim Start eines Standorts, Regelbetrieb als Routine, Sonderprüfung bei Verdacht oder Beschwerde.','Regelbetrieb'),
+        C('5','Prüfungsdatum','Datum','📅','Datum','Wann die Prüfung stattfindet. Nutze bei Bedarf eine Zeitspanne, wenn sich die Prüfung über mehrere Tage zieht.','15.07.2026'),
+        C('6','Frist','Datum','📅','Datum','Bis wann Nacharbeiten oder die Prüfung selbst erledigt sein müssen. Der Termin, an dem du nachhakst.','22.07.2026'),
+        C('7','Prüfer','Person','👤','Person','Wer die Prüfung durchführt. Ein oder mehrere Notion-Nutzer — so ist Verantwortung immer zugeordnet.','@Robert Reff'),
+        C('8','Gesamt-Compliance','Zahl · %','◎','%','Der Erfüllungsgrad in Prozent. Du trägst den Wert ein; Notion zeigt ihn als Prozent. So siehst du auf einen Blick, wie gut ein Standort läuft.','92 %'),
+        C('9','Kritische Verstöße','Zahl','🔴','Anzahl','Wie viele kritische Verstöße die Prüfung gefunden hat. Eine harte Zahl, die sofort Priorität signalisiert.','1'),
+        C('10','Maßnahmen erforderlich','Auswahl · 2','◧','Ja/Nein','Ein Ja/Nein-Flag: Muss aus dieser Prüfung etwas folgen? Bei Ja wandern die Punkte in die Verstöße-Datenbank.','Ja'),
+        C('11','Referenzierte Regeln','Text','🔗','Regel-IDs','Die Regel-IDs aus dem Regelwerk, die diese Prüfung abgedeckt hat. Der Faden zurück zu Datenbank 1.','KUE-001, HYG-003'),
+        C('12','Notizen','Text','🗒','Text','Platz für Beobachtungen, die nicht in ein Feld passen — Kontext, Auffälligkeiten, Absprachen vor Ort.','„Kühlhaus-Temperatur grenzwertig"')
+      ]},
+      { eyebrow:'⚠️ Datenbank 3 von 3 · Verstöße & Maßnahmen', title:'Die Konsequenz. <span class="g">Fall für Fall.</span>', sub:'Jeder Regelbruch mit Schweregrad, Eskalationsstufe, Maßnahme und Frist — rückverknüpft an Regel und Prüfung. / → „Datenbank – Inline".', unit:'Bausteine', money:false, cta:'In den Einkaufswagen', cards:[
+        C('1','Button anlegen','Setup','＋','Aktion','Legt den Button an, mit dem du die Verstöße-Datenbank einfügst. Sie macht Konsequenzen nachvollziehbar statt willkürlich.','„⚠️ Verstöße anlegen"'),
+        C('2','Datenbank + Verstoß-ID','Titel-Spalte','⚠️','1 DB','Erstellt die Datenbank „Verstöße & Maßnahmen" mit der Titelspalte „Verstoß-ID". Jeder Verstoß bekommt einen eindeutigen Code, damit du ihn in Berichten und Gesprächen klar benennen kannst.','V-2026-014'),
+        C('3','Betroffene Regel','Text','⚖️','Regel-ID','Die Regel-ID aus dem Regelwerk, die gebrochen wurde. Der Rückverweis auf Datenbank 1 — so ist jeder Verstoß an eine konkrete Regel gebunden.','KUE-001'),
+        C('4','Prüfungs-Referenz','Text','✅','Text','Die Prüfung, in der der Verstoß auffiel. Verbindet den Fall mit Datenbank 2, damit die Herkunft klar ist.','Hamburg-Altona (15.07.2026)'),
+        C('5','Standort','Text','🏬','Text','Wo der Verstoß passiert ist. Als Freitext, damit auch Bereiche innerhalb eines Standorts genannt werden können.','Hamburg-Altona / Küche'),
+        C('6','Schweregrad','Auswahl · 4','◧','4 Stufen','Wie gravierend der Bruch ist — von Gering bis Kritisch. Steuert, wie schnell und hart reagiert wird.','Hoch'),
+        C('7','Konsequenzstufe','Auswahl · 4','▲','4 Stufen','Die Sanktion in vier Eskalationsstufen: Verwarnung, Nachschulung, Geldstrafe, Lizenzentzug. Macht Konsequenzen berechenbar.','Stufe 2: Nachschulung'),
+        C('8','Maßnahme','Text','✎','Text','Die konkrete Korrektur, die den Verstoß behebt. Kein „wird bearbeitet", sondern eine benennbare Handlung.','„Küchenteam-Schulung Fritteuse bis KW30"'),
+        C('9','Verantwortlich','Person','👤','Person','Wer die Behebung übernimmt. Ein klarer Name statt einer diffusen Zuständigkeit.','@Standortleitung'),
+        C('10','Festgestellt am','Datum','📅','Datum','Wann der Verstoß entdeckt wurde. Der Startpunkt der Frist-Rechnung.','15.07.2026'),
+        C('11','Frist zur Behebung','Datum','📅','Datum','Bis wann der Verstoß behoben sein muss. Der Termin, gegen den der Status läuft.','29.07.2026'),
+        C('12','Status','Status · 6','◔','Status','Der Bearbeitungsstand — von Erfasst über In Bearbeitung bis Behoben. Zeigt, welche Fälle noch offen sind.','In Bearbeitung'),
+        C('13','Notizen','Text','🗒','Text','Zusätzlicher Kontext zum Fall, der in kein Feld passt.','„Zweiter Vorfall in 30 Tagen"')
+      ]}
+    ],
+    ergebnis:{ heading:'Ein System, <span class="g">das ohne dich läuft</span>', text:'Am Ende hast du einen geschlossenen Kreislauf: Regeln, die messbar sind, Prüfungen, die sie kontrollieren, und Verstöße, die in festen Stufen geahndet werden — jeder rückverfolgbar an seine Regel und seine Prüfung.', icon:'▦', phLabel:'Ergebnis-Ansicht folgt' },
+    anim2:{ title:'Die vier <span class="g">Eskalationsstufen</span>', lead:'Konsequenzen sind kein Zufall und keine Laune, sondern eine feste Leiter — jeder weiß vorher, was ein Bruch kostet.', nodes:[
+      {ic:'⚠️',t:'Stufe 1',s:'Verwarnung.'},
+      {ic:'📚',t:'Stufe 2',s:'Nachschulung.'},
+      {ic:'💸',t:'Stufe 3',s:'Geldstrafe.'},
+      {ic:'⛔',t:'Stufe 4',s:'Lizenzentzug.'}
+    ]},
+    tip:{ icon:'💡', heading:'Erst die Regel-IDs, dann alles andere', text:'Lege dein ID-Schema fest, bevor du die erste Regel schreibst — zum Beispiel KUE-, HYG-, SVC- plus laufende Nummer. Die IDs sind der Faden, an dem später Prüfungen und Verstöße hängen. Ein sauberes Schema am Anfang spart dir das Aufräumen, wenn die Tabelle auf hundert Regeln wächst.' },
+    learnings:[
+      'Eine Regel taugt nur, wenn ein Prüfer ohne Rückfrage entscheiden kann, ob sie erfüllt ist — messbar formulieren, nicht wünschen.',
+      'Die Regel-ID ist der Anker des ganzen Systems; über sie hängen Prüfungen und Verstöße rückverfolgbar an der richtigen Regel.',
+      'Drei Datenbanken bilden den vollen Kreislauf ab: Regel setzen, Einhaltung prüfen, Verstoß mit fester Stufe ahnden.',
+      'Konsequenzen in vier Stufen zu staffeln macht Kontrolle berechenbar — jeder weiß vorher, was ein Bruch auslöst.',
+      'Text-Referenzen statt nativer Relationen halten die drei Tabellen einfach baubar und einzeln kopierbar.'
+    ],
+    next:{ href:'/eventkonzepte', label:'Eventkonzepte' }
+  };
+})();
