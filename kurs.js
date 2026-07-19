@@ -12186,3 +12186,201 @@
   document.addEventListener("DOMContentLoaded", mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   vision-frame — Verteiler-/Landing-Ebene (Modul 2, Abschluss)
+   Struktureller Zwilling zu operations-area (#tsops): keine einzelne
+   DB, sondern 13 Informationsinseln, thematisch in 4 Bloecke gruppiert
+   (Identitaet & Marke · Markt & Positionierung · Standort & Skalierung ·
+   Angebot & Umsatz). Hero mit "Vision-Aufstiegskurve" (Richtung ->
+   Skalierung, greift die Meilenstein-Sprache auf) + 4 Themen-Chips +
+   Einleitung + gruppiertes Kachel-Grid (#tslmod-Muster, vf-/tsvf-).
+   Klick auf eine Kachel -> jeweilige Insel-Lektionsseite (Slugs folgen).
+   Eigene Praefixe (tsvf/vf-) -> kollisionsfrei. Titel-Font "Lineal Web".
+   ============================================================ */
+(function(){
+  if(window.__tsvf) return; window.__tsvf=true;
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var GLOW="199,180,137";
+  var P=".page__vision-frame-abschluss-des-building-prozesses";
+  function on(){ return /\/vision-frame-abschluss-des-building-prozesses\/?$/.test(location.pathname); }
+
+  /* [roem, name, count] */
+  var GROUPS=[
+   ['I','Identität & Marke','4 Inseln'],
+   ['II','Markt & Positionierung','3 Inseln'],
+   ['III','Standort & Skalierung','3 Inseln'],
+   ['IV','Angebot & Umsatz','3 Inseln']
+  ];
+  /* [num, gruppe, kicker, titel, beschreibung, meta, href] */
+  var CARDS=[
+   ['01',0,'Fundament','Vision & Werte','Vision, Mission und die Werte, die jede Entscheidung im Betrieb tragen.','1 DB','/vision-werte'],
+   ['02',0,'Marke','Unternehmen & Markenidentität','Name, Tonalität, Logo, Farbwelt — die Identität, an der dich Gäste wiedererkennen.','1 DB','/markenidentitaet'],
+   ['03',0,'Menschen','Team & Kultur Guidelines','Wie ihr zusammenarbeitet: Kultur, Haltung und Guidelines für dein Team.','1 DB','/team-kultur'],
+   ['04',0,'Raum','Interieur Design','Vom Material bis zum Möbel — wie dein Raum die Marke spürbar macht.','1 DB','/interieur-design'],
+   ['05',1,'Gäste','Zielgruppenanalyse','Segmente, Bedürfnisse und Motive deiner Gäste — datenbasiert erfasst.','1 DB','/zielgruppenanalyse'],
+   ['06',1,'Wettbewerb','Konkurrenzanalyse','Mitbewerber, Stärken und Lücken — und dein Platz im Markt.','1 DB','/konkurrenzanalyse'],
+   ['07',1,'Wissen','Gastronomie Lexikon','Das Nachschlagewerk: Begriffe, Kennzahlen und Standards der Branche an einem Ort.','1 DB','/gastronomie-lexikon'],
+   ['08',2,'Standort','Standortanalyse','Lage, Frequenz, Umfeld und Potenzial — im strukturierten Check, bevor du unterschreibst.','1 DB','/standortanalyse'],
+   ['09',2,'Wachstum','Expansioncenter','Der Maschinenraum der Skalierung: Pipeline, Projekte, Partner, Meilensteine, Risiken und Capex.','6 DBs','/expansioncenter'],
+   ['10',2,'System','Franchise Rulebook','Dein Betrieb als Blaupause: Regelwerk, Prüfungen und Maßnahmen für saubere Vervielfältigung.','3 DBs','/franchise-rulebook'],
+   ['11',3,'Event','Eventkonzepte','Anlässe, die verkaufen: durchdachte Eventformate als eigene Umsatzsäule.','1 DB','/eventkonzepte'],
+   ['12',3,'Service','Catering','Deine Küche außer Haus: Catering-Angebote sauber kalkuliert und organisiert.','1 DB','/catering'],
+   ['13',3,'Produkt','Merch // Produkte','Über den Teller hinaus: Merchandise und Eigenprodukte als zusätzliche Einnahmequelle.','1 DB','/merch-produkte']
+  ];
+
+  var CSS=`
+  ${P}{--vf-beige:#c7b489;--vf-display:"Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--vf-title:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;--vf-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;--vf-muted:#e1e1e1;}
+  /* ---- HERO ---- */
+  ${P} .vf-hero{position:relative;width:min(1180px,94vw);margin:74px auto 4px;text-align:center;isolation:isolate;}
+  ${P} .vf-hero__logo{display:block;width:58px;height:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:vfRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;}
+  ${P} .vf-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--vf-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--vf-beige);margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95);animation:vfRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;}
+  ${P} .vf-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--vf-beige);box-shadow:0 0 12px rgba(${GLOW},.7);animation:vfBeat 3.2s ease-in-out infinite;}
+  ${P} .vf-hero__title{margin:0;font-family:var(--vf-display);font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-wrap:balance;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9);animation:vfRise 800ms cubic-bezier(.16,1,.3,1) 220ms both;}
+  ${P} .vf-hero__title .vf-gold{color:var(--vf-beige);}
+  ${P} .vf-hero__sub{margin:18px auto 0;max-width:660px;font:400 1.06rem/1.6 var(--vf-sans);color:rgba(255,255,255,.72);animation:vfRise 850ms cubic-bezier(.16,1,.3,1) 300ms both;}
+  /* ---- VISION-AUFSTIEGSKURVE (Richtung -> Skalierung) ---- */
+  ${P} .vf-pulse{position:relative;width:min(1180px,94vw);margin:24px auto 2px;height:82px;opacity:0;animation:vfRise 1s ease 420ms both;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+  ${P} .vf-pulse svg{display:block;width:100%;height:100%;}
+  ${P} .vf-pulse .vf-base{fill:none;stroke:rgba(${GLOW},.16);stroke-width:2;}
+  ${P} .vf-pulse .vf-run{fill:none;stroke:var(--vf-beige);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70 2400;filter:drop-shadow(0 0 6px rgba(${GLOW},.65));animation:vfDash 3.6s linear infinite;}
+  ${P} .vf-pulse .vf-node{fill:var(--vf-beige);opacity:.9;filter:drop-shadow(0 0 6px rgba(${GLOW},.85));animation:vfNode 3.2s ease-in-out infinite;}
+  ${P} .vf-pulse .vf-node.n2{animation-delay:.5s}
+  ${P} .vf-pulse .vf-node.n3{animation-delay:1s}
+  ${P} .vf-pulse .vf-node--end{fill:#fff;opacity:1;filter:drop-shadow(0 0 9px rgba(${GLOW},.95)) drop-shadow(0 0 3px rgba(255,255,255,.9));}
+  ${P} .vf-pulse .vf-dot{fill:#fff;filter:drop-shadow(0 0 7px rgba(${GLOW},.95));}
+  /* ---- CHIP-TICKER (die 4 Themen-Bloecke) ---- */
+  ${P} .vf-chips{display:flex;flex-wrap:wrap;gap:8px 10px;justify-content:center;width:min(900px,92vw);margin:8px auto 0;opacity:0;animation:vfRise 1s ease 520ms both;}
+  ${P} .vf-chip{font:600 11px/1 var(--vf-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:7px 13px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(255,255,255,.02);animation:vfChip 7s ease-in-out infinite;}
+  ${P} .vf-chip:nth-child(1){animation-delay:0s}
+  ${P} .vf-chip:nth-child(2){animation-delay:.6s}
+  ${P} .vf-chip:nth-child(3){animation-delay:1.2s}
+  ${P} .vf-chip:nth-child(4){animation-delay:1.8s}
+  /* ---- INTRO ---- */
+  ${P} .vf-intro{width:min(820px,92vw);margin:40px auto 6px;text-align:center;}
+  ${P} .vf-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:var(--vf-muted);}
+  ${P} .vf-intro p .em{color:#fff;}
+  /* ---- GRUPPEN ---- */
+  #tsvf{width:min(1320px,95vw);margin:30px auto 30px;font-family:var(--vf-sans);color:#fff}
+  #tsvf *{box-sizing:border-box}
+  #tsvf .vf-group{width:100%;margin:0 auto}
+  #tsvf .vf-group-head{display:flex;align-items:center;gap:14px;width:100%;margin:40px auto 20px}
+  #tsvf .vf-group-head::before,#tsvf .vf-group-head::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)}
+  #tsvf .vf-gk{font:600 .72rem/1 var(--vf-sans);letter-spacing:.22em;color:rgba(${GLOW},.85)}
+  #tsvf .vf-gn{font-family:var(--vf-title);font-weight:600;font-size:1.04rem;letter-spacing:-.005em;color:#fff;white-space:nowrap}
+  #tsvf .vf-gc{font:600 .58rem/1 var(--vf-sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap}
+  /* ---- GRID (Klon #tslmod, CSS-Cover) ---- */
+  #tsvf .vf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  #tsvf a.vf-card{position:relative;display:block;overflow:hidden;text-align:center;text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;border-radius:16px;padding:32px 24px 28px;min-height:230px;background:#04050a;border:1px solid rgba(255,255,255,.06);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);will-change:transform,box-shadow;transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
+  #tsvf .vf-cover{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;background:radial-gradient(120% 92% at 50% 0%,rgba(${GLOW},.10) 0%,rgba(${GLOW},.03) 34%,rgba(4,5,10,0) 62%),#04050a;pointer-events:none}
+  #tsvf .vf-cover::before{content:attr(data-n);position:absolute;right:-6px;bottom:-30px;font:600 8.4rem/1 var(--vf-display);color:rgba(255,255,255,.035);letter-spacing:-.04em;pointer-events:none}
+  #tsvf .vf-cover::after{content:"";position:absolute;top:0;left:22px;right:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(${GLOW},.5),transparent)}
+  #tsvf .vf-num,#tsvf .vf-logo,#tsvf .vf-k,#tsvf .vf-h,#tsvf .vf-t,#tsvf .vf-meta{position:relative;z-index:2}
+  #tsvf a.vf-card.on{opacity:1;transform:translateY(0)}
+  #tsvf a.vf-card:hover{transform:translateY(-4px);border-color:rgba(${GLOW},.28);box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16);animation:vfHb 3.2s ease-in-out infinite}
+  #tsvf a.vf-card:focus-visible{outline:2px solid rgba(${GLOW},.7);outline-offset:4px}
+  #tsvf .vf-num{position:absolute;top:24px;right:24px;font-size:.7rem;font-weight:500;letter-spacing:.2em;color:rgba(${GLOW},.55)}
+  #tsvf .vf-logo{display:block;height:32px;width:auto;margin:2px auto 16px}
+  #tsvf .vf-k{display:block;font-size:.56rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:9px}
+  #tsvf .vf-h{font-family:var(--vf-title);font-size:1.22rem;font-weight:600;letter-spacing:-.012em;line-height:1.16;color:#fff;margin:0 0 11px}
+  #tsvf .vf-t{color:rgba(255,255,255,.66);font-size:.84rem;line-height:1.55;margin:0 auto 14px;max-width:32ch}
+  #tsvf .vf-meta{display:inline-block;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(${GLOW},.72);border:1px solid rgba(${GLOW},.22);border-radius:999px;padding:5px 11px}
+  @keyframes vfHb{0%{box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16)}20%{box-shadow:0 8px 26px rgba(${GLOW},.34),0 0 52px rgba(${GLOW},.34)}40%{box-shadow:0 6px 20px rgba(${GLOW},.18),0 0 30px rgba(${GLOW},.18)}60%{box-shadow:0 7px 24px rgba(${GLOW},.28),0 0 44px rgba(${GLOW},.26)}100%{box-shadow:0 6px 22px rgba(${GLOW},.20),0 0 40px rgba(${GLOW},.16)}}
+  @keyframes vfRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes vfBeat{0%,72%,100%{transform:scale(1);opacity:.85}12%{transform:scale(1.5);opacity:1}30%{transform:scale(1.05);opacity:.9}}
+  @keyframes vfDash{from{stroke-dashoffset:2470}to{stroke-dashoffset:0}}
+  @keyframes vfNode{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+  @keyframes vfChip{0%,100%{color:rgba(255,255,255,.42);border-color:rgba(255,255,255,.09)}50%{color:var(--vf-beige);border-color:rgba(${GLOW},.34)}}
+  @media(max-width:980px){#tsvf .vf-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){#tsvf .vf-grid{grid-template-columns:1fr}#tsvf .vf-gn{white-space:normal}${P} .vf-hero__title{font-size:clamp(1.9rem,10vw,2.8rem)}}
+  @media(prefers-reduced-motion:reduce){
+    ${P} .vf-hero__logo,${P} .vf-hero__eyebrow,${P} .vf-hero__eyebrow::before,${P} .vf-hero__title,${P} .vf-hero__sub,${P} .vf-pulse,${P} .vf-pulse .vf-run,${P} .vf-pulse .vf-node,${P} .vf-chips,${P} .vf-chip,#tsvf a.vf-card{animation:none!important}
+    #tsvf a.vf-card{opacity:1;transform:none}
+    ${P} .vf-pulse{opacity:1}
+  }`;
+
+  function injectCSS(){ if(document.getElementById("tsvf-css"))return; var s=document.createElement("style"); s.id="tsvf-css"; s.textContent=CSS; document.head.appendChild(s); }
+
+  var CURVE_D="M0 60 H300 L380 44 L560 46 L660 28 L860 30 L960 14 L1060 15 H1180";
+  function buildHero(sc){
+    if(sc.querySelector(".vf-hero")) return;
+    var hero=document.createElement("div"); hero.className="vf-hero";
+    hero.innerHTML=
+      '<img class="vf-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+      '<div class="vf-hero__eyebrow">Modul 2 · Richtung, Identität &amp; Skalierung</div>'+
+      '<h1 class="vf-hero__title">Vision <span class="vf-gold">Frame</span></h1>'+
+      '<p class="vf-hero__sub">Der Abschluss des Building-Prozesses — die Ebene über den Zahlen: Marke, Markt, Skalierung und Angebot. Nicht was du einträgst, sondern worauf alles hinausläuft.</p>'+
+      '<div class="vf-pulse"><svg viewBox="0 0 1180 82" preserveAspectRatio="none" aria-hidden="true">'+
+        '<path class="vf-base" d="'+CURVE_D+'"/>'+
+        '<path class="vf-run" id="vfCurvePath" d="'+CURVE_D+'"/>'+
+        '<circle class="vf-node n1" cx="380" cy="44" r="3.2"/>'+
+        '<circle class="vf-node n2" cx="660" cy="28" r="3.2"/>'+
+        '<circle class="vf-node n3" cx="960" cy="14" r="3.2"/>'+
+        '<circle class="vf-node vf-node--end" cx="1060" cy="15" r="4.6"/>'+
+        '<circle class="vf-dot" r="3.4"><animateMotion dur="3.6s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#vfCurvePath"/></animateMotion></circle>'+
+      '</svg></div>'+
+      '<div class="vf-chips">'+GROUPS.map(function(g){ return '<span class="vf-chip">'+g[1]+'</span>'; }).join('')+'</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+  }
+
+  function cardHTML(c){
+    return '<a class="vf-card" href="'+c[6]+'">'+
+      '<span class="vf-cover" data-n="'+c[0]+'" aria-hidden="true"></span>'+
+      '<span class="vf-num">'+c[0]+'</span>'+
+      '<img class="vf-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy">'+
+      '<span class="vf-k">'+c[2]+'</span>'+
+      '<h3 class="vf-h">'+c[3]+'</h3>'+
+      '<p class="vf-t">'+c[4]+'</p>'+
+      '<span class="vf-meta">'+c[5]+'</span>'+
+    '</a>';
+  }
+
+  function buildBody(sc){
+    if(document.getElementById("tsvf")) return;
+    var box=document.createElement("div"); box.id="tsvf";
+    var groupsHTML=GROUPS.map(function(g,gi){
+      var cards=CARDS.filter(function(c){ return c[1]===gi; }).map(cardHTML).join('');
+      return '<section class="vf-group">'+
+        '<div class="vf-group-head"><span class="vf-gk">'+g[0]+'</span><span class="vf-gn">'+g[1]+'</span><span class="vf-gc">'+g[2]+'</span></div>'+
+        '<div class="vf-grid">'+cards+'</div>'+
+      '</section>';
+    }).join('');
+    box.innerHTML=
+      '<div class="vf-intro"><p>Anders als die Datenbanken davor ist der <span class="em">Vision Frame</span> keine Tabelle, die du füllst — sondern das Bild vom Ganzen: wofür dein Betrieb steht, wen er erreicht und wo er hinwächst. Dreizehn eigenständige Inseln, von Vision und Werten über Markt- und Standortanalyse bis zu Expansion, Franchise und Angebot. Wähle einen Bereich, um tiefer einzusteigen.</p></div>'+
+      groupsHTML;
+    var hero=sc.querySelector(".vf-hero");
+    if(hero && hero.nextSibling) sc.insertBefore(box, hero.nextSibling);
+    else { var nr=sc.querySelector(".notion-root"); if(nr) sc.insertBefore(box, nr); else sc.appendChild(box); }
+    stagger(box);
+  }
+
+  function stagger(box){
+    var cards=[].slice.call(box.querySelectorAll(".vf-card"));
+    var done=false;
+    function reveal(){
+      if(done) return; done=true;
+      cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.05)+'s'; c.classList.add('on'); setTimeout(function(){ c.style.transitionDelay=''; }, i*50+900); });
+    }
+    var io=new IntersectionObserver(function(e){ if(e[0].isIntersecting){ reveal(); io.disconnect(); } },{threshold:.05});
+    io.observe(box);
+    /* Self-healing: sofort einblenden, wenn die Sektion schon im Viewport steht, + harter Fallback */
+    var r=box.getBoundingClientRect(), vh=window.innerHeight||800;
+    if(r.top < vh && r.bottom > 0){ requestAnimationFrame(reveal); }
+    setTimeout(reveal, 1200);
+  }
+
+  function mount(){
+    if(!on()) return;
+    injectCSS();
+    var sc=document.querySelector(".super-content"); if(!sc) return;
+    buildHero(sc);
+    buildBody(sc);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
