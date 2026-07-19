@@ -842,13 +842,21 @@
     T(function(){ root.__playing=false; }, 3600);
   }
 
+  function ensureWk(){
+    /* Anker fuer den Warenkorb (tsshop mountet an #tskmwk). Robust: eigener Guard auf #tskmwk,
+       nicht am #tskm-Guard haengend -> falls super.so nur den Anker wegraeumt, wird er neu angelegt. */
+    if(document.getElementById('tskmwk')) return;
+    var after=document.getElementById('tskm')||document.getElementById('tskm-intro');
+    if(after&&after.parentNode){ var wk=document.createElement('div'); wk.id='tskmwk'; after.parentNode.insertBefore(wk, after.nextSibling); }
+  }
   function mount(){
     if(!on()){ var e=document.getElementById('tskm'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    ensureWk();
     if(document.getElementById('tskm')) return;
     var intro=document.getElementById('tskm-intro'); if(!intro) return;
     var root=build();
     intro.parentNode.insertBefore(root, intro.nextSibling);
-    if(!document.getElementById('tskmwk')){ var wk=document.createElement('div'); wk.id='tskmwk'; root.parentNode.insertBefore(wk, root.nextSibling); }
+    ensureWk();
     tryPlay();
   }
 
