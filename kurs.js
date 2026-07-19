@@ -10724,7 +10724,7 @@
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev6 2026-07-17) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev7 2026-07-20) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -10732,6 +10732,9 @@
    Rev 6: Kapitel-Kicker raus; Ansichten-Animation groß auf
    Laptop-Mockup; 3 Tool-Karten mit echten Logos (Gemini/Higgsfield/
    Midjourney) je 3-Bild-Swipe nach Stärke; eigene Canva-Sektion.
+   Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
+   Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
+   .ts2mac-row übernommen).
    ============================================================ */
 (function(){
   if(window.__tsIface) return; window.__tsIface = true;
@@ -10819,6 +10822,15 @@
     #tsIface .vswitch .ph{position:absolute;inset:0;width:100%;height:100%;border-radius:0}
     #tsIface .vbadge{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--disp);font-size:11px;letter-spacing:.08em;color:var(--tx2);background:rgba(5,6,11,.55);border:1px solid var(--bd);border-radius:999px;padding:5px 12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
     #tsIface .vbadge b{color:var(--beige);font-weight:600}
+
+    /* Ansichten-Animation im Ergebnis-Blick-Layout — Werte 1:1 aus .ts2mac-row/.ts2mac-h/.ts2mac-p */
+    #tsIface .vrow{display:flex;align-items:center;gap:clamp(20px,4vw,64px);max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,40px);box-sizing:border-box}
+    #tsIface .vrow .vtxt{flex:1 1 0;min-width:0;text-align:left}
+    #tsIface .vrow .vtxt h2{font-size:clamp(24px,2.4vw,30px);line-height:1.15;margin:0 0 16px;text-align:left;text-wrap:auto}
+    #tsIface .vrow .vtxt p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 12px;max-width:52ch}
+    #tsIface .vrow .vtxt p:last-child{margin-bottom:0}
+    #tsIface .vrow .vpc{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center}
+    #tsIface .vrow .macwrap{margin:0;max-width:520px;width:100%}
 
     /* compare / swipe carousel */
     #tsIface .cmp-stage{position:relative}
@@ -10951,6 +10963,9 @@
     @media(max-width:860px){
       #tsIface section{padding:48px 0}
       #tsIface .split,#tsIface .canva-split{grid-template-columns:1fr;gap:26px;max-width:460px}
+      #tsIface .vrow{flex-direction:column;gap:26px}
+      #tsIface .vrow .vtxt{max-width:460px}
+      #tsIface .vrow .macwrap{max-width:460px}
       #tsIface .cards,#tsIface .gal,#tsIface .trio{grid-template-columns:1fr}
       #tsIface .trio{max-width:420px}
       #tsIface .learn{grid-template-columns:repeat(2,1fr);gap:34px 28px;max-width:560px}
@@ -11043,13 +11058,16 @@
       '</div>'+
     '</div>'+
 
-    /* Bausteinprinzip — Text mittig, große Laptop-Animation darunter */
+    /* Bausteinprinzip — Ergebnis-Blick-Layout: Text links, Laptop-Animation klein rechts (Robert 20.07.2026) */
     '<section class="rev">'+
-      '<div class="tsif-col center">'+
-        '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
-        '<p class="tsif-sub">Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm. Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
+      '<div class="vrow">'+
+        '<div class="vtxt">'+
+          '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
+          '<p>Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm.</p>'+
+          '<p>Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
+        '</div>'+
+        '<div class="vpc">'+viewMock()+'</div>'+
       '</div>'+
-      viewMock()+
     '</section>'+
 
     /* Galerie mit Covern — 3 Tool-Karten mit echten Logos */
