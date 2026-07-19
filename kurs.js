@@ -878,6 +878,537 @@
 })();
 
 /* ============================================================
+   key-metrics — #tskmvid Abschnitt 03 Erklärvideo (PC-Mockup links + Text rechts + Abschluss-Text)
+   Muster: Abschnitts-Katalog 03 (/inventurliste #tsmacInv). Sitzt zwischen #tskm (Animation) und #tskmwk (Warenkorb).
+   PC = Platzhalter-Mockup (echtes MacBook folgt von Robert). Play-Button -> Lightbox-Platzhalter (Video kommt spaeter, Vimeo).
+   ============================================================ */
+(function(){
+  if(window.__tskmvid) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+  var IMG="https://tastyrob123.github.io/kurs-code/img/key-metrics/macbook-placeholder.svg"; /* PLATZHALTER MacBook — echtes Mockup folgt (Robert), dann nur diese Zeile tauschen */
+  var CSS=`
+  #tskmvid{width:min(1180px,94vw);margin:56px auto 0;padding:0 clamp(16px,3vw,40px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskmvid *{box-sizing:border-box}
+  #tskmvid .kv-row{display:flex;flex-direction:column;gap:26px}
+  @media(min-width:768px){ #tskmvid .kv-row{flex-direction:row;align-items:center;gap:clamp(28px,4vw,56px)} #tskmvid .kv-pc,#tskmvid .kv-text{flex:1 1 50%;min-width:0} }
+  #tskmvid .kv-pc{display:flex;align-items:center;justify-content:center;position:relative}
+  #tskmvid .kv-mac{position:relative;display:block;width:100%;max-width:560px;cursor:pointer;line-height:0}
+  #tskmvid .kv-mac img{width:100%;height:auto;display:block;filter:drop-shadow(0 22px 50px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tskmvid .kv-mac:hover img{transform:scale(1.02)}
+  #tskmvid .kv-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  #tskmvid .kv-play span{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:transform .3s ease,background .3s ease;margin-top:-6%}
+  #tskmvid .kv-mac:hover .kv-play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
+  #tskmvid .kv-play span::after{content:"";border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff;margin-left:5px}
+  #tskmvid .kv-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12;font-size:clamp(1.9rem,3.4vw,2.6rem);margin:0 0 18px}
+  #tskmvid .kv-title .ts-gold{color:#c7b489}
+  #tskmvid .kv-text p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px;text-align:left}
+  #tskmvid .kv-text p:last-child{margin-bottom:0}
+  #tskmvid .kv-text b{color:#c7b489;font-weight:600}
+  #tskmvid .kv-outro{max-width:900px;margin:34px auto 0;text-align:center}
+  #tskmvid .kv-outro p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0}
+  #tskmvid .kv-outro b{color:#c7b489;font-weight:600}
+  @media(max-width:820px){ #tskmvid .kv-text{display:none} }
+  /* Lightbox-Platzhalter */
+  #tskmvid-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  #tskmvid-lb.on{display:flex}
+  #tskmvid-lb .kv-lb-box{width:min(900px,92vw);aspect-ratio:16/9;border-radius:16px;background:#0b0d14;border:1px solid rgba(199,180,137,.4);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:14px;text-align:center;padding:24px}
+  #tskmvid-lb .kv-lb-close{position:absolute;top:22px;right:26px;width:40px;height:40px;border-radius:50%;background:rgba(11,13,20,.9);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  `;
+  function injectCSS(){ if(document.getElementById('tskmvid-css'))return; var s=document.createElement('style'); s.id='tskmvid-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tskmvid';
+    el.innerHTML=`
+<div class="kv-row">
+  <div class="kv-pc">
+    <div class="kv-mac" role="button" tabindex="0" aria-label="Erklärvideo abspielen">
+      <img src="${IMG}" alt="Kostenauswertung Master — Erklärvideo">
+      <div class="kv-play"><span></span></div>
+    </div>
+  </div>
+  <div class="kv-text">
+    <h2 class="kv-title">Was du misst, kannst du <span class="ts-gold">führen</span>.</h2>
+    <p>Key Metrics sind die wenigen Zahlen, an denen du wirklich erkennst, ob dein Betrieb gesund läuft. Nicht der Umsatz allein zählt, sondern das, was am Ende eines Monats von ihm übrig bleibt.</p>
+    <p>Dafür trägst du pro Monat nur die <b>echten Zahlen aus deinem Betrieb</b> ein: Umsatz, Wareneinsatz, Personalkosten, geleistete Stunden, Öffnungstage. Den Rest übernimmt die Datenbank — sie rechnet daraus <b>Deckungsbeitrag I, II und III</b>, deinen Wareneinsatz in Prozent, die Produktivität pro Stunde und den Durchschnittsbon.</p>
+    <p>Der erste Schritt ist der Rahmen: Du legst die <b>Kostenauswertung Master</b> an — die Datenbank, auf der von hier an alles aufbaut.</p>
+  </div>
+</div>
+<div class="kv-outro"><p>Leg jetzt in Notion eine leere Seite an und nenn sie <b>Kostenauswertung Master</b>. Mehr brauchst du für den Moment nicht. Alles Weitere bauen wir gemeinsam — direkt hier unter diesem Abschnitt entsteht deine Datenbank <b>Karte für Karte</b>, die erste Spalte gleich als Nächstes.</p></div>`;
+    var mac=el.querySelector('.kv-mac');
+    mac.addEventListener('click',openLb);
+    mac.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
+    return el;
+  }
+  function ensureLb(){
+    if(document.getElementById('tskmvid-lb')) return document.getElementById('tskmvid-lb');
+    var lb=document.createElement('div'); lb.id='tskmvid-lb';
+    lb.innerHTML='<button class="kv-lb-close" aria-label="Schließen">×</button><div class="kv-lb-box">Das Erklärvideo folgt — es wird nach Fertigstellung aller Lektionen aufgenommen und hier eingebettet.</div>';
+    lb.addEventListener('click',function(e){ if(e.target===lb||e.target.className==='kv-lb-close') closeLb(); });
+    document.body.appendChild(lb);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
+    return lb;
+  }
+  function openLb(){ var lb=ensureLb(); lb.classList.add('on'); }
+  function closeLb(){ var lb=document.getElementById('tskmvid-lb'); if(lb) lb.classList.remove('on'); }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskmvid'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tskmvid')) return;
+    var wk=document.getElementById('tskmwk'); var anim=document.getElementById('tskm');
+    injectCSS();
+    var el=build();
+    if(wk&&wk.parentNode){ wk.parentNode.insertBefore(el, wk); }        /* zwischen Animation und Warenkorb */
+    else if(anim&&anim.parentNode){ anim.parentNode.insertBefore(el, anim.nextSibling); }
+    else return;
+  }
+  window.__tskmvid=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   key-metrics — #tskmtrend Abschnitt 06 Optionale Zweit-Animation "Der Trend zeigt es früher"
+   Konzept (Doktrin, aus Kontext): eine Kennzahl (Wareneinsatz %) über 6 Monate gegen eine Ziellinie ->
+   der Trend läuft über die Linie, die Kennzahl warnt früh. Clean/datengetrieben. One-Shot + Replay.
+   Sitzt hinter Warenkorb/Ergebnis-Blick (afterAnchor). Beispielwerte gekennzeichnet.
+   ============================================================ */
+(function(){
+  if(window.__tskmtrend) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+  var MON=['Jan','Feb','Mär','Apr','Mai','Jun'];
+  var VAL=[27.6,28.1,28.4,29.3,30.8,30.2]; /* Beispielwerte Wareneinsatz % je Monat */
+  var TARGET=28.0;
+  var YMIN=26, YMAX=32;
+  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
+
+  var CSS=`
+  #tskmtrend{width:100vw;max-width:100vw;margin:60px 0 16px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskmtrend *{box-sizing:border-box}
+  #tskmtrend .tr-head{max-width:820px;margin:0 auto 30px;text-align:center}
+  #tskmtrend .tr-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tskmtrend .tr-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tskmtrend .tr-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px}
+  #tskmtrend .tr-title span{color:#c7b489}
+  #tskmtrend .tr-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
+  #tskmtrend .tr-wrap{max-width:880px;margin:0 auto;opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+  #tskmtrend .tr-wrap.on{opacity:1;transform:none}
+  #tskmtrend .tr-chart{position:relative;width:100%}
+  #tskmtrend svg{display:block;width:100%;height:auto;overflow:visible}
+  #tskmtrend .tr-grid{stroke:rgba(255,255,255,.08);stroke-width:1}
+  #tskmtrend .tr-glabel{fill:rgba(255,255,255,.4);font-size:11px;font-family:inherit}
+  #tskmtrend .tr-mlabel{fill:rgba(255,255,255,.62);font-size:12px;font-weight:600;font-family:inherit;text-anchor:middle}
+  #tskmtrend .tr-target{stroke:rgba(255,255,255,.34);stroke-width:1.5;stroke-dasharray:5 6;opacity:0;transition:opacity .5s ease}
+  #tskmtrend .tr-target.on{opacity:1}
+  #tskmtrend .tr-tlabel{fill:rgba(255,255,255,.5);font-size:11px;font-weight:600;font-family:inherit;opacity:0;transition:opacity .5s ease}
+  #tskmtrend .tr-tlabel.on{opacity:1}
+  #tskmtrend .tr-area{fill:url(#trArea);opacity:0;transition:opacity .7s ease}
+  #tskmtrend .tr-area.on{opacity:1}
+  #tskmtrend .tr-line{fill:none;stroke:#c7b489;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 6px rgba(199,180,137,.35))}
+  #tskmtrend .tr-dot{opacity:0}
+  #tskmtrend .tr-dot.on{opacity:1;transition:opacity .3s ease,transform .4s cubic-bezier(.34,1.56,.64,1)}
+  #tskmtrend .tr-dot circle{stroke:#05060b;stroke-width:2}
+  #tskmtrend .tr-dot.below circle{fill:#c7b489}
+  #tskmtrend .tr-dot.above circle{fill:#e32552}
+  #tskmtrend .tr-dotv{fill:#fff;font-size:11.5px;font-weight:700;font-family:inherit;text-anchor:middle}
+  #tskmtrend .tr-dot.above .tr-dotv{fill:#f2889f}
+  #tskmtrend .tr-note{max-width:660px;margin:20px auto 0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.7);text-align:center}
+  #tskmtrend .tr-note b{color:#efe6d2;font-weight:700}
+  #tskmtrend .tr-note .warn{color:#f2889f;font-weight:700}
+  #tskmtrend .tr-foot{display:flex;justify-content:center;margin-top:22px}
+  #tskmtrend .tr-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s,border-color .4s,color .4s,transform .4s}
+  #tskmtrend .tr-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tskmtrend .tr-replay svg{width:15px;height:15px}
+  @media(max-width:640px){ #tskmtrend .tr-dotv{font-size:10px} }
+  @media(prefers-reduced-motion:reduce){ #tskmtrend .tr-wrap{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tskmtrend-css'))return; var s=document.createElement('style'); s.id='tskmtrend-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  var W=880,H=340,PADL=44,PADR=20,PADT=24,PADB=40;
+  function xg(i){ return PADL+(W-PADL-PADR)*(i/(MON.length-1)); }
+  function yg(v){ return PADT+(H-PADT-PADB)*(1-(v-YMIN)/(YMAX-YMIN)); }
+  function linePath(){ var d=''; for(var i=0;i<VAL.length;i++){ d+=(i?' L ':'M ')+xg(i).toFixed(1)+' '+yg(VAL[i]).toFixed(1); } return d; }
+  function areaPath(){ var d='M '+xg(0).toFixed(1)+' '+yg(YMIN).toFixed(1); for(var i=0;i<VAL.length;i++){ d+=' L '+xg(i).toFixed(1)+' '+yg(VAL[i]).toFixed(1); } d+=' L '+xg(VAL.length-1).toFixed(1)+' '+yg(YMIN).toFixed(1)+' Z'; return d; }
+
+  function build(){
+    var el=document.createElement('div'); el.id='tskmtrend';
+    var grid=''; [26,28,30,32].forEach(function(v){ var y=yg(v).toFixed(1); grid+='<line class="tr-grid" x1="'+PADL+'" y1="'+y+'" x2="'+(W-PADR)+'" y2="'+y+'"/><text class="tr-glabel" x="'+(PADL-8)+'" y="'+(+y+4)+'" text-anchor="end">'+v+'%</text>'; });
+    var mlabels=''; for(var i=0;i<MON.length;i++){ mlabels+='<text class="tr-mlabel" x="'+xg(i).toFixed(1)+'" y="'+(H-PADB+22)+'">'+MON[i]+'</text>'; }
+    var dots=''; for(var i=0;i<VAL.length;i++){ var above=VAL[i]>TARGET; dots+='<g class="tr-dot '+(above?'above':'below')+'" data-i="'+i+'" style="transform-origin:'+xg(i).toFixed(1)+'px '+yg(VAL[i]).toFixed(1)+'px"><circle cx="'+xg(i).toFixed(1)+'" cy="'+yg(VAL[i]).toFixed(1)+'" r="5.5"/><text class="tr-dotv" x="'+xg(i).toFixed(1)+'" y="'+(yg(VAL[i])-13).toFixed(1)+'">'+VAL[i].toFixed(1).replace('.',',')+'</text></g>'; }
+    el.innerHTML=`
+<div class="tr-head">
+  <div class="tr-eyebrow">Kennzahlen über die Zeit</div>
+  <h2 class="tr-title">Der Trend zeigt es <span>früher</span>.</h2>
+  <p class="tr-sub">Eine einzelne Zahl sagt wenig. Die Reihe über die Monate zeigt, wohin es läuft — Beispiel: dein Wareneinsatz gegen die Ziellinie von 28 %.</p>
+</div>
+<div class="tr-wrap">
+  <div class="tr-chart">
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Wareneinsatz in Prozent über sechs Monate">
+      <defs><linearGradient id="trArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7b489" stop-opacity="0.22"/><stop offset="1" stop-color="#c7b489" stop-opacity="0"/></linearGradient></defs>
+      ${grid}
+      <path class="tr-area" d="${areaPath()}"/>
+      <line class="tr-target" x1="${PADL}" y1="${yg(TARGET).toFixed(1)}" x2="${W-PADR}" y2="${yg(TARGET).toFixed(1)}"/>
+      <text class="tr-tlabel" x="${W-PADR}" y="${(yg(TARGET)-7).toFixed(1)}" text-anchor="end">Ziel 28 %</text>
+      <path class="tr-line" d="${linePath()}"/>
+      ${mlabels}
+      ${dots}
+    </svg>
+  </div>
+  <p class="tr-note">Bis <b>März</b> im Rahmen — ab <span class="warn">April</span> über der Ziellinie. Die Kennzahl warnt dich, <b>bevor</b> der Monatsabschluss es tut.</p>
+  <div class="tr-foot"><button class="tr-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>
+</div>`;
+    el.querySelector('.tr-replay').addEventListener('click',function(){ play(el, true); });
+    return el;
+  }
+
+  var timers=[];
+  function play(root, force){
+    if(!root) return;
+    if(root.__playing) return;
+    if(root.__played && !force) return;
+    root.__played=true; root.__playing=true;
+    timers.forEach(clearTimeout); timers=[];
+    function T(fn,ms){ timers.push(setTimeout(fn,ms)); }
+    var wrap=root.querySelector('.tr-wrap');
+    var line=root.querySelector('.tr-line'), area=root.querySelector('.tr-area'), target=root.querySelector('.tr-target'), tlabel=root.querySelector('.tr-tlabel');
+    var dots=root.querySelectorAll('.tr-dot');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    // reset
+    wrap.classList.add('on');
+    var L=line.getTotalLength();
+    line.style.transition='none'; line.style.strokeDasharray=L; line.style.strokeDashoffset=L; line.getBoundingClientRect();
+    area.classList.remove('on'); target.classList.remove('on'); tlabel.classList.remove('on');
+    Array.prototype.forEach.call(dots,function(d){ d.classList.remove('on'); d.style.transform='scale(.4)'; });
+    if(reduced){
+      line.style.transition='none'; line.style.strokeDashoffset='0'; area.classList.add('on'); target.classList.add('on'); tlabel.classList.add('on');
+      Array.prototype.forEach.call(dots,function(d){ d.classList.add('on'); d.style.transform='none'; });
+      root.__playing=false; return;
+    }
+    T(function(){ target.classList.add('on'); tlabel.classList.add('on'); }, 250);
+    T(function(){ line.style.transition='stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1)'; line.style.strokeDashoffset='0'; area.classList.add('on'); }, 550);
+    Array.prototype.forEach.call(dots,function(d,i){ T(function(){ d.classList.add('on'); d.style.transform='none'; }, 700+i*230); });
+    T(function(){ root.__playing=false; }, 700+dots.length*230+400);
+  }
+
+  function tryPlay(){ if(!on())return; var el=document.getElementById('tskmtrend'); if(!el||el.__played)return; var r=el.getBoundingClientRect(); if(r.top<window.innerHeight*0.82 && r.bottom>60) play(el); }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskmtrend'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tskmtrend')) return;
+    var anchor=afterAnchor(['tskmwk','tskm2mac']); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    tryPlay();
+  }
+  window.__tskmtrend=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('scroll', tryPlay, {passive:true});
+})();
+
+/* ============================================================
+   key-metrics — #tskm2mac Abschnitt 05 Ergebnis-Blick (Text links + PC rechts, Klick -> Scroll-Lightbox)
+   Muster: Abschnitts-Katalog 05 (#ts2mac). Erster/einziger Blick der Seite -> Text links / PC rechts.
+   PC + Scroll-Screenshot = Platzhalter (echte Bilder folgen von Robert). Sitzt hinter dem Warenkorb.
+   ============================================================ */
+(function(){
+  if(window.__tskm2mac) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
+  var TILE="https://tastyrob123.github.io/kurs-code/img/key-metrics/macbook-placeholder.svg"; /* PLATZHALTER Mockup */
+  var SCROLL="https://tastyrob123.github.io/kurs-code/img/key-metrics/db-scroll-placeholder.svg"; /* PLATZHALTER langer DB-Screenshot */
+  var CSS=`
+  #tskm2mac{width:min(1180px,94vw);margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskm2mac *{box-sizing:border-box}
+  #tskm2mac .km2-row{display:flex;flex-direction:column;gap:26px}
+  @media(min-width:768px){ #tskm2mac .km2-row{flex-direction:row;align-items:center;gap:clamp(20px,4vw,64px)} #tskm2mac .km2-text,#tskm2mac .km2-pc{flex:1 1 50%;min-width:0} }
+  #tskm2mac .km2-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;line-height:1.15;font-size:clamp(1.6rem,2.9vw,2.15rem);margin:0 0 14px;text-align:left}
+  #tskm2mac .km2-title .ts-gold{color:#c7b489}
+  #tskm2mac .km2-text p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px;text-align:left}
+  #tskm2mac .km2-text p:last-child{margin-bottom:0}
+  #tskm2mac .km2-text b{color:#c7b489;font-weight:600}
+  #tskm2mac .km2-pc{display:flex;flex-direction:column;align-items:center}
+  #tskm2mac .km2-tile{position:relative;display:block;width:100%;max-width:520px;cursor:pointer;line-height:0;background:transparent}
+  #tskm2mac .km2-tile img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tskm2mac .km2-tile:hover img{transform:translateY(-4px) scale(1.02)}
+  #tskm2mac .km2-cap{margin-top:12px;font-size:15px;font-weight:600;color:#fff;text-align:center}
+  #tskm2mac .km2-cap .g{color:#c7b489}
+  #tskm2mac .km2-hint{margin-top:5px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;animation:km2pulse 2.6s ease-in-out infinite}
+  @keyframes km2pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  @media(max-width:820px){ #tskm2mac .km2-text{display:none} }
+  #tskm2mac-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.85);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);padding:clamp(16px,4vh,48px)}
+  #tskm2mac-lb.on{display:flex}
+  #tskm2mac-lb .km2-lb-screen{width:min(1000px,94vw);max-height:88vh;overflow-y:auto;border-radius:14px;border:1px solid rgba(199,180,137,.4);background:#0b0d14;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+  #tskm2mac-lb .km2-lb-screen img{width:100%;height:auto;display:block}
+  #tskm2mac-lb .km2-lb-screen::-webkit-scrollbar{width:8px}
+  #tskm2mac-lb .km2-lb-screen::-webkit-scrollbar-thumb{background:rgba(199,180,137,.4);border-radius:8px}
+  #tskm2mac-lb .km2-lb-close{position:absolute;top:20px;right:24px;width:42px;height:42px;border-radius:50%;background:rgba(11,13,20,.92);border:1px solid rgba(255,255,255,.32);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  `;
+  function injectCSS(){ if(document.getElementById('tskm2mac-css'))return; var s=document.createElement('style'); s.id='tskm2mac-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tskm2mac';
+    el.innerHTML=`
+<div class="km2-row">
+  <div class="km2-text">
+    <h3 class="km2-title">Ein Monat, eine <span class="ts-gold">Zeile</span>.</h3>
+    <p>So sieht die Kostenauswertung Master aus, wenn sie läuft: Jeder Monat steht als eine <b>Zeile</b>, daneben liegen alle Kennzahlen — deine drei <b>Deckungsbeiträge</b>, Wareneinsatz in Prozent, Produktivität und Durchschnittsbon.</p>
+    <p>Weil jeder Monat gleich aufgebaut ist, kannst du sie direkt <b>vergleichen</b>. Du siehst, ob dein Wareneinsatz nach oben klettert oder die Deckungsbeiträge dünner werden — und in welchem Monat es gekippt ist.</p>
+  </div>
+  <div class="km2-pc">
+    <div class="km2-tile" role="button" tabindex="0" aria-label="Datenbank vergrößern">
+      <img src="${TILE}" alt="Kostenauswertung Master — fertige Datenbank">
+    </div>
+    <div class="km2-cap">Kostenauswertung Master <span class="g">– Live Beispiel</span></div>
+    <div class="km2-hint">Klicke zum Vergrößern</div>
+  </div>
+</div>`;
+    var tile=el.querySelector('.km2-tile');
+    tile.addEventListener('click',openLb);
+    tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
+    return el;
+  }
+  function ensureLb(){
+    if(document.getElementById('tskm2mac-lb')) return document.getElementById('tskm2mac-lb');
+    var lb=document.createElement('div'); lb.id='tskm2mac-lb';
+    lb.innerHTML='<button class="km2-lb-close" aria-label="Schließen">×</button><div class="km2-lb-screen"><img src="'+SCROLL+'" alt="Kostenauswertung Master — Ganzansicht"></div>';
+    lb.addEventListener('click',function(e){ if(e.target===lb||e.target.className==='km2-lb-close') closeLb(); });
+    document.body.appendChild(lb);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
+    return lb;
+  }
+  function openLb(){ var lb=ensureLb(); lb.classList.add('on'); var sc=lb.querySelector('.km2-lb-screen'); if(sc) sc.scrollTop=0; }
+  function closeLb(){ var lb=document.getElementById('tskm2mac-lb'); if(lb) lb.classList.remove('on'); }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskm2mac'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tskm2mac')) return;
+    var anchor=afterAnchor(['tskmwk']); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+  }
+  window.__tskm2mac=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   key-metrics — #tskmemp Abschnitt 07 Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   Muster: Abschnitts-Katalog 07 (#tszein) — Verhalten 1:1 (Entrance/Tilt/Glow/Heartbeat/Sync-Highlight+Goldlinie).
+   Links: Monats-Routine (4 Schritte) synchron zur rechten nummerierten Liste. Sitzt hinter Ergebnis-Blick/Trend.
+   ============================================================ */
+(function(){
+  if(window.__tskmemp) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
+  var STEPS=[
+    {n:'01', l:'Werte eintragen'},
+    {n:'02', l:'Kennzahlen lesen'},
+    {n:'03', l:'Ausreißer finden'},
+    {n:'04', l:'Ursache angehen'}
+  ];
+  var CSS=`
+  #tskmemp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s ease}
+  #tskmemp.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  #tskmemp *{box-sizing:border-box}
+  #tskmemp::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #tskmemp::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #tskmemp.glow::before{opacity:1}
+  #tskmemp.beat{animation:tskmempBeat 2.6s ease-in-out}
+  @keyframes tskmempBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
+  #tskmemp .emp-grid{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #tskmemp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #tskmemp .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease}
+  #tskmemp .emp-link path.on{opacity:1}
+  #tskmemp .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #tskmemp .emp-link circle.on{opacity:1}
+  /* left animation */
+  #tskmemp .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #tskmemp .emp-anim-hd{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.15rem;color:#fff;margin:0 0 6px}
+  #tskmemp .emp-anim-hd span{color:#c7b489}
+  #tskmemp .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
+  #tskmemp.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #tskmemp.in .emp-step:nth-child(1){transition-delay:.15s}#tskmemp.in .emp-step:nth-child(2){transition-delay:.28s}#tskmemp.in .emp-step:nth-child(3){transition-delay:.41s}#tskmemp.in .emp-step:nth-child(4){transition-delay:.54s}
+  #tskmemp .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #tskmemp .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #tskmemp .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #tskmemp .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #tskmemp .emp-step.on .emp-step-l{color:#fff}
+  /* right text */
+  #tskmemp .emp-text{position:relative;z-index:2}
+  #tskmemp .emp-h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #tskmemp .emp-h .eg{color:#c7b489}
+  #tskmemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  #tskmemp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #tskmemp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #tskmemp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #tskmemp .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  #tskmemp .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ #tskmemp .emp-grid{grid-template-columns:1fr;gap:26px} #tskmemp svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #tskmemp{transform:none;opacity:1} #tskmemp .emp-step{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tskmemp-css'))return; var s=document.createElement('style'); s.id='tskmemp-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tskmemp';
+    var stepsHtml=STEPS.map(function(s,i){ return '<div class="emp-step" data-i="'+i+'"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    el.innerHTML=`
+<div class="emp-grid">
+  <svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>
+  <div class="emp-anim">
+    <div class="emp-anim-hd">Deine <span>Monatsroutine</span></div>
+    ${stepsHtml}
+  </div>
+  <div class="emp-text">
+    <h3 class="emp-h">Empfehlung zur <span class="eg">Nutzung</span></h3>
+    <p class="emp-intro">Damit die Kostenauswertung Master dir wirklich etwas bringt, mach sie zu einer festen Monatsroutine:</p>
+    <ol class="emp-ol">
+      <li data-i="0">Am Monatsende die echten Werte eintragen: Umsatz aus Store, Lieferando und Wolt, Wareneinsatz, Personalkosten, geleistete Stunden und Öffnungstage.</li>
+      <li data-i="1">Die fertigen Kennzahlen durchgehen — vor allem <b>Wareneinsatz in Prozent</b>, deine Deckungsbeiträge und die Produktivität pro Stunde.</li>
+      <li data-i="2">Ausreißer suchen: eine Zahl, die aus der Reihe fällt. Klettert dein Wareneinsatz über deinen Zielwert, ist das dein Signal.</li>
+      <li data-i="3">Der Ursache nachgehen — Einkaufspreise, Portionsgrößen und Verkaufspreise prüfen — und den nächsten Monat daran messen.</li>
+    </ol>
+  </div>
+</div>`;
+    return el;
+  }
+  function drawLink(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect();
+    var a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2;
+    var x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function setup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ drawLink(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    // entrance + cycle on scroll
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    // cursor tilt + glow (desktop)
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ drawLink(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskmemp'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tskmemp')) return;
+    var anchor=afterAnchor(['tskmwk','tskm2mac','tskmtrend']); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    setup(el);
+  }
+  window.__tskmemp=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   key-metrics — #tskmnext Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Nächste Lektion")
+   Muster: Abschnitts-Katalog 09 (#tsl + #ts-next). 4 Learnings aus dem Lektionsinhalt, Button -> Modul-2-Landing (Ausbau-Hub).
+   ============================================================ */
+(function(){
+  if(window.__tskmnext) return;
+  function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
+  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/modul-2-das-notion-ai-backoffice-system';
+  var LEARN=[
+    'Du hast die <b>Kostenauswertung Master</b> gebaut — jeder Monat eine Zeile mit allen Kennzahlen.',
+    'Du verstehst <b>Deckungsbeitrag I, II und III</b> — und was zwischen den Stufen abgezogen wird.',
+    'Du weißt, wie <b>Wareneinsatz&nbsp;%</b>, Produktivität und Durchschnittsbon entstehen.',
+    'Du kannst <b>Monate vergleichen</b> und Ausreißer erkennen, bevor sie die Marge kosten.'
+  ];
+  var CSS=`
+  #tskmnext{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskmnext *{box-sizing:border-box}
+  #tskmnext .tsl-head{text-align:center;margin-bottom:66px}
+  #tskmnext .tsl-eyebrow{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #tskmnext .tsl-title{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #tskmnext .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #tskmnext .tsl-cell{display:flex;justify-content:center}
+  #tskmnext .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #tskmnext .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #tskmnext.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #tskmnext.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #tskmnext.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #tskmnext.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #tskmnext.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #tskmnext .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #tskmnext .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  #tskmnext .tsl-t b{color:#c7b489;font-weight:700}
+  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  #tskmnext #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #tskmnext #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #tskmnext #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #tskmnext #ts-next svg{width:16px;height:16px}
+  @media(max-width:1079px){ #tskmnext .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #tskmnext .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ #tskmnext .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tskmnext-css'))return; var s=document.createElement('style'); s.id='tskmnext-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tskmnext';
+    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML=`
+<div class="tsl-head">
+  <span class="tsl-eyebrow">Was du mitnimmst</span>
+  <h2 class="tsl-title">Learnings</h2>
+</div>
+<div class="tsl-grid">${orbs}</div>
+<div id="ts-next-wrap">
+  <a id="ts-next" href="${NEXT_URL}">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>`;
+    var a=el.querySelector('#ts-next');
+    a.addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
+    return el;
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tskmnext'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tskmnext')) return;
+    var anchor=afterAnchor(['tskmwk','tskm2mac','tskmtrend','tskmemp']); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+  }
+  window.__tskmnext=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    gerichte-getrnke-finaler-schritt — Hero "DB XI : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
    ============================================================ */
 (function(){
