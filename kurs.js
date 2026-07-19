@@ -7824,7 +7824,7 @@
    ============================================================ */
 (function(){
   if(window.__ts2mac) return; window.__ts2mac=true;
-  var PATH=/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$|\/gemeinkosten-mitarbeiterlhne\/?$/;
+  var PATH=/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$|\/gemeinkosten-mitarbeiterlhne\/?$|\/gerichte-getrnke-finaler-schritt\/?$/;
   var BASE='https://tastyrob123.github.io/kurs/img/lieferpartner-mac/';
   var SCROLL=BASE+'scroll/';
   /* gemeinkosten-mitarbeiterlhne — eigener Bild-Ordner (Robert-Assets, freigestellt + Alpha-Bbox-
@@ -7859,7 +7859,13 @@
       html:'<h3 class="ts2mac-h">Echte Arbeitgeberkosten <span class="g">statt Bauchgefühl.</span></h3>'
         +'<p class="ts2mac-p">Für jeden Mitarbeiter hinterlegst du Name, Rolle, Art der Anstellung und dein Monatsgehalt brutto. Dazu kommt der AG-Kosten-Faktor — die Empfehlung liegt bei 1,25, denn dein Bruttolohn ist nicht deine echte Kostenzahl.</p>'
         +'<p class="ts2mac-p">Aus Bruttogehalt und AG-Faktor errechnet eine Formel automatisch deine AG-Kosten pro Monat. Eine zweite Formel setzt je nach Anstellungsart die Monatsstunden — Vollzeit, Teilzeit und Minijob unterscheiden sich hier deutlich.</p>'
-        +'<p class="ts2mac-p">Am Ende steht der Stundensatz auf AG-Kosten-Basis — die Zahl, mit der du kalkulierst. Nicht der Bruttolohn aus dem Vertrag, sondern das, was ein Mitarbeiter dich pro Arbeitsstunde tatsächlich kostet.</p>' }
+        +'<p class="ts2mac-p">Am Ende steht der Stundensatz auf AG-Kosten-Basis — die Zahl, mit der du kalkulierst. Nicht der Bruttolohn aus dem Vertrag, sondern das, was ein Mitarbeiter dich pro Arbeitsstunde tatsächlich kostet.</p>' },
+    /* Unter "Deine Gerichte & Getränke. Spalte für Spalte." (DB XI) — Ergebnis-Blick, PC rechts, Text links. */
+    { after:'tsshop--db8_gerichte', side:'right', img:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/gerichte-db-pc.png', shot:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/scroll/gerichte-db.jpg', cap:'Gerichte & Getränke',
+      html:'<h3 class="ts2mac-h">Deine ganze Karte, <span class="g">durchgerechnet.</span></h3>'
+        +'<p class="ts2mac-p">In DB XI liegt jedes Gericht und jedes Getränk als eigene Karte: mit Cover, den eingehängten Zutaten und Rezepturen und der zugewiesenen Verpackung. Den Portionspreis holt sich die Datenbank selbst aus den Bausteinen, die du vorher aufgebaut hast.</p>'
+        +'<p class="ts2mac-p">Auf jeder Karte stehen die Kennzahlen direkt untereinander: Deckungsbeitrag I, II und III, dazu der Gemeinkosten- und Personalkosten-Anteil pro Produkt. Tauschst du oben eine Zutat, rechnen sich diese Werte sofort neu.</p>'
+        +'<p class="ts2mac-p">So liest du pro Gericht auf den Cent ab, was hängen bleibt. Du erkennst sofort, welches Gericht sich trägt und wo die Marge zu dünn wird, und richtest deine Speisekarte danach aus.</p>' }
   ];
   var CSS = `
   .ts2mac-row{width:100%;max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-sizing:border-box}
