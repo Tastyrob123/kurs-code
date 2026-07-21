@@ -12444,7 +12444,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev8 2026-07-20) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev9 2026-07-21) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -12455,6 +12455,13 @@ var TSISL_ZUG_SCHLUESSEL=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 9 (2026-07-21): Tool-Kacheln mit Marken-Logos ueber den Namen
+   (.tunit/.tmark, OpenAI+Claude neu im Repo unter img/logos/);
+   Abo-Sektion: belegte USD-Preise + gestaffelte Tabellen-Animation,
+   beide Hinweis-Boxen nebeneinander (.boxduo); Format-Sektion:
+   Zutat links / Gericht rechts mit Bild links (.f-split), Coverdesign
+   volle Breite mit Banner ueber dem Titel (.f-wide/.f-banner);
+   Ordner-Abschnitt Text verdoppelt.
    Rev 8 (2026-07-20): Format-Glattzug der ganzen Seite gegen den
    Abschnitts-Katalog — Fließtext auf Site-Standard (--tx .86 /
    15.5px), H2 auf clamp(1.9rem,4.4vw,2.9rem), Kopfspalte 860px,
@@ -12481,6 +12488,8 @@ var TSISL_ZUG_SCHLUESSEL=[
   var LG_HIGGS="https://files.catbox.moe/nork7u.png";
   var LG_MIDJOURNEY="https://files.catbox.moe/dpjfgb.svg";
   var LG_CANVA="https://files.catbox.moe/qm931y.svg";
+  var LG_OPENAI="https://tastyrob123.github.io/kurs-code/img/logos/openai.svg";
+  var LG_CLAUDE="https://tastyrob123.github.io/kurs-code/img/logos/claude.svg";
   function on(){ return SLUG.test(location.pathname); }
 
   /* ---------- STYLES ---------- */
@@ -12512,6 +12521,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .gold{color:var(--beige)}
     #tsIface p{margin:0 0 16px}
     #tsIface .tsif-sub{color:var(--tx);max-width:860px;margin:0 auto 16px;line-height:1.62;font-size:15.5px}
+    #tsIface .tsif-sub.small{font-size:13.5px;color:rgba(255,255,255,.62);max-width:720px}
     #tsIface .tsif-sub:last-child{margin-bottom:0}
     #tsIface .center{text-align:center}
     #tsIface a{color:var(--beige-lo)}
@@ -12600,14 +12610,18 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .canva-split .macwrap{margin:0}
 
     /* use-case cards */
-    #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:44px auto 0}
-    #tsIface .card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:26px 24px 22px;box-shadow:0 26px 60px -38px rgba(0,0,0,.95);transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1);overflow:hidden;text-align:center}
+    #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:1120px;margin:44px auto 0}
+    #tsIface .card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:34px 30px 30px;box-shadow:0 26px 60px -38px rgba(0,0,0,.95);transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1);overflow:hidden;text-align:center}
     #tsIface .card::before{content:"";position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(199,180,137,.5),transparent);opacity:0;transition:opacity .35s cubic-bezier(.16,1,.3,1)}
     #tsIface .card:hover{transform:translateY(-3px);border-color:rgba(199,180,137,.28)}
     #tsIface .card:hover::before{opacity:1}
-    #tsIface .toolrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin:2px 0 16px}
-    #tsIface .tname{font-family:var(--disp);font-weight:600;font-size:clamp(1.15rem,1.7vw,1.5rem);letter-spacing:-.01em;color:#fff;line-height:1.1}
-    #tsIface .tplus{font-family:var(--disp);font-size:1.15rem;color:var(--beige);font-weight:600}
+    #tsIface .toolrow{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:10px 18px;margin:2px 0 22px}
+    #tsIface .tunit{display:flex;flex-direction:column;align-items:center;gap:11px}
+    #tsIface .tmark{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);box-shadow:0 10px 26px -14px rgba(0,0,0,.9);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .tmark img{width:28px;height:28px;object-fit:contain;display:block}
+    #tsIface .card:hover .tmark{transform:translateY(-3px);border-color:rgba(199,180,137,.34)}
+    #tsIface .tname{font-family:var(--disp);font-weight:600;font-size:clamp(1.05rem,1.5vw,1.32rem);letter-spacing:-.01em;color:#fff;line-height:1.1;text-align:center}
+    #tsIface .tplus{font-family:var(--disp);font-size:1.15rem;color:var(--beige);font-weight:600;align-self:center;margin-top:6px}
     #tsIface .card h3{color:var(--beige-hi);letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin:0 0 12px}
     #tsIface .card p.k{color:var(--tx);margin:0 auto;max-width:34ch}
     #tsIface .flow{font-size:13.5px;color:var(--tx);margin:14px auto 0;line-height:1.55;max-width:36ch}
@@ -12619,7 +12633,9 @@ var TSISL_ZUG_SCHLUESSEL=[
 
     /* split rows (Ordner-Sektion) */
     #tsIface .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center;margin:0 auto;max-width:1000px}
-    #tsIface .s-txt p{color:var(--tx);margin:0}
+    #tsIface .s-txt p{color:var(--tx);margin:0 0 12px}
+    #tsIface .s-txt p:last-child{margin-bottom:0}
+    #tsIface .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.94em;color:var(--beige-hi);background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.22);border-radius:5px;padding:1px 6px;white-space:nowrap}
     #tsIface .s-txt .st-eye{display:block;font-family:var(--disp);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:10px}
     #tsIface .frame{margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.01));box-shadow:0 30px 70px -42px rgba(0,0,0,.95);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s;max-width:420px}
     #tsIface .frame:hover{transform:translateY(-4px);border-color:rgba(199,180,137,.3)}
@@ -12640,6 +12656,11 @@ var TSISL_ZUG_SCHLUESSEL=[
 
     /* boxes */
     #tsIface .box{border-radius:16px;padding:22px 26px;margin:20px auto 0;max-width:840px;border:1px solid var(--bd);background:var(--card)}
+    /* Die zwei Abo-Boxen nebeneinander, gleiche Hoehe */
+    #tsIface .boxduo{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1120px;margin:26px auto 0;align-items:stretch}
+    #tsIface .boxduo .box{margin:0;max-width:none;height:100%;position:relative;overflow:hidden}
+    #tsIface .boxduo .box::after{content:"";position:absolute;top:0;left:22px;right:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);opacity:0;transition:opacity .45s cubic-bezier(.16,1,.3,1)}
+    #tsIface .boxduo .box:hover::after{opacity:1}
     #tsIface .box .bh{font-weight:600;color:#fff;margin:0 0 6px;font-size:16px;font-family:var(--disp);letter-spacing:-.01em}
     #tsIface .box p{margin:0;color:var(--tx)}
     #tsIface .box.good{border-color:rgba(143,203,170,.42);background:linear-gradient(160deg,rgba(143,203,170,.12),rgba(143,203,170,.015))}
@@ -12658,8 +12679,16 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .prompt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--tx2);background:rgba(0,0,0,.35);border:1px solid var(--bd);border-radius:10px;padding:12px;line-height:1.5}
 
     /* format cards */
-    #tsIface .fmt{display:grid;gap:16px;max-width:880px;margin:44px auto 0}
+    #tsIface .fmt{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1120px;margin:44px auto 0;align-items:stretch}
     #tsIface .fcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px 26px}
+    /* Zutat + Gericht: Bild links, Text rechts — beide auf gleicher Hoehe */
+    #tsIface .fcard.f-split{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1fr);gap:22px;align-items:start;padding:22px}
+    #tsIface .f-media .ph{aspect-ratio:3/2;border-radius:12px}
+    #tsIface .f-body{min-width:0}
+    /* Coverdesign / Landscape: volle Breite, Banner oben ueber dem Titel */
+    #tsIface .fcard.f-wide{grid-column:1/-1}
+    #tsIface .f-banner{margin:-2px 0 20px}
+    #tsIface .f-banner .ph{aspect-ratio:8/1;border-radius:12px}
     #tsIface .fcard h3{font-size:19px;display:flex;align-items:center;gap:10px}
     #tsIface .fcard h3 .fn{font-family:var(--disp);font-size:12px;color:#05060b;background:var(--beige);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
     #tsIface .fsteps{margin:10px 0 0;padding-left:18px;color:var(--tx);font-size:14px}
@@ -12667,6 +12696,21 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .spec{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     #tsIface .spec span{font-size:12px;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:7px;padding:5px 10px;color:#fff}
     #tsIface .spec span b{color:var(--beige);font-weight:600}
+    /* Abo-Tabelle: Zeilen laufen gestaffelt ein, Preis zaehlt sich auf */
+    #tsIface .tbl.abo tbody tr{opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+    #tsIface .tbl.abo.in tbody tr{opacity:1;transform:none}
+    #tsIface .tbl.abo tbody tr:nth-child(1){transition-delay:60ms}
+    #tsIface .tbl.abo tbody tr:nth-child(2){transition-delay:150ms}
+    #tsIface .tbl.abo tbody tr:nth-child(3){transition-delay:240ms}
+    #tsIface .tbl.abo tbody tr:nth-child(4){transition-delay:330ms}
+    #tsIface .tbl.abo tbody tr:nth-child(5){transition-delay:420ms}
+    #tsIface .tbl.abo tbody tr:nth-child(6){transition-delay:510ms}
+    #tsIface .tbl.abo tfoot td{border-top:1px solid rgba(199,180,137,.34);color:#fff;font-weight:600;padding-top:16px}
+    #tsIface .tbl.abo tfoot .sum{color:var(--beige);font-variant-numeric:tabular-nums;font-size:16px}
+    #tsIface .tbl.abo td.num b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;display:block}
+    #tsIface .tbl.abo .note{display:block;font-size:11.5px;color:rgba(255,255,255,.5);margin-top:3px;font-variant-numeric:normal}
+    #tsIface .tbl.abo .tier{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--beige-lo);background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.24);border-radius:5px;padding:2px 7px;margin-left:7px;vertical-align:1px}
+    #tsIface .tbl.abo tfoot td{font-size:13.5px;color:rgba(255,255,255,.7)}
 
     /* learnings orbs */
     #tsIface .learn{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:44px auto 0;justify-items:center}
@@ -12695,6 +12739,9 @@ var TSISL_ZUG_SCHLUESSEL=[
       #tsIface .vrow .vtxt{max-width:460px}
       #tsIface .vrow .macwrap{max-width:460px}
       #tsIface .cards,#tsIface .gal,#tsIface .trio{grid-template-columns:1fr}
+      #tsIface .fmt{grid-template-columns:1fr;max-width:520px}
+      #tsIface .boxduo{grid-template-columns:1fr;max-width:520px;gap:16px}
+      #tsIface .fcard.f-split{grid-template-columns:1fr;gap:16px}
       #tsIface .trio{max-width:420px}
       #tsIface .learn{grid-template-columns:repeat(2,1fr);gap:34px 28px;max-width:560px}
       .page__interface-bau-grundstruktur-widgets .ts-hero__text{margin-top:-14%}
@@ -12765,9 +12812,21 @@ var TSISL_ZUG_SCHLUESSEL=[
         '<div class="cmp-foot"><span class="cmp-label">Beispiel 1</span><span class="cmp-dots">'+dots+'</span></div>'+
       '</div></div>';
   }
+  /* Logo je Tool-Name (Originalfarben) — Key = exakter Anzeigename in den Karten */
+  var TOOLLOGO={
+    'ChatGPT':LG_OPENAI,'Gemini':LG_GEMINI,'Canva Pro':LG_CANVA,
+    'Claude Code':LG_CLAUDE,'Higgsfield':LG_HIGGS,'Midjourney':LG_MIDJOURNEY
+  };
   function toolcard(tools,cat,desc,flow,who,whoSelf,req){
     var tr='';
-    for(var i=0;i<tools.length;i++){ if(i) tr+='<span class="tplus">+</span>'; tr+='<span class="tname">'+tools[i]+'</span>'; }
+    for(var i=0;i<tools.length;i++){
+      if(i) tr+='<span class="tplus">+</span>';
+      var lg=TOOLLOGO[tools[i]];
+      tr+='<span class="tunit">'+
+            (lg?'<span class="tmark"><img src="'+lg+'" alt="'+tools[i]+'" loading="lazy"></span>':'')+
+            '<span class="tname">'+tools[i]+'</span>'+
+          '</span>';
+    }
     return '<div class="card"><div class="toolrow">'+tr+'</div><h3>'+cat+'</h3><p class="k">'+desc+'</p><div class="flow">'+flow+'</div>'+(req?'<div class="req">'+req+'</div>':'')+'<span class="who'+(whoSelf?' self':'')+'">'+who+'</span></div>';
   }
   function frameSm(cap){ return '<div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
@@ -12854,20 +12913,23 @@ var TSISL_ZUG_SCHLUESSEL=[
     '<section class="rev">'+
       '<div class="tsif-col center">'+
         '<h2>Klingt nach <span class="gold">vielen Abos</span></h2>'+
-        '<p class="tsif-sub">Auf den ersten Blick sind das einige Abos pro Monat — und dauerhaft laufen gelassen würde das mittelfristig den Rahmen sprengen. Erst der Überblick, welche du brauchst, dann der Trick, es günstig zu halten.</p>'+
+        '<p class="tsif-sub">Auf den ersten Blick sind das einige Abos pro Monat, und dauerhaft laufen gelassen würde das mittelfristig den Rahmen sprengen. Erst der Überblick, welche du brauchst, dann der Trick, es günstig zu halten.</p>'+
+        '<p class="tsif-sub small">Midjourney, Higgsfield und Claude rechnen weltweit in Dollar ab, deshalb stehen sie hier so. Die Preise von ChatGPT, Google und Canva hängen am Land und werden ergänzt, sobald sie für Deutschland bestätigt sind.</p>'+
       '</div>'+
-      '<div class="tbl">'+
+      '<div class="tbl abo">'+
         '<table><thead><tr><th>Tool</th><th>Wofür</th><th class="num">Abo&nbsp;(mtl.)</th></tr></thead><tbody>'+
           '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><span class="pending">folgt</span></td></tr>'+
           '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><span class="pending">folgt</span></td></tr>'+
-          '<tr><td>Claude Pro</td><td>Objekte + automatischer Einbau in Notion</td><td class="num"><span class="pending">folgt</span></td></tr>'+
-          '<tr><td>Higgsfield</td><td>Fotorealistische Objekte</td><td class="num"><span class="pending">folgt</span></td></tr>'+
-          '<tr><td>Midjourney</td><td>Banner, Cover, Landscapes</td><td class="num"><span class="pending">folgt</span></td></tr>'+
+          '<tr><td>Claude Pro</td><td>Objekte + automatischer Einbau in Notion</td><td class="num"><b>20&nbsp;$</b><span class="note">17&nbsp;$ im Jahresabo</span></td></tr>'+
+          '<tr><td>Higgsfield <span class="tier">Starter</span></td><td>Fotorealistische Objekte</td><td class="num"><b>15&nbsp;$</b><span class="note">zzgl. MwSt.</span></td></tr>'+
+          '<tr><td>Midjourney <span class="tier">Basic</span></td><td>Banner, Cover, Landscapes</td><td class="num"><b>10&nbsp;$</b><span class="note">8&nbsp;$ im Jahresabo</span></td></tr>'+
           '<tr><td>Canva Pro</td><td>Feinschliff: Text, Logo, Mockups, Schatten</td><td class="num"><span class="pending">folgt</span></td></tr>'+
-        '</tbody></table>'+
+        '</tbody>'+
+        '<tfoot><tr><td colspan="2">Belegt bisher (die drei Tools, die weltweit in Dollar abrechnen)</td><td class="num"><span class="sum">45&nbsp;$</span></td></tr></tfoot></table>'+
       '</div>'+
+      '<div class="boxduo">'+
       '<div class="box good"><div class="bh">Der Trick: nur abonnieren, solange du baust</div><p>Setz dir einen Referenz-Zeitraum von <b style="color:#fff">4 Wochen</b>. In dieser Phase schließt du die Abos ab, baust dein persönliches Backoffice einmal komplett auf und erstellst alles Material, das deinem aktuellen Bedarf entspricht — danach kündigst du wieder. Brauchst du später Nachschub, sammelst du erst, was fehlt (z.&nbsp;B. neue Gerichte bis zum nächsten Menüwechsel), und buchst die Abos für einen einzigen Monat erneut. So zahlst du nie durchgehend.</p></div>'+
-      '<div class="box beige"><div class="bh">Keine Lust auf die Abo-Runde? Der Tasty-Studios-Shop</div><p>Parallel baue ich einen Shop, in dem du fertige Designs einfach bestellen kannst — Gerichte, Zutaten, Festwert-Inventar und mehr: entweder als fertiges Bildmaterial oder gleich als komplette Notion-Datenbank. Hast du spezielle Wünsche, die du im Shop nicht findest? Schreib mir gerne an <a href="mailto:robert@tasty-studios.com">robert@tasty-studios.com</a>.</p></div>'+
+      '<div class="box beige"><div class="bh">Keine Lust auf die Abo-Runde? Der Tasty-Studios-Shop</div><p>Parallel baue ich einen Shop, in dem du fertige Designs einfach bestellen kannst — Gerichte, Zutaten, Festwert-Inventar und mehr: entweder als fertiges Bildmaterial oder gleich als komplette Notion-Datenbank. Hast du spezielle Wünsche, die du im Shop nicht findest? Schreib mir gerne an <a href="mailto:robert@tasty-studios.com">robert@tasty-studios.com</a>.</p></div></div>'+
     '</section>'+
 
     /* Prompt-Vorlagen */
@@ -12890,9 +12952,9 @@ var TSISL_ZUG_SCHLUESSEL=[
         '<p class="tsif-sub">Ein Bild muss die richtige Größe haben, sonst wirkt es in Notion abgeschnitten oder verzerrt. Für jede Bild-Art gibt es deshalb einen festen Weg und ein festes Format. Einmal gemerkt, machst du es danach immer gleich.</p>'+
       '</div>'+
       '<div class="fmt">'+
-        '<div class="fcard"><h3><span class="fn">1</span>Zutat</h3><ol class="fsteps"><li>Bild erstellen</li><li>Direkt bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>Notion-Upload: <b>3:2</b></span></div></div>'+
-        '<div class="fcard"><h3><span class="fn">2</span>Gericht</h3><ol class="fsteps"><li>Bild erstellen</li><li>Hintergrund freistellen (Sticker)</li><li>In Canva einfügen — Texte, Schatten &amp; Co. darüberlegen</li><li>Fertiges Bild bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>In Canva anlegen: <b>1920 × 1080 px</b></span></div></div>'+
-        '<div class="fcard"><h3><span class="fn">3</span>Abstraktes Coverdesign / Landscape</h3><ol class="fsteps"><li>Bild in Midjourney erstellen</li><li>Je nach Einsatzort die Zielgröße in Canva anlegen &amp; zuschneiden</li><li>Bild bei Notion hochladen</li></ol>'+
+        '<div class="fcard f-split">'+'<div class="f-media"><div class="ph"><div class="ph-in"><span class="ph-pill">Zutat</span><span class="ph-cap">Beispiel folgt</span></div></div></div>'+'<div class="f-body"><h3><span class="fn">1</span>Zutat</h3><ol class="fsteps"><li>Bild erstellen</li><li>Direkt bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>Notion-Upload: <b>3:2</b></span></div></div>'+'</div>'+
+        '<div class="fcard f-split">'+'<div class="f-media"><div class="ph"><div class="ph-in"><span class="ph-pill">Gericht</span><span class="ph-cap">Beispiel folgt</span></div></div></div>'+'<div class="f-body"><h3><span class="fn">2</span>Gericht</h3><ol class="fsteps"><li>Bild erstellen</li><li>Hintergrund freistellen (Sticker)</li><li>In Canva einfügen — Texte, Schatten &amp; Co. darüberlegen</li><li>Fertiges Bild bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>In Canva anlegen: <b>1920 × 1080 px</b></span></div></div></div>'+
+        '<div class="fcard f-wide">'+'<div class="f-banner"><div class="ph"><div class="ph-in"><span class="ph-pill">Coverdesign &amp; Landscape</span><span class="ph-cap">Banner-Beispiel folgt</span></div></div></div>'+'<h3><span class="fn">3</span>Abstraktes Coverdesign / Landscape</h3><ol class="fsteps"><li>Bild in Midjourney erstellen</li><li>Je nach Einsatzort die Zielgröße in Canva anlegen &amp; zuschneiden</li><li>Bild bei Notion hochladen</li></ol>'+
           '<div class="tbl" style="margin-top:16px"><table><thead><tr><th>Wo im System</th><th class="num">Zielgröße&nbsp;(px)</th><th>Form</th><th>In Midjourney</th></tr></thead><tbody>'+
             '<tr><td>Banner ganz oben auf der Seite</td><td class="num">2000 × 400</td><td>5:1</td><td><b style="color:#c7b489">--ar 16:9</b> &rarr; zuschneiden</td></tr>'+
             '<tr><td>Titel-Banner im Text (volle Breite)</td><td class="num">1536 × 192</td><td>8:1</td><td><b style="color:#c7b489">--ar 16:9</b> &rarr; zuschneiden</td></tr>'+
@@ -12909,7 +12971,11 @@ var TSISL_ZUG_SCHLUESSEL=[
     /* Ordner + Links */
     '<section class="rev">'+
       '<div class="split">'+
-        '<div class="s-txt"><h3>Ordner auf dem Rechner anlegen</h3><p>Bevor du loslegst, leg dir ein paar Ordner an — je einen für Zutaten, Gerichte und Banner. Klingt banal, spart dir aber viel Sucherei: So findest du jedes Bild sofort wieder und kannst in Ruhe Material sammeln, bis der nächste Schwung dran ist.</p></div>'+
+        '<div class="s-txt"><h3>Ordner auf dem Rechner anlegen</h3>'+
+          '<p>Bevor du loslegst, leg dir ein paar Ordner an, je einen für Zutaten, Gerichte und Banner. Bei den Gerichten kommt ein Unterordner für die freigestellten Sticker dazu, weil du die in Canva immer wieder brauchst.</p>'+
+          '<p>Benenn die Dateien so, wie der Eintrag später in Notion heißt. Aus <span class="mono">zutat-tomate.png</span> wird die Tomate in deiner Zutatenliste, und du musst beim Hochladen nicht raten, welches der vier ähnlichen Bilder das richtige war. Bei Bannern hängst du die Zielgröße an den Namen.</p>'+
+          '<p>Zwei Minuten Aufwand, die sich in der Bauphase auszahlen. Da entsteht in kurzer Zeit viel Material, und du lädst es am Stück nach Notion hoch. Mit sortierten Ordnern wird daraus eine ruhige halbe Stunde statt einer Suchaktion.</p>'+
+        '</div>'+
         '<div class="s-media">'+frameSm('Ordner-Baum · Zutaten / Gerichte / Banner')+'</div>'+
       '</div>'+
       '<div class="cards" style="max-width:840px;margin-top:44px">'+
@@ -12950,7 +13016,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   }
 
   function revealObserve(root){
-    var els=root.querySelectorAll('.rev');
+    var els=root.querySelectorAll('.rev,.tbl.abo');
     if(!('IntersectionObserver' in window)){ Array.prototype.forEach.call(els,function(e){e.classList.add('in');}); return; }
     var io=new IntersectionObserver(function(ents){
       ents.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
