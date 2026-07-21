@@ -15493,16 +15493,31 @@ var TSISL_ZUG_SCHLUESSEL=[
 
   var layer=null, open=null, raf=0;
 
+  /* .notion-collection.inline liefert width:0 (die Breite steckt erst im
+     inneren Gallery-Container), .notion-image umschliesst ein
+     display:contents-span. Deshalb im Zweifel am inneren Element messen. */
+  function rectOf(el){
+    var r=el.getBoundingClientRect();
+    if(r.width>=8 && r.height>=8) return r;
+    var inner=el.querySelector(".notion-collection-gallery, .notion-collection-list, .notion-collection-table, img");
+    if(inner){
+      var ir=inner.getBoundingClientRect();
+      if(ir.width>=8 && ir.height>=8) return ir;
+    }
+    return r;
+  }
+
   function place(s){
-    if(!s || !s.el || !s.card) return;
-    if(!s.el.isConnected){ s.card.classList.remove("on"); return; }
-    var r=s.el.getBoundingClientRect();
-    if(r.height<8){ s.card.classList.remove("on"); return; }   // Bild noch nicht geladen
+    if(!s || !s.el || !s.card) return false;
+    if(!s.el.isConnected){ s.card.classList.remove("on"); return false; }
+    var r=rectOf(s.el);
+    if(r.height<8 || r.width<8){ s.card.classList.remove("on"); return false; } // noch nicht geladen
     s.card.style.top    = Math.round(r.top+window.pageYOffset)+"px";
     s.card.style.left   = Math.round(r.left+window.pageXOffset)+"px";
     s.card.style.width  = Math.round(r.width)+"px";
     s.card.style.height = Math.round(r.height)+"px";
     s.card.classList.toggle("tight", r.height < 320);
+    return true;
   }
   function placeAll(){ SEC.forEach(place); }
 
@@ -15511,8 +15526,8 @@ var TSISL_ZUG_SCHLUESSEL=[
     if(open) open.card.classList.remove("on");
     open=s;
     if(!s) return;
-    place(s);
-    s.card.classList.add("on");
+    if(place(s)) s.card.classList.add("on");   // nie mit kaputter Geometrie zeigen
+    else open=null;
   }
   function hide(s){ if(open===s) show(null); }
 
