@@ -1664,70 +1664,74 @@
     #tsarc .arc-tile{opacity:1;transform:none;transition:none;animation:none !important}
   }
 
-  #tswave{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tswave{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tswave *{box-sizing:border-box}
-  #tswave .wv-head{max-width:900px;margin:0 auto 48px;padding:0 24px;text-align:center}
+  #tswave .wv-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
   #tswave .wv-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
   #tswave .wv-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  /* "Lineal Web" statt "Lineal TS": der Titel enthaelt ein F (Einkaufspreis), das im TS-Subset fehlt. */
   #tswave .wv-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
   #tswave .wv-title .ts-gold{color:#c7b489}
-  #tswave .wv-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0;max-width:680px;margin-left:auto;margin-right:auto}
+  #tswave .wv-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0;max-width:640px;margin-left:auto;margin-right:auto}
 
+  /* Grunddefault sichtbar; erst mit JS (.js) wird animationsabhaengig versteckt */
   #tswave .wv-wrap{max-width:1180px;margin:0 auto}
   #tswave.js .wv-wrap{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
   #tswave.js .wv-wrap.on{opacity:1;transform:none}
 
-  /* Kette */
-  #tswave .wv-chain{position:relative;display:flex;align-items:flex-start;justify-content:center;gap:0;padding-bottom:52px}
-  #tswave .wv-node{display:flex;flex-direction:column;align-items:center;gap:10px;flex:0 0 auto;width:clamp(104px,12vw,146px);text-align:center}
-  #tswave .wv-med{width:clamp(74px,8.4vw,100px);height:clamp(74px,8.4vw,100px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);transition:box-shadow .6s cubic-bezier(.16,1,.3,1)}
-  #tswave .wv-node.hot .wv-med{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.18),0 0 36px rgba(199,180,137,.44)}
-  #tswave .wv-step{font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#c7b489}
-  #tswave .wv-name{font-size:12.5px;font-weight:700;letter-spacing:.01em;color:#efe6d2;line-height:1.3}
-  #tswave .wv-chip{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.32);border-radius:12px;padding:6px 11px}
-  #tswave .wv-k{font-size:8.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.48);white-space:nowrap}
-  #tswave .wv-v{font-size:14px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tswave .wv-badge{font-size:10.5px;font-weight:700;color:#c7b489;opacity:0;height:14px}
-  #tswave.js .wv-node.hit .wv-badge{animation:wvBadge 2s cubic-bezier(.16,1,.3,1) 1}
+  #tswave .wv-stage{display:flex;align-items:center;justify-content:center;gap:0}
 
-  /* Verbinder */
-  #tswave .wv-conn{position:relative;flex:1 1 auto;min-width:22px;max-width:74px;height:2px;margin-top:clamp(37px,4.2vw,50px);border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.06),rgba(199,180,137,.5),rgba(199,180,137,.06))}
+  /* Quelle links */
+  #tswave .wv-src{display:flex;flex-direction:column;align-items:center;gap:11px;flex:0 0 auto}
+  #tswave .wv-med{border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);transition:box-shadow .6s cubic-bezier(.16,1,.3,1)}
+  #tswave .wv-src .wv-med{width:clamp(72px,7.4vw,92px);height:clamp(72px,7.4vw,92px)}
+  #tswave .wv-src.hot .wv-med{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.18),0 0 38px rgba(199,180,137,.45)}
+  #tswave .wv-name{font-size:11.5px;font-weight:700;letter-spacing:.02em;color:#efe6d2}
+  #tswave .wv-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.34);border-radius:999px;padding:6px 13px}
+  #tswave .wv-k{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  #tswave .wv-v{font-size:14px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+  #tswave .wv-note{font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
+
+  /* Zuleitung + Sammelschiene */
+  #tswave .wv-feed{position:relative;width:clamp(22px,3.2vw,48px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.5))}
+  #tswave .wv-bus{width:2px;align-self:stretch;flex:0 0 auto;border-radius:2px;background:linear-gradient(180deg,rgba(199,180,137,.12),rgba(199,180,137,.5),rgba(199,180,137,.12));margin:14px 0}
   #tswave .wv-dot{position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
-  #tswave.js .wv-conn.fire .wv-dot{animation:wvRun .8s cubic-bezier(.16,1,.3,1) 1}
+  #tswave.js .wv-feed.fire .wv-dot{animation:wvRun .75s cubic-bezier(.16,1,.3,1) 1}
 
-  /* Nebenweg: Zutat geht auch direkt ins Gericht */
-  #tswave .wv-bypass{position:absolute;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.06),rgba(199,180,137,.4),rgba(199,180,137,.06));opacity:0;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
-  #tswave .wv-wrap.on .wv-bypass{opacity:1}
-  #tswave .wv-bypass::before,#tswave .wv-bypass::after{content:"";position:absolute;width:2px;height:16px;background:linear-gradient(180deg,rgba(199,180,137,.4),rgba(199,180,137,.06));bottom:0}
-  #tswave .wv-bypass::before{left:0}
-  #tswave .wv-bypass::after{right:0}
-  #tswave .wv-bypass .wv-dot{top:50%}
-  #tswave.js .wv-bypass.fire .wv-dot{animation:wvRun 1s cubic-bezier(.16,1,.3,1) 1}
-  #tswave .wv-bylabel{position:absolute;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.42);white-space:nowrap;transform:translate(-50%,6px)}
+  /* Gerichte rechts */
+  #tswave .wv-dishes{display:flex;flex-direction:column;gap:clamp(14px,2vw,24px);flex:0 0 auto}
+  #tswave .wv-row{display:flex;align-items:center;gap:0}
+  #tswave .wv-branch{position:relative;width:clamp(22px,3.2vw,48px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.5),rgba(199,180,137,.5),rgba(199,180,137,.04))}
+  #tswave.js .wv-branch.fire .wv-dot{animation:wvRun .8s cubic-bezier(.16,1,.3,1) 1}
+  #tswave .wv-dish{display:flex;align-items:center;gap:13px;padding-left:14px}
+  #tswave .wv-dish .wv-med{width:74px;height:74px}
+  #tswave .wv-meta{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+  #tswave .wv-price{position:relative;display:inline-flex;align-items:center;gap:8px}
+  #tswave .wv-badge{font-size:11px;font-weight:700;color:#c7b489;opacity:0;transform:translateY(4px)}
+  #tswave.js .wv-row.hit .wv-badge{animation:wvBadge 1.8s cubic-bezier(.16,1,.3,1) 1}
+  #tswave.js .wv-row.hit .wv-med{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.15),0 0 30px rgba(199,180,137,.34)}
 
-  #tswave .wv-caption{max-width:720px;margin:30px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
-  #tswave .wv-note{display:block;margin-top:8px;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28);text-align:center}
-  #tswave .wv-foot{display:flex;justify-content:center;margin-top:26px}
+  #tswave .wv-foot{display:flex;justify-content:center;margin-top:32px}
   #tswave .wv-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
   #tswave .wv-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
   #tswave .wv-replay svg{width:15px;height:15px}
+  #tswave .wv-caption{max-width:660px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
 
   #tswave.hid *{animation-play-state:paused !important}
 
   @keyframes wvRun{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
-  @keyframes wvBadge{0%{opacity:0;transform:translateY(4px)}14%{opacity:1;transform:none}70%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+  @keyframes wvBadge{0%{opacity:0;transform:translateY(4px)}14%{opacity:1;transform:none}72%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
 
-  @media(max-width:900px){
-    #tswave .wv-chain{flex-direction:column;align-items:center}
-    #tswave .wv-node{width:100%;max-width:280px;flex-direction:row;justify-content:flex-start;gap:14px;text-align:left}
-    #tswave .wv-node .wv-meta{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
-    #tswave .wv-med{width:64px;height:64px}
-    #tswave .wv-chip{align-items:flex-start}
-    #tswave .wv-conn{flex:0 0 auto;width:2px;height:22px;min-width:0;max-width:none;margin:8px 0 8px calc(-1 * (280px / 2) + 32px);background:linear-gradient(180deg,rgba(199,180,137,.06),rgba(199,180,137,.5),rgba(199,180,137,.06))}
+  @media(max-width:820px){
+    #tswave .wv-stage{flex-direction:column;gap:0}
+    #tswave .wv-feed{width:2px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.5));margin:10px 0}
+    #tswave .wv-bus{display:none}
+    #tswave .wv-dishes{gap:14px;width:100%;max-width:340px}
+    #tswave .wv-row{flex-direction:column;gap:0}
+    #tswave .wv-branch{width:2px;height:20px;background:linear-gradient(180deg,rgba(199,180,137,.5),rgba(199,180,137,.04));margin:6px 0}
+    #tswave .wv-dish{padding-left:0;width:100%;justify-content:flex-start}
+    #tswave .wv-dish .wv-med{width:62px;height:62px}
+    #tswave.js .wv-feed.fire .wv-dot,#tswave.js .wv-branch.fire .wv-dot{animation:wvRunDown .8s cubic-bezier(.16,1,.3,1) 1}
     #tswave .wv-dot{left:50%;top:0}
-    #tswave.js .wv-conn.fire .wv-dot{animation:wvRunDown .8s cubic-bezier(.16,1,.3,1) 1}
-    #tswave .wv-bypass,#tswave .wv-bylabel{display:none}
   }
   @keyframes wvRunDown{0%{top:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
 
@@ -1735,6 +1739,25 @@
     #tswave.js .wv-wrap{opacity:1;transform:none;transition:none}
     #tswave .wv-dot{display:none}
     #tswave *{animation:none!important}
+  }
+
+  /* --- Erweiterung: weitere Spalten-Bereiche, gleiche Bausteine --- */
+  #tswave .wv-step{font-size:9px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#c7b489}
+  #tswave .wv-src{width:clamp(112px,11.5vw,142px);text-align:center}
+  /* schmale Spalten: Bezeichner ueber den Wert stapeln, damit nichts umbricht */
+  #tswave .wv-src .wv-chip{flex-direction:column;align-items:center;gap:2px;padding:6px 12px}
+  #tswave .wv-src .wv-k{white-space:nowrap}
+  #tswave .wv-caption .wv-note{display:block;margin-top:10px}
+  #tswave .wv-src .wv-name{text-align:center}
+  #tswave .wv-src .wv-badge{opacity:0;height:14px}
+  #tswave.js .wv-src.hit .wv-badge{animation:wvBadge 2s cubic-bezier(.16,1,.3,1) 1}
+  #tswave .wv-src.hot .wv-med{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.18),0 0 38px rgba(199,180,137,.45)}
+  /* Rueckfluss der Gerichte in die Menue-Kalkulation: gespiegelter Abzweig */
+  #tswave .wv-branch--out{background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.5));margin-left:13px}
+  #tswave .wv-dish{padding-right:0}
+  @media(max-width:900px){
+    #tswave .wv-src{width:100%;max-width:340px}
+    #tswave .wv-branch--out{width:2px;height:20px;background:linear-gradient(180deg,rgba(199,180,137,.5),rgba(199,180,137,.04));margin:6px 0}
   }
   `;
   function injectCSS(){
@@ -1895,61 +1918,85 @@
   </div>
 
   <div class="wv-wrap">
-    <div class="wv-chain" id="wvChain">
-      <div class="wv-node" data-n="0">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/inventar/olivenoel.jpg" alt="Olivenöl">
-        <div class="wv-meta">
-          <div class="wv-step">Inventarprodukt</div>
-          <div class="wv-name">Olivenöl 5 L</div>
-          <div class="wv-chip"><span class="wv-k">Einkaufspreis</span><span class="wv-v">24,00 €</span></div>
-          <span class="wv-badge">+2,40 €</span>
-        </div>
+    <div class="wv-stage">
+      <div class="wv-src" data-n="0">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/inventar/olivenoel.jpg" alt="Olivenöl 5 L">
+        <div class="wv-step">Inventarprodukt</div>
+        <div class="wv-name">Olivenöl 5 L</div>
+        <div class="wv-chip"><span class="wv-k">Einkaufspreis</span><span class="wv-v">24,00 €</span></div>
+        <span class="wv-badge">+2,40 €</span>
+        <span class="wv-note">Beispielwert</span>
       </div>
-      <span class="wv-conn"><span class="wv-dot"></span></span>
-      <div class="wv-node" data-n="1">
+      <span class="wv-feed"><span class="wv-dot"></span></span>
+      <div class="wv-src" data-n="1">
         <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
-        <div class="wv-meta">
-          <div class="wv-step">Zutat</div>
-          <div class="wv-name">Basilikum</div>
-          <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">0,40 €</span></div>
-          <span class="wv-badge">+0,04 €</span>
-        </div>
+        <div class="wv-step">Zutat</div>
+        <div class="wv-name">Basilikum</div>
+        <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">0,40 €</span></div>
+        <span class="wv-badge">+0,04 €</span>
       </div>
-      <span class="wv-conn"><span class="wv-dot"></span></span>
-      <div class="wv-node" data-n="2">
+      <span class="wv-feed"><span class="wv-dot"></span></span>
+      <div class="wv-src" data-n="2">
         <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Basilikum-Pesto">
-        <div class="wv-meta">
-          <div class="wv-step">Rezept</div>
-          <div class="wv-name">Basilikum-Pesto</div>
-          <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">1,20 €</span></div>
-          <span class="wv-badge">+0,04 €</span>
+        <div class="wv-step">Rezept</div>
+        <div class="wv-name">Basilikum-Pesto</div>
+        <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">1,20 €</span></div>
+        <span class="wv-badge">+0,04 €</span>
+      </div>
+      <span class="wv-feed"><span class="wv-dot"></span></span>
+      <span class="wv-bus"></span>
+
+      <div class="wv-dishes">
+        <div class="wv-row" data-n="3">
+          <span class="wv-branch"><span class="wv-dot"></span></span>
+          <div class="wv-dish">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.jpg" alt="Blattsalat">
+            <div class="wv-meta">
+              <div class="wv-step">Gericht</div>
+              <div class="wv-name">Blattsalat</div>
+              <div class="wv-price"><div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">4,55 €</span></div><span class="wv-badge">+0,04 €</span></div>
+            </div>
+          </div>
+          <span class="wv-branch wv-branch--out"><span class="wv-dot"></span></span>
+        </div>
+        <div class="wv-row" data-n="4">
+          <span class="wv-branch"><span class="wv-dot"></span></span>
+          <div class="wv-dish">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Pilz-Ravioli">
+            <div class="wv-meta">
+              <div class="wv-step">Gericht</div>
+              <div class="wv-name">Pilz-Ravioli</div>
+              <div class="wv-price"><div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">5,20 €</span></div><span class="wv-badge">+0,04 €</span></div>
+            </div>
+          </div>
+          <span class="wv-branch wv-branch--out"><span class="wv-dot"></span></span>
+        </div>
+        <div class="wv-row" data-n="5">
+          <span class="wv-branch"><span class="wv-dot"></span></span>
+          <div class="wv-dish">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg" alt="Lachsfilet">
+            <div class="wv-meta">
+              <div class="wv-step">Gericht</div>
+              <div class="wv-name">Lachsfilet</div>
+              <div class="wv-price"><div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">7,80 €</span></div><span class="wv-badge">+0,04 €</span></div>
+            </div>
+          </div>
+          <span class="wv-branch wv-branch--out"><span class="wv-dot"></span></span>
         </div>
       </div>
-      <span class="wv-conn"><span class="wv-dot"></span></span>
-      <div class="wv-node" data-n="3">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Pilz-Ravioli">
-        <div class="wv-meta">
-          <div class="wv-step">Gericht</div>
-          <div class="wv-name">Pilz-Ravioli</div>
-          <div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">5,20 €</span></div>
-          <span class="wv-badge">+0,04 €</span>
-        </div>
+
+      <span class="wv-bus"></span>
+      <span class="wv-feed"><span class="wv-dot"></span></span>
+      <div class="wv-src" data-n="6">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/menu-01.webp" alt="3-Gang-Menü">
+        <div class="wv-step">Menü-Kalkulation</div>
+        <div class="wv-name">3-Gang-Menü</div>
+        <div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">18,50 €</span></div>
+        <span class="wv-badge">+0,04 €</span>
       </div>
-      <span class="wv-conn"><span class="wv-dot"></span></span>
-      <div class="wv-node" data-n="4">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/menu-01.webp" alt="Menü">
-        <div class="wv-meta">
-          <div class="wv-step">Menü-Kalkulation</div>
-          <div class="wv-name">3-Gang-Menü</div>
-          <div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">18,50 €</span></div>
-          <span class="wv-badge">+0,04 €</span>
-        </div>
-      </div>
-      <span class="wv-bypass" id="wvBypass"><span class="wv-dot"></span></span>
-      <span class="wv-bylabel" id="wvByLabel">Die Zutat geht auch direkt ins Gericht</span>
     </div>
 
-    <p class="wv-caption">Du änderst den Einkaufspreis genau einmal — am Inventarprodukt. Zutat, Rezept, Gericht und Menü rechnen sich von selbst neu, ohne dass du eine Kalkulation von Hand anfasst.
+    <p class="wv-caption">Du änderst den Einkaufspreis genau einmal — am Inventarprodukt. Zutat, Rezept, jedes Gericht und am Ende die Menü-Kalkulation rechnen sich von selbst neu.
       <span class="wv-note">Alle Zahlen sind Beispielwerte.</span>
     </p>
 
@@ -1966,112 +2013,112 @@
   }
 
   function initWave(){
-    var root=document.getElementById('tswave'); if(!root) return;
-    var wrap=root.querySelector('.wv-wrap'); if(!wrap) return;
-    if(window.__tswaveKill){ try{ window.__tswaveKill(); }catch(e){} }
+  var root=document.getElementById('tswave'); if(!root) return;
+  var wrap=root.querySelector('.wv-wrap'); if(!wrap) return;
+  if(window.__tswaveKill){ try{ window.__tswaveKill(); }catch(e){} }
 
-    var chain=root.querySelector('#wvChain');
-    var nodes=[].slice.call(root.querySelectorAll('.wv-node'));
-    var conns=[].slice.call(root.querySelectorAll('.wv-chain > .wv-conn'));
-    var bypass=root.querySelector('#wvBypass'), byLabel=root.querySelector('#wvByLabel');
-    var replay=root.querySelector('#wvReplay');
-    /* Beispielwerte: grosser Einkaufs-Sprung wird zu kleinen Portions-Aufschlaegen */
-    var VALS=[[24.00,26.40],[0.40,0.44],[1.20,1.24],[5.20,5.24],[18.50,18.54]];
-    var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var revealed=false, dead=false, forceReady=false;
-    var timers=[], rafs=[], pollId=null, readyTimer=null, io=null;
+  var srcs=[].slice.call(root.querySelectorAll('.wv-src'));      /* 0 Inventar, 1 Zutat, 2 Rezept, 3 Menue */
+  var rows=[].slice.call(root.querySelectorAll('.wv-row'));      /* 3 Gerichte */
+  var feeds=[].slice.call(root.querySelectorAll('.wv-stage > .wv-feed'));
+  var replay=root.querySelector('#wvReplay');
+  /* Beispielwerte: grosser Einkaufs-Sprung wird zu kleinen Portions-Aufschlaegen */
+  var SRC=[[24.00,26.40],[0.40,0.44],[1.20,1.24],[18.50,18.54]];
+  var DISH=[[4.55,4.59],[5.20,5.24],[7.80,7.84]];
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var revealed=false, dead=false, forceReady=false;
+  var timers=[], rafs=[], pollId=null, readyTimer=null, io=null;
 
-    root.classList.add('js');
+  root.classList.add('js');
 
-    function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
-    function later(fn,ms){ var t=setTimeout(function(){ if(!dead) fn(); },ms); timers.push(t); return t; }
-    function count(el,from,to,dur){
-      if(!el) return;
-      if(reduced){ el.textContent=money(to); return; }
-      var t0=null,d=dur||700,rid=null;
-      function tk(ts){ if(dead) return; if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); el.textContent=money(from+(to-from)*e); if(p<1){ rid=requestAnimationFrame(tk); rafs.push(rid); } }
-      rid=requestAnimationFrame(tk); rafs.push(rid);
+  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+  function later(fn,ms){ var t=setTimeout(function(){ if(!dead) fn(); },ms); timers.push(t); return t; }
+  function count(el,from,to,dur){
+    if(!el) return;
+    if(reduced){ el.textContent=money(to); return; }
+    var t0=null,d=dur||650,rid=null;
+    function tk(ts){ if(dead) return; if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); el.textContent=money(from+(to-from)*e); if(p<1){ rid=requestAnimationFrame(tk); rafs.push(rid); } }
+    rid=requestAnimationFrame(tk); rafs.push(rid);
+  }
+  function clearAll(){ timers.forEach(clearTimeout); timers=[]; rafs.forEach(cancelAnimationFrame); rafs=[]; }
+  function fire(el){ if(!el) return; el.classList.remove('fire'); void el.offsetWidth; el.classList.add('fire'); }
+  function val(el){ return el ? el.querySelector('.wv-v') : null; }
+  function resetView(){
+    clearAll();
+    srcs.forEach(function(s,i){ s.classList.remove('hot','hit'); var v=val(s); if(v&&SRC[i]) v.textContent=money(SRC[i][0]); });
+    rows.forEach(function(r,i){ r.classList.remove('hot','hit'); var v=val(r); if(v&&DISH[i]) v.textContent=money(DISH[i][0]); });
+    feeds.forEach(function(f){ f.classList.remove('fire'); });
+    [].slice.call(root.querySelectorAll('.wv-branch')).forEach(function(b){ b.classList.remove('fire'); });
+  }
+  function light(el,from,to,dur){
+    if(!el) return;
+    el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit','hot');
+    count(val(el),from,to,dur);
+    later(function(){ el.classList.remove('hot'); }, 1600);
+  }
+  function run(){
+    resetView();
+    if(reduced){
+      srcs.forEach(function(s,i){ var v=val(s); if(v&&SRC[i]) v.textContent=money(SRC[i][1]); });
+      rows.forEach(function(r,i){ var v=val(r); if(v&&DISH[i]) v.textContent=money(DISH[i][1]); });
+      return;
     }
-    function clearAll(){ timers.forEach(clearTimeout); timers=[]; rafs.forEach(cancelAnimationFrame); rafs=[]; }
-    function fire(el){ if(!el) return; el.classList.remove('fire'); void el.offsetWidth; el.classList.add('fire'); }
-    function resetView(){
-      clearAll();
-      nodes.forEach(function(n,i){
-        n.classList.remove('hot','hit');
-        var v=n.querySelector('.wv-v'); if(v) v.textContent=money(VALS[i][0]);
-      });
-      conns.forEach(function(c){ c.classList.remove('fire'); });
-      if(bypass) bypass.classList.remove('fire');
-    }
-    /* Nebenweg Zutat -> Gericht unter der Kette positionieren */
-    function placeBypass(){
-      if(!bypass||!chain) return;
-      if(window.innerWidth<=900){ return; }
-      var a=nodes[1], b=nodes[3]; if(!a||!b) return;
-      var cr=chain.getBoundingClientRect(), ar=a.getBoundingClientRect(), br=b.getBoundingClientRect();
-      var bottom=0;
-      nodes.forEach(function(n){ var b=n.getBoundingClientRect().bottom; if(b>bottom) bottom=b; });
-      var top=(bottom-cr.top)+18;
-      var x1=ar.left+ar.width/2-cr.left, x2=br.left+br.width/2-cr.left;
-      bypass.style.left=x1+'px'; bypass.style.width=(x2-x1)+'px'; bypass.style.top=top+'px';
-      if(byLabel){ byLabel.style.left=((x1+x2)/2)+'px'; byLabel.style.top=top+'px'; }
-    }
-    function run(){
-      resetView(); placeBypass();
-      if(reduced){ nodes.forEach(function(n,i){ var v=n.querySelector('.wv-v'); if(v) v.textContent=money(VALS[i][1]); }); return; }
-      later(function(){ nodes[0].classList.add('hot','hit'); count(nodes[0].querySelector('.wv-v'),VALS[0][0],VALS[0][1],800); }, 500);
-      for(var i=0;i<4;i++){
-        (function(i){
-          later(function(){ fire(conns[i]); if(i===1) fire(bypass); }, 1500+i*900);
-          later(function(){
-            var n=nodes[i+1];
-            n.classList.remove('hit'); void n.offsetWidth; n.classList.add('hit','hot');
-            count(n.querySelector('.wv-v'),VALS[i+1][0],VALS[i+1][1],650);
-            if(nodes[i]) nodes[i].classList.remove('hot');
-          }, 2200+i*900);
-        })(i);
-      }
-      later(function(){ nodes[4].classList.remove('hot'); }, 6400);
-    }
+    /* 1) Einkaufspreis am Inventarprodukt steigt */
+    later(function(){ light(srcs[0],SRC[0][0],SRC[0][1],800); }, 500);
+    /* 2) weiter in die Zutat */
+    later(function(){ fire(feeds[0]); }, 1500);
+    later(function(){ light(srcs[1],SRC[1][0],SRC[1][1]); }, 2150);
+    /* 3) weiter ins Rezept */
+    later(function(){ fire(feeds[1]); }, 2650);
+    later(function(){ light(srcs[2],SRC[2][0],SRC[2][1]); }, 3300);
+    /* 4) ueber die Sammelschiene gestaffelt in alle Gerichte */
+    later(function(){ fire(feeds[2]); }, 3800);
+    rows.forEach(function(r,i){
+      later(function(){ fire(r.querySelector('.wv-branch:not(.wv-branch--out)')); }, 4450+i*240);
+      later(function(){ light(r,DISH[i][0],DISH[i][1]); }, 5050+i*240);
+    });
+    /* 5) und aus den Gerichten zurueck in die Menue-Kalkulation */
+    rows.forEach(function(r,i){
+      later(function(){ fire(r.querySelector('.wv-branch--out')); }, 5900+i*160);
+    });
+    later(function(){ fire(feeds[3]); }, 6500);
+    later(function(){ light(srcs[3],SRC[3][0],SRC[3][1]); }, 7150);
+  }
 
-    function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
-    function inView(){ var r=wrap.getBoundingClientRect(); return r.top < window.innerHeight*0.85 && r.bottom > 0; }
-    function docTop(){ var el=wrap,y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
-    var lastDocTop=null, stableTicks=0;
-    function layoutSettled(){ var d=docTop(); if(lastDocTop!==null && Math.abs(d-lastDocTop)<2){ stableTicks++; } else { stableTicks=0; } lastDocTop=d; return stableTicks>=3; }
-    function maybeReveal(){
-      if(dead||revealed) return;
-      if(!forceReady){ var hero=document.querySelector('.ts-hero__img'); if(hero && !hero.complete){ lastDocTop=null; stableTicks=0; return; } }
-      if(inView() && (forceReady || layoutSettled())){ reveal(); run(); }
-    }
-    function onVis(){ root.classList.toggle('hid', document.hidden); }
-    function onResize(){ placeBypass(); }
-    document.addEventListener('visibilitychange', onVis);
-    window.addEventListener('resize', onResize);
-    readyTimer=setTimeout(function(){ forceReady=true; }, 10000);
+  function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
+  function inView(){ var r=wrap.getBoundingClientRect(); return r.top < window.innerHeight*0.85 && r.bottom > 0; }
+  function docTop(){ var el=wrap,y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+  var lastDocTop=null, stableTicks=0;
+  function layoutSettled(){ var d=docTop(); if(lastDocTop!==null && Math.abs(d-lastDocTop)<2){ stableTicks++; } else { stableTicks=0; } lastDocTop=d; return stableTicks>=3; }
+  function maybeReveal(){
+    if(dead||revealed) return;
+    if(!forceReady){ var hero=document.querySelector('.ts-hero__img'); if(hero && !hero.complete){ lastDocTop=null; stableTicks=0; return; } }
+    if(inView() && (forceReady || layoutSettled())){ reveal(); run(); }
+  }
+  function onVis(){ root.classList.toggle('hid', document.hidden); }
+  document.addEventListener('visibilitychange', onVis);
+  readyTimer=setTimeout(function(){ forceReady=true; }, 10000);
 
-    if(replay) replay.addEventListener('click', function(){ reveal(); run(); });
+  if(replay) replay.addEventListener('click', function(){ reveal(); run(); });
 
-    window.__tswaveKill=function(){
-      dead=true; clearAll();
-      if(pollId){ clearInterval(pollId); pollId=null; }
-      if(readyTimer){ clearTimeout(readyTimer); readyTimer=null; }
-      if(io){ io.disconnect(); io=null; }
-      document.removeEventListener('visibilitychange', onVis);
-      window.removeEventListener('resize', onResize);
-    };
+  window.__tswaveKill=function(){
+    dead=true; clearAll();
+    if(pollId){ clearInterval(pollId); pollId=null; }
+    if(readyTimer){ clearTimeout(readyTimer); readyTimer=null; }
+    if(io){ io.disconnect(); io=null; }
+    document.removeEventListener('visibilitychange', onVis);
+  };
 
-    resetView(); placeBypass();
-    if(reduced){ reveal(); run(); return; }
+  resetView();
+  if(reduced){ reveal(); run(); return; }
 
-    if('IntersectionObserver' in window){
-      io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); }); },{threshold:.2});
-      io.observe(wrap);
-    }
-    pollId=setInterval(function(){
-      if(dead||revealed){ clearInterval(pollId); pollId=null; if(io){ io.disconnect(); io=null; } return; }
-      maybeReveal();
-    }, 400);
+  if('IntersectionObserver' in window){
+    io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); }); },{threshold:.2});
+    io.observe(wrap);
+  }
+  pollId=setInterval(function(){
+    if(dead||revealed){ clearInterval(pollId); pollId=null; if(io){ io.disconnect(); io=null; } return; }
+    maybeReveal();
+  }, 400);
   }
 
   function initBaustein(){
