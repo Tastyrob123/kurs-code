@@ -1490,16 +1490,16 @@
   /* connectors — Loop 3.4s mit Ruhephase */
   #tsbau .bau-conn{position:relative;width:clamp(34px,5.5vw,80px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.04))}
   #tsbau .bau-conn::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
-  #tsbau.js .bau-scene.on .bau-conn::after{animation:bauPulse 3.4s cubic-bezier(.45,0,.25,1) infinite}
-  #tsbau.js .bau-scene.on .bau-conn.rev::after{animation:bauPulseRev 3.4s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn::after{animation:bauPulse 3.4s cubic-bezier(.22,1,.36,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn.rev::after{animation:bauPulseRev 3.4s cubic-bezier(.22,1,.36,1) infinite}
   /* Szene 1: Punkt laeuft NUR beim Wechsel los */
-  #tsbau.js .bau-scene.on .bau-conn.once::after{animation:none}
-  #tsbau.js .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn.once::after{animation:none}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
 
   #tsbau .bau-vconn{position:relative;width:2px;height:24px;margin:8px 0;flex:0 0 auto;border-radius:2px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.55),rgba(199,180,137,.05))}
   #tsbau .bau-vconn::after{content:"";position:absolute;left:50%;top:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
-  #tsbau.js .bau-scene.on .bau-vconn.up::after{animation:bauPulseUp 3.4s cubic-bezier(.45,0,.25,1) infinite}
-  #tsbau.js .bau-scene.on .bau-vconn.down::after{animation:bauPulseDown 3.4s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-vconn.up::after{animation:bauPulseUp 3.4s cubic-bezier(.22,1,.36,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-vconn.down::after{animation:bauPulseDown 3.4s cubic-bezier(.22,1,.36,1) infinite}
 
   /* SCENE 1 — Tauschen */
   #tsbau .bau-swap{position:relative;display:flex;align-items:center;gap:14px}
@@ -1513,30 +1513,30 @@
   #tsbau .bau-sat .bau-med{width:104px;height:104px}
   #tsbau .bau-center .bau-med{width:150px;height:150px}
   #tsbau.js .bau-sat .bau-med{opacity:0;transform:scale(.8)}
-  #tsbau.js .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
-  #tsbau.js .bau-scene.on .bau-sat.s1 .bau-med{animation-delay:.3s}
-  #tsbau.js .bau-scene.on .bau-sat.s2 .bau-med{animation-delay:.5s}
-  #tsbau.js .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-sat.s1 .bau-med{animation-delay:.3s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-sat.s2 .bau-med{animation-delay:.5s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s cubic-bezier(.22,1,.36,1) infinite}
 
   /* SCENE 3 — Schachteln: seitlicher Fluss */
   #tsbau .bau-zcol{display:flex;flex-direction:column;gap:10px}
   #tsbau .bau-zcol .bau-nm{width:52px;height:52px}
   #tsbau.js .bau-zcol .bau-nm{opacity:0;transform:translateX(-10px) scale(.8)}
-  #tsbau.js .bau-scene.on .bau-nm{animation:bauPopX .6s cubic-bezier(.34,1.56,.64,1) both}
-  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(1){animation-delay:.22s}
-  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(2){animation-delay:.36s}
-  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(3){animation-delay:.5s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-nm{animation:bauPopX .6s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-zcol .bau-nm:nth-child(1){animation-delay:.22s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-zcol .bau-nm:nth-child(2){animation-delay:.36s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-zcol .bau-nm:nth-child(3){animation-delay:.5s}
   #tsbau .bau-pesto{width:92px;height:92px}
-  #tsbau.js .bau-scene.on .bau-pesto{animation:bauBreath 3.6s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-pesto{animation:bauBreath 3.6s cubic-bezier(.22,1,.36,1) infinite}
   #tsbau .bau-dishgrp{position:relative;display:flex;flex-direction:column;align-items:center;gap:0}
   #tsbau .bau-dishtag{position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:14px;white-space:nowrap;text-align:left}
   #tsbau .bau-dish{width:128px;height:128px}
   #tsbau .bau-sm{width:50px;height:50px}
   #tsbau.js .bau-sm{opacity:0;transform:scale(.8)}
-  #tsbau.js .bau-scene.on .bau-sm{animation:bauSatIn .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.72s}
+  #tsbau.js .bau-wrap.on .bau-scene.on .bau-sm{animation:bauSatIn .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.72s}
 
   /* caption + replay */
-  #tsbau .bau-cap{max-width:720px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center}
+  #tsbau .bau-cap{max-width:720px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:78px;text-align:center}
   #tsbau .bau-foot{display:flex;justify-content:center;margin-top:28px}
   #tsbau .bau-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
   #tsbau .bau-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
@@ -1555,7 +1555,8 @@
   @keyframes bauBreath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055)}50%{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.14),0 0 34px rgba(199,180,137,.28)}}
 
   @media(max-width:820px){
-    #tsbau .bau-stage{height:auto;min-height:470px;display:flex;align-items:center;justify-content:center}
+    #tsbau .bau-stage{height:auto;min-height:580px;display:flex;align-items:center;justify-content:center}
+    #tsbau .bau-cap{min-height:150px}
     #tsbau .bau-scene{position:relative;inset:auto;width:100%;display:none;flex-direction:column;gap:14px}
     #tsbau .bau-scene[data-i="0"]{display:flex}
     #tsbau.js .bau-scene,#tsbau.js .bau-scene[data-i="0"]{display:none}
@@ -1574,9 +1575,9 @@
     /* Connector wird vertikal -> Punkt laeuft vertikal (bleibt sichtbar) */
     #tsbau .bau-conn{width:2px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.5),rgba(199,180,137,.05))}
     #tsbau .bau-conn::after{left:50%;top:0}
-    #tsbau.js .bau-scene.on .bau-conn::after{animation:bauPulseDown 3.4s cubic-bezier(.45,0,.25,1) infinite}
-    #tsbau.js .bau-scene.on .bau-conn.rev::after{animation:bauPulseUp 3.4s cubic-bezier(.45,0,.25,1) infinite}
-    #tsbau.js .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseDownOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
+    #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn::after{animation:bauPulseDown 3.4s cubic-bezier(.22,1,.36,1) infinite}
+    #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn.rev::after{animation:bauPulseUp 3.4s cubic-bezier(.22,1,.36,1) infinite}
+    #tsbau.js .bau-wrap.on .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseDownOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
     #tsbau .bau-step-l{font-size:12px}
     #tsbau .bau-steps{gap:8px}
   }
@@ -1814,6 +1815,9 @@
   function initBaustein(){
     var root=document.getElementById('tsbau'); if(!root) return;
     var wrap=root.querySelector('.bau-wrap'); if(!wrap) return;
+    /* Alten Mount abraeumen (super.so Re-Render) — sonst sammeln sich Timer/Listener an. */
+    if(window.__tsbauKill){ try{ window.__tsbauKill(); }catch(e){} }
+
     var steps=[].slice.call(root.querySelectorAll('.bau-step'));
     var scenes=[].slice.call(root.querySelectorAll('.bau-scene'));
     var chip=root.querySelector('#bauChip');
@@ -1824,24 +1828,24 @@
       'Eine einmal gebaute Sauce wandert in beliebig viele Gerichte. Du legst sie einmal an und nutzt sie überall.',
       'Ein Baustein kann selbst aus Bausteinen bestehen: Das Pesto ist wieder aus eigenen Zutaten zusammengesetzt und wird damit ein neuer Baustein. Aus allen Bausteinen kann man dann die Gerichte bauen.'
     ];
-    var PRICES=[4.80,4.55];               /* Beispielwerte, im UI als solche gekennzeichnet */
-    var DWELL=[9000,4200,5200];           /* Szene 1 bleibt lang genug fuer mehrere Wechsel */
+    var PRICES=[4.80,4.55];               /* Beispielwerte, im UI gekennzeichnet */
+    var DWELL=[9000,4200,5200];
     var SWAP_MS=1800;
     var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
     var params=new URLSearchParams(location.search);
     var forced=params.has('scene'), noauto=params.has('noauto')||forced;
-    var timer=null, swapTimer=null, chipRaf=null, swapState=0, cur=-1;
+    var timer=null, swapTimer=null, chipRaf=null, pollId=null, pollStart=null, io=null;
+    var swapState=0, cur=-1, revealed=false, dead=false;
 
     root.classList.add('js');
 
     function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
     function stopChip(){ if(chipRaf){ cancelAnimationFrame(chipRaf); chipRaf=null; } }
     function countChip(from,to,dur){
-      stopChip();
-      if(!chip) return;
+      stopChip(); if(!chip) return;
       if(reduced){ chip.textContent=money(to); return; }
       var t0=null,d=dur||700;
-      function tk(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); chip.textContent=money(from+(to-from)*e); if(p<1){ chipRaf=requestAnimationFrame(tk); } else { chipRaf=null; } }
+      function tk(ts){ if(dead) return; if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); chip.textContent=money(from+(to-from)*e); if(p<1){ chipRaf=requestAnimationFrame(tk); } else { chipRaf=null; } }
       chipRaf=requestAnimationFrame(tk);
     }
     function stopSwap(){ if(swapTimer){ clearInterval(swapTimer); swapTimer=null; } stopChip(); }
@@ -1856,7 +1860,7 @@
       if(chip) chip.textContent=money(PRICES[0]);
       if(reduced) return;
       swapTimer=setInterval(function(){
-        if(cur!==0){ stopSwap(); return; }
+        if(dead || cur!==0){ clearInterval(swapTimer); swapTimer=null; return; }
         var prev=swapState; swapState=1-swapState;
         sc.classList.toggle('swapb', swapState===1);
         if(tom) tom.classList.toggle('lit', swapState===0);
@@ -1865,46 +1869,73 @@
         countChip(PRICES[prev], PRICES[swapState], 700);
       }, SWAP_MS);
     }
-    function show(i,manual){
+    /* nur Zustand malen — keine Timer, keine Loops */
+    function paint(i){
       cur=i;
-      stopSwap();
-      clearTimeout(timer);
       steps.forEach(function(s,k){ s.classList.toggle('on',k===i); });
       scenes.forEach(function(s,k){
         if(k===i){ s.classList.remove('on'); void s.offsetWidth; s.classList.add('on'); }
         else { s.classList.remove('on'); s.classList.remove('swapb'); }
       });
       if(cap) cap.textContent=CAPS[i];
+    }
+    function show(i,manual){
+      stopSwap(); clearTimeout(timer);
+      paint(i);
       if(i===0) startSwap(); else if(chip) chip.textContent=money(PRICES[1]);
       if(!noauto && !manual && i<scenes.length-1){
-        timer=setTimeout(function(){ show(i+1); }, DWELL[i]);
+        timer=setTimeout(function(){ if(!dead) show(i+1); }, DWELL[i]);
       }
     }
     function play(){ clearTimeout(timer); show(forced?(parseInt(params.get('scene'),10)||0):0); }
 
-    steps.forEach(function(s){ s.addEventListener('click',function(){ show(parseInt(s.dataset.i,10),true); }); });
-    if(replay) replay.addEventListener('click', play);
-    document.addEventListener('visibilitychange', function(){
+    /* Grundzustand: Szene 1 steht mit Endwerten da — ohne laufende Timer/Loops. */
+    paint(0);
+    if(chip) chip.textContent=money(PRICES[0]);
+
+    function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
+    function inView(){ var r=wrap.getBoundingClientRect(); return r.top < window.innerHeight*0.85 && r.bottom > 0; }
+    function trigger(){ if(revealed) return; reveal(); play(); }
+
+    function onVis(){
       root.classList.toggle('hid', document.hidden);
       if(document.hidden){ stopSwap(); clearTimeout(timer); }
-      else if(cur===0){ startSwap(); }
-    });
+      else if(revealed && cur===0){ startSwap(); }
+    }
+    document.addEventListener('visibilitychange', onVis);
 
-    /* Buehne ist ab sofort nie leer: Szene 1 steht mit Endwerten da. */
-    show(0,true);
-    var revealed=false, failsafe=null;
-    function reveal(){ if(revealed) return; revealed=true; clearTimeout(failsafe); wrap.classList.add('on'); }
-    /* Failsafe: auch wenn der Trigger nie feuert (Re-Render, kein IO), wird sichtbar gestellt. */
-    failsafe=setTimeout(reveal, 1500);
+    steps.forEach(function(s){ s.addEventListener('click',function(){ reveal(); show(parseInt(s.dataset.i,10),true); }); });
+    if(replay) replay.addEventListener('click', function(){ reveal(); play(); });
+
+    window.__tsbauKill=function(){
+      dead=true;
+      if(swapTimer){ clearInterval(swapTimer); swapTimer=null; }
+      if(timer){ clearTimeout(timer); timer=null; }
+      if(pollId){ clearInterval(pollId); pollId=null; }
+      if(pollStart){ clearTimeout(pollStart); pollStart=null; }
+      stopChip();
+      if(io){ io.disconnect(); io=null; }
+      document.removeEventListener('visibilitychange', onVis);
+    };
 
     if(reduced){ reveal(); return; }
-    if(forced || params.has('reveal')){ reveal(); play(); return; }
-    if(!('IntersectionObserver' in window)){ reveal(); play(); return; }
+    if(forced || params.has('reveal')){ trigger(); return; }
 
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ reveal(); play(); io.disconnect(); } });
-    },{threshold:.3});
-    io.observe(wrap);
+    if('IntersectionObserver' in window){
+      io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ trigger(); if(io){ io.disconnect(); io=null; } } });
+      },{threshold:.3});
+      io.observe(wrap);
+    }
+    /* Fallback: nur ausloesen, wenn der Block wirklich sichtbar ist — der Einstieg
+       wird dadurch nie off-screen verbraucht, und haengen bleibt er trotzdem nie. */
+    pollStart=setTimeout(function(){
+      if(dead || revealed) return;
+      pollId=setInterval(function(){
+        if(dead || revealed){ clearInterval(pollId); pollId=null; return; }
+        if(inView()){ trigger(); clearInterval(pollId); pollId=null; }
+      }, 600);
+    }, 3000);
   }
 
   var arcPlayed=false;
