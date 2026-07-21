@@ -15042,15 +15042,31 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq .q-in .q-lbl{color:#c7b489}
 
   /* Verbindungslinie in der Spalte */
-  #tsnaiq .q-chain{position:relative}
-  #tsnaiq .q-rail{position:absolute;left:50%;top:44px;bottom:20px;width:1px;transform:translateX(-50%);
-    background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));z-index:0}
-  #tsnaiq .q-chain .q-rail{top:0;bottom:0}
+  /* Die Schiene laeuft als linke Spine NEBEN den Karten, nie darunter:
+     unter einer opaken Kachel waere der Laufpunkt verdeckt (gemessen: nur 5,8 % der Reise sichtbar).
+     Genau daran scheiterte #tskm — dort wurde es faelschlich durch transparente Kacheln 'geloest'. */
+  #tsnaiq .q-chain{position:relative;padding-left:26px}
+  #tsnaiq .q-rail{position:absolute;width:1px;z-index:0}
+  #tsnaiq .q-chain .q-rail{top:0;bottom:0;left:8px;transform:none}
   #tsnaiq .q-in .q-rail{background:linear-gradient(180deg,rgba(199,180,137,.42),rgba(199,180,137,.12))}
   #tsnaiq .q-dot{position:absolute;left:50%;top:0;width:7px;height:7px;border-radius:50%;
     transform:translate(-50%,-50%);background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.8);opacity:0;z-index:1}
-  #tsnaiq.js .q-in.go .q-dot{animation:naiqRun 1.9s cubic-bezier(.42,0,.58,1) .2s 1 forwards}
-  @keyframes naiqRun{0%{opacity:0;top:0}8%{opacity:1}92%{opacity:1}100%{opacity:0;top:100%}}
+  #tsnaiq.js .q-in.go .q-dot{animation:naiqRun 1.9s .2s 1 forwards}
+  /* Der Impuls springt von Datenbank zu Datenbank und ruht kurz auf jeder, waehrend sie antwortet.
+     Gleichmaessige Reise ueber Stuetzstellen (Muster #tsbau/#tskm), Easing je Segment = zugelassene Kurve.
+     Kartenmitten gemessen bei 10,85 / 37,30 / 63,23 / 89,68 % der Schiene (inkl. 9px margin-bottom). */
+  @keyframes naiqRun{
+    0%  {top:0;      opacity:0;   animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    6%  {opacity:1;               animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    18% {top:10.85%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    28% {top:10.85%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    42% {top:37.30%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    52% {top:37.30%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    66% {top:63.23%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    76% {top:63.23%; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    90% {top:89.68%; opacity:1; animation-timing-function:cubic-bezier(.16,1,.3,1)}
+    100%{top:89.68%; opacity:0}
+  }
 
   /* Karten */
   #tsnaiq .q-card{position:relative;z-index:2;border-radius:12px;padding:11px 14px;margin-bottom:9px;
@@ -15060,20 +15076,20 @@ var TSISL_ZUG_SCHLUESSEL=[
     transition:border-color .5s ${EASE},box-shadow .5s ${EASE},background .5s ${EASE}}
   #tsnaiq .q-card:last-child{margin-bottom:0}
   #tsnaiq .q-card-n{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.55);white-space:nowrap}
-  #tsnaiq .q-card-v{font-size:14px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #tsnaiq .q-card-v{font-size:14px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
   #tsnaiq .q-card.lit{border-color:rgba(199,180,137,.5);
     background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#05060b;
     box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 34px -14px rgba(199,180,137,.4)}
   #tsnaiq .q-card.lit .q-card-n{color:#fff}
-  #tsnaiq .q-card.lit .q-card-v{color:#c7b489}
+  #tsnaiq .q-card.lit .q-card-v{color:#c7b489;font-weight:700}
   /* Dimmen NIE per opacity: das macht die Kachel durchsichtig und die Schiene scheint durch
      (Opake-Basis-Regel, Robert-Feedback 21.07.2026 zu #tskm). Gedimmt wird ueber Farbe + Rand. */
-  #tsnaiq.js .q-card{border-color:rgba(255,255,255,.06)}
-  #tsnaiq.js .q-card .q-card-n{color:rgba(255,255,255,.3)}
-  #tsnaiq.js .q-card .q-card-v{color:rgba(255,255,255,.26)}
+  #tsnaiq.js .q-card:not(.lit){border-color:rgba(255,255,255,.06)}
+  #tsnaiq.js .q-card:not(.lit) .q-card-n{color:rgba(255,255,255,.3)}
+  #tsnaiq.js .q-card:not(.lit) .q-card-v{color:rgba(255,255,255,.26)}
 
   /* Ergebnis */
-  #tsnaiq .q-res{position:relative;z-index:2;margin-top:13px;border-radius:13px;padding:14px;text-align:center;
+  #tsnaiq .q-res{position:relative;z-index:2;margin:13px 0 0 26px;border-radius:13px;padding:14px;text-align:center;
     border:1px solid rgba(199,180,137,.5);
     background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b;
     transition:box-shadow .6s ${EASE},opacity .6s ${EASE}}
@@ -15084,8 +15100,8 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq.js .q-res-v{opacity:0;transform:translateY(8px);
     transition:opacity .55s ${EASE} .1s,transform .55s ${EASE} .1s}
   #tsnaiq.js .q-res.lit .q-res-v{opacity:1;transform:none}
-  #tsnaiq.js .q-res{border-color:rgba(199,180,137,.16)}
-  #tsnaiq.js .q-res .q-res-k{color:rgba(255,255,255,.22)}
+  #tsnaiq.js .q-res:not(.lit){border-color:rgba(199,180,137,.16)}
+  #tsnaiq.js .q-res:not(.lit) .q-res-k{color:rgba(255,255,255,.22)}
   #tsnaiq.js .q-res.lit{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.2),0 18px 44px -16px rgba(199,180,137,.55)}
   #tsnaiq.js .q-res.lit .q-res-k{color:rgba(255,255,255,.45)}
 
@@ -15105,13 +15121,12 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq.js .q-ext-a{opacity:0;transform:translateY(6px);
     transition:opacity .5s ${EASE},transform .5s ${EASE}}
   #tsnaiq.js .q-ext-a.on{opacity:1;transform:none}
-  #tsnaiq.js .q-dots{display:none}
   #tsnaiq.js .q-out.go .q-dots{display:inline-flex}
   #tsnaiq.js .q-out.done .q-dots{display:none}
 
   /* Fussnoten je Spalte */
   #tsnaiq .q-note{font-size:10px;line-height:1.5;color:rgba(255,255,255,.28);margin-top:11px;text-align:center}
-  #tsnaiq .q-in .q-note{color:rgba(255,255,255,.32)}
+  #tsnaiq .q-in .q-note{color:rgba(255,255,255,.28)}
 
   /* Ambient: ruhiges Atmen des System-Rahmens, mit Ruhephase */
   #tsnaiq.js .q-in.go{animation:naiqBreath 3.6s ${EASE} 1.2s infinite}
@@ -15131,11 +15146,9 @@ var TSISL_ZUG_SCHLUESSEL=[
 
   @media (max-width:820px){
     #tsnaiq .q-stage{grid-template-columns:1fr}
-    #tsnaiq .q-title{font-size:clamp(1.6rem,7vw,2.1rem)}
   }
   @media (prefers-reduced-motion:reduce){
     #tsnaiq.js .q-wrap,#tsnaiq.js .q-ask{opacity:1!important;transform:none!important}
-    #tsnaiq.js .q-card,#tsnaiq.js .q-res{opacity:1!important}
     #tsnaiq.js .q-res-v{opacity:1!important;transform:none!important}
     #tsnaiq.js .q-ext-a{opacity:1!important;transform:none!important}
     #tsnaiq.js .q-in.go{animation:none!important}
@@ -15171,7 +15184,7 @@ var TSISL_ZUG_SCHLUESSEL=[
         '<div class="q-card" data-i="0"><span class="q-card-n">DB 0 : Inventurliste</span><span class="q-card-v">3,20 € / kg</span></div>'+
         '<div class="q-card" data-i="1"><span class="q-card-n">DB IV : Zutaten</span><span class="q-card-v">120 g Einwaage</span></div>'+
         '<div class="q-card" data-i="2"><span class="q-card-n">DB V : Rezepturen</span><span class="q-card-v">1 × Tomate</span></div>'+
-        '<div class="q-card" data-i="3"><span class="q-card-n">DB XI : Gerichte</span><span class="q-card-v">Wareneinsatz</span></div>'+
+        '<div class="q-card" data-i="3"><span class="q-card-n">DB XI : Gerichte</span><span class="q-card-v">Wareneinsatz ( € )</span></div>'+
         '</div>'+
         '<div class="q-res"><div class="q-res-k">Antwort</div><div class="q-res-v">0,38 €</div></div>'+
         '<div class="q-note">Beispielwerte — dieselben wie in der Zutaten-Lektion.</div>'+
@@ -15224,12 +15237,12 @@ var TSISL_ZUG_SCHLUESSEL=[
     at(980, function(){ inn.classList.add('go'); });
     /* Zeitpunkte = wann der Laufpunkt die jeweilige Kartenmitte erreicht
        (ease-in-out ueber 1900 ms ab 1180 ms; Kartenmitten bei 12,5/37,5/62,5/87,5 % der Schiene) */
-    /* Gemessen per Web-Animations-API: currentTime ENTHAELT den animation-delay bereits,
-       er darf nicht zusaetzlich addiert werden. Punkt erreicht die Kartenmitten bei 1621/1988/2287/2654 ms. */
-    var HIT=[1620,1980,2290,2650];
+    /* Gemessen per Web-Animations-API (currentTime ENTHAELT den animation-delay bereits, nicht addieren):
+       Der Impuls erreicht die Kartenmitten bei 1315/1865/2305/2780 ms und ruht dort, waehrend die Karte antwortet. */
+    var HIT=[1315,1865,2305,2780];
     cards.forEach(function(c,i){ at(HIT[i], function(){ c.classList.add('lit'); }); });
     /* Aufloesung: die Zahl */
-    at(3120,function(){ res.classList.add('lit'); });
+    at(3060,function(){ res.classList.add('lit'); });
   }
 
   function arm(root){
