@@ -688,12 +688,12 @@
 
   #tskm .km-col{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
   #tskm .km-col-lbl{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;margin-bottom:3px}
-  #tskm .km-in{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 14px}
+  #tskm .km-in{display:flex;flex-direction:column;gap:2px;background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 14px}
   #tskm .km-wrap.playing .km-in{opacity:0;transform:translateX(-14px) scale(.96);animation:kmIn .6s cubic-bezier(.34,1.56,.64,1) both}
   #tskm .km-in-k{font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5)}
   #tskm .km-in-v{font-size:14px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
 
-  #tskm .km-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(199,180,137,.07);border:1px solid rgba(199,180,137,.4);border-radius:20px;padding:24px 16px;box-shadow:0 26px 60px -30px rgba(0,0,0,.92)}
+  #tskm .km-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#05060b;border:1px solid rgba(199,180,137,.4);border-radius:20px;padding:24px 16px;box-shadow:0 26px 60px -30px rgba(0,0,0,.92)}
   #tskm .km-wrap.playing .km-core{opacity:0;transform:scale(.9);animation:kmCore .7s cubic-bezier(.16,1,.3,1) .5s both}
   #tskm .km-core.pulse{animation:kmPulse 1.5s cubic-bezier(.16,1,.3,1)}
   #tskm .km-core-ico{width:46px;height:46px;border-radius:13px;background:rgba(199,180,137,.14);border:1px solid rgba(199,180,137,.4);display:flex;align-items:center;justify-content:center;margin-bottom:2px}
@@ -702,7 +702,9 @@
   #tskm .km-core-tag{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 
   #tskm .km-kpis{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  #tskm .km-kpi{background:rgba(255,255,255,.04);border:1px solid rgba(199,180,137,.24);border-radius:14px;padding:12px 15px;transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1),border-color .5s ease,box-shadow .5s ease}
+  /* Opake Basis unter dem transparenten Kachel-Ton: sonst scheinen die Verbindungslinien durch die Kachel
+     (Robert-Korrektur 21.07.2026 — Striche duerfen nie durch die Kacheln laufen). Ton bleibt exakt rgba(255,255,255,.04). */
+  #tskm .km-kpi{background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(199,180,137,.24);border-radius:14px;padding:12px 15px;transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1),border-color .5s ease,box-shadow .5s ease}
   #tskm .km-wrap.playing .km-kpi{opacity:.38;transform:translateY(8px);border-color:rgba(255,255,255,.12)}
   #tskm .km-wrap.playing .km-kpi.lit{opacity:1;transform:none;border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -16px rgba(199,180,137,.42)}
   #tskm .km-kpi-k{font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px}
@@ -890,16 +892,17 @@
   #tskmvid{width:min(1180px,94vw);margin:56px auto 0;padding:0 clamp(16px,3vw,40px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tskmvid *{box-sizing:border-box}
   #tskmvid .kv-row{display:flex;flex-direction:column;gap:26px}
-  @media(min-width:768px){ #tskmvid .kv-row{flex-direction:row;align-items:center;gap:clamp(28px,4vw,56px)} #tskmvid .kv-pc,#tskmvid .kv-text{flex:1 1 50%;min-width:0} }
+  @media(min-width:768px){ #tskmvid .kv-row{flex-direction:row;align-items:center;gap:18px} #tskmvid .kv-pc,#tskmvid .kv-text{flex:0 0 calc((100% - 18px)*.5);width:calc((100% - 18px)*.5);min-width:0} }
   #tskmvid .kv-pc{display:flex;align-items:center;justify-content:center;position:relative}
-  #tskmvid .kv-mac{position:relative;display:block;width:100%;max-width:560px;cursor:pointer;line-height:0}
+  #tskmvid .kv-mac{position:relative;display:block;width:100%;cursor:pointer;line-height:0}
   #tskmvid .kv-mac img{width:100%;height:auto;display:block;filter:drop-shadow(0 22px 50px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.16,1,.3,1)}
   #tskmvid .kv-mac:hover img{transform:scale(1.02)}
   #tskmvid .kv-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
   #tskmvid .kv-play span{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:transform .3s ease,background .3s ease;margin-top:-6%}
   #tskmvid .kv-mac:hover .kv-play span{transform:scale(1.08);background:rgba(255,255,255,.26)}
   #tskmvid .kv-play span::after{content:"";border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff;margin-left:5px}
-  #tskmvid .kv-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12;font-size:clamp(1.9rem,3.4vw,2.6rem);margin:0 0 18px}
+  #tskmvid .kv-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.15;font-size:42px;text-align:center;white-space:nowrap;margin:0 0 18px}
+  @media(max-width:900px){ #tskmvid .kv-title{font-size:clamp(1.9rem,4.4vw,42px);white-space:normal} }
   #tskmvid .kv-title .ts-gold{color:#c7b489}
   #tskmvid .kv-text p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px;text-align:left}
   #tskmvid .kv-text p:last-child{margin-bottom:0}
@@ -907,7 +910,7 @@
   #tskmvid .kv-outro{max-width:900px;margin:34px auto 0;text-align:center}
   #tskmvid .kv-outro p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0}
   #tskmvid .kv-outro b{color:#c7b489;font-weight:600}
-  @media(max-width:820px){ #tskmvid .kv-text{display:none} }
+  /* 03 zeigt seinen Text auch auf Mobile (Ausblenden gilt nur fuer den Ergebnis-Blick 05) */
   /* Lightbox-Platzhalter */
   #tskmvid-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   #tskmvid-lb.on{display:flex}
@@ -1121,7 +1124,8 @@
   #tskm2mac *{box-sizing:border-box}
   #tskm2mac .km2-row{display:flex;flex-direction:column;gap:26px}
   @media(min-width:768px){ #tskm2mac .km2-row{flex-direction:row;align-items:center;gap:clamp(20px,4vw,64px)} #tskm2mac .km2-text,#tskm2mac .km2-pc{flex:1 1 50%;min-width:0} }
-  #tskm2mac .km2-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;line-height:1.15;font-size:clamp(1.6rem,2.9vw,2.15rem);margin:0 0 14px;text-align:left}
+  /* Katalog 05: native h3-Groesse clamp(25px,2.8vw,32px)/1.2, linksbuendig, Abstaende 28/12 (Robert-Korrektur 21.07.2026 — war 34.4px, ueber dem Cap) */
+  #tskm2mac .km2-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;line-height:1.2;font-size:clamp(25px,2.8vw,32px);margin:28px 0 12px;text-align:left}
   #tskm2mac .km2-title .ts-gold{color:#c7b489}
   #tskm2mac .km2-text p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px;text-align:left}
   #tskm2mac .km2-text p:last-child{margin-bottom:0}
@@ -3451,6 +3455,9 @@
     { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' },
     { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/operations-area' },
     { re:/\/operations-area\/?$/, href:'/lektionen/team-onboarding' },
+    /* Key Metrics fehlte hier -> pageHref() lieferte null und der Pager hat den von #tskmnext
+       gebauten Weiter-Button wieder ENTFERNT (Robert-Meldung 21.07.2026 "Button fehlt"). */
+    { re:/\/key-metrics\/?$/, href:'/modul-2-das-notion-ai-backoffice-system' },
     { re:/\/lektionen\/vision-werte\/?$/, href:'/lektionen/unternehmen-markenidentitt' },
     { re:/\/lektionen\/team-onboarding\/?$/, href:'/lektionen/checklisten-produktion' },
     { re:/\/lektionen\/checklisten-produktion\/?$/, href:'/lektionen/hygiene-behrden-handbcher' },
