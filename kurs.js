@@ -12821,7 +12821,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   /* ---- GRID (Klon #tslmod, CSS-Cover) ---- */
   #tsops{width:min(1320px,95vw);margin:44px auto 30px;font-family:var(--ops-sans);color:#fff}
   #tsops *{box-sizing:border-box}
-  #tsops .ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  #tsops .ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:clamp(38px,5vh,64px)}
   #tsops a.ops-card{position:relative;display:block;overflow:hidden;text-align:center;text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;border-radius:16px;padding:32px 24px 28px;min-height:230px;background:#04050a;border:1px solid rgba(255,255,255,.06);box-shadow:0 18px 44px -30px rgba(0,0,0,.85);opacity:0;transform:translateY(18px);will-change:transform,box-shadow;transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1),border-color .4s ease,box-shadow .5s ease}
   #tsops .ops-cover{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;background:radial-gradient(120% 92% at 50% 0%,rgba(${GLOW},.10) 0%,rgba(${GLOW},.03) 34%,rgba(4,5,10,0) 62%),#04050a;pointer-events:none}
   #tsops .ops-cover::before{content:attr(data-n);position:absolute;right:-6px;bottom:-30px;font:600 8.4rem/1 var(--ops-display);color:rgba(255,255,255,.035);letter-spacing:-.04em;pointer-events:none}
@@ -13140,18 +13140,17 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.',
     intro:['In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.','Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.'],
     anim:{type:'checklist', head:{eyebrow:'Wie Onboarding wirklich läuft', h:'Vom ersten Tag bis <span class="il-g">startklar</span>', sub:'Jeder neue Mitarbeiter geht dieselbe Checkliste durch. Nichts hängt am Zufall.'}, unit:'Schritte', rows:['Willkommen & Orientierung','Hygiene-Grundlagen','Rollen & Verantwortung','Wichtigste SOPs','Erste Einweisung (unter Aufsicht)','§43 IfSG-Belehrung','Buddy zuweisen','Sicherheits-Rundgang']},
-    video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungs-Ausgabe und Urlaub greifen ineinander. Jeder neue Mitarbeiter wird einmal als Zeile angelegt, danach hängt alles daran: welche Kleidung er bekommen hat, wann er Urlaub nimmt, welche Nachweise gültig sind.','So wird aus vier losen Listen ein Personal-System, das mitdenkt.'], close:'In den nächsten Schritten baust du dieses System Stück für Stück selbst auf. Wir starten mit der Warenkorb-Ansicht: jede Karte ist ein Baustein deiner Personal-Tabelle.'},
+    video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungsausgabe und Urlaub wirken wie vier getrennte Listen. Tatsächlich hängen sie alle an derselben Person. Du legst einen Mitarbeiter genau einmal an, danach zieht sich jede weitere Tabelle ihre Informationen aus dieser einen Zeile.','Im Alltag merkst du den Unterschied sofort. An der Person siehst du, welche Kleidung ausgegeben wurde und welcher Pfand dafür hinterlegt ist, welcher Nachweis wann abläuft und wann Urlaub beantragt wurde. Du blätterst nirgendwo mehr nach.','So wird aus vier losen Listen ein Personal-System, das mitdenkt, statt dich bei jeder Frage neu suchen zu lassen.'], close:'Öffne dir dafür eine leere Seite in Notion und nenne sie Team und Onboarding. Mehr brauchst du im Moment nicht vorzubereiten. Die vier Datenbanken dahinter bauen wir gleich gemeinsam auf, eine nach der anderen. Jede Karte im Warenkorb ist eine Spalte, die du einmal anlegst und danach nie wieder von Hand pflegen musst.'},
     wk:[
       {id:'ops_team_onb', eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.'},
       {id:'ops_team_mitarbeiter', eyebrow:'Team · Mitarbeiter-Stammdaten', title:'Dein <span>Team</span>. An einem Ort.'}
     ],
     ergebnis:[
-      {h:'Das Team auf <span class="il-g">einen Blick</span>', p:'Eine Zeile pro Person: Rolle, Anstellung, Kontakt, Eintritt. Aus Gehalt und Arbeitgeber-Faktor rechnet die Tabelle sogar die echten Personalkosten pro Stunde mit.', side:'left'},
-      {h:'Urlaub, bevor es <span class="il-g">eng wird</span>', p:'Dieselben Anträge erscheinen als Timeline, Monatskalender und Freigabe-Board. Du erkennst Engpässe Wochen vorher und planst Schichten drumherum.', side:'right'}
+      {h:'Das Team auf <span class="il-g">einen Blick</span>', cap:'Mitarbeiter-Stammdaten', p:['Eine Zeile pro Person, und darin alles, was im Betrieb wirklich gebraucht wird: Rolle, Anstellungsart, Kontakt, Eintrittsdatum und der Status der Zusammenarbeit. Nichts davon liegt noch auf einem Zettel im Büro oder im Kopf des Schichtleiters.','Der eigentliche Gewinn steckt in den Rechenfeldern. Aus dem hinterlegten Gehalt und dem Arbeitgeber-Faktor rechnet die Tabelle die tatsächlichen Personalkosten pro Stunde aus. Damit kalkulierst du eine Schicht, bevor du sie planst, statt am Monatsende zu erklären, warum die Lohnquote gestiegen ist.','Sortierst du die Ansicht nach Rolle, siehst du dein Team so, wie es im Dienstplan zusammenarbeitet.']},
+      {h:'Urlaub, bevor es <span class="il-g">eng wird</span>', cap:'Urlaubsplanung', p:['Dieselben Urlaubsanträge erscheinen in drei Ansichten: als Timeline über das Jahr, als Monatskalender und als Freigabe-Board nach Status. Du pflegst einen einzigen Eintrag und liest ihn dreimal völlig unterschiedlich.','Damit erkennst du Engpässe Wochen im Voraus. Wenn im Juli drei Anträge auf derselben Woche liegen, siehst du das in der Timeline sofort und planst die Schichten drumherum, statt kurzfristig zu telefonieren und Gefallen einzufordern.','Das Feld Vertretung sorgt zusätzlich dafür, dass keine Abwesenheit ohne saubere Übergabe durchgeht. Wer wegfällt, ist damit vorher bekannt und nicht erst am Morgen der Schicht.']}
     ],
     zweit:{type:'stack', head:{eyebrow:'Kleidung mit Pfand', h:'Jedes Teil hat einen <span class="il-g">Wert</span>', sub:'Arbeitskleidung ist Betriebseigentum. Der hinterlegte Pfand summiert sich pro Mitarbeiter.'}, unit:'€', rows:[{label:'Cap Schwarz',val:10},{label:'Kochhose L (Leiber)',val:30},{label:'Kochschuhe 42 (Abeba)',val:40}], totalLabel:'Pfand im Umlauf'},
-    empf:{emph:'Verbinde Onboarding mit den <span class="il-eg">Pflichtdokumenten</span>', p:'Sobald ein Nachweis wie die §43-Belehrung ein Ablaufdatum hat, erinnert dich Notion vierzehn Tage vorher. Kein Mitarbeiter arbeitet mehr mit abgelaufenem Nachweis.', points:['Gesundheitszeugnis','Hygienebelehrung','§43 IfSG','Brandschutzhelfer']},
-    duo:{h:'So legst du es in <span class="il-g">Notion</span> an', items:[{chips:['Tabelle','Spalte','Auswahl'], h:'Mitarbeiter <span class="il-g">anlegen</span>', p:['Eine neue Datenbank, eine Zeile pro Person. Rolle und Anstellung als Auswahl, damit du später filtern und Kosten rechnen kannst.','Drücke Schrägstrich, wähle neue Tabelle, und leg die erste Spalte an.']},{chips:['Status','Board','Vertretung'], h:'Urlaub als <span class="il-g">Board</span>', p:['Ein Status-Feld macht aus Anträgen einen Freigabe-Stapel: beantragt, genehmigt, abgelehnt. Das Feld Vertretung sorgt dafür, dass keine Abwesenheit ohne Übergabe durchgeht.','Gruppiere die Ansicht nach Status, fertig ist dein Freigabe-Board.']}]},
+    empf:{dbhd:'Nachweise und <span class="il-eg">Gültigkeit</span>', emph:'Verbinde Onboarding mit den <span class="il-eg">Pflichtdokumenten</span>', p:'Sobald ein Nachweis wie die Belehrung nach Paragraf 43 ein Ablaufdatum trägt, erinnert dich Notion vierzehn Tage vorher. Kein Mitarbeiter arbeitet mehr mit abgelaufenem Nachweis.', points:['Gesundheitszeugnis','Hygienebelehrung','§43 IfSG','Brandschutzhelfer'], steps:['Lege je Nachweis fest, ob er Pflicht ist und wie viele Monate er gilt.','Verknüpfe den Nachweis mit der Person, die ihn erbracht hat.','Lass das Ablaufdatum rechnen, statt es von Hand einzutragen.','Setze die Erinnerung auf vierzehn Tage vor Ablauf.']},
     learn:['Du hast die Personal-Insel deiner Operations Area gebaut, mit Onboarding, Team, Kleidung und Urlaub an einem Ort.','Du weißt, wie eine Onboarding-Checkliste neue Mitarbeiter sicher startklar macht, inklusive der rechtlich zwingenden §43-Belehrung.','Du pflegst die Stammdaten deines Teams so, dass daraus automatisch die echten Personalkosten pro Stunde entstehen.','Du behältst Kleidung im Umlauf, Pfand und Urlaube im Blick, bevor daraus Engpässe oder Streit werden.']
    },
    {
@@ -13161,18 +13160,17 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Der Unterschied zwischen gutem und chaotischem Betrieb ist nicht Talent, sondern Wiederholbarkeit.',
     intro:['Im Kopf ist alles klar. Bis der Laden voll ist, zwei Leute krank sind und die neue Kraft zum ersten Mal allein schließt. Dann zeigt sich, was wirklich dokumentiert war und was nur Gewohnheit.','Diese Insel macht aus dem Bauchgefühl ein System: Checklisten für den Takt, Audits für die Kontrolle, Produktionslisten für die Küche und eine Waste-Erfassung, die jeden Verlust in Euro sichtbar macht.'],
     anim:{type:'checklist', head:{eyebrow:'Das Store-Audit am iPad', h:'Aus Bauchgefühl wird eine <span class="il-g">Mängelliste</span>', sub:'Jede Frage hat eine Antwort: Ja oder Nein. Was auf Nein steht, landet automatisch in der Optimierungsliste.'}, unit:'Prüfpunkte', rows:['Store-Eindruck & Grundordnung','Service & Auftreten','Küche & Produktion','Hygiene','Waren & Bestand','Allergene & Sicherheit','Führung & Team','Prozesse & Alltag']},
-    video:{h:'Checkliste oder <span class="il-g">SOP</span>?', p:['Eine Checkliste sagt dir, was abzuhaken ist. Eine SOP sagt dir, wie genau du es machst. Beide hängen über eine Verknüpfung zusammen: Zur Checkliste Kassenabschluss gehört die SOP mit dem genauen Ablauf.','Jede Aufgabe bekommt einen Turnus, eine Wichtigkeit und einen Namen. Nichts geht unter, weil alles einen Platz hat.'], close:'Wir bauen die Checklisten-Datenbank Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Liste steuerbar macht.'},
+    video:{h:'Checkliste oder <span class="il-g">SOP</span>?', p:['Eine Checkliste sagt dir, was abzuhaken ist. Eine SOP sagt dir, wie genau es gemacht wird. Beide gehören zusammen und werden deshalb über eine Verknüpfung verbunden: Zur Checkliste Kassenabschluss gehört die SOP mit dem genauen Ablauf, eine Ebene tiefer jederzeit abrufbar.','Jede Aufgabe bekommt zusätzlich einen Turnus, eine Wichtigkeit und eine verantwortliche Rolle. Damit ist geklärt, was täglich läuft, was wöchentlich, und wer es übernimmt, wenn du selbst nicht im Haus bist.','Nichts geht unter, weil alles einen festen Platz und einen Besitzer hat. Und du erkennst beim Blick auf die Liste, welche Aufgabe seit Wochen niemand mehr angefasst hat.'], close:'Lege dir eine leere Seite mit dem Namen Checklisten und Produktion an, mehr ist jetzt nicht nötig. Im nächsten Schritt bauen wir die Datenbank gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus einer Liste ein Werkzeug macht, mit dem sich der Betrieb wirklich steuern lässt.'},
     wk:[
       {id:'ops_check_audit', eyebrow:'Audit · Store-Check', title:'Dein <span>Audit</span>. Frage für Frage.'},
       {id:'ops_check_prod', eyebrow:'Produktion · Wochenliste', title:'Deine <span>Produktion</span>. Tag für Tag.'}
     ],
     ergebnis:[
-      {h:'Die Woche im <span class="il-g">Voraus</span>', p:'Was wird produziert, wie viel, an welchem Tag, mit welchem Vorlauf. Der Pizzateig braucht zwei Tage, also zeigt die Liste den Startpunkt von selbst. Ein Status-Feld macht die Mise en Place schichtübergreifend sichtbar.', side:'left'},
-      {h:'Waste als <span class="il-g">Zahl</span>', p:'Der teuerste Ort in der Küche ist der Mülleimer. Über die Verknüpfung zu den Zutaten rechnet jeder Eintrag den Verlust automatisch in Euro. Die Gründe zeigen, ob das Problem im Einkauf, in der Produktion oder im Handling liegt.', side:'right'}
+      {h:'Die Woche im <span class="il-g">Voraus</span>', cap:'Produktionsliste', p:['Was wird produziert, in welcher Menge, an welchem Tag und mit welchem Vorlauf. Der Pizzateig braucht zwei Tage Gare, also zeigt die Liste den Startpunkt von selbst an, statt ihn dich jede Woche neu ausrechnen zu lassen.','Ein Status-Feld macht die Mise en Place schichtübergreifend sichtbar. Die Frühschicht sieht, was die Spätschicht vorbereitet hat, und niemand produziert dieselbe Sauce zweimal oder verlässt sich darauf, dass es schon jemand gemacht hat.','Gruppiert nach Tag wird daraus der Produktionsplan für die ganze Woche, den du sonntags einmal durchgehst und danach ruhig liegen lässt. Was fertig ist, verschwindet aus der Ansicht.']},
+      {h:'Waste als <span class="il-g">Zahl</span>', cap:'Waste-Erfassung', p:['Der teuerste Ort in der Küche ist der Mülleimer. Über die Verknüpfung zu den Zutaten rechnet jeder Waste-Eintrag den Verlust automatisch in Euro, sodass aus einem Bauchgefühl eine Zahl wird, die du Monat für Monat vergleichen kannst.','Die hinterlegten Gründe zeigen dir, wo das Problem tatsächlich sitzt. Abgelaufen deutet auf den Einkauf, Überproduktion auf die Planung, Handling-Fehler auf die Einweisung neuer Leute.','Damit reparierst du die Ursache, statt jeden Monat nur den Schaden zu zählen und dich über die Zahl zu ärgern. Nach dem dritten Monat siehst du an der Kurve, ob deine Maßnahme wirklich gegriffen hat.']}
     ],
     zweit:null,
-    empf:{emph:'Koppel Produktion an die <span class="il-eg">Waste-Erfassung</span>', p:'Überproduktion ist der häufigste Waste-Grund. Wenn beide Tabellen zusammenhängen, siehst du sofort, welches Gericht du zu großzügig kalkulierst, und ziehst die Menge nach.', points:['Abgelaufen','Überproduktion','Qualität','Handling-Fehler']},
-    duo:{h:'So baust du den <span class="il-g">Takt</span>', items:[{chips:['Typ','Turnus','Rolle'], h:'Checkliste <span class="il-g">takten</span>', p:['Jede Checkliste bekommt einen Typ (täglich, wöchentlich, monatlich), eine Kritikalität und eine Zielrolle. So weiß jeder, was wann in seiner Verantwortung liegt.','Die Verknüpfung zur SOP hält die genaue Anleitung eine Ebene tiefer bereit.']},{chips:['iPad','Foto','Filter'], h:'Audit am <span class="il-g">Gerät</span>', p:['Große Tap-Checkboxen, direkt am iPad, ein Foto als Beweis. Der Filter zeigt am Ende nur die Nein-Antworten, deine Mängelliste für heute.','Das Diagramm zeigt die Erfüllungsquote je Besuch, ideal für den Vergleich mehrerer Standorte.']}]},
+    empf:{dbhd:'Waste nach <span class="il-eg">Grund</span>', emph:'Koppel Produktion an die <span class="il-eg">Waste-Erfassung</span>', p:'Überproduktion ist der häufigste Waste-Grund. Wenn beide Tabellen zusammenhängen, siehst du sofort, welches Gericht du zu großzügig kalkulierst, und ziehst die Menge nach.', points:['Abgelaufen','Überproduktion','Qualität','Handling-Fehler'], steps:['Hinterlege jeden Waste-Eintrag mit genau einem eindeutigen Grund.','Verknüpfe die Zutat, damit der Verlust automatisch in Euro erscheint.','Vergleiche die Gründe monatlich und such dir den größten Block.','Zieh die Produktionsmenge nach, wenn Überproduktion oben steht.']},
     learn:['Du hast die Abläufe-Insel gebaut, mit Audit, Checklisten, Produktion und Waste an einem Ort.','Du kennst den Unterschied zwischen Checkliste und SOP und weißt, wie beide über eine Verknüpfung zusammenhängen.','Du planst Wochenproduktion mit Vorlaufzeit und Status, sodass nie etwas kurzfristig fehlt.','Du erfasst Waste als Euro-Wert und erkennst an den Gründen, wo im Betrieb das Geld verloren geht.']
    },
    {
@@ -13182,18 +13180,17 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Eine Kontrolle ist kein Problem, wenn du vorbereitet bist. Sie ist ein Problem, wenn du suchst.',
     intro:['Das Gesundheitsamt kommt unangekündigt. Das Finanzamt und der Zoll können dich existenziell treffen. Wer dann in Ordnern blättert, hat schon verloren.','Diese Insel macht aus Angst vor Kontrolle ein planbares Spielfeld: Das Hygienehandbuch dokumentiert jedes Mittel, die Behörden-Übersicht zeigt wer wann kommt, die Pflichtdokumente laufen nie unbemerkt ab, und das Management-Handbuch hält die Antworten für den Ernstfall bereit.'],
     anim:{type:'grid', head:{eyebrow:'Wer kann bei dir klingeln', h:'Neun Behörden, <span class="il-g">ein Überblick</span>', sub:'Für jede weißt du vorab: wie oft, ob unangekündigt, und wie hoch das Risiko bei einem Verstoß ist.'}, label:'Kontrollbereiche', nodes:['Gesundheitsamt','Finanzamt','Zoll','Gewerbeaufsicht','Brandschutz','Bauamt','Umweltamt','Arbeitsschutz','Ordnungsamt']},
-    video:{h:'Pflicht ist <span class="il-g">nachweisbar</span>', p:['Jeder im Lebensmittelbereich braucht eine gültige §43-Belehrung und eine Hygienebelehrung. Die Pflichtdokumente-Logik verbindet zwei Ebenen: welcher Nachweis Pflicht ist und wie lange er gilt, und welche Person ihn hat und wann er abläuft.','Bei einer Kontrolle ziehst du die Datei mit einem Klick, statt im Ordner zu suchen.'], close:'Wir bauen die Hygiene- und Nachweis-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Prüfungssicherheit erhöht.'},
+    video:{h:'Pflicht ist <span class="il-g">nachweisbar</span>', p:['Jeder, der mit Lebensmitteln arbeitet, braucht eine gültige Belehrung nach Paragraf 43 und eine Hygienebelehrung. Die Pflichtdokumente-Logik verbindet dafür zwei Ebenen: welcher Nachweis überhaupt Pflicht ist und wie lange er gilt, und welche Person ihn besitzt und wann er abläuft.','Aus dieser Kombination entsteht ein Ablaufdatum je Mitarbeiter und eine Erinnerung, die vierzehn Tage vorher anspringt. Du wirst gewarnt, bevor jemand ohne gültigen Nachweis in der Küche steht.','Bei einer Kontrolle ziehst du die Datei mit einem Klick, statt im Ordner zu blättern. Das gilt für jeden Nachweis, vom Gesundheitszeugnis bis zur Brandschutzunterweisung.'], close:'Lege dir eine leere Seite mit dem Namen Hygiene und Behörden an, das reicht für den Moment vollkommen aus. Nimm dir dafür ruhig zehn Minuten Zeit, mehr braucht es nicht. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Prüfungssicherheit ein Stück erhöht.'},
     wk:[
       {id:'ops_hyg_produkte', eyebrow:'Hygiene · Reinigungsmittel', title:'Dein <span>Hygienehandbuch</span>. Mittel für Mittel.'},
       {id:'ops_hyg_pflicht', eyebrow:'Pflichtnachweise · Dokumenttypen', title:'Deine <span>Pflichtdokumente</span>. Lückenlos.'}
     ],
     ergebnis:[
-      {h:'Die Ampel für <span class="il-g">jeden Nachweis</span>', p:'Pro Mitarbeiter ein Trio aus Häkchen, Ablaufdatum und Datei. Vierzehn Tage vor Ablauf erinnert dich Notion. Der teuerste Fall, ein Mitarbeiter mit abgelaufenem Nachweis, passiert nicht mehr.', side:'left'},
-      {h:'Das Playbook für den <span class="il-g">Ernstfall</span>', p:'Personalausfall, Beschwerde, Kontrolle: Zu jeder Situation hält das Management-Handbuch drei Dinge bereit, die Sofortmaßnahme, die Follow-up-Aktion und die Warnsignale. Führungswissen wird abrufbar statt an eine Person gebunden.', side:'right'}
+      {h:'Die Ampel für <span class="il-g">jeden Nachweis</span>', cap:'Pflichtnachweise', p:['Pro Mitarbeiter ein Trio aus Häkchen, Ablaufdatum und hinterlegter Datei. Solange alles grün ist, musst du nichts tun. Vierzehn Tage vor Ablauf meldet sich Notion von selbst bei dir.','Der teuerste Fall im Betrieb ist der Mitarbeiter, der mit abgelaufenem Nachweis arbeitet, ohne dass es jemand bemerkt. Genau der kann hier nicht mehr entstehen, weil das Ablaufdatum gerechnet und nicht aus dem Gedächtnis erinnert wird.','Filtere die Ansicht nach abgelaufen, und du hast in Sekunden die Liste, die du diese Woche abarbeiten musst. Alles andere bleibt liegen, weil es noch gültig ist und keine Aufmerksamkeit braucht.']},
+      {h:'Das Playbook für den <span class="il-g">Ernstfall</span>', cap:'Management-Handbuch', p:['Personalausfall am Samstagabend, eine Beschwerde im Netz, eine unangekündigte Kontrolle. Zu jeder dieser Situationen hält das Management-Handbuch drei Dinge bereit: die Sofortmaßnahme für die nächsten Minuten, die Follow-up-Aktion für die Tage danach und die Warnsignale, an denen du den Fall früh erkennst.','Damit wird Führungswissen abrufbar, statt an einer einzigen Person zu hängen. Es steht schriftlich da, wo es im Ernstfall gebraucht wird.','Deine Schichtleitung trifft dieselbe Entscheidung, die du treffen würdest, auch wenn du gerade nicht erreichbar bist. Genau das ist der Punkt, an dem ein Betrieb ohne dich funktioniert.']}
     ],
     zweit:null,
-    empf:{emph:'Verbinde Behörden mit deinen <span class="il-eg">Dokumenttypen</span>', p:'Jede Behörde will bestimmte Nachweise sehen. Wenn Behörde und Dokumenttyp verknüpft sind, hast du für jeden Besuch die richtige Mappe schon zusammengestellt, bevor geklingelt wird.', points:['Gesundheitsamt','Finanzamt','Zoll','Brandschutz']},
-    duo:{h:'So wird es <span class="il-g">prüfungssicher</span>', items:[{chips:['Pflicht','Gültigkeit','Erinnerung'], h:'Nachweise <span class="il-g">tracken</span>', p:['Ein Dokumenttyp trägt, ob er Pflicht ist und wie viele Monate er gilt. Daraus rechnet Notion pro Person das Ablaufdatum und die Erinnerung.','So wird aus Papierstapeln eine Liste, die selbst Alarm schlägt.']},{chips:['Fall','Sofort','Follow-up'], h:'Wissen <span class="il-g">sichern</span>', p:['Jeder kritische Fall bekommt einen Eintrag mit Sofortmaßnahme, Follow-up und Warnsignalen. Verknüpft mit der passenden SOP.','Aus dem Kopf des Inhabers wird ein Standard, den die Schichtleitung abrufen kann.']}]},
+    empf:{dbhd:'Behörden und <span class="il-eg">Mappen</span>', emph:'Verbinde Behörden mit deinen <span class="il-eg">Dokumenttypen</span>', p:'Jede Behörde will bestimmte Nachweise sehen. Wenn Behörde und Dokumenttyp verknüpft sind, hast du für jeden Besuch die richtige Mappe schon zusammengestellt, bevor geklingelt wird.', points:['Gesundheitsamt','Finanzamt','Zoll','Brandschutz'], steps:['Halte je Behörde fest, welche Nachweise sie sehen will.','Verknüpfe die Behörde mit den passenden Dokumenttypen.','Filtere die Ansicht auf eine Behörde und du hast die Mappe.','Prüfe vor jedem Termin, ob alle verknüpften Dokumente gültig sind.']},
     learn:['Du hast die Compliance-Insel gebaut, mit Hygiene, Behörden, Pflichtdokumenten und Management-Handbuch.','Du weißt vorab, welche Behörde wie oft kommt, ob unangekündigt, und wie hoch das Risiko bei einem Verstoß ist.','Du trackst jeden Pflichtnachweis mit Ablaufdatum und Erinnerung, sodass nie ein Nachweis unbemerkt abläuft.','Du hast Führungswissen als abrufbares Playbook gesichert, delegierbar an Betriebs- und Schichtleitung.']
    },
    {
@@ -13203,17 +13200,16 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Dein Lager ist Geld, das nur anders aussieht.',
     intro:['Zwei Dinge werden ständig verwechselt. Der laufende Wareneinsatz, also alles, was du verbrauchst und nachkaufst, und der Festwert, also das langlebige Inventar, das Jahr für Jahr im Betrieb bleibt. Beide zählst du anders.','Diese Insel baut die Festwert-Inventur sauber auf und zeigt klar, wo die monatliche Inventurliste und das Packaging andocken, ohne dass du dieselbe Zahl doppelt pflegst.'],
     anim:{type:'stack', head:{eyebrow:'Was der Festwert wirklich ist', h:'Menge mal Preis, <span class="il-g">Zeile für Zeile</span>', sub:'Jeder Posten trägt seinen eigenen Wert. Summiert ergibt das den Festwert, der in den Jahresabschluss geht.'}, unit:'€', rows:[{label:'Tafelmesser · 180 Stück',val:324},{label:'Bratpfanne 28cm · 6 Stück',val:270},{label:'Wasserkaraffe · 10 Stück',val:80}], totalLabel:'Festwert gesamt'},
-    video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt seinen aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, springt die Zeile auf ein Nachbestell-Signal, mit hinterlegtem Lieferanten und Link.','So wird aus der Jahresinventur ein System, das dich das ganze Jahr über warnt, bevor etwas ausgeht.'], close:'Wir bauen die Festwert-Liste Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deinen Bestand steuerbar macht.'},
+    video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt drei Zahlen: den aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, springt die Zeile auf ein Nachbestell-Signal um, mit hinterlegtem Lieferanten und Bestell-Link direkt daneben.','Damit hört die Inventur auf, ein Termin einmal im Jahr zu sein. Sie wird zu einer Liste, die dich das ganze Jahr über warnt, bevor etwas ausgeht, und die im Dezember trotzdem den sauberen Wert für den Jahresabschluss liefert.','Aus Zählen wird Steuern, und aus einer lästigen Pflicht ein Werkzeug, das dir Arbeit abnimmt. Der Mindestbestand ist dabei die eigentliche Intelligenz der ganzen Tabelle.'], close:'Lege dir eine leere Seite mit dem Namen Inventur und Bestand an, mehr brauchst du nicht vorzubereiten. Ein Titel und eine leere Seite genügen völlig. Im nächsten Schritt bauen wir die Festwert-Liste gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus deiner Zählung eine belastbare Zahl für den Abschluss macht.'},
     wk:[
       {id:'ops_inv_festwert', eyebrow:'Festwert · Jahresinventur', title:'Dein <span>Festwert</span>. Stück für Stück.'}
     ],
     ergebnis:[
-      {h:'Zwei Inventuren, <span class="il-g">ein System</span>', p:'Die monatliche Inventurliste (DB 0) zählt den Verbrauch in Kilo und Liter. Die Festwert-Liste zählt langlebiges Inventar in Stück. Sie ergänzen sich, statt sich zu überschneiden, und du pflegst jede Zahl nur einmal.', side:'left'},
-      {h:'Verpackung, <span class="il-g">sauber verknüpft</span>', p:'Die Packaging-Datenbank zieht ihre Preise direkt aus der Inventurliste. Kein doppeltes Pflegen, keine veralteten Werte. Ein Verweis genügt, um alles verbunden zu halten.', side:'right'}
+      {h:'Zwei Inventuren, <span class="il-g">ein System</span>', cap:'Festwert-Liste', p:['Die monatliche Inventurliste zählt den Verbrauch in Kilo und Liter, also alles, was du laufend einkaufst und wieder verarbeitest. Die Festwert-Liste zählt langlebiges Inventar in Stück, also Teller, Pfannen, Besteck und Gläser.','Beide werden ständig verwechselt, obwohl sie völlig unterschiedlich funktionieren und in der Buchhaltung an ganz verschiedenen Stellen landen. Getrennt geführt ergänzen sie sich, statt sich zu überschneiden.','Du pflegst jede Zahl genau einmal und weißt zu jedem Zeitpunkt, welche der beiden Listen die richtige Antwort auf deine Frage hat. Damit endet die Diskussion darüber, was denn nun in die Inventur gehört.']},
+      {h:'Verpackung, <span class="il-g">sauber verknüpft</span>', cap:'Packaging-Datenbank', p:['Die Packaging-Datenbank führt keine eigenen Preise. Sie zieht sie über eine Verknüpfung direkt aus der Inventurliste, in der der Einkaufspreis ohnehin schon gepflegt wird.','Damit verschwindet die häufigste Fehlerquelle im Backoffice: zwei Tabellen mit derselben Zahl, von denen eine irgendwann veraltet und niemand merkt es. Änderst du den Preis an der Quelle, ändert er sich überall mit, auch in jeder Kalkulation, die darauf aufbaut.','Ein einziger Verweis genügt, um den ganzen Aufbau verbunden und aktuell zu halten. Genau darin liegt der Unterschied zwischen einer Sammlung von Tabellen und einem System.']}
     ],
     zweit:null,
-    empf:{emph:'Halte deinen Bestand mit einem <span class="il-eg">Nachbestell-Signal</span> lebendig', p:'Der Mindestbestand ist die eigentliche Intelligenz der Tabelle. Sobald ein Posten darunter fällt, siehst du es sofort, mit Lieferant und Bestell-Link direkt an der Zeile. Aus Zählen wird Steuern.', points:['Aktueller Bestand','Sollbestand','Mindestbestand','Nachbestellen']},
-    duo:{h:'So zählst du <span class="il-g">richtig</span>', items:[{chips:['Kategorie','Menge','Preis'], h:'Festwert <span class="il-g">erfassen</span>', p:['Jeder Posten bekommt Kategorie, Bereich, Menge und einen Stückpreis. Die Tabelle rechnet Menge mal Preis zum Zeilenwert und summiert den Festwert von selbst.','Genau die Zahl, die dein Steuerberater zur Jahresinventur braucht.']},{chips:['Soll','Minimum','Signal'], h:'Bestand <span class="il-g">steuern</span>', p:['Neben dem aktuellen Bestand trägst du Soll- und Mindestbestand ein. Die Tabelle zeigt, was nachbestellt werden muss, bevor es leer ist.','Der hinterlegte Lieferant macht aus der Warnung direkt eine Bestellung.']}]},
+    empf:{dbhd:'Bestand mit <span class="il-eg">Signal</span>', emph:'Halte deinen Bestand mit einem <span class="il-eg">Nachbestell-Signal</span> lebendig', p:'Der Mindestbestand ist die eigentliche Intelligenz der Tabelle. Sobald ein Posten darunter fällt, siehst du es sofort, mit Lieferant und Bestell-Link direkt an der Zeile.', points:['Aktueller Bestand','Sollbestand','Mindestbestand','Nachbestellen'], steps:['Trag den aktuellen Bestand bei jeder Zählung neu ein.','Definiere den Sollbestand, den du im Normalbetrieb halten willst.','Setz den Mindestbestand auf die Menge, die eine Lieferzeit überbrückt.','Lass die Zeile auf Nachbestellen springen, sobald sie darunter fällt.']},
     learn:['Du hast die Bestands-Insel gebaut und trennst sauber laufenden Wareneinsatz von langlebigem Festwert.','Du erfasst die Festwert-Liste so, dass Menge mal Preis automatisch den Inventurwert für den Jahresabschluss ergibt.','Du steuerst deinen Bestand über Soll- und Mindestbestand, statt ihn nur einmal im Jahr zu zählen.','Du weißt, wie die monatliche Inventurliste und das Packaging andocken, ohne dass du eine Zahl doppelt pflegst.']
    },
    {
@@ -13223,18 +13219,17 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Der teuerste Vertrag ist der, dessen Kündigungsfrist du verpasst.',
     intro:['Jeder Betrieb sammelt über die Jahre Dutzende laufende Verträge: Wartung, Software, Versicherung, Miete. Und ein Netz aus Dienstleistern, die man genau dann sucht, wenn etwas kaputt ist.','Diese Insel bringt beides an einen Ort. Die Dienstleister-Übersicht als schnelles Verzeichnis, die Vertragsübersicht mit Wert, Laufzeit und Frist, damit keine Verlängerung und keine Kündigung mehr durchrutscht.'],
     anim:{type:'stack', head:{eyebrow:'Was in deinen Verträgen steckt', h:'Jeder Vertrag hat einen <span class="il-g">Wert</span>', sub:'Summiert zeigt sich schnell, wie viel Geld pro Jahr über laufende Verträge gebunden ist.'}, unit:'€', rows:[{label:'Metro Cash & Carry · Lieferant',val:48000},{label:'Barausstattung Bartscher',val:16500},{label:'Spülmaschinen-Service Hobart',val:7600}], totalLabel:'Vertragsvolumen'},
-    video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt, was läuft, was zur Unterschrift ansteht und was gekündigt ist.','Die Verknüpfung zum Lieferpartner holt den passenden Kontakt automatisch dazu, ohne dass du ihn erneut eintippst.'], close:'Wir bauen die Verträge- und Dienstleister-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir Kontrolle über deine Partner gibt.'},
+    video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt dir daneben, was läuft, was noch zur Unterschrift ansteht und was bereits gekündigt ist.','Der wichtigste Teil ist die Frist. Aus Ende und Kündigungsfrist rechnet die Tabelle den Tag aus, an dem du spätestens entscheiden musst. Damit verlängert sich kein Vertrag mehr still um ein weiteres Jahr, nur weil niemand den Kalender im Kopf hatte.','Die Verknüpfung zum Lieferpartner holt den passenden Ansprechpartner automatisch dazu, ohne erneutes Tippen. Damit steht die Vertragsakte vollständig an einer Stelle, statt verteilt auf Ordner und Postfächer.'], close:'Lege dir eine leere Seite mit dem Namen Partner und Verträge an, das genügt vorerst. Der Rest entsteht Schritt für Schritt beim Mitbauen. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir ein Stück Kontrolle über deine laufenden Kosten zurückgibt.'},
     wk:[
       {id:'ops_part_vertraege', eyebrow:'Verträge · Übersicht', title:'Deine <span>Verträge</span>. Frist im Blick.'},
       {id:'ops_part_dienstleister', eyebrow:'Dienstleister · Verzeichnis', title:'Deine <span>Dienstleister</span>. Griffbereit.'}
     ],
     ergebnis:[
-      {h:'Jeder Partner in <span class="il-g">einer Kategorie</span>', p:'Vom Kassenanbieter über die Schädlingsbekämpfung bis zur Reinigung. Wenn nachts die Kühlung ausfällt, findest du den Wartungsdienst in Sekunden, statt alte Rechnungen zu durchsuchen.', side:'left'},
-      {h:'Kein <span class="il-g">Vertrag im Blindflug</span>', p:'Die Vertragsübersicht zeigt Wert, Laufzeit und Frist auf einen Blick. Du siehst früh, welcher Vertrag ausläuft, und entscheidest bewusst zu verlängern oder zu wechseln, statt automatisch weiterzuzahlen.', side:'right'}
+      {h:'Jeder Partner in <span class="il-g">einer Kategorie</span>', cap:'Dienstleister-Verzeichnis', p:['Vom Kassenanbieter über die Schädlingsbekämpfung bis zur Reinigungsfirma. Das Verzeichnis ordnet jeden Partner einer Kategorie zu und hält Kontakt, Zuständigkeit und die wichtigste Notiz direkt an der Zeile.','Der Wert zeigt sich nicht im Alltag, sondern in der Ausnahme. Wenn nachts die Kühlung ausfällt, findest du den Wartungsdienst in Sekunden, statt alte Rechnungen nach einer Telefonnummer zu durchsuchen oder im Bekanntenkreis zu fragen.','Das ist kein Warenlieferant, sondern das Netz aus Handwerkern und Dienstleistern, das deinen Laden am Laufen hält. Einmal sauber angelegt, hält es sich über Jahre fast von allein aktuell.']},
+      {h:'Kein <span class="il-g">Vertrag im Blindflug</span>', cap:'Vertragsübersicht', p:['Die Vertragsübersicht zeigt Wert, Laufzeit und Frist nebeneinander. Sortiert nach Ende siehst du sofort, was in den nächsten Monaten ansteht, und entscheidest bewusst zu verlängern oder zu wechseln.','Summiert siehst du außerdem, wie viel Geld pro Jahr über laufende Verträge gebunden ist. Diese Zahl kennen die wenigsten Betriebe, obwohl sie einer der größten Fixkostenblöcke überhaupt ist und sich mit etwas Vorlauf gut verhandeln lässt.','Kein Vertrag läuft mehr einfach weiter, nur weil du ihn schlicht vergessen hast. Du entscheidest über jede Verlängerung bewusst, mit der Frist und der Summe vor Augen.']}
     ],
     zweit:null,
-    empf:{emph:'Verknüpfe Verträge mit deinen <span class="il-eg">Lieferpartnern</span>', p:'Die Lieferpartner-Datenbank aus Modul zwei kennt deine Kontakte schon. Über eine Verknüpfung zieht die Vertragskarte den richtigen Ansprechpartner automatisch heran, du pflegst ihn nur einmal.', points:['Vertragswert','Laufzeit','Kündigungsfrist','Kontakt']},
-    duo:{h:'So behältst du die <span class="il-g">Kontrolle</span>', items:[{chips:['Wert','Status','Frist'], h:'Verträge <span class="il-g">führen</span>', p:['Jeder Vertrag bekommt Wert, Typ, Beginn, Ende und Kündigungsfrist. Das Status-Feld macht aus der Sammlung einen Arbeitsstapel: in Prüfung, laufend, gekündigt.','So entscheidest du über jede Verlängerung bewusst, mit Frist im Blick.']},{chips:['Kategorie','Kontakt','Notiz'], h:'Dienstleister <span class="il-g">ordnen</span>', p:['Ein Verzeichnis nach Kategorie: wer macht was, wie erreichst du ihn, was ist wichtig. Kein Warenlieferant, sondern die Partner, die den Laden am Laufen halten.','Im Ernstfall ist der richtige Kontakt einen Klick entfernt.']}]},
+    empf:{dbhd:'Vertrag mit <span class="il-eg">Frist</span>', emph:'Verknüpfe Verträge mit deinen <span class="il-eg">Lieferpartnern</span>', p:'Die Lieferpartner-Datenbank aus Modul zwei kennt deine Kontakte schon. Über eine Verknüpfung zieht die Vertragskarte den richtigen Ansprechpartner automatisch heran, du pflegst ihn nur einmal.', points:['Vertragswert','Laufzeit','Kündigungsfrist','Kontakt'], steps:['Trag den Jahreswert ein, damit sich das Vertragsvolumen summiert.','Erfasse Beginn und Ende, nicht nur das Datum der Unterschrift.','Lass aus Ende und Frist den letzten Entscheidungstag rechnen.','Verknüpfe den Lieferpartner, statt den Kontakt erneut einzutippen.']},
     learn:['Du hast die Partner-Insel gebaut, mit Dienstleister-Verzeichnis und Vertragsübersicht an einem Ort.','Du führst jeden Vertrag mit Wert, Laufzeit und Kündigungsfrist, sodass keine Frist mehr durchrutscht.','Du erkennst über das Status-Feld, welcher Vertrag ansteht, läuft oder gekündigt ist.','Du verknüpfst Verträge mit deinen Lieferpartnern und ziehst den richtigen Kontakt automatisch heran.']
    },
    {
@@ -13244,18 +13239,17 @@ var TSISL_ZUG_SCHLUESSEL=[
     lead:'Kontrolle über einen Betrieb heißt Kontrolle darüber, wer worauf Zugriff hat.',
     intro:['Passwörter im Kopf, Schlüssel in der Schublade, Bareinzahlungen auf Zetteln. Solange nichts passiert, geht das gut. Beim ersten Personalwechsel oder der ersten Nachfrage vom Steuerberater wird es teuer.','Diese Insel bringt das Sensible in geordnete Bahnen: eine nachvollziehbare Zugangs-Hoheit, eine lückenlose Einzahlungs-Doku und eine Schlüsselliste, die im Verlustfall sofort Antwort gibt.'],
     anim:{type:'grid', head:{eyebrow:'Wer hat Zugriff worauf', h:'Zugänge unter <span class="il-g">Kontrolle</span>', sub:'Nicht das Passwort ist der Wert, sondern die Übersicht: welcher Zugang, welcher Status, ist die Zwei-Faktor-Sicherung aktiv.'}, label:'Zugänge', nodes:['Kasse / POS','Payment','Banking','Shop','Portal','Social','Tech','Behörden','Intern']},
-    video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage speichert nicht das Geheimnis selbst, sondern die Übersicht: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv, wann zuletzt geändert. Beim Personalwechsel sperrst du gezielt, statt zu raten.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index, der die Hoheit sichtbar macht.'], close:'Wir bauen die Zugangs- und Werte-Datenbanken auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles kontrollierbar macht.'},
+    video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage speichert nicht das Geheimnis selbst, sondern die Übersicht darüber: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv und wann wurde zuletzt geändert. Damit beantwortest du beim Personalwechsel die entscheidende Frage, worauf diese Person Zugriff hatte.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index darüber, der die Hoheit sichtbar macht und im Zweifel den Weg zeigt.','Du sperrst gezielt, statt zu raten, und siehst nebenbei, welche Zugänge noch ohne zweite Sicherung laufen. Beim Austritt wird daraus eine Abarbeitungsliste statt einer Erinnerungsübung.'], close:'Lege dir eine leere Seite mit dem Namen Zugänge und Werte an, mehr ist im Moment nicht nötig. Das ist in zwei Minuten erledigt. Danach bauen wir die Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles nachvollziehbar macht, ohne dass ein Passwort in Notion steht.'},
     wk:[
       {id:'ops_zug_bank', eyebrow:'Bankeinzahlungen · Nachweis', title:'Deine <span>Einzahlungen</span>. Lückenlos belegt.'},
       {id:'ops_zug_schluessel', eyebrow:'Schlüssel · Ausgabe', title:'Deine <span>Schlüssel</span>. Jeder zugeordnet.'}
     ],
     ergebnis:[
-      {h:'Jede Einzahlung <span class="il-g">belegt</span>', p:'Betrag, Datum, Referenz und ein Beleg-Scan. Die Statuskette von geplant über eingezahlt bis verbucht macht offene Posten sichtbar. Das ist die Brücke zwischen Tageskasse und Steuerberater, sauber nachweisbar.', side:'left'},
-      {h:'Im Verlustfall sofort <span class="il-g">handlungsfähig</span>', p:'Die Schlüsselliste beantwortet in Sekunden, wer welchen Schlüssel zu welchem Bereich hat. Steht ein Schlüssel auf verloren, weißt du, ob der Schließzylinder getauscht werden muss. Bei Kündigung hältst du die Rückgabe nach.', side:'right'}
+      {h:'Jede Einzahlung <span class="il-g">belegt</span>', cap:'Bankeinzahlungen', p:['Betrag, Datum, Referenz und ein Beleg-Scan an jeder einzelnen Zeile. Die Statuskette von geplant über eingezahlt bis verbucht macht offene Posten sichtbar, statt sie im Kassenbuch verschwinden zu lassen.','Das ist die Brücke zwischen Tageskasse und Steuerberater. Wenn nachgefragt wird, warum an einem Dienstag eine größere Summe eingezahlt wurde, liegt die Antwort samt Beleg an derselben Stelle und du musst nichts rekonstruieren.','Gefiltert auf offen siehst du in Sekunden, welche Einzahlung noch nicht verbucht wurde. Damit ist die Kassenführung nicht nur ordentlich, sondern auch nachweisbar ordentlich.']},
+      {h:'Im Verlustfall sofort <span class="il-g">handlungsfähig</span>', cap:'Schlüsselliste', p:['Die Schlüsselliste beantwortet in Sekunden, wer welchen Schlüssel zu welchem Bereich hat und seit wann. Steht ein Schlüssel auf verloren, weißt du sofort, ob nur nachbestellt oder der Schließzylinder getauscht werden muss.','Bei einer Kündigung hältst du die Rückgabe im selben Feld nach. Der Mitarbeiter geht erst aus dem System, wenn alles zurück ist, und niemand muss sich hinterher erinnern, was noch fehlt.','Damit verschwindet die unangenehmste Lücke im Betrieb: dass niemand genau weiß, wie viele Schlüssel eigentlich im Umlauf sind. Diese Frage stellt sich spätestens beim ersten Einbruch oder der ersten Kündigung im Streit.']}
     ],
     zweit:{type:'stack', head:{eyebrow:'Einzahlungen summiert', h:'Aus Belegen wird eine <span class="il-g">Zahl</span>', sub:'Jede dokumentierte Einzahlung zählt in die Gesamtsumme, die deine Buchhaltung erwartet.'}, unit:'€', rows:[{label:'Einzahlung 02.04.',val:995},{label:'Einzahlung 06.05.',val:1326},{label:'Einzahlung 20.08.',val:506}], totalLabel:'Belegt eingezahlt'},
-    empf:{emph:'Verknüpfe Zugänge mit dem <span class="il-eg">Personalwechsel</span>', p:'Wenn jemand geht, ist die entscheidende Frage: worauf hatte diese Person Zugriff. Mit Passwort- und Schlüsselliste an einem Ort sperrst und sammelst du gezielt ein, statt hinterher zu hoffen.', points:['Zugang sperren','Schlüssel zurück','Status prüfen','2FA aktiv']},
-    duo:{h:'So sicherst du das <span class="il-g">Sensible</span>', items:[{chips:['Kategorie','2FA','Status'], h:'Zugänge <span class="il-g">ordnen</span>', p:['Jeder Zugang bekommt eine Kategorie, einen Status und die Info, ob die Zwei-Faktor-Sicherung aktiv ist. Das Passwort selbst bleibt im Passwort-Manager.','So siehst du auf einen Blick, welche Zugänge unsicher sind, ohne ein Geheimnis preiszugeben.']},{chips:['Bereich','Verantwortlich','Status'], h:'Schlüssel <span class="il-g">zuordnen</span>', p:['Jeder Schlüssel bekommt einen Bereich, einen Verantwortlichen und einen Status. Ausgegeben, verfügbar, verloren.','Im Verlustfall ist sofort klar, wer Zugang hatte und ob gehandelt werden muss.']}]},
+    empf:{dbhd:'Austritt in <span class="il-eg">vier Schritten</span>', emph:'Verknüpfe Zugänge mit dem <span class="il-eg">Personalwechsel</span>', p:'Wenn jemand geht, ist die entscheidende Frage: worauf hatte diese Person Zugriff. Mit Passwort- und Schlüsselliste an einem Ort sperrst und sammelst du gezielt ein, statt hinterher zu hoffen.', points:['Zugang sperren','Schlüssel zurück','Status prüfen','2FA aktiv'], steps:['Filtere alle Zugänge, die auf die austretende Person laufen.','Hol jeden ausgegebenen Schlüssel zurück und quittiere die Rückgabe.','Setz jeden betroffenen Eintrag auf den neuen Status.','Prüfe zum Schluss, ob die Zwei-Faktor-Sicherung noch am alten Gerät hängt.']},
     learn:['Du hast die Zugänge-Insel gebaut, mit Passwortablage, Bankeinzahlungen und Schlüsselliste an einem Ort.','Du verwaltest Zugänge über Status und Zwei-Faktor-Sicherung, ohne echte Passwörter in Notion zu speichern.','Du dokumentierst jede Einzahlung lückenlos mit Beleg, als saubere Brücke zur Buchhaltung.','Du weißt im Verlust- oder Kündigungsfall sofort, wer welchen Schlüssel und welchen Zugang hatte.']
    }
   ];
@@ -13324,46 +13318,66 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsisl .il-mock .ph{font:600 12px/1.5 inherit;letter-spacing:.16em;text-transform:uppercase;color:rgba(${G},.7);text-align:center}
   #tsisl .il-mock .ph small{display:block;margin-top:6px;color:rgba(255,255,255,.3);letter-spacing:.1em}
   #tsisl .il-mock::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 0%,rgba(${G},.06),transparent 60%);pointer-events:none}
-  /* erklärvideo section: mock left, text right */
-  #tsisl .il-vid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;width:min(1120px,94vw);margin:0 auto}
-  #tsisl .il-vid .il-vtext h3{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(24px,3vw,38px);line-height:1.15;letter-spacing:-.02em;color:#fff}
+  /* Abschnitt 03 — Erklärvideo: PC links (füllt seine halbe Spalte), Text rechts */
+  #tsisl .il-vid{display:grid;grid-template-columns:calc((100% - 18px) * .5) calc((100% - 18px) * .5);gap:18px;align-items:center;width:min(1180px,94vw);margin:0 auto}
+  #tsisl .il-vid .il-vmock{display:flex;align-items:center;justify-content:center;width:100%}
+  #tsisl .il-vid .il-vmock .il-mock{width:100%}
+  #tsisl .il-vid .il-vtext h3{margin:0 0 16px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:42px;line-height:1.15;letter-spacing:-.02em;text-align:center;color:#fff}
   #tsisl .il-vid .il-vtext h3 .il-g{color:#c7b489}
-  #tsisl .il-vid .il-vtext p{margin:0 0 14px;font-size:15.5px;line-height:1.68;color:rgba(255,255,255,.86)}
-  #tsisl .il-vidclose{width:min(900px,92vw);margin:34px auto 0;text-align:center;font-size:15.5px;line-height:1.7;color:rgba(255,255,255,.86)}
-  /* ergebnis-blick rows */
-  #tsisl .il-erg{display:flex;align-items:center;gap:clamp(20px,4vw,64px);width:min(1120px,94vw);margin:clamp(40px,5vh,64px) auto 0}
-  #tsisl .il-erg.right{flex-direction:row-reverse}
+  #tsisl .il-vid .il-vtext p{margin:0 0 14px;text-align:left;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsisl .il-vid .il-vtext p:last-child{margin-bottom:0}
+  #tsisl .il-vidclose{width:min(900px,92vw);margin:38px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  /* Abschnitt 05 — Ergebnis-Blick: Text links / PC rechts (erster), danach alternierend */
+  #tsisl .il-erg{display:flex;align-items:center;gap:clamp(20px,4vw,64px);max-width:1180px;width:100%;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px)}
+  #tsisl .il-erg.flip{flex-direction:row-reverse}
   #tsisl .il-erg .il-erg-cell{flex:1 1 0;min-width:0}
-  #tsisl .il-erg .il-erg-txt h3{margin:0 0 12px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(21px,2.6vw,30px);line-height:1.18;letter-spacing:-.015em;color:#fff}
+  #tsisl .il-erg .il-erg-pc{display:flex;flex-direction:column;align-items:center}
+  #tsisl .il-erg .il-erg-pc .il-mock{max-width:520px;width:100%}
+  #tsisl .il-erg .il-erg-txt h3{margin:28px 0 12px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(21px,2.6vw,30px);line-height:1.18;letter-spacing:-.015em;text-align:left;color:#fff}
   #tsisl .il-erg .il-erg-txt h3 .il-g{color:#c7b489}
-  #tsisl .il-erg .il-erg-txt p{margin:0;font-size:15.5px;line-height:1.68;color:rgba(255,255,255,.86)}
-  #tsisl .il-erg .il-mock{max-width:520px}
+  #tsisl .il-erg .il-erg-txt p{margin:0 0 13px;text-align:left;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsisl .il-erg .il-erg-txt p:last-child{margin-bottom:0}
+  #tsisl .il-erg-cap{margin:14px 0 0;text-align:center;font:600 15px/1.4 inherit;color:#fff}
+  #tsisl .il-erg-cap .il-g{color:#c7b489}
+  #tsisl .il-erg-hint{margin:6px 0 0;text-align:center;font:600 11px/1.4 inherit;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);animation:ilHint 2.8s ease-in-out infinite}
   /* warenkorb anchor spacing */
   #tsisl .il-wkwrap{width:100%;margin:clamp(56px,7vh,88px) 0 0}
-  /* empfehlung */
-  #tsisl .il-empf{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;width:min(1000px,95vw);margin:0 auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 14px rgba(${G},.08)}
-  #tsisl .il-empf::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(${G},.4),transparent)}
-  #tsisl .il-empf .il-emph{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;line-height:1.25;color:#fff}
+  /* Abschnitt 07 — Empfehlungs-Kachel: Verhalten 1:1 wie Referenz #tszein */
+  #tsisl .il-empf{--rx:0deg;--ry:0deg;position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;width:min(1000px,95vw);margin:34px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%,rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 14px rgba(${G},.08);transform-style:preserve-3d;will-change:transform;opacity:0;transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-empf.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #tsisl .il-empf.live{transition:transform .16s ease-out,box-shadow .5s ease,border-color .4s ease}
+  #tsisl .il-empf.live:hover{border-color:rgba(${G},.4);animation:ilBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  #tsisl .il-empf::before{content:"";position:absolute;inset:0;border-radius:20px;background:radial-gradient(560px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.055),transparent 46%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+  #tsisl .il-empf.live:hover::before{opacity:1}
+  #tsisl .il-empf::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(${G},.4),transparent);pointer-events:none}
+  #tsisl .il-empf .il-elink{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0;opacity:1;transition:opacity .35s ease}
+  #tsisl .il-empf .il-elink.off{opacity:0}
+  #tsisl .il-empf .il-elink path{fill:none;stroke:rgba(${G},.55);stroke-width:1.5;filter:drop-shadow(0 0 6px rgba(${G},.35))}
+  #tsisl .il-empf .il-elink circle{fill:rgba(${G},.9)}
+  #tsisl .il-empf .il-ecol{min-width:0;position:relative;z-index:1;transform:translateZ(22px)}
+  #tsisl .il-empf .il-ehd{font-size:1.4rem;font-weight:700;letter-spacing:-.01em;line-height:1.2;margin:0 0 14px;color:#fff;opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-empf .il-ehd .il-eg{color:#c7b489}
+  #tsisl .il-empf.in .il-ehd{opacity:1;transform:none}
+  #tsisl .il-empf .il-erow{display:flex;flex-direction:column;align-items:stretch;gap:6px;max-width:300px}
+  #tsisl .il-empf .il-tb{display:inline-flex;align-items:center;gap:9px;padding:11px 15px;border-radius:12px;font-size:.92rem;font-weight:600;color:rgba(255,255,255,.5);white-space:nowrap;opacity:0;transform:translateY(10px) scale(.97);transition:color .45s ease,background .5s ease,box-shadow .5s ease,opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-empf .il-tb .num{color:#c7b489;font-variant-numeric:tabular-nums;opacity:.9;font-size:.82rem}
+  #tsisl .il-empf.in .il-tb{opacity:1;transform:none}
+  #tsisl .il-empf.in .il-tb:nth-child(2){transition-delay:.08s}
+  #tsisl .il-empf.in .il-tb:nth-child(3){transition-delay:.16s}
+  #tsisl .il-empf.in .il-tb:nth-child(4){transition-delay:.24s}
+  #tsisl .il-empf .il-tb.on{color:#fff;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(${G},.10)}
+  #tsisl .il-empf .il-tb.on .num{opacity:1}
+  #tsisl .il-empf .il-eitem{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsisl .il-empf.in .il-eitem{opacity:1;transform:none}
+  #tsisl .il-empf .il-emph{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-size:1.45rem;font-weight:600;letter-spacing:-.012em;line-height:1.25;color:#fff;margin:0 0 12px;padding:0}
   #tsisl .il-empf .il-emph .il-eg{color:#c7b489}
-  #tsisl .il-empf .il-ep{margin:0 0 18px;font-size:.98rem;line-height:1.7;color:rgba(255,255,255,.68)}
-  #tsisl .il-empf .il-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
-  #tsisl .il-empf .il-ol li{display:flex;align-items:center;gap:11px;font-size:14.5px;color:rgba(255,255,255,.82);transition:color .4s}
-  #tsisl .il-empf .il-ol li::before{content:"";width:9px;height:9px;border-radius:50%;background:rgba(${G},.35);box-shadow:0 0 0 3px rgba(${G},.08);transition:background .4s,box-shadow .4s}
-  #tsisl .il-empf .il-ol li.lit{color:#fff} #tsisl .il-empf .il-ol li.lit::before{background:#c7b489;box-shadow:0 0 12px rgba(${G},.7)}
-  #tsisl .il-empf .il-eanim{position:relative;aspect-ratio:1/1;max-width:240px;margin:0 auto;border-radius:18px;background:radial-gradient(120% 120% at 38% 28%,rgba(${G},.18),rgba(255,255,255,.03) 48%,rgba(10,12,20,.85) 80%);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
-  #tsisl .il-empf .il-eanim .ring{position:absolute;inset:16%;border-radius:50%;border:1px dashed rgba(${G},.4);animation:ilSpin 14s linear infinite}
-  #tsisl .il-empf .il-eanim .dot{width:14px;height:14px;border-radius:50%;background:#c7b489;box-shadow:0 0 18px rgba(${G},.9);animation:ilPulse 2.6s ease-in-out infinite}
-  /* duo-video */
-  #tsisl .il-duo{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(28px,4vw,60px);row-gap:22px;width:min(1200px,94vw);margin:0 auto}
-  #tsisl .il-duo .il-dsteps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-  #tsisl .il-duo .il-dchip{font:600 11.5px/1 inherit;letter-spacing:.04em;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.7);background:rgba(255,255,255,.02)}
-  #tsisl .il-duo .il-dtext{text-align:center;margin-top:16px}
-  #tsisl .il-duo .il-dtext h3{margin:0 0 10px;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(19px,1.9vw,26px);letter-spacing:-.02em;color:#fff}
-  #tsisl .il-duo .il-dtext h3 .il-g{color:#c7b489}
-  #tsisl .il-duo .il-dtext p{margin:0 auto 12px;max-width:520px;font-size:15.5px;line-height:1.7;color:#dcdcdc}
-  #tsisl .il-duo .il-play{display:inline-flex;align-items:center;gap:9px;margin-top:14px;background:#c7b489;color:#05060b;border:none;border-radius:999px;padding:11px 20px;font:600 13px/1 inherit;cursor:pointer;transition:filter .3s,transform .3s}
-  #tsisl .il-duo .il-play:hover{filter:brightness(1.08);transform:translateY(-1px)}
-  #tsisl .il-duo .il-play::before{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #05060b}
+  #tsisl .il-empf .il-ep{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 16px;max-width:none}
+  #tsisl .il-empf .il-ol{margin:0;padding-left:1.6em}
+  #tsisl .il-empf .il-ol li{color:rgba(255,255,255,.62);font-size:.92rem;line-height:1.55;margin:0 0 8px;padding:10px 14px;border-radius:12px;transition:color .45s ease,background .5s ease,box-shadow .5s ease}
+  #tsisl .il-empf .il-ol li::marker{color:rgba(255,255,255,.35);font-weight:600}
+  #tsisl .il-empf .il-ol li.lit{color:#fff;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 0 22px rgba(${G},.10)}
+  #tsisl .il-empf .il-ol li.lit::marker{color:rgba(${G},.9)}
+  @keyframes ilBeat{0%{box-shadow:0 4px 14px rgba(${G},.10),0 0 14px rgba(${G},.10)}18%{box-shadow:0 6px 22px rgba(${G},.30),0 0 46px rgba(${G},.34)}32%{box-shadow:0 5px 18px rgba(${G},.16),0 0 26px rgba(${G},.18)}46%{box-shadow:0 6px 20px rgba(${G},.26),0 0 40px rgba(${G},.28)}72%,100%{box-shadow:0 4px 14px rgba(${G},.10),0 0 14px rgba(${G},.10)}}
   /* learnings (tsl clone) */
   #tsisl .il-learn{width:100vw;max-width:100vw;margin:clamp(64px,8vh,96px) 0 10px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px)}
   #tsisl .il-learn-head{text-align:center;margin:0 auto 52px}
@@ -13375,12 +13389,13 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsisl .il-orb-cell:nth-child(2) .il-orb{animation-delay:-1.6s}#tsisl .il-orb-cell:nth-child(3) .il-orb{animation-delay:-3.2s}#tsisl .il-orb-cell:nth-child(4) .il-orb{animation-delay:-4.8s}
   #tsisl .il-orb p{position:relative;margin:0;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,14.5px);font-weight:500;line-height:1.5;max-width:22ch}
   @keyframes ilFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
-  @keyframes ilSpin{to{transform:rotate(360deg)}}
-  @keyframes ilPulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.35);opacity:1}}
-  @media(max-width:900px){#tsisl .il-vid,#tsisl .il-duo{grid-template-columns:1fr}#tsisl .il-erg{flex-direction:column!important}#tsisl .il-erg .il-erg-txt{text-align:center}#tsisl .il-empf{grid-template-columns:1fr}#tsisl .il-empf .il-eanim{margin-bottom:8px}}
+  @keyframes ilHint{0%,100%{opacity:.42}50%{opacity:.92}}
+  @media(max-width:900px){#tsisl .il-vid{grid-template-columns:1fr}#tsisl .il-empf{grid-template-columns:1fr;gap:26px}#tsisl .il-empf .il-elink{display:none}#tsisl .il-empf .il-erow{max-width:none}}
+  @media(max-width:820px){#tsisl .il-erg{flex-direction:column!important;padding:0}#tsisl .il-erg .il-erg-txt{display:none}}
   @media(max-width:1079px){#tsisl .il-learn-grid{grid-template-columns:repeat(2,1fr);gap:36px 30px;max-width:580px}#tsisl .il-gd{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:640px){#tsisl-hero .il-title{font-size:clamp(1.9rem,10vw,2.8rem)}#tsisl .il-learn-grid{grid-template-columns:1fr;max-width:320px}#tsisl .il-st-row{grid-template-columns:1fr 2fr 64px;gap:8px}#tsisl .il-st-lab{font-size:12px}}
-  @media(prefers-reduced-motion:reduce){#tsisl *{animation:none!important;transition:none!important}#tsisl .il-cl-row,#tsisl .il-gd-node{opacity:1;transform:none}}
+  @media(max-width:720px){#tsisl .il-empf .il-ehd{font-size:1.25rem}#tsisl .il-empf .il-tb{padding:10px 13px;font-size:.86rem}#tsisl .il-empf .il-emph{font-size:1.3rem}}
+  @media(max-width:640px){#tsisl-hero .il-title{font-size:clamp(1.9rem,10vw,2.8rem)}#tsisl .il-vid .il-vtext h3{font-size:30px}#tsisl .il-learn-grid{grid-template-columns:1fr;max-width:320px}#tsisl .il-st-row{grid-template-columns:1fr 2fr 64px;gap:8px}#tsisl .il-st-lab{font-size:12px}}
+  @media(prefers-reduced-motion:reduce){#tsisl *{animation:none!important;transition:none!important}#tsisl .il-cl-row,#tsisl .il-gd-node{opacity:1;transform:none}#tsisl .il-empf,#tsisl .il-empf.in{opacity:1;transform:none}#tsisl .il-empf .il-ehd,#tsisl .il-empf .il-tb,#tsisl .il-empf .il-eitem{opacity:1;transform:none}}
   `;
   function injectCSS(){ if(document.getElementById('tsisl-css'))return; var s=document.createElement('style'); s.id='tsisl-css'; s.textContent=CSS; document.head.appendChild(s); }
 
@@ -13438,20 +13453,32 @@ var TSISL_ZUG_SCHLUESSEL=[
   function videoHTML(v){
     return '<section class="il-sec"><div class="il-vid"><div class="il-vmock">'+mockPH('Live-Ansicht')+'</div><div class="il-vtext"><h3>'+v.h+'</h3>'+v.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div><p class="il-vidclose">'+v.close+'</p></section>';
   }
-  function ergHTML(rows){
-    return rows.map(function(r){ return '<div class="il-erg'+(r.side==='right'?' right':'')+'"><div class="il-erg-cell">'+mockPH('Beispiel-Ansicht')+'</div><div class="il-erg-cell il-erg-txt"><h3>'+r.h+'</h3><p>'+r.p+'</p></div></div>'; }).join('');
+  /* Abschnitt 05 — ein Ergebnis-Blick. i=0 IMMER Text links / PC rechts, danach alternierend. */
+  function ergHTML(r,i){
+    var pcs='<div class="il-erg-cell il-erg-pc">'+mockPH('Beispiel-Ansicht')
+      +'<p class="il-erg-cap">'+r.cap+' <span class="il-g">– Live Beispiel</span></p>'
+      +'<p class="il-erg-hint">Klicke zum Vergrößern</p></div>';
+    var txt='<div class="il-erg-cell il-erg-txt"><h3>'+r.h+'</h3>'+r.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
+    return '<div class="il-erg'+(i%2?' flip':'')+'">'+txt+pcs+'</div>';
   }
   function empfHTML(e){
-    return '<section class="il-sec"><div class="il-empf"><div class="il-eanim"><span class="ring"></span><span class="dot"></span></div><div class="il-etext"><p class="il-emph">'+e.emph+'</p><p class="il-ep">'+e.p+'</p><ul class="il-ol">'+e.points.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul></div></div></section>';
-  }
-  function duoHTML(d){
-    return '<section class="il-sec">'+secHead({eyebrow:'Schritt für Schritt in Notion', h:d.h})+'<div class="il-duo">'+d.items.map(function(it){ return '<div class="il-dcard"><div class="il-dsteps">'+it.chips.map(function(c){return '<span class="il-dchip">'+c+'</span>';}).join('')+'</div>'+mockPH('Walkthrough')+'<button class="il-play" type="button">Abspielen</button><div class="il-dtext"><h3>'+it.h+'</h3>'+it.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div>'; }).join('')+'</div></section>';
+    var pills='<div class="il-erow">'+e.points.map(function(p,i){ return '<span class="il-tb"><span class="num">0'+(i+1)+'</span>'+p+'</span>'; }).join('')+'</div>';
+    var L='<div class="il-ecol"><div class="il-ehd">'+e.dbhd+'</div>'+pills+'</div>';
+    var R='<div class="il-ecol"><p class="il-emph il-eitem">'+e.emph+'</p><p class="il-ep il-eitem">'+e.p+'</p><ol class="il-ol il-eitem">'+e.steps.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ol></div>';
+    return '<section class="il-sec"><div class="il-empf">'+L+R+'</div></section>';
   }
   function learnHTML(items){
     return '<section class="il-learn"><div class="il-learn-head"><span class="il-learn-eb">Was du mitnimmst</span><h2 class="il-learn-h">Learnings</h2></div><div class="il-learn-grid">'+items.map(function(t){return '<div class="il-orb-cell"><div class="il-orb"><p>'+t+'</p></div></div>';}).join('')+'</div></section>';
   }
-  function wkHTML(wk){
-    return wk.map(function(w){ return '<div class="il-wkwrap"><div id="tsisl-wk-'+w.id+'"></div></div>'; }).join('');
+  /* PFLICHT-SEQUENZ je Datenbank: Warenkorb -> Bilanz-Balken (rendert tsshop selbst) -> Ergebnis-Blick.
+     Nie zwei Warenkörbe direkt untereinander. Anker-IDs bleiben unverändert (#tsisl-wk-<kachel_id>). */
+  function wkErgHTML(wk,erg){
+    var out='', n=Math.max(wk.length,erg.length);
+    for(var i=0;i<n;i++){
+      if(wk[i]) out+='<div class="il-wkwrap"><div id="tsisl-wk-'+wk[i].id+'"></div></div>';
+      if(erg[i]) out+='<section class="il-sec">'+ergHTML(erg[i],i)+'</section>';
+    }
+    return out;
   }
 
   function buildHero(sc,c){
@@ -13470,18 +13497,15 @@ var TSISL_ZUG_SCHLUESSEL=[
     var html='<div class="il-intro">'+c.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
     html+=animHTML(c.anim);
     html+=videoHTML(c.video);
-    html+=wkHTML(c.wk);
-    html+='<section class="il-sec">'+secHead({eyebrow:'Das Ergebnis', h:'So sieht es <span class="il-g">fertig</span> aus'})+ergHTML(c.ergebnis)+'</section>';
+    html+=wkErgHTML(c.wk,c.ergebnis);
     if(c.zweit) html+=animHTML(c.zweit);
     html+=empfHTML(c.empf);
-    html+=duoHTML(c.duo);
     html+=learnHTML(c.learn);
     box.innerHTML=html;
     var hero=sc.querySelector('#tsisl-hero');
     if(hero&&hero.nextSibling) sc.insertBefore(box,hero.nextSibling); else { var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(box,nr); else sc.appendChild(box); }
     wireReveal(box);
     wireEmpf(box);
-    wireDuo(box);
   }
   function inView(el){ var r=el.getBoundingClientRect(); return r.top<window.innerHeight*.85 && r.bottom>0; }
   function wireReveal(box){
@@ -13493,12 +13517,79 @@ var TSISL_ZUG_SCHLUESSEL=[
     });
     // learnings orbs fade handled by float anim (always visible)
   }
-  function wireEmpf(box){
-    var e=box.querySelector('.il-empf'); if(!e) return; var lis=[].slice.call(e.querySelectorAll('.il-ol li')); if(!lis.length) return; var idx=0;
-    setInterval(function(){ lis.forEach(function(l){l.classList.remove('lit');}); lis[idx%lis.length].classList.add('lit'); idx++; },2600);
+  /* Abschnitt 07 — Verhalten 1:1 wie #tszein: Entrance, Cursor-Tilt, Cursor-Glow,
+     Heartbeat-Hover, Sync-Highlight alle 2600 ms + goldene Bézier-Linie. */
+  function empfPos(el,root){ var x=0,y=0; while(el&&el!==root){ x+=el.offsetLeft; y+=el.offsetTop; el=el.offsetParent; } return {x:x,y:y}; }
+  function empfTilt(wrap){
+    if(!(window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var raf=null, cx=0, cy=0;
+    wrap.addEventListener('mousemove',function(ev){
+      cx=ev.clientX; cy=ev.clientY;
+      if(!wrap.classList.contains('live')||raf) return;
+      raf=requestAnimationFrame(function(){
+        raf=null;
+        var r=wrap.getBoundingClientRect();
+        var px=(cx-r.left)/r.width, py=(cy-r.top)/r.height;
+        wrap.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg');
+        wrap.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        wrap.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+        wrap.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      });
+    });
+    wrap.addEventListener('mouseleave',function(){ wrap.style.setProperty('--rx','0deg'); wrap.style.setProperty('--ry','0deg'); });
   }
-  function wireDuo(box){
-    [].slice.call(box.querySelectorAll('.il-duo .il-play')).forEach(function(btn){ btn.addEventListener('click',function(){ var card=btn.closest('.il-dcard'); var chips=[].slice.call(card.querySelectorAll('.il-dchip')); var i=0; chips.forEach(function(c){c.classList.remove('il-dchip--on');}); var iv=setInterval(function(){ if(i>=chips.length){clearInterval(iv);return;} chips[i].style.background='rgba(199,180,137,.16)'; chips[i].style.color='#efe6d2'; chips[i].style.borderColor='rgba(199,180,137,.4)'; i++; },500); }); });
+  function wireEmpf(box){
+    var wrap=box.querySelector('.il-empf'); if(!wrap) return;
+    var items=wrap.querySelectorAll('.il-eitem');
+    for(var k=0;k<items.length;k++) items[k].style.transitionDelay=(k*0.12+0.1)+'s';
+    var io0=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ wrap.classList.add('in'); setTimeout(function(){ wrap.classList.add('live'); },950); io0.disconnect(); }
+    },{threshold:.25});
+    io0.observe(wrap);
+    empfTilt(wrap);
+    var NS='http://www.w3.org/2000/svg';
+    var tabs=[].slice.call(wrap.querySelectorAll('.il-tb'));
+    var lis=[].slice.call(wrap.querySelectorAll('.il-ol li'));
+    if(tabs.length<4||lis.length<4) return;
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','il-elink off');
+    var path=document.createElementNS(NS,'path');
+    var c1=document.createElementNS(NS,'circle'), c2=document.createElementNS(NS,'circle');
+    c1.setAttribute('r','2.5'); c2.setAttribute('r','2.5');
+    svg.appendChild(path); svg.appendChild(c1); svg.appendChild(c2);
+    wrap.appendChild(svg);
+    function draw(a,b){
+      svg.setAttribute('viewBox','0 0 '+wrap.clientWidth+' '+wrap.clientHeight);
+      var pa=empfPos(a,wrap), pb=empfPos(b,wrap);
+      var ax=pa.x+a.offsetWidth+10, ay=pa.y+a.offsetHeight/2;
+      var bx=pb.x-14, by=pb.y+b.offsetHeight/2;
+      var dx=Math.max(30,(bx-ax)*.45);
+      path.setAttribute('d','M'+ax+' '+ay+' C'+(ax+dx)+' '+ay+', '+(bx-dx)+' '+by+', '+bx+' '+by);
+      c1.setAttribute('cx',ax); c1.setAttribute('cy',ay);
+      c2.setAttribute('cx',bx); c2.setAttribute('cy',by);
+      try{
+        var len=path.getTotalLength();
+        path.style.transition='none'; path.style.strokeDasharray=len; path.style.strokeDashoffset=len;
+        void path.getBoundingClientRect();
+        path.style.transition='stroke-dashoffset .55s cubic-bezier(.22,1,.36,1)'; path.style.strokeDashoffset='0';
+      }catch(err){}
+      svg.classList.remove('off');
+    }
+    var idx=0;
+    function apply(){
+      for(var i=0;i<tabs.length;i++) tabs[i].classList.toggle('on',i===idx);
+      for(var j=0;j<lis.length;j++) lis[j].classList.toggle('lit',j===idx);
+      if(window.innerWidth<901){ svg.classList.add('off'); return; }
+      draw(tabs[idx],lis[idx]);
+    }
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ apply(); if(!reduce&&!timer) timer=setInterval(function(){ idx=(idx+1)%tabs.length; apply(); },2600); }
+      else if(timer){ clearInterval(timer); timer=null; }
+    },{threshold:.3});
+    io.observe(wrap);
+    window.addEventListener('resize',apply);
   }
 
   function mount(){
