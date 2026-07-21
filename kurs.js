@@ -911,6 +911,7 @@
   #tskmvid .kv-outro p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0}
   #tskmvid .kv-outro b{color:#c7b489;font-weight:600}
   /* 03 zeigt seinen Text auch auf Mobile (Ausblenden gilt nur fuer den Ergebnis-Blick 05) */
+
   /* Lightbox-Platzhalter */
   #tskmvid-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   #tskmvid-lb.on{display:flex}
@@ -12868,7 +12869,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev10 2026-07-21) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev11 2026-07-21) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -12879,6 +12880,12 @@ var TSISL_ZUG_SCHLUESSEL=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 11 (2026-07-21): Erklaeranimation ausgetauscht — die rev10-Fassung
+   "Aus der Zeile wird eine Kachel" (#tsgz) doppelte inhaltlich die direkt
+   folgende Ansichten-Sektion und ging am Seiteninhalt vorbei (Robert).
+   Neu: #tspc "Vom Prompt zum Cover" — 5 Beats entlang dessen, was die
+   Seite danach im Detail erklaert: leerer Kachelplatz, Prompt, passendes
+   Werkzeug, Rohbild, Canva-Feinschliff. #tsgz vollstaendig entfernt.
    Rev 10 (2026-07-21): Drei neue Abschnitte direkt nach der Einleitung —
    (1) Erklaeranimation #tsgz "Aus der Zeile wird eine Kachel" (4 Beats,
    Step-Rail, Replay, Widget mit Count-up), (2) zentrierter Zwischentext,
@@ -13181,84 +13188,95 @@ var TSISL_ZUG_SCHLUESSEL=[
     }
     @media(max-width:520px){#tsIface .learn{grid-template-columns:1fr;max-width:300px}}
 
-    /* ============ ERKLAERANIMATION "Aus der Zeile wird eine Kachel" (#tsgz) ============
-       Endzustand = Default: ohne .js steht die fertige Galerie sichtbar da (kein schwarzes Loch). */
-    #tsIface .gz-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
-    #tsIface .gz-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:12px}
-    #tsIface .gz-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
-    #tsIface .gz-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0;max-width:720px;margin-left:auto;margin-right:auto}
 
-    #tsIface .gz-wrap{max-width:920px;margin:0 auto;padding:0 clamp(12px,2vw,20px)}
-    #tsIface .gz-stage{position:relative;height:440px;margin:0 auto}
-    #tsIface .gz-tablehead{position:absolute;top:74px;left:0;width:100%;height:26px;display:flex;align-items:center;gap:0;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.34);border-bottom:1px solid rgba(255,255,255,.09);opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
-    #tsIface .gz-th1{margin-left:72px}#tsIface .gz-th2{margin-left:auto;width:26%}#tsIface .gz-th3{width:20%;text-align:right}
+    /* ============ ERKLAERANIMATION "Vom Prompt zum Cover" (#tspc) ============
+       Zeigt den Weg, den die Seite danach im Detail erklaert: leerer Kachelplatz ->
+       Prompt -> passendes Werkzeug -> Rohbild -> Canva-Feinschliff -> fertige Kachel.
+       Endzustand = Default: ohne .js steht die fertige Kachel sichtbar da. */
+    #tsIface .pc-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
+    #tsIface .pc-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:12px}
+    #tsIface .pc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
+    #tsIface .pc-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0 auto;max-width:720px}
 
-    #tsIface .gz-item{position:absolute;top:40px;left:calc(var(--r) * 34.6%);width:30.8%;height:264px;border-radius:15px;background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.12);box-shadow:0 26px 58px -34px rgba(0,0,0,.95);overflow:hidden;
-      transition:top .82s cubic-bezier(.16,1,.3,1),left .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
-    #tsIface .gz-thumb{position:absolute;left:0;top:0;width:100%;height:186px;border-radius:15px 15px 0 0;overflow:hidden;background:#0b0d14;
-      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
-    #tsIface .gz-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    #tsIface .gz-name{position:absolute;left:16px;top:202px;width:calc(100% - 32px);font-family:var(--disp);font-weight:600;font-size:17px;line-height:1.15;color:#fff;text-align:left;white-space:nowrap;
-      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),font-size .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
-    #tsIface .gz-cat{position:absolute;left:16px;top:228px;width:calc(100% - 32px);font-size:12px;color:rgba(255,255,255,.5);text-align:left;white-space:nowrap;
-      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
-    #tsIface .gz-val{position:absolute;left:calc(100% - 94px);top:12px;width:80px;font-size:12.5px;font-weight:600;color:var(--beige-hi);font-variant-numeric:tabular-nums;text-align:center;white-space:nowrap;background:rgba(5,6,11,.66);border:1px solid rgba(199,180,137,.45);border-radius:999px;padding:5px 0;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),font-size .82s cubic-bezier(.16,1,.3,1),background .6s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),padding .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+    #tsIface .pc-wrap{max-width:980px;margin:0 auto;padding:0 clamp(12px,2vw,20px)}
+    #tsIface .pc-stage{position:relative;display:grid;grid-template-columns:1fr 300px;gap:clamp(26px,4vw,58px);align-items:center;min-height:420px}
 
-    /* --- ZEILEN-ZUSTAND (nur mit JS) --- */
-    #tsIface .gz-wrap.js.rows .gz-tablehead{opacity:1}
-    #tsIface .gz-wrap.js.rows .gz-item{top:calc(var(--r) * 58px + 110px);left:0;width:100%;height:50px;border-radius:10px;box-shadow:0 10px 26px -20px rgba(0,0,0,.9)}
-    #tsIface .gz-wrap.js.rows .gz-thumb{left:12px;top:9px;width:46px;height:32px;border-radius:6px}
-    #tsIface .gz-wrap.js.rows .gz-name{left:72px;top:16px;width:32%;font-size:14.5px}
-    #tsIface .gz-wrap.js.rows .gz-cat{left:52%;top:18px;width:24%}
-    #tsIface .gz-wrap.js.rows .gz-val{left:74%;top:15px;width:22%;text-align:right;font-size:13.5px;background:transparent;border-color:transparent;padding:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+    /* --- linke Seite: Werkstatt --- */
+    #tsIface .pc-work{position:relative;min-width:0}
+    #tsIface .pc-prompt{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.13);border-radius:13px;padding:15px 17px;box-shadow:0 22px 50px -30px rgba(0,0,0,.95)}
+    #tsIface .pc-plabel{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:9px}
+    #tsIface .pc-pline{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.62;color:rgba(255,255,255,.82)}
+    #tsIface .pc-pline + .pc-pline{margin-top:3px}
+    #tsIface .pc-pline b{color:var(--beige)}
 
-    /* Einzug der Zeilen (Beat 1) */
-    #tsIface .gz-wrap.js .gz-item{opacity:0;transform:translateY(14px)}
-    #tsIface .gz-wrap.js.go .gz-item{opacity:1;transform:none;transition:top .82s cubic-bezier(.16,1,.3,1),left .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-tools{display:flex;align-items:stretch;gap:10px;margin-top:20px}
+    #tsIface .pc-tool{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:13px 8px 11px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.10);transition:border-color .55s cubic-bezier(.16,1,.3,1),background .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-tool img{width:24px;height:24px;object-fit:contain;display:block;opacity:.42;transition:opacity .55s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-tool span{font-size:11px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.42);text-align:center;transition:color .55s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-tool.on{border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.10);transform:translateY(-3px);box-shadow:0 18px 40px -20px rgba(0,0,0,.95),0 0 0 6px rgba(199,180,137,.05)}
+    #tsIface .pc-tool.on img{opacity:1}
+    #tsIface .pc-tool.on span{color:var(--beige-hi)}
+    #tsIface .pc-fit{display:block;margin-top:5px;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--beige);opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-tool.on .pc-fit{opacity:1}
 
-    /* Sweep-Hervorhebung (Beat 2) */
-    #tsIface .gz-item.lit{border-color:rgba(199,180,137,.55);box-shadow:0 14px 34px -18px rgba(0,0,0,.9),0 0 0 6px rgba(199,180,137,.055)}
-    #tsIface .gz-item.lit::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 12%,rgba(199,180,137,.20) 48%,transparent 84%);transform:translateX(-100%);animation:gzSweep 1.15s cubic-bezier(.22,1,.36,1) forwards}
-    @keyframes gzSweep{to{transform:translateX(100%)}}
+    /* --- Verbindung Werkstatt -> Kachel --- */
+    #tsIface .pc-link{position:absolute;left:calc(100% + 6px);top:50%;width:clamp(20px,4vw,52px);height:1px;background:linear-gradient(90deg,rgba(199,180,137,.45),rgba(199,180,137,.12));overflow:visible}
+    #tsIface .pc-link i{position:absolute;top:50%;left:0;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.85);opacity:0}
+    #tsIface .pc-wrap.js.beam .pc-link i{animation:pcBeam 1.05s cubic-bezier(.22,1,.36,1) forwards}
+    @keyframes pcBeam{0%{opacity:0;left:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;left:100%}}
 
-    /* Widget (Beat 4) */
-    #tsIface .gz-widget{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(330px,86%);background:linear-gradient(160deg,rgba(199,180,137,.14),rgba(199,180,137,.03));border:1px solid rgba(199,180,137,.42);border-radius:13px;padding:13px 16px 14px;box-shadow:0 22px 50px -26px rgba(0,0,0,.95)}
-    #tsIface .gz-wrap.js .gz-widget{opacity:0;transform:translateX(-50%) translateY(12px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
-    #tsIface .gz-wrap.js.widget .gz-widget{opacity:1;transform:translateX(-50%) translateY(0)}
-    #tsIface .gz-wk{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-    #tsIface .gz-wk-l{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--beige-lo)}
-    #tsIface .gz-wk-v{font-family:var(--disp);font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums}
-    #tsIface .gz-bar{position:relative;height:5px;border-radius:999px;background:rgba(255,255,255,.10);margin-top:9px;overflow:hidden}
-    #tsIface .gz-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:999px;background:linear-gradient(90deg,rgba(199,180,137,.65),var(--beige));transition:width 1.1s cubic-bezier(.16,1,.3,1)}
-    #tsIface .gz-wk2{margin-top:11px;padding-top:10px;border-top:1px solid rgba(199,180,137,.20)}
-    #tsIface .gz-wk2 .gz-wk-v{font-size:17px}
-    #tsIface .gz-wrap.js.widget .gz-bar i{width:72%}
-    #tsIface .gz-wrap:not(.js) .gz-bar i{width:72%}
+    /* --- rechte Seite: Notion-Galerie-Kachel --- */
+    #tsIface .pc-tile{position:relative;width:300px;border-radius:15px;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.13);box-shadow:0 30px 66px -34px rgba(0,0,0,.96);transition:border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-cover{position:relative;width:100%;aspect-ratio:4/3;background:#0b0d14;overflow:hidden}
+    #tsIface .pc-empty{position:absolute;inset:11px;border:1.5px dashed rgba(255,255,255,.16);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.3);opacity:0;transition:opacity .55s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;transform:none;transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-shade{position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(180deg,transparent,rgba(4,5,10,.82));opacity:1;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-over{position:absolute;left:14px;right:14px;bottom:12px;opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-over b{display:block;font-family:var(--disp);font-weight:600;font-size:19px;color:#fff;line-height:1.1;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+    #tsIface .pc-over small{display:block;margin-top:3px;font-size:11px;letter-spacing:.05em;color:rgba(255,255,255,.72)}
+    #tsIface .pc-meta{padding:13px 15px 15px}
+    #tsIface .pc-meta b{display:block;font-family:var(--disp);font-weight:600;font-size:15.5px;color:#fff}
+    #tsIface .pc-meta span{display:block;margin-top:3px;font-size:12px;color:rgba(255,255,255,.5)}
+    #tsIface .pc-canva{position:absolute;top:11px;right:11px;display:inline-flex;align-items:center;gap:6px;background:rgba(5,6,11,.72);border:1px solid rgba(199,180,137,.45);border-radius:999px;padding:5px 10px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);z-index:3}
+    #tsIface .pc-canva img{width:14px;height:14px;object-fit:contain}
+    #tsIface .pc-canva em{font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--beige-hi)}
+
+    /* --- Zustaende (nur mit .js) --- */
+    #tsIface .pc-wrap.js .pc-prompt,#tsIface .pc-wrap.js .pc-tools{opacity:0;transform:translateY(12px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-wrap.js.s1 .pc-prompt{opacity:1;transform:none}
+    #tsIface .pc-wrap.js.s2 .pc-prompt,#tsIface .pc-wrap.js.s2 .pc-tools{opacity:1;transform:none}
+    #tsIface .pc-wrap.js.s2 .pc-tools .pc-tool{transition-delay:calc(var(--t) * 110ms)}
+    #tsIface .pc-wrap.js .pc-shot{opacity:0;transform:scale(1.06)}
+    #tsIface .pc-wrap.js .pc-shade,#tsIface .pc-wrap.js .pc-over,#tsIface .pc-wrap.js .pc-canva{opacity:0}
+    #tsIface .pc-wrap.js .pc-over{transform:translateY(9px)}
+    #tsIface .pc-wrap.js .pc-canva{transform:translateY(-6px)}
+    #tsIface .pc-wrap.js .pc-empty{opacity:1}
+    #tsIface .pc-wrap.js.s3 .pc-shot,#tsIface .pc-wrap.js.s4 .pc-shot{opacity:1;transform:none}
+    #tsIface .pc-wrap.js.s3 .pc-empty,#tsIface .pc-wrap.js.s4 .pc-empty{opacity:0}
+    #tsIface .pc-wrap.js.s4 .pc-shade{opacity:1}
+    #tsIface .pc-wrap.js.s4 .pc-over{opacity:1;transform:none}
+    #tsIface .pc-wrap.js.s4 .pc-canva{opacity:1;transform:none}
+    #tsIface .pc-wrap.js.s4 .pc-tile{border-color:rgba(199,180,137,.42);box-shadow:0 30px 70px -30px rgba(0,0,0,.96),0 0 0 6px rgba(199,180,137,.045)}
 
     /* Rail + Caption + Replay */
-    #tsIface .gz-steps{display:flex;justify-content:center;gap:9px;margin:26px 0 0;flex-wrap:wrap}
-    #tsIface .gz-step{font-family:var(--disp);font-size:11.5px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.42);background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 13px;cursor:pointer;transition:color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),background .4s cubic-bezier(.16,1,.3,1)}
-    #tsIface .gz-step:hover{color:#fff;border-color:rgba(255,255,255,.3)}
-    #tsIface .gz-step.on{color:var(--beige);border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.09)}
-    #tsIface .gz-cap{max-width:680px;margin:18px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
-    #tsIface .gz-note{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-    #tsIface .gz-foot{text-align:center;margin-top:6px}
-    #tsIface .gz-replay{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--beige);background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
-    #tsIface .gz-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
+    #tsIface .pc-steps{display:flex;justify-content:center;gap:9px;margin:30px 0 0;flex-wrap:wrap}
+    #tsIface .pc-step{font-family:var(--disp);font-size:11.5px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.42);background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 13px;cursor:pointer;transition:color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),background .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-step:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+    #tsIface .pc-step.on{color:var(--beige);border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.09)}
+    #tsIface .pc-cap{max-width:700px;margin:18px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
+    #tsIface .pc-foot{text-align:center;margin-top:4px}
+    #tsIface .pc-replay{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--beige);background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
 
     @media(max-width:820px){
-      #tsIface .gz-stage{height:auto;min-height:640px}
-      #tsIface .gz-item{position:relative;left:auto !important;top:auto !important;width:100% !important;height:auto !important;min-height:270px;margin-bottom:14px;--r:0}
-      #tsIface .gz-wrap.js.rows .gz-item{height:50px !important;min-height:0}
-      #tsIface .gz-cap{min-height:120px}
-      #tsIface .gz-widget{position:relative;left:auto;bottom:auto;transform:none;width:100%;margin-top:6px}
-      #tsIface .gz-wrap.js .gz-widget{transform:translateY(12px)}
-      #tsIface .gz-wrap.js.widget .gz-widget{transform:none}
+      #tsIface .pc-stage{grid-template-columns:1fr;gap:26px;min-height:0;max-width:340px;margin:0 auto}
+      #tsIface .pc-tile{width:100%}
+      #tsIface .pc-link{display:none}
+      #tsIface .pc-cap{min-height:120px}
     }
     @media(prefers-reduced-motion:reduce){
-      #tsIface .gz-item,#tsIface .gz-thumb,#tsIface .gz-name,#tsIface .gz-cat,#tsIface .gz-val,#tsIface .gz-widget,#tsIface .gz-bar i{transition:none !important}
-      #tsIface .gz-item.lit::after{animation:none}
+      #tsIface .pc-prompt,#tsIface .pc-tools,#tsIface .pc-tool,#tsIface .pc-shot,#tsIface .pc-shade,#tsIface .pc-over,#tsIface .pc-canva,#tsIface .pc-empty{transition:none !important}
+      #tsIface .pc-link i{animation:none !important}
     }
 
     /* ============ ERKLAERVIDEO (#tsvid) — Katalog Abschnitt 03 ============ */
@@ -13366,51 +13384,58 @@ var TSISL_ZUG_SCHLUESSEL=[
   function frameSm(cap){ return '<div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
 
 
-  /* ---------- ERKLAERANIMATION "Aus der Zeile wird eine Kachel" ---------- */
-  var GZ_IMG='https://tastyrob123.github.io/kurs/img/zutaten/';
-  var GZ_ROWS=[
-    {img:'tomate.jpg',        n:'Tomate',    c:'Gemüse',        v:'2,40 €/kg'},
-    {img:'basilikum.jpg',     n:'Basilikum', c:'Kräuter',       v:'1,80 €/Bund'},
-    {img:'parmesan.jpg',      n:'Parmesan',  c:'Milchprodukte', v:'24,90 €/kg'}
+
+  /* ---------- ERKLAERANIMATION "Vom Prompt zum Cover" ---------- */
+  var PC_SHOT='https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg';
+  var PC_TOOLS=[
+    {logo:LG_GEMINI,   n:'Gemini',     fit:'passt'},
+    {logo:LG_HIGGS,    n:'Higgsfield', fit:''},
+    {logo:LG_MIDJOURNEY,n:'Midjourney',fit:''}
   ];
-  var GZ_CAPS=[
-    'Drei Zutaten mit Kategorie und Preis. Inhaltlich stimmt hier alles, nur öffnet diese Ansicht niemand freiwillig zweimal.',
-    'Jetzt wird eine Zeile ausgewählt. Am Eintrag selbst ändert sich nichts, du legst nur fest, wie Notion ihn zeigen soll.',
-    'Das kleine Vorschaubild wandert nach oben und wird zum Cover, der Name rutscht darunter, der Preis sitzt als Badge in der Ecke.',
-    'Zum Schluss dockt ein Widget an und zählt live mit, wie viele Zutaten drinstehen und was sie im Schnitt kosten.'
-  ];
-  function gzHTML(){
-    var items='';
-    for(var i=0;i<GZ_ROWS.length;i++){
-      var r=GZ_ROWS[i];
-      items+='<div class="gz-item" style="--r:'+i+'">'+
-               '<div class="gz-thumb"><img src="'+GZ_IMG+r.img+'" alt="'+r.n+'" loading="lazy"></div>'+
-               '<div class="gz-name">'+r.n+'</div>'+
-               '<div class="gz-cat">'+r.c+'</div>'+
-               '<div class="gz-val">'+r.v+'</div>'+
+  var PC_CAPS=['Nach dem Datenbank-Bau sieht es genau so aus: Der Eintrag ist angelegt, die Fläche für das Titelbild ist noch leer.','Zuerst der Prompt, also die Anweisung an das Tool. Hier: freigestellte Tomate auf schwarzem Grund, mit Spiegelung.','Denselben Prompt schickst du nicht überall hin. Bei einer Zutat übernimmt Gemini, weil es Lebensmittel am glaubwürdigsten trifft.','Zurück kommt das Rohbild. Es füllt die Kachel schon, sieht aber noch nach Bilddatei aus und nicht nach fertigem Cover.','Den Rest macht Canva: Titel aufs Bild, ein Schatten darunter, damit die Schrift lesbar bleibt. Danach ist die Kachel fertig.'];
+  function pcHTML(){
+    var tools='';
+    for(var i=0;i<PC_TOOLS.length;i++){
+      var t=PC_TOOLS[i];
+      tools+='<div class="pc-tool" style="--t:'+i+'" data-i="'+i+'">'+
+               '<img src="'+t.logo+'" alt="'+t.n+'" loading="lazy">'+
+               '<span>'+t.n+(t.fit?'<em class="pc-fit">'+t.fit+'</em>':'')+'</span>'+
              '</div>';
     }
     var steps='';
-    for(var k=0;k<4;k++){ steps+='<button class="gz-step'+(k===0?' on':'')+'" data-s="'+k+'">0'+(k+1)+'</button>'; }
-    return '<section class="rev" id="tsgz">'+
-      '<div class="gz-head">'+
-        '<span class="gz-eyebrow">Von Zeile zu Kachel</span>'+
-        '<h2>Aus drei Zeilen werden <span class=\"gold\">drei Kacheln</span>.</h2>'+
-        '<p class="gz-sub">Was du hier siehst, sind keine neuen Daten. Es sind dieselben drei Zutaten mit denselben Preisen, nur anders angezeigt.</p>'+
+    for(var k=0;k<5;k++){ steps+='<button class="pc-step'+(k===0?' on':'')+'" data-s="'+k+'">0'+(k+1)+'</button>'; }
+    return '<section class="rev" id="tspc">'+
+      '<div class="pc-head">'+
+        '<span class="pc-eyebrow">Vom Prompt zur Kachel</span>'+
+        '<h2>Fünf Schritte bis zum <span class=\"gold\">Cover</span>.</h2>'+
+        '<p class="pc-sub">Die Galerie steht, die Bildflächen sind leer. Wie eine davon gefüllt wird, siehst du hier im Überblick, bevor die Seite jeden Schritt einzeln durchgeht.</p>'+
       '</div>'+
-      '<div class="gz-wrap">'+
-        '<div class="gz-stage">'+
-          '<div class="gz-tablehead"><span class="gz-th1">Name</span><span class="gz-th2">Kategorie</span><span class="gz-th3">Preis</span></div>'+
-          items+
-          '<div class="gz-widget">'+
-            '<div class="gz-wk"><span class="gz-wk-l">Zutaten erfasst</span><span class="gz-wk-v" data-to="24">24</span></div>'+
-            '<div class="gz-bar"><i></i></div>'+
-            '<div class="gz-wk gz-wk2"><span class="gz-wk-l">Preis im Schnitt</span><span class="gz-wk-v gz-wk-eur" data-to="9.70">9,70 €</span></div>'+
+      '<div class="pc-wrap">'+
+        '<div class="pc-stage">'+
+          '<div class="pc-work">'+
+            '<div class="pc-prompt">'+
+              '<span class="pc-plabel">Prompt</span>'+
+              '<span class="pc-pline">Eine <b>frische Tomate</b>, freigestellt,</span>'+
+              '<span class="pc-pline">auf <b>schwarzem Hintergrund</b>, mit</span>'+
+              '<span class="pc-pline">weicher <b>Spiegelung</b>, Seitenlicht.</span>'+
+            '</div>'+
+            '<div class="pc-tools">'+tools+'</div>'+
+            '<span class="pc-link"><i></i></span>'+
+          '</div>'+
+          '<div class="pc-tile">'+
+            '<div class="pc-cover">'+
+              '<span class="pc-empty">Kein Titelbild</span>'+
+              '<img class="pc-shot" src="'+PC_SHOT+'" alt="Cover-Beispiel Tomate" loading="lazy">'+
+              '<span class="pc-shade"></span>'+
+              '<span class="pc-canva"><img src="'+LG_CANVA+'" alt="Canva"><em>Canva</em></span>'+
+              '<span class="pc-over"><b>Tomate</b><small>Gem&uuml;se &middot; 2,40 &euro;/kg</small></span>'+
+            '</div>'+
+            '<div class="pc-meta"><b>Tomate</b><span>Zutatenliste &middot; Galerie mit Covern</span></div>'+
           '</div>'+
         '</div>'+
-        '<div class="gz-steps">'+steps+'</div>'+
-        '<p class="gz-cap">'+GZ_CAPS[0]+'<span class="gz-note">Beispielwerte</span></p>'+
-        '<div class="gz-foot"><button class="gz-replay">Neu abspielen</button></div>'+
+        '<div class="pc-steps">'+steps+'</div>'+
+        '<p class="pc-cap">'+PC_CAPS[0]+'</p>'+
+        '<div class="pc-foot"><button class="pc-replay">Neu abspielen</button></div>'+
       '</div>'+
     '</section>';
   }
@@ -13447,7 +13472,7 @@ var TSISL_ZUG_SCHLUESSEL=[
       '<p class="tsif-sub">Praktisch sieht das Ganze aber noch aus wie eine nüchterne Tabelle. Es fehlt das gewisse Etwas, das aus deinen Zahlen ein visuell ansprechendes Interface macht — ein System, das du gerne öffnest. Genau das bauen wir jetzt. Dafür nutzen wir verschiedene Tools und Möglichkeiten, und wir fangen mit dem wichtigsten Baukasten an: Notion selbst.</p>'+
     '</section>'+
 
-    gzHTML()+
+    pcHTML()+
     midHTML()+
     vidHTML()+
 
@@ -13624,108 +13649,75 @@ var TSISL_ZUG_SCHLUESSEL=[
     revealObserve(root);
     startViewCycle(root);
     setupCompare(root);
-    initGZ();
+    initPC();
     initVid();
   }
 
 
-  /* ---------- Choreografie der Erklaeranimation ----------
-     Beats: 0 Tabelle | 1 Zeile hervorgehoben | 2 Zeilen werden Kacheln | 3 Widget dockt an
-     Endzustand = Default: ohne .js steht die fertige Galerie da. */
-  var GZ_DWELL=[3200,2100,3100,3200];
-  function initGZ(){
-    var wrap=document.querySelector('#tsgz .gz-wrap');
-    if(!wrap || wrap.__gz) return;
-    wrap.__gz=true;
+  /* ---------- Choreografie "Vom Prompt zum Cover" ----------
+     Beats: 0 leere Kachel | 1 Prompt | 2 Werkzeugwahl + Impuls | 3 Rohbild | 4 Canva-Feinschliff
+     Endzustand = Default: ohne .js steht die fertige Kachel da. */
+  var PC_DWELL=[2600,3000,3000,2600,3000];
+  function initPC(){
+    var wrap=document.querySelector('#tspc .pc-wrap');
+    if(!wrap || wrap.__pc) return; wrap.__pc=true;
     var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var steps=wrap.querySelectorAll('.gz-step');
-    var cap=wrap.querySelector('.gz-cap');
-    var val=wrap.querySelector('.gz-wk-v');
-    var eur=wrap.querySelector('.gz-wk-eur');
-    var timer=null, numRaf=null, beat=-1, playing=false;
+    var steps=wrap.querySelectorAll('.pc-step');
+    var cap=wrap.querySelector('.pc-cap');
+    var tools=wrap.querySelectorAll('.pc-tool');
+    var timer=null, beat=-1, playing=false;
 
-    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} if(numRaf){cancelAnimationFrame(numRaf);numRaf=null;} }
-    function setCap(i){
-      if(!cap) return;
-      cap.innerHTML=GZ_CAPS[i]+'<span class="gz-note">Beispielwerte</span>';
-    }
-    function markStep(i){
-      for(var k=0;k<steps.length;k++){ steps[k].classList.toggle('on', k===i); }
-    }
-    /* Count-up beider Werte auf EINEM Ticker, ~26 fps gedrosselt (Mutation-Storm-Schutz) */
-    function eurTxt(n){ return n.toFixed(2).replace('.',',')+' \u20AC'; }
-    function countAll(){
-      var tN=parseInt(val&&val.getAttribute('data-to')||'24',10);
-      var tE=parseFloat(eur&&eur.getAttribute('data-to')||'9.70');
-      if(reduce){ if(val) val.textContent=tN; if(eur) eur.textContent=eurTxt(tE); return; }
-      var dur=1050, t0=null, last=0;
-      function step(ts){
-        if(t0===null) t0=ts;
-        var pr=Math.min(1,(ts-t0)/dur);
-        var e=1-Math.pow(1-pr,3);
-        if(ts-last>38 || pr===1){
-          if(val) val.textContent=Math.round(tN*e);
-          if(eur) eur.textContent=eurTxt(tE*e);
-          last=ts;
-        }
-        if(pr<1){ numRaf=requestAnimationFrame(step); } else { numRaf=null; }
-      }
-      numRaf=requestAnimationFrame(step);
-    }
+    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} }
+    function markStep(i){ for(var k=0;k<steps.length;k++){ steps[k].classList.toggle('on',k===i); } }
     function go(i,auto){
-      beat=i; markStep(i); setCap(i);
-      var items=wrap.querySelectorAll('.gz-item');
-      wrap.classList.add('js','go');
-      if(i<=1){ wrap.classList.add('rows'); } else { wrap.classList.remove('rows'); }
-      wrap.classList.toggle('widget', i>=3);
-      for(var k=0;k<items.length;k++){ items[k].classList.remove('lit'); }
-      if(i===1 && items[0]){ void items[0].offsetWidth; items[0].classList.add('lit'); }
-      if(i===3){ if(numRaf){cancelAnimationFrame(numRaf);numRaf=null;} countAll(); }
-      else { if(val) val.textContent='0'; if(eur) eur.textContent='0,00 €'; }
-      if(auto && i<3){
-        timer=setTimeout(function(){ go(i+1,true); }, GZ_DWELL[i]);
-      } else if(auto){ playing=false; }
+      beat=i; markStep(i);
+      if(cap) cap.textContent=PC_CAPS[i];
+      wrap.classList.add('js');
+      wrap.classList.remove('s1','s2','s3','s4','beam');
+      if(i>=1) wrap.classList.add('s1');
+      if(i>=2) wrap.classList.add('s2');
+      if(i>=3) wrap.classList.add('s3');
+      if(i>=4) wrap.classList.add('s4');
+      for(var k=0;k<tools.length;k++){ tools[k].classList.toggle('on', i>=2 && k===0); }
+      if(i===2){ void wrap.offsetWidth; wrap.classList.add('beam'); }
+      if(auto && i<4){ timer=setTimeout(function(){ go(i+1,true); }, PC_DWELL[i]); }
+      else if(auto){ playing=false; }
     }
     function play(){
       clearAll();
-      if(reduce){ wrap.classList.remove('js'); markStep(3); setCap(3); return; }
+      if(reduce){ wrap.classList.remove('js'); markStep(4); if(cap) cap.textContent=PC_CAPS[4]; return; }
       playing=true;
       wrap.classList.add('js');
-      wrap.classList.add('rows');
-      wrap.classList.remove('go','widget');
+      wrap.classList.remove('s1','s2','s3','s4','beam');
       void wrap.offsetWidth;
       timer=setTimeout(function(){ go(0,true); },60);
     }
     for(var k=0;k<steps.length;k++){
       (function(idx){ steps[idx].addEventListener('click',function(){ clearAll(); playing=false; wrap.classList.add('js'); go(idx,false); }); })(k);
     }
-    var rp=wrap.querySelector('.gz-replay');
+    var rp=wrap.querySelector('.pc-replay');
     if(rp) rp.addEventListener('click',function(){ play(); });
 
-    /* Hintergrund-Tab: laufende Sequenz anhalten */
     document.addEventListener('visibilitychange',function(){
       if(document.hidden){ clearAll(); }
-      else if(playing && beat>-1 && beat<3){ timer=setTimeout(function(){ go(beat+1,true); }, GZ_DWELL[beat]); }
+      else if(playing && beat>-1 && beat<4){ timer=setTimeout(function(){ go(beat+1,true); }, PC_DWELL[beat]); }
     });
 
-    /* One-Shot beim Scrollen + self-healing Fallback */
     var fired=false;
     function trigger(){ if(fired) return; fired=true; play(); }
     if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(en){
-        if(en[0].isIntersecting){ io.disconnect(); trigger(); }
-      },{threshold:.3});
+      var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ io.disconnect(); trigger(); } },{threshold:.3});
       io.observe(wrap);
     } else { trigger(); }
     function heal(){
-      var w=document.querySelector('#tsgz .gz-wrap'); if(!w) return;
+      var w=document.querySelector('#tspc .pc-wrap'); if(!w) return;
       var r=w.getBoundingClientRect();
       if(!fired && r.top < innerHeight*.75 && r.bottom > 0){ trigger(); }
     }
     window.addEventListener('scroll',heal,{passive:true});
     window.addEventListener('resize',heal);
     setTimeout(heal,1200);
-    window.__tsgzKill=function(){ clearAll(); playing=false; };
+    window.__tspcKill=function(){ clearAll(); playing=false; };
   }
 
   /* Lightbox-Platzhalter fuer den Play-Button (Video kommt erst nach allen Lektionen) */
