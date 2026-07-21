@@ -14977,3 +14977,301 @@ var TSISL_ZUG_SCHLUESSEL=[
   document.addEventListener("DOMContentLoaded", mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   notion-ai-fr-unser-system — #tsnaiq Erklaeranimation "Die Frage bleibt im System."
+   Abschnitt 02, Aufbau: Eyebrow + H2 + 1-2 Saetze, dann Animation (Robert 21.07.2026).
+   Konzept (eigens fuer diese Seite): DIESELBE Frage zweimal. Links verlaesst sie deine Daten
+   und kommt schnell, aber leer zurueck. Rechts bleibt sie drin und laeuft durch die echten
+   Datenbanken DB 0 -> DB IV -> DB V -> DB XI und kommt mit einer konkreten Zahl zurueck.
+   Das ist die Achse der Lektion, ohne den Anbietervergleich aus L0.2 zu wiederholen.
+   Beispielwerte aus L2.2 (Tomate 2,00 EUR/kg, 80 g Portion -> 0,16 EUR) - im UI gekennzeichnet.
+   Doktrin: Endzustand = Default (ohne .js ist alles sichtbar), One-Shot + Replay,
+   self-healing Trigger, prefers-reduced-motion statisch, opake Kartenbasis (Linien scheinen sonst durch).
+   Font "Lineal Web": Titel enthaelt F -> ausserhalb des 30-Glyphen-Subsets von "Lineal TS".
+   ============================================================ */
+(function(){
+  if(window.__tsnaiq) return; window.__tsnaiq=true;
+  function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
+  var EASE="cubic-bezier(.16,1,.3,1)";
+
+  var CSS=`
+  #tsnaiq{width:min(1080px,94vw);margin:20px auto 60px;box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsnaiq *{box-sizing:border-box}
+
+  /* ---- Sektions-Kopf (Katalog Abschnitt 02) ---- */
+  #tsnaiq .q-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
+  #tsnaiq .q-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;
+    font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsnaiq .q-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;
+    box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tsnaiq .q-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;
+    text-wrap:balance;margin:0 0 18px;color:#fff}
+  #tsnaiq .q-title .ts-gold{color:#c7b489}
+  #tsnaiq .q-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
+
+  /* ---- Buehne ---- */
+  #tsnaiq .q-wrap{max-width:980px;margin:0 auto}
+  #tsnaiq.js .q-wrap{opacity:0;transform:translateY(24px) scale(.97);
+    transition:opacity .85s ${EASE},transform .95s ${EASE}}
+  #tsnaiq.js .q-wrap.on{opacity:1;transform:none}
+
+  /* Frage-Chip */
+  #tsnaiq .q-ask{max-width:560px;margin:0 auto 30px;text-align:center;
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;
+    border:1px solid rgba(199,180,137,.34);border-radius:14px;padding:15px 22px;
+    box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  #tsnaiq .q-ask-k{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.4);margin-bottom:7px}
+  #tsnaiq .q-ask-v{font-size:15.5px;line-height:1.5;color:#fff;font-weight:600}
+  #tsnaiq.js .q-ask{opacity:0;transform:translateY(10px) scale(.96);
+    transition:opacity .42s ${EASE},transform .42s ${EASE}}
+  #tsnaiq.js .q-ask.on{opacity:1;transform:none}
+
+  #tsnaiq .q-stage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,28px);align-items:start}
+
+  /* Spalten-Rahmen */
+  #tsnaiq .q-track{position:relative;border-radius:16px;padding:18px 18px 20px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(rgba(255,255,255,.022),rgba(255,255,255,.022)),#05060b}
+  #tsnaiq .q-in{border-color:rgba(199,180,137,.3)}
+  #tsnaiq .q-lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.4);text-align:center;margin-bottom:16px}
+  #tsnaiq .q-in .q-lbl{color:#c7b489}
+
+  /* Verbindungslinie in der Spalte */
+  #tsnaiq .q-chain{position:relative}
+  #tsnaiq .q-rail{position:absolute;left:50%;top:44px;bottom:20px;width:1px;transform:translateX(-50%);
+    background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));z-index:0}
+  #tsnaiq .q-chain .q-rail{top:0;bottom:0}
+  #tsnaiq .q-in .q-rail{background:linear-gradient(180deg,rgba(199,180,137,.42),rgba(199,180,137,.12))}
+  #tsnaiq .q-dot{position:absolute;left:50%;top:0;width:7px;height:7px;border-radius:50%;
+    transform:translate(-50%,-50%);background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.8);opacity:0;z-index:1}
+  #tsnaiq.js .q-in.go .q-dot{animation:naiqRun 1.9s cubic-bezier(.42,0,.58,1) .2s 1 forwards}
+  @keyframes naiqRun{0%{opacity:0;top:0}8%{opacity:1}92%{opacity:1}100%{opacity:0;top:100%}}
+
+  /* Karten */
+  #tsnaiq .q-card{position:relative;z-index:2;border-radius:12px;padding:11px 14px;margin-bottom:9px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    transition:border-color .5s ${EASE},box-shadow .5s ${EASE},background .5s ${EASE}}
+  #tsnaiq .q-card:last-child{margin-bottom:0}
+  #tsnaiq .q-card-n{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.62);white-space:nowrap}
+  #tsnaiq .q-card-v{font-size:13.5px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #tsnaiq .q-card.lit{border-color:rgba(199,180,137,.5);
+    background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#05060b;
+    box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 34px -14px rgba(199,180,137,.4)}
+  #tsnaiq .q-card.lit .q-card-n{color:#fff}
+  #tsnaiq .q-card.lit .q-card-v{color:#c7b489}
+  #tsnaiq.js .q-card{opacity:.34}
+  #tsnaiq.js .q-card.lit{opacity:1}
+
+  /* Ergebnis */
+  #tsnaiq .q-res{position:relative;z-index:2;margin-top:13px;border-radius:13px;padding:14px;text-align:center;
+    border:1px solid rgba(199,180,137,.5);
+    background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b;
+    transition:box-shadow .6s ${EASE},opacity .6s ${EASE}}
+  #tsnaiq .q-res-k{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.45);margin-bottom:6px}
+  #tsnaiq .q-res-v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:26px;
+    color:#c7b489;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  #tsnaiq.js .q-res-v{opacity:0;transform:translateY(8px);
+    transition:opacity .55s ${EASE} .1s,transform .55s ${EASE} .1s}
+  #tsnaiq.js .q-res.lit .q-res-v{opacity:1;transform:none}
+  #tsnaiq.js .q-res{opacity:.34}
+  #tsnaiq.js .q-res.lit{opacity:1;box-shadow:0 0 0 1px rgba(199,180,137,.2),0 18px 44px -16px rgba(199,180,137,.55)}
+
+  /* Linke Spalte: externes Chatfenster */
+  #tsnaiq .q-ext{position:relative;z-index:2;border-radius:12px;padding:14px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b}
+  #tsnaiq .q-ext-k{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.34);margin-bottom:9px}
+  #tsnaiq .q-ext-a{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.6)}
+  #tsnaiq .q-dots{display:inline-flex;gap:5px;align-items:center;height:20px}
+  #tsnaiq .q-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.42);display:block}
+  #tsnaiq.js .q-out.go .q-dots i{animation:naiqBlink 1.1s ${EASE} infinite}
+  #tsnaiq.js .q-out.go .q-dots i:nth-child(2){animation-delay:.16s}
+  #tsnaiq.js .q-out.go .q-dots i:nth-child(3){animation-delay:.32s}
+  @keyframes naiqBlink{0%,100%{opacity:.28}50%{opacity:.85}}
+  #tsnaiq.js .q-ext-a{opacity:0;transform:translateY(6px);
+    transition:opacity .5s ${EASE},transform .5s ${EASE}}
+  #tsnaiq.js .q-ext-a.on{opacity:1;transform:none}
+  #tsnaiq.js .q-dots{display:none}
+  #tsnaiq.js .q-out.go .q-dots{display:inline-flex}
+  #tsnaiq.js .q-out.done .q-dots{display:none}
+
+  /* Fussnoten je Spalte */
+  #tsnaiq .q-note{font-size:10.5px;line-height:1.5;color:rgba(255,255,255,.34);margin-top:11px;text-align:center}
+  #tsnaiq .q-in .q-note{color:rgba(255,255,255,.42)}
+
+  /* Ambient: ruhiges Atmen des System-Rahmens, mit Ruhephase */
+  #tsnaiq.js .q-in.go{animation:naiqBreath 5.2s ${EASE} 1.2s infinite}
+  @keyframes naiqBreath{0%,62%,100%{box-shadow:0 0 0 0 rgba(199,180,137,0)}
+    78%{box-shadow:0 0 0 1px rgba(199,180,137,.14),0 0 44px -12px rgba(199,180,137,.3)}}
+
+  /* Caption + Replay */
+  #tsnaiq .q-cap{max-width:700px;margin:30px auto 0;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsnaiq .q-cap b{color:#c7b489;font-weight:600}
+  #tsnaiq .q-replay{display:block;margin:20px auto 0;background:transparent;cursor:pointer;
+    border:1px solid rgba(199,180,137,.45);border-radius:999px;padding:8px 20px;
+    color:#c7b489;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.02em;
+    transition:background .4s ${EASE},border-color .4s ${EASE},color .4s ${EASE}}
+  #tsnaiq .q-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2}
+
+  @media (max-width:820px){
+    #tsnaiq .q-stage{grid-template-columns:1fr}
+    #tsnaiq .q-title{font-size:clamp(1.6rem,7vw,2.1rem)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #tsnaiq.js .q-wrap,#tsnaiq.js .q-ask{opacity:1!important;transform:none!important}
+    #tsnaiq.js .q-card,#tsnaiq.js .q-res{opacity:1!important}
+    #tsnaiq.js .q-res-v{opacity:1!important;transform:none!important}
+    #tsnaiq.js .q-ext-a{opacity:1!important;transform:none!important}
+    #tsnaiq.js .q-in.go{animation:none!important}
+    #tsnaiq.js .q-in.go .q-dot{animation:none!important;opacity:0!important}
+  }
+  `;
+
+  var HTML=
+  '<div class="q-head">'+
+    '<div class="q-eyebrow">Was Notion AI anders macht</div>'+
+    '<h2 class="q-title">Die Frage bleibt im <span class="ts-gold">System</span>.</h2>'+
+    '<p class="q-sub">Ein Chat ohne Zugriff auf deine Daten kann dir nur erklären, wovon es abhängt. Notion AI sitzt in deinen Datenbanken und rechnet mit dem, was dort steht.</p>'+
+  '</div>'+
+  '<div class="q-wrap">'+
+    '<div class="q-ask">'+
+      '<div class="q-ask-k">Dieselbe Frage</div>'+
+      '<div class="q-ask-v">„Was kostet mich eine Portion Tomaten?"</div>'+
+    '</div>'+
+    '<div class="q-stage">'+
+      '<div class="q-track q-out">'+
+        '<div class="q-lbl">Ein Chat außerhalb deiner Daten</div>'+
+        '<div class="q-rail"></div>'+
+        '<div class="q-ext">'+
+          '<div class="q-ext-k">Antwort</div>'+
+          '<div class="q-dots"><i></i><i></i><i></i></div>'+
+          '<div class="q-ext-a">„Das hängt von deinem Einkaufspreis und deiner Portionsgröße ab. Rechne den Kilopreis auf deine Portion herunter."</div>'+
+        '</div>'+
+        '<div class="q-note">Richtig — aber ohne eine einzige Zahl aus deinem Betrieb.</div>'+
+      '</div>'+
+      '<div class="q-track q-in">'+
+        '<div class="q-lbl">Notion AI in deinem System</div>'+
+        '<div class="q-chain">'+
+        '<div class="q-rail"><span class="q-dot"></span></div>'+
+        '<div class="q-card" data-i="0"><span class="q-card-n">DB 0 : Inventurliste</span><span class="q-card-v">2,00 € / kg</span></div>'+
+        '<div class="q-card" data-i="1"><span class="q-card-n">DB IV : Zutaten</span><span class="q-card-v">80 g je Portion</span></div>'+
+        '<div class="q-card" data-i="2"><span class="q-card-n">DB V : Rezepturen</span><span class="q-card-v">1 Position</span></div>'+
+        '<div class="q-card" data-i="3"><span class="q-card-n">DB XI : Gerichte</span><span class="q-card-v">Wareneinsatz</span></div>'+
+        '</div>'+
+        '<div class="q-res"><div class="q-res-k">Antwort</div><div class="q-res-v" data-to="0.16">0,16 €</div></div>'+
+        '<div class="q-note">Beispielwerte aus der Zutaten-Lektion.</div>'+
+      '</div>'+
+    '</div>'+
+    '<p class="q-cap">Der Unterschied ist nicht die Intelligenz, sondern der <b>Standort</b>. Notion AI liest die Werte, die du selbst eingetragen hast, und rechnet damit — deshalb bekommst du eine Zahl statt einer Erklärung.</p>'+
+    '<button class="q-replay" type="button">Neu abspielen</button>'+
+  '</div>';
+
+  function injectCSS(){
+    if(document.getElementById('tsnaiq-css')) return;
+    var s=document.createElement('style'); s.id='tsnaiq-css'; s.textContent=CSS; document.head.appendChild(s);
+  }
+
+  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+
+  function play(root){
+    if(!root) return;
+    var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var wrap=root.querySelector('.q-wrap'),
+        ask=root.querySelector('.q-ask'),
+        out=root.querySelector('.q-out'),
+        inn=root.querySelector('.q-in'),
+        exta=root.querySelector('.q-ext-a'),
+        cards=[].slice.call(root.querySelectorAll('.q-card')),
+        res=root.querySelector('.q-res'),
+        resv=root.querySelector('.q-res-v');
+    if(!wrap) return;
+    /* Reset */
+    if(root.__t){ root.__t.forEach(clearTimeout); }
+    if(root.__raf){ cancelAnimationFrame(root.__raf); root.__raf=null; }
+    root.__t=[];
+    wrap.classList.remove('on'); ask.classList.remove('on');
+    out.classList.remove('go','done'); inn.classList.remove('go');
+    exta.classList.remove('on');
+    cards.forEach(function(c){ c.classList.remove('lit'); });
+    res.classList.remove('lit'); resv.textContent=money(0.16);
+
+    if(reduced){
+      wrap.classList.add('on'); ask.classList.add('on'); exta.classList.add('on');
+      out.classList.add('done'); cards.forEach(function(c){c.classList.add('lit');}); res.classList.add('lit');
+      return;
+    }
+    function at(ms,fn){ root.__t.push(setTimeout(fn,ms)); }
+    /* Setup */
+    void wrap.offsetWidth;
+    at(20,  function(){ wrap.classList.add('on'); });
+    /* Aktion: die Frage */
+    at(340, function(){ ask.classList.add('on'); });
+    /* Links: schnell, aber leer */
+    at(820, function(){ out.classList.add('go'); });
+    at(1880,function(){ out.classList.add('done'); exta.classList.add('on'); });
+    /* Rechts: der Weg durch die Datenbanken */
+    at(980, function(){ inn.classList.add('go'); });
+    /* Zeitpunkte = wann der Laufpunkt die jeweilige Kartenmitte erreicht
+       (ease-in-out ueber 1900 ms ab 1180 ms; Kartenmitten bei 12,5/37,5/62,5/87,5 % der Schiene) */
+    var HIT=[1820,2180,2480,2850];   /* gemessen: exakt die Zeitpunkte, zu denen der Laufpunkt die Kartenmitte erreicht */
+    cards.forEach(function(c,i){ at(HIT[i], function(){ c.classList.add('lit'); }); });
+    /* Aufloesung: die Zahl */
+    at(3320,function(){ res.classList.add('lit'); });
+  }
+
+  function arm(root){
+    if(root.__armed) return; root.__armed=true;
+    root.classList.add('js');
+    var fired=false;
+    function go(){ if(fired) return; fired=true; play(root); }
+    function inView(){
+      var r=root.getBoundingClientRect();
+      return r.top < (innerHeight*0.82) && r.bottom > 0;
+    }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ go(); io.disconnect(); } });
+      },{threshold:.3});
+      io.observe(root);
+    }
+    /* self-healing Zusatz-Trigger (Muster #tsd4/#tskm) */
+    function chk(){ var r=document.getElementById('tsnaiq'); if(!r) return; if(inView()) go(); }
+    addEventListener('scroll',chk,{passive:true});
+    addEventListener('resize',chk,{passive:true});
+    chk();
+    var rp=root.querySelector('.q-replay');
+    if(rp) rp.addEventListener('click',function(){ play(document.getElementById('tsnaiq')); });
+  }
+
+  function findAnchor(){
+    return document.getElementById('tsnai-intro') || document.querySelector('.super-content .notion-root');
+  }
+
+  function mount(){
+    if(!on()){
+      var old=document.getElementById('tsnaiq'); if(old&&old.parentNode) old.parentNode.removeChild(old);
+      return;
+    }
+    if(document.getElementById('tsnaiq')) return;
+    var a=findAnchor(); if(!a||!a.parentNode) return;
+    injectCSS();
+    var root=document.createElement('section');
+    root.id='tsnaiq'; root.innerHTML=HTML;
+    a.parentNode.insertBefore(root, a.nextSibling);
+    arm(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded',mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
