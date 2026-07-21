@@ -15622,7 +15622,13 @@ var TSISL_ZUG_SCHLUESSEL=[
        waechst die Kachel symmetrisch darueber hinaus. Lieber ein
        Stueck ueberstehen als Text abschneiden. */
     if(tight){
-      var need=s.card.querySelector(".fdqx-in").scrollHeight;
+      /* NICHT .fdqx-in.scrollHeight nehmen: scrollHeight laesst das
+         untere Padding weg, die Kachel blieb dadurch 11-18px zu kurz
+         und der letzte Schritt wurde angeschnitten. Panel + beide
+         Paddings messen. */
+      var inn=s.card.querySelector(".fdqx-in");
+      var pad=parseFloat(getComputedStyle(inn).paddingTop)||0;
+      var need=s.card.querySelector(".fdqx-panel").scrollHeight + pad*2;
       if(need>h){
         s.card.style.height=Math.round(need)+"px";
         s.card.style.top=Math.round(top-(need-h)/2)+"px";
