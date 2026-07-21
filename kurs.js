@@ -15312,6 +15312,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 /* ============================================================
    #tsfdqx — Hover-Bauanleitung über dem eingebetteten Quartier
    Seite: /food-drinksquartier-inhalte-interface
+
    Der Schüler fährt über einen Abschnitt (Banner / Galerie),
    das Original wird verdeckt, an seiner Stelle steht die
    Schritt-für-Schritt-Anleitung für genau diesen Abschnitt.
@@ -15322,6 +15323,12 @@ var TSISL_ZUG_SCHLUESSEL=[
      ein React-Re-Render nichts zerreissen.
    - Anker = Bild-UUID (Banner) bzw. DB-Slug + Ordinal (Galerie),
      NICHT die Notion-Block-IDs (die sind nachweislich instabil).
+   - VOLLE ABDECKUNG: jedes Bild und jede Galerie bekommt eine
+     Kachel. Was nicht konfiguriert ist, wird aus dem DOM
+     abgeleitet (DB-Slug aus der Karten-URL) — nichts erfunden.
+   - Flache Abschnitte (Banner) legen die Schritte zweispaltig
+     neben den Titel und wachsen bei Bedarf ueber die Blockhoehe
+     hinaus, damit nie Text abgeschnitten wird.
    - Hover nur auf echten Zeigergeraeten (hover:hover).
    ============================================================ */
 (function(){
@@ -15331,12 +15338,11 @@ var TSISL_ZUG_SCHLUESSEL=[
   function on(){ return SLUG.test(location.pathname); }
 
   var CAN_HOVER = !(window.matchMedia && window.matchMedia("(hover:none)").matches);
-  var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 
   /* ---- Der Banner-Bauweg ist ueberall derselbe ---------------- */
   function bannerSteps(motiv){
     return [
-      "Bild im Bannerformat generieren — Motiv: "+motiv,
+      "Bild im Bannerformat generieren"+(motiv?" — Motiv: "+motiv:""),
       "In Canva einfügen → Zielmaß anlegen",
       "Schatten, Textfläche und Schriftzug setzen",
       "Bild herunterladen",
@@ -15351,14 +15357,25 @@ var TSISL_ZUG_SCHLUESSEL=[
       "Ansicht hinzufügen → Galerie",
       "Kartenvorschau → Cover"
     ];
-    s.push(filter ? "Filter: "+filter : "Kein Filter — die ganze Datenbank");
+    if(filter) s.push("Filter: "+filter);
     return s;
   }
 
-  /* ---- Die Abschnitte der Seite, in Dokument-Reihenfolge ------ */
+  /* ---- Konfigurierte Abschnitte, in Dokument-Reihenfolge ------
+     Filter sind gegen die echten Notion-Kategorien geprueft:
+     Breakfast · Lunch · Dinner · Sweet Treats · Coffee ·
+     Juice&Tea · Matcha&Sweet · Softdrinks · Wein / Alkohol ·
+     Longdrinks   (ein "Dessert" gibt es nicht)                  */
   var SEC=[
     { img:"59ddf0d2", eyebrow:"Banner", t:"Das Quartiers-Banner",
       steps:bannerSteps("Food- und Drinksquartier") },
+
+    { img:"ffb749f6", eyebrow:"Banner", t:"Speisekarten-Banner",
+      steps:bannerSteps("Speisekarte") },
+    { img:"ad7f6fb8", eyebrow:"Banner", t:"Speisekarten-Banner",
+      steps:bannerSteps("Speisekarte") },
+    { img:"eddfe1aa", eyebrow:"Banner", t:"Speisekarten-Banner",
+      steps:bannerSteps("Speisekarte") },
 
     { img:"1d7f8fde", eyebrow:"Banner", t:"Das Breakfast-Banner",
       steps:bannerSteps("Breakfast") },
@@ -15375,15 +15392,18 @@ var TSISL_ZUG_SCHLUESSEL=[
     { db:"db-gerichte", nth:2, eyebrow:"Galerie", t:"Die Dinner-Galerie",
       steps:galSteps("DB Gerichte","Kategorie = Dinner") },
 
-    { img:"a010b2cc", eyebrow:"Banner", t:"Das Dessert-Banner",
-      steps:bannerSteps("Dessert") },
-    { db:"db-gerichte", nth:3, eyebrow:"Galerie", t:"Die Dessert-Galerie",
-      steps:galSteps("DB Gerichte","Kategorie = Dessert") },
+    { img:"a010b2cc", eyebrow:"Banner", t:"Das Sweet-Treats-Banner",
+      steps:bannerSteps("Sweet Treats") },
+    { db:"db-gerichte", nth:3, eyebrow:"Galerie", t:"Die Sweet-Treats-Galerie",
+      steps:galSteps("DB Gerichte","Kategorie = Sweet Treats") },
 
     { img:"4509a72a", eyebrow:"Banner", t:"Das Saucen-Banner",
       steps:bannerSteps("Saucen") },
     { db:"db-meine-rezepturen", nth:0, eyebrow:"Galerie", t:"Die Saucen-Galerie",
-      steps:galSteps("DB Rezepturen","Kategorie = Sauce") },
+      steps:galSteps("DB Meine Rezepturen", null) },
+
+    { img:"03abf082", eyebrow:"Banner", t:"Das Datenbank-Banner",
+      steps:bannerSteps("Datenbanken") },
 
     { img:"60cf5c32", eyebrow:"Banner", t:"Das Zutaten-Banner",
       steps:bannerSteps("Zutaten") },
@@ -15438,7 +15458,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
     font-size:clamp(21px,2.5vw,30px);
   }
-  #tsfdqx-layer .fdqx-steps{list-style:none;margin:0;padding:0;counter-reset:fdqx;}
+  #tsfdqx-layer .fdqx-steps{list-style:none;margin:0;padding:0;}
   #tsfdqx-layer .fdqx-steps li{
     counter-increment:fdqx;position:relative;padding-left:34px;
     margin:0 0 11px;color:rgba(255,255,255,.86);
@@ -15450,13 +15470,27 @@ var TSISL_ZUG_SCHLUESSEL=[
     width:23px;text-align:right;
     color:#c7b489;font-weight:600;font-size:13px;line-height:1.9;
   }
-  /* Kompaktmodus: flache Abschnitte (Banner) bekommen kleinere Typo */
-  #tsfdqx-layer .fdqx-card.tight .fdqx-t{font-size:clamp(17px,1.7vw,21px);margin-bottom:11px;}
-  #tsfdqx-layer .fdqx-card.tight .fdqx-eyebrow{font-size:10.5px;margin-bottom:7px;}
-  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li{font-size:13.5px;line-height:1.5;margin-bottom:5px;padding-left:28px;}
-  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li::before{width:19px;font-size:11.5px;line-height:1.65;}
-  #tsfdqx-layer .fdqx-card.tight .fdqx-in{padding:clamp(12px,1.6vw,20px);}
-  #tsfdqx-layer .fdqx-card.tight .fdqx-panel{width:min(820px,100%);}
+  /* zweite Liste im Normalfall direkt unter der ersten */
+  #tsfdqx-layer .fdqx-col2{margin-top:11px;}
+
+  /* ---- Kompaktmodus: flache Abschnitte (Banner) -------------
+     Titel + erste Schritte links, restliche Schritte rechts.  */
+  #tsfdqx-layer .fdqx-card.tight .fdqx-panel{
+    width:min(940px,100%);
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;
+    column-gap:clamp(22px,3.2vw,52px);align-items:start;
+  }
+  #tsfdqx-layer .fdqx-card.tight .fdqx-head{grid-column:1;grid-row:1;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-col1{grid-column:1;grid-row:2;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-col2{grid-column:2;grid-row:1/3;align-self:center;margin-top:0;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-t{font-size:clamp(18px,1.9vw,24px);margin-bottom:12px;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-eyebrow{font-size:11px;margin-bottom:7px;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li{
+    font-size:14px;line-height:1.5;margin-bottom:7px;padding-left:29px;
+  }
+  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li::before{width:20px;font-size:12px;line-height:1.62;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-in{padding:clamp(14px,1.8vw,24px);}
+
   @media (prefers-reduced-motion:reduce){
     #tsfdqx-layer .fdqx-card{transition:none;}
   }
@@ -15489,19 +15523,30 @@ var TSISL_ZUG_SCHLUESSEL=[
     if(/allergene|glutenhaltiges|krebstiere/.test(id+href)) return "allergene";
     return "";
   }
+  /* db-meine-rezepturen -> "DB Meine Rezepturen" */
+  function prettyDb(slug){
+    return slug.split("-").map(function(w){
+      if(w==="db") return "DB";
+      return w.charAt(0).toUpperCase()+w.slice(1);
+    }).join(" ");
+  }
+
+  var ALL=[], autoCards={};
 
   function resolve(root){
     var imgs=[].slice.call(root.querySelectorAll(".notion-image"));
     var gals=[].slice.call(root.querySelectorAll(".notion-collection.inline"));
-    var seenDb={};
-    var galMap=[];
+
+    var seenDb={}, galMap=[];
     gals.forEach(function(g){
       var db=dbOf(g);
-      if(!db) return;                        // leere Galerien haben nichts zu erklaeren
+      if(!db) return;                        // leere Collections (Diagramme) haben nichts zu zeigen
       var n = seenDb[db]==null ? 0 : seenDb[db]+1;
       seenDb[db]=n;
       galMap.push({el:g,db:db,nth:n});
     });
+
+    var claimed=[];
     SEC.forEach(function(s){
       if(s.img){
         s.el = imgs.filter(function(e){ return uidOf(e).indexOf(s.img)===0; })[0] || null;
@@ -15509,21 +15554,57 @@ var TSISL_ZUG_SCHLUESSEL=[
         var hit = galMap.filter(function(g){ return g.db===s.db && g.nth===s.nth; })[0];
         s.el = hit ? hit.el : null;
       }
+      if(s.el) claimed.push(s.el);
     });
+
+    /* --- Volle Abdeckung: alles Nicht-Konfigurierte ableiten --- */
+    var auto=[];
+    imgs.forEach(function(e){
+      if(claimed.indexOf(e)>-1) return;
+      var uid=uidOf(e); if(!uid) return;
+      auto.push(mkAuto("img:"+uid, e, "Banner", "Banner", bannerSteps(null)));
+    });
+    galMap.forEach(function(g){
+      if(claimed.indexOf(g.el)>-1) return;
+      auto.push(mkAuto("gal:"+g.db+"#"+g.nth, g.el, "Galerie",
+        "Die "+prettyDb(g.db).replace(/^DB /,"")+"-Galerie",
+        galSteps(prettyDb(g.db), null)));
+    });
+
+    ALL = SEC.filter(function(s){ return !!s.el; }).concat(auto);
+  }
+
+  function mkAuto(key, el, eyebrow, t, steps){
+    var s = autoCards[key] || (autoCards[key]={eyebrow:eyebrow,t:t,steps:steps});
+    s.el=el;
+    return s;
   }
 
   /* ------------------------ Karten bauen ---------------------- */
   function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
+  function ol(cls, steps, startAt){
+    if(!steps.length) return "";
+    return '<ol class="fdqx-steps '+cls+'" style="counter-reset:fdqx '+startAt+'">'
+      + steps.map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("")
+      + '</ol>';
+  }
+
   function buildCard(s){
+    /* Im Kompaktmodus liegen links floor(n/2) Schritte unter dem Titel,
+       rechts der Rest. Der Titel braucht links Platz, darum die kleinere
+       Haelfte links. Im Normalfall stehen beide Listen untereinander. */
+    var n=s.steps.length, cut=Math.floor(n/2);
     var c=document.createElement("div");
     c.className="fdqx-card";
     c.innerHTML='<div class="fdqx-in"><div class="fdqx-panel">'
-      + '<p class="fdqx-eyebrow">'+esc(s.eyebrow)+'</p>'
-      + '<h3 class="fdqx-t">'+esc(s.t)+'</h3>'
-      + '<ol class="fdqx-steps">'
-      + s.steps.map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("")
-      + '</ol></div></div>';
+      + '<div class="fdqx-head">'
+      +   '<p class="fdqx-eyebrow">'+esc(s.eyebrow)+'</p>'
+      +   '<h3 class="fdqx-t">'+esc(s.t)+'</h3>'
+      + '</div>'
+      + ol("fdqx-col1", s.steps.slice(0,cut), 0)
+      + ol("fdqx-col2", s.steps.slice(cut), cut)
+      + '</div></div>';
     return c;
   }
 
@@ -15547,15 +15628,30 @@ var TSISL_ZUG_SCHLUESSEL=[
     if(!s || !s.el || !s.card) return false;
     if(!s.el.isConnected){ s.card.classList.remove("on"); return false; }
     var r=rectOf(s.el);
-    if(r.height<8 || r.width<8){ s.card.classList.remove("on"); return false; } // noch nicht geladen
-    s.card.style.top    = Math.round(r.top+window.pageYOffset)+"px";
-    s.card.style.left   = Math.round(r.left+window.pageXOffset)+"px";
-    s.card.style.width  = Math.round(r.width)+"px";
-    s.card.style.height = Math.round(r.height)+"px";
-    s.card.classList.toggle("tight", r.height < 320);
+    if(r.height<8 || r.width<8){ s.card.classList.remove("on"); return false; }
+
+    var tight = r.height < 320;
+    s.card.classList.toggle("tight", tight);
+
+    var top=r.top+window.pageYOffset, h=r.height;
+    s.card.style.left  = Math.round(r.left+window.pageXOffset)+"px";
+    s.card.style.width = Math.round(r.width)+"px";
+    s.card.style.top   = Math.round(top)+"px";
+    s.card.style.height= Math.round(h)+"px";
+
+    /* Flache Banner: wenn der Text nicht in die Blockhoehe passt,
+       waechst die Kachel symmetrisch darueber hinaus. Lieber ein
+       Stueck ueberstehen als Text abschneiden. */
+    if(tight){
+      var need=s.card.querySelector(".fdqx-in").scrollHeight;
+      if(need>h){
+        s.card.style.height=Math.round(need)+"px";
+        s.card.style.top=Math.round(top-(need-h)/2)+"px";
+      }
+    }
     return true;
   }
-  function placeAll(){ SEC.forEach(place); }
+  function placeAll(){ ALL.forEach(place); }
 
   function show(s){
     if(open===s) return;
@@ -15585,7 +15681,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 
     resolve(root);
 
-    SEC.forEach(function(s){
+    ALL.forEach(function(s){
       if(!s.el) return;
       if(!s.card || !layer.contains(s.card)){
         s.card=buildCard(s);
@@ -15604,8 +15700,8 @@ var TSISL_ZUG_SCHLUESSEL=[
         var t=e.target;
         if(!t || !t.closest) return;
         var el=t.closest(".notion-image, .notion-collection.inline");
-        if(!el){ return; }
-        var hit=SEC.filter(function(s){ return s.el===el && s.card; })[0];
+        if(!el) return;
+        var hit=ALL.filter(function(s){ return s.el===el && s.card; })[0];
         if(hit) show(hit);
       });
     }
