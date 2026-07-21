@@ -931,11 +931,11 @@
   <div class="kv-text">
     <h2 class="kv-title">Was du misst, kannst du <span class="ts-gold">führen</span>.</h2>
     <p>Key Metrics sind die wenigen Zahlen, an denen du wirklich erkennst, ob dein Betrieb gesund läuft. Nicht der Umsatz allein zählt, sondern das, was am Ende eines Monats von ihm übrig bleibt.</p>
-    <p>Dafür trägst du pro Monat nur die <b>echten Zahlen aus deinem Betrieb</b> ein: Umsatz, Wareneinsatz, Personalkosten, geleistete Stunden, Öffnungstage. Den Rest übernimmt die Datenbank — sie rechnet daraus <b>Deckungsbeitrag I, II und III</b>, deinen Wareneinsatz in Prozent, die Produktivität pro Stunde und den Durchschnittsbon.</p>
-    <p>Der erste Schritt ist der Rahmen: Du legst die <b>Kostenauswertung Master</b> an — die Datenbank, auf der von hier an alles aufbaut.</p>
+    <p>Dafür trägst du pro Monat nur ein, was ohnehin bei dir anfällt: <b>Umsatz, Wareneinsatz, Personalkosten</b>, geleistete Stunden und Öffnungstage. Daraus entstehen <b>Deckungsbeitrag I, II und III</b>, dein Wareneinsatz in Prozent, die Produktivität pro Stunde und der Durchschnittsbon.</p>
+    <p>Alles beginnt beim Rahmen — der <b>Kostenauswertung Master</b>. Sie ist die Datenbank, auf der jede weitere Zahl aufbaut, noch bevor die erste Formel dazukommt.</p>
   </div>
 </div>
-<div class="kv-outro"><p>Leg jetzt in Notion eine leere Seite an und nenn sie <b>Kostenauswertung Master</b>. Mehr brauchst du für den Moment nicht. Alles Weitere bauen wir gemeinsam — direkt hier unter diesem Abschnitt entsteht deine Datenbank <b>Karte für Karte</b>, die erste Spalte gleich als Nächstes.</p></div>`;
+<div class="kv-outro"><p>Leg jetzt in Notion eine leere Seite an und nenn sie <b>Kostenauswertung Master</b> — genau so geschrieben, den Namen brauchst du später wieder. Keine Tabelle, keine Vorlage, die leere Seite reicht. Alles Weitere bauen wir gemeinsam: Direkt unter diesem Abschnitt entsteht deine Datenbank <b>Karte für Karte</b>, und mit der ersten Spalte geht es gleich weiter.</p></div>`;
     var mac=el.querySelector('.kv-mac');
     mac.addEventListener('click',openLb);
     mac.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
@@ -1154,8 +1154,9 @@
 <div class="km2-row">
   <div class="km2-text">
     <h3 class="km2-title">Ein Monat, eine <span class="ts-gold">Zeile</span>.</h3>
-    <p>So sieht die Kostenauswertung Master aus, wenn sie läuft: Jeder Monat steht als eine <b>Zeile</b>, daneben liegen alle Kennzahlen — deine drei <b>Deckungsbeiträge</b>, Wareneinsatz in Prozent, Produktivität und Durchschnittsbon.</p>
-    <p>Weil jeder Monat gleich aufgebaut ist, kannst du sie direkt <b>vergleichen</b>. Du siehst, ob dein Wareneinsatz nach oben klettert oder die Deckungsbeiträge dünner werden — und in welchem Monat es gekippt ist.</p>
+    <p>So sieht die Kostenauswertung Master aus, wenn sie läuft: Du trägst am Monatsende deine Werte ein, die fertigen <b>Kennzahlen</b> stehen Sekunden später daneben. Keine Nebenrechnung, keine zweite Tabelle.</p>
+    <p>Weil jede Zeile gleich aufgebaut ist, lassen sich die <b>Monate direkt nebeneinanderlegen</b>. Was sich verschoben hat, steht untereinander statt in zwei getrennten Auswertungen, die du erst gegeneinander halten müsstest.</p>
+    <p>Und genau dort fällt der eine Monat auf, der <b>aus der Reihe springt</b>. Du siehst ihn, bevor du ihn am Kontostand merkst, und kannst nachsehen, was in diesem Monat anders lief: im Einkauf oder im Dienstplan.</p>
   </div>
   <div class="km2-pc">
     <div class="km2-tile" role="button" tabindex="0" aria-label="Datenbank vergrößern">
