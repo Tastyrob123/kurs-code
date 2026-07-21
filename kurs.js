@@ -12058,7 +12058,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev7 2026-07-20) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev8 2026-07-20) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -12069,6 +12069,12 @@ var TSISL_ZUG_SCHLUESSEL=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 8 (2026-07-20): Format-Glattzug der ganzen Seite gegen den
+   Abschnitts-Katalog — Fließtext auf Site-Standard (--tx .86 /
+   15.5px), H2 auf clamp(1.9rem,4.4vw,2.9rem), Kopfspalte 860px,
+   Hero-Text -16% + Lesbarkeits-Backdrop + Mobile-Regeln, Easing-
+   Familie an 12 Stellen, Learnings-Eyebrow + gestaffelte Orbs,
+   Weiter-Button verdrahtet, Ergebnis-Blick-Text auf Norm-Länge.
    ============================================================ */
 (function(){
   if(window.__tsIface) return; window.__tsIface = true;
@@ -12097,8 +12103,9 @@ var TSISL_ZUG_SCHLUESSEL=[
     var css = `
     .page__interface-bau-grundstruktur-widgets .ts-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate;}
     .page__interface-bau-grundstruktur-widgets .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;filter:contrast(1.06) saturate(1.05);image-rendering:-webkit-optimize-contrast;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0;}
-    .page__interface-bau-grundstruktur-widgets .ts-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:2%;transform:translateX(-50%);width:80%;height:66%;background:radial-gradient(closest-side,rgba(4,5,10,.78) 0%,rgba(4,5,10,.5) 46%,rgba(4,5,10,.16) 68%,rgba(4,5,10,0) 84%);}
-    .page__interface-bau-grundstruktur-widgets .ts-hero__text{position:relative;z-index:2;text-align:center;margin-top:-25%;padding:0 24px 8px;}
+    .page__interface-bau-grundstruktur-widgets .ts-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;background:radial-gradient(closest-side,rgba(4,5,10,.78) 0%,rgba(4,5,10,.5) 46%,rgba(4,5,10,.16) 68%,rgba(4,5,10,0) 84%);}
+    .page__interface-bau-grundstruktur-widgets .ts-hero__text{position:relative;z-index:2;text-align:center;margin-top:-16%;padding:0 24px 8px;}
+    .page__interface-bau-grundstruktur-widgets .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88),rgba(4,5,10,.68) 38%,rgba(4,5,10,.28) 64%,rgba(4,5,10,0) 82%);filter:blur(3px);}
     .page__interface-bau-grundstruktur-widgets .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none;}
     .page__interface-bau-grundstruktur-widgets .ts-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;}
     .page__interface-bau-grundstruktur-widgets .ts-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7);}
@@ -12107,23 +12114,24 @@ var TSISL_ZUG_SCHLUESSEL=[
     @keyframes tsMcZoom{from{transform:scale(1.05);opacity:0}to{transform:scale(1);opacity:1}}
     @keyframes tsRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-    #tsIface{--bg:#05060b;--beige:#c7b489;--beige-hi:#efe6d2;--beige-lo:#d8c9ab;--green:#8FCBAA;--red:#e32552;--tx:rgba(255,255,255,.96);--tx2:rgba(255,255,255,.9);--card:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0));--bd:rgba(255,255,255,.10);--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;--disp:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-      width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);color:#fff;font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    #tsIface{--bg:#05060b;--beige:#c7b489;--beige-hi:#efe6d2;--beige-lo:#d8c9ab;--green:#8FCBAA;--red:#e32552;--tx:rgba(255,255,255,.86);--tx2:rgba(255,255,255,.9);--card:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0));--bd:rgba(255,255,255,.10);--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;--disp:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+      width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);color:#fff;font-family:var(--sans);font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
     #tsIface *{box-sizing:border-box}
-    #tsIface .tsif-wrap{max-width:1120px;margin:0 auto}
-    #tsIface .tsif-col{max-width:760px;margin:0 auto}
+    #tsIface .tsif-col{max-width:860px;margin:0 auto}
+    #tsIface .tsif-eyebrow{display:block;font-family:var(--disp);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:14px}
+    #tsIface .tsif-learnh{font-size:clamp(30px,5vw,46px);line-height:1.05}
     #tsIface section{margin:0 auto;padding:60px 0}
-    #tsIface h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.2vw,44px);letter-spacing:-.02em;line-height:1.09;margin:0 0 16px;text-wrap:balance;color:#fff}
-    #tsIface h3{font-family:var(--disp);font-weight:600;font-size:clamp(18px,1.9vw,22px);letter-spacing:-.015em;line-height:1.22;margin:0 0 10px;color:#fff}
+    #tsIface h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);letter-spacing:-.01em;line-height:1.08;margin:0 0 16px;text-wrap:balance;color:#fff}
+    #tsIface h3{font-family:var(--disp);font-weight:600;font-size:clamp(18px,1.9vw,22px);letter-spacing:-.015em;line-height:1.22;margin:0 0 12px;color:#fff}
     #tsIface .gold{color:var(--beige)}
     #tsIface p{margin:0 0 16px}
-    #tsIface .tsif-sub{color:var(--tx);max-width:680px;margin:0 auto 16px;line-height:1.7;font-size:16px}
+    #tsIface .tsif-sub{color:var(--tx);max-width:860px;margin:0 auto 16px;line-height:1.62;font-size:15.5px}
     #tsIface .tsif-sub:last-child{margin-bottom:0}
     #tsIface .center{text-align:center}
     #tsIface a{color:var(--beige-lo)}
 
     /* reveal */
-    #tsIface .rev{opacity:0;transform:translateY(24px);filter:blur(8px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0) * 100ms)}
+    #tsIface .rev{opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0) * 140ms)}
     #tsIface .rev.in{opacity:1;transform:none;filter:blur(0)}
 
     /* placeholder surface */
@@ -12136,7 +12144,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     /* views chips — eine Reihe, direkt unter dem Intro */
     #tsIface .viewbar{padding:6px 0 44px}
     #tsIface .views{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:1080px;margin:0 auto}
-    #tsIface .chip{padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:#fff;transition:transform .3s,border-color .3s}
+    #tsIface .chip{padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:#fff;transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s cubic-bezier(.16,1,.3,1)}
     #tsIface .chip:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
     #tsIface .chip.star{background:linear-gradient(160deg,rgba(199,180,137,.22),rgba(199,180,137,.05));border-color:rgba(199,180,137,.5);color:var(--beige-hi);font-weight:600;box-shadow:0 0 30px -8px rgba(199,180,137,.4)}
     #tsIface .chip.star::before{content:"\\2605  ";color:var(--beige)}
@@ -12151,7 +12159,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .mac-base{position:relative;width:102%;left:-1%;height:15px;background:linear-gradient(180deg,#26272e,#111218);border-radius:0 0 13px 13px;box-shadow:0 34px 54px -32px rgba(0,0,0,.9)}
     #tsIface .mac-base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:14%;height:7px;background:#0b0c11;border-radius:0 0 8px 8px}
     #tsIface .vswitch{position:relative;width:100%;aspect-ratio:16/10;background:#17181e;overflow:hidden}
-    #tsIface .vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;opacity:0;transition:opacity .7s ease}
+    #tsIface .vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;opacity:0;transition:opacity .7s cubic-bezier(.16,1,.3,1)}
     #tsIface .vslide.on{opacity:1}
     #tsIface .vswitch .ph{position:absolute;inset:0;width:100%;height:100%;border-radius:0}
     #tsIface .vbadge{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--disp);font-size:11px;letter-spacing:.08em;color:var(--tx2);background:rgba(5,6,11,.55);border:1px solid var(--bd);border-radius:999px;padding:5px 12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
@@ -12168,27 +12176,27 @@ var TSISL_ZUG_SCHLUESSEL=[
 
     /* compare / swipe carousel */
     #tsIface .cmp-stage{position:relative}
-    #tsIface .cmp-slide{opacity:0;position:absolute;inset:0;transition:opacity .45s ease}
+    #tsIface .cmp-slide{opacity:0;position:absolute;inset:0;transition:opacity .45s cubic-bezier(.16,1,.3,1)}
     #tsIface .cmp-slide.on{opacity:1;position:relative}
     #tsIface .cmp-slide .ph{aspect-ratio:3/2;border-radius:0}
-    #tsIface .cmp-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:rgba(5,6,11,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .25s,color .25s,border-color .25s,transform .25s;z-index:3}
+    #tsIface .cmp-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:rgba(5,6,11,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1),border-color .25s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1);z-index:3}
     #tsIface .cmp-nav:hover{background:rgba(199,180,137,.9);color:#05060b;border-color:transparent;transform:translateY(-50%) scale(1.06)}
     #tsIface .cmp-prev{left:10px}#tsIface .cmp-next{right:10px}
     #tsIface .cmp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:0 2px}
     #tsIface .cmp-label{font-family:var(--disp);font-size:13px;letter-spacing:.02em;color:var(--beige-hi)}
     #tsIface .cmp-dots{display:flex;gap:7px}
-    #tsIface .cmp-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0;transition:background .25s}
+    #tsIface .cmp-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;border:0;padding:0;transition:background .25s cubic-bezier(.16,1,.3,1)}
     #tsIface .cmp-dot.on{background:var(--beige)}
 
     /* Tool-Showcase-Trio (Gemini/Higgsfield/Midjourney) */
-    #tsIface .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:38px auto 0}
+    #tsIface .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:44px auto 0}
     #tsIface .tcard{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;box-shadow:0 34px 78px -44px rgba(0,0,0,.96);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s}
     #tsIface .tcard:hover{transform:translateY(-5px);border-color:rgba(199,180,137,.32)}
     #tsIface .tlogo{display:flex;align-items:center;justify-content:center;height:74px;padding:24px 20px 8px}
     #tsIface .tlogo img{max-height:40px;max-width:66%;width:auto;height:auto;object-fit:contain;border-radius:9px;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
     #tsIface .tvisual{position:relative;aspect-ratio:3/2;overflow:hidden;background:#17181e;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
     #tsIface .tvisual .cmp-stage{position:absolute;inset:0}
-    #tsIface .tvisual .cmp-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+    #tsIface .tvisual .cmp-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s cubic-bezier(.16,1,.3,1)}
     #tsIface .tvisual .cmp-slide.on{opacity:1;position:absolute}
     #tsIface .tvisual .cmp-slide .ph{width:100%;height:100%;aspect-ratio:auto;border-radius:0}
     #tsIface .tcap{padding:22px 22px 24px;text-align:center}
@@ -12202,13 +12210,13 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .bullets li{position:relative;padding:0 0 0 32px;margin-bottom:15px;color:var(--tx);font-size:15.5px;line-height:1.5}
     #tsIface .bullets li::before{content:"";position:absolute;left:0;top:2px;width:19px;height:19px;border-radius:50%;background:rgba(199,180,137,.13);border:1px solid rgba(199,180,137,.42)}
     #tsIface .bullets li::after{content:"";position:absolute;left:6px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 10px rgba(199,180,137,.7)}
-    #tsIface .canva-split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,60px);align-items:center;max-width:1040px;margin:34px auto 0}
+    #tsIface .canva-split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,60px);align-items:center;max-width:1040px;margin:44px auto 0}
     #tsIface .canva-split .macwrap{margin:0}
 
     /* use-case cards */
-    #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:34px auto 0}
-    #tsIface .card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:26px 24px 22px;box-shadow:0 26px 60px -38px rgba(0,0,0,.95);transition:transform .35s,border-color .35s;overflow:hidden;text-align:center}
-    #tsIface .card::before{content:"";position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(199,180,137,.5),transparent);opacity:0;transition:opacity .35s}
+    #tsIface .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:44px auto 0}
+    #tsIface .card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:26px 24px 22px;box-shadow:0 26px 60px -38px rgba(0,0,0,.95);transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1);overflow:hidden;text-align:center}
+    #tsIface .card::before{content:"";position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(199,180,137,.5),transparent);opacity:0;transition:opacity .35s cubic-bezier(.16,1,.3,1)}
     #tsIface .card:hover{transform:translateY(-3px);border-color:rgba(199,180,137,.28)}
     #tsIface .card:hover::before{opacity:1}
     #tsIface .toolrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin:2px 0 16px}
@@ -12234,11 +12242,11 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .frame .ph{border-radius:0;aspect-ratio:3/2}
 
     /* table */
-    #tsIface .tbl{overflow-x:auto;border-radius:16px;border:1px solid var(--bd);max-width:880px;margin:26px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,0))}
+    #tsIface .tbl{overflow-x:auto;border-radius:16px;border:1px solid var(--bd);max-width:880px;margin:44px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,0))}
     #tsIface table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;color:#fff}
     #tsIface th,#tsIface td{padding:14px 18px;text-align:left;border-bottom:1px solid rgba(255,255,255,.07)}
     #tsIface thead th{color:var(--beige);font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
-    #tsIface tbody tr{transition:background .25s}
+    #tsIface tbody tr{transition:background .25s cubic-bezier(.16,1,.3,1)}
     #tsIface tbody tr:hover{background:rgba(255,255,255,.03)}
     #tsIface tbody tr:last-child td{border-bottom:none}
     #tsIface td.num,#tsIface th.num{text-align:right;font-variant-numeric:tabular-nums}
@@ -12254,8 +12262,8 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .box.beige .bh{color:var(--beige-hi)}
 
     /* prompt cover galleries */
-    #tsIface .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:30px auto 0}
-    #tsIface .gcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:transform .35s,border-color .35s}
+    #tsIface .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:44px auto 0}
+    #tsIface .gcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1)}
     #tsIface .gcard:hover{transform:translateY(-3px);border-color:rgba(199,180,137,.28)}
     #tsIface .gcard .ph{border-radius:0;border-bottom:1px solid var(--bd);aspect-ratio:4/3}
     #tsIface .gbody{padding:18px}
@@ -12264,7 +12272,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .prompt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--tx2);background:rgba(0,0,0,.35);border:1px solid var(--bd);border-radius:10px;padding:12px;line-height:1.5}
 
     /* format cards */
-    #tsIface .fmt{display:grid;gap:16px;max-width:880px;margin:26px auto 0}
+    #tsIface .fmt{display:grid;gap:16px;max-width:880px;margin:44px auto 0}
     #tsIface .fcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px 26px}
     #tsIface .fcard h3{font-size:19px;display:flex;align-items:center;gap:10px}
     #tsIface .fcard h3 .fn{font-family:var(--disp);font-size:12px;color:#05060b;background:var(--beige);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -12275,9 +12283,9 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .spec span b{color:var(--beige);font-weight:600}
 
     /* learnings orbs */
-    #tsIface .learn{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1120px;margin:34px auto 0;justify-items:center}
-    #tsIface .lcell{width:100%;max-width:240px}
-    #tsIface .lorb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;background:radial-gradient(120% 120% at 30% 22%,rgba(255,255,255,.07),rgba(255,255,255,.015) 60%),linear-gradient(160deg,rgba(199,180,137,.05),rgba(255,255,255,0));border:1px solid var(--bd);box-shadow:0 22px 50px -22px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.08);animation:tsifFloat 7s ease-in-out infinite;transition:border-color .4s,box-shadow .4s}
+    #tsIface .learn{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:44px auto 0;justify-items:center}
+    #tsIface .lcell{width:100%;max-width:250px}
+    #tsIface .lorb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;background:radial-gradient(120% 120% at 30% 22%,rgba(255,255,255,.07),rgba(255,255,255,.015) 60%),linear-gradient(160deg,rgba(199,180,137,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.12);box-shadow:0 22px 50px -22px rgba(0,0,0,.8),inset 0 1px 1px rgba(255,255,255,.08);animation:tsifFloat 7s cubic-bezier(.45,0,.55,1) infinite;transition:border-color .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
     #tsIface .lcell:nth-child(1) .lorb{animation-delay:0s}
     #tsIface .lcell:nth-child(2) .lorb{animation-delay:-1.6s}
     #tsIface .lcell:nth-child(3) .lorb{animation-delay:-3.2s}
@@ -12285,13 +12293,13 @@ var TSISL_ZUG_SCHLUESSEL=[
     #tsIface .lorb::before{content:"";position:absolute;top:10%;left:16%;width:34%;height:24%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.16),rgba(255,255,255,0));pointer-events:none}
     #tsIface .lorb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 22px 50px -18px rgba(0,0,0,.8),0 0 40px rgba(199,180,137,.22)}
     #tsIface .lnum{position:absolute;top:16px;left:50%;transform:translateX(-50%);font-family:var(--disp);font-size:13px;color:var(--beige);font-weight:600}
-    #tsIface .lt{position:relative;color:#fff;font-size:clamp(12.5px,1.1vw,14.5px);font-weight:500;line-height:1.5;max-width:22ch}
+    #tsIface .lt{position:relative;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
     #tsIface .lt b{color:#fff;font-weight:700}
     @keyframes tsifFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
 
     /* next button */
-    #tsIfaceNext{text-align:center;padding:56px 0 24px}
-    #tsIfaceNext a{display:inline-flex;align-items:center;gap:10px;background:#c7b489;color:#05060b;font-family:var(--disp);font-weight:600;padding:16px 34px;border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.01em;box-shadow:0 20px 50px -18px rgba(199,180,137,.55);transition:transform .3s,box-shadow .3s}
+    #tsIfaceNext{text-align:center;margin:48px 0 72px;padding:0}
+    #tsIfaceNext a{display:inline-flex;align-items:center;gap:10px;background:#c7b489;color:#05060b;font-family:var(--disp);font-weight:600;height:44px;padding:0 28px;border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.01em;box-shadow:0 20px 50px -18px rgba(199,180,137,.55);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}
     #tsIfaceNext a:hover{transform:translateY(-2px);box-shadow:0 26px 60px -18px rgba(199,180,137,.7)}
 
     @media(max-width:860px){
@@ -12303,7 +12311,11 @@ var TSISL_ZUG_SCHLUESSEL=[
       #tsIface .cards,#tsIface .gal,#tsIface .trio{grid-template-columns:1fr}
       #tsIface .trio{max-width:420px}
       #tsIface .learn{grid-template-columns:repeat(2,1fr);gap:34px 28px;max-width:560px}
-      .page__interface-bau-grundstruktur-widgets .ts-hero__text{margin-top:-22%}
+      .page__interface-bau-grundstruktur-widgets .ts-hero__text{margin-top:-14%}
+    }
+    @media(max-width:640px){
+      .page__interface-bau-grundstruktur-widgets .ts-hero__title{font-size:clamp(2rem,12vw,3rem)}
+      .page__interface-bau-grundstruktur-widgets .ts-hero__text{padding:0 16px 20px}
     }
     @media(max-width:520px){#tsIface .learn{grid-template-columns:1fr;max-width:300px}}
     @media(prefers-reduced-motion:reduce){
@@ -12329,7 +12341,7 @@ var TSISL_ZUG_SCHLUESSEL=[
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
-        '<h1 class="ts-hero__title">Interface-Bau —<br>Grundstruktur &amp; <span class="ts-gold">Widgets</span></h1>'+
+        '<h1 class="ts-hero__title">Interface-Bau —<br><span class="ts-gold">Grundstruktur &amp; Widgets</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
     if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
@@ -12397,8 +12409,9 @@ var TSISL_ZUG_SCHLUESSEL=[
       '<div class="vrow">'+
         '<div class="vtxt">'+
           '<h2>Eine Tabelle, <span class="gold">viele Ansichten</span></h2>'+
-          '<p>Das Praktische an Notion: Du legst deine Daten nur ein einziges Mal an — und zeigst sie danach auf ganz verschiedene Arten an. Dieselbe Zutatenliste einmal als Tabelle, einmal als Kachel-Galerie, einmal als Diagramm.</p>'+
-          '<p>Du tippst nichts doppelt, du wählst nur aus, wie es aussehen soll. Genau das siehst du hier: ein Klick — dieselben Daten, ein anderes Gesicht.</p>'+
+          '<p>Das Praktische an Notion: Du legst deine Daten ein einziges Mal an und entscheidest danach nur noch, wie du sie ansehen willst. Dieselbe Zutatenliste, einmal als Tabelle zum schnellen Eintippen, einmal als Kachel-Galerie mit Bildern.</p>'+
+          '<p>Der Unterschied zeigt sich im Alltag. Beim Wareneingang willst du eine schmale Liste, in die du Preise tippst. Bei der Kalkulation willst du sehen, welche Zutat nach oben ausreißt. Zwei Situationen, zwei Ansichten, dieselbe Grundlage.</p>'+
+          '<p>Und weil nichts doppelt liegt, kann auch nichts auseinanderlaufen. Änderst du einen Preis in einer Ansicht, steht er in allen anderen sofort richtig.</p>'+
         '</div>'+
         '<div class="vpc">'+viewMock()+'</div>'+
       '</div>'+
@@ -12474,7 +12487,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     /* Prompt-Vorlagen */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<h2>Wie erstellen wir die <span class="gold">verschiedenen Bild-Arten</span>?</h2>'+
+        '<h2>Wie erstellen wir die <span class="gold">Bild-Arten</span>?</h2>'+
         '<p class="tsif-sub">Jedes Tool „versteht“ deine Anweisung ein bisschen anders. Damit du nicht bei null anfängst, bekommst du fertige Prompt-Vorlagen — Textbausteine, die du nur noch anpasst und einfügst. Für jedes Tool eine eigene.</p>'+
       '</div>'+
       '<div class="gal">'+
@@ -12521,17 +12534,17 @@ var TSISL_ZUG_SCHLUESSEL=[
 
     /* Learnings */
     '<section class="rev">'+
-      '<div class="tsif-col center"><h2>4 <span class="gold">Learnings</span></h2></div>'+
+      '<div class="tsif-col center"><span class="tsif-eyebrow">Was du mitnimmst</span><h2 class="tsif-learnh">4 <span class="gold">Learnings</span></h2></div>'+
       '<div class="learn">'+
-        '<div class="lcell"><div class="lorb"><span class="lnum">1</span><p class="lt">Eine Datenbank, viele Ansichten — die <b>Galerie mit Covern</b> macht aus deiner Tabelle ein System, das aussieht wie eine App.</p></div></div>'+
-        '<div class="lcell"><div class="lorb"><span class="lnum">2</span><p class="lt">Jedes Tool hat seine Stärke: <b>Gemini</b> fürs Essen, <b>Higgsfield</b> für Objekte, <b>Midjourney</b> für Welten &amp; Banner.</p></div></div>'+
-        '<div class="lcell"><div class="lorb"><span class="lnum">3</span><p class="lt">Abos nicht dauerhaft laufen lassen: in <b>4 Wochen</b> einmal alles bauen, danach nur bei Bedarf für einen Monat nachbuchen.</p></div></div>'+
-        '<div class="lcell"><div class="lorb"><span class="lnum">4</span><p class="lt">Sehr breite Banner immer <b>breit erstellen und dann zuschneiden</b> — nie stauchen.</p></div></div>'+
+        '<div class="lcell rev" style="--i:0"><div class="lorb"><span class="lnum">1</span><p class="lt">Eine Datenbank, viele Ansichten — die <b>Galerie mit Covern</b> macht aus deiner Tabelle ein System, das aussieht wie eine App.</p></div></div>'+
+        '<div class="lcell rev" style="--i:1"><div class="lorb"><span class="lnum">2</span><p class="lt">Jedes Tool hat seine Stärke: <b>Gemini</b> fürs Essen, <b>Higgsfield</b> für Objekte, <b>Midjourney</b> für Welten &amp; Banner.</p></div></div>'+
+        '<div class="lcell rev" style="--i:2"><div class="lorb"><span class="lnum">3</span><p class="lt">Abos nicht dauerhaft laufen lassen: in <b>4 Wochen</b> einmal alles bauen, danach nur bei Bedarf für einen Monat nachbuchen.</p></div></div>'+
+        '<div class="lcell rev" style="--i:3"><div class="lorb"><span class="lnum">4</span><p class="lt">Sehr breite Banner immer <b>breit erstellen und dann zuschneiden</b> — nie stauchen.</p></div></div>'+
       '</div>'+
     '</section>'+
 
     /* Next */
-    '<div id="tsIfaceNext"><a href="#">Nächste Lektion &rarr;</a></div>';
+    '<div id="tsIfaceNext"><a href="/food-drinksquartier-inhalte-interface">Nächste Lektion &rarr;</a></div>';
   }
 
   function mountContent(){
