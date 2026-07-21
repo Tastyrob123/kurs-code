@@ -15671,7 +15671,9 @@ var TSISL_ZUG_SCHLUESSEL=[
     width:16%;height:4px;border-radius:0 0 5px 5px;background:rgba(255,255,255,.09)}
   /* Platzhalter-Inhalt im Screen (Notion-AI-Chat angedeutet) */
   #tsnaivid .vd-ph{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;
-    justify-content:flex-end;gap:8px;padding:clamp(10px,2vw,20px);line-height:normal}
+    justify-content:flex-end;gap:8px;padding:clamp(10px,2vw,20px);line-height:normal;
+    -webkit-mask-image:radial-gradient(circle 62px at 50% 50%,transparent 0,transparent 96%,#000 100%);
+    mask-image:radial-gradient(circle 62px at 50% 50%,transparent 0,transparent 96%,#000 100%)}
   #tsnaivid .vd-bub{max-width:74%;border-radius:11px;padding:8px 11px;font-size:clamp(8px,1vw,11.5px);
     line-height:1.45;background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#0d1019;
     border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.72)}
@@ -15731,7 +15733,7 @@ var TSISL_ZUG_SCHLUESSEL=[
       '<p>Für Formeln gilt dasselbe. Du schreibst ins Feld, was gelten soll — <b>wenn dieser Wert, dann jener</b> — und die Formel entsteht daraus.</p>'+
     '</div>'+
   '</div>'+
-  '<p class="vd-close">Probier es an einer kleinen Tabelle aus, die du ohnehin brauchst, und beschreibe sie in einem einzigen Satz. Schau dir an, was zurückkommt, und korrigiere im Gespräch, was nicht sofort passt, statt es von Hand nachzubauen. Genau dieses Nachschärfen ist die Fähigkeit, die den Unterschied macht — und um die geht es im nächsten Abschnitt.</p>';
+  '<p class="vd-close">Probier es an einer kleinen Tabelle aus, die du ohnehin brauchst, und beschreibe sie in einem einzigen Satz. Schau dir an, was zurückkommt, und korrigiere im Gespräch, was nicht sofort passt, statt es von Hand nachzubauen. Genau dieses Nachschärfen ist die Fähigkeit, die den Unterschied macht, und sie wächst mit jeder Woche, in der du sie benutzt.</p>';
 
   function injectCSS(){ if(document.getElementById('tsnaivid-css'))return;
     var s=document.createElement('style'); s.id='tsnaivid-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -15820,9 +15822,13 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnai2mac-lb .lb-scroll{width:100%;height:100%;overflow-y:auto;overflow-x:hidden}
   #tsnai2mac-lb .lb-scroll img{width:100%;display:block}
   #tsnai2mac-lb .lb-ph{color:rgba(255,255,255,.45);font-size:13px;letter-spacing:.06em;text-align:center;padding:24px}
-  #tsnai2mac-lb .lb-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;
+  #tsnai2mac-lb .lb-close,#tsnai2mac-lb .lb-expand{position:absolute;top:-46px;width:38px;height:38px;border-radius:50%;
     background:rgba(11,13,20,.9);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:19px;cursor:pointer;
-    display:flex;align-items:center;justify-content:center}
+    display:flex;align-items:center;justify-content:center;transition:border-color .3s ease,color .3s ease}
+  #tsnai2mac-lb .lb-close{right:0}
+  #tsnai2mac-lb .lb-expand{right:46px}
+  #tsnai2mac-lb .lb-close:hover,#tsnai2mac-lb .lb-expand:hover{border-color:rgba(199,180,137,.7);color:#c7b489}
+  #tsnai2mac-lb .lb-expand svg{width:16px;height:16px}
 
   @media(max-width:820px){
     #tsnai2mac .m2-row{flex-direction:column;gap:24px}
@@ -15843,9 +15849,9 @@ var TSISL_ZUG_SCHLUESSEL=[
   '<div class="m2-row">'+
     '<div class="m2-txt">'+
       '<h3 class="m2-h3">Deine Zahlen, <span class="ts-accent">auf Zuruf</span>.</h3>'+
-      '<p>Sobald dein Backoffice steht, hörst du auf, in Ansichten zu suchen, und fängst an zu fragen. Welche Gerichte enthalten Tomaten. Welcher Lieferant hat die kürzesten Liefertage. Was passiert mit dem Wareneinsatz, wenn ich diese Zutat gegen jene tausche.</p>'+
+      '<p>Sobald dein Backoffice steht, hörst du auf, in Ansichten zu suchen, und fängst an zu fragen. Welche Gerichte enthalten Tomaten, welcher Lieferant liefert am schnellsten, und was passiert eigentlich mit dem Wareneinsatz, wenn ich diese Zutat gegen jene tausche.</p>'+
       '<p>Notion AI liest dabei die Werte, die in deinen Datenbanken stehen — <b>nicht irgendwelche aus dem Netz</b>. Deshalb bekommst du eine Antwort, die zu deinem Betrieb passt, und kannst ihr nachgehen, weil du weißt, aus welcher Spalte sie kommt.</p>'+
-      '<p>Und weil du auf jeder Seite fragen kannst und einzelne Seiten sogar fest mit dem Chat verknüpfst, wird aus dem Backoffice ein Gegenüber statt einer Ablage.</p>'+
+      '<p>Und weil du das von jeder Seite aus tun kannst, ohne vorher irgendetwas zu exportieren, wird aus dem Backoffice ein Gegenüber statt einer Ablage.</p>'+
     '</div>'+
     '<div class="m2-pcwrap">'+
       '<div class="m2-tile" role="button" tabindex="0" aria-label="Vergroessern">'+
@@ -15864,7 +15870,9 @@ var TSISL_ZUG_SCHLUESSEL=[
     var lb=document.getElementById('tsnai2mac-lb');
     if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsnai2mac-lb';
-    lb.innerHTML='<div class="lb-frame"><button class="lb-close" aria-label="Schliessen">&times;</button>'+
+    lb.innerHTML='<div class="lb-frame">'+
+      '<button class="lb-expand" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>'+
+      '<button class="lb-close" aria-label="Schliessen">&times;</button>'+
       '<div class="lb-screen">'+(SHOT
         ? '<div class="lb-scroll"><img src="'+SHOT+'" alt="Backoffice-Abfrage"></div>'
         : '<div class="lb-ph">Screenshot der Notion-AI-Abfrage folgt</div>')+'</div></div>';
@@ -15872,14 +15880,21 @@ var TSISL_ZUG_SCHLUESSEL=[
     function close(){ lb.classList.remove('open'); }
     lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
     lb.querySelector('.lb-close').addEventListener('click',close);
-    document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+    lb.querySelector('.lb-expand').addEventListener('click',function(){
+      var f=lb.querySelector('.lb-frame');
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else if(f.requestFullscreen){ f.requestFullscreen(); }
+    });
+    lb.__esc=function(e){ if(e.key==='Escape') close(); };
+    document.addEventListener('keydown',lb.__esc);
     return lb;
   }
 
   function mount(){
     if(!on()){
       var o=document.getElementById('tsnai2mac'); if(o&&o.parentNode)o.parentNode.removeChild(o);
-      var l=document.getElementById('tsnai2mac-lb'); if(l&&l.parentNode)l.parentNode.removeChild(l);
+      var l=document.getElementById('tsnai2mac-lb');
+      if(l){ if(l.__esc) document.removeEventListener('keydown',l.__esc); if(l.parentNode)l.parentNode.removeChild(l); }
       return;
     }
     if(document.getElementById('tsnai2mac')) return;
@@ -16114,7 +16129,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   var LEARN=[
     'Du weißt, warum Notion AI <b>in deinen Daten sitzt</b> — und ein Chat daneben nur erklären kann, wovon es abhängt.',
     'Du kannst <b>Tabellen und Formeln beschreiben</b>, statt sie Spalte für Spalte selbst zu bauen.',
-    'Du lädst <b>Lieferscheine und Listen</b> in jede Datenbank und lässt die Zeilen daraus entstehen.',
+    'Du weißt, dass <b>Abfragequalität Übung braucht</b> — und behältst dabei dein Nutzungsguthaben im Blick.',
     'Du kannst <b>Szenarien durchrechnen</b> — fällt eine Zutat aus, siehst du sofort, was das im Wareneinsatz bedeutet.'
   ];
   var CSS=`
@@ -16138,6 +16153,9 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnainext .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
   #tsnainext .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
   #tsnainext .tsl-t b{color:#c7b489;font-weight:700}
+  /* Keyframe MUSS hier stehen: der einzige tslFloat im Repo lebt im #tskmnext-CSS und wird
+     nur auf /key-metrics injiziert -> hier fehlte er, die Orbs standen still. */
+  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
   #tsnainext #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
   #tsnainext #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
   #tsnainext #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
@@ -16171,6 +16189,15 @@ var TSISL_ZUG_SCHLUESSEL=[
     injectCSS();
     var el=build();
     anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    /* Der globale Pager __tsNext laeuft frueher (lange Ankerkette) und haengt seinen eigenen
+       Weiter-Button an .notion-root; danach findet er per getElementById nur noch den ersten
+       und laesst seine Waise stehen -> zwei sichtbare Buttons. Fremden Wrap abraeumen. */
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!el.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
     io.observe(el);
     var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
