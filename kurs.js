@@ -1895,6 +1895,12 @@
 
     function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
     function inView(){ var r=wrap.getBoundingClientRect(); return r.top < window.innerHeight*0.85 && r.bottom > 0; }
+    /* Dokument-Position: aendert sich beim Nachladen der Seite, NICHT beim Scrollen.
+       So laesst sich Layout-Wachstum von echtem Hinscrollen unterscheiden. */
+    function docTop(){ var el=wrap, y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+    var lastDocTop=null;
+    function layoutSettled(){ var d=docTop(); var s=(lastDocTop!==null && Math.abs(d-lastDocTop)<2); lastDocTop=d; return s; }
+    function maybeReveal(){ if(dead||revealed) return; if(inView() && layoutSettled()) trigger(); }
     function trigger(){ if(revealed) return; reveal(); play(); }
 
     function onVis(){
@@ -1923,19 +1929,16 @@
 
     if('IntersectionObserver' in window){
       io=new IntersectionObserver(function(es){
-        es.forEach(function(e){ if(e.isIntersecting){ trigger(); if(io){ io.disconnect(); io=null; } } });
+        es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); });
       },{threshold:.3});
       io.observe(wrap);
     }
-    /* Fallback: nur ausloesen, wenn der Block wirklich sichtbar ist — der Einstieg
-       wird dadurch nie off-screen verbraucht, und haengen bleibt er trotzdem nie. */
-    pollStart=setTimeout(function(){
-      if(dead || revealed) return;
-      pollId=setInterval(function(){
-        if(dead || revealed){ clearInterval(pollId); pollId=null; return; }
-        if(inView()){ trigger(); clearInterval(pollId); pollId=null; }
-      }, 600);
-    }, 3000);
+    /* Taktgeber: liefert die zweite Messung fuer layoutSettled() und faengt den Fall ab,
+       dass der Observer nie feuert. Der Einstieg wird nie off-screen verbraucht. */
+    pollId=setInterval(function(){
+      if(dead || revealed){ clearInterval(pollId); pollId=null; if(io){ io.disconnect(); io=null; } return; }
+      maybeReveal();
+    }, 400);
   }
 
   var arcPlayed=false;
