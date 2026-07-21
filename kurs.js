@@ -15275,3 +15275,310 @@ var TSISL_ZUG_SCHLUESSEL=[
   document.addEventListener('DOMContentLoaded',mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   #tsfdqx — Hover-Bauanleitung über dem eingebetteten Quartier
+   Seite: /food-drinksquartier-inhalte-interface
+   Der Schüler fährt über einen Abschnitt (Banner / Galerie),
+   das Original wird verdeckt, an seiner Stelle steht die
+   Schritt-für-Schritt-Anleitung für genau diesen Abschnitt.
+
+   Doktrin:
+   - KEINE Mutation des Notion-DOM. Der Overlay-Layer haengt an
+     document.body und arbeitet in Seitenkoordinaten. Damit kann
+     ein React-Re-Render nichts zerreissen.
+   - Anker = Bild-UUID (Banner) bzw. DB-Slug + Ordinal (Galerie),
+     NICHT die Notion-Block-IDs (die sind nachweislich instabil).
+   - Hover nur auf echten Zeigergeraeten (hover:hover).
+   ============================================================ */
+(function(){
+  if(window.__tsfdqx) return; window.__tsfdqx=true;
+
+  var SLUG=/\/food-drinksquartier-inhalte-interface\/?$/;
+  function on(){ return SLUG.test(location.pathname); }
+
+  var CAN_HOVER = !(window.matchMedia && window.matchMedia("(hover:none)").matches);
+  var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  /* ---- Der Banner-Bauweg ist ueberall derselbe ---------------- */
+  function bannerSteps(motiv){
+    return [
+      "Bild im Bannerformat generieren — Motiv: "+motiv,
+      "In Canva einfügen → Zielmaß anlegen",
+      "Schatten, Textfläche und Schriftzug setzen",
+      "Bild herunterladen",
+      "In Notion an diese Stelle einfügen"
+    ];
+  }
+  /* ---- Der Galerie-Bauweg unterscheidet sich nur im Filter ---- */
+  function galSteps(db, filter){
+    var s=[
+      "/ → Tabellenansicht – Datenbank",
+      db+" verknüpfen",
+      "Ansicht hinzufügen → Galerie",
+      "Kartenvorschau → Cover"
+    ];
+    s.push(filter ? "Filter: "+filter : "Kein Filter — die ganze Datenbank");
+    return s;
+  }
+
+  /* ---- Die Abschnitte der Seite, in Dokument-Reihenfolge ------ */
+  var SEC=[
+    { img:"59ddf0d2", eyebrow:"Banner", t:"Das Quartiers-Banner",
+      steps:bannerSteps("Food- und Drinksquartier") },
+
+    { img:"1d7f8fde", eyebrow:"Banner", t:"Das Breakfast-Banner",
+      steps:bannerSteps("Breakfast") },
+    { db:"db-gerichte", nth:0, eyebrow:"Galerie", t:"Die Breakfast-Galerie",
+      steps:galSteps("DB Gerichte","Kategorie = Breakfast") },
+
+    { img:"d72f5904", eyebrow:"Banner", t:"Das Lunch-Banner",
+      steps:bannerSteps("Lunch") },
+    { db:"db-gerichte", nth:1, eyebrow:"Galerie", t:"Die Lunch-Galerie",
+      steps:galSteps("DB Gerichte","Kategorie = Lunch") },
+
+    { img:"be857a39", eyebrow:"Banner", t:"Das Dinner-Banner",
+      steps:bannerSteps("Dinner") },
+    { db:"db-gerichte", nth:2, eyebrow:"Galerie", t:"Die Dinner-Galerie",
+      steps:galSteps("DB Gerichte","Kategorie = Dinner") },
+
+    { img:"a010b2cc", eyebrow:"Banner", t:"Das Dessert-Banner",
+      steps:bannerSteps("Dessert") },
+    { db:"db-gerichte", nth:3, eyebrow:"Galerie", t:"Die Dessert-Galerie",
+      steps:galSteps("DB Gerichte","Kategorie = Dessert") },
+
+    { img:"4509a72a", eyebrow:"Banner", t:"Das Saucen-Banner",
+      steps:bannerSteps("Saucen") },
+    { db:"db-meine-rezepturen", nth:0, eyebrow:"Galerie", t:"Die Saucen-Galerie",
+      steps:galSteps("DB Rezepturen","Kategorie = Sauce") },
+
+    { img:"60cf5c32", eyebrow:"Banner", t:"Das Zutaten-Banner",
+      steps:bannerSteps("Zutaten") },
+    { db:"db-zutaten", nth:0, eyebrow:"Galerie", t:"Die Zutaten-Galerie",
+      steps:galSteps("DB Zutaten", null) },
+
+    { db:"db-inventurliste", nth:0, eyebrow:"Galerie", t:"Die Inventur-Galerie",
+      steps:galSteps("DB Inventurliste", null) },
+
+    { img:"fbdfecf9", eyebrow:"Banner", t:"Das Lieferpartner-Banner",
+      steps:bannerSteps("Lieferpartner") },
+    { db:"db-lieferpartner", nth:0, eyebrow:"Galerie", t:"Die Lieferpartner-Galerie",
+      steps:galSteps("DB Lieferpartner", null) },
+
+    { img:"4a6e14e3", eyebrow:"Banner", t:"Das Allergene-Banner",
+      steps:bannerSteps("Allergene") },
+    { db:"allergene", nth:0, eyebrow:"Galerie", t:"Die Allergene-Galerie",
+      steps:galSteps("DB Allergene", null) }
+  ];
+
+  /* ------------------------------ CSS ------------------------- */
+  var CSS = `
+  #tsfdqx-layer{position:absolute;top:0;left:0;width:0;height:0;pointer-events:none;z-index:60;}
+  #tsfdqx-layer .fdqx-card{
+    position:absolute;border-radius:16px;overflow:hidden;
+    opacity:0;pointer-events:none;
+    transition:opacity .28s cubic-bezier(.16,1,.3,1);
+    background:linear-gradient(165deg,rgba(28,38,72,.985),rgba(11,15,30,.985));
+    border:1px solid rgba(199,180,137,.26);
+    box-shadow:0 40px 120px -40px rgba(0,0,0,.95);
+  }
+  #tsfdqx-layer .fdqx-card.on{opacity:1;pointer-events:auto;}
+  #tsfdqx-layer .fdqx-in{
+    position:sticky;top:0;height:min(100vh,100%);
+    display:flex;align-items:center;justify-content:center;
+    padding:clamp(18px,2.4vw,34px);box-sizing:border-box;
+  }
+  #tsfdqx-layer .fdqx-panel{width:min(680px,100%);}
+  #tsfdqx-layer .fdqx-eyebrow{
+    display:flex;align-items:center;gap:9px;
+    font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:#c7b489;margin:0 0 10px;
+  }
+  #tsfdqx-layer .fdqx-eyebrow::before{
+    content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;flex:0 0 auto;
+  }
+  #tsfdqx-layer .fdqx-t{
+    margin:0 0 18px;color:#fff;font-weight:600;letter-spacing:-.01em;line-height:1.14;
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-size:clamp(21px,2.5vw,30px);
+  }
+  #tsfdqx-layer .fdqx-steps{list-style:none;margin:0;padding:0;counter-reset:fdqx;}
+  #tsfdqx-layer .fdqx-steps li{
+    counter-increment:fdqx;position:relative;padding-left:34px;
+    margin:0 0 11px;color:rgba(255,255,255,.86);
+    font-size:15.5px;line-height:1.62;
+  }
+  #tsfdqx-layer .fdqx-steps li:last-child{margin-bottom:0;}
+  #tsfdqx-layer .fdqx-steps li::before{
+    content:counter(fdqx);position:absolute;left:0;top:0;
+    width:23px;text-align:right;
+    color:#c7b489;font-weight:600;font-size:13px;line-height:1.9;
+  }
+  /* Kompaktmodus: flache Abschnitte (Banner) bekommen kleinere Typo */
+  #tsfdqx-layer .fdqx-card.tight .fdqx-t{font-size:clamp(17px,1.7vw,21px);margin-bottom:11px;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-eyebrow{font-size:10.5px;margin-bottom:7px;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li{font-size:13.5px;line-height:1.5;margin-bottom:5px;padding-left:28px;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-steps li::before{width:19px;font-size:11.5px;line-height:1.65;}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-in{padding:clamp(12px,1.6vw,20px);}
+  #tsfdqx-layer .fdqx-card.tight .fdqx-panel{width:min(820px,100%);}
+  @media (prefers-reduced-motion:reduce){
+    #tsfdqx-layer .fdqx-card{transition:none;}
+  }
+  @media (max-width:900px){ #tsfdqx-layer{display:none;} }
+  `;
+
+  function injectCSS(){
+    if(document.getElementById("tsfdqx-css")) return;
+    var s=document.createElement("style"); s.id="tsfdqx-css"; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  /* --------------------- Abschnitte aufloesen ------------------ */
+  function uidOf(el){
+    var img=el.querySelector("img");
+    var src=(img&&img.currentSrc)||(img&&img.src)||"";
+    if(!src){
+      var sp=el.querySelector("[data-full-size]");
+      src=sp?sp.getAttribute("data-full-size"):"";
+    }
+    var p=src.split("/");
+    return p.length>2 ? p[p.length-3] : "";
+  }
+  function dbOf(el){
+    var a=el.querySelector(".notion-collection-card__anchor");
+    var href=a?(a.getAttribute("href")||""):"";
+    var m=href.match(/\/(db-[a-z0-9-]+)\//);
+    if(m) return m[1];
+    var id=a?(a.getAttribute("id")||""):"";
+    if(/allergene|glutenhaltiges|krebstiere/.test(id+href)) return "allergene";
+    return "";
+  }
+
+  function resolve(root){
+    var imgs=[].slice.call(root.querySelectorAll(".notion-image"));
+    var gals=[].slice.call(root.querySelectorAll(".notion-collection.inline"));
+    var seenDb={};
+    var galMap=[];
+    gals.forEach(function(g){
+      var db=dbOf(g);
+      if(!db) return;                        // leere Galerien haben nichts zu erklaeren
+      var n = seenDb[db]==null ? 0 : seenDb[db]+1;
+      seenDb[db]=n;
+      galMap.push({el:g,db:db,nth:n});
+    });
+    SEC.forEach(function(s){
+      if(s.img){
+        s.el = imgs.filter(function(e){ return uidOf(e).indexOf(s.img)===0; })[0] || null;
+      }else{
+        var hit = galMap.filter(function(g){ return g.db===s.db && g.nth===s.nth; })[0];
+        s.el = hit ? hit.el : null;
+      }
+    });
+  }
+
+  /* ------------------------ Karten bauen ---------------------- */
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function buildCard(s){
+    var c=document.createElement("div");
+    c.className="fdqx-card";
+    c.innerHTML='<div class="fdqx-in"><div class="fdqx-panel">'
+      + '<p class="fdqx-eyebrow">'+esc(s.eyebrow)+'</p>'
+      + '<h3 class="fdqx-t">'+esc(s.t)+'</h3>'
+      + '<ol class="fdqx-steps">'
+      + s.steps.map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("")
+      + '</ol></div></div>';
+    return c;
+  }
+
+  var layer=null, open=null, raf=0;
+
+  function place(s){
+    if(!s || !s.el || !s.card) return;
+    if(!s.el.isConnected){ s.card.classList.remove("on"); return; }
+    var r=s.el.getBoundingClientRect();
+    if(r.height<8){ s.card.classList.remove("on"); return; }   // Bild noch nicht geladen
+    s.card.style.top    = Math.round(r.top+window.pageYOffset)+"px";
+    s.card.style.left   = Math.round(r.left+window.pageXOffset)+"px";
+    s.card.style.width  = Math.round(r.width)+"px";
+    s.card.style.height = Math.round(r.height)+"px";
+    s.card.classList.toggle("tight", r.height < 320);
+  }
+  function placeAll(){ SEC.forEach(place); }
+
+  function show(s){
+    if(open===s) return;
+    if(open) open.card.classList.remove("on");
+    open=s;
+    if(!s) return;
+    place(s);
+    s.card.classList.add("on");
+  }
+  function hide(s){ if(open===s) show(null); }
+
+  /* --------------------------- Mount -------------------------- */
+  function mount(){
+    if(!on() || !CAN_HOVER) return;
+    var root=document.querySelector(".notion-root");
+    if(!root) return;
+    injectCSS();
+
+    if(!layer || !document.body.contains(layer)){
+      layer=document.getElementById("tsfdqx-layer");
+      if(!layer){
+        layer=document.createElement("div");
+        layer.id="tsfdqx-layer";
+        document.body.appendChild(layer);
+      }
+    }
+
+    resolve(root);
+
+    SEC.forEach(function(s){
+      if(!s.el) return;
+      if(!s.card || !layer.contains(s.card)){
+        s.card=buildCard(s);
+        layer.appendChild(s.card);
+        s.card.addEventListener("mouseleave", function(){ hide(s); });
+      }
+    });
+    placeAll();
+
+    /* Listener haengt an document, NICHT an .notion-root:
+       React tauscht den Root-Knoten aus, ein daran gebundener
+       Listener waere danach tot. */
+    if(!window.__fdqxBound){
+      window.__fdqxBound=true;
+      document.addEventListener("mouseover", function(e){
+        var t=e.target;
+        if(!t || !t.closest) return;
+        var el=t.closest(".notion-image, .notion-collection.inline");
+        if(!el){ return; }
+        var hit=SEC.filter(function(s){ return s.el===el && s.card; })[0];
+        if(hit) show(hit);
+      });
+    }
+    if(!window.__fdqxScroll){
+      window.__fdqxScroll=true;
+      window.addEventListener("scroll", function(){
+        if(raf) return;
+        raf=requestAnimationFrame(function(){ raf=0; if(open) place(open); });
+      }, {passive:true});
+      window.addEventListener("resize", placeAll, {passive:true});
+      if(window.ResizeObserver){
+        new ResizeObserver(function(){
+          if(raf) return;
+          raf=requestAnimationFrame(function(){ raf=0; placeAll(); });
+        }).observe(root);
+      }
+      // Banner sind lazy — nach dem Nachladen sitzt die Geometrie neu
+      document.addEventListener("load", function(e){
+        if(e.target && e.target.tagName==="IMG") placeAll();
+      }, true);
+    }
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
