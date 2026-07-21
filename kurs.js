@@ -1835,7 +1835,7 @@
     var params=new URLSearchParams(location.search);
     var forced=params.has('scene'), noauto=params.has('noauto')||forced;
     var timer=null, swapTimer=null, chipRaf=null, pollId=null, pollStart=null, io=null;
-    var swapState=0, cur=-1, revealed=false, dead=false;
+    var swapState=0, cur=-1, revealed=false, dead=false, forceReady=false, readyTimer=null;
 
     root.classList.add('js');
 
@@ -1907,10 +1907,13 @@
     }
     function maybeReveal(){
       if(dead||revealed) return;
-      /* Erst wenn die Seite fertig geladen ist — sonst steht der Block waehrend des
-         Ladens kurz weit oben (Hero-Bild noch ohne Hoehe) und der Einstieg wuerde
-         off-screen verbraucht. */
-      if(document.readyState!=='complete'){ lastDocTop=null; stableTicks=0; return; }
+      /* Ursache des Fehlalarms: solange das Hero-Bild noch keine Hoehe hat, sitzt der
+         Block kurz weit oben und waere "sichtbar" — der Einstieg wuerde off-screen
+         verbraucht. Also warten, bis das Hero-Bild geladen ist (mit Notbremse). */
+      if(!forceReady){
+        var hero=document.querySelector('.ts-hero__img');
+        if(hero && !hero.complete){ lastDocTop=null; stableTicks=0; return; }
+      }
       if(inView() && layoutSettled()) trigger();
     }
     function trigger(){ if(revealed) return; reveal(); play(); }
@@ -1921,6 +1924,8 @@
       else if(revealed && cur===0){ startSwap(); }
     }
     document.addEventListener('visibilitychange', onVis);
+    /* Notbremse: nach 10s wird der Reveal auf jeden Fall zugelassen. */
+    readyTimer=setTimeout(function(){ forceReady=true; }, 10000);
 
     steps.forEach(function(s){ s.addEventListener('click',function(){ reveal(); show(parseInt(s.dataset.i,10),true); }); });
     if(replay) replay.addEventListener('click', function(){ reveal(); play(); });
@@ -1930,7 +1935,7 @@
       if(swapTimer){ clearInterval(swapTimer); swapTimer=null; }
       if(timer){ clearTimeout(timer); timer=null; }
       if(pollId){ clearInterval(pollId); pollId=null; }
-      if(pollStart){ clearTimeout(pollStart); pollStart=null; }
+      if(readyTimer){ clearTimeout(readyTimer); readyTimer=null; }
       stopChip();
       if(io){ io.disconnect(); io=null; }
       document.removeEventListener('visibilitychange', onVis);
