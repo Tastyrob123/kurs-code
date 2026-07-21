@@ -13721,18 +13721,18 @@ var TSISL_ZUG_SCHLUESSEL=[
   /* [num, gruppe, kicker, titel, beschreibung, meta, href] */
   var CARDS=[
    ['01',0,'Fundament','Vision & Werte','Vision, Mission und die Werte, die jede Entscheidung im Betrieb tragen.','1 DB','/lektionen/vision-werte'],
-   ['02',0,'Marke','Unternehmen & Markenidentität','Name, Tonalität, Logo, Farbwelt — die Identität, an der dich Gäste wiedererkennen.','1 DB','/markenidentitaet'],
-   ['03',0,'Menschen','Team & Kultur Guidelines','Wie ihr zusammenarbeitet: Kultur, Haltung und Guidelines für dein Team.','1 DB','/team-kultur'],
-   ['04',0,'Raum','Interieur Design','Vom Material bis zum Möbel — wie dein Raum die Marke spürbar macht.','1 DB','/interieur-design'],
-   ['05',1,'Gäste','Zielgruppenanalyse','Segmente, Bedürfnisse und Motive deiner Gäste — datenbasiert erfasst.','1 DB','/zielgruppenanalyse'],
-   ['06',1,'Wettbewerb','Konkurrenzanalyse','Mitbewerber, Stärken und Lücken — und dein Platz im Markt.','1 DB','/konkurrenzanalyse'],
-   ['07',1,'Wissen','Gastronomie Lexikon','Das Nachschlagewerk: Begriffe, Kennzahlen und Standards der Branche an einem Ort.','1 DB','/gastronomie-lexikon'],
-   ['08',2,'Standort','Standortanalyse','Lage, Frequenz, Umfeld und Potenzial — im strukturierten Check, bevor du unterschreibst.','1 DB','/standortanalyse'],
-   ['09',2,'Wachstum','Expansioncenter','Der Maschinenraum der Skalierung: Pipeline, Projekte, Partner, Meilensteine, Risiken und Capex.','6 DBs','/expansioncenter'],
-   ['10',2,'System','Franchise Rulebook','Dein Betrieb als Blaupause: Regelwerk, Prüfungen und Maßnahmen für saubere Vervielfältigung.','3 DBs','/franchise-rulebook'],
-   ['11',3,'Event','Eventkonzepte','Anlässe, die verkaufen: durchdachte Eventformate als eigene Umsatzsäule.','1 DB','/eventkonzepte'],
-   ['12',3,'Service','Catering','Deine Küche außer Haus: Catering-Angebote sauber kalkuliert und organisiert.','1 DB','/catering'],
-   ['13',3,'Produkt','Merch // Produkte','Über den Teller hinaus: Merchandise und Eigenprodukte als zusätzliche Einnahmequelle.','1 DB','/merch-produkte']
+   ['02',0,'Marke','Unternehmen & Markenidentität','Name, Tonalität, Logo, Farbwelt — die Identität, an der dich Gäste wiedererkennen.','1 DB','/lektionen/unternehmen-markenidentitt'],
+   ['03',0,'Menschen','Team & Kultur Guidelines','Wie ihr zusammenarbeitet: Kultur, Haltung und Guidelines für dein Team.','1 DB','/lektionen/team-kultur-guidelines'],
+   ['04',0,'Raum','Interieur Design','Vom Material bis zum Möbel — wie dein Raum die Marke spürbar macht.','1 DB','/lektionen/interieur-design'],
+   ['05',1,'Gäste','Zielgruppenanalyse','Segmente, Bedürfnisse und Motive deiner Gäste — datenbasiert erfasst.','1 DB','/lektionen/zielgruppenanalyse'],
+   ['06',1,'Wettbewerb','Konkurrenzanalyse','Mitbewerber, Stärken und Lücken — und dein Platz im Markt.','1 DB','/lektionen/konkurrenzanalyse'],
+   ['07',1,'Wissen','Gastronomie Lexikon','Das Nachschlagewerk: Begriffe, Kennzahlen und Standards der Branche an einem Ort.','1 DB','/lektionen/gastronomie-lexikon'],
+   ['08',2,'Standort','Standortanalyse','Lage, Frequenz, Umfeld und Potenzial — im strukturierten Check, bevor du unterschreibst.','1 DB','/lektionen/standortanalyse'],
+   ['09',2,'Wachstum','Expansioncenter','Der Maschinenraum der Skalierung: Pipeline, Projekte, Partner, Meilensteine, Risiken und Capex.','6 DBs','/lektionen/expansioncenter'],
+   ['10',2,'System','Franchise Rulebook','Dein Betrieb als Blaupause: Regelwerk, Prüfungen und Maßnahmen für saubere Vervielfältigung.','3 DBs','/lektionen/franchise-rulebook'],
+   ['11',3,'Event','Eventkonzepte','Anlässe, die verkaufen: durchdachte Eventformate als eigene Umsatzsäule.','1 DB','/lektionen/eventkonzepte'],
+   ['12',3,'Service','Catering','Deine Küche außer Haus: Catering-Angebote sauber kalkuliert und organisiert.','1 DB','/lektionen/catering'],
+   ['13',3,'Produkt','Merch // Produkte','Über den Teller hinaus: Merchandise und Eigenprodukte als zusätzliche Einnahmequelle.','1 DB','/lektionen/merch-produkte']
   ];
 
   var CSS=`
