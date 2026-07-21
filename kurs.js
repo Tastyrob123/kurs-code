@@ -8043,17 +8043,17 @@ var TSISL_ZUG_SCHLUESSEL=[
          gebaute Lieferpartner-Verknüpfung, inline baubar) → keine Relation-Kachel (sonst Duplikat). */
       summary:'Vertragsvolumina', cta:'Vertrag abschließen', ctaDone:'Vertrag geschlossen', chain:true }
 ,
-{ path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_onb', anchorSel:'#tsisl-wk-ops_team_onb', steps:TSISL_TEAM_ONB, eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.', sub:'Jede Karte ist ein Schritt der Einarbeitung. Klick sie auf, arbeite sie ab, leg sie in den Einkaufswagen — der Balken zeigt, wie startklar dein neuer Mitarbeiter ist.', chain:true },
-{ path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_mitarbeiter', anchorSel:'#tsisl-wk-ops_team_mitarbeiter', steps:TSISL_TEAM_MIT, eyebrow:'DB 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte der Mitarbeiter-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht dein sauberes Team-Stammblatt.', chain:true },
-{ path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_audit', anchorSel:'#tsisl-wk-ops_check_audit', steps:TSISL_CHECK_AUDIT, eyebrow:'DB Audit Checkliste', title:'Deine <span>Audit-Checkliste</span>. Punkt für Punkt.', sub:'Jede Karte ist eine Spalte der Audit-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Prüfpunkte.', chain:true },
-{ path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_prod', anchorSel:'#tsisl-wk-ops_check_prod', steps:TSISL_CHECK_PROD, eyebrow:'DB Produktionslisten', title:'Deine <span>Produktionslisten</span>. Posten für Posten.', sub:'Jede Karte ist eine Spalte der Produktionsliste. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Produktionsposten.', chain:true },
-{ path:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, kachel:'ops_hyg_produkte', anchorSel:'#tsisl-wk-ops_hyg_produkte', steps:TSISL_HYG_PROD, eyebrow:'DB Hygiene Produkte', title:'Dein <span>Hygienehandbuch</span>. Mittel für Mittel.', sub:'Jede Karte ist eine Spalte der Hygiene-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Hygienemittel.', chain:true },
-{ path:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, kachel:'ops_hyg_pflicht', anchorSel:'#tsisl-wk-ops_hyg_pflicht', steps:TSISL_HYG_PFLICHT, eyebrow:'DB Dokumenttypen (Pflichtnachweise)', title:'Deine <span>Pflichtnachweise</span>. Dokument für Dokument.', sub:'Jede Karte ist eine Spalte der Dokumenttypen-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Pflichtnachweise.', chain:true },
-{ path:/\/lektionen\/inventur-bestand\/?$/, kachel:'ops_inv_festwert', anchorSel:'#tsisl-wk-ops_inv_festwert', steps:TSISL_INV_FESTWERT, eyebrow:'DB Festwert-Liste', title:'Deine <span>Festwert-Liste</span>. Position für Position.', sub:'Jede Karte ist eine Spalte der Festwert-Liste. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Festwert in Euro.', chain:true },
-{ path:/\/lektionen\/partner-vertr[a-z-]*\/?$/, kachel:'ops_part_vertraege', anchorSel:'#tsisl-wk-ops_part_vertraege', steps:TSISL_PART_VERTRAEGE, eyebrow:'DB Verträge & Dienstleister', title:'Deine <span>Verträge</span>. Wert für Wert.', sub:'Jede Karte ist eine Spalte der Vertrags-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Vertragswert in Euro.', chain:true },
-{ path:/\/lektionen\/partner-vertr[a-z-]*\/?$/, kachel:'ops_part_dienstleister', anchorSel:'#tsisl-wk-ops_part_dienstleister', steps:TSISL_PART_DIENST, eyebrow:'DB Dienstleister', title:'Deine <span>Dienstleister</span>. Partner für Partner.', sub:'Jede Karte ist eine Spalte der Dienstleister-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Partner.', chain:true },
-{ path:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, kachel:'ops_zug_bank', anchorSel:'#tsisl-wk-ops_zug_bank', steps:TSISL_ZUG_BANK, eyebrow:'DB Bankeinzahlungen', title:'Deine <span>Bankeinzahlungen</span>. Betrag für Betrag.', sub:'Jede Karte ist eine Spalte der Einzahlungs-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Betrag in Euro.', chain:true },
-{ path:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, kachel:'ops_zug_schluessel', anchorSel:'#tsisl-wk-ops_zug_schluessel', steps:TSISL_ZUG_SCHLUESSEL, eyebrow:'DB Schlüsselliste', title:'Deine <span>Schlüsselliste</span>. Schlüssel für Schlüssel.', sub:'Jede Karte ist eine Spalte der Schlüssel-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Schlüssel.', chain:true },
+{ path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_onb', anchorSel:'#tsisl-wk-ops_team_onb', steps:TSISL_TEAM_ONB, eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.', sub:'Jede Karte ist ein Schritt der Einarbeitung. Klick sie auf, arbeite sie ab, leg sie in den Einkaufswagen — der Balken zeigt, wie startklar dein neuer Mitarbeiter ist.', summary:'Onboarding', chain:true },
+{ path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_mitarbeiter', anchorSel:'#tsisl-wk-ops_team_mitarbeiter', steps:TSISL_TEAM_MIT, eyebrow:'DB 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte der Mitarbeiter-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht dein sauberes Team-Stammblatt.', summary:'Mitarbeiter', chain:true },
+{ path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_audit', anchorSel:'#tsisl-wk-ops_check_audit', steps:TSISL_CHECK_AUDIT, eyebrow:'DB Audit Checkliste', title:'Deine <span>Audit-Checkliste</span>. Punkt für Punkt.', sub:'Jede Karte ist eine Spalte der Audit-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Prüfpunkte.', summary:'Audit-Checkliste', chain:true },
+{ path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_prod', anchorSel:'#tsisl-wk-ops_check_prod', steps:TSISL_CHECK_PROD, eyebrow:'DB Produktionslisten', title:'Deine <span>Produktionslisten</span>. Posten für Posten.', sub:'Jede Karte ist eine Spalte der Produktionsliste. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Produktionsposten.', summary:'Produktionslisten', chain:true },
+{ path:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, kachel:'ops_hyg_produkte', anchorSel:'#tsisl-wk-ops_hyg_produkte', steps:TSISL_HYG_PROD, eyebrow:'DB Hygiene Produkte', title:'Dein <span>Hygienehandbuch</span>. Mittel für Mittel.', sub:'Jede Karte ist eine Spalte der Hygiene-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Hygienemittel.', summary:'Hygieneprodukte', chain:true },
+{ path:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, kachel:'ops_hyg_pflicht', anchorSel:'#tsisl-wk-ops_hyg_pflicht', steps:TSISL_HYG_PFLICHT, eyebrow:'DB Dokumenttypen (Pflichtnachweise)', title:'Deine <span>Pflichtnachweise</span>. Dokument für Dokument.', sub:'Jede Karte ist eine Spalte der Dokumenttypen-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Pflichtnachweise.', summary:'Pflichtnachweise', chain:true },
+{ path:/\/lektionen\/inventur-bestand\/?$/, kachel:'ops_inv_festwert', anchorSel:'#tsisl-wk-ops_inv_festwert', steps:TSISL_INV_FESTWERT, eyebrow:'DB Festwert-Liste', title:'Deine <span>Festwert-Liste</span>. Position für Position.', sub:'Jede Karte ist eine Spalte der Festwert-Liste. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Festwert in Euro.', summary:'Festwert-Liste', chain:true },
+{ path:/\/lektionen\/partner-vertr[a-z-]*\/?$/, kachel:'ops_part_vertraege', anchorSel:'#tsisl-wk-ops_part_vertraege', steps:TSISL_PART_VERTRAEGE, eyebrow:'DB Verträge & Dienstleister', title:'Deine <span>Verträge</span>. Wert für Wert.', sub:'Jede Karte ist eine Spalte der Vertrags-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Vertragswert in Euro.', summary:'Verträge', chain:true },
+{ path:/\/lektionen\/partner-vertr[a-z-]*\/?$/, kachel:'ops_part_dienstleister', anchorSel:'#tsisl-wk-ops_part_dienstleister', steps:TSISL_PART_DIENST, eyebrow:'DB Dienstleister', title:'Deine <span>Dienstleister</span>. Partner für Partner.', sub:'Jede Karte ist eine Spalte der Dienstleister-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Partner.', summary:'Dienstleister', chain:true },
+{ path:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, kachel:'ops_zug_bank', anchorSel:'#tsisl-wk-ops_zug_bank', steps:TSISL_ZUG_BANK, eyebrow:'DB Bankeinzahlungen', title:'Deine <span>Bankeinzahlungen</span>. Betrag für Betrag.', sub:'Jede Karte ist eine Spalte der Einzahlungs-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist der Betrag in Euro.', summary:'Bankkonten', chain:true },
+{ path:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, kachel:'ops_zug_schluessel', anchorSel:'#tsisl-wk-ops_zug_schluessel', steps:TSISL_ZUG_SCHLUESSEL, eyebrow:'DB Schlüsselliste', title:'Deine <span>Schlüsselliste</span>. Schlüssel für Schlüssel.', sub:'Jede Karte ist eine Spalte der Schlüssel-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Schlüssel.', summary:'Schlüssel', chain:true },
 
 
   ];
@@ -8107,17 +8107,21 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsshop .tss-imgwrap img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}
   #tsshop .tss-card:hover .tss-imgwrap img{transform:scale(1.04)}
   #tsshop .tss-donebadge{position:absolute;top:12px;right:12px;z-index:3;width:28px;height:28px;border-radius:50%;display:none;align-items:center;justify-content:center;background:rgba(143,203,170,.92);border:1px solid rgba(255,255,255,.25);color:#0b1512;box-shadow:0 4px 16px rgba(143,203,170,.4)}
-  #tsshop .tss-card.is-done .tss-donebadge{display:flex}
+  #tsshop .tss-card.is-done:not(.tss-filling) .tss-donebadge{display:flex}
   /* im Einkaufswagen = edles Pastellgrün — Schleier nur über Rahmen/Textbereich, NICHT über dem Bild */
   #tsshop .tss-card{position:relative}
   #tsshop .tss-body{position:relative}
   #tsshop .tss-body::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:0 0 16px 16px;background:linear-gradient(180deg,rgba(143,203,170,.12),rgba(143,203,170,.22));opacity:0;transition:opacity .55s ease}
-  #tsshop .tss-card.is-done .tss-body::after{opacity:1}
+  #tsshop .tss-card.is-done:not(.tss-filling) .tss-body::after{opacity:1}
   /* Erledigt: grüner Schleier steigt vom Textbereich in die untere Bildhälfte -> Karte wirkt durchgehend grün (nicht halb schwarz) */
   #tsshop .tss-imgwrap::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(143,203,170,.10) 0%,rgba(143,203,170,.24) 48%,rgba(143,203,170,.42) 100%);opacity:0;transition:opacity .55s ease;z-index:2}
-  #tsshop .tss-card.is-done .tss-imgwrap::after{opacity:1}
-  #tsshop .tss-card.is-done{--tss-g:143,203,170;background:linear-gradient(165deg,rgba(160,208,180,.30),rgba(160,208,180,.12) 55%,rgba(160,208,180,.05));border-color:rgba(160,208,180,.6);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 38px rgba(143,203,170,.24)}
-  #tsshop .tss-card.is-done .tss-val{color:#9FD3B9}
+  #tsshop .tss-card.is-done:not(.tss-filling) .tss-imgwrap::after{opacity:1}
+  #tsshop .tss-card.is-done:not(.tss-filling){--tss-g:143,203,170;background:linear-gradient(165deg,rgba(160,208,180,.30),rgba(160,208,180,.12) 55%,rgba(160,208,180,.05));border-color:rgba(160,208,180,.6);box-shadow:0 18px 44px -30px rgba(0,0,0,.85),0 0 38px rgba(143,203,170,.24)}
+  #tsshop .tss-card.is-done:not(.tss-filling) .tss-val{color:#9FD3B9}
+  /* Tron-synchrone Grün-Füllung: steigt von unten nach oben mit dem Sweep (Robert 20.07.2026) */
+  #tsshop .tss-card .tss-fill{position:absolute;left:0;right:0;bottom:0;height:0;border-radius:16px;pointer-events:none;z-index:4;background:linear-gradient(to top,rgba(160,208,180,.34),rgba(160,208,180,.18) 55%,rgba(160,208,180,.07));box-shadow:0 0 30px rgba(143,203,170,.30)}
+  #tsshop .tss-card .tss-fill::after{content:"";position:absolute;left:5%;right:5%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(169,220,193,.95),transparent);box-shadow:0 0 14px rgba(143,203,170,.95)}
+  @media(prefers-reduced-motion:reduce){#tsshop .tss-card .tss-fill{display:none}}
   /* ── Relation-Kacheln: Ghost (erscheint automatisch) + Safe-for-Later (Lila) ── */
   #tsshop .tss-card.tss-rel{cursor:pointer}
   #tsshop .tss-flag{position:absolute;top:11px;left:11px;z-index:4;display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 9px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:.02em;line-height:1;white-space:nowrap;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
@@ -8368,6 +8372,12 @@ var TSISL_ZUG_SCHLUESSEL=[
   function neonSweep(card){
     if(reduced||!card||card.querySelector('.tss-neon')) return;
     var w=card.offsetWidth,h=card.offsetHeight; if(!w||!h) return;
+    /* Grün-Füllung synchron zum Sweep: 0->100% von unten nach oben, danach Endzustand */
+    card.classList.add('tss-filling');
+    var fill=card.querySelector('.tss-fill'); if(fill) fill.remove();
+    fill=document.createElement('div'); fill.className='tss-fill'; card.appendChild(fill);
+    fill.animate([{height:'0%'},{height:'100%'}],{duration:950,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'});
+    setTimeout(function(){ card.classList.remove('tss-filling'); fill.style.transition='opacity .5s ease'; fill.style.opacity='0'; setTimeout(function(){ if(fill&&fill.parentNode) fill.remove(); },540); },950);
     var i=1.25,r=16-i,q=r-r/Math.SQRT2;
     var x0=i,y0=i,x1=w-i,y1=h-i;
     var P0x=x0+q,P0y=y1-q,P1x=x1-q,P1y=y0+q;
@@ -8497,6 +8507,7 @@ var TSISL_ZUG_SCHLUESSEL=[
         var nv=localStorage.getItem(kk)==='1'?'0':'1';
         localStorage.setItem(kk,nv);
         card.classList.toggle('is-done',nv==='1');
+        if(nv==='1'&&!reduced) card.classList.add('tss-filling'); else card.classList.remove('tss-filling');
         updProgress(root,steps,k,page);
         if(nv==='1'){ closeOv(); setTimeout(function(){ neonSweep(card); },320); }
         else { db.classList.remove('is-done'); db.innerHTML=CART+'<span>Als erledigt markieren</span>'; }
@@ -8528,7 +8539,8 @@ var TSISL_ZUG_SCHLUESSEL=[
       var st=steps[idx];
       var val=!isDone(st);
       setDone(st,val);
-      var c=root.querySelector('.tss-card[data-step="'+idx+'"]'); if(c) c.classList.toggle('is-done',val);
+      var c=root.querySelector('.tss-card[data-step="'+idx+'"]');
+      if(c){ c.classList.toggle('is-done',val); if(val&&!reduced) c.classList.add('tss-filling'); else c.classList.remove('tss-filling'); }
       updProgress(root,steps,k,page);
       if(val){
         closeOv();
