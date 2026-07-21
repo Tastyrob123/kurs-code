@@ -15337,6 +15337,196 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 /* ============================================================
+   #tsfdqc — Diagramm-Nachbau im eingebetteten Quartier
+   Seite: /food-drinksquartier-inhalte-interface
+
+   super.so rendert Notion-Diagrammansichten NICHT: die fuenf
+   betroffenen Bloecke kommen als komplett leeres Markup an
+   (<div class="notion-collection inline"></div>). Es gibt also
+   nichts zu ueberlagern — der Inhalt muss nachgebaut werden.
+
+   Werte, Achsen und Farben sind am 22.07.2026 direkt aus der
+   Notion-Ansicht ausgelesen (Highcharts-aria-Labels), nicht
+   geschaetzt. Sie sind ein Stand, kein Live-Abzug: aendert
+   Robert die Gerichte, muessen sie neu gezogen werden.
+
+   Die Kacheln setzt #tsfdqx darueber (Klasse .fdqc-block).
+   ============================================================ */
+(function(){
+  if(window.__tsfdqc) return; window.__tsfdqc=true;
+
+  var SLUG=/\/food-drinksquartier-inhalte-interface\/?$/;
+  function on(){ return SLUG.test(location.pathname); }
+
+  var ORANGE="222,146,85", GREEN="114,188,143";
+
+  var BAR1={
+    id:"3a2b9546553480cb9516ef6275ba4f50",
+    tabs:["Overview","Neu"], achseMax:60, achseStep:15, hoehe:640,
+    daten:[["Belgische Waffel",51.71],["Glazed Dounut",30.80],["Cinnamon Roll",30.57],
+           ["Apple Crumble Tart",26.71],["Brookie",25.25],["Chocolate Lava Cake",25.09],
+           ["Blueberry Muffin",25.00],["New York Cheesecake",15.20]]
+  };
+  var BAR2N=["Rindfleisch Bulgur Pfanne","Lemon Herb Rice","Zucchini Hash Plate","Breakfast Bagel",
+    "Lachs mit Zitronen-Dill-Butter","Tofu Mix Plate","Gnocchi mit Spinat-Ricotta-Sauce",
+    "Butter-Zucchini mit Pecorino","Herb Ricotta Bowl","Coconut Breakfast Bowl","Thai Peanut Tofu Bowl",
+    "Spaghetti al Limone e Parmigiano","Shakshuka","Tuna Crunch Plate","Quinoa Feta Salat",
+    "Caesar Salad Reloaded","Coco Curry Plate","Süßkartoffel-Kokos-Curry","Mushroom-Polenta Bowl",
+    "Caprese Sandwich","Green Veggie Bowl","Mediterranean Power Bowl","Green Omelette",
+    "Zucchini Chickpea Plate","Mediterranean Falafel Wrap","Vegane Buddha Bowl","Oatmeal Deluxe",
+    "Smoked Salmon Sandwich","Garlic Shrimp & Rice","Shrimp Tomaten Pasta","Beef Bolognese Pasta",
+    "Avocado-Toast mit pochiertem Ei"];
+  var BAR2V=[27.68,26.40,25.65,25.47,24.72,23.76,23.68,23.43,22.88,22.56,22.26,22.15,21.41,21.23,
+    20.82,20.78,20.74,20.63,20.59,20.53,20.34,20.00,19.88,19.67,17.89,17.67,16.10,15.92,15.92,
+    14.90,14.36,14.18];
+  var BAR2={
+    id:"3a2b954655348075baced92bf0e5f0fa",
+    tabs:["Overview","Neu"], achseMax:32, achseStep:8, hoehe:640,
+    daten:BAR2N.map(function(n,i){ return [n,BAR2V[i]]; })
+  };
+
+  var DONUTS=[
+    { id:"3a2b9546553480d58281fc63406c6a47", titel:"Target // 7 Eur",
+      mitte:"7,2 €", label:"DB I: Durchschnittswert",
+      werte:[12.34,11.99,10.93,10.24,10.09,9.68,9.64,9.53,9.48,9.44,9.41,9.11,8.94,8.81,7.6,7.55,
+             7.53,7.41,7.39,7.25,7.23,7.08,6.87,6.81,6.75,6.73,6.68,6.36,6.35,6.32,5.52,5.36,5.13,
+             5.06,4.12,3,2.99,2.43,1.73,1.69] },
+    { id:"3a2b95465534808fb952fde414fe7678", titel:"Target // 4.50 Eur",
+      mitte:"5,5 €", label:"DB II: Durchschnittswert",
+      werte:[10.62,10.27,9.21,8.52,8.37,7.96,7.92,7.81,7.76,7.72,7.69,7.39,7.22,7.09,5.88,5.83,5.81,
+             5.69,5.67,5.53,5.51,5.36,5.13,5.09,5.03,5.01,4.96,4.64,4.63,4.60,3.80,3.64,3.41,3.32,
+             2.40,1.28,1.27,0.71,0.03,0.01] },
+    { id:"3a2b9546553480f2a03df7344223c285", titel:"Target // 3.10 Eur",
+      mitte:"3,5 €", label:"DB III: Durchschnittswert",
+      werte:[8.77,8.11,7.73,6.72,6.36,6.15,5.68,5.45,5.29,5.25,4.83,4.72,4.67,4.29,4.2,4.02,3.99,
+             3.82,3.55,3.53,3.47,3.42,3.1,2.89,2.79,2.42,2.4,2.16,2.12,2.08,1.78,1.52,1.51,1.33,
+             1.02,0.66,0.65,0.65,0.61,0.09] }
+  ];
+
+  var CSS = `
+  .fdqc-block{margin:6px 0 18px;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+  .fdqc-tabs{display:flex;gap:16px;margin:0 0 10px;padding:0 2px;}
+  .fdqc-tab{font-size:14px;line-height:1.4;color:rgba(255,255,255,.45);padding-bottom:5px;}
+  .fdqc-tab.is-on{color:rgba(255,255,255,.9);box-shadow:inset 0 -2px 0 rgba(255,255,255,.85);}
+  .fdqc-title{font-size:14px;font-weight:500;color:rgba(255,255,255,.9);margin:0 0 8px;padding:0 2px;}
+  .fdqc-card{border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:14px 16px 8px;background:rgba(255,255,255,.02);}
+  .fdqc-block svg{display:block;width:100%;height:auto;overflow:visible;}
+  .fdqc-block .ax{fill:rgba(255,255,255,.42);font-size:12px;}
+  .fdqc-block .cat{fill:rgba(255,255,255,.42);font-size:9.6px;}
+  .fdqc-block .dl{fill:rgba(255,255,255,.72);font-size:9.6px;}
+  .fdqc-block .grid{stroke:rgba(255,255,255,.08);stroke-width:1;}
+  .fdqc-block .zero{stroke:rgba(255,255,255,.18);stroke-width:1;}
+  .fdqc-mitte{fill:#fff;font-size:26px;font-weight:600;}
+  .fdqc-sub{fill:rgba(255,255,255,.55);font-size:11px;}
+  `;
+  function injectCSS(){
+    if(document.getElementById("tsfdqc-css")) return;
+    var s=document.createElement("style"); s.id="tsfdqc-css"; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function de(n,d){ return n.toFixed(d==null?2:d).replace(".",","); }
+
+  /* Notion faerbt die Balken nach Rang: voll deckend oben, dann
+     .7 / .5 / .3 / .15 — der Rest bleibt auf der letzten Stufe. */
+  function alphaFor(i,n){
+    var steps=[1,.7,.5,.3,.15];
+    if(n<=steps.length) return steps[i];
+    return steps[Math.min(steps.length-1, Math.floor(i/(n/steps.length)))];
+  }
+
+  function barSVG(cfg){
+    var W=920, H=cfg.hoehe-140, padL=52, padB=cfg.daten.length>12?118:74, padT=22;
+    var n=cfg.daten.length;
+    var plotW=W-padL-14, plotH=H-padT-padB;
+    var s='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" role="img">';
+    // Gitter + Y-Achse
+    for(var v=0; v<=cfg.achseMax; v+=cfg.achseStep){
+      var y=padT+plotH-(v/cfg.achseMax)*plotH;
+      s+='<line class="'+(v===0?"zero":"grid")+'" x1="'+padL+'" y1="'+y+'" x2="'+(padL+plotW)+'" y2="'+y+'"/>';
+      s+='<text class="ax" x="'+(padL-9)+'" y="'+(y+4)+'" text-anchor="end">'+de(v,2)+' %</text>';
+    }
+    var slot=plotW/n, bw=Math.min(46, slot*0.62);
+    cfg.daten.forEach(function(d,i){
+      var val=d[1], h=(val/cfg.achseMax)*plotH;
+      var x=padL+slot*i+(slot-bw)/2, y=padT+plotH-h;
+      s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)
+        +'" rx="2" fill="rgba('+ORANGE+','+alphaFor(i,n)+')"/>';
+      s+='<text class="dl" x="'+(x+bw/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" text-anchor="middle">'+de(val)+' %</text>';
+      var cx=x+bw/2, cy=padT+plotH+10;
+      s+='<text class="cat" transform="translate('+cx.toFixed(1)+','+cy+') rotate(-45)" text-anchor="end">'+esc(d[0])+'</text>';
+    });
+    return s+'</svg>';
+  }
+
+  function donutSVG(cfg){
+    var W=420,H=300, cx=W/2, cy=H/2+6, rO=104, rI=64;
+    var sum=cfg.werte.reduce(function(a,b){ return a+b; },0) || 1;
+    var max=Math.max.apply(null,cfg.werte)||1;
+    var s='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" role="img">';
+    var a0=-Math.PI/2;
+    cfg.werte.forEach(function(v){
+      var a1=a0+(v/sum)*Math.PI*2;
+      var big=(a1-a0)>Math.PI?1:0;
+      var x0=cx+rO*Math.cos(a0), y0=cy+rO*Math.sin(a0);
+      var x1=cx+rO*Math.cos(a1), y1=cy+rO*Math.sin(a1);
+      var x2=cx+rI*Math.cos(a1), y2=cy+rI*Math.sin(a1);
+      var x3=cx+rI*Math.cos(a0), y3=cy+rI*Math.sin(a0);
+      var al=(0.28+0.62*(v/max)).toFixed(3);
+      s+='<path d="M'+x0.toFixed(2)+' '+y0.toFixed(2)
+        +'A'+rO+' '+rO+' 0 '+big+' 1 '+x1.toFixed(2)+' '+y1.toFixed(2)
+        +'L'+x2.toFixed(2)+' '+y2.toFixed(2)
+        +'A'+rI+' '+rI+' 0 '+big+' 0 '+x3.toFixed(2)+' '+y3.toFixed(2)
+        +'Z" fill="rgba('+GREEN+','+al+')" stroke="rgba(5,6,11,.55)" stroke-width="1"/>';
+      a0=a1;
+    });
+    s+='<text class="fdqc-mitte" x="'+cx+'" y="'+(cy+2)+'" text-anchor="middle">'+esc(cfg.mitte)+'</text>';
+    s+='<text class="fdqc-sub" x="'+cx+'" y="'+(cy+24)+'" text-anchor="middle">'+esc(cfg.label)+'</text>';
+    return s+'</svg>';
+  }
+
+  function tabsHTML(tabs){
+    return '<div class="fdqc-tabs">'+tabs.map(function(t,i){
+      return '<span class="fdqc-tab'+(i===0?" is-on":"")+'">'+esc(t)+'</span>';
+    }).join("")+'</div>';
+  }
+
+  function build(cfg, art){
+    var box=document.createElement("div");
+    box.className="fdqc-block";
+    box.setAttribute("data-fdqc", cfg.id);
+    box.innerHTML = (art==="bar" ? tabsHTML(cfg.tabs) : tabsHTML(["Overview","Neu"]))
+      + (art==="donut" ? '<p class="fdqc-title">'+esc(cfg.titel)+'</p>' : "")
+      + '<div class="fdqc-card">'+(art==="bar"?barSVG(cfg):donutSVG(cfg))+'</div>';
+    return box;
+  }
+
+  function mountOne(cfg, art){
+    var blk=document.getElementById("block-"+cfg.id);
+    if(!blk) return;
+    /* Sibling einsetzen statt in den React-Knoten schreiben —
+       gleiches Muster wie #tslmod. */
+    var next=blk.nextElementSibling;
+    if(next && next.getAttribute && next.getAttribute("data-fdqc")===cfg.id) return;
+    blk.parentNode.insertBefore(build(cfg,art), blk.nextSibling);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(!document.querySelector(".notion-root")) return;
+    injectCSS();
+    mountOne(BAR1,"bar");
+    mountOne(BAR2,"bar");
+    DONUTS.forEach(function(d){ mountOne(d,"donut"); });
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    #tsfdqx — Hover-Bauanleitung über dem eingebetteten Quartier
    Seite: /food-drinksquartier-inhalte-interface
 
@@ -15450,6 +15640,32 @@ var TSISL_ZUG_SCHLUESSEL=[
     { db:"allergene", nth:0, eyebrow:"Galerie", t:"Die Allergene-Galerie",
       steps:galSteps("DB Allergene", null) }
   ];
+
+  /* ---- Die von #tsfdqc nachgebauten Diagramme ----------------
+     super.so rendert Notion-Diagramme nicht; #tsfdqc setzt sie
+     als .fdqc-block daneben, hier bekommen sie ihre Anleitung. */
+  function chartSteps(db, art, achse, filter){
+    var s=[
+      "/ → Tabellenansicht – Datenbank",
+      db+" verknüpfen",
+      "Ansicht hinzufügen → Diagramm",
+      art+": "+achse
+    ];
+    if(filter) s.push("Filter: "+filter);
+    return s;
+  }
+  var CHART={
+    "3a2b9546553480cb9516ef6275ba4f50":{ t:"Das Wareneinsatz-Diagramm",
+      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz (%)","Kategorie = Sweet Treats") },
+    "3a2b954655348075baced92bf0e5f0fa":{ t:"Das Wareneinsatz-Diagramm",
+      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz (%)",null) },
+    "3a2b9546553480d58281fc63406c6a47":{ t:"Das DB-I-Diagramm",
+      steps:chartSteps("DB Gerichte","Ring","Wert = DB I, Mitte = Durchschnitt",null) },
+    "3a2b95465534808fb952fde414fe7678":{ t:"Das DB-II-Diagramm",
+      steps:chartSteps("DB Gerichte","Ring","Wert = DB II, Mitte = Durchschnitt",null) },
+    "3a2b9546553480f2a03df7344223c285":{ t:"Das DB-III-Diagramm",
+      steps:chartSteps("DB Gerichte","Ring","Wert = DB III, Mitte = Durchschnitt",null) }
+  };
 
   /* ------------------------------ CSS ------------------------- */
   var CSS = `
@@ -15602,6 +15818,12 @@ var TSISL_ZUG_SCHLUESSEL=[
          eine Kachel teilen und das zweite bliebe leer. */
       auto.push(mkAuto("img#"+i, e, "Banner", "Banner", bannerSteps(null)));
     });
+    [].slice.call(root.querySelectorAll(".fdqc-block")).forEach(function(e){
+      var id=e.getAttribute("data-fdqc")||"", c=CHART[id];
+      auto.push(mkAuto("chart:"+id, e, "Diagramm",
+        c?c.t:"Die Diagramm-Ansicht",
+        c?c.steps:chartSteps("DB Gerichte","Diagramm","Achsen wählen",null)));
+    });
     galMap.forEach(function(g){
       if(claimed.indexOf(g.el)>-1) return;
       var name = g.label || prettyDb(g.db);
@@ -15744,7 +15966,7 @@ var TSISL_ZUG_SCHLUESSEL=[
       document.addEventListener("mouseover", function(e){
         var t=e.target;
         if(!t || !t.closest) return;
-        var el=t.closest(".notion-image, .notion-collection.inline");
+        var el=t.closest(".notion-image, .notion-collection.inline, .fdqc-block");
         if(!el) return;
         var hit=ALL.filter(function(s){ return s.el===el && s.card; })[0];
         if(hit) show(hit);
