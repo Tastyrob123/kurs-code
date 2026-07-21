@@ -7425,6 +7425,8 @@
       {name:'DB III (%)', wert:1},
       {name:'Formel DB III (%)', wert:1}
       ]},
+{ kachel_id:'vf_werte', kachel_name:'🎯 Visionen & Werte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Titel',wert:1,img:null}, {name:'Art',wert:1,img:null}, {name:'Essenz',wert:1,img:null}, {name:'Wirkung',wert:1,img:null}, {name:'Bezug',wert:1,img:null} ] },
 { kachel_id:'ops_team_onb', kachel_name:'Onboarding', ist_produkt_kachel:true, einheit:'Schritte', einheit_typ:'menge',
   objekt_varianten:[ {name:'Willkommen',wert:30,img:null}, {name:'Hygiene',wert:45,img:null}, {name:'Rollen',wert:30,img:null}, {name:'SOPs',wert:60,img:null}, {name:'Einweisung',wert:120,img:null}, {name:'Sicherheit',wert:20,img:null} ] },
 { kachel_id:'ops_team_mitarbeiter', kachel_name:'👤 Mitarbeiter', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
@@ -7782,6 +7784,17 @@
     {title:'49. DB III (%)', desc:'Eigenschaft : Formel → Name der Spalte : DB III (%) Trage diese Formel ein : lets( /* Clean and convert t', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB III (%)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">lets(<br>&nbsp;&nbsp;/* Clean and convert text properties to numbers by removing non-numeric characters */<br>&nbsp;&nbsp;dbThree, toNumber(prop(&quot;DB III (EUR)&quot;).replaceAll(&quot;[^0-9.-]&quot;, &quot;&quot;)),<br>&nbsp;&nbsp;umsatzGesamt, toNumber(prop(&quot;Umsatz Gesamt Netto&quot;).replaceAll(&quot;[^0-9.-]&quot;, &quot;&quot;)),<br>&nbsp;&nbsp;/* Calculate and return percentage */<br>&nbsp;&nbsp;if(dbThree == 0 and umsatzGesamt == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;0.0%&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;if(umsatzGesamt == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;N/A&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(round(dbThree / umsatzGesamt * 100, 1)) + &quot;%&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt Deckungsbeitrag III im Verhältnis zum Gesamtumsatz — dein Ergebnis.</p>'},
     {title:'50. Formel DB III (%)', desc:'Eigenschaft : Formel → Name der Spalte : Formel DB III (%) Trage diese Formel ein : prop("DB III (%)") → ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Formel DB III (%)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;DB III (%)&quot;)</div><p class="notion-text">→ Die eingetragene Formel macht aus dem DB-III-Prozentwert eine saubere Zahl.</p>'},
   ];
+
+var TSISL_VF_WERTE=[
+  {title:'1. Button anlegen', desc:'Lege auf deiner Vision-Frame-Seite einen Button an, der zur neuen Datenbank führt.', html:'<p class="notion-text">Wie bei jeder Datenbank bauen wir zuerst den Rahmen: Lege auf deiner Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+  {title:'2. Datenbank anlegen', desc:'Drücke / und wähle Tabellenansicht – Datenbank. Name : 🎯 Visionen & Werte', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> 🎯 Visionen &amp; Werte</p><p class="notion-text">Damit steht der Rahmen — jede Karte in diesem Regal ist ab jetzt eine Spalte dieser Datenbank.</p>'},
+  {title:'3. Titel', desc:'Eigenschaft : Titel → Name der Spalte : Titel', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Titel</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen der Vision oder des Werts, kurz und eindeutig, bspw. Gastronomische Vielfalt bewahren.</p>'},
+  {title:'4. Art', desc:'Eigenschaft : Auswählen → Name der Spalte : Art', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Art</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Vision · Wert</p><p class="notion-text">Die Vision beschreibt die Richtung, der Wert das Prinzip. Beide liegen im selben Gefäß, dieses Feld trennt sie.</p>'},
+  {title:'5. Essenz', desc:'Eigenschaft : Text → Name der Spalte : Essenz', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Essenz</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Kern in einem einzigen Satz, bspw. Kleinen Betrieben die KI-Welt zugänglich machen.</p>'},
+  {title:'6. Wirkung im Alltag', desc:'Eigenschaft : Text → Name der Spalte : Wirkung im Alltag', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Wirkung im Alltag</p><p class="notion-text">→ <b>Du trägst hier ein :</b> woran du den Punkt im täglichen Handeln merkst, bspw. Ich baue jedes Angebot so, dass ein Einzelbetrieb es allein umsetzen kann.</p>'},
+  {title:'7. Bezug zum System', desc:'Eigenschaft : Text → Name der Spalte : Bezug zum System', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Bezug zum System</p><p class="notion-text">→ <b>Du trägst hier ein :</b> wo die Idee in deinem Aufbau verankert ist, bspw. in der Positionierung oder im Angebot.</p>'},
+  {title:'8. Gedanken', desc:'Eigenschaft : Text → Name der Spalte : Gedanken', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Gedanken</p><p class="notion-text">→ <b>Du trägst hier ein :</b> offene Fragen und Zweifel zum Eintrag. Nichts muss hier fertig sein.</p>'}
+];
 
 var TSISL_TEAM_ONB=[
   {title:'1. Willkommen & Orientierung', desc:'Hol den neuen Mitarbeiter ab: Rundgang, Räume, Team. ca. 30 Minuten.', html:'<p class="notion-text">Der erste Schritt: hol deinen neuen Mitarbeiter ab und gib ihm Orientierung.</p><p class="notion-text">→ Rundgang durch den Betrieb, alle Räume zeigen, das Team vorstellen.</p><p class="notion-text">→ <b>Zeit :</b> ca. 30 Minuten.</p>'},
@@ -8151,6 +8164,7 @@ var TSISL_ZUG_SCHLUESSEL=[
          gebaute Lieferpartner-Verknüpfung, inline baubar) → keine Relation-Kachel (sonst Duplikat). */
       summary:'Vertragsvolumina', cta:'Vertrag abschließen', ctaDone:'Vertrag geschlossen', chain:true }
 ,
+{ path:/\/lektionen\/vision-werte\/?$/, kachel:'vf_werte', anchorSel:'#tsisl-wk-vf_werte', steps:TSISL_VF_WERTE, eyebrow:'Visionen & Werte', title:'Dein <span>Wertefundament</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte deiner Werte-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht aus einem Gefühl eine Struktur, an der du Entscheidungen misst. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst Tabellenansicht – Datenbank.', summary:'Visionen & Werte', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_onb', anchorSel:'#tsisl-wk-ops_team_onb', steps:TSISL_TEAM_ONB, eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.', sub:'Jede Karte ist ein Schritt der Einarbeitung. Klick sie auf, arbeite sie ab, leg sie in den Einkaufswagen — der Balken zeigt, wie startklar dein neuer Mitarbeiter ist.', summary:'Onboarding', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_mitarbeiter', anchorSel:'#tsisl-wk-ops_team_mitarbeiter', steps:TSISL_TEAM_MIT, eyebrow:'DB 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte der Mitarbeiter-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht dein sauberes Team-Stammblatt.', summary:'Mitarbeiter', chain:true },
 { path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_audit', anchorSel:'#tsisl-wk-ops_check_audit', steps:TSISL_CHECK_AUDIT, eyebrow:'DB Audit Checkliste', title:'Deine <span>Audit-Checkliste</span>. Punkt für Punkt.', sub:'Jede Karte ist eine Spalte der Audit-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Prüfpunkte.', summary:'Audit-Checkliste', chain:true },
@@ -8445,7 +8459,7 @@ var TSISL_ZUG_SCHLUESSEL=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
+  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -13255,6 +13269,26 @@ var TSISL_ZUG_SCHLUESSEL=[
   /* ---------- CONTENT: alle 6 Inseln ---------- */
   var ISLANDS=[
    {
+    slug:/\/lektionen\/vision-werte\/?$/, key:'vfwerte',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.13.1', kicker:'Vision Frame · Identität & Marke',
+    titleHTML:'Vision & <span class="il-g">Werte</span>',
+    lead:'Bevor du Systeme baust, brauchst du einen Bezugspunkt, an dem du Entscheidungen misst.',
+    intro:['Die meisten Betriebe haben ihre Werte im Kopf, nicht auf dem Papier. Das reicht, solange du allein entscheidest. Sobald ein Team dazukommt, ein zweiter Standort oder ein Partner, entscheidet jeden Tag die Tagesform — und niemand kann nachlesen, wofür der Laden eigentlich steht.','Diese Insel macht daraus eine Datenbank. Du trennst zwei Dinge sauber: die Vision, also die Richtung, in die du willst, und den Wert, also das Prinzip, nach dem du handelst. Jeder Eintrag bekommt eine Essenz in einem Satz, eine Wirkung im Alltag und einen Bezug zu deinem System.'],
+    anim:{type:'checklist', head:{eyebrow:'Was einen Eintrag tragfähig macht', h:'Vom Satz zum <span class="il-g">Fundament</span>', sub:'Ein Wert, der nur schön klingt, verändert nichts. Diese fünf Fragen machen aus einer Absicht etwas Überprüfbares.'}, unit:'Fragen', rows:['Ist es eine Richtung oder ein Prinzip?','Steht die Essenz in einem einzigen Satz?','Woran merke ich es im Alltag?','Wo ist es im System verankert?','Würde ein Fremder danach entscheiden können?']},
+    video:{h:'Richtung und Prinzip <span class="il-g">sauber getrennt</span>', p:['Eine Vision beschreibt einen Zustand, den du erreichen willst — sie zieht nach vorn und ist nie ganz fertig. Ein Wert beschreibt, wie du unterwegs handelst, auch wenn es unbequem wird. Beide gehören in dieselbe Tabelle, aber nicht in dieselbe Spalte. Genau dafür gibt es das Feld Art: Es zwingt dich bei jedem Eintrag zu der Entscheidung, ob du gerade ein Ziel formulierst oder eine Regel.','Der Unterschied klingt akademisch, ist im Alltag aber der ganze Punkt. An der Vision richtest du Jahresziele aus, am Wert einzelne Entscheidungen. Wer beides vermischt, bekommt eine Liste schöner Sätze, mit der niemand arbeiten kann.'], close:'In den nächsten Schritten baust du die Tabelle Spalte für Spalte. Jede Karte im Regal ist ein Feld deiner Werte-Datenbank.'},
+    wk:[
+      {id:'vf_werte', eyebrow:'Visionen & Werte', title:'Dein <span>Wertefundament</span>. Feld für Feld.'}
+    ],
+    ergebnis:[
+      {h:'Das Fundament auf <span class="il-g">einen Blick</span>', p:['Am Ende steht eine Tabelle, in der Vision und Wert sauber getrennt sind und jeder Eintrag seine Essenz, seine Wirkung im Alltag und seinen Bezug zum System trägt. Über das Feld Art filterst du in einem Klick auf das eine oder das andere.','Damit hast du zum ersten Mal einen Bezugspunkt, den du jemand anderem zeigen kannst — beim Einstellen, beim Briefing, bei jeder größeren Entscheidung.'], side:'left'}
+    ],
+    zweit:null,
+    empf:{dbhd:'🎯 Visionen & Werte', points:['Vision','Wert','Essenz','Wirkung'], emph:'Fülle immer zuerst die <span class="il-eg">Wirkung im Alltag</span>', p:'Wenn dir dort nichts Konkretes einfällt, hast du keinen Wert formuliert, sondern eine Absichtserklärung. Fang mit drei bis fünf Einträgen an, die du wirklich lebst, statt mit einer langen Liste, die niemand liest.', steps:['Trag drei Einträge ein, die du sofort benennen kannst.','Setz bei jedem das Feld Art auf Vision oder Wert.','Formuliere die Essenz in genau einem Satz.','Beschreib die Wirkung im Alltag an einem echten Beispiel.']},
+    duo:null,
+    learn:['Du hast dein Wertefundament als Datenbank gebaut, statt es im Kopf zu behalten.','Du trennst Vision und Wert sauber — die Richtung von dem Prinzip, nach dem du handelst.','Du bringst jeden Eintrag auf eine Essenz in einem Satz und zwingst dich damit zur Klarheit.','Du verankerst jeden Wert im Alltag und im System, sodass er überprüfbar wird statt dekorativ.']
+   },
+ {
     slug:/\/lektionen\/team-onboarding\/?$/, key:'team',
     eyebrow:'Lektion 2.12.1', kicker:'Operations Area · Personal',
     titleHTML:'Team & <span class="il-g">Onboarding</span>',
@@ -13605,7 +13639,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   function buildHero(sc,c){
     if(sc.querySelector('#tsisl-hero')) return;
     var hero=document.createElement('div'); hero.id='tsisl-hero';
-    hero.innerHTML='<a class="il-back" href="/operations-area"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Operations Area</a>'
+    hero.innerHTML='<a class="il-back" href="'+(c.backHref||'/operations-area')+'"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+(c.backLabel||'Operations Area')+'</a>'
       +'<img class="il-logo" alt="Tasty Studios" src="'+LOGO+'">'
       +'<div class="il-eyebrow">'+c.kicker+'</div>'
       +'<h1 class="il-title">'+c.titleHTML+'</h1>'
