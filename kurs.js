@@ -14540,3 +14540,102 @@ var TSISL_ZUG_SCHLUESSEL=[
   document.addEventListener('DOMContentLoaded',mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   notion-ai-fr-unser-system — Hero "Notion AI" + Einleitung
+   Abschnitt 01 (Abschnitts-Katalog 01, Werte 1:1). Muster: key-metrics-Hero.
+   Titel einzeilig: der -16%-Pull des Katalogs ist auf EINE Titelzeile kalibriert
+   (zweizeilig ragt die H1 um genau eine Zeilenhoehe unter das Bild -> verboten).
+   Font "Lineal Web": das "Lineal TS"-Subset hat nur 30 Glyphen ( -./0123456789:BDILVZaeiknotu— )
+   und deckt N/A nicht ab -> sonst Font-Mischmasch. CSS hier bewusst .page__-gescopt.
+   Cover = PLATZHALTER (echtes 3-Laptop-Cover folgt von Robert -> nur die IMG-Zeile tauschen)
+   ============================================================ */
+(function(){
+  var IMG="https://tastyrob123.github.io/kurs-code/img/notion-ai/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Notion AI: 3-Laptop-SVG (Position/Struktur final), echtes Cover kommt spaeter -> nur diese Zeile ersetzen */
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var SCOPE="page__notion-ai-fr-unser-system";
+  function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .`+SCOPE+` .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .`+SCOPE+` .ts-body h3{
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  .`+SCOPE+` .ts-body h3:first-child{margin-top:0}
+  .`+SCOPE+` .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .`+SCOPE+` .ts-body p:last-child{margin-bottom:0}
+  .`+SCOPE+` .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .`+SCOPE+` .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .`+SCOPE+` .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .`+SCOPE+` .ts-body li b, .`+SCOPE+` .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('tsnai-intro-css')) return;
+    var s=document.createElement('style'); s.id='tsnai-intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()){ /* SPA-Abriss: eigene Knoten beim Seitenwechsel entfernen, sonst bleiben sie stehen */
+      var oi=document.getElementById('tsnai-intro'); if(oi&&oi.parentNode) oi.parentNode.removeChild(oi);
+      var oh=document.getElementById('tsnai-hero'); if(oh&&oh.parentNode) oh.parentNode.removeChild(oh);
+      return;
+    }
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.getElementById('tsnai-hero')){
+      if(!document.getElementById('tsnai-intro')) mountBody(sc);
+      return;
+    }
+    if(sc.querySelector(".ts-hero")) return; /* fremder Hero da -> nicht dazwischenfunken */
+    var hero=document.createElement("div");
+    hero.className="ts-hero"; hero.id="tsnai-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Notion AI im Backoffice" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 2.14</div>'+
+        '<h1 class="ts-hero__title">Notion <span class="ts-gold">AI</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('tsnai-intro')) return;
+    injectCSS();
+    var hero=document.getElementById('tsnai-hero')||sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='tsnai-intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Ganz am Anfang habe ich dir gesagt, dass wir Notion AI für zweierlei nutzen: um <b>im System zu arbeiten</b> und um das <b>System selbst mitzubauen</b>. Bisher ging es fast nur um das Bauen.</p>
+  <p>Dein Backoffice steht jetzt, die Kalkulationen laufen und deine Datenbanken greifen ineinander. Damit wird der andere Teil interessant. In dieser Lektion zeige ich dir, was Notion AI kann, wenn es auf ein System trifft, das du selbst aufgebaut hast, und wie du es im Alltag befragst, ohne dass du dafür eine einzige Formel auswendig können musst.</p>
+</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
