@@ -8031,6 +8031,8 @@
       {name:'DB III (%)', wert:1},
       {name:'Formel DB III (%)', wert:1}
       ]},
+{ kachel_id:'vf_marke', kachel_name:'🎯 Markenidentität', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Aspekt',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Ausarbeitung',wert:1,img:null} ] },
 { kachel_id:'vf_werte', kachel_name:'🎯 Visionen & Werte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
   objekt_varianten:[ {name:'Titel',wert:1,img:null}, {name:'Art',wert:1,img:null}, {name:'Essenz',wert:1,img:null}, {name:'Wirkung',wert:1,img:null}, {name:'Bezug',wert:1,img:null} ] },
 { kachel_id:'ops_team_onb', kachel_name:'Onboarding', ist_produkt_kachel:true, einheit:'Schritte', einheit_typ:'menge',
@@ -8390,6 +8392,16 @@
     {title:'49. DB III (%)', desc:'Eigenschaft : Formel → Name der Spalte : DB III (%) Trage diese Formel ein : lets( /* Clean and convert t', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> DB III (%)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">lets(<br>&nbsp;&nbsp;/* Clean and convert text properties to numbers by removing non-numeric characters */<br>&nbsp;&nbsp;dbThree, toNumber(prop(&quot;DB III (EUR)&quot;).replaceAll(&quot;[^0-9.-]&quot;, &quot;&quot;)),<br>&nbsp;&nbsp;umsatzGesamt, toNumber(prop(&quot;Umsatz Gesamt Netto&quot;).replaceAll(&quot;[^0-9.-]&quot;, &quot;&quot;)),<br>&nbsp;&nbsp;/* Calculate and return percentage */<br>&nbsp;&nbsp;if(dbThree == 0 and umsatzGesamt == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;0.0%&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;if(umsatzGesamt == 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;N/A&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format(round(dbThree / umsatzGesamt * 100, 1)) + &quot;%&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>&nbsp;&nbsp;)<br>)</div><p class="notion-text">→ Die eingetragene Formel zeigt Deckungsbeitrag III im Verhältnis zum Gesamtumsatz — dein Ergebnis.</p>'},
     {title:'50. Formel DB III (%)', desc:'Eigenschaft : Formel → Name der Spalte : Formel DB III (%) Trage diese Formel ein : prop("DB III (%)") → ', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Formel DB III (%)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;DB III (%)&quot;)</div><p class="notion-text">→ Die eingetragene Formel macht aus dem DB-III-Prozentwert eine saubere Zahl.</p>'},
   ];
+
+var TSISL_VF_MARKE=[
+  {title:'1. Button anlegen', desc:'Lege auf deiner Seite einen Button an, der einen neuen Aspekt anlegt.', html:'<p class="notion-text">Zuerst der Rahmen: ein <b>Button</b>, der mit einem Klick eine fertig vorstrukturierte Aspekt-Seite erzeugt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung „+ Neuer Aspekt" → Aktion „Seite hinzufügen zu" → diese Datenbank.</p>'},
+  {title:'2. Datenbank anlegen', desc:'Drücke / und wähle Tabellenansicht – Datenbank. Name : 🎯 Markenidentität', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> 🎯 Markenidentität</p><p class="notion-text">Jede Zeile ist ab jetzt ein Aspekt deiner Marke, jede Karte in diesem Regal eine Spalte.</p>'},
+  {title:'3. Aspekt', desc:'Eigenschaft : Titel → Name der Spalte : Aspekt', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Aspekt</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den einen Marken-Aspekt, den die Zeile beschreibt, bspw. Vision, Kernwerte oder Farbpalette.</p>'},
+  {title:'4. Kategorie', desc:'Eigenschaft : Auswählen → Name der Spalte : Kategorie', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Kategorie</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Vision &amp; Mission · Werte · Positionierung · Zielgruppe · Markenversprechen · Tonalität &amp; Kommunikation · Visuell &amp; Design</p>'},
+  {title:'5. Status', desc:'Eigenschaft : Mehrfachauswahl → Name der Spalte : Status', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Mehrfachauswahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Status</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Entwurf · In Bearbeitung · Freigegeben · Zu überarbeiten</p>'},
+  {title:'6. Beschreibung', desc:'Eigenschaft : Text → Name der Spalte : Beschreibung', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Beschreibung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> ein bis zwei Sätze, die den Aspekt auf den Punkt bringen — der schnelle Blick in der Tabelle.</p>'},
+  {title:'7. Detaillierte Ausarbeitung', desc:'Eigenschaft : Text → Name der Spalte : Detaillierte Ausarbeitung', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Detaillierte Ausarbeitung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Aspekt in voller Länge. Von hier ziehst du später Formulierungen für Website, Karte und Team-Briefing.</p>'}
+];
 
 var TSISL_VF_WERTE=[
   {title:'1. Button anlegen', desc:'Lege auf deiner Vision-Frame-Seite einen Button an, der zur neuen Datenbank führt.', html:'<p class="notion-text">Wie bei jeder Datenbank bauen wir zuerst den Rahmen: Lege auf deiner Seite einen <b>Button</b> an, der dich zur neuen Datenbank führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
@@ -8770,6 +8782,7 @@ var TSISL_ZUG_SCHLUESSEL=[
          gebaute Lieferpartner-Verknüpfung, inline baubar) → keine Relation-Kachel (sonst Duplikat). */
       summary:'Vertragsvolumina', cta:'Vertrag abschließen', ctaDone:'Vertrag geschlossen', chain:true }
 ,
+{ path:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, kachel:'vf_marke', anchorSel:'#tsisl-wk-vf_marke', steps:TSISL_VF_MARKE, eyebrow:'Markenidentität', title:'Deine <span>Marke</span>. Aspekt für Aspekt.', sub:'Jede Karte ist eine Spalte deiner Marken-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt werden die gebauten Felder. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst Tabellenansicht – Datenbank.', summary:'Felder gebaut', chain:true },
 { path:/\/lektionen\/vision-werte\/?$/, kachel:'vf_werte', anchorSel:'#tsisl-wk-vf_werte', steps:TSISL_VF_WERTE, eyebrow:'Visionen & Werte', title:'Dein <span>Wertefundament</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte deiner Werte-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht aus einem Gefühl eine Struktur, an der du Entscheidungen misst. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst Tabellenansicht – Datenbank.', summary:'Visionen & Werte', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_onb', anchorSel:'#tsisl-wk-ops_team_onb', steps:TSISL_TEAM_ONB, eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.', sub:'Jede Karte ist ein Schritt der Einarbeitung. Klick sie auf, arbeite sie ab, leg sie in den Einkaufswagen — der Balken zeigt, wie startklar dein neuer Mitarbeiter ist.', summary:'Onboarding', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_mitarbeiter', anchorSel:'#tsisl-wk-ops_team_mitarbeiter', steps:TSISL_TEAM_MIT, eyebrow:'DB 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte der Mitarbeiter-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht dein sauberes Team-Stammblatt.', summary:'Mitarbeiter', chain:true },
@@ -9065,7 +9078,7 @@ var TSISL_ZUG_SCHLUESSEL=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
+  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -13935,12 +13948,55 @@ var TSISL_ZUG_SCHLUESSEL=[
    ============================================================ */
 (function(){
   if(window.__tsisl) return; window.__tsisl=true;
+  /* Seiten-eigene Erklaeranimationen: key -> play(sec). Jede Insel bekommt ihre eigene
+     Choreografie (Abschnitt 02, Verschaerfung 1: Konzept-Recycling verboten).
+     Endzustand ist per CSS Default sichtbar (Qualitaets-Gesetz Punkt 10). */
+  var CUSTOM={};
+  /* Insel 2 — „Aus Bauchgefühl wird Fundament": Fragmente -> Marken-Kern -> Berührungspunkte.
+     Endzustand = CSS-Default (alles sichtbar); play() setzt zurueck und staffelt neu. */
+  CUSTOM.marke=function(sec){
+    var frs=[].slice.call(sec.querySelectorAll('.mk-fr')),
+        core=sec.querySelector('.mk-core'),
+        tps=[].slice.call(sec.querySelectorAll('.mk-tp')),
+        lns=[].slice.call(sec.querySelectorAll('.mk-ln'));
+    if(!core) return;
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var wrap=sec.querySelector('.mk'); if(wrap) wrap.classList.add('rst');
+    frs.concat(tps).forEach(function(e){e.classList.remove('on');});
+    lns.forEach(function(e){e.classList.remove('flow');});
+    core.classList.remove('on','pulse');
+    frs.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 120+i*150); });
+    setTimeout(function(){ core.classList.add('on'); }, 120+frs.length*150+180);
+    setTimeout(function(){ lns.forEach(function(l,i){ setTimeout(function(){l.classList.add('flow');}, i*110); }); }, 120+frs.length*150+420);
+    setTimeout(function(){ core.classList.add('pulse'); }, 120+frs.length*150+900);
+    tps.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 120+frs.length*150+1150+i*160); });
+  };
   var LOGO="https://files.catbox.moe/au80tp.png";
   var G="199,180,137";
 
   /* ---------- CONTENT: alle 6 Inseln ---------- */
   var ISLANDS=[
    {
+    slug:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, key:'vfmarke',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.13.2', kicker:'Vision Frame · Identität & Marke',
+    titleHTML:'Unternehmen & <span class="il-g">Markenidentität</span>',
+    lead:'Eine Marke ist kein Logo, sondern die Summe der Entscheidungen, die du immer gleich triffst.',
+    intro:['Die meisten Betriebe haben eine Marke, ohne sie je aufgeschrieben zu haben. Sie steckt im Kopf des Inhabers: wie man mit Gästen spricht, was auf keinen Fall auf die Karte kommt, welche Farbe sich richtig anfühlt. Solange du alles selbst machst, funktioniert das.','Sobald jemand anderes eine Speisekarte gestaltet, einen Social-Post schreibt oder ein Schild bestellt, zerfällt es. In dieser Insel legst du deine Marke an einer Stelle fest — sieben Kategorien von Vision und Werten über Positionierung und Zielgruppe bis zu Sprache und Optik.'],
+    anim:{type:'custom', key:'marke', head:{eyebrow:'So entsteht deine Marke', h:'Aus Bauchgefühl wird <span class="il-g">Fundament</span>', sub:'Alles, was deine Marke ausmacht, sammelt sich an einer Stelle — und von dort zieht jeder Berührungspunkt dieselbe Linie.'}, html:'<style>.mk{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;max-width:940px;margin:0 auto;padding:8px 0}.mk-col{display:flex;flex-direction:column;gap:12px}.mk-fr,.mk-tp{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.14);font:600 13.5px/1.2 inherit;color:#fff;opacity:1;transform:none;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .7s ease}.mk.rst .mk-fr:not(.on){opacity:0;transform:translateX(-18px)}.mk.rst .mk-tp:not(.on){opacity:0;transform:translateX(18px)}.mk-fr.on,.mk-tp.on{opacity:1;transform:none}.mk-tp.on{border-color:rgba(199,180,137,.5)}.mk-sw{width:16px;height:16px;border-radius:5px;flex:none}.mk-core{display:flex;flex-direction:column;align-items:center;gap:7px;padding:20px 22px;border-radius:18px;background:rgba(199,180,137,.09);border:1px solid rgba(199,180,137,.5);box-shadow:0 24px 60px rgba(0,0,0,.45);opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}.mk.rst .mk-core:not(.on){opacity:0;transform:scale(.94)}.mk-core.on{opacity:1;transform:none}.mk-core-ic{font-size:26px;line-height:1}.mk-core-n{font:600 15px/1.1 inherit;color:#fff}.mk-core-t{font:600 9.5px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}.mk-core.pulse{animation:mkPulse 1.5s cubic-bezier(.22,1,.36,1)}@keyframes mkPulse{0%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(199,180,137,.42)}60%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 22px rgba(199,180,137,0)}100%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(199,180,137,0)}}.mk-lns{position:absolute;inset:0;pointer-events:none}.mk-wrap{position:relative}.mk-ln{stroke:rgba(199,180,137,.3);stroke-width:1.4;fill:none;stroke-linecap:round}.mk-ln.flow{stroke-dasharray:5 9;animation:mkFlow 3.4s cubic-bezier(.22,1,.36,1) infinite}@keyframes mkFlow{0%{stroke-dashoffset:150}45%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}.mk-note{margin:16px auto 0;text-align:center;font:400 10px/1 inherit;color:rgba(255,255,255,.28)}@media(max-width:820px){.mk{grid-template-columns:1fr;gap:16px}.mk-lns{display:none}}@media(prefers-reduced-motion:reduce){.mk-ln.flow{animation:none}.mk-core.pulse{animation:none}}</style><div class="mk-wrap"><div class="mk"><div class="mk-col"><div class="mk-fr"><span class="mk-sw" style="background:#C1785A"></span>Farbwelt</div><div class="mk-fr"><span class="mk-sw" style="background:#2C2C2C;border:1px solid rgba(255,255,255,.25)"></span>Schrift &bdquo;Aa&ldquo;</div><div class="mk-fr"><span class="mk-sw" style="background:#8a7f6a"></span>Haltung</div><div class="mk-fr"><span class="mk-sw" style="background:#F5F1E8"></span>Tonfall</div></div><div class="mk-core"><span class="mk-core-ic">🎯</span><span class="mk-core-n">Markenidentität</span><span class="mk-core-t">7 Kategorien</span></div><div class="mk-col"><div class="mk-tp">Speisekarte</div><div class="mk-tp">Website</div><div class="mk-tp">Verpackung</div><div class="mk-tp">Schild an der Tür</div></div><svg class="mk-lns" viewBox="0 0 940 260" preserveAspectRatio="none"><path class="mk-ln" d="M300 46 C 380 46 390 130 452 130"/><path class="mk-ln" d="M300 92 C 380 92 396 130 452 130"/><path class="mk-ln" d="M300 168 C 380 168 396 130 452 130"/><path class="mk-ln" d="M300 214 C 380 214 390 130 452 130"/><path class="mk-ln" d="M488 130 C 550 130 560 46 640 46"/><path class="mk-ln" d="M488 130 C 550 130 556 92 640 92"/><path class="mk-ln" d="M488 130 C 550 130 556 168 640 168"/><path class="mk-ln" d="M488 130 C 550 130 560 214 640 214"/></svg></div><p class="mk-note">Beispielwerte</p></div>'},
+    video:{h:'Sieben Kategorien, <span class="il-g">ein Bild</span>', p:['Die sieben Kategorien sind kein Ordnungssystem um seiner selbst willen. Sie zwingen dich, die Marke von innen nach außen zu denken: erst Vision und Werte, dann Positionierung und Zielgruppe, dann Markenversprechen und Tonalität, zuletzt das Visuelle. Wer mit der Farbpalette anfängt, dekoriert eine Marke, die es noch gar nicht gibt.','Jeder Aspekt trägt zwei Ebenen: eine kurze Beschreibung für den schnellen Blick in der Tabelle und eine ausführliche Ausarbeitung für den Ernstfall. Aus dieser Ausarbeitung zitierst du später, statt jedes Mal neu zu formulieren.'], close:'In den nächsten Schritten baust du die Tabelle Spalte für Spalte auf. Jede Karte im Regal ist ein Feld deiner Marken-Datenbank: Klick sie auf, leg sie in Notion an, hak sie ab. Fang danach mit den drei Aspekten an, die du sofort benennen kannst.'},
+    wk:[
+      {id:'vf_marke', eyebrow:'Markenidentität', title:'Deine <span>Marke</span>. Aspekt für Aspekt.'}
+    ],
+    ergebnis:[
+      {h:'Die Marke auf <span class="il-g">einen Blick</span>', cap:'Markenidentität', p:['Am Ende steht eine Tabelle, in der jeder Aspekt seiner Kategorie zugeordnet ist und seinen Reifegrad zeigt. Über den Status siehst du sofort, was schon freigegeben ist und woran noch gearbeitet wird.','Damit hast du eine Quelle, aus der alles Sichtbare zieht: die Speisekarte, die Website, die Verpackung, das Schild an der Tür. Niemand muss mehr raten, wie etwas klingen oder aussehen soll.','Und weil die Ausarbeitung mit in der Zeile steht, kannst du Formulierungen direkt übernehmen, statt sie jedes Mal neu zu erfinden.']}
+    ],
+    zweit:null,
+    empf:{dbhd:'🎯 Markenidentität', points:['Vision','Werte','Sprache','Optik'], emph:'Fang <span class="il-eg">oben</span> an, nicht bei der Farbe', p:'Schreib zuerst auf, wofür du stehst und für wen — erst danach, wie es aussieht. Die Optik ist die Folge der Haltung, nicht der Startpunkt.', steps:['Leg die drei Aspekte an, die du sofort benennen kannst.','Ordne jedem eine der sieben Kategorien zu.','Schreib die Beschreibung in ein bis zwei Sätzen.','Setz den Status ehrlich — Entwurf ist ein gültiger Zustand.']},
+    duo:null,
+    learn:['Du hast deine Marke als Datenbank angelegt, statt sie im Kopf des Inhabers zu lassen.','Du denkst die Marke von innen nach außen: erst Haltung und Zielgruppe, dann Sprache und Optik.','Du trennst den schnellen Blick von der Ausarbeitung, aus der du später zitierst.','Du siehst über den Status, welcher Aspekt schon trägt und welcher noch Arbeit braucht.']
+   },
+ {
     slug:/\/lektionen\/vision-werte\/?$/, key:'vfwerte',
     backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
     eyebrow:'Lektion 2.13.1', kicker:'Vision Frame · Identität & Marke',
@@ -14244,12 +14300,17 @@ var TSISL_ZUG_SCHLUESSEL=[
         +'<div class="il-st-total"><span class="l">'+a.totalLabel+'</span><span class="v" data-t="'+tot+'">0</span></div></div>';
     } else if(a.type==='grid'){
       inner='<div class="il-gd">'+a.nodes.map(function(n,i){return '<div class="il-gd-node" data-i="'+i+'"><span>'+n+'</span></div>';}).join('')+'</div><div class="il-gd-cap">0 / '+a.nodes.length+' '+a.label+'</div>';
+    } else if(a.type==='custom'){
+      inner=a.html||'';
     }
-    return '<section class="il-sec">'+secHead(a.head)+'<div class="il-stage">'+inner+'<button class="il-replay" type="button">Neu abspielen</button></div></section>';
+    var mark=(a.type==='custom'&&a.key)?' data-anim="'+a.key+'"':'';
+    return '<section class="il-sec"'+mark+'>'+secHead(a.head)+'<div class="il-stage">'+inner+'<button class="il-replay" type="button">Neu abspielen</button></div></section>';
   }
 
   function playAnim(sec){
     if(!sec) return;
+    var ck=sec.getAttribute&&sec.getAttribute('data-anim');
+    if(ck&&CUSTOM[ck]){ try{ CUSTOM[ck](sec); }catch(e){} return; }
     var cl=sec.querySelector('.il-cl');
     if(cl){
       var rows=[].slice.call(cl.querySelectorAll('.il-cl-row')), n=rows.length, unit=sec.querySelector('.il-cl-cap').textContent.split(' ').slice(-1)[0];
@@ -14337,7 +14398,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   function inView(el){ var r=el.getBoundingClientRect(); return r.top<window.innerHeight*.85 && r.bottom>0; }
   function wireReveal(box){
     [].slice.call(box.querySelectorAll('.il-sec')).forEach(function(sec){
-      var hasAnim=sec.querySelector('.il-cl,.il-stk,.il-gd');
+      var hasAnim=sec.querySelector('.il-cl,.il-stk,.il-gd')||(sec.getAttribute&&sec.getAttribute('data-anim'));
       var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ if(hasAnim) playAnim(sec); io.disconnect(); } },{threshold:.25});
       io.observe(sec);
       if(hasAnim){ setTimeout(function(){ if(inView(sec)) playAnim(sec); },600); var rp=sec.querySelector('.il-replay'); if(rp) rp.addEventListener('click',function(){playAnim(sec);}); }
