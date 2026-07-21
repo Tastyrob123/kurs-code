@@ -4764,6 +4764,326 @@
 /* ---- */
 
 /* ============================================================
+   allergene-bersicht — Ergebnis-Blick DB Packaging #tspkres (Abschnitts-Katalog 05)
+   ZWEITER Ergebnis-Blick der Seite -> Alternierungs-Regel: PC LINKS / Text RECHTS
+   (der erste, #tsalgpc2 "Jedes Allergen auf einen Blick", ist Text links / PC rechts).
+   Muster 1:1 von #tsalgpc2: Grid 1.42fr/1fr (hier gespiegelt), Ueberschrift 30px
+   Lineal TS mit Beige-Akzent, Text 16/24, Klick -> MacBook-Scroll-Lightbox
+   (Rahmen oj1wa9.png + scrollbarer Screen im Screen-Rect) mit Auto-Scroll.
+   Sitzt zwischen Packaging-Warenkorb (#ts10wk) und der Empfehlungs-Kachel.
+   ⚠️ POSTER/SHOT = Platzhalter bis Robert die echten Bilder liefert (Robert-Entscheid
+   21.07.2026 "Bau schon, Bilder kommen nach"): sind beide null, rendert ein
+   gestalteter Platzhalter im MacBook-Rahmen. Zum Tausch NUR die 2 Konstanten setzen.
+   ============================================================ */
+(function(){
+  if(window.__tspkres) return; window.__tspkres=true;
+  var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen DB Packaging (Robert) */
+  var SHOT=null;     /* <- langer Ganzseiten-Screenshot der DB Packaging (Robert)  */
+  var FRAME="https://files.catbox.moe/oj1wa9.png";
+  (function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); })();
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #tspkres{width:100%;margin:34px 0 60px;font-family:${SANS};color:#fff}
+  #tspkres *{box-sizing:border-box}
+  #tspkres .pkr-inner{width:min(1180px,94vw);margin:0 auto}
+  /* gespiegelt ggü. #tsalgpc2: PC links (1fr), Text rechts (1.42fr) */
+  #tspkres .pkr-grid{display:grid;grid-template-columns:1fr 1.42fr;gap:44px;align-items:center}
+  #tspkres .pkr-pc{display:flex;flex-direction:column;align-items:center;gap:12px}
+  #tspkres .pkr-tile{position:relative;display:block;width:100%;max-width:520px;line-height:0;cursor:pointer;background:transparent;border:0;padding:0;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tspkres .pkr-tile img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}
+  #tspkres .pkr-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #tspkres .pkr-tile:hover img{animation:pkrBeat 2.6s ease-in-out infinite}
+  @keyframes pkrBeat{0%,100%{filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}50%{filter:drop-shadow(0 18px 44px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(199,180,137,.28))}}
+  /* Platzhalter-Bildschirm im Rahmen, solange kein echtes Cover da ist */
+  #tspkres .pkr-ph{display:block;position:relative;width:100%;max-width:520px;aspect-ratio:1366/768;line-height:normal;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}
+  #tspkres .pkr-ph img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+  #tspkres .pkr-ph i{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;z-index:3;border-radius:3px;
+    background:linear-gradient(150deg,#141721,#0a0c12 60%,#07080d);box-shadow:inset 0 0 0 1px rgba(199,180,137,.10);
+    display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;line-height:1.5;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.44);text-align:center;padding:0 8%}
+  #tspkres .pkr-cap{font-size:15px;font-weight:600;color:#fff;text-align:center;line-height:1.3}
+  #tspkres .pkr-cap .g{color:#c7b489}
+  #tspkres .pkr-hint{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);text-align:center;animation:pkrPulse 2.8s ease-in-out infinite}
+  @keyframes pkrPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  #tspkres .pkr-h{margin:0 0 20px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:30px;line-height:1.12;letter-spacing:-.01em;color:#fff}
+  #tspkres .pkr-h .g{color:#c7b489}
+  #tspkres .pkr-txt p{margin:0 0 16px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tspkres .pkr-txt p:last-child{margin-bottom:0}
+
+  /* ---- MacBook-Scroll-Lightbox (Muster #tsalgpc2) ---- */
+  #tspkres-lb{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,6,11,.92);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:32px;opacity:0;transition:opacity .24s cubic-bezier(.16,1,.3,1);font-family:${SANS}}
+  #tspkres-lb.open{display:flex;opacity:1}
+  #tspkres-lb .pkr-mbinner{position:relative;width:100%;max-width:min(1000px,calc(100vw - 64px));transform:scale(.92) translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tspkres-lb.open .pkr-mbinner{transform:scale(1) translateY(0)}
+  #tspkres-lb.full{padding:0}
+  #tspkres-lb.full .pkr-mbinner{max-width:100vw}
+  #tspkres-lb .pkr-mockup{position:relative;width:100%;aspect-ratio:1366/768;filter:drop-shadow(0 30px 80px rgba(0,0,0,.6)) drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+  #tspkres-lb .pkr-frame{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;user-select:none}
+  #tspkres-lb .pkr-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:3;border-radius:3px;background:#191919;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+  #tspkres-lb .pkr-screen::-webkit-scrollbar{width:5px}
+  #tspkres-lb .pkr-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:4px}
+  #tspkres-lb .pkr-screen img{width:100%;display:block}
+  #tspkres-lb .pkr-screen .pkr-phbig{display:flex;align-items:center;justify-content:center;height:100%;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;padding:0 10%}
+  #tspkres-lb .pkr-closehint{margin-top:22px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.4);text-align:center;transition:opacity .4s ease}
+  #tspkres-lb.full .pkr-closehint{display:none}
+  #tspkres-lb .pkr-btn{position:absolute;top:16px;z-index:10;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .2s,color .2s}
+  #tspkres-lb .pkr-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+  #tspkres-lb .pkr-expand{left:16px}
+  #tspkres-lb .pkr-closex{right:16px}
+
+  @media (max-width:820px){
+    #tspkres .pkr-grid{grid-template-columns:1fr;gap:26px}
+    #tspkres .pkr-pc{order:-1}
+    #tspkres .pkr-h{font-size:26px}
+  }
+  @media (prefers-reduced-motion:reduce){#tspkres .pkr-tile:hover img{animation:none}#tspkres .pkr-hint{animation:none}#tspkres-lb *{animation:none!important;transition-duration:.01ms!important}}`;
+
+  var EXP='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+  function tileHtml(){
+    if(POSTER) return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><img src="'+POSTER+'" alt="DB Packaging — Paket-Übersicht" loading="lazy"></button>';
+    return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><span class="pkr-ph"><i>DB Packaging · Screenshot folgt</i><img src="'+FRAME+'" alt=""></span></button>';
+  }
+
+  function build(){
+    var sec=document.createElement('section');
+    sec.id='tspkres';
+    sec.innerHTML =
+      '<div class="pkr-inner"><div class="pkr-grid">'+
+        '<div class="pkr-pc">'+
+          tileHtml()+
+          '<div class="pkr-cap">DB Packaging <span class="g">– Live Beispiel</span></div>'+
+          '<div class="pkr-hint">Klicke zum Vergrößern</div>'+
+        '</div>'+
+        '<div class="pkr-txt">'+
+          '<h2 class="pkr-h">Ein Paket, <span class="g">für viele Gerichte.</span></h2>'+
+          '<p>Jedes Paket liegt als eigene Karte in der DB Packaging: mit Namen, den eingehängten Einzelartikeln und der Stückzahl je Artikel. Zwei Servietten statt einer, Deckel nur beim heißen Getränk — die Menge steht drin, nicht nur der Artikel.</p>'+
+          '<p>Ein Paket bedient dabei beliebig viele Gerichte. Du legst „Bowl To-Go" einmal an und hängst es an jede Bowl auf der Karte. Steigt der Becherpreis beim Lieferanten, änderst du ihn in der Inventurliste, und er läuft durch jedes Paket und jedes verknüpfte Gericht.</p>'+
+          '<p>Unten steht, was dein To-Go-Handling pro Gericht wirklich kostet. Als eigene Zahl, nicht versteckt im Wareneinsatz.</p>'+
+        '</div>'+
+      '</div></div>';
+    return sec;
+  }
+
+  function shut(){ var lb=document.getElementById('tspkres-lb'); if(!lb) return; lb.classList.remove('open','full'); document.body.style.overflow=''; if(lb.__raf) cancelAnimationFrame(lb.__raf); }
+
+  function ensureLb(){
+    var lb=document.getElementById('tspkres-lb'); if(lb) return lb;
+    lb=document.createElement('div'); lb.id='tspkres-lb';
+    var inner = SHOT
+      ? '<img src="'+SHOT+'" alt="DB Packaging — Pakete, Artikel und Kosten">'
+      : '<div class="pkr-phbig">Screenshot der DB Packaging folgt</div>';
+    lb.innerHTML='<button class="pkr-btn pkr-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
+      '<button class="pkr-btn pkr-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
+      '<div class="pkr-mbinner"><div class="pkr-mockup"><img class="pkr-frame" src="'+FRAME+'" alt="MacBook">'+
+        '<div class="pkr-screen">'+inner+'</div>'+
+      '</div></div>'+
+      '<div class="pkr-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    document.body.appendChild(lb);
+    var mbinner=lb.querySelector('.pkr-mbinner'), screen=lb.querySelector('.pkr-screen'), hint=lb.querySelector('.pkr-closehint');
+    lb.querySelector('.pkr-closex').addEventListener('click',shut);
+    lb.querySelector('.pkr-expand').addEventListener('click',function(e){ e.stopPropagation(); lb.classList.toggle('full'); });
+    mbinner.addEventListener('click',function(e){ e.stopPropagation(); });
+    lb.addEventListener('click',function(e){ if(e.target===lb) shut(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
+    screen.addEventListener('wheel', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
+    screen.addEventListener('touchstart', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
+    return lb;
+  }
+
+  function autoScroll(lb){
+    if(reduced || !SHOT) return;
+    var screen=lb.querySelector('.pkr-screen'), hint=lb.querySelector('.pkr-closehint');
+    var start=null, dur=11000;
+    function run(){
+      function step(ts){
+        if(!lb.classList.contains('open')) return;
+        if(!start) start=ts;
+        var max=screen.scrollHeight-screen.clientHeight;
+        if(max<=4){ lb.__raf=requestAnimationFrame(step); return; }
+        var t=Math.min(1,(ts-start)/dur);
+        var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+        screen.scrollTop=e*max;
+        if(t<1) lb.__raf=requestAnimationFrame(step);
+        else hint.style.opacity='0';
+      }
+      lb.__raf=requestAnimationFrame(step);
+    }
+    var img=screen.querySelector('img');
+    setTimeout(function(){
+      if(!lb.classList.contains('open')) return;
+      if(img && img.complete && img.naturalHeight) run();
+      else if(img) img.addEventListener('load',run,{once:true});
+    },420);
+  }
+
+  function open(){
+    var lb=ensureLb();
+    var screen=lb.querySelector('.pkr-screen'), hint=lb.querySelector('.pkr-closehint');
+    screen.scrollTop=0; hint.style.opacity='';
+    lb.classList.add('open'); document.body.style.overflow='hidden';
+    autoScroll(lb);
+  }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('tspkres'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tspkres')) return;
+    var anchor=document.getElementById('ts10wk')||document.querySelector('.ts10wk');
+    if(!anchor||!anchor.parentNode) return;
+    if(!document.getElementById('tspkres-css')){ var st=document.createElement('style'); st.id='tspkres-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    sec.querySelector('.pkr-tile').addEventListener('click',open);
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
+   allergene-bersicht — #tspkemp Abschnitt 07 Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   Muster: Abschnitts-Katalog 07 (#tszein / #tskmemp) — Verhalten 1:1
+   (Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat, Sync-Highlight + Goldlinie).
+   Links: der Packaging-Alltag in 4 Schritten, synchron zur rechten nummerierten Liste.
+   Sitzt zwischen Ergebnis-Blick (#tspkres) und den Learnings (#tsl).
+   ============================================================ */
+(function(){
+  if(window.__tspkemp) return;
+  function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
+  var STEPS=[
+    {n:'01', l:'Pakete schnüren'},
+    {n:'02', l:'Mengen setzen'},
+    {n:'03', l:'Gerichte verknüpfen'},
+    {n:'04', l:'Preise pflegen'}
+  ];
+  var CSS=`
+  #tspkemp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s ease}
+  #tspkemp.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  #tspkemp *{box-sizing:border-box}
+  #tspkemp::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #tspkemp::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #tspkemp.glow::before{opacity:1}
+  #tspkemp.beat{animation:tspkempBeat 2.6s ease-in-out}
+  @keyframes tspkempBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
+  #tspkemp .emp-grid{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #tspkemp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #tspkemp .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease}
+  #tspkemp .emp-link path.on{opacity:1}
+  #tspkemp .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #tspkemp .emp-link circle.on{opacity:1}
+  #tspkemp .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #tspkemp .emp-anim-hd{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.15rem;color:#fff;margin:0 0 6px}
+  #tspkemp .emp-anim-hd span{color:#c7b489}
+  #tspkemp .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
+  #tspkemp.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #tspkemp.in .emp-step:nth-child(1){transition-delay:.15s}#tspkemp.in .emp-step:nth-child(2){transition-delay:.28s}#tspkemp.in .emp-step:nth-child(3){transition-delay:.41s}#tspkemp.in .emp-step:nth-child(4){transition-delay:.54s}
+  #tspkemp .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #tspkemp .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #tspkemp .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #tspkemp .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #tspkemp .emp-step.on .emp-step-l{color:#fff}
+  #tspkemp .emp-text{position:relative;z-index:2}
+  #tspkemp .emp-h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #tspkemp .emp-h .eg{color:#c7b489}
+  #tspkemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  #tspkemp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #tspkemp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #tspkemp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #tspkemp .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  #tspkemp .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ #tspkemp .emp-grid{grid-template-columns:1fr;gap:26px} #tspkemp svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #tspkemp{transform:none;opacity:1} #tspkemp .emp-step{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tspkemp-css'))return; var s=document.createElement('style'); s.id='tspkemp-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tspkemp';
+    var stepsHtml=STEPS.map(function(s,i){ return '<div class="emp-step" data-i="'+i+'"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    el.innerHTML=`
+<div class="emp-grid">
+  <svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>
+  <div class="emp-anim">
+    <div class="emp-anim-hd">Dein <span>Packaging-Alltag</span></div>
+    ${stepsHtml}
+  </div>
+  <div class="emp-text">
+    <h3 class="emp-h">Empfehlung zur <span class="eg">Nutzung</span></h3>
+    <p class="emp-intro">Damit die DB Packaging im Alltag trägt, halte sie schlank und pflege sie an einer einzigen Stelle:</p>
+    <ol class="emp-ol">
+      <li data-i="0">Pakete nach Gebinde schnüren, nicht pro Gericht: <b>Bowl To-Go</b>, <b>Becher kalt</b>, <b>Becher heiß</b>. So bleibt die Liste kurz und du findest jedes Paket wieder.</li>
+      <li data-i="1">Die Stückzahl ehrlich eintragen: zwei Servietten, ein Besteckset, ein Deckel. Diese Genauigkeit entscheidet, wie belastbar dein Wareneinsatz am Ende ist.</li>
+      <li data-i="2">Nur die Gerichte verknüpfen, die wirklich to go rausgehen. Was ausschließlich <b>In-House</b> läuft, bleibt ohne Paket.</li>
+      <li data-i="3">Ändert der Lieferant den Stückpreis, pflegst du ihn in der <b>Inventurliste</b>, nie im Paket. Von dort zieht sich die Änderung überall nach.</li>
+    </ol>
+  </div>
+</div>`;
+    return el;
+  }
+  function drawLink(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect();
+    var a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2;
+    var x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function setup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ drawLink(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ drawLink(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tspkemp'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tspkemp')) return;
+    var anchor=document.getElementById('tspkres')||document.getElementById('ts10wk')||document.querySelector('.ts10wk');
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    setup(el);
+  }
+  window.__tspkemp=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    allergene-bersicht — Allergen-Warenkorb (#tsalgcart) — v4
    1:1-Nachbildung des globalen .tsshop-Regals (Größen exakt an
    /inventurliste gemessen: Titel 52px, Container 1280, Karten 4-spaltig
