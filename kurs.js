@@ -969,129 +969,168 @@
 })();
 
 /* ============================================================
-   key-metrics — #tskmtrend Abschnitt 06 Optionale Zweit-Animation "Der Trend zeigt es früher"
-   Konzept (Doktrin, aus Kontext): eine Kennzahl (Wareneinsatz %) über 6 Monate gegen eine Ziellinie ->
-   der Trend läuft über die Linie, die Kennzahl warnt früh. Clean/datengetrieben. One-Shot + Replay.
-   Sitzt hinter Warenkorb/Ergebnis-Blick (afterAnchor). Beispielwerte gekennzeichnet.
+   key-metrics — #tskmtrend Abschnitt 06 Zweit-Animation "Der Trend zeigt es früher"
+   NEUKONZEPTION (Robert 21.07.2026: "Animation neu, anders, sieht so billig aus" — vorher generisches Liniendiagramm).
+   Konzept (Doktrin, aus dem Seitenkontext): "Die Zeile wird zur Kurve". Die Monatszeilen der Kostenauswertung
+   Master erscheinen wie in der Tabelle; beim Aufleuchten einer Zeile setzt sich ihr Wareneinsatz-Wert als Punkt
+   in die Kurve. Danach zieht die Ziellinie durch, die Kurve verbindet sich, und die Monate ueber 28 % kippen ins Rot.
+   Damit erzaehlt der Abschnitt die Seite weiter (Zeile -> Kennzahl -> Trend) statt ein Standard-Chart zu zeigen.
+   Re-render-fest nach Qualitaets-Gesetz P10: Endzustand = Default, self-healing Trigger, root lokal.
    ============================================================ */
 (function(){
-  if(window.__tskmtrend) return;
+  if(window.__tskmtrend) return; window.__tskmtrend=true;
   function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
+
   var MON=['Jan','Feb','Mär','Apr','Mai','Jun'];
-  var VAL=[27.6,28.1,28.4,29.3,30.8,30.2]; /* Beispielwerte Wareneinsatz % je Monat */
+  var VAL=[27.6,28.1,28.4,29.3,30.8,30.2];   /* Beispielwerte Wareneinsatz % je Monat (SSOT, nicht neu erfinden) */
   var TARGET=28.0;
-  var YMIN=26, YMAX=32;
-  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
+  var W=580,H=300,PADL=46,PADR=20,PADT=28,PADB=36,LO=26,HI=32;
+  function xg(i){ return PADL + i*(W-PADL-PADR)/(VAL.length-1); }
+  function yg(v){ return PADT + (HI-v)/(HI-LO)*(H-PADT-PADB); }
+  function fmt(v){ return v.toFixed(1).replace('.',',')+' %'; }
 
   var CSS=`
-  #tskmtrend{width:100vw;max-width:100vw;margin:60px 0 16px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tskmtrend{width:100vw;max-width:100vw;margin:64px 0 16px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tskmtrend *{box-sizing:border-box}
-  #tskmtrend .tr-head{max-width:820px;margin:0 auto 30px;text-align:center}
-  #tskmtrend .tr-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tskmtrend .tr-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tskmtrend .tr-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px}
-  #tskmtrend .tr-title span{color:#c7b489}
-  #tskmtrend .tr-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
-  #tskmtrend .tr-wrap{max-width:880px;margin:0 auto;opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
-  #tskmtrend .tr-wrap.on{opacity:1;transform:none}
-  #tskmtrend .tr-chart{position:relative;width:100%}
+  #tskmtrend .tt-head{max-width:820px;margin:0 auto 34px;text-align:center}
+  #tskmtrend .tt-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tskmtrend .tt-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  /* Zweit-Animation hat ihren EIGENEN Titel-Standard (kleiner als die Haupt-Erklaeranimation -> Hierarchie) */
+  #tskmtrend .tt-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12;font-size:clamp(24px,3.2vw,36px);margin:0 0 12px}
+  #tskmtrend .tt-title span{color:#c7b489}
+  #tskmtrend .tt-sub{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0;max-width:640px;margin-left:auto;margin-right:auto}
+
+  #tskmtrend .tt-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(210px,.62fr) minmax(320px,1fr);gap:clamp(24px,3.6vw,52px);align-items:center}
+  #tskmtrend .tt-rowlbl{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+  #tskmtrend .tt-rows{display:flex;flex-direction:column;gap:7px}
+  /* opake Basis (Katalog 02): sonst scheinen Linien/Hintergrund durch */
+  #tskmtrend .tt-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 13px;border-radius:10px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.10);
+    transition:border-color .45s ease,box-shadow .45s ease,background .45s ease}
+  #tskmtrend .tt-row .m{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.62);letter-spacing:.02em}
+  #tskmtrend .tt-row .v{font-size:14px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums}
+  #tskmtrend .tt-row.lit{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.13),0 14px 30px -16px rgba(199,180,137,.4)}
+  #tskmtrend .tt-row.over{border-color:rgba(227,93,118,.55);box-shadow:0 0 0 1px rgba(227,93,118,.14),0 14px 30px -16px rgba(227,93,118,.42)}
+  #tskmtrend .tt-row.over .v{color:#e35d76}
+  #tskmtrend .tt-chart{position:relative}
   #tskmtrend svg{display:block;width:100%;height:auto;overflow:visible}
-  #tskmtrend .tr-grid{stroke:rgba(255,255,255,.08);stroke-width:1}
-  #tskmtrend .tr-glabel{fill:rgba(255,255,255,.4);font-size:11px;font-family:inherit}
-  #tskmtrend .tr-mlabel{fill:rgba(255,255,255,.62);font-size:12px;font-weight:600;font-family:inherit;text-anchor:middle}
-  #tskmtrend .tr-target{stroke:rgba(255,255,255,.34);stroke-width:1.5;stroke-dasharray:5 6;opacity:0;transition:opacity .5s ease}
-  #tskmtrend .tr-target.on{opacity:1}
-  #tskmtrend .tr-tlabel{fill:rgba(255,255,255,.5);font-size:11px;font-weight:600;font-family:inherit;opacity:0;transition:opacity .5s ease}
-  #tskmtrend .tr-tlabel.on{opacity:1}
-  #tskmtrend .tr-area{fill:url(#trArea);opacity:0;transition:opacity .7s ease}
-  #tskmtrend .tr-area.on{opacity:1}
-  #tskmtrend .tr-line{fill:none;stroke:#c7b489;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 6px rgba(199,180,137,.35))}
-  #tskmtrend .tr-dot{opacity:0}
-  #tskmtrend .tr-dot.on{opacity:1;transition:opacity .3s ease,transform .4s cubic-bezier(.34,1.56,.64,1)}
-  #tskmtrend .tr-dot circle{stroke:#05060b;stroke-width:2}
-  #tskmtrend .tr-dot.below circle{fill:#c7b489}
-  #tskmtrend .tr-dot.above circle{fill:#e32552}
-  #tskmtrend .tr-dotv{fill:#fff;font-size:11.5px;font-weight:700;font-family:inherit;text-anchor:middle}
-  #tskmtrend .tr-dot.above .tr-dotv{fill:#f2889f}
-  #tskmtrend .tr-note{max-width:660px;margin:20px auto 0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.7);text-align:center}
-  #tskmtrend .tr-note b{color:#efe6d2;font-weight:700}
-  #tskmtrend .tr-note .warn{color:#f2889f;font-weight:700}
-  #tskmtrend .tr-foot{display:flex;justify-content:center;margin-top:22px}
-  #tskmtrend .tr-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s,border-color .4s,color .4s,transform .4s}
-  #tskmtrend .tr-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
-  #tskmtrend .tr-replay svg{width:15px;height:15px}
-  @media(max-width:640px){ #tskmtrend .tr-dotv{font-size:10px} }
-  @media(prefers-reduced-motion:reduce){ #tskmtrend .tr-wrap{opacity:1;transform:none} }
+  #tskmtrend .tt-grid{stroke:rgba(255,255,255,.07);stroke-width:1}
+  #tskmtrend .tt-ax{fill:rgba(255,255,255,.42);font-size:11px;font-family:inherit}
+  #tskmtrend .tt-mx{fill:rgba(255,255,255,.55);font-size:11.5px;font-weight:600;font-family:inherit;text-anchor:middle}
+  #tskmtrend .tt-target{stroke:rgba(255,255,255,.34);stroke-width:1.5;stroke-dasharray:5 6}
+  #tskmtrend .tt-tlabel{fill:rgba(255,255,255,.5);font-size:11px;font-weight:600;font-family:inherit}
+  #tskmtrend .tt-line{fill:none;stroke:#c7b489;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 7px rgba(199,180,137,.32))}
+  #tskmtrend .tt-dot circle{fill:#c7b489;stroke:#05060b;stroke-width:2}
+  #tskmtrend .tt-dot.over circle{fill:#e35d76}
+  #tskmtrend .tt-dot text{fill:#efe6d2;font-size:11.5px;font-weight:700;font-family:inherit;font-variant-numeric:tabular-nums}
+  #tskmtrend .tt-dot.over text{fill:#e35d76}
+  #tskmtrend .tt-note{max-width:700px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
+  #tskmtrend .tt-note b{color:#c7b489;font-weight:600}
+  #tskmtrend .tt-note .warn{color:#e35d76;font-weight:600}
+  #tskmtrend .tt-foot{display:flex;justify-content:center;margin-top:24px}
+  #tskmtrend .tt-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .4s ease}
+  #tskmtrend .tt-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tskmtrend .tt-replay svg{width:15px;height:15px}
+
+  /* --- Animationszustaende: NUR waehrend .playing. Default = Endzustand (P10) --- */
+  #tskmtrend .tt-wrap.playing .tt-row{opacity:0;transform:translateX(-12px);animation:ttRow .55s cubic-bezier(.34,1.56,.64,1) both}
+  #tskmtrend .tt-wrap.playing .tt-target,#tskmtrend .tt-wrap.playing .tt-tlabel{opacity:0;animation:ttFade .5s ease forwards}
+  #tskmtrend .tt-wrap.playing .tt-dot{opacity:0;transform:scale(.4);animation:ttDot .5s cubic-bezier(.34,1.56,.64,1) both}
+  #tskmtrend .tt-wrap.playing .tt-row:not(.lit):not(.over){border-color:rgba(255,255,255,.10);box-shadow:none}
+  @keyframes ttRow{to{opacity:1;transform:none}}
+  @keyframes ttFade{to{opacity:1}}
+  @keyframes ttDot{to{opacity:1;transform:none}}
+
+  @media(max-width:860px){
+    #tskmtrend .tt-wrap{grid-template-columns:1fr;gap:22px}
+    #tskmtrend .tt-rows{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #tskmtrend .tt-wrap.playing .tt-row,#tskmtrend .tt-wrap.playing .tt-dot,
+    #tskmtrend .tt-wrap.playing .tt-target,#tskmtrend .tt-wrap.playing .tt-tlabel{animation:none!important;opacity:1!important;transform:none!important}
+  }
   `;
   function injectCSS(){ if(document.getElementById('tskmtrend-css'))return; var s=document.createElement('style'); s.id='tskmtrend-css'; s.textContent=CSS; document.head.appendChild(s); }
 
-  var W=880,H=340,PADL=44,PADR=20,PADT=24,PADB=40;
-  function xg(i){ return PADL+(W-PADL-PADR)*(i/(MON.length-1)); }
-  function yg(v){ return PADT+(H-PADT-PADB)*(1-(v-YMIN)/(YMAX-YMIN)); }
-  function linePath(){ var d=''; for(var i=0;i<VAL.length;i++){ d+=(i?' L ':'M ')+xg(i).toFixed(1)+' '+yg(VAL[i]).toFixed(1); } return d; }
-  function areaPath(){ var d='M '+xg(0).toFixed(1)+' '+yg(YMIN).toFixed(1); for(var i=0;i<VAL.length;i++){ d+=' L '+xg(i).toFixed(1)+' '+yg(VAL[i]).toFixed(1); } d+=' L '+xg(VAL.length-1).toFixed(1)+' '+yg(YMIN).toFixed(1)+' Z'; return d; }
-
   function build(){
     var el=document.createElement('div'); el.id='tskmtrend';
-    var grid=''; [26,28,30,32].forEach(function(v){ var y=yg(v).toFixed(1); grid+='<line class="tr-grid" x1="'+PADL+'" y1="'+y+'" x2="'+(W-PADR)+'" y2="'+y+'"/><text class="tr-glabel" x="'+(PADL-8)+'" y="'+(+y+4)+'" text-anchor="end">'+v+'%</text>'; });
-    var mlabels=''; for(var i=0;i<MON.length;i++){ mlabels+='<text class="tr-mlabel" x="'+xg(i).toFixed(1)+'" y="'+(H-PADB+22)+'">'+MON[i]+'</text>'; }
-    var dots=''; for(var i=0;i<VAL.length;i++){ var above=VAL[i]>TARGET; dots+='<g class="tr-dot '+(above?'above':'below')+'" data-i="'+i+'" style="transform-origin:'+xg(i).toFixed(1)+'px '+yg(VAL[i]).toFixed(1)+'px"><circle cx="'+xg(i).toFixed(1)+'" cy="'+yg(VAL[i]).toFixed(1)+'" r="5.5"/><text class="tr-dotv" x="'+xg(i).toFixed(1)+'" y="'+(yg(VAL[i])-13).toFixed(1)+'">'+VAL[i].toFixed(1).replace('.',',')+'</text></g>'; }
+    var rows=''; for(var i=0;i<MON.length;i++){
+      var over=VAL[i]>TARGET;
+      rows+='<div class="tt-row'+(over?' over':' lit')+'" data-i="'+i+'"><span class="m">'+MON[i]+'</span><span class="v">'+fmt(VAL[i])+'</span></div>';
+    }
+    var grid=''; for(var g=LO;g<=HI;g+=2){ grid+='<line class="tt-grid" x1="'+PADL+'" y1="'+yg(g).toFixed(1)+'" x2="'+(W-PADR)+'" y2="'+yg(g).toFixed(1)+'"/>'+
+      '<text class="tt-ax" x="'+(PADL-9)+'" y="'+(yg(g)+4).toFixed(1)+'" text-anchor="end">'+g+'</text>'; }
+    var mx=''; for(var k=0;k<MON.length;k++){ mx+='<text class="tt-mx" x="'+xg(k).toFixed(1)+'" y="'+(H-PADB+20)+'">'+MON[k]+'</text>'; }
+    var d=''; for(var j=0;j<VAL.length;j++){ d+=(j?' L ':'M ')+xg(j).toFixed(1)+' '+yg(VAL[j]).toFixed(1); }
+    var dots=''; for(var n=0;n<VAL.length;n++){ var ov=VAL[n]>TARGET;
+      var anch = n===0 ? 'start' : (n===VAL.length-1 ? 'end' : 'middle');
+      var tx = n===0 ? xg(n)+9 : (n===VAL.length-1 ? xg(n)-9 : xg(n));
+      dots+='<g class="tt-dot'+(ov?' over':'')+'" data-i="'+n+'" style="transform-origin:'+xg(n).toFixed(1)+'px '+yg(VAL[n]).toFixed(1)+'px">'+
+        '<circle cx="'+xg(n).toFixed(1)+'" cy="'+yg(VAL[n]).toFixed(1)+'" r="5.4"/>'+
+        '<text text-anchor="'+anch+'" x="'+tx.toFixed(1)+'" y="'+(yg(VAL[n])-13).toFixed(1)+'">'+VAL[n].toFixed(1).replace('.',',')+'</text></g>'; }
     el.innerHTML=`
-<div class="tr-head">
-  <div class="tr-eyebrow">Kennzahlen über die Zeit</div>
-  <h2 class="tr-title">Der Trend zeigt es <span>früher</span>.</h2>
-  <p class="tr-sub">Eine einzelne Zahl sagt wenig. Die Reihe über die Monate zeigt, wohin es läuft — Beispiel: dein Wareneinsatz gegen die Ziellinie von 28 %.</p>
+<div class="tt-head">
+  <div class="tt-eyebrow">Kennzahlen über die Zeit</div>
+  <h2 class="tt-title">Der Trend zeigt es <span>früher</span>.</h2>
+  <p class="tt-sub">Eine einzelne Zahl sagt wenig. Erst die Reihe über die Monate zeigt, wohin es läuft — hier dein Wareneinsatz gegen die Ziellinie von 28 %.</p>
 </div>
-<div class="tr-wrap">
-  <div class="tr-chart">
-    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Wareneinsatz in Prozent über sechs Monate">
-      <defs><linearGradient id="trArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7b489" stop-opacity="0.22"/><stop offset="1" stop-color="#c7b489" stop-opacity="0"/></linearGradient></defs>
-      ${grid}
-      <path class="tr-area" d="${areaPath()}"/>
-      <line class="tr-target" x1="${PADL}" y1="${yg(TARGET).toFixed(1)}" x2="${W-PADR}" y2="${yg(TARGET).toFixed(1)}"/>
-      <text class="tr-tlabel" x="${W-PADR}" y="${(yg(TARGET)-7).toFixed(1)}" text-anchor="end">Ziel 28 %</text>
-      <path class="tr-line" d="${linePath()}"/>
-      ${mlabels}
+<div class="tt-wrap">
+  <div>
+    <div class="tt-rowlbl">Kostenauswertung Master</div>
+    <div class="tt-rows">${rows}</div>
+  </div>
+  <div class="tt-chart">
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      ${grid}${mx}
+      <line class="tt-target" x1="${PADL}" y1="${yg(TARGET).toFixed(1)}" x2="${W-PADR}" y2="${yg(TARGET).toFixed(1)}"/>
+      <text class="tt-tlabel" x="${W-PADR}" y="${(yg(TARGET)-8).toFixed(1)}" text-anchor="end">Ziel 28 %</text>
+      <path class="tt-line" d="${d}"/>
       ${dots}
     </svg>
   </div>
-  <p class="tr-note">Bis <b>März</b> im Rahmen — ab <span class="warn">April</span> über der Ziellinie. Die Kennzahl warnt dich, <b>bevor</b> der Monatsabschluss es tut.</p>
-  <div class="tr-foot"><button class="tr-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>
-</div>`;
-    el.querySelector('.tr-replay').addEventListener('click',function(){ play(el, true); });
+</div>
+<p class="tt-note">Schon ab <span class="warn">Februar</span> liegt der Wareneinsatz über der Ziellinie — ab <span class="warn">April</span> zieht er deutlich weg. Die Kennzahl warnt dich, <b>bevor</b> der Monatsabschluss es tut.</p>
+<div class="tt-foot"><button class="tt-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>`;
+    el.querySelector('.tt-replay').addEventListener('click',function(){ play(el,true); });
     return el;
   }
 
-  var timers=[];
-  function play(root, force){
-    if(!root) return;
-    if(root.__playing) return;
-    if(root.__played && !force) return;
+  function play(root,force){
+    if(!root||root.__playing) return;
+    if(root.__played&&!force) return;
     root.__played=true; root.__playing=true;
-    timers.forEach(clearTimeout); timers=[];
-    function T(fn,ms){ timers.push(setTimeout(fn,ms)); }
-    var wrap=root.querySelector('.tr-wrap');
-    var line=root.querySelector('.tr-line'), area=root.querySelector('.tr-area'), target=root.querySelector('.tr-target'), tlabel=root.querySelector('.tr-tlabel');
-    var dots=root.querySelectorAll('.tr-dot');
-    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    // reset
-    wrap.classList.add('on');
+    var wrap=root.querySelector('.tt-wrap'); if(!wrap){ root.__playing=false; return; }
+    var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var rows=root.querySelectorAll('.tt-row'), dots=root.querySelectorAll('.tt-dot');
+    var line=root.querySelector('.tt-line');
+    if(root.__t){ root.__t.forEach(clearTimeout); } root.__t=[];
+    function T(f,ms){ root.__t.push(setTimeout(f,ms)); }
+    if(reduced){ wrap.classList.remove('playing'); line.style.strokeDasharray='none'; line.style.strokeDashoffset='0'; root.__playing=false; return; }
+
+    /* Reset auf Startzustand */
+    wrap.classList.remove('playing'); void wrap.offsetWidth; wrap.classList.add('playing');
+    rows.forEach(function(r,i){ r.classList.remove('lit','over'); r.style.animationDelay=(200+i*120)+'ms'; });
+    dots.forEach(function(dd,i){ dd.style.animationDelay=(1500+i*150)+'ms'; });
+    var tl=root.querySelector('.tt-target'), tlab=root.querySelector('.tt-tlabel');
+    tl.style.animationDelay='1050ms'; tlab.style.animationDelay='1150ms';
     var L=line.getTotalLength();
     line.style.transition='none'; line.style.strokeDasharray=L; line.style.strokeDashoffset=L; line.getBoundingClientRect();
-    area.classList.remove('on'); target.classList.remove('on'); tlabel.classList.remove('on');
-    Array.prototype.forEach.call(dots,function(d){ d.classList.remove('on'); d.style.transform='scale(.4)'; });
-    if(reduced){
-      line.style.transition='none'; line.style.strokeDashoffset='0'; area.classList.add('on'); target.classList.add('on'); tlabel.classList.add('on');
-      Array.prototype.forEach.call(dots,function(d){ d.classList.add('on'); d.style.transform='none'; });
-      root.__playing=false; return;
-    }
-    T(function(){ target.classList.add('on'); tlabel.classList.add('on'); }, 250);
-    T(function(){ line.style.transition='stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1)'; line.style.strokeDashoffset='0'; area.classList.add('on'); }, 550);
-    Array.prototype.forEach.call(dots,function(d,i){ T(function(){ d.classList.add('on'); d.style.transform='none'; }, 700+i*230); });
-    T(function(){ root.__playing=false; }, 700+dots.length*230+400);
+    line.style.transition='stroke-dashoffset 1.05s cubic-bezier(.16,1,.3,1) 1650ms'; line.style.strokeDashoffset='0';
+
+    /* Zeile leuchtet auf, wenn ihr Punkt sitzt -> Zeile und Kurve gehoeren sichtbar zusammen */
+    rows.forEach(function(r,i){
+      T(function(){ r.classList.add(VAL[i]>TARGET?'over':'lit'); }, 1560+i*150);
+    });
+    T(function(){ root.__playing=false; }, 3400);
   }
 
-  function tryPlay(){ if(!on())return; var el=document.getElementById('tskmtrend'); if(!el||el.__played)return; var r=el.getBoundingClientRect(); if(r.top<window.innerHeight*0.82 && r.bottom>60) play(el); }
+  function tryPlay(){
+    if(!on()) return;
+    var el=document.getElementById('tskmtrend'); if(!el||el.__played) return;
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.82 && r.bottom>60) play(el);
+  }
+  function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
   function mount(){
     if(!on()){ var e=document.getElementById('tskmtrend'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tskmtrend')) return;
@@ -1101,11 +1140,11 @@
     anchor.parentNode.insertBefore(el, anchor.nextSibling);
     tryPlay();
   }
-  window.__tskmtrend=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', tryPlay, {passive:true});
+  window.addEventListener('resize', tryPlay);
 })();
 
 /* ============================================================
