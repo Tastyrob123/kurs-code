@@ -1447,122 +1447,147 @@
   /* ===== #tsbau — Bausteinprinzip: EIN Teller, drei Freiheiten (Cross-Fade-Beats) ===== */
   #tsbau{width:100vw;max-width:100vw;margin:52px 0 12px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsbau *{box-sizing:border-box}
-  #tsbau .bau-head{max-width:820px;margin:0 auto 34px;text-align:center}
-  #tsbau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:14px}
+  #tsbau .bau-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
+  #tsbau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
   #tsbau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   #tsbau .bau-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
-  #tsbau .bau-title span{color:#c7b489}
+  #tsbau .bau-title .ts-gold{color:#c7b489}
   #tsbau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0}
 
-  #tsbau .bau-wrap{max-width:980px;margin:0 auto;opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .95s cubic-bezier(.16,1,.3,1)}
-  #tsbau .bau-wrap.on{opacity:1;transform:none}
+  /* Grunddefault: sichtbar. Erst wenn JS laeuft (.js) wird animationsabhaengig versteckt. */
+  #tsbau .bau-wrap{max-width:980px;margin:0 auto}
+  #tsbau.js .bau-wrap{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+  #tsbau.js .bau-wrap.on{opacity:1;transform:none}
 
   /* step rail */
   #tsbau .bau-steps{display:flex;justify-content:center;gap:clamp(9px,1.6vw,18px);margin-bottom:34px;flex-wrap:wrap}
-  #tsbau .bau-step{display:inline-flex;align-items:center;gap:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:9px 20px 9px 11px;color:rgba(255,255,255,.6);cursor:pointer;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s ease,color .5s ease,box-shadow .5s ease;font-family:inherit}
-  #tsbau .bau-step-n{font-size:11px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.42);background:rgba(255,255,255,.06);border-radius:50%;width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;transition:background .5s ease,color .5s ease;font-variant-numeric:tabular-nums}
+  #tsbau .bau-step{display:inline-flex;align-items:center;gap:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:9px 20px 9px 11px;color:rgba(255,255,255,.6);cursor:pointer;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);font-family:inherit}
+  #tsbau .bau-step-n{font-size:11px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.42);background:rgba(255,255,255,.06);border-radius:50%;width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1);font-variant-numeric:tabular-nums}
   #tsbau .bau-step-l{font-size:13.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
   #tsbau .bau-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.16),0 14px 34px -14px rgba(199,180,137,.45)}
   #tsbau .bau-step.on .bau-step-n{background:#c7b489;color:#05060b}
 
-  /* stage */
+  /* stage — ohne JS steht Szene 1 mit Endwerten da */
   #tsbau .bau-stage{position:relative;height:420px;margin:0 auto}
-  #tsbau .bau-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,20px);opacity:0;pointer-events:none;transition:opacity .6s ease}
-  #tsbau .bau-scene.on{opacity:1;pointer-events:auto}
+  #tsbau .bau-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,20px);opacity:0;pointer-events:none;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+  #tsbau .bau-scene[data-i="0"]{opacity:1;pointer-events:auto}
+  #tsbau.js .bau-scene,#tsbau.js .bau-scene[data-i="0"]{opacity:0;pointer-events:none}
+  #tsbau.js .bau-scene.on{opacity:1;pointer-events:auto}
 
   /* medallions */
-  #tsbau .bau-med{border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}
-  #tsbau .bau-hero{width:196px;height:196px;border-width:1.5px}
+  #tsbau .bau-med{border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055)}
+  #tsbau .bau-hero{width:196px;height:196px}
   #tsbau .bau-node{display:flex;flex-direction:column;align-items:center;gap:12px}
   #tsbau .bau-tag{font-size:11px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62);text-align:center}
   #tsbau .bau-tag b{color:#efe6d2;font-weight:700}
+  #tsbau .bau-note{font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
 
   /* price chip */
   #tsbau .bau-chip{display:inline-flex;align-items:center;gap:9px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.34);border-radius:999px;padding:7px 15px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   #tsbau .bau-chip-k{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
   #tsbau .bau-chip-v{font-size:15px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;min-width:58px;text-align:right}
 
-  /* connectors */
+  /* connectors — Loop 3.4s mit Ruhephase */
   #tsbau .bau-conn{position:relative;width:clamp(34px,5.5vw,80px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.04),rgba(199,180,137,.5),rgba(199,180,137,.04))}
   #tsbau .bau-conn::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
-  #tsbau .bau-scene.on .bau-conn::after{animation:bauPulse 1.9s cubic-bezier(.45,0,.25,1) infinite}
-  #tsbau .bau-scene.on .bau-conn.rev::after{animation:bauPulseRev 1.9s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-scene.on .bau-conn::after{animation:bauPulse 3.4s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-scene.on .bau-conn.rev::after{animation:bauPulseRev 3.4s cubic-bezier(.45,0,.25,1) infinite}
+  /* Szene 1: Punkt laeuft NUR beim Wechsel los */
+  #tsbau.js .bau-scene.on .bau-conn.once::after{animation:none}
+  #tsbau.js .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
+
+  #tsbau .bau-vconn{position:relative;width:2px;height:24px;margin:8px 0;flex:0 0 auto;border-radius:2px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.55),rgba(199,180,137,.05))}
+  #tsbau .bau-vconn::after{content:"";position:absolute;left:50%;top:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
+  #tsbau.js .bau-scene.on .bau-vconn.up::after{animation:bauPulseUp 3.4s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau.js .bau-scene.on .bau-vconn.down::after{animation:bauPulseDown 3.4s cubic-bezier(.45,0,.25,1) infinite}
 
   /* SCENE 1 — Tauschen */
   #tsbau .bau-swap{position:relative;display:flex;align-items:center;gap:14px}
   #tsbau .bau-swap .bau-med{width:96px;height:96px}
-  #tsbau .bau-swapicon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,13,20,.92);border:1px solid rgba(199,180,137,.6);color:#d8c9ab;box-shadow:0 8px 22px rgba(0,0,0,.65);flex:0 0 auto}
-  #tsbau .bau-scene.on .bau-swapicon{animation:bauSpin 3.4s ease-in-out infinite}
-  #tsbau .bau-old{position:relative}
-  #tsbau .bau-old::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(5,6,11,.55);opacity:0;transition:opacity .7s ease}
-  #tsbau .bau-scene.on .bau-old::after{animation:bauDim 3.4s ease-in-out infinite}
-  #tsbau .bau-new{opacity:.35;transform:scale(.9);transition:none}
-  #tsbau .bau-scene.on .bau-new{animation:bauGlow 3.4s ease-in-out infinite}
+  #tsbau.js .bau-swap .bau-med{opacity:.28;transform:scale(.92);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+  #tsbau.js .bau-swap .bau-med.lit{opacity:1;transform:scale(1);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.17),0 0 34px rgba(199,180,137,.42)}
+  #tsbau .bau-swapicon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,13,20,.92);border:1px solid rgba(199,180,137,.6);color:#d8c9ab;box-shadow:0 8px 22px rgba(0,0,0,.65);flex:0 0 auto;transition:transform .75s cubic-bezier(.16,1,.3,1)}
+  #tsbau .bau-scene.swapb .bau-swapicon{transform:rotate(180deg)}
 
   /* SCENE 2 — Mehrfach nutzen */
-  #tsbau .bau-sat .bau-med{width:104px;height:104px;opacity:0;transform:scale(.8)}
-  #tsbau .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
-  #tsbau .bau-scene.on .bau-sat.s1 .bau-med{animation-delay:.3s}
-  #tsbau .bau-scene.on .bau-sat.s2 .bau-med{animation-delay:.5s}
+  #tsbau .bau-sat .bau-med{width:104px;height:104px}
   #tsbau .bau-center .bau-med{width:150px;height:150px}
-  #tsbau .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s ease-in-out infinite}
+  #tsbau.js .bau-sat .bau-med{opacity:0;transform:scale(.8)}
+  #tsbau.js .bau-scene.on .bau-sat .bau-med{animation:bauSatIn .7s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau.js .bau-scene.on .bau-sat.s1 .bau-med{animation-delay:.3s}
+  #tsbau.js .bau-scene.on .bau-sat.s2 .bau-med{animation-delay:.5s}
+  #tsbau.js .bau-scene.on .bau-center .bau-med{animation:bauBreath 3.6s cubic-bezier(.45,0,.25,1) infinite}
 
-  /* SCENE 3 — Schachteln (Fluss: Zutaten -> Pesto -> Gericht) */
-  #tsbau .bau-flow{flex-direction:column;gap:0}
-  #tsbau .bau-flow-row{display:flex;gap:14px;justify-content:center;align-items:center}
-  #tsbau .bau-flow .bau-nm{width:60px;height:60px;opacity:0;transform:translateY(12px) scale(.78)}
-  #tsbau .bau-scene.on .bau-nm{animation:bauPop .6s cubic-bezier(.34,1.56,.64,1) both}
-  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(1){animation-delay:.25s}
-  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(2){animation-delay:.4s}
-  #tsbau .bau-scene.on .bau-flow-row .bau-nm:nth-child(3){animation-delay:.55s}
-  #tsbau .bau-vline{width:2px;background:linear-gradient(180deg,rgba(199,180,137,.7),rgba(199,180,137,.12));height:22px;margin:9px 0}
-  #tsbau .bau-pesto{width:90px;height:90px}
-  #tsbau .bau-scene.on .bau-pesto{animation:bauBreath 3.6s ease-in-out infinite}
-  #tsbau .bau-assemble{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.3vw,15px)}
-  #tsbau .bau-dish{width:120px;height:120px}
-  #tsbau .bau-sm{width:54px;height:54px;opacity:0;transform:scale(.8)}
-  #tsbau .bau-scene.on .bau-side .bau-sm{animation:bauSatIn .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.75s}
+  /* SCENE 3 — Schachteln: seitlicher Fluss */
+  #tsbau .bau-zcol{display:flex;flex-direction:column;gap:10px}
+  #tsbau .bau-zcol .bau-nm{width:52px;height:52px}
+  #tsbau.js .bau-zcol .bau-nm{opacity:0;transform:translateX(-10px) scale(.8)}
+  #tsbau.js .bau-scene.on .bau-nm{animation:bauPopX .6s cubic-bezier(.34,1.56,.64,1) both}
+  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(1){animation-delay:.22s}
+  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(2){animation-delay:.36s}
+  #tsbau.js .bau-scene.on .bau-zcol .bau-nm:nth-child(3){animation-delay:.5s}
+  #tsbau .bau-pesto{width:92px;height:92px}
+  #tsbau.js .bau-scene.on .bau-pesto{animation:bauBreath 3.6s cubic-bezier(.45,0,.25,1) infinite}
+  #tsbau .bau-dishgrp{position:relative;display:flex;flex-direction:column;align-items:center;gap:0}
+  #tsbau .bau-dishtag{position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:14px;white-space:nowrap;text-align:left}
+  #tsbau .bau-dish{width:128px;height:128px}
+  #tsbau .bau-sm{width:50px;height:50px}
+  #tsbau.js .bau-sm{opacity:0;transform:scale(.8)}
+  #tsbau.js .bau-scene.on .bau-sm{animation:bauSatIn .6s cubic-bezier(.34,1.56,.64,1) both;animation-delay:.72s}
 
-  /* replay */
+  /* caption + replay */
+  #tsbau .bau-cap{max-width:720px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center}
   #tsbau .bau-foot{display:flex;justify-content:center;margin-top:28px}
-  #tsbau .bau-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s ease,border-color .4s ease,color .4s ease,transform .4s ease}
+  #tsbau .bau-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
   #tsbau .bau-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
   #tsbau .bau-replay svg{width:15px;height:15px}
 
-  @keyframes bauPulse{0%{left:0;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:100%;opacity:0}}
-  @keyframes bauPulseRev{0%{left:100%;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:0;opacity:0}}
-  @keyframes bauSpin{0%,44%{transform:rotate(0)}56%,100%{transform:rotate(180deg)}}
-  @keyframes bauDim{0%,40%{opacity:0}60%,100%{opacity:.55}}
-  @keyframes bauGlow{0%,40%{opacity:.32;transform:scale(.9)}60%,100%{opacity:1;transform:scale(1)}}
-  @keyframes bauPop{to{opacity:1;transform:none}}
+  /* Hintergrund-Tab: alles anhalten */
+  #tsbau.hid *{animation-play-state:paused !important}
+
+  @keyframes bauPulse{0%{left:0;opacity:0}6%{opacity:1}50%{left:100%;opacity:1}56%{left:100%;opacity:0}100%{left:100%;opacity:0}}
+  @keyframes bauPulseRev{0%{left:100%;opacity:0}6%{opacity:1}50%{left:0;opacity:1}56%{left:0;opacity:0}100%{left:0;opacity:0}}
+  @keyframes bauPulseUp{0%{top:100%;opacity:0}6%{opacity:1}50%{top:0;opacity:1}56%{top:0;opacity:0}100%{top:0;opacity:0}}
+  @keyframes bauPulseDown{0%{top:0;opacity:0}6%{opacity:1}50%{top:100%;opacity:1}56%{top:100%;opacity:0}100%{top:100%;opacity:0}}
+  @keyframes bauPulseOnce{0%{left:0;opacity:0}12%{opacity:1}86%{opacity:1}100%{left:100%;opacity:0}}
+  @keyframes bauPopX{to{opacity:1;transform:none}}
   @keyframes bauSatIn{to{opacity:1;transform:none}}
-  @keyframes bauBreath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05)}50%{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.14),0 0 34px rgba(199,180,137,.28)}}
+  @keyframes bauBreath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055)}50%{box-shadow:0 20px 52px -16px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.14),0 0 34px rgba(199,180,137,.28)}}
 
   @media(max-width:820px){
-    #tsbau .bau-stage{height:auto;min-height:480px;display:flex;align-items:center;justify-content:center}
+    #tsbau .bau-stage{height:auto;min-height:470px;display:flex;align-items:center;justify-content:center}
     #tsbau .bau-scene{position:relative;inset:auto;width:100%;display:none;flex-direction:column;gap:14px}
-    #tsbau .bau-scene.on{display:flex}
+    #tsbau .bau-scene[data-i="0"]{display:flex}
+    #tsbau.js .bau-scene,#tsbau.js .bau-scene[data-i="0"]{display:none}
+    #tsbau.js .bau-scene.on{display:flex}
     #tsbau .bau-hero{width:150px;height:150px}
     #tsbau .bau-center .bau-med{width:128px;height:128px}
     #tsbau .bau-sat .bau-med{width:94px;height:94px}
     #tsbau .bau-swap{flex-direction:row}
     #tsbau .bau-swap .bau-med{width:78px;height:78px}
+    #tsbau .bau-zcol{flex-direction:row}
+    #tsbau .bau-zcol .bau-nm{width:50px;height:50px}
     #tsbau .bau-pesto{width:86px;height:86px}
-    #tsbau .bau-dish{width:110px;height:110px}
-    #tsbau .bau-flow .bau-nm{width:54px;height:54px}
-    #tsbau .bau-sm{width:50px;height:50px}
+    #tsbau .bau-dish{width:112px;height:112px}
+    #tsbau .bau-sm{width:46px;height:46px}
+    #tsbau .bau-dishtag{position:static;transform:none;margin:10px 0 0;white-space:normal;text-align:center}
+    /* Connector wird vertikal -> Punkt laeuft vertikal (bleibt sichtbar) */
     #tsbau .bau-conn{width:2px;height:26px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.5),rgba(199,180,137,.05))}
-    #tsbau .bau-conn::after{display:none}
-    #tsbau .bau-assemble{gap:10px}
+    #tsbau .bau-conn::after{left:50%;top:0}
+    #tsbau.js .bau-scene.on .bau-conn::after{animation:bauPulseDown 3.4s cubic-bezier(.45,0,.25,1) infinite}
+    #tsbau.js .bau-scene.on .bau-conn.rev::after{animation:bauPulseUp 3.4s cubic-bezier(.45,0,.25,1) infinite}
+    #tsbau.js .bau-scene.on .bau-conn.once.fire::after{animation:bauPulseDownOnce 1.15s cubic-bezier(.16,1,.3,1) 1}
     #tsbau .bau-step-l{font-size:12px}
     #tsbau .bau-steps{gap:8px}
   }
+  @keyframes bauPulseDownOnce{0%{top:0;opacity:0}12%{opacity:1}86%{opacity:1}100%{top:100%;opacity:0}}
+
   @media(prefers-reduced-motion:reduce){
-    #tsbau .bau-wrap{opacity:1;transform:none}
+    #tsbau.js .bau-wrap{opacity:1;transform:none;transition:none}
     #tsbau .bau-scene *{animation:none!important}
-    #tsbau .bau-new{opacity:1;transform:none}
-    #tsbau .bau-flow .bau-nm,#tsbau .bau-sm,#tsbau .bau-sat .bau-med{opacity:1;transform:none}
-    #tsbau .bau-conn::after{display:none}
+    #tsbau.js .bau-swap .bau-med{opacity:1;transform:none}
+    #tsbau.js .bau-zcol .bau-nm,#tsbau.js .bau-sm,#tsbau.js .bau-sat .bau-med{opacity:1;transform:none}
+    #tsbau .bau-conn::after,#tsbau .bau-vconn::after{display:none}
   }
 
   #tsarc{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -1684,7 +1709,7 @@
 <div id="tsbau">
   <div class="bau-head">
     <div class="bau-eyebrow">Das Bausteinprinzip</div>
-    <h3 class="bau-title">Warum wir es <span>genau so</span> machen</h3>
+    <h2 class="bau-title">Warum wir es <span class="ts-gold">genau so</span> machen</h2>
     <p class="bau-sub">Der Sinn dahinter ist Flexibilität. Weil jede Zutat ein eigenständiger Baustein mit eigenem Preis ist, kannst du drei Dinge tun:</p>
   </div>
 
@@ -1703,10 +1728,11 @@
           <span class="bau-swapicon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg></span>
           <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.jpg" alt="Paprika">
         </div>
-        <span class="bau-conn"></span>
+        <span class="bau-conn once"></span>
         <div class="bau-node">
           <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.jpg" alt="Gericht">
           <div class="bau-chip"><span class="bau-chip-k">Wareneinsatz</span><span class="bau-chip-v" id="bauChip">4,80 €</span></div>
+          <span class="bau-note">Beispielwert</span>
         </div>
       </div>
 
@@ -1719,27 +1745,30 @@
         <div class="bau-sat s2 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.jpg" alt="Gericht"><span class="bau-tag">Lachsfilet</span></div>
       </div>
 
-      <!-- SCENE 3 — Schachteln: Zutaten -> Pesto (neuer Baustein) -> Gericht -->
+      <!-- SCENE 3 — Schachteln -->
       <div class="bau-scene bau-flow" data-i="2">
-        <div class="bau-flow-row">
+        <div class="bau-zcol">
           <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
           <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
           <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg" alt="Walnüsse">
         </div>
-        <span class="bau-vline"></span>
+        <span class="bau-conn"></span>
         <div class="bau-node"><img class="bau-med bau-pesto" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b> · neuer Baustein</span></div>
-        <span class="bau-vline"></span>
-        <div class="bau-assemble">
-          <div class="bau-node bau-side"><img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum"></div>
-          <span class="bau-conn"></span>
-          <div class="bau-node"><img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht"><span class="bau-tag"><b>Pilz-Ravioli</b> · Gericht</span></div>
-          <span class="bau-conn"></span>
-          <div class="bau-node bau-side"><img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan"></div>
+        <span class="bau-conn rev"></span>
+        <div class="bau-node">
+          <div class="bau-dishgrp">
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
+            <span class="bau-vconn up"></span>
+            <img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.jpg" alt="Gericht">
+            <span class="bau-vconn down"></span>
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
+            <span class="bau-tag bau-dishtag"><b>Pilz-Ravioli</b> · Gericht</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <p class="bau-sub" id="bauCap" style="max-width:720px;margin:26px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:2.6em;text-align:center"></p>
+    <p class="bau-cap" id="bauCap">Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt, der Preis rechnet sich neu.</p>
 
     <div class="bau-foot">
       <button class="bau-replay" id="bauReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
@@ -1783,54 +1812,97 @@
   }
 
   function initBaustein(){
-    var wrap=document.querySelector('#tsbau .bau-wrap'); if(!wrap) return;
-    var steps=[].slice.call(wrap.querySelectorAll('.bau-step'));
-    var scenes=[].slice.call(wrap.querySelectorAll('.bau-scene'));
-    var chip=document.getElementById('bauChip');
-    var cap=document.getElementById('bauCap');
-    var replay=document.getElementById('bauReplay');
+    var root=document.getElementById('tsbau'); if(!root) return;
+    var wrap=root.querySelector('.bau-wrap'); if(!wrap) return;
+    var steps=[].slice.call(root.querySelectorAll('.bau-step'));
+    var scenes=[].slice.call(root.querySelectorAll('.bau-scene'));
+    var chip=root.querySelector('#bauChip');
+    var cap=root.querySelector('#bauCap');
+    var replay=root.querySelector('#bauReplay');
     var CAPS=[
       'Wird ein Produkt teurer oder ist nicht lieferbar, tauschst du den Baustein gegen einen anderen — der Rest des Gerichts bleibt unberührt, der Preis rechnet sich neu.',
       'Eine einmal gebaute Sauce wandert in beliebig viele Gerichte. Du legst sie einmal an und nutzt sie überall.',
       'Ein Baustein kann selbst aus Bausteinen bestehen: Das Pesto ist wieder aus eigenen Zutaten zusammengesetzt und wird damit ein neuer Baustein. Aus allen Bausteinen kann man dann die Gerichte bauen.'
     ];
-    var ADV=3600, reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var PRICES=[4.80,4.55];               /* Beispielwerte, im UI als solche gekennzeichnet */
+    var DWELL=[9000,4200,5200];           /* Szene 1 bleibt lang genug fuer mehrere Wechsel */
+    var SWAP_MS=1800;
+    var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
     var params=new URLSearchParams(location.search);
     var forced=params.has('scene'), noauto=params.has('noauto')||forced;
-    var timer=null, cur=-1;
+    var timer=null, swapTimer=null, chipRaf=null, swapState=0, cur=-1;
+
+    root.classList.add('js');
 
     function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
-    function countChip(from,to){
+    function stopChip(){ if(chipRaf){ cancelAnimationFrame(chipRaf); chipRaf=null; } }
+    function countChip(from,to,dur){
+      stopChip();
       if(!chip) return;
       if(reduced){ chip.textContent=money(to); return; }
-      var t0=null,d=1100;
-      function tk(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); chip.textContent=money(from+(to-from)*e); if(p<1) requestAnimationFrame(tk); }
-      requestAnimationFrame(tk);
+      var t0=null,d=dur||700;
+      function tk(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); chip.textContent=money(from+(to-from)*e); if(p<1){ chipRaf=requestAnimationFrame(tk); } else { chipRaf=null; } }
+      chipRaf=requestAnimationFrame(tk);
+    }
+    function stopSwap(){ if(swapTimer){ clearInterval(swapTimer); swapTimer=null; } stopChip(); }
+    function startSwap(){
+      stopSwap();
+      var sc=scenes[0]; if(!sc) return;
+      var tom=sc.querySelector('.bau-old'), pap=sc.querySelector('.bau-new'), conn=sc.querySelector('.bau-conn.once');
+      swapState=0;
+      sc.classList.remove('swapb');
+      if(tom) tom.classList.add('lit');
+      if(pap) pap.classList.remove('lit');
+      if(chip) chip.textContent=money(PRICES[0]);
+      if(reduced) return;
+      swapTimer=setInterval(function(){
+        if(cur!==0){ stopSwap(); return; }
+        var prev=swapState; swapState=1-swapState;
+        sc.classList.toggle('swapb', swapState===1);
+        if(tom) tom.classList.toggle('lit', swapState===0);
+        if(pap) pap.classList.toggle('lit', swapState===1);
+        if(conn){ conn.classList.remove('fire'); void conn.offsetWidth; conn.classList.add('fire'); }
+        countChip(PRICES[prev], PRICES[swapState], 700);
+      }, SWAP_MS);
     }
     function show(i,manual){
       cur=i;
+      stopSwap();
+      clearTimeout(timer);
       steps.forEach(function(s,k){ s.classList.toggle('on',k===i); });
       scenes.forEach(function(s,k){
         if(k===i){ s.classList.remove('on'); void s.offsetWidth; s.classList.add('on'); }
-        else s.classList.remove('on');
+        else { s.classList.remove('on'); s.classList.remove('swapb'); }
       });
       if(cap) cap.textContent=CAPS[i];
-      if(chip){ if(i===0){ chip.textContent='4,80 €'; setTimeout(function(){ if(cur===0) countChip(4.80,4.55); },1500); } else chip.textContent='4,55 €'; }
-      if(!noauto && !manual){
-        clearTimeout(timer);
-        if(i<scenes.length-1) timer=setTimeout(function(){ show(i+1); }, ADV);
+      if(i===0) startSwap(); else if(chip) chip.textContent=money(PRICES[1]);
+      if(!noauto && !manual && i<scenes.length-1){
+        timer=setTimeout(function(){ show(i+1); }, DWELL[i]);
       }
     }
     function play(){ clearTimeout(timer); show(forced?(parseInt(params.get('scene'),10)||0):0); }
 
-    steps.forEach(function(s){ s.addEventListener('click',function(){ clearTimeout(timer); show(parseInt(s.dataset.i,10),true); }); });
+    steps.forEach(function(s){ s.addEventListener('click',function(){ show(parseInt(s.dataset.i,10),true); }); });
     if(replay) replay.addEventListener('click', play);
+    document.addEventListener('visibilitychange', function(){
+      root.classList.toggle('hid', document.hidden);
+      if(document.hidden){ stopSwap(); clearTimeout(timer); }
+      else if(cur===0){ startSwap(); }
+    });
 
-    if(reduced){ wrap.classList.add('on'); show(0,true); return; }
-    if(forced || params.has('reveal')){ wrap.classList.add('on'); play(); return; }
+    /* Buehne ist ab sofort nie leer: Szene 1 steht mit Endwerten da. */
+    show(0,true);
+    var revealed=false, failsafe=null;
+    function reveal(){ if(revealed) return; revealed=true; clearTimeout(failsafe); wrap.classList.add('on'); }
+    /* Failsafe: auch wenn der Trigger nie feuert (Re-Render, kein IO), wird sichtbar gestellt. */
+    failsafe=setTimeout(reveal, 1500);
+
+    if(reduced){ reveal(); return; }
+    if(forced || params.has('reveal')){ reveal(); play(); return; }
+    if(!('IntersectionObserver' in window)){ reveal(); play(); return; }
 
     var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ wrap.classList.add('on'); play(); io.disconnect(); } });
+      es.forEach(function(e){ if(e.isIntersecting){ reveal(); play(); io.disconnect(); } });
     },{threshold:.3});
     io.observe(wrap);
   }
