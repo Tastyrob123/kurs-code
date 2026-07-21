@@ -1638,69 +1638,64 @@
     #tsbau .bau-conn::after,#tsbau .bau-vconn::after{display:none}
   }
 
-  #tsarc{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsarc .arc-inner{max-width:1180px;margin:0 auto;text-align:center}
-  #tsarc .arc-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tsarc .arc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsarc .arc-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;margin:0 0 46px}
-  #tsarc .arc-title span{color:#c7b489}
+  #tsring{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsring *{box-sizing:border-box}
+  #tsring .rg-head{max-width:900px;margin:0 auto 44px;padding:0 24px;text-align:center}
+  #tsring .rg-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsring .rg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  /* "Lineal Web": der Titel enthaelt ein f (laeuft), das im TS-Subset fehlt */
+  #tsring .rg-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
+  #tsring .rg-title .ts-gold{color:#c7b489}
+  #tsring .rg-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0;max-width:640px;margin-left:auto;margin-right:auto}
 
-  #tsarc .arc-stage{position:relative;display:grid;grid-template-columns:.82fr 1.3fr .82fr;grid-template-rows:1fr 1fr;gap:clamp(38px,6vw,80px) clamp(46px,7vw,96px);}
-  #tsarc svg.arc-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
-  #tsarc .arc-line{fill:none;stroke:rgba(199,180,137,.28);stroke-width:1;opacity:0;transition:opacity .5s ease}
-  #tsarc .arc-line.on{opacity:1}
-  #tsarc .arc-flow{fill:rgba(216,201,171,.95);filter:drop-shadow(0 0 4px rgba(199,180,137,.5));opacity:0}
+  #tsring .rg-wrap{max-width:1180px;margin:0 auto}
+  #tsring.js .rg-wrap{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+  #tsring.js .rg-wrap.on{opacity:1;transform:none}
 
-  #tsarc .arc-tile{
-    position:relative;border-radius:18px;overflow:hidden;z-index:2;
-    display:flex;flex-direction:column;justify-content:flex-end;
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 26px 60px -30px rgba(0,0,0,.95);
-    min-height:150px;
-    background-size:cover;background-position:center;
-    opacity:0;transform:scale(.966) translateY(20px);
-    transition:opacity 1.05s ease,transform 1.15s cubic-bezier(.19,1,.22,1),box-shadow .6s ease;
-  }
-  #tsarc .arc-tile.in{opacity:1;transform:none}
-  #tsarc .arc-tile::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(5,6,11,.22) 0%,rgba(5,6,11,.5) 44%,rgba(5,6,11,.92) 100%)}
-  #tsarc .arc-tile-final::before{background:radial-gradient(118% 100% at 50% 46%,rgba(5,6,11,.72) 0%,rgba(5,6,11,.48) 52%,rgba(5,6,11,.84) 100%)}
-  #tsarc .arc-tile-1{background-image:url(https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg)}
-  #tsarc .arc-tile-2{background-image:url(https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg)}
-  #tsarc .arc-tile-3{background-image:url(https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg)}
-  #tsarc .arc-tile-4{background-image:url(https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg)}
-  #tsarc .arc-tile-final{background-image:url(https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg)}
-  #tsarc .arc-tile-1,#tsarc .arc-tile-2,#tsarc .arc-tile-3,#tsarc .arc-tile-4{min-height:152px}
-  #tsarc .arc-tile-1{grid-column:1;grid-row:1}
-  #tsarc .arc-tile-2{grid-column:1;grid-row:2}
-  #tsarc .arc-tile-3{grid-column:3;grid-row:1}
-  #tsarc .arc-tile-4{grid-column:3;grid-row:2}
-  #tsarc .arc-tile-final{grid-column:2;grid-row:1 / 3;min-height:324px;justify-content:center}
+  /* Buehne: quadratisch, Ring + Kern + vier Satelliten */
+  #tsring .rg-stage{position:relative;width:clamp(340px,50vw,560px);height:clamp(340px,50vw,560px);margin:0 auto}
+  #tsring .rg-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  #tsring .rg-track{fill:none;stroke:rgba(255,255,255,.055);stroke-width:2.2}
+  #tsring .rg-seg{fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:0 999;transition:stroke-dasharray 1.05s cubic-bezier(.16,1,.3,1)}
 
-  #tsarc .arc-logo{position:relative;z-index:2;width:19px;height:auto;margin:0 auto 8px;display:block;filter:drop-shadow(0 2px 7px rgba(0,0,0,.95))}
-  #tsarc .arc-tile-final .arc-logo{width:26px;margin-bottom:11px}
-  #tsarc .arc-tile-body{position:relative;z-index:2;padding:16px 16px 16px;text-align:center;display:flex;flex-direction:column;align-items:center}
-  #tsarc .arc-tile-final .arc-tile-body{padding:24px 24px 26px;justify-content:center;height:100%}
-  #tsarc .arc-label{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.94rem;font-weight:600;letter-spacing:-.005em;color:#fff;margin:0 0 3px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1)}
-  #tsarc .arc-tile-final .arc-label{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.75rem,2.7vw,2.2rem);font-weight:600;letter-spacing:-.015em;text-transform:none;color:#efe6d2;margin-bottom:8px;text-shadow:0 2px 18px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
-  #tsarc .arc-val{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.24rem;font-weight:500;color:#efe6d2;font-variant-numeric:tabular-nums;letter-spacing:.005em;margin-bottom:4px;text-shadow:0 2px 12px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,1);transition:transform .2s ease}
-  #tsarc .arc-tile-final .arc-val{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(2.2rem,3.8vw,3.1rem);font-weight:500;letter-spacing:-.012em;color:#fff;margin-top:6px;order:2;min-height:1.2em;text-shadow:0 2px 24px rgba(199,180,137,.5),0 2px 12px rgba(0,0,0,.95)}
-  #tsarc .arc-desc{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.74rem;line-height:1.46;color:rgba(255,255,255,.82);text-shadow:0 1px 7px rgba(0,0,0,.98)}
-  #tsarc .arc-tile-final .arc-desc{order:1;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.94rem;line-height:1.55;color:#fff;max-width:270px;text-shadow:0 2px 14px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1),0 0 24px rgba(0,0,0,.85)}
-  #tsarc .arc-tile-final .arc-sub{position:relative;z-index:2;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:.76rem;color:rgba(255,255,255,.72);margin-top:9px;order:3;text-shadow:0 2px 12px rgba(0,0,0,1),0 1px 4px rgba(0,0,0,1)}
-  #tsarc .arc-caption{max-width:640px;margin:34px auto 0;font-size:12px;color:rgba(255,255,255,.4);text-align:center}
+  /* Kern */
+  #tsring .rg-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:3;text-align:center}
+  #tsring .rg-plate{width:clamp(118px,15vw,168px);height:clamp(118px,15vw,168px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 22px 50px -18px rgba(0,0,0,.94),0 0 0 7px rgba(199,180,137,.055);transition:box-shadow .7s cubic-bezier(.16,1,.3,1)}
+  #tsring .rg-core.done .rg-plate{box-shadow:0 22px 56px -16px rgba(0,0,0,.94),0 0 0 10px rgba(199,180,137,.16),0 0 46px rgba(199,180,137,.4)}
+  #tsring .rg-total{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.015em;color:#fff;font-variant-numeric:tabular-nums;line-height:1;text-shadow:0 2px 22px rgba(199,180,137,.35)}
+  #tsring .rg-totalk{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.46)}
 
-  @media(max-width:900px){
-    #tsarc .arc-stage{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:18px}
-    #tsarc .arc-tile-1{grid-column:1;grid-row:1}
-    #tsarc .arc-tile-2{grid-column:2;grid-row:1}
-    #tsarc .arc-tile-final{grid-column:1 / 3;grid-row:2;min-height:200px}
-    #tsarc .arc-tile-3{grid-column:1;grid-row:3}
-    #tsarc .arc-tile-4{grid-column:2;grid-row:3}
-    #tsarc svg.arc-lines{display:none}
+  /* Satelliten auf dem Ring */
+  #tsring .rg-sat{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:2;width:118px;text-align:center}
+  #tsring .rg-med{width:clamp(46px,6.2vw,62px);height:clamp(46px,6.2vw,62px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.5);box-shadow:0 14px 34px -14px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05);transition:box-shadow .6s cubic-bezier(.16,1,.3,1)}
+  #tsring .rg-sat.lit .rg-med{box-shadow:0 14px 38px -12px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.4)}
+  #tsring .rg-chip{display:inline-flex;flex-direction:column;align-items:center;gap:3px;background:rgba(5,6,11,.9);border:1px solid rgba(199,180,137,.26);border-radius:11px;padding:5px 11px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  #tsring .rg-name{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.2;white-space:nowrap}
+  #tsring .rg-val{font-size:14px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;line-height:1}
+  #tsring.js .rg-sat{opacity:0;transform:translate(-50%,-50%) scale(.82)}
+  #tsring.js .rg-wrap.on .rg-sat.in{opacity:1;transform:translate(-50%,-50%) scale(1);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1)}
+
+  #tsring .rg-caption{max-width:700px;margin:34px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
+  #tsring .rg-note{display:block;margin-top:10px;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
+  #tsring .rg-foot{display:flex;justify-content:center;margin-top:26px}
+  #tsring .rg-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+  #tsring .rg-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tsring .rg-replay svg{width:15px;height:15px}
+
+  #tsring.hid *{animation-play-state:paused !important}
+
+  /* Mobile: Ring bleibt, Satelliten-Labels kompakter */
+  @media(max-width:720px){
+    #tsring .rg-stage{width:min(94vw,400px);height:min(94vw,400px)}
+    #tsring .rg-sat{width:92px;gap:5px}
+    #tsring .rg-name{font-size:10px}
+    #tsring .rg-val{font-size:12.5px}
   }
   @media(prefers-reduced-motion:reduce){
-    #tsarc .arc-tile{opacity:1;transform:none;transition:none;animation:none !important}
+    #tsring.js .rg-wrap{opacity:1;transform:none;transition:none}
+    #tsring.js .rg-sat{opacity:1;transform:translate(-50%,-50%)}
+    #tsring .rg-seg{transition:none}
+    #tsring *{animation:none!important}
   }
 
   #tswave{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -1923,31 +1918,58 @@
     <p>Das ist das Bausteinprinzip: Wir bauen einmal sauber von unten auf — vom Lieferschein über die Grundeinheit zur portionierten Zutat — und können oben dann frei und schnell kombinieren. Ändert sich unten ein Preis, zieht er sich automatisch durch alle Gerichte, die diesen Baustein nutzen.</p>
   <p><b>Kurz gesagt:</b> Die Formeln sind das Fundament. Sie verwandeln chaotische Lieferanten-Angaben in saubere Grundpreise. Auf diesem Fundament bauen wir einen Zutatenpool aus austauschbaren Bausteinen — und aus diesen Bausteinen lassen sich Gerichte schnell, flexibel und mit immer korrekter Kalkulation zusammensetzen.</p>
 </div>
-<div id="tsarc">
-  <div class="arc-inner">
-    <div class="arc-eyebrow">Vier Bausteine · ein Gericht</div>
-    <h3 class="arc-title">Alles läuft in deinem <span>Gericht zusammen.</span></h3>
-    <div class="arc-stage" id="arcStage">
-      <svg class="arc-lines" id="arcLines"></svg>
-      <div class="arc-tile arc-tile-1" id="arcT1">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Zutaten</div><div class="arc-val">3,20 €</div></div>
+<section id="tsring">
+  <div class="rg-head">
+    <div class="rg-eyebrow">Vier Bausteine · ein Gericht</div>
+    <h2 class="rg-title">Alles läuft in deinem <span class="ts-gold">Gericht zusammen.</span></h2>
+    <p class="rg-sub">Jeder Baustein legt sein Stück auf den Ring. Ist der Ring geschlossen, steht dein Wareneinsatz.</p>
+  </div>
+
+  <div class="rg-wrap">
+    <div class="rg-stage" id="rgStage">
+      <svg class="rg-svg" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="rg-track" cx="100" cy="100" r="72"></circle>
+        <g transform="rotate(-90 100 100)">
+          <circle class="rg-seg" data-s="0" cx="100" cy="100" r="72" stroke="#c7b489"></circle>
+          <circle class="rg-seg" data-s="1" cx="100" cy="100" r="72" stroke="#d8c9ab"></circle>
+          <circle class="rg-seg" data-s="2" cx="100" cy="100" r="72" stroke="#efe6d2"></circle>
+          <circle class="rg-seg" data-s="3" cx="100" cy="100" r="72" stroke="#c7b489" stroke-opacity=".72"></circle>
+        </g>
+      </svg>
+
+      <div class="rg-core" id="rgCore">
+        <img class="rg-plate" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="Gericht">
+        <div class="rg-total" id="rgTotal">0,00 €</div>
+        <div class="rg-totalk">Kosten pro Portion</div>
       </div>
-      <div class="arc-tile arc-tile-2" id="arcT2">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Rezepturen</div><div class="arc-val">4,10 €</div></div>
+
+      <div class="rg-sat" data-s="0">
+        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="Zutaten">
+        <div class="rg-chip"><div class="rg-name">Zutaten</div><div class="rg-val">3,20 €</div></div>
       </div>
-      <div class="arc-tile arc-tile-final" id="arcFinal">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-desc">Alle vier Bausteine zusammen ergeben den Wareneinsatz und die Kalkulation für</div><div class="arc-label">Gericht</div><div class="arc-val" id="arcFinalVal"></div><div class="arc-sub">Kosten pro Portion</div></div>
+      <div class="rg-sat" data-s="1">
+        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Rezepturen">
+        <div class="rg-chip"><div class="rg-name">Rezepturen</div><div class="rg-val">4,10 €</div></div>
       </div>
-      <div class="arc-tile arc-tile-3" id="arcT3">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Personalkosten</div><div class="arc-val">1,80 €</div></div>
+      <div class="rg-sat" data-s="2">
+        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg" alt="Personalkosten">
+        <div class="rg-chip"><div class="rg-name">Personalkosten</div><div class="rg-val">1,80 €</div></div>
       </div>
-      <div class="arc-tile arc-tile-4" id="arcT4">
-        <div class="arc-tile-body"><img class="arc-logo" src="https://files.catbox.moe/au80tp.png" alt=""><div class="arc-label">Gemeinkosten</div><div class="arc-val">2,10 €</div></div>
+      <div class="rg-sat" data-s="3">
+        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg" alt="Gemeinkosten">
+        <div class="rg-chip"><div class="rg-name">Gemeinkosten</div><div class="rg-val">2,10 €</div></div>
       </div>
     </div>
-    <p class="arc-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laden sich einmal nacheinander auf — dann fließen alle vier gemeinsam in dein Gericht. Alle Zahlen sind Beispielwerte.</p>
+
+    <p class="rg-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laufen zusammen in einer Zahl — den Kosten pro Portion. Erst wenn alle vier stehen, ist das Gericht sauber kalkuliert.
+      <span class="rg-note">Alle Zahlen sind Beispielwerte.</span>
+    </p>
+
+    <div class="rg-foot">
+      <button class="rg-replay" id="rgReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
+    </div>
   </div>
-</div>
+</section>
 <div class="ts8wk" id="ts8wk"></div>
 <section id="tswave">
   <div class="wv-head">
@@ -2046,7 +2068,7 @@
 </section>
     `;
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-    try{ initArc(); }catch(e){}
+    try{ initRing(); }catch(e){}
     try{ initBaustein(); }catch(e){}
     try{ initWave(); }catch(e){}
   }
@@ -2306,94 +2328,131 @@
     }, 400);
   }
 
-  var arcPlayed=false;
-  function initArc(){
+  function initRing(){
+  var root=document.getElementById('tsring'); if(!root) return;
+  var wrap=root.querySelector('.rg-wrap'); if(!wrap) return;
+  if(window.__tsringKill){ try{ window.__tsringKill(); }catch(e){} }
 
-  var stage = document.getElementById('arcStage');
-  var svg = document.getElementById('arcLines');
-  var tiles = [
-    {el: document.getElementById('arcT1'), val: 3.20},
-    {el: document.getElementById('arcT2'), val: 4.10},
-    {el: document.getElementById('arcT3'), val: 1.80},
-    {el: document.getElementById('arcT4'), val: 2.10}
-  ];
-  var final = document.getElementById('arcFinal');
-  var finalVal = document.getElementById('arcFinalVal');
-  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage=root.querySelector('#rgStage');
+  var segs=[].slice.call(root.querySelectorAll('.rg-seg'));
+  var sats=[].slice.call(root.querySelectorAll('.rg-sat'));
+  var core=root.querySelector('#rgCore');
+  var totalEl=root.querySelector('#rgTotal');
+  var replay=root.querySelector('#rgReplay');
+  /* Beispielwerte — Anteile ergeben den Wareneinsatz pro Portion */
+  var PARTS=[3.20,4.10,1.80,2.10];
+  var TOTAL=PARTS.reduce(function(a,b){return a+b;},0);   /* 11,20 € */
+  var R=72, C=2*Math.PI*R, GAP=5;                          /* Ringradius im viewBox, Luecke zwischen Segmenten */
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var revealed=false, dead=false, forceReady=false;
+  var timers=[], rafs=[], pollId=null, readyTimer=null, io=null;
 
-  function center(el){
-    var r = el.getBoundingClientRect(), s = stage.getBoundingClientRect();
-    return { x: r.left - s.left + r.width/2, y: r.top - s.top + r.height/2 };
+  root.classList.add('js');
+
+  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+  function later(fn,ms){ var t=setTimeout(function(){ if(!dead) fn(); },ms); timers.push(t); return t; }
+  function clearAll(){ timers.forEach(clearTimeout); timers=[]; rafs.forEach(cancelAnimationFrame); rafs=[]; }
+  function count(el,from,to,dur){
+    if(!el) return;
+    if(reduced){ el.textContent=money(to); return; }
+    var t0=null,d=dur||900,rid=null;
+    function tk(ts){ if(dead) return; if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/d); var e=1-Math.pow(1-p,3); el.textContent=money(from+(to-from)*e); if(p<1){ rid=requestAnimationFrame(tk); rafs.push(rid); } }
+    rid=requestAnimationFrame(tk); rafs.push(rid);
   }
 
-  var NS = 'http://www.w3.org/2000/svg';
-  var paths = [];
-  function buildLines(){
-    if(window.innerWidth <= 900){ svg.innerHTML=''; paths=[]; return; }
-    svg.innerHTML='';
-    paths = tiles.map(function(t){
-      var a = center(t.el), b = center(final);
-      var p = document.createElementNS(NS,'path');
-      p.setAttribute('class','arc-line');
-      p.setAttribute('d','M '+a.x+' '+a.y+' L '+b.x+' '+b.y);
-      svg.appendChild(p);
-      return p;
+  /* Segment-Geometrie + Satelliten-Position aus den Anteilen berechnen */
+  function layout(){
+    var acc=0;
+    segs.forEach(function(s,i){
+      var frac=PARTS[i]/TOTAL;
+      var len=Math.max(0, C*frac - GAP);
+      s.setAttribute('data-len', len);
+      s.style.strokeDashoffset = (-C*acc) + '';
+      acc += frac;
+    });
+    /* Satelliten auf die Segment-Mitten setzen */
+    acc=0;
+    sats.forEach(function(sat,i){
+      var frac=PARTS[i]/TOTAL;
+      var mid=acc+frac/2;
+      var ang=(-90 + mid*360) * Math.PI/180;
+      var rp=36;                                  /* Ringradius = 36% der Buehne (r72 von 200) */
+      sat.style.left=(50 + Math.cos(ang)*rp)+'%';
+      sat.style.top =(50 + Math.sin(ang)*rp)+'%';
+      acc += frac;
     });
   }
-  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €'; }
-  function drawLine(path, cb){
-    if(!path){ if(cb) cb(); return; }
-    path.classList.add('on');
-    var len = path.getTotalLength();
-    path.style.strokeDasharray = len;
-    path.style.strokeDashoffset = len;
-    path.getBoundingClientRect();
-    path.style.transition = 'stroke-dashoffset .75s cubic-bezier(.4,0,.2,1)';
-    path.style.strokeDashoffset = '0';
-    var dot = document.createElementNS(NS,'circle');
-    dot.setAttribute('r','2.6'); dot.setAttribute('class','arc-flow');
-    svg.appendChild(dot);
-    var t0 = null, dur = 820;
-    function fr(ts){
-      if(t0 === null) t0 = ts;
-      var p = Math.min(1, (ts - t0) / dur);
-      var pt = path.getPointAtLength(p*len);
-      dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
-      dot.style.opacity = p < 0.12 ? (p/0.12) : (p > 0.85 ? (1-(p-0.85)/0.15) : 1);
-      if(p < 1) requestAnimationFrame(fr); else { dot.remove(); if(cb) cb(); }
-    }
-    requestAnimationFrame(fr);
+  function resetView(){
+    clearAll();
+    segs.forEach(function(s){ s.style.strokeDasharray='0 999'; });
+    sats.forEach(function(s){ s.classList.remove('in','lit'); });
+    if(core) core.classList.remove('done');
+    if(totalEl) totalEl.textContent=money(0);
+    layout();
   }
-  var played = false;
-  function play(){
-    if(played) return; played = true;
-    /* Edel & ruhig: Mitte zuerst, dann setzen sich die vier Bausteine sanft dazu
-       und eine dezente Linie läuft von jedem zur Mitte und bringt ihren Wert mit. */
-    final.classList.add('in');
-    var total = tiles.reduce(function(s,t){ return s + t.val; }, 0);
-    if(reduced){ tiles.forEach(function(t){ t.el.classList.add('in'); }); finalVal.textContent = money(total); return; }
-    buildLines();
-    var acc = 0;
-    function addValue(v){
-      var from = acc, to = acc + v; acc = to;
-      var d = 460, t0 = null;
-      function e(x){ return 1 - Math.pow(1 - x, 3); }
-      function tk(ts){ if(t0===null) t0=ts; var p=Math.min(1,(ts-t0)/d); finalVal.textContent = money(from + (to-from)*e(p)); if(p<1) requestAnimationFrame(tk); }
-      requestAnimationFrame(tk);
+  function run(){
+    resetView();
+    if(reduced){
+      segs.forEach(function(s){ s.style.strokeDasharray=s.getAttribute('data-len')+' 999'; });
+      sats.forEach(function(s){ s.classList.add('in'); });
+      if(totalEl) totalEl.textContent=money(TOTAL);
+      if(core) core.classList.add('done');
+      return;
     }
-    tiles.forEach(function(t,i){
-      setTimeout(function(){
-        t.el.classList.add('in');
-        drawLine(paths[i], function(){ addValue(t.val); });
-      }, 420 + i*300);
+    var running=0;
+    segs.forEach(function(s,i){
+      var at=600+i*820;
+      later(function(){                                  /* Segment zeichnet sich */
+        s.style.strokeDasharray=s.getAttribute('data-len')+' 999';
+        if(sats[i]) sats[i].classList.add('in','lit');
+      }, at);
+      later(function(){                                  /* Zwischensumme waechst mit */
+        running+=PARTS[i];
+        count(totalEl, running-PARTS[i], running, 700);
+        if(sats[i]) sats[i].classList.remove('lit');
+      }, at+520);
     });
+    later(function(){ if(core) core.classList.add('done'); }, 600+segs.length*820+400);
   }
-  window.addEventListener('resize', function(){ if(!played) buildLines(); });
-  var io = new IntersectionObserver(function(entries){
-    if(entries[0].isIntersecting){ play(); io.disconnect(); }
-  }, {threshold:.3});
-  io.observe(stage);
 
+  function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
+  function inView(){ var r=wrap.getBoundingClientRect(); return r.top < window.innerHeight*0.85 && r.bottom > 0; }
+  function docTop(){ var el=wrap,y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+  var lastDocTop=null, stableTicks=0;
+  function layoutSettled(){ var d=docTop(); if(lastDocTop!==null && Math.abs(d-lastDocTop)<2){ stableTicks++; } else { stableTicks=0; } lastDocTop=d; return stableTicks>=3; }
+  function maybeReveal(){
+    if(dead||revealed) return;
+    if(!forceReady){ var hero=document.querySelector('.ts-hero__img'); if(hero && !hero.complete){ lastDocTop=null; stableTicks=0; return; } }
+    if(inView() && (forceReady || layoutSettled())){ reveal(); run(); }
+  }
+  function onVis(){ root.classList.toggle('hid', document.hidden); }
+  function onResize(){ layout(); }
+  document.addEventListener('visibilitychange', onVis);
+  window.addEventListener('resize', onResize);
+  readyTimer=setTimeout(function(){ forceReady=true; }, 10000);
+
+  if(replay) replay.addEventListener('click', function(){ reveal(); run(); });
+
+  window.__tsringKill=function(){
+    dead=true; clearAll();
+    if(pollId){ clearInterval(pollId); pollId=null; }
+    if(readyTimer){ clearTimeout(readyTimer); readyTimer=null; }
+    if(io){ io.disconnect(); io=null; }
+    document.removeEventListener('visibilitychange', onVis);
+    window.removeEventListener('resize', onResize);
+  };
+
+  resetView();
+  if(reduced){ reveal(); run(); return; }
+
+  if('IntersectionObserver' in window){
+    io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); }); },{threshold:.25});
+    io.observe(wrap);
+  }
+  pollId=setInterval(function(){
+    if(dead||revealed){ clearInterval(pollId); pollId=null; if(io){ io.disconnect(); io=null; } return; }
+    maybeReveal();
+  }, 400);
   }
 
   mount();
