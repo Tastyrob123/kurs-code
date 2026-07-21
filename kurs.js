@@ -1898,8 +1898,13 @@
     /* Dokument-Position: aendert sich beim Nachladen der Seite, NICHT beim Scrollen.
        So laesst sich Layout-Wachstum von echtem Hinscrollen unterscheiden. */
     function docTop(){ var el=wrap, y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
-    var lastDocTop=null;
-    function layoutSettled(){ var d=docTop(); var s=(lastDocTop!==null && Math.abs(d-lastDocTop)<2); lastDocTop=d; return s; }
+    var lastDocTop=null, stableTicks=0;
+    function layoutSettled(){
+      var d=docTop();
+      if(lastDocTop!==null && Math.abs(d-lastDocTop)<2){ stableTicks++; } else { stableTicks=0; }
+      lastDocTop=d;
+      return stableTicks>=3;               /* ~1,2 s ohne Layout-Bewegung */
+    }
     function maybeReveal(){ if(dead||revealed) return; if(inView() && layoutSettled()) trigger(); }
     function trigger(){ if(revealed) return; reveal(); play(); }
 
