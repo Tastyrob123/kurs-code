@@ -1905,7 +1905,14 @@
       lastDocTop=d;
       return stableTicks>=3;               /* ~1,2 s ohne Layout-Bewegung */
     }
-    function maybeReveal(){ if(dead||revealed) return; if(inView() && layoutSettled()) trigger(); }
+    function maybeReveal(){
+      if(dead||revealed) return;
+      /* Erst wenn die Seite fertig geladen ist — sonst steht der Block waehrend des
+         Ladens kurz weit oben (Hero-Bild noch ohne Hoehe) und der Einstieg wuerde
+         off-screen verbraucht. */
+      if(document.readyState!=='complete'){ lastDocTop=null; stableTicks=0; return; }
+      if(inView() && layoutSettled()) trigger();
+    }
     function trigger(){ if(revealed) return; reveal(); play(); }
 
     function onVis(){
