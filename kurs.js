@@ -15374,8 +15374,11 @@ var TSISL_ZUG_SCHLUESSEL=[
   /* ------------------------------ CSS ------------------------- */
   var CSS = `
   #tsfdqx-layer{position:absolute;top:0;left:0;width:0;height:0;pointer-events:none;z-index:60;}
+  /* KEIN overflow:hidden — das macht die Kachel selbst zum Scrollport
+     und setzt das sticky Panel in hohen Abschnitten ausser Kraft.
+     Der border-radius beschneidet den Hintergrund ohnehin. */
   #tsfdqx-layer .fdqx-card{
-    position:absolute;border-radius:16px;overflow:hidden;
+    position:absolute;border-radius:16px;
     opacity:0;pointer-events:none;
     transition:opacity .28s cubic-bezier(.16,1,.3,1);
     background:linear-gradient(165deg,rgba(28,38,72,.985),rgba(11,15,30,.985));
