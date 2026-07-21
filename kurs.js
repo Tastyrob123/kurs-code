@@ -4528,7 +4528,7 @@
     var bubble=document.getElementById('flBubble'), dbPanel=document.getElementById('flDb'), poof=document.getElementById('flPoof');
     var lvEls={}, lvLines={}, lvLabs={};
     [].forEach.call(stage.querySelectorAll('.fl-lv'),function(l){ var n=l.getAttribute('data-lv'); lvEls[n]=l; lvLines[n]=l.querySelector('i'); var lab=l.querySelector('.fl-lvlab'); if(lab) lvLabs[n]=lab; });
-    /* Ebene 2 — exakte Reihenfolge: RPET Becher, Kugeldeckel, Becherhalter, Serviette, Bowl, Deckel */
+    /* Ebene 2 — exakte Reihenfolge: RPET Becher, Kugeldeckel, Strohhalm, Serviette, Bowl, Deckel */
     var E2={becher:{x:.25,y:LV.y2},kugel:{x:.362,y:LV.y2},straw:{x:.474,y:LV.y2},serv:{x:.586,y:LV.y2},bowl:{x:.698,y:LV.y2},deckel:{x:.81,y:LV.y2}};
     var E2IDS=['becher','kugel','straw','serv','bowl','deckel'];
     var DESKX=[.25,.362,.474,.586,.698,.81], MOBX=[.32,.436,.552,.668,.784,.90];
