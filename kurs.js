@@ -15059,15 +15059,18 @@ var TSISL_ZUG_SCHLUESSEL=[
     display:flex;align-items:center;justify-content:space-between;gap:12px;
     transition:border-color .5s ${EASE},box-shadow .5s ${EASE},background .5s ${EASE}}
   #tsnaiq .q-card:last-child{margin-bottom:0}
-  #tsnaiq .q-card-n{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.62);white-space:nowrap}
-  #tsnaiq .q-card-v{font-size:13.5px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #tsnaiq .q-card-n{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.55);white-space:nowrap}
+  #tsnaiq .q-card-v{font-size:14px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
   #tsnaiq .q-card.lit{border-color:rgba(199,180,137,.5);
     background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#05060b;
     box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 34px -14px rgba(199,180,137,.4)}
   #tsnaiq .q-card.lit .q-card-n{color:#fff}
   #tsnaiq .q-card.lit .q-card-v{color:#c7b489}
-  #tsnaiq.js .q-card{opacity:.34}
-  #tsnaiq.js .q-card.lit{opacity:1}
+  /* Dimmen NIE per opacity: das macht die Kachel durchsichtig und die Schiene scheint durch
+     (Opake-Basis-Regel, Robert-Feedback 21.07.2026 zu #tskm). Gedimmt wird ueber Farbe + Rand. */
+  #tsnaiq.js .q-card{border-color:rgba(255,255,255,.06)}
+  #tsnaiq.js .q-card .q-card-n{color:rgba(255,255,255,.3)}
+  #tsnaiq.js .q-card .q-card-v{color:rgba(255,255,255,.26)}
 
   /* Ergebnis */
   #tsnaiq .q-res{position:relative;z-index:2;margin-top:13px;border-radius:13px;padding:14px;text-align:center;
@@ -15081,8 +15084,10 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq.js .q-res-v{opacity:0;transform:translateY(8px);
     transition:opacity .55s ${EASE} .1s,transform .55s ${EASE} .1s}
   #tsnaiq.js .q-res.lit .q-res-v{opacity:1;transform:none}
-  #tsnaiq.js .q-res{opacity:.34}
-  #tsnaiq.js .q-res.lit{opacity:1;box-shadow:0 0 0 1px rgba(199,180,137,.2),0 18px 44px -16px rgba(199,180,137,.55)}
+  #tsnaiq.js .q-res{border-color:rgba(199,180,137,.16)}
+  #tsnaiq.js .q-res .q-res-k{color:rgba(255,255,255,.22)}
+  #tsnaiq.js .q-res.lit{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.2),0 18px 44px -16px rgba(199,180,137,.55)}
+  #tsnaiq.js .q-res.lit .q-res-k{color:rgba(255,255,255,.45)}
 
   /* Linke Spalte: externes Chatfenster */
   #tsnaiq .q-ext{position:relative;z-index:2;border-radius:12px;padding:14px;
@@ -15091,7 +15096,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq .q-ext-k{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
     color:rgba(255,255,255,.34);margin-bottom:9px}
   #tsnaiq .q-ext-a{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.6)}
-  #tsnaiq .q-dots{display:inline-flex;gap:5px;align-items:center;height:20px}
+  #tsnaiq .q-dots{display:none;gap:5px;align-items:center;height:20px}
   #tsnaiq .q-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.42);display:block}
   #tsnaiq.js .q-out.go .q-dots i{animation:naiqBlink 1.1s ${EASE} infinite}
   #tsnaiq.js .q-out.go .q-dots i:nth-child(2){animation-delay:.16s}
@@ -15105,12 +15110,13 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsnaiq.js .q-out.done .q-dots{display:none}
 
   /* Fussnoten je Spalte */
-  #tsnaiq .q-note{font-size:10.5px;line-height:1.5;color:rgba(255,255,255,.34);margin-top:11px;text-align:center}
-  #tsnaiq .q-in .q-note{color:rgba(255,255,255,.42)}
+  #tsnaiq .q-note{font-size:10px;line-height:1.5;color:rgba(255,255,255,.28);margin-top:11px;text-align:center}
+  #tsnaiq .q-in .q-note{color:rgba(255,255,255,.32)}
 
   /* Ambient: ruhiges Atmen des System-Rahmens, mit Ruhephase */
-  #tsnaiq.js .q-in.go{animation:naiqBreath 5.2s ${EASE} 1.2s infinite}
-  @keyframes naiqBreath{0%,62%,100%{box-shadow:0 0 0 0 rgba(199,180,137,0)}
+  #tsnaiq.js .q-in.go{animation:naiqBreath 3.6s ${EASE} 1.2s infinite}
+  #tsnaiq.hid .q-in.go,#tsnaiq.hid .q-out.go .q-dots i{animation-play-state:paused}
+  @keyframes naiqBreath{0%,58%,100%{box-shadow:0 0 0 0 rgba(199,180,137,0)}
     78%{box-shadow:0 0 0 1px rgba(199,180,137,.14),0 0 44px -12px rgba(199,180,137,.3)}}
 
   /* Caption + Replay */
@@ -15151,7 +15157,6 @@ var TSISL_ZUG_SCHLUESSEL=[
     '<div class="q-stage">'+
       '<div class="q-track q-out">'+
         '<div class="q-lbl">Ein Chat außerhalb deiner Daten</div>'+
-        '<div class="q-rail"></div>'+
         '<div class="q-ext">'+
           '<div class="q-ext-k">Antwort</div>'+
           '<div class="q-dots"><i></i><i></i><i></i></div>'+
@@ -15163,13 +15168,13 @@ var TSISL_ZUG_SCHLUESSEL=[
         '<div class="q-lbl">Notion AI in deinem System</div>'+
         '<div class="q-chain">'+
         '<div class="q-rail"><span class="q-dot"></span></div>'+
-        '<div class="q-card" data-i="0"><span class="q-card-n">DB 0 : Inventurliste</span><span class="q-card-v">2,00 € / kg</span></div>'+
-        '<div class="q-card" data-i="1"><span class="q-card-n">DB IV : Zutaten</span><span class="q-card-v">80 g je Portion</span></div>'+
-        '<div class="q-card" data-i="2"><span class="q-card-n">DB V : Rezepturen</span><span class="q-card-v">1 Position</span></div>'+
+        '<div class="q-card" data-i="0"><span class="q-card-n">DB 0 : Inventurliste</span><span class="q-card-v">3,20 € / kg</span></div>'+
+        '<div class="q-card" data-i="1"><span class="q-card-n">DB IV : Zutaten</span><span class="q-card-v">120 g Einwaage</span></div>'+
+        '<div class="q-card" data-i="2"><span class="q-card-n">DB V : Rezepturen</span><span class="q-card-v">1 × Tomate</span></div>'+
         '<div class="q-card" data-i="3"><span class="q-card-n">DB XI : Gerichte</span><span class="q-card-v">Wareneinsatz</span></div>'+
         '</div>'+
-        '<div class="q-res"><div class="q-res-k">Antwort</div><div class="q-res-v" data-to="0.16">0,16 €</div></div>'+
-        '<div class="q-note">Beispielwerte aus der Zutaten-Lektion.</div>'+
+        '<div class="q-res"><div class="q-res-k">Antwort</div><div class="q-res-v">0,38 €</div></div>'+
+        '<div class="q-note">Beispielwerte — dieselben wie in der Zutaten-Lektion.</div>'+
       '</div>'+
     '</div>'+
     '<p class="q-cap">Der Unterschied ist nicht die Intelligenz, sondern der <b>Standort</b>. Notion AI liest die Werte, die du selbst eingetragen hast, und rechnet damit — deshalb bekommst du eine Zahl statt einer Erklärung.</p>'+
@@ -15181,8 +15186,6 @@ var TSISL_ZUG_SCHLUESSEL=[
     var s=document.createElement('style'); s.id='tsnaiq-css'; s.textContent=CSS; document.head.appendChild(s);
   }
 
-  function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
-
   function play(root){
     if(!root) return;
     var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -15192,18 +15195,16 @@ var TSISL_ZUG_SCHLUESSEL=[
         inn=root.querySelector('.q-in'),
         exta=root.querySelector('.q-ext-a'),
         cards=[].slice.call(root.querySelectorAll('.q-card')),
-        res=root.querySelector('.q-res'),
-        resv=root.querySelector('.q-res-v');
+        res=root.querySelector('.q-res');
     if(!wrap) return;
     /* Reset */
     if(root.__t){ root.__t.forEach(clearTimeout); }
-    if(root.__raf){ cancelAnimationFrame(root.__raf); root.__raf=null; }
     root.__t=[];
     wrap.classList.remove('on'); ask.classList.remove('on');
     out.classList.remove('go','done'); inn.classList.remove('go');
     exta.classList.remove('on');
     cards.forEach(function(c){ c.classList.remove('lit'); });
-    res.classList.remove('lit'); resv.textContent=money(0.16);
+    res.classList.remove('lit');
 
     if(reduced){
       wrap.classList.add('on'); ask.classList.add('on'); exta.classList.add('on');
@@ -15223,23 +15224,28 @@ var TSISL_ZUG_SCHLUESSEL=[
     at(980, function(){ inn.classList.add('go'); });
     /* Zeitpunkte = wann der Laufpunkt die jeweilige Kartenmitte erreicht
        (ease-in-out ueber 1900 ms ab 1180 ms; Kartenmitten bei 12,5/37,5/62,5/87,5 % der Schiene) */
-    var HIT=[1820,2180,2480,2850];   /* gemessen: exakt die Zeitpunkte, zu denen der Laufpunkt die Kartenmitte erreicht */
+    /* Gemessen per Web-Animations-API: currentTime ENTHAELT den animation-delay bereits,
+       er darf nicht zusaetzlich addiert werden. Punkt erreicht die Kartenmitten bei 1621/1988/2287/2654 ms. */
+    var HIT=[1620,1980,2290,2650];
     cards.forEach(function(c,i){ at(HIT[i], function(){ c.classList.add('lit'); }); });
     /* Aufloesung: die Zahl */
-    at(3320,function(){ res.classList.add('lit'); });
+    at(3120,function(){ res.classList.add('lit'); });
   }
 
   function arm(root){
     if(root.__armed) return; root.__armed=true;
     root.classList.add('js');
+    /* Alten Mount abraeumen (super.so Re-Render) — sonst sammeln sich Listener an. */
+    if(window.__tsnaiqKill){ try{ window.__tsnaiqKill(); }catch(e){} }
     var fired=false;
     function go(){ if(fired) return; fired=true; play(root); }
     function inView(){
       var r=root.getBoundingClientRect();
       return r.top < (innerHeight*0.82) && r.bottom > 0;
     }
+    var io=null;
     if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){
+      io=new IntersectionObserver(function(es){
         es.forEach(function(e){ if(e.isIntersecting){ go(); io.disconnect(); } });
       },{threshold:.3});
       io.observe(root);
@@ -15251,6 +15257,16 @@ var TSISL_ZUG_SCHLUESSEL=[
     chk();
     var rp=root.querySelector('.q-replay');
     if(rp) rp.addEventListener('click',function(){ play(document.getElementById('tsnaiq')); });
+    /* Loops im Hintergrund-Tab pausieren (Qualitaets-Gesetz Punkt 3) */
+    function vis(){ var r=document.getElementById('tsnaiq'); if(r) r.classList.toggle('hid',document.hidden); }
+    document.addEventListener('visibilitychange',vis); vis();
+    window.__tsnaiqKill=function(){
+      removeEventListener('scroll',chk); removeEventListener('resize',chk);
+      document.removeEventListener('visibilitychange',vis);
+      if(io) { try{ io.disconnect(); }catch(e){} }
+      if(root.__t) root.__t.forEach(clearTimeout);
+      window.__tsnaiqKill=null;
+    };
   }
 
   function findAnchor(){
@@ -15259,6 +15275,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 
   function mount(){
     if(!on()){
+      if(window.__tsnaiqKill){ try{ window.__tsnaiqKill(); }catch(e){} }
       var old=document.getElementById('tsnaiq'); if(old&&old.parentNode) old.parentNode.removeChild(old);
       return;
     }
