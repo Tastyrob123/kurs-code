@@ -12808,7 +12808,7 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev9 2026-07-21) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev10 2026-07-21) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -12819,6 +12819,11 @@ var TSISL_ZUG_SCHLUESSEL=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 10 (2026-07-21): Drei neue Abschnitte direkt nach der Einleitung —
+   (1) Erklaeranimation #tsgz "Aus der Zeile wird eine Kachel" (4 Beats,
+   Step-Rail, Replay, Widget mit Count-up), (2) zentrierter Zwischentext,
+   (3) Erklaervideo #tsvid nach Katalog Abschnitt 03 (PC links, Text
+   rechts, zentrierter Abschluss-Text).
    Rev 9 (2026-07-21): Tool-Kacheln mit Marken-Logos ueber den Namen
    (.tunit/.tmark, OpenAI+Claude neu im Repo unter img/logos/);
    Abo-Sektion: belegte USD-Preise + gestaffelte Tabellen-Animation,
@@ -13115,6 +13120,111 @@ var TSISL_ZUG_SCHLUESSEL=[
       .page__interface-bau-grundstruktur-widgets .ts-hero__text{padding:0 16px 20px}
     }
     @media(max-width:520px){#tsIface .learn{grid-template-columns:1fr;max-width:300px}}
+
+    /* ============ ERKLAERANIMATION "Aus der Zeile wird eine Kachel" (#tsgz) ============
+       Endzustand = Default: ohne .js steht die fertige Galerie sichtbar da (kein schwarzes Loch). */
+    #tsIface .gz-head{max-width:860px;margin:0 auto 44px;padding:0 24px;text-align:center}
+    #tsIface .gz-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:12px}
+    #tsIface .gz-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
+    #tsIface .gz-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0;max-width:720px;margin-left:auto;margin-right:auto}
+
+    #tsIface .gz-wrap{max-width:920px;margin:0 auto;padding:0 clamp(12px,2vw,20px)}
+    #tsIface .gz-stage{position:relative;height:440px;margin:0 auto}
+    #tsIface .gz-tablehead{position:absolute;top:74px;left:0;width:100%;height:26px;display:flex;align-items:center;gap:0;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.34);border-bottom:1px solid rgba(255,255,255,.09);opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+    #tsIface .gz-th1{margin-left:72px}#tsIface .gz-th2{margin-left:auto;width:26%}#tsIface .gz-th3{width:20%;text-align:right}
+
+    #tsIface .gz-item{position:absolute;top:40px;left:calc(var(--r) * 34.6%);width:30.8%;height:264px;border-radius:15px;background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.12);box-shadow:0 26px 58px -34px rgba(0,0,0,.95);overflow:hidden;
+      transition:top .82s cubic-bezier(.16,1,.3,1),left .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+    #tsIface .gz-thumb{position:absolute;left:0;top:0;width:100%;height:186px;border-radius:15px 15px 0 0;overflow:hidden;background:#0b0d14;
+      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+    #tsIface .gz-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    #tsIface .gz-name{position:absolute;left:16px;top:202px;width:calc(100% - 32px);font-family:var(--disp);font-weight:600;font-size:17px;line-height:1.15;color:#fff;text-align:left;white-space:nowrap;
+      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),font-size .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+    #tsIface .gz-cat{position:absolute;left:16px;top:228px;width:calc(100% - 32px);font-size:12px;color:rgba(255,255,255,.5);text-align:left;white-space:nowrap;
+      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+    #tsIface .gz-val{position:absolute;left:calc(100% - 94px);top:12px;width:80px;font-size:12.5px;font-weight:600;color:var(--beige-hi);font-variant-numeric:tabular-nums;text-align:center;white-space:nowrap;background:rgba(5,6,11,.66);border:1px solid rgba(199,180,137,.45);border-radius:999px;padding:5px 0;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+      transition:left .82s cubic-bezier(.16,1,.3,1),top .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),font-size .82s cubic-bezier(.16,1,.3,1),background .6s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),padding .82s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--r) * 150ms)}
+
+    /* --- ZEILEN-ZUSTAND (nur mit JS) --- */
+    #tsIface .gz-wrap.js.rows .gz-tablehead{opacity:1}
+    #tsIface .gz-wrap.js.rows .gz-item{top:calc(var(--r) * 58px + 110px);left:0;width:100%;height:50px;border-radius:10px;box-shadow:0 10px 26px -20px rgba(0,0,0,.9)}
+    #tsIface .gz-wrap.js.rows .gz-thumb{left:12px;top:9px;width:46px;height:32px;border-radius:6px}
+    #tsIface .gz-wrap.js.rows .gz-name{left:72px;top:16px;width:32%;font-size:14.5px}
+    #tsIface .gz-wrap.js.rows .gz-cat{left:52%;top:18px;width:24%}
+    #tsIface .gz-wrap.js.rows .gz-val{left:74%;top:15px;width:22%;text-align:right;font-size:13.5px;background:transparent;border-color:transparent;padding:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+
+    /* Einzug der Zeilen (Beat 1) */
+    #tsIface .gz-wrap.js .gz-item{opacity:0;transform:translateY(14px)}
+    #tsIface .gz-wrap.js.go .gz-item{opacity:1;transform:none;transition:top .82s cubic-bezier(.16,1,.3,1),left .82s cubic-bezier(.16,1,.3,1),width .82s cubic-bezier(.16,1,.3,1),height .82s cubic-bezier(.16,1,.3,1),border-radius .82s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+
+    /* Sweep-Hervorhebung (Beat 2) */
+    #tsIface .gz-item.lit{border-color:rgba(199,180,137,.55);box-shadow:0 14px 34px -18px rgba(0,0,0,.9),0 0 0 6px rgba(199,180,137,.055)}
+    #tsIface .gz-item.lit::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 12%,rgba(199,180,137,.20) 48%,transparent 84%);transform:translateX(-100%);animation:gzSweep 1.15s cubic-bezier(.22,1,.36,1) forwards}
+    @keyframes gzSweep{to{transform:translateX(100%)}}
+
+    /* Widget (Beat 4) */
+    #tsIface .gz-widget{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(330px,86%);background:linear-gradient(160deg,rgba(199,180,137,.14),rgba(199,180,137,.03));border:1px solid rgba(199,180,137,.42);border-radius:13px;padding:13px 16px 14px;box-shadow:0 22px 50px -26px rgba(0,0,0,.95)}
+    #tsIface .gz-wrap.js .gz-widget{opacity:0;transform:translateX(-50%) translateY(12px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+    #tsIface .gz-wrap.js.widget .gz-widget{opacity:1;transform:translateX(-50%) translateY(0)}
+    #tsIface .gz-wk{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+    #tsIface .gz-wk-l{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--beige-lo)}
+    #tsIface .gz-wk-v{font-family:var(--disp);font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums}
+    #tsIface .gz-bar{position:relative;height:5px;border-radius:999px;background:rgba(255,255,255,.10);margin-top:9px;overflow:hidden}
+    #tsIface .gz-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:999px;background:linear-gradient(90deg,rgba(199,180,137,.65),var(--beige));transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+    #tsIface .gz-wk2{margin-top:11px;padding-top:10px;border-top:1px solid rgba(199,180,137,.20)}
+    #tsIface .gz-wk2 .gz-wk-v{font-size:17px}
+    #tsIface .gz-wrap.js.widget .gz-bar i{width:72%}
+    #tsIface .gz-wrap:not(.js) .gz-bar i{width:72%}
+
+    /* Rail + Caption + Replay */
+    #tsIface .gz-steps{display:flex;justify-content:center;gap:9px;margin:26px 0 0;flex-wrap:wrap}
+    #tsIface .gz-step{font-family:var(--disp);font-size:11.5px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.42);background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 13px;cursor:pointer;transition:color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),background .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .gz-step:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+    #tsIface .gz-step.on{color:var(--beige);border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.09)}
+    #tsIface .gz-cap{max-width:680px;margin:18px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
+    #tsIface .gz-note{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+    #tsIface .gz-foot{text-align:center;margin-top:6px}
+    #tsIface .gz-replay{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--beige);background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .gz-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
+
+    @media(max-width:820px){
+      #tsIface .gz-stage{height:auto;min-height:640px}
+      #tsIface .gz-item{position:relative;left:auto !important;top:auto !important;width:100% !important;height:auto !important;min-height:270px;margin-bottom:14px;--r:0}
+      #tsIface .gz-wrap.js.rows .gz-item{height:50px !important;min-height:0}
+      #tsIface .gz-cap{min-height:120px}
+      #tsIface .gz-widget{position:relative;left:auto;bottom:auto;transform:none;width:100%;margin-top:6px}
+      #tsIface .gz-wrap.js .gz-widget{transform:translateY(12px)}
+      #tsIface .gz-wrap.js.widget .gz-widget{transform:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      #tsIface .gz-item,#tsIface .gz-thumb,#tsIface .gz-name,#tsIface .gz-cat,#tsIface .gz-val,#tsIface .gz-widget,#tsIface .gz-bar i{transition:none !important}
+      #tsIface .gz-item.lit::after{animation:none}
+    }
+
+    /* ============ ERKLAERVIDEO (#tsvid) — Katalog Abschnitt 03 ============ */
+    #tsIface .vid-row{display:grid;grid-template-columns:calc((100% - 18px) * .5) calc((100% - 18px) * .5);gap:18px;max-width:1180px;margin:0 auto;align-items:center}
+    #tsIface .vid-pc{display:flex;align-items:center;justify-content:center}
+    #tsIface .vid-pc .macwrap{margin:0;max-width:none;width:100%}
+    #tsIface .vid-screen{position:relative;cursor:pointer}
+    #tsIface .vid-screen .ph{aspect-ratio:16/10;border-radius:0}
+    #tsIface .vid-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;z-index:3;transition:transform .4s cubic-bezier(.16,1,.3,1),background .4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .vid-play::before{content:"";width:0;height:0;margin-left:5px;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}
+    #tsIface .vid-screen:hover .vid-play{transform:translate(-50%,-50%) scale(1.08);background:rgba(255,255,255,.26)}
+    #tsIface .vid-txt h2{font-size:42px;line-height:1.15;text-align:center;letter-spacing:-.02em;margin:0 0 18px}
+    #tsIface .vid-txt p{font-size:15.5px;line-height:1.62;color:var(--tx);text-align:left;margin:0 0 12px}
+    #tsIface .vid-txt p:last-child{margin-bottom:0}
+    #tsIface .vid-close{max-width:900px;margin:44px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx)}
+    @media(max-width:820px){
+      #tsIface .vid-row{grid-template-columns:1fr;gap:26px;max-width:520px}
+      #tsIface .vid-txt h2{font-size:clamp(26px,6vw,34px)}
+    }
+
+    /* ============ Zwischen-Textabschnitt ============ */
+    #tsIface .midtext{max-width:720px;margin:0 auto;text-align:center}
+    #tsIface .midtext h3{font-size:clamp(19px,2vw,23px);margin:0 0 14px}
+    #tsIface .midtext p{font-size:15.5px;line-height:1.62;color:var(--tx);margin:0 0 12px}
+    #tsIface .midtext p:last-child{margin-bottom:0}
+
     @media(prefers-reduced-motion:reduce){
       #tsIface .rev{opacity:1;transform:none;filter:none;transition:none}
       #tsIface .lorb{animation:none}
@@ -13195,6 +13305,79 @@ var TSISL_ZUG_SCHLUESSEL=[
   }
   function frameSm(cap){ return '<div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="ph"><div class="ph-in"><span class="ph-pill">Beispiel</span><span class="ph-cap">'+cap+'</span></div></div></div>'; }
 
+
+  /* ---------- ERKLAERANIMATION "Aus der Zeile wird eine Kachel" ---------- */
+  var GZ_IMG='https://tastyrob123.github.io/kurs/img/zutaten/';
+  var GZ_ROWS=[
+    {img:'tomate.jpg',        n:'Tomate',    c:'Gemüse',        v:'2,40 €/kg'},
+    {img:'basilikum.jpg',     n:'Basilikum', c:'Kräuter',       v:'1,80 €/Bund'},
+    {img:'parmesan.jpg',      n:'Parmesan',  c:'Milchprodukte', v:'24,90 €/kg'}
+  ];
+  var GZ_CAPS=[
+    'Drei Zutaten mit Kategorie und Preis. Inhaltlich stimmt hier alles, nur öffnet diese Ansicht niemand freiwillig zweimal.',
+    'Jetzt wird eine Zeile ausgewählt. Am Eintrag selbst ändert sich nichts, du legst nur fest, wie Notion ihn zeigen soll.',
+    'Das kleine Vorschaubild wandert nach oben und wird zum Cover, der Name rutscht darunter, der Preis sitzt als Badge in der Ecke.',
+    'Zum Schluss dockt ein Widget an und zählt live mit, wie viele Zutaten drinstehen und was sie im Schnitt kosten.'
+  ];
+  function gzHTML(){
+    var items='';
+    for(var i=0;i<GZ_ROWS.length;i++){
+      var r=GZ_ROWS[i];
+      items+='<div class="gz-item" style="--r:'+i+'">'+
+               '<div class="gz-thumb"><img src="'+GZ_IMG+r.img+'" alt="'+r.n+'" loading="lazy"></div>'+
+               '<div class="gz-name">'+r.n+'</div>'+
+               '<div class="gz-cat">'+r.c+'</div>'+
+               '<div class="gz-val">'+r.v+'</div>'+
+             '</div>';
+    }
+    var steps='';
+    for(var k=0;k<4;k++){ steps+='<button class="gz-step'+(k===0?' on':'')+'" data-s="'+k+'">0'+(k+1)+'</button>'; }
+    return '<section class="rev" id="tsgz">'+
+      '<div class="gz-head">'+
+        '<span class="gz-eyebrow">Von Zeile zu Kachel</span>'+
+        '<h2>Aus drei Zeilen werden <span class=\"gold\">drei Kacheln</span>.</h2>'+
+        '<p class="gz-sub">Was du hier siehst, sind keine neuen Daten. Es sind dieselben drei Zutaten mit denselben Preisen, nur anders angezeigt.</p>'+
+      '</div>'+
+      '<div class="gz-wrap">'+
+        '<div class="gz-stage">'+
+          '<div class="gz-tablehead"><span class="gz-th1">Name</span><span class="gz-th2">Kategorie</span><span class="gz-th3">Preis</span></div>'+
+          items+
+          '<div class="gz-widget">'+
+            '<div class="gz-wk"><span class="gz-wk-l">Zutaten erfasst</span><span class="gz-wk-v" data-to="24">24</span></div>'+
+            '<div class="gz-bar"><i></i></div>'+
+            '<div class="gz-wk gz-wk2"><span class="gz-wk-l">Preis im Schnitt</span><span class="gz-wk-v gz-wk-eur" data-to="9.70">9,70 €</span></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="gz-steps">'+steps+'</div>'+
+        '<p class="gz-cap">'+GZ_CAPS[0]+'<span class="gz-note">Beispielwerte</span></p>'+
+        '<div class="gz-foot"><button class="gz-replay">Neu abspielen</button></div>'+
+      '</div>'+
+    '</section>';
+  }
+
+  /* ---------- ERKLAERVIDEO (Katalog Abschnitt 03) ---------- */
+  function vidHTML(){
+    return '<section class="rev" id="tsvid">'+
+      '<div class="vid-row">'+
+        '<div class="vid-pc">'+
+          laptop('<div class="vid-screen"><div class="ph"><div class="ph-in"><span class="ph-pill">Video</span><span class="ph-cap">folgt</span></div></div><span class="vid-play" role="button" aria-label="Video abspielen"></span></div>')+
+        '</div>'+
+        '<div class="vid-txt">'+
+          '<h2>Erst die Ansicht, dann <span class=\"gold\">das Bild</span>.</h2>'+
+          '<p>Die Lektion beginnt bei den Ansichten in Notion. Tabelle, Galerie, Board, Liste und Diagramm sind fünf Wege, dieselben Einträge zu zeigen, und du siehst gleich, wofür sich welcher eignet.</p>'+'<p>Den größten Teil der Arbeit macht danach die Galerie, denn dort braucht jeder Eintrag ein Titelbild. Die Bilder kommen von drei KI-Tools: Gemini übernimmt alles Essbare, Higgsfield die fotorealistischen Objekte wie Verpackungen und Geschirr, und für abstrakte Motive und weite Landschaften ist Midjourney zuständig.</p>'+'<p>Was danach noch fehlt, ergänzt du in Canva Pro. Text auf dem Bild, ein Schatten, dein Logo an der richtigen Stelle.</p>'+
+        '</div>'+
+      '</div>'+
+      '<p class="vid-close">Bevor du das Video startest, öffne Notion und leg die Seite an, auf der dein Interface später entsteht. Ein Titel reicht, der Rest kommt Schritt für Schritt dazu. Halte sie offen, während du zusiehst, dann kannst du direkt mitbauen. In der nächsten Lektion füllen wir diese Seite dann gemeinsam mit dem Food- und dem Drinksquartier.</p>'+
+    '</section>';
+  }
+
+  /* ---------- Zwischen-Textabschnitt ---------- */
+  function midHTML(){
+    return '<section class="rev">'+
+      '<div class="midtext"><h3>Der Weg dorthin</h3><p>Der Umbau selbst dauert keine zwei Minuten. Du klickst auf Ansicht hinzufügen, wählst Galerie und bist fertig. Der Aufwand steckt woanders: in den Bildern, die auf den Kacheln liegen, und in der Frage, welche Ansicht du für welche Situation überhaupt brauchst.</p><p>Genau darum geht es im Rest dieser Lektion. Im Video gehe ich mit dir durch, in welcher Reihenfolge du vorgehst und wo die typischen Umwege liegen.</p></div>'+
+    '</section>';
+  }
+
   /* ---------- CONTENT ---------- */
   function contentHTML(){
     return ''+
@@ -13203,6 +13386,10 @@ var TSISL_ZUG_SCHLUESSEL=[
       '<p class="tsif-sub">Bis hierhin haben wir das Fundament gebaut: Datenbanken, die miteinander verbunden sind und aufeinander aufbauen. Deine Zahlen liegen vor — zumindest theoretisch.</p>'+
       '<p class="tsif-sub">Praktisch sieht das Ganze aber noch aus wie eine nüchterne Tabelle. Es fehlt das gewisse Etwas, das aus deinen Zahlen ein visuell ansprechendes Interface macht — ein System, das du gerne öffnest. Genau das bauen wir jetzt. Dafür nutzen wir verschiedene Tools und Möglichkeiten, und wir fangen mit dem wichtigsten Baukasten an: Notion selbst.</p>'+
     '</section>'+
+
+    gzHTML()+
+    midHTML()+
+    vidHTML()+
 
     /* Ansichten-Chips — eine Reihe, direkt unter dem Intro */
     '<div class="viewbar rev">'+
@@ -13377,6 +13564,118 @@ var TSISL_ZUG_SCHLUESSEL=[
     revealObserve(root);
     startViewCycle(root);
     setupCompare(root);
+    initGZ();
+    initVid();
+  }
+
+
+  /* ---------- Choreografie der Erklaeranimation ----------
+     Beats: 0 Tabelle | 1 Zeile hervorgehoben | 2 Zeilen werden Kacheln | 3 Widget dockt an
+     Endzustand = Default: ohne .js steht die fertige Galerie da. */
+  var GZ_DWELL=[3200,2100,3100,3200];
+  function initGZ(){
+    var wrap=document.querySelector('#tsgz .gz-wrap');
+    if(!wrap || wrap.__gz) return;
+    wrap.__gz=true;
+    var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var steps=wrap.querySelectorAll('.gz-step');
+    var cap=wrap.querySelector('.gz-cap');
+    var val=wrap.querySelector('.gz-wk-v');
+    var eur=wrap.querySelector('.gz-wk-eur');
+    var timer=null, numRaf=null, beat=-1, playing=false;
+
+    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} if(numRaf){cancelAnimationFrame(numRaf);numRaf=null;} }
+    function setCap(i){
+      if(!cap) return;
+      cap.innerHTML=GZ_CAPS[i]+'<span class="gz-note">Beispielwerte</span>';
+    }
+    function markStep(i){
+      for(var k=0;k<steps.length;k++){ steps[k].classList.toggle('on', k===i); }
+    }
+    /* Count-up beider Werte auf EINEM Ticker, ~26 fps gedrosselt (Mutation-Storm-Schutz) */
+    function eurTxt(n){ return n.toFixed(2).replace('.',',')+' \u20AC'; }
+    function countAll(){
+      var tN=parseInt(val&&val.getAttribute('data-to')||'24',10);
+      var tE=parseFloat(eur&&eur.getAttribute('data-to')||'9.70');
+      if(reduce){ if(val) val.textContent=tN; if(eur) eur.textContent=eurTxt(tE); return; }
+      var dur=1050, t0=null, last=0;
+      function step(ts){
+        if(t0===null) t0=ts;
+        var pr=Math.min(1,(ts-t0)/dur);
+        var e=1-Math.pow(1-pr,3);
+        if(ts-last>38 || pr===1){
+          if(val) val.textContent=Math.round(tN*e);
+          if(eur) eur.textContent=eurTxt(tE*e);
+          last=ts;
+        }
+        if(pr<1){ numRaf=requestAnimationFrame(step); } else { numRaf=null; }
+      }
+      numRaf=requestAnimationFrame(step);
+    }
+    function go(i,auto){
+      beat=i; markStep(i); setCap(i);
+      var items=wrap.querySelectorAll('.gz-item');
+      wrap.classList.add('js','go');
+      if(i<=1){ wrap.classList.add('rows'); } else { wrap.classList.remove('rows'); }
+      wrap.classList.toggle('widget', i>=3);
+      for(var k=0;k<items.length;k++){ items[k].classList.remove('lit'); }
+      if(i===1 && items[0]){ void items[0].offsetWidth; items[0].classList.add('lit'); }
+      if(i===3){ if(numRaf){cancelAnimationFrame(numRaf);numRaf=null;} countAll(); }
+      else { if(val) val.textContent='0'; if(eur) eur.textContent='0,00 €'; }
+      if(auto && i<3){
+        timer=setTimeout(function(){ go(i+1,true); }, GZ_DWELL[i]);
+      } else if(auto){ playing=false; }
+    }
+    function play(){
+      clearAll();
+      if(reduce){ wrap.classList.remove('js'); markStep(3); setCap(3); return; }
+      playing=true;
+      wrap.classList.add('js');
+      wrap.classList.add('rows');
+      wrap.classList.remove('go','widget');
+      void wrap.offsetWidth;
+      timer=setTimeout(function(){ go(0,true); },60);
+    }
+    for(var k=0;k<steps.length;k++){
+      (function(idx){ steps[idx].addEventListener('click',function(){ clearAll(); playing=false; wrap.classList.add('js'); go(idx,false); }); })(k);
+    }
+    var rp=wrap.querySelector('.gz-replay');
+    if(rp) rp.addEventListener('click',function(){ play(); });
+
+    /* Hintergrund-Tab: laufende Sequenz anhalten */
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){ clearAll(); }
+      else if(playing && beat>-1 && beat<3){ timer=setTimeout(function(){ go(beat+1,true); }, GZ_DWELL[beat]); }
+    });
+
+    /* One-Shot beim Scrollen + self-healing Fallback */
+    var fired=false;
+    function trigger(){ if(fired) return; fired=true; play(); }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(en){
+        if(en[0].isIntersecting){ io.disconnect(); trigger(); }
+      },{threshold:.3});
+      io.observe(wrap);
+    } else { trigger(); }
+    function heal(){
+      var w=document.querySelector('#tsgz .gz-wrap'); if(!w) return;
+      var r=w.getBoundingClientRect();
+      if(!fired && r.top < innerHeight*.75 && r.bottom > 0){ trigger(); }
+    }
+    window.addEventListener('scroll',heal,{passive:true});
+    window.addEventListener('resize',heal);
+    setTimeout(heal,1200);
+    window.__tsgzKill=function(){ clearAll(); playing=false; };
+  }
+
+  /* Lightbox-Platzhalter fuer den Play-Button (Video kommt erst nach allen Lektionen) */
+  function initVid(){
+    var scr=document.querySelector('#tsvid .vid-screen');
+    if(!scr || scr.__v) return; scr.__v=true;
+    scr.addEventListener('click',function(){
+      var cap=scr.querySelector('.ph-cap');
+      if(cap){ cap.textContent='Video folgt in Kürze'; setTimeout(function(){ cap.textContent='folgt'; },1800); }
+    });
   }
 
   function revealObserve(root){
