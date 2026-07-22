@@ -23696,13 +23696,13 @@ var TSISL_TEAM_ONB_V2=[
     --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
   #ts11emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
   #ts11emp.js.in{opacity:1}
-  #ts11emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts11emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #ts11emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
   #ts11emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
     background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
   #ts11emp:hover::before{opacity:1}
-  #ts11emp.beat::after{animation:ts11empBeat 2.6s ease-in-out infinite}
-  @keyframes ts11empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts11emp.beat{animation:ts11empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts11empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
   #ts11emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
   #ts11emp .db-hd .g{color:#c7b489}
   #ts11emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
@@ -24098,13 +24098,13 @@ var TSISL_TEAM_ONB_V2=[
     --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
   #ts12emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
   #ts12emp.js.in{opacity:1}
-  #ts12emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts12emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #ts12emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
   #ts12emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
     background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
   #ts12emp:hover::before{opacity:1}
-  #ts12emp.beat::after{animation:ts12empBeat 2.6s ease-in-out infinite}
-  @keyframes ts12empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts12emp.beat{animation:ts12empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts12empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
   #ts12emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
   #ts12emp .db-hd .g{color:#c7b489}
   #ts12emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
@@ -24557,13 +24557,13 @@ var TSISL_TEAM_ONB_V2=[
     --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
   #ts13emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
   #ts13emp.js.in{opacity:1}
-  #ts13emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts13emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #ts13emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
   #ts13emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
     background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
   #ts13emp:hover::before{opacity:1}
-  #ts13emp.beat::after{animation:ts13empBeat 2.6s ease-in-out infinite}
-  @keyframes ts13empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts13emp.beat{animation:ts13empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts13empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
   #ts13emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
   #ts13emp .db-hd .g{color:#c7b489}
   #ts13emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
@@ -25007,13 +25007,13 @@ var TSISL_TEAM_ONB_V2=[
     --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
   #ts14emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
   #ts14emp.js.in{opacity:1}
-  #ts14emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts14emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #ts14emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
   #ts14emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
     background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
   #ts14emp:hover::before{opacity:1}
-  #ts14emp.beat::after{animation:ts14empBeat 2.6s ease-in-out infinite}
-  @keyframes ts14empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts14emp.beat{animation:ts14empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts14empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
   #ts14emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
   #ts14emp .db-hd .g{color:#c7b489}
   #ts14emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
@@ -25428,13 +25428,13 @@ var TSISL_TEAM_ONB_V2=[
     --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
   #ts15emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
   #ts15emp.js.in{opacity:1}
-  #ts15emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts15emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #ts15emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
   #ts15emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
     background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
   #ts15emp:hover::before{opacity:1}
-  #ts15emp.beat::after{animation:ts15empBeat 2.6s ease-in-out infinite}
-  @keyframes ts15empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts15emp.beat{animation:ts15empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts15empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
   #ts15emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
   #ts15emp .db-hd .g{color:#c7b489}
   #ts15emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
@@ -25611,6 +25611,423 @@ var TSISL_TEAM_ONB_V2=[
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/ansichten-filter">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   ansichten-filter — Hero + Einleitung "Der Blick wechselt."
+   Lektion 1.6 · Modul 1 · Notion-Grundlagen (Wissens-Lektion)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.6');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts16intro-css')) return;
+    var s=document.createElement('style'); s.id='ts16intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts16intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.6" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.6</div>'+
+        '<h1 class="ts-hero__title">Der Blick <span class="ts-gold">wechselt</span>.</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts16intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts16intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Dieselben Aufgaben sehen als Liste anders aus als im Kanban-Board oder in der Galerie — es ist nicht dieselbe Ansicht dreimal kopiert, sondern eine Datenquelle, die du dir aus drei Blickwinkeln anschaust. Änderst du eine Aufgabe in der Liste, ändert sie sich sofort auch im Board.</p>
+  <p><b>Self-Referencing Filter</b> gehen einen Schritt weiter: Eine Datenbank filtert sich anhand ihrer eigenen Verknüpfungen selbst — zum Beispiel Unteraufgaben, die automatisch erscheinen, sobald eine Hauptaufgabe verknüpft wird, ohne dass du die Ansicht jedes Mal neu einstellst.</p>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   ansichten-filter — Erkläranimation "View-Switcher" (echter Layout-Morph)
+   Eigenständiges Konzept: dieselben 3 Chips bleiben im DOM stehen, wechseln aber per
+   animierten Positionen/Größen zwischen Liste/Board/Galerie-Layout. Endzustand=Default.
+   ============================================================ */
+(function(){
+  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts16bau{width:min(860px,94vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts16bau .bau-head{max-width:700px;margin:0 auto 30px;padding:0 24px;text-align:center}
+  #ts16bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts16bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts16bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts16bau h2 .ts-gold{color:#c7b489}
+  #ts16bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
+  #ts16bau .vs-tabs{display:flex;justify-content:center;gap:10px;margin-bottom:28px}
+  #ts16bau .vs-tab{font:600 13px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:8px 16px;border-radius:999px;transition:background .4s,border-color .4s,color .4s}
+  #ts16bau .vs-tab.on{background:rgba(199,180,137,.14);border-color:rgba(199,180,137,.5);color:#fff}
+  #ts16bau .vs-stage{position:relative;height:220px;background:linear-gradient(165deg,rgba(255,255,255,.04),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden}
+  #ts16bau .vs-sweep{position:absolute;top:0;left:-20%;width:20%;height:100%;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.16),rgba(199,180,137,0));pointer-events:none;opacity:0}
+  #ts16bau.js.on .vs-sweep.fire{animation:ts16sweep 1.1s cubic-bezier(.16,1,.3,1) 1}
+  @keyframes ts16sweep{0%{left:-20%;opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+  #ts16bau.js .vs-stage{opacity:0;transform:translateY(20px)}
+  #ts16bau.js.on .vs-stage{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  #ts16bau .chip{position:absolute;display:flex;align-items:center;gap:8px;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.35);border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#fff;
+    transition:left 1s cubic-bezier(.22,1,.36,1),top 1s cubic-bezier(.22,1,.36,1),width 1s cubic-bezier(.22,1,.36,1),height 1s cubic-bezier(.22,1,.36,1)}
+  #ts16bau .chip i{width:8px;height:8px;border-radius:50%;background:#c7b489;flex:0 0 auto}
+  #ts16bau .bau-foot{display:flex;justify-content:center;margin-top:24px}
+  #ts16bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts16bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  `;
+
+  function injectCSS(){
+    if(document.getElementById('ts16bau-css')) return;
+    var s=document.createElement('style'); s.id='ts16bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  var NAMES=['Rechnung prüfen','Speisekarte updaten','Team-Meeting vorbereiten'];
+  var VIEWS=['list','board','gallery'];
+  var LAYOUTS={
+    list:  [ {l:'6%',t:'12%',w:'88%',h:'20%'}, {l:'6%',t:'40%',w:'88%',h:'20%'}, {l:'6%',t:'68%',w:'88%',h:'20%'} ],
+    board: [ {l:'4%',t:'14%',w:'28%',h:'72%'}, {l:'36%',t:'14%',w:'28%',h:'40%'}, {l:'68%',t:'14%',w:'28%',h:'56%'} ],
+    gallery: [ {l:'4%',t:'14%',w:'28%',h:'72%'}, {l:'36%',t:'14%',w:'28%',h:'72%'}, {l:'68%',t:'14%',w:'28%',h:'72%'} ]
+  };
+
+  function html(){
+    var tabs=['Liste','Board','Galerie'].map(function(t,i){ return '<button class="vs-tab'+(i===0?' on':'')+'" data-v="'+VIEWS[i]+'">'+t+'</button>'; }).join('');
+    var chips=NAMES.map(function(n,i){ return '<div class="chip" data-i="'+i+'"><i></i>'+n+'</div>'; }).join('');
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Ein View-Switcher</div>'+
+      '<h2>Die Daten bleiben, <span class="ts-gold">das Layout wechselt</span>.</h2>'+
+      '<p class="bau-sub">Dieselben drei Aufgaben — einmal als Liste, einmal als Board, einmal als Galerie.</p>'+
+      '</div>'+
+      '<div class="vs-tabs">'+tabs+'</div>'+
+      '<div class="vs-stage">'+chips+'<span class="vs-sweep"></span></div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts16bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function applyLayout(root, view){
+    var chips=root.querySelectorAll('.chip');
+    var pos=LAYOUTS[view];
+    chips.forEach(function(c,i){
+      c.style.left=pos[i].l; c.style.top=pos[i].t; c.style.width=pos[i].w; c.style.height=pos[i].h;
+    });
+    root.querySelectorAll('.vs-tab').forEach(function(t){ t.classList.toggle('on', t.dataset.v===view); });
+    var sweep=root.querySelector('.vs-sweep');
+    if(sweep){ sweep.classList.remove('fire'); void sweep.offsetWidth; sweep.classList.add('fire'); }
+  }
+
+  var cycleTimer=null;
+  function cycle(root){
+    var idx=0;
+    applyLayout(root, VIEWS[0]);
+    if(reduced) return;
+    cycleTimer=setInterval(function(){
+      idx=(idx+1)%VIEWS.length;
+      applyLayout(root, VIEWS[idx]);
+    }, 2600);
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+    if(cycleTimer) clearInterval(cycleTimer);
+    cycle(root);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts16bau')) return;
+    var anchor=document.getElementById('ts16intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts16bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    applyLayout(root, VIEWS[0]);
+    root.querySelector('#ts16bauReplay').addEventListener('click', function(){ play(root); });
+    root.querySelectorAll('.vs-tab').forEach(function(t){
+      t.addEventListener('click', function(){ if(cycleTimer) clearInterval(cycleTimer); applyLayout(root, t.dataset.v); });
+    });
+    if(reduced){ root.classList.add('on'); cycle(root); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   ansichten-filter — Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   ============================================================ */
+(function(){
+  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['Eine Datenquelle, viele Ansichten','Filter statt neuer Datenbanken','Gruppieren nach dem, was zählt','Self-Referencing sparsam einsetzen'];
+  var TEXTS=[
+    'Leg nie dieselbe Datenbank zweimal an, nur um sie anders zu sortieren — bau stattdessen eine neue Ansicht.',
+    'Für „nur heute" oder „nur diese Priorität" reicht ein Filter auf der bestehenden Ansicht, keine neue Tabelle.',
+    'Gruppiere nach Priorität oder Bereich, nicht nach dem Feld, das gerade zufällig zuletzt bearbeitet wurde.',
+    'Self-Referencing Filter lohnen sich für klare Fälle wie Unteraufgaben — nicht für jede Kleinigkeit.'
+  ];
+
+  var CSS=`
+  #ts16emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts16emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
+  #ts16emp.js.in{opacity:1}
+  #ts16emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
+  #ts16emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts16emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts16emp:hover::before{opacity:1}
+  #ts16emp.beat{animation:ts16empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts16empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
+  #ts16emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts16emp .db-hd .g{color:#c7b489}
+  #ts16emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts16emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts16emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts16emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts16emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts16emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts16emp .emp-right{position:relative;z-index:1}
+  #ts16emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts16emp .emph .eg{color:#c7b489}
+  #ts16emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts16emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts16emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts16emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts16emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts16emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts16emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts16emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts16emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts16emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts16emp{grid-template-columns:1fr} #ts16emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts16emp-css')) return;
+    var s=document.createElement('style'); s.id='ts16emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Dein <span class="g">Ansichten-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
+      '<p class="p">Damit deine Ansichten übersichtlich bleiben, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts16emp')) return;
+    var anchor=document.getElementById('ts16bau'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts16emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   ansichten-filter — Seitenabschluss (Learnings + Weiter-Button)
+   ============================================================ */
+(function(){
+  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du nutzt Board, Kalender, Gallery und Timeline auf derselben Datenquelle.',
+    'Du filterst und sortierst, statt neue Tabellen anzulegen.',
+    'Du gruppierst Ansichten nach dem, was wirklich zählt.',
+    'Du weißt, wann sich ein Self-Referencing Filter lohnt.'
+  ];
+
+  var CSS=`
+  #ts16l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts16l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts16l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts16l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts16l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts16l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts16lFloat 7s ease-in-out infinite}
+  #ts16l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts16l .tsl-orb:nth-child(1){animation-delay:0s} #ts16l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts16l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts16l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts16l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts16l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts16l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts16l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts16l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts16l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts16l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts16l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts16lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts16l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts16l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts16l-css')) return;
+    var s=document.createElement('style'); s.id='ts16l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts16l')) return;
+    var anchor=document.getElementById('ts16emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts16l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/automations-buttons">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
