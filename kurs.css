@@ -543,6 +543,32 @@ body:has(#sb-toggle-cb:checked) { overflow: hidden !important; height: 100% !imp
 .super-sidebar { overscroll-behavior: contain; }
 .super-navigation-menu__items-viewport { -webkit-overflow-scrolling: touch; }
 
+/* Native Scrollbar als verlaessliches Backup: super.so versteckt die native Scrollbar per
+   [data-radix-scroll-area-viewport]{scrollbar-width:none;...} und verlaesst sich nur auf
+   Radix' eigenen Custom-Thumb (.super-navigation-menu__items-thumb). Dessen Groesse/Position
+   wird per ResizeObserver berechnet und kann bei schnell wachsendem Inhalt (Modul aufklappen)
+   kurzzeitig eine veraltete, zu kurze Gesamthoehe zeigen — der Thumb wirkt dann optisch schon
+   "am Ende", obwohl der native Scroll-Bereich (scrollHeight) technisch bereits korrekt weiter
+   reicht (live geprueft: Radix-Thumb kurzzeitig falsch, natives scrollTop/scrollHeight immer
+   korrekt). Native Scrollbar zusaetzlich sichtbar machen schliesst diese Luecke, weil sie vom
+   Browser direkt aus scrollHeight/clientHeight gezeichnet wird, nie aus Radix' Zustand. */
+.super-navigation-menu__items-viewport[data-radix-scroll-area-viewport],
+.super-navigation-menu__items-viewport {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(255,255,255,.28) transparent !important;
+  -ms-overflow-style: auto !important;
+}
+.super-navigation-menu__items-viewport[data-radix-scroll-area-viewport]::-webkit-scrollbar,
+.super-navigation-menu__items-viewport::-webkit-scrollbar {
+  display: block !important;
+  width: 8px;
+}
+.super-navigation-menu__items-viewport::-webkit-scrollbar-track { background: transparent; }
+.super-navigation-menu__items-viewport::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.28); border-radius: 4px;
+}
+.super-navigation-menu__items-viewport::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.42); }
+
 /* Hamburger-Button */
 #sb-toggle {
   position: fixed; top: 16px; left: 24px; z-index: 9999;
