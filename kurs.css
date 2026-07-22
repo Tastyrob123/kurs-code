@@ -526,11 +526,13 @@ canvas[style*="2147483647"]{ display:none !important; }
   left: -340px; top: 0;
   height: 100vh;
   z-index: 60;
+  transform: none !important;
   transition: left .28s ease;
   box-shadow: none !important;
 }
 body:has(#sb-toggle-cb:checked) .super-sidebar {
   left: 0;
+  transform: none !important;
   box-shadow: 4px 0 24px rgba(0,0,0,.45) !important;
 }
 .super-content { max-width: none !important; }
