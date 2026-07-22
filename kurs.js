@@ -21924,21 +21924,22 @@ var TSISL_TEAM_ONB_V2=[
   function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
 
   var CSS=`
-  #tsnaiamb{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-  #tsnaiamb .amb-rail{position:absolute;left:calc(50% - 560px);top:0;bottom:0;width:1px;
+  #tsnaiamb{position:fixed;top:0;left:0;width:0;height:0;pointer-events:none;z-index:0}
+  #tsnaiamb .amb-rail{position:fixed;left:calc(50% - 560px);top:0;width:1px;height:100vh;pointer-events:none;
     background:linear-gradient(180deg,rgba(199,180,137,0) 0%,rgba(199,180,137,.14) 12%,rgba(199,180,137,.14) 88%,rgba(199,180,137,0) 100%)}
-  #tsnaiamb .amb-dot{position:absolute;left:calc(50% - 560px);top:0;width:6px;height:6px;margin-left:-2.5px;
+  #tsnaiamb .amb-dot{position:fixed;left:calc(50% - 560px);top:0;width:6px;height:6px;margin-left:-2.5px;pointer-events:none;
     border-radius:50%;background:#c7b489;box-shadow:0 0 14px rgba(199,180,137,.9),0 0 28px rgba(199,180,137,.4);
     animation:ambTravel 13s cubic-bezier(.45,0,.55,1) infinite}
   @keyframes ambTravel{
-    0%{top:0%;opacity:0}
+    0%{top:0vh;opacity:0}
     6%{opacity:1}
-    48%{top:100%;opacity:1}
+    48%{top:100vh;opacity:1}
     54%{opacity:0}
-    54.01%{top:0%}
-    100%{top:0%;opacity:0}
+    54.01%{top:0vh}
+    100%{top:0vh;opacity:0}
   }
-  #tsnaiamb .amb-mote{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(199,180,137,.5),rgba(199,180,137,0) 70%);
+  #tsnaiamb .amb-mote{position:fixed;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.5),rgba(199,180,137,0) 70%);
     filter:blur(1px);animation:ambDrift linear infinite}
   @keyframes ambDrift{
     0%{transform:translate(0,0);opacity:0}
