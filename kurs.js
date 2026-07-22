@@ -8371,7 +8371,7 @@
    Quartier Operations Area) — s. warenkorb-verifikation-bestehend.md. Weitere Zeilen ohne MCP-Zugriff nicht
    nachscanbar, deshalb hier NICHT erfunden/aufgefüllt (Niemals-schätzen-Regel). */
 { kachel_id:'ops_hyg_produkte', kachel_name:'Hygiene Produkte', ist_produkt_kachel:true, einheit:'Preis (€)', einheit_typ:'preis',
-  objekt_varianten:[ {name:'Desinfektionsmittel',wert:20,img:null} ] },
+  objekt_varianten:[ {name:'Desinfektionsmittel',wert:20,img:null}, {name:'Gummihandschuhe',wert:7,img:null}, {name:'Schnelldesinfektion Hand',wert:4.50,img:null}, {name:'Abzieher',wert:14,img:null}, {name:'Wischmopp mit Eimer',wert:45,img:null}, {name:'Handspülmittel',wert:15,img:null} ] },
 { kachel_id:'ops_hyg_pflicht', kachel_name:'Dokumenttypen', ist_produkt_kachel:true, einheit:'Nachweise', einheit_typ:'menge',
   objekt_varianten:[ {name:'Hygienebelehrung',wert:1,img:null}, {name:'IfSG §43',wert:1,img:null}, {name:'Gesundheitszeugnis',wert:1,img:null}, {name:'Brandschutz',wert:1,img:null} ] },
 { kachel_id:'ops_inv_festwert', kachel_name:'Festwert-Liste', ist_produkt_kachel:true, einheit:'Preis (€)', einheit_typ:'preis',
