@@ -11365,17 +11365,23 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 /* ============================================================
-   #tsrezsys — SYSTEMFLUSS (DB V) · /rezepturen  [v3]
+   #tsrezsys — SYSTEMFLUSS (DB V) · /rezepturen  [v4, 2026-07-22]
    Zwischen Finance-Warenkorb (#tsshop--db5_finance_personal) und
-   Learnings (#tsl). Reduzierter High-End-Flow, korrekter Graph:
+   Learnings (#tsl). Korrekter Graph:
      Inventarprodukt (DB 0) -> Zutat (DB IV)
      Zutat -> Rezept (DB V)
      Zutat -> Gericht/Getraenk (DB VIII)   [direkt, ohne Rezept]
      Rezept -> Gericht/Getraenk
      Gericht/Getraenk -> Menue (Kalkulation)
-   Die Kennzahlen (Preis/Portion, Allergene, Naehrwerte) ziehen als
-   Licht durch das System bis in die Menuekalkulation.
-   Keine Piktogramme (edle Ringknoten + Typo), kein greller Blob.
+   v4-Fixes gegen Abschnitt-02-Katalog (Komposition + Robustheit,
+   Robert-Feedback 22.07.2026 "entspricht nicht vorgaben"):
+   (1) ALLE 5 Knoten exakt gleich gross + auf EINER gemeinsamen
+       Achse (Rezept war vorher groesser + angehoben — Doktrin
+       1b(a)/(b) verletzt). Rezept-Akzent nur noch ueber Farbe.
+   (2) Endzustand = Default (Robustheits-Regel): Knoten/Tags sind
+       OHNE JS voll sichtbar; Klasse .js schaltet in den Start-
+       Zustand, .on/.lit bauen die Sequenz wieder auf (#tspc-Muster).
+   (3) "Neu abspielen"-Button ergaenzt (Qualitaets-Gesetz Punkt 6).
    Champagner-Gold #c7b489, Lineal TS 600, reduced-motion-Gate.
    ============================================================ */
 (function(){
@@ -11390,80 +11396,87 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsrezsys .rs-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   #tsrezsys .rs-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0;color:#fff}
   #tsrezsys .rs-title .g{color:#c7b489}
-  #tsrezsys .stage{position:relative;width:100%;aspect-ratio:1200/380}
+  #tsrezsys .stage{position:relative;width:100%;aspect-ratio:1200/300}
   #tsrezsys svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   #tsrezsys .ln{fill:none;stroke:#c7b489;stroke-width:1.25;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.55}
+  #tsrezsys .ln.byp{stroke-width:1;stroke-dasharray:2 6;opacity:.32}
   #tsrezsys .guide{fill:none;stroke:none}
   #tsrezsys .comet{fill:#f3ead4;filter:drop-shadow(0 0 7px rgba(199,180,137,.95));opacity:0}
   #tsrezsys .comet.on{opacity:1}
-  #tsrezsys .nd{position:absolute;transform:translate(-50%,-50%) scale(.72);opacity:0;transition:opacity .45s ease,transform .55s cubic-bezier(.34,1.56,.64,1)}
-  #tsrezsys .nd.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  #tsrezsys .dot{display:block;position:relative;width:44px;height:44px;border-radius:50%;background:radial-gradient(65% 65% at 40% 34%,rgba(255,255,255,.05),rgba(13,16,22,.92));border:1px solid rgba(216,201,171,.26);margin:0 auto;transition:border-color .55s ease,box-shadow .55s ease}
-  #tsrezsys .dot::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:#ecdfc2;transform:translate(-50%,-50%) scale(0);opacity:0;transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s ease;box-shadow:0 0 10px rgba(199,180,137,.7)}
-  #tsrezsys .nd.lit .dot{border-color:rgba(199,180,137,.85);box-shadow:0 0 0 1px rgba(199,180,137,.1),0 0 26px rgba(199,180,137,.18)}
-  #tsrezsys .nd.lit .dot::after{transform:translate(-50%,-50%) scale(1);opacity:1}
-  /* Rezept-Knoten: dezent hervorgehoben (Thema DB V) — champagner-getoentes Glas, feiner Doppelring */
-  #tsrezsys .nd.rez .dot{width:58px;height:58px;background:radial-gradient(70% 70% at 42% 34%,rgba(199,180,137,.22),rgba(199,180,137,.06) 58%,rgba(15,18,24,.92));border:1px solid rgba(216,201,171,.5)}
-  #tsrezsys .nd.rez .dot::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(216,201,171,.14);transition:border-color .55s ease}
-  #tsrezsys .nd.rez .dot::after{width:8px;height:8px}
-  #tsrezsys .nd.rez.lit .dot{border-color:rgba(216,201,171,.95);box-shadow:0 0 0 1px rgba(199,180,137,.12),0 0 40px rgba(199,180,137,.28)}
-  #tsrezsys .nd.rez.lit .dot::before{border-color:rgba(199,180,137,.45)}
-  #tsrezsys .lbl{position:absolute;left:50%;transform:translateX(-50%);width:168px;text-align:center;line-height:1.25}
-  #tsrezsys .lbl.below{top:calc(100% + 12px)}
-  #tsrezsys .lbl.above{bottom:calc(100% + 12px)}
+  #tsrezsys .comet.byp{fill:rgba(243,234,212,.6);filter:drop-shadow(0 0 5px rgba(199,180,137,.6))}
+  /* Endzustand = Default (Robustheits-Regel): Knoten/Punkt sind OHNE JS bereits voll sichtbar */
+  #tsrezsys .nd{position:absolute;top:50%;transform:translate(-50%,-50%) scale(1);opacity:1;transition:opacity .45s ease,transform .55s cubic-bezier(.34,1.56,.64,1)}
+  #tsrezsys .dot{display:block;position:relative;width:46px;height:46px;border-radius:50%;background:radial-gradient(65% 65% at 40% 34%,rgba(255,255,255,.05),rgba(13,16,22,.92));border:1px solid rgba(199,180,137,.85);margin:0 auto;box-shadow:0 0 0 1px rgba(199,180,137,.1),0 0 26px rgba(199,180,137,.18);transition:border-color .55s ease,box-shadow .55s ease}
+  #tsrezsys .dot::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:#ecdfc2;transform:translate(-50%,-50%) scale(1);opacity:1;transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s ease;box-shadow:0 0 10px rgba(199,180,137,.7)}
+  /* Rezept-Knoten: EXAKT gleiche Groesse wie alle anderen (Doktrin 1b) — Akzent nur ueber waermere Farbtemperatur */
+  #tsrezsys .nd.rez .dot{background:radial-gradient(70% 70% at 42% 34%,rgba(199,180,137,.28),rgba(199,180,137,.08) 58%,rgba(15,18,24,.92))}
+  #tsrezsys .nd.rez .lbl .nm{color:#efe6d2}
+  #tsrezsys .lbl{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);width:168px;text-align:center;line-height:1.25}
   #tsrezsys .lbl .nm{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:600;letter-spacing:-.005em;color:#fff}
   #tsrezsys .lbl .sub{display:block;font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,201,171,.5);margin-top:4px}
-  #tsrezsys .nd.rez .lbl .nm{font-size:15.5px;color:#efe6d2}
-  /* Kennzahl-Leiste unter dem Flow — edle Hairline-Tags */
+  /* Kennzahl-Leiste unter dem Flow — edle Hairline-Tags, ebenfalls Default = sichtbar */
   #tsrezsys .rs-keys{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:clamp(28px,3.6vw,44px) auto 0}
-  #tsrezsys .kp{font-size:11px;font-weight:600;letter-spacing:.05em;color:#d8c9ab;background:rgba(199,180,137,.05);border:1px solid rgba(216,201,171,.28);border-radius:999px;padding:6px 15px;white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
-  #tsrezsys .kp.on{opacity:1;transform:none}
+  #tsrezsys .kp{font-size:11px;font-weight:600;letter-spacing:.05em;color:#d8c9ab;background:rgba(199,180,137,.05);border:1px solid rgba(216,201,171,.28);border-radius:999px;padding:6px 15px;white-space:nowrap;opacity:1;transform:none;transition:opacity .5s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
   #tsrezsys .rs-desc{max-width:680px;margin:clamp(16px,2.2vw,24px) auto 0;text-align:center;font-size:15.5px;line-height:1.65;color:rgba(255,255,255,.9)}
   #tsrezsys .rs-desc .g{color:#c7b489}
+  #tsrezsys .rs-foot{display:flex;justify-content:center;margin:clamp(20px,2.8vw,30px) auto 0}
+  #tsrezsys .rs-replay{display:inline-flex;align-items:center;gap:8px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:12.5px;font-weight:600;color:#c7b489;background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+  #tsrezsys .rs-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
+  /* Start-Zustand NUR waehrend der Reveal-Sequenz — .js schaltet zurueck (Muster #tspc), .on/.lit gewinnen per Spezifitaet/Reihenfolge zurueck */
+  #tsrezsys.js .nd{opacity:0;transform:translate(-50%,-50%) scale(.72)}
+  #tsrezsys.js .dot{border-color:rgba(216,201,171,.26);box-shadow:none}
+  #tsrezsys.js .dot::after{transform:translate(-50%,-50%) scale(0);opacity:0}
+  #tsrezsys.js .kp{opacity:0;transform:translateY(6px)}
+  #tsrezsys .nd.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  #tsrezsys .nd.lit .dot{border-color:rgba(199,180,137,.85);box-shadow:0 0 0 1px rgba(199,180,137,.1),0 0 26px rgba(199,180,137,.18)}
+  #tsrezsys .nd.rez.lit .dot{border-color:rgba(216,201,171,.95);box-shadow:0 0 0 1px rgba(199,180,137,.12),0 0 40px rgba(199,180,137,.28)}
+  #tsrezsys .nd.lit .dot::after{transform:translate(-50%,-50%) scale(1);opacity:1}
+  #tsrezsys .kp.on{opacity:1;transform:none}
   @media(max-width:820px){
     #tsrezsys .stage-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -3vw;padding-bottom:6px}
     #tsrezsys .stage{min-width:760px;margin:0 3vw}
   }
   @media(prefers-reduced-motion:reduce){
     #tsrezsys{opacity:1;transform:none;transition:none}
-    #tsrezsys .nd{opacity:1;transform:translate(-50%,-50%) scale(1);transition:none}
+    #tsrezsys.js .nd,#tsrezsys .nd{opacity:1;transform:translate(-50%,-50%) scale(1);transition:none}
+    #tsrezsys.js .dot,#tsrezsys.js .dot::after,#tsrezsys.js .kp{opacity:1;transform:none}
     #tsrezsys .kp,#tsrezsys .comet,#tsrezsys .dot,#tsrezsys .dot::after{transition:none}
-    #tsrezsys .kp{opacity:1;transform:none}
   }
   `;
   function injectCSS(){ if(document.getElementById('tsrezsys-css'))return; var s=document.createElement('style'); s.id='tsrezsys-css'; s.textContent=CSS; document.head.appendChild(s); }
 
-  /* Nodes: [id, left%, top%, klasse, name, sublabel, labelPos] — %-Werte aus SVG-Koord. (viewBox 1200x380) */
+  /* Nodes: [id, left%, klasse, name, sublabel] — ALLE auf einer Baseline (top:50% via CSS), Doktrin 1b: gemeinsame Achse */
   var NODES=[
-    ['inv', 7.9,  65.8, 'st',  'Inventarprodukt', 'DB 0',       'below'],
-    ['zut', 30,   65.8, 'zt',  'Zutat',           'DB IV',      'below'],
-    ['rez', 52,   21.6, 'rez', 'Rezept',          'DB V',       'above'],
-    ['gg',  74.2, 65.8, 'dn',  'Gericht / Getränk','DB XI',   'below'],
-    ['men', 93.3, 65.8, 'dn',  'Menü',            'Kalkulation','below']
+    ['inv', 7.9,  'st',  'Inventarprodukt',  'DB 0'],
+    ['zut', 30,   'zt',  'Zutat',            'DB IV'],
+    ['rez', 52,   'rez', 'Rezept',           'DB V'],
+    ['gg',  74.2, 'dn',  'Gericht / Getränk','DB XI'],
+    ['men', 93.3, 'dn',  'Menü',             'Kalkulation']
   ];
   function build(){
     var root=document.createElement('div'); root.id='tsrezsys';
     var nodesHTML='';
     NODES.forEach(function(n){
-      var lbl = n[4] ? ('<span class="lbl '+n[6]+'"><span class="nm">'+n[4]+'</span>'+(n[5]?('<span class="sub">'+n[5]+'</span>'):'')+'</span>') : '';
-      nodesHTML+='<div class="nd '+n[3]+'" data-id="'+n[0]+'" style="left:'+n[1]+'%;top:'+n[2]+'%"><span class="dot"></span>'+lbl+'</div>';
+      var lbl='<span class="lbl"><span class="nm">'+n[3]+'</span><span class="sub">'+n[4]+'</span></span>';
+      nodesHTML+='<div class="nd '+n[2]+'" data-id="'+n[0]+'" style="left:'+n[1]+'%"><span class="dot"></span>'+lbl+'</div>';
     });
-    var svg='<svg viewBox="0 0 1200 380" preserveAspectRatio="none">'
-      +'<path class="ln" data-k="a" d="M95,250 H 360"/>'                                   /* Inventarprodukt -> Zutat */
-      +'<path class="ln" data-k="b" d="M360,250 C 470,250 520,82 625,82"/>'               /* Zutat -> Rezept */
-      +'<path class="ln" data-k="c" d="M360,250 C 520,312 730,312 890,250"/>'             /* Zutat -> Gericht/Getraenk (direkt) */
-      +'<path class="ln" data-k="d" d="M625,82 C 730,82 780,250 890,250"/>'               /* Rezept -> Gericht/Getraenk */
-      +'<path class="ln" data-k="e" d="M890,250 H 1120"/>'                                 /* Gericht/Getraenk -> Menue */
-      +'<path class="guide" data-g="up" d="M95,250 L360,250 C470,250 520,82 625,82 C730,82 780,250 890,250 L1120,250"/>'
-      +'<path class="guide" data-g="dn" d="M95,250 L360,250 C520,312 730,312 890,250 L1120,250"/>'
-      +'<circle class="comet" data-p="up" r="4"/><circle class="comet" data-p="dn" r="4"/>'
+    var svg='<svg viewBox="0 0 1200 300" preserveAspectRatio="none">'
+      +'<path class="ln" data-k="a" d="M95,150 H 360"/>'                                     /* Inventarprodukt -> Zutat */
+      +'<path class="ln" data-k="b" d="M360,150 H 625"/>'                                     /* Zutat -> Rezept */
+      +'<path class="ln byp" data-k="c" d="M360,150 C 550,224 700,224 890,150"/>'            /* Zutat -> Gericht/Getraenk (direkt, Shortcut-Annotation) */
+      +'<path class="ln" data-k="d" d="M625,150 H 890"/>'                                     /* Rezept -> Gericht/Getraenk */
+      +'<path class="ln" data-k="e" d="M890,150 H 1120"/>'                                    /* Gericht/Getraenk -> Menue */
+      +'<path class="guide" data-g="main" d="M95,150 L360,150 L625,150 L890,150 L1120,150"/>'
+      +'<path class="guide" data-g="byp" d="M360,150 C550,224 700,224 890,150"/>'
+      +'<circle class="comet" data-p="main" r="4"/><circle class="comet byp" data-p="byp" r="3"/>'
       +'</svg>';
     root.innerHTML='<div class="rs-head"><span class="rs-eyebrow">Das Rückgrat · DB V</span>'
       +'<h2 class="rs-title">Eine Rezeptur. Das ganze <span class="g">System</span> rechnet mit.</h2></div>'
       +'<div class="stage-wrap"><div class="stage">'+svg+nodesHTML
       +'</div></div>'
       +'<div class="rs-keys"><span class="kp" data-i="0">Preis pro Portion</span><span class="kp" data-i="1">Allergene</span><span class="kp" data-i="2">Nährwerte</span></div>'
-      +'<p class="rs-desc">Vom Inventarprodukt bis zur Menükalkulation — jede Rezeptur bündelt deine Zutaten und trägt <span class="g">Preis pro Portion, Allergene und Nährwerte</span> durch dein ganzes System.</p>';
+      +'<p class="rs-desc">Vom Inventarprodukt bis zur Menükalkulation — jede Rezeptur bündelt deine Zutaten und trägt <span class="g">Preis pro Portion, Allergene und Nährwerte</span> durch dein ganzes System.</p>'
+      +'<div class="rs-foot"><button type="button" class="rs-replay">↻ Neu abspielen</button></div>';
     return root;
   }
 
@@ -11471,12 +11484,13 @@ var TSISL_ZUG_SCHLUESSEL=[
   function lit(root,id){var n=q(root,id);if(n){n.classList.add('on');n.classList.add('lit');}}
   function on(root,id){var n=q(root,id);if(n)n.classList.add('on');}
   function draw(p,dur){var L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.style.transition='stroke-dashoffset '+dur+'ms cubic-bezier(.4,0,.2,1)';void p.getBoundingClientRect();p.style.strokeDashoffset='0';}
+  function resetLine(p){ if(!p)return; p.style.transition='none'; p.style.strokeDasharray=''; p.style.strokeDashoffset=''; }
   function ln(root,k){return root.querySelector('.ln[data-k="'+k+'"]');}
   function comet(root,which){
     var guide=root.querySelector('.guide[data-g="'+which+'"]');
     var c=root.querySelector('.comet[data-p="'+which+'"]');
     if(!guide||!c)return;
-    var L=guide.getTotalLength(),t0=null,dur=1850;
+    var L=guide.getTotalLength(),t0=null,dur=which==='main'?2200:1300;
     c.classList.add('on');
     function step(now){
       if(t0===null)t0=now;
@@ -11489,25 +11503,39 @@ var TSISL_ZUG_SCHLUESSEL=[
     requestAnimationFrame(step);
   }
 
+  var timers=[];
+  function schedule(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+
+  function finalState(root){
+    root.querySelectorAll('.nd').forEach(function(n){n.classList.add('on','lit');});
+    root.querySelectorAll('.ln').forEach(resetLine);
+    root.querySelectorAll('.kp').forEach(function(k){k.classList.add('on');});
+    root.classList.remove('js');
+  }
+
   function play(root){
-    if(root.__played)return; root.__played=true;
+    clearTimers();
     root.classList.add('in');
-    if(reduced){
-      root.querySelectorAll('.nd').forEach(function(n){n.classList.add('on','lit');});
-      root.querySelectorAll('.ln').forEach(function(l){l.style.strokeDashoffset='0';});
-      return;
-    }
-    setTimeout(function(){on(root,'inv');},200);
-    setTimeout(function(){lit(root,'inv');},520);
-    setTimeout(function(){draw(ln(root,'a'),600);},450);
-    setTimeout(function(){lit(root,'zut');},1050);
-    setTimeout(function(){draw(ln(root,'b'),650);draw(ln(root,'c'),820);},1150);
-    setTimeout(function(){lit(root,'rez');},1820);
-    root.querySelectorAll('.kp').forEach(function(k){setTimeout(function(){k.classList.add('on');},2000+(+k.getAttribute('data-i'))*160);});
-    setTimeout(function(){draw(ln(root,'d'),650);},2150);
-    setTimeout(function(){lit(root,'gg');},2820);
-    setTimeout(function(){draw(ln(root,'e'),560);comet(root,'up');comet(root,'dn');},2980);
-    setTimeout(function(){lit(root,'men');},4680);
+    if(reduced){ finalState(root); return; }
+    root.querySelectorAll('.nd,.kp').forEach(function(n){n.classList.remove('on','lit');});
+    root.querySelectorAll('.ln').forEach(resetLine);
+    root.querySelectorAll('.comet').forEach(function(c){c.classList.remove('on');});
+    void root.offsetWidth;
+    root.classList.add('js');
+    schedule(function(){on(root,'inv');},200);
+    schedule(function(){lit(root,'inv');},520);
+    schedule(function(){draw(ln(root,'a'),600);},450);
+    schedule(function(){lit(root,'zut');},1050);
+    schedule(function(){draw(ln(root,'b'),550);},1150);
+    schedule(function(){lit(root,'rez');},1750);
+    root.querySelectorAll('.kp').forEach(function(k){schedule(function(){k.classList.add('on');},1950+(+k.getAttribute('data-i'))*160);});
+    schedule(function(){draw(ln(root,'d'),550);},1850);
+    schedule(function(){lit(root,'gg');},2450);
+    schedule(function(){draw(ln(root,'e'),520);comet(root,'main');},2600);
+    schedule(function(){draw(ln(root,'c'),700);comet(root,'byp');},3000);
+    schedule(function(){lit(root,'men');},4900);
+    schedule(function(){root.classList.remove('js');},5500);
   }
 
   function inView(el){ var r=el.getBoundingClientRect(); return r.top < (window.innerHeight*0.8) && r.bottom > (window.innerHeight*0.2); }
@@ -11528,6 +11556,8 @@ var TSISL_ZUG_SCHLUESSEL=[
     injectCSS();
     var root=build();
     if(!anchorMount(root)) return;
+    var rp=root.querySelector('.rs-replay');
+    if(rp) rp.addEventListener('click',function(){ play(root); });
     var started=false;
     function go(){ if(started)return; started=true; play(root); }
     if('IntersectionObserver' in window){
