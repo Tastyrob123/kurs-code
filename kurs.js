@@ -13961,7 +13961,7 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev14 2026-07-21) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev15 2026-07-21) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -13972,6 +13972,14 @@ var TSISL_TEAM_ONB_V2=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 15 (2026-07-21): #tspc Choreografie neu gedacht (Robert: Aufbau
+   dauerte viel zu lange, luxurioeser machen). Entkoppelt: (1) schneller
+   eleganter Aufbau ~1.1s - alle 7 Medaillons kaskadieren herein (Back-Ease-
+   Pop, 150ms Stagger), Goldlinie zeichnet sich. (2) Danach steht die Kette
+   FERTIG + lebendig: atmende Halos, Licht-Schimmer wandert ueber die Linie,
+   sanfter Ken-Burns-Zoom auf den Food-Bildern. (3) Text-Durchlauf hebt je
+   Station nur noch kurz hervor (Puls-Ring + Scale), EINE Runde. Nichts
+   wartet mehr auf die naechste Bubble.
    Rev 14 (2026-07-21): #tspc auf den Tasty-Studios-Ketten-Look adaptiert
    (Robert: soll aussehen wie die Medaillon-Kette der Kalkulations-Seite).
    7 runde Medaillons mit Logo/Bild auf Schwarz (.pc-med, Werte aus #tsbau),
@@ -14302,10 +14310,13 @@ var TSISL_TEAM_ONB_V2=[
 
 
     /* ============ ERKLAERANIMATION "Von Datenbank bis Galerie" (#tspc) ============
-       Medaillon-Kette im Tasty-Studios-Stil (wie #tsbau/#ts11chain): 7 runde
-       Medaillons mit Logo/Bild auf Schwarz, duenne Goldlinien, Micro-Label
-       oben + Pille unten. Baut sich links->rechts auf, Impuls wandert.
-       Endzustand = Default: ohne .js steht die ganze Kette fertig da. */
+       Medaillon-Kette (Tasty-Studios-Stil). PREMIUM-Choreografie:
+       (1) schneller eleganter Aufbau ~1.5s - alle 7 Medaillons kaskadieren
+           herein (Back-Ease-Pop), Goldlinie zeichnet sich mit vorauseilendem
+           Lichtpunkt. (2) Danach steht die Kette FERTIG + lebendig: atmende
+           Halos, Licht-Schimmer wandert ueber die Linie, sanfter Ken-Burns-Zoom
+           auf den Food-Bildern. (3) Text-Durchlauf hebt nur noch hervor.
+       Endzustand = Default: ohne .js ganze Kette fertig sichtbar. */
     #tsIface .pc-head{max-width:860px;margin:0 auto 46px;padding:0 24px;text-align:center}
     #tsIface .pc-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:12px}
     #tsIface .pc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
@@ -14314,22 +14325,46 @@ var TSISL_TEAM_ONB_V2=[
     #tsIface .pc-wrap{max-width:1120px;margin:0 auto;padding:0 24px}
     #tsIface .pc-chainwrap{overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;scrollbar-width:none}
     #tsIface .pc-chainwrap::-webkit-scrollbar{display:none}
-    #tsIface .pc-chain{position:relative;display:grid;grid-template-columns:repeat(7,1fr);min-width:820px;padding:6px 0 2px}
-    /* Grundlinie + Fuell-Linie auf Medaillon-Hoehe (Label 30px + Medaillon-Radius 46px) */
-    #tsIface .pc-track{position:absolute;left:7.14%;right:7.14%;top:76px;height:2px;background:rgba(199,180,137,.20);z-index:0}
-    #tsIface .pc-track-fill{position:absolute;left:7.14%;top:76px;height:2px;width:0;background:linear-gradient(90deg,rgba(199,180,137,.55),var(--beige));z-index:1;transition:width .55s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-track-fill i{position:absolute;right:-4px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.9);opacity:0}
+    #tsIface .pc-chain{position:relative;display:grid;grid-template-columns:repeat(7,1fr);min-width:820px;padding:12px 0 6px}
+    /* Grundlinie / Fuell-Linie / Schimmer auf Medaillon-Hoehe (Label 30px + Radius 46px + pad 12) */
+    #tsIface .pc-track{position:absolute;left:7.14%;right:7.14%;top:88px;height:2px;background:rgba(199,180,137,.18);z-index:0}
+    #tsIface .pc-track-fill{position:absolute;left:7.14%;top:88px;height:2px;width:0;background:linear-gradient(90deg,rgba(199,180,137,.5),var(--beige));z-index:1;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-track-fill i{position:absolute;right:-5px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--beige);box-shadow:0 0 14px rgba(199,180,137,.95),0 0 4px #fff;opacity:0;transition:opacity .3s ease}
     #tsIface .pc-wrap.js.moving .pc-track-fill i{opacity:1}
+    /* Licht-Schimmer, wandert ueber die Linie (nur wenn fertig) */
+    #tsIface .pc-shine{position:absolute;left:7.14%;right:7.14%;top:86px;height:6px;z-index:1;pointer-events:none;overflow:hidden;opacity:0}
+    #tsIface .pc-wrap.built .pc-shine{opacity:1}
+    #tsIface .pc-shine::before{content:"";position:absolute;top:2px;left:0;width:26%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,247,230,.9),transparent);transform:translateX(-120%)}
+    #tsIface .pc-wrap.built:not(.hid) .pc-shine::before{animation:pcShine 4.6s cubic-bezier(.5,0,.5,1) infinite;animation-delay:1.2s}
+    @keyframes pcShine{0%{transform:translateX(-120%)}60%,100%{transform:translateX(520%)}}
 
     #tsIface .pc-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;cursor:pointer;background:transparent;border:0;padding:0}
-    #tsIface .pc-nlabel{min-height:30px;display:flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.34);text-align:center;transition:color .5s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-node.done .pc-nlabel,#tsIface .pc-node.on .pc-nlabel{color:var(--beige)}
+    #tsIface .pc-nlabel{min-height:30px;display:flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--beige);text-align:center}
 
-    /* Medaillon */
-    #tsIface .pc-med{position:relative;width:92px;height:92px;border-radius:50%;background:#0b0d14;border:1.5px solid rgba(199,180,137,.2);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.03);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:border-color .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),filter .55s cubic-bezier(.16,1,.3,1);filter:grayscale(.4) brightness(.82)}
-    #tsIface .pc-node.done .pc-med{border-color:rgba(199,180,137,.55);filter:none}
-    #tsIface .pc-node.on .pc-med{border-color:rgba(199,180,137,.85);transform:scale(1.07);filter:none;box-shadow:0 24px 54px -18px rgba(0,0,0,.94),0 0 0 8px rgba(199,180,137,.10)}
+    /* Medaillon-Wrapper (nicht geclippt -> traegt Ringe) + geclipptes Medaillon */
+    #tsIface .pc-medwrap{position:relative;width:92px;height:92px}
+    #tsIface .pc-medwrap::before{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(199,180,137,.4);opacity:0}
+    #tsIface .pc-wrap.built:not(.hid) .pc-medwrap::before{animation:pcBreath 4.4s ease-in-out infinite}
+    #tsIface .pc-node:nth-child(3) .pc-medwrap::before{animation-delay:.5s}
+    #tsIface .pc-node:nth-child(4) .pc-medwrap::before{animation-delay:1s}
+    #tsIface .pc-node:nth-child(5) .pc-medwrap::before{animation-delay:1.5s}
+    #tsIface .pc-node:nth-child(6) .pc-medwrap::before{animation-delay:2s}
+    #tsIface .pc-node:nth-child(7) .pc-medwrap::before{animation-delay:2.5s}
+    #tsIface .pc-node:nth-child(8) .pc-medwrap::before{animation-delay:3s}
+    @keyframes pcBreath{0%,100%{opacity:.22;transform:scale(1)}50%{opacity:.6;transform:scale(1.045)}}
+    /* Fokus-Puls-Ring (Text-Durchlauf) */
+    #tsIface .pc-ring{position:absolute;inset:-3px;border-radius:50%;border:1.5px solid rgba(199,180,137,.7);opacity:0;pointer-events:none}
+    #tsIface .pc-node.focus:not(.hid) .pc-ring{animation:pcFocus 1.9s cubic-bezier(.16,1,.3,1) infinite}
+    @keyframes pcFocus{0%{opacity:.7;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.42)}}
+
+    #tsIface .pc-med{position:absolute;inset:0;border-radius:50%;background:#0b0d14;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.05);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-node.focus .pc-med{transform:scale(1.06);border-color:rgba(199,180,137,.9);box-shadow:0 24px 54px -18px rgba(0,0,0,.94),0 0 0 8px rgba(199,180,137,.10)}
     #tsIface .pc-med img.pc-full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    #tsIface .pc-wrap.built:not(.hid) .pc-med img.pc-full{animation:pcKen 15s ease-in-out infinite alternate}
+    #tsIface .pc-node:nth-child(4) .pc-med img.pc-full{animation-delay:2s}
+    #tsIface .pc-node:nth-child(7) .pc-med img.pc-full{animation-delay:4s}
+    #tsIface .pc-node:nth-child(8) .pc-med img.pc-full{animation-delay:6s}
+    @keyframes pcKen{0%{transform:scale(1)}100%{transform:scale(1.09)}}
     #tsIface .pc-med .pc-logo{width:40px;height:40px;object-fit:contain;display:block}
     #tsIface .pc-med .pc-duo{display:flex;gap:7px;align-items:center}
     #tsIface .pc-med .pc-duo img{width:27px;height:27px;object-fit:contain}
@@ -14338,19 +14373,16 @@ var TSISL_TEAM_ONB_V2=[
     #tsIface .pc-fold::after{content:"";position:absolute;left:0;top:0;width:52%;height:9px;border-radius:5px 5px 0 0;background:rgba(199,180,137,.5)}
 
     /* Pille */
-    #tsIface .pc-pill{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.2);border-radius:999px;padding:6px 13px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transform:translateY(6px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-node.done .pc-pill,#tsIface .pc-node.on .pc-pill{opacity:1;transform:none;border-color:rgba(199,180,137,.4)}
+    #tsIface .pc-pill{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.34);border-radius:999px;padding:6px 13px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
     #tsIface .pc-pill img{width:15px;height:15px;object-fit:contain;display:block}
     #tsIface .pc-pill .pc-plogos{display:inline-flex;gap:6px}
     #tsIface .pc-pill span{font-size:12px;font-weight:600;letter-spacing:.01em;color:#efe6d2;white-space:nowrap}
 
-    /* ohne JS: alles fertig (Endzustand) */
-    #tsIface .pc-wrap:not(.js) .pc-med{border-color:rgba(199,180,137,.55);filter:none}
-    #tsIface .pc-wrap:not(.js) .pc-nlabel{color:var(--beige)}
-    #tsIface .pc-wrap:not(.js) .pc-pill{opacity:1;transform:none;border-color:rgba(199,180,137,.4)}
-    #tsIface .pc-wrap:not(.js) .pc-track-fill{width:85.72%}
+    /* Aufbau-Kaskade: Node startet unsichtbar, .lit poppt es herein (Back-Ease) */
+    #tsIface .pc-wrap.js .pc-node{opacity:0;transform:translateY(16px) scale(.86)}
+    #tsIface .pc-wrap.js .pc-node.lit{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.34,1.56,.64,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
 
-    #tsIface .pc-cap{max-width:640px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
+    #tsIface .pc-cap{max-width:640px;margin:32px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px;transition:opacity .35s cubic-bezier(.16,1,.3,1)}
     #tsIface .pc-note{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.3)}
     #tsIface .pc-foot{text-align:center;margin-top:2px}
     #tsIface .pc-replay{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--beige);background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
@@ -14362,7 +14394,9 @@ var TSISL_TEAM_ONB_V2=[
       #tsIface .pc-cap{min-height:120px}
     }
     @media(prefers-reduced-motion:reduce){
-      #tsIface .pc-med,#tsIface .pc-pill,#tsIface .pc-nlabel,#tsIface .pc-track-fill{transition:none !important}
+      #tsIface .pc-wrap.js .pc-node{opacity:1;transform:none}
+      #tsIface .pc-medwrap::before,#tsIface .pc-shine::before,#tsIface .pc-med img.pc-full,#tsIface .pc-ring{animation:none !important}
+      #tsIface .pc-med,#tsIface .pc-track-fill{transition:none !important}
     }
 
     /* ============ ERKLAERVIDEO (#tsvid) — Katalog Abschnitt 03 ============ */
@@ -14487,9 +14521,9 @@ var TSISL_TEAM_ONB_V2=[
     var nodes='';
     for(var k=0;k<PC_STEPS.length;k++){
       var st=PC_STEPS[k];
-      nodes+='<button class="pc-node'+(k===0?' on':'')+'" data-s="'+k+'">'+
+      nodes+='<button class="pc-node" data-s="'+k+'">'+
                '<span class="pc-nlabel">'+st.lbl+'</span>'+
-               '<span class="pc-med">'+st.med+'</span>'+
+               '<span class="pc-medwrap"><span class="pc-ring"></span><span class="pc-med">'+st.med+'</span></span>'+
                '<span class="pc-pill">'+st.pill+'</span>'+
              '</button>';
     }
@@ -14501,7 +14535,7 @@ var TSISL_TEAM_ONB_V2=[
       '</div>'+
       '<div class="pc-wrap">'+
         '<div class="pc-chainwrap"><div class="pc-chain">'+
-          '<span class="pc-track"></span><span class="pc-track-fill"><i></i></span>'+
+          '<span class="pc-track"></span><span class="pc-track-fill"><i></i></span><span class="pc-shine"></span>'+
           nodes+
         '</div></div>'+
         '<p class="pc-cap">'+PC_CAPS[0]+'<span class="pc-note">Beispielwerte</span></p>'+
@@ -14724,11 +14758,13 @@ var TSISL_TEAM_ONB_V2=[
   }
 
 
-  /* ---------- Choreografie "Von Datenbank bis Galerie" (Medaillon-Kette) ----------
-     Kette baut sich links->rechts auf: aktives Medaillon leuchtet + skaliert,
-     erledigte bleiben hell, Fuell-Linie waechst mit wanderndem Impuls.
-     Endzustand = Default (ohne .js ganze Kette fertig). */
-  var PC_DWELL=[2400,2600,2800,2600,2400,2600,3200];
+  /* ---------- Choreografie "Von Datenbank bis Galerie" (PREMIUM) ----------
+     Phase 1 Aufbau (~1.5s): Medaillons kaskadieren herein, Linie zeichnet sich.
+     Phase 2 fertig+lebendig: .built schaltet Atmen/Schimmer/Ken-Burns.
+     Phase 3 Durchlauf: hebt je Station kurz hervor + Caption, EINE Runde.
+     Endzustand=Default (ohne .js alles fertig). */
+  var PC_STAGGER=150;   /* Abstand je Medaillon beim Aufbau */
+  var PC_WALK=2000;     /* Verweildauer je Caption im Durchlauf */
   function initPC(){
     var wrap=document.querySelector('#tspc .pc-wrap');
     if(!wrap || wrap.__pc) return; wrap.__pc=true;
@@ -14737,57 +14773,73 @@ var TSISL_TEAM_ONB_V2=[
     var fill=wrap.querySelector('.pc-track-fill');
     var cap=wrap.querySelector('.pc-cap');
     var scroller=wrap.querySelector('.pc-chainwrap');
-    var timer=null, moveTO=null, beat=-1, playing=false, N=nodes.length;
+    var N=nodes.length, timers=[], walkTO=null, moveTO=null, focusIdx=-1, walking=false;
 
-    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} if(moveTO){clearTimeout(moveTO);moveTO=null;} }
+    function clearTimers(){ timers.forEach(function(t){clearTimeout(t);}); timers=[]; if(walkTO){clearTimeout(walkTO);walkTO=null;} if(moveTO){clearTimeout(moveTO);moveTO=null;} }
     function setCap(i){ if(cap) cap.innerHTML=PC_CAPS[i]+'<span class="pc-note">Beispielwerte</span>'; }
     function centerNode(i){
       if(!scroller) return;
+      if(scroller.scrollWidth<=scroller.clientWidth+2) return;
       var n=nodes[i]; if(!n) return;
-      if(scroller.scrollWidth<=scroller.clientWidth+2) return; /* passt ganz rein, kein Scroll */
-      var target=Math.max(0,n.offsetLeft + n.offsetWidth/2 - scroller.clientWidth/2);
-      scroller.scrollLeft=target;
+      scroller.scrollLeft=Math.max(0,n.offsetLeft + n.offsetWidth/2 - scroller.clientWidth/2);
     }
-    function show(i){
-      beat=i;
-      for(var k=0;k<nodes.length;k++){
-        nodes[k].classList.toggle('on', k===i);
-        nodes[k].classList.toggle('done', k<i);
+    function focus(i){
+      focusIdx=i;
+      for(var k=0;k<nodes.length;k++){ nodes[k].classList.toggle('focus', k===i); }
+      setCap(i); centerNode(i);
+    }
+    /* Phase 3 */
+    function walkStep(i){
+      if(i>=N){ walking=false; return; } /* eine Runde, dann ruht die Kette */
+      focus(i);
+      walkTO=setTimeout(function(){ walkStep(i+1); }, PC_WALK);
+    }
+    function startWalk(){ walking=true; walkStep(0); }
+    /* Phase 1+2 */
+    function build(){
+      clearTimers();
+      wrap.classList.remove('built','moving');
+      for(var k=0;k<nodes.length;k++){ nodes[k].classList.remove('lit','focus'); }
+      if(fill) fill.style.width='0%';
+      setCap(0);
+      if(reduce){
+        wrap.classList.remove('js');
+        for(var m=0;m<nodes.length;m++){ nodes[m].classList.add('lit'); }
+        focus(N-1);
+        return;
       }
-      if(fill){ fill.style.width=(i/(N-1))*85.72+'%'; }
-      setCap(i);
-      centerNode(i);
-      // Impuls-Punkt kurz sichtbar waehrend die Linie waechst
-      wrap.classList.add('moving');
-      if(moveTO) clearTimeout(moveTO);
-      moveTO=setTimeout(function(){ wrap.classList.remove('moving'); },600);
-    }
-    function go(i,auto){
-      show(i);
-      if(auto && i<N-1){ timer=setTimeout(function(){ go(i+1,true); }, PC_DWELL[i]); }
-      else if(auto){ playing=false; }
-    }
-    function play(){
-      clearAll();
-      if(reduce){ wrap.classList.remove('js'); show(N-1); wrap.classList.remove('moving'); return; }
-      playing=true;
       wrap.classList.add('js');
       void wrap.offsetWidth;
-      timer=setTimeout(function(){ go(0,true); },60);
+      /* Kaskade + Linie */
+      wrap.classList.add('moving');
+      timers.push(setTimeout(function(){ if(fill) fill.style.width='85.72%'; },40));
+      for(var n=0;n<nodes.length;n++){
+        (function(idx){ timers.push(setTimeout(function(){ nodes[idx].classList.add('lit'); }, 60+idx*PC_STAGGER)); })(n);
+      }
+      var buildEnd=60+(N-1)*PC_STAGGER+600;
+      moveTO=setTimeout(function(){ wrap.classList.remove('moving'); },1500);
+      timers.push(setTimeout(function(){ wrap.classList.add('built'); },buildEnd-200));
+      timers.push(setTimeout(function(){ startWalk(); },buildEnd+150));
     }
+    /* Klick auf Station: Aufbau ueberspringen, direkt hierhin */
     for(var k=0;k<nodes.length;k++){
-      (function(idx){ nodes[idx].addEventListener('click',function(){ clearAll(); playing=false; wrap.classList.add('js'); show(idx); }); })(k);
+      (function(idx){ nodes[idx].addEventListener('click',function(){
+        clearTimers(); walking=false; wrap.classList.add('js','built');
+        for(var m=0;m<nodes.length;m++){ nodes[m].classList.add('lit'); }
+        if(fill) fill.style.width='85.72%';
+        focus(idx);
+      }); })(k);
     }
     var rp=wrap.querySelector('.pc-replay');
-    if(rp) rp.addEventListener('click',function(){ play(); });
+    if(rp) rp.addEventListener('click',function(){ build(); });
 
     document.addEventListener('visibilitychange',function(){
-      if(document.hidden){ clearAll(); }
-      else if(playing && beat>-1 && beat<N-1){ timer=setTimeout(function(){ go(beat+1,true); }, PC_DWELL[beat]); }
+      if(document.hidden){ wrap.classList.add('hid'); if(walkTO){clearTimeout(walkTO);walkTO=null;} }
+      else { wrap.classList.remove('hid'); if(walking && focusIdx>-1 && focusIdx<N-1){ walkTO=setTimeout(function(){ walkStep(focusIdx+1); }, PC_WALK); } }
     });
 
     var fired=false;
-    function trigger(){ if(fired) return; fired=true; play(); }
+    function trigger(){ if(fired) return; fired=true; build(); }
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ io.disconnect(); trigger(); } },{threshold:.3});
       io.observe(wrap);
@@ -14800,7 +14852,7 @@ var TSISL_TEAM_ONB_V2=[
     window.addEventListener('scroll',heal,{passive:true});
     window.addEventListener('resize',heal);
     setTimeout(heal,1200);
-    window.__tspcKill=function(){ clearAll(); playing=false; };
+    window.__tspcKill=function(){ clearTimers(); walking=false; };
   }
 
   /* Lightbox-Platzhalter fuer den Play-Button (Video kommt erst nach allen Lektionen) */
