@@ -528,13 +528,20 @@ body:has(#sb-toggle-cb:checked) .super-sidebar {
 
 /* Scroll-Fix: die Lektionsliste hat kein eigenes Overflow, sie verlaesst sich
    auf super.so's internen Radix-Scrollbereich (.super-navigation-menu__items-viewport).
-   Ohne Body-Lock laeuft ein Scroll-Versuch nahe der duennen Scrollbar-Spur (rechter Rand
-   der Sidebar) am Viewport vorbei durch bis zur verdeckten Hauptseite dahinter — die Liste
-   bewegt sich nicht, es sieht aus wie "kann nicht bis zum Ende scrollen". Body waehrend
-   offenem Drawer sperren + Scroll-Chaining unterbinden behebt das. */
-body:has(#sb-toggle-cb:checked) { overflow: hidden !important; }
+   Ohne Lock laeuft ein Scroll-/Wheel-Versuch (v.a. nahe der duennen Scrollbar-Spur am
+   rechten Sidebar-Rand oder sobald der interne Bereich sein Ende erreicht) am Viewport
+   vorbei durch bis zur verdeckten Hauptseite dahinter — die Liste bewegt sich nicht mehr,
+   es sieht aus wie "kann nicht bis zum Ende scrollen". overscroll-behavior allein reicht
+   in Safari NICHT (WebKit unterbindet Wheel-Scroll-Chaining darueber unzuverlaessig) —
+   deshalb zusaetzlich html UND body waehrend offenem Drawer hart sperren (Safari kann je
+   nach Seite html statt body als Scroll-Root nutzen, daher beide). */
+html:has(#sb-toggle-cb:checked),
+body:has(#sb-toggle-cb:checked) { overflow: hidden !important; height: 100% !important; }
 .super-navigation-menu__items-viewport,
+.super-navigation-menu__items-wrapper,
+.super-sidebar__content,
 .super-sidebar { overscroll-behavior: contain; }
+.super-navigation-menu__items-viewport { -webkit-overflow-scrolling: touch; }
 
 /* Hamburger-Button */
 #sb-toggle {
