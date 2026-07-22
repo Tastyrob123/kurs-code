@@ -14477,6 +14477,4641 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 /* ============================================================
+   OPERATIONS-INSELN — 7 EIGENS KONZIPIERTE ERKLÄRANIMATIONEN
+   Ersetzen die 3 recycelten generischen #tsisl-Renderer
+   (checklist/stack/grid). Jede IIFE ist eigenständig, selbst-
+   mountend (eigener on()-Slug-Check + MutationObserver) und
+   hängt sich NICHT in die #tsisl-Render-Pipeline ein — sie
+   wartet auf ihren #tsanimN-anchor (siehe ISLANDS-Config unten).
+   ============================================================ */
+
+/* ============================================================
+   #tsopsanim — Opener-Animation /operations-area — Sechs Inseln, ein Maschinenraum
+   ============================================================ */
+/* ============================================================
+   operations-area — OPENER-ANIMATION #tsopsanim
+   "Sechs Inseln, ein Maschinenraum"
+
+   Auftakt-Animation der Verteilerseite (Modul 2, Betrieb). Erzaehlt in
+   drei Beats: (1) VERSTREUT — 21 Bausteine des Tagesgeschaefts liegen
+   ungeordnet im Raum ("laeuft nur im Kopf zusammen"), (2) GEORDNET —
+   sechs leere Ablageflaechen werden zu Inseln, jeder Baustein fliegt an
+   seinen festen Ort, (3) VERBUNDEN — die sechs Inseln koppeln an einen
+   Core und bilden den Maschinenraum, ein Impuls laeuft den Ring entlang.
+
+   Mount: zwischen Einleitungs-Absatz (#tsops .ops-intro) und
+   Insel-Kachel-Grid (#tsops .ops-grid).
+
+   Eigener Namespace (tsopsanim / o2-) -> kollisionsfrei zu #tsops.
+   Folgt der Animations-Robustheits-Regel: Endzustand = Default,
+   root lokal an play(root), self-healing scroll/resize, Count-up ~26fps.
+   ============================================================ */
+(function(){
+  if(window.__tsopsanim) return; window.__tsopsanim=true;
+
+  function on(){ return /\/operations-area\/?$/.test(location.pathname); }
+
+  var GLOW="199,180,137";
+  var IMG="https://tastyrob123.github.io/kurs-code/img/ops/opener/";
+
+  /* Insel-Ringpositionen (Hexagon, im Uhrzeigersinn ab oben links).
+     [x%, y%] — Karten sitzen mit translate(-50%,-50%) auf dem Punkt. */
+  var POS=[[33.5,20],[66.5,20],[84,50],[66.5,80],[33.5,80],[16,50]];
+
+  /* [kicker, titel, medaillon-slug, [bausteine…]]
+     Bausteine = die Bereiche/Verweise aus den Insel-Kacheln dieser Seite. */
+  var ISLES=[
+   ['Personal','Team &amp; Onboarding','team',
+     ['Onboarding','Team-Infos','Kleidungs-Ausgabe','Urlaubsplanung']],
+   ['Abl&auml;ufe','Checklisten &amp; Produktion','checklisten',
+     ['Audit-Checkliste','Tages-Checkliste','Produktionsliste','Waste-Erfassung']],
+   ['Compliance','Hygiene, Beh&ouml;rden &amp; Handb&uuml;cher','hygiene',
+     ['Hygienehandbuch','Beh&ouml;rden-Unterlagen','Pflichtdokumente','Management-Handbuch']],
+   ['Bestand','Inventur &amp; Bestand','inventur',
+     ['Festwertinventur','Jahresinventur','Inventurliste']],
+   ['Partner','Partner &amp; Vertr&auml;ge','partner',
+     ['Dienstleister','Vertr&auml;ge','Lieferanten']],
+   ['Zug&auml;nge','Zug&auml;nge &amp; Werte','zugaenge',
+     ['Passwortablage','Bankeinzahlungen','Schl&uuml;sselliste']]
+  ];
+
+  var STEPS=[
+   ['01','Verstreut','Alles l&auml;uft nur im Kopf des Chefs zusammen.'],
+   ['02','Geordnet','Jeder Bereich bekommt seinen festen Ort.'],
+   ['03','Verbunden','Zusammen ergeben sie den Maschinenraum.']
+  ];
+
+  var CHIPTOTAL=ISLES.reduce(function(n,o){ return n+o[3].length; },0); /* 21 */
+
+  var CSS=`
+  #tsopsanim{width:100%;margin:8px auto 42px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsopsanim *{box-sizing:border-box}
+
+  /* ---- Sektionskopf (Erklaeranimations-Standard) ---- */
+  #tsopsanim .o2-head{max-width:860px;margin:0 auto 34px;padding:0 24px;text-align:center}
+  #tsopsanim .o2-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsopsanim .o2-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GLOW},.7)}
+  #tsopsanim .o2-title{font-family:"Lineal TS","Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px;color:#fff}
+  #tsopsanim .o2-title span{color:#c7b489}
+  #tsopsanim .o2-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.78);margin:0}
+
+  /* ---- Step-Rail ---- */
+  #tsopsanim .o2-rail{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 26px;padding:0 20px}
+  #tsopsanim .o2-step{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.5);cursor:pointer;transition:color .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+  #tsopsanim .o2-step b{font-weight:600;font-size:10px;letter-spacing:.16em;color:rgba(${GLOW},.55);transition:color .5s cubic-bezier(.16,1,.3,1)}
+  #tsopsanim .o2-step:hover{border-color:rgba(${GLOW},.4);color:rgba(255,255,255,.8)}
+  #tsopsanim .o2-step.act{color:#efe6d2;border-color:rgba(${GLOW},.55);background:rgba(${GLOW},.08)}
+  #tsopsanim .o2-step.act b{color:#c7b489}
+  #tsopsanim .o2-step:focus-visible{outline:2px solid rgba(${GLOW},.7);outline-offset:3px}
+
+  /* ---- Buehne ---- */
+  #tsopsanim .o2-wrap{max-width:1180px;margin:0 auto}
+  #tsopsanim .o2-stage{position:relative;width:100%;height:clamp(690px,60vw,810px)}
+  #tsopsanim svg.o2-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+  #tsopsanim .o2-line{fill:none;stroke:rgba(${GLOW},.34);stroke-width:1.3;stroke-linecap:round;opacity:0;transition:opacity .4s ease}
+  #tsopsanim .o2-line.on{opacity:1}
+  #tsopsanim .o2-ring{fill:none;stroke:rgba(${GLOW},.22);stroke-width:1;stroke-linecap:round;opacity:0;transition:opacity .5s ease}
+  #tsopsanim .o2-ring.on{opacity:1}
+  #tsopsanim .o2-dot{fill:#fbe6c2;opacity:0;filter:drop-shadow(0 0 7px rgba(${GLOW},.95));transition:opacity .6s ease}
+  #tsopsanim .o2-dot.on{opacity:1}
+
+  /* ---- Insel ---- */
+  #tsopsanim .o2-isle{position:absolute;width:212px;transform:translate(-50%,-50%);z-index:2}
+  /* Karten-Grund DECKEND (#04050a + Wash): Ring + Verbinder laufen sauber HINTER den Inseln durch */
+  #tsopsanim .o2-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#04050a;border:1px solid rgba(${GLOW},.28);border-radius:16px;padding:16px 14px 13px;box-shadow:0 24px 60px rgba(0,0,0,.45);transition:background .7s cubic-bezier(.16,1,.3,1),border-color .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  #tsopsanim .o2-med{position:relative;width:58px;height:58px;border-radius:50%;overflow:hidden;background:#0b0d14;border:1.5px solid rgba(${GLOW},.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(${GLOW},.055);margin-bottom:11px;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1),border-color .6s ease}
+  #tsopsanim .o2-med img{width:100%;height:100%;object-fit:cover;display:block}
+  #tsopsanim .o2-med::after{content:attr(data-n);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Lineal TS","Lineal Web",sans-serif;font-weight:600;font-size:19px;color:rgba(${GLOW},.5);opacity:0}
+  #tsopsanim .o2-med.noimg::after{opacity:1}
+  #tsopsanim .o2-k{font-size:8.8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:5px;transition:opacity .6s ease}
+  #tsopsanim .o2-h{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;font-size:14.5px;line-height:1.2;letter-spacing:-.008em;color:#fff;margin:0 0 10px;transition:opacity .6s ease}
+  #tsopsanim .o2-sep{width:100%;height:1px;background:rgba(255,255,255,.09);margin:0 0 9px;transition:opacity .6s ease}
+  #tsopsanim .o2-chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+  #tsopsanim .o2-chip{display:inline-block;font-size:9.6px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 8px;white-space:nowrap;transition:transform .82s cubic-bezier(.16,1,.3,1),opacity .5s ease,color .6s ease,border-color .6s ease,background .6s ease}
+  #tsopsanim .o2-isle.lit .o2-chip{color:rgba(255,255,255,.72);border-color:rgba(${GLOW},.26);background:rgba(${GLOW},.06)}
+  #tsopsanim .o2-chip i{display:inline-block;font-style:normal}
+
+  /* Start-/Zwischenzustand nur waehrend .playing (Endzustand = Default) */
+  #tsopsanim .o2-wrap.playing .o2-in{background:transparent;border-style:dashed;border-color:rgba(255,255,255,.08);box-shadow:none;transform:scale(.97)}
+  #tsopsanim .o2-wrap.playing .o2-med,#tsopsanim .o2-wrap.playing .o2-k,#tsopsanim .o2-wrap.playing .o2-h,#tsopsanim .o2-wrap.playing .o2-sep{opacity:.1}
+  #tsopsanim .o2-wrap.playing .o2-med{transform:scale(.82)}
+  #tsopsanim .o2-wrap.playing .o2-isle.lit .o2-in{background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#04050a;border-style:solid;border-color:rgba(${GLOW},.45);box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(${GLOW},.1);transform:none}
+  #tsopsanim .o2-wrap.playing .o2-isle.lit .o2-med,#tsopsanim .o2-wrap.playing .o2-isle.lit .o2-k,#tsopsanim .o2-wrap.playing .o2-isle.lit .o2-h,#tsopsanim .o2-wrap.playing .o2-isle.lit .o2-sep{opacity:1}
+  #tsopsanim .o2-wrap.playing .o2-isle.lit .o2-med{transform:none}
+  #tsopsanim .o2-isle.flying{z-index:9}
+  #tsopsanim .o2-chip.drift i{animation:o2drift 3.4s cubic-bezier(.37,0,.63,1) infinite alternate}
+
+  /* ---- Core ---- */
+  #tsopsanim .o2-core{position:absolute;left:50%;top:50%;width:250px;transform:translate(-50%,-50%);z-index:3}
+  #tsopsanim .o2-core-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;background:linear-gradient(rgba(${GLOW},.07),rgba(${GLOW},.07)),#04050a;border:1px solid rgba(${GLOW},.42);border-radius:22px;padding:22px 18px 18px;box-shadow:0 26px 70px -28px rgba(0,0,0,.92);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1),border-color .7s ease}
+  #tsopsanim .o2-core-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:.16;filter:saturate(.5)}
+  #tsopsanim .o2-core-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 0%,rgba(4,5,10,.45) 0%,rgba(4,5,10,.9) 78%)}
+  #tsopsanim .o2-core-ico,#tsopsanim .o2-core-name,#tsopsanim .o2-core-tag,#tsopsanim .o2-core-stats{position:relative;z-index:1}
+  #tsopsanim .o2-core-ico{width:48px;height:48px;border-radius:14px;background:rgba(${GLOW},.14);border:1px solid rgba(${GLOW},.42);display:flex;align-items:center;justify-content:center;margin-bottom:11px}
+  #tsopsanim .o2-core-ico svg{width:25px;height:25px}
+  #tsopsanim .o2-core-name{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;font-size:17px;line-height:1.15;color:#efe6d2;margin-bottom:4px}
+  #tsopsanim .o2-core-tag{font-size:9.2px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:13px}
+  #tsopsanim .o2-core-stats{display:flex;gap:9px;width:100%}
+  #tsopsanim .o2-stat{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(${GLOW},.22);border-radius:11px;padding:8px 6px}
+  #tsopsanim .o2-stat-v{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;font-size:21px;line-height:1;color:#efe6d2;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  #tsopsanim .o2-stat-k{display:block;font-size:8.4px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:5px}
+  #tsopsanim .o2-wrap.playing .o2-core-in{opacity:.16;transform:scale(.88);border-color:rgba(255,255,255,.1)}
+  #tsopsanim .o2-wrap.playing .o2-core.lit .o2-core-in{opacity:1;transform:none;border-color:rgba(${GLOW},.42)}
+  #tsopsanim .o2-core.pulse .o2-core-in{animation:o2pulse 1.6s cubic-bezier(.16,1,.3,1)}
+
+  /* ---- Caption + Fuss ---- */
+  #tsopsanim .o2-cap{min-height:26px;margin:24px auto 0;text-align:center;font-size:14.5px;color:rgba(255,255,255,.72)}
+  #tsopsanim .o2-cap b{font-weight:600;color:#c7b489;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-right:11px;vertical-align:1px}
+  #tsopsanim .o2-note{max-width:680px;margin:12px auto 0;text-align:center;font-size:12px;line-height:1.55;color:rgba(255,255,255,.34)}
+  #tsopsanim .o2-foot{display:flex;justify-content:center;margin-top:24px}
+  #tsopsanim .o2-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(${GLOW},.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+  #tsopsanim .o2-replay:hover{background:rgba(${GLOW},.12);border-color:rgba(${GLOW},.7);color:#efe6d2;transform:translateY(-1px)}
+  #tsopsanim .o2-replay:focus-visible{outline:2px solid rgba(${GLOW},.7);outline-offset:3px}
+  #tsopsanim .o2-replay svg{width:15px;height:15px}
+
+  @keyframes o2pulse{0%{box-shadow:0 26px 70px -28px rgba(0,0,0,.92),0 0 0 0 rgba(${GLOW},0)}42%{box-shadow:0 26px 70px -28px rgba(0,0,0,.92),0 0 44px 6px rgba(${GLOW},.34)}100%{box-shadow:0 26px 70px -28px rgba(0,0,0,.92),0 0 0 0 rgba(${GLOW},0)}}
+  @keyframes o2drift{from{transform:translateY(-3px) rotate(-1.2deg)}to{transform:translateY(3px) rotate(1.2deg)}}
+
+  /* ---- Mobile: gestapelt, kein Ring, keine Streuung ---- */
+  @media(max-width:820px){
+    #tsopsanim .o2-stage{height:auto;display:grid;grid-template-columns:1fr;gap:16px}
+    #tsopsanim svg.o2-lines{display:none}
+    #tsopsanim .o2-isle{position:relative!important;left:auto!important;top:auto!important;width:100%;transform:none}
+    #tsopsanim .o2-core{position:relative;left:auto;top:auto;width:100%;max-width:320px;margin:0 auto;transform:none;order:-1}
+    #tsopsanim .o2-wrap.playing .o2-in{transform:none}
+    #tsopsanim .o2-wrap.playing .o2-core-in{transform:none}
+    #tsopsanim .o2-rail{gap:7px}
+    #tsopsanim .o2-step{padding:7px 12px;font-size:11px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #tsopsanim .o2-wrap.playing .o2-in,#tsopsanim .o2-wrap.playing .o2-core-in{background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#04050a;border-style:solid;border-color:rgba(${GLOW},.28);opacity:1!important;transform:none!important;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+    #tsopsanim .o2-wrap.playing .o2-core-in{background:linear-gradient(rgba(${GLOW},.07),rgba(${GLOW},.07)),#04050a;border-color:rgba(${GLOW},.42)}
+    #tsopsanim .o2-wrap.playing .o2-med,#tsopsanim .o2-wrap.playing .o2-k,#tsopsanim .o2-wrap.playing .o2-h,#tsopsanim .o2-wrap.playing .o2-sep{opacity:1!important;transform:none!important}
+    #tsopsanim .o2-chip{transition:none!important;transform:none!important}
+    #tsopsanim .o2-chip.drift i,#tsopsanim .o2-core.pulse .o2-core-in{animation:none!important}
+    #tsopsanim .o2-dot{display:none}
+  }
+  `;
+
+  /* ---------- Helfer ---------- */
+  function nf(v){ return String(Math.round(v)); }
+
+  /* deterministischer Pseudo-Zufall (kein Math.random -> gleiche Streuung bei jedem Replay) */
+  function rnd(seed){ var x=Math.sin(seed*127.1+311.7)*43758.5453; return x-Math.floor(x); }
+
+  /* ---------- Aufbau (Endzustand = Default) ---------- */
+  function build(){
+    var el=document.createElement('div'); el.id='tsopsanim';
+    var st=document.createElement('style'); st.textContent=CSS; el.appendChild(st);
+
+    var isles=ISLES.map(function(o,i){
+      var chips=o[3].map(function(c,j){
+        return '<span class="o2-chip" data-c="'+j+'"><i>'+c+'</i></span>';
+      }).join('');
+      return '<div class="o2-isle" data-i="'+i+'" style="left:'+POS[i][0]+'%;top:'+POS[i][1]+'%">'+
+        '<div class="o2-in">'+
+          '<span class="o2-med" data-n="'+(i+1)+'"><img src="'+IMG+o[2]+'.webp" alt="" loading="lazy" '+
+            'onerror="this.style.display=\'none\';this.parentNode.classList.add(\'noimg\')"></span>'+
+          '<span class="o2-k">'+o[0]+'</span>'+
+          '<h3 class="o2-h">'+o[1]+'</h3>'+
+          '<span class="o2-sep"></span>'+
+          '<div class="o2-chips">'+chips+'</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+
+    var rail=STEPS.map(function(s,i){
+      return '<button class="o2-step'+(i===STEPS.length-1?' act':'')+'" type="button" data-s="'+i+'"><b>'+s[0]+'</b>'+s[1]+'</button>';
+    }).join('');
+
+    var wrap=document.createElement('div');
+    wrap.innerHTML=`
+<div class="o2-head">
+  <div class="o2-eyebrow">Sechs Inseln, ein Maschinenraum</div>
+  <h2 class="o2-title">Aus vielen Einzelteilen wird dein <span>Maschinenraum</span>.</h2>
+  <p class="o2-sub">Das Tagesgesch&auml;ft besteht aus lauter getrennten Bereichen, die sonst nur im Kopf des Chefs zusammenlaufen &mdash; hier bekommt jeder davon seinen festen Ort.</p>
+</div>
+<div class="o2-rail">${rail}</div>
+<div class="o2-wrap">
+  <div class="o2-stage">
+    <svg class="o2-lines" preserveAspectRatio="none" aria-hidden="true"></svg>
+    ${isles}
+    <div class="o2-core">
+      <div class="o2-core-in">
+        <span class="o2-core-bg" style="background-image:url('${IMG}core.webp')"></span>
+        <span class="o2-core-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c7b489" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6 20.1 7v10L12 21.4 3.9 17V7z"/><circle cx="12" cy="12" r="3.4"/></svg></span>
+        <div class="o2-core-name">Operations Area</div>
+        <div class="o2-core-tag">Der Maschinenraum</div>
+        <div class="o2-core-stats">
+          <div class="o2-stat"><span class="o2-stat-v" data-to="6">6</span><span class="o2-stat-k">Inseln</span></div>
+          <div class="o2-stat"><span class="o2-stat-v" data-to="${CHIPTOTAL}">${CHIPTOTAL}</span><span class="o2-stat-k">Bausteine</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="o2-cap"><b>03</b><span class="o2-cap-t">${STEPS[2][2]}</span></p>
+  <p class="o2-note">Bausteine = die Bereiche und Verweise, die in dieser Lektion behandelt werden &mdash; die Inseln findest du gleich darunter als Kacheln.</p>
+  <div class="o2-foot">
+    <button class="o2-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
+  </div>
+</div>`;
+    while(wrap.firstChild) el.appendChild(wrap.firstChild);
+
+    el.querySelector('.o2-replay').addEventListener('click', function(){ play(el, true, 0); });
+    Array.prototype.forEach.call(el.querySelectorAll('.o2-step'), function(b){
+      b.addEventListener('click', function(){ play(el, true, parseInt(b.getAttribute('data-s'),10)); });
+    });
+    return el;
+  }
+
+  /* ---------- SVG-Geometrie ---------- */
+  function svgEl(n){ return document.createElementNS('http://www.w3.org/2000/svg', n); }
+
+  function drawLines(root){
+    var stage=root.querySelector('.o2-stage'), svg=root.querySelector('.o2-lines');
+    if(!stage||!svg) return {lines:[],ring:null};
+    var sr=stage.getBoundingClientRect();
+    if(!sr.width || window.innerWidth<=820) return {lines:[],ring:null};
+    svg.setAttribute('viewBox','0 0 '+sr.width+' '+sr.height);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    var core=root.querySelector('.o2-core'); if(!core) return {lines:[],ring:null};
+    var cr=core.getBoundingClientRect();
+    var cx=cr.left-sr.left+cr.width/2, cy=cr.top-sr.top+cr.height/2;
+
+    /* Ring durch die sechs Insel-Mittelpunkte */
+    var pts=[], lines=[];
+    Array.prototype.forEach.call(root.querySelectorAll('.o2-isle'), function(el){
+      var r=el.getBoundingClientRect();
+      pts.push([r.left-sr.left+r.width/2, r.top-sr.top+r.height/2]);
+    });
+    if(pts.length<2) return {lines:[],ring:null};
+
+    var ring=svgEl('path');
+    ring.setAttribute('id','o2Ring');
+    ring.setAttribute('class','o2-ring');
+    ring.setAttribute('d', pts.map(function(p,i){ return (i?'L ':'M ')+p[0]+' '+p[1]; }).join(' ')+' Z');
+    svg.appendChild(ring);
+
+    /* Verbindungen Insel -> Core. Start = Insel-Mittelpunkt (liegt hinter der
+       deckenden Karte, sichtbar wird nur das Stueck zwischen Karte und Core),
+       Ende = knapp vor der Core-Kante (feiner Spalt = Eleganz). */
+    pts.forEach(function(p){
+      var dx=cx-p[0], dy=cy-p[1], len=Math.sqrt(dx*dx+dy*dy)||1;
+      var ux=dx/len, uy=dy/len;
+      var x1=p[0], y1=p[1];
+      var x2=cx-ux*(cr.width/2+7), y2=cy-uy*(cr.height/2+7);
+      var pth=svgEl('path');
+      pth.setAttribute('class','o2-line');
+      pth.setAttribute('d','M '+x1+' '+y1+' L '+x2+' '+y2);
+      svg.appendChild(pth);
+      lines.push(pth);
+    });
+
+    /* wandernder Impuls auf dem Ring (Leben) */
+    var dot=svgEl('circle');
+    dot.setAttribute('class','o2-dot'); dot.setAttribute('r','3.2');
+    var mo=svgEl('animateMotion');
+    mo.setAttribute('dur','7.2s'); mo.setAttribute('repeatCount','indefinite');
+    mo.setAttribute('rotate','auto'); mo.setAttribute('calcMode','linear');
+    var mp=svgEl('mpath');
+    mp.setAttribute('href','#o2Ring');
+    mp.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#o2Ring');
+    mo.appendChild(mp); dot.appendChild(mo); svg.appendChild(dot);
+
+    return {lines:lines, ring:ring, dot:dot};
+  }
+
+  function prime(p){ var L=0; try{ L=p.getTotalLength(); }catch(e){} if(!L) return; p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.style.transition='none'; p.getBoundingClientRect(); }
+  function drawOn(p,delay,dur){ p.style.transition='stroke-dashoffset '+(dur||620)+'ms cubic-bezier(.16,1,.3,1) '+delay+'ms, opacity .35s ease '+delay+'ms'; p.classList.add('on'); p.style.strokeDashoffset='0'; }
+  function drawInstant(p){ if(!p) return; p.style.transition='none'; p.style.strokeDasharray='none'; p.style.strokeDashoffset='0'; p.classList.add('on'); }
+  function drawOff(p){ if(!p) return; p.classList.remove('on'); }
+
+  /* Count-up, ~26fps gedrosselt (Mutation-Storm) */
+  function animVal(el,to){
+    var dur=1000, start=null, last=0;
+    function step(ts){ if(!start) start=ts;
+      var pr=Math.min(1,(ts-start)/dur), e=1-Math.pow(1-pr,3);
+      if(pr>=1){ el.textContent=nf(to); return; }
+      if(ts-last>=38){ el.textContent=nf(to*e); last=ts; }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- Zustands-Helfer ---------- */
+  function chipsOf(root){ return Array.prototype.slice.call(root.querySelectorAll('.o2-chip')); }
+
+  /* Streu-Zielpunkte deterministisch in einer Ellipse um die Buehnenmitte */
+  function scatter(root, visible){
+    var stage=root.querySelector('.o2-stage'); if(!stage) return;
+    var sr=stage.getBoundingClientRect(); if(!sr.width) return;
+    var cx=sr.width/2, cy=sr.height/2;
+    var n=chipsOf(root).length, GA=2.39996323; /* goldener Winkel -> gleichmaessige, deterministische Streuung */
+    chipsOf(root).forEach(function(ch,i){
+      var r=ch.getBoundingClientRect();
+      var a=i*GA+rnd(i+1)*0.5;
+      var rad=Math.sqrt((i+0.62)/n)*(0.86+rnd(i+7)*0.2);
+      var tx=cx+Math.cos(a)*rad*sr.width*0.33;
+      var ty=cy+Math.sin(a)*rad*sr.height*0.30;
+      var dx=tx-(r.left-sr.left+r.width/2);
+      var dy=ty-(r.top-sr.top+r.height/2);
+      var rot=(rnd(i+13)-.5)*22;
+      ch.style.transition='none';
+      ch.style.transform='translate('+dx.toFixed(1)+'px,'+dy.toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg)';
+      ch.style.opacity=visible?'1':'0';
+      ch.classList.add('drift');
+      ch.querySelector('i').style.animationDelay=(-(rnd(i+21)*3.4)).toFixed(2)+'s';
+    });
+    root.querySelectorAll('.o2-chip')[0] && root.getBoundingClientRect();
+    chipsOf(root).forEach(function(ch){ ch.style.transition=''; });
+  }
+
+  function chipsHome(root, instant){
+    chipsOf(root).forEach(function(ch){
+      if(instant) ch.style.transition='none';
+      ch.style.transform=''; ch.style.opacity='';
+      ch.classList.remove('drift');
+      if(instant){ ch.getBoundingClientRect(); ch.style.transition=''; }
+    });
+  }
+
+  function islesLit(root, yes){
+    Array.prototype.forEach.call(root.querySelectorAll('.o2-isle'), function(el){
+      el.classList.toggle('lit', !!yes);
+    });
+  }
+  /* Inseln mit noch fliegenden Bausteinen liegen ueber den bereits gesetzten
+     (deckenden) Karten -> kein Baustein verschwindet hinter einer Insel. */
+  function islesFlying(root, yes){
+    Array.prototype.forEach.call(root.querySelectorAll('.o2-isle'), function(el){
+      el.classList.toggle('flying', !!yes);
+    });
+  }
+
+  function setStep(root, k){
+    Array.prototype.forEach.call(root.querySelectorAll('.o2-step'), function(b){
+      b.classList.toggle('act', parseInt(b.getAttribute('data-s'),10)===k);
+    });
+    var cap=root.querySelector('.o2-cap');
+    if(cap){ cap.querySelector('b').textContent=STEPS[k][0]; cap.querySelector('.o2-cap-t').innerHTML=STEPS[k][2]; }
+  }
+
+  function statsSet(root, zero){
+    Array.prototype.forEach.call(root.querySelectorAll('.o2-stat-v'), function(el){
+      el.textContent = zero ? '0' : nf(parseFloat(el.getAttribute('data-to')));
+    });
+  }
+
+  /* ---------- Choreografie ---------- */
+  function play(root, force, fromStep){
+    if(!root) return;
+    if(root.__playing && !force) return;
+    if(root.__played && !force) return;
+    root.__played=true;
+
+    var wrap=root.querySelector('.o2-wrap'); if(!wrap) return;
+    var core=root.querySelector('.o2-core');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var stacked=window.innerWidth<=820;
+    var k=fromStep||0;
+
+    if(root.__timers) root.__timers.forEach(clearTimeout);
+    root.__timers=[];
+    function T(fn,ms){ root.__timers.push(setTimeout(fn,ms)); }
+
+    /* --- reduced motion: sofort Endzustand --- */
+    if(reduced){
+      wrap.classList.add('playing');
+      chipsHome(root,true); islesLit(root,true); islesFlying(root,false); core && core.classList.add('lit');
+      statsSet(root,false); setStep(root,2);
+      var g0=drawLines(root); g0.lines.forEach(drawInstant); drawInstant(g0.ring);
+      root.__playing=false; return;
+    }
+
+    root.__playing=true;
+    wrap.classList.remove('playing'); void wrap.offsetWidth; wrap.classList.add('playing');
+
+    /* Wrap-Einzug nur beim Voll-Durchlauf (Inline -> ueberlebt class-strip) */
+    if(k===0){
+      wrap.style.transition='none'; wrap.style.opacity='0'; wrap.style.transform='translateY(22px)';
+      void wrap.offsetWidth;
+      wrap.style.transition='opacity .85s ease, transform .95s cubic-bezier(.16,1,.3,1)';
+      wrap.style.opacity='1'; wrap.style.transform='none';
+    } else { wrap.style.transition=''; wrap.style.opacity=''; wrap.style.transform=''; }
+
+    var geo={lines:[],ring:null};
+    function resetLines(){
+      geo=drawLines(root);
+      geo.lines.forEach(function(p){ drawOff(p); prime(p); });
+      if(geo.ring){ drawOff(geo.ring); prime(geo.ring); }
+      if(geo.dot) geo.dot.classList.remove('on');
+    }
+
+    /* ---- Beat 1: VERSTREUT ---- */
+    function beatScatter(done){
+      setStep(root,0);
+      islesLit(root,false); core.classList.remove('lit','pulse'); statsSet(root,true);
+      resetLines();
+      if(stacked){ chipsHome(root,true); islesFlying(root,false); T(done,600); return; }
+      islesFlying(root,true);
+      scatter(root,false);
+      chipsOf(root).forEach(function(ch,i){
+        T(function(){ ch.style.opacity='1'; }, 120+i*42);
+      });
+      T(done, 1780);
+    }
+
+    /* ---- Beat 2: GEORDNET ---- */
+    function beatDock(done){
+      setStep(root,1);
+      core.classList.remove('lit','pulse'); statsSet(root,true);
+      resetLines();
+      var isles=Array.prototype.slice.call(root.querySelectorAll('.o2-isle'));
+      if(!stacked) islesFlying(root,true);
+      isles.forEach(function(isle,j){
+        var base=j*195;
+        T(function(){ isle.classList.add('lit'); }, base);
+        var chips=Array.prototype.slice.call(isle.querySelectorAll('.o2-chip'));
+        chips.forEach(function(ch,c){
+          T(function(){
+            ch.classList.remove('drift');
+            ch.style.transform=''; ch.style.opacity='';
+          }, base+150+c*70);
+        });
+        T(function(){ isle.classList.remove('flying'); }, base+1150);
+      });
+      T(done, 5*195+150+3*70+900);
+    }
+
+    /* ---- Beat 3: VERBUNDEN ---- */
+    function beatConnect(done){
+      setStep(root,2);
+      islesLit(root,true); islesFlying(root,false); chipsHome(root,true); statsSet(root,true);
+      resetLines();
+      T(function(){ core.classList.add('lit'); }, 60);
+      if(geo.ring) drawOn(geo.ring, 240, 900);
+      geo.lines.forEach(function(p,i){ drawOn(p, 620+i*95, 620); });
+      T(function(){ if(geo.dot) geo.dot.classList.add('on'); }, 1250);
+      T(function(){ core.classList.add('pulse'); }, 1320);
+      T(function(){ core.classList.remove('pulse'); }, 2960);
+      T(function(){
+        Array.prototype.forEach.call(root.querySelectorAll('.o2-stat-v'), function(el,i){
+          T(function(){ animVal(el, parseFloat(el.getAttribute('data-to'))); }, i*160);
+        });
+      }, 1380);
+      T(done, 3100);
+    }
+
+    var beats=[beatScatter, beatDock, beatConnect];
+    function chain(i){
+      if(i>2){ root.__playing=false; return; }
+      beats[i](function(){ chain(i+1); });
+    }
+
+    /* Einstieg ueber die Step-Rail: vorherige Beats sofort setzen */
+    if(k===1){ scatter(root,true); }
+    if(k===2){ chipsHome(root,true); islesLit(root,true); }
+    chain(k);
+  }
+
+  /* ---------- Mount / Trigger (self-healing) ---------- */
+  function mount(){
+    if(!on()){ var old=document.getElementById('tsopsanim'); if(old&&old.parentNode) old.parentNode.removeChild(old); return; }
+    if(document.getElementById('tsopsanim')) return;
+    var box=document.getElementById('tsops'); if(!box) return;
+    var intro=box.querySelector('.ops-intro');
+    var grid=box.querySelector('.ops-grid');
+    if(!intro && !grid) return;
+    var root=build();
+    if(intro && intro.parentNode) intro.parentNode.insertBefore(root, intro.nextSibling);
+    else grid.parentNode.insertBefore(root, grid);
+    tryPlay();
+  }
+
+  function tryPlay(){
+    if(!on()) return;
+    var el=document.getElementById('tsopsanim'); if(!el || el.__played) return;
+    var r=el.getBoundingClientRect();
+    if(!r.height) return;
+    /* IO-Aequivalent threshold .3 */
+    var vis=Math.min(r.bottom, window.innerHeight)-Math.max(r.top,0);
+    if(vis>0 && (vis/Math.min(r.height, window.innerHeight))>=.3) play(el, false, 0);
+  }
+
+  var rz=null;
+  function onResize(){
+    clearTimeout(rz);
+    rz=setTimeout(function(){
+      var el=document.getElementById('tsopsanim');
+      if(el && el.__played && !el.__playing){
+        var g=drawLines(el);
+        g.lines.forEach(drawInstant); drawInstant(g.ring);
+        if(g.dot) g.dot.classList.add('on');
+      }
+      tryPlay();
+    },170);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('scroll', tryPlay, {passive:true});
+  window.addEventListener('resize', onResize);
+})();
+
+
+/* ============================================================
+   #tsanim1 — Erkläranimation Team & Onboarding (Insel 01)
+   ============================================================ */
+/* ============================================================================
+   #tsanim1 — Erkläranimation „Team & Onboarding"
+   Seite: /lektionen/team-onboarding  (Operations Area)
+   Konzept: „Die Ausgabe-Strecke" — ein Token läuft die 8-Schritte-Strecke ab,
+            an jeder Station wird etwas ausgegeben/geprüft, das direkt in die
+            Personalakte einrastet, bis der Datensatz vollständig ist.
+   Eigenständige IIFE · CSS per injiziertem <style> · kein kurs.css-Delta
+   Folgt der Animations-Robustheits-Regel (Endzustand = Default, self-healing,
+   Count-up gedrosselt) und dem Qualitäts-Gesetz Animationen.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  if (window.__tsanim1) return;
+  window.__tsanim1 = true;
+
+  var ID = 'tsanim1';
+  var IMG = 'https://tastyrob123.github.io/kurs-code/img/ops/team/';
+
+  function on() { return /\/lektionen\/team-onboarding\/?$/.test(location.pathname); }
+
+  var REDUCE = false;
+  try {
+    REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) { REDUCE = false; }
+
+  /* ---------------------------------------------------------------- Daten --
+     Alle Personen-/Zahlenwerte sind DEKLARIERTE BEISPIELWERTE (Niemals-
+     schätzen-Regel) — es liegen keine echten Personaldaten im Vault.
+     SSOT für die Beispielwerte: Lektions-Datei „Team & Onboarding".         */
+
+  var STEPS = [
+    { n: '01', t: 'Vertrag unterschrieben',        s: 'Eintritt fixiert' },
+    { n: '02', t: 'Position & Standort',           s: 'Rolle im Betrieb' },
+    { n: '03', t: 'Pflichtdokumente geprüft',      s: 'Nachweise vollständig', med: 0 },
+    { n: '04', t: 'Steuer-ID & Sozialversicherung', s: 'Abrechnung startklar' },
+    { n: '05', t: 'Kleidung ausgegeben',           s: 'gegen Pfand quittiert', med: 1 },
+    { n: '06', t: 'Spind & Schlüssel',             s: 'Pfand hinterlegt',      med: 2 },
+    { n: '07', t: 'Zeiterfassung eingerichtet',    s: 'Stunden laufen sauber', med: 3 },
+    { n: '08', t: 'Team-Vorstellung & Probezeit',  s: 'Termin gesetzt',        med: 4 }
+  ];
+
+  /* 12 Felder der Mitarbeiter-Datenbank, jedes hängt an einer Station */
+  var FIELDS = [
+    { st: 0, g: 'Stammdaten',                k: 'Name',                    v: 'Marie Kessler' },
+    { st: 0, g: null,                        k: 'Eintritt',                v: '01.08.2026' },
+    { st: 1, g: null,                        k: 'Position',                v: 'Service · Schicht B' },
+    { st: 1, g: null,                        k: 'Standort',                v: 'Haus Alter Markt' },
+    { st: 2, g: 'Pflichtdokumente',          k: 'Gesundheitszeugnis',      v: 'liegt vor', ok: true },
+    { st: 2, g: null,                        k: 'Arbeitsvertrag',          v: 'liegt vor', ok: true },
+    { st: 3, g: null,                        k: 'Steuer-ID',               v: 'hinterlegt', ok: true },
+    { st: 3, g: null,                        k: 'Sozialversicherung',      v: 'hinterlegt', ok: true },
+    { st: 4, g: 'Ausstattung & Konditionen', k: 'Kleidung ausgegeben',     v: '3 Teile', ex: true },
+    { st: 5, g: null,                        k: 'Pfand hinterlegt',        v: '50,00 €', gold: true, ex: true },
+    { st: 6, g: null,                        k: 'Stundensatz inkl. AG',    v: '17,40 €', gold: true, ex: true },
+    { st: 7, g: null,                        k: 'Urlaubsanspruch',         v: '28 Tage', ex: true }
+  ];
+
+  var MEDS = [
+    { f: 'mitarbeiterhandbuch.jpg',    l: 'Handbuch', z: 1.2 },
+    { f: 'serviceschuerze.jpg',        l: 'Schürze',  z: 1.15 },
+    { f: 'personalspind.jpg',          l: 'Spind',    z: 1.5 },
+    { f: 'zeiterfassungsterminal.jpg', l: 'Terminal', z: 1.25 },
+    { f: 'logo-anstecker.jpg',         l: 'Anstecker', z: 1.5 }
+  ];
+
+  /* ------------------------------------------------------------------ CSS --
+     Display-Font: "Lineal TS" 600 mit "Lineal Web" als Glyph-Fallback in
+     derselben Stack-Zeile — das TS-Subset hat u. a. kein F/q, der Browser
+     zieht fehlende Glyphen glyphweise aus der vollen Web-Fassung derselben
+     Schriftlinie nach. Kein neuer Font-Look.                               */
+
+  var CSS = ''
+    + '#' + ID + '{--tw-gold:#c7b489;--tw-glow:199,180,137;--tw-ok:#8FCBAA;--tw-red:#e32552;'
+    + 'display:block;width:min(1240px,94vw);margin:96px auto 104px;color:#fff;'
+    + '-webkit-font-smoothing:antialiased;}'
+
+    /* --- Sektionskopf (Standard-Spec Erkläranimation) --- */
+    + '#' + ID + ' .tw-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px;}'
+    + '#' + ID + ' .tw-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;'
+    + 'letter-spacing:.16em;text-transform:uppercase;color:var(--tw-gold);margin:0 0 12px;}'
+    + '#' + ID + ' .tw-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tw-gold);'
+    + 'box-shadow:0 0 10px rgba(var(--tw-glow),.85),0 0 20px rgba(var(--tw-glow),.4);flex:0 0 auto;}'
+    + '#' + ID + ' .tw-title{font-family:"Lineal TS","Lineal Web",system-ui,sans-serif;font-weight:600;'
+    + 'font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0;color:#fff;}'
+    + '#' + ID + ' .tw-title span{color:var(--tw-gold);}'
+    + '#' + ID + ' .tw-sub{font:400 16.5px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;'
+    + 'color:rgba(255,255,255,.6);margin:16px 0 0;text-wrap:balance;}'
+
+    /* --- Bühne --- */
+    + '#' + ID + ' .tw-wrap{position:relative;}'
+    + '#' + ID + ' .tw-stage{position:relative;display:grid;grid-template-columns:minmax(280px,340px) 1fr;gap:clamp(28px,4.4vw,72px);'
+    + 'align-items:stretch;}'
+
+    /* --- Strecke links --- */
+    + '#' + ID + ' .tw-rail{position:relative;padding:4px 0 18px 40px;display:flex;flex-direction:column;}'
+    + '#' + ID + ' .tw-steps{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between;}'
+    + '#' + ID + ' .tw-collbl{font:600 9.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;'
+    + 'color:rgba(255,255,255,.36);margin:0 0 20px -40px;}'
+    + '#' + ID + ' .tw-track{position:absolute;left:13px;top:34px;bottom:16px;width:1px;background:rgba(var(--tw-glow),.16);}'
+    + '#' + ID + ' .tw-fill{position:absolute;left:0;top:0;width:1px;height:100%;'
+    + 'background:linear-gradient(180deg,rgba(var(--tw-glow),.05),rgba(var(--tw-glow),.6));'
+    + 'transition:height 460ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-token{position:absolute;left:0;top:0;width:1px;height:1px;'
+    + 'transform:translateY(var(--ty,0px));transition:transform 480ms cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:3;}'
+    + '#' + ID + ' .tw-token i{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;'
+    + 'background:radial-gradient(circle at 38% 34%,#fbe6c2,var(--tw-gold) 62%,#8f7f5c);'
+    + 'box-shadow:0 0 0 4px rgba(var(--tw-glow),.12),0 0 16px rgba(var(--tw-glow),.75),0 0 34px rgba(var(--tw-glow),.35);}'
+    + '#' + ID + ' .tw-token b{position:absolute;left:-3px;top:-34px;width:6px;height:34px;border-radius:3px;'
+    + 'background:linear-gradient(180deg,rgba(var(--tw-glow),0),rgba(var(--tw-glow),.5));opacity:0;'
+    + 'transition:opacity 320ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-wrap.playing .tw-token b{opacity:1;}'
+
+    + '#' + ID + ' .tw-step{position:relative;display:grid;grid-template-columns:auto 1fr;gap:12px;'
+    + 'align-items:baseline;padding:9px 0 9px 0;}'
+    + '#' + ID + ' .tw-dot{position:absolute;left:-40px;top:50%;margin-top:-5.5px;width:11px;height:11px;border-radius:50%;'
+    + 'background:#04050a;border:1px solid rgba(var(--tw-glow),.4);box-sizing:border-box;'
+    + 'transition:border-color 420ms cubic-bezier(.16,1,.3,1),box-shadow 420ms cubic-bezier(.16,1,.3,1),background 420ms cubic-bezier(.16,1,.3,1);'
+    + 'transform:translateX(3px);}'
+    + '#' + ID + ' .tw-step.done .tw-dot{border-color:rgba(143,203,170,.75);background:rgba(143,203,170,.18);'
+    + 'box-shadow:0 0 0 4px rgba(143,203,170,.07),0 0 14px rgba(143,203,170,.35);}'
+    + '#' + ID + ' .tw-n{font:600 10px/1.5 system-ui,sans-serif;letter-spacing:.1em;color:rgba(255,255,255,.28);'
+    + 'transition:color 420ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-step.done .tw-n{color:rgba(var(--tw-glow),.72);}'
+    + '#' + ID + ' .tw-st{font-family:"Lineal TS","Lineal Web",system-ui,sans-serif;font-weight:600;font-size:14.5px;'
+    + 'line-height:1.32;color:rgba(255,255,255,.5);transition:color 420ms cubic-bezier(.16,1,.3,1);margin:0;}'
+    + '#' + ID + ' .tw-step.done .tw-st{color:#fff;}'
+    + '#' + ID + ' .tw-ss{display:block;font:400 11.5px/1.5 system-ui,sans-serif;color:rgba(255,255,255,.3);margin-top:2px;}'
+    + '#' + ID + ' .tw-step.done .tw-ss{color:rgba(143,203,170,.7);}'
+    + '#' + ID + ' .tw-check{display:inline-block;width:0;overflow:hidden;vertical-align:middle;color:var(--tw-ok);'
+    + 'font-size:11px;transition:width 380ms cubic-bezier(.34,1.56,.64,1),opacity 380ms cubic-bezier(.16,1,.3,1);opacity:0;}'
+    + '#' + ID + ' .tw-step.done .tw-check{width:15px;opacity:1;}'
+
+    /* --- Personalakte rechts --- */
+    + '#' + ID + ' .tw-card{position:relative;border-radius:18px;background:rgba(255,255,255,.035);'
+    + 'border:1px solid rgba(var(--tw-glow),.28);box-shadow:0 24px 60px rgba(0,0,0,.45);padding:26px 28px 22px;'
+    + 'transition:border-color 700ms cubic-bezier(.16,1,.3,1),background 700ms cubic-bezier(.16,1,.3,1),'
+    + 'box-shadow 700ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-card.complete{border-color:rgba(var(--tw-glow),.55);background:rgba(199,180,137,.055);'
+    + 'box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(var(--tw-glow),.1),0 0 44px -8px rgba(var(--tw-glow),.16);}'
+    + '#' + ID + ' .tw-cardlbl{font:600 9.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;'
+    + 'color:rgba(var(--tw-glow),.75);margin:0 0 14px;}'
+    + '#' + ID + ' .tw-chead{display:flex;align-items:center;gap:16px;padding-bottom:18px;'
+    + 'border-bottom:1px solid rgba(255,255,255,.09);}'
+    + '#' + ID + ' .tw-ring{position:relative;width:62px;height:62px;flex:0 0 auto;}'
+    + '#' + ID + ' .tw-ring svg{width:62px;height:62px;transform:rotate(-90deg);display:block;}'
+    + '#' + ID + ' .tw-ring .bg{fill:none;stroke:rgba(255,255,255,.09);stroke-width:2;}'
+    + '#' + ID + ' .tw-ring .fg{fill:none;stroke:var(--tw-gold);stroke-width:2;stroke-linecap:round;'
+    + 'filter:drop-shadow(0 0 6px rgba(var(--tw-glow),.5));transition:stroke-dashoffset 620ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;'
+    + 'font-family:"Lineal TS","Lineal Web",system-ui,sans-serif;font-weight:600;font-size:15px;color:#fff;'
+    + 'font-variant-numeric:tabular-nums;}'
+    + '#' + ID + ' .tw-who{min-width:0;}'
+    + '#' + ID + ' .tw-name{font-family:"Lineal TS","Lineal Web",system-ui,sans-serif;font-weight:600;font-size:20px;'
+    + 'line-height:1.2;margin:0;color:#fff;}'
+    + '#' + ID + ' .tw-role{font:400 12.5px/1.5 system-ui,sans-serif;color:rgba(255,255,255,.5);margin:3px 0 0;}'
+    + '#' + ID + ' .tw-count{margin-left:auto;text-align:right;flex:0 0 auto;}'
+    + '#' + ID + ' .tw-count b{display:block;font-family:"Lineal TS","Lineal Web",system-ui,sans-serif;font-weight:600;'
+    + 'font-size:17px;color:var(--tw-gold);font-variant-numeric:tabular-nums;}'
+    + '#' + ID + ' .tw-count span{display:block;font:400 10px/1.4 system-ui,sans-serif;color:rgba(255,255,255,.32);margin-top:2px;}'
+
+    /* Feld-Zeilen */
+    + '#' + ID + ' .tw-grp{font:600 8.5px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;'
+    + 'color:rgba(255,255,255,.34);margin:18px 0 8px;}'
+    + '#' + ID + ' .tw-row{position:relative;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;'
+    + 'padding:7px 0;border-bottom:1px solid rgba(255,255,255,.045);}'
+    + '#' + ID + ' .tw-row:last-child{border-bottom:0;}'
+    + '#' + ID + ' .tw-k{font:400 12.5px/1.4 system-ui,sans-serif;color:rgba(255,255,255,.55);}'
+    + '#' + ID + ' .tw-v{position:relative;font:600 14px/1.4 system-ui,sans-serif;color:#fff;text-align:right;'
+    + 'white-space:nowrap;opacity:1;transform:none;'
+    + 'transition:opacity 520ms cubic-bezier(.16,1,.3,1),transform 520ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-v.gold{color:var(--tw-gold);font-weight:700;font-variant-numeric:tabular-nums;}'
+    + '#' + ID + ' .tw-v.ok::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;'
+    + 'background:var(--tw-ok);box-shadow:0 0 8px rgba(143,203,170,.7);margin-right:8px;vertical-align:middle;}'
+    + '#' + ID + ' .tw-ph{position:absolute;right:0;top:50%;width:74px;height:1px;'
+    + 'background:repeating-linear-gradient(90deg,rgba(255,255,255,.2) 0 4px,transparent 4px 9px);'
+    + 'opacity:0;transition:opacity 340ms cubic-bezier(.16,1,.3,1);pointer-events:none;}'
+    + '#' + ID + ' .tw-ex{display:block;font:400 9.5px/1.3 system-ui,sans-serif;color:rgba(255,255,255,.26);'
+    + 'letter-spacing:.04em;margin-top:1px;font-weight:400;}'
+
+    /* Ausgabe-Regal */
+    + '#' + ID + ' .tw-kitlbl{font:600 8.5px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;'
+    + 'color:rgba(255,255,255,.34);margin:20px 0 12px;}'
+    + '#' + ID + ' .tw-kit{display:flex;flex-wrap:wrap;gap:14px;}'
+    + '#' + ID + ' .tw-slot{position:relative;width:64px;text-align:center;}'
+    + '#' + ID + ' .tw-med{position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;'
+    + 'background:#0b0d14;border:1.5px solid rgba(var(--tw-glow),.55);box-sizing:border-box;'
+    + 'box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--tw-glow),.055);'
+    + 'opacity:1;transform:none;will-change:transform,opacity;}'
+    + '#' + ID + ' .tw-med img{width:100%;height:100%;object-fit:cover;display:block;opacity:.94;'
+    + 'transform:scale(var(--z,1));transform-origin:50% 48%;}'
+    + '#' + ID + ' .tw-slot em{display:block;font:400 9.5px/1.3 system-ui,sans-serif;color:rgba(255,255,255,.36);'
+    + 'font-style:normal;margin-top:7px;}'
+
+    + '#' + ID + ' .tw-foot{margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);'
+    + 'display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;}'
+    + '#' + ID + ' .tw-note{font:400 12px/1.55 system-ui,sans-serif;color:rgba(255,255,255,.42);margin:0;flex:1 1 260px;}'
+    + '#' + ID + ' .tw-note b{color:rgba(var(--tw-glow),.9);font-weight:600;}'
+    + '#' + ID + ' .tw-disc{font:400 10px/1.4 system-ui,sans-serif;color:rgba(255,255,255,.28);margin:14px 0 0;'
+    + 'text-align:center;}'
+
+    /* Replay-Pill */
+    + '#' + ID + ' .tw-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;'
+    + 'border:1px solid rgba(var(--tw-glow),.5);border-radius:999px;padding:10px 22px;cursor:pointer;'
+    + 'font:600 12px/1 system-ui,sans-serif;letter-spacing:.06em;color:var(--tw-gold);'
+    + 'transition:background 420ms cubic-bezier(.16,1,.3,1),border-color 420ms cubic-bezier(.16,1,.3,1),'
+    + 'color 420ms cubic-bezier(.16,1,.3,1),box-shadow 420ms cubic-bezier(.16,1,.3,1);}'
+    + '#' + ID + ' .tw-replay:hover{background:rgba(var(--tw-glow),.09);border-color:rgba(var(--tw-glow),.8);'
+    + 'color:#fbe6c2;box-shadow:0 0 24px -6px rgba(var(--tw-glow),.4);}'
+    + '#' + ID + ' .tw-replay svg{width:13px;height:13px;flex:0 0 auto;}'
+    + '#' + ID + ' .tw-replaywrap{text-align:center;margin-top:34px;}'
+
+    /* Startzustand NUR während des Abspielens (Endzustand bleibt Default) */
+    + '#' + ID + ' .tw-wrap.playing .tw-v{opacity:0;transform:translateY(5px);}'
+    + '#' + ID + ' .tw-wrap.playing .tw-v.fill{opacity:1;transform:none;}'
+    + '#' + ID + ' .tw-wrap.playing .tw-ph{opacity:1;}'
+    + '#' + ID + ' .tw-wrap.playing .tw-row.fill .tw-ph{opacity:0;}'
+
+    /* Mobile */
+    + '@media (max-width:820px){'
+    + '#' + ID + '{margin:64px auto 72px;}'
+    + '#' + ID + ' .tw-stage{grid-template-columns:1fr;gap:34px;}'
+    + '#' + ID + ' .tw-rail{padding-left:34px;}'
+    + '#' + ID + ' .tw-track{left:10px;}'
+    + '#' + ID + ' .tw-token{left:10px;}'
+    + '#' + ID + ' .tw-dot{left:-34px;}'
+    + '#' + ID + ' .tw-collbl{margin-left:-34px;}'
+    + '#' + ID + ' .tw-card{padding:22px 18px 18px;}'
+    + '#' + ID + ' .tw-chead{flex-wrap:wrap;gap:12px;}'
+    + '#' + ID + ' .tw-count{margin-left:0;text-align:left;width:100%;}'
+    + '#' + ID + ' .tw-row{grid-template-columns:1fr;gap:2px;}'
+    + '#' + ID + ' .tw-v{text-align:left;white-space:normal;}'
+    + '#' + ID + ' .tw-ph{display:none;}'
+    + '#' + ID + ' .tw-slot,#' + ID + ' .tw-med{width:56px;}'
+    + '#' + ID + ' .tw-med{height:56px;}'
+    + '}'
+
+    /* reduced motion */
+    + '@media (prefers-reduced-motion: reduce){'
+    + '#' + ID + ' *,#' + ID + ' *::before,#' + ID + ' *::after{transition:none !important;animation:none !important;}'
+    + '#' + ID + ' .tw-replaywrap{display:none;}'
+    + '}';
+
+  function injectCSS() {
+    if (document.getElementById(ID + '-css')) return;
+    var s = document.createElement('style');
+    s.id = ID + '-css';
+    s.textContent = CSS;
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* ------------------------------------------------------------- Aufbau ---
+     build() schreibt den ENDZUSTAND: alle Schritte erledigt, alle Felder
+     gefüllt, Ring auf 100 %, Medaillons an ihrem Platz. Ohne JS-Trigger
+     ist die Bühne damit immer vollständig sichtbar (kein schwarzes Loch).  */
+
+  var C = 2 * Math.PI * 28; /* Ringumfang, r = 28 */
+
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function build() {
+    var root = document.createElement('section');
+    root.id = ID;
+
+    var h = ''
+      + '<div class="tw-head">'
+      + '<div class="tw-eyebrow">Personal im Griff</div>'
+      + '<h2 class="tw-title">Aus einem neuen Gesicht wird ein <span>vollständiger Datensatz</span>.</h2>'
+      + '<p class="tw-sub">Acht Schritte, eine Strecke: Jede Station gibt etwas aus oder prüft etwas — und trägt es sofort in die Personalakte ein.</p>'
+      + '</div>'
+      + '<div class="tw-wrap">'
+      + '<div class="tw-stage">';
+
+    /* Strecke */
+    h += '<div class="tw-rail">'
+      + '<div class="tw-collbl">Onboarding · 8 Schritte</div>'
+      + '<div class="tw-track"><div class="tw-fill"></div><div class="tw-token"><b></b><i></i></div></div>'
+      + '<div class="tw-steps">';
+    for (var i = 0; i < STEPS.length; i++) {
+      var st = STEPS[i];
+      h += '<div class="tw-step done" data-i="' + i + '">'
+        + '<span class="tw-dot"></span>'
+        + '<span class="tw-n">' + esc(st.n) + '</span>'
+        + '<span><span class="tw-st">' + esc(st.t) + ' <span class="tw-check">✓</span></span>'
+        + '<span class="tw-ss">' + esc(st.s) + '</span></span>'
+        + '</div>';
+    }
+    h += '</div></div>';
+
+    /* Personalakte */
+    h += '<div class="tw-card complete">'
+      + '<div class="tw-cardlbl">Mitarbeiter-Datenbank · 12 Felder</div>'
+      + '<div class="tw-chead">'
+      + '<div class="tw-ring">'
+      + '<svg viewBox="0 0 62 62" aria-hidden="true">'
+      + '<circle class="bg" cx="31" cy="31" r="28"></circle>'
+      + '<circle class="fg" cx="31" cy="31" r="28" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="0"></circle>'
+      + '</svg><span class="tw-pct">100 %</span></div>'
+      + '<div class="tw-who"><p class="tw-name">Marie Kessler</p>'
+      + '<p class="tw-role">Service · Schicht B — Beispiel-Datensatz</p></div>'
+      + '<div class="tw-count"><b class="tw-cnum">12 / 12</b><span>Felder gepflegt</span></div>'
+      + '</div>';
+
+    for (var f = 0; f < FIELDS.length; f++) {
+      var fd = FIELDS[f];
+      if (fd.g) h += '<div class="tw-grp">' + esc(fd.g) + '</div>';
+      h += '<div class="tw-row fill" data-st="' + fd.st + '">'
+        + '<span class="tw-k">' + esc(fd.k) + (fd.ex ? '<span class="tw-ex">Beispielwert</span>' : '') + '</span>'
+        + '<span class="tw-v fill' + (fd.gold ? ' gold' : '') + (fd.ok ? ' ok' : '') + '">' + esc(fd.v) + '</span>'
+        + '<span class="tw-ph"></span>'
+        + '</div>';
+    }
+
+    h += '<div class="tw-kitlbl">Ausgegeben & quittiert</div><div class="tw-kit">';
+    for (var m = 0; m < MEDS.length; m++) {
+      h += '<div class="tw-slot"><div class="tw-med" data-m="' + m + '" style="--z:' + (MEDS[m].z || 1) + '">'
+        + '<img src="' + IMG + MEDS[m].f + '" alt="' + esc(MEDS[m].l) + '" loading="eager" decoding="async">'
+        + '</div><em>' + esc(MEDS[m].l) + '</em></div>';
+    }
+    h += '</div>';
+
+    h += '<div class="tw-foot">'
+      + '<p class="tw-note">Der Betrieb weiß jederzeit, wer was hat — inklusive <b>50,00 €</b> hinterlegtem Pfand auf die ausgegebene Kleidung.</p>'
+      + '</div>'
+      + '</div>'; /* /card */
+
+    h += '</div>'; /* /stage */
+
+    h += '<p class="tw-disc">Alle Namen und Zahlen sind Beispielwerte — keine echten Personaldaten.</p>'
+      + '<div class="tw-replaywrap"><button type="button" class="tw-replay">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+      + '<path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>Neu abspielen</button></div>'
+      + '</div>'; /* /wrap */
+
+    root.innerHTML = h;
+    return root;
+  }
+
+  /* -------------------------------------------------------- Token-Layout --
+     Position des Tokens/der Füll-Linie aus echten Offsets, re-render-fest.  */
+
+  function stationOffsets(root) {
+    var track = root.querySelector('.tw-track');
+    var steps = root.querySelectorAll('.tw-step');
+    if (!track || !steps.length) return null;
+    var tr = track.getBoundingClientRect();
+    var out = [];
+    for (var i = 0; i < steps.length; i++) {
+      var dot = steps[i].querySelector('.tw-dot');
+      var dr = (dot || steps[i]).getBoundingClientRect();
+      out.push(Math.max(0, dr.top + dr.height / 2 - tr.top));
+    }
+    return { offs: out, h: tr.height || 1 };
+  }
+
+  /* Track exakt zwischen erste und letzte Station legen (Layout-unabhängig) */
+  function layoutTrack(root) {
+    var rail = root.querySelector('.tw-rail');
+    var track = root.querySelector('.tw-track');
+    var steps = root.querySelectorAll('.tw-step');
+    if (!rail || !track || steps.length < 2) return;
+    var rr = rail.getBoundingClientRect();
+    var a = steps[0].querySelector('.tw-dot');
+    var b = steps[steps.length - 1].querySelector('.tw-dot');
+    if (!a || !b) return;
+    var ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+    var top = ar.top + ar.height / 2 - rr.top;
+    var h = (br.top + br.height / 2) - (ar.top + ar.height / 2);
+    if (h <= 0) return;
+    track.style.top = top.toFixed(1) + 'px';
+    track.style.bottom = 'auto';
+    track.style.height = h.toFixed(1) + 'px';
+  }
+
+  function layoutToken(root) {
+    layoutTrack(root);
+    var g = stationOffsets(root);
+    if (!g) return;
+    var token = root.querySelector('.tw-token');
+    var wrap = root.querySelector('.tw-wrap');
+    if (token && wrap && !wrap.classList.contains('playing')) {
+      token.style.transition = 'none';
+      token.style.setProperty('--ty', g.offs[g.offs.length - 1] + 'px');
+      void token.offsetWidth;
+      token.style.transition = '';
+    }
+  }
+
+  /* ------------------------------------------------------------ Count-up --
+     Auf ~26 fps gedrosselt (Mutation-Storm-Schutz) + garantierter Endwert.  */
+
+  function countUp(root, el, from, to, dur, fmt) {
+    if (!el) return;
+    var t0 = 0, last = 0, raf = 0, done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      if (raf) cancelAnimationFrame(raf);
+      el.textContent = fmt(to);
+    }
+    function frame(ts) {
+      if (!t0) t0 = ts;
+      if (ts - last >= 38) {
+        last = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(from + (to - from) * e);
+        if (p >= 1) { finish(); return; }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    push(root, setTimeout(finish, dur + 160));
+  }
+
+  /* -------------------------------------------------------- Choreografie --
+     Endzustand ist Default → play() setzt zurück und erzählt von vorn.      */
+
+  function clear(root) {
+    var ts = root.__tsanim1Timers;
+    if (ts) { for (var i = 0; i < ts.length; i++) clearTimeout(ts[i]); }
+    root.__tsanim1Timers = [];
+  }
+  function push(root, id) {
+    if (!root.__tsanim1Timers) root.__tsanim1Timers = [];
+    root.__tsanim1Timers.push(id);
+  }
+  function at(root, ms, fn) { push(root, setTimeout(fn, ms)); }
+
+  function play(root) {
+    if (!root || REDUCE) return;
+    var wrap = root.querySelector('.tw-wrap');
+    if (!wrap) return;
+
+    clear(root);
+    layoutTrack(root);
+
+    var steps = root.querySelectorAll('.tw-step');
+    var rows = root.querySelectorAll('.tw-row');
+    var meds = root.querySelectorAll('.tw-med');
+    var card = root.querySelector('.tw-card');
+    var fill = root.querySelector('.tw-fill');
+    var token = root.querySelector('.tw-token');
+    var ring = root.querySelector('.tw-ring .fg');
+    var pct = root.querySelector('.tw-pct');
+    var cnum = root.querySelector('.tw-cnum');
+    var note = root.querySelector('.tw-note');
+
+    var g = stationOffsets(root);
+    if (!g) return;
+
+    /* --- Reset auf Startzustand (Inline + Klassen, überlebt Class-Strip) --- */
+    wrap.classList.add('playing');
+    if (card) card.classList.remove('complete');
+    for (var i = 0; i < steps.length; i++) steps[i].classList.remove('done');
+    for (var r = 0; r < rows.length; r++) {
+      rows[r].classList.remove('fill');
+      var v = rows[r].querySelector('.tw-v');
+      if (v) v.classList.remove('fill');
+    }
+    if (fill) { fill.style.transition = 'none'; fill.style.height = '0px'; }
+    if (token) { token.style.transition = 'none'; token.style.setProperty('--ty', g.offs[0] + 'px'); }
+    if (ring) { ring.style.transition = 'none'; ring.style.strokeDashoffset = C.toFixed(2); }
+    if (pct) pct.textContent = '0 %';
+    if (cnum) cnum.textContent = '0 / 12';
+    if (note) { note.style.transition = 'none'; note.style.opacity = '0'; }
+
+    /* Medaillons an ihre Station versetzen (fliegen später in die Akte) */
+    var flights = [];
+    for (var m = 0; m < meds.length; m++) {
+      var med = meds[m];
+      var si = -1;
+      for (var s = 0; s < STEPS.length; s++) if (STEPS[s].med === m) { si = s; break; }
+      if (si < 0 || !steps[si]) continue;
+      var dot = steps[si].querySelector('.tw-dot');
+      var mr = med.getBoundingClientRect();
+      var sr = (dot || steps[si]).getBoundingClientRect();
+      var dx = (sr.left + sr.width / 2) - (mr.left + mr.width / 2);
+      var dy = (sr.top + sr.height / 2) - (mr.top + mr.height / 2);
+      med.style.transition = 'none';
+      med.style.opacity = '0';
+      med.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(.34)';
+      flights.push({ el: med, st: si });
+    }
+
+    /* Reflow, damit der Reset greift, bevor die Übergänge scharfgestellt werden */
+    void wrap.offsetWidth;
+    if (fill) fill.style.transition = '';
+    if (token) token.style.transition = '';
+    if (ring) ring.style.transition = '';
+
+    /* --- Sequenz --- */
+    var T0 = 420;                 /* Anlauf */
+    var STEP = 520;               /* Takt je Station */
+    var total = STEPS.length;
+
+    at(root, T0 - 200, function () {
+      if (note) { note.style.transition = 'opacity 620ms cubic-bezier(.16,1,.3,1)'; }
+    });
+
+    for (var k = 0; k < total; k++) {
+      (function (idx) {
+        var t = T0 + idx * STEP;
+
+        /* Token gleitet zur Station, Linie wächst mit */
+        at(root, t, function () {
+          var rt = document.getElementById(ID);
+          if (!rt) return;
+          var gg = stationOffsets(rt);
+          if (!gg) return;
+          var tk = rt.querySelector('.tw-token');
+          var fl = rt.querySelector('.tw-fill');
+          if (tk) tk.style.setProperty('--ty', gg.offs[idx] + 'px');
+          if (fl) fl.style.height = gg.offs[idx] + 'px';
+        });
+
+        /* Station quittiert */
+        at(root, t + 240, function () {
+          var rt = document.getElementById(ID);
+          if (!rt) return;
+          var sp = rt.querySelectorAll('.tw-step')[idx];
+          if (sp) sp.classList.add('done');
+        });
+
+        /* Ausgabe fliegt in die Akte */
+        for (var fi = 0; fi < flights.length; fi++) {
+          if (flights[fi].st !== idx) continue;
+          (function (fl) {
+            at(root, t + 300, function () {
+              fl.el.style.transition = 'transform 820ms cubic-bezier(.22,1,.36,1),opacity 460ms cubic-bezier(.16,1,.3,1)';
+              fl.el.style.transform = 'none';
+              fl.el.style.opacity = '1';
+            });
+          })(flights[fi]);
+        }
+
+        /* Felder tragen sich ein */
+        var mine = [];
+        for (var q = 0; q < FIELDS.length; q++) if (FIELDS[q].st === idx) mine.push(q);
+        for (var mi = 0; mi < mine.length; mi++) {
+          (function (rowIdx, order) {
+            at(root, t + 360 + order * 140, function () {
+              var rt = document.getElementById(ID);
+              if (!rt) return;
+              var rw = rt.querySelectorAll('.tw-row')[rowIdx];
+              if (!rw) return;
+              rw.classList.add('fill');
+              var vv = rw.querySelector('.tw-v');
+              if (vv) vv.classList.add('fill');
+              var filled = rt.querySelectorAll('.tw-row.fill').length;
+              var rg = rt.querySelector('.tw-ring .fg');
+              var pc = rt.querySelector('.tw-pct');
+              var cn = rt.querySelector('.tw-cnum');
+              var p = filled / FIELDS.length;
+              if (rg) rg.style.strokeDashoffset = (C * (1 - p)).toFixed(2);
+              if (pc) pc.textContent = Math.round(p * 100) + ' %';
+              if (cn) cn.textContent = filled + ' / ' + FIELDS.length;
+            });
+          })(mine[mi], mi);
+        }
+      })(k);
+    }
+
+    /* --- Abbinder --- */
+    var END = T0 + (total - 1) * STEP + 900;
+
+    at(root, END, function () {
+      var rt = document.getElementById(ID);
+      if (!rt) return;
+      var cd = rt.querySelector('.tw-card');
+      if (cd) cd.classList.add('complete');
+      var nt = rt.querySelector('.tw-note');
+      if (nt) nt.style.opacity = '1';
+      var pc = rt.querySelector('.tw-pct');
+      countUp(rt, pc, 92, 100, 780, function (v) { return Math.round(v) + ' %'; });
+    });
+
+    at(root, END + 1200, function () {
+      var rt = document.getElementById(ID);
+      if (!rt) return;
+      var wr = rt.querySelector('.tw-wrap');
+      if (wr) wr.classList.remove('playing');
+      /* Endzustand hart absichern */
+      var rws = rt.querySelectorAll('.tw-row');
+      for (var i2 = 0; i2 < rws.length; i2++) {
+        rws[i2].classList.add('fill');
+        var vv2 = rws[i2].querySelector('.tw-v');
+        if (vv2) { vv2.classList.add('fill'); vv2.style.opacity = ''; vv2.style.transform = ''; }
+      }
+      var sps = rt.querySelectorAll('.tw-step');
+      for (var i3 = 0; i3 < sps.length; i3++) sps[i3].classList.add('done');
+      var mds = rt.querySelectorAll('.tw-med');
+      for (var i4 = 0; i4 < mds.length; i4++) { mds[i4].style.transform = 'none'; mds[i4].style.opacity = '1'; }
+      var rg2 = rt.querySelector('.tw-ring .fg');
+      if (rg2) rg2.style.strokeDashoffset = '0';
+      var pc2 = rt.querySelector('.tw-pct');
+      if (pc2) pc2.textContent = '100 %';
+      var cn2 = rt.querySelector('.tw-cnum');
+      if (cn2) cn2.textContent = '12 / 12';
+      var nt2 = rt.querySelector('.tw-note');
+      if (nt2) { nt2.style.opacity = ''; nt2.style.transition = ''; }
+      layoutToken(rt);
+    });
+  }
+
+  /* ------------------------------------------------------------- Trigger --
+     One-Shot beim Einscrollen (IntersectionObserver .3) + self-healing
+     scroll/resize-Fallback, der das DOM per getElementById RE-QUERYT.       */
+
+  function inView(root) {
+    var r = root.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (r.height <= 0) return false;
+    var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return vis > 0 && vis / Math.min(r.height, vh) >= 0.3;
+  }
+
+  function tryPlay() {
+    var root = document.getElementById(ID);
+    if (!root || root.__tsanim1Played || REDUCE) return;
+    if (!inView(root)) return;
+    root.__tsanim1Played = true;
+    play(root);
+  }
+
+  var wired = false;
+  function wire() {
+    if (wired) return;
+    wired = true;
+    window.addEventListener('scroll', tryPlay, { passive: true });
+    window.addEventListener('resize', function () {
+      var root = document.getElementById(ID);
+      if (root) layoutToken(root);
+      tryPlay();
+    }, { passive: true });
+  }
+
+  /* --------------------------------------------------------------- Mount --*/
+
+  function findAnchor() {
+    var scope = document.querySelector('.super-content .notion-root')
+      || document.querySelector('.notion-root')
+      || document.querySelector('.super-content');
+    if (!scope) return null;
+
+    var marker = document.getElementById(ID + '-anchor');
+    if (marker) return { parent: marker.parentNode, before: marker.nextSibling };
+
+    /* Nach dem Einleitungs-Absatz, vor dem Erklärvideo-Abschnitt */
+    var kids = scope.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      var txt = (el.textContent || '').trim();
+      if (txt.length >= 90 && /^(P|DIV)$/.test(el.tagName) && !el.querySelector('h1,h2,h3')) {
+        return { parent: scope, before: el.nextSibling };
+      }
+    }
+    return { parent: scope, before: null };
+  }
+
+  function mount() {
+    if (!on()) {
+      var stale = document.getElementById(ID);
+      if (stale && stale.parentNode) stale.parentNode.removeChild(stale);
+      return;
+    }
+    if (document.getElementById(ID)) return;
+
+    var a = findAnchor();
+    if (!a || !a.parent) return;
+
+    injectCSS();
+    var root = build();
+    a.parent.insertBefore(root, a.before || null);
+
+    var btn = root.querySelector('.tw-replay');
+    if (btn) btn.addEventListener('click', function () {
+      var rt = document.getElementById(ID);
+      if (rt) { rt.__tsanim1Played = true; play(rt); }
+    });
+
+    requestAnimationFrame(function () { layoutToken(root); });
+    push(root, setTimeout(function () { layoutToken(root); }, 600));
+
+    if (REDUCE) return; /* Endzustand steht bereits — nichts animieren */
+
+    try {
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          for (var i = 0; i < es.length; i++) {
+            if (es[i].isIntersecting) {
+              var rt = document.getElementById(ID);
+              if (rt && !rt.__tsanim1Played) { rt.__tsanim1Played = true; play(rt); }
+              io.disconnect();
+            }
+          }
+        }, { threshold: 0.3 });
+        io.observe(root);
+      }
+    } catch (e) { /* Fallback über scroll-Handler */ }
+
+    wire();
+    push(root, setTimeout(tryPlay, 700));
+  }
+
+  function boot() {
+    mount();
+    try {
+      var mo = new MutationObserver(function () { mount(); });
+      mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+    } catch (e) { /* ignore */ }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+
+/* ============================================================
+   #tsanim2 — Erkläranimation Checklisten & Produktion (Insel 02)
+   ============================================================ */
+/* ============================================================================
+ *  #tsanim2 — Erkläranimation „Aus Bauchgefühl wird eine Mängelliste."
+ *  Seite: /lektionen/checklisten-produktion  (Operations Area · Insel 02)
+ *
+ *  Konzept (einzigartig, kein Recycling eines bestehenden Insel-Konzepts):
+ *  Das iPad IST die Bühne. Links ein gekipptes Gerät, auf dessen Display der
+ *  subjektive Eindruck als unscharfe Zeilen + schwebende Bauchgefühl-Wörter
+ *  liegt. Ein Prüf-Sweep wandert von oben nach unten durch das Display und
+ *  „entwickelt" jede Zeile scharf — Zeile für Zeile fällt ein Ja/Nein-Stempel.
+ *  Jedes Nein wird nach rechts ausgeworfen und stapelt sich in der
+ *  Mängelliste; von dort läuft ein Impuls weiter in die Produktionsliste.
+ *
+ *  Robustheits-Regel (Design-System, VERBINDLICH):
+ *   - Endzustand = Default (Bühne ohne Trigger IMMER final sichtbar)
+ *   - root lokal an play(root), self-healing scroll/resize/IO/Poll (re-query)
+ *   - Count-up auf ~26 fps gedrosselt + Garantie-Endwert per setTimeout
+ *
+ *  Namespace: #tsanim2 / window.__tsanim2 / Klassenpräfix .a2-
+ *  Kein kurs.css-Delta (CSS wird injiziert).
+ * ==========================================================================*/
+(function () {
+  'use strict';
+  if (window.__tsanim2) return;
+  window.__tsanim2 = true;
+
+  /* ---------------------------------------------------------------- Gate */
+  function on() { return /\/lektionen\/checklisten-produktion\/?$/.test(location.pathname); }
+
+  /* -------------------------------------------------------------- Assets */
+  // Ziel-Ablage im Repo Tastyrob123/kurs-code (siehe Manifest, Punkt b).
+  var IMGB = 'https://tastyrob123.github.io/kurs-code/img/ops/checklisten/';
+  // Fehlt ein Asset noch, greift der onerror-Fallback (Glyph statt Bild) —
+  // die Animation bricht dadurch NIE.
+
+  /* --------------------------------------------------- Inhalt (SSOT-nah) */
+  // 8 Prüfpunkte = die 8 Kategorien der DB „Audit Checkliste" (Lektion 2.12.2).
+  // Ja/Nein-Verteilung = DEKLARIERTE BEISPIELWERTE.
+  var ROWS = [
+    { t: 'Store-Eindruck & Grundordnung', ok: 1 },
+    { t: 'Service & Auftreten',           ok: 1 },
+    { t: 'Küche & Produktion',            ok: 0 },
+    { t: 'Hygiene',                       ok: 1 },
+    { t: 'Waren & Bestand',               ok: 0 },
+    { t: 'Allergene & Sicherheit',        ok: 1 },
+    { t: 'Führung & Team',                ok: 1 },
+    { t: 'Prozesse & Alltag',             ok: 0 }
+  ];
+
+  // Mängel = die drei Nein-Zeilen, je mit dem Gerät, um das es geht.
+  var DEFECTS = [
+    { row: 2, k: 'Küche & Produktion', t: 'Mise en Place unter Soll',        img: 'prep-table.webp',  gl: '▤' },
+    { row: 4, k: 'Waren & Bestand',    t: 'Kühlvitrine halb bestückt',       img: 'kuehlvitrine.webp', gl: '▥' },
+    { row: 7, k: 'Prozesse & Alltag',  t: 'Entkalkung ohne festen Turnus',   img: 'glaeserspueler.webp', gl: '▦' }
+  ];
+
+  var QUOTA   = 63;   // Beispielwert: 5 von 8 Prüfpunkten erfüllt
+  var POSTEN  = 11;   // SSOT: Produktionslisten-Warenkorb = 11 Posten
+
+  var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----------------------------------------------------------------- CSS */
+  var CSS = [
+    '@font-face{font-family:"Lineal Web";src:url("https://files.catbox.moe/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
+
+    '#tsanim2{--a2-bg:#04050a;--a2-be:#c7b489;--a2-g:199,180,137;--a2-ok:#8FCBAA;--a2-no:#e0574f;--a2-no2:#e32552;',
+    '--a2-e:cubic-bezier(.16,1,.3,1);--a2-e2:cubic-bezier(.22,1,.36,1);--a2-pop:cubic-bezier(.34,1.56,.64,1);',
+    '--a2-disp:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+    '--a2-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;',
+    'display:block;width:100%;max-width:1320px;margin:20px auto 60px;padding:0 24px;box-sizing:border-box;',
+    'font-family:var(--a2-sans);color:#fff;-webkit-font-smoothing:antialiased}',
+    '#tsanim2 *{box-sizing:border-box}',
+    /* Label/Name-Spans brechen um (Karten-Anatomie: Micro-Eyebrow über Name) */
+    '#tsanim2 .a2-sk,#tsanim2 .a2-sn,#tsanim2 .a2-pk,#tsanim2 .a2-pn,#tsanim2 .a2-dk,#tsanim2 .a2-dt,',
+    '#tsanim2 .a2-count,#tsanim2 .a2-countl,#tsanim2 .a2-pbig,#tsanim2 .a2-pbigl{display:block}',
+
+    /* ---- Sektionskopf (Katalog-Spec, verbindlich) ---- */
+    '#tsanim2 .a2-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}',
+    '#tsanim2 .a2-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--a2-sans);',
+    'letter-spacing:.16em;text-transform:uppercase;color:var(--a2-be);margin-bottom:12px}',
+    '#tsanim2 .a2-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--a2-be);',
+    'box-shadow:0 0 12px rgba(var(--a2-g),.85)}',
+    '#tsanim2 .a2-title{font-family:var(--a2-disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);',
+    'line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0 0 14px}',
+    '#tsanim2 .a2-title .a2-g{color:var(--a2-be)}',
+    '#tsanim2 .a2-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0}',
+
+    /* ---- Bühne ---- */
+    '#tsanim2 .a2-stage{display:grid;grid-template-columns:1.12fr .88fr;gap:30px;align-items:start}',
+
+    /* ---- iPad ---- */
+    '#tsanim2 .a2-pad{position:relative;background:linear-gradient(160deg,#15171f,#0a0b11 60%);',
+    'border:1px solid rgba(255,255,255,.13);border-radius:26px;padding:26px 15px 20px;',
+    'box-shadow:0 34px 80px -26px rgba(0,0,0,.92),0 0 0 7px rgba(var(--a2-g),.045);',
+    'transform:perspective(1400px) rotateY(1.6deg) rotateX(.6deg)}',
+    '#tsanim2 .a2-cam{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:6px;height:6px;',
+    'border-radius:50%;background:#1d2029;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}',
+    '#tsanim2 .a2-home{width:92px;height:3px;border-radius:999px;background:rgba(255,255,255,.16);margin:16px auto 0}',
+    '#tsanim2 .a2-screen{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% -10%,rgba(var(--a2-g),.075),rgba(4,5,10,0) 62%),#06070d;',
+    'border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:18px 18px 16px}',
+    '#tsanim2 .a2-screen::after{content:"";position:absolute;inset:0;border-radius:15px;pointer-events:none;',
+    'box-shadow:inset 0 0 0 1px rgba(var(--a2-g),.10)}',
+
+    '#tsanim2 .a2-shead{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;',
+    'padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:4px}',
+    '#tsanim2 .a2-sk{font:600 9.5px/1 var(--a2-sans);letter-spacing:.12em;text-transform:uppercase;',
+    'color:rgba(var(--a2-g),.9);margin-bottom:7px}',
+    '#tsanim2 .a2-sn{font-family:var(--a2-disp);font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}',
+    '#tsanim2 .a2-spill{flex:none;font:600 11px/1 var(--a2-sans);color:var(--a2-be);padding:7px 12px;',
+    'border:1px solid rgba(var(--a2-g),.34);border-radius:999px;background:rgba(var(--a2-g),.07)}',
+
+    '#tsanim2 .a2-rows{position:relative;padding:4px 0 2px}',
+    '#tsanim2 .a2-row{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:11px;',
+    'padding:10px 2px;border-bottom:1px solid rgba(255,255,255,.055)}',
+    '#tsanim2 .a2-row:last-child{border-bottom:0}',
+    '#tsanim2 .a2-rn{font:600 10.5px/1 var(--a2-sans);color:rgba(255,255,255,.28);font-variant-numeric:tabular-nums}',
+    '#tsanim2 .a2-rt{font-size:13.5px;line-height:1.3;color:rgba(255,255,255,.86)}',
+    '#tsanim2 .a2-rv{font:600 10.5px/1 var(--a2-sans);letter-spacing:.06em;padding:6px 11px;border-radius:999px;white-space:nowrap}',
+    '#tsanim2 .a2-row.ok .a2-rv{color:var(--a2-ok);border:1px solid rgba(143,203,170,.42);background:rgba(143,203,170,.10)}',
+    '#tsanim2 .a2-row.no .a2-rv{color:var(--a2-no);border:1px solid rgba(224,87,79,.45);background:rgba(224,87,79,.10)}',
+    '#tsanim2 .a2-row.no .a2-rt{color:#fff}',
+
+    /* Erfüllungsquote */
+    '#tsanim2 .a2-quota{margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.09)}',
+    '#tsanim2 .a2-qtop{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:9px}',
+    '#tsanim2 .a2-ql{font:600 9.5px/1 var(--a2-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}',
+    '#tsanim2 .a2-qv{font-family:var(--a2-disp);font-weight:600;font-size:20px;color:var(--a2-be);font-variant-numeric:tabular-nums}',
+    '#tsanim2 .a2-qtrack{height:4px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden}',
+    '#tsanim2 .a2-qfill{height:100%;width:var(--w,63%);border-radius:999px;',
+    'background:linear-gradient(90deg,rgba(var(--a2-g),.55),var(--a2-be));box-shadow:0 0 12px rgba(var(--a2-g),.45)}',
+
+    /* Sweep + Bauchgefühl-Schicht: reine Start-/Übergangs-Elemente → default unsichtbar */
+    '#tsanim2 .a2-sweep{position:absolute;left:0;right:0;top:0;height:74px;pointer-events:none;opacity:0;',
+    'background:linear-gradient(180deg,rgba(var(--a2-g),0),rgba(var(--a2-g),.13) 55%,rgba(251,230,194,.30) 92%,rgba(var(--a2-g),0));',
+    'border-bottom:1px solid rgba(251,230,194,.55);box-shadow:0 8px 30px rgba(var(--a2-g),.32)}',
+    '#tsanim2 .a2-haze{position:absolute;inset:0;pointer-events:none}',
+    '#tsanim2 .a2-vg{position:absolute;font-size:13px;font-style:italic;color:rgba(255,255,255,.5);opacity:0;',
+    'text-shadow:0 0 18px rgba(0,0,0,.9);white-space:nowrap}',
+    '#tsanim2 .a2-vg.v1{left:12%;top:16%}',
+    '#tsanim2 .a2-vg.v2{right:9%;top:42%}',
+    '#tsanim2 .a2-vg.v3{left:18%;top:70%}',
+
+    '#tsanim2 .a2-cap{margin:16px 2px 0;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.42);text-align:center}',
+
+    /* ---- Rechte Spalte ---- */
+    '#tsanim2 .a2-right{display:flex;flex-direction:column}',
+    '#tsanim2 .a2-panel{background:rgba(255,255,255,.035);border:1px solid rgba(var(--a2-g),.28);border-radius:16px;',
+    'padding:18px 18px 16px;box-shadow:0 24px 60px rgba(0,0,0,.45)}',
+    '#tsanim2 .a2-pk{font:600 9.5px/1 var(--a2-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--a2-g),.9);margin-bottom:8px}',
+    '#tsanim2 .a2-pn{font-family:var(--a2-disp);font-weight:600;font-size:19px;letter-spacing:-.01em;color:#fff}',
+    '#tsanim2 .a2-pdiv{height:1px;background:rgba(255,255,255,.09);margin:13px 0 12px}',
+
+    '#tsanim2 .a2-phead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}',
+    '#tsanim2 .a2-count{font-family:var(--a2-disp);font-weight:600;font-size:30px;line-height:1;color:var(--a2-no);',
+    'font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(224,87,79,.32)}',
+    '#tsanim2 .a2-countl{font:600 9.5px/1 var(--a2-sans);letter-spacing:.1em;text-transform:uppercase;',
+    'color:rgba(255,255,255,.34);margin-top:6px;text-align:right}',
+
+    '#tsanim2 .a2-def{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:center;padding:10px 0;',
+    'border-bottom:1px solid rgba(255,255,255,.06)}',
+    '#tsanim2 .a2-def:last-of-type{border-bottom:0}',
+    '#tsanim2 .a2-thumb{width:38px;height:38px;display:flex;align-items:center;justify-content:center;',
+    'border-radius:9px;background:#0b0d14;border:1px solid rgba(var(--a2-g),.3);overflow:hidden}',
+    '#tsanim2 .a2-thumb img{width:100%;height:100%;object-fit:contain;',
+    'filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}',
+    '#tsanim2 .a2-thumb .a2-gl{font-size:15px;color:rgba(var(--a2-g),.75)}',
+    '#tsanim2 .a2-dk{font:600 9px/1 var(--a2-sans);letter-spacing:.1em;text-transform:uppercase;',
+    'color:rgba(255,255,255,.34);margin-bottom:5px}',
+    '#tsanim2 .a2-dt{font-size:13.5px;line-height:1.35;color:#fff}',
+    '#tsanim2 .a2-dfoot{margin-top:12px;font-size:10px;color:rgba(255,255,255,.28)}',
+
+    /* Connector */
+    '#tsanim2 .a2-link{position:relative;height:76px;display:flex;align-items:center;justify-content:center}',
+    '#tsanim2 .a2-line{position:absolute;top:0;bottom:0;left:50%;width:1px;transform:translateX(-.5px);',
+    'background:linear-gradient(180deg,rgba(var(--a2-g),0),rgba(var(--a2-g),.42) 22%,rgba(var(--a2-g),.42) 78%,rgba(var(--a2-g),0))}',
+    '#tsanim2 .a2-dot{position:absolute;left:50%;top:8px;width:6px;height:6px;margin-left:-3px;border-radius:50%;',
+    'background:#efe6d2;box-shadow:0 0 12px rgba(var(--a2-g),.85);opacity:0}',
+    '#tsanim2 .a2-linklbl{position:relative;background:var(--a2-bg);padding:0 12px;font:600 9.5px/1 var(--a2-sans);',
+    'letter-spacing:.11em;text-transform:uppercase;color:rgba(var(--a2-g),.85)}',
+
+    /* Produktionsliste */
+    '#tsanim2 .a2-prod{background:rgba(var(--a2-g),.09);border-color:rgba(var(--a2-g),.5)}',
+    '#tsanim2 .a2-prow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0}',
+    '#tsanim2 .a2-pl{font-size:12.5px;color:rgba(255,255,255,.55)}',
+    '#tsanim2 .a2-pv{font:600 14px/1 var(--a2-sans);color:#fff;font-variant-numeric:tabular-nums}',
+    '#tsanim2 .a2-pv.gold{color:var(--a2-be);font-weight:700}',
+    '#tsanim2 .a2-pmain{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;margin-bottom:4px}',
+    '#tsanim2 .a2-pthumb{width:52px;height:52px;display:flex;align-items:center;justify-content:center;',
+    'border-radius:11px;background:#0b0d14;border:1px solid rgba(var(--a2-g),.42);overflow:hidden}',
+    '#tsanim2 .a2-pthumb img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.65))}',
+    '#tsanim2 .a2-pthumb .a2-gl{font-size:20px;color:rgba(var(--a2-g),.75)}',
+    '#tsanim2 .a2-pbig{font-family:var(--a2-disp);font-weight:600;font-size:30px;line-height:1;color:var(--a2-be);',
+    'font-variant-numeric:tabular-nums;text-shadow:0 0 30px rgba(var(--a2-g),.42)}',
+    '#tsanim2 .a2-pbigl{font:600 9.5px/1 var(--a2-sans);letter-spacing:.1em;text-transform:uppercase;',
+    'color:rgba(255,255,255,.4);margin-top:7px}',
+    '#tsanim2 .a2-pfoot{margin-top:12px;padding-top:11px;border-top:1px solid rgba(var(--a2-g),.22);',
+    'font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.5)}',
+
+    /* Fuß */
+    '#tsanim2 .a2-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:26px;flex-wrap:wrap}',
+    '#tsanim2 .a2-note{margin:0;font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.32)}',
+    '#tsanim2 .a2-replay{flex:none;font:600 12px/1 var(--a2-sans);letter-spacing:.02em;color:var(--a2-be);',
+    'background:transparent;border:1px solid rgba(var(--a2-g),.45);border-radius:999px;padding:11px 20px;cursor:pointer;',
+    'transition:background .45s var(--a2-e),border-color .45s var(--a2-e),transform .45s var(--a2-e)}',
+    '#tsanim2 .a2-replay:hover{background:rgba(var(--a2-g),.1);border-color:rgba(var(--a2-g),.7);transform:translateY(-1px)}',
+    '#tsanim2 .a2-replay:active{transform:scale(.97)}',
+
+    /* ================= Choreografie — nur unter .playing ================= */
+    '#tsanim2 .a2-wrap.playing .a2-stage{animation:a2Rise .68s var(--a2-e) both}',
+    '#tsanim2 .a2-wrap.playing .a2-pad{animation:a2Pad .82s var(--a2-e) .18s both}',
+    '#tsanim2 .a2-wrap.playing .a2-sweep{animation:a2Sweep 1.78s var(--a2-e2) .9s both}',
+    '#tsanim2 .a2-wrap.playing .a2-vg{animation:a2Vague 2.5s var(--a2-e) var(--d,0ms) both}',
+    '#tsanim2 .a2-wrap.playing .a2-row .a2-rt,#tsanim2 .a2-wrap.playing .a2-row .a2-rn{animation:a2Sharp .78s var(--a2-e) var(--d,0ms) both}',
+    '#tsanim2 .a2-wrap.playing .a2-row .a2-rv{animation:a2Stamp .52s var(--a2-pop) calc(var(--d,0ms) + 240ms) both}',
+    '#tsanim2 .a2-wrap.playing .a2-defects{animation:a2Panel .72s var(--a2-e) .78s both}',
+    '#tsanim2 .a2-wrap.playing .a2-def{animation:a2Eject .74s var(--a2-e) var(--d,0ms) both}',
+    '#tsanim2 .a2-wrap.playing .a2-quota{animation:a2Fade .6s var(--a2-e) 3.0s both}',
+    '#tsanim2 .a2-wrap.playing .a2-qfill{animation:a2Bar 1.0s var(--a2-e) 3.05s both}',
+    '#tsanim2 .a2-wrap.playing .a2-link{animation:a2Fade .6s var(--a2-e) 3.35s both}',
+    '#tsanim2 .a2-wrap.playing .a2-prod{animation:a2Panel .78s var(--a2-e) 3.75s both,a2Lit 1.5s var(--a2-e) 3.9s both}',
+    /* fließende Dauer-Elemente (mit Ruhephase) */
+    '#tsanim2 .a2-dot{animation:a2Flow 3.6s var(--a2-e2) 4.1s infinite}',
+    '#tsanim2 .a2-screen{animation:a2Breath 5.2s ease-in-out 1.2s infinite}',
+    '#tsanim2.a2-pause .a2-dot,#tsanim2.a2-pause .a2-screen{animation-play-state:paused}',
+
+    '@keyframes a2Rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}',
+    '@keyframes a2Pad{from{opacity:0;transform:perspective(1400px) rotateY(1.6deg) rotateX(.6deg) translateY(26px) scale(.965)}',
+    'to{opacity:1;transform:perspective(1400px) rotateY(1.6deg) rotateX(.6deg) translateY(0) scale(1)}}',
+    '@keyframes a2Sweep{0%{opacity:0;transform:translateY(-70px)}12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateY(var(--sw,430px))}}',
+    '@keyframes a2Sharp{from{opacity:.16;filter:blur(6px);transform:translateY(5px)}to{opacity:1;filter:blur(0);transform:none}}',
+    '@keyframes a2Stamp{from{opacity:0;transform:scale(.62)}to{opacity:1;transform:scale(1)}}',
+    '@keyframes a2Vague{0%{opacity:0;transform:translateY(8px) scale(.98)}22%{opacity:.55}62%{opacity:.5;transform:translateY(-4px) scale(1)}100%{opacity:0;transform:translateY(-14px) scale(1.02);filter:blur(4px)}}',
+    '@keyframes a2Panel{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}',
+    '@keyframes a2Eject{from{opacity:0;transform:translateX(-30px) scale(.95)}to{opacity:1;transform:none}}',
+    '@keyframes a2Fade{from{opacity:0}to{opacity:1}}',
+    '@keyframes a2Bar{from{width:0}to{width:var(--w,63%)}}',
+    '@keyframes a2Lit{0%{box-shadow:0 24px 60px rgba(0,0,0,.45)}45%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 6px rgba(var(--a2-g),.14)}100%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(var(--a2-g),0)}}',
+    '@keyframes a2Flow{0%{opacity:0;transform:translateY(0)}8%{opacity:1}52%{opacity:1;transform:translateY(58px)}62%{opacity:0;transform:translateY(60px)}100%{opacity:0;transform:translateY(60px)}}',
+    '@keyframes a2Breath{0%,100%{box-shadow:inset 0 0 0 1px rgba(var(--a2-g),.04)}50%{box-shadow:inset 0 0 0 1px rgba(var(--a2-g),.14)}}',
+
+    /* ------------------------------- Mobile ------------------------------ */
+    '@media(max-width:820px){',
+    '#tsanim2{padding:0 16px;margin-top:24px}',
+    '#tsanim2 .a2-stage{grid-template-columns:1fr;gap:24px}',
+    '#tsanim2 .a2-right{margin-top:2px}',
+    '#tsanim2 .a2-pad{transform:none;padding:22px 12px 16px}',
+    '#tsanim2 .a2-wrap.playing .a2-pad{animation:a2PadM .82s var(--a2-e) .18s both}',
+    '@keyframes a2PadM{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}',
+    '#tsanim2 .a2-row{grid-template-columns:20px 1fr auto;gap:9px}',
+    '#tsanim2 .a2-rt{font-size:12.5px}',
+    '#tsanim2 .a2-foot{flex-direction:column;align-items:flex-start}',
+    '#tsanim2 .a2-replay{align-self:stretch;text-align:center}',
+    '}',
+    /* sehr schmale Geräte: nichts darf die Spalte sprengen */
+    '@media(max-width:480px){',
+    '#tsanim2 .a2-shead{flex-wrap:wrap;row-gap:10px}',
+    '#tsanim2 .a2-screen,#tsanim2 .a2-panel{padding-left:14px;padding-right:14px}',
+    '#tsanim2 .a2-rt{font-size:12px}',
+    '#tsanim2 .a2-rv{padding:5px 9px}',
+    '#tsanim2 .a2-def{grid-template-columns:34px 1fr;gap:10px}',
+    '#tsanim2 .a2-thumb{width:34px;height:34px}',
+    '}',
+    /* Text-Zellen dürfen Grid/Flex nie aufblähen */
+    '#tsanim2 .a2-rt,#tsanim2 .a2-dt,#tsanim2 .a2-dk,#tsanim2 .a2-def>span,',
+    '#tsanim2 .a2-pmain>span,#tsanim2 .a2-shead>span,#tsanim2 .a2-pl{min-width:0;overflow-wrap:anywhere}',
+
+    /* -------------------------- reduced motion --------------------------- */
+    '@media(prefers-reduced-motion:reduce){',
+    '#tsanim2 *,#tsanim2 .a2-wrap.playing *{animation:none !important;transition:none !important}',
+    '#tsanim2 .a2-sweep,#tsanim2 .a2-vg{display:none !important}',
+    '#tsanim2 .a2-dot{opacity:1;top:34px}',
+    '}'
+  ].join('');
+
+  function css() {
+    if (document.getElementById('tsanim2-css')) return;
+    var s = document.createElement('style');
+    s.id = 'tsanim2-css';
+    s.textContent = CSS;
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* ------------------------------------------------------------- Helpers */
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function thumb(cls, file, glyph) {
+    // Bild mit Glyph-Fallback: fehlt das Asset, bleibt die Kachel elegant.
+    return '<span class="' + cls + '" data-gl="' + glyph + '">' +
+      '<img src="' + IMGB + file + '" alt="" loading="lazy"></span>';
+  }
+
+  function armThumbs(root) {
+    var imgs = root.querySelectorAll('.a2-thumb img,.a2-pthumb img');
+    for (var i = 0; i < imgs.length; i++) {
+      (function (img) {
+        function fail() {
+          var box = img.parentNode;
+          if (!box || box.querySelector('.a2-gl')) return;
+          box.removeChild(img);
+          var g = document.createElement('span');
+          g.className = 'a2-gl';
+          g.textContent = box.getAttribute('data-gl') || '▤';
+          box.appendChild(g);
+        }
+        if (img.complete && img.naturalWidth === 0) fail();
+        img.addEventListener('error', fail);
+      })(imgs[i]);
+    }
+  }
+
+  /* -------------------------------------------------------------- Markup */
+  function markup() {
+    var rows = ROWS.map(function (r, i) {
+      return '<div class="a2-row ' + (r.ok ? 'ok' : 'no') + '" data-i="' + i + '">' +
+        '<span class="a2-rn">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
+        '<span class="a2-rt">' + esc(r.t) + '</span>' +
+        '<span class="a2-rv">' + (r.ok ? 'Ja' : 'Nein') + '</span>' +
+        '</div>';
+    }).join('');
+
+    var defs = DEFECTS.map(function (d, i) {
+      return '<div class="a2-def" data-i="' + i + '">' +
+        thumb('a2-thumb', d.img, d.gl) +
+        '<span><span class="a2-dk">' + esc(d.k) + '</span>' +
+        '<span class="a2-dt">' + esc(d.t) + '</span></span>' +
+        '</div>';
+    }).join('');
+
+    return '' +
+      '<div class="a2-head">' +
+        '<div class="a2-eyebrow">Das Store-Audit am iPad</div>' +
+        '<h2 class="a2-title">Aus Bauchgefühl wird eine <span class="a2-g">Mängelliste</span>.</h2>' +
+        '<p class="a2-sub">Jede Frage hat eine Antwort: Ja oder Nein. Was auf Nein steht, landet automatisch in der Optimierungsliste.</p>' +
+      '</div>' +
+
+      '<div class="a2-wrap">' +
+        '<div class="a2-stage">' +
+
+          '<div class="a2-left">' +
+            '<div class="a2-pad">' +
+              '<span class="a2-cam"></span>' +
+              '<div class="a2-screen">' +
+                '<div class="a2-shead">' +
+                  '<span><span class="a2-sk">Rundgang · Beispiel</span>' +
+                  '<span class="a2-sn">Audit Checkliste</span></span>' +
+                  '<span class="a2-spill">8 Prüfpunkte</span>' +
+                '</div>' +
+                '<div class="a2-rows">' + rows + '</div>' +
+                '<div class="a2-quota">' +
+                  '<div class="a2-qtop"><span class="a2-ql">Erfüllungsquote</span>' +
+                  '<span class="a2-qv" data-count="' + QUOTA + '" data-suffix=" %">' + QUOTA + ' %</span></div>' +
+                  '<div class="a2-qtrack"><div class="a2-qfill" style="--w:' + QUOTA + '%"></div></div>' +
+                '</div>' +
+                '<div class="a2-sweep"></div>' +
+                '<div class="a2-haze">' +
+                  '<span class="a2-vg v1">„wirkt sauber"</span>' +
+                  '<span class="a2-vg v2">„läuft schon"</span>' +
+                  '<span class="a2-vg v3">„irgendwas fehlt"</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="a2-home"></div>' +
+            '</div>' +
+            '<p class="a2-cap">Ein Rundgang, acht Fragen — der Eindruck bekommt eine Form.</p>' +
+          '</div>' +
+
+          '<div class="a2-right">' +
+            '<div class="a2-panel a2-defects">' +
+              '<div class="a2-phead">' +
+                '<span><span class="a2-pk">Automatisch gefiltert</span>' +
+                '<span class="a2-pn">Mängelliste</span></span>' +
+                '<span><span class="a2-count" data-count="' + DEFECTS.length + '">' + DEFECTS.length + '</span>' +
+                '<span class="a2-countl">offen</span></span>' +
+              '</div>' +
+              '<div class="a2-pdiv"></div>' +
+              defs +
+              '<p class="a2-dfoot">3 von 8 Prüfpunkten auf Nein · Beispielwerte</p>' +
+            '</div>' +
+
+            '<div class="a2-link">' +
+              '<span class="a2-line"></span>' +
+              '<span class="a2-dot"></span>' +
+              '<span class="a2-linklbl">Was fehlt, wird produziert</span>' +
+            '</div>' +
+
+            '<div class="a2-panel a2-prod">' +
+              '<span class="a2-pk">Daraus folgt</span>' +
+              '<span class="a2-pn">Produktionsliste</span>' +
+              '<div class="a2-pdiv"></div>' +
+              '<div class="a2-pmain">' +
+                thumb('a2-pthumb', 'bain-marie.webp', '▧') +
+                '<span><span class="a2-pbig" data-count="' + POSTEN + '">' + POSTEN + '</span>' +
+                '<span class="a2-pbigl">Posten für morgen</span></span>' +
+              '</div>' +
+              '<div class="a2-prow"><span class="a2-pl">Bereich</span><span class="a2-pv">Küche · Bar</span></div>' +
+              '<div class="a2-prow"><span class="a2-pl">Längster Vorlauf</span><span class="a2-pv gold">48 h</span></div>' +
+              '<div class="a2-prow"><span class="a2-pl">Status</span><span class="a2-pv">Mise en Place</span></div>' +
+              '<p class="a2-pfoot">Der Bestands-Mangel wird zum Posten mit Menge, Tag und Vorlauf.</p>' +
+            '</div>' +
+          '</div>' +
+
+        '</div>' +
+
+        '<div class="a2-foot">' +
+          '<p class="a2-note">Prüfpunkte und Posten entsprechen der Audit- und Produktions-Datenbank. Ja/Nein-Verteilung, Quote und Vorlauf sind gekennzeichnete Beispielwerte.</p>' +
+          '<button type="button" class="a2-replay">Neu abspielen</button>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* ------------------------------------------------------ Timing-Vergabe */
+  var T0 = 1020, STEP = 190;   // erste Zeile / Stagger (Katalog: 120–200 ms)
+
+  function stamp(root) {
+    var rows = root.querySelectorAll('.a2-row');
+    var i;
+    for (i = 0; i < rows.length; i++) rows[i].style.setProperty('--d', (T0 + i * STEP) + 'ms');
+
+    var defs = root.querySelectorAll('.a2-def');
+    for (i = 0; i < defs.length; i++) {
+      var src = DEFECTS[i] ? DEFECTS[i].row : i;
+      defs[i].style.setProperty('--d', (T0 + src * STEP + 540) + 'ms');
+    }
+
+    var vg = root.querySelectorAll('.a2-vg');
+    for (i = 0; i < vg.length; i++) vg[i].style.setProperty('--d', (620 + i * 150) + 'ms');
+
+    // Sweep-Weg an die echte Höhe der Zeilen-Zone koppeln (re-query, kein Cache)
+    var scr = root.querySelector('.a2-screen'), sw = root.querySelector('.a2-sweep');
+    if (scr && sw) sw.style.setProperty('--sw', Math.max(240, scr.offsetHeight - 6) + 'px');
+  }
+
+  /* ----------------------------------------------------------- Count-ups */
+  function clearTimers(root) {
+    if (root.__timers) { root.__timers.forEach(function (t) { clearTimeout(t); }); }
+    if (root.__rafs) { root.__rafs.forEach(function (r) { cancelAnimationFrame(r); }); }
+    root.__timers = []; root.__rafs = [];
+  }
+
+  function countUp(root, el, to, dur) {
+    if (!el) return;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var t0 = 0, last = 0;
+    el.textContent = '0' + suffix;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      if (ts - last >= 38 || p === 1) {            // ~26 fps gedrosselt
+        last = ts;
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * e) + suffix;
+      }
+      if (p < 1) root.__rafs.push(requestAnimationFrame(step));
+    }
+    root.__rafs.push(requestAnimationFrame(step));
+    // Garantie-Endwert (rAF wird im Hintergrund-Tab gedrosselt)
+    root.__timers.push(setTimeout(function () { el.textContent = to + suffix; }, dur + 180));
+  }
+
+  function setFinal(root) {
+    var q = root.querySelector('.a2-qv'); if (q) q.textContent = QUOTA + ' %';
+    var c = root.querySelector('.a2-count'); if (c) c.textContent = DEFECTS.length;
+    var p = root.querySelector('.a2-pbig'); if (p) p.textContent = POSTEN;
+  }
+
+  /* --------------------------------------------------------------- Play */
+  function play(root) {                     // root IMMER lokal übergeben
+    if (!root) return;
+    var wrap = root.querySelector('.a2-wrap');
+    if (!wrap) return;
+
+    clearTimers(root);
+    if (REDUCE) { setFinal(root); return; }
+
+    stamp(root);
+    wrap.classList.remove('playing');
+    void wrap.offsetWidth;                  // Reflow → Animationen neu starten
+    wrap.classList.add('playing');
+
+    // Count-ups an die Choreografie gehängt
+    var firstDefect = T0 + DEFECTS[0].row * STEP + 540;
+    root.__timers.push(setTimeout(function () {
+      var r = document.getElementById('tsanim2'); if (!r) return;
+      countUp(r, r.querySelector('.a2-count'), DEFECTS.length, 1150);
+    }, firstDefect));
+    root.__timers.push(setTimeout(function () {
+      var r = document.getElementById('tsanim2'); if (!r) return;
+      countUp(r, r.querySelector('.a2-qv'), QUOTA, 1000);
+    }, 3050));
+    root.__timers.push(setTimeout(function () {
+      var r = document.getElementById('tsanim2'); if (!r) return;
+      countUp(r, r.querySelector('.a2-pbig'), POSTEN, 1100);
+    }, 3850));
+  }
+
+  /* ------------------------------------------------- Trigger (self-heal) */
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (!r.height) return false;
+    var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return vis > 0 && (vis / Math.min(r.height, vh)) >= .3;   // IO-Schwelle .3
+  }
+
+  function tryPlay() {
+    var root = document.getElementById('tsanim2');            // re-query, kein Modul-Cache
+    if (!root || root.__played) return;
+    if (!inView(root)) return;
+    root.__played = 1;
+    play(root);
+  }
+
+  function arm() {
+    var root = document.getElementById('tsanim2');
+    if (!root || root.__armed) return;
+    root.__armed = 1;
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        for (var i = 0; i < es.length; i++) if (es[i].isIntersecting) tryPlay();
+      }, { threshold: .3 });
+      io.observe(root);
+    }
+    window.addEventListener('scroll', tryPlay, { passive: true });
+    window.addEventListener('resize', tryPlay, { passive: true });
+
+    var n = 0, poll = setInterval(function () {
+      n++;
+      var r = document.getElementById('tsanim2');
+      if (!r || r.__played || n > 80) { clearInterval(poll); return; }   // max ~20 s
+      tryPlay();
+    }, 250);
+
+    tryPlay();   // Sofort-Check, falls schon im Viewport
+  }
+
+  /* --------------------------------------------------------------- Mount */
+  function anchor() {
+    // 1) expliziter Slot  2) generische #tsisl-Animation ersetzen  3) Fallback
+    var slot = document.getElementById('tsanim2-slot');
+    if (slot) return { node: slot, mode: 'in' };
+
+    var isl = document.getElementById('tsisl');
+    if (isl) {
+      var old = isl.querySelector('.il-anim, [class*="il-anim"]');
+      if (old) return { node: old, mode: 'before' };
+    }
+    var sc = document.querySelector('.super-content');
+    var nr = sc && sc.querySelector('.notion-root');
+    if (nr) return { node: nr, mode: 'before' };
+    if (sc) return { node: sc, mode: 'in' };
+    return null;
+  }
+
+  function mount() {
+    if (!on()) {
+      var stale = document.getElementById('tsanim2');
+      if (stale && stale.parentNode) stale.parentNode.removeChild(stale);
+      return;
+    }
+    css();
+    if (document.getElementById('tsanim2')) { arm(); return; }
+
+    var a = anchor();
+    if (!a) return;
+
+    var sec = document.createElement('section');
+    sec.id = 'tsanim2';
+    sec.innerHTML = markup();
+
+    if (a.mode === 'before' && a.node.parentNode) {
+      a.node.parentNode.insertBefore(sec, a.node);
+      // die generische Insel-Animation weicht dieser eigens gebauten
+      if (a.node.className && /il-anim/.test(a.node.className)) {
+        a.node.style.display = 'none';
+        a.node.setAttribute('data-tsanim2-replaced', '1');
+      }
+    } else {
+      a.node.appendChild(sec);
+    }
+
+    setFinal(sec);   // Endzustand = Default, auch ohne Trigger
+    stamp(sec);
+    armThumbs(sec);
+
+    var btn = sec.querySelector('.a2-replay');
+    if (btn) btn.addEventListener('click', function () {
+      var r = document.getElementById('tsanim2');
+      if (!r) return;
+      r.__played = 1;
+      play(r);
+    });
+
+    arm();
+  }
+
+  /* ------------------------------------------------------ Loop-Ruhephase */
+  document.addEventListener('visibilitychange', function () {
+    var r = document.getElementById('tsanim2');
+    if (!r) return;
+    r.classList.toggle('a2-pause', document.hidden);
+  });
+
+  /* ------------------------------------------- React-resilienter Re-Mount */
+  var deb;
+  function schedule() { clearTimeout(deb); deb = setTimeout(mount, 200); }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
+  new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true });
+  window.addEventListener('popstate', schedule);
+  setTimeout(mount, 900);
+  setTimeout(mount, 2200);
+})();
+
+
+/* ============================================================
+   #tsanim3 — Erkläranimation Hygiene, Behörden & Handbücher (Insel 03)
+   ============================================================ */
+/* ============================================================================
+ * #tsanim3 — Erkläranimation „Der Ordner, der sich selbst meldet."
+ * Lektion 2.12.3 — Hygiene, Behörden & Handbücher (Insel 03, Operations Area)
+ * Slug: /lektionen/hygiene-behrden-handbcher  (Regex tolerant, Umlaut-Stripping)
+ *
+ * Eigenständige IIFE. CSS wird injiziert (kein kurs.css-Delta).
+ * Namespace: #tsanim3 / window.__tsanim3
+ * Folgt: Animations-Doktrin + Qualitäts-Gesetz (10 Punkte) + Animations-
+ * Robustheits-Regel (Endzustand = Default, self-healing Trigger, gedrosselter
+ * Count-up), Design-System Tasty Studios.
+ * Alle Zahlen/Daten = deklarierte BEISPIELWERTE.
+ * ========================================================================== */
+(function () {
+  'use strict';
+
+  if (window.__tsanim3) return;
+  window.__tsanim3 = true;
+
+  var ID = 'tsanim3';
+  var CSS_ID = 'tsanim3-css';
+  var PATH = /\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/;
+  var IMG = 'https://tastyrob123.github.io/kurs-code/img/ops/hygiene/';
+
+  /* --------------------------------------------------------------------- */
+  /* DATEN — Beispielwerte (SSOT: Lektion 2.12.3, Notion-DBs                */
+  /*   „Hygiene Produkte" + „Dokumenttypen (Pflichtnachweise)")             */
+  /* --------------------------------------------------------------------- */
+
+  /* Referenz-Stichtag der Animation (fix, damit die Darstellung
+     deterministisch bleibt — kein Date.now(), kein „driftendes" Bild). */
+  var HEUTE = '2026-07-21';
+  var AXIS_VON = '2026-06-01';
+  var AXIS_BIS = '2027-04-01';
+  var VORLAUF = 14; /* Erinnerung Tage vorher — SSOT Notion-DB */
+
+  /* 10 Hygienemittel — Bilddateien = generierte Serie (Downloads) */
+  var MITTEL = [
+    { s: 'hygieneseife',                n: 'Hygieneseife',            g: 'Reinigung & Chemie',  d: '1 Hub',        b: 'Küche · Sanitär',   sdb: 1 },
+    { s: 'schnelldesinfektion-hand',    n: 'Handdesinfektion',        g: 'Desinfektion',        d: '3 ml',         b: 'Handwaschplatz',    sdb: 1 },
+    { s: 'schnelldesinfektion-flaeche', n: 'Flächendesinfektion',     g: 'Desinfektion',        d: 'unverdünnt',   b: 'Arbeitsflächen',    sdb: 1 },
+    { s: 'flaechendesinfektion-kanister', n: 'Desinfektion (Vorrat)', g: 'Desinfektion',        d: '2 %',          b: 'Küche gesamt',      sdb: 1 },
+    { s: 'allzweckreiniger',            n: 'Allzweckreiniger',        g: 'Reinigung & Chemie',  d: '2 %',          b: 'Küche · Lager',     sdb: 1 },
+    { s: 'allzweckreiniger-kanister',   n: 'Allzweck (Vorrat)',       g: 'Reinigung & Chemie',  d: '2 %',          b: 'Lager',             sdb: 1 },
+    { s: 'bodenreiniger',               n: 'Bodenreiniger',           g: 'Reinigung & Chemie',  d: '3 %',          b: 'Küchenboden',       sdb: 1 },
+    { s: 'sanitaerreiniger',            n: 'Sanitärreiniger',         g: 'Reinigung & Chemie',  d: '3 %',          b: 'Gäste-WC',          sdb: 1 },
+    { s: 'handspuelreiniger',           n: 'Handspülreiniger',        g: 'Spülhygiene',         d: '0,5 %',        b: 'Spülbecken',        sdb: 1 },
+    { s: 'spuelmaschinenreiniger',      n: 'Spülmaschinenreiniger',   g: 'Spülhygiene',         d: '1,5 g/l',      b: 'Haubenspüler',      sdb: 0 }
+  ];
+
+  /* Das aufgeschlagene Datenblatt (Index in MITTEL) */
+  var BLATT = 0;
+
+  /* 8 Pflichtnachweise — Kürzel/Gültigkeit gem. Notion-DB, Daten = Beispiel */
+  var DOKS = [
+    { k: 'HA',  n: 'HACCP-Schulung',        m: 12, z: 'Küchenleitung',  bis: '2026-07-06' },
+    { k: 'GZ',  n: 'Gesundheitszeugnis',    m: 24, z: 'Serviceleitung', bis: '2026-08-02' },
+    { k: 'EH',  n: 'Ersthelfer-Schulung',   m: 24, z: 'Schichtleitung', bis: '2026-08-28' },
+    { k: 'HY',  n: 'Hygienebelehrung',      m: 24, z: 'Küchenleitung',  bis: '2026-09-12' },
+    { k: 'BS',  n: 'Brandschutzhelfer',     m: 36, z: 'Haustechnik',    bis: '2026-10-06' },
+    { k: '§43', n: 'IfSG §43 Belehrung',    m: 24, z: 'Betriebsleitung', bis: '2026-11-04' },
+    { k: 'AL',  n: 'Allergen-Schulung',     m: 12, z: 'Serviceleitung', bis: '2026-12-31' },
+    { k: 'PR',  n: 'Prüfprotokoll Spülen',  m: 12, z: 'Haustechnik',    bis: '2027-03-01' }
+  ];
+
+  var MONATE = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+  /* --------------------------------------------------------------------- */
+  /* Helfer                                                                 */
+  /* --------------------------------------------------------------------- */
+
+  function dnum(iso) {
+    var p = iso.split('-');
+    return Date.UTC(+p[0], +p[1] - 1, +p[2]) / 86400000;
+  }
+  function dfmt(iso) {
+    var p = iso.split('-');
+    return p[2] + '.' + p[1] + '.' + p[0];
+  }
+  function tage(iso) { return Math.round(dnum(iso) - dnum(HEUTE)); }
+
+  /* Status je Nachweis: ab = abgelaufen, warn = Erinnerung aktiv, ok = gültig */
+  function status(iso) {
+    var t = tage(iso);
+    if (t < 0) return 'ab';
+    if (t <= VORLAUF) return 'warn';
+    return 'ok';
+  }
+  function pos(iso) {
+    var a = dnum(AXIS_VON), b = dnum(AXIS_BIS);
+    var p = (dnum(iso) - a) / (b - a);
+    return Math.max(0, Math.min(1, p)) * 100;
+  }
+
+  var REDUCE = false;
+  try {
+    REDUCE = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  } catch (e) { REDUCE = false; }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  /* Abgeleitete Kennzahlen (nicht geschätzt — aus den Daten oben gerechnet) */
+  function zahlen() {
+    var ok = 0, warn = 0, ab = 0, i, st;
+    for (i = 0; i < DOKS.length; i++) {
+      st = status(DOKS[i].bis);
+      if (st === 'ok') ok++; else if (st === 'warn') warn++; else ab++;
+    }
+    var sdb = 0;
+    for (i = 0; i < MITTEL.length; i++) if (MITTEL[i].sdb) sdb++;
+    return {
+      eintraege: MITTEL.length + DOKS.length,
+      nachweise: DOKS.length,
+      sdb: sdb,
+      mittel: MITTEL.length,
+      ok: ok, warn: warn, ab: ab
+    };
+  }
+
+  /* --------------------------------------------------------------------- */
+  /* CSS                                                                    */
+  /* --------------------------------------------------------------------- */
+
+  var CSS = [
+    '#tsanim3{',
+    '  --hg-bg:#04050a; --hg-beige:#c7b489; --hg-beige-r:199,180,137;',
+    '  --hg-gruen:#8FCBAA; --hg-gruen-r:143,203,170;',
+    '  --hg-rot:#e32552; --hg-rot-r:227,37,82;',
+    /* „Lineal Web" zuerst: das „Lineal TS"-Subset (30 Glyphen) hat kein F/q —
+       hier kommen F-Glyphen vor (Monogramm „Flächendesinfektion"). Gleicher
+       Look, voller Zeichensatz. Design-System-Regel vom 17.07.2026. */
+    '  --hg-disp:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+    '  --hg-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+    '  --hg-e:cubic-bezier(.16,1,.3,1); --hg-e2:cubic-bezier(.22,1,.36,1);',
+    '  --hg-pop:cubic-bezier(.34,1.56,.64,1);',
+    '  position:relative; width:94vw; margin:20px calc(50% - 47vw) 60px;',
+    /* overflow-x:clip verhindert, dass dekorative Overlays (Chaos-Pill, Glows)
+       horizontalen Seiten-Scroll erzeugen — ohne einen Scroll-Container zu
+       bilden (anders als overflow:hidden), damit das Band-Scrolling intakt bleibt */
+    '  overflow-x:clip;',
+    '  font-family:var(--hg-sans); color:#fff; -webkit-font-smoothing:antialiased;',
+    '}',
+
+    /* ---- Sektionskopf (Standard-Spec Erkläranimation) ---- */
+    '#tsanim3 .hg-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}',
+    '#tsanim3 .hg-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--hg-sans);',
+    '  letter-spacing:.16em;text-transform:uppercase;color:var(--hg-beige);margin-bottom:12px}',
+    '#tsanim3 .hg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hg-beige);',
+    '  box-shadow:0 0 10px rgba(var(--hg-beige-r),.85),0 0 20px rgba(var(--hg-beige-r),.4)}',
+    '#tsanim3 .hg-h2{font-family:var(--hg-disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);',
+    '  line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0;color:#fff}',
+    '#tsanim3 .hg-h2 span{color:var(--hg-beige)}',
+    '#tsanim3 .hg-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.62);margin:14px 0 0}',
+
+    /* ---- Bühne ---- */
+    '#tsanim3 .hg-wrap{max-width:1180px;margin:0 auto;padding:0 24px;position:relative}',
+    '#tsanim3 .hg-stage{display:grid;grid-template-columns:1.02fr .98fr;gap:22px;align-items:stretch}',
+
+    '#tsanim3 .hg-card{position:relative;background:rgba(255,255,255,.035);',
+    '  border:1px solid rgba(var(--hg-beige-r),.28);border-radius:16px;padding:20px 20px 18px;',
+    '  box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden}',
+    '#tsanim3 .hg-ceyebrow{font:600 9.5px/1 var(--hg-sans);letter-spacing:.12em;text-transform:uppercase;',
+    '  color:var(--hg-beige);margin-bottom:8px}',
+    '#tsanim3 .hg-cname{font-family:var(--hg-disp);font-weight:600;font-size:17px;letter-spacing:-.005em;color:#fff;margin:0}',
+    '#tsanim3 .hg-crule{height:1px;background:rgba(255,255,255,.09);margin:14px 0 15px}',
+    '#tsanim3 .hg-cfoot{font:400 10px/1.5 var(--hg-sans);color:rgba(255,255,255,.28);margin-top:14px}',
+
+    /* ---- links: Medaillon-Regal ---- */
+    /* minmax(0,1fr): sonst sprengt ein langes Wort wie „Spülmaschinenreiniger"
+       die Spalte und erzeugt horizontalen Seiten-Overflow */
+    '#tsanim3 .hg-shelf{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px 10px}',
+    '#tsanim3 .hg-med{position:relative;text-align:center;opacity:1;transform:none}',
+    '#tsanim3 .hg-med .mm{position:relative;width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;',
+    '  background:#0b0d14;border:1.5px solid rgba(var(--hg-beige-r),.34);',
+    '  box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--hg-beige-r),.055);',
+    '  transition:border-color .6s var(--hg-e),box-shadow .6s var(--hg-e)}',
+    '#tsanim3 .hg-med .mm img{width:100%;height:100%;object-fit:cover;object-position:center;',
+    '  transform:scale(1.42);opacity:.96;display:block}',
+    '#tsanim3 .hg-med .mm .mono{position:absolute;inset:0;display:none;align-items:center;justify-content:center;',
+    '  font-family:var(--hg-disp);font-size:19px;color:rgba(var(--hg-beige-r),.72)}',
+    '#tsanim3 .hg-med.noimg .mm img{display:none}',
+    '#tsanim3 .hg-med.noimg .mm .mono{display:flex}',
+    '#tsanim3 .hg-med .ml{display:block;margin-top:7px;font:600 8.8px/1.25 var(--hg-sans);',
+    '  color:rgba(255,255,255,.5);letter-spacing:.01em;overflow-wrap:break-word;hyphens:auto}',
+    '#tsanim3 .hg-med .mdose{display:block;font:600 8.8px/1.3 var(--hg-sans);color:rgba(var(--hg-beige-r),.85)}',
+    /* Fehlendes Sicherheitsdatenblatt → beige Flag, kein Rot (Rot bleibt den Fristen vorbehalten) */
+    '#tsanim3 .hg-med.flag .mm{border-color:rgba(var(--hg-beige-r),.72);',
+    '  box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--hg-beige-r),.13),0 0 26px rgba(var(--hg-beige-r),.3)}',
+    '#tsanim3 .hg-med .mflag{position:absolute;top:-2px;right:-2px;width:15px;height:15px;border-radius:50%;',
+    '  background:var(--hg-beige);color:#05060b;font:700 10px/15px var(--hg-sans);text-align:center;',
+    '  box-shadow:0 0 12px rgba(var(--hg-beige-r),.7);opacity:0;transform:scale(.4)}',
+    '#tsanim3 .hg-med.flag .mflag{opacity:1;transform:scale(1)}',
+
+    /* ---- Datenblatt ---- */
+    '#tsanim3 .hg-sheet{margin-top:16px;background:rgba(var(--hg-beige-r),.07);',
+    '  border:1px solid rgba(var(--hg-beige-r),.4);border-radius:13px;padding:13px 15px}',
+    '#tsanim3 .hg-sheet .sh-t{font-family:var(--hg-disp);font-weight:600;font-size:14.5px;color:#fff;margin-bottom:9px}',
+    '#tsanim3 .hg-rows{display:grid;grid-template-columns:auto 1fr;gap:5px 14px}',
+    '#tsanim3 .hg-rows .k{font:400 12px/1.45 var(--hg-sans);color:rgba(255,255,255,.55);white-space:nowrap}',
+    '#tsanim3 .hg-rows .v{font:600 12.5px/1.45 var(--hg-sans);color:#fff;text-align:right}',
+    '#tsanim3 .hg-rows .v.gold{color:var(--hg-beige);font-weight:700}',
+    '#tsanim3 .hg-rows .v.gruen{color:var(--hg-gruen)}',
+
+    /* ---- rechts: Nachweisregister ---- */
+    '#tsanim3 .hg-list{display:flex;flex-direction:column;gap:6px}',
+    '#tsanim3 .hg-doc{display:grid;grid-template-columns:34px 1fr auto;gap:11px;align-items:center;',
+    '  padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.028);',
+    '  border:1px solid rgba(255,255,255,.07);opacity:1;transform:none}',
+    '#tsanim3 .hg-doc .dk{font:700 9.5px/16px var(--hg-sans);text-align:center;border-radius:5px;',
+    '  color:var(--hg-beige);background:rgba(var(--hg-beige-r),.11);border:1px solid rgba(var(--hg-beige-r),.3)}',
+    '#tsanim3 .hg-doc .dn{font:600 12.5px/1.3 var(--hg-sans);color:#fff}',
+    '#tsanim3 .hg-doc .dz{font:400 10px/1.35 var(--hg-sans);color:rgba(255,255,255,.42)}',
+    '#tsanim3 .hg-doc .dd{display:flex;align-items:center;gap:7px;font:600 11.5px/1 var(--hg-sans);',
+    '  color:rgba(255,255,255,.62);font-variant-numeric:tabular-nums;white-space:nowrap}',
+    '#tsanim3 .hg-doc .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);flex:none;',
+    '  transition:background .5s var(--hg-e),box-shadow .5s var(--hg-e)}',
+    '#tsanim3 .hg-doc.s-ok .dot{background:var(--hg-gruen);box-shadow:0 0 9px rgba(var(--hg-gruen-r),.55)}',
+    '#tsanim3 .hg-doc.s-warn .dot{background:var(--hg-beige);box-shadow:0 0 9px rgba(var(--hg-beige-r),.7)}',
+    '#tsanim3 .hg-doc.s-warn{border-color:rgba(var(--hg-beige-r),.4);background:rgba(var(--hg-beige-r),.06)}',
+    '#tsanim3 .hg-doc.s-warn .dd{color:var(--hg-beige)}',
+    '#tsanim3 .hg-doc.s-ab .dot{background:var(--hg-rot);box-shadow:0 0 9px rgba(var(--hg-rot-r),.6)}',
+    '#tsanim3 .hg-doc.s-ab{border-color:rgba(var(--hg-rot-r),.38);background:rgba(var(--hg-rot-r),.055)}',
+    '#tsanim3 .hg-doc.s-ab .dd{color:#f2718c}',
+
+    /* ---- Fristen-Band ---- */
+    '#tsanim3 .hg-band{position:relative;margin-top:22px;background:rgba(255,255,255,.026);',
+    '  border:1px solid rgba(var(--hg-beige-r),.24);border-radius:16px;padding:20px 26px 18px;',
+    '  box-shadow:0 24px 60px rgba(0,0,0,.42)}',
+    '#tsanim3 .hg-bandhead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:6px}',
+    '#tsanim3 .hg-track{position:relative;height:132px;margin:0 6px}',
+    '#tsanim3 .hg-axis{position:absolute;left:0;right:0;top:58px;height:1px;background:rgba(var(--hg-beige-r),.3);',
+    '  transform-origin:left center;transform:scaleX(1)}',
+    '#tsanim3 .hg-tick{position:absolute;top:58px;width:1px;height:5px;background:rgba(255,255,255,.14)}',
+    '#tsanim3 .hg-tickl{position:absolute;top:68px;transform:translateX(-50%);font:600 9px/1 var(--hg-sans);',
+    '  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap}',
+
+    '#tsanim3 .hg-mk{position:absolute;top:58px;transform:translateX(-50%);opacity:1}',
+    '#tsanim3 .hg-mk .lead{position:absolute;left:50%;width:1px;background:rgba(var(--hg-beige-r),.26)}',
+    '#tsanim3 .hg-mk.up .lead{bottom:0;height:20px}',
+    '#tsanim3 .hg-mk.dn .lead{top:0;height:30px}',
+    '#tsanim3 .hg-mk .pt{position:absolute;left:50%;top:0;width:9px;height:9px;margin:-4px 0 0 -4.5px;',
+    '  border-radius:50%;background:#0b0d14;border:1.5px solid rgba(255,255,255,.22);',
+    '  transition:border-color .5s var(--hg-e),background .5s var(--hg-e),box-shadow .5s var(--hg-e),transform .5s var(--hg-pop)}',
+    '#tsanim3 .hg-mk .cap{position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;',
+    '  font:600 9.5px/1.35 var(--hg-sans);color:rgba(255,255,255,.55);transition:color .5s var(--hg-e)}',
+    '#tsanim3 .hg-mk .cap small{display:block;font:400 8.5px/1.3 var(--hg-sans);color:rgba(255,255,255,.3);',
+    '  font-variant-numeric:tabular-nums}',
+    '#tsanim3 .hg-mk.up .cap{bottom:22px}',
+    '#tsanim3 .hg-mk.dn .cap{top:32px}',
+    '#tsanim3 .hg-mk.lit.s-ok .pt{border-color:var(--hg-gruen);background:var(--hg-gruen);',
+    '  box-shadow:0 0 12px rgba(var(--hg-gruen-r),.5)}',
+    '#tsanim3 .hg-mk.lit.s-warn .pt{border-color:var(--hg-beige);background:var(--hg-beige);',
+    '  box-shadow:0 0 15px rgba(var(--hg-beige-r),.8);transform:scale(1.18)}',
+    '#tsanim3 .hg-mk.lit.s-warn .cap{color:var(--hg-beige)}',
+    '#tsanim3 .hg-mk.lit.s-ab .pt{border-color:var(--hg-rot);background:var(--hg-rot);',
+    '  box-shadow:0 0 15px rgba(var(--hg-rot-r),.7);transform:scale(1.18)}',
+    '#tsanim3 .hg-mk.lit.s-ab .cap{color:#f2718c}',
+
+    /* Heute-Läufer: im Endzustand die stehende „Heute"-Linie */
+    '#tsanim3 .hg-now{position:absolute;top:18px;bottom:18px;width:1px;left:0;',
+    '  background:linear-gradient(180deg,rgba(var(--hg-beige-r),0),rgba(var(--hg-beige-r),.9) 22%,',
+    '  rgba(var(--hg-beige-r),.9) 78%,rgba(var(--hg-beige-r),0));',
+    '  box-shadow:0 0 14px rgba(var(--hg-beige-r),.55);will-change:transform}',
+    '#tsanim3 .hg-now::after{content:"Heute";position:absolute;top:-14px;left:50%;transform:translateX(-50%);',
+    '  font:600 8.5px/1 var(--hg-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--hg-beige);white-space:nowrap}',
+    '#tsanim3 .hg-now.breath{animation:hgBreath 4s var(--hg-e2) infinite}',
+    '@keyframes hgBreath{0%,72%,100%{opacity:1}86%{opacity:.55}}',
+
+    /* ---- Meldungen ---- */
+    '#tsanim3 .hg-alerts{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px;min-height:30px}',
+    '#tsanim3 .hg-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;',
+    '  font:600 11.5px/1 var(--hg-sans);white-space:nowrap;opacity:1;transform:none}',
+    '#tsanim3 .hg-pill .pd{width:6px;height:6px;border-radius:50%;flex:none}',
+    '#tsanim3 .hg-pill.p-ab{color:#f2718c;background:rgba(var(--hg-rot-r),.1);border:1px solid rgba(var(--hg-rot-r),.42)}',
+    '#tsanim3 .hg-pill.p-ab .pd{background:var(--hg-rot);box-shadow:0 0 9px rgba(var(--hg-rot-r),.75)}',
+    '#tsanim3 .hg-pill.p-warn{color:var(--hg-beige);background:rgba(var(--hg-beige-r),.09);border:1px solid rgba(var(--hg-beige-r),.42)}',
+    '#tsanim3 .hg-pill.p-warn .pd{background:var(--hg-beige);box-shadow:0 0 9px rgba(var(--hg-beige-r),.75)}',
+    '#tsanim3 .hg-pill.p-ok{color:var(--hg-gruen);background:rgba(var(--hg-gruen-r),.09);border:1px solid rgba(var(--hg-gruen-r),.42)}',
+    '#tsanim3 .hg-pill.p-ok .pd{background:var(--hg-gruen);box-shadow:0 0 9px rgba(var(--hg-gruen-r),.65)}',
+
+    /* ---- Statuszeile ---- */
+    '#tsanim3 .hg-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}',
+    '#tsanim3 .hg-stat{background:rgba(var(--hg-beige-r),.055);border:1px solid rgba(var(--hg-beige-r),.24);',
+    '  border-radius:13px;padding:13px 15px}',
+    '#tsanim3 .hg-stat .sv{font-family:var(--hg-disp);font-weight:600;font-size:26px;line-height:1;color:var(--hg-beige);',
+    '  font-variant-numeric:tabular-nums}',
+    '#tsanim3 .hg-stat.done .sv{color:var(--hg-gruen)}',
+    '#tsanim3 .hg-stat .sk{font:400 11px/1.4 var(--hg-sans);color:rgba(255,255,255,.5);margin-top:7px}',
+
+    /* ---- Fuß / Replay ---- */
+    '#tsanim3 .hg-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;',
+    '  margin-top:22px;flex-wrap:wrap}',
+    '#tsanim3 .hg-note{font:400 11px/1.5 var(--hg-sans);color:rgba(255,255,255,.28);margin:0}',
+    '#tsanim3 .hg-replay{appearance:none;-webkit-appearance:none;cursor:pointer;background:transparent;',
+    '  border:1px solid rgba(var(--hg-beige-r),.5);border-radius:999px;padding:10px 22px;',
+    '  font:600 12px/1 var(--hg-sans);letter-spacing:.04em;color:var(--hg-beige);',
+    '  transition:background .45s var(--hg-e),border-color .45s var(--hg-e),box-shadow .45s var(--hg-e)}',
+    '#tsanim3 .hg-replay:hover{background:rgba(var(--hg-beige-r),.1);border-color:rgba(var(--hg-beige-r),.8);',
+    '  box-shadow:0 0 22px rgba(var(--hg-beige-r),.22)}',
+    '#tsanim3 .hg-replay:active{transform:scale(.97)}',
+
+    /* ---- Chaos-Overlay (Phase 1) ---- */
+    '#tsanim3 .hg-chaos{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;visibility:hidden}',
+    '#tsanim3.playing .hg-chaos{visibility:visible}',
+    /* Fokus-Vignette: dämpft die noch leeren Karten während der Suche ab */
+    '#tsanim3 .hg-chaos::before{content:"";position:absolute;inset:0;',
+    '  background:radial-gradient(closest-side at 50% 44%,rgba(4,5,10,.95) 0%,rgba(4,5,10,.88) 42%,rgba(4,5,10,0) 80%)}',
+    '#tsanim3 .hg-sheet-p{position:absolute;left:50%;top:44%;width:132px;height:172px;margin:-86px 0 0 -66px;',
+    '  border-radius:6px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));',
+    '  border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 50px rgba(0,0,0,.6);',
+    '  will-change:transform,opacity}',
+    '#tsanim3 .hg-sheet-p i{position:absolute;left:14px;right:14px;height:2px;border-radius:2px;',
+    '  background:rgba(255,255,255,.13)}',
+    '#tsanim3 .hg-scan{position:absolute;left:50%;top:44%;width:340px;height:340px;margin:-170px 0 0 -170px;',
+    '  border-radius:50%;pointer-events:none;',
+    '  background:radial-gradient(closest-side,rgba(var(--hg-beige-r),.16),rgba(var(--hg-beige-r),0) 72%);',
+    '  border:1px solid rgba(var(--hg-beige-r),.16);opacity:0}',
+    '#tsanim3 .hg-chaostxt{position:absolute;left:50%;top:44%;transform:translate(-50%,118px);',
+    '  font:600 11.5px/1 var(--hg-sans);letter-spacing:.05em;color:#f2718c;white-space:nowrap;opacity:0;',
+    '  padding:9px 18px;border-radius:999px;background:rgba(9,5,10,.92);',
+    '  border:1px solid rgba(var(--hg-rot-r),.34);box-shadow:0 14px 40px rgba(0,0,0,.7)}',
+    '#tsanim3 .hg-chaostxt .pd{display:inline-block;width:6px;height:6px;border-radius:50%;',
+    '  background:var(--hg-rot);box-shadow:0 0 10px rgba(var(--hg-rot-r),.8);margin-right:8px;vertical-align:middle}',
+
+    /* ---- Startzustände NUR über .playing (Endzustand bleibt Default) ---- */
+    '#tsanim3.playing .hg-med{opacity:0;transform:translateY(14px) scale(.9)}',
+    '#tsanim3.playing .hg-sheet{opacity:0;transform:translateY(12px)}',
+    '#tsanim3.playing .hg-doc{opacity:0;transform:translateX(20px)}',
+    '#tsanim3.playing .hg-axis{transform:scaleX(0)}',
+    '#tsanim3.playing .hg-mk{opacity:0;transform:translateX(-50%) translateY(8px) scale(.7)}',
+    '#tsanim3.playing .hg-tick,#tsanim3.playing .hg-tickl{opacity:0}',
+    '#tsanim3.playing .hg-pill{opacity:0;transform:translateY(8px) scale(.94)}',
+    '#tsanim3.playing .hg-stat{opacity:0;transform:translateY(12px)}',
+    '#tsanim3.playing .hg-now{opacity:0}',
+    '#tsanim3.playing .hg-med.flag .mflag{opacity:0;transform:scale(.4)}',
+
+    /* ---- Ankunfts-Keyframes (laufen auch auf busy Seiten durch) ---- */
+    '#tsanim3 .hg-med.in{animation:hgMedIn .74s var(--hg-pop) both}',
+    '@keyframes hgMedIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}',
+    '#tsanim3 .hg-sheet.in{animation:hgRise .8s var(--hg-e) both}',
+    '#tsanim3 .hg-stat.in{animation:hgRise .8s var(--hg-e) both}',
+    '@keyframes hgRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
+    '#tsanim3 .hg-doc.in{animation:hgDocIn .7s var(--hg-e) both}',
+    '@keyframes hgDocIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}',
+    '#tsanim3 .hg-axis.in{animation:hgAxis 1.05s var(--hg-e2) both}',
+    '@keyframes hgAxis{from{transform:scaleX(0)}to{transform:scaleX(1)}}',
+    '#tsanim3 .hg-tick.in,#tsanim3 .hg-tickl.in{animation:hgFade .6s var(--hg-e) both}',
+    '@keyframes hgFade{from{opacity:0}to{opacity:1}}',
+    '#tsanim3 .hg-mk.in{animation:hgMkIn .62s var(--hg-pop) both}',
+    '@keyframes hgMkIn{from{opacity:0;transform:translateX(-50%) translateY(8px) scale(.7)}',
+    '  to{opacity:1;transform:translateX(-50%)}}',
+    '#tsanim3 .hg-pill.in{animation:hgPillIn .62s var(--hg-pop) both}',
+    '@keyframes hgPillIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}',
+    '#tsanim3 .hg-now.in{animation:hgFade .5s var(--hg-e) both}',
+    '#tsanim3 .hg-mflagin{animation:hgFlagIn .6s var(--hg-pop) both}',
+    '@keyframes hgFlagIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}',
+
+    /* Chaos-Keyframes */
+    '#tsanim3 .hg-chaos.go{animation:hgFade .5s var(--hg-e) both}',
+    '#tsanim3 .hg-chaos.out{animation:hgFadeOut .55s var(--hg-e) both}',
+    '@keyframes hgFadeOut{from{opacity:1}to{opacity:0}}',
+    '#tsanim3 .hg-scan.go{animation:hgScan 1.35s var(--hg-e2) both}',
+    '@keyframes hgScan{0%{opacity:0;transform:scale(.42)}42%{opacity:1}100%{opacity:0;transform:scale(1.22)}}',
+    '#tsanim3 .hg-chaostxt.go{animation:hgFade .55s var(--hg-e) .35s both}',
+    '#tsanim3 .hg-sheet-p.fly{animation:hgFly .78s var(--hg-e) both}',
+    '@keyframes hgFly{to{opacity:0}}',
+
+    /* ---- Mobile ---- */
+    '@media (max-width:820px){',
+    '  #tsanim3{width:100%;margin:24px 0 44px}',
+    '  #tsanim3 .hg-wrap{padding:0 16px}',
+    '  #tsanim3 .hg-stage{grid-template-columns:1fr;gap:16px}',
+    /* Mobil: 5 Medaillons nebeneinander wären zu schmal für die Namen →
+       2 Spalten als Zeilen-Layout (Medaillon links, Text rechts) */
+    '  #tsanim3 .hg-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 12px}',
+    '  #tsanim3 .hg-med{display:grid;grid-template-columns:38px minmax(0,1fr);',
+    '    grid-template-rows:auto auto;column-gap:10px;text-align:left}',
+    '  #tsanim3 .hg-med .mm{grid-column:1;grid-row:1/3;width:38px;height:38px;aspect-ratio:auto;align-self:center}',
+    '  #tsanim3 .hg-med .ml{grid-column:2;grid-row:1;margin-top:0;font-size:9.5px;align-self:end}',
+    '  #tsanim3 .hg-med .mdose{grid-column:2;grid-row:2;font-size:9.5px;align-self:start}',
+    /* Nachweiszeile bricht auf zwei Zeilen um — sonst sprengt die
+       nowrap-Datumsspalte die Karte */
+    '  #tsanim3 .hg-doc{grid-template-columns:30px 1fr;gap:8px 10px}',
+    '  #tsanim3 .hg-doc .dd{grid-column:1/-1;justify-content:flex-start;margin-top:1px}',
+    '  #tsanim3 .hg-stats{grid-template-columns:repeat(2,1fr)}',
+    '  #tsanim3 .hg-band{padding:18px 14px 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}',
+    '  #tsanim3 .hg-bandinner{min-width:640px}',
+    '  #tsanim3 .hg-chaostxt{white-space:normal;max-width:88%;text-align:center;line-height:1.45}',
+    '  #tsanim3 .hg-foot{justify-content:center;text-align:center}',
+    '  #tsanim3 .hg-replay{width:100%;max-width:320px}',
+    '}',
+
+    /* ---- reduced motion ---- */
+    '@media (prefers-reduced-motion:reduce){',
+    '  #tsanim3 *,#tsanim3 *::before,#tsanim3 *::after{animation:none!important;transition:none!important}',
+    '  #tsanim3 .hg-chaos{display:none!important}',
+    '}'
+  ].join('\n');
+
+  function injectCSS() {
+    if (document.getElementById(CSS_ID)) return;
+    var s = document.createElement('style');
+    s.id = CSS_ID;
+    s.type = 'text/css';
+    s.appendChild(document.createTextNode(CSS));
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* --------------------------------------------------------------------- */
+  /* BUILD — rendert IMMER den Endzustand (Robustheits-Regel Punkt 1)       */
+  /* --------------------------------------------------------------------- */
+
+  function build() {
+    var z = zahlen();
+    var root = document.createElement('section');
+    root.id = ID;
+    root.setAttribute('aria-label', 'Erkläranimation: Hygiene- und Nachweisregister mit Fristen-Band');
+
+    var h = [];
+
+    /* Sektionskopf */
+    h.push('<div class="hg-head">');
+    h.push('<div class="hg-eyebrow">Hygiene &amp; Pflichtnachweise</div>');
+    h.push('<h2 class="hg-h2">Der Ordner meldet sich, <span>bevor die Kontrolle klingelt</span>.</h2>');
+    h.push('<p class="hg-sub">Jedes Mittel mit Dosierung, Einsatzbereich und Sicherheitsdatenblatt. ' +
+           'Jeder Nachweis mit Ablaufdatum und Zuständigkeit — und einer Erinnerung, ' + VORLAUF +
+           ' Tage vorher.</p>');
+    h.push('</div>');
+
+    h.push('<div class="hg-wrap">');
+
+    /* ---------- Bühne ---------- */
+    h.push('<div class="hg-stage">');
+
+    /* linke Karte: Hygienehandbuch */
+    h.push('<div class="hg-card hg-left">');
+    h.push('<div class="hg-ceyebrow">Hygienehandbuch</div>');
+    h.push('<p class="hg-cname">' + MITTEL.length + ' Mittel, jedes mit eigenem Datenblatt</p>');
+    h.push('<div class="hg-crule"></div>');
+    h.push('<div class="hg-shelf">');
+    for (var i = 0; i < MITTEL.length; i++) {
+      var m = MITTEL[i];
+      h.push('<div class="hg-med' + (m.sdb ? '' : ' flag') + '" data-i="' + i + '">');
+      h.push('<div class="mm">');
+      h.push('<img src="' + IMG + m.s + '.webp" alt="' + esc(m.n) + '" loading="lazy" decoding="async">');
+      h.push('<span class="mono">' + esc(m.n.charAt(0)) + '</span>');
+      h.push('<span class="mflag" aria-hidden="true">!</span>');
+      h.push('</div>');
+      h.push('<span class="ml">' + esc(m.n) + '</span>');
+      h.push('<span class="mdose">' + esc(m.d) + '</span>');
+      h.push('</div>');
+    }
+    h.push('</div>');
+
+    /* aufgeschlagenes Datenblatt */
+    var b = MITTEL[BLATT];
+    h.push('<div class="hg-sheet">');
+    h.push('<div class="sh-t">' + esc(b.n) + '</div>');
+    h.push('<div class="hg-rows">');
+    h.push('<div class="k">Gruppe</div><div class="v">' + esc(b.g) + '</div>');
+    h.push('<div class="k">Dosierung</div><div class="v gold">' + esc(b.d) + '</div>');
+    h.push('<div class="k">Einsatzbereich</div><div class="v">' + esc(b.b) + '</div>');
+    h.push('<div class="k">Kritisch für Kontrolle</div><div class="v">Ja</div>');
+    h.push('<div class="k">Sicherheitsdatenblatt</div><div class="v gruen">hinterlegt</div>');
+    h.push('</div>');
+    h.push('</div>');
+    h.push('<p class="hg-cfoot">Beispielwerte aus der Datenbank „Hygiene Produkte"</p>');
+    h.push('</div>');
+
+    /* rechte Karte: Nachweisregister */
+    h.push('<div class="hg-card hg-right">');
+    h.push('<div class="hg-ceyebrow">Pflichtnachweise</div>');
+    h.push('<p class="hg-cname">' + DOKS.length + ' Dokumenttypen, jeder mit Ablaufdatum und Zuständigkeit</p>');
+    h.push('<div class="hg-crule"></div>');
+    h.push('<div class="hg-list">');
+    for (var j = 0; j < DOKS.length; j++) {
+      var d = DOKS[j];
+      var st = status(d.bis);
+      var t = tage(d.bis);
+      var lbl = st === 'ab' ? 'seit ' + Math.abs(t) + ' T' : 'in ' + t + ' T';
+      h.push('<div class="hg-doc s-' + st + '" data-i="' + j + '">');
+      h.push('<span class="dk">' + esc(d.k) + '</span>');
+      h.push('<span><span class="dn">' + esc(d.n) + '</span><br>' +
+             '<span class="dz">' + d.m + ' Monate gültig · ' + esc(d.z) + '</span></span>');
+      h.push('<span class="dd"><span class="dot"></span>' + dfmt(d.bis) +
+             ' <span style="opacity:.55">' + lbl + '</span></span>');
+      h.push('</div>');
+    }
+    h.push('</div>');
+    h.push('<p class="hg-cfoot">Beispielwerte aus der Datenbank „Dokumenttypen (Pflichtnachweise)"</p>');
+    h.push('</div>');
+
+    h.push('</div>'); /* /hg-stage */
+
+    /* ---------- Fristen-Band ---------- */
+    h.push('<div class="hg-band">');
+    h.push('<div class="hg-bandinner">');
+    h.push('<div class="hg-bandhead">');
+    h.push('<div class="hg-ceyebrow" style="margin:0">Fristen-Band · ' + dfmt(HEUTE) + '</div>');
+    h.push('<div class="hg-note" style="margin:0">Erinnerung ' + VORLAUF + ' Tage vor Ablauf</div>');
+    h.push('</div>');
+    h.push('<div class="hg-track">');
+    h.push('<div class="hg-axis"></div>');
+
+    /* Monats-Ticks */
+    var a0 = dnum(AXIS_VON), a1 = dnum(AXIS_BIS);
+    var dv = AXIS_VON.split('-'), y = +dv[0], mo = +dv[1];
+    while (true) {
+      mo++; if (mo > 12) { mo = 1; y++; }
+      var iso = y + '-' + (mo < 10 ? '0' + mo : mo) + '-01';
+      if (dnum(iso) > a1) break;
+      var pt = ((dnum(iso) - a0) / (a1 - a0)) * 100;
+      h.push('<div class="hg-tick" style="left:' + pt.toFixed(2) + '%"></div>');
+      h.push('<div class="hg-tickl" style="left:' + pt.toFixed(2) + '%">' + MONATE[mo - 1] + '</div>');
+    }
+
+    /* Marker */
+    for (var k = 0; k < DOKS.length; k++) {
+      var dk = DOKS[k];
+      var sk = status(dk.bis);
+      var side = (k % 2 === 0) ? 'up' : 'dn';
+      h.push('<div class="hg-mk lit ' + side + ' s-' + sk + '" data-p="' + pos(dk.bis).toFixed(3) +
+             '" data-i="' + k + '" style="left:' + pos(dk.bis).toFixed(2) + '%">');
+      h.push('<span class="lead"></span>');
+      h.push('<span class="pt"></span>');
+      h.push('<span class="cap">' + esc(dk.k) + '<small>' + dfmt(dk.bis) + '</small></span>');
+      h.push('</div>');
+    }
+
+    /* Heute-Läufer */
+    h.push('<div class="hg-now breath" style="left:' + pos(HEUTE).toFixed(2) + '%"></div>');
+    h.push('</div>'); /* /hg-track */
+
+    /* Meldungen */
+    h.push('<div class="hg-alerts">');
+    var abD = null, warnD = null;
+    for (var q = 0; q < DOKS.length; q++) {
+      var sq = status(DOKS[q].bis);
+      if (sq === 'ab' && !abD) abD = DOKS[q];
+      if (sq === 'warn' && !warnD) warnD = DOKS[q];
+    }
+    if (abD) {
+      h.push('<span class="hg-pill p-ab"><span class="pd"></span>Abgelaufen · ' + esc(abD.n) +
+             ' → ' + esc(abD.z) + '</span>');
+    }
+    if (warnD) {
+      h.push('<span class="hg-pill p-warn"><span class="pd"></span>In ' + tage(warnD.bis) +
+             ' Tagen fällig · ' + esc(warnD.n) + ' → ' + esc(warnD.z) + '</span>');
+    }
+    var fehlt = null;
+    for (var f = 0; f < MITTEL.length; f++) if (!MITTEL[f].sdb) { fehlt = MITTEL[f]; break; }
+    if (fehlt) {
+      h.push('<span class="hg-pill p-warn"><span class="pd"></span>Sicherheitsdatenblatt fehlt · ' +
+             esc(fehlt.n) + '</span>');
+    }
+    h.push('<span class="hg-pill p-ok"><span class="pd"></span>Prüfmappe bereit</span>');
+    h.push('</div>');
+    h.push('</div></div>'); /* /hg-bandinner /hg-band */
+
+    /* ---------- Statuszeile ---------- */
+    h.push('<div class="hg-stats">');
+    h.push(stat(z.eintraege, 'Einträge im System', 0));
+    h.push(stat(z.nachweise, 'Nachweise mit Frist überwacht', 0));
+    h.push(stat(z.sdb, 'von ' + z.mittel + ' Sicherheitsdatenblättern hinterlegt', 0));
+    h.push('<div class="hg-stat done"><div class="sv" data-to="0">0</div>' +
+           '<div class="sk">Ordner, die du noch durchsuchen musst</div></div>');
+    h.push('</div>');
+
+    /* ---------- Fuß ---------- */
+    h.push('<div class="hg-foot">');
+    h.push('<p class="hg-note">Alle Namen, Daten und Zahlen sind Beispielwerte. ' +
+           'Stichtag der Darstellung: ' + dfmt(HEUTE) + '.</p>');
+    h.push('<button type="button" class="hg-replay">Neu abspielen</button>');
+    h.push('</div>');
+
+    /* ---------- Chaos-Overlay ---------- */
+    h.push('<div class="hg-chaos" aria-hidden="true">');
+    h.push('<div class="hg-scan"></div>');
+    for (var c = 0; c < 11; c++) {
+      var rot = (c - 5) * 4.6 + (c % 3 === 0 ? 2.4 : -1.8);
+      var ox = (c % 4 - 1.5) * 13;
+      var oy = (c % 5 - 2) * 9;
+      h.push('<div class="hg-sheet-p" style="transform:translate(' + ox.toFixed(1) + 'px,' +
+             oy.toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg)">' +
+             '<i style="top:22px"></i><i style="top:34px"></i><i style="top:46px;right:52px"></i>' +
+             '<i style="top:74px"></i><i style="top:86px"></i><i style="top:98px;right:40px"></i></div>');
+    }
+    h.push('<div class="hg-chaostxt"><span class="pd"></span>Kontrolle steht vor der Tür — wo ist welcher Nachweis?</div>');
+    h.push('</div>');
+
+    h.push('</div>'); /* /hg-wrap */
+
+    root.innerHTML = h.join('');
+
+    /* Bild-Fallback: kein 404-Loch, sondern Monogramm-Medaillon */
+    var imgs = root.querySelectorAll('.hg-med img');
+    for (var ii = 0; ii < imgs.length; ii++) {
+      (function (im) {
+        im.addEventListener('error', function () {
+          var p = im.parentNode && im.parentNode.parentNode;
+          if (p && p.classList) p.classList.add('noimg');
+        }, false);
+        if (im.complete && im.naturalWidth === 0) {
+          var pp = im.parentNode && im.parentNode.parentNode;
+          if (pp && pp.classList) pp.classList.add('noimg');
+        }
+      }(imgs[ii]));
+    }
+
+    var btn = root.querySelector('.hg-replay');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var r = document.getElementById(ID);
+        if (r) play(r, true);
+      }, false);
+    }
+
+    return root;
+  }
+
+  function stat(v, label, done) {
+    return '<div class="hg-stat' + (done ? ' done' : '') + '"><div class="sv" data-to="' + v + '">' +
+           v + '</div><div class="sk">' + esc(label) + '</div></div>';
+  }
+
+  /* --------------------------------------------------------------------- */
+  /* PLAY — Choreografie                                                    */
+  /* --------------------------------------------------------------------- */
+
+  function clearTimers(root) {
+    if (root.__t) {
+      for (var i = 0; i < root.__t.length; i++) clearTimeout(root.__t[i]);
+    }
+    root.__t = [];
+    if (root.__raf) { cancelAnimationFrame(root.__raf); root.__raf = 0; }
+  }
+
+  function at(root, ms, fn) {
+    root.__t.push(setTimeout(function () {
+      /* Re-Query: das Element kann zwischenzeitlich ersetzt worden sein */
+      var r = document.getElementById(ID);
+      if (!r) return;
+      try { fn(r); } catch (e) {}
+    }, ms));
+  }
+
+  function cls(el, c) { if (el && el.classList) el.classList.add(c); }
+  function unc(el, c) { if (el && el.classList) el.classList.remove(c); }
+
+  /* Gedrosselter Count-up (~26 fps) mit garantiertem Endzustand */
+  function countTo(root, el, to, dur) {
+    if (!el) return;
+    var from = 0, t0 = 0, last = 0;
+    var fin = setTimeout(function () { el.textContent = String(to); }, dur + 160);
+    root.__t.push(fin);
+    function step(ts) {
+      if (!t0) { t0 = ts; last = 0; }
+      var p = Math.min(1, (ts - t0) / dur);
+      if (ts - last >= 38 || p === 1) {
+        last = ts;
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(from + (to - from) * e));
+      }
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = String(to);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function play(root, force) {
+    if (!root) return;
+    if (REDUCE) return;                 /* Endzustand ist Default → nichts zu tun */
+    if (root.__playing && !force) return;
+    if (root.__played && !force) return;
+
+    root.__played = true;
+    root.__playing = true;
+    clearTimers(root);
+
+    var meds  = root.querySelectorAll('.hg-med');
+    var docs  = root.querySelectorAll('.hg-doc');
+    var mks   = root.querySelectorAll('.hg-mk');
+    var ticks = root.querySelectorAll('.hg-tick, .hg-tickl');
+    var pills = root.querySelectorAll('.hg-pill');
+    var stats = root.querySelectorAll('.hg-stat');
+    var sheet = root.querySelector('.hg-sheet');
+    var axis  = root.querySelector('.hg-axis');
+    var now   = root.querySelector('.hg-now');
+    var chaos = root.querySelector('.hg-chaos');
+    var scan  = root.querySelector('.hg-scan');
+    var ctxt  = root.querySelector('.hg-chaostxt');
+    var papers = root.querySelectorAll('.hg-sheet-p');
+    var i;
+
+    /* --- Reset: .playing setzt die Startzustände (überlebt class-strip nicht,
+           deshalb zusätzlich die Ankunfts-Keyframes weiter unten) --- */
+    cls(root, 'playing');
+    var all = [meds, docs, mks, ticks, pills, stats];
+    for (i = 0; i < all.length; i++) {
+      for (var j = 0; j < all[i].length; j++) {
+        all[i][j].classList.remove('in');
+        if (all[i] === mks) all[i][j].classList.remove('lit');
+      }
+    }
+    if (sheet) unc(sheet, 'in');
+    if (axis) unc(axis, 'in');
+    if (now) { unc(now, 'in'); unc(now, 'breath'); now.style.transform = ''; }
+    if (chaos) { unc(chaos, 'go'); unc(chaos, 'out'); }
+    if (scan) unc(scan, 'go');
+    if (ctxt) unc(ctxt, 'go');
+    for (i = 0; i < papers.length; i++) unc(papers[i], 'fly');
+    for (i = 0; i < stats.length; i++) {
+      var sv = stats[i].querySelector('.sv');
+      if (sv) sv.textContent = '0';
+    }
+    /* Reflow, damit die Keyframes sicher neu starten */
+    void root.offsetWidth;
+
+    /* --- PHASE 1 (0–1450 ms): Der Stapel. Suchen. --- */
+    at(root, 40, function () {
+      var c = root.querySelector('.hg-chaos');
+      var s = root.querySelector('.hg-scan');
+      var x = root.querySelector('.hg-chaostxt');
+      cls(c, 'go'); cls(s, 'go'); cls(x, 'go');
+    });
+
+    /* --- PHASE 2 (1450–3250 ms): Der Stapel sortiert sich. --- */
+    at(root, 1450, function (r) {
+      var ps = r.querySelectorAll('.hg-sheet-p');
+      for (var n = 0; n < ps.length; n++) {
+        (function (el, idx) {
+          el.style.animationDelay = (idx * 34) + 'ms';
+          el.classList.add('fly');
+        }(ps[n], n));
+      }
+      cls(r.querySelector('.hg-chaos'), 'out');
+    });
+
+    /* Medaillons poppen gestaffelt (Stagger 130 ms) */
+    at(root, 1620, function (r) {
+      var ms = r.querySelectorAll('.hg-med');
+      for (var n = 0; n < ms.length; n++) {
+        ms[n].style.animationDelay = (n * 130) + 'ms';
+        ms[n].classList.add('in');
+      }
+    });
+    /* Nachweiszeilen laufen ein (Stagger 130 ms), leicht versetzt zu links */
+    at(root, 1780, function (r) {
+      var ds = r.querySelectorAll('.hg-doc');
+      for (var n = 0; n < ds.length; n++) {
+        ds[n].style.animationDelay = (n * 130) + 'ms';
+        ds[n].classList.add('in');
+      }
+    });
+    /* Datenblatt schlägt auf */
+    at(root, 2680, function (r) { cls(r.querySelector('.hg-sheet'), 'in'); });
+    /* Fehlendes Datenblatt wird geflaggt */
+    at(root, 3120, function (r) {
+      var fl = r.querySelector('.hg-med.flag .mflag');
+      if (fl) { fl.classList.remove('hg-mflagin'); void fl.offsetWidth; fl.classList.add('hg-mflagin'); }
+    });
+
+    /* --- PHASE 3 (3250–5900 ms): Das Fristen-Band. --- */
+    at(root, 3250, function (r) { cls(r.querySelector('.hg-axis'), 'in'); });
+    at(root, 3600, function (r) {
+      var ts = r.querySelectorAll('.hg-tick, .hg-tickl');
+      for (var n = 0; n < ts.length; n++) {
+        ts[n].style.animationDelay = (n * 26) + 'ms';
+        ts[n].classList.add('in');
+      }
+    });
+    at(root, 3900, function (r) {
+      var ms = r.querySelectorAll('.hg-mk');
+      for (var n = 0; n < ms.length; n++) {
+        ms[n].style.animationDelay = (n * 90) + 'ms';
+        ms[n].classList.add('in');
+      }
+    });
+
+    /* Heute-Läufer: fährt die ganze Achse ab und zündet jede Frist,
+       kehrt dann auf „Heute" zurück und bleibt dort stehen. */
+    at(root, 4620, function (r) {
+      var nw = r.querySelector('.hg-now');
+      var marks = r.querySelectorAll('.hg-mk');
+      var track = r.querySelector('.hg-track');
+      if (!nw || !track) return;
+      cls(nw, 'in');
+
+      var w = track.offsetWidth || 1;
+      var home = pos(HEUTE) / 100;                /* Ruheposition (links-Anteil) */
+      var SWEEP = 2350, BACK = 780;
+      var t0 = 0, fertig = false;
+
+      /* GARANTIERTER Endzustand: läuft rAF nicht durch (Hintergrund-Tab,
+         Throttling, busy super.so-Seite), setzt dieser Timer das Bild final.
+         Ohne ihn bliebe das Band grau = animationsabhängiger Inhalt. */
+      function finish() {
+        if (fertig) return;
+        fertig = true;
+        var r3 = document.getElementById(ID);
+        if (!r3) return;
+        if (r3.__raf) { cancelAnimationFrame(r3.__raf); r3.__raf = 0; }
+        var ms = r3.querySelectorAll('.hg-mk');
+        for (var n = 0; n < ms.length; n++) ms[n].classList.add('lit');
+        var nw2 = r3.querySelector('.hg-now');
+        if (nw2) { nw2.style.transform = 'translateX(0)'; nw2.classList.add('in'); nw2.classList.add('breath'); }
+      }
+      root.__t.push(setTimeout(finish, SWEEP + BACK + 300));
+
+      function frame(ts) {
+        var r2 = document.getElementById(ID);
+        if (!r2 || fertig) return;
+        if (!t0) t0 = ts;
+        var el = ts - t0;
+        var x;
+        if (el <= SWEEP) {
+          var p = el / SWEEP;
+          var e = 1 - Math.pow(1 - p, 3);          /* weiches Auslaufen */
+          x = e;
+          for (var n = 0; n < marks.length; n++) {
+            var mp = parseFloat(marks[n].getAttribute('data-p')) / 100;
+            if (x >= mp) marks[n].classList.add('lit');
+          }
+          r2.__raf = requestAnimationFrame(frame);
+        } else if (el <= SWEEP + BACK) {
+          var p2 = (el - SWEEP) / BACK;
+          var e2 = 1 - Math.pow(1 - p2, 3);
+          x = 1 + (home - 1) * e2;
+          r2.__raf = requestAnimationFrame(frame);
+        } else {
+          finish();
+          return;
+        }
+        nw.style.transform = 'translateX(' + ((x - home) * w).toFixed(2) + 'px)';
+      }
+      root.__raf = requestAnimationFrame(frame);
+    });
+
+    /* --- PHASE 4 (7900–9400 ms): Das System meldet. --- */
+    at(root, 7900, function (r) {
+      var ps = r.querySelectorAll('.hg-pill');
+      for (var n = 0; n < ps.length; n++) {
+        ps[n].style.animationDelay = (n * 180) + 'ms';
+        ps[n].classList.add('in');
+      }
+    });
+    at(root, 8400, function (r) {
+      var ss = r.querySelectorAll('.hg-stat');
+      for (var n = 0; n < ss.length; n++) {
+        ss[n].style.animationDelay = (n * 140) + 'ms';
+        ss[n].classList.add('in');
+        var sv = ss[n].querySelector('.sv');
+        if (!sv) continue;
+        var to = parseInt(sv.getAttribute('data-to'), 10) || 0;
+        (function (el, target, delay) {
+          at(r, delay, function () { countTo(document.getElementById(ID) || r, el, target, 1050); });
+        }(sv, to, n * 140));
+      }
+    });
+
+    /* Ende: .playing weg → Default (= Endzustand) ist wieder maßgeblich.
+       window-Flag: One-Shot gilt für den Seitenbesuch, nicht nur für dieses
+       Element — nach einem super.so-Re-Render zeigt die neu gebaute Bühne
+       sofort den Endzustand, statt die Sequenz erneut abzuspielen. */
+    at(root, 10200, function (r) {
+      unc(r, 'playing');
+      r.__playing = false;
+      window.__tsanim3_done = true;
+    });
+  }
+
+  /* --------------------------------------------------------------------- */
+  /* TRIGGER — self-healing (Robustheits-Regel Punkt 2)                     */
+  /* --------------------------------------------------------------------- */
+
+  function inView(el, ratio) {
+    var b = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (b.height === 0) return false;
+    var vis = Math.min(b.bottom, vh) - Math.max(b.top, 0);
+    return vis > 0 && (vis / Math.min(b.height, vh)) >= (ratio || 0.3);
+  }
+
+  function tryPlay() {
+    var r = document.getElementById(ID);          /* immer frisch re-queryen */
+    if (!r || r.__played) return;
+    if (window.__tsanim3_done) { r.__played = true; return; }  /* One-Shot je Seitenbesuch */
+    if (inView(r, 0.3)) play(r, false);
+  }
+
+  var onScroll = function () { tryPlay(); };
+
+  /* Bei jedem (Re-)Mount den aktuellen Root beobachten — ein IO, der noch am
+     alten, entfernten Element hängt, feuert nie wieder. */
+  function observeRoot() {
+    var r = document.getElementById(ID);
+    if (!r || !window.__tsanim3_io) return;
+    if (r.__observed) return;
+    try { window.__tsanim3_io.observe(r); r.__observed = true; } catch (e) {}
+  }
+
+  function armTriggers() {
+    if (window.__tsanim3_armed) { observeRoot(); return; }
+    window.__tsanim3_armed = true;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    /* Polling als primärer Fallback auf busy super.so-Seiten */
+    var n = 0;
+    var iv = setInterval(function () {
+      n++;
+      tryPlay();
+      var r = document.getElementById(ID);
+      if ((r && r.__played) || n > 120) clearInterval(iv);
+    }, 250);
+    /* IntersectionObserver nur als Zusatz */
+    if (window.IntersectionObserver) {
+      try {
+        var io = new IntersectionObserver(function (es) {
+          for (var i = 0; i < es.length; i++) {
+            if (es[i].isIntersecting) { tryPlay(); }
+          }
+        }, { threshold: 0.3 });
+        window.__tsanim3_io = io;
+        observeRoot();
+      } catch (e) {}
+    }
+  }
+
+  /* --------------------------------------------------------------------- */
+  /* MOUNT — React-resilient, Phrase-first-Anker                            */
+  /* --------------------------------------------------------------------- */
+
+  var ANKER_PHRASEN = [
+    'Diese Insel macht aus Angst vor Kontrolle',
+    'Das Gesundheitsamt kommt unangekündigt',
+    'Eine Kontrolle ist kein Problem, wenn du vorbereitet bist'
+  ];
+
+  function findAnchor() {
+    /* 1) expliziter Anker, falls im Seitenmodul gesetzt */
+    var ex = document.getElementById('tsanim3-anchor');
+    if (ex) return ex;
+
+    /* 2) Phrase-first (Einleitungs-Absatz der Insel) */
+    var cand = document.querySelectorAll('.notion-text, .notion-root p, [class*="il-"] p, section p');
+    for (var i = 0; i < cand.length; i++) {
+      var tx = cand[i].textContent || '';
+      for (var j = 0; j < ANKER_PHRASEN.length; j++) {
+        if (tx.indexOf(ANKER_PHRASEN[j]) !== -1) {
+          /* an die äußerste Sektion des Absatzes hängen, nicht in den Absatz hinein */
+          var sec = cand[i].closest ? cand[i].closest('section') : null;
+          return sec || cand[i];
+        }
+      }
+    }
+
+    /* 3) letzter Ausweg: erste Sektion in der Notion-Root */
+    var nr = document.querySelector('.notion-root');
+    if (nr) {
+      var first = nr.querySelector('section');
+      if (first) return first;
+      return nr.firstElementChild || nr;
+    }
+    return null;
+  }
+
+  function cleanup() {
+    var old = document.getElementById(ID);
+    if (old && old.parentNode) old.parentNode.removeChild(old);
+  }
+
+  function mount() {
+    if (!PATH.test(location.pathname)) { cleanup(); return false; }
+    injectCSS();
+    if (document.getElementById(ID)) { armTriggers(); return true; }
+
+    var anchor = findAnchor();
+    if (!anchor || !anchor.parentNode) return false;
+
+    var root = build();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    armTriggers();
+    /* Sofort prüfen — falls die Sektion schon im Viewport steht */
+    tryPlay();
+    return true;
+  }
+
+  /* Persistenz-Mount: Retry-Loop + MutationObserver */
+  function boot() {
+    mount();
+    var tries = 0;
+    var iv = setInterval(function () {
+      tries++;
+      if (mount() || tries > 60) clearInterval(iv);
+    }, 300);
+
+    var pending = 0;
+    var mo = new MutationObserver(function () {
+      if (pending) return;
+      pending = setTimeout(function () { pending = 0; mount(); }, 200);
+    });
+    try {
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, false);
+  } else {
+    boot();
+  }
+  window.addEventListener('load', function () { mount(); }, false);
+})();
+
+
+/* ============================================================
+   #tsanim4 — Erkläranimation Inventur & Bestand (Insel 04)
+   ============================================================ */
+/* ============================================================================
+   #tsanim4 — Erkläranimation „Inventur & Bestand" (/lektionen/inventur-bestand)
+   Konzept: „Der Erfassungs-Sweep" — ein Lichtbalken wandert einmal über die
+   Fläche; was er berührt, rastet aus der Streuung in die Festwert-Liste ein,
+   bekommt sein Datenblatt und wird der laufenden Bestandssumme zugeschlagen.
+   Abschnitts-Katalog 02 · Animations-Doktrin · Qualitäts-Gesetz 1–10
+   Animations-Robustheits-Regel: Endzustand = Default, self-healing Trigger,
+   Count-up gedrosselt, root lokal an play(root).
+   Keine neue Farbe, kein neuer Font.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  if (window.__tsanim4) return;
+  window.__tsanim4 = true;
+
+  function on() { return /\/lektionen\/inventur-bestand\/?$/.test(location.pathname); }
+
+  var IMG = 'https://tastyrob123.github.io/kurs-code/img/ops/inventur/';
+
+  /* Beispielwerte — deklariert, KEINE echten Betriebszahlen (Niemals-schätzen-Regel).
+     Summe 50.800 € = exakte Summe der acht Positionen unten. */
+  var ITEMS = [
+    { f: 'konvektomat.webp',           n: 'Konvektomat',           o: 'Küche',      z: 'gut',      v: 8900, dx: -34, dy: -26, rz: -5 },
+    { f: 'kombidaempfer.webp',         n: 'Kombidämpfer',          o: 'Küche',      z: 'sehr gut', v: 12400, dx: 26, dy: -34, rz: 4 },
+    { f: 'schockfroster.webp',         n: 'Schockfroster',         o: 'Küche',      z: 'gut',      v: 6200, dx: -22, dy: 30, rz: 6 },
+    { f: 'planetenruehrmaschine.webp', n: 'Planetenrührmaschine',  o: 'Patisserie', z: 'gut',      v: 3450, dx: 36, dy: 22, rz: -6 },
+    { f: 'salamander.webp',            n: 'Salamander',            o: 'Küche',      z: 'gebraucht', v: 2150, dx: -38, dy: 18, rz: 4 },
+    { f: 'espressomaschine.webp',      n: 'Espressomaschine',      o: 'Bar',        z: 'sehr gut', v: 7800, dx: 20, dy: 34, rz: -4 },
+    { f: 'zapfanlage.webp',            n: 'Zapfanlage',            o: 'Bar',        z: 'gut',      v: 4600, dx: -28, dy: -32, rz: 5 },
+    { f: 'haubenspuelmaschine.webp',   n: 'Haubenspülmaschine',    o: 'Spüle',      z: 'gut',      v: 5300, dx: 32, dy: 28, rz: -4 }
+  ];
+
+  var USES = [
+    { k: 'Versicherung',   s: 'Deckungssumme belegbar' },
+    { k: 'Abschreibung',   s: 'Anschaffungswert je Position' },
+    { k: 'Ersatzplanung',  s: 'Zustand sichtbar, nicht geraten' }
+  ];
+
+  var TOTAL = ITEMS.reduce(function (a, i) { return a + i.v; }, 0);
+
+  function reduceMotion() {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    catch (e) { return false; }
+  }
+
+  /* deutsche Tausenderpunkte, deterministisch (kein toLocaleString) */
+  function nf(v) {
+    return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  /* ---------------------------------------------------------------- CSS -- */
+  function css() {
+    if (document.getElementById('tsanim4-css')) return;
+    var s = document.createElement('style');
+    s.id = 'tsanim4-css';
+    s.textContent = [
+      /* Full-Bleed-Ausbruch aus der Notion-Textspalte (kanonische 50%/50vw-Technik),
+         background transparent — die Seite liefert an der Stelle bereits einen BG. */
+      '#tsanim4{--g:#c7b489;--g2:#d8c9ab;--gr:199,180,137;--ok:#8FCBAA;',
+      'width:100vw;max-width:100vw;margin:20px calc(50% - 50vw) 60px;',
+      'padding:0 clamp(20px,4vw,56px);background:transparent;position:relative;box-sizing:border-box;',
+      'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+      '-webkit-font-smoothing:antialiased}',
+
+      /* ---- Sektionskopf (Standard-Spec Abschnitt 02) ---- */
+      '#tsanim4 .iv-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}',
+      '#tsanim4 .iv-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;',
+      'letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:12px}',
+      '#tsanim4 .iv-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--g);',
+      'box-shadow:0 0 10px rgba(var(--gr),.85);font-style:normal}',
+      '#tsanim4 .iv-title{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;',
+      'font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;',
+      'color:#fff;margin:0}',
+      '#tsanim4 .iv-title span{color:var(--g)}',
+      '#tsanim4 .iv-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:14px 0 0}',
+
+      /* ---- Bühne ---- */
+      '#tsanim4 *{box-sizing:border-box}',
+      '#tsanim4 .iv-wrap{display:grid;grid-template-columns:1.55fr .95fr;gap:26px;align-items:start;',
+      'max-width:1180px;margin:0 auto}',
+      '#tsanim4 .iv-field{position:relative;border-radius:18px;padding:22px;overflow:hidden;',
+      'background:rgba(255,255,255,.022);border:1px solid rgba(var(--gr),.2);',
+      'box-shadow:0 24px 60px rgba(0,0,0,.45)}',
+      '#tsanim4 .iv-field-lbl{display:flex;justify-content:space-between;align-items:baseline;gap:12px;',
+      'margin:0 2px 16px;font:600 9.5px/1 inherit;letter-spacing:.12em;text-transform:uppercase;',
+      'color:rgba(255,255,255,.4)}',
+      '#tsanim4 .iv-field-lbl b{color:var(--g);font-weight:600}',
+
+      /* Sweep-Balken */
+      '#tsanim4 .iv-sweep{position:absolute;left:0;right:0;top:0;height:180px;pointer-events:none;',
+      'opacity:0;z-index:3;background:linear-gradient(180deg,rgba(var(--gr),0) 0%,rgba(var(--gr),.05) 42%,',
+      'rgba(var(--gr),.16) 78%,rgba(251,230,194,.5) 96%,rgba(var(--gr),0) 100%)}',
+      '#tsanim4 .iv-wrap.playing .iv-sweep{animation:ivSweep 2.35s cubic-bezier(.22,1,.36,1) .18s 1 both}',
+      '@keyframes ivSweep{0%{opacity:0;transform:translateY(-190px)}',
+      '12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateY(105%)}}',
+
+      /* Raster + Kacheln */
+      '#tsanim4 .iv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:2}',
+      '#tsanim4 .iv-tile{position:relative;border-radius:14px;padding:10px 10px 12px;background:#0b0d14;',
+      'border:1.5px solid rgba(var(--gr),.55);',
+      'box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--gr),.055);',
+      'transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1),',
+      'border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),filter .78s cubic-bezier(.16,1,.3,1)}',
+      /* Startzustand NUR über .pre — Default ist der Endzustand */
+      '#tsanim4 .iv-tile.pre{opacity:.16;filter:grayscale(1) brightness(.6);border-color:rgba(255,255,255,.08);',
+      'box-shadow:none;transform:translate(var(--dx,0),var(--dy,0)) rotate(var(--rz,0deg)) scale(.9)}',
+      '#tsanim4 .iv-tile.hit{border-color:rgba(var(--gr),.95);',
+      'box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--gr),.16),0 0 26px rgba(var(--gr),.3)}',
+      '#tsanim4 .iv-ph{position:relative;width:100%;aspect-ratio:1/1;border-radius:9px;overflow:hidden;background:#000}',
+      '#tsanim4 .iv-ph img{width:100%;height:100%;object-fit:cover;display:block}',
+      '#tsanim4 .iv-chk{position:absolute;top:7px;right:7px;width:19px;height:19px;border-radius:50%;',
+      'display:flex;align-items:center;justify-content:center;background:rgba(143,203,170,.14);',
+      'border:1px solid rgba(143,203,170,.55);color:var(--ok);font-size:10px;line-height:1;',
+      'transition:opacity .5s cubic-bezier(.34,1.56,.64,1),transform .5s cubic-bezier(.34,1.56,.64,1)}',
+      '#tsanim4 .iv-tile.pre .iv-chk{opacity:0;transform:scale(.4)}',
+      '#tsanim4 .iv-meta{margin-top:9px;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}',
+      '#tsanim4 .iv-tile.pre .iv-meta{opacity:0;transform:translateY(8px)}',
+      '#tsanim4 .iv-n{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;',
+      'font-size:12.5px;line-height:1.25;color:#fff;margin:0 0 6px}',
+      '#tsanim4 .iv-r{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;line-height:1.5;',
+      'color:rgba(255,255,255,.5)}',
+      '#tsanim4 .iv-r b{font-weight:600;color:rgba(255,255,255,.8)}',
+      '#tsanim4 .iv-v{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.09);',
+      'font-size:13px;font-weight:700;color:var(--g);font-variant-numeric:tabular-nums}',
+
+      /* Bestandsblatt rechts */
+      '#tsanim4 .iv-panel{border-radius:18px;padding:22px 22px 20px;background:rgba(var(--gr),.06);',
+      'border:1px solid rgba(var(--gr),.4);box-shadow:0 24px 60px rgba(0,0,0,.45)}',
+      '#tsanim4 .iv-p-eyebrow{font:600 9.5px/1 inherit;letter-spacing:.12em;text-transform:uppercase;',
+      'color:var(--g);margin-bottom:9px}',
+      '#tsanim4 .iv-p-title{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;',
+      'font-size:19px;line-height:1.2;color:#fff;margin:0 0 14px}',
+      '#tsanim4 .iv-hr{height:1px;background:rgba(255,255,255,.09);margin:0 0 14px}',
+      '#tsanim4 .iv-kv{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}',
+      '#tsanim4 .iv-kv .k{font-size:12.5px;color:rgba(255,255,255,.55)}',
+      '#tsanim4 .iv-kv .v{font-size:14px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}',
+      '#tsanim4 .iv-total{margin:16px 0 4px;padding:14px 15px;border-radius:13px;',
+      'background:rgba(var(--gr),.09);border:1px solid rgba(var(--gr),.5);transition:box-shadow .7s cubic-bezier(.16,1,.3,1)}',
+      '#tsanim4 .iv-total.glow{box-shadow:0 0 34px rgba(var(--gr),.24)}',
+      '#tsanim4 .iv-total .k{font:600 9.5px/1 inherit;letter-spacing:.12em;text-transform:uppercase;',
+      'color:rgba(255,255,255,.45);margin-bottom:8px}',
+      '#tsanim4 .iv-total .v{font-family:"Lineal TS","Lineal Web",-apple-system,sans-serif;font-weight:600;',
+      'font-size:clamp(26px,3.1vw,34px);line-height:1;color:var(--g);font-variant-numeric:tabular-nums}',
+      '#tsanim4 .iv-bar{margin-top:11px;height:3px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}',
+      '#tsanim4 .iv-bar i{display:block;height:100%;width:100%;border-radius:999px;',
+      'background:linear-gradient(90deg,var(--g),var(--g2));transition:width .62s cubic-bezier(.16,1,.3,1)}',
+      '#tsanim4 .iv-note{font-size:10px;color:rgba(255,255,255,.28);margin:9px 2px 0}',
+
+      '#tsanim4 .iv-uses{margin-top:18px;display:grid;gap:8px}',
+      '#tsanim4 .iv-use{display:flex;align-items:baseline;gap:9px;padding:9px 11px;border-radius:11px;',
+      'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);',
+      'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),',
+      'border-color .7s cubic-bezier(.16,1,.3,1),background .7s cubic-bezier(.16,1,.3,1)}',
+      '#tsanim4 .iv-use.pre{opacity:0;transform:translateY(10px)}',
+      '#tsanim4 .iv-use::before{content:"";flex:0 0 auto;width:5px;height:5px;border-radius:50%;',
+      'background:var(--g);box-shadow:0 0 9px rgba(var(--gr),.8);position:relative;top:-2px}',
+      '#tsanim4 .iv-use.lit{border-color:rgba(var(--gr),.42);background:rgba(var(--gr),.055)}',
+      '#tsanim4 .iv-use .uk{font-size:12.5px;font-weight:600;color:#fff}',
+      '#tsanim4 .iv-use .us{font-size:11px;color:rgba(255,255,255,.45);margin-left:auto;text-align:right}',
+
+      /* Fuß + Replay */
+      '#tsanim4 .iv-foot{display:flex;justify-content:center;margin-top:26px}',
+      '#tsanim4 .iv-replay{appearance:none;cursor:pointer;background:transparent;color:var(--g);',
+      'border:1px solid rgba(var(--gr),.45);border-radius:999px;padding:9px 20px;font:600 12px/1 inherit;',
+      'letter-spacing:.04em;transition:background .45s cubic-bezier(.16,1,.3,1),border-color .45s cubic-bezier(.16,1,.3,1),',
+      'color .45s cubic-bezier(.16,1,.3,1)}',
+      '#tsanim4 .iv-replay:hover{background:rgba(var(--gr),.1);border-color:rgba(var(--gr),.75);color:var(--g2)}',
+
+      /* Mobile */
+      '@media(max-width:820px){',
+      '#tsanim4{margin-top:24px}',
+      '#tsanim4 .iv-wrap{grid-template-columns:1fr;gap:20px}',
+      '#tsanim4 .iv-grid{grid-template-columns:repeat(2,1fr);gap:12px}',
+      '#tsanim4 .iv-field{padding:16px}',
+      '#tsanim4 .iv-field-lbl{font-size:8.5px;letter-spacing:.08em;gap:8px}',
+      '#tsanim4 .iv-field-lbl b{white-space:nowrap}',
+      '#tsanim4 .iv-tile.pre{transform:translateY(calc(var(--dy,0px)*.45)) rotate(var(--rz,0deg)) scale(.92)}',
+      '#tsanim4 .iv-use .us{display:none}',
+      '}',
+
+      /* reduced motion */
+      '@media(prefers-reduced-motion:reduce){',
+      '#tsanim4 .iv-tile,#tsanim4 .iv-meta,#tsanim4 .iv-chk,#tsanim4 .iv-use,#tsanim4 .iv-bar i,',
+      '#tsanim4 .iv-total{transition:none!important;animation:none!important}',
+      '#tsanim4 .iv-sweep{display:none!important}',
+      '}'
+    ].join('');
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* -------------------------------------------------------------- BUILD -- */
+  function tileHTML(it) {
+    return '<div class="iv-tile" style="--dx:' + it.dx + 'px;--dy:' + it.dy + 'px;--rz:' + it.rz + 'deg">' +
+      '<div class="iv-ph"><img src="' + IMG + it.f + '" alt="" loading="lazy" decoding="async">' +
+      '<span class="iv-chk">&#10003;</span></div>' +
+      '<div class="iv-meta">' +
+      '<p class="iv-n">' + it.n + '</p>' +
+      '<div class="iv-r"><span>Standort</span><b>' + it.o + '</b></div>' +
+      '<div class="iv-r"><span>Zustand</span><b>' + it.z + '</b></div>' +
+      '<div class="iv-v" data-to="' + it.v + '">' + nf(it.v) + ' &euro;</div>' +
+      '</div></div>';
+  }
+
+  function build() {
+    if (document.getElementById('tsanim4')) return document.getElementById('tsanim4');
+
+    var sec = document.createElement('section');
+    sec.id = 'tsanim4';
+    sec.innerHTML =
+      '<div class="iv-head">' +
+      '<div class="iv-eyebrow"><i></i>Vom Besitz zum Bestand</div>' +
+      '<h2 class="iv-title">Was du besitzt, steht am Ende <span>in einer Zeile</span>.</h2>' +
+      '<p class="iv-sub">Die Festwert-Liste sammelt jedes langlebige St&uuml;ck deines Betriebs &mdash; mit Wert, Zustand und Standort. Aus &bdquo;wir haben da irgendwo was&ldquo; wird eine Summe, die du belegen kannst.</p>' +
+      '</div>' +
+      '<div class="iv-wrap">' +
+      '<div class="iv-field">' +
+      '<div class="iv-field-lbl"><span>Festwert-Liste &middot; 12 Spalten</span>' +
+      '<b id="iv-lbl">' + ITEMS.length + ' von ' + ITEMS.length + ' erfasst</b></div>' +
+      '<div class="iv-sweep"></div>' +
+      '<div class="iv-grid">' + ITEMS.map(tileHTML).join('') + '</div>' +
+      '</div>' +
+      '<aside class="iv-panel">' +
+      '<div class="iv-p-eyebrow">Bestandsblatt</div>' +
+      '<p class="iv-p-title">Dein Anlageverm&ouml;gen</p>' +
+      '<div class="iv-hr"></div>' +
+      '<div class="iv-kv"><span class="k">Erfasste Positionen</span><span class="v" id="iv-cnt">' + ITEMS.length + '</span></div>' +
+      '<div class="iv-kv"><span class="k">Standorte</span><span class="v">4</span></div>' +
+      '<div class="iv-kv"><span class="k">Ohne Bewertung</span><span class="v">0</span></div>' +
+      '<div class="iv-total glow"><div class="k">Gesamtwert Bestand</div>' +
+      '<div class="v" id="iv-sum">' + nf(TOTAL) + ' &euro;</div>' +
+      '<div class="iv-bar"><i id="iv-fill"></i></div></div>' +
+      '<p class="iv-note">Alle Betr&auml;ge sind Beispielwerte.</p>' +
+      '<div class="iv-uses">' +
+      USES.map(function (u) {
+        return '<div class="iv-use lit"><span class="uk">' + u.k + '</span><span class="us">' + u.s + '</span></div>';
+      }).join('') +
+      '</div>' +
+      '</aside>' +
+      '</div>' +
+      '<div class="iv-foot"><button type="button" class="iv-replay">Neu abspielen</button></div>';
+
+    return sec;
+  }
+
+  /* -------------------------------------------------------------- MOUNT -- */
+  function findAnchor() {
+    var pinned = document.getElementById('tsanim4-anchor');
+    if (pinned) return pinned;
+    var root = document.querySelector('.notion-root');
+    if (!root) return null;
+    var texts = root.querySelectorAll('.notion-text');
+    if (texts.length) return texts[Math.min(texts.length - 1, 2)];
+    return root.firstElementChild;
+  }
+
+  function mount() {
+    if (!on()) {
+      var old = document.getElementById('tsanim4');
+      if (old && old.parentNode) old.parentNode.removeChild(old);
+      return;
+    }
+    css();
+    var existing = document.getElementById('tsanim4');
+    if (existing && existing.isConnected) return;
+    var anchor = findAnchor();
+    if (!anchor || !anchor.parentNode) return;
+    var sec = build();
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    wire(sec);
+  }
+
+  /* --------------------------------------------------------------- PLAY -- */
+  /* Ein einziger Zähler pro Element mit Generations-Token: die Count-ups der
+     acht Positionen überlappen sich (Stagger 170 ms < Dauer 620 ms) — ohne Token
+     würde ein älterer rAF-Loop den neueren Wert überschreiben und die Summe
+     bliebe zu niedrig stehen. Zusätzlich Garantie-Endwert per setTimeout
+     (rAF friert in Hintergrund-Tabs ein). */
+  function makeCounter(el, suffix) {
+    var cur = 0, gen = 0;
+    function set(v) { if (el) el.textContent = nf(v) + suffix; }
+    return {
+      set: function (v) { gen++; cur = v; set(v); },
+      to: function (v, dur) {
+        var g = ++gen, from = cur, t0 = 0, last = 0;
+        function step(ts) {
+          if (g !== gen) return;              /* abgelöst → abbrechen */
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var e = 1 - Math.pow(1 - p, 3);
+          cur = from + (v - from) * e;
+          if (ts - last >= 38 || p === 1) {   /* ~26 fps gedrosselt */
+            last = ts;
+            set(cur);
+          }
+          if (p < 1) requestAnimationFrame(step);
+          else { cur = v; set(v); }
+        }
+        requestAnimationFrame(step);
+        setTimeout(function () {
+          if (g !== gen) return;
+          cur = v; set(v);
+        }, dur + 160);
+      }
+    };
+  }
+
+  function play(root) {
+    if (!root || !root.isConnected) return;
+    var wrap = root.querySelector('.iv-wrap');
+    var tiles = root.querySelectorAll('.iv-tile');
+    var uses = root.querySelectorAll('.iv-use');
+    var sum = root.querySelector('#iv-sum');
+    var cnt = root.querySelector('#iv-cnt');
+    var fill = root.querySelector('#iv-fill');
+    var lbl = root.querySelector('#iv-lbl');
+    var total = root.querySelector('.iv-total');
+    var N = ITEMS.length;
+    if (!wrap || !tiles.length) return;
+
+    if (root.__timers) root.__timers.forEach(clearTimeout);
+    root.__timers = [];
+    var T = function (fn, ms) { root.__timers.push(setTimeout(fn, ms)); };
+
+    /* reduced motion: Endzustand sofort, keine Choreografie */
+    if (reduceMotion()) {
+      wrap.classList.remove('playing');
+      tiles.forEach(function (t) { t.classList.remove('pre', 'hit'); });
+      uses.forEach(function (u) { u.classList.remove('pre'); u.classList.add('lit'); });
+      if (sum) sum.innerHTML = nf(TOTAL) + ' &euro;';
+      if (cnt) cnt.textContent = String(N);
+      if (lbl) lbl.textContent = N + ' von ' + N + ' erfasst';
+      if (fill) fill.style.width = '100%';
+      if (total) total.classList.add('glow');
+      return;
+    }
+
+    /* ---- Reset auf Startzustand (nur per Klasse/Inline — überlebt class-strip) */
+    wrap.classList.remove('playing');
+    tiles.forEach(function (t) { t.classList.add('pre'); t.classList.remove('hit'); });
+    uses.forEach(function (u) { u.classList.add('pre'); u.classList.remove('lit'); });
+    var counter = makeCounter(sum, ' €');
+    counter.set(0);
+    if (cnt) cnt.textContent = '0';
+    if (lbl) lbl.textContent = '0 von ' + N + ' erfasst';
+    if (fill) fill.style.width = '0%';
+    if (total) total.classList.remove('glow');
+
+    void wrap.offsetWidth; /* reflow → Transitions greifen sauber */
+    wrap.classList.add('playing');
+
+    var START = 430, STAG = 170, acc = 0;
+
+    tiles.forEach(function (t, i) {
+      var at = START + i * STAG;
+      acc += ITEMS[i].v;
+      var to = acc, idx = i + 1;
+      T(function () {
+        t.classList.remove('pre');
+        t.classList.add('hit');
+        if (cnt) cnt.textContent = String(idx);
+        if (lbl) lbl.textContent = idx + ' von ' + N + ' erfasst';
+        if (fill) fill.style.width = (idx / N * 100) + '%';
+        counter.to(to, 620);
+        T(function () { t.classList.remove('hit'); }, 620);
+      }, at);
+    });
+
+    var last = START + (tiles.length - 1) * STAG + 620;
+    /* harter Garantie-Endwert, unabhängig von rAF/Timing */
+    T(function () { counter.set(TOTAL); }, last + 220);
+    T(function () { if (total) total.classList.add('glow'); }, last + 60);
+    uses.forEach(function (u, i) {
+      T(function () { u.classList.remove('pre'); u.classList.add('lit'); }, last + 240 + i * 160);
+    });
+  }
+
+  /* ------------------------------------------------------- TRIGGER/WIRE -- */
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    var h = window.innerHeight || document.documentElement.clientHeight;
+    if (!r.height) return false;
+    var vis = Math.min(r.bottom, h) - Math.max(r.top, 0);
+    return vis > 0 && vis / Math.min(r.height, h) >= 0.3;
+  }
+
+  /* self-healing: re-query per getElementById, root lokal an play(root) */
+  function tryPlay() {
+    var root = document.getElementById('tsanim4');
+    if (!root || !root.isConnected) return;
+    if (root.__played) return;
+    if (!inView(root)) return;
+    root.__played = true;
+    play(root);
+  }
+
+  function wire(sec) {
+    if (sec.__wired) return;
+    sec.__wired = true;
+    var btn = sec.querySelector('.iv-replay');
+    if (btn) btn.addEventListener('click', function () {
+      var root = document.getElementById('tsanim4');
+      if (!root) return;
+      root.__played = true;
+      play(root);
+    });
+    tryPlay();
+  }
+
+  window.addEventListener('scroll', tryPlay, { passive: true });
+  window.addEventListener('resize', tryPlay, { passive: true });
+
+  /* Scheduler bewusst auf setTimeout statt requestAnimationFrame:
+     rAF feuert in Hintergrund-Tabs NICHT → Widget würde nie mounten. */
+  var pending = 0;
+  function schedule() {
+    if (pending) return;
+    pending = setTimeout(function () { pending = 0; mount(); tryPlay(); }, 0);
+  }
+
+  schedule();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', schedule);
+  }
+  try {
+    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true });
+  } catch (e) { /* noop */ }
+  var poll = setInterval(schedule, 400);
+  setTimeout(function () { clearInterval(poll); }, 20000);
+})();
+
+
+/* ============================================================
+   #tsanim5 — Erkläranimation Partner & Verträge (Insel 05)
+   ============================================================ */
+/* ============================================================================
+   #tsanim5 — Erkläranimation „Partner & Verträge" (Insel 05, Operations Area)
+   Slug: /lektionen/partner-vertrge   (tolerante Regex wegen Umlaut-Slug)
+
+   KONZEPT „Die Schublade wird zur Zeitachse":
+   Aus einem Stapel loser Verträge in der Schublade werden Laufzeit-Bänder auf
+   einer gemeinsamen Zeitachse. Ein wandernder „heute"-Zeiger fährt über die
+   Achse und deckt auf, welche Kündigungsfrist noch sicher ist und welche
+   gerade läuft. Zum Schluss hängt sich unter die Verträge das Dienstleister-
+   Netz: eine feine Beige-Rückgrat-Linie mit Abgängen zu den Partner-Kategorien.
+
+   Doktrin/Recht: Abschnitt 02 — Erkläranimation (10-Punkte-Qualitäts-Gesetz,
+   Animations-Robustheits-Regel, Verschärfungen 20.07.2026) + Design-System.
+   Palette: #04050a · Beige #c7b489 (einziger Akzent) · Grün #8FCBAA (gesichert)
+   · Rot #e32552 (genau EINE auslaufende Frist). Display: „Lineal Web" (Titel
+   enthält „F" → Lineal-TS-Subset hat kein F/q). Body: System-Sans.
+
+   Zahlen = deklarierte BEISPIELWERTE aus [[Lektion 2.12.5 — Partner & Verträge]]
+   (48.000 / 16.500 / 7.600 → Summe 72.100 €). Nichts geschätzt, nichts erfunden.
+   ========================================================================== */
+(function () {
+  'use strict';
+  if (window.__tsanim5) return;
+  window.__tsanim5 = true;
+
+  var ID = 'tsanim5';
+  var CSS_ID = 'tsanim5-css';
+  var SLUG = /\/lektionen\/partner-vertr[a-z-]*\/?$/;
+  var IMG_BASE = 'https://tastyrob123.github.io/kurs-code/img/ops/partner/';
+
+  var REDUCE = false;
+  try {
+    REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) { REDUCE = false; }
+
+  /* ---------------------------------------------------------------- Daten */
+  /* Laufzeit-Positionen in % der 12-Monats-Achse (Beispieldaten der Lektion).
+     frist = Anteil des Bandes am Ende, der die Kündigungsfrist markiert.
+     Der „heute"-Zeiger steht bei TODAY % — genau eine Frist ist bereits offen. */
+  var TODAY = 58;
+
+  var LANES = [
+    {
+      name: 'Metro Cash &amp; Carry',
+      type: 'Lieferant &middot; Rahmenvertrag',
+      mono: 'M',
+      img: 'lieferung.webp',
+      alt: 'Kühltransporter — Warenlieferung',
+      s: 3, w: 72, frist: 0.14,
+      val: 48000,
+      flag: 'Frist gesichert', warn: false
+    },
+    {
+      name: 'Barausstattung Bartscher',
+      type: 'Lieferant &middot; Ausstattung',
+      mono: 'B',
+      img: 'bar.webp',
+      alt: 'Zapfanlage — Barausstattung',
+      s: 8, w: 62, frist: 0.16,
+      val: 16500,
+      flag: 'Frist gesichert', warn: false
+    },
+    {
+      name: 'Spülmaschinen-Service Hobart',
+      type: 'Wartung &middot; Service',
+      mono: 'H',
+      img: 'spuelmaschine.webp',
+      alt: 'Haubenspülmaschine — Wartungsvertrag',
+      s: 1, w: 63, frist: 0.28,
+      val: 7600,
+      flag: 'Kündigungsfrist läuft', warn: true
+    }
+  ];
+
+  var TOTAL = 72100; // 48000 + 16500 + 7600 — SSOT Lektion 2.12.5
+  var MONTHS = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+  var CHIPS = ['Wartung', 'Reinigung', 'Entsorgung', 'IT', 'Steuerberatung'];
+
+  /* ------------------------------------------------------------- Helpers */
+  function fmtEur(v) {
+    var s = String(Math.round(v)), out = '', c = 0;
+    for (var i = s.length - 1; i >= 0; i--) {
+      out = s.charAt(i) + out;
+      if (++c % 3 === 0 && i > 0) out = '.' + out;
+    }
+    return out + ' €';
+  }
+
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function clearTimers() {
+    for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+    timers = [];
+  }
+
+  /* Count-up: ease-out-cubic, auf ~26 fps gedrosselt (Mutation-Storm-Schutz),
+     Endwert zusätzlich per setTimeout garantiert (rAF-Throttling im Hintergrund). */
+  function countTo(el, to, dur) {
+    if (!el) return;
+    if (REDUCE) { el.textContent = fmtEur(to); return; }
+    var t0 = 0, last = 0, done = false;
+    function finish() { if (done) return; done = true; el.textContent = fmtEur(to); }
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      if (ts - last >= 38 || p === 1) {
+        last = ts;
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmtEur(to * e);
+      }
+      if (p < 1 && !done) requestAnimationFrame(step);
+      else finish();
+    }
+    requestAnimationFrame(step);
+    later(finish, dur + 180);
+  }
+
+  /* ----------------------------------------------------------------- CSS */
+  function css() {
+    if (document.getElementById(CSS_ID)) return;
+    var s = document.createElement('style');
+    s.id = CSS_ID;
+    s.textContent = [
+      '@font-face{font-family:"Lineal Web";src:url("https://files.catbox.moe/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
+
+      '#' + ID + '{--pv-g:199,180,137;--pv-beige:#c7b489;--pv-green:#8FCBAA;--pv-red:#e32552;',
+      '--pv-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+      '--pv-display:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;',
+      'position:relative;width:min(1280px,94vw);margin:0 auto;padding:64px 0 8px;',
+      'font-family:var(--pv-sans);',
+      'color:#fff;-webkit-font-smoothing:antialiased}',
+
+      /* ---- Sektionskopf (Standard-Spec Abschnitt 02) ---- */
+      '#' + ID + ' .pv-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}',
+      '#' + ID + ' .pv-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--pv-sans);',
+      'letter-spacing:.16em;text-transform:uppercase;color:var(--pv-beige);margin-bottom:12px}',
+      '#' + ID + ' .pv-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--pv-beige);',
+      'box-shadow:0 0 10px rgba(var(--pv-g),.85);display:inline-block}',
+      '#' + ID + ' .pv-title{font-family:var(--pv-display);font-weight:600;',
+      'font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;',
+      'margin:0;color:#fff}',
+      '#' + ID + ' .pv-title span{color:var(--pv-beige)}',
+      '#' + ID + ' .pv-sub{margin:16px auto 0;max-width:720px;font-size:16.5px;line-height:1.62;',
+      'color:rgba(255,255,255,.62)}',
+
+      /* ---- Bühne ---- */
+      '#' + ID + ' .pv-wrap{position:relative}',
+      '#' + ID + ' .pv-stage{display:grid;grid-template-columns:186px 1fr;gap:26px;align-items:stretch}',
+
+      /* Schublade */
+      '#' + ID + ' .pv-drawer{position:relative;border:1px solid rgba(var(--pv-g),.24);border-radius:16px;',
+      'background:rgba(255,255,255,.028);box-shadow:0 24px 60px rgba(0,0,0,.45);padding:18px 16px 15px;',
+      'display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:14px}',
+      '#' + ID + ' .pv-dl{font:600 9.5px/1 var(--pv-sans);letter-spacing:.14em;text-transform:uppercase;',
+      'color:rgba(var(--pv-g),.72);align-self:flex-start}',
+      '#' + ID + ' .pv-stack{position:relative;width:110px;height:104px;opacity:.22;',
+      'transition:opacity .6s cubic-bezier(.22,1,.36,1)}',
+      '#' + ID + ' .pv-sheet{position:absolute;left:50%;top:50%;width:78px;height:96px;margin:-48px 0 0 -39px;',
+      'border-radius:5px;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.03));',
+      'border:1px solid rgba(var(--pv-g),.26);box-shadow:0 14px 30px -14px rgba(0,0,0,.9);',
+      'padding:11px 9px;display:flex;flex-direction:column;gap:6px}',
+      '#' + ID + ' .pv-sheet i{display:block;height:1px;background:rgba(255,255,255,.17);border-radius:1px}',
+      '#' + ID + ' .pv-sheet i:nth-child(1){width:70%;background:rgba(var(--pv-g),.42)}',
+      '#' + ID + ' .pv-sheet i:nth-child(3){width:82%}',
+      '#' + ID + ' .pv-sheet i:nth-child(4){width:54%}',
+      '#' + ID + ' .pv-sheet[data-i="0"]{transform:rotate(-7deg) translate(-7px,3px)}',
+      '#' + ID + ' .pv-sheet[data-i="1"]{transform:rotate(-1deg)}',
+      '#' + ID + ' .pv-sheet[data-i="2"]{transform:rotate(6deg) translate(8px,-3px)}',
+      '#' + ID + ' .pv-ghost{position:absolute;left:50%;top:50%;width:78px;height:96px;margin:-48px 0 0 -39px;',
+      'border-radius:5px;border:1px solid rgba(255,255,255,.10);transform:rotate(11deg) translate(13px,-6px)}',
+      '#' + ID + ' .pv-dn{font-size:10.5px;line-height:1.45;color:rgba(255,255,255,.3);text-align:center}',
+      '#' + ID + ' .pv-na{display:none}',
+      '#' + ID + ' .pv-drawer{transition:opacity .7s cubic-bezier(.22,1,.36,1)}',
+
+      /* Board */
+      '#' + ID + ' .pv-board{--today:' + TODAY + '%;position:relative;border:1px solid rgba(var(--pv-g),.28);',
+      'border-radius:18px;background:rgba(255,255,255,.035);box-shadow:0 24px 60px rgba(0,0,0,.45);',
+      'padding:20px 26px 24px;overflow:hidden}',
+      '#' + ID + ' .pv-bh{display:flex;align-items:baseline;justify-content:space-between;gap:14px;',
+      'padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:16px}',
+      '#' + ID + ' .pv-bh-k{font:600 9.5px/1 var(--pv-sans);letter-spacing:.13em;text-transform:uppercase;color:var(--pv-beige)}',
+      '#' + ID + ' .pv-bh-m{font-size:10px;color:rgba(255,255,255,.3)}',
+
+      /* Achse */
+      '#' + ID + ' .pv-axis{position:relative;margin:0 0 10px;padding-left:calc(44px + 16px + 196px + 16px);',
+      'padding-right:calc(116px + 16px)}',
+      '#' + ID + ' .pv-axline{position:relative;height:30px}',
+      '#' + ID + ' .pv-months{position:absolute;left:0;right:0;bottom:0;display:flex;font-size:9px;',
+      'letter-spacing:.06em;color:rgba(255,255,255,.26)}',
+      '#' + ID + ' .pv-months span{flex:1;text-align:left}',
+      '#' + ID + ' .pv-today{position:absolute;top:14px;bottom:0;left:var(--today);width:1px;',
+      'background:linear-gradient(180deg,rgba(var(--pv-g),.05),rgba(var(--pv-g),.55));z-index:4;pointer-events:none}',
+      '#' + ID + ' .pv-today b{position:absolute;left:50%;top:-3px;width:7px;height:7px;margin-left:-3.5px;',
+      'border-radius:50%;background:#efe6d2;box-shadow:0 0 12px rgba(var(--pv-g),.8),0 0 26px rgba(var(--pv-g),.35)}',
+      '#' + ID + ' .pv-today em{position:absolute;left:0;top:-16px;transform:translateX(-50%);font-style:normal;',
+      'font:600 8.5px/1 var(--pv-sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--pv-g),.85);white-space:nowrap}',
+
+      /* Lanes */
+      '#' + ID + ' .pv-lanes{position:relative}',
+      '#' + ID + ' .pv-todayfull{position:absolute;top:-14px;bottom:-2px;left:var(--today);width:1px;',
+      'background:linear-gradient(180deg,rgba(var(--pv-g),.42),rgba(var(--pv-g),.06));z-index:3;pointer-events:none}',
+      '#' + ID + ' .pv-lane{display:grid;grid-template-columns:44px 196px 1fr 116px;gap:16px;align-items:center;',
+      'padding:11px 0}',
+      '#' + ID + ' .pv-lane+.pv-lane{border-top:1px solid rgba(255,255,255,.055)}',
+
+      '#' + ID + ' .pv-med{position:relative;width:44px;height:44px;border-radius:50%;background:#0b0d14;',
+      'border:1.5px solid rgba(var(--pv-g),.55);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(var(--pv-g),.055);',
+      'display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}',
+      '#' + ID + ' .pv-med img{width:100%;height:100%;object-fit:contain;padding:5px;box-sizing:border-box;',
+      'filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}',
+      '#' + ID + ' .pv-med span{position:absolute;font-family:var(--pv-display);font-weight:600;',
+      'font-size:15px;color:rgba(var(--pv-g),.8)}',
+      '#' + ID + ' .pv-med.has-img span{display:none}',
+
+      '#' + ID + ' .pv-name{font-family:var(--pv-display);font-weight:600;font-size:14.5px;',
+      'line-height:1.25;color:#fff;letter-spacing:.002em}',
+      '#' + ID + ' .pv-type{margin-top:3px;font-size:10.5px;color:rgba(255,255,255,.36)}',
+
+      '#' + ID + ' .pv-track{position:relative;height:12px;border-radius:999px;background:rgba(255,255,255,.04)}',
+      '#' + ID + ' .pv-grid{position:absolute;inset:0;border-radius:999px;overflow:hidden;pointer-events:none}',
+      '#' + ID + ' .pv-grid i{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.05)}',
+      '#' + ID + ' .pv-band{position:absolute;top:0;bottom:0;border-radius:999px;transform-origin:left center;',
+      'background:linear-gradient(90deg,rgba(var(--pv-g),.20),rgba(var(--pv-g),.44));',
+      'border:1px solid rgba(var(--pv-g),.34);box-shadow:0 0 18px -6px rgba(var(--pv-g),.55);overflow:hidden}',
+      '#' + ID + ' .pv-frist{position:absolute;top:0;bottom:0;right:0;border-left:1px dashed rgba(var(--pv-g),.5);',
+      'background-image:repeating-linear-gradient(135deg,rgba(var(--pv-g),.30) 0 2px,transparent 2px 6px)}',
+      '#' + ID + ' .pv-lane.warn .pv-band{background:linear-gradient(90deg,rgba(var(--pv-g),.18),rgba(227,37,82,.30));',
+      'border-color:rgba(227,37,82,.42);box-shadow:0 0 20px -6px rgba(227,37,82,.5)}',
+      '#' + ID + ' .pv-lane.warn .pv-frist{border-left-color:rgba(227,37,82,.6);',
+      'background-image:repeating-linear-gradient(135deg,rgba(227,37,82,.34) 0 2px,transparent 2px 6px)}',
+
+      '#' + ID + ' .pv-flag{position:absolute;top:50%;margin-top:-10px;margin-left:12px;white-space:nowrap;z-index:5;',
+      'font:600 10px/20px var(--pv-sans);height:20px;padding:0 10px;border-radius:999px;',
+      'color:var(--pv-green);border:1px solid rgba(143,203,170,.42);background:rgba(143,203,170,.10)}',
+      '#' + ID + ' .pv-lane.warn .pv-flag{color:#f2708d;border-color:rgba(227,37,82,.45);background:rgba(227,37,82,.10)}',
+
+      '#' + ID + ' .pv-val{text-align:right;font-family:var(--pv-display);font-weight:600;',
+      'font-size:15px;color:var(--pv-beige);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}',
+      '#' + ID + ' .pv-vk{display:block;margin-top:2px;font-family:var(--pv-sans);font-weight:400;font-size:9px;',
+      'letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.26)}',
+
+      /* Netz */
+      '#' + ID + ' .pv-net{position:relative;margin:30px auto 0;width:min(880px,92%);text-align:center}',
+      '#' + ID + ' .pv-nl{font:600 9.5px/1 var(--pv-sans);letter-spacing:.14em;text-transform:uppercase;',
+      'color:rgba(var(--pv-g),.72);margin-bottom:16px}',
+      '#' + ID + ' .pv-spine{position:relative;height:1px;width:100%;transform-origin:center;',
+      'background:linear-gradient(90deg,rgba(var(--pv-g),0),rgba(var(--pv-g),.45) 12%,rgba(var(--pv-g),.45) 88%,rgba(var(--pv-g),0))}',
+      '#' + ID + ' .pv-spark{position:absolute;top:50%;left:0;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;',
+      'border-radius:50%;background:#efe6d2;box-shadow:0 0 10px rgba(var(--pv-g),.9),0 0 24px 4px rgba(var(--pv-g),.32);',
+      'animation:pvSpark 4.2s cubic-bezier(.16,1,.3,1) infinite}',
+      '#' + ID + ' .pv-chips{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}',
+      '#' + ID + ' .pv-chip{position:relative;font-size:11.5px;line-height:26px;height:26px;padding:0 14px;',
+      'border-radius:999px;color:rgba(255,255,255,.78);border:1px solid rgba(var(--pv-g),.30);',
+      'background:rgba(var(--pv-g),.055)}',
+      '#' + ID + ' .pv-drop{position:absolute;left:50%;top:-26px;width:1px;height:26px;transform-origin:top center;',
+      'background:linear-gradient(180deg,rgba(var(--pv-g),.42),rgba(var(--pv-g),.14))}',
+      '#' + ID + ' .pv-count{margin-top:14px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;',
+      'color:rgba(255,255,255,.3)}',
+
+      /* Summe */
+      '#' + ID + ' .pv-total{margin:30px auto 0;width:min(880px,92%);display:flex;align-items:center;',
+      'justify-content:space-between;gap:18px;padding:15px 22px;border-radius:14px;',
+      'background:rgba(var(--pv-g),.09);border:1px solid rgba(var(--pv-g),.42)}',
+      '#' + ID + ' .pv-tk{font-size:12.5px;color:rgba(255,255,255,.66);text-align:left}',
+      '#' + ID + ' .pv-tv{font-family:var(--pv-display);font-weight:600;font-size:22px;',
+      'color:var(--pv-beige);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;white-space:nowrap}',
+
+      /* Fuß */
+      '#' + ID + ' .pv-foot{display:flex;justify-content:center;margin-top:26px}',
+      '#' + ID + ' .pv-replay{font:600 11.5px/1 var(--pv-sans);letter-spacing:.1em;text-transform:uppercase;',
+      'color:var(--pv-beige);background:transparent;border:1px solid rgba(var(--pv-g),.42);',
+      'border-radius:999px;padding:10px 20px;cursor:pointer;',
+      'transition:background .35s cubic-bezier(.22,1,.36,1),border-color .35s cubic-bezier(.22,1,.36,1),color .35s cubic-bezier(.22,1,.36,1)}',
+      '#' + ID + ' .pv-replay:hover{background:rgba(var(--pv-g),.10);border-color:rgba(var(--pv-g),.7);color:#efe6d2}',
+      '#' + ID + ' .pv-note{margin:16px auto 0;max-width:760px;text-align:center;font-size:10px;',
+      'line-height:1.55;color:rgba(255,255,255,.28)}',
+
+      /* ---- Startzustand NUR während des Abspielens (.playing) ---- */
+      '#' + ID + ' .pv-wrap.playing .pv-lane{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-lane.on{animation:pvLane .62s cubic-bezier(.16,1,.3,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-band{transform:scaleX(0)}',
+      '#' + ID + ' .pv-wrap.playing .pv-lane.on .pv-band{animation:pvBand .78s cubic-bezier(.16,1,.3,1) .16s both}',
+      '#' + ID + ' .pv-wrap.playing .pv-med{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-lane.on .pv-med{animation:pvPop .52s cubic-bezier(.34,1.56,.64,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-frist{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-lanes.frist .pv-frist{animation:pvFade .5s cubic-bezier(.22,1,.36,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-flag{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-flag.on{animation:pvFlag .5s cubic-bezier(.34,1.56,.64,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-lane.warn.lit .pv-band{animation:pvBand .78s cubic-bezier(.16,1,.3,1) .16s both,pvWarn 1.6s cubic-bezier(.22,1,.36,1) .95s 2}',
+      '#' + ID + ' .pv-wrap.playing .pv-today,#' + ID + ' .pv-wrap.playing .pv-todayfull{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-today.on{animation:pvSweep 1.15s cubic-bezier(.16,1,.3,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-todayfull.on{animation:pvSweep 1.15s cubic-bezier(.16,1,.3,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-months{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-months.on{animation:pvFade .6s cubic-bezier(.22,1,.36,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-sheet.fly{animation:pvFly .62s cubic-bezier(.16,1,.3,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-drawer:not(.spent) .pv-stack{opacity:1}',
+      '#' + ID + ' .pv-wrap.playing .pv-drawer:not(.spent) .pv-na{display:block}',
+      '#' + ID + ' .pv-wrap.playing .pv-drawer:not(.spent) .pv-nb{display:none}',
+      '#' + ID + ' .pv-wrap.playing .pv-spine{transform:scaleX(0)}',
+      '#' + ID + ' .pv-wrap.playing .pv-spine.on{animation:pvSpine .72s cubic-bezier(.16,1,.3,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-spark{opacity:0;animation:none}',
+      '#' + ID + ' .pv-wrap.playing .pv-spine.on .pv-spark{animation:pvSpark 4.2s cubic-bezier(.16,1,.3,1) .5s infinite}',
+      '#' + ID + ' .pv-wrap.playing .pv-drop{transform:scaleY(0)}',
+      '#' + ID + ' .pv-wrap.playing .pv-chip{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-chip.on{animation:pvPop .52s cubic-bezier(.34,1.56,.64,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-chip.on .pv-drop{animation:pvDrop .38s cubic-bezier(.16,1,.3,1) .1s both}',
+      '#' + ID + ' .pv-wrap.playing .pv-count,#' + ID + ' .pv-wrap.playing .pv-nl{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-count.on,#' + ID + ' .pv-wrap.playing .pv-nl.on{animation:pvFade .6s cubic-bezier(.22,1,.36,1) both}',
+      '#' + ID + ' .pv-wrap.playing .pv-total{opacity:0}',
+      '#' + ID + ' .pv-wrap.playing .pv-total.on{animation:pvLane .7s cubic-bezier(.16,1,.3,1) both}',
+
+      /* ---- Keyframes (nur weiche Kurven, nie linear/ease) ---- */
+      '@keyframes pvLane{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}',
+      '@keyframes pvBand{from{transform:scaleX(0)}to{transform:scaleX(1)}}',
+      '@keyframes pvPop{from{opacity:0;transform:scale(.62)}to{opacity:1;transform:scale(1)}}',
+      '@keyframes pvFade{from{opacity:0}to{opacity:1}}',
+      '@keyframes pvFlag{from{opacity:0;transform:translateY(7px) scale(.92)}to{opacity:1;transform:none}}',
+      '@keyframes pvSweep{from{left:0;opacity:0}14%{opacity:1}to{left:var(--today);opacity:1}}',
+      '@keyframes pvFly{from{opacity:1;transform:translate(0,0) rotate(0) scale(1)}',
+      'to{opacity:0;transform:translate(74px,-22px) rotate(9deg) scale(.82)}}',
+      '@keyframes pvSpine{from{transform:scaleX(0)}to{transform:scaleX(1)}}',
+      '@keyframes pvDrop{from{transform:scaleY(0)}to{transform:scaleY(1)}}',
+      '@keyframes pvSpark{0%{left:6%;opacity:0}9%{opacity:1}66%{left:94%;opacity:1}74%{opacity:0}100%{left:94%;opacity:0}}',
+      '@keyframes pvWarn{0%,100%{box-shadow:0 0 20px -6px rgba(227,37,82,.5)}50%{box-shadow:0 0 30px -2px rgba(227,37,82,.8)}}',
+
+      /* ---- Mobile ≤820px: einspaltig ---- */
+      '@media (max-width:820px){',
+      '#' + ID + '{padding-top:46px}',
+      '#' + ID + ' .pv-stage{grid-template-columns:1fr;gap:18px}',
+      '#' + ID + ' .pv-drawer{flex-direction:row;justify-content:flex-start;gap:18px;padding:14px 16px}',
+      '#' + ID + ' .pv-stack{width:86px;height:82px;flex:none}',
+      '#' + ID + ' .pv-sheet{width:62px;height:76px;margin:-38px 0 0 -31px;padding:9px 7px;gap:5px}',
+      '#' + ID + ' .pv-ghost{width:62px;height:76px;margin:-38px 0 0 -31px}',
+      '#' + ID + ' .pv-dn{text-align:left;padding-left:12px}',
+      '#' + ID + ' .pv-bh{flex-direction:column;align-items:flex-start;gap:5px;padding-bottom:11px;margin-bottom:12px}',
+      '#' + ID + ' .pv-bh-m{font-size:9.5px}',
+      '#' + ID + ' .pv-dl{align-self:center}',
+      '#' + ID + ' .pv-board{padding:16px 16px 18px}',
+      '#' + ID + ' .pv-axis{padding-left:0;padding-right:0}',
+      '#' + ID + ' .pv-months span:nth-child(even){visibility:hidden}',
+      '#' + ID + ' .pv-lane{grid-template-columns:38px 1fr auto;grid-template-areas:"med meta val" "trk trk trk";',
+      'gap:10px 12px;padding:14px 0}',
+      '#' + ID + ' .pv-med{grid-area:med;width:38px;height:38px}',
+      '#' + ID + ' .pv-meta{grid-area:meta}',
+      '#' + ID + ' .pv-val{grid-area:val}',
+      '#' + ID + ' .pv-trackwrap{grid-area:trk;position:relative;padding-bottom:30px}',
+      '#' + ID + ' .pv-flag{left:0!important;top:auto;bottom:-30px;margin:0}',
+      '#' + ID + ' .pv-todayfull{display:none}',
+      '#' + ID + ' .pv-total{flex-direction:column;align-items:flex-start;gap:8px}',
+      '#' + ID + ' .pv-chips{gap:9px}',
+      '}',
+
+      /* ---- reduced motion: alles statisch im Endzustand ---- */
+      '@media (prefers-reduced-motion:reduce){',
+      '#' + ID + ' .pv-spark{animation:none;left:50%;opacity:.75}',
+      '#' + ID + ' .pv-wrap.playing *{animation:none!important;opacity:1!important;transform:none!important}',
+      '#' + ID + ' .pv-wrap.playing .pv-band{transform:scaleX(1)!important}',
+      '#' + ID + ' .pv-foot{display:none}',
+      '}'
+    ].join('');
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* ---------------------------------------------------------------- Build */
+  /* Endzustand = Default: die Bühne ist ohne jeden Trigger vollständig
+     sichtbar und trägt die finalen Werte (Animations-Robustheits-Regel). */
+  function build() {
+    var root = document.createElement('section');
+    root.id = ID;
+
+    var h = [];
+    h.push('<div class="pv-head">');
+    h.push('<div class="pv-eyebrow"><i></i>Partner &amp; Verträge</div>');
+    h.push('<h2 class="pv-title">Aus dem Stapel in der Schublade wird ein <span>Netz mit Fristen</span>.</h2>');
+    h.push('<p class="pv-sub">Jeder Vertrag bekommt eine sichtbare Laufzeit, einen Wert und eine Kündigungsfrist &mdash; und hängt am Partner, der dahintersteht.</p>');
+    h.push('</div>');
+
+    h.push('<div class="pv-wrap">');
+    h.push('<div class="pv-stage">');
+
+    /* Schublade */
+    h.push('<div class="pv-drawer">');
+    h.push('<div class="pv-dl">Schublade</div>');
+    h.push('<div class="pv-stack"><div class="pv-ghost"></div>');
+    for (var s = 0; s < 3; s++) {
+      h.push('<div class="pv-sheet" data-i="' + s + '"><i></i><i></i><i></i><i></i></div>');
+    }
+    h.push('</div>');
+    h.push('<div class="pv-dn"><span class="pv-na">ungeordnet<br>Frist unsichtbar</span>' +
+      '<span class="pv-nb">geleert<br>alles auf der Zeitachse</span></div>');
+    h.push('</div>');
+
+    /* Board */
+    h.push('<div class="pv-board">');
+    h.push('<div class="pv-bh"><span class="pv-bh-k">Verträge &middot; Laufzeit</span>' +
+      '<span class="pv-bh-m">DB Verträge &amp; Dienstleister &middot; 10 Spalten</span></div>');
+
+    h.push('<div class="pv-axis"><div class="pv-axline">');
+    h.push('<div class="pv-months">');
+    for (var m = 0; m < MONTHS.length; m++) h.push('<span>' + MONTHS[m] + '</span>');
+    h.push('</div>');
+    h.push('<div class="pv-today"><em>heute</em><b></b></div>');
+    h.push('</div></div>');
+
+    h.push('<div class="pv-lanes"><div class="pv-todayfull"></div>');
+    for (var i = 0; i < LANES.length; i++) {
+      var L = LANES[i];
+      h.push('<div class="pv-lane' + (L.warn ? ' warn' : '') + '" data-i="' + i + '">');
+      h.push('<div class="pv-med"><span>' + L.mono + '</span>' +
+        '<img src="' + IMG_BASE + L.img + '" alt="' + L.alt + '" loading="lazy">' + '</div>');
+      h.push('<div class="pv-meta"><div class="pv-name">' + L.name + '</div>' +
+        '<div class="pv-type">' + L.type + '</div></div>');
+      h.push('<div class="pv-trackwrap"><div class="pv-track">');
+      h.push('<div class="pv-grid">');
+      for (var g = 1; g < 12; g++) h.push('<i style="left:' + (g * 100 / 12).toFixed(3) + '%"></i>');
+      h.push('</div>');
+      h.push('<div class="pv-band" style="left:' + L.s + '%;width:' + L.w + '%">' +
+        '<span class="pv-frist" style="width:' + Math.round(L.frist * 100) + '%"></span>' +
+        '</div>');
+      h.push('<span class="pv-flag" style="left:' + (L.s + L.w) + '%">' + L.flag + '</span>');
+      h.push('</div></div>');
+      h.push('<div class="pv-val" data-to="' + L.val + '">' + fmtEur(L.val) +
+        '<span class="pv-vk">Vertragswert</span></div>');
+      h.push('</div>');
+    }
+    h.push('</div>'); /* lanes */
+    h.push('</div>'); /* board */
+    h.push('</div>'); /* stage */
+
+    /* Netz */
+    h.push('<div class="pv-net">');
+    h.push('<div class="pv-nl">Dienstleister-Verzeichnis</div>');
+    h.push('<div class="pv-spine"><span class="pv-spark"></span></div>');
+    h.push('<div class="pv-chips">');
+    for (var c = 0; c < CHIPS.length; c++) {
+      h.push('<div class="pv-chip"><span class="pv-drop"></span>' + CHIPS[c] + '</div>');
+    }
+    h.push('</div>');
+    h.push('<div class="pv-count">8 Partner im Verzeichnis</div>');
+    h.push('</div>');
+
+    /* Summe */
+    h.push('<div class="pv-total"><div class="pv-tk">Jährlich gebundenes Vertragsvolumen</div>' +
+      '<div class="pv-tv" data-to="' + TOTAL + '">' + fmtEur(TOTAL) + '</div></div>');
+
+    h.push('</div>'); /* wrap */
+
+    h.push('<div class="pv-foot"><button type="button" class="pv-replay">Neu abspielen</button></div>');
+    h.push('<p class="pv-note">Laufzeiten, Fristen und Beträge sind Beispielwerte aus dieser Lektion ' +
+      '(48.000 &euro; + 16.500 &euro; + 7.600 &euro; = 72.100 &euro;) &mdash; keine echten Betriebszahlen.</p>');
+
+    root.innerHTML = h.join('');
+
+    /* Medaillon-Bilder: nur zeigen, wenn wirklich vorhanden (sonst Monogramm) */
+    var imgs = root.querySelectorAll('.pv-med img');
+    for (var k = 0; k < imgs.length; k++) {
+      (function (im) {
+        im.style.display = 'none';
+        im.addEventListener('load', function () {
+          im.style.display = '';
+          if (im.parentNode) im.parentNode.classList.add('has-img');
+        });
+        im.addEventListener('error', function () { im.style.display = 'none'; });
+        if (im.complete && im.naturalWidth > 0) {
+          im.style.display = '';
+          if (im.parentNode) im.parentNode.classList.add('has-img');
+        }
+      })(imgs[k]);
+    }
+
+    var rp = root.querySelector('.pv-replay');
+    if (rp) rp.addEventListener('click', function () {
+      var r = document.getElementById(ID);
+      if (r) play(r);
+    });
+
+    /* Spark bei verstecktem Tab pausieren (Ruhephasen-Regel) */
+    document.addEventListener('visibilitychange', function () {
+      var r = document.getElementById(ID);
+      if (!r) return;
+      var sp = r.querySelector('.pv-spark');
+      if (sp) sp.style.animationPlayState = document.hidden ? 'paused' : 'running';
+    });
+
+    return root;
+  }
+
+  /* ---------------------------------------------------------------- Play */
+  function reset(root) {
+    clearTimers();
+    var wrap = root.querySelector('.pv-wrap');
+    if (!wrap) return null;
+    var on = root.querySelectorAll('.on,.fly,.lit,.spent,.frist');
+    for (var i = 0; i < on.length; i++) {
+      on[i].classList.remove('on', 'fly', 'lit', 'spent', 'frist');
+    }
+    /* Werte auf Start zurück — Endwerte werden im Verlauf wieder erreicht */
+    var vals = root.querySelectorAll('[data-to]');
+    for (var v = 0; v < vals.length; v++) {
+      var lbl = vals[v].querySelector('.pv-vk');
+      vals[v].textContent = fmtEur(0);
+      if (lbl) vals[v].appendChild(lbl);
+    }
+    wrap.classList.add('playing');
+    /* Reflow erzwingen, damit Keyframes nach dem Reset neu starten */
+    void wrap.offsetWidth;
+    return wrap;
+  }
+
+  /* Endzustand herstellen: transiente Klassen weg → CSS-Default = Endbild.
+     Damit bleibt die Bühne auch nach React-Re-Rendern vollständig sichtbar. */
+  function finish(root) {
+    var wrap = root.querySelector('.pv-wrap');
+    if (wrap) wrap.classList.remove('playing');
+    var tr = root.querySelectorAll('.on,.fly,.lit,.spent,.frist');
+    for (var i = 0; i < tr.length; i++) tr[i].classList.remove('on', 'fly', 'lit', 'spent', 'frist');
+    var vals = root.querySelectorAll('[data-to]');
+    for (var v = 0; v < vals.length; v++) {
+      var lbl = vals[v].querySelector('.pv-vk');
+      vals[v].textContent = fmtEur(parseFloat(vals[v].getAttribute('data-to')) || 0);
+      if (lbl) vals[v].appendChild(lbl);
+    }
+  }
+
+  function play(root) {
+    if (!root) return;
+    if (REDUCE) { finish(root); return; }
+
+    var wrap = reset(root);
+    if (!wrap) return;
+
+    var sheets = root.querySelectorAll('.pv-sheet');
+    var lanes = root.querySelectorAll('.pv-lane');
+    var lanesBox = root.querySelector('.pv-lanes');
+    var drawer = root.querySelector('.pv-drawer');
+    var months = root.querySelector('.pv-months');
+    var today = root.querySelector('.pv-today');
+    var todayF = root.querySelector('.pv-todayfull');
+    var spine = root.querySelector('.pv-spine');
+    var chips = root.querySelectorAll('.pv-chip');
+    var netLbl = root.querySelector('.pv-nl');
+    var count = root.querySelector('.pv-count');
+    var total = root.querySelector('.pv-total');
+    var totalV = root.querySelector('.pv-tv');
+
+    /* 1 — Achse legt sich hin */
+    later(function () { if (months) months.classList.add('on'); }, 320);
+
+    /* 2 — je Vertrag: Blatt fliegt aus der Schublade, Lane erscheint,
+           Band zeichnet sich, Wert zählt hoch (Stagger 180 ms) */
+    for (var i = 0; i < lanes.length; i++) {
+      (function (idx) {
+        var t = 760 + idx * 180;
+        later(function () { if (sheets[idx]) sheets[idx].classList.add('fly'); }, t - 240);
+        later(function () {
+          if (lanes[idx]) lanes[idx].classList.add('on');
+          var vEl = lanes[idx] ? lanes[idx].querySelector('.pv-val') : null;
+          if (vEl) {
+            var lbl = vEl.querySelector('.pv-vk');
+            var target = parseFloat(vEl.getAttribute('data-to')) || 0;
+            var num = document.createElement('span');
+            /* Count-up direkt auf dem Wert-Knoten, Label bleibt erhalten */
+            var t0 = 0, last = 0, done = false;
+            function setv(x) {
+              vEl.textContent = fmtEur(x);
+              if (lbl) vEl.appendChild(lbl);
+            }
+            function fin() { if (done) return; done = true; setv(target); }
+            function step(ts) {
+              if (!t0) t0 = ts;
+              var p = Math.min(1, (ts - t0) / 1050);
+              if (ts - last >= 38 || p === 1) { last = ts; setv(target * (1 - Math.pow(1 - p, 3))); }
+              if (p < 1 && !done) requestAnimationFrame(step); else fin();
+            }
+            requestAnimationFrame(step);
+            later(fin, 1240);
+            void num;
+          }
+        }, t);
+      })(i);
+    }
+
+    /* 3 — Schublade ist leer */
+    later(function () { if (drawer) drawer.classList.add('spent'); }, 760 + lanes.length * 180 + 120);
+
+    /* 4 — Kündigungsfristen werden als Zone sichtbar */
+    later(function () { if (lanesBox) lanesBox.classList.add('frist'); }, 1780);
+
+    /* 5 — „heute" fährt über die Achse (das fließende Element) */
+    later(function () {
+      if (today) today.classList.add('on');
+      if (todayF) todayF.classList.add('on');
+    }, 2180);
+
+    /* 6 — Fristen lösen auf: zwei gesichert (grün), eine läuft (rot, pulst) */
+    for (var f = 0; f < lanes.length; f++) {
+      (function (idx) {
+        later(function () {
+          var fl = lanes[idx] ? lanes[idx].querySelector('.pv-flag') : null;
+          if (fl) fl.classList.add('on');
+          if (lanes[idx] && lanes[idx].classList.contains('warn')) lanes[idx].classList.add('lit');
+        }, 3260 + idx * 150);
+      })(f);
+    }
+
+    /* 7 — das Netz spannt sich: Rückgrat, Abgänge, Partner-Kategorien */
+    later(function () { if (netLbl) netLbl.classList.add('on'); }, 3820);
+    later(function () { if (spine) spine.classList.add('on'); }, 3900);
+    for (var c = 0; c < chips.length; c++) {
+      (function (idx) {
+        later(function () { if (chips[idx]) chips[idx].classList.add('on'); }, 4280 + idx * 120);
+      })(c);
+    }
+    later(function () { if (count) count.classList.add('on'); }, 4280 + chips.length * 120);
+
+    /* 8 — Summe des gebundenen Volumens */
+    later(function () {
+      if (total) total.classList.add('on');
+      countTo(totalV, TOTAL, 1050);
+    }, 5020);
+
+    /* 9 — harte Sicherung: Endzustand in jedem Fall (auch bei rAF-Throttling) */
+    later(function () { finish(root); }, 6800);
+  }
+
+  /* -------------------------------------------------- Trigger (self-healing) */
+  function inView(el) {
+    if (!el) return false;
+    var r = el.getBoundingClientRect();
+    var h = window.innerHeight || document.documentElement.clientHeight;
+    return r.top < h * 0.7 && r.bottom > h * 0.15;
+  }
+
+  var poll = null;
+  function tryPlay() {
+    var root = document.getElementById(ID); /* IMMER neu queryen — kein globales root */
+    if (!root) return;
+    if (root.__played) return;
+    if (!inView(root)) return;
+    root.__played = true;
+    play(root);
+    if (poll) { clearInterval(poll); poll = null; }
+  }
+
+  function armTriggers() {
+    window.addEventListener('scroll', tryPlay, { passive: true });
+    window.addEventListener('resize', tryPlay, { passive: true });
+    if (poll) clearInterval(poll);
+    poll = setInterval(tryPlay, 250);
+    setTimeout(function () { if (poll) { clearInterval(poll); poll = null; } }, 20000);
+    try {
+      if (window.IntersectionObserver) {
+        var io = new IntersectionObserver(function (en) {
+          for (var i = 0; i < en.length; i++) if (en[i].isIntersecting) tryPlay();
+        }, { threshold: 0.3 });
+        var r = document.getElementById(ID);
+        if (r) io.observe(r);
+      }
+    } catch (e) { /* IO optional — Polling trägt */ }
+    tryPlay();
+  }
+
+  /* ------------------------------------------------------------ Mount */
+  function findSlot() {
+    /* Einhängepunkt: nach der Einleitung, vor dem Erklärvideo-Abschnitt.
+       Selektoren gegen das #tsisl-Modul; jede Stufe ist ein Fallback. */
+    var isl = document.getElementById('tsisl') || document.querySelector('[id^="tsisl"]');
+    var scope = isl ? (isl.parentNode || document) : document;
+
+    var beforeSel = ['#tsisl-video', '#tsanim5-anchor', '.il-video', '.il-anim', '#tsisl-anim'];
+    for (var i = 0; i < beforeSel.length; i++) {
+      var b = (scope.querySelector ? scope : document).querySelector(beforeSel[i]);
+      if (b && b.parentNode) return { parent: b.parentNode, before: b };
+    }
+    var intro = document.querySelector('.il-intro, #tsisl-intro');
+    if (intro && intro.parentNode) return { parent: intro.parentNode, before: intro.nextSibling };
+    if (isl && isl.parentNode) return { parent: isl.parentNode, before: isl.nextSibling };
+
+    var sc = document.querySelector('.super-content');
+    var nr = document.querySelector('.notion-root');
+    if (sc && nr && nr.parentNode === sc) return { parent: sc, before: nr };
+    if (sc) return { parent: sc, before: null };
+    return null;
+  }
+
+  function cleanup() {
+    var old = document.getElementById(ID);
+    if (old && old.parentNode) old.parentNode.removeChild(old);
+    if (poll) { clearInterval(poll); poll = null; }
+  }
+
+  function mount() {
+    if (!SLUG.test(location.pathname)) { cleanup(); return; }
+    css();
+    var existing = document.getElementById(ID);
+    if (existing && existing.isConnected) return;
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+
+    var slot = findSlot();
+    if (!slot) return;
+    var root = build();
+    if (slot.before) slot.parent.insertBefore(root, slot.before);
+    else slot.parent.appendChild(root);
+
+    if (REDUCE) { finish(root); root.__played = true; return; }
+    armTriggers();
+  }
+
+  function boot() {
+    mount();
+    var tries = 0;
+    var iv = setInterval(function () {
+      mount();
+      if (++tries > 60) clearInterval(iv);
+    }, 300);
+    try {
+      var mo = new MutationObserver(function () { mount(); });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) { /* Retry-Loop trägt */ }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+  window.addEventListener('load', mount);
+})();
+
+
+/* ============================================================
+   #tsanim6 — Erkläranimation Zugänge & Werte (Insel 06)
+   ============================================================ */
+/* ============================================================================
+   #tsanim6 — Erkläranimation „Die Schließfachwand"
+   Seite: /lektionen/zugnge-werte  (Zugänge & Werte)
+   Muster: Tresor-/Schließfachwand — 15 verschlossene Fächer öffnen sich unter
+           einem wandernden Licht-Balken und geben preis, WER was hat.
+   Tasty Studios · Basis #04050a · Akzent #c7b489 · Grün #8FCBAA · Rot #e32552
+   Robustheits-Regel: Endzustand = Default, self-healing Trigger, 26fps Count-up
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  if (window.__tsanim6) return;
+
+  var ID = 'tsanim6';
+  var PATH = /\/lektionen\/zug[a-z-]*nge-werte\/?$/;
+
+  /* ---------------------------------------------------------------------- *
+   * 1) INHALT — Beispielwerte (Niemals-schätzen: als Beispielwert markiert)
+   * ---------------------------------------------------------------------- */
+
+  var PERSONS = [
+    { k: 'inh', n: 'Inhaberin' },
+    { k: 'kue', n: 'Küchenchef' },
+    { k: 'srv', n: 'Serviceleitung' },
+    { k: 'stb', n: 'Steuerbüro' },
+    { k: 'rei', n: 'Reinigung' },
+    { k: 'vrm', n: 'Vermieter' },
+    { k: 'bnk', n: 'Bank' }
+  ];
+
+  var KONTEN = [
+    { e: 'Bankkonto',    n: 'Geschäftskonto',        mk: 'Verfügung',   mv: '15.000,00 €', who: ['inh'],        wl: 'Inhaberin',   st: 'ok' },
+    { e: 'Bankkonto',    n: 'Steuer-Rücklage',       mk: 'Zugriff',     mv: 'nur lesend',  who: ['inh','stb'],  wl: 'Steuerbüro',  st: 'ok' },
+    { e: 'Kreditkarte',  n: 'Einkauf & Online',      mk: 'Limit',       mv: '5.000,00 €',  who: ['kue'],        wl: 'Küchenchef',  st: 'ok' },
+    { e: 'Einzahlung',   n: 'Tageslosung / Nachtsafe', mk: 'Einwurf',   mv: 'täglich',     who: ['srv','bnk'],  wl: 'Serviceleitung', st: 'ok' },
+    { e: 'Online-Zugang',n: 'Banking & 2FA-Gerät',   mk: 'Gerät liegt', mv: 'im Tresor',   who: ['inh'],        wl: 'Inhaberin',   st: 'ok' },
+    { e: 'Vollmacht',    n: 'Kontovollmacht',        mk: 'hinterlegt',  mv: 'bei der Bank',who: ['kue','bnk'],  wl: 'Küchenchef',  st: 'ok' },
+    { e: 'Zahlungsanbieter', n: 'Kartenterminal',    mk: 'Auszahlung',  mv: 'Geschäftskonto', who: ['inh'],     wl: 'Inhaberin',   st: 'ok' },
+    { e: 'Lastschrift',  n: 'SEPA-Mandate Lieferanten', mk: 'Freigabe', mv: 'Steuerbüro',  who: ['stb'],        wl: 'Steuerbüro',  st: 'ok' }
+  ];
+
+  var SCHLUESSEL = [
+    { e: 'Schlüssel 01', n: 'Haupteingang',        mk: 'Pfand',    mv: '50,00 €',    who: ['inh'],       wl: 'Inhaberin',      st: 'ok' },
+    { e: 'Schlüssel 02', n: 'Lieferanteneingang',  mk: 'Pfand',    mv: '50,00 €',    who: ['kue'],       wl: 'Küchenchef',     st: 'ok' },
+    { e: 'Schlüssel 03', n: 'Kühlhaus & Lager',    mk: 'Rückgabe', mv: 'offen',      who: ['srv'],       wl: 'Serviceleitung', st: 'warn' },
+    { e: 'Code',         n: 'Tresor & Kasse',      mk: 'Kennen',   mv: '2 Personen', who: ['inh','srv'], wl: 'Inhaberin',      st: 'ok' },
+    { e: 'Code',         n: 'Alarmanlage',         mk: 'Kennen',   mv: '3 Personen', who: ['inh','srv','rei'], wl: 'Reinigung', st: 'ok' },
+    { e: 'Schlüssel 04', n: 'Reinigung / Zweitsatz', mk: 'Rückgabe', mv: 'quittiert', who: ['rei'],      wl: 'Reinigung',      st: 'ok' },
+    { e: 'Schlüssel 05', n: 'Vermieter / Notzugang', mk: 'Pfand',  mv: '110,00 €',   who: ['vrm'],       wl: 'Vermieter',      st: 'ok' }
+  ];
+
+  var SEAL = [
+    { k: 'Zugänge dokumentiert', to: 15,    dec: 0, suf: '' },
+    { k: 'Verfügungsrahmen',     to: 20000, dec: 2, suf: ' €' },
+    { k: 'Schlüsselpfand',       to: 210,   dec: 2, suf: ' €' },
+    { k: 'Rückgabe offen',       to: 1,     dec: 0, suf: '', warn: true }
+  ];
+
+  /* ---------------------------------------------------------------------- *
+   * 2) CSS
+   * ---------------------------------------------------------------------- */
+
+  var CSS = [
+    '#tsanim6{--zwg:#c7b489;--zwgd:199,180,137;--zwok:#8FCBAA;--zwwarn:#e32552;',
+    '  --zwdisp:"Lineal TS","Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+    '  --zwsans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
+    '  display:block;position:relative;margin:20px auto 60px;max-width:1180px;padding:0 24px;',
+    '  font-family:var(--zwsans);color:#fff;-webkit-font-smoothing:antialiased;}',
+
+    /* Sektions-Kopf */
+    '#tsanim6 .zw-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px;}',
+    '#tsanim6 .zw-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--zwsans);',
+    '  letter-spacing:.16em;text-transform:uppercase;color:var(--zwg);margin:0 0 12px;}',
+    '#tsanim6 .zw-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--zwg);',
+    '  box-shadow:0 0 10px rgba(var(--zwgd),.85);flex:0 0 auto;}',
+    '#tsanim6 .zw-title{font-family:var(--zwdisp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);',
+    '  line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0;color:#fff;}',
+    '#tsanim6 .zw-title span{color:var(--zwg);}',
+    '#tsanim6 .zw-sub{margin:16px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.7);}',
+
+    /* Bühne */
+    '#tsanim6 .zw-wrap{position:relative;}',
+    '#tsanim6 .zw-stage{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}',
+    '#tsanim6 .zw-col{position:relative;}',
+    '#tsanim6 .zw-col-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;',
+    '  padding:0 4px 12px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:14px;}',
+    '#tsanim6 .zw-col-l{font:600 10px/1 var(--zwsans);letter-spacing:.14em;text-transform:uppercase;color:var(--zwg);}',
+    '#tsanim6 .zw-col-c{font:600 10px/1 var(--zwsans);letter-spacing:.1em;color:rgba(255,255,255,.34);',
+    '  font-variant-numeric:tabular-nums;}',
+    '#tsanim6 .zw-body{position:relative;display:flex;flex-direction:column;gap:10px;}',
+
+    /* Fach */
+    '#tsanim6 .zw-box{position:relative;perspective:1000px;border-radius:13px;}',
+    '#tsanim6 .zw-face{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;',
+    '  padding:13px 16px;border-radius:13px;background:rgba(255,255,255,.035);',
+    '  border:1px solid rgba(var(--zwgd),.28);box-shadow:0 24px 60px rgba(0,0,0,.45);',
+    '  transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-box.alert .zw-face{border-color:rgba(227,37,82,.4);background:rgba(227,37,82,.05);}',
+    '#tsanim6 .zw-num{font:700 12px/1 var(--zwsans);letter-spacing:.06em;color:rgba(var(--zwgd),.75);',
+    '  font-variant-numeric:tabular-nums;width:22px;}',
+    '#tsanim6 .zw-eyb{font:600 8.5px/1 var(--zwsans);letter-spacing:.12em;text-transform:uppercase;',
+    '  color:rgba(255,255,255,.4);margin-bottom:6px;}',
+    '#tsanim6 .zw-name{font-family:var(--zwdisp);font-weight:600;font-size:14.5px;line-height:1.2;color:#fff;}',
+    '#tsanim6 .zw-meta{display:flex;align-items:baseline;gap:7px;margin-top:6px;padding-top:6px;',
+    '  border-top:1px solid rgba(255,255,255,.09);}',
+    '#tsanim6 .zw-mk{font:400 11.5px/1 var(--zwsans);color:rgba(255,255,255,.5);}',
+    '#tsanim6 .zw-mv{font:700 12.5px/1 var(--zwsans);color:var(--zwg);font-variant-numeric:tabular-nums;}',
+    '#tsanim6 .zw-box.alert .zw-mv{color:var(--zwwarn);}',
+    '#tsanim6 .zw-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right;}',
+    '#tsanim6 .zw-who{font:600 11px/1 var(--zwsans);color:rgba(255,255,255,.82);white-space:nowrap;}',
+    '#tsanim6 .zw-st{display:inline-flex;align-items:center;gap:6px;font:600 9.5px/1 var(--zwsans);',
+    '  letter-spacing:.09em;text-transform:uppercase;color:var(--zwok);white-space:nowrap;}',
+    '#tsanim6 .zw-st i{width:5px;height:5px;border-radius:50%;background:var(--zwok);',
+    '  box-shadow:0 0 8px rgba(143,203,170,.5);}',
+    '#tsanim6 .zw-st.warn{color:var(--zwwarn);}',
+    '#tsanim6 .zw-st.warn i{background:var(--zwwarn);box-shadow:0 0 8px rgba(227,37,82,.55);',
+    '  animation:zwBreath 3.6s cubic-bezier(.22,1,.36,1) infinite;}',
+
+    /* Tür (Endzustand = offen/unsichtbar = Default) */
+    '#tsanim6 .zw-door{position:absolute;inset:0;border-radius:13px;background:#0b0d14;',
+    '  border:1px solid rgba(var(--zwgd),.22);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),',
+    '  inset 0 1px 0 rgba(var(--zwgd),.09);display:flex;align-items:center;gap:14px;padding:0 16px;',
+    '  transform-origin:left center;backface-visibility:hidden;pointer-events:none;',
+    '  opacity:0;transform:rotateY(-108deg);',
+    '  transition:transform .78s cubic-bezier(.16,1,.3,1),opacity .42s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-dnum{font:700 12px/1 var(--zwsans);letter-spacing:.06em;color:rgba(var(--zwgd),.5);',
+    '  font-variant-numeric:tabular-nums;width:22px;}',
+    '#tsanim6 .zw-slot{flex:1;height:1px;background:linear-gradient(90deg,rgba(var(--zwgd),.05),',
+    '  rgba(var(--zwgd),.3) 42%,rgba(var(--zwgd),.05));}',
+    '#tsanim6 .zw-lock{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(var(--zwgd),.42);}',
+    '#tsanim6 .zw-wrap.playing .zw-box:not(.open) .zw-door{opacity:1;transform:rotateY(0deg);}',
+    '#tsanim6 .zw-wrap.playing .zw-box:not(.open) .zw-face{opacity:0;transform:translateX(-6px);}',
+    '#tsanim6 .zw-wrap.zw-still .zw-door,#tsanim6 .zw-wrap.zw-still .zw-face{transition:none!important;}',
+
+    /* Licht-Balken */
+    '#tsanim6 .zw-scan{position:absolute;left:-6px;right:-6px;top:0;height:2px;border-radius:2px;',
+    '  background:linear-gradient(90deg,rgba(var(--zwgd),0),rgba(var(--zwgd),.95) 50%,rgba(var(--zwgd),0));',
+    '  box-shadow:0 0 22px rgba(var(--zwgd),.6);opacity:0;pointer-events:none;',
+    '  transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-scan.on{opacity:1;}',
+
+    /* Trägerleiste */
+    '#tsanim6 .zw-rail{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:center;gap:9px;',
+    '  padding-top:22px;border-top:1px solid rgba(255,255,255,.08);}',
+    '#tsanim6 .zw-p{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;',
+    '  background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.06);',
+    '  font:600 11.5px/1 var(--zwsans);color:rgba(255,255,255,.26);',
+    '  transition:color .5s cubic-bezier(.22,1,.36,1),border-color .5s cubic-bezier(.22,1,.36,1),',
+    '  background-color .5s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-p b{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.14);display:block;',
+    '  transition:background-color .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-p.lit{color:#fff;border-color:rgba(var(--zwgd),.5);background:rgba(var(--zwgd),.08);}',
+    '#tsanim6 .zw-p.lit b{background:var(--zwg);box-shadow:0 0 9px rgba(var(--zwgd),.8);}',
+    '#tsanim6 .zw-p.hit{animation:zwHit .9s cubic-bezier(.22,1,.36,1) 1;}',
+
+    /* Siegel / Summenleiste */
+    '#tsanim6 .zw-seal{margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;',
+    '  border-radius:16px;overflow:hidden;background:rgba(var(--zwgd),.16);',
+    '  border:1px solid rgba(var(--zwgd),.34);}',
+    '#tsanim6 .zw-sk{background:#06070d;padding:18px 18px 16px;text-align:center;}',
+    '#tsanim6 .zw-sk .k{font:600 9.5px/1 var(--zwsans);letter-spacing:.12em;text-transform:uppercase;',
+    '  color:rgba(255,255,255,.4);display:block;margin-bottom:10px;}',
+    '#tsanim6 .zw-sk .v{font-family:var(--zwdisp);font-weight:600;font-size:clamp(1.05rem,2vw,1.5rem);',
+    '  line-height:1;color:var(--zwg);font-variant-numeric:tabular-nums;display:block;}',
+    '#tsanim6 .zw-sk.warn .v{color:var(--zwwarn);}',
+
+    /* Fuß */
+    '#tsanim6 .zw-foot{margin-top:22px;display:flex;align-items:center;justify-content:center;',
+    '  gap:18px;flex-wrap:wrap;}',
+    '#tsanim6 .zw-note{font:400 12px/1.5 var(--zwsans);color:rgba(255,255,255,.34);text-align:center;}',
+    '#tsanim6 .zw-replay{display:inline-flex;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;',
+    '  background:transparent;border:1px solid rgba(var(--zwgd),.45);color:var(--zwg);cursor:pointer;',
+    '  font:600 11.5px/1 var(--zwsans);letter-spacing:.08em;text-transform:uppercase;',
+    '  transition:background-color .45s cubic-bezier(.22,1,.36,1),border-color .45s cubic-bezier(.22,1,.36,1),',
+    '  color .45s cubic-bezier(.22,1,.36,1);}',
+    '#tsanim6 .zw-replay:hover{background:rgba(var(--zwgd),.1);border-color:rgba(var(--zwgd),.75);color:#efe6d2;}',
+    '#tsanim6 .zw-replay svg{width:13px;height:13px;display:block;}',
+
+    /* Keyframes */
+    '@keyframes zwHit{0%{transform:translateY(0) scale(1)}',
+    '  38%{transform:translateY(-3px) scale(1.045)}100%{transform:translateY(0) scale(1)}}',
+    '@keyframes zwBreath{0%,62%,100%{opacity:1;box-shadow:0 0 8px rgba(227,37,82,.55)}',
+    '  31%{opacity:.45;box-shadow:0 0 14px rgba(227,37,82,.2)}}',
+
+    /* Mobile */
+    '@media(max-width:820px){',
+    '  #tsanim6{padding:0 16px;margin-top:24px;}',
+    '  #tsanim6 .zw-stage{grid-template-columns:1fr;gap:34px;}',
+    '  #tsanim6 .zw-seal{grid-template-columns:1fr 1fr;}',
+    '  #tsanim6 .zw-face{grid-template-columns:auto 1fr;gap:11px;padding:12px 14px;}',
+    '  #tsanim6 .zw-side{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;',
+    '    text-align:left;padding-top:9px;border-top:1px solid rgba(255,255,255,.07);}',
+    '}',
+
+    /* Reduced motion */
+    '@media(prefers-reduced-motion:reduce){',
+    '  #tsanim6 .zw-door{display:none!important;}',
+    '  #tsanim6 .zw-scan{display:none!important;}',
+    '  #tsanim6 .zw-face{opacity:1!important;transform:none!important;}',
+    '  #tsanim6 .zw-p{color:#fff;border-color:rgba(var(--zwgd),.5);background:rgba(var(--zwgd),.08);}',
+    '  #tsanim6 .zw-p b{background:var(--zwg);}',
+    '  #tsanim6 .zw-st.warn i{animation:none!important;}',
+    '  #tsanim6 *{transition:none!important;}',
+    '}'
+  ].join('');
+
+  function injectCSS() {
+    if (document.getElementById(ID + '-style')) return;
+    var s = document.createElement('style');
+    s.id = ID + '-style';
+    s.textContent = CSS;
+    (document.head || document.documentElement).appendChild(s);
+  }
+
+  /* ---------------------------------------------------------------------- *
+   * 3) Helfer
+   * ---------------------------------------------------------------------- */
+
+  function esc(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function fmt(v, dec, suf) {
+    var s = Number(v).toLocaleString('de-DE', {
+      minimumFractionDigits: dec, maximumFractionDigits: dec
+    });
+    return s + (suf || '');
+  }
+  function reduced() {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    catch (e) { return false; }
+  }
+
+  function boxHTML(d, i) {
+    var n = pad(i + 1);
+    return '<div class="zw-box' + (d.st === 'warn' ? ' alert' : '') + '" data-who="' + d.who.join(',') + '">' +
+      '<div class="zw-face">' +
+        '<div class="zw-num">' + n + '</div>' +
+        '<div class="zw-main">' +
+          '<div class="zw-eyb">' + esc(d.e) + '</div>' +
+          '<div class="zw-name">' + esc(d.n) + '</div>' +
+          '<div class="zw-meta"><span class="zw-mk">' + esc(d.mk) + '</span>' +
+            '<span class="zw-mv">' + esc(d.mv) + '</span></div>' +
+        '</div>' +
+        '<div class="zw-side">' +
+          '<span class="zw-who">' + esc(d.wl) + '</span>' +
+          '<span class="zw-st' + (d.st === 'warn' ? ' warn' : '') + '"><i></i>' +
+            (d.st === 'warn' ? 'Rückgabe offen' : 'dokumentiert') + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="zw-door"><span class="zw-dnum">' + n + '</span>' +
+        '<i class="zw-slot"></i><span class="zw-lock"></span></div>' +
+    '</div>';
+  }
+
+  function colHTML(label, count, list) {
+    var h = '<div class="zw-col"><div class="zw-col-h">' +
+      '<span class="zw-col-l">' + esc(label) + '</span>' +
+      '<span class="zw-col-c">' + pad(count) + ' Positionen</span></div>' +
+      '<div class="zw-body"><div class="zw-scan"></div>';
+    for (var i = 0; i < list.length; i++) h += boxHTML(list[i], i);
+    return h + '</div></div>';
+  }
+
+  /* ---------------------------------------------------------------------- *
+   * 4) Bau — Endzustand ist der Default (kein opacity:0-Grunddefault)
+   * ---------------------------------------------------------------------- */
+
+  function build() {
+    var sec = document.createElement('section');
+    sec.id = ID;
+
+    var html =
+      '<div class="zw-head">' +
+        '<div class="zw-eyebrow"><i></i>Wer hat was</div>' +
+        '<h2 class="zw-title">Jeder Zugang hat einen <span>Namen</span>.</h2>' +
+        '<p class="zw-sub">Konten, Vollmachten, Schlüssel und Codes liegen sonst im Kopf des Chefs. ' +
+        'Hier stehen sie in einem Register, das auch dann trägt, wenn er nicht da ist.</p>' +
+      '</div>' +
+      '<div class="zw-wrap">' +
+        '<div class="zw-stage">' +
+          colHTML('Bankkonten & Zugänge', KONTEN.length, KONTEN) +
+          colHTML('Schlüssel & Codes', SCHLUESSEL.length, SCHLUESSEL) +
+        '</div>' +
+        '<div class="zw-rail">';
+
+    for (var p = 0; p < PERSONS.length; p++) {
+      html += '<span class="zw-p lit" data-p="' + PERSONS[p].k + '"><b></b>' + esc(PERSONS[p].n) + '</span>';
+    }
+
+    html += '</div><div class="zw-seal">';
+    for (var s = 0; s < SEAL.length; s++) {
+      var o = SEAL[s];
+      html += '<div class="zw-sk' + (o.warn ? ' warn' : '') + '">' +
+        '<span class="k">' + esc(o.k) + '</span>' +
+        '<span class="v" data-to="' + o.to + '" data-dec="' + o.dec + '" data-suf="' + o.suf + '">' +
+        fmt(o.to, o.dec, o.suf) + '</span></div>';
+    }
+    html += '</div>' +
+      '<div class="zw-foot">' +
+        '<span class="zw-note">Euro-Beträge sind Beispielwerte eines Musterbetriebs.</span>' +
+        '<button type="button" class="zw-replay" aria-label="Animation neu abspielen">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Neu abspielen</button>' +
+      '</div>' +
+    '</div>';
+
+    sec.innerHTML = html;
+
+    var btn = sec.querySelector('.zw-replay');
+    if (btn) btn.addEventListener('click', function () {
+      var r = document.getElementById(ID);
+      if (r) play(r, true);
+    });
+
+    return sec;
+  }
+
+  /* ---------------------------------------------------------------------- *
+   * 5) Choreografie — root wird IMMER lokal übergeben
+   * ---------------------------------------------------------------------- */
+
+  var timers = [];
+  function clearTimers() {
+    for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+    timers = [];
+  }
+  function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+  /* Count-up, gedrosselt auf ~26 fps gegen den Mutation-Storm.
+     Sicherheitsnetz: wenn rAF nicht (mehr) feuert, steht am Ende trotzdem
+     der Endwert — der Inhalt hängt NIE an der Animation. */
+  function animVal(el, to, dec, suf, dur) {
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      el.textContent = fmt(to, dec, suf);
+    }
+    setTimeout(finish, dur + 500);
+    if (typeof requestAnimationFrame !== 'function') { finish(); return; }
+
+    var t0 = 0, last = 0;
+    function step(ts) {
+      if (done) return;
+      if (!t0) { t0 = ts; last = ts; }
+      var p = Math.min(1, (ts - t0) / dur);
+      if (ts - last >= 38 || p === 1) {
+        last = ts;
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(to * e, dec, suf);
+      }
+      if (p < 1) requestAnimationFrame(step);
+      else finish();
+    }
+    requestAnimationFrame(step);
+  }
+
+  function pulsePersons(root, keys) {
+    for (var i = 0; i < keys.length; i++) {
+      var chip = root.querySelector('.zw-p[data-p="' + keys[i] + '"]');
+      if (!chip) continue;
+      chip.classList.remove('hit');
+      void chip.offsetWidth;
+      chip.classList.add('lit');
+      chip.classList.add('hit');
+    }
+  }
+
+  function play(root, force) {
+    if (!root) return;
+    if (reduced()) { root.dataset.played = '1'; return; }
+    if (root.dataset.played === '1' && !force) return;
+    root.dataset.played = '1';
+
+    clearTimers();
+
+    var wrap = root.querySelector('.zw-wrap');
+    if (!wrap) return;
+
+    var boxes = [].slice.call(root.querySelectorAll('.zw-box'));
+    var scans = [].slice.call(root.querySelectorAll('.zw-scan'));
+    var chips = [].slice.call(root.querySelectorAll('.zw-p'));
+    var vals = [].slice.call(root.querySelectorAll('.zw-sk .v'));
+
+    /* Reset ohne Transition (Türen schließen sich nicht sichtbar zurück) */
+    wrap.classList.add('zw-still');
+    wrap.classList.add('playing');
+    boxes.forEach(function (b) { b.classList.remove('open'); });
+    chips.forEach(function (c) { c.classList.remove('lit', 'hit'); });
+    scans.forEach(function (s) { s.classList.remove('on'); s.style.transform = 'translateY(0px)'; });
+    vals.forEach(function (v) {
+      v.textContent = fmt(0, parseInt(v.dataset.dec, 10) || 0, v.dataset.suf || '');
+    });
+    void wrap.offsetWidth;
+    wrap.classList.remove('zw-still');
+
+    /* Sequenz: erst Konten, dann Schlüssel — Licht-Balken läuft die Wand ab */
+    var START = 340, STEP = 145;
+    var order = boxes;
+
+    order.forEach(function (box, i) {
+      at(START + i * STEP, function () {
+        var live = document.getElementById(ID);
+        if (!live || !live.contains(box)) return;
+        var scan = box.parentNode.querySelector('.zw-scan');
+        if (scan) {
+          scan.classList.add('on');
+          scan.style.transform = 'translateY(' + (box.offsetTop + box.offsetHeight / 2) + 'px)';
+        }
+        box.classList.add('open');
+        var who = (box.getAttribute('data-who') || '').split(',').filter(Boolean);
+        at(180, function () { pulsePersons(live, who); });
+      });
+    });
+
+    /* Licht-Balken ausblenden, sobald seine Spalte durch ist */
+    scans.forEach(function (scan) {
+      var own = [].slice.call(scan.parentNode.querySelectorAll('.zw-box'));
+      var lastIdx = order.indexOf(own[own.length - 1]);
+      at(START + lastIdx * STEP + 620, function () { scan.classList.remove('on'); });
+    });
+
+    var END = START + order.length * STEP + 260;
+
+    /* Siegel: Summen zählen hoch */
+    at(END, function () {
+      var live = document.getElementById(ID);
+      if (!live) return;
+      [].slice.call(live.querySelectorAll('.zw-sk .v')).forEach(function (v, i) {
+        at(i * 130, function () {
+          animVal(v, parseFloat(v.dataset.to) || 0,
+            parseInt(v.dataset.dec, 10) || 0, v.dataset.suf || '', 1050);
+        });
+      });
+    });
+
+    at(END + 900, function () {
+      var live = document.getElementById(ID);
+      if (live) {
+        var w = live.querySelector('.zw-wrap');
+        if (w) w.classList.remove('playing');
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------------- *
+   * 6) Self-healing Trigger — re-queryen, nie modul-globales root halten
+   * ---------------------------------------------------------------------- */
+
+  function inView(el, ratio) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (r.height === 0) return false;
+    var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    return vis > 0 && vis / Math.min(r.height, vh) >= (ratio || .3);
+  }
+
+  function tryPlay() {
+    var root = document.getElementById(ID);
+    if (!root || root.dataset.played === '1') return;
+    if (inView(root, .3)) play(root, false);
+  }
+
+  var ioBound = false;
+  function bindIO(root) {
+    if (ioBound || !('IntersectionObserver' in window)) return;
+    try {
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            var live = document.getElementById(ID);
+            if (live && live.dataset.played !== '1') play(live, false);
+          }
+        }
+      }, { threshold: .3 });
+      io.observe(root);
+      ioBound = true;
+    } catch (e) { /* Fallback bleibt scroll */ }
+  }
+
+  /* ---------------------------------------------------------------------- *
+   * 7) Mount
+   * ---------------------------------------------------------------------- */
+
+  function matches() {
+    try { return PATH.test(location.pathname); } catch (e) { return false; }
+  }
+
+  function findAnchor(root) {
+    /* Einhängepunkt: nach der Einleitung, VOR dem Erklärvideo.
+       Erstes Video/Embed suchen und bis zum direkten Kind von root hochlaufen. */
+    var v = root.querySelector('.notion-video, .notion-embed, video, iframe');
+    if (!v) return null;
+    var host = v;
+    var guard = 0;
+    while (host && host.parentNode && host.parentNode !== root && guard++ < 40) host = host.parentNode;
+    return (host && host.parentNode === root) ? host : null;
+  }
+
+  function mount() {
+    if (!matches()) return;
+    injectCSS();
+    if (document.getElementById(ID)) { bindIO(document.getElementById(ID)); tryPlay(); return; }
+
+    var sec = build();
+
+    /* 1) gepinnter #tsisl-Anker hat Vorrang (deterministisch, Insel-Renderer-Slot) */
+    var pinned = document.getElementById('tsanim6-anchor');
+    if (pinned && pinned.parentNode) {
+      pinned.parentNode.insertBefore(sec, pinned.nextSibling);
+      bindIO(sec);
+      tryPlay();
+      return;
+    }
+
+    /* 2) Fallback: erstes Video/Embed in der echten Notion-Root suchen */
+    var root = document.querySelector('.notion-root') ||
+               document.querySelector('main') ||
+               document.body;
+    if (!root) return;
+
+    var anchor = findAnchor(root);
+    if (anchor) root.insertBefore(sec, anchor);
+    else root.appendChild(sec);
+
+    bindIO(sec);
+    tryPlay();
+  }
+
+  var mo = null;
+  function boot() {
+    mount();
+    if (mo) return;
+    var t = null;
+    mo = new MutationObserver(function () {
+      clearTimeout(t);
+      t = setTimeout(mount, 200);
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  window.addEventListener('scroll', tryPlay, { passive: true });
+  window.addEventListener('resize', tryPlay, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  window.__tsanim6 = { mount: mount, play: function () { play(document.getElementById(ID), true); } };
+})();
+
+
+/* ============================================================
    #tsisl — Insel-Lektionen der Operations Area (config-getrieben)
    Rendert die volle 9-Abschnitt-Anatomie (Hero+Einleitung,
    Erkläranimation, Erklärvideo-Mockup, Warenkorb-Anker, Ergebnis-
@@ -14561,7 +19196,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Team & <span class="il-g">Onboarding</span>',
     lead:'Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.',
     intro:['In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.','Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.'],
-    anim:{type:'checklist', head:{eyebrow:'Wie Onboarding wirklich läuft', h:'Vom ersten Tag bis <span class="il-g">startklar</span>', sub:'Jeder neue Mitarbeiter geht dieselbe Checkliste durch. Nichts hängt am Zufall.'}, unit:'Schritte', rows:['Willkommen & Orientierung','Hygiene-Grundlagen','Rollen & Verantwortung','Wichtigste SOPs','Erste Einweisung (unter Aufsicht)','§43 IfSG-Belehrung','Buddy zuweisen','Sicherheits-Rundgang']},
+    animAnchor:'tsanim1-anchor', /* #tsanim1 — eigenständige Erkläranimation Team & Onboarding, ersetzt generischen checklist-Renderer */
     video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungsausgabe und Urlaub wirken wie vier getrennte Listen. Tatsächlich hängen sie alle an derselben Person. Du legst einen Mitarbeiter genau einmal an, danach zieht sich jede weitere Tabelle ihre Informationen aus dieser einen Zeile.','Im Alltag merkst du den Unterschied sofort. An der Person siehst du, welche Kleidung ausgegeben wurde und welcher Pfand dafür hinterlegt ist, welcher Nachweis wann abläuft und wann Urlaub beantragt wurde. Du blätterst nirgendwo mehr nach.','So wird aus vier losen Listen ein Personal-System, das mitdenkt, statt dich bei jeder Frage neu suchen zu lassen.'], close:'Öffne dir dafür eine leere Seite in Notion und nenne sie Team und Onboarding. Mehr brauchst du im Moment nicht vorzubereiten. Die vier Datenbanken dahinter bauen wir gleich gemeinsam auf, eine nach der anderen. Jede Karte im Warenkorb ist eine Spalte, die du einmal anlegst und danach nie wieder von Hand pflegen musst.'},
     wk:[
       {id:'ops_team_onb', eyebrow:'Onboarding · Checkliste', title:'Dein <span>Onboarding</span>. Schritt für Schritt.'},
@@ -14581,7 +19216,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Checklisten & <span class="il-g">Produktion</span>',
     lead:'Der Unterschied zwischen gutem und chaotischem Betrieb ist nicht Talent, sondern Wiederholbarkeit.',
     intro:['Im Kopf ist alles klar. Bis der Laden voll ist, zwei Leute krank sind und die neue Kraft zum ersten Mal allein schließt. Dann zeigt sich, was wirklich dokumentiert war und was nur Gewohnheit.','Diese Insel macht aus dem Bauchgefühl ein System: Checklisten für den Takt, Audits für die Kontrolle, Produktionslisten für die Küche und eine Waste-Erfassung, die jeden Verlust in Euro sichtbar macht.'],
-    anim:{type:'checklist', head:{eyebrow:'Das Store-Audit am iPad', h:'Aus Bauchgefühl wird eine <span class="il-g">Mängelliste</span>', sub:'Jede Frage hat eine Antwort: Ja oder Nein. Was auf Nein steht, landet automatisch in der Optimierungsliste.'}, unit:'Prüfpunkte', rows:['Store-Eindruck & Grundordnung','Service & Auftreten','Küche & Produktion','Hygiene','Waren & Bestand','Allergene & Sicherheit','Führung & Team','Prozesse & Alltag']},
+    animAnchor:'tsanim2-slot', /* #tsanim2 — eigenständige Erkläranimation Checklisten & Produktion, ersetzt generischen checklist-Renderer */
     video:{h:'Checkliste oder <span class="il-g">SOP</span>?', p:['Eine Checkliste sagt dir, was abzuhaken ist. Eine SOP sagt dir, wie genau es gemacht wird. Beide gehören zusammen und werden deshalb über eine Verknüpfung verbunden: Zur Checkliste Kassenabschluss gehört die SOP mit dem genauen Ablauf, eine Ebene tiefer jederzeit abrufbar.','Jede Aufgabe bekommt zusätzlich einen Turnus, eine Wichtigkeit und eine verantwortliche Rolle. Damit ist geklärt, was täglich läuft, was wöchentlich, und wer es übernimmt, wenn du selbst nicht im Haus bist.','Nichts geht unter, weil alles einen festen Platz und einen Besitzer hat. Und du erkennst beim Blick auf die Liste, welche Aufgabe seit Wochen niemand mehr angefasst hat.'], close:'Lege dir eine leere Seite mit dem Namen Checklisten und Produktion an, mehr ist jetzt nicht nötig. Im nächsten Schritt bauen wir die Datenbank gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus einer Liste ein Werkzeug macht, mit dem sich der Betrieb wirklich steuern lässt.'},
     wk:[
       {id:'ops_check_audit', eyebrow:'Audit · Store-Check', title:'Dein <span>Audit</span>. Frage für Frage.'},
@@ -14601,7 +19236,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Hygiene, Behörden & <span class="il-g">Handbücher</span>',
     lead:'Eine Kontrolle ist kein Problem, wenn du vorbereitet bist. Sie ist ein Problem, wenn du suchst.',
     intro:['Das Gesundheitsamt kommt unangekündigt. Das Finanzamt und der Zoll können dich existenziell treffen. Wer dann in Ordnern blättert, hat schon verloren.','Diese Insel macht aus Angst vor Kontrolle ein planbares Spielfeld: Das Hygienehandbuch dokumentiert jedes Mittel, die Behörden-Übersicht zeigt wer wann kommt, die Pflichtdokumente laufen nie unbemerkt ab, und das Management-Handbuch hält die Antworten für den Ernstfall bereit.'],
-    anim:{type:'grid', head:{eyebrow:'Wer kann bei dir klingeln', h:'Neun Behörden, <span class="il-g">ein Überblick</span>', sub:'Für jede weißt du vorab: wie oft, ob unangekündigt, und wie hoch das Risiko bei einem Verstoß ist.'}, label:'Kontrollbereiche', nodes:['Gesundheitsamt','Finanzamt','Zoll','Gewerbeaufsicht','Brandschutz','Bauamt','Umweltamt','Arbeitsschutz','Ordnungsamt']},
+    animAnchor:'tsanim3-anchor', /* #tsanim3 — eigenständige Erkläranimation Hygiene, Behörden & Handbücher, ersetzt generischen grid-Renderer */
     video:{h:'Pflicht ist <span class="il-g">nachweisbar</span>', p:['Jeder, der mit Lebensmitteln arbeitet, braucht eine gültige Belehrung nach Paragraf 43 und eine Hygienebelehrung. Die Pflichtdokumente-Logik verbindet dafür zwei Ebenen: welcher Nachweis überhaupt Pflicht ist und wie lange er gilt, und welche Person ihn besitzt und wann er abläuft.','Aus dieser Kombination entsteht ein Ablaufdatum je Mitarbeiter und eine Erinnerung, die vierzehn Tage vorher anspringt. Du wirst gewarnt, bevor jemand ohne gültigen Nachweis in der Küche steht.','Bei einer Kontrolle ziehst du die Datei mit einem Klick, statt im Ordner zu blättern. Das gilt für jeden Nachweis, vom Gesundheitszeugnis bis zur Brandschutzunterweisung.'], close:'Lege dir eine leere Seite mit dem Namen Hygiene und Behörden an, das reicht für den Moment vollkommen aus. Nimm dir dafür ruhig zehn Minuten Zeit, mehr braucht es nicht. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die deine Prüfungssicherheit ein Stück erhöht.'},
     wk:[
       {id:'ops_hyg_produkte', eyebrow:'Hygiene · Reinigungsmittel', title:'Dein <span>Hygienehandbuch</span>. Mittel für Mittel.'},
@@ -14621,7 +19256,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Inventur & <span class="il-g">Bestand</span>',
     lead:'Dein Lager ist Geld, das nur anders aussieht.',
     intro:['Zwei Dinge werden ständig verwechselt. Der laufende Wareneinsatz, also alles, was du verbrauchst und nachkaufst, und der Festwert, also das langlebige Inventar, das Jahr für Jahr im Betrieb bleibt. Beide zählst du anders.','Diese Insel baut die Festwert-Inventur sauber auf und zeigt klar, wo die monatliche Inventurliste und das Packaging andocken, ohne dass du dieselbe Zahl doppelt pflegst.'],
-    anim:{type:'stack', head:{eyebrow:'Was der Festwert wirklich ist', h:'Menge mal Preis, <span class="il-g">Zeile für Zeile</span>', sub:'Jeder Posten trägt seinen eigenen Wert. Summiert ergibt das den Festwert, der in den Jahresabschluss geht.'}, unit:'€', rows:[{label:'Tafelmesser · 180 Stück',val:324},{label:'Bratpfanne 28cm · 6 Stück',val:270},{label:'Wasserkaraffe · 10 Stück',val:80}], totalLabel:'Festwert gesamt'},
+    animAnchor:'tsanim4-anchor', /* #tsanim4 — eigenständige Erkläranimation Inventur & Bestand, ersetzt generischen stack-Renderer */
     video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt drei Zahlen: den aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, springt die Zeile auf ein Nachbestell-Signal um, mit hinterlegtem Lieferanten und Bestell-Link direkt daneben.','Damit hört die Inventur auf, ein Termin einmal im Jahr zu sein. Sie wird zu einer Liste, die dich das ganze Jahr über warnt, bevor etwas ausgeht, und die im Dezember trotzdem den sauberen Wert für den Jahresabschluss liefert.','Aus Zählen wird Steuern, und aus einer lästigen Pflicht ein Werkzeug, das dir Arbeit abnimmt. Der Mindestbestand ist dabei die eigentliche Intelligenz der ganzen Tabelle.'], close:'Lege dir eine leere Seite mit dem Namen Inventur und Bestand an, mehr brauchst du nicht vorzubereiten. Ein Titel und eine leere Seite genügen völlig. Im nächsten Schritt bauen wir die Festwert-Liste gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus deiner Zählung eine belastbare Zahl für den Abschluss macht.'},
     wk:[
       {id:'ops_inv_festwert', eyebrow:'Festwert · Jahresinventur', title:'Dein <span>Festwert</span>. Stück für Stück.'}
@@ -14640,7 +19275,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Partner & <span class="il-g">Verträge</span>',
     lead:'Der teuerste Vertrag ist der, dessen Kündigungsfrist du verpasst.',
     intro:['Jeder Betrieb sammelt über die Jahre Dutzende laufende Verträge: Wartung, Software, Versicherung, Miete. Und ein Netz aus Dienstleistern, die man genau dann sucht, wenn etwas kaputt ist.','Diese Insel bringt beides an einen Ort. Die Dienstleister-Übersicht als schnelles Verzeichnis, die Vertragsübersicht mit Wert, Laufzeit und Frist, damit keine Verlängerung und keine Kündigung mehr durchrutscht.'],
-    anim:{type:'stack', head:{eyebrow:'Was in deinen Verträgen steckt', h:'Jeder Vertrag hat einen <span class="il-g">Wert</span>', sub:'Summiert zeigt sich schnell, wie viel Geld pro Jahr über laufende Verträge gebunden ist.'}, unit:'€', rows:[{label:'Metro Cash & Carry · Lieferant',val:48000},{label:'Barausstattung Bartscher',val:16500},{label:'Spülmaschinen-Service Hobart',val:7600}], totalLabel:'Vertragsvolumen'},
+    animAnchor:'tsanim5-anchor', /* #tsanim5 — eigenständige Erkläranimation Partner & Verträge, ersetzt generischen stack-Renderer */
     video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt dir daneben, was läuft, was noch zur Unterschrift ansteht und was bereits gekündigt ist.','Der wichtigste Teil ist die Frist. Aus Ende und Kündigungsfrist rechnet die Tabelle den Tag aus, an dem du spätestens entscheiden musst. Damit verlängert sich kein Vertrag mehr still um ein weiteres Jahr, nur weil niemand den Kalender im Kopf hatte.','Die Verknüpfung zum Lieferpartner holt den passenden Ansprechpartner automatisch dazu, ohne erneutes Tippen. Damit steht die Vertragsakte vollständig an einer Stelle, statt verteilt auf Ordner und Postfächer.'], close:'Lege dir eine leere Seite mit dem Namen Partner und Verträge an, das genügt vorerst. Der Rest entsteht Schritt für Schritt beim Mitbauen. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir ein Stück Kontrolle über deine laufenden Kosten zurückgibt.'},
     wk:[
       {id:'ops_part_vertraege', eyebrow:'Verträge · Übersicht', title:'Deine <span>Verträge</span>. Frist im Blick.'},
@@ -14660,7 +19295,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     titleHTML:'Zugänge & <span class="il-g">Werte</span>',
     lead:'Kontrolle über einen Betrieb heißt Kontrolle darüber, wer worauf Zugriff hat.',
     intro:['Passwörter im Kopf, Schlüssel in der Schublade, Bareinzahlungen auf Zetteln. Solange nichts passiert, geht das gut. Beim ersten Personalwechsel oder der ersten Nachfrage vom Steuerberater wird es teuer.','Diese Insel bringt das Sensible in geordnete Bahnen: eine nachvollziehbare Zugangs-Hoheit, eine lückenlose Einzahlungs-Doku und eine Schlüsselliste, die im Verlustfall sofort Antwort gibt.'],
-    anim:{type:'grid', head:{eyebrow:'Wer hat Zugriff worauf', h:'Zugänge unter <span class="il-g">Kontrolle</span>', sub:'Nicht das Passwort ist der Wert, sondern die Übersicht: welcher Zugang, welcher Status, ist die Zwei-Faktor-Sicherung aktiv.'}, label:'Zugänge', nodes:['Kasse / POS','Payment','Banking','Shop','Portal','Social','Tech','Behörden','Intern']},
+    animAnchor:'tsanim6-anchor', /* #tsanim6 — eigenständige Erkläranimation Zugänge & Werte, ersetzt generischen grid-Renderer */
     video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage speichert nicht das Geheimnis selbst, sondern die Übersicht darüber: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv und wann wurde zuletzt geändert. Damit beantwortest du beim Personalwechsel die entscheidende Frage, worauf diese Person Zugriff hatte.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index darüber, der die Hoheit sichtbar macht und im Zweifel den Weg zeigt.','Du sperrst gezielt, statt zu raten, und siehst nebenbei, welche Zugänge noch ohne zweite Sicherung laufen. Beim Austritt wird daraus eine Abarbeitungsliste statt einer Erinnerungsübung.'], close:'Lege dir eine leere Seite mit dem Namen Zugänge und Werte an, mehr ist im Moment nicht nötig. Das ist in zwei Minuten erledigt. Danach bauen wir die Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles nachvollziehbar macht, ohne dass ein Passwort in Notion steht.'},
     wk:[
       {id:'ops_zug_bank', eyebrow:'Bankeinzahlungen · Nachweis', title:'Deine <span>Einzahlungen</span>. Lückenlos belegt.'},
@@ -14922,7 +19557,9 @@ var TSISL_ZUG_SCHLUESSEL=[
     if(document.getElementById('tsisl')) return;
     var box=document.createElement('div'); box.id='tsisl';
     var html='<div class="il-intro">'+c.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
-    html+=animHTML(c.anim);
+    /* Slot für die eigens konzipierte Insel-Erkläranimation (#tsanim1…6, siehe oben) —
+       mountet sich selbst über ihren eigenen on()-Slug-Check + MutationObserver. */
+    html+= c.animAnchor ? '<div id="'+c.animAnchor+'"></div>' : animHTML(c.anim);
     html+=videoHTML(c.video);
     html+=wkErgHTML(c.wk,c.ergebnis);
     if(c.zweit) html+=animHTML(c.zweit);
