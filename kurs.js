@@ -13565,7 +13565,7 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 
-/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev13 2026-07-21) ============ */
+/* ============ LEKTION 2.3: Interface-Bau — Grundstruktur & Widgets (rev14 2026-07-21) ============ */
 /* ============================================================
    LEKTION 2.3 — Interface-Bau — Grundstruktur & Widgets
    Slug: /interface-bau-grundstruktur-widgets
@@ -13576,6 +13576,12 @@ var TSISL_TEAM_ONB_V2=[
    Rev 7: Ansichten-Animation ins Ergebnis-Blick-Layout überführt —
    Text links, Laptop klein (max 520px) rechts (.vrow, Werte aus
    .ts2mac-row übernommen).
+   Rev 14 (2026-07-21): #tspc auf den Tasty-Studios-Ketten-Look adaptiert
+   (Robert: soll aussehen wie die Medaillon-Kette der Kalkulations-Seite).
+   7 runde Medaillons mit Logo/Bild auf Schwarz (.pc-med, Werte aus #tsbau),
+   duenne Goldlinie + wachsende Fuell-Linie, Micro-Label oben, Pille mit
+   Tool-Logo unten. Baut sich links->rechts auf. Rechteckige Szenen-Buehne
+   aus rev13 abgeloest.
    Rev 13 (2026-07-21): #tspc grundlegend neu - statt Einzel-Cover-Weg
    jetzt der GANZE Prozess als 7-Stationen-Pipeline (Robert): Datenbank ->
    Prompt (Claude/ChatGPT) -> Generieren (Higgsfield/Gemini/Midjourney) ->
@@ -13899,129 +13905,68 @@ var TSISL_TEAM_ONB_V2=[
     @media(max-width:520px){#tsIface .learn{grid-template-columns:1fr;max-width:300px}}
 
 
-    /* ============ ERKLAERANIMATION "Der ganze Weg" (#tspc) ============
-       EINE Buehne (Fokus-Rahmen), in der der aktive Schritt erscheint. Darunter
-       eine Leiste aus 7 GLEICH grossen Stationen, durch die ein Impuls wandert.
-       Nichts spawnt: Rahmen + Leiste stehen ruhig, es wechselt nur der Szenen-
-       Inhalt im Rahmen. Endzustand = Default: ohne .js steht Schritt 7 (Cover in
-       der Galerie) sichtbar da. */
-    #tsIface .pc-head{max-width:860px;margin:0 auto 48px;padding:0 24px;text-align:center}
+    /* ============ ERKLAERANIMATION "Von Datenbank bis Galerie" (#tspc) ============
+       Medaillon-Kette im Tasty-Studios-Stil (wie #tsbau/#ts11chain): 7 runde
+       Medaillons mit Logo/Bild auf Schwarz, duenne Goldlinien, Micro-Label
+       oben + Pille unten. Baut sich links->rechts auf, Impuls wandert.
+       Endzustand = Default: ohne .js steht die ganze Kette fertig da. */
+    #tsIface .pc-head{max-width:860px;margin:0 auto 46px;padding:0 24px;text-align:center}
     #tsIface .pc-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--beige);margin-bottom:12px}
     #tsIface .pc-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.7)}
     #tsIface .pc-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0 auto;max-width:720px}
 
-    #tsIface .pc-wrap{max-width:640px;margin:0 auto;padding:0 24px}
-    #tsIface .pc-stage{position:relative}
-    #tsIface .pc-frame{position:relative;width:100%}
-    #tsIface .pc-frame::before{content:"";position:absolute;inset:-13% -9%;background:radial-gradient(52% 56% at 50% 46%,rgba(199,180,137,.15),rgba(46,64,120,.10) 48%,transparent 74%);filter:blur(34px);z-index:0;pointer-events:none}
-    #tsIface .pc-canvas{position:relative;z-index:1;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#0a0c12;border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.96);transition:border-color .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+    #tsIface .pc-chainwrap{overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    #tsIface .pc-chainwrap::-webkit-scrollbar{display:none}
+    #tsIface .pc-chain{position:relative;display:grid;grid-template-columns:repeat(7,1fr);min-width:820px;padding:6px 0 2px}
+    /* Grundlinie + Fuell-Linie auf Medaillon-Hoehe (Label 30px + Medaillon-Radius 46px) */
+    #tsIface .pc-track{position:absolute;left:7.14%;right:7.14%;top:76px;height:2px;background:rgba(199,180,137,.20);z-index:0}
+    #tsIface .pc-track-fill{position:absolute;left:7.14%;top:76px;height:2px;width:0;background:linear-gradient(90deg,rgba(199,180,137,.55),var(--beige));z-index:1;transition:width .55s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-track-fill i{position:absolute;right:-4px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.9);opacity:0}
+    #tsIface .pc-wrap.js.moving .pc-track-fill i{opacity:1}
 
-    /* --- Szenen: alle uebereinander, Cross-Fade --- */
-    #tsIface .pcs{position:absolute;inset:0;padding:24px clamp(24px,6%,40px);display:flex;flex-direction:column;justify-content:center;gap:16px;opacity:0;transform:scale(.985);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1);pointer-events:none}
-    #tsIface .pc-wrap:not(.js) .pcs{transition:none}
-    /* Szenen-Kopf: kleine Logos + Micro-Label */
-    #tsIface .pcs-top{display:flex;align-items:center;gap:10px;flex:0 0 auto}
-    #tsIface .pcs-logo{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);box-shadow:0 10px 24px -14px rgba(0,0,0,.9)}
-    #tsIface .pcs-logo img{width:22px;height:22px;object-fit:contain;display:block}
-    #tsIface .pcs-or{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.34);align-self:center}
-    #tsIface .pcs-tag{margin-left:auto;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--beige-lo);align-self:flex-start}
+    #tsIface .pc-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;cursor:pointer;background:transparent;border:0;padding:0}
+    #tsIface .pc-nlabel{min-height:30px;display:flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.34);text-align:center;transition:color .5s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-node.done .pc-nlabel,#tsIface .pc-node.on .pc-nlabel{color:var(--beige)}
 
-    /* Szene 1: Notion-Datenbank-Raster */
-    #tsIface .pc-db{border:1px solid rgba(255,255,255,.10);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.02)}
-    #tsIface .pc-db-row{display:grid;grid-template-columns:1.4fr 1fr .8fr;gap:0}
-    #tsIface .pc-db-row + .pc-db-row{border-top:1px solid rgba(255,255,255,.07)}
-    #tsIface .pc-db-row.head{background:rgba(255,255,255,.03)}
-    #tsIface .pc-db-c{padding:9px 13px;font-size:12px;color:rgba(255,255,255,.7);border-right:1px solid rgba(255,255,255,.06);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    #tsIface .pc-db-row.head .pc-db-c{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-    #tsIface .pc-db-c:last-child{border-right:0}
-    #tsIface .pc-db-c .g{color:var(--beige);font-weight:600;font-variant-numeric:tabular-nums}
+    /* Medaillon */
+    #tsIface .pc-med{position:relative;width:92px;height:92px;border-radius:50%;background:#0b0d14;border:1.5px solid rgba(199,180,137,.2);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.03);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:border-color .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),filter .55s cubic-bezier(.16,1,.3,1);filter:grayscale(.4) brightness(.82)}
+    #tsIface .pc-node.done .pc-med{border-color:rgba(199,180,137,.55);filter:none}
+    #tsIface .pc-node.on .pc-med{border-color:rgba(199,180,137,.85);transform:scale(1.07);filter:none;box-shadow:0 24px 54px -18px rgba(0,0,0,.94),0 0 0 8px rgba(199,180,137,.10)}
+    #tsIface .pc-med img.pc-full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    #tsIface .pc-med .pc-logo{width:40px;height:40px;object-fit:contain;display:block}
+    #tsIface .pc-med .pc-duo{display:flex;gap:7px;align-items:center}
+    #tsIface .pc-med .pc-duo img{width:27px;height:27px;object-fit:contain}
+    #tsIface .pc-fold{width:44px;height:34px;position:relative}
+    #tsIface .pc-fold::before{content:"";position:absolute;inset:0;top:6px;border-radius:5px;background:linear-gradient(160deg,rgba(199,180,137,.6),rgba(199,180,137,.3))}
+    #tsIface .pc-fold::after{content:"";position:absolute;left:0;top:0;width:52%;height:9px;border-radius:5px 5px 0 0;background:rgba(199,180,137,.5)}
 
-    /* Szene 2: Prompt-Text */
-    #tsIface .pc-prompt{}
-    #tsIface .pc-plabel{display:block;font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:11px}
-    #tsIface .pc-pline{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.84)}
-    #tsIface .pc-pline b{color:var(--beige);font-weight:600}
+    /* Pille */
+    #tsIface .pc-pill{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(11,13,20,.82);border:1px solid rgba(199,180,137,.2);border-radius:999px;padding:6px 13px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transform:translateY(6px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1)}
+    #tsIface .pc-node.done .pc-pill,#tsIface .pc-node.on .pc-pill{opacity:1;transform:none;border-color:rgba(199,180,137,.4)}
+    #tsIface .pc-pill img{width:15px;height:15px;object-fit:contain;display:block}
+    #tsIface .pc-pill .pc-plogos{display:inline-flex;gap:6px}
+    #tsIface .pc-pill span{font-size:12px;font-weight:600;letter-spacing:.01em;color:#efe6d2;white-space:nowrap}
 
-    /* geteiltes Tomaten-Bild (Szenen 3,4,6,7) */
-    #tsIface .pc-img{position:relative;flex:1;border-radius:11px;overflow:hidden;background:#05060b;min-height:0}
-    #tsIface .pc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-    #tsIface .pcs-gen .pc-img img{animation:pcResolve 1.1s cubic-bezier(.16,1,.3,1) both}
-    @keyframes pcResolve{0%{opacity:0;filter:blur(16px) saturate(.5);transform:scale(1.08)}100%{opacity:1;filter:none;transform:none}}
-    #tsIface .pc-cardtitle{position:absolute;left:15px;right:15px;bottom:13px;z-index:2}
-    #tsIface .pc-cardtitle::before{content:"";position:absolute;left:-15px;right:-15px;bottom:-13px;height:150%;background:linear-gradient(180deg,transparent,rgba(4,5,10,.85));z-index:-1}
-    #tsIface .pc-cardtitle b{display:block;font-family:var(--disp);font-weight:600;font-size:20px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.9)}
-    #tsIface .pc-cardtitle small{display:block;margin-top:2px;font-size:11.5px;color:rgba(255,255,255,.74)}
-    #tsIface .pcs-canva .pc-cardtitle{animation:pcRise .6s cubic-bezier(.16,1,.3,1) both}
-    @keyframes pcRise{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+    /* ohne JS: alles fertig (Endzustand) */
+    #tsIface .pc-wrap:not(.js) .pc-med{border-color:rgba(199,180,137,.55);filter:none}
+    #tsIface .pc-wrap:not(.js) .pc-nlabel{color:var(--beige)}
+    #tsIface .pc-wrap:not(.js) .pc-pill{opacity:1;transform:none;border-color:rgba(199,180,137,.4)}
+    #tsIface .pc-wrap:not(.js) .pc-track-fill{width:85.72%}
 
-    /* Szene 5: Ordner */
-    #tsIface .pc-folders{display:flex;gap:12px}
-    #tsIface .pc-folder{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;padding:16px 8px 13px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09)}
-    #tsIface .pc-folder.on{border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.08)}
-    #tsIface .pc-fico{width:38px;height:29px;position:relative}
-    #tsIface .pc-fico::before{content:"";position:absolute;inset:0;top:5px;border-radius:4px;background:linear-gradient(160deg,rgba(199,180,137,.55),rgba(199,180,137,.28))}
-    #tsIface .pc-fico::after{content:"";position:absolute;left:0;top:0;width:52%;height:8px;border-radius:4px 4px 0 0;background:rgba(199,180,137,.5)}
-    #tsIface .pc-folder span{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.62)}
-    #tsIface .pc-folder.on span{color:var(--beige-hi)}
-    #tsIface .pcs-folder .pc-folder.on .pc-fico{animation:pcDrop .7s cubic-bezier(.34,1.56,.64,1) both}
-    @keyframes pcDrop{0%{transform:translateY(-14px);opacity:.4}100%{transform:none;opacity:1}}
-
-    /* Szene 6: Upload - Karte bleibt sichtbar, Impuls wandert nach unten ins Ziel */
-    #tsIface .pcs-upload{align-items:center}
-    #tsIface .pc-up{display:flex;flex-direction:column;align-items:center;gap:0;margin:auto}
-    #tsIface .pc-up-card{width:128px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 38px -18px rgba(0,0,0,.92)}
-    #tsIface .pc-up-card img{width:100%;height:100%;object-fit:cover;display:block}
-    #tsIface .pc-up-wire{position:relative;width:2px;height:46px;background:linear-gradient(180deg,rgba(199,180,137,.5),rgba(199,180,137,.14))}
-    #tsIface .pc-up-wire i{position:absolute;left:50%;top:0;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--beige);box-shadow:0 0 12px rgba(199,180,137,.85);opacity:0}
-    #tsIface .pc-wrap.js .pcs-upload.on .pc-up-wire i{animation:pcDown 1.4s cubic-bezier(.22,1,.36,1) infinite}
-    @keyframes pcDown{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:100%}}
-    #tsIface .pc-up-target{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:11px;background:rgba(199,180,137,.08);border:1px solid rgba(199,180,137,.4)}
-    #tsIface .pc-up-target img{width:20px;height:20px;object-fit:contain}
-    #tsIface .pc-up-target span{font-size:12.5px;font-weight:600;color:#fff}
-
-    /* Szene 7: Galerie-Grid mit fertigem Cover */
-    #tsIface .pc-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;min-height:0}
-    #tsIface .pc-gal-c{border-radius:9px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);position:relative}
-    #tsIface .pc-gal-c.ph{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01))}
-    #tsIface .pc-gal-c.star{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 4px rgba(199,180,137,.06)}
-    #tsIface .pc-gal-c.star img{width:100%;height:100%;object-fit:cover;display:block}
-    #tsIface .pc-gal-lbl{position:absolute;left:7px;right:7px;bottom:6px;font-family:var(--disp);font-weight:600;font-size:12px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.95);z-index:2}
-    #tsIface .pc-gal-lbl::before{content:"";position:absolute;left:-7px;right:-7px;bottom:-6px;height:220%;background:linear-gradient(180deg,transparent,rgba(4,5,10,.8));z-index:-1}
-    #tsIface .pcs-gallery .pc-gal-c.star{animation:pcPop .6s cubic-bezier(.34,1.56,.64,1) both}
-    @keyframes pcPop{0%{transform:scale(.9);opacity:0}100%{transform:none;opacity:1}}
-
-    /* aktive Szene */
-    #tsIface .pc-wrap.js .pc-canvas .pcs.on{opacity:1;transform:none;pointer-events:auto}
-    /* Default ohne JS: nur Galerie sichtbar (Endzustand) */
-    #tsIface .pc-wrap:not(.js) .pcs-gallery{opacity:1;transform:none}
-
-    /* --- Stationen-Leiste: 7 gleich grosse Stationen --- */
-    #tsIface .pc-rail{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin:26px auto 0;max-width:100%}
-    #tsIface .pc-rail::before{content:"";position:absolute;left:7.14%;right:7.14%;top:15px;height:2px;background:rgba(255,255,255,.10);z-index:0}
-    #tsIface .pc-rail-fill{position:absolute;left:7.14%;top:15px;height:2px;width:0;background:linear-gradient(90deg,rgba(199,180,137,.6),var(--beige));z-index:1;transition:width .5s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;background:transparent;border:0;padding:0}
-    #tsIface .pc-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:12.5px;font-weight:600;color:rgba(255,255,255,.5);background:#0a0c12;border:1.5px solid rgba(255,255,255,.16);transition:color .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),background .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-nlabel{font-size:10.5px;font-weight:600;letter-spacing:.01em;color:rgba(255,255,255,.4);text-align:center;line-height:1.2;transition:color .4s cubic-bezier(.16,1,.3,1)}
-    #tsIface .pc-node.done .pc-dot{color:var(--beige);border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.10)}
-    #tsIface .pc-node.on .pc-dot{color:#05060b;background:var(--beige);border-color:var(--beige);transform:scale(1.12);box-shadow:0 0 0 5px rgba(199,180,137,.12)}
-    #tsIface .pc-node.on .pc-nlabel{color:var(--beige-hi)}
-    #tsIface .pc-node:hover .pc-dot{border-color:rgba(255,255,255,.34)}
-
-    #tsIface .pc-cap{max-width:640px;margin:24px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
+    #tsIface .pc-cap{max-width:640px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);min-height:76px}
+    #tsIface .pc-note{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.3)}
     #tsIface .pc-foot{text-align:center;margin-top:2px}
     #tsIface .pc-replay{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--beige);background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
     #tsIface .pc-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
 
     @media(max-width:820px){
-      #tsIface .pc-rail{grid-template-columns:repeat(7,1fr)}
-      #tsIface .pc-nlabel{display:none}
+      #tsIface .pc-wrap{padding:0 16px}
+      #tsIface .pc-chain{min-width:720px}
       #tsIface .pc-cap{min-height:120px}
-      #tsIface .pcs{padding:20px 20px}
-      #tsIface .pc-folders{gap:8px}
     }
     @media(prefers-reduced-motion:reduce){
-      #tsIface .pcs{transition:none !important}
-      #tsIface .pcs-gen .pc-img img,#tsIface .pcs-canva .pc-cardtitle,#tsIface .pcs-upload.on .pc-up-wire i,#tsIface .pcs-folder .pc-folder.on .pc-fico,#tsIface .pcs-gallery .pc-gal-c.star{animation:none !important}
+      #tsIface .pc-med,#tsIface .pc-pill,#tsIface .pc-nlabel,#tsIface .pc-track-fill{transition:none !important}
     }
 
     /* ============ ERKLAERVIDEO (#tsvid) — Katalog Abschnitt 03 ============ */
@@ -14130,91 +14075,40 @@ var TSISL_TEAM_ONB_V2=[
 
 
 
-  /* ---------- ERKLAERANIMATION "Der ganze Weg" (7 Schritte) ---------- */
+  /* ---------- ERKLAERANIMATION "Von Datenbank bis Galerie" (Medaillon-Kette) ---------- */
   var PC_SHOT='https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg';
-  var PC_NODES=['Datenbank','Prompt','Generieren','Canva','Ordner','Upload','Galerie'];
   var PC_CAPS=['Erst steht die Datenbank. Jeder Eintrag ist angelegt, nur die Kachel in der Galerie ist noch leer und wartet auf ihr Titelbild.','Jetzt schreibst du den Prompt, die genaue Anweisung ans Bild-Tool. Claude oder ChatGPT helfen dir, sie sauber zu formulieren.','Den Prompt gibst du ins passende Tool. Für unsere Tomate übernimmt Gemini, weil es Lebensmittel am glaubwürdigsten trifft.','In Canva legst du den Titel über die Tomate und setzt einen Schatten darunter, damit die Schrift auf dem Bild lesbar bleibt.','Bevor es zurück nach Notion geht, sortierst du die fertigen Cover in Ordner auf dem Rechner. So findest du später jedes Bild wieder.','Aus dem Ordner lädst du das Cover in den passenden Eintrag hoch. Notion legt es als Titelbild auf die Kachel der Galerie.','Zum Schluss stellst du die Ansicht auf Galerie. Die Kachel zeigt ihr fertiges Cover in der Kartenvorschau, der Eintrag ist am Ziel.'];
-  function pcLogo(src,alt){ return '<span class="pcs-logo"><img src="'+src+'" alt="'+alt+'" loading="lazy"></span>'; }
+  var PC_STEPS=[
+    {lbl:'Datenbank',  med:'<img class="pc-logo" src="'+LG_NOTION+'" alt="Notion">', pill:'<img src="'+LG_NOTION+'" alt=""><span>Notion</span>'},
+    {lbl:'Prompt',     med:'<span class="pc-duo"><img src="'+LG_CLAUDE+'" alt="Claude"><img src="'+LG_OPENAI+'" alt="ChatGPT"></span>', pill:'<span>Claude &middot; ChatGPT</span>'},
+    {lbl:'Generieren', med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Generiertes Bild">', pill:'<span class="pc-plogos"><img src="'+LG_GEMINI+'" alt="Gemini"><img src="'+LG_HIGGS+'" alt="Higgsfield"><img src="'+LG_MIDJOURNEY+'" alt="Midjourney"></span>'},
+    {lbl:'Canva',      med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Bild in Canva">', pill:'<img src="'+LG_CANVA+'" alt=""><span>Canva</span>'},
+    {lbl:'Ordner',     med:'<span class="pc-fold"></span>', pill:'<span>Rechner</span>'},
+    {lbl:'Upload',     med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Upload">', pill:'<img src="'+LG_NOTION+'" alt=""><span>Notion</span>'},
+    {lbl:'Galerie',    med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Cover in der Galerie">', pill:'<span>Kartenvorschau</span>'}
+  ];
   function pcHTML(){
-    var scenes=''+
-      /* 1 Datenbank */
-      '<div class="pcs pcs-db" data-i="0">'+
-        '<div class="pcs-top">'+pcLogo(LG_NOTION,'Notion')+'<span class="pcs-tag">Fundament steht</span></div>'+
-        '<div class="pc-db">'+
-          '<div class="pc-db-row head"><span class="pc-db-c">Zutat</span><span class="pc-db-c">Kategorie</span><span class="pc-db-c">Preis</span></div>'+
-          '<div class="pc-db-row"><span class="pc-db-c">Tomate</span><span class="pc-db-c">Gem&uuml;se</span><span class="pc-db-c g">2,40 &euro;</span></div>'+
-          '<div class="pc-db-row"><span class="pc-db-c">Basilikum</span><span class="pc-db-c">Kr&auml;uter</span><span class="pc-db-c g">1,80 &euro;</span></div>'+
-          '<div class="pc-db-row"><span class="pc-db-c">Parmesan</span><span class="pc-db-c">Milch</span><span class="pc-db-c g">24,90 &euro;</span></div>'+
-        '</div>'+
-      '</div>'+
-      /* 2 Prompt */
-      '<div class="pcs pcs-prompt" data-i="1">'+
-        '<div class="pcs-top">'+pcLogo(LG_CLAUDE,'Claude')+'<span class="pcs-or">oder</span>'+pcLogo(LG_OPENAI,'ChatGPT')+'<span class="pcs-tag">Anweisung ans Bild-Tool</span></div>'+
-        '<div class="pc-prompt">'+
-          '<span class="pc-plabel">Prompt</span>'+
-          '<span class="pc-pline">Eine <b>frische Tomate</b>, freigestellt,</span>'+
-          '<span class="pc-pline">auf <b>schwarzem Hintergrund</b>,</span>'+
-          '<span class="pc-pline">mit weicher <b>Spiegelung</b>.</span>'+
-        '</div>'+
-      '</div>'+
-      /* 3 Generieren */
-      '<div class="pcs pcs-gen" data-i="2">'+
-        '<div class="pcs-top">'+pcLogo(LG_HIGGS,'Higgsfield')+pcLogo(LG_GEMINI,'Gemini')+pcLogo(LG_MIDJOURNEY,'Midjourney')+'<span class="pcs-tag">Bild entsteht</span></div>'+
-        '<div class="pc-img"><img src="'+PC_SHOT+'" alt="Generiertes Tomaten-Bild"></div>'+
-      '</div>'+
-      /* 4 Canva */
-      '<div class="pcs pcs-canva" data-i="3">'+
-        '<div class="pcs-top">'+pcLogo(LG_CANVA,'Canva')+'<span class="pcs-tag">Feinschliff</span></div>'+
-        '<div class="pc-img"><img src="'+PC_SHOT+'" alt="Cover in Canva">'+
-          '<span class="pc-cardtitle"><b>Tomate</b><small>Gem&uuml;se &middot; 2,40 &euro;/kg</small></span>'+
-        '</div>'+
-      '</div>'+
-      /* 5 Ordner */
-      '<div class="pcs pcs-folder" data-i="4">'+
-        '<div class="pcs-top"><span class="pcs-tag">Sauber abgelegt</span></div>'+
-        '<div class="pc-folders">'+
-          '<div class="pc-folder on"><span class="pc-fico"></span><span>Zutaten</span></div>'+
-          '<div class="pc-folder"><span class="pc-fico"></span><span>Gerichte</span></div>'+
-          '<div class="pc-folder"><span class="pc-fico"></span><span>Banner</span></div>'+
-        '</div>'+
-      '</div>'+
-      /* 6 Upload */
-      '<div class="pcs pcs-upload" data-i="5">'+
-        '<div class="pcs-top">'+pcLogo(LG_NOTION,'Notion')+'<span class="pcs-tag">Zur&uuml;ck ins System</span></div>'+
-        '<div class="pc-up">'+
-          '<div class="pc-up-card"><img src="'+PC_SHOT+'" alt="Cover wird hochgeladen"></div>'+
-          '<div class="pc-up-wire"><i></i></div>'+
-          '<div class="pc-up-target"><img src="'+LG_NOTION+'" alt="Notion"><span>Zutatenliste</span></div>'+
-        '</div>'+
-      '</div>'+
-      /* 7 Galerie */
-      '<div class="pcs pcs-gallery" data-i="6">'+
-        '<div class="pcs-top"><span class="pcs-tag">Ansicht &rarr; Galerie</span></div>'+
-        '<div class="pc-gal">'+
-          '<div class="pc-gal-c star"><img src="'+PC_SHOT+'" alt="Tomate Cover"><span class="pc-gal-lbl">Tomate</span></div>'+
-          '<div class="pc-gal-c ph"></div>'+
-          '<div class="pc-gal-c ph"></div>'+
-          '<div class="pc-gal-c ph"></div>'+
-          '<div class="pc-gal-c ph"></div>'+
-          '<div class="pc-gal-c ph"></div>'+
-        '</div>'+
-      '</div>';
     var nodes='';
-    for(var k=0;k<7;k++){
-      nodes+='<button class="pc-node'+(k===0?' on':'')+'" data-s="'+k+'"><span class="pc-dot">'+(k+1)+'</span><span class="pc-nlabel">'+PC_NODES[k]+'</span></button>';
+    for(var k=0;k<PC_STEPS.length;k++){
+      var st=PC_STEPS[k];
+      nodes+='<button class="pc-node'+(k===0?' on':'')+'" data-s="'+k+'">'+
+               '<span class="pc-nlabel">'+st.lbl+'</span>'+
+               '<span class="pc-med">'+st.med+'</span>'+
+               '<span class="pc-pill">'+st.pill+'</span>'+
+             '</button>';
     }
     return '<section class="rev" id="tspc">'+
       '<div class="pc-head">'+
         '<span class="pc-eyebrow">Von Datenbank bis Galerie</span>'+
         '<h2>Sieben Stationen, ein <span class=\"gold\">fertiges Cover</span>.</h2>'+
-        '<p class="pc-sub">Deine Datenbanken stehen, aber die Kacheln in der Galerie haben noch kein Titelbild. Die sieben Stationen unten zeigen an einem Beispiel den kompletten Ablauf, von der fertigen Datenbank bis zum Cover in der Kartenvorschau.</p>'+
+        '<p class="pc-sub">Deine Datenbanken stehen, aber die Kacheln in der Galerie haben noch kein Titelbild. Die sieben Stationen zeigen an einem Beispiel den kompletten Ablauf, von der fertigen Datenbank bis zum Cover in der Kartenvorschau.</p>'+
       '</div>'+
       '<div class="pc-wrap">'+
-        '<div class="pc-stage">'+
-          '<div class="pc-frame"><div class="pc-canvas">'+scenes+'</div></div>'+
-          '<div class="pc-rail"><span class="pc-rail-fill"></span>'+nodes+'</div>'+
-        '</div>'+
-        '<p class="pc-cap">'+PC_CAPS[0]+'</p>'+
+        '<div class="pc-chainwrap"><div class="pc-chain">'+
+          '<span class="pc-track"></span><span class="pc-track-fill"><i></i></span>'+
+          nodes+
+        '</div></div>'+
+        '<p class="pc-cap">'+PC_CAPS[0]+'<span class="pc-note">Beispielwerte</span></p>'+
         '<div class="pc-foot"><button class="pc-replay">Neu abspielen</button></div>'+
       '</div>'+
     '</section>';
@@ -14434,30 +14328,43 @@ var TSISL_TEAM_ONB_V2=[
   }
 
 
-  /* ---------- Choreografie "Der ganze Weg" (7 Schritte) ----------
-     Fokus-Rahmen zeigt je Schritt eine Szene (Cross-Fade), Stationen-Leiste
-     laeuft mit, Fuell-Linie waechst. Endzustand = Default (Szene 7 sichtbar). */
-  var PC_DWELL=[2600,3000,3000,2800,2600,2800,3200];
+  /* ---------- Choreografie "Von Datenbank bis Galerie" (Medaillon-Kette) ----------
+     Kette baut sich links->rechts auf: aktives Medaillon leuchtet + skaliert,
+     erledigte bleiben hell, Fuell-Linie waechst mit wanderndem Impuls.
+     Endzustand = Default (ohne .js ganze Kette fertig). */
+  var PC_DWELL=[2400,2600,2800,2600,2400,2600,3200];
   function initPC(){
     var wrap=document.querySelector('#tspc .pc-wrap');
     if(!wrap || wrap.__pc) return; wrap.__pc=true;
     var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     var nodes=wrap.querySelectorAll('.pc-node');
-    var scenes=wrap.querySelectorAll('.pcs');
-    var fill=wrap.querySelector('.pc-rail-fill');
+    var fill=wrap.querySelector('.pc-track-fill');
     var cap=wrap.querySelector('.pc-cap');
-    var timer=null, beat=-1, playing=false, N=7;
+    var scroller=wrap.querySelector('.pc-chainwrap');
+    var timer=null, moveTO=null, beat=-1, playing=false, N=nodes.length;
 
-    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} }
+    function clearAll(){ if(timer){clearTimeout(timer);timer=null;} if(moveTO){clearTimeout(moveTO);moveTO=null;} }
+    function setCap(i){ if(cap) cap.innerHTML=PC_CAPS[i]+'<span class="pc-note">Beispielwerte</span>'; }
+    function centerNode(i){
+      if(!scroller) return;
+      var n=nodes[i]; if(!n) return;
+      if(scroller.scrollWidth<=scroller.clientWidth+2) return; /* passt ganz rein, kein Scroll */
+      var target=Math.max(0,n.offsetLeft + n.offsetWidth/2 - scroller.clientWidth/2);
+      scroller.scrollLeft=target;
+    }
     function show(i){
       beat=i;
-      for(var k=0;k<scenes.length;k++){ scenes[k].classList.toggle('on', k===i); }
-      for(var n=0;n<nodes.length;n++){
-        nodes[n].classList.toggle('on', n===i);
-        nodes[n].classList.toggle('done', n<i);
+      for(var k=0;k<nodes.length;k++){
+        nodes[k].classList.toggle('on', k===i);
+        nodes[k].classList.toggle('done', k<i);
       }
       if(fill){ fill.style.width=(i/(N-1))*85.72+'%'; }
-      if(cap) cap.textContent=PC_CAPS[i];
+      setCap(i);
+      centerNode(i);
+      // Impuls-Punkt kurz sichtbar waehrend die Linie waechst
+      wrap.classList.add('moving');
+      if(moveTO) clearTimeout(moveTO);
+      moveTO=setTimeout(function(){ wrap.classList.remove('moving'); },600);
     }
     function go(i,auto){
       show(i);
@@ -14466,7 +14373,7 @@ var TSISL_TEAM_ONB_V2=[
     }
     function play(){
       clearAll();
-      if(reduce){ wrap.classList.remove('js'); show(N-1); return; }
+      if(reduce){ wrap.classList.remove('js'); show(N-1); wrap.classList.remove('moving'); return; }
       playing=true;
       wrap.classList.add('js');
       void wrap.offsetWidth;
