@@ -26986,3 +26986,107 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   modul-1-notion-grundlagen — Modul-1-Übersichtsseite (Hero + Intro + 8-Lektionen-Kachel-Register)
+   Slug-Erwartung: Notion-Seite "Modul 1 · Notion-Grundlagen" slugifiziert. Bild-Assets als Platzhalter,
+   Muster analog Modul-2-Übersicht (Hero-IIFE ~Z. 3037, Kachel-Register #tslmod ~Z. 11061 ff.), aber
+   eigens für Modul 1 vereinfacht: Text-Kacheln statt Foto-Kacheln, da noch keine Bild-Assets vorliegen.
+   ============================================================ */
+(function(){
+  function phHero(){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="640">'
+      +'<rect width="1400" height="640" fill="#0b0d14"/>'
+      +'<circle cx="700" cy="300" r="260" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="700" cy="300" r="180" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="700" cy="300" r="130" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="700" y="330" text-anchor="middle" font-family="Georgia,serif" font-size="34" letter-spacing="4" fill="rgba(216,201,171,0.75)">M 1</text>'
+      +'<text x="700" y="540" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="22" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="700" y="572" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="13" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero();
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/modul-1-notion-grundlagen\/?$/.test(location.pathname); }
+
+  var LEKTIONEN=[
+    {n:'1.1', t:'Die Notion-Philosophie & Das Canvas-Prinzip', d:'Blöcke statt Dokumente — die Grundhaltung.', href:'/notion-philosophie-canvas-prinzip'},
+    {n:'1.2', t:'Layout, Medien & Strukturierungs-Tricks', d:'Spalten, Toggles, Embeds, Synced Blocks.', href:'/layout-medien-strukturierung'},
+    {n:'1.3', t:'Einführung in Datenbanken', d:'Seite vs. Datenbank — deine erste eigene Tabelle.', href:'/einfuehrung-datenbanken'},
+    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Aggregationen ziehen.', href:'/relationen-rollups'},
+    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'let(), ifs(), dateBetween() — Formeln, die rechnen.', href:'/formeln-logik-bausteine'},
+    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Eine Datenquelle, viele Blickwinkel.', href:'/ansichten-filter'},
+    {n:'1.7', t:'Native Automations & Buttons', d:'Ein Klick, ein fertiger Eintrag.', href:'/automations-buttons'},
+    {n:'1.8', t:'System-Architektur & Dashboard-Design', d:'Alles läuft an einem Ort zusammen.', href:'/system-architektur-dashboard'}
+  ];
+
+  var CSS = `
+  #ts1mod-intro{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  #ts1mod-intro p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  #ts1mod-intro p:last-child{margin-bottom:0}
+  #ts1mod-intro b{color:#c7b489;font-weight:600}
+  #ts1mod-grid{width:min(1180px,95vw);margin:52px auto 80px;padding:0 clamp(16px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts1mod-grid a.card{display:block;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:22px 20px;text-decoration:none;transition:border-color .35s,transform .35s,box-shadow .35s}
+  #ts1mod-grid a.card:hover{border-color:rgba(199,180,137,.5);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.7),0 0 30px rgba(199,180,137,.14)}
+  #ts1mod-grid .card-n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.4);color:#c7b489;font:700 12px/1 -apple-system,sans-serif;margin-bottom:14px}
+  #ts1mod-grid .card-t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:16.5px;color:#fff;margin:0 0 8px;line-height:1.3}
+  #ts1mod-grid .card-d{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.55);margin:0}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts1mod-css')) return;
+    var s=document.createElement('style'); s.id='ts1mod-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mountHero(sc){
+    if(sc.querySelector('.ts-hero')) return;
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Tasty Studios</div>'+
+        '<h1 class="ts-hero__title"><span class="ts-red">Modul 1</span><br>Notion-Grundlagen</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+  }
+
+  function mountIntro(sc, hero){
+    if(document.getElementById('ts1mod-intro')) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts1mod-intro';
+    wrap.innerHTML='<p>Acht Lektionen, roter Faden ist Roberts eigenes Notion-Projektsystem: von Blöcken über Layout und Datenbanken bis zu Relationen, Formeln, Ansichten und Buttons. Am Ende hast du das System, das er selbst jeden Tag nutzt, konzeptionell nachgebaut.</p><p>Drei Lektionen bauen einen <b>echten interaktiven Warenkorb</b> aus seinen realen Notion-Datenbanken — die restlichen fünf erklären die Grundlagen anhand desselben Systems.</p>';
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  function mountGrid(sc, anchor){
+    if(document.getElementById('ts1mod-grid')) return;
+    var grid=document.createElement('div');
+    grid.id='ts1mod-grid';
+    grid.innerHTML=LEKTIONEN.map(function(l){
+      return '<a class="card" href="'+l.href+'"><span class="card-n">'+l.n+'</span><div class="card-t">'+l.t+'</div><p class="card-d">'+l.d+'</p></a>';
+    }).join('');
+    if(anchor.nextSibling) sc.insertBefore(grid, anchor.nextSibling); else sc.appendChild(grid);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    injectCSS();
+    mountHero(sc);
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    mountIntro(sc, hero);
+    var introEl=document.getElementById('ts1mod-intro'); if(!introEl) return;
+    mountGrid(sc, introEl);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
