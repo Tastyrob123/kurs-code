@@ -21487,9 +21487,15 @@ var TSISL_TEAM_ONB_V2=[
      eine Neuberechnung dieses Abschnitts aus und blockiert den Main-Thread (gemessen ~700ms/1,2s). */
   (function(){
     if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    /* Retry-Loop statt Einmal-Timeout: super.so/Notion braucht manchmal laenger als
+       20s zum Rendern (React-Hydration, Bildladezeiten) -> ein reiner Timeout-Abbruch
+       liesse den Abschnitt dann fuer immer leer bleiben. Bewaehrtes Muster aus dem
+       Warenkorb-Modul: 40 Versuche a 300ms (12s), PLUS MutationObserver fuer sofortige
+       Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
+    var tries=0;
+    var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
   })();
 })();
 
@@ -21654,9 +21660,15 @@ var TSISL_TEAM_ONB_V2=[
      eine Neuberechnung dieses Abschnitts aus und blockiert den Main-Thread (gemessen ~700ms/1,2s). */
   (function(){
     if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    /* Retry-Loop statt Einmal-Timeout: super.so/Notion braucht manchmal laenger als
+       20s zum Rendern (React-Hydration, Bildladezeiten) -> ein reiner Timeout-Abbruch
+       liesse den Abschnitt dann fuer immer leer bleiben. Bewaehrtes Muster aus dem
+       Warenkorb-Modul: 40 Versuche a 300ms (12s), PLUS MutationObserver fuer sofortige
+       Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
+    var tries=0;
+    var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
   })();
 })();
 
@@ -21866,9 +21878,15 @@ var TSISL_TEAM_ONB_V2=[
      eine Neuberechnung dieses Abschnitts aus und blockiert den Main-Thread (gemessen ~700ms/1,2s). */
   (function(){
     if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    /* Retry-Loop statt Einmal-Timeout: super.so/Notion braucht manchmal laenger als
+       20s zum Rendern (React-Hydration, Bildladezeiten) -> ein reiner Timeout-Abbruch
+       liesse den Abschnitt dann fuer immer leer bleiben. Bewaehrtes Muster aus dem
+       Warenkorb-Modul: 40 Versuche a 300ms (12s), PLUS MutationObserver fuer sofortige
+       Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
+    var tries=0;
+    var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
   })();
 })();
 
@@ -21953,9 +21971,15 @@ var TSISL_TEAM_ONB_V2=[
      eine Neuberechnung dieses Abschnitts aus und blockiert den Main-Thread (gemessen ~700ms/1,2s). */
   (function(){
     if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    /* Retry-Loop statt Einmal-Timeout: super.so/Notion braucht manchmal laenger als
+       20s zum Rendern (React-Hydration, Bildladezeiten) -> ein reiner Timeout-Abbruch
+       liesse den Abschnitt dann fuer immer leer bleiben. Bewaehrtes Muster aus dem
+       Warenkorb-Modul: 40 Versuche a 300ms (12s), PLUS MutationObserver fuer sofortige
+       Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
+    var tries=0;
+    var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
   })();
 })();
 
