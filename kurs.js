@@ -11172,10 +11172,8 @@ var TSISL_TEAM_ONB_V2=[
   .tscb .tsccard-bg{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;background:#04050a;pointer-events:none}
   .tscb .tsccard-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
   .tscb .tsccard-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(96% 86% at 50% 62%,rgba(4,5,10,.62) 0%,rgba(4,5,10,.40) 48%,rgba(4,5,10,.14) 78%,rgba(4,5,10,0) 100%)}
-  .tscb .tsccard-logo,.tscb .tsccard-k,.tscb .tsccard-h,.tscb .tsccard-t{position:relative;z-index:2}
+  .tscb .tsccard-logo,.tscb .tsccard-t{position:relative;z-index:2}
   .tscb .tsccard-logo{display:block;height:30px;width:auto;margin:2px auto 14px}
-  .tscb .tsccard-k{display:block;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:8px;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 8px rgba(0,0,0,.8)}
-  .tscb .tsccard-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.18rem;font-weight:600;letter-spacing:-.012em;line-height:1.15;color:#fff;margin:0 0 10px;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.95),0 3px 14px rgba(0,0,0,.9),0 6px 34px rgba(0,0,0,.8)}
   .tscb .tsccard-t{color:rgba(255,255,255,.7);font-size:.84rem;line-height:1.55;margin:0 auto;max-width:30ch;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.85),0 4px 22px rgba(0,0,0,.7)}
   .tscb .tscp-head{text-align:left;margin-bottom:14px}
   .tscb .tscp-eye{font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c7b489}
@@ -11397,19 +11395,19 @@ var TSISL_TEAM_ONB_V2=[
   }
   var PLAYBTN='<button type="button" class="tsc-play"><span class="tsc-play-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span class="tsc-play-label">Abspielen</span></button>';
 
-  /* Cover = Foto-Karte im Stil des Modul-2-Kachelrasters (#tslmod: Bild + Scrim + T-Logo + Kicker +
-     Titel + Text) statt Icon-Animation (Robert-Korrektur 22.07.2026: "Foto in den Hintergrund, Text
-     davor, Logo. Scheiß auf die Animation."). Fotos = dieselben Zutaten-Bildserie-Assets wie im
-     Kachelraster (img/modul2/…), keine neue Generierung nötig. */
+  /* Cover = Foto-Karte im Stil des Modul-2-Kachelrasters (Bild + Scrim + T-Logo + Text), OHNE Kicker/
+     Überschrift — die saß hinter dem Play-Button versteckt und war unnötig (Robert-Korrektur
+     22.07.2026: "Das reicht, wenn nur die Buttons da sind. […] die Überschrift kann weg."). Fotos =
+     dieselben Zutaten-Bildserie-Assets wie im Kachelraster (img/modul2/…). */
   var TSCARD_LOGO='https://files.catbox.moe/au80tp.png';
   var TSCARD_BASE='https://tastyrob123.github.io/kurs/img/modul2/';
-  function coverCard(img,kicker,title,text){
+  function coverCard(img,text){
     return '<div class="tsc-idlecover"><span class="tsccard-bg" aria-hidden="true"><img src="'+TSCARD_BASE+img+'" alt="" loading="lazy"></span>'+
       '<img class="tsccard-logo" src="'+TSCARD_LOGO+'" alt="Tasty Studios" loading="lazy">'+
-      '<span class="tsccard-k">'+kicker+'</span><h3 class="tsccard-h">'+title+'</h3><p class="tsccard-t">'+text+'</p></div>';
+      '<p class="tsccard-t">'+text+'</p></div>';
   }
-  var COVER_A=coverCard('zutaten.jpg','Baustein','Einmal anlegen','Zutat duplizieren, Portionsgröße setzen — fertig ist der Baustein.');
-  var COVER_B=coverCard('inventurliste.jpg','Übersicht','Bausteine anzeigen','Alle Bausteine einer Hauptzutat auf einen Blick.');
+  var COVER_A=coverCard('zutaten.jpg','Zutat duplizieren, Portionsgröße setzen — fertig ist der Baustein.');
+  var COVER_B=coverCard('inventurliste.jpg','Alle Bausteine einer Hauptzutat auf einen Blick.');
 
   /* EIN Section: beide Animationen nebeneinander (2 Spalten), Text je zentriert darunter, je eigener Play-Button. */
   function buildDuo(){
