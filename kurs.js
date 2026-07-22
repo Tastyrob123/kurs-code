@@ -23038,12 +23038,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  (function(){
-    if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
-    mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
-  })();
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23152,12 +23147,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded',mount);
-  (function(){
-    if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
-    mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
-  })();
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23293,12 +23283,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  (function(){
-    if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
-    mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
-  })();
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23367,13 +23352,11 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  /* Beobachter NUR bis zum Einbau: dauerhaft angehaengt wuerde er bei jeder Seitenmutation
-     (auch den ganz normalen Aktualisierungen des globalen #ts-next-wrap durch den Pager)
-     erneut feuern -> war zuvor mit dedupe() in einer Endlosschleife (Prüfer-Fund). */
-  (function(){
-    if(mount()) return;
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
-    mo.observe(document.documentElement,{childList:true,subtree:true});
-    setTimeout(function(){ mo.disconnect(); },20000);
-  })();
+  /* Dauerhafter Beobachter, wie #tsmsa (Abschnitt 02) -- kein 20s-Timeout mehr: unter realer
+     Netzwerk-/Hydration-Last kann die Ankerkette (jeder Abschnitt wartet auf den vorigen) laenger
+     als 20s brauchen; ein zu frueher Abbruch liess die Seite auf super.so komplett leer bleiben
+     (Robert-Meldung "ich sehe nichts", 2026-07-22). mount() bleibt guenstig+idempotent (frueher
+     Ausstieg per getElementById), das dedupe()-Element wurde bereits entfernt -> sicher, kein
+     Endlos-Loop-Risiko wie beim urspruenglichen Fund. */
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
