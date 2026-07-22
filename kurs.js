@@ -11084,28 +11084,20 @@ var TSISL_TEAM_ONB_V2=[
     at(11000,function(){ if(opts&&opts.onEnd) opts.onEnd(); });
   }
 
-  /* Cover = die echte Animation selbst (kein Fremdfoto): läuft automatisch einmal an, sobald die Kachel
-     ins Bild scrollt -> wer nur scrollt, sieht ohne Klick, was in der "Video" passiert. Der Play-Button
-     dient danach als Replay ("Erneut abspielen"). */
+  /* Cover = die echte UI-Karte im Ruhezustand (kein Fremdfoto, reveal() zeigt sie bereits ungeschminkt) —
+     bleibt so stehen, bis geklickt wird. Kein Autoplay: der volle Walkthrough läuft nur auf Klick
+     (Robert-Korrektur 22.07.2026: Auto-Play beim Scrollen ließ gar kein Cover mehr sichtbar werden,
+     weil die Sektion sofort durchlief). Play-Button wird danach zum Replay ("Erneut abspielen"). */
   function armCell(cell, playFn){
     var panel=cell.querySelector('.tsc-anim'), btn=cell.querySelector('.tsc-play'), stage=cell.querySelector('.tsc-stage');
     playFn(panel,{idle:true});
-    var playing=false, started=false;
-    function label(t){ var l=btn&&btn.querySelector('.tsc-play-label'); if(l) l.textContent=t; }
-    function run(){
-      if(playing) return; playing=true; if(btn) btn.classList.add('playing'); if(stage) stage.classList.add('playing');
-      playFn(panel,{onEnd:function(){ playing=false; label('Erneut abspielen'); if(btn) btn.classList.remove('playing'); if(stage) stage.classList.remove('playing'); }});
-    }
-    if(btn) btn.addEventListener('click', run);
-    function inView(){ var r=cell.getBoundingClientRect(); return r.top<innerHeight*0.85 && r.bottom>0; }
-    function maybeStart(){ if(started||!inView()) return; started=true; run(); }
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ maybeStart(); io.disconnect(); } },{threshold:.3});
-      io.observe(cell);
-    }
-    maybeStart();
-    var poll=setInterval(function(){ if(!document.body.contains(cell)){ clearInterval(poll); return; } maybeStart(); if(started) clearInterval(poll); },300);
-    setTimeout(function(){ clearInterval(poll); },15000);
+    if(!btn) return;
+    var playing=false;
+    function label(t){ var l=btn.querySelector('.tsc-play-label'); if(l) l.textContent=t; }
+    btn.addEventListener('click',function(){
+      if(playing) return; playing=true; btn.classList.add('playing'); if(stage) stage.classList.add('playing');
+      playFn(panel,{onEnd:function(){ playing=false; label('Erneut abspielen'); btn.classList.remove('playing'); if(stage) stage.classList.remove('playing'); }});
+    });
   }
   function armDuo(sec){
     if(sec.__armed) return; sec.__armed=true;
