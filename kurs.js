@@ -11365,30 +11365,34 @@ var TSISL_ZUG_SCHLUESSEL=[
 })();
 
 /* ============================================================
-   #tsrezsys — SYSTEMFLUSS (DB V) · /rezepturen  [v4, 2026-07-22]
+   #tsrezsys — ZUTATEN→REZEPTUR (DB V) · /rezepturen  [v5, 2026-07-22]
    Zwischen Finance-Warenkorb (#tsshop--db5_finance_personal) und
-   Learnings (#tsl). Korrekter Graph:
-     Inventarprodukt (DB 0) -> Zutat (DB IV)
-     Zutat -> Rezept (DB V)
-     Zutat -> Gericht/Getraenk (DB VIII)   [direkt, ohne Rezept]
-     Rezept -> Gericht/Getraenk
-     Gericht/Getraenk -> Menue (Kalkulation)
-   v4-Fixes gegen Abschnitt-02-Katalog (Komposition + Robustheit,
-   Robert-Feedback 22.07.2026 "entspricht nicht vorgaben"):
-   (1) ALLE 5 Knoten exakt gleich gross + auf EINER gemeinsamen
-       Achse (Rezept war vorher groesser + angehoben — Doktrin
-       1b(a)/(b) verletzt). Rezept-Akzent nur noch ueber Farbe.
-   (2) Endzustand = Default (Robustheits-Regel): Knoten/Tags sind
-       OHNE JS voll sichtbar; Klasse .js schaltet in den Start-
-       Zustand, .on/.lit bauen die Sequenz wieder auf (#tspc-Muster).
-   (3) "Neu abspielen"-Button ergaenzt (Qualitaets-Gesetz Punkt 6).
+   Learnings (#tsl). Robert-Feedback 22.07.2026 auf v4: "auch müll,
+   neu machen, edler/luxuriöser/anders, mit Bildern". v3/v4 waren
+   abstrakte Kreis-Diagramme — v5 ersetzt das komplett durch echte
+   Food-Fotografie (Bestand, kein Motiv-Recycling: die Bilder liegen
+   bereits im Repo Tastyrob123/kurs unter img/zutaten-cut/, exakt
+   zum Rezepturen-Thema, schwarzer Grund + Spiegelung, Tasty-Look).
+   Konzept (fan-in, wie #tskm strukturell, aber mit Fotos statt
+   Zahlen-Karten — eigene Choreografie, kein Recycling): 4 Zutaten
+   (Basilikum, Knoblauch, Parmesan, Pinienkerne) schweben als
+   gleich grosse Foto-Kacheln auf einer Achse ein, Goldlinien
+   ziehen sich zu einem Punkt zusammen, ein Licht-Impuls läuft auf
+   jeder Linie zum Zentrum, dort materialisiert sich das fertige
+   Ergebnis (Basilikum-Pesto-Glas, grösser = eigene Rolle "Hero",
+   kein Konflikt mit Doktrin 1b da kein Peer der 4 Zutaten-Kacheln).
+   Doktrin-Konformität: die 4 Zutaten-Kacheln sind exakt gleich
+   gross + auf einer Achse (1b a+b); Endzustand = Default (Punkt 10,
+   Kacheln/Hero/Linien ohne JS voll sichtbar, .js schaltet zurueck,
+   #tspc-Muster); "Neu abspielen"-Button (Qualitaets-Gesetz Punkt 6).
    Champagner-Gold #c7b489, Lineal TS 600, reduced-motion-Gate.
    ============================================================ */
 (function(){
   if(window.__tsrezsys) return; window.__tsrezsys=true;
   var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var IMG_BASE='https://tastyrob123.github.io/kurs/img/zutaten-cut/';
   var CSS=`
-  #tsrezsys{width:min(1120px,94vw);margin:clamp(32px,5.5vh,64px) auto clamp(36px,5vh,64px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  #tsrezsys{width:min(980px,94vw);margin:clamp(32px,5.5vh,64px) auto clamp(36px,5vh,64px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
   #tsrezsys.in{opacity:1;transform:none}
   #tsrezsys *{box-sizing:border-box}
   #tsrezsys .rs-head{text-align:center;margin:0 0 clamp(30px,4vw,50px)}
@@ -11396,107 +11400,108 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsrezsys .rs-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   #tsrezsys .rs-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0;color:#fff}
   #tsrezsys .rs-title .g{color:#c7b489}
-  #tsrezsys .stage{position:relative;width:100%;aspect-ratio:1200/300}
-  #tsrezsys svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-  #tsrezsys .ln{fill:none;stroke:#c7b489;stroke-width:1.25;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.55}
-  #tsrezsys .ln.byp{stroke-width:1;stroke-dasharray:2 6;opacity:.32}
-  #tsrezsys .guide{fill:none;stroke:none}
-  #tsrezsys .comet{fill:#f3ead4;filter:drop-shadow(0 0 7px rgba(199,180,137,.95));opacity:0}
-  #tsrezsys .comet.on{opacity:1}
-  #tsrezsys .comet.byp{fill:rgba(243,234,212,.6);filter:drop-shadow(0 0 5px rgba(199,180,137,.6))}
-  /* Endzustand = Default (Robustheits-Regel): Knoten/Punkt sind OHNE JS bereits voll sichtbar */
-  #tsrezsys .nd{position:absolute;top:50%;transform:translate(-50%,-50%) scale(1);opacity:1;transition:opacity .45s ease,transform .55s cubic-bezier(.34,1.56,.64,1)}
-  #tsrezsys .dot{display:block;position:relative;width:46px;height:46px;border-radius:50%;background:radial-gradient(65% 65% at 40% 34%,rgba(255,255,255,.05),rgba(13,16,22,.92));border:1px solid rgba(199,180,137,.85);margin:0 auto;box-shadow:0 0 0 1px rgba(199,180,137,.1),0 0 26px rgba(199,180,137,.18);transition:border-color .55s ease,box-shadow .55s ease}
-  #tsrezsys .dot::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:#ecdfc2;transform:translate(-50%,-50%) scale(1);opacity:1;transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s ease;box-shadow:0 0 10px rgba(199,180,137,.7)}
-  /* Rezept-Knoten: EXAKT gleiche Groesse wie alle anderen (Doktrin 1b) — Akzent nur ueber waermere Farbtemperatur */
-  #tsrezsys .nd.rez .dot{background:radial-gradient(70% 70% at 42% 34%,rgba(199,180,137,.28),rgba(199,180,137,.08) 58%,rgba(15,18,24,.92))}
-  #tsrezsys .nd.rez .lbl .nm{color:#efe6d2}
-  #tsrezsys .lbl{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);width:168px;text-align:center;line-height:1.25}
-  #tsrezsys .lbl .nm{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:600;letter-spacing:-.005em;color:#fff}
-  #tsrezsys .lbl .sub{display:block;font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,201,171,.5);margin-top:4px}
-  /* Kennzahl-Leiste unter dem Flow — edle Hairline-Tags, ebenfalls Default = sichtbar */
-  #tsrezsys .rs-keys{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:clamp(28px,3.6vw,44px) auto 0}
+  /* Zutaten-Reihe — 4 exakt gleich grosse Foto-Kacheln auf einer Achse (Doktrin 1b) */
+  #tsrezsys .rz-ings{display:flex;justify-content:center;align-items:flex-start;gap:clamp(16px,3vw,30px);position:relative;z-index:2}
+  #tsrezsys .rz-ing{width:118px;display:flex;flex-direction:column;align-items:center;opacity:1;transform:scale(1) translateY(0);transition:opacity .5s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  #tsrezsys .rz-ph{width:118px;height:118px;border-radius:16px;overflow:hidden;background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(199,180,137,.28);box-shadow:0 20px 40px -12px rgba(0,0,0,.55);transition:border-color .5s ease,box-shadow .5s ease}
+  #tsrezsys .rz-ph img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+  #tsrezsys .rz-lbl{margin-top:10px;font-size:11.5px;font-weight:600;letter-spacing:.03em;color:rgba(255,255,255,.65);text-align:center}
+  /* Konvergenz-Linien — Zwischenraum zwischen Zutaten und Ergebnis (Opake-Basis-Regel: Linien laufen NICHT unter den Kacheln) */
+  #tsrezsys .rz-lines-wrap{position:relative;width:min(620px,84%);height:clamp(46px,7vw,72px);margin:0 auto;z-index:1}
+  #tsrezsys .rz-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #tsrezsys .rz-ln{fill:none;stroke:#c7b489;stroke-width:1.25;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.5}
+  #tsrezsys .rz-comet{fill:#f3ead4;filter:drop-shadow(0 0 7px rgba(199,180,137,.95));opacity:0}
+  #tsrezsys .rz-comet.on{opacity:1}
+  /* Ergebnis-Hero — eigene Rolle (kein Peer der Zutaten-Kacheln), darf groesser sein */
+  #tsrezsys .rz-hero{position:relative;width:min(280px,72vw);margin:0 auto;text-align:center;z-index:2}
+  #tsrezsys .rz-glow{position:absolute;inset:-22% -30% -10%;background:radial-gradient(60% 60% at 50% 40%,rgba(199,180,137,.32),rgba(199,180,137,0) 72%);filter:blur(28px);opacity:.5;transition:opacity .8s ease;pointer-events:none}
+  #tsrezsys .rz-jar{position:relative;width:100%;display:block;border-radius:18px;opacity:1;transform:scale(1);box-shadow:0 30px 64px -20px rgba(0,0,0,.65);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1),box-shadow .6s ease}
+  #tsrezsys .rz-hero-cap{position:relative;display:block;margin-top:14px;opacity:1;transition:opacity .5s ease,transform .55s cubic-bezier(.34,1.56,.64,1);transform:translateY(0)}
+  #tsrezsys .rz-hero-cap b{display:block;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;font-weight:600;color:#efe6d2;letter-spacing:-.005em}
+  #tsrezsys .rz-hero-cap small{display:block;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,201,171,.5);margin-top:4px}
+  /* Kennzahl-Leiste unter dem Ergebnis — edle Hairline-Tags, ebenfalls Default = sichtbar */
+  #tsrezsys .rs-keys{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:clamp(26px,3.4vw,40px) auto 0}
   #tsrezsys .kp{font-size:11px;font-weight:600;letter-spacing:.05em;color:#d8c9ab;background:rgba(199,180,137,.05);border:1px solid rgba(216,201,171,.28);border-radius:999px;padding:6px 15px;white-space:nowrap;opacity:1;transform:none;transition:opacity .5s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
   #tsrezsys .rs-desc{max-width:680px;margin:clamp(16px,2.2vw,24px) auto 0;text-align:center;font-size:15.5px;line-height:1.65;color:rgba(255,255,255,.9)}
   #tsrezsys .rs-desc .g{color:#c7b489}
   #tsrezsys .rs-foot{display:flex;justify-content:center;margin:clamp(20px,2.8vw,30px) auto 0}
   #tsrezsys .rs-replay{display:inline-flex;align-items:center;gap:8px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:12.5px;font-weight:600;color:#c7b489;background:transparent;border:1px solid rgba(199,180,137,.42);border-radius:999px;padding:8px 17px;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
   #tsrezsys .rs-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);transform:translateY(-2px)}
-  /* Start-Zustand NUR waehrend der Reveal-Sequenz — .js schaltet zurueck (Muster #tspc), .on/.lit gewinnen per Spezifitaet/Reihenfolge zurueck */
-  #tsrezsys.js .nd{opacity:0;transform:translate(-50%,-50%) scale(.72)}
-  #tsrezsys.js .dot{border-color:rgba(216,201,171,.26);box-shadow:none}
-  #tsrezsys.js .dot::after{transform:translate(-50%,-50%) scale(0);opacity:0}
+  /* Start-Zustand NUR waehrend der Reveal-Sequenz — .js schaltet zurueck (Muster #tspc), .on gewinnt per Reihenfolge zurueck */
+  #tsrezsys.js .rz-ing{opacity:0;transform:scale(.7) translateY(14px)}
+  #tsrezsys.js .rz-glow{opacity:0}
+  #tsrezsys.js .rz-jar{opacity:0;transform:scale(.86)}
+  #tsrezsys.js .rz-hero-cap{opacity:0;transform:translateY(8px)}
   #tsrezsys.js .kp{opacity:0;transform:translateY(6px)}
-  #tsrezsys .nd.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  #tsrezsys .nd.lit .dot{border-color:rgba(199,180,137,.85);box-shadow:0 0 0 1px rgba(199,180,137,.1),0 0 26px rgba(199,180,137,.18)}
-  #tsrezsys .nd.rez.lit .dot{border-color:rgba(216,201,171,.95);box-shadow:0 0 0 1px rgba(199,180,137,.12),0 0 40px rgba(199,180,137,.28)}
-  #tsrezsys .nd.lit .dot::after{transform:translate(-50%,-50%) scale(1);opacity:1}
+  #tsrezsys .rz-ing.on{opacity:1;transform:scale(1) translateY(0)}
+  #tsrezsys .rz-hero.on .rz-glow{opacity:.5}
+  #tsrezsys .rz-hero.on .rz-jar{opacity:1;transform:scale(1)}
+  #tsrezsys .rz-hero.on .rz-hero-cap{opacity:1;transform:translateY(0)}
   #tsrezsys .kp.on{opacity:1;transform:none}
   @media(max-width:820px){
-    #tsrezsys .stage-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -3vw;padding-bottom:6px}
-    #tsrezsys .stage{min-width:760px;margin:0 3vw}
+    #tsrezsys .rz-ings{display:grid;grid-template-columns:repeat(2,1fr);max-width:290px;margin:0 auto;gap:16px}
+    #tsrezsys .rz-ing{width:100%}
+    #tsrezsys .rz-ph{width:100%;height:auto;aspect-ratio:1/1}
+    #tsrezsys .rz-lines-wrap{display:none}
+    #tsrezsys .rz-hero{margin-top:22px}
   }
   @media(prefers-reduced-motion:reduce){
     #tsrezsys{opacity:1;transform:none;transition:none}
-    #tsrezsys.js .nd,#tsrezsys .nd{opacity:1;transform:translate(-50%,-50%) scale(1);transition:none}
-    #tsrezsys.js .dot,#tsrezsys.js .dot::after,#tsrezsys.js .kp{opacity:1;transform:none}
-    #tsrezsys .kp,#tsrezsys .comet,#tsrezsys .dot,#tsrezsys .dot::after{transition:none}
+    #tsrezsys.js .rz-ing,#tsrezsys .rz-ing{opacity:1;transform:none;transition:none}
+    #tsrezsys.js .rz-glow,#tsrezsys .rz-glow{opacity:.5;transition:none}
+    #tsrezsys.js .rz-jar,#tsrezsys .rz-jar{opacity:1;transform:none;transition:none}
+    #tsrezsys.js .rz-hero-cap,#tsrezsys .rz-hero-cap{opacity:1;transform:none;transition:none}
+    #tsrezsys.js .kp,#tsrezsys .kp{opacity:1;transform:none;transition:none}
   }
   `;
   function injectCSS(){ if(document.getElementById('tsrezsys-css'))return; var s=document.createElement('style'); s.id='tsrezsys-css'; s.textContent=CSS; document.head.appendChild(s); }
 
-  /* Nodes: [id, left%, klasse, name, sublabel] — ALLE auf einer Baseline (top:50% via CSS), Doktrin 1b: gemeinsame Achse */
-  var NODES=[
-    ['inv', 7.9,  'st',  'Inventarprodukt',  'DB 0'],
-    ['zut', 30,   'zt',  'Zutat',            'DB IV'],
-    ['rez', 52,   'rez', 'Rezept',           'DB V'],
-    ['gg',  74.2, 'dn',  'Gericht / Getränk','DB XI'],
-    ['men', 93.3, 'dn',  'Menü',             'Kalkulation']
+  /* Zutaten: [id, Name, Dateiname] — Bestand aus Tastyrob123/kurs (bereits live), passend zur Beispiel-Rezeptur "Basilikum-Pesto" aus der DB-V-Anleitung */
+  var INGS=[
+    ['bas','Basilikum','basilikum.png'],
+    ['kno','Knoblauch','knoblauch.png'],
+    ['par','Parmesan','parmesan.png'],
+    ['pin','Pinienkerne','pinienkerne.png']
   ];
   function build(){
     var root=document.createElement('div'); root.id='tsrezsys';
-    var nodesHTML='';
-    NODES.forEach(function(n){
-      var lbl='<span class="lbl"><span class="nm">'+n[3]+'</span><span class="sub">'+n[4]+'</span></span>';
-      nodesHTML+='<div class="nd '+n[2]+'" data-id="'+n[0]+'" style="left:'+n[1]+'%"><span class="dot"></span>'+lbl+'</div>';
+    var ingsHTML='';
+    INGS.forEach(function(g){
+      ingsHTML+='<div class="rz-ing" data-id="'+g[0]+'"><div class="rz-ph"><img src="'+IMG_BASE+g[2]+'" alt="'+g[1]+'" loading="lazy"></div><span class="rz-lbl">'+g[1]+'</span></div>';
     });
-    var svg='<svg viewBox="0 0 1200 300" preserveAspectRatio="none">'
-      +'<path class="ln" data-k="a" d="M95,150 H 360"/>'                                     /* Inventarprodukt -> Zutat */
-      +'<path class="ln" data-k="b" d="M360,150 H 625"/>'                                     /* Zutat -> Rezept */
-      +'<path class="ln byp" data-k="c" d="M360,150 C 550,224 700,224 890,150"/>'            /* Zutat -> Gericht/Getraenk (direkt, Shortcut-Annotation) */
-      +'<path class="ln" data-k="d" d="M625,150 H 890"/>'                                     /* Rezept -> Gericht/Getraenk */
-      +'<path class="ln" data-k="e" d="M890,150 H 1120"/>'                                    /* Gericht/Getraenk -> Menue */
-      +'<path class="guide" data-g="main" d="M95,150 L360,150 L625,150 L890,150 L1120,150"/>'
-      +'<path class="guide" data-g="byp" d="M360,150 C550,224 700,224 890,150"/>'
-      +'<circle class="comet" data-p="main" r="4"/><circle class="comet byp" data-p="byp" r="3"/>'
-      +'</svg>';
+    var linesHTML='<div class="rz-lines-wrap"><svg class="rz-lines" viewBox="0 0 1000 100" preserveAspectRatio="none">'
+      +'<path class="rz-ln" data-k="0" d="M125,0 C125,55 500,45 500,100"/>'
+      +'<path class="rz-ln" data-k="1" d="M375,0 C375,55 500,45 500,100"/>'
+      +'<path class="rz-ln" data-k="2" d="M625,0 C625,55 500,45 500,100"/>'
+      +'<path class="rz-ln" data-k="3" d="M875,0 C875,55 500,45 500,100"/>'
+      +'<circle class="rz-comet" data-p="0" r="4"/><circle class="rz-comet" data-p="1" r="4"/><circle class="rz-comet" data-p="2" r="4"/><circle class="rz-comet" data-p="3" r="4"/>'
+      +'</svg></div>';
     root.innerHTML='<div class="rs-head"><span class="rs-eyebrow">Das Rückgrat · DB V</span>'
       +'<h2 class="rs-title">Eine Rezeptur. Das ganze <span class="g">System</span> rechnet mit.</h2></div>'
-      +'<div class="stage-wrap"><div class="stage">'+svg+nodesHTML
-      +'</div></div>'
+      +'<div class="rz-ings">'+ingsHTML+'</div>'
+      +linesHTML
+      +'<div class="rz-hero"><div class="rz-glow"></div><img class="rz-jar" src="'+IMG_BASE+'pesto-glas.png" alt="Basilikum-Pesto — fertige Rezeptur"><span class="rz-hero-cap"><b>Basilikum-Pesto</b><small>Fertige Rezeptur · DB V</small></span></div>'
       +'<div class="rs-keys"><span class="kp" data-i="0">Preis pro Portion</span><span class="kp" data-i="1">Allergene</span><span class="kp" data-i="2">Nährwerte</span></div>'
       +'<p class="rs-desc">Vom Inventarprodukt bis zur Menükalkulation — jede Rezeptur bündelt deine Zutaten und trägt <span class="g">Preis pro Portion, Allergene und Nährwerte</span> durch dein ganzes System.</p>'
       +'<div class="rs-foot"><button type="button" class="rs-replay">↻ Neu abspielen</button></div>';
     return root;
   }
 
-  function q(root,id){return root.querySelector('.nd[data-id="'+id+'"]');}
-  function lit(root,id){var n=q(root,id);if(n){n.classList.add('on');n.classList.add('lit');}}
-  function on(root,id){var n=q(root,id);if(n)n.classList.add('on');}
+  function ing(root,id){return root.querySelector('.rz-ing[data-id="'+id+'"]');}
   function draw(p,dur){var L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p.style.transition='stroke-dashoffset '+dur+'ms cubic-bezier(.4,0,.2,1)';void p.getBoundingClientRect();p.style.strokeDashoffset='0';}
   function resetLine(p){ if(!p)return; p.style.transition='none'; p.style.strokeDasharray=''; p.style.strokeDashoffset=''; }
-  function ln(root,k){return root.querySelector('.ln[data-k="'+k+'"]');}
+  function ln(root,k){return root.querySelector('.rz-ln[data-k="'+k+'"]');}
   function comet(root,which){
-    var guide=root.querySelector('.guide[data-g="'+which+'"]');
-    var c=root.querySelector('.comet[data-p="'+which+'"]');
-    if(!guide||!c)return;
-    var L=guide.getTotalLength(),t0=null,dur=which==='main'?2200:1300;
+    var path=ln(root,which);
+    var c=root.querySelector('.rz-comet[data-p="'+which+'"]');
+    if(!path||!c)return;
+    var L=path.getTotalLength(),t0=null,dur=650;
     c.classList.add('on');
     function step(now){
       if(t0===null)t0=now;
       var pr=Math.min(1,(now-t0)/dur);
       var e=pr<.5?2*pr*pr:1-Math.pow(-2*pr+2,2)/2; // easeInOutQuad
-      var pt=guide.getPointAtLength(L*e);
+      var pt=path.getPointAtLength(L*e);
       c.setAttribute('cx',pt.x);c.setAttribute('cy',pt.y);
       if(pr<1)requestAnimationFrame(step); else c.classList.remove('on');
     }
@@ -11508,8 +11513,9 @@ var TSISL_ZUG_SCHLUESSEL=[
   function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
 
   function finalState(root){
-    root.querySelectorAll('.nd').forEach(function(n){n.classList.add('on','lit');});
-    root.querySelectorAll('.ln').forEach(resetLine);
+    root.querySelectorAll('.rz-ing').forEach(function(n){n.classList.add('on');});
+    root.querySelectorAll('.rz-ln').forEach(resetLine);
+    root.querySelector('.rz-hero').classList.add('on');
     root.querySelectorAll('.kp').forEach(function(k){k.classList.add('on');});
     root.classList.remove('js');
   }
@@ -11518,24 +11524,19 @@ var TSISL_ZUG_SCHLUESSEL=[
     clearTimers();
     root.classList.add('in');
     if(reduced){ finalState(root); return; }
-    root.querySelectorAll('.nd,.kp').forEach(function(n){n.classList.remove('on','lit');});
-    root.querySelectorAll('.ln').forEach(resetLine);
-    root.querySelectorAll('.comet').forEach(function(c){c.classList.remove('on');});
+    root.querySelectorAll('.rz-ing').forEach(function(n){n.classList.remove('on');});
+    root.querySelector('.rz-hero').classList.remove('on');
+    root.querySelectorAll('.kp').forEach(function(k){k.classList.remove('on');});
+    root.querySelectorAll('.rz-ln').forEach(resetLine);
+    root.querySelectorAll('.rz-comet').forEach(function(c){c.classList.remove('on');});
     void root.offsetWidth;
     root.classList.add('js');
-    schedule(function(){on(root,'inv');},200);
-    schedule(function(){lit(root,'inv');},520);
-    schedule(function(){draw(ln(root,'a'),600);},450);
-    schedule(function(){lit(root,'zut');},1050);
-    schedule(function(){draw(ln(root,'b'),550);},1150);
-    schedule(function(){lit(root,'rez');},1750);
-    root.querySelectorAll('.kp').forEach(function(k){schedule(function(){k.classList.add('on');},1950+(+k.getAttribute('data-i'))*160);});
-    schedule(function(){draw(ln(root,'d'),550);},1850);
-    schedule(function(){lit(root,'gg');},2450);
-    schedule(function(){draw(ln(root,'e'),520);comet(root,'main');},2600);
-    schedule(function(){draw(ln(root,'c'),700);comet(root,'byp');},3000);
-    schedule(function(){lit(root,'men');},4900);
-    schedule(function(){root.classList.remove('js');},5500);
+    INGS.forEach(function(g,i){ schedule(function(){ ing(root,g[0]).classList.add('on'); }, 200+i*150); });
+    schedule(function(){ ['0','1','2','3'].forEach(function(k,i){ setTimeout(function(){ draw(ln(root,k),620); }, i*90); }); }, 1000);
+    schedule(function(){ ['0','1','2','3'].forEach(function(k,i){ setTimeout(function(){ comet(root,k); }, i*80); }); }, 1750);
+    schedule(function(){ root.querySelector('.rz-hero').classList.add('on'); }, 2250);
+    root.querySelectorAll('.kp').forEach(function(k){ schedule(function(){ k.classList.add('on'); }, 2550+(+k.getAttribute('data-i'))*160); });
+    schedule(function(){ root.classList.remove('js'); }, 3400);
   }
 
   function inView(el){ var r=el.getBoundingClientRect(); return r.top < (window.innerHeight*0.8) && r.bottom > (window.innerHeight*0.2); }
