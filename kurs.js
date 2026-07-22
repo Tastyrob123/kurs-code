@@ -484,10 +484,6 @@
     ov.innerHTML='<span class="ts-play-btn"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>';
     ov.addEventListener("click",function(){ vid.setAttribute("controls","controls"); try{vid.play();}catch(e){} ov.parentNode&&ov.parentNode.removeChild(ov); });
     vwrap.appendChild(ov);
-    var fs=document.createElement("button"); fs.className="ts-fs"; fs.type="button"; fs.setAttribute("aria-label","Vollbild");
-    fs.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
-    fs.addEventListener("click",function(e){ e.stopPropagation(); var el=vid; var r=el.requestFullscreen||el.webkitRequestFullscreen||el.webkitEnterFullscreen||el.msRequestFullscreen; if(r) r.call(el); });
-    vwrap.appendChild(fs);
   }
   function mount(){
     if(!on()) return;

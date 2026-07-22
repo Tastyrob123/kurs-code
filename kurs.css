@@ -161,13 +161,6 @@ section.notion-tabs {
 }
 .page__zutatenliste .ts-play-overlay:hover .ts-play-btn{ transform:scale(1.08); background:rgba(20,24,38,.7); }
 .page__zutatenliste .ts-play-btn svg{ margin-left:4px; }
-.page__zutatenliste .ts-fs{
-  position:absolute; top:12px; left:12px; z-index:5; width:34px; height:34px;
-  display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:9px; cursor:pointer;
-  background:rgba(10,12,20,.5); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
-  box-shadow:0 2px 10px rgba(0,0,0,.5); transition:background .15s, transform .15s;
-}
-.page__zutatenliste .ts-fs:hover{ background:rgba(20,24,38,.75); transform:scale(1.06); }
 canvas[style*="2147483647"]{ display:none !important; }
 @media (max-width:640px){
   .page__zutatenliste .ts-hero{ min-height:320px; }
