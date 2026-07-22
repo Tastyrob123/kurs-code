@@ -60,6 +60,42 @@
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
+/* ============================================================
+   Sidebar-Collapsible-Haenger-Fix (2026-07-22, Scroll-Fix v5).
+   Robert-Repro: Modul 1 aufklappen, dann Modul 2 aufklappen -> Liste "abgehackt", Trackpad
+   scrollt nicht bis ans Ende. Ursache live per DOM-Messung gefunden: Radix' eigene
+   Aufklapp-Animation (@keyframes slideDown, .18s, animation-fill-mode:forwards) auf
+   .super-navigation-menu__list-items[data-state="open"] bleibt bei "height:0" haengen,
+   OBWOHL Radix selbst die korrekte Zielhoehe bereits per Inline-Custom-Property
+   --radix-collapsible-content-height gemessen hat — sichtbar per getComputedStyle direkt
+   nachvollzogen (Ursache vermutlich: die Sidebar-Text-Wrapper-Observer oben mutieren
+   Textknoten IM selben Sidebar-Baum via splitText/replaceChild und stossen dabei eine
+   Reflow/Restart-Kollision mit der laufenden CSS-Animation an, wenn zwei Module kurz
+   hintereinander geoeffnet werden). Fix: selbstheilend pruefen, ob die gerenderte Hoehe
+   deutlich unter der von Radix selbst gemessenen Zielhoehe liegt — falls ja, die haengende
+   Animation stoppen und die korrekte Hoehe erzwingen (per !important, da eine aktive
+   CSS-Animation sonst sogar eine normale Inline-Hoehe weiter ueberschreibt). */
+(function(){
+  if(window.__tsSbCollapsibleFix) return; window.__tsSbCollapsibleFix = true;
+  function fix(){
+    document.querySelectorAll('.super-navigation-menu__list-items[data-state="open"]').forEach(function(el){
+      var target = el.style.getPropertyValue('--radix-collapsible-content-height');
+      if(!target) return;
+      var targetPx = parseFloat(target);
+      var currentPx = parseFloat(getComputedStyle(el).height) || 0;
+      if(currentPx < targetPx - 2){
+        el.style.setProperty('animation','none','important');
+        el.style.setProperty('height', target, 'important');
+      }
+    });
+  }
+  fix();
+  document.addEventListener('DOMContentLoaded', fix);
+  var _t=null;
+  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; fix(); },250); })
+    .observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['data-state','style']});
+})();
+
 (function () {
   var SEL = '.notion-toggle[class*="notion-toggle-heading"]';
   var booted = false;
