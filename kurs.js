@@ -9969,21 +9969,21 @@ var TSISL_ZUG_SCHLUESSEL=[
     /* Unter „Deine Gemeinkosten. Posten für Posten.“ (DB VI) — PC rechts, Text links. */
     { after:'tsshop--db6_gemeinkosten', side:'right', img:GK_BASE+'gk-kosten-pc.png', shot:GK_SCROLL+'gk-kosten.jpg', cap:'Gemeinkosten nach Monat',
       html:'<h3 class="ts2mac-h">Saubere Gemeinkosten-Erfassung <span class="g">ist die Basis.</span></h3>'
-        +'<p class="ts2mac-p">Miete, Versicherungen, Reinigung, Verwaltung, Instandhaltung, Marketing — jede Gemeinkosten-Position bekommt hier eine eigene Zeile mit Kategorie, Beschreibung, Zeitraum und Betrag. So behältst du jede einzelne Fixkosten-Art im Blick, statt nur eine Summe zu sehen.</p>'
-        +'<p class="ts2mac-p">Zusätzlich hältst du fest, ob eine Kosten wiederkehrend ist und in welchem Turnus sie bezahlt wird — monatlich, vierteljährlich, halbjährlich oder jährlich. Ein Check-Up-Feld zeigt dir auf einen Blick, welche Position schon beglichen ist und welche noch offen ist.</p>'
-        +'<p class="ts2mac-p">Diese Zahlen sind die Berechnungsgrundlage für Deckungsbeitrag II. Ohne sie kennst du nur deinen Rohertrag, nicht deinen tatsächlichen Gewinn — und genau diese Lücke schließt DB VI.</p>' },
+        +'<p class="ts2mac-p">Miete, Versicherungen, Reinigung, Verwaltung, Instandhaltung, Marketing: Jede Position bekommt eine Zeile mit Kategorie, Zeitraum und Betrag, einzeln sichtbar statt nur als Summe.</p>'
+        +'<p class="ts2mac-p">Dazu hältst du fest, ob eine Kosten wiederkehrend ist und in welchem Turnus sie bezahlt wird: monatlich, vierteljährlich, halbjährlich oder jährlich. Ein Check-Up-Feld zeigt, welche Position schon beglichen ist.</p>'
+        +'<p class="ts2mac-p">Diese Zahlen sind die Grundlage für Deckungsbeitrag II. Ohne sie kennst du nur deinen Rohertrag, nicht den tatsächlichen Gewinn.</p>' },
     /* Unter „Deine Gemeinkostenannahmen.“ — PC links, Text rechts. */
     { after:'tsshop--db6_gemeinkostenannahmen', img:GK_BASE+'gk-annahmen-pc.png', shot:GK_SCROLL+'gk-annahmen.jpg', cap:'GK Kosten Annahmen',
       html:'<h3 class="ts2mac-h">Die Rechen-Ebene <span class="g">macht den Unterschied.</span></h3>'
-        +'<p class="ts2mac-p">Aus den Fixkosten wird hier die Rechen-Ebene: Für jeden Monat verknüpfst du die passenden Kostenfaktoren aus DB VI und legst deinen geplanten Absatz fest — die Stückzahl der Produkte, die du in diesem Zeitraum verkaufen willst.</p>'
-        +'<p class="ts2mac-p">Ein Rollup summiert automatisch alle verknüpften Gemeinkosten zu deinen GK-Kosten pro Monat. Du musst nichts von Hand addieren — die Datenbank rechnet live mit, sobald du eine neue Position aus DB VI einhängst.</p>'
-        +'<p class="ts2mac-p">Am Ende steht eine einzige Zahl — die Gemeinkosten pro Produkt. Sie entsteht, indem die Monatskosten durch deine Absatzmenge geteilt werden, und zeigt dir, wie viel jedes verkaufte Gericht an Fixkosten mitträgt.</p>' },
+        +'<p class="ts2mac-p">Aus den Fixkosten wird hier die Rechen-Ebene: Für jeden Monat verknüpfst du die Kostenfaktoren aus DB VI und legst deinen geplanten Absatz fest, die Stückzahl für diesen Zeitraum.</p>'
+        +'<p class="ts2mac-p">Ein Rollup summiert automatisch alle verknüpften Gemeinkosten zu deinen GK-Kosten pro Monat. Die Datenbank rechnet live mit, sobald du eine neue Position aus DB VI einhängst.</p>'
+        +'<p class="ts2mac-p">Am Ende steht eine Zahl: die Gemeinkosten pro Produkt, aus Monatskosten geteilt durch Absatzmenge. Sie zeigt, wie viel jedes Gericht an Fixkosten mitträgt.</p>' },
     /* Unter „Deine Mitarbeiterlöhne. Netto für Netto.“ (DB VII) — PC rechts, Text links. */
     { after:'tsshop--db7_mitarbeiterloehne', side:'right', img:GK_BASE+'ma-loehne-pc.png', shot:GK_SCROLL+'ma-loehne.jpg', cap:'Mitarbeitergehälter',
       html:'<h3 class="ts2mac-h">Echte Arbeitgeberkosten <span class="g">statt Bauchgefühl.</span></h3>'
-        +'<p class="ts2mac-p">Für jeden Mitarbeiter hinterlegst du Name, Rolle, Art der Anstellung und dein Monatsgehalt brutto. Dazu kommt der AG-Kosten-Faktor — die Empfehlung liegt bei 1,25, denn dein Bruttolohn ist nicht deine echte Kostenzahl.</p>'
-        +'<p class="ts2mac-p">Aus Bruttogehalt und AG-Faktor errechnet eine Formel automatisch deine AG-Kosten pro Monat. Eine zweite Formel setzt je nach Anstellungsart die Monatsstunden — Vollzeit, Teilzeit und Minijob unterscheiden sich hier deutlich.</p>'
-        +'<p class="ts2mac-p">Am Ende steht der Stundensatz auf AG-Kosten-Basis — die Zahl, mit der du kalkulierst. Nicht der Bruttolohn aus dem Vertrag, sondern das, was ein Mitarbeiter dich pro Arbeitsstunde tatsächlich kostet.</p>' },
+        +'<p class="ts2mac-p">Für jeden Mitarbeiter hinterlegst du Name, Rolle, Anstellungsart und Bruttogehalt. Dazu kommt der AG-Kosten-Faktor, empfohlen 1,25, denn der Bruttolohn ist nicht deine echte Kostenzahl.</p>'
+        +'<p class="ts2mac-p">Aus Bruttogehalt und AG-Faktor errechnet eine Formel deine AG-Kosten pro Monat. Eine zweite setzt die Monatsstunden je Anstellungsart: Vollzeit, Teilzeit, Minijob.</p>'
+        +'<p class="ts2mac-p">Am Ende steht der Stundensatz auf AG-Kosten-Basis, die Zahl, mit der du kalkulierst, nicht der Bruttolohn aus dem Vertrag, sondern das, was ein Mitarbeiter dich pro Stunde wirklich kostet.</p>' },
     /* Unter "Deine Gerichte & Getränke. Spalte für Spalte." (DB XI) — Ergebnis-Blick, PC rechts, Text links. */
     { after:'tsshop--db8_gerichte', side:'right', img:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/gerichte-db-pc.png', shot:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/scroll/gerichte-db.jpg', cap:'Gerichte & Getränke',
       html:'<h3 class="ts2mac-h">Deine ganze Karte, <span class="g">durchgerechnet.</span></h3>'
