@@ -510,30 +510,33 @@ canvas[style*="2147483647"]{ display:none !important; }
    CSS-FELD (super.so) — Sidebar-Drawer, Hamburger, Kacheln
    ============================================================ */
 
-/* Sidebar als einklappbares Drawer */
+/* Sidebar als einklappbares Drawer.
+   Scroll-Fix v4 (2026-07-22, nach 3 gescheiterten Trackpad-Fix-Versuchen — Robert scrollt
+   mit dem MacBook-Trackpad, Liste blieb trotz Wheel-Chaining-Lock + native Scrollbar immer
+   an derselben Stelle haengen): Safari hat einen bekannten Bug, bei dem `transform` auf
+   einem Vorfahren (hier: die Slide-in-Animation der Sidebar) die Trackpad-/Wheel-Weiterleitung
+   an verschachtelte scrollbare Nachfahren (Radix' .items-viewport) unzuverlaessig macht.
+   Slide-in-Animation deshalb von `transform` auf `left` umgestellt (kein Compositing-Layer
+   mehr, der die Scroll-Weiterleitung stoert) — Radix' eigener Scroll-Mechanismus bleibt
+   dabei UNVERAENDERT (ein direkter Eingriff dort — overflow/height auf .items-wrapper/
+   .items-viewport erzwingen — wurde getestet und bricht Radix' eigene Aufklapp-Animation
+   der Module, siehe Verbatim-Historie in Feld — CSS.md; deshalb NICHT so gebaut). */
 .super-sidebar {
   position: fixed !important;
-  left: 0; top: 0;
+  left: -340px; top: 0;
   height: 100vh;
   z-index: 60;
-  transform: translateX(-100%);
-  transition: transform .28s ease;
+  transition: left .28s ease;
   box-shadow: none !important;
 }
 body:has(#sb-toggle-cb:checked) .super-sidebar {
-  transform: translateX(0);
+  left: 0;
   box-shadow: 4px 0 24px rgba(0,0,0,.45) !important;
 }
 .super-content { max-width: none !important; }
 
-/* Scroll-Fix: die Lektionsliste hat kein eigenes Overflow, sie verlaesst sich
-   auf super.so's internen Radix-Scrollbereich (.super-navigation-menu__items-viewport).
-   Ohne Lock laeuft ein Scroll-/Wheel-Versuch (v.a. nahe der duennen Scrollbar-Spur am
-   rechten Sidebar-Rand oder sobald der interne Bereich sein Ende erreicht) am Viewport
-   vorbei durch bis zur verdeckten Hauptseite dahinter — die Liste bewegt sich nicht mehr,
-   es sieht aus wie "kann nicht bis zum Ende scrollen". overscroll-behavior allein reicht
-   in Safari NICHT (WebKit unterbindet Wheel-Scroll-Chaining darueber unzuverlaessig) —
-   deshalb zusaetzlich html UND body waehrend offenem Drawer hart sperren (Safari kann je
+/* Body/html waehrend offenem Drawer sperren: verhindert, dass ein Wheel-Ueberschuss an
+   der verdeckten Hauptseite dahinter landet statt an der Sidebar-Liste (Safari kann je
    nach Seite html statt body als Scroll-Root nutzen, daher beide). */
 html:has(#sb-toggle-cb:checked),
 body:has(#sb-toggle-cb:checked) { overflow: hidden !important; height: 100% !important; }
@@ -543,15 +546,9 @@ body:has(#sb-toggle-cb:checked) { overflow: hidden !important; height: 100% !imp
 .super-sidebar { overscroll-behavior: contain; }
 .super-navigation-menu__items-viewport { -webkit-overflow-scrolling: touch; }
 
-/* Native Scrollbar als verlaessliches Backup: super.so versteckt die native Scrollbar per
-   [data-radix-scroll-area-viewport]{scrollbar-width:none;...} und verlaesst sich nur auf
-   Radix' eigenen Custom-Thumb (.super-navigation-menu__items-thumb). Dessen Groesse/Position
-   wird per ResizeObserver berechnet und kann bei schnell wachsendem Inhalt (Modul aufklappen)
-   kurzzeitig eine veraltete, zu kurze Gesamthoehe zeigen — der Thumb wirkt dann optisch schon
-   "am Ende", obwohl der native Scroll-Bereich (scrollHeight) technisch bereits korrekt weiter
-   reicht (live geprueft: Radix-Thumb kurzzeitig falsch, natives scrollTop/scrollHeight immer
-   korrekt). Native Scrollbar zusaetzlich sichtbar machen schliesst diese Luecke, weil sie vom
-   Browser direkt aus scrollHeight/clientHeight gezeichnet wird, nie aus Radix' Zustand. */
+/* Native Scrollbar zusaetzlich sichtbar als verlaesslicher, browser-nativer Indikator/
+   Backup neben Radix' eigenem Custom-Thumb (der bei schnell wachsendem Inhalt kurzzeitig
+   eine veraltete Gesamthoehe anzeigen kann, s. Feld — CSS.md Iteration 3). */
 .super-navigation-menu__items-viewport[data-radix-scroll-area-viewport],
 .super-navigation-menu__items-viewport {
   scrollbar-width: thin !important;
