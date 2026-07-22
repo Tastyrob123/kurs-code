@@ -23204,12 +23204,12 @@ var TSISL_TEAM_ONB_V2=[
     '</div>'+
     '<div class="msv-txt">'+
       '<h2 class="msv-h2">So funktioniert die <span class="ts-gold">Ableitung</span></h2>'+
-      '<p>Die eigentliche Trennung passiert vorher, rein in Notion: zwei <b>Teamspaces</b>, einer für die Geschäftsführung mit Master-Inventur und Kalkulation, einer für den Standort mit nur der Zählliste. Wer nicht Mitglied ist, kann die Seite gar nicht öffnen — Berechtigung statt Vorhang.</p>'+
-      '<p>Getrennte Datenbanken müssen aber synchron bleiben: Ändert sich ein Einkaufspreis, muss er in jeder Zählliste ankommen. Claude Code übernimmt das für dich, komplett <b>optional</b> — pflegst du lieber von Hand nach, bleibt die Trennung intakt.</p>'+
-      '<p>Wie diese Verbindung technisch entsteht, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du Claude Code im Detail kennst.</p>'+
+      '<p>Die Trennung passiert vorher, rein in Notion: zwei <b>Teamspaces</b> — einer für die Geschäftsführung mit Master-Inventur und Kalkulation, einer für den Standort mit nur der Zählliste. Wer nicht Mitglied ist, kommt gar nicht rein.</p>'+
+      '<p>Wichtig: keine <b>Notion-Relation</b>, kein Linked View zwischen beiden — das würde die Trennung sofort wieder aufheben, genau wie eine ausgeblendete Spalte. Claude Code liest die Masterliste über die API und schreibt Artikel und Einheit als reine Werte in die Zählliste, komplett <b>optional</b>.</p>'+
+      '<p>Wie diese Verbindung technisch entsteht, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du sie im Detail kennst.</p>'+
     '</div>'+
   '</div>'+
-  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen — sicher arbeitest du schon allein durch die Teamspace-Trennung. Präg dir nur das Prinzip ein: Claude Code hält die getrennten Datenbanken danach optional synchron, damit niemand von Hand nachpflegen muss. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
+  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur die zwei Regeln ein: getrennte Teamspaces, und niemals eine Relation zwischen ihnen. Claude Code hält die getrennten Datenbanken danach optional synchron, damit niemand von Hand nachpflegen muss. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
 
   function injectCSS(){ if(document.getElementById('tsmsv-css'))return;
     var s=document.createElement('style'); s.id='tsmsv-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -23240,9 +23240,9 @@ var TSISL_TEAM_ONB_V2=[
   var P=".page__multistandort-erweiterung-optional";
   function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
   var STEPS=[
-    {n:'01', l:'Liste duplizieren'},
+    {n:'01', l:'Zählliste anlegen'},
     {n:'02', l:'Teamspace anlegen'},
-    {n:'03', l:'Relation verknüpfen'},
+    {n:'03', l:'Ohne Relation befüllen'},
     {n:'04', l:'Testlauf prüfen'}
   ];
   var CSS=`
@@ -23302,9 +23302,9 @@ var TSISL_TEAM_ONB_V2=[
     <h3 class="msemp-h">Empfehlung zur <span class="eg">Einrichtung</span></h3>
     <p class="msemp-intro">Damit ein neuer Standort sauber in die Struktur passt, gehst du diese vier Schritte in genau dieser Reihenfolge:</p>
     <ol class="msemp-ol">
-      <li data-i="0">Dupliziere die <b>Master-Zählliste</b> als Vorlage für den neuen Standort, statt eine neue Liste von Grund auf zu bauen.</li>
+      <li data-i="0">Lege eine eigenständige <b>Zählliste</b> an — eine neue, unabhängige Datenbank für den Standort, keine Kopie mit Relation zur Masterliste.</li>
       <li data-i="1">Lege für den Standort einen eigenen <b>Teamspace</b> an und lade den Manager ausschließlich dort ein — er sieht dann nur, was in diesem Teamspace liegt.</li>
-      <li data-i="2">Verknüpfe die <b>Relation zur Master-Inventur</b>, damit die Ableitung Artikel und Einheit automatisch nachzieht.</li>
+      <li data-i="2">Befülle die Zählliste <b>ohne Relation</b>: Claude Code schreibt Artikel und Einheit als reine Werte hinein, nie als Verknüpfung zurück in die Kalkulation.</li>
       <li data-i="3">Lass den Standort einen <b>ersten Zähldurchlauf</b> machen und prüfe, ob die Menge oben ankommt, bevor der Alltag beginnt.</li>
     </ol>
   </div>
