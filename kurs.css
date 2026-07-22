@@ -533,6 +533,16 @@ body:has(#sb-toggle-cb:checked) .super-sidebar {
 }
 .super-content { max-width: none !important; }
 
+/* Scroll-Fix: die Lektionsliste hat kein eigenes Overflow, sie verlaesst sich
+   auf super.so's internen Radix-Scrollbereich (.super-navigation-menu__items-viewport).
+   Ohne Body-Lock laeuft ein Scroll-Versuch nahe der duennen Scrollbar-Spur (rechter Rand
+   der Sidebar) am Viewport vorbei durch bis zur verdeckten Hauptseite dahinter — die Liste
+   bewegt sich nicht, es sieht aus wie "kann nicht bis zum Ende scrollen". Body waehrend
+   offenem Drawer sperren + Scroll-Chaining unterbinden behebt das. */
+body:has(#sb-toggle-cb:checked) { overflow: hidden !important; }
+.super-navigation-menu__items-viewport,
+.super-sidebar { overscroll-behavior: contain; }
+
 /* Hamburger-Button */
 #sb-toggle {
   position: fixed; top: 16px; left: 24px; z-index: 9999;
