@@ -1639,64 +1639,75 @@
     #tsbau .bau-conn::after,#tsbau .bau-vconn::after{display:none}
   }
 
-  #tsring{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsring *{box-sizing:border-box}
-  #tsring .rg-head{max-width:900px;margin:0 auto 44px;padding:0 24px;text-align:center}
-  #tsring .rg-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tsring .rg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tstarget{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(24px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tstarget *{box-sizing:border-box}
+  #tstarget .tg-head{max-width:900px;margin:0 auto 44px;padding:0 24px;text-align:center}
+  #tstarget .tg-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tstarget .tg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   /* "Lineal Web": der Titel enthaelt ein f (laeuft), das im TS-Subset fehlt */
-  #tsring .rg-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
-  #tsring .rg-title .ts-gold{color:#c7b489}
-  #tsring .rg-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0;max-width:640px;margin-left:auto;margin-right:auto}
+  #tstarget .tg-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 18px}
+  #tstarget .tg-title .ts-gold{color:#c7b489}
+  #tstarget .tg-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0;max-width:640px;margin-left:auto;margin-right:auto}
 
-  #tsring .rg-wrap{max-width:1180px;margin:0 auto}
-  #tsring.js .rg-wrap{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
-  #tsring.js .rg-wrap.on{opacity:1;transform:none}
+  #tstarget .tg-wrap{max-width:1180px;margin:0 auto}
+  #tstarget.js .tg-wrap{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+  #tstarget.js .tg-wrap.on{opacity:1;transform:none}
 
-  /* Buehne: quadratisch, Ring + Kern + vier Satelliten */
-  #tsring .rg-stage{position:relative;width:clamp(340px,50vw,560px);height:clamp(340px,50vw,560px);margin:0 auto}
-  #tsring .rg-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-  #tsring .rg-track{fill:none;stroke:rgba(255,255,255,.055);stroke-width:2.2}
-  #tsring .rg-seg{fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:0 999;transition:stroke-dasharray 1.05s cubic-bezier(.16,1,.3,1)}
+  /* Buehne: quadratisch, 5 konzentrische Ringe + Kern + 17 Knoten */
+  #tstarget .tg-stage{position:relative;width:clamp(420px,56vw,660px);height:clamp(420px,56vw,660px);margin:0 auto 56px}
+  #tstarget .tg-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  #tstarget .tg-track{fill:none;stroke:rgba(255,255,255,.075);stroke-width:1.4;transform-box:fill-box;transform-origin:50% 50%}
+  #tstarget.js .tg-track{opacity:0;transform:scale(.9)}
+  #tstarget.js .tg-track.in{opacity:1;transform:scale(1);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 
   /* Kern */
-  #tsring .rg-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:3;text-align:center}
-  #tsring .rg-plate{width:clamp(118px,15vw,168px);height:clamp(118px,15vw,168px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 22px 50px -18px rgba(0,0,0,.94),0 0 0 7px rgba(199,180,137,.055);transition:box-shadow .7s cubic-bezier(.16,1,.3,1)}
-  #tsring .rg-core.done .rg-plate{box-shadow:0 22px 56px -16px rgba(0,0,0,.94),0 0 0 10px rgba(199,180,137,.16),0 0 46px rgba(199,180,137,.4)}
-  #tsring .rg-total{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.015em;color:#fff;font-variant-numeric:tabular-nums;line-height:1;text-shadow:0 2px 22px rgba(199,180,137,.35)}
-  #tsring .rg-totalk{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.46)}
+  #tstarget .tg-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:4;text-align:center;width:clamp(120px,15vw,168px)}
+  #tstarget .tg-plate{width:clamp(96px,11vw,130px);height:clamp(96px,11vw,130px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.55);box-shadow:0 22px 50px -18px rgba(0,0,0,.94),0 0 0 7px rgba(199,180,137,.055);transition:box-shadow .7s cubic-bezier(.16,1,.3,1)}
+  #tstarget .tg-core.done .tg-plate{box-shadow:0 22px 56px -16px rgba(0,0,0,.94),0 0 0 10px rgba(199,180,137,.16),0 0 46px rgba(199,180,137,.4)}
+  #tstarget .tg-price{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(1.5rem,3vw,2.15rem);font-weight:600;letter-spacing:-.015em;color:#fff;font-variant-numeric:tabular-nums;line-height:1;text-shadow:0 2px 22px rgba(199,180,137,.35)}
+  #tstarget .tg-pricek{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.46)}
 
-  /* Satelliten auf dem Ring */
-  #tsring .rg-sat{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;z-index:2;width:118px;text-align:center}
-  #tsring .rg-med{width:clamp(46px,6.2vw,62px);height:clamp(46px,6.2vw,62px);border-radius:50%;object-fit:cover;background:#0b0d14;display:block;border:1.5px solid rgba(199,180,137,.5);box-shadow:0 14px 34px -14px rgba(0,0,0,.92),0 0 0 6px rgba(199,180,137,.05);transition:box-shadow .6s cubic-bezier(.16,1,.3,1)}
-  #tsring .rg-sat.lit .rg-med{box-shadow:0 14px 38px -12px rgba(0,0,0,.92),0 0 0 8px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.4)}
-  #tsring .rg-chip{display:inline-flex;flex-direction:column;align-items:center;gap:3px;background:rgba(5,6,11,.9);border:1px solid rgba(199,180,137,.26);border-radius:11px;padding:5px 11px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-  #tsring .rg-name{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.2;white-space:nowrap}
-  #tsring .rg-val{font-size:14px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;line-height:1}
-  #tsring.js .rg-sat{opacity:0;transform:translate(-50%,-50%) scale(.82)}
-  #tsring.js .rg-wrap.on .rg-sat.in{opacity:1;transform:translate(-50%,-50%) scale(1);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1)}
+  /* Knoten auf den Ringen */
+  #tstarget .tg-sat{position:absolute;transform:translate(-50%,-50%);z-index:2;text-align:center}
+  #tstarget.js .tg-sat{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+  #tstarget.js .tg-wrap.on .tg-sat.in{opacity:1;transform:translate(-50%,-50%) scale(1);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.34,1.56,.64,1)}
 
-  #tsring .rg-caption{max-width:700px;margin:34px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
-  #tsring .rg-note{display:block;margin-top:10px;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
-  #tsring .rg-foot{display:flex;justify-content:center;margin-top:26px}
-  #tsring .rg-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
-  #tsring .rg-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
-  #tsring .rg-replay svg{width:15px;height:15px}
+  /* Ring 1+2 (innen): Werte-Chip mit Betrag */
+  #tstarget .tg-chip{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:#0b0d14;border:1px solid rgba(199,180,137,.32);border-radius:11px;padding:6px 12px;min-width:88px;max-width:120px}
+  #tstarget .tg-chip .tg-name{font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.2}
+  #tstarget .tg-chip .tg-val{font-size:13.5px;font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;line-height:1.15;margin-top:1px}
+  #tstarget .tg-sat[data-ring="0"] .tg-chip{border-color:rgba(199,180,137,.5);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#0b0d14}
 
-  #tsring.hid *{animation-play-state:paused !important}
+  /* Ring 3-5 (aussen): schlichte Pille, kein Betrag, nach aussen zunehmend gedimmt */
+  #tstarget .tg-pill{display:inline-flex;align-items:center;background:#0b0d14;border-radius:999px;padding:6px 14px;font-size:10.5px;font-weight:600;letter-spacing:.03em;white-space:nowrap}
+  #tstarget .tg-sat[data-ring="2"] .tg-pill{border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.62)}
+  #tstarget .tg-sat[data-ring="3"] .tg-pill{border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5)}
+  #tstarget .tg-sat[data-ring="4"] .tg-pill{border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.4)}
 
-  /* Mobile: Ring bleibt, Satelliten-Labels kompakter */
+  #tstarget .tg-caption{max-width:700px;min-height:56px;margin:34px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
+  #tstarget .tg-note{display:block;margin-top:10px;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
+  #tstarget .tg-foot{display:flex;justify-content:center;margin-top:26px}
+  #tstarget .tg-replay{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#d8c9ab;border-radius:999px;padding:10px 22px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+  #tstarget .tg-replay:hover{background:rgba(199,180,137,.12);border-color:rgba(199,180,137,.7);color:#efe6d2;transform:translateY(-1px)}
+  #tstarget .tg-replay svg{width:15px;height:15px}
+
+  #tstarget.hid *{animation-play-state:paused !important}
+
+  /* Mobile: Buehne kleiner, Knoten kompakter */
   @media(max-width:720px){
-    #tsring .rg-stage{width:min(94vw,400px);height:min(94vw,400px)}
-    #tsring .rg-sat{width:92px;gap:5px}
-    #tsring .rg-name{font-size:10px}
-    #tsring .rg-val{font-size:12.5px}
+    #tstarget .tg-stage{width:min(96vw,400px);height:min(96vw,400px)}
+    #tstarget .tg-chip{min-width:64px;max-width:86px;padding:4px 8px}
+    #tstarget .tg-chip .tg-name{font-size:8.5px}
+    #tstarget .tg-chip .tg-val{font-size:11px}
+    #tstarget .tg-pill{padding:4px 9px;font-size:8.5px}
+    #tstarget .tg-plate{width:70px;height:70px}
+    #tstarget .tg-price{font-size:1.25rem}
   }
   @media(prefers-reduced-motion:reduce){
-    #tsring.js .rg-wrap{opacity:1;transform:none;transition:none}
-    #tsring.js .rg-sat{opacity:1;transform:translate(-50%,-50%)}
-    #tsring .rg-seg{transition:none}
-    #tsring *{animation:none!important}
+    #tstarget.js .tg-wrap{opacity:1;transform:none;transition:none}
+    #tstarget.js .tg-sat{opacity:1;transform:translate(-50%,-50%)}
+    #tstarget.js .tg-track{opacity:1;transform:none;transition:none}
+    #tstarget *{animation:none!important}
   }
 
   #tswave{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -1919,55 +1930,92 @@
     <p>Das ist das Bausteinprinzip: Wir bauen einmal sauber von unten auf — vom Lieferschein über die Grundeinheit zur portionierten Zutat — und können oben dann frei und schnell kombinieren. Ändert sich unten ein Preis, zieht er sich automatisch durch alle Gerichte, die diesen Baustein nutzen.</p>
   <p><b>Kurz gesagt:</b> Die Formeln sind das Fundament. Sie verwandeln chaotische Lieferanten-Angaben in saubere Grundpreise. Auf diesem Fundament bauen wir einen Zutatenpool aus austauschbaren Bausteinen — und aus diesen Bausteinen lassen sich Gerichte schnell, flexibel und mit immer korrekter Kalkulation zusammensetzen.</p>
 </div>
-<section id="tsring">
-  <div class="rg-head">
-    <div class="rg-eyebrow">Vier Bausteine · ein Gericht</div>
-    <h2 class="rg-title">Alles läuft in deinem <span class="ts-gold">Gericht zusammen.</span></h2>
-    <p class="rg-sub">Jeder Baustein legt sein Stück auf den Ring. Ist der Ring geschlossen, steht dein Wareneinsatz.</p>
+<section id="tstarget">
+  <div class="tg-head">
+    <div class="tg-eyebrow">Fünf Ringe · ein Gericht</div>
+    <h2 class="tg-title">Alles läuft in deinem <span class="ts-gold">Gericht zusammen.</span></h2>
+    <p class="tg-sub">Jede Datenbank, die du in diesem Kurs aufgebaut hast, liegt auf einem Ring. Ganz innen steht dein Gericht.</p>
   </div>
 
-  <div class="rg-wrap">
-    <div class="rg-stage" id="rgStage">
-      <svg class="rg-svg" viewBox="0 0 200 200" aria-hidden="true">
-        <circle class="rg-track" cx="100" cy="100" r="72"></circle>
-        <g transform="rotate(-90 100 100)">
-          <circle class="rg-seg" data-s="0" cx="100" cy="100" r="72" stroke="#c7b489"></circle>
-          <circle class="rg-seg" data-s="1" cx="100" cy="100" r="72" stroke="#d8c9ab"></circle>
-          <circle class="rg-seg" data-s="2" cx="100" cy="100" r="72" stroke="#efe6d2"></circle>
-          <circle class="rg-seg" data-s="3" cx="100" cy="100" r="72" stroke="#c7b489" stroke-opacity=".72"></circle>
-        </g>
+  <div class="tg-wrap">
+    <div class="tg-stage" id="tgStage">
+      <svg class="tg-svg" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="tg-track" data-ring="0" cx="100" cy="100" r="48"></circle>
+        <circle class="tg-track" data-ring="1" cx="100" cy="100" r="72"></circle>
+        <circle class="tg-track" data-ring="2" cx="100" cy="100" r="92"></circle>
+        <circle class="tg-track" data-ring="3" cx="100" cy="100" r="108"></circle>
+        <circle class="tg-track" data-ring="4" cx="100" cy="100" r="124"></circle>
       </svg>
 
-      <div class="rg-core" id="rgCore">
-        <img class="rg-plate" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="Gericht">
-        <div class="rg-total" id="rgTotal">0,00 €</div>
-        <div class="rg-totalk">Kosten pro Portion</div>
+      <div class="tg-core" id="tgCore">
+        <img class="tg-plate" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.jpg" alt="Gericht">
+        <div class="tg-price" id="tgPrice">0,00 €</div>
+        <div class="tg-pricek">Verkaufspreis</div>
       </div>
 
-      <div class="rg-sat" data-s="0">
-        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="Zutaten">
-        <div class="rg-chip"><div class="rg-name">Zutaten</div><div class="rg-val">3,20 €</div></div>
+      <div class="tg-sat" data-ring="0" style="left:50%;top:26%">
+        <div class="tg-chip"><div class="tg-name">DB I</div><div class="tg-val">9,10 €</div></div>
       </div>
-      <div class="rg-sat" data-s="1">
-        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.jpg" alt="Rezepturen">
-        <div class="rg-chip"><div class="rg-name">Rezepturen</div><div class="rg-val">4,10 €</div></div>
+      <div class="tg-sat" data-ring="0" style="left:70.8%;top:38%">
+        <div class="tg-chip"><div class="tg-name">DB II</div><div class="tg-val">6,80 €</div></div>
       </div>
-      <div class="rg-sat" data-s="2">
-        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.jpg" alt="Personalkosten">
-        <div class="rg-chip"><div class="rg-name">Personalkosten</div><div class="rg-val">1,80 €</div></div>
+      <div class="tg-sat" data-ring="0" style="left:29.2%;top:38%">
+        <div class="tg-chip"><div class="tg-name">DB III</div><div class="tg-val">4,20 €</div></div>
       </div>
-      <div class="rg-sat" data-s="3">
-        <img class="rg-med" src="https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.jpg" alt="Gemeinkosten">
-        <div class="rg-chip"><div class="rg-name">Gemeinkosten</div><div class="rg-val">2,10 €</div></div>
+
+      <div class="tg-sat" data-ring="1" style="left:14.5%;top:43.7%">
+        <div class="tg-chip"><div class="tg-name">Wareneinsatz</div><div class="tg-val">3,80 €</div></div>
+      </div>
+      <div class="tg-sat" data-ring="1" style="left:73.1%;top:22.4%">
+        <div class="tg-chip"><div class="tg-name">Personalkosten</div><div class="tg-val">2,60 €</div></div>
+      </div>
+      <div class="tg-sat" data-ring="1" style="left:20.5%;top:70.7%">
+        <div class="tg-chip"><div class="tg-name">Gemeinkosten-Anteil</div><div class="tg-val">2,30 €</div></div>
+      </div>
+
+      <div class="tg-sat" data-ring="2" style="left:20.4%;top:14.8%">
+        <div class="tg-pill">Zutaten</div>
+      </div>
+      <div class="tg-sat" data-ring="2" style="left:95.3%;top:42%">
+        <div class="tg-pill">Rezepte</div>
+      </div>
+      <div class="tg-sat" data-ring="2" style="left:23.6%;top:87.7%">
+        <div class="tg-pill">Mitarbeiter</div>
+      </div>
+
+      <div class="tg-sat" data-ring="3" style="left:68.5%;top:-0.8%">
+        <div class="tg-pill">Löhne</div>
+      </div>
+      <div class="tg-sat" data-ring="3" style="left:100.8%;top:68.5%">
+        <div class="tg-pill">Packaging</div>
+      </div>
+      <div class="tg-sat" data-ring="3" style="left:31.5%;top:100.8%">
+        <div class="tg-pill">Allergene</div>
+      </div>
+      <div class="tg-sat" data-ring="3" style="left:-0.8%;top:31.5%">
+        <div class="tg-pill">Gemeinkosten</div>
+      </div>
+
+      <div class="tg-sat" data-ring="4" style="left:106.2%;top:23.8%">
+        <div class="tg-pill">Inventar</div>
+      </div>
+      <div class="tg-sat" data-ring="4" style="left:76.2%;top:106.2%">
+        <div class="tg-pill">Lieferanten</div>
+      </div>
+      <div class="tg-sat" data-ring="4" style="left:-6.2%;top:76.2%">
+        <div class="tg-pill">Verträge</div>
+      </div>
+      <div class="tg-sat" data-ring="4" style="left:23.8%;top:-6.2%">
+        <div class="tg-pill">Ansprechpartner</div>
       </div>
     </div>
 
-    <p class="rg-caption">Zutaten, Rezepturen, Personalkosten und Gemeinkosten laufen zusammen in einer Zahl — den Kosten pro Portion. Erst wenn alle vier stehen, ist das Gericht sauber kalkuliert.
-      <span class="rg-note">Alle Zahlen sind Beispielwerte.</span>
+    <p class="tg-caption" id="tgCap">Ganz außen liegen deine Stammdaten: Inventar, Lieferanten, Verträge, Ansprechpartner. Ohne sie beginnt keine Kalkulation.
+      <span class="tg-note">Alle Zahlen sind Beispielwerte.</span>
     </p>
 
-    <div class="rg-foot">
-      <button class="rg-replay" id="rgReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
+    <div class="tg-foot">
+      <button class="tg-replay" id="tgReplay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
     </div>
   </div>
 </section>
@@ -2069,7 +2117,7 @@
 </section>
     `;
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-    try{ initRing(); }catch(e){}
+    try{ initTarget(); }catch(e){}
     try{ initBaustein(); }catch(e){}
     try{ initWave(); }catch(e){}
   }
@@ -2329,30 +2377,39 @@
     }, 400);
   }
 
-  function initRing(){
-  var root=document.getElementById('tsring'); if(!root) return;
-  var wrap=root.querySelector('.rg-wrap'); if(!wrap) return;
-  if(window.__tsringKill){ try{ window.__tsringKill(); }catch(e){} }
+  function initTarget(){
+  var root=document.getElementById('tstarget'); if(!root) return;
+  var wrap=root.querySelector('.tg-wrap'); if(!wrap) return;
+  if(window.__tstargetKill){ try{ window.__tstargetKill(); }catch(e){} }
 
-  var stage=root.querySelector('#rgStage');
-  var segs=[].slice.call(root.querySelectorAll('.rg-seg'));
-  var sats=[].slice.call(root.querySelectorAll('.rg-sat'));
-  var core=root.querySelector('#rgCore');
-  var totalEl=root.querySelector('#rgTotal');
-  var replay=root.querySelector('#rgReplay');
-  /* Beispielwerte — Anteile ergeben den Wareneinsatz pro Portion */
-  var PARTS=[3.20,4.10,1.80,2.10];
-  var TOTAL=PARTS.reduce(function(a,b){return a+b;},0);   /* 11,20 € */
-  var R=72, C=2*Math.PI*R, GAP=5;                          /* Ringradius im viewBox, Luecke zwischen Segmenten */
+  var tracks=[].slice.call(root.querySelectorAll('.tg-track'));
+  var sats=[].slice.call(root.querySelectorAll('.tg-sat'));
+  var core=root.querySelector('#tgCore');
+  var priceEl=root.querySelector('#tgPrice');
+  var capEl=root.querySelector('#tgCap');
+  var replay=root.querySelector('#tgReplay');
+  var VK=12.90;                                            /* Beispielwert Verkaufspreis */
   var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var revealed=false, dead=false, forceReady=false;
   var timers=[], rafs=[], pollId=null, readyTimer=null, io=null;
 
   root.classList.add('js');
 
+  /* Captions je Ring-Schritt, aussen -> innen, letzte = Finale */
+  var CAPS=[
+    'Ganz außen liegen deine Stammdaten: Inventar, Lieferanten, Verträge, Ansprechpartner. Ohne sie beginnt keine Kalkulation.',
+    'Daraus entstehen die nächsten Ebenen: Löhne, Packaging, Allergene, Gemeinkosten.',
+    'Und aus denen wieder die drei zentralen Größen: Zutaten, Rezepte, Mitarbeiter.',
+    'Sie bündeln sich zu drei Kostenblöcken pro Portion: Wareneinsatz, Personalkosten, Gemeinkosten-Anteil.',
+    'Die rechnen sich zur Marge durch: Deckungsbeitrag I, II und III.',
+    'Ganz innen steht dein Gericht — mit seinem Verkaufspreis.'
+  ];
+  var NOTE='Alle Zahlen sind Beispielwerte.';
+
   function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
   function later(fn,ms){ var t=setTimeout(function(){ if(!dead) fn(); },ms); timers.push(t); return t; }
   function clearAll(){ timers.forEach(clearTimeout); timers=[]; rafs.forEach(cancelAnimationFrame); rafs=[]; }
+  function setCap(i){ if(!capEl) return; capEl.innerHTML=CAPS[i]+' <span class="tg-note">'+NOTE+'</span>'; }
   function count(el,from,to,dur){
     if(!el) return;
     if(reduced){ el.textContent=money(to); return; }
@@ -2361,59 +2418,44 @@
     rid=requestAnimationFrame(tk); rafs.push(rid);
   }
 
-  /* Segment-Geometrie + Satelliten-Position aus den Anteilen berechnen */
-  function layout(){
-    var acc=0;
-    segs.forEach(function(s,i){
-      var frac=PARTS[i]/TOTAL;
-      var len=Math.max(0, C*frac - GAP);
-      s.setAttribute('data-len', len);
-      s.style.strokeDashoffset = (-C*acc) + '';
-      acc += frac;
-    });
-    /* Satelliten auf die Segment-Mitten setzen */
-    acc=0;
-    sats.forEach(function(sat,i){
-      var frac=PARTS[i]/TOTAL;
-      var mid=acc+frac/2;
-      var ang=(-90 + mid*360) * Math.PI/180;
-      var rp=36;                                  /* Ringradius = 36% der Buehne (r72 von 200) */
-      sat.style.left=(50 + Math.cos(ang)*rp)+'%';
-      sat.style.top =(50 + Math.sin(ang)*rp)+'%';
-      acc += frac;
-    });
-  }
+  function byRing(i){ return sats.filter(function(s){ return s.getAttribute('data-ring')===String(i); }); }
+  function trackByRing(i){ return tracks.filter(function(t){ return t.getAttribute('data-ring')===String(i); })[0]; }
+
   function resetView(){
     clearAll();
-    segs.forEach(function(s){ s.style.strokeDasharray='0 999'; });
-    sats.forEach(function(s){ s.classList.remove('in','lit'); });
+    tracks.forEach(function(t){ t.classList.remove('in'); });
+    sats.forEach(function(s){ s.classList.remove('in'); });
     if(core) core.classList.remove('done');
-    if(totalEl) totalEl.textContent=money(0);
-    layout();
+    if(priceEl) priceEl.textContent=money(0);
+    setCap(0);
   }
   function run(){
     resetView();
     if(reduced){
-      segs.forEach(function(s){ s.style.strokeDasharray=s.getAttribute('data-len')+' 999'; });
+      tracks.forEach(function(t){ t.classList.add('in'); });
       sats.forEach(function(s){ s.classList.add('in'); });
-      if(totalEl) totalEl.textContent=money(TOTAL);
+      if(priceEl) priceEl.textContent=money(VK);
       if(core) core.classList.add('done');
+      setCap(5);
       return;
     }
-    var running=0;
-    segs.forEach(function(s,i){
-      var at=600+i*820;
-      later(function(){                                  /* Segment zeichnet sich */
-        s.style.strokeDasharray=s.getAttribute('data-len')+' 999';
-        if(sats[i]) sats[i].classList.add('in','lit');
+    /* Ring-Reihenfolge aussen -> innen: data-ring 4,3,2,1,0 */
+    var order=[4,3,2,1,0];
+    var STEP=680;
+    order.forEach(function(ringIdx,step){
+      var at=300+step*STEP;
+      later(function(){
+        var track=trackByRing(ringIdx);
+        if(track) track.classList.add('in');
+        byRing(ringIdx).forEach(function(s,i){ later(function(){ s.classList.add('in'); }, i*90); });
+        setCap(step);
       }, at);
-      later(function(){                                  /* Zwischensumme waechst mit */
-        running+=PARTS[i];
-        count(totalEl, running-PARTS[i], running, 700);
-        if(sats[i]) sats[i].classList.remove('lit');
-      }, at+520);
     });
-    later(function(){ if(core) core.classList.add('done'); }, 600+segs.length*820+400);
+    later(function(){
+      if(core) core.classList.add('done');
+      count(priceEl, 0, VK, 1000);
+      setCap(5);
+    }, 300+order.length*STEP+300);
   }
 
   function reveal(){ if(revealed) return; revealed=true; wrap.classList.add('on'); }
@@ -2427,27 +2469,24 @@
     if(inView() && (forceReady || layoutSettled())){ reveal(); run(); }
   }
   function onVis(){ root.classList.toggle('hid', document.hidden); }
-  function onResize(){ layout(); }
   document.addEventListener('visibilitychange', onVis);
-  window.addEventListener('resize', onResize);
   readyTimer=setTimeout(function(){ forceReady=true; }, 10000);
 
   if(replay) replay.addEventListener('click', function(){ reveal(); run(); });
 
-  window.__tsringKill=function(){
+  window.__tstargetKill=function(){
     dead=true; clearAll();
     if(pollId){ clearInterval(pollId); pollId=null; }
     if(readyTimer){ clearTimeout(readyTimer); readyTimer=null; }
     if(io){ io.disconnect(); io=null; }
     document.removeEventListener('visibilitychange', onVis);
-    window.removeEventListener('resize', onResize);
   };
 
   resetView();
   if(reduced){ reveal(); run(); return; }
 
   if('IntersectionObserver' in window){
-    io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); }); },{threshold:.25});
+    io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) maybeReveal(); }); },{threshold:.2});
     io.observe(wrap);
   }
   pollId=setInterval(function(){
