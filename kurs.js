@@ -61,32 +61,26 @@
 })();
 
 /* ============================================================
-   Sidebar-Collapsible-Haenger-Fix (2026-07-22, Scroll-Fix v5).
-   Robert-Repro: Modul 1 aufklappen, dann Modul 2 aufklappen -> Liste "abgehackt", Trackpad
-   scrollt nicht bis ans Ende. Ursache live per DOM-Messung gefunden: Radix' eigene
-   Aufklapp-Animation (@keyframes slideDown, .18s, animation-fill-mode:forwards) auf
-   .super-navigation-menu__list-items[data-state="open"] bleibt bei "height:0" haengen,
-   OBWOHL Radix selbst die korrekte Zielhoehe bereits per Inline-Custom-Property
-   --radix-collapsible-content-height gemessen hat — sichtbar per getComputedStyle direkt
-   nachvollzogen (Ursache vermutlich: die Sidebar-Text-Wrapper-Observer oben mutieren
-   Textknoten IM selben Sidebar-Baum via splitText/replaceChild und stossen dabei eine
-   Reflow/Restart-Kollision mit der laufenden CSS-Animation an, wenn zwei Module kurz
-   hintereinander geoeffnet werden). Fix: selbstheilend pruefen, ob die gerenderte Hoehe
-   deutlich unter der von Radix selbst gemessenen Zielhoehe liegt — falls ja, die haengende
-   Animation stoppen und die korrekte Hoehe erzwingen (per !important, da eine aktive
-   CSS-Animation sonst sogar eine normale Inline-Hoehe weiter ueberschreibt). */
+   Sidebar-Collapsible-Haenger-Fix (2026-07-22, Scroll-Fix v6 — ersetzt v5).
+   Robert-Repro 1: Modul 1 dann Modul 2 kurz hintereinander aufklappen -> Liste "abgehackt".
+   Robert-Repro 2 (v5 hat das NICHT erwischt): auch ein einzelner Klick auf Modul 2 reicht —
+   die letzten 1-2 Eintraege ("Lektion 2.9.1", "2.9.2") fehlten dann komplett, kein Scrollen
+   half (keine Bewegung, kein Leerraum). Ursache: Radix' eigene Aufklapp-Animation
+   (@keyframes slideDown, .18s, animation-fill-mode:forwards) auf
+   .super-navigation-menu__list-items[data-state="open"] bleibt bei "height:0" haengen ODER
+   die von Radix selbst gemessene Zielhoehe (--radix-collapsible-content-height) ist zu kurz
+   bzw. fehlt ganz (live beobachtet: leerer Wert, obwohl 21 Lektionen im DOM stehen) — v5
+   verliess sich auf genau diesen Radix-Wert und griff deshalb in Robert-Repro 2 gar nicht.
+   v6 misst nichts mehr und vertraut auch Radix' Wert nicht: Animation stoppen und Hoehe auf
+   "auto" setzen — der Browser layoutet dann live und immer korrekt anhand des echten
+   Inhalts, unabhaengig davon was Radix zwischenzeitlich (falsch) gemessen hat. */
 (function(){
   if(window.__tsSbCollapsibleFix) return; window.__tsSbCollapsibleFix = true;
   function fix(){
     document.querySelectorAll('.super-navigation-menu__list-items[data-state="open"]').forEach(function(el){
-      var target = el.style.getPropertyValue('--radix-collapsible-content-height');
-      if(!target) return;
-      var targetPx = parseFloat(target);
-      var currentPx = parseFloat(getComputedStyle(el).height) || 0;
-      if(currentPx < targetPx - 2){
-        el.style.setProperty('animation','none','important');
-        el.style.setProperty('height', target, 'important');
-      }
+      if(el.style.getPropertyValue('height') === 'auto') return;
+      el.style.setProperty('animation','none','important');
+      el.style.setProperty('height','auto','important');
     });
   }
   fix();
