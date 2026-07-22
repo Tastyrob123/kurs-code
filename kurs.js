@@ -12765,17 +12765,17 @@ var TSISL_ZUG_SCHLUESSEL=[
      (Robert-Feedback 17.07.2026: "striche zu symbolen die erklaeren was wie zusammenhaengt").
      Liest sich als Gleichung: Gemeinkosten Σ/Monat → ÷ je Stueck → GK pro Produkt → − von DB I → DB II. */
   var GK_CHAIN=[
-    {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg'},
-    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'je Monat'},
-    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'je Stück'},
-    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'→', sub:'DB I − GK pro Produkt', result:true}
+    {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg',    sub:'Miete, Strom, Versicherungen & Co.'},
+    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'werden monatlich addiert', sub:'Alle Gemeinkosten eines Monats'},
+    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'geteilt durch verkaufte Stückzahl', sub:'Gemeinkostenanteil je verkauftem Produkt'},
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'→', cap:'wird von DB I abgezogen', sub:'DB I − GK pro Produkt', result:true}
   ];
   var PK_CHAIN=[
-    {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg'},
-    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'je Stunde'},
-    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zeit'},
-    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt'},
-    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'→', sub:'DB II − PK pro Produkt', result:true}
+    {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg',                                        sub:'Bruttolöhne plus Arbeitgeberanteil'},
+    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'geteilt durch Arbeitsstunden',       sub:'Personalkosten je Arbeitsstunde'},
+    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zubereitungszeit',               sub:'Zeit, die ein Produkt in der Zubereitung braucht'},
+    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt den Personalkostenanteil',    sub:'Personalkostenanteil je verkauftem Produkt'},
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'→', cap:'wird von DB II abgezogen',           sub:'DB II − PK pro Produkt', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -12804,13 +12804,14 @@ var TSISL_ZUG_SCHLUESSEL=[
   #tsgkflow .node.result{width:190px}
   #tsgkflow .node.result .node-med{width:150px;height:150px;box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4);animation:tsgkflow-glow 3.4s ease-in-out infinite}
   #tsgkflow .node.result .node-lbl{margin-top:14px;font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.12rem;font-weight:600;letter-spacing:-.01em;color:#efe6d2;max-width:190px}
-  #tsgkflow .node-sub{margin-top:7px;font-size:.72rem;font-weight:500;line-height:1.3;letter-spacing:.01em;color:rgba(199,180,137,.85);max-width:200px}
+  #tsgkflow .node-sub{margin-top:7px;font-size:.72rem;font-weight:500;line-height:1.32;letter-spacing:.01em;color:rgba(199,180,137,.85);max-width:116px}
+  #tsgkflow .node.result .node-sub{max-width:200px}
   @keyframes tsgkflow-glow{0%,100%{box-shadow:0 20px 46px -14px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 0 6px rgba(var(--g),.5),0 0 46px rgba(var(--g),.4)}50%{box-shadow:0 20px 52px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.14),0 0 0 6px rgba(var(--g),.7),0 0 62px rgba(var(--g),.6)}}
   /* Verbindung = Operator-Chip (absolut auf der Medaillon-Mittellinie 75px zentriert) + Caption darunter */
-  #tsgkflow .link{position:relative;width:clamp(58px,5.5vw,88px);height:150px;flex:0 0 auto}
-  #tsgkflow .link-op{position:absolute;top:56px;left:50%;margin-left:-19px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;line-height:1;color:#efe6d2;background:radial-gradient(circle at 50% 35%,rgba(var(--g),.28),rgba(var(--g),.08));border:1px solid rgba(var(--g),.55);box-shadow:0 6px 18px -8px rgba(0,0,0,.7),0 0 16px rgba(var(--g),.22);opacity:0;transform:scale(.5);transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
+  #tsgkflow .link{position:relative;width:clamp(92px,10vw,140px);height:150px;flex:0 0 auto}
+  #tsgkflow .link-op{position:absolute;top:52px;left:50%;margin-left:-19px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;line-height:1;color:#efe6d2;background:radial-gradient(circle at 50% 35%,rgba(var(--g),.28),rgba(var(--g),.08));border:1px solid rgba(var(--g),.55);box-shadow:0 6px 18px -8px rgba(0,0,0,.7),0 0 16px rgba(var(--g),.22);opacity:0;transform:scale(.5);transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 180ms)}
   #tsgkflow.in .link-op{opacity:1;transform:none}
-  #tsgkflow .link-cap{position:absolute;top:102px;left:0;right:0;text-align:center;font-size:.62rem;font-weight:500;letter-spacing:.02em;line-height:1.2;color:rgba(255,255,255,.42);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i) * 180ms + 130ms)}
+  #tsgkflow .link-cap{position:absolute;top:96px;left:-8px;right:-8px;text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.01em;line-height:1.28;color:rgba(255,255,255,.58);white-space:normal;opacity:0;transform:translateY(4px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i) * 180ms + 130ms)}
   #tsgkflow.in .link-cap{opacity:1;transform:none}
   @media(max-width:760px){#tsgkflow .chain{gap:16px 8px}#tsgkflow .node{width:120px}#tsgkflow .node-box{height:auto}#tsgkflow .node-med{width:72px;height:72px}#tsgkflow .node.result{width:150px}#tsgkflow .node.result .node-med{width:120px;height:120px}#tsgkflow .link{width:100%;flex:0 0 100%;height:auto;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:10px}#tsgkflow .link-op{position:static;margin:0}#tsgkflow .link-cap{position:static}#tsgkflow .hd{font-size:1.4rem}}
   @media(prefers-reduced-motion:reduce){#tsgkflow,#tsgkflow.in{opacity:1;transform:none;transition:none}#tsgkflow .node,#tsgkflow .link-op,#tsgkflow .link-cap,#tsgkflow .row-lbl{opacity:1;filter:none;transform:none;transition:none}#tsgkflow .node.result .node-med{animation:none}}
