@@ -25177,3 +25177,424 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   formeln-logik-bausteine — Hero + Einleitung "Eine Formel rechnet mit."
+   Lektion 1.5 · Modul 1 · Notion-Grundlagen (Wissens-Lektion)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.5');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body b{color:#c7b489;font-weight:600}
+  .ts-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2;background:rgba(199,180,137,.1);padding:1px 6px;border-radius:5px;font-size:14px}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts15intro-css')) return;
+    var s=document.createElement('style'); s.id='ts15intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts15intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.5" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.5</div>'+
+        '<h1 class="ts-hero__title">Eine Formel <span class="ts-gold">rechnet mit</span>.</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts15intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts15intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Eine Formel in Notion ist kein Excel-Rest, sondern ein kleiner Rechner, der bei jeder Änderung neu läuft. Formulas 2.0 bringt dir Variablen: Mit <code>let()</code> gibst du einem Zwischenwert einen Namen, statt dieselbe Berechnung mehrfach zu wiederholen.</p>
+  <p>Mit <code>ifs()</code> prüfst du mehrere Bedingungen nacheinander, mit <code>dateBetween()</code> rechnest du die Tage bis zu einem Termin aus. Genau solche Bausteine stecken zum Beispiel hinter einem Fortschrittsbalken unter einem Kalendertermin oder einem Countdown bis zu einem Meilenstein.</p>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   formeln-logik-bausteine — Erkläranimation "Formel-Konsole" (Typewriter + Count-up + Füllbalken)
+   Eigenständiges Konzept: EINE Konsole tippt eine echte Formel, löst sie live zu einem Zahlenwert auf,
+   der Füllbalken zieht synchron mit. Endzustand=Default.
+   ============================================================ */
+(function(){
+  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts15bau{width:min(760px,92vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts15bau .bau-head{max-width:640px;margin:0 auto 32px;padding:0 24px;text-align:center}
+  #ts15bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts15bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts15bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts15bau h2 .ts-gold{color:#c7b489}
+  #ts15bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
+  #ts15bau .console{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:clamp(20px,3.5vw,32px);
+    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  #ts15bau.js .console{opacity:0;transform:translateY(22px) scale(.98)}
+  #ts15bau.js.on .console{opacity:1;transform:none}
+  #ts15bau .c-line{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(13px,1.8vw,15.5px);color:#efe6d2;margin:0 0 20px;min-height:1.4em;white-space:nowrap;overflow:hidden}
+  #ts15bau .c-line .cur{display:inline-block;width:8px;height:1.1em;background:#c7b489;vertical-align:-2px;margin-left:2px;opacity:0}
+  #ts15bau.js.on .c-line .cur{animation:ts15cursor 1s step-end infinite}
+  @keyframes ts15cursor{0%,100%{opacity:0}50%{opacity:1}}
+  #ts15bau .c-result{display:flex;align-items:baseline;gap:12px;margin:0 0 16px}
+  #ts15bau .c-num{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.4rem);color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+  #ts15bau .c-label{font-size:13px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
+  #ts15bau .c-bar{height:8px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
+  #ts15bau .c-bar i{display:block;height:100%;width:0%;border-radius:5px;background:linear-gradient(90deg,#c7b489,#efe6d2);transition:width 1.8s cubic-bezier(.22,1,.36,1)}
+  #ts15bau.js.on .c-bar i{width:68%}
+  #ts15bau .bau-foot{display:flex;justify-content:center;margin-top:24px}
+  #ts15bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts15bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  `;
+
+  function injectCSS(){
+    if(document.getElementById('ts15bau-css')) return;
+    var s=document.createElement('style'); s.id='ts15bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  var CODE = 'dateBetween(now(), Fällig_am, "days")';
+
+  function html(){
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Eine Formel live gesehen</div>'+
+      '<h2>Du tippst sie <span class="ts-gold">einmal</span>, sie rechnet <span class="ts-gold">jedes Mal</span>.</h2>'+
+      '<p class="bau-sub">Eine Formel steht in der Spalte, aber sie läuft bei jedem Seitenaufruf neu — hier siehst du, was dabei unter der Haube passiert.</p>'+
+      '</div>'+
+      '<div class="console">'+
+        '<p class="c-line"><span class="c-text">'+CODE+'</span><span class="cur"></span></p>'+
+        '<div class="c-result"><span class="c-num" id="ts15num">12</span><span class="c-label">Tage bis fällig</span></div>'+
+        '<div class="c-bar"><i style="width:68%"></i></div>'+
+      '</div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts15bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function typeLine(root, cb){
+    var el=root.querySelector('.c-text');
+    var i=0;
+    if(reduced){ el.textContent=CODE; if(cb) cb(); return; }
+    (function tick(){
+      el.textContent=CODE.slice(0,i);
+      i++;
+      if(i<=CODE.length){ setTimeout(tick, 26); } else if(cb){ cb(); }
+    })();
+  }
+
+  function countUp(root){
+    var numEl=root.querySelector('#ts15num');
+    if(reduced){ numEl.textContent='12'; return; }
+    var start=Date.now ? 0 : 0, dur=900, target=12;
+    var t0=null;
+    function frame(ts){
+      if(!t0) t0=ts;
+      var p=Math.min((ts-t0)/dur,1);
+      numEl.textContent=Math.round(p*target);
+      if(p<1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+    var bar=root.querySelector('.c-bar i'); if(bar) bar.style.width='0%';
+    root.querySelector('#ts15num').textContent='0';
+    typeLine(root, function(){
+      setTimeout(function(){
+        countUp(root);
+        if(bar) requestAnimationFrame(function(){ bar.style.width='68%'; });
+      }, 200);
+    });
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts15bau')) return;
+    var anchor=document.getElementById('ts15intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts15bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    root.querySelector('#ts15bauReplay').addEventListener('click', function(){ play(root); });
+    if(reduced){ root.classList.add('on'); root.querySelector('.c-text').textContent=CODE; root.querySelector('#ts15num').textContent='12'; var b=root.querySelector('.c-bar i'); if(b) b.style.width='68%'; return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+
+/* ============================================================
+   formeln-logik-bausteine — Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   ============================================================ */
+(function(){
+  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['Erst let(), dann die Logik','ifs() statt verschachtelter if','Datumsformeln mit Puffer testen','Notion-KI zum Erklären nutzen'];
+  var TEXTS=[
+    'Lagere wiederkehrende Zwischenwerte in let() aus — das hält jede Formel lesbar, auch nach Wochen noch.',
+    'Mehrere Bedingungen gehören in ein einziges ifs() statt in verschachtelte if()-Klammern, die kein Mensch mehr entwirrt.',
+    'Teste Datumsformeln an einem Termin, der heute fällig ist, und an einem, der es erst in Wochen wird.',
+    'Lass dir unklaren Formel-Code von der Notion-KI im Formeleditor erklären, bevor du ihn kopierst.'
+  ];
+
+  var CSS=`
+  #ts15emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts15emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
+  #ts15emp.js.in{opacity:1}
+  #ts15emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts15emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts15emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts15emp:hover::before{opacity:1}
+  #ts15emp.beat::after{animation:ts15empBeat 2.6s ease-in-out infinite}
+  @keyframes ts15empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts15emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts15emp .db-hd .g{color:#c7b489}
+  #ts15emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts15emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts15emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts15emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts15emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts15emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts15emp .emp-right{position:relative;z-index:1}
+  #ts15emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts15emp .emph .eg{color:#c7b489}
+  #ts15emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts15emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts15emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts15emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts15emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts15emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts15emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts15emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts15emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts15emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts15emp{grid-template-columns:1fr} #ts15emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts15emp-css')) return;
+    var s=document.createElement('style'); s.id='ts15emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Dein <span class="g">Formel-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
+      '<p class="p">Damit deine Formeln auch in einem Jahr noch verständlich sind, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts15emp')) return;
+    var anchor=document.getElementById('ts15bau'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts15emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   formeln-logik-bausteine — Seitenabschluss (Learnings + Weiter-Button)
+   ============================================================ */
+(function(){
+  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du nutzt let(), um Zwischenwerte lesbar zu benennen.',
+    'Du prüfst mehrere Bedingungen mit ifs() statt verschachtelten if.',
+    'Du rechnest Datumsabstände mit dateBetween().',
+    'Du lässt dir unklare Formeln von der Notion-KI erklären.'
+  ];
+
+  var CSS=`
+  #ts15l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts15l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts15l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts15l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts15l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts15l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts15lFloat 7s ease-in-out infinite}
+  #ts15l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts15l .tsl-orb:nth-child(1){animation-delay:0s} #ts15l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts15l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts15l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts15l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts15l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts15l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts15l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts15l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts15l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts15l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts15l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts15lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts15l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts15l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts15l-css')) return;
+    var s=document.createElement('style'); s.id='ts15l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts15l')) return;
+    var anchor=document.getElementById('ts15emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts15l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/ansichten-filter">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
