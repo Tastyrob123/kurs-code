@@ -20396,7 +20396,7 @@ var TSISL_TEAM_ONB_V2=[
   var EASE="cubic-bezier(.16,1,.3,1)";
 
   var CSS=`
-  #tsnaiq{content-visibility:auto;contain-intrinsic-size:auto 900px;width:min(1080px,94vw);margin:20px auto 60px;box-sizing:border-box;
+  #tsnaiq{width:min(1080px,94vw);margin:20px auto 60px;box-sizing:border-box;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsnaiq *{box-sizing:border-box}
 
@@ -21384,7 +21384,7 @@ var TSISL_TEAM_ONB_V2=[
   var EASE="cubic-bezier(.16,1,.3,1)";
 
   var CSS=`
-  #tsnaivid{width:min(1180px,94vw);margin:64px auto 0;box-sizing:border-box;content-visibility:auto;contain-intrinsic-size:auto 900px;
+  #tsnaivid{width:min(1180px,94vw);margin:64px auto 0;box-sizing:border-box;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsnaivid *{box-sizing:border-box}
   #tsnaivid .vd-row{display:grid;grid-template-columns:calc((100% - 18px) * .5) calc((100% - 18px) * .5);
@@ -21512,7 +21512,7 @@ var TSISL_TEAM_ONB_V2=[
   var SHOT=null;    /* langer Ganzseiten-Screenshot fuer die Lightbox — dito */
 
   var CSS=`
-  #tsnai2mac{width:100%;margin-top:clamp(30px,4vh,58px);box-sizing:border-box;content-visibility:auto;contain-intrinsic-size:auto 700px;
+  #tsnai2mac{width:100%;margin-top:clamp(30px,4vh,58px);box-sizing:border-box;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsnai2mac *{box-sizing:border-box}
   #tsnai2mac .m2-row{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -21685,7 +21685,7 @@ var TSISL_TEAM_ONB_V2=[
   ];
 
   var CSS=`
-  #tsnaiemp{position:relative;width:min(1000px,95vw);margin:34px auto;content-visibility:auto;contain-intrinsic-size:auto 600px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);
+  #tsnaiemp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);
     border-radius:20px;box-sizing:border-box;overflow:hidden;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;
     background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));
@@ -21890,7 +21890,7 @@ var TSISL_TEAM_ONB_V2=[
     'Du kannst <b>Szenarien durchrechnen</b> — fällt eine Zutat aus, siehst du sofort, was das im Wareneinsatz bedeutet.'
   ];
   var CSS=`
-  #tsnainext{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;content-visibility:auto;contain-intrinsic-size:auto 900px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsnainext{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsnainext *{box-sizing:border-box}
   #tsnainext .tsl-head{text-align:center;margin-bottom:66px}
   #tsnainext .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
