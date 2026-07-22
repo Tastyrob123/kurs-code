@@ -5100,7 +5100,7 @@
       '<div class="fl-lv" data-lv="3" style="top:'+(LV.l3*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Packaging</span></span></div><i></i></div>'+
       '<div class="fl-lv" data-lv="4" style="top:'+(LV.l4*100)+'%"><i></i></div>'+
       '<div class="fl-lv" data-lv="5" style="top:'+(LV.l5*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Gerichte</span></span></div><i></i></div>'+
-      '<div class="fl-bubble" id="flBubble">„Einmal den <b>Green Detox Smasher</b>, bitte."</div>'+
+      '<div class="fl-bubble" id="flBubble">„Einen <b>Green Detox Smasher</b> To Go bitte."</div>'+
       '<div class="fl-poof" id="flPoof" style="left:50%;top:'+(LV.y4*100)+'%"><span class="pf-flash"></span><span class="pf-ring"></span>'+poofP+'</div>'+
       '<div class="fl-vs" id="flVs">VS</div>'+
       '<div class="fl-db fl-db-togo" id="flDbTogo"><div class="dbcap">'+NUM.togo.cap+'</div>'+togoRows+'</div>'+
