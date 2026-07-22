@@ -11158,7 +11158,7 @@ var TSISL_ZUG_SCHLUESSEL=[
     '#tsrv-root .tsrv-textslot{min-width:0;min-height:1px;}',
     '#tsrv-root .tsrv-textslot .tsrv-lead{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:clamp(1.32rem,2vw,1.6rem);font-weight:600;letter-spacing:-.012em;line-height:1.22;color:#fff;margin:0 0 18px;}',
     '#tsrv-root .tsrv-textslot .tsrv-lead .tsrv-accent{color:var(--tsrv-gold);}',
-    '#tsrv-root .tsrv-textslot p:not(.tsrv-lead){font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.62);margin:0 0 14px;}',
+    '#tsrv-root .tsrv-textslot p:not(.tsrv-lead){font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 14px;}',
     '#tsrv-root .tsrv-textslot p:last-child{margin-bottom:0;}',
     '.tsrv-hide{display:none !important;}',
     '#tsrv-root .tsrv-unit{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;}',
@@ -11246,6 +11246,15 @@ var TSISL_ZUG_SCHLUESSEL=[
     return p;
   }
   function makeP(text){ var p=document.createElement('p'); p.textContent=(text||'').trim(); return p; }
+  /* Restsatz-Text in 1-2 Absätze teilen (Katalog-Vorgabe: 2-3 Absätze insgesamt inkl. Lead). */
+  function splitBodyParagraphs(text){
+    var re=/[^.!?]+[.!?]+(?:\s+|$)/g, sentences=[], m;
+    while((m=re.exec(text))){ sentences.push(m[0].trim()); }
+    if(!sentences.length) return text?[text.trim()]:[];
+    if(sentences.length<=2) return [sentences.join(' ')];
+    var mid=Math.ceil(sentences.length/2);
+    return [sentences.slice(0,mid).join(' '), sentences.slice(mid).join(' ')];
+  }
   function fillText(anchor){
     var root=document.getElementById('tsrv-root'); if(!root) return;
     var slot=root.querySelector('.tsrv-textslot'); if(!slot) return;
@@ -11256,7 +11265,7 @@ var TSISL_ZUG_SCHLUESSEL=[
         var leadTxt=idx>0?full.slice(0,idx+1):full;   /* "Nun haben wir Zutaten und Rezepte." */
         var bodyTxt=idx>0?full.slice(idx+2):'';        /* Rest */
         slot.appendChild(makeLead(leadTxt));
-        if(bodyTxt) slot.appendChild(makeP(bodyTxt));
+        splitBodyParagraphs(bodyTxt).forEach(function(p){ slot.appendChild(makeP(p)); });
         slot.__filled=true;
       }
     }
