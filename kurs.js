@@ -22531,3 +22531,109 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   notion-philosophie-canvas-prinzip — Hero + Einleitung "Denk in Blöcken"
+   Lektion 1.1 · Modul 1 · Notion-Grundlagen (Muster: gerichte-getrnke-finaler-schritt-Hero)
+   ============================================================ */
+(function(){
+  function phHero(){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">L 1.1</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero(); /* Platzhalter bis Robert das echte 3-Laptop-Cover liefert (weisser BG, Freisteller nach Rezept Abschnitt 01) */
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .ts-body h3{
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts11intro-css')) return;
+    var s=document.createElement('style'); s.id='ts11intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts11intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.1" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.1</div>'+
+        '<h1 class="ts-hero__title">Denk in <span class="ts-gold">Blöcken</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts11intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts11intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Die meisten Neulinge behandeln Notion wie ein Word-Dokument — eine Seite von oben nach unten beschrieben. Genau das bremst dich aus. Notion besteht aus Blöcken: Jede Zeile, jedes Bild, jede Liste ist ein eigenständiges Teil, das du frei verschieben und neu zusammensetzen kannst.</p>
+  <p>Schau dir mein eigenes Projekt-System an: Der Startbereich oben ist nur drei Blöcke in Spalten — Fortschrittsbalken, Uhr, Wetter. Jeder Block macht eine Sache, zusammen ergeben sie ein Cockpit. Genauso baust du gleich deinen Workspace auf: Seitenleiste links, Editor in der Mitte.</p>
+  <h3>Die vier Blöcke, die du sofort brauchst</h3>
+  <ul>
+    <li>Text und Überschriften — für die Grundstruktur jeder Seite</li>
+    <li>To-Do — für alles, was am Ende abgehakt werden soll</li>
+    <li>Callouts — für Hinweise, die aus dem Text herausstechen sollen</li>
+  </ul>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
