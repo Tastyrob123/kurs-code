@@ -8759,6 +8759,16 @@
         {name:'Aufwand (h)', wert:1},
         {name:'Prioritäten', wert:1}
       ]},
+    /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 (New To Do / Gewichtsupdate / Meeting Note) + Automations-Konzept. */
+    { kachel_id:'m1_buttons', kachel_name:'Buttons & Automationen', ist_produkt_kachel:true,
+      einheit:'Buttons', einheit_typ:'anzahl',
+      objekt_varianten:[
+        {name:'Button anlegen (Grundprinzip)', wert:0},
+        {name:'New To Do', wert:1},
+        {name:'Gewichtsupdate', wert:1},
+        {name:'Create Meeting Note', wert:1},
+        {name:'Native Automation (Trigger & Actions)', wert:1}
+      ]},
     { kachel_id:'km_master', kachel_name:'Kostenauswertung Master', ist_produkt_kachel:true,
       einheit:'Kennzahlen', einheit_typ:'anzahl',
       objekt_varianten:[
@@ -9622,7 +9632,23 @@ var TSISL_TEAM_ONB_V2=[
     {title:'10. Prioritäten', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Priorität → Berechnen : Werte anzeigen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Priorität</p><p class="notion-text">→ <b>Berechnen :</b> Werte anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäten</p><p class="notion-text">Dir wird hier eine Liste der Prioritäten aller verknüpften Aufgaben angezeigt — eine Formel, die daraus einen Durchschnitt errechnet, baust du in Lektion 1.5.</p>'}
   ];
 
+  /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 + Automations-Konzept. */
+  var TS17_STEPS=[
+    {title:'1. Button anlegen (Grundprinzip)', desc:'/button einfügen, Aktion "Seite erstellen in" wählen, Zieldatenbank festlegen.', html:'<p class="notion-text">→ <b>/button</b> einfügen</p><p class="notion-text">→ <b>Aktion :</b> „Seite erstellen in" wählen</p><p class="notion-text">→ <b>Zieldatenbank</b> festlegen — der Button erstellt ab jetzt bei jedem Klick einen neuen Eintrag dort.</p><p class="notion-text">Darunter kannst du Felder vorausfüllen, die jeder neue Eintrag automatisch bekommt.</p>'},
+    {title:'2. New To Do', desc:'Ziel: DB II Aufgaben & ToDos → Feld "To Do of the Day" vorausgefüllt mit Haken.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> DB II : Aufgaben &amp; ToDos</p><p class="notion-text">→ <b>Vorausgefülltes Feld :</b> „To Do of the Day" → Haken</p><p class="notion-text">→ <b>Label :</b> „+ New To Do"</p><p class="notion-text">Ein Klick legt eine neue Aufgabe an, die sofort in der Daily-Tasks-Ansicht auftaucht.</p>'},
+    {title:'3. Gewichtsupdate', desc:'Ziel: Gewicht-Tracker → Felder Datum und Zeitpunkt automatisch vorausgefüllt.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Gewicht-Tracker</p><p class="notion-text">→ <b>Vorausgefüllte Felder :</b> Datum = heute, Zeitpunkt = jetzt</p><p class="notion-text">→ <b>Label :</b> „Gewichtsupdate"</p><p class="notion-text">Du trägst nur noch den Wert in Kilogramm ein — Datum und Uhrzeit stehen schon.</p>'},
+    {title:'4. Create Meeting Note', desc:'Ziel: Meeting-Notizen → öffnet direkt eine vorbereitete Notiz-Vorlage.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Meeting-Notizen</p><p class="notion-text">→ <b>Vorlage :</b> Standard-Meeting-Note-Template wird automatisch eingefügt</p><p class="notion-text">→ <b>Label :</b> „Create Meeting Note"</p><p class="notion-text">Ein Klick öffnet die neue Notiz direkt zum Tippen, ohne Struktur von Hand aufzubauen.</p>'},
+    {title:'5. Native Automation (Trigger & Actions)', desc:'Datenbank reagiert selbst auf Änderungen, ganz ohne Button-Klick.', html:'<p class="notion-text">→ <b>Trigger :</b> „Wenn Status sich ändert zu Erledigt"</p><p class="notion-text">→ <b>Aktion :</b> Erledigt-Datum setzen / Benachrichtigung senden</p><p class="notion-text">Anders als ein Button braucht eine native Automation keinen Klick — sie reagiert von selbst, sobald die Bedingung eintritt.</p>'}
+  ];
+
   var PAGES=[
+    /* Lektion 1.7 (Modul 1) — Buttons & Automationen, kleiner Warenkorb. Notion-Seite leer -> Config-Steps. */
+    { path:/\/automations-buttons\/?$/, kachel:'m1_buttons',
+      anchorSel:'#ts17wk', steps:TS17_STEPS,
+      eyebrow:'DB : Buttons & Automationen',
+      title:'Deine Buttons. <span>Ein Klick, ein Eintrag.</span>',
+      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Um einen Button anzulegen, drücke / und wähle Button.',
+      summary:'Buttons', chain:true },
     /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + Rollups. Notion-Seite leer -> Config-Steps. */
     { path:/\/relationen-rollups\/?$/, kachel:'m1_projekte',
       anchorSel:'#ts14wk', steps:TS14_STEPS,
@@ -10180,7 +10206,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:10, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:10, m1_buttons:5, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -26028,6 +26054,452 @@ var TSISL_TEAM_ONB_V2=[
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/automations-buttons">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   automations-buttons — Hero + Einleitung "Ein Klick erledigt es."
+   Lektion 1.7 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #3, klein)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.7');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts17intro-css')) return;
+    var s=document.createElement('style'); s.id='ts17intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts17intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.7" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.7</div>'+
+        '<h1 class="ts-hero__title">Ein Klick <span class="ts-gold">erledigt es</span>.</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts17intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts17intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Ein Button in Notion ist kein Deko-Element, sondern ein kleiner Automat: Ein Klick, und er legt dir einen neuen Eintrag an — mit allen Feldern schon richtig vorausgefüllt. Genau so funktionieren die drei Buttons in meinem eigenen System.</p>
+  <p>Der New-To-Do-Button setzt die Checkbox <b>To Do of the Day</b> sofort, der Gewichtsupdate-Button trägt automatisch Datum und Uhrzeit ein, der Meeting-Note-Button öffnet eine fertige Notiz-Vorlage. Native DB-Automationen gehen noch weiter: Sie reagieren auf Änderungen, ganz ohne Klick.</p>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   automations-buttons — Erkläranimation "Klick-Ripple" (Button löst Kettenreaktion aus)
+   Eigenständiges Konzept: ein Button, drei ausstrahlende Ripple-Ringe + ein Häkchen, das
+   nach dem virtuellen Klick erscheint. Endzustand=Default.
+   ============================================================ */
+(function(){
+  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts17bau{width:min(720px,92vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
+  #ts17bau .bau-head{max-width:640px;margin:0 auto 30px;padding:0 24px}
+  #ts17bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts17bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts17bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts17bau h2 .ts-gold{color:#c7b489}
+  #ts17bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:520px}
+  #ts17bau .stage{position:relative;height:200px;display:flex;align-items:center;justify-content:center}
+  #ts17bau.js .stage{opacity:0;transform:translateY(20px)}
+  #ts17bau.js.on .stage{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  #ts17bau .btn{position:relative;z-index:2;background:#c7b489;color:#05060b;font:700 14px/1 -apple-system,sans-serif;padding:14px 26px;border-radius:999px;box-shadow:0 20px 40px -18px rgba(0,0,0,.7)}
+  #ts17bau .ring{position:absolute;top:50%;left:50%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:1.5px solid rgba(199,180,137,.6);opacity:0}
+  #ts17bau.js.on .ring.r1{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite}
+  #ts17bau.js.on .ring.r2{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite .5s}
+  #ts17bau.js.on .ring.r3{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite 1s}
+  @keyframes ts17ring{0%{transform:scale(.6);opacity:0}10%{opacity:.7}70%{opacity:0}100%{transform:scale(2.4);opacity:0}}
+  #ts17bau .check{position:absolute;top:6%;right:22%;width:34px;height:34px;border-radius:50%;background:#8FCBAA;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5)}
+  #ts17bau.js.on .check.fire{animation:ts17check 2.6s cubic-bezier(.22,1,.36,1) infinite}
+  @keyframes ts17check{0%,55%{opacity:0;transform:scale(.5)}62%{opacity:1;transform:scale(1.1)}70%{transform:scale(1)}92%{opacity:1}100%{opacity:0}}
+  #ts17bau .check svg{width:16px;height:16px;color:#05060b}
+  #ts17bau .bau-foot{display:flex;justify-content:center;margin-top:20px}
+  #ts17bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts17bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  #ts17bau.reduced .stage{opacity:1;transform:none}
+  #ts17bau.reduced .ring{opacity:.4;transform:scale(1.4)}
+  #ts17bau.reduced .check{opacity:1;transform:scale(1)}
+  `;
+
+  function injectCSS(){
+    if(document.getElementById('ts17bau-css')) return;
+    var s=document.createElement('style'); s.id='ts17bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Ein Klick, eine Kette</div>'+
+      '<h2>Der Button <span class="ts-gold">löst etwas aus</span>.</h2>'+
+      '<p class="bau-sub">Ein Klick auf den Button legt still im Hintergrund einen fertigen Eintrag an.</p>'+
+      '</div>'+
+      '<div class="stage">'+
+        '<span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>'+
+        '<button class="btn" type="button">+ New To Do</button>'+
+        '<span class="check fire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg></span>'+
+      '</div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts17bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts17bau')) return;
+    var anchor=document.getElementById('ts17intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts17bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    root.querySelector('#ts17bauReplay').addEventListener('click', function(){ play(root); });
+
+    if(!document.getElementById('ts17wk')){
+      var wk=document.createElement('div'); wk.id='ts17wk';
+      root.parentNode.insertBefore(wk, root.nextSibling);
+    }
+
+    if(reduced){ root.classList.add('reduced'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   automations-buttons — Ergebnis-Blick "Ein Klick, keine Formulare mehr." (Text links / PC rechts)
+   ============================================================ */
+(function(){
+  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #ts17res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts17res .r-text{flex:1 1 0}
+  #ts17res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
+  #ts17res h3 .ts-accent{color:#c7b489}
+  #ts17res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
+  #ts17res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
+  #ts17res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #ts17res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts17res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
+  #ts17res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #ts17res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
+  #ts17res .r-cap b{color:#c7b489;font-weight:600}
+  #ts17res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
+  @media(max-width:820px){ #ts17res{flex-direction:column} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts17res-css')) return;
+    var s=document.createElement('style'); s.id='ts17res-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="r-text"><h3>Ein Klick, <span class="ts-accent">keine Formulare mehr.</span></h3>'+
+      '<p>Sobald die drei Buttons stehen, verschwindet die Hürde des leeren Formulars: Du musst nie wieder zehn Felder von Hand ausfüllen, nur um eine Aufgabe oder ein Gewicht einzutragen — ein Klick reicht, der Rest steht schon vorausgefüllt bereit. Genau diese Kleinigkeit entscheidet im Alltag, ob ein System auch an hektischen Tagen benutzt wird oder nicht.</p>'+
+      '<p>Und weil Buttons und native Automationen zusammenarbeiten, kannst du festlegen, was NACH dem Klick automatisch passiert — etwa eine Benachrichtigung, sobald der neue Eintrag als erledigt markiert wird. Zwei Bausteine, ein durchgehend automatisierter Ablauf, der dir jeden Tag ein paar Klicks abnimmt.</p></div>'+
+      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
+      '<div class="r-cap">Buttons &amp; Automationen <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts17res')) return;
+    var anchor=document.getElementById('tsshop--m1_buttons'); if(!anchor){ anchor=document.getElementById('ts17wk'); }
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts17res'; root.innerHTML=html();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   automations-buttons — Empfehlungs-Kachel "Empfehlung zur Einrichtung" (Verhalten 1:1, Fixes bereits enthalten)
+   ============================================================ */
+(function(){
+  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['Ein Button, ein Ziel','Felder sinnvoll vorausfüllen','Automation statt Erinnerung','Label ehrlich benennen'];
+  var TEXTS=[
+    'Ein Button soll genau eine Datenbank befüllen — nicht mehrere Ziele gleichzeitig verwalten.',
+    'Fülle nur Felder vor, die bei jedem Klick wirklich denselben Wert brauchen, sonst wird der Button unehrlich.',
+    'Wiederkehrende Prüfungen gehören in eine native Automation, nicht in eine Erinnerung, die du selbst auslösen musst.',
+    'Nenne den Button so, wie er wirklich wirkt — „New To Do" ist klarer als ein generisches „Neu".'
+  ];
+
+  var CSS=`
+  #ts17emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts17emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+  #ts17emp.js.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts17emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
+  #ts17emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts17emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts17emp:hover::before{opacity:1}
+  #ts17emp.beat{animation:ts17empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts17empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
+  #ts17emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts17emp .db-hd .g{color:#c7b489}
+  #ts17emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts17emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts17emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts17emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts17emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts17emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts17emp .emp-right{position:relative;z-index:1}
+  #ts17emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts17emp .emph .eg{color:#c7b489}
+  #ts17emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts17emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts17emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts17emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts17emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts17emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts17emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts17emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts17emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts17emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts17emp{grid-template-columns:1fr} #ts17emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts17emp-css')) return;
+    var s=document.createElement('style'); s.id='ts17emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Deine <span class="g">Button-Einrichtung</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Einrichtung</span></div>'+
+      '<p class="p">Damit Buttons verlässlich bleiben, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts17emp')) return;
+    var anchor=document.getElementById('ts17res'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts17emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   automations-buttons — Seitenabschluss (Learnings + Weiter-Button)
+   ============================================================ */
+(function(){
+  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du legst Buttons an, die neue Einträge mit vorausgefüllten Feldern erstellen.',
+    'Du weißt, welche Felder sich fürs Vorausfüllen eignen.',
+    'Du unterscheidest Button (Klick) von nativer Automation (reagiert selbst).',
+    'Du benennst Buttons so, dass ihre Wirkung sofort klar ist.'
+  ];
+
+  var CSS=`
+  #ts17l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts17l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts17l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts17l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts17l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts17l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts17lFloat 7s ease-in-out infinite}
+  #ts17l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts17l .tsl-orb:nth-child(1){animation-delay:0s} #ts17l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts17l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts17l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts17l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts17l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts17l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts17l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts17l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts17l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts17l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts17l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts17lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts17l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts17l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts17l-css')) return;
+    var s=document.createElement('style'); s.id='ts17l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts17l')) return;
+    var anchor=document.getElementById('ts17emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts17l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/system-architektur-dashboard">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
