@@ -11760,6 +11760,142 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
+   rezepturen — #tsrzemp Abschnitt 07 Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   Muster: Abschnitts-Katalog 07 (#tszein / #tskmemp / #tspkemp) — Verhalten 1:1
+   (Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat, Sync-Highlight + Goldlinie).
+   Links: der Rezepturen-Alltag in 4 Schritten, synchron zur rechten nummerierten Liste.
+   Sitzt direkt unter dem Rezeptur-Rechner (#tsd5, "Basilikum Pesto"), vor den Learnings (#tsl).
+   ============================================================ */
+(function(){
+  if(window.__tsrzemp) return;
+  function on(){ return /\/rezepturen\/?$/.test(location.pathname); }
+  var STEPS=[
+    {n:'01', l:'Namen vergeben'},
+    {n:'02', l:'Portionsgröße setzen'},
+    {n:'03', l:'Zutaten verknüpfen'},
+    {n:'04', l:'Werte prüfen'}
+  ];
+  var CSS=`
+  #tsrzemp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s ease}
+  #tsrzemp.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  #tsrzemp *{box-sizing:border-box}
+  #tsrzemp::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #tsrzemp::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #tsrzemp.glow::before{opacity:1}
+  #tsrzemp.beat{animation:tsrzempBeat 2.6s ease-in-out}
+  @keyframes tsrzempBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
+  #tsrzemp .emp-grid{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #tsrzemp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #tsrzemp .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease}
+  #tsrzemp .emp-link path.on{opacity:1}
+  #tsrzemp .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #tsrzemp .emp-link circle.on{opacity:1}
+  #tsrzemp .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #tsrzemp .emp-anim-hd{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.15rem;color:#fff;margin:0 0 6px}
+  #tsrzemp .emp-anim-hd span{color:#c7b489}
+  #tsrzemp .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
+  #tsrzemp.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #tsrzemp.in .emp-step:nth-child(1){transition-delay:.15s}#tsrzemp.in .emp-step:nth-child(2){transition-delay:.28s}#tsrzemp.in .emp-step:nth-child(3){transition-delay:.41s}#tsrzemp.in .emp-step:nth-child(4){transition-delay:.54s}
+  #tsrzemp .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #tsrzemp .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #tsrzemp .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #tsrzemp .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #tsrzemp .emp-step.on .emp-step-l{color:#fff}
+  #tsrzemp .emp-text{position:relative;z-index:2}
+  #tsrzemp .emp-h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #tsrzemp .emp-h .eg{color:#c7b489}
+  #tsrzemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  #tsrzemp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #tsrzemp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #tsrzemp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #tsrzemp .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  #tsrzemp .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ #tsrzemp .emp-grid{grid-template-columns:1fr;gap:26px} #tsrzemp svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #tsrzemp{transform:none;opacity:1} #tsrzemp .emp-step{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsrzemp-css'))return; var s=document.createElement('style'); s.id='tsrzemp-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsrzemp';
+    var stepsHtml=STEPS.map(function(s,i){ return '<div class="emp-step" data-i="'+i+'"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    el.innerHTML=`
+<div class="emp-grid">
+  <svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>
+  <div class="emp-anim">
+    <div class="emp-anim-hd">Dein <span>Rezepturen-Alltag</span></div>
+    ${stepsHtml}
+  </div>
+  <div class="emp-text">
+    <h3 class="emp-h">Empfehlung zur <span class="eg">Nutzung</span></h3>
+    <p class="emp-intro">Damit DB V im Alltag trägt und jede Rezeptur später sauber in die Gerichte einläuft, halte dich an diese Reihenfolge:</p>
+    <ol class="emp-ol">
+      <li data-i="0">Gib der Rezeptur sofort einen sprechenden Namen, z. B. <b>Basilikum-Pesto</b>. Nummern oder Kürzel machen die Wiederverwendung in den Gerichten später mühsam.</li>
+      <li data-i="1">Setz die <b>Portionsgröße</b> zuerst, bevor du weiterrechnest. Sie teilt Menge und Preis auf jede Portion auf — alles Weitere hängt an diesem einen Wert.</li>
+      <li data-i="2">Leg hier nur echte Bausteine an: Saucen, Dressings, Pestos, Sirupe. Ein komplettes Gericht gehört erst in die <b>Gerichte-Datenbank</b>.</li>
+      <li data-i="3">Pflege Allergene und Nährwerte einmal an der Zutat, nie an der Rezeptur selbst. Sie ziehen sich automatisch in jede Rezeptur, die diese Zutat verwendet.</li>
+    </ol>
+  </div>
+</div>`;
+    return el;
+  }
+  function drawLink(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect();
+    var a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2;
+    var x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function setup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ drawLink(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ drawLink(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsrzemp'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsrzemp')) return;
+    var anchor=document.getElementById('tsd5')||document.getElementById('tsl');
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    setup(el);
+  }
+  window.__tsrzemp=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    #tsrezsys — ZUTATEN→REZEPTUR (DB V) · /rezepturen  [v5, 2026-07-22]
    Zwischen dem (jetzt einzigen, gemergten) Rezepturen-Warenkorb
    (#tsshop--db5_rezepturen, seit 22.07.2026 inkl. Finance-Erweiterung —
