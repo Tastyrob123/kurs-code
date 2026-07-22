@@ -20967,7 +20967,7 @@ var TSISL_TEAM_ONB_V2=[
   #tsnaiq.js .q-src.on{opacity:1;transform:none}
 
   /* SVG-Faecher unter der Quelle */
-  #tsnaiq .q-fan{position:relative;width:100%;height:clamp(340px,42vw,420px);margin-top:-4px}
+  #tsnaiq .q-fan{position:relative;width:100%;height:clamp(480px,54vw,600px);margin-top:8px}
   #tsnaiq .q-fan svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   #tsnaiq .q-path{fill:none;stroke-linecap:round}
   #tsnaiq .q-path-out{stroke:rgba(255,255,255,.16);stroke-width:1.6;stroke-dasharray:2 7}
@@ -21001,7 +21001,7 @@ var TSISL_TEAM_ONB_V2=[
 
   /* Rechte Faecher-Badges: versetzt, nicht als starre Saeule */
   #tsnaiq .q-badge{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;
-    gap:8px;width:118px;text-align:center}
+    gap:6px;width:132px;text-align:center}
   #tsnaiq .q-badge-c{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
     border:1.5px solid rgba(255,255,255,.12);
     background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;
@@ -21035,11 +21035,11 @@ var TSISL_TEAM_ONB_V2=[
     color:rgba(255,255,255,.35);font-variant-numeric:tabular-nums;letter-spacing:-.01em;
     transition:color .6s ${EASE}}
   #tsnaiq .q-core.lit .q-core-v{color:#c7b489}
-  #tsnaiq .q-core-note{font-size:10px;line-height:1.4;color:rgba(255,255,255,.3);margin-top:8px}
+  #tsnaiq .q-core-note{font-size:10px;line-height:1.4;color:rgba(255,255,255,.3);margin-top:6px;max-width:220px}
   #tsnaiq.js .q-core{opacity:0;transform:scale(.9)}
   #tsnaiq.js .q-core.on{opacity:1;transform:none;transition:opacity .6s ${EASE},transform .6s ${EASE}}
 
-  #tsnaiq .q-cap{max-width:700px;margin:38px auto 0;text-align:center;
+  #tsnaiq .q-cap{max-width:700px;margin:64px auto 0;text-align:center;
     font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
   #tsnaiq .q-cap b{color:#c7b489;font-weight:600}
   #tsnaiq .q-replay{display:block;margin:20px auto 0;background:transparent;cursor:pointer;
@@ -21064,16 +21064,16 @@ var TSISL_TEAM_ONB_V2=[
 
   /* Faecher-Geometrie (viewBox 920x400): Quelle oben-mittig (460,0), 4 Badges rechts gestaffelt,
      Kern unten-rechts. Links ein gedaempfter, dashed Pfad zum externen Chat. */
-  var VB_W=920, VB_H=400;
+  var VB_W=920, VB_H=580;
   var SRC={x:460,y:6};
   var BADGES=[
-    {x:560,y:96,  n:'DB 0 : Inventurliste', v:'3,20 € / kg'},
-    {x:660,y:176, n:'DB IV : Zutaten',      v:'120 g Einwaage'},
-    {x:720,y:264, n:'DB V : Rezepturen',    v:'1 × Tomate'},
-    {x:730,y:352, n:'DB XI : Gerichte',     v:'Wareneinsatz (€)'}
+    {x:540,y:108, n:'DB 0 : Inventurliste', v:'3,20 € / kg'},
+    {x:640,y:238, n:'DB IV : Zutaten',      v:'120 g Einwaage'},
+    {x:700,y:368, n:'DB V : Rezepturen',    v:'1 × Tomate'},
+    {x:700,y:478, n:'DB XI : Gerichte',     v:'Wareneinsatz (€)'}
   ];
-  var CORE={x:610,y:392};
-  var EXTP={x:150,y:230};
+  var CORE={x:560,y:560};
+  var EXTP={x:150,y:300};
 
   function pathD(pts){
     var d='M'+pts[0].x+' '+pts[0].y;
