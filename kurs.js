@@ -21879,6 +21879,73 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
+   notion-ai-fr-unser-system — #tsnaiflow Verbindungs-Animation zwischen 02 und 03
+   Robert-Feedback 22.07.2026: "es muessen noch Animationen dazwischen" — schmales,
+   dekoratives Bindeglied: eine gestrichelte Linie zieht sich, ein wandernder Lichtpunkt
+   laeuft von der Antwort aus Abschnitt 02 nach unten zur Frage "Und im Alltag?", die
+   direkt zu Abschnitt 03 ueberleitet. Kein neuer Abschnitt im Katalog-Sinn, rein optischer
+   Uebergang. Leichtgewichtig: ein Pfad, ein Punkt, keine Dauerschleife ausser dezentem Fade.
+   ============================================================ */
+(function(){
+  if(window.__tsnaiflow) return; window.__tsnaiflow=true;
+  function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
+  var EASE="cubic-bezier(.16,1,.3,1)";
+
+  var CSS=`
+  #tsnaiflow{width:100%;height:74px;margin:-8px auto -8px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;position:relative;overflow:hidden}
+  #tsnaiflow .fl-line{width:1px;height:34px;background:linear-gradient(180deg,rgba(199,180,137,.05),rgba(199,180,137,.4),rgba(199,180,137,.05));
+    position:relative}
+  #tsnaiflow .fl-dot{position:absolute;left:50%;top:0;width:5px;height:5px;border-radius:50%;
+    transform:translateX(-50%);background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.85);opacity:0}
+  #tsnaiflow.js .fl-dot.go{animation:flDot 3.2s ${EASE} .3s infinite}
+  @keyframes flDot{0%{opacity:0;top:0}10%{opacity:1}85%{opacity:1}100%{opacity:0;top:100%}}
+  #tsnaiflow .fl-txt{margin-top:10px;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.32)}
+  @media(prefers-reduced-motion:reduce){ #tsnaiflow.js .fl-dot{animation:none!important;opacity:0!important} }
+  `;
+
+  var HTML='<div class="fl-line"><span class="fl-dot"></span></div><div class="fl-txt">Und im Alltag?</div>';
+
+  function injectCSS(){ if(document.getElementById('tsnaiflow-css'))return;
+    var s=document.createElement('style'); s.id='tsnaiflow-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function arm(root){
+    root.classList.add('js');
+    var dot=root.querySelector('.fl-dot');
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ dot.classList.toggle('go', e.isIntersecting); });
+    },{threshold:.2});
+    io.observe(root);
+    window.__tsnaiflowKill=function(){ try{ io.disconnect(); }catch(e){} window.__tsnaiflowKill=null; };
+  }
+
+  function mount(){
+    if(!on()){
+      if(window.__tsnaiflowKill){ try{ window.__tsnaiflowKill(); }catch(e){} }
+      var old=document.getElementById('tsnaiflow'); if(old&&old.parentNode) old.parentNode.removeChild(old);
+      return;
+    }
+    if(document.getElementById('tsnaiflow')) return true;
+    var a=document.getElementById('tsnaiq'); if(!a||!a.parentNode) return;
+    injectCSS();
+    var root=document.createElement('div');
+    root.id='tsnaiflow'; root.innerHTML=HTML;
+    a.parentNode.insertBefore(root, a.nextSibling);
+    arm(root);
+    return true;
+  }
+
+  (function(){
+    if(mount()) return;
+    var tries=0;
+    var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+  })();
+})();
+
+/* ============================================================
    notion-ai-fr-unser-system — #tsnaivid Abschnitt 03 Erklaervideo (PC links + Text rechts)
    Katalog 03: 2 Spalten 50/50, Gap FEST 18px, PC fuellt seine halbe Spalte KOMPLETT (kein max-width),
    H2 FEST 42px/1.15/zentriert/einzeilig, Fliesstext linksbuendig 600-650 Zeichen (Pflicht),
@@ -21900,9 +21967,13 @@ var TSISL_TEAM_ONB_V2=[
     gap:18px;align-items:center}
 
   /* linke Spalte: PC fuellt die halbe Spalte komplett */
-  #tsnaivid .vd-pc{display:flex;align-items:center;justify-content:center;width:100%}
+  #tsnaivid .vd-pc{display:flex;align-items:center;justify-content:center;width:100%;isolation:isolate}
   #tsnaivid .vd-mac{position:relative;width:100%;cursor:pointer;line-height:0;
     transition:transform .5s ${EASE}}
+  #tsnaivid .vd-mac::after{content:"";position:absolute;left:8%;right:8%;bottom:-14%;height:40%;
+    z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(199,180,137,.16),rgba(199,180,137,0) 72%);
+    animation:vdGlow 4.8s ease-in-out infinite}
+  @keyframes vdGlow{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1.04)}}
   #tsnaivid .vd-mac:hover{transform:scale(1.02)}
   #tsnaivid .vd-lid{position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;
     background:linear-gradient(160deg,#2a2d3a,#14161f);padding:10px;
@@ -22043,9 +22114,14 @@ var TSISL_TEAM_ONB_V2=[
   #tsnai2mac .m2-txt p:last-child{margin-bottom:0}
   #tsnai2mac .m2-txt b{color:#c7b489;font-weight:600}
 
-  #tsnai2mac .m2-tile{width:100%;max-width:520px;cursor:pointer;line-height:normal;
+  #tsnai2mac .m2-pcwrap{position:relative;isolation:isolate}
+  #tsnai2mac .m2-tile{position:relative;width:100%;max-width:520px;cursor:pointer;line-height:normal;
     filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
     transition:transform .5s ${EASE},filter .5s ${EASE}}
+  #tsnai2mac .m2-tile::after{content:"";position:absolute;left:14%;right:14%;bottom:-10%;height:38%;
+    z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(199,180,137,.14),rgba(199,180,137,0) 72%);
+    animation:m2Glow 5.4s ease-in-out infinite .6s}
+  @keyframes m2Glow{0%,100%{opacity:.5;transform:scale(.94)}50%{opacity:1;transform:scale(1.05)}}
   #tsnai2mac .m2-tile:hover{transform:translateY(-4px) scale(1.02);
     filter:drop-shadow(0 22px 52px rgba(0,0,0,.55)) drop-shadow(0 0 26px rgba(199,180,137,.22))}
   @keyframes naiBeat{0%,70%,100%{filter:drop-shadow(0 22px 52px rgba(0,0,0,.55)) drop-shadow(0 0 26px rgba(199,180,137,.22))}
