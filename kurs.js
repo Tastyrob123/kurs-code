@@ -1650,7 +1650,7 @@
   #tstarget.js .tg-wrap.on{opacity:1;transform:none}
 
   /* Buehne: quadratisch, 5 konzentrische Ringe + Kern + 17 Knoten */
-  #tstarget .tg-stage{position:relative;width:clamp(420px,56vw,660px);height:clamp(420px,56vw,660px);margin:0 auto 56px}
+  #tstarget .tg-stage{position:relative;width:clamp(420px,56vw,660px);height:clamp(420px,56vw,660px);margin:clamp(110px,13.5vw,178px) auto 56px}
   #tstarget .tg-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
   #tstarget .tg-track{fill:none;stroke:rgba(255,255,255,.075);stroke-width:1.4;transform-box:fill-box;transform-origin:50% 50%}
   #tstarget.js .tg-track{opacity:0;transform:scale(.9)}
@@ -1680,35 +1680,35 @@
 
   /* Knoten auf den Ringen: Pivot (fix im Zentrum, 0x0) -> Orb (rotierender Arm, Kreisbahn per rotate+translate+gegenrotate) -> Vis (Einblenden) -> Badge/Wert */
   #tstarget .tg-sat{position:absolute;left:50%;top:50%;width:0;height:0;z-index:2}
-  #tstarget .tg-orb{position:absolute;left:0;top:0;transform-origin:0 0;width:var(--orb-d);height:var(--orb-d);margin:calc(var(--orb-d) * -.5) 0 0 calc(var(--orb-d) * -.5);animation-name:tg-orbit-cw;animation-duration:var(--dur,32s);animation-delay:var(--delay,0s);animation-timing-function:linear;animation-iteration-count:infinite;animation-play-state:paused}
+  #tstarget .tg-orb{position:absolute;left:0;top:0;transform-origin:0 0;width:var(--orb-w);height:var(--orb-h);overflow:visible;margin:calc(var(--orb-h) * -.5) 0 0 calc(var(--orb-w) * -.5);animation-name:tg-orbit-cw;animation-duration:var(--dur,32s);animation-delay:var(--delay,0s);animation-timing-function:linear;animation-iteration-count:infinite;animation-play-state:paused}
   #tstarget .tg-sat[data-dir="ccw"] .tg-orb{animation-name:tg-orbit-ccw}
   #tstarget.js .tg-wrap.on .tg-sat.in .tg-orb{animation-play-state:running}
   @keyframes tg-orbit-cw{from{transform:rotate(0deg) translateX(var(--r,60px)) rotate(0deg)}to{transform:rotate(360deg) translateX(var(--r,60px)) rotate(-360deg)}}
   @keyframes tg-orbit-ccw{from{transform:rotate(0deg) translateX(var(--r,60px)) rotate(0deg)}to{transform:rotate(-360deg) translateX(var(--r,60px)) rotate(360deg)}}
 
-  #tstarget .tg-orb-vis{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:0;transform:scale(.72)}
+  #tstarget .tg-orb-vis{width:var(--orb-w);height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;opacity:0;transform:scale(.72)}
   #tstarget.js .tg-wrap.on .tg-sat.in .tg-orb-vis{opacity:1;transform:scale(1);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.34,1.56,.64,1)}
 
-  #tstarget .tg-orb-badge{width:var(--badge-d);height:var(--badge-d);border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0b0d14;flex:0 0 auto}
+  #tstarget .tg-orb-badge{width:var(--badge-d);height:var(--badge-d);border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0b0d14;flex:0 0 auto;box-shadow:0 6px 16px -6px rgba(0,0,0,.85)}
+  #tstarget .tg-orb-badge img{width:100%;height:100%;object-fit:cover;display:block}
   #tstarget .tg-orb-badge svg{width:56%;height:56%;stroke:rgba(255,255,255,.62);fill:none}
-  #tstarget .tg-sat[data-ring="0"] .tg-orb-badge{border:1px solid rgba(199,180,137,.55);background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#0b0d14}
+  #tstarget .tg-sat[data-ring="0"] .tg-orb-badge{border:1.5px solid rgba(199,180,137,.55)}
   #tstarget .tg-sat[data-ring="0"] .tg-orb-badge svg{stroke:#efe6d2}
-  #tstarget .tg-sat[data-ring="1"] .tg-orb-badge{border:1px solid rgba(199,180,137,.34)}
-  #tstarget .tg-sat[data-ring="1"] .tg-orb-badge svg{stroke:#dcd0b4}
-  #tstarget .tg-sat[data-ring="2"] .tg-orb-badge{border:1px solid rgba(255,255,255,.18)}
-  #tstarget .tg-sat[data-ring="3"] .tg-orb-badge{border:1px solid rgba(255,255,255,.13)}
-  #tstarget .tg-sat[data-ring="3"] .tg-orb-badge svg{stroke:rgba(255,255,255,.5)}
-  #tstarget .tg-sat[data-ring="4"] .tg-orb-badge{border:1px solid rgba(255,255,255,.1)}
-  #tstarget .tg-sat[data-ring="4"] .tg-orb-badge svg{stroke:rgba(255,255,255,.4)}
+  #tstarget .tg-sat[data-ring="1"] .tg-orb-badge{border:1.5px solid rgba(199,180,137,.34)}
+  #tstarget .tg-sat[data-ring="2"] .tg-orb-badge{border:1px solid rgba(255,255,255,.2)}
+  #tstarget .tg-sat[data-ring="3"] .tg-orb-badge{border:1px solid rgba(255,255,255,.15)}
+  #tstarget .tg-sat[data-ring="4"] .tg-orb-badge{border:1px solid rgba(255,255,255,.12)}
 
+  #tstarget .tg-orb-name{font-size:var(--name-fs,9.5px);font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.72);line-height:1.15;white-space:nowrap;text-align:center}
+  #tstarget .tg-sat[data-ring="0"] .tg-orb-name,#tstarget .tg-sat[data-ring="1"] .tg-orb-name{color:rgba(255,255,255,.85)}
   #tstarget .tg-orb-val{font-size:var(--val-fs,10.5px);font-weight:700;color:#efe6d2;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap}
 
-  /* Groessen je Ring, so bemessen dass sie mit Sicherheitsabstand innerhalb der Ring-Luecke bleiben (keine Ueberschneidung beim Rotieren) */
-  #tstarget .tg-sat[data-ring="0"]{--badge-d:clamp(30px,5.6vw,44px);--orb-d:clamp(30px,5.6vw,44px);--val-fs:clamp(9px,1.6vw,11px)}
-  #tstarget .tg-sat[data-ring="1"]{--badge-d:clamp(26px,4.8vw,38px);--orb-d:clamp(26px,4.8vw,38px);--val-fs:clamp(8px,1.4vw,10px)}
-  #tstarget .tg-sat[data-ring="2"]{--badge-d:clamp(24px,4.2vw,34px);--orb-d:clamp(24px,4.2vw,34px)}
-  #tstarget .tg-sat[data-ring="3"]{--badge-d:clamp(22px,3.8vw,32px);--orb-d:clamp(22px,3.8vw,32px)}
-  #tstarget .tg-sat[data-ring="4"]{--badge-d:clamp(21px,3.6vw,30px);--orb-d:clamp(21px,3.6vw,30px)}
+  /* Groessen je Ring, so bemessen dass Foto+Beschriftung mit Sicherheitsabstand innerhalb der Ring-Luecke bleiben (keine Ueberschneidung beim Rotieren) */
+  #tstarget .tg-sat[data-ring="0"]{--badge-d:clamp(34px,6vw,46px);--orb-w:clamp(56px,9vw,78px);--orb-h:clamp(65px,11.5vw,81px);--name-fs:clamp(8.5px,1.4vw,10px);--val-fs:clamp(9.5px,1.6vw,11.5px)}
+  #tstarget .tg-sat[data-ring="1"]{--badge-d:clamp(30px,5.2vw,40px);--orb-w:clamp(56px,9vw,78px);--orb-h:clamp(58px,10vw,72px);--name-fs:clamp(8px,1.3vw,9.5px);--val-fs:clamp(8.5px,1.4vw,10px)}
+  #tstarget .tg-sat[data-ring="2"]{--badge-d:clamp(28px,4.6vw,36px);--orb-w:clamp(58px,9vw,78px);--orb-h:clamp(42px,7.2vw,52px);--name-fs:clamp(8px,1.3vw,9.5px)}
+  #tstarget .tg-sat[data-ring="3"]{--badge-d:clamp(26px,4.2vw,32px);--orb-w:clamp(60px,9vw,80px);--orb-h:clamp(39px,6.6vw,47px);--name-fs:clamp(7.5px,1.2vw,9px)}
+  #tstarget .tg-sat[data-ring="4"]{--badge-d:clamp(24px,3.8vw,30px);--orb-w:clamp(62px,9.4vw,84px);--orb-h:clamp(37px,6.2vw,45px);--name-fs:clamp(7.5px,1.2vw,9px)}
 
   #tstarget .tg-caption{max-width:700px;min-height:56px;margin:34px auto 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:center}
   #tstarget .tg-note{display:block;margin-top:10px;font-size:10px;letter-spacing:.02em;color:rgba(255,255,255,.28)}
@@ -1721,14 +1721,14 @@
 
   /* Mobile: Buehne kleiner, Knoten kompakter */
   @media(max-width:720px){
-    #tstarget .tg-stage{width:min(96vw,400px);height:min(96vw,400px)}
+    #tstarget .tg-stage{width:min(96vw,400px);height:min(96vw,400px);margin-top:110px}
     #tstarget .tg-plate{width:70px;height:70px}
     #tstarget .tg-price{font-size:1.25rem}
-    #tstarget .tg-sat[data-ring="0"]{--badge-d:26px;--orb-d:26px;--val-fs:8.5px}
-    #tstarget .tg-sat[data-ring="1"]{--badge-d:22px;--orb-d:22px;--val-fs:7.5px}
-    #tstarget .tg-sat[data-ring="2"]{--badge-d:20px;--orb-d:20px}
-    #tstarget .tg-sat[data-ring="3"]{--badge-d:18px;--orb-d:18px}
-    #tstarget .tg-sat[data-ring="4"]{--badge-d:17px;--orb-d:17px}
+    #tstarget .tg-sat[data-ring="0"]{--badge-d:28px;--orb-w:52px;--orb-h:56px;--name-fs:7.5px;--val-fs:9px}
+    #tstarget .tg-sat[data-ring="1"]{--badge-d:24px;--orb-w:50px;--orb-h:50px;--name-fs:7px;--val-fs:8px}
+    #tstarget .tg-sat[data-ring="2"]{--badge-d:22px;--orb-w:52px;--orb-h:36px;--name-fs:7px}
+    #tstarget .tg-sat[data-ring="3"]{--badge-d:20px;--orb-w:54px;--orb-h:33px;--name-fs:6.8px}
+    #tstarget .tg-sat[data-ring="4"]{--badge-d:19px;--orb-w:56px;--orb-h:32px;--name-fs:6.8px}
   }
   @media(prefers-reduced-motion:reduce){
     #tstarget.js .tg-wrap{opacity:1;transform:none;transition:none}
@@ -1969,11 +1969,11 @@
   <div class="tg-wrap">
     <div class="tg-stage" id="tgStage">
       <svg class="tg-svg" viewBox="0 0 200 200" aria-hidden="true">
-        <circle class="tg-track" data-ring="0" cx="100" cy="100" r="48"></circle>
-        <circle class="tg-track" data-ring="1" cx="100" cy="100" r="72"></circle>
-        <circle class="tg-track" data-ring="2" cx="100" cy="100" r="92"></circle>
-        <circle class="tg-track" data-ring="3" cx="100" cy="100" r="108"></circle>
-        <circle class="tg-track" data-ring="4" cx="100" cy="100" r="124"></circle>
+        <circle class="tg-track" data-ring="0" cx="100" cy="100" r="40"></circle>
+        <circle class="tg-track" data-ring="1" cx="100" cy="100" r="68"></circle>
+        <circle class="tg-track" data-ring="2" cx="100" cy="100" r="94"></circle>
+        <circle class="tg-track" data-ring="3" cx="100" cy="100" r="118"></circle>
+        <circle class="tg-track" data-ring="4" cx="100" cy="100" r="148"></circle>
       </svg>
 
       <div class="tg-shock" id="tgShock" aria-hidden="true"></div>
@@ -2373,8 +2373,8 @@
 
   root.classList.add('js');
 
-  /* Ring-Radien in % der Buehnenbreite (muss zu den SVG-r-Werten 48/72/92/108/124 von 200 passen) */
-  var RING_PCT=[24,36,46,54,62];
+  /* Ring-Radien in % der Buehnenbreite (muss zu den SVG-r-Werten 40/68/92/114/136 von 200 passen) */
+  var RING_PCT=[20,34,47,59,74];
   /* Start-Phase je Ring in Grad, gegeneinander versetzt -> wirkt im ersten Frame gleichmaessig/rosettenartig statt als Speichen */
   var RING_BASE=[0,22,44,66,88];
   /* Umlaufdauer je Ring in Sekunden -- langsam, durchgehend */
@@ -2382,43 +2382,29 @@
   /* Drehrichtung wechselt von Ring zu Ring */
   var RING_DIR=['cw','ccw','cw','ccw','cw'];
 
-  /* Minimal-Icons (Feather-Stil, 24x24, stroke=currentColor via CSS) */
-  var ICONS={
-    db:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/>',
-    basket:'<path d="M4 9h16l-1.5 10a2 2 0 0 1-2 1.8H7.5a2 2 0 0 1-2-1.8L4 9Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/>',
-    staff:'<circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-6.4 7-6.4s7 2.8 7 6.4"/>',
-    building:'<rect x="5" y="3" width="14" height="18" rx="1.4"/><path d="M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1"/>',
-    leaf:'<path d="M20 4C10 4 4 10 4 20c10 0 16-6 16-16Z"/><path d="M4 20 20 4"/>',
-    book:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z"/><path d="M20 19H6.5A2.5 2.5 0 0 0 4 21.5"/>',
-    users:'<circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-6 6.5-6s6.5 2.7 6.5 6"/><path d="M16.5 5.2a3 3 0 0 1 0 5.8"/><path d="M21.5 20c0-2.7-2-5-4.8-5.8"/>',
-    wallet:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14" r="1.1" fill="#c7b489" stroke="none"/>',
-    box:'<path d="M12 3 3 7.5 12 12l9-4.5L12 3Z"/><path d="M3 7.5V16l9 4.5V12"/><path d="M21 7.5V16l-9 4.5"/>',
-    alert:'<path d="M12 4 2 20h20L12 4Z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".9" fill="#c7b489" stroke="none"/>',
-    archive:'<rect x="3" y="4" width="18" height="4.5" rx="1"/><path d="M4.5 8.5V19a1.5 1.5 0 0 0 1.5 1.5h12A1.5 1.5 0 0 0 19.5 19V8.5"/><path d="M10 13h4"/>',
-    truck:'<path d="M2 8h11v9H2z"/><path d="M13 11h4l4 3.2V17h-8"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/>',
-    file:'<path d="M7 3h8l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M9 15c1-1.4 2-1.4 2.4-.5.4.9 1.4.7 2-.3"/><path d="M9 12h6"/>',
-    card:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2.2"/><path d="M5.3 17c.6-2.2 2.2-3.4 3.7-3.4s3.1 1.2 3.7 3.4"/><path d="M14 9h5M14 13h5"/>'
-  };
+  var IMG_BASE='https://tastyrob123.github.io/kurs-code/img/ring/';
+  /* DB I/II/III bleiben Icon (kein sinnvolles Foto fuer eine Kennzahl) */
+  var ICON_DB='<path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/>';
 
-  /* 17 Knoten, aussen->innen ueber die 5 Ringe verteilt. val=Beispielwert (nur Ring 0+1 zeigen einen Betrag) */
+  /* 17 Knoten, aussen->innen ueber die 5 Ringe verteilt. val=Beispielwert (nur Ring 0+1 zeigen einen Betrag). name=sichtbare Beschriftung unter dem Bild. */
   var TG_ITEMS=[
-    {ring:0,icon:'db',val:9.10,tip:'Deckungsbeitrag I'},
-    {ring:0,icon:'db',val:6.80,tip:'Deckungsbeitrag II'},
-    {ring:0,icon:'db',val:4.20,tip:'Deckungsbeitrag III'},
-    {ring:1,icon:'basket',val:3.80,tip:'Wareneinsatz'},
-    {ring:1,icon:'staff',val:2.60,tip:'Personalkosten'},
-    {ring:1,icon:'building',val:2.30,tip:'Gemeinkosten-Anteil'},
-    {ring:2,icon:'leaf',tip:'Zutaten'},
-    {ring:2,icon:'book',tip:'Rezepte'},
-    {ring:2,icon:'users',tip:'Mitarbeiter'},
-    {ring:3,icon:'wallet',tip:'Löhne'},
-    {ring:3,icon:'box',tip:'Packaging'},
-    {ring:3,icon:'alert',tip:'Allergene'},
-    {ring:3,icon:'building',tip:'Gemeinkosten'},
-    {ring:4,icon:'archive',tip:'Inventar'},
-    {ring:4,icon:'truck',tip:'Lieferanten'},
-    {ring:4,icon:'file',tip:'Verträge'},
-    {ring:4,icon:'card',tip:'Ansprechpartner'}
+    {ring:0,icon:ICON_DB,name:'DB I',val:9.10},
+    {ring:0,icon:ICON_DB,name:'DB II',val:6.80},
+    {ring:0,icon:ICON_DB,name:'DB III',val:4.20},
+    {ring:1,img:'wareneinsatz',name:'Wareneinsatz',val:3.80},
+    {ring:1,img:'personalkosten',name:'Personal',val:2.60},
+    {ring:1,img:'gemeinkosten-anteil',name:'GK-Anteil',val:2.30},
+    {ring:2,img:'zutaten',name:'Zutaten'},
+    {ring:2,img:'rezepte',name:'Rezepte'},
+    {ring:2,img:'mitarbeiter',name:'Team'},
+    {ring:3,img:'loehne',name:'Löhne'},
+    {ring:3,img:'packaging',name:'Packaging'},
+    {ring:3,img:'allergene',name:'Allergene'},
+    {ring:3,img:'gemeinkosten',name:'GK gesamt'},
+    {ring:4,img:'inventar',name:'Inventar'},
+    {ring:4,img:'lieferanten',name:'Lieferanten'},
+    {ring:4,img:'vertraege',name:'Verträge'},
+    {ring:4,img:'ansprechpartner',name:'Kontakt'}
   ];
 
   function money(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
@@ -2451,12 +2437,18 @@
       orb.style.setProperty('--delay',delay.toFixed(3)+'s');
       var vis=document.createElement('div');
       vis.className='tg-orb-vis';
-      vis.title=it.tip;
-      vis.setAttribute('aria-label', it.tip+(it.val!=null?' '+money(it.val):''));
       var badge=document.createElement('div');
       badge.className='tg-orb-badge';
-      badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+ICONS[it.icon]+'</svg>';
+      if(it.img){
+        badge.innerHTML='<img src="'+IMG_BASE+it.img+'.webp" alt="'+it.name+'" loading="lazy">';
+      } else {
+        badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+it.icon+'</svg>';
+      }
       vis.appendChild(badge);
+      var nameEl=document.createElement('div');
+      nameEl.className='tg-orb-name';
+      nameEl.textContent=it.name;
+      vis.appendChild(nameEl);
       if(it.val!=null){
         var val=document.createElement('div');
         val.className='tg-orb-val';
