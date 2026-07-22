@@ -23090,9 +23090,14 @@ var TSISL_TEAM_ONB_V2=[
 /* ============================================================
    multistandort-erweiterung-optional — Abschnitt "Was im Standort liegt"
    Content-Vergleich (kein Katalog-Animationstyp; Sektions-Kopf-Spec aus Katalog 02 übernommen
-   für Site-Konsistenz). Zwei Spalten: Grün=Standort / Beige=Zentral — Farbsemantik aus der
-   Erkläranimation (Beat 2: Preis bleibt=beige, Menge kommt hoch=grün) fortgeführt.
-   Inhalte NUR benannt (Operations-Inseln erklären sie bereits), keine Doppel-Begründung.
+   für Site-Konsistenz). DREI Spalten (Robert-Korrektur 22.07.2026, Commit-Folge nach f706a7a):
+   Grün=Standort (inkl. eigener, abgeleiteter Zählliste + Kennzahlen-Ansicht) / Beige=NUR
+   Geschäftsführung (Master-Inventur, Kalkulation, Key-Metrics-Master) / Weiß-neutral=Geteilte
+   Zentrale, für ALLE sichtbar aber zentral gepflegt (Lieferanten/Dienstleister, Sicherheitsdaten-
+   blätter, Arbeitssicherheit) — diese drei duerfen NICHT im GF-only-Bereich verschwinden, sonst
+   findet kein Standort mehr "wen rufe ich bei einem Problem an". Farbsemantik Grün/Beige aus der
+   Erkläranimation (Beat 2) fortgeführt, Weiß-neutral NEU für "offen für alle" (keine neue Farbe,
+   reine Graustufen-Variante). Inhalte NUR benannt (Operations-Inseln erklären sie bereits).
    Namespace #tsmsi / .msi-*.
    ============================================================ */
 (function(){
@@ -23100,8 +23105,9 @@ var TSISL_TEAM_ONB_V2=[
   var P=".page__multistandort-erweiterung-optional";
   function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
 
-  var STORE=['Kühltemperaturlisten','Checklisten &amp; Audits','Mitarbeiter-Pflichtdokumente','Urlaubsplanung','Waste-Erfassung','Mitarbeiterkleidung','Bestell- &amp; Lieferlisten','Reparaturmeldungen','Bankeinzahlungen','Anleitungen <span>(Kasse, Musikanlage)</span>'];
-  var HQ=['Master-Inventur &amp; Kalkulation','Lieferanten- &amp; Dienstleister-Verzeichnis <span>(inkl. Portfolios, z.&nbsp;B. Reinigungsfirma)</span>','Sicherheitsdatenblätter','Arbeitssicherheit &amp; Lebensmittelkontrollen','Key-Metrics-Master'];
+  var STORE=['Eigene <b>Zählliste</b> <span>(monatlich, aus der Masterliste abgeleitet, ohne Preise)</span>','Eigene <b>Kennzahlen-Ansicht</b> <span>(aus Key Metrics abgeleitet, nur die eigenen Zahlen)</span>','Kühltemperaturlisten','Checklisten &amp; Audits','Mitarbeiter-Pflichtdokumente','Urlaubsplanung','Waste-Erfassung','Mitarbeiterkleidung','Bestell- &amp; Lieferlisten','Reparaturmeldungen','Bankeinzahlungen','Anleitungen <span>(Kasse, Musikanlage)</span>'];
+  var HQ=['Master-Inventur &amp; Kalkulation','Key-Metrics-Master'];
+  var HUB=['Lieferanten- &amp; Dienstleister-Verzeichnis <span>(inkl. Portfolios, z.&nbsp;B. Reinigungsfirma)</span>','Sicherheitsdatenblätter','Arbeitssicherheit &amp; Lebensmittelkontrollen'];
 
   var CSS=`
   ${P} #tsmsi{width:min(1180px,94vw);margin:clamp(64px,8vh,100px) auto 0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -23113,22 +23119,27 @@ var TSISL_TEAM_ONB_V2=[
   ${P} #tsmsi .msi-title .ts-gold{color:#c7b489}
   ${P} #tsmsi .msi-sub{font-size:16.5px;line-height:1.5;color:rgba(255,255,255,.8);margin:0}
 
-  ${P} #tsmsi .msi-cols{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.4vw,32px);
+  ${P} #tsmsi .msi-cols{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(16px,2.6vw,26px);
     opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
   ${P} #tsmsi.in .msi-cols{opacity:1;transform:none}
-  ${P} #tsmsi .msi-col{background:rgba(255,255,255,.035);border-radius:16px;padding:24px 22px;border:1px solid rgba(255,255,255,.12)}
+  ${P} #tsmsi .msi-col{background:rgba(255,255,255,.035);border-radius:16px;padding:22px 20px;border:1px solid rgba(255,255,255,.12)}
   ${P} #tsmsi .msi-col--store{border-color:rgba(70,175,115,.32);background:linear-gradient(165deg,rgba(70,175,115,.06),rgba(255,255,255,.02))}
   ${P} #tsmsi .msi-col--hq{border-color:rgba(199,180,137,.32);background:linear-gradient(165deg,rgba(199,180,137,.07),rgba(255,255,255,.02))}
-  ${P} #tsmsi .msi-col-hd{display:flex;align-items:center;gap:9px;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;margin:0 0 16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+  ${P} #tsmsi .msi-col--hub{border-color:rgba(255,255,255,.24);background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.015))}
+  ${P} #tsmsi .msi-col-hd{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;margin:0 0 4px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+  ${P} #tsmsi .msi-col-hd-row{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  ${P} #tsmsi .msi-col-note{display:block;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.42);margin-top:2px}
   ${P} #tsmsi .msi-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
   ${P} #tsmsi .msi-col--store .msi-dot{background:#46af73;box-shadow:0 0 10px rgba(70,175,115,.7)}
   ${P} #tsmsi .msi-col--hq .msi-dot{background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.7)}
+  ${P} #tsmsi .msi-col--hub .msi-dot{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.5)}
   ${P} #tsmsi .msi-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
-  ${P} #tsmsi .msi-list li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);padding:8px 4px 8px 18px;position:relative}
-  ${P} #tsmsi .msi-list li::before{content:"";position:absolute;left:0;top:16px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.32)}
-  ${P} #tsmsi .msi-list li span{color:rgba(255,255,255,.5);font-size:12.5px}
+  ${P} #tsmsi .msi-list li{font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.86);padding:7px 4px 7px 16px;position:relative}
+  ${P} #tsmsi .msi-list li::before{content:"";position:absolute;left:0;top:14px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.32)}
+  ${P} #tsmsi .msi-list li b{color:inherit;font-weight:600}
+  ${P} #tsmsi .msi-list li span{display:block;color:rgba(255,255,255,.5);font-size:11.5px;margin-top:1px}
 
-  @media(max-width:820px){ ${P} #tsmsi .msi-cols{grid-template-columns:1fr;gap:16px} }
+  @media(max-width:900px){ ${P} #tsmsi .msi-cols{grid-template-columns:1fr;gap:16px} }
   @media(prefers-reduced-motion:reduce){ ${P} #tsmsi .msi-cols{opacity:1;transform:none} }
   `;
   function injectCSS(){ if(document.getElementById('tsmsi-css'))return; var s=document.createElement('style'); s.id='tsmsi-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -23137,13 +23148,14 @@ var TSISL_TEAM_ONB_V2=[
     var el=document.createElement('div'); el.id='tsmsi';
     el.innerHTML=
     '<div class="msi-head">'+
-      '<div class="msi-eyebrow">Wer trägt was</div>'+
-      '<h2 class="msi-title">Zwei Häuser, <span class="ts-gold">zwei Aufgaben</span></h2>'+
-      '<p class="msi-sub">Manches gehört an den Standort, wo es täglich gebraucht wird. Manches bleibt in der Zentrale, wo der Überblick zählt.</p>'+
+      '<div class="msi-eyebrow">Wer sieht was</div>'+
+      '<h2 class="msi-title">Drei Bereiche, <span class="ts-gold">eine Struktur</span></h2>'+
+      '<p class="msi-sub">Nicht alles gehört an denselben Ort: der Standort braucht anderes als die Geschäftsführung, und manches muss für beide sichtbar bleiben.</p>'+
     '</div>'+
     '<div class="msi-cols">'+
-      '<div class="msi-col msi-col--store"><div class="msi-col-hd"><span class="msi-dot"></span>Lebt im Standort</div><ul class="msi-list">'+li(STORE)+'</ul></div>'+
-      '<div class="msi-col msi-col--hq"><div class="msi-col-hd"><span class="msi-dot"></span>Bleibt zentral</div><ul class="msi-list">'+li(HQ)+'</ul></div>'+
+      '<div class="msi-col msi-col--store"><div class="msi-col-hd"><div class="msi-col-hd-row"><span class="msi-dot"></span>Lebt im Standort</div></div><ul class="msi-list">'+li(STORE)+'</ul></div>'+
+      '<div class="msi-col msi-col--hq"><div class="msi-col-hd"><div class="msi-col-hd-row"><span class="msi-dot"></span>Nur Geschäftsführung</div></div><ul class="msi-list">'+li(HQ)+'</ul></div>'+
+      '<div class="msi-col msi-col--hub"><div class="msi-col-hd"><div class="msi-col-hd-row"><span class="msi-dot"></span>Geteilte Zentrale</div><span class="msi-col-note">Zentral gepflegt, für alle Standorte lesbar</span></div><ul class="msi-list">'+li(HUB)+'</ul></div>'+
     '</div>';
     return el;
   }
@@ -23249,12 +23261,12 @@ var TSISL_TEAM_ONB_V2=[
     '</div>'+
     '<div class="msv-txt">'+
       '<h2 class="msv-h2">So funktioniert die <span class="ts-gold">Ableitung</span></h2>'+
-      '<p>Die Trennung passiert vorher, rein in Notion: zwei <b>Teamspaces</b> — einer für die Geschäftsführung mit Master-Inventur und Kalkulation, einer für den Standort mit nur der Zählliste. Wer nicht Mitglied ist, kommt gar nicht rein.</p>'+
-      '<p>Wichtig: keine <b>Notion-Relation</b>, kein Linked View zwischen beiden — das würde die Trennung sofort wieder aufheben, genau wie eine ausgeblendete Spalte. Claude Code liest die Masterliste über die API und schreibt Artikel und Einheit als reine Werte in die Zählliste, komplett <b>optional</b>.</p>'+
-      '<p>Wie diese Verbindung technisch entsteht, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du sie im Detail kennst.</p>'+
+      '<p>Die Trennung passiert vorher, rein in Notion: ein Teamspace für die Geschäftsführung mit Master-Inventur, Key Metrics und Kalkulation, einer je Standort mit nur den eigenen Listen.</p>'+
+      '<p>Jeder Standort bekommt so seine eigene Zählliste und Kennzahlen-Ansicht, beide ohne Relation zur Masterliste. <b>Claude Code</b> liest Master-Inventur und Key Metrics über die API und schreibt für jeden Standort nur die eigenen Werte hinein, nie eine Verknüpfung.</p>'+
+      '<p>Ab mehr als ein, zwei Standorten ist das von Hand kaum zu pflegen — Claude Code ist hier kein Nice-to-have, sondern Teil der Lösung. Wie du sie aufbaust, zeigen wir dir in <b>Modul vier und fünf</b>.</p>'+
     '</div>'+
   '</div>'+
-  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur die zwei Regeln ein: getrennte Teamspaces, und niemals eine Relation zwischen ihnen. Claude Code hält die getrennten Datenbanken danach optional synchron, damit niemand von Hand nachpflegen muss. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
+  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur zwei Regeln ein: getrennte Teamspaces, niemals eine Relation dazwischen. Für Inventur und Key Metrics gilt dasselbe Muster — Claude Code hält die getrennten Datenbanken synchron, sobald mehr als ein Standort dazukommt. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
 
   function injectCSS(){ if(document.getElementById('tsmsv-css'))return;
     var s=document.createElement('style'); s.id='tsmsv-css'; s.textContent=CSS; document.head.appendChild(s); }
