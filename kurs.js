@@ -16614,3 +16614,483 @@ var TSISL_ZUG_SCHLUESSEL=[
     setTimeout(function(){ mo.disconnect(); },20000);
   })();
 })();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt 01: Hero + Einleitung
+   Werte 1:1 aus Abschnitts-Katalog 01 (Referenz: gerichte-Hero DB XI / key-metrics).
+   Cover = PLATZHALTER (echtes 3-Laptop-Cover folgt von Robert -> nur die IMG-Zeile tauschen).
+   Titel-Font "Lineal Web" zuerst: der "Lineal TS"-Subset deckt nur 28 Glyphen ab
+   (-./0-9:BDILVZaeiknotu) und traegt keinen Nicht-DB-Titel. Muster wie Operations Area / Vision Frame.
+   ============================================================ */
+(function(){
+  if(window.__tsms) return; window.__tsms=1;
+  var IMG="https://tastyrob123.github.io/kurs-code/img/multistandort/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Multistandort -> nur diese Zeile ersetzen */
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+
+  var CSS=`
+  ${P} .ts-hero{
+    position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  }
+  ${P} .ts-hero__img{
+    position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+    animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
+  }
+  ${P} .ts-hero::after{
+    content:""; position:absolute; z-index:1; pointer-events:none;
+    left:50%; bottom:-4%; transform:translateX(-50%); width:74%; height:56%;
+    background:radial-gradient(closest-side, rgba(4,5,10,.74) 0%, rgba(4,5,10,.42) 52%, rgba(4,5,10,0) 80%);
+  }
+  ${P} .ts-hero__text{
+    position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center;
+    margin-top:-16%; padding:0 24px 8px;
+  }
+  ${P} .ts-hero__text::before{
+    content:""; position:absolute; z-index:-1; pointer-events:none;
+    left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+    background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
+    filter:blur(3px);
+  }
+  ${P} .ts-hero__logo{
+    display:block; width:58px; height:auto; margin:0 auto 10px;
+    filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));
+    animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both; pointer-events:none; user-select:none;
+  }
+  ${P} .ts-hero__eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font:600 13px/1 var(--font-sans, -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif);
+    letter-spacing:.16em; text-transform:uppercase; color:#c7b489;
+    margin-bottom:16px; text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);
+    animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both;
+  }
+  ${P} .ts-hero__eyebrow::before{ content:""; width:7px;height:7px;border-radius:50%; background:#c7b489; box-shadow:0 0 12px rgba(199,180,137,.7); }
+  ${P} .ts-hero__title{
+    margin:0; font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600; color:#fff;
+    line-height:1.02; letter-spacing:-.02em; font-size:clamp(2.6rem,8vw,5.4rem);
+    text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9),0 18px 140px rgba(0,0,0,.78);
+    animation:tsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both;
+  }
+  ${P} .ts-hero__title .ts-gold{ color:#c7b489; }
+  @media (max-width:640px){
+    ${P} .ts-hero__text{ padding:0 16px 20px; }
+    ${P} .ts-hero__title{ font-size:clamp(2rem,12vw,3rem); }
+  }
+
+  ${P} .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  ${P} .ts-body h3{
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  ${P} .ts-body h3:first-child{margin-top:0}
+  ${P} .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  ${P} .ts-body p:last-child{margin-bottom:0}
+  ${P} .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  ${P} .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  ${P} .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  ${P} .ts-body li b, ${P} .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('tsms-hero-css')) return;
+    var s=document.createElement('style'); s.id='tsms-hero-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    injectCSS();
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('tsms-intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Multistandort — ein Backoffice über mehrere Standorte" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 2.15 · Optional</div>'+
+        '<h1 class="ts-hero__title">Mehrere <span class="ts-gold">Standorte</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('tsms-intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='tsms-intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Führst du einen einzigen Betrieb, kannst du diese Lektion überspringen. An dem, was du bisher gebaut hast, ändert sie nichts.</p>
+  <p>Kommt ein <b>zweiter Standort</b> dazu, schiebt sich allerdings eine Frage nach vorn, die vorher keine war: <b>Wer darf was sehen?</b> Dein Store Manager braucht seine Inventurliste, seine Checklisten und die Zahlen seines Hauses. Die Einkaufspreise der ganzen Gruppe braucht er nicht, und die Kalkulation dahinter erst recht nicht. Genau an dieser Stelle stößt Notion an eine Grenze. Wir bauen die Struktur so, dass sie trotzdem hält.</p>
+</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt 02: Erkläranimation
+   Konzept (aus dem Lektions-Kontext abgeleitet, Doktrin Punkt 1): 3 Beats auf EINER Bühne,
+   Cross-Fade + Step-Rail (Muster #tsbau) — erst der Fehlschlag, dann der Fix.
+   (0) Ausblenden ist keine Wand  (1) Jede Relation ist eine Tür  (2) Zwei Häuser, eine Brücke.
+   Datengetrieben, keine Fotos (Struktur/Sichtbarkeit-Thema). Beispielwerte als solche gekennzeichnet.
+   Robust: Endzustand = Default sichtbar (ohne .js alles da), self-healing arm, One-Shot + Replay.
+   Namespace tsmsa / msa- / window.__tsmsa. CSS+HTML JS-injiziert (kein kurs.css-Delta).
+   ============================================================ */
+(function(){
+  if(window.__tsmsa) return; window.__tsmsa=1;
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var DWELL=[7200,6400,8200]; /* ms je Beat, szenen-individuell */
+  var CAPS=[
+    'Der Store Manager sieht nur Artikel und Menge. Doch <b>ausgeblendete Spalten</b> sind zwei Klicks entfernt — kein Schutz, nur ein Vorhang.',
+    'Und jede <b>Relation ist eine Tür</b>: Wer eine Zeile öffnet, klickt sich über die Verknüpfung bis in die Kalkulation.',
+    'Die Lösung liegt eine Ebene höher. <b>Eine Masterliste, mehrere Zähllisten</b> — der Preis bleibt oben, nur die gezählte Menge kommt hoch.'
+  ];
+
+  var CSS=`
+  ${P} #tsmsa{width:100vw;max-width:100vw;margin:64px 0 20px;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0 clamp(20px,5vw,72px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  ${P} #tsmsa *{box-sizing:border-box}
+  ${P} #tsmsa .msa-head{max-width:860px;margin:0 auto 44px;text-align:center;padding:0 24px}
+  ${P} #tsmsa .msa-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--font-sans, -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif);letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  ${P} #tsmsa .msa-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  ${P} #tsmsa .msa-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0}
+  ${P} #tsmsa .msa-title .ts-gold{color:#c7b489}
+
+  ${P} #tsmsa .msa-wrap{max-width:1000px;margin:0 auto}
+  ${P} #tsmsa .msa-stage{position:relative;height:340px}
+  ${P} #tsmsa .msa-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);pointer-events:none}
+  ${P} #tsmsa .msa-wrap.is-0 .msa-scene[data-i="0"],
+  ${P} #tsmsa .msa-wrap.is-1 .msa-scene[data-i="1"],
+  ${P} #tsmsa .msa-wrap.is-2 .msa-scene[data-i="2"]{opacity:1;transform:none}
+
+  /* ---- generische Karten/Tabellen ---- */
+  ${P} #tsmsa .msa-card{background:rgba(255,255,255,.035);border:1px solid rgba(199,180,137,.28);border-radius:15px;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  ${P} #tsmsa .msa-ceyebrow{font-size:8.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(199,180,137,.85)}
+  ${P} #tsmsa .msa-cname{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14.5px;color:#fff;line-height:1.15}
+  ${P} #tsmsa .msa-note{font-size:10px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.3)}
+
+  /* ===== Beat 0 — Ausblenden ===== */
+  ${P} #tsmsa .msa-inv{width:min(560px,92%);padding:16px 18px 14px}
+  ${P} #tsmsa .msa-inv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  ${P} #tsmsa .msa-tag{display:inline-flex;align-items:center;gap:7px;font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  ${P} #tsmsa .msa-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#c7b489}
+  ${P} #tsmsa .msa-reveal-btn{font-size:11px;font-weight:600;color:#c7b489;border:1px solid rgba(199,180,137,.4);border-radius:999px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-wrap.is-0.msa-open .msa-reveal-btn{background:rgba(224,87,79,.14);border-color:rgba(224,87,79,.55);color:#f0938c}
+  ${P} #tsmsa .msa-grid{display:grid;grid-template-columns:1.4fr .7fr 1fr 1fr;gap:0;font-variant-numeric:tabular-nums}
+  ${P} #tsmsa .msa-cell{padding:8px 10px;font-size:13px;color:rgba(255,255,255,.9);border-top:1px solid rgba(255,255,255,.07)}
+  ${P} #tsmsa .msa-ch{font-size:8.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);border-top:none;padding-bottom:4px}
+  ${P} #tsmsa .msa-sens{position:relative;color:rgba(255,255,255,.32);transition:color .5s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-sens .msa-lock{transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-sens .msa-val{opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1) .1s}
+  ${P} #tsmsa .msa-wrap.is-0.msa-open .msa-sens{color:#f0938c;background:rgba(224,87,79,.1)}
+  ${P} #tsmsa .msa-wrap.is-0.msa-open .msa-sens .msa-lock{opacity:0}
+  ${P} #tsmsa .msa-wrap.is-0.msa-open .msa-sens .msa-val{opacity:1}
+  ${P} #tsmsa .msa-lock svg{width:11px;height:11px;vertical-align:-1px;opacity:.5}
+
+  /* ===== Beat 1 — Relation als Tür ===== */
+  ${P} #tsmsa .msa-chain{display:flex;align-items:center;justify-content:center;gap:0;width:100%;max-width:760px}
+  ${P} #tsmsa .msa-node{width:168px;padding:14px 15px;flex:0 0 auto}
+  ${P} #tsmsa .msa-node .msa-cname{margin:6px 0 3px}
+  ${P} #tsmsa .msa-node-danger{border-color:rgba(224,87,79,.45);background:rgba(224,87,79,.07)}
+  ${P} #tsmsa .msa-node-danger .msa-ceyebrow{color:#f0938c}
+  ${P} #tsmsa .msa-krow{display:flex;justify-content:space-between;font-size:11.5px;margin-top:5px}
+  ${P} #tsmsa .msa-krow .k{color:rgba(255,255,255,.5)}
+  ${P} #tsmsa .msa-krow .v{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+  ${P} #tsmsa .msa-krow .v.sensv{color:#f0938c}
+  ${P} #tsmsa .msa-link{position:relative;flex:1 1 auto;height:2px;min-width:34px;background:linear-gradient(90deg,rgba(199,180,137,.14),rgba(199,180,137,.4),rgba(199,180,137,.14))}
+  ${P} #tsmsa .msa-link.dash{background:none;border-top:2px dashed rgba(199,180,137,.45);height:0}
+  ${P} #tsmsa .msa-link .msa-dot{position:absolute;top:50%;left:0;width:9px;height:9px;border-radius:50%;background:#f5e6c2;box-shadow:0 0 12px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
+  ${P} #tsmsa .msa-wrap.is-1 .msa-link.fire .msa-dot{animation:msaDot 1s cubic-bezier(.22,1,.36,1) forwards}
+  ${P} #tsmsa .msa-wrap.is-1 .msa-link.fire2 .msa-dot{animation:msaDot 1s cubic-bezier(.22,1,.36,1) .95s forwards}
+  ${P} #tsmsa .msa-link .msa-rlabel{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(199,180,137,.7);white-space:nowrap}
+  @keyframes msaDot{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+
+  /* ===== Beat 2 — Zwei Häuser, eine Brücke ===== */
+  ${P} #tsmsa .msa-bridge{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(14px,3vw,40px);width:100%;max-width:860px}
+  ${P} #tsmsa .msa-master{padding:15px 16px}
+  ${P} #tsmsa .msa-mrow{display:grid;grid-template-columns:1.3fr .6fr .8fr;gap:2px 8px;font-size:11.5px;margin-top:8px;font-variant-numeric:tabular-nums}
+  ${P} #tsmsa .msa-mrow .mh{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+  ${P} #tsmsa .msa-mrow .mc{color:rgba(255,255,255,.82)}
+  ${P} #tsmsa .msa-mrow .mp{color:#c7b489;font-weight:600;text-align:right}
+  ${P} #tsmsa .msa-mval{text-align:right;color:#fff;font-weight:600}
+  ${P} #tsmsa .msa-stores{display:flex;flex-direction:column;gap:9px}
+  ${P} #tsmsa .msa-store{padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;opacity:.5;transform:translateX(8px);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-wrap.is-2 .msa-store.lit{opacity:1;transform:none}
+  ${P} #tsmsa .msa-store-nm{font-size:11.5px;font-weight:600;color:#fff;display:flex;align-items:center;gap:7px}
+  ${P} #tsmsa .msa-store-nm::before{content:"";width:5px;height:5px;border-radius:50%;background:#c7b489}
+  ${P} #tsmsa .msa-store-cols{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+  ${P} #tsmsa .msa-noprice{font-size:9px;font-weight:600;color:rgba(70,175,115,.9);display:inline-flex;align-items:center;gap:4px;margin-top:2px}
+  ${P} #tsmsa .msa-span{position:relative;width:clamp(46px,9vw,96px);height:120px}
+  ${P} #tsmsa .msa-span-line{position:absolute;left:50%;top:14px;bottom:14px;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,rgba(199,180,137,.5),rgba(199,180,137,.16))}
+  ${P} #tsmsa .msa-span-lbl{position:absolute;left:50%;top:-4px;transform:translateX(-50%);font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(199,180,137,.7);white-space:nowrap}
+  ${P} #tsmsa .msa-flow{position:absolute;left:50%;width:11px;height:11px;border-radius:50%;transform:translateX(-50%);opacity:0}
+  ${P} #tsmsa .msa-flow.down{top:14px;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.8)}
+  ${P} #tsmsa .msa-flow.up{bottom:14px;background:#46af73;box-shadow:0 0 12px rgba(70,175,115,.8)}
+  ${P} #tsmsa .msa-wrap.on.is-2 .msa-flow.down{animation:msaDown 3.4s cubic-bezier(.22,1,.36,1) infinite}
+  ${P} #tsmsa .msa-wrap.on.is-2 .msa-flow.up{animation:msaUp 3.4s cubic-bezier(.22,1,.36,1) 1.7s infinite}
+  ${P} #tsmsa .msa-pricechip{position:absolute;left:50%;top:34px;transform:translate(-50%,-6px);font-size:9px;font-weight:600;color:#c7b489;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.4);border-radius:999px;padding:2px 7px;opacity:0}
+  ${P} #tsmsa .msa-wrap.on.is-2 .msa-pricechip{animation:msaChip 3.4s cubic-bezier(.16,1,.3,1) infinite}
+  ${P} #tsmsa.hid .msa-flow,${P} #tsmsa.hid .msa-pricechip{animation-play-state:paused}
+  @keyframes msaDown{0%{top:14px;opacity:0}10%{opacity:1}46%{opacity:1}56%,100%{top:calc(100% - 14px);opacity:0}}
+  @keyframes msaUp{0%{bottom:14px;opacity:0}10%{opacity:1}46%{opacity:1}56%,100%{bottom:calc(100% - 14px);opacity:0}}
+  @keyframes msaChip{0%,44%{opacity:0}50%{opacity:1;transform:translate(-50%,-6px)}60%{opacity:0;transform:translate(-50%,10px)}100%{opacity:0}}
+
+  /* ---- Step-Rail + Caption + Replay ---- */
+  ${P} #tsmsa .msa-steps{display:flex;justify-content:center;gap:0;margin:26px auto 0;max-width:640px}
+  ${P} #tsmsa .msa-step{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;padding:0 6px;background:none;border:none}
+  ${P} #tsmsa .msa-step-bar{width:100%;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden;position:relative}
+  ${P} #tsmsa .msa-step-bar::after{content:"";position:absolute;inset:0;background:#c7b489;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-step.active .msa-step-bar::after{transform:scaleX(1)}
+  ${P} #tsmsa .msa-step-n{font-size:9.5px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.4);transition:color .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-step.active .msa-step-n{color:#c7b489}
+  ${P} #tsmsa .msa-step-t{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.55);text-align:center;line-height:1.25;transition:color .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-step.active .msa-step-t{color:#fff}
+  ${P} #tsmsa .msa-cap{max-width:680px;margin:22px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:80px}
+  ${P} #tsmsa .msa-cap b{color:#c7b489;font-weight:600}
+  ${P} #tsmsa .msa-replay{display:inline-flex;align-items:center;gap:8px;margin:6px auto 0;font-size:12.5px;font-weight:600;color:#c7b489;background:none;border:1px solid rgba(199,180,137,.45);border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .35s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsa .msa-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.7)}
+  ${P} #tsmsa .msa-replay svg{width:14px;height:14px}
+  ${P} #tsmsa .msa-foot{display:flex;justify-content:center;margin-top:20px}
+
+  @media (max-width:820px){
+    ${P} #tsmsa .msa-stage{height:auto;min-height:440px}
+    ${P} #tsmsa .msa-scene{position:relative;inset:auto;display:none}
+    ${P} #tsmsa .msa-wrap.is-0 .msa-scene[data-i="0"],${P} #tsmsa .msa-wrap.is-1 .msa-scene[data-i="1"],${P} #tsmsa .msa-wrap.is-2 .msa-scene[data-i="2"]{display:flex}
+    ${P} #tsmsa .msa-chain{flex-direction:column;gap:0}
+    ${P} #tsmsa .msa-link{width:2px;min-height:26px;height:26px;min-width:0;background:linear-gradient(180deg,rgba(199,180,137,.14),rgba(199,180,137,.4),rgba(199,180,137,.14))}
+    ${P} #tsmsa .msa-link.dash{border-top:none;border-left:2px dashed rgba(199,180,137,.45);width:0;height:26px}
+    ${P} #tsmsa .msa-link .msa-rlabel{top:50%;left:14px;transform:translateY(-50%)}
+    ${P} #tsmsa .msa-bridge{grid-template-columns:1fr;gap:14px}
+    ${P} #tsmsa .msa-span{width:100%;height:56px}
+    ${P} #tsmsa .msa-span-line{left:50%;top:8px;bottom:8px}
+    ${P} #tsmsa .msa-step-t{display:none}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    ${P} #tsmsa .msa-wrap{opacity:1;transform:none}
+    ${P} #tsmsa .msa-scene{transition:none}
+    ${P} #tsmsa .msa-flow,${P} #tsmsa .msa-pricechip,${P} #tsmsa .msa-dot{animation:none!important}
+  }
+  `;
+
+  function lockIco(){ return '<span class="msa-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>'; }
+  function replayIco(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>'; }
+
+  function build(){
+    var wrap=document.createElement('div');
+    wrap.id='tsmsa';
+    wrap.innerHTML=
+    '<div class="msa-head">'+
+      '<div class="msa-eyebrow">Rechte &amp; Sichtbarkeit</div>'+
+      '<h2 class="msa-title">Warum <span class="ts-gold">Ausblenden</span> nicht reicht</h2>'+
+    '</div>'+
+    '<div class="msa-wrap" role="group" aria-label="Drei-Ebenen-Animation">'+
+      '<div class="msa-stage">'+
+        /* Beat 0 */
+        '<div class="msa-scene" data-i="0">'+
+          '<div class="msa-card msa-inv">'+
+            '<div class="msa-inv-top"><span class="msa-tag">Standort · Inventur</span>'+
+              '<span class="msa-reveal-btn">Eigenschaften einblenden ▾</span></div>'+
+            '<div class="msa-grid">'+
+              '<div class="msa-cell msa-ch">Artikel</div><div class="msa-cell msa-ch">Menge</div>'+
+              '<div class="msa-cell msa-ch">EK-Preis</div><div class="msa-cell msa-ch">Lieferant</div>'+
+              '<div class="msa-cell">Rinderfilet</div><div class="msa-cell">12</div>'+
+              '<div class="msa-cell msa-sens">'+lockIco()+'<span class="msa-val">24,90 €</span></div>'+
+              '<div class="msa-cell msa-sens">'+lockIco()+'<span class="msa-val">Metro</span></div>'+
+              '<div class="msa-cell">Butter</div><div class="msa-cell">8</div>'+
+              '<div class="msa-cell msa-sens">'+lockIco()+'<span class="msa-val">6,40 €</span></div>'+
+              '<div class="msa-cell msa-sens">'+lockIco()+'<span class="msa-val">Transgourmet</span></div>'+
+            '</div>'+
+            '<div class="msa-note" style="margin-top:10px">Beispielwerte</div>'+
+          '</div>'+
+        '</div>'+
+        /* Beat 1 */
+        '<div class="msa-scene" data-i="1">'+
+          '<div class="msa-chain">'+
+            '<div class="msa-card msa-node">'+
+              '<div class="msa-ceyebrow">Standort</div><div class="msa-cname">Inventur-Zeile</div>'+
+              '<div class="msa-krow"><span class="k">Rinderfilet</span><span class="v">12</span></div>'+
+            '</div>'+
+            '<div class="msa-link dash"><span class="msa-rlabel">Relation</span><span class="msa-dot"></span></div>'+
+            '<div class="msa-card msa-node">'+
+              '<div class="msa-ceyebrow">Hauptbereich</div><div class="msa-cname">Kalkulation</div>'+
+              '<div class="msa-krow"><span class="k">Wareneinsatz</span><span class="v">31,2 %</span></div>'+
+            '</div>'+
+            '<div class="msa-link dash fire2-anchor"><span class="msa-rlabel">Relation</span><span class="msa-dot"></span></div>'+
+            '<div class="msa-card msa-node msa-node-danger">'+
+              '<div class="msa-ceyebrow">Sensibel</div><div class="msa-cname">Deckungsbeitrag</div>'+
+              '<div class="msa-krow"><span class="k">DB III</span><span class="v sensv">1,84 €</span></div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+        /* Beat 2 */
+        '<div class="msa-scene" data-i="2">'+
+          '<div class="msa-bridge">'+
+            '<div class="msa-card msa-master">'+
+              '<div class="msa-ceyebrow">Hauptbereich · Geschäftsführung</div>'+
+              '<div class="msa-cname" style="margin:4px 0 2px">Master-Inventur</div>'+
+              '<div class="msa-mrow">'+
+                '<span class="mh">Artikel</span><span class="mh">Menge</span><span class="mh" style="text-align:right">EK-Preis</span>'+
+                '<span class="mc">Rinderfilet</span><span class="mc">—</span><span class="mp">24,90 €</span>'+
+                '<span class="mc">Butter</span><span class="mc">—</span><span class="mp">6,40 €</span>'+
+              '</div>'+
+              '<div class="msa-note" style="margin-top:9px">Preis &amp; Kalkulation — nur hier</div>'+
+            '</div>'+
+            '<div class="msa-span">'+
+              '<span class="msa-span-lbl">Ableitung</span>'+
+              '<span class="msa-span-line"></span>'+
+              '<span class="msa-flow down"></span>'+
+              '<span class="msa-pricechip">Preis bleibt</span>'+
+              '<span class="msa-flow up"></span>'+
+            '</div>'+
+            '<div class="msa-stores">'+
+              '<div class="msa-card msa-store" data-s="0"><div><span class="msa-store-nm">Standort Mitte</span>'+
+                '<div class="msa-noprice">Artikel · Menge — kein Preis</div></div><span class="msa-store-cols">zählen</span></div>'+
+              '<div class="msa-card msa-store" data-s="1"><div><span class="msa-store-nm">Standort Nord</span>'+
+                '<div class="msa-noprice">Artikel · Menge — kein Preis</div></div><span class="msa-store-cols">zählen</span></div>'+
+              '<div class="msa-card msa-store" data-s="2"><div><span class="msa-store-nm">Standort Süd</span>'+
+                '<div class="msa-noprice">Artikel · Menge — kein Preis</div></div><span class="msa-store-cols">zählen</span></div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="msa-steps">'+
+        '<button class="msa-step" data-i="0"><span class="msa-step-bar"></span><span class="msa-step-n">01</span><span class="msa-step-t">Ausblenden</span></button>'+
+        '<button class="msa-step" data-i="1"><span class="msa-step-bar"></span><span class="msa-step-n">02</span><span class="msa-step-t">Relation</span></button>'+
+        '<button class="msa-step" data-i="2"><span class="msa-step-bar"></span><span class="msa-step-n">03</span><span class="msa-step-t">Brücke</span></button>'+
+      '</div>'+
+      '<p class="msa-cap"></p>'+
+      '<div class="msa-foot"><button class="msa-replay" type="button">'+replayIco()+'Neu abspielen</button></div>'+
+    '</div>';
+    return wrap;
+  }
+
+  function injectCSS(){
+    if(document.getElementById('tsmsa-css')) return;
+    var s=document.createElement('style'); s.id='tsmsa-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  var timers=[];
+  function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+
+  function setBeat(root,i){
+    var wrap=root.querySelector('.msa-wrap');
+    wrap.classList.remove('is-0','is-1','is-2','msa-open');
+    wrap.classList.add('is-'+i);
+    root.querySelectorAll('.msa-step').forEach(function(st){ st.classList.toggle('active', +st.getAttribute('data-i')===i); });
+    root.querySelector('.msa-cap').innerHTML=CAPS[i];
+    if(i===0){
+      timers.push(setTimeout(function(){ wrap.classList.add('msa-open'); },1400));
+    }
+    if(i===1){
+      root.querySelectorAll('.msa-link').forEach(function(l){ l.classList.remove('fire','fire2'); });
+      // reflow-retrigger
+      void root.offsetWidth;
+      var links=root.querySelectorAll('.msa-scene[data-i="1"] .msa-link');
+      if(links[0]) links[0].classList.add('fire');
+      if(links[1]) links[1].classList.add('fire2');
+    }
+    if(i===2){
+      root.querySelectorAll('.msa-store').forEach(function(s,k){
+        timers.push(setTimeout(function(){ s.classList.add('lit'); },200+k*260));
+      });
+    }
+  }
+
+  function playFrom(root,start){
+    clearTimers();
+    if(reduce){ setBeat(root,2); root.querySelectorAll('.msa-store').forEach(function(s){ s.classList.add('lit'); }); root.querySelector('.msa-wrap').classList.add('on'); return; }
+    root.querySelector('.msa-wrap').classList.add('on');
+    var seq=[0,1,2];
+    var idx=seq.indexOf(start); if(idx<0) idx=0;
+    function run(pos){
+      var beat=seq[pos];
+      setBeat(root,beat);
+      if(pos<seq.length-1){
+        timers.push(setTimeout(function(){ run(pos+1); }, DWELL[beat]));
+      }
+    }
+    run(idx);
+  }
+
+  function inView(el){ var r=el.getBoundingClientRect(); return r.top<(innerHeight*0.82)&&r.bottom>0; }
+
+  function arm(root){
+    var played=false;
+    function go(){ if(played)return; played=true; playFrom(root,0); }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ go(); io.disconnect(); } },{threshold:.28});
+      io.observe(root);
+    }
+    if(inView(root)) go();
+    var poll=setInterval(function(){ if(!document.body.contains(root)){ clearInterval(poll); return; } if(inView(root)){ go(); clearInterval(poll); } },250);
+    setTimeout(function(){ clearInterval(poll); },20000);
+    // Step-Rail + Replay
+    root.querySelectorAll('.msa-step').forEach(function(st){
+      st.addEventListener('click',function(){ played=true; playFrom(root, +st.getAttribute('data-i')); });
+    });
+    var rp=root.querySelector('.msa-replay');
+    if(rp) rp.addEventListener('click',function(){ played=true; playFrom(root,0); });
+  }
+
+  function mount(){
+    if(!on()){ return; }
+    if(document.getElementById('tsmsa')) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    var anchorEl=document.getElementById('tsms-intro'); if(!anchorEl) return; /* nach der Hero-Einleitung */
+    // Re-Mount-Aufräumer: alte Timer/Listener killen (Robustheits-Regel Punkt 5)
+    if(window.__tsmsaKill) window.__tsmsaKill();
+    injectCSS();
+    var root=build();
+    anchorEl.parentNode.insertBefore(root, anchorEl.nextSibling);
+    var wrap=root.querySelector('.msa-wrap');
+    // Endzustand = Default (immer sichtbar, kein opacity:0-Grunddefault): Beat 2 + .on (Loops aktiv)
+    wrap.classList.add('is-2'); /* statischer Beat-2-Endframe; .on (Loops) erst beim Reveal via playFrom */
+    root.querySelector('.msa-cap').innerHTML=CAPS[2];
+    arm(root);
+    // Loop-Pause im Hintergrund-Tab
+    function onVis(){ root.classList.toggle('hid', document.hidden); }
+    document.addEventListener('visibilitychange', onVis);
+    window.__tsmsaKill=function(){
+      clearTimers();
+      document.removeEventListener('visibilitychange', onVis);
+    };
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+})();
