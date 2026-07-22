@@ -10750,10 +10750,6 @@ var TSISL_TEAM_ONB_V2=[
   .tscb .tsc-play .tsc-play-ic{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(11,13,20,.16)}
   .tscb .tsc-play .tsc-play-ic svg{width:11px;height:11px;margin-left:1px}
   .tscb .tsc-play.playing{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.9)}
-  .tscb .tsc-poster{position:absolute;inset:0;z-index:15;border-radius:16px;overflow:hidden;background:#0f0f0f;transition:opacity .45s ease}
-  .tscb .tsc-poster img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-  .tscb .tsc-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,11,.12),rgba(5,6,11,.5))}
-  .tscb .tsc-stage.playing .tsc-poster{opacity:0;pointer-events:none}
   .tscb .tscp-head{text-align:left;margin-bottom:14px}
   .tscb .tscp-eye{font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c7b489}
   .tscb .tscp-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(20px,1.8vw,26px);font-weight:600;letter-spacing:-.015em;color:#fff;margin:6px 0 0}
@@ -10986,7 +10982,7 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tscb-anim" data-cell="B">'+animB()+'</div>'+
       centerText(TXT_B,'B')+
     '</div>';
-    [].forEach.call(sec.querySelectorAll('.tsc-stage'), function(st){ st.insertAdjacentHTML('beforeend', '<div class="tsc-poster"><img src="'+IMG+'" alt=""></div>'+PLAYBTN); });
+    [].forEach.call(sec.querySelectorAll('.tsc-stage'), function(st){ st.insertAdjacentHTML('beforeend', PLAYBTN); });
     return sec;
   }
 
@@ -11088,17 +11084,28 @@ var TSISL_TEAM_ONB_V2=[
     at(11000,function(){ if(opts&&opts.onEnd) opts.onEnd(); });
   }
 
-  /* Kein Autoplay: Idle-Poster + Play-Button JE Kachel, Animation läuft EINMAL auf Klick. */
+  /* Cover = die echte Animation selbst (kein Fremdfoto): läuft automatisch einmal an, sobald die Kachel
+     ins Bild scrollt -> wer nur scrollt, sieht ohne Klick, was in der "Video" passiert. Der Play-Button
+     dient danach als Replay ("Erneut abspielen"). */
   function armCell(cell, playFn){
     var panel=cell.querySelector('.tsc-anim'), btn=cell.querySelector('.tsc-play'), stage=cell.querySelector('.tsc-stage');
     playFn(panel,{idle:true});
-    if(!btn) return;
-    var playing=false;
-    function label(t){ var l=btn.querySelector('.tsc-play-label'); if(l) l.textContent=t; }
-    btn.addEventListener('click',function(){
-      if(playing) return; playing=true; btn.classList.add('playing'); if(stage) stage.classList.add('playing');
-      playFn(panel,{onEnd:function(){ playing=false; label('Erneut abspielen'); btn.classList.remove('playing'); if(stage) stage.classList.remove('playing'); }});
-    });
+    var playing=false, started=false;
+    function label(t){ var l=btn&&btn.querySelector('.tsc-play-label'); if(l) l.textContent=t; }
+    function run(){
+      if(playing) return; playing=true; if(btn) btn.classList.add('playing'); if(stage) stage.classList.add('playing');
+      playFn(panel,{onEnd:function(){ playing=false; label('Erneut abspielen'); if(btn) btn.classList.remove('playing'); if(stage) stage.classList.remove('playing'); }});
+    }
+    if(btn) btn.addEventListener('click', run);
+    function inView(){ var r=cell.getBoundingClientRect(); return r.top<innerHeight*0.85 && r.bottom>0; }
+    function maybeStart(){ if(started||!inView()) return; started=true; run(); }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ maybeStart(); io.disconnect(); } },{threshold:.3});
+      io.observe(cell);
+    }
+    maybeStart();
+    var poll=setInterval(function(){ if(!document.body.contains(cell)){ clearInterval(poll); return; } maybeStart(); if(started) clearInterval(poll); },300);
+    setTimeout(function(){ clearInterval(poll); },15000);
   }
   function armDuo(sec){
     if(sec.__armed) return; sec.__armed=true;
