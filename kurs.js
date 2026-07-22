@@ -21052,7 +21052,7 @@ var TSISL_TEAM_ONB_V2=[
   var pathOut = 'M'+SRC.x+' '+SRC.y+' C '+((SRC.x+EXTP.x)/2)+' '+SRC.y+', '+((SRC.x+EXTP.x)/2)+' '+EXTP.y+', '+EXTP.x+' '+EXTP.y;
 
   var badgeHTML = BADGES.map(function(b,i){
-    var left=(b.x/VB_W*100).toFixed(2)+'%', top=(b.y/VB_H*100).toFixed(2)+'%';
+    var left=(b.x/VB_W*100).toFixed(2), top=(b.y/VB_H*100).toFixed(2);
     return '<div class="q-badge" data-i="'+i+'" style="left:'+left+'%;top:'+top+'%;transform:translate(-50%,-50%)">'
       +'<div class="q-badge-c">'+(i+1)+'</div>'
       +'<div class="q-badge-n">'+b.n+'</div>'
