@@ -4907,31 +4907,20 @@
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var B='https://tastyrob123.github.io/kurs-code/img/packaging/';
-  /* PLATZHALTER Inhouse-Glas (Limo-Glas mit Henkel, T-Logo, Strohhalm) — echtes Cutout folgt von Robert,
-     dann NUR diese Zeile durch B+'glas-cut.webp' ersetzen (Muster wie alle anderen IMG-Einträge) */
-  var GLASPH='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="380" viewBox="0 0 300 380">'
-    +'<path d="M92 58 L104 302 Q104 332 150 332 Q196 332 196 302 L208 58 Z" fill="rgba(199,180,137,0.08)" stroke="rgba(199,180,137,0.55)" stroke-width="4"/>'
-    +'<path d="M208 108 Q262 118 260 168 Q258 210 210 204" fill="none" stroke="rgba(199,180,137,0.55)" stroke-width="4" stroke-linecap="round"/>'
-    +'<line x1="168" y1="8" x2="140" y2="92" stroke="rgba(255,255,255,0.55)" stroke-width="7" stroke-linecap="round"/>'
-    +'<circle cx="150" cy="188" r="19" fill="none" stroke="rgba(199,180,137,0.6)" stroke-width="2"/>'
-    +'<text x="150" y="195" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="rgba(216,201,171,0.75)">T</text>'
-    +'<text x="150" y="358" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">GLAS FOLGT</text>'
-    +'</svg>');
   var IMG={bowl:B+'bowl-cut.webp',deckel:B+'deckel-cut.webp',becher:B+'becher-cut.webp',
     kugeldeckel:B+'kugeldeckel-cut.webp',serviette:B+'serviette-cut.webp',halter:B+'halter-cut.webp',
     strohhalm:B+'strohhalm-cut.webp',drink:B+'drink-cut.webp',
-    karton_zu:B+'karton-zu-cut.webp',karton_offen:B+'karton-offen-cut.webp',glasph:GLASPH};
+    karton_zu:B+'karton-zu-cut.webp',karton_offen:B+'karton-offen-cut.webp',glasph:B+'glas-cut.webp'};
   (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
 
   /* DB-Werte je Kanal = die von Robert vorgegebenen Beispielwerte (SSOT kurs.js).
      Inhouse = Basiswert ohne Packaging (identisch mit dem früheren "vorher"-Wert);
      To Go = derselbe Artikel MIT verknüpftem Packaging (identisch mit dem früheren "nachher"-Wert) -> teurer, daher rot. */
   var NUM={
-    togo:{ cap:'Detox Hipster Drink · To Go (inkl. Packaging)', rows:[
+    togo:{ cap:'Green Detox Smasher · To Go (inkl. Packaging)', rows:[
       ['Wareneinsatz','2,97 €','+24,3 %'],['DB I','8,53 €','−6,4 %'],
       ['DB II','6,81 €','−7,8 %'],['DB III','4,25 €','−12,0 %']] },
-    inhouse:{ cap:'Detox Hipster Drink · Inhouse (ohne Packaging)', rows:[
+    inhouse:{ cap:'Green Detox Smasher · Inhouse (ohne Packaging)', rows:[
       ['Wareneinsatz','2,39 €'],['DB I','9,11 €'],
       ['DB II','7,39 €'],['DB III','4,83 €']] }
   };
@@ -4996,6 +4985,9 @@
   @keyframes pfFlash{0%{opacity:0;transform:scale(.3)}22%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
   @keyframes pfRing{0%{opacity:.9;transform:scale(.25)}100%{opacity:0;transform:scale(1.5)}}
   @keyframes pfP{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+  /* VS-Marke — sitzt mittig zwischen To-Go-Becher und Inhouse-Glas, macht den Vergleich auf einen Blick klar */
+  #tspkflow .fl-vs{position:absolute;left:50%;top:85.5%;transform:translate(-50%,-50%) scale(.7);opacity:0;font-family:${LIN};font-weight:600;font-size:clamp(20px,2.4vw,32px);color:#c7b489;letter-spacing:.05em;text-shadow:0 4px 18px rgba(0,0,0,.75);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);z-index:8;pointer-events:none}
+  #tspkflow .fl-vs.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
   /* Preis-Panels — links (To Go) vom Becher, rechts (Inhouse) vom Glas, gleiche Achse (y:85.5%) */
   #tspkflow .fl-db{position:absolute;top:85.5%;transform:translateY(-50%) scale(.94);opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);width:min(250px,23vw);background:rgba(9,11,17,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 14px;z-index:7;box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
   #tspkflow .fl-db.on{opacity:1;transform:translateY(-50%) scale(1)}
@@ -5052,8 +5044,8 @@
     {id:'serv',  cls:'floaty', cap:'Serviette',     img:'serviette'},
     {id:'bowl',  cls:'floaty', cap:'Bowl',          img:'bowl'},
     {id:'deckel',cls:'floaty', cap:'Deckel',        img:'deckel'},
-    {id:'drink', cls:'big',    cap:'Detox Hipster Drink · To Go', img:'drink'},
-    {id:'glass', cls:'big',    cap:'Detox Hipster Drink · Inhouse', img:'glasph'}
+    {id:'drink', cls:'big',    cap:'Green Detox Smasher · To Go', img:'drink'},
+    {id:'glass', cls:'big',    cap:'Green Detox Smasher · Inhouse', img:'glasph'}
   ];
 
   function flowSection(){
@@ -5069,8 +5061,9 @@
       '<div class="fl-lv" data-lv="3" style="top:'+(LV.l3*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Packaging</span></span></div><i></i></div>'+
       '<div class="fl-lv" data-lv="4" style="top:'+(LV.l4*100)+'%"><i></i></div>'+
       '<div class="fl-lv" data-lv="5" style="top:'+(LV.l5*100)+'%"><div class="fl-lvlab"><span class="k">DB <span class="g">Gerichte</span></span></div><i></i></div>'+
-      '<div class="fl-bubble" id="flBubble">„Einmal den <b>Detox Hipster Drink</b>, bitte."</div>'+
+      '<div class="fl-bubble" id="flBubble">„Einmal den <b>Green Detox Smasher</b>, bitte."</div>'+
       '<div class="fl-poof" id="flPoof" style="left:50%;top:'+(LV.y4*100)+'%"><span class="pf-flash"></span><span class="pf-ring"></span>'+poofP+'</div>'+
+      '<div class="fl-vs" id="flVs">VS</div>'+
       '<div class="fl-db fl-db-togo" id="flDbTogo"><div class="dbcap">'+NUM.togo.cap+'</div>'+togoRows+'</div>'+
       '<div class="fl-db fl-db-inhouse" id="flDbInhouse"><div class="dbcap">'+NUM.inhouse.cap+'</div>'+inRows+'</div>'+
       '</div></div>'+
@@ -5087,7 +5080,7 @@
       d.innerHTML=inner+'<div class="cap">'+sp.cap+'</div>';
       stage.appendChild(d); els[sp.id]=d;
     });
-    var bubble=document.getElementById('flBubble'), dbPanel=document.getElementById('flDbTogo'), dbPanelIn=document.getElementById('flDbInhouse'), poof=document.getElementById('flPoof');
+    var bubble=document.getElementById('flBubble'), dbPanel=document.getElementById('flDbTogo'), dbPanelIn=document.getElementById('flDbInhouse'), poof=document.getElementById('flPoof'), vsEl=document.getElementById('flVs');
     var lvEls={}, lvLines={}, lvLabs={};
     [].forEach.call(stage.querySelectorAll('.fl-lv'),function(l){ var n=l.getAttribute('data-lv'); lvEls[n]=l; lvLines[n]=l.querySelector('i'); var lab=l.querySelector('.fl-lvlab'); if(lab) lvLabs[n]=lab; });
     /* Ebene 2 — exakte Reihenfolge: RPET Becher, Kugeldeckel, Strohhalm, Serviette, Bowl, Deckel */
@@ -5117,7 +5110,7 @@
            bubbleIn:7.2,bubbleOut:11.0,trioDown:[8.7,11.2],lab3:9.9,
            converge:[11.6,12.9],poofAt:12.9,drinkIn:[13.0,13.9],
            drinkDown:[14.6,15.7],drinkLeft:[15.9,16.7],lab5:15.8,dbShow:16.9,
-           glassIn:[17.6,18.7],dbShowIn:19.0,end:20.6};
+           glassIn:[17.6,18.7],vsShow:18.75,dbShowIn:19.0,end:20.6};
     var DUR=T.end;
     var ITEM_IDS=['becher','kugel','straw','serv','bowl','deckel'];
     var LINE_T={1:[0.0,0.8],2:[2.1,2.9],3:[8.7,9.5],4:[11.6,12.4],5:[14.6,15.4]};
@@ -5171,12 +5164,13 @@
       if(gi>0){ var gy=lerp(E5R.y+.16,E5R.y,eOut(gi));
         place(els.glass,E5R.x,gy,gi<1?eBack(gi):1,0,clamp(gi*1.6,0,1)); }
       else els.glass.style.opacity=0;
+      if(t>=T.vsShow-0.01) vsEl.classList.add('on');
       if(t>=T.dbShowIn-0.01) dbPanelIn.classList.add('on');
     }
     var raf=0,startTs=0;
     function tick(ts){ if(!startTs) startTs=ts; var t=(ts-startTs)/1000; frame(Math.min(t,DUR)); if(t<DUR) raf=requestAnimationFrame(tick); }
     function resetAll(){ ['1','2','3','5'].forEach(function(q){ if(lvLabs[q]) lvLabs[q].classList.remove('on'); });
-      bubble.classList.remove('on'); dbPanel.classList.remove('on'); dbPanelIn.classList.remove('on'); poofFired=false; poof.classList.remove('go'); void poof.offsetWidth;
+      bubble.classList.remove('on'); dbPanel.classList.remove('on'); dbPanelIn.classList.remove('on'); vsEl.classList.remove('on'); poofFired=false; poof.classList.remove('go'); void poof.offsetWidth;
       for(var lv in lvLines){ lvLines[lv].style.width='0%'; lvEls[lv].classList.remove('done'); } }
     function play(){ if(reduced){ measure(); stage.classList.add('open'); frame(DUR); poof.classList.remove('go'); return; }
       cancelAnimationFrame(raf); resetAll(); startTs=0; measure(); raf=requestAnimationFrame(tick); }
