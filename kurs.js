@@ -26518,3 +26518,471 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   system-architektur-dashboard — Hero + Einleitung "Dein System, komplett."
+   Lektion 1.8 · Modul 1 · Notion-Grundlagen (Wissens-Lektion, Abschluss)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.8');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts18intro-css')) return;
+    var s=document.createElement('style'); s.id='ts18intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts18intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.8" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.8</div>'+
+        '<h1 class="ts-hero__title">Dein System, <span class="ts-gold">komplett</span>.</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts18intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts18intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Ein gutes System braucht eine Ordnung, die mitwächst — die <b>PARA-Methode</b> teilt jede Seite in Projekte, Areas, Resources und Archive, damit du nie wieder überlegen musst, wo etwas hingehört. Darüber legst du ein Dashboard: eine Startseite, die verknüpfte Ansichten deiner Datenbanken zusammenzieht.</p>
+  <p>Eine <b>Linked Database</b> zeigt dieselbe Tabelle an einem zweiten Ort, gefiltert auf das, was dort zählt. Bei vielen verknüpften Ansichten lohnt sich ein Blick auf Performance und Rechteverwaltung, damit dein System schnell bleibt und nur die richtigen Leute sehen, was sie sehen sollen.</p>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   system-architektur-dashboard — Erkläranimation "Dashboard-Konvergenz"
+   Eigenständiges Konzept: 5 DB-Chips liegen im Kreis um einen zentralen Dashboard-Hub,
+   Verbindungslinien zeichnen sich per stroke-dashoffset ein (Fan-in), eine Zahl zählt
+   "Module verbunden" von 0 auf 5 hoch. Endzustand=Default.
+   ============================================================ */
+(function(){
+  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts18bau{width:min(820px,94vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
+  #ts18bau .bau-head{max-width:680px;margin:0 auto 30px;padding:0 24px}
+  #ts18bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts18bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts18bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts18bau h2 .ts-gold{color:#c7b489}
+  #ts18bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
+  #ts18bau .orbit{position:relative;height:280px;max-width:560px;margin:0 auto}
+  #ts18bau.js .orbit{opacity:0;transform:translateY(20px)}
+  #ts18bau.js.on .orbit{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  #ts18bau .hub{position:absolute;top:50%;left:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:20px;background:linear-gradient(165deg,rgba(199,180,137,.18),rgba(199,180,137,.04));border:1.5px solid rgba(199,180,137,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;z-index:2;box-shadow:0 20px 46px -18px rgba(0,0,0,.9),0 0 0 7px rgba(199,180,137,.06)}
+  #ts18bau .hub b{font-family:"Lineal Web","Lineal TS",sans-serif;font-size:22px;color:#efe6d2}
+  #ts18bau .hub span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5)}
+  #ts18bau .node{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.55);text-align:center;padding:4px;z-index:2;transition:border-color .5s,color .5s,box-shadow .5s}
+  #ts18bau .node.lit{border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.16),0 0 24px rgba(199,180,137,.22)}
+  #ts18bau svg.orbit-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:1}
+  #ts18bau svg.orbit-svg path{fill:none;stroke:rgba(199,180,137,.45);stroke-width:1.4;stroke-dasharray:140;stroke-dashoffset:140;transition:stroke-dashoffset .8s cubic-bezier(.16,1,.3,1)}
+  #ts18bau svg.orbit-svg path.on{stroke-dashoffset:0}
+  #ts18bau .bau-foot{display:flex;justify-content:center;margin-top:20px}
+  #ts18bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts18bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  @media(max-width:600px){ #ts18bau .orbit{height:340px} }
+  `;
+
+  function injectCSS(){
+    if(document.getElementById('ts18bau-css')) return;
+    var s=document.createElement('style'); s.id='ts18bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  var NODES=['Projekte','Aufgaben','Kalender','Content','Finances'];
+  var POS=[ {x:'50%',y:'6%'}, {x:'90%',y:'34%'}, {x:'74%',y:'86%'}, {x:'26%',y:'86%'}, {x:'10%',y:'34%'} ];
+
+  function html(){
+    var nodes=NODES.map(function(n,i){ return '<div class="node" style="left:'+POS[i].x+';top:'+POS[i].y+'">'+n+'</div>'; }).join('');
+    var paths='';
+    for(var i=0;i<5;i++){ paths+='<path class="p'+i+'" d="M0 0"></path>'; }
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Fünf Module, ein Dashboard</div>'+
+      '<h2>Alles läuft an <span class="ts-gold">einem Ort</span> zusammen</h2>'+
+      '<p class="bau-sub">Jede Datenbank bleibt eigenständig — verknüpft zeigt sie sich trotzdem am Dashboard.</p>'+
+      '</div>'+
+      '<div class="orbit"><svg class="orbit-svg">'+paths+'</svg>'+nodes+
+      '<div class="hub"><b id="ts18hubnum">0</b><span>Module</span></div></div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts18bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function layout(root){
+    var orbit=root.querySelector('.orbit');
+    var hub=root.querySelector('.hub');
+    var hr=hub.getBoundingClientRect(), or_=orbit.getBoundingClientRect();
+    var hcx=hr.left-or_.left+hr.width/2, hcy=hr.top-or_.top+hr.height/2;
+    root.querySelectorAll('.node').forEach(function(n,i){
+      var nr=n.getBoundingClientRect();
+      var ncx=nr.left-or_.left+nr.width/2, ncy=nr.top-or_.top+nr.height/2;
+      var path=root.querySelector('.p'+i);
+      path.setAttribute('d','M '+ncx+' '+ncy+' L '+hcx+' '+hcy);
+      var len=path.getTotalLength?path.getTotalLength():140;
+      path.style.strokeDasharray=len; path.style.strokeDashoffset=reduced?0:len;
+    });
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+    var nodes=root.querySelectorAll('.node'), paths=root.querySelectorAll('svg.orbit-svg path');
+    nodes.forEach(function(n){ n.classList.remove('lit'); });
+    paths.forEach(function(p){ p.classList.remove('on'); });
+    var numEl=root.querySelector('#ts18hubnum'); numEl.textContent='0';
+    if(reduced){ nodes.forEach(function(n){n.classList.add('lit');}); paths.forEach(function(p){p.classList.add('on');}); numEl.textContent='5'; return; }
+    nodes.forEach(function(n,i){
+      setTimeout(function(){
+        n.classList.add('lit');
+        paths[i].classList.add('on');
+        numEl.textContent=String(i+1);
+      }, 300+i*450);
+    });
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts18bau')) return;
+    var anchor=document.getElementById('ts18intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts18bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    layout(root);
+    root.querySelector('#ts18bauReplay').addEventListener('click', function(){ layout(root); play(root); });
+    window.addEventListener('resize', function(){ layout(root); });
+    if(reduced){ root.classList.add('on'); play(root); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   system-architektur-dashboard — Ergebnis-Blick "Ein System, keine Baustelle mehr." (Text links / PC rechts)
+   ============================================================ */
+(function(){
+  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #ts18res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts18res .r-text{flex:1 1 0}
+  #ts18res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
+  #ts18res h3 .ts-accent{color:#c7b489}
+  #ts18res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
+  #ts18res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
+  #ts18res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #ts18res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts18res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
+  #ts18res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #ts18res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
+  #ts18res .r-cap b{color:#c7b489;font-weight:600}
+  #ts18res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
+  @media(max-width:820px){ #ts18res{flex-direction:column} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts18res-css')) return;
+    var s=document.createElement('style'); s.id='ts18res-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="r-text"><h3>Ein System, <span class="ts-accent">keine Baustelle mehr.</span></h3>'+
+      '<p>Das ist das PM Vol.1 System, wie ich es selbst nutze: ein Hero-Bereich mit Fortschrittsbalken, Uhr und Wetter, darunter Tabs zum Anlegen neuer Projekte und Aufgaben, der Kalender, Timeframes für die Zwei-Wochen-Planung, Daily Tasks und Content nebeneinander, Milestones mit Countdown, ganz unten Gewicht-Tracker und Ausgaben.</p>'+
+      '<p>Jeder Baustein aus diesem Modul — Blöcke, Layout, Datenbanken, Relationen, Formeln, Ansichten, Buttons — steckt hier drin, nur live und in Benutzung. Genau das ist das Ziel: kein Notion-Wissen im Abstrakten, sondern ein System, das du morgen früh öffnest und einfach benutzt.</p></div>'+
+      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
+      '<div class="r-cap">PM Vol. 1 <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts18res')) return;
+    var anchor=document.getElementById('ts18bau'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts18res'; root.innerHTML=html();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   system-architektur-dashboard — Empfehlungs-Kachel "Empfehlung zur Nutzung" (Verhalten 1:1, Fixes bereits enthalten)
+   ============================================================ */
+(function(){
+  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['PARA als Grundordnung setzen','Dashboard erst am Ende bauen','Linked Views statt Datenkopien','Rechte vor dem Teilen prüfen'];
+  var TEXTS=[
+    'Leg die vier PARA-Bereiche an, bevor du die erste Datenbank baust — Struktur zuerst, Inhalt danach.',
+    'Bau das Dashboard, nachdem die Datenbanken stehen, nicht davor — sonst verknüpfst du auf etwas, das sich noch ändert.',
+    'Zeig Daten am Dashboard immer als Linked View, nie als Kopie — sonst laufen zwei Wahrheiten auseinander.',
+    'Prüfe vor dem Teilen einer Seite, wer sie sehen darf — Rechte sind leichter vorher gesetzt als nachträglich korrigiert.'
+  ];
+
+  var CSS=`
+  #ts18emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts18emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+  #ts18emp.js.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts18emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
+  #ts18emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts18emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts18emp:hover::before{opacity:1}
+  #ts18emp.beat{animation:ts18empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts18empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
+  #ts18emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts18emp .db-hd .g{color:#c7b489}
+  #ts18emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts18emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts18emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts18emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts18emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts18emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts18emp .emp-right{position:relative;z-index:1}
+  #ts18emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts18emp .emph .eg{color:#c7b489}
+  #ts18emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts18emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts18emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts18emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts18emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts18emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts18emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts18emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts18emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts18emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts18emp{grid-template-columns:1fr} #ts18emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts18emp-css')) return;
+    var s=document.createElement('style'); s.id='ts18emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Dein <span class="g">System-Aufbau</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
+      '<p class="p">Damit dein fertiges System tragfähig bleibt, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts18emp')) return;
+    var anchor=document.getElementById('ts18res'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts18emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   system-architektur-dashboard — Seitenabschluss (Learnings + Weiter-Button, Modul-1-Abschluss)
+   ============================================================ */
+(function(){
+  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du strukturierst mit der PARA-Methode statt planlos zu wachsen.',
+    'Du baust ein Dashboard aus verknüpften Ansichten, nicht aus Kopien.',
+    'Du behältst Performance und Rechteverwaltung im Blick.',
+    'Du hast Modul 1 komplett — bereit für das Notion AI Backoffice.'
+  ];
+
+  var CSS=`
+  #ts18l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts18l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts18l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts18l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts18l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts18l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts18lFloat 7s ease-in-out infinite}
+  #ts18l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts18l .tsl-orb:nth-child(1){animation-delay:0s} #ts18l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts18l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts18l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts18l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts18l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts18l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts18l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts18l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts18l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts18l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts18l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts18lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts18l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts18l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts18l-css')) return;
+    var s=document.createElement('style'); s.id='ts18l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts18l')) return;
+    var anchor=document.getElementById('ts18emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts18l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/mehrwert-zielbild">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
