@@ -4178,7 +4178,12 @@
     { re:/\/lektionen\/checklisten-produktion\/?$/, href:'/lektionen/hygiene-behrden-handbcher' },
     { re:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, href:'/lektionen/inventur-bestand' },
     { re:/\/lektionen\/inventur-bestand\/?$/, href:'/lektionen/partner-vertrge' },
-    { re:/\/lektionen\/partner-vertr[a-z-]*\/?$/, href:'/lektionen/zugnge-werte' }
+    { re:/\/lektionen\/partner-vertr[a-z-]*\/?$/, href:'/lektionen/zugnge-werte' },
+    /* Kette schloss hier: zugnge-werte war letzte Insel ohne Folgeeintrag -> Button verschwand
+       (Fund kurs-text-waechter 21.07.2026). Jetzt an Multistandort angeschlossen, dahinter Vision Frame
+       (Robert-Entscheid: Operations Area -> Multistandort -> Vision Frame, Modul-2-Kachelreihe 13-14-15). */
+    { re:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, href:'/multistandort-erweiterung-optional' },
+    { re:/\/multistandort-erweiterung-optional\/?$/, href:'/vision-frame-abschluss-des-building-prozesses' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -22957,4 +22962,418 @@ var TSISL_TEAM_ONB_V2=[
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt "Was im Standort liegt"
+   Content-Vergleich (kein Katalog-Animationstyp; Sektions-Kopf-Spec aus Katalog 02 übernommen
+   für Site-Konsistenz). Zwei Spalten: Grün=Standort / Beige=Zentral — Farbsemantik aus der
+   Erkläranimation (Beat 2: Preis bleibt=beige, Menge kommt hoch=grün) fortgeführt.
+   Inhalte NUR benannt (Operations-Inseln erklären sie bereits), keine Doppel-Begründung.
+   Namespace #tsmsi / .msi-*.
+   ============================================================ */
+(function(){
+  if(window.__tsmsi) return; window.__tsmsi=1;
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+
+  var STORE=['Kühltemperaturlisten','Checklisten &amp; Audits','Mitarbeiter-Pflichtdokumente','Urlaubsplanung','Waste-Erfassung','Mitarbeiterkleidung','Bestell- &amp; Lieferlisten','Reparaturmeldungen','Bankeinzahlungen','Anleitungen <span>(Kasse, Musikanlage)</span>'];
+  var HQ=['Master-Inventur &amp; Kalkulation','Lieferanten- &amp; Dienstleister-Verzeichnis <span>(inkl. Portfolios, z.&nbsp;B. Reinigungsfirma)</span>','Sicherheitsdatenblätter','Arbeitssicherheit &amp; Lebensmittelkontrollen','Key-Metrics-Master'];
+
+  var CSS=`
+  ${P} #tsmsi{width:min(1180px,94vw);margin:clamp(64px,8vh,100px) auto 0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  ${P} #tsmsi *{box-sizing:border-box}
+  ${P} #tsmsi .msi-head{max-width:860px;margin:0 auto 44px;text-align:center;padding:0 24px}
+  ${P} #tsmsi .msi-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--font-sans, -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif);letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  ${P} #tsmsi .msi-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  ${P} #tsmsi .msi-title{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 16px}
+  ${P} #tsmsi .msi-title .ts-gold{color:#c7b489}
+  ${P} #tsmsi .msi-sub{font-size:16.5px;line-height:1.5;color:rgba(255,255,255,.8);margin:0}
+
+  ${P} #tsmsi .msi-cols{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.4vw,32px);
+    opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsi.in .msi-cols{opacity:1;transform:none}
+  ${P} #tsmsi .msi-col{background:rgba(255,255,255,.035);border-radius:16px;padding:24px 22px;border:1px solid rgba(255,255,255,.12)}
+  ${P} #tsmsi .msi-col--store{border-color:rgba(70,175,115,.32);background:linear-gradient(165deg,rgba(70,175,115,.06),rgba(255,255,255,.02))}
+  ${P} #tsmsi .msi-col--hq{border-color:rgba(199,180,137,.32);background:linear-gradient(165deg,rgba(199,180,137,.07),rgba(255,255,255,.02))}
+  ${P} #tsmsi .msi-col-hd{display:flex;align-items:center;gap:9px;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;margin:0 0 16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+  ${P} #tsmsi .msi-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+  ${P} #tsmsi .msi-col--store .msi-dot{background:#46af73;box-shadow:0 0 10px rgba(70,175,115,.7)}
+  ${P} #tsmsi .msi-col--hq .msi-dot{background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.7)}
+  ${P} #tsmsi .msi-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  ${P} #tsmsi .msi-list li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);padding:8px 4px 8px 18px;position:relative}
+  ${P} #tsmsi .msi-list li::before{content:"";position:absolute;left:0;top:16px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.32)}
+  ${P} #tsmsi .msi-list li span{color:rgba(255,255,255,.5);font-size:12.5px}
+
+  @media(max-width:820px){ ${P} #tsmsi .msi-cols{grid-template-columns:1fr;gap:16px} }
+  @media(prefers-reduced-motion:reduce){ ${P} #tsmsi .msi-cols{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsmsi-css'))return; var s=document.createElement('style'); s.id='tsmsi-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function li(arr){ return arr.map(function(t){ return '<li>'+t+'</li>'; }).join(''); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsmsi';
+    el.innerHTML=
+    '<div class="msi-head">'+
+      '<div class="msi-eyebrow">Wer trägt was</div>'+
+      '<h2 class="msi-title">Zwei Häuser, <span class="ts-gold">zwei Aufgaben</span></h2>'+
+      '<p class="msi-sub">Manches gehört an den Standort, wo es täglich gebraucht wird. Manches bleibt in der Zentrale, wo der Überblick zählt.</p>'+
+    '</div>'+
+    '<div class="msi-cols">'+
+      '<div class="msi-col msi-col--store"><div class="msi-col-hd"><span class="msi-dot"></span>Lebt im Standort</div><ul class="msi-list">'+li(STORE)+'</ul></div>'+
+      '<div class="msi-col msi-col--hq"><div class="msi-col-hd"><span class="msi-dot"></span>Bleibt zentral</div><ul class="msi-list">'+li(HQ)+'</ul></div>'+
+    '</div>';
+    return el;
+  }
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('tsmsi')) return true;
+    var anchor=document.getElementById('tsmsa'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.25});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<innerHeight*.85 && r.bottom>0) el.classList.add('in');
+    return true;
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  (function(){
+    if(mount()) return;
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(function(){ mo.disconnect(); },20000);
+  })();
+})();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt "Die Ableitung" (Katalog 03: Erklärvideo PC links/Text rechts)
+   Kein Mockup geliefert -> CSS-Laptop-Nachbau (Katalog-03-Ersatzmuster #tsnaivid, NICHT global aufrufbar,
+   daher eigener Nachbau .msv-mac/.msv-lid/.msv-screen/.msv-base). Video-Thema ausgeklammert bis alle
+   Lektionen stehen (Vimeo-Entscheid). 2 Spalten 50/50, Gap fest 18px, PC füllt halbe Spalte komplett,
+   H2 fest 42px/1.15/zentriert/einzeilig, Fließtext linksbündig 600–650 Zeichen, Text bleibt mobil sichtbar.
+   Namespace #tsmsv / .msv-*.
+   ============================================================ */
+(function(){
+  if(window.__tsmsv) return; window.__tsmsv=1;
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+  var EASE="cubic-bezier(.16,1,.3,1)";
+
+  var CSS=`
+  ${P} #tsmsv{width:min(1180px,94vw);margin:clamp(64px,8vh,100px) auto 0;box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  ${P} #tsmsv *{box-sizing:border-box}
+  ${P} #tsmsv .msv-row{display:grid;grid-template-columns:calc((100% - 18px) * .5) calc((100% - 18px) * .5);
+    gap:18px;align-items:center}
+
+  ${P} #tsmsv .msv-pc{display:flex;align-items:center;justify-content:center;width:100%}
+  ${P} #tsmsv .msv-mac{position:relative;width:100%;cursor:pointer;line-height:0;transition:transform .5s ${EASE}}
+  ${P} #tsmsv .msv-mac:hover{transform:scale(1.02)}
+  ${P} #tsmsv .msv-lid{position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;
+    background:linear-gradient(160deg,#2a2d3a,#14161f);padding:10px;box-shadow:0 30px 64px -28px rgba(0,0,0,.9)}
+  ${P} #tsmsv .msv-screen{position:relative;width:100%;height:100%;border-radius:7px;overflow:hidden;
+    background:linear-gradient(180deg,#1a1d2b,#0a0c14);border:1px solid rgba(199,180,137,.22)}
+  ${P} #tsmsv .msv-base{width:112%;height:11px;margin:0 auto;border-radius:0 0 12px 12px;
+    background:linear-gradient(180deg,#23263200,#2a2d3a);position:relative;left:-6%}
+  ${P} #tsmsv .msv-base::after{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:16%;height:4px;border-radius:0 0 5px 5px;background:rgba(255,255,255,.09)}
+  ${P} #tsmsv .msv-ph{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;
+    justify-content:flex-end;gap:8px;padding:clamp(10px,2vw,20px);line-height:normal}
+  ${P} #tsmsv .msv-bub{max-width:78%;border-radius:11px;padding:8px 11px;font-size:clamp(8px,1vw,11.5px);
+    line-height:1.45;background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#0d1019;
+    border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.72)}
+  ${P} #tsmsv .msv-bub.me{align-self:flex-end;
+    background:linear-gradient(rgba(199,180,137,.13),rgba(199,180,137,.13)),#0d1019;
+    border-color:rgba(199,180,137,.4);color:#fff}
+  ${P} #tsmsv .msv-play{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center}
+  ${P} #tsmsv .msv-play span{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.16);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);
+    display:flex;align-items:center;justify-content:center;transition:transform .3s ${EASE},background .3s ${EASE}}
+  ${P} #tsmsv .msv-mac:hover .msv-play span{transform:scale(1.08);background:rgba(255,255,255,.24)}
+  ${P} #tsmsv .msv-play span::after{content:"";border-style:solid;border-width:12px 0 12px 20px;
+    border-color:transparent transparent transparent #fff;margin-left:5px}
+  ${P} #tsmsv .msv-soon{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:5;
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.42);white-space:nowrap}
+
+  ${P} #tsmsv .msv-h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:42px;line-height:1.15;letter-spacing:-.02em;text-align:center;color:#fff;margin:0 0 18px;white-space:nowrap}
+  ${P} #tsmsv .msv-h2 .ts-gold{color:#c7b489}
+  ${P} #tsmsv .msv-txt p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px;text-align:left}
+  ${P} #tsmsv .msv-txt p:last-child{margin-bottom:0}
+  ${P} #tsmsv .msv-txt b{color:#c7b489;font-weight:600}
+
+  ${P} #tsmsv .msv-close{max-width:900px;margin:46px auto 0;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  ${P} #tsmsv .msv-close b{color:#c7b489;font-weight:600}
+
+  @media(max-width:900px){
+    ${P} #tsmsv .msv-row{grid-template-columns:1fr;gap:26px}
+    ${P} #tsmsv .msv-h2{font-size:clamp(1.7rem,7vw,2.2rem);white-space:normal}
+  }
+  @media(prefers-reduced-motion:reduce){ ${P} #tsmsv .msv-mac{transition:none} }
+  `;
+
+  var HTML=
+  '<div class="msv-row">'+
+    '<div class="msv-pc">'+
+      '<div class="msv-mac" role="button" tabindex="0" aria-label="Video folgt">'+
+        '<div class="msv-lid"><div class="msv-screen">'+
+          '<div class="msv-ph">'+
+            '<div class="msv-bub me">Rolle die Zählliste für alle fünf Standorte aus, Preise bleiben oben.</div>'+
+            '<div class="msv-bub">Ausgerollt. Fünf Zähllisten aktualisiert, kein Preis mitgegeben.</div>'+
+          '</div>'+
+          '<div class="msv-play"><span></span></div>'+
+          '<div class="msv-soon">Video folgt</div>'+
+        '</div></div>'+
+        '<div class="msv-base"></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="msv-txt">'+
+      '<h2 class="msv-h2">So funktioniert die <span class="ts-gold">Ableitung</span></h2>'+
+      '<p>Hinter der Brücke aus der Animation steckt eine technische Verbindung: Claude Code spricht mit der Notion-API und rollt Artikel und Einheit der Masterliste in jede Standort-Zählliste aus, immer ohne Preis.</p>'+
+      '<p>Zählt ein Standort seine Ware, sammelt dieselbe Verbindung die Mengen wieder ein und trägt sie zurück in die Master-Inventur. Erst dort trifft die gezählte Menge auf den hinterlegten Preis, die Kalkulation bleibt allein in der Zentrale.</p>'+
+      '<p>Wie diese Verbindung technisch aufgebaut wird, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du Claude Code und die Notion-API im Detail kennst. Hier reicht dir das Prinzip.</p>'+
+    '</div>'+
+  '</div>'+
+  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur das Prinzip ein: Stammdaten wandern nach unten, gezählte Mengen wandern nach oben, und der Preis bleibt oben, wo die Entscheidung darüber liegt. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie Claude Code diese Verbindung für dich aufbaut.</p>';
+
+  function injectCSS(){ if(document.getElementById('tsmsv-css'))return;
+    var s=document.createElement('style'); s.id='tsmsv-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('tsmsv')) return true;
+    var a=document.getElementById('tsmsi'); if(!a||!a.parentNode) return;
+    injectCSS();
+    var el=document.createElement('section'); el.id='tsmsv'; el.innerHTML=HTML;
+    a.parentNode.insertBefore(el, a.nextSibling);
+    return true;
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded',mount);
+  (function(){
+    if(mount()) return;
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(function(){ mo.disconnect(); },20000);
+  })();
+})();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt "Empfehlung zur Einrichtung" (Katalog 07, Pflicht-Kachel)
+   Verhalten 1:1 wie #tszein/#tskmemp/#tspkemp: Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat,
+   Sync-Highlight alle 2600ms + goldene Bézier-Linie, Mobile einspaltig + Linie aus, reduced-motion statisch.
+   Links: 4 Einrichtungs-Schritte, synchron zu 4 nummerierten Punkten rechts.
+   Namespace #tsmsemp / .msemp-* (eigenes Präfix, keine Kollision mit #tspkemp/.emp-*).
+   ============================================================ */
+(function(){
+  if(window.__tsmsemp) return; window.__tsmsemp=1;
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+  var STEPS=[
+    {n:'01', l:'Liste duplizieren'},
+    {n:'02', l:'Rechte begrenzen'},
+    {n:'03', l:'Relation verknüpfen'},
+    {n:'04', l:'Testlauf prüfen'}
+  ];
+  var CSS=`
+  ${P} #tsmsemp{width:min(1000px,95vw);margin:34px auto clamp(64px,8vh,100px);padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsemp.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  ${P} #tsmsemp *{box-sizing:border-box}
+  ${P} #tsmsemp::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  ${P} #tsmsemp::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1);background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  ${P} #tsmsemp.glow::before{opacity:1}
+  ${P} #tsmsemp.beat{animation:tsmsempBeat 2.6s ease-in-out}
+  @keyframes tsmsempBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
+  ${P} #tsmsemp .msemp-grid{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  ${P} #tsmsemp svg.msemp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  ${P} #tsmsemp .msemp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsemp .msemp-link path.on{opacity:1}
+  ${P} #tsmsemp .msemp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsemp .msemp-link circle.on{opacity:1}
+  ${P} #tsmsemp .msemp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  ${P} #tsmsemp .msemp-anim-hd{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.15rem;color:#fff;margin:0 0 6px}
+  ${P} #tsmsemp .msemp-anim-hd span{color:#c7b489}
+  ${P} #tsmsemp .msemp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;opacity:0;transform:translateX(-10px)}
+  ${P} #tsmsemp.in .msemp-step{opacity:1;transform:none;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsemp.in .msemp-step:nth-child(1){transition-delay:.15s}${P} #tsmsemp.in .msemp-step:nth-child(2){transition-delay:.28s}${P} #tsmsemp.in .msemp-step:nth-child(3){transition-delay:.41s}${P} #tsmsemp.in .msemp-step:nth-child(4){transition-delay:.54s}
+  ${P} #tsmsemp .msemp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  ${P} #tsmsemp .msemp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsemp .msemp-step.on .msemp-step-n{background:#c7b489;color:#05060b}
+  ${P} #tsmsemp .msemp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  ${P} #tsmsemp .msemp-step.on .msemp-step-l{color:#fff}
+  ${P} #tsmsemp .msemp-text{position:relative;z-index:2}
+  ${P} #tsmsemp .msemp-h{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  ${P} #tsmsemp .msemp-h .eg{color:#c7b489}
+  ${P} #tsmsemp .msemp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  ${P} #tsmsemp .msemp-ol{list-style:none;margin:0;padding:0;counter-reset:msemp}
+  ${P} #tsmsemp .msemp-ol li{position:relative;counter-increment:msemp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);margin-bottom:6px}
+  ${P} #tsmsemp .msemp-ol li::before{content:counter(msemp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  ${P} #tsmsemp .msemp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  ${P} #tsmsemp .msemp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ ${P} #tsmsemp .msemp-grid{grid-template-columns:1fr;gap:26px} ${P} #tsmsemp svg.msemp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ ${P} #tsmsemp{transform:none;opacity:1} ${P} #tsmsemp .msemp-step{opacity:1;transform:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsmsemp-css'))return; var s=document.createElement('style'); s.id='tsmsemp-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsmsemp';
+    var stepsHtml=STEPS.map(function(s,i){ return '<div class="msemp-step" data-i="'+i+'"><span class="msemp-step-n">'+s.n+'</span><span class="msemp-step-l">'+s.l+'</span></div>'; }).join('');
+    el.innerHTML=`
+<div class="msemp-grid">
+  <svg class="msemp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>
+  <div class="msemp-anim">
+    <div class="msemp-anim-hd">Ein neuer <span>Standort</span></div>
+    ${stepsHtml}
+  </div>
+  <div class="msemp-text">
+    <h3 class="msemp-h">Empfehlung zur <span class="eg">Einrichtung</span></h3>
+    <p class="msemp-intro">Damit ein neuer Standort sauber in die Struktur passt, gehst du diese vier Schritte in genau dieser Reihenfolge:</p>
+    <ol class="msemp-ol">
+      <li data-i="0">Dupliziere die <b>Master-Zählliste</b> als Vorlage für den neuen Standort, statt eine neue Liste von Grund auf zu bauen.</li>
+      <li data-i="1">Begrenze die <b>Rechte</b> des Store Managers auf genau diesen einen Standort, bevor irgendjemand Zugriff bekommt.</li>
+      <li data-i="2">Verknüpfe die <b>Relation zur Master-Inventur</b>, damit die Ableitung Artikel und Einheit automatisch nachzieht.</li>
+      <li data-i="3">Lass den Standort einen <b>ersten Zähldurchlauf</b> machen und prüfe, ob die Menge oben ankommt, bevor der Alltag beginnt.</li>
+    </ol>
+  </div>
+</div>`;
+    return el;
+  }
+  function drawLink(el){
+    var grid=el.querySelector('.msemp-grid'), svg=el.querySelector('.msemp-link');
+    var onEl=el.querySelector('.msemp-step.on'), lit=el.querySelector('.msemp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!onEl||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect();
+    var a=onEl.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2;
+    var x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function setup(el){
+    var steps=el.querySelectorAll('.msemp-step'), lis=el.querySelectorAll('.msemp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ drawLink(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ drawLink(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('tsmsemp')) return true;
+    var anchor=document.getElementById('tsmsv'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    setup(el);
+    return true;
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  (function(){
+    if(mount()) return;
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(function(){ mo.disconnect(); },20000);
+  })();
+})();
+
+/* ============================================================
+   multistandort-erweiterung-optional — Abschnitt "Seitenabschluss" (Katalog 09: Learnings + Weiter-Button)
+   Muster 1:1 #tsnainext. Lange Ankerkette (Hero->Animation->Standort-Inhalt->Ableitung->Empfehlung->hier)
+   -> dedupe()-Pflicht gegen ZWEI sichtbare Weiter-Buttons (Katalog-09-Falle, belegt L2.14).
+   Eigener tslFloat-Keyframe im Block (nur auf dieser Seite injiziert, sonst stehen die Orbs still).
+   Der Button selbst kommt vom globalen __tsNext-Pager (PAGES-Map ergänzt: zugnge-werte -> diese Seite
+   -> vision-frame-abschluss-des-building-prozesses). #ts-next/#ts-next-wrap sind GLOBAL in kurs.css gestylt.
+   Namespace #tsmsnext / .tsl-* (wie Referenz).
+   ============================================================ */
+(function(){
+  if(window.__tsmsnext) return; window.__tsmsnext=1;
+  var P=".page__multistandort-erweiterung-optional";
+  function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
+  var LEARN=[
+    'Du weißt, warum eine ausgeblendete Spalte <b>kein Schutz</b> ist, sondern nur ein Vorhang.',
+    'Du kennst die <b>Rechte-Architektur</b> aus Masterliste und Standort-Zählliste.',
+    'Du verstehst das <b>Ableitungsprinzip</b>: Stammdaten runter, Mengen rauf, der Preis bleibt oben.',
+    'Du weißt, dass <b>Claude Code und die Notion-API</b> diese Verbindung tragen, und wohin dich Modul vier und fünf dabei führen.'
+  ];
+  var CSS=`
+  ${P} #tsmsnext{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;content-visibility:auto;contain-intrinsic-size:auto 900px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  ${P} #tsmsnext *{box-sizing:border-box}
+  ${P} #tsmsnext .tsl-head{text-align:center;margin-bottom:66px}
+  ${P} #tsmsnext .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  ${P} #tsmsnext .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  ${P} #tsmsnext .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  ${P} #tsmsnext .tsl-cell{display:flex;justify-content:center}
+  ${P} #tsmsnext .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
+  ${P} #tsmsnext .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  ${P} #tsmsnext.in .tsl-orb{opacity:1;transform:none;animation:tsmsTslFloat 7s ease-in-out infinite}
+  ${P} #tsmsnext.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  ${P} #tsmsnext.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  ${P} #tsmsnext.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  ${P} #tsmsnext.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  ${P} #tsmsnext .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  ${P} #tsmsnext .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  ${P} #tsmsnext .tsl-t b{color:#c7b489;font-weight:700}
+  @keyframes tsmsTslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ ${P} #tsmsnext .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ ${P} #tsmsnext .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ ${P} #tsmsnext .tsl-orb{opacity:1;transform:none;animation:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsmsnext-css'))return; var s=document.createElement('style'); s.id='tsmsnext-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsmsnext';
+    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div><div class="tsl-grid">'+orbs+'</div>';
+    return el;
+  }
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('tsmsnext')) return true;
+    var anchor=document.getElementById('tsmsemp'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<innerHeight && r.bottom>0) el.classList.add('in');
+    return true;
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  /* Beobachter NUR bis zum Einbau: dauerhaft angehaengt wuerde er bei jeder Seitenmutation
+     (auch den ganz normalen Aktualisierungen des globalen #ts-next-wrap durch den Pager)
+     erneut feuern -> war zuvor mit dedupe() in einer Endlosschleife (Prüfer-Fund). */
+  (function(){
+    if(mount()) return;
+    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); } });
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(function(){ mo.disconnect(); },20000);
+  })();
 })();
