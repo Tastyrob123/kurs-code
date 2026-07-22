@@ -11538,12 +11538,17 @@ var TSISL_TEAM_ONB_V2=[
     setTimeout(function(){ recompute(root, DEFAULT_PORTION, true); },1150);
   }
 
+  /* Reihenfolge-Tausch 22.07.2026 (Robert): #tsd5 tauscht die Position mit #tsrezsys
+     (Zutaten-Konvergenz-Animation) — der Rechner sitzt jetzt NACH dem Warenkorb (dort,
+     wo #tsrezsys vorher war), die Animation sitzt jetzt dort, wo #tsd5 vorher war
+     (direkt unter dem Konzept-Absatz, vor dem Warenkorb). Anker-Logik 1:1 von
+     #tsrezsys' vorheriger anchorMount() übernommen (Warenkorb → tsl-Fallback). */
   function findAnchor(){
-    /* Konzept-Absatz zuerst (Textphrase), Block-ID nur Fallback — Widget sitzt DIREKT DARUNTER,
-       über dem Video-/Nährstoffe-Block und dem Heading "Der Aufbau". */
-    var p=document.querySelectorAll('p.notion-text__content, .notion-text__content');
-    for(var i=0;i<p.length;i++){ if((p[i].textContent||'').indexOf('zieht sich die einzelnen Zutaten')>-1) return p[i].closest('[id^="block-"]')||p[i]; }
-    return document.getElementById('block-2c5edc4c7d1e4c1eb2478fdea38a3535');
+    var shop=document.getElementById('tsshop--db5_rezepturen');
+    if(shop) return shop;
+    var tsl=document.getElementById('tsl');
+    if(tsl) return tsl;
+    return document.getElementById('ts-next-wrap');
   }
   function inView(el){ var r=el.getBoundingClientRect(); return r.top<(window.innerHeight*0.75)&&r.bottom>(window.innerHeight*0.25); }
 
@@ -11553,7 +11558,8 @@ var TSISL_TEAM_ONB_V2=[
     var a=findAnchor(); if(!a) return;
     injectCSS();
     var root=build();
-    a.parentNode.insertBefore(root, a.nextSibling);  /* DIREKT UNTER den Konzept-Absatz */
+    /* Warenkorb/ts-next-wrap: DAVOR einfügen; #tsl (Learnings): ebenfalls DAVOR einfügen (= direkt nach dem Warenkorb, vor Learnings) */
+    a.parentNode.insertBefore(root, a.id==='tsshop--db5_rezepturen'?a.nextSibling:a);
     var range=root.querySelector('.d5-range');
     range.addEventListener('input', function(){ recompute(root, parseInt(range.value,10)||DEFAULT_PORTION, false); });
     /* +/- an "Anzahl Portionen": invers gekoppelt — Portionsgröße = Gesamtmenge ÷ Portionen */
@@ -11924,9 +11930,19 @@ var TSISL_TEAM_ONB_V2=[
 
   function inView(el){ var r=el.getBoundingClientRect(); return r.top < (window.innerHeight*0.8) && r.bottom > (window.innerHeight*0.2); }
 
+  /* Reihenfolge-Tausch 22.07.2026 (Robert): #tsrezsys tauscht die Position mit #tsd5
+     (Rezeptur-Rechner "Basilikum Pesto") — die Animation sitzt jetzt VOR dem Warenkorb,
+     direkt unter dem Konzept-Absatz ("zieht sich die einzelnen Zutaten"), #tsd5 sitzt
+     jetzt dort, wo #tsrezsys vorher war (nach dem Warenkorb, vor Learnings). Anker-Logik
+     1:1 von #tsd5s vorheriger findAnchor() übernommen. */
+  function findIntroAnchor(){
+    var p=document.querySelectorAll('p.notion-text__content, .notion-text__content');
+    for(var i=0;i<p.length;i++){ if((p[i].textContent||'').indexOf('zieht sich die einzelnen Zutaten')>-1) return p[i].closest('[id^="block-"]')||p[i]; }
+    return document.getElementById('block-2c5edc4c7d1e4c1eb2478fdea38a3535');
+  }
   function anchorMount(root){
-    var shop=document.getElementById('tsshop--db5_rezepturen');
-    if(shop && shop.parentNode){ shop.parentNode.insertBefore(root, shop.nextSibling); return true; }
+    var a=findIntroAnchor();
+    if(a && a.parentNode){ a.parentNode.insertBefore(root, a.nextSibling); return true; }
     var tsl=document.getElementById('tsl');
     if(tsl && tsl.parentNode){ tsl.parentNode.insertBefore(root, tsl); return true; }
     var nx=document.getElementById('ts-next-wrap');
@@ -11936,7 +11952,7 @@ var TSISL_TEAM_ONB_V2=[
   function mount(){
     if(!/\/rezepturen\/?$/.test(location.pathname)){ var e=document.getElementById('tsrezsys'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsrezsys')) return;
-    if(!document.getElementById('tsshop--db5_rezepturen') && !document.getElementById('tsl')) return;
+    if(!findIntroAnchor() && !document.getElementById('tsl')) return;
     injectCSS();
     var root=build();
     if(!anchorMount(root)) return;
