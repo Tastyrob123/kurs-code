@@ -11173,15 +11173,16 @@ var TSISL_TEAM_ONB_V2=[
   .tscb .tsc-play .tsc-play-ic{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(11,13,20,.16)}
   .tscb .tsc-play .tsc-play-ic svg{width:11px;height:11px;margin-left:1px}
   .tscb .tsc-play.playing{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.9)}
-  .tscb .tsc-idlecover{position:absolute;inset:0;z-index:15;border-radius:16px;overflow:hidden;background:#191919;transition:opacity .45s ease}
+  .tscb .tsc-idlecover{position:absolute;inset:0;z-index:15;overflow:hidden;border-radius:16px;background:#04050a;text-align:center;padding:30px 24px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .45s ease}
   .tscb .tsc-stage.playing .tsc-idlecover{opacity:0;pointer-events:none}
-  .tscb .tsc-flowbox{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;padding:0 26px}
-  .tscb .tsc-flow{display:flex;align-items:center;gap:8px}
-  .tscb .tsc-flow__step{flex:0 0 auto;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);box-shadow:inset 0 0 0 1.5px rgba(199,180,137,.45);color:#e6dcc4}
-  .tscb .tsc-flow__step svg{width:21px;height:21px}
-  .tscb .tsc-flow__arrow{flex:0 0 auto;display:flex;color:rgba(255,255,255,.22)}
-  .tscb .tsc-flow__arrow svg{width:15px;height:15px}
-  .tscb .tsc-flow__cap{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.48);text-align:center;max-width:300px}
+  .tscb .tsccard-bg{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;background:#04050a;pointer-events:none}
+  .tscb .tsccard-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+  .tscb .tsccard-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(96% 86% at 50% 62%,rgba(4,5,10,.62) 0%,rgba(4,5,10,.40) 48%,rgba(4,5,10,.14) 78%,rgba(4,5,10,0) 100%)}
+  .tscb .tsccard-logo,.tscb .tsccard-k,.tscb .tsccard-h,.tscb .tsccard-t{position:relative;z-index:2}
+  .tscb .tsccard-logo{display:block;height:30px;width:auto;margin:2px auto 14px}
+  .tscb .tsccard-k{display:block;font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:8px;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 8px rgba(0,0,0,.8)}
+  .tscb .tsccard-h{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:1.18rem;font-weight:600;letter-spacing:-.012em;line-height:1.15;color:#fff;margin:0 0 10px;text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.95),0 3px 14px rgba(0,0,0,.9),0 6px 34px rgba(0,0,0,.8)}
+  .tscb .tsccard-t{color:rgba(255,255,255,.7);font-size:.84rem;line-height:1.55;margin:0 auto;max-width:30ch;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 10px rgba(0,0,0,.85),0 4px 22px rgba(0,0,0,.7)}
   .tscb .tscp-head{text-align:left;margin-bottom:14px}
   .tscb .tscp-eye{font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c7b489}
   .tscb .tscp-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(20px,1.8vw,26px);font-weight:600;letter-spacing:-.015em;color:#fff;margin:6px 0 0}
@@ -11402,19 +11403,19 @@ var TSISL_TEAM_ONB_V2=[
   }
   var PLAYBTN='<button type="button" class="tsc-play"><span class="tsc-play-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span class="tsc-play-label">Abspielen</span></button>';
 
-  /* Info-Cover: Icon-Flow der 4 Schritte + Kurzsatz statt Foto — erklärt auf einen Blick, was das
-     "Video" zeigt, ohne Klick nötig zu machen (Robert 22.07.2026: "Informationsgrafiken als Cover"). */
-  var ARROW='<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var DUPICON=svgSm('<rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 15V5a1 1 0 011-1h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>');
-  var PENCILICON=svgSm('<path d="M4 20l1-4L16 5l3 3L8 19l-4 1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>');
-  var PLUSICON=svgSm('<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
-  function coverFlow(icons,caption){
-    return '<div class="tsc-idlecover"><div class="tsc-flowbox"><div class="tsc-flow">'+
-      icons.map(function(ic,i){ return (i?'<span class="tsc-flow__arrow">'+ARROW+'</span>':'')+'<span class="tsc-flow__step">'+ic+'</span>'; }).join('')+
-      '</div><div class="tsc-flow__cap">'+caption+'</div></div></div>';
+  /* Cover = Foto-Karte im Stil des Modul-2-Kachelrasters (#tslmod: Bild + Scrim + T-Logo + Kicker +
+     Titel + Text) statt Icon-Animation (Robert-Korrektur 22.07.2026: "Foto in den Hintergrund, Text
+     davor, Logo. Scheiß auf die Animation."). Fotos = dieselben Zutaten-Bildserie-Assets wie im
+     Kachelraster (img/modul2/…), keine neue Generierung nötig. */
+  var TSCARD_LOGO='https://files.catbox.moe/au80tp.png';
+  var TSCARD_BASE='https://tastyrob123.github.io/kurs/img/modul2/';
+  function coverCard(img,kicker,title,text){
+    return '<div class="tsc-idlecover"><span class="tsccard-bg" aria-hidden="true"><img src="'+TSCARD_BASE+img+'" alt="" loading="lazy"></span>'+
+      '<img class="tsccard-logo" src="'+TSCARD_LOGO+'" alt="Tasty Studios" loading="lazy">'+
+      '<span class="tsccard-k">'+kicker+'</span><h3 class="tsccard-h">'+title+'</h3><p class="tsccard-t">'+text+'</p></div>';
   }
-  var COVER_A=coverFlow([DUPICON,PENCILICON,WRENCH,XI],'So wird aus einer Zutat ein wiederverwendbarer Baustein.');
-  var COVER_B=coverFlow([PLUSICON,DB,GAL,FLAG],'So siehst du alle Bausteine einer Hauptzutat auf einen Blick.');
+  var COVER_A=coverCard('zutaten.jpg','Baustein','Einmal anlegen','Zutat duplizieren, Portionsgröße setzen — fertig ist der Baustein.');
+  var COVER_B=coverCard('inventurliste.jpg','Übersicht','Bausteine anzeigen','Alle Bausteine einer Hauptzutat auf einen Blick.');
 
   /* EIN Section: beide Animationen nebeneinander (2 Spalten), Text je zentriert darunter, je eigener Play-Button. */
   function buildDuo(){
