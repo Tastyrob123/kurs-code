@@ -12055,6 +12055,14 @@ var TSISL_TEAM_ONB_V2=[
   var SHOT="https://tastyrob123.github.io/kurs/img/rezepturen-mac/rv-scroll.png";
   var ANCHOR_ID='block-6a8b34d0e7ed4681ab0fb35925ce5a88';
   var ANCHOR_PHRASE='Nun haben wir Zutaten und Rezepte';
+  /* FORCED_TEXT (22.07.2026): Notion-Quelle ist seit heute bereits auf den neuen, langen Text
+     aktualisiert — super.so hat die Seite aber (Stand jetzt) noch nicht neu published, die Live-
+     Seite scraped daher noch den ALTEN 268-Zeichen-Text aus dem DOM. Statt auf den Re-Sync zu
+     warten, wird der Text hier direkt erzwungen (Notion-Wortlaut 1:1 übernommen). Sobald Robert
+     in super.so re-synct, ist der DOM-Text identisch — kein Konflikt, keine Doppelarbeit. Diese
+     Konstante NICHT als neue SSOT missverstehen: sobald der Re-Sync bestätigt ist, kann sie
+     wieder auf null gesetzt werden (dann greift automatisch wieder der Live-Scrape). */
+  var FORCED_TEXT='Nun haben wir Zutaten und Rezepte. Jede Zutat trägt jetzt Preis und Nährwerte, jede Rezeptur zieht das automatisch zu einem fertigen Baustein mit Preis, Nährwerten und Allergenen pro Portion zusammen. Für ein Gericht fehlen von hier aus nur noch zwei Bausteine. Die nächste Lektion bringt Gemeinkosten und Personalkosten dazu, damit ein Gericht am Ende zeigt, was es wirklich kostet, nicht nur den reinen Wareneinsatz. Danach kommt eine Übersicht zu den Allergenen, bevor wir alles in der Gerichte-Datenbank zusammenführen. Ab da rechnet sich jedes Gericht von der einzelnen Zutat bis zum Deckungsbeitrag von selbst durch.';
   function on(){ return /\/rezepturen\/?$/.test(location.pathname); }
   var CSS=[
     '#tsrv-root{--tsrv-gold:#c7b489;--tsrv-ease:cubic-bezier(.16,1,.3,1);width:min(1000px,95vw);margin:8px auto 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,60px);align-items:center;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;opacity:0;transform:translateY(20px);transition:opacity .8s var(--tsrv-ease),transform .9s var(--tsrv-ease);}',
@@ -12164,7 +12172,7 @@ var TSISL_TEAM_ONB_V2=[
     var root=document.getElementById('tsrv-root'); if(!root) return;
     var slot=root.querySelector('.tsrv-textslot'); if(!slot) return;
     if(!slot.__filled){
-      var full=(anchor.textContent||'').replace(/\s+/g,' ').trim();
+      var full=FORCED_TEXT||(anchor.textContent||'').replace(/\s+/g,' ').trim();
       if(full){
         var idx=full.indexOf('. ');
         var leadTxt=idx>0?full.slice(0,idx+1):full;   /* "Nun haben wir Zutaten und Rezepte." */
