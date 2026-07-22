@@ -8744,6 +8744,21 @@
         {name:'Erledigt', wert:1},
         {name:'Beschreibung', wert:1}
       ]},
+    /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + 2 Rollups. wert:0 = Anleitungskarten. */
+    { kachel_id:'m1_projekte', kachel_name:'Projekte (verknüpft mit Aufgaben)', ist_produkt_kachel:true,
+      einheit:'Aufwand (h)', einheit_typ:'anzahl',
+      objekt_varianten:[
+        {name:'Button anlegen', wert:0},
+        {name:'Datenbank anlegen', wert:0},
+        {name:'Titel', wert:1},
+        {name:'Status', wert:1},
+        {name:'Bereich', wert:1},
+        {name:'Startdatum', wert:1},
+        {name:'Fällig am', wert:1},
+        {name:'ToDos (DB II)', wert:1},
+        {name:'Aufwand (h)', wert:1},
+        {name:'Prioritäten', wert:1}
+      ]},
     { kachel_id:'km_master', kachel_name:'Kostenauswertung Master', ist_produkt_kachel:true,
       einheit:'Kennzahlen', einheit_typ:'anzahl',
       objekt_varianten:[
@@ -9593,7 +9608,28 @@ var TSISL_TEAM_ONB_V2=[
     {title:'12. Beschreibung', desc:'Eigenschaft : Text → Name der Spalte : Beschreibung.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Beschreibung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Kontext, den der Titel allein nicht hergibt.</p>'}
   ];
 
+  /* Lektion 1.4 (Modul 1) — DB I : Projekte <-> DB II : Aufgaben, Relation + Rollups (Zeitaufwand-Summe, Prioritaeten-Liste). */
+  var TS14_STEPS=[
+    {title:'1. Button anlegen', desc:'Leg auf deiner Seite einen Button an, der zur neuen Datenbank führt.', html:'<p class="notion-text">Wie bei jeder neuen Datenbank fängst du mit dem Rahmen an: Lege einen <b>Button</b> an, der dich zur neuen Tabelle führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
+    {title:'2. Datenbank anlegen', desc:'Drücke / und wähle Tabellenansicht – Datenbank. Name: Projektmanagement.', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> DB I : Projektmanagement</p><p class="notion-text">Ab jetzt ist jede Karte in diesem Regal eine Spalte dieser Tabelle.</p>'},
+    {title:'3. Titel', desc:'Eigenschaft : Titel → Name der Spalte : Name.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Name</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Namen des Projekts.</p>'},
+    {title:'4. Status', desc:'Eigenschaft : Status → Backlog, Geplant, In Arbeit, Warten, Erledigt, Archiviert.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Status</p><p class="notion-text">→ <b>Name der Spalte :</b> Status</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein (in drei Gruppen):</p><p class="notion-text">— Zu erledigen: <b>Backlog</b>, <b>Geplant</b></p><p class="notion-text">— In Arbeit: <b>In Arbeit</b>, <b>Warten</b></p><p class="notion-text">— Erledigt: <b>Erledigt</b>, <b>Archiviert</b></p>'},
+    {title:'5. Bereich', desc:'Eigenschaft : Auswählen → Business, Privat, Food & Beverage, Reisen, Finance, Selfcare, Content, Admin.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Bereich</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text"><b>Business</b> · <b>Privat</b> · <b>Food &amp; Beverage</b> · <b>Reisen</b> · <b>Finance</b> · <b>Selfcare</b> · <b>Content</b> · <b>Admin</b></p>'},
+    {title:'6. Startdatum', desc:'Eigenschaft : Datum → Name der Spalte : Startdatum.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Startdatum</p><p class="notion-text">→ <b>Du trägst hier ein :</b> wann das Projekt beginnt.</p>'},
+    {title:'7. Fällig am', desc:'Eigenschaft : Datum → Name der Spalte : Fällig am.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Fällig am</p><p class="notion-text">→ <b>Du trägst hier ein :</b> das geplante Ende des Projekts.</p>'},
+    {title:'8. ToDos (DB II)', desc:'Eigenschaft : Verknüpfung → DB II : Aufgaben & ToDos → wechselseitige Verbindung.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB II : Aufgaben &amp; ToDos → Wechselseitige Verbindung hinzufügen.</p><p class="notion-text">→ <b>Name der Spalte :</b> ToDos (DB II)</p><p class="notion-text">Du verknüpfst hier alle Aufgaben, die zu diesem Projekt gehören.</p><p class="notion-text">In deiner Aufgaben-Tabelle taucht jetzt eine neue Spalte auf — nenne sie <b>„Projekt"</b>.</p>'},
+    {title:'9. Aufwand (h)', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Zeitaufwand ( h ) → Berechnen : Summe.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Zeitaufwand ( h )</p><p class="notion-text">→ <b>Berechnen :</b> Summe</p><p class="notion-text">→ <b>Name der Spalte :</b> Aufwand (h)</p><p class="notion-text">Dir wird hier die Gesamtstunden aller verknüpften Aufgaben angezeigt.</p>'},
+    {title:'10. Prioritäten', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Priorität → Berechnen : Werte anzeigen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Priorität</p><p class="notion-text">→ <b>Berechnen :</b> Werte anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäten</p><p class="notion-text">Dir wird hier eine Liste der Prioritäten aller verknüpften Aufgaben angezeigt — eine Formel, die daraus einen Durchschnitt errechnet, baust du in Lektion 1.5.</p>'}
+  ];
+
   var PAGES=[
+    /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + Rollups. Notion-Seite leer -> Config-Steps. */
+    { path:/\/relationen-rollups\/?$/, kachel:'m1_projekte',
+      anchorSel:'#ts14wk', steps:TS14_STEPS,
+      eyebrow:'DB : Projekte ↔ Aufgaben',
+      title:'Deine Projekte. <span>Verknüpft mit den Aufgaben.</span>',
+      sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist Aufwand in Stunden. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
+      summary:'Aufwand (h)', chain:true },
     /* Lektion 1.3 (Modul 1) — DB II : Aufgaben & ToDos, vereinfacht (Basis-Properties). Notion-Seite leer -> Config-Steps. */
     { path:/\/einfuehrung-datenbanken\/?$/, kachel:'m1_todo',
       anchorSel:'#ts13wk', steps:TS13_STEPS,
@@ -10144,7 +10180,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:10, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24597,6 +24633,456 @@ var TSISL_TEAM_ONB_V2=[
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/relationen-rollups">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   relationen-rollups — Hero + Einleitung "Zwei Tabellen, ein System."
+   Lektion 1.4 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #2, Kern-Lektion)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.4');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts14intro-css')) return;
+    var s=document.createElement('style'); s.id='ts14intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts14intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.4" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.4</div>'+
+        '<h1 class="ts-hero__title">Zwei Tabellen, <span class="ts-gold">ein System</span>.</h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts14intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts14intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Eine Datenbank für sich ist nützlich. Zwei Datenbanken, die miteinander sprechen, sind ein System. Sobald du in <b>DB I</b> die Verknüpfung zu deinen Aufgaben anlegst — mit wechselseitiger Verbindung —, taucht in <b>DB II</b> automatisch eine neue Spalte <b>Projekt</b> auf, ohne dass du sie selbst bauen musst.</p>
+  <p>Von da an ziehst du dir Aggregationen über die Verknüpfung: eine Summe aus dem Zeitaufwand aller verknüpften Aufgaben, eine Liste ihrer Prioritäten. Das ist ein <b>Rollup</b> — er rechnet nichts selbst, er sammelt nur ein, was in der verknüpften Tabelle schon steht.</p>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   relationen-rollups — Erkläranimation "Eine Verknüpfung, zwei Richtungen" (mit fließendem Element)
+   Endzustand=Default. Direkt danach: leerer Anker #ts14wk für den echten Warenkorb.
+   ============================================================ */
+(function(){
+  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts14bau{width:min(1000px,95vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts14bau .bau-head{max-width:760px;margin:0 auto 36px;padding:0 24px;text-align:center}
+  #ts14bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts14bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts14bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts14bau h2 .ts-gold{color:#c7b489}
+  #ts14bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:600px}
+  #ts14bau .bau-stage{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2vw,20px);max-width:760px;margin:0 auto}
+  #ts14bau .bau-box{flex:1 1 0;max-width:280px;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:24px 20px;text-align:center;
+    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
+  #ts14bau.js .bau-box{opacity:0;transform:translateY(22px) scale(.97)}
+  #ts14bau.js.on .bau-box{opacity:1;transform:none}
+  #ts14bau.js.on .bau-box:nth-child(1){transition-delay:0ms}
+  #ts14bau.js.on .bau-box:nth-child(3){transition-delay:220ms}
+  #ts14bau .bau-box.lit{border-color:rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.8),0 0 0 1px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.22)}
+  #ts14bau .bau-bname{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:16px;color:#fff;margin:0 0 6px}
+  #ts14bau .bau-bdesc{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.62);margin:0}
+  #ts14bau .bau-rel{position:relative;width:clamp(48px,7vw,84px);height:2px;flex:0 0 auto;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.06),rgba(199,180,137,.5),rgba(199,180,137,.06))}
+  #ts14bau .bau-rel .dot{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
+  #ts14bau.js.on .bau-rel .dot.fwd{animation:ts14relFwd 2.4s cubic-bezier(.22,1,.36,1) infinite}
+  #ts14bau.js.on .bau-rel .dot.back{animation:ts14relBack 2.4s cubic-bezier(.22,1,.36,1) infinite 1.2s}
+  @keyframes ts14relFwd{0%{left:0%;opacity:0}8%{opacity:1}42%{opacity:1}50%{left:100%;opacity:0}100%{left:100%;opacity:0}}
+  @keyframes ts14relBack{0%{left:100%;opacity:0}8%{opacity:1}42%{opacity:1}50%{left:0%;opacity:0}100%{left:0%;opacity:0}}
+  #ts14bau .bau-foot{display:flex;justify-content:center;margin-top:28px}
+  #ts14bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts14bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  @media(max-width:820px){ #ts14bau .bau-stage{flex-direction:column} #ts14bau .bau-rel{width:40px;height:48px} }
+  `;
+
+  function injectCSS(){
+    if(document.getElementById('ts14bau-css')) return;
+    var s=document.createElement('style'); s.id='ts14bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Eine Verknüpfung, zwei Richtungen</div>'+
+      '<h2>Was du <span class="ts-gold">dort</span> verknüpfst, siehst du <span class="ts-gold">hier</span></h2>'+
+      '<p class="bau-sub">Eine wechselseitige Verknüpfung läuft in beide Richtungen — und liefert damit den Rohstoff für jedes Rollup.</p>'+
+      '</div>'+
+      '<div class="bau-stage">'+
+        '<div class="bau-box"><div class="bau-bname">DB I · Projekte</div><p class="bau-bdesc">Legt die Verknüpfung „ToDos" an.</p></div>'+
+        '<div class="bau-rel"><span class="dot fwd"></span><span class="dot back"></span></div>'+
+        '<div class="bau-box"><div class="bau-bname">DB II · Aufgaben</div><p class="bau-bdesc">Erhält die Gegenspalte „Projekt" automatisch.</p></div>'+
+      '</div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts14bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+    var boxes=root.querySelectorAll('.bau-box');
+    boxes.forEach(function(c){ c.classList.remove('lit'); });
+    if(reduced) return;
+    boxes.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); }, 400+i*1200); });
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts14bau')) return;
+    var anchor=document.getElementById('ts14intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts14bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    root.querySelector('#ts14bauReplay').addEventListener('click', function(){ play(root); });
+
+    if(!document.getElementById('ts14wk')){
+      var wk=document.createElement('div'); wk.id='ts14wk';
+      root.parentNode.insertBefore(wk, root.nextSibling);
+    }
+
+    if(reduced){ root.classList.add('on'); root.querySelectorAll('.bau-box').forEach(function(c){c.classList.add('lit');}); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   relationen-rollups — Ergebnis-Blick "Die Zahl kommt von allein." (Text links / PC rechts)
+   ============================================================ */
+(function(){
+  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #ts14res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts14res .r-text{flex:1 1 0}
+  #ts14res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
+  #ts14res h3 .ts-accent{color:#c7b489}
+  #ts14res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
+  #ts14res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
+  #ts14res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #ts14res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts14res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
+  #ts14res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #ts14res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
+  #ts14res .r-cap b{color:#c7b489;font-weight:600}
+  #ts14res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
+  @media(max-width:820px){ #ts14res{flex-direction:column} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts14res-css')) return;
+    var s=document.createElement('style'); s.id='ts14res-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="r-text"><h3>Die Zahl kommt <span class="ts-accent">von allein.</span></h3>'+
+      '<p>Sobald die Verknüpfung steht, musst du den Zeitaufwand eines Projekts nirgendwo mehr von Hand zusammenrechnen — das Rollup summiert ihn aus jeder verknüpften Aufgabe, live und automatisch. Änderst du den Zeitaufwand einer Aufgabe, zieht sich das sofort durch die Projekt-Ansicht.</p>'+
+      '<p>Die Prioritäten-Liste funktioniert genauso: Du siehst auf einen Blick, wie viele hochpriore Aufgaben in einem Projekt stecken, ohne jede einzeln zu öffnen. Genau diese Automatik macht aus zwei Tabellen ein System, das mitdenkt statt nur zu speichern.</p></div>'+
+      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
+      '<div class="r-cap">DB I Projekte <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts14res')) return;
+    var anchor=document.getElementById('tsshop--m1_projekte'); if(!anchor){ anchor=document.getElementById('ts14wk'); }
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts14res'; root.innerHTML=html();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   relationen-rollups — Empfehlungs-Kachel "Empfehlung zur Einrichtung"
+   ============================================================ */
+(function(){
+  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['Relation vor Rollup','Immer wechselseitig','Ein Rollup, ein Zweck','Ghost-Spalten nie selbst anlegen'];
+  var TEXTS=[
+    'Bau erst die Verknüpfung, dann die Rollups darüber — ein Rollup ohne Relation hat nichts zum Sammeln.',
+    'Aktiviere immer die wechselseitige Verbindung, sonst siehst du die Aufgaben nur von einer Seite aus.',
+    'Ein Rollup soll eine Frage beantworten — Summe, Durchschnitt oder Liste, nicht alles auf einmal.',
+    'Die automatisch erscheinende Gegenspalte legst du nie selbst an — sie kommt von der Relation, nicht von dir.'
+  ];
+
+  var CSS=`
+  #ts14emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts14emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
+  #ts14emp.js.in{opacity:1}
+  #ts14emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts14emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts14emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts14emp:hover::before{opacity:1}
+  #ts14emp.beat::after{animation:ts14empBeat 2.6s ease-in-out infinite}
+  @keyframes ts14empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts14emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts14emp .db-hd .g{color:#c7b489}
+  #ts14emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts14emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts14emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts14emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts14emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts14emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts14emp .emp-right{position:relative;z-index:1}
+  #ts14emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts14emp .emph .eg{color:#c7b489}
+  #ts14emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts14emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts14emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts14emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts14emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts14emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts14emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts14emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts14emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts14emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts14emp{grid-template-columns:1fr} #ts14emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts14emp-css')) return;
+    var s=document.createElement('style'); s.id='ts14emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Deine <span class="g">Relations-Einrichtung</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Einrichtung</span></div>'+
+      '<p class="p">Damit Relation und Rollup zuverlässig bleiben, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts14emp')) return;
+    var anchor=document.getElementById('ts14res'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts14emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   relationen-rollups — Seitenabschluss (Learnings + Weiter-Button)
+   ============================================================ */
+(function(){
+  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du verknüpfst zwei Datenbanken mit wechselseitiger Verbindung.',
+    'Du weißt, dass die Gegenspalte automatisch erscheint, nicht selbst gebaut wird.',
+    'Du baust Rollups für Summen und Listen über eine Relation.',
+    'Du erkennst 1:n-Beziehungen wie Projekt und seine Aufgaben.'
+  ];
+
+  var CSS=`
+  #ts14l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts14l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts14l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts14l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts14l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts14l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts14lFloat 7s ease-in-out infinite}
+  #ts14l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts14l .tsl-orb:nth-child(1){animation-delay:0s} #ts14l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts14l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts14l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts14l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts14l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts14l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts14l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts14l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts14l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts14l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts14l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts14lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts14l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts14l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts14l-css')) return;
+    var s=document.createElement('style'); s.id='ts14l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts14l')) return;
+    var anchor=document.getElementById('ts14emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts14l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/formeln-logik-bausteine">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
