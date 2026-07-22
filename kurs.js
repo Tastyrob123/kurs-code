@@ -10742,6 +10742,15 @@ var TSISL_TEAM_ONB_V2=[
   .tscb .tsc-play .tsc-play-ic{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(11,13,20,.16)}
   .tscb .tsc-play .tsc-play-ic svg{width:11px;height:11px;margin-left:1px}
   .tscb .tsc-play.playing{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.9)}
+  .tscb .tsc-idlecover{position:absolute;inset:0;z-index:15;border-radius:16px;overflow:hidden;background:#191919;transition:opacity .45s ease}
+  .tscb .tsc-stage.playing .tsc-idlecover{opacity:0;pointer-events:none}
+  .tscb .tsc-flowbox{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;padding:0 26px}
+  .tscb .tsc-flow{display:flex;align-items:center;gap:8px}
+  .tscb .tsc-flow__step{flex:0 0 auto;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);box-shadow:inset 0 0 0 1.5px rgba(199,180,137,.45);color:#e6dcc4}
+  .tscb .tsc-flow__step svg{width:21px;height:21px}
+  .tscb .tsc-flow__arrow{flex:0 0 auto;display:flex;color:rgba(255,255,255,.22)}
+  .tscb .tsc-flow__arrow svg{width:15px;height:15px}
+  .tscb .tsc-flow__cap{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.48);text-align:center;max-width:300px}
   .tscb .tscp-head{text-align:left;margin-bottom:14px}
   .tscb .tscp-eye{font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c7b489}
   .tscb .tscp-title{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:clamp(20px,1.8vw,26px);font-weight:600;letter-spacing:-.015em;color:#fff;margin:6px 0 0}
@@ -10962,6 +10971,20 @@ var TSISL_TEAM_ONB_V2=[
   }
   var PLAYBTN='<button type="button" class="tsc-play"><span class="tsc-play-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span class="tsc-play-label">Abspielen</span></button>';
 
+  /* Info-Cover: Icon-Flow der 4 Schritte + Kurzsatz statt Foto — erklärt auf einen Blick, was das
+     "Video" zeigt, ohne Klick nötig zu machen (Robert 22.07.2026: "Informationsgrafiken als Cover"). */
+  var ARROW='<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var DUPICON=svgSm('<rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 15V5a1 1 0 011-1h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>');
+  var PENCILICON=svgSm('<path d="M4 20l1-4L16 5l3 3L8 19l-4 1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>');
+  var PLUSICON=svgSm('<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
+  function coverFlow(icons,caption){
+    return '<div class="tsc-idlecover"><div class="tsc-flowbox"><div class="tsc-flow">'+
+      icons.map(function(ic,i){ return (i?'<span class="tsc-flow__arrow">'+ARROW+'</span>':'')+'<span class="tsc-flow__step">'+ic+'</span>'; }).join('')+
+      '</div><div class="tsc-flow__cap">'+caption+'</div></div></div>';
+  }
+  var COVER_A=coverFlow([DUPICON,PENCILICON,WRENCH,XI],'So wird aus einer Zutat ein wiederverwendbarer Baustein.');
+  var COVER_B=coverFlow([PLUSICON,DB,GAL,FLAG],'So siehst du alle Bausteine einer Hauptzutat auf einen Blick.');
+
   /* EIN Section: beide Animationen nebeneinander (2 Spalten), Text je zentriert darunter, je eigener Play-Button. */
   function buildDuo(){
     if(!document.getElementById('tscover-css')){ var s=document.createElement('style'); s.id='tscover-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -10974,7 +10997,8 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tscb-anim" data-cell="B">'+animB()+'</div>'+
       centerText(TXT_B,'B')+
     '</div>';
-    [].forEach.call(sec.querySelectorAll('.tsc-stage'), function(st){ st.insertAdjacentHTML('beforeend', PLAYBTN); });
+    var stA=sec.querySelector('.tscb-anim[data-cell="A"] .tsc-stage'); if(stA) stA.insertAdjacentHTML('beforeend', COVER_A+PLAYBTN);
+    var stB=sec.querySelector('.tscb-anim[data-cell="B"] .tsc-stage'); if(stB) stB.insertAdjacentHTML('beforeend', COVER_B+PLAYBTN);
     return sec;
   }
 
