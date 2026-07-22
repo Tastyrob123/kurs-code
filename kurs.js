@@ -21879,6 +21879,92 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
+   notion-ai-fr-unser-system — #tsnaiamb Durchgehende Ambient-Bewegung
+   Robert-Feedback 22.07.2026: "mehr Bewegung durchgehend" — nicht nur EINE
+   Animation je Abschnitt, sondern etwas, das die ganze Seite ueber in Bewegung
+   ist. Zwei Elemente, beide GPU-only (nur transform/opacity, kein Layout-Trigger):
+   1) Eine duenne vertikale Lichtspur am linken Rand der Content-Spalte, auf der ein
+      Puls-Punkt endlos auf und ab wandert (durchlaeuft die ganze Seitenhoehe unabhaengig
+      von Abschnittsgrenzen).
+   2) Ein paar sehr dezente, langsam driftende Lichtpartikel im Hintergrund (rein
+      dekorativ, pointer-events:none, sehr geringe Opazitaet).
+   Bewusst UNABHAENGIG von Abschnitts-Ankern (Lehre aus #tsnaiflow, das an einem
+   fragilen getElementById-Anker haengengeblieben ist und nie gemountet hat):
+   dieses Modul haengt sich direkt an .super-content, position:fixed relativ zum
+   Viewport, kein Warten auf andere Module noetig.
+   ============================================================ */
+(function(){
+  if(window.__tsnaiamb) return; window.__tsnaiamb=true;
+  function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #tsnaiamb{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+  #tsnaiamb .amb-rail{position:absolute;left:calc(50% - 560px);top:0;bottom:0;width:1px;
+    background:linear-gradient(180deg,rgba(199,180,137,0) 0%,rgba(199,180,137,.14) 12%,rgba(199,180,137,.14) 88%,rgba(199,180,137,0) 100%)}
+  #tsnaiamb .amb-dot{position:absolute;left:calc(50% - 560px);top:0;width:6px;height:6px;margin-left:-2.5px;
+    border-radius:50%;background:#c7b489;box-shadow:0 0 14px rgba(199,180,137,.9),0 0 28px rgba(199,180,137,.4);
+    animation:ambTravel 13s cubic-bezier(.45,0,.55,1) infinite}
+  @keyframes ambTravel{
+    0%{top:0%;opacity:0}
+    6%{opacity:1}
+    48%{top:100%;opacity:1}
+    54%{opacity:0}
+    54.01%{top:0%}
+    100%{top:0%;opacity:0}
+  }
+  #tsnaiamb .amb-mote{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(199,180,137,.5),rgba(199,180,137,0) 70%);
+    filter:blur(1px);animation:ambDrift linear infinite}
+  @keyframes ambDrift{
+    0%{transform:translate(0,0);opacity:0}
+    8%{opacity:.55}
+    92%{opacity:.55}
+    100%{transform:var(--amb-end);opacity:0}
+  }
+  @media(max-width:1240px){ #tsnaiamb .amb-rail,#tsnaiamb .amb-dot{display:none} }
+  @media(prefers-reduced-motion:reduce){
+    #tsnaiamb .amb-dot,#tsnaiamb .amb-mote{animation:none!important;opacity:0!important}
+  }
+  `;
+
+  function motes(){
+    var out='', cfg=[
+      {l:'8%',  t:'14%', s:120, dx:60,  dy:-40, dur:34},
+      {l:'92%', t:'22%', s:90,  dx:-50, dy:30,  dur:29},
+      {l:'12%', t:'58%', s:140, dx:40,  dy:50,  dur:38},
+      {l:'88%', t:'68%', s:100, dx:-60, dy:-30, dur:26},
+      {l:'6%',  t:'86%', s:110, dx:50,  dy:-45, dur:32}
+    ];
+    for(var i=0;i<cfg.length;i++){
+      var c=cfg[i];
+      out+='<span class="amb-mote" style="left:'+c.l+';top:'+c.t+';width:'+c.s+'px;height:'+c.s+'px;'
+        +'--amb-end:translate('+c.dx+'px,'+c.dy+'px);animation-duration:'+c.dur+'s;animation-delay:-'+(c.dur*i/cfg.length).toFixed(1)+'s"></span>';
+    }
+    return out;
+  }
+
+  function injectCSS(){ if(document.getElementById('tsnaiamb-css'))return;
+    var s=document.createElement('style'); s.id='tsnaiamb-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){
+      var old=document.getElementById('tsnaiamb'); if(old&&old.parentNode) old.parentNode.removeChild(old);
+      return;
+    }
+    if(document.getElementById('tsnaiamb')) return true;
+    injectCSS();
+    var root=document.createElement('div');
+    root.id='tsnaiamb';
+    root.innerHTML='<div class="amb-rail"></div><div class="amb-dot"></div>'+motes();
+    document.body.appendChild(root);
+    return true;
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    notion-ai-fr-unser-system — #tsnaivid Abschnitt 03 Erklaervideo (PC links + Text rechts)
    Katalog 03: 2 Spalten 50/50, Gap FEST 18px, PC fuellt seine halbe Spalte KOMPLETT (kein max-width),
    H2 FEST 42px/1.15/zentriert/einzeilig, Fliesstext linksbuendig 600-650 Zeichen (Pflicht),
