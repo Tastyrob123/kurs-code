@@ -23713,3 +23713,404 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   layout-medien-strukturierung — Hero + Einleitung "Spalten machen den Unterschied"
+   Lektion 1.2 · Modul 1 · Notion-Grundlagen (Muster: notion-philosophie-canvas-prinzip)
+   ============================================================ */
+(function(){
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  var IMG=phHero('L 1.2');
+  var LOGO="https://files.catbox.moe/au80tp.png";
+  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
+  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 10px;padding-left:22px;position:relative}
+  .ts-body li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#c7b489}
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts12intro-css')) return;
+    var s=document.createElement('style'); s.id='ts12intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('ts12intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.2" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">L 1.2</div>'+
+        '<h1 class="ts-hero__title">Layout mit <span class="ts-gold">Absicht</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('ts12intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='ts12intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Eine Seite von oben nach unten ist selten die beste Lösung. Mit Spalten legst du Inhalte nebeneinander statt untereinander — per Drag & Drop ziehst du einen Block einfach neben einen anderen, Notion baut die Spalte von selbst.</p>
+  <p>Toggle-Listen klappen Inhalt weg, bis du ihn brauchst, Trennlinien schaffen Ruhe zwischen Abschnitten. Medien-Embeds holen Bilder, PDFs und Links direkt auf die Seite, Synced Blocks halten denselben Inhalt an mehreren Stellen aktuell. Genau diese drei Werkzeuge stecken in den Tabs meines Projekt-Systems, die dich durch den Einstieg führen — Synced Blocks bekommt gleich noch einen eigenen Blick.</p>
+  <h3>Drei Werkzeuge für ein aufgeräumtes Layout</h3>
+  <ul>
+    <li>Spalten — für Inhalte, die zusammengehören und nebeneinander stehen sollen</li>
+    <li>Toggles — für Details, die erst auf Klick sichtbar werden müssen</li>
+    <li>Embeds — für Bilder, PDFs und Links, die direkt auf der Seite leben</li>
+  </ul>
+</div>`;
+    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   layout-medien-strukturierung — Erkläranimation "Ein Layout, drei Werkzeuge"
+   Endzustand=Default: Basis zeigt fertiges Bild, .js versteckt initial, .on baut wieder auf.
+   ============================================================ */
+(function(){
+  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #ts12bau{width:min(1000px,95vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts12bau .bau-head{max-width:760px;margin:0 auto 36px;padding:0 24px;text-align:center}
+  #ts12bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts12bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts12bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
+  #ts12bau h2 .ts-gold{color:#c7b489}
+  #ts12bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:600px}
+  #ts12bau .bau-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:920px;margin:0 auto}
+  #ts12bau .bau-card{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:26px 22px;text-align:center;
+    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
+  #ts12bau.js .bau-card{opacity:0;transform:translateY(22px) scale(.97)}
+  #ts12bau.js.on .bau-card{opacity:1;transform:none}
+  #ts12bau.js.on .bau-card:nth-child(1){transition-delay:0ms}
+  #ts12bau.js.on .bau-card:nth-child(2){transition-delay:180ms}
+  #ts12bau.js.on .bau-card:nth-child(3){transition-delay:360ms}
+  #ts12bau .bau-card.lit{border-color:rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.8),0 0 0 1px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.22)}
+  #ts12bau .bau-ico{width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.34);color:#c7b489}
+  #ts12bau .bau-cname{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px}
+  #ts12bau .bau-cdesc{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);margin:0}
+  #ts12bau .bau-foot{display:flex;justify-content:center;margin-top:28px}
+  #ts12bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
+  #ts12bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
+  @media(max-width:820px){ #ts12bau .bau-cards{grid-template-columns:1fr} }
+  `;
+
+  var CARDS=[
+    {name:'Spalte', desc:'Zwei Blöcke stehen nebeneinander statt untereinander — per Drag & Drop.', icon:'<rect x="4" y="4" width="7" height="16" rx="1.5"/><rect x="13" y="4" width="7" height="16" rx="1.5"/>'},
+    {name:'Toggle', desc:'Inhalt bleibt zugeklappt, bis du ihn per Klick aufdeckst.', icon:'<path d="M6 9l6 6 6-6"/>'},
+    {name:'Embed', desc:'Bild, PDF oder Link lebt direkt auf der Seite, ohne Umweg.', icon:'<rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M6 16l4-4 3 3 5-5"/>'}
+  ];
+
+  function injectCSS(){
+    if(document.getElementById('ts12bau-css')) return;
+    var s=document.createElement('style'); s.id='ts12bau-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var cards=CARDS.map(function(c){
+      return '<div class="bau-card"><div class="bau-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+c.icon+'</svg></div><div class="bau-cname">'+c.name+'</div><p class="bau-cdesc">'+c.desc+'</p></div>';
+    }).join('');
+    return '<div class="bau-head">'+
+      '<div class="bau-eyebrow">Ein Layout, drei Werkzeuge</div>'+
+      '<h2>Struktur ist eine <span class="ts-gold">Entscheidung</span>, kein Zufall</h2>'+
+      '<p class="bau-sub">Spalte, Toggle und Embed lösen jeweils ein anderes Problem — zusammen ergeben sie ein Layout, das mitdenkt.</p>'+
+      '</div>'+
+      '<div class="bau-cards">'+cards+'</div>'+
+      '<div class="bau-foot"><button class="bau-replay" id="ts12bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
+  }
+
+  function play(root){
+    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
+    var cards=root.querySelectorAll('.bau-card');
+    cards.forEach(function(c){ c.classList.remove('lit'); });
+    if(reduced) return;
+    cards.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); }, 500+i*250); });
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts12bau')) return;
+    var anchor=document.getElementById('ts12intro'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts12bau'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+    root.querySelector('#ts12bauReplay').addEventListener('click', function(){ play(root); });
+    if(reduced){ root.classList.add('on'); root.querySelectorAll('.bau-card').forEach(function(c){c.classList.add('lit');}); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
+    io.observe(root);
+    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   layout-medien-strukturierung — Empfehlungs-Kachel "Empfehlung zur Nutzung"
+   Verhalten 1:1 wie Referenz: Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat, Sync+Bézier-Linie.
+   ============================================================ */
+(function(){
+  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STEPS=['Spalten nur bei echtem Zusammenhang','Toggles statt langer Textwüsten','Embeds bewusst dosieren','Synced Blocks für Wiederkehrendes'];
+  var TEXTS=[
+    'Zwei Blöcke gehören nur dann in eine Spalte, wenn man sie wirklich nebeneinander lesen will.',
+    'Lange Erklärungen wandern in einen Toggle, damit die Seite auf den ersten Blick ruhig bleibt.',
+    'Nicht jedes Bild braucht ein Embed — nur das, was direkt gebraucht wird, ohne Klick.',
+    'Wiederkehrende Hinweise als Synced Block anlegen, dann reicht eine Änderung für alle Stellen.'
+  ];
+
+  var CSS=`
+  #ts12emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
+    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
+    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
+  #ts12emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
+  #ts12emp.js.in{opacity:1}
+  #ts12emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
+  #ts12emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
+  #ts12emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
+  #ts12emp:hover::before{opacity:1}
+  #ts12emp.beat::after{animation:ts12empBeat 2.6s ease-in-out infinite}
+  @keyframes ts12empBeat{0%,100%{opacity:.6}50%{opacity:1}}
+  #ts12emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
+  #ts12emp .db-hd .g{color:#c7b489}
+  #ts12emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
+  #ts12emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
+  #ts12emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #ts12emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  #ts12emp .tb.on .tb-n{background:#c7b489;color:#05060b}
+  #ts12emp .tb-l{font-size:13.5px;font-weight:600}
+  #ts12emp .emp-right{position:relative;z-index:1}
+  #ts12emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
+  #ts12emp .emph .eg{color:#c7b489}
+  #ts12emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
+  #ts12emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #ts12emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
+  #ts12emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
+  #ts12emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
+  #ts12emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  #ts12emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
+  #ts12emp svg.emp-link path.on{stroke-dashoffset:0}
+  #ts12emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
+  #ts12emp svg.emp-link circle.on{opacity:1}
+  @media(max-width:900px){ #ts12emp{grid-template-columns:1fr} #ts12emp svg.emp-link{display:none} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts12emp-css')) return;
+    var s=document.createElement('style'); s.id='ts12emp-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
+    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
+    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
+      '<div><div class="db-hd">Dein <span class="g">Layout-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
+      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
+      '<p class="p">Damit dein Layout nicht zur Bastelseite wird, halte dich an diese Reihenfolge:</p>'+
+      '<ol class="tsz-ol">'+lis+'</ol></div>';
+  }
+
+  function drawLink(root, i){
+    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
+    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
+    if(!tb||!li) return;
+    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
+    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
+    var mx=(x1+x2)/2;
+    var path=svg.querySelector('path');
+    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
+    var len = path.getTotalLength ? path.getTotalLength() : 340;
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    void path.offsetWidth;
+    path.classList.add('on'); path.style.strokeDashoffset = 0;
+    var circles=svg.querySelectorAll('circle');
+    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
+    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
+  }
+
+  function sync(root){
+    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
+    var i=0, n=STEPS.length;
+    function step(){
+      tbs.forEach(function(t){ t.classList.remove('on'); });
+      lis.forEach(function(l){ l.classList.remove('lit'); });
+      tbs[i].classList.add('on'); lis[i].classList.add('lit');
+      drawLink(root, i);
+      i=(i+1)%n;
+    }
+    step();
+    if(reduced) return null;
+    return setInterval(step, 2600);
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts12emp')) return;
+    var anchor=document.getElementById('ts12bau'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts12emp'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    if(!reduced){
+      root.addEventListener('mousemove', function(e){
+        var r=root.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        root.style.setProperty('--ry',((px-.5)*5)+'deg');
+        root.style.setProperty('--rx',((.5-py)*4)+'deg');
+        root.style.setProperty('--gx',(px*100)+'%');
+        root.style.setProperty('--gy',(py*100)+'%');
+      });
+      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
+      root.addEventListener('mouseleave', function(){
+        root.classList.remove('beat');
+        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
+      });
+    }
+
+    var timer=null;
+    var io=new IntersectionObserver(function(ev){
+      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+    },{threshold:.3});
+    io.observe(root);
+    if(reduced){ root.classList.add('in'); sync(root); }
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   layout-medien-strukturierung — Seitenabschluss (Learnings + Weiter-Button)
+   ============================================================ */
+(function(){
+  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var LEARNINGS=[
+    'Du legst Spalten per Drag & Drop an, statt sie zu erzwingen.',
+    'Du weißt, wann ein Toggle die bessere Wahl ist als Fließtext.',
+    'Du bindest Bilder, PDFs und Links direkt in die Seite ein.',
+    'Du hältst wiederkehrende Inhalte über Synced Blocks konsistent.'
+  ];
+
+  var CSS=`
+  #ts12l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts12l .tsl-hd{text-align:center;margin-bottom:66px}
+  #ts12l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
+  #ts12l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #ts12l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #ts12l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
+    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    animation:ts12lFloat 7s ease-in-out infinite}
+  #ts12l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
+  #ts12l .tsl-orb:nth-child(1){animation-delay:0s} #ts12l .tsl-orb:nth-child(2){animation-delay:-1.6s}
+  #ts12l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts12l .tsl-orb:nth-child(4){animation-delay:-4.8s}
+  #ts12l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
+  #ts12l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
+  #ts12l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts12l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
+  #ts12l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts12l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
+  #ts12l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
+  #ts12l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
+  @keyframes ts12lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #ts12l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #ts12l .tsl-grid{grid-template-columns:1fr} }
+  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
+    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
+  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts12l-css')) return;
+    var s=document.createElement('style'); s.id='ts12l-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
+    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts12l')) return;
+    var anchor=document.getElementById('ts12emp'); if(!anchor) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts12l'; root.innerHTML=html();
+    if(!reduced) root.classList.add('js');
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
+    nextWrap.innerHTML='<a id="ts-next" href="/einfuehrung-datenbanken">Nächste Lektion</a>';
+    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+
+    if(reduced){ root.classList.add('on'); return; }
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
+    io.observe(root);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
