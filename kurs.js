@@ -7989,7 +7989,12 @@
       einheit:'Portionsgröße (g)', einheit_typ:'menge_g',
       /* 23 Tasty-Studios-Sirupe/Saucen (edle Gastro-Lagerung, schwarzes Studio, img/rezepturen, GitHub Pages) — Portionsgrößen = Beispielwerte.
          23 einzigartige Bilder = 23 Karten (kein zyklisches Wiederholen). Reihenfolge bewusst farblich
-         durchmischt (Rot/Orange/Grün/Blau/Violett/Braun abwechselnd), nicht nach Farbgruppen sortiert. */
+         durchmischt (Rot/Orange/Grün/Blau/Violett/Braun abwechselnd), nicht nach Farbgruppen sortiert.
+         + 6 Tasty-Studios-Gerichte (Glasschale, img/erweiterung) für die Finance-Erweiterung "Personalkosten
+         pro Rezeptur" (Robert 22.07.2026: EIN Regal statt zwei separaten Warenkörben — die Finance-Karten
+         hängen HINTEN an dasselbe Regal an, Index 23-28 der Karten, keepSteps:29 in PAGES kappt den
+         7. Finance-Schritt "Verwendet in" (bleibt Ghost-Relation). Caprese (7. Bild) daher bewusst NICHT
+         mit übernommen — nur 6 Bilder für 6 gebaute Finance-Schritte, exakte 1:1-Zuordnung per Index. */
       objekt_varianten:[
         { name:'Erdbeer-Sirup',         wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/erdbeer-sirup.jpg' },
         { name:'Mango-Sauce',           wert:50, img:'https://tastyrob123.github.io/kurs/img/rezepturen/mango-sauce.jpg' },
@@ -8013,20 +8018,13 @@
         { name:'Kiwi-Limetten-Sauce',   wert:45, img:'https://tastyrob123.github.io/kurs/img/rezepturen/kiwi-limetten-sauce.jpg' },
         { name:'Cassis-Sirup',          wert:18, img:'https://tastyrob123.github.io/kurs/img/rezepturen/cassis-sirup.jpg' },
         { name:'Rhabarber-Sirup',       wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/rhabarber-sirup.jpg' },
-        { name:'Curry-Mango-Dip',       wert:50, img:'https://tastyrob123.github.io/kurs/img/rezepturen/curry-mango-dip.jpg' }
-      ]},
-    { kachel_id:'db5_finance_personal', kachel_name:'Personalkosten pro Rezeptur', ist_produkt_kachel:true,
-      einheit:'Portionsgröße (g)', einheit_typ:'menge_g',
-      /* 7 Tasty-Studios-Gerichte (Glasschale, schwarzes Studio, img/erweiterung, GitHub Pages) — Portionsgrößen = Beispielwerte.
-         Finance-Erweiterung "Personalkosten pro Rezeptur" = 2. Tab-Gruppe auf /rezepturen, 7 Schritte = 7 Karten (1:1). */
-      objekt_varianten:[
-        { name:'Kichererbsen-Salat',   wert:120, img:'https://tastyrob123.github.io/kurs/img/erweiterung/kichererbsen-salat.jpg' },
-        { name:'Tomatensalsa',         wert:90,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/tomatensalsa.jpg' },
-        { name:'Guacamole',            wert:80,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/guacamole.jpg' },
-        { name:'Hummus',               wert:100, img:'https://tastyrob123.github.io/kurs/img/erweiterung/hummus.jpg' },
-        { name:'Räucherlachs-Röschen', wert:150, img:'https://tastyrob123.github.io/kurs/img/erweiterung/raeucherlachs-roeschen.jpg' },
-        { name:'Gurkensalat',          wert:130, img:'https://tastyrob123.github.io/kurs/img/erweiterung/gurkensalat.jpg' },
-        { name:'Caprese',              wert:160, img:'https://tastyrob123.github.io/kurs/img/erweiterung/caprese.jpg' }
+        { name:'Curry-Mango-Dip',       wert:50, img:'https://tastyrob123.github.io/kurs/img/rezepturen/curry-mango-dip.jpg' },
+        { name:'Kichererbsen-Salat',    wert:120, img:'https://tastyrob123.github.io/kurs/img/erweiterung/kichererbsen-salat.jpg' },
+        { name:'Tomatensalsa',          wert:90,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/tomatensalsa.jpg' },
+        { name:'Guacamole',             wert:80,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/guacamole.jpg' },
+        { name:'Hummus',                wert:100, img:'https://tastyrob123.github.io/kurs/img/erweiterung/hummus.jpg' },
+        { name:'Räucherlachs-Röschen',  wert:150, img:'https://tastyrob123.github.io/kurs/img/erweiterung/raeucherlachs-roeschen.jpg' },
+        { name:'Gurkensalat',           wert:130, img:'https://tastyrob123.github.io/kurs/img/erweiterung/gurkensalat.jpg' }
       ]},
     { kachel_id:'db13_lieferanten', kachel_name:'Lieferpartner', ist_produkt_kachel:true,
       einheit:'Mindestbelieferung (€)', einheit_typ:'preis',
@@ -8932,28 +8930,29 @@ var TSISL_ZUG_SCHLUESSEL=[
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB XI : Gerichte &amp; Getränke</b> die Verknüpfung „Zutaten" mit <b>wechselseitiger Verbindung</b> anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Gerichte</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, in welchen Gerichten diese Zutat direkt (Ready-to-Use) eingehängt ist.</p>' }
       ],
       summary:'Einwaage', chain:true },
-    /* DB V Rezepturen — Phasen liegen hier in einem Tab-Widget (.notion-tabs, 4 Phasen),
-       nicht in einer .notion-column-list → container-Selector + marker (nur die Phasen-
-       Tabs tragen "Grundgerüst", die zweite Finance-Erweiterung-Tabgruppe nicht). */
+    /* DB V Rezepturen — Phasen liegen in EINEM Tab-Widget (.notion-tabs, 4 Phasen "Grundgerüst"),
+       die spätere Finance-Erweiterung "Personalkosten pro Rezeptur" in einem ZWEITEN, separaten
+       .notion-tabs-Widget weiter unten auf derselben Seite. Robert 22.07.2026: „ist eigentlich
+       alles eine Tabelle" — EIN Regal statt zwei separaten Warenkörben, wie in allen anderen
+       Lektionen auch (Erweiterungen hängen hinten am selben Regal an, kein zweiter Warenkorb).
+       multi:true + expect:2 bündelt beide .notion-tabs-Container (marker trifft beide Panel-
+       Überschriften) zu EINEM Schritt-Regal — Muster aus der Engine (mountPage(), s. Kommentar
+       „Mehrere getrennte Container zu EINEM Regal bündeln"), vorher nur für db8_gerichte gedacht
+       (dort inzwischen auf Config-Steps migriert), hier der erste Live-Einsatz. */
     { path:/\/rezepturen\/?$/, kachel:'db5_rezepturen',
-      container:'.notion-tabs', marker:/Grundgerüst/,
+      container:'.notion-tabs', marker:/Grundgerüst|Finance-Erweiterung/, multi:true, expect:2,
       eyebrow:'DB V : Rezepturen',
       title:'Deine Rezepturen. <span>Portion für Portion</span>.',
       sub:'Jeder Schritt liegt als Karte im Regal. Klick ihn auf, arbeite ihn ab, leg ihn in den Einkaufswagen — die Währung von DB V ist die Portionsgröße.',
-      summary:'Portionsmenge', chain:true },
-    /* DB V Finance-Erweiterung — zweite .notion-tabs-Gruppe auf /rezepturen ("Personalkosten pro
-       Rezeptur", 7 Schritte). marker /Finance/ trifft NUR diese Gruppe; die Grundgerüst-Gruppe
-       trägt kein "Finance". Zweites Regal unter DB V auf derselben Seite (eigene kachel_id → eigene rootId). */
-    { path:/\/rezepturen\/?$/, kachel:'db5_finance_personal',
-      container:'.notion-tabs', marker:/Finance/,
-      eyebrow:'DB V : Rezepturen',
-      title:'Erweiterung nach <span>Finance</span>',
-      sub:'Wenn du Gemeinkosten & Mitarbeiterlöhne angelegt hast, können wir diese Tabelle erweitern. Wir wollen jetzt wissen: Was kostet es uns, eine Charge zuzubereiten? Wareneinsatz + Personalkosten pro Arbeitsvorgang (Gemeinkosten sind optional ebenfalls verknüpfbar). Dafür ergänzen wir weitere Spalten in der Rezepturen-Liste.',
-      /* keepSteps: Finance-Schritt 7 „Verwendet in" (→ DB Gerichte) ist keine hier baubare Spalte —
-         DB Gerichte (DB VIII, finaler Schritt) existiert zu diesem Zeitpunkt noch nicht. Sie erscheint
-         automatisch als Gegenspalte, sobald du in DB VIII die „Produkte Inhouse Production"-Verknüpfung
-         (Rezepturen/Homemade-Ansicht) wechselseitig anlegst → Ghost (unten). Muster wie db0 „Packaging / Co.". */
-      keepSteps:6,
+      /* keepSteps:29 = 23 Grundgerüst-Schritte + 6 baubare Finance-Schritte. Der 7. Finance-Schritt
+         „Verwendet in" (→ DB Gerichte) ist keine hier baubare Spalte — DB Gerichte (DB VIII, finaler
+         Schritt) existiert zu diesem Zeitpunkt noch nicht. Sie erscheint automatisch als Gegenspalte,
+         sobald du in DB VIII die „Produkte Inhouse Production"-Verknüpfung (Rezepturen/Homemade-
+         Ansicht) wechselseitig anlegst → Ghost (unten). Muster wie db0 „Packaging / Co.". Die
+         Grundgerüst-Gruppe (23 Schritte) kommt im DOM zuerst, die Finance-Gruppe (7 Schritte) danach
+         — collectSteps() haengt beide in dieser Reihenfolge aneinander, keepSteps(29) kappt exakt
+         den ueberzaehligen 7. Finance-Schritt am Ende, die 23 Grundgerüst-Schritte bleiben unangetastet. */
+      keepSteps:29,
       relations:[
         { type:'ghost', name:'Verwendet in', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Inhouse-Production-Verknüpfung aus den Gerichten — erscheint von allein.',
@@ -9404,7 +9403,7 @@ var TSISL_ZUG_SCHLUESSEL=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db5_finance_personal:6, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
+  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:8, ops_team_mitarbeiter:12, ops_check_audit:8, ops_check_prod:11, ops_hyg_produkte:10, ops_hyg_pflicht:8, ops_inv_festwert:12, ops_part_vertraege:10, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -11476,8 +11475,9 @@ var TSISL_ZUG_SCHLUESSEL=[
 
 /* ============================================================
    #tsrezsys — ZUTATEN→REZEPTUR (DB V) · /rezepturen  [v5, 2026-07-22]
-   Zwischen Finance-Warenkorb (#tsshop--db5_finance_personal) und
-   Learnings (#tsl). Robert-Feedback 22.07.2026 auf v4: "auch müll,
+   Zwischen dem (jetzt einzigen, gemergten) Rezepturen-Warenkorb
+   (#tsshop--db5_rezepturen, seit 22.07.2026 inkl. Finance-Erweiterung —
+   s. PAGES-Eintrag oben) und Learnings (#tsl). Robert-Feedback 22.07.2026 auf v4: "auch müll,
    neu machen, edler/luxuriöser/anders, mit Bildern". v3/v4 waren
    abstrakte Kreis-Diagramme — v5 ersetzt das komplett durch echte
    Food-Fotografie (Bestand, kein Motiv-Recycling: die Bilder liegen
@@ -11652,7 +11652,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   function inView(el){ var r=el.getBoundingClientRect(); return r.top < (window.innerHeight*0.8) && r.bottom > (window.innerHeight*0.2); }
 
   function anchorMount(root){
-    var shop=document.getElementById('tsshop--db5_finance_personal');
+    var shop=document.getElementById('tsshop--db5_rezepturen');
     if(shop && shop.parentNode){ shop.parentNode.insertBefore(root, shop.nextSibling); return true; }
     var tsl=document.getElementById('tsl');
     if(tsl && tsl.parentNode){ tsl.parentNode.insertBefore(root, tsl); return true; }
@@ -11663,7 +11663,7 @@ var TSISL_ZUG_SCHLUESSEL=[
   function mount(){
     if(!/\/rezepturen\/?$/.test(location.pathname)){ var e=document.getElementById('tsrezsys'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsrezsys')) return;
-    if(!document.getElementById('tsshop--db5_finance_personal') && !document.getElementById('tsl')) return;
+    if(!document.getElementById('tsshop--db5_rezepturen') && !document.getElementById('tsl')) return;
     injectCSS();
     var root=build();
     if(!anchorMount(root)) return;
