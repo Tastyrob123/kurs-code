@@ -22519,7 +22519,7 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">L 2.15 · Optional</div>'+
-        '<h1 class="ts-hero__title">Mehrere <span class="ts-gold">Standorte</span></h1>'+
+        '<h1 class="ts-hero__title">Multistandorte</h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
     if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
@@ -22537,8 +22537,8 @@ var TSISL_TEAM_ONB_V2=[
     wrap.id='tsms-intro';
     wrap.innerHTML=`
 <div class="ts-body">
-  <p>Führst du einen einzigen Betrieb, kannst du diese Lektion überspringen. An dem, was du bisher gebaut hast, ändert sie nichts.</p>
-  <p>Kommt ein <b>zweiter Standort</b> dazu, schiebt sich allerdings eine Frage nach vorn, die vorher keine war: <b>Wer darf was sehen?</b> Dein Store Manager braucht seine Inventurliste, seine Checklisten und die Zahlen seines Hauses. Die Einkaufspreise der ganzen Gruppe braucht er nicht, und die Kalkulation dahinter erst recht nicht. Genau an dieser Stelle stößt Notion an eine Grenze. Wir bauen die Struktur so, dass sie trotzdem hält.</p>
+  <p>Diese Lektion dreht sich nicht um die Zahl deiner Standorte, sondern um eine Rolle: den Betreiber, der nicht automatisch der Entscheider ist. Sobald ein angestellter Manager die Inventur führt, aber die Kalkulation nicht sehen soll, gilt das schon mit einem einzigen Haus.</p>
+  <p>Mehrere Standorte verschärfen diese Frage lediglich, sie erzeugen sie nicht neu: aus einer Zählliste werden mehrere, aus einem Manager mehrere Team-Mitglieder mit Zugriff — die Trennung dahinter bleibt dieselbe. Wir bauen die Struktur so, dass Notion sie hält, unabhängig davon, wie viele Häuser dazukommen.</p>
 </div>`;
     hero.parentNode.insertBefore(wrap, hero.nextSibling);
   }
@@ -22567,7 +22567,7 @@ var TSISL_TEAM_ONB_V2=[
   var CAPS=[
     'Der Store Manager sieht nur Artikel und Menge. Doch <b>ausgeblendete Spalten</b> sind zwei Klicks entfernt — kein Schutz, nur ein Vorhang.',
     'Und jede <b>Relation ist eine Tür</b>: Wer eine Zeile öffnet, klickt sich über die Verknüpfung bis in die Kalkulation.',
-    'Die Lösung liegt eine Ebene höher. <b>Eine Masterliste, mehrere Zähllisten</b> — der Preis bleibt oben, nur die gezählte Menge kommt hoch.'
+    'Die echte Wand heißt <b>Teamspace</b>, nicht Spalten-Ansicht: eine Notion-Berechtigung, hinter der Zentrale und Standort getrennt sitzen — der Preis bleibt drüben.'
   ];
 
   var CSS=`
@@ -23154,12 +23154,12 @@ var TSISL_TEAM_ONB_V2=[
     '</div>'+
     '<div class="msv-txt">'+
       '<h2 class="msv-h2">So funktioniert die <span class="ts-gold">Ableitung</span></h2>'+
-      '<p>Hinter der Brücke aus der Animation steckt eine technische Verbindung: Claude Code spricht mit der Notion-API und rollt Artikel und Einheit der Masterliste in jede Standort-Zählliste aus, immer ohne Preis.</p>'+
-      '<p>Zählt ein Standort seine Ware, sammelt dieselbe Verbindung die Mengen wieder ein und trägt sie zurück in die Master-Inventur. Erst dort trifft die gezählte Menge auf den hinterlegten Preis, die Kalkulation bleibt allein in der Zentrale.</p>'+
-      '<p>Wie diese Verbindung technisch aufgebaut wird, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du Claude Code und die Notion-API im Detail kennst. Hier reicht dir das Prinzip.</p>'+
+      '<p>Die eigentliche Trennung passiert vorher, rein in Notion: zwei <b>Teamspaces</b>, einer für die Geschäftsführung mit Master-Inventur und Kalkulation, einer für den Standort mit nur der Zählliste. Wer nicht Mitglied ist, kann die Seite gar nicht öffnen — Berechtigung statt Vorhang.</p>'+
+      '<p>Getrennte Datenbanken müssen aber synchron bleiben: Ändert sich ein Einkaufspreis, muss er in jeder Zählliste ankommen. Claude Code übernimmt das für dich, komplett <b>optional</b> — pflegst du lieber von Hand nach, bleibt die Trennung intakt.</p>'+
+      '<p>Wie diese Verbindung technisch entsteht, zeigen wir dir in <b>Modul vier und fünf</b>, sobald du Claude Code im Detail kennst.</p>'+
     '</div>'+
   '</div>'+
-  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur das Prinzip ein: Stammdaten wandern nach unten, gezählte Mengen wandern nach oben, und der Preis bleibt oben, wo die Entscheidung darüber liegt. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie Claude Code diese Verbindung für dich aufbaut.</p>';
+  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen — sicher arbeitest du schon allein durch die Teamspace-Trennung. Präg dir nur das Prinzip ein: Claude Code hält die getrennten Datenbanken danach optional synchron, damit niemand von Hand nachpflegen muss. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
 
   function injectCSS(){ if(document.getElementById('tsmsv-css'))return;
     var s=document.createElement('style'); s.id='tsmsv-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -23191,7 +23191,7 @@ var TSISL_TEAM_ONB_V2=[
   function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
   var STEPS=[
     {n:'01', l:'Liste duplizieren'},
-    {n:'02', l:'Rechte begrenzen'},
+    {n:'02', l:'Teamspace anlegen'},
     {n:'03', l:'Relation verknüpfen'},
     {n:'04', l:'Testlauf prüfen'}
   ];
@@ -23253,7 +23253,7 @@ var TSISL_TEAM_ONB_V2=[
     <p class="msemp-intro">Damit ein neuer Standort sauber in die Struktur passt, gehst du diese vier Schritte in genau dieser Reihenfolge:</p>
     <ol class="msemp-ol">
       <li data-i="0">Dupliziere die <b>Master-Zählliste</b> als Vorlage für den neuen Standort, statt eine neue Liste von Grund auf zu bauen.</li>
-      <li data-i="1">Begrenze die <b>Rechte</b> des Store Managers auf genau diesen einen Standort, bevor irgendjemand Zugriff bekommt.</li>
+      <li data-i="1">Lege für den Standort einen eigenen <b>Teamspace</b> an und lade den Manager ausschließlich dort ein — er sieht dann nur, was in diesem Teamspace liegt.</li>
       <li data-i="2">Verknüpfe die <b>Relation zur Master-Inventur</b>, damit die Ableitung Artikel und Einheit automatisch nachzieht.</li>
       <li data-i="3">Lass den Standort einen <b>ersten Zähldurchlauf</b> machen und prüfe, ob die Menge oben ankommt, bevor der Alltag beginnt.</li>
     </ol>
