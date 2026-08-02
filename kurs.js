@@ -29091,3 +29091,441 @@ var TSISL_TEAM_ONB_V2=[
     .observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('popstate',function(){ clearTimeout(t); t=setTimeout(sync,60); });
 })();
+
+/* ============================================================
+   MODUL 6 · L6.1 — #tsws1anim Abschnitt 02 Erkläranimation "Drei Griffe, ein Arbeitsplatz."
+   Aufbau-Variante 1.1 (Überschrift + 1 Satz, dann Animation).
+   Schwerpunkt-Treue (Doktrin 1a): die Lektion hat GENAU DREI inhaltliche Stationen
+   (Projektordner · Projekt-CLAUDE.md · Higgsfield-Anschluss) — die Animation zeigt alle drei
+   als EINEN Aufbau und nimmt damit keiner Folgesektion etwas weg.
+   Kompositions-Regel 1b: EINE Bühne (Fenster) + 3 GLEICH GROSSE Chips auf DERSELBEN Achse
+   (beide width:min(560px,100%)); die Möbel stehen ab Beat 0 ruhig, es wechselt nur der Inhalt.
+   Robustheit: Endzustand = Default, Startzustand hinter .js; Kill-Handle window.__tsws1animKill.
+   Bilder: KEINE (reine UI-Darstellung, kein Motiv-Recycling) — Katalog erlaubt das für Software-Abläufe.
+   ============================================================ */
+(function(){
+  if(window.__tsws1anim) return;
+  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
+
+  var CAPS=[
+    'Ein leerer Ordner — mehr braucht der Anfang nicht. Claude arbeitet immer dort, wo du es startest.',
+    'Der Ordner bekommt einen Namen und wird zur Heimat: Code, Bilder, Videos, Notizen liegen ab jetzt beieinander.',
+    'In die Projekt-CLAUDE.md wandern deine echten Betriebsdaten — und die zwei Regeln, an die Claude sich in jeder Sitzung hält.',
+    'Zuletzt dockt Higgsfield an. Ab hier kann Claude Bilder und Videos erzeugen, ohne dass du das Fenster wechselst.'
+  ];
+  var DWELL=[3000,3400,5200,4200];
+
+  var CSS=`
+  #tsws1anim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsws1anim *{box-sizing:border-box}
+  #tsws1anim .wa-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #tsws1anim .wa-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsws1anim .wa-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tsws1anim h2.wa-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #tsws1anim h2.wa-title .ts-gold{color:#c7b489}
+  #tsws1anim .wa-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #tsws1anim .wa-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  /* EINE Achse: Fenster und Chip-Reihe teilen sich exakt dieselbe Breite (Kompositions-Regel 1b a) */
+  #tsws1anim .wa-frame{position:relative;width:min(560px,100%);margin:0 auto;border-radius:16px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9);overflow:hidden}
+  #tsws1anim .wa-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
+  #tsws1anim .wa-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;
+    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  #tsws1anim .wa-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
+  #tsws1anim .wa-dot:first-child{background:rgba(199,180,137,.55)}
+  #tsws1anim .wa-path{margin-left:8px;font:600 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.04em;color:rgba(255,255,255,.34);transition:color .6s ease}
+  #tsws1anim .wa-canvas{position:relative;aspect-ratio:4/3}
+  #tsws1anim .wa-scene{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:14px;
+    opacity:0;transition:opacity .7s cubic-bezier(.16,1,.3,1)}
+  #tsws1anim .wa-scene.on{opacity:1}
+
+  /* Beat 0 — leerer Ordner */
+  #tsws1anim .wa-empty{margin:auto;width:78%;height:64%;border:1.5px dashed rgba(255,255,255,.16);border-radius:14px;
+    display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:13px;letter-spacing:.04em}
+  /* Beat 1 — Dateiliste */
+  #tsws1anim .wa-row{display:flex;align-items:center;gap:11px}
+  #tsws1anim .wa-ico{width:22px;height:18px;border-radius:3px 5px 5px 5px;flex:0 0 auto;
+    background:linear-gradient(rgba(199,180,137,.30),rgba(199,180,137,.30)),#05060b;border:1px solid rgba(199,180,137,.4)}
+  #tsws1anim .wa-line{height:11px;border-radius:6px;background:rgba(255,255,255,.15)}
+  #tsws1anim .wa-line.k{background:rgba(199,180,137,.55)}
+  /* Beat 2 — CLAUDE.md */
+  #tsws1anim .wa-doc{width:100%;border-radius:12px;padding:16px 18px;
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(199,180,137,.30)}
+  #tsws1anim .wa-dt{font:600 11px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsws1anim .wa-fact{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  #tsws1anim .wa-rule{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.09)}
+  #tsws1anim .wa-rule + .wa-rule{margin-top:8px;padding-top:0;border-top:0}
+  #tsws1anim .wa-check{width:14px;height:14px;border-radius:50%;flex:0 0 auto;border:1.5px solid rgba(199,180,137,.55);
+    background:radial-gradient(circle,rgba(199,180,137,.5),rgba(199,180,137,0) 70%)}
+  #tsws1anim .wa-rt{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.72)}
+  /* Beat 3 — Anschluss */
+  #tsws1anim .wa-link{display:flex;align-items:center;gap:0;width:100%}
+  #tsws1anim .wa-box{flex:1 1 0;min-height:96px;border-radius:12px;padding:13px 14px;
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(255,255,255,.13);
+    display:flex;flex-direction:column;justify-content:center;gap:8px;transition:border-color .5s ease}
+  #tsws1anim .wa-box.lit{border-color:rgba(199,180,137,.5)}
+  #tsws1anim .wa-bt{font:600 11px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+  #tsws1anim .wa-box.lit .wa-bt{color:#c7b489}
+  #tsws1anim .wa-bn{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff}
+  /* Verbindung im ZWISCHENRAUM (Opake-Basis-Regel, Erweiterung 3) */
+  #tsws1anim .wa-conn{position:relative;flex:0 0 74px;height:2px;background:rgba(199,180,137,.22);margin:0 10px}
+  #tsws1anim .wa-conn i{position:absolute;top:50%;left:0;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;
+    background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.85);opacity:0}
+  #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:waPulse 3.4s cubic-bezier(.45,0,.55,1) infinite}
+
+  /* Chip-Reihe: 3 gleichrangige Elemente, exakt gleich groß (Kompositions-Regel 1b b) */
+  #tsws1anim .wa-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(560px,100%);margin:22px auto 0}
+  #tsws1anim .wa-step{height:84px;border-radius:13px;padding:0 12px;cursor:pointer;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
+  #tsws1anim .wa-step:not(.on) .wa-sn{color:rgba(255,255,255,.3)}
+  #tsws1anim .wa-step:not(.on) .wa-sl{color:rgba(255,255,255,.34)}
+  #tsws1anim .wa-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
+  #tsws1anim .wa-sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:#c7b489;transition:color .4s ease}
+  #tsws1anim .wa-sl{font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.86);transition:color .4s ease}
+
+  #tsws1anim .wa-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsws1anim .wa-cap b{color:#c7b489;font-weight:600}
+  #tsws1anim .wa-foot{display:flex;justify-content:center;margin-top:8px}
+  #tsws1anim .wa-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #tsws1anim .wa-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes waPulse{0%{opacity:0;left:0}8%{opacity:1}50%{left:calc(100% - 7px);opacity:1}58%{opacity:0}100%{opacity:0;left:calc(100% - 7px)}}
+  @media(max-width:820px){
+    #tsws1anim .wa-steps{grid-template-columns:1fr;gap:10px}
+    #tsws1anim .wa-step{height:64px;flex-direction:row;gap:10px;justify-content:flex-start;text-align:left}
+    #tsws1anim .wa-cap{min-height:130px}
+    #tsws1anim .wa-link{flex-direction:column;gap:0}
+    #tsws1anim .wa-conn{flex:0 0 44px;width:2px;height:44px;margin:8px 0}
+    #tsws1anim .wa-conn i{left:50%;margin-left:-3.5px;top:0;margin-top:0}
+    #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:waPulseV 3.4s cubic-bezier(.45,0,.55,1) infinite}
+  }
+  @keyframes waPulseV{0%{opacity:0;top:0}8%{opacity:1}50%{top:calc(100% - 7px);opacity:1}58%{opacity:0}100%{opacity:0;top:calc(100% - 7px)}}
+  /* Startzustand NUR mit .js — ohne JS steht der letzte Beat fertig da (Endzustand = Default) */
+  #tsws1anim .wa-wrap:not(.js) .wa-scene{opacity:0}
+  #tsws1anim .wa-wrap:not(.js) .wa-scene:last-child{opacity:1}
+  @media(prefers-reduced-motion:reduce){
+    #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:none;opacity:1;left:calc(50% - 3.5px)}
+  }
+  `;
+
+  function html(){
+    var steps=[['01','Projektordner'],['02','CLAUDE.md'],['03','Higgsfield']].map(function(s,i){
+      return '<div class="wa-step" data-i="'+(i+1)+'"><span class="wa-sn">'+s[0]+'</span><span class="wa-sl">'+s[1]+'</span></div>';
+    }).join('');
+    return `
+<div class="wa-head">
+  <span class="wa-eyebrow">Der Arbeitsplatz</span>
+  <h2 class="wa-title">Drei Griffe, ein <span class="ts-gold">Arbeitsplatz</span>.</h2>
+  <p class="wa-sub">Bevor die erste Zeile Code entsteht, richten wir das Fenster ein, in dem später die ganze Website gebaut wird.</p>
+</div>
+<div class="wa-wrap">
+  <div class="wa-frame">
+    <div class="wa-bar"><span class="wa-dot"></span><span class="wa-dot"></span><span class="wa-dot"></span><span class="wa-path">~/</span></div>
+    <div class="wa-canvas">
+      <div class="wa-scene" data-i="0"><div class="wa-empty">noch leer</div></div>
+      <div class="wa-scene" data-i="1">
+        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line k" style="width:44%"></span></div>
+        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:62%"></span></div>
+        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:38%"></span></div>
+        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:54%"></span></div>
+      </div>
+      <div class="wa-scene" data-i="2">
+        <div class="wa-doc">
+          <div class="wa-dt">CLAUDE.md</div>
+          <div class="wa-fact"><span class="wa-line k" style="width:26%"></span><span class="wa-line" style="width:46%"></span></div>
+          <div class="wa-fact"><span class="wa-line k" style="width:20%"></span><span class="wa-line" style="width:56%"></span></div>
+          <div class="wa-fact"><span class="wa-line k" style="width:30%"></span><span class="wa-line" style="width:34%"></span></div>
+          <div class="wa-rule"><span class="wa-check"></span><span class="wa-rt">Nach jedem Schritt die Mobil-Ansicht prüfen.</span></div>
+          <div class="wa-rule"><span class="wa-check"></span><span class="wa-rt">Nichts als fertig melden, was Claude nicht selbst gesehen hat.</span></div>
+        </div>
+      </div>
+      <div class="wa-scene" data-i="3">
+        <div class="wa-link">
+          <div class="wa-box lit"><span class="wa-bt">Dein Projekt</span><span class="wa-bn">Claude Code</span></div>
+          <div class="wa-conn"><i></i></div>
+          <div class="wa-box lit"><span class="wa-bt">Bilder &amp; Videos</span><span class="wa-bn">Higgsfield</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wa-steps">${steps}</div>
+  <p class="wa-cap"></p>
+  <div class="wa-foot"><button class="wa-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timer=null;
+  function clear(){ if(timer){ clearTimeout(timer); timer=null; } }
+
+  function show(root,i){
+    var scenes=root.querySelectorAll('.wa-scene');
+    for(var s=0;s<scenes.length;s++) scenes[s].classList.toggle('on', s===i);
+    var steps=root.querySelectorAll('.wa-step');
+    for(var t=0;t<steps.length;t++) steps[t].classList.toggle('on', (t+1)<=i);
+    var cap=root.querySelector('.wa-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
+    var path=root.querySelector('.wa-path');
+    if(path) path.textContent = i===0 ? '~/' : '~/website-meinbetrieb';
+    if(path) path.style.color = i===0 ? 'rgba(255,255,255,.34)' : '#c7b489';
+  }
+
+  function run(root,i){
+    clear();
+    show(root,i);
+    if(i < CAPS.length-1){
+      timer=setTimeout(function(){ run(root,i+1); }, DWELL[i]);
+    } else {
+      root.querySelector('.wa-wrap').classList.add('built');
+    }
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.wa-wrap'); if(!wrap) return;
+    wrap.classList.add('js'); wrap.classList.remove('built');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      show(root, CAPS.length-1); wrap.classList.add('built'); return;
+    }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='tsws1anim'; el.innerHTML=html();
+    el.querySelector('.wa-replay').addEventListener('click',function(){ play(el); });
+    var steps=el.querySelectorAll('.wa-step');
+    for(var i=0;i<steps.length;i++){
+      (function(n){ steps[n].addEventListener('click',function(){
+        clear(); el.querySelector('.wa-wrap').classList.add('js','built'); show(el,n+1);
+      }); })(i);
+    }
+    return el;
+  }
+
+  function injectCSS(){ if(document.getElementById('tsws1anim-css'))return;
+    var s=document.createElement('style'); s.id='tsws1anim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('tsws1anim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('tsws1anim')) return;
+    var anchor=document.getElementById('tsws1-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.wa-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__tsws1animKill=function(){ clear(); };
+  window.__tsws1anim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 6 · L6.2 — #tsws2anim Abschnitt 02 Erkläranimation "Vier Werkzeuge, ein anderer Blick."
+   Aufbau-Variante 1.1. EIGENES Konzept (kein Recycling von #tsws1anim): dort entsteht ein
+   Arbeitsplatz Schritt fuer Schritt, hier veraendert sich EIN bestehendes Ergebnis mit jedem Werkzeug.
+   Schwerpunkt-Treue (Doktrin 1a): die Lektion dreht sich um die vier Werkzeug-Rollen und darum,
+   dass man ihre Wirkung pruefen muss — genau das zeigt die Bühne.
+   Kompositions-Regel 1b: EIN Rahmen + 4 GLEICH GROSSE Chips auf DERSELBEN Achse (min(560px,100%));
+   die Möbel stehen ab Beat 0 ruhig, es wechselt nur der Inhalt IM Rahmen.
+   Robustheit: Endzustand = Default, Startzustand hinter .js; Kill-Handle window.__tsws2animKill.
+   ============================================================ */
+(function(){
+  if(window.__tsws2anim) return;
+  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
+
+  var CAPS=[
+    'So baut Claude ohne Vorgaben: Verlauf, runde Kacheln, Standardschrift. Technisch fehlerfrei — und austauschbar.',
+    '<b>Design</b> zuerst. Der Verlauf weicht einer ruhigen Fläche, die Abstände bekommen Luft, die Kanten werden leiser.',
+    '<b>Animation</b> bringt Bewegung in die Seite: ein Impuls läuft durch, wo vorher alles stillstand.',
+    '<b>Inszenierung</b> gibt dem Bild die Bühne. Aus einer Kachelreihe wird eine Szene, die beim Scrollen erzählt.',
+    '<b>Typografie</b> setzt den Schlusspunkt: eine große ruhige Zeile statt vieler gleich lauter. Jetzt sieht es nach Agentur aus.'
+  ];
+  var DWELL=[3400,3600,3400,3600,4200];
+
+  var CSS=`
+  #tsws2anim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsws2anim *{box-sizing:border-box}
+  #tsws2anim .sk-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #tsws2anim .sk-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #tsws2anim .sk-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #tsws2anim h2.sk-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #tsws2anim h2.sk-title .ts-gold{color:#c7b489}
+  #tsws2anim .sk-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #tsws2anim .sk-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #tsws2anim .sk-frame{position:relative;width:min(560px,100%);margin:0 auto;border-radius:16px;overflow:hidden;
+    background:#05060b;border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9);
+    transition:border-color .8s cubic-bezier(.16,1,.3,1),box-shadow .8s cubic-bezier(.16,1,.3,1)}
+  #tsws2anim .sk-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
+  #tsws2anim .sk-canvas{position:relative;aspect-ratio:4/3;padding:26px;display:flex;flex-direction:column;justify-content:center;gap:16px;
+    transition:background .9s cubic-bezier(.16,1,.3,1),padding .9s cubic-bezier(.16,1,.3,1)}
+  /* Beat 0 = Baukasten-Look */
+  #tsws2anim .sk-wrap.js.b0 .sk-canvas{background:linear-gradient(150deg,#3a2a6d 0%,#2a2450 55%,#1a1636 100%)}
+  #tsws2anim .sk-hl{font-family:-apple-system,sans-serif;font-weight:700;font-size:19px;line-height:1.25;color:#fff;
+    text-align:center;letter-spacing:0;
+    transition:font-family .6s ease,font-size .9s cubic-bezier(.16,1,.3,1),letter-spacing .9s ease,text-align .3s ease}
+  #tsws2anim .sk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;transition:gap .9s cubic-bezier(.16,1,.3,1)}
+  #tsws2anim .sk-card{height:86px;border-radius:18px;background:rgba(255,255,255,.14);
+    box-shadow:0 10px 22px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);
+    transition:height .9s cubic-bezier(.16,1,.3,1),border-radius .9s cubic-bezier(.16,1,.3,1),
+      background .9s cubic-bezier(.16,1,.3,1),box-shadow .9s cubic-bezier(.16,1,.3,1),opacity .7s ease}
+  /* Beat 1 — Design: ruhige Fläche, flachere Kanten, Luft */
+  #tsws2anim .sk-wrap.js.b1 .sk-canvas,#tsws2anim .sk-wrap.js.b2 .sk-canvas,
+  #tsws2anim .sk-wrap.js.b3 .sk-canvas,#tsws2anim .sk-wrap.js.b4 .sk-canvas{background:#05060b}
+  #tsws2anim .sk-wrap.js.b1 .sk-card,#tsws2anim .sk-wrap.js.b2 .sk-card{border-radius:10px;background:rgba(255,255,255,.045);
+    box-shadow:none;border-color:rgba(255,255,255,.1)}
+  #tsws2anim .sk-wrap.js.b1 .sk-cards,#tsws2anim .sk-wrap.js.b2 .sk-cards{gap:18px}
+  /* Beat 2 — Animation: Impuls laeuft durch */
+  #tsws2anim .sk-sweep{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:linear-gradient(100deg,rgba(199,180,137,0) 38%,rgba(199,180,137,.20) 50%,rgba(199,180,137,0) 62%)}
+  #tsws2anim .sk-wrap.js.b2 .sk-sweep{opacity:1;animation:skSweep 1.6s cubic-bezier(.22,1,.36,1) infinite}
+  /* Beat 3 — Inszenierung: aus der Kachelreihe wird eine Szene */
+  #tsws2anim .sk-wrap.js.b3 .sk-cards,#tsws2anim .sk-wrap.js.b4 .sk-cards{gap:0;grid-template-columns:1fr}
+  #tsws2anim .sk-wrap.js.b3 .sk-card:nth-child(2),#tsws2anim .sk-wrap.js.b4 .sk-card:nth-child(2),
+  #tsws2anim .sk-wrap.js.b3 .sk-card:nth-child(3),#tsws2anim .sk-wrap.js.b4 .sk-card:nth-child(3){display:none}
+  #tsws2anim .sk-wrap.js.b3 .sk-card:first-child,#tsws2anim .sk-wrap.js.b4 .sk-card:first-child{
+    height:190px;border-radius:12px;
+    background:linear-gradient(165deg,rgba(199,180,137,.16),rgba(255,255,255,.02) 55%),#0a0c14;
+    border-color:rgba(199,180,137,.32)}
+  /* Beat 4 — Typografie */
+  #tsws2anim .sk-wrap.js.b4 .sk-hl{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:30px;letter-spacing:-.02em}
+  #tsws2anim .sk-wrap.js.b4 .sk-frame{border-color:rgba(199,180,137,.4);box-shadow:0 34px 76px -30px rgba(0,0,0,.92),0 0 46px -18px rgba(199,180,137,.4)}
+
+  #tsws2anim .sk-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:min(560px,100%);margin:22px auto 0}
+  #tsws2anim .sk-step{height:84px;border-radius:13px;padding:0 10px;cursor:pointer;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
+  #tsws2anim .sk-step:not(.on) .sk-sn{color:rgba(255,255,255,.3)}
+  #tsws2anim .sk-step:not(.on) .sk-sl{color:rgba(255,255,255,.34)}
+  #tsws2anim .sk-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
+  #tsws2anim .sk-sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:#c7b489;transition:color .4s ease}
+  #tsws2anim .sk-sl{font-size:12px;line-height:1.3;color:rgba(255,255,255,.86);transition:color .4s ease}
+
+  #tsws2anim .sk-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsws2anim .sk-cap b{color:#c7b489;font-weight:600}
+  #tsws2anim .sk-foot{display:flex;justify-content:center;margin-top:8px}
+  #tsws2anim .sk-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #tsws2anim .sk-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes skSweep{0%{transform:translateX(-100%)}55%{transform:translateX(100%)}100%{transform:translateX(100%)}}
+  @media(max-width:820px){
+    #tsws2anim .sk-steps{grid-template-columns:repeat(2,1fr);gap:10px}
+    #tsws2anim .sk-step{height:70px}
+    #tsws2anim .sk-cap{min-height:130px}
+    #tsws2anim .sk-wrap.js.b4 .sk-hl{font-size:24px}
+  }
+  /* Endzustand = Default: ohne .js steht die fertige Seite da (kein schwarzes Loch) */
+  #tsws2anim .sk-wrap:not(.js) .sk-canvas{background:#05060b}
+  #tsws2anim .sk-wrap:not(.js) .sk-hl{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:30px;letter-spacing:-.02em}
+  #tsws2anim .sk-wrap:not(.js) .sk-cards{gap:0;grid-template-columns:1fr}
+  #tsws2anim .sk-wrap:not(.js) .sk-card:nth-child(2),#tsws2anim .sk-wrap:not(.js) .sk-card:nth-child(3){display:none}
+  #tsws2anim .sk-wrap:not(.js) .sk-card:first-child{height:190px;border-radius:12px;
+    background:linear-gradient(165deg,rgba(199,180,137,.16),rgba(255,255,255,.02) 55%),#0a0c14;border-color:rgba(199,180,137,.32)}
+  @media(prefers-reduced-motion:reduce){ #tsws2anim .sk-wrap.js.b2 .sk-sweep{animation:none;opacity:0} }
+  `;
+
+  function html(){
+    var steps=[['01','Design'],['02','Animation'],['03','Inszenierung'],['04','Typografie']].map(function(s,i){
+      return '<div class="sk-step" data-i="'+(i+1)+'"><span class="sk-sn">'+s[0]+'</span><span class="sk-sl">'+s[1]+'</span></div>';
+    }).join('');
+    return `
+<div class="sk-head">
+  <span class="sk-eyebrow">Die Werkzeugkiste</span>
+  <h2 class="sk-title">Vier Werkzeuge, ein anderer <span class="ts-gold">Blick</span>.</h2>
+  <p class="sk-sub">Dieselbe Seite, viermal nachgeschärft — so verändert jeder geladene Skill das, was am Ende herauskommt.</p>
+</div>
+<div class="sk-wrap">
+  <div class="sk-frame">
+    <div class="sk-canvas">
+      <div class="sk-hl">Secret Mountain</div>
+      <div class="sk-cards"><div class="sk-card"></div><div class="sk-card"></div><div class="sk-card"></div></div>
+      <div class="sk-sweep"></div>
+    </div>
+  </div>
+  <div class="sk-steps">${steps}</div>
+  <p class="sk-cap"></p>
+  <div class="sk-foot"><button class="sk-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timer=null;
+  function clear(){ if(timer){ clearTimeout(timer); timer=null; } }
+
+  function show(root,i){
+    var wrap=root.querySelector('.sk-wrap');
+    for(var b=0;b<CAPS.length;b++) wrap.classList.toggle('b'+b, b===i);
+    var steps=root.querySelectorAll('.sk-step');
+    for(var t=0;t<steps.length;t++) steps[t].classList.toggle('on', (t+1)<=i);
+    var cap=root.querySelector('.sk-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
+  }
+
+  function run(root,i){
+    clear(); show(root,i);
+    if(i < CAPS.length-1) timer=setTimeout(function(){ run(root,i+1); }, DWELL[i]);
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.sk-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ show(root, CAPS.length-1); return; }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='tsws2anim'; el.innerHTML=html();
+    el.querySelector('.sk-replay').addEventListener('click',function(){ play(el); });
+    var steps=el.querySelectorAll('.sk-step');
+    for(var i=0;i<steps.length;i++){
+      (function(n){ steps[n].addEventListener('click',function(){
+        clear(); el.querySelector('.sk-wrap').classList.add('js'); show(el,n+1);
+      }); })(i);
+    }
+    return el;
+  }
+
+  function injectCSS(){ if(document.getElementById('tsws2anim-css'))return;
+    var s=document.createElement('style'); s.id='tsws2anim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('tsws2anim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('tsws2anim')) return;
+    var anchor=document.getElementById('tsws2-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.sk-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__tsws2animKill=function(){ clear(); };
+  window.__tsws2anim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
