@@ -7470,6 +7470,190 @@
 })();
 
 /* ============================================================
+   inventurliste — Ergebnis-Blick "Monatliche Inventurliste" #tsinvres
+   (Abschnitts-Katalog 05). ZWEITER Ergebnis-Blick der Seite ->
+   Alternierungs-Regel: PC LINKS / Text RECHTS (der erste, #tsiv
+   "Deine fertige Datenbank.", ist Text links / PC rechts).
+   1:1-Klon des kanonischen #tspkres (/allergene-bersicht):
+   Grid 1fr/1.42fr, Ueberschrift 30px Lineal TS mit Beige-Akzent,
+   Fliesstext 15.5/1.62/.86, Klick -> MacBook-Scroll-Lightbox
+   (Rahmen oj1wa9 + scrollbarer Screen), Auto-Scroll ~11 s.
+   Sitzt direkt UNTER dem Monats-Warenkorb #tsshop--inventur_monat.
+   Mobile: Text bleibt sichtbar (Praezedenz #tspkres/#tsnai2mac —
+   Katalog-KLAEREN-Frage weiter offen).
+   ⚠️ POSTER/SHOT = null -> gestalteter Platzhalter im MacBook-
+   Rahmen, Auto-Scroll aus. Tausch = NUR die 2 Konstanten setzen
+   (Robert liefert Mockup + langen Ganzseiten-Screenshot nach).
+   ============================================================ */
+(function(){
+  if(window.__tsinvres) return; window.__tsinvres=true;
+  var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen Inventurliste 01-2026 (Robert) */
+  var SHOT=null;     /* <- langer Ganzseiten-Screenshot der Inventurliste 01-2026 (Robert)  */
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.webp";
+  (function(){ if(!/\/inventurliste\/?$/.test(location.pathname)) return; var __go=function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); }; if(document.readyState==='complete'){setTimeout(__go,800);}else{window.addEventListener('load',function(){setTimeout(__go,800);},{once:true});} })();
+  function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CSS = `
+  #tsinvres{width:100%;margin:34px 0 60px;font-family:${SANS};color:#fff}
+  #tsinvres *{box-sizing:border-box}
+  #tsinvres .ivr-inner{width:min(1180px,94vw);margin:0 auto}
+  /* gespiegelt ggü. #tsiv: PC links (1fr), Text rechts (1.42fr) */
+  #tsinvres .ivr-grid{display:grid;grid-template-columns:1fr 1.42fr;gap:44px;align-items:center}
+  #tsinvres .ivr-pc{display:flex;flex-direction:column;align-items:center;gap:12px}
+  #tsinvres .ivr-tile{position:relative;display:block;width:100%;max-width:520px;line-height:0;cursor:pointer;background:transparent;border:0;padding:0;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsinvres .ivr-tile img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}
+  #tsinvres .ivr-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #tsinvres .ivr-tile:hover img{animation:ivrBeat 2.6s ease-in-out infinite}
+  @keyframes ivrBeat{0%,100%{filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}50%{filter:drop-shadow(0 18px 44px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(199,180,137,.28))}}
+  #tsinvres .ivr-ph{display:block;position:relative;width:100%;max-width:520px;aspect-ratio:1366/768;line-height:normal;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5))}
+  #tsinvres .ivr-ph img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+  #tsinvres .ivr-ph i{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;z-index:3;border-radius:3px;
+    background:linear-gradient(150deg,#141721,#0a0c12 60%,#07080d);box-shadow:inset 0 0 0 1px rgba(199,180,137,.10);
+    display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;line-height:1.5;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.44);text-align:center;padding:0 8%}
+  #tsinvres .ivr-cap{font-size:15px;font-weight:600;color:#fff;text-align:center;line-height:1.3}
+  #tsinvres .ivr-cap .g{color:#c7b489}
+  #tsinvres .ivr-hint{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);text-align:center;animation:ivrPulse 2.8s ease-in-out infinite}
+  @keyframes ivrPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  #tsinvres .ivr-h{margin:0 0 20px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:30px;line-height:1.12;letter-spacing:-.01em;color:#fff}
+  #tsinvres .ivr-h .g{color:#c7b489}
+  #tsinvres .ivr-txt p{margin:0 0 16px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsinvres .ivr-txt p:last-child{margin-bottom:0}
+
+  /* ---- MacBook-Scroll-Lightbox (Muster #tspkres) ---- */
+  #tsinvres-lb{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,6,11,.92);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:32px;opacity:0;transition:opacity .24s cubic-bezier(.16,1,.3,1);font-family:${SANS}}
+  #tsinvres-lb.open{display:flex;opacity:1}
+  #tsinvres-lb .ivr-mbinner{position:relative;width:100%;max-width:min(1000px,calc(100vw - 64px));transform:scale(.92) translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsinvres-lb.open .ivr-mbinner{transform:scale(1) translateY(0)}
+  #tsinvres-lb.full{padding:0}
+  #tsinvres-lb.full .ivr-mbinner{max-width:100vw}
+  #tsinvres-lb .ivr-mockup{position:relative;width:100%;aspect-ratio:1366/768;filter:drop-shadow(0 30px 80px rgba(0,0,0,.6)) drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+  #tsinvres-lb .ivr-frame{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;user-select:none}
+  #tsinvres-lb .ivr-screen{position:absolute;top:3.65%;left:12.22%;width:73.06%;height:83.85%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:3;border-radius:3px;background:#191919;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+  #tsinvres-lb .ivr-screen::-webkit-scrollbar{width:5px}
+  #tsinvres-lb .ivr-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:4px}
+  #tsinvres-lb .ivr-screen img{width:100%;display:block}
+  #tsinvres-lb .ivr-screen .ivr-phbig{display:flex;align-items:center;justify-content:center;height:100%;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;padding:0 10%}
+  #tsinvres-lb .ivr-closehint{margin-top:22px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.4);text-align:center;transition:opacity .4s ease}
+  #tsinvres-lb.full .ivr-closehint{display:none}
+  #tsinvres-lb .ivr-btn{position:absolute;top:16px;z-index:10;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .2s,color .2s}
+  #tsinvres-lb .ivr-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+  #tsinvres-lb .ivr-expand{left:16px}
+  #tsinvres-lb .ivr-closex{right:16px}
+
+  @media (max-width:820px){
+    #tsinvres .ivr-grid{grid-template-columns:1fr;gap:26px}
+    #tsinvres .ivr-pc{order:-1}
+    #tsinvres .ivr-h{font-size:26px}
+  }
+  @media (prefers-reduced-motion:reduce){#tsinvres .ivr-tile:hover img{animation:none}#tsinvres .ivr-hint{animation:none}#tsinvres-lb *{animation:none!important;transition-duration:.01ms!important}}`;
+
+  var EXP='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+  function tileHtml(){
+    if(POSTER) return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><img src="'+POSTER+'" alt="Inventurliste 01-2026 — Monats-Tabelle" loading="lazy"></button>';
+    return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><span class="ivr-ph"><i>Inventurliste 01-2026 · Screenshot folgt</i><img src="'+FRAME+'" alt=""></span></button>';
+  }
+
+  function build(){
+    var sec=document.createElement('section');
+    sec.id='tsinvres';
+    sec.innerHTML =
+      '<div class="ivr-inner"><div class="ivr-grid">'+
+        '<div class="ivr-pc">'+
+          tileHtml()+
+          '<div class="ivr-cap">Inventurliste 01-2026 <span class="g">– Live Beispiel</span></div>'+
+          '<div class="ivr-hint">Klicke zum Vergrößern</div>'+
+        '</div>'+
+        '<div class="ivr-txt">'+
+          '<h2 class="ivr-h">Die fertige <span class="g">Monats-Tabelle.</span></h2>'+
+          '<p>So sieht die Inventurliste 01-2026 aus, wenn alles steht: Die Artikel und Preise kommen über die Verknüpfung aus deiner Inventurliste, du füllst beim Zählen nur noch die drei Gezählt-Spalten, und die Summe rechnet jede Zeile sofort in Euro um.</p>'+
+          '<p>Sobald der Fix-Wert Füller gelaufen ist, steht der Monat fest. Du legst die Tabellen der Monate nebeneinander, siehst auf einen Blick, wo dein Bestand aus der Reihe tanzt — und dein Wareneinsatz rechnet mit festen Monatswerten statt mit beweglichen Zahlen.</p>'+
+        '</div>'+
+      '</div></div>';
+    return sec;
+  }
+
+  function shut(){ var lb=document.getElementById('tsinvres-lb'); if(!lb) return; lb.classList.remove('open','full'); document.body.style.overflow=''; if(lb.__raf) cancelAnimationFrame(lb.__raf); }
+
+  function ensureLb(){
+    var lb=document.getElementById('tsinvres-lb'); if(lb) return lb;
+    lb=document.createElement('div'); lb.id='tsinvres-lb';
+    var inner = SHOT
+      ? '<img src="'+SHOT+'" alt="Inventurliste 01-2026 — Artikel, Zählwerte und Monatssummen">'
+      : '<div class="ivr-phbig">Screenshot der Inventurliste 01-2026 folgt</div>';
+    lb.innerHTML='<button class="ivr-btn ivr-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
+      '<button class="ivr-btn ivr-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
+      '<div class="ivr-mbinner"><div class="ivr-mockup"><img class="ivr-frame" src="'+FRAME+'" alt="MacBook">'+
+        '<div class="ivr-screen">'+inner+'</div>'+
+      '</div></div>'+
+      '<div class="ivr-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    document.body.appendChild(lb);
+    var mbinner=lb.querySelector('.ivr-mbinner'), screen=lb.querySelector('.ivr-screen'), hint=lb.querySelector('.ivr-closehint');
+    lb.querySelector('.ivr-closex').addEventListener('click',shut);
+    lb.querySelector('.ivr-expand').addEventListener('click',function(e){ e.stopPropagation(); lb.classList.toggle('full'); });
+    mbinner.addEventListener('click',function(e){ e.stopPropagation(); });
+    lb.addEventListener('click',function(e){ if(e.target===lb) shut(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
+    screen.addEventListener('wheel', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
+    screen.addEventListener('touchstart', function(){ if(lb.__raf){ cancelAnimationFrame(lb.__raf); lb.__raf=0; } hint.style.opacity='0'; }, {passive:true});
+    return lb;
+  }
+
+  function autoScroll(lb){
+    if(reduced || !SHOT) return;
+    var screen=lb.querySelector('.ivr-screen'), hint=lb.querySelector('.ivr-closehint');
+    var start=null, dur=11000;
+    function run(){
+      function step(ts){
+        if(!lb.classList.contains('open')) return;
+        if(!start) start=ts;
+        var max=screen.scrollHeight-screen.clientHeight;
+        if(max<=4){ lb.__raf=requestAnimationFrame(step); return; }
+        var t=Math.min(1,(ts-start)/dur);
+        var e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+        screen.scrollTop=e*max;
+        if(t<1) lb.__raf=requestAnimationFrame(step);
+        else hint.style.opacity='0';
+      }
+      lb.__raf=requestAnimationFrame(step);
+    }
+    var img=screen.querySelector('img');
+    setTimeout(function(){
+      if(!lb.classList.contains('open')) return;
+      if(img && img.complete && img.naturalHeight) run();
+      else if(img) img.addEventListener('load',run,{once:true});
+    },420);
+  }
+
+  function open(){
+    var lb=ensureLb();
+    var screen=lb.querySelector('.ivr-screen'), hint=lb.querySelector('.ivr-closehint');
+    screen.scrollTop=0; hint.style.opacity='';
+    lb.classList.add('open'); document.body.style.overflow='hidden';
+    autoScroll(lb);
+  }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsinvres'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsinvres')) return;
+    var anchor=document.getElementById('tsshop--inventur_monat');
+    if(!anchor||!anchor.parentNode) return;
+    if(!document.getElementById('tsinvres-css')){ var st=document.createElement('style'); st.id='tsinvres-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    sec.querySelector('.ivr-tile').addEventListener('click',open);
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    inventurliste — Kacheln "Was uns jetzt noch fehlt" (v3)
    Drei reduzierte Luxus-Kacheln (DB Lieferpartner / Zutaten /
    Packaging) ersetzen die Text-Bullets. v3 (11.07.2026):
@@ -7710,7 +7894,11 @@
       var block=h.closest('[id^="block-"]')||h;
       injectCSS();
       var root=buildTile();
-      block.parentNode.insertBefore(root, block);
+      /* Ergebnis-Blick IMMER ueber dem Monats-Warenkorb: existiert der Anker #tsinvmwk
+         (von __tsInvCut vor den Heading-Block gesetzt), vor DIESEM einfuegen — sonst
+         entscheidet die Lade-Reihenfolge und der Warenkorb rutscht nach oben (QA-Befund 02.08.). */
+      var ref=document.getElementById('tsinvmwk')||block;
+      block.parentNode.insertBefore(root, ref);
       reveal(root);
     }
     fillText();
@@ -9809,35 +9997,35 @@ var TSISL_TEAM_ONB_V2=[
      desc:'→ Eigenschaft : Titel → Name der Spalte : Name Öffne deine Inventurliste und kopiere die Namen-Spalte ein',
      html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Name</p><p class="notion-text">Öffne deine Inventurliste und kopiere die Namen-Spalte einmal von oben bis unten. Wechsle in die neue Tabelle, wähle die erste leere Zeile aus und füge alles mit <b>Cmd/Strg + V</b> ein — jede Zeile wird ein eigener Artikel.</p>'},
     {title:'3. Verknüpfung',
-     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB 0 : Inventurliste → Name der Spalte : Verknüpfung Jetzt',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB 0 : Inventurliste</p><p class="notion-text">→ <b>Name der Spalte :</b> Verknüpfung</p><p class="notion-text">Jetzt verbindest du jeden Artikel mit seinem Original in der Inventurliste. Entweder Zeile für Zeile von Hand — oder du sagst <b>Notion AI</b>, er soll alle Einträge anhand des Namens verknüpfen, und prüfst danach kurz das Ergebnis.</p>'},
+     desc:'→ Eigenschaft : Verknüpfung → DB 0 : Inventurliste → → Name der Spalte : Verknüpfung Du verknüpfst hier j',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB 0 : Inventurliste →</p><p class="notion-text">→ <b>Name der Spalte :</b> Verknüpfung</p><p class="notion-text">Du verknüpfst hier jeden Artikel mit seinem Original in der Inventurliste. Entweder Zeile für Zeile von Hand — oder du sagst <b>Notion AI</b>, er soll alle Einträge anhand des Namens verknüpfen, und prüfst danach kurz das Ergebnis.</p>'},
     {title:'4. Herstellerbezeichnung',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Herstellerbezeichnung → Berechnen : Or',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Herstellerbezeichnung</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Herstellerbezeichnung</p><p class="notion-text">Zieht die Herstellerbezeichnung aus der verknüpften Inventurliste — beim Zählen siehst du sofort, welches Produkt gemeint ist.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Herstellerbezeichnung</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Herstellerbezeichnung</p><p class="notion-text">Dir wird hier die Herstellerbezeichnung aus der verknüpften Inventurliste angezeigt — beim Zählen siehst du sofort, welches Produkt gemeint ist.</p>'},
     {title:'5. Artikelnummer',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Artikelnummer → Berechnen : Original a',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Artikelnummer</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Artikelnummer</p><p class="notion-text">Zieht die Artikelnummer aus der Inventurliste in deine Monats-Tabelle.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Artikelnummer</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Artikelnummer</p><p class="notion-text">Dir wird hier die Artikelnummer aus der verknüpften Inventurliste angezeigt.</p>'},
     {title:'6. Menge / Unit',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Menge / Unit → Berechnen : Original an',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Menge / Unit</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Menge / Unit</p><p class="notion-text">Zeigt dir die Gebindegröße des Artikels, bspw. 10 kg oder 100 Stück — wichtig, um beim Zählen die richtige Spalte zu treffen.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Menge / Unit</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Menge / Unit</p><p class="notion-text">Dir wird hier die Gebindegröße des Artikels angezeigt, bspw. 10 kg oder 100 Stück — so triffst du beim Zählen die richtige Spalte.</p>'},
     {title:'7. Preis / KG',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / KG → Berechnen : Original anze',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / KG</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / KG</p><p class="notion-text">Zieht den aktuellen Kilo-Preis aus der Inventurliste. Mit ihm rechnet später die Monats-Formel.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / KG</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / KG</p><p class="notion-text">Dir wird hier der aktuelle Kilo-Preis aus der Inventurliste angezeigt — mit ihm rechnet später die Monats-Formel.</p>'},
     {title:'8. Preis / Ltr.',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / Ltr. → Berechnen : Original an',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Ltr.</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Ltr.</p><p class="notion-text">Zieht den Liter-Preis aus der Inventurliste — für alles, was du in Litern zählst.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Ltr.</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Ltr.</p><p class="notion-text">Dir wird hier der Liter-Preis aus der Inventurliste angezeigt — für alles, was du in Litern zählst.</p>'},
     {title:'9. Preis / Stck',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / Stck → Berechnen : Original an',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Stck</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Stck</p><p class="notion-text">Zieht den Stück-Preis aus der Inventurliste — für alles, was du in Stück zählst.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Stck</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Stck</p><p class="notion-text">Dir wird hier der Stück-Preis aus der Inventurliste angezeigt — für alles, was du in Stück zählst.</p>'},
     {title:'10. Preis pro Unit (€)',
      desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis pro Unit (€) → Berechnen : Origi',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis pro Unit (€)</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis pro Unit (€)</p><p class="notion-text">Zieht den Preis pro Gebinde aus der Inventurliste — für alles, was du in ganzen Units zählst.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis pro Unit (€)</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis pro Unit (€)</p><p class="notion-text">Dir wird hier der Preis pro Gebinde aus der Inventurliste angezeigt — für alles, was du in ganzen Units zählst.</p>'},
     {title:'11. Lieferant',
-     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB I : Lieferpartner → Name der Spalte : Lieferant Verbind',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB I : Lieferpartner</p><p class="notion-text">→ <b>Name der Spalte :</b> Lieferant</p><p class="notion-text">Verbindet den Artikel mit seinem Lieferpartner. Praktisch, wenn du beim Zählen merkst, dass etwas nachbestellt werden muss.</p>'},
+     desc:'→ Eigenschaft : Verknüpfung → DB I : Lieferpartner → → Name der Spalte : Lieferant Du verknüpfst hier den',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB I : Lieferpartner →</p><p class="notion-text">→ <b>Name der Spalte :</b> Lieferant</p><p class="notion-text">Du verknüpfst hier den Lieferpartner des Artikels — praktisch, wenn du beim Zählen merkst, dass etwas nachbestellt werden muss.</p>'},
     {title:'12. Ist Zutat',
-     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB IV : Zutaten → Name der Spalte : Ist Zutat Verbindet de',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB IV : Zutaten</p><p class="notion-text">→ <b>Name der Spalte :</b> Ist Zutat</p><p class="notion-text">Verbindet den Artikel mit seiner Zutat aus DB IV. Wenn du die Spalte im Alltag nicht brauchst, kannst du sie später einfach ausblenden.</p>'},
+     desc:'→ Eigenschaft : Verknüpfung → DB IV : Zutaten → → Name der Spalte : Ist Zutat Du verknüpfst hier die zuge',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB IV : Zutaten →</p><p class="notion-text">→ <b>Name der Spalte :</b> Ist Zutat</p><p class="notion-text">Du verknüpfst hier die zugehörige Zutat aus DB IV. Wenn du die Spalte im Alltag nicht brauchst, blendest du sie später einfach aus.</p>'},
     {title:'13. Kategorie',
      desc:'→ Eigenschaft : Auswählen → Name der Spalte : Kategorie Trage diese Auswahlmöglichkeiten ein : Food · Bev',
      html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Kategorie</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Food · Beverage · Packaging · Hygiene</p><p class="notion-text">Damit kannst du die fertige Inventur nach Warengruppen auswerten — bspw. der gesamte Food-Bestand auf einen Blick.</p>'},
@@ -9845,20 +10033,20 @@ var TSISL_TEAM_ONB_V2=[
      desc:'→ Eigenschaft : Text → Name der Spalte : Lagerort → Du trägst hier ein : wo der Artikel liegt, bspw. Troc',
      html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Lagerort</p><p class="notion-text">→ <b>Du trägst hier ein :</b> wo der Artikel liegt, bspw. Trockenlager Regal A. Danach kannst du die Tabelle nach Lagerort gruppieren und läufst beim Zählen einfach Regal für Regal ab.</p>'},
     {title:'15. Gezählt Ltr./KG',
-     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Ltr./KG',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Ltr./KG</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Menge in Litern oder Kilo, bspw. 25 für einen vollen Sack Reis.</p>'},
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Ltr./KG</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Menge in Litern oder Kilo, bspw. 25 für einen vollen Sack Reis.</p>'},
     {title:'16. Gezählt Stck',
-     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Stck → ',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Stck</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Stückzahl, bspw. 14 Dosen.</p>'},
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Stck</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Stückzahl, bspw. 14 Dosen.</p>'},
     {title:'17. Gezählt Unit',
-     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Unit → ',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Unit</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Anzahl ganzer Gebinde, bspw. 2 ungeöffnete Kartons. Pro Artikel füllst du nur die Gezählt-Spalte, die zu seiner Einheit passt — die anderen beiden bleiben leer.</p>'},
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl Nachkommastellen : Standard → Name ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Unit</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Anzahl ganzer Gebinde, bspw. 2 ungeöffnete Kartons. Pro Artikel füllst du nur die Gezählt-Spalte, die zu seiner Einheit passt — die anderen beiden bleiben leer.</p>'},
     {title:'18. Summe Monat 01.26',
      desc:'→ Eigenschaft : Formel → Name der Spalte : Summe Monat 01.26 Trage diese Formel ein : /* Ltr. / KG Block ',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Monat 01.26</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">/* Ltr. / KG Block - calculates value based on weight or volume */<br>ifs(<br>&nbsp;&nbsp;/* If price per KG exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / KG&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / KG&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / KG&quot;).first()),<br><br>&nbsp;&nbsp;/* If price per Liter exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / Ltr.&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Ltr.&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / Ltr.&quot;).first()),<br><br>&nbsp;&nbsp;/* Default case returns 0 */<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Stück-Block - calculates value based on piece count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis / Stck&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Stck&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Stck&quot;)) * toNumber(prop(&quot;Preis / Stck&quot;).first()),<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Unit-Block - calculates value based on unit count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis pro Unit (€)&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Unit&quot;)) * toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()),<br>&nbsp;&nbsp;0<br>)</div><p class="notion-text">Diese Spalte ist eine <b>Formel</b> — du trägst hier nichts von Hand ein. Sie nimmt deine gezählte Menge, multipliziert sie mit dem passenden Preis aus der Inventurliste und zeigt den Warenwert der Zeile.</p>'},
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Monat 01.26</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">/* Ltr. / KG Block - calculates value based on weight or volume */<br>ifs(<br>&nbsp;&nbsp;/* If price per KG exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / KG&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / KG&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / KG&quot;).first()),<br><br>&nbsp;&nbsp;/* If price per Liter exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / Ltr.&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Ltr.&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / Ltr.&quot;).first()),<br><br>&nbsp;&nbsp;/* Default case returns 0 */<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Stück-Block - calculates value based on piece count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis / Stck&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Stck&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Stck&quot;)) * toNumber(prop(&quot;Preis / Stck&quot;).first()),<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Unit-Block - calculates value based on unit count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis pro Unit (€)&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Unit&quot;)) * toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()),<br>&nbsp;&nbsp;0<br>)</div><p class="notion-text">Diese Spalte ist eine <b>Formel</b> — du trägst hier nichts von Hand ein.</p><p class="notion-text">→ Die eingetragene Formel nimmt deine gezählte Menge, multipliziert sie mit dem passenden Preis aus der Inventurliste und zeigt den Warenwert der Zeile.</p>'},
     {title:'19. Wert 01.26 (fix)',
-     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro → Name der Spalte : Wert 01.26 (fix',
-     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text">→ <b>Name der Spalte :</b> Wert 01.26 (fix)</p><p class="notion-text">Die Formel daneben bleibt beweglich: Ändert sich später ein Preis in der Inventurliste, ändert sich ihr Ergebnis rückwirkend mit. Eine Inventur soll aber ein Stichtag bleiben. In diese Spalte kommt deshalb der eingefrorene Januar-Wert — befüllt wird sie gleich vom Agenten, nicht von dir.</p>'},
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro Nachkommastellen : Standard → Name ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text"><b>Nachkommastellen :</b> Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Wert 01.26 (fix)</p><p class="notion-text">Die Formel daneben bleibt beweglich: Ändert sich später ein Preis in der Inventurliste, ändert sich ihr Ergebnis rückwirkend mit. Eine Inventur soll aber ein Stichtag bleiben. In diese Spalte kommt deshalb der eingefrorene Januar-Wert — befüllt wird sie gleich vom Agenten, nicht von dir.</p>'},
     {title:'20. Zuletzt aktualisiert',
      desc:'→ Eigenschaft : Datum → Name der Spalte : Zuletzt aktualisiert → Du trägst hier ein : den Tag, an dem du ',
      html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Zuletzt aktualisiert</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Tag, an dem du die Zeile gezählt hast — so siehst du bei einer Unterbrechung sofort, wo du stehengeblieben bist.</p>'},
@@ -10089,9 +10277,9 @@ var TSISL_TEAM_ONB_V2=[
        ausgeblendete Sektion "Was uns jetzt noch fehlt"; Anker-Div legt __tsInvCut an. */
     { path:/\/inventurliste\/?$/, kachel:'inventur_monat',
       anchorSel:'#tsinvmwk', steps:TSINVM_STEPS,
-      eyebrow:'Monats-Inventur : Klon der Inventurliste',
-      title:'Die <span>monatliche Inventurliste</span>.',
-      sub:'Ein Klon deiner Inventurliste, gebaut fürs Zählen: eine Tabelle pro Monat, die Stammdaten kommen über die Verknüpfung aus DB 0, und am Ende friert ein Notion-AI-Agent den Monatswert ein — die Währung ist der Inventurwert in Euro.',
+      eyebrow:'Monats-Inventur : Inventurliste 01-2026',
+      title:'Deine Monats-Inventur. <span>Eine Tabelle pro Monat</span>.',
+      sub:'Der Klon deiner Inventurliste fürs monatliche Zählen: Die Stammdaten kommen über die Verknüpfung aus DB 0, gezählt wird nur noch. Jede Karte ist eine Spalte — klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Die Währung ist der Inventurwert in Euro.',
       summary:'Inventurwert', chain:true },
     { path:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, kachel:'db13_lieferanten',
       marker:/Kundennummer/,
