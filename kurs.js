@@ -4412,11 +4412,11 @@ window.__tsMO = function(cb){
        Gates TOLERANT (Root ODER /lektionen/-Praefix), weil super.so Seiten aus der
        Lektionen-DB beim Re-Sync umhaengen kann. Ohne Eintrag hier raeumt der Pager
        den von #ts4?next gebauten Weiter-Button wieder ab. */
-    { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/dein-backoffice-befragen' },
-    { re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/, href:'/datenbanken-automatisch-aktualisieren' },
-    { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/notion-agents-einsetzen' },
-    { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/notion-automationen-bauen' },
-    { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/wiederkehrende-routinen-einrichten' },
+    { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/lektionen/dein-backoffice-befragen' },
+    { re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/, href:'/lektionen/datenbanken-automatisch-aktualisieren' },
+    { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/lektionen/notion-agents-einsetzen' },
+    { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/lektionen/notion-automationen-bauen' },
+    { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/lektionen/wiederkehrende-routinen-einrichten' },
     { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/modul-5-claude-code-notion' }
   ];
   function pageHref(){
@@ -34765,7 +34765,7 @@ var TSISL_TEAM_ONB_V2=[
         'Du verstehst, dass die <b>Freigabe pro Seite</b> die eigentliche Sicherheitsgrenze ist, nicht die Verbindung.',
         'Du kannst mit einer einzigen Frage <b>prüfen</b>, ob die Verbindung steht und was noch fehlt.'
       ],
-      next:'/dein-backoffice-befragen'
+      next:'/lektionen/dein-backoffice-befragen'
     });
   }
   window.__ts4arest=true;
@@ -35015,7 +35015,7 @@ var TSISL_TEAM_ONB_V2=[
         'Du hast die Regel gegen <b>geratene Zahlen</b> in deiner CLAUDE.md stehen.',
         'Du kennst die Grenze bei großen Datenmengen und nutzt <b>bestehende Formeln</b> statt neu zu rechnen.'
       ],
-      next:'/datenbanken-automatisch-aktualisieren'
+      next:'/lektionen/datenbanken-automatisch-aktualisieren'
     });
   }
   window.__ts4brest=true; mount();
@@ -35262,7 +35262,7 @@ var TSISL_TEAM_ONB_V2=[
         'Du kannst leere Felder in Masse befüllen lassen und markierst dabei, was <b>ungeprüft</b> ist.',
         'Du kennst die Grenze: Kalkulationsfelder nur nach Vorschau, <b>gelöscht wird nie</b>.'
       ],
-      next:'/notion-agents-einsetzen'
+      next:'/lektionen/notion-agents-einsetzen'
     });
   }
   window.__ts4crest=true; mount();
@@ -35504,7 +35504,7 @@ var TSISL_TEAM_ONB_V2=[
         'Du kannst einen Auftrag schreiben, der <b>nichts erfindet</b> und Ungeprüftes markiert.',
         'Du kannst die Grenze ziehen: alles in Notion heißt Agent, <b>etwas von außen</b> heißt Claude Code.'
       ],
-      next:'/notion-automationen-bauen'
+      next:'/lektionen/notion-automationen-bauen'
     });
   }
   window.__ts4drest=true; mount();
@@ -35739,7 +35739,7 @@ var TSISL_TEAM_ONB_V2=[
         'Du kannst jede Idee einsortieren: immer gleich, mitdenken in Notion, oder <b>etwas von außen</b>.',
         'Du fängst bei neuen Ideen <b>unten</b> an statt oben.'
       ],
-      next:'/wiederkehrende-routinen-einrichten'
+      next:'/lektionen/wiederkehrende-routinen-einrichten'
     });
   }
   window.__ts4erest=true; mount();
