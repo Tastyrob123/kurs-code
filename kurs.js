@@ -9612,7 +9612,8 @@ window.__tsMO = function(cb){
         {name:'Fällig am', wert:1},
         {name:'ToDos (DB II)', wert:1},
         {name:'Aufwand (h)', wert:1},
-        {name:'Prioritäten', wert:1}
+        {name:'Prioritäten', wert:1},
+        {name:'Projekt-Status', wert:1}
       ]},
     /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 (New To Do / Gewichtsupdate / Meeting Note) + Automations-Konzept. */
     { kachel_id:'m1_buttons', kachel_name:'Buttons & Automationen', ist_produkt_kachel:true,
@@ -9622,7 +9623,45 @@ window.__tsMO = function(cb){
         {name:'New To Do', wert:1},
         {name:'Gewichtsupdate', wert:1},
         {name:'Create Meeting Note', wert:1},
-        {name:'Native Automation (Trigger & Actions)', wert:1}
+        {name:'Native Automation (Trigger & Actions)', wert:1},
+        {name:'Automatisierung mit Zeit-Auslöser', wert:1}
+      ]},
+    /* Lektion 1.5 (Modul 1) — Formeln 2.0 + Rollups auf DB I/DB II. wert:0 = Konzept-/Anleitungskarten. */
+    { kachel_id:'m1_formeln', kachel_name:'Formeln & Rollups', ist_produkt_kachel:true,
+      einheit:'Rechenspalten', einheit_typ:'anzahl',
+      objekt_varianten:[
+        {name:'Den Formeleditor öffnen', wert:0},
+        {name:'prop()', wert:0},
+        {name:'Erledigt (Zahl)', wert:1},
+        {name:'Prio-Zahl', wert:1},
+        {name:'ToDos gesamt', wert:1},
+        {name:'Erledigte ToDos', wert:1},
+        {name:'Prioritäts-Ø', wert:1},
+        {name:'Fortschritt %', wert:1},
+        {name:'Fortschrittsbalken', wert:1},
+        {name:'Tage bis fällig', wert:1},
+        {name:'Termin', wert:1},
+        {name:'Ampel', wert:1},
+        {name:'Wenn die Formel rot wird', wert:0}
+      ]},
+    /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter. */
+    { kachel_id:'m1_ansichten', kachel_name:'Ansichten & Filter', ist_produkt_kachel:true,
+      einheit:'Ansichten', einheit_typ:'anzahl',
+      objekt_varianten:[
+        {name:'Eine Ansicht anlegen', wert:0},
+        {name:'Alle Aufgaben', wert:1},
+        {name:'Nach Status', wert:1},
+        {name:'Termine', wert:1},
+        {name:'Galerie & Kartenvorschau', wert:1},
+        {name:'Projektverlauf', wert:1},
+        {name:'Filter, Sortierung, Gruppierung', wert:0},
+        {name:'Heute', wert:1},
+        {name:'Diese Woche', wert:1},
+        {name:'Graveyard', wert:1},
+        {name:'Eigenschaften ein- und ausblenden', wert:0},
+        {name:'Eine Datenbank-Vorlage anlegen', wert:0},
+        {name:'Self-Referencing Filter', wert:0},
+        {name:'Die Ansicht an einen zweiten Ort holen', wert:1}
       ]},
     { kachel_id:'km_master', kachel_name:'Kostenauswertung Master', ist_produkt_kachel:true,
       einheit:'Kennzahlen', einheit_typ:'anzahl',
@@ -10456,7 +10495,7 @@ var TSISL_TEAM_ONB_V2=[
 ];
 
   /* Lektion 1.3 (Modul 1, Notion-Grundlagen) — Config-Steps-Regal, echte Notion-DB "DB II : Aufgaben & ToDos"
-     aus Roberts PM Vol.1 (Basis-Properties, vereinfacht: Titel/Status/Auswahl/Mehrfachauswahl/Datum/Nummer/
+     aus Roberts PM Vol.1 (Basis-Eigenschaften, vereinfacht: Titel/Status/Auswahl/Mehrfachauswahl/Datum/Nummer/
      Checkbox/Text — OHNE Projekt-Relation und Fortschritt-Formel, die gehören zu Lektion 1.4). */
   var TS13_STEPS=[
     {title:'1. Button anlegen', desc:'Leg auf deiner Seite einen Button an, der zur neuen Datenbank führt.', html:'<p class="notion-text">Wie bei jeder neuen Datenbank fängst du mit dem Rahmen an: Lege einen <b>Button</b> an, der dich zur neuen Tabelle führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
@@ -10484,7 +10523,8 @@ var TSISL_TEAM_ONB_V2=[
     {title:'7. Fällig am', desc:'Eigenschaft : Datum → Name der Spalte : Fällig am.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Fällig am</p><p class="notion-text">→ <b>Du trägst hier ein :</b> das geplante Ende des Projekts.</p>'},
     {title:'8. ToDos (DB II)', desc:'Eigenschaft : Verknüpfung → DB II : Aufgaben & ToDos → wechselseitige Verbindung.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → DB II : Aufgaben &amp; ToDos → Wechselseitige Verbindung hinzufügen.</p><p class="notion-text">→ <b>Name der Spalte :</b> ToDos (DB II)</p><p class="notion-text">Du verknüpfst hier alle Aufgaben, die zu diesem Projekt gehören.</p><p class="notion-text">In deiner Aufgaben-Tabelle taucht jetzt eine neue Spalte auf — nenne sie <b>„Projekt"</b>.</p>'},
     {title:'9. Aufwand (h)', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Zeitaufwand ( h ) → Berechnen : Summe.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Zeitaufwand ( h )</p><p class="notion-text">→ <b>Berechnen :</b> Summe</p><p class="notion-text">→ <b>Name der Spalte :</b> Aufwand (h)</p><p class="notion-text">Dir wird hier die Gesamtstunden aller verknüpften Aufgaben angezeigt.</p>'},
-    {title:'10. Prioritäten', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Priorität → Berechnen : Werte anzeigen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Priorität</p><p class="notion-text">→ <b>Berechnen :</b> Werte anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäten</p><p class="notion-text">Dir wird hier eine Liste der Prioritäten aller verknüpften Aufgaben angezeigt — eine Formel, die daraus einen Durchschnitt errechnet, baust du in Lektion 1.5.</p>'}
+    {title:'10. Prioritäten', desc:'Eigenschaft : Rollup → Verknüpfung : ToDos → Eigenschaft : Priorität → Berechnen : Werte anzeigen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Priorität</p><p class="notion-text">→ <b>Berechnen :</b> Werte anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäten</p><p class="notion-text">Dir wird hier eine Liste der Prioritäten aller verknüpften Aufgaben angezeigt — eine Formel, die daraus einen Durchschnitt errechnet, baust du in Lektion 1.5.</p>'},
+    {title:'11. Projekt-Status', desc:'In DB II · Eigenschaft : Rollup → Verknüpfung : Projekt → Berechnen : Original anzeigen.', html:'<p class="notion-text">Diese Spalte baust du in <b>DB II : Aufgaben &amp; ToDos</b>. Sie holt den Status des übergeordneten Projekts in jede Aufgabenzeile.</p><p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Projekt</p><p class="notion-text">→ <b>Eigenschaft :</b> Status</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Projekt-Status</p><p class="notion-text">Damit hast du alle drei Berechnungsarten gesehen, die du im Kurs brauchst. <b>Summe</b> rechnet zusammen, <b>Werte anzeigen</b> listet auf, und <b>Original anzeigen</b> reicht den Wert unverändert durch, mit Farbe und Formatierung. Ein Status bleibt hier also ein Status-Chip und wird nicht zu grauem Text.</p><p class="notion-text">Welchen Modus du nimmst, entscheidet die Frage: Willst du eine Zahl, eine Liste oder den Wert selbst?</p>'}
   ];
 
   /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 + Automations-Konzept. */
@@ -10493,7 +10533,47 @@ var TSISL_TEAM_ONB_V2=[
     {title:'2. New To Do', desc:'Ziel: DB II Aufgaben & ToDos → Feld "To Do of the Day" vorausgefüllt mit Haken.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> DB II : Aufgaben &amp; ToDos</p><p class="notion-text">→ <b>Vorausgefülltes Feld :</b> „To Do of the Day" → Haken</p><p class="notion-text">→ <b>Label :</b> „+ New To Do"</p><p class="notion-text">Ein Klick legt eine neue Aufgabe an, die sofort in der Daily-Tasks-Ansicht auftaucht.</p>'},
     {title:'3. Gewichtsupdate', desc:'Ziel: Gewicht-Tracker → Felder Datum und Zeitpunkt automatisch vorausgefüllt.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Gewicht-Tracker</p><p class="notion-text">→ <b>Vorausgefüllte Felder :</b> Datum = heute, Zeitpunkt = jetzt</p><p class="notion-text">→ <b>Label :</b> „Gewichtsupdate"</p><p class="notion-text">Du trägst nur noch den Wert in Kilogramm ein — Datum und Uhrzeit stehen schon.</p>'},
     {title:'4. Create Meeting Note', desc:'Ziel: Meeting-Notizen → öffnet direkt eine vorbereitete Notiz-Vorlage.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Meeting-Notizen</p><p class="notion-text">→ <b>Vorlage :</b> Standard-Meeting-Note-Template wird automatisch eingefügt</p><p class="notion-text">→ <b>Label :</b> „Create Meeting Note"</p><p class="notion-text">Ein Klick öffnet die neue Notiz direkt zum Tippen, ohne Struktur von Hand aufzubauen.</p>'},
-    {title:'5. Native Automation (Trigger & Actions)', desc:'Datenbank reagiert selbst auf Änderungen, ganz ohne Button-Klick.', html:'<p class="notion-text">→ <b>Trigger :</b> „Wenn Status sich ändert zu Erledigt"</p><p class="notion-text">→ <b>Aktion :</b> Erledigt-Datum setzen / Benachrichtigung senden</p><p class="notion-text">Anders als ein Button braucht eine native Automation keinen Klick — sie reagiert von selbst, sobald die Bedingung eintritt.</p>'}
+    {title:'5. Native Automation (Trigger & Actions)', desc:'Datenbank reagiert selbst auf Änderungen, ganz ohne Button-Klick.', html:'<p class="notion-text">→ <b>Trigger :</b> „Wenn Status sich ändert zu Erledigt"</p><p class="notion-text">→ <b>Aktion :</b> Erledigt-Datum setzen / Benachrichtigung senden</p><p class="notion-text">Anders als ein Button braucht eine native Automation keinen Klick — sie reagiert von selbst, sobald die Bedingung eintritt.</p>'},
+    {title:'6. Automatisierung mit Zeit-Auslöser', desc:'Läuft nach Uhrzeit über alle Zeilen, ganz ohne Klick.', html:'<p class="notion-text">Ein Button braucht immer jemanden, der ihn drückt, und zwar in jeder Zeile einzeln. Bei zwanzig Einträgen sind das zwanzig Klicks. Dafür gibt es die zweite Bauform.</p><p class="notion-text">→ In der Datenbank oben rechts auf <b>⚡</b> → <b>Neue Automatisierung</b></p><p class="notion-text">→ <b>Auslöser :</b> Jeden Monat &nbsp;·&nbsp; am 1. &nbsp;·&nbsp; 08:00 Uhr</p><p class="notion-text">→ <b>Aktion :</b> Eigenschaft bearbeiten → Status auf „Geplant" setzen</p><p class="notion-text">Es gibt zwei Familien von Auslösern. <b>Zeitgesteuert</b> heißt: jeden Tag, jede Woche, jeden Monat zu einer festen Uhrzeit. <b>Ereignisgesteuert</b> heißt: wenn eine Seite hinzugefügt wird oder wenn eine bestimmte Eigenschaft bearbeitet wird.</p><p class="notion-text">Die Faustregel für die Wahl: <b>Button</b>, wenn du selbst entscheidest, wann etwas passiert. <b>Automatisierung</b>, wenn es ohne dich laufen soll oder gleich viele Zeilen betrifft.</p><p class="notion-text">Wie du damit in einem echten Betrieb einen Monatsabschluss einfrierst, siehst du in Modul 2.</p>'}
+  ];
+
+  /* Lektion 1.5 (Modul 1) — Formeln 2.0 & Rollups auf DB I/DB II des PM-Systems.
+     Deckt prop/toNumber/ifs/round/let/repeat/format/dateBetween/empty/formatDate ab
+     (Voraussetzung fuer Modul 2: prop() 59x allein in der Inventurliste). */
+  var TS15_STEPS=[
+    {title:'1. Den Formeleditor öffnen', desc:'Neue Spalte anlegen, Eigenschaft Formel wählen — der Editor öffnet sich.', html:'<p class="notion-text">Jede Formel lebt in einer eigenen Spalte. Du legst sie an wie jede andere Eigenschaft auch.</p><p class="notion-text">→ In der Tabelle rechts auf <b>+</b> klicken → <b>Eigenschaft :</b> Formel → <b>Formel bearbeiten</b></p><p class="notion-text">Der Editor hat drei Teile: oben tippst du, darunter siehst du sofort das Ergebnis für die Zeile, in der du stehst, und rechts steht die Liste aller Funktionen mit Erklärung.</p><p class="notion-text">Solange etwas rot unterstrichen ist, speichert Notion die Formel nicht. Das ist kein Fehler von dir — das ist der Editor, der mitliest.</p>'},
+    {title:'2. prop() — der Griff in eine andere Spalte', desc:'Die eine Funktion, die in fast jeder Formel steckt.', html:'<p class="notion-text">Eine Formel rechnet nie mit sich selbst. Sie holt sich ihre Werte aus anderen Spalten, und dafür gibt es eine einzige Funktion.</p><p class="notion-text">Trage zum Ausprobieren das hier ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;Zeitaufwand ( h )&quot;)</div><p class="notion-text">In den Anführungszeichen steht der Spaltenname — <b>exakt so, wie er in der Tabelle steht</b>, mit jedem Leerzeichen. Schreibfehler sind der häufigste Grund, warum eine Formel nicht läuft.</p><p class="notion-text">Diese Karte baut noch keine Spalte. Sie ist das Werkzeug für alles, was jetzt kommt.</p>'},
+    {title:'3. Erledigt (Zahl)', desc:'In DB II · Eigenschaft : Formel → toNumber() macht aus dem Haken eine 1.', html:'<p class="notion-text">Diese Spalte legst du in <b>DB II : Aufgaben &amp; ToDos</b> an, nicht in den Projekten.</p><p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Erledigt (Zahl)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">toNumber(prop(&quot;Erledigt&quot;))</div><p class="notion-text">Ein Haken ist für Notion ein Ja/Nein-Wert, und mit Ja/Nein kann man nicht rechnen. <b>toNumber()</b> macht daraus eine 1 oder eine 0.</p><p class="notion-text">Damit kannst du erledigte Aufgaben gleich zusammenzählen — genau das machst du in Karte 6.</p>'},
+    {title:'4. Prio-Zahl', desc:'In DB II · Eigenschaft : Formel → ifs() übersetzt Hoch/Mittel/Niedrig in 3/2/1.', html:'<p class="notion-text">Auch diese Spalte gehört in <b>DB II : Aufgaben &amp; ToDos</b>.</p><p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Prio-Zahl</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">ifs(<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Hoch&quot;, 3,<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Mittel&quot;, 2,<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Niedrig&quot;, 1,<br>&nbsp;&nbsp;0<br>)</div><p class="notion-text"><b>ifs()</b> arbeitet die Paare von oben nach unten ab: Bedingung, dann Ergebnis. Die erste Bedingung, die zutrifft, gewinnt — der Rest wird nicht mehr geprüft. Ganz am Ende steht der Wert für alles, was auf keine Bedingung passt.</p><p class="notion-text">Damit brauchst du keine verschachtelten if-Klammern mehr, in denen sich nach drei Wochen niemand mehr zurechtfindet.</p>'},
+    {title:'5. ToDos gesamt', desc:'In DB I · Eigenschaft : Rollup → Verknüpfung : ToDos → Berechnen : Anzahl.', html:'<p class="notion-text">Ab hier baust du wieder in <b>DB I : Projektmanagement</b>.</p><p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Name</p><p class="notion-text">→ <b>Berechnen :</b> Anzahl</p><p class="notion-text">→ <b>Name der Spalte :</b> ToDos gesamt</p><p class="notion-text">Wie viele Aufgaben hängen an diesem Projekt? Der Rollup zählt sie, ohne dass du eine einzige Zahl eintippst.</p>'},
+    {title:'6. Erledigte ToDos', desc:'In DB I · Eigenschaft : Rollup → Eigenschaft : Erledigt (Zahl) → Berechnen : Summe.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Erledigt (Zahl)</p><p class="notion-text">→ <b>Berechnen :</b> Summe</p><p class="notion-text">→ <b>Name der Spalte :</b> Erledigte ToDos</p><p class="notion-text">Jetzt zahlt sich Karte 3 aus: Weil aus jedem Haken eine 1 geworden ist, ergibt die Summe genau die Anzahl der abgehakten Aufgaben.</p>'},
+    {title:'7. Prioritäts-Ø', desc:'In DB I · Eigenschaft : Rollup → Eigenschaft : Prio-Zahl → Berechnen : Durchschnitt.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Prio-Zahl</p><p class="notion-text">→ <b>Berechnen :</b> Durchschnitt</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäts-Ø</p><p class="notion-text">Ein Wert nahe 3 heißt: In diesem Projekt hängen überwiegend wichtige Aufgaben. Nahe 1 heißt: Das kann warten.</p><p class="notion-text">Das ist der Grund, warum Karte 4 die Auswahl in Zahlen übersetzt hat — über Wörter lässt sich kein Durchschnitt bilden.</p>'},
+    {title:'8. Fortschritt %', desc:'In DB I · Eigenschaft : Formel → round() rechnet den Anteil der erledigten Aufgaben aus.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fortschritt %</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;prop(&quot;ToDos gesamt&quot;) == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;round(prop(&quot;Erledigte ToDos&quot;) / prop(&quot;ToDos gesamt&quot;) * 100)<br>)</div><p class="notion-text">Die Abfrage am Anfang ist wichtig: Ein Projekt ohne Aufgaben würde sonst durch null teilen, und Notion zeigt an der Stelle einen Fehler statt einer Zahl.</p><p class="notion-text"><b>round()</b> schneidet die Nachkommastellen ab. Aus 66,66666 wird 67 — lesbar statt technisch korrekt.</p>'},
+    {title:'9. Fortschrittsbalken', desc:'In DB I · Eigenschaft : Formel → let() + repeat() bauen einen Balken aus Zeichen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fortschrittsbalken</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">let(<br>&nbsp;&nbsp;voll, round(prop(&quot;Fortschritt %&quot;) / 10),<br>&nbsp;&nbsp;repeat(&quot;█&quot;, voll) + repeat(&quot;░&quot;, 10 - voll) + &quot;  &quot; + format(prop(&quot;Fortschritt %&quot;)) + &quot; %&quot;<br>)</div><p class="notion-text"><b>let()</b> gibt einem Zwischenwert einen Namen. Hier heißt er <b>voll</b> und steht für die Anzahl der gefüllten Kästchen. Ohne let müsstest du dieselbe Rechnung dreimal hinschreiben.</p><p class="notion-text"><b>repeat()</b> wiederholt ein Zeichen so oft, wie du sagst. <b>format()</b> macht aus der Zahl einen Text, sonst weigert sich Notion, sie an den Balken anzuhängen.</p><p class="notion-text">Das Ergebnis ist eine Spalte, die auf einen Blick zeigt, wo ein Projekt steht — ohne Diagramm, ohne Zusatz-Werkzeug.</p>'},
+    {title:'10. Tage bis fällig', desc:'In DB I · Eigenschaft : Formel → dateBetween() zählt die Tage bis zum Termin.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Tage bis fällig</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;dateBetween(prop(&quot;Fällig am&quot;), now(), &quot;days&quot;)<br>)</div><p class="notion-text"><b>dateBetween()</b> nimmt zwei Zeitpunkte und die Einheit, in der du das Ergebnis willst — hier <b>days</b>. Weil das Fälligkeitsdatum vorne steht, kommt bei überfälligen Projekten eine negative Zahl heraus.</p><p class="notion-text"><b>empty()</b> fängt die Zeilen ab, in denen noch kein Datum steht. Ohne diese Abfrage würde die Spalte dort einen Fehler zeigen.</p><p class="notion-text"><b>now()</b> ist immer der Moment, in dem du die Seite ansiehst. Die Zahl ist morgen von allein um eins kleiner.</p>'},
+    {title:'11. Termin', desc:'In DB I · Eigenschaft : Formel → empty() + formatDate() geben das Datum lesbar aus.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Termin</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)),<br>&nbsp;&nbsp;&quot;Kein Termin gesetzt&quot;,<br>&nbsp;&nbsp;formatDate(prop(&quot;Fällig am&quot;), &quot;DD.MM.YYYY&quot;)<br>)</div><p class="notion-text"><b>formatDate()</b> bestimmt, wie das Datum aussieht. <b>DD.MM.YYYY</b> ergibt 14.03.2026, <b>DD. MMMM</b> ergibt 14. März.</p><p class="notion-text">Der zweite Nutzen steckt im ersten Teil: Statt einer leeren Zelle steht dort jetzt ein Satz. Leere Zellen liest man beim Überfliegen als Fehler — ein klarer Hinweis nicht.</p>'},
+    {title:'12. Ampel', desc:'In DB I · Eigenschaft : Formel → ifs() über mehrere Spalten gleichzeitig.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Ampel</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">ifs(<br>&nbsp;&nbsp;prop(&quot;Fortschritt %&quot;) &gt;= 100, &quot;🟢  Fertig&quot;,<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)), &quot;⚪️  Kein Termin&quot;,<br>&nbsp;&nbsp;prop(&quot;Tage bis fällig&quot;) &lt; 0, &quot;🔴  Überfällig&quot;,<br>&nbsp;&nbsp;prop(&quot;Tage bis fällig&quot;) &lt;= 3, &quot;🟡  Wird eng&quot;,<br>&nbsp;&nbsp;&quot;⚪️  Läuft&quot;<br>)</div><p class="notion-text">Diese Formel liest gleich vier deiner neuen Spalten aus und macht daraus eine einzige Aussage. Die Reihenfolge entscheidet: Ein fertiges Projekt bleibt grün, auch wenn der Termin längst vorbei ist.</p><p class="notion-text">So setzt du Formeln übereinander: Jede baut auf dem auf, was die vorherige schon ausgerechnet hat.</p>'},
+    {title:'13. Wenn die Formel rot wird', desc:'Fehler lesen, statt raten — und die Notion-KI erklären lassen.', html:'<p class="notion-text">Fast jeder Formelfehler hat eine von vier Ursachen :</p><p class="notion-text">— Der <b>Spaltenname</b> in prop() stimmt nicht exakt. Ein fehlendes Leerzeichen reicht.</p><p class="notion-text">— Du rechnest mit einem <b>Text</b> statt mit einer Zahl. Dann fehlt toNumber().</p><p class="notion-text">— Du hängst eine <b>Zahl an einen Text</b>. Dann fehlt format().</p><p class="notion-text">— Eine <b>Klammer</b> ist nicht geschlossen. Notion markiert die Stelle.</p><p class="notion-text">Kommst du nicht weiter, markiere die Formel im Editor und lass sie dir von der <b>Notion-KI</b> erklären. Sie sagt dir in einem Satz, was die Formel tut — und meistens auch, wo es hakt.</p>'}
+  ];
+
+  /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter.
+     Voraussetzung fuer Modul 2 (Kartenvorschau/Cover im Interface-Bau, relative
+     Datumsfilter, verknuepfte Ansichten im Dashboard). */
+  var TS16_STEPS=[
+    {title:'1. Eine Ansicht anlegen', desc:'Über der Tabelle auf + klicken, Ansichtstyp wählen, benennen.', html:'<p class="notion-text">Eine Ansicht speichert kein einziges eigenes Datenfeld. Sie speichert nur, wie du auf die Tabelle schaust: welche Sortierung gilt, welche Filter greifen, welches Layout du siehst.</p><p class="notion-text">→ Über der Datenbank links auf <b>+</b> klicken</p><p class="notion-text">→ <b>Ansichtstyp</b> wählen : Tabelle, Board, Kalender, Galerie, Liste oder Zeitleiste</p><p class="notion-text">→ Namen vergeben — der Name steht danach als Reiter über der Tabelle</p><p class="notion-text">Alles, was du in einer Ansicht änderst, gilt nur dort. Trägst du dagegen einen Wert in eine Zeile ein, ändert er sich in jeder Ansicht sofort mit.</p>'},
+    {title:'2. Alle Aufgaben', desc:'Ansichtstyp : Tabelle → die Grundansicht, in der du einträgst.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Alle Aufgaben</p><p class="notion-text">→ <b>Kein Filter</b>, sortiert nach <b>Fällig am</b> aufsteigend</p><p class="notion-text">Diese Ansicht ist dein Arbeitstisch. Hier siehst du alles, hier trägst du neue Aufgaben ein, hier korrigierst du.</p><p class="notion-text">Alle anderen Ansichten sind Ausschnitte davon. Deshalb lohnt es sich, genau eine vollständige zu behalten.</p>'},
+    {title:'3. Nach Status', desc:'Ansichtstyp : Board → Gruppieren nach : Status.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Board</p><p class="notion-text">→ <b>Name der Ansicht :</b> Nach Status</p><p class="notion-text">→ <b>Gruppieren nach :</b> Status</p><p class="notion-text">Jede Statusgruppe wird eine Spalte. Du ziehst eine Karte von „Geplant" nach „In Arbeit", und der Status in der Tabelle ändert sich mit — ohne dass du die Zeile öffnest.</p><p class="notion-text">Das ist der Moment, in dem der Unterschied zwischen Tabelle und Ansicht klick macht: Es sind dieselben Daten, nur anders angefasst.</p>'},
+    {title:'4. Termine', desc:'Ansichtstyp : Kalender → Anzeigen nach : Fällig am.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Kalender</p><p class="notion-text">→ <b>Name der Ansicht :</b> Termine</p><p class="notion-text">→ <b>Anzeigen nach :</b> Fällig am</p><p class="notion-text">Jede Aufgabe mit Datum landet auf ihrem Tag. Verschiebst du sie im Kalender, ändert sich das Datum in der Tabelle.</p><p class="notion-text">Aufgaben ohne Datum tauchen hier gar nicht auf. Das ist kein Fehler, sondern der schnellste Weg zu sehen, was noch keinen Termin hat.</p>'},
+    {title:'5. Galerie & Kartenvorschau', desc:'Ansichtstyp : Galerie → Kartenvorschau : Seitencover.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Galerie</p><p class="notion-text">→ <b>Name der Ansicht :</b> Galerie</p><p class="notion-text">→ <b>Kartenvorschau :</b> Seitencover</p><p class="notion-text">→ <b>Bild anpassen :</b> an</p><p class="notion-text">In der Galerie wird aus jeder Zeile eine Kachel. Über <b>Kartenvorschau</b> entscheidest du, was oben auf der Kachel zu sehen ist: das Cover der Seite, ein Bild aus einer Eigenschaft oder der Seiteninhalt.</p><p class="notion-text">Setzt du das Cover einer Seite, taucht es sofort in der Galerie auf. Darüber bekommt ein Bereich sein Gesicht, und du erkennst beim Scrollen, was du suchst, bevor du den Text liest.</p>'},
+    {title:'6. Projektverlauf', desc:'Ansichtstyp : Zeitleiste → Von : Startdatum, Bis : Fällig am.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Zeitleiste</p><p class="notion-text">→ <b>Name der Ansicht :</b> Projektverlauf</p><p class="notion-text">→ <b>Von :</b> Startdatum &nbsp;·&nbsp; <b>Bis :</b> Fällig am</p><p class="notion-text">Jedes Projekt wird ein Balken von Anfang bis Ende. Erst hier siehst du, wo sich Sachen überlappen und welche Woche zu voll ist.</p><p class="notion-text">Diese Ansicht legst du in <b>DB I : Projektmanagement</b> an, nicht bei den Aufgaben — sie lohnt sich für Zeiträume, nicht für einzelne Tage.</p>'},
+    {title:'7. Filter, Sortierung, Gruppierung', desc:'Die drei Regler, mit denen aus einer Ansicht ein Werkzeug wird.', html:'<p class="notion-text">Jede Ansicht hat oben rechts dieselben drei Regler :</p><p class="notion-text">— <b>Filter</b> entscheidet, welche Zeilen überhaupt auftauchen. Mehrere Filter lassen sich mit <b>und</b> beziehungsweise <b>oder</b> verbinden.</p><p class="notion-text">— <b>Sortieren</b> entscheidet die Reihenfolge. Mehrere Sortierungen greifen nacheinander — erst nach Priorität, bei Gleichstand nach Datum.</p><p class="notion-text">— <b>Gruppieren</b> zieht Trennlinien in die Ansicht, zum Beispiel nach Bereich. In der Board-Ansicht ist die Gruppierung gleich das Layout.</p><p class="notion-text">Filter arbeiten auch mit relativen Zeiten: „ist innerhalb der nächsten Woche" bleibt richtig, ohne dass du je ein Datum nachpflegst.</p>'},
+    {title:'8. Heute', desc:'Ansichtstyp : Liste → Filter : To Do of the Day ist aktiviert.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Liste</p><p class="notion-text">→ <b>Name der Ansicht :</b> Heute</p><p class="notion-text">→ <b>Filter :</b> To Do of the Day &nbsp;·&nbsp; ist &nbsp;·&nbsp; aktiviert</p><p class="notion-text">→ <b>Und :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; nicht aktiviert</p><p class="notion-text">→ <b>Sortieren :</b> Priorität absteigend</p><p class="notion-text">Diese Ansicht ist der Grund, warum die Checkbox aus Lektion 1.3 existiert. Du hakst eine Aufgabe morgens an, und sie steht in deiner Tagesliste. Ist sie erledigt, verschwindet sie von selbst.</p>'},
+    {title:'9. Diese Woche', desc:'Ansichtstyp : Tabelle → Filter : Fällig am ist innerhalb der nächsten Woche.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Diese Woche</p><p class="notion-text">→ <b>Filter :</b> Fällig am &nbsp;·&nbsp; ist innerhalb &nbsp;·&nbsp; der nächsten Woche</p><p class="notion-text">→ <b>Und :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; nicht aktiviert</p><p class="notion-text">Ein relativer Datumsfilter rechnet bei jedem Öffnen neu. Du stellst ihn einmal ein und er stimmt in einem halben Jahr immer noch.</p><p class="notion-text">Feste Datumsfilter wie „nach dem 01.03." tun das nicht — die musst du irgendwann von Hand korrigieren, und dann hast du es meistens vergessen.</p>'},
+    {title:'10. Graveyard', desc:'Ansichtstyp : Tabelle → Filter : Erledigt ist aktiviert, sortiert nach Datum absteigend.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Graveyard</p><p class="notion-text">→ <b>Filter :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; aktiviert</p><p class="notion-text">→ <b>Sortieren :</b> Datum absteigend</p><p class="notion-text">Erledigtes wird nicht gelöscht, es zieht um. Was hier landet, ist aus deinen Arbeitsansichten verschwunden, aber nicht weg.</p><p class="notion-text">Zwei Gründe: Du siehst am Monatsende, was tatsächlich passiert ist. Und du findest wieder, was du vor drei Wochen schon einmal entschieden hast.</p>'},
+    {title:'11. Eigenschaften ein- und ausblenden', desc:'In jeder Ansicht getrennt einstellbar — weniger Spalten, mehr Übersicht.', html:'<p class="notion-text">→ Oben rechts auf <b>…</b> → <b>Eigenschaften</b></p><p class="notion-text">→ Pro Ansicht ein- oder ausblenden, per Ziehen umsortieren</p><p class="notion-text">Deine Tabelle hat inzwischen über zehn Spalten. In der Tagesansicht brauchst du davon drei. Ausblenden löscht nichts — die Werte stehen weiter in der Zeile, sie stören hier nur.</p><p class="notion-text">Diese Einstellung gehört zur Ansicht, nicht zur Datenbank. Jede Ansicht darf ein anderes Set zeigen.</p>'},
+    {title:'12. Eine Datenbank-Vorlage anlegen', desc:'In der Datenbank oben rechts : Neu ▾ → Neue Vorlage.', html:'<p class="notion-text">→ In der Datenbank oben rechts neben <b>Neu</b> auf den <b>Pfeil ▾</b> klicken</p><p class="notion-text">→ <b>+ Neue Vorlage</b></p><p class="notion-text">→ Eigenschaften vorbelegen und den Seiteninhalt aufbauen, den jeder neue Eintrag bekommen soll</p><p class="notion-text">Eine Vorlage ist ein Eintrag, der beim Anlegen schon fertig ist: Status gesetzt, Bereich gesetzt, Überschriften und Checklisten stehen. Du fängst nie wieder bei einer leeren Seite an.</p><p class="notion-text">Über <b>… → Als Standard festlegen</b> wird sie automatisch für jeden neuen Eintrag verwendet.</p>'},
+    {title:'13. Self-Referencing Filter', desc:'Eine verknüpfte Ansicht in der Vorlage, gefiltert auf die Seite selbst.', html:'<p class="notion-text">Das ist der Kniff, an dem sich ein aufgeräumtes System von einer Sammlung von Tabellen unterscheidet.</p><p class="notion-text">→ In der <b>Vorlage</b> aus Karte 12 mit <b>/verknüpfte Ansicht</b> die Datenbank <b>DB II : Aufgaben &amp; ToDos</b> einfügen</p><p class="notion-text">→ <b>Filter :</b> Projekt &nbsp;·&nbsp; enthält &nbsp;·&nbsp; <b>diese Vorlage</b></p><p class="notion-text">Der Filter zeigt beim Einrichten auf die Vorlage selbst. Legst du damit ein neues Projekt an, zeigt der Filter automatisch auf dieses neue Projekt — Notion setzt ihn beim Anlegen um.</p><p class="notion-text">Ergebnis: Jede Projektseite listet ihre eigenen Aufgaben, ohne dass du je einen Filter nachstellst. Ein Mal gebaut, gilt für alle künftigen Projekte.</p>'},
+    {title:'14. Die Ansicht an einen zweiten Ort holen', desc:'Mit /verknüpfte Ansicht dieselbe Datenbank woanders zeigen.', html:'<p class="notion-text">→ Auf einer beliebigen Seite <b>/verknüpfte Ansicht der Datenbank</b> eingeben</p><p class="notion-text">→ Datenbank auswählen → eigene Filter und eigenen Ansichtstyp setzen</p><p class="notion-text">Was hier steht, liegt weiterhin in der ursprünglichen Tabelle. Du siehst sie nur an einer zweiten Stelle und mit anderem Ausschnitt. Änderst du hier einen Wert, ändert er sich überall.</p><p class="notion-text">Daraus baust du in Lektion 1.8 dein Dashboard: eine Startseite, die aus mehreren Datenbanken jeweils nur das zeigt, was heute zählt.</p>'}
   ];
 
   /* Inventurliste — Warenkorb 2: Monatliche Inventurliste (Klon der DB 0).
@@ -10586,17 +10666,36 @@ var TSISL_TEAM_ONB_V2=[
     /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + Rollups. Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/, kachel:'m1_projekte',
       anchorSel:'#ts14wk', steps:TS14_STEPS,
+      relations:[
+        { type:'ghost', name:'Projekt', target:'Gegenspalte · in DB II Aufgaben', flag:'erscheint automatisch',
+          desc:'Gegenspalte der ToDos-Verknüpfung — entsteht in DB II von allein.',
+          content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch in <b>DB II : Aufgaben &amp; ToDos</b>, sobald du in Schritt 8 die Verknüpfung mit <b>wechselseitiger Verbindung</b> anlegst. Du gibst ihr dort nur noch einen Namen.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Projekt</p><p class="notion-text">&nbsp;</p><p class="notion-text">Der Unterschied zur einseitigen Verknüpfung liegt hier: Notion baut die Gegenspalte selbst, und beide Seiten bleiben ab sofort synchron. Trägst du bei einer Aufgabe ein Projekt ein, steht die Aufgabe im selben Moment beim Projekt.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Diese Karte zählt nicht in den Fortschritt, weil es nichts zu bauen gibt.</p>' }
+      ],
       eyebrow:'DB : Projekte ↔ Aufgaben',
       title:'Deine Projekte. <span>Verknüpft mit den Aufgaben.</span>',
       sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist Aufwand in Stunden. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
       summary:'Aufwand (h)', chain:true },
-    /* Lektion 1.3 (Modul 1) — DB II : Aufgaben & ToDos, vereinfacht (Basis-Properties). Notion-Seite leer -> Config-Steps. */
+    /* Lektion 1.3 (Modul 1) — DB II : Aufgaben & ToDos, vereinfacht (Basis-Eigenschaften). Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_todo',
       anchorSel:'#ts13wk', steps:TS13_STEPS,
       eyebrow:'DB : Aufgaben & ToDos (vereinfacht)',
       title:'Deine Aufgabenliste. <span>Spalte für Spalte</span>.',
       sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Spalten. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
       summary:'Spalten', chain:true },
+    /* Lektion 1.5 (Modul 1) — Formeln & Rollups auf DB I/DB II. Notion-Seite leer -> Config-Steps. */
+    { path:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, kachel:'m1_formeln',
+      anchorSel:'#ts15wk', steps:TS15_STEPS,
+      eyebrow:'DB I + DB II : Formeln & Rollups',
+      title:'Deine Formeln. <span>Eine nach der anderen.</span>',
+      sub:'Jede Karte ist eine Spalte, die von allein rechnet. Klick sie auf, trag die Formel ein, leg sie in den Einkaufswagen — gezählt wird in Rechenspalten. Die Formel kopierst du dir direkt aus der Karte.',
+      summary:'Rechenspalten', chain:true },
+    /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen. Notion-Seite leer -> Config-Steps. */
+    { path:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, kachel:'m1_ansichten',
+      anchorSel:'#ts16wk', steps:TS16_STEPS,
+      eyebrow:'DB I + DB II : Ansichten & Filter',
+      title:'Deine Ansichten. <span>Eine nach der anderen eingestellt.</span>',
+      sub:'Jede Karte ist eine Ansicht oder ein Regler, mit dem du sie einstellst. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.',
+      summary:'Ansichten', chain:true },
     /* Key Metrics — Config-Steps-Regal (Notion-Seite leer, Steps aus Config; echte DB-Schemas + Formeln). */
     { path:/\/key-metrics\/?$/, kachel:'km_master',
       anchorSel:'#tskmwk', steps:TSKM_STEPS,
@@ -11148,7 +11247,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:23, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:10, m1_buttons:5, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:11, m1_buttons:6, m1_formeln:13, m1_ansichten:14, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24940,8 +25039,8 @@ var TSISL_TEAM_ONB_V2=[
     wrap.id='ts12intro';
     wrap.innerHTML=`
 <div class="ts-body">
-  <p>Eine Seite von oben nach unten ist selten die beste Lösung. Mit Spalten legst du Inhalte nebeneinander statt untereinander — per Drag & Drop ziehst du einen Block einfach neben einen anderen, Notion baut die Spalte von selbst.</p>
-  <p>Toggle-Listen klappen Inhalt weg, bis du ihn brauchst, Trennlinien schaffen Ruhe zwischen Abschnitten. Medien-Embeds holen Bilder, PDFs und Links direkt auf die Seite, Synced Blocks halten denselben Inhalt an mehreren Stellen aktuell. Genau diese drei Werkzeuge stecken in den Tabs meines Projekt-Systems, die dich durch den Einstieg führen — Synced Blocks bekommt gleich noch einen eigenen Blick.</p>
+  <p>Sobald eine Seite länger wird, entscheidet das Layout darüber, ob man sie noch liest. Mit Spalten legst du Inhalte nebeneinander statt untereinander — per Drag & Drop ziehst du einen Block einfach neben einen anderen, Notion baut die Spalte von selbst.</p>
+  <p>Toggle-Listen klappen Inhalt weg, bis du ihn brauchst, Trennlinien schaffen Ruhe zwischen Abschnitten. Medien-Embeds holen Bilder, PDFs und Links direkt auf die Seite, Synced Blocks halten denselben Inhalt an mehreren Stellen aktuell. Und wenn eine Seite mehrere gleichwertige Abschnitte hat, legst du sie mit <b>/Registerkarten</b> als Reiter übereinander, statt sie untereinander zu hängen: Ein Klick auf den Reiter tauscht den Inhalt aus, die Seite bleibt kurz. Genau diese drei Werkzeuge stecken in den Tabs meines Projekt-Systems, die dich durch den Einstieg führen — Synced Blocks bekommt gleich noch einen eigenen Blick.</p>
   <h3>Drei Werkzeuge für ein aufgeräumtes Layout</h3>
   <ul>
     <li>Spalten — für Inhalte, die zusammengehören und nebeneinander stehen sollen</li>
@@ -25056,7 +25155,7 @@ var TSISL_TEAM_ONB_V2=[
     'Zwei Blöcke gehören nur dann in eine Spalte, wenn man sie wirklich nebeneinander lesen will.',
     'Lange Erklärungen wandern in einen Toggle, damit die Seite auf den ersten Blick ruhig bleibt.',
     'Nicht jedes Bild braucht ein Embed — nur das, was direkt gebraucht wird, ohne Klick.',
-    'Wiederkehrende Hinweise als Synced Block anlegen, dann reicht eine Änderung für alle Stellen.'
+    'Wiederkehrende Hinweise als Synced Block anlegen, dann reicht eine Änderung für alle Stellen. Gleichwertige Abschnitte gehören dagegen in Registerkarten.'
   ];
 
   var CSS=`
@@ -25197,7 +25296,7 @@ var TSISL_TEAM_ONB_V2=[
     'Du legst Spalten per Drag & Drop an, statt sie zu erzwingen.',
     'Du weißt, wann ein Toggle die bessere Wahl ist als Fließtext.',
     'Du bindest Bilder, PDFs und Links direkt in die Seite ein.',
-    'Du hältst wiederkehrende Inhalte über Synced Blocks konsistent.'
+    'Du legst gleichwertige Abschnitte als Registerkarten übereinander statt untereinander.'
   ];
 
   var CSS=`
@@ -25656,7 +25755,7 @@ var TSISL_TEAM_ONB_V2=[
   var LEARNINGS=[
     'Du kennst den Unterschied zwischen Seite und Datenbank.',
     'Du weißt, wann Inline und wann Full Page sinnvoll ist.',
-    'Du hast eine erste Datenbank mit Basis-Properties gebaut.',
+    'Du hast eine erste Datenbank mit Basis-Eigenschaften gebaut.',
     'Du liest Status, Auswahl, Datum und Zahl als Bausteine, nicht als Hürden.'
   ];
 
@@ -25962,12 +26061,12 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Relation vor Rollup','Immer wechselseitig','Ein Rollup, ein Zweck','Ghost-Spalten nie selbst anlegen'];
+  var STEPS=['Relation vor Rollup','Immer wechselseitig','Ein Rollup, ein Zweck','Den Berechnungsmodus bewusst wählen'];
   var TEXTS=[
     'Bau erst die Verknüpfung, dann die Rollups darüber — ein Rollup ohne Relation hat nichts zum Sammeln.',
     'Aktiviere immer die wechselseitige Verbindung, sonst siehst du die Aufgaben nur von einer Seite aus.',
     'Ein Rollup soll eine Frage beantworten — Summe, Durchschnitt oder Liste, nicht alles auf einmal.',
-    'Die automatisch erscheinende Gegenspalte legst du nie selbst an — sie kommt von der Relation, nicht von dir.'
+    'Frag dich vor jedem Rollup, was du sehen willst: Summe für eine Zahl, Werte anzeigen für eine Liste, Original anzeigen für den Wert samt Farbe und Format.'
   ];
 
   var CSS=`
@@ -26107,7 +26206,7 @@ var TSISL_TEAM_ONB_V2=[
   var LEARNINGS=[
     'Du verknüpfst zwei Datenbanken mit wechselseitiger Verbindung.',
     'Du weißt, dass die Gegenspalte automatisch erscheint, nicht selbst gebaut wird.',
-    'Du baust Rollups für Summen und Listen über eine Relation.',
+    'Du wählst beim Rollup zwischen Summe, Werte anzeigen und Original anzeigen.',
     'Du erkennst 1:n-Beziehungen wie Projekt und seine Aufgaben.'
   ];
 
@@ -26251,8 +26350,8 @@ var TSISL_TEAM_ONB_V2=[
     wrap.id='ts15intro';
     wrap.innerHTML=`
 <div class="ts-body">
-  <p>Eine Formel in Notion ist kein Excel-Rest, sondern ein kleiner Rechner, der bei jeder Änderung neu läuft. Formulas 2.0 bringt dir Variablen: Mit <code>let()</code> gibst du einem Zwischenwert einen Namen, statt dieselbe Berechnung mehrfach zu wiederholen.</p>
-  <p>Mit <code>ifs()</code> prüfst du mehrere Bedingungen nacheinander, mit <code>dateBetween()</code> rechnest du die Tage bis zu einem Termin aus. Genau solche Bausteine stecken zum Beispiel hinter einem Fortschrittsbalken unter einem Kalendertermin oder einem Countdown bis zu einem Meilenstein.</p>
+  <p>Eine Formel ist ein kleiner Rechner, der in einer eigenen Spalte sitzt und bei jeder Änderung neu läuft. Du legst sie an wie jede andere Eigenschaft, und der Editor zeigt dir sofort, was für die Zeile herauskommt, in der du gerade stehst.</p>
+  <p>In fast jeder Formel steckt derselbe Baustein: <code>prop()</code> holt den Wert einer anderen Spalte herein. Alles Weitere baut darauf auf, wenn du rechnest, vergleichst, Datumsabstände bestimmst oder ein Ergebnis lesbar ausgibst. Am Ende dieser Lektion steht unter jedem Projekt ein Fortschrittsbalken, den keine Hand mehr nachpflegt.</p>
 </div>`;
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
   }
@@ -26366,6 +26465,12 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
     root.querySelector('#ts15bauReplay').addEventListener('click', function(){ play(root); });
+
+    /* Warenkorb-Anker direkt danach (tsshop mountet an #ts15wk via PAGES-Config TS15_STEPS) */
+    if(!document.getElementById('ts15wk')){
+      var wk=document.createElement('div'); wk.id='ts15wk';
+      root.parentNode.insertBefore(wk, root.nextSibling);
+    }
     if(reduced){ root.classList.add('on'); root.querySelector('.c-text').textContent=CODE; root.querySelector('#ts15num').textContent='12'; var b=root.querySelector('.c-bar i'); if(b) b.style.width='68%'; return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
     io.observe(root);
@@ -26378,18 +26483,76 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 
+
+/* ============================================================
+   formeln-logik-bausteine — Ergebnis-Blick "Zehn Spalten, die von allein rechnen." (Text links / PC rechts)
+   Lektion 1.5 · Erster Ergebnis-Blick der Seite -> Text links (Katalog 05).
+   Platzhalter-Modus: gestalteter MacBook-Platzhalter statt echtem Screenshot.
+   ============================================================ */
+(function(){
+  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #ts15res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts15res .r-text{flex:1 1 0}
+  #ts15res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
+  #ts15res h3 .ts-accent{color:#c7b489}
+  #ts15res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
+  #ts15res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
+  #ts15res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #ts15res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts15res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
+  #ts15res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #ts15res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
+  #ts15res .r-cap b{color:#c7b489;font-weight:600}
+  #ts15res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
+  @media(max-width:820px){ #ts15res{flex-direction:column} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts15res-css')) return;
+    var s=document.createElement('style'); s.id='ts15res-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="r-text"><h3>Ein Haken unten, <span class="ts-accent">die Ampel oben.</span></h3>'+
+      '<p>Ab jetzt trägst du in deinen Projekten nur noch ein, was wirklich neu ist: den Namen, den Termin, die Aufgaben. Alles andere steht schon da. Der Fortschritt zählt mit, sobald du eine Aufgabe abhakst, der Balken füllt sich, die Ampel springt um.</p>'+
+      '<p>Wichtig ist die Reihenfolge, in der die Spalten aufeinander zugreifen. Die Ampel liest den Fortschritt, der Fortschritt liest die Rollups, die Rollups lesen zwei kleine Formeln in der Aufgaben-Tabelle. Ändert sich unten ein Haken, läuft die Kette bis nach oben durch.</p>'+
+      '</div>'+
+      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
+      '<div class="r-cap">Projektmanagement mit Formelspalten <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts15res')) return;
+    var anchor=document.getElementById('tsshop--m1_formeln'); if(!anchor){ anchor=document.getElementById('ts15wk'); }
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts15res'; root.innerHTML=html();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
 /* ============================================================
    formeln-logik-bausteine — Empfehlungs-Kachel "Empfehlung zur Nutzung"
    ============================================================ */
 (function(){
   function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Erst let(), dann die Logik','ifs() statt verschachtelter if','Datumsformeln mit Puffer testen','Notion-KI zum Erklären nutzen'];
+  var STEPS=['Spaltennamen klicken statt tippen','ifs() statt verschachtelter if','Erst an einer Zeile prüfen','Die Kette von unten bauen'];
   var TEXTS=[
-    'Lagere wiederkehrende Zwischenwerte in let() aus — das hält jede Formel lesbar, auch nach Wochen noch.',
+    'Hol dir den Spaltennamen für prop() per Klick aus der Vorschlagsliste des Editors. Abgetippt fehlt irgendwann ein Leerzeichen, und die Formel läuft nicht mehr.',
     'Mehrere Bedingungen gehören in ein einziges ifs() statt in verschachtelte if()-Klammern, die kein Mensch mehr entwirrt.',
-    'Teste Datumsformeln an einem Termin, der heute fällig ist, und an einem, der es erst in Wochen wird.',
-    'Lass dir unklaren Formel-Code von der Notion-KI im Formeleditor erklären, bevor du ihn kopierst.'
+    'Prüfe jede neue Formel erst an einer einzigen Zeile, deren Werte du kennst, bevor du dich auf die ganze Tabelle verlässt.',
+    'Bau die Rechenkette von unten nach oben: zuerst die kleinen Hilfsspalten, dann die Rollups darüber, zuletzt die Formeln, die davon leben.'
   ];
 
   var CSS=`
@@ -26483,7 +26646,7 @@ var TSISL_TEAM_ONB_V2=[
   function mount(){
     if(!on()) return;
     if(document.getElementById('ts15emp')) return;
-    var anchor=document.getElementById('ts15bau'); if(!anchor) return;
+    var anchor=document.getElementById('ts15res')||document.getElementById('ts15bau'); if(!anchor) return;
     injectCSS();
     var root=document.createElement('div'); root.id='ts15emp'; root.innerHTML=html();
     if(!reduced) root.classList.add('js');
@@ -26527,10 +26690,10 @@ var TSISL_TEAM_ONB_V2=[
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
-    'Du nutzt let(), um Zwischenwerte lesbar zu benennen.',
+    'Du greifst mit prop() auf den Wert jeder anderen Spalte zu.',
+    'Du wandelst Werte mit toNumber() und format() ineinander um.',
     'Du prüfst mehrere Bedingungen mit ifs() statt verschachtelten if.',
-    'Du rechnest Datumsabstände mit dateBetween().',
-    'Du lässt dir unklare Formeln von der Notion-KI erklären.'
+    'Du baust Rollups und Formeln zu einer Kette, die von allein durchläuft.'
   ];
 
   var CSS=`
@@ -26723,7 +26886,7 @@ var TSISL_TEAM_ONB_V2=[
     document.head.appendChild(s);
   }
 
-  var NAMES=['Rechnung prüfen','Speisekarte updaten','Team-Meeting vorbereiten'];
+  var NAMES=['Rechnung prüfen','Angebot rausschicken','Team-Meeting vorbereiten'];
   var VIEWS=['list','board','gallery'];
   var LAYOUTS={
     list:  [ {l:'6%',t:'12%',w:'88%',h:'20%'}, {l:'6%',t:'40%',w:'88%',h:'20%'}, {l:'6%',t:'68%',w:'88%',h:'20%'} ],
@@ -26785,10 +26948,74 @@ var TSISL_TEAM_ONB_V2=[
     root.querySelectorAll('.vs-tab').forEach(function(t){
       t.addEventListener('click', function(){ if(cycleTimer) clearInterval(cycleTimer); applyLayout(root, t.dataset.v); });
     });
+
+    /* Warenkorb-Anker direkt danach (tsshop mountet an #ts16wk via PAGES-Config TS16_STEPS) */
+    if(!document.getElementById('ts16wk')){
+      var wk=document.createElement('div'); wk.id='ts16wk';
+      root.parentNode.insertBefore(wk, root.nextSibling);
+    }
     if(reduced){ root.classList.add('on'); cycle(root); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
     io.observe(root);
     setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
+  }
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+
+/* ============================================================
+   ansichten-filter — Ergebnis-Blick "Eine Tabelle, neun Blickwinkel." (Text links / PC rechts)
+   Lektion 1.6 · Erster Ergebnis-Blick der Seite -> Text links (Katalog 05).
+   Platzhalter-Modus: gestalteter MacBook-Platzhalter statt echtem Screenshot.
+   ============================================================ */
+(function(){
+  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
+
+  var CSS=`
+  #ts16res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts16res .r-text{flex:1 1 0}
+  #ts16res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
+  #ts16res h3 .ts-accent{color:#c7b489}
+  #ts16res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
+  #ts16res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
+  #ts16res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
+    transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #ts16res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts16res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
+  #ts16res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  #ts16res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
+  #ts16res .r-cap b{color:#c7b489;font-weight:600}
+  #ts16res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
+  @media(max-width:820px){ #ts16res{flex-direction:column} }
+  `;
+  function injectCSS(){
+    if(document.getElementById('ts16res-css')) return;
+    var s=document.createElement('style'); s.id='ts16res-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function html(){
+    return '<div class="r-text"><h3>Eine Tabelle, <span class="ts-accent">neun Blickwinkel.</span></h3>'+
+      '<p>Deine Aufgaben liegen weiterhin an genau einer Stelle. Was sich ändert, ist der Ausschnitt: morgens die Tagesliste, im Wochenplan die Tabelle mit dem relativen Datumsfilter, für den Rückblick der Graveyard.</p>'+
+      '<p>Der eigentliche Gewinn steckt in der Vorlage. Jedes neue Projekt bringt seine eigene Aufgabenliste schon mit, weil der Filter beim Anlegen automatisch auf die neue Seite umspringt. Du baust das ein einziges Mal, und jede Projektseite danach ist von der ersten Sekunde an fertig eingerichtet, ohne dass du je wieder einen Filter nachstellst.</p>'+
+      '</div>'+
+      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
+      '<div class="r-cap">Aufgaben in neun Ansichten <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+  }
+
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts16res')) return;
+    var anchor=document.getElementById('tsshop--m1_ansichten'); if(!anchor){ anchor=document.getElementById('ts16wk'); }
+    if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var root=document.createElement('div'); root.id='ts16res'; root.innerHTML=html();
+    anchor.parentNode.insertBefore(root, anchor.nextSibling);
   }
 
   mount();
@@ -26802,10 +27029,10 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Eine Datenquelle, viele Ansichten','Filter statt neuer Datenbanken','Gruppieren nach dem, was zählt','Self-Referencing sparsam einsetzen'];
+  var STEPS=['Filter gehören zur Ansicht','Relative Datumsfilter nutzen','Gruppieren nach dem, was zählt','Self-Referencing sparsam einsetzen'];
   var TEXTS=[
-    'Leg nie dieselbe Datenbank zweimal an, nur um sie anders zu sortieren — bau stattdessen eine neue Ansicht.',
-    'Für „nur heute" oder „nur diese Priorität" reicht ein Filter auf der bestehenden Ansicht, keine neue Tabelle.',
+    'Filter, Sortierung und sichtbare Spalten hängen an der einzelnen Ansicht. Der Wert in der Zeile ändert sich dagegen überall gleichzeitig.',
+    'Nimm „innerhalb der nächsten Woche" statt eines festen Datums. Ein relativer Filter rechnet bei jedem Öffnen neu und stimmt auch in einem halben Jahr noch.',
     'Gruppiere nach Priorität oder Bereich, nicht nach dem Feld, das gerade zufällig zuletzt bearbeitet wurde.',
     'Self-Referencing Filter lohnen sich für klare Fälle wie Unteraufgaben — nicht für jede Kleinigkeit.'
   ];
@@ -26901,7 +27128,7 @@ var TSISL_TEAM_ONB_V2=[
   function mount(){
     if(!on()) return;
     if(document.getElementById('ts16emp')) return;
-    var anchor=document.getElementById('ts16bau'); if(!anchor) return;
+    var anchor=document.getElementById('ts16res')||document.getElementById('ts16bau'); if(!anchor) return;
     injectCSS();
     var root=document.createElement('div'); root.id='ts16emp'; root.innerHTML=html();
     if(!reduced) root.classList.add('js');
@@ -26945,10 +27172,10 @@ var TSISL_TEAM_ONB_V2=[
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
-    'Du nutzt Board, Kalender, Gallery und Timeline auf derselben Datenquelle.',
-    'Du filterst und sortierst, statt neue Tabellen anzulegen.',
-    'Du gruppierst Ansichten nach dem, was wirklich zählt.',
-    'Du weißt, wann sich ein Self-Referencing Filter lohnt.'
+    'Du nutzt Board, Kalender, Galerie und Zeitleiste auf derselben Datenquelle.',
+    'Du filterst relativ, damit eine Ansicht ohne Nachpflege richtig bleibt.',
+    'Du gibst Kacheln über die Kartenvorschau ein Gesicht.',
+    'Du baust Vorlagen mit Self-Referencing Filter, die sich selbst einrichten.'
   ];
 
   var CSS=`
@@ -27222,8 +27449,8 @@ var TSISL_TEAM_ONB_V2=[
 
   function html(){
     return '<div class="r-text"><h3>Ein Klick, <span class="ts-accent">keine Formulare mehr.</span></h3>'+
-      '<p>Sobald die drei Buttons stehen, verschwindet die Hürde des leeren Formulars: Du musst nie wieder zehn Felder von Hand ausfüllen, nur um eine Aufgabe oder ein Gewicht einzutragen — ein Klick reicht, der Rest steht schon vorausgefüllt bereit. Genau diese Kleinigkeit entscheidet im Alltag, ob ein System auch an hektischen Tagen benutzt wird oder nicht.</p>'+
-      '<p>Und weil Buttons und native Automationen zusammenarbeiten, kannst du festlegen, was NACH dem Klick automatisch passiert — etwa eine Benachrichtigung, sobald der neue Eintrag als erledigt markiert wird. Zwei Bausteine, ein durchgehend automatisierter Ablauf, der dir jeden Tag ein paar Klicks abnimmt.</p></div>'+
+      '<p>Sobald die drei Buttons stehen, fällt die Hürde des leeren Formulars weg. Niemand füllt zehn Felder von Hand aus, nur um eine Aufgabe einzutragen. Diese Kleinigkeit entscheidet, ob ein System auch an hektischen Tagen benutzt wird.</p>'+
+      '<p>Buttons und Automatisierungen greifen dabei ineinander. Der Klick legt den Eintrag an, die Automatisierung übernimmt danach: Sie setzt das Erledigt-Datum oder schickt eine Nachricht, sobald der Status umspringt. Du baust beides einmal und arbeitest ab dann nur noch mit dem Ergebnis.</p></div>'+
       '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
       '<div class="r-cap">Buttons &amp; Automationen <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
   }
@@ -27394,8 +27621,8 @@ var TSISL_TEAM_ONB_V2=[
   var LEARNINGS=[
     'Du legst Buttons an, die neue Einträge mit vorausgefüllten Feldern erstellen.',
     'Du weißt, welche Felder sich fürs Vorausfüllen eignen.',
-    'Du unterscheidest Button (Klick) von nativer Automation (reagiert selbst).',
-    'Du benennst Buttons so, dass ihre Wirkung sofort klar ist.'
+    'Du unterscheidest Button (auf Klick) von Automatisierung (läuft ohne dich).',
+    'Du kennst beide Auslöser-Familien: zeitgesteuert und ereignisgesteuert.'
   ];
 
   var CSS=`
@@ -27538,7 +27765,8 @@ var TSISL_TEAM_ONB_V2=[
     wrap.innerHTML=`
 <div class="ts-body">
   <p>Ein gutes System braucht eine Ordnung, die mitwächst — die <b>PARA-Methode</b> teilt jede Seite in Projekte, Areas, Resources und Archive, damit du nie wieder überlegen musst, wo etwas hingehört. Darüber legst du ein Dashboard: eine Startseite, die verknüpfte Ansichten deiner Datenbanken zusammenzieht.</p>
-  <p>Eine <b>Linked Database</b> zeigt dieselbe Tabelle an einem zweiten Ort, gefiltert auf das, was dort zählt. Bei vielen verknüpften Ansichten lohnt sich ein Blick auf Performance und Rechteverwaltung, damit dein System schnell bleibt und nur die richtigen Leute sehen, was sie sehen sollen.</p>
+  <p>Die <b>verknüpfte Ansicht</b> aus Lektion 1.6 ist dabei dein Baustein, hier stellt sich nur eine neue Frage: wie viele davon eine Startseite verträgt. Jede verknüpfte Ansicht lädt ihre Datenbank mit, und ab etwa sechs bis acht wird eine Seite spürbar träge.</p>
+  <p>Der zweite Punkt betrifft die Sichtbarkeit. Eine verknüpfte Ansicht ist ein Fenster in dieselbe Datenbank und hat keine eigenen Rechte. Wer die Seite sehen darf, sieht alles, was dahinterliegt, auch die Spalten, die du in dieser Ansicht ausgeblendet hast. Teilst du eine Seite, prüfst du also nicht die Ansicht, sondern die Tabelle.</p>
 </div>`;
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
   }
@@ -27722,8 +27950,8 @@ var TSISL_TEAM_ONB_V2=[
   var TEXTS=[
     'Leg die vier PARA-Bereiche an, bevor du die erste Datenbank baust — Struktur zuerst, Inhalt danach.',
     'Bau das Dashboard, nachdem die Datenbanken stehen, nicht davor — sonst verknüpfst du auf etwas, das sich noch ändert.',
-    'Zeig Daten am Dashboard immer als Linked View, nie als Kopie — sonst laufen zwei Wahrheiten auseinander.',
-    'Prüfe vor dem Teilen einer Seite, wer sie sehen darf — Rechte sind leichter vorher gesetzt als nachträglich korrigiert.'
+    'Zeig Daten am Dashboard immer als verknüpfte Ansicht. Eine zweite Tabelle mit denselben Werten läuft früher oder später auseinander.',
+    'Prüfe vor dem Teilen, welche Datenbanken an der Seite hängen. Freigegeben wird nie nur die Ansicht, sondern immer die Tabelle dahinter.'
   ];
 
   var CSS=`
@@ -27863,8 +28091,8 @@ var TSISL_TEAM_ONB_V2=[
   var LEARNINGS=[
     'Du strukturierst mit der PARA-Methode statt planlos zu wachsen.',
     'Du baust ein Dashboard aus verknüpften Ansichten, nicht aus Kopien.',
-    'Du behältst Performance und Rechteverwaltung im Blick.',
-    'Du hast Modul 1 komplett — bereit für das Notion AI Backoffice.'
+    'Du weißt, dass eine verknüpfte Ansicht keine eigenen Rechte hat.',
+    'Du hast alle Bausteine, um jedes System selbst zu bauen.'
   ];
 
   var CSS=`
@@ -27965,10 +28193,10 @@ var TSISL_TEAM_ONB_V2=[
     {n:'1.1', t:'Die Notion-Philosophie & Das Canvas-Prinzip', d:'Blöcke statt Dokumente — die Grundhaltung.', href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip'},
     {n:'1.2', t:'Layout, Medien & Strukturierungs-Tricks', d:'Spalten, Toggles, Embeds, Synced Blocks.', href:'/lektionen/l12-layout-medien-strukturierungs-tricks'},
     {n:'1.3', t:'Einführung in Datenbanken', d:'Seite vs. Datenbank — deine erste eigene Tabelle.', href:'/lektionen/l13-einfhrung-in-datenbanken'},
-    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Aggregationen ziehen.', href:'/lektionen/l14-relationen-rollups'},
-    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'let(), ifs(), dateBetween() — Formeln, die rechnen.', href:'/lektionen/l15-formeln-20-logik-bausteine'},
-    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Eine Datenquelle, viele Blickwinkel.', href:'/lektionen/l16-ansichten-self-referencing-filter'},
-    {n:'1.7', t:'Native Automations & Buttons', d:'Ein Klick, ein fertiger Eintrag.', href:'/lektionen/l17-native-automations-buttons'},
+    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Werte über die Verknüpfung ziehen.', href:'/lektionen/l14-relationen-rollups'},
+    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'prop(), ifs(), Rollups: Spalten, die sich selbst ausrechnen.', href:'/lektionen/l15-formeln-20-logik-bausteine'},
+    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Ansichten, Filter, Vorlagen, die sich selbst einrichten.', href:'/lektionen/l16-ansichten-self-referencing-filter'},
+    {n:'1.7', t:'Native Automations & Buttons', d:'Buttons und Automatisierungen, die Arbeit abnehmen.', href:'/lektionen/l17-native-automations-buttons'},
     {n:'1.8', t:'System-Architektur & Dashboard-Design', d:'Alles läuft an einem Ort zusammen.', href:'/lektionen/l18-system-architektur-dashboard-design'}
   ];
 
@@ -28011,7 +28239,7 @@ var TSISL_TEAM_ONB_V2=[
     if(document.getElementById('ts1mod-intro')) return;
     var wrap=document.createElement('div');
     wrap.id='ts1mod-intro';
-    wrap.innerHTML='<p>Acht Lektionen, roter Faden ist Roberts eigenes Notion-Projektsystem: von Blöcken über Layout und Datenbanken bis zu Relationen, Formeln, Ansichten und Buttons. Am Ende hast du das System, das er selbst jeden Tag nutzt, konzeptionell nachgebaut.</p><p>Drei Lektionen bauen einen <b>echten interaktiven Warenkorb</b> aus seinen realen Notion-Datenbanken — die restlichen fünf erklären die Grundlagen anhand desselben Systems.</p>';
+    wrap.innerHTML='<p>Acht Lektionen, ein durchgehendes Beispiel: mein eigenes Projektsystem. Es fängt bei Blöcken und Layout an, geht über Datenbanken, Verknüpfungen und Rollups zu Formeln, Ansichten und Buttons, und endet bei einem Dashboard, das alles an einem Ort zusammenzieht.</p><p>Fünf der acht Lektionen bauen ein <b>echtes Regal</b> mit: Du klickst jede Spalte auf, baust sie nach und legst sie in den Einkaufswagen. Am Ende steht kein Beispiel auf einer Folie, sondern ein System in deinem eigenen Notion.</p><p>Dieses Modul steht für sich. Du brauchst dafür <b>keine Vorkenntnisse</b> und keinen bestimmten Beruf — gerechnet wird durchgehend mit Projekten, Aufgaben und Terminen. Wer danach in die Gastronomie-Module geht, bringt genau das Handwerk mit, das dort vorausgesetzt wird.</p>';
     if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
   }
 
