@@ -1,4 +1,21 @@
 /* ============================================================
+   __tsMO — gebremste MutationObserver-Fabrik (02.08.2026, Performance).
+   ALLE Modul-Observer dieser Datei laufen hierdurch: Leading-Edge-Aufruf
+   sofort, danach 180ms-Sammelfenster (ein Trailing-Aufruf, wenn in der
+   Zwischenzeit weitere Mutationen kamen). Vorher feuerten 158 site-weite
+   Observer UNGEBREMST bei jeder DOM-Mutation (Tipp-Animationen = 1 Mutation
+   pro Buchstabe x 158 Callbacks = Ruckeln). Kein Callback nutzt die
+   Mutations-Argumente (geprueft 02.08.2026). Verhalten identisch, nur
+   koalesziert. NICHT window.MutationObserver patchen -- super.so/Next
+   braucht das native Verhalten.
+   ============================================================ */
+window.__tsMO = function(cb){
+  var t=null, dirty=false;
+  function fire(){ t=setTimeout(function(){ t=null; if(dirty){ dirty=false; fire(); } }, 180); try{ cb(); }catch(e){} }
+  return new MutationObserver(function(){ if(t){ dirty=true; return; } fire(); });
+};
+
+/* ============================================================
    TASTY STUDIOS · Gastronomie AI MasterClass
    kurs.js — ausgelagerte Interaktionen (super.so -> extern)
    Byte-genau aus dem Live-DOM extrahiert 2026-07-09.
@@ -21,12 +38,26 @@
    Failsafe (2,5s) greift zusaetzlich, falls dieses Skript nie ausgefuehrt wird. */
 (function(){
   if(window.__tsVeil) return; window.__tsVeil=true;
-  function reveal(){ document.documentElement.classList.add('ts-reveal'); }
-  function go(){ setTimeout(reveal, 550); }
-  if(document.readyState!=='loading') go(); else document.addEventListener('DOMContentLoaded', go);
-  window.addEventListener('load', function(){ setTimeout(reveal, 250); });
+  var lastMut = performance.now();
+  var mo = new MutationObserver(function(){ lastMut = performance.now(); });
+  mo.observe(document.documentElement, {childList:true, subtree:true, attributes:true});
+  function reveal(){
+    document.documentElement.classList.add('ts-reveal');
+    try{ mo.disconnect(); }catch(e){}
+  }
+  /* Reveal, sobald das DOM nach DOMContentLoaded 300ms lang ruhig war
+     (= Module fertig gemountet), fruehestens 400ms nach Skript-Start.
+     WICHTIG: max. 900ms warten -- Seiten mit Dauer-Animationen (tickende
+     Uhr, Tipp-Effekt) werden nie "ruhig" und sollen trotzdem zackig oeffnen. */
+  var t0 = performance.now(), dclDone = document.readyState !== 'loading';
+  document.addEventListener('DOMContentLoaded', function(){ dclDone = true; });
+  var iv = setInterval(function(){
+    var now = performance.now();
+    if(dclDone && now - t0 > 400 && (now - lastMut > 300 || now - t0 > 900)){ clearInterval(iv); reveal(); }
+  }, 100);
+  window.addEventListener('load', function(){ setTimeout(reveal, 400); });
   document.addEventListener('visibilitychange', function(){ if(!document.hidden) setTimeout(reveal, 400); });
-  setTimeout(reveal, 2200);
+  setTimeout(function(){ clearInterval(iv); reveal(); }, 2200);
 })();
 
 (function(){
@@ -72,7 +103,7 @@
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -102,7 +133,7 @@
   fix();
   document.addEventListener('DOMContentLoaded', fix);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; fix(); },250); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; fix(); },250); })
     .observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['data-state','style']});
 })();
 
@@ -198,7 +229,7 @@
   document.addEventListener('DOMContentLoaded', boot);
   boot();
   var t;
-  new MutationObserver(function () { clearTimeout(t); t = setTimeout(function () { sync(); updateBars(); }, 150); })
+  window.__tsMO(function () { clearTimeout(t); t = setTimeout(function () { sync(); updateBars(); }, 150); })
     .observe(document.documentElement, { childList: true, subtree: true });
 })();
 
@@ -507,7 +538,7 @@
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   var _mt=null;
-  new MutationObserver(function(){ if(_mt)return; _mt=setTimeout(function(){ _mt=null; mount(); },300); })
+  window.__tsMO(function(){ if(_mt)return; _mt=setTimeout(function(){ _mt=null; mount(); },300); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -557,7 +588,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -589,7 +620,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -677,7 +708,7 @@
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -916,7 +947,7 @@
   window.__tskm=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', tryPlay, {passive:true});
   window.addEventListener('resize', onResize);
 })();
@@ -1008,7 +1039,7 @@
   window.__tskmvid=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -1185,7 +1216,7 @@
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', tryPlay, {passive:true});
   window.addEventListener('resize', tryPlay);
 })();
@@ -1275,7 +1306,7 @@
   window.__tskm2mac=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -1413,7 +1444,7 @@
   window.__tskmemp=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -1492,7 +1523,7 @@
   window.__tskmnext=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -2645,7 +2676,7 @@
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -2753,7 +2784,7 @@
   function mount(){ if(!/\/zutatenliste\/?$/.test(location.pathname)){ var e=document.getElementById('tsd4'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; } if(document.getElementById('tsd4')) return; var a=findAnchor(); if(!a) return; injectCSS(); var root=build(); a.parentNode.insertBefore(root, a); var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.35}); io.observe(root); if(inView(root)) play(root); }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -2963,7 +2994,7 @@
     arm(root);
   }
   function boot(){ var tries=0; var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()){ hideNative(); if(!document.getElementById('tsreuse')) mount(); } }).observe(document.documentElement,{childList:true,subtree:true}); }
+    window.__tsMO(function(){ if(on()){ hideNative(); if(!document.getElementById('tsreuse')) mount(); } }).observe(document.documentElement,{childList:true,subtree:true}); }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
 
@@ -2989,7 +3020,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -3042,7 +3073,7 @@
   }
   document.addEventListener('DOMContentLoaded', mount);
   var t;
-  new MutationObserver(function(){ clearTimeout(t); t=setTimeout(mount,120); })
+  window.__tsMO(function(){ clearTimeout(t); t=setTimeout(mount,120); })
     .observe(document.documentElement, { childList:true, subtree:true });
   mount();
 })();
@@ -3073,7 +3104,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -3606,7 +3637,7 @@
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', tryPlay, {passive:true});
   window.addEventListener('resize', onResize);
 })();
@@ -3641,7 +3672,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -3965,7 +3996,7 @@
 
   function boot(){
     mount();
-    var mo = new MutationObserver(function(){
+    var mo = window.__tsMO(function(){
       if (!PATH.test(location.pathname)){
         var stale = document.getElementById(ROOT_ID); if (stale) stale.remove();
         return;
@@ -4037,7 +4068,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){tries++;mount();if(tries>40)clearInterval(iv);},300);
-    new MutationObserver(function(){if(!document.getElementById('tsq'))mount();}).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){if(!document.getElementById('tsq'))mount();}).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete')boot();else window.addEventListener('load',boot);
 })();
@@ -4059,7 +4090,7 @@
   }
   tagIntro();
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; tagIntro(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; tagIntro(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4097,7 +4128,7 @@
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4157,7 +4188,7 @@
   function boot(){
     var tries = 0;
     var iv = setInterval(function(){ tries++; apply(); if (tries > 40) clearInterval(iv); }, 300);
-    new MutationObserver(function(){ apply(); })
+    window.__tsMO(function(){ apply(); })
       .observe(document.documentElement, {childList:true, subtree:true});
   }
   if (document.readyState === 'complete') boot();
@@ -4183,7 +4214,7 @@
   }
   apply();
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4251,7 +4282,7 @@
   function boot(){
     if(!document.body){ return setTimeout(boot, 50); }   // Fix: auf <body> warten
     mount();
-    new MutationObserver(mount).observe(document.body, {childList:true, subtree:true});
+    window.__tsMO(mount).observe(document.body, {childList:true, subtree:true});
   }
   boot();
   document.addEventListener('DOMContentLoaded', mount);
@@ -4433,7 +4464,7 @@
   function boot(){
     var tries = 0;
     var iv = setInterval(function(){ tries++; mount(); if (tries > 40) clearInterval(iv); }, 300);
-    new MutationObserver(function(){ if (!document.getElementById('tsl')) mount(); })
+    window.__tsMO(function(){ if (!document.getElementById('tsl')) mount(); })
       .observe(document.documentElement, {childList:true, subtree:true});
   }
   if (document.readyState === 'complete') boot();
@@ -4463,7 +4494,7 @@
   run();
   /* dauerhafter, debounced Observer: React kann die H1 spät mounten oder den Span strippen -> immer wieder nachziehen */
   var t=null;
-  new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },200); })
+  window.__tsMO(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4498,7 +4529,7 @@
   function run(){ document.querySelectorAll('.notion-root .notion-text, .notion-root li').forEach(toneEl); }
   run();
   var t=null;
-  new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },250); })
+  window.__tsMO(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },250); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4535,7 +4566,7 @@
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4562,7 +4593,7 @@
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4598,7 +4629,7 @@
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4627,7 +4658,7 @@
   wrap();
   document.addEventListener('DOMContentLoaded', wrap);
   var _tu=null;
-  new MutationObserver(function(){ if(_tu) return; _tu=setTimeout(function(){ _tu=null; wrap(); },200); })
+  window.__tsMO(function(){ if(_tu) return; _tu=setTimeout(function(){ _tu=null; wrap(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4653,7 +4684,7 @@
     a.parentElement.insertBefore(w,a); return true;
   }
   if(mount()) return;
-  var obs=new MutationObserver(function(){ if(mount()) obs.disconnect(); });
+  var obs=window.__tsMO(function(){ if(mount()) obs.disconnect(); });
   obs.observe(document.body,{childList:true,subtree:true});
   setTimeout(function(){ obs.disconnect(); },15000);
 })();
@@ -4723,7 +4754,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -4817,7 +4848,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if((document.getElementById('tsmb-root')&&document.getElementById('tsmb-root').closest('.notion-column'))||tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -5020,7 +5051,7 @@
   function boot(){
     var tries = 0;
     var iv = setInterval(function(){ tries++; mount(); if (tries > 40) clearInterval(iv); }, 300);
-    new MutationObserver(function(){ if (!document.getElementById(ROOT_ID)) mount(); })
+    window.__tsMO(function(){ if (!document.getElementById(ROOT_ID)) mount(); })
       .observe(document.documentElement, {childList:true, subtree:true});
   }
   if (document.readyState === 'complete') boot();
@@ -5054,7 +5085,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5086,7 +5117,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5118,7 +5149,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5280,7 +5311,7 @@
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5379,7 +5410,7 @@
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5537,7 +5568,7 @@
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -5850,7 +5881,7 @@
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -6032,7 +6063,7 @@
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -6170,7 +6201,7 @@
   window.__tspkemp=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -6524,7 +6555,7 @@
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -6799,7 +6830,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7077,7 +7108,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7107,7 +7138,7 @@
   }
   reorder();
   document.addEventListener('DOMContentLoaded', reorder);
-  new MutationObserver(reorder).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(reorder).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -7139,7 +7170,7 @@
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -7254,7 +7285,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(!document.getElementById('tsflow')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(!document.getElementById('tsflow')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7327,7 +7358,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7415,7 +7446,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7465,7 +7496,7 @@
   }
   apply();
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -7747,7 +7778,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(!document.getElementById('tslink')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(!document.getElementById('tslink')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7907,7 +7938,7 @@
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
     var t=null;
-    new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; mount(); },200); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(t) return; t=setTimeout(function(){ t=null; mount(); },200); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -7998,7 +8029,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(!document.getElementById('tsdb0')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(!document.getElementById('tsdb0')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -8135,7 +8166,7 @@
       if(!li||window.innerWidth<901){ svg.classList.add('off'); return; }
       draw(tabs[act],li);
     }
-    var mo=new MutationObserver(upd);
+    var mo=window.__tsMO(upd);
     tabs.forEach(function(t){ mo.observe(t,{attributes:true,attributeFilter:['class']}); });
     window.addEventListener('resize',upd);
     upd();
@@ -8199,7 +8230,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -8342,7 +8373,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -8463,7 +8494,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -8632,7 +8663,7 @@
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11006,7 +11037,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>40) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11077,7 +11108,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11264,7 +11295,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   function boot(){
     mount();
-    var mo=new MutationObserver(function(){
+    var mo=window.__tsMO(function(){
       if(!PATH.test(location.pathname)){ var st=document.getElementById(ROOT_ID); if(st) st.remove(); return; }
       if(!document.getElementById(ROOT_ID)) mount();
     });
@@ -11432,7 +11463,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>80) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11469,7 +11500,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; apply(); if(tries>80) clearInterval(iv); },300);
-    new MutationObserver(function(){ apply(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ apply(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11568,7 +11599,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -11613,7 +11644,7 @@ var TSISL_TEAM_ONB_V2=[
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -12099,7 +12130,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0; var iv=setInterval(function(){ tries++; mount(); if(tries>50)clearInterval(iv); },300);
     var _mt=null;
-    new MutationObserver(function(){ if(_mt)return; _mt=setTimeout(function(){ _mt=null; mount(); },250); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(_mt)return; _mt=setTimeout(function(){ _mt=null; mount(); },250); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -12213,7 +12244,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>80) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -12256,7 +12287,7 @@ var TSISL_TEAM_ONB_V2=[
   apply();
   document.addEventListener('DOMContentLoaded', apply);
   var _t=null;
-  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+  window.__tsMO(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -12563,7 +12594,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 
@@ -12735,7 +12766,7 @@ var TSISL_TEAM_ONB_V2=[
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
     var t=null;
-    new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; mount(); },200); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(t) return; t=setTimeout(function(){ t=null; mount(); },200); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -12873,7 +12904,7 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsrzemp=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -13094,7 +13125,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(!document.getElementById('tsrezsys')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(!document.getElementById('tsrezsys')) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -13181,7 +13212,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -13463,7 +13494,7 @@ var TSISL_TEAM_ONB_V2=[
   function tick(){ mount(); relocateSection(); }
   tick();
   document.addEventListener("DOMContentLoaded", tick);
-  new MutationObserver(tick).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(tick).observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(function(){ document.documentElement.classList.add('ts-brille-moved'); }, 4000); // Fail-open: nie dauerhaft verstecken
 })();
 
@@ -13498,7 +13529,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 
@@ -14304,7 +14335,7 @@ var TSISL_TEAM_ONB_V2=[
   var ts11emp = document.getElementById('ts11emp');
   revealOnce(ts11emp, 'on');
   var ts11empArmed = false; /* Guard: Setup darf nur EINMAL laufen, sonst Doppel-Listener beim späteren .live-Toggle */
-  new MutationObserver(function(){
+  window.__tsMO(function(){
     if (!ts11empArmed && ts11emp.classList.contains('on')) {
       ts11empArmed = true;
       tiltPanel(ts11emp);
@@ -14319,7 +14350,7 @@ var TSISL_TEAM_ONB_V2=[
   revealOnce(document.getElementById('ts11l'), 'ts11l-armed');
   /* ts11l-armed triggert die Orb-Cells gestaffelt */
   var tslRoot = document.getElementById('ts11l');
-  var tslObs = new MutationObserver(function(){
+  var tslObs = window.__tsMO(function(){
     if (tslRoot.classList.contains('ts11l-armed')) {
       Array.prototype.forEach.call(tslCells, function(cell){ cell.classList.add('on'); });
       tslObs.disconnect();
@@ -14346,7 +14377,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>80) clearInterval(iv); },300);
-    new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
@@ -14496,7 +14527,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot(){
     var tries=0;
     var iv=setInterval(function(){ tries++; mount(); if(tries>60) clearInterval(iv); },300);
-    new MutationObserver(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+    window.__tsMO(function(){ if(on()) mount(); }).observe(document.documentElement,{childList:true,subtree:true});
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load',boot);
 })();
@@ -15458,7 +15489,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   run();
   document.addEventListener("DOMContentLoaded", run);
-  new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(run).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -15692,7 +15723,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -15849,7 +15880,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -16047,7 +16078,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -16589,7 +16620,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', tryPlay, {passive:true});
   window.addEventListener('resize', onResize);
 })();
@@ -17306,7 +17337,7 @@ var TSISL_TEAM_ONB_V2=[
   function boot() {
     mount();
     try {
-      var mo = new MutationObserver(function () { mount(); });
+      var mo = window.__tsMO(function () { mount(); });
       mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
     } catch (e) { /* ignore */ }
   }
@@ -17932,7 +17963,7 @@ var TSISL_TEAM_ONB_V2=[
   } else {
     mount();
   }
-  new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true });
+  window.__tsMO(schedule).observe(document.documentElement, { childList: true, subtree: true });
   window.addEventListener('popstate', schedule);
   setTimeout(mount, 900);
   setTimeout(mount, 2200);
@@ -18940,7 +18971,7 @@ var TSISL_TEAM_ONB_V2=[
     }, 300);
 
     var pending = 0;
-    var mo = new MutationObserver(function () {
+    var mo = window.__tsMO(function () {
       if (pending) return;
       pending = setTimeout(function () { pending = 0; mount(); }, 200);
     });
@@ -19386,7 +19417,7 @@ var TSISL_TEAM_ONB_V2=[
     document.addEventListener('DOMContentLoaded', schedule);
   }
   try {
-    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true });
+    window.__tsMO(schedule).observe(document.documentElement, { childList: true, subtree: true });
   } catch (e) { /* noop */ }
   var poll = setInterval(schedule, 400);
   setTimeout(function () { clearInterval(poll); }, 20000);
@@ -20112,7 +20143,7 @@ var TSISL_TEAM_ONB_V2=[
       if (++tries > 60) clearInterval(iv);
     }, 300);
     try {
-      var mo = new MutationObserver(function () { mount(); });
+      var mo = window.__tsMO(function () { mount(); });
       mo.observe(document.documentElement, { childList: true, subtree: true });
     } catch (e) { /* Retry-Loop trägt */ }
   }
@@ -20665,7 +20696,7 @@ var TSISL_TEAM_ONB_V2=[
     mount();
     if (mo) return;
     var t = null;
-    mo = new MutationObserver(function () {
+    mo = window.__tsMO(function () {
       clearTimeout(t);
       t = setTimeout(mount, 200);
     });
@@ -21265,7 +21296,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded',mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -21364,7 +21395,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 
@@ -21666,7 +21697,7 @@ var TSISL_TEAM_ONB_V2=[
     if(mount()) return;
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -21858,7 +21889,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -22329,7 +22360,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -22416,7 +22447,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -22548,7 +22579,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -22726,7 +22757,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -22944,7 +22975,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23037,7 +23068,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=new MutationObserver(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23181,7 +23212,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener("DOMContentLoaded", mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23519,7 +23550,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23625,7 +23656,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23714,7 +23745,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23823,7 +23854,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded',mount);
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -23959,7 +23990,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24034,7 +24065,7 @@ var TSISL_TEAM_ONB_V2=[
      (Robert-Meldung "ich sehe nichts", 2026-07-22). mount() bleibt guenstig+idempotent (frueher
      Ausstieg per getElementById), das dedupe()-Element wurde bereits entfernt -> sicher, kein
      Endlos-Loop-Risiko wie beim urspruenglichen Fund. */
-  new MutationObserver(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24123,7 +24154,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24265,7 +24296,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24342,7 +24373,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -24351,7 +24382,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24439,7 +24470,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24526,7 +24557,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24667,7 +24698,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24743,7 +24774,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -24752,7 +24783,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24831,7 +24862,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24931,7 +24962,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -24986,7 +25017,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25126,7 +25157,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25202,7 +25233,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -25211,7 +25242,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25290,7 +25321,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25382,7 +25413,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25436,7 +25467,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25576,7 +25607,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25652,7 +25683,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -25661,7 +25692,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25741,7 +25772,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -25856,7 +25887,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 
@@ -25997,7 +26028,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26073,7 +26104,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -26082,7 +26113,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26161,7 +26192,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26274,7 +26305,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26414,7 +26445,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26490,7 +26521,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -26499,7 +26530,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26578,7 +26609,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26666,7 +26697,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26720,7 +26751,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26860,7 +26891,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -26936,7 +26967,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -26945,7 +26976,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27024,7 +27055,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27135,7 +27166,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27188,7 +27219,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27328,7 +27359,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27404,7 +27435,7 @@ var TSISL_TEAM_ONB_V2=[
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
     }
     dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
 
     if(reduced){ root.classList.add('on'); return; }
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
@@ -27413,7 +27444,7 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -27517,5 +27548,5 @@ var TSISL_TEAM_ONB_V2=[
 
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
