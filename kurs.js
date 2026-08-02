@@ -16,6 +16,85 @@ window.__tsMO = function(cb){
 };
 
 /* ============================================================
+   TS Lazy-Video (02.08.2026, Performance -- Robert-Befund: DB III/IV/V
+   brauchten 30s+). Notion liefert die Lektions-Videos als <video> mit
+   fester src aus. Chrome zieht die (teils 50-100 MB) SOFORT beim
+   Seitenaufbau -- gemessen 60s Dauerdownload -- und blockiert damit
+   Verbindungen, die die sichtbaren Inhalte brauchen. Die Videos sind
+   auf den MacBook-Cover-Seiten sogar unsichtbar (Cover davor) und
+   werden beim Klick ohnehin als NEUES <video> in der Lightbox gebaut.
+   Loesung: src beim ersten Zugriff abklemmen (-> data-tssrc), preload
+   auf none, laufenden Download per load() abbrechen. Zurueckgegeben
+   wird die src erst, wenn das Video wirklich sichtbar in den Viewport
+   kommt (IntersectionObserver, 300px Vorlauf) oder jemand darauf
+   klickt. Optik unveraendert: Poster/Player-Rahmen bleiben stehen.
+   Die Lightbox-Module lesen die Quelle ueber data-tssrc (5 Stellen).
+   ============================================================ */
+(function(){
+  if(window.__tsLazyVid) return; window.__tsLazyVid=true;
+
+  function disarm(v){
+    if(v.__tsDisarmed) return; v.__tsDisarmed=true;
+    var s=v.getAttribute('src')||v.currentSrc||'';
+    var so=v.querySelector('source');
+    if(!s && so) s=so.getAttribute('src')||'';
+    if(!s) return;
+    v.setAttribute('data-tssrc', s);
+    v.removeAttribute('src');
+    if(so){ so.setAttribute('data-tssrc', so.getAttribute('src')||''); so.removeAttribute('src'); }
+    v.setAttribute('preload','none');
+    try{ v.load(); }catch(e){}   /* bricht den laufenden Download ab */
+  }
+
+  function arm(v){
+    if(!v.__tsDisarmed || v.__tsArmed) return; v.__tsArmed=true;
+    var s=v.getAttribute('data-tssrc'); if(!s) return;
+    var so=v.querySelector('source');
+    if(so && so.getAttribute('data-tssrc')) so.setAttribute('src', so.getAttribute('data-tssrc'));
+    v.setAttribute('src', s);
+    v.setAttribute('preload','metadata');
+    try{ v.load(); }catch(e){}
+  }
+
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    for(var i=0;i<entries.length;i++){
+      var e=entries[i];
+      if(e.isIntersecting){ arm(e.target); io.unobserve(e.target); }
+    }
+  }, {rootMargin:'300px'}) : null;
+
+  function sichtbar(v){
+    /* hinter einem MacBook-Cover (.tsmac-host) oder per CSS versteckt -> nicht laden */
+    if(v.closest && v.closest('.tsmac-host')) return false;
+    return v.offsetParent !== null || getComputedStyle(v).position === 'fixed';
+  }
+
+  function scan(){
+    var vids=document.querySelectorAll('video');
+    for(var i=0;i<vids.length;i++){
+      var v=vids[i];
+      if(v.closest && v.closest('#tsmac-lb')) continue;      /* Lightbox-Video: soll laden */
+      if(v.autoplay) continue;                                /* Autoplay-Deko nicht anfassen */
+      disarm(v);
+      if(io && !v.__tsArmed && sichtbar(v)) io.observe(v);
+    }
+  }
+
+  scan();
+  document.addEventListener('DOMContentLoaded', scan);
+  window.addEventListener('load', scan);
+  window.__tsMO(scan).observe(document.documentElement,{childList:true,subtree:true});
+
+  /* Klick auf den Player-Bereich -> sofort laden und abspielen */
+  document.addEventListener('click', function(ev){
+    var v=ev.target && ev.target.closest ? ev.target.closest('.notion-video') : null;
+    if(!v) return;
+    var vid=v.querySelector('video'); if(!vid) return;
+    arm(vid);
+  }, true);
+})();
+
+/* ============================================================
    TASTY STUDIOS · Gastronomie AI MasterClass
    kurs.js — ausgelagerte Interaktionen (super.so -> extern)
    Byte-genau aus dem Live-DOM extrahiert 2026-07-09.
@@ -4739,7 +4818,7 @@ window.__tsMO = function(cb){
     var nv=scope.querySelector('.notion-column-list:has(h1.notion-heading) .notion-video'); if(!nv) return;
     if(nv.querySelector('.tsmac')) return;
     var raw=nv.querySelector('video'); if(!raw) return;
-    var src=raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
+    var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
     poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 3.2 – Mehrwert & Zielbild" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
@@ -7343,7 +7422,7 @@ window.__tsMO = function(cb){
     var nv=scope.querySelector('.notion-column-list .notion-video'); if(!nv) return;
     if(nv.querySelector('.tsmac')) return;
     var raw=nv.querySelector('video'); if(!raw) return;
-    var src=raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
+    var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
     poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.1 – DB 0: Inventurliste" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
@@ -7430,7 +7509,7 @@ window.__tsMO = function(cb){
     var nv=findVid(scope); if(!nv) return;
     if(nv.querySelector('.tsmac')) return;
     var raw=nv.querySelector('video'); if(!raw) return;
-    var src=raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
+    var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
@@ -11093,7 +11172,7 @@ var TSISL_TEAM_ONB_V2=[
     var nv=scope.querySelector(VID); if(!nv) return;
     if(nv.querySelector('.tsmac')) return;
     var raw=nv.querySelector('video'); if(!raw) return;
-    var src=raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
+    var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
     poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.2 – DB I - III: Lieferpartner" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
@@ -13196,7 +13275,7 @@ var TSISL_TEAM_ONB_V2=[
     var nv=findVid(scope); if(!nv) return;
     if(nv.querySelector('.tsmac')) return;
     var raw=nv.querySelector('video'); if(!raw) return;
-    var src=raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
+    var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
