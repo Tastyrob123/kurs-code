@@ -4329,14 +4329,14 @@ window.__tsMO = function(cb){
     { re:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, href:'/multistandort-erweiterung-optional' },
     { re:/\/multistandort-erweiterung-optional\/?$/, href:'/vision-frame-abschluss-des-building-prozesses' },
     /* Modul 1 - Notion-Grundlagen (Lektion 1.1-1.8), Robert-Entscheid 22.07.2026 */
-    { re:/\/notion-philosophie-canvas-prinzip\/?$/, href:'/layout-medien-strukturierung' },
-    { re:/\/layout-medien-strukturierung\/?$/, href:'/einfuehrung-datenbanken' },
-    { re:/\/einfuehrung-datenbanken\/?$/, href:'/relationen-rollups' },
-    { re:/\/relationen-rollups\/?$/, href:'/formeln-logik-bausteine' },
-    { re:/\/formeln-logik-bausteine\/?$/, href:'/ansichten-filter' },
-    { re:/\/ansichten-filter\/?$/, href:'/automations-buttons' },
-    { re:/\/automations-buttons\/?$/, href:'/system-architektur-dashboard' },
-    { re:/\/system-architektur-dashboard\/?$/, href:'/mehrwert-zielbild' },
+    { re:/\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/, href:'/lektionen/l12-layout-medien-strukturierungs-tricks' },
+    { re:/\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/, href:'/lektionen/l13-einfhrung-in-datenbanken' },
+    { re:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, href:'/lektionen/l14-relationen-rollups' },
+    { re:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/, href:'/lektionen/l15-formeln-20-logik-bausteine' },
+    { re:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, href:'/lektionen/l16-ansichten-self-referencing-filter' },
+    { re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, href:'/lektionen/l17-native-automations-buttons' },
+    { re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
+    { re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/, href:'/mehrwert-zielbild' },
     /* Modul 6 - AI Website Building (L6.1-L6.2 gebaut 02.08.2026, L6.3+ folgen).
        PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
        den von #tsws1next/#tsws2next gebauten Weiter-Button wieder. */
@@ -10577,21 +10577,21 @@ var TSISL_TEAM_ONB_V2=[
 
   var PAGES=[
     /* Lektion 1.7 (Modul 1) — Buttons & Automationen, kleiner Warenkorb. Notion-Seite leer -> Config-Steps. */
-    { path:/\/automations-buttons\/?$/, kachel:'m1_buttons',
+    { path:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, kachel:'m1_buttons',
       anchorSel:'#ts17wk', steps:TS17_STEPS,
       eyebrow:'DB : Buttons & Automationen',
       title:'Deine Buttons. <span>Ein Klick, ein Eintrag.</span>',
       sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Um einen Button anzulegen, drücke / und wähle Button.',
       summary:'Buttons', chain:true },
     /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + Rollups. Notion-Seite leer -> Config-Steps. */
-    { path:/\/relationen-rollups\/?$/, kachel:'m1_projekte',
+    { path:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/, kachel:'m1_projekte',
       anchorSel:'#ts14wk', steps:TS14_STEPS,
       eyebrow:'DB : Projekte ↔ Aufgaben',
       title:'Deine Projekte. <span>Verknüpft mit den Aufgaben.</span>',
       sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist Aufwand in Stunden. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
       summary:'Aufwand (h)', chain:true },
     /* Lektion 1.3 (Modul 1) — DB II : Aufgaben & ToDos, vereinfacht (Basis-Properties). Notion-Seite leer -> Config-Steps. */
-    { path:/\/einfuehrung-datenbanken\/?$/, kachel:'m1_todo',
+    { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_todo',
       anchorSel:'#ts13wk', steps:TS13_STEPS,
       eyebrow:'DB : Aufgaben & ToDos (vereinfacht)',
       title:'Deine Aufgabenliste. <span>Spalte für Spalte</span>.',
@@ -24055,7 +24055,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero(); /* Platzhalter bis Robert das echte 3-Laptop-Cover liefert (weisser BG, Freisteller nach Rezept Abschnitt 01) */
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{
@@ -24557,7 +24557,7 @@ var TSISL_TEAM_ONB_V2=[
    Endzustand=Default: Basis zeigt das fertige Bild, .js versteckt initial, .on baut wieder auf.
    ============================================================ */
 (function(){
-  function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -24646,7 +24646,7 @@ var TSISL_TEAM_ONB_V2=[
    Sync-Highlight + goldene Bézier-Linie. Endzustand=Default (Basis sichtbar, .js versteckt, .in baut auf).
    ============================================================ */
 (function(){
-  function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Erst denken, dann tippen','Blöcke klein halten','Callouts sparsam einsetzen','Seiten nach Sinn benennen'];
   var TEXTS=[
@@ -24788,7 +24788,7 @@ var TSISL_TEAM_ONB_V2=[
    Endzustand=Default: Orbs sind Basis sichtbar, .js versteckt initial, .on baut wieder auf.
    ============================================================ */
 (function(){
-  function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -24849,7 +24849,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/layout-medien-strukturierung">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l12-layout-medien-strukturierungs-tricks">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -24888,7 +24888,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.2');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -24962,7 +24962,7 @@ var TSISL_TEAM_ONB_V2=[
    Endzustand=Default: Basis zeigt fertiges Bild, .js versteckt initial, .on baut wieder auf.
    ============================================================ */
 (function(){
-  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -25049,7 +25049,7 @@ var TSISL_TEAM_ONB_V2=[
    Verhalten 1:1 wie Referenz: Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat, Sync+Bézier-Linie.
    ============================================================ */
 (function(){
-  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Spalten nur bei echtem Zusammenhang','Toggles statt langer Textwüsten','Embeds bewusst dosieren','Synced Blocks für Wiederkehrendes'];
   var TEXTS=[
@@ -25190,7 +25190,7 @@ var TSISL_TEAM_ONB_V2=[
    layout-medien-strukturierung — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -25251,7 +25251,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/einfuehrung-datenbanken">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l13-einfhrung-in-datenbanken">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -25290,7 +25290,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.3');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -25356,7 +25356,7 @@ var TSISL_TEAM_ONB_V2=[
    globale tsshop-Warenkorb mountet (Config-Steps-Regal, TS13_STEPS/PAGES-Eintrag).
    ============================================================ */
 (function(){
-  function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -25455,7 +25455,7 @@ var TSISL_TEAM_ONB_V2=[
    Platzhalter-Modus (POSTER=null): gestalteter MacBook-Platzhalter statt echtem Screenshot.
    ============================================================ */
 (function(){
-  function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
 
   var CSS=`
   #ts13res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
@@ -25509,7 +25509,7 @@ var TSISL_TEAM_ONB_V2=[
    einfuehrung-datenbanken — Empfehlungs-Kachel "Empfehlung zur Einrichtung"
    ============================================================ */
 (function(){
-  function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Titel zuerst, Rest danach','Status statt Checkbox-Wildwuchs','Auswahllisten kurz halten','Views erst wenn Daten stehen'];
   var TEXTS=[
@@ -25650,7 +25650,7 @@ var TSISL_TEAM_ONB_V2=[
    einfuehrung-datenbanken — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -25711,7 +25711,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/relationen-rollups">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l14-relationen-rollups">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -25750,7 +25750,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.4');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -25815,7 +25815,7 @@ var TSISL_TEAM_ONB_V2=[
    Endzustand=Default. Direkt danach: leerer Anker #ts14wk für den echten Warenkorb.
    ============================================================ */
 (function(){
-  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -25906,7 +25906,7 @@ var TSISL_TEAM_ONB_V2=[
    relationen-rollups — Ergebnis-Blick "Die Zahl kommt von allein." (Text links / PC rechts)
    ============================================================ */
 (function(){
-  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
 
   var CSS=`
   #ts14res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
@@ -25960,7 +25960,7 @@ var TSISL_TEAM_ONB_V2=[
    relationen-rollups — Empfehlungs-Kachel "Empfehlung zur Einrichtung"
    ============================================================ */
 (function(){
-  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Relation vor Rollup','Immer wechselseitig','Ein Rollup, ein Zweck','Ghost-Spalten nie selbst anlegen'];
   var TEXTS=[
@@ -26101,7 +26101,7 @@ var TSISL_TEAM_ONB_V2=[
    relationen-rollups — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -26162,7 +26162,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/formeln-logik-bausteine">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l15-formeln-20-logik-bausteine">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -26201,7 +26201,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.5');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -26268,7 +26268,7 @@ var TSISL_TEAM_ONB_V2=[
    der Füllbalken zieht synchron mit. Endzustand=Default.
    ============================================================ */
 (function(){
-  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -26382,7 +26382,7 @@ var TSISL_TEAM_ONB_V2=[
    formeln-logik-bausteine — Empfehlungs-Kachel "Empfehlung zur Nutzung"
    ============================================================ */
 (function(){
-  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Erst let(), dann die Logik','ifs() statt verschachtelter if','Datumsformeln mit Puffer testen','Notion-KI zum Erklären nutzen'];
   var TEXTS=[
@@ -26523,7 +26523,7 @@ var TSISL_TEAM_ONB_V2=[
    formeln-logik-bausteine — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -26584,7 +26584,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/ansichten-filter">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l16-ansichten-self-referencing-filter">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -26623,7 +26623,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.6');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -26689,7 +26689,7 @@ var TSISL_TEAM_ONB_V2=[
    animierten Positionen/Größen zwischen Liste/Board/Galerie-Layout. Endzustand=Default.
    ============================================================ */
 (function(){
-  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -26800,7 +26800,7 @@ var TSISL_TEAM_ONB_V2=[
    ansichten-filter — Empfehlungs-Kachel "Empfehlung zur Nutzung"
    ============================================================ */
 (function(){
-  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Eine Datenquelle, viele Ansichten','Filter statt neuer Datenbanken','Gruppieren nach dem, was zählt','Self-Referencing sparsam einsetzen'];
   var TEXTS=[
@@ -26941,7 +26941,7 @@ var TSISL_TEAM_ONB_V2=[
    ansichten-filter — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -27002,7 +27002,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/automations-buttons">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l17-native-automations-buttons">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -27041,7 +27041,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.7');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -27107,7 +27107,7 @@ var TSISL_TEAM_ONB_V2=[
    nach dem virtuellen Klick erscheint. Endzustand=Default.
    ============================================================ */
 (function(){
-  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -27193,7 +27193,7 @@ var TSISL_TEAM_ONB_V2=[
    automations-buttons — Ergebnis-Blick "Ein Klick, keine Formulare mehr." (Text links / PC rechts)
    ============================================================ */
 (function(){
-  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
 
   var CSS=`
   #ts17res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
@@ -27247,7 +27247,7 @@ var TSISL_TEAM_ONB_V2=[
    automations-buttons — Empfehlungs-Kachel "Empfehlung zur Einrichtung" (Verhalten 1:1, Fixes bereits enthalten)
    ============================================================ */
 (function(){
-  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['Ein Button, ein Ziel','Felder sinnvoll vorausfüllen','Automation statt Erinnerung','Label ehrlich benennen'];
   var TEXTS=[
@@ -27388,7 +27388,7 @@ var TSISL_TEAM_ONB_V2=[
    automations-buttons — Seitenabschluss (Learnings + Weiter-Button)
    ============================================================ */
 (function(){
-  function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -27449,7 +27449,7 @@ var TSISL_TEAM_ONB_V2=[
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/system-architektur-dashboard">Nächste Lektion</a>';
+    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l18-system-architektur-dashboard-design">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
 
     function dedupe(){
@@ -27488,7 +27488,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero('L 1.8');
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
 
   var CSS=`
   .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
@@ -27555,7 +27555,7 @@ var TSISL_TEAM_ONB_V2=[
    "Module verbunden" von 0 auf 5 hoch. Endzustand=Default.
    ============================================================ */
 (function(){
-  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = `
@@ -27663,7 +27663,7 @@ var TSISL_TEAM_ONB_V2=[
    system-architektur-dashboard — Ergebnis-Blick "Ein System, keine Baustelle mehr." (Text links / PC rechts)
    ============================================================ */
 (function(){
-  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
 
   var CSS=`
   #ts18res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
@@ -27716,7 +27716,7 @@ var TSISL_TEAM_ONB_V2=[
    system-architektur-dashboard — Empfehlungs-Kachel "Empfehlung zur Nutzung" (Verhalten 1:1, Fixes bereits enthalten)
    ============================================================ */
 (function(){
-  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STEPS=['PARA als Grundordnung setzen','Dashboard erst am Ende bauen','Linked Views statt Datenkopien','Rechte vor dem Teilen prüfen'];
   var TEXTS=[
@@ -27857,7 +27857,7 @@ var TSISL_TEAM_ONB_V2=[
    system-architektur-dashboard — Seitenabschluss (Learnings + Weiter-Button, Modul-1-Abschluss)
    ============================================================ */
 (function(){
-  function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
+  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var LEARNINGS=[
@@ -27959,17 +27959,17 @@ var TSISL_TEAM_ONB_V2=[
   }
   var IMG=phHero();
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/modul-1-notion-grundlagen\/?$/.test(location.pathname); }
+  function on(){ return /\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/.test(location.pathname); }
 
   var LEKTIONEN=[
-    {n:'1.1', t:'Die Notion-Philosophie & Das Canvas-Prinzip', d:'Blöcke statt Dokumente — die Grundhaltung.', href:'/notion-philosophie-canvas-prinzip'},
-    {n:'1.2', t:'Layout, Medien & Strukturierungs-Tricks', d:'Spalten, Toggles, Embeds, Synced Blocks.', href:'/layout-medien-strukturierung'},
-    {n:'1.3', t:'Einführung in Datenbanken', d:'Seite vs. Datenbank — deine erste eigene Tabelle.', href:'/einfuehrung-datenbanken'},
-    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Aggregationen ziehen.', href:'/relationen-rollups'},
-    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'let(), ifs(), dateBetween() — Formeln, die rechnen.', href:'/formeln-logik-bausteine'},
-    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Eine Datenquelle, viele Blickwinkel.', href:'/ansichten-filter'},
-    {n:'1.7', t:'Native Automations & Buttons', d:'Ein Klick, ein fertiger Eintrag.', href:'/automations-buttons'},
-    {n:'1.8', t:'System-Architektur & Dashboard-Design', d:'Alles läuft an einem Ort zusammen.', href:'/system-architektur-dashboard'}
+    {n:'1.1', t:'Die Notion-Philosophie & Das Canvas-Prinzip', d:'Blöcke statt Dokumente — die Grundhaltung.', href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip'},
+    {n:'1.2', t:'Layout, Medien & Strukturierungs-Tricks', d:'Spalten, Toggles, Embeds, Synced Blocks.', href:'/lektionen/l12-layout-medien-strukturierungs-tricks'},
+    {n:'1.3', t:'Einführung in Datenbanken', d:'Seite vs. Datenbank — deine erste eigene Tabelle.', href:'/lektionen/l13-einfhrung-in-datenbanken'},
+    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Aggregationen ziehen.', href:'/lektionen/l14-relationen-rollups'},
+    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'let(), ifs(), dateBetween() — Formeln, die rechnen.', href:'/lektionen/l15-formeln-20-logik-bausteine'},
+    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Eine Datenquelle, viele Blickwinkel.', href:'/lektionen/l16-ansichten-self-referencing-filter'},
+    {n:'1.7', t:'Native Automations & Buttons', d:'Ein Klick, ein fertiger Eintrag.', href:'/lektionen/l17-native-automations-buttons'},
+    {n:'1.8', t:'System-Architektur & Dashboard-Design', d:'Alles läuft an einem Ort zusammen.', href:'/lektionen/l18-system-architektur-dashboard-design'}
   ];
 
   var CSS = `
