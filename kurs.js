@@ -8040,6 +8040,28 @@ window.__tsMO = function(cb){
     });
   }
 
+  /* Reveal-Ausloeser mit Failsafes. Der IntersectionObserver allein reicht NICHT:
+     das Page-Veil-System (html.ts-reveal) haelt den Inhalt anfangs unsichtbar, der IO
+     feuert in dieser Zeit nicht, und danach aendert sich die Intersection nicht mehr
+     -> Callback bleibt aus, Zahlen stehen dauerhaft auf 0 (live belegt 03.08.2026).
+     Deshalb zusaetzlich: Scroll/Resize-Listener, Intervall-Check und ein harter
+     Zeit-Failsafe, damit ein Block NIE unausgeloest stehen bleibt. */
+  function tsReveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
   function mount(){
     if(!on()){ var e=document.getElementById('tsinvaus'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsinvaus')) return;
@@ -8048,8 +8070,7 @@ window.__tsMO = function(cb){
     if(!document.getElementById('tsinvaus-css')){ var st=document.createElement('style'); st.id='tsinvaus-css'; st.textContent=CSS; document.head.appendChild(st); }
     var sec=build();
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
-    var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ animate(sec); io.disconnect(); } },{threshold:.18});
-    io.observe(sec);
+    tsReveal(sec, function(){ animate(sec); });
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
@@ -8205,6 +8226,28 @@ window.__tsMO = function(cb){
     return sec;
   }
 
+  /* Reveal-Ausloeser mit Failsafes. Der IntersectionObserver allein reicht NICHT:
+     das Page-Veil-System (html.ts-reveal) haelt den Inhalt anfangs unsichtbar, der IO
+     feuert in dieser Zeit nicht, und danach aendert sich die Intersection nicht mehr
+     -> Callback bleibt aus, Zahlen stehen dauerhaft auf 0 (live belegt 03.08.2026).
+     Deshalb zusaetzlich: Scroll/Resize-Listener, Intervall-Check und ein harter
+     Zeit-Failsafe, damit ein Block NIE unausgeloest stehen bleibt. */
+  function tsReveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
   function mount(){
     if(!on()){ var e=document.getElementById('tsinvsync'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsinvsync')) return;
@@ -8213,8 +8256,7 @@ window.__tsMO = function(cb){
     if(!document.getElementById('tsinvsync-css')){ var st=document.createElement('style'); st.id='tsinvsync-css'; st.textContent=CSS; document.head.appendChild(st); }
     var sec=build();
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
-    var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ sec.classList.add('in'); io.disconnect(); } },{threshold:.15});
-    io.observe(sec);
+    tsReveal(sec, function(){ sec.classList.add('in'); });
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
