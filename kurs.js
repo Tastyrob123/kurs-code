@@ -31610,9 +31610,9 @@ var TSISL_TEAM_ONB_V2=[
     var sc=document.querySelector('.super-content'); if(!sc) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.1'),
-      alt: 'Was Claude ist: ein Modell, vier Zugänge',
+      alt: 'Claude einordnen: ein Modell, vier Zugänge, dein Zugang',
       eyebrow: 'L 3.1',
-      title: 'Was <span class="ts-gold">Claude</span> ist'
+      title: '<span class="ts-gold">Claude</span> einordnen'
     });
     window.__ts3.body('ts3a-intro',
       '<p>Claude kommt von <b>Anthropic</b>, einem KI-Unternehmen aus San Francisco, das seit der Gründung an einer einzigen Sache arbeitet: an Sprachmodellen, die verlässlich bleiben, wenn es kompliziert wird.</p>'+
@@ -31951,9 +31951,9 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.2'),
-      alt: 'Welches Claude wann: Chat, Cowork, Code',
+      alt: 'Chat, Cowork oder Code unterscheiden',
       eyebrow: 'L 3.2',
-      title: 'Welches Claude <span class="ts-gold">wann</span>'
+      title: 'Chat, Cowork, <span class="ts-gold">Code</span>'
     });
     window.__ts3.body('ts3b-intro',
       '<p>Vier Zugänge klingen nach Auswahl. In der Praxis hängt alles an einer einzigen Frage: <b>wie tief soll Claude an deine Sachen ran</b>.</p>'+
@@ -32255,9 +32255,9 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.3'),
-      alt: 'Claude Pläne und Preis: Free, Pro, Max',
+      alt: 'Plan und Preis vergleichen: Free, Pro, Max',
       eyebrow: 'L 3.3',
-      title: 'Pläne &amp; <span class="ts-gold">Preis</span>'
+      title: 'Plan und <span class="ts-gold">Preis</span>'
     });
     window.__ts3.body('ts3c-intro',
       '<p>Es gibt drei Stufen, und für unsere Arbeit fällt eine davon sofort weg: Im <b>kostenlosen Zugang ist Claude Code nicht enthalten</b>. Damit ist die Entscheidung enger, als die Preisseite auf den ersten Blick vermuten lässt.</p>'+
@@ -32535,9 +32535,9 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.4'),
-      alt: 'Die sechs Begriffe: Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub',
+      alt: 'Die sechs Grundbegriffe: Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub',
       eyebrow: 'L 3.4',
-      title: 'Sechs <span class="ts-gold">Begriffe</span>'
+      title: '<span class="ts-gold">Sechs</span> Grundbegriffe'
     });
     window.__ts3.body('ts3d-intro',
       '<p>Bevor wir bauen, gehen wir einmal durch, was dir immer wieder begegnet. <b>Du musst das jetzt nicht auswendig können.</b> Es reicht, wenn dir die Wörter später nicht fremd vorkommen.</p>'+
@@ -32824,9 +32824,9 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.5'),
-      alt: 'Claude Interface Durchlauf: App, Terminal, Erweiterung',
+      alt: 'Arbeitsfenster wählen: App, Terminal oder Erweiterung',
       eyebrow: 'L 3.5',
-      title: 'Drei <span class="ts-gold">Fenster</span>'
+      title: 'Dein <span class="ts-gold">Arbeitsfenster</span>'
     });
     window.__ts3.body('ts3e-intro',
       '<p>Claude Code lässt sich auf drei Arten öffnen, und alle drei sprechen mit demselben Programm. Was sich unterscheidet, ist <b>wie viel du dabei siehst</b>.</p>'+
@@ -33149,9 +33149,9 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.6'),
-      alt: 'Stack aufräumen: bleibt, macht Claude, fliegt raus',
+      alt: 'Werkzeug-Stack ausmisten: bleibt, macht Claude, fliegt raus',
       eyebrow: 'L 3.6',
-      title: 'Stack <span class="ts-gold">aufräumen</span>'
+      title: '<span class="ts-gold">Stack</span> ausmisten'
     });
     window.__ts3.body('ts3f-intro',
       '<p>Bevor ein neues Werkzeug dazukommt, lohnt ein Blick auf die, die schon da sind. Bei vielen haben sich über die Jahre etliche Abos angesammelt, von denen die Hälfte seit Wochen niemand mehr geöffnet hat.</p>'+
@@ -33463,7 +33463,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.querySelector('.super-content')) return;
     window.__ts3.hero({
       img: window.__ts3.phHero('L 3.7'),
-      alt: 'Der Umstieg von der Chat-App auf Claude Code',
+      alt: 'Von der Chat-App auf Claude Code umsteigen',
       eyebrow: 'L 3.7',
       title: 'Der <span class="ts-gold">Umstieg</span>'
     });
@@ -33772,7 +33772,7 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__ts3modanim) return;
   function on(){ return /\/modul-3-claude-grundlagen(-[a-z0-9-]+)?\/?$/.test(location.pathname); }
 
-  var STATIONS=['Was Claude ist','Welches wann','Pläne & Preis','Sechs Begriffe','Drei Fenster','Stack aufräumen','Der Umstieg'];
+  var STATIONS=['Claude einordnen','Zugang wählen','Plan vergleichen','Grundbegriffe','Fenster wählen','Stack ausmisten','Umsteigen'];
   var MOCAPS=[
     'Zuerst der <b>Begriff</b>: wer dahintersteckt, was das Modell kann und wo seine Grenze liegt.',
     'Dann die <b>Wahl</b>: eine Frage, die dir bei jeder Aufgabe den richtigen Zugang zeigt.',
@@ -33966,13 +33966,13 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__ts3modgrid) return;
   function on(){ return /\/modul-3-claude-grundlagen(-[a-z0-9-]+)?\/?$/.test(location.pathname); }
   var LEKTIONEN=[
-    {n:'3.1', t:'Was Claude ist', d:'Ein Modell, vier Zugänge, und dein eigener Account.', href:'/was-ist-claude-genau'},
-    {n:'3.2', t:'Welches Claude wann', d:'Chat, Cowork, Code, Schnittstelle: die Regel in einem Satz.', href:'/welches-claude-wann-chatcoworkcodeapi'},
-    {n:'3.3', t:'Pläne & Preis', d:'Was jede Stufe kostet und ab wann sich der Sprung lohnt.', href:'/claude-plne-preis'},
-    {n:'3.4', t:'Sechs Begriffe', d:'Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub.', href:'/claude-nutzung-erklrt-6-konzepte'},
-    {n:'3.5', t:'Drei Fenster', d:'App, Terminal oder Erweiterung: wo du wirklich arbeitest.', href:'/claude-interface-durchlauf'},
-    {n:'3.6', t:'Stack aufräumen', d:'Zwölf Werkzeuge, drei Stapel, ein schlanker Schreibtisch.', href:'/stack-aufrumen'},
-    {n:'3.7', t:'Der Umstieg', d:'Die vier Gedanken, die den Anfang am häufigsten aufhalten.', href:'/der-umstieg-von-chat-app-auf-claude-code'}
+    {n:'3.1', t:'Claude einordnen und Zugang anlegen', d:'Wer dahintersteckt, wo die Grenze liegt, und dein eigener Account.', href:'/was-ist-claude-genau'},
+    {n:'3.2', t:'Chat, Cowork oder Code unterscheiden', d:'Eine Frage, die dir bei jeder Aufgabe den richtigen Zugang zeigt.', href:'/welches-claude-wann-chatcoworkcodeapi'},
+    {n:'3.3', t:'Plan und Preis vergleichen', d:'Was jede Stufe kostet und ab wann sich der Sprung lohnt.', href:'/claude-plne-preis'},
+    {n:'3.4', t:'Die sechs Grundbegriffe verstehen', d:'Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub.', href:'/claude-nutzung-erklrt-6-konzepte'},
+    {n:'3.5', t:'Arbeitsfenster wählen', d:'App, Terminal oder Erweiterung: wo du wirklich arbeitest.', href:'/claude-interface-durchlauf'},
+    {n:'3.6', t:'Werkzeug-Stack ausmisten', d:'Zwölf Werkzeuge, drei Stapel, ein schlanker Schreibtisch.', href:'/stack-aufrumen'},
+    {n:'3.7', t:'Von der Chat-App umsteigen', d:'Die vier Gedanken, die den Anfang am häufigsten aufhalten.', href:'/der-umstieg-von-chat-app-auf-claude-code'}
   ];
   var CSS=`
   #ts3mod-grid{width:min(1180px,95vw);margin:62px auto 90px;padding:0 clamp(16px,3vw,40px);display:grid;
