@@ -8019,24 +8019,31 @@ window.__tsMO = function(cb){
       sec.querySelectorAll('.iva-donut').forEach(function(d){ d.style.setProperty('--p', d.getAttribute('data-p')); });
       return;
     }
-    /* Ringe fuellen */
+    /* Ringe fuellen (+ Hart-Setzer, falls der Timer unter dem Page-Veil verschluckt wird) */
     setTimeout(function(){
       sec.querySelectorAll('.iva-donut').forEach(function(d,i){
         setTimeout(function(){ d.style.setProperty('--p', d.getAttribute('data-p')); }, i*90);
       });
     },260);
-    /* Count-up mit garantiertem Endwert */
+    sec.querySelectorAll('.iva-donut').forEach(function(d){
+      setTimeout(function(){ d.style.setProperty('--p', d.getAttribute('data-p')); }, 2200);
+    });
+    /* Count-up. WICHTIG: requestAnimationFrame laeuft NICHT, solange die Seite unter dem
+       Page-Veil verborgen ist — der Zaehler bliebe dann fuer immer auf 0 stehen (live
+       belegt 03.08.2026). Deshalb setzt ein zweiter Timer den Endwert in jedem Fall. */
     sec.querySelectorAll('[data-v]').forEach(function(el,i){
-      var target=+el.getAttribute('data-v'), dur=1100, t0=null;
+      var target=+el.getAttribute('data-v'), dur=1100, t0=null, fertig=false;
       setTimeout(function(){
         function step(ts){
+          if(fertig) return;
           if(!t0) t0=ts;
           var t=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-t,3);
           el.textContent=eur(Math.round(target*e*100)/100);
-          if(t<1) requestAnimationFrame(step); else el.textContent=eur(target);
+          if(t<1) requestAnimationFrame(step); else { fertig=true; el.textContent=eur(target); }
         }
         requestAnimationFrame(step);
       }, 260+i*70);
+      setTimeout(function(){ fertig=true; el.textContent=eur(target); }, 260+i*70+dur+400);
     });
   }
 
