@@ -28011,7 +28011,10 @@ var TSISL_TEAM_ONB_V2=[
   function mount(){
     if(!on()){ var e=document.getElementById('tsws1next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsws1next')) return;
-    var host=document.querySelector('.notion-root'); if(!host) return;
+    /* An .super-content haengen, NICHT in .notion-root: die Notion-Spalte ist 900px schmal,
+       das Learnings-Grid braucht 1180px -> sonst laeuft die 4. Orb aus dem Bild (live gemessen). */
+    var host=document.querySelector('.super-content'); if(!host) return;
+    if(!document.querySelector('.notion-root')) return;
     injectCSS();
     host.appendChild(build());
     var el=document.getElementById('tsws1next');
@@ -28178,7 +28181,10 @@ var TSISL_TEAM_ONB_V2=[
   function mount(){
     if(!on()){ var e=document.getElementById('tsws2next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
     if(document.getElementById('tsws2next')) return;
-    var host=document.querySelector('.notion-root'); if(!host) return;
+    /* An .super-content haengen, NICHT in .notion-root: die Notion-Spalte ist 900px schmal,
+       das Learnings-Grid braucht 1180px -> sonst laeuft die 4. Orb aus dem Bild (live gemessen). */
+    var host=document.querySelector('.super-content'); if(!host) return;
+    if(!document.querySelector('.notion-root')) return;
     injectCSS();
     host.appendChild(build());
     var el=document.getElementById('tsws2next');
