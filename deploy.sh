@@ -14,6 +14,22 @@ MSG="${1:-kurs update}"
 #    Dieser Schritt laeuft bei JEDEM Deploy, damit Aenderungen aus JEDEM Chat
 #    garantiert in der ausgelieferten Datei landen. Faellt esbuild aus, wird
 #    unminifiziert kopiert (langsamer, aber nie veralteter Code live).
+# Guard: War die ausgelieferte Datei ueberhaupt aktuell? Wenn nicht, hat jemand
+# am deploy.sh vorbei gepusht -- dann war seine Aenderung bis jetzt NICHT live.
+# Das wird laut gemeldet statt still repariert (Vorfall 02.08.2026: b348d6d, fe5ca1c).
+if [ -f kurs.min.js ]; then
+  npx --yes esbuild kurs.js --minify --target=es2015 --outfile=/tmp/_ts_min_check.js >/dev/null 2>&1 || true
+  if [ -f /tmp/_ts_min_check.js ] && ! diff -q /tmp/_ts_min_check.js kurs.min.js >/dev/null 2>&1; then
+    echo ""
+    echo "‼  ACHTUNG: kurs.min.js war VERALTET (passte nicht zu kurs.js)."
+    echo "   Heisst: die zuletzt gepushte Aenderung war bis eben NICHT live."
+    echo "   Ursache: jemand hat per 'git push' statt './deploy.sh' ausgerollt."
+    echo "   -> Wird jetzt mitgebaut. Bitte danach die betroffene Seite pruefen."
+    echo ""
+  fi
+  rm -f /tmp/_ts_min_check.js
+fi
+
 echo "… baue kurs.min.js / kurs.min.css …"
 if npx --yes esbuild kurs.js --minify --target=es2015 --outfile=kurs.min.js >/dev/null 2>&1 \
    && node --check kurs.min.js >/dev/null 2>&1; then
