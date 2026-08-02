@@ -4407,7 +4407,17 @@ window.__tsMO = function(cb){
     { re:/\/claude-nutzung-erklrt-6-konzepte\/?$/, href:'/claude-interface-durchlauf' },
     { re:/\/claude-interface-durchlauf\/?$/, href:'/stack-aufrumen' },
     { re:/\/stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
-    { re:/\/der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' }
+    { re:/\/der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
+    /* Modul 4 - Claude Code + Notion Agents (L4.1-L4.6, gebaut 03.08.2026).
+       Gates TOLERANT (Root ODER /lektionen/-Praefix), weil super.so Seiten aus der
+       Lektionen-DB beim Re-Sync umhaengen kann. Ohne Eintrag hier raeumt der Pager
+       den von #ts4?next gebauten Weiter-Button wieder ab. */
+    { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/dein-backoffice-befragen' },
+    { re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/, href:'/datenbanken-automatisch-aktualisieren' },
+    { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/notion-agents-einsetzen' },
+    { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/notion-automationen-bauen' },
+    { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/wiederkehrende-routinen-einrichten' },
+    { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/modul-5-claude-code-notion' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -34095,6 +34105,1898 @@ var TSISL_TEAM_ONB_V2=[
   }
   window.__ts3modgrid=true;
   mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · CLAUDE CODE + NOTION AGENTS — gemeinsame Bausteine (__ts4)
+   ------------------------------------------------------------
+   Sechs Lektionen (L4.1-L4.6). Alle Seiten sind in Notion LEER,
+   der komplette Inhalt wird hier injiziert (Muster 1:1 aus __ts3).
+
+   Was hier liegt (und NICHT je Seite dupliziert wird):
+     - phHero(label)  Platzhalter-Cover als data-URI (Abschnitts-Katalog 01: "BILD FOLGT")
+     - hero(cfg)      Abschnitt 01 Hero  (Werte in kurs.css, Block "MODUL 4 ... Heroes")
+     - body(id,html)  Abschnitt 01 Einleitung (.ts-body, 860px zentriert)
+     - sec(id,a,html) Inhalts-Sektion (nutzt die .ts-body-h3-Spec, keine erfundene Groesse)
+     - emp(cfg)       Abschnitt 07 Empfehlungs-Kachel, Verhalten 1:1 aus __ts3
+     - learn(cfg)     Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Naechste Lektion")
+   Die ERKLAERANIMATION je Seite ist bewusst NICHT hier: Katalog-Regel
+   "jede Seite bekommt ein eigens konzipiertes Konzept, kein Recycling".
+
+   Gates sind TOLERANT (Root ODER /lektionen/-Praefix), weil super.so Seiten aus der
+   Lektionen-DB beim Re-Sync umhaengen kann (Konsistenz-Regel 17).
+   Textfarben Empfehlungs-Kachel: .86 / .72 wie in Modul 3 (neuere Design-System-Regel).
+   Float-Keyframe in translate-Notation (Flacker-Fix a147073), nicht transform.
+   ============================================================ */
+(function(){
+  if(window.__ts4) return;
+
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var DISP='"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif';
+
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};text-align:center}
+  .ts-body h3{font-family:${DISP};font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 10px;padding-left:22px;position:relative}
+  .ts-body li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#c7b489}
+  .ts-body li b,.ts-body p b{color:#c7b489;font-weight:600}
+
+  .ts4sec{max-width:860px;margin:72px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};color:#fff;box-sizing:border-box}
+  .ts4sec *{box-sizing:border-box}
+  .ts4sec h3{font-family:${DISP};font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:0 0 14px;text-align:center}
+  .ts4sec h3 .g{color:#c7b489}
+  .ts4sec p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts4sec p b{color:#c7b489;font-weight:600}
+  .ts4sec .lead{text-align:center;max-width:720px;margin:0 auto 30px}
+
+  .ts4-cards{display:grid;gap:16px;margin:0 0 8px}
+  .ts4-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .ts4-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .ts4-card{background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:20px 20px 18px;
+    transition:border-color .4s ease,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s ease}
+  .ts4-card:hover{border-color:rgba(199,180,137,.45);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.75),0 0 28px rgba(199,180,137,.12)}
+  .ts4-eb{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:11px}
+  .ts4-nm{font-family:${DISP};font-weight:600;font-size:17px;line-height:1.25;color:#fff;margin:0 0 11px}
+  .ts4-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 11px}
+  .ts4-card p{font-size:14px;line-height:1.58;color:rgba(255,255,255,.86);margin:0 0 9px}
+  .ts4-card p:last-child{margin-bottom:0}
+  .ts4-foot{font-size:10px;line-height:1.4;color:rgba(255,255,255,.4);margin:10px 0 0}
+
+  .ts4-do{margin:26px 0 0;padding:22px 24px;border-radius:16px;border:1px solid rgba(199,180,137,.32);
+    background:linear-gradient(rgba(199,180,137,.055),rgba(199,180,137,.055)),#05060b}
+  .ts4-do .ts4-eb{margin-bottom:12px}
+  .ts4-do ol{list-style:none;counter-reset:d;margin:0;padding:0}
+  .ts4-do li{counter-increment:d;position:relative;padding:0 0 0 32px;margin:0 0 11px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.86)}
+  .ts4-do li:last-child{margin-bottom:0}
+  .ts4-do li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:2px;font:700 11px/1.5 ${SANS};color:#c7b489;font-variant-numeric:tabular-nums}
+  .ts4-do li b{color:#c7b489;font-weight:600}
+
+  /* Befehls-/Prompt-Block: in Modul 4 gehoeren Befehle dazu, deshalb als eigener Kasten
+     mit Kopierknopf (Muster .notion-code, hier eigenstaendig fuer injizierte Sektionen). */
+  .ts4-cmd{position:relative;margin:18px 0 0;padding:15px 54px 15px 18px;border-radius:12px;text-align:left;
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;border:1px solid rgba(199,180,137,.28)}
+  .ts4-cmd code{display:block;font:600 12.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.01em;color:#efe6d2;white-space:pre-wrap;word-break:break-word}
+  .ts4-cmd button{position:absolute;top:11px;right:11px;height:26px;padding:0 11px;border-radius:7px;border:1px solid rgba(199,180,137,.35);
+    background:rgba(199,180,137,.12);color:#efe6d2;font:600 10.5px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+    transition:background .3s ease,color .3s ease}
+  .ts4-cmd button:hover{background:#c7b489;color:#05060b}
+  .ts4-mono{display:inline-block;font:600 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+    color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.28);border-radius:7px;padding:2px 8px}
+
+  .ts4-close{max-width:900px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  .ts4-close b{color:#c7b489;font-weight:600}
+
+  @media(max-width:820px){
+    .ts4-cards.c2,.ts4-cards.c3{grid-template-columns:1fr}
+  }
+  `;
+  function css(){
+    if(document.getElementById('ts4-css')) return;
+    var s=document.createElement('style'); s.id='ts4-css'; s.textContent=CSS; document.head.appendChild(s);
+  }
+
+  function hero(cfg){
+    var sc=document.querySelector('.super-content'); if(!sc) return null;
+    var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
+    css();
+    var h=document.createElement('div');
+    h.className='ts-hero';
+    h.innerHTML=
+      '<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+cfg.img+'" fetchpriority="high" decoding="async">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div>'+
+        '<h1 class="ts-hero__title">'+cfg.title+'</h1>'+
+      '</div>';
+    var nr=sc.querySelector('.notion-root');
+    if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+    return h;
+  }
+
+  function body(id, html){
+    if(document.getElementById(id)) return document.getElementById(id);
+    var sc=document.querySelector('.super-content'); if(!sc) return null;
+    var h=sc.querySelector('.ts-hero'); if(!h) return null;
+    css();
+    var w=document.createElement('div'); w.id=id;
+    w.innerHTML='<div class="ts-body">'+html+'</div>';
+    h.parentNode.insertBefore(w, h.nextSibling);
+    return w;
+  }
+
+  function sec(id, anchorId, html){
+    if(document.getElementById(id)) return document.getElementById(id);
+    var a=document.getElementById(anchorId); if(!a||!a.parentNode) return null;
+    css();
+    var w=document.createElement('div'); w.id=id; w.className='ts4sec';
+    w.innerHTML=html;
+    a.parentNode.insertBefore(w, a.nextSibling);
+    /* Kopierknoepfe der Befehls-Kaesten */
+    var bs=w.querySelectorAll('.ts4-cmd button');
+    for(var i=0;i<bs.length;i++){
+      (function(b){
+        b.addEventListener('click',function(){
+          var code=b.parentNode.querySelector('code'); if(!code) return;
+          var t=code.textContent;
+          function done(){ var old=b.textContent; b.textContent='Kopiert'; setTimeout(function(){ b.textContent=old; },1600); }
+          if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done, function(){}); }
+          else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+                 try{ document.execCommand('copy'); done(); }catch(e){} document.body.removeChild(ta); }
+        });
+      })(bs[i]);
+    }
+    return w;
+  }
+
+  function empCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:${SANS};color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s ease}
+  #${id}.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  #${id}.in.tilt{transition:transform .16s ease-out,opacity .9s ease}
+  #${id} *{box-sizing:border-box}
+  #${id}::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #${id}::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #${id}.glow::before{opacity:1}
+  #${id}.beat{animation:ts4empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  #${id} .emp-grid{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #${id} svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #${id} .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease,stroke-dashoffset .55s cubic-bezier(.16,1,.3,1)}
+  #${id} .emp-link path.on{opacity:1}
+  #${id} .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #${id} .emp-link circle.on{opacity:1}
+  #${id} .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #${id} .emp-anim-hd{font-family:${DISP};font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 6px}
+  #${id} .emp-anim-hd span{color:#c7b489}
+  #${id} .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
+  #${id}.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #${id}.in .emp-step:nth-child(2){transition-delay:.15s}#${id}.in .emp-step:nth-child(3){transition-delay:.28s}#${id}.in .emp-step:nth-child(4){transition-delay:.41s}#${id}.in .emp-step:nth-child(5){transition-delay:.54s}
+  #${id} .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #${id} .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #${id} .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #${id} .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #${id} .emp-step.on .emp-step-l{color:#fff}
+  #${id} .emp-text{position:relative;z-index:2}
+  #${id} .emp-h{font-family:${DISP};font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #${id} .emp-h .eg{color:#c7b489}
+  #${id} .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
+  #${id} .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #${id} .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.72);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #${id} .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #${id} .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  #${id} .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ #${id} .emp-grid{grid-template-columns:1fr;gap:26px} #${id} svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #${id}{transform:none;opacity:1} #${id} .emp-step{opacity:1;transform:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+           void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+
+  function empSetup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ empDraw(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); });
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ empDraw(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+
+  function emp(cfg){
+    if(document.getElementById(cfg.id)) return;
+    var a=document.getElementById(cfg.anchorId); if(!a||!a.parentNode) return;
+    empCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    var steps=cfg.steps.map(function(s){ return '<div class="emp-step"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    var pts=cfg.points.map(function(p){ return '<li>'+p+'</li>'; }).join('');
+    el.innerHTML=
+      '<div class="emp-grid">'+
+        '<svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+        '<div class="emp-anim">'+
+          '<div class="emp-anim-hd">'+cfg.animTitle+' <span>'+cfg.animGold+'</span></div>'+steps+
+        '</div>'+
+        '<div class="emp-text">'+
+          '<h3 class="emp-h">Empfehlung zur <span class="eg">'+cfg.kind+'</span></h3>'+
+          '<p class="emp-intro">'+cfg.intro+'</p>'+
+          '<ol class="emp-ol">'+pts+'</ol>'+
+        '</div>'+
+      '</div>';
+    a.parentNode.insertBefore(el, a.nextSibling);
+    empSetup(el);
+  }
+
+  function learnCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  #${id} *{box-sizing:border-box}
+  #${id} .tsl-head{text-align:center;margin-bottom:66px}
+  #${id} .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #${id} .tsl-title{font-family:${DISP};font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #${id} .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #${id} .tsl-cell{display:flex;justify-content:center}
+  #${id} .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #${id}.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
+  #${id} .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #${id}.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite;will-change:translate}
+  #${id}.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #${id}.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #${id}.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #${id}.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #${id} .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #${id} .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  #${id} .tsl-t b{color:#c7b489;font-weight:700}
+  #${id} #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #${id} #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #${id} #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #${id} #ts-next svg{width:16px;height:16px}
+  @keyframes tslFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
+  @media(max-width:1079px){ #${id} .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #${id} .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ #${id}.js.in .tsl-orb, #${id} .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+
+  function learn(cfg){
+    if(document.getElementById(cfg.id)) return;
+    var host=document.querySelector('.super-content'); if(!host) return;
+    if(!document.querySelector('.notion-root')) return;
+    learnCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    var orbs=cfg.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML=
+      '<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>'+
+      '<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
+    host.appendChild(el);
+    function wrapHTML(){
+      return '<a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+    }
+    function guard(){
+      var host=document.getElementById(cfg.id); if(!host) return;
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')){
+        var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML=wrapHTML(); host.appendChild(w);
+      }
+    }
+    guard();
+    new MutationObserver(guard).observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('scroll', guard, {passive:true});
+    setTimeout(guard,1500); setTimeout(guard,4000); setTimeout(guard,9000);
+    el.classList.add('js');
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); },4000);
+  }
+
+  window.__ts4={ LOGO:LOGO, SANS:SANS, DISP:DISP, phHero:phHero, css:css, hero:hero, body:body, sec:sec, emp:emp, learn:learn };
+
+  (function(){
+    if(document.getElementById('ts4-kf')) return;
+    var s=document.createElement('style'); s.id='ts4-kf';
+    s.textContent='@keyframes ts4empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}';
+    document.head.appendChild(s);
+  })();
+})();
+
+/* ============================================================
+   MODUL 4 · L4.1 "Notion mit Claude Code verbinden"
+   Slug: /notion-mit-claude-code-verbinden  (Gate tolerant, auch /lektionen/-Praefix)
+   Abschnitte: 01 Hero+Einleitung · 02 Erklaeranimation #ts4aanim · 2 Inhalts-Sektionen · 07 · 09
+
+   Erklaeranimation "Eine Leitung, deine Grenze." — EIGENES Konzept:
+   links das Terminal-Fenster, rechts die sechs Bereiche des Backoffices als Kacheln,
+   dazwischen eine Leitung, die im ZWISCHENRAUM laeuft (Opake-Basis-Regel).
+   Choreografie: Phase 1 Aufbau (Stagger 120ms) · Phase 2 Leitung waechst · Phase 3 die
+   freigegebenen Bereiche gehen an, die gesperrten bleiben dunkel · Phase 4 Bilanzzeile.
+   Schwerpunkt-Treue: die Animation zeigt die FREIGABE-GRENZE (Kern beider Sektionen),
+   nicht das Auswerten — das gehoert zu L4.2 und wird hier nicht vorweggenommen.
+   ============================================================ */
+
+/* ---- L4.1 · Abschnitt 01 (Hero + Einleitung) ---- */
+(function(){
+  if(window.__ts4a) return;
+  function on(){ return /\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return;
+    if(!window.__ts4) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    window.__ts4.hero({
+      img: window.__ts4.phHero('L 4.1'),
+      alt: 'Claude Code mit dem Notion-Backoffice verbinden',
+      eyebrow: 'L 4.1',
+      title: 'Notion <span class="ts-gold">anschließen</span>'
+    });
+    window.__ts4.body('ts4a-intro',
+      '<p>Dein Backoffice steht. Die Inventur ist gefüllt, die Zutaten hängen an den Lieferanten, die Gerichte rechnen ihre Deckungsbeiträge. Und bis jetzt bist du derjenige, der das alles anfasst.</p>'+
+      '<p>Das ändern wir in diesem Modul. Nicht, weil Handarbeit schlecht wäre, sondern weil dein System inzwischen groß genug ist, dass die Pflege Zeit frisst, die du im Betrieb brauchst.</p>'+
+      '<p>Wir beginnen mit der Verbindung, denn ohne die passiert gar nichts. Und wir ziehen dabei von Anfang an eine <b>Grenze</b>: du bestimmst, welche Bereiche deines Systems das Werkzeug überhaupt sehen darf.</p>'
+    );
+  }
+  window.__ts4a=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L4.1 · Abschnitt 02 (Erklaeranimation #ts4aanim) ---- */
+(function(){
+  if(window.__ts4aanim) return;
+  function on(){ return /\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/.test(location.pathname); }
+
+  var AREAS=[
+    {n:'Foodquartier',    d:'Zutaten, Rezepturen, Gerichte', open:true},
+    {n:'Drinksquartier',  d:'Getränke und Rezepturen',        open:true},
+    {n:'Finance Studio',  d:'Kalkulation und Deckungsbeitrag',open:true},
+    {n:'Key Metrics',     d:'Umsätze und Kennzahlen',         open:false},
+    {n:'Operations Area', d:'Verträge, Löhne, Passwörter',    open:false},
+    {n:'Vision Frame',    d:'Strategie und Marke',            open:false}
+  ];
+  var STAGGER=120;
+
+  var CSS=`
+  #ts4aanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4aanim *{box-sizing:border-box}
+  #ts4aanim .lg-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4aanim .lg-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4aanim .lg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4aanim h2.lg-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4aanim h2.lg-title .ts-gold{color:#c7b489}
+  #ts4aanim .lg-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts4aanim .lg-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts4aanim .lg-stage{position:relative;display:grid;grid-template-columns:196px 1fr;gap:52px;align-items:center}
+
+  /* Terminal-Kachel */
+  #ts4aanim .lg-term{position:relative;border-radius:14px;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),#0b0d14;
+    border:1.5px solid rgba(199,180,137,.5);box-shadow:0 22px 48px -20px rgba(0,0,0,.92);
+    opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4aanim .lg-wrap.js .lg-term{opacity:0;transform:translateY(14px) scale(.96)}
+  #ts4aanim .lg-wrap.js.on .lg-term{opacity:1;transform:none}
+  #ts4aanim .lg-term .bar{display:flex;align-items:center;gap:5px;padding:8px 11px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.09)}
+  #ts4aanim .lg-term .bar i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22)}
+  #ts4aanim .lg-term .bd{padding:15px 14px 17px;text-align:center}
+  #ts4aanim .lg-term b{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;margin-bottom:5px}
+  #ts4aanim .lg-term span{display:block;font:600 8.5px/1.4 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  #ts4aanim .lg-termlbl{margin:11px auto 0;text-align:center;font:600 10px/1 -apple-system,sans-serif;
+    letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+  /* Leitung: liegt vollstaendig im 52px-Zwischenraum, nie unter einer Kachel */
+  #ts4aanim .lg-rail{position:absolute;left:196px;top:0;bottom:0;width:52px;pointer-events:none}
+  #ts4aanim .lg-rail .base{position:absolute;left:26px;top:8%;bottom:8%;width:1.5px;background:rgba(199,180,137,.16)}
+  #ts4aanim .lg-rail .fill{position:absolute;left:26px;top:50%;width:1.5px;height:0;background:linear-gradient(180deg,#c7b489,rgba(199,180,137,.35));
+    transform:translateY(-50%);transition:height 1.1s cubic-bezier(.16,1,.3,1)}
+  #ts4aanim .lg-wrap.on .lg-rail .fill{height:84%}
+  #ts4aanim .lg-rail .stem{position:absolute;left:0;top:50%;width:26px;height:1.5px;background:rgba(199,180,137,.2);transform:scaleX(0);transform-origin:left center;
+    transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #ts4aanim .lg-wrap.on .lg-rail .stem{transform:scaleX(1);background:#c7b489}
+  #ts4aanim .lg-rail .dot{position:absolute;left:22.5px;top:50%;width:8px;height:8px;border-radius:50%;background:#efe6d2;
+    box-shadow:0 0 14px rgba(199,180,137,.9);opacity:0;transition:opacity .4s ease}
+  #ts4aanim .lg-wrap.moving .lg-rail .dot{opacity:1}
+
+  /* Bereiche */
+  /* EINSPALTIG: nur so bekommt JEDER freigegebene Bereich seinen eigenen Abzweig
+     im Zwischenraum. Zweispaltig haette die rechte Spalte lit ohne Linie dagestanden. */
+  #ts4aanim .lg-areas{display:grid;grid-template-columns:1fr;gap:8px}
+  #ts4aanim .lg-a{position:relative;border-radius:11px;padding:9px 13px;display:flex;align-items:baseline;gap:10px;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;
+    border:1px solid rgba(255,255,255,.10);
+    transition:border-color .6s ease,box-shadow .6s ease,opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4aanim .lg-wrap.js .lg-a{opacity:0;transform:translateY(12px)}
+  #ts4aanim .lg-wrap.js .lg-a.in{opacity:1;transform:none}
+  #ts4aanim .lg-a .nm{flex:0 0 auto;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13px;line-height:1.25;color:rgba(255,255,255,.6);transition:color .6s ease}
+  #ts4aanim .lg-a .ds{flex:1 1 auto;font:500 10.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.34);transition:color .6s ease}
+  #ts4aanim .lg-a .tag{position:absolute;top:50%;right:12px;transform:translateY(-50%);font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.3);opacity:0;transition:opacity .5s ease,color .5s ease}
+  #ts4aanim .lg-a.lit{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -18px rgba(199,180,137,.4)}
+  #ts4aanim .lg-a.lit .nm{color:#fff}
+  #ts4aanim .lg-a.lit .ds{color:rgba(255,255,255,.7)}
+  #ts4aanim .lg-a.lit .tag{opacity:1;color:#c7b489}
+  #ts4aanim .lg-a.shut .tag{opacity:1}
+  /* Abzweig in den Zwischenraum hinein — nur bei freigegebenen Bereichen */
+  #ts4aanim .lg-a::before{content:"";position:absolute;left:-27px;top:50%;width:27px;height:1.5px;background:#c7b489;
+    transform:scaleX(0);transform-origin:right center;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #ts4aanim .lg-a.lit::before{transform:scaleX(1)}
+
+  #ts4aanim .lg-cap{max-width:720px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4aanim .lg-cap b{color:#c7b489;font-weight:600}
+  #ts4aanim .lg-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4aanim .lg-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4aanim .lg-replay:hover{background:#c7b489;color:#05060b}
+
+  @media(max-width:820px){
+    #ts4aanim .lg-stage{grid-template-columns:1fr;gap:22px}
+    #ts4aanim .lg-rail{display:none}
+    #ts4aanim .lg-a::before{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #ts4aanim .lg-wrap.js .lg-term,#ts4aanim .lg-wrap.js .lg-a{opacity:1;transform:none}
+  }
+  `;
+
+  function html(){
+    var areas=AREAS.map(function(a,i){
+      return '<div class="lg-a'+(a.open?'':' shut')+'" data-i="'+i+'">'+
+        '<span class="tag">'+(a.open?'frei':'zu')+'</span>'+
+        '<span class="nm">'+a.n+'</span><span class="ds">'+a.d+'</span></div>';
+    }).join('');
+    return `
+<div class="lg-head">
+  <span class="lg-eyebrow">Was du hier entscheidest</span>
+  <h2 class="lg-title">Eine Leitung, deine <span class="ts-gold">Grenze</span>.</h2>
+  <p class="lg-sub">Die Verbindung ist schnell gebaut. Die eigentliche Arbeit ist die Entscheidung, welche Bereiche deines Backoffices am anderen Ende überhaupt sichtbar werden.</p>
+</div>
+<div class="lg-wrap">
+  <div class="lg-stage">
+    <div>
+      <div class="lg-term"><div class="bar"><i></i><i></i><i></i></div><div class="bd"><b>Claude Code</b><span>auf deinem Rechner</span></div></div>
+      <div class="lg-termlbl">Ein Werkzeug</div>
+    </div>
+    <div class="lg-rail"><span class="base"></span><span class="stem"></span><span class="fill"></span><span class="dot"></span></div>
+    <div class="lg-areas">${areas}</div>
+  </div>
+  <p class="lg-cap"></p>
+  <div class="lg-foot"><button class="lg-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function cap(root,html){ var c=root.querySelector('.lg-cap'); if(c) c.innerHTML=html; }
+
+  function play(root){
+    var wrap=root.querySelector('.lg-wrap'); if(!wrap) return;
+    clear();
+    wrap.classList.remove('on','moving');
+    wrap.classList.add('js');
+    var cells=root.querySelectorAll('.lg-a');
+    for(var i=0;i<cells.length;i++){ cells[i].classList.remove('in','lit'); }
+    cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on');
+      for(var r=0;r<cells.length;r++){ cells[r].classList.add('in'); if(AREAS[r].open) cells[r].classList.add('lit'); }
+      cap(root,'Freigegeben sind <b>drei von sechs</b> Bereichen. Alles andere bleibt für das Werkzeug unsichtbar.');
+      return;
+    }
+    void wrap.offsetWidth;
+    /* PHASE 1 — Buehne baut sich auf */
+    later(function(){ wrap.classList.add('moving'); }, 40);
+    for(var n=0;n<cells.length;n++){
+      (function(k,el){ later(function(){ el.classList.add('in'); }, 220+k*STAGGER); })(n,cells[n]);
+    }
+    /* PHASE 2 — die Leitung waechst */
+    later(function(){ wrap.classList.add('on'); cap(root,'Die Verbindung steht. Sie zeigt von sich aus noch <b>nichts</b> an.'); }, 1000);
+    /* PHASE 3 — nur die freigegebenen Bereiche gehen an */
+    var lit=0;
+    for(var m=0;m<AREAS.length;m++){
+      if(!AREAS[m].open) continue;
+      (function(k,order){ later(function(){ cells[k].classList.add('lit'); }, 1900+order*420); })(m,lit);
+      lit++;
+    }
+    later(function(){ cap(root,'Freigegeben hast du das <b>Foodquartier</b>, das Drinksquartier und das Finance Studio.'); }, 2100);
+    /* PHASE 4 — die Bilanz, und die Buehne ruht */
+    later(function(){
+      wrap.classList.remove('moving');
+      cap(root,'<b>Drei von sechs</b> Bereichen sind sichtbar. Löhne, Verträge und Passwörter bleiben draußen, weil sie draußen bleiben sollen.');
+    }, 3500);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts4aanim'; el.innerHTML=html();
+    el.querySelector('.lg-replay').addEventListener('click',function(){ play(el); });
+    return el;
+  }
+
+  function injectCSS(){ if(document.getElementById('ts4aanim-css'))return;
+    var s=document.createElement('style'); s.id='ts4aanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4aanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4aanim')) return;
+    var anchor=document.getElementById('ts4a-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.lg-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4aanim .lg-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4aanim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+
+  document.addEventListener('visibilitychange',function(){
+    var w=document.querySelector('#ts4aanim .lg-wrap'); if(!w) return;
+    if(document.hidden){ clear(); }
+  });
+  window.__ts4aanimKill=function(){ clear(); };
+  window.__ts4aanim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L4.1 · Inhalts-Sektionen + Abschnitt 07 + Abschnitt 09 ---- */
+(function(){
+  if(window.__ts4arest) return;
+  function on(){ return /\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return;
+    if(!window.__ts4) return;
+    if(!document.getElementById('ts4aanim')) return;
+
+    window.__ts4.sec('ts4a-wege','ts4aanim',
+      '<h3>Zwei Wege, dieselbe <span class="g">Leitung</span></h3>'+
+      '<p class="lead">Claude Code lebt auf deinem Rechner, dein Notion liegt in der Cloud. Damit die beiden miteinander reden, brauchst du eine Verbindung. Es gibt zwei Wege dorthin, und beide sind in Ordnung.</p>'+
+      '<div class="ts4-cards c2">'+
+        '<div class="ts4-card"><span class="ts4-eb">Weg 1 · schnell</span><div class="ts4-nm">Der fertige Anschluss</div><hr>'+
+          '<p>Notion bietet einen fertigen Anschluss an, den du in einer Zeile einhängst. Danach meldest du dich einmal im Browser an und wählst aus, für welche Seiten der Zugriff gelten soll.</p>'+
+          '<p class="ts4-foot">Reicht für den Anfang völlig. Du kannst jederzeit auf Weg 2 wechseln.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Weg 2 · kontrolliert</span><div class="ts4-nm">Deine eigene Integration</div><hr>'+
+          '<p>Du legst dir in Notion eine eigene Integration an, nennst sie zum Beispiel Backoffice-Claude und legst fest, was sie darf: nur lesen, oder auch aktualisieren, oder auch neue Einträge anlegen.</p>'+
+          '<p class="ts4-foot">Lohnt sich, wenn du am Anfang nur lesen willst oder später etwas ohne dich laufen soll.</p></div>'+
+      '</div>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp</code></div>'+
+      '<p class="ts4-close">Der Zusatz <b>scope user</b> sorgt dafür, dass die Verbindung in allen deinen Projekten da ist und nicht nur in dem Ordner, in dem du gerade stehst. Danach tippst du <span class="ts4-mono">/mcp</span>, wählst Notion aus und meldest dich einmal an. Den Schlüssel aus Weg 2 behandelst du wie den Schlüssel zu deinem Büro.</p>'
+    );
+
+    window.__ts4.sec('ts4a-grenze','ts4a-wege',
+      '<h3>Die eigentliche <span class="g">Sicherheitsgrenze</span></h3>'+
+      '<p class="lead">Das ist der Punkt, den die meisten überlesen, und er erspart dir später Ärger. Egal welchen Weg du gehst: Notion gibt der Verbindung von sich aus gar nichts frei.</p>'+
+      '<p>Dein Workspace bleibt zu, bis du eine Seite ausdrücklich freischaltest. Das machst du auf der Seite selbst, oben rechts im Menü unter den Verbindungen, und alles, was unter dieser Seite liegt, kommt automatisch mit.</p>'+
+      '<p>Stell diese Schraube am Anfang eng. Gib zuerst den Bereich frei, mit dem du arbeiten willst, zum Beispiel das Foodquartier mit Inventur, Zutaten und Gerichten. Die Personalkosten, die Verträge und die Passwortablage aus der Operations Area lässt du erstmal draußen. Nicht weil damit Unsinn passiert, sondern weil alles, was freigegeben ist, auch mitgelesen wird, wenn du eine Frage stellst. <b>Weniger Freigabe heißt schnellere und präzisere Antworten</b>, weil nicht durch deinen halben Betrieb gesucht werden muss.</p>'+
+      '<div class="ts4-do"><span class="ts4-eb">Jetzt du</span><ol>'+
+        '<li>Verbindung einhängen und einmal anmelden.</li>'+
+        '<li>Auf der Seite deines <b>Foodquartiers</b> die Verbindung hinzufügen.</li>'+
+        '<li>Den Test stellen und prüfen, ob deine echten Datenbanken zurückkommen.</li>'+
+        '<li>Fehlt eine, gibst du sie frei. Fehlt alles, ist die Anmeldung nicht durchgelaufen.</li>'+
+      '</ol></div>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Zeig mir alle Notion-Datenbanken, auf die du Zugriff hast, mit ihrem Namen und der Anzahl der Einträge. Ändere nichts.</code></div>'+
+      '<p class="ts4-close">Diesen Test machst du auch später jedes Mal, wenn etwas nicht funktioniert. In neun von zehn Fällen liegt es nicht am Modell, sondern an einer <b>fehlenden Freigabe</b>.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4aemp', anchorId:'ts4a-grenze', kind:'Einrichtung',
+      animTitle:'Vier Schritte bis zur', animGold:'Leitung',
+      steps:[{n:'01',l:'Anschluss einhängen'},{n:'02',l:'Einmal anmelden'},{n:'03',l:'Bereiche freigeben'},{n:'04',l:'Verbindung testen'}],
+      intro:'So gehe ich bei einem neuen Betrieb vor, und in dieser Reihenfolge, weil jeder Schritt den nächsten erst möglich macht.',
+      points:[
+        'Nimm für den Start den <b>fertigen Anschluss</b>. Die eigene Integration kannst du jederzeit nachziehen, wenn du feiner steuern willst.',
+        'Gib beim Anmelden <b>nur den Bereich frei</b>, mit dem du in dieser Woche arbeitest. Der Rest kommt dazu, wenn du ihn brauchst.',
+        'Lass Löhne, Verträge und die Passwortablage bewusst <b>draußen</b>, solange du dich einarbeitest.',
+        'Merk dir den <b>Test-Prompt</b>. Er ist der erste Griff, wenn irgendwann etwas nicht geht.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4anext',
+      learn:[
+        'Du kannst Notion in <b>einer Zeile</b> an Claude Code anschließen und die Anmeldung sauber durchlaufen.',
+        'Du kennst den zweiten Weg über eine <b>eigene Integration</b> und weißt, wann er sich lohnt.',
+        'Du verstehst, dass die <b>Freigabe pro Seite</b> die eigentliche Sicherheitsgrenze ist, nicht die Verbindung.',
+        'Du kannst mit einer einzigen Frage <b>prüfen</b>, ob die Verbindung steht und was noch fehlt.'
+      ],
+      next:'/dein-backoffice-befragen'
+    });
+  }
+  window.__ts4arest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · L4.2 "Dein Backoffice befragen"   Slug: /dein-backoffice-befragen
+   Erklaeranimation "Eine Frage, eine belegte Antwort." — EIGENES Konzept:
+   oben die Frage, darunter drei Datenbanken, aus denen Werte in eine Ergebniszeile
+   wandern. Der vierte Wert hat keine Quelle und wird als FEHLT gemeldet statt gefuellt.
+   Schwerpunkt-Treue: zeigt das Lesen und die Belegpflicht, nicht das Schreiben (L4.3).
+   ============================================================ */
+(function(){
+  if(window.__ts4b) return;
+  function on(){ return /\/(?:lektionen\/)?dein-backoffice-befragen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts4.hero({ img: window.__ts4.phHero('L 4.2'), alt:'Auswertungen aus dem Notion-Backoffice',
+      eyebrow:'L 4.2', title:'Dein System <span class="ts-gold">befragen</span>' });
+    window.__ts4.body('ts4b-intro',
+      '<p>Dein Backoffice weiß eine Menge über deinen Betrieb. Was jede Zutat kostet, wie sie sich auf die Portion runterrechnet, welches Gericht welchen Deckungsbeitrag bringt und welcher Lieferant dahintersteht.</p>'+
+      '<p>Nur liegt dieses Wissen über mehrere Datenbanken verteilt, und die Frage, die dich wirklich interessiert, steht in keiner einzelnen Ansicht.</p>'+
+      '<p>Genau da setzen wir an. Wir fragen nicht die Datenbank, wir fragen <b>das System</b>. Und wir sorgen dafür, dass jede Zahl, die zurückkommt, aus deinen Feldern stammt und nicht aus einer Schätzung.</p>'
+    );
+  }
+  window.__ts4b=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4banim) return;
+  function on(){ return /\/(?:lektionen\/)?dein-backoffice-befragen\/?$/.test(location.pathname); }
+
+  var SRC=[
+    {n:'Inventurliste', f:'Einkaufspreis', v:'6,80 €'},
+    {n:'Zutaten',       f:'Portionsgröße', v:'180 g'},
+    {n:'Gerichte',      f:'Verkaufspreis', v:'18,50 €'}
+  ];
+  var ROWS=[
+    {l:'Wareneinsatz',   v:'1,22 €',  ok:true},
+    {l:'Wareneinsatz %', v:'6,6 %',   ok:true},
+    {l:'Deckungsbeitrag',v:'17,28 €', ok:true},
+    {l:'Garverlust',     v:'fehlt',   ok:false}
+  ];
+
+  var CSS=`
+  #ts4banim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4banim *{box-sizing:border-box}
+  #ts4banim .fr-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4banim .fr-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4banim .fr-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4banim h2.fr-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4banim h2.fr-title .ts-gold{color:#c7b489}
+  #ts4banim .fr-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  #ts4banim .fr-wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  #ts4banim .fr-q{position:relative;border-radius:13px;padding:14px 18px;text-align:left;
+    background:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),#0b0d14;border:1.5px solid rgba(199,180,137,.45);
+    font:500 14.5px/1.5 -apple-system,sans-serif;color:rgba(255,255,255,.9);
+    opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4banim .fr-wrap.js .fr-q{opacity:0;transform:translateY(-10px)}
+  #ts4banim .fr-wrap.js.on .fr-q{opacity:1;transform:none}
+  #ts4banim .fr-q::before{content:"Deine Frage";position:absolute;top:-8px;left:16px;padding:0 7px;background:#05060b;
+    font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+
+  #ts4banim .fr-srcs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0 0}
+  #ts4banim .fr-s{position:relative;border-radius:12px;padding:13px 14px;text-align:left;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.10);
+    transition:border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4banim .fr-wrap.js .fr-s{opacity:0;transform:translateY(12px)}
+  #ts4banim .fr-wrap.js .fr-s.in{opacity:1;transform:none}
+  #ts4banim .fr-s .nm{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;color:#fff}
+  #ts4banim .fr-s .fl{display:block;margin-top:5px;font:500 10.5px/1.4 -apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+  #ts4banim .fr-s .vl{display:block;margin-top:7px;font:700 15px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c7b489;opacity:.35;transition:opacity .5s ease}
+  #ts4banim .fr-s.pull{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -18px rgba(199,180,137,.45)}
+  #ts4banim .fr-s.pull .vl{opacity:1}
+
+  #ts4banim .fr-flow{position:relative;height:38px;margin:0}
+  #ts4banim .fr-flow span{position:absolute;top:0;width:1.5px;height:100%;background:linear-gradient(180deg,rgba(199,180,137,.55),rgba(199,180,137,0));
+    transform:scaleY(0);transform-origin:top center;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  #ts4banim .fr-flow span.on{transform:scaleY(1)}
+
+  #ts4banim .fr-out{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(rgba(255,255,255,.028),rgba(255,255,255,.028)),#05060b}
+  #ts4banim .fr-out .hd{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08);
+    font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  #ts4banim .fr-r{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 16px;border-top:1px solid rgba(255,255,255,.055);
+    opacity:1;transition:opacity .5s ease,background .5s ease}
+  #ts4banim .fr-out .fr-r:first-of-type{border-top:0}
+  #ts4banim .fr-wrap.js .fr-r{opacity:.22}
+  #ts4banim .fr-wrap.js .fr-r.on{opacity:1}
+  #ts4banim .fr-r .l{font-size:13.5px;color:rgba(255,255,255,.86)}
+  #ts4banim .fr-r .v{font:700 14px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2}
+  #ts4banim .fr-r.miss{background:rgba(227,37,82,.07)}
+  #ts4banim .fr-r.miss .v{color:#e35d76;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  #ts4banim .fr-r .src{display:block;margin-top:3px;font:500 10px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.34)}
+
+  #ts4banim .fr-cap{max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4banim .fr-cap b{color:#c7b489;font-weight:600}
+  #ts4banim .fr-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4banim .fr-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4banim .fr-replay:hover{background:#c7b489;color:#05060b}
+  @media(max-width:820px){ #ts4banim .fr-srcs{grid-template-columns:1fr} #ts4banim .fr-flow{display:none} }
+  @media(prefers-reduced-motion:reduce){ #ts4banim .fr-wrap.js .fr-q,#ts4banim .fr-wrap.js .fr-s,#ts4banim .fr-wrap.js .fr-r{opacity:1;transform:none} }
+  `;
+
+  function html(){
+    var srcs=SRC.map(function(s,i){ return '<div class="fr-s" data-i="'+i+'"><span class="nm">'+s.n+'</span><span class="fl">'+s.f+'</span><span class="vl">'+s.v+'</span></div>'; }).join('');
+    var flow=''; for(var i=0;i<3;i++){ flow+='<span data-i="'+i+'" style="left:'+(16.67+i*33.33).toFixed(2)+'%"></span>'; }
+    var rows=ROWS.map(function(r,i){
+      return '<div class="fr-r'+(r.ok?'':' miss')+'" data-i="'+i+'"><span class="l">'+r.l+
+        (r.ok?'<span class="src">aus deinen Feldern gerechnet</span>':'<span class="src">kein Wert hinterlegt</span>')+
+        '</span><span class="v">'+r.v+'</span></div>';
+    }).join('');
+    return `
+<div class="fr-head">
+  <span class="fr-eyebrow">Woher die Zahl kommt</span>
+  <h2 class="fr-title">Eine Frage, eine <span class="ts-gold">belegte</span> Antwort.</h2>
+  <p class="fr-sub">Die Antwort setzt sich aus Feldern zusammen, die in deinen Datenbanken stehen. Und wo kein Feld steht, kommt kein Wert, sondern eine Meldung.</p>
+</div>
+<div class="fr-wrap">
+  <div class="fr-q">Was bringt mir das Rinderfilet pro Portion, und wo liegt der Wareneinsatz?</div>
+  <div class="fr-srcs">${srcs}</div>
+  <div class="fr-flow">${flow}</div>
+  <div class="fr-out"><div class="hd">Antwort</div>${rows}</div>
+  <p class="fr-cap"></p>
+  <div class="fr-foot"><button class="fr-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function cap(root,h){ var c=root.querySelector('.fr-cap'); if(c) c.innerHTML=h; }
+
+  function play(root){
+    var wrap=root.querySelector('.fr-wrap'); if(!wrap) return;
+    clear(); wrap.classList.remove('on'); wrap.classList.add('js');
+    var ss=root.querySelectorAll('.fr-s'), fl=root.querySelectorAll('.fr-flow span'), rr=root.querySelectorAll('.fr-r');
+    for(var i=0;i<ss.length;i++){ ss[i].classList.remove('in','pull'); }
+    for(var j=0;j<fl.length;j++){ fl[j].classList.remove('on'); }
+    for(var k=0;k<rr.length;k++){ rr[k].classList.remove('on'); }
+    cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on');
+      for(var a=0;a<ss.length;a++){ ss[a].classList.add('in','pull'); }
+      for(var b=0;b<fl.length;b++){ fl[b].classList.add('on'); }
+      for(var c=0;c<rr.length;c++){ rr[c].classList.add('on'); }
+      cap(root,'Drei Werte kommen aus deinen Feldern. Der vierte wird als <b>fehlend</b> gemeldet.');
+      return;
+    }
+    void wrap.offsetWidth;
+    later(function(){ wrap.classList.add('on'); }, 40);
+    for(var n=0;n<ss.length;n++){ (function(x){ later(function(){ ss[x].classList.add('in'); }, 500+x*140); })(n); }
+    later(function(){ cap(root,'Die Frage geht nicht an eine Datenbank, sondern an <b>drei</b>.'); }, 900);
+    for(var m=0;m<ss.length;m++){
+      (function(x){ later(function(){ ss[x].classList.add('pull'); fl[x] && fl[x].classList.add('on'); }, 1600+x*380); })(m);
+    }
+    for(var q=0;q<3;q++){ (function(x){ later(function(){ rr[x].classList.add('on'); }, 2300+x*380); })(q); }
+    later(function(){ cap(root,'Jede Zahl hängt an einem Feld, das du selbst gepflegt hast.'); }, 2600);
+    later(function(){
+      rr[3] && rr[3].classList.add('on');
+      cap(root,'Für den <b>Garverlust</b> ist nichts hinterlegt. Statt einen plausiblen Wert anzunehmen, meldet das System die Lücke. Genau das ist der Unterschied zwischen einer Auswertung, der du trauen kannst, und einer, die nur sauber aussieht.');
+    }, 3900);
+  }
+
+  function build(){ var el=document.createElement('div'); el.id='ts4banim'; el.innerHTML=html();
+    el.querySelector('.fr-replay').addEventListener('click',function(){ play(el); }); return el; }
+  function injectCSS(){ if(document.getElementById('ts4banim-css'))return;
+    var s=document.createElement('style'); s.id='ts4banim-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4banim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4banim')) return;
+    var anchor=document.getElementById('ts4b-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS(); var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.fr-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4banim .fr-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4banim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts4banimKill=function(){ clear(); };
+  window.__ts4banim=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4brest) return;
+  function on(){ return /\/(?:lektionen\/)?dein-backoffice-befragen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.getElementById('ts4banim')) return;
+
+    window.__ts4.sec('ts4b-fragen','ts4banim',
+      '<h3>Drei Auswertungen, die sich sofort <span class="g">rechnen</span></h3>'+
+      '<p class="lead">Fang mit den Fragen an, für die du sonst filterst, sortierst, exportierst und in einer Tabelle nachrechnest. Sie sind in einer Minute beantwortet.</p>'+
+      '<div class="ts4-cards c3">'+
+        '<div class="ts4-card"><span class="ts4-eb">Auswertung 01</span><div class="ts4-nm">Wo die Marge wegläuft</div><hr>'+
+          '<p>Die zehn Gerichte mit dem höchsten Wareneinsatz in Prozent, mit Verkaufspreis, Wareneinsatz in Euro und Deckungsbeitrag.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Auswertung 02</span><div class="ts4-nm">Was der Lieferant erhöht hat</div><hr>'+
+          '<p>Jede Zutat, die sich seit dem letzten Lieferschein um mehr als fünf Prozent verteuert hat, und dazu die Gerichte, in denen sie steckt.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Auswertung 03</span><div class="ts4-nm">Wo dein System Lücken hat</div><hr>'+
+          '<p>Alle Rezepturen, die Zutaten ohne hinterlegten Preis verwenden. Die Frage, die dein Küchenchef stellt.</p></div>'+
+      '</div>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Geh in meine Gerichte-Datenbank. Liste mir die zehn Gerichte mit dem höchsten Wareneinsatz in Prozent auf, mit Verkaufspreis, Wareneinsatz in Euro und in Prozent und dem Deckungsbeitrag. Sortiere absteigend nach Prozent. Nimm die Zahlen ausschließlich aus den Feldern der Datenbank und rechne nichts hinzu.</code></div>'+
+      '<p class="ts4-close">Drei Dinge machen den Unterschied und kosten dich jeweils einen halben Satz: sag dazu, <b>welche Datenbank</b> gemeint ist, <b>in welcher Form</b> du das Ergebnis willst, und <b>dass nichts geändert werden soll</b>, solange du nur schaust.</p>'
+    );
+
+    window.__ts4.sec('ts4b-regel','ts4b-fragen',
+      '<h3>Die Regel gegen <span class="g">geratene</span> Zahlen</h3>'+
+      '<p class="lead">Das ist der wichtigste Absatz dieser Lektion. Ein Sprachmodell lässt ungern eine Lücke stehen.</p>'+
+      '<p>Wenn in deiner Zutatenliste bei drei Positionen kein Preis hinterlegt ist, neigt es dazu, einen plausiblen Wert anzunehmen und weiterzurechnen. Das Ergebnis sieht dann vollkommen sauber aus, und genau das ist das Gefährliche daran. Eine Kalkulation, die auf einem geratenen Einkaufspreis steht, ist schlimmer als gar keine Kalkulation, weil du ihr vertraust.</p>'+
+      '<p>Deshalb gilt bei mir eine feste Regel, und die schreibst du dir einmal in die CLAUDE.md deines Backoffice-Projekts, damit sie bei jeder Sitzung mitgelesen wird. Wie du die Datei anlegst, weißt du aus <b>Modul 3</b>. Neu ist hier nur dieser eine Absatz.</p>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Zahlen kommen ausschließlich aus den Feldern der Notion-Datenbanken. Fehlt ein Wert, wird er als fehlend benannt und nicht geschätzt, nicht interpoliert und nicht aus Erfahrungswerten ergänzt. Jede genannte Zahl bekommt die Datenbank und den Eintrag dazu, aus dem sie stammt.</code></div>'+
+      '<p class="ts4-close">Und die ehrliche Grenze dazu: Fragen über sehr viele Einträge werden ungenau, weil irgendwann zusammengefasst statt gerechnet wird. Bei dreihundert Positionen fragst du besser nach einer <b>Kategorie</b> statt nach allem. Prozentwerte, die in Notion schon als Formel existieren, lässt du dir ausgeben statt neu berechnen — die Formel im System ist geprüft, eine neu gerechnete Zahl ist es nicht.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4bemp', anchorId:'ts4b-regel', kind:'Nutzung',
+      animTitle:'Vier Teile einer guten', animGold:'Frage',
+      steps:[{n:'01',l:'Datenbank benennen'},{n:'02',l:'Form vorgeben'},{n:'03',l:'Quelle verlangen'},{n:'04',l:'Nur lesen sagen'}],
+      intro:'So stelle ich jede Auswertungsfrage, und in dieser Reihenfolge bekomme ich seit Monaten Antworten, mit denen ich arbeiten kann.',
+      points:[
+        'Sag, <b>wo</b> gesucht werden soll. „Schau in die Gerichte" ist schneller und präziser als „schau in mein Notion".',
+        'Sag, <b>wie</b> du es willst: als Tabelle, sortiert wonach, mit welchen Spalten. Sonst baust du dir die Tabelle selbst.',
+        'Verlang zu jeder Zahl den <b>Eintrag</b>, aus dem sie stammt. Das ist deine Stichprobe.',
+        'Häng ein <b>„ändere nichts"</b> an, solange du nur auswertest. Die billigste Versicherung, die du haben kannst.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4bnext',
+      learn:[
+        'Du kannst Auswertungen über <b>mehrere Datenbanken</b> hinweg in normaler Sprache anfordern.',
+        'Du kennst drei Auswertungen, die sich sofort rechnen: <b>Wareneinsatz</b>, Preissprünge, Lücken.',
+        'Du hast die Regel gegen <b>geratene Zahlen</b> in deiner CLAUDE.md stehen.',
+        'Du kennst die Grenze bei großen Datenmengen und nutzt <b>bestehende Formeln</b> statt neu zu rechnen.'
+      ],
+      next:'/datenbanken-automatisch-aktualisieren'
+    });
+  }
+  window.__ts4brest=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · L4.3 "Datenbanken automatisch aktualisieren"
+   Slug: /datenbanken-automatisch-aktualisieren
+   Erklaeranimation "Erst zeigen, dann schreiben." — EIGENES Konzept:
+   der Lieferschein links, die Vorschau in der Mitte (alt -> neu, plus ein unklarer
+   Artikel), das Okay als eigener Beat, danach springen die Werte in die Datenbank.
+   Schwerpunkt-Treue: zeigt die Pruef-Schleife, nicht die Agenten (L4.4).
+   ============================================================ */
+(function(){
+  if(window.__ts4c) return;
+  function on(){ return /\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts4.hero({ img: window.__ts4.phHero('L 4.3'), alt:'Lieferschein-Preise automatisch in die Inventur',
+      eyebrow:'L 4.3', title:'Dein System <span class="ts-gold">pflegen</span> lassen' });
+    window.__ts4.body('ts4c-intro',
+      '<p>Lesen war die halbe Miete. Der eigentliche Zeitfresser in einem gepflegten Backoffice ist das Nachtragen, und das kennst du: Der Lieferant hat die Preise angepasst, du hast den Lieferschein auf dem Tisch, und jetzt sitzt du zwanzig Minuten und tippst neue Zahlen in Zeilen. Vier Wochen später wieder.</p>'+
+      '<p>Das übernimmt jetzt das Werkzeug. Aber bevor wir es machen lassen, bauen wir das Sicherheitsnetz, denn ein Werkzeug mit Schreibrechten in deiner Kalkulation ist etwas anderes als eines, das nur schaut.</p>'
+    );
+  }
+  window.__ts4c=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4canim) return;
+  function on(){ return /\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/.test(location.pathname); }
+
+  var LINES=[
+    {a:'Rinderfilet',    o:'42,90 €', n:'46,10 €', ok:true},
+    {a:'Butter 10 kg',   o:'68,00 €', n:'71,50 €', ok:true},
+    {a:'Olivenöl 5 l',   o:'39,20 €', n:'39,20 €', ok:true},
+    {a:'Art. TG-4471',   o:'—',       n:'unklar',  ok:false}
+  ];
+
+  var CSS=`
+  #ts4canim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4canim *{box-sizing:border-box}
+  #ts4canim .vw-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4canim .vw-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4canim .vw-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4canim h2.vw-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4canim h2.vw-title .ts-gold{color:#c7b489}
+  #ts4canim .vw-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  #ts4canim .vw-wrap{max-width:800px;margin:0 auto;padding:0 24px}
+
+  #ts4canim .vw-stage{display:grid;grid-template-columns:1fr;gap:0}
+  #ts4canim .vw-doc{width:min(280px,100%);margin:0 auto;border-radius:12px;padding:13px 15px;text-align:left;
+    background:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),#0b0d14;border:1px solid rgba(199,180,137,.42);
+    opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4canim .vw-wrap.js .vw-doc{opacity:0;transform:translateY(-10px)}
+  #ts4canim .vw-wrap.js.on .vw-doc{opacity:1;transform:none}
+  #ts4canim .vw-doc b{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;color:#fff;margin-bottom:4px}
+  #ts4canim .vw-doc span{display:block;font:500 11px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.42)}
+
+  #ts4canim .vw-arrow{height:30px;position:relative}
+  #ts4canim .vw-arrow i{position:absolute;left:50%;top:0;width:1.5px;height:100%;background:linear-gradient(180deg,rgba(199,180,137,.6),rgba(199,180,137,0));
+    transform:translateX(-50%) scaleY(0);transform-origin:top center;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  #ts4canim .vw-wrap.on .vw-arrow i{transform:translateX(-50%) scaleY(1)}
+
+  #ts4canim .vw-prev{border-radius:14px;overflow:hidden;border:1px solid rgba(199,180,137,.34);
+    background:linear-gradient(rgba(199,180,137,.045),rgba(199,180,137,.045)),#05060b}
+  #ts4canim .vw-prev .hd{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+  #ts4canim .vw-prev .hd span{font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  #ts4canim .vw-prev .hd em{font:600 10.5px/1 -apple-system,sans-serif;font-style:normal;color:rgba(255,255,255,.42)}
+  #ts4canim .vw-l{display:grid;grid-template-columns:1.4fr .8fr 22px .8fr;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid rgba(255,255,255,.055);
+    opacity:1;transform:none;transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1),background .5s ease}
+  #ts4canim .vw-prev .vw-l:first-of-type{border-top:0}
+  #ts4canim .vw-wrap.js .vw-l{opacity:0;transform:translateX(-8px)}
+  #ts4canim .vw-wrap.js .vw-l.in{opacity:1;transform:none}
+  #ts4canim .vw-l .a{font-size:13.5px;color:rgba(255,255,255,.88)}
+  #ts4canim .vw-l .o{font:600 12.5px/1 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.36);text-decoration:line-through}
+  #ts4canim .vw-l .ar{font-size:12px;color:rgba(199,180,137,.6);text-align:center}
+  #ts4canim .vw-l .n{font:700 13px/1 ui-monospace,Menlo,monospace;color:#efe6d2}
+  #ts4canim .vw-l.bad{background:rgba(227,37,82,.07)}
+  #ts4canim .vw-l.bad .n{color:#e35d76;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+  #ts4canim .vw-l.bad .o,#ts4canim .vw-l.bad .ar{opacity:.3}
+
+  #ts4canim .vw-ok{display:flex;justify-content:center;margin:20px 0 0}
+  #ts4canim .vw-ok b{display:inline-flex;align-items:center;gap:9px;height:38px;padding:0 20px;border-radius:9999px;
+    background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.4);color:#efe6d2;font:700 12px/1 -apple-system,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+    opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1),background .4s ease,color .4s ease}
+  #ts4canim .vw-wrap.js .vw-ok b{opacity:0;transform:scale(.9)}
+  #ts4canim .vw-wrap.js .vw-ok.in b{opacity:1;transform:none}
+  #ts4canim .vw-wrap .vw-ok.hit b{background:#c7b489;color:#05060b}
+
+  #ts4canim .vw-db{margin:20px 0 0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(rgba(255,255,255,.028),rgba(255,255,255,.028)),#05060b;
+    opacity:1;transition:opacity .6s ease,border-color .6s ease,box-shadow .6s ease}
+  #ts4canim .vw-wrap.js .vw-db{opacity:.3}
+  #ts4canim .vw-wrap.js .vw-db.in{opacity:1;border-color:rgba(199,180,137,.4);box-shadow:0 18px 40px -22px rgba(199,180,137,.45)}
+  #ts4canim .vw-db .hd{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  #ts4canim .vw-db .row{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;border-top:1px solid rgba(255,255,255,.055);font-size:13px;color:rgba(255,255,255,.82)}
+  #ts4canim .vw-db .row:first-of-type{border-top:0}
+  #ts4canim .vw-db .row em{font-style:normal;font:700 13px/1 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.4);transition:color .5s ease}
+  #ts4canim .vw-wrap .vw-db.in .row em{color:#efe6d2}
+
+  #ts4canim .vw-cap{max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4canim .vw-cap b{color:#c7b489;font-weight:600}
+  #ts4canim .vw-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4canim .vw-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4canim .vw-replay:hover{background:#c7b489;color:#05060b}
+  @media(max-width:820px){ #ts4canim .vw-l{grid-template-columns:1fr auto;row-gap:4px} #ts4canim .vw-l .ar{display:none} }
+  @media(prefers-reduced-motion:reduce){ #ts4canim .vw-wrap.js .vw-doc,#ts4canim .vw-wrap.js .vw-l,#ts4canim .vw-wrap.js .vw-ok b,#ts4canim .vw-wrap.js .vw-db{opacity:1;transform:none} }
+  `;
+
+  function html(){
+    var ls=LINES.map(function(l,i){
+      return '<div class="vw-l'+(l.ok?'':' bad')+'" data-i="'+i+'"><span class="a">'+l.a+'</span><span class="o">'+l.o+'</span><span class="ar">→</span><span class="n">'+l.n+'</span></div>';
+    }).join('');
+    return `
+<div class="vw-head">
+  <span class="vw-eyebrow">Die Reihenfolge, die zählt</span>
+  <h2 class="vw-title">Erst zeigen, dann <span class="ts-gold">schreiben</span>.</h2>
+  <p class="vw-sub">Zwischen dem Lieferschein und deiner Datenbank steht immer eine Vorschau. Erst dein Okay löst das Schreiben aus, und was nicht sicher zugeordnet werden kann, bleibt liegen.</p>
+</div>
+<div class="vw-wrap">
+  <div class="vw-stage">
+    <div class="vw-doc"><b>Lieferschein 08/26</b><span>4 Positionen erkannt</span></div>
+    <div class="vw-arrow"><i></i></div>
+    <div class="vw-prev"><div class="hd"><span>Vorschau</span><em>nichts geschrieben</em></div>${ls}</div>
+    <div class="vw-ok"><b>Dein Okay</b></div>
+    <div class="vw-db"><div class="hd">Inventurliste</div>
+      <div class="row">Rinderfilet <em>46,10 €</em></div>
+      <div class="row">Butter 10 kg <em>71,50 €</em></div>
+      <div class="row">Olivenöl 5 l <em>39,20 €</em></div>
+    </div>
+  </div>
+  <p class="vw-cap"></p>
+  <div class="vw-foot"><button class="vw-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function cap(root,h){ var c=root.querySelector('.vw-cap'); if(c) c.innerHTML=h; }
+
+  function play(root){
+    var wrap=root.querySelector('.vw-wrap'); if(!wrap) return;
+    clear(); wrap.classList.remove('on'); wrap.classList.add('js');
+    var ls=root.querySelectorAll('.vw-l'), ok=root.querySelector('.vw-ok'), db=root.querySelector('.vw-db');
+    for(var i=0;i<ls.length;i++) ls[i].classList.remove('in');
+    ok.classList.remove('in','hit'); db.classList.remove('in'); cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on');
+      for(var a=0;a<ls.length;a++) ls[a].classList.add('in');
+      ok.classList.add('in','hit'); db.classList.add('in');
+      cap(root,'Drei Preise werden geschrieben. Der unklare Artikel bleibt <b>liegen</b>, statt geraten zu werden.');
+      return;
+    }
+    void wrap.offsetWidth;
+    later(function(){ wrap.classList.add('on'); cap(root,'Der Lieferschein liegt im Projektordner. Gelesen wird er, geschrieben noch nichts.'); }, 60);
+    for(var n=0;n<ls.length;n++){ (function(x){ later(function(){ ls[x].classList.add('in'); }, 900+x*260); })(n); }
+    later(function(){ cap(root,'Drei Zeilen sind eindeutig zugeordnet. Eine nicht, weil der Lieferant den Artikel <b>anders benennt</b> als du.'); }, 2100);
+    later(function(){ ok.classList.add('in'); }, 2900);
+    later(function(){ ok.classList.add('hit'); cap(root,'Du schaust drüber und bestätigst. Das ist der Moment, den keine Automatik ersetzt.'); }, 3500);
+    later(function(){ db.classList.add('in'); cap(root,'Jetzt erst wird geschrieben. Und weil dein System verbunden ist, rechnen die Zutaten ihre Portionspreise sofort neu, die Rezepturen ziehen nach, die <b>Deckungsbeiträge</b> stehen aktualisiert da.'); }, 4200);
+  }
+
+  function build(){ var el=document.createElement('div'); el.id='ts4canim'; el.innerHTML=html();
+    el.querySelector('.vw-replay').addEventListener('click',function(){ play(el); }); return el; }
+  function injectCSS(){ if(document.getElementById('ts4canim-css'))return;
+    var s=document.createElement('style'); s.id='ts4canim-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4canim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4canim')) return;
+    var anchor=document.getElementById('ts4c-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS(); var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.vw-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4canim .vw-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4canim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts4canimKill=function(){ clear(); };
+  window.__ts4canim=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4crest) return;
+  function on(){ return /\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.getElementById('ts4canim')) return;
+
+    window.__ts4.sec('ts4c-schleife','ts4canim',
+      '<h3>Die <span class="g">Prüf-Schleife</span>, die dich schützt</h3>'+
+      '<p class="lead">Claude ändert nichts direkt. Es legt dir zuerst eine Liste vor, was es ändern würde, Zeile für Zeile, mit altem und neuem Wert. Erst dein Okay löst das Schreiben aus.</p>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Vor jeder Änderung an einer Notion-Datenbank wird eine Vorschau ausgegeben: betroffene Datenbank, betroffene Einträge, alter Wert, neuer Wert. Geschrieben wird erst nach ausdrücklicher Bestätigung. Bei mehr als zwanzig betroffenen Einträgen wird zusätzlich die Gesamtzahl genannt.</code></div>'+
+      '<p>Warum die letzte Bedingung? Weil ein Tippfehler in deiner Anweisung dazu führen kann, dass statt drei Zeilen dreihundert angefasst werden. Wenn dir die Zahl vorher genannt wird, fällt es dir auf.</p>'+
+      '<p>Und die zweite Vorsichtsmaßnahme kostet dich dreißig Sekunden: Bevor du eine Massenänderung startest, <b>duplizierst du die Datenbank</b> in Notion. Beim ersten Mal machst du das ganz sicher, später nach Gefühl. Ich mache es bis heute bei allem, was mehr als eine Handvoll Zeilen betrifft.</p>'
+    );
+
+    window.__ts4.sec('ts4c-praxis','ts4c-schleife',
+      '<h3>Der Lieferschein und die <span class="g">liegengebliebene</span> Arbeit</h3>'+
+      '<p class="lead">Zwei Durchgänge, die sich in jedem Betrieb sofort rechnen. Beide laufen über dieselbe Prüf-Schleife.</p>'+
+      '<div class="ts4-cards c2">'+
+        '<div class="ts4-card"><span class="ts4-eb">Durchgang 01</span><div class="ts4-nm">Preise aus dem Lieferschein</div><hr>'+
+          '<p>Du legst den Lieferschein als Foto oder PDF in den Projektordner. Zurück kommt eine Vorschau mit den geänderten Einkaufspreisen und einer getrennten Liste der Artikel, die nicht sicher zugeordnet werden konnten.</p>'+
+          '<p class="ts4-foot">Aus zwanzig Minuten Tipparbeit wird eine Minute Prüfarbeit.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Durchgang 02</span><div class="ts4-nm">Die Baustelle, die liegen bleibt</div><hr>'+
+          '<p>Zubereitungshinweise, Allergene, Nährwerte. Alles, was nie dringend ist. Das geht als Durchgang, und jeder erzeugte Eintrag wird als „Vorschlag, ungeprüft" markiert.</p>'+
+          '<p class="ts4-foot">So siehst du in einer eigenen Ansicht, was noch kein Mensch gelesen hat.</p></div>'+
+      '</div>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Lies den Lieferschein im Ordner. Vergleich die Artikel mit meiner Inventurliste in Notion und finde für jeden Artikel die passende Zeile. Zeig mir eine Vorschau, bei welchen Zeilen sich der Einkaufspreis geändert hat, mit altem und neuem Preis und der Abweichung in Prozent. Artikel, die du nicht sicher zuordnen kannst, listest du getrennt auf, statt zu raten. Schreib noch nichts.</code></div>'+
+      '<p class="ts4-close">Wo ich die Grenze ziehe: Beschreibungen, Vorschläge und Zuordnungen lasse ich schreiben. <b>Preise, Mengen und Kalkulationsfelder nur nach Vorschau</b>, nie automatisch im Hintergrund. Und gelöscht wird nichts — soll eine Zeile weg, wird sie auf einen Status gesetzt und ich lösche selbst.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4cemp', anchorId:'ts4c-praxis', kind:'Nutzung',
+      animTitle:'Vier Schritte vor jedem', animGold:'Durchgang',
+      steps:[{n:'01',l:'Kopie anlegen'},{n:'02',l:'Vorschau anfordern'},{n:'03',l:'Unklares klären'},{n:'04',l:'Bestätigen'}],
+      intro:'Diese vier Schritte kosten dich zusammen eine Minute und haben mir mehr als einmal einen ganzen Abend gerettet.',
+      points:[
+        'Vor jeder Massenänderung die Datenbank <b>duplizieren</b>. Dreißig Sekunden gegen ein mulmiges Gefühl.',
+        'Nie ohne <b>Vorschau</b> schreiben lassen, und die Zeilenzahl mitlesen — sie verrät Tippfehler in deiner Anweisung.',
+        'Die nicht zugeordneten Artikel <b>selbst klären</b>. Das sind meist zwei, und sie sind der Grund, warum nichts geraten wurde.',
+        'Alles Erzeugte als <b>ungeprüft</b> markieren lassen, damit du den Überblick behältst, was ein Mensch schon gesehen hat.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4cnext',
+      learn:[
+        'Du hast die Schleife <b>erst zeigen, dann schreiben</b> in deiner CLAUDE.md verankert.',
+        'Du kannst einen <b>Lieferschein</b> einlesen und die Einkaufspreise deiner Inventur aktualisieren lassen.',
+        'Du kannst leere Felder in Masse befüllen lassen und markierst dabei, was <b>ungeprüft</b> ist.',
+        'Du kennst die Grenze: Kalkulationsfelder nur nach Vorschau, <b>gelöscht wird nie</b>.'
+      ],
+      next:'/notion-agents-einsetzen'
+    });
+  }
+  window.__ts4crest=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · L4.4 "Notion Agents einsetzen"   Slug: /notion-agents-einsetzen
+   Erklaeranimation "Ein Mitarbeiter, ein Revier." — EIGENES Konzept:
+   der Agent in der Mitte, links sein Revier (verbunden, hell), rechts die Bereiche
+   ausserhalb (dunkel, keine Linie), unten die Datei auf dem RECHNER, zu der keine
+   Verbindung entsteht — die Grenze zu Claude Code als Bild.
+   ============================================================ */
+(function(){
+  if(window.__ts4d) return;
+  function on(){ return /\/(?:lektionen\/)?notion-agents-einsetzen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts4.hero({ img: window.__ts4.phHero('L 4.4'), alt:'Notion Agents im eigenen Workspace einsetzen',
+      eyebrow:'L 4.4', title:'Einen <span class="ts-gold">Agenten</span> beauftragen' });
+    window.__ts4.body('ts4d-intro',
+      '<p>Bis hierher lief alles über Claude Code auf deinem Rechner. Das ist mächtig, hat aber eine Eigenschaft: Es passiert nur, wenn du davor sitzt.</p>'+
+      '<p>Notion selbst kann inzwischen auch etwas, und das schauen wir uns jetzt an, weil es für einen Teil deiner Arbeit der bequemere Weg ist. Stell ihn dir als Mitarbeiter vor, der ausschließlich in deinem Notion arbeitet.</p>'+
+      '<p>Am Ende dieser Lektion hast du einen Agenten mit klarem Auftrag und eine <b>Merkregel</b>, wann du ihn nimmst und wann Claude Code.</p>'
+    );
+  }
+  window.__ts4d=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4danim) return;
+  function on(){ return /\/(?:lektionen\/)?notion-agents-einsetzen\/?$/.test(location.pathname); }
+
+  var IN=[{n:'Rezepturen',d:'darf lesen und schreiben'},{n:'Zutaten',d:'darf lesen'}];
+  var OUT=[{n:'Finance Studio',d:'nicht im Auftrag'},{n:'Operations Area',d:'nicht im Auftrag'}];
+
+  var CSS=`
+  #ts4danim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4danim *{box-sizing:border-box}
+  #ts4danim .rv-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4danim .rv-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4danim .rv-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4danim h2.rv-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4danim h2.rv-title .ts-gold{color:#c7b489}
+  #ts4danim .rv-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  #ts4danim .rv-wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+  #ts4danim .rv-stage{position:relative;display:grid;grid-template-columns:1fr 168px 1fr;gap:40px;align-items:center}
+  #ts4danim .rv-col{display:flex;flex-direction:column;gap:12px}
+  #ts4danim .rv-b{position:relative;border-radius:12px;padding:12px 14px;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.10);
+    transition:border-color .6s ease,box-shadow .6s ease,opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4danim .rv-wrap.js .rv-b{opacity:0;transform:translateY(12px)}
+  #ts4danim .rv-wrap.js .rv-b.in{opacity:1;transform:none}
+  #ts4danim .rv-b .nm{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;color:rgba(255,255,255,.6);transition:color .6s ease}
+  #ts4danim .rv-b .ds{display:block;margin-top:4px;font:500 10.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.32);transition:color .6s ease}
+  #ts4danim .rv-b.lit{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -18px rgba(199,180,137,.4)}
+  #ts4danim .rv-b.lit .nm{color:#fff}
+  #ts4danim .rv-b.lit .ds{color:rgba(255,255,255,.7)}
+  /* Abzweige liegen im 40px-Zwischenraum, nie unter einer Kachel */
+  #ts4danim .rv-left .rv-b::after{content:"";position:absolute;right:-40px;top:50%;width:40px;height:1.5px;background:#c7b489;
+    transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  #ts4danim .rv-left .rv-b.lit::after{transform:scaleX(1)}
+  #ts4danim .rv-right .rv-b::after{content:"";position:absolute;left:-40px;top:50%;width:40px;height:1.5px;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 4px,transparent 4px 8px)}
+
+  #ts4danim .rv-agentwrap{position:relative;width:168px;height:168px;margin:0 auto}
+  #ts4danim .rv-agentwrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.24),rgba(199,180,137,0) 72%);opacity:0}
+  #ts4danim .rv-wrap.built .rv-agentwrap::before{animation:rvBreath 4.4s ease-in-out infinite}
+  #ts4danim .rv-agent{position:absolute;inset:0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:16px;
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#0b0d14;border:1.5px solid rgba(199,180,137,.55);
+    box-shadow:0 22px 50px -20px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.05);
+    opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+  #ts4danim .rv-wrap.js .rv-agent{opacity:0;transform:scale(.9)}
+  #ts4danim .rv-wrap.js.on .rv-agent{opacity:1;transform:none}
+  #ts4danim .rv-agent b{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff}
+  #ts4danim .rv-agent span{font:600 8.5px/1.4 -apple-system,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#c7b489}
+  #ts4danim .rv-agent em{font-style:normal;font:500 10px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.42);margin-top:2px}
+
+  /* Die Datei auf deinem Rechner — ausserhalb, unerreichbar */
+  #ts4danim .rv-outside{margin:30px auto 0;max-width:430px;position:relative;padding-top:34px}
+  #ts4danim .rv-outside .link{position:absolute;left:50%;top:0;width:1.5px;height:34px;transform:translateX(-50%);
+    background:repeating-linear-gradient(180deg,rgba(255,255,255,.2) 0 4px,transparent 4px 8px)}
+  #ts4danim .rv-outside .x{position:absolute;left:50%;top:11px;transform:translate(-50%,-50%);width:15px;height:15px;opacity:0;transition:opacity .5s ease}
+  #ts4danim .rv-outside .x::before,#ts4danim .rv-outside .x::after{content:"";position:absolute;left:0;top:7px;width:15px;height:1.5px;background:#e35d76}
+  #ts4danim .rv-outside .x::before{transform:rotate(45deg)}
+  #ts4danim .rv-outside .x::after{transform:rotate(-45deg)}
+  #ts4danim .rv-wrap.cut .rv-outside .x{opacity:1}
+  #ts4danim .rv-file{border-radius:12px;padding:12px 14px;text-align:center;
+    background:linear-gradient(rgba(255,255,255,.022),rgba(255,255,255,.022)),#05060b;border:1px dashed rgba(255,255,255,.16)}
+  #ts4danim .rv-file b{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13px;color:rgba(255,255,255,.55)}
+  #ts4danim .rv-file span{display:block;margin-top:4px;font:500 10.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.32)}
+
+  #ts4danim .rv-cap{max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4danim .rv-cap b{color:#c7b489;font-weight:600}
+  #ts4danim .rv-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4danim .rv-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4danim .rv-replay:hover{background:#c7b489;color:#05060b}
+  @keyframes rvBreath{0%,100%{opacity:.5;transform:scale(.97)}50%{opacity:1;transform:scale(1.03)}}
+  @media(max-width:820px){
+    #ts4danim .rv-stage{grid-template-columns:1fr;gap:18px}
+    #ts4danim .rv-left .rv-b::after,#ts4danim .rv-right .rv-b::after{display:none}
+    #ts4danim .rv-agentwrap{width:140px;height:140px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts4danim .rv-wrap.js .rv-b,#ts4danim .rv-wrap.js .rv-agent{opacity:1;transform:none} #ts4danim .rv-wrap.built .rv-agentwrap::before{animation:none} }
+  `;
+
+  function html(){
+    function col(list,cls){ return list.map(function(b,i){ return '<div class="rv-b" data-i="'+i+'"><span class="nm">'+b.n+'</span><span class="ds">'+b.d+'</span></div>'; }).join(''); }
+    return `
+<div class="rv-head">
+  <span class="rv-eyebrow">Wo er arbeitet, und wo nicht</span>
+  <h2 class="rv-title">Ein Mitarbeiter, ein <span class="ts-gold">Revier</span>.</h2>
+  <p class="rv-sub">Der Agent ist stark, solange alles in Notion liegt. Sobald etwas von außen dazukommt, endet sein Revier — und genau dort fängt Claude Code an.</p>
+</div>
+<div class="rv-wrap">
+  <div class="rv-stage">
+    <div class="rv-col rv-left">${col(IN)}</div>
+    <div class="rv-agentwrap"><div class="rv-agent"><b>Dein Agent</b><span>in Notion</span><em>läuft ohne deinen Rechner</em></div></div>
+    <div class="rv-col rv-right">${col(OUT)}</div>
+  </div>
+  <div class="rv-outside">
+    <span class="link"></span><span class="x"></span>
+    <div class="rv-file"><b>Lieferschein 08/26</b><span>liegt auf deinem Rechner</span></div>
+  </div>
+  <p class="rv-cap"></p>
+  <div class="rv-foot"><button class="rv-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function cap(root,h){ var c=root.querySelector('.rv-cap'); if(c) c.innerHTML=h; }
+
+  function play(root){
+    var wrap=root.querySelector('.rv-wrap'); if(!wrap) return;
+    clear(); wrap.classList.remove('on','built','cut'); wrap.classList.add('js');
+    var bs=root.querySelectorAll('.rv-b'), left=root.querySelectorAll('.rv-left .rv-b');
+    for(var i=0;i<bs.length;i++){ bs[i].classList.remove('in','lit'); }
+    cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on','built','cut');
+      for(var a=0;a<bs.length;a++) bs[a].classList.add('in');
+      for(var b=0;b<left.length;b++) left[b].classList.add('lit');
+      cap(root,'Zwei Datenbanken im Revier, zwei außerhalb, und die Datei auf deinem Rechner bleibt <b>unerreichbar</b>.');
+      return;
+    }
+    void wrap.offsetWidth;
+    later(function(){ wrap.classList.add('on'); }, 60);
+    for(var n=0;n<bs.length;n++){ (function(x){ later(function(){ bs[x].classList.add('in'); }, 520+x*130); })(n); }
+    later(function(){ cap(root,'Du gibst ihm einen Auftrag und sagst, <b>welche Datenbanken</b> dazugehören.'); }, 900);
+    for(var m=0;m<left.length;m++){ (function(x){ later(function(){ left[x].classList.add('lit'); }, 1700+x*440); })(m); }
+    later(function(){ wrap.classList.add('built'); cap(root,'Sein Revier sind die Rezepturen und die Zutaten. Alles andere in deinem Notion fasst er <b>nicht</b> an, auch wenn er es sehen könnte.'); }, 2400);
+    later(function(){ wrap.classList.add('cut'); cap(root,'Und hier endet er. Der Lieferschein liegt auf deinem Rechner, nicht in Notion. Dafür nimmst du <b>Claude Code</b> — das ist die ganze Merkregel.'); }, 3900);
+  }
+
+  function build(){ var el=document.createElement('div'); el.id='ts4danim'; el.innerHTML=html();
+    el.querySelector('.rv-replay').addEventListener('click',function(){ play(el); }); return el; }
+  function injectCSS(){ if(document.getElementById('ts4danim-css'))return;
+    var s=document.createElement('style'); s.id='ts4danim-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4danim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4danim')) return;
+    var anchor=document.getElementById('ts4d-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS(); var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.rv-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4danim .rv-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4danim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts4danimKill=function(){ clear(); };
+  window.__ts4danim=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4drest) return;
+  function on(){ return /\/(?:lektionen\/)?notion-agents-einsetzen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.getElementById('ts4danim')) return;
+
+    window.__ts4.sec('ts4d-drei','ts4danim',
+      '<h3>Drei Agenten, die sich in der Gastronomie <span class="g">rechnen</span></h3>'+
+      '<p class="lead">Er kann in deinen Datenbanken suchen, Zusammenhänge über mehrere Seiten hinweg lesen, Einträge anlegen, Felder befüllen und Texte schreiben. Und er wartet nicht auf dich.</p>'+
+      '<div class="ts4-cards c3">'+
+        '<div class="ts4-card"><span class="ts4-eb">Agent 01</span><div class="ts4-nm">Der Vorarbeiter</div><hr>'+
+          '<p>Entsteht in deinen Rezepturen eine neue Zeile, füllt er die Felder vor, die sich aus den Zutaten ergeben: eine erste Fassung der Zubereitung, die Allergene, eine Einschätzung der Zeit.</p>'+
+          '<p class="ts4-foot">Du kommst abends rein und prüfst, statt bei null anzufangen.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Agent 02</span><div class="ts4-nm">Der Kartenschreiber</div><hr>'+
+          '<p>Aus dreißig Gerichten mit Zutaten, Mengen und Zubereitung macht er Beschreibungen in deinem Ton, für die Speisekarte und für die Lieferplattformen.</p>'+
+          '<p class="ts4-foot">Gib ihm ein paar deiner eigenen guten Texte als Vorbild, sonst klingt es nach Katalog.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Agent 03</span><div class="ts4-nm">Der stille Beobachter</div><hr>'+
+          '<p>Einmal pro Woche schaut er in die Waste-Erfassung und schreibt eine kurze Zusammenfassung: was am häufigsten weggeworfen wurde, wo es mehr wurde als in der Woche davor.</p>'+
+          '<p class="ts4-foot">Keine Bewertung, nur der Blick, den sonst niemand macht.</p></div>'+
+      '</div>'+
+      '<p class="ts4-close">Wie viel davon in deinem Plan enthalten ist und was der Zusatz kostet, hängt vom Notion-Plan ab und ändert sich regelmäßig. Das prüfen wir <b>im Video am aktuellen Stand</b> gemeinsam, statt hier eine Zahl hinzuschreiben, die in drei Monaten falsch ist.</p>'
+    );
+
+    window.__ts4.sec('ts4d-auftrag','ts4d-drei',
+      '<h3>Der <span class="g">Auftrag</span>, den du ihm mitgibst</h3>'+
+      '<p class="lead">Ein Agent ist genau so gut wie sein Auftrag. Das hier ist die Vorlage, an der du dich entlanghangelst.</p>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Du arbeitest ausschließlich in den Datenbanken Rezepturen und Zutaten. Wenn eine Rezeptur ohne Zubereitungshinweis angelegt wird, schreibst du einen Vorschlag, der sich nur aus den verknüpften Zutaten und ihren Mengen ergibt. Du erfindest keine Zutaten und keine Mengen. Du setzt das Feld Status auf „Vorschlag, ungeprüft". Du änderst keine Preise, keine Mengen und keine Kalkulationsfelder. Wenn Informationen fehlen, schreibst du das in das Notizfeld, statt zu ergänzen.</code></div>'+
+      '<p>Das sind dieselben zwei Grundsätze wie in den letzten beiden Lektionen: nichts erfinden, und alles Ungeprüfte bleibt als solches erkennbar. Die Regeln ändern sich nicht, nur der Ort, an dem sie stehen.</p>'+
+      '<p class="ts4-close">Und die Merkregel, die dir dieses Modul zusammenhält: <b>Bleibt die Arbeit komplett in Notion, nimm den Agenten. Kommt irgendetwas von außen dazu, nimm Claude Code.</b> Eine Datei auf deinem Rechner, ein Export aus dem Kassensystem, eine Mail — alles davon ist außen.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4demp', anchorId:'ts4d-auftrag', kind:'Einrichtung',
+      animTitle:'Vier Teile eines guten', animGold:'Auftrags',
+      steps:[{n:'01',l:'Revier festlegen'},{n:'02',l:'Aufgabe beschreiben'},{n:'03',l:'Verbote nennen'},{n:'04',l:'Ungeprüft markieren'}],
+      intro:'Jeder Agenten-Auftrag, den ich schreibe, enthält diese vier Teile. Fehlt einer, merkst du es meist erst, wenn etwas in deinen Daten steht, das da nicht hingehört.',
+      points:[
+        'Nenn die <b>Datenbanken</b>, in denen er arbeitet, und nur die. Alles Weitere ist außerhalb seines Reviers.',
+        'Beschreib die Aufgabe an einem <b>Auslöser</b>: „wenn eine Rezeptur ohne Zubereitungshinweis angelegt wird".',
+        'Sag ausdrücklich, was er <b>nicht</b> anfasst: Preise, Mengen, Kalkulationsfelder.',
+        'Lass jedes Ergebnis als <b>ungeprüft</b> markieren und bau dir dazu eine eigene Ansicht.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4dnext',
+      learn:[
+        'Du weißt, was ein <b>Notion Agent</b> ist und dass er ohne deinen Rechner im Workspace arbeitet.',
+        'Du kennst drei Einsätze, die sich rechnen: <b>Vorarbeit</b>, Karten-Texte, Blick auf die Waste-Erfassung.',
+        'Du kannst einen Auftrag schreiben, der <b>nichts erfindet</b> und Ungeprüftes markiert.',
+        'Du kannst die Grenze ziehen: alles in Notion heißt Agent, <b>etwas von außen</b> heißt Claude Code.'
+      ],
+      next:'/notion-automationen-bauen'
+    });
+  }
+  window.__ts4drest=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · L4.5 "Notion Automationen bauen"   Slug: /notion-automationen-bauen
+   Erklaeranimation "Wenn das, dann das." — EIGENES Konzept: vier Wenn-Dann-Paare,
+   durch die ein Impuls laeuft. Kein Modell dazwischen, keine Interpretation —
+   das Bild ist bewusst mechanisch, weil die Lektion genau das lehrt.
+   ============================================================ */
+(function(){
+  if(window.__ts4e) return;
+  function on(){ return /\/(?:lektionen\/)?notion-automationen-bauen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts4.hero({ img: window.__ts4.phHero('L 4.5'), alt:'Notion Automationen im Betrieb',
+      eyebrow:'L 4.5', title:'Den Alltag <span class="ts-gold">verdrahten</span>' });
+    window.__ts4.body('ts4e-intro',
+      '<p>Wir haben jetzt zwei Werkzeuge, die denken. Und wie das so ist, wenn man ein gutes Werkzeug hat, benutzt man es auch für Dinge, für die es viel zu groß ist.</p>'+
+      '<p>Die dritte Stufe ist die schlichteste, und in einem laufenden Betrieb ist sie diejenige, die am zuverlässigsten trägt: eine Regel in einer Datenbank. Wenn das passiert, mach das. Kein Modell dazwischen, keine Interpretation, keine Kosten pro Durchlauf.</p>'+
+      '<p>Am Ende dieser Lektion hast du vier Automationen und eine <b>Sortierregel</b>, mit der du jede künftige Idee sicher einordnest.</p>'
+    );
+  }
+  window.__ts4e=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4eanim) return;
+  function on(){ return /\/(?:lektionen\/)?notion-automationen-bauen\/?$/.test(location.pathname); }
+
+  var PAIRS=[
+    {w:'Status wird „nachbestellen"', d:'Bestellaufgabe entsteht', s:'Inventurliste'},
+    {w:'Gericht wird „aktiv"',        d:'Startdatum wird gesetzt', s:'Gerichte'},
+    {w:'Jemand drückt den Button',    d:'Zählliste der Woche entsteht', s:'Operations Area'},
+    {w:'Einkaufspreis springt',       d:'Zeile wird markiert, du bekommst eine Nachricht', s:'Zutaten'}
+  ];
+
+  var CSS=`
+  #ts4eanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4eanim *{box-sizing:border-box}
+  #ts4eanim .wd-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4eanim .wd-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4eanim .wd-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4eanim h2.wd-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4eanim h2.wd-title .ts-gold{color:#c7b489}
+  #ts4eanim .wd-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  #ts4eanim .wd-wrap{max-width:800px;margin:0 auto;padding:0 24px}
+
+  #ts4eanim .wd-row{display:grid;grid-template-columns:1fr 66px 1fr;align-items:center;gap:0;margin:0 0 13px}
+  #ts4eanim .wd-row:last-of-type{margin-bottom:0}
+  #ts4eanim .wd-c{position:relative;border-radius:12px;padding:12px 14px;min-height:62px;display:flex;flex-direction:column;justify-content:center;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.10);
+    transition:border-color .5s ease,box-shadow .5s ease,opacity .55s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  #ts4eanim .wd-wrap.js .wd-c{opacity:0;transform:translateY(10px)}
+  #ts4eanim .wd-wrap.js .wd-row.in .wd-c{opacity:1;transform:none}
+  #ts4eanim .wd-c .eb{display:block;font:700 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.34);margin-bottom:6px;transition:color .5s ease}
+  #ts4eanim .wd-c .tx{display:block;font-size:13.5px;line-height:1.4;color:rgba(255,255,255,.62);transition:color .5s ease}
+  #ts4eanim .wd-c .src{display:block;margin-top:5px;font:500 10px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.3)}
+  #ts4eanim .wd-row.fire .wd-c{border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 16px 34px -18px rgba(199,180,137,.4)}
+  #ts4eanim .wd-row.fire .wd-c .eb{color:#c7b489}
+  #ts4eanim .wd-row.fire .wd-c .tx{color:#fff}
+
+  /* Impuls-Strecke liegt vollstaendig zwischen den Kacheln */
+  #ts4eanim .wd-link{position:relative;height:100%;min-height:62px}
+  #ts4eanim .wd-link .base{position:absolute;left:8px;right:8px;top:50%;height:1.5px;background:rgba(199,180,137,.16);transform:translateY(-50%)}
+  #ts4eanim .wd-link .fill{position:absolute;left:8px;top:50%;height:1.5px;width:0;background:linear-gradient(90deg,rgba(199,180,137,.3),#c7b489);transform:translateY(-50%);
+    transition:width .5s cubic-bezier(.16,1,.3,1)}
+  #ts4eanim .wd-row.fire .wd-link .fill{width:calc(100% - 16px)}
+  #ts4eanim .wd-link .head{position:absolute;right:6px;top:50%;width:7px;height:7px;border-radius:50%;background:#efe6d2;
+    box-shadow:0 0 12px rgba(199,180,137,.85);transform:translateY(-50%);opacity:0;transition:opacity .35s ease}
+  #ts4eanim .wd-row.fire .wd-link .head{opacity:1}
+
+  #ts4eanim .wd-cap{max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4eanim .wd-cap b{color:#c7b489;font-weight:600}
+  #ts4eanim .wd-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4eanim .wd-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4eanim .wd-replay:hover{background:#c7b489;color:#05060b}
+  @media(max-width:820px){ #ts4eanim .wd-row{grid-template-columns:1fr;row-gap:8px} #ts4eanim .wd-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #ts4eanim .wd-wrap.js .wd-c{opacity:1;transform:none} }
+  `;
+
+  function html(){
+    var rows=PAIRS.map(function(p,i){
+      return '<div class="wd-row" data-i="'+i+'">'+
+        '<div class="wd-c"><span class="eb">Wenn</span><span class="tx">'+p.w+'</span><span class="src">'+p.s+'</span></div>'+
+        '<div class="wd-link"><span class="base"></span><span class="fill"></span><span class="head"></span></div>'+
+        '<div class="wd-c"><span class="eb">Dann</span><span class="tx">'+p.d+'</span></div>'+
+      '</div>';
+    }).join('');
+    return `
+<div class="wd-head">
+  <span class="wd-eyebrow">Die schlichteste Stufe</span>
+  <h2 class="wd-title">Wenn das, dann <span class="ts-gold">das</span>.</h2>
+  <p class="wd-sub">Vier Regeln, die jeden Tag laufen und nichts kosten. Sie denken nicht mit, und genau deshalb kann man sich auf sie verlassen.</p>
+</div>
+<div class="wd-wrap">
+  ${rows}
+  <p class="wd-cap"></p>
+  <div class="wd-foot"><button class="wd-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function cap(root,h){ var c=root.querySelector('.wd-cap'); if(c) c.innerHTML=h; }
+
+  var CAPS=[
+    'Jemand setzt in der Inventur einen Status. Die Bestellaufgabe entsteht von selbst — der Zettel ist weg.',
+    'Ein Gericht geht auf die Karte, das Datum steht. Drei Monate später weißt du, was es gebracht hat.',
+    'Dein Team drückt einen Knopf und hat die Zählliste. Vorher war das eine Vorlage, die jemand duplizieren musste.',
+    'Ein Einkaufspreis springt, die Zeile ist markiert. Genau die Zeilen, für die du in Lektion zwei die Auswertung gebaut hast.'
+  ];
+
+  function play(root){
+    var wrap=root.querySelector('.wd-wrap'); if(!wrap) return;
+    clear(); wrap.classList.add('js');
+    var rows=root.querySelectorAll('.wd-row');
+    for(var i=0;i<rows.length;i++){ rows[i].classList.remove('in','fire'); }
+    cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      for(var a=0;a<rows.length;a++){ rows[a].classList.add('in','fire'); }
+      cap(root,'Vier Regeln, die immer exakt dasselbe tun. Deshalb gehen sie nicht kaputt.');
+      return;
+    }
+    void wrap.offsetWidth;
+    for(var n=0;n<rows.length;n++){ (function(x){ later(function(){ rows[x].classList.add('in'); }, 200+x*140); })(n); }
+    for(var m=0;m<rows.length;m++){
+      (function(x){
+        later(function(){
+          for(var k=0;k<rows.length;k++) rows[k].classList.toggle('fire', k===x);
+          cap(root, CAPS[x]);
+        }, 1100+x*1700);
+      })(m);
+    }
+    later(function(){
+      for(var k=0;k<rows.length;k++) rows[k].classList.add('fire');
+      cap(root,'Alle vier laufen weiter, ob du im Haus bist oder nicht. Und keine davon kostet dich etwas pro Durchlauf.');
+    }, 1100+rows.length*1700);
+  }
+
+  function build(){ var el=document.createElement('div'); el.id='ts4eanim'; el.innerHTML=html();
+    el.querySelector('.wd-replay').addEventListener('click',function(){ play(el); }); return el; }
+  function injectCSS(){ if(document.getElementById('ts4eanim-css'))return;
+    var s=document.createElement('style'); s.id='ts4eanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4eanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4eanim')) return;
+    var anchor=document.getElementById('ts4e-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS(); var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.wd-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4eanim .wd-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4eanim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts4eanimKill=function(){ clear(); };
+  window.__ts4eanim=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4erest) return;
+  function on(){ return /\/(?:lektionen\/)?notion-automationen-bauen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.getElementById('ts4eanim')) return;
+
+    window.__ts4.sec('ts4e-vier','ts4eanim',
+      '<h3>Die vier, die ich in jedem Betrieb <span class="g">einrichte</span></h3>'+
+      '<p class="lead">Ausgelöst wird eine Automation, wenn ein neuer Eintrag entsteht oder sich ein bestimmtes Feld ändert. Und was sie dann tut, ist ebenso überschaubar: ein Feld setzen, einen Eintrag anlegen, jemanden benachrichtigen.</p>'+
+      '<div class="ts4-cards c2">'+
+        '<div class="ts4-card"><span class="ts4-eb">Automation 01</span><div class="ts4-nm">Die Bestellaufgabe</div><hr>'+
+          '<p>Setzt jemand bei einer Inventur-Zeile den Status auf „nachbestellen", entsteht in der Operations Area eine Bestellaufgabe, mit Artikel, hinterlegtem Lieferanten und heutigem Datum.</p>'+
+          '<p class="ts4-foot">Der Nutzen ist nicht die Zeit. Der Nutzen ist, dass nichts mehr vergessen wird.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Automation 02</span><div class="ts4-nm">Das Startdatum</div><hr>'+
+          '<p>Wechselt ein Gericht auf „aktiv", wird das Datum gesetzt, ab dem es auf der Karte steht.</p>'+
+          '<p class="ts4-foot">Klingt nach nichts, ist aber die Grundlage dafür, dass du später sagen kannst, was das neue Gericht gebracht hat.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Automation 03</span><div class="ts4-nm">Der Wocheninventur-Button</div><hr>'+
+          '<p>Ein Knopf in der Operations Area, den dein Team drückt. Er legt die Zählliste für die Woche an, mit allen Positionen und einer leeren Spalte für die Menge.</p>'+
+          '<p class="ts4-foot">Vorher war das eine Vorlage, die jemand duplizieren musste und manchmal vergaß.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Automation 04</span><div class="ts4-nm">Die Preissprung-Meldung</div><hr>'+
+          '<p>Ändert sich ein Einkaufspreis um mehr als einen von dir gesetzten Wert, wird die Zeile markiert und du bekommst eine Nachricht.</p>'+
+          '<p class="ts4-foot">Sie stößt dich auf genau die Zeilen, für die du in Lektion zwei die Auswertung gebaut hast.</p></div>'+
+      '</div>'
+    );
+
+    window.__ts4.sec('ts4e-sortier','ts4e-vier',
+      '<h3>Die <span class="g">Sortierregel</span> für alles, was du dir noch ausdenkst</h3>'+
+      '<p class="lead">Damit haben wir alle drei Wege beisammen, die dieses Modul dir gibt. Ab jetzt wirst du im Alltag ständig Ideen haben, was sich automatisieren ließe. Die sortierst du in dieser Reihenfolge, und zwar von unten nach oben.</p>'+
+      '<div class="ts4-cards c3">'+
+        '<div class="ts4-card"><span class="ts4-eb">Stufe 01</span><div class="ts4-nm">Notion-Automation</div><hr>'+
+          '<p>Passiert immer exakt dasselbe? Dann nimm sie. Umsonst, schnell gebaut, geht nicht kaputt.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Stufe 02</span><div class="ts4-nm">Notion Agent</div><hr>'+
+          '<p>Muss jemand mitdenken, aber alles liegt in Notion? Dann er. Er kann lesen, verstehen und formulieren.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Stufe 03</span><div class="ts4-nm">Claude Code</div><hr>'+
+          '<p>Kommt etwas von außen dazu, eine Datei, eine Mail, ein anderes System? Dann Claude Code.</p></div>'+
+      '</div>'+
+      '<p class="ts4-close">Der Fehler, den fast alle machen, ist, <b>oben anzufangen</b>. Man hat ein starkes Werkzeug und baut damit auch die Dinge, die eine schlichte Wenn-Dann-Regel besser könnte. Fang unten an. Die Hälfte deiner Ideen ist eine Automation, und die ist in fünf Minuten gebaut.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4eemp', anchorId:'ts4e-sortier', kind:'Einrichtung',
+      animTitle:'Vier Regeln in einer', animGold:'Stunde',
+      steps:[{n:'01',l:'Bestellaufgabe'},{n:'02',l:'Startdatum'},{n:'03',l:'Wocheninventur-Button'},{n:'04',l:'Preissprung-Meldung'}],
+      intro:'Wenn du an einem Vormittag etwas Bleibendes bauen willst, dann diese vier. In dieser Reihenfolge, weil die ersten beiden dir die Logik beibringen und die letzten beiden dein Team direkt entlasten.',
+      points:[
+        'Bau die <b>Bestellaufgabe</b> zuerst. Sie ist die einfachste und du siehst das Ergebnis sofort in der Operations Area.',
+        'Das <b>Startdatum</b> ist in zwei Minuten gebaut und zahlt sich erst in drei Monaten aus. Trotzdem jetzt machen.',
+        'Den <b>Button</b> baust du für dein Team, nicht für dich. Lass ihn einmal jemanden drücken, der ihn benutzen wird.',
+        'Setz die <b>Schwelle</b> der Preissprung-Meldung bewusst. Zu niedrig, und du liest sie nach zwei Wochen nicht mehr.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4enext',
+      learn:[
+        'Du verstehst, dass eine Automation nur aus <b>Auslöser und Aktion</b> besteht und deshalb zuverlässig ist.',
+        'Du hast vier Automationen gebaut, die im Alltag <b>tragen</b>.',
+        'Du kannst jede Idee einsortieren: immer gleich, mitdenken in Notion, oder <b>etwas von außen</b>.',
+        'Du fängst bei neuen Ideen <b>unten</b> an statt oben.'
+      ],
+      next:'/wiederkehrende-routinen-einrichten'
+    });
+  }
+  window.__ts4erest=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 4 · L4.6 "Wiederkehrende Routinen einrichten"
+   Slug: /wiederkehrende-routinen-einrichten   (Modul-Abschluss)
+   Erklaeranimation "Montag, sieben Uhr." — EIGENES Konzept: die Woche als sieben
+   Punkte, der Montag zuendet, waehrend der Rechner daneben dunkel bleibt, und aus
+   dem Impuls waechst die Berichtsseite Block fuer Block.
+   ============================================================ */
+(function(){
+  if(window.__ts4f) return;
+  function on(){ return /\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts4.hero({ img: window.__ts4.phHero('L 4.6'), alt:'Zeitgesteuerter Wochenbericht aus dem Backoffice',
+      eyebrow:'L 4.6', title:'Berichte <span class="ts-gold">kommen lassen</span>' });
+    window.__ts4.body('ts4f-intro',
+      '<p>Es gibt eine Sorte Arbeit, die nie dringend ist und deshalb nie passiert. Der Blick auf die Zahlen der Woche gehört dazu.</p>'+
+      '<p>Du hast dir in Lektion zwei die Auswertungen gebaut, sie funktionieren, und trotzdem lässt du sie nach drei Wochen nicht mehr laufen, weil montags immer etwas dazwischenkommt. Ich kenne das aus meinem eigenen Betrieb.</p>'+
+      '<p>Deshalb schließen wir dieses Modul mit dem Schritt ab, der aus einer guten Auswertung eine Gewohnheit macht: <b>Sie kommt von allein.</b></p>'
+    );
+  }
+  window.__ts4f=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4fanim) return;
+  function on(){ return /\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/.test(location.pathname); }
+
+  var DAYS=['Mo','Di','Mi','Do','Fr','Sa','So'];
+  var BLOCKS=[
+    {t:'Höchster Wareneinsatz', v:'5 Gerichte'},
+    {t:'Preise verändert',      v:'8 Zutaten'},
+    {t:'Unter Zielmarge',       v:'3 Gerichte'},
+    {t:'Fehlende Angaben',      v:'11 Zeilen'}
+  ];
+
+  var CSS=`
+  #ts4fanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts4fanim *{box-sizing:border-box}
+  #ts4fanim .mo-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts4fanim .mo-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts4fanim .mo-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts4fanim h2.mo-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts4fanim h2.mo-title .ts-gold{color:#c7b489}
+  #ts4fanim .mo-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  #ts4fanim .mo-wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  #ts4fanim .mo-top{display:grid;grid-template-columns:1fr 168px;gap:32px;align-items:center}
+  #ts4fanim .mo-week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  #ts4fanim .mo-d{position:relative;border-radius:10px;padding:11px 0 10px;text-align:center;
+    background:linear-gradient(rgba(255,255,255,.028),rgba(255,255,255,.028)),#05060b;border:1px solid rgba(255,255,255,.09);
+    font:600 11.5px/1 -apple-system,sans-serif;color:rgba(255,255,255,.4);
+    transition:border-color .5s ease,color .5s ease,box-shadow .5s ease,opacity .5s ease,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  #ts4fanim .mo-wrap.js .mo-d{opacity:0;transform:translateY(9px)}
+  #ts4fanim .mo-wrap.js .mo-d.in{opacity:1;transform:none}
+  #ts4fanim .mo-d i{display:block;margin:7px auto 0;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.16);transition:background .5s ease,box-shadow .5s ease}
+  #ts4fanim .mo-d.hit{border-color:rgba(199,180,137,.55);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.16),0 14px 30px -16px rgba(199,180,137,.5)}
+  #ts4fanim .mo-d.hit i{background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.9);animation:moPulse 1.8s ease-in-out infinite}
+  #ts4fanim .mo-time{margin:12px 0 0;text-align:center;font:600 10px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.36);
+    opacity:0;transition:opacity .5s ease}
+  #ts4fanim .mo-wrap.on .mo-time{opacity:1;color:#c7b489}
+
+  /* Der Rechner bleibt zu — das ist der Punkt der Lektion */
+  #ts4fanim .mo-mac{border-radius:12px;padding:16px 14px;text-align:center;
+    background:linear-gradient(rgba(255,255,255,.016),rgba(255,255,255,.016)),#05060b;border:1px dashed rgba(255,255,255,.14)}
+  #ts4fanim .mo-mac .lid{width:78px;height:8px;margin:0 auto 10px;border-radius:3px;background:rgba(255,255,255,.10)}
+  #ts4fanim .mo-mac b{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:12.5px;color:rgba(255,255,255,.5)}
+  #ts4fanim .mo-mac span{display:block;margin-top:4px;font:500 10px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.3)}
+
+  #ts4fanim .mo-drop{position:relative;height:34px;margin:6px 0 0}
+  #ts4fanim .mo-drop i{position:absolute;left:7.14%;top:0;width:1.5px;height:100%;background:linear-gradient(180deg,#c7b489,rgba(199,180,137,0));
+    transform:scaleY(0);transform-origin:top center;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  #ts4fanim .mo-wrap.on .mo-drop i{transform:scaleY(1)}
+
+  #ts4fanim .mo-page{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(rgba(255,255,255,.028),rgba(255,255,255,.028)),#05060b;
+    transition:border-color .6s ease,box-shadow .6s ease}
+  #ts4fanim .mo-wrap.done .mo-page{border-color:rgba(199,180,137,.4);box-shadow:0 20px 44px -24px rgba(199,180,137,.45)}
+  #ts4fanim .mo-page .hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+  #ts4fanim .mo-page .hd b{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14px;color:#fff}
+  #ts4fanim .mo-page .hd em{font-style:normal;font:600 10px/1 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+  #ts4fanim .mo-b{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-top:1px solid rgba(255,255,255,.055);
+    opacity:1;transform:none;transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1)}
+  #ts4fanim .mo-wrap.js .mo-b{opacity:0;transform:translateY(8px)}
+  #ts4fanim .mo-wrap.js .mo-b.in{opacity:1;transform:none}
+  #ts4fanim .mo-b .t{font-size:13.5px;color:rgba(255,255,255,.86)}
+  #ts4fanim .mo-b .v{font:700 13px/1 ui-monospace,Menlo,monospace;color:#efe6d2}
+  #ts4fanim .mo-page .ft{padding:10px 16px;border-top:1px solid rgba(255,255,255,.055);
+    font:600 10px/1.4 -apple-system,sans-serif;letter-spacing:.06em;color:rgba(255,255,255,.34);text-align:center;opacity:0;transition:opacity .5s ease}
+  #ts4fanim .mo-wrap.done .mo-page .ft{opacity:1}
+
+  #ts4fanim .mo-cap{max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);min-height:52px}
+  #ts4fanim .mo-cap b{color:#c7b489;font-weight:600}
+  #ts4fanim .mo-foot{display:flex;justify-content:center;margin-top:14px}
+  #ts4fanim .mo-replay{height:34px;padding:0 17px;border-radius:9999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.10);
+    color:#efe6d2;font:600 11.5px/1 -apple-system,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .3s ease,color .3s ease}
+  #ts4fanim .mo-replay:hover{background:#c7b489;color:#05060b}
+  @keyframes moPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  @media(max-width:820px){ #ts4fanim .mo-top{grid-template-columns:1fr;gap:18px} #ts4fanim .mo-drop{display:none} #ts4fanim .mo-week{gap:5px} }
+  @media(prefers-reduced-motion:reduce){ #ts4fanim .mo-wrap.js .mo-d,#ts4fanim .mo-wrap.js .mo-b{opacity:1;transform:none} #ts4fanim .mo-d.hit i{animation:none} }
+  `;
+
+  function html(){
+    var days=DAYS.map(function(d,i){ return '<div class="mo-d" data-i="'+i+'">'+d+'<i></i></div>'; }).join('');
+    var bl=BLOCKS.map(function(b,i){ return '<div class="mo-b" data-i="'+i+'"><span class="t">'+b.t+'</span><span class="v">'+b.v+'</span></div>'; }).join('');
+    return `
+<div class="mo-head">
+  <span class="mo-eyebrow">Ohne dass du daran denkst</span>
+  <h2 class="mo-title">Montag, sieben <span class="ts-gold">Uhr</span>.</h2>
+  <p class="mo-sub">Die Routine läuft nicht auf deinem Rechner. Sie läuft, während er zugeklappt im Büro liegt und du im Service stehst.</p>
+</div>
+<div class="mo-wrap">
+  <div class="mo-top">
+    <div>
+      <div class="mo-week">${days}</div>
+      <p class="mo-time">07:00 · automatisch</p>
+    </div>
+    <div class="mo-mac"><span class="lid"></span><b>Dein Rechner</b><span>zugeklappt</span></div>
+  </div>
+  <div class="mo-drop"><i></i></div>
+  <div class="mo-page">
+    <div class="hd"><b>Wochenblick</b><em>Key Metrics</em></div>
+    ${bl}
+    <div class="ft">Nur gelesen. In den Datenbanken wurde nichts geändert.</div>
+  </div>
+  <p class="mo-cap"></p>
+  <div class="mo-foot"><button class="mo-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+  function cap(root,h){ var c=root.querySelector('.mo-cap'); if(c) c.innerHTML=h; }
+
+  function play(root){
+    var wrap=root.querySelector('.mo-wrap'); if(!wrap) return;
+    clear(); wrap.classList.remove('on','done'); wrap.classList.add('js');
+    var ds=root.querySelectorAll('.mo-d'), bs=root.querySelectorAll('.mo-b');
+    for(var i=0;i<ds.length;i++){ ds[i].classList.remove('in','hit'); }
+    for(var j=0;j<bs.length;j++){ bs[j].classList.remove('in'); }
+    cap(root,'');
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on','done');
+      for(var a=0;a<ds.length;a++) ds[a].classList.add('in');
+      ds[0].classList.add('hit');
+      for(var b=0;b<bs.length;b++) bs[b].classList.add('in');
+      cap(root,'Montags früh liegt der Bericht da. <b>Gelesen, nicht geändert.</b>');
+      return;
+    }
+    void wrap.offsetWidth;
+    for(var n=0;n<ds.length;n++){ (function(x){ later(function(){ ds[x].classList.add('in'); }, 160+x*90); })(n); }
+    later(function(){ cap(root,'Eine Routine ist derselbe Auftrag wie in Lektion zwei, nur an eine Uhrzeit gehängt.'); }, 700);
+    later(function(){ ds[0].classList.add('hit'); wrap.classList.add('on'); cap(root,'Sie läuft nicht bei dir, sondern auf der anderen Seite. Dein Rechner darf <b>aus sein</b>.'); }, 1500);
+    for(var m=0;m<bs.length;m++){ (function(x){ later(function(){ bs[x].classList.add('in'); }, 2500+x*400); })(m); }
+    later(function(){
+      wrap.classList.add('done');
+      cap(root,'Was du vorfindest, ist eine Seite, die du im Stehen liest, und drei bis fünf Punkte, bei denen du entscheidest, ob du etwas tust. Sie <b>berichtet nur</b>. Ändern darf sie nichts, denn hier sitzt niemand davor, der die Vorschau prüft.');
+    }, 4300);
+  }
+
+  function build(){ var el=document.createElement('div'); el.id='ts4fanim'; el.innerHTML=html();
+    el.querySelector('.mo-replay').addEventListener('click',function(){ play(el); }); return el; }
+  function injectCSS(){ if(document.getElementById('ts4fanim-css'))return;
+    var s=document.createElement('style'); s.id='ts4fanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts4fanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts4fanim')) return;
+    var anchor=document.getElementById('ts4f-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS(); var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.mo-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts4fanim .mo-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts4fanim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts4fanimKill=function(){ clear(); };
+  window.__ts4fanim=true; mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+(function(){
+  if(window.__ts4frest) return;
+  function on(){ return /\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return; if(!window.__ts4) return;
+    if(!document.getElementById('ts4fanim')) return;
+
+    window.__ts4.sec('ts4f-bericht','ts4fanim',
+      '<h3>Dein <span class="g">Wochenbericht</span></h3>'+
+      '<p class="lead">Bis jetzt hast du Claude Code jedes Mal selbst gestartet. Eine Routine ist derselbe Auftrag, nur an eine Uhrzeit gehängt — und sie läuft nicht auf deinem Rechner.</p>'+
+      '<p>Du legst sie mit <span class="ts4-mono">/schedule</span> an, sagst, was gemacht werden soll und wann, und danach kümmerst du dich nicht mehr darum. Wie oft eine Routine höchstens laufen darf, ist begrenzt; für einen Wochenbericht spielt das keine Rolle.</p>'+
+      '<div class="ts4-cmd"><button type="button">Kopieren</button><code>Jeden Montag um sieben Uhr: Geh in mein Notion-Backoffice und schreib eine neue Seite im Bereich Key Metrics mit dem Titel „Wochenblick" und dem Datum. Nimm ausschließlich Zahlen aus den Datenbanken, schätze nichts, und nenn zu jeder Zahl den Eintrag, aus dem sie stammt. Inhalt: die fünf Gerichte mit dem höchsten Wareneinsatz in Prozent. Alle Zutaten, deren Einkaufspreis sich seit der letzten Woche um mehr als fünf Prozent geändert hat, mit den betroffenen Gerichten. Alle Gerichte, deren Deckungsbeitrag unter meiner Zielmarge liegt. Alle Rezepturen und Zutaten mit fehlenden Pflichtangaben. Ändere nichts in den Datenbanken.</code></div>'+
+      '<p class="ts4-close">Was du montags früh vorfindest, ist eine Seite, die du im Stehen liest, und drei bis fünf Punkte, bei denen du entscheidest, ob du etwas tust. Nicht mehr, aber auch <b>nicht weniger</b>.</p>'
+    );
+
+    window.__ts4.sec('ts4f-regel','ts4f-bericht',
+      '<h3>Eine Routine <span class="g">berichtet</span>. Sie ändert nichts.</h3>'+
+      '<p class="lead">Das klingt streng, und es ist es auch. Der Grund ist einfach.</p>'+
+      '<p>Bei allem, was du bis hierher gemacht hast, saß ein Mensch davor und hat die Vorschau geprüft. Bei einer Routine sitzt niemand da. Wenn sie schreibt und etwas falsch versteht, merkst du es unter Umständen erst Wochen später, und dann ist die Kalkulation, auf die du dich verlässt, still verrutscht.</p>'+
+      '<p>Schreibende Routinen gibt es bei mir erst, wenn ein Ablauf über Monate von Hand gelaufen ist und ich genau weiß, wie er sich verhält. Fang mit Berichten an. Das ist keine Vorsicht aus Prinzip, das ist die Erfahrung aus einem System, in dem echte Zahlen stehen.</p>'+
+      '<div class="ts4-cards c3">'+
+        '<div class="ts4-card"><span class="ts4-eb">Variante 01</span><div class="ts4-nm">Monatsblick</div><hr>'+
+          '<p>Dieselben Kennzahlen über vier Wochen verglichen, damit du Bewegung siehst statt Momentaufnahmen.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Variante 02</span><div class="ts4-nm">Pflege-Bericht</div><hr>'+
+          '<p>Wo in deinem System Lücken entstanden sind, weil im Alltag jemand eine Zeile halb angelegt hat.</p></div>'+
+        '<div class="ts4-card"><span class="ts4-eb">Variante 03</span><div class="ts4-nm">Karten-Check</div><hr>'+
+          '<p>Vor jedem saisonalen Wechsel: welche Gerichte mit den aktuellen Einkaufspreisen nicht mehr aufgehen.</p></div>'+
+      '</div>'+
+      '<div class="ts4-do"><span class="ts4-eb">Die ersten vier Wochen</span><ol>'+
+        '<li>Jeden Bericht bewusst <b>ansehen</b>, nicht überfliegen.</li>'+
+        '<li>Zwei, drei Zahlen von Hand in der Datenbank <b>gegenprüfen</b>.</li>'+
+        '<li>Kommt dir etwas komisch vor, liegt es fast immer am <b>Auftrag</b>, nicht am Werkzeug.</li>'+
+        '<li>Auftrag nachschärfen. Nach einem Monat weißt du, ob du dem Bericht trauen kannst.</li>'+
+      '</ol></div>'+
+      '<p class="ts4-close">Damit ist dieses Modul rund: Du fragst dein Backoffice in normaler Sprache und bekommst belegte Zahlen. Du lässt es sich selbst aktualisieren, mit einer Prüf-Schleife dazwischen. Ein Agent nimmt dir in Notion die Vorarbeit ab, Automationen erledigen das, was immer gleich ist, und montags früh liegt ein Bericht bereit, um den du dich nicht gekümmert hast. Gebraucht hast du dafür <b>eine Verbindung und ein paar klare Regeln</b>.</p>'
+    );
+
+    window.__ts4.emp({
+      id:'ts4femp', anchorId:'ts4f-regel', kind:'Einrichtung',
+      animTitle:'Vier Schritte zur ersten', animGold:'Routine',
+      steps:[{n:'01',l:'Auftrag schreiben'},{n:'02',l:'Zeit festlegen'},{n:'03',l:'Einmal von Hand testen'},{n:'04',l:'Vier Wochen prüfen'}],
+      intro:'So richte ich jede neue Routine ein. Der dritte Schritt ist der, den die meisten überspringen, und genau der verhindert, dass du eine Woche auf einen Bericht wartest, der nie kommt.',
+      points:[
+        'Nimm den <b>Auftrag aus dieser Lektion</b> und schneide ihn auf deinen Betrieb zu, vor allem die Zielmarge.',
+        'Leg die Zeit so, dass du den Bericht auch <b>liest</b>. Montag sieben Uhr, wenn du früh anfängst, sonst später.',
+        'Lös sie einmal <b>von Hand aus</b>, statt bis Montag zu warten, und schau dir die entstandene Seite an.',
+        'Prüf vier Wochen lang zwei Zahlen gegen. Danach liest du den Bericht einfach nur noch.'
+      ]
+    });
+
+    window.__ts4.learn({
+      id:'ts4fnext',
+      learn:[
+        'Du kannst eine <b>zeitgesteuerte Routine</b> anlegen, die auch läuft, wenn dein Rechner aus ist.',
+        'Du hast einen Wochenbericht, der <b>belegte Zahlen</b> liefert und nichts schätzt.',
+        'Du hältst dich an die Regel: Routinen <b>berichten</b>, sie ändern nicht.',
+        'Du prüfst die ersten vier Wochen gegen und schärfst den <b>Auftrag</b> nach.'
+      ],
+      next:'/modul-5-claude-code-notion'
+    });
+  }
+  window.__ts4frest=true; mount();
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
