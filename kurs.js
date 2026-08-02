@@ -27876,7 +27876,7 @@ var TSISL_TEAM_ONB_V2=[
     text-align:center;
   }
   .ts-body h3{
-    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
     font-weight:600;letter-spacing:-.015em;color:#fff;
     font-size:clamp(25px,2.8vw,32px);line-height:1.2;
     margin:32px 0 14px;
@@ -27966,8 +27966,8 @@ var TSISL_TEAM_ONB_V2=[
   #tsws1next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsws1next *{box-sizing:border-box}
   #tsws1next .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws1next .tsl-eyebrow{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws1next .tsl-title{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #tsws1next .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #tsws1next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
   #tsws1next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
   #tsws1next .tsl-cell{display:flex;justify-content:center}
   #tsws1next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
@@ -28042,7 +28042,7 @@ var TSISL_TEAM_ONB_V2=[
     text-align:center;
   }
   .ts-body h3{
-    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
     font-weight:600;letter-spacing:-.015em;color:#fff;
     font-size:clamp(25px,2.8vw,32px);line-height:1.2;
     margin:32px 0 14px;
@@ -28133,8 +28133,8 @@ var TSISL_TEAM_ONB_V2=[
   #tsws2next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
   #tsws2next *{box-sizing:border-box}
   #tsws2next .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws2next .tsl-eyebrow{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws2next .tsl-title{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #tsws2next .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #tsws2next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
   #tsws2next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
   #tsws2next .tsl-cell{display:flex;justify-content:center}
   #tsws2next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
