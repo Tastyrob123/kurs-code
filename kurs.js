@@ -6337,7 +6337,7 @@
   #tsalgcart .tsac-bar__cap{font-size:12.5px;letter-spacing:.05em;color:rgba(255,255,255,.6);margin:0 0 8px}
   #tsalgcart .tsac-bar__cap b{color:#fff}
   #tsalgcart .tsac-bar__track{position:relative;height:8px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
-  #tsalgcart .tsac-bar__fill{position:relative;height:100%;width:0;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 10px rgba(${GRN},.5),inset 0 1px 0 rgba(255,255,255,.3);transition:width .7s cubic-bezier(.22,1,.36,1)}
+  #tsalgcart .tsac-bar__fill{position:relative;height:100%;width:0;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#e35d76,#e32552);box-shadow:0 0 10px rgba(227,37,82,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:width .7s cubic-bezier(.22,1,.36,1)}
   #tsalgcart .tsac-bar__fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:translateX(-100%);animation:tsac-sheen 3.4s ease-in-out infinite}
   @keyframes tsac-sheen{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
   #tsalgcart .tsac-bar__num{flex:none;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.3rem;color:#efe6d2;font-variant-numeric:tabular-nums}
@@ -7454,6 +7454,14 @@
     if(li) hide(li.closest('.notion-bulleted-list'));
     var tl=document.getElementById('tslink'); if(tl) tl.classList.add('ts-invcut-hide');
     hide(findText('.page__inventurliste .notion-text', /Dazu kommen wir in den jeweiligen Lektionen/));
+    /* Anker fuer den Ersatz-Warenkorb "Monatliche Inventurliste" (tsshop mountet an #tsinvmwk) —
+       sitzt exakt an der Stelle der ausgeblendeten Sektion (vor deren Heading-Block). */
+    var h2=findText('.page__inventurliste .notion-heading', /Was uns jetzt noch fehlt/);
+    if(h2 && !document.getElementById('tsinvmwk')){
+      var anch=document.createElement('div'); anch.id='tsinvmwk';
+      var blk=h2.closest('[id^="block-"]')||h2;
+      blk.parentNode.insertBefore(anch, blk);
+    }
   }
   apply();
   var _t=null;
@@ -8491,6 +8499,35 @@
         { name:'Oregano',           wert:2.40, img:'https://tastyrob123.github.io/kurs/img/inventar/oregano.webp' },
         { name:'Paprika Edelsüß',   wert:3.10, img:'https://tastyrob123.github.io/kurs/img/inventar/paprika-edelsuess.jpg' },
         { name:'Weißweinessig',     wert:3.60, img:'https://tastyrob123.github.io/kurs/img/inventar/weissweinessig.jpg' }
+      ]},
+    { kachel_id:'inventur_monat', kachel_name:'Monatliche Inventurliste', ist_produkt_kachel:true,
+      einheit:'Inventurwert (€)', einheit_typ:'preis',
+      /* 23 Trockenlager-/Vorrats-Artikel — Werte = BEISPIELWERTE (Inventurwerte je Karte).
+         Bilder folgen (Higgsfield, Stil der anderen Warenkörbe) -> ph()-Platzhalter. */
+      objekt_varianten:[
+        { name:'Haferflocken',        wert:38.00 },
+        { name:'Reis',                wert:155.00 },
+        { name:'Spaghetti',           wert:22.00 },
+        { name:'Thunfisch',           wert:37.00 },
+        { name:'Espressobohnen',      wert:29.80 },
+        { name:'Schwarzer Tee',       wert:80.00 },
+        { name:'Olivenöl',            wert:9.80 },
+        { name:'Balsamico',           wert:7.90 },
+        { name:'Meersalz',            wert:2.90 },
+        { name:'Schwarzer Pfeffer',   wert:4.80 },
+        { name:'Tomatenmark',         wert:1.90 },
+        { name:'Dijon-Senf',          wert:3.80 },
+        { name:'Honig',               wert:6.40 },
+        { name:'Sojasauce',           wert:4.20 },
+        { name:'Chilisauce',          wert:4.50 },
+        { name:'Mayonnaise',          wert:5.60 },
+        { name:'Cornichons',          wert:3.20 },
+        { name:'Sardellen',           wert:5.90 },
+        { name:'Oregano',             wert:2.40 },
+        { name:'Paprika Edelsüß',     wert:3.10 },
+        { name:'Kichererbsen',        wert:12.40 },
+        { name:'Kokosmilch',          wert:18.60 },
+        { name:'Weißweinessig',       wert:3.60 }
       ]},
     { kachel_id:'db4_zutaten', kachel_name:'Zutaten', ist_produkt_kachel:true,
       einheit:'Portionsgröße (g)', einheit_typ:'menge_g',
@@ -9757,6 +9794,85 @@ var TSISL_TEAM_ONB_V2=[
     {title:'5. Native Automation (Trigger & Actions)', desc:'Datenbank reagiert selbst auf Änderungen, ganz ohne Button-Klick.', html:'<p class="notion-text">→ <b>Trigger :</b> „Wenn Status sich ändert zu Erledigt"</p><p class="notion-text">→ <b>Aktion :</b> Erledigt-Datum setzen / Benachrichtigung senden</p><p class="notion-text">Anders als ein Button braucht eine native Automation keinen Klick — sie reagiert von selbst, sobald die Bedingung eintritt.</p>'}
   ];
 
+  /* Inventurliste — Warenkorb 2: Monatliche Inventurliste (Klon der DB 0).
+     Engine-generiert 2026-08-02 aus dem echten Notion-Schema (CDP-Sniff,
+     Collection fa8b9546-5534-8263-976f-078b8f0b37ec "Inventurliste 01-2026");
+     Formel "Summe Monat 01.26" VERBATIM (fpp-Referenzen zu prop("…") aufgelöst;
+     unsichtbares Trailing-Space in "Preis / Stck " bewusst normalisiert, damit
+     Spaltenname und Formel beim Nachbau zusammenpassen). Button-Property der
+     Original-DB bewusst ohne Karte (Zweck unklar — KLÄREN). */
+  var TSINVM_STEPS=[
+    {title:'1. Datenbank anlegen',
+     desc:'Drücke / und wähle „Tabellenansicht – Datenbank“ — eine neue, leere Tabelle. → Name der Datenbank : Inven',
+     html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo; — eine neue, leere Tabelle.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Inventurliste 01-2026</p><p class="notion-text">Eine Tabelle steht für genau einen Monat. Für den Februar legst du später denselben Klon noch einmal an — so bleibt jede Inventur ein sauberer Stichtag.</p>'},
+    {title:'2. Namen übernehmen',
+     desc:'→ Eigenschaft : Titel → Name der Spalte : Name Öffne deine Inventurliste und kopiere die Namen-Spalte ein',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> Name</p><p class="notion-text">Öffne deine Inventurliste und kopiere die Namen-Spalte einmal von oben bis unten. Wechsle in die neue Tabelle, wähle die erste leere Zeile aus und füge alles mit <b>Cmd/Strg + V</b> ein — jede Zeile wird ein eigener Artikel.</p>'},
+    {title:'3. Verknüpfung',
+     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB 0 : Inventurliste → Name der Spalte : Verknüpfung Jetzt',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB 0 : Inventurliste</p><p class="notion-text">→ <b>Name der Spalte :</b> Verknüpfung</p><p class="notion-text">Jetzt verbindest du jeden Artikel mit seinem Original in der Inventurliste. Entweder Zeile für Zeile von Hand — oder du sagst <b>Notion AI</b>, er soll alle Einträge anhand des Namens verknüpfen, und prüfst danach kurz das Ergebnis.</p>'},
+    {title:'4. Herstellerbezeichnung',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Herstellerbezeichnung → Berechnen : Or',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Herstellerbezeichnung</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Herstellerbezeichnung</p><p class="notion-text">Zieht die Herstellerbezeichnung aus der verknüpften Inventurliste — beim Zählen siehst du sofort, welches Produkt gemeint ist.</p>'},
+    {title:'5. Artikelnummer',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Artikelnummer → Berechnen : Original a',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Artikelnummer</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Artikelnummer</p><p class="notion-text">Zieht die Artikelnummer aus der Inventurliste in deine Monats-Tabelle.</p>'},
+    {title:'6. Menge / Unit',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Menge / Unit → Berechnen : Original an',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Menge / Unit</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Menge / Unit</p><p class="notion-text">Zeigt dir die Gebindegröße des Artikels, bspw. 10 kg oder 100 Stück — wichtig, um beim Zählen die richtige Spalte zu treffen.</p>'},
+    {title:'7. Preis / KG',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / KG → Berechnen : Original anze',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / KG</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / KG</p><p class="notion-text">Zieht den aktuellen Kilo-Preis aus der Inventurliste. Mit ihm rechnet später die Monats-Formel.</p>'},
+    {title:'8. Preis / Ltr.',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / Ltr. → Berechnen : Original an',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Ltr.</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Ltr.</p><p class="notion-text">Zieht den Liter-Preis aus der Inventurliste — für alles, was du in Litern zählst.</p>'},
+    {title:'9. Preis / Stck',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis / Stck → Berechnen : Original an',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis / Stck</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis / Stck</p><p class="notion-text">Zieht den Stück-Preis aus der Inventurliste — für alles, was du in Stück zählst.</p>'},
+    {title:'10. Preis pro Unit (€)',
+     desc:'→ Eigenschaft : Rollup → Verknüpfung : Verknüpfung → Eigenschaft : Preis pro Unit (€) → Berechnen : Origi',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> Verknüpfung</p><p class="notion-text">→ <b>Eigenschaft :</b> Preis pro Unit (€)</p><p class="notion-text">→ <b>Berechnen :</b> Original anzeigen</p><p class="notion-text">→ <b>Name der Spalte :</b> Preis pro Unit (€)</p><p class="notion-text">Zieht den Preis pro Gebinde aus der Inventurliste — für alles, was du in ganzen Units zählst.</p>'},
+    {title:'11. Lieferant',
+     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB I : Lieferpartner → Name der Spalte : Lieferant Verbind',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB I : Lieferpartner</p><p class="notion-text">→ <b>Name der Spalte :</b> Lieferant</p><p class="notion-text">Verbindet den Artikel mit seinem Lieferpartner. Praktisch, wenn du beim Zählen merkst, dass etwas nachbestellt werden muss.</p>'},
+    {title:'12. Ist Zutat',
+     desc:'→ Eigenschaft : Verknüpfung → Ziel-Datenbank → DB IV : Zutaten → Name der Spalte : Ist Zutat Verbindet de',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Verknüpfung → Ziel-Datenbank → DB IV : Zutaten</p><p class="notion-text">→ <b>Name der Spalte :</b> Ist Zutat</p><p class="notion-text">Verbindet den Artikel mit seiner Zutat aus DB IV. Wenn du die Spalte im Alltag nicht brauchst, kannst du sie später einfach ausblenden.</p>'},
+    {title:'13. Kategorie',
+     desc:'→ Eigenschaft : Auswählen → Name der Spalte : Kategorie Trage diese Auswahlmöglichkeiten ein : Food · Bev',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Kategorie</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text">Food · Beverage · Packaging · Hygiene</p><p class="notion-text">Damit kannst du die fertige Inventur nach Warengruppen auswerten — bspw. der gesamte Food-Bestand auf einen Blick.</p>'},
+    {title:'14. Lagerort',
+     desc:'→ Eigenschaft : Text → Name der Spalte : Lagerort → Du trägst hier ein : wo der Artikel liegt, bspw. Troc',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Lagerort</p><p class="notion-text">→ <b>Du trägst hier ein :</b> wo der Artikel liegt, bspw. Trockenlager Regal A. Danach kannst du die Tabelle nach Lagerort gruppieren und läufst beim Zählen einfach Regal für Regal ab.</p>'},
+    {title:'15. Gezählt Ltr./KG',
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Ltr./KG',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Ltr./KG</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Menge in Litern oder Kilo, bspw. 25 für einen vollen Sack Reis.</p>'},
+    {title:'16. Gezählt Stck',
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Stck → ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Stck</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die gezählte Stückzahl, bspw. 14 Dosen.</p>'},
+    {title:'17. Gezählt Unit',
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Zahl → Name der Spalte : Gezählt Unit → ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Zahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Gezählt Unit</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Anzahl ganzer Gebinde, bspw. 2 ungeöffnete Kartons. Pro Artikel füllst du nur die Gezählt-Spalte, die zu seiner Einheit passt — die anderen beiden bleiben leer.</p>'},
+    {title:'18. Summe Monat 01.26',
+     desc:'→ Eigenschaft : Formel → Name der Spalte : Summe Monat 01.26 Trage diese Formel ein : /* Ltr. / KG Block ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Summe Monat 01.26</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">/* Ltr. / KG Block - calculates value based on weight or volume */<br>ifs(<br>&nbsp;&nbsp;/* If price per KG exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / KG&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / KG&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / KG&quot;).first()),<br><br>&nbsp;&nbsp;/* If price per Liter exists and is greater than 0 */<br>&nbsp;&nbsp;prop(&quot;Preis / Ltr.&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Ltr.&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Ltr./KG&quot;)) * toNumber(prop(&quot;Preis / Ltr.&quot;).first()),<br><br>&nbsp;&nbsp;/* Default case returns 0 */<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Stück-Block - calculates value based on piece count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis / Stck&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis / Stck&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Stck&quot;)) * toNumber(prop(&quot;Preis / Stck&quot;).first()),<br>&nbsp;&nbsp;0<br>)<br>+<br>/* Unit-Block - calculates value based on unit count */<br>ifs(<br>&nbsp;&nbsp;prop(&quot;Preis pro Unit (€)&quot;).length() &gt; 0 and toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()) &gt; 0,<br>&nbsp;&nbsp;toNumber(prop(&quot;Gezählt Unit&quot;)) * toNumber(prop(&quot;Preis pro Unit (€)&quot;).first()),<br>&nbsp;&nbsp;0<br>)</div><p class="notion-text">Diese Spalte ist eine <b>Formel</b> — du trägst hier nichts von Hand ein. Sie nimmt deine gezählte Menge, multipliziert sie mit dem passenden Preis aus der Inventurliste und zeigt den Warenwert der Zeile.</p>'},
+    {title:'19. Wert 01.26 (fix)',
+     desc:'→ Eigenschaft : Nummer → Eigenschaft bearbeiten - Zahlenformat : Euro → Name der Spalte : Wert 01.26 (fix',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten -</p><p class="notion-text"><b>Zahlenformat :</b> Euro</p><p class="notion-text">→ <b>Name der Spalte :</b> Wert 01.26 (fix)</p><p class="notion-text">Die Formel daneben bleibt beweglich: Ändert sich später ein Preis in der Inventurliste, ändert sich ihr Ergebnis rückwirkend mit. Eine Inventur soll aber ein Stichtag bleiben. In diese Spalte kommt deshalb der eingefrorene Januar-Wert — befüllt wird sie gleich vom Agenten, nicht von dir.</p>'},
+    {title:'20. Zuletzt aktualisiert',
+     desc:'→ Eigenschaft : Datum → Name der Spalte : Zuletzt aktualisiert → Du trägst hier ein : den Tag, an dem du ',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Zuletzt aktualisiert</p><p class="notion-text">→ <b>Du trägst hier ein :</b> den Tag, an dem du die Zeile gezählt hast — so siehst du bei einer Unterbrechung sofort, wo du stehengeblieben bist.</p>'},
+    {title:'21. Notizen',
+     desc:'→ Eigenschaft : Text → Name der Spalte : Notizen → Du trägst hier ein : Auffälligkeiten beim Zählen, bspw',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Notizen</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Auffälligkeiten beim Zählen, bspw. eine beschädigte Verpackung oder einen Zählwert, den du noch prüfen willst.</p>'},
+    {title:'22. Ansicht einrichten',
+     desc:'Ordne die Spalten so an, wie du sie beim Zählen brauchst: die drei Gezählt -Spalten und Summe Monat 01.26',
+     html:'<p class="notion-text">Ordne die Spalten so an, wie du sie beim Zählen brauchst: die drei <b>Gezählt</b>-Spalten und <b>Summe Monat 01.26</b> nach links, daneben Name, Herstellerbezeichnung und Menge / Unit, die Preise dahinter.</p><p class="notion-text">Alles, was beim Zählen nicht hilft, blendest du aus — bspw. Notizen oder die Verknüpfung selbst. Die Daten bleiben erhalten, nur die Ansicht wird ruhig.</p><p class="notion-text">Gruppiere die Tabelle nach <b>Lagerort</b>, und du bekommst pro Regal einen eigenen Abschnitt.</p>'},
+    {title:'23. Autofill-Agent : Fix-Wert Füller',
+     desc:'Zum Schluss richtest du den Notion-AI-Agenten ein, der deine Januar-Werte einfriert. → Öffne die Datenban',
+     html:'<p class="notion-text">Zum Schluss richtest du den Notion-AI-Agenten ein, der deine Januar-Werte einfriert.</p><p class="notion-text">→ Öffne die Datenbank Inventurliste 01-2026</p><p class="notion-text">→ Erstelle einen neuen <b>Autofill-Agenten</b> und nenne ihn &bdquo;Inventur 01.26 Fix-Wert Füller&ldquo;</p><p class="notion-text">→ <b>Zielfeld :</b> Wert 01.26 (fix)</p><p class="notion-text">→ <b>Aufgabe :</b> &bdquo;Kopiere pro Zeile den Wert aus ‚Summe Monat 01.26‘ exakt in ‚Wert 01.26 (fix)‘ und ändere sonst nichts.&ldquo;</p><p class="notion-text">Teste ihn erst an 2&ndash;3 Zeilen, dann lässt du ihn über die ganze Liste laufen. Prüfe danach kurz: keine leeren Fix-Werte, keine auffälligen 0,00-€-Zeilen.</p><p class="notion-text">Ab jetzt liest deine Auswertung nur noch <b>Wert 01.26 (fix)</b> — der Januar bleibt Januar, egal was sich später an Preisen oder Verknüpfungen ändert. Und der Endbestand Januar ist zugleich dein Anfangsbestand Februar für den Wareneinsatz.</p>'}
+  ];
+
   var PAGES=[
     /* Lektion 1.7 (Modul 1) — Buttons & Automationen, kleiner Warenkorb. Notion-Seite leer -> Config-Steps. */
     { path:/\/automations-buttons\/?$/, kachel:'m1_buttons',
@@ -9969,6 +10085,14 @@ var TSISL_TEAM_ONB_V2=[
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie ist die <b>Gegenspalte</b> der Verknüpfung „Packaging", die du erst in <b>DB XI : Gerichte &amp; Getränke</b> anlegst — dort wählst du je Gericht die passende Verpackung, und ihr Preis fließt in den Wareneinsatz. Ist die Verbindung wechselseitig, taucht „Packaging / Co." hier automatisch auf und zeigt, welche Gerichte diese Verpackung nutzen.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Die Verpackung selbst liegt als normales Produkt in deiner Inventurliste — die „Packaging"-Seite ist nur eine gefilterte Ansicht davon.</p>' }
       ],
       summary:'Stückpreis', chain:true },
+    /* Inventurliste — Warenkorb 2: Monatliche Inventurliste (Robert 02.08.2026). Ersatz für die
+       ausgeblendete Sektion "Was uns jetzt noch fehlt"; Anker-Div legt __tsInvCut an. */
+    { path:/\/inventurliste\/?$/, kachel:'inventur_monat',
+      anchorSel:'#tsinvmwk', steps:TSINVM_STEPS,
+      eyebrow:'Monats-Inventur : Klon der Inventurliste',
+      title:'Die <span>monatliche Inventurliste</span>.',
+      sub:'Ein Klon deiner Inventurliste, gebaut fürs Zählen: eine Tabelle pro Monat, die Stammdaten kommen über die Verknüpfung aus DB 0, und am Ende friert ein Notion-AI-Agent den Monatswert ein — die Währung ist der Inventurwert in Euro.',
+      summary:'Inventurwert', chain:true },
     { path:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, kachel:'db13_lieferanten',
       marker:/Kundennummer/,
       eyebrow:'DB I : Lieferpartner',
@@ -10066,7 +10190,7 @@ var TSISL_TEAM_ONB_V2=[
   #tsshop .tss-bar__cap{font-size:11px;font-weight:600;letter-spacing:.01em;color:#c7b489;margin-top:10px;white-space:nowrap}
   #tsshop .tss-bar__mid{flex:1 1 auto;min-width:0}
   #tsshop .tss-bar__track{position:relative;height:6px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 1px 2px rgba(0,0,0,.45);overflow:hidden}
-  #tsshop .tss-bar__fill{position:relative;height:100%;width:0;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#5FAE88,#9FD3B9);box-shadow:0 0 10px rgba(143,203,170,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:width .7s cubic-bezier(.22,1,.36,1)}
+  #tsshop .tss-bar__fill{position:relative;height:100%;width:0;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#e35d76,#e32552);box-shadow:0 0 10px rgba(227,37,82,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:width .7s cubic-bezier(.22,1,.36,1)}
   #tsshop .tss-bar__fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:translateX(-100%);animation:tss-sheen 3.4s ease-in-out infinite}
   @keyframes tss-sheen{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
   #tsshop .tss-bar__mid-cap{display:flex;justify-content:space-between;gap:12px;margin-top:11px;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.4)}
@@ -10321,7 +10445,7 @@ var TSISL_TEAM_ONB_V2=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
+  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:23, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
   ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:10, m1_buttons:5, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
