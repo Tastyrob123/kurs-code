@@ -4351,7 +4351,17 @@ window.__tsMO = function(cb){
     { re:/\/lektionen\/texte-definieren\/?$/, href:'/lektionen/schriftarten-anpassen' },
     { re:/\/lektionen\/schriftarten-anpassen\/?$/, href:'/lektionen/online-hosten' },
     { re:/\/lektionen\/online-hosten\/?$/, href:'/lektionen/mobil-check' },
-    { re:/\/lektionen\/mobil-check\/?$/, href:'/modul-6-ai-website-building' }
+    { re:/\/lektionen\/mobil-check\/?$/, href:'/modul-6-ai-website-building' },
+    /* Modul 3 - Claude Grundlagen (L3.1-L3.7, gebaut 02.08.2026).
+       PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
+       den von #ts3?next gebauten Weiter-Button wieder. */
+    { re:/\/was-ist-claude-genau\/?$/, href:'/welches-claude-wann-chatcoworkcodeapi' },
+    { re:/\/welches-claude-wann-chatcoworkcodeapi\/?$/, href:'/claude-plne-preis' },
+    { re:/\/claude-plne-preis\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
+    { re:/\/claude-nutzung-erklrt-6-konzepte\/?$/, href:'/claude-interface-durchlauf' },
+    { re:/\/claude-interface-durchlauf\/?$/, href:'/stack-aufrumen' },
+    { re:/\/stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
+    { re:/\/der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -31168,6 +31178,2772 @@ var TSISL_TEAM_ONB_V2=[
 
   function mount(){ mountHero(); mountL(); }
   window.__tsws12=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+/* ============================================================
+   MODUL 3 · CLAUDE GRUNDLAGEN — gemeinsame Bausteine (__ts3)
+   ------------------------------------------------------------
+   Sieben Lektionen + Modul-Landing. Alle Seiten sind in Notion LEER,
+   der komplette Inhalt wird hier injiziert (Muster: Lektion 11 / Modul 6).
+
+   Was hier liegt (und NICHT je Seite dupliziert wird):
+     - phHero(label)  Platzhalter-Cover als data-URI (Abschnitts-Katalog 01: "BILD FOLGT")
+     - hero(cfg)      Abschnitt 01 Hero  (Werte in kurs.css, Block "MODUL 3 ... Heroes")
+     - body(id,html)  Abschnitt 01 Einleitung (.ts-body, 860px zentriert)
+     - sec(id,html)   Inhalts-Sektion (kein Katalog-Typ -> nutzt die .ts-body-h3-Spec)
+     - emp(cfg)       Abschnitt 07 Empfehlungs-Kachel, Verhalten 1:1 aus #tszein/#tspkemp
+     - learn(cfg)     Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Naechste Lektion")
+   Die ERKLAERANIMATION je Seite ist bewusst NICHT hier: Katalog-Regel
+   "jede Seite bekommt ein eigens konzipiertes Konzept, kein Recycling".
+
+   Robustheit ueberall: Endzustand = Default, Startzustand haengt an .js;
+   kein document.readyState als Gate; Observer nur ueber window.__tsMO.
+   ============================================================ */
+(function(){
+  if(window.__ts3) return;
+
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var DISP='"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif';
+
+  /* --- Platzhalter-Cover (Abschnitts-Katalog 01: echtes 3-Laptop-Cover folgt) --- */
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  /* --- gemeinsames CSS (einmal je Seite injiziert) --- */
+  var CSS=`
+  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};text-align:center}
+  .ts-body h3{font-family:${DISP};font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 10px;padding-left:22px;position:relative}
+  .ts-body li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#c7b489}
+  .ts-body li b,.ts-body p b{color:#c7b489;font-weight:600}
+
+  /* Inhalts-Sektion: 860px Lesespalte, Ueberschrift in der .ts-body-h3-Spec (keine erfundene Groesse) */
+  .ts3sec{max-width:860px;margin:72px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};color:#fff;box-sizing:border-box}
+  .ts3sec *{box-sizing:border-box}
+  .ts3sec h3{font-family:${DISP};font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:0 0 14px;text-align:center}
+  .ts3sec h3 .g{color:#c7b489}
+  .ts3sec p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .ts3sec p b{color:#c7b489;font-weight:600}
+  .ts3sec .lead{text-align:center;max-width:720px;margin:0 auto 30px}
+  .ts3sec a{color:#c7b489;text-decoration:none;border-bottom:1px solid rgba(199,180,137,.4);transition:border-color .3s ease}
+  .ts3sec a:hover{border-color:#c7b489}
+
+  /* Karten-Anatomie nach Abschnitts-Katalog 02 (Micro-Eyebrow -> Name -> Trennlinie -> Text) */
+  .ts3-cards{display:grid;gap:16px;margin:0 0 8px}
+  .ts3-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .ts3-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .ts3-card{background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:20px 20px 18px;
+    transition:border-color .4s ease,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s ease}
+  .ts3-card:hover{border-color:rgba(199,180,137,.45);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.75),0 0 28px rgba(199,180,137,.12)}
+  .ts3-eb{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:11px}
+  .ts3-nm{font-family:${DISP};font-weight:600;font-size:17px;line-height:1.25;color:#fff;margin:0 0 11px}
+  .ts3-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 11px}
+  .ts3-card p{font-size:14px;line-height:1.58;color:rgba(255,255,255,.86);margin:0 0 9px}
+  .ts3-card p:last-child{margin-bottom:0}
+  .ts3-foot{font-size:10px;line-height:1.4;color:rgba(255,255,255,.4);margin:10px 0 0}
+
+  /* "Jetzt du" — konkrete Handlungsanweisung am Ende einer Sektion */
+  .ts3-do{margin:26px 0 0;padding:22px 24px;border-radius:16px;border:1px solid rgba(199,180,137,.32);
+    background:linear-gradient(rgba(199,180,137,.055),rgba(199,180,137,.055)),#05060b}
+  .ts3-do .ts3-eb{margin-bottom:12px}
+  .ts3-do ol{list-style:none;counter-reset:d;margin:0;padding:0}
+  .ts3-do li{counter-increment:d;position:relative;padding:0 0 0 32px;margin:0 0 11px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.86)}
+  .ts3-do li:last-child{margin-bottom:0}
+  .ts3-do li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:2px;font:700 11px/1.5 ${SANS};color:#c7b489;font-variant-numeric:tabular-nums}
+  .ts3-do li b{color:#c7b489;font-weight:600}
+
+  /* Zeile mit Befehl/Pfad — Monospace, ohne Copy-Button (Befehle gehoeren in Modul 4) */
+  .ts3-mono{display:inline-block;font:600 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+    color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.28);border-radius:7px;padding:2px 8px}
+
+  /* Abschluss-Text einer Sektion (zentriert, 900px — Muster Abschnitt 03) */
+  .ts3-close{max-width:900px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  .ts3-close b{color:#c7b489;font-weight:600}
+
+  @media(max-width:820px){
+    .ts3-cards.c2,.ts3-cards.c3{grid-template-columns:1fr}
+  }
+  `;
+  function css(){
+    if(document.getElementById('ts3-css')) return;
+    var s=document.createElement('style'); s.id='ts3-css'; s.textContent=CSS; document.head.appendChild(s);
+  }
+
+  /* --- Abschnitt 01: Hero --- */
+  function hero(cfg){
+    var sc=document.querySelector('.super-content'); if(!sc) return null;
+    var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
+    css();
+    var h=document.createElement('div');
+    h.className='ts-hero';
+    h.innerHTML=
+      '<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+cfg.img+'" fetchpriority="high" decoding="async">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div>'+
+        '<h1 class="ts-hero__title">'+cfg.title+'</h1>'+
+      '</div>';
+    var nr=sc.querySelector('.notion-root');
+    if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+    return h;
+  }
+
+  /* --- Abschnitt 01: Einleitung --- */
+  function body(id, html){
+    if(document.getElementById(id)) return document.getElementById(id);
+    var sc=document.querySelector('.super-content'); if(!sc) return null;
+    var h=sc.querySelector('.ts-hero'); if(!h) return null;
+    css();
+    var w=document.createElement('div'); w.id=id;
+    w.innerHTML='<div class="ts-body">'+html+'</div>';
+    h.parentNode.insertBefore(w, h.nextSibling);
+    return w;
+  }
+
+  /* --- Inhalts-Sektion (haengt hinter einen beliebigen Anker) --- */
+  function sec(id, anchorId, html){
+    if(document.getElementById(id)) return document.getElementById(id);
+    var a=document.getElementById(anchorId); if(!a||!a.parentNode) return null;
+    css();
+    var w=document.createElement('div'); w.id=id; w.className='ts3sec';
+    w.innerHTML=html;
+    a.parentNode.insertBefore(w, a.nextSibling);
+    return w;
+  }
+
+  /* --- Abschnitt 07: Empfehlungs-Kachel (Verhalten 1:1 aus #tszein / #tspkemp) --- */
+  function empCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:${SANS};color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s ease}
+  #${id}.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  /* Nachfuehrung waehrend des Hovers: .16s ease-out (Katalog 07 Z.30). Die traege
+     .9s-Kurve gilt nur fuer den Scroll-Entrance, nicht fuer den Cursor-Tilt. */
+  #${id}.in.tilt{transition:transform .16s ease-out,opacity .9s ease}
+  #${id} *{box-sizing:border-box}
+  #${id}::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #${id}::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #${id}.glow::before{opacity:1}
+  #${id}.beat{animation:ts3empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  #${id} .emp-grid{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #${id} svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #${id} .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease,stroke-dashoffset .55s cubic-bezier(.16,1,.3,1)}
+  #${id} .emp-link path.on{opacity:1}
+  #${id} .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #${id} .emp-link circle.on{opacity:1}
+  #${id} .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #${id} .emp-anim-hd{font-family:${DISP};font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 6px}
+  #${id} .emp-anim-hd span{color:#c7b489}
+  #${id} .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
+  #${id}.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #${id}.in .emp-step:nth-child(2){transition-delay:.15s}#${id}.in .emp-step:nth-child(3){transition-delay:.28s}#${id}.in .emp-step:nth-child(4){transition-delay:.41s}#${id}.in .emp-step:nth-child(5){transition-delay:.54s}
+  #${id} .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #${id} .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #${id} .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #${id} .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #${id} .emp-step.on .emp-step-l{color:#fff}
+  #${id} .emp-text{position:relative;z-index:2}
+  #${id} .emp-h{font-family:${DISP};font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #${id} .emp-h .eg{color:#c7b489}
+  #${id} .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
+  #${id} .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #${id} .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.72);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #${id} .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #${id} .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  #${id} .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ #${id} .emp-grid{grid-template-columns:1fr;gap:26px} #${id} svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #${id}{transform:none;opacity:1} #${id} .emp-step{opacity:1;transform:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    /* Die Linie ZEICHNET sich (Katalog 07 Z.33) statt nur einzublenden. */
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+           void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+
+  function empSetup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ empDraw(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); if(!reduced) start(); } else { stop(); } },{threshold:.3});
+    io.observe(el);
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); });
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ empDraw(el); }); });
+    if(reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+  }
+
+  /* cfg: {id, anchorId, kind:'Nutzung'|'Einrichtung', animTitle, animGold, steps:[{n,l}], intro, points:[html]} */
+  function emp(cfg){
+    if(document.getElementById(cfg.id)) return;
+    var a=document.getElementById(cfg.anchorId); if(!a||!a.parentNode) return;
+    empCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    var steps=cfg.steps.map(function(s){ return '<div class="emp-step"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    var pts=cfg.points.map(function(p){ return '<li>'+p+'</li>'; }).join('');
+    el.innerHTML=
+      '<div class="emp-grid">'+
+        '<svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+        '<div class="emp-anim">'+
+          '<div class="emp-anim-hd">'+cfg.animTitle+' <span>'+cfg.animGold+'</span></div>'+steps+
+        '</div>'+
+        '<div class="emp-text">'+
+          '<h3 class="emp-h">Empfehlung zur <span class="eg">'+cfg.kind+'</span></h3>'+
+          '<p class="emp-intro">'+cfg.intro+'</p>'+
+          '<ol class="emp-ol">'+pts+'</ol>'+
+        '</div>'+
+      '</div>';
+    a.parentNode.insertBefore(el, a.nextSibling);
+    empSetup(el);
+  }
+
+  /* --- Abschnitt 09: Learnings-Orbs + "Naechste Lektion" --- */
+  function learnCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  #${id} *{box-sizing:border-box}
+  #${id} .tsl-head{text-align:center;margin-bottom:66px}
+  #${id} .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #${id} .tsl-title{font-family:${DISP};font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #${id} .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #${id} .tsl-cell{display:flex;justify-content:center}
+  #${id} .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #${id}.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
+  #${id} .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #${id}.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #${id}.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #${id}.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #${id}.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #${id}.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #${id} .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #${id} .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  #${id} .tsl-t b{color:#c7b489;font-weight:700}
+  #${id} #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #${id} #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #${id} #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #${id} #ts-next svg{width:16px;height:16px}
+  /* PFLICHT beim Kopieren des Musters: das Keyframe muss im EIGENEN Block liegen,
+     sonst stehen die Orbs still (Abschnitt 09, Keyframe-Mitnahme). */
+  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @media(max-width:1079px){ #${id} .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #${id} .tsl-grid{grid-template-columns:1fr} }
+  /* Spezifitaet: die Reduce-Regel muss #id.js.in .tsl-orb (0,1,3,0) schlagen, sonst schweben die Orbs weiter. */
+  @media(prefers-reduced-motion:reduce){ #${id}.js.in .tsl-orb, #${id} .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+
+  /* cfg: {id, learn:[html x4], next:'/slug'} */
+  function learn(cfg){
+    if(document.getElementById(cfg.id)) return;
+    var host=document.querySelector('.super-content'); if(!host) return;
+    if(!document.querySelector('.notion-root')) return;
+    learnCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    var orbs=cfg.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML=
+      '<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+orbs+'</div>'+
+      '<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
+    host.appendChild(el);
+    /* Zweite Haelfte der __tsNext-Falle: bei langer Ankerkette baut der globale Pager
+       seinen eigenen Button, bevor dieses Modul mountet -> jeden fremden Wrap entfernen. */
+    function dedupe(){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!el.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    }
+    dedupe();
+    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    el.classList.add('js');
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); },4000);
+  }
+
+  window.__ts3={ LOGO:LOGO, SANS:SANS, DISP:DISP, phHero:phHero, css:css, hero:hero, body:body, sec:sec, emp:emp, learn:learn };
+
+  /* Heartbeat-Keyframe der Empfehlungs-Kachel: EINMAL global, wird von allen Modul-3-Seiten genutzt. */
+  (function(){
+    if(document.getElementById('ts3-kf')) return;
+    var s=document.createElement('style'); s.id='ts3-kf';
+    s.textContent='@keyframes ts3empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}';
+    document.head.appendChild(s);
+  })();
+})();
+
+/* ============================================================
+   MODUL 3 · L3.1 "Was Claude ist"  (/was-ist-claude-genau)
+   Abschnitte: 01 Hero+Einleitung · 02 Erklaeranimation #ts3aanim · Inhalt · 07 Empfehlung · 09 Abschluss
+
+   Erklaeranimation "Ein Kern, vier Tueren." — EIGENES Konzept (kein Recycling):
+   ein zentraler Modell-Kern + vier gleich grosse Tuer-Kacheln auf DERSELBEN Achse
+   (beide width:min(620px,100%)), verbunden ueber eine Goldschiene, die im ZWISCHENRAUM
+   zwischen Kern und Kacheln laeuft (Opake-Basis-Regel, Erweiterung 3: 100% sichtbar).
+   Choreografie nach der rev15-Regel "Reveal ist schnell, Erklaerung ist ruhig":
+     Phase 1 (~1,1s) alle Elemente kaskadieren herein (Stagger 150ms, Back-Ease)
+     Phase 2 (.built) Ambient: Kern-Halo atmet, Schimmer wandert ueber die Schiene
+     Phase 3 Highlight-Durchlauf 2200ms/Tuer, EINE Runde, dann ruht die Buehne.
+   Schwerpunkt-Treue: die Animation zeigt WAS jede Tuer ist, NICHT wann man welche nimmt —
+   die Auswahl-Regel gehoert zu L3.2 und wird hier bewusst nicht vorweggenommen.
+   ============================================================ */
+
+/* ---- L3.1 · Abschnitt 01 (Hero + Einleitung) ---- */
+(function(){
+  if(window.__ts3a) return;
+  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on()) return;
+    if(!window.__ts3) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.1'),
+      alt: 'Was Claude ist: ein Modell, vier Zugänge',
+      eyebrow: 'L 3.1',
+      title: 'Was <span class="ts-gold">Claude</span> ist'
+    });
+    window.__ts3.body('ts3a-intro',
+      '<p>Claude kommt von <b>Anthropic</b>, einem KI-Unternehmen aus San Francisco, das seit der Gründung an einer einzigen Sache arbeitet: an Sprachmodellen, die verlässlich bleiben, wenn es kompliziert wird.</p>'+
+      '<p>Dir begegnen mehrere Oberflächen, eine Chat-App, eine Arbeitsfläche für Dokumente, und ein Fenster mitten in deinem Terminal. Dahinter steckt jedes Mal dasselbe Modell. Die Frage ist nur, wie viel du ihm von deiner Arbeit zeigst.</p>'+
+      '<p>Kommst du aus der Einleitung, kennst du das Bild der Werkstätten mit demselben Meister. Hier zählen wir sie durch. Am Ende hast du deinen Zugang und die App auf dem Rechner.</p>'
+    );
+  }
+  window.__ts3a=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.1 · Abschnitt 02 (Erklaeranimation #ts3aanim) ---- */
+(function(){
+  if(window.__ts3aanim) return;
+  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
+
+  var DOORS=[
+    {k:'Chat',    n:'Claude Chat',    t:'App &amp; Browser'},
+    {k:'Cowork',  n:'Claude Cowork',  t:'Dateien &amp; Dokumente'},
+    {k:'Code',    n:'Claude Code',    t:'Terminal &amp; Ordner'},
+    {k:'API',     n:'Schnittstelle',  t:'für Entwickler'}
+  ];
+  var CAPS=[
+    'Der Chat redet mit dir und fasst sonst nichts an. Deine Dateien bleiben außen vor.',
+    '<b>Cowork</b> darf an deine Dokumente, ohne dass du ein Terminal öffnest.',
+    '<b>Claude Code</b> darf an deinen ganzen Ordner. Damit arbeiten wir in diesem Kurs.',
+    'Die Schnittstelle bauen Entwickler in eigene Software ein. Für dich vorerst kein Thema.'
+  ];
+  var STAGGER=150, WALK=2200;
+
+  var CSS=`
+  #ts3aanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3aanim *{box-sizing:border-box}
+  #ts3aanim .ka-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3aanim .ka-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3aanim .ka-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3aanim h2.ka-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3aanim h2.ka-title .ts-gold{color:#c7b489}
+  #ts3aanim .ka-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3aanim .ka-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3aanim .ka-stage{width:min(620px,100%);margin:0 auto}
+
+  /* Kern — eigener Wrapper, damit der Atem-Ring AUSSERHALB des runden Clips liegt */
+  #ts3aanim .ka-corewrap{position:relative;width:126px;height:126px;margin:0 auto 0}
+  #ts3aanim .ka-corewrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.24),rgba(199,180,137,0) 72%);opacity:0}
+  #ts3aanim .ka-wrap.built:not(.hid) .ka-corewrap::before{animation:kaBreath 4.4s ease-in-out infinite}
+  #ts3aanim .ka-core{position:absolute;inset:0;border-radius:50%;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),#0b0d14;
+    border:1.5px solid rgba(199,180,137,.55);
+    box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.05);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    transition:transform .7s cubic-bezier(.34,1.56,.64,1),opacity .6s ease}
+  #ts3aanim .ka-core b{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:.01em}
+  #ts3aanim .ka-core span{font:600 8.5px/1.3 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;text-align:center}
+  #ts3aanim .ka-corelbl{margin:12px auto 0;text-align:center;font:600 10px/1 -apple-system,sans-serif;
+    letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+  /* Schiene im ZWISCHENRAUM zwischen Kern und Kacheln (Linien laufen nie unter opaken Kacheln) */
+  #ts3aanim .ka-rail{position:relative;height:34px;margin:14px 0 0}
+  #ts3aanim .ka-rail .base{position:absolute;left:11.774%;right:11.774%;top:16px;height:1.5px;background:rgba(199,180,137,.18)}
+  #ts3aanim .ka-rail .fill{position:absolute;left:11.774%;top:16px;height:1.5px;width:0;
+    background:linear-gradient(90deg,rgba(199,180,137,.25),#c7b489);transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+  #ts3aanim .ka-wrap.js.on .ka-rail .fill{width:76.452%}
+  #ts3aanim .ka-rail .fill i{position:absolute;right:-4px;top:-3.5px;width:8px;height:8px;border-radius:50%;
+    background:#efe6d2;box-shadow:0 0 14px rgba(199,180,137,.9);opacity:0}
+  #ts3aanim .ka-wrap.moving .ka-rail .fill i{opacity:1}
+  #ts3aanim .ka-rail .drop{position:absolute;top:17px;width:1.5px;height:17px;background:rgba(199,180,137,.18);transition:background .5s ease}
+  #ts3aanim .ka-rail .drop.lit{background:rgba(199,180,137,.6)}
+  #ts3aanim .ka-rail .stem{position:absolute;left:50%;top:-14px;width:1.5px;height:30px;margin-left:-.75px;background:rgba(199,180,137,.3)}
+  #ts3aanim .ka-shine{position:absolute;left:11.774%;right:11.774%;top:14px;height:5px;overflow:hidden;pointer-events:none}
+  #ts3aanim .ka-shine::before{content:"";position:absolute;top:0;left:-30%;width:30%;height:100%;
+    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(239,230,210,.75),rgba(255,255,255,0))}
+  #ts3aanim .ka-wrap.built:not(.hid) .ka-shine::before{animation:kaShine 4.6s ease-in-out infinite}
+
+  /* Vier gleichrangige Tueren: exakt gleich gross (repeat(4,1fr) + feste Hoehe) */
+  #ts3aanim .ka-doors{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
+  #ts3aanim .ka-door{position:relative;height:112px;border-radius:14px;padding:0 10px;text-align:center;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.10);
+    transition:border-color .5s ease,box-shadow .5s ease,transform .7s cubic-bezier(.34,1.56,.64,1),opacity .6s ease}
+  #ts3aanim .ka-door .k{font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34);transition:color .5s ease}
+  #ts3aanim .ka-door .n{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14.5px;line-height:1.2;color:rgba(255,255,255,.55);transition:color .5s ease}
+  #ts3aanim .ka-door .t{font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.34);transition:color .5s ease}
+  #ts3aanim .ka-door.lit{border-color:rgba(199,180,137,.4)}
+  #ts3aanim .ka-door.lit .k{color:#c7b489}
+  #ts3aanim .ka-door.lit .n{color:#fff}
+  #ts3aanim .ka-door.lit .t{color:rgba(255,255,255,.62)}
+  #ts3aanim .ka-door.focus{border-color:rgba(199,180,137,.85);box-shadow:0 0 34px -10px rgba(199,180,137,.55);transform:translateY(-3px)}
+  #ts3aanim .ka-ring{position:absolute;inset:-4px;border-radius:17px;border:1px solid rgba(199,180,137,.5);opacity:0;pointer-events:none}
+  #ts3aanim .ka-door.focus .ka-ring{animation:kaFocus 1.9s ease-out}
+
+  /* Startzustand NUR mit .js — ohne JS steht die Buehne fertig da (Endzustand = Default) */
+  #ts3aanim .ka-wrap.js:not(.on) .ka-core{opacity:0;transform:translateY(14px) scale(.86)}
+  #ts3aanim .ka-wrap.js:not(.on) .ka-door{opacity:0;transform:translateY(16px) scale(.86)}
+  #ts3aanim .ka-wrap:not(.js) .ka-rail .fill{width:76.452%}
+  #ts3aanim .ka-wrap:not(.js) .ka-door{border-color:rgba(199,180,137,.4)}
+  #ts3aanim .ka-wrap:not(.js) .ka-door .k{color:#c7b489}
+  #ts3aanim .ka-wrap:not(.js) .ka-door .n{color:#fff}
+  #ts3aanim .ka-wrap:not(.js) .ka-door .t{color:rgba(255,255,255,.62)}
+
+  #ts3aanim .ka-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3aanim .ka-cap b{color:#c7b489;font-weight:600}
+  #ts3aanim .ka-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3aanim .ka-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3aanim .ka-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes kaBreath{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.85;transform:scale(1.07)}}
+  @keyframes kaShine{0%{left:-30%}55%{left:100%}100%{left:100%}}
+  @keyframes kaFocus{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.14)}}
+  @media(max-width:820px){
+    #ts3aanim .ka-doors{grid-template-columns:repeat(2,1fr)}
+    #ts3aanim .ka-door{height:96px}
+    #ts3aanim .ka-rail{display:none}
+    #ts3aanim .ka-cap{min-height:120px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #ts3aanim .ka-wrap.built:not(.hid) .ka-corewrap::before{animation:none;opacity:.6}
+    #ts3aanim .ka-wrap.built:not(.hid) .ka-shine::before{animation:none;opacity:0}
+    #ts3aanim .ka-door.focus .ka-ring{animation:none}
+  }
+  `;
+
+  function html(){
+    var doors=DOORS.map(function(d,i){
+      return '<div class="ka-door" data-i="'+i+'"><span class="ka-ring"></span><span class="k">'+d.k+'</span><span class="n">'+d.n+'</span><span class="t">'+d.t+'</span></div>';
+    }).join('');
+    /* Abzweige exakt ueber die Spaltenmitten: 4 Spalten von 6% bis 94% */
+    var drops='';
+    for(var i=0;i<4;i++){ drops+='<span class="drop" data-i="'+i+'" style="left:'+(11.774+i*25.484).toFixed(3)+'%"></span>'; }
+    return `
+<div class="ka-head">
+  <span class="ka-eyebrow">Dahinter steckt eins</span>
+  <h2 class="ka-title">Ein Kern, vier <span class="ts-gold">Türen</span>.</h2>
+  <p class="ka-sub">Alle vier Zugänge sprechen mit demselben Modell. Was sie unterscheidet, ist nur, wie tief sie in deine Arbeit hineinreichen dürfen.</p>
+</div>
+<div class="ka-wrap">
+  <div class="ka-stage">
+    <div class="ka-corewrap"><div class="ka-core"><b>Claude</b><span>Anthropic</span></div></div>
+    <div class="ka-corelbl">Ein Modell</div>
+    <div class="ka-rail">
+      <span class="stem"></span>
+      <span class="base"></span>
+      <span class="fill"><i></i></span>
+      <span class="ka-shine"></span>
+      ${drops}
+    </div>
+    <div class="ka-doors">${doors}</div>
+  </div>
+  <p class="ka-cap"></p>
+  <div class="ka-foot"><button class="ka-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function focusStep(root,i){
+    var doors=root.querySelectorAll('.ka-door'), drops=root.querySelectorAll('.ka-rail .drop');
+    for(var d=0;d<doors.length;d++){ doors[d].classList.toggle('focus', d===i); }
+    for(var s=0;s<drops.length;s++){ drops[s].classList.toggle('lit', s===i); }
+    var cap=root.querySelector('.ka-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.ka-wrap'); if(!wrap) return;
+    clear();
+    wrap.classList.remove('on','built','moving');
+    wrap.classList.add('js');
+    var doors=root.querySelectorAll('.ka-door'), core=root.querySelector('.ka-core');
+    for(var d=0;d<doors.length;d++){ doors[d].classList.remove('lit','focus'); }
+    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      wrap.classList.add('on','built');
+      for(var r=0;r<doors.length;r++) doors[r].classList.add('lit');
+      focusStep(root,0);
+      return;
+    }
+    /* PHASE 1 — schneller, eleganter Aufbau (~1,1s), Lichten NICHT am Caption-Takt */
+    void wrap.offsetWidth;
+    wrap.classList.add('on','moving');
+    if(core) core.style.transitionDelay='0s';
+    for(var i=0;i<doors.length;i++){
+      (function(n,el){ el.style.transitionDelay=(60+n*STAGGER)/1000+'s'; later(function(){ el.classList.add('lit'); }, 60+n*STAGGER); })(i,doors[i]);
+    }
+    /* PHASE 2 — fertig + lebendig */
+    later(function(){ wrap.classList.remove('moving'); wrap.classList.add('built'); },1500);
+    /* PHASE 3 — EIN Highlight-Durchlauf, danach ruht die Buehne */
+    for(var w=0;w<CAPS.length;w++){
+      (function(n){ later(function(){ focusStep(root,n); }, 1700+n*WALK); })(w);
+    }
+    later(function(){
+      var dd=root.querySelectorAll('.ka-door'); for(var q=0;q<dd.length;q++) dd[q].classList.remove('focus');
+      var dr=root.querySelectorAll('.ka-rail .drop'); for(var p=0;p<dr.length;p++) dr[p].classList.add('lit');
+    }, 1700+CAPS.length*WALK);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3aanim'; el.innerHTML=html();
+    el.querySelector('.ka-replay').addEventListener('click',function(){ play(el); });
+    var doors=el.querySelectorAll('.ka-door');
+    for(var i=0;i<doors.length;i++){
+      (function(n){ doors[n].addEventListener('click',function(){
+        clear();
+        var w=el.querySelector('.ka-wrap'); w.classList.add('js','on','built'); w.classList.remove('moving');
+        var dd=el.querySelectorAll('.ka-door'); for(var q=0;q<dd.length;q++){ dd[q].classList.add('lit'); dd[q].style.transitionDelay='0s'; }
+        focusStep(el,n);
+      }); })(i);
+    }
+    return el;
+  }
+
+  function injectCSS(){ if(document.getElementById('ts3aanim-css'))return;
+    var s=document.createElement('style'); s.id='ts3aanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3aanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3aanim')) return;
+    var anchor=document.getElementById('ts3a-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build();
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.ka-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts3aanim .ka-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts3aanim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
+  }
+
+  document.addEventListener('visibilitychange',function(){
+    var w=document.querySelector('#ts3aanim .ka-wrap'); if(!w) return;
+    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
+  });
+  window.__ts3aanimKill=function(){ clear(); };
+  window.__ts3aanim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.1 · Inhalts-Sektionen + Abschnitt 07 + Abschnitt 09 ---- */
+(function(){
+  if(window.__ts3arest) return;
+  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
+
+  function mount(){
+    if(!on()) return;
+    if(!window.__ts3) return;
+    if(!document.getElementById('ts3aanim')) return;
+
+    window.__ts3.sec('ts3a-was','ts3aanim',
+      '<h3>Was hinter dem <span class="g">Namen</span> steckt</h3>'+
+      '<p class="lead">Drei Dinge solltest du wissen, bevor du das erste Mal etwas Ernsthaftes von Claude verlangst. Sie erklären, warum manches sofort funktioniert und anderes nicht.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Der Anbieter</span><div class="ts3-nm">Anthropic</div><hr>'+
+          '<p>Anthropic baut seit dem ersten Tag Modelle, die sich an Anweisungen halten. Deshalb ist Claude in diesem Kurs das Werkzeug für den Aufbau und nicht nur für den Chat.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Das Modell</span><div class="ts3-nm">Eine Familie, mehrere Größen</div><hr>'+
+          '<p>Claude ist nicht ein einzelnes Modell, sondern eine Reihe davon, vom schnellen kleinen bis zum langsamen gründlichen. Welche Größe wofür taugt, streifen wir in Lektion 3.4 und entscheiden es am echten Projekt in Modul 4.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Die Grenze</span><div class="ts3-nm">Es sieht nur, was du zeigst</div><hr>'+
+          '<p>Claude kennt deinen Betrieb nicht, bis du ihn zeigst, und es erinnert sich nach einem Neustart an nichts, solange du das nicht einrichtest. Und es kann sich irren. Wer nicht gegenliest, übernimmt Fehler.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Der dritte Punkt ist der wichtigste, und er bleibt den ganzen Kurs über gültig: <b>du bleibst verantwortlich</b>. Claude nimmt dir die Arbeit ab, nicht das Urteil darüber, ob das Ergebnis stimmt.</p>'
+    );
+
+    window.__ts3.sec('ts3a-zug','ts3a-was',
+      '<h3>Dein <span class="g">Zugang</span></h3>'+
+      '<p class="lead">Zwei Handgriffe, dann steht die Grundlage für alles Weitere. Du brauchst dafür kein Abo, das entscheidest du erst in Lektion 3.3.</p>'+
+      '<div class="ts3-do">'+
+        '<span class="ts3-eb">Jetzt du</span>'+
+        '<ol>'+
+          '<li>Konto anlegen auf <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. Nimm die Adresse, unter der du auch später arbeitest, ein Wechsel zieht sonst Abo und Verlauf mit sich.</li>'+
+          '<li>Desktop-App laden von <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> und einmal einloggen. Die App ist die Basis für alles, was in den nächsten Lektionen dazukommt.</li>'+
+          '<li>Stell eine erste Frage aus deinem echten Alltag, keine Testfrage. Du merkst schneller, was das Werkzeug taugt, wenn echte Arbeit dranhängt.</li>'+
+        '</ol>'+
+      '</div>'+
+      '<p class="ts3-close">Damit ist die Tür offen. In der nächsten Lektion klären wir, <b>welche der vier</b> du wann nimmst, damit du nicht bei jeder Aufgabe neu überlegen musst.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3aemp', anchorId:'ts3a-zug', kind:'Einrichtung',
+      animTitle:'Dein', animGold:'erster Zugang',
+      steps:[{n:'01',l:'Konto anlegen'},{n:'02',l:'App installieren'},{n:'03',l:'Einloggen'},{n:'04',l:'Erste echte Frage'}],
+      intro:'Damit du später nicht umziehen musst, richte den Zugang gleich so ein, wie du ihn ein Jahr lang nutzen willst:',
+      points:[
+        'Leg das Konto mit deiner <b>Arbeits-Adresse</b> an, nicht mit einer schnellen Zweitadresse. Abo, Verlauf und später deine Projekte hängen daran.',
+        'Nimm die <b>Desktop-App</b>, nicht nur den Browser. Alles, was ab Modul 4 dazukommt, setzt auf ihr auf.',
+        'Bleib im ersten Durchgang beim kostenlosen Zugang. Welcher Plan zu dir passt, entscheidest du in <b>Lektion 3.3</b> mit den echten Zahlen vor dir.',
+        'Stell als Erstes eine Frage aus deinem Alltag. Eine erfundene Testfrage sagt dir nichts darüber, ob das Werkzeug dir wirklich Arbeit abnimmt.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3anext',
+      learn:[
+        'Du weißt, dass hinter allen Oberflächen <b>dasselbe Modell</b> steckt.',
+        'Du kennst die vier Zugänge: <b>Chat, Cowork, Code</b> und die Schnittstelle.',
+        'Du kennst die Grenze: Claude sieht nur, <b>was du ihm zeigst</b>, und kann sich irren.',
+        'Du hast <b>Konto und Desktop-App</b> und bist bereit für die Auswahl.'
+      ],
+      next:'/welches-claude-wann-chatcoworkcodeapi'
+    });
+  }
+  window.__ts3arest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.2 "Welches Claude wann"  (/welches-claude-wann-chatcoworkcodeapi)
+
+   Erklaeranimation "Eine Frage, drei Wege." — EIGENES Konzept:
+   eine Frage-Karte oben, darunter drei geschwungene Pfade zu drei gleich grossen
+   Zielen. Je Beat wechselt NUR der Fragetext und der aktive Pfad; die Moebel
+   (Karte, Pfade, Ziele) stehen ab Beat 0 ruhig. Pfade liegen im ZWISCHENRAUM
+   zwischen Karte und Zielen -> der Laufpunkt ist ueber die ganze Reise sichtbar.
+   Abgrenzung zu L3.1 (Kern + Tueren, zeigt WAS): diese Animation zeigt WANN.
+   ============================================================ */
+
+/* ---- L3.2 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3b) return;
+  function on(){ return /\/welches-claude-wann-chatcoworkcodeapi\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.2'),
+      alt: 'Welches Claude wann: Chat, Cowork, Code',
+      eyebrow: 'L 3.2',
+      title: 'Welches Claude <span class="ts-gold">wann</span>'
+    });
+    window.__ts3.body('ts3b-intro',
+      '<p>Vier Zugänge klingen nach Auswahl. In der Praxis hängt alles an einer einzigen Frage: <b>wie tief soll Claude an deine Sachen ran</b>.</p>'+
+      '<p>Bleibt es beim Reden, reicht der Chat. Sollen Dateien wirklich bearbeitet werden, ohne dass du ein Terminal öffnest, ist Cowork der Ort. Und soll auf deinem Rechner am Ende wirklich etwas entstehen, dann führt kein Weg an Claude Code vorbei.</p>'+
+      '<p>Diese Lektion gibt dir die Regel dafür an die Hand, damit du nicht aus Gewohnheit im Chat hängen bleibst und dich hinterher wunderst, warum nichts vorangeht.</p>'
+    );
+  }
+  window.__ts3b=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.2 · Abschnitt 02 (Erklaeranimation #ts3banim) ---- */
+(function(){
+  if(window.__ts3banim) return;
+  function on(){ return /\/welches-claude-wann-chatcoworkcodeapi\/?$/.test(location.pathname); }
+
+  var RUNS=[
+    { q:'Formulier mir eine freundliche Absage an einen Bewerber.', target:0,
+      cap:'Nichts wird angefasst, es entsteht nur Text. Dafür ist der <b>Chat</b> da, und dafür ist er auch schneller als alles andere.' },
+    { q:'Geh die vierzig Angebote im Ordner durch und zieh mir die Konditionen raus.', target:1,
+      cap:'Hier müssen echte Dateien gelesen und ein Ergebnis abgelegt werden. Das ist <b>Cowork</b>, ohne dass du ein Terminal brauchst.' },
+    { q:'Bau mir eine Übersichtsseite aus diesen Daten und stell sie online.', target:2,
+      cap:'Sobald auf deinem Rechner etwas passieren soll, ist <b>Claude Code</b> die Antwort.' }
+  ];
+  var TARGETS=[
+    {k:'Reden',   n:'Claude Chat',   t:'Antwort im Fenster'},
+    {k:'Mitarbeiten', n:'Claude Cowork', t:'Datei geändert'},
+    {k:'Bauen',   n:'Claude Code',   t:'Ergebnis auf dem Rechner'}
+  ];
+  var DWELL=4400;
+
+  var CSS=`
+  #ts3banim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3banim *{box-sizing:border-box}
+  #ts3banim .wg-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3banim .wg-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3banim .wg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3banim h2.wg-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3banim h2.wg-title .ts-gold{color:#c7b489}
+  #ts3banim .wg-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3banim .wg-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3banim .wg-stage{width:min(620px,100%);margin:0 auto}
+
+  /* Frage-Karte — das eine Moebel oben, nur der Text darin wechselt */
+  #ts3banim .wg-q{position:relative;min-height:98px;border-radius:15px;padding:16px 20px;display:flex;flex-direction:column;justify-content:center;gap:9px;
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;
+    border:1px solid rgba(199,180,137,.32);box-shadow:0 26px 60px -30px rgba(0,0,0,.9)}
+  #ts3banim .wg-qlbl{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
+  #ts3banim .wg-qt{font-size:15px;line-height:1.5;color:#fff;transition:opacity .45s cubic-bezier(.16,1,.3,1)}
+  #ts3banim .wg-wrap.swap .wg-qt{opacity:0}
+
+  /* Pfade: eigener Zwischenraum, Linien laufen NIE unter den Kacheln */
+  #ts3banim .wg-paths{position:relative;height:104px}
+  #ts3banim .wg-paths svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #ts3banim .wg-paths path.base{fill:none;stroke:rgba(199,180,137,.18);stroke-width:1.5;vector-effect:non-scaling-stroke}
+  #ts3banim .wg-paths path.flow{fill:none;stroke:#efe6d2;stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;
+    stroke-dasharray:7 93;stroke-dashoffset:100;opacity:0;filter:drop-shadow(0 0 5px rgba(199,180,137,.9))}
+  #ts3banim .wg-wrap:not(.hid) .wg-paths path.flow.run{opacity:1;animation:wgFlow 3.4s cubic-bezier(.45,0,.55,1) infinite}
+  #ts3banim .wg-wrap.hid .wg-paths path.flow.run{opacity:1}
+
+  /* Drei gleichrangige Ziele: repeat(3,1fr) + feste Hoehe */
+  #ts3banim .wg-targets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  #ts3banim .wg-t{position:relative;height:110px;border-radius:14px;padding:0 10px;text-align:center;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.10);transition:border-color .5s ease,box-shadow .5s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+  #ts3banim .wg-t .k{font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34);transition:color .5s ease}
+  #ts3banim .wg-t .n{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14.5px;color:rgba(255,255,255,.6);transition:color .5s ease}
+  #ts3banim .wg-t .t{font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.34);transition:color .5s ease}
+  #ts3banim .wg-t.on{border-color:rgba(199,180,137,.75);box-shadow:0 0 36px -12px rgba(199,180,137,.6);transform:translateY(-3px)}
+  #ts3banim .wg-t.on .k{color:#c7b489}
+  #ts3banim .wg-t.on .n{color:#fff}
+  #ts3banim .wg-t.on .t{color:rgba(255,255,255,.7)}
+
+  #ts3banim .wg-note{max-width:620px;margin:20px auto 0;text-align:center;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.5)}
+  #ts3banim .wg-note b{color:rgba(199,180,137,.85);font-weight:600}
+  #ts3banim .wg-cap{max-width:640px;margin:22px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3banim .wg-cap b{color:#c7b489;font-weight:600}
+  #ts3banim .wg-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3banim .wg-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3banim .wg-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes wgFlow{0%{stroke-dashoffset:100}55%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}  /* Ruhephase ab 55% */
+  /* Endzustand = Default: ohne JS steht der dritte Weg fertig da */
+  #ts3banim .wg-wrap:not(.js) .wg-t:last-child{border-color:rgba(199,180,137,.75)}
+  #ts3banim .wg-wrap:not(.js) .wg-t:last-child .k{color:#c7b489}
+  #ts3banim .wg-wrap:not(.js) .wg-t:last-child .n{color:#fff}
+  @media(max-width:820px){
+    #ts3banim .wg-paths{height:56px}
+    #ts3banim .wg-targets{grid-template-columns:1fr;gap:10px}
+    #ts3banim .wg-t{height:78px}
+    #ts3banim .wg-cap{min-height:120px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts3banim .wg-paths path.flow.run{animation:none;stroke-dashoffset:0;stroke-dasharray:none;opacity:.7} }
+  `;
+
+  /* Pfade in einem 100x100-Koordinatensystem: von der Kartenmitte (50,0) zu den drei Spaltenmitten */
+  var XS=[16.667,50,83.333];
+  function pathD(i){
+    var x=XS[i];
+    return 'M 50 0 C 50 46 '+x+' 54 '+x+' 100';
+  }
+
+  function html(){
+    var paths=XS.map(function(_,i){
+      return '<path class="base" d="'+pathD(i)+'" pathLength="100"/>';
+    }).join('')+XS.map(function(_,i){
+      return '<path class="flow" data-i="'+i+'" d="'+pathD(i)+'" pathLength="100"/>';
+    }).join('');
+    var tg=TARGETS.map(function(t,i){
+      return '<div class="wg-t" data-i="'+i+'"><span class="k">'+t.k+'</span><span class="n">'+t.n+'</span><span class="t">'+t.t+'</span></div>';
+    }).join('');
+    return `
+<div class="wg-head">
+  <span class="wg-eyebrow">Die eine Frage</span>
+  <h2 class="wg-title">Eine Frage, drei <span class="ts-gold">Wege</span>.</h2>
+  <p class="wg-sub">Lies den Satz, den du gerade tippen willst, und frag dich, ob dabei etwas entstehen soll oder nur gesagt werden muss.</p>
+</div>
+<div class="wg-wrap">
+  <div class="wg-stage">
+    <div class="wg-q"><span class="wg-qlbl">Was du willst</span><span class="wg-qt"></span></div>
+    <div class="wg-paths"><svg viewBox="0 0 100 100" preserveAspectRatio="none">${paths}</svg></div>
+    <div class="wg-targets">${tg}</div>
+  </div>
+  <p class="wg-note">Die vierte Tür, die <b>Schnittstelle</b>, bleibt hier bewusst außen vor: Sie ist für Entwickler gedacht und für die Arbeit in Claude Code deutlich teurer als ein Abo.</p>
+  <p class="wg-cap"></p>
+  <div class="wg-foot"><button class="wg-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function show(root,i){
+    var r=RUNS[i]; if(!r) return;
+    var wrap=root.querySelector('.wg-wrap');
+    var qt=root.querySelector('.wg-qt'), cap=root.querySelector('.wg-cap');
+    wrap.classList.add('swap');
+    later(function(){
+      qt.textContent=r.q;
+      wrap.classList.remove('swap');
+    },300);
+    var flows=root.querySelectorAll('.wg-paths path.flow');
+    for(var f=0;f<flows.length;f++) flows[f].classList.toggle('run', f===r.target);
+    var ts=root.querySelectorAll('.wg-t');
+    later(function(){ for(var t=0;t<ts.length;t++) ts[t].classList.toggle('on', t===r.target); },900);
+    later(function(){ if(cap) cap.innerHTML=r.cap; },900);
+  }
+
+  function run(root,i){
+    clear(); show(root,i);
+    if(i<RUNS.length-1) later(function(){ run(root,i+1); }, DWELL);
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.wg-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      clear(); show(root,RUNS.length-1); return;
+    }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3banim'; el.innerHTML=html();
+    el.querySelector('.wg-replay').addEventListener('click',function(){ play(el); });
+    var ts=el.querySelectorAll('.wg-t');
+    for(var i=0;i<ts.length;i++){
+      (function(n){ ts[n].addEventListener('click',function(){ clear(); el.querySelector('.wg-wrap').classList.add('js'); show(el,n); }); })(i);
+    }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3banim-css'))return;
+    var s=document.createElement('style'); s.id='ts3banim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3banim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3banim')) return;
+    var anchor=document.getElementById('ts3b-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.wg-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){
+    var w=document.querySelector('#ts3banim .wg-wrap'); if(!w) return;
+    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
+  });
+  window.__ts3banimKill=function(){ clear(); };
+  window.__ts3banim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.2 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3brest) return;
+  function on(){ return /\/welches-claude-wann-chatcoworkcodeapi\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3banim')) return;
+
+    window.__ts3.sec('ts3b-reg','ts3banim',
+      '<h3>Die Regel in einem <span class="g">Satz</span></h3>'+
+      '<p class="lead">Du musst dir keine Tabelle merken. Eine Frage genügt, und sie funktioniert bei jeder Aufgabe, die dir im Alltag begegnet.</p>'+
+      '<div class="ts3-do">'+
+        '<span class="ts3-eb">Die Regel</span>'+
+        '<ol>'+
+          '<li>Soll am Ende nur <b>etwas gesagt</b> sein, ein Text, eine Antwort, eine Idee? Dann Chat.</li>'+
+          '<li>Sollen <b>Dateien angefasst</b> werden, du willst aber kein Terminal öffnen? Dann Cowork.</li>'+
+          '<li>Soll auf deinem Rechner <b>wirklich etwas passieren</b>, gebaut, geändert, veröffentlicht? Dann Claude Code.</li>'+
+        '</ol>'+
+      '</div>'+
+      '<p class="ts3-close">Im Zweifel gehe ich die schärfere Variante. Wer mit Claude Code anfängt, kann jederzeit nur reden. Wer im Chat anfängt, macht die halbe Arbeit später noch einmal.</p>'
+    );
+
+    window.__ts3.sec('ts3b-vier','ts3b-reg',
+      '<h3>Die vier Zugänge im <span class="g">Vergleich</span></h3>'+
+      '<div class="ts3-cards c2">'+
+        '<div class="ts3-card"><span class="ts3-eb">Zugang 1</span><div class="ts3-nm">Claude Chat</div><hr>'+
+          '<p>App oder Browser. Fragen, Texte, Ideen, schnelles Nachschlagen. Kommt an deine Dateien nicht heran und soll das auch nicht.</p>'+
+          '<p class="ts3-foot">Gut für: unterwegs, zwischendurch, alles ohne Ergebnisdatei.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Zugang 2</span><div class="ts3-nm">Claude Cowork</div><hr>'+
+          '<p>Die Arbeitsfläche zwischen Reden und Bauen. Claude liest deine Dokumente, ändert sie und legt Ergebnisse ab, während du zusiehst. Kein Terminal nötig.</p>'+
+          '<p class="ts3-foot">Gut für: Auswertungen, Zusammenfassungen, Stapel von Dateien.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Zugang 3</span><div class="ts3-nm">Claude Code</div><hr>'+
+          '<p>Läuft im Terminal, mit Zugriff auf Ordner, Dateien und Netz. Baut Programme, Websites und Automatisierungen und führt sie auch aus. Darum dreht sich dieser Kurs ab Modul 4.</p>'+
+          '<p class="ts3-foot">Gut für: alles, was bleiben soll.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Zugang 4</span><div class="ts3-nm">Die Schnittstelle</div><hr>'+
+          '<p>Der direkte Draht für Entwickler, die Claude in eigene Software einbauen. Abgerechnet wird nach Verbrauch, für die Arbeit aus diesem Kurs also deutlich teurer als ein Abo.</p>'+
+          '<p class="ts3-foot">Für dich vorerst nicht relevant.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Wichtig ist nur der Sprung von Zugang eins auf Zugang drei. Genau daran scheitern die meisten, weil sich der Chat vertrauter anfühlt. In <b>Lektion 3.7</b> gehen wir diesen Sprung noch einmal in Ruhe durch.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3bemp', anchorId:'ts3b-vier', kind:'Nutzung',
+      animTitle:'Deine', animGold:'tägliche Wahl',
+      steps:[{n:'01',l:'Entsteht etwas?'},{n:'02',l:'Liegt es als Datei vor?'},{n:'03',l:'Soll es laufen?'},{n:'04',l:'Dann entscheiden'}],
+      intro:'So gehst du im Alltag vor, ohne lange zu überlegen, welcher Zugang der richtige ist:',
+      points:[
+        'Frag dich zuerst, ob am Ende <b>etwas entstehen</b> soll oder ob nur eine Antwort reicht. Das trennt Chat von allem anderen.',
+        'Wenn Dateien im Spiel sind, prüfe, ob sie <b>schon irgendwo liegen</b>. Vorhandene Dokumente sind der klassische Fall für Cowork.',
+        'Soll das Ergebnis später <b>von allein weiterlaufen</b>, gehört die Aufgabe von Anfang an in Claude Code. Nachträglich umziehen kostet dich die doppelte Zeit.',
+        'Bleib bei deiner Wahl, bis die Aufgabe fertig ist. Zwischen den Oberflächen zu springen ist die häufigste Ursache dafür, dass Zwischenstände verloren gehen.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3bnext',
+      learn:[
+        'Du hast die <b>eine Frage</b>, die dir jedes Mal den richtigen Zugang zeigt.',
+        'Du weißt, wofür <b>Chat, Cowork und Code</b> jeweils gemacht sind.',
+        'Du kennst die Schnittstelle und weißt, warum sie <b>vorerst nichts für dich</b> ist.',
+        'Du erkennst den Fehler, aus <b>Gewohnheit im Chat</b> zu bleiben.'
+      ],
+      next:'/claude-plne-preis'
+    });
+  }
+  window.__ts3brest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.3 "Claude Pläne & Preis"  (/claude-plne-preis)
+
+   Erklaeranimation "Drei Stufen, eine Empfehlung." — EIGENES Konzept:
+   drei EXAKT gleich grosse Plan-Saeulen (repeat(3,1fr), feste Hoehe 300px).
+   Die Saeulen stehen ab Beat 0 ruhig, es wechselt nur ihr INHALT: der
+   Nutzungs-Balken waechst, die Haekchen setzen sich, zuletzt legt sich der
+   Empfehlungs-Schimmer auf die dritte Saeule. Keine Verbindungslinien noetig.
+
+   PREISE — Primaerquelle claude.com/pricing, Abruf 02.08.2026, zzgl. Steuern:
+     Free 0 $ (Claude Code NICHT enthalten) · Pro 20 $/Monat, 17 $/Monat im
+     Jahresabo (200 $ im Voraus) · Max ab 100 $/Monat, darin waehlbar 5-fache
+     oder 20-fache Pro-Nutzung. Der Preis der 20-fach-Stufe steht nicht auf der
+     Anbieterseite und wird deshalb NICHT genannt (Niemals-schaetzen-Regel).
+   ============================================================ */
+
+/* ---- L3.3 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3c) return;
+  function on(){ return /\/claude-plne-preis\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.3'),
+      alt: 'Claude Pläne und Preis: Free, Pro, Max',
+      eyebrow: 'L 3.3',
+      title: 'Pläne &amp; <span class="ts-gold">Preis</span>'
+    });
+    window.__ts3.body('ts3c-intro',
+      '<p>Es gibt drei Stufen, und für unsere Arbeit fällt eine davon sofort weg: Im <b>kostenlosen Zugang ist Claude Code nicht enthalten</b>. Damit ist die Entscheidung enger, als die Preisseite auf den ersten Blick vermuten lässt.</p>'+
+      '<p>Wir gehen die Stufen einmal ehrlich durch, mit dem, was jeweils drinsteckt, und ich sage dir am Ende, was ich selbst empfehle und ab wann sich der Sprung lohnt.</p>'+
+      '<p>Alle Zahlen hier sind der Stand vom 2. August 2026 von der Anbieterseite und verstehen sich ohne Steuern. Preise ändern sich, schau im Zweifel selbst nach.</p>'
+    );
+  }
+  window.__ts3c=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.3 · Abschnitt 02 (Erklaeranimation #ts3canim) ---- */
+(function(){
+  if(window.__ts3canim) return;
+  function on(){ return /\/claude-plne-preis\/?$/.test(location.pathname); }
+
+  var PLANS=[
+    { key:'Free', name:'Free', price:'0 $', sub:'ohne Kosten', fill:14,
+      rows:[['Chat im Browser und in der App',1],['Claude Code',0],['Claude Cowork',0],['Große Modelle',0]] },
+    { key:'Pro', name:'Pro', price:'20 $', sub:'im Monat · 17 $ im Jahresabo', fill:42,
+      rows:[['Chat im Browser und in der App',1],['Claude Code',1],['Claude Cowork',1],['Große Modelle',1]] },
+    { key:'Max', name:'Max', price:'ab 100 $', sub:'im Monat · 5-fach oder 20-fach', fill:100,
+      rows:[['Chat im Browser und in der App',1],['Claude Code',1],['Claude Cowork',1],['Große Modelle',1]] }
+  ];
+  var CAPS=[
+    'Der kostenlose Zugang reicht zum Ausprobieren im Chatfenster. <b>Claude Code ist nicht dabei</b>, damit fällt er für alles Weitere aus.',
+    '<b>Pro</b> schaltet Claude Code und Cowork frei und kostet zwanzig Dollar im Monat, im Jahresabo siebzehn. Für die ersten eigenen Projekte reicht das.',
+    '<b>Max</b> beginnt bei hundert Dollar und gibt dir die fünffache oder die zwanzigfache Nutzung von Pro. Ab hier hört das Rechnen auf und du arbeitest einfach.'
+  ];
+  var DWELL=4600;
+
+  var CSS=`
+  #ts3canim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3canim *{box-sizing:border-box}
+  #ts3canim .pl-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3canim .pl-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3canim .pl-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3canim h2.pl-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3canim h2.pl-title .ts-gold{color:#c7b489}
+  #ts3canim .pl-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3canim .pl-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3canim .pl-stage{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:min(680px,100%);margin:0 auto}
+  #ts3canim .pl-col{position:relative;height:314px;border-radius:16px;padding:18px 16px 16px;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.10);display:flex;flex-direction:column;
+    transition:border-color .6s ease,box-shadow .6s ease,transform .6s cubic-bezier(.16,1,.3,1)}
+  #ts3canim .pl-col.lit{border-color:rgba(199,180,137,.5)}
+  #ts3canim .pl-col.best{border-color:rgba(199,180,137,.85);box-shadow:0 0 44px -14px rgba(199,180,137,.6);transform:translateY(-4px)}
+  #ts3canim .pl-nm{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:16px;color:rgba(255,255,255,.62);transition:color .6s ease}
+  #ts3canim .pl-col.lit .pl-nm{color:#fff}
+  #ts3canim .pl-pr{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:25px;line-height:1.15;margin:7px 0 2px;color:rgba(255,255,255,.5);transition:color .6s ease}
+  #ts3canim .pl-col.lit .pl-pr{color:#c7b489}
+  #ts3canim .pl-ps{font-size:10.5px;line-height:1.35;color:rgba(255,255,255,.4);min-height:28px}
+  #ts3canim .pl-bar{position:relative;height:7px;border-radius:5px;margin:12px 0 14px;background:rgba(255,255,255,.07);overflow:hidden}
+  #ts3canim .pl-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;
+    background:linear-gradient(90deg,rgba(199,180,137,.5),#c7b489);transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+  #ts3canim .pl-blbl{font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.34);margin:-8px 0 12px}
+  #ts3canim .pl-rows{display:flex;flex-direction:column;gap:7px;margin-top:auto}
+  #ts3canim .pl-r{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.35;color:rgba(255,255,255,.42);transition:color .6s ease}
+  #ts3canim .pl-col.lit .pl-r{color:rgba(255,255,255,.78)}
+  #ts3canim .pl-col.lit .pl-r.no{color:rgba(255,255,255,.34)}
+  #ts3canim .pl-ic{flex:0 0 auto;width:13px;height:13px;margin-top:1px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+    position:relative;transition:border-color .6s ease,background .6s ease}
+  #ts3canim .pl-col.lit .pl-r:not(.no) .pl-ic{border-color:rgba(199,180,137,.7);background:rgba(199,180,137,.22)}
+  #ts3canim .pl-col.lit .pl-r:not(.no) .pl-ic::after{content:"";position:absolute;left:3.5px;top:1.5px;width:3.5px;height:6.5px;
+    border:solid #c7b489;border-width:0 1.6px 1.6px 0;transform:rotate(43deg)}
+  #ts3canim .pl-r.no .pl-ic::after{content:"";position:absolute;left:3px;top:5.5px;width:6px;height:1.4px;background:rgba(255,255,255,.35)}
+  #ts3canim .pl-flag{position:absolute;top:0;left:0;right:0;height:26px;display:flex;align-items:center;justify-content:center;
+    font:700 9px/1 -apple-system,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#05060b;background:#c7b489;
+    transform:translateY(-100%);transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+  #ts3canim .pl-col.best .pl-flag{transform:none}
+  #ts3canim .pl-col.best{padding-top:38px}
+
+  #ts3canim .pl-note{max-width:660px;margin:20px auto 0;text-align:center;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.5)}
+  #ts3canim .pl-cap{max-width:640px;margin:22px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3canim .pl-cap b{color:#c7b489;font-weight:600}
+  #ts3canim .pl-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3canim .pl-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3canim .pl-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  /* Endzustand = Default: ohne JS stehen alle drei Saeulen fertig da */
+  #ts3canim .pl-wrap:not(.js) .pl-col{border-color:rgba(199,180,137,.5)}
+  #ts3canim .pl-wrap:not(.js) .pl-nm{color:#fff}
+  #ts3canim .pl-wrap:not(.js) .pl-pr{color:#c7b489}
+  #ts3canim .pl-wrap:not(.js) .pl-col:nth-child(1) .pl-bar i{width:14%}
+  #ts3canim .pl-wrap:not(.js) .pl-col:nth-child(2) .pl-bar i{width:42%}
+  #ts3canim .pl-wrap:not(.js) .pl-col:nth-child(3) .pl-bar i{width:100%}
+  #ts3canim .pl-wrap:not(.js) .pl-col:nth-child(3){padding-top:38px;border-color:rgba(199,180,137,.85)}
+  #ts3canim .pl-wrap:not(.js) .pl-col:nth-child(3) .pl-flag{transform:none}
+  #ts3canim .pl-wrap:not(.js) .pl-r{color:rgba(255,255,255,.78)}
+  #ts3canim .pl-wrap:not(.js) .pl-r:not(.no) .pl-ic{border-color:rgba(199,180,137,.7);background:rgba(199,180,137,.22)}
+  @media(max-width:820px){
+    #ts3canim .pl-stage{grid-template-columns:1fr;gap:12px}
+    #ts3canim .pl-col{height:auto;min-height:238px}
+    #ts3canim .pl-cap{min-height:120px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts3canim .pl-bar i{transition:none} }
+  `;
+
+  function html(){
+    var cols=PLANS.map(function(p,i){
+      var rows=p.rows.map(function(r){
+        return '<div class="pl-r'+(r[1]?'':' no')+'"><span class="pl-ic"></span><span>'+r[0]+'</span></div>';
+      }).join('');
+      return '<div class="pl-col" data-i="'+i+'" data-fill="'+p.fill+'">'+
+        '<span class="pl-flag">Empfehlung</span>'+
+        '<div class="pl-nm">'+p.name+'</div>'+
+        '<div class="pl-pr">'+p.price+'</div>'+
+        '<div class="pl-ps">'+p.sub+'</div>'+
+        '<div class="pl-bar"><i></i></div>'+
+        '<div class="pl-blbl">Nutzung</div>'+
+        '<div class="pl-rows">'+rows+'</div>'+
+      '</div>';
+    }).join('');
+    return `
+<div class="pl-head">
+  <span class="pl-eyebrow">Was drinsteckt</span>
+  <h2 class="pl-title">Drei Stufen, eine <span class="ts-gold">Empfehlung</span>.</h2>
+  <p class="pl-sub">Nicht der Preis entscheidet, sondern was jeweils freigeschaltet ist. Eine Stufe fällt für diesen Kurs schon aus dem Rennen, bevor es ums Geld geht.</p>
+</div>
+<div class="pl-wrap">
+  <div class="pl-stage">${cols}</div>
+  <p class="pl-note">Stand 2. August 2026, Quelle ist die Preisseite des Anbieters, alle Beträge ohne Steuern. Der Preis der 20-fach-Stufe wird dort nicht ausgewiesen und steht deshalb hier auch nicht.</p>
+  <p class="pl-cap"></p>
+  <div class="pl-foot"><button class="pl-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function step(root,i){
+    var cols=root.querySelectorAll('.pl-col');
+    for(var c=0;c<cols.length;c++){
+      var on=c<=i;
+      cols[c].classList.toggle('lit', on);
+      cols[c].querySelector('.pl-bar i').style.width = on ? cols[c].getAttribute('data-fill')+'%' : '0%';
+      cols[c].classList.toggle('best', c===2 && i>=2);
+    }
+    var cap=root.querySelector('.pl-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
+  }
+
+  function run(root,i){
+    clear(); step(root,i);
+    if(i<CAPS.length-1) later(function(){ run(root,i+1); }, DWELL);
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.pl-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,CAPS.length-1); return; }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3canim'; el.innerHTML=html();
+    el.querySelector('.pl-replay').addEventListener('click',function(){ play(el); });
+    var cols=el.querySelectorAll('.pl-col');
+    for(var i=0;i<cols.length;i++){
+      (function(n){ cols[n].addEventListener('click',function(){ clear(); el.querySelector('.pl-wrap').classList.add('js'); step(el,n); }); })(i);
+    }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3canim-css'))return;
+    var s=document.createElement('style'); s.id='ts3canim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3canim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3canim')) return;
+    var anchor=document.getElementById('ts3c-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.pl-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts3canimKill=function(){ clear(); };
+  window.__ts3canim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.3 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3crest) return;
+  function on(){ return /\/claude-plne-preis\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3canim')) return;
+
+    window.__ts3.sec('ts3c-ehr','ts3canim',
+      '<h3>Was die drei Stufen wirklich <span class="g">unterscheidet</span></h3>'+
+      '<p class="lead">Der günstigste Plan ist nicht automatisch der richtige. Entscheidend ist, welcher dich beim Arbeiten in Ruhe lässt. Beides hat einen Preis, nur zahlst du den einen in Euro und den anderen in Wartezeit.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Fällt aus</span><div class="ts3-nm">Free</div><hr>'+
+          '<p>Zum Hineinschnuppern ins Chatfenster in Ordnung. Für diesen Kurs unbrauchbar, weil <b>Claude Code nicht enthalten</b> ist. Damit endet die Diskussion.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Zum Anfangen</span><div class="ts3-nm">Pro</div><hr>'+
+          '<p>Zwanzig Dollar im Monat, siebzehn wenn du das Jahr im Voraus zahlst. Claude Code und Cowork sind dabei. Für die ersten Projekte reicht das, du wirst nur regelmäßig an die Nutzungsgrenze stoßen.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Meine Empfehlung</span><div class="ts3-nm">Max</div><hr>'+
+          '<p>Ab hundert Dollar im Monat, mit fünffacher Nutzung gegenüber Pro. Das ist die Stufe, auf der ich selbst arbeite, weil ich nicht mitten in einer Sitzung ausgebremst werden will.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Wenn du dir unsicher bist: Fang mit <b>Pro</b> an und wechsle, sobald dich die Nutzungsgrenze das zweite Mal in derselben Woche stoppt. Dieser Moment kommt schneller, als du denkst, und dann weißt du auch, dass sich der Sprung lohnt.</p>'
+    );
+
+    window.__ts3.sec('ts3c-gren','ts3c-ehr',
+      '<h3>Was die <span class="g">Nutzungsgrenze</span> wirklich bedeutet</h3>'+
+      '<p>Alle Stufen haben ein Nutzungsfenster. Ist es aufgebraucht, wartest du, bis es sich zurücksetzt. Das ist der eigentliche Unterschied zwischen den Plänen, nicht die Liste der Funktionen.</p>'+
+      '<p>Wie schnell du an die Grenze kommst, hängt weniger daran, wie viel du schreibst, als daran, <b>wie viel Claude bei jeder Antwort mitlesen muss</b>. Ein aufgeräumter Arbeitsplatz mit wenigen Erweiterungen hält deutlich länger als ein überladener. Deshalb schauen wir uns in Lektion 3.4 an, was den Platz eigentlich füllt.</p>'+
+      '<p class="ts3-close">Merk dir für heute nur: <b>Der Plan bestimmt, wie lange du am Stück arbeiten kannst.</b> Alles andere ist auf jeder Stufe gleich.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3cemp', anchorId:'ts3c-gren', kind:'Nutzung',
+      animTitle:'Deine', animGold:'Plan-Entscheidung',
+      steps:[{n:'01',l:'Free ausschließen'},{n:'02',l:'Mit Pro starten'},{n:'03',l:'Grenze beobachten'},{n:'04',l:'Auf Max wechseln'}],
+      intro:'Wenn du heute entscheiden musst und keine Lust auf lange Vergleiche hast, geh so vor:',
+      points:[
+        'Streich <b>Free</b> von der Liste. Ohne Claude Code kommst du in diesem Kurs keine Lektion weit.',
+        'Starte mit <b>Pro</b>, wenn du die Werkzeuge noch nicht täglich brauchst. Zwanzig Dollar sind ein überschaubarer Einsatz, um herauszufinden, wie du arbeitest.',
+        'Achte in den ersten zwei Wochen darauf, <b>wie oft dich die Nutzungsgrenze stoppt</b>. Das ist deine einzige belastbare Entscheidungsgrundlage.',
+        'Wechsle auf <b>Max</b>, sobald das Warten dich mehr kostet als der Aufpreis. Solange du monatlich zahlst, bindest du dich an nichts.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3cnext',
+      learn:[
+        'Du weißt, dass <b>Free ohne Claude Code</b> kommt und damit ausscheidet.',
+        'Du kennst die Preise von <b>Pro und Max</b> und weißt, was jeweils dazugehört.',
+        'Du verstehst, dass der Plan vor allem die <b>Nutzungsgrenze</b> verschiebt.',
+        'Du hast eine Regel, <b>wann sich der Wechsel</b> auf die größere Stufe lohnt.'
+      ],
+      next:'/claude-nutzung-erklrt-6-konzepte'
+    });
+  }
+  window.__ts3crest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.4 "Die sechs Begriffe"  (/claude-nutzung-erklrt-6-konzepte)
+
+   Erklaeranimation "Sechs Schichten, ein Arbeitsplatz." — EIGENES Konzept:
+   ein senkrechter Stapel aus sechs EXAKT gleich hohen Schichten (je 54px) auf
+   EINER Achse (width:min(560px,100%)). Choreografie nach der rev15-Regel:
+   Phase 1 schneller Aufbau (Stagger 140ms, alle sechs in ~1s), Phase 2 Ambient
+   (der Stapel atmet), Phase 3 Highlight-Durchlauf — die fokussierte Schicht
+   KLAPPT AUF und zeigt ihren Einzeiler. Das ist der eigene Mechanismus dieser
+   Seite (Akkordeon im Stapel), nicht der Tueren-Durchlauf aus L3.1.
+
+   Abgrenzung nach oben: hier steht nur, WAS die sechs Begriffe sind.
+   Wie man sie einrichtet (Installation, CLAUDE.md schreiben, Skills laden),
+   gehoert nach Modul 4 und wird hier bewusst nicht vorweggenommen.
+   ============================================================ */
+
+/* ---- L3.4 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3d) return;
+  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.4'),
+      alt: 'Die sechs Begriffe: Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub',
+      eyebrow: 'L 3.4',
+      title: 'Sechs <span class="ts-gold">Begriffe</span>'
+    });
+    window.__ts3.body('ts3d-intro',
+      '<p>Bevor wir bauen, gehen wir einmal durch, was dir immer wieder begegnet. <b>Du musst das jetzt nicht auswendig können.</b> Es reicht, wenn dir die Wörter später nicht fremd vorkommen.</p>'+
+      '<p>Sechs Stück sind es, und sie bauen aufeinander auf wie Schichten. Ganz unten liegt der Ort, an dem gearbeitet wird, alles Weitere setzt darauf auf.</p>'+
+      '<p>Am Ende kennst du die Wörter gut genug, um in Modul 4 nicht nachschlagen zu müssen. Eingerichtet wird dort, mit den Händen am Gerät und an einem echten Projekt, das dir gehört.</p>'
+    );
+  }
+  window.__ts3d=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.4 · Abschnitt 02 (Erklaeranimation #ts3danim) ---- */
+(function(){
+  if(window.__ts3danim) return;
+  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
+
+  var LAYERS=[
+    {n:'06', t:'GitHub',                 d:'Der Ablageort im Netz. Dein Projekt liegt dort sicher und du kommst von jedem Rechner daran.'},
+    {n:'05', t:'Kontext und Tokens',     d:'Der Arbeitsspeicher einer Sitzung. Je voller er wird, desto langsamer und ungenauer wird jede Antwort.'},
+    {n:'04', t:'Modelle und Denk-Tiefe', d:'Wie groß das Modell ist und wie gründlich es nachdenkt. Beides stellst du selbst ein.'},
+    {n:'03', t:'Skills, MCPs, Plugins',  d:'Fähigkeiten, Verbindungen und beides im Paket.'},
+    {n:'02', t:'CLAUDE.md',              d:'Dein Briefing. Wird bei jedem Start gelesen.'},
+    {n:'01', t:'Ordner und Dateien',     d:'Der Ort, an dem gearbeitet wird. Was nicht drin liegt, existiert nicht.'}
+  ];
+  var CAPS=[
+    'Ganz unten liegt der <b>Ordner</b>. Er entscheidet, worauf Claude überhaupt Zugriff hat, und ist damit die wichtigste Einstellung von allen.',
+    'Darüber die <b>CLAUDE.md</b>. Eine schlichte Textdatei, die bei jedem Start gelesen wird, damit du dich nicht jedes Mal neu erklären musst.',
+    'Dann die <b>Erweiterungen</b>. Skills geben Claude neue Fähigkeiten, MCPs verbinden es mit deinen Werkzeugen, Plugins liefern beides in einem Paket.',
+    'Die <b>Modellwahl</b> und die Denk-Tiefe bestimmen, wie gründlich gearbeitet wird. Nicht jede Aufgabe braucht die größte Stufe.',
+    '<b>Kontext</b> ist das, was Claude gerade im Kopf hat. Er füllt sich im Lauf einer Sitzung, und ab einem gewissen Punkt hilft nur noch Aufräumen.',
+    'Ganz oben <b>GitHub</b>. Der Ort, an dem dein Projekt liegt, wenn es nicht nur auf deinem Schreibtisch überleben soll.'
+  ];
+  var STAGGER=140, WALK=3600;
+
+  var CSS=`
+  #ts3danim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3danim *{box-sizing:border-box}
+  #ts3danim .lz-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3danim .lz-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3danim .lz-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3danim h2.lz-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3danim h2.lz-title .ts-gold{color:#c7b489}
+  #ts3danim .lz-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3danim .lz-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3danim .lz-stack{position:relative;width:min(560px,100%);min-height:424px;margin:0 auto;display:flex;flex-direction:column;justify-content:flex-start;gap:8px}
+  #ts3danim .lz-stack::before{content:"";position:absolute;inset:-22px -18px;z-index:-1;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.12),rgba(255,255,255,0) 72%);filter:blur(28px);opacity:0}
+  #ts3danim .lz-wrap.built:not(.hid) .lz-stack::before{animation:lzBreath 5s ease-in-out infinite}
+
+  /* Sechs gleichrangige Schichten: identische Grundhoehe, gleiche Breite */
+  #ts3danim .lz-l{position:relative;min-height:54px;border-radius:12px;padding:0 16px;cursor:pointer;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.10);
+    transition:border-color .5s ease,box-shadow .5s ease,opacity .55s ease,transform .7s cubic-bezier(.34,1.56,.64,1),min-height .55s cubic-bezier(.16,1,.3,1)}
+  #ts3danim .lz-row{display:flex;align-items:center;gap:12px;min-height:54px}
+  #ts3danim .lz-n{flex:0 0 auto;font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.28);transition:color .5s ease}
+  #ts3danim .lz-t{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:rgba(255,255,255,.6);transition:color .5s ease}
+  #ts3danim .lz-d{max-height:0;opacity:0;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.7);
+    transition:max-height .55s cubic-bezier(.16,1,.3,1),opacity .45s ease,padding .45s ease;padding:0}
+  #ts3danim .lz-l.lit{border-color:rgba(199,180,137,.4)}
+  #ts3danim .lz-l.lit .lz-n{color:#c7b489}
+  #ts3danim .lz-l.lit .lz-t{color:#fff}
+  #ts3danim .lz-l.focus{border-color:rgba(199,180,137,.85);box-shadow:0 0 38px -12px rgba(199,180,137,.55);min-height:104px}
+  #ts3danim .lz-l.focus .lz-d{max-height:70px;opacity:1;padding:0 0 14px}
+  #ts3danim .lz-base{width:min(560px,100%);height:4px;margin:10px auto 0;border-radius:3px;
+    background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.45),rgba(199,180,137,0))}
+  #ts3danim .lz-baselbl{width:min(560px,100%);margin:9px auto 0;text-align:center;
+    font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34)}
+
+  /* Startzustand NUR mit .js — ohne JS steht der Stapel fertig da */
+  #ts3danim .lz-wrap.js:not(.on) .lz-l{opacity:0;transform:translateY(14px) scale(.94)}
+  #ts3danim .lz-wrap:not(.js) .lz-l{border-color:rgba(199,180,137,.4)}
+  #ts3danim .lz-wrap:not(.js) .lz-n{color:#c7b489}
+  #ts3danim .lz-wrap:not(.js) .lz-t{color:#fff}
+
+  #ts3danim .lz-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3danim .lz-cap b{color:#c7b489;font-weight:600}
+  #ts3danim .lz-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3danim .lz-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3danim .lz-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes lzBreath{0%,100%{opacity:.35}50%{opacity:.9}}
+  @media(max-width:820px){ #ts3danim .lz-cap{min-height:130px} #ts3danim .lz-l.focus{min-height:126px} #ts3danim .lz-stack{min-height:446px} }
+  @media(prefers-reduced-motion:reduce){ #ts3danim .lz-wrap.built:not(.hid) .lz-stack::before{animation:none;opacity:.5} }
+  `;
+
+  function html(){
+    var ls=LAYERS.map(function(l,i){
+      return '<div class="lz-l" data-i="'+i+'">'+
+        '<div class="lz-row"><span class="lz-n">'+l.n+'</span><span class="lz-t">'+l.t+'</span></div>'+
+        '<div class="lz-d">'+l.d+'</div>'+
+      '</div>';
+    }).join('');
+    return `
+<div class="lz-head">
+  <span class="lz-eyebrow">Die Landkarte</span>
+  <h2 class="lz-title">Sechs Schichten, ein <span class="ts-gold">Arbeitsplatz</span>.</h2>
+  <p class="lz-sub">Klick auf eine Schicht, dann siehst du in einem Satz, worum es dabei geht.</p>
+</div>
+<div class="lz-wrap">
+  <div class="lz-stack">${ls}</div>
+  <div class="lz-base"></div>
+  <div class="lz-baselbl">Dein Rechner</div>
+  <p class="lz-cap"></p>
+  <div class="lz-foot"><button class="lz-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  /* Reihenfolge von unten nach oben: LAYERS ist top-down, Schritt n -> Index (5-n) */
+  function focusStep(root,n){
+    var ls=root.querySelectorAll('.lz-l'), idx=LAYERS.length-1-n;
+    for(var i=0;i<ls.length;i++) ls[i].classList.toggle('focus', i===idx);
+    var cap=root.querySelector('.lz-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
+  }
+
+  function play(root){
+    var wrap=root.querySelector('.lz-wrap'); if(!wrap) return;
+    clear();
+    wrap.classList.remove('on','built'); wrap.classList.add('js');
+    var ls=root.querySelectorAll('.lz-l');
+    for(var i=0;i<ls.length;i++){ ls[i].classList.remove('lit','focus'); ls[i].style.transitionDelay=''; }
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      wrap.classList.add('on','built');
+      for(var r=0;r<ls.length;r++) ls[r].classList.add('lit');
+      focusStep(root,0); return;
+    }
+    void wrap.offsetWidth;
+    wrap.classList.add('on');
+    /* PHASE 1 — von unten nach oben aufbauen, ~1s fuer alle sechs */
+    for(var k=0;k<LAYERS.length;k++){
+      (function(n){
+        var el=ls[LAYERS.length-1-n];
+        el.style.transitionDelay=(60+n*STAGGER)/1000+'s';
+        later(function(){ el.classList.add('lit'); }, 60+n*STAGGER);
+      })(k);
+    }
+    /* PHASE 2 — Ambient */
+    later(function(){ wrap.classList.add('built'); },1300);
+    /* PHASE 3 — EIN Durchlauf, Schicht klappt auf */
+    for(var w=0;w<CAPS.length;w++){ (function(n){ later(function(){ focusStep(root,n); }, 1500+n*WALK); })(w); }
+    later(function(){ var a=root.querySelectorAll('.lz-l'); for(var q=0;q<a.length;q++) a[q].classList.remove('focus'); }, 1500+CAPS.length*WALK);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3danim'; el.innerHTML=html();
+    el.querySelector('.lz-replay').addEventListener('click',function(){ play(el); });
+    var ls=el.querySelectorAll('.lz-l');
+    for(var i=0;i<ls.length;i++){
+      (function(n){ ls[n].addEventListener('click',function(){
+        clear();
+        var w=el.querySelector('.lz-wrap'); w.classList.add('js','on','built');
+        var a=el.querySelectorAll('.lz-l'); for(var q=0;q<a.length;q++){ a[q].classList.add('lit'); a[q].style.transitionDelay='0s'; }
+        focusStep(el, LAYERS.length-1-n);
+      }); })(i);
+    }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3danim-css'))return;
+    var s=document.createElement('style'); s.id='ts3danim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3danim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3danim')) return;
+    var anchor=document.getElementById('ts3d-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.lz-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){
+    var w=document.querySelector('#ts3danim .lz-wrap'); if(!w) return;
+    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
+  });
+  window.__ts3danimKill=function(){ clear(); };
+  window.__ts3danim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.4 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3drest) return;
+  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3danim')) return;
+
+    window.__ts3.sec('ts3d-eins','ts3danim',
+      '<h3>Worauf Claude überhaupt <span class="g">zugreift</span></h3>'+
+      '<p class="lead">Diese drei entscheiden darüber, ob Claude überhaupt sinnvoll arbeiten kann. Wer sie überspringt, wundert sich später über Ergebnisse, die neben der Sache liegen.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 01</span><div class="ts3-nm">Ordner und Dateien</div><hr>'+
+          '<p>Claude Code arbeitet immer in genau dem Ordner, in dem du es startest. Alles darin darf es lesen und ändern, alles außerhalb existiert für es nicht.</p>'+
+          '<p>Deshalb bekommt jedes Projekt seinen eigenen Ordner, egal ob darin dein Speiseplan, deine Steuerunterlagen oder eine Website liegen.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 02</span><div class="ts3-nm">Die CLAUDE.md</div><hr>'+
+          '<p>Eine gewöhnliche Textdatei im Projektordner. Claude liest sie bei jedem Start und weiß dadurch, wer du bist, wie du arbeitest und was es niemals tun soll.</p>'+
+          '<p>Was da hineingehört und wie kurz sie bleibt, klärst du in Modul 4, sobald du deine erste schreibst.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 03</span><div class="ts3-nm">Skills, MCPs, Plugins</div><hr>'+
+          '<p><b>Skills</b> geben Claude neue Fähigkeiten, etwa einen bestimmten Schreibstil. <b>MCPs</b> sind Verbindungen nach außen, zum Mailfach oder zur Buchhaltung. <b>Plugins</b> liefern beides zusammen.</p>'+
+          '<p>Angeschlossen wird das ab Modul 4. Hier reicht, dass du die drei Wörter auseinanderhalten kannst.</p></div>'+
+      '</div>'
+    );
+
+    window.__ts3.sec('ts3d-zwei','ts3d-eins',
+      '<h3>Was dir beim <span class="g">Arbeiten</span> begegnet</h3>'+
+      '<p class="lead">Diese drei begegnen dir nicht beim Einrichten, sondern beim Arbeiten. Sie erklären, warum eine Sitzung gut läuft und die nächste zäh wird.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 04</span><div class="ts3-nm">Modelle und Denk-Tiefe</div><hr>'+
+          '<p>Es gibt kleine schnelle und große gründliche Modelle, und du kannst zusätzlich einstellen, wie lange nachgedacht wird.</p>'+
+          '<p>Beides stellst du selbst um. Für die meiste Arbeit reicht die mittlere Stufe, und sie ist deutlich sparsamer.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 05</span><div class="ts3-nm">Kontext und Tokens</div><hr>'+
+          '<p>Alles, was in einer Sitzung gesagt und gelesen wurde, bleibt im Kontext und wird bei jeder weiteren Antwort mitgeschleppt.</p>'+
+          '<p>Deshalb wird eine lange Sitzung langsamer und ungenauer. Die Lösung ist banal: aufräumen und neu anfangen.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Schicht 06</span><div class="ts3-nm">GitHub</div><hr>'+
+          '<p>Ein Ablageort im Netz für ganze Projektordner. Jede Änderung wird festgehalten, du kommst von jedem Rechner daran und kannst jederzeit zurück.</p>'+
+          '<p>Für dich heißt das vor allem: Deine Arbeit lebt nicht mehr nur auf einer Festplatte.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Sechs Wörter, mehr ist es nicht. Wenn dir eines davon in Modul 4 wiederbegegnet, weißt du, in welche Schublade es gehört, und genau das war der Zweck dieser Lektion.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3demp', anchorId:'ts3d-zwei', kind:'Nutzung',
+      animTitle:'Deine', animGold:'vier Gewohnheiten',
+      steps:[{n:'01',l:'Ordner zuerst'},{n:'02',l:'Briefing kurz halten'},{n:'03',l:'Nur laden, was greift'},{n:'04',l:'Sitzung sauber halten'}],
+      intro:'Vier Gewohnheiten, die aus diesen sechs Begriffen folgen. Sie kosten nichts und ersparen dir später viel:',
+      points:[
+        'Öffne Claude <b>immer im Projektordner</b>, nie irgendwo auf dem Schreibtisch. Der falsche Ordner ist die häufigste Ursache für unbrauchbare Ergebnisse.',
+        'Halte die <b>CLAUDE.md kurz</b>. Sie fährt bei jeder Anfrage mit, und jede überflüssige Zeile geht von deinem Nutzungsfenster ab.',
+        'Lade nur Erweiterungen, die du <b>wirklich benutzt</b>. Was mitfährt, ohne je anzuspringen, verbraucht trotzdem Platz.',
+        'Fang eine <b>neue Sitzung an</b>, wenn ein Thema abgeschlossen ist. Das ist wirksamer als jede Einstellung, die du sonst drehen könntest.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3dnext',
+      learn:[
+        'Du weißt, dass Claude <b>nur den Ordner sieht</b>, in dem du es startest.',
+        'Du weißt, wozu die <b>CLAUDE.md</b> da ist und warum sie kurz bleibt.',
+        'Du kannst <b>Skills, MCPs und Plugins</b> auseinanderhalten.',
+        'Du verstehst, warum eine Sitzung mit der Zeit <b>voll und langsam</b> wird.'
+      ],
+      next:'/claude-interface-durchlauf'
+    });
+  }
+  window.__ts3drest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.5 "Drei Fenster"  (/claude-interface-durchlauf)
+
+   Erklaeranimation "Ein Fenster, das mitwaechst." — EIGENES Konzept:
+   ECHTER LAYOUT-MORPH statt Cross-Fade. Es gibt genau EIN Fenster; dieselben
+   drei Bereiche (Dateibaum, Editor, Claude-Spalte) bleiben stehen und wechseln
+   per animierter Breite zwischen drei Zustaenden. Aussage: es ist nicht dreimal
+   etwas anderes, sondern dasselbe Claude mit mehr Sicht drumherum — genau der
+   Fall, fuer den der Katalog den Morph statt des Cross-Fades vorsieht.
+   Feste Buehnenhoehe (300px) gegen Layout-Spruenge.
+   ============================================================ */
+
+/* ---- L3.5 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3e) return;
+  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.5'),
+      alt: 'Claude Interface Durchlauf: App, Terminal, Erweiterung',
+      eyebrow: 'L 3.5',
+      title: 'Drei <span class="ts-gold">Fenster</span>'
+    });
+    window.__ts3.body('ts3e-intro',
+      '<p>Claude Code lässt sich auf drei Arten öffnen, und alle drei sprechen mit demselben Programm. Was sich unterscheidet, ist <b>wie viel du dabei siehst</b>.</p>'+
+      '<p>Was sich unterscheidet, ist nur, wie viel du dabei mitbekommst, und das entscheidet mehr, als man zuerst denkt. Wer nichts sieht, merkt zu spät, wenn etwas an der falschen Stelle landet.</p>'+
+      '<p>Ich zeige dir alle drei und sage dir, in welchem Fenster ich selbst sitze und warum. Es ist eine Entscheidung für den Anfang, keine für immer, und du kannst sie jederzeit revidieren.</p>'
+    );
+  }
+  window.__ts3e=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.5 · Abschnitt 02 (Erklaeranimation #ts3eanim) ---- */
+(function(){
+  if(window.__ts3eanim) return;
+  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
+
+  var STATES=[
+    { k:'Desktop-App',  path:'Claude',                 side:0,  main:0,  chat:100, term:0 },
+    { k:'Terminal',     path:'~/mein-projekt',         side:24, main:76, chat:0,   term:52 },
+    { k:'Erweiterung',  path:'~/mein-projekt · Claude',side:20, main:46, chat:34,  term:0 }
+  ];
+  var CAPS=[
+    'In der <b>Desktop-App</b> hast du ein Chatfenster und sonst nichts. Am schnellsten eingerichtet, und am wenigsten zu sehen.',
+    'Im <b>Terminal deines Editors</b> liegt der Dateibaum daneben. Du siehst live, welche Datei gerade entsteht oder sich ändert.',
+    'Mit der <b>Erweiterung</b> sitzt Claude als eigene Spalte neben dem Editor. Fast wie ein normales Chatfenster, nur mit allem drumherum.'
+  ];
+  var DWELL=4800;
+
+  var CSS=`
+  #ts3eanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3eanim *{box-sizing:border-box}
+  #ts3eanim .fw-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3eanim .fw-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3eanim .fw-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3eanim h2.fw-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3eanim h2.fw-title .ts-gold{color:#c7b489}
+  #ts3eanim .fw-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3eanim .fw-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3eanim .fw-frame{position:relative;width:min(620px,100%);margin:0 auto;border-radius:16px;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9)}
+  #ts3eanim .fw-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
+  #ts3eanim .fw-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;
+    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  #ts3eanim .fw-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
+  #ts3eanim .fw-dot:first-child{background:rgba(199,180,137,.55)}
+  #ts3eanim .fw-path{margin-left:8px;font:600 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.04em;color:#c7b489;transition:opacity .4s ease}
+  #ts3eanim .fw-wrap.swap .fw-path{opacity:0}
+
+  /* Die drei Bereiche bleiben IMMER dieselben Knoten, nur ihre Breite morpht */
+  #ts3eanim .fw-body{display:flex;height:300px}
+  #ts3eanim .fw-side,#ts3eanim .fw-main,#ts3eanim .fw-chat{
+    overflow:hidden;transition:width .82s cubic-bezier(.16,1,.3,1),opacity .6s ease,padding .82s cubic-bezier(.16,1,.3,1)}
+  #ts3eanim .fw-side{width:0;opacity:0;padding:14px 0;border-right:1px solid rgba(255,255,255,.07);flex:0 0 auto}
+  #ts3eanim .fw-main{width:0;opacity:0;padding:0;position:relative;flex:0 0 auto;display:flex;flex-direction:column}
+  #ts3eanim .fw-chat{width:100%;opacity:1;padding:16px;border-left:1px solid rgba(255,255,255,.07);flex:0 0 auto}
+  #ts3eanim .fw-side.on{opacity:1;padding:14px 10px}
+  #ts3eanim .fw-main.on{opacity:1}
+  #ts3eanim .fw-chat.off{width:0;opacity:0;padding:0}
+  /* Endzustand = Default: ohne JS steht Zustand 3 (Erweiterung) fertig da. */
+  #ts3eanim .fw-wrap:not(.js) .fw-side{width:20%;opacity:1;padding:14px 10px}
+  #ts3eanim .fw-wrap:not(.js) .fw-main{width:46%;opacity:1}
+  #ts3eanim .fw-wrap:not(.js) .fw-chat{width:34%}
+  #ts3eanim .fw-wrap:not(.js) .fw-step:last-child{border-color:rgba(199,180,137,.55)}
+
+  #ts3eanim .fw-flbl{font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin:0 0 10px 6px;white-space:nowrap}
+  #ts3eanim .fw-f{display:flex;align-items:center;gap:8px;margin:0 0 8px 6px;white-space:nowrap}
+  #ts3eanim .fw-fi{width:16px;height:13px;border-radius:2px 4px 4px 4px;flex:0 0 auto;
+    background:linear-gradient(rgba(199,180,137,.3),rgba(199,180,137,.3)),#05060b;border:1px solid rgba(199,180,137,.4)}
+  #ts3eanim .fw-fl{height:8px;border-radius:5px;background:rgba(255,255,255,.15)}
+  #ts3eanim .fw-fl.k{background:rgba(199,180,137,.5)}
+
+  #ts3eanim .fw-code{flex:1 1 auto;padding:14px 16px;overflow:hidden}
+  #ts3eanim .fw-cl{height:8px;border-radius:5px;background:rgba(255,255,255,.12);margin:0 0 9px}
+  #ts3eanim .fw-cl.k{background:rgba(199,180,137,.35)}
+  #ts3eanim .fw-term{border-top:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.35);padding:0 14px;
+    height:0;opacity:0;overflow:hidden;transition:height .82s cubic-bezier(.16,1,.3,1),opacity .6s ease,padding .82s ease}
+  #ts3eanim .fw-term.on{opacity:1;padding:12px 14px}
+  #ts3eanim .fw-tl{font:600 11px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(255,255,255,.62);white-space:nowrap}
+  #ts3eanim .fw-tl b{color:#c7b489;font-weight:700}
+
+  #ts3eanim .fw-msg{border-radius:11px;padding:10px 12px;margin:0 0 9px;
+    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(255,255,255,.10)}
+  #ts3eanim .fw-msg.me{border-color:rgba(199,180,137,.3)}
+  #ts3eanim .fw-ml{height:8px;border-radius:5px;background:rgba(255,255,255,.14);margin:0 0 7px}
+  #ts3eanim .fw-ml:last-child{margin-bottom:0}
+  #ts3eanim .fw-ml.k{background:rgba(199,180,137,.5)}
+  #ts3eanim .fw-clbl{font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:0 0 10px;white-space:nowrap}
+
+  /* Umschalter — drei gleichrangige Chips, exakt gleich gross, auf derselben Achse */
+  #ts3eanim .fw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(620px,100%);margin:20px auto 0}
+  #ts3eanim .fw-step{height:76px;border-radius:13px;padding:0 12px;cursor:pointer;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
+  #ts3eanim .fw-step .sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.3);transition:color .4s ease}
+  #ts3eanim .fw-step .sl{font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.4);transition:color .4s ease}
+  #ts3eanim .fw-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
+  #ts3eanim .fw-step.on .sn{color:#c7b489}
+  #ts3eanim .fw-step.on .sl{color:rgba(255,255,255,.86)}
+
+  #ts3eanim .fw-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3eanim .fw-cap b{color:#c7b489;font-weight:600}
+  #ts3eanim .fw-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3eanim .fw-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3eanim .fw-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @media(max-width:820px){
+    #ts3eanim .fw-body{height:250px}
+    #ts3eanim .fw-steps{grid-template-columns:1fr;gap:10px}
+    #ts3eanim .fw-step{height:56px;flex-direction:row;gap:10px;justify-content:flex-start;text-align:left}
+    #ts3eanim .fw-cap{min-height:120px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #ts3eanim .fw-side,#ts3eanim .fw-main,#ts3eanim .fw-chat,#ts3eanim .fw-term{transition:none}
+  }
+  `;
+
+  function html(){
+    var steps=STATES.map(function(s,i){
+      return '<div class="fw-step" data-i="'+i+'"><span class="sn">0'+(i+1)+'</span><span class="sl">'+s.k+'</span></div>';
+    }).join('');
+    return `
+<div class="fw-head">
+  <span class="fw-eyebrow">Immer dasselbe Claude</span>
+  <h2 class="fw-title">Ein Fenster, das <span class="ts-gold">mitwächst</span>.</h2>
+  <p class="fw-sub">Es sind nicht drei Programme. Es ist dasselbe Claude, und du entscheidest, wie viel drumherum du dabei sehen willst.</p>
+</div>
+<div class="fw-wrap">
+  <div class="fw-frame">
+    <div class="fw-bar"><span class="fw-dot"></span><span class="fw-dot"></span><span class="fw-dot"></span><span class="fw-path">Claude</span></div>
+    <div class="fw-body">
+      <div class="fw-side">
+        <div class="fw-flbl">Projekt</div>
+        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl k" style="width:52px"></span></div>
+        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:66px"></span></div>
+        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:44px"></span></div>
+        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:58px"></span></div>
+      </div>
+      <div class="fw-main">
+        <div class="fw-code">
+          <div class="fw-cl k" style="width:46%"></div>
+          <div class="fw-cl" style="width:72%"></div>
+          <div class="fw-cl" style="width:58%"></div>
+          <div class="fw-cl k" style="width:34%"></div>
+          <div class="fw-cl" style="width:64%"></div>
+        </div>
+        <div class="fw-term">
+          <div class="fw-tl"><b>&gt;</b> claude</div>
+          <div class="fw-tl">Datei angelegt.</div>
+        </div>
+      </div>
+      <div class="fw-chat">
+        <div class="fw-clbl">Claude</div>
+        <div class="fw-msg me"><div class="fw-ml k" style="width:70%"></div><div class="fw-ml" style="width:44%"></div></div>
+        <div class="fw-msg"><div class="fw-ml" style="width:88%"></div><div class="fw-ml" style="width:62%"></div><div class="fw-ml" style="width:76%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fw-steps">${steps}</div>
+  <p class="fw-cap"></p>
+  <div class="fw-foot"><button class="fw-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function show(root,i){
+    var s=STATES[i]; if(!s) return;
+    var wrap=root.querySelector('.fw-wrap');
+    var side=root.querySelector('.fw-side'), main=root.querySelector('.fw-main'),
+        chat=root.querySelector('.fw-chat'), term=root.querySelector('.fw-term');
+    side.style.width=s.side+'%'; side.classList.toggle('on', s.side>0);
+    main.style.width=s.main+'%'; main.classList.toggle('on', s.main>0);
+    chat.style.width=s.chat+'%'; chat.classList.toggle('off', s.chat===0);
+    term.style.height=s.term+'px'; term.classList.toggle('on', s.term>0);
+    wrap.classList.add('swap');
+    later(function(){ root.querySelector('.fw-path').textContent=s.path; wrap.classList.remove('swap'); },260);
+    var st=root.querySelectorAll('.fw-step');
+    for(var t=0;t<st.length;t++) st[t].classList.toggle('on', t===i);
+    var cap=root.querySelector('.fw-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
+  }
+
+  function run(root,i){ clear(); show(root,i); if(i<STATES.length-1) later(function(){ run(root,i+1); },DWELL); }
+
+  function play(root){
+    var wrap=root.querySelector('.fw-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); show(root,STATES.length-1); return; }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3eanim'; el.innerHTML=html();
+    el.querySelector('.fw-replay').addEventListener('click',function(){ play(el); });
+    var st=el.querySelectorAll('.fw-step');
+    for(var i=0;i<st.length;i++){ (function(n){ st[n].addEventListener('click',function(){ clear(); el.querySelector('.fw-wrap').classList.add('js'); show(el,n); }); })(i); }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3eanim-css'))return;
+    var s=document.createElement('style'); s.id='ts3eanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3eanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3eanim')) return;
+    var anchor=document.getElementById('ts3e-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    /* Endzustand = Default: ohne Trigger steht Zustand 3 (Erweiterung) fertig da */
+    show(el, STATES.length-1);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.fw-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts3eanimKill=function(){ clear(); };
+  window.__ts3eanim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.5 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3erest) return;
+  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3eanim')) return;
+
+    window.__ts3.sec('ts3e-drei','ts3eanim',
+      '<h3>Wo du wirklich <span class="g">sitzt</span></h3>'+
+      '<p class="lead">Alle drei starten dasselbe Programm. Der Unterschied liegt darin, wie viel Übersicht du dabei behältst und wie gut du eingreifen kannst, wenn etwas schiefläuft.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Weg 1</span><div class="ts3-nm">In der Desktop-App</div><hr>'+
+          '<p>Am schnellsten eingerichtet, du brauchst nichts weiter zu installieren. Dafür siehst du nur das Chatfenster und musst dir alles andere denken.</p>'+
+          '<p class="ts3-foot">Gut zum Anfangen, schlecht bei allem, was länger dauert.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Weg 2</span><div class="ts3-nm">Im Terminal eines Editors</div><hr>'+
+          '<p>Du öffnest deinen Projektordner in einem kostenlosen Editor und startest Claude im eingebauten Terminal. Der Dateibaum liegt daneben, du siehst jede Änderung sofort.</p>'+
+          '<p class="ts3-foot">Mein Weg. Volle Kontrolle, mehrere Sitzungen gleichzeitig.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Weg 3</span><div class="ts3-nm">Über die Erweiterung</div><hr>'+
+          '<p>Dieselbe Umgebung, aber Claude sitzt als eigene Spalte neben dem Editor statt im Terminal. Fühlt sich an wie ein Chatfenster und zeigt trotzdem alles drumherum.</p>'+
+          '<p class="ts3-foot">Der freundlichste Einstieg, wenn Terminals dich abschrecken.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Du musst dich nicht festlegen. Alle drei greifen auf dieselben Ordner zu, du kannst am selben Projekt heute im Terminal und morgen in der Erweiterung arbeiten.</p>'
+    );
+
+    window.__ts3.sec('ts3e-warum','ts3e-drei',
+      '<h3>Warum ich im <span class="g">Terminal</span> arbeite</h3>'+
+      '<p>Drei Gründe, und keiner davon hat mit Technikverliebtheit zu tun.</p>'+
+      '<p>Erstens sehe ich <b>jede Datei, die entsteht</b>, in dem Moment, in dem sie entsteht. Wenn etwas an der falschen Stelle landet, merke ich das sofort und nicht erst nach zwanzig Minuten.</p>'+
+      '<p>Zweitens kann ich <b>mehrere Sitzungen gleichzeitig</b> laufen lassen, jede in ihrem eigenen Fenster, jede an einem anderen Thema. Das geht in der App nicht.</p>'+
+      '<p>Drittens ist es der Weg, auf dem später auch die Systeme laufen, die im Hintergrund für dich arbeiten. Wer sich früh daran gewöhnt, muss später nichts umlernen.</p>'+
+      '<p class="ts3-close">Schreckt dich ein Terminal ab, fang mit der <b>Erweiterung</b> an. Der Schritt ins Terminal ist von dort aus klein, und niemand sieht dir hinterher an, welchen Weg du genommen hast.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3eemp', anchorId:'ts3e-warum', kind:'Einrichtung',
+      animTitle:'Dein', animGold:'Arbeitsfenster',
+      steps:[{n:'01',l:'Fenster wählen'},{n:'02',l:'In Ordnern denken'},{n:'03',l:'Bei einem Weg bleiben'},{n:'04',l:'In Modul 4 einrichten'}],
+      intro:'Entschieden wird hier, eingerichtet wird in Modul 4. Diese vier Punkte nimmst du mit:',
+      points:[
+        'Leg dich jetzt auf <b>ein Fenster</b> fest. Ob es das richtige war, merkst du in der ersten Woche, und wechseln kannst du dann immer noch.',
+        'Wenn dich ein Terminal abschreckt, nimm die <b>Erweiterung</b>. Sie sieht aus wie ein Chatfenster und liegt trotzdem schon in der richtigen Umgebung.',
+        'Für alle drei Wege gilt dasselbe: Claude arbeitet in dem <b>Ordner</b>, den du geöffnet hast. Das entscheidet mehr als die Oberfläche.',
+        'Bleib die ersten Wochen bei <b>einem Weg</b>. Zwischen den Oberflächen zu wechseln kostet dich mehr Zeit, als jede von ihnen dir spart.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3enext',
+      learn:[
+        'Du kennst die <b>drei Wege</b>, Claude Code zu öffnen.',
+        'Du weißt, dass alle drei <b>dasselbe Programm</b> starten.',
+        'Du kennst die drei Gründe für das <b>Terminal</b> und die Alternative dazu.',
+        'Du weißt, dass du dich <b>nicht festlegen</b> musst.'
+      ],
+      next:'/stack-aufrumen'
+    });
+  }
+  window.__ts3erest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.6 "Stack aufräumen"  (/stack-aufrumen)
+
+   Erklaeranimation "Zwölf Werkzeuge, drei Stapel." — EIGENES Konzept:
+   eine echte SORTIER-Bewegung. Zwoelf gleich grosse Chips liegen zu Beginn
+   durcheinander im oberen Feld; die drei Zielspalten stehen als Moebel ab
+   Beat 0 ruhig da. Je Beat wandern vier Chips in ihre Spalte — es spawnt
+   nichts, es verschwindet nichts, es bewegt sich nur.
+   Kompositions-Regel: alle Chips exakt gleich gross, alle Elemente auf
+   derselben Achse (width:min(680px,100%)), feste Buehnenhoehe gegen Spruenge.
+
+   Inhaltlich bewusst OHNE die Haltungs-Predigt aus Modul 0 ("fang schlank an"):
+   hier wird sortiert, nicht gepredigt.
+   ============================================================ */
+
+/* ---- L3.6 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3f) return;
+  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.6'),
+      alt: 'Stack aufräumen: bleibt, macht Claude, fliegt raus',
+      eyebrow: 'L 3.6',
+      title: 'Stack <span class="ts-gold">aufräumen</span>'
+    });
+    window.__ts3.body('ts3f-intro',
+      '<p>Bevor ein neues Werkzeug dazukommt, lohnt ein Blick auf die, die schon da sind. Bei vielen haben sich über die Jahre etliche Abos angesammelt, von denen die Hälfte seit Wochen niemand mehr geöffnet hat.</p>'+
+      '<p>Wir machen daraus drei Stapel, und sortiert wird nach einer einzigen Frage: Wer macht diese Arbeit ab morgen. Das ist keine Fleißaufgabe, zwanzig Minuten reichen.</p>'+
+      '<p>Ist deine Liste kurz, umso besser. Dann bist du schneller fertig und weißt trotzdem, wonach du künftig sortierst, wenn wieder ein Abo dazukommen will.</p>'
+    );
+  }
+  window.__ts3f=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.6 · Abschnitt 02 (Erklaeranimation #ts3fanim) ---- */
+(function(){
+  if(window.__ts3fanim) return;
+  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
+
+  /* g = Zielspalte (0 bleibt · 1 macht Claude · 2 fliegt raus), s = Startplatz im Feld oben */
+  var CHIPS=[
+    {t:'Kalender',            g:0, s:0},
+    {t:'Recherche-Abo',       g:1, s:1},
+    {t:'Zweites Notiz-Tool',  g:2, s:2},
+    {t:'Notiz-Tool',          g:0, s:3},
+    {t:'Text-Assistent',      g:1, s:4},
+    {t:'Mindmap-Abo',         g:2, s:5},
+    {t:'Buchhaltung',         g:0, s:6},
+    {t:'Zusammenfasser',      g:1, s:7},
+    {t:'Screenshot-Abo',      g:2, s:8},
+    {t:'Code-Editor',         g:0, s:9},
+    {t:'Übersetzer-Abo',      g:1, s:10},
+    {t:'Projekt-Tool Nr. 3',  g:2, s:11}
+  ];
+  var COLS=[
+    {t:'Bleibt',       d:'hat eine eigene Aufgabe'},
+    {t:'Macht Claude', d:'wandert in Claude Code'},
+    {t:'Fliegt raus',  d:'seit Wochen nicht geöffnet'}
+  ];
+  var CAPS=[
+    'So sieht es bei den meisten aus: ein Dutzend Werkzeuge, alle irgendwann aus einem guten Grund dazugekommen, keines je wieder überprüft.',
+    'Zuerst das, was <b>bleibt</b>. Kalender, Notizen, Buchhaltung, dein Editor: alles Dinge mit einer klaren Aufgabe, die Claude nicht übernimmt.',
+    'Dann das, was <b>Claude Code künftig selbst macht</b>. Recherchieren, Texte schreiben, zusammenfassen, übersetzen.',
+    'Und der dritte Stapel: alles, was du seit Wochen nicht geöffnet hast. Der <b>fliegt raus</b>, und mit ihm die monatliche Abbuchung.'
+  ];
+  var DWELL=4600;
+
+  /* Geometrie in Prozent der Buehnenbreite bzw. Pixeln der Buehnenhoehe */
+  var CH_W=22.5, START_X=[1.5,26.3,51.2,76], START_Y=[10,48,86], COL_X=[4.5,38.75,73], SLOT_Y=[206,244,282,320];
+
+  var CSS=`
+  #ts3fanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3fanim *{box-sizing:border-box}
+  #ts3fanim .sr-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3fanim .sr-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3fanim .sr-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3fanim h2.sr-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3fanim h2.sr-title .ts-gold{color:#c7b489}
+  #ts3fanim .sr-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3fanim .sr-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3fanim .sr-stage{position:relative;width:min(680px,100%);height:372px;margin:0 auto}
+  #ts3fanim .sr-inlbl{position:absolute;left:0;top:-22px;font:600 9.5px/1 -apple-system,sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34)}
+  /* Das Eingangsfeld ist MOEBEL und bleibt stehen, auch wenn alle Chips heraus sind —
+     sonst klafft nach dem Sortieren ein Loch (Kompositions-Regel 1b c). */
+  #ts3fanim .sr-in{position:absolute;left:0;right:0;top:0;height:126px;border-radius:14px;
+    border:1px dashed rgba(255,255,255,.10);pointer-events:none}
+  #ts3fanim .sr-inempty{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none;
+    font:600 11px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);
+    opacity:0;transition:opacity .8s ease}
+  #ts3fanim .sr-stage.empty .sr-inempty{opacity:1}
+
+/* Zielspalten = Moebel, ab Beat 0 ruhig sichtbar */
+  #ts3fanim .sr-col{position:absolute;top:150px;height:222px;width:31.5%;border-radius:14px;padding:11px 10px 0;
+    background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b;
+    border:1px dashed rgba(255,255,255,.12);transition:border-color .6s ease,box-shadow .6s ease}
+  #ts3fanim .sr-col.act{border-style:solid;border-color:rgba(199,180,137,.5);box-shadow:0 0 34px -14px rgba(199,180,137,.5)}
+  #ts3fanim .sr-col.out.act{border-color:rgba(255,255,255,.22);box-shadow:none}
+  #ts3fanim .sr-ct{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;color:rgba(255,255,255,.55);transition:color .6s ease}
+  #ts3fanim .sr-col.act .sr-ct{color:#fff}
+  #ts3fanim .sr-cd{font-size:10.5px;line-height:1.35;color:rgba(255,255,255,.34);margin-top:3px}
+
+  /* Zwoelf exakt gleich grosse Chips */
+  #ts3fanim .sr-chip{position:absolute;height:30px;border-radius:9px;padding:0 9px;display:flex;align-items:center;justify-content:center;
+    font-size:11px;line-height:1.2;text-align:center;color:rgba(255,255,255,.78);
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;
+    border:1px solid rgba(255,255,255,.14);
+    transition:left .85s cubic-bezier(.16,1,.3,1),top .85s cubic-bezier(.16,1,.3,1),border-color .6s ease,color .6s ease,box-shadow .6s ease}
+  #ts3fanim .sr-chip.keep{border-color:rgba(199,180,137,.55);color:#fff;box-shadow:0 0 22px -10px rgba(199,180,137,.55)}
+  #ts3fanim .sr-chip.gone{border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3);text-decoration:line-through}
+
+  #ts3fanim .sr-cap{max-width:640px;margin:30px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3fanim .sr-cap b{color:#c7b489;font-weight:600}
+  #ts3fanim .sr-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3fanim .sr-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3fanim .sr-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  /* Mobile nach Qualitaets-Gesetz 8, Variante "overflow-x:auto + min-width":
+     die Sortier-Komposition bleibt unveraendert und wird seitlich scrollbar,
+     statt die Chips zu quetschen (Text lief sonst aus den Kacheln). */
+  #ts3fanim .sr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  #ts3fanim .sr-scroll::-webkit-scrollbar{display:none}
+  @media(max-width:820px){
+    #ts3fanim .sr-stage{width:680px;min-width:680px}
+    #ts3fanim .sr-cap{min-height:130px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts3fanim .sr-chip{transition:none} }
+  `;
+
+  function html(){
+    var cols=COLS.map(function(c,i){
+      return '<div class="sr-col'+(i===2?' out':'')+'" data-i="'+i+'" style="left:'+(i*34.25)+'%"><div class="sr-ct">'+c.t+'</div><div class="sr-cd">'+c.d+'</div></div>';
+    }).join('');
+    var chips=CHIPS.map(function(c,i){
+      var col=c.s%4, row=Math.floor(c.s/4);
+      return '<div class="sr-chip" data-i="'+i+'" style="width:'+CH_W+'%;left:'+START_X[col]+'%;top:'+START_Y[row]+'px">'+c.t+'</div>';
+    }).join('');
+    return `
+<div class="sr-head">
+  <span class="sr-eyebrow">Vor dem Aufbau</span>
+  <h2 class="sr-title">Zwölf Werkzeuge, drei <span class="ts-gold">Stapel</span>.</h2>
+  <p class="sr-sub">Nimm alles, was du im Monat bezahlst, und leg es einmal offen hin. Danach sortieren wir, und zwar nur nach einer einzigen Frage: Wer macht die Arbeit künftig?</p>
+</div>
+<div class="sr-wrap">
+  <div class="sr-scroll"><div class="sr-stage">
+    <span class="sr-inlbl">Dein Stack heute</span>
+    <span class="sr-in"></span>
+    <span class="sr-inempty">alles einsortiert</span>
+    ${cols}
+    ${chips}
+  </div></div>
+  <p class="sr-cap"></p>
+  <div class="sr-foot"><button class="sr-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function reset(root){
+    var chips=root.querySelectorAll('.sr-chip');
+    for(var i=0;i<chips.length;i++){
+      var c=CHIPS[i], col=c.s%4, row=Math.floor(c.s/4);
+      chips[i].style.left=START_X[col]+'%'; chips[i].style.top=START_Y[row]+'px';
+      chips[i].classList.remove('keep','gone');
+    }
+    var cs=root.querySelectorAll('.sr-col'); for(var k=0;k<cs.length;k++) cs[k].classList.remove('act');
+    root.querySelector('.sr-stage').classList.remove('empty');
+  }
+
+  function sortGroup(root,g){
+    var chips=root.querySelectorAll('.sr-chip'), slot=0;
+    for(var i=0;i<chips.length;i++){
+      if(CHIPS[i].g!==g) continue;
+      chips[i].style.left=COL_X[g]+'%';
+      chips[i].style.top=SLOT_Y[slot]+'px';
+      chips[i].classList.add(g===2?'gone':'keep');
+      slot++;
+    }
+    root.querySelectorAll('.sr-col')[g].classList.add('act');
+    var rest=0, all=root.querySelectorAll('.sr-chip');
+    for(var q=0;q<all.length;q++){ if(!all[q].classList.contains('keep') && !all[q].classList.contains('gone')) rest++; }
+    root.querySelector('.sr-stage').classList.toggle('empty', rest===0);
+  }
+
+  function step(root,n){
+    if(n===0) reset(root); else sortGroup(root,n-1);
+    var cap=root.querySelector('.sr-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
+  }
+
+  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },DWELL); }
+
+  function play(root){
+    var wrap=root.querySelector('.sr-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      clear(); reset(root); sortGroup(root,0); sortGroup(root,1); sortGroup(root,2);
+      var cap=root.querySelector('.sr-cap'); if(cap) cap.innerHTML=CAPS[CAPS.length-1];
+      return;
+    }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3fanim'; el.innerHTML=html();
+    el.querySelector('.sr-replay').addEventListener('click',function(){ play(el); });
+    var cs=el.querySelectorAll('.sr-col');
+    for(var i=0;i<cs.length;i++){ (function(n){ cs[n].addEventListener('click',function(){ clear(); step(el,n+1); }); })(i); }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3fanim-css'))return;
+    var s=document.createElement('style'); s.id='ts3fanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3fanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3fanim')) return;
+    var anchor=document.getElementById('ts3f-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    /* Endzustand = Default: ohne Trigger stehen alle drei Stapel fertig sortiert da */
+    sortGroup(el,0); sortGroup(el,1); sortGroup(el,2);
+    el.querySelector('.sr-cap').innerHTML=CAPS[CAPS.length-1];
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.sr-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts3fanimKill=function(){ clear(); };
+  window.__ts3fanim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.6 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3frest) return;
+  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3fanim')) return;
+
+    window.__ts3.sec('ts3f-stapel','ts3fanim',
+      '<h3>Die drei <span class="g">Stapel</span></h3>'+
+      '<p class="lead">Sortiert wird nach einer einzigen Frage: Wer macht diese Arbeit ab morgen. Ob dir ein Werkzeug gefällt, spielt dabei keine Rolle.</p>'+
+      '<div class="ts3-cards c3">'+
+        '<div class="ts3-card"><span class="ts3-eb">Stapel 1</span><div class="ts3-nm">Bleibt</div><hr>'+
+          '<p>Alles mit einer eigenen Aufgabe, die Claude Code nicht übernimmt: dein Kalender, dein Notiz-Tool, die Buchhaltung, der Editor.</p>'+
+          '<p>Hierher gehört auch ein <b>Automations-Werkzeug</b>, wenn etwas laufen soll, während dein Rechner aus ist. Genau darauf baut später Modul 5 auf.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Stapel 2</span><div class="ts3-nm">Macht Claude</div><hr>'+
+          '<p>Recherche, Textarbeit, Zusammenfassungen, kleine Abläufe, Dokumente erstellen. Für all das zahlst du heute vermutlich einzeln.</p>'+
+          '<p>Kündige hier nicht sofort. Lass beides einen Monat parallel laufen und schau, was du wirklich noch aufmachst.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Stapel 3</span><div class="ts3-nm">Fliegt raus</div><hr>'+
+          '<p>Alles, was du seit Wochen nicht geöffnet hast. Da hilft kein Argument, das Nutzungsverhalten hat längst entschieden.</p>'+
+          '<p>Der Stapel ist meistens größer, als einem lieb ist, und er ist der einzige, der sofort Geld zurückbringt.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Am Ende steht ein schlanker Stack mit Claude Code in der Mitte. <b>Jedes Werkzeug, das du behältst, will bedient und bezahlt werden</b>, und das ist Zeit, die nicht in deine Arbeit fließt.</p>'
+    );
+
+    window.__ts3.sec('ts3f-uebung','ts3f-stapel',
+      '<h3>Die Übung für <span class="g">heute</span></h3>'+
+      '<p class="lead">Zwanzig Minuten, ein Blatt Papier oder eine leere Notiz. Danach weißt du zum ersten Mal genau, wofür dein Werkzeug-Budget draufgeht.</p>'+
+      '<div class="ts3-do">'+
+        '<span class="ts3-eb">Jetzt du</span>'+
+        '<ol>'+
+          '<li>Zieh dir aus deinem Konto oder deinem App-Store die <b>Liste aller laufenden Abos</b>. Aus dem Kopf vergisst jeder die Hälfte.</li>'+
+          '<li>Schreib hinter jedes den <b>letzten Tag, an dem du es geöffnet hast</b>. Wenn du es nicht mehr weißt, ist das die Antwort.</li>'+
+          '<li>Sortier in die drei Stapel. Ein Werkzeug darf nur in <b>Bleibt</b>, wenn du in einem Satz sagen kannst, was es kann, das Claude nicht kann.</li>'+
+          '<li>Kündige den dritten Stapel <b>heute</b>, nicht nächste Woche. Der zweite bekommt einen Monat Parallelbetrieb.</li>'+
+        '</ol>'+
+      '</div>'+
+      '<p class="ts3-close">Heb dir die Liste auf. Ab <b>Modul 4</b> wirst du an einigen Stellen merken, dass Claude eine Aufgabe übernimmt, für die du noch bezahlst.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3femp', anchorId:'ts3f-uebung', kind:'Nutzung',
+      animTitle:'Dein', animGold:'schlanker Stack',
+      steps:[{n:'01',l:'Echte Abo-Liste ziehen'},{n:'02',l:'Letzte Nutzung notieren'},{n:'03',l:'Einen Monat parallel'},{n:'04',l:'Wiedervorlage setzen'}],
+      intro:'Damit die Aufräumaktion nicht in zwei Monaten wieder von vorne losgeht, halte dich an diese vier Punkte:',
+      points:[
+        'Arbeite mit der <b>echten Abo-Liste</b> aus Konto oder App-Store, nie aus dem Gedächtnis. Genau die vergessenen Posten sind die teuren.',
+        'Entscheide nach der <b>letzten Nutzung</b>, nicht nach dem guten Vorsatz. Ein Werkzeug, das du seit acht Wochen nicht geöffnet hast, öffnest du auch nächsten Monat nicht.',
+        'Lass Stapel zwei einen <b>Monat parallel</b> laufen, bevor du kündigst. So merkst du, ob Claude die Aufgabe wirklich übernimmt.',
+        'Setz dir eine <b>Wiedervorlage in drei Monaten</b>. Neue Abos schleichen sich genauso ein, wie die alten es getan haben.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3fnext',
+      learn:[
+        'Du kennst die <b>eine Frage</b>, nach der sortiert wird: Wer macht die Arbeit?',
+        'Du hast deine Werkzeuge in <b>drei Stapel</b> geteilt.',
+        'Du weißt, warum Stapel zwei einen <b>Monat Parallelbetrieb</b> bekommt.',
+        'Du hast den dritten Stapel <b>gekündigt</b> und Geld zurück.'
+      ],
+      next:'/der-umstieg-von-chat-app-auf-claude-code'
+    });
+  }
+  window.__ts3frest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · L3.7 "Der Umstieg"  (/der-umstieg-von-chat-app-auf-claude-code)
+
+   Erklaeranimation "Derselbe Satz, zwei Orte." — EIGENES Konzept:
+   ein direkter Nebeneinander-Vergleich. ZWEI exakt gleich grosse Fenster
+   (repeat(2,1fr), feste Hoehe 288px) auf derselben Achse; in beiden steht
+   derselbe Satz. Je Beat wechselt nur, was UNTER dem Satz passiert:
+   links waechst eine Textantwort, rechts entstehen Dateien und eine
+   Fertig-Meldung. Kein Sortieren, kein Pfad, kein Morph — bewusst anders
+   als L3.2 (Weg), L3.5 (Morph) und L3.6 (Sortieren).
+   ============================================================ */
+
+/* ---- L3.7 · Abschnitt 01 ---- */
+(function(){
+  if(window.__ts3g) return;
+  function on(){ return /\/der-umstieg-von-chat-app-auf-claude-code\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('L 3.7'),
+      alt: 'Der Umstieg von der Chat-App auf Claude Code',
+      eyebrow: 'L 3.7',
+      title: 'Der <span class="ts-gold">Umstieg</span>'
+    });
+    window.__ts3.body('ts3g-intro',
+      '<p>Der schwierigste Teil an Claude Code ist nicht die Technik. Es ist die Gewohnheit, in ein Chatfenster zu tippen und eine Antwort zu erwarten, statt einen Auftrag zu geben und ein Ergebnis zu bekommen.</p>'+
+      '<p>Diese Lektion räumt die vier Gedanken aus dem Weg, die den Umstieg am häufigsten aufhalten. Danach weißt du, was du von der Chat-App behältst, wo du anfängst und was du in der ersten Woche noch nicht erwarten solltest.</p>'+
+      '<p>Es ist die letzte Lektion dieses Moduls. Ab Modul 4 liegen die Hände am Gerät, und der Aufbau, den wir hier nur beschrieben haben, entsteht Schritt für Schritt.</p>'
+    );
+  }
+  window.__ts3g=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.7 · Abschnitt 02 (Erklaeranimation #ts3ganim) ---- */
+(function(){
+  if(window.__ts3ganim) return;
+  function on(){ return /\/der-umstieg-von-chat-app-auf-claude-code\/?$/.test(location.pathname); }
+
+  var CAPS=[
+    'Derselbe Satz, in ganz normaler Sprache. Du musst dafür nichts können, was du nicht schon kannst.',
+    'Links antwortet die <b>Chat-App</b>: ein sauberer Text, den du lesen, kopieren und irgendwo einfügen musst.',
+    'Rechts legt <b>Claude Code</b> die Dateien an, füllt sie und meldet sich, wenn es fertig ist. Du hast kein Ergebnis zum Abtippen, du hast das Ergebnis.'
+  ];
+  var DWELL=5000;
+
+  var CSS=`
+  #ts3ganim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3ganim *{box-sizing:border-box}
+  #ts3ganim .um-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3ganim .um-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3ganim .um-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3ganim h2.um-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3ganim h2.um-title .ts-gold{color:#c7b489}
+  #ts3ganim .um-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3ganim .um-wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  #ts3ganim .um-stage{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:min(700px,100%);margin:0 auto}
+  #ts3ganim .um-win{position:relative;height:288px;border-radius:15px;overflow:hidden;display:flex;flex-direction:column;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.11);box-shadow:0 28px 62px -32px rgba(0,0,0,.9);
+    transition:border-color .6s ease,box-shadow .6s ease}
+  #ts3ganim .um-win.lit{border-color:rgba(199,180,137,.6);box-shadow:0 0 40px -14px rgba(199,180,137,.5)}
+  #ts3ganim .um-bar{display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;flex:0 0 auto;
+    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  #ts3ganim .um-bt{font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42);transition:color .6s ease}
+  #ts3ganim .um-win.lit .um-bt{color:#c7b489}
+  #ts3ganim .um-body{flex:1 1 auto;padding:13px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+  #ts3ganim .um-q{border-radius:10px;padding:9px 11px;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.9);
+    background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b;border:1px solid rgba(199,180,137,.28)}
+  #ts3ganim .um-out{display:flex;flex-direction:column;gap:7px;opacity:0;transform:translateY(8px);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  #ts3ganim .um-out.on{opacity:1;transform:none}
+  /* Endzustand = Default: ohne JS stehen beide Ergebnisse da. */
+  #ts3ganim .um-wrap:not(.js) .um-out{opacity:1;transform:none}
+  #ts3ganim .um-wrap:not(.js) .um-step:last-child{border-color:rgba(199,180,137,.55)}
+  #ts3ganim .um-tl{height:8px;border-radius:5px;background:rgba(255,255,255,.16)}
+  #ts3ganim .um-f{display:flex;align-items:center;gap:8px}
+  #ts3ganim .um-fi{width:15px;height:12px;border-radius:2px 4px 4px 4px;flex:0 0 auto;
+    background:linear-gradient(rgba(199,180,137,.3),rgba(199,180,137,.3)),#05060b;border:1px solid rgba(199,180,137,.42)}
+  #ts3ganim .um-fn{font:600 10.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(255,255,255,.72)}
+  #ts3ganim .um-done{display:flex;align-items:center;gap:7px;margin-top:2px;font:600 10.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8FCBAA}
+  #ts3ganim .um-done::before{content:"";width:7px;height:7px;border-radius:50%;background:#8FCBAA;box-shadow:0 0 10px rgba(143,203,170,.8)}
+  #ts3ganim .um-hint{font-size:10.5px;line-height:1.4;color:rgba(255,255,255,.42);margin-top:auto}
+
+  #ts3ganim .um-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(700px,100%);margin:20px auto 0}
+  #ts3ganim .um-step{height:64px;border-radius:13px;padding:0 12px;cursor:pointer;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
+    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
+  #ts3ganim .um-step .sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.3);transition:color .4s ease}
+  #ts3ganim .um-step .sl{font-size:12px;line-height:1.3;color:rgba(255,255,255,.4);transition:color .4s ease}
+  #ts3ganim .um-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
+  #ts3ganim .um-step.on .sn{color:#c7b489}
+  #ts3ganim .um-step.on .sl{color:rgba(255,255,255,.86)}
+
+  #ts3ganim .um-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3ganim .um-cap b{color:#c7b489;font-weight:600}
+  #ts3ganim .um-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3ganim .um-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3ganim .um-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @media(max-width:820px){
+    #ts3ganim .um-stage{grid-template-columns:1fr;gap:12px}
+    #ts3ganim .um-win{height:250px}
+    #ts3ganim .um-steps{grid-template-columns:1fr;gap:10px}
+    #ts3ganim .um-step{height:52px;flex-direction:row;gap:10px;justify-content:flex-start;text-align:left}
+    #ts3ganim .um-cap{min-height:120px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts3ganim .um-out{transition:none} }
+  `;
+
+  var SATZ='Erstell mir eine Übersicht meiner Lieferanten mit Preisen und stell sie als Seite bereit.';
+
+  function html(){
+    var steps=[['01','Derselbe Satz'],['02','Chat antwortet'],['03','Claude Code liefert']].map(function(s,i){
+      return '<div class="um-step" data-i="'+i+'"><span class="sn">'+s[0]+'</span><span class="sl">'+s[1]+'</span></div>';
+    }).join('');
+    return `
+<div class="um-head">
+  <span class="um-eyebrow">Der Unterschied</span>
+  <h2 class="um-title">Derselbe Satz, zwei <span class="ts-gold">Orte</span>.</h2>
+  <p class="um-sub">Du formulierst in beiden Fenstern genau dasselbe. Was danach passiert, ist der ganze Unterschied zwischen Reden und Arbeiten.</p>
+</div>
+<div class="um-wrap">
+  <div class="um-stage">
+    <div class="um-win" data-w="0">
+      <div class="um-bar"><span class="um-bt">Chat-App</span></div>
+      <div class="um-body">
+        <div class="um-q">${SATZ}</div>
+        <div class="um-out" data-o="0">
+          <span class="um-tl" style="width:92%"></span>
+          <span class="um-tl" style="width:78%"></span>
+          <span class="um-tl" style="width:86%"></span>
+          <span class="um-tl" style="width:64%"></span>
+        </div>
+        <div class="um-hint">Text zum Lesen und Kopieren.</div>
+      </div>
+    </div>
+    <div class="um-win" data-w="1">
+      <div class="um-bar"><span class="um-bt">Claude Code</span></div>
+      <div class="um-body">
+        <div class="um-q">${SATZ}</div>
+        <div class="um-out" data-o="1">
+          <div class="um-f"><span class="um-fi"></span><span class="um-fn">lieferanten.csv</span></div>
+          <div class="um-f"><span class="um-fi"></span><span class="um-fn">uebersicht.html</span></div>
+          <div class="um-f"><span class="um-fi"></span><span class="um-fn">preise.json</span></div>
+          <div class="um-done">fertig · läuft auf localhost</div>
+        </div>
+        <div class="um-hint">Dateien auf deinem Rechner.</div>
+      </div>
+    </div>
+  </div>
+  <div class="um-steps">${steps}</div>
+  <p class="um-cap"></p>
+  <div class="um-foot"><button class="um-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function step(root,n){
+    var outs=root.querySelectorAll('.um-out'), wins=root.querySelectorAll('.um-win'), st=root.querySelectorAll('.um-step');
+    outs[0].classList.toggle('on', n>=1);
+    outs[1].classList.toggle('on', n>=2);
+    wins[0].classList.toggle('lit', n===1);
+    wins[1].classList.toggle('lit', n===2);
+    for(var i=0;i<st.length;i++) st[i].classList.toggle('on', i===n);
+    var cap=root.querySelector('.um-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
+  }
+
+  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },DWELL); }
+
+  function play(root){
+    var wrap=root.querySelector('.um-wrap'); if(!wrap) return;
+    wrap.classList.add('js');
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,CAPS.length-1); return; }
+    run(root,0);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3ganim'; el.innerHTML=html();
+    el.querySelector('.um-replay').addEventListener('click',function(){ play(el); });
+    var st=el.querySelectorAll('.um-step');
+    for(var i=0;i<st.length;i++){ (function(n){ st[n].addEventListener('click',function(){ clear(); el.querySelector('.um-wrap').classList.add('js'); step(el,n); }); })(i); }
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3ganim-css'))return;
+    var s=document.createElement('style'); s.id='ts3ganim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3ganim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3ganim')) return;
+    var anchor=document.getElementById('ts3g-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    /* Endzustand = Default */
+    step(el, CAPS.length-1);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.um-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
+  window.__ts3ganimKill=function(){ clear(); };
+  window.__ts3ganim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- L3.7 · Inhalt + Empfehlung + Abschluss ---- */
+(function(){
+  if(window.__ts3grest) return;
+  function on(){ return /\/der-umstieg-von-chat-app-auf-claude-code\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.getElementById('ts3ganim')) return;
+
+    window.__ts3.sec('ts3g-vier','ts3ganim',
+      '<h3>Die vier <span class="g">Gedanken</span>, die den Umstieg aufhalten</h3>'+
+      '<p class="lead">Ich habe diese vier bei fast jedem gehört, der angefangen hat. Keiner davon hält der Praxis stand, aber alle vier kosten Wochen, wenn sie unausgesprochen bleiben.</p>'+
+      '<div class="ts3-cards c2">'+
+        '<div class="ts3-card"><span class="ts3-eb">Gedanke 1</span><div class="ts3-nm">„Das ist Programmieren"</div><hr>'+
+          '<p>Der Name führt in die Irre. Du schreibst keine Zeile Code, du schreibst Sätze in ganz normaler Sprache.</p>'+
+          '<p>Was du wirklich lernst, ist präzise zu sagen, was du willst. Das ist eine Frage der Formulierung, mehr nicht.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Gedanke 2</span><div class="ts3-nm">„Dann brauche ich die App nicht mehr"</div><hr>'+
+          '<p>Doch. Für schnelle Fragen, zum Nachschlagen, zum Ideensammeln unterwegs bleibt die Chat-App das bessere Werkzeug, und sie ist in deinem Abo ohnehin enthalten.</p>'+
+          '<p>Es wird nichts ersetzt. Es kommt etwas dazu, das die App nie konnte.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Gedanke 3</span><div class="ts3-nm">„Ich starte im nackten Terminal"</div><hr>'+
+          '<p>Musst du nicht. Du hast in Lektion 3.5 gesehen, dass Claude genauso gut im Editor startet, mit deinen Dateien daneben statt einer schwarzen Fläche.</p>'+
+          '<p>Der Unterschied ist rein psychologisch, und genau deshalb wichtig.</p></div>'+
+        '<div class="ts3-card"><span class="ts3-eb">Gedanke 4</span><div class="ts3-nm">„Erst wenn das Setup perfekt ist"</div><hr>'+
+          '<p>Dann fängst du nie an. In der ersten Woche wird dein Aufbau unvollständig sein, und das ist der normale Zustand, nicht das Problem.</p>'+
+          '<p>Was dir wirklich fehlt, merkst du in dem Moment, in dem du es brauchst. Vorher weißt du gar nicht, ob du es willst.</p></div>'+
+      '</div>'+
+      '<p class="ts3-close">Wenn du dich in einem dieser vier Sätze wiedererkennst, ist das ein gutes Zeichen. Dann weißt du jetzt, woran es liegt, und nicht nur, dass es hakt.</p>'
+    );
+
+    window.__ts3.sec('ts3g-ende','ts3g-vier',
+      '<h3>Was du jetzt <span class="g">hast</span></h3>'+
+      '<p>Am Ende dieses Moduls weißt du, was Claude ist und wer dahintersteht. Du kannst zwischen den vier Zugängen entscheiden, ohne zu raten. Du kennst die Pläne und weißt, ab wann sich der größere lohnt. Die sechs Begriffe, die dir ab Modul 4 ständig begegnen, sind dir nicht mehr fremd. Du weißt, in welchem Fenster du arbeiten willst. Und dein Werkzeug-Stapel ist zum ersten Mal seit Langem sortiert.</p>'+
+      '<p>Das ist die ganze Grundlage. Nichts davon musstest du installieren, konfigurieren oder auswendig lernen. Ab hier ändert sich das.</p>'+
+      '<p class="ts3-close">In <b>Modul 4</b> installieren wir Claude Code, schreiben deine erste CLAUDE.md, laden die ersten Skills und bauen in einer echten Sitzung das erste Ergebnis. Von da an arbeitest du.</p>'
+    );
+
+    window.__ts3.emp({
+      id:'ts3gemp', anchorId:'ts3g-ende', kind:'Nutzung',
+      animTitle:'Deine', animGold:'erste Woche',
+      steps:[{n:'01',l:'In Sätzen denken'},{n:'02',l:'App behalten'},{n:'03',l:'Im Editor starten'},{n:'04',l:'Unfertig anfangen'}],
+      intro:'Vier Vorsätze für die ersten Tage in Modul 4. Sie klingen unspektakulär und ersparen dir trotzdem die meisten Umwege:',
+      points:[
+        'Formulier deine Aufträge so, wie du sie einem <b>neuen Mitarbeiter</b> geben würdest: was, womit, bis wann fertig. Nicht kürzer, nicht technischer.',
+        'Behalt die <b>Chat-App</b> für alles, was nur eine Antwort braucht. Sie ist im selben Abo enthalten und für schnelle Fragen weiterhin das schnellere Werkzeug.',
+        'Starte Claude im <b>Editor mit geöffnetem Projektordner</b>, nicht im leeren Terminalfenster. Du willst sehen, was passiert.',
+        'Fang <b>unfertig</b> an. Was dir wirklich fehlt, merkst du beim ersten echten Projekt, und nicht davor.'
+      ]
+    });
+
+    window.__ts3.learn({
+      id:'ts3gnext',
+      learn:[
+        'Du weißt, dass du <b>Sätze schreibst</b>, keinen Code.',
+        'Du behältst die <b>Chat-App</b> und weißt genau, wofür.',
+        'Du startest im <b>Editor</b>, nicht im leeren Terminal.',
+        'Du fängst an, <b>bevor</b> dein Aufbau perfekt ist.'
+      ],
+      next:'/modul-4-claude-claude-code'
+    });
+  }
+  window.__ts3grest=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 3 · LANDING "Claude Grundlagen"  (/modul-3-claude-grundlagen)
+
+   ⚠️ Der Slug existiert noch NICHT auf super.site — die Notion-Zeile fuer das
+   Modul muss angelegt und die Site re-synct werden. Das Gate feuert bis dahin
+   einfach nicht; sobald die Seite da ist, steht die Landing sofort.
+   Slug im Gate tolerant: /modul-3-claude-grundlagen ODER /modul-3-claude-grundlagen-*
+
+   Opener-Animation "Sieben Schritte, ein Werkzeug." — EIGENES Konzept und laut
+   Katalog (Abschnitt 02, Verschaerfung 3) bewusst grosser angelegt als eine
+   normale Erklaeranimation: waehrend die Schiene unten von Station zu Station
+   waechst, setzt sich oben Kachel fuer Kachel EIN Werkzeug zusammen. Am Ende
+   steht ein vollstaendiges Fenster — das Bild fuer "sieben Lektionen, danach
+   kannst du damit arbeiten". Mosaik + Schiene teilen dieselbe Achse.
+   ============================================================ */
+
+/* ---- Landing · Hero + Einleitung ---- */
+(function(){
+  if(window.__ts3mod) return;
+  function on(){ return /\/modul-3-claude-grundlagen(-[a-z0-9-]+)?\/?$/.test(location.pathname); }
+  function mount(){
+    if(!on() || !window.__ts3) return;
+    if(!document.querySelector('.super-content')) return;
+    window.__ts3.hero({
+      img: window.__ts3.phHero('Modul 3'),
+      alt: 'Modul 3: Claude Grundlagen',
+      eyebrow: 'Tasty Studios',
+      title: '<span class="ts-red">Modul 3</span><br>Claude Grundlagen'
+    });
+    window.__ts3.body('ts3mod-intro',
+      '<p>Sieben Lektionen, in denen noch nichts eingerichtet und nichts konfiguriert wird. Dieses Modul beantwortet die Fragen, die vor der Technik stehen: <b>was Claude ist, welchen Zugang du wann nimmst, was es kostet und was die Begriffe bedeuten</b>, die dir danach ständig begegnen.</p>'+
+      '<p>Das Modul steht für sich. Du brauchst dafür keine Gastronomie, keine Vorkenntnisse und nichts aus den Modulen davor, nur einen Rechner und die Bereitschaft, eine alte Gewohnheit abzulegen. Wer aus dem Gesamtkurs kommt, findet hier die Grundlage für alles, was ab Modul 4 gebaut wird.</p>'
+    );
+  }
+  window.__ts3mod=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- Landing · Opener-Animation #ts3modanim ---- */
+(function(){
+  if(window.__ts3modanim) return;
+  function on(){ return /\/modul-3-claude-grundlagen(-[a-z0-9-]+)?\/?$/.test(location.pathname); }
+
+  var STATIONS=['Was Claude ist','Welches wann','Pläne & Preis','Sechs Begriffe','Drei Fenster','Stack aufräumen','Der Umstieg'];
+  var MOCAPS=[
+    'Zuerst der <b>Begriff</b>: wer dahintersteckt, was das Modell kann und wo seine Grenze liegt.',
+    'Dann die <b>Wahl</b>: eine Frage, die dir bei jeder Aufgabe den richtigen Zugang zeigt.',
+    'Dann das <b>Geld</b>: was jede Stufe wirklich freischaltet und ab wann sich der Sprung lohnt.',
+    'Dann die <b>Begriffe</b>, die dir ab Modul 4 in jeder Sitzung begegnen.',
+    'Dann dein <b>Fenster</b>: App, Terminal oder Erweiterung, und was du dabei siehst.',
+    'Dann der <b>Schreibtisch</b>: was bleibt, was Claude übernimmt, was rausfliegt.',
+    'Und zuletzt die <b>Haltung</b>, ohne die der beste Aufbau nichts bringt.'
+  ];
+  var PIECES=[
+    {c:'a', l:'Modell'},   {c:'b', l:'Zugang'},   {c:'c', l:'Plan'},
+    {c:'d', l:'Begriffe'}, {c:'e', l:'Fenster'},  {c:'f', l:'Stack'},
+    {c:'g', l:'Haltung'}
+  ];
+  var STAGGER=210;
+
+  var CSS=`
+  #ts3modanim{width:100%;margin:76px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #ts3modanim *{box-sizing:border-box}
+  #ts3modanim .mo-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  #ts3modanim .mo-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  #ts3modanim .mo-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  #ts3modanim h2.mo-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
+  #ts3modanim h2.mo-title .ts-gold{color:#c7b489}
+  #ts3modanim .mo-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+
+  #ts3modanim .mo-wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  #ts3modanim .mo-stage{width:min(640px,100%);margin:0 auto}
+
+  /* Das Werkzeug, das sich zusammensetzt */
+  #ts3modanim .mo-tool{position:relative;border-radius:17px;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 34px 78px -36px rgba(0,0,0,.92);
+    transition:border-color .8s ease,box-shadow .8s ease}
+  #ts3modanim .mo-wrap.done .mo-tool{border-color:rgba(199,180,137,.55);box-shadow:0 0 60px -18px rgba(199,180,137,.55),0 34px 78px -36px rgba(0,0,0,.92)}
+  #ts3modanim .mo-tool::before{content:"";position:absolute;inset:-14% -10%;z-index:-1;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(199,180,137,.16),rgba(255,255,255,0) 70%);filter:blur(34px);opacity:0;transition:opacity 1s ease}
+  #ts3modanim .mo-wrap.done .mo-tool::before{opacity:1}
+  #ts3modanim .mo-bar{display:flex;align-items:center;gap:7px;height:36px;padding:0 14px;
+    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  #ts3modanim .mo-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+  #ts3modanim .mo-dot:first-child{background:rgba(199,180,137,.5)}
+  #ts3modanim .mo-blbl{margin-left:8px;font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:rgba(255,255,255,.34)}
+  #ts3modanim .mo-grid{display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:74px;gap:8px;padding:14px}
+  #ts3modanim .mo-p{position:relative;border-radius:11px;display:flex;align-items:center;justify-content:center;padding:0 4px;
+    font:600 9.5px/1.25 -apple-system,sans-serif;letter-spacing:.03em;text-align:center;overflow-wrap:anywhere;color:rgba(255,255,255,.34);
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;
+    border:1px dashed rgba(255,255,255,.11);
+    opacity:.3;transform:scale(.9);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1),border-color .6s ease,color .6s ease,background .6s ease}
+  #ts3modanim .mo-p.set{opacity:1;transform:none;border-style:solid;border-color:rgba(199,180,137,.5);color:#fff;
+    background:linear-gradient(rgba(199,180,137,.10),rgba(199,180,137,.10)),#05060b}
+  #ts3modanim .mo-wrap.done:not(.hid) .mo-p.set{animation-name:moGlow;animation-duration:5s;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+  #ts3modanim .mo-p:nth-child(1).set{animation-delay:0s}
+  #ts3modanim .mo-p:nth-child(2).set{animation-delay:-.7s}
+  #ts3modanim .mo-p:nth-child(3).set{animation-delay:-1.4s}
+  #ts3modanim .mo-p:nth-child(4).set{animation-delay:-2.1s}
+  #ts3modanim .mo-p:nth-child(5).set{animation-delay:-2.8s}
+  #ts3modanim .mo-p:nth-child(6).set{animation-delay:-3.5s}
+  #ts3modanim .mo-p:nth-child(7).set{animation-delay:-4.2s}
+
+  /* Schiene mit sieben Stationen — im ZWISCHENRAUM unter dem Werkzeug */
+  #ts3modanim .mo-rail{position:relative;margin:26px 0 0;height:56px}
+  #ts3modanim .mo-rail .base{position:absolute;left:7.14%;right:7.14%;top:9px;height:1.5px;background:rgba(199,180,137,.18)}
+  #ts3modanim .mo-rail .fill{position:absolute;left:7.14%;top:9px;height:1.5px;width:0;
+    background:linear-gradient(90deg,rgba(199,180,137,.3),#c7b489);transition:width 1.6s cubic-bezier(.16,1,.3,1)}
+  #ts3modanim .mo-wrap.on .mo-rail .fill{width:85.72%}
+  #ts3modanim .mo-nodes{position:absolute;inset:0;display:grid;grid-template-columns:repeat(7,1fr)}
+  #ts3modanim .mo-n{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default}
+  #ts3modanim .mo-nd{width:11px;height:11px;border-radius:50%;background:#0b0d14;border:1.5px solid rgba(199,180,137,.3);
+    margin-top:3.5px;transition:border-color .5s ease,box-shadow .5s ease,background .5s ease}
+  #ts3modanim .mo-n.lit .mo-nd{border-color:#c7b489;background:#c7b489;box-shadow:0 0 14px rgba(199,180,137,.85)}
+  #ts3modanim .mo-nl{font:600 9px/1.3 -apple-system,sans-serif;letter-spacing:.06em;text-align:center;color:rgba(255,255,255,.3);
+    padding:0 3px;max-width:100%;overflow-wrap:anywhere;transition:color .5s ease}
+  #ts3modanim .mo-n.lit .mo-nl{color:rgba(255,255,255,.78)}
+
+  /* Endzustand = Default: ohne JS steht das Werkzeug fertig da */
+  #ts3modanim .mo-wrap:not(.js) .mo-p{opacity:1;transform:none;border-style:solid;border-color:rgba(199,180,137,.5);color:#fff}
+  #ts3modanim .mo-wrap:not(.js) .mo-rail .fill{width:85.72%}
+  #ts3modanim .mo-wrap:not(.js) .mo-nd{border-color:#c7b489;background:#c7b489}
+  #ts3modanim .mo-wrap:not(.js) .mo-nl{color:rgba(255,255,255,.78)}
+
+  #ts3modanim .mo-cap{max-width:640px;margin:24px auto 0;min-height:56px;text-align:center;
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #ts3modanim .mo-cap b{color:#c7b489;font-weight:600}
+  #ts3modanim .mo-foot{display:flex;justify-content:center;margin-top:8px}
+  #ts3modanim .mo-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
+    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
+    transition:background .3s ease,border-color .3s ease}
+  #ts3modanim .mo-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
+  @keyframes moGlow{0%,100%{box-shadow:0 0 0 rgba(199,180,137,0)}50%{box-shadow:0 0 22px -8px rgba(199,180,137,.55)}}
+  @media(max-width:820px){
+    #ts3modanim .mo-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:62px}
+    #ts3modanim .mo-cap{min-height:104px}
+    #ts3modanim .mo-nl{font-size:7.5px;letter-spacing:0;padding:0 1px}
+  }
+  @media(prefers-reduced-motion:reduce){ #ts3modanim .mo-wrap.done:not(.hid) .mo-p.set{animation:none} }
+  `;
+
+  function html(){
+    var ps=PIECES.map(function(p,i){
+      return '<div class="mo-p" data-i="'+i+'">'+p.l+'</div>';
+    }).join('');
+    var ns=STATIONS.map(function(s,i){
+      return '<div class="mo-n" data-i="'+i+'"><span class="mo-nd"></span><span class="mo-nl">'+s+'</span></div>';
+    }).join('');
+    return `
+<div class="mo-head">
+  <span class="mo-eyebrow">Was in diesem Modul entsteht</span>
+  <h2 class="mo-title">Sieben Schritte, ein <span class="ts-gold">Werkzeug</span>.</h2>
+  <p class="mo-sub">Am Anfang ist Claude ein Name, den du irgendwo gehört hast. Am Ende dieses Moduls ist es ein Werkzeug, bei dem du weißt, wo du es anfasst.</p>
+</div>
+<div class="mo-wrap">
+  <div class="mo-stage">
+    <div class="mo-tool">
+      <div class="mo-bar"><span class="mo-dot"></span><span class="mo-dot"></span><span class="mo-dot"></span><span class="mo-blbl">claude</span></div>
+      <div class="mo-grid">${ps}</div>
+    </div>
+    <div class="mo-rail">
+      <span class="base"></span><span class="fill"></span>
+      <div class="mo-nodes">${ns}</div>
+    </div>
+  </div>
+  <p class="mo-cap"></p>
+  <div class="mo-foot"><button class="mo-replay" type="button">Neu abspielen</button></div>
+</div>`;
+  }
+
+  var timers=[];
+  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
+  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+
+  function play(root){
+    var wrap=root.querySelector('.mo-wrap'); if(!wrap) return;
+    clear();
+    wrap.classList.remove('on','done'); wrap.classList.add('js');
+    var ps=root.querySelectorAll('.mo-p'), ns=root.querySelectorAll('.mo-n');
+    for(var i=0;i<ps.length;i++){ ps[i].classList.remove('set'); ns[i].classList.remove('lit'); }
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      wrap.classList.add('on','done');
+      for(var r=0;r<ps.length;r++){ ps[r].classList.add('set'); ns[r].classList.add('lit'); }
+      var c0=root.querySelector('.mo-cap'); if(c0) c0.innerHTML=MOCAPS[MOCAPS.length-1];
+      return;
+    }
+    void wrap.offsetWidth;
+    wrap.classList.add('on');
+    for(var k=0;k<ps.length;k++){
+      (function(n){ later(function(){
+        ps[n].classList.add('set'); ns[n].classList.add('lit');
+        var c=root.querySelector('.mo-cap'); if(c) c.innerHTML=MOCAPS[n]||'';
+      }, 120+n*STAGGER); })(k);
+    }
+    later(function(){ wrap.classList.add('done'); }, 120+ps.length*STAGGER+400);
+  }
+
+  function build(){
+    var el=document.createElement('div'); el.id='ts3modanim'; el.innerHTML=html();
+    el.querySelector('.mo-replay').addEventListener('click',function(){ play(el); });
+    return el;
+  }
+  function injectCSS(){ if(document.getElementById('ts3modanim-css'))return;
+    var s=document.createElement('style'); s.id='ts3modanim-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function mount(){
+    if(!on()){ var old=document.getElementById('ts3modanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
+    if(document.getElementById('ts3modanim')) return;
+    var anchor=document.getElementById('ts3mod-intro'); if(!anchor||!anchor.parentNode) return;
+    injectCSS();
+    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
+    setTimeout(function(){ var w=el.querySelector('.mo-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
+  }
+  document.addEventListener('visibilitychange',function(){
+    var w=document.querySelector('#ts3modanim .mo-wrap'); if(!w) return;
+    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
+  });
+  window.__ts3modanimKill=function(){ clear(); };
+  window.__ts3modanim=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- Landing · Lektions-Register (7 Kacheln) ---- */
+(function(){
+  if(window.__ts3modgrid) return;
+  function on(){ return /\/modul-3-claude-grundlagen(-[a-z0-9-]+)?\/?$/.test(location.pathname); }
+  var LEKTIONEN=[
+    {n:'3.1', t:'Was Claude ist', d:'Ein Modell, vier Zugänge, und dein eigener Account.', href:'/was-ist-claude-genau'},
+    {n:'3.2', t:'Welches Claude wann', d:'Chat, Cowork, Code, Schnittstelle: die Regel in einem Satz.', href:'/welches-claude-wann-chatcoworkcodeapi'},
+    {n:'3.3', t:'Pläne & Preis', d:'Was jede Stufe kostet und ab wann sich der Sprung lohnt.', href:'/claude-plne-preis'},
+    {n:'3.4', t:'Sechs Begriffe', d:'Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub.', href:'/claude-nutzung-erklrt-6-konzepte'},
+    {n:'3.5', t:'Drei Fenster', d:'App, Terminal oder Erweiterung: wo du wirklich arbeitest.', href:'/claude-interface-durchlauf'},
+    {n:'3.6', t:'Stack aufräumen', d:'Zwölf Werkzeuge, drei Stapel, ein schlanker Schreibtisch.', href:'/stack-aufrumen'},
+    {n:'3.7', t:'Der Umstieg', d:'Die vier Gedanken, die den Anfang am häufigsten aufhalten.', href:'/der-umstieg-von-chat-app-auf-claude-code'}
+  ];
+  var CSS=`
+  #ts3mod-grid{width:min(1180px,95vw);margin:62px auto 90px;padding:0 clamp(16px,3vw,40px);display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+  #ts3mod-grid a.card{display:block;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:22px 20px;text-decoration:none;
+    transition:border-color .35s,transform .35s,box-shadow .35s}
+  #ts3mod-grid a.card:hover{border-color:rgba(199,180,137,.5);transform:translateY(-3px);
+    box-shadow:0 24px 50px -24px rgba(0,0,0,.7),0 0 30px rgba(199,180,137,.14)}
+  #ts3mod-grid .card-n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;
+    background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.4);color:#c7b489;font:700 12px/1 -apple-system,sans-serif;margin-bottom:14px}
+  #ts3mod-grid .card-t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:16.5px;color:#fff;margin:0 0 8px;line-height:1.3}
+  #ts3mod-grid .card-d{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.6);margin:0}
+  `;
+  function mount(){
+    if(!on()) return;
+    if(document.getElementById('ts3mod-grid')) return;
+    var anchor=document.getElementById('ts3modanim')||document.getElementById('ts3mod-intro');
+    if(!anchor||!anchor.parentNode) return;
+    if(!document.getElementById('ts3mod-grid-css')){
+      var s=document.createElement('style'); s.id='ts3mod-grid-css'; s.textContent=CSS; document.head.appendChild(s);
+    }
+    var g=document.createElement('div'); g.id='ts3mod-grid';
+    g.innerHTML=LEKTIONEN.map(function(l){
+      return '<a class="card" href="'+l.href+'"><span class="card-n">'+l.n+'</span><div class="card-t">'+l.t+'</div><p class="card-d">'+l.d+'</p></a>';
+    }).join('');
+    anchor.parentNode.insertBefore(g, anchor.nextSibling);
+  }
+  window.__ts3modgrid=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
