@@ -7860,12 +7860,12 @@ window.__tsMO = function(cb){
   var MONATE=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
   /* Live-Werte der echten Auswertungs-Seite, Januar 2026 */
   var KAT=[
-    {k:'Food',      v:5987, c:'#c7b489'},
-    {k:'Packaging', v:3015, c:'#d8c9ab'},
-    {k:'Beverage',  v:1171, c:'#efe6d2'},
-    {k:'Hygiene',   v:548,  c:'rgba(255,255,255,.5)'}
+    {k:'Food',      v:5718.62, c:'#c7b489'},
+    {k:'Packaging', v:3015,    c:'#d8c9ab'},
+    {k:'Beverage',  v:1171.11, c:'#efe6d2'},
+    {k:'Hygiene',   v:548,     c:'rgba(255,255,255,.5)'}
   ];
-  var GESAMT=10721;
+  var GESAMT=10452.73;
   /* Die 11 Spalten der DB "Inventur Monatsabschlüsse" (Sniff-Reihenfolge sinnvoll sortiert) */
   var COLS=[
     {n:'Monat',         t:'Titel'},
@@ -7960,7 +7960,7 @@ window.__tsMO = function(cb){
     #tsinvaus .iva-donut{transition:none}
   }`;
 
-  function eur(n){ return n.toLocaleString('de-DE')+' €'; }
+  function eur(n){ return n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
 
   function build(){
     var sec=document.createElement('section'); sec.id='tsinvaus';
@@ -7998,8 +7998,8 @@ window.__tsMO = function(cb){
         '<div class="iva-tblwrap"><table class="iva-tbl">'+
           '<tr><th>Monat</th><th>Food</th><th>Beverage</th><th>Packaging</th><th>Hygiene</th><th>Gesamt</th><th>Status</th></tr>'+
           '<tr><td class="n">01.2026</td>'+
-            '<td data-v="5987">0 €</td><td data-v="1171">0 €</td><td data-v="3015">0 €</td><td data-v="548">0 €</td>'+
-            '<td class="sum" data-v="10721">0 €</td><td><span class="iva-pill">Gefreezed</span></td></tr>'+
+            '<td data-v="5718.62">0 €</td><td data-v="1171.11">0 €</td><td data-v="3015">0 €</td><td data-v="548">0 €</td>'+
+            '<td class="sum" data-v="10452.73">0 €</td><td><span class="iva-pill">Gefreezed</span></td></tr>'+
           '<tr><td class="n">02.2026</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">offen</td></tr>'+
         '</table></div>'+
         '<p class="iva-note">Darunter liegt die Datenbank &bdquo;Inventur Monatsabschlüsse&ldquo;. Die vier Warengruppen-Summen trägst du aus dem eingefrorenen Monat ein, Gesamt rechnet sich daraus selbst. Status hält fest, ob der Monat wirklich abgeschlossen ist, und in Quelle hinterlegst du den Link zur Monatstabelle — dann kommst du von jeder Jahreszahl mit einem Klick zurück zu den Artikeln, aus denen sie entstanden ist.</p>'+
@@ -8030,7 +8030,7 @@ window.__tsMO = function(cb){
         function step(ts){
           if(!t0) t0=ts;
           var t=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-t,3);
-          el.textContent=eur(Math.round(target*e));
+          el.textContent=eur(Math.round(target*e*100)/100);
           if(t<1) requestAnimationFrame(step); else el.textContent=eur(target);
         }
         requestAnimationFrame(step);
