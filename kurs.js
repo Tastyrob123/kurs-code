@@ -7763,7 +7763,7 @@ window.__tsMO = function(cb){
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -7987,7 +7987,7 @@ window.__tsMO = function(cb){
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
-  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -24597,6 +24597,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -24999,6 +25000,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -25458,6 +25460,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -25908,6 +25911,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -26329,6 +26333,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -26746,6 +26751,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -27192,6 +27198,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
@@ -27660,6 +27667,7 @@ var TSISL_TEAM_ONB_V2=[
     var timer=null;
     var io=new IntersectionObserver(function(ev){
       if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
+      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
     },{threshold:.3});
     io.observe(root);
     if(reduced){ root.classList.add('in'); sync(root); }
