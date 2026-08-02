@@ -7993,6 +7993,170 @@ window.__tsMO = function(cb){
 /* ---- */
 
 /* ============================================================
+   inventurliste — #tsinvsync "Die Verdrahtung: Monatstabelle → Auswertung"
+   (Robert-Auftrag 02.08.2026, direkt nach #tsinvaus).
+   Erklaert in 3 Stufen, wie sich die Auswertung selbst fuellt:
+     01 vier Hilfs-Formelspalten je Warengruppe (Rollups koennen NICHT
+        nach Kategorie filtern -> deshalb der Umweg)
+     02 Relation Monatstabelle <-> Inventur Monatsabschluesse
+     03 die vier Zahlenfelder der Auswertung auf Rollup/Summe umstellen
+   Formeln mit eigenem Copy-Button (super.so haengt seinen
+   .notion-code__copy-button nur an native Notion-Bloecke, nicht an
+   JS-gebaute Module -> eigener Button noetig).
+   Design 1:1 wie #tsinvaus (gleiche Seite): Karten, Nummern-Chips,
+   Konnektoren, Scroll-Reveal. Kein neuer Farbton.
+   ============================================================ */
+(function(){
+  if(window.__tsinvsync) return; window.__tsinvsync=true;
+  function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+
+  var HILF=[
+    {n:'Food €',      k:'Food'},
+    {n:'Beverage €',  k:'Beverage'},
+    {n:'Packaging €', k:'Packaging'},
+    {n:'Hygiene €',   k:'Hygiene'}
+  ];
+  function formel(k){ return 'if(prop("Kategorie") == "'+k+'", prop("Wert 01.26 (fix)"), 0)'; }
+
+  var CSS=`
+  #tsinvsync{--g:199,180,137;width:100%;margin:0 0 64px;font-family:${SANS};color:#fff}
+  #tsinvsync *{box-sizing:border-box}
+  #tsinvsync .ivs-inner{width:min(1000px,94vw);margin:0 auto}
+  #tsinvsync .ivs-head{text-align:center;margin-bottom:34px}
+  #tsinvsync .ivs-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.06em;color:#c7b489;margin-bottom:12px}
+  #tsinvsync .ivs-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(var(--g),.7)}
+  #tsinvsync .ivs-h{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",${SANS};font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.14;letter-spacing:-.015em;color:#fff}
+  #tsinvsync .ivs-h .g{color:#c7b489}
+  #tsinvsync .ivs-lead{max-width:720px;margin:0 auto;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsinvsync .ivs-step{position:relative;border-radius:18px;padding:26px clamp(20px,3vw,32px) 28px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 58%,rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 20px 50px -34px rgba(0,0,0,.85);
+    opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .8s cubic-bezier(.16,1,.3,1),border-color .4s ease}
+  #tsinvsync.in .ivs-step{opacity:1;transform:none}
+  #tsinvsync.in .ivs-step:nth-of-type(3){transition-delay:.14s}
+  #tsinvsync.in .ivs-step:nth-of-type(5){transition-delay:.28s}
+  #tsinvsync .ivs-step:hover{border-color:rgba(var(--g),.34)}
+  #tsinvsync .ivs-step::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.36),transparent)}
+  #tsinvsync .ivs-tag{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+  #tsinvsync .ivs-num{font-size:.62rem;font-weight:600;letter-spacing:.16em;color:#c7b489;border:1px solid rgba(var(--g),.35);border-radius:999px;padding:4px 10px}
+  #tsinvsync .ivs-tt{font-family:"Lineal Web","Lineal TS",${SANS};font-weight:600;font-size:clamp(1.05rem,2vw,1.28rem);letter-spacing:-.01em;color:#fff}
+  #tsinvsync .ivs-note{margin:0 0 18px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsinvsync .ivs-note:last-child{margin:16px 0 0}
+  #tsinvsync .ivs-fields p{margin:0 0 7px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsinvsync .ivs-fields b{color:#fff}
+  /* Formel-Zeilen */
+  #tsinvsync .ivs-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;padding:11px 0;border-top:1px solid rgba(255,255,255,.06)}
+  #tsinvsync .ivs-row:first-of-type{border-top:0}
+  #tsinvsync .ivs-rn{font-size:13.5px;font-weight:600;color:#c7b489;white-space:nowrap}
+  #tsinvsync .ivs-code{position:relative;display:flex;align-items:center;gap:10px;min-width:0;border-radius:10px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.08);padding:9px 11px}
+  #tsinvsync .ivs-code code{flex:1 1 auto;min-width:0;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.55;color:rgba(255,255,255,.86);white-space:nowrap;scrollbar-width:thin}
+  #tsinvsync .ivs-cp{flex:0 0 auto;cursor:pointer;border:1px solid rgba(var(--g),.3);background:rgba(199,180,137,.10);color:#c7b489;border-radius:8px;padding:5px 11px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:background .25s,color .25s,border-color .25s}
+  #tsinvsync .ivs-cp:hover{background:rgba(199,180,137,.2);color:#efe6d2}
+  #tsinvsync .ivs-cp.ok{background:rgba(143,203,170,.16);border-color:rgba(143,203,170,.4);color:#8FCBAA}
+  /* Rollup-Tabelle */
+  #tsinvsync .ivs-rollups{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  #tsinvsync .ivs-ru{padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+  #tsinvsync .ivs-ru b{display:block;font-size:13px;font-weight:600;color:#fff;margin-bottom:6px}
+  #tsinvsync .ivs-ru span{display:block;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.72)}
+  #tsinvsync .ivs-ru span i{font-style:normal;color:#c7b489}
+  #tsinvsync .ivs-link{display:flex;flex-direction:column;align-items:center;height:58px;opacity:0;transition:opacity .6s ease .2s}
+  #tsinvsync.in .ivs-link{opacity:1}
+  #tsinvsync .ivs-link i{display:block;width:1px;flex:1 1 auto;background:linear-gradient(180deg,rgba(var(--g),0),rgba(var(--g),.55),rgba(var(--g),0))}
+  #tsinvsync .ivs-link span{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--g),.85);padding:5px 12px;border-radius:999px;background:rgba(199,180,137,.08);border:1px solid rgba(var(--g),.24);white-space:nowrap}
+  #tsinvsync .ivs-hint{margin-top:26px;padding:16px 20px;border-radius:14px;background:rgba(199,180,137,.06);border:1px solid rgba(var(--g),.2);font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+  #tsinvsync .ivs-hint b{color:#c7b489}
+  @media(max-width:760px){
+    #tsinvsync .ivs-row{grid-template-columns:1fr;gap:7px}
+    #tsinvsync .ivs-rollups{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){#tsinvsync .ivs-step,#tsinvsync.in .ivs-step,#tsinvsync .ivs-link{opacity:1;transform:none;transition:none}}`;
+
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function build(){
+    var sec=document.createElement('section'); sec.id='tsinvsync';
+    var rows=HILF.map(function(h){
+      return '<div class="ivs-row"><div class="ivs-rn">'+h.n+'</div>'+
+             '<div class="ivs-code"><code>'+esc(formel(h.k))+'</code>'+
+             '<button type="button" class="ivs-cp" data-f="'+esc(formel(h.k))+'">Kopieren</button></div></div>';
+    }).join('');
+    var rollups=HILF.map(function(h){
+      return '<div class="ivs-ru"><b>'+h.k+'</b>'+
+             '<span>Verknüpfung : <i>Monatsabschluss</i></span>'+
+             '<span>Eigenschaft : <i>'+h.n+'</i></span>'+
+             '<span>Berechnen : <i>Summe</i></span></div>';
+    }).join('');
+    sec.innerHTML=
+    '<div class="ivs-inner">'+
+      '<div class="ivs-head">'+
+        '<span class="ivs-eyebrow">Der Monatsabschluss · Verdrahtung</span>'+
+        '<h2 class="ivs-h">Die Zahlen wandern <span class="g">von selbst.</span></h2>'+
+        '<p class="ivs-lead">Bis hierhin trägst du die vier Warengruppen-Summen noch von Hand in die Auswertung. Mit drei Handgriffen holt sie sich die Zahlen selbst aus der Monatstabelle — und der Monatsabschluss ist danach ein Blick statt einer Aufgabe.</p>'+
+      '</div>'+
+      '<div class="ivs-step">'+
+        '<div class="ivs-tag"><span class="ivs-num">01</span><span class="ivs-tt">Vier Hilfsspalten</span></div>'+
+        '<p class="ivs-note">Ein Rollup kann summieren, aber nicht nach Kategorie unterscheiden. Deshalb legst du in der Monatstabelle vier <b>Formel</b>-Spalten an, von denen jede nur ihre eigene Warengruppe durchlässt — alles andere wird 0.</p>'+
+        rows+
+        '<p class="ivs-note">Achte darauf, dass die Formeln auf <b>Wert 01.26 (fix)</b> zeigen und nicht auf die Summen-Formel. Sonst wandert später ein beweglicher Wert in deine Auswertung.</p>'+
+      '</div>'+
+      '<div class="ivs-link"><i></i><span>verknüpfen</span><i></i></div>'+
+      '<div class="ivs-step">'+
+        '<div class="ivs-tag"><span class="ivs-num">02</span><span class="ivs-tt">Die Verknüpfung</span></div>'+
+        '<div class="ivs-fields">'+
+          '<p>→ <b>Eigenschaft :</b> Verknüpfung → Inventur Monatsabschlüsse →</p>'+
+          '<p>→ <b>Name der Spalte :</b> Monatsabschluss</p>'+
+        '</div>'+
+        '<p class="ivs-note">Lege in der Auswertung die Zeile für deinen Monat an, bspw. 01.2026. Zurück in der Monatstabelle verknüpfst du die erste Zeile damit, kopierst die Zelle, markierst die ganze Spalte und fügst sie ein — damit hängen alle Artikel am selben Monatsabschluss.</p>'+
+      '</div>'+
+      '<div class="ivs-link"><i></i><span>summieren</span><i></i></div>'+
+      '<div class="ivs-step">'+
+        '<div class="ivs-tag"><span class="ivs-num">03</span><span class="ivs-tt">Vier Rollups</span></div>'+
+        '<p class="ivs-note">Jetzt stellst du in <b>Inventur Monatsabschlüsse</b> die vier Zahlenfelder auf <b>Rollup</b> um. Jedes zieht sich die Summe seiner Hilfsspalte:</p>'+
+        rollups+
+        '<p class="ivs-note">Ab hier füllt sich die Auswertung allein: Sobald du zählst, läuft der Wert über die Automatisierung in das feste Feld, von dort über die Hilfsspalte in das Rollup — und <b>Gesamt</b> rechnet die vier zusammen.</p>'+
+      '</div>'+
+      '<div class="ivs-hint"><b>Für die nächsten Monate :</b> Wenn du die Monatstabelle duplizierst, kommen Hilfsspalten und Verknüpfung mit. Du biegst dann nur die vier Formeln und die Automatisierung von 01.26 auf den neuen Monat um und verknüpfst die Zeilen mit der neuen Abschluss-Zeile.</div>'+
+    '</div>';
+    sec.addEventListener('click',function(e){
+      var b=e.target.closest('.ivs-cp'); if(!b) return;
+      var txt=b.getAttribute('data-f');
+      var done=function(){ var o='Kopieren'; b.textContent='Kopiert'; b.classList.add('ok');
+        setTimeout(function(){ b.textContent=o; b.classList.remove('ok'); },1600); };
+      /* Fallback IMMER erreichbar: schlaegt die Clipboard-API fehl (kein Fokus, kein
+         https, Permission verweigert), wuerde der Button sonst stumm nichts tun. */
+      var legacy=function(){
+        var ta=document.createElement('textarea'); ta.value=txt; ta.setAttribute('readonly','');
+        ta.style.position='fixed'; ta.style.top='0'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,txt.length);
+        var ok=false; try{ ok=document.execCommand('copy'); }catch(err){}
+        ta.remove(); if(ok) done();
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,legacy); }
+      else legacy();
+    });
+    return sec;
+  }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsinvsync'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsinvsync')) return;
+    var anchor=document.getElementById('tsinvaus');
+    if(!anchor||!anchor.parentNode) return;
+    if(!document.getElementById('tsinvsync-css')){ var st=document.createElement('style'); st.id='tsinvsync-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ sec.classList.add('in'); io.disconnect(); } },{threshold:.15});
+    io.observe(sec);
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
    inventurliste — Kacheln "Was uns jetzt noch fehlt" (v3)
    Drei reduzierte Luxus-Kacheln (DB Lieferpartner / Zutaten /
    Packaging) ersetzen die Text-Bullets. v3 (11.07.2026):
