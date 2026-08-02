@@ -201,7 +201,6 @@ window.__tsMO = function(cb){
       if(!href) return;
       var a=document.createElement('a');
       a.className='ts-modlink'; a.href=href;
-      a.setAttribute('title','Zur Modul-Uebersicht');
       while(el.firstChild) a.appendChild(el.firstChild);
       el.appendChild(a);
       /* Klick auf den Text navigiert und klappt NICHT auf/zu. */
@@ -210,11 +209,14 @@ window.__tsMO = function(cb){
       a.addEventListener('mousedown', function(e){ e.stopPropagation(); });
     });
   }
-  var LINKCSS='.super-navigation-menu__list-header .ts-modlink{display:inline;color:inherit;text-decoration:none;'
-    +'border-bottom:1px solid transparent;transition:border-color .25s,color .25s}'
-    +'.super-navigation-menu__list-header .ts-modlink:hover{border-bottom-color:#c7b489}'
-    +'.super-navigation-menu__list-header .ts-modlink:hover,.super-navigation-menu__list-header .ts-modlink:hover *{color:#c7b489}'
-    +'.super-navigation-menu__list-header .ts-modlink:hover .ts-modul-num{color:#c7b489}';
+  /* KEINE optische Kennzeichnung (Robert 03.08.2026): kein Unterstrich, kein Farbwechsel,
+     kein Hover-Effekt. Der Titel soll exakt aussehen wie jeder andere Gruppentitel — der Link
+     ist nur Funktion. Deshalb ausschliesslich Vererbung, nichts Eigenes. */
+  var LINKCSS='.super-navigation-menu__list-header .ts-modlink{display:inline;color:inherit;font:inherit;'
+    +'text-decoration:none;border:0;background:none;cursor:inherit}'
+    +'.super-navigation-menu__list-header .ts-modlink:hover,'
+    +'.super-navigation-menu__list-header .ts-modlink:focus,'
+    +'.super-navigation-menu__list-header .ts-modlink:active{color:inherit;text-decoration:none;border:0}';
   function injectLinkCSS(){
     if(document.getElementById('ts-modlink-css')) return;
     var st=document.createElement('style'); st.id='ts-modlink-css'; st.textContent=LINKCSS;
