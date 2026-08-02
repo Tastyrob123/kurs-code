@@ -1,48 +1,26 @@
 /* ============================================================
-   TS Page-Veil (02.08.2026, Performance-Session): Auf den Custom-
-   Code-Seiten bleibt der Notion-Inhaltsbereich unsichtbar, bis
-   kurs.js die Module angewendet hat (html.ts-reveal, Ausloeser-
-   Modul am Anfang von kurs.js) -- die FERTIGE Seite erscheint in
-   einem Zug statt "Geruest zuerst, dann Umbau". Navbar/Sidebar
-   sind nie verdeckt. Failsafe doppelt: CSS-Animation blendet nach
-   2,5 s ein (falls kurs.js nie laeuft; in hidden Tabs pausiert
-   Chrome Animationen -- deshalb zusaetzlich JS-Failsafes im
-   Ausloeser-Modul). Getestet 02.08.: Reveal-Override + Failsafe.
+   TS Page-Veil (02.08.2026, Performance-Session; Selektor generisch
+   seit dem Modul-Vollscan): Der Notion-Inhaltsbereich bleibt
+   unsichtbar, bis kurs.js die Module angewendet hat (html.ts-reveal)
+   -- die FERTIGE Seite erscheint in einem Zug statt "Geruest zuerst,
+   dann Umbau". Navbar/Sidebar sind nie verdeckt.
+
+   ⚠️ WARUM GENERISCH: Bis zum Vollscan stand hier eine Liste von 31
+   festen `main.page__<slug>`-Selektoren. Die deckte nur 2 der 29
+   Lektions-Unterseiten ab -- super.so praefixt sie zu
+   `page__lektionen-<slug>` und ihre echten Slugs weichen von den
+   Gate-Regexen in kurs.js ab (z. B. live
+   /lektionen/l14-relationen-rollups vs. Gate /relationen-rollups).
+   Auf allen uebrigen Kursseiten lief der Veil deshalb NICHT und der
+   Notion-Umbau blieb sichtbar. Der Attribut-Selektor greift auf jeder
+   super.so-Inhaltsseite -- inklusive aller kuenftigen, ohne Pflege.
+   Die 404-Seite hat kein `main.super-content` und bleibt sofort sichtbar.
+
+   Failsafe doppelt: CSS-Animation blendet nach 2,5 s ein (falls
+   kurs.js nie laeuft), zusaetzlich JS-Failsafes im Ausloeser-Modul.
    BEWUSST AM DATEIANFANG (kollisionssicher, Chats appenden am Ende).
    ============================================================ */
-main.page__allergene-bersicht > .notion-root,
-main.page__ansichten-filter > .notion-root,
-main.page__automations-buttons > .notion-root,
-main.page__checklisten-produktion > .notion-root,
-main.page__lektionen-claude-startklar-machen > .notion-root,
-main.page__einfuehrung-datenbanken > .notion-root,
-main.page__food-drinksquartier-inhalte-interface > .notion-root,
-main.page__formeln-logik-bausteine > .notion-root,
-main.page__gemeinkosten-mitarbeiterlhne > .notion-root,
-main.page__gerichte-getrnke-finaler-schritt > .notion-root,
-main.page__index > .notion-root,
-main.page__interface-bau-grundstruktur-widgets > .notion-root,
-main.page__inventur-bestand > .notion-root,
-main.page__inventurliste > .notion-root,
-main.page__key-metrics > .notion-root,
-main.page__layout-medien-strukturierung > .notion-root,
-main.page__lieferpartner-ansprechpartner-lieferantenvertrge > .notion-root,
-main.page__mehrwert-zielbild > .notion-root,
-main.page__menkalkulation-catering-rechner > .notion-root,
-main.page__modul-1-notion-grundlagen > .notion-root,
-main.page__modul-2-das-notion-ai-backoffice-system > .notion-root,
-main.page__multistandort-erweiterung-optional > .notion-root,
-main.page__notion-ai-fr-unser-system > .notion-root,
-main.page__notion-philosophie-canvas-prinzip > .notion-root,
-main.page__operations-area > .notion-root,
-main.page__relationen-rollups > .notion-root,
-main.page__rezepturen > .notion-root,
-main.page__system-architektur-dashboard > .notion-root,
-main.page__team-onboarding > .notion-root,
-main.page__vision-frame-abschluss-des-building-prozesses > .notion-root,
-main.page__vision-werte > .notion-root,
-main.page__lektionen-website-skills-laden > .notion-root,
-main.page__zutatenliste > .notion-root { opacity:0; animation:tsVeilFail .4s 2.5s ease forwards; }
+main.super-content[class*="page__"] > .notion-root { opacity:0; animation:tsVeilFail .4s 2.5s ease forwards; }
 html.ts-reveal main.super-content > .notion-root { opacity:1 !important; animation:none !important; }
 @keyframes tsVeilFail { to { opacity:1; } }
 
