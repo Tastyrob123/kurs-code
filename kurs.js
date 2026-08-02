@@ -30144,7 +30144,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Strukturausdenken" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Struktur<span class="ts-gold">ausdenken</span></h1></div>';
+        '<h1 class="ts-hero__title">Struktur <span class="ts-gold">ausdenken</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -30362,7 +30362,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Kamerafahrtplanen" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Kamerafahrt<span class="ts-gold">planen</span></h1></div>';
+        '<h1 class="ts-hero__title">Kamerafahrt <span class="ts-gold">planen</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -30580,7 +30580,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Bildergenerieren" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Bilder<span class="ts-gold">generieren</span></h1></div>';
+        '<h1 class="ts-hero__title">Bilder <span class="ts-gold">generieren</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -30689,7 +30689,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Videosgenerieren" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Videos<span class="ts-gold">generieren</span></h1></div>';
+        '<h1 class="ts-hero__title">Videos <span class="ts-gold">generieren</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -30798,7 +30798,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Textedefinieren" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Texte<span class="ts-gold">definieren</span></h1></div>';
+        '<h1 class="ts-hero__title">Texte <span class="ts-gold">definieren</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -30907,7 +30907,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Schriftartenanpassen" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Schriftarten<span class="ts-gold">anpassen</span></h1></div>';
+        '<h1 class="ts-hero__title">Schriftarten <span class="ts-gold">anpassen</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
@@ -31016,7 +31016,7 @@ var TSISL_TEAM_ONB_V2=[
       hero.innerHTML='<img class="ts-hero__img" alt="Onlinehosten" src="'+IMG+'">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
         '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Online<span class="ts-gold">hosten</span></h1></div>';
+        '<h1 class="ts-hero__title">Online <span class="ts-gold">hosten</span></h1></div>';
       var nr=sc.querySelector(".notion-root");
       if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
       Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
