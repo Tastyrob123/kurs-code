@@ -28385,7 +28385,20 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   /* ---------- CONTENT: 8 Lektionen ---------- */
-  var BACK={href:'/modul-5-claude-code-notion', label:'Modul 5'};
+  /* Der Modul-Slug wandert: die Notion-Modulzeile heisst seit 02.08.2026
+     „Modul 5 · AI Reservation Agent" (vorher „Modul 5 · Claude Code + Notion").
+     super.so slugifiziert aus dem Titel, der Slug aendert sich also beim
+     naechsten Re-Sync. Deshalb wird er zur Laufzeit aus der Seiten-Navigation
+     gelesen und nur im Notfall auf den erwarteten neuen Slug zurueckgefallen. */
+  var BACK={href:'/modul-5-ai-reservation-agent', label:'Modul 5'};
+  function moduleHref(){
+    var as=document.querySelectorAll('a[href^="/modul-5"]');
+    for(var i=0;i<as.length;i++){
+      var h=as[i].getAttribute('href');
+      if(h&&h.indexOf('/lektionen/')===-1) return h;
+    }
+    return BACK.href;
+  }
   var LEK=[
   {
    slug:/\/lektionen\/reservierungen-ohne-anruf\/?$/, key:'l50',
@@ -28600,7 +28613,7 @@ var TSISL_TEAM_ONB_V2=[
    img2:['Was bleiben darf','Vorher-Nachher: links Einträge mit Namen, rechts nach der Frist nur noch anonyme Zahlen in den Key Metrics.'],
    note:{h:'Die Notizfeld-<span class="rs-g">Linie</span>', p:'Sagt ein Gast von sich aus, dass jemand am Tisch eine Nussallergie hat, notiert der Agent das als Hinweis für die Küche, denn das ist Service. Aber er fragt nicht danach, und wir werten es nicht aus. Gesundheitsangaben sind besonders geschützt, und eine Reservierungs-Datenbank ist nicht der Ort, sie zu sammeln.'},
    learn:['Du weißt, was neu dazukommt und was Modul vier schon abdeckt.','Du setzt die Transparenz um: Ansage am Telefon, klarer Hinweis im Chat.','Du lebst Datenminimierung und kennst die Notizfeld-Linie.','Du hast ein automatisches Löschkonzept und weißt, mit wem Verträge nötig sind.'],
-   next:{href:'/modul-5-claude-code-notion', label:'Zurück zum Modul'}
+   next:{href:'__MODUL__', label:'Zurück zum Modul'}
   }];
 
   /* ---------- CSS ---------- */
@@ -28934,7 +28947,7 @@ var TSISL_TEAM_ONB_V2=[
   function build(L){
     var h='';
     h+='<section class="rs-hero">'+
-       '<a class="rs-back" href="'+BACK.href+'">&larr; '+BACK.label+'</a>'+
+       '<a class="rs-back" href="'+moduleHref()+'">&larr; '+BACK.label+'</a>'+
        '<img class="rs-logo" src="'+LOGO+'" alt="">'+
        '<span class="rs-eyebrow">'+L.eyebrow+'</span>'+
        '<span class="rs-kicker">'+L.kicker+'</span>'+
@@ -28971,7 +28984,7 @@ var TSISL_TEAM_ONB_V2=[
        '<div class="rs-orbs">'+L.learn.map(function(t){return '<div class="rs-orb"><i></i><span>'+t+'</span></div>';}).join('')+
        '</div></div></section>';
     /* Weiter */
-    h+='<div class="rs-next rs-rv"><a href="'+L.next.href+'">'+L.next.label+' <i>&rarr;</i></a></div>';
+    h+='<div class="rs-next rs-rv"><a href="'+(L.next.href==='__MODUL__'?moduleHref():L.next.href)+'">'+L.next.label+' <i>&rarr;</i></a></div>';
     return h;
   }
 
@@ -29073,9 +29086,8 @@ var TSISL_TEAM_ONB_V2=[
       run();
     }
   }
-  var mo=new MutationObserver(function(){
-    clearTimeout(t); t=setTimeout(sync,200);
-  });
-  mo.observe(document.documentElement,{childList:true,subtree:true});
+  var MOF=window.__tsMO||function(cb){return new MutationObserver(cb);};
+  MOF(function(){ clearTimeout(t); t=setTimeout(sync,200); })
+    .observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('popstate',function(){ clearTimeout(t); t=setTimeout(sync,60); });
 })();
