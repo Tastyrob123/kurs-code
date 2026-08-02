@@ -65,7 +65,7 @@ section.notion-tabs {
 }
 @font-face{
   font-family:"Lineal TS";
-  src:url("https://files.catbox.moe/e1pdl7.woff2") format("woff2");
+  src:url("https://tastyrob123.github.io/kurs-code/assets/e1pdl7.woff2") format("woff2");
   font-weight:600; font-style:normal; font-display:swap;
 }
 .page__zutatenliste .ts-hero{
@@ -172,7 +172,7 @@ canvas[style*="2147483647"]{ display:none !important; }
 /* ===== BLOCK 4 · Startseite (Hero) ===== */
 @font-face{
   font-family:"Lineal Web";
-  src:url("https://files.catbox.moe/rosyiu.woff2") format("woff2");
+  src:url("https://tastyrob123.github.io/kurs-code/assets/rosyiu.woff2") format("woff2");
   font-weight:600; font-style:normal; font-display:swap;
 }
 .page__index .ts-hero{

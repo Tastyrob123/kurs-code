@@ -498,9 +498,9 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/etxqcu.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
-  var POSTER="https://files.catbox.moe/fpkny6.webp";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/etxqcu.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/fpkny6.webp";
   function on(){ return /\/zutatenliste\/?$/.test(location.pathname); }
   function enhanceVideo(sc){
     var vwrap=sc.querySelector(".notion-video__content");
@@ -548,8 +548,8 @@
    rezepturen — Hero "DB V : Rezepturen" (Muster: zutatenliste-Hero DB IV)
    ============================================================ */
 (function(){
-  var IMG="https://files.catbox.moe/usatux.png"; /* 3-Laptop-Cover Rezepturen v3 UHD: NEU aus sauberem Original "Meine Rezepte.png" aufgebaut (nicht mehr aus dem harten Live-Asset), auf Alpha-Grid registriert (offset 3,132 @1x), 3x Lanczos = 4080x1464 RGBA. Ton = Original-natuerlich, farbenfroh (saturate 1.20) + knackig (UnsharpMask r1.8/p85), leichte Kontrast-Pointe 1.05 (pivot118) -- KEIN harter contrast/unsharp125 mehr. Alpha aus 7qzb0p hochskaliert -> blendet nahtlos in #05060b. Vorgaenger: n0vdhw (K2, zu flach), 7qzb0p (zu hart) */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/usatux.png"; /* 3-Laptop-Cover Rezepturen v3 UHD: NEU aus sauberem Original "Meine Rezepte.png" aufgebaut (nicht mehr aus dem harten Live-Asset), auf Alpha-Grid registriert (offset 3,132 @1x), 3x Lanczos = 4080x1464 RGBA. Ton = Original-natuerlich, farbenfroh (saturate 1.20) + knackig (UnsharpMask r1.8/p85), leichte Kontrast-Pointe 1.05 (pivot118) -- KEIN harter contrast/unsharp125 mehr. Alpha aus 7qzb0p hochskaliert -> blendet nahtlos in #05060b. Vorgaenger: n0vdhw (K2, zu flach), 7qzb0p (zu hart) */
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/rezepturen\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -582,7 +582,7 @@
    ============================================================ */
 (function(){
   var IMG="https://tastyrob123.github.io/kurs-code/img/key-metrics/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Key Metrics: sauberer 3-Laptop-SVG (Position/Struktur final), echtes Cover kommt spaeter -> nur diese Zeile ersetzen */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -1483,8 +1483,8 @@
    gerichte-getrnke-finaler-schritt — Hero "DB XI : Gerichte & Getränke" (Muster: rezepturen-Hero DB V)
    ============================================================ */
 (function(){
-  var IMG="https://files.catbox.moe/sceu4c.png"; /* 3-Laptop-Cover Gerichte & Getränke: weisser Hintergrund per Edge-Flood-Fill entfernt (transparent RGBA, kein AI), Farben knallig (Saettigung +24%), Feinradius-Schaerfung (2-stufig r1.0/r0.5, Kantenschaerfe OHNE Kontrast-Halo), eng auf die Laptops beschnitten -> groesser+hoeher wie Referenz, 2700px (aus Gerichte.png) */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/sceu4c.png"; /* 3-Laptop-Cover Gerichte & Getränke: weisser Hintergrund per Edge-Flood-Fill entfernt (transparent RGBA, kein AI), Farben knallig (Saettigung +24%), Feinradius-Schaerfung (2-stufig r1.0/r0.5, Kantenschaerfe OHNE Kontrast-Halo), eng auf die Laptops beschnitten -> groesser+hoeher wie Referenz, 2700px (aus Gerichte.png) */
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/gerichte-getrnke-finaler-schritt\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -2954,8 +2954,8 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/4ezi8i.png";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/4ezi8i.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function mount(){
     var sc=document.querySelector(".super-content.page__index");
     if(!sc || sc.querySelector(".ts-hero")) return;
@@ -3034,8 +3034,8 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/d9udfg.png";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/d9udfg.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/modul-2-das-notion-ai-backoffice-system\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -3601,8 +3601,8 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/botkum.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/botkum.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/mehrwert-zielbild\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -3923,7 +3923,7 @@
     var ex = document.querySelector('script[data-ts-gsap]');
     if (ex){ ex.addEventListener('load', cb); return; }
     var sc = document.createElement('script');
-    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
+    sc.src = 'https://tastyrob123.github.io/kurs-code/assets/gsap.min.js';
     sc.setAttribute('data-ts-gsap','1');
     sc.onload = cb; sc.onerror = cb;
     document.head.appendChild(sc);
@@ -3975,9 +3975,9 @@
     vision:  "https://app.notion.com/p/cceb95465534823c889e01b310495ab9?source=copy_link"
   };
   var IMG = {
-    food:"https://files.catbox.moe/rf93ka.jpg",drinks:"https://files.catbox.moe/5j95hc.jpg",
-    finance:"https://files.catbox.moe/m629vk.jpg",metrics:"https://files.catbox.moe/hninlw.jpg",
-    ops:"https://files.catbox.moe/bne5l8.jpg",vision:"https://files.catbox.moe/6b9lws.jpg"
+    food:"https://tastyrob123.github.io/kurs-code/assets/rf93ka.jpg",drinks:"https://tastyrob123.github.io/kurs-code/assets/5j95hc.jpg",
+    finance:"https://tastyrob123.github.io/kurs-code/assets/m629vk.jpg",metrics:"https://tastyrob123.github.io/kurs-code/assets/hninlw.jpg",
+    ops:"https://tastyrob123.github.io/kurs-code/assets/bne5l8.jpg",vision:"https://tastyrob123.github.io/kurs-code/assets/6b9lws.jpg"
   };
   var GLOW = {food:"90,150,185",drinks:"235,140,40",finance:"60,150,215",metrics:"95,165,205",ops:"170,120,90",vision:"150,110,220"};
   var CSS = `
@@ -4589,7 +4589,7 @@
 /* Tasty Studios · mehrwert-zielbild · MacBook-Cover + Klick-Lightbox
    Extern gehostet, damit super.so-Code klein bleibt. Läuft nur auf /mehrwert-zielbild. */
 (function(){
-  var POSTER="https://files.catbox.moe/qryb5j.png";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/qryb5j.png";
   (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var CSS=[
     '.page__mehrwert-zielbild .notion-column-list:has(h1.notion-heading) > .notion-column:not(:has(h1.notion-heading)){display:flex!important;}',
@@ -4662,8 +4662,8 @@
    Bilder (catbox): Frame = oj1wa9.png · Screenshot = 4s49ab.png
    ============================================================ */
 (function(){
-  var FRAME="https://files.catbox.moe/oj1wa9.png";
-  var SHOT="https://files.catbox.moe/4s49ab.png";
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
+  var SHOT="https://tastyrob123.github.io/kurs-code/assets/4s49ab.png";
   var ANCHOR="verwendeten Zutaten und Produkte";   // Text der RECHTEN Spalte -> MacBook links daneben
   var CSS=[
     '#tsmb-root{--tsmb-gold:#c7b489;--tsmb-ease:cubic-bezier(.16,1,.3,1);margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;}',
@@ -4955,8 +4955,8 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/9ah8jn.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/9ah8jn.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -4987,8 +4987,8 @@
 /* gemeinkosten-mitarbeiterlhne — Hero "DB VI–VII : GK und Löhne" (Muster: inventurliste-Hero).
    Bild = 3-Laptop-Cover (Finance Studio) freigestellt auf Transparenz (aus GK & Löhne.png). Text = HTML/CSS-Overlay. */
 (function(){
-  var IMG="https://files.catbox.moe/sscg6x.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/sscg6x.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/gemeinkosten-mitarbeiterlhne\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -5019,8 +5019,8 @@
 /* allergene-bersicht — Hero "DB IX–X : Allergene & Packaging" (Muster: gemeinkosten-Hero).
    Bild = 3-Laptop-Cover (Allergene-DB) freigestellt auf Transparenz (aus Allergene Hero.png). Text = HTML/CSS-Overlay. */
 (function(){
-  var IMG="https://files.catbox.moe/850o43.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/850o43.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -5131,9 +5131,9 @@
   function conn(){ return '<div class="tsalg-conn"><span class="ln"></span><span class="hd"></span></div>'; }
 
   var IMG={
-    mehl:"https://files.catbox.moe/rdk2ux.png",
-    teig:"https://files.catbox.moe/wn29tf.png",
-    pizza:"https://files.catbox.moe/0uk9xg.png"
+    mehl:"https://tastyrob123.github.io/kurs-code/assets/rdk2ux.png",
+    teig:"https://tastyrob123.github.io/kurs-code/assets/wn29tf.png",
+    pizza:"https://tastyrob123.github.io/kurs-code/assets/0uk9xg.png"
   };
   (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
   function card(n, img, alt, type, name, tag, tagCls){
@@ -5220,7 +5220,7 @@
    ============================================================ */
 (function(){
   if(window.__tsalgpc) return; window.__tsalgpc=true;
-  var POSTER="https://files.catbox.moe/8xy3px.png";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/8xy3px.png";
   (function(){ var p=new Image(); p.src=POSTER; })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
@@ -5319,9 +5319,9 @@
    ============================================================ */
 (function(){
   if(window.__tsalgpc2) return; window.__tsalgpc2=true;
-  var POSTER="https://files.catbox.moe/z0dt0j.png";
-  var FRAME="https://files.catbox.moe/oj1wa9.png";
-  var SHOT="https://files.catbox.moe/1xvr23.webp";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/z0dt0j.png";
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
+  var SHOT="https://tastyrob123.github.io/kurs-code/assets/1xvr23.webp";
   (function(){ [POSTER,FRAME,SHOT].forEach(function(u){ var p=new Image(); p.src=u; }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
@@ -5796,7 +5796,7 @@
   if(window.__tspkres) return; window.__tspkres=true;
   var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen DB Packaging (Robert) */
   var SHOT=null;     /* <- langer Ganzseiten-Screenshot der DB Packaging (Robert)  */
-  var FRAME="https://files.catbox.moe/oj1wa9.png";
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
   (function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
@@ -6117,7 +6117,7 @@
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
 
   var ITEMS=[
-   {name:"Glutenhaltiges Getreide", intoleranz:"Zöliakie", img:"https://files.catbox.moe/t6ysos.webp",
+   {name:"Glutenhaltiges Getreide", intoleranz:"Zöliakie", img:"https://tastyrob123.github.io/kurs-code/assets/t6ysos.webp",
     wasistes:"Proteine aus bestimmten Getreidesorten: Weizen, Roggen, Gerste, Hafer, Dinkel, Kamut.",
     kennz:"Pflicht bei Zutaten oder Bestandteilen.", gefahr:"Mittel bis hoch.",
     kreuz:"Hoch: gleiche Toaster, Fritteuse, Schneidebretter, Mehlstaub.",
@@ -6125,7 +6125,7 @@
     zeit:"Minuten bis Stunden, teils verzögert.",
     versteckt:"Sojasauce mit Weizen, Gewürzmischungen, Fertigsoßen, Brühen, „crispy toppings“, Seitan.",
     hinweis:"Glutenfrei ist nur glaubwürdig mit Prozessen: separate Tools, separate Lagerung, klare Kommunikation."},
-   {name:"Schalenfrüchte", intoleranz:"Nussallergie", img:"https://files.catbox.moe/ar3kvg.webp",
+   {name:"Schalenfrüchte", intoleranz:"Nussallergie", img:"https://tastyrob123.github.io/kurs-code/assets/ar3kvg.webp",
     wasistes:"Mandel, Haselnuss, Walnuss, Cashew, Pecannuss, Paranuss, Pistazie, Macadamia.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
     kreuz:"Hoch. Nüsse sind häufig als Topping oder in Desserts.",
@@ -6133,7 +6133,7 @@
     zeit:"Meist Minuten.",
     versteckt:"Pesto, Nussmilch, Desserts, Toppings, Backwaren, Saucen, Nussmischungen.",
     hinweis:"Bei Nussallergie sind Toppings und Dessertstationen kritisch. Nur zusagen, wenn Prozesse sauber sind."},
-   {name:"Eier", intoleranz:"Hühnereiweißallergie", img:"https://files.catbox.moe/z4gmmr.webp",
+   {name:"Eier", intoleranz:"Hühnereiweißallergie", img:"https://tastyrob123.github.io/kurs-code/assets/z4gmmr.webp",
     wasistes:"Eier von Geflügel und alle Produkte, die Ei oder Ei-Bestandteile enthalten.",
     kennz:"Pflicht.", gefahr:"Mittel bis hoch. Bei manchen Betroffenen schwere Reaktionen möglich.",
     kreuz:"Mittel. Besonders bei Frühstücks- und Backstationen.",
@@ -6141,7 +6141,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Mayonnaise, Remoulade, Dressings, Aioli, Panaden, Teige, Backwaren, Nudelteig, Glasuren.",
     hinweis:"Dressings immer aktiv prüfen. Bei Backwaren ist Ei sehr häufig. Klare Rezeptdatenbank verhindert Fehler."},
-   {name:"Fisch", intoleranz:"Fischallergie", img:"https://files.catbox.moe/sctqws.webp",
+   {name:"Fisch", intoleranz:"Fischallergie", img:"https://tastyrob123.github.io/kurs-code/assets/sctqws.webp",
     wasistes:"Alle Fischarten und daraus hergestellte Produkte.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich bei stark allergischen Personen.",
     kreuz:"Hoch. Grill, Pfanne, Fritteuse, gleiche Zange, gleiche Schneidebretter.",
@@ -6149,7 +6149,7 @@
     zeit:"Meist Minuten bis 2 Stunden.",
     versteckt:"Worcester-Sauce, Caesar-Dressing (Anchovis), Fischsauce, Fischfond, asiatische Saucen.",
     hinweis:"Nicht nur das Filet zählt, auch Fond und Sauce. Bei Unsicherheit keine Zusage."},
-   {name:"Erdnüsse", intoleranz:"Erdnussallergie", img:"https://files.catbox.moe/vfrlnd.webp",
+   {name:"Erdnüsse", intoleranz:"Erdnussallergie", img:"https://tastyrob123.github.io/kurs-code/assets/vfrlnd.webp",
     wasistes:"Erdnüsse und alle Produkte aus Erdnüssen.",
     kennz:"Pflicht.", gefahr:"Sehr hoch, potenziell lebensbedrohlich.",
     kreuz:"Hoch. Besonders an Dessertstationen, bei Toppings und Nussmischungen.",
@@ -6157,7 +6157,7 @@
     zeit:"Oft Minuten.",
     versteckt:"Satay-Saucen, asiatische Dressings, Desserts, Nussmischungen, Erdnussöl, Schokoladen/Backwaren mit Spuren.",
     hinweis:"Bei Erdnussallergie niemals „wahrscheinlich frei“. Nur zusagen, wenn die Kette sicher ist."},
-   {name:"Soja", intoleranz:"Sojaallergie", img:"https://files.catbox.moe/5up0dj.webp",
+   {name:"Soja", intoleranz:"Sojaallergie", img:"https://tastyrob123.github.io/kurs-code/assets/5up0dj.webp",
     wasistes:"Sojabohnen und Produkte daraus, inklusive Tofu, Tempeh, Sojamilch, Sojasauce.",
     kennz:"Pflicht.", gefahr:"Mittel. Schwere Reaktionen möglich, aber seltener als bei Erdnüssen.",
     kreuz:"Mittel. Besonders an Wok- oder Asia-Stationen.",
@@ -6165,7 +6165,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Sojasauce, Marinaden, Dressings, Fleischersatz, Fertigprodukte, teilweise Lecithin.",
     hinweis:"Saucen sind der Hauptfehler. Soja ist oft „unsichtbar“ enthalten."},
-   {name:"Milch", intoleranz:"Laktoseintoleranz", img:"https://files.catbox.moe/3pkqvs.webp",
+   {name:"Milch", intoleranz:"Laktoseintoleranz", img:"https://tastyrob123.github.io/kurs-code/assets/3pkqvs.webp",
     wasistes:"Milch und Milchprodukte. Relevant sind Milchproteine. Laktoseintoleranz ist keine Allergie, aber oft mit gemeint.",
     kennz:"Pflicht.", gefahr:"Mittel bis hoch. Bei echter Milchallergie auch schwere Reaktionen möglich.",
     kreuz:"Mittel. Milchprodukte sind in Küchen allgegenwärtig.",
@@ -6173,7 +6173,7 @@
     zeit:"Allergie oft Minuten. Intoleranz eher 30 Minuten bis mehrere Stunden.",
     versteckt:"Butter, Sahne, Käse, Joghurt, Molke, Milchpulver, viele Desserts, Cremes, Saucen, Schokolade.",
     hinweis:"Immer klären, ob Allergie oder Intoleranz. Laktosefrei ist nicht automatisch milchfrei."},
-   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://files.catbox.moe/dg9pzt.webp",
+   {name:"Krebstiere", intoleranz:"Schalentierallergie", img:"https://tastyrob123.github.io/kurs-code/assets/dg9pzt.webp",
     wasistes:"Garnelen, Krabben, Hummer, Krebs und alle daraus hergestellten Produkte.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich. Bereits kleinste Mengen können Anaphylaxie auslösen.",
     kreuz:"Hoch. Grillplatten, Woks, Fritteusen und Pfannen sind häufige Kontaminationsquellen.",
@@ -6181,7 +6181,7 @@
     zeit:"Oft innerhalb von Minuten, selten bis zu 2 Stunden.",
     versteckt:"Fisch- und Meeresfrüchtesaucen, Meeresfrüchtebrühen, asiatische Pasten, „Seafood Mix“.",
     hinweis:"Nie raten. Bei Unsicherheit ablehnen. Separate Tools und klare Reinigung sind Pflicht."},
-   {name:"Senf", intoleranz:"Senfallergie", img:"https://files.catbox.moe/5tg513.webp",
+   {name:"Senf", intoleranz:"Senfallergie", img:"https://tastyrob123.github.io/kurs-code/assets/5tg513.webp",
     wasistes:"Senf und senfhaltige Produkte wie Dressings, Marinaden und Saucen.",
     kennz:"Pflicht.", gefahr:"Mittel, bei manchen hoch.",
     kreuz:"Mittel. Senf wird häufig als Grundzutat genutzt.",
@@ -6189,7 +6189,7 @@
     zeit:"Minuten bis Stunden.",
     versteckt:"Mayonnaise, Dressings, BBQ-Sauce, Marinaden, Gewürzmischungen, Wurstwaren, Ketchup je nach Rezeptur.",
     hinweis:"Dressings sind Hauptfehler. Rezeptdatenbank muss Senf sauber markieren."},
-   {name:"Sesam", intoleranz:"Sesamallergie", img:"https://files.catbox.moe/z0ntai.webp",
+   {name:"Sesam", intoleranz:"Sesamallergie", img:"https://tastyrob123.github.io/kurs-code/assets/z0ntai.webp",
     wasistes:"Sesamsamen und Sesamprodukte wie Tahini, Sesamöl, Sesampasten.",
     kennz:"Pflicht.", gefahr:"Hoch bis lebensbedrohlich.",
     kreuz:"Mittel bis hoch. Sesam verteilt sich leicht über Arbeitsflächen.",
@@ -6197,7 +6197,7 @@
     zeit:"Meist Minuten.",
     versteckt:"Hummus, Tahini, Burger-Buns, Brot-Toppings, asiatische Dressings, Sesamöl.",
     hinweis:"Brot und Toppings aktiv abfragen. Bei Sesamallergie sind Spuren kritisch."},
-   {name:"Sulfite", intoleranz:"Sulfitintoleranz", img:"https://files.catbox.moe/61ymxr.webp",
+   {name:"Sulfite", intoleranz:"Sulfitintoleranz", img:"https://tastyrob123.github.io/kurs-code/assets/61ymxr.webp",
     wasistes:"Konservierungsstoffe und natürliche Bestandteile, häufig in Wein, Sekt, Essig, Trockenfrüchten.",
     kennz:"Pflicht ab 10 mg/kg oder 10 mg/L.", gefahr:"Mittel. Bei Asthma kann es ernst werden.",
     kreuz:"Niedrig. Eher eine Zutatenfrage als eine Flächenfrage.",
@@ -6538,7 +6538,7 @@
   /* BG-Bilder liegen im Repo (GitHub Pages), da kurs.js von github.io geladen
      wird -> absolute Pages-URL noetig. Serie 3: Produkt mittig auf reinem Schwarz. */
   var BASE='https://tastyrob123.github.io/kurs/img/gemeinkosten-grid/';
-  var LOGO='https://files.catbox.moe/au80tp.png';
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var CARDS=[
     ['Reinigungskosten','reinigungskosten'],
     ['Versicherungen','versicherungen'],
@@ -7040,8 +7040,8 @@
 /* ---- */
 
 (function(){
-  var IMG="https://files.catbox.moe/ecvbxi.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var IMG="https://tastyrob123.github.io/kurs-code/assets/ecvbxi.webp";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -7193,7 +7193,7 @@
    ============================================================ */
 (function(){
   if(window.__tsmacInv) return; window.__tsmacInv=true;
-  var POSTER="https://files.catbox.moe/tqee6z.png";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/tqee6z.png";
   (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var CSS=[
     '.page__inventurliste .notion-column-list:has(h1.notion-heading) > .notion-column:not(:has(h1.notion-heading)){display:flex!important;}',
@@ -7361,7 +7361,7 @@
    ============================================================ */
 (function(){
   if(window.__tslink) return; window.__tslink=true;
-  var LOGO='https://files.catbox.moe/au80tp.png';
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var GLOW='199,180,137';
   var CSS=`
   #tslink{width:min(1000px,95vw);margin:36px auto 30px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -7389,9 +7389,9 @@
   `;
   var LINKICON='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
   var CARDS=[
-    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.2.1','https://files.catbox.moe/wl5y7h.jpg'],
-    ['02','Zutaten','Zieht ihre Preise später direkt aus deiner Inventurliste.','https://sore-donut-083.notion.site/DB-Zutaten-388b95465534827481c0011c243f90de?source=copy_link','Lektion 2.2.2','https://files.catbox.moe/cvv9ee.jpg'],
-    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.2.3','https://files.catbox.moe/bwgtim.jpg']
+    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.2.1','https://tastyrob123.github.io/kurs-code/assets/wl5y7h.jpg'],
+    ['02','Zutaten','Zieht ihre Preise später direkt aus deiner Inventurliste.','https://sore-donut-083.notion.site/DB-Zutaten-388b95465534827481c0011c243f90de?source=copy_link','Lektion 2.2.2','https://tastyrob123.github.io/kurs-code/assets/cvv9ee.jpg'],
+    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.2.3','https://tastyrob123.github.io/kurs-code/assets/bwgtim.jpg']
   ];
   function injectCSS(){ if(document.getElementById('tslink-css'))return; var s=document.createElement('style'); s.id='tslink-css'; s.textContent=CSS; document.head.appendChild(s); }
   function build(){
@@ -7462,9 +7462,9 @@
    ============================================================ */
 (function(){
   if(window.__tsiv) return; window.__tsiv=true;
-  var FRAME="https://files.catbox.moe/oj1wa9.png";
-  var COVER="https://files.catbox.moe/r8ef2f.png";
-  var SHOT="https://files.catbox.moe/5hhr5b.png";
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
+  var COVER="https://tastyrob123.github.io/kurs-code/assets/r8ef2f.png";
+  var SHOT="https://tastyrob123.github.io/kurs-code/assets/5hhr5b.png";
   var CSS=[
     '#tsiv-root{--tsiv-gold:#c7b489;--tsiv-ease:cubic-bezier(.16,1,.3,1);width:min(1000px,95vw);margin:8px auto 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,60px);align-items:center;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;opacity:0;transform:translateY(20px);transition:opacity .8s var(--tsiv-ease),transform .9s var(--tsiv-ease);}',
     '#tsiv-root.in{opacity:1;transform:none;}',
@@ -10594,7 +10594,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   if(window.__tsmacLief) return; window.__tsmacLief=true;
-  var POSTER="https://files.catbox.moe/yznugp.png";
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/yznugp.png";
   (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var PG='.page__lieferpartner-ansprechpartner-lieferantenvertrge';
   var VID='#block-39ab954655348084b1bee141678f6bcf';
@@ -10868,7 +10868,7 @@ var TSISL_TEAM_ONB_V2=[
      des ANDEREN Widgets (#tsmac Video-Lightbox, Anker "Wir bauen zwei Datenbanken"). */
   var GK_BASE='https://tastyrob123.github.io/kurs/img/gemeinkosten-mac/';
   var GK_SCROLL=GK_BASE+'scroll/';
-  var FRAME='https://files.catbox.moe/oj1wa9.png'; /* leerer MacBook-Rahmen wie #tsmb */
+  var FRAME='https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png'; /* leerer MacBook-Rahmen wie #tsmb */
   /* col: leere Notion-Spalte im 2-Spalten-Layout neben dem Erklärtext — der PC wird DORT platziert
      (echter Nachbar, gleiche Höhe, mittig). Ohne col (Verträge = kein 2-Spalten-Layout, Text volle
      Breite; ebenso alle drei gemeinkosten-mitarbeiterlhne-Kacheln = kein 2-Spalten-Layout dort):
@@ -11062,7 +11062,7 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__tslmod) return; window.__tslmod=true;
   function on(){ return /\/modul-2-das-notion-ai-backoffice-system\/?$/.test(location.pathname); }
   var BASE='https://tastyrob123.github.io/kurs/img/modul2/';
-  var LOGO='https://files.catbox.moe/au80tp.png';
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var GLOW='199,180,137';
   var BLK='block-38fb95465534800bafb6c04f03af102b';
   var CARDS=[
@@ -11512,7 +11512,7 @@ var TSISL_TEAM_ONB_V2=[
      Überschrift — die saß hinter dem Play-Button versteckt und war unnötig (Robert-Korrektur
      22.07.2026: "Das reicht, wenn nur die Buttons da sind. […] die Überschrift kann weg."). Fotos =
      dieselben Zutaten-Bildserie-Assets wie im Kachelraster (img/modul2/…). */
-  var TSCARD_LOGO='https://files.catbox.moe/au80tp.png';
+  var TSCARD_LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var TSCARD_BASE='https://tastyrob123.github.io/kurs/img/modul2/';
   function coverCard(img,text){
     return '<div class="tsc-idlecover"><span class="tsccard-bg" aria-hidden="true"><img src="'+TSCARD_BASE+img+'" alt="" loading="lazy"></span>'+
@@ -11690,7 +11690,7 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__tszmac) return; window.__tszmac=true;
   var PATH=/\/zutatenliste\/?$/;
   var MARKER='zutat-laptop';
-  var FRAME='https://files.catbox.moe/oj1wa9.png';   /* leerer MacBook-Rahmen (wie #ts2mac) */
+  var FRAME='https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png';   /* leerer MacBook-Rahmen (wie #ts2mac) */
   var IMG='https://tastyrob123.github.io/kurs/img/zutaten-mac/pc.png';
   var SHOT='https://tastyrob123.github.io/kurs/img/zutaten-mac/scroll.jpg';
   var CAP='Meine Zutaten · DB-Ansicht';
@@ -11851,7 +11851,7 @@ var TSISL_TEAM_ONB_V2=[
 
   var IMGBASE='https://tastyrob123.github.io/kurs/img/zutaten-cut/';
   var JAR='https://tastyrob123.github.io/kurs/img/zutaten-cut/pesto-glas.png';
-  var LOGO='https://files.catbox.moe/au80tp.png';
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var RECIPE={
     name:'Basilikum-Pesto',
     items:[
@@ -12154,7 +12154,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   if(window.__tsrv) return; window.__tsrv=true;
-  var FRAME="https://files.catbox.moe/oj1wa9.png";
+  var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
   var COVER="https://tastyrob123.github.io/kurs/img/rezepturen-mac/rv-poster.png";
   var SHOT="https://tastyrob123.github.io/kurs/img/rezepturen-mac/rv-scroll.png";
   var ANCHOR_ID='block-6a8b34d0e7ed4681ab0fb35925ce5a88';
@@ -13046,7 +13046,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   var IMG="https://tastyrob123.github.io/kurs/img/menuekalkulation/hero.webp"; /* freigestellt (Rand-Flood-Fill), Alpha-BBox-Crop, 3x Lanczos + saturate 1.20 + UnsharpMask 1.8/85 + Kontrast-Pointe 1.05@118 (Live-Rezept) */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/menkalkulation-catering-rechner\/?$/.test(location.pathname); }
   function mount(){
     if(!on()) return;
@@ -13571,7 +13571,7 @@ var TSISL_TEAM_ONB_V2=[
     hintT = setTimeout(function(){ hint.classList.remove('on'); }, 3200);
   }
   /* Schlussstein-PC: Toast (Video folgt). DB-PCs: Scroll-Lightbox mit der echten DB-Ansicht. */
-  var SLB_FRAME = 'https://files.catbox.moe/oj1wa9.png'; /* leerer MacBook-Rahmen (wie #ts2mac/#tsmb) */
+  var SLB_FRAME = 'https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png'; /* leerer MacBook-Rahmen (wie #ts2mac/#tsmb) */
   function ensureSlb(){
     var lb = document.getElementById('ts11slb');
     if (lb) return lb;
@@ -14140,22 +14140,22 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   if(window.__tsIface) return; window.__tsIface = true;
   var SLUG=/\/interface-bau-grundstruktur-widgets\/?$/;
-  var HERO="https://files.catbox.moe/fz54d3.png"; /* transparenter Hintergrund */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var HERO="https://tastyrob123.github.io/kurs-code/assets/fz54d3.png"; /* transparenter Hintergrund */
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   /* echte Notion-Ansichten (Robert-Screenshots, in Klick-Reihenfolge) */
   var VIEWS=[
-    {src:"https://files.catbox.moe/t4lt8n.png",n:"Tabelle"},
-    {src:"https://files.catbox.moe/xeriqo.png",n:"Galerie"},
-    {src:"https://files.catbox.moe/8gadf6.png",n:"Board"},
-    {src:"https://files.catbox.moe/bnr15z.png",n:"Liste"},
-    {src:"https://files.catbox.moe/07xpp4.png",n:"Feed"},
-    {src:"https://files.catbox.moe/feoto4.png",n:"Diagramm"}
+    {src:"https://tastyrob123.github.io/kurs-code/assets/t4lt8n.png",n:"Tabelle"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/xeriqo.png",n:"Galerie"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/8gadf6.png",n:"Board"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/bnr15z.png",n:"Liste"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/07xpp4.png",n:"Feed"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/feoto4.png",n:"Diagramm"}
   ];
   /* echte Tool-Logos */
-  var LG_GEMINI="https://files.catbox.moe/xvdtd5.svg";
-  var LG_HIGGS="https://files.catbox.moe/nork7u.png";
-  var LG_MIDJOURNEY="https://files.catbox.moe/dpjfgb.svg";
-  var LG_CANVA="https://files.catbox.moe/qm931y.svg";
+  var LG_GEMINI="https://tastyrob123.github.io/kurs-code/assets/xvdtd5.svg";
+  var LG_HIGGS="https://tastyrob123.github.io/kurs-code/assets/nork7u.png";
+  var LG_MIDJOURNEY="https://tastyrob123.github.io/kurs-code/assets/dpjfgb.svg";
+  var LG_CANVA="https://tastyrob123.github.io/kurs-code/assets/qm931y.svg";
   var LG_OPENAI="https://tastyrob123.github.io/kurs-code/img/logos/openai.svg";
   var LG_CLAUDE="https://tastyrob123.github.io/kurs-code/img/logos/claude.svg";
   var LG_NOTION="https://tastyrob123.github.io/kurs-code/img/logos/notion.svg";
@@ -15049,7 +15049,7 @@ var TSISL_TEAM_ONB_V2=[
   var BASE="https://tastyrob123.github.io/kurs-code/img/food-drinks/";
   var HERO=BASE+"hero.webp";
   var COVER=BASE+"cover.webp";
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var FRAME=BASE+"macbook.webp";
   var ITEMS=[
     { page:BASE+"food-page.webp",   label:"Food-Quartier",   cjk:"食" },
@@ -15280,7 +15280,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   if(window.__tsops) return; window.__tsops=true;
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var GLOW="199,180,137";
   function on(){ return /\/operations-area\/?$/.test(location.pathname); }
 
@@ -15437,7 +15437,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   if(window.__tsvf) return; window.__tsvf=true;
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var GLOW="199,180,137";
   var P=".page__vision-frame-abschluss-des-building-prozesses";
   function on(){ return /\/vision-frame-abschluss-des-building-prozesses\/?$/.test(location.pathname); }
@@ -16956,7 +16956,7 @@ var TSISL_TEAM_ONB_V2=[
 
   /* ----------------------------------------------------------------- CSS */
   var CSS = [
-    '@font-face{font-family:"Lineal Web";src:url("https://files.catbox.moe/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
+    '@font-face{font-family:"Lineal Web";src:url("https://tastyrob123.github.io/kurs-code/assets/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
 
     '#tsanim2{--a2-bg:#04050a;--a2-be:#c7b489;--a2-g:199,180,137;--a2-ok:#8FCBAA;--a2-no:#e0574f;--a2-no2:#e32552;',
     '--a2-e:cubic-bezier(.16,1,.3,1);--a2-e2:cubic-bezier(.22,1,.36,1);--a2-pop:cubic-bezier(.34,1.56,.64,1);',
@@ -19091,7 +19091,7 @@ var TSISL_TEAM_ONB_V2=[
     var s = document.createElement('style');
     s.id = CSS_ID;
     s.textContent = [
-      '@font-face{font-family:"Lineal Web";src:url("https://files.catbox.moe/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
+      '@font-face{font-family:"Lineal Web";src:url("https://tastyrob123.github.io/kurs-code/assets/rosyiu.woff2") format("woff2");font-weight:600;font-display:swap}',
 
       '#' + ID + '{--pv-g:199,180,137;--pv-beige:#c7b489;--pv-green:#8FCBAA;--pv-red:#e32552;',
       '--pv-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;',
@@ -20291,7 +20291,7 @@ var TSISL_TEAM_ONB_V2=[
     setTimeout(function(){ core.classList.add('pulse'); }, 120+frs.length*150+900);
     tps.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 120+frs.length*150+1150+i*160); });
   };
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var G="199,180,137";
 
   /* ---------- CONTENT: alle 6 Inseln ---------- */
@@ -20851,7 +20851,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================ */
 (function(){
   var IMG="https://tastyrob123.github.io/kurs-code/img/notion-ai/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Notion AI: 3-Laptop-SVG (Position/Struktur final), echtes Cover kommt spaeter -> nur diese Zeile ersetzen */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var SCOPE="page__notion-ai-fr-unser-system";
   function on(){ return /\/notion-ai-fr-unser-system\/?$/.test(location.pathname); }
 
@@ -22624,7 +22624,7 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   if(window.__tsms) return; window.__tsms=1;
   var IMG="https://tastyrob123.github.io/kurs-code/img/multistandort/hero-cover-placeholder.svg"; /* PLATZHALTER-Cover Multistandort -> nur diese Zeile ersetzen */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   var P=".page__multistandort-erweiterung-optional";
   function on(){ return /\/multistandort-erweiterung-optional\/?$/.test(location.pathname); }
 
@@ -23112,7 +23112,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero(); /* Platzhalter bis Robert das echte 3-Laptop-Cover liefert (weisser BG, Freisteller nach Rezept Abschnitt 01) */
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/notion-philosophie-canvas-prinzip\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -23944,7 +23944,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.2');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/layout-medien-strukturierung\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -24345,7 +24345,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.3');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/einfuehrung-datenbanken\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -24804,7 +24804,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.4');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/relationen-rollups\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -25254,7 +25254,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.5');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/formeln-logik-bausteine\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -25675,7 +25675,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.6');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/ansichten-filter\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -26092,7 +26092,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.7');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/automations-buttons\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -26538,7 +26538,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero('L 1.8');
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/system-architektur-dashboard\/?$/.test(location.pathname); }
 
   var CSS=`
@@ -27008,7 +27008,7 @@ var TSISL_TEAM_ONB_V2=[
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   }
   var IMG=phHero();
-  var LOGO="https://files.catbox.moe/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   function on(){ return /\/modul-1-notion-grundlagen\/?$/.test(location.pathname); }
 
   var LEKTIONEN=[
