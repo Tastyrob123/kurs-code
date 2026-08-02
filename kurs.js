@@ -27970,16 +27970,19 @@ var TSISL_TEAM_ONB_V2=[
   #tsws1next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
   #tsws1next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
   #tsws1next .tsl-cell{display:flex;justify-content:center}
+  /* Endzustand ist der Default (Animations-Doktrin): faellt JS oder der IntersectionObserver
+     aus, bleiben die Orbs sichtbar statt unsichtbar. Startzustand haengt an .js. */
   #tsws1next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
     background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #tsws1next.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
   #tsws1next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws1next.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws1next.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws1next.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws1next.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws1next.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #tsws1next.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #tsws1next.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #tsws1next.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #tsws1next.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #tsws1next.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
   #tsws1next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
   #tsws1next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
   #tsws1next .tsl-t b{color:#c7b489;font-weight:700}
@@ -28018,9 +28021,12 @@ var TSISL_TEAM_ONB_V2=[
     injectCSS();
     host.appendChild(build());
     var el=document.getElementById('tsws1next');
+    el.classList.add('js');
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
     io.observe(el);
     var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+    /* Notbremse: falls der Observer nicht feuert (Remount/Mutation), nach 4s hart einblenden. */
+    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
   }
   window.__tsws1next=true;
   mount();
@@ -28140,16 +28146,19 @@ var TSISL_TEAM_ONB_V2=[
   #tsws2next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
   #tsws2next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
   #tsws2next .tsl-cell{display:flex;justify-content:center}
+  /* Endzustand ist der Default (Animations-Doktrin): faellt JS oder der IntersectionObserver
+     aus, bleiben die Orbs sichtbar statt unsichtbar. Startzustand haengt an .js. */
   #tsws2next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
     background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #tsws2next.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
   #tsws2next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws2next.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws2next.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws2next.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws2next.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws2next.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #tsws2next.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #tsws2next.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #tsws2next.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #tsws2next.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #tsws2next.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
   #tsws2next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
   #tsws2next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
   #tsws2next .tsl-t b{color:#c7b489;font-weight:700}
@@ -28188,9 +28197,12 @@ var TSISL_TEAM_ONB_V2=[
     injectCSS();
     host.appendChild(build());
     var el=document.getElementById('tsws2next');
+    el.classList.add('js');
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
     io.observe(el);
     var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+    /* Notbremse: falls der Observer nicht feuert (Remount/Mutation), nach 4s hart einblenden. */
+    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
   }
   window.__tsws2next=true;
   mount();
