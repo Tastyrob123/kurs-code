@@ -29001,13 +29001,26 @@ var TSISL_TEAM_ONB_V2=[
       },{rootMargin:'0px 0px -12% 0px',threshold:.12});
       rvs.forEach(function(e){io.observe(e);});
     }
-    /* Selbstheilender Fallback (Design-System: Reveal-Robustheit) */
-    setTimeout(function(){
+    /* Reveal-Robustheit (Design-System): der IntersectionObserver greift in
+       super.sos Scroll-Container nachweislich NICHT zuverlaessig (live gemessen
+       02.08.2026: Sektion 22px im Viewport, IO feuerte nie). Deshalb ist das
+       inView-Polling der eigentliche Motor, IO nur die schnelle Abkuerzung.
+       Zusaetzlich ein passiver scroll-Listener fuer sofortige Reaktion. */
+    var check=function(){
+      var vh=window.innerHeight||800, open=0;
       rvs.forEach(function(e){
+        if(e.classList.contains('in')) return;
+        open++;
         var r=e.getBoundingClientRect();
-        if(r.top<window.innerHeight*1.15) fire(e);
+        if(r.top<vh*1.1&&r.bottom>-vh*0.3) fire(e);
       });
-    },1400);
+      return open;
+    };
+    check();
+    var poll=setInterval(function(){ if(check()===0) clearInterval(poll); },350);
+    setTimeout(function(){ clearInterval(poll); },90000);
+    window.addEventListener('scroll',check,{passive:true});
+    document.addEventListener('scroll',check,{passive:true,capture:true});
     /* Replay */
     [].slice.call(root.querySelectorAll('.rs-replay')).forEach(function(b){
       b.addEventListener('click',function(){
