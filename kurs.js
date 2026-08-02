@@ -1608,7 +1608,7 @@ window.__tsMO = function(cb){
   #tskmnext .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
   #tskmnext .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
   #tskmnext .tsl-t b{color:#c7b489;font-weight:700}
-  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tslFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   #tskmnext #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
   #tskmnext #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
   #tskmnext #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
@@ -4498,7 +4498,7 @@ window.__tsMO = function(cb){
   #tsl .tsl-orb::before{content:"";position:absolute;top:10%;left:16%;width:34%;height:24%;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.16), rgba(255,255,255,0));pointer-events:none}
   #tsl .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 22px 50px -18px rgba(0,0,0,.8), inset 0 1px 1px rgba(255,255,255,.12), 0 0 40px rgba(199,180,137,.22)}
   #tsl .tsl-t{position:relative;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;letter-spacing:-.005em;max-width:22ch}
-  @keyframes tsl-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tsl-float{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){#tsl .tsl-grid{grid-template-columns:repeat(2,1fr);gap:36px 30px;max-width:580px}}
   @media(max-width:520px){#tsl .tsl-grid{grid-template-columns:1fr;max-width:320px}}
   @media(prefers-reduced-motion:reduce){
@@ -15583,7 +15583,7 @@ var TSISL_TEAM_ONB_V2=[
     #tsIface .lnum{position:absolute;top:16px;left:50%;transform:translateX(-50%);font-family:var(--disp);font-size:13px;color:var(--beige);font-weight:600}
     #tsIface .lt{position:relative;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
     #tsIface .lt b{color:#fff;font-weight:700}
-    @keyframes tsifFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+    @keyframes tsifFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
 
     /* next button */
     #tsIfaceNext{text-align:center;margin:48px 0 72px;padding:0}
@@ -21804,7 +21804,7 @@ var TSISL_TEAM_ONB_V2=[
   #tsisl .il-orb{position:relative;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(20px,2.6vw,32px);background:radial-gradient(120% 120% at 38% 28%,rgba(${G},.2),rgba(255,255,255,.035) 46%,rgba(10,12,20,.85) 78%);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 44px -18px rgba(0,0,0,.75),inset 0 0 60px rgba(${G},.06);animation:ilFloat 7s ease-in-out infinite}
   #tsisl .il-orb-cell:nth-child(2) .il-orb{animation-delay:-1.6s}#tsisl .il-orb-cell:nth-child(3) .il-orb{animation-delay:-3.2s}#tsisl .il-orb-cell:nth-child(4) .il-orb{animation-delay:-4.8s}
   #tsisl .il-orb p{position:relative;margin:0;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,14.5px);font-weight:500;line-height:1.5;max-width:22ch}
-  @keyframes ilFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ilFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @keyframes ilHint{0%,100%{opacity:.42}50%{opacity:.92}}
   @media(max-width:900px){#tsisl .il-vid{grid-template-columns:1fr}#tsisl .il-empf{grid-template-columns:1fr;gap:26px}#tsisl .il-empf .il-elink{display:none}#tsisl .il-empf .il-erow{max-width:none}}
   @media(max-width:820px){#tsisl .il-erg{flex-direction:column!important;padding:0}#tsisl .il-erg .il-erg-txt{display:none}}
@@ -23750,7 +23750,7 @@ var TSISL_TEAM_ONB_V2=[
   #tsnainext .tsl-t b{color:#c7b489;font-weight:700}
   /* Keyframe MUSS hier stehen: der einzige tslFloat im Repo lebt im #tskmnext-CSS und wird
      nur auf /key-metrics injiziert -> hier fehlte er, die Orbs standen still. */
-  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tslFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   #tsnainext #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
   #tsnainext #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
   #tsnainext #ts-next svg{width:16px;height:16px}
@@ -24763,7 +24763,7 @@ var TSISL_TEAM_ONB_V2=[
   ${P} #tsmsnext .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
   ${P} #tsmsnext .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
   ${P} #tsmsnext .tsl-t b{color:#c7b489;font-weight:700}
-  @keyframes tsmsTslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tsmsTslFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ ${P} #tsmsnext .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ ${P} #tsmsnext .tsl-grid{grid-template-columns:1fr} }
   @media(prefers-reduced-motion:reduce){ ${P} #tsmsnext .tsl-orb{opacity:1;transform:none;animation:none} }
@@ -25055,7 +25055,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts11lFloat 7s ease-in-out infinite}
   #ts11l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts11l .tsl-orb:nth-child(1){animation-delay:0s} #ts11l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -25066,7 +25066,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts11l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts11l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts11l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts11l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts11lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts11lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts11l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts11l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -25461,7 +25461,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts12lFloat 7s ease-in-out infinite}
   #ts12l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts12l .tsl-orb:nth-child(1){animation-delay:0s} #ts12l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -25472,7 +25472,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts12l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts12l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts12l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts12l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts12lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts12lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts12l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts12l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -25925,7 +25925,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts13lFloat 7s ease-in-out infinite}
   #ts13l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts13l .tsl-orb:nth-child(1){animation-delay:0s} #ts13l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -25936,7 +25936,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts13l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts13l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts13l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts13l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts13lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts13lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts13l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts13l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -26380,7 +26380,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts14lFloat 7s ease-in-out infinite}
   #ts14l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts14l .tsl-orb:nth-child(1){animation-delay:0s} #ts14l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -26391,7 +26391,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts14l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts14l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts14l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts14l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts14lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts14lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts14l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts14l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -26908,7 +26908,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts15lFloat 7s ease-in-out infinite}
   #ts15l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts15l .tsl-orb:nth-child(1){animation-delay:0s} #ts15l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -26919,7 +26919,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts15l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts15l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts15l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts15l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts15lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts15lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts15l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts15l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -27432,7 +27432,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts16lFloat 7s ease-in-out infinite}
   #ts16l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts16l .tsl-orb:nth-child(1){animation-delay:0s} #ts16l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -27443,7 +27443,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts16l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts16l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts16l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts16l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts16lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts16lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts16l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts16l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -27883,7 +27883,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts17lFloat 7s ease-in-out infinite}
   #ts17l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts17l .tsl-orb:nth-child(1){animation-delay:0s} #ts17l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -27894,7 +27894,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts17l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts17l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts17l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts17l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts17lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts17lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts17l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts17l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -28357,7 +28357,7 @@ var TSISL_TEAM_ONB_V2=[
     background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
     display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
     animation:ts18lFloat 7s ease-in-out infinite}
   #ts18l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
   #ts18l .tsl-orb:nth-child(1){animation-delay:0s} #ts18l .tsl-orb:nth-child(2){animation-delay:-1.6s}
@@ -28368,7 +28368,7 @@ var TSISL_TEAM_ONB_V2=[
   #ts18l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts18l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
   #ts18l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
   #ts18l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts18lFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes ts18lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #ts18l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #ts18l .tsl-grid{grid-template-columns:1fr} }
   #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
@@ -31572,7 +31572,7 @@ var TSISL_TEAM_ONB_V2=[
   #${id} #ts-next svg{width:16px;height:16px}
   /* PFLICHT beim Kopieren des Musters: das Keyframe muss im EIGENEN Block liegen,
      sonst stehen die Orbs still (Abschnitt 09, Keyframe-Mitnahme). */
-  @keyframes tslFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes tslFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
   @media(max-width:1079px){ #${id} .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #${id} .tsl-grid{grid-template-columns:1fr} }
   /* Spezifitaet: die Reduce-Regel muss #id.js.in .tsl-orb (0,1,3,0) schlagen, sonst schweben die Orbs weiter. */
