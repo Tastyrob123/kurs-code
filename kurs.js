@@ -8083,7 +8083,7 @@ window.__tsMO = function(cb){
     }).join('');
     var rollups=HILF.map(function(h){
       return '<div class="ivs-ru"><b>'+h.k+'</b>'+
-             '<span>Verknüpfung : <i>Monatsabschluss</i></span>'+
+             '<span>Verknüpfung : <i>Artikel</i></span>'+
              '<span>Eigenschaft : <i>'+h.n+'</i></span>'+
              '<span>Berechnen : <i>Summe</i></span></div>';
     }).join('');
@@ -8104,10 +8104,11 @@ window.__tsMO = function(cb){
       '<div class="ivs-step">'+
         '<div class="ivs-tag"><span class="ivs-num">02</span><span class="ivs-tt">Die Verknüpfung</span></div>'+
         '<div class="ivs-fields">'+
-          '<p>→ <b>Eigenschaft :</b> Verknüpfung → Inventur Monatsabschlüsse →</p>'+
+          '<p>→ <b>Eigenschaft :</b> Verknüpfung → Inventur Monatsabschlüsse → <b>Wechselseitige Verbindung hinzufügen</b></p>'+
           '<p>→ <b>Name der Spalte :</b> Monatsabschluss</p>'+
+          '<p>→ <b>Gegenspalte in der Auswertung :</b> nenne sie Artikel</p>'+
         '</div>'+
-        '<p class="ivs-note">Lege in der Auswertung die Zeile für deinen Monat an, bspw. 01.2026. Zurück in der Monatstabelle verknüpfst du die erste Zeile damit, kopierst die Zelle, markierst die ganze Spalte und fügst sie ein — damit hängen alle Artikel am selben Monatsabschluss.</p>'+
+        '<p class="ivs-note">Die <b>wechselseitige Verbindung</b> ist hier Pflicht: Nur dann entsteht in der Auswertung die Gegenspalte, über die im nächsten Schritt die Rollups laufen. Ohne sie lässt Notion dich das Rollup gar nicht erst anlegen.</p><p class="ivs-note">Lege in der Auswertung die Zeile für deinen Monat an, bspw. 01.2026. Zurück in der Monatstabelle verknüpfst du die erste Zeile damit, kopierst die Zelle, markierst die ganze Spalte und fügst sie ein — damit hängen alle Artikel am selben Monatsabschluss.</p>'+
       '</div>'+
       '<div class="ivs-link"><i></i><span>summieren</span><i></i></div>'+
       '<div class="ivs-step">'+
