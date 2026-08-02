@@ -8,6 +8,27 @@ set -euo pipefail
 cd "$(dirname "$0")"
 MSG="${1:-kurs update}"
 
+# 0) MINIFIZIERTE AUSLIEFERUNGS-DATEIEN BAUEN (seit 02.08.2026)
+#    Live geladen werden kurs.min.js / kurs.min.css (ca. 20% bzw. 44% kleiner).
+#    kurs.js / kurs.css bleiben die lesbare QUELLE (SSOT) -- immer die editieren!
+#    Dieser Schritt laeuft bei JEDEM Deploy, damit Aenderungen aus JEDEM Chat
+#    garantiert in der ausgelieferten Datei landen. Faellt esbuild aus, wird
+#    unminifiziert kopiert (langsamer, aber nie veralteter Code live).
+echo "… baue kurs.min.js / kurs.min.css …"
+if npx --yes esbuild kurs.js --minify --target=es2015 --outfile=kurs.min.js >/dev/null 2>&1 \
+   && node --check kurs.min.js >/dev/null 2>&1; then
+  echo "   ✓ kurs.min.js minifiziert"
+else
+  echo "   ⚠ esbuild fehlgeschlagen -> kurs.js unveraendert als kurs.min.js kopiert"
+  cp kurs.js kurs.min.js
+fi
+if npx --yes esbuild kurs.css --minify --outfile=kurs.min.css >/dev/null 2>&1; then
+  echo "   ✓ kurs.min.css minifiziert"
+else
+  echo "   ⚠ esbuild fehlgeschlagen -> kurs.css unveraendert als kurs.min.css kopiert"
+  cp kurs.css kurs.min.css
+fi
+
 # 1) Eigene Aenderungen committen (nur falls vorhanden)
 git add -A
 git diff --cached --quiet || git commit -m "$MSG"
