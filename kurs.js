@@ -28209,3 +28209,852 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ============================================================
+   #tsres — Modul 5 · AI Reservation Agent (8 Lektionen)
+   Config-getriebenes Seiten-Modul fuer /lektionen/<slug>.
+   Aufbau je Seite: Hero -> Lead/Intro -> Signatur-Animation
+   -> Bild-Platzhalter -> Inhalts-Karten -> Bild-Platzhalter
+   -> Learnings -> Weiter-Button.
+   Jede Lektion hat eine EIGENE Choreografie (kein Recycling).
+   Bilder = bewusste Platzhalter (Robert 02.08.2026).
+   Palette/Fonts = Bestand (#c7b489, GLOW 199,180,137, Lineal Web).
+   Prefix: tsres / rs-.  Append-only, keine fremden Bloecke.
+   ============================================================ */
+(function(){
+  if(window.__tsres) return; window.__tsres=true;
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var G="199,180,137";
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Signatur-Choreografien ---------- */
+  var CUSTOM={};
+
+  /* L5.0 — Anrufe verpuffen vs. Agent faengt sie auf */
+  CUSTOM.verpuffen=function(sec){
+    if(RM) return;
+    var lost=[].slice.call(sec.querySelectorAll('.rv-c.lost')),
+        kept=[].slice.call(sec.querySelectorAll('.rv-c.kept')),
+        box=sec.querySelector('.rv-box');
+    var all=lost.concat(kept);
+    all.forEach(function(e){e.classList.remove('go','fade','land');});
+    if(box) box.classList.remove('on');
+    all.forEach(function(e,i){ setTimeout(function(){e.classList.add('go');}, 140+i*130); });
+    setTimeout(function(){ lost.forEach(function(e,i){ setTimeout(function(){e.classList.add('fade');}, i*160); }); }, 140+all.length*130+320);
+    setTimeout(function(){ if(box) box.classList.add('on'); }, 140+all.length*130+700);
+    setTimeout(function(){ kept.forEach(function(e,i){ setTimeout(function(){e.classList.add('land');}, i*150); }); }, 140+all.length*130+960);
+  };
+
+  /* L5.1 — Drei Tore: Groesse, Zeit, Tisch -> gruen oder Mensch */
+  CUSTOM.tore=function(sec){
+    if(RM) return;
+    var gates=[].slice.call(sec.querySelectorAll('.rg-gate')),
+        ok=sec.querySelector('.rg-out.ok'), esc=sec.querySelector('.rg-out.esc'),
+        dot=sec.querySelector('.rg-dot');
+    gates.forEach(function(e){e.classList.remove('on','pass');});
+    if(ok) ok.classList.remove('on'); if(esc) esc.classList.remove('on');
+    if(dot) dot.classList.remove('run');
+    gates.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 160+i*220); });
+    setTimeout(function(){ if(dot) dot.classList.add('run'); }, 160+gates.length*220+160);
+    gates.forEach(function(e,i){ setTimeout(function(){e.classList.add('pass');}, 160+gates.length*220+380+i*420); });
+    setTimeout(function(){ if(ok) ok.classList.add('on'); }, 160+gates.length*220+380+gates.length*420+180);
+    setTimeout(function(){ if(esc) esc.classList.add('on'); }, 160+gates.length*220+380+gates.length*420+560);
+  };
+
+  /* L5.2 — Zwei Tueren, ein Gehirn */
+  CUSTOM.gehirn=function(sec){
+    if(RM) return;
+    var doors=[].slice.call(sec.querySelectorAll('.rb-door')),
+        core=sec.querySelector('.rb-core'),
+        lns=[].slice.call(sec.querySelectorAll('.rb-ln')),
+        outs=[].slice.call(sec.querySelectorAll('.rb-out'));
+    doors.concat(outs).forEach(function(e){e.classList.remove('on');});
+    if(core) core.classList.remove('on','pulse');
+    lns.forEach(function(e){e.classList.remove('flow');});
+    doors.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 140+i*200); });
+    setTimeout(function(){ if(core) core.classList.add('on'); }, 640);
+    setTimeout(function(){ lns.forEach(function(l,i){ setTimeout(function(){l.classList.add('flow');}, i*120); }); }, 900);
+    setTimeout(function(){ if(core) core.classList.add('pulse'); }, 1400);
+    outs.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 1650+i*200); });
+  };
+
+  /* L5.3 — Sprachwelle laeuft, zwei Wege heben sich */
+  CUSTOM.welle=function(sec){
+    if(RM) return;
+    var bars=[].slice.call(sec.querySelectorAll('.rw-b')),
+        ways=[].slice.call(sec.querySelectorAll('.rw-way')),
+        slim=sec.querySelector('.rw-slim');
+    bars.forEach(function(e){e.classList.remove('live');});
+    ways.forEach(function(e){e.classList.remove('on');});
+    if(slim) slim.classList.remove('on');
+    bars.forEach(function(e,i){ setTimeout(function(){e.classList.add('live');}, 90+i*45); });
+    ways.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 900+i*260); });
+    setTimeout(function(){ if(slim) slim.classList.add('on'); }, 1700);
+  };
+
+  /* L5.4 — Tischraster: belegte fallen weg, freier pulsiert */
+  CUSTOM.tische=function(sec){
+    if(RM) return;
+    var ts=[].slice.call(sec.querySelectorAll('.rt-t')),
+        res=sec.querySelector('.rt-res');
+    ts.forEach(function(e){e.classList.remove('on','busy','free');});
+    if(res) res.classList.remove('on');
+    ts.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 80+i*55); });
+    setTimeout(function(){
+      ts.forEach(function(e,i){
+        if(e.dataset.busy==='1') setTimeout(function(){e.classList.add('busy');}, i*70);
+      });
+    }, 80+ts.length*55+280);
+    setTimeout(function(){
+      ts.forEach(function(e){ if(e.dataset.busy!=='1'&&e.dataset.hit==='1') e.classList.add('free'); });
+      if(res) res.classList.add('on');
+    }, 80+ts.length*55+1250);
+  };
+
+  /* L5.5 — Kreislauf: Erinnerung -> Absage -> frei -> Warteliste */
+  CUSTOM.kreis=function(sec){
+    if(RM) return;
+    var st=[].slice.call(sec.querySelectorAll('.rk-st')),
+        ring=sec.querySelector('.rk-ring'),
+        hub=sec.querySelector('.rk-hub');
+    st.forEach(function(e){e.classList.remove('on','hot');});
+    if(ring) ring.classList.remove('spin');
+    if(hub) hub.classList.remove('on');
+    setTimeout(function(){ if(hub) hub.classList.add('on'); }, 160);
+    st.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 420+i*180); });
+    setTimeout(function(){ if(ring) ring.classList.add('spin'); }, 420+st.length*180+180);
+    var loop=function(){
+      st.forEach(function(e,i){
+        setTimeout(function(){
+          st.forEach(function(x){x.classList.remove('hot');});
+          e.classList.add('hot');
+        }, i*900);
+      });
+    };
+    setTimeout(loop, 420+st.length*180+400);
+  };
+
+  /* L5.6 — Testprotokoll hakt sich ab, dann Schattenmodus */
+  CUSTOM.pruefen=function(sec){
+    if(RM) return;
+    var rows=[].slice.call(sec.querySelectorAll('.rp-row')),
+        sw=sec.querySelector('.rp-switch'),
+        bar=sec.querySelector('.rp-fill');
+    rows.forEach(function(e){e.classList.remove('on','done');});
+    if(sw) sw.classList.remove('on');
+    if(bar) bar.style.width='0%';
+    rows.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 100+i*110); });
+    rows.forEach(function(e,i){
+      setTimeout(function(){
+        e.classList.add('done');
+        if(bar) bar.style.width=Math.round((i+1)/rows.length*100)+'%';
+      }, 100+rows.length*110+260+i*230);
+    });
+    setTimeout(function(){ if(sw) sw.classList.add('on'); }, 100+rows.length*110+260+rows.length*230+300);
+  };
+
+  /* L5.7 — Daten verblassen nach Frist, anonyme Balken bleiben */
+  CUSTOM.loeschen=function(sec){
+    if(RM) return;
+    var cards=[].slice.call(sec.querySelectorAll('.rl-card')),
+        bars=[].slice.call(sec.querySelectorAll('.rl-bar')),
+        gear=sec.querySelector('.rl-gear');
+    cards.forEach(function(e){e.classList.remove('on','gone');});
+    bars.forEach(function(e){e.classList.remove('on');});
+    if(gear) gear.classList.remove('on','turn');
+    cards.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 120+i*130); });
+    setTimeout(function(){ if(gear){gear.classList.add('on'); setTimeout(function(){gear.classList.add('turn');},300);} }, 120+cards.length*130+300);
+    setTimeout(function(){ cards.forEach(function(e,i){ setTimeout(function(){e.classList.add('gone');}, i*140); }); }, 120+cards.length*130+900);
+    setTimeout(function(){ bars.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, i*130); }); }, 120+cards.length*130+1500);
+  };
+
+  /* ---------- Bild-Platzhalter ---------- */
+  function ph(label, note, ratio){
+    return '<figure class="rs-ph" style="--r:'+(ratio||'16/9')+'">'+
+      '<div class="rs-ph-in"><span class="rs-ph-ic"></span>'+
+      '<span class="rs-ph-l">'+label+'</span>'+
+      '<span class="rs-ph-n">'+note+'</span></div></figure>';
+  }
+
+  /* ---------- CONTENT: 8 Lektionen ---------- */
+  var BACK={href:'/modul-5-claude-code-notion', label:'Modul 5'};
+  var LEK=[
+  {
+   slug:/\/lektionen\/reservierungen-ohne-anruf\/?$/, key:'l50',
+   eyebrow:'Lektion 5.0', kicker:'AI Reservation Agent · Zielbild',
+   title:'Reservierungen ohne <span class="rs-g">Anruf</span>',
+   lead:'Das Telefon, das freitags um halb acht klingelt, wenn alle im Service sind, kostet dich jeden Abend Geld — nur siehst du es nirgends.',
+   intro:['Ein Gast wartet vier Mal Freizeichen, legt auf und ruft beim Betrieb zwei Straßen weiter an. Du hast diesen Gast nie gesehen, und genau deshalb taucht er in keiner Auswertung auf. Verlorene Reservierungen sind unsichtbarer Umsatzverlust.','In diesem Modul bauen wir den Mitarbeiter, der diesen Anruf annimmt. Rund um die Uhr, in deinem Ton, und ohne je eine Reservierung zu vergessen.'],
+   anim:{key:'verpuffen', eyebrow:'Was heute passiert', h:'Fünf Anfragen. Drei <span class="rs-g">verpuffen</span>.', sub:'Ohne jemanden, der abnimmt, entscheidet der Gast in genau dem Moment um, in dem er Lust auf deinen Laden hatte.',
+    html:'<div class="rv"><div class="rv-lane">'+
+      '<div class="rv-c lost"><b>19:31</b><span>Anruf · 4 Personen</span></div>'+
+      '<div class="rv-c kept"><b>21:08</b><span>WhatsApp · 2 Personen</span></div>'+
+      '<div class="rv-c lost"><b>23:47</b><span>Anruf · 6 Personen</span></div>'+
+      '<div class="rv-c kept"><b>08:12</b><span>Mail · 5 Personen</span></div>'+
+      '<div class="rv-c lost"><b>12:04</b><span>Anruf · 3 Personen</span></div>'+
+     '</div><div class="rv-box"><span class="rv-box-t">Deine Reservierungen</span><span class="rv-box-s">immer erreichbar</span></div></div>'},
+   img1:['Der Freitagabend-Moment','Klingelndes Telefon am Tresen im vollen Service, daneben der Gast, der schon die nächste Nummer wählt.'],
+   cards:{eyebrow:'Das Zielbild', h:'Was am Ende <span class="rs-g">läuft</span>', items:[
+     ['Annehmen','Dein Gast schreibt per Mail oder WhatsApp oder ruft an, zu jeder Tages- und Nachtzeit. Der Agent antwortet in Sekunden, in deinem Ton und mit deinen Regeln.'],
+     ['Prüfen','Er kennt deine Öffnungszeiten, deine Tische und die echte Belegung, weil er in dieselbe Datenbank schaut wie du.'],
+     ['Buchen','Ist ein Tisch frei, bucht er. Ist keiner frei, schlägt er zwei Alternativen vor statt nur abzusagen.'],
+     ['Abgeben','Bei der Zwanziger-Gruppe, beim Sonderwunsch, bei der Beschwerde gibt er an dich ab — sauber und mit allen Informationen.']]},
+   img2:['Deine Daten bleiben deine Daten','Schaubild: eigene Reservierungs-Datenbank in der Mitte, Mail, WhatsApp und Telefon als Kanäle von außen.'],
+   note:{h:'Warum das in <span class="rs-g">deiner</span> Datenbank landet', p:'Das Jahr 2026 hat gezeigt, warum das zählt. Quandoo stellt den Betrieb ein, ab September 2026 laufen dort keine neuen Reservierungen mehr. Betriebe, die ihre gesamte Gästehistorie dort liegen hatten, stehen jetzt vor der Frage, wie sie an ihre eigenen Daten kommen. Diese Abhängigkeit bauen wir von Anfang an nicht ein.'},
+   learn:['Du erkennst Reservierungen als Schnittstelle mit unsichtbarem Umsatzverlust.','Du kennst das vollständige Zielbild: annehmen, prüfen, buchen, bestätigen, erinnern, abgeben.','Du weißt, warum die eigene Datenbank strategisch zählt.','Du kennst die Baureihenfolge: erst die geschriebenen Kanäle, dann das Telefon.'],
+   next:{href:'/lektionen/dein-reservierungs-prozess', label:'Dein Reservierungs-Prozess'}
+  },
+  {
+   slug:/\/lektionen\/dein-reservierungs-prozess\/?$/, key:'l51',
+   eyebrow:'Lektion 5.1', kicker:'AI Reservation Agent · Fundament',
+   title:'Dein Reservierungs-<span class="rs-g">Prozess</span>',
+   lead:'Bevor wir ein Werkzeug anfassen, schreiben wir auf, wie Reservierungen bei dir wirklich laufen. Diese eine Seite wird später zum Gehirn deines Agenten.',
+   intro:['Ich habe viele Systeme scheitern sehen, und fast nie lag es an der Technik. Es lag daran, dass jemand einen Agenten auf einen Prozess losgelassen hat, den er selbst nie sauber aufgeschrieben hatte. Der Agent hat dann Regeln erfunden, wo keine waren.','Das verhindern wir jetzt mit Papier und einer Stunde Zeit, bevor irgendein Werkzeug geöffnet wird.'],
+   anim:{key:'tore', eyebrow:'Die Entscheidungs-Grenze', h:'Drei Tore. Dann <span class="rs-g">bucht</span> er.', sub:'Nur wenn alle drei zusammenkommen, entscheidet der Agent allein. Alles andere geht an einen Menschen.',
+    html:'<div class="rg"><div class="rg-in">Anfrage</div><div class="rg-track"><span class="rg-dot"></span>'+
+      '<div class="rg-gate"><b>1</b><span>Standardgröße<br>2 bis 6 Personen</span></div>'+
+      '<div class="rg-gate"><b>2</b><span>Innerhalb<br>der Öffnungszeit</span></div>'+
+      '<div class="rg-gate"><b>3</b><span>Tisch laut<br>Datenbank frei</span></div>'+
+      '</div><div class="rg-outs"><div class="rg-out ok"><b>Agent bucht</b><span>Bestätigung geht sofort raus</span></div>'+
+      '<div class="rg-out esc"><b>Geht an dich</b><span>Gruppe · Sonderwunsch · Beschwerde</span></div></div></div>'},
+   img1:['Dein echter Tischplan','Handgezeichneter Tischplan mit Nummern, Platzzahlen und Terrassen-Zone, daneben dieselbe Information als saubere Tabelle.'],
+   cards:{eyebrow:'Der Steckbrief', h:'Vier Blöcke, eine <span class="rs-g">Stunde</span>', items:[
+     ['Kanäle','Telefon, WhatsApp, Mail, Instagram, das Kontaktformular, der Gast an der Tür. Schreib dazu, wie oft und was heute damit passiert.'],
+     ['Kapazität','Tische, Plätze, Zonen — und die Frage, die gern vergessen wird: Wie lange bleibt ein Tisch bei dir besetzt.'],
+     ['Sonderfälle','Zwölf Personen. Gast mit Hund. Kindergeburtstag. Feiertag mit Sonderkarte. Für die meisten hast du längst eine Regel im Kopf, sie stand nur nie irgendwo.'],
+     ['Die Grenze','Was darf der Agent allein, was gibt er ab. Eng starten, später weiten — Vertrauen ist schneller verloren als aufgebaut.']]},
+   img2:['Der Prozess-Steckbrief','Ausgefülltes Formular auf dem Tisch, daneben der fertige System-Prompt am Bildschirm — dieselben Werte, andere Form.'],
+   note:{h:'Warum wir <span class="rs-g">eng</span> starten', p:'Ein Agent, der eine Zwanziger-Gruppe auf einen Dienstagabend legt, an dem nur eine Servicekraft steht, richtet mehr Schaden an als zehn verpasste Anrufe. Wir starten eng und weiten die Grenze, sobald das Log zeigt, dass der Agent sauber arbeitet.'},
+   learn:['Du hast alle Kanäle erfasst und weißt, welcher heute ins Leere läuft.','Du hast deine Kapazität als Daten aufgeschrieben, inklusive Belegungsdauer.','Du hast die unausgesprochenen Regeln hinter deinen Sonderfällen sichtbar gemacht.','Du hast die Entscheidungs-Grenze gezogen und weißt, warum sie eng startet.'],
+   next:{href:'/lektionen/der-schreib-agent', label:'Der Schreib-Agent'}
+  },
+  {
+   slug:/\/lektionen\/der-schreib-agent\/?$/, key:'l52',
+   eyebrow:'Lektion 5.2', kicker:'AI Reservation Agent · Stufe 1',
+   title:'Der Schreib-<span class="rs-g">Agent</span>',
+   lead:'Wir bauen deinen Agenten zuerst auf den geschriebenen Kanälen: E-Mail und WhatsApp. Dort ist alles nachlesbar, und Fehler fallen sofort auf.',
+   intro:['Beide Kanäle sind geschrieben, und für den Agenten ist das der entscheidende Punkt. Er liest einen Text, versteht ihn, prüft die Verfügbarkeit und schreibt zurück. Ob der Text aus einem Postfach kommt oder aus einem Messenger, ändert am Denken nichts, nur am Eingang und am Ausgang.','Wir bauen deshalb ein Gehirn und hängen zwei Türen daran. Das Telefon kommt in der nächsten Lektion und benutzt genau dasselbe Gehirn.'],
+   anim:{key:'gehirn', eyebrow:'Die Architektur', h:'Zwei Türen, ein <span class="rs-g">Gehirn</span>', sub:'Eine Regel-Änderung, und beide Kanäle verhalten sich neu. Das ist der ganze Grund, warum wir es so bauen.',
+    html:'<div class="rb"><div class="rb-col">'+
+      '<div class="rb-door"><b>E-Mail</b><span>Postfach &amp; Kontaktformular</span></div>'+
+      '<div class="rb-door"><b>WhatsApp</b><span>Business Cloud API</span></div></div>'+
+      '<div class="rb-core"><span class="rb-core-n">n8n + Claude</span><span class="rb-core-t">dein System-Prompt</span></div>'+
+      '<div class="rb-col">'+
+      '<div class="rb-out"><b>Verfügbarkeit</b><span>prüfen</span></div>'+
+      '<div class="rb-out"><b>Reservierung</b><span>anlegen</span></div>'+
+      '<div class="rb-out"><b>Übergabe</b><span>an einen Menschen</span></div></div>'+
+      '<svg class="rb-lns" viewBox="0 0 940 260" preserveAspectRatio="none">'+
+      '<path class="rb-ln" d="M300 78 C 380 78 396 130 452 130"/>'+
+      '<path class="rb-ln" d="M300 182 C 380 182 396 130 452 130"/>'+
+      '<path class="rb-ln" d="M488 130 C 550 130 560 56 640 56"/>'+
+      '<path class="rb-ln" d="M488 130 C 550 130 556 130 640 130"/>'+
+      '<path class="rb-ln" d="M488 130 C 550 130 560 204 640 204"/></svg></div>'},
+   img1:['Der Workflow in n8n','Bildschirmaufnahme: Mail-Auslöser und WhatsApp-Auslöser laufen in denselben Agenten-Baustein, dahinter die drei Werkzeuge.'],
+   cards:{eyebrow:'Die Bausteine', h:'Drei Teile, zwei hast du <span class="rs-g">schon</span>', items:[
+     ['Die Kanäle','Dein Reservierungs-Postfach, das n8n abfragen und beantworten kann, und die WhatsApp Business Cloud API — der offizielle Weg von Meta unter deiner Restaurant-Nummer.'],
+     ['Die Zentrale','n8n auf deinem eigenen Server, den du in Modul vier aufgesetzt hast. Er läuft rund um die Uhr, egal ob dein Rechner an ist.'],
+     ['Das Gehirn','Claude über einen API-Schlüssel, mit deinem Steckbrief als Regelwerk. Für den Dialog reicht das mittlere Modell.'],
+     ['Die Kosten','Der Server läuft schon. WhatsApp berechnet Antworten im Servicefenster nicht. In Summe deutlich unter zwanzig Euro im Monat, Stand August 2026 als Größenordnung.']]},
+   img2:['Die erste echte Konversation','Handy-Bildschirm: Anfrage nach einem Tisch für vier, Antwort des Agenten mit Bestätigung — in Sekunden.'],
+   note:{h:'Die eine Regel, die über <span class="rs-g">alles</span> entscheidet', p:'Ein Sprachmodell will antworten, das ist seine Natur. Fragst du es nach einem freien Tisch, ohne dass es nachsehen kann, dann behauptet es freundlich und überzeugend einen freien Tisch. Deshalb steht im System-Prompt: Verfügbarkeit ausschließlich aus der Werkzeug-Antwort. Kein Werkzeug-Ergebnis, keine Zusage. Bei Unklarheit nimmt der Agent die Anfrage auf und kündigt eine Rückmeldung an. Niemals raten.'},
+   learn:['Du kennst die drei Bausteine und weißt, welche du aus Modul vier schon hast.','Du verstehst, warum die geschriebenen Kanäle vor dem Telefon kommen.','Du kannst den Workflow benennen: Auslöser, Agent mit Prompt und Werkzeugen, Antwort.','Du kennst die Halluzinations-Regel und ihre Begründung.'],
+   next:{href:'/lektionen/der-telefon-agent', label:'Der Telefon-Agent'}
+  },
+  {
+   slug:/\/lektionen\/der-telefon-agent\/?$/, key:'l53',
+   eyebrow:'Lektion 5.3', kicker:'AI Reservation Agent · Stufe 2',
+   title:'Der Telefon-<span class="rs-g">Agent</span>',
+   lead:'Das Telefon ist der größte Reservierungskanal der Gastronomie und der anspruchsvollste für einen Agenten. Es gibt zwei Wege, ihn zu besetzen, und einen dritten, den ich nicht verschweige.',
+   intro:['Sprache ist für einen Agenten schwerer als Text. Er muss in Echtzeit zuhören, verstehen und antworten, mit Küchenlärm im Hintergrund, mit Dialekt, mit dem älteren Herrn, der langsam spricht.','Die Technik dafür ist 2026 gut geworden, aber sie ist nicht magisch. Deshalb treffen wir hier eine bewusste Werkzeug-Entscheidung.'],
+   anim:{key:'welle', eyebrow:'Die Entscheidung', h:'Zwei Wege ans <span class="rs-g">Telefon</span>', sub:'Schnell und fertig, oder souverän am eigenen Gehirn. Und ein dritter Weg, der gar nichts kostet.',
+    html:'<div class="rw"><div class="rw-wave">'+
+      '<i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i>'+
+      '</div><div class="rw-ways">'+
+      '<div class="rw-way"><span class="rw-tag">Weg 1</span><b>Fertiger Assistent</b><span class="rw-p">Deutscher Anbieter, im Browser konfiguriert. In Tagen live.</span><span class="rw-cost">rund 100 bis 350 € im Monat bei einigen hundert Anrufen</span></div>'+
+      '<div class="rw-way"><span class="rw-tag">Weg 2</span><b>Baukasten am eigenen Gehirn</b><span class="rw-p">Ruft bei jedem Anruf dein n8n auf — derselbe Prompt wie im Schreib-Kanal.</span><span class="rw-cost">rund 7 bis 30 US-Cent je Gesprächsminute</span></div>'+
+      '</div><div class="rw-slim"><b>Der dritte Weg</b><span>Anrufbeantworter mit einem Satz: „Am schnellsten reservierst du per WhatsApp." Manche Betriebe fangen so den Großteil ab, ohne einen Euro für Telefon-KI.</span></div></div>'},
+   img1:['Der Probeanruf','Bildschirmaufnahme der Anbieter-Oberfläche, daneben das Telefon beim Testanruf aus der lauten Küche.'],
+   cards:{eyebrow:'Am Telefon anders', h:'Drei Dinge, die du zusätzlich <span class="rs-g">regelst</span>', items:[
+     ['Die Ansage','Der Gast muss am Anfang hören, dass er mit einem KI-Assistenten spricht und jederzeit einen Menschen bekommt. Das ist Vertrauen und Rechtsthema zugleich.'],
+     ['Die Weiterleitung','Sagt der Gast „Mitarbeiter", wird durchgestellt oder ein Rückruf notiert. Niemand darf gegen eine Maschine anreden müssen.'],
+     ['Die Rückfrage','Bei unsicher verstandenem Datum oder Personenzahl wiederholt der Agent zur Bestätigung. Ein falsch verstandenes Datum passiert am Telefon schneller als im Chat.'],
+     ['Die Rechnung','Rechne nie mit der Grundgebühr, rechne mit deinem Anrufaufkommen. Das ist der Posten, der den Preis macht.']]},
+   img2:['Die Anbieter-Prüfliste','Zehn Fragen auf einer Seite, oben die wichtigste: Kann euer Assistent per Schnittstelle in mein System buchen?'],
+   note:{h:'Meine ehrliche <span class="rs-g">Empfehlung</span>', p:'Willst du nur, dass das Telefon nicht mehr ins Leere klingelt, nimm Weg eins — du bist in Tagen live und hast einen deutschen Ansprechpartner. Willst du das System aus diesem Modul in voller Konsequenz, ein Gehirn für alle Kanäle, dann geh Weg zwei. Und wenn du erst einmal sehen willst, ob das überhaupt zu deinem Betrieb passt: Fang schlank an, mit dem dritten Weg.'},
+   learn:['Du kennst die zwei Wege und ihre ehrlichen Kosten, Stand August 2026.','Du weißt, dass die reale Rechnung über das Anrufaufkommen läuft.','Du kannst die Anbieter-Prüfliste anwenden, allen voran die Schnittstellen-Frage.','Du kennst die drei Voice-Besonderheiten: Ansage, Weiterleitung, Rückfrage-Pflicht.'],
+   next:{href:'/lektionen/verfuegbarkeit-und-buchung', label:'Verfügbarkeit und Buchung'}
+  },
+  {
+   slug:/\/lektionen\/verf[a-z]*gbarkeit-und-buchung\/?$/, key:'l54',
+   eyebrow:'Lektion 5.4', kicker:'AI Reservation Agent · Das Herzstück',
+   title:'Verfügbarkeit und <span class="rs-g">Buchung</span>',
+   lead:'Jetzt bekommt dein Agent echte Tische. Wir bauen die Reservierungs-Datenbank in die Operations Area und verdrahten sie mit dem Gehirn aus der letzten Lektion.',
+   intro:['Bis hierher konnte dein Agent reden, aber nicht handeln. Das ändern wir, und dafür klären wir zuerst die Grundsatzfrage: Wo sollen deine Reservierungen leben.','Hast du schon ein Reservierungssystem, prüf es an einer einzigen Frage: Hat es eine offene Schnittstelle, über die ein fremdes Werkzeug Verfügbarkeit lesen und Buchungen schreiben darf. Der Markt hat sich 2026 bewegt, und nicht in Richtung Offenheit.'],
+   anim:{key:'tische', eyebrow:'Die Verfügbarkeitslogik', h:'Passende Tische minus <span class="rs-g">belegte</span>', sub:'Freitag, 19 Uhr, vier Personen. So entscheidet das System, was „frei" wirklich heißt.',
+    html:'<div class="rt"><div class="rt-grid">'+
+      '<div class="rt-t" data-busy="1"><b>T1</b><span>2</span></div>'+
+      '<div class="rt-t" data-busy="0"><b>T2</b><span>2</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T3</b><span>4</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T4</b><span>4</span></div>'+
+      '<div class="rt-t" data-busy="0" data-hit="1"><b>T5</b><span>4</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T6</b><span>4</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T7</b><span>6</span></div>'+
+      '<div class="rt-t" data-busy="0"><b>T8</b><span>6</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T9</b><span>2</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T10</b><span>8</span></div>'+
+      '<div class="rt-t" data-busy="0"><b>T11</b><span>2</span></div>'+
+      '<div class="rt-t" data-busy="1"><b>T12</b><span>4</span></div>'+
+      '</div><div class="rt-res"><b>Tisch 5 ist frei</b><span>4 Plätze · Innen · 19:00 bis 21:00</span></div></div>'},
+   img1:['Die zwei Datenbanken','Schaubild: Tische &amp; Zeitfenster als ruhige Stammdaten links, Reservierungen als Arbeitstier rechts, dazwischen die Relation.'],
+   cards:{eyebrow:'Was wir anlegen', h:'Zwei Tabellen in der <span class="rs-g">Operations Area</span>', items:[
+     ['Tische &amp; Zeitfenster','Eine Zeile pro Tisch: Name, Plätze, Zone, kombinierbar, aktiv. Dazu deine Servicezeiten. Einmal befüllt, danach selten angefasst.'],
+     ['Reservierungen','Das Arbeitstier: Gastname, Telefon, Datum, Uhrzeit, Personen, Tisch als Relation, Status, Kanal, Notiz.'],
+     ['Vier Status, mehr nicht','Angefragt, Bestätigt, Storniert, No-Show. Jeder zusätzliche Status ist eine Regel, die Agent und Team verstehen müssen.'],
+     ['Zwei Werkzeuge','Verfügbarkeit prüfen und Reservierung anlegen. Ab jetzt ist die Halluzinations-Regel nicht mehr nur Text, sondern verdrahtet.']]},
+   img2:['Der Moment, in dem alles zusammenkommt','Split-Ansicht: WhatsApp-Bestätigung auf dem Handy, gleichzeitig die neue Zeile im Notion-Backoffice.'],
+   note:{h:'Warum ein „nein" immer eine <span class="rs-g">Alternative</span> braucht', p:'Bleibt kein Tisch übrig, sucht derselbe Ablauf die zwei nächstgelegenen freien Uhrzeiten. Ein „leider nein" ohne Alternative ist eine verlorene Buchung — und der Gast, der stattdessen um halb neun kommt, war nie ein Problem, er wusste nur nicht, dass es geht.'},
+   learn:['Du kannst die Grundsatzfrage beantworten: offenes Fremdsystem oder eigene Datenbank.','Du kennst beide Tabellen, ihre Rollen und die vier Status-Werte.','Du verstehst die Verfügbarkeitslogik samt Alternativvorschlag.','Du hast die komplette Kette einmal selbst ausgelöst.'],
+   next:{href:'/lektionen/erinnerung-und-no-shows', label:'Erinnerung und No-Shows'}
+  },
+  {
+   slug:/\/lektionen\/erinnerung-und-no-shows\/?$/, key:'l55',
+   eyebrow:'Lektion 5.5', kicker:'AI Reservation Agent · Nach der Buchung',
+   title:'Erinnerung und <span class="rs-g">No-Shows</span>',
+   lead:'Die Buchung ist nur die halbe Reservierung. Jetzt bauen wir den Kreislauf dahinter — den Teil, der No-Shows wirklich senkt.',
+   intro:['Erinnerst du dich an die Faustregel aus Modul vier: Claude allein, Routine oder die Automatisierungsfabrik. Die Entscheidungsfrage war, ob es laufen muss, wenn dein Rechner aus ist.','Eine Erinnerung, die am Vortag um siebzehn Uhr rausgeht, egal wo du gerade bist, beantwortet diese Frage eindeutig. Anders als der Agent wird sie nicht von einem Gast geweckt, sondern von der Uhr.'],
+   anim:{key:'kreis', eyebrow:'Der Kreislauf', h:'Die Absage füllt den Tisch <span class="rs-g">neu</span>', sub:'Vier Schritte, die ohne dich laufen. Genau hier wird aus einzelnen Bausteinen ein System.',
+    html:'<div class="rk"><div class="rk-ring"></div><div class="rk-hub"><b>Reservierungen</b><span>deine Datenbank</span></div>'+
+      '<div class="rk-st s1"><b>Erinnerung</b><span>am Vortag, 17 Uhr</span></div>'+
+      '<div class="rk-st s2"><b>Absage</b><span>ein Fingertipp für den Gast</span></div>'+
+      '<div class="rk-st s3"><b>Tisch frei</b><span>in derselben Minute</span></div>'+
+      '<div class="rk-st s4"><b>Warteliste</b><span>der Erste bekommt ihn</span></div></div>'},
+   img1:['Die Erinnerung auf dem Handy','WhatsApp-Vorlage mit einer Frage und zwei Schnellantworten: Passt oder Leider absagen.'],
+   cards:{eyebrow:'Die vier Abläufe', h:'Was hier <span class="rs-g">automatisch</span> läuft', items:[
+     ['Erinnerung am Vortag','Eine Frage, zwei Antworten, wenige Cent pro Gast. Die Wirkung kommt nicht aus dem Text, sondern aus dem Moment.'],
+     ['Absage und Freigabe','Status auf Storniert, und der Tisch ist in der Verfügbarkeitslogik sofort wieder frei. Keine Liste, kein Post-it am Tresen.'],
+     ['Warteliste','Ist nichts frei, notiert der Agent. Wird ein Tisch frei, geht die Nachricht an den Ersten. Wer zuerst bestätigt, bekommt ihn.'],
+     ['No-Show-Nachfassen','Am Vormittag danach eine freundliche Nachricht ohne Vorwurf. Die meisten No-Shows sind Vergesslichkeit, kein böser Wille.']]},
+   img2:['Der No-Show-Handgriff','Tablet nach Serviceende: nicht erschienene Reservierungen mit einem Tipp auf den vierten Status gesetzt.'],
+   note:{h:'Warum Anzahlungen hier <span class="rs-g">nicht</span> vorkommen', p:'Anzahlungen und Kreditkarten-Hinterlegung funktionieren, aber sie brauchen einen Bezahldienstleister, einen Vertrag und eine Preis-Kommunikation an den Gast, und sie verändern die Hürde beim Reservieren spürbar. Ich lasse das bewusst außerhalb dieses Moduls. Braucht dein Betrieb es, etwa bei großen Gruppen, ist es ein eigenes Projekt — und dein System hier ist dafür vorbereitet.'},
+   learn:['Du kannst die Nach-Buchungs-Abläufe mit der Faustregel aus Modul vier einordnen.','Du kennst den Erinnerungs-Ablauf und seine bewusste Schlichtheit.','Du verstehst den Kreislauf Absage, Status, freier Tisch, Warteliste.','Du kennst den freundlichen No-Show-Umgang und die Wiederkenner-Regel.'],
+   next:{href:'/lektionen/go-live-und-betrieb', label:'Go-Live und Betrieb'}
+  },
+  {
+   slug:/\/lektionen\/go-live-und-betrieb\/?$/, key:'l56',
+   eyebrow:'Lektion 5.6', kicker:'AI Reservation Agent · Betrieb',
+   title:'Go-Live und <span class="rs-g">Betrieb</span>',
+   lead:'Ein Reservierungs-Agent prägt den ersten Eindruck deines Betriebs. Deshalb geht hier nichts live, was nicht vorher mit dir gesprochen hat.',
+   intro:['In diesem Kurs gilt eine Arbeitsregel, die du schon kennst: Nichts wird als fertig gemeldet, was man nicht selbst angesehen hat. Für den Reservierungs-Agenten verschärfe ich sie.','Der Agent trägt deinen Namen. Wenn er gut ist, zahlt das auf deinen Betrieb ein. Wenn er patzt, patzt in den Augen des Gastes dein Restaurant. Also testen wir wie ein Gast, der es darauf anlegt.'],
+   anim:{key:'pruefen', eyebrow:'Vor dem Go-Live', h:'Einundzwanzig Fälle. <span class="rs-g">Alle.</span>', sub:'Erst der Normalfall dreimal sauber, dann die Härtefälle. Ich meine es ernst: alle, nicht die ersten fünf.',
+    html:'<div class="rp"><div class="rp-bar"><i class="rp-fill"></i></div><div class="rp-list">'+
+      '<div class="rp-row"><span>Einfache Buchung morgen 19:00 für 2</span><i></i></div>'+
+      '<div class="rp-row"><span>Ausgebuchter Abend — kommen zwei Alternativen?</span><i></i></div>'+
+      '<div class="rp-row"><span>Anfrage für 20 Personen — landet sie bei dir?</span><i></i></div>'+
+      '<div class="rp-row"><span>„So gegen acht" — fragt er nach oder rät er?</span><i></i></div>'+
+      '<div class="rp-row"><span>Zwei Anfragen gleichzeitig auf den letzten Tisch</span><i></i></div>'+
+      '<div class="rp-row"><span>Werkzeug getrennt — gesteht er es ein?</span><i></i></div>'+
+      '<div class="rp-row"><span>Beschwerde — bleibt sie niemals beim Agenten?</span><i></i></div>'+
+      '</div><div class="rp-switch"><span class="rp-sw"></span><b>Schattenbetrieb</b><span class="rp-swt">Eine Woche mitlesen, bevor er allein arbeitet</span></div></div>'},
+   img1:['Der Doppelbuchungs-Test','Zwei Handys nebeneinander, beide fragen im selben Moment den letzten freien Tisch an.'],
+   cards:{eyebrow:'Der Betrieb', h:'Fünf Minuten am Tag, die dein System <span class="rs-g">besser</span> machen', items:[
+     ['Der Schattenbetrieb','Eine Woche schickt der Agent dir jede geplante Zusage aufs Handy. Sind deine Freigaben nur noch Durchwinken, darf er im Standardfall allein arbeiten.'],
+     ['Das Agenten-Log','Jede Konversation landet in einer kleinen dritten Datenbank: Zeitpunkt, Kanal, Anliegen, Ergebnis. Zwei Wochen lang einmal täglich beim Kaffee lesen.'],
+     ['Zwei Fragen ans Log','Wo hat er unnötig abgegeben — dort kann die Grenze weiter. Wo klingt er nicht nach dir — das sind Sätze für den Steckbrief.'],
+     ['Die Übergabe','Der Gast bekommt eine ehrliche Ansage mit Zeithorizont, du bekommst alles, was der Agent schon weiß. Niemand fragt zweimal dasselbe.']]},
+   img2:['Das Agenten-Log','Notion-Ansicht mit den Konversationen des Tages, gefiltert auf „Übergeben" — die Kandidaten für eine weitere Grenze.'],
+   note:{h:'Ein Agent, der abgibt, und ein Team, das nicht <span class="rs-g">übernimmt</span>', p:'…ist schlimmer als gar kein Agent. Leg fest, wer im Betrieb diese Nachrichten bekommt und bis wann sie beantwortet sein müssen. Eskalation ist nur dann ein Sicherheitsnetz, wenn jemand darunter steht.'},
+   learn:['Du hast das Testprotokoll komplett durchlaufen, bis zum Doppelbuchungs-Test.','Du kennst den Schattenbetrieb und sein Ausstiegskriterium.','Du führst das Agenten-Log und nutzt es für die zwei Verbesserungs-Fragen.','Du hast die Übergabe mit Person und Antwortfrist geregelt.'],
+   next:{href:'/lektionen/datenschutz-und-recht', label:'Datenschutz und Recht'}
+  },
+  {
+   slug:/\/lektionen\/datenschutz-und-recht\/?$/, key:'l57',
+   eyebrow:'Lektion 5.7', kicker:'AI Reservation Agent · Fundament',
+   title:'Datenschutz und <span class="rs-g">Recht</span>',
+   lead:'Dein Agent verarbeitet Namen, Telefonnummern und Anrufe. Also machen wir das Fundament sauber — ohne Panik und ohne Rechtsberatung.',
+   intro:['Die Grundlagen hast du in Modul vier gelegt, in der Datenschutz-Lektion mit den zwei Wegen. Was dort gilt, gilt hier weiter, und ich wiederhole es nicht.','Wir kümmern uns nur um das, was durch den Reservierungs-Agenten neu dazukommt. Vorweg der Satz, der auch in Modul vier stand: Ich bin Praktiker und kein Anwalt, das hier ersetzt keine Rechtsberatung für deinen Betrieb.'],
+   anim:{key:'loeschen', eyebrow:'Das Löschkonzept', h:'Lösch-Automatik statt <span class="rs-g">Lösch-Vorsatz</span>', sub:'Einmal im Monat läuft die Routine durch und nimmt die persönlichen Daten raus. Was bleibt, sind Zahlen ohne Namen.',
+    html:'<div class="rl"><div class="rl-cards">'+
+      '<div class="rl-card"><b>M. Schneider</b><span>0176 · 12.05. · 4 Personen</span></div>'+
+      '<div class="rl-card"><b>A. Yilmaz</b><span>0151 · 12.05. · 2 Personen</span></div>'+
+      '<div class="rl-card"><b>P. Berger</b><span>0170 · 13.05. · 6 Personen</span></div>'+
+      '<div class="rl-card"><b>L. Kowalski</b><span>0160 · 14.05. · 3 Personen</span></div>'+
+      '</div><div class="rl-gear"><span class="rl-gear-i"></span><span class="rl-gear-t">monatliche Lösch-Routine</span></div>'+
+      '<div class="rl-bars"><div class="rl-bar" style="--h:62%"><i></i><span>Buchungen</span></div>'+
+      '<div class="rl-bar" style="--h:34%"><i></i><span>No-Shows</span></div>'+
+      '<div class="rl-bar" style="--h:78%"><i></i><span>WhatsApp</span></div>'+
+      '<div class="rl-bar" style="--h:45%"><i></i><span>Telefon</span></div></div></div>'},
+   img1:['Die KI-Ansage am Telefon','Der Begrüßungstext auf einer Seite, mit dem Ausweg „Mitarbeiter" farblich hervorgehoben.'],
+   cards:{eyebrow:'Vier Punkte', h:'Was durch den Agenten <span class="rs-g">neu</span> dazukommt', items:[
+     ['Transparenz','Am Telefon sagt die Begrüßung in einem Satz, dass ein KI-Assistent spricht, und nennt den Ausweg. Im Chat machen Profil und erste Antwort es klar.'],
+     ['Datenminimierung','Neun Felder, mehr nicht. Keine Adresse, kein Geburtstag, keine E-Mail, wenn wir sie nicht brauchen. Und der Agent fragt nie nach Gesundheitsdaten.'],
+     ['Löschen','Eine uhrgesteuerte Routine nimmt monatlich die persönlichen Daten älterer Einträge raus. Die Frist legst du fest und sprichst sie ab.'],
+     ['Verträge','Mit jedem, der Gästedaten anfasst: Meta, dein Server-Anbieter, Anthropic und, falls du es nutzt, der Telefon-Dienst. Dazu ein Absatz in der Datenschutzerklärung.']]},
+   img2:['Was bleiben darf','Vorher-Nachher: links Einträge mit Namen, rechts nach der Frist nur noch anonyme Zahlen in den Key Metrics.'],
+   note:{h:'Die Notizfeld-<span class="rs-g">Linie</span>', p:'Sagt ein Gast von sich aus, dass jemand am Tisch eine Nussallergie hat, notiert der Agent das als Hinweis für die Küche, denn das ist Service. Aber er fragt nicht danach, und wir werten es nicht aus. Gesundheitsangaben sind besonders geschützt, und eine Reservierungs-Datenbank ist nicht der Ort, sie zu sammeln.'},
+   learn:['Du weißt, was neu dazukommt und was Modul vier schon abdeckt.','Du setzt die Transparenz um: Ansage am Telefon, klarer Hinweis im Chat.','Du lebst Datenminimierung und kennst die Notizfeld-Linie.','Du hast ein automatisches Löschkonzept und weißt, mit wem Verträge nötig sind.'],
+   next:{href:'/modul-5-claude-code-notion', label:'Zurück zum Modul'}
+  }];
+
+  /* ---------- CSS ---------- */
+  var CSS=''+
+  '#tsres{--g:#c7b489;--gl:'+G+';--bg:#05060b;position:relative;z-index:2;color:#fff;'+
+   'font-family:var(--font-sans,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);padding-bottom:40px}'+
+  '#tsres *{box-sizing:border-box}'+
+  '#tsres .rs-g{color:var(--g)}'+
+  '#tsres .rs-wrap{max-width:1080px;margin:0 auto;padding:0 24px}'+
+  /* Hero */
+  '#tsres .rs-hero{position:relative;min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;'+
+   'text-align:center;padding:120px 24px 70px;overflow:hidden}'+
+  '#tsres .rs-hero::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,120vw);height:620px;transform:translate(-50%,-50%);'+
+   'background:radial-gradient(ellipse at center,rgba(var(--gl),.16),rgba(var(--gl),.05) 42%,transparent 70%);filter:blur(8px);pointer-events:none}'+
+  '#tsres .rs-hero>*{position:relative}'+
+  '#tsres .rs-back{position:absolute;top:96px;left:50%;transform:translateX(-50%);font:500 13px/1 inherit;color:rgba(255,255,255,.48);'+
+   'text-decoration:none;transition:color .25s;z-index:3}'+
+  '#tsres .rs-back:hover{color:var(--g)}'+
+  '#tsres .rs-logo{width:44px;height:44px;object-fit:contain;opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .05s forwards}'+
+  '#tsres .rs-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font:600 11px/1 inherit;letter-spacing:.18em;'+
+   'text-transform:uppercase;color:var(--g);opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .16s forwards}'+
+  '#tsres .rs-eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 12px rgba(var(--gl),.9)}'+
+  '#tsres .rs-kicker{margin-top:9px;font:400 12.5px/1.4 inherit;letter-spacing:.05em;color:rgba(255,255,255,.42);'+
+   'opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .24s forwards}'+
+  '#tsres .rs-title{margin:16px 0 0;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
+   'font-size:clamp(2.5rem,7.4vw,5rem);line-height:1.04;letter-spacing:-.025em;color:#fff;'+
+   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .32s forwards}'+
+  '#tsres .rs-lead{max-width:660px;margin:26px auto 0;font:400 17.5px/1.62 inherit;color:rgba(255,255,255,.72);'+
+   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .44s forwards}'+
+  '#tsres .rs-scroll{margin-top:46px;width:22px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:12px;position:relative;'+
+   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .6s forwards}'+
+  '#tsres .rs-scroll::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:6px;border-radius:2px;background:var(--g);'+
+   'transform:translateX(-50%);animation:rsDrop 1.9s cubic-bezier(.6,0,.4,1) infinite}'+
+  '@keyframes rsRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}'+
+  '@keyframes rsDrop{0%{opacity:0;transform:translate(-50%,0)}22%{opacity:1}70%{opacity:0;transform:translate(-50%,13px)}100%{opacity:0}}'+
+  /* Intro */
+  '#tsres .rs-intro{max-width:760px;margin:0 auto;padding:8px 24px 24px}'+
+  '#tsres .rs-intro p{font:400 17px/1.72 inherit;color:rgba(255,255,255,.78);margin:0 0 20px}'+
+  /* Reveal */
+  '#tsres .rs-rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rs-rv.in{opacity:1;transform:none}'+
+  /* Sektions-Kopf */
+  '#tsres .rs-sh{text-align:center;max-width:760px;margin:0 auto 34px}'+
+  '#tsres .rs-sh .e{display:inline-flex;align-items:center;gap:8px;font:600 10.5px/1 inherit;letter-spacing:.17em;text-transform:uppercase;color:var(--g)}'+
+  '#tsres .rs-sh .e::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g)}'+
+  '#tsres .rs-sh h2{margin:14px 0 0;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
+   'font-size:clamp(1.85rem,4.1vw,2.65rem);line-height:1.14;letter-spacing:-.02em;color:#fff}'+
+  '#tsres .rs-sh p{margin:14px 0 0;font:400 15.5px/1.66 inherit;color:rgba(255,255,255,.62)}'+
+  /* Animations-Sektion */
+  '#tsres .rs-anim{padding:78px 0 20px}'+
+  '#tsres .rs-stage{position:relative;max-width:1000px;margin:0 auto;padding:44px 26px 40px;border-radius:22px;'+
+   'background:linear-gradient(165deg,rgba(28,38,72,.42),rgba(11,15,30,.55));border:1px solid rgba(var(--gl),.17);'+
+   'box-shadow:0 50px 130px -50px rgba(0,0,0,.95);overflow:hidden}'+
+  '#tsres .rs-stage::after{content:"";position:absolute;inset:0;pointer-events:none;'+
+   'background:radial-gradient(ellipse at 50% 0%,rgba(var(--gl),.08),transparent 60%)}'+
+  '#tsres .rs-replay{position:absolute;right:16px;top:14px;z-index:4;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 13px;'+
+   'border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(var(--gl),.28);color:var(--g);'+
+   'font:600 10.5px/1 inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}'+
+  '#tsres .rs-replay:hover{background:rgba(var(--gl),.14);border-color:rgba(var(--gl),.5)}'+
+  /* Bild-Platzhalter */
+  '#tsres .rs-ph{margin:0;position:relative;width:100%;aspect-ratio:var(--r,16/9);border-radius:20px;overflow:hidden;'+
+   'background:linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid rgba(var(--gl),.2)}'+
+  '#tsres .rs-ph::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,'+
+   'rgba(255,255,255,.018) 0 2px,transparent 2px 12px)}'+
+  '#tsres .rs-ph::after{content:"";position:absolute;top:0;bottom:0;width:38%;left:-40%;'+
+   'background:linear-gradient(100deg,transparent,rgba(var(--gl),.09),transparent);animation:rsShine 5.5s ease-in-out infinite}'+
+  '@keyframes rsShine{0%{left:-45%}55%{left:105%}100%{left:105%}}'+
+  '#tsres .rs-ph-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'+
+   'gap:11px;text-align:center;padding:30px;z-index:2}'+
+  '#tsres .rs-ph-ic{width:38px;height:38px;border-radius:11px;border:1px solid rgba(var(--gl),.42);position:relative}'+
+  '#tsres .rs-ph-ic::before{content:"";position:absolute;left:8px;bottom:9px;width:9px;height:9px;border-radius:50%;background:rgba(var(--gl),.6)}'+
+  '#tsres .rs-ph-ic::after{content:"";position:absolute;right:6px;bottom:8px;width:19px;height:12px;'+
+   'background:rgba(var(--gl),.3);clip-path:polygon(0 100%,42% 22%,68% 62%,84% 40%,100% 100%)}'+
+  '#tsres .rs-ph-l{font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;font-size:clamp(1rem,2vw,1.28rem);'+
+   'letter-spacing:-.01em;color:rgba(255,255,255,.9)}'+
+  '#tsres .rs-ph-n{max-width:520px;font:400 13.5px/1.6 inherit;color:rgba(255,255,255,.44)}'+
+  '#tsres .rs-ph-tag{position:absolute;left:14px;top:13px;z-index:3;font:600 9.5px/1 inherit;letter-spacing:.15em;text-transform:uppercase;'+
+   'color:var(--g);background:rgba(5,6,11,.6);border:1px solid rgba(var(--gl),.3);border-radius:999px;padding:6px 11px}'+
+  '#tsres .rs-figs{padding:56px 0 0}'+
+  /* Karten */
+  '#tsres .rs-cards{padding:78px 0 0}'+
+  '#tsres .rs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:0 auto}'+
+  '#tsres .rs-card{position:relative;padding:28px 26px 30px;border-radius:16px;background:rgba(255,255,255,.035);'+
+   'border:1px solid rgba(255,255,255,.09);transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,background .45s}'+
+  '#tsres .rs-card:hover{transform:translateY(-5px);border-color:rgba(var(--gl),.45);background:rgba(255,255,255,.052)}'+
+  '#tsres .rs-card .n{display:inline-block;font:600 9.5px/1 inherit;letter-spacing:.16em;color:var(--g);'+
+   'border:1px solid rgba(var(--gl),.34);border-radius:999px;padding:6px 11px}'+
+  '#tsres .rs-card h3{margin:15px 0 9px;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
+   'font-size:1.16rem;letter-spacing:-.01em;color:#fff}'+
+  '#tsres .rs-card p{margin:0;font:400 14.8px/1.66 inherit;color:rgba(255,255,255,.72)}'+
+  /* Merk-Kachel */
+  '#tsres .rs-note{max-width:860px;margin:78px auto 0;padding:38px 36px 40px;border-radius:20px;'+
+   'background:linear-gradient(165deg,rgba(28,38,72,.5),rgba(11,15,30,.62));border:1px solid rgba(var(--gl),.26);'+
+   'box-shadow:0 40px 110px -50px rgba(0,0,0,.9)}'+
+  '#tsres .rs-note h3{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
+   'font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.2;letter-spacing:-.02em;color:#fff}'+
+  '#tsres .rs-note p{margin:0;font:400 16px/1.74 inherit;color:rgba(255,255,255,.78)}'+
+  /* Learnings */
+  '#tsres .rs-learn{position:relative;margin-top:88px;padding:80px 24px 84px;overflow:hidden;'+
+   'background:radial-gradient(ellipse at 50% 0%,rgba(var(--gl),.07),transparent 62%)}'+
+  '#tsres .rs-learn-in{max-width:900px;margin:0 auto}'+
+  '#tsres .rs-orbs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}'+
+  '#tsres .rs-orb{display:flex;align-items:flex-start;gap:14px;padding:22px 22px 24px;border-radius:15px;'+
+   'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);animation:rsFloat 7s ease-in-out infinite}'+
+  '#tsres .rs-orb:nth-child(2){animation-delay:-1.6s}'+
+  '#tsres .rs-orb:nth-child(3){animation-delay:-3.2s}'+
+  '#tsres .rs-orb:nth-child(4){animation-delay:-4.8s}'+
+  '#tsres .rs-orb i{flex:none;margin-top:5px;width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 14px rgba(var(--gl),.85)}'+
+  '#tsres .rs-orb span{font:400 15px/1.62 inherit;color:rgba(255,255,255,.8)}'+
+  '@keyframes rsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}'+
+  /* Weiter */
+  '#tsres .rs-next{display:flex;justify-content:center;padding:6px 24px 90px}'+
+  '#tsres .rs-next a{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 32px;border-radius:999px;'+
+   'background:var(--g);color:#05060b;font:600 15px/1 inherit;text-decoration:none;transition:filter .25s,transform .35s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rs-next a:hover{filter:brightness(1.07);transform:translateY(-2px)}'+
+  '#tsres .rs-next a i{font-style:normal;transition:transform .3s}'+
+  '#tsres .rs-next a:hover i{transform:translateX(4px)}'+
+
+  /* === L5.0 verpuffen === */
+  '#tsres .rv{display:flex;flex-direction:column;align-items:center;gap:26px}'+
+  '#tsres .rv-lane{display:flex;flex-wrap:wrap;justify-content:center;gap:11px}'+
+  '#tsres .rv-c{display:flex;flex-direction:column;gap:3px;padding:13px 17px;border-radius:13px;background:rgba(255,255,255,.04);'+
+   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(-16px);'+
+   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .6s}'+
+  '#tsres .rv-c b{font:600 13px/1.1 inherit;color:#fff}'+
+  '#tsres .rv-c span{font:400 11.5px/1.1 inherit;color:rgba(255,255,255,.5)}'+
+  '#tsres .rv-c.go{opacity:1;transform:none}'+
+  '#tsres .rv-c.fade{opacity:.16;filter:blur(1.5px);transform:translateY(16px)}'+
+  '#tsres .rv-c.land{border-color:rgba(var(--gl),.55);box-shadow:0 0 30px rgba(var(--gl),.14)}'+
+  '#tsres .rv-box{display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px 30px;border-radius:16px;'+
+   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);opacity:0;transform:scale(.94);'+
+   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rv-box.on{opacity:1;transform:none}'+
+  '#tsres .rv-box-t{font:600 15px/1.1 inherit;color:#fff}'+
+  '#tsres .rv-box-s{font:600 9.5px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}'+
+  /* === L5.1 tore === */
+  '#tsres .rg{display:flex;flex-direction:column;align-items:center;gap:24px}'+
+  '#tsres .rg-in{padding:11px 20px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);'+
+   'font:600 13px/1 inherit;color:#fff}'+
+  '#tsres .rg-track{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}'+
+  '#tsres .rg-gate{display:flex;align-items:center;gap:11px;padding:15px 19px;border-radius:14px;background:rgba(255,255,255,.035);'+
+   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(14px);'+
+   'transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}'+
+  '#tsres .rg-gate.on{opacity:1;transform:none}'+
+  '#tsres .rg-gate.pass{border-color:rgba(var(--gl),.55);box-shadow:0 0 26px rgba(var(--gl),.16)}'+
+  '#tsres .rg-gate b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;'+
+   'font:600 12px/1 inherit;color:var(--g);border:1px solid rgba(var(--gl),.4)}'+
+  '#tsres .rg-gate span{font:400 12.5px/1.35 inherit;color:rgba(255,255,255,.74)}'+
+  '#tsres .rg-dot{position:absolute;left:0;top:50%;width:8px;height:8px;border-radius:50%;background:var(--g);opacity:0;'+
+   'box-shadow:0 0 18px rgba(var(--gl),.9)}'+
+  '#tsres .rg-dot.run{animation:rgRun 2.6s cubic-bezier(.42,0,.58,1) forwards}'+
+  '@keyframes rgRun{0%{opacity:0;left:0}12%{opacity:1}92%{opacity:1;left:100%}100%{opacity:0;left:100%}}'+
+  '#tsres .rg-outs{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}'+
+  '#tsres .rg-out{display:flex;flex-direction:column;gap:4px;padding:17px 22px;border-radius:15px;opacity:0;transform:translateY(12px);'+
+   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rg-out.on{opacity:1;transform:none}'+
+  '#tsres .rg-out b{font:600 14px/1.1 inherit;color:#fff}'+
+  '#tsres .rg-out span{font:400 12px/1.3 inherit;color:rgba(255,255,255,.55)}'+
+  '#tsres .rg-out.ok{background:rgba(var(--gl),.1);border:1px solid rgba(var(--gl),.5)}'+
+  '#tsres .rg-out.esc{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.17)}'+
+  /* === L5.2 gehirn === */
+  '#tsres .rb{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;max-width:940px;margin:0 auto}'+
+  '#tsres .rb-col{display:flex;flex-direction:column;gap:13px}'+
+  '#tsres .rb-door,#tsres .rb-out{display:flex;flex-direction:column;gap:3px;padding:14px 17px;border-radius:13px;'+
+   'background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.14);opacity:0;'+
+   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .6s}'+
+  '#tsres .rb-door{transform:translateX(-18px)}'+
+  '#tsres .rb-out{transform:translateX(18px)}'+
+  '#tsres .rb-door.on,#tsres .rb-out.on{opacity:1;transform:none}'+
+  '#tsres .rb-out.on{border-color:rgba(var(--gl),.42)}'+
+  '#tsres .rb-door b,#tsres .rb-out b{font:600 13.5px/1.1 inherit;color:#fff}'+
+  '#tsres .rb-door span,#tsres .rb-out span{font:400 11.5px/1.25 inherit;color:rgba(255,255,255,.5)}'+
+  '#tsres .rb-core{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 24px;border-radius:18px;'+
+   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);box-shadow:0 24px 60px rgba(0,0,0,.45);'+
+   'opacity:0;transform:scale(.94);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rb-core.on{opacity:1;transform:none}'+
+  '#tsres .rb-core-n{font:600 15px/1.1 inherit;color:#fff}'+
+  '#tsres .rb-core-t{font:600 9.5px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}'+
+  '#tsres .rb-core.pulse{animation:rbPulse 1.6s cubic-bezier(.22,1,.36,1)}'+
+  '@keyframes rbPulse{0%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(var(--gl),.42)}'+
+   '60%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 24px rgba(var(--gl),0)}'+
+   '100%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(var(--gl),0)}}'+
+  '#tsres .rb-lns{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}'+
+  '#tsres .rb-ln{stroke:rgba(var(--gl),.3);stroke-width:1.4;fill:none;stroke-linecap:round}'+
+  '#tsres .rb-ln.flow{stroke-dasharray:5 9;animation:rbFlow 3.4s cubic-bezier(.22,1,.36,1) infinite}'+
+  '@keyframes rbFlow{0%{stroke-dashoffset:150}45%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}'+
+  /* === L5.3 welle === */
+  '#tsres .rw{display:flex;flex-direction:column;align-items:center;gap:30px}'+
+  '#tsres .rw-wave{display:flex;align-items:center;gap:5px;height:66px}'+
+  '#tsres .rw-b{display:block;width:4px;height:8px;border-radius:3px;background:rgba(var(--gl),.32);transition:height .5s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rw-b.live{animation:rwB 1.5s ease-in-out infinite}'+
+  '#tsres .rw-b:nth-child(3n).live{animation-duration:1.9s}'+
+  '#tsres .rw-b:nth-child(4n).live{animation-duration:1.2s}'+
+  '@keyframes rwB{0%,100%{height:9px;background:rgba(var(--gl),.3)}50%{height:46px;background:rgba(var(--gl),.75)}}'+
+  '#tsres .rw-ways{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;width:100%}'+
+  '#tsres .rw-way{display:flex;flex-direction:column;gap:7px;padding:22px 22px 24px;border-radius:16px;background:rgba(255,255,255,.035);'+
+   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(16px);'+
+   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .6s}'+
+  '#tsres .rw-way.on{opacity:1;transform:none;border-color:rgba(var(--gl),.35)}'+
+  '#tsres .rw-tag{align-self:flex-start;font:600 9.5px/1 inherit;letter-spacing:.15em;text-transform:uppercase;color:var(--g);'+
+   'border:1px solid rgba(var(--gl),.34);border-radius:999px;padding:6px 11px}'+
+  '#tsres .rw-way b{font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;font-size:1.06rem;color:#fff}'+
+  '#tsres .rw-p{font:400 13.5px/1.55 inherit;color:rgba(255,255,255,.7)}'+
+  '#tsres .rw-cost{font:600 12px/1.4 inherit;color:var(--g)}'+
+  '#tsres .rw-slim{display:flex;flex-direction:column;gap:6px;max-width:820px;width:100%;padding:19px 22px;border-radius:14px;'+
+   'background:rgba(255,255,255,.022);border:1px dashed rgba(var(--gl),.3);opacity:0;transform:translateY(12px);'+
+   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rw-slim.on{opacity:1;transform:none}'+
+  '#tsres .rw-slim b{font:600 13px/1.1 inherit;color:var(--g)}'+
+  '#tsres .rw-slim span{font:400 13.5px/1.55 inherit;color:rgba(255,255,255,.68)}'+
+  /* === L5.4 tische === */
+  '#tsres .rt{display:flex;flex-direction:column;align-items:center;gap:26px}'+
+  '#tsres .rt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;width:100%;max-width:660px}'+
+  '#tsres .rt-t{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 6px;border-radius:12px;'+
+   'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);opacity:0;transform:scale(.9);'+
+   'transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),'+
+   'filter .7s ease,border-color .6s,box-shadow .6s}'+
+  '#tsres .rt-t.on{opacity:1;transform:none}'+
+  '#tsres .rt-t b{font:600 12.5px/1 inherit;color:#fff}'+
+  '#tsres .rt-t span{font:400 10.5px/1 inherit;color:rgba(255,255,255,.45)}'+
+  '#tsres .rt-t.busy{opacity:.2;filter:grayscale(1)}'+
+  '#tsres .rt-t.free{border-color:rgba(var(--gl),.65);background:rgba(var(--gl),.12);'+
+   'box-shadow:0 0 34px rgba(var(--gl),.22);animation:rtPulse 2.2s cubic-bezier(.22,1,.36,1) infinite}'+
+  '@keyframes rtPulse{0%,100%{box-shadow:0 0 34px rgba(var(--gl),.16)}50%{box-shadow:0 0 46px rgba(var(--gl),.34)}}'+
+  '#tsres .rt-res{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 28px;border-radius:15px;'+
+   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);opacity:0;transform:translateY(12px);'+
+   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rt-res.on{opacity:1;transform:none}'+
+  '#tsres .rt-res b{font:600 15px/1.1 inherit;color:#fff}'+
+  '#tsres .rt-res span{font:400 12px/1.2 inherit;color:rgba(255,255,255,.6)}'+
+  /* === L5.5 kreis === */
+  '#tsres .rk{position:relative;width:min(560px,100%);aspect-ratio:1/.72;margin:0 auto}'+
+  '#tsres .rk-ring{position:absolute;left:50%;top:50%;width:min(430px,84%);aspect-ratio:1;transform:translate(-50%,-50%);'+
+   'border-radius:50%;border:1px dashed rgba(var(--gl),.28)}'+
+  '#tsres .rk-ring.spin{animation:rkSpin 26s linear infinite}'+
+  '@keyframes rkSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}'+
+  '#tsres .rk-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.94);display:flex;flex-direction:column;'+
+   'align-items:center;gap:3px;padding:16px 20px;border-radius:15px;background:rgba(var(--gl),.09);'+
+   'border:1px solid rgba(var(--gl),.5);opacity:0;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rk-hub.on{opacity:1;transform:translate(-50%,-50%) scale(1)}'+
+  '#tsres .rk-hub b{font:600 13.5px/1.1 inherit;color:#fff}'+
+  '#tsres .rk-hub span{font:600 9px/1 inherit;letter-spacing:.13em;text-transform:uppercase;color:var(--g)}'+
+  '#tsres .rk-st{position:absolute;display:flex;flex-direction:column;gap:2px;padding:11px 15px;border-radius:12px;'+
+   'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);opacity:0;'+
+   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s;'+
+   'white-space:nowrap}'+
+  '#tsres .rk-st.on{opacity:1}'+
+  '#tsres .rk-st.hot{border-color:rgba(var(--gl),.6);box-shadow:0 0 30px rgba(var(--gl),.2)}'+
+  '#tsres .rk-st b{font:600 12.5px/1.1 inherit;color:#fff}'+
+  '#tsres .rk-st span{font:400 11px/1.1 inherit;color:rgba(255,255,255,.5)}'+
+  '#tsres .rk-st.s1{left:50%;top:0;transform:translateX(-50%)}'+
+  '#tsres .rk-st.s2{right:0;top:50%;transform:translateY(-50%)}'+
+  '#tsres .rk-st.s3{left:50%;bottom:0;transform:translateX(-50%)}'+
+  '#tsres .rk-st.s4{left:0;top:50%;transform:translateY(-50%)}'+
+  /* === L5.6 pruefen === */
+  '#tsres .rp{display:flex;flex-direction:column;gap:22px;max-width:720px;margin:0 auto;width:100%}'+
+  '#tsres .rp-bar{height:4px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}'+
+  '#tsres .rp-fill{display:block;height:100%;width:0;border-radius:999px;background:var(--g);'+
+   'box-shadow:0 0 18px rgba(var(--gl),.6);transition:width .5s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rp-list{display:flex;flex-direction:column;gap:9px}'+
+  '#tsres .rp-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 17px;border-radius:12px;'+
+   'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);opacity:0;transform:translateX(-14px);'+
+   'transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),border-color .5s}'+
+  '#tsres .rp-row.on{opacity:1;transform:none}'+
+  '#tsres .rp-row span{font:400 13.5px/1.35 inherit;color:rgba(255,255,255,.74)}'+
+  '#tsres .rp-row i{flex:none;width:19px;height:19px;border-radius:50%;border:1px solid rgba(255,255,255,.22);position:relative;'+
+   'transition:border-color .4s,background .4s}'+
+  '#tsres .rp-row.done{border-color:rgba(var(--gl),.35)}'+
+  '#tsres .rp-row.done i{border-color:var(--g);background:rgba(var(--gl),.16)}'+
+  '#tsres .rp-row.done i::after{content:"";position:absolute;left:5px;top:4px;width:5px;height:9px;border:solid var(--g);'+
+   'border-width:0 1.6px 1.6px 0;transform:rotate(42deg)}'+
+  '#tsres .rp-switch{display:flex;align-items:center;gap:13px;padding:17px 20px;border-radius:14px;background:rgba(255,255,255,.028);'+
+   'border:1px dashed rgba(var(--gl),.3);opacity:.4;transition:opacity .7s ease,border-color .7s}'+
+  '#tsres .rp-switch.on{opacity:1;border-style:solid;border-color:rgba(var(--gl),.5)}'+
+  '#tsres .rp-sw{flex:none;width:38px;height:21px;border-radius:999px;background:rgba(255,255,255,.12);position:relative;transition:background .5s}'+
+  '#tsres .rp-sw::after{content:"";position:absolute;left:3px;top:3px;width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.5);'+
+   'transition:transform .5s cubic-bezier(.16,1,.3,1),background .5s}'+
+  '#tsres .rp-switch.on .rp-sw{background:rgba(var(--gl),.4)}'+
+  '#tsres .rp-switch.on .rp-sw::after{transform:translateX(17px);background:var(--g)}'+
+  '#tsres .rp-switch b{font:600 13.5px/1 inherit;color:#fff}'+
+  '#tsres .rp-swt{font:400 12.5px/1.3 inherit;color:rgba(255,255,255,.55)}'+
+  /* === L5.7 loeschen === */
+  '#tsres .rl{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}'+
+  '#tsres .rl-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;width:100%;max-width:740px}'+
+  '#tsres .rl-card{display:flex;flex-direction:column;gap:4px;padding:14px 15px;border-radius:12px;background:rgba(255,255,255,.04);'+
+   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(12px);'+
+   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),filter .9s ease}'+
+  '#tsres .rl-card.on{opacity:1;transform:none}'+
+  '#tsres .rl-card.gone{opacity:.08;filter:blur(3px)}'+
+  '#tsres .rl-card b{font:600 12.5px/1.1 inherit;color:#fff}'+
+  '#tsres .rl-card span{font:400 11px/1.25 inherit;color:rgba(255,255,255,.5)}'+
+  '#tsres .rl-gear{display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.04);'+
+   'border:1px solid rgba(var(--gl),.34);opacity:0;transition:opacity .7s ease}'+
+  '#tsres .rl-gear.on{opacity:1}'+
+  '#tsres .rl-gear-i{width:15px;height:15px;border-radius:50%;border:2px dashed var(--g)}'+
+  '#tsres .rl-gear.turn .rl-gear-i{animation:rlSpin 6s linear infinite}'+
+  '@keyframes rlSpin{to{transform:rotate(360deg)}}'+
+  '#tsres .rl-gear-t{font:600 10.5px/1 inherit;letter-spacing:.13em;text-transform:uppercase;color:var(--g)}'+
+  '#tsres .rl-bars{display:flex;align-items:flex-end;justify-content:center;gap:18px;height:120px;width:100%;max-width:520px}'+
+  '#tsres .rl-bar{display:flex;flex-direction:column;align-items:center;gap:9px;flex:1;height:100%;justify-content:flex-end}'+
+  '#tsres .rl-bar i{display:block;width:100%;max-width:52px;height:0;border-radius:8px 8px 3px 3px;'+
+   'background:linear-gradient(180deg,rgba(var(--gl),.75),rgba(var(--gl),.22));'+
+   'transition:height .9s cubic-bezier(.16,1,.3,1)}'+
+  '#tsres .rl-bar.on i{height:var(--h)}'+
+  '#tsres .rl-bar span{font:400 11px/1 inherit;color:rgba(255,255,255,.45)}'+
+  /* Responsive */
+  '@media(max-width:860px){'+
+   '#tsres .rs-grid,#tsres .rs-orbs,#tsres .rw-ways{grid-template-columns:1fr}'+
+   '#tsres .rb{grid-template-columns:1fr;gap:16px}#tsres .rb-lns{display:none}'+
+   '#tsres .rb-door,#tsres .rb-out{transform:translateY(14px)}'+
+   '#tsres .rt-grid{grid-template-columns:repeat(4,1fr)}'+
+   '#tsres .rl-cards{grid-template-columns:repeat(2,1fr)}'+
+   '#tsres .rk{aspect-ratio:1/1.05}'+
+   '#tsres .rs-stage{padding:34px 16px 32px;border-radius:18px}'+
+   '#tsres .rs-hero{min-height:64vh;padding:104px 20px 54px}'+
+   '#tsres .rs-note{padding:28px 22px 30px}'+
+  '}'+
+  '@media(max-width:520px){#tsres .rt-grid{grid-template-columns:repeat(3,1fr)}#tsres .rw-wave{gap:3px}}'+
+  '@media(prefers-reduced-motion:reduce){'+
+   '#tsres *,#tsres *::before,#tsres *::after{animation:none !important;transition:none !important}'+
+   '#tsres .rs-rv{opacity:1;transform:none}'+
+   '#tsres .rv-c,#tsres .rg-gate,#tsres .rg-out,#tsres .rb-door,#tsres .rb-out,#tsres .rb-core,'+
+   '#tsres .rw-way,#tsres .rw-slim,#tsres .rt-t,#tsres .rt-res,#tsres .rk-st,#tsres .rk-hub,'+
+   '#tsres .rp-row,#tsres .rl-card,#tsres .rv-box{opacity:1 !important;transform:none !important}'+
+   '#tsres .rl-bar i{height:var(--h) !important}'+
+   '#tsres .rp-switch{opacity:1}'+
+  '}';
+
+  /* ---------- Build ---------- */
+  function esc(s){return s;}
+  function build(L){
+    var h='';
+    h+='<section class="rs-hero">'+
+       '<a class="rs-back" href="'+BACK.href+'">&larr; '+BACK.label+'</a>'+
+       '<img class="rs-logo" src="'+LOGO+'" alt="">'+
+       '<span class="rs-eyebrow">'+L.eyebrow+'</span>'+
+       '<span class="rs-kicker">'+L.kicker+'</span>'+
+       '<h1 class="rs-title">'+L.title+'</h1>'+
+       '<p class="rs-lead">'+L.lead+'</p>'+
+       '<div class="rs-scroll"></div>'+
+       '</section>';
+    h+='<div class="rs-intro rs-rv">'+L.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
+    /* Animation */
+    h+='<section class="rs-anim rs-rv" data-anim="'+L.anim.key+'">'+
+       '<div class="rs-wrap"><div class="rs-sh"><span class="e">'+L.anim.eyebrow+'</span>'+
+       '<h2>'+L.anim.h+'</h2><p>'+L.anim.sub+'</p></div>'+
+       '<div class="rs-stage"><button class="rs-replay" type="button">nochmal</button>'+L.anim.html+'</div></div></section>';
+    /* Bild 1 */
+    h+='<section class="rs-figs rs-rv"><div class="rs-wrap">'+
+       '<div style="position:relative">'+ph(L.img1[0],L.img1[1],'16/9')+
+       '<span class="rs-ph-tag">Bild folgt</span></div></div></section>';
+    /* Karten */
+    h+='<section class="rs-cards rs-rv"><div class="rs-wrap">'+
+       '<div class="rs-sh"><span class="e">'+L.cards.eyebrow+'</span><h2>'+L.cards.h+'</h2></div>'+
+       '<div class="rs-grid">'+L.cards.items.map(function(it,i){
+         return '<article class="rs-card"><span class="n">0'+(i+1)+'</span><h3>'+it[0]+'</h3><p>'+it[1]+'</p></article>';
+       }).join('')+'</div></div></section>';
+    /* Merk-Kachel */
+    h+='<section class="rs-rv"><div class="rs-wrap"><div class="rs-note">'+
+       '<h3>'+L.note.h+'</h3><p>'+L.note.p+'</p></div></div></section>';
+    /* Bild 2 */
+    h+='<section class="rs-figs rs-rv"><div class="rs-wrap">'+
+       '<div style="position:relative">'+ph(L.img2[0],L.img2[1],'21/9')+
+       '<span class="rs-ph-tag">Bild folgt</span></div></div></section>';
+    /* Learnings */
+    h+='<section class="rs-learn rs-rv"><div class="rs-learn-in">'+
+       '<div class="rs-sh"><span class="e">Was du mitnimmst</span><h2>Learnings</h2></div>'+
+       '<div class="rs-orbs">'+L.learn.map(function(t){return '<div class="rs-orb"><i></i><span>'+t+'</span></div>';}).join('')+
+       '</div></div></section>';
+    /* Weiter */
+    h+='<div class="rs-next rs-rv"><a href="'+L.next.href+'">'+L.next.label+' <i>&rarr;</i></a></div>';
+    return h;
+  }
+
+  function mount(L){
+    if(document.getElementById('tsres')) return true;
+    var host=document.querySelector('.super-content')||document.querySelector('main')||document.body;
+    if(!host) return false;
+    if(!document.getElementById('tsres-css')){
+      var st=document.createElement('style'); st.id='tsres-css'; st.textContent=CSS;
+      document.head.appendChild(st);
+    }
+    var root=document.createElement('div');
+    root.id='tsres';
+    root.innerHTML=build(L);
+    var nr=host.querySelector('.notion-root');
+    if(nr) host.insertBefore(root,nr); else host.appendChild(root);
+    /* Notion-Kopf ausblenden */
+    ['.notion-header.page','.notion-root','.notion-collection-page-properties'].forEach(function(sel){
+      var e=host.querySelector(sel); if(e) e.style.display='none';
+    });
+    /* Reveal */
+    var rvs=[].slice.call(root.querySelectorAll('.rs-rv'));
+    var fire=function(el){
+      if(el.classList.contains('in')) return;
+      el.classList.add('in');
+      var a=el.getAttribute('data-anim');
+      if(a&&CUSTOM[a]) setTimeout(function(){
+        /* Nach einem Seitenwechsel kann der Knoten schon abgehaengt sein */
+        if(el.isConnected) CUSTOM[a](el);
+      },260);
+    };
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ fire(e.target); io.unobserve(e.target); } });
+      },{rootMargin:'0px 0px -12% 0px',threshold:.12});
+      rvs.forEach(function(e){io.observe(e);});
+    }
+    /* Selbstheilender Fallback (Design-System: Reveal-Robustheit) */
+    setTimeout(function(){
+      rvs.forEach(function(e){
+        var r=e.getBoundingClientRect();
+        if(r.top<window.innerHeight*1.15) fire(e);
+      });
+    },1400);
+    /* Replay */
+    [].slice.call(root.querySelectorAll('.rs-replay')).forEach(function(b){
+      b.addEventListener('click',function(){
+        var sec=b.closest('.rs-anim'); if(!sec) return;
+        var a=sec.getAttribute('data-anim');
+        if(a&&CUSTOM[a]) CUSTOM[a](sec);
+      });
+    });
+    return true;
+  }
+
+  function current(){
+    var p=location.pathname;
+    for(var i=0;i<LEK.length;i++){ if(LEK[i].slug.test(p)) return LEK[i]; }
+    return null;
+  }
+
+  function run(){
+    var L=current(); if(!L) return;
+    if(mount(L)) return;
+    var tries=0, iv=setInterval(function(){
+      tries++;
+      if(mount(L)||tries>40) clearInterval(iv);
+    },150);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+  /* React-Re-Render / super.so-SPA-Navigation abfangen.
+     Debounced (Design-System: Persistenz-Mount-Muster, 200 ms) und
+     re-entrancy-sicher — sonst ueberholen sich Pfadwechsel gegenseitig. */
+  var last=location.pathname, t=null, busy=false;
+  function sync(){
+    if(busy) return;
+    var p=location.pathname;
+    if(p!==last){
+      busy=true; last=p;
+      var old=document.getElementById('tsres'); if(old) old.remove();
+      busy=false;
+      run();
+    } else if(current()&&!document.getElementById('tsres')){
+      run();
+    }
+  }
+  var mo=new MutationObserver(function(){
+    clearTimeout(t); t=setTimeout(sync,200);
+  });
+  mo.observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('popstate',function(){ clearTimeout(t); t=setTimeout(sync,60); });
+})();
