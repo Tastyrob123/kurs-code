@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 1180" width="2600" height="1180" fill="none">
+  <defs>
+    <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1d2b"/>
+      <stop offset="1" stop-color="#0a0c14"/>
+    </linearGradient>
+    <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2d3a"/>
+      <stop offset="1" stop-color="#14161f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Zentrales Terminal-Fenster -->
+  <g transform="translate(660,250)">
+    <rect x="0" y="0" width="1280" height="720" rx="26" fill="url(#scr)" stroke="#c7b489" stroke-opacity="0.30" stroke-width="2.5"/>
+    <!-- Titelleiste -->
+    <rect x="0" y="0" width="1280" height="66" rx="26" fill="#20232f"/>
+    <rect x="0" y="40" width="1280" height="26" fill="#20232f"/>
+    <circle cx="42" cy="33" r="9" fill="#c7b489" fill-opacity="0.55"/>
+    <circle cx="76" cy="33" r="9" fill="#ffffff" fill-opacity="0.18"/>
+    <circle cx="110" cy="33" r="9" fill="#ffffff" fill-opacity="0.18"/>
+    <rect x="560" y="26" width="160" height="14" rx="7" fill="#ffffff" fill-opacity="0.12"/>
+
+    <!-- Prompt-Zeilen -->
+    <rect x="56" y="130" width="26" height="16" rx="4" fill="#c7b489" fill-opacity="0.85"/>
+    <rect x="100" y="130" width="420" height="16" rx="8" fill="#ffffff" fill-opacity="0.30"/>
+    <rect x="56" y="186" width="26" height="16" rx="4" fill="#c7b489" fill-opacity="0.55"/>
+    <rect x="100" y="186" width="660" height="16" rx="8" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="100" y="234" width="520" height="16" rx="8" fill="#ffffff" fill-opacity="0.14"/>
+
+    <!-- CLAUDE.md Kachel -->
+    <rect x="56" y="310" width="560" height="330" rx="18" fill="#ffffff" fill-opacity="0.035" stroke="#c7b489" stroke-opacity="0.26" stroke-width="2"/>
+    <rect x="92" y="352" width="230" height="18" rx="9" fill="#c7b489" fill-opacity="0.80"/>
+    <rect x="92" y="404" width="430" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.22"/>
+    <rect x="92" y="440" width="380" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.18"/>
+    <rect x="92" y="476" width="410" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.18"/>
+    <rect x="92" y="512" width="300" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.14"/>
+    <rect x="92" y="562" width="340" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.14"/>
+    <rect x="92" y="598" width="260" height="13" rx="6.5" fill="#ffffff" fill-opacity="0.10"/>
+
+    <!-- MCP-Anschluss rechts -->
+    <rect x="664" y="310" width="560" height="150" rx="18" fill="#ffffff" fill-opacity="0.035" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+    <circle cx="716" cy="385" r="16" fill="#c7b489" fill-opacity="0.75"/>
+    <rect x="754" y="368" width="240" height="16" rx="8" fill="#ffffff" fill-opacity="0.26"/>
+    <rect x="754" y="400" width="360" height="12" rx="6" fill="#ffffff" fill-opacity="0.14"/>
+
+    <rect x="664" y="490" width="560" height="150" rx="18" fill="#ffffff" fill-opacity="0.035" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+    <circle cx="716" cy="565" r="16" fill="#ffffff" fill-opacity="0.28"/>
+    <rect x="754" y="548" width="200" height="16" rx="8" fill="#ffffff" fill-opacity="0.22"/>
+    <rect x="754" y="580" width="320" height="12" rx="6" fill="#ffffff" fill-opacity="0.12"/>
+  </g>
+
+  <!-- Projektordner links -->
+  <g transform="translate(210,470)" opacity="0.85">
+    <path d="M0 40 Q0 8 32 8 L150 8 L186 52 L360 52 Q392 52 392 84 L392 380 Q392 412 360 412 L32 412 Q0 412 0 380 Z" fill="url(#deck)" stroke="#c7b489" stroke-opacity="0.24" stroke-width="2.5"/>
+    <rect x="52" y="130" width="200" height="14" rx="7" fill="#ffffff" fill-opacity="0.22"/>
+    <rect x="52" y="176" width="280" height="12" rx="6" fill="#ffffff" fill-opacity="0.14"/>
+    <rect x="52" y="216" width="240" height="12" rx="6" fill="#ffffff" fill-opacity="0.14"/>
+    <rect x="52" y="256" width="180" height="12" rx="6" fill="#ffffff" fill-opacity="0.10"/>
+  </g>
+
+  <!-- Bildmaschine rechts -->
+  <g transform="translate(2000,470)" opacity="0.85">
+    <rect x="0" y="8" width="392" height="404" rx="26" fill="url(#deck)" stroke="#ffffff" stroke-opacity="0.13" stroke-width="2.5"/>
+    <circle cx="196" cy="150" r="58" fill="#c7b489" fill-opacity="0.20" stroke="#c7b489" stroke-opacity="0.45" stroke-width="2.5"/>
+    <circle cx="196" cy="150" r="24" fill="#c7b489" fill-opacity="0.55"/>
+    <rect x="66" y="256" width="260" height="14" rx="7" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="66" y="298" width="200" height="12" rx="6" fill="#ffffff" fill-opacity="0.13"/>
+  </g>
+
+  <!-- Verbindungslinien -->
+  <g stroke="#c7b489" stroke-opacity="0.30" stroke-width="3" stroke-dasharray="12 14">
+    <path d="M602 676 L660 620"/>
+    <path d="M1940 620 L1998 676"/>
+  </g>
+</svg>

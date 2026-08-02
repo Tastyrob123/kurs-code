@@ -4336,7 +4336,12 @@ window.__tsMO = function(cb){
     { re:/\/formeln-logik-bausteine\/?$/, href:'/ansichten-filter' },
     { re:/\/ansichten-filter\/?$/, href:'/automations-buttons' },
     { re:/\/automations-buttons\/?$/, href:'/system-architektur-dashboard' },
-    { re:/\/system-architektur-dashboard\/?$/, href:'/mehrwert-zielbild' }
+    { re:/\/system-architektur-dashboard\/?$/, href:'/mehrwert-zielbild' },
+    /* Modul 6 - AI Website Building (L6.1-L6.2 gebaut 02.08.2026, L6.3+ folgen).
+       PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
+       den von #tsws1next/#tsws2next gebauten Weiter-Button wieder. */
+    { re:/\/lektionen\/claude-startklar-machen\/?$/, href:'/lektionen/website-skills-laden' },
+    { re:/\/lektionen\/website-skills-laden\/?$/, href:'/modul-6-ai-website-building' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -27849,6 +27854,339 @@ var TSISL_TEAM_ONB_V2=[
     mountGrid(sc, introEl);
   }
 
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 6 · AI WEBSITE BUILDING — Lektion 6.1 "Claude startklar machen"
+   Abschnitt 01 (Hero + Einleitung), Muster 1:1 aus key-metrics; Werte aus Abschnitts-Katalog 01.
+   Cover = PLATZHALTER-SVG -> echtes Cover kommt spaeter, nur die IMG-Zeile tauschen.
+   ============================================================ */
+(function(){
+  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-claude-startklar-placeholder.svg";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .ts-body h3{
+    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('tsws1-intro-css')) return;
+    var s=document.createElement('style'); s.id='tsws1-intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('tsws1-intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Claude startklar machen — Projektordner, CLAUDE.md, Higgsfield" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
+        '<h1 class="ts-hero__title">Claude <span class="ts-gold">startklar</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('tsws1-intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='tsws1-intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>In diesem Modul bauen wir eine <b>komplette Website für deinen Betrieb</b> — mit eigener Bildwelt aus KI-Generierung und einer Kamerafahrt, die beim Scrollen abläuft. Bevor die erste Zeile Code entsteht, richten wir den Arbeitsplatz ein.</p>
+  <p>Drei Dinge stehen am Ende dieser Lektion: ein <b>eigener Projektordner</b>, in dem Claude arbeitet. Eine <b>Projekt-CLAUDE.md</b> mit deinen echten Betriebsdaten und zwei Arbeitsregeln, an die Claude sich in jeder Sitzung hält. Und der Anschluss an <b>Higgsfield</b>, aus dem später die Bilder und Videos kommen.</p>
+</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 6 · L6.1 — #tsws1next Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Nächste Lektion")
+   Muster: Abschnitts-Katalog 09 (#tsl + #ts-next), 1:1 aus key-metrics/#tskmnext.
+   ============================================================ */
+(function(){
+  if(window.__tsws1next) return;
+  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
+  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/website-skills-laden';
+  var LEARN=[
+    'Du legst ein Website-Projekt sauber an — <b>eigener Ordner</b>, Claude darin gestartet.',
+    'Du weißt, was in die <b>Projekt-CLAUDE.md</b> gehört: Betriebsfakten, Arbeitsregeln, Design.',
+    'Du kennst die zwei Regeln: <b>Mobil-Check</b> nach jedem Schritt, nichts ungesehen fertig melden.',
+    'Du hast <b>Higgsfield</b> angeschlossen — und weißt, warum vor Lektion 7 nicht generiert wird.'
+  ];
+  var CSS=`
+  #tsws1next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsws1next *{box-sizing:border-box}
+  #tsws1next .tsl-head{text-align:center;margin-bottom:66px}
+  #tsws1next .tsl-eyebrow{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #tsws1next .tsl-title{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #tsws1next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #tsws1next .tsl-cell{display:flex;justify-content:center}
+  #tsws1next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #tsws1next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #tsws1next.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #tsws1next.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #tsws1next.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #tsws1next.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #tsws1next.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #tsws1next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #tsws1next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  #tsws1next .tsl-t b{color:#c7b489;font-weight:700}
+  #tsws1next #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #tsws1next #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #tsws1next #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #tsws1next #ts-next svg{width:16px;height:16px}
+  @media(max-width:1079px){ #tsws1next .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #tsws1next .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ #tsws1next .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsws1next-css'))return; var s=document.createElement('style'); s.id='tsws1next-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsws1next';
+    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML=`
+<div class="tsl-head">
+  <span class="tsl-eyebrow">Was du mitnimmst</span>
+  <h2 class="tsl-title">Learnings</h2>
+</div>
+<div class="tsl-grid">${orbs}</div>
+<div id="ts-next-wrap">
+  <a id="ts-next" href="${NEXT_URL}">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>`;
+    var a=el.querySelector('#ts-next');
+    a.addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
+    return el;
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsws1next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsws1next')) return;
+    var host=document.querySelector('.notion-root'); if(!host) return;
+    injectCSS();
+    host.appendChild(build());
+    var el=document.getElementById('tsws1next');
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+  }
+  window.__tsws1next=true;
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 6 · AI WEBSITE BUILDING — Lektion 6.2 "Website-Skills laden"
+   Abschnitt 01 (Hero + Einleitung), Muster 1:1 aus key-metrics; Werte aus Abschnitts-Katalog 01.
+   Cover = PLATZHALTER-SVG -> echtes Cover kommt spaeter, nur die IMG-Zeile tauschen.
+   ============================================================ */
+(function(){
+  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-skills-laden-placeholder.svg";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
+
+  var CSS=`
+  .ts-body{
+    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    text-align:center;
+  }
+  .ts-body h3{
+    font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    font-weight:600;letter-spacing:-.015em;color:#fff;
+    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
+    margin:32px 0 14px;
+  }
+  .ts-body h3:first-child{margin-top:0}
+  .ts-body p{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 13px;
+  }
+  .ts-body p:last-child{margin-bottom:0}
+  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
+  .ts-body li{
+    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
+    margin:0 0 10px;padding-left:22px;position:relative;
+  }
+  .ts-body li::before{
+    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
+    background:#c7b489;
+  }
+  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
+  `;
+  function injectCSS(){
+    if(document.getElementById('tsws2-intro-css')) return;
+    var s=document.createElement('style'); s.id='tsws2-intro-css'; s.textContent=CSS;
+    document.head.appendChild(s);
+  }
+
+  function mount(){
+    if(!on()) return;
+    var sc=document.querySelector(".super-content");
+    if(!sc) return;
+    if(document.querySelector(".ts-hero")){
+      if(!document.getElementById('tsws2-intro')) mountBody(sc);
+      return;
+    }
+    var hero=document.createElement("div");
+    hero.className="ts-hero";
+    hero.innerHTML=
+      '<img class="ts-hero__img" alt="Website-Skills laden — Design, Animation, Inszenierung, Typografie" src="'+IMG+'">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
+        '<h1 class="ts-hero__title">Website-<span class="ts-gold">Skills</span></h1>'+
+      '</div>';
+    var nr=sc.querySelector(".notion-root");
+    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
+    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
+      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
+    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
+    mountBody(sc);
+  }
+
+  function mountBody(sc){
+    if(document.getElementById('tsws2-intro')) return;
+    injectCSS();
+    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
+    var wrap=document.createElement('div');
+    wrap.id='tsws2-intro';
+    wrap.innerHTML=`
+<div class="ts-body">
+  <p>Claude kann von Haus aus Websites bauen — aber es baut dann <b>Durchschnitt</b>: dieselben Schriften und Farbverläufe wie überall, dieselbe Kachel-Optik. Genau daran erkennt man KI-gebaute Seiten auf den ersten Blick.</p>
+  <p>Deshalb rüsten wir aus, bevor wir planen. Vier Rollen müssen besetzt sein: <b>Design</b>, <b>Animation fürs Scrollen</b>, <b>Inszenierung</b> und <b>Typografie</b>. Und wir prüfen bei jedem Skill, dass er im Ernstfall wirklich anspringt — ein Skill, der nie greift, ist nur ein Ordner auf deiner Festplatte.</p>
+</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+
+  mount();
+  document.addEventListener("DOMContentLoaded", mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   MODUL 6 · L6.2 — #tsws2next Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Nächste Lektion")
+   Muster: Abschnitts-Katalog 09 (#tsl + #ts-next), 1:1 aus key-metrics/#tskmnext.
+   NEXT_URL zeigt vorerst auf die Modul-6-Landing (L6.3 folgt).
+   ============================================================ */
+(function(){
+  if(window.__tsws2next) return;
+  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
+  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/modul-6-ai-website-building';
+  var LEARN=[
+    'Du verstehst, warum Claude ohne Design-Skills den <b>austauschbaren Baukasten-Look</b> baut.',
+    'Du kennst die vier Rollen: <b>Design</b>, GSAP-Animation, Scroll-Inszenierung, Typografie.',
+    'Du kannst Skills installieren und weißt, dass Claude danach <b>neu gestartet</b> wird.',
+    'Du prüfst mit einem <b>Test-Prompt</b>, ob ein Skill anspringt — statt es zu hoffen.'
+  ];
+  var CSS=`
+  #tsws2next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
+  #tsws2next *{box-sizing:border-box}
+  #tsws2next .tsl-head{text-align:center;margin-bottom:66px}
+  #tsws2next .tsl-eyebrow{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #tsws2next .tsl-title{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #tsws2next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #tsws2next .tsl-cell{display:flex;justify-content:center}
+  #tsws2next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+  #tsws2next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #tsws2next.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
+  #tsws2next.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
+  #tsws2next.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #tsws2next.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #tsws2next.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #tsws2next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #tsws2next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
+  #tsws2next .tsl-t b{color:#c7b489;font-weight:700}
+  #tsws2next #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #tsws2next #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #tsws2next #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #tsws2next #ts-next svg{width:16px;height:16px}
+  @media(max-width:1079px){ #tsws2next .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #tsws2next .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ #tsws2next .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+  function injectCSS(){ if(document.getElementById('tsws2next-css'))return; var s=document.createElement('style'); s.id='tsws2next-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function build(){
+    var el=document.createElement('div'); el.id='tsws2next';
+    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
+    el.innerHTML=`
+<div class="tsl-head">
+  <span class="tsl-eyebrow">Was du mitnimmst</span>
+  <h2 class="tsl-title">Learnings</h2>
+</div>
+<div class="tsl-grid">${orbs}</div>
+<div id="ts-next-wrap">
+  <a id="ts-next" href="${NEXT_URL}">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>`;
+    var a=el.querySelector('#ts-next');
+    a.addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
+    return el;
+  }
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsws2next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsws2next')) return;
+    var host=document.querySelector('.notion-root'); if(!host) return;
+    injectCSS();
+    host.appendChild(build());
+    var el=document.getElementById('tsws2next');
+    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
+    io.observe(el);
+    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
+  }
+  window.__tsws2next=true;
   mount();
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
