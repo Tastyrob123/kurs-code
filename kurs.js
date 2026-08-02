@@ -13,6 +13,22 @@
    Parallel-Commits (ad33dbc, 0b76635) beim Anhängen neuer Blöcke überschrieben. Am Anfang
    arbeitet niemand -> kollisionssicher. Bitte hier lassen.
    ============================================================ */
+
+/* TS Page-Veil Ausloeser (Gegenstueck zum Veil-Block am Anfang von kurs.css):
+   Reveal ~350ms nach DOMContentLoaded -- bis dahin haben die Seiten-Module ihren
+   ersten Mount-Durchlauf gemacht. Mehrfach abgesichert: load-Event, visibility-
+   change (hidden Tabs drosseln Timer/Animationen), harter 2,2s-Timeout. CSS-
+   Failsafe (2,5s) greift zusaetzlich, falls dieses Skript nie ausgefuehrt wird. */
+(function(){
+  if(window.__tsVeil) return; window.__tsVeil=true;
+  function reveal(){ document.documentElement.classList.add('ts-reveal'); }
+  function go(){ setTimeout(reveal, 350); }
+  if(document.readyState!=='loading') go(); else document.addEventListener('DOMContentLoaded', go);
+  window.addEventListener('load', function(){ setTimeout(reveal, 250); });
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) setTimeout(reveal, 400); });
+  setTimeout(reveal, 2200);
+})();
+
 (function(){
   if(window.__tsSbNum) return; window.__tsSbNum = true;
 
