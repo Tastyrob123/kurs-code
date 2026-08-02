@@ -10975,23 +10975,23 @@ var TSISL_TEAM_ONB_V2=[
      Fallback = eigenes volles Band via side + html (Text wird von diesem Modul selbst gebaut,
      kein natives Notion-Pendant). */
   var MACS=[
-    { after:'tsshop--db13_lieferanten',     col:'block-39bb954655348092b69cec1441abcc6e', img:BASE+'lieferpartner-uebersicht.png', shot:SCROLL+'lieferpartner.jpg',   cap:'Lieferpartner-Übersicht' },
-    { after:'tsshop--db13_ansprechpartner', col:'block-39bb95465534801e9c8add95f1979a5e', img:BASE+'ansprechpartner-galerie.png',   shot:SCROLL+'ansprechpartner.jpg', cap:'Ansprechpartner-Galerie' },
-    { after:'tsshop--db13_vertraege',       col:'block-39bb954655348006934fff07a63c709c', img:BASE+'vertraege-datenbank.png',        shot:SCROLL+'vertraege.jpg',      cap:'Verträge-Datenbank' },
+    { after:'tsshop--db13_lieferanten',     col:'block-39bb954655348092b69cec1441abcc6e', img:BASE+'lieferpartner-uebersicht.webp', shot:SCROLL+'lieferpartner.jpg',   cap:'Lieferpartner-Übersicht' },
+    { after:'tsshop--db13_ansprechpartner', col:'block-39bb95465534801e9c8add95f1979a5e', img:BASE+'ansprechpartner-galerie.webp',   shot:SCROLL+'ansprechpartner.jpg', cap:'Ansprechpartner-Galerie' },
+    { after:'tsshop--db13_vertraege',       col:'block-39bb954655348006934fff07a63c709c', img:BASE+'vertraege-datenbank.webp',        shot:SCROLL+'vertraege.jpg',      cap:'Verträge-Datenbank' },
     /* Unter „Deine Gemeinkosten. Posten für Posten.“ (DB VI) — PC rechts, Text links. */
-    { after:'tsshop--db6_gemeinkosten', side:'right', img:GK_BASE+'gk-kosten-pc.png', shot:GK_SCROLL+'gk-kosten.jpg', cap:'Gemeinkosten nach Monat',
+    { after:'tsshop--db6_gemeinkosten', side:'right', img:GK_BASE+'gk-kosten-pc.webp', shot:GK_SCROLL+'gk-kosten.jpg', cap:'Gemeinkosten nach Monat',
       html:'<h3 class="ts2mac-h">Saubere Gemeinkosten-Erfassung <span class="g">ist die Basis.</span></h3>'
         +'<p class="ts2mac-p">Miete, Versicherungen, Reinigung, Verwaltung, Instandhaltung, Marketing: Jede Position bekommt eine Zeile mit Kategorie, Zeitraum und Betrag, einzeln sichtbar statt nur als Summe.</p>'
         +'<p class="ts2mac-p">Dazu hältst du fest, ob eine Kosten wiederkehrend ist und in welchem Turnus sie bezahlt wird: monatlich, vierteljährlich, halbjährlich oder jährlich. Ein Check-Up-Feld zeigt, welche Position schon beglichen ist.</p>'
         +'<p class="ts2mac-p">Diese Zahlen sind die Grundlage für Deckungsbeitrag II. Ohne sie kennst du nur deinen Rohertrag, nicht den tatsächlichen Gewinn.</p>' },
     /* Unter „Deine Gemeinkostenannahmen.“ — PC links, Text rechts. */
-    { after:'tsshop--db6_gemeinkostenannahmen', img:GK_BASE+'gk-annahmen-pc.png', shot:GK_SCROLL+'gk-annahmen.jpg', cap:'GK Kosten Annahmen',
+    { after:'tsshop--db6_gemeinkostenannahmen', img:GK_BASE+'gk-annahmen-pc.webp', shot:GK_SCROLL+'gk-annahmen.jpg', cap:'GK Kosten Annahmen',
       html:'<h3 class="ts2mac-h">Die Rechen-Ebene <span class="g">macht den Unterschied.</span></h3>'
         +'<p class="ts2mac-p">Aus den Fixkosten wird hier die Rechen-Ebene: Für jeden Monat verknüpfst du die Kostenfaktoren aus DB VI und legst deinen geplanten Absatz fest, die Stückzahl für diesen Zeitraum.</p>'
         +'<p class="ts2mac-p">Ein Rollup summiert automatisch alle verknüpften Gemeinkosten zu deinen GK-Kosten pro Monat. Die Datenbank rechnet live mit, sobald du eine neue Position aus DB VI einhängst.</p>'
         +'<p class="ts2mac-p">Am Ende steht eine Zahl: die Gemeinkosten pro Produkt, aus Monatskosten geteilt durch Absatzmenge. Sie zeigt, wie viel jedes Gericht an Fixkosten mitträgt.</p>' },
     /* Unter „Deine Mitarbeiterlöhne. Netto für Netto.“ (DB VII) — PC rechts, Text links. */
-    { after:'tsshop--db7_mitarbeiterloehne', side:'right', img:GK_BASE+'ma-loehne-pc.png', shot:GK_SCROLL+'ma-loehne.jpg', cap:'Mitarbeitergehälter',
+    { after:'tsshop--db7_mitarbeiterloehne', side:'right', img:GK_BASE+'ma-loehne-pc.webp', shot:GK_SCROLL+'ma-loehne.jpg', cap:'Mitarbeitergehälter',
       html:'<h3 class="ts2mac-h">Echte Arbeitgeberkosten <span class="g">statt Bauchgefühl.</span></h3>'
         +'<p class="ts2mac-p">Für jeden Mitarbeiter hinterlegst du Name, Rolle, Anstellungsart und Bruttogehalt. Dazu kommt der AG-Kosten-Faktor, empfohlen 1,25, denn der Bruttolohn ist nicht deine echte Kostenzahl.</p>'
         +'<p class="ts2mac-p">Aus Bruttogehalt und AG-Faktor errechnet eine Formel deine AG-Kosten pro Monat. Eine zweite setzt die Monatsstunden je Anstellungsart: Vollzeit, Teilzeit, Minijob.</p>'
@@ -11171,13 +11171,13 @@ var TSISL_TEAM_ONB_V2=[
    ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner & Verträge — die Quelle jeder Einkaufszeile.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.jpg'],
    ['04','Datenbank','DB IV · Zutaten','Zieht ihre Preise direkt aus deiner Inventurliste.','/zutatenliste','zutaten.jpg'],
    ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus den Zutaten — automatisch.','/rezepturen','rezepturen.jpg'],
-   ['06','Datenbank','DB VI–VIII · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.jpg'],
+   ['06','Datenbank','DB VI–VIII · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.webp'],
    ['07','Datenbank','DB IX · Allergene','Jede Zutat kennt ihre Allergene — die Kennzeichnung schreibt sich selbst.','/allergene-bersicht','allergene.jpg'],
    ['08','Datenbank','DB XI · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.jpg'],
    ['09','Interface','Interface-Bau','Grundstruktur & Widgets — dein System bekommt ein Gesicht.','/interface-bau-grundstruktur-widgets','interface.jpg'],
    ['10','Interface','Food-/Drinksquartier','Inhalte und Interface für Speisen und Getränke an einem Ort.','/food-drinksquartier-inhalte-interface','food-drinks.jpg'],
    ['11','Kalkulation','Menükalkulation','Menüs und Catering — kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.jpg'],
-   ['12','Kennzahlen','Key Metrics','Deine wichtigsten Zahlen auf einen Blick — live aus dem System.','/key-metrics','key-metrics.jpg'],
+   ['12','Kennzahlen','Key Metrics','Deine wichtigsten Zahlen auf einen Blick — live aus dem System.','/key-metrics','key-metrics.webp'],
    ['13','Betrieb','Operations Area','Der operative Kern — Abläufe, Checklisten, Tagesgeschäft.','/operations-area','operations.jpg'],
    ['14','Skalierung','Multistandort','Das System auf mehrere Standorte erweitern — optional.','/multistandort-erweiterung-optional','multistandort.jpg'],
    ['15','Abschluss','Vision Frame','Der Abschluss des Building-Prozesses — dein Bild vom Ganzen.','/vision-frame-abschluss-des-building-prozesses','vision-frame.jpg'],
@@ -11955,12 +11955,12 @@ var TSISL_TEAM_ONB_V2=[
   var RECIPE={
     name:'Basilikum-Pesto',
     items:[
-      {n:'Basilikum',   g:50, p:24.00, img:'basilikum.png'},
-      {n:'Parmesan',    g:40, p:18.00, img:'parmesan.png'},
-      {n:'Pinienkerne', g:30, p:42.00, img:'pinienkerne.png'},
-      {n:'Olivenöl',    g:90, p:9.80,  img:'olivenoel.png'},
-      {n:'Knoblauch',   g:8,  p:6.00,  img:'knoblauch.png'},
-      {n:'Meersalz',    g:2,  p:2.90,  img:'meersalz.png'}
+      {n:'Basilikum',   g:50, p:24.00, img:'basilikum.webp'},
+      {n:'Parmesan',    g:40, p:18.00, img:'parmesan.webp'},
+      {n:'Pinienkerne', g:30, p:42.00, img:'pinienkerne.webp'},
+      {n:'Olivenöl',    g:90, p:9.80,  img:'olivenoel.webp'},
+      {n:'Knoblauch',   g:8,  p:6.00,  img:'knoblauch.webp'},
+      {n:'Meersalz',    g:2,  p:2.90,  img:'meersalz.webp'}
     ]
   };
   /* Nährwerte je 100 g fertige Rezeptur (Beispielwerte) → skalieren mit der Portionsgröße */
@@ -12643,10 +12643,10 @@ var TSISL_TEAM_ONB_V2=[
 
   /* Zutaten: [id, Name, Dateiname] — Bestand aus Tastyrob123/kurs (bereits live), passend zur Beispiel-Rezeptur "Basilikum-Pesto" aus der DB-V-Anleitung */
   var INGS=[
-    ['bas','Basilikum','basilikum.png'],
-    ['kno','Knoblauch','knoblauch.png'],
-    ['par','Parmesan','parmesan.png'],
-    ['pin','Pinienkerne','pinienkerne.png']
+    ['bas','Basilikum','basilikum.webp'],
+    ['kno','Knoblauch','knoblauch.webp'],
+    ['par','Parmesan','parmesan.webp'],
+    ['pin','Pinienkerne','pinienkerne.webp']
   ];
   function build(){
     var root=document.createElement('div'); root.id='tsrezsys';
@@ -14060,17 +14060,17 @@ var TSISL_TEAM_ONB_V2=[
      (Robert-Feedback 17.07.2026: "striche zu symbolen die erklaeren was wie zusammenhaengt").
      Liest sich als Gleichung: Gemeinkosten Σ/Monat → ÷ je Stueck → GK pro Produkt → − von DB I → DB II. */
   var GK_CHAIN=[
-    {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.jpg',    sub:'Miete, Strom, Versicherungen & Co.'},
-    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.jpg', op:'Σ', cap:'werden monatlich addiert', sub:'Alle Gemeinkosten eines Monats'},
+    {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.webp',    sub:'Miete, Strom, Versicherungen & Co.'},
+    {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.webp', op:'Σ', cap:'werden monatlich addiert', sub:'Alle Gemeinkosten eines Monats'},
     {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'geteilt durch verkaufte Stückzahl', sub:'Gemeinkostenanteil je verkauftem Produkt'},
-    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.jpg',       op:'→', cap:'wird von DB I abgezogen', sub:'DB I − GK pro Produkt', result:true}
+    {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.webp',       op:'→', cap:'wird von DB I abgezogen', sub:'DB I − GK pro Produkt', result:true}
   ];
   var PK_CHAIN=[
-    {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.jpg',                                        sub:'Bruttolöhne plus Arbeitgeberanteil'},
-    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.jpg', op:'÷', cap:'geteilt durch Arbeitsstunden',       sub:'Personalkosten je Arbeitsstunde'},
+    {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.webp',                                        sub:'Bruttolöhne plus Arbeitgeberanteil'},
+    {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.webp', op:'÷', cap:'geteilt durch Arbeitsstunden',       sub:'Personalkosten je Arbeitsstunde'},
     {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zubereitungszeit',               sub:'Zeit, die ein Produkt in der Zubereitung braucht'},
     {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt den Personalkostenanteil',    sub:'Personalkostenanteil je verkauftem Produkt'},
-    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.jpg',     op:'→', cap:'wird von DB II abgezogen',           sub:'DB II − PK pro Produkt', result:true}
+    {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.webp',     op:'→', cap:'wird von DB II abgezogen',           sub:'DB II − PK pro Produkt', result:true}
   ];
   var CSS=`
   #tsgkflow{--g:199,180,137;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);margin-top:56px;margin-bottom:60px;padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px);position:relative;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
