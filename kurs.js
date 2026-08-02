@@ -1934,9 +1934,9 @@
       <!-- SCENE 1 — Tauschen -->
       <div class="bau-scene" data-i="0">
         <div class="bau-swap">
-          <img class="bau-med bau-old" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg" alt="Tomate">
+          <img class="bau-med bau-old" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp" alt="Tomate">
           <span class="bau-swapicon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg></span>
-          <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.jpg" alt="Paprika">
+          <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.webp" alt="Paprika">
         </div>
         <span class="bau-conn once"></span>
         <div class="bau-node">
@@ -1958,20 +1958,20 @@
       <!-- SCENE 3 — Schachteln -->
       <div class="bau-scene bau-flow" data-i="2">
         <div class="bau-zcol">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg" alt="Walnüsse">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.webp" alt="Walnüsse">
         </div>
         <span class="bau-conn"></span>
         <div class="bau-node"><img class="bau-med bau-pesto" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b> · neuer Baustein</span></div>
         <span class="bau-conn rev"></span>
         <div class="bau-node">
           <div class="bau-dishgrp">
-            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
             <span class="bau-vconn up"></span>
             <img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Gericht">
             <span class="bau-vconn down"></span>
-            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg" alt="Parmesan">
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan">
             <span class="bau-tag bau-dishtag"><b>Pilz-Ravioli</b> · Gericht</span>
           </div>
         </div>
@@ -2046,7 +2046,7 @@
       </div>
       <span class="wv-feed"><span class="wv-dot"></span></span>
       <div class="wv-src" data-n="1">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg" alt="Basilikum">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
         <div class="wv-step">Zutat</div>
         <div class="wv-name">Basilikum</div>
         <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">0,40 €</span></div>
@@ -2641,8 +2641,8 @@
    ============================================================ */
 (function(){
   if(window.__tsd4) return; window.__tsd4=true;
-  var IMG_WHOLE ="https://tastyrob123.github.io/kurs/img/anim/tomate-3d.png";
-  var IMG_SLICED="https://tastyrob123.github.io/kurs/img/anim/tomate-sliced.png";
+  var IMG_WHOLE ="https://tastyrob123.github.io/kurs/img/anim/tomate-3d.webp";
+  var IMG_SLICED="https://tastyrob123.github.io/kurs/img/anim/tomate-sliced.webp";
   var IMG_STACK ="https://tastyrob123.github.io/kurs/img/anim/tomate-stack.webp";
   var CSS=`
   #tsd4{width:min(1000px,95vw);margin:20px auto 60px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
@@ -3975,9 +3975,9 @@
     vision:  "https://app.notion.com/p/cceb95465534823c889e01b310495ab9?source=copy_link"
   };
   var IMG = {
-    food:"https://tastyrob123.github.io/kurs-code/assets/rf93ka.jpg",drinks:"https://tastyrob123.github.io/kurs-code/assets/5j95hc.jpg",
-    finance:"https://tastyrob123.github.io/kurs-code/assets/m629vk.jpg",metrics:"https://tastyrob123.github.io/kurs-code/assets/hninlw.jpg",
-    ops:"https://tastyrob123.github.io/kurs-code/assets/bne5l8.jpg",vision:"https://tastyrob123.github.io/kurs-code/assets/6b9lws.jpg"
+    food:"https://tastyrob123.github.io/kurs-code/assets/rf93ka.webp",drinks:"https://tastyrob123.github.io/kurs-code/assets/5j95hc.jpg",
+    finance:"https://tastyrob123.github.io/kurs-code/assets/m629vk.webp",metrics:"https://tastyrob123.github.io/kurs-code/assets/hninlw.jpg",
+    ops:"https://tastyrob123.github.io/kurs-code/assets/bne5l8.webp",vision:"https://tastyrob123.github.io/kurs-code/assets/6b9lws.jpg"
   };
   var GLOW = {food:"90,150,185",drinks:"235,140,40",finance:"60,150,215",metrics:"95,165,205",ops:"170,120,90",vision:"150,110,220"};
   var CSS = `
@@ -7489,9 +7489,9 @@
   `;
   var LINKICON='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
   var CARDS=[
-    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.2.1','https://tastyrob123.github.io/kurs-code/assets/wl5y7h.jpg'],
+    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.2.1','https://tastyrob123.github.io/kurs-code/assets/wl5y7h.webp'],
     ['02','Zutaten','Zieht ihre Preise später direkt aus deiner Inventurliste.','https://sore-donut-083.notion.site/DB-Zutaten-388b95465534827481c0011c243f90de?source=copy_link','Lektion 2.2.2','https://tastyrob123.github.io/kurs-code/assets/cvv9ee.jpg'],
-    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.2.3','https://tastyrob123.github.io/kurs-code/assets/bwgtim.jpg']
+    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.2.3','https://tastyrob123.github.io/kurs-code/assets/bwgtim.webp']
   ];
   function injectCSS(){ if(document.getElementById('tslink-css'))return; var s=document.createElement('style'); s.id='tslink-css'; s.textContent=CSS; document.head.appendChild(s); }
   function build(){
@@ -8462,7 +8462,7 @@
       objekt_varianten:[
         { name:'Olivenöl',          wert:9.80, img:'https://tastyrob123.github.io/kurs/img/inventar/olivenoel.jpg' },
         { name:'Balsamico',         wert:7.90, img:'https://tastyrob123.github.io/kurs/img/inventar/balsamico.jpg' },
-        { name:'Meersalz',          wert:2.90, img:'https://tastyrob123.github.io/kurs/img/inventar/meersalz.jpg' },
+        { name:'Meersalz',          wert:2.90, img:'https://tastyrob123.github.io/kurs/img/inventar/meersalz.webp' },
         { name:'Schwarzer Pfeffer', wert:4.80, img:'https://tastyrob123.github.io/kurs/img/inventar/schwarzer-pfeffer.jpg' },
         { name:'Tomatenmark',       wert:1.90, img:'https://tastyrob123.github.io/kurs/img/inventar/tomatenmark.jpg' },
         { name:'Dijon-Senf',        wert:3.80, img:'https://tastyrob123.github.io/kurs/img/inventar/dijon-senf.jpg' },
@@ -8472,7 +8472,7 @@
         { name:'Mayonnaise',        wert:5.60, img:'https://tastyrob123.github.io/kurs/img/inventar/mayonnaise.jpg' },
         { name:'Cornichons',        wert:3.20, img:'https://tastyrob123.github.io/kurs/img/inventar/cornichons.jpg' },
         { name:'Sardellen',         wert:5.90, img:'https://tastyrob123.github.io/kurs/img/inventar/sardellen.jpg' },
-        { name:'Oregano',           wert:2.40, img:'https://tastyrob123.github.io/kurs/img/inventar/oregano.jpg' },
+        { name:'Oregano',           wert:2.40, img:'https://tastyrob123.github.io/kurs/img/inventar/oregano.webp' },
         { name:'Paprika Edelsüß',   wert:3.10, img:'https://tastyrob123.github.io/kurs/img/inventar/paprika-edelsuess.jpg' },
         { name:'Weißweinessig',     wert:3.60, img:'https://tastyrob123.github.io/kurs/img/inventar/weissweinessig.jpg' }
       ]},
@@ -8480,36 +8480,36 @@
       einheit:'Portionsgröße (g)', einheit_typ:'menge_g',
       /* 30 Tasty-Studios-Zutatenbilder (schwarzes Glas, Low-Key, img/zutaten, GitHub Pages) — Portionsgrößen = Beispielwerte */
       objekt_varianten:[
-        { name:'Tomate',        wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/rindersteak.jpg' },
-        { name:'Avocado',       wert:75,  img:'https://tastyrob123.github.io/kurs/img/zutaten/thymian.jpg' },
-        { name:'Paprika',       wert:80,  img:'https://tastyrob123.github.io/kurs/img/zutaten/butter.jpg' },
-        { name:'Zitrone',       wert:20,  img:'https://tastyrob123.github.io/kurs/img/zutaten/knoblauch.jpg' },
-        { name:'Lauchzwiebel',  wert:15,  img:'https://tastyrob123.github.io/kurs/img/zutaten/lauchzwiebel.jpg' },
-        { name:'Champignons',   wert:75,  img:'https://tastyrob123.github.io/kurs/img/zutaten/champignons.jpg' },
-        { name:'Rindersteak',   wert:200, img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg' },
-        { name:'Basilikum',     wert:5,   img:'https://tastyrob123.github.io/kurs/img/zutaten/basilikum.jpg' },
-        { name:'Zwiebel',       wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/zwiebel.jpg' },
-        { name:'Lachsfilet',    wert:150, img:'https://tastyrob123.github.io/kurs/img/zutaten/lachsfilet.jpg' },
-        { name:'Karotte',       wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/karotte.jpg' },
+        { name:'Tomate',        wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/rindersteak.webp' },
+        { name:'Avocado',       wert:75,  img:'https://tastyrob123.github.io/kurs/img/zutaten/thymian.webp' },
+        { name:'Paprika',       wert:80,  img:'https://tastyrob123.github.io/kurs/img/zutaten/butter.webp' },
+        { name:'Zitrone',       wert:20,  img:'https://tastyrob123.github.io/kurs/img/zutaten/knoblauch.webp' },
+        { name:'Lauchzwiebel',  wert:15,  img:'https://tastyrob123.github.io/kurs/img/zutaten/lauchzwiebel.webp' },
+        { name:'Champignons',   wert:75,  img:'https://tastyrob123.github.io/kurs/img/zutaten/champignons.webp' },
+        { name:'Rindersteak',   wert:200, img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp' },
+        { name:'Basilikum',     wert:5,   img:'https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp' },
+        { name:'Zwiebel',       wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/zwiebel.webp' },
+        { name:'Lachsfilet',    wert:150, img:'https://tastyrob123.github.io/kurs/img/zutaten/lachsfilet.webp' },
+        { name:'Karotte',       wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/karotte.webp' },
         { name:'Granatapfel',   wert:80,  img:'https://tastyrob123.github.io/kurs/img/zutaten/granatapfel.jpg' },
-        { name:'Knoblauch',     wert:8,   img:'https://tastyrob123.github.io/kurs/img/zutaten/zitrone.jpg' },
-        { name:'Brokkoli',      wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/brokkoli.jpg' },
-        { name:'Blaubeeren',    wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/blaubeeren.jpg' },
-        { name:'Chili',         wert:5,   img:'https://tastyrob123.github.io/kurs/img/zutaten/chili-rot.jpg' },
-        { name:'Kartoffel',     wert:150, img:'https://tastyrob123.github.io/kurs/img/zutaten/kartoffel.jpg' },
+        { name:'Knoblauch',     wert:8,   img:'https://tastyrob123.github.io/kurs/img/zutaten/zitrone.webp' },
+        { name:'Brokkoli',      wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/brokkoli.webp' },
+        { name:'Blaubeeren',    wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/blaubeeren.webp' },
+        { name:'Chili',         wert:5,   img:'https://tastyrob123.github.io/kurs/img/zutaten/chili-rot.webp' },
+        { name:'Kartoffel',     wert:150, img:'https://tastyrob123.github.io/kurs/img/zutaten/kartoffel.webp' },
         { name:'Garnelen',      wert:80,  img:'https://tastyrob123.github.io/kurs/img/zutaten/garnelen.jpg' },
-        { name:'Feige',         wert:40,  img:'https://tastyrob123.github.io/kurs/img/zutaten/feige.jpg' },
-        { name:'Spinat',        wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/spinat.jpg' },
-        { name:'Aubergine',     wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/aubergine.jpg' },
-        { name:'Parmesan',      wert:20,  img:'https://tastyrob123.github.io/kurs/img/zutaten/parmesan.jpg' },
-        { name:'Ingwer',        wert:10,  img:'https://tastyrob123.github.io/kurs/img/zutaten/ingwer.jpg' },
-        { name:'Rote Bete',     wert:100, img:'https://tastyrob123.github.io/kurs/img/zutaten/rote-bete.jpg' },
+        { name:'Feige',         wert:40,  img:'https://tastyrob123.github.io/kurs/img/zutaten/feige.webp' },
+        { name:'Spinat',        wert:60,  img:'https://tastyrob123.github.io/kurs/img/zutaten/spinat.webp' },
+        { name:'Aubergine',     wert:120, img:'https://tastyrob123.github.io/kurs/img/zutaten/aubergine.webp' },
+        { name:'Parmesan',      wert:20,  img:'https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp' },
+        { name:'Ingwer',        wert:10,  img:'https://tastyrob123.github.io/kurs/img/zutaten/ingwer.webp' },
+        { name:'Rote Bete',     wert:100, img:'https://tastyrob123.github.io/kurs/img/zutaten/rote-bete.webp' },
         { name:'Hähnchenbrust', wert:180, img:'https://tastyrob123.github.io/kurs/img/zutaten/haehnchenbrust.jpg' },
-        { name:'Zucchini',      wert:100, img:'https://tastyrob123.github.io/kurs/img/zutaten/zucchini.jpg' },
-        { name:'Walnüsse',      wert:25,  img:'https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.jpg' },
-        { name:'Mozzarella',    wert:125, img:'https://tastyrob123.github.io/kurs/img/zutaten/mozzarella.jpg' },
-        { name:'Butter',        wert:15,  img:'https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.jpg' },
-        { name:'Thymian',       wert:3,   img:'https://tastyrob123.github.io/kurs/img/zutaten/avocado.jpg' }
+        { name:'Zucchini',      wert:100, img:'https://tastyrob123.github.io/kurs/img/zutaten/zucchini.webp' },
+        { name:'Walnüsse',      wert:25,  img:'https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.webp' },
+        { name:'Mozzarella',    wert:125, img:'https://tastyrob123.github.io/kurs/img/zutaten/mozzarella.webp' },
+        { name:'Butter',        wert:15,  img:'https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.webp' },
+        { name:'Thymian',       wert:3,   img:'https://tastyrob123.github.io/kurs/img/zutaten/avocado.webp' }
       ]},
     { kachel_id:'db5_rezepturen', kachel_name:'Rezepturen', ist_produkt_kachel:true,
       einheit:'Portionsgröße (g)', einheit_typ:'menge_g',
@@ -8525,7 +8525,7 @@
         { name:'Erdbeer-Sirup',         wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/erdbeer-sirup.webp' },
         { name:'Mango-Sauce',           wert:50, img:'https://tastyrob123.github.io/kurs/img/rezepturen/mango-sauce.webp' },
         { name:'Basilikum-Pesto',       wert:30, img:'https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp' },
-        { name:'Blaubeer-Sauce',        wert:55, img:'https://tastyrob123.github.io/kurs/img/rezepturen/blaubeer-sauce.jpg' },
+        { name:'Blaubeer-Sauce',        wert:55, img:'https://tastyrob123.github.io/kurs/img/rezepturen/blaubeer-sauce.webp' },
         { name:'Karamellsirup',         wert:35, img:'https://tastyrob123.github.io/kurs/img/rezepturen/karamellsirup.webp' },
         { name:'Zitronensirup',         wert:18, img:'https://tastyrob123.github.io/kurs/img/rezepturen/zitronensirup.webp' },
         { name:'Holunderblüten-Sirup',  wert:20, img:'https://tastyrob123.github.io/kurs/img/rezepturen/holunderblueten-sirup.webp' },
@@ -8539,36 +8539,36 @@
         { name:'Matcha-Sirup',          wert:20, img:'https://tastyrob123.github.io/kurs/img/rezepturen/matcha-sirup.webp' },
         { name:'Butterfly-Pea-Sirup',   wert:18, img:'https://tastyrob123.github.io/kurs/img/rezepturen/butterfly-pea-sirup.webp' },
         { name:'Himbeer-Coulis',        wert:40, img:'https://tastyrob123.github.io/kurs/img/rezepturen/himbeer-coulis.webp' },
-        { name:'Ahornsirup',            wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/ahornsirup.jpg' },
+        { name:'Ahornsirup',            wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/ahornsirup.webp' },
         { name:'Passionsfrucht-Sauce',  wert:45, img:'https://tastyrob123.github.io/kurs/img/rezepturen/passionsfrucht-sauce.webp' },
         { name:'Kiwi-Limetten-Sauce',   wert:45, img:'https://tastyrob123.github.io/kurs/img/rezepturen/kiwi-limetten-sauce.webp' },
-        { name:'Cassis-Sirup',          wert:18, img:'https://tastyrob123.github.io/kurs/img/rezepturen/cassis-sirup.jpg' },
+        { name:'Cassis-Sirup',          wert:18, img:'https://tastyrob123.github.io/kurs/img/rezepturen/cassis-sirup.webp' },
         { name:'Rhabarber-Sirup',       wert:25, img:'https://tastyrob123.github.io/kurs/img/rezepturen/rhabarber-sirup.webp' },
         { name:'Curry-Mango-Dip',       wert:50, img:'https://tastyrob123.github.io/kurs/img/rezepturen/curry-mango-dip.webp' },
         { name:'Kichererbsen-Salat',    wert:120, img:'https://tastyrob123.github.io/kurs/img/erweiterung/kichererbsen-salat.jpg' },
         { name:'Tomatensalsa',          wert:90,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/tomatensalsa.jpg' },
         { name:'Guacamole',             wert:80,  img:'https://tastyrob123.github.io/kurs/img/erweiterung/guacamole.jpg' },
-        { name:'Hummus',                wert:100, img:'https://tastyrob123.github.io/kurs/img/erweiterung/hummus.jpg' },
-        { name:'Räucherlachs-Röschen',  wert:150, img:'https://tastyrob123.github.io/kurs/img/erweiterung/raeucherlachs-roeschen.jpg' },
+        { name:'Hummus',                wert:100, img:'https://tastyrob123.github.io/kurs/img/erweiterung/hummus.webp' },
+        { name:'Räucherlachs-Röschen',  wert:150, img:'https://tastyrob123.github.io/kurs/img/erweiterung/raeucherlachs-roeschen.webp' },
         { name:'Gurkensalat',           wert:130, img:'https://tastyrob123.github.io/kurs/img/erweiterung/gurkensalat.webp' }
       ]},
     { kachel_id:'db13_lieferanten', kachel_name:'Lieferpartner', ist_produkt_kachel:true,
       einheit:'Mindestbelieferung (€)', einheit_typ:'preis',
       /* 13 Tasty-Studios-Fahrzeugbilder (img/lieferpartner, GitHub Pages) — Werte = Beispielwerte */
       objekt_varianten:[
-        { name:'Lieferroller',             wert:25,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/lieferroller.jpg' },
-        { name:'E-Lastenrad',              wert:35,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/e-lastenrad.jpg' },
+        { name:'Lieferroller',             wert:25,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/lieferroller.webp' },
+        { name:'E-Lastenrad',              wert:35,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/e-lastenrad.webp' },
         { name:'Pickup',                   wert:60,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/pickup.jpg' },
-        { name:'Stadtlieferwagen kompakt', wert:75,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/stadtlieferwagen-kompakt.jpg' },
-        { name:'E-Lieferwagen',            wert:90,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/e-lieferwagen.jpg' },
-        { name:'Hochdach-Transporter',     wert:120, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/hochdach-transporter.jpg' },
-        { name:'Kastenwagen Transit',      wert:150, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kastenwagen-transit.jpg' },
-        { name:'Kühltransporter Sprinter', wert:180, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kuehltransporter-sprinter.jpg' },
-        { name:'Pritschenwagen',           wert:220, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/pritschenwagen-kisten.jpg' },
-        { name:'Getränke-LKW',             wert:350, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/getraenke-lkw.jpg' },
-        { name:'Güterzug',                 wert:1200, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/gueterzug.jpg' },
-        { name:'Containerschiff',          wert:3500, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/containerschiff.jpg' },
-        { name:'Frachtflugzeug',           wert:7500, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/militaer-frachtflugzeug.jpg' }
+        { name:'Stadtlieferwagen kompakt', wert:75,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/stadtlieferwagen-kompakt.webp' },
+        { name:'E-Lieferwagen',            wert:90,  img:'https://tastyrob123.github.io/kurs/img/lieferpartner/e-lieferwagen.webp' },
+        { name:'Hochdach-Transporter',     wert:120, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/hochdach-transporter.webp' },
+        { name:'Kastenwagen Transit',      wert:150, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kastenwagen-transit.webp' },
+        { name:'Kühltransporter Sprinter', wert:180, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kuehltransporter-sprinter.webp' },
+        { name:'Pritschenwagen',           wert:220, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/pritschenwagen-kisten.webp' },
+        { name:'Getränke-LKW',             wert:350, img:'https://tastyrob123.github.io/kurs/img/lieferpartner/getraenke-lkw.webp' },
+        { name:'Güterzug',                 wert:1200, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/gueterzug.webp' },
+        { name:'Containerschiff',          wert:3500, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/containerschiff.webp' },
+        { name:'Frachtflugzeug',           wert:7500, fit:'contain', img:'https://tastyrob123.github.io/kurs/img/lieferpartner/militaer-frachtflugzeug.webp' }
       ]},
     { kachel_id:'db13_ansprechpartner', kachel_name:'Ansprechpartner', ist_produkt_kachel:true,
       einheit:'Jahresrückvergütung (%)', einheit_typ:'prozent',
@@ -8622,12 +8622,12 @@
         { name:'Brandschutz',  wert:45,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/brandschutz-feuerloescher.webp' },
         { name:'Wartung',      wert:180,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/wartung-werkzeug.webp' },
         { name:'Miete',        wert:2500, img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/miete-schluessel.webp' },
-        { name:'Reinigung',    wert:350,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/reinigung-putzeimer.jpg' },
-        { name:'Entsorgung',   wert:120,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/entsorgung-muelltonne.jpg' },
+        { name:'Reinigung',    wert:350,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/reinigung-putzeimer.webp' },
+        { name:'Entsorgung',   wert:120,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/entsorgung-muelltonne.webp' },
         { name:'Buchhaltung',  wert:280,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/buchhaltung-rechner.webp' },
         { name:'Lüftung',      wert:90,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/lueftung-ventilator.webp' },
-        { name:'Telefon',      wert:40,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/telefon.jpg' },
-        { name:'Versicherung', wert:210,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/versicherung-schirm.jpg' }
+        { name:'Telefon',      wert:40,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/telefon.webp' },
+        { name:'Versicherung', wert:210,  img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/versicherung-schirm.webp' }
       ]},
     { kachel_id:'db6_gemeinkostenannahmen', kachel_name:'Gemeinkostenannahmen', ist_produkt_kachel:true,
       einheit:'Annahme', einheit_typ:'anzahl',
@@ -8636,10 +8636,10 @@
          eigene schwarze-Studio-Bilder + finale Beispielwerte/Einheit von Robert nachziehen. */
       objekt_varianten:[
         { name:'Monat',          wert:1,    img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/buchhaltung-rechner.webp' },
-        { name:'Kostenfaktoren', wert:15,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/entsorgung-muelltonne.jpg' },
-        { name:'GK / Monat',     wert:4770, img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/versicherung-schirm.jpg' },
+        { name:'Kostenfaktoren', wert:15,   img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/entsorgung-muelltonne.webp' },
+        { name:'GK / Monat',     wert:4770, img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/versicherung-schirm.webp' },
         { name:'Absatz / Monat', wert:3000, img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/lueftung-ventilator.webp' },
-        { name:'GK / Produkt',   wert:2,    img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/telefon.jpg' }
+        { name:'GK / Produkt',   wert:2,    img:'https://tastyrob123.github.io/kurs/img/gemeinkosten/telefon.webp' }
       ]},
     { kachel_id:'db7_mitarbeiterloehne', kachel_name:'Mitarbeiterlöhne', ist_produkt_kachel:true,
       einheit:'Nettogehalt (€)', einheit_typ:'preis',
@@ -8650,16 +8650,16 @@
         { name:'Personalspind',    wert:1500, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/personalspind.webp' },
         { name:'Stechkarten',      wert:1580, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/stechkarten-kartenhalter.webp' },
         { name:'Logo-Anstecker',   wert:1720, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/logo-anstecker.webp' },
-        { name:'Namensschild',     wert:1900, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/namensschild.jpg' },
-        { name:'Bonblock',         wert:2100, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/bonblock.jpg' },
-        { name:'Dienstplan',       wert:2400, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/dienstplan.jpg' },
+        { name:'Namensschild',     wert:1900, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/namensschild.webp' },
+        { name:'Bonblock',         wert:2100, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/bonblock.webp' },
+        { name:'Dienstplan',       wert:2400, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/dienstplan.webp' },
         { name:'Serviceschürze',   wert:1780, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/serviceschuerze.webp' },
-        { name:'Arbeitsschuhe',    wert:1550, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/arbeitsschuhe.jpg' },
+        { name:'Arbeitsschuhe',    wert:1550, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/arbeitsschuhe.webp' },
         { name:'Lohnumschlag',     wert:1620, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/lohnumschlag.webp' },
-        { name:'Ausweis',          wert:1950, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/ausweis-lanyard.jpg' },
+        { name:'Ausweis',          wert:1950, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/ausweis-lanyard.webp' },
         { name:'Trinkgeld',        wert:1480, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/trinkgeldglas.webp' },
-        { name:'Kochjacke',        wert:2600, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/kochjacke.jpg' },
-        { name:'Mitarbeiterhandbuch', wert:2200, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/mitarbeiterhandbuch.jpg' }
+        { name:'Kochjacke',        wert:2600, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/kochjacke.webp' },
+        { name:'Mitarbeiterhandbuch', wert:2200, img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/mitarbeiterhandbuch.webp' }
       ]},
     { kachel_id:'db8_gerichte', kachel_name:'Gerichte & Getränke', ist_produkt_kachel:true,
       einheit:'Kosten (€)', einheit_typ:'preis',
@@ -9901,7 +9901,7 @@ var TSISL_TEAM_ONB_V2=[
           content:'<p class="notion-text">→ <b>Eigenschaft</b> : Verknüpfung</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Mitarbeiterkleidung</p><p class="notion-text">&nbsp;</p><p class="notion-text">Du verknüpfst hier die Arbeitskleidung, die dem Mitarbeiter zugeordnet ist.</p>' },
         { type:'later', name:'Mitarbeiter Pflicht Dokumente', target:'Verknüpfung · Pflicht-Dokumente', flag:'später verknüpfen',
           desc:'Verknüpfung zu den Pflicht-Dokumenten des Mitarbeiters — baust du selbst.',
-          img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/ausweis-lanyard.jpg',
+          img:'https://tastyrob123.github.io/kurs/img/mitarbeiterloehne/ausweis-lanyard.webp',
           content:'<p class="notion-text">→ <b>Eigenschaft</b> : Verknüpfung</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Mitarbeiter Pflicht Dokumente</p><p class="notion-text">&nbsp;</p><p class="notion-text">Du verknüpfst hier die Pflicht-Dokumente (z. B. Gesundheitszeugnis, Hygienebelehrung) des Mitarbeiters.</p>' },
         { type:'later', name:'Vorhandene Dokumente', target:'Rollup · über Pflicht-Dokumente', flag:'später verknüpfen',
           desc:'Rollup über die Pflicht-Dokumente-Verknüpfung — baust du selbst.',
@@ -9933,7 +9933,7 @@ var TSISL_TEAM_ONB_V2=[
       relations:[
         { type:'ghost', name:'Lieferpartner', target:'Verknüpfung · DB I Lieferpartner', flag:'erscheint automatisch',
           desc:'Spiegelspalte der Lieferpartner-Verknüpfung — erscheint von allein.',
-          img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kuehltransporter-sprinter.jpg',
+          img:'https://tastyrob123.github.io/kurs/img/lieferpartner/kuehltransporter-sprinter.webp',
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> selbst an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sobald du in <b>DB I : Lieferpartner</b> die Verknüpfung zur Inventurliste mit <b>wechselseitiger Verbindung</b> anlegst, taucht sie hier von allein auf.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Lieferpartner</p><p class="notion-text">&nbsp;</p><p class="notion-text">Du benennst sie hier nur — verknüpft wird von der Lieferpartner-Seite.</p>' },
         { type:'later', name:'Hauptkontakt Lieferant', target:'Formel · Visitenkarte', flag:'später verknüpfen',
           desc:'Formel „Hauptkontakt Visitenkarte" — baust du selbst.',
@@ -9945,7 +9945,7 @@ var TSISL_TEAM_ONB_V2=[
           content:'<p class="notion-text">→ <b>Eigenschaft</b> : Rollup</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Verknüpfung</b> : Lieferpartner</p><p class="notion-text">→ <b>Eigenschaft</b> : Ansprechpartner</p><p class="notion-text">→ <b>Berechnen</b> : Eindeutige Werte zeigen</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Ansprechpartner Lieferant</p><p class="notion-text">&nbsp;</p><p class="notion-text">Dir werden hier die Ansprechpartner angezeigt, die im verknüpften Lieferanten hinterlegt sind.</p>' },
         { type:'ghost', name:'Ist Zutat', target:'Verknüpfung · DB IV Zutaten', flag:'erscheint automatisch',
           desc:'Spiegelspalte der Zutaten-Verknüpfung — erscheint von allein.',
-          img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg',
+          img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp',
           content:'<p class="notion-text">Diese Spalte legst du hier <b>nicht</b> selbst an.</p><p class="notion-text">&nbsp;</p><p class="notion-text">Sie erscheint automatisch, sobald du in <b>DB IV : Zutaten</b> die Verknüpfung „Inventar Produkt" mit <b>wechselseitiger Verbindung</b> zur Inventurliste anlegst.</p><p class="notion-text">&nbsp;</p><p class="notion-text">→ <b>Name der Spalte</b> : Ist Zutat</p><p class="notion-text">&nbsp;</p><p class="notion-text">Zeigt dir, welche Zutaten dieses Inventarprodukt verwenden.</p>' },
         { type:'ghost', name:'Packaging / Co.', target:'Gegenspalte · aus DB XI Gerichte', flag:'erscheint automatisch',
           desc:'Gegenspalte der Packaging-Verknüpfung aus den Gerichten — erscheint von allein.',
@@ -11166,24 +11166,24 @@ var TSISL_TEAM_ONB_V2=[
   var GLOW='199,180,137';
   var BLK='block-38fb95465534800bafb6c04f03af102b';
   var CARDS=[
-   ['01','Überblick','Mehrwert & Zielbild','Das fertige Gericht vor Augen — worauf die nächsten Schritte hinarbeiten.','/mehrwert-zielbild','mehrwert-zielbild.jpg'],
+   ['01','Überblick','Mehrwert & Zielbild','Das fertige Gericht vor Augen — worauf die nächsten Schritte hinarbeiten.','/mehrwert-zielbild','mehrwert-zielbild.webp'],
    ['02','Datenbank','DB 0 · Inventurliste','Dein Warenbestand als Basis — jede Zutat mit ihrem Preis.','/inventurliste','inventurliste.jpg'],
-   ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner & Verträge — die Quelle jeder Einkaufszeile.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.jpg'],
+   ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner & Verträge — die Quelle jeder Einkaufszeile.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.webp'],
    ['04','Datenbank','DB IV · Zutaten','Zieht ihre Preise direkt aus deiner Inventurliste.','/zutatenliste','zutaten.jpg'],
-   ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus den Zutaten — automatisch.','/rezepturen','rezepturen.jpg'],
+   ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus den Zutaten — automatisch.','/rezepturen','rezepturen.webp'],
    ['06','Datenbank','DB VI–VIII · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.webp'],
    ['07','Datenbank','DB IX · Allergene','Jede Zutat kennt ihre Allergene — die Kennzeichnung schreibt sich selbst.','/allergene-bersicht','allergene.jpg'],
-   ['08','Datenbank','DB XI · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.jpg'],
-   ['09','Interface','Interface-Bau','Grundstruktur & Widgets — dein System bekommt ein Gesicht.','/interface-bau-grundstruktur-widgets','interface.jpg'],
+   ['08','Datenbank','DB XI · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.webp'],
+   ['09','Interface','Interface-Bau','Grundstruktur & Widgets — dein System bekommt ein Gesicht.','/interface-bau-grundstruktur-widgets','interface.webp'],
    ['10','Interface','Food-/Drinksquartier','Inhalte und Interface für Speisen und Getränke an einem Ort.','/food-drinksquartier-inhalte-interface','food-drinks.jpg'],
-   ['11','Kalkulation','Menükalkulation','Menüs und Catering — kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.jpg'],
+   ['11','Kalkulation','Menükalkulation','Menüs und Catering — kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.webp'],
    ['12','Kennzahlen','Key Metrics','Deine wichtigsten Zahlen auf einen Blick — live aus dem System.','/key-metrics','key-metrics.webp'],
-   ['13','Betrieb','Operations Area','Der operative Kern — Abläufe, Checklisten, Tagesgeschäft.','/operations-area','operations.jpg'],
-   ['14','Skalierung','Multistandort','Das System auf mehrere Standorte erweitern — optional.','/multistandort-erweiterung-optional','multistandort.jpg'],
-   ['15','Abschluss','Vision Frame','Der Abschluss des Building-Prozesses — dein Bild vom Ganzen.','/vision-frame-abschluss-des-building-prozesses','vision-frame.jpg'],
-   ['16','Dynamik','Dynamisches System','Automationen und Feinschliff — das System bleibt in Bewegung.','/system-lebendiger-machen','dynamic-system.jpg'],
-   ['17','KI','Notion AI','Wie KI dein System mitdenken lässt — konkret und im Alltag.','/notion-ai-fr-unser-system','notion-ai.jpg'],
-   ['18','Praxis','Allgemeine Tipps','Kniffe und Empfehlungen aus der Praxis — zum Weiterbauen.','/allgemeine-tipps','allgemeine-tipps.jpg']
+   ['13','Betrieb','Operations Area','Der operative Kern — Abläufe, Checklisten, Tagesgeschäft.','/operations-area','operations.webp'],
+   ['14','Skalierung','Multistandort','Das System auf mehrere Standorte erweitern — optional.','/multistandort-erweiterung-optional','multistandort.webp'],
+   ['15','Abschluss','Vision Frame','Der Abschluss des Building-Prozesses — dein Bild vom Ganzen.','/vision-frame-abschluss-des-building-prozesses','vision-frame.webp'],
+   ['16','Dynamik','Dynamisches System','Automationen und Feinschliff — das System bleibt in Bewegung.','/system-lebendiger-machen','dynamic-system.webp'],
+   ['17','KI','Notion AI','Wie KI dein System mitdenken lässt — konkret und im Alltag.','/notion-ai-fr-unser-system','notion-ai.webp'],
+   ['18','Praxis','Allgemeine Tipps','Kniffe und Empfehlungen aus der Praxis — zum Weiterbauen.','/allgemeine-tipps','allgemeine-tipps.webp']
   ];
   var CSS=`
   #tslmod{width:min(1320px,95vw);margin:34px auto 30px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -11327,7 +11327,7 @@ var TSISL_TEAM_ONB_V2=[
    ============================================================================ */
 (function(){
   if(window.__tscover) return; window.__tscover=true;
-  var IMG='https://tastyrob123.github.io/kurs/img/zutaten/spinat.jpg';
+  var IMG='https://tastyrob123.github.io/kurs/img/zutaten/spinat.webp';
   var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function on(){ return /\/zutatenliste\/?$/.test(location.pathname); }
 
@@ -14062,14 +14062,14 @@ var TSISL_TEAM_ONB_V2=[
   var GK_CHAIN=[
     {t:'Gemeinkosten',            img:GK_IMG+'miete-schluessel.webp',    sub:'Miete, Strom, Versicherungen & Co.'},
     {t:'Gemeinkostenannahmen',    img:GK_IMG+'buchhaltung-rechner.webp', op:'Σ', cap:'werden monatlich addiert', sub:'Alle Gemeinkosten eines Monats'},
-    {t:'GK pro Produkt',          img:GK_IMG+'telefon.jpg',             op:'÷', cap:'geteilt durch verkaufte Stückzahl', sub:'Gemeinkostenanteil je verkauftem Produkt'},
+    {t:'GK pro Produkt',          img:GK_IMG+'telefon.webp',             op:'÷', cap:'geteilt durch verkaufte Stückzahl', sub:'Gemeinkostenanteil je verkauftem Produkt'},
     {t:'Deckungsbeitrag II',      img:MA_IMG+'trinkgeldglas.webp',       op:'→', cap:'wird von DB I abgezogen', sub:'DB I − GK pro Produkt', result:true}
   ];
   var PK_CHAIN=[
     {t:'Mitarbeiterlöhne × AG-Faktor', img:MA_IMG+'lohnumschlag.webp',                                        sub:'Bruttolöhne plus Arbeitgeberanteil'},
     {t:'Lohn pro Stunde',              img:MA_IMG+'zeiterfassungsterminal.webp', op:'÷', cap:'geteilt durch Arbeitsstunden',       sub:'Personalkosten je Arbeitsstunde'},
-    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.jpg',             op:'×', cap:'mal Zubereitungszeit',               sub:'Zeit, die ein Produkt in der Zubereitung braucht'},
-    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.jpg',              op:'=', cap:'ergibt den Personalkostenanteil',    sub:'Personalkostenanteil je verkauftem Produkt'},
+    {t:'Zubereitungszeit pro Minute',  img:MA_IMG+'dienstplan.webp',             op:'×', cap:'mal Zubereitungszeit',               sub:'Zeit, die ein Produkt in der Zubereitung braucht'},
+    {t:'PK pro Produkt',               img:MA_IMG+'kochjacke.webp',              op:'=', cap:'ergibt den Personalkostenanteil',    sub:'Personalkostenanteil je verkauftem Produkt'},
     {t:'Deckungsbeitrag III',          img:MA_IMG+'kellnerbrieftasche.webp',     op:'→', cap:'wird von DB II abgezogen',           sub:'DB II − PK pro Produkt', result:true}
   ];
   var CSS=`
@@ -14244,12 +14244,12 @@ var TSISL_TEAM_ONB_V2=[
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
   /* echte Notion-Ansichten (Robert-Screenshots, in Klick-Reihenfolge) */
   var VIEWS=[
-    {src:"https://tastyrob123.github.io/kurs-code/assets/t4lt8n.png",n:"Tabelle"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/t4lt8n.webp",n:"Tabelle"},
     {src:"https://tastyrob123.github.io/kurs-code/assets/xeriqo.webp",n:"Galerie"},
     {src:"https://tastyrob123.github.io/kurs-code/assets/8gadf6.webp",n:"Board"},
-    {src:"https://tastyrob123.github.io/kurs-code/assets/bnr15z.png",n:"Liste"},
-    {src:"https://tastyrob123.github.io/kurs-code/assets/07xpp4.png",n:"Feed"},
-    {src:"https://tastyrob123.github.io/kurs-code/assets/feoto4.png",n:"Diagramm"}
+    {src:"https://tastyrob123.github.io/kurs-code/assets/bnr15z.webp",n:"Liste"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/07xpp4.webp",n:"Feed"},
+    {src:"https://tastyrob123.github.io/kurs-code/assets/feoto4.webp",n:"Diagramm"}
   ];
   /* echte Tool-Logos */
   var LG_GEMINI="https://tastyrob123.github.io/kurs-code/assets/xvdtd5.svg";
@@ -14719,7 +14719,7 @@ var TSISL_TEAM_ONB_V2=[
 
 
   /* ---------- ERKLAERANIMATION "Von Datenbank bis Galerie" (Medaillon-Kette) ---------- */
-  var PC_SHOT='https://tastyrob123.github.io/kurs/img/zutaten/tomate.jpg';
+  var PC_SHOT='https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp';
   var PC_CAPS=['Erst steht die Datenbank. Jeder Eintrag ist angelegt, nur die Kachel in der Galerie ist noch leer und wartet auf ihr Titelbild.','Jetzt schreibst du den Prompt, die genaue Anweisung ans Bild-Tool. Claude oder ChatGPT helfen dir, sie sauber zu formulieren.','Den Prompt gibst du ins passende Tool. Für unsere Tomate übernimmt Gemini, weil es Lebensmittel am glaubwürdigsten trifft.','In Canva legst du den Titel über die Tomate und setzt einen Schatten darunter, damit die Schrift auf dem Bild lesbar bleibt.','Bevor es zurück nach Notion geht, sortierst du die fertigen Cover in Ordner auf dem Rechner. So findest du später jedes Bild wieder.','Aus dem Ordner lädst du das Cover in den passenden Eintrag hoch. Notion legt es als Titelbild auf die Kachel der Galerie.','Zum Schluss stellst du die Ansicht auf Galerie. Die Kachel zeigt ihr fertiges Cover in der Kartenvorschau, der Eintrag ist am Ziel.'];
   var PC_STEPS=[
     {lbl:'Datenbank',  med:'<img class="pc-logo" src="'+LG_NOTION+'" alt="Notion">', pill:'<img src="'+LG_NOTION+'" alt=""><span>Notion</span>'},
