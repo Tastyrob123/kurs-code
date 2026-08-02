@@ -7680,7 +7680,7 @@ window.__tsMO = function(cb){
         '<div class="ivr-txt">'+
           '<h2 class="ivr-h">Die fertige <span class="g">Monats-Tabelle.</span></h2>'+
           '<p>So sieht die Inventurliste 01-2026 aus, wenn alles steht: Die Artikel und Preise kommen über die Verknüpfung aus deiner Inventurliste, du füllst beim Zählen nur noch die drei Gezählt-Spalten, und die Summe rechnet jede Zeile sofort in Euro um.</p>'+
-          '<p>Sobald der Fix-Wert Füller gelaufen ist, steht der Monat fest. Du legst die Tabellen der Monate nebeneinander, siehst auf einen Blick, wo dein Bestand aus der Reihe tanzt — und dein Wareneinsatz rechnet mit festen Monatswerten statt mit beweglichen Zahlen.</p>'+
+          '<p>Sobald du den Monat eingefroren hast, steht er fest. Du legst die Tabellen der Monate nebeneinander, siehst auf einen Blick, wo dein Bestand aus der Reihe tanzt — und dein Wareneinsatz rechnet mit festen Monatswerten statt mit beweglichen Zahlen.</p>'+
         '</div>'+
       '</div></div>';
     return sec;
@@ -7755,6 +7755,230 @@ window.__tsMO = function(cb){
     var sec=build();
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
     sec.querySelector('.ivr-tile').addEventListener('click',open);
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  new MutationObserver(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* ============================================================
+   inventurliste — #tsinvaus "Aufbau der Seite Inventur Auswertungen"
+   (Robert-Auftrag 02.08.2026: Erklaer-Block UNTER dem Ergebnis-Blick).
+   Erklaert die zweite Seite des Inventur-Systems in 3 Stufen, in der
+   Reihenfolge, in der die echte Notion-Seite aufgebaut ist:
+     01 Monats-Tabellen (eine je Monat, eingefroren)
+     02 Monatsblock oben auf der Seite: 4 Kategorie-Ringe
+     03 Jahres-Register unten: eine Zeile je Monat + Gesamt-Formel
+   ALLE Zahlen/Spalten/Optionen stammen aus dem CDP-Sniff der echten
+   Seite (Collection e2759cdc-… "Inventur Monatsabschlüsse", 11 Props,
+   Gesamt = Food+Beverage+Packaging+Hygiene, Status = Gefreezed/
+   Korrigiert/Test) und den Live-Diagrammwerten Januar 2026
+   (Food 5.987 / Beverage 1.171 / Packaging 3.015 / Hygiene 548 =
+   10.721 €) — nichts geschaetzt.
+   Kategorie-Farben bewusst in der Beige-Familie (Anteil = Helligkeit),
+   keine neue Farbe. Scroll-Reveal gestaffelt, Count-up mit Garantie-
+   Endwert, Ringe per conic-gradient. Sitzt zwischen #tsinvres und
+   der ausgeblendeten Alt-Sektion.
+   ============================================================ */
+(function(){
+  if(window.__tsinvaus) return; window.__tsinvaus=true;
+  function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var MONATE=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  /* Live-Werte der echten Auswertungs-Seite, Januar 2026 */
+  var KAT=[
+    {k:'Food',      v:5987, c:'#c7b489'},
+    {k:'Packaging', v:3015, c:'#d8c9ab'},
+    {k:'Beverage',  v:1171, c:'#efe6d2'},
+    {k:'Hygiene',   v:548,  c:'rgba(255,255,255,.5)'}
+  ];
+  var GESAMT=10721;
+  /* Die 11 Spalten der DB "Inventur Monatsabschlüsse" (Sniff-Reihenfolge sinnvoll sortiert) */
+  var COLS=[
+    {n:'Monat',         t:'Titel'},
+    {n:'Abschlussdatum',t:'Datum'},
+    {n:'Food',          t:'Zahl · €'},
+    {n:'Beverage',      t:'Zahl · €'},
+    {n:'Packaging',     t:'Zahl · €'},
+    {n:'Hygiene',       t:'Zahl · €'},
+    {n:'Gesamt',        t:'Formel'},
+    {n:'Status',        t:'Auswählen'},
+    {n:'Quelle',        t:'URL'},
+    {n:'Notiz',         t:'Text'},
+    {n:'Erstellt am',   t:'Erstellt-Zeit'}
+  ];
+
+  var CSS=`
+  /* --p muss registriert sein, sonst ist der Ring-Fuellstand nicht animierbar (springt) */
+  @property --p{syntax:'<number>';inherits:false;initial-value:0}
+  #tsinvaus{--g:199,180,137;width:100%;margin:10px 0 64px;font-family:${SANS};color:#fff}
+  #tsinvaus *{box-sizing:border-box}
+  #tsinvaus .iva-inner{width:min(1000px,94vw);margin:0 auto}
+  #tsinvaus .iva-head{text-align:center;margin-bottom:34px}
+  #tsinvaus .iva-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.06em;color:#c7b489;margin-bottom:12px}
+  #tsinvaus .iva-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(var(--g),.7)}
+  #tsinvaus .iva-h{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",${SANS};font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.14;letter-spacing:-.015em;color:#fff}
+  #tsinvaus .iva-h .g{color:#c7b489}
+  #tsinvaus .iva-lead{max-width:720px;margin:0 auto;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+
+  #tsinvaus .iva-step{position:relative;border-radius:18px;padding:26px clamp(20px,3vw,32px) 28px;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 58%,rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 20px 50px -34px rgba(0,0,0,.85);
+    opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .8s cubic-bezier(.16,1,.3,1),border-color .4s ease}
+  #tsinvaus.in .iva-step{opacity:1;transform:none}
+  #tsinvaus.in .iva-step:nth-of-type(3){transition-delay:.14s}
+  #tsinvaus.in .iva-step:nth-of-type(5){transition-delay:.28s}
+  #tsinvaus .iva-step:hover{border-color:rgba(var(--g),.34)}
+  #tsinvaus .iva-step::after{content:"";position:absolute;top:0;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--g),.36),transparent)}
+  #tsinvaus .iva-tag{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+  #tsinvaus .iva-num{font-size:.62rem;font-weight:600;letter-spacing:.16em;color:#c7b489;border:1px solid rgba(var(--g),.35);border-radius:999px;padding:4px 10px}
+  #tsinvaus .iva-tt{font-family:"Lineal Web","Lineal TS",${SANS};font-weight:600;font-size:clamp(1.05rem,2vw,1.28rem);letter-spacing:-.01em;color:#fff}
+  #tsinvaus .iva-note{margin:14px 0 0;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
+
+  /* Konnektor */
+  #tsinvaus .iva-link{display:flex;flex-direction:column;align-items:center;gap:0;height:58px;opacity:0;transition:opacity .6s ease .2s}
+  #tsinvaus.in .iva-link{opacity:1}
+  #tsinvaus .iva-link i{display:block;width:1px;flex:1 1 auto;background:linear-gradient(180deg,rgba(var(--g),0),rgba(var(--g),.55),rgba(var(--g),0))}
+  #tsinvaus .iva-link span{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--g),.85);padding:5px 12px;border-radius:999px;background:rgba(199,180,137,.08);border:1px solid rgba(var(--g),.24);white-space:nowrap}
+
+  /* 01 — Monats-Chips */
+  #tsinvaus .iva-months{display:flex;flex-wrap:wrap;gap:8px}
+  #tsinvaus .iva-m{flex:1 1 62px;min-width:62px;text-align:center;padding:12px 6px;border-radius:11px;border:1px dashed rgba(255,255,255,.13);color:rgba(255,255,255,.4);font-size:12.5px;font-weight:600;letter-spacing:.02em;transition:all .5s cubic-bezier(.16,1,.3,1)}
+  #tsinvaus .iva-m.on{border-style:solid;border-color:rgba(var(--g),.5);background:rgba(199,180,137,.10);color:#fff;box-shadow:0 0 22px rgba(var(--g),.12)}
+  #tsinvaus .iva-m small{display:block;margin-top:3px;font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--g),.8)}
+  #tsinvaus .iva-m:not(.on) small{color:rgba(255,255,255,.22)}
+
+  /* 02 — Ringe */
+  #tsinvaus .iva-rings{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  #tsinvaus .iva-ring{display:flex;flex-direction:column;align-items:center;gap:10px}
+  #tsinvaus .iva-donut{position:relative;width:100%;max-width:118px;aspect-ratio:1;border-radius:50%;
+    background:conic-gradient(var(--c) calc(var(--p) * 1%), rgba(255,255,255,.06) 0);
+    transition:--p 1.1s cubic-bezier(.16,1,.3,1)}
+  #tsinvaus .iva-donut::after{content:"";position:absolute;inset:13px;border-radius:50%;background:#080a11;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+  #tsinvaus .iva-donut b{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:#fff;font-variant-numeric:tabular-nums}
+  #tsinvaus .iva-rk{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.86)}
+  #tsinvaus .iva-rp{font-size:10.5px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.62)}
+
+  /* 03 — Jahres-Register */
+  #tsinvaus .iva-tblwrap{overflow-x:auto;border-radius:13px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.02)}
+  #tsinvaus table.iva-tbl{width:100%;min-width:620px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  #tsinvaus .iva-tbl th{padding:11px 13px;text-align:right;font-size:9.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.08);white-space:nowrap}
+  #tsinvaus .iva-tbl th:first-child,#tsinvaus .iva-tbl td:first-child{text-align:left}
+  #tsinvaus .iva-tbl td{padding:13px;text-align:right;font-size:13.5px;color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+  #tsinvaus .iva-tbl tr:last-child td{border-bottom:0}
+  #tsinvaus .iva-tbl td.n{font-weight:600;color:#fff}
+  #tsinvaus .iva-tbl td.sum{font-weight:700;color:#c7b489}
+  #tsinvaus .iva-tbl td.ghost{color:rgba(255,255,255,.26)}
+  #tsinvaus .iva-pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;letter-spacing:.04em;background:rgba(143,203,170,.14);color:#8FCBAA;border:1px solid rgba(143,203,170,.3)}
+  #tsinvaus .iva-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--c)}
+
+  /* Spalten-Legende */
+  #tsinvaus .iva-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px;margin-top:16px}
+  #tsinvaus .iva-col{padding:11px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+  #tsinvaus .iva-col b{display:block;font-size:12.5px;font-weight:600;color:#fff}
+  #tsinvaus .iva-col span{display:block;margin-top:3px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--g),.75)}
+
+  @media(max-width:760px){
+    #tsinvaus .iva-rings{grid-template-columns:repeat(2,1fr);gap:22px}
+    #tsinvaus .iva-m{flex:1 1 52px;min-width:52px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #tsinvaus .iva-step,#tsinvaus.in .iva-step,#tsinvaus .iva-link{opacity:1;transform:none;transition:none}
+    #tsinvaus .iva-donut{transition:none}
+  }`;
+
+  function eur(n){ return n.toLocaleString('de-DE')+' €'; }
+
+  function build(){
+    var sec=document.createElement('section'); sec.id='tsinvaus';
+    var months=MONATE.map(function(m,i){
+      var on=i<2;
+      return '<div class="iva-m'+(on?' on':'')+'">'+m+'<small>'+(on?(i===0?'fix':'offen'):'—')+'</small></div>';
+    }).join('');
+    var rings=KAT.map(function(k){
+      var p=Math.round(k.v/GESAMT*1000)/10;
+      return '<div class="iva-ring"><div class="iva-donut" style="--c:'+k.c+';--p:0" data-p="'+p+'"><b data-v="'+k.v+'">0 €</b></div>'+
+             '<div class="iva-rk">'+k.k+'</div><div class="iva-rp">'+String(p).replace('.',',')+' %</div></div>';
+    }).join('');
+    var cols=COLS.map(function(c){ return '<div class="iva-col"><b>'+c.n+'</b><span>'+c.t+'</span></div>'; }).join('');
+    sec.innerHTML=
+    '<div class="iva-inner">'+
+      '<div class="iva-head">'+
+        '<span class="iva-eyebrow">Die zweite Seite · Inventur Auswertungen</span>'+
+        '<h2 class="iva-h">Zwölf Monate, <span class="g">eine Kurve.</span></h2>'+
+        '<p class="iva-lead">Die Monatstabellen zählen, die Auswertung sammelt ein. Jeder eingefrorene Monat wird hier zu genau einer Zeile, und aus den Zeilen entsteht der Verlauf, an dem du dein Jahr abliest. So ist die Seite aufgebaut.</p>'+
+      '</div>'+
+      '<div class="iva-step">'+
+        '<div class="iva-tag"><span class="iva-num">01</span><span class="iva-tt">Die Monats-Tabellen</span></div>'+
+        '<div class="iva-months">'+months+'</div>'+
+        '<p class="iva-note">Für jeden Monat eine eigene Tabelle, alle nach demselben Bauplan. Gezählt wird dort, gerechnet auch — und sobald du den Monat eingefroren hast, ändert sich an seinen Zahlen nichts mehr.</p>'+
+      '</div>'+
+      '<div class="iva-link"><i></i><span>eingefrorene Werte</span><i></i></div>'+
+      '<div class="iva-step">'+
+        '<div class="iva-tag"><span class="iva-num">02</span><span class="iva-tt">Der Monatsblock</span></div>'+
+        '<div class="iva-rings">'+rings+'</div>'+
+        '<p class="iva-note">Oben auf der Auswertungsseite liegt je Monat ein Block aus vier Diagrammen — eines pro Warengruppe. Du siehst sofort, wo dein Kapital liegt: im Januar stecken über die Hälfte des Bestands im Food, während Hygiene kaum ins Gewicht fällt.</p>'+
+      '</div>'+
+      '<div class="iva-link"><i></i><span>eine Zeile je Monat</span><i></i></div>'+
+      '<div class="iva-step">'+
+        '<div class="iva-tag"><span class="iva-num">03</span><span class="iva-tt">Das Jahres-Register</span></div>'+
+        '<div class="iva-tblwrap"><table class="iva-tbl">'+
+          '<tr><th>Monat</th><th>Food</th><th>Beverage</th><th>Packaging</th><th>Hygiene</th><th>Gesamt</th><th>Status</th></tr>'+
+          '<tr><td class="n">01.2026</td>'+
+            '<td data-v="5987">0 €</td><td data-v="1171">0 €</td><td data-v="3015">0 €</td><td data-v="548">0 €</td>'+
+            '<td class="sum" data-v="10721">0 €</td><td><span class="iva-pill">Gefreezed</span></td></tr>'+
+          '<tr><td class="n">02.2026</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">—</td><td class="ghost">offen</td></tr>'+
+        '</table></div>'+
+        '<p class="iva-note">Darunter liegt die Datenbank &bdquo;Inventur Monatsabschlüsse&ldquo;. Die vier Warengruppen-Summen trägst du aus dem eingefrorenen Monat ein, Gesamt rechnet sich daraus selbst. Status hält fest, ob der Monat wirklich abgeschlossen ist, und in Quelle hinterlegst du den Link zur Monatstabelle — dann kommst du von jeder Jahreszahl mit einem Klick zurück zu den Artikeln, aus denen sie entstanden ist.</p>'+
+        '<div class="iva-cols">'+cols+'</div>'+
+      '</div>'+
+    '</div>';
+    return sec;
+  }
+
+  function animate(sec){
+    if(sec.__an) return; sec.__an=true;
+    sec.classList.add('in');
+    if(reduced){
+      sec.querySelectorAll('[data-v]').forEach(function(el){ el.textContent=eur(+el.getAttribute('data-v')); });
+      sec.querySelectorAll('.iva-donut').forEach(function(d){ d.style.setProperty('--p', d.getAttribute('data-p')); });
+      return;
+    }
+    /* Ringe fuellen */
+    setTimeout(function(){
+      sec.querySelectorAll('.iva-donut').forEach(function(d,i){
+        setTimeout(function(){ d.style.setProperty('--p', d.getAttribute('data-p')); }, i*90);
+      });
+    },260);
+    /* Count-up mit garantiertem Endwert */
+    sec.querySelectorAll('[data-v]').forEach(function(el,i){
+      var target=+el.getAttribute('data-v'), dur=1100, t0=null;
+      setTimeout(function(){
+        function step(ts){
+          if(!t0) t0=ts;
+          var t=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-t,3);
+          el.textContent=eur(Math.round(target*e));
+          if(t<1) requestAnimationFrame(step); else el.textContent=eur(target);
+        }
+        requestAnimationFrame(step);
+      }, 260+i*70);
+    });
+  }
+
+  function mount(){
+    if(!on()){ var e=document.getElementById('tsinvaus'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
+    if(document.getElementById('tsinvaus')) return;
+    var anchor=document.getElementById('tsinvres');
+    if(!anchor||!anchor.parentNode) return;
+    if(!document.getElementById('tsinvaus-css')){ var st=document.createElement('style'); st.id='tsinvaus-css'; st.textContent=CSS; document.head.appendChild(st); }
+    var sec=build();
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    var io=new IntersectionObserver(function(en){ if(en[0].isIntersecting){ animate(sec); io.disconnect(); } },{threshold:.18});
+    io.observe(sec);
   }
   mount();
   document.addEventListener('DOMContentLoaded', mount);
@@ -10166,9 +10390,9 @@ var TSISL_TEAM_ONB_V2=[
     {title:'22. Ansicht einrichten',
      desc:'Ordne die Spalten so an, wie du sie beim Zählen brauchst: die drei Gezählt -Spalten und Summe Monat 01.26',
      html:'<p class="notion-text">Ordne die Spalten so an, wie du sie beim Zählen brauchst: die drei <b>Gezählt</b>-Spalten und <b>Summe Monat 01.26</b> nach links, daneben Name, Herstellerbezeichnung und Menge / Unit, die Preise dahinter.</p><p class="notion-text">Alles, was beim Zählen nicht hilft, blendest du aus — bspw. Notizen oder die Verknüpfung selbst. Die Daten bleiben erhalten, nur die Ansicht wird ruhig.</p><p class="notion-text">Gruppiere die Tabelle nach <b>Lagerort</b>, und du bekommst pro Regal einen eigenen Abschnitt.</p>'},
-    {title:'23. Autofill-Agent : Fix-Wert Füller',
-     desc:'Zum Schluss richtest du den Notion-AI-Agenten ein, der deine Januar-Werte einfriert. → Öffne die Datenban',
-     html:'<p class="notion-text">Zum Schluss richtest du den Notion-AI-Agenten ein, der deine Januar-Werte einfriert.</p><p class="notion-text">→ Öffne die Datenbank Inventurliste 01-2026</p><p class="notion-text">→ Erstelle einen neuen <b>Autofill-Agenten</b> und nenne ihn &bdquo;Inventur 01.26 Fix-Wert Füller&ldquo;</p><p class="notion-text">→ <b>Zielfeld :</b> Wert 01.26 (fix)</p><p class="notion-text">→ <b>Aufgabe :</b> &bdquo;Kopiere pro Zeile den Wert aus ‚Summe Monat 01.26‘ exakt in ‚Wert 01.26 (fix)‘ und ändere sonst nichts.&ldquo;</p><p class="notion-text">Teste ihn erst an 2&ndash;3 Zeilen, dann lässt du ihn über die ganze Liste laufen. Prüfe danach kurz: keine leeren Fix-Werte, keine auffälligen 0,00-€-Zeilen.</p><p class="notion-text">Ab jetzt liest deine Auswertung nur noch <b>Wert 01.26 (fix)</b> — der Januar bleibt Januar, egal was sich später an Preisen oder Verknüpfungen ändert. Und der Endbestand Januar ist zugleich dein Anfangsbestand Februar für den Wareneinsatz.</p>'}
+    {title:'23. Monat einfrieren',
+     desc:'Eigenschaft : Schaltfläche → Name der Spalte : Monat einfrieren → Aktion : Seiten bearbeiten in → Inventur',
+     html:'<p class="notion-text">→ <b>Eigenschaft :</b> Schaltfläche</p><p class="notion-text">→ <b>Name der Spalte :</b> Monat einfrieren</p><p class="notion-text">→ <b>Aktion :</b> Seiten bearbeiten in → Inventurliste 01-2026</p><p class="notion-text">→ <b>Eigenschaft bearbeiten :</b> Wert 01.26 (fix)</p><p class="notion-text">→ <b>Wert :</b> im Wertfeld auf <b>∑</b> klicken und diese Formel eintragen :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;Summe Monat 01.26&quot;)</div><p class="notion-text">Ein Klick auf die Schaltfläche schreibt den gerechneten Wert in das feste Feld. Wenn du am Monatsende alles gezählt hast, klickst du dich einmal durch die Liste — oder du markierst alle Zeilen und lässt den Button über die Auswahl laufen.</p><p class="notion-text">Prüfe danach kurz: keine leeren Fix-Werte, keine auffälligen 0,00-€-Zeilen.</p><p class="notion-text">Ab jetzt liest deine Auswertung nur noch <b>Wert 01.26 (fix)</b> — der Januar bleibt Januar, egal was sich später an Preisen oder Verknüpfungen ändert. Und der Endbestand Januar ist zugleich dein Anfangsbestand Februar für den Wareneinsatz.</p><p class="notion-text">&nbsp;</p><p class="notion-text"><b>Warum kein KI-Agent?</b> Werte von A nach B kopieren ist reine Rechenarbeit — da gibt es nichts zu verstehen. Notions KI-Autofill wird immer <b>auf der Spalte selbst</b> eingeschaltet, die gefüllt werden soll, und verbraucht pro Zeile Guthaben. Die Schaltfläche macht dasselbe exakt, sofort und umsonst. Wer es ganz ohne Klick will, baut dieselbe Aktion als <b>Automatisierung</b> mit dem Auslöser &bdquo;Jeden Monat&ldquo;.</p>'}
   ];
 
   var PAGES=[
