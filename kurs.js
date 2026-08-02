@@ -22,7 +22,7 @@
 (function(){
   if(window.__tsVeil) return; window.__tsVeil=true;
   function reveal(){ document.documentElement.classList.add('ts-reveal'); }
-  function go(){ setTimeout(reveal, 350); }
+  function go(){ setTimeout(reveal, 550); }
   if(document.readyState!=='loading') go(); else document.addEventListener('DOMContentLoaded', go);
   window.addEventListener('load', function(){ setTimeout(reveal, 250); });
   document.addEventListener('visibilitychange', function(){ if(!document.hidden) setTimeout(reveal, 400); });

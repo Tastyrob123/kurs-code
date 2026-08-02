@@ -44,6 +44,18 @@ main.page__zutatenliste > .notion-root { opacity:0; animation:tsVeilFail .4s 2.5
 html.ts-reveal main.super-content > .notion-root { opacity:1 !important; animation:none !important; }
 @keyframes tsVeilFail { to { opacity:1; } }
 
+/* TS Video-Veil (Ergaenzung 02.08.2026): Die drei Roh-Video-Bloecke, die
+   von den MacBook-Cover-Modulen (.tsmac) ersetzt werden, sind bis zum
+   Modul-Mount unsichtbar -- sonst blitzt das nackte Video kurz auf.
+   Failsafe: erscheint nach 4 s von selbst, falls das Modul nie mountet.
+   Sobald das Modul den Marker .tsmac-host setzt, uebernimmt dessen
+   display:none-Regel; die Failsafe-Animation wird dann abgeschaltet. */
+main.page__rezepturen #block-39cb9546553480698e45d99c0d1cb9d5 video,
+main.page__lieferpartner-ansprechpartner-lieferantenvertrge #block-39ab954655348084b1bee141678f6bcf video,
+main.page__gemeinkosten-mitarbeiterlhne #block-39cb9546553480c8a4d0e1fc54cfcb87 video { opacity:0; animation:tsVidFail .4s 4s ease forwards; }
+.notion-video.tsmac-host video { animation:none !important; }
+@keyframes tsVidFail { to { opacity:1; } }
+
 /* ============================================================
    TASTY STUDIOS · Gastronomie AI MasterClass
    kurs.css — ausgelagerter Design-Code (super.so → extern)
