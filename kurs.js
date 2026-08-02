@@ -177,7 +177,51 @@ window.__tsMO = function(cb){
     });
   }
 
-  function apply(){ wrapModulNum(); wrapLektionName(); }
+
+  /* Modul-Startseite aus der Seitenleiste erreichbar machen (Robert 02.08.2026).
+     Die Gruppen-Kopfzeile ist bei super.so reines Aufklapp-Element ohne Link — man kam
+     nie auf die Modul-Uebersicht. Loesung: NUR der Titel-TEXT wird ein Link (inline,
+     also exakt so breit wie die Schrift). Der restliche Balken und der Pfeil bleiben
+     unveraendert Aufklapp-Flaeche, deshalb stopPropagation nur auf dem <a> selbst.
+     Zuordnung ueber die Modulnummer im Titel; unbekannte Nummer -> kein Link. */
+  var MODUL_SLUG = {
+    '0':'/modul-0-einleitung-was-dich-erwartet',
+    '1':'/modul-1-notion-grundlagen-3-lernpfade',
+    '2':'/modul-2-das-notion-ai-backoffice-system',
+    '3':'/modul-3-dein-persnlicher-workspace',
+    '4':'/modul-4-claude-claude-code',
+    '5':'/modul-5-claude-code-notion',
+    '6':'/modul-6-weitere-tools-projektmanagement'
+  };
+  function linkModulTitel(){
+    document.querySelectorAll('.super-navigation-menu__list-header .super-navigation-menu__item-title').forEach(function(el){
+      if(el.querySelector('a.ts-modlink')) return;
+      var num=(el.textContent.match(/\d+/)||[])[0];
+      var href=MODUL_SLUG[num];
+      if(!href) return;
+      var a=document.createElement('a');
+      a.className='ts-modlink'; a.href=href;
+      a.setAttribute('title','Zur Modul-Uebersicht');
+      while(el.firstChild) a.appendChild(el.firstChild);
+      el.appendChild(a);
+      /* Klick auf den Text navigiert und klappt NICHT auf/zu. */
+      a.addEventListener('click', function(e){ e.stopPropagation(); });
+      a.addEventListener('pointerdown', function(e){ e.stopPropagation(); });
+      a.addEventListener('mousedown', function(e){ e.stopPropagation(); });
+    });
+  }
+  var LINKCSS='.super-navigation-menu__list-header .ts-modlink{display:inline;color:inherit;text-decoration:none;'
+    +'border-bottom:1px solid transparent;transition:border-color .25s,color .25s}'
+    +'.super-navigation-menu__list-header .ts-modlink:hover{border-bottom-color:#c7b489}'
+    +'.super-navigation-menu__list-header .ts-modlink:hover,.super-navigation-menu__list-header .ts-modlink:hover *{color:#c7b489}'
+    +'.super-navigation-menu__list-header .ts-modlink:hover .ts-modul-num{color:#c7b489}';
+  function injectLinkCSS(){
+    if(document.getElementById('ts-modlink-css')) return;
+    var st=document.createElement('style'); st.id='ts-modlink-css'; st.textContent=LINKCSS;
+    document.head.appendChild(st);
+  }
+
+  function apply(){ wrapModulNum(); wrapLektionName(); injectLinkCSS(); linkModulTitel(); }
 
   apply();
   document.addEventListener('DOMContentLoaded', apply);
