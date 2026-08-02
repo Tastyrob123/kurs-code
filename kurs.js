@@ -4590,7 +4590,7 @@
    Extern gehostet, damit super.so-Code klein bleibt. Läuft nur auf /mehrwert-zielbild. */
 (function(){
   var POSTER="https://tastyrob123.github.io/kurs-code/assets/qryb5j.png";
-  (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
+  (function(){ if(!/\/mehrwert-zielbild\/?$/.test(location.pathname)) return; var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var CSS=[
     '.page__mehrwert-zielbild .notion-column-list:has(h1.notion-heading) > .notion-column:not(:has(h1.notion-heading)){display:flex!important;}',
     '@media (min-width:768px){',
@@ -5135,7 +5135,7 @@
     teig:"https://tastyrob123.github.io/kurs-code/assets/wn29tf.png",
     pizza:"https://tastyrob123.github.io/kurs-code/assets/0uk9xg.png"
   };
-  (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
+  (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
   function card(n, img, alt, type, name, tag, tagCls){
     return '<div class="tsalg-card" data-n="'+n+'">'+
       '<div class="tc-img"><img src="'+img+'" alt="'+alt+'" loading="eager"></div>'+
@@ -5221,7 +5221,7 @@
 (function(){
   if(window.__tsalgpc) return; window.__tsalgpc=true;
   var POSTER="https://tastyrob123.github.io/kurs-code/assets/8xy3px.png";
-  (function(){ var p=new Image(); p.src=POSTER; })();
+  (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; var p=new Image(); p.src=POSTER; })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
 
@@ -5322,7 +5322,7 @@
   var POSTER="https://tastyrob123.github.io/kurs-code/assets/z0dt0j.png";
   var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
   var SHOT="https://tastyrob123.github.io/kurs-code/assets/1xvr23.webp";
-  (function(){ [POSTER,FRAME,SHOT].forEach(function(u){ var p=new Image(); p.src=u; }); })();
+  (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; [POSTER,FRAME,SHOT].forEach(function(u){ var p=new Image(); p.src=u; }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5486,7 +5486,7 @@
     kugeldeckel:B+'kugeldeckel-cut.webp',serviette:B+'serviette-cut.webp',halter:B+'halter-cut.webp',
     strohhalm:B+'strohhalm-cut.webp',drink:B+'drink-cut.webp',
     karton_zu:B+'karton-zu-cut.webp',karton_offen:B+'karton-offen-cut.webp',glasph:B+'glas-cut.webp'};
-  (function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
+  (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } })();
 
   /* DB-Werte je Kanal = die von Robert vorgegebenen Beispielwerte (SSOT kurs.js).
      Inhouse = Basiswert ohne Packaging (identisch mit dem früheren "vorher"-Wert);
@@ -5797,7 +5797,7 @@
   var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen DB Packaging (Robert) */
   var SHOT=null;     /* <- langer Ganzseiten-Screenshot der DB Packaging (Robert)  */
   var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.png";
-  (function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); })();
+  (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
   var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
   var reduced=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -7194,7 +7194,7 @@
 (function(){
   if(window.__tsmacInv) return; window.__tsmacInv=true;
   var POSTER="https://tastyrob123.github.io/kurs-code/assets/tqee6z.png";
-  (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
+  (function(){ if(!/\/inventurliste\/?$/.test(location.pathname)) return; var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var CSS=[
     '.page__inventurliste .notion-column-list:has(h1.notion-heading) > .notion-column:not(:has(h1.notion-heading)){display:flex!important;}',
     '@media (min-width:768px){',
@@ -7271,7 +7271,7 @@
 (function(){
   if(window.__tsmacRez) return; window.__tsmacRez=true;
   var POSTER="https://tastyrob123.github.io/kurs/img/rezepturen-mac/pc.png";
-  (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
+  (function(){ if(!/\/rezepturen\/?$/.test(location.pathname)) return; var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var VID='#block-39cb9546553480698e45d99c0d1cb9d5';
   var PHRASE='Nährstoffe und Allergene';
   var CSS=[
@@ -10595,7 +10595,7 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   if(window.__tsmacLief) return; window.__tsmacLief=true;
   var POSTER="https://tastyrob123.github.io/kurs-code/assets/yznugp.png";
-  (function(){ var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
+  (function(){ if(!/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/.test(location.pathname)) return; var pre=new Image(); pre.src=POSTER; })(); // Poster vorladen -> kein Leer-Blitz
   var PG='.page__lieferpartner-ansprechpartner-lieferantenvertrge';
   var VID='#block-39ab954655348084b1bee141678f6bcf';
   var CSS=[
@@ -12685,7 +12685,7 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   if(window.__tsmacGk) return; window.__tsmacGk=true;
   var POSTER="https://tastyrob123.github.io/kurs/img/gemeinkosten-mac/pc.png";
-  (function(){ var pre=new Image(); pre.src=POSTER; })();
+  (function(){ if(!/\/gemeinkosten-mitarbeiterlhne\/?$/.test(location.pathname)) return; var pre=new Image(); pre.src=POSTER; })();
   var VID='#block-39cb9546553480c8a4d0e1fc54cfcb87';
   var PHRASE='Wir bauen zwei Datenbanken';
   var CSS=[
