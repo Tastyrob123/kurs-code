@@ -25095,17 +25095,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l12-layout-medien-strukturierungs-tricks">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -25501,17 +25506,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l13-einfhrung-in-datenbanken">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -25965,17 +25975,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l14-relationen-rollups">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -26420,17 +26435,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l15-formeln-20-logik-bausteine">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -26948,17 +26968,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l16-ansichten-self-referencing-filter">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -27472,17 +27497,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l17-native-automations-buttons">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -27923,17 +27953,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l18-system-architektur-dashboard-design">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -28397,17 +28432,22 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
-    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/mehrwert-zielbild">Nächste Lektion</a>';
-    root.parentNode.insertBefore(nextWrap, root.nextSibling);
+    root.appendChild(nextWrap);
 
     function dedupe(){
+      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
+         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
+         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
+         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
+         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
+         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
+         einen abgehaengten Knoten zeigt. */
+      var host=document.getElementById(root.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
-         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
-      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
