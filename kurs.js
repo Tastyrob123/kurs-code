@@ -1312,7 +1312,7 @@
   #tskmemp .emp-text{position:relative;z-index:2}
   #tskmemp .emp-h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
   #tskmemp .emp-h .eg{color:#c7b489}
-  #tskmemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  #tskmemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
   #tskmemp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
   #tskmemp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
   #tskmemp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
@@ -3135,14 +3135,14 @@
   #tsm2hub *{box-sizing:border-box}
 
   #tsm2hub .m2h-intro{width:min(820px,92vw);margin:0 auto 34px;text-align:center}
-  #tsm2hub .m2h-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:rgba(255,255,255,.78)}
+  #tsm2hub .m2h-intro p{margin:0;font-size:1.18rem;line-height:1.72;color:rgba(255,255,255,.86)}
 
   #tsm2hub .m2h-head{max-width:860px;margin:0 auto 34px;padding:0 24px;text-align:center}
   #tsm2hub .m2h-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 inherit;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
   #tsm2hub .m2h-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(${GLOW},.7)}
   #tsm2hub .m2h-title{font-family:"Lineal TS","Lineal Web",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px;color:#fff}
   #tsm2hub .m2h-title span{color:#c7b489}
-  #tsm2hub .m2h-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.78);margin:0}
+  #tsm2hub .m2h-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86);margin:0}
 
   #tsm2hub .m2h-rail{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 26px;padding:0 20px}
   #tsm2hub .m2h-step{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.5);cursor:pointer;transition:color .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
@@ -3198,7 +3198,7 @@
   #tsm2hub .m2h-wrap.playing .m2h-core.lit .m2h-core-in{opacity:1;transform:none;border-color:rgba(${GLOW},.42)}
   #tsm2hub .m2h-core.pulse .m2h-core-in{animation:m2hpulse 1.6s cubic-bezier(.16,1,.3,1)}
 
-  #tsm2hub .m2h-cap{min-height:26px;margin:24px auto 0;text-align:center;font-size:14.5px;color:rgba(255,255,255,.72)}
+  #tsm2hub .m2h-cap{min-height:26px;margin:24px auto 0;text-align:center;font-size:14.5px;color:rgba(255,255,255,.86)}
   #tsm2hub .m2h-cap b{font-weight:600;color:#c7b489;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-right:11px;vertical-align:1px}
   #tsm2hub .m2h-note{max-width:680px;margin:12px auto 0;text-align:center;font-size:12px;line-height:1.55;color:rgba(255,255,255,.34)}
   #tsm2hub .m2h-foot{display:flex;justify-content:center;margin-top:24px}
@@ -3647,7 +3647,7 @@
     #tsEcoRoot .net-header { text-align: center; margin-bottom: 8px; }
     #tsEcoRoot .net-title { font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif; font-size: clamp(30px,4.4vw,52px); font-weight:600; letter-spacing:-.03em; color:#fff; line-height:1.1; margin:0 0 12px; }
     #tsEcoRoot .net-title span { color:#c7b489; }
-    #tsEcoRoot .net-sub { font-size:17px; color:rgba(255,255,255,.42); max-width:560px; margin:0 auto; line-height:1.65; }
+    #tsEcoRoot .net-sub { font-size:17px; color:rgba(255,255,255,.86); max-width:560px; margin:0 auto; line-height:1.65; }
     #tsEcoRoot .eco-canvas-wrap { position:relative; width:100%; max-width:1100px; margin:8px auto 0; aspect-ratio:1100/560; }  /* ★3 Grafik enger an Header */
     #tsEcoRoot .eco-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; }
     #tsEcoRoot .eco-svg { position:absolute; inset:0; width:100%; height:100%; z-index:1; overflow:visible; pointer-events:none; }
@@ -3684,7 +3684,7 @@
     #tsEcoRoot .net-arg:first-child { padding-left:0; }
     #tsEcoRoot .net-arg:last-child { padding-right:0; }
     #tsEcoRoot .net-arg-title { font-size:18px; font-weight:700; letter-spacing:-.02em; color:#fff; margin-bottom:10px; }
-    #tsEcoRoot .net-arg-text { font-size:15px; color:rgba(255,255,255,.42); line-height:1.65; }
+    #tsEcoRoot .net-arg-text { font-size:15px; color:rgba(255,255,255,.86); line-height:1.65; }
     @media(max-width:900px){
       #tsEcoRoot .eco-canvas-wrap { aspect-ratio:auto; height:520px; overflow-x:auto; overflow-y:hidden; }
       #tsEcoRoot .eco-canvas-wrap > .eco-scroll { min-width:800px; position:relative; height:100%; }
@@ -3994,7 +3994,7 @@
   #tsq .tsq-h{font-size:1.45rem;font-weight:600;letter-spacing:-.015em;line-height:1.12;margin:0 0 18px;transition:color .3s ease}
   #tsq .tsq-h .g{color:#c7b489}
   #tsq a.tsq-card:hover .tsq-h{color:#fff}
-  #tsq .tsq-t{color:rgba(255,255,255,.62);font-size:.9rem;line-height:1.68;margin:0 auto;max-width:36ch}
+  #tsq .tsq-t{color:rgba(255,255,255,.86);font-size:.9rem;line-height:1.68;margin:0 auto;max-width:36ch}
   #tsq .tsq-t b{color:#fff;font-weight:600}
   @keyframes tsq-heartbeat{0%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}18%{box-shadow:0 6px 22px rgba(var(--g),.30),0 0 46px rgba(var(--g),.34)}32%{box-shadow:0 5px 18px rgba(var(--g),.16),0 0 26px rgba(var(--g),.18)}46%{box-shadow:0 6px 20px rgba(var(--g),.26),0 0 40px rgba(var(--g),.28)}72%,100%{box-shadow:0 4px 14px rgba(var(--g),.10),0 0 14px rgba(var(--g),.10)}}
   @media(prefers-reduced-motion:reduce){#tsq .tsq-frame{transition:none}#tsq a.tsq-card:hover .tsq-frame{transform:none;animation:none;box-shadow:0 0 26px rgba(var(--g),.25)}#tsq a.tsq-card:hover .tsq-frame img{transform:none}}
@@ -4028,40 +4028,43 @@
 
 /* ---- */
 
-/* mehrwert-zielbild — Intro über dem 6-Kachel-Raster zentrieren; alles darunter bleibt links wie in Notion */
+/* mehrwert-zielbild — Intro über dem 6-Kachel-Raster zentrieren (volle Inhaltsbreite, nur text-align);
+   alles darunter bleibt links wie in Notion. Selbstheilend via debounced Observer (Muster __tsTone):
+   der alte Einmal-Disconnect verlor die Klassen, sobald React nach der Hydration neu renderte. */
 (function(){
   if(window.__tsMzIntro) return; window.__tsMzIntro = true;
   function tagIntro(){
     var scope = document.querySelector('.page__mehrwert-zielbild');
     var tsq = document.getElementById('tsq');
-    if(!scope || !tsq) return false;
+    if(!scope || !tsq) return;
     scope.querySelectorAll('.notion-text, .notion-heading').forEach(function(b){
       if(tsq.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_PRECEDING) b.classList.add('ts-mz-center');
     });
-    return true;
   }
-  if(tagIntro()) return;
-  var obs = new MutationObserver(function(){ if(tagIntro()) obs.disconnect(); });
-  obs.observe(document.documentElement, {childList:true, subtree:true});
-  setTimeout(function(){ try{ obs.disconnect(); }catch(e){} }, 8000);
+  tagIntro();
+  var _t=null;
+  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; tagIntro(); },200); })
+    .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
 
-/* mehrwert-zielbild — "Das Zielbild: was ein fertiges Gericht dir zeigt."-Absatz (strong):
-   Phrase "was ein fertiges Gericht dir zeigt." in .ts-accent (beige) wrappen; Klasse ts-mwz-goal setzen
-   (groß/mittig/Lineal via kurs.css). Absatz per Text gefunden, nicht per Block-ID (driftsicher).
+/* mehrwert-zielbild — "Das Zielbild: Was ein fertiges Gericht dir zeigt."-Absatz (strong):
+   große mittige Abschnitts-Überschrift (Klasse ts-mwz-goal, Styles in kurs.css), Kern-Phrase
+   "fertiges Gericht" in .ts-accent (beige) — Satzpunkt bleibt weiß, Hero-Farbregel ~2/3 weiß.
+   Absatz per Text gefunden, nicht per Block-ID (driftsicher); der Anker matcht case-tolerant,
+   weil Notion "Was" groß schreibt und der alte exakte Vergleich ("was") deshalb nie griff.
    Selbstheilend (Muster wie toneLastWord/ts-m2-gold): React kann den Span strippen -> nachziehen. */
 (function(){
   if(window.__tsMwzGoal) return; window.__tsMwzGoal = true;
   function on(){ return /\/mehrwert-zielbild\/?$/.test(location.pathname); }
-  var PHRASE='was ein fertiges Gericht dir zeigt.';
-  var FULL='Das Zielbild: '+PHRASE;
+  var PHRASE='fertiges Gericht';
+  var FULL=/^das zielbild:\s*was ein fertiges gericht dir zeigt\.$/;
   function apply(){
     if(!on()) return;
     var scope=document.querySelector('.page__mehrwert-zielbild'); if(!scope) return;
     var el=null, ps=scope.querySelectorAll('.notion-text, p');
-    for(var j=0;j<ps.length;j++){ if((ps[j].textContent||'').trim()===FULL){ el=ps[j]; break; } }
+    for(var j=0;j<ps.length;j++){ if(FULL.test((ps[j].textContent||'').trim().toLowerCase())){ el=ps[j]; break; } }
     if(!el) return;
     el.classList.add('ts-mwz-goal');
     var strong=el.querySelector('strong')||el;
@@ -4069,9 +4072,9 @@
     var w=document.createTreeWalker(strong, NodeFilter.SHOW_TEXT), n;
     while(n=w.nextNode()){
       var i=n.nodeValue.indexOf(PHRASE);
-      if(i>-1){ var PACC=PHRASE.replace(/[.!?…]+$/,'');   /* Satzzeichen bleibt weiss (ausserhalb Span) */
-        var after=n.splitText(i); after.splitText(PACC.length);
-        var span=document.createElement('span'); span.className='ts-accent'; span.textContent=PACC;
+      if(i>-1){
+        var after=n.splitText(i); after.splitText(PHRASE.length);
+        var span=document.createElement('span'); span.className='ts-accent'; span.textContent=PHRASE;
         after.parentNode.replaceChild(span, after); return; }
     }
   }
@@ -4089,14 +4092,12 @@
 
   var LIFT = 28;   // px höher (nur erster Lead-Block; 0 = nicht anheben)
 
+  /* Die vier "Du siehst…"-Texte stehen NICHT mehr hier: sie leben jetzt im
+     Karten-Grid ts-mwz-grid (__tsMwzGrid + kurs.css) und sind dort linksbündig. */
   var CENTER = [
     "Wir starten mit dem Food",
     "Der Core des Systems",
     "Und genau diese drei Stufen rechnet",
-    "Du siehst den Gemeinkostenanteil",
-    "Du siehst die Allergene und die Nährwerte",
-    "Du bekommst Vorschläge für deinen Verkaufspreis",
-    "Du siehst die Zubereitungszeit",
     "Und optional, wenn du es auswählst",
     "Das ist das Ziel",
     "Learnings",
@@ -4145,6 +4146,29 @@
   }
   if (document.readyState === 'complete') boot();
   else window.addEventListener('load', boot);
+})();
+
+/* ---- */
+
+/* mehrwert-zielbild — "Du siehst…"-Vierspalter als Karten-Grid: Klasse ts-mwz-grid auf die
+   Notion-Column-List (Phrase-Anker, driftsicher — Block-IDs driften auf dieser Seite belegt).
+   Styles komplett in kurs.css (Grid, Karten, Nummern-Chips 01–04 per CSS-Counter).
+   Selbstheilend via debounced Observer (Muster __tsTone). */
+(function(){
+  if(window.__tsMwzGrid) return; window.__tsMwzGrid=true;
+  function on(){ return /\/mehrwert-zielbild\/?$/.test(location.pathname); }
+  function apply(){
+    if(!on()) return;
+    var scope=document.querySelector('.page__mehrwert-zielbild'); if(!scope) return;
+    var ls=scope.querySelectorAll('.notion-column-list');
+    for(var i=0;i<ls.length;i++){
+      if((ls[i].textContent||'').indexOf('Du siehst den Gemeinkostenanteil')>-1){ ls[i].classList.add('ts-mwz-grid'); return; }
+    }
+  }
+  apply();
+  var _t=null;
+  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+    .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---- */
@@ -4424,6 +4448,41 @@
   /* dauerhafter, debounced Observer: React kann die H1 spät mounten oder den Span strippen -> immer wieder nachziehen */
   var t=null;
   new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },200); })
+    .observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ---- */
+
+/* Site-weit — Fachkürzel "DB" in Fließtext/Listen beige via .ts-accent (#c7b489).
+   Kursweite Regel (Robert 02.08.2026, Vorbild: Packaging-Absatz "Die DB zieht sich die Preise…").
+   Matcht "DB", "DB 0", "DB IV", "DB I–III", "DB IX – X"; nur ganze Wörter, Satzzeichen bleiben
+   weiß (nie im Span), Komposita wie "DB-Treppe" bleiben unberührt (konservativ, nur Solo-Treffer).
+   Ausgenommen: Überschriften (eigene Toner), Links, Code (.notion-code — Formeln bleiben verbatim),
+   Custom-Module ([id^="ts"]). Selbstheilend + idempotent: Text in bestehenden .ts-accent-Spans
+   wird übersprungen, debounced Observer zieht nach React-Re-Renders nach (Muster __tsTone). */
+(function(){
+  if(window.__tsDbTone) return; window.__tsDbTone=true;
+  var RE=/\bDB(?:\s?(?:0|[IVX]+(?:\s?[–—-]\s?[IVX]+)?))?\b(?![–—-])/;
+  var SKIP='a, code, pre, .notion-code, .ts-accent, [id^="ts"]';
+  function toneEl(el){
+    if(el.closest(SKIP)) return;
+    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),n,hits=[];
+    while(n=w.nextNode()){ if(n.parentElement && !n.parentElement.closest(SKIP) && RE.test(n.nodeValue)) hits.push(n); }
+    hits.forEach(function(node){
+      var m;
+      while(node && node.nodeValue && (m=node.nodeValue.match(RE))){
+        var hit=node.splitText(m.index);            /* node = Text davor, hit = Treffer + Rest */
+        var tail=hit.splitText(m[0].length);        /* hit = nur Treffer, tail = Rest */
+        var span=document.createElement('span'); span.className='ts-accent'; span.textContent=m[0];
+        hit.parentNode.replaceChild(span, hit);
+        node=tail;                                  /* im Rest weitersuchen */
+      }
+    });
+  }
+  function run(){ document.querySelectorAll('.notion-root .notion-text, .notion-root li').forEach(toneEl); }
+  run();
+  var t=null;
+  new MutationObserver(function(){ if(t) return; t=setTimeout(function(){ t=null; run(); },250); })
     .observe(document.documentElement,{childList:true,subtree:true});
 })();
 
@@ -4810,7 +4869,7 @@
   #tsdb .tsdb-row[data-kind="cost"] .tsdb-val{color:rgba(227,37,82,.85);font-weight:600}
   #tsdb .tsdb-row[data-kind="result"] .tsdb-val{color:#d8c9ab}
   #tsdb .tsdb-row[data-kind="final"] .tsdb-val{color:#efe6d2;font-size:15px}
-  #tsdb .tsdb-take{text-align:center;margin:24px auto 0;max-width:560px;font-size:14px;color:rgba(255,255,255,.42);line-height:1.6;opacity:0;transform:translateY(8px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+  #tsdb .tsdb-take{text-align:center;margin:24px auto 0;max-width:560px;font-size:14px;color:rgba(255,255,255,.86);line-height:1.6;opacity:0;transform:translateY(8px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
   #tsdb .tsdb-take.on{opacity:1;transform:none}
   #tsdb .tsdb-take b{color:#d8c9ab;font-weight:700}
   #tsdb .tsdb-replay{display:block;margin:14px auto 0;padding:7px 18px;border:1px solid rgba(216,201,171,.25);border-radius:9999px;background:transparent;color:rgba(216,201,171,.55);font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;opacity:0;transition:opacity .5s ease,color .2s ease,border-color .2s ease}
@@ -6011,7 +6070,7 @@
   #tspkemp .emp-text{position:relative;z-index:2}
   #tspkemp .emp-h{font-family:"Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
   #tspkemp .emp-h .eg{color:#c7b489}
-  #tspkemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.68);margin:0 0 16px}
+  #tspkemp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
   #tspkemp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
   #tspkemp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.62);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
   #tspkemp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
@@ -6248,7 +6307,7 @@
   #tsalgcart .tsac-body::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:0 0 16px 16px;background:linear-gradient(180deg,rgba(${GRN},.12),rgba(${GRN},.22));opacity:0;transition:opacity .55s ease}
   #tsalgcart .tsac-card.in .tsac-body::after{opacity:1}
   #tsalgcart .tsac-name{margin:0 0 6px;font-family:"Lineal TS", var(--font-sans, ${SANS});font-weight:600;font-size:1.02rem;line-height:1.2;color:#fff}
-  #tsalgcart .tsac-desc{margin:0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.52);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #tsalgcart .tsac-desc{margin:0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.86);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #tsalgcart .tsac-val{text-align:right;margin-top:14px;font-size:1rem;font-weight:700;color:#d8c9ab;line-height:1.2}
   #tsalgcart .tsac-card.in .tsac-val{color:#9FD3B9}
 
@@ -6288,11 +6347,11 @@
   #tsac-detail .tsacd-content{flex:1;min-height:0;overflow-y:auto;padding-right:10px;scrollbar-width:thin}
   #tsac-detail .tsacd-content::-webkit-scrollbar{width:7px}
   #tsac-detail .tsacd-content::-webkit-scrollbar-thumb{background:rgba(${GOLD},.22);border-radius:99px}
-  #tsac-detail .tsacd-eig{margin:0 0 18px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.72)}
+  #tsac-detail .tsacd-eig{margin:0 0 18px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.86)}
   #tsac-detail .tsacd-eig .ar{color:#c7b489;margin-right:7px}
   #tsac-detail .tsacd-eig b{color:#fff;font-weight:600}
   #tsac-detail .tsacd-block{margin:0 0 18px}
-  #tsac-detail .tsacd-block > div{margin:0 0 7px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.72)}
+  #tsac-detail .tsacd-block > div{margin:0 0 7px;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.86)}
   #tsac-detail .tsacd-block > div:last-child{margin-bottom:0}
   #tsac-detail .tsacd-block .ar{color:#c7b489;margin-right:7px}
   #tsac-detail .tsacd-block b{color:#fff;font-weight:600}
@@ -7346,6 +7405,47 @@
 })();
 
 /* ============================================================
+   inventurliste — Sektion "Was uns jetzt noch fehlt" AUS
+   (Robert-Entscheid 02.08.2026): Heading + Intro-Absatz +
+   Bullet-Liste + #tslink-Kacheln + "Dazu kommen wir…"-Satz
+   werden nur VERSTECKT (display:none), nicht entfernt —
+   #tsiv-root ankert weiter vor dem Heading-Block, #tsmiss
+   ankert an "Empfehlung zur Anzeige" und beide bleiben live.
+   An dieser Stelle kommt als Ersatz ein neuer tsshop-Warenkorb
+   "Monatliche Inventurliste" (wartet auf Notion-DB-URL+Währung).
+   Phrase-Anker, selbstheilend (Muster __tsTone).
+   ============================================================ */
+(function(){
+  if(window.__tsInvCut) return; window.__tsInvCut=true;
+  function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
+  function injectCSS(){
+    if(document.getElementById('ts-invcut-css')) return;
+    var s=document.createElement('style'); s.id='ts-invcut-css';
+    s.textContent='.ts-invcut-hide{display:none !important}';
+    document.head.appendChild(s);
+  }
+  function findText(sel,re){ var n=document.querySelectorAll(sel); for(var i=0;i<n.length;i++){ if(re.test(n[i].textContent||'')) return n[i]; } return null; }
+  /* WICHTIG: nie zum Block-Wrapper hochklettern — die UL hat keinen eigenen Block-Wrapper,
+     closest('[id^="block-"]') träfe dann den Seiten-Root (article#block-inventurliste)
+     und würde die GANZE Seite verstecken. Gefundenes Element immer direkt verstecken. */
+  function hide(el){ if(!el) return; el.classList.add('ts-invcut-hide'); }
+  function apply(){
+    if(!on()) return;
+    injectCSS();
+    hide(findText('.page__inventurliste .notion-heading', /Was uns jetzt noch fehlt/));
+    hide(findText('.page__inventurliste .notion-text', /Grundstruktur für deine Inventurliste/));
+    var li=findText('.page__inventurliste .notion-bulleted-list li', /DB Lieferpartner/);
+    if(li) hide(li.closest('.notion-bulleted-list'));
+    var tl=document.getElementById('tslink'); if(tl) tl.classList.add('ts-invcut-hide');
+    hide(findText('.page__inventurliste .notion-text', /Dazu kommen wir in den jeweiligen Lektionen/));
+  }
+  apply();
+  var _t=null;
+  new MutationObserver(function(){ if(_t) return; _t=setTimeout(function(){ _t=null; apply(); },200); })
+    .observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
    inventurliste — Kacheln "Was uns jetzt noch fehlt" (v3)
    Drei reduzierte Luxus-Kacheln (DB Lieferpartner / Zutaten /
    Packaging) ersetzen die Text-Bullets. v3 (11.07.2026):
@@ -7471,7 +7571,7 @@
     '#tsiv-root .tsiv-textslot{min-width:0;min-height:1px;}',
     '#tsiv-root .tsiv-textslot .tsiv-lead{font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:clamp(1.32rem,2vw,1.6rem);font-weight:600;letter-spacing:-.012em;line-height:1.22;color:#fff;margin:0 0 18px;}',
     '#tsiv-root .tsiv-textslot .tsiv-lead .tsiv-accent{color:var(--tsiv-gold);}',
-    '#tsiv-root .tsiv-textslot p:not(.tsiv-lead){font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.62);margin:0 0 14px;}',
+    '#tsiv-root .tsiv-textslot p:not(.tsiv-lead){font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 14px;}',
     '#tsiv-root .tsiv-textslot p:last-child{margin-bottom:0;}',
     '.tsiv-hide{display:none !important;}',
     '#tsiv-root .tsiv-unit{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;}',

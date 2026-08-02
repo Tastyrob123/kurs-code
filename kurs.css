@@ -633,12 +633,22 @@ details > summary {
 /* mehrwert-zielbild — Intro-H2 "Die sechs Bereiche…" größer (trifft nur diese eine H2 vor dem Raster, nie H1/Fließtext) */
 .page__mehrwert-zielbild h2.notion-heading.ts-mz-center{ font-size:clamp(1.7rem,3.6vw,2.15rem); line-height:1.16; }
 
-/* mehrwert-zielbild — "Das Zielbild: was ein fertiges Gericht dir zeigt."-Absatz groß, mittig, Lineal TS; Phrase "was ein fertiges Gericht dir zeigt." beige via .ts-accent. Klasse ts-mwz-goal + Phrase-Split in kurs.js (__tsMwzGoal), driftsicher ohne Block-ID */
-.page__mehrwert-zielbild .ts-mwz-goal{ text-align:center; margin:34px 0 14px; }
-.page__mehrwert-zielbild .ts-mwz-goal strong{ display:block; font-family:"Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif; font-weight:600; letter-spacing:-.02em; font-size:clamp(1.7rem,3.6vw,2.15rem); line-height:1.16; color:#fff; }
+/* mehrwert-zielbild — "Das Zielbild: Was ein fertiges Gericht dir zeigt."-Absatz als große mittige Abschnitts-Überschrift; Phrase "fertiges Gericht" beige via .ts-accent (Satzpunkt bleibt weiß). Klasse ts-mwz-goal + Phrase-Split in kurs.js (__tsMwzGoal), driftsicher ohne Block-ID. "Lineal Web" zuerst im Stack: der Satz braucht Glyphen außerhalb des Lineal-TS-Subsets */
+.page__mehrwert-zielbild .ts-mwz-goal{ text-align:center; margin:56px 0 20px; }
+.page__mehrwert-zielbild .ts-mwz-goal strong{ display:block; font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif; font-weight:600; letter-spacing:-.02em; font-size:clamp(2rem,4.4vw,2.75rem); line-height:1.14; color:#fff; }
 
 /* mehrwert-zielbild — "Du siehst…"-Vierspalter: mehr Luft oben/unten */
 .page__mehrwert-zielbild #block-398b9546553480e4bf74c90f15b0f5f5{ margin-top:40px; margin-bottom:40px; }
+
+/* mehrwert-zielbild — "Du siehst…"-Vierspalter als Karten-Grid (Klasse ts-mwz-grid via kurs.js __tsMwzGrid, Phrase-Anker, driftsicher). Nummern-Chips 01–04 per CSS-Counter — kein neuer Text, Notion bleibt Text-SSOT */
+.page__mehrwert-zielbild .ts-mwz-grid{ display:grid !important; grid-template-columns:repeat(4,1fr); gap:18px; counter-reset:tsmwz; margin:6px 0 30px; }
+.page__mehrwert-zielbild .ts-mwz-grid > .notion-column{ width:auto !important; margin:0 !important; display:flex; flex-direction:column; counter-increment:tsmwz; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:24px 22px 26px; transition:transform .35s cubic-bezier(.22,1,.36,1), border-color .45s ease, background .45s ease; }
+.page__mehrwert-zielbild .ts-mwz-grid > .notion-column:hover{ transform:translateY(-4px); border-color:rgba(199,180,137,.45); background:rgba(255,255,255,.05); }
+.page__mehrwert-zielbild .ts-mwz-grid > .notion-column::before{ content:"0" counter(tsmwz); display:block; width:max-content; font-size:.6rem; font-weight:600; letter-spacing:.16em; color:#c7b489; border:1px solid rgba(199,180,137,.35); border-radius:999px; padding:4px 10px; margin:0 0 14px; }
+.page__mehrwert-zielbild .ts-mwz-grid .notion-text{ text-align:left !important; font-size:15.5px !important; line-height:1.62 !important; color:rgba(255,255,255,.86) !important; }
+.page__mehrwert-zielbild .ts-mwz-grid .notion-text b, .page__mehrwert-zielbild .ts-mwz-grid .notion-text strong{ color:#fff; }
+@media (max-width:980px){ .page__mehrwert-zielbild .ts-mwz-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .page__mehrwert-zielbild .ts-mwz-grid{ grid-template-columns:1fr; } }
 
 /* mehrwert-zielbild — mehr Luft vor "Und genau diese drei Stufen…" (Abstand zum DB-Diagramm/Button) */
 .page__mehrwert-zielbild #block-38eb9546553480a5a7c8c1b512fd2f2b{ margin-top:44px; font-size:1.2rem !important; line-height:1.5 !important; }
@@ -720,7 +730,7 @@ details > summary {
   line-height:1;letter-spacing:-1px;}
 #ts-lesson-stats .ts-title{margin-top:16px;color:#fff;font-size:23px;
   font-weight:700;line-height:1.15;letter-spacing:-.2px;}
-#ts-lesson-stats .ts-desc{margin-top:14px;color:rgba(255,255,255,.4);
+#ts-lesson-stats .ts-desc{margin-top:14px;color:rgba(255,255,255,.86);
   font-size:15px;font-weight:400;line-height:1.5;}
 @media(max-width:640px){
   #ts-lesson-stats{grid-template-columns:repeat(2,1fr);row-gap:34px;
