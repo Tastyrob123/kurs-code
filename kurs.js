@@ -10728,15 +10728,15 @@ var TSISL_TEAM_ONB_V2=[
     /* Lektion 1.5 (Modul 1) — Formeln & Rollups auf DB I/DB II. Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, kachel:'m1_formeln',
       anchorSel:'#ts15wk', steps:TS15_STEPS,
-      eyebrow:'DB I + DB II : Formeln & Rollups',
-      title:'Deine Formeln. <span>Eine nach der anderen.</span>',
-      sub:'Jede Karte ist eine Spalte, die von allein rechnet. Klick sie auf, trag die Formel ein, leg sie in den Einkaufswagen — gezählt wird in Rechenspalten. Die Formel kopierst du dir direkt aus der Karte.',
+      eyebrow:'DB : Formeln & Rollups',
+      title:'Deine Formeln. <span>Zeile für Zeile.</span>',
+      sub:'Jede Karte ist eine Spalte, die von allein rechnet. Klick sie auf, trag die Formel ein, leg sie in den Einkaufswagen — gezählt wird in Rechenspalten. Eine Formelspalte legst du in der Tabelle rechts über + an, Eigenschaft : Formel. Die Formel selbst kopierst du dir aus der Karte.',
       summary:'Rechenspalten', chain:true },
     /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen. Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, kachel:'m1_ansichten',
       anchorSel:'#ts16wk', steps:TS16_STEPS,
-      eyebrow:'DB I + DB II : Ansichten & Filter',
-      title:'Deine Ansichten. <span>Eine nach der anderen eingestellt.</span>',
+      eyebrow:'DB : Ansichten & Filter',
+      title:'Deine Ansichten. <span>Blick für Blick.</span>',
       sub:'Jede Karte ist eine Ansicht oder ein Regler, mit dem du sie einstellst. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.',
       summary:'Ansichten', chain:true },
     /* Key Metrics — Config-Steps-Regal (Notion-Seite leer, Steps aus Config; echte DB-Schemas + Formeln). */
@@ -24990,6 +24990,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l12-layout-medien-strukturierungs-tricks">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -24997,6 +24998,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -25392,6 +25396,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l13-einfhrung-in-datenbanken">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -25399,6 +25404,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -25852,6 +25860,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l14-relationen-rollups">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -25859,6 +25868,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -26303,6 +26315,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l15-formeln-20-logik-bausteine">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -26310,6 +26323,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -26535,6 +26551,10 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
 
+  /* Bildtausch spaeter: NUR diese zwei Konstanten setzen (Platzhalter-Mechanik wie #tspkres).
+     POSTER = Vorschaubild der Kachel · SHOT = langer Ganzseiten-Screenshot fuer die Lightbox. */
+  var POSTER=null, SHOT=null;
+
   var CSS=`
   #ts15res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
@@ -26543,16 +26563,32 @@ var TSISL_TEAM_ONB_V2=[
   #ts15res h3 .ts-accent{color:#c7b489}
   #ts15res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
   #ts15res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts15res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+  #ts15res .r-tile{box-sizing:border-box;cursor:pointer;width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
     transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts15res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts15res .r-tile:hover{transform:translateY(-4px) scale(1.02);animation:ts15resBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts15resBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.30)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.24)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10)}}
   #ts15res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
   #ts15res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
   #ts15res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
   #ts15res .r-cap b{color:#c7b489;font-weight:600}
   #ts15res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts15res{flex-direction:column} }
+  @media(max-width:820px){ #ts15res{flex-direction:column} #ts15res .r-pc{order:-1} #ts15res h3{font-size:26px} }
+  #ts15res-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);
+    background:rgba(3,4,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #ts15res-lb.on{display:flex}
+  #ts15res-lb .lb-frame{position:relative;width:min(1100px,94vw);aspect-ratio:1366/768;border-radius:16px;overflow:hidden;
+    background:#0b0d14;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px -30px rgba(0,0,0,.9)}
+  #ts15res-lb .lb-screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;
+    display:flex;align-items:center;justify-content:center}
+  #ts15res-lb .lb-screen img{display:block;width:100%;height:auto}
+  #ts15res-lb .lb-ph{display:flex;flex-direction:column;align-items:center;gap:12px;color:rgba(255,255,255,.5);
+    font:500 14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:24px}
+  #ts15res-lb .lb-ph b{color:#c7b489;font-weight:600}
+  #ts15res-lb .lb-close{position:absolute;top:-46px;right:0;background:transparent;border:1px solid rgba(255,255,255,.3);
+    color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;line-height:1;cursor:pointer}
+  #ts15res-lb .lb-close:hover{border-color:#c7b489;color:#c7b489}
+  @media(prefers-reduced-motion:reduce){ #ts15res .r-tile:hover{animation:none} }
   `;
   function injectCSS(){
     if(document.getElementById('ts15res-css')) return;
@@ -26565,8 +26601,11 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Ab jetzt trägst du in deinen Projekten nur noch ein, was wirklich neu ist: den Namen, den Termin, die Aufgaben. Alles andere steht schon da. Der Fortschritt zählt mit, sobald du eine Aufgabe abhakst, der Balken füllt sich, die Ampel springt um.</p>'+
       '<p>Wichtig ist die Reihenfolge, in der die Spalten aufeinander zugreifen. Die Ampel liest den Fortschritt, der Fortschritt liest die Rollups, die Rollups lesen zwei kleine Formeln in der Aufgaben-Tabelle. Ändert sich unten ein Haken, läuft die Kette bis nach oben durch.</p>'+
       '</div>'+
-      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
-      '<div class="r-cap">Projektmanagement mit Formelspalten <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+      '<div class="r-pc"><div class="r-tile" role="button" tabindex="0" aria-label="Projektmanagement mit Formelspalten vergrößern">'+
+        (POSTER?'<img src="'+POSTER+'" alt="Projektmanagement mit Formelspalten" loading="lazy" decoding="async">'
+               :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span>')+
+      '</div>'+
+      '<div class="r-cap">Projektmanagement mit Formelspalten <b>– Live Beispiel</b></div><div class="r-hint">Klicke zum Vergrößern</div></div>';
   }
 
   function mount(){
@@ -26577,6 +26616,21 @@ var TSISL_TEAM_ONB_V2=[
     injectCSS();
     var root=document.createElement('div'); root.id='ts15res'; root.innerHTML=html();
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    /* Lightbox: Klick vergroessert, langer Screenshot scrollt im Bildschirm.
+       Solange SHOT==null steht ein gestalteter Platzhalter drin (Auto-Scroll aus). */
+    var lb=document.createElement('div'); lb.id='ts15res-lb';
+    lb.innerHTML='<div class="lb-frame"><button class="lb-close" type="button" aria-label="Schließen">&times;</button>'+
+      '<div class="lb-screen">'+(SHOT?'<img src="'+SHOT+'" alt="Projektmanagement mit Formelspalten">'
+        :'<div class="lb-ph"><b>DB I : Projektmanagement</b><span>Der Screenshot dieser Datenbank folgt.</span></div>')+'</div></div>';
+    document.body.appendChild(lb);
+    function open(){ lb.classList.add('on'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.lb-screen'); if(sc) sc.scrollTop=0; }
+    function close(){ lb.classList.remove('on'); document.body.style.overflow=''; }
+    var tile=root.querySelector('.r-tile');
+    tile.addEventListener('click', open);
+    tile.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+    lb.addEventListener('click', function(e){ if(e.target===lb||e.target.classList.contains('lb-close')) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
   }
 
   mount();
@@ -26789,6 +26843,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l16-ansichten-self-referencing-filter">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -26796,6 +26851,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -27017,6 +27075,10 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
 
+  /* Bildtausch spaeter: NUR diese zwei Konstanten setzen (Platzhalter-Mechanik wie #tspkres).
+     POSTER = Vorschaubild der Kachel · SHOT = langer Ganzseiten-Screenshot fuer die Lightbox. */
+  var POSTER=null, SHOT=null;
+
   var CSS=`
   #ts16res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
@@ -27025,16 +27087,32 @@ var TSISL_TEAM_ONB_V2=[
   #ts16res h3 .ts-accent{color:#c7b489}
   #ts16res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
   #ts16res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts16res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
+  #ts16res .r-tile{box-sizing:border-box;cursor:pointer;width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
     transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts16res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
+  #ts16res .r-tile:hover{transform:translateY(-4px) scale(1.02);animation:ts16resBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes ts16resBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.30)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.24)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10)}}
   #ts16res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
   #ts16res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
   #ts16res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
   #ts16res .r-cap b{color:#c7b489;font-weight:600}
   #ts16res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts16res{flex-direction:column} }
+  @media(max-width:820px){ #ts16res{flex-direction:column} #ts16res .r-pc{order:-1} #ts16res h3{font-size:26px} }
+  #ts16res-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);
+    background:rgba(3,4,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #ts16res-lb.on{display:flex}
+  #ts16res-lb .lb-frame{position:relative;width:min(1100px,94vw);aspect-ratio:1366/768;border-radius:16px;overflow:hidden;
+    background:#0b0d14;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px -30px rgba(0,0,0,.9)}
+  #ts16res-lb .lb-screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;
+    display:flex;align-items:center;justify-content:center}
+  #ts16res-lb .lb-screen img{display:block;width:100%;height:auto}
+  #ts16res-lb .lb-ph{display:flex;flex-direction:column;align-items:center;gap:12px;color:rgba(255,255,255,.5);
+    font:500 14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:24px}
+  #ts16res-lb .lb-ph b{color:#c7b489;font-weight:600}
+  #ts16res-lb .lb-close{position:absolute;top:-46px;right:0;background:transparent;border:1px solid rgba(255,255,255,.3);
+    color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;line-height:1;cursor:pointer}
+  #ts16res-lb .lb-close:hover{border-color:#c7b489;color:#c7b489}
+  @media(prefers-reduced-motion:reduce){ #ts16res .r-tile:hover{animation:none} }
   `;
   function injectCSS(){
     if(document.getElementById('ts16res-css')) return;
@@ -27043,12 +27121,15 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   function html(){
-    return '<div class="r-text"><h3>Eine Tabelle, <span class="ts-accent">neun Blickwinkel.</span></h3>'+
-      '<p>Deine Aufgaben liegen weiterhin an genau einer Stelle. Was sich ändert, ist der Ausschnitt: morgens die Tagesliste, im Wochenplan die Tabelle mit dem relativen Datumsfilter, für den Rückblick der Graveyard.</p>'+
+    return '<div class="r-text"><h3>Dieselben Aufgaben, <span class="ts-accent">neun Blickwinkel.</span></h3>'+
+      '<p>Deine Aufgaben liegen weiterhin an genau einer Stelle. Was sich ändert, ist der Ausschnitt: morgens die Tagesliste mit den drei Dingen für heute, im Wochenplan die Tabelle mit dem relativen Datumsfilter, für den Rückblick der Graveyard.</p>'+
       '<p>Der eigentliche Gewinn steckt in der Vorlage. Jedes neue Projekt bringt seine eigene Aufgabenliste schon mit, weil der Filter beim Anlegen automatisch auf die neue Seite umspringt. Du baust das ein einziges Mal, und jede Projektseite danach ist von der ersten Sekunde an fertig eingerichtet, ohne dass du je wieder einen Filter nachstellst.</p>'+
       '</div>'+
-      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
-      '<div class="r-cap">Aufgaben in neun Ansichten <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
+      '<div class="r-pc"><div class="r-tile" role="button" tabindex="0" aria-label="Aufgaben in neun Ansichten vergrößern">'+
+        (POSTER?'<img src="'+POSTER+'" alt="Aufgaben in neun Ansichten" loading="lazy" decoding="async">'
+               :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span>')+
+      '</div>'+
+      '<div class="r-cap">Aufgaben in neun Ansichten <b>– Live Beispiel</b></div><div class="r-hint">Klicke zum Vergrößern</div></div>';
   }
 
   function mount(){
@@ -27059,6 +27140,21 @@ var TSISL_TEAM_ONB_V2=[
     injectCSS();
     var root=document.createElement('div'); root.id='ts16res'; root.innerHTML=html();
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
+
+    /* Lightbox: Klick vergroessert, langer Screenshot scrollt im Bildschirm.
+       Solange SHOT==null steht ein gestalteter Platzhalter drin (Auto-Scroll aus). */
+    var lb=document.createElement('div'); lb.id='ts16res-lb';
+    lb.innerHTML='<div class="lb-frame"><button class="lb-close" type="button" aria-label="Schließen">&times;</button>'+
+      '<div class="lb-screen">'+(SHOT?'<img src="'+SHOT+'" alt="Aufgaben in neun Ansichten">'
+        :'<div class="lb-ph"><b>DB II : Aufgaben & ToDos</b><span>Der Screenshot dieser Datenbank folgt.</span></div>')+'</div></div>';
+    document.body.appendChild(lb);
+    function open(){ lb.classList.add('on'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.lb-screen'); if(sc) sc.scrollTop=0; }
+    function close(){ lb.classList.remove('on'); document.body.style.overflow=''; }
+    var tile=root.querySelector('.r-tile');
+    tile.addEventListener('click', open);
+    tile.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+    lb.addEventListener('click', function(e){ if(e.target===lb||e.target.classList.contains('lb-close')) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
   }
 
   mount();
@@ -27271,6 +27367,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l17-native-automations-buttons">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -27278,6 +27375,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -27718,6 +27818,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l18-system-architektur-dashboard-design">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -27725,6 +27826,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
@@ -28188,6 +28292,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!reduced) root.classList.add('js');
     anchor.parentNode.insertBefore(root, anchor.nextSibling);
 
+    var heal=0;
     var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
     nextWrap.innerHTML='<a id="ts-next" href="/mehrwert-zielbild">Nächste Lektion</a>';
     root.parentNode.insertBefore(nextWrap, root.nextSibling);
@@ -28195,6 +28300,9 @@ var TSISL_TEAM_ONB_V2=[
     function dedupe(){
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(all[i]!==nextWrap && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      /* Selbstheilung: super.so haengt den Weiter-Button beim Re-Render gelegentlich aus
+         (auf L1.8 live reproduziert). Max. 5 Versuche, damit nie eine Schleife entsteht. */
+      if(!nextWrap.parentNode && root.parentNode && heal<5){ heal++; root.parentNode.insertBefore(nextWrap, root.nextSibling); }
     }
     dedupe();
     window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
