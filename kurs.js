@@ -468,7 +468,7 @@ window.__tsMO = function(cb){
     return DISHES.map(function(d){
       var k=d.db3<0?'bad':'good';
       return '<figure class="ck-dish ck-dish--'+k+'">'+
-        '<div class="ck-dish__imgwrap"><img src="'+IMG(d.slug)+'" alt="'+d.name+'" loading="lazy"></div>'+
+        '<div class="ck-dish__imgwrap"><img src="'+IMG(d.slug)+'" alt="'+d.name+'" loading="lazy" decoding="async"></div>'+
         '<figcaption class="ck-dish__name">'+d.name+'</figcaption>'+
         '<div class="ck-pl">'+
           '<div class="ck-pl__row"><span>VK</span><b>'+eur(d.vk)+'</b></div>'+
@@ -650,9 +650,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB IV — Zutaten" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB IV — Zutaten" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
         '<h1 class="ts-hero__title">DB IV : <span class="ts-gold">Zutaten</span></h1>'+
       '</div>';
@@ -685,9 +685,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB V — Rezepturen" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB V — Rezepturen" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.4</div>'+
         '<h1 class="ts-hero__title">DB V : <span class="ts-gold">Rezepturen</span></h1>'+
       '</div>';
@@ -757,9 +757,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Key Metrics — Kostenauswertung Master" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Key Metrics — Kostenauswertung Master" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Modul 2 · Ausbau</div>'+
         '<h1 class="ts-hero__title">Key <span class="ts-gold">Metrics</span></h1>'+
       '</div>';
@@ -1077,7 +1077,7 @@ window.__tsMO = function(cb){
 <div class="kv-row">
   <div class="kv-pc">
     <div class="kv-mac" role="button" tabindex="0" aria-label="Erklärvideo abspielen">
-      <img src="${IMG}" alt="Kostenauswertung Master — Erklärvideo">
+      <img src="${IMG}" alt="Kostenauswertung Master — Erklärvideo" loading="lazy" decoding="async">
       <div class="kv-play"><span></span></div>
     </div>
   </div>
@@ -1352,7 +1352,7 @@ window.__tsMO = function(cb){
   </div>
   <div class="km2-pc">
     <div class="km2-tile" role="button" tabindex="0" aria-label="Datenbank vergrößern">
-      <img src="${TILE}" alt="Kostenauswertung Master — fertige Datenbank">
+      <img src="${TILE}" alt="Kostenauswertung Master — fertige Datenbank" loading="lazy" decoding="async">
     </div>
     <div class="km2-cap">Kostenauswertung Master <span class="g">– Live Beispiel</span></div>
     <div class="km2-hint">Klicke zum Vergrößern</div>
@@ -1366,7 +1366,7 @@ window.__tsMO = function(cb){
   function ensureLb(){
     if(document.getElementById('tskm2mac-lb')) return document.getElementById('tskm2mac-lb');
     var lb=document.createElement('div'); lb.id='tskm2mac-lb';
-    lb.innerHTML='<button class="km2-lb-close" aria-label="Schließen">×</button><div class="km2-lb-screen"><img src="'+SCROLL+'" alt="Kostenauswertung Master — Ganzansicht"></div>';
+    lb.innerHTML='<button class="km2-lb-close" aria-label="Schließen">×</button><div class="km2-lb-screen"><img src="'+SCROLL+'" alt="Kostenauswertung Master — Ganzansicht" loading="lazy" decoding="async"></div>';
     lb.addEventListener('click',function(e){ if(e.target===lb||e.target.className==='km2-lb-close') closeLb(); });
     document.body.appendChild(lb);
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
@@ -2016,9 +2016,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB XI — Gerichte & Getränke" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB XI — Gerichte & Getränke" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 2.7</div>'+
         '<h1 class="ts-hero__title">DB XI : <span class="ts-gold">Gerichte &amp; Getränke</span></h1>'+
       '</div>';
@@ -2060,13 +2060,13 @@ window.__tsMO = function(cb){
       <!-- SCENE 1 — Tauschen -->
       <div class="bau-scene" data-i="0">
         <div class="bau-swap">
-          <img class="bau-med bau-old" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp" alt="Tomate">
+          <img class="bau-med bau-old" src="https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp" alt="Tomate" loading="lazy" decoding="async">
           <span class="bau-swapicon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg></span>
-          <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.webp" alt="Paprika">
+          <img class="bau-med bau-new" src="https://tastyrob123.github.io/kurs/img/zutaten/paprika-rot.webp" alt="Paprika" loading="lazy" decoding="async">
         </div>
         <span class="bau-conn once"></span>
         <div class="bau-node">
-          <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.webp" alt="Gericht">
+          <img class="bau-med bau-hero" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.webp" alt="Gericht" loading="lazy" decoding="async">
           <div class="bau-chip"><span class="bau-chip-k">Wareneinsatz</span><span class="bau-chip-v" id="bauChip">4,80 €</span></div>
           <span class="bau-note">Beispielwert</span>
         </div>
@@ -2074,30 +2074,30 @@ window.__tsMO = function(cb){
 
       <!-- SCENE 2 — Mehrfach nutzen -->
       <div class="bau-scene" data-i="1">
-        <div class="bau-sat s1 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Gericht"><span class="bau-tag">Pilz-Ravioli</span></div>
+        <div class="bau-sat s1 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Gericht" loading="lazy" decoding="async"><span class="bau-tag">Pilz-Ravioli</span></div>
         <span class="bau-conn rev"></span>
-        <div class="bau-center bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b></span></div>
+        <div class="bau-center bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Pesto" loading="lazy" decoding="async"><span class="bau-tag"><b>Basilikum-Pesto</b></span></div>
         <span class="bau-conn"></span>
-        <div class="bau-sat s2 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.webp" alt="Gericht"><span class="bau-tag">Lachsfilet</span></div>
+        <div class="bau-sat s2 bau-node"><img class="bau-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.webp" alt="Gericht" loading="lazy" decoding="async"><span class="bau-tag">Lachsfilet</span></div>
       </div>
 
       <!-- SCENE 3 — Schachteln -->
       <div class="bau-scene bau-flow" data-i="2">
         <div class="bau-zcol">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan">
-          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.webp" alt="Walnüsse">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum" loading="lazy" decoding="async">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan" loading="lazy" decoding="async">
+          <img class="bau-med bau-nm" src="https://tastyrob123.github.io/kurs/img/zutaten/walnuesse.webp" alt="Walnüsse" loading="lazy" decoding="async">
         </div>
         <span class="bau-conn"></span>
-        <div class="bau-node"><img class="bau-med bau-pesto" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Pesto"><span class="bau-tag"><b>Basilikum-Pesto</b> · neuer Baustein</span></div>
+        <div class="bau-node"><img class="bau-med bau-pesto" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Pesto" loading="lazy" decoding="async"><span class="bau-tag"><b>Basilikum-Pesto</b> · neuer Baustein</span></div>
         <span class="bau-conn rev"></span>
         <div class="bau-node">
           <div class="bau-dishgrp">
-            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum" loading="lazy" decoding="async">
             <span class="bau-vconn up"></span>
-            <img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Gericht">
+            <img class="bau-med bau-dish" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Gericht" loading="lazy" decoding="async">
             <span class="bau-vconn down"></span>
-            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan">
+            <img class="bau-med bau-sm" src="https://tastyrob123.github.io/kurs/img/zutaten/parmesan.webp" alt="Parmesan" loading="lazy" decoding="async">
             <span class="bau-tag bau-dishtag"><b>Pilz-Ravioli</b> · Gericht</span>
           </div>
         </div>
@@ -2135,7 +2135,7 @@ window.__tsMO = function(cb){
       <div class="tg-shock" id="tgShock" aria-hidden="true"></div>
 
       <div class="tg-core" id="tgCore">
-        <img class="tg-plate" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.webp" alt="Gericht">
+        <img class="tg-plate" src="https://tastyrob123.github.io/kurs/img/gerichte/rinderfilet.webp" alt="Gericht" loading="lazy" decoding="async">
         <div class="tg-price" id="tgPrice">0,00 €</div>
         <div class="tg-pricek">Verkaufspreis</div>
       </div>
@@ -2163,7 +2163,7 @@ window.__tsMO = function(cb){
   <div class="wv-wrap">
     <div class="wv-stage">
       <div class="wv-src" data-n="0">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/inventar/olivenoel.jpg" alt="Olivenöl 5 L">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/inventar/olivenoel.jpg" alt="Olivenöl 5 L" loading="lazy" decoding="async">
         <div class="wv-step">Inventarprodukt</div>
         <div class="wv-name">Olivenöl 5 L</div>
         <div class="wv-chip"><span class="wv-k">Einkaufspreis</span><span class="wv-v">24,00 €</span></div>
@@ -2172,7 +2172,7 @@ window.__tsMO = function(cb){
       </div>
       <span class="wv-feed"><span class="wv-dot"></span></span>
       <div class="wv-src" data-n="1">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/zutaten/basilikum.webp" alt="Basilikum" loading="lazy" decoding="async">
         <div class="wv-step">Zutat</div>
         <div class="wv-name">Basilikum</div>
         <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">0,40 €</span></div>
@@ -2180,7 +2180,7 @@ window.__tsMO = function(cb){
       </div>
       <span class="wv-feed"><span class="wv-dot"></span></span>
       <div class="wv-src" data-n="2">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Basilikum-Pesto">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/rezepturen/basilikum-pesto.webp" alt="Basilikum-Pesto" loading="lazy" decoding="async">
         <div class="wv-step">Rezept</div>
         <div class="wv-name">Basilikum-Pesto</div>
         <div class="wv-chip"><span class="wv-k">pro Portion</span><span class="wv-v">1,20 €</span></div>
@@ -2193,7 +2193,7 @@ window.__tsMO = function(cb){
         <div class="wv-row" data-n="3">
           <span class="wv-branch"><span class="wv-dot"></span></span>
           <div class="wv-dish">
-            <img class="wv-med" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.webp" alt="Blattsalat">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs-code/img/gerichte/blattsalat.webp" alt="Blattsalat" loading="lazy" decoding="async">
             <div class="wv-meta">
               <div class="wv-step">Gericht</div>
               <div class="wv-name">Blattsalat</div>
@@ -2205,7 +2205,7 @@ window.__tsMO = function(cb){
         <div class="wv-row" data-n="4">
           <span class="wv-branch"><span class="wv-dot"></span></span>
           <div class="wv-dish">
-            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Pilz-Ravioli">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/pilz-ravioli.webp" alt="Pilz-Ravioli" loading="lazy" decoding="async">
             <div class="wv-meta">
               <div class="wv-step">Gericht</div>
               <div class="wv-name">Pilz-Ravioli</div>
@@ -2217,7 +2217,7 @@ window.__tsMO = function(cb){
         <div class="wv-row" data-n="5">
           <span class="wv-branch"><span class="wv-dot"></span></span>
           <div class="wv-dish">
-            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.webp" alt="Lachsfilet">
+            <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/gerichte/lachs.webp" alt="Lachsfilet" loading="lazy" decoding="async">
             <div class="wv-meta">
               <div class="wv-step">Gericht</div>
               <div class="wv-name">Lachsfilet</div>
@@ -2231,7 +2231,7 @@ window.__tsMO = function(cb){
       <span class="wv-bus"></span>
       <span class="wv-feed"><span class="wv-dot"></span></span>
       <div class="wv-src" data-n="6">
-        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/menu-01.webp" alt="3-Gang-Menü">
+        <img class="wv-med" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/menu-01.webp" alt="3-Gang-Menü" loading="lazy" decoding="async">
         <div class="wv-step">Menü-Kalkulation</div>
         <div class="wv-name">3-Gang-Menü</div>
         <div class="wv-chip"><span class="wv-k">Wareneinsatz</span><span class="wv-v">18,50 €</span></div>
@@ -2596,7 +2596,7 @@ window.__tsMO = function(cb){
       var badge=document.createElement('div');
       badge.className='tg-orb-badge';
       if(it.img){
-        badge.innerHTML='<img src="'+IMG_BASE+it.img+'.webp" alt="'+it.name+'" loading="lazy">';
+        badge.innerHTML='<img src="'+IMG_BASE+it.img+'.webp" alt="'+it.name+'" loading="lazy" decoding="async">';
       } else {
         badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+it.icon+'</svg>';
       }
@@ -2846,11 +2846,11 @@ window.__tsMO = function(cb){
     root.innerHTML=
       '<div class="tsd4-head"><h2 class="tsd4-title">Die Zutat zieht sich ihren <span class="g">Preis</span>.</h2></div>'+
       '<div class="tsd4-stage">'+
-        '<div class="tsd4-card tsd4-inv"><div class="tsd4-fruit is-whole"><img src="'+IMG_WHOLE+'" alt="Tomate" loading="lazy"></div><p class="c-eye">DB 0 · Inventurliste</p><p class="c-name">Tomaten</p><div class="c-div"></div><div class="tsd4-row"><span class="k">Einkaufspreis</span><span class="v">3,20 €/kg</span></div><p class="tsd4-note">Beispielwert</p></div>'+
+        '<div class="tsd4-card tsd4-inv"><div class="tsd4-fruit is-whole"><img src="'+IMG_WHOLE+'" alt="Tomate" loading="lazy" decoding="async"></div><p class="c-eye">DB 0 · Inventurliste</p><p class="c-name">Tomaten</p><div class="c-div"></div><div class="tsd4-row"><span class="k">Einkaufspreis</span><span class="v">3,20 €/kg</span></div><p class="tsd4-note">Beispielwert</p></div>'+
         '<div class="tsd4-conn"><div class="clabel">Relation<small>zieht den Preis</small></div><div class="line"></div><div class="ball"></div></div>'+
-        '<div class="tsd4-card tsd4-zutat"><div class="tsd4-fruit is-sliced"><img src="'+IMG_SLICED+'" alt="Tomate in Scheiben" loading="lazy"></div><p class="c-eye">DB IV · Zutat</p><p class="c-name">Tomate</p><div class="c-div"></div><div class="tsd4-row"><span class="k">Preis (aus DB 0)</span><span class="v muted">3,20 €/kg</span></div><div class="tsd4-row"><span class="k">Einwaage</span><span class="v gold">120 g</span></div></div>'+
+        '<div class="tsd4-card tsd4-zutat"><div class="tsd4-fruit is-sliced"><img src="'+IMG_SLICED+'" alt="Tomate in Scheiben" loading="lazy" decoding="async"></div><p class="c-eye">DB IV · Zutat</p><p class="c-name">Tomate</p><div class="c-div"></div><div class="tsd4-row"><span class="k">Preis (aus DB 0)</span><span class="v muted">3,20 €/kg</span></div><div class="tsd4-row"><span class="k">Einwaage</span><span class="v gold">120 g</span></div></div>'+
         '<div class="tsd4-eq"><svg viewBox="0 0 26 14"><path d="M2 5 H20 M2 9 H20 M17 2 L23 7 L17 12"/></svg></div>'+
-        '<div class="tsd4-card tsd4-result"><div class="tsd4-fruit is-stack"><img src="'+IMG_STACK+'" alt="Zwei Tomatenscheiben" loading="lazy"></div><p class="c-eye">Portionspreis</p><p class="r-val" data-target="0.384">0,00 €</p><p class="r-formula">120 g × 3,20 €/kg</p></div>'+
+        '<div class="tsd4-card tsd4-result"><div class="tsd4-fruit is-stack"><img src="'+IMG_STACK+'" alt="Zwei Tomatenscheiben" loading="lazy" decoding="async"></div><p class="c-eye">Portionspreis</p><p class="r-val" data-target="0.384">0,00 €</p><p class="r-formula">120 g × 3,20 €/kg</p></div>'+
       '</div>'+
       '<p class="tsd4-desc">Jede einzelne Zutat bündelt dabei sämtliche relevanten Informationen an einem Ort – von Einkaufspreisen über Nährwerte bis hin zu den Allergenen. So hast du für jede Zutat alles Wichtige auf einen Blick und musst die Angaben nicht mehr an mehreren Stellen zusammensuchen.</p>'+
       '<div class="tsd4-foot"><p class="f-main">→ Der fertige Baustein geht so in <span class="g">jedes Rezept</span> — Preis und Menge in einem.</p><p class="f-sub">Zahlen = Beispielwerte. Einwaage aus deiner Zutaten-Tabelle, Einkaufspreis illustrativ.</p></div>';
@@ -3088,9 +3088,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Gastronomie AI MasterClass" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Gastronomie AI MasterClass" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow"><span class="ts-eb-w">Tasty</span><span class="ts-eb-b">Studios</span></div>'+
         '<h1 class="ts-hero__title">Gastronomie<br>AI Master<span class="ts-red">Class</span></h1>'+
       '</div>';
@@ -3170,9 +3170,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Notion AI Backoffice System" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Notion AI Backoffice System" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Tasty Studios</div>'+
         '<h1 class="ts-hero__title"><span class="ts-red">Modul 2</span><br>Das Notion AI Backoffice System</h1>'+
       '</div>';
@@ -3737,9 +3737,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Mehrwert & Zielbild" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Mehrwert & Zielbild" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.1</div>'+
         '<h1 class="ts-hero__title">Mehrwert &amp; <span class="ts-gold">Zielbild</span></h1>'+
       '</div>';
@@ -4127,7 +4127,7 @@ window.__tsMO = function(cb){
   @media(max-width:820px){#tsq .tsq-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:540px){#tsq .tsq-grid{grid-template-columns:1fr}}
   `;
-  function card(k,ki,w1,w2,tx){return '<a class="tsq-card" href="'+LINK[k]+'" style="--g:'+GLOW[k]+'"><div class="tsq-frame"><img src="'+IMG[k]+'" alt="'+w1+' '+w2+'" loading="lazy"></div><span class="tsq-k">'+ki+'</span><h3 class="tsq-h">'+w1+' <span class="g">'+w2+'</span></h3><p class="tsq-t">'+tx+'</p></a>';}
+  function card(k,ki,w1,w2,tx){return '<a class="tsq-card" href="'+LINK[k]+'" style="--g:'+GLOW[k]+'"><div class="tsq-frame"><img src="'+IMG[k]+'" alt="'+w1+' '+w2+'" loading="lazy" decoding="async"></div><span class="tsq-k">'+ki+'</span><h3 class="tsq-h">'+w1+' <span class="g">'+w2+'</span></h3><p class="tsq-t">'+tx+'</p></a>';}
   var HTML = '<div id="tsq"><div class="tsq-grid">'
    +card('food','Der Kern','Food','Quartier','Alles, was auf den <b>Teller</b> kommt. Deine Speisen-Produkte, sauber strukturiert.')
    +card('drinks','Der Kern','Drinks','Quartier','Alles, was ins <b>Glas</b> geht. Gleich aufgebaut wie das Foodquartier.')
@@ -4821,7 +4821,7 @@ window.__tsMO = function(cb){
     var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 3.2 – Mehrwert & Zielbild" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 3.2 – Mehrwert & Zielbild" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -4889,7 +4889,7 @@ window.__tsMO = function(cb){
   function ensureLb(){
     var lb=document.getElementById('tsmb-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsmb-lb';
-    lb.innerHTML='<button class="tsmb-btn tsmb-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsmb-btn tsmb-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsmb-inner"><div class="tsmb-mockup"><img class="tsmb-frame" src="'+FRAME+'" alt="MacBook"><div class="tsmb-screen"><img src="'+SHOT+'" alt="Thai Peanut Tofu Bowl"></div></div></div><div class="tsmb-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    lb.innerHTML='<button class="tsmb-btn tsmb-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsmb-btn tsmb-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsmb-inner"><div class="tsmb-mockup"><img class="tsmb-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="tsmb-screen"><img src="'+SHOT+'" alt="Thai Peanut Tofu Bowl" loading="lazy" decoding="async"></div></div></div><div class="tsmb-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
     var inner=lb.querySelector('.tsmb-inner');
     lb.querySelector('.tsmb-closex').addEventListener('click',shut);
@@ -4903,7 +4903,7 @@ window.__tsMO = function(cb){
   function findAnchor(){ var n=document.querySelectorAll('.notion-text'); for(var i=0;i<n.length;i++){ var t=n[i].textContent; if(t && t.indexOf(ANCHOR)>-1) return n[i]; } return null; }
   function buildTile(){
     var root=document.createElement('div'); root.id='tsmb-root';
-    root.innerHTML='<div class="tsmb-tile" role="button" tabindex="0" aria-label="MacBook vergrößern"><div class="tsmb-cover"><img src="'+SHOT+'" alt=""></div><img class="tsmb-frame" src="'+FRAME+'" alt="MacBook"></div><div class="tsmb-caption">Gerichte Datenbank<span class="tsmb-accent"> – Live Beispiel</span></div><div class="tsmb-hint">Klicke zum Vergrößern</div>';
+    root.innerHTML='<div class="tsmb-tile" role="button" tabindex="0" aria-label="MacBook vergrößern"><div class="tsmb-cover"><img src="'+SHOT+'" alt="" loading="lazy" decoding="async"></div><img class="tsmb-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"></div><div class="tsmb-caption">Gerichte Datenbank<span class="tsmb-accent"> – Live Beispiel</span></div><div class="tsmb-hint">Klicke zum Vergrößern</div>';
     var tile=root.querySelector('.tsmb-tile');
     tile.addEventListener('click',openLb);
     tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
@@ -5150,9 +5150,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB 0 — Inventurliste" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB 0 — Inventurliste" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.1</div>'+
         '<h1 class="ts-hero__title">DB 0 : <span class="ts-gold">Inventurliste</span></h1>'+
       '</div>';
@@ -5182,9 +5182,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB VI–VII — Gemeinkosten & Löhne" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB VI–VII — Gemeinkosten & Löhne" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.5</div>'+
         '<h1 class="ts-hero__title">DB VI – VIII :<br><span class="ts-gold">GK und Löhne</span></h1>'+
       '</div>';
@@ -5214,9 +5214,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB IX–X — Allergene & Packaging" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB IX–X — Allergene & Packaging" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.6</div>'+
         '<h1 class="ts-hero__title">DB IX – X :<br><span class="ts-gold">Allergene &amp; Packaging</span></h1>'+
       '</div>';
@@ -5323,7 +5323,7 @@ window.__tsMO = function(cb){
   (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; var __go=function(){ for(var k in IMG){ var p=new Image(); p.src=IMG[k]; } }; if(document.readyState==='complete'){setTimeout(__go,800);}else{window.addEventListener('load',function(){setTimeout(__go,800);},{once:true});} })();
   function card(n, img, alt, type, name, tag, tagCls){
     return '<div class="tsalg-card" data-n="'+n+'">'+
-      '<div class="tc-img"><img src="'+img+'" alt="'+alt+'" loading="eager"></div>'+
+      '<div class="tc-img"><img src="'+img+'" alt="'+alt+'" loading="lazy" decoding="async"></div>'+
       '<div class="tc-body"><p class="tc-type">'+type+'</p><p class="tc-name">'+name+'</p>'+badge(tag,tagCls)+'</div>'+
     '</div>';
   }
@@ -5445,7 +5445,7 @@ window.__tsMO = function(cb){
     sec.innerHTML =
       '<div class="apc-inner"><div class="apc-grid">'+
         '<button type="button" class="apc-tile" aria-label="Vorschau öffnen">'+
-          '<img src="'+POSTER+'" alt="DB IX–X — Allergene &amp; Packaging" loading="eager">'+
+          '<img src="'+POSTER+'" alt="DB IX–X — Allergene &amp; Packaging" loading="lazy" decoding="async">'+
           '<span class="apc-play"><span></span></span>'+
         '</button>'+
         '<div class="apc-txt">'+
@@ -5462,7 +5462,7 @@ window.__tsMO = function(cb){
     var lb=document.getElementById('tsalgpc-lb');
     if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsalgpc-lb';
-    lb.innerHTML='<button class="apc-x" aria-label="Schließen">&times;</button><div class="apc-stage"><img src="'+POSTER+'" alt="DB IX–X — Allergene &amp; Packaging"></div>';
+    lb.innerHTML='<button class="apc-x" aria-label="Schließen">&times;</button><div class="apc-stage"><img src="'+POSTER+'" alt="DB IX–X — Allergene &amp; Packaging" loading="lazy" decoding="async"></div>';
     function close(){ lb.classList.remove('open'); }
     lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('apc-x')) close(); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
@@ -5567,7 +5567,7 @@ window.__tsMO = function(cb){
           '<p>Kommt die Frage vom Gast oder die Kontrolle vom Amt, öffnest du das Allergen und hast sofort alles Betroffene vor dir, statt Karten und Rezepte einzeln durchzugehen.</p>'+
         '</div>'+
         '<button type="button" class="apc2-tile" aria-label="Live-Ansicht im großen MacBook öffnen">'+
-          '<img src="'+POSTER+'" alt="Allergene-Datenbank — Galerieansicht" loading="eager">'+
+          '<img src="'+POSTER+'" alt="Allergene-Datenbank — Galerieansicht" loading="lazy" decoding="async">'+
         '</button>'+
       '</div></div>';
     return sec;
@@ -5580,8 +5580,8 @@ window.__tsMO = function(cb){
     lb=document.createElement('div'); lb.id='tsalgpc2-lb';
     lb.innerHTML='<button class="apc2-btn apc2-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
       '<button class="apc2-btn apc2-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
-      '<div class="apc2-mbinner"><div class="apc2-mockup"><img class="apc2-frame" src="'+FRAME+'" alt="MacBook">'+
-        '<div class="apc2-screen"><img src="'+SHOT+'" alt="Allergen „Gluten“ — Zutaten, Rezepte und Gerichte"></div>'+
+      '<div class="apc2-mbinner"><div class="apc2-mockup"><img class="apc2-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async">'+
+        '<div class="apc2-screen"><img src="'+SHOT+'" alt="Allergen „Gluten“ — Zutaten, Rezepte und Gerichte" loading="lazy" decoding="async"></div>'+
       '</div></div>'+
       '<div class="apc2-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
@@ -5835,8 +5835,8 @@ window.__tsMO = function(cb){
     var els={};
     SPRITES.forEach(function(sp){
       var d=document.createElement('div'); d.className='sp '+sp.cls;
-      var second=(sp.img2&&IMG[sp.img2])?'<img class="box-open" src="'+IMG[sp.img2]+'" alt="">':'';
-      var inner=(sp.img&&IMG[sp.img])?'<div class="ph"><img class="box-closed" src="'+IMG[sp.img]+'" alt="">'+second+'</div>':'<div class="ph"></div>';
+      var second=(sp.img2&&IMG[sp.img2])?'<img class="box-open" src="'+IMG[sp.img2]+'" alt="" loading="lazy" decoding="async">':'';
+      var inner=(sp.img&&IMG[sp.img])?'<div class="ph"><img class="box-closed" src="'+IMG[sp.img]+'" alt="" loading="lazy" decoding="async">'+second+'</div>':'<div class="ph"></div>';
       d.innerHTML=inner+'<div class="cap">'+sp.cap+'</div>';
       stage.appendChild(d); els[sp.id]=d;
     });
@@ -6046,8 +6046,8 @@ window.__tsMO = function(cb){
   var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function tileHtml(){
-    if(POSTER) return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><img src="'+POSTER+'" alt="DB Packaging — Paket-Übersicht" loading="lazy"></button>';
-    return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><span class="pkr-ph"><i>DB Packaging · Screenshot folgt</i><img src="'+FRAME+'" alt=""></span></button>';
+    if(POSTER) return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><img src="'+POSTER+'" alt="DB Packaging — Paket-Übersicht" loading="lazy" decoding="async"></button>';
+    return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><span class="pkr-ph"><i>DB Packaging · Screenshot folgt</i><img src="'+FRAME+'" alt="" loading="lazy" decoding="async"></span></button>';
   }
 
   function build(){
@@ -6076,11 +6076,11 @@ window.__tsMO = function(cb){
     var lb=document.getElementById('tspkres-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tspkres-lb';
     var inner = SHOT
-      ? '<img src="'+SHOT+'" alt="DB Packaging — Pakete, Artikel und Kosten">'
+      ? '<img src="'+SHOT+'" alt="DB Packaging — Pakete, Artikel und Kosten" loading="lazy" decoding="async">'
       : '<div class="pkr-phbig">Screenshot der DB Packaging folgt</div>';
     lb.innerHTML='<button class="pkr-btn pkr-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
       '<button class="pkr-btn pkr-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
-      '<div class="pkr-mbinner"><div class="pkr-mockup"><img class="pkr-frame" src="'+FRAME+'" alt="MacBook">'+
+      '<div class="pkr-mbinner"><div class="pkr-mockup"><img class="pkr-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async">'+
         '<div class="pkr-screen">'+inner+'</div>'+
       '</div></div>'+
       '<div class="pkr-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
@@ -6547,7 +6547,7 @@ window.__tsMO = function(cb){
       '<div class="tsacd-panel">'+
         '<button type="button" class="tsacd-close" aria-label="Schließen">'+XICON+'</button>'+
         '<div class="tsacd-grid">'+
-          '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'"></div>'+
+          '<div class="tsacd-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'" loading="lazy" decoding="async"></div>'+
           '<div class="tsacd-info">'+
             '<div class="tsacd-eyebrow">DB IX : Allergene</div>'+
             '<h2 class="tsacd-title">'+(idx+1)+'. '+esc(it.name)+'</h2>'+
@@ -6578,7 +6578,7 @@ window.__tsMO = function(cb){
   function build(){
     var cards=ITEMS.map(function(it,i){
       return '<article class="tsac-card'+(isIn(it.name)?' in':'')+'" data-i="'+i+'" role="button" tabindex="0" aria-label="'+esc(it.name)+' öffnen">'+
-        '<div class="tsac-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'" loading="lazy"><span class="tsac-badge">'+CHECK+'</span></div>'+
+        '<div class="tsac-imgwrap"><img src="'+(it.img||ph(it.name))+'" alt="'+esc(it.name)+'" loading="lazy" decoding="async"><span class="tsac-badge">'+CHECK+'</span></div>'+
         '<div class="tsac-body"><h4 class="tsac-name">'+(i+1)+'. '+esc(it.name)+'</h4><p class="tsac-desc">'+esc(it.wasistes)+'</p><div class="tsac-val">'+esc(it.intoleranz)+'</div></div>'+
       '</article>';
     }).join('');
@@ -6822,7 +6822,7 @@ window.__tsMO = function(cb){
       ov.innerHTML='<div class="tsgk-ov__scrim"></div>'
         +'<div class="tsgk-ov__box">'
           +'<button class="tsgk-ov__x" aria-label="Schließen">&times;</button>'
-          +'<div class="tsgk-ov__hero"><img class="tsgk-ov__heroimg" alt="" src="" loading="lazy"><img class="tsgk-ov__logo" src="'+LOGO+'" alt="Tasty Studios"><div class="tsgk-ov__cap"><span class="tsgk-ov__k">Kostenblock</span><h3 class="tsgk-ov__h"></h3></div></div>'
+          +'<div class="tsgk-ov__hero"><img class="tsgk-ov__heroimg" alt="" src="" loading="lazy" decoding="async"><img class="tsgk-ov__logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async"><div class="tsgk-ov__cap"><span class="tsgk-ov__k">Kostenblock</span><h3 class="tsgk-ov__h"></h3></div></div>'
           +'<div class="tsgk-ov__body"></div>'
         +'</div>';
       document.body.appendChild(ov);
@@ -6850,8 +6850,8 @@ window.__tsMO = function(cb){
     var root=document.createElement('div'); root.id='tsgk';
     root.innerHTML='<div class="tsgk-grid">'+CARDS.map(function(c){
       return '<div class="tsgk-card" style="--g:'+GLOW+'" data-slug="'+c[1]+'" role="button" tabindex="0" aria-label="'+c[0]+' — Details öffnen">'
-        +'<span class="tsgk-bg" aria-hidden="true"><img src="'+BASE+c[1]+'.webp" alt="" loading="lazy"></span>'
-        +'<div class="tsgk-in"><img class="tsgk-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy">'
+        +'<span class="tsgk-bg" aria-hidden="true"><img src="'+BASE+c[1]+'.webp" alt="" loading="lazy" decoding="async"></span>'
+        +'<div class="tsgk-in"><img class="tsgk-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async">'
         +'<span class="tsgk-k">Kostenblock</span>'
         +'<h3 class="tsgk-h">'+c[0]+'</h3></div>'
         +'</div>';
@@ -7235,9 +7235,9 @@ window.__tsMO = function(cb){
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="DB I - III — Lieferanten" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="DB I - III — Lieferanten" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.2.1</div>'+
         '<h1 class="ts-hero__title">DB I - III : <span class="ts-gold">Lieferanten</span></h1>'+
       '</div>';
@@ -7425,7 +7425,7 @@ window.__tsMO = function(cb){
     var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.1 – DB 0: Inventurliste" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.1 – DB 0: Inventurliste" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -7513,7 +7513,7 @@ window.__tsMO = function(cb){
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.4 – DB V: Rezepturen" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.4 – DB V: Rezepturen" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -7663,8 +7663,8 @@ window.__tsMO = function(cb){
   var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function tileHtml(){
-    if(POSTER) return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><img src="'+POSTER+'" alt="Inventurliste 01-2026 — Monats-Tabelle" loading="lazy"></button>';
-    return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><span class="ivr-ph"><i>Inventurliste 01-2026 · Screenshot folgt</i><img src="'+FRAME+'" alt=""></span></button>';
+    if(POSTER) return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><img src="'+POSTER+'" alt="Inventurliste 01-2026 — Monats-Tabelle" loading="lazy" decoding="async"></button>';
+    return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><span class="ivr-ph"><i>Inventurliste 01-2026 · Screenshot folgt</i><img src="'+FRAME+'" alt="" loading="lazy" decoding="async"></span></button>';
   }
 
   function build(){
@@ -7692,11 +7692,11 @@ window.__tsMO = function(cb){
     var lb=document.getElementById('tsinvres-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsinvres-lb';
     var inner = SHOT
-      ? '<img src="'+SHOT+'" alt="Inventurliste 01-2026 — Artikel, Zählwerte und Monatssummen">'
+      ? '<img src="'+SHOT+'" alt="Inventurliste 01-2026 — Artikel, Zählwerte und Monatssummen" loading="lazy" decoding="async">'
       : '<div class="ivr-phbig">Screenshot der Inventurliste 01-2026 folgt</div>';
     lb.innerHTML='<button class="ivr-btn ivr-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
       '<button class="ivr-btn ivr-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
-      '<div class="ivr-mbinner"><div class="ivr-mockup"><img class="ivr-frame" src="'+FRAME+'" alt="MacBook">'+
+      '<div class="ivr-mbinner"><div class="ivr-mockup"><img class="ivr-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async">'+
         '<div class="ivr-screen">'+inner+'</div>'+
       '</div></div>'+
       '<div class="ivr-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
@@ -7815,7 +7815,7 @@ window.__tsMO = function(cb){
   function build(){
     var root=document.createElement('div'); root.id='tslink';
     root.innerHTML='<div class="tsl-grid">'+CARDS.map(function(c){
-      return '<a class="tsl-card" href="'+c[3]+'" target="_blank" rel="noopener" style="--g:'+GLOW+'"><span class="tsl-bg" aria-hidden="true"><img src="'+c[5]+'" alt="" loading="lazy"></span><span class="tsl-num">'+c[0]+'</span><img class="tsl-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy"><span class="tsl-k">Datenbank</span><h3 class="tsl-h">DB '+c[1]+'</h3><p class="tsl-t">'+c[2]+'</p><div class="tsl-foot">'+LINKICON+'Verknüpfung in '+c[4]+'</div></a>';
+      return '<a class="tsl-card" href="'+c[3]+'" target="_blank" rel="noopener" style="--g:'+GLOW+'"><span class="tsl-bg" aria-hidden="true"><img src="'+c[5]+'" alt="" loading="lazy" decoding="async"></span><span class="tsl-num">'+c[0]+'</span><img class="tsl-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async"><span class="tsl-k">Datenbank</span><h3 class="tsl-h">DB '+c[1]+'</h3><p class="tsl-t">'+c[2]+'</p><div class="tsl-foot">'+LINKICON+'Verknüpfung in '+c[4]+'</div></a>';
     }).join('')+'</div>';
     return root;
   }
@@ -7927,7 +7927,7 @@ window.__tsMO = function(cb){
   function ensureLb(){
     var lb=document.getElementById('tsiv-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsiv-lb';
-    lb.innerHTML='<button class="tsiv-btn tsiv-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsiv-btn tsiv-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsiv-inner"><div class="tsiv-mockup"><img class="tsiv-frame" src="'+FRAME+'" alt="MacBook"><div class="tsiv-screen"><img src="'+SHOT+'" alt="Avocado — Zutaten-Detailseite"></div></div></div><div class="tsiv-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    lb.innerHTML='<button class="tsiv-btn tsiv-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsiv-btn tsiv-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsiv-inner"><div class="tsiv-mockup"><img class="tsiv-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="tsiv-screen"><img src="'+SHOT+'" alt="Avocado — Zutaten-Detailseite" loading="lazy" decoding="async"></div></div></div><div class="tsiv-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
     var inner=lb.querySelector('.tsiv-inner');
     lb.querySelector('.tsiv-closex').addEventListener('click',shut);
@@ -7940,7 +7940,7 @@ window.__tsMO = function(cb){
   function openLb(){ var lb=ensureLb(); lb.classList.add('open'); lb.classList.remove('full'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.tsiv-screen'); if(sc) sc.scrollTop=0; }
   function buildTile(){
     var root=document.createElement('div'); root.id='tsiv-root';
-    root.innerHTML='<div class="tsiv-textslot"></div><div class="tsiv-unit"><div class="tsiv-tile" role="button" tabindex="0" aria-label="Mein Inventar vergrößern"><img class="tsiv-cover" src="'+COVER+'" alt="Mein Inventar — DB Inventurliste" fetchpriority="high" decoding="async"></div><div class="tsiv-caption">Mein Inventar<span class="tsiv-accent"> – Live Beispiel</span></div><div class="tsiv-hint">Klicke zum Vergrößern</div></div>';
+    root.innerHTML='<div class="tsiv-textslot"></div><div class="tsiv-unit"><div class="tsiv-tile" role="button" tabindex="0" aria-label="Mein Inventar vergrößern"><img class="tsiv-cover" src="'+COVER+'" alt="Mein Inventar — DB Inventurliste" fetchpriority="high" decoding="async" loading="lazy" decoding="async"></div><div class="tsiv-caption">Mein Inventar<span class="tsiv-accent"> – Live Beispiel</span></div><div class="tsiv-hint">Klicke zum Vergrößern</div></div>';
     var tile=root.querySelector('.tsiv-tile');
     tile.addEventListener('click',openLb);
     tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
@@ -10702,7 +10702,7 @@ var TSISL_TEAM_ONB_V2=[
     var cards=steps.map(function(st,i){
       var v=k.objekt_varianten[i%k.objekt_varianten.length]||{};
       return '<article class="tss-card'+(v.fit==='contain'?' tss-fit-contain':'')+(isDone(st)?' is-done':'')+'" data-step="'+i+'" role="button" tabindex="0" aria-label="'+st.title+' öffnen">'
-        +'<div class="tss-imgwrap"><img src="'+(v.img||ph(v.name||st.title))+'" alt="'+st.title+'" loading="lazy"><span class="tss-donebadge">'+CHECK+'</span></div>'
+        +'<div class="tss-imgwrap"><img src="'+(v.img||ph(v.name||st.title))+'" alt="'+st.title+'" loading="lazy" decoding="async"><span class="tss-donebadge">'+CHECK+'</span></div>'
         +'<div class="tss-body">'
           +'<h4 class="tss-name">'+st.title+'</h4>'
           +'<p class="tss-desc">'+st.desc+'</p>'
@@ -10714,7 +10714,7 @@ var TSISL_TEAM_ONB_V2=[
       relCards=page.relations.map(function(r,ri){
         var done=(r.type==='later'&&localStorage.getItem(relKey(page,r))==='1')||(r.mirrorKey&&localStorage.getItem(r.mirrorKey)==='1');
         return '<article class="tss-card tss-rel tss-'+r.type+(r.fit==='contain'?' tss-fit-contain':'')+(done?' is-done':'')+'" data-rel="'+ri+'" role="button" tabindex="0" aria-label="'+r.name+' — '+r.flag+'">'
-          +'<div class="tss-imgwrap"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'" loading="lazy"><span class="tss-flag">'+r.flag+'</span><span class="tss-donebadge">'+CHECK+'</span></div>'
+          +'<div class="tss-imgwrap"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'" loading="lazy" decoding="async"><span class="tss-flag">'+r.flag+'</span><span class="tss-donebadge">'+CHECK+'</span></div>'
           +'<div class="tss-body"><h4 class="tss-name">'+r.name+'</h4><p class="tss-desc">'+r.desc+'</p><div class="tss-val tss-val--rel">'+r.target+'</div></div>'
         +'</article>';
       }).join('');
@@ -10823,7 +10823,7 @@ var TSISL_TEAM_ONB_V2=[
       +'<div class="tsd-panel">'
         +'<button type="button" class="tsd-close" aria-label="Schließen">'+XICON+'</button>'
         +'<div class="tsd-grid">'
-          +'<div class="tsd-imgwrap'+(v.fit==='contain'?' tsd-imgwrap--contain':'')+'"><img src="'+(v.img||ph(v.name||st.title))+'" alt="'+st.title+'" style="view-transition-name:tsshopimg"></div>'
+          +'<div class="tsd-imgwrap'+(v.fit==='contain'?' tsd-imgwrap--contain':'')+'"><img src="'+(v.img||ph(v.name||st.title))+'" alt="'+st.title+'" style="view-transition-name:tsshopimg" loading="lazy" decoding="async"></div>'
           +'<div class="tsd-info">'
             +'<div class="tsd-eyebrow">'+page.eyebrow+'</div>'
             +'<h2 class="tsd-title" style="view-transition-name:tsshoptitle">'+st.title+'</h2>'
@@ -10891,7 +10891,7 @@ var TSISL_TEAM_ONB_V2=[
       +'<div class="tsd-panel">'
         +'<button type="button" class="tsd-close" aria-label="Schließen">'+XICON+'</button>'
         +'<div class="tsd-grid">'
-          +'<div class="tsd-imgwrap'+(contain?' tsd-imgwrap--contain':'')+'"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'"></div>'
+          +'<div class="tsd-imgwrap'+(contain?' tsd-imgwrap--contain':'')+'"><img src="'+(r.img||ph(r.name))+'" alt="'+r.name+'" loading="lazy" decoding="async"></div>'
           +'<div class="tsd-info">'
             +'<div class="tsd-eyebrow">'+(isLater?'Safe for Later':'Ghost · erscheint automatisch')+'</div>'
             +'<h2 class="tsd-title">'+r.name+'</h2>'
@@ -11175,7 +11175,7 @@ var TSISL_TEAM_ONB_V2=[
     var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.2 – DB I - III: Lieferpartner" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.2 – DB I - III: Lieferpartner" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -11277,7 +11277,7 @@ var TSISL_TEAM_ONB_V2=[
     var track='';
     NODES.forEach(function(n,i){
       track += '<div class="tsflow-node'+(n.central?' central':'')+'" style="--i:'+i+'">'
-             +   '<div class="tsflow-medallion"><img src="'+IMG+n.img+'" alt="'+n.label+'" loading="lazy"></div>'
+             +   '<div class="tsflow-medallion"><img src="'+IMG+n.img+'" alt="'+n.label+'" loading="lazy" decoding="async"></div>'
              +   '<div class="tsflow-num">'+n.k+'</div>'
              +   '<div class="tsflow-label">'+n.label+'</div>'
              +   '<div class="tsflow-desc">'+n.desc+'</div>'
@@ -11492,7 +11492,7 @@ var TSISL_TEAM_ONB_V2=[
   function ensureLb(){
     var lb=document.getElementById('ts2mac-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='ts2mac-lb';
-    lb.innerHTML='<button class="ts2mac-btn ts2mac-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="ts2mac-btn ts2mac-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="ts2mac-inner"><div class="ts2mac-mockup"><img class="ts2mac-fr" src="'+FRAME+'" alt="MacBook"><div class="ts2mac-screen"><img alt=""></div></div></div><div class="ts2mac-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    lb.innerHTML='<button class="ts2mac-btn ts2mac-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="ts2mac-btn ts2mac-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="ts2mac-inner"><div class="ts2mac-mockup"><img class="ts2mac-fr" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="ts2mac-screen"><img alt="" loading="lazy" decoding="async"></div></div></div><div class="ts2mac-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
     var inner=lb.querySelector('.ts2mac-inner');
     lb.querySelector('.ts2mac-closex').addEventListener('click',shutFull);
@@ -11650,7 +11650,7 @@ var TSISL_TEAM_ONB_V2=[
   function build(){
     var root=document.createElement('div'); root.id='tslmod';
     root.innerHTML='<div class="tsl-grid">'+CARDS.map(function(c){
-      return '<a class="tsl-card" href="'+c[4]+'" style="--g:'+GLOW+'"><span class="tsl-bg" aria-hidden="true"><img src="'+BASE+c[5]+'" alt="" loading="lazy"></span><span class="tsl-num">'+c[0]+'</span><img class="tsl-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy"><span class="tsl-k">'+c[1]+'</span><h3 class="tsl-h">'+c[2]+'</h3><p class="tsl-t">'+c[3]+'</p></a>';
+      return '<a class="tsl-card" href="'+c[4]+'" style="--g:'+GLOW+'"><span class="tsl-bg" aria-hidden="true"><img src="'+BASE+c[5]+'" alt="" loading="lazy" decoding="async"></span><span class="tsl-num">'+c[0]+'</span><img class="tsl-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async"><span class="tsl-k">'+c[1]+'</span><h3 class="tsl-h">'+c[2]+'</h3><p class="tsl-t">'+c[3]+'</p></a>';
     }).join('')+'</div>';
     return root;
   }
@@ -11986,7 +11986,7 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tsc-stage">'+
         '<div class="tsc-win">'+
           '<div class="tsc-done"><span class="dot">'+CK+'</span>Neue Größeneinheit</div>'+
-          '<div class="tsc-cover"><img src="'+IMG+'" alt="Spinat"></div>'+
+          '<div class="tsc-cover"><img src="'+IMG+'" alt="Spinat" loading="lazy" decoding="async"></div>'+
           '<div class="tsc-pad">'+
             '<div class="tsc-titlerow"><span class="tsc-logo">'+TLOGO+'</span><span class="tsc-h1"><span class="tsc-h1txt">Spinat</span><span class="caret"></span></span></div>'+
             '<div class="tsc-meta">Details anzeigen · Kommentar hinzufügen</div>'+
@@ -12003,7 +12003,7 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   /* ---------- Panel B markup ---------- */
-  function galCard(label){ return '<div class="tscbb-gc"><div class="im"><img src="'+IMG+'" alt="'+label+'"></div><div class="lb">'+label+'</div></div>'; }
+  function galCard(label){ return '<div class="tscbb-gc"><div class="im"><img src="'+IMG+'" alt="'+label+'" loading="lazy" decoding="async"></div><div class="lb">'+label+'</div></div>'; }
   function animB(){
     var barTools=[svgSm('<path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'),
       svgSm('<path d="M7 4v16m0 0l-3-3m3 3l3-3M17 20V4m0 0l-3 3m3-3l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'),
@@ -12053,8 +12053,8 @@ var TSISL_TEAM_ONB_V2=[
   var TSCARD_LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var TSCARD_BASE='https://tastyrob123.github.io/kurs/img/modul2/';
   function coverCard(img,text){
-    return '<div class="tsc-idlecover"><span class="tsccard-bg" aria-hidden="true"><img src="'+TSCARD_BASE+img+'" alt="" loading="lazy"></span>'+
-      '<img class="tsccard-logo" src="'+TSCARD_LOGO+'" alt="Tasty Studios" loading="lazy">'+
+    return '<div class="tsc-idlecover"><span class="tsccard-bg" aria-hidden="true"><img src="'+TSCARD_BASE+img+'" alt="" loading="lazy" decoding="async"></span>'+
+      '<img class="tsccard-logo" src="'+TSCARD_LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async">'+
       '<p class="tsccard-t">'+text+'</p></div>';
   }
   var COVER_A=coverCard('zutaten.jpg','Zutat duplizieren, Portionsgröße setzen — fertig ist der Baustein.');
@@ -12268,7 +12268,7 @@ var TSISL_TEAM_ONB_V2=[
   function ensureLb(){
     var lb=document.getElementById('tszmac-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tszmac-lb';
-    lb.innerHTML='<button class="tszmac-btn tszmac-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tszmac-btn tszmac-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tszmac-inner"><div class="tszmac-mockup"><img class="tszmac-fr" src="'+FRAME+'" alt="MacBook"><div class="tszmac-screen"><img src="'+SHOT+'" alt="'+CAP+'"></div></div></div><div class="tszmac-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    lb.innerHTML='<button class="tszmac-btn tszmac-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tszmac-btn tszmac-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tszmac-inner"><div class="tszmac-mockup"><img class="tszmac-fr" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="tszmac-screen"><img src="'+SHOT+'" alt="'+CAP+'" loading="lazy" decoding="async"></div></div></div><div class="tszmac-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
     var inner=lb.querySelector('.tszmac-inner');
     lb.querySelector('.tszmac-closex').addEventListener('click',shutFull);
@@ -12515,7 +12515,7 @@ var TSISL_TEAM_ONB_V2=[
     var itemsHTML='';
     RECIPE.items.forEach(function(it,i){
       itemsHTML+='<div class="d5-item" style="transition-delay:'+(120+i*90)+'ms">'+
-        '<img class="d5-thumb" src="'+IMGBASE+it.img+'" alt="'+it.n+'" decoding="async">'+
+        '<img class="d5-thumb" src="'+IMGBASE+it.img+'" alt="'+it.n+'" decoding="async" loading="lazy" decoding="async">'+
         '<span class="nm">'+it.n+'<small>'+nf(it.p,2)+' €/kg</small></span>'+
         '<span class="qty"><div class="q1">'+it.g+' g</div><div class="q2"><b class="pp" data-g="'+it.g+'">–</b> g/Portion</div></span>'+
       '</div>';
@@ -12524,9 +12524,9 @@ var TSISL_TEAM_ONB_V2=[
     root.innerHTML=
       '<div class="d5-head">'+
         '<div class="d5-hero">'+
-          '<img class="d5-jar" src="'+JAR+'" alt="Basilikum-Pesto im Glas" decoding="async">'+
+          '<img class="d5-jar" src="'+JAR+'" alt="Basilikum-Pesto im Glas" decoding="async" loading="lazy" decoding="async">'+
           '<div class="d5-herotext">'+
-            '<img class="d5-logo" src="'+LOGO+'" alt="Tasty Studios">'+
+            '<img class="d5-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async">'+
             '<h2 class="d5-title"><span class="basil">Basilikum</span> <span class="pesto">Pesto</span></h2>'+
           '</div>'+
         '</div>'+
@@ -12751,7 +12751,7 @@ var TSISL_TEAM_ONB_V2=[
   function ensureLb(){
     var lb=document.getElementById('tsrv-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsrv-lb';
-    lb.innerHTML='<button class="tsrv-btn tsrv-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsrv-btn tsrv-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsrv-inner"><div class="tsrv-mockup"><img class="tsrv-frame" src="'+FRAME+'" alt="MacBook"><div class="tsrv-screen"><img src="'+SHOT+'" alt="Zutaten-Detailseite — Live Beispiel"></div></div></div><div class="tsrv-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
+    lb.innerHTML='<button class="tsrv-btn tsrv-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tsrv-btn tsrv-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><div class="tsrv-inner"><div class="tsrv-mockup"><img class="tsrv-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="tsrv-screen"><img src="'+SHOT+'" alt="Zutaten-Detailseite — Live Beispiel" loading="lazy" decoding="async"></div></div></div><div class="tsrv-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     document.body.appendChild(lb);
     var inner=lb.querySelector('.tsrv-inner');
     lb.querySelector('.tsrv-closex').addEventListener('click',shut);
@@ -12764,7 +12764,7 @@ var TSISL_TEAM_ONB_V2=[
   function openLb(){ var lb=ensureLb(); lb.classList.add('open'); lb.classList.remove('full'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.tsrv-screen'); if(sc) sc.scrollTop=0; }
   function buildTile(){
     var root=document.createElement('div'); root.id='tsrv-root';
-    root.innerHTML='<div class="tsrv-textslot"></div><div class="tsrv-unit"><div class="tsrv-tile" role="button" tabindex="0" aria-label="Meine Rezepturen vergrößern"><img class="tsrv-cover" src="'+COVER+'" alt="Meine Rezepturen — DB-Ansicht" fetchpriority="high" decoding="async"></div><div class="tsrv-caption">Meine Rezepturen<span class="tsrv-accent"> · DB-Ansicht – Live Beispiel</span></div><div class="tsrv-hint">Klicke zum Vergrößern</div></div>';
+    root.innerHTML='<div class="tsrv-textslot"></div><div class="tsrv-unit"><div class="tsrv-tile" role="button" tabindex="0" aria-label="Meine Rezepturen vergrößern"><img class="tsrv-cover" src="'+COVER+'" alt="Meine Rezepturen — DB-Ansicht" fetchpriority="high" decoding="async" loading="lazy" decoding="async"></div><div class="tsrv-caption">Meine Rezepturen<span class="tsrv-accent"> · DB-Ansicht – Live Beispiel</span></div><div class="tsrv-hint">Klicke zum Vergrößern</div></div>';
     var tile=root.querySelector('.tsrv-tile');
     tile.addEventListener('click',openLb);
     tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(); } });
@@ -13090,7 +13090,7 @@ var TSISL_TEAM_ONB_V2=[
     var root=document.createElement('div'); root.id='tsrezsys';
     var ingsHTML='';
     INGS.forEach(function(g){
-      ingsHTML+='<div class="rz-ing" data-id="'+g[0]+'"><div class="rz-ph"><img src="'+IMG_BASE+g[2]+'" alt="'+g[1]+'" loading="lazy"></div><span class="rz-lbl">'+g[1]+'</span></div>';
+      ingsHTML+='<div class="rz-ing" data-id="'+g[0]+'"><div class="rz-ph"><img src="'+IMG_BASE+g[2]+'" alt="'+g[1]+'" loading="lazy" decoding="async"></div><span class="rz-lbl">'+g[1]+'</span></div>';
     });
     var linesHTML='<div class="rz-lines-wrap"><svg class="rz-lines" viewBox="0 0 1000 100" preserveAspectRatio="none">'
       +'<path class="rz-ln" data-k="0" d="M125,0 C125,55 500,45 500,100"/>'
@@ -13103,7 +13103,7 @@ var TSISL_TEAM_ONB_V2=[
       +'<h2 class="rs-title">Eine Rezeptur. Das ganze <span class="g">System</span> rechnet mit.</h2></div>'
       +'<div class="rz-ings">'+ingsHTML+'</div>'
       +linesHTML
-      +'<div class="rz-hero"><div class="rz-glow"></div><img class="rz-jar" src="'+IMG_BASE+'pesto-glas.png" alt="Basilikum-Pesto — fertige Rezeptur"><span class="rz-hero-cap"><b>Basilikum-Pesto</b><small>Fertige Rezeptur · DB V</small></span></div>'
+      +'<div class="rz-hero"><div class="rz-glow"></div><img class="rz-jar" src="'+IMG_BASE+'pesto-glas.png" alt="Basilikum-Pesto — fertige Rezeptur" loading="lazy" decoding="async"><span class="rz-hero-cap"><b>Basilikum-Pesto</b><small>Fertige Rezeptur · DB V</small></span></div>'
       +'<div class="rs-keys"><span class="kp" data-i="0">Preis pro Portion</span><span class="kp" data-i="1">Allergene</span><span class="kp" data-i="2">Nährwerte</span></div>'
       +'<p class="rs-desc">Vom Inventarprodukt bis zur Menükalkulation — jede Rezeptur bündelt deine Zutaten und trägt <span class="g">Preis pro Portion, Allergene und Nährwerte</span> durch dein ganzes System.</p>'
       +'<div class="rs-foot"><button type="button" class="rs-replay">↻ Neu abspielen</button></div>';
@@ -13279,7 +13279,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.6 – DB VI–VIII: GK & Löhne" fetchpriority="high" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.6 – DB VI–VIII: GK & Löhne" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -13594,9 +13594,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Menükalkulation & Catering-Rechner" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Menükalkulation & Catering-Rechner" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 11</div>'+
         '<h1 class="ts-hero__title">Menükalkulation & <span class="ts-gold">Catering&#8209;Rechner</span></h1>'+
       '</div>';
@@ -13989,7 +13989,7 @@ var TSISL_TEAM_ONB_V2=[
   </div>
   <div class="split">
     <div class="tsmac" id="ts11pcmac" role="button" tabindex="0" aria-label="Video abspielen (folgt)">
-      <img alt="Lektion 11 — Menükalkulation, Video-Cover" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy">
+      <img alt="Lektion 11 — Menükalkulation, Video-Cover" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy" decoding="async">
       <div class="tsmac__play"><span></span></div>
     </div>
     <div class="split__text">
@@ -14014,7 +14014,7 @@ var TSISL_TEAM_ONB_V2=[
       <p>Aus der Verknüpfung zur Gerichte-Datenbank zieht sich der Wareneinsatz pro Position von allein, und die Summe steht sofort. Ändert sich eine Zutat, läuft die Änderung bis hierher durch, ohne dass du eine Zahl anfasst.</p>
           <p>Dazu listet dir jede Position die benötigten Mengen pro Zutat auf. Du siehst also nicht nur, was das Menü kostet, sondern auch, was du dafür einkaufen und produzieren musst. Die halbe Einkaufsliste schreibt sich mit.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w1.webp" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp"></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w1.webp" aria-label="Angebot Master – DB-Ansicht vergrößern"><img alt="Angebot Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w1.webp" loading="lazy" decoding="async"></div><div class="dbpc__cap"><span class="t"><b>Angebot Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -14028,7 +14028,7 @@ var TSISL_TEAM_ONB_V2=[
       <p>Umsatz, Ansprechpartner und Event-Termine hängen direkt am Kunden. Über die Verknüpfung zum Menürechner weißt du zu jedem Kunden, welche Menüs für ihn kalkuliert wurden.</p>
           <p>Und weil der Status als Pipeline geführt wird, ersetzt dir die Tabelle das halbe CRM: Vom Lead über das Angebot bis zur Abrechnung wandert jeder Kunde durch dieselben Stationen, und nichts bleibt im Posteingang liegen.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w2.webp" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp"></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w2.webp" aria-label="Kunden Master – DB-Ansicht vergrößern"><img alt="Kunden Master — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w2.webp" loading="lazy" decoding="async"></div><div class="dbpc__cap"><span class="t"><b>Kunden Master</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -14042,7 +14042,7 @@ var TSISL_TEAM_ONB_V2=[
       <p>Du siehst Deckungsbeitrag I, II und III, den Wareneinsatz in Prozent, die Personalkosten pro Produkt und einen Verkaufspreis für jede Wareneinsatz-Stufe. Am Ende steht der Preisvorschlag, mit dem du beim Kunden rausgehst.</p>
           <p>Auch die Zeiten stecken mit drin: Produktion, Verpackung, Logistik, Event und Nachbereitung laufen als Minuten in die Personalkosten ein. Damit kalkulierst du ein Catering nicht nur über die Ware, sondern über den kompletten Einsatz.</p>
     </div>
-    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w3.webp" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp"></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
+    <div class="pcrow__pc"><div class="dbpc"><div class="dbpc__mac" role="button" tabindex="0" data-scroll="https://tastyrob123.github.io/kurs/img/menuekalkulation/scroll-w3.webp" aria-label="Menürechner – DB-Ansicht vergrößern"><img alt="Menürechner — DB-Ansicht" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-w3.webp" loading="lazy" decoding="async"></div><div class="dbpc__cap"><span class="t"><b>Menürechner</b> · DB-Ansicht — Live-Beispiel</span><span class="z">Klicke zum Vergrößern</span></div></div></div>
   </div>
 </section>
 
@@ -14118,7 +14118,7 @@ var TSISL_TEAM_ONB_V2=[
     lb.style.cssText = 'position:fixed;inset:0;z-index:99999';
     lb.innerHTML = '<button type="button" class="slb-btn slb-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
       + '<button type="button" class="slb-btn slb-closex" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'
-      + '<div class="slb-inner"><div class="slb-mockup"><img class="slb-fr" src="' + SLB_FRAME + '" alt="MacBook"><div class="slb-screen"><img alt=""></div></div></div>'
+      + '<div class="slb-inner"><div class="slb-mockup"><img class="slb-fr" src="' + SLB_FRAME + '" alt="MacBook" loading="lazy" decoding="async"><div class="slb-screen"><img alt="" loading="lazy" decoding="async"></div></div></div>'
       + '<div class="slb-closehint">✕ Klicke daneben oder ESC zum Schließen</div>';
     var host = document.getElementById('ts11page') || document.body;
     host.appendChild(lb);
@@ -15093,9 +15093,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Interface-Bau — Grundstruktur & Widgets" src="'+HERO+'">'+
+      '<img class="ts-hero__img" alt="Interface-Bau — Grundstruktur & Widgets" src="'+HERO+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
         '<h1 class="ts-hero__title">Interface-Bau —<br><span class="ts-gold">Grundstruktur &amp; Widgets</span></h1>'+
       '</div>';
@@ -15112,7 +15112,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   function viewMock(){
     var slides='';
-    for(var i=0;i<VIEWS.length;i++){ slides+='<img class="vslide'+(i===0?' on':'')+'" src="'+VIEWS[i].src+'" alt="Ansicht: '+VIEWS[i].n+'" loading="lazy">'; }
+    for(var i=0;i<VIEWS.length;i++){ slides+='<img class="vslide'+(i===0?' on':'')+'" src="'+VIEWS[i].src+'" alt="Ansicht: '+VIEWS[i].n+'" loading="lazy" decoding="async">'; }
     return laptop('<div class="vswitch"><span class="vbadge">Ansicht: <b>Tabelle</b></span>'+slides+'</div>');
   }
   function canvaMock(){
@@ -15126,7 +15126,7 @@ var TSISL_TEAM_ONB_V2=[
       dots+='<button class="cmp-dot'+(i===1?' on':'')+'" aria-label="Beispiel '+i+'"></button>';
     }
     return '<div class="tcard compare">'+
-      '<div class="tlogo"><img src="'+logo+'" alt="'+name+'"></div>'+
+      '<div class="tlogo"><img src="'+logo+'" alt="'+name+'" loading="lazy" decoding="async"></div>'+
       '<div class="tvisual"><div class="cmp-stage">'+slides+
         '<button class="cmp-nav cmp-prev" aria-label="Vorheriges Beispiel">‹</button>'+
         '<button class="cmp-nav cmp-next" aria-label="Nächstes Beispiel">›</button>'+
@@ -15146,7 +15146,7 @@ var TSISL_TEAM_ONB_V2=[
       if(i) tr+='<span class="tplus">+</span>';
       var lg=TOOLLOGO[tools[i]];
       tr+='<span class="tunit">'+
-            (lg?'<span class="tmark"><img src="'+lg+'" alt="'+tools[i]+'" loading="lazy"></span>':'')+
+            (lg?'<span class="tmark"><img src="'+lg+'" alt="'+tools[i]+'" loading="lazy" decoding="async"></span>':'')+
             '<span class="tname">'+tools[i]+'</span>'+
           '</span>';
     }
@@ -15160,13 +15160,13 @@ var TSISL_TEAM_ONB_V2=[
   var PC_SHOT='https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp';
   var PC_CAPS=['Erst steht die Datenbank. Jeder Eintrag ist angelegt, nur die Kachel in der Galerie ist noch leer und wartet auf ihr Titelbild.','Jetzt schreibst du den Prompt, die genaue Anweisung ans Bild-Tool. Claude oder ChatGPT helfen dir, sie sauber zu formulieren.','Den Prompt gibst du ins passende Tool. Für unsere Tomate übernimmt Gemini, weil es Lebensmittel am glaubwürdigsten trifft.','In Canva legst du den Titel über die Tomate und setzt einen Schatten darunter, damit die Schrift auf dem Bild lesbar bleibt.','Bevor es zurück nach Notion geht, sortierst du die fertigen Cover in Ordner auf dem Rechner. So findest du später jedes Bild wieder.','Aus dem Ordner lädst du das Cover in den passenden Eintrag hoch. Notion legt es als Titelbild auf die Kachel der Galerie.','Zum Schluss stellst du die Ansicht auf Galerie. Die Kachel zeigt ihr fertiges Cover in der Kartenvorschau, der Eintrag ist am Ziel.'];
   var PC_STEPS=[
-    {lbl:'Datenbank',  med:'<img class="pc-logo" src="'+LG_NOTION+'" alt="Notion">', pill:'<img src="'+LG_NOTION+'" alt=""><span>Notion</span>'},
-    {lbl:'Prompt',     med:'<span class="pc-duo"><img src="'+LG_CLAUDE+'" alt="Claude"><img src="'+LG_OPENAI+'" alt="ChatGPT"></span>', pill:'<span>Claude &middot; ChatGPT</span>'},
-    {lbl:'Generieren', med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Generiertes Bild">', pill:'<span class="pc-plogos"><img src="'+LG_GEMINI+'" alt="Gemini"><img src="'+LG_HIGGS+'" alt="Higgsfield"><img src="'+LG_MIDJOURNEY+'" alt="Midjourney"></span>'},
-    {lbl:'Canva',      med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Bild in Canva">', pill:'<img src="'+LG_CANVA+'" alt=""><span>Canva</span>'},
+    {lbl:'Datenbank',  med:'<img class="pc-logo" src="'+LG_NOTION+'" alt="Notion" loading="lazy" decoding="async">', pill:'<img src="'+LG_NOTION+'" alt="" loading="lazy" decoding="async"><span>Notion</span>'},
+    {lbl:'Prompt',     med:'<span class="pc-duo"><img src="'+LG_CLAUDE+'" alt="Claude" loading="lazy" decoding="async"><img src="'+LG_OPENAI+'" alt="ChatGPT" loading="lazy" decoding="async"></span>', pill:'<span>Claude &middot; ChatGPT</span>'},
+    {lbl:'Generieren', med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Generiertes Bild" loading="lazy" decoding="async">', pill:'<span class="pc-plogos"><img src="'+LG_GEMINI+'" alt="Gemini" loading="lazy" decoding="async"><img src="'+LG_HIGGS+'" alt="Higgsfield" loading="lazy" decoding="async"><img src="'+LG_MIDJOURNEY+'" alt="Midjourney" loading="lazy" decoding="async"></span>'},
+    {lbl:'Canva',      med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Bild in Canva" loading="lazy" decoding="async">', pill:'<img src="'+LG_CANVA+'" alt="" loading="lazy" decoding="async"><span>Canva</span>'},
     {lbl:'Ordner',     med:'<span class="pc-fold"></span>', pill:'<span>Rechner</span>'},
-    {lbl:'Upload',     med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Upload">', pill:'<img src="'+LG_NOTION+'" alt=""><span>Notion</span>'},
-    {lbl:'Galerie',    med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Cover in der Galerie">', pill:'<span>Kartenvorschau</span>'}
+    {lbl:'Upload',     med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Upload" loading="lazy" decoding="async">', pill:'<img src="'+LG_NOTION+'" alt="" loading="lazy" decoding="async"><span>Notion</span>'},
+    {lbl:'Galerie',    med:'<img class="pc-full" src="'+PC_SHOT+'" alt="Cover in der Galerie" loading="lazy" decoding="async">', pill:'<span>Kartenvorschau</span>'}
   ];
   function pcHTML(){
     var nodes='';
@@ -15269,7 +15269,7 @@ var TSISL_TEAM_ONB_V2=[
     /* Veredeln in Canva Pro — Logo + Überschrift mittig, Bullets links, PC rechts */
     '<section class="rev">'+
       '<div class="tsif-col center">'+
-        '<img class="canva-logo" src="'+LG_CANVA+'" alt="Canva">'+
+        '<img class="canva-logo" src="'+LG_CANVA+'" alt="Canva" loading="lazy" decoding="async">'+
         '<h2>Veredeln in <span class="gold">Canva Pro</span></h2>'+
         '<p class="tsif-sub">Manche Bilder gehen vor Notion noch kurz durch Canva Pro. Dort machst du aus einem Rohbild ein fertiges, verkaufsstarkes Cover.</p>'+
       '</div>'+
@@ -15707,9 +15707,9 @@ var TSISL_TEAM_ONB_V2=[
     if(document.querySelector(".ts-hero")) return;
     var hero=document.createElement("div"); hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Food- und Drinksquartier" src="'+HERO+'">'+
+      '<img class="ts-hero__img" alt="Food- und Drinksquartier" src="'+HERO+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Lektion 2.4</div>'+
         '<h1 class="ts-hero__title">Food- und Drinks<span class="ts-gold">quartier</span></h1>'+
       '</div>';
@@ -15724,7 +15724,7 @@ var TSISL_TEAM_ONB_V2=[
     lbEl.innerHTML=
       '<button class="fdqm-btn fdqm-expand" title="Vollbild" aria-label="Vollbild"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
       '<button class="fdqm-btn fdqm-x" title="Schließen" aria-label="Schließen"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>'+
-      '<div class="fdqm-lb-inner"><div class="fdqm-mock"><img class="fdqm-mock-frame" src="'+FRAME+'" alt="MacBook"><div class="fdqm-mock-screen"><img alt=""></div></div>'+
+      '<div class="fdqm-lb-inner"><div class="fdqm-mock"><img class="fdqm-mock-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async"><div class="fdqm-mock-screen"><img alt="" loading="lazy" decoding="async"></div></div>'+
         '<div class="fdqm-lb-cap"></div><div class="fdqm-lb-hint">Scroll im Screen · ESC oder Klick daneben zum Schließen</div></div>';
     document.body.appendChild(lbEl);
     var inner=lbEl.querySelector(".fdqm-lb-inner");
@@ -15751,8 +15751,8 @@ var TSISL_TEAM_ONB_V2=[
     var macs=ITEMS.map(function(it){
       return '<div class="fdqm-item">'+
         '<div class="fdqm-tile" data-page="'+it.page+'" data-label="'+it.label+'" role="button" tabindex="0" aria-label="'+it.label+' vergrößern">'+
-          '<div class="fdqm-screen"><img src="'+it.page+'" alt="'+it.label+'"></div>'+
-          '<img class="fdqm-frame" src="'+FRAME+'" alt="MacBook">'+
+          '<div class="fdqm-screen"><img src="'+it.page+'" alt="'+it.label+'" loading="lazy" decoding="async"></div>'+
+          '<img class="fdqm-frame" src="'+FRAME+'" alt="MacBook" loading="lazy" decoding="async">'+
         '</div>'+
         '<div class="fdqm-caption">'+it.label+'<span class="g"> – Live Beispiel</span></div>'+
         '<div class="fdqm-hint">Klicke zum Vergrößern</div>'+
@@ -15767,7 +15767,7 @@ var TSISL_TEAM_ONB_V2=[
       '</div>'+
       '<section class="fdqm"><div class="fdqm-row">'+macs+'</div></section>'+
       '<section class="fdq-pc"><div class="fdq-pc-grid">'+
-        '<div class="fdq-pc-tile"><img alt="Food- &amp; Drinksquartier — Interface" src="'+COVER+'"></div>'+
+        '<div class="fdq-pc-tile"><img alt="Food- &amp; Drinksquartier — Interface" src="'+COVER+'" loading="lazy" decoding="async"></div>'+
         '<div class="fdq-pc-txt">'+
           '<h2 class="fdq-pc-h">Das Interface als <span class="g">Steuerzentrale</span></h2>'+
           '<p>Die Datenbanken liefern die Wahrheit — aber niemand arbeitet gerne in rohen Tabellen. Deshalb bauen wir aus den Quartieren eine Oberfläche, die sich anfühlt wie eine App: klar, ruhig und auf das Wesentliche reduziert.</p>'+
@@ -15900,7 +15900,7 @@ var TSISL_TEAM_ONB_V2=[
     if(sc.querySelector(".ops-hero")) return;
     var hero=document.createElement("div"); hero.className="ops-hero";
     hero.innerHTML=
-      '<img class="ops-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+      '<img class="ops-hero__logo" alt="Tasty Studios" src="'+LOGO+'" loading="lazy" decoding="async">'+
       '<div class="ops-hero__eyebrow">Modul 2 · Der operative Kern</div>'+
       '<h1 class="ops-hero__title">Operations <span class="ops-gold">Area</span></h1>'+
       '<p class="ops-hero__sub">Der Bereich, in dem dein Betrieb auch ohne dich läuft — Abläufe, Checklisten, Dokumente und Zugänge, gebündelt in klaren Inseln.</p>'+
@@ -15921,7 +15921,7 @@ var TSISL_TEAM_ONB_V2=[
       return '<a class="ops-card" href="'+c[5]+'">'+
         '<span class="ops-cover" data-n="'+c[0]+'" aria-hidden="true"></span>'+
         '<span class="ops-num">'+c[0]+'</span>'+
-        '<img class="ops-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy">'+
+        '<img class="ops-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async">'+
         '<span class="ops-k">'+c[1]+'</span>'+
         '<h3 class="ops-h">'+c[2]+'</h3>'+
         '<p class="ops-t">'+c[3]+'</p>'+
@@ -16081,7 +16081,7 @@ var TSISL_TEAM_ONB_V2=[
     if(sc.querySelector(".vf-hero")) return;
     var hero=document.createElement("div"); hero.className="vf-hero";
     hero.innerHTML=
-      '<img class="vf-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+      '<img class="vf-hero__logo" alt="Tasty Studios" src="'+LOGO+'" loading="lazy" decoding="async">'+
       '<div class="vf-hero__eyebrow">Modul 2 · Richtung, Identität &amp; Skalierung</div>'+
       '<h1 class="vf-hero__title">Vision <span class="vf-gold">Frame</span></h1>'+
       '<p class="vf-hero__sub">Der Abschluss des Building-Prozesses — die Ebene über den Zahlen: Marke, Markt, Skalierung und Angebot. Nicht was du einträgst, sondern worauf alles hinausläuft.</p>'+
@@ -16103,7 +16103,7 @@ var TSISL_TEAM_ONB_V2=[
     return '<a class="vf-card" href="'+c[6]+'">'+
       '<span class="vf-cover" data-n="'+c[0]+'" aria-hidden="true"></span>'+
       '<span class="vf-num">'+c[0]+'</span>'+
-      '<img class="vf-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy">'+
+      '<img class="vf-logo" src="'+LOGO+'" alt="Tasty Studios" loading="lazy" decoding="async">'+
       '<span class="vf-k">'+c[2]+'</span>'+
       '<h3 class="vf-h">'+c[3]+'</h3>'+
       '<p class="vf-t">'+c[4]+'</p>'+
@@ -16355,7 +16355,7 @@ var TSISL_TEAM_ONB_V2=[
       return '<div class="o2-isle" data-i="'+i+'" style="left:'+POS[i][0]+'%;top:'+POS[i][1]+'%">'+
         '<div class="o2-in">'+
           '<span class="o2-med" data-n="'+(i+1)+'"><img src="'+IMG+o[2]+'.webp" alt="" loading="lazy" '+
-            'onerror="this.style.display=\'none\';this.parentNode.classList.add(\'noimg\')"></span>'+
+            'onerror="this.style.display=\'none\';this.parentNode.classList.add(\'noimg\')" decoding="async"></span>'+
           '<span class="o2-k">'+o[0]+'</span>'+
           '<h3 class="o2-h">'+o[1]+'</h3>'+
           '<span class="o2-sep"></span>'+
@@ -17024,7 +17024,7 @@ var TSISL_TEAM_ONB_V2=[
     h += '<div class="tw-kitlbl">Ausgegeben & quittiert</div><div class="tw-kit">';
     for (var m = 0; m < MEDS.length; m++) {
       h += '<div class="tw-slot"><div class="tw-med" data-m="' + m + '" style="--z:' + (MEDS[m].z || 1) + '">'
-        + '<img src="' + IMG + MEDS[m].f + '" alt="' + esc(MEDS[m].l) + '" loading="eager" decoding="async">'
+        + '<img src="' + IMG + MEDS[m].f + '" alt="' + esc(MEDS[m].l) + '" loading="lazy" decoding="async">'
         + '</div><em>' + esc(MEDS[m].l) + '</em></div>';
     }
     h += '</div>';
@@ -17719,7 +17719,7 @@ var TSISL_TEAM_ONB_V2=[
   function thumb(cls, file, glyph) {
     // Bild mit Glyph-Fallback: fehlt das Asset, bleibt die Kachel elegant.
     return '<span class="' + cls + '" data-gl="' + glyph + '">' +
-      '<img src="' + IMGB + file + '" alt="" loading="lazy"></span>';
+      '<img src="' + IMGB + file + '" alt="" loading="lazy" decoding="async"></span>';
   }
 
   function armThumbs(root) {
@@ -19915,7 +19915,7 @@ var TSISL_TEAM_ONB_V2=[
       var L = LANES[i];
       h.push('<div class="pv-lane' + (L.warn ? ' warn' : '') + '" data-i="' + i + '">');
       h.push('<div class="pv-med"><span>' + L.mono + '</span>' +
-        '<img src="' + IMG_BASE + L.img + '" alt="' + L.alt + '" loading="lazy">' + '</div>');
+        '<img src="' + IMG_BASE + L.img + '" alt="' + L.alt + '" loading="lazy" decoding="async">' + '</div>');
       h.push('<div class="pv-meta"><div class="pv-name">' + L.name + '</div>' +
         '<div class="pv-type">' + L.type + '</div></div>');
       h.push('<div class="pv-trackwrap"><div class="pv-track">');
@@ -21255,7 +21255,7 @@ var TSISL_TEAM_ONB_V2=[
     if(sc.querySelector('#tsisl-hero')) return;
     var hero=document.createElement('div'); hero.id='tsisl-hero';
     hero.innerHTML='<a class="il-back" href="'+(c.backHref||'/operations-area')+'"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+(c.backLabel||'Operations Area')+'</a>'
-      +'<img class="il-logo" alt="Tasty Studios" src="'+LOGO+'">'
+      +'<img class="il-logo" alt="Tasty Studios" src="'+LOGO+'" loading="lazy" decoding="async">'
       +'<div class="il-eyebrow">'+c.kicker+'</div>'
       +'<h1 class="il-title">'+c.titleHTML+'</h1>'
       +'<p class="il-lead">'+c.lead+'</p>';
@@ -21444,9 +21444,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero"; hero.id="tsnai-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Notion AI im Backoffice" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Notion AI im Backoffice" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 2.14</div>'+
         '<h1 class="ts-hero__title">Notion <span class="ts-gold">AI</span></h1>'+
       '</div>';
@@ -22758,7 +22758,7 @@ var TSISL_TEAM_ONB_V2=[
   `;
 
   var TILE_INNER = POSTER
-    ? '<img src="'+POSTER+'" alt="Notion AI im Backoffice" style="width:100%;display:block;border-radius:7px">'
+    ? '<img src="'+POSTER+'" alt="Notion AI im Backoffice" style="width:100%;display:block;border-radius:7px" loading="lazy" decoding="async">'
     : '<div class="m2-ph"><div class="m2-ph-ico">AI</div><div class="m2-ph-t">Screenshot folgt</div></div>';
 
   var HTML=
@@ -22790,7 +22790,7 @@ var TSISL_TEAM_ONB_V2=[
       '<button class="lb-expand" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>'+
       '<button class="lb-close" aria-label="Schliessen">&times;</button>'+
       '<div class="lb-screen">'+(SHOT
-        ? '<div class="lb-scroll"><img src="'+SHOT+'" alt="Backoffice-Abfrage"></div>'
+        ? '<div class="lb-scroll"><img src="'+SHOT+'" alt="Backoffice-Abfrage" loading="lazy" decoding="async"></div>'
         : '<div class="lb-ph">Screenshot der Notion-AI-Abfrage folgt</div>')+'</div></div>';
     document.body.appendChild(lb);
     function close(){ lb.classList.remove('open'); }
@@ -23261,9 +23261,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Multistandort — ein Backoffice über mehrere Standorte" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Multistandort — ein Backoffice über mehrere Standorte" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 2.15 · Optional</div>'+
         '<h1 class="ts-hero__title">Multistandorte</h1>'+
       '</div>';
@@ -23699,9 +23699,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.1" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.1" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.1</div>'+
         '<h1 class="ts-hero__title">Denk in <span class="ts-gold">Blöcken</span></h1>'+
       '</div>';
@@ -24513,9 +24513,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.2" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.2" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.2</div>'+
         '<h1 class="ts-hero__title">Layout mit <span class="ts-gold">Absicht</span></h1>'+
       '</div>';
@@ -24911,9 +24911,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.3" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.3" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.3</div>'+
         '<h1 class="ts-hero__title">Seite oder <span class="ts-gold">Datenbank</span>?</h1>'+
       '</div>';
@@ -25370,9 +25370,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.4" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.4" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.4</div>'+
         '<h1 class="ts-hero__title">Zwei Tabellen, <span class="ts-gold">ein System</span>.</h1>'+
       '</div>';
@@ -25821,9 +25821,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.5" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.5" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.5</div>'+
         '<h1 class="ts-hero__title">Eine Formel <span class="ts-gold">rechnet mit</span>.</h1>'+
       '</div>';
@@ -26241,9 +26241,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.6" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.6" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.6</div>'+
         '<h1 class="ts-hero__title">Der Blick <span class="ts-gold">wechselt</span>.</h1>'+
       '</div>';
@@ -26658,9 +26658,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.7" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.7" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.7</div>'+
         '<h1 class="ts-hero__title">Ein Klick <span class="ts-gold">erledigt es</span>.</h1>'+
       '</div>';
@@ -27104,9 +27104,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.8" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.8" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">L 1.8</div>'+
         '<h1 class="ts-hero__title">Dein System, <span class="ts-gold">komplett</span>.</h1>'+
       '</div>';
@@ -27584,9 +27584,9 @@ var TSISL_TEAM_ONB_V2=[
     var hero=document.createElement("div");
     hero.className="ts-hero";
     hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen" src="'+IMG+'">'+
+      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">Tasty Studios</div>'+
         '<h1 class="ts-hero__title"><span class="ts-red">Modul 1</span><br>Notion-Grundlagen</h1>'+
       '</div>';
