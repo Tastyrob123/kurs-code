@@ -31488,7 +31488,17 @@ var TSISL_TEAM_ONB_V2=[
 
   /* cfg: {id, learn:[html x4], next:'/slug'} */
   function learn(cfg){
-    if(document.getElementById(cfg.id)) return;
+    var ex=document.getElementById(cfg.id);
+    if(ex){
+      /* Selbstheilung: der globale Pager kann den Weiter-Button spaeter noch einmal
+         entfernen (super.so-Re-Render). Fehlt er im eigenen Block, bauen wir ihn neu. */
+      if(!ex.querySelector('#ts-next-wrap')){
+        var w=document.createElement('div'); w.id='ts-next-wrap';
+        w.innerHTML='<a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+        ex.appendChild(w);
+      }
+      return;
+    }
     var host=document.querySelector('.super-content'); if(!host) return;
     if(!document.querySelector('.notion-root')) return;
     learnCSS(cfg.id);
