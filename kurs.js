@@ -31488,17 +31488,7 @@ var TSISL_TEAM_ONB_V2=[
 
   /* cfg: {id, learn:[html x4], next:'/slug'} */
   function learn(cfg){
-    var ex=document.getElementById(cfg.id);
-    if(ex){
-      /* Selbstheilung: der globale Pager kann den Weiter-Button spaeter noch einmal
-         entfernen (super.so-Re-Render). Fehlt er im eigenen Block, bauen wir ihn neu. */
-      if(!ex.querySelector('#ts-next-wrap')){
-        var w=document.createElement('div'); w.id='ts-next-wrap';
-        w.innerHTML='<a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
-        ex.appendChild(w);
-      }
-      return;
-    }
+    if(document.getElementById(cfg.id)) return;
     var host=document.querySelector('.super-content'); if(!host) return;
     if(!document.querySelector('.notion-root')) return;
     learnCSS(cfg.id);
@@ -31509,14 +31499,29 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tsl-grid">'+orbs+'</div>'+
       '<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
     host.appendChild(el);
-    /* Zweite Haelfte der __tsNext-Falle: bei langer Ankerkette baut der globale Pager
-       seinen eigenen Button, bevor dieses Modul mountet -> jeden fremden Wrap entfernen. */
-    function dedupe(){
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!el.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    /* Zweite Haelfte der __tsNext-Falle, in zwei Richtungen:
+       (a) der globale Pager baut bei langer Ankerkette seinen EIGENEN Wrap, bevor dieses
+           Modul mountet -> jeder fremde Wrap fliegt raus;
+       (b) findet der Pager spaeter keinen Treffer in seiner PAGES-Map oder raeumt super.so
+           beim Re-Render auf, verschwindet UNSER Wrap -> wir bauen ihn neu.
+       WICHTIG: der Host wird bei JEDEM Durchlauf frisch geholt. Ein festgehaltenes `el`
+       aus dem ersten Mount zeigt nach einem super.so-Re-Render auf einen abgehaengten
+       Knoten — dedupe() haette dann den frischen Button als "fremd" geloescht. */
+    function wrapHTML(){
+      return '<a id="ts-next" href="'+cfg.next+'">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
     }
-    dedupe();
-    new MutationObserver(dedupe).observe(document.body,{childList:true,subtree:true});
+    function guard(){
+      var host=document.getElementById(cfg.id); if(!host) return;
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')){
+        var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML=wrapHTML(); host.appendChild(w);
+      }
+    }
+    guard();
+    new MutationObserver(guard).observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('scroll', guard, {passive:true});
+    setTimeout(guard,1500); setTimeout(guard,4000); setTimeout(guard,9000);
     el.classList.add('js');
     var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
     io.observe(el);
