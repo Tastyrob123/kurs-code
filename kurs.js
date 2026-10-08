@@ -15987,7 +15987,7 @@ var TSISL_TEAM_ONB_V2=[
       '</div>'+
       '<div class="boxduo">'+
       '<div class="box good"><div class="bh">Der Trick: nur abonnieren, solange du baust</div><p>Setz dir einen Referenz-Zeitraum von <b style="color:#fff">4 Wochen</b>. In dieser Phase schließt du die Abos ab, baust dein persönliches Backoffice einmal komplett auf und erstellst alles Material, das deinem aktuellen Bedarf entspricht — danach kündigst du wieder. Brauchst du später Nachschub, sammelst du erst, was fehlt (z.&nbsp;B. neue Gerichte bis zum nächsten Menüwechsel), und buchst die Abos für einen einzigen Monat erneut. So zahlst du nie durchgehend.</p></div>'+
-      '<div class="box beige"><div class="bh">Keine Lust auf die Abo-Runde? Der Tasty-Studios-Shop</div><p>Parallel baue ich einen Shop, in dem du fertige Designs einfach bestellen kannst — Gerichte, Zutaten, Festwert-Inventar und mehr: entweder als fertiges Bildmaterial oder gleich als komplette Notion-Datenbank. Hast du spezielle Wünsche, die du im Shop nicht findest? Schreib mir gerne an <a href="mailto:robert@tasty-studios.com">robert@tasty-studios.com</a>.</p></div></div>'+
+      '<div class="box beige"><div class="bh">Keine Lust auf die Abo-Runde? Der Tasty-Studios-Shop</div><p>Parallel baue ich einen Shop, in dem du fertige Designs einfach bestellen kannst — Gerichte, Zutaten, Festwert-Inventar und mehr: entweder als fertiges Bildmaterial oder gleich als komplette Notion-Datenbank. Hast du spezielle Wünsche, die du im Shop nicht findest? Schreib mir gerne an <a href="mailto:robert@tasty-studios.de">robert@tasty-studios.de</a>.</p></div></div>'+
     '</section>'+
 
     /* Prompt-Vorlagen */
