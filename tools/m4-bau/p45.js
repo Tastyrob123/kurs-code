@@ -7,10 +7,10 @@
       '<path class="ln" pathLength="1" data-s="1" d="M205 200 H232"/><path class="ln" pathLength="1" data-s="1" d="M397 200 H432"/><path class="ln" pathLength="1" data-s="1" d="M597 200 H632"/><path class="ln" pathLength="1" data-s="1" d="M797 200 H832"/>'+
       '<path class="ln dash" pathLength="1" data-s="5" d="M914 342 C914 388 714 388 714 342"/><path class="sp" pathLength="1" d="M914 342 C914 388 714 388 714 342"/>'+
     '</svg>'+
-    '<div class="cardx src" data-s="1" style="'+P(20,120,185,160)+'"><span class="md"><img src="'+I+'z-tomate.webp" alt=""></span><span class="k">Vorschlag von Claude</span><span class="t">Tomaten, Preis pro Unit (€)</span><span class="v mono">2,40 € → 2,65 €</span></div>'+
-    '<div class="cardx gt g1" data-s="1" style="'+P(232,60,165,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Preis pro Unit (€)</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
+    '<div class="cardx src" data-s="1" style="'+P(20,120,185,160)+'"><span class="md"><img src="'+I+'z-tomate.webp" alt=""></span><span class="k">Vorschlag von Claude</span><span class="t">Tomaten, Einkaufspreis</span><span class="v mono">2,40 € → 2,65 €</span></div>'+
+    '<div class="cardx gt g1" data-s="1" style="'+P(232,60,165,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Preis pro Unit&nbsp;(€)</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
     '<div class="cardx gt g2" data-s="1" style="'+P(432,60,165,280)+'"><span class="n">02</span><span class="h">Dein Okay</span><div class="yes">Ja, schreiben</div><span class="f">Claude Code fragt zusätzlich vor jedem Schreibzugriff.</span></div>'+
-    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><div class="nw mini"><div class="nbar">'+N.nic('table')+'<span>TB Inventory</span></div><table class="nt"><colgroup><col style="width:42%"><col style="width:58%"></colgroup><tr><th><span>'+N.nic('title')+'Name</span></th><th><span>'+N.nic('num')+'Preis pro Unit (€)</span></th></tr><tr><td>Tomaten</td><td class="r nv">2,40 €</td></tr></table></div><span class="f">Geschrieben wird erst nach deinem Okay.</span></div>'+
+    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><div class="nw mini"><div class="nbar">'+N.nic('table')+'<span>TB Inventory</span></div><table class="nt"><colgroup><col style="width:40%"><col style="width:60%"></colgroup><tr><th><span>'+N.nic('title')+'Name</span></th><th><span>'+N.nic('num')+'<em class="cl">Preis pro Unit (€)</em></span></th></tr><tr><td>Tomaten</td><td class="r nv">2,40 €</td></tr></table></div><span class="f">Geschrieben wird erst nach deinem Okay.</span></div>'+
     '<div class="cardx gt g4" data-s="1" style="'+P(832,60,165,280)+'"><span class="n">03</span><span class="h">Verlauf</span><div class="clk"><i></i></div><span class="f">Jede Änderung lässt sich zurückholen.</span></div>'+
     '<div class="mv" style="'+P(0,0,1000,400)+'"><span class="tok mono">2,65 €</span></div>'+
   '</div></div>';
@@ -19,7 +19,8 @@
   #tsn4a4anim .mini .nbar{height:34px;flex-basis:34px;font-size:12px;padding:0 10px}
   #tsn4a4anim .mini table.nt{font-size:11px;table-layout:fixed}
   #tsn4a4anim .mini table.nt th{height:28px;font-size:10px;padding:0 4px}
-  #tsn4a4anim .mini table.nt th>span{gap:4px}
+  #tsn4a4anim .mini table.nt th>span{gap:4px;max-width:100%;overflow:hidden}
+  #tsn4a4anim .mini .cl{font-style:normal;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   #tsn4a4anim .mini table.nt td{height:32px;padding:0 5px}
   #tsn4a4anim .mini .ni{width:12px;height:12px;flex-basis:12px}
   #tsn4a4anim .src{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center}
