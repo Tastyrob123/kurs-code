@@ -42,7 +42,7 @@
   `;
   N.page({
     key:'tsn4a2', re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/,
-    eyebrow:'L 4.2', title:'Die <span class="ts-gold">Systemkarte</span>', alt:'Claude lernt die Backoffice-Vorlage kennen',
+    img:N.COV('l42'), eyebrow:'L 4.2', title:'Die <span class="ts-gold">Systemkarte</span>', alt:'Claude lernt die Backoffice-Vorlage kennen',
     intro:
       '<p>Claude sieht jetzt deinen Workspace. Was es noch nicht weiß, ist, wie deine Vorlage gebaut ist. Welche Zahl trägst du von Hand ein, welche rechnet Notion selbst, und welche Datenbank hängt an welcher? Ohne dieses Wissen sucht Claude bei jeder Frage neu, und im schlimmsten Fall rechnet es eine Zahl selbst, die dein System längst geprüft ausrechnet.</p>'+
       '<p>Deshalb lassen wir Claude die Vorlage einmal gründlich lesen und daraus eine <b>Systemkarte</b> schreiben. Die legen wir zusammen mit ein paar festen Regeln in das Briefing deines Backoffice-Ordners, und ab dann kennt Claude dein System bei jedem Start.</p>',
@@ -168,7 +168,7 @@
   }
   N.page({
     key:'tsn4a3', re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/,
-    eyebrow:'L 4.3', title:'Dein System <span class="ts-gold">befragen</span>', alt:'Auswertungen aus dem Notion-Backoffice in normaler Sprache',
+    img:N.COV('l43'), eyebrow:'L 4.3', title:'Dein System <span class="ts-gold">befragen</span>', alt:'Auswertungen aus dem Notion-Backoffice in normaler Sprache',
     intro:
       '<p>Dein Backoffice weiß eine Menge über deinen Betrieb. Es kennt den Preis jeder Zutat, ihren Anteil an jeder Portion, den Wareneinsatz jedes Gerichts und den Lieferanten dahinter. Nur liegt dieses Wissen über viele Datenbanken verteilt, und die Frage, die dich wirklich interessiert, steht in keiner einzelnen Ansicht.</p>'+
       '<p>In dieser Lektion stellen wir diese Fragen in normaler Sprache. Wir lesen nur, wir ändern nichts. Und wir fragen so, dass jede Zahl, die zurückkommt, <b>belegt</b> ist und keine einzige geschätzt.</p>',

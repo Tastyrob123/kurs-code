@@ -4485,6 +4485,7 @@ window.__tsMO = function(cb){
        Gates TOLERANT (Root ODER /lektionen/-Praefix), weil super.so Seiten aus der
        Lektionen-DB beim Re-Sync umhaengen kann. Ohne Eintrag hier raeumt der Pager
        den von #ts4?next gebauten Weiter-Button wieder ab. */
+    { re:/\/modul-4-claude-claude-code\/?$/, href:'/lektionen/dein-backoffice-bekommt-hnde' },
     { re:/\/(?:lektionen\/)?dein-backoffice-bekommt-h[a-z]*nde\/?$/, href:'/lektionen/notion-mit-claude-code-verbinden' },
     { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/lektionen/die-systemkarte-anlegen' },
     { re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/, href:'/lektionen/dein-backoffice-befragen' },
@@ -33159,6 +33160,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var IMG='https://tastyrob123.github.io/kurs-code/img/m4/';
   var RING='https://tastyrob123.github.io/kurs-code/img/ring/';
+  /* Hero-Cover: echtes 3-MacBook-Cover (assets/sceu4c.png) mit Aufnahmen der eigenen Seiten, 2360x936, -s = 640x254 fuer Listen */
+  function COV(k){ return 'https://tastyrob123.github.io/kurs-code/img/modul-4/cover-'+k+'.webp'; }
   var EASE='cubic-bezier(.16,1,.3,1)', BACK='cubic-bezier(.34,1.56,.64,1)';
 
   function addCSS(id, text){
@@ -33499,7 +33502,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
     addCSS('tsn4-base', BASE);
     var h=document.createElement('div'); h.className='ts-hero';
-    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" fetchpriority="high" decoding="sync">'+
+    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" width="2360" height="936" fetchpriority="high" decoding="sync">'+
       '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="sync">'+
       '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div><h1 class="ts-hero__title">'+cfg.title+'</h1></div>';
     var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
@@ -33698,17 +33701,163 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     p.anim.anchorId=p.key+'-intro';
     if(!anim(p.anim)) return;
     var prev=p.anim.id;
-    for(var i=0;i<p.secs.length;i++){ if(!sec(p.secs[i].id, prev, p.secs[i].html)) return; prev=p.secs[i].id; }
-    p.emp.anchorId=prev; emp(p.emp);
-    if(!document.getElementById(p.emp.id)) return;
+    for(var i=0;i<p.secs.length;i++){ var s=sec(p.secs[i].id, prev, p.secs[i].html); if(!s) return; if(p.secs[i].wide) s.classList.add('tsn4-wide'); prev=p.secs[i].id; }
+    if(p.emp){ p.emp.anchorId=prev; emp(p.emp); if(!document.getElementById(p.emp.id)) return; prev=p.emp.id; }
     learn({ id:p.key+'-next', learn:p.learn, next:resolve(p.next) });
   }
   function boot(){ if(!document.body){ return setTimeout(boot,50); } mount(); window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true}); }
 
   window.__tsn4={ SANS:SANS, DISP:DISP, MONO:MONO, IMG:IMG, RING:RING, EASE:EASE, BACK:BACK, addCSS:addCSS, reduced:reduced, tsReveal:tsReveal,
-    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, nic:nic, nCSS:nCSS, NPAGE:NPAGE, NCHEV:NCHEV, esc:esc, page:page, mount:mount };
+    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, nic:nic, COV:COV, nCSS:nCSS, NPAGE:NPAGE, NCHEV:NCHEV, esc:esc, page:page, mount:mount };
   /* Boot erst nach dem Seiten-Register (am Ende der Zone). */
   window.__tsn4Boot=boot;
+})();
+
+/* ---------- Modul 4 · Uebersicht (/modul-4-claude-claude-code) ---------- */
+(function(){
+  var N=window.__tsn4; if(!N) return;
+  var P=function(x,y,w,h){ return N.pos(x,y,w,h,430); };
+  /* Opener: eine Woche im Backoffice nach Modul 4. Sieben Tage, darunter das Fundament,
+     dann faellt jede Aufgabe auf ihren Tag, mit der Lektion, in der sie gebaut wird. */
+  var DAYS=['Mo','Di','Mi','Do','Fr','Sa','So'];
+  var cols=DAYS.map(function(d,i){
+    return '<div class="dy'+(i>4?' off':'')+'" data-s="1" style="'+P(14+i*140,20,132,300)+'"><span class="dn">'+d+'</span></div>';
+  }).join('');
+  var TASKS=[
+    {d:0,s:3,l:'L 4.8',t:'Der Wochenblick liegt bereit',h:'Zeitplan, 6:00 Uhr'},
+    {d:1,s:4,l:'L 4.5',t:'Lieferscheine der Woche einlesen',h:'Claude Code'},
+    {d:2,s:5,l:'L 4.7',t:'Preis geändert, Datum gesetzt',h:'Automation'},
+    {d:3,s:6,l:'L 4.6',t:'Neue Rezeptur, erster Vorschlag',h:'Notion Agent'},
+    {d:4,s:6,l:'L 4.3',t:'Welches Gericht liegt über dem Ziel?',h:'Claude Code'}
+  ];
+  var tasks=TASKS.map(function(k,i){
+    return '<div class="tk t'+i+'" data-s="'+k.s+'" style="'+P(22+k.d*140,78,116,190)+'"><span class="tl">'+k.l+'</span><span class="tt">'+k.t+'</span><span class="th">'+k.h+'</span></div>';
+  }).join('');
+  var rest='<div class="rs" data-s="2" style="'+P(14+5*140,150,272,40)+'">Service. Das Backoffice läuft ohne dich.</div>';
+  var base='<div class="fd" data-s="2" style="'+P(14,340,972,64)+'"><span class="fk">Fundament</span>'+
+    '<span class="fc">L 4.1 Verbindung</span><span class="fc">L 4.2 Systemkarte</span><span class="fc">L 4.4 Vorschau vor jeder Änderung</span><span class="fc">L 4.9 Wer macht was</span></div>';
+  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/430">'+cols+rest+tasks+base+'</div></div>';
+  var css=`
+  #tsn4movanim .dy{border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b}
+  #tsn4movanim .dy.off{border-style:dashed;border-color:rgba(255,255,255,.08);background:transparent}
+  #tsn4movanim .dn{position:absolute;left:0;right:0;top:16px;text-align:center;font-family:${N.DISP};font-weight:600;font-size:18px;color:#fff}
+  #tsn4movanim .dy.off .dn{color:rgba(255,255,255,.55)}
+  #tsn4movanim .rs{display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;line-height:1.35;color:rgba(255,255,255,.62);padding:0 18px}
+  #tsn4movanim .tk{display:flex;flex-direction:column;gap:10px;padding:16px 14px;border-radius:12px;border:1px solid rgba(199,180,137,.3);background:linear-gradient(rgba(199,180,137,.06),rgba(199,180,137,.06)),#0b0d14;
+    box-shadow:0 22px 40px -24px rgba(0,0,0,.95);transition:border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
+  #tsn4movanim .tk.lit{border-color:rgba(199,180,137,.8);box-shadow:0 22px 40px -24px rgba(0,0,0,.95),0 0 28px rgba(199,180,137,.24)}
+  #tsn4movanim .tl{font:700 11px/1 ${N.SANS};letter-spacing:.12em;color:#c7b489}
+  #tsn4movanim .tt{font-family:${N.DISP};font-weight:600;font-size:16px;line-height:1.25;color:#fff}
+  #tsn4movanim .th{margin-top:auto;font-size:12px;line-height:1.3;color:rgba(255,255,255,.72)}
+  #tsn4movanim .fd{display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:14px;border:1px solid rgba(199,180,137,.4);background:rgba(199,180,137,.07)}
+  #tsn4movanim .fk{font:700 11px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-right:6px}
+  #tsn4movanim .fc{display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:#05060b;font-size:12.5px;color:#efe6d2;white-space:nowrap}
+  `;
+  /* Die zehn Lektionen, in vier Etappen */
+  var GR=[
+    ['Anschließen',[
+      ['0','dein-backoffice-bekommt-hnde','Dein Backoffice bekommt Hände','Wo deine Zeit heute hingeht und welcher Helfer welche Stelle übernimmt.'],
+      ['1','notion-mit-claude-code-verbinden','Notion mit Claude Code verbinden','Der Anschluss in wenigen Minuten, und was Claude in deinem Notion sehen darf.'],
+      ['2','die-systemkarte-anlegen','Die Systemkarte anlegen','Claude lernt deine Vorlage einmal kennen und weiß danach, was es nie schreibt.']]],
+    ['Lesen und schreiben',[
+      ['3','dein-backoffice-befragen','Dein Backoffice befragen','Fragen in deinen eigenen Worten, Antworten aus deinen Zahlen, auf Wunsch als Excel-Datei.'],
+      ['4','datenbanken-automatisch-aktualisieren','Datenbanken automatisch aktualisieren','Vorschau, dein Okay, Verlauf: drei Netze, bevor Claude etwas in Notion ändert.'],
+      ['5','lieferscheine-und-preise-einpflegen','Lieferscheine und Preise einpflegen','Die Scheine der Woche in einem Durchgang, und was eine Preiserhöhung im Teller bedeutet.']]],
+    ['Helfer im Hintergrund',[
+      ['6','notion-agents-im-betrieb-einsetzen','Notion Agents im Betrieb einsetzen','Ein Agent mit klarem Auftrag, der auch arbeitet, wenn dein Laptop zugeklappt ist.'],
+      ['7','notion-automationen-bauen','Notion Automationen bauen','Was immer gleich abläuft, erledigt Notion selbst, ohne KI und ohne Kosten je Durchlauf.'],
+      ['8','wiederkehrende-routinen-einrichten','Wiederkehrende Routinen einrichten','Montags früh liegt dein Wochenblick bereit, ohne dass du daran denken musst.']]],
+    ['Den Überblick behalten',[
+      ['9','wer-macht-was-im-backoffice','Wer macht was im Backoffice','Eine Regel für jede neue Idee, was das alles kostet, und dein Wochenplan.']]]
+  ];
+  var list='<div class="tsn4-ov">'+GR.map(function(g,gi){
+    return '<div class="ov-g" style="--g:'+gi+'"><div class="ov-gh"><span class="ov-gn">'+(gi+1)+'</span><span class="ov-gt">'+g[0]+'</span></div>'+
+      g[1].map(function(l,li){
+        return '<a class="ov-r" style="--i:'+li+'" href="/lektionen/'+l[1]+'"><span class="ov-th"><img src="'+N.COV('l4'+l[0]+'-s')+'" alt="" width="640" height="254" loading="lazy" decoding="async"></span>'+
+          '<span class="ov-m"><span class="ov-no">L 4.'+l[0]+'</span><span class="ov-t">'+l[2]+'</span><span class="ov-d">'+l[3]+'</span></span>'+
+          '<span class="ov-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
+      }).join('')+'</div>';
+  }).join('')+'</div>';
+  N.addCSS('tsn4mov-list', `
+  .tsn4-sec.tsn4-wide{max-width:1000px}
+  .tsn4-ov{display:flex;flex-direction:column;gap:34px}
+  .tsn4-ov .ov-gh{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  .tsn4-ov .ov-gn{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(199,180,137,.6);font:700 12px/1 ${N.SANS};color:#c7b489}
+  .tsn4-ov .ov-gt{font:600 13px/1 ${N.SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
+  .tsn4-ov .ov-r{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr) 40px;align-items:center;gap:22px;padding:14px;margin:0 0 10px;border-radius:16px;
+    border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;text-decoration:none;color:#fff;
+    transition:border-color .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+  .tsn4-ov .ov-r:hover{border-color:rgba(199,180,137,.6);transform:translateY(-3px);box-shadow:0 24px 50px -28px rgba(0,0,0,.95),0 0 26px rgba(199,180,137,.14)}
+  .tsn4-ov .ov-th{display:block;border-radius:10px;overflow:hidden;background:#0b0d14;aspect-ratio:640/254}
+  .tsn4-ov .ov-th img{display:block;width:100%;height:100%;object-fit:cover}
+  .tsn4-ov .ov-m{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .tsn4-ov .ov-no{font:700 11px/1 ${N.SANS};letter-spacing:.12em;color:#c7b489}
+  .tsn4-ov .ov-t{font-family:${N.DISP};font-weight:600;font-size:20px;line-height:1.2}
+  .tsn4-ov .ov-d{font-size:15px;line-height:1.5;color:rgba(255,255,255,.82)}
+  .tsn4-ov .ov-go{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(199,180,137,.5);color:#c7b489;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 18px -10px rgba(0,0,0,.9);transition:background .4s,color .4s}
+  .tsn4-ov .ov-go svg{width:18px;height:18px}
+  .tsn4-ov .ov-r:hover .ov-go{background:#c7b489;color:#05060b}
+  .tsn4-ov.js .ov-r{opacity:0;transform:translateX(28px)}
+  .tsn4-ov.js.in .ov-r{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.16,1,.3,1) calc(var(--g)*.22s + var(--i)*.08s),transform .8s cubic-bezier(.34,1.56,.64,1) calc(var(--g)*.22s + var(--i)*.08s),border-color .5s,box-shadow .5s}
+  @media(max-width:640px){
+    .tsn4-ov .ov-r{grid-template-columns:minmax(0,1fr);gap:12px}
+    .tsn4-ov .ov-go{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){ .tsn4-ov.js .ov-r{opacity:1;transform:none} }
+  `);
+  function lit(el,sel,on){ var x=el.querySelector(sel); if(x) x.classList.toggle('lit',on); }
+  N.page({
+    key:'tsn4mov', re:/^\/modul-4-claude-claude-code\/?$/, img:N.COV('m4'),
+    eyebrow:'Modul 4', title:'Die <span class="ts-gold">Helfer</span>', alt:'Modul 4: Claude Code und Notion Agents arbeiten in deinem Backoffice',
+    intro:
+      '<p>Dein Backoffice aus Modul zwei rechnet zuverlässig, aber jede neue Zahl trägst bisher du ein. In diesem Modul gibst du einen Teil dieser Arbeit ab: an Claude Code, an Notion Agents, an Automationen und an Aufgaben, die zu einer festen Uhrzeit von selbst laufen.</p>'+
+      '<p>Jede Lektion nimmt sich eine Stelle vor, an der heute deine Zeit hängen bleibt, vom Lieferschein bis zum Wochenblick am Montagmorgen. Am Ende weißt du, welcher Helfer welche Aufgabe übernimmt. Was ins System geht, entscheidest weiterhin du.</p>',
+    anim:{
+      id:'tsn4movanim', eyebrow:'Zehn Lektionen', title:'Deine Woche nach <span class="g">Modul vier</span>.',
+      sub:'Sieben Tage im Backoffice. Jede Aufgabe trägt die Lektion, in der du sie einrichtest.',
+      html:html, css:css, settle:1600,
+      beats:[
+        {t:200, s:1, cap:'Eine ganz normale Woche in deinem Betrieb. Fünf Tage mit Backoffice, das Wochenende gehört dem Service.'},
+        {t:2800, s:2, cap:'Darunter liegt das <b>Fundament</b>: die Verbindung zu Notion, die Systemkarte, die Vorschau vor jeder Änderung und eine klare Regel, wer was übernimmt.'},
+        {t:5600, s:3, cap:'<b>Montag, sechs Uhr.</b> Dein Wochenblick liegt fertig in Notion, bevor du den ersten Kaffee getrunken hast.'},
+        {t:8200, s:4, cap:'<b>Dienstag.</b> Die Lieferscheine der Woche gehen in einem Durchgang in deine Inventur, nach deiner Freigabe.'},
+        {t:10800, s:5, cap:'<b>Mittwoch.</b> Jemand ändert einen Preis von Hand, und Notion setzt das Datum dazu. Ohne KI, jedes Mal gleich.'},
+        {t:13400, s:6, cap:'<b>Donnerstag und Freitag.</b> Der Agent bereitet eine neue Rezeptur vor, und du fragst dein Backoffice, welches Gericht über deinem Ziel liegt.'},
+        {t:16200, s:6, cap:'So sieht deine Woche aus, wenn du alle zehn Lektionen durchgearbeitet hast. Wir fangen beim Anschluss an.'}
+      ],
+      reset:function(el){ for(var i=0;i<5;i++) lit(el,'.t'+i,false); },
+      onBeat:function(el,i){
+        if(i>=2 && i<=5){ for(var k=0;k<5;k++) lit(el,'.t'+k,false); }
+        if(i===2) lit(el,'.t0',true);
+        if(i===3) lit(el,'.t1',true);
+        if(i===4) lit(el,'.t2',true);
+        if(i===5){ lit(el,'.t3',true); lit(el,'.t4',true); }
+        if(i===6){ for(var j=0;j<5;j++) lit(el,'.t'+j,false); }
+      },
+      final:function(el){ for(var i=0;i<5;i++) lit(el,'.t'+i,false); }
+    },
+    secs:[
+      {id:'tsn4mov-list', wide:true, html:
+        '<div class="tsn4-eb">Die Lektionen</div>'+
+        '<h3>Zehn Schritte, vier <span class="g">Etappen</span></h3>'+
+        '<p class="lead">Jede Etappe baut auf der vorigen auf. Erst anschließen und lesen, dann schreiben lassen, zuletzt die Helfer im Hintergrund.</p>'+
+        list }
+    ],
+    learn:[
+      'Du verbindest Claude Code mit deinem Backoffice und bringst ihm deine <b>Vorlage</b> bei.',
+      'Du lässt Claude <b>lesen und schreiben</b>, mit einer Vorschau vor jeder Änderung.',
+      'Du richtest <b>Agents, Automationen</b> und Aufgaben mit festem Zeitplan ein.',
+      'Du weißt bei jeder neuen Idee, <b>welcher Helfer</b> sie übernimmt.'
+    ],
+    next:'/lektionen/dein-backoffice-bekommt-hnde'
+  });
+  /* Liste kaskadiert beim Erscheinen herein (eigener Auftritt, Etappe fuer Etappe) */
+  function arm(){
+    var o=document.querySelector('#tsn4mov-list .tsn4-ov'); if(!o||o.__a) return; o.__a=1;
+    if(N.reduced()) return; o.classList.add('js'); N.tsReveal(o,function(){ o.classList.add('in'); });
+  }
+  window.__tsMO(arm).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ---------- L4.0 · Dein Backoffice bekommt Haende ---------- */
@@ -33766,7 +33915,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function lit(el,sel,on){ var x=el.querySelector(sel); if(x) x.classList.toggle('lit',on); }
   N.page({
     key:'tsn4a0', re:/\/(?:lektionen\/)?dein-backoffice-bekommt-h[a-z]*nde\/?$/,
-    eyebrow:'L 4.0', title:'Hände für dein <span class="ts-gold">System</span>', alt:'Claude Code und Notion Agents arbeiten im Backoffice',
+    img:N.COV('l40'), eyebrow:'L 4.0', title:'Hände für dein <span class="ts-gold">System</span>', alt:'Claude Code und Notion Agents arbeiten im Backoffice',
     intro:
       '<p>Dein Backoffice steht. Die Vorlage aus Modul zwei ist befüllt, die Zutaten hängen an ihren Lieferanten, und jedes Gericht rechnet seinen Wareneinsatz selbst. Bis jetzt bist aber du derjenige, der jede neue Zahl einträgt und jeden Preis nachzieht.</p>'+
       '<p>In diesem Modul bekommt dein System <b>Hände</b>. Claude Code liest und pflegt deine Datenbanken, Notion Agents erledigen Vorarbeit im Hintergrund, und Automationen übernehmen, was immer gleich abläuft. Du entscheidest weiterhin. Was sich ändert, ist deine Rolle am Rechner: Du prüfst, was vorbereitet wurde, und gibst es frei.</p>',
@@ -33887,7 +34036,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('on', i<n); } var w=el.querySelector('.wsw'); if(w) w.classList.toggle('lit', n>0); }
   N.page({
     key:'tsn4a1', re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/,
-    eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
+    img:N.COV('l41'), eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
     intro:
       '<p>Claude Code lebt auf deinem Rechner und kennt von sich aus nur den Ordner, in dem du es startest. Deine Backoffice-Vorlage liegt in der Cloud bei Notion. Damit die beiden miteinander reden, hängen wir einen Anschluss ein, und dafür gibt es von Notion einen fertigen Weg.</p>'+
       '<p>In dieser Lektion stellen wir die Verbindung her, melden uns einmal an und prüfen, ob die Leitung steht. Und wir klären die Frage, die vor allem anderen kommt: <b>Was darf Claude in deinem Notion sehen</b>? Die Antwort ist einfacher, als viele denken, und sie hat Folgen dafür, wie du deinen Workspace ordnest.</p>',
@@ -34016,7 +34165,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   `;
   N.page({
     key:'tsn4a2', re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/,
-    eyebrow:'L 4.2', title:'Die <span class="ts-gold">Systemkarte</span>', alt:'Claude lernt die Backoffice-Vorlage kennen',
+    img:N.COV('l42'), eyebrow:'L 4.2', title:'Die <span class="ts-gold">Systemkarte</span>', alt:'Claude lernt die Backoffice-Vorlage kennen',
     intro:
       '<p>Claude sieht jetzt deinen Workspace. Was es noch nicht weiß, ist, wie deine Vorlage gebaut ist. Welche Zahl trägst du von Hand ein, welche rechnet Notion selbst, und welche Datenbank hängt an welcher? Ohne dieses Wissen sucht Claude bei jeder Frage neu, und im schlimmsten Fall rechnet es eine Zahl selbst, die dein System längst geprüft ausrechnet.</p>'+
       '<p>Deshalb lassen wir Claude die Vorlage einmal gründlich lesen und daraus eine <b>Systemkarte</b> schreiben. Die legen wir zusammen mit ein paar festen Regeln in das Briefing deines Backoffice-Ordners, und ab dann kennt Claude dein System bei jedem Start.</p>',
@@ -34142,7 +34291,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   }
   N.page({
     key:'tsn4a3', re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/,
-    eyebrow:'L 4.3', title:'Dein System <span class="ts-gold">befragen</span>', alt:'Auswertungen aus dem Notion-Backoffice in normaler Sprache',
+    img:N.COV('l43'), eyebrow:'L 4.3', title:'Dein System <span class="ts-gold">befragen</span>', alt:'Auswertungen aus dem Notion-Backoffice in normaler Sprache',
     intro:
       '<p>Dein Backoffice weiß eine Menge über deinen Betrieb. Es kennt den Preis jeder Zutat, ihren Anteil an jeder Portion, den Wareneinsatz jedes Gerichts und den Lieferanten dahinter. Nur liegt dieses Wissen über viele Datenbanken verteilt, und die Frage, die dich wirklich interessiert, steht in keiner einzelnen Ansicht.</p>'+
       '<p>In dieser Lektion stellen wir diese Fragen in normaler Sprache. Wir lesen nur, wir ändern nichts. Und wir fragen so, dass jede Zahl, die zurückkommt, <b>belegt</b> ist und keine einzige geschätzt.</p>',
@@ -34285,7 +34434,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function to(el,x){ el.querySelector('.mv').style.setProperty('--x',x); }
   N.page({
     key:'tsn4a4', re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/,
-    eyebrow:'L 4.4', title:'Sicher <span class="ts-gold">schreiben</span>', alt:'Claude schreibt mit Vorschau in die Notion-Datenbanken',
+    img:N.COV('l44'), eyebrow:'L 4.4', title:'Sicher <span class="ts-gold">schreiben</span>', alt:'Claude schreibt mit Vorschau in die Notion-Datenbanken',
     intro:
       '<p>Bis hierher hat Claude nur gelesen. Ab dieser Lektion schreibt es in dein System, und das ist ein anderer Schritt. Ein Werkzeug mit Schreibrechten in deiner Kalkulation kann dir viel Arbeit abnehmen, und es kann mit einem falsch verstandenen Satz dreihundert Zeilen ändern statt drei.</p>'+
       '<p>Deshalb spannen wir zuerst die Netze, bevor wir irgendetwas schreiben lassen. Es sind drei, und zwei davon hast du in Lektion zwei schon festgelegt: <b>die Vorschau</b>, dein ausdrückliches Okay und der Verlauf, den Notion für jede Änderung führt.</p>',
@@ -34433,7 +34582,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function counts(el,anim){ var a=[[ '.c1n',2],['.c2n',1],['.c3n',1]]; a.forEach(function(x,k){ var e=el.querySelector(x[0]); if(anim) N.count(e,x[1],null,k*160,700); else e.textContent=x[1]; }); }
   N.page({
     key:'tsn4a5', re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/,
-    eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
+    img:N.COV('l45'), eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
     intro:
       '<p>Wie Notion AI einen einzelnen Lieferschein als PDF einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
       '<p>Wir bauen einen festen Ablauf, mit dem Claude Code deine Lieferscheine aus einem Ordner liest, jeden Artikel deiner Inventur zuordnet und dir die Preisänderungen als Vorschau hinlegt. Nach deiner Freigabe rechnet deine Vorlage den neuen Preis bis in jedes Gericht durch, und du siehst, <b>was dich die Erhöhung wirklich kostet</b>.</p>',
@@ -34580,7 +34729,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function ti(el,a,b){ el.querySelector('.x1').classList.toggle('on',a); el.querySelector('.x2').classList.toggle('on',b); }
   N.page({
     key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-(?:im-betrieb-)?einsetzen\/?$/,
-    eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
+    img:N.COV('l46'), eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
     intro:
       '<p>Alles, was wir bis hierher gebaut haben, passiert, wenn du am Rechner sitzt und Claude Code startest. Notion hat inzwischen eigene Agenten, die ohne dich arbeiten. Sie sitzen in deinem Workspace, warten auf einen Auslöser und erledigen dann ihre Aufgabe, nachts, am Wochenende oder während du im Service stehst.</p>'+
       '<p>In dieser Lektion richten wir einen solchen Agenten ein, geben ihm eine klare Aufgabe und einen eng begrenzten Bereich, und binden ihn an dieselben Regeln wie Claude. Wir klären auch ehrlich, <b>was er kostet</b> und in welchem Tarif es ihn gibt.</p>',
@@ -34720,7 +34869,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function on(el,i,v){ var a=el.querySelector('.r'+i),w=el.querySelector('.sw'+i),b=el.querySelector('.b'+i); if(a) a.classList.toggle('lit',v); if(w) w.classList.toggle('on',v); if(b) b.classList.toggle('lit',v); }
   N.page({
     key:'tsn4a7', re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/,
-    eyebrow:'L 4.7', title:'Den Alltag <span class="ts-gold">verdrahten</span>', alt:'Notion-Automationen und Buttons im Backoffice',
+    img:N.COV('l47'), eyebrow:'L 4.7', title:'Den Alltag <span class="ts-gold">verdrahten</span>', alt:'Notion-Automationen und Buttons im Backoffice',
     intro:
       '<p>Zwei Werkzeuge, die mitdenken, hast du jetzt. Und wie das so ist mit einem guten Werkzeug: Man nimmt es schnell auch für Dinge, für die es viel zu groß ist. Die dritte Stufe dieses Moduls kommt ganz ohne KI aus, und im laufenden Betrieb ist sie die zuverlässigste.</p>'+
       '<p>Eine Notion-Automation ist eine Regel in einer Datenbank: Wenn das passiert, mach das. Sie interpretiert nichts, sie kostet nichts je Durchlauf, und sie tut jedes Mal <b>exakt dasselbe</b>. In dieser Lektion bauen wir vier davon für dein Backoffice und einen Button für dein Team.</p>',
@@ -34847,7 +34996,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function hands(el,h,m,label){ var ck=el.querySelector('.ck'); ck.style.setProperty('--h',h+'deg'); ck.style.setProperty('--m',m+'deg'); el.querySelector('.tm').textContent=label; }
   N.page({
     key:'tsn4a8', re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/,
-    eyebrow:'L 4.8', title:'Berichte <span class="ts-gold">kommen lassen</span>', alt:'Zeitgesteuerte Aufgaben mit Claude für den Wochenbericht',
+    img:N.COV('l48'), eyebrow:'L 4.8', title:'Berichte <span class="ts-gold">kommen lassen</span>', alt:'Zeitgesteuerte Aufgaben mit Claude für den Wochenbericht',
     intro:
       '<p>Es gibt eine Sorte Arbeit, die nie dringend ist und deshalb selten passiert. Der Blick auf die Zahlen der Woche gehört dazu. Die Auswertungen aus Lektion drei funktionieren, und trotzdem lässt du sie nach ein paar Wochen nicht mehr laufen, weil montags immer etwas dazwischenkommt.</p>'+
       '<p>In dieser Lektion hängen wir die Auswertung an eine Uhrzeit. Claude führt sie in der Cloud aus, auch wenn dein Laptop zugeklappt ist, und legt dir montags früh <b>eine Seite in deine Key Metrics</b>, die du in wenigen Minuten liest. Sie berichtet und ändert in deinen Datenbanken nichts.</p>',
@@ -34978,7 +35127,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function litS(el,n){ for(var i=0;i<3;i++){ var s=el.querySelector('.s'+i); if(s) s.classList.toggle('lit', n.indexOf(i)>-1); } }
   N.page({
     key:'tsn4a9', re:/\/(?:lektionen\/)?wer-macht-was-im-backoffice\/?$/,
-    eyebrow:'L 4.9', title:'Wer macht <span class="ts-gold">was</span>', alt:'Automation, Notion Agent oder Claude Code richtig zuordnen',
+    img:N.COV('l49'), eyebrow:'L 4.9', title:'Wer macht <span class="ts-gold">was</span>', alt:'Automation, Notion Agent oder Claude Code richtig zuordnen',
     intro:
       '<p>Du hast jetzt drei Helfer im Backoffice: Automationen, die immer dasselbe tun, Notion Agents, die im Hintergrund mitdenken, und Claude Code, das von außen holt, was dein System braucht. Ab jetzt wirst du im Alltag ständig Ideen haben, was sich noch abnehmen ließe.</p>'+
       '<p>In dieser letzten Lektion bekommst du die Regel, mit der du jede dieser Ideen dem richtigen Werkzeug zuordnest, und eine ehrliche Übersicht, <b>was jeder Weg kostet</b>. Am Ende steht dein Wochenplan, und wir lösen ein, was Modul zwei für mehrere Standorte versprochen hat.</p>',

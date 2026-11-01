@@ -48,7 +48,7 @@
   function to(el,x){ el.querySelector('.mv').style.setProperty('--x',x); }
   N.page({
     key:'tsn4a4', re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/,
-    eyebrow:'L 4.4', title:'Sicher <span class="ts-gold">schreiben</span>', alt:'Claude schreibt mit Vorschau in die Notion-Datenbanken',
+    img:N.COV('l44'), eyebrow:'L 4.4', title:'Sicher <span class="ts-gold">schreiben</span>', alt:'Claude schreibt mit Vorschau in die Notion-Datenbanken',
     intro:
       '<p>Bis hierher hat Claude nur gelesen. Ab dieser Lektion schreibt es in dein System, und das ist ein anderer Schritt. Ein Werkzeug mit Schreibrechten in deiner Kalkulation kann dir viel Arbeit abnehmen, und es kann mit einem falsch verstandenen Satz dreihundert Zeilen ändern statt drei.</p>'+
       '<p>Deshalb spannen wir zuerst die Netze, bevor wir irgendetwas schreiben lassen. Es sind drei, und zwei davon hast du in Lektion zwei schon festgelegt: <b>die Vorschau</b>, dein ausdrückliches Okay und der Verlauf, den Notion für jede Änderung führt.</p>',
@@ -196,7 +196,7 @@
   function counts(el,anim){ var a=[[ '.c1n',2],['.c2n',1],['.c3n',1]]; a.forEach(function(x,k){ var e=el.querySelector(x[0]); if(anim) N.count(e,x[1],null,k*160,700); else e.textContent=x[1]; }); }
   N.page({
     key:'tsn4a5', re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/,
-    eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
+    img:N.COV('l45'), eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
     intro:
       '<p>Wie Notion AI einen einzelnen Lieferschein als PDF einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
       '<p>Wir bauen einen festen Ablauf, mit dem Claude Code deine Lieferscheine aus einem Ordner liest, jeden Artikel deiner Inventur zuordnet und dir die Preisänderungen als Vorschau hinlegt. Nach deiner Freigabe rechnet deine Vorlage den neuen Preis bis in jedes Gericht durch, und du siehst, <b>was dich die Erhöhung wirklich kostet</b>.</p>',

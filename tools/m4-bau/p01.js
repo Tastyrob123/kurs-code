@@ -53,7 +53,7 @@
   function lit(el,sel,on){ var x=el.querySelector(sel); if(x) x.classList.toggle('lit',on); }
   N.page({
     key:'tsn4a0', re:/\/(?:lektionen\/)?dein-backoffice-bekommt-h[a-z]*nde\/?$/,
-    eyebrow:'L 4.0', title:'Hände für dein <span class="ts-gold">System</span>', alt:'Claude Code und Notion Agents arbeiten im Backoffice',
+    img:N.COV('l40'), eyebrow:'L 4.0', title:'Hände für dein <span class="ts-gold">System</span>', alt:'Claude Code und Notion Agents arbeiten im Backoffice',
     intro:
       '<p>Dein Backoffice steht. Die Vorlage aus Modul zwei ist befüllt, die Zutaten hängen an ihren Lieferanten, und jedes Gericht rechnet seinen Wareneinsatz selbst. Bis jetzt bist aber du derjenige, der jede neue Zahl einträgt und jeden Preis nachzieht.</p>'+
       '<p>In diesem Modul bekommt dein System <b>Hände</b>. Claude Code liest und pflegt deine Datenbanken, Notion Agents erledigen Vorarbeit im Hintergrund, und Automationen übernehmen, was immer gleich abläuft. Du entscheidest weiterhin. Was sich ändert, ist deine Rolle am Rechner: Du prüfst, was vorbereitet wurde, und gibst es frei.</p>',
@@ -174,7 +174,7 @@
   function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('on', i<n); } var w=el.querySelector('.wsw'); if(w) w.classList.toggle('lit', n>0); }
   N.page({
     key:'tsn4a1', re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/,
-    eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
+    img:N.COV('l41'), eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
     intro:
       '<p>Claude Code lebt auf deinem Rechner und kennt von sich aus nur den Ordner, in dem du es startest. Deine Backoffice-Vorlage liegt in der Cloud bei Notion. Damit die beiden miteinander reden, hängen wir einen Anschluss ein, und dafür gibt es von Notion einen fertigen Weg.</p>'+
       '<p>In dieser Lektion stellen wir die Verbindung her, melden uns einmal an und prüfen, ob die Leitung steht. Und wir klären die Frage, die vor allem anderen kommt: <b>Was darf Claude in deinem Notion sehen</b>? Die Antwort ist einfacher, als viele denken, und sie hat Folgen dafür, wie du deinen Workspace ordnest.</p>',

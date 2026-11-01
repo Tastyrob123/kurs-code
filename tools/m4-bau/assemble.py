@@ -40,7 +40,8 @@ if OLD_START in js:
     js=js[:a]+'/* MODUL 4 (Altbestand __ts4, 03.08.2026) entfernt am 01.11.2026 — Neubau steht in der Zone NEUBAU MODUL 4 am Dateiende (window.__tsn4). */\n\n'+js[b:]
 
 # --- __tsNext PAGES: nur die Modul-4-Zeilen
-NEWP='''    { re:/\\/(?:lektionen\\/)?dein-backoffice-bekommt-h[a-z]*nde\\/?$/, href:'/lektionen/notion-mit-claude-code-verbinden' },
+NEWP='''    { re:/\\/modul-4-claude-claude-code\\/?$/, href:'/lektionen/dein-backoffice-bekommt-hnde' },
+    { re:/\\/(?:lektionen\\/)?dein-backoffice-bekommt-h[a-z]*nde\\/?$/, href:'/lektionen/notion-mit-claude-code-verbinden' },
     { re:/\\/(?:lektionen\\/)?notion-mit-claude-code-verbinden\\/?$/, href:'/lektionen/die-systemkarte-anlegen' },
     { re:/\\/(?:lektionen\\/)?die-systemkarte-anlegen\\/?$/, href:'/lektionen/dein-backoffice-befragen' },
     { re:/\\/(?:lektionen\\/)?dein-backoffice-befragen\\/?$/, href:'/lektionen/datenbanken-automatisch-aktualisieren' },
@@ -58,11 +59,12 @@ def find(pred):
     for k,l in enumerate(lines):
         if pred(l): return k
     return -1
-a=find(lambda l: "{ re:/\\/(?:lektionen\\/)?dein-backoffice-bekommt-h[a-z]*nde" in l)
+a=find(lambda l: "{ re:/\\/modul-4-claude-claude-code\\/?$/" in l)
+if a<0: a=find(lambda l: "{ re:/\\/(?:lektionen\\/)?dein-backoffice-bekommt-h[a-z]*nde" in l)
 if a<0: a=find(lambda l: "{ re:/\\/(?:lektionen\\/)?notion-mit-claude-code-verbinden\\/?$/" in l)
 b=find(lambda l: "{ re:/\\/(?:lektionen\\/)?wer-macht-was-im-backoffice\\/?$/" in l)
 if b<0: b=find(lambda l: "{ re:/\\/(?:lektionen\\/)?wiederkehrende-routinen-einrichten\\/?$/" in l)
-assert a>0 and b>=a and b-a<=12, (a,b)
+assert a>0 and b>=a and b-a<=13, (a,b)
 lines[a:b+1]=NEWP.rstrip('\n').split('\n')
 js='\n'.join(lines)
 js=js.replace("Modul 4 - Claude Code + Notion Agents (L4.1-L4.6, gebaut 03.08.2026).","Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).",1)

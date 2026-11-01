@@ -44,7 +44,7 @@
   function hands(el,h,m,label){ var ck=el.querySelector('.ck'); ck.style.setProperty('--h',h+'deg'); ck.style.setProperty('--m',m+'deg'); el.querySelector('.tm').textContent=label; }
   N.page({
     key:'tsn4a8', re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/,
-    eyebrow:'L 4.8', title:'Berichte <span class="ts-gold">kommen lassen</span>', alt:'Zeitgesteuerte Aufgaben mit Claude für den Wochenbericht',
+    img:N.COV('l48'), eyebrow:'L 4.8', title:'Berichte <span class="ts-gold">kommen lassen</span>', alt:'Zeitgesteuerte Aufgaben mit Claude für den Wochenbericht',
     intro:
       '<p>Es gibt eine Sorte Arbeit, die nie dringend ist und deshalb selten passiert. Der Blick auf die Zahlen der Woche gehört dazu. Die Auswertungen aus Lektion drei funktionieren, und trotzdem lässt du sie nach ein paar Wochen nicht mehr laufen, weil montags immer etwas dazwischenkommt.</p>'+
       '<p>In dieser Lektion hängen wir die Auswertung an eine Uhrzeit. Claude führt sie in der Cloud aus, auch wenn dein Laptop zugeklappt ist, und legt dir montags früh <b>eine Seite in deine Key Metrics</b>, die du in wenigen Minuten liest. Sie berichtet und ändert in deinen Datenbanken nichts.</p>',
@@ -175,7 +175,7 @@
   function litS(el,n){ for(var i=0;i<3;i++){ var s=el.querySelector('.s'+i); if(s) s.classList.toggle('lit', n.indexOf(i)>-1); } }
   N.page({
     key:'tsn4a9', re:/\/(?:lektionen\/)?wer-macht-was-im-backoffice\/?$/,
-    eyebrow:'L 4.9', title:'Wer macht <span class="ts-gold">was</span>', alt:'Automation, Notion Agent oder Claude Code richtig zuordnen',
+    img:N.COV('l49'), eyebrow:'L 4.9', title:'Wer macht <span class="ts-gold">was</span>', alt:'Automation, Notion Agent oder Claude Code richtig zuordnen',
     intro:
       '<p>Du hast jetzt drei Helfer im Backoffice: Automationen, die immer dasselbe tun, Notion Agents, die im Hintergrund mitdenken, und Claude Code, das von außen holt, was dein System braucht. Ab jetzt wirst du im Alltag ständig Ideen haben, was sich noch abnehmen ließe.</p>'+
       '<p>In dieser letzten Lektion bekommst du die Regel, mit der du jede dieser Ideen dem richtigen Werkzeug zuordnest, und eine ehrliche Übersicht, <b>was jeder Weg kostet</b>. Am Ende steht dein Wochenplan, und wir lösen ein, was Modul zwei für mehrere Standorte versprochen hat.</p>',

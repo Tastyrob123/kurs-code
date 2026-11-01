@@ -59,7 +59,7 @@
   function ti(el,a,b){ el.querySelector('.x1').classList.toggle('on',a); el.querySelector('.x2').classList.toggle('on',b); }
   N.page({
     key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-(?:im-betrieb-)?einsetzen\/?$/,
-    eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
+    img:N.COV('l46'), eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
     intro:
       '<p>Alles, was wir bis hierher gebaut haben, passiert, wenn du am Rechner sitzt und Claude Code startest. Notion hat inzwischen eigene Agenten, die ohne dich arbeiten. Sie sitzen in deinem Workspace, warten auf einen Auslöser und erledigen dann ihre Aufgabe, nachts, am Wochenende oder während du im Service stehst.</p>'+
       '<p>In dieser Lektion richten wir einen solchen Agenten ein, geben ihm eine klare Aufgabe und einen eng begrenzten Bereich, und binden ihn an dieselben Regeln wie Claude. Wir klären auch ehrlich, <b>was er kostet</b> und in welchem Tarif es ihn gibt.</p>',
@@ -199,7 +199,7 @@
   function on(el,i,v){ var a=el.querySelector('.r'+i),w=el.querySelector('.sw'+i),b=el.querySelector('.b'+i); if(a) a.classList.toggle('lit',v); if(w) w.classList.toggle('on',v); if(b) b.classList.toggle('lit',v); }
   N.page({
     key:'tsn4a7', re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/,
-    eyebrow:'L 4.7', title:'Den Alltag <span class="ts-gold">verdrahten</span>', alt:'Notion-Automationen und Buttons im Backoffice',
+    img:N.COV('l47'), eyebrow:'L 4.7', title:'Den Alltag <span class="ts-gold">verdrahten</span>', alt:'Notion-Automationen und Buttons im Backoffice',
     intro:
       '<p>Zwei Werkzeuge, die mitdenken, hast du jetzt. Und wie das so ist mit einem guten Werkzeug: Man nimmt es schnell auch für Dinge, für die es viel zu groß ist. Die dritte Stufe dieses Moduls kommt ganz ohne KI aus, und im laufenden Betrieb ist sie die zuverlässigste.</p>'+
       '<p>Eine Notion-Automation ist eine Regel in einer Datenbank: Wenn das passiert, mach das. Sie interpretiert nichts, sie kostet nichts je Durchlauf, und sie tut jedes Mal <b>exakt dasselbe</b>. In dieser Lektion bauen wir vier davon für dein Backoffice und einen Button für dein Team.</p>',

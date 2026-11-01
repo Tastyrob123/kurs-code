@@ -18,6 +18,8 @@
   var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
   var IMG='https://tastyrob123.github.io/kurs-code/img/m4/';
   var RING='https://tastyrob123.github.io/kurs-code/img/ring/';
+  /* Hero-Cover: echtes 3-MacBook-Cover (assets/sceu4c.png) mit Aufnahmen der eigenen Seiten, 2360x936, -s = 640x254 fuer Listen */
+  function COV(k){ return 'https://tastyrob123.github.io/kurs-code/img/modul-4/cover-'+k+'.webp'; }
   var EASE='cubic-bezier(.16,1,.3,1)', BACK='cubic-bezier(.34,1.56,.64,1)';
 
   function addCSS(id, text){
@@ -358,7 +360,7 @@
     var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
     addCSS('tsn4-base', BASE);
     var h=document.createElement('div'); h.className='ts-hero';
-    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" fetchpriority="high" decoding="sync">'+
+    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" width="2360" height="936" fetchpriority="high" decoding="sync">'+
       '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="sync">'+
       '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div><h1 class="ts-hero__title">'+cfg.title+'</h1></div>';
     var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
@@ -557,15 +559,14 @@
     p.anim.anchorId=p.key+'-intro';
     if(!anim(p.anim)) return;
     var prev=p.anim.id;
-    for(var i=0;i<p.secs.length;i++){ if(!sec(p.secs[i].id, prev, p.secs[i].html)) return; prev=p.secs[i].id; }
-    p.emp.anchorId=prev; emp(p.emp);
-    if(!document.getElementById(p.emp.id)) return;
+    for(var i=0;i<p.secs.length;i++){ var s=sec(p.secs[i].id, prev, p.secs[i].html); if(!s) return; if(p.secs[i].wide) s.classList.add('tsn4-wide'); prev=p.secs[i].id; }
+    if(p.emp){ p.emp.anchorId=prev; emp(p.emp); if(!document.getElementById(p.emp.id)) return; prev=p.emp.id; }
     learn({ id:p.key+'-next', learn:p.learn, next:resolve(p.next) });
   }
   function boot(){ if(!document.body){ return setTimeout(boot,50); } mount(); window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true}); }
 
   window.__tsn4={ SANS:SANS, DISP:DISP, MONO:MONO, IMG:IMG, RING:RING, EASE:EASE, BACK:BACK, addCSS:addCSS, reduced:reduced, tsReveal:tsReveal,
-    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, nic:nic, nCSS:nCSS, NPAGE:NPAGE, NCHEV:NCHEV, esc:esc, page:page, mount:mount };
+    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, nic:nic, COV:COV, nCSS:nCSS, NPAGE:NPAGE, NCHEV:NCHEV, esc:esc, page:page, mount:mount };
   /* Boot erst nach dem Seiten-Register (am Ende der Zone). */
   window.__tsn4Boot=boot;
 })();
