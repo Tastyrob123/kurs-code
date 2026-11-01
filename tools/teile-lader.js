@@ -157,7 +157,7 @@
      Browser die naechste Seite unsichtbar komplett fertig (Chrome/Edge: Speculation Rules), der
      Klick zeigt sie dann sofort. Safari und andere: Titelbild + Teile der naechsten Seite vorab.
      Fuer alle anderen Links: fertig laden, sobald der Zeiger kurz darauf ruht. */
-  var spec=false, SPEC_AN=false;   /* Schritt 2 des Ausrollens schaltet die Vorbereitung ein */
+  var spec=false, SPEC_AN=true;   /* Vorbereitung der naechsten Seite (Schritt 2, 01.11.2026) */
   try{ spec=SPEC_AN && !!(HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')); }catch(e){}
   function regel(obj){ var s=document.createElement('script'); s.type='speculationrules'; s.textContent=JSON.stringify(obj); kopf.appendChild(s); }
   /* Eine Seite, die selbst gerade unsichtbar vorbereitet wird, bereitet erst nach dem Zeigen weiter vor. */
