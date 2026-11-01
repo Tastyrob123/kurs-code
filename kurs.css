@@ -2518,6 +2518,55 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 /* · */
 
 /* >>> NEUBAU MODUL 2 (Notion AI Backoffice System) — ANFANG >>> */
+/* Handy (01.11.2026): kein seitliches Scrollen auf den Modul-2-Seiten.
+   Ursache: Abschnitte mit width:min(…,95vw) sitzen im Seitenrahmen mit 24px Innenabstand und ragen rechts hinaus;
+   Kopfbilder sind am Handy 116% breit und waren nicht zentriert. Kopfleiste („Direkt zur Vorlage“) regelt die Ladezeit. */
+@media (max-width:820px){
+  :is(.page__modul-2-das-notion-ai-backoffice-system,
+    .page__lektionen-vorlage-holen-und-einrichten,
+    .page__mehrwert-zielbild,
+    .page__inventurliste,
+    .page__lieferpartner-ansprechpartner-lieferantenvertrge,
+    .page__zutatenliste,
+    .page__rezepturen,
+    .page__gemeinkosten-mitarbeiterlhne,
+    .page__allergene-bersicht,
+    .page__gerichte-getrnke-finaler-schritt,
+    .page__interface-bau-grundstruktur-widgets,
+    .page__food-drinksquartier-inhalte-interface,
+    .page__menkalkulation-catering-rechner,
+    .page__key-metrics,
+    .page__operations-area,
+    .page__lektionen-team-onboarding,
+    .page__lektionen-checklisten-produktion,
+    .page__lektionen-hygiene-behrden-handbcher,
+    .page__lektionen-inventur-bestand,
+    .page__lektionen-partner-vertrge,
+    .page__lektionen-zugnge-werte,
+    .page__multistandort-erweiterung-optional,
+    .page__vision-frame-abschluss-des-building-prozesses,
+    .page__lektionen-vision-werte,
+    .page__lektionen-unternehmen-markenidentitt,
+    .page__lektionen-team-kultur-guidelines,
+    .page__lektionen-interieur-design,
+    .page__lektionen-zielgruppenanalyse,
+    .page__lektionen-konkurrenzanalyse,
+    .page__lektionen-gastronomie-lexikon,
+    .page__lektionen-standortanalyse,
+    .page__lektionen-expansioncenter,
+    .page__lektionen-franchise-rulebook,
+    .page__lektionen-eventkonzepte,
+    .page__lektionen-catering,
+    .page__lektionen-merch-produkte,
+    .page__system-lebendiger-machen,
+    .page__notion-ai-fr-unser-system,
+    .page__allgemeine-tipps){ overflow-x:clip; }
+  :is(#tsn2-start,#tslmod,#tsflow,#tsiv-root,#tsmiss,#tsn2-lief-s3,#tslpemp,#tsd4,#tsn2-zut-s3,#tszein,#tsrezsys,#tsd5,#tsrv-root,#tsrzemp,#tsbrille,#tsgkemp,#tspkemp,#ts11emp,#tsanim1,#tsanim6){ max-width:100%; box-sizing:border-box; }
+}
+@media (max-width:640px){
+  .page__zutatenliste .ts-hero__img,
+  .page__modul-2-das-notion-ai-backoffice-system .ts-hero__img{ margin-left:-8%; }
+}
 /* <<< NEUBAU MODUL 2 — ENDE <<< */
 /* · */
 /* · */
