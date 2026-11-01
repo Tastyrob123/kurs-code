@@ -4421,14 +4421,14 @@ window.__tsMO = function(cb){
        Lektionen-DB beim Re-Sync umhaengen kann. Ohne Eintrag hier raeumt der Pager
        den von #ts4?next gebauten Weiter-Button wieder ab. */
     { re:/\/(?:lektionen\/)?dein-backoffice-bekommt-h[a-z]*nde\/?$/, href:'/lektionen/notion-mit-claude-code-verbinden' },
-    { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/lektionen/dein-backoffice-befragen' },
+    { re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/, href:'/lektionen/die-systemkarte-anlegen' },
     { re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/, href:'/lektionen/dein-backoffice-befragen' },
     { re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/, href:'/lektionen/datenbanken-automatisch-aktualisieren' },
-    { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/lektionen/notion-agents-einsetzen' },
+    { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/lektionen/lieferscheine-und-preise-einpflegen' },
     { re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/, href:'/lektionen/notion-agents-einsetzen' },
     { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/lektionen/notion-automationen-bauen' },
     { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/lektionen/wiederkehrende-routinen-einrichten' },
-    { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/modul-5-claude-code-notion' },
+    { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/lektionen/wer-macht-was-im-backoffice' },
     { re:/\/(?:lektionen\/)?wer-macht-was-im-backoffice\/?$/, href:'/modul-5-claude-code-notion' },
     /* Modul 0 - Einfuehrung, Neubau 01.11.2026 (sieben Lektionen, Gates tolerant fuer Wurzel und /lektionen/). */
     { re:/^\/modul-0-einleitung-was-dich-erwartet\/?$/, href:'/was-dich-in-diesem-kurs-erwartet' },
@@ -31513,7 +31513,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var ORDER=['/lektionen/dein-backoffice-bekommt-hnde','/lektionen/notion-mit-claude-code-verbinden','/lektionen/die-systemkarte-anlegen','/lektionen/dein-backoffice-befragen',
     '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-einsetzen','/lektionen/notion-automationen-bauen',
     '/lektionen/wiederkehrende-routinen-einrichten','/lektionen/wer-macht-was-im-backoffice','/modul-5-claude-code-notion'];
-  var PENDING=/*PENDING*/["/lektionen/dein-backoffice-bekommt-hnde", "/lektionen/die-systemkarte-anlegen", "/lektionen/lieferscheine-und-preise-einpflegen", "/lektionen/wer-macht-was-im-backoffice"]/*/PENDING*/;
+  var PENDING=/*PENDING*/[]/*/PENDING*/;
   function resolve(h){ var g=0; while(PENDING.indexOf(h)>-1 && g++<12){ var i=ORDER.indexOf(h); if(i<0||i>=ORDER.length-1) break; h=ORDER[i+1]; } return h; }
   var PAGES=[];
   function page(def){ PAGES.push(def); }
