@@ -25848,8 +25848,8 @@ var TSISL_TEAM_ONB_V2=[
       if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
     }
     function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
-    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
-    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    function check(){ if(!el.isConnected) return; var pg=el.closest&&el.closest('.tsn0-page'); if(pg && !pg.classList.contains('go')) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) check(); },{threshold:.12}); io.observe(el); }catch(e){}
     window.addEventListener('scroll',check,{passive:true,capture:true});
     window.addEventListener('resize',check,{passive:true});
     iv=setInterval(check,400);
@@ -25864,7 +25864,7 @@ var TSISL_TEAM_ONB_V2=[
   function hero(cfg){
     var x=h('div','ts-hero tsn0-hero');
     x.innerHTML=
-      '<img class="tsn0-hero__img" alt="'+cfg.alt+'" src="'+cfg.img+'" fetchpriority="high" decoding="sync">'+
+      '<img class="tsn0-hero__img" alt="'+cfg.alt+'" src="'+cfg.img+'" width="2360" height="936" fetchpriority="high" decoding="sync">'+
       '<div class="tsn0-hero__text">'+
         '<img class="tsn0-hero__logo" alt="Tasty Studios" src="'+LOGO+'" decoding="sync">'+
         '<div class="tsn0-hero__eyebrow">'+cfg.eyebrow+'</div>'+
@@ -26211,12 +26211,12 @@ var TSISL_TEAM_ONB_V2=[
   var N=window.__tsn0, L=window.__tsn0L;
   /* Beispielwerte = Rezeptur-Rechner #tsd5 (Basilikum-Pesto, /rezepturen): Menge x Einkaufspreis */
   var ROWS=[
-    ['Basilikum','24,00 €','50 g','1,20 €'],
-    ['Parmesan','18,00 €','40 g','0,72 €'],
-    ['Pinienkerne','42,00 €','30 g','1,26 €'],
-    ['Olivenöl','9,80 €','90 g','0,88 €'],
-    ['Knoblauch','6,00 €','8 g','0,05 €'],
-    ['Meersalz','2,90 €','2 g','0,01 €']
+    ['Basilikum','24,00 €','50','1,20 €'],
+    ['Parmesan','18,00 €','40','0,72 €'],
+    ['Pinienkerne','42,00 €','30','1,26 €'],
+    ['Olivenöl','9,80 €','90','0,88 €'],
+    ['Knoblauch','6,00 €','8','0,05 €'],
+    ['Meersalz','2,90 €','2','0,01 €']
   ];
   var CAPS=[
     'Die Vorlage kommt fertig: Datenbanken, Verbindungen und Formeln stehen schon. Leer sind nur die Zeilen.',
@@ -26226,20 +26226,34 @@ var TSISL_TEAM_ONB_V2=[
   var Q='Welches Gericht hat den schwächsten Deckungsbeitrag?';
   var A='Das <b>Lammkarree</b>. Nach Ware, Gemeinkosten und Personal bleiben <b>−0,90 €</b> je Teller. Das Gemüse-Steak liegt bei <b>3,60 €</b>, dem besten Wert auf deiner Karte.';
 
+  /* Notion-Original (Dark Mode), Werte am 01.11.2026 an einer echten Notion-Datenbank abgenommen
+     (sore-donut-083.notion.site, berechnete Stile): Hintergrund #191919, Text #f0efed, Kopfzeile
+     #ada9a3 14px 36px hoch, Zeilen 37px, Linien #fffff315, Titel 32px/700, Schrift ui-sans-serif.
+     Icons = Notions eigene Eigenschafts-Icons (font, hashtag, formula). Keine Kursfarben im Fenster. */
+  var IC={
+    font:'<svg viewBox="0 0 20 20"><path d="M4.963 4.447H7.7l3.832 11.107H9.55l-.863-2.5h-4.71l-.862 2.5H1.13zm-.34 6.732H8.04L6.363 6.321H6.3zM16.995 9.08l.195-.467h1.68v6.94h-1.68l-.195-.796.004-.008a2.9 2.9 0 0 1-2.036.804c-1.825 0-3.28-1.513-3.28-3.635s1.455-3.635 3.28-3.635c.8 0 1.497.29 2.032.796m-3.438 2.835c0 1.145.715 1.96 1.719 1.96s1.719-.816 1.719-1.96-.715-1.96-1.72-1.96c-1.003 0-1.718.815-1.718 1.96"/></svg>',
+    hash:'<svg viewBox="0 0 20 20"><path d="M16.875 8.125V6.25h-2.5l.938-3.75h-1.876L12.5 6.25H9.375l.938-3.75H8.437L7.5 6.25H3.75v1.875h3.281l-.937 3.75H3.125v1.875h2.5l-.937 3.75h1.875l.937-3.75h3.125l-.937 3.75h1.874l.938-3.75h3.75v-1.875h-3.281l.937-3.75zm-5.781 3.75H7.969l.937-3.75h3.125z"/></svg>',
+    formula:'<svg viewBox="0 0 20 20"><path d="M5.375 16.688h9.25v-1.875H8.002L13.153 10 8.002 5.188h6.623V3.313h-9.25v1.986L10.407 10l-5.032 4.7z"/></svg>'
+  };
   function stage(){
-    var side=['Lieferpartner','Inventur','Zutaten','Rezepturen','Gerichte','Kennzahlen'];
+    var th=[['font','Zutat'],['hash','Einkauf / kg'],['hash','Menge (g)'],['formula','Kosten']];
     return '<div class="a1-win">'+
-      '<div class="a1-bar"><i></i><i></i><i></i><span class="a1-crumb"><span class="a1-ws">Rezepturen</span> <span class="a1-sl">/</span> <span class="a1-ttl">Basilikum-Pesto</span></span><span class="a1-badge"><span class="a1-b1">Vorlage</span><span class="a1-b2">Dein Betrieb</span></span></div>'+
-      '<div class="a1-body">'+
-        '<aside class="a1-side">'+side.map(function(s){ return '<span class="a1-si'+(s==='Rezepturen'?' on':'')+'">'+s+'</span>'; }).join('')+'</aside>'+
-        '<div class="a1-main">'+
-          '<div class="a1-th"><span>Zutat</span><span>Einkauf / kg</span><span>Menge</span><span class="f">Kosten <i>ƒ</i></span></div>'+
-          ROWS.map(function(r,i){ return '<div class="a1-tr" style="--r:'+i+'">'+r.map(function(c,j){ return '<span class="c'+j+'"><em>'+c+'</em><u></u></span>'; }).join('')+'</div>'; }).join('')+
-          '<div class="a1-sum"><span>Rohstoffkosten je Ansatz · 220 g</span><b class="a1-tot">4,12 €</b></div>'+
-          '<div class="a1-ask"><span class="a1-cl">'+window.__tsn0svg.CLAUDE+'</span><span class="a1-q"></span><span class="a1-caret"></span></div>'+
-          '<div class="a1-ans"><span class="a1-cl">'+window.__tsn0svg.CLAUDE+'</span><p>'+A+'</p></div>'+
+      '<div class="a1-bar"><i class="r"></i><i class="y"></i><i class="g"></i>'+
+        '<span class="a1-crumb"><span class="a1-em">🍽️</span> Backoffice <span class="a1-sl">/</span> Rezepturen <span class="a1-sl">/</span> Basilikum-Pesto</span></div>'+
+      '<div class="a1-page">'+
+        '<h4 class="a1-h1"><span class="a1-em">🌿</span>Basilikum-Pesto</h4>'+
+        '<div class="a1-tab">'+
+          '<div class="a1-th">'+th.map(function(t,i){ return '<span class="c'+i+'"><i>'+IC[t[0]]+'</i>'+t[1]+'</span>'; }).join('')+'</div>'+
+          ROWS.map(function(r,i){ return '<div class="a1-tr" style="--r:'+i+'">'+r.map(function(c,j){ return '<span class="c'+j+'">'+c+'</span>'; }).join('')+'</div>'; }).join('')+
+          '<div class="a1-new">+ Neue Seite</div>'+
         '</div>'+
-      '</div></div>';
+      '</div></div>'+
+      /* Kurs-Gestaltung nur AUSSERHALB des Notion-Fensters */
+      '<div class="a1-out">'+
+        '<div class="a1-o o1"><span class="a1-ok">Die Vorlage</span><p>Spalten, Verbindungen und die Formel stehen. Die Tabelle ist noch leer.</p></div>'+
+        '<div class="a1-o o2"><span class="a1-ok">Deine Daten</span><p>Rohstoffkosten je Ansatz (220 g): <b class="a1-tot">4,12 €</b>, gerechnet von der Formelspalte.</p></div>'+
+        '<div class="a1-o o3"><span class="a1-cl">'+window.__tsn0svg.CLAUDE+'</span><div><p class="a1-qq"><span class="a1-q"></span><span class="a1-caret"></span></p><p class="a1-ans">'+A+'</p></div></div>'+
+      '</div>';
   }
   function build(){
     var out=[];
@@ -26694,8 +26708,8 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Diese Fragen sind berechtigt. Hier bekommst du die Antworten, eine nach der anderen. Manche Antworten beruhigen dich, andere zeigen dir, worauf du achten musst. Beides gehört dazu, wenn du KI mit echten Betriebszahlen nutzt, und keine dieser Fragen ist eine dumme Frage. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a05';
     a.innerHTML=N.head('Fünf Fragen','Die Zettel an der <span class="g">Pinnwand.</span>','Die Bedenken, die ich am häufigsten höre. Tipp auf einen Zettel, um direkt zur Antwort zu springen.')+
-      '<div class="a5-frame"><div class="a5-rail"><span class="a5-bar"></span>'+
-        Q.map(function(q,i){ return '<a class="a5-bon" href="#tsn0-l05q'+(i+1)+'" style="--i:'+i+'"><span class="a5-clip"></span><span class="a5-no">Frage '+(i+1)+'</span><span class="a5-q">'+q+'</span><span class="a5-perf"></span><span class="a5-st">✓ beantwortet</span></a>'; }).join('')+
+      '<div class="a5-frame"><div class="a5-rail">'+
+        Q.map(function(q,i){ return '<a class="a5-bon" href="#tsn0-l05q'+(i+1)+'" style="--i:'+i+';--rot:'+[-1.8,1.3,-.7,1.7,-1.2][i]+'deg"><span class="a5-clip"></span><span class="a5-no">Frage '+(i+1)+'</span><span class="a5-q">'+q+'</span><span class="a5-perf"></span><span class="a5-st"><svg viewBox="0 0 40 28" aria-hidden="true"><path d="M3 15 L14 25 L37 3"/></svg><em>beantwortet</em></span></a>'; }).join('')+
       '</div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
@@ -26995,10 +27009,10 @@ var TSISL_TEAM_ONB_V2=[
 
 /* ============================================================
    ABSCHLUSS · Was du jetzt kannst  (/abschluss-was-du-am-ende-kannst)
-   Erklaeranimation #tsn0-ab "Der Tisch" — EIGENES Konzept: ein gedeckter
-   langer Tisch mit sechs Cloches (Pass ist in 3.1/3.2 vergeben). Eine nach der anderen hebt sich und gibt
-   frei, was du in diesem Modul gelernt hast; zum Schluss leuchtet die
-   Glocke am Pass ("Service"). Die Sektionen danach: Pflege, Weg danach.
+   Erklaeranimation #tsn0-ab "Der Tisch" — EIGENES Konzept: ein gedeckter langer Tisch mit
+   sechs Cloches (Pass ist in 3.1/3.2 vergeben). Eine nach der anderen hebt sich und gibt einen
+   Teller frei: ein Gang je Modul, mit Gericht aus der Kurs-Beispielkarte. Was du kannst, steht
+   bewusst erst in der Sektion darunter (Doktrin 1a).
    ============================================================ */
 (function(){
   if(window.__tsn0ab) return; window.__tsn0ab=true;
@@ -27006,12 +27020,12 @@ var TSISL_TEAM_ONB_V2=[
   /* Teller = die sechs Beispielgerichte des Kurses (Kurs-SSOT DISHES, /mehrwert-zielbild) */
   var DISH=['rinderfilet','rote-bete-risotto','lammkarree','kuerbis-veloute','pilz-ravioli','gemuese-steak'];
   var CL=[
-    ['Notion','Du liest jede Datenbank deiner Vorlage und findest dich in jeder Ansicht zurecht.'],
-    ['Backoffice','Dein Betrieb steht im System: Einkauf, Rezepturen, Gerichte, Kosten, Kennzahlen.'],
-    ['Claude','Du weißt, was Claude ist, und hast es für deinen Betrieb eingerichtet.'],
-    ['Claude + Notion','Claude beantwortet Fragen zu deinen Zahlen und pflegt dein Backoffice mit.'],
-    ['Reservierungen','Ein Agent nimmt Anfragen an und trägt sie ein.'],
-    ['Website','Deine Website steht und ist online.']
+    ['Modul 1','Notion-Grundlagen','Rinderfilet'],
+    ['Modul 2','Das Backoffice','Rote-Bete-Risotto'],
+    ['Modul 3','Claude Grundlagen','Lammkarree'],
+    ['Modul 4','Claude Code + Notion','Kürbis-Velouté'],
+    ['Modul 5','Reservierungen','Pilz-Ravioli'],
+    ['Modul 6','Deine Website','Gemüse-Steak']
   ];
   function build(){
     var out=[];
@@ -27019,7 +27033,7 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Du bist durch. Ich weiß, wie viele Abende in diesem Kurs stecken, neben einem Betrieb, der dich jeden Tag fordert. Danke, dass du drangeblieben bist.</p>'+
       '<p>Nimm dir für diese Seite ein paar Minuten. Wir schauen zurück auf das, was du jetzt kannst, und nach vorn: was du jede Woche tust, damit dein Backoffice stimmt, und wie es für dich weitergeht. Du wirst sehen, wie viel sich seit der ersten Lektion verändert hat, in deinem Kopf und in deinem Betrieb. Niemand erwartet, dass vom ersten Tag an alles rund läuft.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-ab';
-    a.innerHTML=N.head('Der Tisch','Alles ist <span class="g">angerichtet.</span>','Ein Teller für jedes Modul nach der Einführung.')+
+    a.innerHTML=N.head('Der Tisch','Alles ist <span class="g">angerichtet.</span>','Ein Gang für jedes Modul nach der Einführung.')+
       '<div class="ab-frame"><div class="ab-glow"></div><div class="ab-pass">'+
         CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-dish"><img src="https://tastyrob123.github.io/kurs/img/mehrwert/'+DISH[i]+'.jpg" alt="" loading="lazy" decoding="async"></span><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
       '</div><div class="ab-shelf"></div></div>'+
