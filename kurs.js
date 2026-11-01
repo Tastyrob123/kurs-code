@@ -26142,7 +26142,7 @@ var TSISL_TEAM_ONB_V2=[
     m1:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip',
     m2:'/lektionen/vorlage-holen-und-einrichten',
     m3:'/was-ist-claude-genau',
-    m4:'/lektionen/notion-mit-claude-code-verbinden',
+    m4:'/lektionen/dein-backoffice-bekommt-hnde',
     m5:'/lektionen/reservierungen-ohne-anruf',
     m6:'/lektionen/claude-startklar-machen'
   };
@@ -26626,7 +26626,8 @@ var TSISL_TEAM_ONB_V2=[
         '<div class="tsn0-card"><span class="k">OpenAI</span><div class="n">ChatGPT</div><hr><p>Stark im Formulieren. Wer mag, lässt sich von ChatGPT die genaue Bildbeschreibung schreiben. Claude kann das genauso.</p></div>'+
         '<div class="tsn0-card"><span class="k">Midjourney</span><div class="n">Midjourney</div><hr><p>Hat eine eigene, sehr markante Bildsprache. Wir vergleichen es mit dem Weg über Gemini, damit du siehst, was zu deinem Betrieb passt.</p></div>'+
         '<div class="tsn0-card"><span class="k">Canva</span><div class="n">Canva Pro</div><hr><p>Macht aus einem Bild ein fertiges Cover, ein Banner oder eine Karte mit Schrift. Hier bekommt dein System seinen letzten Schliff.</p></div>'+
-      '</div>'));
+      '</div>'+
+      '<p>Wie du damit die Cover für deine Zutaten, Rezepturen und Gerichte machst, zeige ich dir in <b>Modul 2</b>, genau dort, wo du die Daten einträgst. Bilder und Videos für deine Website kommen in <b>Modul 6</b>.</p>'));
 
     out.push(N.sec('tsn0-l03s5',
       '<h3>Was du zum Start <span class="g">wirklich</span> brauchst.</h3>'+
