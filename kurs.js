@@ -29584,328 +29584,7 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
-/* ============================================================
-   MODUL 3 · L3.5 "Drei Fenster"  (/claude-interface-durchlauf)
-
-   Erklaeranimation "Ein Fenster, das mitwaechst." — EIGENES Konzept:
-   ECHTER LAYOUT-MORPH statt Cross-Fade. Es gibt genau EIN Fenster; dieselben
-   drei Bereiche (Dateibaum, Editor, Claude-Spalte) bleiben stehen und wechseln
-   per animierter Breite zwischen drei Zustaenden. Aussage: es ist nicht dreimal
-   etwas anderes, sondern dasselbe Claude mit mehr Sicht drumherum — genau der
-   Fall, fuer den der Katalog den Morph statt des Cross-Fades vorsieht.
-   Feste Buehnenhoehe (300px) gegen Layout-Spruenge.
-   ============================================================ */
-
-/* ---- L3.5 · Abschnitt 01 ---- */
-(function(){
-  if(window.__ts3e) return;
-  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 3.5'),
-      alt: 'Arbeitsfenster wählen: App, Terminal oder Erweiterung',
-      eyebrow: 'L 3.5',
-      title: 'Dein <span class="ts-gold">Arbeitsfenster</span>'
-    });
-    window.__ts3.body('ts3e-intro',
-      '<p>Claude Code lässt sich auf drei Arten öffnen, und alle drei sprechen mit demselben Programm. Was sich unterscheidet, ist <b>wie viel du dabei siehst</b>.</p>'+
-      '<p>Was sich unterscheidet, ist nur, wie viel du dabei mitbekommst, und das entscheidet mehr, als man zuerst denkt. Wer nichts sieht, merkt zu spät, wenn etwas an der falschen Stelle landet.</p>'+
-      '<p>Ich zeige dir alle drei und sage dir, in welchem Fenster ich selbst sitze und warum. Es ist eine Entscheidung für den Anfang, keine für immer, und du kannst sie jederzeit revidieren.</p>'
-    );
-  }
-  window.__ts3e=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.5 · Abschnitt 02 (Erklaeranimation #ts3eanim) ---- */
-(function(){
-  if(window.__ts3eanim) return;
-  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
-
-  var STATES=[
-    { k:'Desktop-App',  path:'Claude',                 side:0,  main:0,  chat:100, term:0 },
-    { k:'Terminal',     path:'~/mein-projekt',         side:24, main:76, chat:0,   term:52 },
-    { k:'Erweiterung',  path:'~/mein-projekt · Claude',side:20, main:46, chat:34,  term:0 }
-  ];
-  var CAPS=[
-    'In der <b>Desktop-App</b> hast du ein Chatfenster und sonst nichts. Am schnellsten eingerichtet, und am wenigsten zu sehen.',
-    'Im <b>Terminal deines Editors</b> liegt der Dateibaum daneben. Du siehst live, welche Datei gerade entsteht oder sich ändert.',
-    'Mit der <b>Erweiterung</b> sitzt Claude als eigene Spalte neben dem Editor. Fast wie ein normales Chatfenster, nur mit allem drumherum.'
-  ];
-  var DWELL=4800;
-
-  var CSS=`
-  #ts3eanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts3eanim *{box-sizing:border-box}
-  #ts3eanim .fw-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts3eanim .fw-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts3eanim .fw-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts3eanim h2.fw-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts3eanim h2.fw-title .ts-gold{color:#c7b489}
-  #ts3eanim .fw-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts3eanim .fw-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts3eanim .fw-frame{position:relative;width:min(620px,100%);margin:0 auto;border-radius:16px;overflow:hidden;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9)}
-  #ts3eanim .fw-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
-  #ts3eanim .fw-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;
-    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-  #ts3eanim .fw-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
-  #ts3eanim .fw-dot:first-child{background:rgba(199,180,137,.55)}
-  #ts3eanim .fw-path{margin-left:8px;font:600 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-    letter-spacing:.04em;color:#c7b489;transition:opacity .4s ease}
-  #ts3eanim .fw-wrap.swap .fw-path{opacity:0}
-
-  /* Die drei Bereiche bleiben IMMER dieselben Knoten, nur ihre Breite morpht */
-  #ts3eanim .fw-body{display:flex;height:300px}
-  #ts3eanim .fw-side,#ts3eanim .fw-main,#ts3eanim .fw-chat{
-    overflow:hidden;transition:width .82s cubic-bezier(.16,1,.3,1),opacity .6s ease,padding .82s cubic-bezier(.16,1,.3,1)}
-  #ts3eanim .fw-side{width:0;opacity:0;padding:14px 0;border-right:1px solid rgba(255,255,255,.07);flex:0 0 auto}
-  #ts3eanim .fw-main{width:0;opacity:0;padding:0;position:relative;flex:0 0 auto;display:flex;flex-direction:column}
-  #ts3eanim .fw-chat{width:100%;opacity:1;padding:16px;border-left:1px solid rgba(255,255,255,.07);flex:0 0 auto}
-  #ts3eanim .fw-side.on{opacity:1;padding:14px 10px}
-  #ts3eanim .fw-main.on{opacity:1}
-  #ts3eanim .fw-chat.off{width:0;opacity:0;padding:0}
-  /* Endzustand = Default: ohne JS steht Zustand 3 (Erweiterung) fertig da. */
-  #ts3eanim .fw-wrap:not(.js) .fw-side{width:20%;opacity:1;padding:14px 10px}
-  #ts3eanim .fw-wrap:not(.js) .fw-main{width:46%;opacity:1}
-  #ts3eanim .fw-wrap:not(.js) .fw-chat{width:34%}
-  #ts3eanim .fw-wrap:not(.js) .fw-step:last-child{border-color:rgba(199,180,137,.55)}
-
-  #ts3eanim .fw-flbl{font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin:0 0 10px 6px;white-space:nowrap}
-  #ts3eanim .fw-f{display:flex;align-items:center;gap:8px;margin:0 0 8px 6px;white-space:nowrap}
-  #ts3eanim .fw-fi{width:16px;height:13px;border-radius:2px 4px 4px 4px;flex:0 0 auto;
-    background:linear-gradient(rgba(199,180,137,.3),rgba(199,180,137,.3)),#05060b;border:1px solid rgba(199,180,137,.4)}
-  #ts3eanim .fw-fl{height:8px;border-radius:5px;background:rgba(255,255,255,.15)}
-  #ts3eanim .fw-fl.k{background:rgba(199,180,137,.5)}
-
-  #ts3eanim .fw-code{flex:1 1 auto;padding:14px 16px;overflow:hidden}
-  #ts3eanim .fw-cl{height:8px;border-radius:5px;background:rgba(255,255,255,.12);margin:0 0 9px}
-  #ts3eanim .fw-cl.k{background:rgba(199,180,137,.35)}
-  #ts3eanim .fw-term{border-top:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.35);padding:0 14px;
-    height:0;opacity:0;overflow:hidden;transition:height .82s cubic-bezier(.16,1,.3,1),opacity .6s ease,padding .82s ease}
-  #ts3eanim .fw-term.on{opacity:1;padding:12px 14px}
-  #ts3eanim .fw-tl{font:600 11px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(255,255,255,.62);white-space:nowrap}
-  #ts3eanim .fw-tl b{color:#c7b489;font-weight:700}
-
-  #ts3eanim .fw-msg{border-radius:11px;padding:10px 12px;margin:0 0 9px;
-    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(255,255,255,.10)}
-  #ts3eanim .fw-msg.me{border-color:rgba(199,180,137,.3)}
-  #ts3eanim .fw-ml{height:8px;border-radius:5px;background:rgba(255,255,255,.14);margin:0 0 7px}
-  #ts3eanim .fw-ml:last-child{margin-bottom:0}
-  #ts3eanim .fw-ml.k{background:rgba(199,180,137,.5)}
-  #ts3eanim .fw-clbl{font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:0 0 10px;white-space:nowrap}
-
-  /* Umschalter — drei gleichrangige Chips, exakt gleich gross, auf derselben Achse */
-  #ts3eanim .fw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(620px,100%);margin:20px auto 0}
-  #ts3eanim .fw-step{height:76px;border-radius:13px;padding:0 12px;cursor:pointer;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
-  #ts3eanim .fw-step .sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.3);transition:color .4s ease}
-  #ts3eanim .fw-step .sl{font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.4);transition:color .4s ease}
-  #ts3eanim .fw-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
-  #ts3eanim .fw-step.on .sn{color:#c7b489}
-  #ts3eanim .fw-step.on .sl{color:rgba(255,255,255,.86)}
-
-  #ts3eanim .fw-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts3eanim .fw-cap b{color:#c7b489;font-weight:600}
-  #ts3eanim .fw-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts3eanim .fw-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts3eanim .fw-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @media(max-width:820px){
-    #ts3eanim .fw-body{height:250px}
-    #ts3eanim .fw-steps{grid-template-columns:1fr;gap:10px}
-    #ts3eanim .fw-step{height:56px;flex-direction:row;gap:10px;justify-content:flex-start;text-align:left}
-    #ts3eanim .fw-cap{min-height:120px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    #ts3eanim .fw-side,#ts3eanim .fw-main,#ts3eanim .fw-chat,#ts3eanim .fw-term{transition:none}
-  }
-  `;
-
-  function html(){
-    var steps=STATES.map(function(s,i){
-      return '<div class="fw-step" data-i="'+i+'"><span class="sn">0'+(i+1)+'</span><span class="sl">'+s.k+'</span></div>';
-    }).join('');
-    return `
-<div class="fw-head">
-  <span class="fw-eyebrow">Immer dasselbe Claude</span>
-  <h2 class="fw-title">Ein Fenster, das <span class="ts-gold">mitwächst</span>.</h2>
-  <p class="fw-sub">Es sind nicht drei Programme. Es ist dasselbe Claude, und du entscheidest, wie viel drumherum du dabei sehen willst.</p>
-</div>
-<div class="fw-wrap">
-  <div class="fw-frame">
-    <div class="fw-bar"><span class="fw-dot"></span><span class="fw-dot"></span><span class="fw-dot"></span><span class="fw-path">Claude</span></div>
-    <div class="fw-body">
-      <div class="fw-side">
-        <div class="fw-flbl">Projekt</div>
-        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl k" style="width:52px"></span></div>
-        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:66px"></span></div>
-        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:44px"></span></div>
-        <div class="fw-f"><span class="fw-fi"></span><span class="fw-fl" style="width:58px"></span></div>
-      </div>
-      <div class="fw-main">
-        <div class="fw-code">
-          <div class="fw-cl k" style="width:46%"></div>
-          <div class="fw-cl" style="width:72%"></div>
-          <div class="fw-cl" style="width:58%"></div>
-          <div class="fw-cl k" style="width:34%"></div>
-          <div class="fw-cl" style="width:64%"></div>
-        </div>
-        <div class="fw-term">
-          <div class="fw-tl"><b>&gt;</b> claude</div>
-          <div class="fw-tl">Datei angelegt.</div>
-        </div>
-      </div>
-      <div class="fw-chat">
-        <div class="fw-clbl">Claude</div>
-        <div class="fw-msg me"><div class="fw-ml k" style="width:70%"></div><div class="fw-ml" style="width:44%"></div></div>
-        <div class="fw-msg"><div class="fw-ml" style="width:88%"></div><div class="fw-ml" style="width:62%"></div><div class="fw-ml" style="width:76%"></div></div>
-      </div>
-    </div>
-  </div>
-  <div class="fw-steps">${steps}</div>
-  <p class="fw-cap"></p>
-  <div class="fw-foot"><button class="fw-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function show(root,i){
-    var s=STATES[i]; if(!s) return;
-    var wrap=root.querySelector('.fw-wrap');
-    var side=root.querySelector('.fw-side'), main=root.querySelector('.fw-main'),
-        chat=root.querySelector('.fw-chat'), term=root.querySelector('.fw-term');
-    side.style.width=s.side+'%'; side.classList.toggle('on', s.side>0);
-    main.style.width=s.main+'%'; main.classList.toggle('on', s.main>0);
-    chat.style.width=s.chat+'%'; chat.classList.toggle('off', s.chat===0);
-    term.style.height=s.term+'px'; term.classList.toggle('on', s.term>0);
-    wrap.classList.add('swap');
-    later(function(){ root.querySelector('.fw-path').textContent=s.path; wrap.classList.remove('swap'); },260);
-    var st=root.querySelectorAll('.fw-step');
-    for(var t=0;t<st.length;t++) st[t].classList.toggle('on', t===i);
-    var cap=root.querySelector('.fw-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
-  }
-
-  function run(root,i){ clear(); show(root,i); if(i<STATES.length-1) later(function(){ run(root,i+1); },DWELL); }
-
-  function play(root){
-    var wrap=root.querySelector('.fw-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); show(root,STATES.length-1); return; }
-    run(root,0);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='ts3eanim'; el.innerHTML=html();
-    el.querySelector('.fw-replay').addEventListener('click',function(){ play(el); });
-    var st=el.querySelectorAll('.fw-step');
-    for(var i=0;i<st.length;i++){ (function(n){ st[n].addEventListener('click',function(){ clear(); el.querySelector('.fw-wrap').classList.add('js'); show(el,n); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts3eanim-css'))return;
-    var s=document.createElement('style'); s.id='ts3eanim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts3eanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts3eanim')) return;
-    var anchor=document.getElementById('ts3e-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    /* Endzustand = Default: ohne Trigger steht Zustand 3 (Erweiterung) fertig da */
-    show(el, STATES.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.fw-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts3eanimKill=function(){ clear(); };
-  window.__ts3eanim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.5 · Inhalt + Empfehlung + Abschluss ---- */
-(function(){
-  if(window.__ts3erest) return;
-  function on(){ return /\/claude-interface-durchlauf\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts3eanim')) return;
-
-    window.__ts3.sec('ts3e-drei','ts3eanim',
-      '<h3>Wo du wirklich <span class="g">sitzt</span></h3>'+
-      '<p class="lead">Alle drei starten dasselbe Programm. Der Unterschied liegt darin, wie viel Übersicht du dabei behältst und wie gut du eingreifen kannst, wenn etwas schiefläuft.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 1</span><div class="ts3-nm">In der Desktop-App</div><hr>'+
-          '<p>Am schnellsten eingerichtet, du brauchst nichts weiter zu installieren. Dafür siehst du nur das Chatfenster und musst dir alles andere denken.</p>'+
-          '<p class="ts3-foot">Gut zum Anfangen, schlecht bei allem, was länger dauert.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 2</span><div class="ts3-nm">Im Terminal eines Editors</div><hr>'+
-          '<p>Du öffnest deinen Projektordner in einem kostenlosen Editor und startest Claude im eingebauten Terminal. Der Dateibaum liegt daneben, du siehst jede Änderung sofort.</p>'+
-          '<p class="ts3-foot">Mein Weg. Volle Kontrolle, mehrere Sitzungen gleichzeitig.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 3</span><div class="ts3-nm">Über die Erweiterung</div><hr>'+
-          '<p>Dieselbe Umgebung, aber Claude sitzt als eigene Spalte neben dem Editor statt im Terminal. Fühlt sich an wie ein Chatfenster und zeigt trotzdem alles drumherum.</p>'+
-          '<p class="ts3-foot">Der freundlichste Einstieg, wenn Terminals dich abschrecken.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Du musst dich nicht festlegen. Alle drei greifen auf dieselben Ordner zu, du kannst am selben Projekt heute im Terminal und morgen in der Erweiterung arbeiten.</p>'
-    );
-
-    window.__ts3.sec('ts3e-warum','ts3e-drei',
-      '<h3>Warum ich im <span class="g">Terminal</span> arbeite</h3>'+
-      '<p>Drei Gründe, und keiner davon hat mit Technikverliebtheit zu tun.</p>'+
-      '<p>Erstens sehe ich <b>jede Datei, die entsteht</b>, in dem Moment, in dem sie entsteht. Wenn etwas an der falschen Stelle landet, merke ich das sofort und nicht erst nach zwanzig Minuten.</p>'+
-      '<p>Zweitens kann ich <b>mehrere Sitzungen gleichzeitig</b> laufen lassen, jede in ihrem eigenen Fenster, jede an einem anderen Thema. Das geht in der App nicht.</p>'+
-      '<p>Drittens ist es der Weg, auf dem später auch die Systeme laufen, die im Hintergrund für dich arbeiten. Wer sich früh daran gewöhnt, muss später nichts umlernen.</p>'+
-      '<p class="ts3-close">Schreckt dich ein Terminal ab, fang mit der <b>Erweiterung</b> an. Der Schritt ins Terminal ist von dort aus klein, und niemand sieht dir hinterher an, welchen Weg du genommen hast.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts3eemp', anchorId:'ts3e-warum', kind:'Einrichtung',
-      animTitle:'Dein', animGold:'Arbeitsfenster',
-      steps:[{n:'01',l:'Fenster wählen'},{n:'02',l:'In Ordnern denken'},{n:'03',l:'Bei einem Weg bleiben'},{n:'04',l:'In Modul 4 einrichten'}],
-      intro:'Entschieden wird hier, eingerichtet wird in Modul 4. Diese vier Punkte nimmst du mit:',
-      points:[
-        'Leg dich jetzt auf <b>ein Fenster</b> fest. Ob es das richtige war, merkst du in der ersten Woche, und wechseln kannst du dann immer noch.',
-        'Wenn dich ein Terminal abschreckt, nimm die <b>Erweiterung</b>. Sie sieht aus wie ein Chatfenster und liegt trotzdem schon in der richtigen Umgebung.',
-        'Für alle drei Wege gilt dasselbe: Claude arbeitet in dem <b>Ordner</b>, den du geöffnet hast. Das entscheidet mehr als die Oberfläche.',
-        'Bleib die ersten Wochen bei <b>einem Weg</b>. Zwischen den Oberflächen zu wechseln kostet dich mehr Zeit, als jede von ihnen dir spart.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts3enext',
-      learn:[
-        'Du kennst die <b>drei Wege</b>, Claude Code zu öffnen.',
-        'Du weißt, dass alle drei <b>dasselbe Programm</b> starten.',
-        'Du kennst die drei Gründe für das <b>Terminal</b> und die Alternative dazu.',
-        'Du weißt, dass du dich <b>nicht festlegen</b> musst.'
-      ],
-      next:'/stack-aufrumen'
-    });
-  }
-  window.__ts3erest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
+/* MODUL 3 · alter Block claude-interface-durchlauf (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* ============================================================
    MODUL 3 · L3.6 "Stack aufräumen"  (/stack-aufrumen)
 
@@ -36338,6 +36017,139 @@ var TSISL_TEAM_ONB_V2=[
         'Du verstehst die <b>zwei Fenster</b>: fünf Stunden und eine Woche, aus einem Topf.',
         'Du hast eine Regel, <b>wann sich der Wechsel</b> auf die größere Stufe lohnt.'],
       next:'/claude-interface-durchlauf'}
+  });
+})();
+
+/* ---- l04-desktop-app.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.4 "Die Desktop-App"  (/claude-interface-durchlauf)
+   Fakten: Faktenblatt Punkt 2, 3, 14 (Download, ein Gespraech seit 16.09.2026, Projekte,
+   Gedaechtnis unter Einstellungen > Gedaechtnis, Konnektoren, Modelltraining-Schalter).
+   Erklaeranimation #tsn3-a04 "Ein Fenster, fuenf Stellen."
+   Ein stilisiertes App-Fenster (keine Nachbildung der echten Oberflaeche): links eine
+   Seitenleiste mit fuenf Stellen, rechts die Arbeitsflaeche. Ein Goldbalken gleitet (transform)
+   von Stelle zu Stelle, die Arbeitsflaeche blendet die passende Szene ein. Rahmen, Leiste und
+   Flaeche stehen ab Beat 0, es wechselt nur der Inhalt.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var ITEMS=['Gespräch','Projekte','Gedächtnis','Konnektoren','Datenschutz'];
+  var CAPS=[
+    'Im <b>Gespräch</b> gibst du Notizen, Fotos oder Dateien hinein und bekommst Text, Tabellen oder Dokumente zurück.',
+    'Ein <b>Projekt</b> hält alles zusammen, was zu einem Thema gehört: Dateien, deine Anweisungen und den Verlauf.',
+    'Im <b>Gedächtnis</b> merkt sich Claude, was über viele Gespräche gilt. Jeder Eintrag lässt sich ansehen und löschen.',
+    'Über <b>Konnektoren</b> liest Claude in deinem Postfach, Kalender oder Drive mit, so weit du es freigibst.',
+    'Unter <b>Datenschutz</b> legst du fest, ob deine Gespräche zum Training verwendet werden dürfen. Für einen Betrieb gehört der Schalter auf aus.'
+  ];
+  var DISHES=['Mo · Kalbsrahmgeschnetzeltes, Rösti','Di · Gebratener Saibling, Fenchel','Mi · Ofengemüse, Ziegenkäse, Honig','Do · Geschmorte Rinderwange','Fr · Linguine mit Muscheln'];
+  var scenes=[
+    '<div class="l4-sc s0"><div class="l4-msg u">Mach aus meinen Notizen die Mittagskarte für nächste Woche, ein Hauptgericht pro Tag.<span class="l4-att">'+'<img src="'+T3.pic('a04-notizen.webp','Notizen',200,140)+'" alt="Notizen" loading="lazy" decoding="async"></span></div>'
+      +'<div class="l4-msg c"><span class="l4-who">Claude</span><ol class="l4-dish">'+DISHES.map(function(d){ return '<li>'+d+'</li>'; }).join('')+'</ol></div></div>',
+    '<div class="l4-sc s1"><div class="l4-ph">Projekt · Sommerkarte</div><div class="l4-files"><span>Rezepturen.xlsx</span><span>Lieferantenpreise.pdf</span><span>Hausstil.txt</span></div>'
+      +'<div class="l4-inst"><span class="l4-who">Anweisung für dieses Projekt</span>Schreib in unserem Ton: kurz, ohne Fremdwörter, Herkunft der Zutaten immer nennen.</div></div>',
+    '<div class="l4-sc s2"><div class="l4-ph">Einstellungen · Gedächtnis</div><ul class="l4-mem"><li><b>Betrieb</b> 60 Plätze, Montag Ruhetag</li><li><b>Küche</b> saisonal, Lieferanten aus der Region</li><li><b>Karte</b> Gäste werden geduzt</li></ul><div class="l4-hint">Jeder Eintrag lässt sich einzeln löschen.</div></div>',
+    '<div class="l4-sc s3"><div class="l4-ph">Anpassen · Konnektoren</div><div class="l4-cons">'
+      +['Gmail','Google Kalender','Google Drive'].map(function(n){ return '<div class="l4-con"><span class="l4-cn">'+n+'</span><span class="l4-tg"><i></i></span></div>'; }).join('')+'</div></div>',
+    '<div class="l4-sc s4"><div class="l4-ph">Einstellungen · Datenschutz</div><div class="l4-con wide"><span class="l4-cn">Modelltraining mit meinen Gesprächen</span><span class="l4-tg on"><i></i></span></div>'
+      +'<div class="l4-hint">Ohne Training werden Gespräche 30 Tage aufbewahrt, mit Training bis zu fünf Jahre.</div></div>'
+  ];
+  var stage='<div class="l4-win"><div class="l4-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l4-tt">Claude</span></div>'
+    +'<div class="l4-body"><div class="l4-side"><span class="l4-focus"></span>'+ITEMS.map(function(n,i){ return '<button type="button" class="l4-it" data-i="'+i+'"><span class="n">0'+(i+1)+'</span>'+n+'</button>'; }).join('')+'</div>'
+    +'<div class="l4-main">'+scenes.join('')+'</div></div></div>';
+
+  function show(el,i){
+    el.querySelector('.l4-focus').style.setProperty('--i',i);
+    el.querySelectorAll('.l4-it').forEach(function(b,k){ b.classList.toggle('on',k===i); });
+    el.querySelectorAll('.l4-sc').forEach(function(s,k){ s.classList.toggle('on',k===i); });
+  }
+  T3.anim('tsn3-a04',{
+    reset:function(el){
+      show(el,0);
+      el.querySelectorAll('.l4-dish li').forEach(function(li){ li.classList.remove('in'); });
+      el.querySelectorAll('.s3 .l4-tg').forEach(function(t){ t.classList.remove('on'); });
+      el.querySelector('.s4 .l4-tg').classList.add('on');
+    },
+    play:function(el, api, end){
+      var STEP=3600;
+      ITEMS.forEach(function(n,i){
+        var t0=300+i*STEP;
+        api.T.at(t0,function(){ show(el,i); api.cap(CAPS[i]); });
+        if(i===0) el.querySelectorAll('.l4-dish li').forEach(function(li,k){ api.T.at(t0+900+k*320,function(){ li.classList.add('in'); }); });
+        if(i===3) el.querySelectorAll('.s3 .l4-tg').forEach(function(t,k){ api.T.at(t0+800+k*450,function(){ t.classList.add('on'); }); });
+        if(i===4) api.T.at(t0+1300,function(){ el.querySelector('.s4 .l4-tg').classList.remove('on'); });
+      });
+      api.T.at(300+ITEMS.length*STEP+200, end);
+    },
+    end:function(el){
+      show(el,4);
+      el.querySelectorAll('.l4-dish li').forEach(function(li){ li.classList.add('in'); });
+      el.querySelectorAll('.s3 .l4-tg').forEach(function(t){ t.classList.add('on'); });
+      el.querySelector('.s4 .l4-tg').classList.remove('on');
+    },
+    setup:function(el, api){
+      el.querySelectorAll('.l4-it').forEach(function(b){ b.addEventListener('click',function(){
+        var k=window['__tsn3Kill_tsn3_a04']; if(k) k();
+        var i=+b.getAttribute('data-i'); show(el,i); api.capNow(CAPS[i]);
+      }); });
+    }
+  });
+
+  T3.page({
+    key:'l04', re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, tab:'L 3.4 · Die Desktop-App',
+    hero:{eyebrow:'L 3.4', title:'Die <span class="ts-gold">Desktop-App</span>', alt:'Die Claude Desktop-App: Gespräch, Projekte, Gedächtnis, Konnektoren und Datenschutz'},
+    intro:'<p>Die Desktop-App ist der Ort, an dem du mit Claude am meisten Zeit verbringst. Hier schreibst du, ziehst Dateien hinein, gibst Ordner frei und öffnest später auch Claude Code. Alles, was du in der App einrichtest, gilt auch im Browser und auf dem Handy, weil sich Gespräche, Projekte und Gedächtnis über deine Geräte abgleichen.</p>'
+      +'<p>Wir richten sie heute so ein, wie ein Betrieb sie braucht: mit dem richtigen Datenschutz, einem Projekt für jedes große Thema und einem Gedächtnis, das deinen Betrieb kennt, ohne dass du ihn jedes Mal neu erklärst.</p>',
+    anim:{id:'tsn3-a04', eb:'Der Rundgang', title:'Ein Fenster, fünf <span class="g">Stellen</span>.',
+      sub:'Fünf Stellen in der App entscheiden darüber, wie gut Claude für deinen Betrieb arbeitet. Wir gehen sie einmal der Reihe nach durch.',
+      stage:stage,
+      capEnd:CAPS[4]},
+    body:function(H){
+      return H.sec({id:'tsn3-l04-start', title:'Die App <span class="g">einrichten</span>',
+          lead:'Zehn Minuten, einmal gemacht. Danach musst du an den Einstellungen nur noch selten etwas ändern.',
+          body:H.steps([
+            'Lade die App von <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>. Es gibt sie für Mac, für Windows (auch für Rechner mit ARM-Chip und im Microsoft Store) und als Vorschau für Linux.',
+            'Melde dich mit dem Konto an, das du in Lektion 3.1 angelegt hast. Die App ist in jedem Plan dabei, auch im kostenlosen.',
+            'Öffne die Datenschutz-Einstellungen, direkt erreichbar über <a href="https://claude.ai/settings/data-privacy-controls" target="_blank" rel="noopener">claude.ai/settings/data-privacy-controls</a>, und prüf den Schalter für das <b>Modelltraining</b>. Für einen Betrieb gehört er auf aus.',
+            'Leg dein erstes <b>Projekt</b> an, zum Beispiel für die Speisekarte, und lade die Dateien hinein, die du dafür immer wieder brauchst.'
+          ],'Jetzt du')
+          +H.note('Bei Free, Pro, Max und Ultra wird mit deinen Gesprächen nur trainiert, wenn dieser Schalter an ist. Ist er aus, werden sie 30 Tage aufbewahrt, ist er an, bis zu fünf Jahre. Team und Enterprise trainieren grundsätzlich nicht, außer du stimmst ausdrücklich zu.','Datenschutz')})
+        +H.sec({id:'tsn3-l04-gespraech', title:'Das <span class="g">Gespräch</span>',
+          lead:'Seit Mitte September 2026 gibt es in der App keine Wahl mehr zwischen Chat und Cowork. Kurze Frage und große Aufgabe laufen im selben Gespräch.',
+          body:'<p><strong class="lead">Du gibst Material, nicht nur Fragen.</strong>Zieh ein Foto, ein PDF oder eine Excel-Datei ins Eingabefeld. Claude liest es mit und arbeitet damit, statt zu raten. Eine Speisekarte als PDF ist eine bessere Grundlage als jede Beschreibung aus dem Kopf.</p>'
+            +'<p><strong class="lead">Du bekommst Dateien, nicht nur Antworten.</strong>Bitte um das Ergebnis in der Form, in der du es brauchst: als Tabelle, als Word-Dokument, als PDF für den Aushang, als Folien für die Teambesprechung. Claude legt die Datei an, du lädst sie herunter.</p>'
+            +'<p><strong class="lead">Große Aufgaben laufen weiter.</strong>Gibst du Claude eine längere Aufgabe, arbeitet es selbständig in mehreren Schritten und meldet sich mit dem Ergebnis. Wie das mit ganzen Ordnern geht, zeige ich dir in Lektion 3.5.</p>'
+            +H.prompt('Hier sind meine Notizen für die Mittagskarte nächste Woche. Mach daraus eine Karte für Montag bis Freitag mit je einem Hauptgericht, kurzen Beschreibungen in unserem Ton und den Allergenen nach der Lebensmittelinformations-Verordnung. Gib mir das Ergebnis als PDF im Format A5.','Prompt: Mittagskarte aus Notizen','Notizen als Foto oder Textdatei mitschicken. Allergene prüfst du danach selbst gegen deine Rezepturen.')})
+        +H.sec({id:'tsn3-l04-projekte', wide:true, title:'Ein Projekt für jedes <span class="g">große Thema</span>',
+          lead:'Ein Projekt ist ein Ordner in der App. Was darin liegt, kennt Claude in jedem Gespräch dieses Projekts, ohne dass du es neu hochlädst.',
+          body:H.cards([
+            {eb:'Projekt', nm:'Speisekarte', p:'Rezepturen, die aktuelle Karte als PDF, deine Hausregeln für Beschreibungen. Jede neue Karte entsteht hier, im selben Ton wie die letzte.'},
+            {eb:'Projekt', nm:'Team', p:'Handbuch, Checklisten, Vorlagen für Stellenanzeigen. Für Einarbeitungspläne, Aushänge und Antworten an Bewerber.'},
+            {eb:'Projekt', nm:'Einkauf', p:'Lieferantenliste, Preisliste, die letzten Lieferscheine. Für Preisvergleiche und Bestellungen, die auf deinen echten Zahlen beruhen.'}
+          ],3)
+          +'<p style="margin-top:18px"><strong class="lead">Die Anweisung im Projekt.</strong>Jedes Projekt bekommt eine kurze Anweisung, die für alle Gespräche darin gilt, zum Beispiel: „Schreib in unserem Ton, kurz und ohne Fremdwörter, und nenn bei jedem Gericht die Herkunft der Hauptzutat.“ Im kostenlosen Plan hast du bis zu fünf Projekte.</p>'})
+        +H.sec({id:'tsn3-l04-gedaechtnis', title:'Das <span class="g">Gedächtnis</span>',
+          lead:'Das Gedächtnis ist das, was Claude über dich und deinen Betrieb weiß, über alle Gespräche hinweg.',
+          body:'<p><strong class="lead">Claude merkt sich selbst, was wichtig ist.</strong>Erwähnst du, dass dein Betrieb sechzig Plätze hat und montags geschlossen ist, wird daraus ein Eintrag. Seit Juli 2026 sind das einzelne, sortierte Einträge, die du unter <b>Einstellungen › Gedächtnis</b> ansehen, ändern und löschen kannst. Sie gelten auch, wenn Claude größere Aufgaben in Ordnern erledigt.</p>'
+            +'<p><strong class="lead">Du kannst es auch gezielt füttern.</strong>Ein Satz wie „Merk dir, dass wir auf der Karte duzen und keine Fremdwörter benutzen“ reicht. Themen wie Gesundheit oder Weltanschauung bleiben draußen, solange du sensible Themen nicht ausdrücklich einschaltest.</p>'
+            +H.note('Ins Gedächtnis gehört dein Betrieb, nicht deine Gäste. Namen, Telefonnummern und Unverträglichkeiten einzelner Gäste haben dort nichts zu suchen.','Die Merkregel')})
+        +H.sec({id:'tsn3-l04-konnektoren', title:'<span class="g">Konnektoren</span>: Postfach, Kalender, Drive',
+          lead:'Ein Konnektor verbindet Claude mit einem Dienst, den du schon nutzt. Danach muss nichts mehr kopiert werden.',
+          body:'<p>Du findest sie in der App unter <b>Anpassen › Konnektoren</b>. Zur Auswahl stehen unter anderem Google Drive, Gmail, Google Kalender, Microsoft 365, Notion, Slack und Canva. Nach der Anmeldung beim Dienst kann Claude dort lesen, im Postfach auch Antworten entwerfen. Konnektoren gibt es in jedem Plan.</p>'
+            +'<p>Für den Anfang reicht einer. Am meisten bringt meist das <b>Postfach</b>, weil dort Lieferantenmails, Bewerbungen und Gästeanfragen zusammenlaufen. Wie Verbindungen grundsätzlich funktionieren und wie du sie in Claude Code anschließt, lernst du in Lektion 3.13. Notion verbinden wir in Modul 4 mit deinem Backoffice.</p>'
+            +H.prompt('Geh meine ungelesenen Mails der letzten drei Tage durch. Liste mir Reservierungsanfragen, Lieferantenmails und Bewerbungen getrennt auf, jeweils mit Absender, Datum und einem Satz Inhalt. Antworte noch auf nichts.','Prompt: Postfach sortieren','Setzt einen verbundenen Gmail- oder Microsoft-365-Konnektor voraus.')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Deine', animGold:'App für den Betrieb',
+      steps:['App laden','Training aus','Drei Projekte','Ein Konnektor'],
+      intro:'So richtest du die App ein, damit sie vom ersten Tag an zu deinem Betrieb passt:',
+      points:['Arbeite in der <b>Desktop-App</b>. Ordner freigeben und Claude Code öffnen geht nur dort, alles andere gleicht sich mit Browser und Handy ab.',
+        'Stell das <b>Modelltraining</b> aus, bevor du das erste echte Betriebsdokument hochlädst.',
+        'Leg <b>drei Projekte</b> an, für Karte, Team und Einkauf, jedes mit einer kurzen Anweisung zu Ton und Regeln.',
+        'Verbinde <b>einen Konnektor</b>, am besten dein Postfach. Weitere kommen dazu, wenn du merkst, dass du sie brauchst.']},
+    learn:{learn:['Du weißt, dass <b>Chat und Cowork</b> seit September ein Gespräch sind.',
+        'Du hast das <b>Modelltraining</b> für deinen Betrieb ausgeschaltet.',
+        'Du kennst <b>Projekte</b> und das Gedächtnis und weißt, was wohin gehört.',
+        'Du weißt, wo du <b>Konnektoren</b> verbindest.'],
+      next:'/claude-cowork'}
   });
 })();
 
