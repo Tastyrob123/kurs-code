@@ -27265,6 +27265,7 @@ var TSISL_TEAM_ONB_V2=[
     addCSS('tsn1-css',CSS);
     var h=hero({img:def.hero.img||phHero(def.hero.label), alt:def.hero.alt, eyebrow:def.hero.eyebrow, title:def.hero.title, two:def.hero.two});
     if(!h) return;
+    if(def.hideRoot){ var nrt=sc.querySelector('.notion-root'); if(nrt && nrt.style.display!=='none') nrt.style.display='none'; }
     var id='tsn1-'+def.key;
     if(!document.getElementById(id)){
       var root=document.createElement('div'); root.id=id; root.className='tsn1 js';
@@ -27629,15 +27630,18 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a0 .bar{display:flex;align-items:center;gap:6px;height:44px;padding:0 14px;font-size:14px;color:rgb(240,239,237)}
       #tsn1-a0 .bar em{font-style:normal;color:rgb(125,122,117)}
       
-      #tsn1-a0 .lay{display:grid;grid-template-columns:200px 1fr;min-height:470px}
+      #tsn1-a0 .lay{display:grid;grid-template-columns:200px 1fr}
+      #tsn1-a0 .cov{height:120px;overflow:hidden;margin:-22px -24px 4px}
+      #tsn1-a0 .cov img{width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block}
+      #tsn1-a0 .cur{position:absolute;left:0;top:0;width:18px;height:22px;z-index:6;pointer-events:none;opacity:0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));transition:transform 1s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a0 .pt{position:relative;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1)}
       #tsn1-a0.js .pt{opacity:0;transform:translateY(12px) scale(.97)}
       #tsn1-a0.js .pt.in{opacity:1;transform:none}
       #tsn1-a0 .nb{position:absolute;top:-9px;left:-9px;z-index:4;min-width:26px;height:26px;padding:0 6px;border-radius:999px;background:#c7b489;color:#05060b;font:700 11px/26px -apple-system,sans-serif;text-align:center;box-shadow:0 0 0 4px rgba(199,180,137,.18),0 8px 18px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a0 .nb{opacity:0;transform:scale(.6)}
       #tsn1-a0 .pt.hot .nb{opacity:1;transform:scale(1);box-shadow:0 0 0 6px rgba(199,180,137,.2),0 0 24px rgba(199,180,137,.55);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.34,1.56,.64,1)}
-      #tsn1-a0 .pt{outline:1px solid rgba(199,180,137,0);outline-offset:3px;border-radius:8px;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1),outline-color .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a0 .pt.hot{outline-color:rgba(199,180,137,.75)}
+      #tsn1-a0 .pt{border-radius:6px;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1),background-color .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a0 .pt.hot{background-color:rgba(39,131,222,.18)}
       #tsn1-a0 .tbw{overflow:visible}
       #tsn1-a0 .vw span.bt{color:rgb(243,249,253);background:rgb(39,131,222);box-shadow:none}
       #tsn1-a0 .side{padding:12px 8px;background:rgb(32,32,32)}
@@ -27676,31 +27680,31 @@ var TSISL_TEAM_ONB_V2=[
       @media(prefers-reduced-motion:reduce){ #tsn1-a0.js .pt{opacity:1;transform:none} }
       `);
       var LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
-      function nb(n){ return '<span class="nb">'+n+'</span>'; }
+      function nb(n){ return ''; }
       host.id='tsn1-a0';
       host.innerHTML=R.head('Zehn Lektionen','Das Handwerk hinter deiner <span class="g">Vorlage</span>.','Jedes Teil dieses Fensters erklärt dir eine Lektion. Am Ende des Moduls liest du jede Seite der Backoffice-Vorlage so selbstverständlich wie deine Speisekarte.')+
         '<div class="win ntn"><div class="bar">Probeküche <em>/</em> Produkte</div><div class="lay">'+
-          '<div class="side pt" data-k="1">'+nb('1.1')+'<div class="gp">Teamspaces</div><div class="it">Küche</div><div class="it l1">Notion AI Backoffice</div><div class="it">Service</div><div class="gp">Privat</div><div class="it on">Probeküche</div></div>'+
-          '<div class="main">'+
+          '<div class="side pt" data-k="1">'+nb('1.1')+'<div class="gp">Teamspaces</div><div class="it">Küche</div><div class="it l1">Mein Notion AI Backoffice</div><div class="it">Service</div><div class="gp">Privat</div><div class="it on">Probeküche</div></div>'+
+          '<div class="main"><div class="cov"><img alt="" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div>'+
             '<div class="ttl"><h4>Produkte</h4><span class="lock pt" data-k="9">'+nb('1.9')+LOCK+'Kann Inhalt bearbeiten</span></div>'+
             '<div class="co pt" data-k="2">'+nb('1.2')+'💡 Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
             '<div class="vw"><span class="pt on" data-k="7">'+nb('1.7')+'Bestellliste</span><span>Lager</span><span>Knapp</span><span class="bt pt" data-k="8">'+nb('1.8')+'Neu</span></div>'+
             '<div class="tbw">'+
               '<div class="tr h pt" data-k="3">'+nb('1.3')+'<span><i>Aa</i>Produkt</span><span><i>↗</i>Lieferant</span><span><i>#</i>Preis</span><span><i>Σ</i>Bestand prüfen</span></div>'+
               '<div class="pt" data-k="4">'+nb('1.4')+
-                '<div class="tr"><span>Burrata 125 g</span><span class="pt" data-k="5" style="position:relative">'+nb('1.5')+'<span class="chip">Frischdienst Nord</span></span><span>18,90 €</span><span class="pt" data-k="6" style="position:relative">'+nb('1.6')+'<span class="amp r">knapp</span></span></div>'+
+                '<div class="tr"><span>Burrata 125 g</span><span class="pt" data-k="5" style="position:relative">'+nb('1.5')+'<span class="chip">Frischdienst Nord</span></span><span class="pt" data-k="10">18,90 €</span><span class="pt" data-k="6" style="position:relative">'+nb('1.6')+'<span class="amp r">knapp</span></span></div>'+
                 '<div class="tr"><span>Olivenöl 5 l</span><span><span class="chip">Feinkost Lorenz</span></span><span>42,50 €</span><span><span class="amp g">ok</span></span></div>'+
                 '<div class="tr"><span>Tomaten Ochsenherz</span><span><span class="chip">Gemüsehof Brandt</span></span><span>16,00 €</span><span><span class="amp r">knapp</span></span></div>'+
                 '<div class="tr"><span>Parmigiano 24 Monate</span><span><span class="chip">Frischdienst Nord</span></span><span>23,40 €</span><span><span class="amp g">ok</span></span></div>'+
               '</div>'+
-              '<span class="lp pt" data-k="10">'+nb('1.10')+'</span>'+
             '</div>'+
-          '</div></div></div>'+
+          '</div></div><svg class="cur" viewBox="0 0 18 22"><path d="M2 1.5v16.2l4.3-4 2.7 6.3 2.8-1.2-2.7-6.2 5.9-.3z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round"/></svg></div>'+
         '<div class="cap"></div><div class="rp"><button type="button">Neu abspielen</button></div>';
 
       var CAP={1:'<b>1.1</b> Die Seitenleiste ist der Grundriss deines Betriebs.',2:'<b>1.2</b> Ein Hinweis, der am Pass nicht überlesen wird.',3:'<b>1.3</b> Jede Spalte hat einen Typ, und der Typ entscheidet, was sie kann.',4:'<b>1.4</b> Die Zeilen kommen von Hand, aus einer Liste oder aus einem Dokument.',5:'<b>1.5</b> Der Lieferant steht über eine Verknüpfung direkt beim Produkt.',6:'<b>1.6</b> Eine Formel prüft den Bestand und färbt, was knapp ist.',7:'<b>1.7</b> Eine Ansicht beantwortet eine Frage: Was bestelle ich bei wem?',8:'<b>1.8</b> Buttons und Automationen nehmen dir die Handgriffe ab, die sich jeden Tag wiederholen.',9:'<b>1.9</b> Das Team trägt ein, die Formeln bleiben geschützt.',10:'<b>1.10</b> Stimmt eine Zahl nicht, verfolgst du sie bis zur Quelle.'};
       var pts={}; [].forEach.call(host.querySelectorAll('.pt'),function(p){ pts[p.getAttribute('data-k')]=p; });
-      var cap=host.querySelector('.cap');
+      var cap=host.querySelector('.cap'), win=host.querySelector('.win'), cur=host.querySelector('.cur');
+      function curTo(el){ var w=win.getBoundingClientRect(), r=el.getBoundingClientRect(); cur.style.opacity='1'; cur.style.transform='translate('+Math.round(r.left-w.left+Math.min(r.width*.5,140))+'px,'+Math.round(r.top-w.top+r.height*.55)+'px)'; }
       var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
       window.__tsn1a0Kill=clear;
       function endState(){ clear(); host.classList.remove('js'); Object.keys(pts).forEach(function(k){ pts[k].classList.add('in'); pts[k].classList.remove('hot'); }); cap.innerHTML='Zehn Lektionen, ein Fenster. Am Ende kennst du <b>jedes Teil</b> davon aus eigener Hand.'; }
@@ -27708,8 +27712,8 @@ var TSISL_TEAM_ONB_V2=[
         clear(); host.classList.add('js'); Object.keys(pts).forEach(function(k){ pts[k].classList.remove('in','hot'); }); cap.innerHTML='';
         /* Reveal schnell: alle Teile in ~1,6 s, dann ruhiger Durchlauf mit Erklaerung */
         for(var k=1;k<=10;k++){ (function(k){ later(function(){ pts[k].classList.add('in'); },150+k*140); })(k); }
-        for(var j=1;j<=10;j++){ (function(j){ later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); pts[j].classList.add('hot'); cap.innerHTML=CAP[j]; },2200+(j-1)*1500); })(j); }
-        later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); cap.innerHTML='Zehn Lektionen, ein Fenster. Am Ende kennst du <b>jedes Teil</b> davon aus eigener Hand.'; },2200+10*1500);
+        for(var j=1;j<=10;j++){ (function(j){ later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); pts[j].classList.add('hot'); curTo(pts[j]); cap.innerHTML=CAP[j]; },2200+(j-1)*1500); })(j); }
+        later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); cur.style.opacity='0'; cap.innerHTML='Zehn Lektionen, ein Fenster. Am Ende kennst du <b>jedes Teil</b> davon aus eigener Hand.'; },2200+10*1500);
       }
       host.querySelector('.rp button').addEventListener('click',play);
       endState();
@@ -27721,10 +27725,10 @@ var TSISL_TEAM_ONB_V2=[
     function reg(host){
       N.addCSS('tsn1-reg-css',`
       #tsn1-reg{width:min(1100px,95vw);margin:0 auto}
-      #tsn1-reg .gr{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+      #tsn1-reg .gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:16px}
       #tsn1-reg a.k{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;text-decoration:none;color:#fff;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1)}
       #tsn1-reg a.k:hover{transform:translateY(-4px);border-color:rgba(199,180,137,.5);box-shadow:0 26px 50px -24px rgba(0,0,0,.85),0 0 28px rgba(199,180,137,.14)}
-      #tsn1-reg a.k .im{aspect-ratio:1/1;overflow:hidden;background:#0b0d14}
+      #tsn1-reg a.k .im{aspect-ratio:4/3;overflow:hidden;background:#0b0d14}
       #tsn1-reg a.k .im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
       #tsn1-reg a.k:hover .im img{transform:scale(1.06)}
       #tsn1-reg a.k .bd{padding:14px 14px 16px}
@@ -27734,8 +27738,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-reg a.k.wait{pointer-events:none}
       #tsn1-reg a.k .soon{display:none;position:absolute;top:10px;right:10px;font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#05060b;background:#efe6d2;border-radius:5px;padding:5px 7px}
       #tsn1-reg a.k.wait .soon{display:block}
-      @media(max-width:1000px){ #tsn1-reg .gr{grid-template-columns:repeat(2,1fr)} }
-      @media(max-width:480px){ #tsn1-reg .gr{grid-template-columns:1fr} }
+      @media(max-width:480px){ #tsn1-reg .gr{grid-template-columns:1fr 1fr;gap:10px} #tsn1-reg a.k .d{display:none} }
       `);
       host.id='tsn1-reg';
       host.innerHTML='<div class="gr">'+LEK.map(function(l,i){
@@ -27748,12 +27751,12 @@ var TSISL_TEAM_ONB_V2=[
     }
 
     N.page({
-      key:'m1',
+      key:'m1', hideRoot:true,
       re:/\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/,
       hero:{label:'M 1', eyebrow:'Tasty Studios', title:'<span class="ts-red">Modul 1</span><br>Notion-Grundlagen', alt:'Modul 1: Notion-Grundlagen für die Backoffice-Vorlage', two:true},
       intro:
         '<p>Mit diesem Kurs bekommst du dein Backoffice als fertige Notion-Vorlage: Inventur, Zutaten, Rezepturen, Gerichte, alles schon verbunden und durchgerechnet. Damit du sie mit Zuversicht benutzt, lernst du in diesem Modul das Handwerk dahinter.</p>'+
-        '<p>In zehn Lektionen gehen wir von der ersten Seite bis zur Fehlersuche. Jede Lektion zeigt dir, wo das Gelernte in der Vorlage steckt, und geübt wird in deiner eigenen <b>Probeküche</b>, nie am Original. Vorwissen brauchst du keines.</p>',
+        '<p>In zehn Lektionen gehen wir von der ersten Seite bis zur Fehlersuche. Jede Lektion zeigt dir, wo das Gelernte in der Vorlage steckt, und geübt wird in deiner eigenen <b>Probeküche</b>, nie am Original. Vorwissen brauchst du keines, und jede Lektion endet mit etwas, das du sofort in deinem Betrieb benutzen kannst.</p>',
       parts:[
         {anim:anim},
         R.sec({eb:'So arbeitest du', title:'Jede Lektion geht denselben <span class="g">Weg</span>', lead:'So weißt du immer, wo du stehst und was als Nächstes kommt.', blocks:[
@@ -28346,8 +28349,9 @@ var TSISL_TEAM_ONB_V2=[
     function anim(host){
       window.__tsn1N.css();
       N.addCSS('tsn1-a4-css',`
-      #tsn1-a4 .wrap{position:relative;width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
+      #tsn1-a4 .wrap{position:relative;width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:stretch}
       #tsn1-a4 .ins{display:flex;flex-direction:column;gap:12px}
+      #tsn1-a4 .ins .in{flex:1 1 0;height:auto}
       #tsn1-a4 .in{position:relative;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;height:76px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a4 .in .ic{width:44px;height:44px;border-radius:11px;overflow:hidden;background:#0b0d14;display:flex;align-items:center;justify-content:center;color:#c7b489;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.06em}
       #tsn1-a4 .in .ic img{width:100%;height:100%;object-fit:cover}
@@ -28383,17 +28387,17 @@ var TSISL_TEAM_ONB_V2=[
       var ROWS=[
         ['Burrata 125 g','Frischdienst Nord','kg','18,90 €',0],
         ['Olivenöl 5 l','Feinkost Lorenz','l','42,50 €',1],['Sardellen 500 g','Feinkost Lorenz','kg','11,80 €',1],['Kapern 1 kg','Feinkost Lorenz','kg','9,40 €',1],['Honig 1 kg','Feinkost Lorenz','kg','12,20 €',1],
-        ['Tomaten Ochsenherz','Gemüsehof Brandt','kg','16,00 €',2],['Basilikum Topf','Gemüsehof Brandt','Stück','7,20 €',2],['Zitronen','Gemüsehof Brandt','Stück','4,80 €',2,1],['Rucola','Gemüsehof Brandt','kg','9,90 €',2]
+        ['Tomaten Ochsenherz','Gemüsehof Brandt','kg','16,00 €',2],['Basilikum Topf','Gemüsehof Brandt','Stück','7,20 €',2],['Zitronen','Gemüsehof Brandt','?','4,80 €',2,1],['Rucola','Gemüsehof Brandt','kg','9,90 €',2]
       ];
-      var INS=[['Von Hand','eine Zeile, ein Artikel','<img alt="" decoding="async" src="'+IMG+'ansprechpartner/kugelschreiber.jpg">'],['Aus einer Liste','Excel als CSV, auf einmal','CSV'],['Aus einem Dokument','PDF, Notion AI liest','PDF']];
+      var INS=[['Von Hand','eine Zeile, ein Artikel','Aa'],['Aus einer Liste','Excel als CSV, auf einmal','CSV'],['Aus einem Dokument','PDF, Notion AI liest','PDF']];
       host.id='tsn1-a4';
       host.innerHTML=R.head('Drei Wege in die Tabelle','Eine Zeile oder <span class="g">hundert auf einmal</span>.','Einzelne Artikel tippst du, ganze Listen holst du als Datei herein, und Dokumente liest Notion AI für dich. Geprüft wird bei allen drei Wegen.')+
         '<div class="wrap"><div class="ins">'+INS.map(function(x,i){ return '<div class="in" data-i="'+i+'"><span class="ic">'+x[2]+'</span><span class="t">'+x[0]+'<small>'+x[1]+'</small></span></div>'; }).join('')+'</div>'+
         '<div class="tb ntn"><div class="th"><span class="n">Produkte</span><span class="c"><b class="cnt">0</b>Einträge</span></div>'+
-        '<div class="hd"><span>Aa&nbsp; Produkt</span><span>↗&nbsp; Lieferant</span><span>◉&nbsp; Einheit</span><span style="text-align:right">#&nbsp; Preis</span></div>'+
+        '<div class="hd"><span>Aa&nbsp; Produkt</span><span>↗&nbsp; Lieferant</span><span>◉&nbsp; Einheit</span><span style="text-align:right">#&nbsp; Preis je Gebinde</span></div>'+
         '<div class="rows">'+ROWS.map(function(x,i){ return '<div class="r" data-i="'+i+'" style="transform:translateY('+(i*42)+'px)"><span>'+x[0]+'<em class="fl">Prüfen</em></span><span class="s">'+x[1]+'</span><span class="s">'+x[2]+'</span><span class="p">'+x[3]+'</span></div>'; }).join('')+'</div></div></div>'+
         '<div class="note">Beispielwerte</div>'+
-        '<div class="rail"><button class="st" data-s="0"><b>01</b>Von Hand: ein Artikel, den du gerade in der Hand hast.</button><button class="st" data-s="1"><b>02</b>Aus einer Liste: die Preisliste deines Großhändlers in einem Zug.</button><button class="st" data-s="2"><b>03</b>Aus einem Dokument: Notion AI legt die Zeilen an, du prüfst jede.</button></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Ein Artikel nach dem anderen, für alles Neue und Einzelne.</button><button class="st" data-s="1"><b>02</b>Die Preisliste deines Großhändlers in einem Zug.</button><button class="st" data-s="2"><b>03</b>Notion AI legt die Zeilen an. Wo die Einheit fehlt, markiert sie die Zeile, und du prüfst.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
       var rows=[].slice.call(host.querySelectorAll('.r')), ins=host.querySelectorAll('.in'), sts=host.querySelectorAll('.st'), cnt=host.querySelector('.cnt');
@@ -28411,7 +28415,7 @@ var TSISL_TEAM_ONB_V2=[
         later(function(){ step(1); },2400);
         rows.filter(function(r){ return ROWS[+r.getAttribute('data-i')][4]===1; }).forEach(function(r,k){ later(function(){ show(r,true); count(2+k); },2900+k*130); });
         later(function(){ step(2); },4600);
-        rows.filter(function(r){ return ROWS[+r.getAttribute('data-i')][4]===2; }).forEach(function(r,k){ later(function(){ show(r,true); count(6+k); },5200+k*260); });
+        rows.filter(function(r){ return ROWS[+r.getAttribute('data-i')][4]===2; }).forEach(function(r,k){ later(function(){ show(r,true); count(6+k); },5200+k*180); });
         later(function(){ rows.forEach(function(r){ if(ROWS[+r.getAttribute('data-i')][5]) r.classList.add('chk'); }); },6800);
       }
       [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ clear(); var i=+s.getAttribute('data-s'); step(i); upTo(i,false); }); });
@@ -29269,7 +29273,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a9 .who small{font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
       #tsn1-a9 .key{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font:600 11.5px/1 -apple-system,sans-serif;background:rgba(199,180,137,.14);color:#efe6d2;border:1px solid rgba(199,180,137,.35);white-space:nowrap}
       #tsn1-a9 .key.full{background:#c7b489;color:#05060b;border-color:#c7b489}
-      #tsn1-a9 .key.gst{background:rgba(159,194,224,.12);color:#cfe0ef;border-color:rgba(159,194,224,.4)}
+      #tsn1-a9 .key.gst{background:transparent;color:#efe6d2;border:1px dashed rgba(199,180,137,.7)}
       #tsn1-a9 .lock{width:22px;height:22px;color:rgba(255,255,255,.35)}
       #tsn1-a9 .scan{position:absolute;left:0;right:0;height:74px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.09),rgba(199,180,137,0));opacity:0;pointer-events:none;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a9 .cap{width:min(940px,100%);margin:16px auto 0;min-height:46px;text-align:center;font:500 15px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
@@ -29284,7 +29288,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a9 .rp button:hover{background:#c7b489;color:#05060b}
       #tsn1-a9.js .cell>*{opacity:0;transform:scale(.7)}
       #tsn1-a9.js .cell.in>*{opacity:1;transform:none;transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
-      @media(max-width:760px){ #tsn1-a9 .brd{overflow-x:auto} #tsn1-a9 .mx{min-width:640px} #tsn1-a9 .rail{grid-template-columns:1fr} }
+      @media(max-width:760px){ #tsn1-a9 .mx{grid-template-columns:1fr} #tsn1-a9 .mx>.hdc{display:none} #tsn1-a9 .mx>div{border-left:0;justify-content:space-between;min-height:46px} #tsn1-a9 .mx>.who{min-height:60px;background:rgba(255,255,255,.03)} #tsn1-a9 .cell::before{content:attr(data-l);font:500 12.5px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.86)} #tsn1-a9 .scan{display:none} #tsn1-a9 .rail{grid-template-columns:1fr} }
       @media(prefers-reduced-motion:reduce){ #tsn1-a9.js .cell>*{opacity:1;transform:none} }
       `);
       var LOCK='<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
@@ -29293,13 +29297,13 @@ var TSISL_TEAM_ONB_V2=[
         ['Inhaberin','Mitglied','ansprechpartner/kochjacke.jpg',[['Vollzugriff','full'],['Vollzugriff','full'],['Vollzugriff','full']]],
         ['Küchenchef','Mitglied','ansprechpartner/schuerze.jpg',[['Kann bearbeiten',''],['Kann anzeigen',''],null]],
         ['Servicekraft','Mitglied','ansprechpartner/poloshirt.jpg',[['Kann anzeigen',''],['Kann Inhalt bearbeiten',''],null]],
-        ['Steuerberaterin','Gast','ansprechpartner/notizblock.jpg',[null,null,['Kommentieren · 1 Seite','gst']]]
+        ['Steuerberaterin','Gast','ansprechpartner/notizblock.jpg',[null,null,['Kann kommentieren · 1 Seite','gst']]]
       ];
       var COLS=[['Teamspace','Küche'],['Teamspace','Service'],['Geschlossener Teamspace','Geschäftsführung']];
       var html='<div class="mx"><div class="hdc" style="justify-content:center;align-items:flex-start"><small>Person</small></div>'+COLS.map(function(c){ return '<div class="hdc"><small>'+c[0]+'</small>'+c[1]+'</div>'; }).join('');
       P.forEach(function(p,r){
         html+='<div class="who"><img alt="" decoding="async" src="'+IMG+p[2]+'"><span><b>'+p[0]+'</b><small>'+p[1]+'</small></span></div>';
-        p[3].forEach(function(k,c){ html+='<div class="cell" data-r="'+r+'" data-c="'+c+'">'+(k?'<span class="key '+k[1]+'">'+k[0]+'</span>':LOCK)+'</div>'; });
+        p[3].forEach(function(k,c){ html+='<div class="cell" data-l="'+COLS[c][1]+'" data-r="'+r+'" data-c="'+c+'">'+(k?'<span class="key '+k[1]+'">'+k[0]+'</span>':LOCK)+'</div>'; });
       });
       html+='</div>';
       host.id='tsn1-a9';
@@ -29328,7 +29332,7 @@ var TSISL_TEAM_ONB_V2=[
         cap.innerHTML=['Drei Teamspaces. Die <b>Geschäftsführung</b> ist geschlossen, und alle anderen haben dort keinen Zugriff.','Jede Person hat die <b>kleinste Stufe</b>, mit der sie ihre Arbeit erledigen kann.','Der <b>Gast</b> sieht nur die eine geteilte Seite, nicht den Rest des Teamspace.'][i];
         sweep(i===0?0:i===1?2:3); }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      cap.innerHTML='Jede Person hat die <b>kleinste Stufe</b>, mit der sie ihre Arbeit erledigen kann.';
+      cap.innerHTML='Vier Menschen, drei Räume, und jeder Schlüssel passt genau zur <b>Arbeit</b> dieser Person.';
       if(N.REDUCED){ step(1); return; }
       N.reveal(host,play);
     }
@@ -29415,12 +29419,13 @@ var TSISL_TEAM_ONB_V2=[
       N.addCSS('tsn1-a10-css',`
       #tsn1-a10 .line{position:relative;width:min(1000px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:34px;padding:34px 0 10px}
       #tsn1-a10 .rule{position:absolute;left:12.5%;right:12.5%;top:96px;height:1px;background:rgba(199,180,137,.3);z-index:0}
-      #tsn1-a10 .imp{position:absolute;top:92px;left:12.5%;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#7fd3a3;box-shadow:0 0 14px rgba(127,211,163,.9);opacity:0;z-index:0}
+      #tsn1-a10 .gap{position:absolute;height:9px;margin-top:-4px;z-index:2;pointer-events:none}
+      #tsn1-a10 .gap i{position:absolute;left:0;top:0;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#7fd3a3;box-shadow:0 0 14px rgba(127,211,163,.9);opacity:0}
       #tsn1-a10 .sn{position:relative;z-index:1;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;padding:14px 15px 15px;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a10 .sn .mi{font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(199,180,137,.85);margin-bottom:10px}
+      #tsn1-a10 .sn .mi{font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(199,180,137,.85);margin-bottom:10px;padding-right:26px}
       #tsn1-a10 .sn .im{height:64px;border-radius:9px;overflow:hidden;margin-bottom:11px;background:#0b0d14}
       #tsn1-a10 .sn .im img{width:100%;height:100%;object-fit:cover;display:block}
-      #tsn1-a10 .sn .k{font:500 11.5px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.55)}
+      #tsn1-a10 .sn .k{font:500 11.5px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.7)}
       #tsn1-a10 .sn .v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(19px,2vw,24px);color:#fff;margin-top:3px;font-variant-numeric:tabular-nums;transition:color .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a10 .sn .f{font:500 11px/1.35 -apple-system,sans-serif;color:rgba(255,255,255,.45);margin-top:6px;min-height:30px}
       #tsn1-a10 .sn .ok{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
@@ -29452,31 +29457,34 @@ var TSISL_TEAM_ONB_V2=[
         ['DB 0 : Inventurliste','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis/Kg','126,00 €','12,60 €','Eingetragen von Hand'],
         ['DB IV : Zutaten','zutaten/mozzarella.webp','Burrata 125 g · Preis / Portion','15,75 €','1,58 €','Rollup aus der Inventur, mal Portion'],
         ['DB Gerichte','gerichte/burrata.webp','Wareneinsatz ( Eur )','16,72 €','2,55 €','Summe der Zutaten'],
-        ['DB Gerichte','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
+        ['Formel im Gericht','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
       ];
       host.id='tsn1-a10';
       host.innerHTML=R.head('Fehler suchen','Folge der Zahl bis zu ihrer <span class="g">Quelle</span>.','Ein Gericht mit über hundert Prozent Wareneinsatz kann nicht stimmen. Statt die Formel anzufassen, gehst du die Kette rückwärts, bis du die Stelle findest, an der die Zahl entsteht.')+
-        '<div class="line"><div class="rule"></div><span class="imp"></span><span class="lupe"></span>'+ST.map(function(x,i){
+        '<div class="line"><div class="rule"></div><span class="gap"><i></i></span><span class="gap"><i></i></span><span class="gap"><i></i></span><span class="lupe"></span>'+ST.map(function(x,i){
           return '<div class="sn" data-i="'+i+'"><span class="ok"></span><div class="mi">'+x[0]+'</div><div class="im"><img alt="" decoding="async" src="'+IMG+x[1]+'"></div><div class="k">'+x[2]+'</div><div class="v">'+x[4]+'</div><div class="f">'+x[5]+'</div></div>';
         }).join('')+'</div>'+
         '<div class="cap"></div><div class="note">Beispielwerte</div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Die falsche Zahl: Wo steht sie, und aus welchen Spalten rechnet sie?</button><button class="st" data-s="1"><b>02</b>Station für Station zurück, bis ein Wert von Hand eingetragen ist.</button><button class="st" data-s="2"><b>03</b>An der Quelle korrigieren, und die ganze Kette stimmt wieder.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
-      var line=host.querySelector('.line'), sns=[].slice.call(host.querySelectorAll('.sn')), lupe=host.querySelector('.lupe'), imp=host.querySelector('.imp'), cap=host.querySelector('.cap'), sts=host.querySelectorAll('.st');
+      var line=host.querySelector('.line'), sns=[].slice.call(host.querySelectorAll('.sn')), lupe=host.querySelector('.lupe'), gaps=[].slice.call(host.querySelectorAll('.gap')), cap=host.querySelector('.cap'), sts=host.querySelectorAll('.st');
       var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
       window.__tsn1a10Kill=clear;
       function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
       function val(state){ sns.forEach(function(sn,i){ sn.querySelector('.v').textContent=ST[i][state==='bad'?3:4]; }); }
       function lupeTo(i){ var L=line.getBoundingClientRect(), r=sns[i].getBoundingClientRect(); lupe.style.opacity='1'; lupe.style.transform='translate('+(r.left-L.left+r.width/2-23)+'px,'+(r.top-L.top+62)+'px)'; }
       function cls(sn,c){ sn.classList.remove('bad','good','chk'); if(c) sn.classList.add(c); }
-      function reset(){ clear(); val('bad'); sns.forEach(function(sn){ cls(sn,''); }); lupe.style.opacity='0'; imp.style.transition='none'; imp.style.opacity='0'; imp.style.transform='translateX(0)'; cap.innerHTML=''; step(-1); }
+      function reset(){ clear(); val('bad'); sns.forEach(function(sn){ cls(sn,''); }); lupe.style.opacity='0'; gaps.forEach(function(g){ var i=g.firstChild; i.style.transition='none'; i.style.opacity='0'; i.style.transform='translateX(0)'; }); cap.innerHTML=''; step(-1); }
+      function placeGaps(){ var L=line.getBoundingClientRect(); gaps.forEach(function(g,i){ var A=sns[i].getBoundingClientRect(), B=sns[i+1].getBoundingClientRect(); if(B.left<A.right){ g.style.display='none'; return; } g.style.display=''; g.style.left=(A.right-L.left)+'px'; g.style.width=(B.left-A.right)+'px'; g.style.top=(A.top-L.top+62)+'px'; }); }
       function forward(){
-        var L=line.getBoundingClientRect(), a=sns[0].getBoundingClientRect(), b=sns[3].getBoundingClientRect(), dist=(b.left+b.width/2)-(a.left+a.width/2);
-        imp.style.transition='none'; imp.style.opacity='1'; imp.style.transform='translateX(0)'; void imp.offsetWidth;
-        imp.style.transition='transform 1.6s cubic-bezier(.22,1,.36,1),opacity .4s cubic-bezier(.16,1,.3,1) 1.5s'; imp.style.transform='translateX('+dist+'px)'; imp.style.opacity='0';
+        placeGaps();
+        gaps.forEach(function(g,i){ var d=g.firstChild, w=g.getBoundingClientRect().width;
+          later(function(){ d.style.transition='none'; d.style.opacity='1'; d.style.transform='translateX(0)'; void d.offsetWidth;
+            d.style.transition='transform .5s cubic-bezier(.22,1,.36,1),opacity .3s cubic-bezier(.16,1,.3,1) .45s'; d.style.transform='translateX('+w+'px)'; d.style.opacity='0'; },120+i*480+240); });
         sns.forEach(function(sn,i){ later(function(){ sn.querySelector('.v').textContent=ST[i][4]; cls(sn,'good'); },120+i*480); });
       }
+      window.addEventListener('resize',function(){ if(host.isConnected) placeGaps(); });
       function play(){
         reset();
         later(function(){ step(0); cls(sns[3],'bad'); lupeTo(3); cap.innerHTML='<b>132,6 % Wareneinsatz.</b> Die Spalte ist eine Formel: Wareneinsatz geteilt durch Netto-Preis.'; },700);
@@ -29539,15 +29547,6 @@ var TSISL_TEAM_ONB_V2=[
         R.sec({eb:'Mit Notion AI', title:'Lass die KI die <span class="g">Lücken</span> finden', lead:'Wenn du einen Plan mit Notion AI hast, kann der Agent deine Datenbanken lesen und dir sagen, wo etwas fehlt. Prüfen und korrigieren musst du selbst.', blocks:[
           R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventarprodukt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
           R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventarprodukt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
-        ]}),
-        R.sec({eb:'Geschafft', title:'Was du jetzt <span class="g">kannst</span>', lead:'Mit diesem Handwerk gehst du in Modul 2. Dort lernst du die Vorlage Datenbank für Datenbank kennen und trägst deine eigenen Zahlen ein.', blocks:[
-          R.tab(['Du kannst','Gelernt in'],[
-            ['Dich in der Vorlage zurechtfinden und Seiten lesbar gestalten','1.1 und 1.2'],
-            ['Jede Spalte lesen und die Vorlage mit deinen Daten befüllen','1.3 und 1.4'],
-            ['Verknüpfungen, Rollups und Formeln nachvollziehen und anpassen','1.5 und 1.6'],
-            ['Ansichten, Vorlagen, Buttons und Automationen einrichten','1.7 und 1.8'],
-            ['Festlegen, wer was sieht, und Fehler bis zur Quelle verfolgen','1.9 und 1.10']
-          ])
         ]}),
         {emp:{kind:'Nutzung', animTitle:'Fünf Minuten', animGold:'pro Woche', steps:['Kalkulation sortieren','Ausreißer verfolgen','Ohne-Preis-Ansicht','Verlauf kennen'],
           intro:'Eine Vorlage bleibt verlässlich, wenn du einmal pro Woche kurz hineinschaust, bevor sich ein Fehler durch die Monatszahlen zieht.',
