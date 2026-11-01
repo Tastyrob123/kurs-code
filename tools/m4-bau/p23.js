@@ -2,19 +2,19 @@
 (function(){
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG, P=function(x,y,w,h){ return N.pos(x,y,w,h,440); };
-  /* Echte Spalten der Inventurliste (Notion-API 01.11.2026), Werte = Beispielwerte */
-  var COLS=[{n:'Name',i:'title',t:'in',w:27},{n:'Lieferant',i:'rel',t:'rel',w:21},{n:'Gezählt Ltr./KG',i:'num',t:'in',w:18},{n:'Preis / KG',i:'rollup',t:'calc',w:15},{n:'Summe Monat',i:'formula',t:'calc',w:19}];
-  var ROWS=[['z-tomate','Tomaten','Gemüse Bauer','12','2,40 €','28,80 €'],['z-parmesan','Parmesan','Feinkost Rossi','3','21,40 €','64,20 €'],
-            ['z-mozzarella','Mozzarella','Feinkost Rossi','4','9,80 €','39,20 €'],['z-kartoffel','Kartoffeln','Gemüse Bauer','20','1,10 €','22,00 €']];
+  /* Echte Spalten der leeren Vorlage, DB 0 = Notion-Name „TB Inventory“ (Notion-API 01.11.2026, Modul 2), Werte = Beispielwerte */
+  var COLS=[{n:'Name',i:'title',t:'in',w:24},{n:'Lieferant',i:'rel',t:'rel',w:20},{n:'Menge / Unit',i:'text',t:'in',w:17},{n:'Preis pro Unit (€)',i:'num',t:'in',w:22},{n:'Preis / KG',i:'formula',t:'calc',w:17}];
+  var ROWS=[['z-tomate','Tomaten','Gemüse Bauer','1 kg','2,40 €','2,40 €'],['z-parmesan','Parmesan','Feinkost Rossi','1 kg','21,40 €','21,40 €'],
+            ['z-mozzarella','Mozzarella','Feinkost Rossi','0,125 kg','1,23 €','9,84 €'],['z-kartoffel','Kartoffeln','Gemüse Bauer','25 kg','27,50 €','1,10 €']];
   var TX=20, TW=590, x=TX+0, tags='';
   COLS.forEach(function(c){ var w=TW*c.w/100; tags+='<div class="tgw" data-s="'+(c.t==='in'?2:c.t==='rel'?3:4)+'" style="'+P(x,40,w,24)+'"><em class="tg '+c.t+'">'+(c.t==='in'?'Eingabe':c.t==='rel'?'Verknüpfung':'Rechnet')+'</em></div>'; x+=w; });
-  var table='<div class="nw tb" data-s="1" style="'+P(TX,74,TW,316)+'"><div class="nbar">'+N.nic('table')+'<span>Backoffice</span><span class="sep">/</span><span>Inventurliste</span></div>'+
-    '<div class="dbt ntitle">Inventurliste</div>'+
+  var table='<div class="nw tb" data-s="1" style="'+P(TX,74,TW,316)+'"><div class="nbar">'+N.nic('table')+'<span>Backoffice</span><span class="sep">/</span><span>TB Inventory</span></div>'+
+    '<div class="dbt ntitle">TB Inventory</div>'+
     '<table class="nt"><colgroup>'+COLS.map(function(c){ return '<col style="width:'+c.w+'%">'; }).join('')+'</colgroup><tr>'+COLS.map(function(c){ return '<th><span>'+N.nic(c.i)+c.n+'</span></th>'; }).join('')+'</tr>'+
     ROWS.map(function(r){ return '<tr><td><span class="nm"><img src="'+I+r[0]+'.webp" alt="">'+r[1]+'</span></td><td class="lk">'+r[2]+'</td><td class="r">'+r[3]+'</td><td class="r">'+r[4]+'</td><td class="r">'+r[5]+'</td></tr>'; }).join('')+
     '</table><i class="scan"></i></div>';
   var file='<div class="tw fl" data-s="1" style="'+P(650,74,330,316)+'"><div class="tbar"><i></i><i></i><i></i><span>CLAUDE.md — Backoffice</span></div>'+
-    '<div class="tl h" data-s="5">## Systemkarte</div><div class="tl" data-s="5">Inventurliste</div><div class="tl" data-s="5">  Eingabe: Name, Gezählt Ltr./KG</div><div class="tl" data-s="5">  Verknüpfung: Lieferant</div><div class="tl" data-s="5">  Rechnet: Preis / KG (Rollup),</div><div class="tl" data-s="5">  Summe Monat (Formel), nie schreiben</div>'+
+    '<div class="tl h" data-s="5">## Systemkarte</div><div class="tl" data-s="5">Inventurliste = „TB Inventory“</div><div class="tl" data-s="5">  Eingabe: Name, Menge / Unit,</div><div class="tl" data-s="5">  Preis pro Unit (€), Lieferant</div><div class="tl" data-s="5">  Rechnet: Preis / KG, Preis / Ltr.,</div><div class="tl" data-s="5">  Preis / Stck (Formel), nie schreiben</div>'+
     '<div class="tl h sp6" data-s="6">## Regeln</div><div class="tl" data-s="6">- Zahlen nur aus Notion-Feldern</div><div class="tl" data-s="6">- Vorschau vor jeder Änderung</div><div class="tl" data-s="6">- Nichts löschen</div></div>'+
     '<div class="rd" data-s="7" style="'+P(650,400,330,30)+'">Wird bei jedem Start gelesen</div>';
   var lines='<svg class="lines" viewBox="0 0 1000 440" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="5" d="M612 230 H648"/><path class="sp" pathLength="1" d="M612 230 H648"/></svg>';
@@ -73,7 +73,7 @@
         '<h3>Claude liest deine <span class="g">Vorlage</span></h3>'+
         '<p class="lead">Wir starten Claude Code im Ordner „Backoffice“, den du dir in der Einleitung angelegt hast. Alles, was wir in diesem Modul in die CLAUDE.md schreiben, gilt dann für jede Sitzung in diesem Ordner.</p>'+
         '<p><span class="gl">Warum Claude das wissen muss.</span> Ein Feld wie der Wareneinsatz in Prozent ist in deiner Vorlage eine Formel, die über Zutaten, Rezepturen und Portionsgrößen hinweg rechnet. Fragt man Claude ohne Systemkarte nach dem Wareneinsatz, kann es passieren, dass es die Zahl aus einzelnen Preisen selbst zusammenrechnet. Das Ergebnis sieht plausibel aus und weicht trotzdem von deiner geprüften Formel ab. Mit der Systemkarte weiß Claude, dass diese Zahl fertig in Notion steht und nur gelesen wird.</p>'+
-        N.cmd('Prompt in Claude Code', 'Lies meine Backoffice-Vorlage in Notion und schreib mir daraus eine Systemkarte.\n\nÖffne dafür jede Datenbank im Backoffice und notiere je Datenbank:\n- wofür sie da ist, in einem Satz\n- die Felder, die ich von Hand eintrage\n- die Verknüpfungen und wohin sie zeigen\n- die Felder, die Notion selbst rechnet (Formel und Rollup)\n\nZeig mir die Systemkarte zuerst hier im Chat. Schreib sie erst nach meinem Okay als Abschnitt „Systemkarte“ in die CLAUDE.md in diesem Ordner. Ändere in Notion nichts.')+
+        N.cmd('Prompt in Claude Code', 'Lies meine Backoffice-Vorlage in Notion und schreib mir daraus eine Systemkarte.\n\nÖffne dafür jede Datenbank im Backoffice und notiere je Datenbank:\n- ihren genauen Namen in Notion und den Namen, unter dem ich sie im Alltag nenne, zum Beispiel Inventurliste = „TB Inventory“\n- wofür sie da ist, in einem Satz\n- die Felder, die ich von Hand eintrage\n- die Verknüpfungen und wohin sie zeigen\n- die Felder, die Notion selbst rechnet (Formel und Rollup)\n\nZeig mir die Systemkarte zuerst hier im Chat. Schreib sie erst nach meinem Okay als Abschnitt „Systemkarte“ in die CLAUDE.md in diesem Ordner. Ändere in Notion nichts.')+
         '<p>Bei einer vollständigen Vorlage liest Claude eine ganze Reihe von Datenbanken, und das dauert ein paar Minuten. Lass es in Ruhe durchlaufen und schau dir die Karte danach genau an. Stimmt ein Feld nicht, sag es Claude in einem Satz, und es korrigiert die Karte, bevor sie in die Datei geht.</p>'
       },
       {id:'tsn4a2-regeln', html:
@@ -136,7 +136,7 @@
       (d.v==null?'<span class="miss">fehlt: Preis Steinpilze</span>':'<span class="bar"><i style="--w:'+(d.v/40*100)+'%"></i></span><b class="val" data-v="'+d.v+'">'+N.pct(d.v)+'</b>')+'</div></div>';
   }).join('');
   var html='<div class="st flow">'+
-    '<div class="q cardx" data-s="1"><span class="qk">Deine Frage an DB XI · Gerichte &amp; Getränke</span><span class="qt mono">Welche Gerichte haben den höchsten Wareneinsatz in Prozent? Nimm die Werte nur aus Notion.</span></div>'+
+    '<div class="q cardx" data-s="1"><span class="qk">Deine Frage an DB Gerichte</span><span class="qt mono">Welche Gerichte haben den höchsten Wareneinsatz in Prozent? Nimm die Werte nur aus Notion.</span></div>'+
     '<div class="list" data-s="1">'+rows+'</div></div>';
   var css=`
   #tsn4a3anim .st.flow{max-width:760px;margin:0 auto}
@@ -199,23 +199,23 @@
         '<p class="lead">Diese vier Fragen bringen in fast jedem Betrieb etwas ans Licht, das im Alltag untergeht. Kopier sie, setz deine Werte ein und lass sie laufen.</p>'+
         '<h4>Welches Gericht frisst deine <span class="g">Marge</span>?</h4>'+
         '<p>Die Liste, für die du sonst filterst, sortierst, exportierst und in einer Tabelle nachrechnest.</p>'+
-        N.cmd('Prompt', 'Lies meine Gerichte & Getränke in Notion. Liste mir die zehn Gerichte mit dem höchsten Wareneinsatz in Prozent auf, mit Verkaufspreis, Wareneinsatz in Euro und in Prozent und dem Deckungsbeitrag I. Sortiere absteigend nach Prozent. Nimm alle Werte aus den Feldern der Datenbank und rechne nichts selbst. Ändere nichts.')+
+        N.cmd('Prompt', 'Lies meine Datenbank „DB Gerichte“ in Notion. Liste mir die zehn Gerichte mit dem höchsten „Wareneinsatz ( % )“ auf, mit „Verkaufspreis ( Eur )“, „Wareneinsatz ( Eur )“, „Wareneinsatz ( % )“ und „DB I“. Sortiere absteigend nach „Wareneinsatz ( % )“. Nimm alle Werte aus den Feldern der Datenbank und rechne nichts selbst. Ändere nichts.')+
         '<h4>Wo steckt eine <span class="g">Zutat</span> überall drin?</h4>'+
         '<p>Die Frage, bevor du mit einem Lieferanten über einen Preis sprichst oder eine Zutat ersetzt.</p>'+
-        N.cmd('Prompt', 'In welchen Rezepturen und Gerichten steckt die Zutat Burrata? Nenne mir je Gericht die Menge pro Portion und den Wareneinsatz in Prozent, beides aus Notion. Ändere nichts.')+
+        N.cmd('Prompt', 'In welchen Rezepturen und Gerichten steckt die Zutat Burrata? Nenne mir je Gericht die Menge pro Portion und den „Wareneinsatz ( % )“, beides aus Notion. Ändere nichts.')+
         '<h4>Wo hat dein System <span class="g">Lücken</span>?</h4>'+
         '<p>Die Frage, die dein Küchenchef stellen sollte, bevor er einer Kalkulation traut.</p>'+
-        N.cmd('Prompt', 'Prüf mein Backoffice auf Lücken: Zutaten ohne Einkaufspreis, Rezepturen ohne Zutaten und Gerichte ohne Verkaufspreis. Gib mir je Lücke Datenbank und Eintrag. Rate keine Werte und ändere nichts.')+
+        N.cmd('Prompt', 'Prüf mein Backoffice auf Lücken: Artikel in der Inventurliste ohne „Preis pro Unit (€)“, Rezepturen ohne Zutaten und Gerichte ohne „Verkaufspreis ( Eur )“. Gib mir je Lücke Datenbank und Eintrag. Rate keine Werte und ändere nichts.')+
         '<h4>Welche Gerichte liegen unter deinem <span class="g">Ziel</span>?</h4>'+
         '<p>Setz statt der Klammer deine eigene Grenze ein, zum Beispiel den Wareneinsatz, ab dem ein Gericht für dich zu teuer ist.</p>'+
-        N.cmd('Prompt', 'Zeig mir alle Gerichte, deren Wareneinsatz in Prozent über [deine Grenze, zum Beispiel 32] Prozent liegt. Ordne sie nach Kategorie und nenne zu jedem Gericht die drei Zutaten mit dem größten Anteil am Wareneinsatz. Alle Zahlen aus Notion, ändere nichts.')
+        N.cmd('Prompt', 'Zeig mir alle Gerichte, deren „Wareneinsatz ( % )“ über [deine Grenze, zum Beispiel 32] Prozent liegt. Ordne sie nach Kategorie und nenne zu jedem Gericht die drei Zutaten mit dem größten Anteil am Wareneinsatz. Alle Zahlen aus Notion, ändere nichts.')
       },
       {id:'tsn4a3-wie', html:
         '<div class="tsn4-eb">So fragst du</div>'+
         '<h3>Drei Angaben machen die <span class="g">Antwort</span> brauchbar</h3>'+
         '<p class="lead">Jede der Fragen oben hat dieselben drei Bestandteile. Jeder kostet dich einen halben Satz und spart dir eine Rückfrage.</p>'+
         '<div class="tsn4-cards c3">'+
-          '<div class="tsn4-card"><span class="k">Eins</span><div class="n">Die Datenbank</div><hr><p>„Lies meine Gerichte & Getränke“ ist präziser als „schau in mein Notion“. Claude muss nicht suchen, und die Antwort kommt schneller.</p></div>'+
+          '<div class="tsn4-card"><span class="k">Eins</span><div class="n">Die Datenbank</div><hr><p>„Lies meine DB Gerichte“ ist präziser als „schau in mein Notion“. Claude muss nicht suchen, und die Antwort kommt schneller.</p></div>'+
           '<div class="tsn4-card"><span class="k">Zwei</span><div class="n">Die Form</div><hr><p>Sag, ob du eine Liste, eine Tabelle oder eine kurze Zusammenfassung willst, sortiert wonach und mit welchen Spalten.</p></div>'+
           '<div class="tsn4-card"><span class="k">Drei</span><div class="n">Die Absicht</div><hr><p>„Ändere nichts“ am Ende ist die günstigste Versicherung, die du hast, solange du nur auswerten willst.</p></div>'+
         '</div>'+
@@ -238,7 +238,7 @@
         '<h3>Die Antwort als <span class="g">Datei</span> mitnehmen</h3>'+
         '<p class="lead">Notion AI aus Modul zwei beantwortet dir Fragen direkt in Notion. Claude Code kann zusätzlich etwas, das in Notion nicht geht: Es legt dir das Ergebnis als Datei auf deinen Rechner.</p>'+
         '<p>Das ist der Punkt, an dem sich der Weg über Claude Code lohnt. Die Liste für deinen Steuerberater, die Übersicht für die Küchenbesprechung, die Tabelle, die du deinem Lieferanten schickst. Du bekommst sie als Excel-Datei in deinen Backoffice-Ordner.</p>'+
-        N.cmd('Prompt', 'Erstelle aus meinen Gerichten & Getränken eine Excel-Datei „Wareneinsatz Hauptgänge.xlsx“ in diesem Ordner: Name, Verkaufspreis, Wareneinsatz in Euro und in Prozent, Deckungsbeitrag I. Nur Hauptgänge, sortiert nach Wareneinsatz in Prozent. Alle Werte aus Notion, ändere in Notion nichts.')
+        N.cmd('Prompt', 'Erstelle aus meiner „DB Gerichte“ eine Excel-Datei „Wareneinsatz Hauptgänge.xlsx“ in diesem Ordner: Gericht, „Verkaufspreis ( Eur )“, „Wareneinsatz ( Eur )“, „Wareneinsatz ( % )“, „DB I“. Nur Hauptgänge, sortiert nach „Wareneinsatz ( % )“. Alle Werte aus Notion, ändere in Notion nichts.')
       }
     ],
     emp:{ id:'tsn4a3emp', kind:'Nutzung', animTitle:'Deine', animGold:'Fragerunde',

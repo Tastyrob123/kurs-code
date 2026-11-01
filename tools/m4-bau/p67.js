@@ -118,7 +118,7 @@
           '<li>Unter <b>Werkzeuge und Zugriff</b> nur Rezepturen und Zutaten hinzufügen. Alles andere bleibt draußen, und den Zugriff aufs Internet lässt du aus.</li>'+
           '<li>Speichern, eine Test-Rezeptur anlegen und im <b>Aktivitätsprotokoll</b> nachsehen, was der Agent getan hat.</li>'+
         '</ol></div>'+
-        N.cmd('Anweisung für den Küchen-Vorarbeiter', 'Du arbeitest ausschließlich in den Datenbanken Rezepturen und Zutaten.\n\nWenn eine neue Rezeptur angelegt wird, schreibst du in das Feld Zubereitung einen Vorschlag, der sich nur aus den verknüpften Zutaten und ihren Mengen ergibt. Du erfindest keine Zutaten und keine Mengen.\n\nDu setzt den Prüfstatus auf „Vorschlag, ungeprüft“.\n\nDu änderst keine Preise, keine Mengen und keine Portionsgrößen. Fehlen Angaben, schreibst du in die Zubereitung, was fehlt, statt es zu ergänzen.')+
+        N.cmd('Anweisung für den Küchen-Vorarbeiter', 'Du arbeitest ausschließlich in den Datenbanken „TB V : Rezepturen“ und „DB IV : Zutaten“.\n\nWenn eine neue Rezeptur angelegt wird, schreibst du in das Feld Zubereitung einen Vorschlag, der sich nur aus den verknüpften Zutaten und ihren Mengen ergibt. Du erfindest keine Zutaten und keine Mengen.\n\nDu setzt den Prüfstatus auf „Vorschlag, ungeprüft“.\n\nDu änderst keine Preise, keine Mengen und keine Portionsgrößen. Fehlen Angaben, schreibst du in die Zubereitung, was fehlt, statt es zu ergänzen.')+
         '<p class="tsn4-note">Gibt es in deiner Vorlage noch kein Feld für die Zubereitung, legst du es als Textfeld in den Rezepturen an. Den Prüfstatus hast du in Lektion vier angelegt.</p>'+
         '<h4>Zwei weitere Agenten, die sich im Betrieb <span class="g">lohnen</span>.</h4>'+
         '<div class="tsn4-cards c2">'+
@@ -237,8 +237,8 @@
         '<p class="lead">Alle vier hängen an der Vorlage aus Modul zwei. Wo ein Feld noch fehlt, legst du es vorher an, oder du lässt es Claude mit Vorschau anlegen.</p>'+
         '<table class="tsn4-tbl"><tr><th>Datenbank</th><th>Wenn</th><th>Dann</th></tr>'+
           '<tr><td><b>Inventurliste</b></td><td>das Auswahlfeld Bestand auf „Nachbestellen“ gesetzt wird</td><td>Benachrichtigung an die Person, die bestellt, mit dem Artikel und dem Lieferpartner</td></tr>'+
-          '<tr><td><b>Gerichte & Getränke</b></td><td>der Status auf „Auf der Karte“ wechselt</td><td>Eigenschaft „Auf der Karte seit“ auf das heutige Datum setzen</td></tr>'+
-          '<tr><td><b>Datenbank mit deinen Einkaufspreisen</b></td><td>der Einkaufspreis bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
+          '<tr><td><b>DB Gerichte</b></td><td>der Status auf „Auf der Karte“ wechselt</td><td>Eigenschaft „Auf der Karte seit“ auf das heutige Datum setzen</td></tr>'+
+          '<tr><td><b>Inventurliste („TB Inventory“)</b></td><td>„Preis pro Unit (€)“ bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
           '<tr><td><b>Key Metrics</b></td><td>wiederkehrend, am ersten Tag des Monats</td><td>Seite für die Monatsauswertung anlegen, mit Datum im Titel</td></tr>'+
         '</table>'+
         '<p>Die dritte Automation arbeitet mit den Feldern aus Lektion fünf zusammen. Trägt Claude einen Preis ein, setzt es das Datum ohnehin. Ändert jemand den Preis von Hand, sorgt die Automation dafür, dass das Datum trotzdem stimmt.</p>'+
