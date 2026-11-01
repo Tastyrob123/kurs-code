@@ -26366,300 +26366,7 @@ var TSISL_TEAM_ONB_V2=[
 /* MODUL 3 · alter Block was-ist-claude-genau (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* MODUL 3 · alter Block welches-claude-wann-chatcoworkcodeapi (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* MODUL 3 · alter Block claude-plne-preis (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
-/* ============================================================
-   MODUL 3 · L3.4 "Die sechs Begriffe"  (/claude-nutzung-erklrt-6-konzepte)
-
-   Erklaeranimation "Sechs Schichten, ein Arbeitsplatz." — EIGENES Konzept:
-   ein senkrechter Stapel aus sechs EXAKT gleich hohen Schichten (je 54px) auf
-   EINER Achse (width:min(560px,100%)). Choreografie nach der rev15-Regel:
-   Phase 1 schneller Aufbau (Stagger 140ms, alle sechs in ~1s), Phase 2 Ambient
-   (der Stapel atmet), Phase 3 Highlight-Durchlauf — die fokussierte Schicht
-   KLAPPT AUF und zeigt ihren Einzeiler. Das ist der eigene Mechanismus dieser
-   Seite (Akkordeon im Stapel), nicht der Tueren-Durchlauf aus L3.1.
-
-   Abgrenzung nach oben: hier steht nur, WAS die sechs Begriffe sind.
-   Wie man sie einrichtet (Installation, CLAUDE.md schreiben, Skills laden),
-   gehoert nach Modul 4 und wird hier bewusst nicht vorweggenommen.
-   ============================================================ */
-
-/* ---- L3.4 · Abschnitt 01 ---- */
-(function(){
-  if(window.__ts3d) return;
-  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 3.4'),
-      alt: 'Die sechs Grundbegriffe: Ordner, CLAUDE.md, Erweiterungen, Modelle, Kontext, GitHub',
-      eyebrow: 'L 3.4',
-      title: '<span class="ts-gold">Sechs</span> Grundbegriffe'
-    });
-    window.__ts3.body('ts3d-intro',
-      '<p>Bevor wir bauen, gehen wir einmal durch, was dir immer wieder begegnet. <b>Du musst das jetzt nicht auswendig können.</b> Es reicht, wenn dir die Wörter später nicht fremd vorkommen.</p>'+
-      '<p>Sechs Stück sind es, und sie bauen aufeinander auf wie Schichten. Ganz unten liegt der Ort, an dem gearbeitet wird, alles Weitere setzt darauf auf.</p>'+
-      '<p>Am Ende kennst du die Wörter gut genug, um in Modul 4 nicht nachschlagen zu müssen. Eingerichtet wird dort, mit den Händen am Gerät und an einem echten Projekt, das dir gehört.</p>'
-    );
-  }
-  window.__ts3d=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.4 · Abschnitt 02 (Erklaeranimation #ts3danim) ---- */
-(function(){
-  if(window.__ts3danim) return;
-  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
-
-  var LAYERS=[
-    {n:'06', t:'GitHub',                 d:'Der Ablageort im Netz. Dein Projekt liegt dort sicher und du kommst von jedem Rechner daran.'},
-    {n:'05', t:'Kontext und Tokens',     d:'Der Arbeitsspeicher einer Sitzung. Je voller er wird, desto langsamer und ungenauer wird jede Antwort.'},
-    {n:'04', t:'Modelle und Denk-Tiefe', d:'Wie groß das Modell ist und wie gründlich es nachdenkt. Beides stellst du selbst ein.'},
-    {n:'03', t:'Skills, MCPs, Plugins',  d:'Fähigkeiten, Verbindungen und beides im Paket.'},
-    {n:'02', t:'CLAUDE.md',              d:'Dein Briefing. Wird bei jedem Start gelesen.'},
-    {n:'01', t:'Ordner und Dateien',     d:'Der Ort, an dem gearbeitet wird. Was nicht drin liegt, existiert nicht.'}
-  ];
-  var CAPS=[
-    'Ganz unten liegt der <b>Ordner</b>. Er entscheidet, worauf Claude überhaupt Zugriff hat, und ist damit die wichtigste Einstellung von allen.',
-    'Darüber die <b>CLAUDE.md</b>. Eine schlichte Textdatei, die bei jedem Start gelesen wird, damit du dich nicht jedes Mal neu erklären musst.',
-    'Dann die <b>Erweiterungen</b>. Skills geben Claude neue Fähigkeiten, MCPs verbinden es mit deinen Werkzeugen, Plugins liefern beides in einem Paket.',
-    'Die <b>Modellwahl</b> und die Denk-Tiefe bestimmen, wie gründlich gearbeitet wird. Nicht jede Aufgabe braucht die größte Stufe.',
-    '<b>Kontext</b> ist das, was Claude gerade im Kopf hat. Er füllt sich im Lauf einer Sitzung, und ab einem gewissen Punkt hilft nur noch Aufräumen.',
-    'Ganz oben <b>GitHub</b>. Der Ort, an dem dein Projekt liegt, wenn es nicht nur auf deinem Schreibtisch überleben soll.'
-  ];
-  var STAGGER=140, WALK=3600;
-
-  var CSS=`
-  #ts3danim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts3danim *{box-sizing:border-box}
-  #ts3danim .lz-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts3danim .lz-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts3danim .lz-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts3danim h2.lz-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts3danim h2.lz-title .ts-gold{color:#c7b489}
-  #ts3danim .lz-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts3danim .lz-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts3danim .lz-stack{position:relative;width:min(560px,100%);min-height:424px;margin:0 auto;display:flex;flex-direction:column;justify-content:flex-start;gap:8px}
-  #ts3danim .lz-stack::before{content:"";position:absolute;inset:-22px -18px;z-index:-1;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(199,180,137,.12),rgba(255,255,255,0) 72%);filter:blur(28px);opacity:0}
-  #ts3danim .lz-wrap.built:not(.hid) .lz-stack::before{animation:lzBreath 5s ease-in-out infinite}
-
-  /* Sechs gleichrangige Schichten: identische Grundhoehe, gleiche Breite */
-  #ts3danim .lz-l{position:relative;min-height:54px;border-radius:12px;padding:0 16px;cursor:pointer;overflow:hidden;
-    display:flex;flex-direction:column;justify-content:center;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.10);
-    transition:border-color .5s ease,box-shadow .5s ease,opacity .55s ease,transform .7s cubic-bezier(.34,1.56,.64,1),min-height .55s cubic-bezier(.16,1,.3,1)}
-  #ts3danim .lz-row{display:flex;align-items:center;gap:12px;min-height:54px}
-  #ts3danim .lz-n{flex:0 0 auto;font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.28);transition:color .5s ease}
-  #ts3danim .lz-t{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:rgba(255,255,255,.6);transition:color .5s ease}
-  #ts3danim .lz-d{max-height:0;opacity:0;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.7);
-    transition:max-height .55s cubic-bezier(.16,1,.3,1),opacity .45s ease,padding .45s ease;padding:0}
-  #ts3danim .lz-l.lit{border-color:rgba(199,180,137,.4)}
-  #ts3danim .lz-l.lit .lz-n{color:#c7b489}
-  #ts3danim .lz-l.lit .lz-t{color:#fff}
-  #ts3danim .lz-l.focus{border-color:rgba(199,180,137,.85);box-shadow:0 0 38px -12px rgba(199,180,137,.55);min-height:104px}
-  #ts3danim .lz-l.focus .lz-d{max-height:70px;opacity:1;padding:0 0 14px}
-  #ts3danim .lz-base{width:min(560px,100%);height:4px;margin:10px auto 0;border-radius:3px;
-    background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.45),rgba(199,180,137,0))}
-  #ts3danim .lz-baselbl{width:min(560px,100%);margin:9px auto 0;text-align:center;
-    font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34)}
-
-  /* Startzustand NUR mit .js — ohne JS steht der Stapel fertig da */
-  #ts3danim .lz-wrap.js:not(.on) .lz-l{opacity:0;transform:translateY(14px) scale(.94)}
-  #ts3danim .lz-wrap:not(.js) .lz-l{border-color:rgba(199,180,137,.4)}
-  #ts3danim .lz-wrap:not(.js) .lz-n{color:#c7b489}
-  #ts3danim .lz-wrap:not(.js) .lz-t{color:#fff}
-
-  #ts3danim .lz-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts3danim .lz-cap b{color:#c7b489;font-weight:600}
-  #ts3danim .lz-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts3danim .lz-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts3danim .lz-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @keyframes lzBreath{0%,100%{opacity:.35}50%{opacity:.9}}
-  @media(max-width:820px){ #ts3danim .lz-cap{min-height:130px} #ts3danim .lz-l.focus{min-height:126px} #ts3danim .lz-stack{min-height:446px} }
-  @media(prefers-reduced-motion:reduce){ #ts3danim .lz-wrap.built:not(.hid) .lz-stack::before{animation:none;opacity:.5} }
-  `;
-
-  function html(){
-    var ls=LAYERS.map(function(l,i){
-      return '<div class="lz-l" data-i="'+i+'">'+
-        '<div class="lz-row"><span class="lz-n">'+l.n+'</span><span class="lz-t">'+l.t+'</span></div>'+
-        '<div class="lz-d">'+l.d+'</div>'+
-      '</div>';
-    }).join('');
-    return `
-<div class="lz-head">
-  <span class="lz-eyebrow">Die Landkarte</span>
-  <h2 class="lz-title">Sechs Schichten, ein <span class="ts-gold">Arbeitsplatz</span>.</h2>
-  <p class="lz-sub">Klick auf eine Schicht, dann siehst du in einem Satz, worum es dabei geht.</p>
-</div>
-<div class="lz-wrap">
-  <div class="lz-stack">${ls}</div>
-  <div class="lz-base"></div>
-  <div class="lz-baselbl">Dein Rechner</div>
-  <p class="lz-cap"></p>
-  <div class="lz-foot"><button class="lz-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  /* Reihenfolge von unten nach oben: LAYERS ist top-down, Schritt n -> Index (5-n) */
-  function focusStep(root,n){
-    var ls=root.querySelectorAll('.lz-l'), idx=LAYERS.length-1-n;
-    for(var i=0;i<ls.length;i++) ls[i].classList.toggle('focus', i===idx);
-    var cap=root.querySelector('.lz-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-
-  function play(root){
-    var wrap=root.querySelector('.lz-wrap'); if(!wrap) return;
-    clear();
-    wrap.classList.remove('on','built'); wrap.classList.add('js');
-    var ls=root.querySelectorAll('.lz-l');
-    for(var i=0;i<ls.length;i++){ ls[i].classList.remove('lit','focus'); ls[i].style.transitionDelay=''; }
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      wrap.classList.add('on','built');
-      for(var r=0;r<ls.length;r++) ls[r].classList.add('lit');
-      focusStep(root,0); return;
-    }
-    void wrap.offsetWidth;
-    wrap.classList.add('on');
-    /* PHASE 1 — von unten nach oben aufbauen, ~1s fuer alle sechs */
-    for(var k=0;k<LAYERS.length;k++){
-      (function(n){
-        var el=ls[LAYERS.length-1-n];
-        el.style.transitionDelay=(60+n*STAGGER)/1000+'s';
-        later(function(){ el.classList.add('lit'); }, 60+n*STAGGER);
-      })(k);
-    }
-    /* PHASE 2 — Ambient */
-    later(function(){ wrap.classList.add('built'); },1300);
-    /* PHASE 3 — EIN Durchlauf, Schicht klappt auf */
-    for(var w=0;w<CAPS.length;w++){ (function(n){ later(function(){ focusStep(root,n); }, 1500+n*WALK); })(w); }
-    later(function(){ var a=root.querySelectorAll('.lz-l'); for(var q=0;q<a.length;q++) a[q].classList.remove('focus'); }, 1500+CAPS.length*WALK);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='ts3danim'; el.innerHTML=html();
-    el.querySelector('.lz-replay').addEventListener('click',function(){ play(el); });
-    var ls=el.querySelectorAll('.lz-l');
-    for(var i=0;i<ls.length;i++){
-      (function(n){ ls[n].addEventListener('click',function(){
-        clear();
-        var w=el.querySelector('.lz-wrap'); w.classList.add('js','on','built');
-        var a=el.querySelectorAll('.lz-l'); for(var q=0;q<a.length;q++){ a[q].classList.add('lit'); a[q].style.transitionDelay='0s'; }
-        focusStep(el, LAYERS.length-1-n);
-      }); })(i);
-    }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts3danim-css'))return;
-    var s=document.createElement('style'); s.id='ts3danim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts3danim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts3danim')) return;
-    var anchor=document.getElementById('ts3d-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.lz-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){
-    var w=document.querySelector('#ts3danim .lz-wrap'); if(!w) return;
-    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
-  });
-  window.__ts3danimKill=function(){ clear(); };
-  window.__ts3danim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.4 · Inhalt + Empfehlung + Abschluss ---- */
-(function(){
-  if(window.__ts3drest) return;
-  function on(){ return /\/claude-nutzung-erklrt-6-konzepte\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts3danim')) return;
-
-    window.__ts3.sec('ts3d-eins','ts3danim',
-      '<h3>Worauf Claude überhaupt <span class="g">zugreift</span></h3>'+
-      '<p class="lead">Diese drei entscheiden darüber, ob Claude überhaupt sinnvoll arbeiten kann. Wer sie überspringt, wundert sich später über Ergebnisse, die neben der Sache liegen.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 01</span><div class="ts3-nm">Ordner und Dateien</div><hr>'+
-          '<p>Claude Code arbeitet immer in genau dem Ordner, in dem du es startest. Alles darin darf es lesen und ändern, alles außerhalb existiert für es nicht.</p>'+
-          '<p>Deshalb bekommt jedes Projekt seinen eigenen Ordner, egal ob darin dein Speiseplan, deine Steuerunterlagen oder eine Website liegen.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 02</span><div class="ts3-nm">Die CLAUDE.md</div><hr>'+
-          '<p>Eine gewöhnliche Textdatei im Projektordner. Claude liest sie bei jedem Start und weiß dadurch, wer du bist, wie du arbeitest und was es niemals tun soll.</p>'+
-          '<p>Was da hineingehört und wie kurz sie bleibt, klärst du in Modul 4, sobald du deine erste schreibst.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 03</span><div class="ts3-nm">Skills, MCPs, Plugins</div><hr>'+
-          '<p><b>Skills</b> geben Claude neue Fähigkeiten, etwa einen bestimmten Schreibstil. <b>MCPs</b> sind Verbindungen nach außen, zum Mailfach oder zur Buchhaltung. <b>Plugins</b> liefern beides zusammen.</p>'+
-          '<p>Angeschlossen wird das ab Modul 4. Hier reicht, dass du die drei Wörter auseinanderhalten kannst.</p></div>'+
-      '</div>'
-    );
-
-    window.__ts3.sec('ts3d-zwei','ts3d-eins',
-      '<h3>Was dir beim <span class="g">Arbeiten</span> begegnet</h3>'+
-      '<p class="lead">Diese drei begegnen dir nicht beim Einrichten, sondern beim Arbeiten. Sie erklären, warum eine Sitzung gut läuft und die nächste zäh wird.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 04</span><div class="ts3-nm">Modelle und Denk-Tiefe</div><hr>'+
-          '<p>Es gibt kleine schnelle und große gründliche Modelle, und du kannst zusätzlich einstellen, wie lange nachgedacht wird.</p>'+
-          '<p>Beides stellst du selbst um. Für die meiste Arbeit reicht die mittlere Stufe, und sie ist deutlich sparsamer.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 05</span><div class="ts3-nm">Kontext und Tokens</div><hr>'+
-          '<p>Alles, was in einer Sitzung gesagt und gelesen wurde, bleibt im Kontext und wird bei jeder weiteren Antwort mitgeschleppt.</p>'+
-          '<p>Deshalb wird eine lange Sitzung langsamer und ungenauer. Die Lösung ist banal: aufräumen und neu anfangen.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Schicht 06</span><div class="ts3-nm">GitHub</div><hr>'+
-          '<p>Ein Ablageort im Netz für ganze Projektordner. Jede Änderung wird festgehalten, du kommst von jedem Rechner daran und kannst jederzeit zurück.</p>'+
-          '<p>Für dich heißt das vor allem: Deine Arbeit lebt nicht mehr nur auf einer Festplatte.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Sechs Wörter, mehr ist es nicht. Wenn dir eines davon in Modul 4 wiederbegegnet, weißt du, in welche Schublade es gehört, und genau das war der Zweck dieser Lektion.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts3demp', anchorId:'ts3d-zwei', kind:'Nutzung',
-      animTitle:'Deine', animGold:'vier Gewohnheiten',
-      steps:[{n:'01',l:'Ordner zuerst'},{n:'02',l:'Briefing kurz halten'},{n:'03',l:'Nur laden, was greift'},{n:'04',l:'Sitzung sauber halten'}],
-      intro:'Vier Gewohnheiten, die aus diesen sechs Begriffen folgen. Sie kosten nichts und ersparen dir später viel:',
-      points:[
-        'Öffne Claude <b>immer im Projektordner</b>, nie irgendwo auf dem Schreibtisch. Der falsche Ordner ist die häufigste Ursache für unbrauchbare Ergebnisse.',
-        'Halte die <b>CLAUDE.md kurz</b>. Sie fährt bei jeder Anfrage mit, und jede überflüssige Zeile geht von deinem Nutzungsfenster ab.',
-        'Lade nur Erweiterungen, die du <b>wirklich benutzt</b>. Was mitfährt, ohne je anzuspringen, verbraucht trotzdem Platz.',
-        'Fang eine <b>neue Sitzung an</b>, wenn ein Thema abgeschlossen ist. Das ist wirksamer als jede Einstellung, die du sonst drehen könntest.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts3dnext',
-      learn:[
-        'Du weißt, dass Claude <b>nur den Ordner sieht</b>, in dem du es startest.',
-        'Du weißt, wozu die <b>CLAUDE.md</b> da ist und warum sie kurz bleibt.',
-        'Du kannst <b>Skills, MCPs und Plugins</b> auseinanderhalten.',
-        'Du verstehst, warum eine Sitzung mit der Zeit <b>voll und langsam</b> wird.'
-      ],
-      next:'/claude-interface-durchlauf'
-    });
-  }
-  window.__ts3drest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* MODUL 3 · alter Block claude-interface-durchlauf (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
+/* MODUL 3 · alter Block claude-nutzung-erklrt-6-konzepte (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* ============================================================
    MODUL 3 · L3.6 "Stack aufräumen"  (/stack-aufrumen)
 
@@ -31920,6 +31627,119 @@ var TSISL_TEAM_ONB_V2=[
         'Du kennst drei Einsätze, die <b>lesen und vorbereiten</b>.',
         'Den letzten Klick bei <b>Bestellen und Bezahlen</b> machst du selbst.'],
       next:'/claude-nutzung-erklrt-6-konzepte'}
+  });
+})();
+
+/* ---- l07-so-arbeitet-code.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.7 "So arbeitet Claude Code"  (/claude-nutzung-erklrt-6-konzepte)
+   Fakten: code.claude.com/docs/en/how-claude-code-works (agentic loop: Kontext sammeln,
+   handeln, pruefen; Werkzeug-Kategorien; Zugriff; Sitzungen; Checkpoints; Berechtigungen;
+   Esc/Umlenken; "Delegate, don't dictate"), Faktenblatt Punkt 9.
+   Erklaeranimation #tsn3-a07 "Ein Auftrag, drei Bewegungen."
+   In der Mitte der Projektordner mit seinen Dateien, darum ein Kreis mit drei gleich grossen
+   Stationen (Kontext sammeln, Handeln, Pruefen). Ein Lichtpunkt kreist (rotate eines Traegers),
+   an jeder Station passiert etwas im Ordner. Die Pruefung findet eine Luecke, der Kreis laeuft
+   ein zweites Mal, dann ist der Auftrag fertig.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var ST=[{k:'Kontext sammeln',d:'liest die Dateien'},{k:'Handeln',d:'legt an, ändert'},{k:'Prüfen',d:'kontrolliert das Ergebnis'}];
+  var FILES=['rezepturen.xlsx','karte-herbst.pdf','allergene.html'];
+  var stage='<div class="l7-wrap"><div class="l7-ring"><svg viewBox="0 0 400 400" aria-hidden="true"><circle class="b" cx="200" cy="200" r="168"/><circle class="f" cx="200" cy="200" r="168" pathLength="100"/></svg>'
+    +'<span class="l7-car"><i></i></span>'
+    +ST.map(function(s,i){ return '<div class="l7-st s'+i+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="d">'+s.d+'</span></div>'; }).join('')
+    +'<div class="l7-core"><div class="l7-ch">~/Betrieb/Speisekarte</div><ul class="l7-files">'
+    +FILES.map(function(f,i){ return '<li class="f'+i+'"><span class="ic"></span><span class="fn">'+f+'</span><span class="fs"></span></li>'; }).join('')+'</ul>'
+    +'<div class="l7-task">Auftrag: Allergen-Übersicht für jedes Gericht der Herbstkarte</div></div></div></div>';
+  var BEATS=[
+    {st:0, f:{0:'gelesen',1:'gelesen'}, cap:'Zuerst <b>sammelt</b> Claude Kontext: Es öffnet die Rezepturen und die Karte und verschafft sich ein Bild.'},
+    {st:1, f:{2:'neu'}, cap:'Dann <b>handelt</b> es und legt die Übersicht als neue Datei im Ordner an.'},
+    {st:2, f:{2:'Lücke'}, cap:'Beim <b>Prüfen</b> fällt auf: Für ein Gericht fehlt die Rezeptur. Claude merkt es selbst und dreht eine zweite Runde.', warn:true},
+    {st:0, f:{0:'gelesen'}, cap:'Es sucht in den Rezepturen nach, findet die fehlende Zeile unter anderem Namen ...'},
+    {st:1, f:{2:'ergänzt'}, cap:'... ergänzt die Übersicht ...'},
+    {st:2, f:{2:'fertig'}, cap:'... und prüft noch einmal. Erst jetzt meldet es sich. So läuft <b>jeder</b> Auftrag in Claude Code, ob klein oder groß.', done:true}
+  ];
+  function setF(el,i,txt,cls){ var li=el.querySelector('.l7-files .f'+i); if(!li) return; li.querySelector('.fs').textContent=txt; li.className='f'+i+' on '+(cls||''); }
+
+  T3.anim('tsn3-a07',{
+    reset:function(el){
+      el.querySelectorAll('.l7-st').forEach(function(s){ s.classList.remove('on'); });
+      el.querySelectorAll('.l7-files li').forEach(function(li,i){ li.className='f'+i; li.querySelector('.fs').textContent=''; });
+      el.querySelector('.l7-car').style.setProperty('--r',0); el.querySelector('.l7-ring').style.setProperty('--p',0);
+    },
+    play:function(el, api, end){
+      var car=el.querySelector('.l7-car'), ring=el.querySelector('.l7-ring'), S=2600, deg=0;
+      BEATS.forEach(function(b,i){
+        var t0=400+i*S;
+        api.T.at(t0,function(){
+          deg=i*120; car.style.setProperty('--r',deg); ring.style.setProperty('--p',Math.min(100,(i+1)*100/6));
+          el.querySelectorAll('.l7-st').forEach(function(s,k){ s.classList.toggle('on',k===b.st); });
+          api.cap(b.cap);
+        });
+        api.T.at(t0+900,function(){ Object.keys(b.f).forEach(function(k){ setF(el,+k,b.f[k], b.warn&&k==='2'?'warn':(b.f[k]==='fertig'?'ok':'')); }); });
+      });
+      api.T.at(400+BEATS.length*S+400, end);
+    },
+    end:function(el){
+      el.querySelectorAll('.l7-st').forEach(function(s,k){ s.classList.toggle('on',k===2); });
+      setF(el,0,'gelesen'); setF(el,1,'gelesen'); setF(el,2,'fertig','ok');
+      el.querySelector('.l7-car').style.setProperty('--r',600); el.querySelector('.l7-ring').style.setProperty('--p',100);
+    }
+  });
+
+  T3.page({
+    key:'l07', re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, tab:'L 3.7 · So arbeitet Claude Code',
+    hero:{eyebrow:'L 3.7', title:'So arbeitet <span class="ts-gold">Claude Code</span>', alt:'So arbeitet Claude Code: Kontext sammeln, handeln, prüfen, in einem Ordner auf deinem Rechner'},
+    intro:'<p>Claude Code ist die dritte Werkstatt aus Lektion 3.2, die mit dem meisten Werkzeug. Es arbeitet in einem Ordner auf deinem Rechner, liest dort alle Dateien, legt neue an, führt Programme aus und sucht im Netz. Der Name klingt nach Programmieren, und manchmal schreibt Claude dabei tatsächlich Code. Du selbst schreibst Sätze.</p>'
+      +'<p>Bevor wir es in der nächsten Lektion einrichten, schauen wir uns an, wie es einen Auftrag abarbeitet. Wer das einmal verstanden hat, gibt bessere Aufträge und weiß, wann er eingreifen sollte.</p>',
+    anim:{id:'tsn3-a07', eb:'Was nach deinem Auftrag passiert', title:'Ein Auftrag, drei <span class="g">Bewegungen</span>.',
+      sub:'Claude Code arbeitet im Kreis: Kontext sammeln, handeln, prüfen. So lange, bis das Ergebnis stimmt.',
+      stage:stage,
+      capEnd:BEATS[5].cap},
+    body:function(H){
+      return H.sec({id:'tsn3-l07-zugriff', wide:true, title:'Was Claude Code <span class="g">sieht und tut</span>',
+          lead:'Startest du Claude Code in einem Ordner, bekommt es Zugriff auf genau diesen Ordner und ein paar Dinge drumherum.',
+          body:H.cards([
+            {eb:'Dein Projekt', nm:'Der Ordner', p:'Alle Dateien im Ordner und in seinen Unterordnern. Dateien an anderen Stellen nur mit deiner Erlaubnis.'},
+            {eb:'Dein Rechner', nm:'Das Terminal', p:'Jeder Befehl, den du selbst eingeben könntest: Programme starten, Dateien umwandeln, Skripte ausführen.'},
+            {eb:'Dein Briefing', nm:'CLAUDE.md und Gedächtnis', p:'Die Datei mit deinen festen Regeln für dieses Projekt und die Notizen, die Claude sich selbst gemacht hat. Beides wird bei jedem Start gelesen.'},
+            {eb:'Deine Verbindungen', nm:'Erweiterungen', p:'Skills für bestimmte Arbeitsweisen, Verbindungen zu Diensten wie deinem Postfach und Claude in Chrome für den Browser.'}
+          ],2)
+          +'<p style="margin-top:18px"><strong class="lead">Die Werkzeuge, die es dabei benutzt.</strong>Dateien lesen, anlegen, ändern und umbenennen. Im Ordner nach Inhalten suchen. Befehle ausführen. Im Netz suchen und nachschlagen. Welches Werkzeug es wann nimmt, entscheidet Claude selbst, anhand deines Auftrags und dessen, was es unterwegs herausfindet.</p>'})
+        +H.sec({id:'tsn3-l07-ordner', title:'Der Ordner ist die <span class="g">Grenze</span>',
+          lead:'Claude Code arbeitet immer in dem Ordner, in dem du es startest. Das ist die wichtigste Einstellung von allen, und sie kostet nichts.',
+          body:'<p>Leg dir deshalb eine klare Ordnerstruktur an, bevor du loslegst. Ein Hauptordner für den Betrieb, darin ein Unterordner für jedes größere Thema. Für eine Aufgabe startest du Claude Code im passenden Unterordner, und es sieht genau das, was dazugehört, und sonst nichts.</p>'
+            +H.code('Betrieb/\n├── Speisekarte/      Rezepturen, aktuelle Karte, Fotos der Gerichte\n├── Einkauf/         Lieferantenliste, Preislisten, Lieferscheine\n├── Team/            Handbuch, Checklisten, Vorlagen\n└── Auswertungen/    Kassenberichte, Monatszahlen','Beispiel · Ordnerstruktur')
+            +H.note('Ein Thema, ein Ordner. Startest du Claude Code im falschen Ordner, arbeitet es mit den falschen Dateien, und das merkst du oft erst am Ergebnis.','Die Merkregel')})
+        +H.sec({id:'tsn3-l07-sitzung', title:'Jede Sitzung fängt <span class="g">frisch</span> an',
+          lead:'Eine Sitzung ist ein Gespräch mit Claude Code, von deinem ersten Auftrag bis du es schließt.',
+          body:'<p><strong class="lead">Neue Sitzung, leerer Kopf.</strong>Jede Sitzung beginnt ohne den Verlauf der vorherigen. Was über Sitzungen hinweg gelten soll, steht in der CLAUDE.md oder im Gedächtnis, das Claude selbst führt. Genau deshalb ist die CLAUDE.md so wichtig, ihr widmen wir Lektion 3.9.</p>'
+            +'<p><strong class="lead">Alte Sitzungen holst du zurück.</strong>Claude Code speichert jedes Gespräch auf deinem Rechner. Mit <code>/resume</code> setzt du eine frühere Sitzung genau dort fort, wo du aufgehört hast.</p>'})
+        +H.sec({id:'tsn3-l07-netz', wide:true, title:'Zwei <span class="g">Sicherheitsnetze</span>',
+          lead:'Claude Code kann viel auf deinem Rechner tun. Zwei Mechanismen sorgen dafür, dass du jederzeit die Kontrolle behältst.',
+          body:H.cards([
+            {eb:'Netz 1', nm:'Zurückspulen', p:['Bevor Claude eine Datei ändert, sichert es den alten Stand. Zweimal <span class="tsn3-kbd">Esc</span> bei leerer Eingabe öffnet das Menü zum Zurückspulen, oder du schreibst einfach, dass es die Änderung rückgängig machen soll.','Das gilt nur für Dateien. Was Claude außerhalb deines Rechners auslöst, eine gesendete Mail etwa, lässt sich nicht zurückspulen.']},
+            {eb:'Netz 2', nm:'Berechtigungen', p:['Der Modus legt fest, was Claude ohne Nachfrage darf. Standard ist seit August 2026 der Auto-Modus: Ein zweites Modell prüft im Hintergrund jede Aktion und hält riskante an. Daneben gibt es einen Modus, in dem Claude vor jeder Änderung fragt, und den Plan-Modus, in dem es nur plant.','Mit <span class="tsn3-kbd">Shift</span>+<span class="tsn3-kbd">Tab</span> wechselst du. Mehr dazu in Lektion 3.10 und 3.11.']}
+          ],2)
+          +H.note('Der Auto-Modus ist bequem, aber nach Anthropics eigener Aussage keine Garantie für Sicherheit. Alles, was dein Haus verlässt, siehst du vorher selbst.','Die Merkregel',true)})
+        +H.sec({id:'tsn3-l07-auftrag', title:'Beauftragen, nicht <span class="g">diktieren</span>',
+          lead:'Du musst Claude nicht sagen, welche Dateien es öffnen oder welche Befehle es ausführen soll. Du sagst, was du willst und woran du erkennst, dass es fertig ist.',
+          body:H.prompt('In diesem Ordner liegen unsere Rezepturen als Excel-Datei und die Herbstkarte als PDF. Mach mir eine Allergen-Übersicht für jedes Gericht der Karte, als Tabelle mit den 14 Hauptallergenen. Fertig ist sie, wenn jedes Gericht der Karte eine Zeile hat. Fehlt dir eine Rezeptur, schreib „fehlt“ in die Zeile, statt zu raten.','Ein guter Auftrag')
+            +'<p style="margin-top:16px"><strong class="lead">Du kannst jederzeit eingreifen.</strong>Mit <span class="tsn3-kbd">Esc</span> hältst du Claude sofort an, es wartet dann auf deine nächste Anweisung. Oder du tippst während der Arbeit eine Korrektur und drückst Enter. Claude liest sie nach dem aktuellen Schritt und richtet sich danach.</p>'})
+    },
+    emp:{kind:'Nutzung', animTitle:'Dein', animGold:'Arbeitsrhythmus',
+      steps:['Richtiger Ordner','Ergebnis beschreiben','Zusehen','Eingreifen'],
+      intro:'So arbeitest du von Anfang an mit dem Kreislauf, statt gegen ihn:',
+      points:['Starte Claude Code immer im <b>Ordner der Aufgabe</b>, nie irgendwo auf dem Schreibtisch.',
+        'Beschreib das <b>Ergebnis</b> und woran du erkennst, dass es fertig ist. Die Schritte findet Claude selbst.',
+        'Schau in den ersten Wochen <b>zu</b>, was Claude liest und anlegt. So lernst du, wie es denkt.',
+        'Greif ein, sobald es in die falsche Richtung läuft: <b>Esc</b> zum Anhalten oder eine Korrektur, während es arbeitet.']},
+    learn:{learn:['Du kennst den Kreislauf: <b>Kontext, Handeln, Prüfen</b>.',
+        'Du weißt, dass <b>der Ordner</b> bestimmt, was Claude sieht.',
+        'Du kennst <b>Zurückspulen</b> und Berechtigungen als Sicherheitsnetze.',
+        'Du beauftragst mit dem <b>Ergebnis</b>, nicht mit den Schritten.'],
+      next:'/installation-claude-code-vs-code-extension'}
   });
 })();
 
