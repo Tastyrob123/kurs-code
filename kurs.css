@@ -2531,10 +2531,10 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 /* · */
 
 /* >>> NEUBAU MODUL 2 (Notion AI Backoffice System) — ANFANG >>> */
-/* Handy (01.11.2026): kein seitliches Scrollen auf den Modul-2-Seiten.
+/* Handy und schmale Fenster (01.11.2026, ab 1000 px nachgezogen): kein seitliches Scrollen auf den Modul-2-Seiten.
    Ursache: Abschnitte mit width:min(…,95vw) sitzen im Seitenrahmen mit 24px Innenabstand und ragen rechts hinaus;
    Kopfbilder sind am Handy 116% breit und waren nicht zentriert. Kopfleiste („Direkt zur Vorlage“) regelt die Ladezeit. */
-@media (max-width:820px){
+@media all{
   :is(.page__modul-2-das-notion-ai-backoffice-system,
     .page__lektionen-vorlage-holen-und-einrichten,
     .page__mehrwert-zielbild,
@@ -2579,6 +2579,11 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media (max-width:640px){
   .page__zutatenliste .ts-hero__img,
   .page__modul-2-das-notion-ai-backoffice-system .ts-hero__img{ margin-left:-8%; }
+}
+/* Titel der Video-Abschnitte (Key Metrics, Multistandort) standen auf nowrap und ragten bei ~1000 px aus der halben Spalte. */
+@media (max-width:1279px){
+  .page__key-metrics .kv-title,
+  .page__multistandort-erweiterung-optional .msv-h2{ white-space:normal; text-wrap:balance; }
 }
 /* <<< NEUBAU MODUL 2 — ENDE <<< */
 /* · */

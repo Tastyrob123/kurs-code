@@ -29275,6 +29275,23 @@ var TSISL_TEAM_ONB_V2=[
     .tsn2-step,.tsn2-card,.tsn2-err,.tsn2-way a{opacity:1!important;transform:none!important;transition:none!important}
     .tsn2-way-bar{transform:scaleX(1)!important;transition:none!important}
   }
+  /* Kopf und Einleitung der Modul-2-Seiten (aus dem 2.0-Baustein hierher verschoben, 01.11.2026:
+     seit der Ladezeit-Zerlegung laeuft der 2.0-Baustein nur noch auf 2.0, Tipps, Dynamisches System
+     und die DB-Lektionen brauchen diese Regeln aber auch) */
+  .tsn2-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
+  .tsn2-hero .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
+  .tsn2-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
+  .tsn2-hero .ts-hero__text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-17%;padding:0 24px 8px}
+  .tsn2-hero .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
+  .tsn2-hero .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none}
+  .tsn2-hero .ts-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both}
+  .tsn2-hero .ts-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  .tsn2-hero .ts-hero__title{margin:0;font-family:${DISP};font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9),0 18px 140px rgba(0,0,0,.78);animation:tsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both}
+  .tsn2-hero .ts-hero__title .g{color:#c7b489}
+  @media(max-width:640px){ .tsn2-hero .ts-hero__text{padding:0 16px 20px} .tsn2-hero .ts-hero__title{font-size:clamp(2rem,12vw,3rem)} }
+  .tsn2-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+  .tsn2-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn2-body p.big{font-family:${DISP};font-weight:600;font-size:clamp(19px,2.1vw,23px);line-height:1.4;color:#fff;margin-bottom:18px}
   `;
   function css(){
     if(document.getElementById('tsn2-css')) return;
@@ -29812,20 +29829,6 @@ var TSISL_TEAM_ONB_V2=[
   var T=window.__tsn2;
 
   var HERO_CSS=`
-  .tsn2-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
-  .tsn2-hero .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
-  .tsn2-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
-  .tsn2-hero .ts-hero__text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-17%;padding:0 24px 8px}
-  .tsn2-hero .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
-  .tsn2-hero .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none}
-  .tsn2-hero .ts-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 ${T.SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both}
-  .tsn2-hero .ts-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  .tsn2-hero .ts-hero__title{margin:0;font-family:${T.DISP};font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9),0 18px 140px rgba(0,0,0,.78);animation:tsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both}
-  .tsn2-hero .ts-hero__title .g{color:#c7b489}
-  @media(max-width:640px){ .tsn2-hero .ts-hero__text{padding:0 16px 20px} .tsn2-hero .ts-hero__title{font-size:clamp(2rem,12vw,3rem)} }
-  .tsn2-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
-  .tsn2-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .tsn2-body p.big{font-family:${T.DISP};font-weight:600;font-size:clamp(19px,2.1vw,23px);line-height:1.4;color:#fff;margin-bottom:18px}
 
   /* ---------- Erklaeranimation #tsn2dup ----------
      Innerhalb der Fenster echtes Notion im Dark Mode (Werte am 01.11.2026 aus Roberts Notion abgenommen):
