@@ -4398,16 +4398,16 @@ window.__tsMO = function(cb){
     { re:/\/lektionen\/schriftarten-anpassen\/?$/, href:'/lektionen/online-hosten' },
     { re:/\/lektionen\/online-hosten\/?$/, href:'/lektionen/mobil-check' },
     { re:/\/lektionen\/mobil-check\/?$/, href:'/modul-6-ai-website-building' },
-    /* Modul 3 - Claude Grundlagen (L3.1-L3.7, gebaut 02.08.2026).
+    /* Modul 3 - Claude Grundlagen (NEUBAU 01.11.2026, L3.1-L3.17, Bibliothek __tsn3).
        PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
-       den von #ts3?next gebauten Weiter-Button wieder. */
-    { re:/\/was-ist-claude-genau\/?$/, href:'/welches-claude-wann-chatcoworkcodeapi' },
-    { re:/\/welches-claude-wann-chatcoworkcodeapi\/?$/, href:'/claude-plne-preis' },
-    { re:/\/claude-plne-preis\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
-    { re:/\/claude-nutzung-erklrt-6-konzepte\/?$/, href:'/claude-interface-durchlauf' },
-    { re:/\/claude-interface-durchlauf\/?$/, href:'/stack-aufrumen' },
-    { re:/\/stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
-    { re:/\/der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
+       den Weiter-Button der Seite wieder. Kette = Lektionsfolge des Neubaus (nur lebende Seiten). */
+    { re:/\/(?:lektionen\/)?was-ist-claude-genau\/?$/, href:'/welches-claude-wann-chatcoworkcodeapi' },
+    { re:/\/(?:lektionen\/)?welches-claude-wann-chatcoworkcodeapi\/?$/, href:'/claude-plne-preis' },
+    { re:/\/(?:lektionen\/)?claude-plne-preis\/?$/, href:'/claude-interface-durchlauf' },
+    { re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
+    { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
+    { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.1-L4.6, gebaut 03.08.2026).
        Gates TOLERANT (Root ODER /lektionen/-Praefix), weil super.so Seiten aus der
        Lektionen-DB beim Re-Sync umhaengen kann. Ohne Eintrag hier raeumt der Pager
@@ -31258,353 +31258,7 @@ var TSISL_TEAM_ONB_V2=[
   })();
 })();
 
-/* ============================================================
-   MODUL 3 · L3.1 "Was Claude ist"  (/was-ist-claude-genau)
-   Abschnitte: 01 Hero+Einleitung · 02 Erklaeranimation #ts3aanim · Inhalt · 07 Empfehlung · 09 Abschluss
-
-   Erklaeranimation "Ein Kern, vier Tueren." — EIGENES Konzept (kein Recycling):
-   ein zentraler Modell-Kern + vier gleich grosse Tuer-Kacheln auf DERSELBEN Achse
-   (beide width:min(620px,100%)), verbunden ueber eine Goldschiene, die im ZWISCHENRAUM
-   zwischen Kern und Kacheln laeuft (Opake-Basis-Regel, Erweiterung 3: 100% sichtbar).
-   Choreografie nach der rev15-Regel "Reveal ist schnell, Erklaerung ist ruhig":
-     Phase 1 (~1,1s) alle Elemente kaskadieren herein (Stagger 150ms, Back-Ease)
-     Phase 2 (.built) Ambient: Kern-Halo atmet, Schimmer wandert ueber die Schiene
-     Phase 3 Highlight-Durchlauf 2200ms/Tuer, EINE Runde, dann ruht die Buehne.
-   Schwerpunkt-Treue: die Animation zeigt WAS jede Tuer ist, NICHT wann man welche nimmt —
-   die Auswahl-Regel gehoert zu L3.2 und wird hier bewusst nicht vorweggenommen.
-   ============================================================ */
-
-/* ---- L3.1 · Abschnitt 01 (Hero + Einleitung) ---- */
-(function(){
-  if(window.__ts3a) return;
-  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on()) return;
-    if(!window.__ts3) return;
-    var sc=document.querySelector('.super-content'); if(!sc) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 3.1'),
-      alt: 'Claude einordnen: ein Modell, vier Zugänge, dein Zugang',
-      eyebrow: 'L 3.1',
-      title: '<span class="ts-gold">Claude</span> einordnen'
-    });
-    window.__ts3.body('ts3a-intro',
-      '<p>Claude kommt von <b>Anthropic</b>, einem KI-Unternehmen aus San Francisco, das seit der Gründung an einer einzigen Sache arbeitet: an Sprachmodellen, die verlässlich bleiben, wenn es kompliziert wird.</p>'+
-      '<p>Dir begegnen mehrere Oberflächen, eine Chat-App, eine Arbeitsfläche für Dokumente, und ein Fenster mitten in deinem Terminal. Dahinter steckt jedes Mal dasselbe Modell. Die Frage ist nur, wie viel du ihm von deiner Arbeit zeigst.</p>'+
-      '<p>Kommst du aus der Einleitung, kennst du das Bild der Werkstätten mit demselben Meister. Hier zählen wir sie durch. Am Ende hast du deinen Zugang und die App auf dem Rechner.</p>'
-    );
-  }
-  window.__ts3a=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.1 · Abschnitt 02 (Erklaeranimation #ts3aanim) ---- */
-(function(){
-  if(window.__ts3aanim) return;
-  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
-
-  var DOORS=[
-    {k:'Chat',    n:'Claude Chat',    t:'App &amp; Browser'},
-    {k:'Cowork',  n:'Claude Cowork',  t:'Dateien &amp; Dokumente'},
-    {k:'Code',    n:'Claude Code',    t:'Terminal &amp; Ordner'},
-    {k:'API',     n:'Schnittstelle',  t:'für Entwickler'}
-  ];
-  var CAPS=[
-    'Der Chat redet mit dir und fasst sonst nichts an. Deine Dateien bleiben außen vor.',
-    '<b>Cowork</b> darf an deine Dokumente, ohne dass du ein Terminal öffnest.',
-    '<b>Claude Code</b> darf an deinen ganzen Ordner. Damit arbeiten wir in diesem Kurs.',
-    'Die Schnittstelle bauen Entwickler in eigene Software ein. Für dich vorerst kein Thema.'
-  ];
-  var STAGGER=150, WALK=2200;
-
-  var CSS=`
-  #ts3aanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts3aanim *{box-sizing:border-box}
-  #ts3aanim .ka-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts3aanim .ka-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts3aanim .ka-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts3aanim h2.ka-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts3aanim h2.ka-title .ts-gold{color:#c7b489}
-  #ts3aanim .ka-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts3aanim .ka-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts3aanim .ka-stage{width:min(620px,100%);margin:0 auto}
-
-  /* Kern — eigener Wrapper, damit der Atem-Ring AUSSERHALB des runden Clips liegt */
-  #ts3aanim .ka-corewrap{position:relative;width:126px;height:126px;margin:0 auto 0}
-  #ts3aanim .ka-corewrap::before{content:"";position:absolute;inset:-16px;border-radius:50%;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(199,180,137,.24),rgba(199,180,137,0) 72%);opacity:0}
-  #ts3aanim .ka-wrap.built:not(.hid) .ka-corewrap::before{animation:kaBreath 4.4s ease-in-out infinite}
-  #ts3aanim .ka-core{position:absolute;inset:0;border-radius:50%;overflow:hidden;
-    background:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),#0b0d14;
-    border:1.5px solid rgba(199,180,137,.55);
-    box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.05);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    transition:transform .7s cubic-bezier(.34,1.56,.64,1),opacity .6s ease}
-  #ts3aanim .ka-core b{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff;letter-spacing:.01em}
-  #ts3aanim .ka-core span{font:600 8.5px/1.3 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;text-align:center}
-  #ts3aanim .ka-corelbl{margin:12px auto 0;text-align:center;font:600 10px/1 -apple-system,sans-serif;
-    letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-
-  /* Schiene im ZWISCHENRAUM zwischen Kern und Kacheln (Linien laufen nie unter opaken Kacheln) */
-  #ts3aanim .ka-rail{position:relative;height:34px;margin:14px 0 0}
-  #ts3aanim .ka-rail .base{position:absolute;left:11.774%;right:11.774%;top:16px;height:1.5px;background:rgba(199,180,137,.18)}
-  #ts3aanim .ka-rail .fill{position:absolute;left:11.774%;top:16px;height:1.5px;width:0;
-    background:linear-gradient(90deg,rgba(199,180,137,.25),#c7b489);transition:width 1.4s cubic-bezier(.16,1,.3,1)}
-  #ts3aanim .ka-wrap.js.on .ka-rail .fill{width:76.452%}
-  #ts3aanim .ka-rail .fill i{position:absolute;right:-4px;top:-3.5px;width:8px;height:8px;border-radius:50%;
-    background:#efe6d2;box-shadow:0 0 14px rgba(199,180,137,.9);opacity:0}
-  #ts3aanim .ka-wrap.moving .ka-rail .fill i{opacity:1}
-  #ts3aanim .ka-rail .drop{position:absolute;top:17px;width:1.5px;height:17px;background:rgba(199,180,137,.18);transition:background .5s ease}
-  #ts3aanim .ka-rail .drop.lit{background:rgba(199,180,137,.6)}
-  #ts3aanim .ka-rail .stem{position:absolute;left:50%;top:-14px;width:1.5px;height:30px;margin-left:-.75px;background:rgba(199,180,137,.3)}
-  #ts3aanim .ka-shine{position:absolute;left:11.774%;right:11.774%;top:14px;height:5px;overflow:hidden;pointer-events:none}
-  #ts3aanim .ka-shine::before{content:"";position:absolute;top:0;left:-30%;width:30%;height:100%;
-    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(239,230,210,.75),rgba(255,255,255,0))}
-  #ts3aanim .ka-wrap.built:not(.hid) .ka-shine::before{animation:kaShine 4.6s ease-in-out infinite}
-
-  /* Vier gleichrangige Tueren: exakt gleich gross (repeat(4,1fr) + feste Hoehe) */
-  #ts3aanim .ka-doors{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
-  #ts3aanim .ka-door{position:relative;height:112px;border-radius:14px;padding:0 10px;text-align:center;cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.10);
-    transition:border-color .5s ease,box-shadow .5s ease,transform .7s cubic-bezier(.34,1.56,.64,1),opacity .6s ease}
-  #ts3aanim .ka-door .k{font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34);transition:color .5s ease}
-  #ts3aanim .ka-door .n{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14.5px;line-height:1.2;color:rgba(255,255,255,.55);transition:color .5s ease}
-  #ts3aanim .ka-door .t{font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.34);transition:color .5s ease}
-  #ts3aanim .ka-door.lit{border-color:rgba(199,180,137,.4)}
-  #ts3aanim .ka-door.lit .k{color:#c7b489}
-  #ts3aanim .ka-door.lit .n{color:#fff}
-  #ts3aanim .ka-door.lit .t{color:rgba(255,255,255,.62)}
-  #ts3aanim .ka-door.focus{border-color:rgba(199,180,137,.85);box-shadow:0 0 34px -10px rgba(199,180,137,.55);transform:translateY(-3px)}
-  #ts3aanim .ka-ring{position:absolute;inset:-4px;border-radius:17px;border:1px solid rgba(199,180,137,.5);opacity:0;pointer-events:none}
-  #ts3aanim .ka-door.focus .ka-ring{animation:kaFocus 1.9s ease-out}
-
-  /* Startzustand NUR mit .js — ohne JS steht die Buehne fertig da (Endzustand = Default) */
-  #ts3aanim .ka-wrap.js:not(.on) .ka-core{opacity:0;transform:translateY(14px) scale(.86)}
-  #ts3aanim .ka-wrap.js:not(.on) .ka-door{opacity:0;transform:translateY(16px) scale(.86)}
-  #ts3aanim .ka-wrap:not(.js) .ka-rail .fill{width:76.452%}
-  #ts3aanim .ka-wrap:not(.js) .ka-door{border-color:rgba(199,180,137,.4)}
-  #ts3aanim .ka-wrap:not(.js) .ka-door .k{color:#c7b489}
-  #ts3aanim .ka-wrap:not(.js) .ka-door .n{color:#fff}
-  #ts3aanim .ka-wrap:not(.js) .ka-door .t{color:rgba(255,255,255,.62)}
-
-  #ts3aanim .ka-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts3aanim .ka-cap b{color:#c7b489;font-weight:600}
-  #ts3aanim .ka-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts3aanim .ka-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts3aanim .ka-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @keyframes kaBreath{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.85;transform:scale(1.07)}}
-  @keyframes kaShine{0%{left:-30%}55%{left:100%}100%{left:100%}}
-  @keyframes kaFocus{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.14)}}
-  @media(max-width:820px){
-    #ts3aanim .ka-doors{grid-template-columns:repeat(2,1fr)}
-    #ts3aanim .ka-door{height:96px}
-    #ts3aanim .ka-rail{display:none}
-    #ts3aanim .ka-cap{min-height:120px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    #ts3aanim .ka-wrap.built:not(.hid) .ka-corewrap::before{animation:none;opacity:.6}
-    #ts3aanim .ka-wrap.built:not(.hid) .ka-shine::before{animation:none;opacity:0}
-    #ts3aanim .ka-door.focus .ka-ring{animation:none}
-  }
-  `;
-
-  function html(){
-    var doors=DOORS.map(function(d,i){
-      return '<div class="ka-door" data-i="'+i+'"><span class="ka-ring"></span><span class="k">'+d.k+'</span><span class="n">'+d.n+'</span><span class="t">'+d.t+'</span></div>';
-    }).join('');
-    /* Abzweige exakt ueber die Spaltenmitten: 4 Spalten von 6% bis 94% */
-    var drops='';
-    for(var i=0;i<4;i++){ drops+='<span class="drop" data-i="'+i+'" style="left:'+(11.774+i*25.484).toFixed(3)+'%"></span>'; }
-    return `
-<div class="ka-head">
-  <span class="ka-eyebrow">Dahinter steckt eins</span>
-  <h2 class="ka-title">Ein Kern, vier <span class="ts-gold">Türen</span>.</h2>
-  <p class="ka-sub">Alle vier Zugänge sprechen mit demselben Modell. Was sie unterscheidet, ist nur, wie tief sie in deine Arbeit hineinreichen dürfen.</p>
-</div>
-<div class="ka-wrap">
-  <div class="ka-stage">
-    <div class="ka-corewrap"><div class="ka-core"><b>Claude</b><span>Anthropic</span></div></div>
-    <div class="ka-corelbl">Ein Modell</div>
-    <div class="ka-rail">
-      <span class="stem"></span>
-      <span class="base"></span>
-      <span class="fill"><i></i></span>
-      <span class="ka-shine"></span>
-      ${drops}
-    </div>
-    <div class="ka-doors">${doors}</div>
-  </div>
-  <p class="ka-cap"></p>
-  <div class="ka-foot"><button class="ka-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function focusStep(root,i){
-    var doors=root.querySelectorAll('.ka-door'), drops=root.querySelectorAll('.ka-rail .drop');
-    for(var d=0;d<doors.length;d++){ doors[d].classList.toggle('focus', d===i); }
-    for(var s=0;s<drops.length;s++){ drops[s].classList.toggle('lit', s===i); }
-    var cap=root.querySelector('.ka-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
-  }
-
-  function play(root){
-    var wrap=root.querySelector('.ka-wrap'); if(!wrap) return;
-    clear();
-    wrap.classList.remove('on','built','moving');
-    wrap.classList.add('js');
-    var doors=root.querySelectorAll('.ka-door'), core=root.querySelector('.ka-core');
-    for(var d=0;d<doors.length;d++){ doors[d].classList.remove('lit','focus'); }
-    var reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduced){
-      wrap.classList.add('on','built');
-      for(var r=0;r<doors.length;r++) doors[r].classList.add('lit');
-      focusStep(root,0);
-      return;
-    }
-    /* PHASE 1 — schneller, eleganter Aufbau (~1,1s), Lichten NICHT am Caption-Takt */
-    void wrap.offsetWidth;
-    wrap.classList.add('on','moving');
-    if(core) core.style.transitionDelay='0s';
-    for(var i=0;i<doors.length;i++){
-      (function(n,el){ el.style.transitionDelay=(60+n*STAGGER)/1000+'s'; later(function(){ el.classList.add('lit'); }, 60+n*STAGGER); })(i,doors[i]);
-    }
-    /* PHASE 2 — fertig + lebendig */
-    later(function(){ wrap.classList.remove('moving'); wrap.classList.add('built'); },1500);
-    /* PHASE 3 — EIN Highlight-Durchlauf, danach ruht die Buehne */
-    for(var w=0;w<CAPS.length;w++){
-      (function(n){ later(function(){ focusStep(root,n); }, 1700+n*WALK); })(w);
-    }
-    later(function(){
-      var dd=root.querySelectorAll('.ka-door'); for(var q=0;q<dd.length;q++) dd[q].classList.remove('focus');
-      var dr=root.querySelectorAll('.ka-rail .drop'); for(var p=0;p<dr.length;p++) dr[p].classList.add('lit');
-    }, 1700+CAPS.length*WALK);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='ts3aanim'; el.innerHTML=html();
-    el.querySelector('.ka-replay').addEventListener('click',function(){ play(el); });
-    var doors=el.querySelectorAll('.ka-door');
-    for(var i=0;i<doors.length;i++){
-      (function(n){ doors[n].addEventListener('click',function(){
-        clear();
-        var w=el.querySelector('.ka-wrap'); w.classList.add('js','on','built'); w.classList.remove('moving');
-        var dd=el.querySelectorAll('.ka-door'); for(var q=0;q<dd.length;q++){ dd[q].classList.add('lit'); dd[q].style.transitionDelay='0s'; }
-        focusStep(el,n);
-      }); })(i);
-    }
-    return el;
-  }
-
-  function injectCSS(){ if(document.getElementById('ts3aanim-css'))return;
-    var s=document.createElement('style'); s.id='ts3aanim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts3aanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts3aanim')) return;
-    var anchor=document.getElementById('ts3a-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build();
-    anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.ka-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-    window.addEventListener('scroll',function(){ var w=document.querySelector('#ts3aanim .ka-wrap'); if(w && !w.classList.contains('js')){ var e=document.getElementById('ts3aanim'); var rr=e.getBoundingClientRect(); if(rr.top<window.innerHeight && rr.bottom>0) play(e); } },{passive:true});
-  }
-
-  document.addEventListener('visibilitychange',function(){
-    var w=document.querySelector('#ts3aanim .ka-wrap'); if(!w) return;
-    if(document.hidden){ w.classList.add('hid'); clear(); } else { w.classList.remove('hid'); }
-  });
-  window.__ts3aanimKill=function(){ clear(); };
-  window.__ts3aanim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.1 · Inhalts-Sektionen + Abschnitt 07 + Abschnitt 09 ---- */
-(function(){
-  if(window.__ts3arest) return;
-  function on(){ return /\/was-ist-claude-genau\/?$/.test(location.pathname); }
-
-  function mount(){
-    if(!on()) return;
-    if(!window.__ts3) return;
-    if(!document.getElementById('ts3aanim')) return;
-
-    window.__ts3.sec('ts3a-was','ts3aanim',
-      '<h3>Was hinter dem <span class="g">Namen</span> steckt</h3>'+
-      '<p class="lead">Drei Dinge solltest du wissen, bevor du das erste Mal etwas Ernsthaftes von Claude verlangst. Sie erklären, warum manches sofort funktioniert und anderes nicht.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Der Anbieter</span><div class="ts3-nm">Anthropic</div><hr>'+
-          '<p>Anthropic baut seit dem ersten Tag Modelle, die sich an Anweisungen halten. Deshalb ist Claude in diesem Kurs das Werkzeug für den Aufbau und nicht nur für den Chat.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Das Modell</span><div class="ts3-nm">Eine Familie, mehrere Größen</div><hr>'+
-          '<p>Claude ist nicht ein einzelnes Modell, sondern eine Reihe davon, vom schnellen kleinen bis zum langsamen gründlichen. Welche Größe wofür taugt, streifen wir in Lektion 3.4 und entscheiden es am echten Projekt in Modul 4.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Die Grenze</span><div class="ts3-nm">Es sieht nur, was du zeigst</div><hr>'+
-          '<p>Claude kennt deinen Betrieb nicht, bis du ihn zeigst, und es erinnert sich nach einem Neustart an nichts, solange du das nicht einrichtest. Und es kann sich irren. Wer nicht gegenliest, übernimmt Fehler.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Der dritte Punkt ist der wichtigste, und er bleibt den ganzen Kurs über gültig: <b>du bleibst verantwortlich</b>. Claude nimmt dir die Arbeit ab, nicht das Urteil darüber, ob das Ergebnis stimmt.</p>'
-    );
-
-    window.__ts3.sec('ts3a-zug','ts3a-was',
-      '<h3>Dein <span class="g">Zugang</span></h3>'+
-      '<p class="lead">Zwei Handgriffe, dann steht die Grundlage für alles Weitere. Du brauchst dafür kein Abo, das entscheidest du erst in Lektion 3.3.</p>'+
-      '<div class="ts3-do">'+
-        '<span class="ts3-eb">Jetzt du</span>'+
-        '<ol>'+
-          '<li>Konto anlegen auf <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. Nimm die Adresse, unter der du auch später arbeitest, ein Wechsel zieht sonst Abo und Verlauf mit sich.</li>'+
-          '<li>Desktop-App laden von <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> und einmal einloggen. Die App ist die Basis für alles, was in den nächsten Lektionen dazukommt.</li>'+
-          '<li>Stell eine erste Frage aus deinem echten Alltag, keine Testfrage. Du merkst schneller, was das Werkzeug taugt, wenn echte Arbeit dranhängt.</li>'+
-        '</ol>'+
-      '</div>'+
-      '<p class="ts3-close">Damit ist die Tür offen. In der nächsten Lektion klären wir, <b>welche der vier</b> du wann nimmst, damit du nicht bei jeder Aufgabe neu überlegen musst.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts3aemp', anchorId:'ts3a-zug', kind:'Einrichtung',
-      animTitle:'Dein', animGold:'erster Zugang',
-      steps:[{n:'01',l:'Konto anlegen'},{n:'02',l:'App installieren'},{n:'03',l:'Einloggen'},{n:'04',l:'Erste echte Frage'}],
-      intro:'Damit du später nicht umziehen musst, richte den Zugang gleich so ein, wie du ihn ein Jahr lang nutzen willst:',
-      points:[
-        'Leg das Konto mit deiner <b>Arbeits-Adresse</b> an, nicht mit einer schnellen Zweitadresse. Abo, Verlauf und später deine Projekte hängen daran.',
-        'Nimm die <b>Desktop-App</b>, nicht nur den Browser. Alles, was ab Modul 4 dazukommt, setzt auf ihr auf.',
-        'Bleib im ersten Durchgang beim kostenlosen Zugang. Welcher Plan zu dir passt, entscheidest du in <b>Lektion 3.3</b> mit den echten Zahlen vor dir.',
-        'Stell als Erstes eine Frage aus deinem Alltag. Eine erfundene Testfrage sagt dir nichts darüber, ob das Werkzeug dir wirklich Arbeit abnimmt.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts3anext',
-      learn:[
-        'Du weißt, dass hinter allen Oberflächen <b>dasselbe Modell</b> steckt.',
-        'Du kennst die vier Zugänge: <b>Chat, Cowork, Code</b> und die Schnittstelle.',
-        'Du kennst die Grenze: Claude sieht nur, <b>was du ihm zeigst</b>, und kann sich irren.',
-        'Du hast <b>Konto und Desktop-App</b> und bist bereit für die Auswahl.'
-      ],
-      next:'/welches-claude-wann-chatcoworkcodeapi'
-    });
-  }
-  window.__ts3arest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
+/* MODUL 3 · alter Block was-ist-claude-genau (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* ============================================================
    MODUL 3 · L3.2 "Welches Claude wann"  (/welches-claude-wann-chatcoworkcodeapi)
 
@@ -37663,6 +37317,403 @@ var TSISL_TEAM_ONB_V2=[
 /* · */
 
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
+
+/* ---- lib.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · Claude Grundlagen (November 2026) — Bibliothek __tsn3
+   Jede Seite meldet sich mit __tsn3.page({...}) an und wird als EIN Block
+   (#tsn3-<key>) vor .notion-root gesetzt: Hero, Einleitung, Erklaeranimation,
+   Inhalts-Sektionen, Empfehlungs-Kachel (07), Learnings + Weiter (09).
+   Robustheit: Endzustand = Basis-CSS, Startzustand nur hinter .js;
+   jeder Auftritt ueber tsReveal (IO + Scroll/Resize + 400ms-Intervall +
+   600/1600ms-Checks + hartes fire() nach 9s), nie IO allein.
+   Gestaltung: kurs.css, Zone NEUBAU MODUL 3.
+   ============================================================ */
+(function(){
+  if(window.__tsn3) return;
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
+  var IMG='https://tastyrob123.github.io/kurs-code/img/claude-grundlagen/';
+  var PAGES=[];
+  var ANIMS={};
+  var reduced=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+
+  /* ---------- Auftritt (Design-System Regel a) ---------- */
+  function reveal(el, cb, ratio){
+    var done=false, io=null, iv=null, r0=ratio||0.88;
+    function clean(){
+      window.removeEventListener('scroll',check); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ if(!el.isConnected){ clean(); return; } var r=el.getBoundingClientRect(); if(r.top < innerHeight*r0 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
+  /* ---------- Zeitleiste mit Abbruch ---------- */
+  function timeline(){
+    var ts=[];
+    return {
+      at:function(ms,fn){ ts.push(setTimeout(function(){ try{ fn(); }catch(e){} },ms)); },
+      clear:function(){ for(var i=0;i<ts.length;i++) clearTimeout(ts[i]); ts=[]; }
+    };
+  }
+
+  /* ---------- Platzhalter (Katalog 01: Bild folgt) ---------- */
+  function ph(label, w, h, kind){
+    w=w||1200; h=h||600;
+    var cx=w/2, cy=h*0.45, r=Math.min(w,h)*0.19;
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
+      +'<rect width="'+w+'" height="'+h+'" fill="#0b0d14"/>'
+      +'<circle cx="'+cx+'" cy="'+cy+'" r="'+(r*1.95)+'" fill="rgba(199,180,137,0.04)"/>'
+      +'<circle cx="'+cx+'" cy="'+cy+'" r="'+(r*1.33)+'" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="'+cx+'" y="'+(cy+10)+'" text-anchor="middle" font-family="Georgia,serif" font-size="'+Math.round(h*0.05)+'" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="'+cx+'" y="'+(h*0.83)+'" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="'+Math.round(h*0.035)+'" letter-spacing="5" fill="rgba(255,255,255,0.4)">'+(kind||'3-LAPTOP-COVER')+'</text>'
+      +'<text x="'+cx+'" y="'+(h*0.88)+'" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="'+Math.round(h*0.02)+'" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  /* ---------- HTML-Bausteine ---------- */
+  var ICO_COPY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>';
+  var ICO_REPLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>';
+  var ICO_NEXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  var H={
+    head:function(eb, title, sub){
+      return '<div class="tsn3-head tsn3-rv">'+(eb?'<div class="tsn3-eb">'+eb+'</div>':'')+'<h2 class="tsn3-h2">'+title+'</h2>'+(sub?'<p class="tsn3-sub">'+sub+'</p>':'')+'</div>';
+    },
+    sec:function(o){
+      return '<section class="tsn3-sec'+(o.wide?' wide':'')+'"'+(o.id?' id="'+o.id+'"':'')+'>'
+        +'<h3 class="tsn3-rv">'+o.title+'</h3>'
+        +(o.lead?'<p class="lead tsn3-rv">'+o.lead+'</p>':'')
+        +'<div class="tsn3-rv">'+(o.body||'')+'</div></section>';
+    },
+    cards:function(list, cols){
+      return '<div class="tsn3-cards c'+(cols||list.length)+'">'+list.map(function(c){
+        return '<div class="tsn3-card">'+(c.img?'<img class="cimg" src="'+c.img+'" alt="'+(c.alt||'')+'" loading="lazy" decoding="async">':'')
+          +(c.eb?'<span class="ceb">'+c.eb+'</span>':'')+'<div class="cnm">'+c.nm+'</div><hr>'
+          +(Array.isArray(c.p)?c.p.map(function(x){return '<p>'+x+'</p>';}).join(''):'<p>'+c.p+'</p>')
+          +(c.ft?'<p class="cft">'+c.ft+'</p>':'')+'</div>';
+      }).join('')+'</div>';
+    },
+    steps:function(list, eb){
+      return '<div class="tsn3-do"><span class="ceb">'+(eb||'Jetzt du')+'</span><ol>'+list.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol></div>';
+    },
+    code:function(cmd, label, note){
+      return '<div class="tsn3-code"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="lbl">'+(label||'Terminal')+'</span>'
+        +'<button class="tsn3-copy" type="button">'+ICO_COPY+'<span>Kopieren</span></button></div><pre>'+esc(cmd)+'</pre>'+(note?'<div class="note">'+note+'</div>':'')+'</div>';
+    },
+    prompt:function(text, label, note){
+      return '<div class="tsn3-code prompt"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="lbl">'+(label||'Prompt zum Kopieren')+'</span>'
+        +'<button class="tsn3-copy" type="button">'+ICO_COPY+'<span>Kopieren</span></button></div><pre>'+esc(text)+'</pre>'+(note?'<div class="note">'+note+'</div>':'')+'</div>';
+    },
+    note:function(text, eb, warn){
+      return '<div class="tsn3-note'+(warn?' warn':'')+'"><span class="ceb">'+(eb||'Die Merkregel')+'</span><p>'+text+'</p></div>';
+    },
+    table:function(heads, rows){
+      return '<div class="tsn3-tblw"><table class="tsn3-tbl"><thead><tr>'+heads.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>'
+        +rows.map(function(r){ return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
+    },
+    close:function(html){ return '<p class="tsn3-close">'+html+'</p>'; },
+    fig:function(src, alt, cap){ return '<figure class="tsn3-fig"><img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async">'+(cap?'<figcaption>'+cap+'</figcaption>':'')+'</figure>'; },
+    kbd:function(k){ return '<span class="tsn3-kbd">'+k+'</span>'; }
+  };
+
+  /* ---------- Abschnitt 07 ---------- */
+  function empHTML(e){
+    return '<div class="tsn3-emp">'
+      +'<div class="emp-grid"><svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'
+      +'<div class="emp-anim"><div class="emp-anim-hd">'+e.animTitle+' <span>'+e.animGold+'</span></div>'
+      +e.steps.map(function(s,i){ return '<div class="emp-step"><span class="emp-step-n">'+('0'+(i+1)).slice(-2)+'</span><span class="emp-step-l">'+s+'</span></div>'; }).join('')
+      +'</div><div class="emp-text"><h3 class="emp-h">Empfehlung zur <span class="eg">'+e.kind+'</span></h3><p class="emp-intro">'+e.intro+'</p>'
+      +'<ol class="emp-ol">'+e.points.map(function(p){ return '<li>'+p+'</li>'; }).join('')+'</ol></div></div></div>';
+  }
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2, dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+      void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function empSetup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li'), idx=-1, iv=null;
+    function tick(){
+      idx=(idx+1)%steps.length;
+      for(var i=0;i<steps.length;i++){ steps[i].classList.toggle('on',i===idx); if(lis[i]) lis[i].classList.toggle('lit',i===idx); }
+      requestAnimationFrame(function(){ empDraw(el); });
+    }
+    function start(){ if(iv||reduced) return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    reveal(el, function(){ el.classList.add('in'); start(); });
+    if(reduced){ steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(el.classList.contains('in')&&el.isConnected) start(); });
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ empDraw(el); }); });
+  }
+
+  /* ---------- Abschnitt 09 ---------- */
+  function nextA(href){ return '<a id="ts-next" href="'+href+'">'+(href.indexOf('/modul-')===0?'Nächstes Modul':'Nächste Lektion')+' '+ICO_NEXT+'</a>'; }
+  function learnHTML(l){
+    return '<div class="tsn3-learn"><div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'
+      +'<div class="tsl-grid">'+l.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'
+      +'<div id="ts-next-wrap">'+nextA(l.next)+'</div></div>';
+  }
+  /* Ein Weiter-Button je Seite: fremde Wraps raus, eigener wird bei Verlust neu gebaut.
+     Host wird bei JEDEM Durchlauf frisch geholt (Lernpunkt 02.08.2026, dedupe mit Closure). */
+  function guardNext(cfg){
+    var root=document.getElementById('tsn3-'+cfg.key); if(!root) return;
+    var host=root.querySelector('.tsn3-learn'); if(!host) return;
+    var all=document.querySelectorAll('#ts-next-wrap');
+    for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML=nextA(cfg.learn.next); host.appendChild(w); }
+  }
+
+  /* ---------- Erklaeranimation ---------- */
+  function animHTML(a){
+    return '<section class="tsn3-anim" id="'+a.id+'">'+H.head(a.eb, a.title, a.sub)
+      +'<div class="tsn3-stage tsn3-rv">'+a.stage+'</div>'
+      +'<p class="tsn3-cap" aria-live="polite">'+(a.capEnd||'')+'</p>'
+      +'<div class="tsn3-foot"><button class="tsn3-replay" type="button">'+ICO_REPLAY+'<span>Neu abspielen</span></button></div></section>';
+  }
+  function animSetup(cfg, root){
+    var a=cfg.anim; if(!a) return;
+    var el=root.querySelector('#'+a.id); if(!el) return;
+    var def=ANIMS[a.id]; if(!def) return;
+    var T=timeline(), capEl=el.querySelector('.tsn3-cap');
+    var api={
+      T:T, el:el, reduced:reduced,
+      cap:function(html){ if(!capEl) return; capEl.classList.add('swap'); T.at(260,function(){ capEl.innerHTML=html; capEl.classList.remove('swap'); }); },
+      capNow:function(html){ if(capEl) capEl.innerHTML=html; }
+    };
+    function end(){ T.clear(); el.classList.remove('js','run'); el.classList.add('done'); if(def.end) def.end(el, api); if(a.capEnd) api.capNow(a.capEnd); }
+    function play(){
+      T.clear(); el.classList.remove('done','hid'); el.classList.add('js');
+      if(def.reset) def.reset(el, api);
+      void el.offsetWidth;
+      el.classList.add('run');
+      def.play(el, api, end);
+    }
+    window['__tsn3Kill_'+a.id.replace(/-/g,'_')]=end;
+    var rp=el.querySelector('.tsn3-replay'); if(rp) rp.addEventListener('click', play);
+    document.addEventListener('visibilitychange',function(){ if(document.hidden && el.classList.contains('run')){ el.classList.add('hid'); end(); } });
+    if(def.setup) def.setup(el, api);
+    if(reduced){ end(); return; }
+    el.classList.add('js');
+    if(def.reset) def.reset(el, api);
+    reveal(el.querySelector('.tsn3-stage')||el, play, 0.78);
+  }
+
+  /* ---------- Kopieren ---------- */
+  function copyText(t, btn){
+    function ok(){ btn.classList.add('ok'); var s=btn.querySelector('span'); if(s){ s.textContent='Kopiert'; } setTimeout(function(){ btn.classList.remove('ok'); if(s) s.textContent='Kopieren'; },1600); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok, function(){ fallback(); }); }
+    else fallback();
+    function fallback(){ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); ok(); }catch(e){} document.body.removeChild(ta); }
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('.tsn3-copy'); if(!b) return;
+    var box=b.closest('.tsn3-code'); var pre=box&&box.querySelector('pre'); if(!pre) return;
+    copyText(pre.textContent, b);
+  });
+
+  /* ---------- Seite bauen ---------- */
+  function build(cfg){
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    var nr=sc.querySelector('.notion-root'); if(!nr) return;
+    var root=document.createElement('div');
+    root.id='tsn3-'+cfg.key; root.className='tsn3 js';
+    var h=cfg.hero;
+    var html='<div class="ts-hero'+(h.two?' two':'')+'"><img class="ts-hero__img" alt="'+h.alt+'" src="'+(h.img||ph(h.eyebrow))+'" fetchpriority="high" decoding="async">'
+      +'<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" decoding="async">'
+      +'<div class="ts-hero__eyebrow">'+h.eyebrow+'</div><h1 class="ts-hero__title">'+h.title+'</h1></div></div>'
+      +'<div class="tsn3-body">'+cfg.intro+'</div>'
+      +(cfg.anim?animHTML(cfg.anim):'')
+      +(cfg.body?cfg.body(H, IMG, ph):'')
+      +(cfg.emp?empHTML(cfg.emp):'')
+      +(cfg.learn?learnHTML(cfg.learn):'');
+    root.innerHTML=html;
+    sc.insertBefore(root, nr);
+    hideNotion(sc);
+    if(cfg.tab) document.title=cfg.tab;
+    var rvs=root.querySelectorAll('.tsn3-rv');
+    for(var i=0;i<rvs.length;i++){ (function(x){ reveal(x,function(){ x.classList.add('in'); }); })(rvs[i]); }
+    var em=root.querySelector('.tsn3-emp'); if(em) empSetup(em);
+    var le=root.querySelector('.tsn3-learn'); if(le) reveal(le,function(){ le.classList.add('in'); });
+    animSetup(cfg, root);
+    if(cfg.after) try{ cfg.after(root, {reveal:reveal, timeline:timeline, reduced:reduced}); }catch(e){}
+    guardNext(cfg);
+    setTimeout(function(){ guardNext(cfg); },1500); setTimeout(function(){ guardNext(cfg); },4000); setTimeout(function(){ guardNext(cfg); },9000);
+  }
+  function hideNotion(sc){
+    var nr=sc.querySelector('.notion-root'); if(nr && nr.style.display!=='none') nr.style.display='none';
+    var nh=document.querySelector('.notion-header.page'); if(nh && nh.style.display!=='none') nh.style.display='none';
+  }
+  function mountAll(){
+    var p=location.pathname;
+    for(var i=0;i<PAGES.length;i++){
+      var cfg=PAGES[i], id='tsn3-'+cfg.key, ex=document.getElementById(id);
+      if(!cfg.re.test(p)){ if(ex && ex.parentNode) ex.parentNode.removeChild(ex); continue; }
+      if(ex){ var sc=document.querySelector('.super-content'); if(sc) hideNotion(sc); guardNext(cfg); if(cfg.tab && document.title!==cfg.tab) document.title=cfg.tab; continue; }
+      build(cfg);
+    }
+  }
+  var booted=false;
+  function boot(){
+    if(booted) return; booted=true;
+    mountAll();
+    document.addEventListener('DOMContentLoaded', mountAll);
+    window.addEventListener('scroll', function(){ for(var i=0;i<PAGES.length;i++) if(PAGES[i].re.test(location.pathname)) guardNext(PAGES[i]); }, {passive:true});
+    window.__tsMO(mountAll).observe(document.documentElement,{childList:true,subtree:true});
+  }
+
+  window.__tsn3={
+    IMG:IMG, LOGO:LOGO, H:H, ph:ph, reveal:reveal, timeline:timeline,
+    anim:function(id, def){ ANIMS[id]=def; },
+    page:function(cfg){ PAGES.push(cfg); if(booted) mountAll(); else setTimeout(boot,0); }
+  };
+})();
+
+/* ---- l01-was-claude-ist.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.1 "Was Claude ist"  (/was-ist-claude-genau)
+   Erklaeranimation #tsn3-a01 "Claude sieht nur, was im Licht liegt."
+   Ein Pass mit vier gleich grossen Objekt-Kacheln (Fotoserie Tasty Studios),
+   darueber eine Lampenschiene, darueber das Lese-Fenster von Claude.
+   Die Lampe faehrt von Kachel zu Kachel, die beleuchtete Kachel wird hell,
+   im Fenster tippt Claude, was es damit tun kann. Die vierte Kachel (Kuehlhaus)
+   bleibt dunkel: was du nicht zeigst, gibt es fuer Claude nicht.
+   Alle Kacheln gleich gross, eine Achse (min(860px,100%)), Moebel ab Beat 0 ruhig.
+   ============================================================ */
+(function(){
+  var A='https://tastyrob123.github.io/kurs-code/img/';
+  var BEATS=[
+    {img:A+'gerichte/blattsalat.webp', nm:'Speisekarte', out:'Liest die Karte und listet Gerichte ohne Allergenangabe.', cap:'Zeigst du Claude deine <b>Speisekarte</b>, kann es sie lesen, prüfen und neu formulieren.'},
+    {img:A+'ops/partner/lieferung.webp', nm:'Lieferschein', out:'Vergleicht die Preise mit der letzten Lieferung.', cap:'Gibst du ihm einen <b>Lieferschein</b>, rechnet es mit genau diesen Zahlen und nicht mit geschätzten.'},
+    {img:A+'ops/team/mitarbeiterhandbuch.webp', nm:'Handbuch', out:'Schreibt aus dem Handbuch einen Einarbeitungsplan.', cap:'Liegt dein <b>Handbuch</b> vor, wird daraus ein Einarbeitungsplan für die neue Servicekraft.'},
+    {img:A+'ops/inventur/schockfroster.webp', nm:'Kühlhaus', out:'Kein Einblick. Was hier liegt, weiß Claude nicht.', cap:'Was du <b>nicht zeigst</b>, gibt es für Claude nicht. Fragst du trotzdem danach, rät es, und genau dort entstehen Fehler.', dark:true}
+  ];
+  var stage='<div class="l1-wrap">'
+    +'<div class="l1-panel"><div class="l1-ph"><span class="l1-dot"></span>Claude arbeitet mit dem, was du zeigst</div>'
+    +'<ol class="l1-out">'+BEATS.map(function(b,i){ return '<li class="'+(b.dark?'no':'')+'"><span class="k">'+b.nm+'</span><span class="t" data-t="'+b.out+'">'+b.out+'</span></li>'; }).join('')+'</ol></div>'
+    +'<div class="l1-rail"><span class="l1-lamp"><i></i></span></div>'
+    +'<div class="l1-pass">'+BEATS.map(function(b,i){ return '<button type="button" class="l1-tile'+(b.dark?' dark':' lit')+'" data-i="'+i+'"><span class="l1-img"><img src="'+b.img+'" alt="'+b.nm+'" loading="lazy" decoding="async"></span><span class="l1-nm">'+b.nm+'</span></button>'; }).join('')+'</div>'
+    +'</div>';
+
+  window.__tsn3 && __tsn3.anim('tsn3-a01',{
+    reset:function(el){
+      el.querySelectorAll('.l1-tile').forEach(function(t){ t.classList.remove('lit','on'); });
+      el.querySelectorAll('.l1-out li').forEach(function(li){ li.classList.remove('show'); var t=li.querySelector('.t'); t.textContent=''; });
+      lampTo(el,-1);
+    },
+    play:function(el, api, end){
+      var tiles=el.querySelectorAll('.l1-tile'), lis=el.querySelectorAll('.l1-out li'), lamp=el.querySelector('.l1-lamp');
+      var STEP=3600;
+      BEATS.forEach(function(b,i){
+        var t0=500+i*STEP;
+        api.T.at(t0,function(){ lampTo(el,i); tiles.forEach(function(t){ t.classList.remove('on'); }); api.cap(b.cap); });
+        api.T.at(t0+700,function(){ tiles[i].classList.add('on'); if(!b.dark) tiles[i].classList.add('lit'); lis[i].classList.add('show'); type(lis[i].querySelector('.t'), b.out, api); });
+      });
+      api.T.at(500+BEATS.length*STEP+400, end);
+    },
+    end:function(el){
+      el.querySelectorAll('.l1-tile').forEach(function(t,i){ t.classList.remove('on'); if(!BEATS[i].dark) t.classList.add('lit'); });
+      el.querySelectorAll('.l1-out li').forEach(function(li,i){ li.classList.add('show'); li.querySelector('.t').textContent=BEATS[i].out; });
+      lampTo(el,-1);
+    },
+    setup:function(el, api){
+      el.querySelectorAll('.l1-tile').forEach(function(t){ t.addEventListener('click',function(){
+        var i=+t.getAttribute('data-i'); var k=window['__tsn3Kill_tsn3_a01']; if(k) k();
+        lampTo(el,i);
+        el.querySelectorAll('.l1-tile').forEach(function(x){ x.classList.remove('on'); }); t.classList.add('on');
+        api.capNow(BEATS[i].cap);
+      }); });
+    }
+  });
+  function lampTo(el,i){ var l=el.querySelector('.l1-lamp'); if(i<0){ l.classList.remove('on'); return; } l.style.left=(12.5+i*25)+'%'; l.classList.add('on'); }
+  /* Tipp-Effekt: Zeichen fuer Zeichen, Endwert garantiert ueber die Zeitleiste (nicht rAF) */
+  function type(node, txt, api){
+    node.textContent='';
+    var n=0, per=Math.max(16, Math.min(34, 1500/txt.length));
+    for(var k=1;k<=txt.length;k++){ (function(k){ api.T.at(k*per,function(){ node.textContent=txt.slice(0,k); }); })(k); }
+    api.T.at(txt.length*per+60,function(){ node.textContent=txt; });
+  }
+
+  window.__tsn3 && __tsn3.page({
+    key:'l01', re:/\/(?:lektionen\/)?was-ist-claude-genau\/?$/, tab:'L 3.1 · Was Claude ist',
+    hero:{eyebrow:'L 3.1', title:'Was <span class="ts-gold">Claude</span> ist', alt:'Was Claude ist: ein Sprachmodell von Anthropic, das mit dem arbeitet, was du ihm zeigst'},
+    intro:'<p>Claude ist ein Sprachmodell von <b>Anthropic</b>. Du gibst ihm Text, Fotos oder Dateien, und es liest, rechnet, schreibt und erledigt Arbeit, so weit du es lässt. Im Betrieb heißt das: die Speisekarte überarbeiten, einen Lieferschein gegen die letzte Rechnung prüfen, einem Gast auf eine Beschwerde antworten.</p>'
+      +'<p>In dieser Lektion klären wir, was hinter dem Namen steckt, welche Modelle es gibt und wo die Grenze liegt. Die wichtigste gleich vorweg: Claude kennt deinen Betrieb nicht. Es sieht nur, was du ihm zeigst.</p>',
+    anim:{id:'tsn3-a01', eb:'Die Grenze', title:'Claude sieht nur, was im <span class="g">Licht</span> liegt.',
+      sub:'Alles, was du zeigst, kann es lesen und verarbeiten. Was du nicht zeigst, gibt es für Claude nicht, egal wie wichtig es für deinen Betrieb ist.',
+      stage:stage,
+      capEnd:'Daraus folgt die Regel für den ganzen Kurs: Je mehr du zeigst, desto genauer wird die Arbeit. <b>Was</b> du zeigst, entscheidest du.'},
+    body:function(H){
+      return H.sec({id:'tsn3-l01-name', title:'Was hinter dem <span class="g">Namen</span> steckt',
+          lead:'Drei Dinge reichen, um Claude richtig einzuordnen. Sie erklären, warum manches sofort klappt und anderes nicht.',
+          body:'<p><strong class="lead">Ein Modell, das liest und schreibt.</strong>Claude wurde mit sehr viel Text trainiert und kann deshalb Sprache verstehen und selbst formulieren, auf Deutsch genauso wie auf Englisch. Es liest auch Bilder: das Foto eines Kassenbons, eine abfotografierte Rechnung, ein Bild vom Wochenaushang.</p>'
+            +'<p><strong class="lead">Ein Modell, das Werkzeuge benutzt.</strong>Allein im Chat kann Claude nur antworten. Gibst du ihm Zugriff auf einen Ordner, auf deinen Browser oder auf deine Programme, kann es Dateien anlegen, Tabellen füllen und Seiten bedienen. Wie viel Zugriff du gibst, bestimmt, wie viel Arbeit es dir abnimmt. Darum geht es ab Lektion 3.4.</p>'
+            +'<p><strong class="lead">Ein Modell ohne Erinnerung an deinen Betrieb.</strong>Claude weiß nicht, wie viele Plätze du hast, welcher Lieferant montags kommt oder dass der Fisch freitags teurer ist. Alles, was es wissen soll, musst du ihm einmal zeigen. Wie du das dauerhaft hinterlegst, damit du es nicht jedes Mal neu erklären musst, lernst du mit dem Gedächtnis in Lektion 3.4 und der CLAUDE.md in Lektion 3.9.</p>'})
+        +H.sec({id:'tsn3-l01-modelle', wide:true, title:'Vier Modelle, eine <span class="g">Familie</span>',
+          lead:'Claude ist kein einzelnes Modell, sondern eine Reihe davon. Schnelle und günstige für einfache Arbeit, gründliche für schwere. Stand 1. November 2026 sind das diese vier.',
+          body:H.cards([
+            {eb:'Am schnellsten', nm:'Haiku 5.5', p:'Für große Mengen einfacher Arbeit: hundert Rechnungen nach Lieferant sortieren, Daten aus Lieferscheinen auslesen.', ft:'Auch im kostenlosen Plan'},
+            {eb:'Der Alltag', nm:'Sonnet 5.5', p:'Schnell und klug genug für das meiste, was im Betrieb anfällt: Texte, Antworten, kleine Auswertungen.', ft:'Auch im kostenlosen Plan'},
+            {eb:'Der Standard', nm:'Opus 5.5', p:'Für lange, mehrstufige Arbeit. In Claude Code ist es seit Herbst 2026 das voreingestellte Modell, auch im Pro-Plan.', ft:'Ab Pro'},
+            {eb:'Das stärkste', nm:'Fable 5.1', p:'Für Aufgaben, die größer sind als eine Sitzung. Muss bewusst gewählt werden und verbraucht dein Kontingent am schnellsten.', ft:'Pro über Nutzungsguthaben, Max und Ultra bis zur Hälfte des Wochenlimits'}
+          ],4)
+          +H.note('Du musst nicht bei jeder Aufgabe ein Modell wählen. Die Voreinstellung passt fast immer. Wann sich der Wechsel lohnt und wie du die Denk-Tiefe einstellst, zeige ich dir in Lektion 3.11.')})
+        +H.sec({id:'tsn3-l01-grenze', wide:true, title:'Was Claude im Betrieb <span class="g">kann</span>, und was nicht',
+          lead:'Die Liste links wird im Lauf des Moduls länger. Die Liste rechts bleibt, egal welchen Plan du hast.',
+          body:H.cards([
+            {eb:'Kann', nm:'Mit deinem Material arbeiten', p:['Lieferscheine, Rechnungen, Speisekarten und Dienstpläne lesen, auch als Foto oder PDF.','Mit deinen Zahlen rechnen: Wareneinsatz, Portionskosten, Preisvergleich zwischen zwei Lieferungen.','Texte schreiben, die zu deinem Haus passen: Karte, Stellenanzeige, Antwort auf eine Bewertung.','Mit Zugriff auch selbst handeln: Dateien anlegen, Tabellen füllen, im Browser Formulare ausfüllen.']},
+            {eb:'Grenze', nm:'Dein Urteil ersetzen', p:['Claude kennt deinen Betrieb nur so weit, wie du ihn gezeigt hast.','Es kann sich irren, auch wenn die Antwort sicher klingt. Bei Zahlen und Allergenen ist das kein Schönheitsfehler.','Es entscheidet nichts für dich. Was rausgeht, an Gäste, an Lieferanten, ans Team, prüfst du.','Gästedaten und Personalakten gehören nur dann hinein, wenn du weißt, wo sie landen. Das klären wir in Lektion 3.4.']}
+          ],2)
+          +H.note('Alles, was Gäste essen oder bezahlen, liest du gegen: <b>Allergene, Preise, Mengen</b>. Claude nimmt dir die Arbeit ab, das Urteil darüber, ob es stimmt, bleibt bei dir.','Die Merkregel')})
+        +H.sec({id:'tsn3-l01-start', title:'Dein <span class="g">Zugang</span>',
+          lead:'Zwei Handgriffe, dann steht die Grundlage. Ein Abo brauchst du dafür noch nicht, das entscheidest du in Lektion 3.3.',
+          body:H.steps([
+            'Leg dein Konto auf <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> an. Nimm die Adresse, unter der du auch in einem Jahr noch arbeitest, Abo, Verlauf und Projekte hängen daran.',
+            'Lade die Desktop-App von <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> und melde dich einmal an. Sie ist der Ort, an dem wir ab Lektion 3.4 arbeiten.',
+            'Stell eine erste Frage aus deinem echten Alltag. Am besten mit einem Dokument, das du ohnehin gerade auf dem Tisch hast. Der Prompt unten ist ein guter Anfang.'
+          ])
+          +H.prompt('Hier ist meine aktuelle Speisekarte. Prüf sie auf Rechtschreibung, auf Beschreibungen, die ein Gast nicht versteht, und auf Gerichte ohne Allergenangabe. Ändere noch nichts, sondern liste mir alles auf, was dir auffällt.','Dein erster Prompt','Karte als PDF oder Foto ins Eingabefeld ziehen, dann den Text darunter einfügen.')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Dein', animGold:'erster Zugang',
+      steps:['Konto anlegen','App laden','Echtes Dokument','Ergebnis prüfen'],
+      intro:'Richte den Zugang gleich so ein, wie du ihn ein Jahr lang nutzen willst:',
+      points:['Leg das Konto mit deiner <b>Arbeits-Adresse</b> an. Abo, Verlauf und später deine Projekte hängen daran, ein Umzug kostet dich alles drei.',
+        'Arbeite in der <b>Desktop-App</b>, nicht nur im Browser. Ordner, Aufgaben und Claude Code laufen über sie.',
+        'Starte mit einem <b>echten Dokument</b> aus deinem Betrieb. Eine erfundene Testfrage sagt dir nichts darüber, ob dir das Werkzeug Arbeit abnimmt.',
+        'Lies das erste Ergebnis <b>Zeile für Zeile</b> gegen. So lernst du schnell, wo Claude sicher ist und wo du genauer hinschauen musst.']},
+    learn:{learn:['Du weißt, dass Claude ein <b>Sprachmodell</b> von Anthropic ist, das liest, rechnet und schreibt.',
+        'Du kennst die vier Modelle: <b>Haiku, Sonnet, Opus</b> und Fable.',
+        'Du kennst die Grenze: Claude sieht nur, <b>was du zeigst</b>, und kann sich irren.',
+        'Du hast <b>Konto und Desktop-App</b> und eine erste echte Aufgabe gestellt.'],
+      next:'/welches-claude-wann-chatcoworkcodeapi'}
+  });
+})();
+
 /* <<< NEUBAU MODUL 3 — ENDE <<< */
 /* · */
 /* · */
