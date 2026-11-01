@@ -35542,8 +35542,10 @@ window.__tsn4Boot && window.__tsn4Boot();
       var stage=qs(art,'#tsn6-stage'), capEl=qs(art,'.tsn6-cap');
       animCSS(L.anim.key);
       var inst=ANIM[L.anim.key].run(stage,function(html){ capEl.innerHTML=html; });
-      reveal(stage,function(){ if(!REDUCED && inst && inst.play) inst.play(); },.25);
-      var rb=qs(art,'.tsn6-replay button'); rb.addEventListener('click',function(){ if(inst){ inst.reset(); if(!REDUCED) inst.play(); } });
+      /* Startzustand ohne Uebergang setzen, sonst faehrt die Buehne sichtbar rueckwaerts in ihre Ausgangslage */
+      function go(){ if(!inst||REDUCED) return; stage.classList.add('tsn6-nt'); inst.play(); void stage.offsetWidth; setTimeout(function(){ stage.classList.remove('tsn6-nt'); },60); }
+      reveal(stage,go,.25);
+      var rb=qs(art,'.tsn6-replay button'); rb.addEventListener('click',function(){ if(inst){ inst.reset(); go(); } });
     } else { var rp=qs(art,'.tsn6-replay'); if(rp) rp.remove(); }
     var emp=qs(art,'.tsn6-emp'); if(emp) empWire(emp);
     var ln=qs(art,'.tsn6-learn'); if(ln) reveal(ln,function(){ ln.classList.add('in'); },.15);

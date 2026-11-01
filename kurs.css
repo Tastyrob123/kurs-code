@@ -3506,6 +3506,8 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6-phone .scr::before{content:"";position:absolute;top:8px;left:50%;width:84px;height:22px;border-radius:12px;background:#000;transform:translateX(-50%);z-index:9}
 .tsn6-mono{display:inline-block;font:600 13px/1.5 var(--mono);letter-spacing:.01em;color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.28);border-radius:7px;padding:1px 7px}
 
+.tsn6-nt,.tsn6-nt *{transition:none!important}
+
 /* <<< NEUBAU MODUL 6 — ENDE <<< */
 /* · */
 /* · */
