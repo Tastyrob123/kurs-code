@@ -64,7 +64,7 @@
   .tsn4 .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
   .tsn4 .ts-body p:last-child{margin-bottom:0}
   .tsn4 .ts-body b{color:#c7b489;font-weight:600}
-  .tsn4-sec{max-width:860px;margin:84px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};color:#fff;box-sizing:border-box}
+  .tsn4-sec{width:100%;max-width:860px;margin:84px auto 0;padding:0 clamp(24px,4vw,56px);font-family:${SANS};color:#fff;box-sizing:border-box}
   .tsn4-sec *{box-sizing:border-box}
   .tsn4-sec .tsn4-eb{display:flex;justify-content:center;align-items:center;gap:9px;font:600 13px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
   .tsn4-sec .tsn4-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
