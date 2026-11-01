@@ -22287,10 +22287,10 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   (function(){
-    if(mount()) return;
+    mount();
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ clearInterval(iv); } }); /* Dauerbeobachtung: super.so-Hydration raeumt den Block nach dem ersten Mount ab (Fund 01.11.2026) */
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23172,7 +23172,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ clearInterval(iv); } }); /* Dauerbeobachtung: super.so-Hydration raeumt den Block nach dem ersten Mount ab (Fund 01.11.2026) */
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23350,7 +23350,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ clearInterval(iv); } }); /* Dauerbeobachtung: super.so-Hydration raeumt den Block nach dem ersten Mount ab (Fund 01.11.2026) */
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23568,7 +23568,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ clearInterval(iv); } }); /* Dauerbeobachtung: super.so-Hydration raeumt den Block nach dem ersten Mount ab (Fund 01.11.2026) */
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
@@ -23661,7 +23661,7 @@ var TSISL_TEAM_ONB_V2=[
        Reaktion, PLUS Dauerbeobachtung als letztes Netz (kein Abbruch mehr). */
     var tries=0;
     var iv=setInterval(function(){ tries++; if(mount()||tries>=40){ clearInterval(iv); } },300);
-    var mo=window.__tsMO(function(){ if(mount()){ mo.disconnect(); clearInterval(iv); } });
+    var mo=window.__tsMO(function(){ if(mount()){ clearInterval(iv); } }); /* Dauerbeobachtung: super.so-Hydration raeumt den Block nach dem ersten Mount ab (Fund 01.11.2026) */
     mo.observe(document.documentElement,{childList:true,subtree:true});
   })();
 })();
