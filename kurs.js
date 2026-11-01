@@ -26291,6 +26291,8 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   /* ---------- Platzhalter-Cover (Katalog 01: echtes Cover folgt) ---------- */
+  /* Hero-Cover: echtes 3-MacBook-Cover (assets/sceu4c.png) mit Aufnahmen der eigenen Seite, img/modul-1/cover-<k>.webp, 2360x936 */
+  function COV(k){ return 'https://tastyrob123.github.io/kurs-code/img/modul-1/cover-'+k+'.webp'; }
   function phHero(label){
     var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
       +'<rect width="1200" height="600" fill="#0b0d14"/>'
@@ -26721,7 +26723,7 @@ var TSISL_TEAM_ONB_V2=[
     var def=current(); if(!def) return;
     var sc=document.querySelector('.super-content'); if(!sc) return;
     addCSS('tsn1-css',CSS);
-    var h=hero({img:def.hero.img||phHero(def.hero.label), alt:def.hero.alt, eyebrow:def.hero.eyebrow, title:def.hero.title, two:def.hero.two});
+    var h=hero({img:def.hero.img||(def.hero.cov?COV(def.hero.cov):phHero(def.hero.label)), alt:def.hero.alt, eyebrow:def.hero.eyebrow, title:def.hero.title, two:def.hero.two});
     if(!h) return;
     if(def.hideRoot){ var nrt=sc.querySelector('.notion-root'); if(nrt && nrt.style.display!=='none') nrt.style.display='none'; }
     var id='tsn1-'+def.key;
@@ -27213,7 +27215,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'m1', hideRoot:true,
       re:/\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/,
-      hero:{label:'M 1', eyebrow:'Tasty Studios', title:'<span class="ts-red">Modul 1</span><br>Notion-Grundlagen', alt:'Modul 1: Notion-Grundlagen für die Backoffice-Vorlage', two:true},
+      hero:{label:'M 1', cov:'m1', eyebrow:'Tasty Studios', title:'<span class="ts-red">Modul 1</span><br>Notion-Grundlagen', alt:'Modul 1: Notion-Grundlagen für die Backoffice-Vorlage', two:true},
       intro:
         '<p>Mit diesem Kurs bekommst du dein Backoffice als fertige Notion-Vorlage: Inventur, Zutaten, Rezepturen, Gerichte, alles schon verbunden und durchgerechnet. Damit du sie mit Zuversicht benutzt, lernst du in diesem Modul das Handwerk dahinter.</p>'+
         '<p>In zehn Lektionen gehen wir von der ersten Seite bis zur Fehlersuche. Jede Lektion zeigt dir, wo das Gelernte in der Vorlage steckt, und geübt wird in deiner eigenen <b>Probeküche</b>, nie am Original. Vorwissen brauchst du keines, und jede Lektion endet mit etwas, das du sofort in deinem Betrieb benutzen kannst.</p>',
@@ -27368,7 +27370,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l1',
       re:/\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/,
-      hero:{label:'L 1.1', eyebrow:'L 1.1', title:'Alles ist eine <span class="ts-gold">Seite</span>.', alt:'Notion-Grundlagen: Seiten, Blöcke und der Seitenbaum deines Betriebs'},
+      hero:{label:'L 1.1', cov:'l1', eyebrow:'L 1.1', title:'Alles ist eine <span class="ts-gold">Seite</span>.', alt:'Notion-Grundlagen: Seiten, Blöcke und der Seitenbaum deines Betriebs'},
       intro:
         '<p>Bevor du in der Vorlage die erste Zahl einträgst, lohnt sich ein Blick darauf, wie Notion gebaut ist. Alles, was du dort siehst, ist eine <b>Seite</b>: die Startseite deines Backoffice, die Inventurliste und jeder einzelne Artikel darin. Jede Seite wiederum besteht aus <b>Blöcken</b>, die du greifen und neu anordnen kannst.</p>'+
         '<p>Wer dieses Prinzip einmal verstanden hat, verläuft sich nicht mehr, auch nicht in einem System mit dreißig Datenbanken. Wir richten deinen Workspace ein, lernen die Seitenleiste lesen und üben die Handgriffe, die du ab morgen jeden Tag brauchst.</p>',
@@ -27521,7 +27523,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l2',
       re:/\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/,
-      hero:{label:'L 1.2', eyebrow:'L 1.2', title:'Lesbar im <span class="ts-gold">Stress</span>.', alt:'Notion-Seiten so gestalten, dass man sie im Service liest'},
+      hero:{label:'L 1.2', cov:'l2', eyebrow:'L 1.2', title:'Lesbar im <span class="ts-gold">Stress</span>.', alt:'Notion-Seiten so gestalten, dass man sie im Service liest'},
       intro:
         '<p>Eine Seite in deinem Betrieb wird selten in Ruhe gelesen. Der Hygieneplan hängt als Tablet am Pass, die Mise-en-place-Liste wird mit nassen Händen auf dem Handy abgehakt. Ob jemand liest, was da steht, entscheidet das Layout.</p>'+
         '<p>Wir lernen die Werkzeuge, mit denen aus einem langen Text eine Seite wird, die man im Vorbeigehen erfasst: Überschriften, Spalten, Hinweise, Klappen und Blöcke, die an mehreren Stellen zugleich stehen. Dazu machst du die Eintragsseiten der Vorlage übersichtlich, damit jeder im Team in Sekunden findet, was er gerade braucht.</p>',
@@ -27730,7 +27732,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l3',
       re:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/,
-      hero:{label:'L 1.3', eyebrow:'L 1.3', title:'Die Tabelle <span class="ts-gold">denkt mit</span>.', alt:'Notion-Datenbanken und Eigenschaftstypen am Beispiel einer Produktliste'},
+      hero:{label:'L 1.3', cov:'l3', eyebrow:'L 1.3', title:'Die Tabelle <span class="ts-gold">denkt mit</span>.', alt:'Notion-Datenbanken und Eigenschaftstypen am Beispiel einer Produktliste'},
       intro:
         '<p>Die Inventurliste, die Zutaten, die Gerichte: Alles, womit die Vorlage rechnet, liegt in <b>Datenbanken</b>. Eine Datenbank ist eine Sammlung von Seiten, die alle dieselben Eigenschaften haben. Jede Zeile ist ein Artikel, jede Spalte eine Eigenschaft, also Preis, Gebinde oder Lagerort.</p>'+
         '<p>Der Typ einer Spalte entscheidet, was du eintragen kannst und was das System daraus machen kann. Mit einer Zahl lässt sich rechnen, mit einem Text nicht. Wer die Typen kennt, liest jede Spalte der Vorlage. Am Ende dieser Lektion baust du in der Probeküche deine erste eigene Datenbank.</p>',
@@ -27890,7 +27892,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l4',
       re:/\/(?:lektionen\/)?daten-eintragen-und-einlesen\/?$/,
-      hero:{label:'L 1.4', eyebrow:'L 1.4', title:'Die Tabelle <span class="ts-gold">füllen</span>.', alt:'Daten in Notion eintragen, importieren und mit Notion AI einlesen'},
+      hero:{label:'L 1.4', cov:'l4', eyebrow:'L 1.4', title:'Die Tabelle <span class="ts-gold">füllen</span>.', alt:'Daten in Notion eintragen, importieren und mit Notion AI einlesen'},
       intro:
         '<p>Die Vorlage kommt leer zu dir. Bevor sie dir einen einzigen Wareneinsatz ausrechnet, müssen deine Artikel, Lieferanten und Preise hinein. Das ist die meiste Arbeit am Anfang, und hier entscheidet sich, ob die Zahlen später stimmen. Plan dafür ein paar ruhige Abende ein.</p>'+
         '<p>Es gibt drei Wege in eine Datenbank: von Hand tippen, eine ganze Liste als Datei hereinholen oder ein Dokument von Notion AI einlesen lassen. Wir schauen uns alle drei an, legen vorher fest, wie eingetragen wird, und lernen, viele Zeilen auf einmal zu ändern.</p>',
@@ -28112,7 +28114,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l5',
       re:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/,
-      hero:{label:'L 1.5', eyebrow:'L 1.5', title:'Der Preis <span class="ts-gold">wandert mit</span>.', alt:'Verknüpfungen und Rollups in Notion am Beispiel Lieferant, Produkt und Gericht'},
+      hero:{label:'L 1.5', cov:'l5', eyebrow:'L 1.5', title:'Der Preis <span class="ts-gold">wandert mit</span>.', alt:'Verknüpfungen und Rollups in Notion am Beispiel Lieferant, Produkt und Gericht'},
       intro:
         '<p>Bis hierher steht jede Datenbank für sich. Stark wird dein Backoffice erst, wenn Tabellen voneinander wissen: das Produkt von seinem Lieferanten, das Gericht von seinen Zutaten. Diese Verbindung heißt in Notion <b>Verknüpfung</b>, oft hörst du auch das Wort Relation.</p>'+
         '<p>Über eine Verknüpfung holt ein <b>Rollup</b> Werte aus der anderen Tabelle herüber, zum Beispiel die Telefonnummer des Lieferanten oder die Allergene aller Produkte in einem Gericht. Wir verbinden heute in der Probeküche drei Tabellen, und danach liest du die Kette der Vorlage vom Lieferanten bis zum Teller.</p>',
@@ -28277,7 +28279,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l6',
       re:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/,
-      hero:{label:'L 1.6', eyebrow:'L 1.6', title:'Lies die <span class="ts-gold">Formel</span>.', alt:'Notion-Formeln lesen, anpassen und reparieren'},
+      hero:{label:'L 1.6', cov:'l6', eyebrow:'L 1.6', title:'Lies die <span class="ts-gold">Formel</span>.', alt:'Notion-Formeln lesen, anpassen und reparieren'},
       intro:
         '<p>In der Vorlage stecken viele Formeln. Sie rechnen den Preis einer Portion aus, den Wareneinsatz eines Gerichts und den Deckungsbeitrag. Neu schreiben musst du keine davon. Was du können solltest: eine Formel lesen, einen Wert darin anpassen und erkennen, warum eine Zahl nicht stimmt.</p>'+
         '<p>Dafür reichen eine Handvoll Bausteine. Wir lernen sie an der Probeküche, schreiben die Rechenspalten für Produkte und Gerichte und schauen zum Schluss, wie Notion AI dir eine Formel erklärt, die du nicht auf Anhieb verstehst.</p>',
@@ -28462,7 +28464,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l7',
       re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/,
-      hero:{label:'L 1.7', eyebrow:'L 1.7', title:'Frag die <span class="ts-gold">Tabelle</span>.', alt:'Ansichten, Filter und Vorlagen in Notion-Datenbanken'},
+      hero:{label:'L 1.7', cov:'l7', eyebrow:'L 1.7', title:'Frag die <span class="ts-gold">Tabelle</span>.', alt:'Ansichten, Filter und Vorlagen in Notion-Datenbanken'},
       intro:
         '<p>Eine Datenbank mit hundert Artikeln ist erst einmal eine lange Liste. Nützlich wird sie, wenn sie dir eine Frage beantwortet: Was muss ich bei wem bestellen? Welche Gerichte gehen für einen Gast ohne Milch? Was steht im Kühlhaus? Für jede dieser Fragen legst du eine eigene <b>Ansicht</b> an.</p>'+
         '<p>Eine Ansicht ändert nie die Daten, nur was du siehst und in welcher Reihenfolge. In dieser Lektion stellen wir die drei Regler ein, holen eine Liste auf eine zweite Seite und legen Vorlagen an, damit jeder neue Eintrag gleich vollständig startet.</p>',
@@ -28638,7 +28640,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l8',
       re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/,
-      hero:{label:'L 1.8', eyebrow:'L 1.8', title:'Ein Klick <span class="ts-gold">weniger</span>.', alt:'Buttons und Datenbank-Automationen in Notion'},
+      hero:{label:'L 1.8', cov:'l8', eyebrow:'L 1.8', title:'Ein Klick <span class="ts-gold">weniger</span>.', alt:'Buttons und Datenbank-Automationen in Notion'},
       intro:
         '<p>Manche Handgriffe machst du in der Vorlage jeden Tag gleich: einen Artikel anlegen und die immer gleichen Felder ausfüllen, das Lieferdatum setzen, jemandem Bescheid sagen. Jeder einzelne dauert nur Sekunden, über die Woche summieren sie sich trotzdem, und genau dort schleichen sich die Tippfehler ein.</p>'+
         '<p>Ein <b>Button</b> bündelt solche Handgriffe in einem Klick. Eine <b>Automation</b> geht einen Schritt weiter: Die Datenbank reagiert selbst, sobald etwas passiert. Wir bauen beides in der Probeküche und schauen, welcher Plan was erlaubt.</p>',
@@ -28802,7 +28804,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l9',
       re:/\/(?:lektionen\/)?rechte-teamspaces-und-sicherheit\/?$/,
-      hero:{label:'L 1.9', eyebrow:'L 1.9', title:'Wer darf <span class="ts-gold">was</span>?', alt:'Rechte, Teamspaces und Sicherheit in Notion für den Gastronomiebetrieb'},
+      hero:{label:'L 1.9', cov:'l9', eyebrow:'L 1.9', title:'Wer darf <span class="ts-gold">was</span>?', alt:'Rechte, Teamspaces und Sicherheit in Notion für den Gastronomiebetrieb'},
       intro:
         '<p>Sobald dein Team in der Vorlage mitarbeitet, stellt sich eine Frage, die du vorher beantworten solltest: Wer sieht was, und wer darf was ändern? Deine Servicekraft soll Bestände eintragen, aber keine Formel umbauen. Dein Küchenchef braucht die Rezepturen, nicht unbedingt deine Personalkosten. Und die Steuerberaterin soll den Monatsabschluss sehen, sonst nichts.</p>'+
         '<p>Notion regelt das über Teamspaces und Rechte-Stufen. Wir richten beides für einen typischen Betrieb ein und schauen, wie du dich gegen den falschen Klick absicherst.</p>',
@@ -28971,7 +28973,7 @@ var TSISL_TEAM_ONB_V2=[
     N.page({
       key:'l10',
       re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/,
-      hero:{label:'L 1.10', eyebrow:'L 1.10', title:'Die Zahl <span class="ts-gold">stimmt nicht</span>?', alt:'Die Backoffice-Vorlage lesen, anpassen und reparieren'},
+      hero:{label:'L 1.10', cov:'l10', eyebrow:'L 1.10', title:'Die Zahl <span class="ts-gold">stimmt nicht</span>?', alt:'Die Backoffice-Vorlage lesen, anpassen und reparieren'},
       intro:
         '<p>Irgendwann zeigt dir die Vorlage eine Zahl, die nicht stimmen kann. Ein Gericht mit über hundert Prozent Wareneinsatz, eine Zutat für null Euro, ein Lieferant ohne Telefonnummer. Das ist kein Grund, an der Vorlage zu zweifeln. Fast immer steckt ein einzelner Eintrag dahinter, der an der falschen Stelle oder in der falschen Form steht.</p>'+
         '<p>In dieser letzten Lektion bringen wir alles aus diesem Modul zusammen. Du verfolgst eine Zahl zurück bis zu ihrer Quelle, passt die Vorlage an, ohne die Kette zu brechen, und weißt, wie du einen alten Stand zurückholst.</p>',
