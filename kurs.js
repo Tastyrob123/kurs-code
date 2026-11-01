@@ -28271,6 +28271,7 @@ var TSISL_TEAM_ONB_V2=[
       +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text></svg>';
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   };
+  window.__tsn0cov=function(n){ return 'https://tastyrob123.github.io/kurs-code/img/modul-0/cover-'+n+'.webp'; };
   window.__tsn0re=function(slug){ return new RegExp('^/(?:lektionen/)?'+slug+'$'); };
 })();
 
@@ -28380,7 +28381,7 @@ var TSISL_TEAM_ONB_V2=[
   }
   function after(page){ var w=page.querySelector('#tsn0-m0list'); w.classList.add('js'); N.reveal(w.querySelector('.ml-list'),function(){ w.classList.add('in'); }); }
   N.page({ key:'m0', re:/^\/modul-0-einleitung-was-dich-erwartet$/, build:build, after:after,
-    hero:{ img:window.__tsn0ph('MODUL 0'), alt:'Modul 0: Einführung in die Gastronomy AI Masterclass', eyebrow:'Modul 0', title:'Die <span class="ts-gold">Einführung</span>' },
+    hero:{ img:window.__tsn0cov('m0'), alt:'Modul 0: Einführung in die Gastronomy AI Masterclass', eyebrow:'Modul 0', title:'Die <span class="ts-gold">Einführung</span>' },
     learn:{ learn:[
       'Du weißt, <b>was dich erwartet</b> und wie der Kurs aufgebaut ist.',
       'Du findest die <b>Stellen in deinem Betrieb</b>, an denen KI sich lohnt.',
@@ -28518,7 +28519,7 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   N.page({ key:'l01', re:/^\/was-dich-in-diesem-kurs-erwartet$/, build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.1'), alt:'Was dich in der Gastronomy AI Masterclass erwartet', eyebrow:'L 0.1', title:'Was dich <span class="ts-gold">erwartet</span>' },
+    hero:{ img:window.__tsn0cov('l01'), alt:'Was dich in der Gastronomy AI Masterclass erwartet', eyebrow:'L 0.1', title:'Was dich <span class="ts-gold">erwartet</span>' },
     learn:{ learn:[
       'Du bekommst das Backoffice <b>fertig als Vorlage</b> und trägst nur deine Daten ein.',
       '<b>Notion</b> ist dein System, <b>Claude</b> das Werkzeug, das es bedient und erweitert.',
@@ -28658,7 +28659,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a2-frame'),function(){ root.classList.add('in'); if(N.reduced){ root.classList.add('built'); return; } play(); });
   }
   N.page({ key:'l02', re:window.__tsn0re('wo-ki-dir-zeit-und-geld-spart'), build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.2'), alt:'Wo KI dir im Betrieb Zeit und Geld spart', eyebrow:'L 0.2', title:'Wo KI <span class="ts-gold">Zeit spart</span>' },
+    hero:{ img:window.__tsn0cov('l02'), alt:'Wo KI dir im Betrieb Zeit und Geld spart', eyebrow:'L 0.2', title:'Wo KI <span class="ts-gold">Zeit spart</span>' },
     learn:{ learn:[
       'Eine <b>Schnittstelle</b> ist jede Stelle, an der Information entsteht oder gebraucht wird.',
       'Geld versickert vor allem bei <b>Preisen</b>, die keiner nachzieht, und Ware, die keiner zählt.',
@@ -28760,7 +28761,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a3-frame'),function(){ root.classList.add('in'); if(!N.reduced){ root.classList.remove('rows'); play(); } });
   }
   N.page({ key:'l03', re:window.__tsn0re('system-und-werkzeug'), build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.3'), alt:'System und Werkzeug: Notion, Notion AI und Claude', eyebrow:'L 0.3', title:'System und <span class="ts-gold">Werkzeug</span>' },
+    hero:{ img:window.__tsn0cov('l03'), alt:'System und Werkzeug: Notion, Notion AI und Claude', eyebrow:'L 0.3', title:'System und <span class="ts-gold">Werkzeug</span>' },
     learn:{ learn:[
       '<b>Notion</b> ist das Fundament, in dem dein Backoffice lebt.',
       '<b>Notion AI</b> arbeitet direkt in deinen Seiten und Datenbanken.',
@@ -28866,7 +28867,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a4-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
   N.page({ key:'l04', re:/^\/die-einstiegsfragen$/, build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.4'), alt:'Der KI-Markt im November 2026: Anbieter, Stärken, Preise', eyebrow:'L 0.4', title:'Der <span class="ts-gold">KI-Markt</span>' },
+    hero:{ img:window.__tsn0cov('l04'), alt:'Der KI-Markt im November 2026: Anbieter, Stärken, Preise', eyebrow:'L 0.4', title:'Der <span class="ts-gold">KI-Markt</span>' },
     learn:{ learn:[
       'Du kannst die großen Anbieter <b>einordnen</b> und weißt, wofür jeder steht.',
       'Du wählst das Modell <b>passend zur Aufgabe</b>.',
@@ -28967,7 +28968,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a5-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
   N.page({ key:'l05', re:window.__tsn0re('deine-sorgen-ehrlich-beantwortet'), build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.5'), alt:'Deine Sorgen beim Thema KI, ehrlich beantwortet', eyebrow:'L 0.5', title:'Deine <span class="ts-gold">Sorgen</span>' },
+    hero:{ img:window.__tsn0cov('l05'), alt:'Deine Sorgen beim Thema KI, ehrlich beantwortet', eyebrow:'L 0.5', title:'Deine <span class="ts-gold">Sorgen</span>' },
     learn:{ learn:[
       'Jeder Anbieter hat eine <b>Trainings-Einstellung</b>. Du setzt sie bewusst.',
       '<b>Gästedaten, Gesundheitsdaten und Passwörter</b> gehören in kein privates KI-Konto.',
@@ -29001,7 +29002,7 @@ var TSISL_TEAM_ONB_V2=[
     a.innerHTML=N.head('Zwei Wege','Regel oder <span class="g">Urteil.</span>','Zwei Dinge kommen an. Das eine braucht immer dieselbe Antwort, das andere jedes Mal eine neue.')+
       '<div class="a6-frame">'+
         '<div class="a6-in"><span class="a6-in-k">Eingang</span><div class="a6-slot"><div class="a6-item i1"><span class="a6-ik">Meldung</span><b>Reservierung storniert</b><span>Tisch 12 · Samstag · 20 Uhr</span></div>'+
-          '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div></div></div>'+
+          '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div><div class="a6-done">Beides erledigt. Eine Regel und ein Urteil.</div></div></div>'+
         '<svg class="a6-rails" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><path class="r0" d="M400 0 L400 22"/><path class="r1" d="M400 22 C400 60 200 40 200 90"/><path class="r2" d="M400 22 C400 60 600 40 600 90"/><circle class="dot d1" r="5"/><circle class="dot d2" r="5"/></svg>'+
         '<div class="a6-lanes">'+
           '<div class="a6-lane l1"><div class="a6-lh"><span class="a6-ic">⚙︎</span><span><b>Automation</b><i>feste Regel</i></span></div>'+
@@ -29086,7 +29087,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a6-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
   N.page({ key:'l06', re:window.__tsn0re('agent-oder-automation'), build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.6'), alt:'Agent oder Automation: der Unterschied an einem Beispiel aus dem Betrieb', eyebrow:'L 0.6', title:'Agent oder <span class="ts-gold">Automation</span>' },
+    hero:{ img:window.__tsn0cov('l06'), alt:'Agent oder Automation: der Unterschied an einem Beispiel aus dem Betrieb', eyebrow:'L 0.6', title:'Agent oder <span class="ts-gold">Automation</span>' },
     learn:{ learn:[
       'Eine <b>Automation</b> folgt einer festen Regel und arbeitet jedes Mal gleich.',
       'Ein <b>Agent</b> liest, versteht und entscheidet selbst.',
@@ -29176,7 +29177,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.a7-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
   N.page({ key:'l07', re:window.__tsn0re('dein-weg-durch-den-kurs'), build:build, after:after,
-    hero:{ img:window.__tsn0ph('L 0.7'), alt:'Dein Weg durch die Gastronomy AI Masterclass', eyebrow:'L 0.7', title:'Dein <span class="ts-gold">Weg</span>' },
+    hero:{ img:window.__tsn0cov('l07'), alt:'Dein Weg durch die Gastronomy AI Masterclass', eyebrow:'L 0.7', title:'Dein <span class="ts-gold">Weg</span>' },
     learn:{ learn:[
       'Die Module <b>bauen aufeinander auf</b>, Modul 5 und 6 wählst du frei.',
       'Notion brauchst du <b>ab Modul 1</b>, Claude ab Modul 3.',
@@ -29256,7 +29257,7 @@ var TSISL_TEAM_ONB_V2=[
     N.reveal(root.querySelector('.ab-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
   N.page({ key:'ab', re:/^\/abschluss-was-du-am-ende-kannst$/, build:build, after:after,
-    hero:{ img:window.__tsn0ph('ABSCHLUSS'), alt:'Abschluss der Gastronomy AI Masterclass: was du jetzt kannst', eyebrow:'Abschluss', title:'Was du jetzt <span class="ts-gold">kannst</span>' },
+    hero:{ img:window.__tsn0cov('ab'), alt:'Abschluss der Gastronomy AI Masterclass: was du jetzt kannst', eyebrow:'Abschluss', title:'Was du jetzt <span class="ts-gold">kannst</span>' },
     learn:{ learn:[
       'Du <b>ordnest</b> den KI-Markt ein und triffst eigene Entscheidungen.',
       'Dein <b>Backoffice</b> läuft mit deinen Zahlen.',

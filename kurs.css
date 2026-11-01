@@ -1979,7 +1979,9 @@ details > summary {
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0; }
 .tsn0-hero::after{ content:""; position:absolute; z-index:1; pointer-events:none; left:50%; bottom:-4%; transform:translateX(-50%); width:74%; height:56%;
   background:radial-gradient(closest-side, rgba(4,5,10,.74) 0%, rgba(4,5,10,.42) 52%, rgba(4,5,10,0) 80%); }
-.tsn0-hero__text{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:-16%; padding:0 24px 8px; }
+.tsn0-hero__text{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:min(-16%,-189px); padding:0 24px 8px; }
+/* Katalog 01: -16% ist auf 1180px kalibriert. Darunter schrumpft der Pull schneller als der Textblock,
+   der Titel rutschte bei 1000px 28px unter das Bild. min(): nie weniger als die 189px der Referenz. */
 .tsn0-hero__text::before{ content:""; position:absolute; z-index:-1; pointer-events:none; left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%); filter:blur(3px); }
 .tsn0-hero__logo{ display:block; width:58px; height:auto; margin:0 auto 10px; filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));
@@ -1991,7 +1993,7 @@ details > summary {
   text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9),0 18px 140px rgba(0,0,0,.78);
   animation:tsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both; }
 .tsn0-hero__title .ts-gold{ color:var(--tsn0-gold); }
-@media (max-width:640px){ .tsn0-hero__text{ padding:0 16px 20px; } .tsn0-hero__title{ font-size:clamp(2rem,12vw,3rem); } }
+@media (max-width:640px){ .tsn0-hero__text{ padding:0 16px 20px; margin-top:-16%; } .tsn0-hero__title{ font-size:clamp(2rem,12vw,3rem); } }
 
 /* ---- Einleitung (Katalog 01) ---- */
 .tsn0-body{ max-width:860px; margin:56px auto 0; padding:0 clamp(24px,4vw,56px); text-align:center; }
@@ -2482,6 +2484,8 @@ html[data-tsn0="home"] #block-38fb954655348046a7b2d7825809be85{ margin-top:120px
 #tsn0-a06 .a6-mail{ display:block; font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.86) !important; }
 #tsn0-a06.s1:not(.go1) .i1, #tsn0-a06.s2:not(.go2) .i2{ opacity:1; transform:none; }
 #tsn0-a06.go1 .i1, #tsn0-a06.go2 .i2{ opacity:0; transform:translateY(16px) scale(.96); }
+#tsn0-a06 .a6-done{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--tsn0-disp); font-weight:600; font-size:16px; color:var(--tsn0-gold); opacity:0; transition:opacity .8s cubic-bezier(.16,1,.3,1) .6s; }
+#tsn0-a06.out2 .a6-done, #tsn0-a06:not(.js) .a6-done{ opacity:1; }
 #tsn0-a06 .a6-rails{ display:block; width:100%; height:70px; overflow:visible; }
 #tsn0-a06 .a6-rails path{ fill:none; stroke:rgba(199,180,137,.35); stroke-width:1.5; stroke-dasharray:4 6; vector-effect:non-scaling-stroke; }
 #tsn0-a06 .a6-rails .dot{ fill:#fbe6c2; opacity:0; filter:drop-shadow(0 0 6px rgba(251,230,194,.9)); }
