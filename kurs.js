@@ -29766,7 +29766,7 @@ var TSISL_TEAM_ONB_V2=[
   var RE=/\/(?:lektionen\/)?vorlage-holen-und-einrichten\/?$/;
   function on(){ return RE.test(location.pathname); }
   /* Link zur leeren Vorlage. Leer = Knopf zeigt „Link folgt". */
-  var VORLAGE_URL='';
+  var VORLAGE_URL='https://sore-donut-083.notion.site/Notion-AI-Backoffice-e04b9546553483d0bb2301ccfd8a8e12';
   var NEXT='/mehrwert-zielbild';
   var T=window.__tsn2;
 
