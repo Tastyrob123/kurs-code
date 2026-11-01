@@ -4420,7 +4420,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/die-5-wichtigsten-skills' },
     { re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, href:'/die-4-wichtigsten-mcps' },
     { re:/\/(?:lektionen\/)?die-4-wichtigsten-mcps\/?$/, href:'/kontextmanagement' },
-    { re:/\/(?:lektionen\/)?kontextmanagement\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?kontextmanagement\/?$/, href:'/erste-echte-session-landingpage-4-modi' },
+    { re:/\/(?:lektionen\/)?erste-echte-session-landingpage-4-modi\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31507,7 +31508,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/kontextmanagement", "l14": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/kontextmanagement", "l14": "/erste-echte-session-landingpage-4-modi", "l15": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -33484,6 +33485,100 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du kennst <b>/context, /usage</b>, /compact und /clear.',
         'Du hast <b>sechs Gewohnheiten</b>, die Kontingent sparen.'],
       next:'/erste-echte-session-landingpage-4-modi'}
+  });
+})();
+
+/* ---- l15-erste-session.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.15 "Deine erste Session"  (/erste-echte-session-landingpage-4-modi)
+   Praxis-Lektion: vier Gastro-Auftraege, je eine Sitzung (Regel aus 3.14), Plan-Modus (3.11),
+   CLAUDE.md (3.9), Uebergabe (3.10). KEINE Website (Modul 6). Befehle: Faktenblatt 9, 10, 12.
+   Erklaeranimation #tsn3-a15 "Vier Glocken am Pass."
+   Ein Pass mit vier gleich grossen Plaetzen. Je Sitzung gleitet eine Glocke heran, hebt sich und
+   gibt das Ergebnis frei (Datei unter dem Teller), dann der Haken "gegengelesen". Zwischen den
+   Sitzungen /clear. Pass und Plaetze stehen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var S=[
+    {nm:'Wochenkarte kalkulieren', f:'wareneinsatz-kw46.xlsx', img:T3.pic('a15-teller-1.webp','Kalkulation',300,300), cap:'Erste Sitzung, im Plan-Modus: Aus Rezepturen und Preisliste wird der <b>Wareneinsatz je Gericht</b>.'},
+    {nm:'Dienstplan entwerfen', f:'dienstplan-kw47.xlsx', img:T3.pic('a15-teller-2.webp','Dienstplan',300,300), cap:'Nach /clear die zweite: ein <b>Dienstplan-Entwurf</b> aus Öffnungszeiten und Wünschen, Lücken markiert.'},
+    {nm:'Lieferanten vergleichen', f:'vergleich-gemuese.xlsx', img:T3.pic('a15-teller-3.webp','Vergleich',300,300), cap:'Die dritte: zwei Preislisten, ein <b>Vergleich</b>, der zeigt, wo sich der Wechsel lohnt.'},
+    {nm:'Bewertungen beantworten', f:'antworten-oktober.docx', img:T3.pic('a15-teller-4.webp','Antworten',300,300), cap:'Die vierte: <b>Antwortentwürfe</b> auf die Bewertungen des Monats, in eurem Ton. Veröffentlichen tust du selbst.'}
+  ];
+  var stage='<div class="l15-wrap"><div class="l15-pass">'+S.map(function(s,i){ return '<div class="l15-spot open ok" data-i="'+i+'"><span class="l15-no">Sitzung 0'+(i+1)+'</span><span class="l15-plate"><img src="'+s.img+'" alt="" loading="lazy" decoding="async"></span><span class="l15-cl"><i></i></span><span class="l15-nm">'+s.nm+'</span><span class="l15-f">'+s.f+'</span><span class="l15-ok">gegengelesen</span>'+(i<3?'<span class="l15-clr">/clear</span>':'')+'</div>'; }).join('')+'</div>'
+    +'<div class="l15-heat"></div></div>';
+  T3.anim('tsn3-a15',{
+    reset:function(el){ el.querySelectorAll('.l15-spot').forEach(function(s){ s.classList.remove('in','open','ok','clr'); }); },
+    play:function(el, api, end){
+      var sp=el.querySelectorAll('.l15-spot'), D=3400;
+      S.forEach(function(s,i){
+        var t0=400+i*D;
+        api.T.at(t0,function(){ sp[i].classList.add('in'); api.cap(s.cap); });
+        api.T.at(t0+1000,function(){ sp[i].classList.add('open'); });
+        api.T.at(t0+2200,function(){ sp[i].classList.add('ok'); });
+        if(i<3) api.T.at(t0+2900,function(){ sp[i].classList.add('clr'); });
+      });
+      api.T.at(400+4*D+300,function(){ api.cap('Vier Ergebnisse, vier saubere Sitzungen, alles <b>gegengelesen</b>. So sieht ein guter erster Abend mit Claude Code aus.'); });
+      api.T.at(400+4*D+3000, end);
+    },
+    end:function(el){ el.querySelectorAll('.l15-spot').forEach(function(s,i){ s.classList.add('in','open','ok'); if(i<3) s.classList.add('clr'); }); }
+  });
+
+  T3.page({
+    key:'l15', re:/\/(?:lektionen\/)?erste-echte-session-landingpage-4-modi\/?$/, tab:'L 3.15 · Deine erste Session',
+    hero:{eyebrow:'L 3.15', title:'Deine erste <span class="ts-gold">Session</span>', alt:'Deine erste Session mit Claude Code: vier Aufträge aus dem Betrieb'},
+    intro:'<p>Genug vorbereitet. Heute arbeitet Claude Code für deinen Betrieb, mit echten Dateien und vier Aufträgen, die in fast jeder Küche anfallen: die Wochenkarte kalkulieren, einen Dienstplan entwerfen, zwei Lieferanten vergleichen und auf Bewertungen antworten.</p>'
+      +'<p>Jeder Auftrag bekommt seine eigene Sitzung, so wie du es in Lektion 3.14 gelernt hast. Plan einen Abend dafür ein, rund zwei Stunden, und leg dir die Dateien vorher zurecht. Danach hast du vier Ergebnisse und ein Gefühl dafür, wie Claude arbeitet.</p>',
+    anim:{id:'tsn3-a15', eb:'Der Abend im Überblick', title:'Vier Glocken am <span class="g">Pass</span>.',
+      sub:'Vier Aufträge, vier Sitzungen. Unter jeder Glocke liegt ein Ergebnis, das du vor dem Servieren gegenliest.',
+      stage:stage,
+      capEnd:'Vier Ergebnisse, vier saubere Sitzungen, alles <b>gegengelesen</b>. So sieht ein guter erster Abend mit Claude Code aus.'},
+    body:function(H){
+      return H.sec({id:'tsn3-l15-vor', title:'Fünf Minuten <span class="g">Vorbereitung</span>',
+          lead:'Claude kann nur mit dem arbeiten, was im Ordner liegt. Deshalb kommt zuerst das Material an seinen Platz.',
+          body:H.steps([
+            'Leg in deinem Ordner <code>Betrieb</code> die Unterordner an, falls noch nicht geschehen: Speisekarte, Einkauf, Team und Auswertungen.',
+            'Kopier hinein, was du heute brauchst: Rezepturen und Preisliste, Öffnungszeiten und die Urlaubswünsche des Teams, zwei Preislisten von Gemüselieferanten, die Bewertungen des letzten Monats als Text.',
+            'Prüf, dass deine <b>CLAUDE.md</b> aus Lektion 3.9 im Ordner Betrieb liegt.',
+            'Starte Claude Code im Ordner <code>Betrieb</code> und stell den Modus für heute auf <b>Manual</b>, damit du jeden Schritt siehst.'
+          ])})
+        +H.sec({id:'tsn3-l15-s1', title:'Sitzung 1: die Wochenkarte <span class="g">kalkulieren</span>',
+          lead:'Die größte der vier Aufgaben, deshalb mit Plan. Benenn die Sitzung zuerst mit /rename, damit du sie wiederfindest.',
+          body:H.prompt('/plan Kalkulier die Wochenkarte für KW 46. Die Gerichte stehen in Speisekarte/wochenkarte-kw46.pdf, die Rezepturen mit Mengen in Speisekarte/rezepturen.xlsx, die Einkaufspreise in Einkauf/preisliste.pdf. Rechne für jedes Gericht den Wareneinsatz pro Portion und den Anteil am Verkaufspreis. Leg das Ergebnis als Tabelle in Auswertungen/wareneinsatz-kw46.xlsx ab. Fehlt dir ein Preis oder eine Menge, schreib „fehlt“ in die Zelle, statt zu schätzen.','Prompt · Sitzung 1')
+            +H.note('Lies zuerst den Plan: Hat Claude jede Datei gefunden? Prüf danach drei Gerichte von Hand nach. Stimmen die, stimmt meist auch der Rest.','Worauf du achtest')})
+        +H.sec({id:'tsn3-l15-s2', title:'Sitzung 2: einen <span class="g">Dienstplan</span> entwerfen',
+          lead:'Vorher eine kurze Übergabe, dann /clear. Die Kalkulation braucht hier niemand mehr im Kopf.',
+          body:H.prompt('Entwirf einen Dienstplan für KW 47. Öffnungszeiten stehen in Team/oeffnungszeiten.txt, die Mitarbeitenden mit Wochenstunden in Team/team.xlsx, die Wünsche in Team/wuensche-kw47. In Küche und Service sollen während der Öffnung immer mindestens zwei Leute da sein. Leg den Entwurf als Tabelle in Auswertungen/dienstplan-kw47.xlsx ab und markier jede Schicht, die du nicht besetzen konntest, statt sie irgendwem zuzuteilen.','Prompt · Sitzung 2')
+            +H.note('Ein Entwurf ist ein Entwurf. Arbeitszeitgesetz, Pausen und persönliche Absprachen prüfst du selbst, bevor der Plan an die Wand kommt.','Worauf du achtest')})
+        +H.sec({id:'tsn3-l15-s3', title:'Sitzung 3: zwei Lieferanten <span class="g">vergleichen</span>',
+          lead:'Wieder /clear, wieder ein Thema. Diesmal geht es um Preise, also um Zahlen, die du gegenliest.',
+          body:H.prompt('Vergleich die beiden Preislisten Einkauf/gemuese-anbieter-a.pdf und Einkauf/gemuese-anbieter-b.pdf. Ordne gleiche Artikel einander zu, auch wenn sie unterschiedlich heißen, und rechne alle Preise auf ein Kilo um. Mach eine Tabelle mit Artikel, Preis A, Preis B und Differenz, sortiert nach der größten Differenz. Artikel, die du nicht sicher zuordnen kannst, kommen in eine eigene Liste darunter.','Prompt · Sitzung 3')
+            +H.note('Achte auf die Liste der unsicheren Artikel. Genau dort verstecken sich die Fehler, zum Beispiel Bund gegen Kilo oder Kiste gegen Stück.','Worauf du achtest')})
+        +H.sec({id:'tsn3-l15-s4', title:'Sitzung 4: auf Bewertungen <span class="g">antworten</span>',
+          lead:'Die leichteste der vier, und die, bei der dein Ton am meisten zählt. Hier hilft die CLAUDE.md am deutlichsten.',
+          body:H.prompt('In Team/bewertungen-oktober.txt stehen die Bewertungen unserer Gäste aus dem Oktober. Schreib zu jeder einen Antwortentwurf in unserem Ton: persönlich, kurz, bei Kritik ohne Ausreden und mit einem konkreten Satz, was wir ändern. Leg alle Entwürfe in Auswertungen/antworten-oktober.docx ab, jeweils mit der Bewertung darüber. Veröffentliche nichts.','Prompt · Sitzung 4')
+            +H.note('Lies jede Antwort so, als stündest du selbst am Tisch des Gastes. Was du so nicht sagen würdest, schreibst du um, und die Regel dahinter kommt in die CLAUDE.md.','Worauf du achtest')})
+        +H.sec({id:'tsn3-l15-nach', wide:true, title:'Nach dem <span class="g">Abend</span>',
+          lead:'Drei Dinge machen aus einem guten Abend eine Gewohnheit.',
+          body:H.cards([
+            {eb:'Nachtragen', nm:'CLAUDE.md', p:'Alles, was du heute zweimal korrigiert hast, kommt als Zeile in die CLAUDE.md. Dann musst du es nie wieder sagen.'},
+            {eb:'Festhalten', nm:'Ein Skill', p:'Die Aufgabe, die du nächste Woche wieder machst, wird ein Skill. Meist ist es die Kalkulation der Wochenkarte.'},
+            {eb:'Nachsehen', nm:'/usage', p:'Schau, wie viel von deinem Fenster der Abend gekostet hat. So weißt du, ob dein Plan für deinen Alltag reicht.'}
+          ],3)})
+    },
+    emp:{kind:'Nutzung', animTitle:'Dein', animGold:'erster Abend',
+      steps:['Material bereitlegen','Ein Auftrag je Sitzung','Gegenlesen','Nachtragen'],
+      intro:'So wird dein erster Abend mit Claude Code ein Erfolg:',
+      points:['Leg <b>alle Dateien</b> vorher in die richtigen Ordner. Suchen kostet Claude mehr als Rechnen.',
+        'Gib <b>jedem Auftrag</b> seine eigene Sitzung, mit Übergabe und /clear dazwischen.',
+        'Lies <b>jedes Ergebnis</b> gegen, vor allem Zahlen und alles, was Gäste lesen.',
+        'Trag am Ende ein, was du <b>zweimal korrigiert</b> hast, in die CLAUDE.md oder in einen Skill.']},
+    learn:{learn:['Du hast vier <b>echte Aufträge</b> aus deinem Betrieb erledigt.',
+        'Du arbeitest mit <b>einer Sitzung je Thema</b> und Übergabe dazwischen.',
+        'Du formulierst Aufträge mit <b>Dateien, Ergebnis</b> und Regeln für Lücken.',
+        'Du liest <b>jedes Ergebnis</b> gegen, bevor es den Raum verlässt.'],
+      next:'/stack-aufrumen'}
   });
 })();
 
