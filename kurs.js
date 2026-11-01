@@ -37175,7 +37175,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   @keyframes a62Slot{from{transform:translateY(105%)}to{transform:none}}
   @media(max-width:640px){ .a62-tab small{display:none} .a62-tab b{font-size:10.5px} .a62-chk{width:38%} .a62-view{aspect-ratio:4/3} }
   `,run:function(stage,cap){
-    var T=[['Ohne Erweiterung','Stufe 0'],['frontend-design','Gestaltung'],['GSAP-Skills','Bewegung'],['Browser-Prüfung','Kontrolle']];
+    var T=[['Ohne Erweiterung','Ausgangslage'],['frontend-design','Gestaltung'],['GSAP-Skills','Bewegung'],['Browser-Prüfung','Kontrolle']];
     var C=['Ohne Vorgaben baut Claude, was es am häufigsten gesehen hat: <b>Farbverlauf, Allerweltssatz, runder Knopf</b>. Das sieht man jeder zweiten Seite an.',
       'Mit <b>frontend-design</b> fragt Claude zuerst, wofür die Seite da ist, und gestaltet aus deinem Betrieb heraus: dunkles Foto, eigene Titelschrift, ein Akzent.',
       'Mit den <b>GSAP-Skills</b> kommt Bewegung dazu, die nach Handwerk aussieht: Der Titel steigt aus einer Kante, das Bild setzt sich ruhig.',
@@ -37327,10 +37327,10 @@ window.__tsn4Boot && window.__tsn4Boot();
   @media(max-width:460px){ .a65-strip{grid-template-columns:repeat(2,1fr)} }
   `,run:function(stage,cap){
     var F=[
-      ['Ankommen am Kanal','cover-613','zügig',3,'Auftakt','Der Auftakt geht von selbst auf. Name und Bild sind <b>im ersten Moment</b> da, kein Vorhang, kein Laden.'],
+      ['Ankommen am Kanal','cover-613','zügig',3,'Auftakt','Der Auftakt geht von selbst auf. Name und Bild sind <b>im ersten Moment</b> da, kein Vorhang, kein Warten.'],
       ['An der Bar','cover-65','zügig',3,'Hochschweben','Der Weg in den Betrieb darf zügig sein. Drei Scrollbewegungen, dann ist der Gast drinnen.'],
       ['Der Gastraum','cover-63','ruhig',4,'Fenster','Der Raum bekommt Zeit. Ein <b>Fenster</b>: Das Bild steht, der Ausschnitt öffnet sich langsam.'],
-      ['Am Pass','cover-66','ruhig',4,'Wand an Wand','Am Pass wird es konkret. Bilder groß und dicht, jedes kommt einzeln herein.'],
+      ['Am Pass','cover-66','ruhig',4,'Wand an Wand','Am Pass wird es konkret. Die Bilder stehen groß und dicht und kommen gemeinsam herein.'],
       ['Der Teller','m6-teller','langsam',4,'Zoom','Der Moment, für den man kommt. <b>Langsam</b>, sonst sieht ihn niemand.'],
       ['Tisch reservieren','cover-610','zügig',2,'Ruhe','Am Ende keine Bewegung mehr, nur die Frage: Wann kommst du? Zeiten, Telefon, Knopf.']];
     stage.innerHTML='<div class="a65"><div class="a65-strip">'+F.map(function(f){ return '<div class="a65-f"><div class="im">'+pic(f[1],f[0])+'</div><span class="mv">'+f[4]+'</span><div class="nm">'+f[0]+'</div><div class="ft"><div class="tp">Tempo <em>'+f[2]+'</em></div><div class="dots">'+new Array(f[3]+1).join('<i></i>')+'</div></div></div>'; }).join('')+'</div><div class="a65-bar"><i></i></div></div>';
@@ -37577,12 +37577,12 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'Modul 6', title:'AI Website <span class="g">Building</span>', cover:'cover-60', coverL:'Gedeckter Tisch am Abend, Handy mit der Website',
     intro:[
       'Deine Website ist oft der erste Eindruck, den ein Gast von deinem Betrieb bekommt, lange bevor er deine Tür sieht. In diesem Modul baust du sie selbst, mit Claude Code als Werkstatt und mit dem, was ich beim Bau von Websites für Restaurants und Hotels gelernt habe.',
-      'Du brauchst dafür kein Programmieren. Du brauchst deinen Betrieb, ein paar gute Fotos und die Bereitschaft, Entscheidungen zu treffen. Claude baut, du bestimmst, was gebaut wird und wann es gut genug ist. Für den ersten Durchgang rechnest du mit einigen Abenden, danach ist jede Änderung eine Sache von Minuten.'
+      'Du brauchst dafür kein Programmieren. Du brauchst deinen Betrieb und ein paar gute Fotos, entscheiden musst du selbst. Claude baut, du bestimmst, was gebaut wird und wann es gut genug ist. Für den ersten Durchgang rechnest du mit einigen Abenden, danach ist jede Änderung eine Sache von Minuten.'
     ],
     anim:{key:'a60', eb:'Der Weg durch das Modul', h:'So entsteht <span class="g">deine Seite</span>.', sub:'Jede Lektion fügt der Seite einen Teil hinzu. Am Ende steht sie online, und du kannst sie selbst ändern.'},
     reg:{eb:'Die Lektionen', h:'Vierzehn Schritte, in deinem <span class="g">Tempo</span>.', i:[
       {n:'L 6.1', t:'Das Projekt anlegen', d:'Ordner, Vorschau und eine CLAUDE.md mit den echten Daten deines Betriebs.', href:'/lektionen/claude-startklar-machen', img:'cover-61'},
-      {n:'L 6.2', t:'Die Werkzeugkiste', d:'Drei Erweiterungen, die aus Claude einen guten Gestalter machen.', href:'/lektionen/website-skills-laden', img:'cover-62'},
+      {n:'L 6.2', t:'Die Werkzeugkiste', d:'Zwei Erweiterungen, die Browser-Prüfung und der Anschluss für Bilder.', href:'/lektionen/website-skills-laden', img:'cover-62'},
       {n:'L 6.3', t:'Deine Geschichte', d:'Den Betrieb auslesen, die Geschichte in einem Satz, das Gerüst der Seite.', href:'/lektionen/struktur-ausdenken', img:'cover-63'},
       {n:'L 6.4', t:'Der Design-Brief', d:'Stimmung, Farben und Verbote schriftlich festhalten.', href:'/lektionen/designanforderungen-definieren', img:'cover-64'},
       {n:'L 6.5', t:'Das Drehbuch', d:'Die Startseite als ein Abend in Abschnitten planen.', href:'/lektionen/kamerafahrt-planen', img:'cover-65'},
@@ -37598,14 +37598,14 @@ window.__tsn4Boot && window.__tsn4Boot();
     ]},
     secs:[
       {eb:'Bevor du startest', h:'Was du <span class="g">mitbringst</span>.', b:[
-        {t:'p', h:'Claude Code läuft bei dir, so wie du es in Modul 3 eingerichtet hast, am besten in der Desktop-App. Für die Bilder nutzt du die Higgsfield-Verbindung aus Modul 3 oder ein anderes Bildwerkzeug, das du kennst. Und du brauchst Material aus deinem Betrieb: deine Karte, dein Logo, Fotos vom Haus, von der Küche, vom Teller, gern auch aus dem Handy.'},
+        {t:'p', h:'Claude Code läuft bei dir, so wie du es in Modul 3 eingerichtet hast, am besten in der Desktop-App. Für die Bilder schließen wir in Lektion 6.2 Higgsfield an, oder du nimmst ein anderes Bildwerkzeug, das du kennst. Und du brauchst Material aus deinem Betrieb: deine Karte, dein Logo, Fotos vom Haus, von der Küche, vom Teller, gern auch aus dem Handy.'},
         {t:'tab', h:['Posten','Was es kostet','Wann'], r:[
           ['Claude','dein Plan aus Modul 3, keine Zusatzkosten','vom ersten Abend an'],
           ['Bilder und Filme','Guthaben im Bildwerkzeug, je nach Menge','erst ab Lektion 6.7, gebündelt'],
           ['Hosting','für eine Seite dieser Größe kostenlos möglich, Bedingungen in Lektion 6.13','beim Online-Stellen'],
           ['Eigene Adresse','jährliche Gebühr beim Domain-Anbieter','beim Online-Stellen']
         ]},
-        {t:'p', h:'Ich gehe die Lektionen in genau dieser Reihenfolge, auch wenn es verlockt, mit den Bildern anzufangen. Wer zuerst Bilder macht, macht sie zweimal, weil sie später nicht zur Geschichte passen. Die Reihenfolge ist der eigentliche Trick dieses Moduls.'}
+        {t:'p', h:'Ich gehe die Lektionen in genau dieser Reihenfolge, auch wenn es verlockt, mit den Bildern anzufangen. Wer zuerst Bilder macht, macht sie zweimal, weil sie später nicht zur Geschichte passen.'}
       ]}
     ],
     next:'/lektionen/claude-startklar-machen', nextL:'Zur ersten Lektion'
@@ -37624,8 +37624,8 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Ein Gast öffnet deine Seite fast immer am Handy, oft unterwegs und mit mäßigem Netz. Er will wissen, was es bei dir gibt, wann du offen hast und wie er einen Tisch bekommt, und er will spüren, wie es bei dir ist. Hat er beides in den ersten Sekunden, ruft er an oder reserviert. Hat er es nicht, ist er beim nächsten Betrieb.'},
         {t:'p', h:'Für dieses Modul heißt das: Die Seite erzählt deinen Betrieb und läuft dabei auf dem Handy so ruhig wie am Rechner. Und jede Angabe darauf stimmt, weil eine falsche Öffnungszeit mehr Gäste kostet als jedes mittelmäßige Foto.'},
         {t:'s', h:'Was am Ende dieses Moduls steht.'},
-        {t:'ul', i:['Eine Startseite, die einen Abend in deinem Betrieb erzählt, in Abschnitten, die sich beim Scrollen öffnen.','Bilder, die deinen Laden zeigen. Eigene Fotos, mit KI verbessert, und nur dort erzeugte Bilder, wo dir eins fehlt.','Eine Karte, die du in einer Zeile änderst, und eine Reservierung, die am Handy mit einem Tipp funktioniert.','Eine eigene Adresse mit Impressum und Datenschutz, und die Sicherheit, alles danach selbst zu pflegen.']},
-        {t:'p', h:'Rechne für den ersten Durchgang mit mehreren Abenden. Ein Teil davon ist Warten auf Bilder, ein Teil ist Entscheiden. Claude nimmt dir das Bauen ab. Die Entscheidungen bleiben bei dir, und das ist richtig so, denn du kennst deinen Betrieb und Claude kennt nur, was du ihm gibst.'}
+        {t:'ul', i:['Eine Startseite, die einen Abend in deinem Betrieb erzählt, in Abschnitten, die sich beim Scrollen öffnen.','Bilder, die deinen Betrieb zeigen. Eigene Fotos, mit KI verbessert, und nur dort erzeugte Bilder, wo dir eins fehlt.','Eine Karte, die du in einer Zeile änderst, und eine Reservierung, die am Handy mit einem Tipp funktioniert.','Eine eigene Adresse mit Impressum und Datenschutz, und die Sicherheit, alles danach selbst zu pflegen.']},
+        {t:'p', h:'Claude nimmt dir das Bauen ab. Die Entscheidungen bleiben bei dir, und das ist richtig so, denn du kennst deinen Betrieb und Claude kennt nur, was du ihm gibst.'}
       ]},
       {eb:'Der Arbeitsplatz', h:'Ein Ordner, eine <span class="g">Sitzung</span>.', b:[
         {t:'p', h:'Claude Code läuft bei dir seit Modul 3. Für die Website arbeite ich mit der Desktop-App und dort im Bereich <b>Code</b>, weil sie eine eingebaute Browser-Ansicht mitbringt. Claude startet deine Seite darin, sieht sie sich selbst an, macht Bildschirmfotos und prüft seine Änderungen, bevor es dir etwas meldet. Du schaust in derselben Ansicht mit und klickst selbst herum.'},
@@ -37664,7 +37664,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.10', title:'Karte und <span class="g">Tisch</span>', cover:'cover-610', coverL:'Reservierungsbuch und Tisch für zwei',
     intro:[
       'Die zwei Dinge, die ein Gast auf deiner Seite am häufigsten sucht, sind die Karte und der Weg zu einem Tisch. Beide müssen am Handy sofort funktionieren, und die Karte muss stimmen, heute und in drei Monaten.',
-      'Deshalb legen wir die Karte als Daten an einer einzigen Stelle an, am besten direkt aus deinem Backoffice, und bauen Reservierung und Anruf so ein, dass ein Tipp genügt. Was hinter dem Reservierungsknopf passiert, hast du in Modul 5 gebaut. Hier geht es darum, wie die Seite dorthin führt. Am Ende prüfen wir beides mit einer echten Testbuchung vom Handy aus.'
+      'Deshalb legen wir die Karte als Daten an einer einzigen Stelle an, am besten direkt aus deinem Backoffice, und bauen Reservierung und Anruf so ein, dass ein Tipp genügt. Hast du Modul 5 schon durchgearbeitet, steht hinter dem Reservierungsknopf dein Agent. Hier geht es darum, wie die Seite dorthin führt, und dafür reicht auch das Reservierungssystem, das du heute schon nutzt.'
     ],
     anim:{key:'a610', eb:'Eine Stelle für die Karte', h:'Ein Preis <span class="g">ändert sich</span>.', sub:'Was passiert, wenn die Karte als Daten geführt wird und nicht als Text, der an drei Orten von Hand gepflegt wird.', foot:'Gerichte und Preise sind Beispielwerte.'},
     secs:[
@@ -37674,16 +37674,16 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Leg die Karte auf der Seite als echte Seite an, nicht nur als PDF zum Herunterladen. Am Handy liest sie sich ohne Zoomen, und Suchmaschinen können lesen, was es bei dir gibt. Ein PDF darfst du zusätzlich anbieten, erzeugt aus denselben Daten.'}
       ]},
       {eb:'Aus dem Backoffice', h:'Die Karte kommt aus deiner <span class="g">Gerichte-Datenbank</span>.', b:[
-        {t:'p', h:'Wenn du mit dem Backoffice aus Modul 2 arbeitest, liegen deine Gerichte samt Preisen und Allergenen dort schon sauber gepflegt. Dann ist die Karte auf der Website kein neuer Datenbestand, sondern ein Auszug daraus. Die Verbindung zwischen Claude Code und Notion steht seit Modul 4. Gib zusätzlich die Gerichte-Datenbank für die Verbindung frei.'},
+        {t:'p', h:'Wenn du mit dem Backoffice aus Modul 2 arbeitest, liegen deine Gerichte samt Preisen und Allergenen dort schon sauber gepflegt. Dann ist die Karte auf der Website ein Auszug daraus. Die Verbindung zu Notion hast du in Modul 4 angelegt. Sie sieht alles, was du in Notion sehen darfst, deshalb steht im Auftrag ausdrücklich: nur lesen.'},
         {t:'code', l:'Auftrag: Karte aus dem Backoffice ziehen', h:'Lies aus meiner Notion-Datenbank „Gerichte & Getränke“ alle Einträge, die aktuell auf der Karte stehen (nur lesen, nichts in Notion ändern).\n\nSchreib daraus die Datei daten/karte.json mit: Name, kurze Beschreibung, Preis in Euro, Rubrik, Allergene, Stand (heutiges Datum).\n\nRegeln:\n- Preise und Allergene nur aus den Feldern der Datenbank. Fehlt ein Wert, schreib OFFEN und liste es mir auf.\n- Zeig mir vorher, welche Einträge du übernimmst und welche nicht, und warum.\n\nDanach baut die Seite ihre Karte aus daten/karte.json. Zeig mir die Karte in der Vorschau, breit und in Handybreite.'},
         {t:'p', h:'Ändert sich die Karte, wiederholst du diesen Auftrag. Ohne Backoffice führst du <span class="tsn6-mono">karte.json</span> direkt, Claude legt sie dir aus deiner aktuellen Karte an. Wichtig ist nur, dass es danach genau eine Stelle gibt.'},
         {t:'merk', h:'Ein Gericht, ein Eintrag, eine Stelle. Website, Handy und Druckkarte lesen alle daraus.'}
       ]},
       {eb:'Der Weg zum Tisch', h:'Reservieren mit <span class="g">einem Tipp</span>.', b:[
-        {t:'p', h:'Auf der Startseite gibt es genau zwei Wege zum Tisch, und beide sind am Handy jederzeit erreichbar: ein Knopf „Tisch reservieren“ und ein Knopf „Anrufen“. Der Anruf-Knopf wählt deine Nummer direkt, ohne dass der Gast sie abtippen muss. Auf einer Restaurant-Seite ist das die meistgenutzte Funktion überhaupt.'},
+        {t:'p', h:'Auf der Startseite gibt es genau zwei Wege zum Tisch, und beide sind am Handy jederzeit erreichbar: ein Knopf „Tisch reservieren“ und ein Knopf „Anrufen“. Der Anruf-Knopf wählt deine Nummer direkt, ohne dass der Gast sie abtippen muss. Für viele Gäste ist das der schnellste Weg zu dir.'},
         {t:'cards', c:2, i:[
           {e:'Du hast ein Reservierungssystem', n:'Seine Buchungsmaske bleibt', p:'Bind die Buchung deines Anbieters so ein, wie er es vorsieht, als Link oder eingebettetes Fenster. Die Maske gestalten wir nicht nach, sie ist mit deinem Tischplan verbunden. Die Seite drumherum passt sich an.'},
-          {e:'Du nutzt den Agenten aus Modul 5', n:'Die Seite zeigt auf ihn', p:'Der Knopf führt in das Postfach oder den WhatsApp-Kanal, den dein Agent betreut. Was er dort prüft und bucht, hast du in Modul 5 gebaut.'}
+          {e:'Du nutzt den Agenten aus Modul 5', n:'Die Seite zeigt auf ihn', p:'Der Knopf führt in das Postfach oder den WhatsApp-Kanal, den dein Agent betreut. Was er dort prüft und bucht, steht in Modul 5.'}
         ]},
         {t:'code', l:'Auftrag: Reservierung und Anruf einbinden', h:'Bau auf der Startseite und auf der Karte zwei Knöpfe ein, die am Handy immer erreichbar sind:\n1. „Tisch reservieren“ führt zu [Link deines Reservierungssystems oder Kanal aus Modul 5]. Wird ein Buchungsfenster eingebettet, übernimm es unverändert nach der Anleitung des Anbieters.\n2. „Anrufen“ wählt direkt die Telefonnummer aus dem Fakten-Block.\n\nAm Rechner stehen beide Knöpfe in der Leiste oben. Prüf in der Vorschau in Handybreite, dass beide mit dem Daumen gut zu treffen sind. Prüf außerdem, dass der Reservierungslink wirklich auf die Buchung führt.'},
         {t:'do', i:['Mach nach dem Einbau eine <b>Testreservierung</b> auf dem Handy und storniere sie danach.','Ruf über den Anruf-Knopf einmal an. Klingelt es an deinem Telefon im Betrieb?','Schau, ob die Öffnungszeiten neben dem Knopf mit deinem Google-Eintrag übereinstimmen.']}
@@ -37708,14 +37708,14 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['schriftarten-anpassen']={
     n:'L 6.11', title:'Die <span class="g">Schrift</span>', cover:'cover-611', coverL:'Schild mit Schriftzug über dem Eingang',
     intro:[
-      'Bis hierher läuft deine Seite mit Standardschriften. Die sind ordentlich und austauschbar, und gegen Austauschbarkeit arbeiten wir in diesem ganzen Modul. Die Schrift ist der schnellste Weg, einer Seite Charakter zu geben, und an ihr scheitern mehr Seiten als am Aufbau.',
-      'Du suchst in dieser Lektion zwei Schriften aus, eine für die Titel und eine zum Lesen. Wir prüfen, ob sie alle Zeichen haben, ob du sie gewerblich nutzen darfst, und legen sie so in dein Projekt, dass sie schnell laden und keine Daten deiner Gäste an fremde Server schicken.'
+      'Bis hierher läuft deine Seite mit Standardschriften. Die sind ordentlich und austauschbar, und gegen Austauschbarkeit arbeiten wir in diesem ganzen Modul. Die Schrift ist der schnellste Weg, einer Seite Charakter zu geben. Deine Gäste merken es nicht bewusst, aber sie spüren es.',
+      'Du suchst jetzt zwei Schriften aus, eine für die Titel und eine zum Lesen. Wir prüfen, ob sie alle Zeichen haben, ob du sie gewerblich nutzen darfst, und legen sie so in dein Projekt, dass sie schnell laden und keine Daten deiner Gäste an fremde Server schicken.'
     ],
     anim:{key:'a611', eb:'Woher die Titelschrift kommt', h:'Die Schrift kommt aus dem <span class="g">Logo</span>.', sub:'Dein Betrieb hat schon eine Schrift: auf dem Schild, auf der Karte, im Logo. Die Titelschrift der Seite ist ihre freie Entsprechung.', foot:'Schild und Schriften sind Beispiele.'},
     secs:[
       {eb:'Zwei Schriften', h:'Eine für die Titel, eine zum <span class="g">Lesen</span>.', b:[
         {t:'p', h:'Zwei Schriften reichen immer. Wer drei nimmt, hat meistens keine Entscheidung getroffen. Die Titelschrift darf Charakter haben, weil sie groß steht. Sie kommt aus deiner Wortmarke: Leg dein Logo in den Projektordner und lass dir drei frei verfügbare Schriften vorschlagen, die ihm in Form und Breite am nächsten kommen. Die Wortmarke selbst bleibt ein Bild, die Schrift ist ihre Entsprechung für alle anderen Titel.'},
-        {t:'p', h:'Die Leseschrift muss vor allem eines: auch klein und am Handy gut lesbar sein. Bewährt haben sich bei mir rund achtzehn Pixel am Rechner, sechzehn bis achtzehn am Handy, ein großzügiger Zeilenabstand und Zeilen von höchstens sechzig Zeichen. Nie eine dünne, zarte Schrift für den Lesetext, auch wenn sie elegant aussieht. Betonung entsteht über Farbe, nicht über Kursiv.'},
+        {t:'p', h:'Die Leseschrift muss vor allem eines: auch klein und am Handy gut lesbar sein. Ich nehme rund achtzehn Pixel am Rechner, sechzehn bis achtzehn am Handy, ein großzügiger Zeilenabstand und Zeilen von höchstens sechzig Zeichen. Nie eine dünne, zarte Schrift für den Lesetext, auch wenn sie elegant aussieht. Betonung entsteht über Farbe, nicht über Kursiv.'},
         {t:'code', l:'Auftrag: Titelschrift finden', h:'Im Ordner marke/ liegt mein Logo. Schlag mir drei Schriften vor, die der Wortmarke in Form, Strichstärke und Breite am nächsten kommen. Bedingungen:\n- Lizenz erlaubt den Einsatz auf gewerblichen Websites.\n- Enthält Ä, Ö, Ü, ä, ö, ü, ß, €, „ “ und &.\n\nBau mir eine Musterseite: oben das Logo, darunter der Name meines Betriebs in jeder der drei Schriften, und eine Überschrift mit Umlauten. Nenn je Schrift die Lizenz und woher die Dateien kommen.'}
       ]},
       {eb:'Zeichen und Lizenz', h:'Prüfen, bevor du dich <span class="g">verliebst</span>.', b:[
@@ -37723,9 +37723,9 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Dann die Lizenz. Auf vielen Schriftportalen steht „frei für den persönlichen Gebrauch“. Für deinen Betrieb ist das unbrauchbar, denn eine Restaurant-Seite ist gewerblich. Du brauchst eine Schrift, die ausdrücklich für gewerbliche Websites freigegeben ist, oder eine, die du lizenzierst. Die Schriften aus Google Fonts stehen unter offenen Lizenzen und dürfen gewerblich genutzt werden. Lies trotzdem bei jeder Schrift die Lizenzdatei, die dem Download beiliegt, und lass sie dir von Claude auf diese eine Frage zusammenfassen.'},
         {t:'merk', h:'„Frei für den persönlichen Gebrauch“ heißt: nicht für deinen Betrieb.'}
       ]},
-      {eb:'Im eigenen Projekt', h:'Selbst ausliefern, nicht <span class="g">nachladen</span>.', b:[
-        {t:'p', h:'Der bequeme Weg ist, eine Schrift bei jedem Aufruf von einem fremden Dienst nachzuladen. Dabei geht die Adresse deines Gastes an diesen Dienst. Das Landgericht München hat 2022 entschieden, dass genau das bei Google Fonts ohne Einwilligung unzulässig ist, und einem Besucher hundert Euro Schadensersatz zugesprochen. Danach kam eine Welle von Abmahnungen.'},
-        {t:'p', h:'Der richtige Weg ist ohnehin der bessere: Die Schriftdateien liegen in deinem Projekt und werden von deinem eigenen Server ausgeliefert. Das ist schneller, unabhängig, und es gehen keine Daten deiner Gäste nach außen. Lass Claude außerdem dafür sorgen, dass beim Laden nie kurz eine Ersatzschrift aufblitzt.'},
+      {eb:'Im eigenen Projekt', h:'Die Schrift liegt bei <span class="g">dir</span>.', b:[
+        {t:'p', h:'Der bequeme Weg ist, eine Schrift bei jedem Aufruf von einem fremden Dienst nachzuladen. Dabei geht die Adresse deines Gastes an diesen Dienst. Das Landgericht München I hat mit Urteil vom 20. Januar 2022 entschieden, dass genau das bei Google Fonts ohne Einwilligung unzulässig ist, und einem Besucher hundert Euro Schadensersatz zugesprochen. Danach kam eine Welle von Abmahnungen.'},
+        {t:'p', h:'Der richtige Weg ist ohnehin der bessere: Die Schriftdateien liegen in deinem Projekt und werden von deinem eigenen Server ausgeliefert. So lädt sie schneller, und keine Daten deiner Gäste gehen nach außen. Lass Claude außerdem dafür sorgen, dass beim Laden nie kurz eine Ersatzschrift aufblitzt.'},
         {t:'code', l:'Auftrag: Schriften einbinden', h:'Binde die gewählten Schriften [Titelschrift] und [Leseschrift] lokal ein:\n- Lade die Schriftdateien (WOFF2) aus der offiziellen Quelle in den Ordner schriften/ und leg die Lizenzdateien daneben.\n- Kein Nachladen von fremden Servern, prüf das im Netzwerk-Verlauf der Vorschau.\n- Beim Laden darf nie eine Ersatzschrift aufblitzen.\n- Prüf in der Vorschau eine Überschrift mit „Größe, Grüße, Spätzle“ und einen Preis mit Eurozeichen.\nTrag beide Schriften mit Lizenz in die CLAUDE.md ein.'}
       ]},
       {eb:'Schrift über Bildern', h:'Lesbar, ohne dass man den <span class="g">Kasten</span> sieht.', b:[
@@ -37751,12 +37751,12 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.12', title:'Flüssig am <span class="g">Handy</span>', cover:'cover-612', coverL:'Handy in der Hand vor der Eingangstür',
     intro:[
       'Die meisten deiner Gäste öffnen die Seite am Handy, oft unterwegs, manchmal direkt vor deiner Tür. Seit der ersten Lektion prüft Claude jeden Schritt auch in Handybreite. Diese Lektion ist der letzte, gründliche Durchgang, bevor die Seite online geht.',
-      'Ein Gast, der noch nie bei dir war, öffnet die Seite oft nur ein einziges Mal, auf seinem eigenen Gerät. Stockt sie dort, sind Bilder und Texte umsonst. Deshalb messen wir am schwächsten Gerät, nicht an deinem neuen Laptop. Was dabei auffällt, reparieren wir am Laden der Bilder, nie an der Bewegung.'
+      'Ein Gast, der noch nie bei dir war, öffnet die Seite oft nur ein einziges Mal, auf seinem eigenen Gerät. Stockt sie dort, sind Bilder und Texte umsonst. Deshalb messen wir am schwächsten Gerät, nicht an deinem neuen Laptop. Dafür reicht ein älteres Handy aus der Küche und eine halbe Stunde.'
     ],
     anim:{key:'a612', eb:'Was flüssig wirklich heißt', h:'Der Daumen <span class="g">entscheidet</span>.', sub:'Dieselbe Seite auf einem älteren Handy, schnell gescrollt. Vier Korrekturen, dann der Test mit dem Daumen.', foot:'Kurve schematisch.'},
     secs:[
-      {eb:'Eine eigene Fassung', h:'Das Handy ist kein kleiner <span class="g">Bildschirm</span>.', b:[
-        {t:'p', h:'Eine Seite fürs Handy ist nicht die verkleinerte Rechner-Seite, sondern eine eigene, gleichwertige Fassung. Im ersten Bildschirm stehen nur Bild, Name, ein Satz und die zwei Knöpfe aus Lektion 6.10. Das Auftaktbild bekommt einen eigenen Zuschnitt im Hochformat, damit dein Motiv nicht an den Rändern abgeschnitten wird. Alles darunter läuft in einer Spalte.'},
+      {eb:'Eine eigene Fassung', h:'Eine eigene Fassung fürs <span class="g">Handy</span>.', b:[
+        {t:'p', h:'Die Handyseite bekommt ihre eigene, gleichwertige Fassung. Im ersten Bildschirm stehen nur Bild, Name, ein Satz und die zwei Knöpfe aus Lektion 6.10. Das Auftaktbild bekommt einen eigenen Zuschnitt im Hochformat, damit dein Motiv nicht an den Rändern abgeschnitten wird. Alles darunter läuft in einer Spalte.'},
         {t:'p', h:'Lass Claude die Seite in mehreren Handygrößen prüfen, auch mit niedriger Höhe, wenn die Tastatur offen ist. Nichts darf seitlich überstehen, kein Wort darf mitten getrennt werden, und jeder Knopf ist so groß, dass ein Daumen ihn sicher trifft.'}
       ]},
       {eb:'Die Messlatte', h:'Am schwächsten Gerät, nicht am <span class="g">eigenen</span>.', b:[
@@ -37777,8 +37777,8 @@ window.__tsn4Boot && window.__tsn4Boot();
     ],
     emp:{kind:'Nutzung', at:'Der', ag:'Daumen-Test', steps:['Fassung prüfen','Gedrosselt messen','Leichter ausliefern','Am Gerät testen'],
       intro:'Mach den Test mit dem ältesten Handy, das du findest, gern dem deines Kollegen in der Küche. Es ist näher an deinen Gästen als deins.',
-      points:['Lass die Seite in mehreren <b>Handygrößen</b> prüfen.','Lass sie <b>gedrosselt messen</b>, an der fertigen Fassung.','Liefere die Bilder <b>leichter</b> aus, statt Bilder oder Bewegung zu streichen.','Mach den <b>Daumen-Test</b> am echten Gerät, auch ohne WLAN.']},
-    learn:['Das Handy bekommt eine <b>eigene Fassung</b>, kein verkleinertes Abbild.','Gemessen wird <b>am schwächsten Gerät</b>, gedrosselt, an der fertigen Fassung.','Bei Ruckeln wird das Laden repariert: <b>gleich viele Bilder, nur leichter</b>.','Der <b>Daumen-Test</b> am echten Handy entscheidet, nicht die Vorschau.'],
+      points:['Lass die Seite in mehreren <b>Handygrößen</b> prüfen.','Lass sie <b>gedrosselt messen</b>, an der fertigen Fassung.','Liefere die Bilder <b>leichter</b> aus. Bilder und Bewegung bleiben.','Mach den <b>Daumen-Test</b> am echten Gerät, auch ohne WLAN.']},
+    learn:['Das Handy bekommt eine <b>eigene Fassung</b> mit eigenem Auftaktbild.','Gemessen wird <b>am schwächsten Gerät</b>, gedrosselt, an der fertigen Fassung.','Bei Ruckeln wird das Laden repariert: <b>gleich viele Bilder, nur leichter</b>.','Der <b>Daumen-Test</b> am echten Handy entscheidet, nicht die Vorschau.'],
     next:'/lektionen/online-hosten'
   };
 
@@ -37789,7 +37789,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       'Deine Seite läuft auf deinem Rechner. Damit ein Gast sie aufrufen kann, muss sie auf einen Server und unter eine eigene Adresse. Der Weg dorthin ist kurz, Claude richtet ihn mit dir ein, und du bestätigst unterwegs ein paar Schritte.',
       'Dazu kommen die Pflichten, die eine Seite deines Betriebs erfüllen muss, und der Eintrag, über den die meisten Gäste dich finden: dein Google-Profil. Am Ende dieser Lektion steht die Seite online und ist auf der echten Adresse geprüft. Die laufenden Kosten bleiben klein, meist ist es nur die jährliche Gebühr für deine eigene Adresse.'
     ],
-    anim:{key:'a613', eb:'Vom Rechner ins Netz', h:'Der Weg ins <span class="g">Netz</span>.', sub:'Was hochgeladen wird, was nicht, und was nach dem Hochladen noch geprüft werden muss.', foot:'Ordner, Größen und Adresse sind Beispiele.'},
+    anim:{key:'a613', eb:'Was hochgeht', h:'Der Weg ins <span class="g">Netz</span>.', sub:'Was hochgeladen wird, was nicht, und was nach dem Hochladen noch geprüft werden muss.', foot:'Ordner, Größen und Adresse sind Beispiele.'},
     secs:[
       {eb:'Der Hoster', h:'Eine Seite ohne Datenbank, ein einfacher <span class="g">Hoster</span>.', b:[
         {t:'p', h:'Deine Seite braucht keine Datenbank und kein Benutzerkonto. Es gibt keine Anmeldung und nichts, was sich zwischen zwei Aufrufen verändert, die Karte steht in einer Datei, die du pflegst. Reservierungen laufen über dein Reservierungssystem oder den Agenten aus Modul 5. Eine solche Seite kann jeder einfache Hoster ausliefern, sie ist schnell und geht selten kaputt.'},
@@ -37797,7 +37797,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'tab', h:['Anbieter','Kostenloser Tarif','Für deinen Betrieb'], r:[
           ['Cloudflare Pages','bis 20.000 Dateien je Seite, bis 25 MB je Datei (Stand der Doku: September 2026)','passt für eine Seite dieser Größe. Lies vor dem Start die aktuellen Bedingungen.'],
           ['Vercel','Hobby-Tarif nur für private, nicht gewerbliche Nutzung','gewerblich nur im kostenpflichtigen Pro-Tarif'],
-          ['GitHub Pages','kostenlos','laut GitHub nicht für Geschäftsseiten gedacht und nicht erlaubt'],
+          ['GitHub Pages','kostenlos','laut GitHub nicht als kostenloser Hoster für Geschäftsseiten gedacht. Für deinen Betrieb nehme ich es nicht.'],
           ['Dein bisheriger Webhoster','oft schon bezahlt, wenn du eine Seite hast','geht, Claude erklärt dir das Hochladen dorthin']
         ]},
         {t:'p', h:'Bedingungen ändern sich. Lass Claude vor der Entscheidung die aktuelle Seite deines Anbieters lesen und dir die Frage nach der gewerblichen Nutzung beantworten, mit Link zur Stelle.'}
@@ -37809,16 +37809,16 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'merk', h:'Ändert sich eine gespeicherte Bildfolge, bekommt sie einen neuen Ordnernamen. Sonst zeigen Browser, die die alte gespeichert haben, weiter die alte.'}
       ]},
       {eb:'Adresse und Pflicht', h:'Eigene Adresse, <span class="g">Impressum</span>, Datenschutz.', b:[
-        {t:'p', h:'Nach dem Veröffentlichen bekommst du eine Test-Adresse des Hosters. Für deinen Betrieb willst du deine eigene Domain davor. Das ist kein technischer Akt mehr: Domain bei einem Anbieter kaufen oder die vorhandene nehmen, beim Hoster hinterlegen und beim Domain-Anbieter zwei Einträge setzen. Claude sagt dir, welche. Deine E-Mail-Adresse läuft davon unberührt weiter, wenn die Einträge stimmen.'},
-        {t:'p', h:'Jede geschäftliche Website braucht ein <b>Impressum</b>. Die Pflicht steht seit dem 14. Mai 2024 in Paragraf 5 des Digitale-Dienste-Gesetzes, vorher im Telemediengesetz. Es muss von jeder Seite aus leicht erreichbar sein, am besten im Fuß. Dazu kommt die <b>Datenschutzerklärung</b>: Sie nennt, welche Daten beim Besuch anfallen, beim Hoster, im eingebetteten Reservierungsfenster, bei einer eingebetteten Karte. Für die Reservierungsdaten selbst hast du in Modul 5 den passenden Absatz geschrieben.'},
-        {t:'p', h:'Halte die Seite schlank, dann bleibt auch die Datenschutzerklärung kurz: Schriften liegen bei dir, Tracking kommt nur, wenn du es wirklich auswertest. Lass Impressum und Datenschutzerklärung einmal von einer Fachperson prüfen. Das ist der eine Teil des Moduls, den Claude dir nicht abnehmen soll.'}
+        {t:'p', h:'Nach dem Veröffentlichen bekommst du eine Test-Adresse des Hosters. Für deinen Betrieb willst du deine eigene Domain davor. Dafür kaufst du eine Domain oder nimmst deine vorhandene und hinterlegst sie beim Hoster. Wie viele Einträge beim Domain-Anbieter nötig sind, hängt vom Hoster ab. Bei Cloudflare Pages muss die Adresse ohne „www“ als Ganzes zu Cloudflare umziehen, eine Adresse mit „www“ geht auch mit einem einzelnen Eintrag. Lass Claude vor jedem Umzug prüfen, dass deine Mail-Einträge mitkommen, sonst erreicht dich keine Anfrage mehr.'},
+        {t:'p', h:'Jede geschäftliche Website braucht ein <b>Impressum</b>. Die Pflicht steht seit dem 14. Mai 2024 in Paragraf 5 des Digitale-Dienste-Gesetzes, vorher im Telemediengesetz. Es muss von jeder Seite aus leicht erreichbar sein, am besten im Fuß. Dazu kommt die <b>Datenschutzerklärung</b>: Sie nennt, welche Daten beim Besuch anfallen, beim Hoster, im eingebetteten Reservierungsfenster, bei einer eingebetteten Karte. Nutzt du den Agenten aus Modul 5, kommt sein Absatz aus Lektion 5.8 dazu.'},
+        {t:'p', h:'Halte die Seite schlank, dann bleibt auch die Datenschutzerklärung kurz. Die Schriften liegen bei dir, und Tracking kommt nur, wenn du es wirklich auswertest, denn dafür brauchst du die Einwilligung deiner Gäste und ein Einwilligungsfenster auf der Seite. Das gilt meist auch für eingebettete Karten. Lass Impressum und Datenschutzerklärung einmal von einer Fachperson prüfen. Das ist der eine Teil des Moduls, den Claude dir nicht abnehmen soll.'}
       ]},
       {eb:'Gefunden werden', h:'Dort, wo deine Gäste <span class="g">suchen</span>.', b:[
         {t:'p', h:'Die meisten Gäste finden dich nicht über deine Adresse, sondern über die Suche oder die Karte auf dem Handy. Verlinke deine neue Seite in deinem Google-Unternehmensprofil und prüf, dass Öffnungszeiten und Telefon dort genau mit deinem Fakten-Block übereinstimmen.'},
         {t:'p', h:'Hilfreich ist außerdem, wenn die Seite Suchmaschinen in ihrer Sprache sagt, was sie ist: ein Restaurant, mit Adresse, Öffnungszeiten, Küche, Link zur Karte und zur Reservierung. Dafür gibt es ein festes Format, das Claude in die Seite schreibt, ohne dass ein Gast etwas davon sieht.'},
         {t:'code', l:'Auftrag: für Suchmaschinen lesbar machen', h:'Ergänze die Seite um strukturierte Daten nach schema.org vom Typ Restaurant: Name, Adresse, Telefon, Öffnungszeiten, Küche, Preisspanne, Link zur Karte, Link zur Reservierung. Alle Werte nur aus dem Fakten-Block. Gib jeder Seite einen eigenen Titel und eine Beschreibung in einem Satz. Prüf das Ergebnis und zeig es mir.'}
       ]},
-      {eb:'Die Prüfrunde', h:'Auf der echten Adresse, nicht auf dem <span class="g">Rechner</span>.', b:[
+      {eb:'Die Prüfrunde', h:'Geprüft wird <span class="g">online</span>.', b:[
         {t:'p', h:'Der häufigste Unterschied zwischen deinem Rechner und dem Netz ist ein Bild oder eine Schrift, die lokal liegt und online nicht mitgekommen ist. Deshalb wird nach jedem Veröffentlichen auf der echten Adresse geprüft, am Rechner und am Handy.'},
         {t:'do', i:['Öffne die Seite unter deiner Adresse in einem privaten Fenster und am Handy im Mobilnetz.','Scroll jede Seite ganz durch, klick jeden Link, öffne die Karte.','Reservier testweise und tipp auf „Anrufen“.','Öffne Impressum und Datenschutz von der Startseite und von der Karte aus.','Such deinen Betrieb bei Google und prüf, ob der Link auf die neue Seite führt.']},
         {t:'pairs', i:[
@@ -37831,7 +37831,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     ],
     emp:{kind:'Einrichtung', at:'Online', ag:'stellen', steps:['Hoster wählen','Sichern','Adresse','Prüfrunde'],
       intro:'Plane einen Abend und halte die Zugangsdaten zu deiner Domain bereit. Die Umstellung der Adresse kann ein paar Stunden brauchen, bis sie überall ankommt.',
-      points:['Wähle einen Hoster, dessen Tarif <b>gewerbliche Seiten</b> erlaubt.','Leg die <b>Ausschlussliste</b> an und sichere das Projekt bei GitHub.','Hinterleg deine <b>eigene Adresse</b>, Impressum und Datenschutz im Fuß.','Mach die <b>Prüfrunde</b> auf der echten Adresse und verlinke dein Google-Profil.']},
+      points:['Wähle einen Hoster, dessen Tarif <b>gewerbliche Seiten</b> erlaubt.','Leg die <b>Ausschlussliste</b> an und sichere das Projekt bei GitHub.','Hinterleg deine <b>eigene Adresse</b> und prüf vorher die Mail-Einträge, dann Impressum und Datenschutz in den Fuß.','Mach die <b>Prüfrunde</b> auf der echten Adresse und verlinke dein Google-Profil.']},
     learn:['Deine Seite liegt bei einem Hoster, der <b>gewerbliche Seiten</b> erlaubt.','Dein Projekt ist <b>gesichert</b>, und hochgeladen wird nur, was auf die Seite gehört.','Deine Seite hat eine <b>eigene Adresse</b>, Impressum und Datenschutzerklärung.','Du prüfst <b>auf der echten Adresse</b>, und dein Google-Profil führt auf die Seite.'],
     next:'/lektionen/website-pflegen'
   };
@@ -37841,7 +37841,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.14', title:'Die Seite <span class="g">pflegen</span>', cover:'cover-614', coverL:'Saisonware am Pass, Spargel und Pilze',
     intro:[
       'Eine Website ist nie fertig, so wenig wie eine Karte. Der Spargel kommt, die Terrasse öffnet, im Dezember sind Betriebsferien. Eine Seite, auf der im Juli noch das Wintermenü steht, kostet mehr Vertrauen als gar keine.',
-      'Der eigentliche Gewinn dieses Moduls ist, dass du deine Seite jetzt selbst ändern kannst, in einem Satz, ohne auf eine Agentur zu warten. In dieser Lektion richten wir das so ein, dass jede Änderung sicher ist: Du siehst sie vorher, und du kommst jederzeit zurück. Dazu prüft eine Routine die Seite einmal im Monat und meldet, was nicht mehr stimmt.'
+      'Ab jetzt änderst du deine Seite selbst, in einem Satz, ohne auf eine Agentur zu warten. Wir richten das so ein, dass jede Änderung sicher ist: Du siehst sie vorher, und du kommst jederzeit zurück. Dazu prüft eine zeitgesteuerte Aufgabe die Seite jede Woche und meldet, was nicht mehr stimmt.'
     ],
     anim:{key:'a614', eb:'Pflege übers Jahr', h:'Ein Jahr auf deiner <span class="g">Seite</span>.', sub:'Vier Momente im Jahr, jeder mit einem Satz erledigt. Einmal geht etwas schief, und auch das ist ein Satz.', foot:'Gerichte, Preise und Daten sind Beispielwerte.'},
     secs:[
@@ -37863,21 +37863,21 @@ window.__tsn4Boot && window.__tsn4Boot();
           ['bei jeder Kartenänderung','Karte neu aus dem Backoffice oder aus karte.json ziehen, Vorschau prüfen'],
           ['zu jeder Saison','ein, zwei neue Fotos, das Auftaktbild passend zur Jahreszeit'],
           ['vor Ferien und Feiertagen','Hinweis oben einblenden, Reservierung für die Zeit sperren, Google-Eintrag anpassen'],
-          ['einmal im Monat','Links, Öffnungszeiten, Telefon, Impressum prüfen lassen'],
+          ['jede Woche, automatisch','Links, Öffnungszeiten, Telefon, Impressum prüfen lassen'],
           ['im Januar','Jahreszahl im Fuß, Preise im Überblick, alte Hinweise entfernen']
         ]},
-        {t:'p', h:'Die monatliche Prüfung muss nicht an dir hängen. Richte sie als Routine ein, so wie du es in Modul 4 kennengelernt hast. Die Regel von dort gilt auch hier: Die Routine berichtet, sie ändert nichts.'},
-        {t:'code', l:'Auftrag: monatliche Prüf-Routine', h:'Richte eine Routine ein, die am ersten Montag jedes Monats um 7 Uhr läuft und nur berichtet, nichts ändert:\n1. Öffne die Seite unter [Adresse] und prüf alle Links, die Karte und den Reservierungsknopf.\n2. Vergleich Öffnungszeiten und Telefon auf der Seite mit dem Fakten-Block.\n3. Prüf, ob alle Bilder laden und Impressum und Datenschutz erreichbar sind.\n4. Schreib mir einen kurzen Bericht mit allem, was nicht stimmt.'}
+        {t:'p', h:'Die wöchentliche Prüfung muss nicht an dir hängen. Richte sie als zeitgesteuerte Aufgabe ein, so wie in Modul 4. Die Regel von dort gilt auch hier: Berichte ja, Änderungen nein.'},
+        {t:'code', l:'Auftrag: wöchentliche Prüfung', h:'Richte eine zeitgesteuerte Aufgabe ein, die jeden Montag um 7.07 Uhr läuft und nur berichtet, nichts ändert:\n1. Öffne die Seite unter [Adresse] und prüf alle Links, die Karte und den Reservierungsknopf.\n2. Vergleich Öffnungszeiten und Telefon auf der Seite mit dem Fakten-Block.\n3. Prüf, ob alle Bilder laden und Impressum und Datenschutz erreichbar sind.\n4. Schreib mir einen kurzen Bericht mit allem, was nicht stimmt.'}
       ]},
       {eb:'Grenzen', h:'Was du nicht <span class="g">selbst</span> machen solltest.', b:[
         {t:'p', h:'Fast alles an deiner Seite kannst du jetzt selbst pflegen. Drei Dinge gebe ich trotzdem aus der Hand: Rechtstexte wie Impressum und Datenschutzerklärung prüft einmal im Jahr eine Fachperson. Ein Umzug der Domain zu einem anderen Anbieter ist selten, aber er kann deine E-Mail stilllegen, wenn ein Eintrag fehlt. Und ein neues Formular, das Daten von Gästen sammelt, braucht mehr als eine Vorschau, dafür gilt alles aus Modul 5.'},
-        {t:'p', h:'Somit hast du eine Website, die aus deinem Betrieb heraus entstanden ist, mit deinen Bildern, deinen Worten und deiner Karte, und die du selbst aktuell hältst. Wenn sich ein Preis ändert, änderst du eine Zeile. Wenn eine Terrasse dazukommt, kommt ein Abschnitt dazu.'}
+        {t:'p', h:'Somit hast du eine Website, die aus deinem Betrieb heraus entstanden ist, mit deinen eigenen Bildern und Worten, und die du selbst aktuell hältst. Wenn sich ein Preis ändert, änderst du eine Zeile. Wenn eine Terrasse dazukommt, kommt ein Abschnitt dazu.'}
       ]}
     ],
-    emp:{kind:'Nutzung', at:'Die', ag:'Pflege', steps:['Ein Satz','Vorschau','Gespeichert','Monatsbericht'],
+    emp:{kind:'Nutzung', at:'Die', ag:'Pflege', steps:['Ein Satz','Vorschau','Gespeichert','Wochenbericht'],
       intro:'Pflege kleine Änderungen sofort, solange du sie im Kopf hast. Eine Seite, die immer stimmt, ist mehr wert als ein großer Umbau einmal im Jahr.',
-      points:['Sag Claude in <b>einem Satz</b>, was sich ändert, Fakten zuerst im Fakten-Block.','Schau dir jede Änderung in der <b>Vorschau</b> an, breit und am Handy, bevor sie online geht.','Lass jeden Stand mit einem klaren Namen <b>speichern</b>. Zurück ist ein Satz.','Richte die <b>monatliche Routine</b> ein, die nur berichtet.']},
-    learn:['Du änderst deine Seite <b>in einem Satz</b>, ohne auf jemanden zu warten.','Jede Änderung siehst du <b>vorher</b>, und erst dein Ja veröffentlicht sie.','Jeder Stand ist <b>gespeichert</b>, und zurück ist ein Satz.','Eine Routine prüft deine Seite <b>jeden Monat</b> und berichtet nur.'],
+      points:['Sag Claude in <b>einem Satz</b>, was sich ändert, Fakten zuerst im Fakten-Block.','Schau dir jede Änderung in der <b>Vorschau</b> an, breit und am Handy, bevor sie online geht.','Lass jeden Stand mit einem klaren Namen <b>speichern</b>. Zurück ist ein Satz.','Richte die <b>wöchentliche Prüfung</b> ein, die nur berichtet.']},
+    learn:['Du änderst deine Seite <b>in einem Satz</b>, ohne auf jemanden zu warten.','Jede Änderung siehst du <b>vorher</b>, und erst dein Ja veröffentlicht sie.','Jeder Stand ist <b>gespeichert</b>, und zurück ist ein Satz.','Eine zeitgesteuerte Aufgabe prüft deine Seite <b>jede Woche</b> und berichtet nur.'],
     next:'/modul-6-weitere-tools-projektmanagement', nextL:'Zur Modulübersicht'
   };
 
@@ -37886,23 +37886,24 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.2', title:'Die <span class="g">Werkzeugkiste</span>', cover:'cover-62', coverL:'Messerrolle auf dunklem Holz',
     intro:[
       'Claude kann von Haus aus Websites bauen. Ohne Anleitung baut es aber den Durchschnitt aus allem, was es je gesehen hat, und diesen Durchschnitt erkennt man inzwischen auf den ersten Blick. Ein Gast spürt ihn, auch wenn er ihn nicht benennen kann.',
-      'In dieser Lektion legen wir drei Werkzeuge in die Kiste: eins für die Gestaltung, eins für die Bewegung und eins, mit dem Claude seine Arbeit selbst im Browser prüft. Was Skills und Plugins sind und wie man sie lädt, weißt du aus Modul 3. Hier geht es nur darum, welche für eine Website zählen.'
+      'Für die Website legen wir zwei Erweiterungen in die Kiste, eine für die Gestaltung und eine für die Bewegung, prüfen die eingebaute Browser-Prüfung und schließen Higgsfield für die Bilder an. Was Skills und Plugins sind und wie man sie lädt, weißt du aus Modul 3. Hier geht es nur darum, welche für eine Website zählen.'
     ],
     anim:{key:'a62', eb:'Derselbe Auftrag, vier Stufen', h:'Was die Werkzeuge <span class="g">ändern</span>.', sub:'Der Auftrag ist jedes Mal derselbe: ein Seitenkopf für ein Restaurant. Nur die Werkzeuge in der Kiste wechseln.'},
     secs:[
       {eb:'Warum Claude Hilfe braucht', h:'Der Durchschnitt hat einen <span class="g">Look</span>.', b:[
-        {t:'p', h:'Gib einem Sprachmodell den Auftrag „bau mir eine schöne Restaurant-Website“, und du bekommst fast immer dasselbe: einen Farbverlauf in Lila oder Blau, eine Überschrift, die mit „Willkommen“ anfängt, drei runde Kacheln mit Symbolen und einen Knopf mit weichem Schatten. Das ist kein Fehler des Modells. Es macht, was im Netz am häufigsten vorkommt, weil ihm niemand sagt, wofür die Seite da ist.'},
-        {t:'p', h:'Ein Gast, der deine Seite öffnet, hat solche Seiten hundertfach gesehen. Er wird nicht denken „das ist KI“, aber er wird nichts von deinem Betrieb spüren, und das ist schlimmer. Deine Seite soll nach deinem Laden aussehen, nach deinem Holz, deinem Licht, deinen Tellern.'},
+        {t:'p', h:'Gib einem Sprachmodell den Auftrag „bau mir eine schöne Restaurant-Website“, und du bekommst fast immer dasselbe: einen Farbverlauf in Lila oder Blau, eine Überschrift, die mit „Willkommen“ anfängt, drei runde Kacheln mit Symbolen und einen Knopf mit weichem Schatten. Das Modell macht, was im Netz am häufigsten vorkommt, weil ihm niemand sagt, wofür die Seite da ist.'},
+        {t:'p', h:'Ein Gast, der deine Seite öffnet, hat solche Seiten hundertfach gesehen. Er wird nicht denken „das ist KI“, aber er wird nichts von deinem Betrieb spüren, und das ist schlimmer. Deine Seite soll nach deinem Betrieb aussehen, nach deinem Holz und deinem Licht.'},
         {t:'merk', h:'Ein Werkzeug ersetzt keine Entscheidung. Es sorgt dafür, dass Claude die richtigen Fragen stellt, bevor es baut.'}
       ]},
-      {eb:'Was in die Kiste gehört', h:'Drei Werkzeuge für <span class="g">deine Website</span>.', b:[
-        {t:'cards', c:3, i:[
+      {eb:'Was in die Kiste gehört', h:'Was für <span class="g">deine Website</span> zählt.', b:[
+        {t:'cards', c:2, i:[
           {e:'Gestaltung', n:'frontend-design', p:'Ein Skill von Anthropic aus dem offiziellen Plugin-Verzeichnis. Er bringt Claude bei, wie ein Gestalter zu denken: zuerst den Betrieb verstehen, dann Farben, Schrift und Aufbau daraus ableiten, und die bekannten Allerweltslösungen meiden.\n\nIch lade ihn in jedem Website-Projekt zuerst.'},
           {e:'Bewegung', n:'GSAP-Skills', p:'Die offiziellen Skills der Entwickler von GSAP, der Bibliothek, mit der sich Bilder und Texte beim Scrollen bewegen. Sie zeigen Claude, wie man diese Bewegung sauber und sparsam baut.\n\nGSAP ist mit allen Zusatzteilen kostenlos, auch für gewerbliche Seiten wie deine.'},
-          {e:'Kontrolle', n:'Browser-Prüfung', p:'In der Desktop-App ist sie eingebaut: Claude öffnet die Seite in der Vorschau und sieht sie sich selbst an. Arbeitest du im Terminal, übernimmt das die Erweiterung Claude in Chrome oder das Playwright-Plugin aus dem offiziellen Verzeichnis.\n\nOhne Blick in den Browser rät Claude, wie die Seite aussieht.'}
+          {e:'Kontrolle', n:'Browser-Prüfung', p:'In der Desktop-App ist sie eingebaut: Claude öffnet die Seite in der Vorschau und sieht sie sich selbst an. Arbeitest du im Terminal, übernimmt das die Erweiterung Claude in Chrome oder das Playwright-Plugin aus dem offiziellen Verzeichnis.\n\nOhne Blick in den Browser rät Claude, wie die Seite aussieht.'},
+          {e:'Bilder', n:'Higgsfield-Verbindung', p:'Über diese Verbindung erzeugt und verbessert Claude Bilder und kurze Filme direkt aus der Sitzung. Du meldest dich beim ersten Zugriff einmal mit deinem Higgsfield-Konto an.\n\nJeder Lauf kostet Guthaben. Wir legen den Anschluss jetzt an, erzeugt wird erst ab Lektion 6.7, gebündelt und mit Kosten vorab.'}
         ]},
-        {t:'code', l:'Befehle zum Kopieren (einzeln in Claude Code eingeben)', h:'/plugin install frontend-design@claude-plugins-official\n\n/plugin marketplace add greensock/gsap-skills\n/plugin install gsap-skills@gsap-skills\n\n# nur wenn du im Terminal statt in der Desktop-App arbeitest:\n/plugin install playwright@claude-plugins-official'},
-        {t:'p', h:'Danach startest du die Sitzung einmal neu, damit Claude die neuen Werkzeuge kennt. Die Namen und Wege habe ich am 1. November 2026 an den offiziellen Verzeichnissen geprüft. Verzeichnisse ändern sich, deshalb gilt: Findet <span class="tsn6-mono">/plugin</span> einen Namen nicht, such ihn im Plugin-Fenster unter <b>Discover</b>, statt irgendeine Kopie aus dem Netz zu laden.'}
+        {t:'code', l:'Befehle zum Kopieren (einzeln in Claude Code eingeben)', h:'/plugin install frontend-design@claude-plugins-official\n\n/plugin marketplace add greensock/gsap-skills\n/plugin install gsap-skills@gsap-skills\n\n# nur wenn du im Terminal statt in der Desktop-App arbeitest:\n/plugin install playwright@claude-plugins-official\n\n# im Terminal, für die Bilder ab Lektion 6.7:\nclaude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp'},
+        {t:'p', h:'Danach startest du die Sitzung einmal neu, damit Claude die neuen Werkzeuge kennt. Die Namen und Wege habe ich am 1. November 2026 an den offiziellen Verzeichnissen und der Dokumentation von Claude Code geprüft. Die Higgsfield-Zeile gibst du im Terminal ein, nicht in der Sitzung. Verzeichnisse ändern sich, deshalb gilt: Findet <span class="tsn6-mono">/plugin</span> einen Namen nicht, such ihn im Plugin-Fenster unter <b>Discover</b>, statt irgendeine Kopie aus dem Netz zu laden.'}
       ]},
       {eb:'Der Test', h:'Greift das <span class="g">Werkzeug</span>?', b:[
         {t:'p', h:'Ein installierter Skill ist noch kein arbeitender Skill. Bevor wir uns auf die Werkzeuge verlassen, geben wir Claude eine kleine Aufgabe, bei der sie anspringen müssen, und schauen in den Verlauf der Sitzung. Lädt Claude einen Skill, steht er dort mit Namen.'},
@@ -37910,7 +37911,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Springt kein Skill an, klärst du das jetzt und nicht mitten im Projekt. Meistens fehlt nur der Neustart der Sitzung, manchmal ist ein Name falsch geschrieben. Ein Skill, der nie anspringt, ist nur ein Ordner auf deiner Festplatte.'}
       ]},
       {eb:'Typische Fehler', h:'Mehr Werkzeug macht keine <span class="g">bessere Seite</span>.', b:[
-        {t:'p', h:'Es ist verlockend, gleich zwanzig Skills zu laden, wenn sie nichts kosten. Jeder geladene Skill belegt aber Platz im Kontext, und den bezahlst du mit jeder Nachricht. Lade, was diese Website braucht, und lösch, was du nach dem Projekt nicht mehr nutzt.'},
+        {t:'p', h:'Es ist verlockend, gleich zwanzig Skills zu laden, wenn sie nichts kosten. Jeder Skill meldet sich aber in jeder Sitzung mit Namen und Beschreibung, und Plugins mit eigenen Verbindungen brauchen deutlich mehr Platz im Kontext. Lade, was diese Website braucht, und lösch, was du nach dem Projekt nicht mehr nutzt.'},
         {t:'pairs', i:[
           ['Skills aus irgendeiner Sammlung im Netz laden, weil der Name gut klingt.','Nur aus den offiziellen Verzeichnissen der Hersteller. Ein Skill ist eine Anweisung an Claude, und fremde Anweisungen willst du kennen.'],
           ['Nach der Installation sofort weiterarbeiten.','Sitzung neu starten, dann den Test von oben. Erst wenn die Namen im Verlauf auftauchen, gilt das Werkzeug als geladen.'],
@@ -37918,10 +37919,10 @@ window.__tsn4Boot && window.__tsn4Boot();
         ]}
       ]}
     ],
-    emp:{kind:'Einrichtung', at:'Die', ag:'Werkzeugkiste', steps:['frontend-design','GSAP-Skills','Browser-Prüfung','Testseite'],
+    emp:{kind:'Einrichtung', at:'Die', ag:'Werkzeugkiste', steps:['frontend-design','GSAP-Skills','Higgsfield','Testseite'],
       intro:'Die Einrichtung dauert eine Viertelstunde. Mach sie in der Sitzung im Projektordner, damit alles an der richtigen Stelle landet.',
-      points:['Installier <b>frontend-design</b> aus dem offiziellen Plugin-Verzeichnis.','Füg das Verzeichnis von GreenSock hinzu und installier die <b>GSAP-Skills</b>.','Prüf, dass die Vorschau in der Desktop-App aufgeht, sonst richte Claude in Chrome oder Playwright ein.','Starte neu und lass die <b>Testseite</b> bauen. Im Verlauf müssen die Skills mit Namen stehen.']},
-    learn:['Du weißt, warum Claude ohne Anleitung den <b>Durchschnitt</b> baut.','Du hast <b>frontend-design</b> und die <b>GSAP-Skills</b> aus offiziellen Verzeichnissen geladen.','Claude prüft seine Arbeit selbst im <b>Browser</b>, breit und in Handybreite.','Du testest jedes Werkzeug, bevor du dich darauf verlässt, und lädst <b>nur, was du brauchst</b>.'],
+      points:['Installier <b>frontend-design</b> aus dem offiziellen Plugin-Verzeichnis.','Füg das Verzeichnis von GreenSock hinzu und installier die <b>GSAP-Skills</b>.','Leg die <b>Higgsfield-Verbindung</b> an und prüf, dass die Vorschau in der Desktop-App aufgeht.','Starte neu und lass die <b>Testseite</b> bauen. Im Verlauf müssen die Skills mit Namen stehen.']},
+    learn:['Du weißt, warum Claude ohne Anleitung den <b>Durchschnitt</b> baut.','Du hast <b>frontend-design</b>, die <b>GSAP-Skills</b> und die <b>Higgsfield-Verbindung</b> eingerichtet.','Claude prüft seine Arbeit selbst im <b>Browser</b>, breit und in Handybreite.','Du testest jedes Werkzeug, bevor du dich darauf verlässt, und lädst <b>nur, was du brauchst</b>.'],
     next:'/lektionen/struktur-ausdenken'
   };
 
@@ -37929,7 +37930,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['struktur-ausdenken']={
     n:'L 6.3', title:'Deine <span class="g">Geschichte</span>', cover:'cover-63', coverL:'Eingedeckter Gastraum am Nachmittag',
     intro:[
-      'Die meisten Websites entstehen falsch herum. Jemand sieht eine schöne Seite, findet sie gut und baut etwas Ähnliches. Dann steht da eine Seite, die zu einem Vorstellungsbild passt, aber nicht zu dem Betrieb, für den sie gemacht ist.',
+      'Die meisten Websites entstehen falsch herum. Jemand sieht eine schöne Seite, findet sie gut und baut etwas Ähnliches. Dann steht da eine Seite, die zu einem Vorstellungsbild passt und nicht zu dem Betrieb, für den sie gemacht ist.',
       'Wir fangen am anderen Ende an, bei dem, was wirklich da ist. Wir lesen deinen Betrieb aus, schreiben seine Geschichte in einen Satz und leiten daraus ab, welche Abschnitte die Seite braucht. Am Ende dieser Lektion steht ein Gerüst, das du von oben bis unten durchscrollen kannst.'
     ],
     anim:{key:'a63', eb:'Was ein Gast wissen will', h:'Jede Frage hat ihren <span class="g">Platz</span>.', sub:'Bevor ein Gast reserviert, hat er immer dieselben Fragen. Dein Gerüst beantwortet sie alle, und ganz oben steht, warum man zu dir kommt.'},
@@ -37943,15 +37944,15 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'merk', h:'Fertig ist dieser Schritt, wenn du deinen Betrieb vollständig beschreiben kannst, ohne die alte Seite noch einmal zu öffnen.'}
       ]},
       {eb:'Schritt 2', h:'Die Geschichte in <span class="g">einem Satz</span>.', b:[
-        {t:'p', h:'Jetzt kommt der Teil, den dir kein Werkzeug abnimmt. Was ist an deinem Betrieb das Eine, weswegen jemand kommt? Bei einem Lokal am Wasser ist es vielleicht die Terrasse im letzten Licht, bei einem Landgasthof der Braten am Sonntag nach dem Rezept der Großmutter. Das ist kein Detail für die Fußzeile, das ist der Grund, warum der Gast kommt.'},
-        {t:'p', h:'Schreib daraus einen Satz, der deine Seite als Erlebnis beschreibt. Bewährt hat sich bei mir die Form eines Abends: <b>„Ein Abend bei uns beginnt auf der Terrasse am Kanal, geht weiter am Tisch mit der Karte vom Markt und endet mit einem Glas an der Bar.“</b> Dieser Satz bestimmt die Reihenfolge der Abschnitte.'},
+        {t:'p', h:'Jetzt kommt der Teil, den dir kein Werkzeug abnimmt. Was ist an deinem Betrieb das Eine, weswegen jemand kommt? Bei einem Lokal am Wasser ist es vielleicht die Terrasse im letzten Licht, bei einem Landgasthof der Braten am Sonntag nach dem Rezept der Großmutter. Genau das gehört ganz nach oben.'},
+        {t:'p', h:'Schreib daraus einen Satz, der deine Seite als Erlebnis beschreibt. Ich nehme dafür gern die Form eines Abends: <b>„Ein Abend bei uns beginnt auf der Terrasse am Kanal, geht weiter am Tisch mit der Karte vom Markt und endet mit einem Glas an der Bar.“</b> Dieser Satz bestimmt die Reihenfolge der Abschnitte.'},
         {t:'s', h:'Die Abschnitte fallen aus der Geschichte heraus, nicht umgekehrt.'},
         {t:'p', h:'Wer mit einer Liste von Abschnitten anfängt, bekommt eine Seite, die aussieht wie ein ausgefülltes Formular. Wer mit der Geschichte anfängt, bekommt eine Seite, die man von oben nach unten liest wie einen Abend. Die sechs Fragen aus der Animation sind dabei deine Prüfliste: Jede muss irgendwo beantwortet sein, aber sie müssen nicht die Reihenfolge bestimmen.'},
         {t:'code', l:'Auftrag: Abschnittsplan vorschlagen', h:'Lies die CLAUDE.md (Fakten und Bestand). Das Besondere an meinem Betrieb ist: [dein Satz].\n\nSchlag mir eine Reihenfolge von höchstens acht Abschnitten für die Startseite vor, die als ein Abend erzählt wird und mit dem Besonderen beginnt. Begründe jeden Abschnitt in einem Satz und nenn, welche dieser Gastfragen er beantwortet: Was gibt es, was kostet es, wann habt ihr offen, wo seid ihr, wie ist es dort, wie bekomme ich einen Tisch.\n\nAbschnitte, die keine Frage beantworten und nichts Besonderes zeigen, lässt du weg. Schreib noch nichts in Dateien.'},
         {t:'p', h:'Was zurückkommt, liest du gegen deinen eigenen Kopf. Du kennst deinen Betrieb, Claude kennt nur die Datei. Wenn der Plan stimmt, lässt du ihn als Abschnitt „Aufbau“ in die CLAUDE.md schreiben.'}
       ]},
       {eb:'Schritt 3', h:'Das Gerüst vor den <span class="g">Bildern</span>.', b:[
-        {t:'p', h:'Jetzt bauen wir die ganze Seite, bevor ein einziges Bild existiert. Das klingt verkehrt und ist der wichtigste Kniff des Moduls. Bilder sind der langsamste und teuerste Teil, und wer auf sie wartet, steht still.'},
+        {t:'p', h:'Jetzt bauen wir die ganze Seite, bevor ein einziges Bild existiert. Das klingt verkehrt und spart dir am meisten Zeit. Bilder sind der langsamste und teuerste Teil, und wer auf sie wartet, steht still.'},
         {t:'p', h:'Jede Stelle, an der später ein Bild sitzt, bekommt einen Platzhalter mit zwei Dingen: einer Beschriftung, welches Motiv dort hingehört, und einer Fläche in der Lichtstimmung des künftigen Bildes, warm für den Abend, kühler für den Vormittag. So beurteilst du das Farbklima der Seite schon jetzt, und der spätere Austausch ist ein Handgriff je Platz.'},
         {t:'code', l:'Auftrag: Gerüst bauen', h:'Bau die Startseite nach dem Abschnitt „Aufbau“ der CLAUDE.md als Gerüst:\n\n- Jeder Abschnitt ist vorhanden und bedienbar, Navigation und Knöpfe funktionieren.\n- Wo später ein Bild oder Film sitzt, setzt du einen Platzhalter mit Beschriftung (Motiv, Seitenverhältnis) und einer Farbfläche in der Lichtstimmung des Motivs.\n- Fakten (Zeiten, Telefon, Adresse, Preise) setzt du echt aus dem Fakten-Block ein, nie als Platzhalter.\n- Noch keine Bilder erzeugen, noch kein Feinschliff.\n\nZeig mir die Seite danach in der Vorschau, breit und in Handybreite.'},
         {t:'merk', h:'Platzhalter gibt es nur für Bilder, nie für Fakten. Telefon, Zeiten und Preise stehen ab der ersten Minute echt in der Seite.'}
@@ -37959,7 +37960,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       {eb:'Typische Fehler', h:'Woran Gerüste <span class="g">scheitern</span>.', b:[
         {t:'pairs', i:[
           ['Eine bewunderte Seite als Vorlage nehmen und nachbauen lassen.','Vom eigenen Betrieb ausgehen. Wer nachbaut, übernimmt fremde Gestaltung, die einem anderen gehört, und eine Seite, die nicht zu deinem Laden passt.'],
-          ['„Willkommen auf unserer Website“ als erster Satz, darunter ein Absatz über Leidenschaft und Qualität.','Ganz oben das Eine, als Bild und mit wenigen Worten. Leidenschaft zeigt man am Teller, nicht im Absatz darüber.'],
+          ['Ganz oben ein Begrüßungstext, das Besondere erst im dritten Abschnitt.','Ganz oben das Eine, als Bild und mit wenigen Worten. Die Sätze dazu schreiben wir in Lektion 6.9.'],
           ['Zwölf Unterseiten von Anfang an, für jede Kleinigkeit eine.','Eine starke Startseite und nur die Unterseiten, die ein Gast wirklich braucht, meist Karte, Reservierung und Impressum.'],
           ['Mit dem Gerüst warten, bis die Fotos fertig sind.','Gerüst zuerst, mit beschrifteten Platzhaltern. Die Bilder kommen in Lektion 6.7 an Plätze, die schon bereitstehen.']
         ]}
@@ -37976,12 +37977,12 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['designanforderungen-definieren']={
     n:'L 6.4', title:'Der <span class="g">Design-Brief</span>', cover:'cover-64', coverL:'Speisekarte, Papier und Stempel',
     intro:[
-      'Hier biegen die meisten selbstgebauten Websites falsch ab. Man sucht sich zwei, drei Seiten, die einem gefallen, und sagt: so ungefähr. Heraus kommt ein Mischmasch aus fremden Entscheidungen, der nirgends richtig sitzt.',
-      'Wir schreiben stattdessen auf, wie deine Seite wirken soll, bevor gestaltet wird. Stimmung, Farben, Register und das, was sie nie sein darf. Dieser Brief kommt in die CLAUDE.md, und ab da misst Claude jeden Entwurf daran, und du auch. Ein guter Brief passt auf eine Seite und ist in deinen eigenen Worten geschrieben.'
+      'Bevor Claude eine Farbe setzt, schreiben wir auf, wie deine Seite wirken soll. Wer sich stattdessen zwei, drei fremde Seiten als Vorbild nimmt, bekommt einen Mischmasch aus fremden Entscheidungen, der nirgends richtig sitzt.',
+      'Im Brief stehen die Stimmung, die Farben, das Register und das, was die Seite nie sein darf. Dieser Brief kommt in die CLAUDE.md, und ab da misst Claude jeden Entwurf daran, und du auch. Ein guter Brief passt auf eine Seite und ist in deinen eigenen Worten geschrieben. Er hält Claude von den Lösungen fern, die überall gleich aussehen.'
     ],
     anim:{key:'a64', eb:'Woher die Farben kommen', h:'Die Farben hängen schon an der <span class="g">Wand</span>.', sub:'Dein Betrieb hat längst eine Farbwelt. Sie steckt im Holz, in der Karte, im Schild über der Tür.', foot:'Farbwerte sind Beispielwerte.'},
     secs:[
-      {eb:'Die Stimmung', h:'In deinen Worten, nicht in <span class="g">Werbewörtern</span>.', b:[
+      {eb:'Die Stimmung', h:'Die Stimmung in deinen <span class="g">Worten</span>.', b:[
         {t:'p', h:'„Modern und clean“, „hochwertig“, „gemütlich“ sagt jeder, und für Claude heißt es nichts. Beschreib deinen Betrieb so, wie du ihn einem Freund am Telefon beschreiben würdest, der noch nie da war. Was sieht er, wenn er reinkommt? Wie ist das Licht um neun Uhr abends? Wie klingt es? Woraus sind Tische und Wände?'},
         {t:'pairs', i:[['„Modern, hochwertig, gemütlich, mit regionaler Küche.“','„Dunkles Eichenholz, Kerzen auf jedem Tisch, eine offene Küche, aus der man das Brett hört. Man bleibt länger, als man wollte.“'],['„Junges, frisches Konzept.“','„Hell, laut, Fliesen wie in einer alten Metzgerei, am Tresen wird geredet, und abends geht es bis Mitternacht.“']]},
         {t:'p', h:'Dazu gehört das <b>Register</b>: Wie ruhig darf die Seite sein? Ein Haus mit Stern verträgt nichts Verspieltes, jede Bewegung und jeder Satz muss dort leise sein. Ein Bistro darf lebendiger auftreten. Beides ist richtig, solange es zu deinem Betrieb passt.'}
@@ -37993,11 +37994,11 @@ window.__tsn4Boot && window.__tsn4Boot();
       ]},
       {eb:'Die Verbote', h:'Was deine Seite <span class="g">nie</span> sein soll.', b:[
         {t:'p', h:'Der klarste Teil eines Briefs sind oft die Verbote. Sie halten Claude von den Lösungen fern, die überall zu sehen sind und billig wirken. Diese Liste ist mein Ausgangspunkt bei jedem Betrieb, streich, was für dich nicht gilt, und ergänz, was dich stört.'},
-        {t:'ul', i:['Keine Farbverläufe über Flächen, keine Glanzeffekte, keine Bilder aus Bilddatenbanken.','Keine Kacheln mit Symbolen, keine Emojis, keine Punkt-Etiketten über Überschriften.','Kein Ladebildschirm und kein Vorhang vor der Seite, der erste Blick zeigt sofort deinen Betrieb.','Keine Werbesätze wie „Genießen Sie …“ oder „Wir freuen uns auf Ihren Besuch“.','Keine Bewegung, die wackelt, springt oder seitwärts hereinrutscht.']}
+        {t:'ul', i:['Keine Farbverläufe über Flächen, keine Glanzeffekte, keine Bilder aus Bilddatenbanken.','Keine Kacheln mit Symbolen, keine Emojis, keine Punkt-Etiketten über Überschriften.','Kein Ladebildschirm und kein Vorhang vor der Seite, der erste Blick zeigt sofort deinen Betrieb.','Keine Werbesätze. Woran du sie erkennst, steht in Lektion 6.9.','Keine Bewegung, die wackelt, springt oder seitwärts hereinrutscht.']}
       ]},
       {eb:'Der Brief im Projekt', h:'Einmal schreiben, bei jedem Schritt <span class="g">lesen</span>.', b:[
         {t:'code', l:'Auftrag: Design-Brief in die CLAUDE.md', h:'Schreib den Abschnitt „Design-Brief“ in die CLAUDE.md mit genau diesen Angaben und frag mich, wo etwas fehlt:\n\nStimmung: [deine Beschreibung in ganzen Sätzen]\nRegister: [ruhig und leise | lebendig | dazwischen, mit Begründung]\nFarben: Grundton dunkel [Wert], Grundton hell [Wert], Akzent [Wert], Akzent nur als Linie, Knopf oder Punkt.\nBilder: echte Fotos aus dem Betrieb zuerst.\nNicht: [deine Verbote]\n\nRegel: Jeder Entwurf wird vor dem Zeigen gegen diesen Brief geprüft. Weicht etwas ab, nennst du es.'},
-        {t:'s', h:'Varianten siehst du in der echten Seite, nicht im Chat.'},
+        {t:'s', h:'Varianten siehst du in der echten Seite.'},
         {t:'p', h:'Wenn Claude dir für einen Abschnitt mehrere Fassungen vorschlägt, lass sie dir in die echte Seite bauen, umschaltbar mit den Pfeiltasten und mit einer kleinen Nummer unten. So vergleichst du im richtigen Zusammenhang, auf dem Handy und am Rechner, und sagst am Ende nur noch „Nummer drei“. Beschreibungen und Bildschirmfotos im Chat täuschen, die echte Seite nicht.'},
         {t:'code', l:'Auftrag: Fassungen zum Durchklicken', h:'Bau für den Auftakt der Startseite vier deutlich verschiedene Fassungen nach dem Design-Brief, direkt in die echte Seite. Ich will sie mit den Pfeiltasten links und rechts durchschalten, unten klein die Nummer. Fassung 0 ist der heutige Stand. Die übrige Seite bleibt unverändert.'},
         {t:'s', h:'Zwei Arten von Rückmeldung, zwei Reaktionen.'},
@@ -38019,12 +38020,12 @@ window.__tsn4Boot && window.__tsn4Boot();
       'Bis hierher könnte alles auch für eine ganz normale Website gelten. Jetzt kommt der Teil, der aus einer Seite ein Erlebnis macht: Wir planen die Startseite wie einen Abend in deinem Betrieb, Abschnitt für Abschnitt, mit Tempo und Bewegung.',
       'Das Drehbuch entsteht auf Papier oder in der CLAUDE.md, bevor ein einziges Bild existiert. Es legt fest, was der Gast in welcher Reihenfolge sieht, wie schnell es geht und womit sich jeder Abschnitt bewegt. Wer es überspringt, baut Abschnitt für Abschnitt und merkt erst am Ende, dass die Seite keine Richtung hat.'
     ],
-    anim:{key:'a65', eb:'Wie eine Startseite erzählt', h:'Ein Abend in <span class="g">Abschnitten</span>.', sub:'Jeder Abschnitt hat einen Anfang und ein Ende und braucht höchstens drei bis vier Scrollbewegungen. Dann übergibt er an den nächsten.'},
+    anim:{key:'a65', eb:'Wie eine Startseite erzählt', h:'Ein Abend in <span class="g">Abschnitten</span>.', sub:'Sechs Abschnitte, jeder mit eigenem Tempo. Achte darauf, wo einer aufhört und der nächste beginnt.'},
     secs:[
-      {eb:'Die wichtigste Regel', h:'Abschnitte statt einer langen <span class="g">Fahrt</span>.', b:[
+      {eb:'Der Grundsatz', h:'Die Seite in <span class="g">Abschnitten</span>.', b:[
         {t:'p', h:'Mein erster großer Restaurant-Bau hing komplett an einer einzigen Kamerafahrt. Beim Scrollen flog der Gast über die Insel, in die Bar, durch die Küche bis auf die Terrasse, sechsundzwanzig Sekunden Film über die ganze Seite. Das sah stark aus und hatte einen Haken: Ruckelte eine Stelle, ruckelte die ganze Seite, und jede Änderung am Film verschob alles dahinter.'},
         {t:'p', h:'Seitdem baue ich jede Startseite aus Abschnitten. Jeder Abschnitt ist in sich geschlossen, hat einen Anfang und ein Ende und braucht höchstens drei bis vier Scrollbewegungen. Es läuft immer nur der Abschnitt, den der Gast gerade sieht, der Rest ruht. Macht einer Probleme, reparierst du genau diesen, und die übrige Seite bleibt, wie sie ist.'},
-        {t:'merk', h:'Ein Abschnitt, drei bis vier Scrollbewegungen, ein Anfang und ein Ende. Dann übergibt er an den nächsten.'}
+        {t:'merk', h:'Macht ein Abschnitt Probleme, reparierst du nur ihn.'}
       ]},
       {eb:'Der Auftakt', h:'Der erste Blick ist sofort <span class="g">komplett</span>.', b:[
         {t:'p', h:'In dem Moment, in dem die Seite sichtbar wird, sind Name, Bild und Satz gleichzeitig da. Kein Ladebalken, kein schwarzer Vorhang mit deinem Logo, kein Bild, das erst unscharf ist und dann nachlädt. Ein Gast, der auf eine Wartefläche schaut, hat den ersten Eindruck schon verloren.'},
@@ -38033,18 +38034,18 @@ window.__tsn4Boot && window.__tsn4Boot();
       ]},
       {eb:'Tempo und Bewegung', h:'Kino entsteht aus dem <span class="g">Wechsel</span>.', b:[
         {t:'p', h:'Am Anfang habe ich den Scrollweg gleichmäßig verteilt. Technisch lief alles flüssig, und es wirkte trotzdem wie ein Bildschirmschoner. Spannung entsteht aus dem Wechsel: Der Weg in den Betrieb darf zügig sein, der Teller am Pass braucht Zeit, sonst sieht ihn niemand. Schreib deshalb neben jeden Abschnitt ein Tempo, zügig, ruhig oder langsam.'},
-        {t:'p', h:'Genauso wichtig ist, dass nicht jeder Abschnitt dieselbe Bewegung trägt. Wenn alle Bilder auf dieselbe Weise hereinkommen, wird die schönste Bewegung beim dritten Mal langweilig. Jeder Abschnitt bekommt seine eigene Anordnung und seine eigene Bewegung, und pro Blick bewegt sich nur ein Ding. Welche Bewegungen edel wirken, schauen wir uns in Lektion 6.6 an.'},
+        {t:'p', h:'Genauso wichtig ist, dass nicht jeder Abschnitt dieselbe Bewegung hat. Wenn alle Bilder auf dieselbe Weise hereinkommen, wird die schönste Bewegung beim dritten Mal langweilig. Jeder Abschnitt bekommt seine eigene Anordnung und seine eigene Bewegung. Welche Bewegungen edel wirken und wie viel davon auf einmal geht, schauen wir uns in Lektion 6.6 an.'},
         {t:'tab', h:['Abschnitt','Was der Gast sieht','Bewegung','Tempo'], r:[
           ['Auftakt','die Terrasse am Kanal im letzten Licht, Name groß','Bild setzt sich, Titel steigt','zügig'],
           ['Ankommen','Tür, Bar, das erste Glas','Bilder schweben einzeln herauf','zügig'],
           ['Der Raum','Gastraum mit Kerzen','Fenster: Ausschnitt öffnet sich','ruhig'],
-          ['Die Küche','Pass, Hände, Teller','Bilder Wand an Wand','langsam'],
-          ['Die Karte','vier Gerichte aus der aktuellen Karte','Karten nacheinander von links','ruhig'],
+          ['Am Pass','Hände, Teller unter der Wärmelampe','Bilder Wand an Wand, gemeinsam','ruhig'],
+          ['Der Teller','das eine Gericht, groß','Bild setzt sich','langsam'],
           ['Reservieren','Zeiten, Telefon, Knopf','keine','zügig']
         ]}
       ]},
       {eb:'Das Drehbuch schreiben', h:'Erst die Szenen, dann die <span class="g">Worte</span>.', b:[
-        {t:'code', l:'Auftrag: Drehbuch anlegen', h:'Lies den Abschnitt „Aufbau“ und den Design-Brief in der CLAUDE.md. Schreib daraus ein Drehbuch für die Startseite als Tabelle in den Abschnitt „Drehbuch“:\n\nAbschnitt | Was der Gast sieht | welche Gastfrage oder das Besondere | Bewegung | Tempo (zügig, ruhig, langsam) | Bildbedarf (Motiv, Format, echt vorhanden oder fehlt)\n\nRegeln:\n- Höchstens acht Abschnitte, jeder mit höchstens drei bis vier Scrollbewegungen.\n- Keine zwei Abschnitte mit derselben Bewegung oder derselben Anordnung.\n- Pro Blick bewegt sich nur ein Element.\n- Noch keine Texte über Bildern festlegen.\n\nZeig mir die Tabelle, bevor du sie speicherst.'},
+        {t:'code', l:'Auftrag: Drehbuch anlegen', h:'Lies den Abschnitt „Aufbau“ und den Design-Brief in der CLAUDE.md. Schreib daraus ein Drehbuch für die Startseite als Tabelle in den Abschnitt „Drehbuch“:\n\nAbschnitt | Was der Gast sieht | welche Gastfrage oder das Besondere | Bewegung | Tempo (zügig, ruhig, langsam) | Bildbedarf (Motiv, Format, echt vorhanden oder fehlt)\n\nRegeln:\n- Höchstens acht Abschnitte, jeder mit höchstens drei bis vier Scrollbewegungen.\n- Keine zwei Abschnitte mit derselben Bewegung oder derselben Anordnung.\n- Bewegung nach den Regeln aus dem Abschnitt Bewegung der CLAUDE.md.\n- Noch keine Texte über Bildern festlegen.\n\nZeig mir die Tabelle, bevor du sie speicherst.'},
         {t:'p', h:'Die Spalte Bildbedarf ist die Einkaufsliste für Lektion 6.7. Was dort als „echt vorhanden“ steht, fotografierst du oder suchst es heraus. Was „fehlt“, wird später gezielt erzeugt, und nur das.'},
         {t:'s', h:'Texte an Szenen binden, wenn die Szenen stehen.'},
         {t:'p', h:'Einen Fehler habe ich selbst gemacht, damit du ihn nicht machen musst. Ich hatte die Zeilen über dem Film festgelegt, als die Szenen noch nicht final waren. Bei jeder Änderung am Film saßen alle Zeilen falsch. Leg die Worte erst fest, wenn die Bilder stehen. Bis dahin bleiben beide getrennt.'}
@@ -38054,7 +38055,7 @@ window.__tsn4Boot && window.__tsn4Boot();
           ['Die ganze Seite an eine durchgehende Kamerafahrt hängen.','Abschnitte mit Anfang und Ende. Eine Fahrt höchstens als Auftakt.'],
           ['Die schönsten Fotos aneinanderreihen.','Eine Richtung erzählen: ankommen, hineingehen, am Tisch sitzen, reservieren. Sonst wird es eine Diashow.'],
           ['Ein schwarzer Startbildschirm mit Logo, bis alles geladen ist.','Der erste Blick ist sofort komplett, Name über dem Bild.'],
-          ['Derselbe Einblend-Effekt in jedem Abschnitt.','Jeder Abschnitt hat seine eigene Bewegung, und pro Blick bewegt sich nur eins.']
+          ['Derselbe Einblend-Effekt in jedem Abschnitt.','Jeder Abschnitt hat seine eigene Bewegung und seine eigene Anordnung.']
         ]}
       ]}
     ],
@@ -38069,7 +38070,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['ui-components-laden']={
     n:'L 6.6', title:'Bewegung mit <span class="g">Maß</span>', cover:'cover-66', coverL:'Teller wird am Pass angerichtet',
     intro:[
-      'Eine Seite, auf der sich nichts bewegt, wirkt heute wie eine Visitenkarte aus Papier, ordentlich und vergessen. Eine Seite, auf der alles hüpft und blinkt, wirkt billig. Dazwischen liegt eine Handvoll Bewegungen, die edel wirken, und die lernst du in dieser Lektion kennen.',
+      'Eine Seite, auf der sich nichts bewegt, wirkt heute wie eine Visitenkarte aus Papier, ordentlich und vergessen. Eine Seite, auf der alles hüpft und blinkt, wirkt billig. Dazwischen liegt eine Handvoll Bewegungen, die edel wirken. Ich nenne sie beim Namen, damit du sie Claude genauso nennen kannst.',
       'Dazu holen wir uns fertige Bausteine für das, was jede gute Seite braucht: eine Leiste oben, ein Menü, Knöpfe, die sich richtig anfühlen. Erfinden musst du davon nichts. Wissen musst du, wo man sie herbekommt und was die Lizenz erlaubt.'
     ],
     anim:{key:'a66', eb:'Die Sprache der Bewegung', h:'So bewegt sich eine <span class="g">edle Seite</span>.', sub:'Alle fünf Bewegungen laufen an derselben Bühne. Danach drei, die du nie einbauen solltest.'},
@@ -38086,12 +38087,12 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Bilder, die zusammen eine Fläche bilden, etwa eine Wand aus Fotos, kommen dagegen <b>gemeinsam</b> herein. Wenn jedes einzeln einschwebt, wirkt die Wand unruhig.'}
       ]},
       {eb:'Der Takt', h:'Zügig hinein, ruhig an den <span class="g">Platz</span>.', b:[
-        {t:'p', h:'Zu langsam ist nicht edel, zu schnell ist nicht ruhig. Bewährt hat sich bei mir etwa anderthalb Sekunden für ein Bild, mit einer Kurve, die sofort sichtbar losgeht und am Ende weich ausläuft. Eine Bewegung, die erst wartet und dann plötzlich da ist, wirkt wie ein Fehler.'},
+        {t:'p', h:'Meine Faustregel sind etwa anderthalb Sekunden für ein Bild, mit einer Kurve, die sofort sichtbar losgeht und am Ende weich ausläuft. Eine Bewegung, die erst wartet und dann plötzlich da ist, wirkt wie ein Fehler.'},
         {t:'p', h:'Und eine Regel steht über allem: Die Seite muss auf dem schwächsten Handy flüssig bleiben. Deshalb bewegt sich nur die Lage und die Größe eines Elements, nie seine Breite oder Höhe, und pro Blick bewegt sich nur eins. Das Scrollen selbst fasst du nie an. Es gibt Bibliotheken, die das Scrollen „glätten“ oder Abschnitte einrasten lassen. Sie fühlen sich am Rechner schick an und am Handy wie Kaugummi.'},
         {t:'code', l:'Bewegungs-Regeln für die CLAUDE.md', h:'## Bewegung\n- Bewegt werden nur Lage, Größe und Deckkraft (transform, opacity), nie Breite, Höhe oder Abstände.\n- Pro Blick bewegt sich nur ein Element. Was nicht sichtbar ist, rechnet nicht.\n- Das native Scrollen bleibt unangetastet: kein Einrasten, kein Glätten, kein Kapern.\n- Nichts kommt seitwärts herein, nichts wackelt, nichts blinkt, nichts federt nach.\n- Takt: etwa 1,5 s je Bild, Kurve geht sofort sichtbar los und läuft weich aus.\n- Ausgelöst wird, sobald der Abschnitt den Bildschirmrand berührt, so dass man die Bewegung noch sieht.\n- Bei Ruckeln wird das Laden repariert, nicht die Bewegung entfernt.'}
       ]},
-      {eb:'Fertige Bausteine', h:'Holen statt <span class="g">erfinden</span>.', b:[
-        {t:'p', h:'Für die Leiste, die beim Scrollen mitgeht, für ein Menü, das sich sauber öffnet, und für Knöpfe mit Tiefe gibt es gute fertige Bausteine. Menschen, die den ganzen Tag nichts anderes machen, haben an diesen Details Hunderte Stunden gefeilt. Diese Arbeit noch einmal zu machen, ist die schlechteste Verwendung deiner Abende.'},
+      {eb:'Fertige Bausteine', h:'Fertige Bausteine <span class="g">holen</span>.', b:[
+        {t:'p', h:'Für die Leiste, die beim Scrollen mitgeht, für ein Menü, das sich sauber öffnet, und für Knöpfe mit Tiefe gibt es gute fertige Bausteine. Menschen, die den ganzen Tag nichts anderes machen, haben an diesen Details Hunderte Stunden gefeilt. Diese Arbeit noch einmal zu machen, lohnt sich für dich nicht.'},
         {t:'cards', c:3, i:[
           {e:'Offene Bibliotheken', n:'Kostenlos, laufen überall', p:'Code, den Claude direkt einbaut. Für die Bewegung auf deiner Seite ist das GSAP aus Lektion 6.2, kostenlos auch für gewerbliche Seiten.'},
           {e:'Gekaufte Komponenten', n:'Schön, aber gebunden', p:'Oft sehr fertig, laufen aber nur in dem Baukasten, für den sie gemacht sind, etwa Framer oder Webflow. In deinem Projekt aus eigenem Code laufen sie nicht. Das musst du vor dem Kauf wissen.'},
@@ -38104,16 +38105,15 @@ window.__tsn4Boot && window.__tsn4Boot();
       ]},
       {eb:'Typische Fehler', h:'Wann Bewegung <span class="g">billig</span> wirkt.', b:[
         {t:'pairs', i:[
-          ['Alle Abschnitte tragen dieselbe Einblendung.','Jeder Abschnitt seine Bewegung, und nie mehr als eine pro Blick.'],
+          ['In jedem Abschnitt dieselbe Einblendung.','Jeder Abschnitt hat seine eigene Bewegung, und pro Blick bewegt sich nur eins.'],
           ['Eine Bibliothek, die das Scrollen weich macht, weil es am Rechner edel wirkt.','Natives Scrollen. Am Handy entscheidet es über flüssig oder zäh.'],
-          ['Bei Ruckeln die Bewegung streichen.','Das Laden reparieren: Bildgrößen, Reihenfolge, Vorladen. Die Bewegung bleibt.'],
           ['Eine Komponente für einen Baukasten kaufen und ins eigene Projekt zwingen wollen.','Vor dem Kauf prüfen, ob sie in eigenem Code läuft. Sonst einen Schnipsel nehmen oder Claude bauen lassen.']
         ]}
       ]}
     ],
     emp:{kind:'Nutzung', at:'Bewegung', ag:'mit Maß', steps:['Benennen','Regeln','Bausteine','Prüfen'],
       intro:'Die Regeln einmal festzulegen spart dir Dutzende Korrekturen. Danach sagst du nur noch, welche Bewegung in welchen Abschnitt gehört.',
-      points:['Nenn Bewegungen <b>beim Namen</b>, wenn du Claude einen Abschnitt beschreibst.','Kopier die <b>Bewegungs-Regeln</b> in deine CLAUDE.md.','Hol Leiste, Menü und Knöpfe als fertige Bausteine und führ die <b>Lizenz-Liste</b>.','Prüf jede Bewegung am Handy. Ruckelt etwas, reparier das Laden.']},
+      points:['Nenn Bewegungen <b>beim Namen</b>, wenn du Claude einen Abschnitt beschreibst.','Kopier die <b>Bewegungs-Regeln</b> in deine CLAUDE.md.','Hol Leiste, Menü und Knöpfe als fertige Bausteine und führ die <b>Lizenz-Liste</b>.','Prüf jede Bewegung am Handy, wie in Lektion 6.12 beschrieben.']},
     learn:['Du kennst <b>fünf Bewegungen</b>, die edel wirken, und benennst sie beim Bauen.','Deine Seite bewegt sich im <b>Takt</b>: zügig hinein, ruhig an den Platz.','Das Scrollen bleibt <b>unangetastet</b>, und pro Blick bewegt sich nur eins.','Du holst fertige Bausteine und weißt: <b>eine Lizenz, ein Projekt</b>.'],
     next:'/lektionen/bilder-generieren'
   };
@@ -38122,8 +38122,8 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['bilder-generieren']={
     n:'L 6.7', title:'Echte Bilder <span class="g">zuerst</span>', cover:'cover-67', coverL:'Hände mit Handy über einem angerichteten Teller',
     intro:[
-      'Ein Gast, der deine Seite öffnet, will deinen Betrieb sehen. Nicht einen Betrieb, der so ähnlich aussieht. Deshalb gilt in diesem Modul eine klare Reihenfolge: zuerst deine eigenen Fotos, dann deine Fotos, mit KI verbessert, und erst ganz am Ende erzeugte Bilder für die Lücken, die bleiben.',
-      'Die Bildwerkzeuge kennst du aus Modul 2, als du die Cover für dein Backoffice erzeugt hast, und die Higgsfield-Verbindung aus Modul 3. Für die Website ändert sich vor allem, was ein Bild leisten muss: Es muss zu den anderen Bildern passen und auf einer großen Fläche bestehen, ohne aufzufallen.'
+      'Ein Gast, der deine Seite öffnet, will deinen Betrieb sehen. Deshalb gilt in diesem Modul eine klare Reihenfolge: zuerst deine eigenen Fotos, dann deine Fotos, mit KI verbessert, und erst ganz am Ende erzeugte Bilder für die Lücken, die bleiben.',
+      'Die Bildwerkzeuge kennst du aus Modul 2, als du die Cover für dein Backoffice erzeugt hast. Die Higgsfield-Verbindung hast du in Lektion 6.2 angelegt, ab hier wird damit erzeugt, und jeder Lauf kostet Guthaben. Für die Website ändert sich vor allem, was ein Bild leisten muss: Es muss zu den anderen Bildern passen und auf einer großen Fläche bestehen.'
     ],
     anim:{key:'a67', eb:'Verbessern statt erfinden', h:'Das Foto bleibt <span class="g">deins</span>.', sub:'Dieselbe Aufnahme vor und nach der Verbesserung. Achte darauf, was sich ändert, und was nicht.'},
     secs:[
@@ -38134,9 +38134,9 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'code', l:'Auftrag: Fotos sichten', h:'Sieh dir alle Bilder im Ordner fotos/ an und gleich sie mit der Spalte „Bildbedarf“ im Drehbuch ab. Schreib eine Liste:\n1. Welcher Platz im Drehbuch ist mit welchem Foto gut besetzt (Dateiname, Begründung in einem Satz)?\n2. Welche Fotos sind unscharf, zu klein oder passen in Licht und Stimmung nicht zum Rest?\n3. Welche Plätze bleiben leer?\nVerändere keine Dateien.'}
       ]},
       {eb:'Schritt 2', h:'Verbessern, ohne zu <span class="g">erfinden</span>.', b:[
-        {t:'p', h:'Viele Handyfotos sind echt, aber zu klein, zu flau oder farbstichig. Hier hilft die KI am meisten, und zwar als Bearbeiter, nicht als Erfinder. Sie rechnet das Foto größer, korrigiert Licht, Weißabgleich und Schärfe und lässt alles andere, wie es ist: denselben Raum, dieselbe Perspektive, denselben Teller.'},
+        {t:'p', h:'Viele Handyfotos sind echt, aber zu klein, zu flau oder farbstichig. Hier hilft die KI am meisten, und zwar als Bearbeiter, nicht als Erfinder. Sie rechnet das Foto größer, korrigiert Licht, Weißabgleich und Schärfe und lässt alles andere, wie es ist.'},
         {t:'p', h:'Die Grenze ist für mich klar. Ein Gericht wird nie verändert, weil der Gast genau dieses Gericht bestellen und bekommen wird. Gesichter, Schrift auf Schildern und Etiketten, dein Logo kommen immer aus dem Original. Und jedes verbesserte Bild legst du neben das Original, bevor es auf die Seite kommt.'},
-        {t:'code', l:'Auftrag: echtes Foto verbessern', h:'Verbessere das Foto fotos/[Datei] mit dem Bildwerkzeug aus der Higgsfield-Verbindung. Auftrag an das Modell, wörtlich:\n„Same scene, same camera angle, same plate and food. Improve only light, white balance, sharpness and resolution. Warm evening light as in the original.“\n\nWichtig: Gerichte, Gesichter, Schrift und Logos bleiben wie im Original. Speichere das Ergebnis als neue Datei in fotos/verbessert/ und zeig mir Original und Ergebnis nebeneinander. Nenn mir vorher die Kosten in Credits.'}
+        {t:'code', l:'Auftrag: echtes Foto verbessern', h:'Verbessere das Foto fotos/[Datei] über die Higgsfield-Verbindung. Auftrag an das Modell, wörtlich:\n„Same scene, same camera angle, same plate and food. Improve only light, white balance, sharpness and resolution. Warm evening light as in the original.“\n\nWichtig: Gerichte, Gesichter, Schrift und Logos bleiben wie im Original. Speichere das Ergebnis als neue Datei in fotos/verbessert/ und zeig mir Original und Ergebnis nebeneinander. Nenn mir vorher die Kosten in Credits.'}
       ]},
       {eb:'Schritt 3', h:'Lücken als <span class="g">Serie</span> erzeugen.', b:[
         {t:'p', h:'Was danach noch fehlt, erzeugen wir, aber nur das. Erzeugte Bilder sind gut für Stimmung und Orte, die man schwer fotografiert: das Haus im Abendlicht von der anderen Uferseite, ein Detail von Gläsern, die Terrasse im Sommer, wenn gerade November ist. Gerichte, die du servierst, fotografierst du immer selbst.'},
@@ -38146,7 +38146,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Erzeugt wird in <b>einer gebündelten Runde</b>, wenn Drehbuch und Brief stehen. Ich habe an einem einzigen Tag ein dreistelliges Guthaben verbrannt, weil ich ohne festen Plan losgelaufen bin. Jeder weitere Anlauf soll eine Korrektur sein, keine neue Idee.'}
       ]},
       {eb:'Schritt 4', h:'Herangezoomt <span class="g">prüfen</span>.', b:[
-        {t:'p', h:'Ein Bild, das klein gut aussieht, kann groß verraten, dass es erzeugt ist. Prüf jedes Bild in voller Größe: Hände mit der richtigen Anzahl Finger, Besteck, das an der richtigen Stelle liegt, Schrift auf Flaschen, die man lesen kann oder gar nicht sieht, nichts, was schwebt. Danach legst du alle Bilder einer Seite nebeneinander: dieselbe Tageszeit, dieselbe Blickrichtung, derselbe Stil? Fällt eines heraus, korrigierst du dieses eine, nicht die anderen.'},
+        {t:'p', h:'Ein Bild, das klein gut aussieht, kann groß verraten, dass es erzeugt ist. Prüf jedes Bild in voller Größe: Hände mit der richtigen Anzahl Finger, Besteck, das an der richtigen Stelle liegt, Schrift auf Flaschen, die man lesen kann oder gar nicht sieht, nichts, was schwebt. Danach legst du alle Bilder einer Seite nebeneinander: Stimmen Tageszeit und Blickrichtung überein? Fällt eines heraus, korrigierst du dieses eine, nicht die anderen.'},
         {t:'pairs', i:[
           ['Erzeugte Teller statt echter Gerichte, weil sie schöner aussehen.','Gerichte immer echt fotografiert, höchstens verbessert. Der Gast bestellt, was er gesehen hat.'],
           ['„Mal kurz testen“ im Bildwerkzeug, bevor das Drehbuch steht.','Eine gebündelte Runde, mit Liste und Kosten vorab.'],
@@ -38166,10 +38166,10 @@ window.__tsn4Boot && window.__tsn4Boot();
   LESSONS['videos-generieren-und-einsetzen']={
     n:'L 6.8', title:'Bewegtes <span class="g">Bild</span>', cover:'cover-68', coverL:'Terrasse am Wasser im Sonnenuntergang',
     intro:[
-      'Ein kurzer Film kann einen Auftakt tragen wie nichts anderes: der Blick über die Terrasse, während das Licht wechselt, oder die Kamera, die langsam auf den Pass zufährt. Er kann eine Seite aber auch schwer und langsam machen, und die Erzeugung ist der Teil des Moduls, bei dem am meisten Guthaben verbrennt.',
-      'In dieser Lektion klären wir, wo ein Film lohnt, wie du Clips ohne Sprünge baust und wie sie so auf die Seite kommen, dass sie am Handy flüssig laufen. Die Regeln habe ich teuer gelernt. Du bekommst sie vorab.'
+      'Ein kurzer Film im Auftakt zeigt, was kein Foto kann: wie das Licht über der Terrasse wechselt oder wie die Kamera langsam auf den Pass zufährt. Er kann eine Seite aber auch schwer und langsam machen, und die Erzeugung ist der Teil des Moduls, bei dem am meisten Guthaben verbrennt.',
+      'Wir klären hier, wo ein Film lohnt, wie du Clips ohne Sprünge baust und wie sie so auf die Seite kommen, dass sie am Handy flüssig laufen. Die Regeln habe ich teuer gelernt, du bekommst sie vorab. Notier dir vor jedem Lauf den Kontostand und danach auch.'
     ],
-    anim:{key:'a68', eb:'Die wichtigste Regel', h:'Wo zwei Clips sich <span class="g">treffen</span>.', sub:'Die Naht zwischen zwei Clips entscheidet, ob eine Fahrt wie ein Film wirkt oder wie ein Fehler.'},
+    anim:{key:'a68', eb:'An der Naht', h:'Wo zwei Clips sich <span class="g">treffen</span>.', sub:'Die Naht zwischen zwei Clips entscheidet, ob eine Fahrt wie ein Film wirkt oder wie ein Fehler.'},
     secs:[
       {eb:'Vorher entscheiden', h:'Wo ein Film sich <span class="g">lohnt</span>.', b:[
         {t:'p', h:'Ein Film gehört an eine Stelle der Startseite, meistens in den Auftakt. Dort darf er die Hauptrolle spielen. Überall sonst reicht ein starkes Foto mit einer guten Bewegung aus Lektion 6.6, und es lädt schneller.'},
@@ -38180,7 +38180,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'s', h:'Erstens: Jeder Folgeclip startet auf dem echten letzten Bild des vorherigen.'},
         {t:'p', h:'Du gibst dem Modell ein Startbild und ein Zielbild, und es erzeugt die Bewegung dazwischen. Kein Modell trifft das Zielbild genau. Nimmst du für den nächsten Clip wieder dein sauberes Originalbild als Start, springt der Inhalt an der Naht, so wie oben in der Animation. Claude zieht dir das tatsächlich letzte Bild aus jedem fertigen Clip, du musst nur wissen, dass es passieren muss.'},
         {t:'s', h:'Zweitens: Nicht jedes Modell hält dein Bild.'},
-        {t:'p', h:'Manche Modelle übernehmen deine Vorlage, andere zeichnen sie neu und verlieren dabei Details. Bei einer meiner Fahrten sind reihenweise Gläser vom Tresen verschwunden. Solche Modelle können Dinge nur umverteilen, nicht hinzufügen. Die Modellauswahl in den Bildwerkzeugen ändert sich jeden Monat, deshalb nenne ich dir hier keine Namen. Lass Claude über die Higgsfield-Verbindung empfehlen, welches Modell für Start- und Zielbild gerade passt, und teste mit einem kurzen Clip, bevor du eine ganze Fahrt beauftragst.'},
+        {t:'p', h:'Manche Modelle übernehmen deine Vorlage, andere zeichnen sie neu und verlieren dabei Details. Bei einer meiner Fahrten sind reihenweise Gläser vom Tresen verschwunden. Solche Modelle können Dinge nur umverteilen, nicht hinzufügen. Die Modellauswahl in den Bildwerkzeugen ändert sich jeden Monat, deshalb nenne ich dir hier keine Namen. Lass Claude über die Higgsfield-Verbindung aus Lektion 6.2 empfehlen, welches Modell für Start- und Zielbild gerade passt, und teste mit einem kurzen Clip, bevor du eine ganze Fahrt beauftragst.'},
         {t:'s', h:'Drittens: Keine Verneinungen, auch hier nicht.'},
         {t:'p', h:'Dieselbe Falle wie bei den Bildern. Wer schreibt, dass sich die Gläser nicht bewegen sollen, bekommt bewegte Gläser. Achte auch auf die Verben: Ein Wort, das eigentlich für Flüssigkeiten steht, lässt Rauch fließen wie Wasser. Beschreib lieber die Endposition, die du sehen willst.'},
         {t:'s', h:'Viertens: Jeden Clip als Bildstreifen lesen.'},
@@ -38207,7 +38207,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       ]}
     ],
     emp:{kind:'Nutzung', at:'Ein', ag:'Film', steps:['Stelle wählen','Testclip','Bildstreifen','Einbauen'],
-      intro:'Plane für den Film einen eigenen Tag und ein festes Budget an Guthaben. Notier vor jedem Lauf den Kontostand und danach auch.',
+      intro:'Plane für den Film einen eigenen Tag und ein festes Budget an Guthaben, und hör auf, wenn es aufgebraucht ist.',
       points:['Entscheide, <b>wo</b> der Film steht, meistens im Auftakt, sonst nirgends.','Erzeuge zuerst einen kurzen <b>Testclip</b> und prüf, ob das Modell dein Bild hält.','Lies jeden Clip als <b>Bildstreifen</b> und schließ den nächsten am echten letzten Bild an.','Bau die Fahrt als Bildfolge ein und prüf sie <b>vorwärts und rückwärts</b>.']},
     learn:['Ein Film steht <b>an einer Stelle</b>, meist im Auftakt, mit Standbild davor.','Jeder Folgeclip startet auf dem <b>echten letzten Bild</b> des vorherigen.','Du liest jeden Clip als <b>Bildstreifen</b> und misst, bevor du nachbesserst.','Eine Scrollfahrt läuft als <b>Bildfolge</b>, komprimiert und mit kleinem Vorlauf.'],
     next:'/lektionen/texte-definieren'
@@ -38218,12 +38218,12 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.9', title:'Worte, die <span class="g">schmecken</span>', cover:'cover-69', coverL:'Kreidetafel mit dem Gericht des Tages',
     intro:[
       'Bilder und Bewegung stehen. Was fehlt, sind die Worte, und genau hier fangen viele plötzlich an, Werbung zu schreiben. Eine Restaurant-Seite ist aber kein Text. Der Gast liest kaum, er schaut. Die wenigen Sätze, die er liest, müssen deshalb sitzen.',
-      'In dieser Lektion schreiben wir diese Sätze: kurz, konkret und so, dass sie deinen Teller aufwerten. Und wir lernen, die Sätze zu erkennen, die nach KI klingen, bevor ein Gast sie liest. Die Fakten stehen schon im Fakten-Block deiner CLAUDE.md, hier geht es um den Ton und darum, was ein Satz bei einem Gast auslöst.'
+      'Wir schreiben diese Sätze jetzt, kurz und so konkret, dass sie deinen Teller aufwerten. Und wir lernen, die Sätze zu erkennen, die nach KI klingen, bevor ein Gast sie liest. Die Fakten stehen schon im Fakten-Block deiner CLAUDE.md, hier geht es um den Ton und darum, was ein Satz bei einem Gast auslöst.'
     ],
     anim:{key:'a69', eb:'Der Unterschied in einem Satz', h:'Ein Satz wird <span class="g">konkret</span>.', sub:'Derselbe Platz unter demselben Teller. Einmal mit einem Satz, der überall stehen könnte, einmal mit einem, der nur bei dir stehen kann.', foot:'Gericht und Formulierung sind Beispiele.'},
     secs:[
       {eb:'Die Länge', h:'So wenig wie <span class="g">möglich</span>.', b:[
-        {t:'p', h:'Ein Absatz über die Leidenschaft für regionale Zutaten wird nicht gelesen, wenn daneben ein Bild steht, das dasselbe in einer Sekunde erzählt. Lass das Bild arbeiten. Für die Startseite hat sich bei mir diese Faustregel bewährt: Im Auftakt stehen der Name und ein Satz. Jeder weitere Abschnitt bekommt eine Überschrift und höchstens zwei kurze Sätze. Über bewegten Bildern stehen einzelne Zeilen, keine Sätze.'},
+        {t:'p', h:'Ein Absatz über die Leidenschaft für regionale Zutaten wird nicht gelesen, wenn daneben ein Bild steht, das dasselbe in einer Sekunde erzählt. Lass das Bild arbeiten. Für die Startseite gilt bei mir diese Faustregel: Im Auftakt stehen der Name und ein Satz. Jeder weitere Abschnitt bekommt eine Überschrift und höchstens zwei kurze Sätze. Über bewegten Bildern stehen einzelne Zeilen, keine Sätze.'},
         {t:'p', h:'Schreib nie ausführlicher als nötig. Wer mehr erzählen will, hat dafür die Karte, die Unterseite zum Betrieb oder das Gespräch am Tisch.'}
       ]},
       {eb:'Die Wertigkeit', h:'Würde ein Gast danach mehr <span class="g">zahlen</span>?', b:[
