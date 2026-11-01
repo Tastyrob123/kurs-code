@@ -31209,6 +31209,99 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsMO(sweep).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
+/* NEUBAU MODUL 2 · Erklaeranimation #tsn2sort „Die Weiche" (Lektion Dynamisches System)
+   Sechs Aufgaben aus dem Betrieb laufen nacheinander ein und werden auf drei Spuren sortiert:
+   Automation (immer gleich) · Notion Agent (mitdenken in Notion) · Claude Code (etwas von außen).
+   Grundzustand = Endzustand (alle Karten in ihren Spuren); Animation nur unter .js nach reveal(). */
+(function(){
+  if(window.__tsn2sort) return;
+  var T=window.__tsn2;
+  var LANES=[['Automation','immer gleich'],['Notion Agent','mitdenken in Notion'],['Claude Code','etwas von außen']];
+  var JOBS=[
+    ['Status „nachbestellen“ wird gesetzt','Daraus soll jedes Mal eine Bestellaufgabe werden.',0],
+    ['Neue Rezeptur vorbereiten','Zutaten heraussuchen, Mengen vorschlagen, Lücken markieren.',1],
+    ['Lieferschein liegt im Postfach','Die Datei ist außerhalb von Notion.',2],
+    ['Gericht geht auf die Karte','Beim Wechsel auf „aktiv“ soll das Datum gesetzt werden.',0],
+    ['Waste-Erfassung jede Woche ansehen','Auffälligkeiten erkennen und kurz zusammenfassen.',1],
+    ['Preise über alle Gerichte auswerten','Mehrere Datenbanken, viele Zeilen, ein Bericht.',2]
+  ];
+  var CSS=`
+  #tsn2sort{max-width:1080px;margin:84px auto 0;padding:0 clamp(16px,3vw,40px)}
+  #tsn2sort .stage{position:relative;border-radius:24px;border:1px solid rgba(255,255,255,.09);padding:clamp(20px,3vw,34px);overflow:hidden;
+    background:radial-gradient(60% 70% at 50% 0%,rgba(199,180,137,.08),rgba(199,180,137,0) 60%),#04050a;box-shadow:0 50px 100px -60px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05)}
+  #tsn2sort .in-slot{position:relative;height:96px;margin:0 auto 18px;max-width:440px;border-radius:16px;border:1px dashed rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+  #tsn2sort .in-slot span{font:600 9.5px/1 ${T.SANS};letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+  #tsn2sort .switch{position:relative;height:46px;margin:0 auto 14px;max-width:760px}
+  #tsn2sort .switch svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #tsn2sort .switch path{fill:none;stroke:rgba(255,255,255,.1);stroke-width:1.5;transition:stroke .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2sort .switch path.on{stroke:#c7b489}
+  #tsn2sort .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  #tsn2sort .lane{border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.02);padding:14px 12px 12px;min-height:250px;transition:border-color .4s cubic-bezier(.45,0,.55,1),background .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2sort .lane.on{border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.05)}
+  #tsn2sort .lane h5{margin:0 0 3px;font-family:${T.DISP};font-weight:600;font-size:16px;color:#fff;text-align:center}
+  #tsn2sort .lane small{display:block;text-align:center;font:600 9.5px/1.4 ${T.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:0 0 12px}
+  #tsn2sort .stack{display:flex;flex-direction:column;gap:8px}
+  #tsn2sort .job{border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#090b12;padding:10px 12px;box-shadow:0 14px 28px -18px rgba(0,0,0,.9)}
+  #tsn2sort .job b{display:block;font-size:13px;line-height:1.35;color:#fff;font-weight:600}
+  #tsn2sort .job i{display:block;font-style:normal;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.72);margin-top:3px}
+  #tsn2sort.js .stack .job{opacity:0;transform:translateY(8px)}
+  #tsn2sort.js .stack .job.in{opacity:1;transform:none;transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsn2sort .fly{position:absolute;z-index:5;pointer-events:none;width:300px;border-color:rgba(199,180,137,.55);transition:transform .9s cubic-bezier(.65,0,.25,1),opacity .3s cubic-bezier(.45,0,.55,1)}
+  #tsn2sort .cap{min-height:26px;margin:18px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);max-width:680px;transition:opacity .3s cubic-bezier(.45,0,.55,1)}
+  #tsn2sort .foot{display:flex;justify-content:center;margin:14px 0 0}
+  @media(max-width:760px){ #tsn2sort .lanes{grid-template-columns:1fr} #tsn2sort .switch{display:none} #tsn2sort .lane{min-height:0} #tsn2sort .fly{width:240px} }
+  @media(prefers-reduced-motion:reduce){ #tsn2sort *{transition:none!important} }
+  `;
+  function css(){ if(document.getElementById('tsn2sort-css')) return; var s=document.createElement('style'); s.id='tsn2sort-css'; s.textContent=CSS; document.head.appendChild(s); }
+  function jobHTML(j){ return '<div class="job"><b>'+j[0]+'</b><i>'+j[1]+'</i></div>'; }
+
+  window.__tsn2sort=function(){
+    css();
+    var el=T.make('tsn2sort','',T.head('','Die Weiche','Welcher Weg <span class="g">für welche Aufgabe</span>?','Sechs Aufgaben aus dem Betrieb, drei Wege. Die Faustregel entscheidet in wenigen Sekunden.')+
+      '<div class="stage"><div class="in-slot"><span>Neue Aufgabe</span></div>'+
+      '<div class="switch"><svg preserveAspectRatio="none" viewBox="0 0 760 46"><path d="M380 0 C380 30,127 16,127 46"/><path d="M380 0 L380 46"/><path d="M380 0 C380 30,633 16,633 46"/></svg></div>'+
+      '<div class="lanes">'+LANES.map(function(l,i){ return '<div class="lane" data-l="'+i+'"><h5>'+l[0]+'</h5><small>'+l[1]+'</small><div class="stack">'+JOBS.filter(function(j){ return j[2]===i; }).map(jobHTML).join('')+'</div></div>'; }).join('')+'</div>'+
+      '<div class="cap">Immer gleich: Automation. Mitdenken in Notion: Agent. Etwas von außen: Claude Code.</div>'+
+      '<div class="foot"><button type="button" class="tsn2-replay">Neu abspielen</button></div></div>');
+    var stage=el.querySelector('.stage'), slot=el.querySelector('.in-slot'), lanes=el.querySelectorAll('.lane'), paths=el.querySelectorAll('.switch path'), cap=el.querySelector('.cap');
+    var timers=[];
+    function T_(f,ms){ timers.push(setTimeout(f,ms)); }
+    function clear(){ timers.forEach(clearTimeout); timers=[]; Array.prototype.forEach.call(stage.querySelectorAll('.fly'),function(f){ f.parentNode.removeChild(f); }); }
+    function setCap(t){ cap.style.opacity=0; setTimeout(function(){ cap.textContent=t; cap.style.opacity=1; },160); }
+    function rel(n){ var a=stage.getBoundingClientRect(), b=n.getBoundingClientRect(); return {x:b.left-a.left,y:b.top-a.top,w:b.width,h:b.height}; }
+    function play(){
+      clear();
+      var counters=[0,0,0];
+      Array.prototype.forEach.call(el.querySelectorAll('.stack .job'),function(j){ j.classList.remove('in'); });
+      Array.prototype.forEach.call(lanes,function(l){ l.classList.remove('on'); }); Array.prototype.forEach.call(paths,function(p){ p.classList.remove('on'); });
+      JOBS.forEach(function(job,k){
+        var at=k*2000+300;
+        T_(function(){
+          var L=job[2], lane=lanes[L], target=lane.querySelectorAll('.stack .job')[counters[L]]; counters[L]++;
+          var s=rel(slot), f=document.createElement('div'); f.className='job fly'; f.innerHTML='<b>'+job[0]+'</b><i>'+job[1]+'</i>';
+          stage.appendChild(f);
+          var fw=f.offsetWidth; f.style.left=(s.x+(s.w-fw)/2)+'px'; f.style.top=(s.y+(s.h-f.offsetHeight)/2)+'px'; f.style.opacity='0';
+          void f.offsetWidth; f.style.opacity='1';
+          setCap(['Immer gleich, ohne Nachdenken: Das ist eine Automation.','Hier muss jemand mitdenken, und alles liegt in Notion: Das macht der Agent.','Die Datei liegt außerhalb von Notion: Dafür nimmst du Claude Code.'][L]);
+          T_(function(){
+            Array.prototype.forEach.call(paths,function(p,i){ p.classList.toggle('on',i===L); }); Array.prototype.forEach.call(lanes,function(l,i){ l.classList.toggle('on',i===L); });
+            var t=rel(target); var fs=f.getBoundingClientRect(), ss=stage.getBoundingClientRect();
+            var dx=t.x-(fs.left-ss.left), dy=t.y-(fs.top-ss.top), sc=t.w/fs.width;
+            f.style.transformOrigin='0 0'; f.style.transform='translate('+dx+'px,'+dy+'px) scale('+sc.toFixed(3)+')';
+          },700);
+          T_(function(){ target.classList.add('in'); if(f.parentNode) f.parentNode.removeChild(f); },1650);
+        },at);
+      });
+      T_(function(){ Array.prototype.forEach.call(lanes,function(l){ l.classList.remove('on'); }); Array.prototype.forEach.call(paths,function(p){ p.classList.remove('on'); }); setCap('Immer gleich: Automation. Mitdenken in Notion: Agent. Etwas von außen: Claude Code.'); }, JOBS.length*2000+600);
+    }
+    el.querySelector('.tsn2-replay').addEventListener('click',function(){ if(!T.reduced) play(); });
+    if(T.reduced) return el;
+    el.classList.add('js');
+    T.reveal(el,play);
+    return el;
+  };
+})();
+
 /* ============================================================
    NEUBAU MODUL 2 · Interface-, Kennzahlen-, Operations- und Vision-Lektionen
    Grundsatz A sinngemäß: Nutzen und tägliche Arbeit mit der Vorlage zuerst,
@@ -31357,7 +31450,7 @@ var TSISL_TEAM_ONB_V2=[
 
   /* ---------- Neue Seiten: Dynamisches System + Allgemeine Tipps ---------- */
   var FULL=[
-  { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'Lektion 2.16', title:'Dynamisches System', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system',
+  { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'L 2.16', title:'Dynamisches <span class="g">System</span>', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system', anim:'__tsn2sort',
     hide:['block-38eb9546553480f88995dbe5a2f41255'],
     body:'<p class="big">Deine Vorlage rechnet, sobald du etwas einträgst. Lebendig wird sie, wenn manches ohne dich passiert.</p>'+
       '<p>Dafür gibt es drei Wege, und jeder hat seinen Platz. Hier bekommst du den Überblick, damit du weißt, was wofür taugt. Wie du sie einrichtest, zeige ich dir Schritt für Schritt in Modul 4.</p>',
@@ -31370,7 +31463,7 @@ var TSISL_TEAM_ONB_V2=[
         '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
     learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4.'] },
 
-  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Lektion 2.18', title:'Allgemeine Tipps', cover:'TIPPS', next:null,
+  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'L 2.18', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:null,
     hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
     body:'<p class="big">Kleine Handgriffe, die den Alltag mit deiner Vorlage leichter machen.</p>',
     secs:function(){ return T.make('tsn2-tip-liste','tsn2-sec',T.steps([
@@ -31394,7 +31487,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!document.getElementById(HERO_CSS_ID) && window.__tsn2heroCSS){ var s=document.createElement('style'); s.id=HERO_CSS_ID; s.textContent=window.__tsn2heroCSS; document.head.appendChild(s); }
     if(!sc.querySelector('.ts-hero')){
       var h=document.createElement('div'); h.className='ts-hero tsn2-hero'; h.setAttribute('data-tsn2',cfg.key);
-      h.innerHTML='<img class="ts-hero__img" alt="'+cfg.title+'" src="'+T.phHero(cfg.cover)+'" fetchpriority="high" decoding="async">'+
+      h.innerHTML='<img class="ts-hero__img" alt="'+cfg.title.replace(/<[^>]+>/g,'')+'" src="'+T.phHero(cfg.cover)+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+T.LOGO+'" fetchpriority="high" decoding="async">'+
         '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div><h1 class="ts-hero__title">'+cfg.title+'</h1></div>';
       sc.insertBefore(h,nr);
@@ -31402,6 +31495,7 @@ var TSISL_TEAM_ONB_V2=[
     var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
     var wrap=document.createElement('div'); wrap.id='tsn2-'+cfg.key+'-wrap';
     wrap.appendChild(T.make('tsn2-'+cfg.key+'-body','tsn2-body',cfg.body));
+    if(cfg.anim && window[cfg.anim]) wrap.appendChild(window[cfg.anim]());
     var sec=cfg.secs(); wrap.appendChild(sec);
     var la=document.createElement('div'); la.id='tsn2-'+cfg.key+'-la'; wrap.appendChild(la);
     var hero=sc.querySelector('.ts-hero'); hero.parentNode.insertBefore(wrap, hero.nextSibling);
