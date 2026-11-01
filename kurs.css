@@ -115,10 +115,10 @@ section.notion-tabs {
   font-weight:600; font-style:normal; font-display:swap;
 }
 .page__zutatenliste .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__zutatenliste .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   filter:contrast(1.12) saturate(1.08); image-rendering:-webkit-optimize-contrast;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
@@ -156,7 +156,7 @@ section.notion-tabs {
 .page__zutatenliste #block-395b9546553480ef8cdbd7b1c7b004ed{ display:block !important; margin-top:-14px !important; }
 .page__zutatenliste #block-395b954655348026a5f1db0383851abc{ display:none !important; }
 .page__zutatenliste #block-395b95465534804b8f52ea56366162cc{
-  width:100% !important; max-width:820px !important; margin-inline-start:0 !important; margin-left:auto !important; margin-right:auto !important; text-align:center !important;
+  width:100% !important; max-width:calc(820px * var(--ts-tx)) !important; margin-inline-start:0 !important; margin-left:auto !important; margin-right:auto !important; text-align:center !important;
 }
 .page__zutatenliste #block-38eb95465534806c976fd2de291efe63,
 .page__zutatenliste #block-395b9546553480348711f50bf37904b3{ text-align:center !important; }
@@ -186,7 +186,7 @@ section.notion-tabs {
 /* Leerer Notion-Textblock direkt unter der Überschrift ausblenden → Fließtext rueckt so nah
    heran wie bei "Warenflüsse" (16px statt 48px; Robert 2026-07-13). */
 .page__zutatenliste #block-39bb9546553480669c76c172515df995{ display:none !important; }
-.page__zutatenliste #block-396b954655348098ae30f9bff07fa068{ display:flex !important; align-items:flex-start !important; max-width:1320px !important; margin-left:auto !important; margin-right:auto !important; }
+.page__zutatenliste #block-396b954655348098ae30f9bff07fa068{ display:flex !important; align-items:flex-start !important; max-width:var(--ts-page) !important; margin-left:auto !important; margin-right:auto !important; }
 .page__zutatenliste #block-396b954655348098ae30f9bff07fa068 > .notion-column{
   display:block !important; max-width:none !important; flex:0 0 auto !important; margin:0 !important;
   width:calc((100% - var(--column-spacing, 46px)) * 0.5) !important;
@@ -222,10 +222,10 @@ canvas[style*="2147483647"]{ display:none !important; }
   font-weight:600; font-style:normal; font-display:swap;
 }
 .page__index .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__index .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   filter:contrast(1.12) saturate(1.08); image-rendering:-webkit-optimize-contrast;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
@@ -238,7 +238,7 @@ canvas[style*="2147483647"]{ display:none !important; }
 .page__index .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
   left:50%; top:-10%; transform:translateX(-50%);
-  width:min(940px,100%); height:134%;
+  width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -324,10 +324,10 @@ canvas[style*="2147483647"]{ display:none !important; }
 
 /* ===== BLOCK 9 · Modul 2 (Hero) ===== */
 .page__modul-2-das-notion-ai-backoffice-system .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__modul-2-das-notion-ai-backoffice-system .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   filter:contrast(1.12) saturate(1.08); image-rendering:-webkit-optimize-contrast;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
@@ -372,10 +372,10 @@ canvas[style*="2147483647"]{ display:none !important; }
 
 /* ===== BLOCK 9 · Mehrwert & Zielbild (Hero) ===== */
 .page__mehrwert-zielbild .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__mehrwert-zielbild .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   filter:contrast(1.12) saturate(1.08); image-rendering:-webkit-optimize-contrast;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
@@ -390,7 +390,7 @@ canvas[style*="2147483647"]{ display:none !important; }
 }
 .page__mehrwert-zielbild .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -762,7 +762,7 @@ details > summary {
 #tsnav-wrap{position:fixed;left:0;right:0;top:0;z-index:9999;display:flex;justify-content:center;padding:44px 24px 0;
   pointer-events:none;font-family:-apple-system,system-ui,"SF Pro Display","Helvetica Neue",sans-serif}
 #tsnav{pointer-events:auto;position:relative;display:flex;align-items:center;justify-content:space-between;
-  width:100%;max-width:1200px;height:64px;padding:0 12px 0 28px;border-radius:9999px;
+  width:100%;max-width:var(--ts-page);height:64px;padding:0 12px 0 28px;border-radius:9999px;
   background:rgba(22,24,31,0.95);border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 32px rgba(0,0,0,0.35);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #tsnav .brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;letter-spacing:-0.4px;
@@ -831,10 +831,10 @@ details > summary {
 
 /* ===== BLOCK 10 · Inventurliste (Hero) ===== */
 .page__inventurliste .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__inventurliste .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__inventurliste .ts-hero::after{
@@ -848,7 +848,7 @@ details > summary {
 }
 .page__inventurliste .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -883,10 +883,10 @@ details > summary {
    Studio) freigestellt auf Transparenz. Text-Overlay = HTML/CSS (kein Bild-Text).
    ============================================================ */
 .page__gemeinkosten-mitarbeiterlhne .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__gemeinkosten-mitarbeiterlhne .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__gemeinkosten-mitarbeiterlhne .ts-hero::after{
@@ -900,7 +900,7 @@ details > summary {
 }
 .page__gemeinkosten-mitarbeiterlhne .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -935,10 +935,10 @@ details > summary {
    freigestellt auf Transparenz. Text-Overlay = HTML/CSS, kein Bild-Text).
    ============================================================ */
 .page__allergene-bersicht .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__allergene-bersicht .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__allergene-bersicht .ts-hero::after{
@@ -952,7 +952,7 @@ details > summary {
 }
 .page__allergene-bersicht .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -992,7 +992,7 @@ details > summary {
 
 /* inventurliste — t1/t2 als mittiger Block (volle Zeilen, nicht per Zeile zentriert) */
 .page__inventurliste #block-399b9546553480c0ac35e72c9d8c4055,
-.page__inventurliste #block-38eb9546553480d3ac7dda0fb8e1ab61{ max-width:900px; margin-left:auto; margin-right:auto; }
+.page__inventurliste #block-38eb9546553480d3ac7dda0fb8e1ab61{ max-width:calc(900px * var(--ts-tx)); margin-left:auto; margin-right:auto; }
 /* inventurliste — Ueberschrift "Die Inventurliste traegt die Nummer Null" — weiss, groesser, mittig, Abstand nach unten */
 .page__inventurliste #block-399b9546553480d993d5ef22dd9598a6,
 .page__inventurliste #block-399b9546553480d993d5ef22dd9598a6 .notion-text__content{ text-align:center; color:#ffffff; font-size:1.7rem; font-weight:600; line-height:1.3; }
@@ -1020,10 +1020,10 @@ details > summary {
 
 /* ===== BLOCK 11 · Lieferpartner (Hero) ===== */
 .page__lieferpartner-ansprechpartner-lieferantenvertrge .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__lieferpartner-ansprechpartner-lieferantenvertrge .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__lieferpartner-ansprechpartner-lieferantenvertrge .ts-hero::after{
@@ -1037,7 +1037,7 @@ details > summary {
 }
 .page__lieferpartner-ansprechpartner-lieferantenvertrge .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1078,7 +1078,7 @@ details > summary {
 
 /* Intro-Absatz mittig in schmaler Spalte — wie Startseite / inventurliste */
 .page__lieferpartner-ansprechpartner-lieferantenvertrge #block-39ab9546553480a7b16cdb56ad9de27e{
-  max-width:820px;
+  max-width:calc(820px * var(--ts-tx));
   margin-left:auto !important;
   margin-right:auto !important;
   margin-top:34px !important;
@@ -1125,10 +1125,10 @@ details > summary {
    KEIN img-Filter (Asset bereits sauber), __text::before-Radialglow hinter dem Titel wie Inventur.
    @keyframes tsMcZoom/tsRise + @font-face "Lineal TS" sind global (BLOCK 3) — hier NICHT dupliziert. */
 .page__rezepturen .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__rezepturen .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__rezepturen .ts-hero::after{
@@ -1142,7 +1142,7 @@ details > summary {
 }
 .page__rezepturen .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1184,7 +1184,7 @@ details > summary {
 .page__rezepturen #block-80f311485aa84816b97ce805515ce8c2,
 .page__rezepturen #block-394b9546553480c1a132df5b2fd33e6e,
 .page__rezepturen #block-2c5edc4c7d1e4c1eb2478fdea38a3535{
-  max-width:820px !important; margin-left:auto !important; margin-right:auto !important; }
+  max-width:calc(820px * var(--ts-tx)) !important; margin-left:auto !important; margin-right:auto !important; }
 
 /* Abstand Rechner #tsd5 → Sektion "Rezepturen als weiterer Baustein" verringert (natürlich):
    zwei leere Notion-Filler-Absätze direkt unter dem Widget raus (je ~32px toter Raum) +
@@ -1205,10 +1205,10 @@ details > summary {
 
 /* ---- gerichte-getrnke-finaler-schritt — Hero "DB IX : Gerichte & Getränke" (Muster: rezepturen DB V) ---- */
 .page__gerichte-getrnke-finaler-schritt .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__gerichte-getrnke-finaler-schritt .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__gerichte-getrnke-finaler-schritt .ts-hero::after{
@@ -1222,7 +1222,7 @@ details > summary {
 }
 .page__gerichte-getrnke-finaler-schritt .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1253,10 +1253,10 @@ details > summary {
 
 /* ---- key-metrics — Hero "Key Metrics" (Muster: gerichte DB XI / rezepturen DB V; Werte 1:1 aus Abschnitts-Katalog 01) ---- */
 .page__key-metrics .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__key-metrics .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__key-metrics .ts-hero::after{
@@ -1270,7 +1270,7 @@ details > summary {
 }
 .page__key-metrics .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1316,7 +1316,7 @@ details > summary {
    Klasse .ts-gkintro auf die zwei Intro-Absätze unter dem Hero; hier nur das Styling.
    Intro-Lead-Muster (max-width 820, margin auto). Body-Fließtext darunter bleibt linksbündig. */
 .page__gemeinkosten-mitarbeiterlhne .notion-text.ts-gkintro{
-  text-align:center !important; max-width:820px; margin-left:auto !important; margin-right:auto !important;
+  text-align:center !important; max-width:calc(820px * var(--ts-tx)); margin-left:auto !important; margin-right:auto !important;
 }
 
 /* ===== Gemeinkosten & Löhne (Lektion 2.5) · Exkurs "Eine Zahl, drei Brillen" hochgezogen =====
@@ -1385,10 +1385,10 @@ details > summary {
    => Titel-Oberkante ~80% der Cover-Inhaltshöhe, exakt wie /index (Robert-Vorgabe 15.07.2026).
    KEIN img-Filter (Farb-Boost im Asset). @keyframes tsMcZoom/tsRise + "Lineal TS" global — NICHT dupliziert. */
 .page__menkalkulation-catering-rechner .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__menkalkulation-catering-rechner .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__menkalkulation-catering-rechner .ts-hero::after{
@@ -1402,7 +1402,7 @@ details > summary {
 }
 .page__menkalkulation-catering-rechner .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-14%; transform:translateX(-50%); width:min(920px,104%); height:150%;
+  left:50%; top:-14%; transform:translateX(-50%); width:min(calc(920px * var(--ts-tx)),104%); height:150%;
   background:radial-gradient(58% 62% at 50% 46%, rgba(4,5,10,.92) 0%, rgba(4,5,10,.74) 36%, rgba(4,5,10,.36) 64%, rgba(4,5,10,0) 82%);
   filter:blur(4px);
 }
@@ -1434,10 +1434,10 @@ details > summary {
 
 /* ---- notion-ai-fr-unser-system — Hero "Notion AI in deinem System" (Muster: key-metrics; Werte 1:1 aus Abschnitts-Katalog 01) ---- */
 .page__notion-ai-fr-unser-system .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__notion-ai-fr-unser-system .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__notion-ai-fr-unser-system .ts-hero::after{
@@ -1451,7 +1451,7 @@ details > summary {
 }
 .page__notion-ai-fr-unser-system .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1495,7 +1495,7 @@ details > summary {
 .page__lektionen-schriftarten-anpassen .ts-hero,
 .page__lektionen-online-hosten .ts-hero,
 .page__lektionen-mobil-check .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__lektionen-claude-startklar-machen .ts-hero__img,
 .page__lektionen-website-skills-laden .ts-hero__img,
@@ -1509,7 +1509,7 @@ details > summary {
 .page__lektionen-schriftarten-anpassen .ts-hero__img,
 .page__lektionen-online-hosten .ts-hero__img,
 .page__lektionen-mobil-check .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__lektionen-claude-startklar-machen .ts-hero::after,
@@ -1556,7 +1556,7 @@ details > summary {
 .page__lektionen-online-hosten .ts-hero__text::before,
 .page__lektionen-mobil-check .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1674,7 +1674,7 @@ details > summary {
 .page__stack-aufrumen .ts-hero,
 .page__der-umstieg-von-chat-app-auf-claude-code .ts-hero,
 .page__modul-3-claude-grundlagen .ts-hero{
-  position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
+  position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate;
 }
 .page__was-ist-claude-genau .ts-hero__img,
 .page__welches-claude-wann-chatcoworkcodeapi .ts-hero__img,
@@ -1684,7 +1684,7 @@ details > summary {
 .page__stack-aufrumen .ts-hero__img,
 .page__der-umstieg-von-chat-app-auf-claude-code .ts-hero__img,
 .page__modul-3-claude-grundlagen .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .page__was-ist-claude-genau .ts-hero::after,
@@ -1723,7 +1723,7 @@ details > summary {
 .page__der-umstieg-von-chat-app-auf-claude-code .ts-hero__text::before,
 .page__modul-3-claude-grundlagen .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -1839,14 +1839,14 @@ details > summary {
 .tsn0-page:not(.go) *{ animation-play-state:paused !important; }
 
 /* ---- Hero (Katalog 01, Referenz /gerichte-getrnke-finaler-schritt) ---- */
-.tsn0-hero{ position:relative; width:min(1180px,94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
-.tsn0-hero__img{ position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; aspect-ratio:2360/936; object-fit:contain;
+.tsn0-hero{ position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
+.tsn0-hero__img{ position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; aspect-ratio:2360/936; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0; }
 .tsn0-hero::after{ content:""; position:absolute; z-index:1; pointer-events:none; left:50%; bottom:-4%; transform:translateX(-50%); width:74%; height:56%;
   background:radial-gradient(closest-side, rgba(4,5,10,.74) 0%, rgba(4,5,10,.42) 52%, rgba(4,5,10,0) 80%); }
 .tsn0-hero__text{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:-16%; padding:0 24px 8px; }
 /* Katalog 01: -16% (Robert-Entscheid offen: Vorschlag min(-16%,-189px), weil der Titel bei 1000px 28px unter das Bild rutscht). */
-.tsn0-hero__text::before{ content:""; position:absolute; z-index:-1; pointer-events:none; left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+.tsn0-hero__text::before{ content:""; position:absolute; z-index:-1; pointer-events:none; left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%); filter:blur(3px); }
 .tsn0-hero__logo{ display:block; width:58px; height:auto; margin:0 auto 10px; filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));
   animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both; pointer-events:none; user-select:none; }
@@ -1861,29 +1861,29 @@ details > summary {
   .tsn0-hero{ margin-top:110px; } }
 
 /* ---- Einleitung (Katalog 01) ---- */
-.tsn0-body{ max-width:860px; margin:56px auto 0; padding:0 clamp(24px,4vw,56px); text-align:center; }
+.tsn0-body{ max-width:calc(860px * var(--ts-tx)); margin:56px auto 0; padding:0 clamp(24px,4vw,56px); text-align:center; }
 .tsn0-body p{ font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); margin:0 0 13px; }
 .tsn0-body p:last-child{ margin-bottom:0; }
 .tsn0-body b{ color:var(--tsn0-gold); font-weight:600; }
 
 /* ---- Sektionskopf (Katalog 02, Kette-Groesse) ---- */
-.tsn0-head{ text-align:center; max-width:860px; margin:0 auto 44px; padding:0 24px; }
+.tsn0-head{ text-align:center; max-width:calc(860px * var(--ts-tx)); margin:0 auto 44px; padding:0 24px; }
 .tsn0-eb{ display:inline-flex; align-items:center; gap:9px; font:600 13px/1 var(--tsn0-sans); letter-spacing:.16em; text-transform:uppercase; color:var(--tsn0-gold); margin-bottom:12px; }
 .tsn0-eb::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--tsn0-gold); box-shadow:0 0 12px rgba(199,180,137,.7); }
 .tsn0-h2{ margin:0; font-family:var(--tsn0-disp); font-weight:600; font-size:clamp(1.9rem,4.4vw,2.9rem); line-height:1.08; letter-spacing:-.01em; text-wrap:balance; color:#fff; }
 .tsn0-h2 .g, .tsn0-sec h3 .g{ color:var(--tsn0-gold); }
-.tsn0-sub{ margin:14px auto 0; max-width:720px; font-size:16.5px; line-height:1.6; color:rgba(255,255,255,.86); text-wrap:balance; }
+.tsn0-sub{ margin:14px auto 0; max-width:calc(720px * var(--ts-tx)); font-size:16.5px; line-height:1.6; color:rgba(255,255,255,.86); text-wrap:balance; }
 .tsn0-anim{ width:100%; margin:96px 0 0; padding:0 clamp(20px,4vw,56px); }
 
 /* ---- Inhalts-Sektion: 860px Lesespalte ---- */
-.tsn0-sec{ max-width:860px; margin:88px auto 0; padding:0 clamp(24px,4vw,56px); }
+.tsn0-sec{ max-width:calc(860px * var(--ts-tx)); margin:88px auto 0; padding:0 clamp(24px,4vw,56px); }
 .tsn0-sec h3{ font-family:var(--tsn0-disp); font-weight:600; letter-spacing:-.015em; color:#fff; font-size:clamp(25px,2.8vw,32px); line-height:1.2; margin:0 0 16px; text-align:center; text-wrap:balance; }
 .tsn0-sec p{ font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); margin:0 0 13px; }
 .tsn0-sec p b{ color:var(--tsn0-gold); font-weight:600; }
-.tsn0-sec .lead{ text-align:center; max-width:720px; margin:0 auto 26px; }
+.tsn0-sec .lead{ text-align:center; max-width:calc(720px * var(--ts-tx)); margin:0 auto 26px; }
 .tsn0-sec a{ color:var(--tsn0-gold); text-decoration:none; border-bottom:1px solid rgba(199,180,137,.4); transition:border-color .3s cubic-bezier(.16,1,.3,1); }
 .tsn0-sec a:hover{ border-color:var(--tsn0-gold); }
-.tsn0-sec .tsn0-wide{ width:min(1080px,92vw); position:relative; left:50%; transform:translateX(-50%); }
+.tsn0-sec .tsn0-wide{ width:min(var(--ts-page),92vw); position:relative; left:50%; transform:translateX(-50%); }
 
 /* Karten (Katalog 02 Karten-Anatomie, opake Basis) */
 .tsn0-cards{ display:grid; gap:16px; margin:26px 0 6px; }
@@ -1907,7 +1907,7 @@ details > summary {
 .tsn0-do li b{ color:var(--tsn0-gold); font-weight:600; }
 
 /* Merkregel-Zeile (gut lesbar, nie unter .86) */
-.tsn0-rule{ margin:30px auto 0; max-width:720px; text-align:center; font-family:var(--tsn0-disp); font-weight:600; font-size:clamp(19px,2vw,22px); line-height:1.35; color:#fff; text-wrap:balance; }
+.tsn0-rule{ margin:30px auto 0; max-width:calc(720px * var(--ts-tx)); text-align:center; font-family:var(--tsn0-disp); font-weight:600; font-size:clamp(19px,2vw,22px); line-height:1.35; color:#fff; text-wrap:balance; }
 .tsn0-rule .g{ color:var(--tsn0-gold); }
 
 /* Quellenzeile */
@@ -1925,13 +1925,13 @@ details > summary {
 .tsn0-step{ height:32px; padding:0 14px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:transparent; color:rgba(255,255,255,.7); font:600 12px/1 var(--tsn0-sans); cursor:pointer;
   transition:border-color .4s cubic-bezier(.16,1,.3,1), color .4s cubic-bezier(.16,1,.3,1), background .4s cubic-bezier(.16,1,.3,1); font-variant-numeric:tabular-nums; }
 .tsn0-step.on{ border-color:rgba(199,180,137,.6); color:#05060b; background:var(--tsn0-gold); }
-.tsn0-cap{ max-width:640px; min-height:78px; margin:22px auto 0; text-align:center; font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); transition:opacity .35s cubic-bezier(.16,1,.3,1); }
+.tsn0-cap{ max-width:calc(640px * var(--ts-tx)); min-height:78px; margin:22px auto 0; text-align:center; font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); transition:opacity .35s cubic-bezier(.16,1,.3,1); }
 .tsn0-cap b{ color:var(--tsn0-gold); font-weight:600; }
 .tsn0-cap.fade{ opacity:0; }
 .tsn0-note{ margin:10px auto 0; text-align:center; font-size:12px; color:rgba(255,255,255,.55); }
 
 /* ---- Empfehlungs-Kachel (Katalog 07) ---- */
-.tsn0-emp{ width:min(1000px,95vw); margin:34px auto; padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px); position:relative; border-radius:20px; overflow:hidden;
+.tsn0-emp{ width:min(var(--ts-page),95vw); margin:34px auto; padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px); position:relative; border-radius:20px; overflow:hidden;
   background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0)); border:1px solid rgba(255,255,255,.10);
   box-shadow:0 30px 70px -34px rgba(0,0,0,.9),0 0 60px -24px rgba(199,180,137,.16),inset 0 1px 0 rgba(255,255,255,.05); color:#fff; }
 .tsn0-emp.js{ transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97); opacity:0; transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1); }
@@ -1977,7 +1977,7 @@ details > summary {
 .tsn0-learn .tsl-head{ text-align:center; margin-bottom:66px; }
 .tsn0-learn .tsl-eyebrow{ font-family:var(--tsn0-disp); font-weight:600; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--tsn0-gold); display:block; margin-bottom:14px; }
 .tsn0-learn .tsl-title{ font-family:var(--tsn0-disp); font-weight:600; font-size:clamp(30px,5vw,46px); line-height:1.05; color:#fff; margin:0; }
-.tsn0-learn .tsl-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px,3vw,40px); max-width:1180px; margin:0 auto; }
+.tsn0-learn .tsl-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px,3vw,40px); max-width:var(--ts-page); margin:0 auto; }
 .tsn0-learn .tsl-cell{ display:flex; justify-content:center; }
 .tsn0-learn .tsl-orb{ position:relative; width:100%; max-width:250px; aspect-ratio:1; border-radius:50%; display:flex; align-items:center; justify-content:center; text-align:center; padding:14%;
   background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.12);
@@ -2022,13 +2022,13 @@ html[data-tsn0="home"] #block-38fb954655348046a7b2d7825809be85{ margin-top:120px
   transition:background .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1); }
 .tsn0-btn:hover{ background:#d8c9ab; transform:translateY(-1px); box-shadow:0 14px 30px -12px rgba(199,180,137,.6); }
 .tsn0-btn svg{ width:16px; height:16px; }
-.tsn0-cta{ max-width:720px; margin:110px auto 0; padding:0 24px; text-align:center; }
+.tsn0-cta{ max-width:calc(720px * var(--ts-tx)); margin:110px auto 0; padding:0 24px; text-align:center; }
 .tsn0-cta p{ font-size:16.5px; line-height:1.6; color:rgba(255,255,255,.86); margin:0 0 26px; }
 .tsn0-cta.js{ opacity:0; transform:translateY(18px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
 .tsn0-cta.js.in{ opacity:1; transform:none; }
 
 /* ---- Startseite: "Die Linie" ---- */
-#tsn0-hline .hl-stage{ position:relative; display:grid; grid-template-columns:1fr 120px 1fr; align-items:stretch; width:min(940px,100%); margin:0 auto; }
+#tsn0-hline .hl-stage{ position:relative; display:grid; grid-template-columns:1fr 120px 1fr; align-items:stretch; width:min(calc(940px * var(--ts-tx)),100%); margin:0 auto; }
 #tsn0-hline .hl-card{ position:relative; padding:28px 28px 26px; border-radius:20px; border:1px solid rgba(255,255,255,.12);
   background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b; box-shadow:0 30px 70px -36px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
   transition:border-color .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), opacity .9s cubic-bezier(.16,1,.3,1); }
@@ -2060,7 +2060,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
   #tsn0-hline .hl-mv{ display:none; } }
 
 /* ---- Startseite: "Die Karte" ---- */
-#tsn0-menu .mc-card{ position:relative; width:min(860px,100%); margin:0 auto; padding:clamp(30px,5vw,56px) clamp(22px,5vw,64px) clamp(26px,4vw,44px); border-radius:6px;
+#tsn0-menu .mc-card{ position:relative; width:min(calc(860px * var(--ts-tx)),100%); margin:0 auto; padding:clamp(30px,5vw,56px) clamp(22px,5vw,64px) clamp(26px,4vw,44px); border-radius:6px;
   background:radial-gradient(120% 80% at 50% 0%,rgba(199,180,137,.07),rgba(199,180,137,0) 60%),linear-gradient(#0b0c12,#08090e);
   border:1px solid rgba(199,180,137,.22); box-shadow:0 50px 100px -50px rgba(0,0,0,.95),inset 0 0 0 6px #08090e,inset 0 0 0 7px rgba(199,180,137,.14); }
 #tsn0-menu .mc-top{ display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:clamp(26px,4vw,40px); text-align:center; }
@@ -2098,7 +2098,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media(max-width:640px){ #tsn0-menu .mc-row a{ flex-direction:column; gap:6px; } #tsn0-menu .mc-no{ flex:none; padding:0; } }
 
 /* ---- Modul-0-Uebersicht: Opener mit Leitlinie + Titelbild-Miniaturen ---- */
-#tsn0-m0list .ml-list{ position:relative; list-style:none; margin:0 auto; padding:0 0 0 40px; width:min(940px,100%); }
+#tsn0-m0list .ml-list{ position:relative; list-style:none; margin:0 auto; padding:0 0 0 40px; width:min(calc(940px * var(--ts-tx)),100%); }
 #tsn0-m0list .ml-spine{ position:absolute; left:15px; top:30px; bottom:42px; width:2px; }
 #tsn0-m0list .ml-spine::before{ content:""; position:absolute; inset:0; background:rgba(255,255,255,.08); border-radius:2px; }
 #tsn0-m0list .ml-fill{ position:absolute; inset:0; border-radius:2px; background:linear-gradient(rgba(199,180,137,.9),rgba(199,180,137,.35)); transform-origin:center top; }
@@ -2134,7 +2134,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- L0.1 · #tsn0-a01 "Fertig geliefert, von dir gefuellt." ----
    Im Fenster: echtes Notion (Dark Mode), Werte am 01.11.2026 abgenommen. Ausserhalb (.a1-out): Kurs-Gestaltung. */
-#tsn0-a01 .a1-stage{ width:min(820px,100%); margin:0 auto; overflow-x:auto; scrollbar-width:none; }
+#tsn0-a01 .a1-stage{ width:min(calc(820px * var(--ts-tx)),100%); margin:0 auto; overflow-x:auto; scrollbar-width:none; }
 #tsn0-a01 .a1-stage::-webkit-scrollbar{ display:none; }
 #tsn0-a01 .a1-win{ min-width:640px; height:470px; border-radius:12px; overflow:hidden; position:relative; background:#191919; border:1px solid #383836;
   font-family:ui-sans-serif,-apple-system,"system-ui","Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif;
@@ -2192,7 +2192,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media(prefers-reduced-motion:reduce){ #tsn0-a01 *{ transition:none !important; animation:none !important; } }
 
 /* ---- L0.2 · #tsn0-a02 "Die Tagesuhr" ---- */
-#tsn0-a02 .a2-frame{ display:grid; grid-template-columns:minmax(300px,400px) 1fr; gap:clamp(24px,4vw,56px); align-items:center; width:min(980px,100%); margin:0 auto;
+#tsn0-a02 .a2-frame{ display:grid; grid-template-columns:minmax(300px,400px) 1fr; gap:clamp(24px,4vw,56px); align-items:center; width:min(var(--ts-page),100%); margin:0 auto;
   padding:clamp(24px,3.5vw,40px); border-radius:22px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#06070c;
   box-shadow:0 50px 100px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
 #tsn0-a02.js .a2-frame{ opacity:0; transform:translateY(26px) scale(.97); }
@@ -2239,7 +2239,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media(max-width:820px){ #tsn0-a02 .a2-frame{ grid-template-columns:1fr; } #tsn0-a02 .a2-dial{ max-width:360px; margin:0 auto; } #tsn0-a02 .a2-row{ min-height:0; } }
 
 /* ---- L0.3 · #tsn0-a03 "Drei Ebenen, ein Lieferschein" ---- */
-#tsn0-a03 .a3-frame{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,4vw,48px); align-items:center; width:min(980px,100%); margin:0 auto;
+#tsn0-a03 .a3-frame{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,4vw,48px); align-items:center; width:min(var(--ts-page),100%); margin:0 auto;
   padding:clamp(22px,3vw,36px); border-radius:22px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#06070c;
   box-shadow:0 50px 100px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
 #tsn0-a03.js .a3-frame{ opacity:0; transform:translateY(26px) scale(.97); }
@@ -2284,7 +2284,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media(max-width:820px){ #tsn0-a03 .a3-frame{ grid-template-columns:1fr; } #tsn0-a03 .a3-stack{ height:360px; transform:scale(.86); transform-origin:center top; margin-bottom:-40px; } }
 
 /* ---- L0.4 · #tsn0-a04 "Der Faecher" ---- */
-#tsn0-a04 .a4-frame{ width:min(980px,100%); margin:0 auto; padding:clamp(26px,3.5vw,44px) clamp(16px,3vw,40px) 30px; border-radius:22px; border:1px solid rgba(255,255,255,.1);
+#tsn0-a04 .a4-frame{ width:min(var(--ts-page),100%); margin:0 auto; padding:clamp(26px,3.5vw,44px) clamp(16px,3vw,40px) 30px; border-radius:22px; border:1px solid rgba(255,255,255,.1);
   background:radial-gradient(70% 60% at 50% 100%,rgba(199,180,137,.08),rgba(199,180,137,0) 70%),linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#06070c;
   box-shadow:0 50px 100px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
 #tsn0-a04.js .a4-frame{ opacity:0; transform:translateY(26px) scale(.97); }
@@ -2310,7 +2310,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn0-a04 .a4-badge{ margin-top:6px; height:22px; padding:0 10px; border-radius:999px; display:flex; align-items:center; font:700 10px/1 var(--tsn0-sans); letter-spacing:.08em; text-transform:uppercase;
   background:var(--tsn0-gold); color:#05060b; opacity:0; transform:translateY(6px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
 #tsn0-a04.fin .a4-card.kurs .a4-badge{ opacity:1; transform:none; }
-#tsn0-a04 .a4-cap{ max-width:640px; min-height:52px; margin:14px auto 0; text-align:center; font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); transition:opacity .22s cubic-bezier(.16,1,.3,1); }
+#tsn0-a04 .a4-cap{ max-width:calc(640px * var(--ts-tx)); min-height:52px; margin:14px auto 0; text-align:center; font-size:15.5px; line-height:1.62; color:rgba(255,255,255,.86); transition:opacity .22s cubic-bezier(.16,1,.3,1); }
 #tsn0-a04 .a4-cap b{ color:var(--tsn0-gold); font-weight:600; }
 #tsn0-a04 .a4-cap.fade{ opacity:0; }
 @media(max-width:820px){ #tsn0-a04 .a4-fan{ height:auto; display:flex; gap:12px; overflow-x:auto; padding:30px 4px 10px; scrollbar-width:none; }
@@ -2326,7 +2326,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 @media(prefers-reduced-motion:reduce){ #tsn0-a02 *, #tsn0-a03 *, #tsn0-a04 *{ transition:none !important; animation:none !important; } }
 
 /* gemeinsamer Buehnen-Rahmen der Lektionen 0.5-0.7 + Abschluss (opake Basis) */
-#tsn0-a05 .a5-frame, #tsn0-a06 .a6-frame, #tsn0-a07 .a7-frame, #tsn0-ab .ab-frame{ position:relative; width:min(980px,100%); margin:0 auto; border-radius:22px; border:1px solid rgba(255,255,255,.1);
+#tsn0-a05 .a5-frame, #tsn0-a06 .a6-frame, #tsn0-a07 .a7-frame, #tsn0-ab .ab-frame{ position:relative; width:min(var(--ts-page),100%); margin:0 auto; border-radius:22px; border:1px solid rgba(255,255,255,.1);
   background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#06070c; box-shadow:0 50px 100px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05);
   transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
 #tsn0-a05.js .a5-frame, #tsn0-a06.js .a6-frame, #tsn0-a07.js .a7-frame, #tsn0-ab.js .ab-frame{ opacity:0; transform:translateY(26px) scale(.97); }
@@ -2480,9 +2480,9 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
    Gilt fuer jede Modul-1-Seite: Klasse .tsn1-hero wird vom JS gesetzt, keine Slug-Liste noetig.
    Werte 1:1 aus Abschnitts-Katalog 01: 76px / -16% / 58px Logo / clamp(2.6rem,8vw,5.4rem) / 6-fach-Textschatten.
    Zweizeiliger Titel (.two, nur Modul-Uebersicht): kleinere clamp + vertiefter Pull, nachgemessen h1Bottom <= imgBottom. */
-.ts-hero.tsn1-hero{ position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
+.ts-hero.tsn1-hero{ position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
 .ts-hero.tsn1-hero .ts-hero__img{
-  position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; aspect-ratio:2360/936; object-fit:contain;
+  position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; aspect-ratio:2360/936; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0;
 }
 .ts-hero.tsn1-hero::after{
@@ -2497,7 +2497,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .ts-hero.tsn1-hero.two .ts-hero__text{ margin-top:-24%; }
 .ts-hero.tsn1-hero .ts-hero__text::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+  left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%);
   filter:blur(3px);
 }
@@ -2621,14 +2621,14 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn3 .g,.tsn3 .ts-gold{color:var(--g)}
 
 /* ---------- Abschnitt 01 · Hero (Werte 1:1 Katalog 01) ---------- */
-.tsn3 .ts-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
-.tsn3 .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;
+.tsn3 .ts-hero{position:relative;width:min(var(--ts-page),94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
+.tsn3 .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:var(--ts-page);height:auto;object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
 .tsn3 .ts-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;
   background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
 .tsn3 .ts-hero__text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-16%;padding:0 24px 8px}
 .tsn3 .ts-hero.two .ts-hero__text{margin-top:-24%}
-.tsn3 .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;
+.tsn3 .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(calc(940px * var(--ts-tx)),100%);height:134%;
   background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
 .tsn3 .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));
   animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none}
@@ -2645,22 +2645,22 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 }
 
 /* ---------- Einleitung (Katalog 01) ---------- */
-.tsn3-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+.tsn3-body{max-width:calc(860px * var(--ts-tx));margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
 .tsn3-body p{font-size:15.5px;line-height:1.62;color:var(--tx);margin:0 0 13px}
 .tsn3-body p:last-child{margin-bottom:0}
 .tsn3-body b{color:var(--g);font-weight:600}
 
 /* ---------- Sektions-Kopf (Katalog 02, Standard-Titelgroesse) ---------- */
-.tsn3-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+.tsn3-head{text-align:center;max-width:calc(860px * var(--ts-tx));margin:0 auto 44px;padding:0 24px}
 .tsn3-eb{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:12px}
 .tsn3-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 12px rgba(199,180,137,.7)}
 .tsn3-h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0 0 14px}
-.tsn3-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0 auto;max-width:680px}
+.tsn3-sub{font-size:16.5px;line-height:1.6;color:var(--tx);margin:0 auto;max-width:calc(680px * var(--ts-tx))}
 
 /* ---------- Animations-Abschnitt ---------- */
 .tsn3-anim{margin:104px auto 0;padding:0 clamp(16px,3vw,32px)}
-.tsn3-stage{position:relative;width:min(1000px,100%);margin:0 auto}
-.tsn3-cap{min-height:78px;max-width:720px;margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);transition:opacity .45s var(--ease)}
+.tsn3-stage{position:relative;width:min(var(--ts-page),100%);margin:0 auto}
+.tsn3-cap{min-height:78px;max-width:calc(720px * var(--ts-tx));margin:26px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx);transition:opacity .45s var(--ease)}
 .tsn3-cap b{color:var(--g);font-weight:600}
 .tsn3-cap.swap{opacity:0}
 .tsn3-foot{display:flex;justify-content:center;margin-top:18px}
@@ -2670,14 +2670,14 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn3-replay svg{width:13px;height:13px}
 
 /* ---------- Inhalts-Sektion ---------- */
-.tsn3-sec{max-width:860px;margin:110px auto 0;padding:0 clamp(24px,4vw,56px)}
-.tsn3-sec.wide{max-width:1060px}
+.tsn3-sec{max-width:calc(860px * var(--ts-tx));margin:110px auto 0;padding:0 clamp(24px,4vw,56px)}
+.tsn3-sec.wide{max-width:var(--ts-page)}
 .tsn3-sec h3{font-family:var(--disp);font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:0 0 14px;text-align:center;text-wrap:balance}
 .tsn3-sec h4{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.3;color:#fff;margin:34px 0 10px}
 .tsn3-sec p{font-size:15.5px;line-height:1.62;color:var(--tx);margin:0 0 13px}
 .tsn3-sec p b,.tsn3-sec li b{color:var(--g);font-weight:600}
 .tsn3-sec p strong.lead{display:block;color:#fff;font-weight:600;margin-bottom:4px}
-.tsn3-sec .lead{text-align:center;max-width:720px;margin:0 auto 34px;color:var(--tx)}
+.tsn3-sec .lead{text-align:center;max-width:calc(720px * var(--ts-tx));margin:0 auto 34px;color:var(--tx)}
 .tsn3-sec a,.tsn3-body a{color:var(--g);text-decoration:none;border-bottom:1px solid rgba(199,180,137,.4);transition:border-color .3s ease}
 .tsn3-sec a:hover,.tsn3-body a:hover{border-color:var(--g)}
 .tsn3-sec ul.dot{list-style:none;margin:6px 0 16px;padding:0}
@@ -2744,7 +2744,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn3-tblw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
 /* Abbinder */
-.tsn3-close{max-width:900px;margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx)}
+.tsn3-close{max-width:calc(900px * var(--ts-tx));margin:30px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:var(--tx)}
 .tsn3-close b{color:var(--g);font-weight:600}
 
 /* Bild mit Bildzeile */
@@ -2757,7 +2757,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn3 .tsn3-rv{transition:opacity .8s var(--ease),transform .9s var(--ease)}
 
 /* ---------- Abschnitt 07 · Empfehlungs-Kachel (Werte 1:1 Katalog 07 / __ts3.emp) ---------- */
-.tsn3-emp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
+.tsn3-emp{width:min(var(--ts-page),95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
   background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
   box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);color:#fff;
   transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1;transition:transform .9s var(--ease),opacity .9s ease}
@@ -2801,7 +2801,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn3-learn .tsl-head{text-align:center;margin-bottom:66px}
 .tsn3-learn .tsl-eyebrow{font-family:var(--disp);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:14px}
 .tsn3-learn .tsl-title{font-family:var(--disp);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-.tsn3-learn .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+.tsn3-learn .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:var(--ts-page);margin:0 auto}
 .tsn3-learn .tsl-cell{display:flex;justify-content:center}
 .tsn3-learn .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
   background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
@@ -2880,7 +2880,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l00-landing.css ---- */
 /* LANDING · #tsn3-a00 "Ein Menue in vier Gaengen." — Menuekarte als Opener und Lektions-Register, Achse min(760px,100%) */
-#tsn3-a00 .l00-menu{width:min(760px,100%);margin:0 auto;padding:40px clamp(22px,5vw,56px) 34px;border-radius:6px;color:#1b1a17;
+#tsn3-a00 .l00-menu{width:min(calc(760px * var(--ts-tx)),100%);margin:0 auto;padding:40px clamp(22px,5vw,56px) 34px;border-radius:6px;color:#1b1a17;
   background:linear-gradient(180deg,#f4eee2,#e8dfcc);box-shadow:0 50px 90px -40px rgba(0,0,0,.95),0 0 0 1px rgba(199,180,137,.4),inset 0 0 0 10px #f4eee2,inset 0 0 0 11px rgba(143,129,103,.45)}
 #tsn3-a00 .l00-top{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding-bottom:22px;margin-bottom:10px;border-bottom:1px solid rgba(27,26,23,.25)}
 #tsn3-a00 .l00-est{font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#7a6d52}
@@ -2904,7 +2904,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 /* L3.1 · #tsn3-a01 "Claude sieht nur, was im Licht liegt." — eine Achse min(860px,100%)
    Bewegung nur ueber transform/opacity: Lampe auf einem Traeger (translateX), Kacheln hellen
    ueber eine Abdunkelungs-Schicht auf (opacity), kein filter-Uebergang. */
-#tsn3-a01 .l1-wrap{width:min(860px,100%);margin:0 auto}
+#tsn3-a01 .l1-wrap{width:min(calc(860px * var(--ts-tx)),100%);margin:0 auto}
 #tsn3-a01 .l1-panel{position:relative;border-radius:18px;border:1px solid rgba(199,180,137,.3);padding:18px 22px 16px;
   background:linear-gradient(rgba(199,180,137,.05),rgba(199,180,137,.05)),#05060b;box-shadow:0 30px 60px -36px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}
 #tsn3-a01 .l1-ph{display:flex;align-items:center;gap:9px;font:600 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:14px}
@@ -2920,7 +2920,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn3-a01 .l1-out li:not(.show) .k{color:rgba(255,255,255,.25)}
 #tsn3-a01 .l1-out li.show{background:rgba(199,180,137,.06);border-color:rgba(199,180,137,.16)}
 #tsn3-a01 .l1-out li.no.show{background:rgba(224,87,79,.05);border-color:rgba(224,87,79,.18)}
-#tsn3-a01 .l1-rail{position:relative;height:46px}
+#tsn3-a01 .l1-rail{position:relative;height:46px;overflow-x:clip;overflow-clip-margin:20px}
 #tsn3-a01 .l1-rail::before{content:"";position:absolute;left:0;right:0;top:14px;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.4) 12%,rgba(199,180,137,.4) 88%,rgba(199,180,137,0))}
 #tsn3-a01 .l1-car{position:absolute;inset:0;transform:translateX(calc(var(--i,0) * 25%));transition:transform .9s var(--ease);z-index:3;pointer-events:none}
 #tsn3-a01 .l1-lamp{position:absolute;top:6px;left:12.5%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#f3ead4;
@@ -2953,7 +2953,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l02-welches-claude-wann.css ---- */
 /* L3.2 · #tsn3-a02 "Sechs Bons, drei Faecher." — Bonschiene + Pass, eine Achse min(940px,100%) */
-#tsn3-a02 .l2-wrap{position:relative;width:min(940px,100%);margin:0 auto}
+#tsn3-a02 .l2-wrap{position:relative;width:min(calc(940px * var(--ts-tx)),100%);margin:0 auto}
 #tsn3-a02 .l2-print{position:relative;height:150px;display:flex;justify-content:center}
 #tsn3-a02 .l2-pb{position:relative;width:220px;height:62px;border-radius:12px 12px 6px 6px;background:linear-gradient(#20222c,#11131a);border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 40px -18px rgba(0,0,0,.9);display:flex;align-items:center;gap:10px;padding:0 16px}
 #tsn3-a02 .l2-led{width:7px;height:7px;border-radius:50%;background:#46af73;box-shadow:0 0 8px rgba(70,175,115,.8)}
@@ -2985,7 +2985,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l03-plaene-kosten.css ---- */
 /* L3.3 · #tsn3-a03 "Ein Arbeitstag, vier Plaene." — Tagesleiste + vier gleich grosse Plan-Saeulen, Achse min(960px,100%) */
-#tsn3-a03 .l3-wrap{width:min(960px,100%);margin:0 auto}
+#tsn3-a03 .l3-wrap{width:min(var(--ts-page),100%);margin:0 auto}
 #tsn3-a03 .l3-day{position:relative;height:104px;margin:0 2% 18px}
 #tsn3-a03 .l3-line{position:absolute;left:0;right:0;top:40px;height:3px;border-radius:2px;background:rgba(255,255,255,.08)}
 #tsn3-a03 .l3-fill{position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,#8f8167,#d8c9ab);transform-origin:left center;transform:scaleX(.8);transition:transform 1.2s var(--ease);box-shadow:0 0 14px rgba(199,180,137,.35)}
@@ -3020,7 +3020,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn3-a03 .l3-flag{position:absolute;left:12px;right:12px;bottom:12px;padding:6px 8px;border-radius:999px;font:600 10.5px/1 var(--sans);letter-spacing:.04em;color:#f1b3ad;border:1px solid rgba(224,87,79,.45);background:rgba(224,87,79,.08);opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .6s var(--back)}
 #tsn3-a03 .l3-plan.full .l3-flag{opacity:1;transform:none}
 #tsn3-a03 .l3-plan.off .l3-pr,#tsn3-a03 .l3-plan.off .l3-nm{color:rgba(255,255,255,.4)}
-#tsn3-a03 .l3-note{max-width:720px;margin:16px auto 0;text-align:center;font-size:12px;line-height:1.55;color:rgba(255,255,255,.55)}
+#tsn3-a03 .l3-note{max-width:calc(720px * var(--ts-tx));margin:16px auto 0;text-align:center;font-size:12px;line-height:1.55;color:rgba(255,255,255,.55)}
 #tsn3-a03 .l3-note .lg{display:inline-block;vertical-align:-1px;margin:0 6px 0 14px}
 #tsn3-a03 .l3-note .lg.r{width:11px;height:11px;border-radius:50%;border:2px solid var(--g)}
 #tsn3-a03 .l3-note .lg.b{width:18px;height:5px;border-radius:3px;background:var(--g);vertical-align:1px}
@@ -3036,7 +3036,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l04-desktop-app.css ---- */
 /* L3.4 · #tsn3-a04 "Ein Fenster, fuenf Stellen." — stilisiertes App-Fenster, Achse min(900px,100%) */
-#tsn3-a04 .l4-win{width:min(900px,100%);margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);
+#tsn3-a04 .l4-win{width:min(calc(900px * var(--ts-tx)),100%);margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);
   background:#0a0b12;box-shadow:0 40px 80px -40px rgba(0,0,0,.95),0 0 0 1px rgba(199,180,137,.08)}
 #tsn3-a04 .l4-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;background:#11131c;border-bottom:1px solid rgba(255,255,255,.06)}
 #tsn3-a04 .l4-bar .d{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.16)}
@@ -3090,7 +3090,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l05-cowork.css ---- */
 /* L3.5 · #tsn3-a05 "Ein Ordner, eine Liste." — Ordner links, Monatsliste rechts, gleiche Hoehe, Achse min(1000px,100%) */
-#tsn3-a05 .l5-wrap{width:min(1000px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#tsn3-a05 .l5-wrap{width:min(var(--ts-page),100%);margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 #tsn3-a05 .l5-folder,#tsn3-a05 .l5-sheet{border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px;height:440px;display:flex;flex-direction:column}
 #tsn3-a05 .l5-sheet{border-color:rgba(199,180,137,.3)}
 #tsn3-a05 .l5-h{display:flex;align-items:center;gap:10px;font:600 13px/1 var(--sans);color:#fff;margin-bottom:14px}
@@ -3136,7 +3136,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 /* ---- l06-chrome.css ---- */
 /* L3.6 · #tsn3-a06 "Bis zur Schranke." — echtes Chrome-Fenster (dunkel) + echte Claude-Seitenleiste, Achse min(980px,100%).
    Werte: Original-Werte.md (Chrome-Pixelwerte, claude.ai-Tokens dunkel, Zeiger und Leuchtrand aus der Erweiterung). */
-#tsn3-a06 .l6-win{width:min(980px,100%);margin:0 auto}
+#tsn3-a06 .l6-win{width:min(var(--ts-page),100%);margin:0 auto}
 #tsn3-a06 .tabs .ui-dots{align-self:center;margin-right:6px}
 #tsn3-a06 .tab .fav{width:14px;height:14px;border-radius:3px;background:#2f6b4f;flex:none}
 #tsn3-a06 .tool .ui-spark{width:18px;height:18px;flex:none}
@@ -3203,7 +3203,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l07-so-arbeitet-code.css ---- */
 /* L3.7 · #tsn3-a07 "Ein Auftrag, drei Bewegungen." — Kreis um den Projektordner, Buehne 440x440 */
-#tsn3-a07 .l7-wrap{width:min(560px,100%);margin:0 auto;padding:30px 70px 40px}
+#tsn3-a07 .l7-wrap{width:min(calc(560px * var(--ts-tx)),100%);margin:0 auto;padding:30px 70px 40px}
 #tsn3-a07 .l7-ring{position:relative;width:100%;aspect-ratio:1}
 #tsn3-a07 .l7-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
 #tsn3-a07 .l7-ring circle{fill:none;stroke-width:1.5}
@@ -3247,7 +3247,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l08-einrichten.css ---- */
 /* L3.8 · #tsn3-a08 "Vier Zeilen bis zum ersten Auftrag." — echtes Terminal (Original-Werte.md) + Schrittleiste darunter */
-#tsn3-a08 .l8-wrap{width:min(900px,100%);margin:0 auto}
+#tsn3-a08 .l8-wrap{width:min(calc(900px * var(--ts-tx)),100%);margin:0 auto}
 #tsn3-a08 .l8-scr{position:relative;height:330px;padding:12px 16px;overflow:hidden}
 #tsn3-a08 .l8-sh,#tsn3-a08 .l8-cc{transition:opacity .35s var(--ease)}
 #tsn3-a08 .l8-cc{position:absolute;inset:12px 16px}
@@ -3289,7 +3289,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l09-claude-md.css ---- */
 /* L3.9 · #tsn3-a09 "Eine Datei, die mitwaechst." — Datei links, Sitzung rechts, Achse min(940px,100%) */
-#tsn3-a09 .l9-wrap{width:min(940px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#tsn3-a09 .l9-wrap{width:min(calc(940px * var(--ts-tx)),100%);margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 #tsn3-a09 .l9-file,#tsn3-a09 .l9-chat{height:420px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px 18px;display:flex;flex-direction:column}
 #tsn3-a09 .l9-file{border-color:rgba(199,180,137,.32)}
 #tsn3-a09 .l9-fh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
@@ -3321,7 +3321,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l10-befehle.css ---- */
 /* L3.10 · #tsn3-a10 "Vier Tasten, eine Woche." — Tasten links, Tisch + Regal rechts, Achse min(940px,100%) */
-#tsn3-a10 .l10-wrap{width:min(940px,100%);margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px}
+#tsn3-a10 .l10-wrap{width:min(calc(940px * var(--ts-tx)),100%);margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px}
 #tsn3-a10 .l10-keys{display:grid;grid-template-rows:repeat(4,1fr);gap:10px}
 #tsn3-a10 .l10-key{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 16px;border-radius:14px;
   background:linear-gradient(#1b1d27,#10121a);border:1px solid rgba(255,255,255,.14);border-bottom-width:4px;box-shadow:0 14px 26px -16px rgba(0,0,0,.9);transition:transform .25s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
@@ -3361,7 +3361,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l11-plan-modelle.css ---- */
 /* L3.11 · #tsn3-a11 "Erst Mise en place, dann Service." — Brett mit fuenf Schalen, Achse min(980px,100%) */
-#tsn3-a11 .l11-wrap{position:relative;width:min(980px,100%);margin:0 auto;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.1);
+#tsn3-a11 .l11-wrap{position:relative;width:min(var(--ts-page),100%);margin:0 auto;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.1);
   background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b;box-shadow:0 40px 80px -40px rgba(0,0,0,.95)}
 #tsn3-a11 .l11-top{display:flex;align-items:center;gap:16px;margin-bottom:16px}
 #tsn3-a11 .l11-mode{position:relative;display:inline-flex;align-items:center;gap:9px;height:30px;padding:0 14px 0 12px;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.08);min-width:132px}
@@ -3398,7 +3398,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l12-skills-plugins.css ---- */
 /* L3.12 · #tsn3-a12 "Ein Kasten voller Rezeptkarten." — Tablett links, Rezeptkasten rechts, Achse min(980px,100%) */
-#tsn3-a12 .l12-wrap{width:min(980px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px}
+#tsn3-a12 .l12-wrap{width:min(var(--ts-page),100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px}
 #tsn3-a12 .l12-tray,#tsn3-a12 .l12-box{height:440px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px;display:flex;flex-direction:column;gap:10px;position:relative}
 #tsn3-a12 .l12-box{border-color:rgba(199,180,137,.3)}
 #tsn3-a12 .l12-th,#tsn3-a12 .l12-bh{font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:4px}
@@ -3434,7 +3434,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l13-verbindungen.css ---- */
 /* L3.13 · #tsn3-a13 "Vier Schalter, vier Faehigkeiten." — Schalttafel | Leitungen | Claude, Achse min(960px,100%) */
-#tsn3-a13 .l13-wrap{width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,1fr)}
+#tsn3-a13 .l13-wrap{width:min(var(--ts-page),100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,1fr)}
 #tsn3-a13 .l13-board,#tsn3-a13 .l13-claude{border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px;display:grid;grid-template-rows:28px repeat(4,64px) 46px;gap:10px}
 #tsn3-a13 .l13-claude{border-color:rgba(199,180,137,.3)}
 #tsn3-a13 .l13-h{font:600 9.5px/28px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
@@ -3467,7 +3467,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l14-kontext-kosten.css ---- */
 /* L3.14 · #tsn3-a14 "Die Uhr laeuft fuer alles, was im Wagen sitzt." — Pass + Taxiuhr, Achse min(960px,100%) */
-#tsn3-a14 .l14-wrap{width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+#tsn3-a14 .l14-wrap{width:min(var(--ts-page),100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
 #tsn3-a14 .l14-pass,#tsn3-a14 .l14-meter{position:relative;height:300px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px}
 #tsn3-a14 .l14-meter{border-color:rgba(199,180,137,.3)}
 #tsn3-a14 .l14-h{font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:16px}
@@ -3497,7 +3497,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l15-erste-session.css ---- */
 /* L3.15 · #tsn3-a15 "Vier Glocken am Pass." — Pass mit vier gleich grossen Plaetzen, Achse min(980px,100%) */
-#tsn3-a15 .l15-wrap{position:relative;width:min(980px,100%);margin:0 auto}
+#tsn3-a15 .l15-wrap{position:relative;width:min(var(--ts-page),100%);margin:0 auto}
 #tsn3-a15 .l15-pass{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:22px 18px 18px;border-radius:18px;
   background:linear-gradient(180deg,#191b24,#0e0f16);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 40px 80px -40px rgba(0,0,0,.95)}
 #tsn3-a15 .l15-heat{position:absolute;left:8%;right:8%;top:-18px;height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(243,190,120,.22),rgba(243,190,120,0));z-index:0}
@@ -3528,7 +3528,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l16-stack.css ---- */
 /* L3.16 · #tsn3-a16 "Ein Auszug, drei Stempel." — Abo-Auszug mit neun gleich hohen Zeilen, Achse min(760px,100%) */
-#tsn3-a16 .l16-sheet{width:min(760px,100%);margin:0 auto;padding:22px 24px 18px;border-radius:12px;background:linear-gradient(180deg,#f3ede1,#e6dcc8);color:#1b1a17;box-shadow:0 40px 70px -36px rgba(0,0,0,.95);
+#tsn3-a16 .l16-sheet{width:min(calc(760px * var(--ts-tx)),100%);margin:0 auto;padding:22px 24px 18px;border-radius:12px;background:linear-gradient(180deg,#f3ede1,#e6dcc8);color:#1b1a17;box-shadow:0 40px 70px -36px rgba(0,0,0,.95);
   background-image:repeating-linear-gradient(180deg,transparent 0 43px,rgba(27,26,23,.06) 43px 44px),linear-gradient(180deg,#f3ede1,#e6dcc8)}
 #tsn3-a16 .l16-h{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;margin-bottom:6px;border-bottom:2px solid rgba(27,26,23,.75)}
 #tsn3-a16 .l16-h span:first-child{font:700 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
@@ -3554,7 +3554,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* ---- l17-umstieg.css ---- */
 /* L3.17 · #tsn3-a17 "Sieben Tage, sieben Handgriffe." — sieben gleich grosse Tageskarten + Bruecke, Achse min(1000px,100%) */
-#tsn3-a17 .l17-wrap{width:min(1000px,100%);margin:0 auto}
+#tsn3-a17 .l17-wrap{width:min(var(--ts-page),100%);margin:0 auto}
 #tsn3-a17 .l17-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
 #tsn3-a17 .l17-day{position:relative;height:190px;border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);transition:border-color .5s var(--ease),box-shadow .5s var(--ease),transform .5s var(--ease)}
 #tsn3-a17 .l17-day .d{font-family:var(--disp);font-weight:600;font-size:20px;color:#fff}
@@ -3591,13 +3591,13 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 /* NEUBAU MODUL 4 · Heroes aller zehn Lektionen (L4.0-L4.9). Werte 1:1 aus Abschnitts-Katalog 01
    (76px / -16% / 58px Logo / clamp(2.6rem,8vw,5.4rem) / 6-fach-Textschatten). Gescopt ueber die Klasse
    .tsn4, die window.__tsn4 auf .super-content setzt, damit der Slug-Ort (Root oder /lektionen/) egal ist. */
-.tsn4 .ts-hero{ position:relative; width:min(1180px, 94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
-.tsn4 .ts-hero__img{ position:relative; display:block; margin:0 auto; width:100%; max-width:1180px; height:auto; aspect-ratio:2360/936; object-fit:contain;
+.tsn4 .ts-hero{ position:relative; width:min(var(--ts-page),94vw); margin:76px auto 10px; text-align:center; isolation:isolate; }
+.tsn4 .ts-hero__img{ position:relative; display:block; margin:0 auto; width:100%; max-width:var(--ts-page); height:auto; aspect-ratio:2360/936; object-fit:contain;
   animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both; pointer-events:none; user-select:none; z-index:0; }
 .tsn4 .ts-hero::after{ content:""; position:absolute; z-index:1; pointer-events:none; left:50%; bottom:-4%; transform:translateX(-50%); width:74%; height:56%;
   background:radial-gradient(closest-side, rgba(4,5,10,.74) 0%, rgba(4,5,10,.42) 52%, rgba(4,5,10,0) 80%); }
 .tsn4 .ts-hero__text{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:-16%; padding:0 24px 8px; }
-.tsn4 .ts-hero__text::before{ content:""; position:absolute; z-index:-1; pointer-events:none; left:50%; top:-10%; transform:translateX(-50%); width:min(940px,100%); height:134%;
+.tsn4 .ts-hero__text::before{ content:""; position:absolute; z-index:-1; pointer-events:none; left:50%; top:-10%; transform:translateX(-50%); width:min(calc(940px * var(--ts-tx)),100%); height:134%;
   background:radial-gradient(56% 60% at 50% 50%, rgba(4,5,10,.88) 0%, rgba(4,5,10,.68) 38%, rgba(4,5,10,.3) 64%, rgba(4,5,10,0) 82%); filter:blur(3px); }
 .tsn4 .ts-hero__logo{ display:block; width:58px; height:auto; margin:0 auto 10px;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));
@@ -3647,11 +3647,11 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .g,#tsn5 .ts-gold{color:var(--g)}
 
 /* ---- Abschnitt 01 · Hero (Katalog 01, 1:1) ---- */
-#tsn5 .ts-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
-#tsn5 .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
+#tsn5 .ts-hero{position:relative;width:min(var(--ts-page),94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
+#tsn5 .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:var(--ts-page);height:auto;object-fit:contain;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
 #tsn5 .ts-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
 #tsn5 .ts-hero__text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-16%;padding:0 24px 8px}
-#tsn5 .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
+#tsn5 .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(calc(940px * var(--ts-tx)),100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
 #tsn5 .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none}
 #tsn5 .ts-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both}
 #tsn5 .ts-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
@@ -3660,14 +3660,14 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-back:hover{color:var(--g)}
 
 /* ---- Einleitung (Katalog 01) ---- */
-#tsn5 .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+#tsn5 .ts-body{max-width:calc(860px * var(--ts-tx));margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
 #tsn5 .ts-body p{font-size:15.5px;line-height:1.62;color:var(--tx);margin:0 0 13px}
 #tsn5 .ts-body p:last-child{margin-bottom:0}
 #tsn5 .ts-body b{color:var(--g);font-weight:600}
 
 /* ---- Abschnitt 02 · Kopf der Erklaeranimation (Standard-Titelgroesse) ---- */
-#tsn5 .tsn5-anim{width:min(1080px,100%);margin:96px auto 0;padding:0 clamp(16px,3vw,32px)}
-#tsn5 .tsn5-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+#tsn5 .tsn5-anim{width:min(var(--ts-page),100%);margin:96px auto 0;padding:0 clamp(16px,3vw,32px)}
+#tsn5 .tsn5-head{text-align:center;max-width:calc(860px * var(--ts-tx));margin:0 auto 44px;padding:0 24px}
 #tsn5 .tsn5-eb{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:12px}
 #tsn5 .tsn5-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 12px rgba(199,180,137,.7)}
 #tsn5 .tsn5-head h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0 0 14px}
@@ -3683,11 +3683,11 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-cap{text-align:center;font-size:11px;letter-spacing:.04em;color:var(--tx3);margin:14px 0 0}
 
 /* ---- Inhalts-Sektion ---- */
-#tsn5 .tsn5-sec{max-width:880px;margin:88px auto 0;padding:0 clamp(24px,4vw,56px)}
-#tsn5 .tsn5-sec.wide{max-width:1080px}
+#tsn5 .tsn5-sec{max-width:calc(880px * var(--ts-tx));margin:88px auto 0;padding:0 clamp(24px,4vw,56px)}
+#tsn5 .tsn5-sec.wide{max-width:var(--ts-page)}
 #tsn5 .tsn5-sec > .tsn5-eb{display:flex;justify-content:center}
 #tsn5 .tsn5-sec h3{font-family:var(--disp);font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:0 0 14px;text-align:center;text-wrap:balance}
-#tsn5 .tsn5-sec .lead{text-align:center;max-width:720px;margin:0 auto 30px;font-size:15.5px;line-height:1.62;color:var(--tx)}
+#tsn5 .tsn5-sec .lead{text-align:center;max-width:calc(720px * var(--ts-tx));margin:0 auto 30px;font-size:15.5px;line-height:1.62;color:var(--tx)}
 #tsn5 .tsn5-sec p{font-size:15.5px;line-height:1.62;color:var(--tx);margin:0 0 14px}
 #tsn5 .tsn5-sec p b,#tsn5 .tsn5-sec li b{color:var(--g);font-weight:600}
 #tsn5 .tsn5-sec p.tsn5-kick{font-weight:600;color:#fff;margin:26px 0 8px}
@@ -3766,7 +3766,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 
 /* Bild (Platzhalter bis zur Generierungsrunde) */
 #tsn5 .tsn5-fig{margin:34px 0 24px}
-#tsn5 .tsn5-fig.bleed{width:min(1080px,92vw);position:relative;left:50%;transform:translateX(-50%)}
+#tsn5 .tsn5-fig.bleed{width:min(var(--ts-page),92vw);position:relative;left:50%;transform:translateX(-50%)}
 #tsn5.js .tsn5-fig.bleed.tsn5-rv{transform:translate(-50%,22px)}
 #tsn5.js .tsn5-fig.bleed.tsn5-rv.in{transform:translate(-50%,0)}
 #tsn5 .tsn5-fig .fi{position:relative;aspect-ratio:var(--r,16/9);border-radius:18px;overflow:hidden;border:1px solid rgba(199,180,137,.22);background:#07080d;box-shadow:0 40px 80px -44px rgba(0,0,0,.95)}
@@ -3777,7 +3777,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-fig .ph b{font-family:var(--disp);font-weight:600;font-size:clamp(16px,1.8vw,20px);color:var(--g3)}
 #tsn5 .tsn5-fig .ph span{max-width:56ch;font-size:13px;line-height:1.5;color:var(--tx3)}
 #tsn5 .tsn5-fig .ph i{font-style:normal;font:600 9.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(199,180,137,.6)}
-#tsn5 .tsn5-fig figcaption{font-size:12px;line-height:1.5;color:var(--tx3);text-align:center;margin:12px auto 0;max-width:640px}
+#tsn5 .tsn5-fig figcaption{font-size:12px;line-height:1.5;color:var(--tx3);text-align:center;margin:12px auto 0;max-width:calc(640px * var(--ts-tx))}
 @keyframes tsn5Shim{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
 
 /* ---- Werkzeuge (Rechner, Tester, Protokoll) ---- */
@@ -3824,7 +3824,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-meter i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#c7b489,#efe6d2);transform-origin:left;transform:scaleX(var(--p,0));transition:transform .6s var(--ez)}
 
 /* ---- Quellen & Stand ---- */
-#tsn5 .tsn5-src{max-width:880px;margin:80px auto 0;padding:0 clamp(24px,4vw,56px)}
+#tsn5 .tsn5-src{max-width:calc(880px * var(--ts-tx));margin:80px auto 0;padding:0 clamp(24px,4vw,56px)}
 #tsn5 .tsn5-src details{border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
 #tsn5 .tsn5-src summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:16px 2px;font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
 #tsn5 .tsn5-src summary::-webkit-details-marker{display:none}
@@ -3834,7 +3834,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-src li a{color:var(--g3);word-break:break-word}
 
 /* ---- Abschnitt 07 · Empfehlungs-Kachel (Verhalten wie Katalog 07) ---- */
-#tsn5 .tsn5-emp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
+#tsn5 .tsn5-emp{width:min(var(--ts-page),95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
   background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
   transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .9s var(--ez),opacity .9s cubic-bezier(.22,1,.36,1)}
 #tsn5.js .tsn5-emp:not(.in){transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
@@ -3876,7 +3876,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-learn .lh{text-align:center;margin-bottom:66px}
 #tsn5 .tsn5-learn .le{font-family:var(--disp);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:14px}
 #tsn5 .tsn5-learn .lt{font-family:var(--disp);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-#tsn5 .tsn5-learn .lg{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+#tsn5 .tsn5-learn .lg{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:var(--ts-page);margin:0 auto}
 #tsn5 .tsn5-learn .lc{display:flex;justify-content:center}
 #tsn5 .tsn5-learn .lo{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
   background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.12);
@@ -3897,7 +3897,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .tsn5-next svg{width:16px;height:16px}
 
 /* ---- Modul-Landing: Lektionskarten ---- */
-#tsn5 .tsn5-mods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:min(1080px,100%);margin:70px auto 0;padding:0 clamp(16px,3vw,32px)}
+#tsn5 .tsn5-mods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:min(var(--ts-page),100%);margin:70px auto 0;padding:0 clamp(16px,3vw,32px)}
 #tsn5 .tsn5-mod{position:relative;display:flex;flex-direction:column;gap:10px;min-height:190px;padding:22px 22px 20px;border-radius:18px;text-decoration:none;color:#fff;background:var(--card);border:1px solid var(--line);transition:border-color .45s cubic-bezier(.22,1,.36,1),transform .45s var(--ez),box-shadow .45s cubic-bezier(.22,1,.36,1)}
 #tsn5 .tsn5-mod:hover{border-color:rgba(199,180,137,.5);transform:translateY(-4px);box-shadow:0 28px 60px -30px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.12)}
 #tsn5.js .tsn5-mod.tsn5-rv.in:hover{transform:translateY(-4px)}
@@ -4209,7 +4209,7 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 #tsn5 .a7-k{font-size:10.5px;color:var(--tx3);text-align:center}
 #tsn5 .js .a7-d:not(.on) .a7-p,#tsn5 .js .a7-d:not(.on) .a7-k{color:rgba(255,255,255,.15)}
 #tsn5 .a7-d.cur{border-color:rgba(199,180,137,.6);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#07080d}
-#tsn5 .a7-card{margin:18px auto 0;max-width:620px;padding:16px 18px;border-radius:16px;background:#0b0c12;border:1px solid rgba(255,255,255,.12)}
+#tsn5 .a7-card{margin:18px auto 0;max-width:calc(620px * var(--ts-tx));padding:16px 18px;border-radius:16px;background:#0b0c12;border:1px solid rgba(255,255,255,.12)}
 #tsn5 .a7-ch{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
 #tsn5 .a7-ch span{font:600 9px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--tx3)}
 #tsn5 .a7-cd{font-size:12px;color:var(--g)}
@@ -4539,14 +4539,14 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6 .g{color:var(--g)}
 
 /* ---------- Abschnitt 01 · Hero ---------- */
-.tsn6-hero{width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate;position:relative}
+.tsn6-hero{width:min(var(--ts-page),94vw);margin:76px auto 10px;text-align:center;isolation:isolate;position:relative}
 .tsn6-hero__frame{position:relative;width:100%;aspect-ratio:2/1;overflow:hidden;border-radius:22px;z-index:0;
   -webkit-mask-image:radial-gradient(130% 120% at 50% 38%,#000 52%,transparent 100%);mask-image:radial-gradient(130% 120% at 50% 38%,#000 52%,transparent 100%)}
 .tsn6-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:tsn6Zoom 1200ms var(--ez) both}
 .tsn6-hero::after{content:"";position:absolute;left:50%;bottom:-4%;width:74%;height:56%;transform:translateX(-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
 .tsn6-hero__text{position:relative;z-index:2;margin-top:-24%;padding:0 16px 7%}
-.tsn6-hero__text::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:min(940px,100%);height:134%;top:-10%;z-index:-1;pointer-events:none;filter:blur(3px);
+.tsn6-hero__text::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:min(calc(940px * var(--ts-tx)),100%);height:134%;top:-10%;z-index:-1;pointer-events:none;filter:blur(3px);
   background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%)}
 .tsn6-hero__logo{display:block;width:58px;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsn6Rise 650ms var(--ez) 60ms both}
 .tsn6-hero__eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:16px;
@@ -4560,21 +4560,21 @@ html.tsn6-on .notion-header.page{display:none!important}
 @keyframes tsn6Rise{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
 
 /* ---------- Einleitung ---------- */
-.tsn6-intro{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+.tsn6-intro{max-width:calc(860px * var(--ts-tx));margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
 .tsn6-intro p{font-size:15.5px;line-height:1.62;color:var(--t);margin:0 0 13px}
 .tsn6-intro b{color:var(--g);font-weight:600}
 
 /* ---------- Abschnitt 02 · Sektionskopf + Buehne ---------- */
 .tsn6-anim{margin:96px auto 0;padding:0 clamp(16px,3vw,32px)}
-.tsn6-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+.tsn6-head{text-align:center;max-width:calc(860px * var(--ts-tx));margin:0 auto 44px;padding:0 24px}
 .tsn6-eb{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:12px}
 .tsn6-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 12px rgba(199,180,137,.7)}
 .tsn6-head h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0}
-.tsn6-head p{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:14px auto 0;max-width:680px}
-.tsn6-stage{position:relative;width:min(1040px,100%);margin:0 auto;border-radius:22px;padding:clamp(18px,3vw,36px);
+.tsn6-head p{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:14px auto 0;max-width:calc(680px * var(--ts-tx))}
+.tsn6-stage{position:relative;width:min(var(--ts-page),100%);margin:0 auto;border-radius:22px;padding:clamp(18px,3vw,36px);
   background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),var(--bg);border:1px solid rgba(255,255,255,.09);
   box-shadow:0 40px 90px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden}
-.tsn6-cap{min-height:3.2em;margin:22px auto 0;max-width:760px;text-align:center;font-size:15px;line-height:1.6;color:var(--t)}
+.tsn6-cap{min-height:3.2em;margin:22px auto 0;max-width:calc(760px * var(--ts-tx));text-align:center;font-size:15px;line-height:1.6;color:var(--t)}
 .tsn6-cap b{color:var(--g);font-weight:600}
 .tsn6-replay{display:flex;justify-content:center;margin-top:16px}
 .tsn6-replay button{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 16px;border-radius:999px;border:1px solid rgba(199,180,137,.45);background:transparent;color:var(--g);
@@ -4591,14 +4591,14 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6 img.tsn6-pic{display:block;width:100%;height:100%;object-fit:cover}
 
 /* ---------- Inhalts-Sektionen ---------- */
-.tsn6-sec{max-width:880px;margin:110px auto 0;padding:0 clamp(24px,4vw,56px)}
+.tsn6-sec{max-width:calc(880px * var(--ts-tx));margin:110px auto 0;padding:0 clamp(24px,4vw,56px)}
 .tsn6-sec>.tsn6-sh{text-align:center;margin:0 0 30px}
 .tsn6-sec>.tsn6-sh .tsn6-eb{margin-bottom:14px}
 .tsn6-sec h3{font-family:var(--disp);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.45rem);line-height:1.1;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0}
 .tsn6-sec h4{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2vw,22px);line-height:1.3;color:#fff;margin:34px 0 10px}
 .tsn6-sec p{font-size:15.5px;line-height:1.62;color:var(--t);margin:0 0 14px}
 .tsn6-sec p b,.tsn6-sec li b{color:var(--g);font-weight:600}
-.tsn6-sec p.lead{font-size:16.5px;color:rgba(255,255,255,.8);text-align:center;max-width:720px;margin:0 auto 28px}
+.tsn6-sec p.lead{font-size:16.5px;color:rgba(255,255,255,.8);text-align:center;max-width:calc(720px * var(--ts-tx));margin:0 auto 28px}
 .tsn6-sec a{color:var(--g);text-decoration:none;border-bottom:1px solid rgba(199,180,137,.4)}
 .tsn6-sec ul.tsn6-ul{list-style:none;margin:4px 0 18px;padding:0}
 .tsn6-sec ul.tsn6-ul li{position:relative;padding-left:22px;margin:0 0 10px;font-size:15.5px;line-height:1.62;color:var(--t)}
@@ -4653,10 +4653,10 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6-pair>div:last-child i{color:#46af73}
 
 /* Bild im Text (gross, edel) */
-.tsn6-fig{width:min(1100px,94vw);position:relative;left:50%;transform:translateX(-50%);margin:40px 0 34px}
+.tsn6-fig{width:min(var(--ts-page),94vw);position:relative;left:50%;transform:translateX(-50%);margin:40px 0 34px}
 .tsn6-fig .fr{width:100%;aspect-ratio:21/9;border-radius:20px;overflow:hidden;box-shadow:0 40px 90px -46px rgba(0,0,0,.95)}
 .tsn6-fig .fr>*{width:100%;height:100%}
-.tsn6-fig figcaption{max-width:720px;margin:14px auto 0;text-align:center;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.6)}
+.tsn6-fig figcaption{max-width:calc(720px * var(--ts-tx));margin:14px auto 0;text-align:center;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.6)}
 
 /* Tabelle (Uebersichten) */
 .tsn6-tab{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0 14px;font-size:14px;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}
@@ -4670,7 +4670,7 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6.js .tsn6-rv:not(.in){opacity:0;transform:translateY(26px)}
 
 /* ---------- Abschnitt 07 · Empfehlungs-Kachel ---------- */
-.tsn6-emp{width:min(1000px,95vw);margin:72px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
+.tsn6-emp{width:min(var(--ts-page),95vw);margin:72px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);position:relative;border-radius:20px;overflow:hidden;
   background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0)),var(--bg);border:1px solid rgba(255,255,255,.10);
   box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
   transition:transform .9s var(--ez),opacity .9s cubic-bezier(.22,1,.36,1)}
@@ -4712,7 +4712,7 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6-learn .lh{text-align:center;margin-bottom:66px}
 .tsn6-learn .le{font-family:var(--disp);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:14px}
 .tsn6-learn .lt{font-family:var(--disp);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-.tsn6-learn .lg{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+.tsn6-learn .lg{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:var(--ts-page);margin:0 auto}
 .tsn6-learn .lc{display:flex;justify-content:center}
 .tsn6-learn .lo{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
   background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
@@ -4734,7 +4734,7 @@ html.tsn6-on .notion-header.page{display:none!important}
 #tsn6 #ts-next svg{width:16px;height:16px}
 
 /* ---------- Landing: Lektions-Register ---------- */
-.tsn6-reg{width:min(1180px,94vw);margin:110px auto 0}
+.tsn6-reg{width:min(var(--ts-page),94vw);margin:110px auto 0}
 .tsn6-reg .rg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tsn6-reg a.rk{position:relative;display:block;text-decoration:none;color:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:var(--bg);
   transition:border-color .4s cubic-bezier(.22,1,.36,1),transform .6s var(--ez),box-shadow .4s cubic-bezier(.22,1,.36,1)}
@@ -4801,3 +4801,22 @@ html.tsn6-on .notion-header.page{display:none!important}
 /* · */
 /* · */
 /* · */
+
+/* >>> GEMEINSAMER RAHMEN · BREITE (01.11.2026) — ANFANG >>>
+   Robert 01.11.2026: Seiten nutzen die Breite, schmaler gleichmaessiger Seitenrand statt
+   mittig zentrierter Spalte. Alle grossen festen Breiten im Kurs (frueher min(1180px,94vw),
+   min(1000px,95vw), max-width:1180px usw.) zeigen auf --ts-page, mittlere Breiten (Fliesstext,
+   Karten, 560-959px) wachsen auf grossen Fenstern um --ts-tx mit.
+   --ts-gut  Seitenrand: 16px Handy, 24px ab 600px, 48px ab 1200px, 64px ab 1600px
+   --ts-page nutzbare Breite = Fenster minus 2x Rand, hoechstens 1800px
+   --ts-tx   Faktor fuer Textspalten und mittlere Bausteine (1 / 1.12 / 1.18), Zeilen bleiben lesbar */
+:root{ --ts-gut:16px; --ts-tx:1; --ts-page:min(1800px, calc(100vw - 2 * var(--ts-gut))); }
+@media (min-width:600px){ :root{ --ts-gut:24px; } }
+@media (min-width:1200px){ :root{ --ts-gut:48px; --ts-tx:1.12; } }
+@media (min-width:1600px){ :root{ --ts-gut:64px; --ts-tx:1.18; } }
+/* Notion-Inhalt mit demselben Rand wie die Kurs-Bausteine (super.so setzt sonst 96px) */
+.super-content .notion-root.full-width{ padding-left:var(--ts-gut) !important; padding-right:var(--ts-gut) !important; }
+/* Seiten mit Notion-Textspalte (super.so: max-width 900px, 96px Rand): Spalte waechst mit --ts-tx, Rand wie oben */
+.super-content .notion-root.max-width{ max-width:calc(860px * var(--ts-tx) + 2 * var(--ts-gut)) !important; padding-left:var(--ts-gut) !important; padding-right:var(--ts-gut) !important; }
+@media (min-width:600px){ .super-content .notion-root.full-width.notion-collection{ padding-left:max(var(--ts-gut),32px) !important; padding-right:max(var(--ts-gut),32px) !important; } } /* Gruppen-Pfeile der Lektionsliste haengen 25px links heraus */
+/* <<< GEMEINSAMER RAHMEN · BREITE — ENDE <<< */
