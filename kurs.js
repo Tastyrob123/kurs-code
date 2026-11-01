@@ -9733,24 +9733,6 @@ window.__tsMO = function(cb){
         {name:'Native Automation (Trigger & Actions)', wert:1},
         {name:'Automatisierung mit Zeit-Auslöser', wert:1}
       ]},
-    /* Lektion 1.5 (Modul 1) — Formeln 2.0 + Rollups auf DB I/DB II. wert:0 = Konzept-/Anleitungskarten. */
-    { kachel_id:'m1_formeln', kachel_name:'Formeln & Rollups', ist_produkt_kachel:true,
-      einheit:'Rechenspalten', einheit_typ:'anzahl',
-      objekt_varianten:[
-        {name:'Den Formeleditor öffnen', wert:0},
-        {name:'prop()', wert:0},
-        {name:'Erledigt (Zahl)', wert:1},
-        {name:'Prio-Zahl', wert:1},
-        {name:'ToDos gesamt', wert:1},
-        {name:'Erledigte ToDos', wert:1},
-        {name:'Prioritäts-Ø', wert:1},
-        {name:'Fortschritt %', wert:1},
-        {name:'Fortschrittsbalken', wert:1},
-        {name:'Tage bis fällig', wert:1},
-        {name:'Termin', wert:1},
-        {name:'Ampel', wert:1},
-        {name:'Wenn die Formel rot wird', wert:0}
-      ]},
     /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter. */
     { kachel_id:'m1_ansichten', kachel_name:'Ansichten & Filter', ist_produkt_kachel:true,
       einheit:'Ansichten', einheit_typ:'anzahl',
@@ -10620,24 +10602,6 @@ var TSISL_TEAM_ONB_V2=[
     {title:'6. Automatisierung mit Zeit-Auslöser', desc:'Läuft nach Uhrzeit über alle Zeilen, ganz ohne Klick.', html:'<p class="notion-text">Ein Button braucht immer jemanden, der ihn drückt, und zwar in jeder Zeile einzeln. Bei zwanzig Einträgen sind das zwanzig Klicks. Dafür gibt es die zweite Bauform.</p><p class="notion-text">→ In der Datenbank oben rechts auf <b>⚡</b> → <b>Neue Automatisierung</b></p><p class="notion-text">→ <b>Auslöser :</b> Jeden Monat &nbsp;·&nbsp; am 1. &nbsp;·&nbsp; 08:00 Uhr</p><p class="notion-text">→ <b>Aktion :</b> Eigenschaft bearbeiten → Status auf „Geplant" setzen</p><p class="notion-text">Es gibt zwei Familien von Auslösern. <b>Zeitgesteuert</b> heißt: jeden Tag, jede Woche, jeden Monat zu einer festen Uhrzeit. <b>Ereignisgesteuert</b> heißt: wenn eine Seite hinzugefügt wird oder wenn eine bestimmte Eigenschaft bearbeitet wird.</p><p class="notion-text">Die Faustregel für die Wahl: <b>Button</b>, wenn du selbst entscheidest, wann etwas passiert. <b>Automatisierung</b>, wenn es ohne dich laufen soll oder gleich viele Zeilen betrifft.</p><p class="notion-text">Wie du damit in einem echten Betrieb einen Monatsabschluss einfrierst, siehst du in Modul 2.</p>'}
   ];
 
-  /* Lektion 1.5 (Modul 1) — Formeln 2.0 & Rollups auf DB I/DB II des PM-Systems.
-     Deckt prop/toNumber/ifs/round/let/repeat/format/dateBetween/empty/formatDate ab
-     (Voraussetzung fuer Modul 2: prop() 59x allein in der Inventurliste). */
-  var TS15_STEPS=[
-    {title:'1. Den Formeleditor öffnen', desc:'Neue Spalte anlegen, Eigenschaft Formel wählen — der Editor öffnet sich.', html:'<p class="notion-text">Jede Formel lebt in einer eigenen Spalte. Du legst sie an wie jede andere Eigenschaft auch.</p><p class="notion-text">→ In der Tabelle rechts auf <b>+</b> klicken → <b>Eigenschaft :</b> Formel → <b>Formel bearbeiten</b></p><p class="notion-text">Der Editor hat drei Teile: oben tippst du, darunter siehst du sofort das Ergebnis für die Zeile, in der du stehst, und rechts steht die Liste aller Funktionen mit Erklärung.</p><p class="notion-text">Solange etwas rot unterstrichen ist, speichert Notion die Formel nicht. Das ist kein Fehler von dir — das ist der Editor, der mitliest.</p>'},
-    {title:'2. prop() — der Griff in eine andere Spalte', desc:'Die eine Funktion, die in fast jeder Formel steckt.', html:'<p class="notion-text">Eine Formel rechnet nie mit sich selbst. Sie holt sich ihre Werte aus anderen Spalten, und dafür gibt es eine einzige Funktion.</p><p class="notion-text">Trage zum Ausprobieren das hier ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">prop(&quot;Zeitaufwand ( h )&quot;)</div><p class="notion-text">In den Anführungszeichen steht der Spaltenname — <b>exakt so, wie er in der Tabelle steht</b>, mit jedem Leerzeichen. Schreibfehler sind der häufigste Grund, warum eine Formel nicht läuft.</p><p class="notion-text">Diese Karte baut noch keine Spalte. Sie ist das Werkzeug für alles, was jetzt kommt.</p>'},
-    {title:'3. Erledigt (Zahl)', desc:'In DB II · Eigenschaft : Formel → toNumber() macht aus dem Haken eine 1.', html:'<p class="notion-text">Diese Spalte legst du in <b>DB II : Aufgaben &amp; ToDos</b> an, nicht in den Projekten.</p><p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Erledigt (Zahl)</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">toNumber(prop(&quot;Erledigt&quot;))</div><p class="notion-text">Ein Haken ist für Notion ein Ja/Nein-Wert, und mit Ja/Nein kann man nicht rechnen. <b>toNumber()</b> macht daraus eine 1 oder eine 0.</p><p class="notion-text">Damit kannst du erledigte Aufgaben gleich zusammenzählen — genau das machst du in Karte 6.</p>'},
-    {title:'4. Prio-Zahl', desc:'In DB II · Eigenschaft : Formel → ifs() übersetzt Hoch/Mittel/Niedrig in 3/2/1.', html:'<p class="notion-text">Auch diese Spalte gehört in <b>DB II : Aufgaben &amp; ToDos</b>.</p><p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Prio-Zahl</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">ifs(<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Hoch&quot;, 3,<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Mittel&quot;, 2,<br>&nbsp;&nbsp;prop(&quot;Priorität&quot;) == &quot;Niedrig&quot;, 1,<br>&nbsp;&nbsp;0<br>)</div><p class="notion-text"><b>ifs()</b> arbeitet die Paare von oben nach unten ab: Bedingung, dann Ergebnis. Die erste Bedingung, die zutrifft, gewinnt — der Rest wird nicht mehr geprüft. Ganz am Ende steht der Wert für alles, was auf keine Bedingung passt.</p><p class="notion-text">Damit brauchst du keine verschachtelten if-Klammern mehr, in denen sich nach drei Wochen niemand mehr zurechtfindet.</p>'},
-    {title:'5. ToDos gesamt', desc:'In DB I · Eigenschaft : Rollup → Verknüpfung : ToDos → Berechnen : Anzahl.', html:'<p class="notion-text">Ab hier baust du wieder in <b>DB I : Projektmanagement</b>.</p><p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Name</p><p class="notion-text">→ <b>Berechnen :</b> Anzahl</p><p class="notion-text">→ <b>Name der Spalte :</b> ToDos gesamt</p><p class="notion-text">Wie viele Aufgaben hängen an diesem Projekt? Der Rollup zählt sie, ohne dass du eine einzige Zahl eintippst.</p>'},
-    {title:'6. Erledigte ToDos', desc:'In DB I · Eigenschaft : Rollup → Eigenschaft : Erledigt (Zahl) → Berechnen : Summe.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Erledigt (Zahl)</p><p class="notion-text">→ <b>Berechnen :</b> Summe</p><p class="notion-text">→ <b>Name der Spalte :</b> Erledigte ToDos</p><p class="notion-text">Jetzt zahlt sich Karte 3 aus: Weil aus jedem Haken eine 1 geworden ist, ergibt die Summe genau die Anzahl der abgehakten Aufgaben.</p>'},
-    {title:'7. Prioritäts-Ø', desc:'In DB I · Eigenschaft : Rollup → Eigenschaft : Prio-Zahl → Berechnen : Durchschnitt.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Rollup</p><p class="notion-text">→ <b>Verknüpfung :</b> ToDos (DB II)</p><p class="notion-text">→ <b>Eigenschaft :</b> Prio-Zahl</p><p class="notion-text">→ <b>Berechnen :</b> Durchschnitt</p><p class="notion-text">→ <b>Name der Spalte :</b> Prioritäts-Ø</p><p class="notion-text">Ein Wert nahe 3 heißt: In diesem Projekt hängen überwiegend wichtige Aufgaben. Nahe 1 heißt: Das kann warten.</p><p class="notion-text">Das ist der Grund, warum Karte 4 die Auswahl in Zahlen übersetzt hat — über Wörter lässt sich kein Durchschnitt bilden.</p>'},
-    {title:'8. Fortschritt %', desc:'In DB I · Eigenschaft : Formel → round() rechnet den Anteil der erledigten Aufgaben aus.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fortschritt %</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;prop(&quot;ToDos gesamt&quot;) == 0,<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;round(prop(&quot;Erledigte ToDos&quot;) / prop(&quot;ToDos gesamt&quot;) * 100)<br>)</div><p class="notion-text">Die Abfrage am Anfang ist wichtig: Ein Projekt ohne Aufgaben würde sonst durch null teilen, und Notion zeigt an der Stelle einen Fehler statt einer Zahl.</p><p class="notion-text"><b>round()</b> schneidet die Nachkommastellen ab. Aus 66,66666 wird 67 — lesbar statt technisch korrekt.</p>'},
-    {title:'9. Fortschrittsbalken', desc:'In DB I · Eigenschaft : Formel → let() + repeat() bauen einen Balken aus Zeichen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Fortschrittsbalken</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">let(<br>&nbsp;&nbsp;voll, round(prop(&quot;Fortschritt %&quot;) / 10),<br>&nbsp;&nbsp;repeat(&quot;█&quot;, voll) + repeat(&quot;░&quot;, 10 - voll) + &quot;  &quot; + format(prop(&quot;Fortschritt %&quot;)) + &quot; %&quot;<br>)</div><p class="notion-text"><b>let()</b> gibt einem Zwischenwert einen Namen. Hier heißt er <b>voll</b> und steht für die Anzahl der gefüllten Kästchen. Ohne let müsstest du dieselbe Rechnung dreimal hinschreiben.</p><p class="notion-text"><b>repeat()</b> wiederholt ein Zeichen so oft, wie du sagst. <b>format()</b> macht aus der Zahl einen Text, sonst weigert sich Notion, sie an den Balken anzuhängen.</p><p class="notion-text">Das Ergebnis ist eine Spalte, die auf einen Blick zeigt, wo ein Projekt steht — ohne Diagramm, ohne Zusatz-Werkzeug.</p>'},
-    {title:'10. Tage bis fällig', desc:'In DB I · Eigenschaft : Formel → dateBetween() zählt die Tage bis zum Termin.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Tage bis fällig</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)),<br>&nbsp;&nbsp;0,<br>&nbsp;&nbsp;dateBetween(prop(&quot;Fällig am&quot;), now(), &quot;days&quot;)<br>)</div><p class="notion-text"><b>dateBetween()</b> nimmt zwei Zeitpunkte und die Einheit, in der du das Ergebnis willst — hier <b>days</b>. Weil das Fälligkeitsdatum vorne steht, kommt bei überfälligen Projekten eine negative Zahl heraus.</p><p class="notion-text"><b>empty()</b> fängt die Zeilen ab, in denen noch kein Datum steht. Ohne diese Abfrage würde die Spalte dort einen Fehler zeigen.</p><p class="notion-text"><b>now()</b> ist immer der Moment, in dem du die Seite ansiehst. Die Zahl ist morgen von allein um eins kleiner.</p>'},
-    {title:'11. Termin', desc:'In DB I · Eigenschaft : Formel → empty() + formatDate() geben das Datum lesbar aus.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Termin</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">if(<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)),<br>&nbsp;&nbsp;&quot;Kein Termin gesetzt&quot;,<br>&nbsp;&nbsp;formatDate(prop(&quot;Fällig am&quot;), &quot;DD.MM.YYYY&quot;)<br>)</div><p class="notion-text"><b>formatDate()</b> bestimmt, wie das Datum aussieht. <b>DD.MM.YYYY</b> ergibt 14.03.2026, <b>DD. MMMM</b> ergibt 14. März.</p><p class="notion-text">Der zweite Nutzen steckt im ersten Teil: Statt einer leeren Zelle steht dort jetzt ein Satz. Leere Zellen liest man beim Überfliegen als Fehler — ein klarer Hinweis nicht.</p>'},
-    {title:'12. Ampel', desc:'In DB I · Eigenschaft : Formel → ifs() über mehrere Spalten gleichzeitig.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Formel</p><p class="notion-text">→ <b>Name der Spalte :</b> Ampel</p><p class="notion-text">Trage diese <b>Formel</b> ein :</p><div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">ifs(<br>&nbsp;&nbsp;prop(&quot;Fortschritt %&quot;) &gt;= 100, &quot;🟢  Fertig&quot;,<br>&nbsp;&nbsp;empty(prop(&quot;Fällig am&quot;)), &quot;⚪️  Kein Termin&quot;,<br>&nbsp;&nbsp;prop(&quot;Tage bis fällig&quot;) &lt; 0, &quot;🔴  Überfällig&quot;,<br>&nbsp;&nbsp;prop(&quot;Tage bis fällig&quot;) &lt;= 3, &quot;🟡  Wird eng&quot;,<br>&nbsp;&nbsp;&quot;⚪️  Läuft&quot;<br>)</div><p class="notion-text">Diese Formel liest gleich vier deiner neuen Spalten aus und macht daraus eine einzige Aussage. Die Reihenfolge entscheidet: Ein fertiges Projekt bleibt grün, auch wenn der Termin längst vorbei ist.</p><p class="notion-text">So setzt du Formeln übereinander: Jede baut auf dem auf, was die vorherige schon ausgerechnet hat.</p>'},
-    {title:'13. Wenn die Formel rot wird', desc:'Fehler lesen, statt raten — und die Notion-KI erklären lassen.', html:'<p class="notion-text">Fast jeder Formelfehler hat eine von vier Ursachen :</p><p class="notion-text">— Der <b>Spaltenname</b> in prop() stimmt nicht exakt. Ein fehlendes Leerzeichen reicht.</p><p class="notion-text">— Du rechnest mit einem <b>Text</b> statt mit einer Zahl. Dann fehlt toNumber().</p><p class="notion-text">— Du hängst eine <b>Zahl an einen Text</b>. Dann fehlt format().</p><p class="notion-text">— Eine <b>Klammer</b> ist nicht geschlossen. Notion markiert die Stelle.</p><p class="notion-text">Kommst du nicht weiter, markiere die Formel im Editor und lass sie dir von der <b>Notion-KI</b> erklären. Sie sagt dir in einem Satz, was die Formel tut — und meistens auch, wo es hakt.</p>'}
-  ];
 
   /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter.
      Voraussetzung fuer Modul 2 (Kartenvorschau/Cover im Interface-Bau, relative
@@ -10776,13 +10740,6 @@ var TSISL_TEAM_ONB_V2=[
       title:'Deine Buttons. <span>Ein Klick, ein Eintrag.</span>',
       sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Um einen Button anzulegen, drücke / und wähle Button.',
       summary:'Buttons', chain:true },
-    /* Lektion 1.5 (Modul 1) — Formeln & Rollups auf DB I/DB II. Notion-Seite leer -> Config-Steps. */
-    { path:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, kachel:'m1_formeln',
-      anchorSel:'#ts15wk', steps:TS15_STEPS,
-      eyebrow:'DB : Formeln & Rollups',
-      title:'Deine Formeln. <span>Zeile für Zeile.</span>',
-      sub:'Jede Karte ist eine Spalte, die von allein rechnet. Klick sie auf, trag die Formel ein, leg sie in den Einkaufswagen — gezählt wird in Rechenspalten. Eine Formelspalte legst du in der Tabelle rechts über + an, Eigenschaft : Formel. Die Formel selbst kopierst du dir aus der Karte.',
-      summary:'Rechenspalten', chain:true },
     /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen. Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, kachel:'m1_ansichten',
       anchorSel:'#ts16wk', steps:TS16_STEPS,
@@ -11357,7 +11314,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:33, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_buttons:6, m1_formeln:13, m1_ansichten:14, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_buttons:6, m1_ansichten:14, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24655,539 +24612,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   formeln-logik-bausteine — Hero + Einleitung "Eine Formel rechnet mit."
-   Lektion 1.5 · Modul 1 · Notion-Grundlagen (Wissens-Lektion)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.5');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body b{color:#c7b489;font-weight:600}
-  .ts-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2;background:rgba(199,180,137,.1);padding:1px 6px;border-radius:5px;font-size:14px}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts15intro-css')) return;
-    var s=document.createElement('style'); s.id='ts15intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts15intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.5" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.5</div>'+
-        '<h1 class="ts-hero__title">Eine Formel <span class="ts-gold">rechnet mit</span>.</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts15intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts15intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Eine Formel ist ein kleiner Rechner, der in einer eigenen Spalte sitzt und bei jeder Änderung neu läuft. Du legst sie an wie jede andere Eigenschaft, und der Editor zeigt dir sofort, was für die Zeile herauskommt, in der du gerade stehst.</p>
-  <p>In fast jeder Formel steckt derselbe Baustein: <code>prop()</code> holt den Wert einer anderen Spalte herein. Alles Weitere baut darauf auf, wenn du rechnest, vergleichst, Datumsabstände bestimmst oder ein Ergebnis lesbar ausgibst. Am Ende dieser Lektion steht unter jedem Projekt ein Fortschrittsbalken, den keine Hand mehr nachpflegt.</p>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   formeln-logik-bausteine — Erkläranimation "Formel-Konsole" (Typewriter + Count-up + Füllbalken)
-   Eigenständiges Konzept: EINE Konsole tippt eine echte Formel, löst sie live zu einem Zahlenwert auf,
-   der Füllbalken zieht synchron mit. Endzustand=Default.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts15bau{width:min(760px,92vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts15bau .bau-head{max-width:640px;margin:0 auto 32px;padding:0 24px;text-align:center}
-  #ts15bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts15bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts15bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts15bau h2 .ts-gold{color:#c7b489}
-  #ts15bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
-  #ts15bau .console{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:clamp(20px,3.5vw,32px);
-    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-  #ts15bau.js .console{opacity:0;transform:translateY(22px) scale(.98)}
-  #ts15bau.js.on .console{opacity:1;transform:none}
-  #ts15bau .c-line{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(13px,1.8vw,15.5px);color:#efe6d2;margin:0 0 20px;min-height:1.4em;white-space:nowrap;overflow:hidden}
-  #ts15bau .c-line .cur{display:inline-block;width:8px;height:1.1em;background:#c7b489;vertical-align:-2px;margin-left:2px;opacity:0}
-  #ts15bau.js.on .c-line .cur{animation:ts15cursor 1s step-end infinite}
-  @keyframes ts15cursor{0%,100%{opacity:0}50%{opacity:1}}
-  #ts15bau .c-result{display:flex;align-items:baseline;gap:12px;margin:0 0 16px}
-  #ts15bau .c-num{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.4rem);color:#fff;font-variant-numeric:tabular-nums;line-height:1}
-  #ts15bau .c-label{font-size:13px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
-  #ts15bau .c-bar{height:8px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
-  #ts15bau .c-bar i{display:block;height:100%;width:0%;border-radius:5px;background:linear-gradient(90deg,#c7b489,#efe6d2);transition:width 1.8s cubic-bezier(.22,1,.36,1)}
-  #ts15bau.js.on .c-bar i{width:68%}
-  #ts15bau .bau-foot{display:flex;justify-content:center;margin-top:24px}
-  #ts15bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts15bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  `;
-
-  function injectCSS(){
-    if(document.getElementById('ts15bau-css')) return;
-    var s=document.createElement('style'); s.id='ts15bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  var CODE = 'dateBetween(now(), Fällig_am, "days")';
-
-  function html(){
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Eine Formel live gesehen</div>'+
-      '<h2>Du tippst sie <span class="ts-gold">einmal</span>, sie rechnet <span class="ts-gold">jedes Mal</span>.</h2>'+
-      '<p class="bau-sub">Eine Formel steht in der Spalte, aber sie läuft bei jedem Seitenaufruf neu — hier siehst du, was dabei unter der Haube passiert.</p>'+
-      '</div>'+
-      '<div class="console">'+
-        '<p class="c-line"><span class="c-text">'+CODE+'</span><span class="cur"></span></p>'+
-        '<div class="c-result"><span class="c-num" id="ts15num">12</span><span class="c-label">Tage bis fällig</span></div>'+
-        '<div class="c-bar"><i style="width:68%"></i></div>'+
-      '</div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts15bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function typeLine(root, cb){
-    var el=root.querySelector('.c-text');
-    var i=0;
-    if(reduced){ el.textContent=CODE; if(cb) cb(); return; }
-    (function tick(){
-      el.textContent=CODE.slice(0,i);
-      i++;
-      if(i<=CODE.length){ setTimeout(tick, 26); } else if(cb){ cb(); }
-    })();
-  }
-
-  function countUp(root){
-    var numEl=root.querySelector('#ts15num');
-    if(reduced){ numEl.textContent='12'; return; }
-    var start=Date.now ? 0 : 0, dur=900, target=12;
-    var t0=null;
-    function frame(ts){
-      if(!t0) t0=ts;
-      var p=Math.min((ts-t0)/dur,1);
-      numEl.textContent=Math.round(p*target);
-      if(p<1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    var bar=root.querySelector('.c-bar i'); if(bar) bar.style.width='0%';
-    root.querySelector('#ts15num').textContent='0';
-    typeLine(root, function(){
-      setTimeout(function(){
-        countUp(root);
-        if(bar) requestAnimationFrame(function(){ bar.style.width='68%'; });
-      }, 200);
-    });
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts15bau')) return;
-    var anchor=document.getElementById('ts15intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts15bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    root.querySelector('#ts15bauReplay').addEventListener('click', function(){ play(root); });
-
-    /* Warenkorb-Anker direkt danach (tsshop mountet an #ts15wk via PAGES-Config TS15_STEPS) */
-    if(!document.getElementById('ts15wk')){
-      var wk=document.createElement('div'); wk.id='ts15wk';
-      root.parentNode.insertBefore(wk, root.nextSibling);
-    }
-    if(reduced){ root.classList.add('on'); root.querySelector('.c-text').textContent=CODE; root.querySelector('#ts15num').textContent='12'; var b=root.querySelector('.c-bar i'); if(b) b.style.width='68%'; return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-
-/* ============================================================
-   formeln-logik-bausteine — Ergebnis-Blick "Zehn Spalten, die von allein rechnen." (Text links / PC rechts)
-   Lektion 1.5 · Erster Ergebnis-Blick der Seite -> Text links (Katalog 05).
-   Platzhalter-Modus: gestalteter MacBook-Platzhalter statt echtem Screenshot.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
-
-  /* Bildtausch spaeter: NUR diese zwei Konstanten setzen (Platzhalter-Mechanik wie #tspkres).
-     POSTER = Vorschaubild der Kachel · SHOT = langer Ganzseiten-Screenshot fuer die Lightbox. */
-  var POSTER=null, SHOT=null;
-
-  var CSS=`
-  #ts15res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts15res .r-text{flex:1 1 0}
-  #ts15res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
-  #ts15res h3 .ts-accent{color:#c7b489}
-  #ts15res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
-  #ts15res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts15res .r-tile{box-sizing:border-box;cursor:pointer;width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
-    transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts15res .r-tile:hover{transform:translateY(-4px) scale(1.02);animation:ts15resBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts15resBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.30)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.24)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10)}}
-  #ts15res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
-  #ts15res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #ts15res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
-  #ts15res .r-cap b{color:#c7b489;font-weight:600}
-  #ts15res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts15res{flex-direction:column} #ts15res .r-pc{order:-1} #ts15res h3{font-size:26px} }
-  #ts15res-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);
-    background:rgba(3,4,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  #ts15res-lb.on{display:flex}
-  #ts15res-lb .lb-frame{position:relative;width:min(1100px,94vw);aspect-ratio:1366/768;border-radius:16px;overflow:hidden;
-    background:#0b0d14;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px -30px rgba(0,0,0,.9)}
-  #ts15res-lb .lb-screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;
-    display:flex;align-items:center;justify-content:center}
-  #ts15res-lb .lb-screen img{display:block;width:100%;height:auto}
-  #ts15res-lb .lb-ph{display:flex;flex-direction:column;align-items:center;gap:12px;color:rgba(255,255,255,.5);
-    font:500 14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:24px}
-  #ts15res-lb .lb-ph b{color:#c7b489;font-weight:600}
-  #ts15res-lb .lb-close{position:absolute;top:-46px;right:0;background:transparent;border:1px solid rgba(255,255,255,.3);
-    color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;line-height:1;cursor:pointer}
-  #ts15res-lb .lb-close:hover{border-color:#c7b489;color:#c7b489}
-  @media(prefers-reduced-motion:reduce){ #ts15res .r-tile:hover{animation:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts15res-css')) return;
-    var s=document.createElement('style'); s.id='ts15res-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="r-text"><h3>Ein Haken unten, <span class="ts-accent">die Ampel oben.</span></h3>'+
-      '<p>Ab jetzt trägst du in deinen Projekten nur noch ein, was wirklich neu ist: den Namen, den Termin, die Aufgaben. Alles andere steht schon da. Der Fortschritt zählt mit, sobald du eine Aufgabe abhakst, der Balken füllt sich, die Ampel springt um.</p>'+
-      '<p>Wichtig ist die Reihenfolge, in der die Spalten aufeinander zugreifen. Die Ampel liest den Fortschritt, der Fortschritt liest die Rollups, die Rollups lesen zwei kleine Formeln in der Aufgaben-Tabelle. Ändert sich unten ein Haken, läuft die Kette bis nach oben durch.</p>'+
-      '</div>'+
-      '<div class="r-pc"><div class="r-tile" role="button" tabindex="0" aria-label="Projektmanagement mit Formelspalten vergrößern">'+
-        (POSTER?'<img src="'+POSTER+'" alt="Projektmanagement mit Formelspalten" loading="lazy" decoding="async">'
-               :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span>')+
-      '</div>'+
-      '<div class="r-cap">Projektmanagement mit Formelspalten <b>– Live Beispiel</b></div><div class="r-hint">Klicke zum Vergrößern</div></div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts15res')) return;
-    var anchor=document.getElementById('tsshop--m1_formeln'); if(!anchor){ anchor=document.getElementById('ts15wk'); }
-    if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts15res'; root.innerHTML=html();
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    /* Lightbox: Klick vergroessert, langer Screenshot scrollt im Bildschirm.
-       Solange SHOT==null steht ein gestalteter Platzhalter drin (Auto-Scroll aus). */
-    var lb=document.createElement('div'); lb.id='ts15res-lb';
-    lb.innerHTML='<div class="lb-frame"><button class="lb-close" type="button" aria-label="Schließen">&times;</button>'+
-      '<div class="lb-screen">'+(SHOT?'<img src="'+SHOT+'" alt="Projektmanagement mit Formelspalten">'
-        :'<div class="lb-ph"><b>DB I : Projektmanagement</b><span>Der Screenshot dieser Datenbank folgt.</span></div>')+'</div></div>';
-    document.body.appendChild(lb);
-    function open(){ lb.classList.add('on'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.lb-screen'); if(sc) sc.scrollTop=0; }
-    function close(){ lb.classList.remove('on'); document.body.style.overflow=''; }
-    var tile=root.querySelector('.r-tile');
-    tile.addEventListener('click', open);
-    tile.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
-    lb.addEventListener('click', function(e){ if(e.target===lb||e.target.classList.contains('lb-close')) close(); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   formeln-logik-bausteine — Empfehlungs-Kachel "Empfehlung zur Nutzung"
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Spaltennamen klicken statt tippen','ifs() statt verschachtelter if','Erst an einer Zeile prüfen','Die Kette von unten bauen'];
-  var TEXTS=[
-    'Hol dir den Spaltennamen für prop() per Klick aus der Vorschlagsliste des Editors. Abgetippt fehlt irgendwann ein Leerzeichen, und die Formel läuft nicht mehr.',
-    'Mehrere Bedingungen gehören in ein einziges ifs() statt in verschachtelte if()-Klammern, die kein Mensch mehr entwirrt.',
-    'Prüfe jede neue Formel erst an einer einzigen Zeile, deren Werte du kennst, bevor du dich auf die ganze Tabelle verlässt.',
-    'Bau die Rechenkette von unten nach oben: zuerst die kleinen Hilfsspalten, dann die Rollups darüber, zuletzt die Formeln, die davon leben.'
-  ];
-
-  var CSS=`
-  #ts15emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts15emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
-  #ts15emp.js.in{opacity:1}
-  #ts15emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts15emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts15emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts15emp:hover::before{opacity:1}
-  #ts15emp.beat{animation:ts15empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts15empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts15emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts15emp .db-hd .g{color:#c7b489}
-  #ts15emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts15emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts15emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts15emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts15emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts15emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts15emp .emp-right{position:relative;z-index:1}
-  #ts15emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts15emp .emph .eg{color:#c7b489}
-  #ts15emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts15emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts15emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts15emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts15emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts15emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts15emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts15emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts15emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts15emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts15emp{grid-template-columns:1fr} #ts15emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts15emp-css')) return;
-    var s=document.createElement('style'); s.id='ts15emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Dein <span class="g">Formel-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
-      '<p class="p">Damit deine Formeln auch in einem Jahr noch verständlich sind, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts15emp')) return;
-    var anchor=document.getElementById('ts15res')||document.getElementById('ts15bau'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts15emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   formeln-logik-bausteine — Seitenabschluss (Learnings + Weiter-Button)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du greifst mit prop() auf den Wert jeder anderen Spalte zu.',
-    'Du wandelst Werte mit toNumber() und format() ineinander um.',
-    'Du prüfst mehrere Bedingungen mit ifs() statt verschachtelten if.',
-    'Du baust Rollups und Formeln zu einer Kette, die von allein durchläuft.'
-  ];
-
-  var CSS=`
-  #ts15l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts15l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts15l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts15l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts15l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts15l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts15lFloat 7s ease-in-out infinite}
-  #ts15l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts15l .tsl-orb:nth-child(1){animation-delay:0s} #ts15l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts15l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts15l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts15l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts15l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts15l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts15l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts15l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts15l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts15l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts15l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts15lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts15l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts15l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts15l-css')) return;
-    var s=document.createElement('style'); s.id='ts15l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts15l')) return;
-    var anchor=document.getElementById('ts15emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts15l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l16-ansichten-self-referencing-filter">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    ansichten-filter — Hero + Einleitung "Der Blick wechselt."
    Lektion 1.6 · Modul 1 · Notion-Grundlagen (Wissens-Lektion)
    ============================================================ */
@@ -36021,6 +35445,177 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du verbindest zwei Datenbanken mit einer <b>Verknüpfung</b> in eine oder beide Richtungen.','Du unterscheidest <b>einer zu vielen</b> und <b>viele zu vielen</b> und setzt die Begrenzung passend.','Du holst mit einem <b>Rollup</b> Werte über die Verknüpfung und wählst die richtige Berechnung.','Du kennst die <b>Grenzen</b>: kein Rollup vom Rollup, Duplizieren und Export verlieren Fäden.'],
         next:'/lektionen/l15-formeln-20-logik-bausteine'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.6 "Lies die Formel."  (Formeln)
+   Adresse: /lektionen/l15-formeln-20-logik-bausteine (Alt-Slug toleriert; Nummer 1.6 seit Neukonzept)
+   Erklaeranimation "Von innen nach aussen" — EIGENES Konzept:
+   EIN Formeleditor. Ein goldenes Lesezeichen gleitet unter den Teilen der Formel
+   entlang: erst werden die Spalten durch ihre Werte ersetzt, dann wird von innen
+   nach aussen gerechnet, zuletzt waehlt das if den Zweig. Unten die Vorschau.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L6) return; window.__tsn1L6=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a6-css',`
+      #tsn1-a6 .ed{position:relative;width:min(860px,100%);margin:0 auto;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a6 .eh{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.07);font:600 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.75)}
+      #tsn1-a6 .eh i{font-style:normal;color:#c7b489;font-weight:700}
+      #tsn1-a6 .eh span{margin-left:auto;font-weight:500;color:rgba(255,255,255,.4)}
+      #tsn1-a6 .code{position:relative;padding:26px 26px 30px;font:500 clamp(13px,1.6vw,17px)/2.05 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(239,230,210,.92);white-space:pre}
+      #tsn1-a6 .tk{position:relative;display:inline-block;border-radius:5px;transition:color .5s cubic-bezier(.16,1,.3,1),opacity .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .tk.pr{color:#9fc2e0}
+      #tsn1-a6 .tk.val{color:#fff;background:rgba(199,180,137,.14);padding:0 6px}
+      #tsn1-a6 .tk.dim{opacity:.28}
+      #tsn1-a6 .tk.res{color:#05060b;background:#c7b489;padding:0 7px}
+      #tsn1-a6 .mark{position:absolute;left:0;top:0;height:2px;width:100px;border-radius:2px;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.8);transform-origin:0 0;opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .why{min-height:52px;padding:0 26px 18px;font:500 14px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a6 .why b{color:#c7b489;font-weight:600}
+      #tsn1-a6 .pv{display:flex;align-items:center;gap:14px;padding:14px 26px;border-top:1px solid rgba(255,255,255,.07);background:#0c0e16}
+      #tsn1-a6 .pv .k{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+      #tsn1-a6 .pv .v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:22px;color:#fff;font-variant-numeric:tabular-nums}
+      #tsn1-a6 .pv .v.on{color:#c7b489}
+      #tsn1-a6 .pv .row{margin-left:auto;display:flex;gap:10px;font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
+      #tsn1-a6 .pv .row b{color:#fff;font-weight:600}
+      #tsn1-a6 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(860px,100%);margin:22px auto 0}
+      #tsn1-a6 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a6 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a6 .st.on b{color:#c7b489}
+      #tsn1-a6 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a6 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .rp button:hover{background:#c7b489;color:#05060b}
+      #tsn1-a6.js .ed{opacity:0;transform:translateY(20px) scale(.97)}
+      #tsn1-a6.js.on .ed{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+      @media(max-width:700px){ #tsn1-a6 .code{overflow-x:auto;padding:20px 16px} #tsn1-a6 .rail{grid-template-columns:1fr} #tsn1-a6 .pv .row{display:none} }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a6.js .ed{opacity:1;transform:none} }
+      `);
+      /* Token: [id, Starttext, Klasse] */
+      var TK=[['t0','if(',''],['m1','prop("Menge je Gebinde")','pr'],['t1',' > 0,',''],['nl1','\n  ',''],['t2','round(',''],['e','prop("Einkaufspreis je Gebinde")','pr'],['t3',' / ',''],['m2','prop("Menge je Gebinde")','pr'],['t4',', 2',''],['t5','),',''],['nl2','\n  ',''],['z','0',''],['nl3','\n',''],['t6',')','']];
+      host.id='tsn1-a6';
+      host.innerHTML=R.head('Eine Formel lesen','Erst die <span class="g">innerste Klammer</span>.','So liest du jede Formel der Vorlage: Spalten durch ihre Werte ersetzen, die innerste Klammer zuerst rechnen, dann Schritt für Schritt nach außen.')+
+        '<div class="ed"><div class="eh"><i>Σ</i>Preis je Einheit<span>Formel · Probeküche / Produkte</span></div>'+
+        '<div class="code"><span class="mark"></span>'+TK.map(function(t){ return t[0].indexOf('nl')===0 ? t[1] : '<span class="tk '+t[2]+'" data-k="'+t[0]+'">'+N.esc(t[1])+'</span>'; }).join('')+'</div>'+
+        '<div class="why"></div>'+
+        '<div class="pv"><span class="k">Vorschau</span><span class="v">12,60 €</span><span class="row">Burrata 125 g · <b>18,90 €</b> je Karton · <b>1,5</b> kg</span></div></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Jede Spalte wird durch ihren Wert in dieser Zeile ersetzt.</button><button class="st" data-s="1"><b>02</b>Die innerste Klammer zuerst: teilen, dann runden.</button><button class="st" data-s="2"><b>03</b>Zuletzt prüft das if die Bedingung und wählt den Zweig.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var code=host.querySelector('.code'), mark=host.querySelector('.mark'), why=host.querySelector('.why'), pv=host.querySelector('.pv .v'), sts=host.querySelectorAll('.st');
+      function K(k){ return host.querySelector('.tk[data-k="'+k+'"]'); }
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a6Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function at(el){ if(!el) return; var c=code.getBoundingClientRect(), r=el.getBoundingClientRect();
+        mark.style.opacity='1'; mark.style.transform='translate('+(r.left-c.left)+'px,'+(r.bottom-c.top+2)+'px) scaleX('+(r.width/100)+')'; }
+      function set(k,txt,cls){ var e=K(k); e.textContent=txt; e.className='tk '+(cls||''); }
+      function say(h){ why.innerHTML=h; }
+      function reset(){
+        clear(); TK.forEach(function(t){ if(t[0].indexOf('nl')===0) return; set(t[0],t[1],t[2]); });
+        mark.style.opacity='0'; say(''); pv.textContent='…'; pv.classList.remove('on'); step(-1);
+      }
+      function final(){
+        clear(); TK.forEach(function(t){ if(t[0].indexOf('nl')===0) return; set(t[0],t[1],t[2]); });
+        mark.style.opacity='0'; pv.textContent='12,60 €'; pv.classList.add('on');
+      }
+      function play(){
+        reset(); host.classList.add('on');
+        later(function(){ step(0); say('<b>prop("…")</b> ist ein Griff in eine andere Spalte derselben Zeile.'); at(K('m1')); },900);
+        later(function(){ set('m1','1,5','val'); },1500);
+        later(function(){ at(K('e')); },2100);
+        later(function(){ set('e','18,90','val'); },2700);
+        later(function(){ at(K('m2')); },3300);
+        later(function(){ set('m2','1,5','val'); },3900);
+        later(function(){ step(1); say('Die innerste Rechnung zuerst: <b>18,90 geteilt durch 1,5</b> ergibt 12,6.'); at(K('e')); },4800);
+        later(function(){ set('e','12,6','val'); set('t3','','dim'); set('m2','','dim'); },5500);
+        later(function(){ say('<b>round(…, 2)</b> rundet auf zwei Nachkommastellen.'); at(K('t2')); },6500);
+        later(function(){ set('t2','','dim'); set('e','12,60','val'); set('t4','','dim'); set('t5',',',''); },7100);
+        later(function(){ step(2); say('<b>if(Bedingung, dann, sonst)</b>: 1,5 ist größer als 0, also gilt der mittlere Zweig.'); at(K('m1')); },8200);
+        later(function(){ at(K('t0')); set('z','0','dim'); set('e','12,60','res'); },9100);
+        later(function(){ mark.style.opacity='0'; pv.textContent='12,60 €'; pv.classList.add('on'); say('Das ist der Preis für ein Kilo Burrata. Ohne Menge, also bei null, zeigt die Spalte 0 statt einer Fehlermeldung.'); },9900);
+      }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
+        var i=+s.getAttribute('data-s'); clear(); host.classList.add('on'); step(i); reset(); step(i);
+        if(i>=0){ set('m1','1,5','val'); set('e','18,90','val'); set('m2','1,5','val'); at(K('e')); say('Jede Spalte ist durch ihren Wert ersetzt.'); }
+        if(i>=1){ set('e','12,60','val'); set('t3','','dim'); set('m2','','dim'); set('t2','','dim'); set('t4','','dim'); set('t5',',',''); say('Geteilt und auf zwei Stellen gerundet: 12,60.'); }
+        if(i>=2){ set('z','0','dim'); set('e','12,60','res'); at(K('t0')); pv.textContent='12,60 €'; pv.classList.add('on'); say('Die Bedingung stimmt, also gilt der mittlere Zweig.'); }
+      }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ final(); return; }
+      host.classList.add('js');
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l6',
+      re:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/,
+      hero:{label:'L 1.6', eyebrow:'L 1.6', title:'Lies die <span class="ts-gold">Formel</span>.', alt:'Notion-Formeln lesen, anpassen und reparieren'},
+      intro:
+        '<p>In der Vorlage stecken viele Formeln. Sie rechnen den Preis einer Portion aus, den Wareneinsatz eines Gerichts und den Deckungsbeitrag. Neu schreiben musst du keine davon. Was du können solltest: eine Formel lesen, einen Wert darin anpassen und erkennen, warum eine Zahl nicht stimmt.</p>'+
+        '<p>Dafür reichen eine Handvoll Bausteine. Wir lernen sie an der Probeküche, schreiben die Rechenspalten für Produkte und Gerichte und schauen zum Schluss, wie Notion AI dir eine Formel erklärt, die du nicht auf Anhieb verstehst.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Die Bausteine', title:'Was in fast jeder Formel <span class="g">steckt</span>', wide:true, lead:'Die Formelsprache von Notion hat viele Funktionen. Für dein Backoffice brauchst du diese hier, und die meisten davon nur zum Lesen.', blocks:[
+          R.tab(['Baustein','Was er tut','Beispiel aus der Probeküche'],[
+            ['<code>prop("Name")</code>','Holt den Wert einer anderen Spalte derselben Zeile','<code>prop("Bestand (Gebinde)")</code>'],
+            ['<code>+ - * /</code>','Rechnet wie ein Taschenrechner, Punkt vor Strich','<code>prop("Bestand (Gebinde)") * prop("Einkaufspreis je Gebinde")</code>'],
+            ['<code>round(x, 2)</code>','Rundet auf die angegebene Zahl Nachkommastellen','Preis je Einheit auf zwei Stellen'],
+            ['<code>if(Bedingung, dann, sonst)</code>','Entscheidet zwischen zwei Ergebnissen','Nur teilen, wenn die Menge größer als null ist'],
+            ['<code>ifs(…)</code>','Prüft mehrere Bedingungen von oben nach unten','Die Ampel mit drei Farben'],
+            ['<code>lets(name, wert, …)</code>','Gibt einem Zwischenergebnis einen kurzen Namen','<code>we</code> statt viermal <code>prop("Wareneinsatz (%)")</code>'],
+            ['<code>empty(x)</code>','Prüft, ob ein Feld leer ist','Kein Preis eingetragen, also nichts rechnen'],
+            ['<code>style(text, …)</code>','Färbt oder fettet einen Text','„knapp" in Rot'],
+            ['<code>.map(current…)</code>','Geht durch jeden verknüpften Eintrag','Die Allergene jedes Produkts im Gericht'],
+            ['<code>.sum() .join(", ")</code>','Addiert eine Liste oder setzt sie zu einem Text zusammen','Alle Allergene mit Komma getrennt'],
+            ['<code>dateBetween(a, b, "days")</code>','Zählt die Tage zwischen zwei Daten','Tage seit der letzten Lieferung']
+          ]),
+          R.txt('<p><strong>Werte in Anführungszeichen sind Text.</strong> <code>"knapp"</code> ist ein Wort, <code>28</code> ohne Anführungszeichen ist eine Zahl. Verwechselst du das, meldet die Formel einen Fehler, weil sie Text nicht mit Zahlen vergleichen kann.</p>')
+        ]}),
+        R.sec({eb:'In der Vorlage', title:'Eine Formel der Vorlage in <span class="g">vier Schritten</span> lesen', lead:'Nimm dir eine Formelspalte der Vorlage vor und geh sie so durch. Beim zweiten Mal dauert es keine Minute mehr.', blocks:[
+          R.jetzt([
+            'Klick auf den Spaltenkopf und öffne über <em>Eigenschaft bearbeiten</em> den Formeleditor. Ändere nichts, lies nur.',
+            'Markier dir jedes <code>prop("…")</code>. Das sind die Spalten, aus denen die Formel ihre Werte holt. Schau nach, welchen Typ sie haben.',
+            'Ersetz die Spalten im Kopf durch die Werte einer Zeile, deren Ergebnis du kennst.',
+            'Rechne von der innersten Klammer nach außen und vergleich dein Ergebnis mit der Spalte. Stimmt es, hast du die Formel verstanden.'
+          ],'So gehst du vor'),
+          R.fund(['DB IV : Zutaten','Preis / Portion ( nutzbar )'],'<p>Diese Formel teilt den Portionspreis durch den Anteil, der nach Schnittverlust und Garverlust übrig bleibt. Rechne sie mit einem Beispiel aus deiner Küche nach: Wirft dein Rinderfilet beim Parieren ein Viertel ab, brauchst du für dreihundert Gramm auf dem Teller vierhundert Gramm im Einkauf, und der Portionspreis steigt um ein Drittel. Was die Formel genau prüft und warum sie an der Zutat sitzt, erklärt dir Modul 2.</p>'),
+          R.txt('<p><strong>Einen Wert anpassen, ohne die Formel zu brechen.</strong> Die meisten Anpassungen sind Zahlen, die du austauschst: eine Grenze für die Ampel, ein Rundungswert, ein Prozentsatz. Ändere immer nur diese eine Zahl, schau auf die Vorschau unter dem Formelfeld und speichere erst, wenn kein roter Hinweis erscheint. Kopier dir die Formel vorher in eine Notiz, dann ist der alte Stand mit einem Einfügen zurück.</p>')
+        ]}),
+        R.sec({eb:'Notion AI', title:'Lass dir die Formel <span class="g">erklären</span>', lead:'Im Formeleditor gibt es ein Eingabefeld für Notion AI. Dort beschreibst du, was die Spalte rechnen soll, oder lässt dir eine bestehende Formel erklären.', blocks:[
+          R.copy('Prompt für Notion AI im Formeleditor','Erkläre mir diese Formel Schritt für Schritt in einfachen Worten. Sag mir zu jedem prop(), welche Spalte gemeint ist und was mit ihrem Wert passiert. Rechne zum Schluss ein Beispiel mit diesen Werten durch: [Werte einer Zeile eintragen].','prompt','Notion AI ist in den Plänen Business und Enterprise enthalten, im Free- und Plus-Plan nur als begrenzter Test. Formeln mit KI verbrauchen Credits, Stand November 2026.'),
+          R.copy('Prompt für eine neue Formel','Schreib mir eine Formel für die Spalte „Rohertrag (€)": Netto-Verkaufspreis (€) minus Wareneinsatz (€). Wenn eine der beiden Spalten leer ist, soll 0 herauskommen.','prompt'),
+          R.txt('<p><strong>Prüf jede Formel, die die KI schreibt.</strong> Nimm zwei, drei Zeilen, deren Ergebnis du im Kopf kennst, und vergleich. Eine Formel, die bei der Hälfte der Zeilen stimmt, ist gefährlicher als eine, die gar nicht läuft, weil der Fehler erst in der Monatsabrechnung auffällt.</p>')
+        ]}),
+        R.sec({eb:'Wenn es rot wird', title:'Die häufigsten <span class="g">Formelfehler</span>', wide:true, blocks:[
+          R.fehler([
+            ['Unter dem Formelfeld steht ein roter Hinweis','Ein Spaltenname im prop() stimmt nicht, eine Klammer fehlt oder ein Komma zu viel','Den Namen exakt mit dem Spaltenkopf vergleichen, Klammern zählen'],
+            ['Die Formel zeigt 0 oder bleibt leer','Eine der Spalten, aus denen sie rechnet, ist in dieser Zeile leer','Die Eingabespalten der Zeile prüfen, nicht die Formel'],
+            ['Das Ergebnis hat acht Nachkommastellen','Die Formel rundet nicht','Die Rechnung in <code>round(…, 2)</code> einpacken'],
+            ['Nach dem Löschen einer Spalte zeigen mehrere Formeln Fehler','Die Formeln haben aus dieser Spalte gelesen','Seitenverlauf öffnen und den Stand vor dem Löschen wiederherstellen, dann die Spalte stehen lassen'],
+            ['Eine Zahl wird als Text verglichen','Der Wert kommt aus einer Textspalte','Die Spalte auf Zahl umstellen oder in der Formel <code>toNumber()</code> davorsetzen']
+          ])
+        ]}),
+        R.wk('tsn1-wk-m1_rechnen'),
+        R.res({eb:'Ergebnis', title:'Die Ampel steht <span class="g">neben jedem Gericht</span>.', rev:false, text:[
+          'Trag bei drei, vier Gerichten Netto-Verkaufspreis und Wareneinsatz ein. Die Spalten dahinter rechnen Prozent und Rohertrag aus, die Ampel färbt sich, und der Allergen-Hinweis setzt sich aus den verknüpften Produkten zusammen.',
+          'Ändere einen Wareneinsatz und schau zu, wie Prozent, Rohertrag und Ampel nachziehen. Das ist dasselbe Verhalten wie in der Vorlage, dort nur mit mehr Stufen dazwischen.'],
+          mock:{file:'Probeküche / Gerichte', tab:'Gerichte', views:['Kalkulation'], cols:['Gericht','Netto-VK','Wareneinsatz','WE %','Rohertrag','Ampel'], num:[1,2,3,4],
+            rows:[['Burrata mit Tomaten','12,61 €','3,40 €','27,0','9,21 €','<span class="t gr">im Rahmen</span>'],['Pasta al pesto','13,45 €','2,90 €','21,6','10,55 €','<span class="t gr">im Rahmen</span>'],['Vitello tonnato','15,97 €','5,10 €','31,9','10,87 €','<span class="t">beobachten</span>'],['Rinderfilet','31,93 €','12,20 €','38,2','19,73 €','<span class="t r">zu teuer</span>']],
+            cap:'Beispielwerte, Grenzen 28 % und 33 %'}}),
+        {emp:{kind:'Nutzung', animTitle:'Formeln', animGold:'mit Sicherung', steps:['Erst lesen','Vorher kopieren','Eine Zahl ändern','An Zeilen prüfen'],
+          intro:'Formeln sind der empfindlichste Teil der Vorlage. Mit vier Gewohnheiten fasst du sie trotzdem ohne Angst an.',
+          points:['Lies eine Formel komplett, bevor du etwas änderst, und rechne sie an einer Zeile nach.','Kopier den alten Formeltext in eine Notiz, bevor du ihn bearbeitest.','Ändere pro Durchgang nur eine Sache, zum Beispiel eine Grenze, und speichere erst ohne roten Hinweis.','Prüf das Ergebnis an zwei, drei Zeilen, deren Zahlen du kennst, auch wenn die KI die Formel geschrieben hat.']}}
+      ],
+      learn:{items:['Du kennst die <b>Bausteine</b>: prop, Rechenzeichen, round, if, ifs, lets.','Du liest eine Formel der Vorlage <b>von innen nach außen</b> und rechnest sie nach.','Du passt einen <b>Wert</b> in einer Formel an, ohne die Kette zu brechen.','Du lässt dir eine Formel von <b>Notion AI</b> erklären und prüfst jedes Ergebnis selbst.'],
+        next:'/lektionen/l16-ansichten-self-referencing-filter'}
     });
   }
   go();
