@@ -36,14 +36,31 @@
   window.__tsTeilA=function(){ document.addEventListener=bruecke(dAdd,document); window.addEventListener=bruecke(wAdd,window); };
   window.__tsTeilE=function(){ document.addEventListener=dAdd; window.addEventListener=wAdd; };
 
-  function fertig(){ if(offen>0 || !frei) return; var w=warte; warte=[]; for(var i=0;i<w.length;i++){ try{ w[i](); }catch(e){} } }
+  /* Ausfuehren in Original-Reihenfolge: Kern-Stuecke und Seitenbloecke tragen ihre Position
+     aus kurs.js. Erst wenn alles Angeforderte da ist, laeuft alles sortiert durch. Ein Fehler
+     in einem Block haelt die anderen nicht mehr an. */
+  var Q=window.__tsQ=window.__tsQ||[];
+  function abarbeiten(){
+    var alle=[]; while(Q.length) alle=alle.concat(Q.shift());
+    if(!alle.length) return;
+    alle.sort(function(a,b){ return a[0]-b[0]; });
+    window.__tsTeilA();
+    try{ for(var i=0;i<alle.length;i++){ try{ alle[i][1](); }catch(e){ (function(x){ setTimeout(function(){ throw x; }); })(e); } } }
+    finally{ window.__tsTeilE(); }
+    anstossen();
+  }
+  function fertig(){ if(offen>0 || !frei) return; abarbeiten(); var w=warte; warte=[]; for(var i=0;i<w.length;i++){ try{ w[i](); }catch(e){} } }
   window.__tsTeileBereit=function(cb){ if(offen===0 && frei) cb(); else warte.push(cb); };
 
   var kopf=document.head||document.documentElement;
+  /* Nach jedem Durchlauf die Seiten-Beobachter einmal anstossen: Teile, die spaeter kommen
+     (Seitenwechsel), melden sich bei Bibliotheken an, die nur bei DOM-Aenderungen aufbauen
+     (z. B. window.__tsn4). Eine leere Aenderung im body loest genau diesen Aufbau aus. */
+  function anstossen(){ try{ var b=document.body; if(!b) return; var c=document.createComment('ts'); b.appendChild(c); b.removeChild(c); }catch(e){} }
   function vorladen(f){ var l=document.createElement('link'); l.rel='preload'; l.as='script'; l.href=base+f; kopf.appendChild(l); }
   function ausfuehren(f){
     offen++;
-    var s=document.createElement('script'); s.src=base+f; s.async=false;
+    var s=document.createElement('script'); s.src=base+f; s.async=true;
     s.onload=s.onerror=function(){ offen--; fertig(); };
     kopf.appendChild(s);
   }

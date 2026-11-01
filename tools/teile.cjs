@@ -56,10 +56,44 @@ function isGate(re) {
 
 /* Kommentare vor einem Block gehoeren zum Block (nur fuer Lesbarkeit der Teile egal, Kern minifiziert eh) */
 const blocks = [];
+const globaleNamen = new Set();
 let prevEnd = 0;
+let idx = 0;
+
+/* Jeder Block laeuft spaeter in einer Funktion (damit Kern-Stuecke und Seitenteile in der
+   Original-Reihenfolge verzahnt laufen koennen). Oberste var-/function-Deklarationen werden
+   dafuer zu window-Eigenschaften. let/const/class oder var in obersten if/for-Bloecken:
+   Abbruch -> deploy.sh baut ein Paket wie frueher. */
+function funktionsTauglich(st) {
+  const start = st.start, end = st.end;
+  if (st.type === 'VariableDeclaration') {
+    if (st.kind !== 'var') throw new Error('oberstes ' + st.kind + ' in Zeile ' + src.slice(0, start).split('\n').length);
+    return st.declarations.map((d) => {
+      if (d.id.type !== 'Identifier') throw new Error('var mit Muster in Zeile ' + src.slice(0, start).split('\n').length);
+      globaleNamen.add(d.id.name);
+      return d.init ? 'window[' + JSON.stringify(d.id.name) + ']=' + src.slice(d.init.start, d.init.end) + ';' : '';
+    }).join('\n');
+  }
+  if (st.type === 'FunctionDeclaration') {
+    globaleNamen.add(st.id.name);
+    return 'window[' + JSON.stringify(st.id.name) + ']=' + src.slice(start, end) + ';';
+  }
+  if (st.type === 'ClassDeclaration') throw new Error('oberste class in Zeile ' + src.slice(0, start).split('\n').length);
+  /* var in obersten Steuer-Bloecken (if/for/try ...) ausserhalb von Funktionen */
+  let tief = false;
+  walk.recursive(st, null, {
+    Function() {},
+    VariableDeclaration(n, state, c) { if (n.kind === 'var') tief = true; for (const d of n.declarations) if (d.init) c(d.init, state); },
+  });
+  if (tief) throw new Error('var in oberstem Steuer-Block, Zeile ' + src.slice(0, start).split('\n').length);
+  return src.slice(start, end);
+}
+
 for (const st of ast.body) {
   const code = src.slice(prevEnd, st.end);   /* inkl. vorangehender Kommentare/Leerraum */
+  const fcode = funktionsTauglich(st);
   prevEnd = st.end;
+  const pos = idx++;
   const gates = [];
   let otherPath = 0;
   walk.full(st, (n) => {
@@ -74,7 +108,7 @@ for (const st of ast.body) {
   const pinned = IMMER_KERN.some((m) => code.includes(m + '=') || code.includes(m + ' =') || code.includes('if(' + m + ')') || code.includes('if (' + m + ')'));
   const vorab = VORAB.some((m) => code.includes(m + '=') || code.includes(m + ' =') || code.includes('if(' + m + ')') || code.includes('if (' + m + ')'));
   const page = !vorab && st.type === 'ExpressionStatement' && !pinned && otherPath === 0 && uniq.length >= 1 && uniq.length <= MAX_GATES;
-  blocks.push({ code, page, vorab, gates: uniq, line: src.slice(0, st.start).split('\n').length });
+  blocks.push({ code, fcode, pos, page, vorab, gates: uniq, line: src.slice(0, st.start).split('\n').length });
 }
 const rest = src.slice(prevEnd);
 
@@ -104,17 +138,22 @@ function minifyAll(map) {
 fs.mkdirSync(OUTDIR, { recursive: true });
 const roh = {};
 const gl = [...groups.values()];
+const eintrag = (pos, code) => '[' + pos + ',function(){\n' + code + '\n}]';
 gl.forEach((g, i) => {
-  /* Ereignis-Bruecke: Bloecke, die auf DOMContentLoaded/load warten, laufen auch, wenn das Teil spaeter kommt */
-  roh['t' + i] = 'window.__tsTeilA&&window.__tsTeilA();try{\n' + g.blocks.map((b) => b.code).join('\n') + '\n}finally{window.__tsTeilE&&window.__tsTeilE();}\n';
+  roh['t' + i] = '(window.__tsQ=window.__tsQ||[]).push([' + g.blocks.map((b) => eintrag(b.pos, b.fcode)).join(',\n') + ']);\n';
 });
-/* Kern = alles Seitenuebergreifende (ohne Vorab-Bloecke) */
-let kern = '';
-for (const b of blocks) if (!b.page && !b.vorab) kern += b.code + '\n';
-kern += rest;
-/* Kern laeuft nach DOMContentLoaded -> Ereignis-Bruecke wie bei den Teilen. Ohne try-Block,
-   damit oberste var-Deklarationen (TSISL_* u. a.) global bleiben. */
-roh.kern = 'window.__tsTeilA&&window.__tsTeilA();\n' + kern + '\n;window.__tsTeilE&&window.__tsTeilE();\n';
+/* Kern = alles Seitenuebergreifende (ohne Vorab-Bloecke), als Stuecke zwischen den Seitenbloecken */
+const stuecke = [];
+let aktuell = null;
+for (const b of blocks) {
+  if (b.vorab) continue;
+  if (b.page) { aktuell = null; continue; }
+  if (!aktuell) { aktuell = { pos: b.pos, code: [] }; stuecke.push(aktuell); }
+  aktuell.code.push(b.fcode);
+}
+const namen = JSON.stringify([...globaleNamen]);
+roh.kern = namen + '.forEach(function(n){ if(!(n in window)) window[n]=void 0; });\n'
+  + '(window.__tsQ=window.__tsQ||[]).push([' + stuecke.map((k) => eintrag(k.pos, k.code.join('\n'))).join(',\n') + ']);\n';
 /* Starter = kurs.min.js: Vorab-Bloecke + Lader. Manifest wird nach dem Minifizieren eingesetzt. */
 let starter = '';
 for (const b of blocks) if (b.vorab) starter += b.code + '\n';
@@ -159,5 +198,5 @@ for (const f of fs.readdirSync(OUTDIR)) {
 }
 
 const kb = (n) => Math.round(n / 1024) + ' KB';
-console.log('   ✓ Starter kurs.min.js ' + kb(starterMin.length) + ' · Kern ' + kb(min.kern.length) + ' · ' + manifest.length + ' Seitenteile zusammen ' + kb(teilBytes)
+console.log('   ✓ Starter kurs.min.js ' + kb(starterMin.length) + ' · Kern ' + kb(min.kern.length) + ' (' + stuecke.length + ' Stuecke) · ' + manifest.length + ' Seitenteile zusammen ' + kb(teilBytes)
   + ' · ' + blocks.filter((b) => b.page).length + '/' + blocks.length + ' Bloecke seitengebunden');
