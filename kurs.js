@@ -4404,8 +4404,10 @@ window.__tsMO = function(cb){
     { re:/\/key-metrics\/?$/, href:'/operations-area' },
     { re:/\/system-lebendiger-machen\/?$/, href:'/notion-ai-fr-unser-system' },
     { re:/\/notion-ai-fr-unser-system\/?$/, href:'/allgemeine-tipps' },
-    /* Modul 2 Ende -> Modul 3 (L3.1), Neubau 01.11.2026 */
-    { re:/\/allgemeine-tipps\/?$/, href:'/was-ist-claude-genau' },
+    /* Modul 2 Ende -> Modul-3-Uebersicht (Neubau 01.11.2026) */
+    { re:/\/allgemeine-tipps\/?$/, href:'/module/modul-3-claude-grundlagen' },
+    /* Modul-2-Uebersicht -> 2.0 Vorlage holen (Weiter-Knopf wie auf den anderen Uebersichten) */
+    { re:/\/modul-2-das-notion-ai-backoffice-system\/?$/, href:'/lektionen/vorlage-holen-und-einrichten' },
     /* Vision Frame + 13 Inseln in Kachel-Reihenfolge, danach Dynamisches System (Neubau 01.11.2026) */
     { re:/\/vision-frame-abschluss-des-building-prozesses\/?$/, href:'/lektionen/vision-werte' },
     { re:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, href:'/lektionen/team-kultur-guidelines' },
@@ -30737,7 +30739,7 @@ var TSISL_TEAM_ONB_V2=[
         '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
     learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4, Lektion 4.6 bis 4.9.'] },
 
-  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:'/was-ist-claude-genau', nextLabel:'Weiter zu Modul 3',
+  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:'/module/modul-3-claude-grundlagen', nextLabel:'Weiter zu Modul 3',
     hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
     body:'<p class="big">Kleine Handgriffe, die den Alltag mit deiner Vorlage leichter machen.</p>',
     secs:function(){ return T.make('tsn2-tip-liste','tsn2-sec',T.steps([
