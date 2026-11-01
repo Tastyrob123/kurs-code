@@ -25467,7 +25467,7 @@ var TSISL_TEAM_ONB_V2=[
       '<h3>Du bekommst es <span class="g">fertig.</span></h3>'+
       '<p>Das Herzstück dieses Kurses ist das <b>Notion AI Backoffice</b>. Ein System aus verbundenen Datenbanken, in dem dein ganzer Betrieb Platz hat: Lieferpartner und Inventur, Zutaten und Rezepturen, Gerichte und Getränke, Gemeinkosten, Löhne und Kennzahlen.</p>'+
       '<p>Du bekommst es als leere Vorlage. Du musst nichts nachbauen. Du tippst keine Formel ab und ziehst keine Verbindung selbst. Du übernimmst die Vorlage in dein Notion, trägst deine Daten ein, und ab da rechnet das System für dich.</p>'+
-      '<p>Wie es gebaut ist, siehst du in Modul 2 bei jeder Datenbank im Teil „So ist es gebaut“. Du sollst wissen, woher jede Zahl kommt. Dann verlässt du dich auf sie, und wenn du später etwas anpassen willst, weißt du, wo du ansetzt.</p>'));
+      '<p>Wie es gebaut ist, siehst du in Modul 2 bei jeder Datenbank im Teil „Spalte für Spalte“. Du sollst wissen, woher jede Zahl kommt. Dann verlässt du dich auf sie, und wenn du später etwas anpassen willst, weißt du, wo du ansetzt.</p>'));
 
     out.push(N.sec('tsn0-l01s2',
       '<h3>Wie wir <span class="g">arbeiten.</span></h3>'+
