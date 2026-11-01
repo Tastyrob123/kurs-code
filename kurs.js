@@ -25944,7 +25944,7 @@ var TSISL_TEAM_ONB_V2=[
       if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
     }
     function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
-    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.86 && r.bottom > 0) fire(); }
+    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
     try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
     window.addEventListener('scroll',check,{passive:true,capture:true});
     window.addEventListener('resize',check,{passive:true});
@@ -26011,6 +26011,7 @@ var TSISL_TEAM_ONB_V2=[
     el.classList.add('js');
     function tick(){
       if(!el.isConnected){ stop(); return; }
+      var rr=el.getBoundingClientRect(); if(rr.bottom<0 || rr.top>innerHeight) return; /* Takt nur im Sichtfeld */
       idx=(idx+1)%steps.length;
       for(var i=0;i<steps.length;i++){ steps[i].classList.toggle('on',i===idx); if(lis[i]) lis[i].classList.toggle('lit',i===idx); }
       setTimeout(function(){ empDraw(el); },30);
@@ -26113,6 +26114,7 @@ var TSISL_TEAM_ONB_V2=[
     reveal:tsReveal, reduced:reduced, countUp:countUp, page:function(p){ PAGES.push(p); } };
 
   /* Seiten registrieren sich weiter unten, Mount laeuft danach an (s. Ende der Zone). */
+  document.addEventListener('visibilitychange',function(){ document.documentElement.classList.toggle('tsn0-hid',document.hidden); });
   window.__tsn0mount=mount;
 })();
 
@@ -26193,7 +26195,7 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="hl-stage">'+
         '<div class="hl-card hl-n"><div class="hl-ic">'+NOTION+'</div><span class="hl-k">Das System</span><div class="hl-nm">Notion + Notion AI</div><hr>'+
           '<p>Deine Datenbanken, verbunden und durchgerechnet. Notion AI arbeitet direkt darin und beantwortet dir zum Beispiel Fragen zu deinen Einträgen.</p></div>'+
-        '<div class="hl-bridge" aria-hidden="true"><span class="hl-rail"></span><span class="hl-dot"></span><span class="hl-dot d2"></span></div>'+
+        '<div class="hl-bridge" aria-hidden="true"><span class="hl-rail"></span><span class="hl-mv"><span class="hl-dot"></span></span><span class="hl-mv m2"><span class="hl-dot"></span></span></div>'+
         '<div class="hl-card hl-c"><div class="hl-ic">'+CLAUDE+'</div><span class="hl-k">Das Werkzeug</span><div class="hl-nm">Claude</div><hr>'+
           '<p>Verbindet sich mit deinem Notion und beantwortet dir Fragen zu deinen Zahlen. Auch den Lieferschein vom Handy liest Claude für dich ein.</p></div>'+
       '</div>';
@@ -26248,18 +26250,36 @@ var TSISL_TEAM_ONB_V2=[
   ];
   function build(){
     var out=[];
-    out.push(N.intro('<p>Bevor wir in Notion einsteigen, nehmen wir uns sieben kurze Lektionen Zeit für den Rahmen. Du erfährst, wo KI in deinem Betrieb etwas bringt und mit welchen Werkzeugen wir arbeiten.</p>'+
-      '<p>Am Ende von Modul 0 kennst du die Begriffe, die dir im ganzen Kurs begegnen, und hast deine ersten Unterlagen beisammen.</p>'));
+    out.push(N.intro('<p>Bevor wir in Notion einsteigen, nehmen wir uns sieben kurze Lektionen Zeit für den Rahmen. Du erfährst, wo KI in deinem Betrieb etwas bringt und mit welchen Werkzeugen wir arbeiten. Jede Lektion ist kurz und endet mit dem, was du mitnimmst.</p>'+
+      '<p>Du bekommst außerdem Antworten auf die Fragen, die fast jeder am Anfang hat, vom Datenschutz bis zur Frage, ob sich der Aufwand für deinen Betrieb lohnt. Am Ende von Modul 0 kennst du die Begriffe, die dir im ganzen Kurs begegnen, und hast deine ersten Unterlagen beisammen.</p>'));
     var w=N.h('div','tsn0-anim'); w.id='tsn0-m0list';
     w.innerHTML=N.head('Modul 0','Bevor es <span class="g">losgeht.</span>','Geh sie der Reihe nach durch.')+
-      '<ol class="ml-list">'+LES.map(function(l,i){
-        return '<li class="ml-row" style="--i:'+i+'"><a href="'+l[3]+'"><span class="ml-no">'+l[0]+'</span><span class="ml-main"><span class="ml-t">'+l[1]+'</span><span class="ml-d">'+l[2]+'</span></span>'+
+      '<ol class="ml-list"><span class="ml-spine"><span class="ml-fill"></span><span class="ml-mv"><span class="ml-light"></span></span></span>'+LES.map(function(l,i){
+        return '<li class="ml-row" style="--i:'+i+'"><a href="'+l[3]+'"><span class="ml-no">'+l[0]+'</span><span class="ml-th"><img src="'+window.__tsn0cov('l0'+(i+1)+'-s')+'" alt="" loading="lazy" decoding="async"></span><span class="ml-main"><span class="ml-t">'+l[1]+'</span><span class="ml-d">'+l[2]+'</span></span>'+
           '<span class="ml-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>';
       }).join('')+'</ol>';
     out.push(w);
     return out;
   }
-  function after(page){ var w=page.querySelector('#tsn0-m0list'); w.classList.add('js'); N.reveal(w.querySelector('.ml-list'),function(){ w.classList.add('in'); }); }
+  /* Opener (Katalog 02, Verschaerfung 3): Leitlinie waechst, Lektionen kaskadieren mit ihren
+     Titelbildern herein (~1,3 s), danach laeuft ein Licht die Leitlinie hinab und laesst jede
+     Lektion kurz aufleuchten, an der echten Position des Lichts abgeglichen. */
+  function after(page){
+    var w=page.querySelector('#tsn0-m0list'); if(!w) return;
+    var rows=w.querySelectorAll('.ml-row'), light=w.querySelector('.ml-light'), poll=null, tm=[];
+    function clear(){ tm.forEach(clearTimeout); tm=[]; if(poll){ clearInterval(poll); poll=null; } rows.forEach(function(r){ r.classList.remove('hit'); }); }
+    function play(){
+      clear(); w.classList.remove('in','go'); void w.offsetWidth; w.classList.add('in');
+      var sp=w.querySelector('.ml-spine'); w.querySelector('.ml-light').style.setProperty('--ml-h',sp.clientHeight+'px');
+      if(N.reduced) return;
+      tm.push(setTimeout(function(){ w.classList.add('go');
+        poll=setInterval(function(){ var l=light.getBoundingClientRect(), cy=l.top+l.height/2;
+          rows.forEach(function(r){ var n=r.querySelector('.ml-no').getBoundingClientRect(); r.classList.toggle('hit', Math.abs(n.top+n.height/2-cy)<n.height*.6); }); },60); },1500));
+      tm.push(setTimeout(clear,1500+5400));
+    }
+    w.classList.add('js');
+    N.reveal(w.querySelector('.ml-list'),play);
+  }
   N.page({ key:'m0', re:/^\/modul-0-einleitung-was-dich-erwartet$/, build:build, after:after,
     hero:{ img:window.__tsn0cov('m0'), alt:'Modul 0: Einführung in die Gastronomy AI Masterclass', eyebrow:'Modul 0', title:'Die <span class="ts-gold">Einführung</span>' },
     learn:{ learn:[
@@ -26267,7 +26287,7 @@ var TSISL_TEAM_ONB_V2=[
       'Du findest die <b>Stellen in deinem Betrieb</b>, an denen KI sich lohnt.',
       'Du kennst die <b>Werkzeuge</b> und den <b>Markt</b>, Stand November 2026.',
       'Du gehst mit <b>vorbereiteten Unterlagen</b> in Modul 1.'],
-      next:L.l01, nextLabel:'Mit Lektion 0.1 starten' } });
+      next:L.l01 } });
 })();
 
 /* ============================================================
@@ -26321,7 +26341,7 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Schön, dass du da bist. Ich komme aus der Gastronomie. Ich habe Inventuren gezählt und Deckungsbeiträge gerechnet, oft spät abends im Büro, wenn der Service längst vorbei war.</p>'+
-      '<p>Genau deshalb ist dieser Kurs so aufgebaut, wie er aufgebaut ist: an den Stellen, an denen du im Betrieb wirklich stehst. In dieser Lektion zeige ich dir, was du bekommst und wie wir gemeinsam damit arbeiten.</p>'));
+      '<p>Genau deshalb ist dieser Kurs so aufgebaut, wie er aufgebaut ist: an den Stellen, an denen du im Betrieb wirklich stehst. In dieser Lektion zeige ich dir, was du bekommst und wie wir gemeinsam damit arbeiten. Ein Technikprofi musst du dafür nicht sein. Wenn du einen Lieferschein lesen und einen Wareneinsatz ausrechnen kannst, bringst du alles mit.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a01';
     a.innerHTML=N.head('So arbeiten wir','Fertig geliefert, <span class="g">von dir gefüllt.</span>','Drei Schritte, die du im Kurs immer wieder gehst. Einmal am Stück gezeigt, damit du weißt, worauf alles hinausläuft.')+
       '<div class="a1-stage">'+stage()+'</div>'+
@@ -26466,7 +26486,7 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>KI ist kein Selbstzweck. Sie lohnt sich nur dort, wo dir im Betrieb heute Zeit verloren geht oder Geld versickert, ohne dass du es merkst.</p>'+
-      '<p>Diese Stellen nenne ich <b>Schnittstellen</b>. Gemeint ist jeder Moment im Tag, in dem eine Information entsteht oder gebraucht wird. Wir gehen jetzt einen ganz normalen Tag durch und schauen, wo diese Stellen liegen. Danach weißt du, welches Modul welches Problem für dich löst.</p>'));
+      '<p>Diese Stellen nenne ich <b>Schnittstellen</b>. Gemeint ist jeder Moment im Tag, in dem eine Information entsteht oder gebraucht wird. Wir gehen jetzt einen ganz normalen Tag durch und schauen, wo diese Stellen liegen. Danach weißt du, welches Modul welches Problem für dich löst, und hast deine eigene Liste mit den Stellen, an denen bei dir am meisten liegen bleibt. Die Beispiele kommen aus einem ganz normalen Restaurant.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a02';
     a.innerHTML=N.head('Ein Tag im Betrieb','Ein ganz normaler <span class="g">Dienstag.</span>','Morgens um sieben kommt die Lieferung, kurz vor Mitternacht machst du die Kasse zu. Tipp auf eine Uhrzeit, um eine Station noch einmal anzusehen.')+
       '<div class="a2-frame">'+dial()+info()+'</div>'+
@@ -26569,7 +26589,7 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Im Kurs arbeiten wir mit einer Handvoll Werkzeugen. Keines davon ist zufällig gewählt, jedes hat eine feste Aufgabe. Zusammen decken sie ab, was dein Backoffice braucht.</p>'+
-      '<p>In dieser Lektion lernst du sie kennen: was jedes Werkzeug tut und in welchem Modul es vorkommt. Bedienen lernst du sie dort, Schritt für Schritt. Hier geht es nur darum, dass du die Rollen auseinanderhältst.</p>'));
+      '<p>In dieser Lektion lernst du sie kennen: was jedes Werkzeug tut und in welchem Modul es vorkommt. Bedienen lernst du sie dort, Schritt für Schritt. Hier geht es darum, dass du die Rollen auseinanderhältst und weißt, warum wir für jede Aufgabe genau dieses Werkzeug nehmen. Hörst du später einen neuen Namen, erkennst du sofort, ob er in deinem System eine Lücke füllt oder nur eine Rolle doppelt.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a03';
     a.innerHTML=N.head('Wer was macht','Wer den Lieferschein <span class="g">übernimmt.</span>','Ein Lieferschein am Montagmorgen. Jedes Werkzeug macht damit seinen Teil.')+
       '<div class="a3-frame"><div class="a3-stack">'+
@@ -26766,7 +26786,7 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Fast jeder, mit dem ich über KI im Betrieb spreche, hat dieselben Bedenken. Was passiert mit meinen Zahlen? Kann ich mich auf das verlassen, was da herauskommt? Und lohnt sich der Aufwand überhaupt?</p>'+
-      '<p>Diese Fragen sind berechtigt. Hier bekommst du die Antworten, eine nach der anderen. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
+      '<p>Diese Fragen sind berechtigt. Hier bekommst du die Antworten, eine nach der anderen. Manche Antworten beruhigen dich, andere zeigen dir, worauf du achten musst. Beides gehört dazu, wenn du KI mit echten Betriebszahlen nutzt, und keine dieser Fragen ist eine dumme Frage. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a05';
     a.innerHTML=N.head('Fünf Fragen','Die Zettel an der <span class="g">Pinnwand.</span>','Die Bedenken, die ich am häufigsten höre. Tipp auf einen Zettel, um direkt zur Antwort zu springen.')+
       '<div class="a5-frame"><div class="a5-rail"><span class="a5-bar"></span>'+
@@ -26869,13 +26889,13 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Zwei Begriffe begegnen dir im Kurs immer wieder: <b>Agent</b> und <b>Automation</b>. Beide nehmen dir Arbeit ab, und beide werden gern durcheinandergeworfen.</p>'+
-      '<p>Dabei ist der Unterschied schnell erklärt, wenn man ihn einmal an einem echten Fall aus dem Betrieb sieht. Genau das machen wir jetzt. Danach erkennst du beide, sobald sie dir im Kurs begegnen.</p>'));
+      '<p>Dabei ist der Unterschied schnell erklärt, wenn man ihn einmal an einem echten Fall aus dem Betrieb sieht. Wir nehmen dafür zwei Dinge, die in jedem Restaurant täglich ankommen: eine Stornierung und die Mail eines Gastes. Danach erkennst du beide, sobald sie dir im Kurs begegnen. Das lohnt sich, denn wer die zwei verwechselt, richtet schnell das Falsche ein.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a06';
     a.innerHTML=N.head('Zwei Wege','Regel oder <span class="g">Mitdenken.</span>','Zwei Dinge kommen an. Das eine braucht immer dieselbe Antwort, das andere jedes Mal eine neue.')+
       '<div class="a6-frame">'+
         '<div class="a6-in"><span class="a6-in-k">Eingang</span><div class="a6-slot"><div class="a6-item i1"><span class="a6-ik">Meldung</span><b>Reservierung storniert</b><span>Tisch 12 · Samstag · 20 Uhr</span></div>'+
           '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div><div class="a6-done">Beides erledigt. Einmal nach Regel, einmal mitgedacht.</div></div></div>'+
-        '<svg class="a6-rails" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><path class="r0" d="M400 0 L400 22"/><path class="r1" d="M400 22 C400 60 200 40 200 90"/><path class="r2" d="M400 22 C400 60 600 40 600 90"/><circle class="dot d1" r="5"/><circle class="dot d2" r="5"/></svg>'+
+        '<div class="a6-railwrap"><svg class="a6-rails" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><path class="r0" d="M400 0 L400 22"/><path class="r1" d="M400 22 C400 60 200 40 200 90"/><path class="r2" d="M400 22 C400 60 600 40 600 90"/></svg><i class="a6-dot d1"></i><i class="a6-dot d2"></i></div>'+
         '<div class="a6-lanes">'+
           '<div class="a6-lane l1"><div class="a6-lh"><span class="a6-ic">⚙︎</span><span><b>Automation</b><i>feste Regel</i></span></div>'+
             '<div class="a6-rule"><span class="k">Wenn</span>eine Reservierung storniert wird<span class="k">dann</span>wird der Tisch wieder frei</div>'+
@@ -26930,10 +26950,12 @@ var TSISL_TEAM_ONB_V2=[
     var d1=root.querySelector('.d1'), d2=root.querySelector('.d2'), p1=root.querySelector('.r1'), p2=root.querySelector('.r2'), p0=root.querySelector('.r0');
     function clear(){ timers.forEach(clearTimeout); timers=[]; }
     function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    var svg=root.querySelector('.a6-rails');
     function run(dot,path,dur){
       if(N.reduced) return; var L0=p0.getTotalLength(), L1=path.getTotalLength(), t0=null; dot.style.opacity=1;
+      var w=svg.clientWidth/800, h=svg.clientHeight/90;
       function f(t){ if(!t0) t0=t; var p=Math.min(1,(t-t0)/dur), e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2, d=e*(L0+L1), pt=d<L0?p0.getPointAtLength(d):path.getPointAtLength(d-L0);
-        dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y); if(p<1) requestAnimationFrame(f); else dot.style.opacity=0; }
+        dot.style.transform='translate('+(pt.x*w).toFixed(1)+'px,'+(pt.y*h).toFixed(1)+'px)'; if(p<1) requestAnimationFrame(f); else dot.style.opacity=0; }
       requestAnimationFrame(f); setTimeout(function(){ dot.style.opacity=0; },dur+300);
     }
     function type(start){
@@ -26991,11 +27013,11 @@ var TSISL_TEAM_ONB_V2=[
   function build(){
     var out=[];
     out.push(N.intro(
-      '<p>Jetzt weißt du, worum es geht. Bevor du loslegst, zeige ich dir, wo du einsteigst und welche Konten du vorher brauchst.</p>'+
-      '<p>Am Ende dieser Lektion hast du deine Unterlagen für das Backoffice beisammen. Damit gehst du ohne Umwege in Modul 1.</p>'));
+      '<p>Jetzt weißt du, worum es geht. Bevor du loslegst, zeige ich dir, wo du einsteigst und welche Konten du vorher brauchst. Und du siehst auf einen Blick, was du nach jedem Modul in der Hand hast, von den Notion-Grundlagen bis zur eigenen Website.</p>'+
+      '<p>Dazu bekommst du ein paar Gewohnheiten mit, damit das Gelernte in deinem Alltag ankommt und nicht im Kurs stecken bleibt. Am Ende dieser Lektion hast du deine Unterlagen für das Backoffice beisammen, und in Modul 2 legst du ohne Suchen los. Die Vorbereitung am Ende machst du am besten sofort, solange alles frisch ist.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a07';
     a.innerHTML=N.head('Der Weg','Was du nach jedem Modul <span class="g">in der Hand hast.</span>','Sieben Stationen. An jeder bekommst du etwas, das du am nächsten Tag im Betrieb nutzt.')+
-      '<div class="a7-frame"><div class="a7-track"><span class="a7-line"></span><span class="a7-fill"></span><span class="a7-light"></span>'+
+      '<div class="a7-frame"><div class="a7-track"><span class="a7-line"></span><span class="a7-fill"></span><span class="a7-mv"><span class="a7-light"></span></span>'+
         STN.map(function(s,i){ return '<div class="a7-st" style="--i:'+i+'"><span class="a7-dot">'+s[0]+'</span><span class="a7-name">'+s[1]+'</span><div class="a7-card"><p>'+s[2]+'</p></div></div>'; }).join('')+
       '</div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
@@ -27035,16 +27057,24 @@ var TSISL_TEAM_ONB_V2=[
   }
   function after(page){
     var root=page.querySelector('#tsn0-a07'); if(!root) return;
-    var timers=[], st=root.querySelectorAll('.a7-st');
-    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    var timers=[], st=root.querySelectorAll('.a7-st'), light=root.querySelector('.a7-light'), poll=null;
+    function clear(){ timers.forEach(clearTimeout); timers=[]; if(poll){ clearInterval(poll); poll=null; } }
     function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    /* Phase 1 (~1,2 s): Linie fuellt sich, Stationen kaskadieren herein (CSS, Stagger 150 ms).
+       Phase 2: ein Licht laeuft einmal den Weg ab; die Station, ueber der es gerade steht,
+       leuchtet auf (Abgleich an der echten Position, nicht an einem zweiten Takt). */
     function play(){
-      clear(); root.classList.remove('run','fin'); st.forEach(function(s){ s.classList.remove('on'); });
-      void root.offsetWidth; T(function(){ root.classList.add('run'); },200);
-      st.forEach(function(s,i){ T(function(){ s.classList.add('on'); },700+i*900); });
-      T(function(){ root.classList.add('fin'); },700+st.length*900+400);
+      clear(); root.classList.remove('run','go','fin'); st.forEach(function(s){ s.classList.remove('hit'); });
+      void root.offsetWidth; T(function(){ root.classList.add('run'); },60);
+      T(function(){ root.classList.add('go');
+        poll=setInterval(function(){
+          var lx=light.getBoundingClientRect(); var cx=lx.left+lx.width/2;
+          st.forEach(function(s){ var d=s.querySelector('.a7-dot').getBoundingClientRect(); s.classList.toggle('hit', Math.abs(d.left+d.width/2-cx)<d.width*.7); });
+        },60);
+      },1500);
+      T(function(){ clear(); st.forEach(function(s){ s.classList.remove('hit'); }); root.classList.add('fin'); },1500+6200);
     }
-    root.classList.add('js','run','fin'); st.forEach(function(s){ s.classList.add('on'); });
+    root.classList.add('js','run','fin');
     root.querySelector('.tsn0-replay').addEventListener('click',play);
     N.reveal(root.querySelector('.a7-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
   }
@@ -27055,7 +27085,7 @@ var TSISL_TEAM_ONB_V2=[
       'Notion brauchst du <b>ab Modul 1</b>, Claude ab Modul 3.',
       'Du setzt jede Lektion <b>im eigenen Betrieb</b> um, bevor du weitermachst.',
       'Deine <b>Unterlagen</b> für das Backoffice liegen bereit.'],
-      next:L.m1, nextLabel:'Weiter zu Modul 1' } });
+      next:L.m1 } });
 })();
 
 /* ============================================================
@@ -27068,6 +27098,8 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   if(window.__tsn0ab) return; window.__tsn0ab=true;
   var N=window.__tsn0, L=window.__tsn0L;
+  /* Teller = die sechs Beispielgerichte des Kurses (Kurs-SSOT DISHES, /mehrwert-zielbild) */
+  var DISH=['rinderfilet','rote-bete-risotto','lammkarree','kuerbis-veloute','pilz-ravioli','gemuese-steak'];
   var CL=[
     ['Notion','Du liest jede Datenbank deiner Vorlage und findest dich in jeder Ansicht zurecht.'],
     ['Backoffice','Dein Betrieb steht im System: Einkauf, Rezepturen, Gerichte, Kosten, Kennzahlen.'],
@@ -27080,11 +27112,11 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Du bist durch. Ich weiß, wie viele Abende in diesem Kurs stecken, neben einem Betrieb, der dich jeden Tag fordert. Danke, dass du drangeblieben bist.</p>'+
-      '<p>Auf dieser Seite schauen wir zurück auf das, was du jetzt kannst, und nach vorn: wie dein System lebendig bleibt und wie es für dich weitergeht.</p>'));
+      '<p>Nimm dir für diese Seite ein paar Minuten. Wir schauen zurück auf das, was du jetzt kannst, und nach vorn: was du jede Woche tust, damit dein Backoffice stimmt, und wie es für dich weitergeht. Du wirst sehen, wie viel sich seit der ersten Lektion verändert hat, in deinem Kopf und in deinem Betrieb. Niemand erwartet, dass vom ersten Tag an alles rund läuft.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-ab';
     a.innerHTML=N.head('Der Tisch','Alles ist <span class="g">angerichtet.</span>','Ein Teller für jedes Modul nach der Einführung.')+
       '<div class="ab-frame"><div class="ab-glow"></div><div class="ab-pass">'+
-        CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
+        CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-dish"><img src="https://tastyrob123.github.io/kurs/img/mehrwert/'+DISH[i]+'.jpg" alt="" loading="lazy" decoding="async"></span><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
       '</div><div class="ab-shelf"></div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
@@ -27142,7 +27174,8 @@ var TSISL_TEAM_ONB_V2=[
   var m=window.__tsn0mount; if(!m||window.__tsn0armed) return; window.__tsn0armed=true;
   m(); document.addEventListener('DOMContentLoaded', m);
   window.__tsMO(m).observe(document.documentElement,{childList:true,subtree:true});
-  setTimeout(m,1500); setTimeout(m,4000);
+  setTimeout(m,1500); setTimeout(m,4000); setTimeout(m,9000);
+  var q=false; window.addEventListener('scroll',function(){ if(q) return; q=true; setTimeout(function(){ q=false; m(); },250); },{passive:true});
 })();
 /* <<< NEUBAU MODUL 0 — ENDE <<< */
 /* · */
