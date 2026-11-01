@@ -2612,7 +2612,7 @@ window.__tsMO = function(cb){
   var capEl=root.querySelector('#tgCap');
   var replay=root.querySelector('#tgReplay');
   var shock=root.querySelector('#tgShock');
-  var VK=12.90;                                            /* Beispielwert Verkaufspreis */
+  var VK=14.90;                                            /* Beispielwert Verkaufspreis (Thai Peanut Tofu Bowl, wie Karten und Abschnitt 03) */
   var reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var revealed=false, dead=false, forceReady=false;
   var timers=[], rafs=[], pollId=null, readyTimer=null, io=null, ro=null;
@@ -2634,12 +2634,12 @@ window.__tsMO = function(cb){
 
   /* 17 Knoten, aussen->innen ueber die 5 Ringe verteilt. val=Beispielwert (nur Ring 0+1 zeigen einen Betrag). name=sichtbare Beschriftung unter dem Bild. */
   var TG_ITEMS=[
-    {ring:0,icon:ICON_DB,name:'DB I',val:9.10},
-    {ring:0,icon:ICON_DB,name:'DB II',val:6.80},
-    {ring:0,icon:ICON_DB,name:'DB III',val:4.20},
-    {ring:1,img:'wareneinsatz',name:'Wareneinsatz',val:3.80},
-    {ring:1,img:'personalkosten',name:'Personal',val:2.60},
-    {ring:1,img:'gemeinkosten-anteil',name:'GK-Anteil',val:2.30},
+    {ring:0,icon:ICON_DB,name:'DB I',val:10.95},
+    {ring:0,icon:ICON_DB,name:'DB II',val:7.95},
+    {ring:0,icon:ICON_DB,name:'DB III',val:6.00},
+    {ring:1,img:'wareneinsatz',name:'Wareneinsatz',val:3.95},
+    {ring:1,img:'personalkosten',name:'Personal',val:1.95},
+    {ring:1,img:'gemeinkosten-anteil',name:'GK-Anteil',val:3.00},
     {ring:2,img:'zutaten',name:'Zutaten'},
     {ring:2,img:'rezepte',name:'Rezepte'},
     {ring:2,img:'mitarbeiter',name:'Team'},
@@ -7778,8 +7778,8 @@ window.__tsMO = function(cb){
    ============================================================ */
 (function(){
   if(window.__tsinvres) return; window.__tsinvres=true;
-  var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen Inventurliste 01-2026 (Robert) */
-  var SHOT=null;     /* <- langer Ganzseiten-Screenshot der Inventurliste 01-2026 (Robert)  */
+  var POSTER='https://tastyrob123.github.io/kurs-code/assets/inventurliste-monat-mac.webp';   /* Modul 2 Neubau 01.11.2026: Monatsliste „Inventurliste 01.1“ aus der leeren Vorlage */
+  var SHOT='https://tastyrob123.github.io/kurs-code/assets/inventurliste-monat-screen.webp';     /* Bildschirmfoto der Monatsliste aus der leeren Vorlage */
   var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.webp";
   (function(){ if(!/\/inventurliste\/?$/.test(location.pathname)) return; var __go=function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); }; if(document.readyState==='complete'){setTimeout(__go,800);}else{window.addEventListener('load',function(){setTimeout(__go,800);},{once:true});} })();
   function on(){ return /\/inventurliste\/?$/.test(location.pathname); }
@@ -7844,7 +7844,7 @@ window.__tsMO = function(cb){
   var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function tileHtml(){
-    if(POSTER) return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><img src="'+POSTER+'" alt="Inventurliste 01-2026 — Monats-Tabelle" loading="lazy" decoding="async"></button>';
+    if(POSTER) return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01.1 im großen MacBook öffnen"><img src="'+POSTER+'" alt="Inventurliste 01.1, die Monatsliste deiner Vorlage" loading="lazy" decoding="async"></button>';
     return '<button type="button" class="ivr-tile" aria-label="Inventurliste 01-2026 im großen MacBook öffnen"><span class="ivr-ph"><i>Inventurliste 01-2026 · Screenshot folgt</i><img src="'+FRAME+'" alt="" loading="lazy" decoding="async"></span></button>';
   }
 
@@ -7873,7 +7873,7 @@ window.__tsMO = function(cb){
     var lb=document.getElementById('tsinvres-lb'); if(lb) return lb;
     lb=document.createElement('div'); lb.id='tsinvres-lb';
     var inner = SHOT
-      ? '<img src="'+SHOT+'" alt="Inventurliste 01-2026 — Artikel, Zählwerte und Monatssummen" loading="lazy" decoding="async">'
+      ? '<img src="'+SHOT+'" alt="Inventurliste 01.1 mit Zählspalten und Summe Monat 01.26" loading="lazy" decoding="async">'
       : '<div class="ivr-phbig">Screenshot der Inventurliste 01-2026 folgt</div>';
     lb.innerHTML='<button class="ivr-btn ivr-expand" title="Vollbild" aria-label="Vollbild">'+EXP+'</button>'+
       '<button class="ivr-btn ivr-closex" title="Schließen" aria-label="Schließen">'+XI+'</button>'+
@@ -11339,8 +11339,8 @@ var TSISL_TEAM_ONB_V2=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:30, menue_rechner:10, kunden_master:12, kostenaufstellung:28, db0_inventurliste:18, inventur_monat:22, db13_lieferanten:15, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db6_gemeinkosten:11, db6_gemeinkostenannahmen:7, db7_mitarbeiterloehne:15, db8_gerichte:30, db10_packaging:4, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
+  var BACKOFFICE={ km_master:30, menue_rechner:10, kunden_master:12, kostenaufstellung:28, db0_inventurliste:18, inventur_monat:22, db13_lieferanten:15, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db6_gemeinkosten:11, db6_gemeinkostenannahmen:7, db7_mitarbeiterloehne:15, db8_gerichte:30, db10_packaging:4, vf_werte:6, vf_marke:5, ops_team_onb:11, ops_team_mitarbeiter:15, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:13, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:13, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:13, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:9, ops_hyg_behoerden:11, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -11354,6 +11354,7 @@ var TSISL_TEAM_ONB_V2=[
     /* Links: Summe der erledigten Karten (beige) — Werte exakt wie auf den Karten */
     var total=0;
     for(var i=0;i<steps.length;i++){ if(isDone(steps[i])){ var v=k.objekt_varianten[i%n]; if(v&&typeof v.wert==='number') total+=v.wert; } }
+    if(page.countSummary) total=done;
     total=Math.round(total*100)/100;
     var valEl=root.querySelector('.tss-bar__val');
     if(valEl) valEl.textContent=fmt(page.summaryType||k.einheit_typ,total);
@@ -11637,7 +11638,11 @@ var TSISL_TEAM_ONB_V2=[
        done-Keys mit Kachel-Präfix (Titel wie „1. Button anlegen" sonst seitenübergreifend kollidierend). */
     /* Modul 2 Neubau (Grundsatz A, 01.11.2026): Erklaer-Karten aus der Modul-2-Zone
        (window.__tsn2Shop[kachel]) ersetzen Bau-Schritte, Titel und Untertitel dieses Regals. */
-    var o2=window.__tsn2Shop&&window.__tsn2Shop[page.kachel]; if(o2){ page=Object.assign({},page,o2); }
+    var o2=window.__tsn2Shop&&window.__tsn2Shop[page.kachel]; if(o2){ page=Object.assign({},page,o2);
+      /* Kartenwerte = Beispielwerte der Karten (werte: Spaltenname -> Zahl, sonst leer); typ = Einheit des Regals */
+      if(o2.werte){ var kv=kachel(page.kachel); if(kv && kv.__tsn2w!==page.steps){ var ov=kv.__tsn2ov||kv.objekt_varianten||[], nn=ov.length||1; kv.__tsn2ov=ov;
+        kv.objekt_varianten=page.steps.map(function(st,i){ var b=ov[i%nn]||{}, nm=st.title.replace(/^\d+\.\s*/,''); return {name:b.name,img:b.img,fit:b.fit,wert:(o2.werte.hasOwnProperty(nm)?o2.werte[nm]:null)}; });
+        if(o2.typ) kv.einheit_typ=o2.typ; kv.__tsn2w=page.steps; } } }
     if(page.steps){
       var anchorEl=document.querySelector(page.anchorSel||''); if(!anchorEl) return;
       if(document.getElementById(rootIdFor(page))) return;
@@ -18071,7 +18076,7 @@ var TSISL_TEAM_ONB_V2=[
   var ROWS = [
     { t: 'Store-Eindruck & Grundordnung', ok: 1 },
     { t: 'Service & Auftreten',           ok: 1 },
-    { t: 'Küche & Produktion',            ok: 0 },
+    { t: 'Küche / Produktion',            ok: 0 },
     { t: 'Hygiene',                       ok: 1 },
     { t: 'Waren & Bestand',               ok: 0 },
     { t: 'Allergene & Sicherheit',        ok: 1 },
@@ -18081,7 +18086,7 @@ var TSISL_TEAM_ONB_V2=[
 
   // Mängel = die drei Nein-Zeilen, je mit dem Gerät, um das es geht.
   var DEFECTS = [
-    { row: 2, k: 'Küche & Produktion', t: 'Mise en Place unter Soll',        img: 'prep-table.webp',  gl: '▤' },
+    { row: 2, k: 'Küche / Produktion', t: 'Mise en Place unter Soll',        img: 'prep-table.webp',  gl: '▤' },
     { row: 4, k: 'Waren & Bestand',    t: 'Kühlvitrine halb bestückt',       img: 'kuehlvitrine.webp', gl: '▥' },
     { row: 7, k: 'Prozesse & Alltag',  t: 'Entkalkung ohne festen Turnus',   img: 'glaeserspueler.webp', gl: '▦' }
   ];
@@ -19868,8 +19873,8 @@ var TSISL_TEAM_ONB_V2=[
       '<span class="iv-chk">&#10003;</span></div>' +
       '<div class="iv-meta">' +
       '<p class="iv-n">' + it.n + '</p>' +
-      '<div class="iv-r"><span>Standort</span><b>' + it.o + '</b></div>' +
-      '<div class="iv-r"><span>Zustand</span><b>' + it.z + '</b></div>' +
+      '<div class="iv-r"><span>Bereich</span><b>' + it.o + '</b></div>' +
+      '<div class="iv-r"><span>Aktiv</span><b>Ja</b></div>' +
       '<div class="iv-v" data-to="' + it.v + '">' + nf(it.v) + ' &euro;</div>' +
       '</div></div>';
   }
@@ -19883,11 +19888,11 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="iv-head">' +
       '<div class="iv-eyebrow"><i></i>Vom Besitz zum Bestand</div>' +
       '<h2 class="iv-title">Was du besitzt, steht am Ende <span>in einer Zeile</span>.</h2>' +
-      '<p class="iv-sub">Die Festwert-Liste sammelt jedes langlebige St&uuml;ck deines Betriebs &mdash; mit Wert, Zustand und Standort. Aus &bdquo;wir haben da irgendwo was&ldquo; wird eine Summe, die du belegen kannst.</p>' +
+      '<p class="iv-sub">Die Festwert-Liste sammelt jedes langlebige St&uuml;ck deines Betriebs &mdash; mit Wert, Bereich und Bestand. Aus &bdquo;wir haben da irgendwo was&ldquo; wird eine Summe, die du belegen kannst.</p>' +
       '</div>' +
       '<div class="iv-wrap">' +
       '<div class="iv-field">' +
-      '<div class="iv-field-lbl"><span>Festwert-Liste &middot; 12 Spalten</span>' +
+      '<div class="iv-field-lbl"><span>Festwert-Liste &middot; 15 Spalten</span>' +
       '<b id="iv-lbl">' + ITEMS.length + ' von ' + ITEMS.length + ' erfasst</b></div>' +
       '<div class="iv-sweep"></div>' +
       '<div class="iv-grid">' + ITEMS.map(tileHTML).join('') + '</div>' +
@@ -20500,7 +20505,7 @@ var TSISL_TEAM_ONB_V2=[
     /* Board */
     h.push('<div class="pv-board">');
     h.push('<div class="pv-bh"><span class="pv-bh-k">Verträge &middot; Laufzeit</span>' +
-      '<span class="pv-bh-m">DB Verträge &amp; Dienstleister &middot; 10 Spalten</span></div>');
+      '<span class="pv-bh-m">DB Verträge &amp; Dienstleister &middot; 13 Spalten</span></div>');
 
     h.push('<div class="pv-axis"><div class="pv-axline">');
     h.push('<div class="pv-months">');
@@ -21480,7 +21485,7 @@ var TSISL_TEAM_ONB_V2=[
     lead:'Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.',
     intro:['In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.','Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.'],
     animAnchor:'tsanim1-anchor', /* #tsanim1 — eigenständige Erkläranimation Team & Onboarding, ersetzt generischen checklist-Renderer */
-    video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungsausgabe und Urlaub wirken wie vier getrennte Listen. Tatsächlich hängen sie alle an derselben Person. Du legst einen Mitarbeiter genau einmal an, danach zieht sich jede weitere Tabelle ihre Informationen aus dieser einen Zeile.','Im Alltag merkst du den Unterschied sofort. An der Person siehst du, welche Kleidung ausgegeben wurde und welcher Pfand dafür hinterlegt ist, welcher Nachweis wann abläuft und wann Urlaub beantragt wurde. Du blätterst nirgendwo mehr nach.','So wird aus vier losen Listen ein Personal-System, das mitdenkt, statt dich bei jeder Frage neu suchen zu lassen.'], close:'Öffne dir dafür eine leere Seite in Notion und nenne sie Team und Onboarding. Mehr brauchst du im Moment nicht vorzubereiten. Die vier Datenbanken dahinter bauen wir gleich gemeinsam auf, eine nach der anderen. Jede Karte im Warenkorb ist eine Spalte, die du einmal anlegst und danach nie wieder von Hand pflegen musst.'},
+    video:{h:'Vier Bereiche, <span class="il-g">ein System</span>', p:['Onboarding, Team-Stammdaten, Kleidungsausgabe und Urlaub wirken wie vier getrennte Listen. Tatsächlich drehen sie sich alle um dieselben Menschen. Die Kleidungsausgabe hängt an der Person in 👤 Mitarbeiter, das Onboarding beschreibt die Schritte für jede neue Person, und Urlaub planst du mit den Personen deines Workspace.','Im Alltag merkst du den Unterschied sofort. Filterst du nach einer Person, siehst du, welche Kleidung sie bekommen hat und welches Pfand dafür hinterlegt ist, und im Urlaubskalender, wann sie fehlt. Du blätterst nirgendwo mehr nach.','So wird aus vier losen Listen ein Personal-System, das mitdenkt, statt dich bei jeder Frage neu suchen zu lassen.'], close:'Öffne dir dafür eine leere Seite in Notion und nenne sie Team und Onboarding. Mehr brauchst du im Moment nicht vorzubereiten. Die vier Datenbanken dahinter bauen wir gleich gemeinsam auf, eine nach der anderen. Jede Karte im Warenkorb ist eine Spalte, die du einmal anlegst und danach nie wieder von Hand pflegen musst.'},
     wk:[
       {id:'ops_team_onb', eyebrow:'DB : OnBoarding Wissensdatenbank', title:'Dein <span>Onboarding</span>. Spalte für Spalte.'},
       {id:'ops_team_mitarbeiter', eyebrow:'DB : 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.'},
@@ -21493,8 +21498,8 @@ var TSISL_TEAM_ONB_V2=[
       {h:'Das Team auf <span class="il-g">einen Blick</span>', cap:'Mitarbeiter-Stammdaten', p:['Eine Zeile pro Person, und darin alles, was im Betrieb wirklich gebraucht wird: Rolle, Anstellungsart, Kontakt, Eintrittsdatum und der Status der Zusammenarbeit. Nichts davon liegt noch auf einem Zettel im Büro oder im Kopf des Schichtleiters.','Der eigentliche Gewinn steckt in den Rechenfeldern. Aus dem hinterlegten Gehalt und dem Arbeitgeber-Faktor rechnet die Tabelle die tatsächlichen Personalkosten pro Stunde aus. Damit kalkulierst du eine Schicht, bevor du sie planst, statt am Monatsende zu erklären, warum die Lohnquote gestiegen ist.','Sortierst du die Ansicht nach Rolle, siehst du dein Team so, wie es im Dienstplan zusammenarbeitet.']},
       {h:'Urlaub, bevor es <span class="il-g">eng wird</span>', cap:'Urlaubsplanung', p:['Dieselben Urlaubsanträge erscheinen in drei Ansichten: als Timeline über das Jahr, als Monatskalender und als Freigabe-Board nach Status. Du pflegst einen einzigen Eintrag und liest ihn dreimal völlig unterschiedlich.','Damit erkennst du Engpässe Wochen im Voraus. Wenn im Juli drei Anträge auf derselben Woche liegen, siehst du das in der Timeline sofort und planst die Schichten drumherum, statt kurzfristig zu telefonieren und Gefallen einzufordern.','Das Feld Vertretung sorgt zusätzlich dafür, dass keine Abwesenheit ohne saubere Übergabe durchgeht. Wer wegfällt, ist damit vorher bekannt und nicht erst am Morgen der Schicht.']},
       {h:'Jede Ausgabe <span class="il-g">nachvollziehbar</span>', cap:'Kleidung-Ausgabe', p:['Jede ausgegebene Kleidung steht mit Mitarbeiter, Stückzahl und Pfandbetrag in einer Zeile. Du siehst auf einen Blick, wer was hat und wie viel Pfand dafür hinterlegt ist — ohne im Kopf nachzurechnen.','Der Status Ausgegeben, Zurückgegeben oder Verloren macht sichtbar, was noch offen ist. Bei einer Kündigung filterst du auf die Person und siehst sofort, welche Teile und welches Pfand noch zurückkommen müssen.','Die Pfandvereinbarung liegt als Scan direkt an der Zeile. Kommt es zum Streit über ein fehlendes Teil, ziehst du den Beleg in Sekunden statt im Ordner zu suchen.']},
-      {h:'Bestand <span class="il-g">ohne Rätselraten</span>', cap:'Kleidungsstücke-Inventar', p:['Jede Größen- und Farbvariante ist eine eigene Zeile mit eigenem Bestand. Der verfügbare Bestand wird automatisch aus Ursprungsbestand minus ausgegebenen Teilen gerechnet — du zählst nicht mehr von Hand nach.','Fällt eine Größe knapp aus, siehst du es an der Formel, bevor der nächste neue Mitarbeiter ohne passende Kochjacke dasteht.','Über den Stammartikel bleibt jede Variante mit dem ursprünglichen Einkaufspreis verbunden — die Nachbestellung rechnet sich von selbst.']},
-      {h:'Ein Stammartikel, <span class="il-g">viele Varianten</span>', cap:'Kleidung-Stammartikel', p:['Der Stammartikel bündelt, was allen Größen und Farben eines Kleidungsstücks gemeinsam ist: der Name, der Preis pro Stück, der Lieferpartner. Die einzelnen Varianten hängen sich darunter ein.','Änderst du den Einkaufspreis am Stammartikel, zieht sich das automatisch durch jede Variante, die daran hängt. Du pflegst den Preis nur einmal, nicht pro Größe einzeln.','So bleibt die Kleiderordnung eine kurze, klare Liste, auch wenn im Inventar darunter Dutzende Größen-Kombinationen liegen.']},
+      {h:'Bestand <span class="il-g">ohne Rätselraten</span>', cap:'Kleidungsstücke-Inventar', p:['Jede Größen- und Farbvariante ist eine eigene Zeile mit eigenem Bestand. Der verfügbare Bestand wird automatisch aus Ursprungsbestand minus ausgegebenen Teilen gerechnet, du zählst nicht mehr von Hand nach.','Fällt eine Größe knapp aus, siehst du es an der Formel, bevor der nächste neue Mitarbeiter ohne passende Kochjacke dasteht.','Über den Stammartikel bleibt jede Variante mit ihrem Einkaufspreis verbunden. Beim Nachbestellen weißt du sofort, was ein Teil kostet.']},
+      {h:'Ein Stammartikel, <span class="il-g">viele Varianten</span>', cap:'Kleidung-Stammartikel', p:['Der Stammartikel bündelt, was allen Größen und Farben eines Kleidungsstücks gemeinsam ist: der Name, der Preis pro Stück, der Lieferpartner. Die einzelnen Varianten hängen sich darunter ein.','Der Einkaufspreis steht nur am Stammartikel. Du pflegst ihn einmal, nicht pro Größe einzeln, und jede Variante zeigt über ihren Stammartikel, wozu sie gehört.','So bleibt die Kleiderordnung eine kurze, klare Liste, auch wenn im Inventar darunter Dutzende Größen-Kombinationen liegen.']},
       {h:'Anträge, die sich <span class="il-g">selbst sortieren</span>', cap:'Urlaubsplanung', p:['Jeder Antrag trägt Zeitraum, Abwesenheitstyp und Status — von Beantragt über Genehmigt bis Abgelehnt. Du entscheidest bewusst, statt Anträge nur zur Kenntnis zu nehmen.','Das Feld Vertretung stellt sicher, dass zu jeder genehmigten Abwesenheit feststeht, wer sie auffängt. Keine Schicht bleibt unbesetzt, nur weil niemand rechtzeitig nachgedacht hat.','Filterst du nach Status Beantragt, hast du in Sekunden die Liste, über die du diese Woche entscheiden musst — alles Genehmigte bleibt ruhig liegen.']}
     ],
     zweit:{type:'stack', head:{eyebrow:'Kleidung mit Pfand', h:'Jedes Teil hat einen <span class="il-g">Wert</span>', sub:'Arbeitskleidung ist Betriebseigentum. Der hinterlegte Pfand summiert sich pro Mitarbeiter.'}, unit:'€', rows:[{label:'Cap Schwarz',val:10},{label:'Kochhose L (Leiber)',val:30},{label:'Kochschuhe 42 (Abeba)',val:40}], totalLabel:'Pfand im Umlauf'},
@@ -21517,14 +21522,14 @@ var TSISL_TEAM_ONB_V2=[
       {id:'ops_check_waste', eyebrow:'DB : Waste List', title:'Deine <span>Waste List</span>. Verlust für Verlust.'}
     ],
     ergebnis:[
-      {h:'Die Woche im <span class="il-g">Voraus</span>', cap:'Produktionsliste', p:['Was wird produziert, in welcher Menge, an welchem Tag und mit welchem Vorlauf. Der Pizzateig braucht zwei Tage Gare, also zeigt die Liste den Startpunkt von selbst an, statt ihn dich jede Woche neu ausrechnen zu lassen.','Ein Status-Feld macht die Mise en Place schichtübergreifend sichtbar. Die Frühschicht sieht, was die Spätschicht vorbereitet hat, und niemand produziert dieselbe Sauce zweimal oder verlässt sich darauf, dass es schon jemand gemacht hat.','Gruppiert nach Tag wird daraus der Produktionsplan für die ganze Woche, den du sonntags einmal durchgehst und danach ruhig liegen lässt. Was fertig ist, verschwindet aus der Ansicht.']},
-      {h:'Waste als <span class="il-g">Zahl</span>', cap:'Waste-Erfassung', p:['Der teuerste Ort in der Küche ist der Mülleimer. Über die Verknüpfung zu den Zutaten rechnet jeder Waste-Eintrag den Verlust automatisch in Euro, sodass aus einem Bauchgefühl eine Zahl wird, die du Monat für Monat vergleichen kannst.','Die hinterlegten Gründe zeigen dir, wo das Problem tatsächlich sitzt. Abgelaufen deutet auf den Einkauf, Überproduktion auf die Planung, Handling-Fehler auf die Einweisung neuer Leute.','Damit reparierst du die Ursache, statt jeden Monat nur den Schaden zu zählen und dich über die Zahl zu ärgern. Nach dem dritten Monat siehst du an der Kurve, ob deine Maßnahme wirklich gegriffen hat.']},
+      {h:'Die Woche im <span class="il-g">Voraus</span>', cap:'Produktionsliste', p:['Was wird produziert, in welcher Menge, an welchem Tag und mit welchem Vorlauf. Der Pizzateig braucht zwei Tage Gare, also steht der Starttag in der Liste, und du siehst ihn, bevor es zu spät ist.','Ein Status-Feld macht die Mise en Place schichtübergreifend sichtbar. Die Frühschicht sieht, was die Spätschicht vorbereitet hat, und niemand produziert dieselbe Sauce zweimal oder verlässt sich darauf, dass es schon jemand gemacht hat.','Gruppiert nach Tag wird daraus der Produktionsplan für die ganze Woche, den du sonntags einmal durchgehst und danach ruhig liegen lässt. Was fertig ist, verschwindet aus der Ansicht.']},
+      {h:'Waste als <span class="il-g">Zahl</span>', cap:'Waste-Erfassung', p:['Der teuerste Ort in der Küche ist der Mülleimer. Über die Verknüpfung zu den Zutaten rechnet jeder Waste-Eintrag den Verlust automatisch in Euro, sodass aus einem Bauchgefühl eine Zahl wird, die du Monat für Monat vergleichen kannst.','Die hinterlegten Gründe zeigen dir, wo das Problem tatsächlich sitzt. Abgelaufen deutet auf den Einkauf, Überproduktion auf die Planung, Fehler auf die Einweisung neuer Leute.','Damit reparierst du die Ursache, statt jeden Monat nur den Schaden zu zählen und dich über die Zahl zu ärgern. Nach dem dritten Monat siehst du an der Kurve, ob deine Maßnahme wirklich gegriffen hat.']},
       {h:'Takt statt <span class="il-g">Zufall</span>', cap:'Checklisten', p:['Jede Checkliste trägt Kategorie, Typ und Zielrolle — Kassenabschluss ist etwas anderes als der wöchentliche Kühlraum-Check, und beide gehören trotzdem in dieselbe Übersicht.','Über Letzte Durchführung und Nächste Fälligkeit siehst du, was ansteht, ohne jede Liste einzeln aufzurufen. Was überfällig ist, fällt sofort auf.','Die Verknüpfung zur passenden SOP holt bei Bedarf den genauen Ablauf dazu, eine Ebene tiefer, ohne die Übersicht zu überladen.']},
       {h:'Der Ablauf, <span class="il-g">immer gleich</span>', cap:'SOPs', p:['Jede SOP hält den Schritt-für-Schritt-Ablauf in einem Feld fest, dazu Bereich, Kritikalität und Gültigkeitsstatus. Was in Bearbeitung oder veraltet ist, verwechselst du nicht mehr mit dem aktuellen Stand.','Version und Gültig ab machen nachvollziehbar, welcher Stand gerade gilt. Ändert sich ein Ablauf, zieht sich die neue Version durch, statt in fünf verschiedenen Kladden zu kursieren.','Über die Verknüpfung zu Kontrollthemen und Behörden weißt du sofort, welcher Prozess bei welcher Kontrolle zählt.']},
-      {h:'Verlust, <span class="il-g">sofort sichtbar</span>', cap:'Waste List', p:['Jeder Waste-Eintrag trägt Zutat, Grund und Menge. Über die Verknüpfung zur Zutat rechnet die Formel Wert (€) automatisch den Verlust in Euro aus.','Die Formel Waste Zusammenfassung baut daraus einen lesbaren Titel für deine Ansichten — du musst nichts von Hand betiteln, um die Liste lesbar zu halten.','Gruppiert nach Grund erkennst du in Sekunden, ob dein größter Verlust an abgelaufener Ware, Überproduktion oder Handling-Fehlern liegt.']}
+      {h:'Verlust, <span class="il-g">sofort sichtbar</span>', cap:'Waste List', p:['Jeder Waste-Eintrag trägt Zutat, Grund und Menge. Über die Verknüpfung zur Zutat rechnet die Formel Wert (€) automatisch den Verlust in Euro aus.','Die Formel Waste Zusammenfassung baut daraus einen lesbaren Titel für deine Ansichten, du musst nichts von Hand betiteln, um die Liste lesbar zu halten.','Gruppiert nach Grund erkennst du in Sekunden, ob dein größter Verlust an abgelaufener Ware, Überproduktion oder Fehlern liegt.']}
     ],
     zweit:null,
-    empf:{dbhd:'Waste nach <span class="il-eg">Grund</span>', emph:'Koppel Produktion an die <span class="il-eg">Waste-Erfassung</span>', p:'Überproduktion ist der häufigste Waste-Grund. Wenn beide Tabellen zusammenhängen, siehst du sofort, welches Gericht du zu großzügig kalkulierst, und ziehst die Menge nach.', points:['Abgelaufen','Überproduktion','Qualität','Handling-Fehler'], steps:['Hinterlege jeden Waste-Eintrag mit genau einem eindeutigen Grund.','Verknüpfe die Zutat, damit der Verlust automatisch in Euro erscheint.','Vergleiche die Gründe monatlich und such dir den größten Block.','Zieh die Produktionsmenge nach, wenn Überproduktion oben steht.']},
+    empf:{dbhd:'Waste nach <span class="il-eg">Grund</span>', emph:'Koppel Produktion an die <span class="il-eg">Waste-Erfassung</span>', p:'Überproduktion ist der häufigste Waste-Grund. Wenn beide Tabellen zusammenhängen, siehst du sofort, welches Gericht du zu großzügig kalkulierst, und ziehst die Menge nach.', points:['Abgelaufen','Überproduktion','Qualität','Fehler'], steps:['Hinterlege jeden Waste-Eintrag mit genau einem eindeutigen Grund.','Verknüpfe die Zutat, damit der Verlust automatisch in Euro erscheint.','Vergleiche die Gründe monatlich und such dir den größten Block.','Zieh die Produktionsmenge nach, wenn Überproduktion oben steht.']},
     learn:['Du hast die Abläufe-Insel gebaut, mit Audit, Checklisten, Produktion und Waste an einem Ort.','Du kennst den Unterschied zwischen Checkliste und SOP und weißt, wie beide über eine Verknüpfung zusammenhängen.','Du planst Wochenproduktion mit Vorlaufzeit und Status, sodass nie etwas kurzfristig fehlt.','Du erfasst Waste als Euro-Wert und erkennst an den Gründen, wo im Betrieb das Geld verloren geht.']
    },
    {
@@ -21562,7 +21567,7 @@ var TSISL_TEAM_ONB_V2=[
     lead:'Dein Lager ist Geld, das nur anders aussieht.',
     intro:['Zwei Dinge werden ständig verwechselt. Der laufende Wareneinsatz, also alles, was du verbrauchst und nachkaufst, und der Festwert, also das langlebige Inventar, das Jahr für Jahr im Betrieb bleibt. Beide zählst du anders.','Diese Insel baut die Festwert-Inventur sauber auf und zeigt klar, wo die monatliche Inventurliste und das Packaging andocken, ohne dass du dieselbe Zahl doppelt pflegst.'],
     animAnchor:'tsanim4-anchor', /* #tsanim4 — eigenständige Erkläranimation Inventur & Bestand, ersetzt generischen stack-Renderer */
-    video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt drei Zahlen: den aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, springt die Zeile auf ein Nachbestell-Signal um, mit hinterlegtem Lieferanten und Bestell-Link direkt daneben.','Damit hört die Inventur auf, ein Termin einmal im Jahr zu sein. Sie wird zu einer Liste, die dich das ganze Jahr über warnt, bevor etwas ausgeht, und die im Dezember trotzdem den sauberen Wert für den Jahresabschluss liefert.','Aus Zählen wird Steuern, und aus einer lästigen Pflicht ein Werkzeug, das dir Arbeit abnimmt. Der Mindestbestand ist dabei die eigentliche Intelligenz der ganzen Tabelle.'], close:'Lege dir eine leere Seite mit dem Namen Inventur und Bestand an, mehr brauchst du nicht vorzubereiten. Ein Titel und eine leere Seite genügen völlig. Im nächsten Schritt bauen wir die Festwert-Liste gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus deiner Zählung eine belastbare Zahl für den Abschluss macht.'},
+    video:{h:'Bestand mit <span class="il-g">Signal</span>', p:['Jeder Artikel trägt drei Zahlen: den aktuellen Bestand, den Sollbestand und den Mindestbestand. Fällt die Menge unter das Minimum, siehst du es im Vergleich direkt an der Zeile, mit Bezugsquelle und Bestell-Link daneben.','Damit hört die Inventur auf, ein Termin einmal im Jahr zu sein. Sie wird zu einer Liste, die dich das ganze Jahr über warnt, bevor etwas ausgeht, und die im Dezember trotzdem den sauberen Wert für den Jahresabschluss liefert.','Aus Zählen wird Steuern, und aus einer lästigen Pflicht ein Werkzeug, das dir Arbeit abnimmt. Der Mindestbestand ist dabei die eigentliche Intelligenz der ganzen Tabelle.'], close:'Lege dir eine leere Seite mit dem Namen Inventur und Bestand an, mehr brauchst du nicht vorzubereiten. Ein Titel und eine leere Seite genügen völlig. Im nächsten Schritt bauen wir die Festwert-Liste gemeinsam Spalte für Spalte auf. Jede Karte im Warenkorb ist eine Eigenschaft, die aus deiner Zählung eine belastbare Zahl für den Abschluss macht.'},
     wk:[
       {id:'ops_inv_festwert', eyebrow:'Festwert · Jahresinventur', title:'Dein <span>Festwert</span>. Stück für Stück.'}
     ],
@@ -21571,7 +21576,7 @@ var TSISL_TEAM_ONB_V2=[
       {h:'Verpackung, <span class="il-g">sauber verknüpft</span>', cap:'Packaging-Datenbank', p:['Die Packaging-Datenbank führt keine eigenen Preise. Sie zieht sie über eine Verknüpfung direkt aus der Inventurliste, in der der Einkaufspreis ohnehin schon gepflegt wird.','Damit verschwindet die häufigste Fehlerquelle im Backoffice: zwei Tabellen mit derselben Zahl, von denen eine irgendwann veraltet und niemand merkt es. Änderst du den Preis an der Quelle, ändert er sich überall mit, auch in jeder Kalkulation, die darauf aufbaut.','Ein einziger Verweis genügt, um den ganzen Aufbau verbunden und aktuell zu halten. Genau darin liegt der Unterschied zwischen einer Sammlung von Tabellen und einem System.']}
     ],
     zweit:null,
-    empf:{dbhd:'Bestand mit <span class="il-eg">Signal</span>', emph:'Halte deinen Bestand mit einem <span class="il-eg">Nachbestell-Signal</span> lebendig', p:'Der Mindestbestand ist die eigentliche Intelligenz der Tabelle. Sobald ein Posten darunter fällt, siehst du es sofort, mit Lieferant und Bestell-Link direkt an der Zeile.', points:['Aktueller Bestand','Sollbestand','Mindestbestand','Nachbestellen'], steps:['Trag den aktuellen Bestand bei jeder Zählung neu ein.','Definiere den Sollbestand, den du im Normalbetrieb halten willst.','Setz den Mindestbestand auf die Menge, die eine Lieferzeit überbrückt.','Lass die Zeile auf Nachbestellen springen, sobald sie darunter fällt.']},
+    empf:{dbhd:'Bestand mit <span class="il-eg">Signal</span>', emph:'Halte deinen Bestand mit dem <span class="il-eg">Mindestbestand</span> im Blick', p:'Der Mindestbestand ist die eigentliche Intelligenz der Tabelle. Sobald ein Posten darunter fällt, siehst du es sofort, mit Lieferant und Bestell-Link direkt an der Zeile.', points:['Aktueller Bestand','Sollbestand','Mindestbestand','Nachbestell-Link'], steps:['Trag den aktuellen Bestand bei jeder Zählung neu ein.','Definiere den Sollbestand, den du im Normalbetrieb halten willst.','Setz den Mindestbestand auf die Menge, die eine Lieferzeit überbrückt.','Filtere auf alles unter dem Mindestbestand und bestell über den Nachbestell-Link.']},
     learn:['Du hast die Bestands-Insel gebaut und trennst sauber laufenden Wareneinsatz von langlebigem Festwert.','Du erfasst die Festwert-Liste so, dass Menge mal Preis automatisch den Inventurwert für den Jahresabschluss ergibt.','Du steuerst deinen Bestand über Soll- und Mindestbestand, statt ihn nur einmal im Jahr zu zählen.','Du weißt, wie die monatliche Inventurliste und das Packaging andocken, ohne dass du eine Zahl doppelt pflegst.']
    },
    {
@@ -21581,7 +21586,7 @@ var TSISL_TEAM_ONB_V2=[
     lead:'Der teuerste Vertrag ist der, dessen Kündigungsfrist du verpasst.',
     intro:['Jeder Betrieb sammelt über die Jahre Dutzende laufende Verträge: Wartung, Software, Versicherung, Miete. Und ein Netz aus Dienstleistern, die man genau dann sucht, wenn etwas kaputt ist.','Diese Insel bringt beides an einen Ort. Die Dienstleister-Übersicht als schnelles Verzeichnis, die Vertragsübersicht mit Wert, Laufzeit und Frist, damit keine Verlängerung und keine Kündigung mehr durchrutscht.'],
     animAnchor:'tsanim5-anchor', /* #tsanim5 — eigenständige Erkläranimation Partner & Verträge, ersetzt generischen stack-Renderer */
-    video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt dir daneben, was läuft, was noch zur Unterschrift ansteht und was bereits gekündigt ist.','Der wichtigste Teil ist die Frist. Aus Ende und Kündigungsfrist rechnet die Tabelle den Tag aus, an dem du spätestens entscheiden musst. Damit verlängert sich kein Vertrag mehr still um ein weiteres Jahr, nur weil niemand den Kalender im Kopf hatte.','Die Verknüpfung zum Lieferpartner holt den passenden Ansprechpartner automatisch dazu, ohne erneutes Tippen. Damit steht die Vertragsakte vollständig an einer Stelle, statt verteilt auf Ordner und Postfächer.'], close:'Lege dir eine leere Seite mit dem Namen Partner und Verträge an, das genügt vorerst. Der Rest entsteht Schritt für Schritt beim Mitbauen. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir ein Stück Kontrolle über deine laufenden Kosten zurückgibt.'},
+    video:{h:'Vertrag mit <span class="il-g">Frist</span>', p:['Jeder Vertrag trägt seinen Wert, den Beginn, das Ende und die Kündigungsfrist. Ein Status-Feld zeigt dir daneben, was läuft, was noch zur Unterschrift ansteht und was bereits gekündigt ist.','Der wichtigste Teil ist die Frist. Mit Vertragsende und Kündigungsfrist nebeneinander siehst du, bis wann du spätestens entscheiden musst. Damit verlängert sich kein Vertrag mehr still um ein weiteres Jahr, nur weil niemand den Kalender im Kopf hatte.','Die Verknüpfung zum Lieferpartner holt den passenden Ansprechpartner automatisch dazu, ohne erneutes Tippen. Damit steht die Vertragsakte vollständig an einer Stelle, statt verteilt auf Ordner und Postfächer.'], close:'Lege dir eine leere Seite mit dem Namen Partner und Verträge an, das genügt vorerst. Der Rest entsteht Schritt für Schritt beim Mitbauen. Danach bauen wir die beiden Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dir ein Stück Kontrolle über deine laufenden Kosten zurückgibt.'},
     wk:[
       {id:'ops_part_vertraege', eyebrow:'Verträge · Übersicht', title:'Deine <span>Verträge</span>. Frist im Blick.'},
       {id:'ops_part_dienstleister', eyebrow:'Dienstleister · Verzeichnis', title:'Deine <span>Dienstleister</span>. Griffbereit.'}
@@ -21591,7 +21596,7 @@ var TSISL_TEAM_ONB_V2=[
       {h:'Kein <span class="il-g">Vertrag im Blindflug</span>', cap:'Vertragsübersicht', p:['Die Vertragsübersicht zeigt Wert, Laufzeit und Frist nebeneinander. Sortiert nach Ende siehst du sofort, was in den nächsten Monaten ansteht, und entscheidest bewusst zu verlängern oder zu wechseln.','Summiert siehst du außerdem, wie viel Geld pro Jahr über laufende Verträge gebunden ist. Diese Zahl kennen die wenigsten Betriebe, obwohl sie einer der größten Fixkostenblöcke überhaupt ist und sich mit etwas Vorlauf gut verhandeln lässt.','Kein Vertrag läuft mehr einfach weiter, nur weil du ihn schlicht vergessen hast. Du entscheidest über jede Verlängerung bewusst, mit der Frist und der Summe vor Augen.']}
     ],
     zweit:null,
-    empf:{dbhd:'Vertrag mit <span class="il-eg">Frist</span>', emph:'Verknüpfe Verträge mit deinen <span class="il-eg">Lieferpartnern</span>', p:'Die Lieferpartner-Datenbank aus Modul zwei kennt deine Kontakte schon. Über eine Verknüpfung zieht die Vertragskarte den richtigen Ansprechpartner automatisch heran, du pflegst ihn nur einmal.', points:['Vertragswert','Laufzeit','Kündigungsfrist','Kontakt'], steps:['Trag den Jahreswert ein, damit sich das Vertragsvolumen summiert.','Erfasse Beginn und Ende, nicht nur das Datum der Unterschrift.','Lass aus Ende und Frist den letzten Entscheidungstag rechnen.','Verknüpfe den Lieferpartner, statt den Kontakt erneut einzutippen.']},
+    empf:{dbhd:'Vertrag mit <span class="il-eg">Frist</span>', emph:'Verknüpfe Verträge mit deinen <span class="il-eg">Lieferpartnern</span>', p:'Die Lieferpartner-Datenbank aus Lektion 2.3 kennt deine Kontakte schon. Über eine Verknüpfung zieht die Vertragskarte den richtigen Ansprechpartner automatisch heran, du pflegst ihn nur einmal.', points:['Vertragswert','Laufzeit','Kündigungsfrist','Kontakt'], steps:['Trag den Jahreswert ein, damit sich das Vertragsvolumen summiert.','Erfasse Beginn und Ende, nicht nur das Datum der Unterschrift.','Trag die Kündigungsfrist so ein, wie sie im Vertrag steht.','Verknüpfe den Lieferpartner, statt den Kontakt erneut einzutippen.']},
     learn:['Du hast die Partner-Insel gebaut, mit Dienstleister-Verzeichnis und Vertragsübersicht an einem Ort.','Du führst jeden Vertrag mit Wert, Laufzeit und Kündigungsfrist, sodass keine Frist mehr durchrutscht.','Du erkennst über das Status-Feld, welcher Vertrag ansteht, läuft oder gekündigt ist.','Du verknüpfst Verträge mit deinen Lieferpartnern und ziehst den richtigen Kontakt automatisch heran.']
    },
    {
@@ -21601,20 +21606,20 @@ var TSISL_TEAM_ONB_V2=[
     lead:'Kontrolle über einen Betrieb heißt Kontrolle darüber, wer worauf Zugriff hat.',
     intro:['Passwörter im Kopf, Schlüssel in der Schublade, Bareinzahlungen auf Zetteln. Solange nichts passiert, geht das gut. Beim ersten Personalwechsel oder der ersten Nachfrage vom Steuerberater wird es teuer.','Diese Insel bringt das Sensible in geordnete Bahnen: eine nachvollziehbare Zugangs-Hoheit, eine lückenlose Einzahlungs-Doku und eine Schlüsselliste, die im Verlustfall sofort Antwort gibt.'],
     animAnchor:'tsanim6-anchor', /* #tsanim6 — eigenständige Erkläranimation Zugänge & Werte, ersetzt generischen grid-Renderer */
-    video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage speichert nicht das Geheimnis selbst, sondern die Übersicht darüber: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv und wann wurde zuletzt geändert. Damit beantwortest du beim Personalwechsel die entscheidende Frage, worauf diese Person Zugriff hatte.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index darüber, der die Hoheit sichtbar macht und im Zweifel den Weg zeigt.','Du sperrst gezielt, statt zu raten, und siehst nebenbei, welche Zugänge noch ohne zweite Sicherung laufen. Beim Austritt wird daraus eine Abarbeitungsliste statt einer Erinnerungsübung.'], close:'Lege dir eine leere Seite mit dem Namen Zugänge und Werte an, mehr ist im Moment nicht nötig. Das ist in zwei Minuten erledigt. Danach bauen wir die Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles nachvollziehbar macht, ohne dass ein Passwort in Notion steht.'},
+    video:{h:'Sensibles mit <span class="il-g">Hoheit</span>', p:['Die Passwortablage ist vor allem die Übersicht über deine Zugänge: welcher Dienst, welcher Status, ist die Zwei-Faktor-Sicherung aktiv und wann wurde zuletzt geändert. Damit beantwortest du beim Personalwechsel die entscheidende Frage, worauf diese Person Zugriff hatte.','Echte Passwörter gehören in einen Passwort-Manager. Notion ist der Index darüber, der die Hoheit sichtbar macht und im Zweifel den Weg zeigt.','Du sperrst gezielt, statt zu raten, und siehst nebenbei, welche Zugänge noch ohne zweite Sicherung laufen. Beim Austritt wird daraus eine Abarbeitungsliste statt einer Erinnerungsübung.'], close:'Lege dir eine leere Seite mit dem Namen Zugänge und Werte an, mehr ist im Moment nicht nötig. Das ist in zwei Minuten erledigt. Danach bauen wir die Datenbanken gemeinsam auf. Jede Karte im Warenkorb ist eine Eigenschaft, die dein Sensibles nachvollziehbar macht, ohne dass ein Passwort in Notion steht.'},
     wk:[
       {id:'ops_zug_bank', eyebrow:'Bankeinzahlungen · Nachweis', title:'Deine <span>Einzahlungen</span>. Lückenlos belegt.'},
       {id:'ops_zug_schluessel', eyebrow:'Schlüssel · Ausgabe', title:'Deine <span>Schlüssel</span>. Jeder zugeordnet.'},
       {id:'ops_zug_passwords', eyebrow:'DB : Password Vault', title:'Dein <span>Password Vault</span>. Zugang für Zugang.'}
     ],
     ergebnis:[
-      {h:'Jede Einzahlung <span class="il-g">belegt</span>', cap:'Bankeinzahlungen', p:['Betrag, Datum, Referenz und ein Beleg-Scan an jeder einzelnen Zeile. Die Statuskette von geplant über eingezahlt bis verbucht macht offene Posten sichtbar, statt sie im Kassenbuch verschwinden zu lassen.','Das ist die Brücke zwischen Tageskasse und Steuerberater. Wenn nachgefragt wird, warum an einem Dienstag eine größere Summe eingezahlt wurde, liegt die Antwort samt Beleg an derselben Stelle und du musst nichts rekonstruieren.','Gefiltert auf offen siehst du in Sekunden, welche Einzahlung noch nicht verbucht wurde. Damit ist die Kassenführung nicht nur ordentlich, sondern auch nachweisbar ordentlich.']},
+      {h:'Jede Einzahlung <span class="il-g">belegt</span>', cap:'Bankeinzahlungen', p:['Betrag, Datum, Referenz und ein Beleg-Scan an jeder einzelnen Zeile. Die Statuskette von geplant über eingezahlt bis verbucht macht offene Posten sichtbar, statt sie im Kassenbuch verschwinden zu lassen.','Das ist die Brücke zwischen Tageskasse und Steuerberater. Wenn nachgefragt wird, warum an einem Dienstag eine größere Summe eingezahlt wurde, liegt die Antwort samt Beleg an derselben Stelle und du musst nichts rekonstruieren.','Gefiltert auf Geplant und Eingezahlt siehst du in Sekunden, welche Einzahlung noch nicht verbucht wurde. Damit ist die Kassenführung nicht nur ordentlich, sondern auch nachweisbar ordentlich.']},
       {h:'Im Verlustfall sofort <span class="il-g">handlungsfähig</span>', cap:'Schlüsselliste', p:['Die Schlüsselliste beantwortet in Sekunden, wer welchen Schlüssel zu welchem Bereich hat und seit wann. Steht ein Schlüssel auf verloren, weißt du sofort, ob nur nachbestellt oder der Schließzylinder getauscht werden muss.','Bei einer Kündigung hältst du die Rückgabe im selben Feld nach. Der Mitarbeiter geht erst aus dem System, wenn alles zurück ist, und niemand muss sich hinterher erinnern, was noch fehlt.','Damit verschwindet die unangenehmste Lücke im Betrieb: dass niemand genau weiß, wie viele Schlüssel eigentlich im Umlauf sind. Diese Frage stellt sich spätestens beim ersten Einbruch oder der ersten Kündigung im Streit.']},
-      {h:'Zugänge mit <span class="il-g">Hoheit</span>', cap:'Password Vault', p:['Jeder Zugang trägt Kategorie, Login-URL, Zwei-Faktor-Status und wann er zuletzt geändert wurde. Das echte Passwort steht nicht in Notion — hier steht die Übersicht darüber, was es gibt.','Beim Personalwechsel filterst du auf Aktiv und Zu prüfen und siehst sofort, welche Zugänge gesperrt oder geändert werden müssen.','Das Feld Notizen hält Recovery-Hinweise und Support-Kontakte fest, ohne dass ein Passwort selbst dort landet.']}
+      {h:'Zugänge mit <span class="il-g">Hoheit</span>', cap:'Password Vault', p:['Jeder Zugang trägt Kategorie, Login-URL, Zwei-Faktor-Status und wann er zuletzt geändert wurde. Die Spalte Passwort gibt es, Notion verschlüsselt sie aber nicht. Wichtige Passwörter gehören deshalb in einen Passwort-Manager, hier steht die Übersicht.','Beim Personalwechsel filterst du auf Aktiv und Zu prüfen und siehst sofort, welche Zugänge gesperrt oder geändert werden müssen.','Das Feld Notizen hält Recovery-Hinweise und Support-Kontakte fest, ohne dass ein Passwort selbst dort landet.']}
     ],
     zweit:{type:'stack', head:{eyebrow:'Einzahlungen summiert', h:'Aus Belegen wird eine <span class="il-g">Zahl</span>', sub:'Jede dokumentierte Einzahlung zählt in die Gesamtsumme, die deine Buchhaltung erwartet.'}, unit:'€', rows:[{label:'Einzahlung 02.04.',val:995},{label:'Einzahlung 06.05.',val:1326},{label:'Einzahlung 20.08.',val:506}], totalLabel:'Belegt eingezahlt'},
-    empf:{dbhd:'Austritt in <span class="il-eg">vier Schritten</span>', emph:'Verknüpfe Zugänge mit dem <span class="il-eg">Personalwechsel</span>', p:'Wenn jemand geht, ist die entscheidende Frage: worauf hatte diese Person Zugriff. Mit Passwort- und Schlüsselliste an einem Ort sperrst und sammelst du gezielt ein, statt hinterher zu hoffen.', points:['Zugang sperren','Schlüssel zurück','Status prüfen','2FA aktiv'], steps:['Filtere alle Zugänge, die auf die austretende Person laufen.','Hol jeden ausgegebenen Schlüssel zurück und quittiere die Rückgabe.','Setz jeden betroffenen Eintrag auf den neuen Status.','Prüfe zum Schluss, ob die Zwei-Faktor-Sicherung noch am alten Gerät hängt.']},
-    learn:['Du hast die Zugänge-Insel gebaut, mit Passwortablage, Bankeinzahlungen und Schlüsselliste an einem Ort.','Du verwaltest Zugänge über Status und Zwei-Faktor-Sicherung, ohne echte Passwörter in Notion zu speichern.','Du dokumentierst jede Einzahlung lückenlos mit Beleg, als saubere Brücke zur Buchhaltung.','Du weißt im Verlust- oder Kündigungsfall sofort, wer welchen Schlüssel und welchen Zugang hatte.']
+    empf:{dbhd:'Austritt in <span class="il-eg">vier Schritten</span>', emph:'Verknüpfe Zugänge mit dem <span class="il-eg">Personalwechsel</span>', p:'Wenn jemand geht, ist die entscheidende Frage: worauf hatte diese Person Zugriff. Mit Passwort- und Schlüsselliste an einem Ort sperrst und sammelst du gezielt ein, statt hinterher zu hoffen.', points:['Zugang sperren','Schlüssel zurück','Status prüfen','2FA aktiv'], steps:['Geh die Zugänge durch, die diese Person genutzt hat, und ändere ihre Passwörter.','Hol jeden ausgegebenen Schlüssel zurück und quittiere die Rückgabe.','Setz jeden betroffenen Eintrag auf den neuen Status.','Prüfe zum Schluss, ob die Zwei-Faktor-Sicherung noch am alten Gerät hängt.']},
+    learn:['Du hast die Zugänge-Insel gebaut, mit Passwortablage, Bankeinzahlungen und Schlüsselliste an einem Ort.','Du verwaltest Zugänge über Status und Zwei-Faktor-Sicherung und legst wichtige Passwörter in einen Passwort-Manager.','Du dokumentierst jede Einzahlung lückenlos mit Beleg, als saubere Brücke zur Buchhaltung.','Du weißt im Verlust- oder Kündigungsfall sofort, wer welchen Schlüssel und welchen Zugang hatte.']
    }
   ];
 
@@ -30903,10 +30908,10 @@ var TSISL_TEAM_ONB_V2=[
   var S={};
 
   /* ---------- DB 0 · Inventurliste (TB Inventory) ---------- */
-  S.db0_inventurliste={
+  S.db0_inventurliste={ werte:{'Preis pro Unit (€)':18.9}, typ:'preis', summary:'Gebindepreis', 
     eyebrow:'DB 0 : Inventurliste',
     title:'Deine Inventurliste. <span>Was jede Spalte zeigt</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB 0 ist der Stückpreis.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB 0 ist der Gebindepreis.',
     anchorSel:'#tsn2-inv-shopa', relations:[],
     steps:cards([
       { t:'Name', d:'Dein Name für das Produkt, so wie ihr es in der Küche nennt.',
@@ -31003,7 +31008,7 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- Monats-Inventur · Inventurliste 01.1 (volle Monatsliste der Vorlage, Januar) ---------- */
-  S.inventur_monat={
+  S.inventur_monat={ werte:{'Summe Monat 01.26':38.75}, typ:'preis', summary:'Inventurwert', 
     eyebrow:'Monats-Inventur : Inventurliste 01.1',
     title:'Deine Monats-Inventur. <span>Eine Liste pro Monat</span>.',
     sub:'Am Monatsende zählst du in einer eigenen Liste, die sich ihre Produkte aus der Inventurliste holt. Jede Spalte liegt hier als Karte. Klick sie auf, um zu sehen, was du beim Zählen einträgst und was die Vorlage daraus rechnet. Die Währung ist der Inventurwert in Euro.',
@@ -31075,7 +31080,7 @@ var TSISL_TEAM_ONB_V2=[
         bsp:'Zwei Säcke Reis zu je 15,50 € und 5 kg aus dem angebrochenen Sack zu 1,55 € pro Kilo ergeben 38,75 €.' },
       { t:'Wert 01.26 (fix)', d:'Der eingefrorene Wert, der sich nicht mehr ändert.',
         bed:'Die Summe des Monats als feste Zahl.',
-        her:'Hier steht die Summe Monat 01.26 als feste Zahl, sobald der Monat gezählt ist. Ist das Feld in einer Zeile leer, überträgst du die Summe von Hand.',
+        her:'Füllt eine Automatisierung der Datenbank: Sobald du Gezählt Unit, Gezählt Ltr./KG oder Gezählt Stck bearbeitest, schreibt sie die aktuelle Summe Monat 01.26 als feste Zahl in diese Spalte.',
         wozu:'Die Summe holt sich ihre Preise immer frisch aus der Inventurliste. Steigt im Februar der Preis für Reis, würde sich sonst auch dein Januar ändern. Der feste Wert hält den Monat so fest, wie er am Zähltag war.',
         bsp:'Am 31. Januar steht beim Reis 38,75 €. Diese Zahl kommt in Wert 01.26 (fix) und bleibt dort, egal was der Reis im Februar kostet.' },
       { t:'Kategorie', d:'Food, Beverage, Packaging oder Hygiene.',
@@ -31122,10 +31127,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB I · Lieferpartner (TB Lieferpartner Übersicht) ---------- */
-  S.db13_lieferanten={
+  S.db13_lieferanten={ werte:{'Durchschn. Preis / Produkt':12.5}, typ:'preis', summary:'Ø Preis pro Produkt', 
     eyebrow:'DB I : Lieferpartner',
     title:'Deine Lieferpartner. <span>Die Firma hinter der Ware</span>.', cta:'In den Einkaufswagen', ctaDone:'Im Einkaufswagen',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB I sind die Transportkosten.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB I ist der Durchschnittspreis pro Produkt.',
     anchorSel:'#tsn2-lief-shopa1', relations:[],
     steps:cards([
       { t:'Name', d:'Der Name der Firma, die dir liefert.',
@@ -31207,10 +31212,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB II · Ansprechpartner (TB Ansprechpartner Übersicht) ---------- */
-  S.db13_ansprechpartner={
+  S.db13_ansprechpartner={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', 
     eyebrow:'DB II : Ansprechpartner',
     title:'Deine Ansprechpartner. <span>Wen du anrufst</span>.', cta:'In den Einkaufswagen', ctaDone:'Im Einkaufswagen',
-    sub:'Sieben Spalten, sieben Karten. Hier geht es um die Menschen beim Lieferanten und um die eine Kontaktkarte, die überall auftaucht. Die Währung von DB II ist die Jahresrückvergütung.',
+    sub:'Sieben Spalten, sieben Karten. Hier geht es um die Menschen beim Lieferanten und um die eine Kontaktkarte, die überall auftaucht. Der Balken zählt, wie viele Spalten du verstanden hast.',
     anchorSel:'#tsn2-lief-shopa2', relations:[],
     steps:cards([
       { t:'Name', d:'Die Person, mit der du sprichst.',
@@ -31252,10 +31257,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB III · Verträge & Dienstleister ---------- */
-  S.db13_vertraege={
+  S.db13_vertraege={ werte:{'Vertragswert':890}, typ:'preis', summary:'Vertragswert', 
     eyebrow:'DB III : Lieferantenverträge',
     title:'Deine Lieferantenverträge. <span>Was ihr vereinbart habt</span>.', cta:'In den Einkaufswagen', ctaDone:'Im Einkaufswagen',
-    sub:'In deiner Vorlage heißt diese Datenbank Verträge & Dienstleister, weil dort auch Wartung, Software und Versicherungen liegen. Jede ihrer Spalten liegt hier als Karte. Die Währung von DB III sind die Vertragsvolumina.',
+    sub:'In deiner Vorlage heißt diese Datenbank Verträge & Dienstleister, weil dort auch Wartung, Software und Versicherungen liegen. Jede ihrer Spalten liegt hier als Karte. Die Währung von DB III ist der Vertragswert.',
     anchorSel:'#tsn2-lief-shopa3', relations:[],
     steps:cards([
       { t:'Vertragsbezeichnung', d:'Worum es in dem Vertrag geht.',
@@ -31327,10 +31332,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB IV · Zutaten ---------- */
-  S.db4_zutaten={
+  S.db4_zutaten={ werte:{'Preis / Portion ( nutzbar )':0.57}, typ:'preis', summary:'Preis pro Portion', 
     eyebrow:'DB IV : Zutaten',
     title:'Deine Zutaten. <span>Vom Kilo zur Portion</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Die vier Nährwerte je 100 g, die vier Nährwerte pro Portion und die beiden Kategorie-Spalten teilen sich jeweils eine. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt. Die Währung von DB IV ist die Einwaage.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Die vier Nährwerte je 100 g, die vier Nährwerte pro Portion und die beiden Kategorie-Spalten teilen sich jeweils eine. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt. Die Währung von DB IV ist der Preis pro Portion.',
     anchorSel:'#tsn2-zut-shopa', relations:[],
     steps:cards([
       { t:'Zutat Name', d:'Wie die Zutat oder Portion heißt.',
@@ -31487,10 +31492,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB V · Rezepturen (TB V : Rezepturen) ---------- */
-  S.db5_rezepturen={
+  S.db5_rezepturen={ werte:{'Portionspreise / Summe':0.46}, typ:'preis', summary:'Portionspreis', 
     eyebrow:'DB V : Rezepturen',
     title:'Deine Rezepturen. <span>Hausgemacht und durchgerechnet</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte, die Nährwerte jeweils als eine Karte für alle vier. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB V ist die Portionsmenge.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte, die Nährwerte jeweils als eine Karte für alle vier. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB V ist der Portionspreis.',
     anchorSel:'#tsn2-rez-shopa', relations:[],
     steps:cards([
       { t:'Name', d:'Wie dein hausgemachtes Produkt heißt.',
@@ -31612,10 +31617,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB VI · Gemeinkosten (GK-Kostenblock (Monatlich)) ---------- */
-  S.db6_gemeinkosten={
+  S.db6_gemeinkosten={ werte:{'Betrag netto':210}, typ:'preis', summary:'Betrag netto', 
     eyebrow:'DB VI : Gemeinkosten',
     title:'Deine Gemeinkosten. <span>Posten für Posten</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB VI sind die Fixkosten.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB VI ist der Betrag netto.',
     anchorSel:'#tsn2-gk-shopa1', relations:[],
     steps:cards([
       { t:'GK Position', d:'Wofür du bezahlst.',
@@ -31677,10 +31682,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB VII · Gemeinkostenannahmen (GK Kostenannahmen) ---------- */
-  S.db6_gemeinkostenannahmen={
+  S.db6_gemeinkostenannahmen={ werte:{'GK pro Produkt':3}, typ:'preis', summary:'GK pro Produkt', 
     eyebrow:'DB VII : Gemeinkostenannahmen',
     title:'Deine Gemeinkostenannahmen. <span>Ein Monat, eine Zahl</span>.',
-    sub:'Hier wird aus allen Posten eines Monats der Anteil, den jedes Gericht übernimmt. Jede Spalte liegt als Karte im Regal. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB VII ist der Euro.',
+    sub:'Hier wird aus allen Posten eines Monats der Anteil, den jedes Gericht übernimmt. Jede Spalte liegt als Karte im Regal. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB VII ist der Gemeinkostenanteil pro Gericht.',
     anchorSel:'#tsn2-gk-shopa2', relations:[],
     steps:cards([
       { t:'Monat', d:'Für welchen Monat die Annahme gilt.',
@@ -31722,10 +31727,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB VIII · Mitarbeiterlöhne (👤 Mitarbeiter) ---------- */
-  S.db7_mitarbeiterloehne={
+  S.db7_mitarbeiterloehne={ werte:{'Stundensatz (AG-Kosten)':19.53}, typ:'eur_h', summary:'Stundensatz', 
     eyebrow:'DB VIII : Mitarbeiterlöhne',
     title:'Deine Mitarbeiterlöhne. <span>Was eine Stunde kostet</span>.',
-    sub:'In deiner Vorlage heißt diese Datenbank 👤 Mitarbeiter. Jede Spalte liegt hier als Karte, Kontaktdaten und die beiden Zubereitungs-Verknüpfungen jeweils als eine. Die Währung von DB VIII sind die Gehälter.',
+    sub:'In deiner Vorlage heißt diese Datenbank 👤 Mitarbeiter. Jede Spalte liegt hier als Karte, Kontaktdaten und die beiden Zubereitungs-Verknüpfungen jeweils als eine. Die Währung von DB VIII ist der Stundensatz.',
     anchorSel:'#tsn2-gk-shopa3', relations:[],
     steps:cards([
       { t:'Name', d:'Wer bei dir arbeitet.',
@@ -31807,7 +31812,7 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB X · Packaging (Packaging / Co.) ---------- */
-  S.db10_packaging={
+  S.db10_packaging={ werte:{'Verfication Sum':0.62}, typ:'preis', summary:'Paketpreis', 
     eyebrow:'DB X : Packaging',
     title:'Dein Packaging. <span>Ein Paket pro Gericht</span>.',
     sub:'Vier Spalten, vier Karten. Klick sie auf, um zu sehen, wie aus einzelnen Verpackungsartikeln ein Paket mit Preis wird. Die Währung von DB X ist der Paketpreis.',
@@ -31837,10 +31842,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB XI · Gerichte & Getränke (DB Gerichte) ---------- */
-  S.db8_gerichte={
+  S.db8_gerichte={ werte:{'Wareinsatz Ready to Use in Eur':2.87, 'Wareneinsatz Inhouse Production  in Eur':0.46, 'Summe Packaging / Co.':0.62, 'GK Anteil pro Produkt':3, 'PK Pro Produkt':1.95}, typ:'preis', summary:'Kosten pro Portion', 
     eyebrow:'DB XI : Gerichte & Getränke',
     title:'Deine Gerichte & Getränke. <span>Bis zum Deckungsbeitrag</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte, zusammengehörige Spalten wie die fünf Preisvorschläge oder die Nährwerte jeweils als eine. Klick sie auf, um zu sehen, woher jede Zahl kommt. Die Währung von DB XI sind die Kosten pro Gericht, Getränk oder Dessert.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte, zusammengehörige Spalten wie die fünf Preisvorschläge oder die Nährwerte jeweils als eine. Klick sie auf, um zu sehen, woher jede Zahl kommt. Die Währung von DB XI sind die Kosten pro Gericht: Ware, Gemeinkosten und Personal.',
     relations:[],
     steps:cards([
       { t:'Gericht', d:'Wie das Gericht oder Getränk auf der Karte heißt.',
@@ -31997,10 +32002,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB XII · Menürechner (Menürechner Master Database) ---------- */
-  S.menue_rechner={
+  S.menue_rechner={ werte:{'WE gesamt (EUR)':158}, typ:'preis', summary:'WE gesamt', 
     eyebrow:'DB XII : Menürechner',
     title:'Der Menürechner. <span>Position für Position</span>.',
-    sub:'Jede Zeile im Menürechner ist ein Gang eines Angebots. Jede Spalte liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt. Die Währung von DB XII ist der Menüpreis.',
+    sub:'Jede Zeile im Menürechner ist ein Gang eines Angebots. Jede Spalte liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt. Die Währung von DB XII ist der Wareneinsatz der Position.',
     relations:[],
     steps:cards([
       { t:'Menüposition', d:'Der Gang mit Anzahl, so wie er im Angebot steht.',
@@ -32039,10 +32044,10 @@ var TSISL_TEAM_ONB_V2=[
         wozu:'Du siehst, wo das Geld im Angebot steckt, und hast gleich die Mengen für den Einkauf.',
         bsp:'4 kg Tofu mit Preis, die Erdnusssauce aufgeteilt in ihre Zutaten, die 40 Bowl-To-Go-Pakete, ganz unten die Summe.' },
       { t:'Benötige Menge pro Zutat ( g / stck / ml )', d:'Die Einkaufsmengen pro Zutat.',
-        bed:'Gedacht als Liste der Mengen, die du für die Zeile einkaufen musst.',
-        her:'Rechnet die Vorlage. In der aktuellen Fassung der Vorlage zeigt diese Spalte allerdings einen Fehler. Bis das behoben ist, nimmst du die Mengen aus Wareneinsatz Aufschlüsselung.',
+        bed:'Eine Liste der Mengen, die du für diese Zeile einkaufen musst, eine Zutat pro Zeile.',
+        her:'Rechnet die Vorlage: die Portionsgröße jeder Zutat mal Anzahl im Menü. Die Zutaten einer Rezeptur rechnet sie anteilig mit und schreibt dazu, aus welcher Rezeptur sie kommen. Ab 1.000 g oder 1.000 ml zeigt sie Kilo und Liter.',
         wozu:'Von hier holt sich die Kostenaufstellung ihre Einkaufsliste.',
-        bsp:'Für 40 Bowls: 4.000 g Tofu, 4.800 g Reis gekocht.' },
+        bsp:'Für 40 Bowls: 4 kg Tofu, dazu jede Zutat der Erdnusssauce mit dem Hinweis (aus Erdnusssauce).' },
       { t:'🧑‍🍳 Kunden Master Database', d:'Für welchen Kunden das Angebot ist. Verknüpft mit DB XIII.',
         bed:'Die Verbindung zu einem Kunden in DB XIII : Kunden Datenbank.',
         her:'Wählst du aus.',
@@ -32057,10 +32062,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB XIII · Kunden Datenbank (Kunden Master Database) ---------- */
-  S.kunden_master={
+  S.kunden_master={ werte:{'Umsatz (EUR)':4800}, typ:'preis', summary:'Umsatz', 
     eyebrow:'DB XIII : Kunden Datenbank',
     title:'Deine Kunden. <span>Von der Anfrage bis zur Rechnung</span>.',
-    sub:'Jeder Auftraggeber für Catering, Private Chef oder Event steht hier mit Kontakt und Status. Kontaktdaten und Adressen teilen sich jeweils eine Karte. Die Währung von DB XIII ist der Menüpreis.',
+    sub:'Jeder Auftraggeber für Catering, Private Chef oder Event steht hier mit Kontakt und Status. Kontaktdaten und Adressen teilen sich jeweils eine Karte. Die Währung von DB XIII ist der Umsatz.',
     relations:[],
     steps:cards([
       { t:'Name', d:'Wie der Kunde oder das Event heißt.',
@@ -32127,10 +32132,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- DB XIV · Kostenaufstellung (Angebot Master Database) ---------- */
-  S.kostenaufstellung={
+  S.kostenaufstellung={ werte:{'Summe Wareneinsatz':251.6, 'PK Kosten Gesamt':504, 'GK Kosten Summe':360}, typ:'preis', summary:'Kosten des Angebots', 
     eyebrow:'DB XIV : Kostenaufstellung',
     title:'Die Kostenaufstellung. <span>Ein Angebot, alle Kosten</span>.',
-    sub:'In deiner Vorlage heißt diese Datenbank Angebot Master Database. Sie zieht Menü, Team, Kunde und Gemeinkosten zu einem Angebot zusammen. Zeitangaben, Preisvorschläge und Nährwerte teilen sich jeweils eine Karte. Die Währung von DB XIV ist der Stückpreis in Euro.',
+    sub:'In deiner Vorlage heißt diese Datenbank Angebot Master Database. Sie zieht Menü, Team, Kunde und Gemeinkosten zu einem Angebot zusammen. Zeitangaben, Preisvorschläge und Nährwerte teilen sich jeweils eine Karte. Die Währung von DB XIV sind die Kosten des Angebots.',
     relations:[],
     steps:cards([
       { t:'Name', d:'Wie das Angebot heißt.',
@@ -32265,9 +32270,9 @@ var TSISL_TEAM_ONB_V2=[
         bsp:'Thai Peanut Tofu Bowl: Erdnüsse, Gluten, Sesam, Soja.' },
       { t:'Einkaufsliste ', d:'Die Mengen für den Einkauf. Kommt aus DB XII.',
         bed:'Die Einkaufsmengen aller Menüpositionen.',
-        her:'Füllst du nie selbst. Die Spalte holt sich Benötige Menge pro Zutat aus jeder Menüposition. Solange diese Spalte im Menürechner einen Fehler zeigt, bleibt auch die Einkaufsliste unvollständig.',
+        her:'Füllst du nie selbst. Die Spalte holt sich Benötige Menge pro Zutat aus jeder Menüposition.',
         wozu:'Mit ihr gehst du einkaufen.',
-        bsp:'4.000 g Tofu, 4.800 g Reis gekocht, 2.400 g Edamame.' },
+        bsp:'4 kg Tofu, 4.8 kg Reis gekocht, 2.4 kg Edamame, so wie die Vorlage es ausgibt.' },
       { t:'Recent', d:'Markiert die Angebote, an denen du gerade arbeitest.',
         bed:'Ein Kontrollkästchen.',
         her:'Setzt du selbst.',
@@ -32277,10 +32282,10 @@ var TSISL_TEAM_ONB_V2=[
   };
 
   /* ---------- Key Metrics · Kostenauswertung Master ---------- */
-  S.km_master={
+  S.km_master={ werte:{'Wareneinsatz (EUR)':16800, 'Personalkosten':17920, 'GK Kosten (EUR)':6000}, typ:'preis', summary:'Kosten im Monat', 
     eyebrow:'DB XX : Kostenauswertung Master',
     title:'Die Kostenauswertung. <span>Ein Monat, eine Zeile</span>.',
-    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Die Werte von Lieferando, von Wolt und von Google teilen sich jeweils eine, die vierzehn Formel-Hilfsspalten ebenfalls. Der Balken zählt, wie viele Kennzahlen du schon verstanden hast.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Die Werte von Lieferando, von Wolt und von Google teilen sich jeweils eine, die vierzehn Formel-Hilfsspalten ebenfalls. Die Währung sind die Kosten des Monats.',
     relations:[],
     steps:cards([
       { t:'Name', d:'Wie die Zeile heißt.',
@@ -32436,6 +32441,307 @@ var TSISL_TEAM_ONB_V2=[
     ])
   };
 
+  /* ---------- Operations Area · Insel-Regale (Teil 1) ---------- */
+  function subI(n){ return 'Jede Spalte dieser Datenbank liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast.'+(n?' '+n:''); }
+
+  S.ops_team_onb={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Dein Onboarding. <span>Schritt für Schritt erklärt</span>.', sub:subI('Jede Zeile ist ein Schritt der Einarbeitung.'), relations:[],
+    steps:cards([
+      { t:'Thema/Schritt', d:'Der Schritt der Einarbeitung.', bed:'Was in diesem Schritt erledigt wird.', her:'Trägst du ein.', wozu:'Aus diesen Zeilen entsteht der Ablauf, den jede neue Person durchläuft.', bsp:'Arbeitsvertrag und Dokumente vorbereiten.' },
+      { t:'Beschreibung', d:'Was genau passiert.', bed:'Ein Textfeld mit den Einzelheiten.', her:'Trägst du ein.', wozu:'Wer den Schritt übernimmt, muss nicht nachfragen.', bsp:'Vertrag in zweifacher Ausfertigung, Personalbogen und Steuer-ID abfragen.' },
+      { t:'Kategorie', d:'Zu welchem Thema der Schritt gehört.', bed:'Eine Auswahl: Administrative Aufgaben, Schulung & Training, Einarbeitung Praktisch, Compliance & Hygiene, Team Integration, Verantwortlichkeiten, Systeme & Tools, Evaluation.', her:'Wählst du aus.', wozu:'Du siehst, ob die Einarbeitung alle Themen abdeckt.', bsp:'Hygienebelehrung: Compliance & Hygiene.' },
+      { t:'Phase', d:'Wann im Ablauf der Schritt dran ist.', bed:'Eine Auswahl: Vorbereitung, Tag 1, Woche 1, Woche 2-4, Monat 2-3, Abschluss.', her:'Wählst du aus.', wozu:'Gruppiert nach Phase hast du den Fahrplan für die ersten Monate.', bsp:'Kassenschulung: Woche 1.' },
+      { t:'Priorität', d:'Wie dringend der Schritt ist.', bed:'Eine Auswahl: Kritisch, Hoch, Mittel, Niedrig.', her:'Wählst du aus.', wozu:'Was kritisch ist, wird nie übersprungen, auch wenn die Woche voll ist.', bsp:'Hygienebelehrung: Kritisch.' },
+      { t:'Verantwortlich', d:'Wer den Schritt übernimmt.', bed:'Eine Auswahl: Manager, Assistant Manager, Trainer, Team Lead, HR.', her:'Wählst du aus.', wozu:'Jeder Schritt hat eine Rolle, die sich kümmert.', bsp:'Kassenschulung: Team Lead.' },
+      { t:'Rolle', d:'Für welche Stellen der Schritt gilt.', bed:'Eine Mehrfachauswahl: Service, Bar, Küche, Assistant Manager, Manager.', her:'Wählst du aus, so viele wie passen.', wozu:'Filterst du nach Rolle, bekommst du den Einarbeitungsplan für genau diese Stelle.', bsp:'Barista-Training: Bar.' },
+      { t:'Dauer', d:'Wie lange der Schritt dauert.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du planst die ersten Schichten realistisch.', bsp:'30-45 Min.' },
+      { t:'Dokumente/Ressourcen', d:'Welche Unterlagen gebraucht werden.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Alles, was bereitliegen muss, steht beim Schritt.', bsp:'Arbeitsvertrag Vorlage, Personalbogen.' },
+      { t:'Rechtlich verpflichtend', d:'Ob der Schritt gesetzlich vorgeschrieben ist.', bed:'Ein Kontrollkästchen.', her:'Hakst du ab.', wozu:'Pflichtschritte erkennst du sofort, etwa bei einer Kontrolle.', bsp:'Belehrung nach Infektionsschutzgesetz: Haken.' },
+      { t:'Prüfung erforderlich', d:'Ob jemand das Ergebnis gegenprüft.', bed:'Ein Kontrollkästchen.', her:'Hakst du ab.', wozu:'Bei diesen Schritten schaut eine zweite Person drauf.', bsp:'Probeschicht am Pass: Haken.' }
+    ]) };
+
+  S.ops_check_audit={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Audit-Checkliste. <span>Punkt für Punkt erklärt</span>.', sub:subI('Jede Zeile ist eine Prüffrage für den Rundgang.'), relations:[],
+    steps:cards([
+      { t:'Thema', d:'Die Prüffrage.', bed:'Was beim Rundgang geprüft wird.', her:'Trägst du ein.', wozu:'Aus diesen Fragen besteht dein Audit.', bsp:'Sind die Zuständigkeiten klar?' },
+      { t:'Kategorie', d:'Zu welchem Bereich die Frage gehört.', bed:'Eine Auswahl: Store-Eindruck & Grundordnung, Service & Auftreten, Küche / Produktion, Hygiene, Waren & Bestand, Waste & Verluste, Allergene & Sicherheit, Führung & Team, Prozesse & Alltag, Gesamtbewertung.', her:'Wählst du aus.', wozu:'Du gehst Bereich für Bereich durch und siehst, wo die meisten Probleme liegen.', bsp:'Sind die Kühlschränke beschriftet? Hygiene.' },
+      { t:'Ja', d:'Der Punkt ist erfüllt.', bed:'Ein Kontrollkästchen.', her:'Hakst du beim Rundgang ab.', wozu:'Zusammen mit Nein siehst du, was passt und was nicht.', bsp:'Boden sauber: Ja.' },
+      { t:'Nein', d:'Hier gibt es etwas zu verbessern.', bed:'Ein Kontrollkästchen.', her:'Hakst du beim Rundgang ab.', wozu:'Gefiltert nach Nein hast du deine Aufgabenliste nach dem Rundgang.', bsp:'Etiketten fehlen: Nein.' },
+      { t:'Kommentar', d:'Eine kurze Notiz zum Befund.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Damit später klar ist, was genau nicht gepasst hat.', bsp:'Neue Mitarbeiter noch unsicher.' },
+      { t:'Fotodokumentation', d:'Ein Foto als Nachweis.', bed:'Ein Feld für Dateien.', her:'Du machst das Foto auf dem iPad direkt aus der Kamera.', wozu:'Ein Bild zeigt mehr als ein Satz, und du kannst vorher und nachher vergleichen.', bsp:'Foto vom unbeschrifteten Gastro-Behälter.' },
+      { t:'Verantwortlich', d:'Wer den Punkt bearbeitet.', bed:'Eine Person aus deinem Notion-Workspace.', her:'Wählst du aus.', wozu:'Jeder offene Punkt hat einen Namen.', bsp:'Der Küchenchef.' },
+      { t:'Fälligkeitsdatum', d:'Bis wann der Punkt behoben ist.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Du siehst, was überfällig ist.', bsp:'Bis Freitag.' }
+    ]) };
+
+  S.ops_check_prod={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Produktionslisten. <span>Posten für Posten erklärt</span>.', sub:subI('Jede Zeile ist ein Posten, der vorbereitet werden muss.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Was produziert wird.', bed:'Der Name des Produktionspostens.', her:'Trägst du ein.', wozu:'Darunter findet die Schicht ihren Auftrag.', bsp:'Hummus.' },
+      { t:'Menge', d:'Wie viel produziert wird.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Zusammen mit Einheit weiß die Schicht genau, was zu tun ist.', bsp:'6.' },
+      { t:'Einheit', d:'In welcher Einheit die Menge gemeint ist.', bed:'Eine Auswahl: g, kg, ml, l, Stück, Portion, Blech, GN.', her:'Wählst du aus.', wozu:'6 heißt nichts, 6 GN schon.', bsp:'GN.' },
+      { t:'Bereich', d:'Wer produziert.', bed:'Eine Auswahl: Küche, Patisserie, Bar, Service, Lager.', her:'Wählst du aus.', wozu:'Jeder Bereich sieht nur seine eigene Liste.', bsp:'Hummus: Küche.' },
+      { t:'Produktion am', d:'Wann produziert wird.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Danach sortiert sich die Tagesliste.', bsp:'Donnerstag, 14.05.' },
+      { t:'Wochentag', d:'An welchem Wochentag der Posten ansteht.', bed:'Eine Auswahl von Montag bis Sonntag.', her:'Wählst du aus.', wozu:'Für feste Wochenrhythmen, unabhängig vom Datum.', bsp:'Donnerstag.' },
+      { t:'Vorlauf (Tage)', d:'Wie viele Tage vorher die Vorbereitung beginnt.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Für alles, was Zeit braucht: Teig, Marinaden, Fermentiertes.', bsp:'2 beim Pizzateig.' },
+      { t:'Start (Vorlauf)', d:'Wann die Vorbereitung startet.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Damit niemand am Produktionstag merkt, dass der Teig schon gestern hätte angesetzt werden müssen.', bsp:'Dienstag, 12.05.' },
+      { t:'Haltbarkeit', d:'Wie lange der Posten hält.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du produzierst nicht mehr, als bis zum Ablauf verkauft wird.', bsp:'3 Tage.' },
+      { t:'Zubereitungshinweis', d:'Die kurze Notiz für die Schicht.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Das Wichtigste steht direkt beim Posten, die ganze Anleitung liegt in den SOPs.', bsp:'Kichererbsen über Nacht einweichen.' },
+      { t:'Priorität', d:'Was zuerst dran ist.', bed:'Eine Auswahl: Niedrig, Mittel, Hoch.', her:'Wählst du aus.', wozu:'Wird die Zeit knapp, ist klar, was zuerst fertig sein muss.', bsp:'Hoch für alles, was im Mittagsservice gebraucht wird.' },
+      { t:'Status', d:'Wo der Posten gerade steht.', bed:'Ein Status: Geplant, In Arbeit, Fertig, Erledigt.', her:'Setzt die Schicht selbst.', wozu:'Am Board siehst du in Echtzeit, was noch offen ist.', bsp:'In Arbeit.' },
+      { t:'Wöchentlich wiederholen', d:'Ob der Posten jede Woche wiederkommt.', bed:'Ein Kontrollkästchen.', her:'Hakst du ab.', wozu:'Feste Posten musst du nicht jede Woche neu anlegen.', bsp:'Hummus jeden Donnerstag: Haken.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Hinweise, die in keine andere Spalte passen.', bsp:'Diese Woche doppelte Menge wegen Catering.' }
+    ]) };
+
+  S.ops_inv_festwert={ werte:{'Summe Festwert in Eur':450}, typ:'preis', summary:'Festwert',  title:'Deine Festwert-Liste. <span>Position für Position erklärt</span>.', sub:subI('Hier steht, was im Betrieb bleibt und nicht verbraucht wird: Teller, Besteck, Gläser, Geräte.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Der Gegenstand.', bed:'Was gezählt wird.', her:'Trägst du ein.', wozu:'Darunter findest du die Position bei der Zählung.', bsp:'Tafelmesser.' },
+      { t:'Kategorie', d:'Welche Art Gegenstand.', bed:'Eine Auswahl: Besteck, Geschirr, Gläser, Küchenwerkzeug, Elektro-Kleingeräte, Barista, Service, Reinigung, Lager.', her:'Wählst du aus.', wozu:'Du zählst und bewertest nach Gruppen.', bsp:'Tafelmesser: Besteck.' },
+      { t:'Bereich', d:'Wo der Gegenstand eingesetzt wird.', bed:'Eine Auswahl: Küche, Bar, Service, Spüle, Lager.', her:'Wählst du aus.', wozu:'Jeder Bereich zählt seinen eigenen Bestand.', bsp:'Service.' },
+      { t:'Lagerort', d:'Wo er liegt.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Bei der Zählung weißt du, wo du suchen musst.', bsp:'Regal Spüle.' },
+      { t:'Verwendung', d:'Wofür er gebraucht wird.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Hilft bei ähnlichen Teilen und beim Nachkauf.', bsp:'Für alle Hauptgänge mit Fleisch.' },
+      { t:'Einheit', d:'Wie gezählt wird.', bed:'Eine Auswahl: Stück, Set, Box, Paket.', her:'Wählst du aus.', wozu:'Damit alle gleich zählen.', bsp:'Stück.' },
+      { t:'Aktueller Bestand', d:'Was gerade da ist.', bed:'Eine Zahl, das Ergebnis der letzten Zählung.', her:'Trägst du bei der Zählung ein.', wozu:'Grundlage für Festwert und Nachbestellung.', bsp:'180.' },
+      { t:'Sollbestand', d:'Wie viel da sein soll.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Der Vergleich mit dem aktuellen Bestand zeigt, wie viel fehlt.', bsp:'180.' },
+      { t:'Mindestbestand', d:'Ab wann nachbestellt wird.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Fällt der Bestand darunter, bestellst du nach, bevor es im Service eng wird.', bsp:'120.' },
+      { t:'Preis (ca.)', d:'Was ein Stück ungefähr kostet.', bed:'Eine Zahl in Euro.', her:'Trägst du ein, vom letzten Einkauf.', wozu:'Damit rechnet die Vorlage den Festwert.', bsp:'2,50 €.' },
+      { t:'Summe Festwert in Eur', d:'Was die Position wert ist. Rechnet die Vorlage.', bed:'Der Wert dieser Position in Euro.', her:'Rechnet die Vorlage: Aktueller Bestand mal Preis (ca.), aber nur, wenn Aktiv angehakt ist.', wozu:'Zusammengezählt ist das dein Festwert, den du einmal im Jahr für die Bilanz brauchst.', bsp:'180 Messer zu 2,50 €: 450 €.' },
+      { t:'Aktiv', d:'Ob die Position zum Bestand zählt.', bed:'Ein Kontrollkästchen.', her:'Hakst du ab.', wozu:'Ausgemusterte Teile bleiben in der Liste, zählen aber nicht mehr mit.', bsp:'Die alten Suppenteller: kein Haken.' },
+      { t:'Letzte Zählung', d:'Wann zuletzt gezählt wurde.', bed:'Ein Datum.', her:'Trägst du bei der Zählung ein.', wozu:'Du siehst, welche Positionen lange nicht geprüft wurden.', bsp:'31.12.2025.' },
+      { t:'Nachbestellen bei', d:'Wo du nachkaufst.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Wer nachbestellt, muss nicht suchen.', bsp:'Gastro-Großhandel Nord.' },
+      { t:'Nachbestell-Link', d:'Der direkte Bestell-Link.', bed:'Ein Link.', her:'Trägst du ein.', wozu:'Ein Klick, und du bist beim richtigen Artikel.', bsp:'Der Artikel im Online-Shop des Händlers.' }
+    ]) };
+
+  S.ops_part_dienstleister={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Dienstleister. <span>Partner für Partner erklärt</span>.', sub:subI('Hier stehen alle, die keine Ware liefern, sondern eine Leistung: Handwerk, Technik, Reinigung, IT.'), relations:[],
+    steps:cards([
+      { t:'Dienstleister', d:'Der Firmenname.', bed:'Der Name der Firma.', her:'Trägst du ein.', wozu:'Darunter findest du sie im Notfall.', bsp:'Gastro-Hygiene Pro.' },
+      { t:'Kategorie', d:'Was die Firma für dich macht.', bed:'Eine Auswahl: Kasse & POS, Handwerk, Ausstattung & Möbel, Gastrogroßgeräte, Office & Bürobedarf, Verpackungen, Reinigung, IT & Software, Marketing & Design, Lebensmittel & Getränke, Wartung & Service, Beratung.', her:'Wählst du aus.', wozu:'Fällt die Spülmaschine aus, filterst du nach Gastrogroßgeräte und hast die Nummer.', bsp:'Reinigung.' },
+      { t:'Kontaktperson', d:'Wen du dort ansprichst.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du fragst nach der richtigen Person statt bei der Zentrale.', bsp:'Herr Yilmaz.' },
+      { t:'Telefon', d:'Die Nummer.', bed:'Eine Telefonnummer.', her:'Trägst du ein.', wozu:'Auf dem Handy direkt anrufbar.', bsp:'040 555 12 34.' },
+      { t:'E-Mail', d:'Die Adresse.', bed:'Eine E-Mail-Adresse.', her:'Trägst du ein.', wozu:'Für Aufträge und Rechnungsfragen.', bsp:'service@gastro-hygiene.de.' },
+      { t:'Adresse', d:'Die Anschrift.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Für Rechnungen und Abholungen.', bsp:'Hafenstraße 12, Hamburg.' },
+      { t:'Website', d:'Die Website.', bed:'Ein Link.', her:'Trägst du ein.', wozu:'Für Kundenportal und Handbücher.', bsp:'Das Kundenportal des Kassenanbieters.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Absprachen und Erfahrungen.', bsp:'Notdienst auch am Wochenende, Anfahrt 89 €.' }
+    ]) };
+
+  S.ops_zug_bank={ werte:{'Betrag':995}, typ:'preis', summary:'Einzahlung',  title:'Deine Bankeinzahlungen. <span>Betrag für Betrag erklärt</span>.', sub:subI('Hier hältst du fest, wann welches Bargeld zur Bank gegangen ist.'), relations:[],
+    steps:cards([
+      { t:'Einzahlung', d:'Wie die Einzahlung heißt.', bed:'Die Bezeichnung der Zeile.', her:'Trägst du ein.', wozu:'Darunter findest du sie wieder.', bsp:'Einzahlung 02.04.2025.' },
+      { t:'Datum', d:'Wann eingezahlt wurde.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Zum Abgleich mit dem Kontoauszug.', bsp:'02.04.2025.' },
+      { t:'Betrag', d:'Wie viel eingezahlt wurde.', bed:'Eine Zahl in Euro.', her:'Trägst du ein.', wozu:'Zusammen mit dem Kassenbericht siehst du, ob alles Bargeld angekommen ist.', bsp:'995,00 €.' },
+      { t:'Konto', d:'Wohin das Geld ging.', bed:'Eine Auswahl: Kasse, Bank, Sonstiges.', her:'Wählst du aus.', wozu:'Trennt Einzahlungen auf die Bank von Bewegungen in der Kasse.', bsp:'Bank.' },
+      { t:'Referenz', d:'Die Belegnummer.', bed:'Ein Textfeld.', her:'Trägst du ein, vom Einzahlungsbeleg.', wozu:'Für den Steuerberater und bei Rückfragen der Bank.', bsp:'DEP-2025-0402-01.' },
+      { t:'Status', d:'Wo die Einzahlung steht.', bed:'Ein Status: Geplant, Eingezahlt, Verbucht.', her:'Setzt du selbst.', wozu:'Du siehst, was noch nicht auf dem Konto ist.', bsp:'Eingezahlt.' },
+      { t:'Beleg', d:'Der eingescannte Einzahlungsbeleg.', bed:'Ein Feld für Dateien.', her:'Hängst du an.', wozu:'Der Nachweis liegt direkt bei der Zeile.', bsp:'Foto vom Beleg aus dem Automaten.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Abweichungen und Hinweise.', bsp:'5 € Differenz zur Kasse, geklärt.' }
+    ]) };
+
+  S.ops_zug_schluessel={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Schlüsselliste. <span>Schlüssel für Schlüssel erklärt</span>.', sub:subI('Hier steht, welcher Schlüssel bei wem ist.'), relations:[],
+    steps:cards([
+      { t:'Schlüssel-Nr.', d:'Die Nummer des Schlüssels.', bed:'Die Bezeichnung der Zeile.', her:'Trägst du ein, am besten so, wie sie auf dem Schlüssel steht.', wozu:'Jeder Schlüssel ist eindeutig.', bsp:'HE-002.' },
+      { t:'Beschreibung', d:'Wofür der Schlüssel ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Auch wer die Nummern nicht kennt, weiß, welche Tür gemeint ist.', bsp:'Haupteingang Duplikat.' },
+      { t:'Bereich', d:'Welche Tür.', bed:'Eine Auswahl: Eingang, Küche, Lager, Büro, Sonstige.', her:'Wählst du aus.', wozu:'Du siehst, wie viele Schlüssel es pro Bereich gibt.', bsp:'Eingang.' },
+      { t:'Verantwortlich', d:'Wer den Schlüssel hat.', bed:'Eine Person aus deinem Notion-Workspace.', her:'Wählst du aus.', wozu:'Verlässt jemand den Betrieb, siehst du sofort, was zurückkommen muss.', bsp:'Die Schichtleitung Früh.' },
+      { t:'Ausgabedatum', d:'Wann der Schlüssel ausgegeben wurde.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Für die Übergabe und als Nachweis.', bsp:'01.03.2026.' },
+      { t:'Status', d:'Wo der Schlüssel gerade ist.', bed:'Eine Auswahl: Verfügbar, Ausgegeben, Verloren, Ersatz bestellt.', her:'Setzt du selbst.', wozu:'Ein verlorener Schlüssel fällt nicht unter den Tisch.', bsp:'Ausgegeben.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Pfand, Schließanlage und Absprachen.', bsp:'Gegen 20 € Pfand ausgegeben.' }
+    ]) };
+
+  S.ops_team_kleid_ausgabe={ werte:{'Pfandbetrag (€)':45}, typ:'preis', summary:'Pfand',  title:'Deine Kleidung-Ausgabe. <span>Wer was bekommen hat</span>.', sub:subI('In deiner Vorlage heißt diese Datenbank Mitarbeiterkleidung. Jede Zeile ist eine Ausgabe an eine Person.'), relations:[],
+    steps:cards([
+      { t:'Ausgabe ID', d:'Die Kurzbezeichnung der Ausgabe.', bed:'Der Name der Zeile, meist der Name der Person.', her:'Trägst du ein.', wozu:'Darunter findest du die Ausgabe wieder.', bsp:'Thom.' },
+      { t:'Mitarbeiter', d:'Wer die Kleidung bekommt. Verknüpft mit 👤 Mitarbeiter.', bed:'Die Verbindung zur Person in 👤 Mitarbeiter.', her:'Wählst du aus.', wozu:'Filterst du die Ausgaben nach der Person, siehst du alles, was sie bekommen hat.', bsp:'Thom Becker.' },
+      { t:'Kleidungsstücke', d:'Welche Teile ausgegeben wurden. Verknüpft mit dem Kleidungsinventar.', bed:'Die Verbindung zu den Varianten in Kleidungsstücke Inventar.', her:'Wählst du aus, Größe und Farbe genau so, wie sie ausgegeben wurden.', wozu:'Im Inventar erscheint die Ausgabe in der Spalte Ausgaben und zählt bei Anzahl ausgegeben mit.', bsp:'Pullover Schwarz S, T-Shirt Schwarz S.' },
+      { t:'Anzahl', d:'Wie viele Teile es waren.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Für die Übersicht, was die Person zurückgeben muss.', bsp:'5.' },
+      { t:'Ausgabedatum', d:'Wann ausgegeben wurde.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Für Nachweis und Rückgabe.', bsp:'01.01.2026.' },
+      { t:'Pfandbetrag (€)', d:'Wie viel Pfand hinterlegt ist.', bed:'Eine Zahl in Euro.', her:'Trägst du ein.', wozu:'Beim Austritt weißt du, was du zurückzahlst.', bsp:'45 €.' },
+      { t:'Pfandvereinbarung', d:'Die unterschriebene Vereinbarung.', bed:'Ein Feld für Dateien.', her:'Hängst du als Scan oder Foto an.', wozu:'Der Nachweis liegt direkt bei der Ausgabe.', bsp:'Foto der unterschriebenen Seite.' },
+      { t:'Status', d:'Wo die Kleidung gerade ist.', bed:'Ein Status: Ausgegeben, Zurückgegeben, Verloren.', her:'Setzt du selbst.', wozu:'Du siehst, was noch draußen ist.', bsp:'Ausgegeben.' },
+      { t:'Rückgabe & Auszahlung am', d:'Wann die Kleidung zurückkam.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Schließt die Ausgabe ab.', bsp:'30.06.2026.' },
+      { t:'Pfand ausgezahlt', d:'Ob das Pfand zurückgezahlt ist.', bed:'Ein Kontrollkästchen.', her:'Hakst du ab.', wozu:'Niemand bekommt sein Pfand zweimal oder gar nicht.', bsp:'Haken nach der Auszahlung.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Besonderheiten bei der Ausgabe.', bsp:'Schuhe in Größe 44 nachbestellt.' }
+    ]) };
+
+  S.ops_team_kleid_inventar={ werte:{'Standardpfand (€)':35}, typ:'preis', summary:'Standardpfand',  title:'Dein Kleidungsinventar. <span>Größe für Größe</span>.', sub:subI('Jede Zeile ist eine Variante eines Kleidungsstücks, mit Größe und Farbe.'), relations:[],
+    steps:cards([
+      { t:'Artikel', d:'Die konkrete Variante.', bed:'Der Name der Zeile mit Größe und Farbe.', her:'Trägst du ein.', wozu:'Darunter wählst du die Variante bei der Ausgabe.', bsp:'Pullover Schwarz S.' },
+      { t:'Kleidungsartikel', d:'Zu welchem Stammartikel die Variante gehört. Verknüpft mit Kleidung.', bed:'Die Verbindung zum Stammartikel in Kleidung.', her:'Wählst du aus.', wozu:'Alle Größen eines Pullovers hängen am selben Stammartikel.', bsp:'Pullover Schwarz.' },
+      { t:'Typ', d:'Welche Art Kleidung.', bed:'Eine Auswahl: Pullover, T-Shirt, Jacke, Cap, Hose, Schuhe, Sonstiges.', her:'Wählst du aus.', wozu:'Du filterst nach Art.', bsp:'Pullover.' },
+      { t:'Größe', d:'Die Größe.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Damit jeder die richtige bekommt.', bsp:'S.' },
+      { t:'Farbe', d:'Die Farbe.', bed:'Eine Auswahl: Schwarz, Weiß, Grau, Blau, Rot, Grün, Sonstiges.', her:'Wählst du aus.', wozu:'Für Service und Küche oft unterschiedlich.', bsp:'Schwarz.' },
+      { t:'Marke/Modell', d:'Hersteller und Modell.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Beim Nachkauf bekommst du dasselbe Teil.', bsp:'Leiber.' },
+      { t:'Artikelnummer', d:'Deine interne Nummer.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Eindeutig, auch wenn sich Varianten ähneln.', bsp:'PU-005-S.' },
+      { t:'Ursprungsbestand', d:'Wie viele du gekauft hast.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Davon geht ab, was ausgegeben ist.', bsp:'6.' },
+      { t:'Ausgaben', d:'Die Ausgaben, in denen diese Variante steckt. Verknüpft mit Mitarbeiterkleidung.', bed:'Die Gegenseite der Spalte Kleidungsstücke in Mitarbeiterkleidung.', her:'Entsteht, sobald du bei einer Ausgabe diese Variante auswählst.', wozu:'Du siehst, wer diese Größe gerade trägt.', bsp:'Thom und Lena.' },
+      { t:'Anzahl ausgegeben', d:'Wie oft die Variante ausgegeben ist. Rechnet die Vorlage.', bed:'Die Zahl der Ausgaben mit dieser Variante.', her:'Füllst du nie selbst. Die Spalte zählt die Einträge in Ausgaben.', wozu:'Damit rechnet die Vorlage den verfügbaren Bestand.', bsp:'2.' },
+      { t:'Verfügbarer Bestand', d:'Was noch im Lager liegt. Rechnet die Vorlage.', bed:'Der Bestand, der noch ausgegeben werden kann.', her:'Rechnet die Vorlage: Ursprungsbestand minus Anzahl ausgegeben. Ist das Ergebnis negativ, steht ein Warnzeichen davor.', wozu:'Du siehst, wann du nachkaufen musst.', bsp:'6 minus 2: 4.' },
+      { t:'Standardpfand (€)', d:'Das übliche Pfand für dieses Teil.', bed:'Eine Zahl in Euro.', her:'Trägst du ein.', wozu:'Bei jeder Ausgabe weißt du, was du verlangst.', bsp:'35 €.' },
+      { t:'Notizen', d:'Alles Weitere.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Hinweise zur Variante.', bsp:'Fällt klein aus.' }
+    ]) };
+
+  S.ops_team_kleid_stamm={ werte:{'Preis / Stück':45}, typ:'preis', summary:'Preis pro Stück',  title:'Deine Kleidungs-Stammliste. <span>Artikel für Artikel</span>.', sub:subI('In deiner Vorlage heißt diese Datenbank Kleidung. Hier steht jedes Kleidungsstück einmal, unabhängig von Größe und Farbe.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Der Artikel.', bed:'Der Name des Kleidungsstücks.', her:'Trägst du ein.', wozu:'Darunter hängen alle Größen im Inventar.', bsp:'Pullover Schwarz.' },
+      { t:'Preis / Stück', d:'Was ein Stück im Einkauf kostet.', bed:'Eine Zahl in Euro.', her:'Trägst du ein.', wozu:'Du weißt, was dich die Ausstattung einer Person kostet.', bsp:'45 €.' },
+      { t:'Lieferpartner Übersicht', d:'Bei wem du den Artikel kaufst. Verknüpft mit DB I.', bed:'Die Verbindung zum Lieferanten in DB I : Lieferpartner.', her:'Wählst du aus.', wozu:'Beim Nachkauf hast du den Lieferanten direkt da.', bsp:'Workwear Nord.' },
+      { t:'👕 Kleidungsstücke Inventar', d:'Alle Größen und Farben dieses Artikels.', bed:'Die Gegenseite der Spalte Kleidungsartikel im Inventar.', her:'Entsteht, sobald du im Inventar eine Variante diesem Artikel zuordnest.', wozu:'Du siehst alle Varianten auf einer Seite.', bsp:'Pullover Schwarz S, M, L.' }
+    ]) };
+
+  S.ops_team_urlaub={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Urlaubsplanung. <span>Antrag für Antrag</span>.', sub:subI('Jede Zeile ist eine Abwesenheit.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Kurz, wer wann fehlt.', bed:'Die Bezeichnung der Abwesenheit.', her:'Trägst du ein.', wozu:'Im Kalender liest du sofort, worum es geht.', bsp:'Pham – Urlaub (Feb).' },
+      { t:'Mitarbeitende', d:'Wer abwesend ist.', bed:'Eine Person aus deinem Notion-Workspace.', her:'Wählst du aus.', wozu:'Du siehst alle Abwesenheiten einer Person.', bsp:'Pham Nguyen.' },
+      { t:'Rolle', d:'Team oder Management.', bed:'Eine Auswahl: Team, Management.', her:'Wählst du aus.', wozu:'Damit nicht zwei aus dem Management gleichzeitig fehlen.', bsp:'Team.' },
+      { t:'Abwesenheitstyp', d:'Warum jemand fehlt.', bed:'Eine Auswahl: Urlaub, Krank, Fortbildung, Sonstiges.', her:'Wählst du aus.', wozu:'Du trennst geplante von ungeplanten Ausfällen.', bsp:'Urlaub.' },
+      { t:'Start', d:'Der erste Abwesenheitstag.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Zusammen mit Ende ergibt sich der Zeitraum im Kalender.', bsp:'23.02.2026.' },
+      { t:'Ende', d:'Der letzte Abwesenheitstag.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Du siehst, wann die Person zurück ist.', bsp:'27.02.2026.' },
+      { t:'Vertretung', d:'Wer die Abwesenheit auffängt.', bed:'Eine Person aus deinem Notion-Workspace.', her:'Wählst du aus.', wozu:'Jede Lücke hat jemanden, der sie füllt.', bsp:'Lena Hoffmann.' },
+      { t:'Status', d:'Wo der Antrag steht.', bed:'Ein Status: Beantragt, Genehmigt, Abgelehnt.', her:'Setzt du selbst.', wozu:'Offene Anträge fallen sofort auf.', bsp:'Genehmigt.' },
+      { t:'Notizen', d:'Details zum Antrag.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Absprachen.', bsp:'Ab Mittwoch telefonisch erreichbar.' }
+    ]) };
+
+  S.ops_check_checklisten={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Checklisten. <span>Liste für Liste</span>.', sub:subI('Jede Zeile ist eine Checkliste, die regelmäßig abgearbeitet wird.'), relations:[],
+    steps:cards([
+      { t:'Checklistenname', d:'Wie die Checkliste heißt.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter öffnet das Team die Liste auf dem Tablet.', bsp:'Kassenabschluss Standard.' },
+      { t:'Beschreibung', d:'Was zu prüfen ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Die Schicht weiß genau, was gemeint ist.', bsp:'Bargeld zählen, Bericht drucken, Differenz notieren.' },
+      { t:'Kategorie', d:'Zu welchem Thema die Liste gehört.', bed:'Eine Auswahl: Hygiene & Lebensmittelsicherheit, Personal, Betrieb, Technik, Finanzen, Sicherheit.', her:'Wählst du aus.', wozu:'Du filterst nach Thema.', bsp:'Finanzen.' },
+      { t:'Typ', d:'Wie oft die Liste dran ist.', bed:'Eine Auswahl: Täglich, Wöchentlich, Monatlich, Anlassbezogen.', her:'Wählst du aus.', wozu:'Die tägliche Ansicht zeigt nur, was heute ansteht.', bsp:'Täglich.' },
+      { t:'Zielrolle', d:'Wer die Liste abarbeitet.', bed:'Eine Auswahl: Inhaber, Geschäftsführung, Betriebsleitung, Schichtleitung, Service, Küche.', her:'Wählst du aus.', wozu:'Jede Rolle sieht ihre eigenen Listen.', bsp:'Schichtleitung.' },
+      { t:'Kritikalität', d:'Wie schlimm es ist, wenn die Liste ausfällt.', bed:'Eine Auswahl: Niedrig, Mittel, Hoch, Kritisch.', her:'Wählst du aus.', wozu:'Kritisches wird nie übersprungen.', bsp:'Kühlkette prüfen: Kritisch.' },
+      { t:'Dauer', d:'Wie lange die Liste dauert.', bed:'Eine Auswahl: Kurz, Mittel, Lang.', her:'Wählst du aus.', wozu:'Du planst sie in die Schicht ein.', bsp:'Kurz.' },
+      { t:'Aktiv', d:'Ob die Liste gerade genutzt wird.', bed:'Eine Auswahl: Ja, Nein.', her:'Wählst du aus.', wozu:'Alte Listen bleiben erhalten, ohne zu stören.', bsp:'Ja.' },
+      { t:'Letzte Durchführung', d:'Wann zuletzt abgearbeitet.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Du siehst, ob eine Liste liegen geblieben ist.', bsp:'Gestern Abend.' },
+      { t:'Nächste Fälligkeit', d:'Wann sie wieder dran ist.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Danach sortiert sich die Ansicht für die Schicht.', bsp:'Heute Abend.' },
+      { t:'Zugehörige SOP', d:'Der Standardprozess dahinter. Verknüpft mit den SOPs.', bed:'Die Verbindung zu einem Eintrag in SOPs (Standard Operating Procedures).', her:'Wählst du aus.', wozu:'Wer unsicher ist, öffnet von der Checkliste aus die ganze Anleitung.', bsp:'Kassenabschluss.' }
+    ]) };
+
+  S.ops_check_sops={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Standardprozesse. <span>Ablauf für Ablauf</span>.', sub:subI('Jede Zeile ist ein Prozess, der immer gleich laufen soll.'), relations:[],
+    steps:cards([
+      { t:'SOP-Name', d:'Wie der Prozess heißt.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findet das Team die Anleitung.', bsp:'Kühlung kontrollieren.' },
+      { t:'SOP-Beschreibung', d:'Wofür der Prozess sorgt, in einem Satz.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Jeder versteht sofort, warum es den Prozess gibt.', bsp:'Sorgt dafür, dass keine Ware über 7 °C lagert.' },
+      { t:'Schritt-für-Schritt-Ablauf', d:'Die vollständige Anleitung.', bed:'Ein Textfeld, nummeriert und konkret.', her:'Schreibst du selbst.', wozu:'Wer neu ist, macht es beim ersten Mal richtig.', bsp:'1. Thermometer ablesen. 2. Wert eintragen. 3. Über 7 °C Schichtleitung rufen.' },
+      { t:'Bereich', d:'Zu welchem Bereich der Prozess gehört.', bed:'Eine Auswahl: Hygiene & Lebensmittelsicherheit, Personal & Training, Betrieb & Tagesabläufe, Technik & Sicherheit, Finanzen & Kasse, Sonderfälle & Eskalationen.', her:'Wählst du aus.', wozu:'Du filterst nach Bereich.', bsp:'Hygiene & Lebensmittelsicherheit.' },
+      { t:'Zielrolle', d:'Für wen der Prozess gilt.', bed:'Eine Mehrfachauswahl: Inhaber, Geschäftsführung, Betriebsleitung, Schichtleitung, Service, Küche.', her:'Wählst du aus.', wozu:'Jede Rolle sieht ihre Prozesse.', bsp:'Küche, Schichtleitung.' },
+      { t:'Kritikalität', d:'Wie wichtig der Prozess ist.', bed:'Eine Auswahl: Niedrig, Mittel, Hoch, Kritisch.', her:'Wählst du aus.', wozu:'Kritische Prozesse kommen zuerst in die Einarbeitung.', bsp:'Kritisch.' },
+      { t:'Gültigkeitsstatus', d:'Ob die Anleitung gilt.', bed:'Eine Auswahl: Aktiv, In Überarbeitung, Veraltet.', her:'Setzt du selbst.', wozu:'Niemand arbeitet nach einer alten Fassung.', bsp:'Aktiv.' },
+      { t:'Version', d:'Der Versionsstand.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du weißt, welche Fassung gerade gilt.', bsp:'1.0.' },
+      { t:'Gültig ab', d:'Ab wann die Fassung gilt.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Für den Nachweis bei Kontrollen.', bsp:'01.01.2026.' },
+      { t:'Letzte Aktualisierung', d:'Wann zuletzt geändert.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Du siehst, wie aktuell die Anleitung ist.', bsp:'15.01.2026.' },
+      { t:'Nächste Überprüfung', d:'Wann sie wieder geprüft wird.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Anleitungen veralten nicht unbemerkt.', bsp:'01.06.2026.' },
+      { t:'🏛️ Behörden & Kontrollen', d:'Welche Kontrollen den Prozess betreffen. Verknüpft mit Behörden & Kontrollen.', bed:'Die Verbindung zu Einträgen in Behörden & Kontrollen.', her:'Wählst du aus.', wozu:'Bei einer Kontrolle zeigst du direkt, nach welchem Prozess ihr arbeitet.', bsp:'Lebensmittelkontrolle.' },
+      { t:'✅ Kontrollthemen', d:'Welche Kontrollthemen der Prozess abdeckt. Verknüpft mit Kontrollthemen.', bed:'Die Verbindung zu Einträgen in Kontrollthemen.', her:'Wählst du aus.', wozu:'Du siehst, welches Risiko der Prozess absichert.', bsp:'Kühlkette.' }
+    ]) };
+
+  S.ops_check_waste={ werte:{'Wert (€)':12.8}, typ:'preis', summary:'Waste-Wert',  title:'Deine Waste List. <span>Was weggeworfen wurde</span>.', sub:subI('Jede Zeile ist eine Entsorgung.'), relations:[],
+    steps:cards([
+      { t:'Eintrag', d:'Der Titel der Zeile.', bed:'Der Name der Zeile.', her:'Trägst du ein oder lässt ihn leer. Den lesbaren Titel für Ansichten liefert Waste Zusammenfassung.', wozu:'Notion braucht für jede Zeile einen Titel.', bsp:'Leer oder kurz: Spinat welk.' },
+      { t:'Zutat', d:'Was entsorgt wurde. Verknüpft mit DB IV.', bed:'Die Verbindung zur Zutat in DB IV : Zutaten.', her:'Wählst du aus.', wozu:'Über die Zutat kennt die Zeile den Preis.', bsp:'Spinat 1 kg.' },
+      { t:'Menge', d:'Wie viel entsorgt wurde.', bed:'Eine Zahl.', her:'Trägst du ein.', wozu:'Zusammen mit Einheit ergibt sich der Wert.', bsp:'2.' },
+      { t:'Einheit', d:'In welcher Einheit.', bed:'Eine Auswahl: g, kg, ml, l, Stck.', her:'Wählst du aus.', wozu:'Damit die Vorlage richtig rechnet.', bsp:'kg.' },
+      { t:'Grund', d:'Warum es weg musste.', bed:'Eine Auswahl: Abgelaufen, Beschädigt, Qualität, Überproduktion, Fehler, Retour.', her:'Wählst du aus.', wozu:'Am Monatsende siehst du, ob du zu viel bestellst oder zu viel vorbereitest.', bsp:'Überproduktion.' },
+      { t:'Datum', d:'Wann entsorgt wurde.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Für die Auswertung pro Woche und Monat.', bsp:'28.01.2026.' },
+      { t:'Wert (€)', d:'Was weggeworfen wurde, in Euro. Rechnet die Vorlage.', bed:'Der Warenwert der Entsorgung.', her:'Rechnet die Vorlage: Menge, auf Kilo oder Liter umgerechnet, mal Kilo-, Liter- oder Stückpreis der Zutat.', wozu:'Zusammengezählt siehst du, wie viel Geld im Monat im Müll landet.', bsp:'2 kg Spinat zu 6,40 € pro Kilo: 12,80 €.' },
+      { t:'Waste Zusammenfassung', d:'Ein lesbarer Titel. Rechnet die Vorlage.', bed:'Zutat und Menge in einer Zeile.', her:'Rechnet die Vorlage aus Zutat, Menge und Einheit. Ohne Zutat steht dort (ohne Zutat).', wozu:'In Ansichten und Listen liest du sofort, was passiert ist.', bsp:'Spinat 1 kg – 2 kg.' },
+      { t:'Notizen', d:'Details zum Vorfall.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für alles, was der Grund allein nicht erklärt.', bsp:'Kühlschrank 3 nachts ausgefallen.' }
+    ]) };
+
+  S.ops_hyg_behoerden={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Behörden & Kontrollen. <span>Wer bei dir prüft</span>.', sub:subI('Jede Zeile ist eine Behörde, die deinen Betrieb kontrollieren kann.'), relations:[],
+    steps:cards([
+      { t:'Behördenname', d:'Die Behörde.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findest du alles, was diese Behörde betrifft.', bsp:'Gesundheitsamt.' },
+      { t:'Kontrollbereich', d:'Was die Behörde prüft.', bed:'Eine Auswahl: Hygiene, Lebensmittelsicherheit, Steuern, Arbeit, Brandschutz, Bau, Umwelt, Gewerbe, Arbeitssicherheit.', her:'Wählst du aus.', wozu:'Du siehst, welche Bereiche überhaupt kontrolliert werden.', bsp:'Lebensmittelsicherheit.' },
+      { t:'Verwaltungsebene', d:'Ob Stadt, Land oder Bund.', bed:'Eine Auswahl: Kommunal, Landesebene, Bundesebene.', her:'Wählst du aus.', wozu:'Hilft, die richtige Stelle zu finden, wenn du nachfragen musst.', bsp:'Kommunal.' },
+      { t:'Typische Kontrollfrequenz', d:'Wie oft kontrolliert wird.', bed:'Eine Auswahl: Laufend, Jährlich, Unregelmäßig, Anlassbezogen.', her:'Wählst du aus.', wozu:'Du weißt, womit du rechnen musst.', bsp:'Unregelmäßig.' },
+      { t:'Hauptauslöser', d:'Was eine Kontrolle meist auslöst.', bed:'Eine Mehrfachauswahl: Beschwerde, Routine, Vorfall, Umsatzanstieg, Unfall, Zufall.', her:'Wählst du aus.', wozu:'Du erkennst, wann eine Kontrolle wahrscheinlicher wird.', bsp:'Beschwerde, Routine.' },
+      { t:'Unangekündigte Kontrolle realistisch', d:'Ob die Behörde ohne Ankündigung kommt.', bed:'Eine Auswahl: Ja, Nein.', her:'Wählst du aus.', wozu:'Bei Ja muss der Betrieb jeden Tag kontrollbereit sein.', bsp:'Ja.' },
+      { t:'Angekündigte Kontrolle möglich', d:'Ob sich die Behörde vorher meldet.', bed:'Eine Auswahl: Ja, Nein.', her:'Wählst du aus.', wozu:'Dann kannst du Unterlagen vorbereiten.', bsp:'Nein.' },
+      { t:'Existenzrisiko bei Verstoß', d:'Wie teuer ein Verstoß werden kann.', bed:'Eine Auswahl: Niedrig, Mittel, Hoch, Kritisch.', her:'Wählst du aus.', wozu:'Du weißt, wo du zuerst ansetzt.', bsp:'Kritisch.' },
+      { t:'Letzte Berichte', d:'Notizen zu den letzten Kontrollen.', bed:'Ein Textfeld.', her:'Trägst du nach jeder Kontrolle ein.', wozu:'Beim nächsten Besuch weißt du, was beim letzten Mal bemängelt wurde.', bsp:'März: Temperaturliste lückenhaft, nachgereicht.' },
+      { t:'Notizen', d:'Was die Behörde konkret prüft.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Damit das Team weiß, worauf es ankommt.', bsp:'Kühlkette, Reinigungsplan, Schulungsnachweise.' },
+      { t:'📋 SOPs (Standard Operating Procedures)', d:'Die Prozesse, die diese Kontrolle betreffen. Verknüpft mit den SOPs.', bed:'Die Gegenseite der Spalte 🏛️ Behörden & Kontrollen in den SOPs.', her:'Entsteht, sobald du in einer SOP diese Behörde auswählst.', wozu:'Bei der Kontrolle hast du alle passenden Abläufe auf einer Seite.', bsp:'Kühlung kontrollieren, Reinigungsplan.' }
+    ]) };
+
+  S.ops_hyg_kontrollthemen={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Kontrollthemen. <span>Risiko für Risiko</span>.', sub:subI('Jede Zeile ist ein Thema, auf das bei Kontrollen geschaut wird.'), relations:[],
+    steps:cards([
+      { t:'Kontrollthema', d:'Das Prüfthema.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findest du alles zu diesem Thema.', bsp:'HACCP-Konzept aktuell und umgesetzt.' },
+      { t:'Kategorie', d:'Zu welchem Feld das Thema gehört.', bed:'Eine Auswahl: Hygiene & Lebensmittel, Personal & Arbeit, Finanzen & Kasse, Sicherheit & Technik, Umwelt & Betrieb.', her:'Wählst du aus.', wozu:'Du filterst nach Feld.', bsp:'Hygiene & Lebensmittel.' },
+      { t:'Beschreibung', d:'Die Prüfnotiz.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Was genau geprüft wird, in deinen Worten.', bsp:'Gefahrenpunkte dokumentiert, Temperaturen täglich erfasst.' },
+      { t:'Risikostufe', d:'Wie groß das Risiko ist.', bed:'Eine Auswahl: Niedrig, Mittel, Hoch, Kritisch.', her:'Wählst du aus.', wozu:'Kritische Themen prüfst du öfter.', bsp:'Kritisch.' },
+      { t:'Rechtliche Relevanz', d:'Ob es Pflicht ist.', bed:'Eine Auswahl: Informativ, Verpflichtend, Verpflichtend mit Sanktionsrisiko.', her:'Wählst du aus.', wozu:'Pflichtthemen mit Sanktion stehen ganz oben.', bsp:'Verpflichtend mit Sanktionsrisiko.' },
+      { t:'Kontrollintervall', d:'Wie oft du selbst prüfst.', bed:'Eine Auswahl: Täglich, Wöchentlich, Monatlich, Quartalsweise, Jährlich, Anlassbezogen, Laufend.', her:'Wählst du aus.', wozu:'Daraus ergibt sich dein eigener Prüfrhythmus.', bsp:'Täglich.' },
+      { t:'Verantwortliche Rolle', d:'Wer zuständig ist.', bed:'Eine Auswahl: Inhaber, Geschäftsführung, Betriebsleitung, Schichtleitung, Externer Dienstleister.', her:'Wählst du aus.', wozu:'Jedes Thema hat eine Rolle, die sich kümmert.', bsp:'Betriebsleitung.' },
+      { t:'Zuständige Behörde', d:'Welche Behörde das Thema prüft. Verknüpft mit Behörden & Kontrollen.', bed:'Die Verbindung zu einer Behörde.', her:'Wählst du aus.', wozu:'Du weißt, wer kommt, wenn es um dieses Thema geht.', bsp:'Gesundheitsamt.' },
+      { t:'📋 SOPs (Standard Operating Procedures)', d:'Die Prozesse, die das Thema absichern. Verknüpft mit den SOPs.', bed:'Die Gegenseite der Spalte ✅ Kontrollthemen in den SOPs.', her:'Entsteht, sobald du in einer SOP dieses Thema auswählst.', wozu:'Du siehst, ob jedes Risiko einen Ablauf hat.', bsp:'Kühlung kontrollieren.' }
+    ]) };
+
+  S.ops_hyg_playbook={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Dein Management Playbook. <span>Fall für Fall</span>.', sub:subI('Jede Zeile ist ein Fall, für den die Führung einen festen Plan hat.'), relations:[],
+    steps:cards([
+      { t:'Fall', d:'Der Eskalationsfall.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findet die Schichtleitung im Ernstfall den Plan.', bsp:'Technischer Ausfall (Kühlschrank, Kasse, IT).' },
+      { t:'Short Cut', d:'Das Wichtigste in Kurzform.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Unter Druck liest niemand eine ganze Seite.', bsp:'Ware sichern, Techniker rufen, Gäste informieren.' },
+      { t:'Ausführliche Beschreibung', d:'Warum der Fall wichtig ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Für die Einarbeitung und für Fälle, die nicht ganz passen.', bsp:'Ein ausgefallener Kühlschrank kostet innerhalb weniger Stunden die ganze Ware.' },
+      { t:'⚡ Sofortmaßnahmen', d:'Was sofort zu tun ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Die ersten Minuten entscheiden.', bsp:'Ware in Kühlschrank 2 umlagern, Temperatur notieren.' },
+      { t:'🚨 Warnsignale', d:'Woran du den Fall früh erkennst.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Besser vorher merken als hinterher reagieren.', bsp:'Kompressor brummt laut, Temperatur steigt über 5 °C.' },
+      { t:'📅 Follow-up Aktionen', d:'Was danach passieren muss.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Damit der Fall nicht wiederkommt.', bsp:'Wartungsvertrag prüfen, Waste eintragen.' },
+      { t:'Ziel', d:'Was am Ende erreicht sein soll.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Alle wissen, wann der Fall erledigt ist.', bsp:'Keine Ware verloren, Service läuft weiter.' },
+      { t:'Auslöser', d:'Was den Fall auslöst.', bed:'Eine Mehrfachauswahl: Unterperformance, Konflikt, Zeitdruck, Personalmangel, Kostenabweichung, Regelverstoß, Skalierung, Veränderung, Externer Druck.', her:'Wählst du aus.', wozu:'Du findest den passenden Fall über die Ursache.', bsp:'Zeitdruck.' },
+      { t:'Management-Ebene', d:'Auf welcher Ebene der Fall liegt.', bed:'Eine Auswahl: Tagesgeschäft, Betriebsführung, Unternehmensentwicklung.', her:'Wählst du aus.', wozu:'Trennt Alltagsfälle von großen Entscheidungen.', bsp:'Tagesgeschäft.' },
+      { t:'Verantwortlich', d:'Wer den Fall führt.', bed:'Eine Auswahl: Geschäftsführung, Betriebsleitung, Schichtleitung.', her:'Wählst du aus.', wozu:'Im Ernstfall ist klar, wer entscheidet.', bsp:'Schichtleitung.' },
+      { t:'Anwendbar für', d:'Für wen der Plan gilt.', bed:'Eine Mehrfachauswahl: Geschäftsführung, Betriebsleitung, Schichtleitung.', her:'Wählst du aus.', wozu:'Jede Ebene sieht ihre Fälle.', bsp:'Betriebsleitung, Schichtleitung.' },
+      { t:'Häufigkeit', d:'Wie oft der Fall vorkommt.', bed:'Eine Auswahl: Täglich, Wöchentlich, Monatlich, Quartalsweise, Selten.', her:'Wählst du aus.', wozu:'Häufige Fälle gehören in jede Einarbeitung.', bsp:'Selten.' },
+      { t:'Priorität', d:'Wie wichtig der Fall ist.', bed:'Eine Auswahl: Hoch, Mittel, Niedrig.', her:'Wählst du aus.', wozu:'Du übst die wichtigsten Fälle zuerst.', bsp:'Hoch.' },
+      { t:'Status', d:'Ob der Plan gilt.', bed:'Eine Auswahl: Aktiv, In Prüfung, Überholt.', her:'Setzt du selbst.', wozu:'Niemand handelt nach einem alten Plan.', bsp:'Aktiv.' },
+      { t:'Letzte Revision', d:'Wann zuletzt überarbeitet.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Du siehst, wie aktuell der Plan ist.', bsp:'01.02.2026.' },
+      { t:'📋 Verknüpfte SOPs', d:'Die Abläufe zum Fall. Verknüpft mit den SOPs.', bed:'Die Verbindung zu Einträgen in den SOPs.', her:'Wählst du aus.', wozu:'Vom Plan aus öffnest du direkt die Schritt-für-Schritt-Anleitung.', bsp:'Kühlung kontrollieren.' }
+    ]) };
+
+  S.ops_zug_passwords={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Dein Password Vault. <span>Zugang für Zugang</span>.', sub:subI('Jede Zeile ist ein Zugang zu einem Dienst. Das Passwortfeld ist ein einfaches Textfeld ohne Verschlüsselung, deshalb gehört diese Seite nur in einen Bereich, den ausschließlich du siehst.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Der Dienst.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findest du den Zugang.', bsp:'Stripe.' },
+      { t:'Kategorie', d:'Welche Art Dienst.', bed:'Eine Auswahl: Portal, Dienstleister, Shop, Payment, Banking, Social, Tech, Government, Internal.', her:'Wählst du aus.', wozu:'Du filterst nach Art.', bsp:'Payment.' },
+      { t:'Login URL', d:'Der Login-Link.', bed:'Ein Link.', her:'Trägst du ein.', wozu:'Ein Klick, und du bist auf der richtigen Seite.', bsp:'https://dashboard.stripe.com/login' },
+      { t:'Benutzername', d:'Die Account-ID.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Für den Login.', bsp:'betrieb-hamburg.' },
+      { t:'E-Mail', d:'Die hinterlegte Adresse.', bed:'Eine E-Mail-Adresse.', her:'Trägst du ein.', wozu:'Für Passwort-Zurücksetzen und Benachrichtigungen.', bsp:'kasse@deinbetrieb.de.' },
+      { t:'Passwort', d:'Das Passwort, unverschlüsselt.', bed:'Ein einfaches Textfeld.', her:'Trägst du ein, wenn du es hier ablegen willst.', wozu:'Notion verschlüsselt dieses Feld nicht. Für wichtige Zugänge ist ein Passwortmanager die bessere Wahl, hier steht dann nur, wo das Passwort liegt.', bsp:'Im Passwortmanager unter Stripe.' },
+      { t:'2FA', d:'Welche Zwei-Faktor-Methode aktiv ist.', bed:'Eine Auswahl: Keine, SMS, Authenticator, Email, Hardware Key.', her:'Wählst du aus.', wozu:'Du weißt, welches Gerät oder welche Nummer du für den Login brauchst.', bsp:'Authenticator.' },
+      { t:'Status', d:'Ob der Zugang noch gilt.', bed:'Ein Status: Aktiv, Zu prüfen, Archiviert.', her:'Setzt du selbst.', wozu:'Alte Zugänge fallen auf und werden gekündigt.', bsp:'Aktiv.' },
+      { t:'Zuletzt geändert', d:'Wann das Passwort zuletzt geändert wurde.', bed:'Ein Datum.', her:'Trägst du ein.', wozu:'Nach einem Personalwechsel siehst du, was du ändern musst.', bsp:'01.03.2026.' },
+      { t:'Notizen', d:'Hinweise zum Zugang.', bed:'Ein freies Textfeld.', her:'Trägst du ein.', wozu:'Für Support-Kontakt und Besonderheiten. Recovery-Codes und API-Schlüssel gehören nicht hierher.', bsp:'Support über das Dashboard, Antwort meist innerhalb eines Tages.' }
+    ]) };
+
+  S.vf_marke={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Deine Marke. <span>Aspekt für Aspekt erklärt</span>.', sub:subI('Jede Zeile ist ein Aspekt deiner Marke.'), relations:[],
+    steps:cards([
+      { t:'Aspekt', d:'Der Marken-Aspekt.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Eine Zeile pro Aspekt hält die Marke übersichtlich.', bsp:'Vision, Kernwerte oder Farbpalette.' },
+      { t:'Kategorie', d:'Zu welchem Feld der Aspekt gehört.', bed:'Eine Auswahl: Vision & Mission, Werte, Positionierung, Zielgruppe, Markenversprechen, Tonalität & Kommunikation, Visuell & Design.', her:'Wählst du aus.', wozu:'Du siehst, welche Felder noch leer sind.', bsp:'Farbpalette: Visuell & Design.' },
+      { t:'Beschreibung', d:'Der Aspekt in ein bis zwei Sätzen.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Der schnelle Blick in der Tabelle.', bsp:'Warmes Dunkelgrün, Creme und ein sparsames Rot.' },
+      { t:'Detaillierte Ausarbeitung', d:'Der Aspekt in voller Länge.', bed:'Ein Textfeld.', her:'Schreibst du selbst.', wozu:'Von hier ziehst du Formulierungen für Website, Karte und Team-Briefing.', bsp:'Die drei Farben mit Codes, wo sie eingesetzt werden und wo nicht.' },
+      { t:'Status', d:'Wie weit der Aspekt ist.', bed:'Eine Mehrfachauswahl: Entwurf, In Bearbeitung, Freigegeben, Zu überarbeiten.', her:'Wählst du aus.', wozu:'Nur Freigegebenes geht nach außen.', bsp:'Freigegeben.' }
+    ]) };
+
+  S.vf_werte={ werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl',  title:'Dein Wertefundament. <span>Feld für Feld erklärt</span>.', sub:subI('Jede Zeile ist eine Vision oder ein Wert.'), relations:[],
+    steps:cards([
+      { t:'Titel', d:'Der Name der Vision oder des Werts.', bed:'Der Name der Zeile, kurz und eindeutig.', her:'Trägst du ein.', wozu:'Darunter findet das Team den Eintrag.', bsp:'Gastronomische Vielfalt bewahren.' },
+      { t:'Art', d:'Vision oder Wert.', bed:'Eine Auswahl: Vision, Wert. Die Vision beschreibt die Richtung, der Wert das Prinzip.', her:'Wählst du aus.', wozu:'Beide liegen in derselben Datenbank, dieses Feld trennt sie.', bsp:'Vision.' },
+      { t:'Essenz', d:'Der Kern in einem Satz.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Ein Satz, den jeder im Team wiedergeben kann.', bsp:'Kleinen Betrieben die KI-Welt zugänglich machen.' },
+      { t:'Wirkung im Alltag', d:'Woran man den Punkt im Alltag merkt.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Ein Wert ohne Wirkung bleibt ein Spruch an der Wand.', bsp:'Jedes Angebot so bauen, dass ein Einzelbetrieb es allein umsetzen kann.' },
+      { t:'Bezug zum System', d:'Wo die Idee in deinem Betrieb verankert ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du siehst, ob Werte und Alltag zusammenpassen.', bsp:'In der Positionierung und im Angebot.' },
+      { t:'Gedanken', d:'Offene Fragen und Zweifel.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Hier darf noch nichts fertig sein.', bsp:'Passt das noch, wenn wir einen zweiten Standort eröffnen?' }
+    ]) };
+
+  /* Inseln, deren Datenbank schon eine DB-Lektion erklärt: dieselben Karten */
+  S.ops_team_mitarbeiter={ werte:{'Stundensatz (AG-Kosten)':19.53}, typ:'eur_h', summary:'Stundensatz',  title:'Deine Mitarbeiter. <span>Was jede Spalte zeigt</span>.', sub:subI('Es ist dieselbe Datenbank wie in Lektion 2.6, hier mit Blick auf Team und Einarbeitung.'), relations:[], steps:S.db7_mitarbeiterloehne.steps };
+  S.ops_hyg_produkte={ eyebrow:'DB : Hygiene Produkte', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Hygieneprodukte. <span>Was wofür da ist</span>.', sub:subI('Jede Zeile ist ein Reinigungs- oder Hygieneprodukt, verknüpft mit seinem Eintrag in der Inventurliste.'), relations:[],
+    steps:cards([
+      { t:'Name', d:'Das Produkt.', bed:'Der Name der Zeile.', her:'Trägst du ein.', wozu:'Darunter findet das Team das Produkt.', bsp:'Flächendesinfektion.' },
+      { t:'Inventory', d:'Das Produkt in der Inventurliste. Verknüpft mit DB 0.', bed:'Die Verbindung zum eingekauften Produkt in DB 0 : Inventurliste.', her:'Wählst du aus.', wozu:'Über diese Verbindung kommen Gebinde und Herstellerbezeichnung, der Preis bleibt in der Inventurliste.', bsp:'Desinfektion 5 L Kanister.' },
+      { t:'Herstellerbezeichnung', d:'Kommt aus der Inventurliste.', bed:'Die volle Bezeichnung des Produkts.', her:'Füllst du nie selbst. Sie kommt über Inventory aus der Inventurliste.', wozu:'Du erkennst das richtige Produkt im Regal.', bsp:'Desinfekt Pro Flächenkonzentrat.' },
+      { t:'Menge / Unit', d:'Das Gebinde. Kommt aus der Inventurliste.', bed:'Die Gebindegröße.', her:'Füllst du nie selbst. Sie kommt über Inventory aus der Inventurliste.', wozu:'Du weißt, was nachbestellt wird.', bsp:'5 L.' },
+      { t:'Gruppe', d:'Welche Art Produkt.', bed:'Eine Auswahl: Hygiene & Desinfektion, Reinigung & Chemie, Reinigungstools & Organisation.', her:'Wählst du aus.', wozu:'Du filterst nach Art.', bsp:'Hygiene & Desinfektion.' },
+      { t:'Einsatzbereiche', d:'Wo das Produkt eingesetzt wird.', bed:'Eine Mehrfachauswahl: Küche, Lager, Nebenräume, FOH, Büro, Sanitär, Waschbecken, WC, Spülmaschine, Personal, Reinigung Textilien, Nassbereiche.', her:'Wählst du aus.', wozu:'Jeder Bereich sieht, welche Mittel für ihn gedacht sind.', bsp:'Küche, Sanitär.' },
+      { t:'Auswählen', d:'Wie oft das Produkt eingesetzt wird.', bed:'Eine Auswahl: Täglich, Wöchentlich, Bedarfsabhängig. Die Spalte heißt in der Vorlage wirklich Auswählen.', her:'Wählst du aus.', wozu:'Hilft beim Reinigungsplan und beim Nachbestellen.', bsp:'Täglich.' },
+      { t:'Zweck', d:'Wofür das Produkt da ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Niemand nimmt das falsche Mittel.', bsp:'Desinfektion aller Arbeitsflächen mit Lebensmittelkontakt.' },
+      { t:'Anwendung', d:'Wie es angewendet wird.', bed:'Ein Textfeld.', her:'Trägst du ein, nach Herstellerangabe.', wozu:'Dosierung und Einwirkzeit stehen direkt beim Produkt.', bsp:'2 Prozent Lösung, 5 Minuten einwirken, klar nachspülen.' },
+      { t:'Lagerung/Umgang', d:'Wie es gelagert und gehandhabt wird.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Chemie steht nie neben Lebensmitteln.', bsp:'Getrennt von Lebensmitteln, Handschuhe tragen.' },
+      { t:'Risiken', d:'Was gefährlich werden kann.', bed:'Ein Textfeld.', her:'Trägst du ein, nach Sicherheitsdatenblatt.', wozu:'Das Team kennt die Gefahren, bevor etwas passiert.', bsp:'Reizt Augen und Haut.' },
+      { t:'Sicherheitsdatenblatt', d:'Wo das Datenblatt liegt.', bed:'Ein Textfeld.', her:'Trägst du ein, zum Beispiel den Link oder den Ablageort.', wozu:'Bei einer Kontrolle oder einem Unfall hast du es sofort.', bsp:'Ordner Hygiene, Register 3.' },
+      { t:'Kritisch für Kontrolle', d:'Ob die Lebensmittelkontrolle darauf schaut.', bed:'Eine Auswahl: Ja, Nein.', her:'Wählst du aus.', wozu:'Diese Produkte müssen immer da und dokumentiert sein.', bsp:'Ja.' }
+    ]) };
+  S.ops_part_vertraege={ werte:{'Vertragswert':890}, typ:'preis', summary:'Vertragswert',  title:'Deine Verträge. <span>Was jede Spalte zeigt</span>.', sub:subI('Es ist dieselbe Datenbank wie in Lektion 2.3, hier mit allen Verträgen des Betriebs, nicht nur den Lieferverträgen.'), relations:[], steps:S.db13_vertraege.steps };
+
   window.__tsn2Shop=S;
 })();
 
@@ -32449,6 +32755,49 @@ var TSISL_TEAM_ONB_V2=[
     if(!/\/key-metrics\/?$/.test(location.pathname)) return;
     var ps=document.querySelectorAll('#tskmvid p');
     for(var i=0;i<ps.length;i++){ if(/Leg jetzt in Notion eine leere Seite/.test(ps[i].textContent)) ps[i].innerHTML=NEU; }
+    var ls=document.querySelectorAll('#tsl .tsl-t, .il-learn .il-orb');
+    for(var j=0;j<ls.length;j++){ if(/^Du hast die Kostenauswertung Master gebaut/.test(ls[j].textContent)) ls[j].textContent='Die Kostenauswertung Master hält jeden Monat in einer Zeile mit allen Kennzahlen.'; }
+  }
+  fix();
+  window.__tsMO(fix).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* NEUBAU MODUL 2 · Inseln (Operations Area + Vision Frame): Abschluss-Satz im Video-Abschnitt (Grundsatz A, 01.11.2026)
+   Die alten Sätze schickten zum Anlegen einer leeren Seite und zum Mitbauen. Die Vorlage hat alles schon,
+   deshalb erklären die Karten jetzt die Spalten. Ersetzt wird nur der Abschluss-Satz (close) im Abschnitt #tsisl. */
+(function(){
+  if(window.__tsn2islclose) return; window.__tsn2islclose=true;
+  var RE=/\/lektionen\/(?:unternehmen-markenidentit[a-z]*|vision-werte|team-onboarding|checklisten-produktion|hygiene-beh[a-z-]*handb[a-z-]*|inventur-bestand|partner-vertr[a-z-]*|zug[a-z-]*nge-werte)\/?$/;
+  var FIX=[
+    [/^In den nächsten Schritten baust du die Tabelle Spalte für Spalte auf\. Jede Karte im Regal ist ein Feld deiner Marken-Datenbank/,'In deiner Vorlage ist die Marken-Datenbank schon angelegt. Jede Karte im Regal erklärt ein Feld davon. Fang danach mit den drei Aspekten an, die du sofort benennen kannst.'],
+    [/^In den nächsten Schritten baust du die Tabelle Spalte für Spalte\. Jede Karte im Regal ist ein Feld deiner Werte-Datenbank/,'In deiner Vorlage ist die Werte-Datenbank schon angelegt. Jede Karte im Regal erklärt ein Feld davon. Fang danach mit drei Einträgen an, die du sofort benennen kannst. Im nächsten Schritt bringst du dieselbe Klarheit in deine Marke.'],
+    [/^Öffne dir dafür eine leere Seite in Notion und nenne sie Team und Onboarding\./,'Die Seite Team und Onboarding steckt mit allen Datenbanken schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte: was sie bedeutet, woher ihr Wert kommt und wozu du sie brauchst.'],
+    [/^Lege dir eine leere Seite mit dem Namen Checklisten und Produktion an/,'Die Seite Checklisten und Produktion steckt schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte, die aus einer Liste ein Werkzeug macht, mit dem sich der Betrieb wirklich steuern lässt.'],
+    [/^Lege dir eine leere Seite mit dem Namen Hygiene und Behörden an/,'Die Seite Hygiene und Behörden steckt schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte, die deine Prüfungssicherheit ein Stück erhöht.'],
+    [/^Lege dir eine leere Seite mit dem Namen Inventur und Bestand an/,'Die Seite Inventur und Bestand mit der Festwert-Liste steckt schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte, die aus deiner Zählung eine belastbare Zahl für den Abschluss macht.'],
+    [/^Lege dir eine leere Seite mit dem Namen Partner und Verträge an/,'Die Seite Partner und Verträge steckt schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte, die dir ein Stück Kontrolle über deine laufenden Kosten zurückgibt.'],
+    [/^Lege dir eine leere Seite mit dem Namen Zugänge und Werte an/,'Die Seite Zugänge und Werte steckt schon in deiner Vorlage. Jede Karte im Warenkorb erklärt eine Spalte, die dein Sensibles nachvollziehbar macht.']
+  ];
+  /* Learnings der Inseln: „Du hast die …-Insel gebaut“ -> „Du kennst die …-Insel“ (Orbs .il-orb im Abschnitt .il-learn) */
+  var LEARN=[
+    [/^Du hast die (\S+-Insel)( deiner Operations Area)? gebaut(,| und)/,'Du kennst die $1$2$3'],
+    [/^Du hast dein Wertefundament als Datenbank gebaut, statt es im Kopf zu behalten\.$/,'Dein Wertefundament steht in einer Datenbank, nicht nur im Kopf.'],
+    [/^Du hast deine Marke als Datenbank angelegt, statt sie im Kopf des Inhabers zu lassen\.$/,'Deine Marke steht in einer Datenbank, nicht nur im Kopf des Inhabers.']
+  ];
+  function fixLearn(){
+    var orbs=document.querySelectorAll('.il-learn .il-orb');
+    for(var i=0;i<orbs.length;i++){ if(orbs[i].textContent.indexOf('Du hast')<0) continue;
+      var w=document.createTreeWalker(orbs[i], NodeFilter.SHOW_TEXT, null), n;
+      while((n=w.nextNode())){ var t=n.nodeValue; if(t.indexOf('Du hast')!==0) continue;
+        for(var j=0;j<LEARN.length;j++){ if(LEARN[j][0].test(t)){ n.nodeValue=t.replace(LEARN[j][0],LEARN[j][1]); break; } } } }
+  }
+  function fix(){
+    if(!RE.test(location.pathname)) return;
+    fixLearn();
+    var root=document.getElementById('tsisl'); if(!root || root.__tsn2close) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while((n=w.nextNode())){ var v=n.nodeValue; if(v.length<60) continue;
+      for(var i=0;i<FIX.length;i++){ if(FIX[i][0].test(v)){ n.nodeValue=FIX[i][1]; root.__tsn2close=true; break; } } }
   }
   fix();
   window.__tsMO(fix).observe(document.documentElement,{childList:true,subtree:true});
