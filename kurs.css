@@ -518,6 +518,17 @@ body:has(#sb-toggle-cb:checked) { overflow: hidden !important; height: 100% !imp
 body:has(#sb-toggle-cb:checked) #sb-toggle {
   top: 16px; left: 62px;
 }
+/* Kaestchen unsichtbar (bleibt im Seitenbaum, das Label schaltet es weiter um) und
+   Menue-Knopf vor der Leiste statt halb dahinter, etwas hoeher, damit er die Leiste kaum
+   beruehrt (Ladezeit-Chat 01.11.2026; vorher weisses Quadrat oben Mitte sichtbar). */
+#sb-toggle-cb { position: fixed !important; top: 0; left: 0; width: 1px !important; height: 1px !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important; opacity: 0 !important;
+  pointer-events: none !important; clip-path: inset(50%); }
+#sb-toggle { z-index: 10000; top: 6px; }
+/* super.so blendet die Seitenleiste unter 860 px aus (display:none), dann schaltete der
+   Menue-Knopf am Handy ins Leere. Sie bleibt im Seitenbaum und faehrt wie am Desktop herein. */
+@media (max-width: 860px) { .super-sidebar { display: block !important; } }
+body:has(#sb-toggle-cb:checked) #sb-toggle { top: 6px; }
 
 /* Sidebar-Innenraum: dunkleres Blau als Seiten-BG. Modul-Titel UND Lektionen
    in Lineal-Schrift und weiß; nur die Zahl im Modul-Titel in unserem Rot
