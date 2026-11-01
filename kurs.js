@@ -29379,6 +29379,9 @@ var TSISL_TEAM_ONB_V2=[
 
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
+/* ---- Weiter-Kette (aus build.py) ---- */
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/stack-aufrumen"};
+
 /* ---- lib.js ---- */
 /* ============================================================
    NEUBAU MODUL 3 · Claude Grundlagen (November 2026) — Bibliothek __tsn3
@@ -29538,11 +29541,12 @@ var TSISL_TEAM_ONB_V2=[
   }
 
   /* ---------- Abschnitt 09 ---------- */
+  function chainNext(cfg){ var C=window.__tsn3Chain||{}; return C[cfg.key]||cfg.learn.next; }
   function nextA(href){ return '<a id="ts-next" href="'+href+'">'+(href.indexOf('/modul-')===0?'Nächstes Modul':'Nächste Lektion')+' '+ICO_NEXT+'</a>'; }
   function learnHTML(l){
     return '<div class="tsn3-learn"><div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'
       +'<div class="tsl-grid">'+l.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'
-      +'<div id="ts-next-wrap">'+nextA(l.next)+'</div></div>';
+      +'<div id="ts-next-wrap">'+nextA(l.href||l.next)+'</div></div>';
   }
   /* Ein Weiter-Button je Seite: fremde Wraps raus, eigener wird bei Verlust neu gebaut.
      Host wird bei JEDEM Durchlauf frisch geholt (Lernpunkt 02.08.2026, dedupe mit Closure). */
@@ -29551,7 +29555,7 @@ var TSISL_TEAM_ONB_V2=[
     var host=root.querySelector('.tsn3-learn'); if(!host) return;
     var all=document.querySelectorAll('#ts-next-wrap');
     for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-    if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML=nextA(cfg.learn.next); host.appendChild(w); }
+    if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML=nextA(chainNext(cfg)); host.appendChild(w); }
   }
 
   /* ---------- Erklaeranimation ---------- */
@@ -29573,7 +29577,7 @@ var TSISL_TEAM_ONB_V2=[
     };
     function end(){ T.clear(); el.classList.remove('js','run'); el.classList.add('done'); if(def.end) def.end(el, api); if(a.capEnd) api.capNow(a.capEnd); }
     function play(){
-      T.clear(); el.classList.remove('done','hid'); el.classList.add('js');
+      T.clear(); el.classList.remove('done','hid'); el.classList.add('js'); api.capNow('');
       if(def.reset) def.reset(el, api);
       void el.offsetWidth;
       el.classList.add('run');
@@ -29617,7 +29621,7 @@ var TSISL_TEAM_ONB_V2=[
       +(cfg.anim?animHTML(cfg.anim):'')
       +(cfg.body?cfg.body(H, IMG, ph):'')
       +(cfg.emp?empHTML(cfg.emp):'')
-      +(cfg.learn?learnHTML(cfg.learn):'');
+      +(cfg.learn?learnHTML({learn:cfg.learn.learn, href:chainNext(cfg)}):'');
     root.innerHTML=html;
     sc.insertBefore(root, nr);
     hideNotion(sc);
@@ -29790,11 +29794,11 @@ var TSISL_TEAM_ONB_V2=[
 /* ============================================================
    NEUBAU MODUL 3 · L3.2 "Welches Claude wann"  (/welches-claude-wann-chatcoworkcodeapi)
    Erklaeranimation #tsn3-a02 "Sechs Bons, drei Faecher."
-   Kuechenbild: oben die Bonschiene mit sechs Auftraegen aus dem Betrieb, unten der Pass
-   mit drei gleich grossen Faechern (Claude-App, Claude in Chrome, Claude Code).
-   Bon fuer Bon loest sich von der Schiene und faellt ins richtige Fach (FLIP: die Bons
-   liegen im DOM bereits in ihren Faechern = Endzustand, die Animation startet sie
-   rechnerisch auf der Schiene). Moebel (Schiene, Faecher) stehen ab Beat 0 ruhig.
+   Kuechenbild: oben der Bondrucker am Pass, darunter drei gleich grosse Faecher
+   (Claude-App, Claude in Chrome, Claude Code). Bon fuer Bon kommt aus dem Drucker und
+   gleitet ins richtige Fach (FLIP: die Bons liegen im DOM bereits in ihren Faechern =
+   Endzustand, die Animation startet sie rechnerisch am Druckerschlitz). Bewusst KEINE
+   Bonschiene (die nutzt Modul 0, #tsn0-a05). Moebel stehen ab Beat 0 ruhig.
    ============================================================ */
 (function(){
   var T3=window.__tsn3; if(!T3) return;
@@ -29811,17 +29815,17 @@ var TSISL_TEAM_ONB_V2=[
     {f:1, img:T3.pic('a02-reservierung.webp','Buchungen',300,300), t:'Reservierungen von der Buchungsseite holen', cap:'Die Buchungsseite hat keinen Export. <b>Chrome</b> liest die Liste dort, wo du ohnehin angemeldet bist.'},
     {f:2, img:T3.pic('a02-allergene.webp','Allergene',300,300), t:'Allergen-Übersicht, die bei jeder Kartenänderung neu rechnet', cap:'Etwas, das immer wieder laufen soll, gehört in ein Projekt mit <b>Claude Code</b>. Dort bleibt es beisammen und lässt sich jederzeit neu starten.'}
   ];
-  function bon(b,i){ return '<div class="l2-bon" data-i="'+i+'"><span class="l2-pin"></span><img src="'+b.img+'" alt="" loading="lazy" decoding="async"><span class="l2-bt">'+b.t+'</span></div>'; }
-  var stage='<div class="l2-wrap"><div class="l2-rail"><span class="l2-rl">Bonschiene</span></div>'
+  function bon(b,i){ return '<div class="l2-bon" data-i="'+i+'"><img src="'+b.img+'" alt="" loading="lazy" decoding="async"><span class="l2-bt">'+b.t+'</span></div>'; }
+  var stage='<div class="l2-wrap"><div class="l2-print"><span class="l2-pb"><span class="l2-led"></span><span class="l2-pl">Bondrucker</span><i class="l2-mouth"></i></span></div>'
     +'<div class="l2-pass">'+FACH.map(function(f,fi){
-      return '<div class="l2-fach" data-f="'+fi+'"><div class="l2-fh"><span class="l2-fk">'+f.k+'</span><span class="l2-fn">'+f.nm+'</span><span class="l2-fs">'+f.sub+'</span></div>'
+      return '<div class="l2-fach" data-f="'+fi+'"><div class="l2-fh"><span class="l2-fn">'+f.nm+'</span><span class="l2-fs">'+f.sub+'</span></div>'
         +'<div class="l2-slot">'+BONS.map(function(b,i){ return b.f===fi?bon(b,i):''; }).join('')+'</div></div>';
     }).join('')+'</div></div>';
 
   function railPos(el){
-    /* Zielpunkte auf der Schiene: sechs gleiche Abstaende ueber die Schienenbreite */
-    var wrap=el.querySelector('.l2-wrap').getBoundingClientRect(), rail=el.querySelector('.l2-rail').getBoundingClientRect();
-    return BONS.map(function(b,i){ var w=rail.width/BONS.length; return {x:rail.left-wrap.left+w*i+w/2, y:rail.top-wrap.top+97}; });
+    /* Startpunkt aller Bons: direkt unter dem Druckerschlitz */
+    var wrap=el.querySelector('.l2-wrap').getBoundingClientRect(), m=el.querySelector('.l2-mouth').getBoundingClientRect();
+    return BONS.map(function(){ return {x:m.left-wrap.left+m.width/2, y:m.bottom-wrap.top+84}; });
   }
   function place(el, toRail){
     var wrap=el.querySelector('.l2-wrap').getBoundingClientRect();
@@ -29833,7 +29837,8 @@ var TSISL_TEAM_ONB_V2=[
       n.style.transform='';
       var r=n.getBoundingClientRect();
       var cx=r.left-wrap.left+r.width/2, cy=r.top-wrap.top+r.height/2;
-      n.style.transform='translate('+(rp[i].x-cx)+'px,'+(rp[i].y-cy)+'px)';
+      n.style.transform='translate('+(rp[i].x-cx)+'px,'+(rp[i].y-cy-70)+'px) scale(.92)';
+      n.setAttribute('data-px',(rp[i].x-cx)); n.setAttribute('data-py',(rp[i].y-cy));
     });
   }
   function small(){ return window.innerWidth<=820; }
@@ -29841,7 +29846,7 @@ var TSISL_TEAM_ONB_V2=[
   T3.anim('tsn3-a02',{
     reset:function(el){
       el.querySelectorAll('.l2-fach').forEach(function(f){ f.classList.remove('on'); });
-      el.querySelectorAll('.l2-bon').forEach(function(n){ n.classList.remove('in','hot'); });
+      el.querySelectorAll('.l2-bon').forEach(function(n){ n.classList.remove('in','hot','pr'); });
       if(!small()) place(el,true);
     },
     play:function(el, api, end){
@@ -29849,11 +29854,12 @@ var TSISL_TEAM_ONB_V2=[
       var STEP=3300;
       BONS.forEach(function(b,i){
         var t0=600+i*STEP, n=el.querySelector('.l2-bon[data-i="'+i+'"]');
-        api.T.at(t0,function(){ n.classList.add('hot'); api.cap(b.cap); });
-        api.T.at(t0+500,function(){
+        api.T.at(t0,function(){ n.style.transition='transform .6s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)'; n.style.transform='translate('+n.getAttribute('data-px')+'px,'+n.getAttribute('data-py')+'px)'; n.classList.add('pr','hot'); el.classList.add('printing'); api.cap(b.cap); });
+        api.T.at(t0+300,function(){ el.classList.remove('printing'); });
+        api.T.at(t0+900,function(){
           fach.forEach(function(f){ f.classList.remove('on'); });
           fach[b.f].classList.add('on');
-          n.style.transition='transform 1.15s cubic-bezier(.22,1,.36,1),box-shadow .6s ease';
+          n.style.transition='transform 1.15s cubic-bezier(.22,1,.36,1),box-shadow .6s cubic-bezier(.16,1,.3,1)';
           n.style.transform='';
           n.classList.add('in');
         });
@@ -29862,7 +29868,7 @@ var TSISL_TEAM_ONB_V2=[
       api.T.at(600+BONS.length*STEP, end);
     },
     end:function(el){
-      el.querySelectorAll('.l2-bon').forEach(function(n){ n.style.transition='none'; n.style.transform=''; n.classList.add('in'); n.classList.remove('hot'); });
+      el.querySelectorAll('.l2-bon').forEach(function(n){ n.style.transition='none'; n.style.transform=''; n.classList.add('in','pr'); n.classList.remove('hot'); });
       el.querySelectorAll('.l2-fach').forEach(function(f){ f.classList.remove('on'); });
     },
     setup:function(el, api){
@@ -29879,7 +29885,7 @@ var TSISL_TEAM_ONB_V2=[
   T3.page({
     key:'l02', re:/\/(?:lektionen\/)?welches-claude-wann-chatcoworkcodeapi\/?$/, tab:'L 3.2 · Welches Claude wann',
     hero:{eyebrow:'L 3.2', title:'Welches Claude <span class="ts-gold">wann</span>', alt:'Welches Claude wann: die Claude-App, Claude in Chrome und Claude Code'},
-    intro:'<p>Claude begegnet dir an mehreren Stellen: als App auf dem Rechner und dem Handy, als Erweiterung in deinem Browser und als Claude Code in einem Ordner auf deinem Rechner. Dahinter arbeitet jedes Mal dasselbe Modell. Was sich ändert, ist das Werkzeug, das ihm zur Verfügung steht, und damit die Arbeit, die es dir abnehmen kann.</p>'
+    intro:'<p>Claude begegnet dir an mehreren Stellen: als App auf dem Rechner und dem Handy, als Erweiterung in deinem Browser und als Claude Code in einem Ordner auf deinem Rechner. Dahinter arbeitet jedes Mal dasselbe Modell. Was sich ändert, ist das Werkzeug, das ihm zur Verfügung steht, und damit die Arbeit, die es dir abnehmen kann. Daran hängt, wo du eine Aufgabe am besten ablegst.</p>'
       +'<p>Du musst dir dafür keine Tabelle merken. Es reicht eine Frage, die du dir bei jeder Aufgabe stellst: Wo liegt das Material, und was soll am Ende entstehen?</p>',
     anim:{id:'tsn3-a02', eb:'Die eine Frage', title:'Sechs Bons, drei <span class="g">Fächer</span>.',
       sub:'Sechs Aufträge aus einer ganz normalen Woche. Jeder landet dort, wo das Material liegt und das Ergebnis gebraucht wird.',
@@ -29895,7 +29901,7 @@ var TSISL_TEAM_ONB_V2=[
           ],3)
           +H.close('Der Meister bleibt derselbe. Wer das verstanden hat, sucht nicht mehr nach dem besten Claude, sondern nach der <b>richtigen Werkstatt</b> für die Aufgabe, die gerade auf dem Tisch liegt.')})
         +H.sec({id:'tsn3-l02-regel', title:'Die Regel in einer <span class="g">Frage</span>',
-          lead:'Wo liegt das Material, und was soll am Ende entstehen? Mit diesen zwei Teilen der Frage triffst du die Wahl in Sekunden.',
+          lead:'Drei Fälle decken fast alles ab, was im Betrieb anfällt. Geh sie der Reihe nach durch, beim ersten Treffer hast du deine Werkstatt.',
           body:H.steps([
             'Reicht am Ende eine <b>Antwort oder eine Datei</b>, die du danach selbst benutzt, und liegt das Material bei dir? Dann die Claude-App. Liegen viele Dateien in einem Ordner, gibst du den Ordner frei.',
             'Steht das Material auf einer <b>Webseite hinter deinem Login</b> und lässt sich nirgends exportieren? Dann Claude in Chrome.',
@@ -29914,9 +29920,9 @@ var TSISL_TEAM_ONB_V2=[
     emp:{kind:'Nutzung', animTitle:'Deine', animGold:'tägliche Wahl',
       steps:['Material ansehen','Ergebnis klären','Werkstatt wählen','Dabei bleiben'],
       intro:'So triffst du die Wahl im Alltag, ohne lange zu überlegen:',
-      points:['Schau zuerst, <b>wo das Material liegt</b>: bei dir als Datei, auf einer Webseite oder verteilt über einen ganzen Ordner.',
-        'Kläre, ob am Ende <b>eine Antwort reicht</b> oder ob etwas entstehen soll, das du immer wieder benutzt.',
-        'Wähl die Werkstatt danach. Bei Webseiten mit Login ist es Chrome, bei allem, was bleiben soll, <b>Claude Code</b>, sonst die App.',
+      points:['Leg dir in der App ein festes <b>Projekt für Alltagsfragen</b> an. Dort landet alles, was schnell gehen soll.',
+        'Installier Claude in Chrome erst, wenn du eine <b>konkrete Webseite</b> im Kopf hast, mit der Claude arbeiten soll.',
+        'Schreib dir auf, welche Aufgabe du <b>jede Woche neu erklärst</b>. Das sind deine ersten Fälle für Claude Code ab Lektion 3.7.',
         'Bleib bei deiner Wahl, bis die Aufgabe fertig ist. Wer mittendrin <b>die Werkstatt wechselt</b>, verliert Zwischenstände.']},
     learn:{learn:['Hinter App, Chrome und Code arbeitet <b>dasselbe Modell</b>.',
         'Du kennst die <b>Frage</b>: Wo liegt das Material, was soll entstehen?',
@@ -29946,45 +29952,44 @@ var TSISL_TEAM_ONB_V2=[
   ];
   /* Ein Beispieltag: jeder Auftrag verbraucht beim Pro-Plan diesen Anteil des 5-Stunden-Fensters / der Woche */
   var TASKS=[
-    {t:'09:00', nm:'Wochenkarte kalkulieren', p5:30, pw:5, x:10},
-    {t:'11:00', nm:'Lieferscheine auswerten', p5:45, pw:7, x:30},
-    {t:'14:00', nm:'Dienstplan prüfen', p5:25, pw:4, x:60},
-    {t:'16:30', nm:'Antworten auf Bewertungen', p5:20, pw:3, x:85}
+    {t:'09:00', nm:'Kalkulation der Wochenkarte', p5:30, pw:5, x:10},
+    {t:'10:30', nm:'Lieferscheine in die Monatsliste', p5:45, pw:7, x:30},
+    {t:'12:00', nm:'Dienstplan-Werkzeug anpassen', p5:25, pw:4, x:50},
+    {t:'13:30', nm:'Allergen-Übersicht neu rechnen', p5:20, pw:3, x:70}
   ];
   var CAPS=[
-    'Ein ganz normaler Montag im Büro. Vier Aufträge, alle in Claude, und jeder kostet etwas von deinem <b>Kontingent</b>.',
-    'Um elf ist das Fünf-Stunden-Fenster bei <b>Pro</b> zu drei Vierteln voll. Max hat bis hierher ein Fünftel davon verbraucht.',
-    'Nach dem Dienstplan ist das Fenster bei Pro voll, jetzt heißt es <b>warten</b>, bis es sich zurücksetzt. Max und Ultra arbeiten einfach weiter.',
-    'Am Abend steht bei Ultra kein Fenster im Weg, und auch die Woche ist kaum angekratzt. <b>Free</b> war bei keinem Auftrag dabei, weil Claude Code dort fehlt.'
+    'Ein Montagvormittag im Büro. Vier Aufträge in Claude Code, und jeder kostet etwas von deinem <b>Kontingent</b>.',
+    'Um halb elf ist das Fünf-Stunden-Fenster bei <b>Pro</b> zu drei Vierteln voll. Max hat bis hierher ein Fünftel davon verbraucht.',
+    'Mittags ist das Fenster bei Pro voll, jetzt heißt es <b>warten</b>, bis es sich zurücksetzt. Max und Ultra arbeiten einfach weiter.',
+    'Der vierte Auftrag läuft nur noch bei Max und Ultra. <b>Free</b> war bei keinem dabei, weil Claude Code dort fehlt.'
   ];
-  function cap5(p,v){ return p.f5? Math.min(100, v/p.f5) : 0; }
-  function capW(p,v){ return p.fw? Math.min(100, v/p.fw) : 0; }
+  /* Verbrauch je Plan nach n Auftraegen: ist das 5-Stunden-Fenster voll, laeuft nichts mehr (auch nicht die Woche) */
+  function use(p,n){ var a=0,b=0,full=false; for(var i=0;i<n;i++){ if(full) break; var na=a+(p.f5?TASKS[i].p5/p.f5:0); if(p.f5 && na>100){ a=100; full=true; break; } a=na; b+=TASKS[i].pw/p.fw; if(p.f5 && a>=99.5){ full=true; } } return {a:Math.min(100,a), b:Math.min(100,b), full:full}; }
   var stage='<div class="l3-wrap">'
-    +'<div class="l3-day"><div class="l3-line"><i class="l3-fill"></i><span class="l3-clock">08:00</span></div>'
+    +'<div class="l3-day"><div class="l3-line"><i class="l3-fill"></i><span class="l3-clock">14:30</span></div>'
     +TASKS.map(function(t,i){ return '<div class="l3-task" style="left:'+t.x+'%" data-i="'+i+'"><span class="l3-tt">'+t.t+'</span><span class="l3-tn">'+t.nm+'</span></div>'; }).join('')+'</div>'
     +'<div class="l3-plans">'+PLANS.map(function(p){
-      return '<div class="l3-plan '+p.k+(p.code?'':' off')+'" data-k="'+p.k+'">'
+      return '<div class="l3-plan '+p.k+(p.code?'':' off')+(p.code&&use(p,4).full?' full':'')+'" data-k="'+p.k+'">'
         +'<div class="l3-nm">'+p.nm+'</div><div class="l3-pr"><b data-v="'+p.pr+'">'+p.pr+'</b> $</div><div class="l3-sub">'+p.sub+'</div>'
-        +'<div class="l3-ring" style="--v:0"><svg viewBox="0 0 100 100"><circle class="b" cx="50" cy="50" r="42"/><circle class="f" cx="50" cy="50" r="42" pathLength="100"/></svg>'
-        +'<div class="l3-rv">'+(p.code?(p.f5?'<b>0</b>%':'<span class="inf">ohne</span>'):'<span class="lock">kein<br>Claude Code</span>')+'</div></div><div class="l3-rl">5-Stunden-Fenster</div>'
-        +'<div class="l3-week"><div class="l3-wl">Woche</div><div class="l3-bar"><i></i></div></div>'
+        +'<div class="l3-ring" style="--v:'+(p.code?use(p,4).a:0)+'"><svg viewBox="0 0 100 100"><circle class="b" cx="50" cy="50" r="42"/><circle class="f" cx="50" cy="50" r="42" pathLength="100"/></svg>'
+        +'<div class="l3-rv">'+(p.code?(p.f5?'<b>'+Math.round(use(p,4).a)+'</b>%':'<span class="inf">ohne</span>'):'<span class="lock">kein<br>Claude Code</span>')+'</div></div>'
+        +'<div class="l3-week"><div class="l3-bar"><i style="transform:scaleX('+(p.code?use(p,4).b/100:0)+')"></i></div></div>'
         +'<div class="l3-flag">Pause bis zum Reset</div>'
         +'</div>';
     }).join('')+'</div>'
-    +'<p class="l3-note">Beispieltag. Die Verhältnisse folgen der Preisseite (Max fünfmal Pro, Ultra zehnmal Pro je Woche und ohne Fünf-Stunden-Fenster). Wie schnell es wirklich geht, hängt von Modell, Gesprächslänge und Dateigröße ab.</p>'
+    +'<p class="l3-note"><span class="lg r"></span>Ring: Fünf-Stunden-Fenster <span class="lg b"></span>Balken: Woche · Beispieltag mit gerundeten Werten</p>'
     +'</div>';
 
-  function setVals(el, v5, vw){
+  function setVals(el, n){
     PLANS.forEach(function(p){
       var c=el.querySelector('.l3-plan.'+p.k); if(!c||!p.code) return;
-      var a=cap5(p,v5), b=capW(p,vw);
-      c.querySelector('.l3-ring').style.setProperty('--v',a);
-      var rv=c.querySelector('.l3-rv b'); if(rv) rv.textContent=Math.round(a);
-      c.querySelector('.l3-bar i').style.transform='scaleX('+(b/100)+')';
-      c.classList.toggle('full', p.f5>0 && a>=99);
+      var u=use(p,n);
+      c.querySelector('.l3-ring').style.setProperty('--v',u.a);
+      var rv=c.querySelector('.l3-rv b'); if(rv) rv.textContent=Math.round(u.a);
+      c.querySelector('.l3-bar i').style.transform='scaleX('+(u.b/100)+')';
+      c.classList.toggle('full', p.f5>0 && u.full);
     });
   }
-  function totals(n){ var a=0,b=0; for(var i=0;i<n;i++){ a+=TASKS[i].p5; b+=TASKS[i].pw; } return [a,b]; }
   function price(el, api){
     el.querySelectorAll('.l3-pr b').forEach(function(b){
       var v=+b.getAttribute('data-v'), D=1100;
@@ -29998,7 +30003,7 @@ var TSISL_TEAM_ONB_V2=[
       el.querySelectorAll('.l3-task').forEach(function(t){ t.classList.remove('on'); });
       el.querySelector('.l3-fill').style.transform='scaleX(0)'; el.querySelector('.l3-clock').textContent='08:00';
       el.querySelectorAll('.l3-pr b').forEach(function(b){ b.textContent='0'; });
-      setVals(el,0,0);
+      setVals(el,0);
     },
     play:function(el, api, end){
       var tasks=el.querySelectorAll('.l3-task'), fill=el.querySelector('.l3-fill'), clock=el.querySelector('.l3-clock');
@@ -30007,16 +30012,16 @@ var TSISL_TEAM_ONB_V2=[
       TASKS.forEach(function(t,i){
         var t0=1500+i*3200;
         api.T.at(t0,function(){ fill.style.transform='scaleX('+(t.x/100)+')'; clock.textContent=t.t; });
-        api.T.at(t0+700,function(){ tasks[i].classList.add('on'); var s=totals(i+1); setVals(el,s[0],s[1]); if(i>0) api.cap(CAPS[i]); });
+        api.T.at(t0+700,function(){ tasks[i].classList.add('on'); setVals(el,i+1); if(i>0) api.cap(CAPS[i]); });
       });
-      api.T.at(1500+4*3200,function(){ fill.style.transform='scaleX(1)'; clock.textContent='18:00'; });
+      api.T.at(1500+4*3200,function(){ fill.style.transform='scaleX(.8)'; clock.textContent='14:30'; });
       api.T.at(1500+4*3200+1600, end);
     },
     end:function(el){
       el.querySelectorAll('.l3-task').forEach(function(t){ t.classList.add('on'); });
-      el.querySelector('.l3-fill').style.transform='scaleX(1)'; el.querySelector('.l3-clock').textContent='18:00';
+      el.querySelector('.l3-fill').style.transform='scaleX(.8)'; el.querySelector('.l3-clock').textContent='14:30';
       el.querySelectorAll('.l3-pr b').forEach(function(b){ b.textContent=b.getAttribute('data-v'); });
-      var s=totals(4); setVals(el,s[0],s[1]);
+      setVals(el,4);
     }
   });
 
@@ -30025,11 +30030,11 @@ var TSISL_TEAM_ONB_V2=[
     key:'l03', re:/\/(?:lektionen\/)?claude-plne-preis\/?$/, tab:'L 3.3 · Pläne & Kosten',
     hero:{eyebrow:'L 3.3', title:'Pläne & <span class="ts-gold">Kosten</span>', alt:'Claude Pläne und Kosten: Free, Pro, Max und Ultra'},
     intro:'<p>Claude gibt es in vier Stufen für Einzelpersonen: <b>Free, Pro, Max und Ultra</b>. Für diesen Kurs fällt eine davon sofort weg, denn im kostenlosen Plan ist Claude Code nicht enthalten, und ab Lektion 3.7 arbeiten wir genau damit.</p>'
-      +'<p>Der eigentliche Unterschied zwischen den bezahlten Stufen liegt nicht in der Funktionsliste, sondern darin, wie lange du am Stück arbeiten kannst. Alle Zahlen sind Stand 1. November 2026, direkt von der Preisseite des Anbieters, in US-Dollar und ohne Steuern.</p>',
+      +'<p>Der eigentliche Unterschied zwischen den bezahlten Stufen liegt nicht in der Funktionsliste, sondern darin, wie lange du am Stück arbeiten kannst, bevor du eine Pause einlegen musst. Alle Zahlen sind Stand 1. November 2026, direkt von der Preisseite des Anbieters, in US-Dollar und ohne Steuern.</p>',
     anim:{id:'tsn3-a03', eb:'Was der Plan bestimmt', title:'Ein Arbeitstag, vier <span class="g">Pläne</span>.',
-      sub:'Derselbe Montag im Büro, viermal durchgespielt. Achte auf die Ringe: Sie zeigen, wie viel vom Fünf-Stunden-Fenster jeder Auftrag verbraucht.',
+      sub:'Derselbe Vormittag, viermal durchgespielt. Achte auf die Ringe: Sie zeigen, wie viel vom Fünf-Stunden-Fenster jeder Auftrag verbraucht.',
       stage:stage,
-      capEnd:'Am Abend steht bei Ultra kein Fenster im Weg, und auch die Woche ist kaum angekratzt. <b>Free</b> war bei keinem Auftrag dabei, weil Claude Code dort fehlt.'},
+      capEnd:'Der vierte Auftrag läuft nur noch bei Max und Ultra. <b>Free</b> war bei keinem dabei, weil Claude Code dort fehlt.'},
     body:function(H){
       return H.sec({id:'tsn3-l03-tab', wide:true, title:'Was jede Stufe <span class="g">freischaltet</span>',
           lead:'Die wichtigsten Zeilen der Preisseite, übersetzt auf das, was du im Betrieb brauchst.',
@@ -30047,7 +30052,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Wochenlimit','begrenzt','1x','5x','10x'],
             ['API-Guthaben im Monat',no,no,'100 $','200 $']
           ])
-          +'<p style="margin-top:14px;font-size:13px;color:rgba(255,255,255,.55)">Quelle: claude.com/de/pricing, Stand 1. November 2026. Preise ohne Steuern. „1x“ ist die Pro-Nutzung, alle anderen Stufen sind ein Vielfaches davon. Für Betriebe mit mehreren Personen gibt es zusätzlich Team und Enterprise mit zentraler Verwaltung.</p>'})
+          +'<p class="tsn3-fn">Quelle: claude.com/de/pricing, Stand 1. November 2026. Preise ohne Steuern. „1x“ ist die Pro-Nutzung, alle anderen Stufen sind ein Vielfaches davon. Für Betriebe mit mehreren Personen gibt es zusätzlich Team und Enterprise mit zentraler Verwaltung.</p>'})
         +H.sec({id:'tsn3-l03-grenze', title:'Wie die <span class="g">Grenze</span> funktioniert',
           lead:'Einmal verstanden, ärgerst du dich nie wieder über eine Pause, die dich mitten im Auftrag erwischt.',
           body:'<p><strong class="lead">Zwei Fenster laufen gleichzeitig.</strong>Das erste umfasst fünf Stunden und setzt sich laufend zurück, das zweite eine Woche. Ist eines davon voll, wartest du, bis es wieder frei wird. Ultra hat für verifizierte Konten kein Fünf-Stunden-Fenster mehr, nur noch die Woche.</p>'
@@ -30058,13 +30063,13 @@ var TSISL_TEAM_ONB_V2=[
               {eb:'Wo du nachsiehst', nm:'Einstellungen › Nutzung', p:'Dort steht, wie voll beide Fenster gerade sind. In Claude Code zeigt dir <code>/usage</code> dasselbe, dazu den Verbrauch je Erweiterung.'}
             ],2)})
         +H.sec({id:'tsn3-l03-wahl', wide:true, title:'Meine <span class="g">Empfehlung</span> für deinen Betrieb',
-          lead:'Fang kleiner an, als du denkst. Der Wechsel nach oben dauert eine Minute, und im Monatsabo bindest du dich an nichts.',
+          lead:'Fang kleiner an, als du denkst. Im Monatsabo bindest du dich an nichts, und den Plan wechselst du in den Einstellungen.',
           body:H.cards([
             {eb:'Zum Start', nm:'Pro', p:'Für die ersten Wochen mit diesem Kurs reicht Pro. Du bekommst Claude Code, Chrome und Opus und lernst, wie du arbeitest. Du wirst ab und zu an die Grenze stoßen, und genau das ist deine beste Entscheidungsgrundlage.', ft:'20 $ im Monat oder 17 $ im Jahresabo'},
             {eb:'Wenn es täglich wird', nm:'Max', p:'Sobald dich die Grenze zweimal in derselben Woche mitten in einem Auftrag stoppt, lohnt sich Max. Fünfmal so viel Nutzung, dazu Fable im Plan und ein monatliches API-Guthaben, das wir in Modul 5 brauchen können.', ft:'100 $ im Monat'},
             {eb:'Nur bei Ganztagsbetrieb', nm:'Ultra', p:'Ultra lohnt sich, wenn Claude bei dir den ganzen Tag läuft, oft in mehreren Sitzungen gleichzeitig. Für die meisten Betriebe ist das am Anfang zu groß.', ft:'200 $ im Monat'}
           ],3)
-          +H.note('Bleib bei Pro, bis dich die Grenze zweimal in einer Woche ausbremst. Ab dann kostet dich das Warten mehr als der Aufpreis.')})
+})
     },
     emp:{kind:'Nutzung', animTitle:'Deine', animGold:'Plan-Entscheidung',
       steps:['Free streichen','Mit Pro starten','Grenze beobachten','Dann wechseln'],
@@ -30100,22 +30105,21 @@ var TSISL_TEAM_ONB_V2=[
     'Ein <b>Projekt</b> hält alles zusammen, was zu einem Thema gehört: Dateien, deine Anweisungen und den Verlauf.',
     'Im <b>Gedächtnis</b> merkt sich Claude, was über viele Gespräche gilt. Jeder Eintrag lässt sich ansehen und löschen.',
     'Über <b>Konnektoren</b> liest Claude in deinem Postfach, Kalender oder Drive mit, so weit du es freigibst.',
-    'Unter <b>Datenschutz</b> legst du fest, ob deine Gespräche zum Training verwendet werden dürfen. Für einen Betrieb gehört der Schalter auf aus.'
+    'Unter <b>Datenschutz</b> entscheidest du, ob deine Gespräche zum Training der Modelle verwendet werden dürfen.'
   ];
-  var DISHES=['Mo · Kalbsrahmgeschnetzeltes, Rösti','Di · Gebratener Saibling, Fenchel','Mi · Ofengemüse, Ziegenkäse, Honig','Do · Geschmorte Rinderwange','Fr · Linguine mit Muscheln'];
+  var DISHES=['Ab Montag, 3. November:','Dienstag bis Samstag 17 bis 23 Uhr','Sonntag 12 bis 21 Uhr','Montag Ruhetag'];
   var scenes=[
-    '<div class="l4-sc s0"><div class="l4-msg u">Mach aus meinen Notizen die Mittagskarte für nächste Woche, ein Hauptgericht pro Tag.<span class="l4-att">'+'<img src="'+T3.pic('a04-notizen.webp','Notizen',200,140)+'" alt="Notizen" loading="lazy" decoding="async"></span></div>'
+    '<div class="l4-sc s0"><div class="l4-msg u">Schreib mir aus diesem Zettel einen Aushang mit unseren neuen Öffnungszeiten.<span class="l4-att">'+'<img src="'+T3.pic('a04-zettel.webp','Zettel',200,140)+'" alt="Zettel" loading="lazy" decoding="async"></span></div>'
       +'<div class="l4-msg c"><span class="l4-who">Claude</span><ol class="l4-dish">'+DISHES.map(function(d){ return '<li>'+d+'</li>'; }).join('')+'</ol></div></div>',
-    '<div class="l4-sc s1"><div class="l4-ph">Projekt · Sommerkarte</div><div class="l4-files"><span>Rezepturen.xlsx</span><span>Lieferantenpreise.pdf</span><span>Hausstil.txt</span></div>'
-      +'<div class="l4-inst"><span class="l4-who">Anweisung für dieses Projekt</span>Schreib in unserem Ton: kurz, ohne Fremdwörter, Herkunft der Zutaten immer nennen.</div></div>',
-    '<div class="l4-sc s2"><div class="l4-ph">Einstellungen · Gedächtnis</div><ul class="l4-mem"><li><b>Betrieb</b> 60 Plätze, Montag Ruhetag</li><li><b>Küche</b> saisonal, Lieferanten aus der Region</li><li><b>Karte</b> Gäste werden geduzt</li></ul><div class="l4-hint">Jeder Eintrag lässt sich einzeln löschen.</div></div>',
-    '<div class="l4-sc s3"><div class="l4-ph">Anpassen · Konnektoren</div><div class="l4-cons">'
-      +['Gmail','Google Kalender','Google Drive'].map(function(n){ return '<div class="l4-con"><span class="l4-cn">'+n+'</span><span class="l4-tg"><i></i></span></div>'; }).join('')+'</div></div>',
-    '<div class="l4-sc s4"><div class="l4-ph">Einstellungen · Datenschutz</div><div class="l4-con wide"><span class="l4-cn">Modelltraining mit meinen Gesprächen</span><span class="l4-tg on"><i></i></span></div>'
-      +'<div class="l4-hint">Ohne Training werden Gespräche 30 Tage aufbewahrt, mit Training bis zu fünf Jahre.</div></div>'
+    '<div class="l4-sc s1"><div class="l4-ph">Team</div><div class="l4-files"><span>Handbuch.pdf</span><span>Checkliste_Schließdienst.docx</span><span>Dienstplan_Vorlage.xlsx</span></div>'
+      +'<div class="l4-inst"><span class="l4-who">Anweisung</span>Antworte Bewerbern freundlich, nenn immer einen Termin zum Probearbeiten.</div></div>',
+    '<div class="l4-sc s2"><div class="l4-ph">Einstellungen</div><ul class="l4-mem"><li><b>Küche</b> Der Pass schließt um 21:30</li><li><b>Einkauf</b> Bestellungen bis Donnerstag, 12 Uhr</li><li><b>Team</b> vierzehn Leute in Küche und Service</li></ul></div>',
+    '<div class="l4-sc s3"><div class="l4-ph">Anpassen</div><div class="l4-cons">'
+      +['Gmail','Google Kalender','Google Drive'].map(function(n){ return '<div class="l4-con"><span class="l4-cn">'+n+'</span><span class="l4-tg on"><i></i></span></div>'; }).join('')+'</div></div>',
+    '<div class="l4-sc s4 on"><div class="l4-ph">Einstellungen</div><div class="l4-con wide"><span class="l4-cn">Modelltraining mit meinen Gesprächen</span><span class="l4-tg"><i></i></span></div></div>'
   ];
   var stage='<div class="l4-win"><div class="l4-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l4-tt">Claude</span></div>'
-    +'<div class="l4-body"><div class="l4-side"><span class="l4-focus"></span>'+ITEMS.map(function(n,i){ return '<button type="button" class="l4-it" data-i="'+i+'"><span class="n">0'+(i+1)+'</span>'+n+'</button>'; }).join('')+'</div>'
+    +'<div class="l4-body"><div class="l4-side"><span class="l4-focus"></span>'+ITEMS.map(function(n,i){ return '<button type="button" class="l4-it'+(i===4?' on':'')+'" data-i="'+i+'"><span class="n">0'+(i+1)+'</span>'+n+'</button>'; }).join('')+'</div>'
     +'<div class="l4-main">'+scenes.join('')+'</div></div></div>';
 
   function show(el,i){
@@ -30158,7 +30162,7 @@ var TSISL_TEAM_ONB_V2=[
   T3.page({
     key:'l04', re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, tab:'L 3.4 · Die Desktop-App',
     hero:{eyebrow:'L 3.4', title:'Die <span class="ts-gold">Desktop-App</span>', alt:'Die Claude Desktop-App: Gespräch, Projekte, Gedächtnis, Konnektoren und Datenschutz'},
-    intro:'<p>Die Desktop-App ist der Ort, an dem du mit Claude am meisten Zeit verbringst. Hier schreibst du, ziehst Dateien hinein, gibst Ordner frei und öffnest später auch Claude Code. Alles, was du in der App einrichtest, gilt auch im Browser und auf dem Handy, weil sich Gespräche, Projekte und Gedächtnis über deine Geräte abgleichen.</p>'
+    intro:'<p>Die Desktop-App ist der Ort, an dem du mit Claude am meisten Zeit verbringst. Hier schreibst du, ziehst Dateien hinein, gibst Ordner frei und öffnest später auch Claude Code. Gespräche, Projekte, Gedächtnis und Einstellungen gleichen sich über deine Geräte ab, du findest sie also auch im Browser und auf dem Handy.</p>'
       +'<p>Wir richten sie heute so ein, wie ein Betrieb sie braucht: mit dem richtigen Datenschutz, einem Projekt für jedes große Thema und einem Gedächtnis, das deinen Betrieb kennt, ohne dass du ihn jedes Mal neu erklärst.</p>',
     anim:{id:'tsn3-a04', eb:'Der Rundgang', title:'Ein Fenster, fünf <span class="g">Stellen</span>.',
       sub:'Fünf Stellen in der App entscheiden darüber, wie gut Claude für deinen Betrieb arbeitet. Wir gehen sie einmal der Reihe nach durch.',
@@ -30175,7 +30179,7 @@ var TSISL_TEAM_ONB_V2=[
           ],'Jetzt du')
           +H.note('Bei Free, Pro, Max und Ultra wird mit deinen Gesprächen nur trainiert, wenn dieser Schalter an ist. Ist er aus, werden sie 30 Tage aufbewahrt, ist er an, bis zu fünf Jahre. Team und Enterprise trainieren grundsätzlich nicht, außer du stimmst ausdrücklich zu.','Datenschutz')})
         +H.sec({id:'tsn3-l04-gespraech', title:'Das <span class="g">Gespräch</span>',
-          lead:'Seit Mitte September 2026 gibt es in der App keine Wahl mehr zwischen Chat und Cowork. Kurze Frage und große Aufgabe laufen im selben Gespräch.',
+          lead:'Seit Mitte September 2026 stellt Anthropic die App schrittweise um: keine Wahl mehr zwischen Chat und Cowork, kurze Frage und große Aufgabe laufen im selben Gespräch. Siehst du im Eingabefeld noch beide Begriffe, kommt die Umstellung bei dir noch.',
           body:'<p><strong class="lead">Du gibst Material, nicht nur Fragen.</strong>Zieh ein Foto, ein PDF oder eine Excel-Datei ins Eingabefeld. Claude liest es mit und arbeitet damit, statt zu raten. Eine Speisekarte als PDF ist eine bessere Grundlage als jede Beschreibung aus dem Kopf.</p>'
             +'<p><strong class="lead">Du bekommst Dateien, nicht nur Antworten.</strong>Bitte um das Ergebnis in der Form, in der du es brauchst: als Tabelle, als Word-Dokument, als PDF für den Aushang, als Folien für die Teambesprechung. Claude legt die Datei an, du lädst sie herunter.</p>'
             +'<p><strong class="lead">Große Aufgaben laufen weiter.</strong>Gibst du Claude eine längere Aufgabe, arbeitet es selbständig in mehreren Schritten und meldet sich mit dem Ergebnis. Wie das mit ganzen Ordnern geht, zeige ich dir in Lektion 3.5.</p>'
@@ -30190,7 +30194,7 @@ var TSISL_TEAM_ONB_V2=[
           +'<p style="margin-top:18px"><strong class="lead">Die Anweisung im Projekt.</strong>Jedes Projekt bekommt eine kurze Anweisung, die für alle Gespräche darin gilt, zum Beispiel: „Schreib in unserem Ton, kurz und ohne Fremdwörter, und nenn bei jedem Gericht die Herkunft der Hauptzutat.“ Im kostenlosen Plan hast du bis zu fünf Projekte.</p>'})
         +H.sec({id:'tsn3-l04-gedaechtnis', title:'Das <span class="g">Gedächtnis</span>',
           lead:'Das Gedächtnis ist das, was Claude über dich und deinen Betrieb weiß, über alle Gespräche hinweg.',
-          body:'<p><strong class="lead">Claude merkt sich selbst, was wichtig ist.</strong>Erwähnst du, dass dein Betrieb sechzig Plätze hat und montags geschlossen ist, wird daraus ein Eintrag. Seit Juli 2026 sind das einzelne, sortierte Einträge, die du unter <b>Einstellungen › Gedächtnis</b> ansehen, ändern und löschen kannst. Sie gelten auch, wenn Claude größere Aufgaben in Ordnern erledigt.</p>'
+          body:'<p><strong class="lead">Claude merkt sich selbst, was wichtig ist.</strong>Erwähnst du, dass dein Betrieb sechzig Plätze hat und montags geschlossen ist, wird daraus ein Eintrag. Seit Juli 2026 sind das einzelne, sortierte Einträge, und seit Ende August siehst du sie unter <b>Einstellungen › Gedächtnis</b>, wo du jeden ändern oder löschen kannst. Sie gelten auch, wenn Claude größere Aufgaben in Ordnern erledigt.</p>'
             +'<p><strong class="lead">Du kannst es auch gezielt füttern.</strong>Ein Satz wie „Merk dir, dass wir auf der Karte duzen und keine Fremdwörter benutzen“ reicht. Themen wie Gesundheit oder Weltanschauung bleiben draußen, solange du sensible Themen nicht ausdrücklich einschaltest.</p>'
             +H.note('Ins Gedächtnis gehört dein Betrieb, nicht deine Gäste. Namen, Telefonnummern und Unverträglichkeiten einzelner Gäste haben dort nichts zu suchen.','Die Merkregel')})
         +H.sec({id:'tsn3-l04-konnektoren', title:'<span class="g">Konnektoren</span>: Postfach, Kalender, Drive',
@@ -30202,7 +30206,7 @@ var TSISL_TEAM_ONB_V2=[
     emp:{kind:'Einrichtung', animTitle:'Deine', animGold:'App für den Betrieb',
       steps:['App laden','Training aus','Drei Projekte','Ein Konnektor'],
       intro:'So richtest du die App ein, damit sie vom ersten Tag an zu deinem Betrieb passt:',
-      points:['Arbeite in der <b>Desktop-App</b>. Ordner freigeben und Claude Code öffnen geht nur dort, alles andere gleicht sich mit Browser und Handy ab.',
+      points:['Arbeite in der <b>Desktop-App</b>. Ordner freigeben geht nur dort, und Claude Code öffnest du dort ohne Terminal im Reiter Code.',
         'Stell das <b>Modelltraining</b> aus, bevor du das erste echte Betriebsdokument hochlädst.',
         'Leg <b>drei Projekte</b> an, für Karte, Team und Einkauf, jedes mit einer kurzen Anweisung zu Ton und Regeln.',
         'Verbinde <b>einen Konnektor</b>, am besten dein Postfach. Weitere kommen dazu, wenn du merkst, dass du sie brauchst.']},
