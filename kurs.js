@@ -24548,485 +24548,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   system-architektur-dashboard — Hero + Einleitung "Dein System, komplett."
-   Lektion 1.8 · Modul 1 · Notion-Grundlagen (Wissens-Lektion, Abschluss)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.8');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts18intro-css')) return;
-    var s=document.createElement('style'); s.id='ts18intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts18intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.8" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.8</div>'+
-        '<h1 class="ts-hero__title">Dein System, <span class="ts-gold">komplett</span>.</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts18intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts18intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Ein gutes System braucht eine Ordnung, die mitwächst — die <b>PARA-Methode</b> teilt jede Seite in Projekte, Areas, Resources und Archive, damit du nie wieder überlegen musst, wo etwas hingehört. Darüber legst du ein Dashboard: eine Startseite, die verknüpfte Ansichten deiner Datenbanken zusammenzieht.</p>
-  <p>Die <b>verknüpfte Ansicht</b> aus Lektion 1.6 ist dabei dein Baustein, hier stellt sich nur eine neue Frage: wie viele davon eine Startseite verträgt. Jede verknüpfte Ansicht lädt ihre Datenbank mit, und ab etwa sechs bis acht wird eine Seite spürbar träge.</p>
-  <p>Der zweite Punkt betrifft die Sichtbarkeit. Eine verknüpfte Ansicht ist ein Fenster in dieselbe Datenbank und hat keine eigenen Rechte. Wer die Seite sehen darf, sieht alles, was dahinterliegt, auch die Spalten, die du in dieser Ansicht ausgeblendet hast. Teilst du eine Seite, prüfst du also nicht die Ansicht, sondern die Tabelle.</p>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   system-architektur-dashboard — Erkläranimation "Dashboard-Konvergenz"
-   Eigenständiges Konzept: 5 DB-Chips liegen im Kreis um einen zentralen Dashboard-Hub,
-   Verbindungslinien zeichnen sich per stroke-dashoffset ein (Fan-in), eine Zahl zählt
-   "Module verbunden" von 0 auf 5 hoch. Endzustand=Default.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts18bau{width:min(820px,94vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
-  #ts18bau .bau-head{max-width:680px;margin:0 auto 30px;padding:0 24px}
-  #ts18bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts18bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts18bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts18bau h2 .ts-gold{color:#c7b489}
-  #ts18bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
-  #ts18bau .orbit{position:relative;height:280px;max-width:560px;margin:0 auto}
-  #ts18bau.js .orbit{opacity:0;transform:translateY(20px)}
-  #ts18bau.js.on .orbit{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-  #ts18bau .hub{position:absolute;top:50%;left:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:20px;background:linear-gradient(165deg,rgba(199,180,137,.18),rgba(199,180,137,.04));border:1.5px solid rgba(199,180,137,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;z-index:2;box-shadow:0 20px 46px -18px rgba(0,0,0,.9),0 0 0 7px rgba(199,180,137,.06)}
-  #ts18bau .hub b{font-family:"Lineal Web","Lineal TS",sans-serif;font-size:22px;color:#efe6d2}
-  #ts18bau .hub span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5)}
-  #ts18bau .node{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.55);text-align:center;padding:4px;z-index:2;transition:border-color .5s,color .5s,box-shadow .5s}
-  #ts18bau .node.lit{border-color:rgba(199,180,137,.5);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.16),0 0 24px rgba(199,180,137,.22)}
-  #ts18bau svg.orbit-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:1}
-  #ts18bau svg.orbit-svg path{fill:none;stroke:rgba(199,180,137,.45);stroke-width:1.4;stroke-dasharray:140;stroke-dashoffset:140;transition:stroke-dashoffset .8s cubic-bezier(.16,1,.3,1)}
-  #ts18bau svg.orbit-svg path.on{stroke-dashoffset:0}
-  #ts18bau .bau-foot{display:flex;justify-content:center;margin-top:20px}
-  #ts18bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts18bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  @media(max-width:600px){ #ts18bau .orbit{height:340px} }
-  `;
-
-  function injectCSS(){
-    if(document.getElementById('ts18bau-css')) return;
-    var s=document.createElement('style'); s.id='ts18bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  var NODES=['Projekte','Aufgaben','Kalender','Content','Finances'];
-  var POS=[ {x:'50%',y:'6%'}, {x:'90%',y:'34%'}, {x:'74%',y:'86%'}, {x:'26%',y:'86%'}, {x:'10%',y:'34%'} ];
-
-  function html(){
-    var nodes=NODES.map(function(n,i){ return '<div class="node" style="left:'+POS[i].x+';top:'+POS[i].y+'">'+n+'</div>'; }).join('');
-    var paths='';
-    for(var i=0;i<5;i++){ paths+='<path class="p'+i+'" d="M0 0"></path>'; }
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Fünf Module, ein Dashboard</div>'+
-      '<h2>Alles läuft an <span class="ts-gold">einem Ort</span> zusammen</h2>'+
-      '<p class="bau-sub">Jede Datenbank bleibt eigenständig — verknüpft zeigt sie sich trotzdem am Dashboard.</p>'+
-      '</div>'+
-      '<div class="orbit"><svg class="orbit-svg">'+paths+'</svg>'+nodes+
-      '<div class="hub"><b id="ts18hubnum">0</b><span>Module</span></div></div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts18bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function layout(root){
-    var orbit=root.querySelector('.orbit');
-    var hub=root.querySelector('.hub');
-    var hr=hub.getBoundingClientRect(), or_=orbit.getBoundingClientRect();
-    var hcx=hr.left-or_.left+hr.width/2, hcy=hr.top-or_.top+hr.height/2;
-    root.querySelectorAll('.node').forEach(function(n,i){
-      var nr=n.getBoundingClientRect();
-      var ncx=nr.left-or_.left+nr.width/2, ncy=nr.top-or_.top+nr.height/2;
-      var path=root.querySelector('.p'+i);
-      path.setAttribute('d','M '+ncx+' '+ncy+' L '+hcx+' '+hcy);
-      var len=path.getTotalLength?path.getTotalLength():140;
-      path.style.strokeDasharray=len; path.style.strokeDashoffset=reduced?0:len;
-    });
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    var nodes=root.querySelectorAll('.node'), paths=root.querySelectorAll('svg.orbit-svg path');
-    nodes.forEach(function(n){ n.classList.remove('lit'); });
-    paths.forEach(function(p){ p.classList.remove('on'); });
-    var numEl=root.querySelector('#ts18hubnum'); numEl.textContent='0';
-    if(reduced){ nodes.forEach(function(n){n.classList.add('lit');}); paths.forEach(function(p){p.classList.add('on');}); numEl.textContent='5'; return; }
-    nodes.forEach(function(n,i){
-      setTimeout(function(){
-        n.classList.add('lit');
-        paths[i].classList.add('on');
-        numEl.textContent=String(i+1);
-      }, 300+i*450);
-    });
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts18bau')) return;
-    var anchor=document.getElementById('ts18intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts18bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    layout(root);
-    root.querySelector('#ts18bauReplay').addEventListener('click', function(){ layout(root); play(root); });
-    window.addEventListener('resize', function(){ layout(root); });
-    if(reduced){ root.classList.add('on'); play(root); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   system-architektur-dashboard — Ergebnis-Blick "Ein System, keine Baustelle mehr." (Text links / PC rechts)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  #ts18res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts18res .r-text{flex:1 1 0}
-  #ts18res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
-  #ts18res h3 .ts-accent{color:#c7b489}
-  #ts18res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
-  #ts18res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts18res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
-    transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts18res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
-  #ts18res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
-  #ts18res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #ts18res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
-  #ts18res .r-cap b{color:#c7b489;font-weight:600}
-  #ts18res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts18res{flex-direction:column} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts18res-css')) return;
-    var s=document.createElement('style'); s.id='ts18res-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="r-text"><h3>Ein System, <span class="ts-accent">keine Baustelle mehr.</span></h3>'+
-      '<p>Das ist das PM Vol.1 System, wie ich es selbst nutze: ein Hero-Bereich mit Fortschrittsbalken, Uhr und Wetter, darunter Tabs zum Anlegen neuer Projekte und Aufgaben, der Kalender, Timeframes für die Zwei-Wochen-Planung, Daily Tasks und Content nebeneinander, Milestones mit Countdown, ganz unten Gewicht-Tracker und Ausgaben.</p>'+
-      '<p>Jeder Baustein aus diesem Modul — Blöcke, Layout, Datenbanken, Relationen, Formeln, Ansichten, Buttons — steckt hier drin, nur live und in Benutzung. Genau das ist das Ziel: kein Notion-Wissen im Abstrakten, sondern ein System, das du morgen früh öffnest und einfach benutzt.</p></div>'+
-      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
-      '<div class="r-cap">PM Vol. 1 <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts18res')) return;
-    var anchor=document.getElementById('ts18bau'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts18res'; root.innerHTML=html();
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   system-architektur-dashboard — Empfehlungs-Kachel "Empfehlung zur Nutzung" (Verhalten 1:1, Fixes bereits enthalten)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['PARA als Grundordnung setzen','Dashboard erst am Ende bauen','Linked Views statt Datenkopien','Rechte vor dem Teilen prüfen'];
-  var TEXTS=[
-    'Leg die vier PARA-Bereiche an, bevor du die erste Datenbank baust — Struktur zuerst, Inhalt danach.',
-    'Bau das Dashboard, nachdem die Datenbanken stehen, nicht davor — sonst verknüpfst du auf etwas, das sich noch ändert.',
-    'Zeig Daten am Dashboard immer als verknüpfte Ansicht. Eine zweite Tabelle mit denselben Werten läuft früher oder später auseinander.',
-    'Prüfe vor dem Teilen, welche Datenbanken an der Seite hängen. Freigegeben wird nie nur die Ansicht, sondern immer die Tabelle dahinter.'
-  ];
-
-  var CSS=`
-  #ts18emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts18emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
-  #ts18emp.js.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
-  #ts18emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts18emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts18emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts18emp:hover::before{opacity:1}
-  #ts18emp.beat{animation:ts18empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts18empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts18emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts18emp .db-hd .g{color:#c7b489}
-  #ts18emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts18emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts18emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts18emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts18emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts18emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts18emp .emp-right{position:relative;z-index:1}
-  #ts18emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts18emp .emph .eg{color:#c7b489}
-  #ts18emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts18emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts18emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts18emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts18emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts18emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts18emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts18emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts18emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts18emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts18emp{grid-template-columns:1fr} #ts18emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts18emp-css')) return;
-    var s=document.createElement('style'); s.id='ts18emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Dein <span class="g">System-Aufbau</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
-      '<p class="p">Damit dein fertiges System tragfähig bleibt, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts18emp')) return;
-    var anchor=document.getElementById('ts18res'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts18emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   system-architektur-dashboard — Seitenabschluss (Learnings + Weiter-Button, Modul-1-Abschluss)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du strukturierst mit der PARA-Methode statt planlos zu wachsen.',
-    'Du baust ein Dashboard aus verknüpften Ansichten, nicht aus Kopien.',
-    'Du weißt, dass eine verknüpfte Ansicht keine eigenen Rechte hat.',
-    'Du hast alle Bausteine, um jedes System selbst zu bauen.'
-  ];
-
-  var CSS=`
-  #ts18l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts18l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts18l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts18l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts18l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts18l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts18lFloat 7s ease-in-out infinite}
-  #ts18l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts18l .tsl-orb:nth-child(1){animation-delay:0s} #ts18l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts18l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts18l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts18l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts18l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts18l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts18l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts18l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts18l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts18l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts18l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts18lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts18l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts18l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts18l-css')) return;
-    var s=document.createElement('style'); s.id='ts18l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts18l')) return;
-    var anchor=document.getElementById('ts18emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts18l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/mehrwert-zielbild">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    modul-1-notion-grundlagen — Modul-1-Übersichtsseite (Hero + Intro + 8-Lektionen-Kachel-Register)
    Slug-Erwartung: Notion-Seite "Modul 1 · Notion-Grundlagen" slugifiziert. Bild-Assets als Platzhalter,
    Muster analog Modul-2-Übersicht (Hero-IIFE ~Z. 3037, Kachel-Register #tslmod ~Z. 11061 ff.), aber
@@ -28127,7 +27648,19 @@ var TSISL_TEAM_ONB_V2=[
     }
     if(def.learn) nextGuard(def.learn);
   }
-  function page(def){ PAGES.push(def); mount(); }
+  /* Weiter-Ziel, das es evtl. noch nicht gibt (neue Seite vor dem super.so-Re-Sync):
+     erst pruefen, ob die Adresse antwortet, sonst bleibt das Ausweichziel stehen. */
+  function tryNext(def){
+    var L=def.learn; if(!L||!L.nextTry||L.__tried) return; L.__tried=true;
+    var c=L.nextTry.slice();
+    (function one(){
+      var u=c.shift(); if(!u) return;
+      try{ fetch(u,{method:'HEAD',cache:'no-store'}).then(function(r){
+        if(r.ok){ L.next=u; var a=document.querySelector('#tsn1-learn #ts-next'); if(a) a.setAttribute('href',u); } else one();
+      },function(){ one(); }); }catch(e){}
+    })();
+  }
+  function page(def){ PAGES.push(def); mount(); if(def.re.test(location.pathname)) tryNext(def); }
 
   window.__tsn1={ R:R, IMG:IMG, SANS:SANS, DISP:DISP, REDUCED:REDUCED, reveal:reveal, addCSS:addCSS, esc:esc, phHero:phHero, page:page };
 
@@ -28907,7 +28440,7 @@ var TSISL_TEAM_ONB_V2=[
           points:['Der Titel sagt eindeutig, welcher Artikel gemeint ist, mit Größe. „Burrata 125 g", nicht „Burrata".','Leg erst den Typ fest, dann den Namen. Eine Spalte nachträglich von Text auf Zahl umzustellen kostet dich jede einzelne Zeile.','Fünf bis acht Optionen pro Auswahlfeld reichen fast immer. Jede weitere kostet Übersicht.','Eine Zahlenspalte bekommt eine feste Einheit, und die steht im Spaltennamen oder in einer eigenen Spalte.']}}
       ],
       learn:{items:['Du unterscheidest <b>Seite</b> und <b>Datenbank</b> und weißt, wann was passt.','Du erkennst den <b>Typ</b> jeder Spalte am Symbol im Spaltenkopf.','Du weißt, warum Preise in eine <b>Zahl</b> und Artikelnummern in einen <b>Text</b> gehören.','Du hast in der Probeküche deine erste <b>eigene Datenbank</b> gebaut.'],
-        next:'/lektionen/l14-relationen-rollups'}
+        next:'/lektionen/l14-relationen-rollups', nextTry:['/lektionen/daten-eintragen-und-einlesen','/daten-eintragen-und-einlesen']}
     });
   }
   go();
@@ -29369,7 +28902,7 @@ var TSISL_TEAM_ONB_V2=[
         ['Olivenöl 5 l','inventar/olivenoel.jpg','Feinkost Lorenz','Trockenlager',0],
         ['Burrata 125 g','zutaten/mozzarella.webp','Frischdienst Nord','Kühlhaus',1],
         ['Tomaten Ochsenherz','zutaten/tomate.webp','Gemüsehof Brandt','Kühlhaus',1],
-        ['Balsamico 1 l','inventar/balsamico.jpg','Feinkost Lorenz','Trockenlager',0],
+        ['Honig 1 kg','inventar/honig.jpg','Feinkost Lorenz','Trockenlager',0],
         ['Parmigiano 24 M.','zutaten/parmesan.webp','Frischdienst Nord','Kühlhaus',1],
         ['Basilikum Topf','zutaten/basilikum.webp','Gemüsehof Brandt','Kühlhaus',0],
         ['Sardellen','inventar/sardellen.jpg','Feinkost Lorenz','Trockenlager',1],
@@ -29658,7 +29191,171 @@ var TSISL_TEAM_ONB_V2=[
           points:['Mach den Ablauf dreimal von Hand und schreib die Handgriffe mit. Erst dann baust du den Button.','Jeder Button, der viele Zeilen ändert, bekommt als erste Aktion eine Bestätigung.','Beschrifte Buttons mit dem, was passiert: <b>Neues Produkt</b>, nicht „Los".','Teste neue Buttons und Automationen eine Woche in der Probeküche, bevor sie in die Vorlage kommen.']}}
       ],
       learn:{items:['Du unterscheidest, wann ein <b>Button</b> und wann eine <b>Automation</b> passt.','Du baust Buttons mit mehreren <b>Aktionen</b> und vorausgefüllten Spalten.','Du richtest eine Automation mit dem passenden <b>Auslöser</b> ein, zum Beispiel für Allergene.','Du weißt, welcher <b>Plan</b> was erlaubt und wer welchen Button klicken darf.'],
-        next:'/lektionen/l18-system-architektur-dashboard-design'}
+        next:'/lektionen/l18-system-architektur-dashboard-design', nextTry:['/lektionen/rechte-teamspaces-und-sicherheit','/rechte-teamspaces-und-sicherheit']}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.10 "Die Zahl stimmt nicht?"  (Lesen, anpassen, reparieren)
+   Adresse: /lektionen/l18-system-architektur-dashboard-design (Alt-Slug toleriert; Modul-1-Abschluss)
+   Erklaeranimation "Die Spur zurueck" — EIGENES Konzept:
+   Vier Stationen einer Kalkulation auf einer Linie (Inventur, Zutat, Gericht EUR,
+   Gericht %). Rechts steht eine unmoegliche Zahl. Eine Lupe wandert Station fuer
+   Station zurueck, findet die Quelle (Komma verrutscht), die Zahl wird an der Quelle
+   korrigiert, und ein gruener Impuls laeuft die Kette nach vorn: alles stimmt wieder.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L10) return; window.__tsn1L10=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a10-css',`
+      #tsn1-a10 .line{position:relative;width:min(1000px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:34px;padding:34px 0 10px}
+      #tsn1-a10 .rule{position:absolute;left:12.5%;right:12.5%;top:96px;height:1px;background:rgba(199,180,137,.3);z-index:0}
+      #tsn1-a10 .imp{position:absolute;top:92px;left:12.5%;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#7fd3a3;box-shadow:0 0 14px rgba(127,211,163,.9);opacity:0;z-index:0}
+      #tsn1-a10 .sn{position:relative;z-index:1;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;padding:14px 15px 15px;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .sn .mi{font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(199,180,137,.85);margin-bottom:10px}
+      #tsn1-a10 .sn .im{height:64px;border-radius:9px;overflow:hidden;margin-bottom:11px;background:#0b0d14}
+      #tsn1-a10 .sn .im img{width:100%;height:100%;object-fit:cover;display:block}
+      #tsn1-a10 .sn .k{font:500 11.5px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.55)}
+      #tsn1-a10 .sn .v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(19px,2vw,24px);color:#fff;margin-top:3px;font-variant-numeric:tabular-nums;transition:color .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .sn .f{font:500 11px/1.35 -apple-system,sans-serif;color:rgba(255,255,255,.45);margin-top:6px;min-height:30px}
+      #tsn1-a10 .sn .ok{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .sn.chk .ok{border-color:rgba(255,255,255,.55)}
+      #tsn1-a10 .sn.bad{border-color:rgba(224,87,79,.7);box-shadow:0 0 0 1px rgba(224,87,79,.25),0 0 30px rgba(224,87,79,.16)}
+      #tsn1-a10 .sn.bad .v{color:#f2b8b3}
+      #tsn1-a10 .sn.good{border-color:rgba(127,211,163,.55)}
+      #tsn1-a10 .sn.good .v{color:#a9dcc0}
+      #tsn1-a10 .sn.good .ok{background:#46af73;border-color:#46af73}
+      #tsn1-a10 .lupe{position:absolute;top:8px;left:0;width:46px;height:46px;border-radius:50%;border:2px solid #c7b489;box-shadow:0 0 0 6px rgba(199,180,137,.08),0 10px 24px rgba(0,0,0,.6);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 60%);z-index:3;opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .lupe::after{content:"";position:absolute;right:-12px;bottom:-9px;width:16px;height:3px;border-radius:2px;background:#c7b489;transform:rotate(40deg)}
+      #tsn1-a10 .cap{width:min(1000px,100%);margin:18px auto 0;min-height:48px;text-align:center;font:500 15px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a10 .cap b{color:#c7b489;font-weight:600}
+      #tsn1-a10 .note{width:min(1000px,100%);margin:0 auto;text-align:right;font-size:10.5px;color:rgba(255,255,255,.4)}
+      #tsn1-a10 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(1000px,100%);margin:18px auto 0}
+      #tsn1-a10 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a10 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a10 .st.on b{color:#c7b489}
+      #tsn1-a10 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a10 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a10 .rp button:hover{background:#c7b489;color:#05060b}
+      @media(max-width:820px){ #tsn1-a10 .line{grid-template-columns:1fr 1fr;gap:16px} #tsn1-a10 .rule,#tsn1-a10 .imp{display:none} #tsn1-a10 .rail{grid-template-columns:1fr} }
+      `);
+      /* [Bereich, Bild, Kennzahl, falsch, richtig, Fussnote] — Beispielwerte, nachgerechnet:
+         Burrata 18,90 EUR / 1,5 kg = 12,60 EUR/kg; 125 g = 1,58 EUR; + 0,97 EUR Tomaten/Basilikum/Oel = 2,55 EUR;
+         2,55 / 12,61 netto = 20,2 %. Mit verrutschtem Komma 126,00 EUR/kg: 15,75 + 0,97 = 16,72 EUR = 132,6 %. */
+      var ST=[
+        ['DB 0 : Inventurliste','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis / Kg','126,00 €','12,60 €','Eingetragen von Hand'],
+        ['DB IV : Zutaten','zutaten/mozzarella.webp','Burrata 125 g · Preis / Portion','15,75 €','1,58 €','Rollup aus der Inventur, mal Portion'],
+        ['DB XI : Gerichte &amp; Getränke','gerichte/burrata.webp','Wareneinsatz ( Eur )','16,72 €','2,55 €','Summe der Zutaten'],
+        ['DB XI : Gerichte &amp; Getränke','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
+      ];
+      host.id='tsn1-a10';
+      host.innerHTML=R.head('Fehler suchen','Folge der Zahl bis zu ihrer <span class="g">Quelle</span>.','Ein Gericht mit über hundert Prozent Wareneinsatz kann nicht stimmen. Statt die Formel anzufassen, gehst du die Kette rückwärts, bis du die Stelle findest, an der die Zahl entsteht.')+
+        '<div class="line"><div class="rule"></div><span class="imp"></span><span class="lupe"></span>'+ST.map(function(x,i){
+          return '<div class="sn" data-i="'+i+'"><span class="ok"></span><div class="mi">'+x[0]+'</div><div class="im"><img alt="" decoding="async" src="'+IMG+x[1]+'"></div><div class="k">'+x[2]+'</div><div class="v">'+x[4]+'</div><div class="f">'+x[5]+'</div></div>';
+        }).join('')+'</div>'+
+        '<div class="cap"></div><div class="note">Beispielwerte</div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Die falsche Zahl: Wo steht sie, und aus welchen Spalten rechnet sie?</button><button class="st" data-s="1"><b>02</b>Station für Station zurück, bis ein Wert von Hand eingetragen ist.</button><button class="st" data-s="2"><b>03</b>An der Quelle korrigieren, und die ganze Kette stimmt wieder.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var line=host.querySelector('.line'), sns=[].slice.call(host.querySelectorAll('.sn')), lupe=host.querySelector('.lupe'), imp=host.querySelector('.imp'), cap=host.querySelector('.cap'), sts=host.querySelectorAll('.st');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a10Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function val(state){ sns.forEach(function(sn,i){ sn.querySelector('.v').textContent=ST[i][state==='bad'?3:4]; }); }
+      function lupeTo(i){ var L=line.getBoundingClientRect(), r=sns[i].getBoundingClientRect(); lupe.style.opacity='1'; lupe.style.transform='translate('+(r.left-L.left+r.width/2-23)+'px,'+(r.top-L.top+62)+'px)'; }
+      function cls(sn,c){ sn.classList.remove('bad','good','chk'); if(c) sn.classList.add(c); }
+      function reset(){ clear(); val('bad'); sns.forEach(function(sn){ cls(sn,''); }); lupe.style.opacity='0'; imp.style.transition='none'; imp.style.opacity='0'; imp.style.transform='translateX(0)'; cap.innerHTML=''; step(-1); }
+      function forward(){
+        var L=line.getBoundingClientRect(), a=sns[0].getBoundingClientRect(), b=sns[3].getBoundingClientRect(), dist=(b.left+b.width/2)-(a.left+a.width/2);
+        imp.style.transition='none'; imp.style.opacity='1'; imp.style.transform='translateX(0)'; void imp.offsetWidth;
+        imp.style.transition='transform 1.6s cubic-bezier(.22,1,.36,1),opacity .4s cubic-bezier(.16,1,.3,1) 1.5s'; imp.style.transform='translateX('+dist+'px)'; imp.style.opacity='0';
+        sns.forEach(function(sn,i){ later(function(){ sn.querySelector('.v').textContent=ST[i][4]; cls(sn,'good'); },120+i*480); });
+      }
+      function play(){
+        reset();
+        later(function(){ step(0); cls(sns[3],'bad'); lupeTo(3); cap.innerHTML='<b>132,6 % Wareneinsatz.</b> Die Spalte ist eine Formel: Wareneinsatz geteilt durch Netto-Preis.'; },700);
+        later(function(){ step(1); cls(sns[3],'chk'); cls(sns[2],'bad'); lupeTo(2); cap.innerHTML='Der Wareneinsatz in Euro ist schon zu hoch. Er ist die <b>Summe der Zutaten</b>, also weiter zurück.'; },2900);
+        later(function(){ cls(sns[2],'chk'); cls(sns[1],'bad'); lupeTo(1); cap.innerHTML='Die Burrata-Portion kostet angeblich 15,75 €. Der Preis kommt per <b>Rollup aus der Inventur</b>.'; },5000);
+        later(function(){ cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>126,00 €</b> pro Kilo, das Komma ist eine Stelle verrutscht. Richtig wären 12,60 €.'; },7100);
+        later(function(){ step(2); lupe.style.opacity='0'; cap.innerHTML='Korrigiert an <b>einer</b> Stelle. Zutat, Gericht und Prozent rechnen sofort neu: 20,2 %.'; forward(); },9500);
+      }
+      function endState(){ clear(); val('good'); sns.forEach(function(sn){ cls(sn,'good'); }); cap.innerHTML='Korrigiert an <b>einer</b> Stelle. Zutat, Gericht und Prozent rechnen sofort neu: 20,2 %.'; step(2); }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
+        var i=+s.getAttribute('data-s'); reset(); step(i);
+        if(i===0){ cls(sns[3],'bad'); lupeTo(3); cap.innerHTML='<b>132,6 % Wareneinsatz.</b> Die Spalte ist eine Formel: Wareneinsatz geteilt durch Netto-Preis.'; }
+        if(i===1){ cls(sns[3],'chk'); cls(sns[2],'chk'); cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>126,00 €</b> pro Kilo, das Komma ist eine Stelle verrutscht.'; }
+        if(i===2){ endState(); forward(); }
+      }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      endState();
+      if(N.REDUCED) return;
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l10',
+      re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/,
+      hero:{label:'L 1.10', eyebrow:'L 1.10', title:'Die Zahl <span class="ts-gold">stimmt nicht</span>?', alt:'Die Backoffice-Vorlage lesen, anpassen und reparieren'},
+      intro:
+        '<p>Irgendwann zeigt dir die Vorlage eine Zahl, die nicht stimmen kann. Ein Gericht mit über hundert Prozent Wareneinsatz, eine Zutat für null Euro, ein Lieferant ohne Telefonnummer. Das ist kein Grund, an der Vorlage zu zweifeln. Fast immer steckt ein einzelner Eintrag dahinter, der an der falschen Stelle oder in der falschen Form steht.</p>'+
+        '<p>In dieser letzten Lektion bringen wir alles aus diesem Modul zusammen. Du verfolgst eine Zahl zurück bis zu ihrer Quelle, passt die Vorlage an, ohne die Kette zu brechen, und weißt, wie du einen alten Stand zurückholst.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Die Spur zurück', title:'In fünf Schritten zur <span class="g">Quelle</span>', lead:'Diese Reihenfolge funktioniert bei jeder falschen Zahl in der Vorlage, egal wie lang die Kette dahinter ist.', blocks:[
+          R.jetzt([
+            'Öffne die Zeile mit der falschen Zahl und schau auf den Typ der Spalte. Ist sie von Hand eingetragen, hast du die Quelle schon gefunden.',
+            'Ist sie eine <b>Formel</b>, öffne den Formeleditor und lies, aus welchen Spalten sie rechnet. Schau dir deren Werte in derselben Zeile an.',
+            'Ist eine dieser Spalten ein <b>Rollup</b>, prüf die Verknüpfung dahinter: Ist der richtige Eintrag verknüpft, und nur einer?',
+            'Folge der Verknüpfung in die andere Datenbank und wiederhole die Schritte dort, bis du bei einem Wert landest, den jemand eingetragen hat.',
+            'Korrigier diesen einen Wert. Formeln und Rollups fasst du nicht an, sie rechnen von selbst richtig, sobald die Quelle stimmt.'
+          ],'So gehst du vor'),
+          R.merk('Repariert wird an der Quelle, nie an der Formel.')
+        ]}),
+        R.sec({eb:'Die häufigsten Fehler', title:'Was in der Vorlage am häufigsten <span class="g">schiefgeht</span>', wide:true, lead:'Diese Fälle tauchen in fast jedem Betrieb auf, der mit der Vorlage startet. Alle lassen sich in wenigen Minuten beheben, wenn man sie kennt.', blocks:[
+          R.fehler([
+            ['Eine Zutat kostet 0 €','Die Verknüpfung zum Inventarprodukt ist leer','In DB IV : Zutaten das Inventarprodukt auswählen'],
+            ['Ein Preis ist zehnmal zu hoch oder zu niedrig','Komma verrutscht oder Preis je Gebinde statt je Kilo eingetragen','Den Wert in der Inventurliste korrigieren und mit dem Lieferschein vergleichen'],
+            ['Ein Rollup zeigt zwei Preise','Zwei Inventarprodukte sind mit derselben Zutat verknüpft','Das falsche entfernen, die Verknüpfung auf 1 Seite begrenzen'],
+            ['Ein Artikel steht doppelt','Er wurde neu angelegt, statt den alten zu suchen','Vor jedem Neuanlegen die Suche benutzen. Den Doppelten aus allen Verknüpfungen nehmen, dann löschen'],
+            ['Mehrere Formeln zeigen Fehler','Eine Spalte wurde gelöscht, aus der sie gelesen haben','Seitenverlauf öffnen und den Stand davor zurückholen'],
+            ['Ein Gericht fehlt in der Übersicht','In der Ansicht ist ein Filter aktiv','Filterleiste prüfen oder die Ansicht ohne Filter öffnen'],
+            ['Nach dem Duplizieren fehlen Gegenspalten','Beim Duplizieren einer einzelnen Datenbank werden wechselseitige Verknüpfungen einseitig','Nie einzelne Datenbanken der Vorlage duplizieren. Neues zuerst in der Probeküche bauen']
+          ])
+        ]}),
+        R.sec({eb:'Anpassen', title:'Die Vorlage verändern, ohne sie zu <span class="g">brechen</span>', lead:'Die Vorlage gehört dir, und du sollst sie an deinen Betrieb anpassen. Diese Regeln halten die Kette dabei heil.', blocks:[
+          R.cards([
+            {mi:'Ergänzen', nm:'Neue Spalten sind sicher', img:IMG+'zutaten/thymian.webp', tx:'<p>Eine neue Spalte, zum Beispiel <b>Herkunft</b> bei den Zutaten, ändert an keiner Rechnung etwas. Ergänzen kannst du jederzeit.</p>'},
+            {mi:'Vorsicht', nm:'Bestehende Spalten stehen lassen', img:IMG+'gemeinkosten/wartung-werkzeug.webp', tx:'<p>Spalten, aus denen Formeln oder Rollups lesen, löschst du nicht und stellst ihren Typ nicht um. Brauchst du sie nicht, blendest du sie in der Ansicht aus.</p>'},
+            {mi:'Erst üben', nm:'Neues in der Probeküche', img:IMG+'gerichte/kuerbis-veloute.webp', tx:'<p>Eine neue Formel oder einen neuen Button baust du zuerst in der Probeküche. Erst wenn er dort eine Woche lang stimmt, kommt er in die Vorlage.</p>'}
+          ],3),
+          R.txt('<p><strong>Der Seitenverlauf ist deine Versicherung.</strong> Über die drei Punkte oben rechts auf einer Seite öffnest du ihren Verlauf und holst einen früheren Stand zurück. Im Free-Plan reicht er sieben Tage zurück, bei Plus dreißig, bei Business neunzig. Ein Export als CSV sichert deine Zahlen, aber nicht die Verknüpfungen dazwischen. Er ersetzt den Verlauf deshalb nicht.</p>')
+        ]}),
+        R.sec({eb:'Mit Notion AI', title:'Lass die KI die <span class="g">Lücken</span> finden', lead:'Wenn du einen Plan mit Notion AI hast, kann der Agent deine Datenbanken lesen und dir sagen, wo etwas fehlt. Prüfen und korrigieren musst du selbst.', blocks:[
+          R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventarprodukt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
+          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventar Produkt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
+        ]}),
+        R.sec({eb:'Geschafft', title:'Was du jetzt <span class="g">kannst</span>', lead:'Mit diesem Handwerk gehst du in Modul 2. Dort lernst du die Vorlage Datenbank für Datenbank kennen und trägst deine eigenen Zahlen ein.', blocks:[
+          R.tab(['Du kannst','Gelernt in'],[
+            ['Dich in der Vorlage zurechtfinden und Seiten lesbar gestalten','1.1 und 1.2'],
+            ['Jede Spalte lesen und die Vorlage mit deinen Daten befüllen','1.3 und 1.4'],
+            ['Verknüpfungen, Rollups und Formeln nachvollziehen und anpassen','1.5 und 1.6'],
+            ['Ansichten, Vorlagen, Buttons und Automationen einrichten','1.7 und 1.8'],
+            ['Festlegen, wer was sieht, und Fehler bis zur Quelle verfolgen','1.9 und 1.10']
+          ])
+        ]}),
+        {emp:{kind:'Nutzung', animTitle:'Fünf Minuten', animGold:'pro Woche', steps:['Kalkulation sortieren','Ausreißer verfolgen','Ohne-Preis-Ansicht','Verlauf kennen'],
+          intro:'Eine Vorlage bleibt verlässlich, wenn du einmal pro Woche kurz hineinschaust, bevor sich ein Fehler durch die Monatszahlen zieht.',
+          points:['Sortier deine Gerichte nach Wareneinsatz in Prozent und schau dir die drei obersten und die drei untersten an.','Alles, was dir unrealistisch vorkommt, verfolgst du mit den fünf Schritten bis zur Quelle.','Behalt die Ansicht <b>Ohne Preis</b> im Blick. Sie muss leer sein.','Wisse, wie weit dein Seitenverlauf zurückreicht, und warte mit dem Aufräumen nicht länger als das.']}}
+      ],
+      learn:{items:['Du verfolgst eine falsche Zahl über Formeln und Rollups bis zu ihrer <b>Quelle</b>.','Du kennst die häufigsten <b>Fehler</b> der Vorlage und weißt, wie du sie behebst.','Du <b>ergänzt</b> die Vorlage, ohne bestehende Spalten zu brechen.','Du holst über den <b>Seitenverlauf</b> einen früheren Stand zurück.'],
+        next:'/mehrwert-zielbild', label:'Weiter zu Modul 2'}
     });
   }
   go();
