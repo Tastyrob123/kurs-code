@@ -699,7 +699,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB IV — Zutaten" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.4</div>'+
         '<h1 class="ts-hero__title">DB IV : <span class="ts-gold">Zutaten</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -734,7 +734,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB V — Rezepturen" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.4</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.5</div>'+
         '<h1 class="ts-hero__title">DB V : <span class="ts-gold">Rezepturen</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -2065,7 +2065,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB XI — Gerichte & Getränke" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 2.7</div>'+
+        '<div class="ts-hero__eyebrow">L 2.8</div>'+
         '<h1 class="ts-hero__title">DB XI : <span class="ts-gold">Gerichte &amp; Getränke</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -5284,7 +5284,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB 0 — Inventurliste" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.1</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.2</div>'+
         '<h1 class="ts-hero__title">DB 0 : <span class="ts-gold">Inventurliste</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -5316,7 +5316,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB VI–VII — Gemeinkosten & Löhne" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.5</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.6</div>'+
         '<h1 class="ts-hero__title">DB VI – VIII :<br><span class="ts-gold">GK und Löhne</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -5348,7 +5348,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB IX–X — Allergene & Packaging" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.6</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.7</div>'+
         '<h1 class="ts-hero__title">DB IX – X :<br><span class="ts-gold">Allergene &amp; Packaging</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -5914,7 +5914,7 @@ window.__tsMO = function(cb){
 
   function headSection(){
     var s=document.createElement('section'); s.id='tspk';
-    s.innerHTML='<div class="pk-head"><p class="pk-eyebrow">Der zweite Baustein · Lektion 2.6</p><h2 class="pk-h">DB X : <span class="g">Packaging</span></h2></div>'+
+    s.innerHTML='<div class="pk-head"><p class="pk-eyebrow">Der zweite Baustein · Lektion 2.7</p><h2 class="pk-h">DB X : <span class="g">Packaging</span></h2></div>'+
       '<div class="pk-lead"><p>Das Packaging lebt zunächst direkt in der <span class="hl">Inventurliste</span>. Anders als bei den Inventarprodukten, die wir zu Zutaten weiterverarbeiten, könnten wir mit dem Packaging theoretisch direkt weiterarbeiten. Praktisch sieht die Realität anders aus: Wir wollen nicht in jedem Gericht automatisch das Packaging inkludiert haben, weil wir einen Teil des Umsatzes auch <span class="hl">In-House</span> machen. Auf der anderen Seite wollen wir uns aber auch nicht jedes Mal daran erinnern müssen, welches Packaging bei welchem Produkt verwendet wird. Deshalb bauen wir die <span class="gld">DB Packaging</span>.</p></div>';
     return s;
   }
@@ -7369,7 +7369,7 @@ window.__tsMO = function(cb){
       '<img class="ts-hero__img" alt="DB I - III — Lieferanten" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.2.1</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
         '<h1 class="ts-hero__title">DB I - III : <span class="ts-gold">Lieferanten</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -7556,7 +7556,7 @@ window.__tsMO = function(cb){
     var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.1 – DB 0: Inventurliste" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.2 – DB 0: Inventurliste" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -7644,7 +7644,7 @@ window.__tsMO = function(cb){
     if(!src) return;
     nv.classList.add('tsmac-host');
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.4 – DB V: Rezepturen" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.5 – DB V: Rezepturen" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -8376,9 +8376,9 @@ window.__tsMO = function(cb){
   `;
   var LINKICON='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
   var CARDS=[
-    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.2.1','https://tastyrob123.github.io/kurs-code/assets/wl5y7h.webp'],
-    ['02','Zutaten','Zieht ihre Preise später direkt aus deiner Inventurliste.','https://sore-donut-083.notion.site/DB-Zutaten-388b95465534827481c0011c243f90de?source=copy_link','Lektion 2.2.2','https://tastyrob123.github.io/kurs-code/assets/cvv9ee.jpg'],
-    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.2.3','https://tastyrob123.github.io/kurs-code/assets/bwgtim.webp']
+    ['01','Lieferpartner','Deine Lieferanten & Ansprechpartner — die Quelle jeder Einkaufszeile.','https://sore-donut-083.notion.site/DB-Lieferpartner-2f5b9546553483e2afbc816dd470da0a?source=copy_link','Lektion 2.3','https://tastyrob123.github.io/kurs-code/assets/wl5y7h.webp'],
+    ['02','Zutaten','Zieht ihre Preise später direkt aus deiner Inventurliste.','https://sore-donut-083.notion.site/DB-Zutaten-388b95465534827481c0011c243f90de?source=copy_link','Lektion 2.4','https://tastyrob123.github.io/kurs-code/assets/cvv9ee.jpg'],
+    ['03','Packaging','Auch Verpackung wird Teil der Kalkulation — bis auf den Cent.','https://sore-donut-083.notion.site/Packaging-cfdb95465534835e9e5f8153ce960d12?source=copy_link','Lektion 2.7','https://tastyrob123.github.io/kurs-code/assets/bwgtim.webp']
   ];
   function injectCSS(){ if(document.getElementById('tslink-css'))return; var s=document.createElement('style'); s.id='tslink-css'; s.textContent=CSS; document.head.appendChild(s); }
   function build(){
@@ -11713,7 +11713,7 @@ var TSISL_TEAM_ONB_V2=[
     var src=raw.getAttribute('data-tssrc')||raw.currentSrc||raw.getAttribute('src')||(raw.querySelector('source')&&raw.querySelector('source').getAttribute('src'));
     if(!src) return;
     var poster=document.createElement('div'); poster.className='tsmac';
-    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.2 – DB I - III: Lieferpartner" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
+    poster.innerHTML='<img src="'+POSTER+'" alt="Lektion 2.3 – DB I - III: Lieferpartner" fetchpriority="high" decoding="async" loading="lazy" decoding="async"><div class="tsmac__play"><span></span></div>';
     nv.appendChild(poster);
     poster.addEventListener('click',function(){
       var lb=ensureLb(); var stage=lb.querySelector('.tsmac-stage');
@@ -14135,7 +14135,7 @@ var TSISL_TEAM_ONB_V2=[
       '<img class="ts-hero__img" alt="Menükalkulation & Catering-Rechner" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 11</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.11</div>'+
         '<h1 class="ts-hero__title">Menükalkulation & <span class="ts-gold">Catering&#8209;Rechner</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -15634,7 +15634,7 @@ var TSISL_TEAM_ONB_V2=[
       '<img class="ts-hero__img" alt="Interface-Bau — Grundstruktur & Widgets" src="'+HERO+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.3</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.9</div>'+
         '<h1 class="ts-hero__title">Interface-Bau —<br><span class="ts-gold">Grundstruktur &amp; Widgets</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -16248,7 +16248,7 @@ var TSISL_TEAM_ONB_V2=[
       '<img class="ts-hero__img" alt="Food- und Drinksquartier" src="'+HERO+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Lektion 2.4</div>'+
+        '<div class="ts-hero__eyebrow">Lektion 2.10</div>'+
         '<h1 class="ts-hero__title">Food- und Drinks<span class="ts-gold">quartier</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -21375,7 +21375,7 @@ var TSISL_TEAM_ONB_V2=[
    {
     slug:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, key:'vfmarke',
     backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
-    eyebrow:'Lektion 2.13.2', kicker:'Vision Frame · Identität & Marke',
+    eyebrow:'Lektion 2.15.2', kicker:'Vision Frame · Identität & Marke',
     titleHTML:'Unternehmen & <span class="il-g">Markenidentität</span>',
     lead:'Eine Marke ist kein Logo, sondern die Summe der Entscheidungen, die du immer gleich triffst.',
     intro:['Die meisten Betriebe haben eine Marke, ohne sie je aufgeschrieben zu haben. Sie steckt im Kopf des Inhabers: wie man mit Gästen spricht, was auf keinen Fall auf die Karte kommt, welche Farbe sich richtig anfühlt. Solange du alles selbst machst, funktioniert das.','Sobald jemand anderes eine Speisekarte gestaltet, einen Social-Post schreibt oder ein Schild bestellt, zerfällt es. In dieser Insel legst du deine Marke an einer Stelle fest — sieben Kategorien von Vision und Werten über Positionierung und Zielgruppe bis zu Sprache und Optik.'],
@@ -21395,7 +21395,7 @@ var TSISL_TEAM_ONB_V2=[
  {
     slug:/\/lektionen\/vision-werte\/?$/, key:'vfwerte',
     backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
-    eyebrow:'Lektion 2.13.1', kicker:'Vision Frame · Identität & Marke',
+    eyebrow:'Lektion 2.15.1', kicker:'Vision Frame · Identität & Marke',
     titleHTML:'Vision & <span class="il-g">Werte</span>',
     lead:'Bevor du Systeme baust, brauchst du einen Bezugspunkt, an dem du Entscheidungen misst.',
     intro:['Die meisten Betriebe haben ihre Werte im Kopf, nicht auf dem Papier. Das reicht, solange du allein entscheidest. Sobald ein Team dazukommt, ein zweiter Standort oder ein Partner, entscheidet jeden Tag die Tagesform — und niemand kann nachlesen, wofür der Laden eigentlich steht.','Diese Insel macht daraus eine Datenbank. Du trennst zwei Dinge sauber: die Vision, also die Richtung, in die du willst, und den Wert, also das Prinzip, nach dem du handelst. Jeder Eintrag bekommt eine Essenz in einem Satz, eine Wirkung im Alltag und einen Bezug zu deinem System.'],
@@ -21414,7 +21414,7 @@ var TSISL_TEAM_ONB_V2=[
    },
  {
     slug:/\/lektionen\/team-onboarding\/?$/, key:'team',
-    eyebrow:'Lektion 2.12.1', kicker:'Operations Area · Personal',
+    eyebrow:'Lektion 2.13.1', kicker:'Operations Area · Personal',
     titleHTML:'Team & <span class="il-g">Onboarding</span>',
     lead:'Personal-Organisation entscheidet, wie ruhig dein Betrieb läuft.',
     intro:['In den meisten Läden liegen diese Infos verstreut. Der Onboarding-Plan steckt im Kopf des Schichtleiters, die Kleidergrößen auf einem Zettel im Büro, der Urlaub in irgendeiner WhatsApp-Gruppe. Sobald jemand Neues anfängt oder zwei Leute gleichzeitig frei wollen, wird gesucht und improvisiert.','Diese Insel bündelt vier Bereiche an einem Ort. Neue Leute sind schneller startklar, und du siehst jederzeit, wer wann da ist und was noch offen ist.'],
@@ -21442,7 +21442,7 @@ var TSISL_TEAM_ONB_V2=[
    },
    {
     slug:/\/lektionen\/checklisten-produktion\/?$/, key:'check',
-    eyebrow:'Lektion 2.12.2', kicker:'Operations Area · Abläufe',
+    eyebrow:'Lektion 2.13.2', kicker:'Operations Area · Abläufe',
     titleHTML:'Checklisten & <span class="il-g">Produktion</span>',
     lead:'Der Unterschied zwischen gutem und chaotischem Betrieb ist nicht Talent, sondern Wiederholbarkeit.',
     intro:['Im Kopf ist alles klar. Bis der Laden voll ist, zwei Leute krank sind und die neue Kraft zum ersten Mal allein schließt. Dann zeigt sich, was wirklich dokumentiert war und was nur Gewohnheit.','Diese Insel macht aus dem Bauchgefühl ein System: Checklisten für den Takt, Audits für die Kontrolle, Produktionslisten für die Küche und eine Waste-Erfassung, die jeden Verlust in Euro sichtbar macht.'],
@@ -21468,7 +21468,7 @@ var TSISL_TEAM_ONB_V2=[
    },
    {
     slug:/\/lektionen\/hygiene-beh[a-z-]*handb[a-z-]*\/?$/, key:'hyg',
-    eyebrow:'Lektion 2.12.3', kicker:'Operations Area · Compliance',
+    eyebrow:'Lektion 2.13.3', kicker:'Operations Area · Compliance',
     titleHTML:'Hygiene, Behörden & <span class="il-g">Handbücher</span>',
     lead:'Eine Kontrolle ist kein Problem, wenn du vorbereitet bist. Sie ist ein Problem, wenn du suchst.',
     intro:['Das Gesundheitsamt kommt unangekündigt. Das Finanzamt und der Zoll können dich existenziell treffen. Wer dann in Ordnern blättert, hat schon verloren.','Diese Insel macht aus Angst vor Kontrolle ein planbares Spielfeld: Das Hygienehandbuch dokumentiert jedes Mittel, die Behörden-Übersicht zeigt wer wann kommt, die Pflichtdokumente laufen nie unbemerkt ab, und das Management-Handbuch hält die Antworten für den Ernstfall bereit.'],
@@ -21496,7 +21496,7 @@ var TSISL_TEAM_ONB_V2=[
    },
    {
     slug:/\/lektionen\/inventur-bestand\/?$/, key:'inv',
-    eyebrow:'Lektion 2.12.4', kicker:'Operations Area · Bestand',
+    eyebrow:'Lektion 2.13.4', kicker:'Operations Area · Bestand',
     titleHTML:'Inventur & <span class="il-g">Bestand</span>',
     lead:'Dein Lager ist Geld, das nur anders aussieht.',
     intro:['Zwei Dinge werden ständig verwechselt. Der laufende Wareneinsatz, also alles, was du verbrauchst und nachkaufst, und der Festwert, also das langlebige Inventar, das Jahr für Jahr im Betrieb bleibt. Beide zählst du anders.','Diese Insel baut die Festwert-Inventur sauber auf und zeigt klar, wo die monatliche Inventurliste und das Packaging andocken, ohne dass du dieselbe Zahl doppelt pflegst.'],
@@ -21515,7 +21515,7 @@ var TSISL_TEAM_ONB_V2=[
    },
    {
     slug:/\/lektionen\/partner-vertr[a-z-]*\/?$/, key:'part',
-    eyebrow:'Lektion 2.12.5', kicker:'Operations Area · Partner',
+    eyebrow:'Lektion 2.13.5', kicker:'Operations Area · Partner',
     titleHTML:'Partner & <span class="il-g">Verträge</span>',
     lead:'Der teuerste Vertrag ist der, dessen Kündigungsfrist du verpasst.',
     intro:['Jeder Betrieb sammelt über die Jahre Dutzende laufende Verträge: Wartung, Software, Versicherung, Miete. Und ein Netz aus Dienstleistern, die man genau dann sucht, wenn etwas kaputt ist.','Diese Insel bringt beides an einen Ort. Die Dienstleister-Übersicht als schnelles Verzeichnis, die Vertragsübersicht mit Wert, Laufzeit und Frist, damit keine Verlängerung und keine Kündigung mehr durchrutscht.'],
@@ -21535,7 +21535,7 @@ var TSISL_TEAM_ONB_V2=[
    },
    {
     slug:/\/lektionen\/zug[a-z-]*nge-werte\/?$/, key:'zug',
-    eyebrow:'Lektion 2.12.6', kicker:'Operations Area · Zugänge',
+    eyebrow:'Lektion 2.13.6', kicker:'Operations Area · Zugänge',
     titleHTML:'Zugänge & <span class="il-g">Werte</span>',
     lead:'Kontrolle über einen Betrieb heißt Kontrolle darüber, wer worauf Zugriff hat.',
     intro:['Passwörter im Kopf, Schlüssel in der Schublade, Bareinzahlungen auf Zetteln. Solange nichts passiert, geht das gut. Beim ersten Personalwechsel oder der ersten Nachfrage vom Steuerberater wird es teuer.','Diese Insel bringt das Sensible in geordnete Bahnen: eine nachvollziehbare Zugangs-Hoheit, eine lückenlose Einzahlungs-Doku und eine Schlüsselliste, die im Verlustfall sofort Antwort gibt.'],
@@ -21985,7 +21985,7 @@ var TSISL_TEAM_ONB_V2=[
       '<img class="ts-hero__img" alt="Notion AI im Backoffice" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 2.14</div>'+
+        '<div class="ts-hero__eyebrow">L 2.17</div>'+
         '<h1 class="ts-hero__title">Notion <span class="ts-gold">AI</span></h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
@@ -23802,7 +23802,7 @@ var TSISL_TEAM_ONB_V2=[
       '<img class="ts-hero__img" alt="Multistandort — ein Backoffice über mehrere Standorte" src="'+IMG+'" fetchpriority="high" decoding="async">'+
       '<div class="ts-hero__text">'+
         '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 2.15 · Optional</div>'+
+        '<div class="ts-hero__eyebrow">L 2.14 · Optional</div>'+
         '<h1 class="ts-hero__title">Multistandorte</h1>'+
       '</div>';
     var nr=sc.querySelector(".notion-root");
