@@ -4383,21 +4383,24 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, href:'/lektionen/l17-native-automations-buttons' },
     { re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
     { re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/, href:'/mehrwert-zielbild' },
-    /* Modul 6 - AI Website Building (L6.1-L6.2 gebaut 02.08.2026, L6.3+ folgen).
-       PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
-       den von #tsws1next/#tsws2next gebauten Weiter-Button wieder. */
-    { re:/\/lektionen\/claude-startklar-machen\/?$/, href:'/lektionen/website-skills-laden' },
-    { re:/\/lektionen\/website-skills-laden\/?$/, href:'/lektionen/struktur-ausdenken' },
-    { re:/\/lektionen\/struktur-ausdenken\/?$/, href:'/lektionen/designanforderungen-definieren' },
-    { re:/\/lektionen\/designanforderungen-definieren\/?$/, href:'/lektionen/kamerafahrt-planen' },
-    { re:/\/lektionen\/kamerafahrt-planen\/?$/, href:'/lektionen/ui-components-laden' },
-    { re:/\/lektionen\/ui-components-laden\/?$/, href:'/lektionen/bilder-generieren' },
-    { re:/\/lektionen\/bilder-generieren\/?$/, href:'/lektionen/videos-generieren-und-einsetzen' },
-    { re:/\/lektionen\/videos-generieren-und-einsetzen\/?$/, href:'/lektionen/texte-definieren' },
-    { re:/\/lektionen\/texte-definieren\/?$/, href:'/lektionen/schriftarten-anpassen' },
-    { re:/\/lektionen\/schriftarten-anpassen\/?$/, href:'/lektionen/online-hosten' },
-    { re:/\/lektionen\/online-hosten\/?$/, href:'/lektionen/mobil-check' },
-    { re:/\/lektionen\/mobil-check\/?$/, href:'/modul-6-ai-website-building' },
+    /* Modul 6 - AI Website Building, Neubau 01.11.2026 (Landing + 6.1-6.14). Gates tolerant
+       (Root ODER /lektionen/-Praefix). Ohne Eintrag hier raeumt der Pager den von #tsn6 gebauten
+       Weiter-Knopf wieder ab. Ende der Kette: zurueck zur Modul-Landing. */
+    { re:/\/(?:lektionen\/)?modul-6-weitere-tools-projektmanagement\/?$/, href:'/lektionen/claude-startklar-machen' },
+    { re:/\/(?:lektionen\/)?claude-startklar-machen\/?$/, href:'/lektionen/website-skills-laden' },
+    { re:/\/(?:lektionen\/)?website-skills-laden\/?$/, href:'/lektionen/struktur-ausdenken' },
+    { re:/\/(?:lektionen\/)?struktur-ausdenken\/?$/, href:'/lektionen/designanforderungen-definieren' },
+    { re:/\/(?:lektionen\/)?designanforderungen-definieren\/?$/, href:'/lektionen/kamerafahrt-planen' },
+    { re:/\/(?:lektionen\/)?kamerafahrt-planen\/?$/, href:'/lektionen/ui-components-laden' },
+    { re:/\/(?:lektionen\/)?ui-components-laden\/?$/, href:'/lektionen/bilder-generieren' },
+    { re:/\/(?:lektionen\/)?bilder-generieren\/?$/, href:'/lektionen/videos-generieren-und-einsetzen' },
+    { re:/\/(?:lektionen\/)?videos-generieren-und-einsetzen\/?$/, href:'/lektionen/texte-definieren' },
+    { re:/\/(?:lektionen\/)?texte-definieren\/?$/, href:'/lektionen/speisekarte-und-reservierung' },
+    { re:/\/(?:lektionen\/)?speisekarte-und-reservierung\/?$/, href:'/lektionen/schriftarten-anpassen' },
+    { re:/\/(?:lektionen\/)?schriftarten-anpassen\/?$/, href:'/lektionen/mobil-check' },
+    { re:/\/(?:lektionen\/)?mobil-check\/?$/, href:'/lektionen/online-hosten' },
+    { re:/\/(?:lektionen\/)?online-hosten\/?$/, href:'/lektionen/website-pflegen' },
+    { re:/\/(?:lektionen\/)?website-pflegen\/?$/, href:'/modul-6-weitere-tools-projektmanagement' },
     /* Modul 3 - Claude Grundlagen (NEUBAU 01.11.2026, L3.1-L3.17, Bibliothek __tsn3).
        PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
        den Weiter-Button der Seite wieder. Kette = Lektionsfolge des Neubaus (nur lebende Seiten). */
@@ -25609,357 +25612,7 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
-/* ============================================================
-   MODUL 6 · AI WEBSITE BUILDING — Lektion 6.1 "Claude startklar machen"
-   Abschnitt 01 (Hero + Einleitung), Muster 1:1 aus key-metrics; Werte aus Abschnitts-Katalog 01.
-   Cover = PLATZHALTER-SVG -> echtes Cover kommt spaeter, nur die IMG-Zeile tauschen.
-   ============================================================ */
-(function(){
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-claude-startklar-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{
-    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-    text-align:center;
-  }
-  .ts-body h3{
-    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    font-weight:600;letter-spacing:-.015em;color:#fff;
-    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
-    margin:32px 0 14px;
-  }
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 13px;
-  }
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
-  .ts-body li{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 10px;padding-left:22px;position:relative;
-  }
-  .ts-body li::before{
-    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
-    background:#c7b489;
-  }
-  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('tsws1-intro-css')) return;
-    var s=document.createElement('style'); s.id='tsws1-intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('tsws1-intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Claude startklar machen — Projektordner, CLAUDE.md, Higgsfield" src="'+IMG+'">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Claude <span class="ts-gold">startklar</span></h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('tsws1-intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='tsws1-intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>In diesem Modul bauen wir eine <b>komplette Website für deinen Betrieb</b> — mit eigener Bildwelt aus KI-Generierung und einer Kamerafahrt, die beim Scrollen abläuft. Bevor die erste Zeile Code entsteht, richten wir den Arbeitsplatz ein.</p>
-  <p>Drei Dinge stehen am Ende dieser Lektion: ein <b>eigener Projektordner</b>, in dem Claude arbeitet. Eine <b>Projekt-CLAUDE.md</b> mit deinen echten Betriebsdaten und zwei Arbeitsregeln, an die Claude sich in jeder Sitzung hält. Und der Anschluss an <b>Higgsfield</b>, aus dem später die Bilder und Videos kommen.</p>
-</div>`;
-    hero.parentNode.insertBefore(wrap, hero.nextSibling);
-  }
-
-  mount();
-  document.addEventListener("DOMContentLoaded", mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   MODUL 6 · L6.1 — #tsws1next Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Nächste Lektion")
-   Muster: Abschnitts-Katalog 09 (#tsl + #ts-next), 1:1 aus key-metrics/#tskmnext.
-   ============================================================ */
-(function(){
-  if(window.__tsws1next) return;
-  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/website-skills-laden';
-  var LEARN=[
-    'Du legst ein Website-Projekt sauber an — <b>eigener Ordner</b>, Claude darin gestartet.',
-    'Du weißt, was in die <b>Projekt-CLAUDE.md</b> gehört: Betriebsfakten, Arbeitsregeln, Design.',
-    'Du kennst die zwei Regeln: <b>Mobil-Check</b> nach jedem Schritt, nichts ungesehen fertig melden.',
-    'Du hast <b>Higgsfield</b> angeschlossen — und weißt, warum vor Lektion 7 nicht generiert wird.'
-  ];
-  var CSS=`
-  #tsws1next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws1next *{box-sizing:border-box}
-  #tsws1next .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws1next .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws1next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws1next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws1next .tsl-cell{display:flex;justify-content:center}
-  /* Endzustand ist der Default (Animations-Doktrin): faellt JS oder der IntersectionObserver
-     aus, bleiben die Orbs sichtbar statt unsichtbar. Startzustand haengt an .js. */
-  #tsws1next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws1next.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws1next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws1next.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws1next.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws1next.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws1next.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws1next.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws1next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws1next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws1next .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws1next #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws1next #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws1next #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws1next #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws1next .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws1next .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws1next .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws1next-css'))return; var s=document.createElement('style'); s.id='tsws1next-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function build(){
-    var el=document.createElement('div'); el.id='tsws1next';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML=`
-<div class="tsl-head">
-  <span class="tsl-eyebrow">Was du mitnimmst</span>
-  <h2 class="tsl-title">Learnings</h2>
-</div>
-<div class="tsl-grid">${orbs}</div>
-<div id="ts-next-wrap">
-  <a id="ts-next" href="${NEXT_URL}">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-</div>`;
-    var a=el.querySelector('#ts-next');
-    a.addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-  function mount(){
-    if(!on()){ var e=document.getElementById('tsws1next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
-    if(document.getElementById('tsws1next')) return;
-    /* An .super-content haengen, NICHT in .notion-root: die Notion-Spalte ist 900px schmal,
-       das Learnings-Grid braucht 1180px -> sonst laeuft die 4. Orb aus dem Bild (live gemessen). */
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(build());
-    var el=document.getElementById('tsws1next');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    /* Notbremse: falls der Observer nicht feuert (Remount/Mutation), nach 4s hart einblenden. */
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-  window.__tsws1next=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   MODUL 6 · AI WEBSITE BUILDING — Lektion 6.2 "Website-Skills laden"
-   Abschnitt 01 (Hero + Einleitung), Muster 1:1 aus key-metrics; Werte aus Abschnitts-Katalog 01.
-   Cover = PLATZHALTER-SVG -> echtes Cover kommt spaeter, nur die IMG-Zeile tauschen.
-   ============================================================ */
-(function(){
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-skills-laden-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{
-    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-    text-align:center;
-  }
-  .ts-body h3{
-    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    font-weight:600;letter-spacing:-.015em;color:#fff;
-    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
-    margin:32px 0 14px;
-  }
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 13px;
-  }
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
-  .ts-body li{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 10px;padding-left:22px;position:relative;
-  }
-  .ts-body li::before{
-    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
-    background:#c7b489;
-  }
-  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('tsws2-intro-css')) return;
-    var s=document.createElement('style'); s.id='tsws2-intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('tsws2-intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Website-Skills laden — Design, Animation, Inszenierung, Typografie" src="'+IMG+'">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Website-<span class="ts-gold">Skills</span></h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('tsws2-intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='tsws2-intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Claude kann von Haus aus Websites bauen — aber es baut dann <b>Durchschnitt</b>: dieselben Schriften und Farbverläufe wie überall, dieselbe Kachel-Optik. Genau daran erkennt man KI-gebaute Seiten auf den ersten Blick.</p>
-  <p>Deshalb rüsten wir aus, bevor wir planen. Vier Rollen müssen besetzt sein: <b>Design</b>, <b>Animation fürs Scrollen</b>, <b>Inszenierung</b> und <b>Typografie</b>. Und wir prüfen bei jedem Skill, dass er im Ernstfall wirklich anspringt — ein Skill, der nie greift, ist nur ein Ordner auf deiner Festplatte.</p>
-</div>`;
-    hero.parentNode.insertBefore(wrap, hero.nextSibling);
-  }
-
-  mount();
-  document.addEventListener("DOMContentLoaded", mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   MODUL 6 · L6.2 — #tsws2next Abschnitt 09 Seitenabschluss (Learnings-Orbs + "Nächste Lektion")
-   Muster: Abschnitts-Katalog 09 (#tsl + #ts-next), 1:1 aus key-metrics/#tskmnext.
-   NEXT_URL zeigt vorerst auf die Modul-6-Landing (L6.3 folgt).
-   ============================================================ */
-(function(){
-  if(window.__tsws2next) return;
-  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/modul-6-ai-website-building';
-  var LEARN=[
-    'Du verstehst, warum Claude ohne Design-Skills den <b>austauschbaren Baukasten-Look</b> baut.',
-    'Du kennst die vier Rollen: <b>Design</b>, GSAP-Animation, Scroll-Inszenierung, Typografie.',
-    'Du kannst Skills installieren und weißt, dass Claude danach <b>neu gestartet</b> wird.',
-    'Du prüfst mit einem <b>Test-Prompt</b>, ob ein Skill anspringt — statt es zu hoffen.'
-  ];
-  var CSS=`
-  #tsws2next{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws2next *{box-sizing:border-box}
-  #tsws2next .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws2next .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws2next .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws2next .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws2next .tsl-cell{display:flex;justify-content:center}
-  /* Endzustand ist der Default (Animations-Doktrin): faellt JS oder der IntersectionObserver
-     aus, bleiben die Orbs sichtbar statt unsichtbar. Startzustand haengt an .js. */
-  #tsws2next .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws2next.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws2next .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws2next.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws2next.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws2next.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws2next.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws2next.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws2next .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws2next .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws2next .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws2next #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws2next #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws2next #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws2next #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws2next .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws2next .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws2next .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws2next-css'))return; var s=document.createElement('style'); s.id='tsws2next-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function build(){
-    var el=document.createElement('div'); el.id='tsws2next';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML=`
-<div class="tsl-head">
-  <span class="tsl-eyebrow">Was du mitnimmst</span>
-  <h2 class="tsl-title">Learnings</h2>
-</div>
-<div class="tsl-grid">${orbs}</div>
-<div id="ts-next-wrap">
-  <a id="ts-next" href="${NEXT_URL}">Nächste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-</div>`;
-    var a=el.querySelector('#ts-next');
-    a.addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-  function mount(){
-    if(!on()){ var e=document.getElementById('tsws2next'); if(e&&e.parentNode)e.parentNode.removeChild(e); return; }
-    if(document.getElementById('tsws2next')) return;
-    /* An .super-content haengen, NICHT in .notion-root: die Notion-Spalte ist 900px schmal,
-       das Learnings-Grid braucht 1180px -> sonst laeuft die 4. Orb aus dem Bild (live gemessen). */
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(build());
-    var el=document.getElementById('tsws2next');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    /* Notbremse: falls der Observer nicht feuert (Remount/Mutation), nach 4s hart einblenden. */
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-  window.__tsws2next=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
+/* MODUL 6 · alte Bloecke (L6.1-L6.12, Stand 02.08.2026) am 01.11.2026 entfernt: Neubau im Block "NEUBAU MODUL 6" am Dateiende. */
 /* ============================================================
    #tsres — Modul 5 · AI Reservation Agent (8 Lektionen)
    Config-getriebenes Seiten-Modul fuer /lektionen/<slug>.
@@ -26834,1532 +26487,7 @@ var TSISL_TEAM_ONB_V2=[
   window.addEventListener('popstate',function(){ clearTimeout(t); t=setTimeout(sync,60); });
 })();
 
-/* ============================================================
-   MODUL 6 · L6.1 — #tsws1anim Abschnitt 02 Erkläranimation "Drei Griffe, ein Arbeitsplatz."
-   Aufbau-Variante 1.1 (Überschrift + 1 Satz, dann Animation).
-   Schwerpunkt-Treue (Doktrin 1a): die Lektion hat GENAU DREI inhaltliche Stationen
-   (Projektordner · Projekt-CLAUDE.md · Higgsfield-Anschluss) — die Animation zeigt alle drei
-   als EINEN Aufbau und nimmt damit keiner Folgesektion etwas weg.
-   Kompositions-Regel 1b: EINE Bühne (Fenster) + 3 GLEICH GROSSE Chips auf DERSELBEN Achse
-   (beide width:min(560px,100%)); die Möbel stehen ab Beat 0 ruhig, es wechselt nur der Inhalt.
-   Robustheit: Endzustand = Default, Startzustand hinter .js; Kill-Handle window.__tsws1animKill.
-   Bilder: KEINE (reine UI-Darstellung, kein Motiv-Recycling) — Katalog erlaubt das für Software-Abläufe.
-   ============================================================ */
-(function(){
-  if(window.__tsws1anim) return;
-  function on(){ return /\/claude-startklar-machen\/?$/.test(location.pathname); }
-
-  var CAPS=[
-    'Ein leerer Ordner — mehr braucht der Anfang nicht. Claude arbeitet immer dort, wo du es startest.',
-    'Der Ordner bekommt einen Namen und wird zur Heimat: Code, Bilder, Videos, Notizen liegen ab jetzt beieinander.',
-    'In die Projekt-CLAUDE.md wandern deine echten Betriebsdaten — und die zwei Regeln, an die Claude sich in jeder Sitzung hält.',
-    'Zuletzt dockt Higgsfield an. Ab hier kann Claude Bilder und Videos erzeugen, ohne dass du das Fenster wechselst.'
-  ];
-  var DWELL=[3000,3400,5200,4200];
-
-  var CSS=`
-  #tsws1anim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws1anim *{box-sizing:border-box}
-  #tsws1anim .wa-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #tsws1anim .wa-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tsws1anim .wa-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsws1anim h2.wa-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #tsws1anim h2.wa-title .ts-gold{color:#c7b489}
-  #tsws1anim .wa-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #tsws1anim .wa-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  /* EINE Achse: Fenster und Chip-Reihe teilen sich exakt dieselbe Breite (Kompositions-Regel 1b a) */
-  #tsws1anim .wa-frame{position:relative;width:min(560px,100%);margin:0 auto;border-radius:16px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9);overflow:hidden}
-  #tsws1anim .wa-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
-  #tsws1anim .wa-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;
-    border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-  #tsws1anim .wa-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
-  #tsws1anim .wa-dot:first-child{background:rgba(199,180,137,.55)}
-  #tsws1anim .wa-path{margin-left:8px;font:600 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-    letter-spacing:.04em;color:rgba(255,255,255,.34);transition:color .6s ease}
-  #tsws1anim .wa-canvas{position:relative;aspect-ratio:4/3}
-  #tsws1anim .wa-scene{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:14px;
-    opacity:0;transition:opacity .7s cubic-bezier(.16,1,.3,1)}
-  #tsws1anim .wa-scene.on{opacity:1}
-
-  /* Beat 0 — leerer Ordner */
-  #tsws1anim .wa-empty{margin:auto;width:78%;height:64%;border:1.5px dashed rgba(255,255,255,.16);border-radius:14px;
-    display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:13px;letter-spacing:.04em}
-  /* Beat 1 — Dateiliste */
-  #tsws1anim .wa-row{display:flex;align-items:center;gap:11px}
-  #tsws1anim .wa-ico{width:22px;height:18px;border-radius:3px 5px 5px 5px;flex:0 0 auto;
-    background:linear-gradient(rgba(199,180,137,.30),rgba(199,180,137,.30)),#05060b;border:1px solid rgba(199,180,137,.4)}
-  #tsws1anim .wa-line{height:11px;border-radius:6px;background:rgba(255,255,255,.15)}
-  #tsws1anim .wa-line.k{background:rgba(199,180,137,.55)}
-  /* Beat 2 — CLAUDE.md */
-  #tsws1anim .wa-doc{width:100%;border-radius:12px;padding:16px 18px;
-    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(199,180,137,.30)}
-  #tsws1anim .wa-dt{font:600 11px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tsws1anim .wa-fact{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-  #tsws1anim .wa-rule{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.09)}
-  #tsws1anim .wa-rule + .wa-rule{margin-top:8px;padding-top:0;border-top:0}
-  #tsws1anim .wa-check{width:14px;height:14px;border-radius:50%;flex:0 0 auto;border:1.5px solid rgba(199,180,137,.55);
-    background:radial-gradient(circle,rgba(199,180,137,.5),rgba(199,180,137,0) 70%)}
-  #tsws1anim .wa-rt{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.72)}
-  /* Beat 3 — Anschluss */
-  #tsws1anim .wa-link{display:flex;align-items:center;gap:0;width:100%}
-  #tsws1anim .wa-box{flex:1 1 0;min-height:96px;border-radius:12px;padding:13px 14px;
-    background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;border:1px solid rgba(255,255,255,.13);
-    display:flex;flex-direction:column;justify-content:center;gap:8px;transition:border-color .5s ease}
-  #tsws1anim .wa-box.lit{border-color:rgba(199,180,137,.5)}
-  #tsws1anim .wa-bt{font:600 11px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.42)}
-  #tsws1anim .wa-box.lit .wa-bt{color:#c7b489}
-  #tsws1anim .wa-bn{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:15px;color:#fff}
-  /* Verbindung im ZWISCHENRAUM (Opake-Basis-Regel, Erweiterung 3) */
-  #tsws1anim .wa-conn{position:relative;flex:0 0 74px;height:2px;background:rgba(199,180,137,.22);margin:0 10px}
-  #tsws1anim .wa-conn i{position:absolute;top:50%;left:0;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;
-    background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.85);opacity:0}
-  #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:waPulse 3.4s cubic-bezier(.45,0,.55,1) infinite}
-
-  /* Chip-Reihe: 3 gleichrangige Elemente, exakt gleich groß (Kompositions-Regel 1b b) */
-  #tsws1anim .wa-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(560px,100%);margin:22px auto 0}
-  #tsws1anim .wa-step{height:84px;border-radius:13px;padding:0 12px;cursor:pointer;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
-  #tsws1anim .wa-step:not(.on) .wa-sn{color:rgba(255,255,255,.3)}
-  #tsws1anim .wa-step:not(.on) .wa-sl{color:rgba(255,255,255,.34)}
-  #tsws1anim .wa-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
-  #tsws1anim .wa-sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:#c7b489;transition:color .4s ease}
-  #tsws1anim .wa-sl{font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.86);transition:color .4s ease}
-
-  #tsws1anim .wa-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #tsws1anim .wa-cap b{color:#c7b489;font-weight:600}
-  #tsws1anim .wa-foot{display:flex;justify-content:center;margin-top:8px}
-  #tsws1anim .wa-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #tsws1anim .wa-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @keyframes waPulse{0%{opacity:0;left:0}8%{opacity:1}50%{left:calc(100% - 7px);opacity:1}58%{opacity:0}100%{opacity:0;left:calc(100% - 7px)}}
-  @media(max-width:820px){
-    #tsws1anim .wa-steps{grid-template-columns:1fr;gap:10px}
-    #tsws1anim .wa-step{height:64px;flex-direction:row;gap:10px;justify-content:flex-start;text-align:left}
-    #tsws1anim .wa-cap{min-height:130px}
-    #tsws1anim .wa-link{flex-direction:column;gap:0}
-    #tsws1anim .wa-conn{flex:0 0 44px;width:2px;height:44px;margin:8px 0}
-    #tsws1anim .wa-conn i{left:50%;margin-left:-3.5px;top:0;margin-top:0}
-    #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:waPulseV 3.4s cubic-bezier(.45,0,.55,1) infinite}
-  }
-  @keyframes waPulseV{0%{opacity:0;top:0}8%{opacity:1}50%{top:calc(100% - 7px);opacity:1}58%{opacity:0}100%{opacity:0;top:calc(100% - 7px)}}
-  /* Startzustand NUR mit .js — ohne JS steht der letzte Beat fertig da (Endzustand = Default) */
-  #tsws1anim .wa-wrap:not(.js) .wa-scene{opacity:0}
-  #tsws1anim .wa-wrap:not(.js) .wa-scene:last-child{opacity:1}
-  @media(prefers-reduced-motion:reduce){
-    #tsws1anim .wa-wrap.built .wa-scene.on .wa-conn i{animation:none;opacity:1;left:calc(50% - 3.5px)}
-  }
-  `;
-
-  function html(){
-    var steps=[['01','Projektordner'],['02','CLAUDE.md'],['03','Higgsfield']].map(function(s,i){
-      return '<div class="wa-step" data-i="'+(i+1)+'"><span class="wa-sn">'+s[0]+'</span><span class="wa-sl">'+s[1]+'</span></div>';
-    }).join('');
-    return `
-<div class="wa-head">
-  <span class="wa-eyebrow">Der Arbeitsplatz</span>
-  <h2 class="wa-title">Drei Griffe, ein <span class="ts-gold">Arbeitsplatz</span>.</h2>
-  <p class="wa-sub">Bevor die erste Zeile Code entsteht, richten wir das Fenster ein, in dem später die ganze Website gebaut wird.</p>
-</div>
-<div class="wa-wrap">
-  <div class="wa-frame">
-    <div class="wa-bar"><span class="wa-dot"></span><span class="wa-dot"></span><span class="wa-dot"></span><span class="wa-path">~/</span></div>
-    <div class="wa-canvas">
-      <div class="wa-scene" data-i="0"><div class="wa-empty">noch leer</div></div>
-      <div class="wa-scene" data-i="1">
-        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line k" style="width:44%"></span></div>
-        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:62%"></span></div>
-        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:38%"></span></div>
-        <div class="wa-row"><span class="wa-ico"></span><span class="wa-line" style="width:54%"></span></div>
-      </div>
-      <div class="wa-scene" data-i="2">
-        <div class="wa-doc">
-          <div class="wa-dt">CLAUDE.md</div>
-          <div class="wa-fact"><span class="wa-line k" style="width:26%"></span><span class="wa-line" style="width:46%"></span></div>
-          <div class="wa-fact"><span class="wa-line k" style="width:20%"></span><span class="wa-line" style="width:56%"></span></div>
-          <div class="wa-fact"><span class="wa-line k" style="width:30%"></span><span class="wa-line" style="width:34%"></span></div>
-          <div class="wa-rule"><span class="wa-check"></span><span class="wa-rt">Nach jedem Schritt die Mobil-Ansicht prüfen.</span></div>
-          <div class="wa-rule"><span class="wa-check"></span><span class="wa-rt">Nichts als fertig melden, was Claude nicht selbst gesehen hat.</span></div>
-        </div>
-      </div>
-      <div class="wa-scene" data-i="3">
-        <div class="wa-link">
-          <div class="wa-box lit"><span class="wa-bt">Dein Projekt</span><span class="wa-bn">Claude Code</span></div>
-          <div class="wa-conn"><i></i></div>
-          <div class="wa-box lit"><span class="wa-bt">Bilder &amp; Videos</span><span class="wa-bn">Higgsfield</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="wa-steps">${steps}</div>
-  <p class="wa-cap"></p>
-  <div class="wa-foot"><button class="wa-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timer=null;
-  function clear(){ if(timer){ clearTimeout(timer); timer=null; } }
-
-  function show(root,i){
-    var scenes=root.querySelectorAll('.wa-scene');
-    for(var s=0;s<scenes.length;s++) scenes[s].classList.toggle('on', s===i);
-    var steps=root.querySelectorAll('.wa-step');
-    for(var t=0;t<steps.length;t++) steps[t].classList.toggle('on', (t+1)<=i);
-    var cap=root.querySelector('.wa-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
-    var path=root.querySelector('.wa-path');
-    if(path) path.textContent = i===0 ? '~/' : '~/website-meinbetrieb';
-    if(path) path.style.color = i===0 ? 'rgba(255,255,255,.34)' : '#c7b489';
-  }
-
-  function run(root,i){
-    clear();
-    show(root,i);
-    if(i < CAPS.length-1){
-      timer=setTimeout(function(){ run(root,i+1); }, DWELL[i]);
-    } else {
-      root.querySelector('.wa-wrap').classList.add('built');
-    }
-  }
-
-  function play(root){
-    var wrap=root.querySelector('.wa-wrap'); if(!wrap) return;
-    wrap.classList.add('js'); wrap.classList.remove('built');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      show(root, CAPS.length-1); wrap.classList.add('built'); return;
-    }
-    run(root,0);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='tsws1anim'; el.innerHTML=html();
-    el.querySelector('.wa-replay').addEventListener('click',function(){ play(el); });
-    var steps=el.querySelectorAll('.wa-step');
-    for(var i=0;i<steps.length;i++){
-      (function(n){ steps[n].addEventListener('click',function(){
-        clear(); el.querySelector('.wa-wrap').classList.add('js','built'); show(el,n+1);
-      }); })(i);
-    }
-    return el;
-  }
-
-  function injectCSS(){ if(document.getElementById('tsws1anim-css'))return;
-    var s=document.createElement('style'); s.id='tsws1anim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('tsws1anim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('tsws1anim')) return;
-    var anchor=document.getElementById('tsws1-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build();
-    anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.wa-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__tsws1animKill=function(){ clear(); };
-  window.__tsws1anim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   MODUL 6 · L6.2 — #tsws2anim Abschnitt 02 Erkläranimation "Vier Werkzeuge, ein anderer Blick."
-   Aufbau-Variante 1.1. EIGENES Konzept (kein Recycling von #tsws1anim): dort entsteht ein
-   Arbeitsplatz Schritt fuer Schritt, hier veraendert sich EIN bestehendes Ergebnis mit jedem Werkzeug.
-   Schwerpunkt-Treue (Doktrin 1a): die Lektion dreht sich um die vier Werkzeug-Rollen und darum,
-   dass man ihre Wirkung pruefen muss — genau das zeigt die Bühne.
-   Kompositions-Regel 1b: EIN Rahmen + 4 GLEICH GROSSE Chips auf DERSELBEN Achse (min(560px,100%));
-   die Möbel stehen ab Beat 0 ruhig, es wechselt nur der Inhalt IM Rahmen.
-   Robustheit: Endzustand = Default, Startzustand hinter .js; Kill-Handle window.__tsws2animKill.
-   ============================================================ */
-(function(){
-  if(window.__tsws2anim) return;
-  function on(){ return /\/website-skills-laden\/?$/.test(location.pathname); }
-
-  var CAPS=[
-    'So baut Claude ohne Vorgaben: Verlauf, runde Kacheln, Standardschrift. Technisch fehlerfrei — und austauschbar.',
-    '<b>Design</b> zuerst. Der Verlauf weicht einer ruhigen Fläche, die Abstände bekommen Luft, die Kanten werden leiser.',
-    '<b>Animation</b> bringt Bewegung in die Seite: ein Impuls läuft durch, wo vorher alles stillstand.',
-    '<b>Inszenierung</b> gibt dem Bild die Bühne. Aus einer Kachelreihe wird eine Szene, die beim Scrollen erzählt.',
-    '<b>Typografie</b> setzt den Schlusspunkt: eine große ruhige Zeile statt vieler gleich lauter. Jetzt sieht es nach Agentur aus.'
-  ];
-  var DWELL=[3400,3600,3400,3600,4200];
-
-  var CSS=`
-  #tsws2anim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws2anim *{box-sizing:border-box}
-  #tsws2anim .sk-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #tsws2anim .sk-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #tsws2anim .sk-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #tsws2anim h2.sk-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #tsws2anim h2.sk-title .ts-gold{color:#c7b489}
-  #tsws2anim .sk-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #tsws2anim .sk-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #tsws2anim .sk-frame{position:relative;width:min(560px,100%);margin:0 auto;border-radius:16px;overflow:hidden;
-    background:#05060b;border:1px solid rgba(255,255,255,.13);box-shadow:0 34px 76px -34px rgba(0,0,0,.9);
-    transition:border-color .8s cubic-bezier(.16,1,.3,1),box-shadow .8s cubic-bezier(.16,1,.3,1)}
-  #tsws2anim .sk-frame::before{content:"";position:absolute;inset:-16% -12%;z-index:-1;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(199,180,137,.15),rgba(255,255,255,0) 70%);filter:blur(34px)}
-  #tsws2anim .sk-canvas{position:relative;aspect-ratio:4/3;padding:26px;display:flex;flex-direction:column;justify-content:center;gap:16px;
-    transition:background .9s cubic-bezier(.16,1,.3,1),padding .9s cubic-bezier(.16,1,.3,1)}
-  /* Beat 0 = Baukasten-Look */
-  #tsws2anim .sk-wrap.js.b0 .sk-canvas{background:linear-gradient(150deg,#3a2a6d 0%,#2a2450 55%,#1a1636 100%)}
-  #tsws2anim .sk-hl{font-family:-apple-system,sans-serif;font-weight:700;font-size:19px;line-height:1.25;color:#fff;
-    text-align:center;letter-spacing:0;
-    transition:font-family .6s ease,font-size .9s cubic-bezier(.16,1,.3,1),letter-spacing .9s ease,text-align .3s ease}
-  #tsws2anim .sk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;transition:gap .9s cubic-bezier(.16,1,.3,1)}
-  #tsws2anim .sk-card{height:86px;border-radius:18px;background:rgba(255,255,255,.14);
-    box-shadow:0 10px 22px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);
-    transition:height .9s cubic-bezier(.16,1,.3,1),border-radius .9s cubic-bezier(.16,1,.3,1),
-      background .9s cubic-bezier(.16,1,.3,1),box-shadow .9s cubic-bezier(.16,1,.3,1),opacity .7s ease}
-  /* Beat 1 — Design: ruhige Fläche, flachere Kanten, Luft */
-  #tsws2anim .sk-wrap.js.b1 .sk-canvas,#tsws2anim .sk-wrap.js.b2 .sk-canvas,
-  #tsws2anim .sk-wrap.js.b3 .sk-canvas,#tsws2anim .sk-wrap.js.b4 .sk-canvas{background:#05060b}
-  #tsws2anim .sk-wrap.js.b1 .sk-card,#tsws2anim .sk-wrap.js.b2 .sk-card{border-radius:10px;background:rgba(255,255,255,.045);
-    box-shadow:none;border-color:rgba(255,255,255,.1)}
-  #tsws2anim .sk-wrap.js.b1 .sk-cards,#tsws2anim .sk-wrap.js.b2 .sk-cards{gap:18px}
-  /* Beat 2 — Animation: Impuls laeuft durch */
-  #tsws2anim .sk-sweep{position:absolute;inset:0;pointer-events:none;opacity:0;
-    background:linear-gradient(100deg,rgba(199,180,137,0) 38%,rgba(199,180,137,.20) 50%,rgba(199,180,137,0) 62%)}
-  #tsws2anim .sk-wrap.js.b2 .sk-sweep{opacity:1;animation:skSweep 1.6s cubic-bezier(.22,1,.36,1) infinite}
-  /* Beat 3 — Inszenierung: aus der Kachelreihe wird eine Szene */
-  #tsws2anim .sk-wrap.js.b3 .sk-cards,#tsws2anim .sk-wrap.js.b4 .sk-cards{gap:0;grid-template-columns:1fr}
-  #tsws2anim .sk-wrap.js.b3 .sk-card:nth-child(2),#tsws2anim .sk-wrap.js.b4 .sk-card:nth-child(2),
-  #tsws2anim .sk-wrap.js.b3 .sk-card:nth-child(3),#tsws2anim .sk-wrap.js.b4 .sk-card:nth-child(3){display:none}
-  #tsws2anim .sk-wrap.js.b3 .sk-card:first-child,#tsws2anim .sk-wrap.js.b4 .sk-card:first-child{
-    height:190px;border-radius:12px;
-    background:linear-gradient(165deg,rgba(199,180,137,.16),rgba(255,255,255,.02) 55%),#0a0c14;
-    border-color:rgba(199,180,137,.32)}
-  /* Beat 4 — Typografie */
-  #tsws2anim .sk-wrap.js.b4 .sk-hl{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:30px;letter-spacing:-.02em}
-  #tsws2anim .sk-wrap.js.b4 .sk-frame{border-color:rgba(199,180,137,.4);box-shadow:0 34px 76px -30px rgba(0,0,0,.92),0 0 46px -18px rgba(199,180,137,.4)}
-
-  #tsws2anim .sk-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:min(560px,100%);margin:22px auto 0}
-  #tsws2anim .sk-step{height:84px;border-radius:13px;padding:0 10px;cursor:pointer;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.12);transition:border-color .4s ease,box-shadow .4s ease}
-  #tsws2anim .sk-step:not(.on) .sk-sn{color:rgba(255,255,255,.3)}
-  #tsws2anim .sk-step:not(.on) .sk-sl{color:rgba(255,255,255,.34)}
-  #tsws2anim .sk-step.on{border-color:rgba(199,180,137,.55);box-shadow:0 0 30px -12px rgba(199,180,137,.5)}
-  #tsws2anim .sk-sn{font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;color:#c7b489;transition:color .4s ease}
-  #tsws2anim .sk-sl{font-size:12px;line-height:1.3;color:rgba(255,255,255,.86);transition:color .4s ease}
-
-  #tsws2anim .sk-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #tsws2anim .sk-cap b{color:#c7b489;font-weight:600}
-  #tsws2anim .sk-foot{display:flex;justify-content:center;margin-top:8px}
-  #tsws2anim .sk-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #tsws2anim .sk-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @keyframes skSweep{0%{transform:translateX(-100%)}55%{transform:translateX(100%)}100%{transform:translateX(100%)}}
-  @media(max-width:820px){
-    #tsws2anim .sk-steps{grid-template-columns:repeat(2,1fr);gap:10px}
-    #tsws2anim .sk-step{height:70px}
-    #tsws2anim .sk-cap{min-height:130px}
-    #tsws2anim .sk-wrap.js.b4 .sk-hl{font-size:24px}
-  }
-  /* Endzustand = Default: ohne .js steht die fertige Seite da (kein schwarzes Loch) */
-  #tsws2anim .sk-wrap:not(.js) .sk-canvas{background:#05060b}
-  #tsws2anim .sk-wrap:not(.js) .sk-hl{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:30px;letter-spacing:-.02em}
-  #tsws2anim .sk-wrap:not(.js) .sk-cards{gap:0;grid-template-columns:1fr}
-  #tsws2anim .sk-wrap:not(.js) .sk-card:nth-child(2),#tsws2anim .sk-wrap:not(.js) .sk-card:nth-child(3){display:none}
-  #tsws2anim .sk-wrap:not(.js) .sk-card:first-child{height:190px;border-radius:12px;
-    background:linear-gradient(165deg,rgba(199,180,137,.16),rgba(255,255,255,.02) 55%),#0a0c14;border-color:rgba(199,180,137,.32)}
-  @media(prefers-reduced-motion:reduce){ #tsws2anim .sk-wrap.js.b2 .sk-sweep{animation:none;opacity:0} }
-  `;
-
-  function html(){
-    var steps=[['01','Design'],['02','Animation'],['03','Inszenierung'],['04','Typografie']].map(function(s,i){
-      return '<div class="sk-step" data-i="'+(i+1)+'"><span class="sk-sn">'+s[0]+'</span><span class="sk-sl">'+s[1]+'</span></div>';
-    }).join('');
-    return `
-<div class="sk-head">
-  <span class="sk-eyebrow">Die Werkzeugkiste</span>
-  <h2 class="sk-title">Vier Werkzeuge, ein anderer <span class="ts-gold">Blick</span>.</h2>
-  <p class="sk-sub">Dieselbe Seite, viermal nachgeschärft — so verändert jeder geladene Skill das, was am Ende herauskommt.</p>
-</div>
-<div class="sk-wrap">
-  <div class="sk-frame">
-    <div class="sk-canvas">
-      <div class="sk-hl">Secret Mountain</div>
-      <div class="sk-cards"><div class="sk-card"></div><div class="sk-card"></div><div class="sk-card"></div></div>
-      <div class="sk-sweep"></div>
-    </div>
-  </div>
-  <div class="sk-steps">${steps}</div>
-  <p class="sk-cap"></p>
-  <div class="sk-foot"><button class="sk-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timer=null;
-  function clear(){ if(timer){ clearTimeout(timer); timer=null; } }
-
-  function show(root,i){
-    var wrap=root.querySelector('.sk-wrap');
-    for(var b=0;b<CAPS.length;b++) wrap.classList.toggle('b'+b, b===i);
-    var steps=root.querySelectorAll('.sk-step');
-    for(var t=0;t<steps.length;t++) steps[t].classList.toggle('on', (t+1)<=i);
-    var cap=root.querySelector('.sk-cap'); if(cap) cap.innerHTML=CAPS[i]||'';
-  }
-
-  function run(root,i){
-    clear(); show(root,i);
-    if(i < CAPS.length-1) timer=setTimeout(function(){ run(root,i+1); }, DWELL[i]);
-  }
-
-  function play(root){
-    var wrap=root.querySelector('.sk-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ show(root, CAPS.length-1); return; }
-    run(root,0);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='tsws2anim'; el.innerHTML=html();
-    el.querySelector('.sk-replay').addEventListener('click',function(){ play(el); });
-    var steps=el.querySelectorAll('.sk-step');
-    for(var i=0;i<steps.length;i++){
-      (function(n){ steps[n].addEventListener('click',function(){
-        clear(); el.querySelector('.sk-wrap').classList.add('js'); show(el,n+1);
-      }); })(i);
-    }
-    return el;
-  }
-
-  function injectCSS(){ if(document.getElementById('tsws2anim-css'))return;
-    var s=document.createElement('style'); s.id='tsws2anim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('tsws2anim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('tsws2anim')) return;
-    var anchor=document.getElementById('tsws2-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build();
-    anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.sk-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__tsws2animKill=function(){ clear(); };
-  window.__tsws2anim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   MODUL 6 · struktur-ausdenken — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws3) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/struktur-ausdenken\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/designanforderungen-definieren';
-  var LEARN=[
-    'Du liest einen Betrieb <b>aus</b>, statt ihn nur anzuschauen — und weißt, was dabei herauskommt.',
-    'Du kennst die <b>sechs Fragen</b>, die ein Gast vor der Entscheidung hat.',
-    'Du leitest die Sektionsfolge aus der <b>Geschichte</b> ab, nicht aus einer Liste.',
-    'Du baust das Gerüst mit <b>beschrifteten Leerstellen</b>, bevor ein Bild existiert.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws3l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws3l *{box-sizing:border-box}
-  #tsws3l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws3l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws3l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws3l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws3l .tsl-cell{display:flex;justify-content:center}
-  #tsws3l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws3l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws3l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws3l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws3l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws3l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws3l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws3l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws3l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws3l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws3l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws3l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws3l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws3l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws3l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws3l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws3l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws3l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws3-css'))return; var s=document.createElement('style'); s.id='tsws3-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Strukturausdenken" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Struktur <span class="ts-gold">ausdenken</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws3-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws3-intro';
-      w.innerHTML='<div class="ts-body"><p>Bevor die erste Sektion entsteht, lesen wir deinen Betrieb aus und legen fest, welche Fragen die Seite beantworten muss. Am Ende hast du einen <b>Sektionsplan</b>, der aus deinem Laden kommt und nicht aus einer Vorlage.</p><p>Und dann bauen wir die ganze Seite als Gerüst — mit beschrifteten Leerstellen, wo später die Bilder sitzen. <b>Skelett vor Schönheit</b>: Medien sind der langsamste Teil, auf den wartet niemand.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws3l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws3l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws3l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws3l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws3=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · designanforderungen-definieren — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws4) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/designanforderungen-definieren\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/kamerafahrt-planen';
-  var LEARN=[
-    'Du beschreibst die <b>Stimmung</b> deines Betriebs konkret statt in Leerformeln.',
-    'Du weißt, warum <b>zwei Grundtöne und ein Akzent</b> reichen und woher sie kommen.',
-    'Du erkennst: ein vorhandenes Erscheinungsbild ist der <b>Startpunkt</b>, nicht der Geschmack.',
-    'Du unterscheidest Feedback zum <b>Detail</b> von Feedback zur <b>Richtung</b>.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws4l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws4l *{box-sizing:border-box}
-  #tsws4l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws4l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws4l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws4l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws4l .tsl-cell{display:flex;justify-content:center}
-  #tsws4l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws4l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws4l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws4l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws4l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws4l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws4l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws4l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws4l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws4l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws4l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws4l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws4l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws4l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws4l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws4l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws4l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws4l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws4-css'))return; var s=document.createElement('style'); s.id='tsws4-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Designanforderungen" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Design<span class="ts-gold">anforderungen</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws4-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws4-intro';
-      w.innerHTML='<div class="ts-body"><p>Ein Design entsteht nicht daraus, dass man eine fremde Website nachbaut, sondern aus <b>Anforderungen, die man vorher aufschreibt</b>.</p><p>In dieser Lektion formulierst du deinen Design-Brief so, dass Claude ihn versteht und bei jedem Bauschritt daran gebunden ist — Stimmung in deinen Worten, zwei Grundtöne, ein Akzent.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws4l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws4l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws4l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws4l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws4=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · kamerafahrt-planen — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws5) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/kamerafahrt-planen\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/ui-components-laden';
-  var LEARN=[
-    'Du planst eine <b>Erzählung</b> statt einer Aneinanderreihung schöner Aufnahmen.',
-    'Du weißt, warum die Fakten <b>nach</b> der Fahrt kommen dürfen.',
-    'Du gewichtest das <b>Tempo</b> je Abschnitt — Transit schnell, Momente langsam.',
-    'Du kennst die <b>Von-Bis-Fenster</b> für Texte über dem Film.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws5l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws5l *{box-sizing:border-box}
-  #tsws5l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws5l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws5l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws5l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws5l .tsl-cell{display:flex;justify-content:center}
-  #tsws5l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws5l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws5l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws5l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws5l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws5l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws5l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws5l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws5l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws5l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws5l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws5l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws5l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws5l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws5l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws5l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws5l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws5l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws5-css'))return; var s=document.createElement('style'); s.id='tsws5-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Kamerafahrtplanen" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Kamerafahrt <span class="ts-gold">planen</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws5-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws5-intro';
-      w.innerHTML='<div class="ts-body"><p>Die Kamerafahrt macht aus einer Website ein Erlebnis: Beim Scrollen läuft ein <b>Film über deinen Betrieb</b> ab, und der Gast steuert ihn selbst.</p><p>Wir planen ihn als Storyboard, bevor ein einziges Bild existiert — mit einer Szenenfolge, die etwas erzählt, und einem <b>Tempo je Abschnitt</b> statt einer konstanten Geschwindigkeit.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws5l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws5l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws5l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws5l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws5=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · ui-components-laden — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws6) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/ui-components-laden\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/bilder-generieren';
-  var LEARN=[
-    'Du kennst die <b>drei Sorten</b>: offene Bibliotheken, gekaufte Komponenten, Code-Schnipsel.',
-    'Du prüfst vor dem Kauf, ob eine Komponente in deiner <b>Bauart</b> überhaupt läuft.',
-    'Du kennst die Regel <b>eine Lizenz gleich ein Projekt</b> und rechnest sie bei Kunden ein.',
-    'Du weißt, wann du stattdessen <b>Claude bauen</b> lässt.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws6l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws6l *{box-sizing:border-box}
-  #tsws6l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws6l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws6l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws6l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws6l .tsl-cell{display:flex;justify-content:center}
-  #tsws6l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws6l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws6l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws6l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws6l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws6l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws6l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws6l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws6l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws6l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws6l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws6l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws6l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws6l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws6l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws6l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws6l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws6l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws6-css'))return; var s=document.createElement('style'); s.id='tsws6-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="UI-Components" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">UI-<span class="ts-gold">Components</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws6-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws6-intro';
-      w.innerHTML='<div class="ts-body"><p>Für Navigation, Buttons und kleine Interaktionen musst du nichts erfinden. Es gibt <b>fertige, gut gebaute Bausteine</b>.</p><p>Man muss nur wissen, wo man sie findet, worauf man bei der <b>Lizenz</b> achtet und welche zwei Fallen beim Einbau Stunden kosten.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws6l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws6l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws6l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws6l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws6=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · bilder-generieren — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws7) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/bilder-generieren\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/videos-generieren-und-einsetzen';
-  var LEARN=[
-    'Du unterscheidest <b>Objektbilder</b> aus Modul zwei von einer zusammenhängenden Szenenreihe.',
-    'Du sichtest zuerst dein <b>echtes Material</b> und generierst nur die Lücken.',
-    'Du weißt, dass <b>Verneinungen</b> im Prompt das Gegenteil bewirken.',
-    'Du prüfst die Reihe auf <b>Blickrichtung, Licht und Stil</b> und korrigierst nur den Ausreißer.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws7l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws7l *{box-sizing:border-box}
-  #tsws7l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws7l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws7l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws7l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws7l .tsl-cell{display:flex;justify-content:center}
-  #tsws7l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws7l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws7l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws7l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws7l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws7l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws7l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws7l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws7l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws7l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws7l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws7l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws7l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws7l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws7l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws7l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws7l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws7l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws7-css'))return; var s=document.createElement('style'); s.id='tsws7-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Bildergenerieren" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Bilder <span class="ts-gold">generieren</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws7-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws7-intro';
-      w.innerHTML='<div class="ts-body"><p>Jetzt entsteht die Bildwelt für deine Kamerafahrt. Anders als bei den Produktbildern aus dem Backoffice-Modul geht es hier nicht um Einzelaufnahmen, sondern um <b>Szenen, die zusammen eine Fahrt ergeben</b>.</p><p>Das stellt andere Anforderungen: gleiche Tageszeit, gleiches Licht, gleiche Blickrichtung. Ein einziges Bild, das aus der Reihe fällt, zerstört später die ganze Fahrt.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws7l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws7l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws7l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws7l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws7=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · videos-generieren-und-einsetzen — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws8) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/videos-generieren-und-einsetzen\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/texte-definieren';
-  var LEARN=[
-    'Jeder Folgeclip startet auf dem <b>echten letzten Bild</b> des Vorgängers.',
-    'Du kennst die <b>Modell-Reihenfolge</b> — erst das, dessen Ablehnungen erstattet werden.',
-    'Du siehst dir jeden Clip als <b>Bildstreifen</b> an, bevor du ihn weiterverwendest.',
-    'Du weißt, warum die Fahrt aus <b>Einzelbildern</b> läuft — und kennst die Speicherfalle.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws8l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws8l *{box-sizing:border-box}
-  #tsws8l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws8l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws8l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws8l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws8l .tsl-cell{display:flex;justify-content:center}
-  #tsws8l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws8l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws8l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws8l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws8l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws8l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws8l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws8l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws8l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws8l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws8l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws8l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws8l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws8l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws8l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws8l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws8l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws8l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws8-css'))return; var s=document.createElement('style'); s.id='tsws8-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Videosgenerieren" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Videos <span class="ts-gold">generieren</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws8-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws8-intro';
-      w.innerHTML='<div class="ts-body"><p>Aus deinen Szenenbildern werden Clips, aus den Clips ein durchgehender Film, und daraus die Fahrt, die beim Scrollen läuft.</p><p>Das ist der aufwendigste Schritt des Moduls — und der, bei dem die meisten Credits verbrennen, wenn man <b>vier Regeln</b> nicht kennt. Die gebe ich dir vorweg, damit du sie nicht selbst bezahlst.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws8l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws8l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws8l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws8l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws8=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · texte-definieren — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws9) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/texte-definieren\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/schriftarten-anpassen';
-  var LEARN=[
-    'Du hältst die Texte <b>kurz</b> und lässt die Bilder arbeiten.',
-    'Alle überprüfbaren Angaben kommen aus dem <b>Fakten-Block</b>, Lücken bleiben leer.',
-    'Du legst das Menü als <b>Datenbestand</b> an — wiederverwendbar für jeden Betrieb.',
-    'Einblendungen folgen dem <b>gezeigten Bild</b>, nicht dem Scrollwert.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws9l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws9l *{box-sizing:border-box}
-  #tsws9l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws9l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws9l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws9l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws9l .tsl-cell{display:flex;justify-content:center}
-  #tsws9l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws9l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws9l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws9l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws9l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws9l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws9l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws9l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws9l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws9l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws9l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws9l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws9l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws9l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws9l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws9l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws9l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws9l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws9-css'))return; var s=document.createElement('style'); s.id='tsws9-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Textedefinieren" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Texte <span class="ts-gold">definieren</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws9-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws9-intro';
-      w.innerHTML='<div class="ts-body"><p>Jetzt kommen die Inhalte in die Seite: Karte, Zeiten, Kontakt und die wenigen Zeilen, die über der Kamerafahrt stehen.</p><p>Für die Fakten gilt eine harte Regel, und für das Menü lohnt sich ein Kniff: Als <b>Datenbestand</b> angelegt, ist eine Preisänderung später eine einzige Zeile.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws9l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws9l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws9l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws9l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws9=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · schriftarten-anpassen — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws10) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/schriftarten-anpassen\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/online-hosten';
-  var LEARN=[
-    'Du wählst <b>zwei Schriften</b> und weißt, welche Aufgabe jede hat.',
-    'Du prüfst früh den <b>Zeichensatz</b> auf Umlaute, Eszett und Sonderzeichen.',
-    'Du kennst die Lizenzfalle: <b>frei für den persönlichen Gebrauch</b> ist gewerblich tabu.',
-    'Du machst Text über bewegtem Bild mit <b>zwei Schichten</b> lesbar.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws10l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws10l *{box-sizing:border-box}
-  #tsws10l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws10l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws10l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws10l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws10l .tsl-cell{display:flex;justify-content:center}
-  #tsws10l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws10l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws10l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws10l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws10l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws10l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws10l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws10l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws10l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws10l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws10l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws10l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws10l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws10l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws10l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws10l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws10l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws10l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws10-css'))return; var s=document.createElement('style'); s.id='tsws10-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Schriftartenanpassen" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Schriftarten <span class="ts-gold">anpassen</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws10-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws10-intro';
-      w.innerHTML='<div class="ts-body"><p>An der Schrift scheitern mehr Websites als am Layout. Sie ist der schnellste Weg, einer Seite <b>Charakter</b> zu geben.</p><p>Du suchst zwei Schriften aus, prüfst ihre <b>Lizenz</b>, bindest sie sauber ein — und machst Text über der laufenden Fahrt lesbar.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws10l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws10l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws10l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws10l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws10=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · online-hosten — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws11) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/online-hosten\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/lektionen/mobil-check';
-  var LEARN=[
-    'Du legst eine <b>Ausschlussliste</b> an, damit Zwischenstände nicht mit hochgehen.',
-    'Du überträgst viele Dateien als <b>ein Paket</b> statt einzeln.',
-    'Du lässt Bilder lange <b>zwischenspeichern</b> — und weißt, was das bei neuen Fassungen bedeutet.',
-    'Du prüfst nach dem Veröffentlichen auf der <b>echten Adresse</b>, nicht lokal.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws11l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws11l *{box-sizing:border-box}
-  #tsws11l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws11l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws11l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws11l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws11l .tsl-cell{display:flex;justify-content:center}
-  #tsws11l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws11l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws11l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws11l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws11l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws11l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws11l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws11l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws11l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws11l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws11l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws11l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws11l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws11l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws11l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws11l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws11l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws11l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws11-css'))return; var s=document.createElement('style'); s.id='tsws11-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Onlinehosten" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Online <span class="ts-gold">hosten</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws11-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws11-intro';
-      w.innerHTML='<div class="ts-body"><p>Jetzt geht die Seite live. Den Grundweg kennst du aus der Demo in Modul vier — hier kommen die Punkte dazu, die erst bei einer Seite mit <b>tausenden Bildern</b> auftauchen.</p><p>Vorweg der wichtigste: Diese Seite braucht <b>kein Backend</b>. Sie hat keinen Zustand, der sich ändert — und das macht sie schneller, robuster und im Hosting praktisch kostenlos.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws11l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws11l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws11l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws11l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws11=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   MODUL 6 · mobil-check — Abschnitt 01 (Hero + Einleitung) + Abschnitt 09 (Learnings + Weiter)
-   Muster 1:1 aus key-metrics / Abschnitts-Katalog 01 + 09. Cover = PLATZHALTER-SVG.
-   ============================================================ */
-(function(){
-  if(window.__tsws12) return;
-  var IMG="https://tastyrob123.github.io/kurs-code/img/website-building/hero-generic-placeholder.svg";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/mobil-check\/?$/.test(location.pathname); }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/modul-6-ai-website-building';
-  var LEARN=[
-    'Du weißt, warum eine Fahrt mobil ein <b>eigenes, kleineres Bildset</b> braucht.',
-    'Du weißt, dass ein geänderter Film immer <b>beide Sets</b> betrifft.',
-    'Du verstehst, dass eine Optimierung für den Rechner das Handy <b>bremsen</b> kann.',
-    'Du prüfst am <b>echten Gerät</b> und zusätzlich ohne WLAN.'
-  ];
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body p b{color:#c7b489;font-weight:600}
-  #tsws12l{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #tsws12l *{box-sizing:border-box}
-  #tsws12l .tsl-head{text-align:center;margin-bottom:66px}
-  #tsws12l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
-  #tsws12l .tsl-title{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #tsws12l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #tsws12l .tsl-cell{display:flex;justify-content:center}
-  #tsws12l .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
-    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .4s ease,box-shadow .4s ease}
-  #tsws12l.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
-  #tsws12l .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  #tsws12l.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tslFloat 7s ease-in-out infinite}
-  #tsws12l.js.in .tsl-cell:nth-child(1) .tsl-orb{transition-delay:0s;animation-delay:0s}
-  #tsws12l.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
-  #tsws12l.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
-  #tsws12l.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
-  #tsws12l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
-  #tsws12l .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch}
-  #tsws12l .tsl-t b{color:#c7b489;font-weight:700}
-  #tsws12l #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #tsws12l #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
-  #tsws12l #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
-  #tsws12l #ts-next svg{width:16px;height:16px}
-  @media(max-width:1079px){ #tsws12l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #tsws12l .tsl-grid{grid-template-columns:1fr} }
-  @media(prefers-reduced-motion:reduce){ #tsws12l.js .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
-  `;
-  function injectCSS(){ if(document.getElementById('tsws12-css'))return; var s=document.createElement('style'); s.id='tsws12-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mountHero(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content"); if(!sc) return;
-    if(!document.querySelector(".ts-hero")){
-      var hero=document.createElement("div"); hero.className="ts-hero";
-      hero.innerHTML='<img class="ts-hero__img" alt="Mobil-Check" src="'+IMG+'">'+
-        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'">'+
-        '<div class="ts-hero__eyebrow">Modul 6 · AI Website Building</div>'+
-        '<h1 class="ts-hero__title">Mobil-<span class="ts-gold">Check</span></h1></div>';
-      var nr=sc.querySelector(".notion-root");
-      if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-      Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-        function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-      var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    }
-    if(!document.getElementById('tsws12-intro')){
-      injectCSS();
-      var h=sc.querySelector('.ts-hero'); if(!h) return;
-      var w=document.createElement('div'); w.id='tsws12-intro';
-      w.innerHTML='<div class="ts-body"><p>Die meisten deiner Gäste öffnen die Seite auf dem <b>Handy</b>, oft unterwegs und mit mittelmäßiger Verbindung.</p><p>Diese Lektion ist der letzte Durchgang — und sie zeigt, warum eine Kamerafahrt mobil anders gebaut werden muss als am Rechner.</p></div>';
-      h.parentNode.insertBefore(w, h.nextSibling);
-    }
-  }
-
-  function buildL(){
-    var el=document.createElement('div'); el.id='tsws12l';
-    var orbs=LEARN.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('');
-    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>'+
-      '<div id="ts-next-wrap"><a id="ts-next" href="'+NEXT_URL+'">N\u00e4chste Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>';
-    el.querySelector('#ts-next').addEventListener('click',function(e){ e.preventDefault(); window.location.assign(NEXT_URL); });
-    return el;
-  }
-
-  function mountL(){
-    if(!on()){ var o=document.getElementById('tsws12l'); if(o&&o.parentNode)o.parentNode.removeChild(o); return; }
-    if(document.getElementById('tsws12l')) return;
-    var host=document.querySelector('.super-content'); if(!host) return;
-    if(!document.querySelector('.notion-root')) return;
-    injectCSS();
-    host.appendChild(buildL());
-    var el=document.getElementById('tsws12l');
-    el.classList.add('js');
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ el.classList.add('in'); io.disconnect(); } },{threshold:.2});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) el.classList.add('in');
-    setTimeout(function(){ if(el.isConnected) el.classList.add('in'); }, 4000);
-  }
-
-  function mount(){ mountHero(); mountL(); }
-  window.__tsws12=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
+/* MODUL 6 · alte Bloecke (L6.1-L6.12, Stand 02.08.2026) am 01.11.2026 entfernt: Neubau im Block "NEUBAU MODUL 6" am Dateiende. */
 /* ============================================================
    MODUL 3 · CLAUDE GRUNDLAGEN — gemeinsame Bausteine (__ts3)
    ------------------------------------------------------------
@@ -36021,6 +34149,1796 @@ window.__tsn4Boot && window.__tsn4Boot();
 /* · */
 
 /* >>> NEUBAU MODUL 6 (AI Website Building) — ANFANG >>> */
+/* ============================================================
+   NEUBAU MODUL 6 · AI Website Building (01.11.2026)
+   Eine Bibliothek fuer alle 15 Seiten des Moduls (Landing + 14 Lektionen).
+   Inhalt kommt aus der Konfiguration LESSONS weiter unten, jede Lektion hat
+   ihre EIGENE Erklaeranimation (ANIM.<key>), kein Recycling.
+   Robustheit: Endzustand = Default (Startzustand nur hinter .js), Reveal nach
+   tsReveal-Muster (IO + scroll + resize + Intervall + 600/1600 ms + hartes
+   fire nach 9 s), Weiter-Knopf mit guard() (Host jedes Mal frisch holen),
+   Re-Mount bei super.so-Neuzeichnen und SPA-Navigation.
+   ============================================================ */
+(function(){
+  if(window.__tsn6) return; window.__tsn6=true;
+  var BASE='https://tastyrob123.github.io/kurs-code/';
+  var LOGO=BASE+'assets/au80tp.png';
+  var IMGB=BASE+'img/m6/';
+  /* Bild-Manifest: Name -> Dateiname in img/m6/. Fehlt ein Eintrag, steht ein
+     Platzhalter mit Lichtstimmung + Motiv-Beschriftung (Skelett vor Schoenheit). */
+  var IMS='cover-60 cover-61 cover-62 cover-63 cover-64 cover-65 cover-66 cover-67 cover-68 cover-69 cover-610 cover-611 cover-612 cover-613 cover-614 m6-teller m6-a67-vor m6-spargel m6-pilze m6-winter'.split(' ');
+  var AL={'m6-a61':'cover-63','m6-a62':'cover-65','m6-a64':'cover-64','m6-a67-nach':'m6-teller'};
+  function real(n){ n=AL[n]||n; return IMS.indexOf(n)>-1?n:null; }
+  var REDUCED=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+
+  /* Bild aus img/m6/ (1200 px, WebP). Fehlt es, steht ein Platzhalter mit Lichtstimmung + Motiv. */
+  function pic(name, label, tone){
+    var r=real(name);
+    if(r) return '<img class="tsn6-pic" src="'+IMGB+r+'-s.webp" alt="'+(label||'')+'" decoding="async">';
+    return '<div class="tsn6-ph'+(tone?' '+tone:'')+'"><i>Bild folgt · '+(label||name)+'</i></div>';
+  }
+  function coverSrc(name, label){
+    var r=real(name); if(r) return IMGB+r+'.webp';
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800"><rect width="1600" height="800" fill="#08080b"/></svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+  function qs(r,s){ return r.querySelector(s); }
+  function qa(r,s){ return Array.prototype.slice.call(r.querySelectorAll(s)); }
+
+  /* tsReveal-Muster (Katalog-Regel 15a): nie nur ein nackter IntersectionObserver */
+  function reveal(node, cb, thr){
+    var done=false, io=null, iv=null;
+    function vis(){ if(!node.isConnected) return false; var r=node.getBoundingClientRect(), h=window.innerHeight||800; return r.top < h*(1-(thr||.12)) && r.bottom > 0; }
+    function clean(){ if(io) try{io.disconnect();}catch(e){} if(iv) clearInterval(iv); window.removeEventListener('scroll',chk); window.removeEventListener('resize',chk); }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function chk(){ if(vis()) fire(); }
+    if('IntersectionObserver' in window){ io=new IntersectionObserver(function(e){ if(e[0] && e[0].isIntersecting) fire(); },{threshold:thr||.12}); io.observe(node); }
+    window.addEventListener('scroll',chk,{passive:true}); window.addEventListener('resize',chk);
+    iv=setInterval(chk,400); setTimeout(chk,600); setTimeout(chk,1600);
+    setTimeout(function(){ if(node.isConnected) fire(); },9000);
+  }
+
+  /* Zeitleiste fuer Animationen: alle Timer zentral, damit "Neu abspielen" sauber stoppt */
+  function TL(){ var ts=[]; return {
+    at:function(ms,fn){ ts.push(setTimeout(fn,ms)); },
+    kill:function(){ ts.forEach(clearTimeout); ts=[]; }
+  }; }
+  /* Zahl hochzaehlen, Endwert garantiert per setTimeout ausserhalb von rAF (Regel 15b) */
+  function count(node, from, to, ms, fmt){
+    fmt=fmt||function(v){ return Math.round(v); };
+    var fertig=false, t0=null;
+    function step(t){ if(fertig) return; if(t0===null) t0=t; var p=Math.min(1,(t-t0)/ms); var e=1-Math.pow(1-p,3);
+      node.textContent=fmt(from+(to-from)*e); if(p<1) requestAnimationFrame(step); else fertig=true; }
+    requestAnimationFrame(step);
+    setTimeout(function(){ fertig=true; node.textContent=fmt(to); }, ms+120);
+  }
+  function eur(v){ return v.toFixed(2).replace('.',',')+' €'; }
+
+  /* ---------- Bausteine fuer Inhalts-Sektionen ---------- */
+  var COPY='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  function block(b){
+    switch(b.t){
+      case 'p': return '<p'+(b.cls?' class="'+b.cls+'"':'')+'>'+b.h+'</p>';
+      case 's': return '<p class="tsn6-strong">'+b.h+'</p>';
+      case 'h4': return '<h4>'+b.h+'</h4>';
+      case 'ul': return '<ul class="tsn6-ul">'+b.i.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul>';
+      case 'cards': return '<div class="tsn6-cards c'+(b.c||2)+'">'+b.i.map(function(c){
+          return '<div class="tsn6-card">'+(c.e?'<span class="ce">'+c.e+'</span>':'')+'<p class="cn">'+c.n+'</p><hr>'+c.p.split('\n\n').map(function(x){ return '<p>'+x+'</p>'; }).join('')+'</div>'; }).join('')+'</div>';
+      case 'code': return '<div class="tsn6-code'+(b.one?' one':'')+'"><div class="ch"><span>'+(b.l||'Prompt zum Kopieren')+'</span><button type="button" data-copy>'+COPY+'Kopieren</button></div><pre>'+b.h.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</pre></div>';
+      case 'do': return '<div class="tsn6-do"><span class="de">'+(b.l||'Jetzt du')+'</span><ol>'+b.i.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol></div>';
+      case 'merk': return '<div class="tsn6-merk"><span>'+(b.l||'Die Merkregel')+'</span><p>'+b.h+'</p></div>';
+      case 'pairs': return '<div class="tsn6-pairs">'+b.i.map(function(x){ return '<div class="tsn6-pair"><div><i>So nicht</i>'+x[0]+'</div><div><i>So</i>'+x[1]+'</div></div>'; }).join('')+'</div>';
+      case 'fig': return '<figure class="tsn6-fig"><div class="fr">'+pic(b.img,b.l,b.tone)+'</div>'+(b.cap?'<figcaption>'+b.cap+'</figcaption>':'')+'</figure>';
+      case 'tab': return '<table class="tsn6-tab"><thead><tr>'+b.h.map(function(x){ return '<th>'+x+'</th>'; }).join('')+'</tr></thead><tbody>'+b.r.map(function(r){ return '<tr>'+r.map(function(x){ return '<td>'+x+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
+    }
+    return '';
+  }
+  function wireCopy(root){
+    qa(root,'[data-copy]').forEach(function(btn){
+      if(btn.__w) return; btn.__w=true;
+      btn.addEventListener('click',function(){
+        var txt=btn.closest('.tsn6-code').querySelector('pre').textContent;
+        function ok(){ btn.classList.add('ok'); btn.innerHTML=COPY+'Kopiert'; setTimeout(function(){ btn.classList.remove('ok'); btn.innerHTML=COPY+'Kopieren'; },1800); }
+        if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,function(){ fallback(); }); } else fallback();
+        function fallback(){ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); ok(); }catch(e){} ta.remove(); }
+      });
+    });
+  }
+
+  /* ---------- Abschnitt 07 · Empfehlungs-Kachel (Verhalten 1:1 aus #tszein / __ts3.emp) ---------- */
+  function empHTML(c){
+    return '<div class="eg"><svg class="el" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'
+      +'<div class="ea"><div class="eh">'+c.at+' <span class="g">'+c.ag+'</span></div>'
+      +c.steps.map(function(s,i){ return '<div class="es"><span class="en">'+(i+1)+'</span><span class="eln">'+s+'</span></div>'; }).join('')+'</div>'
+      +'<div class="et"><h3 class="eth">Empfehlung zur <span class="g">'+c.kind+'</span></h3><p class="eti">'+c.intro+'</p><ol>'
+      +c.points.map(function(p){ return '<li>'+p+'</li>'; }).join('')+'</ol></div></div>';
+  }
+  function empDraw(e){
+    var grid=qs(e,'.eg'), svg=qs(e,'.el'), on=qs(e,'.es.on'), lit=qs(e,'ol li.lit');
+    var path=qs(svg,'path'), c1=qs(svg,'.c1'), c2=qs(svg,'.c2');
+    if(!on||!lit||getComputedStyle(svg).display==='none'){ [path,c1,c2].forEach(function(x){ x.classList.remove('on'); }); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2, dx=(x2-x1)*.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(err){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px'; void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    [path,c1,c2].forEach(function(x){ x.classList.add('on'); });
+  }
+  function empWire(e){
+    var steps=qa(e,'.es'), lis=qa(e,'ol li'), idx=-1, iv=null;
+    function tick(){ idx=(idx+1)%steps.length; steps.forEach(function(s,i){ s.classList.toggle('on',i===idx); }); lis.forEach(function(s,i){ s.classList.toggle('lit',i===idx); }); requestAnimationFrame(function(){ empDraw(e); }); }
+    function start(){ if(iv||!e.isConnected) return; tick(); iv=setInterval(function(){ if(!e.isConnected){ clearInterval(iv); iv=null; return; } if(!document.hidden) tick(); },2600); }
+    reveal(e,function(){ e.classList.add('in'); if(!REDUCED) start(); else { steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); } },.25);
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      e.addEventListener('mousemove',function(ev){ var r=e.getBoundingClientRect(), px=(ev.clientX-r.left)/r.width, py=(ev.clientY-r.top)/r.height;
+        e.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); e.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        e.style.setProperty('--gx',(px*100).toFixed(1)+'%'); e.style.setProperty('--gy',(py*100).toFixed(1)+'%'); e.classList.add('glow','tilt'); });
+      e.addEventListener('mouseenter',function(){ e.classList.add('beat','tilt'); });
+      e.addEventListener('mouseleave',function(){ e.style.setProperty('--ry','0deg'); e.style.setProperty('--rx','0deg'); e.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ if(e.isConnected) requestAnimationFrame(function(){ empDraw(e); }); });
+  }
+
+  var ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var REPLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>';
+  /* Marke fliegt von a nach b (nur transform/opacity), wird danach entfernt */
+  function fly(stage, a, b, html, ms, cls){
+    if(!a||!b||!stage.isConnected) return;
+    var s=stage.getBoundingClientRect(), ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+    var t=el('div','tsn6-tok'+(cls?' '+cls:''),html); stage.appendChild(t);
+    var x0=ra.left-s.left+ra.width/2, y0=ra.top-s.top+ra.height/2, dx=rb.left-s.left+rb.width/2-x0, dy=rb.top-s.top+rb.height/2-y0;
+    t.style.left=x0+'px'; t.style.top=y0+'px'; ms=ms||800;
+    t.animate([{transform:'translate(-50%,-50%) scale(.6)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.18},
+      {transform:'translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px)) scale(1)',opacity:1,offset:.86},{transform:'translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px)) scale(.7)',opacity:0}],
+      {duration:ms,easing:'cubic-bezier(.65,0,.35,1)',fill:'forwards'});
+    setTimeout(function(){ t.remove(); },ms+60);
+  }
+  var ANIM={}, LESSONS={};
+  function animCSS(k){ if(!ANIM[k]||!ANIM[k].css||document.getElementById('tsn6-css-'+k)) return; var st=el('style'); st.id='tsn6-css-'+k; st.textContent=ANIM[k].css; document.head.appendChild(st); }
+
+  /* ============ Landing · Opener "So entsteht deine Seite." ============
+     Ein Objekt: Handy links, Stationsleiste rechts (14 gleich grosse Felder).
+     Jede Station schaltet sichtbar einen Teil der Seite im Handy frei. */
+  ANIM.a60={css:`
+  .a60{display:grid;grid-template-columns:300px minmax(0,560px);justify-content:center;align-items:center;gap:clamp(30px,6vw,80px)}
+  .a60 .scr{background:#0a0a0d;transition:background 1s ease}
+  .a60 .scr>*{transition:opacity .8s ease,transform .9s var(--ez),filter .8s ease}
+  .a60-url{position:absolute;top:38px;left:14px;right:14px;height:22px;border-radius:8px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;gap:5px;font:600 9.5px/1 var(--sans);color:rgba(255,255,255,.75);letter-spacing:.02em}
+  .a60-url b{color:#7fd3a2;font-weight:700}
+  .a60-hero{position:absolute;top:70px;left:12px;right:12px;height:36%;border-radius:14px;overflow:hidden}
+  .a60-hero>*{width:100%;height:100%}
+  .a60-play{position:absolute;left:12px;right:12px;bottom:8px;height:2px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}
+  .a60-play i{display:block;height:100%;width:62%;background:var(--g)}
+  .a60-t{position:absolute;top:calc(36% + 82px);left:18px;right:18px}
+  .a60-t h5{margin:0 0 8px;font-family:var(--disp);font-weight:600;font-size:23px;line-height:1.05;color:#fff}
+  .a60-t p{margin:0;height:5px;border-radius:3px;background:rgba(255,255,255,.18);width:92%}
+  .a60-t p+p{margin-top:6px;width:70%}
+  .a60-menu{position:absolute;left:14px;right:14px;bottom:62px;display:flex;flex-direction:column;gap:6px}
+  .a60-menu div{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(255,255,255,.82);padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+  .a60-menu span:last-child{color:var(--g);font-weight:700;font-variant-numeric:tabular-nums}
+  .a60-btn{position:absolute;left:14px;right:14px;bottom:18px;height:32px;border-radius:999px;background:var(--g);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans)}
+  .a60-ok{position:absolute;top:80px;right:20px;z-index:4;padding:4px 8px;border-radius:999px;background:rgba(70,175,115,.2);border:1px solid rgba(70,175,115,.5);color:#8fe0b1;font:700 8.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .a60-sk{position:absolute;inset:70px 12px 18px;display:flex;flex-direction:column;gap:9px;pointer-events:none}
+  .a60-sk i{display:block;border-radius:10px;border:1px dashed rgba(199,180,137,.35)}
+  .a60-sk i:nth-child(1){height:36%}.a60-sk i:nth-child(2){height:16%}.a60-sk i:nth-child(3){flex:1}.a60-sk i:nth-child(4){height:32px;border-radius:999px}
+  .a60-rail{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  .a60-st{display:flex;align-items:center;gap:11px;height:46px;padding:0 13px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease,background .5s ease,box-shadow .5s ease}
+  .a60-st b{flex:0 0 auto;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans);color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease;font-variant-numeric:tabular-nums}
+  .a60-st span{font-size:13px;font-weight:600;color:rgba(255,255,255,.62);transition:color .5s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .a60-st.done b{background:rgba(199,180,137,.2);color:var(--g)}.a60-st.done span{color:rgba(255,255,255,.86)}
+  .a60-st.now{border-color:rgba(199,180,137,.6);background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),var(--bg);box-shadow:0 14px 30px -16px rgba(199,180,137,.45)}
+  .a60-st.now b{background:var(--g);color:var(--bg)}.a60-st.now span{color:#fff}
+  /* Startzustand nur hinter .js */
+  .a60.js .scr{background:#000}
+  .a60.js .a60-sk,.a60.js .a60-url,.a60.js .a60-hero,.a60.js .a60-play,.a60.js .a60-t,.a60.js .a60-menu,.a60.js .a60-btn,.a60.js .a60-ok{opacity:0}
+  .a60.js .a60-hero{transform:translateY(22px)}.a60.js .a60-t{transform:translateY(16px)}
+  .a60.js.s1 .scr{background:#0a0a0d}
+  .a60.js.s2 .a60-sk{opacity:1}
+  .a60.js.s3 .a60-sk i:nth-child(2){border-color:rgba(199,180,137,.75)}
+  .a60.js.s4 .scr{background:radial-gradient(120% 70% at 50% 0%,#1d1610,#0a0a0d 70%)}
+  .a60.js.s6 .a60-hero{transform:none}
+  .a60.js.s7 .a60-hero{opacity:1}.a60.js.s7 .a60-sk{opacity:0}
+  .a60.js.s8 .a60-play{opacity:1}
+  .a60.js.s9 .a60-t{opacity:1;transform:none}
+  .a60.js.s10 .a60-menu,.a60.js.s10 .a60-btn{opacity:1}
+  .a60.js:not(.s11) .a60-t h5{font-family:Georgia,serif;font-weight:400;letter-spacing:0}
+  .a60.js.s12 .a60-ok{opacity:1}
+  .a60.js.s13 .a60-url{opacity:1}
+  @media(max-width:820px){ .a60{grid-template-columns:1fr;justify-items:center} .a60 .tsn6-phone{max-width:250px} .a60-rail{width:100%} }
+  @media(max-width:520px){ .a60-rail{grid-template-columns:1fr} }
+  `,run:function(stage,cap){
+    var S=['Projekt anlegen','Werkzeugkiste','Deine Geschichte','Design-Brief','Drehbuch','Bewegung mit Maß','Echte Bilder zuerst','Bewegtes Bild','Worte, die schmecken','Karte und Tisch','Die Schrift','Flüssig am Handy','Online stellen','Die Seite pflegen'];
+    var C=['Ein Ordner, eine Sitzung und die echten Daten deines Betriebs.','Drei Werkzeuge, die aus Claude einen guten Gestalter machen.','Die Geschichte deines Betriebs bestimmt, welche Abschnitte die Seite braucht.','Farben, Stimmung und Verbote, schriftlich, bevor gestaltet wird.','Die Startseite als ein Abend in Abschnitten.','Bewegung, die edel wirkt, und die, die billig wirkt.','Deine Fotos zuerst, KI nur für das, was fehlt.','Ein kurzer Film dort, wo er sich lohnt.','Wenige Sätze, die deinen Teller aufwerten.','Die Karte als Daten, Reservierung mit einem Tipp.','Die Titelschrift kommt aus deinem Logo.','Geprüft am Handy, nicht am großen Bildschirm.','Eigene Adresse, Impressum, Google-Eintrag.','Preise und Saisonkarte in einem Satz geändert.'];
+    stage.innerHTML='<div class="a60"><div class="tsn6-phone"><div class="scr">'
+      +'<div class="a60-url"><b>●</b> dein-restaurant.de</div><div class="a60-sk"><i></i><i></i><i></i><i></i></div>'
+      +'<div class="a60-hero">'+pic('cover-60','Abendtisch')+'<div class="a60-play"><i></i></div></div><div class="a60-ok">flüssig</div>'
+      +'<div class="a60-t"><h5>Feldkamp</h5><p></p><p></p></div>'
+      +'<div class="a60-menu"><div><span>Kalbsbäckchen, Sellerie</span><span class="pr">28</span></div><div><span>Saibling, Beurre blanc</span><span>26</span></div></div>'
+      +'<div class="a60-btn">Tisch reservieren</div></div></div>'
+      +'<div class="a60-rail">'+S.map(function(s,i){ return '<div class="a60-st"><b>'+(i+1)+'</b><span>'+s+'</span></div>'; }).join('')+'</div></div>';
+    var root=qs(stage,'.a60'), st=qa(stage,'.a60-st'), pr=qs(stage,'.pr'), tl=TL();
+    function end(){ root.className='a60'; st.forEach(function(x){ x.className='a60-st done'; }); pr.textContent='28';
+      cap('Vierzehn Lektionen, und am Ende steht eine Seite, die deinen Betrieb zeigt und die du <b>selbst pflegst</b>.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a60 js'; st.forEach(function(x){ x.className='a60-st'; }); pr.textContent='26'; cap('&nbsp;');
+      S.forEach(function(s,i){ tl.at(400+i*820,function(){
+        st.forEach(function(x,j){ x.className='a60-st'+(j<i?' done':j===i?' now':''); });
+        root.classList.add('s'+(i+1)); cap('<b>'+(i+1)+' · '+s+'.</b> '+C[i]);
+        if(i===13){ count(pr,26,28,700); }
+      }); });
+      tl.at(400+14*820+900,end);
+    }};
+  }};
+
+  /* ============ L6.1 · Animation "Was fehlt, wird erfunden." ============
+     Ein Objekt: CLAUDE.md-Karte links + Handy rechts auf einer Achse.
+     Takt: Seite fuellt sich mit erfundenen Angaben (rot) -> CLAUDE.md kommt ->
+     jede Zeile schickt ihre Angabe ins Handy (gold), eine Angabe fehlt -> OFFEN. */
+  ANIM.a61={css:`
+  .a61{display:grid;grid-template-columns:minmax(0,380px) minmax(0,300px);justify-content:center;align-items:center;gap:clamp(28px,6vw,90px)}
+  .a61-md{border-radius:16px;border:1px solid rgba(199,180,137,.35);background:linear-gradient(rgba(199,180,137,.05),rgba(199,180,137,.05)),#07080d;overflow:hidden;
+    transition:transform .9s var(--ez),opacity .7s ease}
+  .a61-md .h{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.07);font:600 11px/1 var(--mono);color:var(--g)}
+  .a61-md .h i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14);display:inline-block}
+  .a61-md .b{padding:14px 16px 16px;font:500 12.5px/1.95 var(--mono);color:rgba(255,255,255,.62)}
+  .a61-md .b .t{color:#fff}
+  .a61-md .ln{display:flex;justify-content:space-between;gap:12px;border-radius:7px;padding:0 8px;margin:0 -8px;transition:background .4s ease,opacity .5s ease,transform .6s var(--ez)}
+  .a61-md .ln span:last-child{color:#efe6d2;text-align:right}
+  .a61-md .ln.off span:last-child{color:#e0574f}
+  .a61-md .ln.lit{background:rgba(199,180,137,.14)}
+  .a61-ph .scr{display:flex;flex-direction:column}
+  .a61-top{padding:40px 16px 10px;text-align:center;font-family:var(--disp);font-weight:600;font-size:21px;letter-spacing:.02em;color:#fff}
+  .a61-top small{display:block;font:600 8.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-top:6px}
+  .a61-img{margin:4px 12px 12px;height:30%;border-radius:12px;overflow:hidden}
+  .a61-img>*{width:100%;height:100%}
+  .a61-rows{padding:0 14px;display:flex;flex-direction:column;gap:8px}
+  .a61-row{border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:border-color .5s ease,background .5s ease}
+  .a61-row .k{display:block;font:600 8px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px}
+  .a61-row .v{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12.5px;font-weight:600;color:#fff;min-height:16px}
+  .a61-row .v em{font:700 7.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;font-style:normal;padding:3px 6px;border-radius:999px;background:rgba(70,175,115,.16);color:#7fd3a2}
+  .a61-row.bad{border-color:rgba(224,87,79,.55);background:rgba(224,87,79,.08)}
+  .a61-row.bad .v{color:#f0a49e}.a61-row.bad .v em{background:rgba(224,87,79,.2);color:#ff9b93}
+  .a61-row.good{border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.07)}
+  .a61-row.open{border-style:dashed;border-color:rgba(199,180,137,.5)}
+  .a61-row.open .v{color:var(--g)}
+  .a61-row.open .v em{background:rgba(199,180,137,.16);color:var(--g)}
+  .a61-btn{margin:12px 14px 0;height:34px;border-radius:999px;background:var(--g);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--sans)}
+  .a61.js-start .a61-md{opacity:0;transform:translateX(-26px)}
+  @media(max-width:760px){ .a61{grid-template-columns:1fr;justify-items:center} .a61-md{width:100%;max-width:380px} .a61-ph{max-width:250px} }
+  `,run:function(stage,cap){
+    var F=[ ['Name','Feldkamp'], ['Öffnungszeiten','Mi bis So, ab 17.30 Uhr'], ['Telefon','040 / 63 21 90'], ['Adresse','Am Kanal 4'], ['E-Mail','OFFEN'] ];
+    var FAKE=['Täglich 11 bis 23 Uhr','040 / 88 21 340','Hafenstraße 12','info@feldkamp.de'];
+    stage.innerHTML='<div class="a61">'
+      +'<div class="a61-md"><div class="h"><i></i><i></i><i></i>&nbsp;CLAUDE.md</div><div class="b"><div class="t">## Fakten</div>'
+      +F.map(function(f,i){ return '<div class="ln'+(f[1]==='OFFEN'?' off':'')+'" data-i="'+i+'"><span>'+f[0]+':</span><span>'+f[1]+'</span></div>'; }).join('')
+      +'<div class="t" style="margin-top:10px">## Regeln</div><div>Angaben nur aus dem Fakten-Block.</div><div>Fehlt etwas: Stelle leer, OFFEN.</div></div></div>'
+      +'<div class="tsn6-phone a61-ph"><div class="scr"><div class="a61-top">Feldkamp<small>Küche &amp; Wein</small></div><div class="a61-img">'+pic('m6-a61','Gastraum am Abend')+'</div>'
+      +'<div class="a61-rows">'+F.slice(1).map(function(f,i){ return '<div class="a61-row" data-r="'+(i+1)+'"><span class="k">'+f[0]+'</span><span class="v"></span></div>'; }).join('')+'</div>'
+      +'<div class="a61-btn">Tisch reservieren</div></div></div></div>';
+    var root=qs(stage,'.a61'), rows=qa(stage,'.a61-row'), lines=qa(stage,'.a61-md .ln'), tl=TL();
+    function setRow(r,txt,state,tag){ r.className='a61-row'+(state?' '+state:''); qs(r,'.v').innerHTML=txt?('<span>'+txt+'</span>'+(tag?'<em>'+tag+'</em>':'')):''; }
+    function endState(){
+      root.classList.remove('js-start');
+      rows.forEach(function(r,i){ var f=F[i+1]; if(f[1]==='OFFEN') setRow(r,'noch offen','open','offen'); else setRow(r,f[1],'good','aus CLAUDE.md'); });
+      lines.forEach(function(l){ l.classList.remove('lit'); });
+      cap('Jede Angabe kommt aus der <b>CLAUDE.md</b>. Was dort fehlt, bleibt auf der Seite leer und ist als <b>offen</b> markiert, bis du es nachträgst.');
+    }
+    endState();
+    return {
+      reset:function(){ tl.kill(); qa(stage,'.tsn6-tok').forEach(function(t){ t.remove(); }); endState(); },
+      play:function(){
+        tl.kill(); root.classList.add('js-start');
+        rows.forEach(function(r){ setRow(r,'',''); });
+        cap('Ohne Fakten baut Claude die Seite trotzdem fertig.');
+        rows.forEach(function(r,i){ tl.at(700+i*480,function(){ setRow(r,FAKE[i],'bad','erfunden'); }); });
+        tl.at(2900,function(){ cap('Die Angaben sehen plausibel aus. <b>Keine davon stimmt.</b> Ein Gast, der hier anruft, landet bei niemandem.'); });
+        tl.at(5200,function(){ root.classList.remove('js-start'); cap('Jetzt liegt die <b>CLAUDE.md</b> im Projekt. Claude liest sie zu Beginn jeder Sitzung.'); });
+        F.slice(1).forEach(function(f,i){
+          var t0=6600+i*1100, ln=lines[i+1], r=rows[i];
+          tl.at(t0,function(){ lines.forEach(function(l){ l.classList.remove('lit'); }); ln.classList.add('lit');
+            fly(stage,ln,r,f[1]==='OFFEN'?'OFFEN':f[1],820,f[1]==='OFFEN'?'red':''); });
+          tl.at(t0+780,function(){ if(f[1]==='OFFEN') setRow(r,'noch offen','open','offen'); else setRow(r,f[1],'good','aus CLAUDE.md'); });
+        });
+        tl.at(6600+4*1100+400,function(){ lines.forEach(function(l){ l.classList.remove('lit'); });
+          cap('Jede Angabe kommt aus der <b>CLAUDE.md</b>. Was dort fehlt, bleibt auf der Seite leer und ist als <b>offen</b> markiert, bis du es nachträgst.'); });
+      }
+    };
+  }};
+
+  /* ============ L6.10 · Animation "Ein Preis aendert sich." ============
+     Links die Datenzeilen der Karte, rechts drei Ausgaben (Website, Handy,
+     Karte zum Drucken) auf einer Achse. Eine Aenderung in den Daten erscheint
+     ueberall zugleich. Danach Anruf und Reservierung mit einem Tipp. */
+  ANIM.a610={css:`
+  .a610{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(18px,3.5vw,40px);align-items:center}
+  .a610-db{border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#0b0c11;overflow:hidden}
+  .a610-db .h{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
+  .a610-r{display:grid;grid-template-columns:1fr 64px 22px;gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12.5px;color:rgba(255,255,255,.86);transition:background .4s ease,opacity .5s ease}
+  .a610-r .p{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:#fff}
+  .a610-r .c{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(199,180,137,.6);display:flex;align-items:center;justify-content:center}
+  .a610-r .c.on::after{content:"";width:8px;height:8px;border-radius:2px;background:var(--g)}
+  .a610-r.lit{background:rgba(199,180,137,.12)}
+  .a610-r.off{opacity:.42}
+  .a610-out{display:grid;grid-template-columns:1.25fr .8fr 1fr;gap:12px;align-items:end}
+  .a610-o .lb{font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;display:block}
+  .a610-o .bx{border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:7px;transition:box-shadow .5s ease}
+  .a610-o .bx.fl{box-shadow:0 0 0 2px rgba(199,180,137,.75),0 0 30px rgba(199,180,137,.3)}
+  .a610-o .it{display:flex;justify-content:space-between;gap:6px;font-size:11px;line-height:1.25;transition:opacity .5s ease}
+  .a610-o .it b{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .a610-o .it.gone{display:none}
+  .a610-web .bx{background:#101116;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.86)}
+  .a610-web .bx b{color:var(--g)}
+  .a610-ph .bx{background:#0a0a0d;border:1px solid rgba(255,255,255,.14);border-radius:18px;color:rgba(255,255,255,.86);min-height:190px}
+  .a610-ph .bx b{color:var(--g)}
+  .a610-ph .bt{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+  .a610-ph .bt span{position:relative;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--sans);overflow:hidden}
+  .a610-ph .bt span:first-child{background:var(--g);color:var(--bg)}
+  .a610-ph .bt span:last-child{border:1px solid rgba(199,180,137,.5);color:var(--g)}
+  .a610-ph .bt span i{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.5);opacity:0}
+  .a610-ph .bt span.tap i{animation:a610Tap .8s ease-out}
+  @keyframes a610Tap{from{opacity:.8;transform:scale(.2)}to{opacity:0;transform:scale(4)}}
+  .a610-pr .bx{background:#efe6d2;color:#1e1813;font-family:Georgia,serif}
+  .a610-pr .bx b{color:#1e1813}
+  .a610-pr .bx .ti{font-family:var(--disp);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;margin-bottom:3px}
+  @media(max-width:820px){ .a610{grid-template-columns:1fr} }
+  @media(max-width:520px){ .a610-out{grid-template-columns:1fr 1fr} .a610-web{grid-column:1/-1} }
+  `,run:function(stage,cap){
+    var D=[['Kalbsbäckchen, Sellerie','28,00'],['Saibling, Beurre blanc','26,00'],['Rote Bete, Ziegenkäse','17,50'],['Schokolade, Kirsche','12,00']];
+    function items(){ return D.map(function(d,i){ return '<div class="it" data-i="'+i+'"><span>'+d[0]+'</span><b>'+d[1]+'</b></div>'; }).join(''); }
+    stage.innerHTML='<div class="a610"><div class="a610-db"><div class="h">Gerichte · aus dem Backoffice</div>'
+      +D.map(function(d,i){ return '<div class="a610-r" data-i="'+i+'"><span>'+d[0]+'</span><span class="p">'+d[1]+' €</span><span class="c on"></span></div>'; }).join('')+'</div>'
+      +'<div class="a610-out"><div class="a610-o a610-web"><span class="lb">Website</span><div class="bx">'+items()+'</div></div>'
+      +'<div class="a610-o a610-ph"><span class="lb">Handy</span><div class="bx">'+items()+'<div class="bt"><span><i></i>Tisch reservieren</span><span><i></i>Anrufen</span></div></div></div>'
+      +'<div class="a610-o a610-pr"><span class="lb">Zum Drucken</span><div class="bx"><div class="ti">Karte</div>'+items()+'</div></div></div></div>';
+    var root=qs(stage,'.a610'), rows=qa(stage,'.a610-r'), bxs=qa(stage,'.a610-o .bx'), tl=TL();
+    function setPrice(v){ qs(rows[0],'.p').textContent=v+' €'; qa(stage,'.a610-o .it[data-i="0"] b').forEach(function(b){ b.textContent=v; }); }
+    function setOn(i,on){ qs(rows[i],'.c').classList.toggle('on',on); rows[i].classList.toggle('off',!on); qa(stage,'.a610-o .it[data-i="'+i+'"]').forEach(function(x){ x.classList.toggle('gone',!on); }); }
+    function end(){ rows.forEach(function(r){ r.classList.remove('lit'); }); setPrice('28,00'); setOn(1,false); bxs.forEach(function(b){ b.classList.remove('fl'); });
+      cap('Die Karte lebt <b>an einer Stelle</b>. Website, Handy und Druckkarte bauen sich daraus, und ein Gericht, das von der Karte geht, verschwindet überall zugleich.'); }
+    end();
+    return {reset:function(){ tl.kill(); qa(stage,'.tsn6-tok').forEach(function(t){t.remove();}); end(); }, play:function(){
+      tl.kill(); setPrice('26,00'); setOn(1,true); rows.forEach(function(r){ r.classList.remove('lit'); });
+      cap('Links die Gerichte als Daten, rechts drei Orte, an denen der Gast deine Karte sieht.');
+      tl.at(1800,function(){ rows[0].classList.add('lit'); cap('Der Preis für das Kalbsbäckchen ändert sich. Geändert wird <b>eine Zeile</b>.'); count(qs(rows[0],'.p'),26,28,900,function(v){ return eur(v); }); });
+      tl.at(3000,function(){ bxs.forEach(function(b){ fly(stage,rows[0],b,'28,00 €',800); }); });
+      tl.at(3800,function(){ setPrice('28,00'); bxs.forEach(function(b){ b.classList.add('fl'); }); cap('Website, Handy und Druckkarte zeigen den neuen Preis im selben Moment.'); });
+      tl.at(5200,function(){ bxs.forEach(function(b){ b.classList.remove('fl'); }); rows[0].classList.remove('lit'); rows[1].classList.add('lit'); cap('Der Saibling ist aus. Ein Haken in den Daten.'); });
+      tl.at(6400,function(){ setOn(1,false); rows[1].classList.remove('lit'); cap('Er verschwindet überall zugleich. Niemand bestellt am Telefon, was es nicht mehr gibt.'); });
+      tl.at(8400,function(){ var b=qa(stage,'.a610-ph .bt span'); b[0].classList.add('tap'); cap('Und am Handy reicht <b>ein Tipp</b>: reservieren oder direkt anrufen.'); setTimeout(function(){ b[1].classList.add('tap'); },900); setTimeout(function(){ b.forEach(function(x){ x.classList.remove('tap'); }); },2000); });
+      tl.at(11500,end);
+    }};
+  }};
+
+  /* ============ L6.11 · Animation "Die Schrift kommt aus dem Logo." ============
+     Oben das Schild mit der Wortmarke, darunter drei gleich grosse Kandidaten.
+     Jeder wird ueber die Wortmarke gelegt, einer passt. Danach die Zeichenprobe
+     (eine Schrift faellt bei Umlaut und Eszett auf eine Ersatzschrift zurueck)
+     und die Lizenzfrage. */
+  ANIM.a611={css:`
+  .a611{width:min(860px,100%);margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  .a611-sg{position:relative;height:150px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 140% at 50% 0%,#2a1d14,#0c0a09 70%);border:1px solid rgba(255,255,255,.08)}
+  .a611-wm{font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,6vw,58px);letter-spacing:.22em;text-transform:uppercase;color:#e9d9b8;text-shadow:0 0 22px rgba(233,200,140,.35)}
+  .a611-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(34px,6vw,58px);letter-spacing:.22em;text-transform:uppercase;color:rgba(120,200,255,.75);mix-blend-mode:screen;opacity:0;transition:opacity .5s ease}
+  .a611-ov.on{opacity:1}
+  .a611-cd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .a611-c{height:96px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:border-color .5s ease,opacity .5s ease,background .5s ease}
+  .a611-c .s{font-size:24px;color:#fff;letter-spacing:.02em}
+  .a611-c small{font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+  .a611-c.no{opacity:.35}
+  .a611-c.yes{border-color:rgba(199,180,137,.7);background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),var(--bg)}
+  .a611-c.yes small{color:var(--g)}
+  .a611-gl{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;border-radius:13px;border:1px solid rgba(255,255,255,.1);padding:14px 16px;background:#0b0c11}
+  .a611-gl .r{font-family:Georgia,serif;font-size:clamp(20px,3vw,28px);letter-spacing:.06em;color:#fff}
+  .a611-gl .r span{display:inline-block;margin-right:.3em;transition:color .4s ease}
+  .a611-gl .r span.fb{font-family:Arial,Helvetica,sans-serif;color:#ff9b93;text-decoration:underline;text-decoration-color:#e0574f;text-underline-offset:5px}
+  .a611-lc{display:flex;flex-direction:column;gap:6px}
+  .a611-lc span{font:700 9.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:999px;white-space:nowrap}
+  .a611-lc .ok{background:rgba(70,175,115,.18);color:#8fe0b1}
+  .a611-lc .ko{background:rgba(224,87,79,.16);color:#ff9b93;text-decoration:line-through}
+  .a611.js .a611-gl{opacity:.25}.a611.js.g .a611-gl{opacity:1}
+  .a611.js .a611-lc{opacity:0}.a611.js.l .a611-lc{opacity:1}
+  .a611 .a611-gl,.a611 .a611-lc{transition:opacity .6s ease}
+  @media(max-width:640px){ .a611-cd{grid-template-columns:1fr} .a611-c{height:64px} .a611-gl{grid-template-columns:1fr} }
+  `,run:function(stage,cap){
+    var F=[['-apple-system,Helvetica,sans-serif','700','Kandidat 1 · Grotesk'],[ '"Lineal Web",sans-serif','600','Kandidat 2 · Linear'],['Georgia,"Times New Roman",serif','400','Kandidat 3 · Antiqua']];
+    var G=['Ä','Ö','Ü','ß','€','„','“','&'];
+    stage.innerHTML='<div class="a611"><div class="a611-sg"><span class="a611-wm">Feldkamp</span><span class="a611-ov">Feldkamp</span></div>'
+      +'<div class="a611-cd">'+F.map(function(f){ return '<div class="a611-c"><span class="s" style="font-family:'+f[0].replace(/"/g,'&quot;')+';font-weight:'+f[1]+'">Feldkamp</span><small>'+f[2]+'</small></div>'; }).join('')+'</div>'
+      +'<div class="a611-gl"><div class="r">'+G.map(function(g){ return '<span>'+g+'</span>'; }).join('')+'</div><div class="a611-lc"><span class="ok">Web · gewerblich erlaubt</span><span class="ko">nur privat</span></div></div></div>';
+    var root=qs(stage,'.a611'), ov=qs(stage,'.a611-ov'), cs=qa(stage,'.a611-c'), gs=qa(stage,'.a611-gl .r span'), tl=TL();
+    function end(){ root.className='a611'; cs.forEach(function(c,i){ c.className='a611-c'+(i===2?' yes':' no'); }); ov.classList.remove('on'); gs.forEach(function(g){ g.classList.remove('fb'); });
+      cap('Die Titelschrift ist eine freie Entsprechung deiner <b>Wortmarke</b>. Sie hat alle Zeichen, die deine Seite braucht, und eine Lizenz für gewerbliche Websites.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a611 js'; cs.forEach(function(c){ c.className='a611-c'; }); gs.forEach(function(g){ g.classList.remove('fb'); });
+      cap('Oben das Schild über deiner Tür. Darunter drei Schriften, die Claude als Entsprechung vorschlägt.');
+      F.forEach(function(f,i){ tl.at(1600+i*1700,function(){
+        cs.forEach(function(c,j){ c.classList.toggle('yes',j===i); }); ov.style.fontFamily=f[0]; ov.style.fontWeight=f[1]; ov.classList.add('on');
+        cap(i<2?'Kandidat '+(i+1)+' über die Wortmarke gelegt: Form und Breite passen nicht.':'Kandidat 3 liegt fast deckungsgleich. <b>Diese Schrift</b> nehmen wir für die Titel.'); });
+        if(i<2) tl.at(1600+i*1700+1300,function(){ cs[i].className='a611-c no'; }); });
+      tl.at(1600+3*1700,function(){ ov.classList.remove('on'); root.classList.add('g'); cap('Dann die Zeichenprobe. In der ersten Fassung fehlen Umlaute und Eszett, der Browser springt auf eine Ersatzschrift.'); [0,1,3].forEach(function(k){ gs[k].classList.add('fb'); }); });
+      tl.at(1600+3*1700+2600,function(){ gs.forEach(function(g){ g.classList.remove('fb'); }); cap('Die vollständige Fassung der Schrift hat alle Zeichen. Jetzt sieht die Überschrift aus einem Guss aus.'); });
+      tl.at(1600+3*1700+4600,function(){ root.classList.add('l'); cap('Zum Schluss die Lizenz: <b>gewerbliche Websites erlaubt</b>. „Nur privat“ ist für deinen Betrieb tabu.'); });
+      tl.at(1600+3*1700+8200,end);
+    }};
+  }};
+
+  /* ============ L6.12 · Animation "Der Daumen entscheidet." ============
+     Links ein Handy, in dem die Seite scrollt, rechts die Fluessigkeits-Kurve
+     (Bilder pro Sekunde) und vier gleich grosse Pruefpunkte. Jeder behobene
+     Punkt glaettet die Kurve. Zum Schluss tippt der Daumen die zwei Knoepfe. */
+  ANIM.a612={css:`
+  .a612{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(24px,5vw,60px);align-items:center;width:min(900px,100%);margin:0 auto}
+  .a612 .tsn6-phone{max-width:260px}
+  .a612-col{position:absolute;left:0;right:0;top:0;padding:40px 12px 0;display:flex;flex-direction:column;gap:10px}
+  .a612-col .b{border-radius:12px;overflow:hidden;height:150px}.a612-col .b>*{width:100%;height:100%}
+  .a612-col .l{height:6px;border-radius:4px;background:rgba(255,255,255,.16)}.a612-col .l.s{width:60%}
+  .a612.scroll .a612-col{animation:a612Sc 5s cubic-bezier(.45,0,.55,1) infinite alternate}
+  @keyframes a612Sc{from{transform:translateY(0)}to{transform:translateY(-340px)}}
+  .a612-blur{position:absolute;left:0;right:0;top:46%;height:60px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.2),rgba(255,255,255,.1));z-index:3;transition:opacity .6s ease}
+  .a612-bt{position:absolute;left:12px;right:12px;bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;z-index:4}
+  .a612-bt span{position:relative;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans);background:var(--g);color:var(--bg);overflow:hidden}
+  .a612-bt span:last-child{background:#15161b;color:var(--g);border:1px solid rgba(199,180,137,.5)}
+  .a612-th{position:absolute;width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(255,255,255,.12);z-index:6;opacity:0;transform:translate(-50%,-50%) scale(1.3);transition:opacity .4s ease,transform .5s var(--ez),left .8s var(--ez),top .8s var(--ez)}
+  .a612-th.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .a612-gr{border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#0a0b10;padding:14px 14px 8px}
+  .a612-gr .hd{display:flex;justify-content:space-between;font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+  .a612-gr .hd b{color:#8fe0b1;font-variant-numeric:tabular-nums}
+  .a612-gr svg{display:block;width:100%;height:130px}
+  .a612-gr .bd{stroke:rgba(224,87,79,.35);stroke-dasharray:3 5}
+  .a612-gr path.ln{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .6s ease}
+  .a612-ck{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .a612-ck div{height:46px;border-radius:11px;display:flex;align-items:center;gap:9px;padding:0 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,.82);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease}
+  .a612-ck div::before{content:"";width:12px;height:12px;border-radius:50%;flex:0 0 auto;border:1.5px solid rgba(255,255,255,.3);transition:background .4s ease,border-color .4s ease}
+  .a612-ck div.on{border-color:rgba(70,175,115,.45)}.a612-ck div.on::before{background:#46af73;border-color:#46af73}
+  .a612:not(.js) .a612-blur{opacity:0}.a612.js.f2 .a612-blur{opacity:0}
+  @media(max-width:720px){ .a612{grid-template-columns:1fr;justify-items:center} .a612-gr,.a612-ck{width:100%} }
+  `,run:function(stage,cap){
+    var K=['Bilder in Handygröße','Kein Weichzeichner über Bewegtem','Maus-Effekte aus','Eigene Bildfolge fürs Handy'];
+    stage.innerHTML='<div class="a612"><div class="tsn6-phone"><div class="scr"><div class="a612-col"><div class="b">'+pic('cover-612','Handy vor der Tür')+'</div><div class="l"></div><div class="l s"></div><div class="b">'+pic('cover-66','Am Pass')+'</div><div class="l"></div><div class="b">'+pic('cover-63','Gastraum')+'</div><div class="l s"></div></div>'
+      +'<div class="a612-blur"></div><div class="a612-bt"><span>Tisch reservieren</span><span>Anrufen</span></div></div></div>'
+      +'<div><div class="a612-gr"><div class="hd"><span>Bilder pro Sekunde beim Scrollen</span><b>60</b></div><svg viewBox="0 0 300 130" preserveAspectRatio="none"><line class="bd" x1="0" y1="62" x2="300" y2="62"/><path class="ln" d=""/></svg></div>'
+      +'<div class="a612-ck">'+K.map(function(k){ return '<div>'+k+'</div>'; }).join('')+'</div></div><span class="a612-th"></span></div>';
+    var root=qs(stage,'.a612'), ln=qs(stage,'path.ln'), num=qs(stage,'.a612-gr .hd b'), ks=qa(stage,'.a612-ck div'), th=qs(stage,'.a612-th'), tl=TL(), iv=null, q=0;
+    function series(q){ var p=[]; for(var i=0;i<=40;i++){ var x=i*7.5, j=(1-q)*(Math.sin(i*1.7)*22+Math.sin(i*.6)*14+(i%7===3?38:0)), y=20+(1-q)*34+Math.max(0,j); p.push((i?'L':'M')+x.toFixed(1)+' '+Math.min(124,y).toFixed(1)); } return p.join(' '); }
+    function draw(qq){ q=qq; ln.setAttribute('d',series(qq)); ln.style.stroke=qq>.9?'#46af73':qq>.4?'#c7b489':'#e0574f'; num.textContent=Math.round(22+qq*38); num.style.color=qq>.9?'#8fe0b1':qq>.4?'#c7b489':'#ff9b93'; }
+    function tap(btn){ var s=stage.getBoundingClientRect(), r=btn.getBoundingClientRect(); th.style.left=(r.left-s.left+r.width/2)+'px'; th.style.top=(r.top-s.top+r.height/2)+'px'; th.classList.add('on'); }
+    function end(){ if(iv){ clearInterval(iv); iv=null; } root.className='a612'; draw(1); ks.forEach(function(k){ k.classList.add('on'); }); th.classList.remove('on');
+      cap('Flüssig heißt: <b>gleichmäßig schnell</b>, auch beim schnellen Wischen und auch auf einem älteren Handy. Und jeder Knopf ist mit dem Daumen gut zu treffen.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a612 js scroll'; ks.forEach(function(k){ k.classList.remove('on'); }); draw(0);
+      cap('Dieselbe Seite auf einem älteren Handy, schnell gescrollt. Die Kurve bricht immer wieder ein: Die Seite <b>ruckelt</b>.');
+      K.forEach(function(k,i){ tl.at(2600+i*1700,function(){ ks[i].classList.add('on'); if(i===1) root.classList.add('f2'); draw((i+1)/4);
+        cap(['Jedes Bild kommt in der Größe, die das Handy braucht, nicht in Rechnergröße.','Die Milchglas-Fläche über dem bewegten Bild ist weg. Sie war der teuerste Effekt auf der ganzen Seite.','Effekte, die eine Maus brauchen, laden auf dem Handy gar nicht erst.','Der Film im Auftakt hat eine eigene, leichtere Bildfolge fürs Handy. Jetzt ist die Kurve <b>glatt</b>.'][i]); }); });
+      tl.at(9900,function(){ root.classList.remove('scroll'); tap(qa(stage,'.a612-bt span')[0]); cap('Dann der Daumen-Test: Jeder Knopf ist groß genug für einen Daumen, nicht nur für einen Mauszeiger.'); });
+      tl.at(11300,function(){ tap(qa(stage,'.a612-bt span')[1]); });
+      tl.at(13200,end);
+    }};
+  }};
+
+  /* ============ L6.13 · Animation "Der Weg ins Netz." ============
+     Drei gleich breite Stationen auf einer Achse: Projektordner -> Paket ->
+     eigene Adresse. Erst fliegt raus, was nicht hochgehoert, dann reist das Paket
+     ueber die Leitung, die Adresse erscheint, und die Pruefrunde hakt ab. */
+  ANIM.a613={css:`
+  .a613-row{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center}
+  .a613-st{min-height:230px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#0b0c11;padding:14px;display:flex;flex-direction:column;gap:7px;transition:border-color .5s ease,box-shadow .5s ease}
+  .a613-st.lit{border-color:rgba(199,180,137,.6);box-shadow:0 0 30px rgba(199,180,137,.15)}
+  .a613-st .h{font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:4px}
+  .a613-f{display:flex;justify-content:space-between;gap:8px;font:500 11.5px/1.4 var(--mono);color:rgba(255,255,255,.8);transition:opacity .5s ease,transform .6s var(--ez)}
+  .a613-f em{font-style:normal;color:rgba(255,255,255,.4)}
+  .a613-f.x{color:#ff9b93;text-decoration:line-through;text-decoration-color:#e0574f}
+  .a613-f.x em{color:#ff9b93}
+  .a613-pk{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:opacity .5s ease,transform .7s var(--ez)}
+  .a613-pk .bx{width:74px;height:74px;border-radius:16px;background:linear-gradient(145deg,rgba(199,180,137,.3),rgba(199,180,137,.08));border:1px solid rgba(199,180,137,.6);display:flex;align-items:center;justify-content:center;font:700 10px/1.2 var(--sans);color:var(--gl)}
+  .a613-pk small{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
+  .a613-ln{position:relative;height:2px;margin:0 8px;background:rgba(199,180,137,.25)}
+  .a613-ln i{position:absolute;top:50%;left:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--g);box-shadow:0 0 14px rgba(199,180,137,.8);opacity:0}
+  .a613-ln.run i{animation:a613Run 1.2s cubic-bezier(.65,0,.35,1) forwards}
+  @keyframes a613Run{0%{opacity:0;transform:translateX(0)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translateX(54px)}}
+  .a613-br{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.12);flex:1;display:flex;flex-direction:column;transition:opacity .6s ease,transform .8s var(--ez)}
+  .a613-br .u{height:24px;background:#16171c;display:flex;align-items:center;gap:6px;padding:0 9px;font:600 9.5px/1 var(--sans);color:rgba(255,255,255,.8)}
+  .a613-br .u b{color:#8fe0b1}
+  .a613-br .p{flex:1;position:relative;min-height:90px}.a613-br .p>*{position:absolute;inset:0;width:100%;height:100%}
+  .a613-ck{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+  .a613-ck div{height:44px;border-radius:11px;display:flex;align-items:center;gap:9px;padding:0 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,.82);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease}
+  .a613-ck div::before{content:"";width:12px;height:12px;border-radius:50%;flex:0 0 auto;border:1.5px solid rgba(255,255,255,.3);transition:background .4s ease,border-color .4s ease}
+  .a613-ck div.on{border-color:rgba(70,175,115,.45)}.a613-ck div.on::before{background:#46af73;border-color:#46af73}
+  .a613.js .a613-pk{opacity:0;transform:scale(.8)}.a613.js.pk .a613-pk{opacity:1;transform:none}
+  .a613.js .a613-br{opacity:0;transform:translateY(14px)}.a613.js.br .a613-br{opacity:1;transform:none}
+  @media(max-width:820px){ .a613-row{grid-template-columns:1fr} .a613-ln{height:28px;width:2px;margin:6px auto} .a613-ln i{display:none} .a613-ck{grid-template-columns:1fr 1fr} }
+  `,run:function(stage,cap){
+    var FL=[['index.html','',0],['karte.html','',0],['bilder/','38 MB',0],['schriften/','',0],['daten/karte.json','',0],['entwuerfe/','18 GB',1],['fotos-original/','4 GB',1]];
+    var K=['Impressum','Datenschutz','Google-Eintrag','Prüfrunde live'];
+    stage.innerHTML='<div class="a613"><div class="a613-row"><div class="a613-st s1"><span class="h">Projektordner</span>'
+      +FL.map(function(f){ return '<div class="a613-f" data-x="'+f[2]+'"><span>'+f[0]+'</span><em>'+f[1]+'</em></div>'; }).join('')+'</div>'
+      +'<div class="a613-ln l1"><i></i></div><div class="a613-st s2"><span class="h">Hoster</span><div class="a613-pk"><div class="bx">ein<br>Paket</div><small>nur, was auf die Seite gehört</small></div></div>'
+      +'<div class="a613-ln l2"><i></i></div><div class="a613-st s3"><span class="h">Deine Adresse</span><div class="a613-br"><div class="u"><b>●</b> www.dein-restaurant.de</div><div class="p">'+pic('cover-613','Eingangstür am Abend')+'</div></div></div></div>'
+      +'<div class="a613-ck">'+K.map(function(k){ return '<div>'+k+'</div>'; }).join('')+'</div></div>';
+    var root=qs(stage,'.a613'), fs=qa(stage,'.a613-f'), st=qa(stage,'.a613-st'), ls=qa(stage,'.a613-ln'), ks=qa(stage,'.a613-ck div'), tl=TL();
+    function end(){ root.className='a613'; fs.forEach(function(f){ f.classList.toggle('x',f.getAttribute('data-x')==='1'); }); st.forEach(function(s){ s.classList.remove('lit'); }); ks.forEach(function(k){ k.classList.add('on'); });
+      cap('Hochgeladen wird nur, was auf die Seite gehört, in einem Paket. Danach hat dein Betrieb <b>seine eigene Adresse</b>, mit Impressum, Datenschutz und geprüft auf der echten Seite.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a613 js'; fs.forEach(function(f){ f.classList.remove('x'); }); ks.forEach(function(k){ k.classList.remove('on'); }); st.forEach(function(s){ s.classList.remove('lit'); }); st[0].classList.add('lit');
+      cap('Im Projektordner liegt mehr als deine Seite: Entwürfe, Originalfotos, Zwischenstände.');
+      tl.at(1800,function(){ fs.forEach(function(f){ if(f.getAttribute('data-x')==='1') f.classList.add('x'); }); cap('Eine <b>Ausschlussliste</b> legt fest, was nie hochgeladen wird. Hier sind das zweiundzwanzig Gigabyte.'); });
+      tl.at(3600,function(){ ls[0].classList.add('run'); st[0].classList.remove('lit'); st[1].classList.add('lit'); });
+      tl.at(4300,function(){ root.classList.add('pk'); cap('Der Rest geht als <b>ein Paket</b> zum Hoster, nicht als Tausende Einzeldateien.'); });
+      tl.at(6000,function(){ ls[1].classList.add('run'); st[1].classList.remove('lit'); st[2].classList.add('lit'); });
+      tl.at(6800,function(){ root.classList.add('br'); cap('Deine Seite ist unter <b>deiner eigenen Adresse</b> erreichbar, verschlüsselt.'); });
+      K.forEach(function(k,i){ tl.at(8400+i*700,function(){ ks[i].classList.add('on'); }); });
+      tl.at(8400,function(){ cap('Bleibt die Pflicht und die Prüfrunde, auf der echten Adresse und nicht auf deinem Rechner.'); });
+      tl.at(12200,function(){ ls.forEach(function(l){ l.classList.remove('run'); }); end(); });
+    }};
+  }};
+
+  /* ============ L6.14 · Animation "Ein Jahr auf deiner Seite." ============
+     Ein Jahresring mit Zeiger, in der Mitte die Seite. Zu jeder Jahreszeit ein
+     Satz an Claude, und die Seite wechselt Bild, Titel und Karte. Einmal geht
+     eine Aenderung schief und wird mit einem Satz zurueckgenommen. */
+  ANIM.a614={css:`
+  .a614{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:clamp(24px,5vw,60px);align-items:center;width:min(940px,100%);margin:0 auto}
+  .a614-rg{position:relative;aspect-ratio:1;width:100%}
+  .a614-rg svg{position:absolute;inset:0;width:100%;height:100%}
+  .a614-rg .tk{stroke:rgba(255,255,255,.18);stroke-width:2}
+  .a614-rg .tk.s{stroke:var(--g);stroke-width:3}
+  .a614-rg text{font:600 10px var(--sans);fill:rgba(255,255,255,.5);letter-spacing:.08em}
+  .a614-hd{position:absolute;left:50%;top:50%;width:2px;height:46%;margin-left:-1px;transform-origin:50% 0;background:linear-gradient(180deg,rgba(199,180,137,0),var(--g));transform:rotate(var(--r,180deg));transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
+  .a614-cd{position:absolute;left:21%;top:21%;width:58%;height:58%;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#0b0c11;display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}
+  .a614-cd .im{position:relative;flex:1}.a614-cd .im>*{position:absolute;inset:0;width:100%;height:100%;transition:opacity .8s ease}
+  .a614-cd .tx{padding:10px 12px 12px}
+  .a614-cd h6{margin:0 0 6px;font-family:var(--disp);font-weight:600;font-size:clamp(13px,1.6vw,17px);color:#fff;line-height:1.15}
+  .a614-cd .mn{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;color:rgba(255,255,255,.8)}
+  .a614-cd .mn b{color:var(--g);font-variant-numeric:tabular-nums;transition:color .4s ease}
+  .a614-cd .mn b.bad{color:#ff6b61}
+  .a614-cd.fl{animation:a614Fl .9s var(--ez)}
+  @keyframes a614Fl{0%{box-shadow:0 0 0 0 rgba(199,180,137,.0)}30%{box-shadow:0 0 0 3px rgba(199,180,137,.7)}100%{box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}}
+  .a614-ch{display:flex;flex-direction:column;gap:10px}
+  .a614-m{max-width:420px;padding:11px 14px;border-radius:14px 14px 4px 14px;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.35);font-size:13.5px;line-height:1.5;color:#fff;align-self:flex-end;transition:opacity .5s ease,transform .6s var(--ez)}
+  .a614-m.c{align-self:flex-start;border-radius:14px 14px 14px 4px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.82)}
+  .a614-m small{display:block;font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+  .a614-m.c small{color:rgba(255,255,255,.45)}
+  .a614-m.u{border-color:rgba(70,175,115,.5);background:rgba(70,175,115,.1)}
+  .a614.js .a614-m{opacity:0;transform:translateY(10px)}.a614.js .a614-m.on{opacity:1;transform:none}
+  @media(max-width:780px){ .a614{grid-template-columns:1fr} .a614-rg{max-width:360px;margin:0 auto} }
+  `,run:function(stage,cap){
+    var S=[{m:2,img:'m6-spargel',h:'Der Spargel ist da.',d:'Weißer Spargel, Sauce hollandaise',p:'24,00',say:'Spargel ab Freitag auf die Karte, weißer Spargel mit Sauce hollandaise, 24 Euro.'},
+      {m:5,img:'cover-68',h:'Die Terrasse ist offen.',d:'Saibling, Beurre blanc',p:'26,00',say:'Terrasse ab Donnerstag offen, das Auftaktbild auf das Sommerbild der Terrasse wechseln.'},
+      {m:9,img:'m6-pilze',h:'Pilze aus dem Wald.',d:'Steinpilze, Kartoffelschaum',p:'22,00',say:'Herbstkarte aus dem Backoffice übernehmen.'},
+      {m:11,img:'m6-winter',h:'Betriebsferien ab dem 23. Dezember.',d:'Wir sind ab dem 7. Januar wieder da',p:'',say:'Betriebsferien vom 23. Dezember bis 6. Januar oben einblenden und die Reservierung für die Zeit sperren.'}];
+    var MO=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+    var svg='<svg viewBox="0 0 200 200">'; for(var i=0;i<12;i++){ var a=(i/12)*Math.PI*2-Math.PI/2, x1=100+Math.cos(a)*86, y1=100+Math.sin(a)*86, x2=100+Math.cos(a)*94, y2=100+Math.sin(a)*94, tx=100+Math.cos(a)*76, ty=100+Math.sin(a)*76+3;
+      svg+='<line class="tk'+(S.some(function(s){ return s.m===i; })?' s':'')+'" x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'"/><text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle">'+MO[i]+'</text>'; } svg+='</svg>';
+    stage.innerHTML='<div class="a614"><div class="a614-rg">'+svg+'<div class="a614-hd"></div><div class="a614-cd"><div class="im">'+S.map(function(s,i){ return '<div data-i="'+i+'" style="opacity:0">'+pic(s.img,s.h)+'</div>'; }).join('')+'</div><div class="tx"><h6></h6><div class="mn"><span></span><b></b></div></div></div></div>'
+      +'<div class="a614-ch"><div class="a614-m"><small>Du</small><span class="t1"></span></div><div class="a614-m c"><small>Claude</small><span class="t2"></span></div><div class="a614-m u"><small>Du</small><span class="t3">Mach das rückgängig.</span></div></div></div>';
+    var root=qs(stage,'.a614'), hd=qs(stage,'.a614-hd'), cd=qs(stage,'.a614-cd'), ims=qa(stage,'.a614-cd .im>div'), h6=qs(stage,'.a614-cd h6'), sp=qs(stage,'.a614-cd .mn span'), pb=qs(stage,'.a614-cd .mn b'), ms=qa(stage,'.a614-m'), t1=qs(stage,'.t1'), t2=qs(stage,'.t2'), tl=TL();
+    function show(i,price){ var s=S[i]; ims.forEach(function(m,j){ m.style.opacity=j===i?'1':'0'; }); h6.textContent=s.h; sp.textContent=s.d; pb.textContent=price!=null?price:(s.p?s.p+' €':''); pb.classList.remove('bad');
+      root.style.setProperty('--r',(180+(s.m/12)*360)+'deg'); hd.style.transform='rotate('+(180+(s.m/12)*360)+'deg)'; cd.classList.remove('fl'); void cd.offsetWidth; cd.classList.add('fl'); }
+    function end(){ root.className='a614'; show(2); t1.textContent=S[2].say; t2.textContent='Hier ist die Vorschau. Soll ich veröffentlichen?';
+      cap('Ein Jahr Pflege: Jede Änderung ist <b>ein Satz</b>, du siehst sie vorher in der Vorschau, und jede lässt sich mit einem Satz zurücknehmen.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a614 js'; ms.forEach(function(m){ m.classList.remove('on'); });
+      S.forEach(function(s,i){ var t0=500+i*3600;
+        tl.at(t0,function(){ ms.forEach(function(m){ m.classList.remove('on'); }); t1.textContent=s.say; ms[0].classList.add('on'); cap(MO[s.m]+': <b>ein Satz</b> an Claude.'); });
+        tl.at(t0+1100,function(){ t2.textContent='Hier ist die Vorschau. Soll ich veröffentlichen?'; ms[1].classList.add('on'); });
+        tl.at(t0+2200,function(){ show(i); if(i===2){ pb.textContent='2,20 €'; pb.classList.add('bad'); cap('Ein Tippfehler beim Übernehmen: <b>2,20 €</b> statt 22 Euro.'); } else cap('Freigegeben, die Seite ist aktuell.'); });
+        if(i===2){ tl.at(t0+3000,function(){ ms[2].classList.add('on'); }); tl.at(t0+3500,function(){ pb.textContent='22,00 €'; pb.classList.remove('bad'); cap('Ein Satz, und der vorige Stand ist wieder da. Dann wird die Zahl in der Quelle richtig korrigiert.'); }); }
+      });
+      tl.at(500+4*3600+800,end);
+    }};
+  }};
+
+  /* ============ L6.2 · Animation "Was die Werkzeuge aendern." ============
+     Ein Browserfenster, darueber vier gleich grosse Schalter. Derselbe Seitenkopf
+     in vier Stufen: Durchschnitt -> Gestaltung -> Bewegung -> Pruefung. */
+  ANIM.a62={css:`
+  .a62{width:min(860px,100%);margin:0 auto}
+  .a62-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .a62-tab{height:48px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease,background .5s ease}
+  .a62-tab b{font:600 12px/1 var(--sans);color:rgba(255,255,255,.62);transition:color .5s ease}
+  .a62-tab small{font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+  .a62-tab.on{border-color:rgba(199,180,137,.6);background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),var(--bg)}
+  .a62-tab.on b{color:#fff}.a62-tab.on small{color:var(--g)}
+  .a62-win{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0b0b0e;box-shadow:0 30px 70px -40px rgba(0,0,0,.95)}
+  .a62-bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#15161a;border-bottom:1px solid rgba(255,255,255,.07)}
+  .a62-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
+  .a62-bar span{margin-left:10px;flex:1;height:16px;border-radius:6px;background:rgba(255,255,255,.06);font:600 9px/16px var(--sans);color:rgba(255,255,255,.5);padding-left:10px}
+  .a62-view{position:relative;aspect-ratio:16/8.4}
+  .a62-l{position:absolute;inset:0;transition:opacity .9s ease}
+  .a62-gen{background:linear-gradient(135deg,#6d5dfc,#a855f7 55%,#ec4899);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8%;font-family:Arial,Helvetica,sans-serif}
+  .a62-gen h6{margin:0 0 8px;font-size:clamp(17px,2.6vw,28px);font-weight:800;color:#fff}
+  .a62-gen p{margin:0 0 16px;font-size:clamp(10px,1.2vw,13px);color:rgba(255,255,255,.88)}
+  .a62-gen .bt{padding:9px 18px;border-radius:999px;background:#fff;color:#6d28d9;font-weight:700;font-size:12px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+  .a62-gen .cs{display:flex;gap:10px;margin-top:18px}
+  .a62-gen .cs i{width:clamp(48px,8vw,82px);height:clamp(34px,5vw,52px);border-radius:12px;background:rgba(255,255,255,.22);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+  .a62-tas{overflow:hidden}
+  .a62-tas .im{position:absolute;inset:0}.a62-tas .im>*{width:100%;height:100%}
+  .a62-tas::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,11,.82),rgba(5,6,11,.2) 62%,rgba(5,6,11,0))}
+  .a62-tx{position:absolute;left:7%;bottom:12%;z-index:2}
+  .a62-tx .k{display:flex;align-items:center;gap:10px;font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+  .a62-tx .k::before{content:"";width:26px;height:1px;background:var(--g)}
+  .a62-tx .sl{overflow:hidden}
+  .a62-tx h6{margin:0;font-family:var(--disp);font-weight:600;font-size:clamp(28px,5.6vw,58px);line-height:1;color:#fff}
+  .a62-tx p{margin:10px 0 0;font-size:clamp(10px,1.2vw,13px);color:rgba(255,255,255,.78);max-width:34ch}
+  .a62-chk{position:absolute;right:4%;top:8%;bottom:8%;width:27%;border-radius:16px;border:1.5px solid rgba(199,180,137,.7);background:rgba(5,6,11,.88);padding:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;z-index:3;transition:opacity .7s ease,transform .9s var(--ez)}
+  .a62-chk .mi{flex:1;border-radius:10px;overflow:hidden;margin-bottom:6px}.a62-chk .mi>*{width:100%;height:100%}
+  .a62-chk div.c{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.86)}
+  .a62-chk div.c::before{content:"";width:12px;height:12px;border-radius:50%;background:#46af73;box-shadow:0 0 0 3px rgba(70,175,115,.2);flex:0 0 auto}
+  .a62.st0 .a62-tas{opacity:0}
+  .a62:not(.st3) .a62-chk{opacity:0;transform:translateX(30px)}
+  .a62.mv .a62-tas .im{animation:tsn6Zoom 1.4s var(--ez) both}
+  .a62.mv .a62-tx h6{animation:a62Slot 1s var(--ez) .15s both}
+  .a62.mv .a62-tx p,.a62.mv .a62-tx .k{animation:tsn6Rise .9s var(--ez) .45s both}
+  @keyframes a62Slot{from{transform:translateY(105%)}to{transform:none}}
+  @media(max-width:640px){ .a62-tab small{display:none} .a62-tab b{font-size:10.5px} .a62-chk{width:38%} .a62-view{aspect-ratio:4/3} }
+  `,run:function(stage,cap){
+    var T=[['Ohne Erweiterung','Stufe 0'],['frontend-design','Gestaltung'],['GSAP-Skills','Bewegung'],['Browser-Prüfung','Kontrolle']];
+    var C=['Ohne Vorgaben baut Claude, was es am häufigsten gesehen hat: <b>Farbverlauf, Allerweltssatz, runder Knopf</b>. Das sieht man jeder zweiten Seite an.',
+      'Mit <b>frontend-design</b> fragt Claude zuerst, wofür die Seite da ist, und gestaltet aus deinem Betrieb heraus: dunkles Foto, eigene Titelschrift, ein Akzent.',
+      'Mit den <b>GSAP-Skills</b> kommt Bewegung dazu, die nach Handwerk aussieht: Der Titel steigt aus einer Kante, das Bild setzt sich ruhig.',
+      'Mit der <b>Browser-Prüfung</b> sieht Claude sich die Seite selbst an, auch in Handybreite, und meldet erst dann, dass sie steht.'];
+    stage.innerHTML='<div class="a62 st3"><div class="a62-tabs">'+T.map(function(t){ return '<div class="a62-tab"><b>'+t[0]+'</b><small>'+t[1]+'</small></div>'; }).join('')+'</div>'
+      +'<div class="a62-win"><div class="a62-bar"><i></i><i></i><i></i><span>localhost · Vorschau</span></div><div class="a62-view">'
+      +'<div class="a62-l a62-gen"><h6>Willkommen im Restaurant Feldkamp</h6><p>Genießen Sie leckeres Essen in gemütlicher Atmosphäre.</p><span class="bt">Jetzt reservieren</span><div class="cs"><i></i><i></i><i></i></div></div>'
+      +'<div class="a62-l a62-tas"><div class="im">'+pic('m6-a62','Gastraum, warmes Licht')+'</div><div class="a62-tx"><div class="k">Küche &amp; Wein am Kanal</div><div class="sl"><h6>Feldkamp.</h6></div><p>Abends ab halb sechs. Acht Tische, eine Karte, die sich nach dem Markt richtet.</p></div></div>'
+      +'<div class="a62-chk"><div class="mi">'+pic('m6-a62','Handyansicht')+'</div><div class="c">Handybreite geprüft</div><div class="c">Bilder geladen</div><div class="c">Keine Fehler</div></div>'
+      +'</div></div></div>';
+    var root=qs(stage,'.a62'), tabs=qa(stage,'.a62-tab'), tl=TL();
+    function set(n){ root.className='a62 st'+n+(n>=2?' st2b':''); tabs.forEach(function(t,i){ t.classList.toggle('on',i===n); }); cap(C[n]); }
+    function end(){ set(3); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); set(0);
+      tl.at(3400,function(){ set(1); });
+      tl.at(6600,function(){ set(2); void root.offsetWidth; root.classList.add('mv'); });
+      tl.at(10200,function(){ set(3); });
+    }};
+  }};
+
+  /* ============ L6.3 · Animation "Jede Frage hat ihren Platz." ============
+     Oben sechs gleich grosse Gastfragen, darunter das Seitengeruest (sieben
+     gleich hohe Abschnitte). Jede Frage faellt in den Abschnitt, der sie
+     beantwortet. Ein Abschnitt bleibt ohne Frage und wird gedimmt. */
+  ANIM.a63={css:`
+  .a63{width:min(820px,100%);margin:0 auto}
+  .a63-q{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:26px}
+  .a63-qc{height:62px;border-radius:12px;padding:0 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),var(--bg);border:1px solid rgba(255,255,255,.1);transition:border-color .5s ease,background .5s ease}
+  .a63-qc b{font:700 10px/1 var(--sans);color:var(--g)}
+  .a63-qc span{font-size:11.5px;line-height:1.25;font-weight:600;color:rgba(255,255,255,.82)}
+  .a63-qc.used{border-color:rgba(199,180,137,.4);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),var(--bg)}
+  .a63-pg{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:#08090d;padding:12px;display:flex;flex-direction:column;gap:8px}
+  .a63-s{position:relative;height:48px;border-radius:10px;display:flex;align-items:center;gap:12px;padding:0 14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);transition:border-color .5s ease,background .5s ease,opacity .6s ease}
+  .a63-s .nm{font-family:var(--disp);font-weight:600;font-size:15px;color:#fff;flex:1}
+  .a63-s .tg{display:flex;gap:5px}
+  .a63-s .tg i{font:700 9.5px/1 var(--sans);font-style:normal;width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:var(--g);color:var(--bg)}
+  .a63-s .lb{font:600 9px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .a63-s.hit{border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.08)}
+  .a63-s.one{border-color:rgba(199,180,137,.75);background:linear-gradient(90deg,rgba(199,180,137,.16),rgba(199,180,137,.04))}
+  .a63-s.one .lb{color:var(--g)}
+  .a63-s.dim{border-style:dashed;border-color:rgba(224,87,79,.45);background:rgba(224,87,79,.05)}
+  .a63-s.dim .nm{color:rgba(255,255,255,.45)}.a63-s.dim .lb{color:#e88b84}
+  .a63.js .a63-s .tg i{display:none}.a63.js .a63-s .tg i.on{display:flex}
+  @media(max-width:700px){ .a63-q{grid-template-columns:repeat(3,1fr)} .a63-s .lb{display:none} }
+  `,run:function(stage,cap){
+    var Q=['Was gibt es?','Was kostet es?','Wann offen?','Wo seid ihr?','Wie ist es dort?','Wie bekomme ich einen Tisch?'];
+    var S=[['Auftakt: die Terrasse am Kanal','das Eine',[]],['Ein Abend im Gastraum','',[4]],['Die Küche','',[0]],['Die Karte','',[0,1]],['Tisch reservieren','',[5]],['Anfahrt und Zeiten','',[2,3]],['Unsere Philosophie','',[]]];
+    stage.innerHTML='<div class="a63"><div class="a63-q">'+Q.map(function(q,i){ return '<div class="a63-qc"><b>'+(i+1)+'</b><span>'+q+'</span></div>'; }).join('')+'</div>'
+      +'<div class="a63-pg">'+S.map(function(s){ return '<div class="a63-s"><span class="nm">'+s[0]+'</span><span class="tg">'+s[2].map(function(q){ return '<i data-q="'+q+'">'+(q+1)+'</i>'; }).join('')+'</span><span class="lb">'+s[1]+'</span></div>'; }).join('')+'</div></div>';
+    var root=qs(stage,'.a63'), qc=qa(stage,'.a63-qc'), ss=qa(stage,'.a63-s'), tl=TL();
+    var order=[[0,3],[1,3],[4,1],[0,2],[2,5],[3,5],[5,4]];
+    function end(){ root.className='a63'; ss.forEach(function(s,i){ s.className='a63-s'+(i===0?' one':i===6?' dim':' hit'); });
+      qs(ss[6],'.lb').textContent='beantwortet keine Frage'; qc.forEach(function(q){ q.classList.add('used'); });
+      cap('Jeder Abschnitt beantwortet eine Frage des Gastes oder zeigt <b>das Eine</b>, weswegen man zu dir kommt. Ein Abschnitt ohne Frage muss sich rechtfertigen.'); }
+    end();
+    return {reset:function(){ tl.kill(); qa(stage,'.tsn6-tok').forEach(function(t){t.remove();}); end(); }, play:function(){
+      tl.kill(); root.className='a63 js'; ss.forEach(function(s){ s.className='a63-s'; }); qs(ss[6],'.lb').textContent=''; qc.forEach(function(q){ q.classList.remove('used'); });
+      qa(stage,'.a63-s .tg i').forEach(function(i){ i.classList.remove('on'); });
+      cap('Ein Gast hat vor der Entscheidung immer dieselben <b>sechs Fragen</b>. Das Gerüst deiner Seite muss sie beantworten.');
+      tl.at(1600,function(){ ss[0].classList.add('one'); cap('Ganz oben steht, was nur dein Betrieb hat. Bei unserem Beispiel ist es <b>die Terrasse am Kanal</b>.'); });
+      order.forEach(function(o,k){ tl.at(3600+k*900,function(){
+        var q=qc[o[0]], s=ss[o[1]]; fly(stage,q,s,(o[0]+1)+' · '+Q[o[0]],760);
+        setTimeout(function(){ q.classList.add('used'); s.classList.add('hit'); var t=s.querySelector('i[data-q="'+o[0]+'"]'); if(t) t.classList.add('on'); },700);
+        if(k===0) cap('Jede Frage wandert in den Abschnitt, der sie beantwortet.');
+      }); });
+      tl.at(3600+order.length*900+600,function(){ ss[6].classList.add('dim'); qs(ss[6],'.lb').textContent='beantwortet keine Frage';
+        cap('„Unsere Philosophie“ beantwortet keine Frage. Entweder sie wird zu etwas, das man sieht, oder sie fliegt raus.'); });
+      tl.at(3600+order.length*900+4200,end);
+    }};
+  }};
+
+  /* ============ L6.4 · Animation "Die Farben haengen schon an der Wand." ============
+     Links ein Foto aus dem Betrieb, drei Messpunkte nehmen Farben ab und schicken
+     sie in den Brief rechts. Danach Stimmung und Verbote, unten faerbt sich ein
+     Seitenstreifen in der neuen Palette. Ein Objekt, eine Achse. */
+  ANIM.a64={css:`
+  .a64{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:stretch;width:min(900px,100%);margin:0 auto}
+  .a64-ph{position:relative;border-radius:16px;overflow:hidden;min-height:340px}
+  .a64-ph>.tsn6-ph,.a64-ph>img{position:absolute;inset:0;width:100%;height:100%}
+  .a64-dot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 5px rgba(255,255,255,.18),0 8px 18px rgba(0,0,0,.6);transition:transform .6s var(--ez),opacity .5s ease;z-index:3}
+  .a64-dot::after{content:attr(data-hex);position:absolute;left:50%;top:38px;transform:translateX(-50%);font:600 10px/1 var(--mono);color:#fff;background:rgba(0,0,0,.6);padding:4px 6px;border-radius:6px;white-space:nowrap}
+  .a64-br{border-radius:16px;border:1px solid rgba(199,180,137,.35);background:linear-gradient(rgba(199,180,137,.045),rgba(199,180,137,.045)),#07080d;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+  .a64-br .hd{font:600 9.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g)}
+  .a64-sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .a64-sw div{height:70px;border-radius:10px;border:1px solid rgba(255,255,255,.12);position:relative;transition:background .6s ease}
+  .a64-sw div span{position:absolute;left:8px;bottom:7px;font:600 8.5px/1.25 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .a64-row{font-size:13px;line-height:1.5;color:rgba(255,255,255,.86);min-height:20px}
+  .a64-row b{display:block;font:600 9px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px}
+  .a64-row.no span{color:#f0a49e}
+  .a64-strip{margin-top:auto;height:58px;border-radius:10px;overflow:hidden;display:grid;grid-template-columns:2fr 1fr;border:1px solid rgba(255,255,255,.1)}
+  .a64-strip .l{display:flex;flex-direction:column;justify-content:center;padding:0 14px;transition:background .8s ease}
+  .a64-strip .l i{display:block;font-family:var(--disp);font-style:normal;font-weight:600;font-size:17px;transition:color .8s ease}
+  .a64-strip .l u{display:block;width:34px;height:2px;margin-top:6px;text-decoration:none;transition:background .8s ease}
+  .a64-strip .r{transition:background .8s ease}
+  .a64.js .a64-dot{opacity:0;transform:scale(.4)}.a64.js .a64-dot.on{opacity:1;transform:none}
+  @media(max-width:720px){ .a64{grid-template-columns:1fr} .a64-ph{min-height:240px} }
+  `,run:function(stage,cap){
+    var P=[{x:24,y:70,hex:'#1E1813',l:'Grundton dunkel'},{x:62,y:30,hex:'#EDE3CF',l:'Grundton hell'},{x:78,y:64,hex:'#9C3B2A',l:'Akzent'}];
+    var MOOD='Kerzenlicht, altes Holz, ruhig. Ein Ort, an dem man länger bleibt.', NO='verspielt, Farbverläufe, Bilder aus Datenbanken';
+    stage.innerHTML='<div class="a64"><div class="a64-ph">'+pic('m6-a64','Karte und Schild im Gastraum')
+      +P.map(function(p,i){ return '<span class="a64-dot" data-hex="'+p.hex+'" style="left:'+p.x+'%;top:'+p.y+'%;background:'+p.hex+'"></span>'; }).join('')+'</div>'
+      +'<div class="a64-br"><span class="hd">Design-Brief · CLAUDE.md</span><div class="a64-sw">'+P.map(function(p){ return '<div><span>'+p.l+'<br>'+p.hex+'</span></div>'; }).join('')+'</div>'
+      +'<div class="a64-row"><b>Stimmung</b><span class="m"></span></div><div class="a64-row no"><b>Nicht</b><span class="n"></span></div>'
+      +'<div class="a64-strip"><div class="l"><i>Feldkamp.</i><u></u></div><div class="r"></div></div></div></div>';
+    var root=qs(stage,'.a64'), dots=qa(stage,'.a64-dot'), sw=qa(stage,'.a64-sw div'), m=qs(stage,'.m'), n=qs(stage,'.n'), l=qs(stage,'.a64-strip .l'), r=qs(stage,'.a64-strip .r'), ti=qs(stage,'.a64-strip i'), un=qs(stage,'.a64-strip u'), tl=TL();
+    function paint(on){ l.style.background=on?P[0].hex:'#2a2a33'; ti.style.color=on?P[1].hex:'#cfcfe0'; un.style.background=on?P[2].hex:'#6d5dfc'; r.style.background=on?P[2].hex:'linear-gradient(135deg,#6d5dfc,#a855f7)'; }
+    function end(){ root.className='a64'; sw.forEach(function(s,i){ s.style.background=P[i].hex; }); m.textContent=MOOD; n.textContent=NO; paint(true);
+      cap('Die Farben kommen aus dem, was dein Gast vor Ort sieht: <b>Holz, Papier der Karte, Schild</b>. Zwei Grundtöne, ein Akzent. Dazu die Stimmung in deinen Worten und was die Seite nie sein soll.'); }
+    function type(node,txt,t0){ for(var i=1;i<=txt.length;i++){ (function(k){ tl.at(t0+k*28,function(){ node.textContent=txt.slice(0,k); }); })(i); } }
+    end();
+    return {reset:function(){ tl.kill(); qa(stage,'.tsn6-tok').forEach(function(t){t.remove();}); end(); }, play:function(){
+      tl.kill(); root.className='a64 js'; sw.forEach(function(s){ s.style.background='rgba(255,255,255,.03)'; }); m.textContent=''; n.textContent=''; paint(false); dots.forEach(function(d){ d.classList.remove('on'); });
+      cap('Der Seitenstreifen unten zeigt, was ohne Brief entsteht: <b>Allerweltsfarben</b>.');
+      P.forEach(function(p,i){ tl.at(1800+i*1300,function(){ dots[i].classList.add('on'); if(i===0) cap('Claude nimmt die Farben von einem Foto deines Gastraums ab.'); });
+        tl.at(2500+i*1300,function(){ fly(stage,dots[i],sw[i],p.hex,700); }); tl.at(3150+i*1300,function(){ sw[i].style.background=p.hex; }); });
+      tl.at(6200,function(){ cap('Dann die <b>Stimmung</b>, so wie du deinen Betrieb einem Freund beschreiben würdest.'); }); type(m,MOOD,6400);
+      tl.at(8600,function(){ cap('Und was die Seite <b>nie</b> sein soll. Das ist oft der klarere Teil.'); }); type(n,NO,8800);
+      tl.at(10600,function(){ paint(true); cap('Jetzt baut Claude mit deiner Palette, und jede neue Fassung wird an diesem Brief gemessen.'); });
+      tl.at(14000,end);
+    }};
+  }};
+
+  /* ============ L6.5 · Animation "Ein Abend in Abschnitten." ============
+     Ein Filmstreifen aus sechs gleich grossen Szenen. Ein Lesekopf laeuft durch,
+     jede Szene zeigt ihre Scrollbewegungen (Punkte) im eigenen Tempo und ihre
+     eigene Bewegung. Schnell fuer den Weg, langsam fuer die Momente. */
+  ANIM.a65={css:`
+  .a65{position:relative}
+  .a65-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;position:relative}
+  .a65-f{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0a0a0d;transition:transform .7s var(--ez),border-color .5s ease,box-shadow .5s ease}
+  .a65-f .im{aspect-ratio:3/4;position:relative}.a65-f .im>*{position:absolute;inset:0;width:100%;height:100%}
+  .a65-f .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,11,0) 45%,rgba(5,6,11,.9))}
+  .a65-f .nm{position:absolute;left:10px;right:10px;bottom:52px;z-index:2;font-family:var(--disp);font-weight:600;font-size:14px;line-height:1.15;color:#fff}
+  .a65-f .mv{position:absolute;left:10px;top:10px;z-index:2;font:600 8px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--g);background:rgba(5,6,11,.7);padding:4px 6px;border-radius:999px}
+  .a65-f .ft{padding:9px 10px 10px;display:flex;flex-direction:column;gap:7px}
+  .a65-f .tp{display:flex;align-items:center;justify-content:space-between;font:600 8.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .a65-f .tp em{font-style:normal;color:var(--g)}
+  .a65-f .dots{display:flex;gap:5px}
+  .a65-f .dots i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(199,180,137,.55);transition:background .25s ease,box-shadow .25s ease}
+  .a65-f .dots i.on{background:var(--g);box-shadow:0 0 10px rgba(199,180,137,.6)}
+  .a65-f.now{transform:translateY(-8px);border-color:rgba(199,180,137,.65);box-shadow:0 26px 50px -24px rgba(0,0,0,.9),0 0 0 1px rgba(199,180,137,.2)}
+  .a65-f.now .im>*{animation:tsn6Zoom 2.4s var(--ez) both}
+  .a65.js .a65-f:not(.now):not(.seen){opacity:.45}
+  .a65-bar{margin-top:18px;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+  .a65-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,rgba(199,180,137,.4),var(--g));transform-origin:0 50%;transition:transform .5s linear}
+  @media(max-width:820px){ .a65-strip{grid-template-columns:repeat(3,1fr)} }
+  @media(max-width:460px){ .a65-strip{grid-template-columns:repeat(2,1fr)} }
+  `,run:function(stage,cap){
+    var F=[
+      ['Ankommen am Kanal','cover-613','zügig',3,'Auftakt','Der Auftakt geht von selbst auf. Name und Bild sind <b>im ersten Moment</b> da, kein Vorhang, kein Laden.'],
+      ['An der Bar','cover-65','zügig',3,'Hochschweben','Der Weg in den Betrieb darf zügig sein. Drei Scrollbewegungen, dann ist der Gast drinnen.'],
+      ['Der Gastraum','cover-63','ruhig',4,'Fenster','Der Raum bekommt Zeit. Ein <b>Fenster</b>: Das Bild steht, der Ausschnitt öffnet sich langsam.'],
+      ['Am Pass','cover-66','ruhig',4,'Wand an Wand','Am Pass wird es konkret. Bilder groß und dicht, jedes kommt einzeln herein.'],
+      ['Der Teller','m6-teller','langsam',4,'Zoom','Der Moment, für den man kommt. <b>Langsam</b>, sonst sieht ihn niemand.'],
+      ['Tisch reservieren','cover-610','zügig',2,'Ruhe','Am Ende keine Bewegung mehr, nur die Frage: Wann kommst du? Zeiten, Telefon, Knopf.']];
+    stage.innerHTML='<div class="a65"><div class="a65-strip">'+F.map(function(f){ return '<div class="a65-f"><div class="im">'+pic(f[1],f[0])+'</div><span class="mv">'+f[4]+'</span><div class="nm">'+f[0]+'</div><div class="ft"><div class="tp">Tempo <em>'+f[2]+'</em></div><div class="dots">'+new Array(f[3]+1).join('<i></i>')+'</div></div></div>'; }).join('')+'</div><div class="a65-bar"><i></i></div></div>';
+    var root=qs(stage,'.a65'), fs=qa(stage,'.a65-f'), bar=qs(stage,'.a65-bar i'), tl=TL();
+    var SP={'zügig':260,'ruhig':520,'langsam':760};
+    function end(){ root.className='a65'; fs.forEach(function(f){ f.className='a65-f'; qa(f,'.dots i').forEach(function(d){ d.classList.add('on'); }); }); bar.style.transform='scaleX(1)';
+      cap('Sechs Abschnitte, jeder mit Anfang und Ende, mit eigenem Tempo und eigener Bewegung. Zusammen erzählen sie <b>einen Abend</b>.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a65 js'; fs.forEach(function(f){ f.className='a65-f'; qa(f,'.dots i').forEach(function(d){ d.classList.remove('on'); }); }); bar.style.transform='scaleX(0)';
+      cap('Die Startseite als <b>Abend in Abschnitten</b>. Jeder Punkt ist eine Scrollbewegung.');
+      var t=900, total=F.reduce(function(a,f){ return a+f[3]*SP[f[2]]+700; },0), acc=0;
+      F.forEach(function(f,i){
+        tl.at(t,function(){ fs.forEach(function(x,j){ x.classList.toggle('now',j===i); if(j<i) x.classList.add('seen'); }); cap(f[5]); });
+        var ds=qa(fs[i],'.dots i');
+        ds.forEach(function(d,k){ var tt=t+300+k*SP[f[2]]; tl.at(tt,function(){ d.classList.add('on'); acc++; }); });
+        t+=f[3]*SP[f[2]]+1900;
+        (function(tt,frac){ tl.at(tt,function(){ bar.style.transform='scaleX('+frac+')'; }); })(t-400,(i+1)/F.length);
+      });
+      tl.at(t+600,end);
+    }};
+  }};
+
+  /* ============ L6.6 · Animation "So bewegt sich eine edle Seite." ============
+     Eine Buehne (Bild, Titel, drei Karten) und rechts fuenf gleich grosse
+     Schalter. Jede Bewegung wird einmal an derselben Buehne vorgefuehrt, mit
+     Taktleiste. Zum Schluss drei Bewegungen, die billig wirken, durchgestrichen. */
+  ANIM.a66={css:`
+  .a66{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center}
+  .a66-bh{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#08090d;aspect-ratio:16/11}
+  .a66-im{position:absolute;left:5%;top:7%;width:90%;height:56%;border-radius:12px;overflow:hidden}
+  .a66-im .z{position:absolute;inset:0}.a66-im .z>*{width:100%;height:100%}
+  .a66-sh{position:absolute;left:0;right:0;height:50%;background:#08090d;z-index:2;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
+  .a66-sh.t{top:0;transform-origin:50% 0}.a66-sh.b{bottom:0;transform-origin:50% 100%}
+  .a66-sh{transform:scaleY(0)}
+  .a66-tt{position:absolute;left:6%;top:67%;overflow:hidden}
+  .a66-tt h6{margin:0;font-family:var(--disp);font-weight:600;font-size:clamp(18px,2.6vw,28px);line-height:1.05;color:#fff}
+  .a66-cs{position:absolute;left:5%;right:5%;bottom:6%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .a66-cs div{height:clamp(30px,4.6vw,46px);border-radius:9px;background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),#0e0f14;border:1px solid rgba(199,180,137,.3)}
+  .a66-rl{display:flex;flex-direction:column;gap:8px}
+  .a66-b{height:52px;border-radius:12px;padding:0 14px;display:flex;align-items:center;gap:12px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease,background .5s ease}
+  .a66-b b{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans);background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);transition:background .5s ease,color .5s ease;flex:0 0 auto}
+  .a66-b span{font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+  .a66-b small{display:block;font-size:10.5px;font-weight:500;color:rgba(255,255,255,.4);margin-top:2px}
+  .a66-b.on{border-color:rgba(199,180,137,.6);background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),var(--bg)}
+  .a66-b.on b{background:var(--g);color:var(--bg)}.a66-b.on span{color:#fff}
+  .a66-b.bad{border-color:rgba(224,87,79,.35)}.a66-b.bad b{background:rgba(224,87,79,.2);color:#ff9b93}.a66-b.bad span{text-decoration:line-through;text-decoration-color:rgba(224,87,79,.8)}
+  .a66-tk{height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:4px}
+  .a66-tk i{display:block;height:100%;background:var(--g);transform:scaleX(1);transform-origin:0 50%}
+  .a66-bh.m1 .a66-im{animation:a66Up 1.5s var(--ez) both}
+  .a66-bh.m2 .a66-im .z{animation:a66Zoom 1.8s var(--ez) both}
+  .a66-bh.m3 .a66-tt h6{animation:a66Slot 1.1s var(--ez) both}
+  .a66-bh.m4 .a66-cs div{animation:a66Up 1.1s var(--ez) both}
+  .a66-bh.m4 .a66-cs div:nth-child(2){animation-delay:.14s}.a66-bh.m4 .a66-cs div:nth-child(3){animation-delay:.28s}
+  .a66-bh.m5 .a66-sh{transform:scaleY(1);transition:none}
+  .a66-bh.m5.open .a66-sh{transform:scaleY(0);transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
+  .a66-bh.x1 .a66-im{animation:a66Shake .6s linear 2}
+  .a66-bh.x2 .a66-cs{animation:a66Side .9s ease-out both}
+  .a66-bh.x3 .a66-tt{animation:a66Blink .5s steps(2) 3}
+  @keyframes a66Up{from{transform:translateY(60px)}to{transform:none}}
+  @keyframes a66Zoom{from{transform:scale(1.14)}to{transform:none}}
+  @keyframes a66Slot{from{transform:translateY(110%)}to{transform:none}}
+  @keyframes a66Shake{0%,100%{transform:none}25%{transform:rotate(-1.5deg)}75%{transform:rotate(1.5deg)}}
+  @keyframes a66Side{from{transform:translateX(-120%)}to{transform:none}}
+  @keyframes a66Blink{0%{opacity:1}50%{opacity:.15}}
+  .a66-tk.run i{animation:a66Tk 1.5s linear both}
+  @keyframes a66Tk{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media(max-width:760px){ .a66{grid-template-columns:1fr} }
+  `,run:function(stage,cap){
+    var M=[['Hochschweben','Bild kommt deckend von unten','m1','Das Bild <b>schwebt deckend von unten</b> an seinen Platz. Kein Einblenden aus dem Nichts, es ist von Anfang an da und kommt nur näher.'],
+      ['Sanft zoomen','Bild setzt sich in den Rahmen','m2','Das Foto <b>setzt sich</b> in seinen Rahmen, aus leichter Vergrößerung auf das richtige Maß. Ruhig, kaum merklich.'],
+      ['Aus der Kante','Titel steigt zeilenweise','m3','Die Überschrift <b>steigt aus einer unsichtbaren Kante</b>, Zeile für Zeile.'],
+      ['Nacheinander','Karten von links nach rechts','m4','Karten, die man nacheinander liest, kommen <b>kurz nacheinander</b>, von links nach rechts.'],
+      ['Fenster','Ausschnitt öffnet sich','m5','Das <b>Fenster</b>: Das Bild steht still, der Ausschnitt öffnet sich. Zwei bis drei davon auf einer Startseite, an Wendepunkten.']];
+    var X=[['Wackeln','x1'],['Seitwärts hereinrutschen','x2'],['Blinken','x3']];
+    stage.innerHTML='<div class="a66"><div class="a66-bh"><div class="a66-im"><div class="z">'+pic('cover-66','Am Pass')+'</div><div class="a66-sh t"></div><div class="a66-sh b"></div></div>'
+      +'<div class="a66-tt"><h6>Der Abend am Pass.</h6></div><div class="a66-cs"><div></div><div></div><div></div></div></div>'
+      +'<div class="a66-rl">'+M.map(function(m,i){ return '<div class="a66-b"><b>'+(i+1)+'</b><span>'+m[0]+'<small>'+m[1]+'</small></span></div>'; }).join('')
+      +'<div class="a66-tk"><i></i></div></div></div>';
+    var bh=qs(stage,'.a66-bh'), bs=qa(stage,'.a66-b'), tk=qs(stage,'.a66-tk'), tl=TL();
+    function end(){ bh.className='a66-bh'; bs.forEach(function(b,i){ b.className='a66-b'; qs(b,'span').firstChild.nodeValue=M[i][0]; });
+      cap('Fünf Bewegungen, die edel wirken. Alle nur über Lage und Größe, <b>zügig hinein und ruhig an den Platz</b>, etwa anderthalb Sekunden.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); end(); cap('Eine Bühne, fünf Bewegungen. Achte auf den Takt unten rechts.');
+      M.forEach(function(m,i){ tl.at(1200+i*3000,function(){
+        bs.forEach(function(b,j){ b.classList.toggle('on',j===i); });
+        bh.className='a66-bh'; void bh.offsetWidth; bh.classList.add(m[2]); if(m[2]==='m5') setTimeout(function(){ bh.classList.add('open'); },350);
+        tk.classList.remove('run'); void tk.offsetWidth; tk.classList.add('run'); cap(m[3]); }); });
+      X.forEach(function(x,i){ tl.at(16600+i*1700,function(){
+        var b=bs[i]; b.className='a66-b bad'; qs(b,'span').firstChild.nodeValue=x[0];
+        bh.className='a66-bh'; void bh.offsetWidth; bh.classList.add(x[1]);
+        if(i===0) cap('Und so nicht: <b>wackeln, seitwärts hereinrutschen, blinken</b>. Das wirkt nach Baukasten, egal wie gut der Rest ist.'); }); });
+      tl.at(16600+3*1700+1800,end);
+    }};
+  }};
+
+  /* ============ L6.7 · Animation "Das Foto bleibt deins." ============
+     Ein Bild, zwei Zustaende: Handyfoto und verbessertes Foto derselben Szene.
+     Ein Wischer legt die Verbesserung frei (nur transform), danach prueft eine
+     Lupe Kanten und Details, zum Schluss die Pruefpunkte. */
+  ANIM.a67={css:`
+  .a67{width:min(860px,100%);margin:0 auto}
+  .a67-v{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0a0a0d}
+  .a67-v .a,.a67-v .bw,.a67-v .bw .b{position:absolute;inset:0}
+  .a67-v .a>*,.a67-v .b>*{width:100%;height:100%}
+  .a67-v .bw{overflow:hidden;transform:translateX(0);transition:transform 2.6s cubic-bezier(.65,0,.35,1)}
+  .a67-v .bw .b{transition:transform 2.6s cubic-bezier(.65,0,.35,1)}
+  .a67-h{position:absolute;top:0;bottom:0;left:0;width:2px;background:#fff;box-shadow:0 0 16px rgba(255,255,255,.7);z-index:3;transform:translateX(-2px);transition:transform 2.6s cubic-bezier(.65,0,.35,1),opacity .4s ease;opacity:0}
+  .a67-h::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  .a67-tag{position:absolute;top:14px;z-index:4;font:700 9px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:rgba(5,6,11,.75);color:#fff}
+  .a67-tag.l{left:14px}.a67-tag.r{right:14px;color:var(--g)}
+  .a67-lp{position:absolute;width:150px;height:150px;border-radius:50%;overflow:hidden;border:2px solid var(--g);box-shadow:0 18px 40px rgba(0,0,0,.6);z-index:5;left:58%;top:24%;transition:transform 1s var(--ez),opacity .5s ease}
+  .a67-lp .in{position:absolute;width:400%;height:400%;left:-160%;top:-80%}
+  .a67-lp .in>*{width:100%;height:100%}
+  .a67-ck{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+  .a67-ck div{height:46px;border-radius:11px;display:flex;align-items:center;gap:9px;padding:0 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,.82);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s ease,opacity .5s ease}
+  .a67-ck div::before{content:"";width:12px;height:12px;border-radius:50%;flex:0 0 auto;background:#46af73;box-shadow:0 0 0 3px rgba(70,175,115,.2)}
+  .a67.js .a67-v .bw{transform:translateX(-100%)}.a67.js .a67-v .bw .b{transform:translateX(100%)}
+  .a67.js.wipe .a67-v .bw,.a67.js.wipe .a67-v .bw .b{transform:none}
+  .a67.js .a67-h{opacity:1}.a67.js.wipe .a67-h{transform:translateX(var(--w))}
+  .a67.js .a67-lp{opacity:0;transform:scale(.6)}.a67.js.loupe .a67-lp{opacity:1;transform:none}
+  .a67.js .a67-ck div{opacity:.25}.a67.js .a67-ck div.on{opacity:1;border-color:rgba(70,175,115,.45)}
+  .a67.js.done .a67-h{opacity:0}
+  @media(max-width:700px){ .a67-ck{grid-template-columns:repeat(2,1fr)} .a67-lp{width:100px;height:100px} }
+  `,run:function(stage,cap){
+    var K=['gleicher Teller','gleiches Licht','Kanten sauber','nichts dazuerfunden'];
+    stage.innerHTML='<div class="a67"><div class="a67-v"><div class="a">'+pic('m6-a67-vor','Handyfoto vom Teller')+'</div><div class="bw"><div class="b">'+pic('m6-a67-nach','Derselbe Teller, verbessert','dusk')+'</div></div>'
+      +'<div class="a67-h"></div><span class="a67-tag l">Handyfoto</span><span class="a67-tag r">Verbessert</span>'
+      +'<div class="a67-lp"><div class="in">'+pic('m6-a67-nach','Detail','dusk')+'</div></div></div>'
+      +'<div class="a67-ck">'+K.map(function(k){ return '<div>'+k+'</div>'; }).join('')+'</div></div>';
+    var root=qs(stage,'.a67'), v=qs(stage,'.a67-v'), ck=qa(stage,'.a67-ck div'), tl=TL();
+    function end(){ root.className='a67'; ck.forEach(function(c){ c.classList.remove('on'); });
+      cap('Dein Foto bleibt dein Foto. Die KI rechnet es hoch, korrigiert Licht und Farbe und <b>erfindet nichts dazu</b>. So zeigt die Seite, was der Gast später auf dem Tisch hat.'); }
+    end();
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a67 js'; root.style.setProperty('--w',v.getBoundingClientRect().width+'px'); ck.forEach(function(c){ c.classList.remove('on'); });
+      cap('Ein Foto aus dem Handy, am Pass aufgenommen. <b>Echt</b>, aber flau und zu klein für eine große Fläche.');
+      tl.at(1800,function(){ root.classList.add('wipe'); cap('Dieselbe Aufnahme nach der Verbesserung: größer gerechnet, Licht und Weißabgleich korrigiert.'); });
+      tl.at(5000,function(){ root.classList.add('loupe'); cap('Dann der Blick mit der <b>Lupe</b>: Kanten, Saucenrand, Besteck. Hier zeigt sich, ob etwas verändert wurde.'); });
+      K.forEach(function(k,i){ tl.at(6800+i*650,function(){ ck[i].classList.add('on'); }); });
+      tl.at(9400,function(){ root.classList.remove('loupe'); root.classList.add('done'); });
+      tl.at(10400,end);
+    }};
+  }};
+
+  /* ============ L6.8 · Animation "Wo zwei Clips sich treffen." ============
+     Zwei Zeilen Bildstreifen, gleiche Breite, gleiche Achse. Oben startet Clip B
+     auf dem sauberen Originalbild -> Sprung an der Naht (rot). Unten startet er
+     auf dem echten letzten Bild von Clip A -> die Fahrt laeuft durch (gruen). */
+  ANIM.a68={css:`
+  .a68{display:flex;flex-direction:column;gap:22px}
+  .a68-rw .lb{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .a68-rw .lb em{font-style:normal;padding:4px 8px;border-radius:999px;transition:background .4s ease,color .4s ease}
+  .a68-rw.bad .lb em{background:rgba(224,87,79,.18);color:#ff9b93}.a68-rw.good .lb em{background:rgba(70,175,115,.18);color:#8fe0b1}
+  .a68-fs{display:grid;grid-template-columns:repeat(4,1fr) 14px repeat(4,1fr);gap:6px;align-items:stretch}
+  .a68-f{position:relative;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:#0b0b0e;border:1px solid rgba(255,255,255,.08);transition:transform .7s var(--ez),opacity .5s ease}
+  .a68-f .pn{position:absolute;inset:-4% -30% -4% -4%;transform:translateX(var(--p,0))}
+  .a68-f .pn>*{width:100%;height:100%}
+  .a68-f .gl{position:absolute;width:9%;height:16%;border-radius:40% 40% 20% 20%;background:radial-gradient(circle at 50% 30%,rgba(255,236,190,.95),rgba(255,190,110,.35) 60%,rgba(255,190,110,0));top:48%;transform:translateX(-50%);left:var(--gx)}
+  .a68-f small{position:absolute;left:5px;bottom:4px;font:700 8px/1 var(--sans);color:rgba(255,255,255,.6)}
+  .a68-sm{border-radius:4px;background:rgba(255,255,255,.08);transition:background .4s ease,box-shadow .4s ease}
+  .a68-rw.bad .a68-sm{background:#e0574f;box-shadow:0 0 18px rgba(224,87,79,.7)}
+  .a68-rw.good .a68-sm{background:#46af73;box-shadow:0 0 18px rgba(70,175,115,.7)}
+  .a68.js .a68-f{opacity:.12;transform:translateY(10px)}.a68.js .a68-f.on{opacity:1;transform:none}
+  @media(max-width:700px){ .a68-fs{grid-template-columns:repeat(4,1fr);row-gap:6px} .a68-sm{grid-column:1/-1;height:4px} }
+  `,run:function(stage,cap){
+    function frames(off,bad){ var h='';
+      for(var i=0;i<8;i++){ var p=i*3.2, g=60-i*4.6; if(bad && i===4){ p=0; g=60; }
+        if(i===4) h+='<div class="a68-sm"></div>';
+        h+='<div class="a68-f" style="--p:-'+p+'%;--gx:'+g+'%"><div class="pn">'+pic('cover-68','Terrasse im Sonnenuntergang','dusk')+'</div>'+(bad&&i>=4?'':'<span class="gl"></span>')+'<small>'+(i<4?'A'+(i+1):'B'+(i-3))+'</small></div>'; }
+      return h; }
+    stage.innerHTML='<div class="a68"><div class="a68-rw r1"><div class="lb"><span>Clip B startet auf dem sauberen Originalbild</span><em>Sprung</em></div><div class="a68-fs">'+frames(0,true)+'</div></div>'
+      +'<div class="a68-rw r2"><div class="lb"><span>Clip B startet auf dem echten letzten Bild von A</span><em>läuft durch</em></div><div class="a68-fs">'+frames(0,false)+'</div></div></div>';
+    var root=qs(stage,'.a68'), r1=qs(stage,'.r1'), r2=qs(stage,'.r2'), f1=qa(r1,'.a68-f'), f2=qa(r2,'.a68-f'), tl=TL();
+    function end(){ root.className='a68'; r1.className='a68-rw r1 bad'; r2.className='a68-rw r2 good'; qa(stage,'.a68-f').forEach(function(f){ f.classList.add('on'); });
+      cap('Kein Modell trifft sein Zielbild genau. Darum startet jeder Folgeclip auf dem <b>echten letzten Bild</b> des vorherigen, nie auf dem sauberen Original.'); }
+    end();
+    return {reset:function(){ tl.kill(); qa(stage,'.tsn6-tok').forEach(function(t){t.remove();}); end(); }, play:function(){
+      tl.kill(); root.className='a68 js'; r1.className='a68-rw r1'; r2.className='a68-rw r2'; qa(stage,'.a68-f').forEach(function(f){ f.classList.remove('on'); });
+      cap('Zwei Clips einer Kamerafahrt über die Terrasse, als Bildstreifen gelesen.');
+      f1.forEach(function(f,i){ tl.at(600+i*260,function(){ f.classList.add('on'); }); });
+      tl.at(600+8*260+300,function(){ r1.classList.add('bad'); cap('Oben startet Clip B wieder auf dem Originalbild. An der Naht <b>springt</b> die Kamera zurück, und die Kerze auf dem Tisch ist verschwunden.'); });
+      f2.slice(0,4).forEach(function(f,i){ tl.at(4400+i*260,function(){ f.classList.add('on'); }); });
+      tl.at(5700,function(){ cap('Unten nimmt Claude das <b>tatsächlich letzte Bild</b> aus Clip A und gibt es als Startbild für Clip B.'); fly(stage,f2[3],f2[4],'letztes Bild',900); });
+      f2.slice(4).forEach(function(f,i){ tl.at(6700+i*260,function(){ f.classList.add('on'); }); });
+      tl.at(6700+4*260+300,function(){ r2.classList.add('good'); cap('Die Fahrt läuft durch. Die Naht siehst du nur noch, weil sie hier markiert ist.'); });
+      tl.at(11500,end);
+    }};
+  }};
+
+  /* ============ L6.9 · Animation "Ein Satz wird konkret." ============
+     Links das Tellerbild, rechts die Texttafel. Ein Allerweltssatz wird Stueck
+     fuer Stueck markiert und durch einen konkreten Satz ersetzt. Unten eine
+     Waage: Wuerde ein Gast dafuer mehr zahlen? */
+  ANIM.a69={css:`
+  .a69{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(18px,3.5vw,40px);align-items:center;width:min(940px,100%);margin:0 auto}
+  .a69-im{aspect-ratio:4/5;border-radius:16px;overflow:hidden}.a69-im>*{width:100%;height:100%}
+  .a69-tx{min-height:220px}
+  .a69-tx .k{font:600 9.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block}
+  .a69-old,.a69-new{font-family:var(--disp);font-weight:600;font-size:clamp(19px,2.3vw,25px);line-height:1.35;color:#fff;margin:0}
+  .a69-old span{position:relative;transition:color .4s ease}
+  .a69-old span.x{color:rgba(255,255,255,.35);text-decoration:line-through;text-decoration-color:#e0574f;text-decoration-thickness:2px}
+  .a69-old span em{position:absolute;left:0;top:-15px;white-space:nowrap;font:700 8.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:#ff9b93;opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease}
+  .a69-old span.x em{opacity:1;transform:none}
+  .a69-new .w{display:inline-block;transition:opacity .5s ease,transform .7s var(--ez)}
+  .a69-ms{margin-top:26px}
+  .a69-ms .q{font-size:12.5px;color:rgba(255,255,255,.65);margin-bottom:9px}
+  .a69-ms .tr{position:relative;height:8px;border-radius:8px;background:linear-gradient(90deg,rgba(224,87,79,.55),rgba(255,255,255,.12) 50%,rgba(70,175,115,.6))}
+  .a69-ms .nd{position:absolute;top:50%;left:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.5);transform:translateX(var(--x,0px));transition:transform 1.2s var(--ez)}
+  .a69-ms .sc{display:flex;justify-content:space-between;margin-top:7px;font:600 9px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .a69.js .a69-new{display:none}.a69.js.sw .a69-new{display:block}.a69.js.sw .a69-old{display:none}
+  .a69.js .a69-new .w{opacity:0;transform:translateY(12px)}.a69.js .a69-new .w.on{opacity:1;transform:none}
+  .a69:not(.js) .a69-old{display:none}
+  @media(max-width:720px){ .a69{grid-template-columns:1fr} .a69-im{aspect-ratio:16/10} }
+  `,run:function(stage,cap){
+    var OLD=[['Bei uns erwartet Sie','Floskel'],['eine vielfältige Auswahl','sagt jeder'],['an leckeren Gerichten','sagt nichts'],['in gemütlicher Atmosphäre.','zeigt das Bild']];
+    var NEW='Kalbsbäckchen, sechs Stunden in Spätburgunder geschmort, mit Sellerie vom Hof nebenan.';
+    stage.innerHTML='<div class="a69"><div class="a69-im">'+pic('m6-teller','Kalbsbäckchen am Pass','dusk')+'</div><div class="a69-tx"><span class="k">Der Satz unter dem Teller</span>'
+      +'<p class="a69-old">'+OLD.map(function(o){ return '<span>'+o[0]+'<em>'+o[1]+'</em></span>'; }).join(' ')+'</p>'
+      +'<p class="a69-new">'+NEW.split(' ').map(function(w){ return '<span class="w">'+w+'</span>'; }).join(' ')+'</p>'
+      +'<div class="a69-ms"><div class="q">Würde ein Gast nach diesem Satz mehr zahlen wollen?</div><div class="tr"><span class="nd"></span></div><div class="sc"><span>weniger</span><span>mehr</span></div></div></div></div>';
+    var root=qs(stage,'.a69'), sp=qa(stage,'.a69-old span'), ws=qa(stage,'.a69-new .w'), tr=qs(stage,'.a69-ms .tr'), tl=TL();
+    function needle(f){ root.style.setProperty('--x',(tr.getBoundingClientRect().width*f)+'px'); }
+    function end(){ root.className='a69'; needle(.9); cap('Ein Satz, der zeigt, was auf dem Teller liegt und woher es kommt. <b>Kein Adjektiv</b> muss behaupten, dass es gut ist.'); }
+    end(); window.addEventListener('resize',function(){ if(!root.classList.contains('js')) needle(.9); });
+    return {reset:function(){ tl.kill(); end(); }, play:function(){
+      tl.kill(); root.className='a69 js'; sp.forEach(function(s){ s.classList.remove('x'); }); ws.forEach(function(w){ w.classList.remove('on'); }); needle(.38);
+      cap('So stehen Sätze auf tausend Restaurantseiten. Man liest darüber hinweg.');
+      sp.forEach(function(s,i){ tl.at(2000+i*1100,function(){ s.classList.add('x'); needle(.38-(i+1)*.07); }); });
+      tl.at(2000+4*1100+300,function(){ cap('Jeder Teil davon könnte bei jedem Betrieb stehen. Er sagt nichts über <b>deinen</b>.'); });
+      tl.at(7600,function(){ root.classList.add('sw'); cap('Stattdessen steht da, was auf dem Teller liegt und woher es kommt.');
+        ws.forEach(function(w,i){ setTimeout(function(){ if(root.classList.contains('sw')) w.classList.add('on'); },i*110); }); });
+      tl.at(9400,function(){ needle(.9); });
+      tl.at(12000,end);
+    }};
+  }};
+
+  /* ================= Landing · Modul 6 ================= */
+  LESSONS['modul-6-weitere-tools-projektmanagement']={
+    n:'Modul 6', title:'AI Website <span class="g">Building</span>', cover:'cover-60', coverL:'Gedeckter Tisch am Abend, Handy mit der Website',
+    intro:[
+      'Deine Website ist oft der erste Eindruck, den ein Gast von deinem Betrieb bekommt, lange bevor er deine Tür sieht. In diesem Modul baust du sie selbst, mit Claude Code als Werkstatt und mit dem, was ich beim Bau von Websites für Restaurants und Hotels gelernt habe.',
+      'Du brauchst dafür kein Programmieren. Du brauchst deinen Betrieb, ein paar gute Fotos und die Bereitschaft, Entscheidungen zu treffen. Claude baut, du bestimmst, was gebaut wird und wann es gut genug ist.'
+    ],
+    anim:{key:'a60', eb:'Der Weg durch das Modul', h:'So entsteht <span class="g">deine Seite</span>.', sub:'Jede Lektion fügt der Seite einen Teil hinzu. Am Ende steht sie online, und du kannst sie selbst ändern.'},
+    reg:{eb:'Die Lektionen', h:'Vierzehn Schritte, in deinem <span class="g">Tempo</span>.', i:[
+      {n:'L 6.1', t:'Das Projekt anlegen', d:'Ordner, Vorschau und eine CLAUDE.md mit den echten Daten deines Betriebs.', href:'/lektionen/claude-startklar-machen', img:'cover-61'},
+      {n:'L 6.2', t:'Die Werkzeugkiste', d:'Drei Erweiterungen, die aus Claude einen guten Gestalter machen.', href:'/lektionen/website-skills-laden', img:'cover-62'},
+      {n:'L 6.3', t:'Deine Geschichte', d:'Den Betrieb auslesen, die Geschichte in einem Satz, das Gerüst der Seite.', href:'/lektionen/struktur-ausdenken', img:'cover-63'},
+      {n:'L 6.4', t:'Der Design-Brief', d:'Stimmung, Farben und Verbote schriftlich festhalten.', href:'/lektionen/designanforderungen-definieren', img:'cover-64'},
+      {n:'L 6.5', t:'Das Drehbuch', d:'Die Startseite als ein Abend in Abschnitten planen.', href:'/lektionen/kamerafahrt-planen', img:'cover-65'},
+      {n:'L 6.6', t:'Bewegung mit Maß', d:'Was edel wirkt, was billig wirkt, und fertige Bausteine mit Lizenz.', href:'/lektionen/ui-components-laden', img:'cover-66'},
+      {n:'L 6.7', t:'Echte Bilder zuerst', d:'Eigene Fotos verbessern lassen, nur die Lücken erzeugen.', href:'/lektionen/bilder-generieren', img:'cover-67'},
+      {n:'L 6.8', t:'Bewegtes Bild', d:'Ein kurzer Film ohne Sprünge, flüssig in beide Richtungen.', href:'/lektionen/videos-generieren-und-einsetzen', img:'cover-68'},
+      {n:'L 6.9', t:'Worte, die schmecken', d:'Wenige Sätze, die den Teller aufwerten, und keine, die nach KI klingen.', href:'/lektionen/texte-definieren', img:'cover-69'},
+      {n:'L 6.10', t:'Karte und Tisch', d:'Die Karte als Daten, Reservierung und Anruf mit einem Tipp.', href:'/lektionen/speisekarte-und-reservierung', img:'cover-610'},
+      {n:'L 6.11', t:'Die Schrift', d:'Zwei Schriften aus deinem Logo, mit geklärter Lizenz, im eigenen Projekt.', href:'/lektionen/schriftarten-anpassen', img:'cover-611'},
+      {n:'L 6.12', t:'Flüssig am Handy', d:'Prüfen, wo deine Gäste sind, und messen statt hoffen.', href:'/lektionen/mobil-check', img:'cover-612'},
+      {n:'L 6.13', t:'Online stellen', d:'Hoster, eigene Adresse, Impressum, Datenschutz und Google-Eintrag.', href:'/lektionen/online-hosten', img:'cover-613'},
+      {n:'L 6.14', t:'Die Seite pflegen', d:'Preise, Saisonkarte und Ferien in einem Satz ändern, mit Weg zurück.', href:'/lektionen/website-pflegen', img:'cover-614'}
+    ]},
+    secs:[
+      {eb:'Bevor du startest', h:'Was du <span class="g">mitbringst</span>.', b:[
+        {t:'p', h:'Claude Code läuft bei dir, so wie du es in Modul 3 eingerichtet hast, am besten in der Desktop-App. Für die Bilder nutzt du die Higgsfield-Verbindung aus Modul 3 oder ein anderes Bildwerkzeug, das du kennst. Und du brauchst Material aus deinem Betrieb: deine Karte, dein Logo, Fotos vom Haus, von der Küche, vom Teller, gern auch aus dem Handy.'},
+        {t:'tab', h:['Posten','Was es kostet','Wann'], r:[
+          ['Claude','dein Plan aus Modul 3, keine Zusatzkosten','vom ersten Abend an'],
+          ['Bilder und Filme','Guthaben im Bildwerkzeug, je nach Menge','erst ab Lektion 6.7, gebündelt'],
+          ['Hosting','für eine Seite dieser Größe kostenlos möglich, Bedingungen in Lektion 6.13','beim Online-Stellen'],
+          ['Eigene Adresse','jährliche Gebühr beim Domain-Anbieter','beim Online-Stellen']
+        ]},
+        {t:'p', h:'Ich gehe die Lektionen in genau dieser Reihenfolge, auch wenn es verlockt, mit den Bildern anzufangen. Wer zuerst Bilder macht, macht sie zweimal, weil sie später nicht zur Geschichte passen. Die Reihenfolge ist der eigentliche Trick dieses Moduls.'}
+      ]}
+    ],
+    next:'/lektionen/claude-startklar-machen', nextL:'Zur ersten Lektion'
+  };
+
+  /* ================= L6.1 · Das Projekt anlegen ================= */
+  LESSONS['claude-startklar-machen']={
+    n:'L 6.1', title:'Das Projekt <span class="g">anlegen</span>', cover:'cover-61', coverL:'Laptop auf dem Tresen nach Feierabend',
+    intro:[
+      'Ab hier baust du mit Claude Code die Website für deinen Betrieb. Eine Seite, die deine Küche und deinen Gastraum zeigt, die aussieht, als käme sie aus einer guten Agentur, und die am Handy so ruhig läuft, dass ein Gast in einem Moment weiß, ob er heute Abend kommt.',
+      'Bevor die erste Zeile Code entsteht, richten wir den Arbeitsplatz ein: einen eigenen Ordner, eine CLAUDE.md mit den echten Daten deines Betriebs und eine Vorschau, in der du jede Änderung sofort siehst. Das kostet dich einen Abend und spart dir später viele.'
+    ],
+    anim:{key:'a61', eb:'Warum die Daten zuerst kommen', h:'Was fehlt, wird <span class="g">erfunden</span>.', sub:'Ein Sprachmodell lässt ungern eine Lücke stehen. Schau dir an, was passiert, bevor die Fakten im Projekt liegen.', foot:'Name und Angaben sind Beispielwerte.'},
+    secs:[
+      {eb:'Bevor du anfängst', h:'Was deine Seite <span class="g">leisten</span> muss.', b:[
+        {t:'p', h:'Ein Gast öffnet deine Seite fast immer am Handy, oft unterwegs und mit mäßigem Netz. Er will wissen, was es bei dir gibt, wann du offen hast und wie er einen Tisch bekommt, und er will spüren, wie es bei dir ist. Hat er beides in den ersten Sekunden, ruft er an oder reserviert. Hat er es nicht, ist er beim nächsten Betrieb.'},
+        {t:'p', h:'Für dieses Modul heißt das: Die Seite erzählt deinen Betrieb und läuft dabei auf dem Handy so ruhig wie am Rechner. Und jede Angabe darauf stimmt, weil eine falsche Öffnungszeit mehr Gäste kostet als jedes mittelmäßige Foto.'},
+        {t:'s', h:'Was am Ende dieses Moduls steht.'},
+        {t:'ul', i:['Eine Startseite, die einen Abend in deinem Betrieb erzählt, in Abschnitten, die sich beim Scrollen öffnen.','Bilder, die deinen Laden zeigen. Eigene Fotos, mit KI verbessert, und nur dort erzeugte Bilder, wo dir eins fehlt.','Eine Karte, die du in einer Zeile änderst, und eine Reservierung, die am Handy mit einem Tipp funktioniert.','Eine eigene Adresse mit Impressum und Datenschutz, und die Sicherheit, alles danach selbst zu pflegen.']},
+        {t:'p', h:'Rechne für den ersten Durchgang mit mehreren Abenden. Ein Teil davon ist Warten auf Bilder, ein Teil ist Entscheiden. Claude nimmt dir das Bauen ab. Die Entscheidungen bleiben bei dir, und das ist richtig so, denn du kennst deinen Betrieb und Claude kennt nur, was du ihm gibst.'}
+      ]},
+      {eb:'Der Arbeitsplatz', h:'Ein Ordner, eine <span class="g">Sitzung</span>.', b:[
+        {t:'p', h:'Claude Code läuft bei dir seit Modul 3. Für die Website arbeite ich mit der Desktop-App und dort im Bereich <b>Code</b>, weil sie eine eingebaute Browser-Ansicht mitbringt. Claude startet deine Seite darin, sieht sie sich selbst an, macht Bildschirmfotos und prüft seine Änderungen, bevor es dir etwas meldet. Du schaust in derselben Ansicht mit und klickst selbst herum.'},
+        {t:'p', h:'Leg für die Website einen eigenen Ordner an, klein geschrieben und ohne Leerzeichen, zum Beispiel <span class="tsn6-mono">website-feldkamp</span>. Alles, was zur Seite gehört, lebt darin: der Code, die Bilder, die Schriften, deine Notizen. Wähl genau diesen Ordner, wenn du die Sitzung startest, denn Claude arbeitet immer in dem Ordner, in dem die Sitzung läuft.'},
+        {t:'do', i:['Leg den Ordner an, am besten in deinem Benutzerordner und nicht auf dem Schreibtisch zwischen Rechnungen und Dienstplänen.','Öffne die Desktop-App, geh in den Bereich Code und starte eine neue Sitzung in diesem Ordner.','Gib als ersten Auftrag: <b>„Lege eine leere Startseite an und zeig sie mir in der Vorschau.“</b> Wenn rechts die Browser-Ansicht mit deiner leeren Seite aufgeht, steht der Arbeitsplatz.']},
+        {t:'p', h:'Wenn du lieber im Terminal arbeitest, geht alles genauso. Den Blick in den Browser bekommt Claude dort über die Erweiterung Claude in Chrome, du startest die Sitzung dann mit <span class="tsn6-mono">claude --chrome</span>.'}
+      ]},
+      {eb:'Das Gedächtnis des Projekts', h:'Eine CLAUDE.md für <span class="g">diese Seite</span>.', b:[
+        {t:'p', h:'Wie eine CLAUDE.md funktioniert, weißt du aus Modul 3. Hier kommt nur hinein, was diese Website braucht, und das Wichtigste zuerst: die Fakten deines Betriebs.'},
+        {t:'s', h:'Die Fakten stehen ab der ersten Minute drin.'},
+        {t:'p', h:'Name, Adresse, Öffnungszeiten mit Ruhetagen, Telefon, die Adresse für Anfragen, der Weg zur Reservierung, Instagram, die Preisspanne deiner Hauptgerichte und deine Küche in einem Satz. Warum so früh, wenn noch gar nichts gebaut ist? Weil Claude sonst Lücken füllt, so wie du es oben in der Animation gesehen hast. Eine plausible Telefonnummer, die niemandem gehört, kostet dich Anrufe, und du merkst es erst, wenn ein Stammgast fragt, warum keiner abhebt.'},
+        {t:'s', h:'Zwei Arbeitsregeln, die mir beim Bauen viele Abende gerettet haben.'},
+        {t:'p', h:'Erstens prüft Claude nach jedem Bauschritt auch die Ansicht in Handybreite, denn dort sind die meisten deiner Gäste. Zweitens meldet es nichts als fertig, was es nicht selbst in der Vorschau angesehen hat. Beide Regeln stehen als Sätze in der Datei, und weil Claude sie zu Beginn jeder Sitzung liest, musst du sie nie wiederholen.'},
+        {t:'p', h:'Darunter bleibt Platz für den Design-Brief und das Drehbuch, die wir in den nächsten Lektionen schreiben. Die Datei wächst mit dem Projekt. Tippen musst du sie nicht selbst, der Auftrag unten lässt Claude die Datei anlegen und fragt dich die Angaben einzeln ab.'},
+        {t:'code', l:'Auftrag: CLAUDE.md anlegen', h:'Wir bauen in diesem Ordner die Website für meinen Betrieb. Lege eine CLAUDE.md mit den folgenden Abschnitten an. Frag mich die Fakten einzeln ab, bevor du etwas einträgst.\n\n## Fakten (einzige Quelle für alle Angaben auf der Seite)\nName, Art des Betriebs, Adresse, Öffnungszeiten mit Ruhetagen, Telefon, E-Mail für Anfragen, Weg zur Reservierung (Link oder Telefon), Instagram, Preisspanne der Hauptgerichte, Küche in einem Satz.\n\n## Regeln\n- Angaben auf der Seite kommen nur aus dem Fakten-Block. Fehlt eine Angabe, bleibt die Stelle leer und wird mit OFFEN markiert. Nie schätzen, nie erfinden.\n- Nach jedem Bauschritt prüfst du die Seite auch in Handybreite (390 px).\n- Du meldest nichts als fertig, was du nicht selbst in der Vorschau angesehen hast.\n- Bilder und Videos erzeugst du erst, wenn Design-Brief und Drehbuch stehen und ich es freigebe.\n\n## Design-Brief\n(folgt)\n\n## Drehbuch\n(folgt)'},
+        {t:'do', i:['Beantworte die Fragen mit dem Aushang an der Tür vor dir, nicht aus dem Gedächtnis.','Leg deinen Google-Eintrag daneben. Stimmen Öffnungszeiten oder Telefon dort nicht, korrigierst du zuerst den Eintrag, sonst hast du ab jetzt zwei Wahrheiten.','Lass dir die fertige Datei zeigen und lies den Fakten-Block einmal laut. Alles, was dort steht, wird ein Gast später lesen.']}
+      ]},
+      {eb:'Typische Fehler', h:'Was am Anfang <span class="g">schiefgeht</span>.', b:[
+        {t:'pairs', i:[
+          ['Die Website entsteht in irgendeinem Ordner auf dem Schreibtisch, neben alten Speisekarten und Rechnungen.','Ein eigener Ordner nur für die Website. In einem halben Jahr findest du alles wieder, und Claude sieht nichts, was es nicht sehen soll.'],
+          ['Die Öffnungszeiten stehen nur in deinem Kopf, und Claude setzt Platzhalter, die später keiner ersetzt.','Alle Fakten stehen vor dem ersten Bauschritt in der CLAUDE.md. Was noch fehlt, ist als OFFEN sichtbar.'],
+          ['Du lässt dir die fertige Seite beschreiben und glaubst der Meldung.','Du schaust selbst in die Vorschau, breit und in Handybreite. Gemeldet heißt nicht gesehen.'],
+          ['Am ersten Abend schon Bilder erzeugen, weil es Spaß macht.','Erst die Geschichte, der Brief und das Drehbuch, dann die Bilder. Jeder Bildlauf kostet Guthaben, und ohne Plan passt er später nicht.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Einrichtung', at:'Der erste', ag:'Abend', steps:['Ordner anlegen','Sitzung starten','CLAUDE.md anlegen','Vorschau prüfen'],
+      intro:'Plan die Einrichtung für einen ruhigen Abend nach Schluss. Sie geht schnell, aber die Fakten sollen stimmen, und das braucht einen klaren Kopf.',
+      points:['Leg den Ordner an und starte die Sitzung genau darin.','Lass Claude die CLAUDE.md mit dem Auftrag oben anlegen und beantworte die Fragen <b>mit dem Aushang vor dir</b>.','Vergleich die Fakten mit deinem Google-Eintrag und korrigier, was abweicht.','Lass dir eine leere Startseite in der Vorschau zeigen, einmal breit und einmal in Handybreite.']},
+    learn:['Du weißt, was deine Seite einem Gast in den <b>ersten Sekunden</b> geben muss.','Du arbeitest in einem eigenen <b>Projektordner</b> mit Vorschau in der Desktop-App.','Deine <b>CLAUDE.md</b> enthält die echten Fakten und die Regel: nichts erfinden, Lücken markieren.','Claude prüft jede Änderung selbst, am Rechner und in <b>Handybreite</b>.'],
+    next:'/lektionen/website-skills-laden'
+  };
+
+  /* ================= L6.10 · Karte und Tisch (NEU) ================= */
+  LESSONS['speisekarte-und-reservierung']={
+    n:'L 6.10', title:'Karte und <span class="g">Tisch</span>', cover:'cover-610', coverL:'Reservierungsbuch und Tisch für zwei',
+    intro:[
+      'Die zwei Dinge, die ein Gast auf deiner Seite am häufigsten sucht, sind die Karte und der Weg zu einem Tisch. Beide müssen am Handy sofort funktionieren, und die Karte muss stimmen, heute und in drei Monaten.',
+      'Deshalb legen wir die Karte als Daten an einer einzigen Stelle an, am besten direkt aus deinem Backoffice, und bauen Reservierung und Anruf so ein, dass ein Tipp genügt. Was hinter dem Reservierungsknopf passiert, hast du in Modul 5 gebaut. Hier geht es darum, wie die Seite dorthin führt.'
+    ],
+    anim:{key:'a610', eb:'Eine Stelle für die Karte', h:'Ein Preis <span class="g">ändert sich</span>.', sub:'Was passiert, wenn die Karte als Daten geführt wird und nicht als Text, der an drei Orten von Hand gepflegt wird.', foot:'Gerichte und Preise sind Beispielwerte.'},
+    secs:[
+      {eb:'Die Karte als Daten', h:'Eine Zeile pro Gericht, an <span class="g">einer Stelle</span>.', b:[
+        {t:'p', h:'Die naheliegende Art wäre, die Karte als Text in die Seite zu schreiben. Das funktioniert, bis sich ein Preis ändert. Dann suchst du die Stelle auf der Website, in der Druckkarte und vielleicht noch in einem PDF, und irgendwo vergisst du eine. Ein Gast, der am Tisch einen anderen Preis liest als auf deiner Seite, fühlt sich nicht gut beraten.'},
+        {t:'p', h:'Wir legen die Karte stattdessen als Liste von Einträgen an, jeder mit Name, kurzer Beschreibung, Preis, Rubrik und dem Vermerk, ob er gerade auf der Karte steht. Die Seite baut ihre Karte daraus, und eine Druckfassung lässt sich aus denselben Daten erzeugen. Eine Preisänderung ist danach eine Zeile.'},
+        {t:'p', h:'Leg die Karte auf der Seite als echte Seite an, nicht nur als PDF zum Herunterladen. Am Handy liest sie sich ohne Zoomen, und Suchmaschinen können lesen, was es bei dir gibt. Ein PDF darfst du zusätzlich anbieten, erzeugt aus denselben Daten.'}
+      ]},
+      {eb:'Aus dem Backoffice', h:'Die Karte kommt aus deiner <span class="g">Gerichte-Datenbank</span>.', b:[
+        {t:'p', h:'Wenn du mit dem Backoffice aus Modul 2 arbeitest, liegen deine Gerichte samt Preisen und Allergenen dort schon sauber gepflegt. Dann ist die Karte auf der Website kein neuer Datenbestand, sondern ein Auszug daraus. Die Verbindung zwischen Claude Code und Notion steht seit Modul 4. Gib zusätzlich die Gerichte-Datenbank für die Verbindung frei.'},
+        {t:'code', l:'Auftrag: Karte aus dem Backoffice ziehen', h:'Lies aus meiner Notion-Datenbank „Gerichte & Getränke“ alle Einträge, die aktuell auf der Karte stehen (nur lesen, nichts in Notion ändern).\n\nSchreib daraus die Datei daten/karte.json mit: Name, kurze Beschreibung, Preis in Euro, Rubrik, Allergene, Stand (heutiges Datum).\n\nRegeln:\n- Preise und Allergene nur aus den Feldern der Datenbank. Fehlt ein Wert, schreib OFFEN und liste es mir auf.\n- Zeig mir vorher, welche Einträge du übernimmst und welche nicht, und warum.\n\nDanach baut die Seite ihre Karte aus daten/karte.json. Zeig mir die Karte in der Vorschau, breit und in Handybreite.'},
+        {t:'p', h:'Ändert sich die Karte, wiederholst du diesen Auftrag. Ohne Backoffice führst du <span class="tsn6-mono">karte.json</span> direkt, Claude legt sie dir aus deiner aktuellen Karte an. Wichtig ist nur, dass es danach genau eine Stelle gibt.'},
+        {t:'merk', h:'Ein Gericht, ein Eintrag, eine Stelle. Website, Handy und Druckkarte lesen alle daraus.'}
+      ]},
+      {eb:'Der Weg zum Tisch', h:'Reservieren mit <span class="g">einem Tipp</span>.', b:[
+        {t:'p', h:'Auf der Startseite gibt es genau zwei Wege zum Tisch, und beide sind am Handy jederzeit erreichbar: ein Knopf „Tisch reservieren“ und ein Knopf „Anrufen“. Der Anruf-Knopf wählt deine Nummer direkt, ohne dass der Gast sie abtippen muss. Auf einer Restaurant-Seite ist das die meistgenutzte Funktion überhaupt.'},
+        {t:'cards', c:2, i:[
+          {e:'Du hast ein Reservierungssystem', n:'Seine Buchungsmaske bleibt', p:'Bind die Buchung deines Anbieters so ein, wie er es vorsieht, als Link oder eingebettetes Fenster. Die Maske gestalten wir nicht nach, sie ist mit deinem Tischplan verbunden. Die Seite drumherum passt sich an.'},
+          {e:'Du nutzt den Agenten aus Modul 5', n:'Die Seite zeigt auf ihn', p:'Der Knopf führt in das Postfach oder den WhatsApp-Kanal, den dein Agent betreut. Was er dort prüft und bucht, hast du in Modul 5 gebaut.'}
+        ]},
+        {t:'code', l:'Auftrag: Reservierung und Anruf einbinden', h:'Bau auf der Startseite und auf der Karte zwei Knöpfe ein, die am Handy immer erreichbar sind:\n1. „Tisch reservieren“ führt zu [Link deines Reservierungssystems oder Kanal aus Modul 5]. Wird ein Buchungsfenster eingebettet, übernimm es unverändert nach der Anleitung des Anbieters.\n2. „Anrufen“ wählt direkt die Telefonnummer aus dem Fakten-Block.\n\nAm Rechner stehen beide Knöpfe in der Leiste oben. Prüf in der Vorschau in Handybreite, dass beide mit dem Daumen gut zu treffen sind. Prüf außerdem, dass der Reservierungslink wirklich auf die Buchung führt.'},
+        {t:'do', i:['Mach nach dem Einbau eine <b>Testreservierung</b> auf dem Handy und storniere sie danach.','Ruf über den Anruf-Knopf einmal an. Klingelt es an deinem Telefon im Betrieb?','Schau, ob die Öffnungszeiten neben dem Knopf mit deinem Google-Eintrag übereinstimmen.']}
+      ]},
+      {eb:'Typische Fehler', h:'Wo Gäste <span class="g">hängen bleiben</span>.', b:[
+        {t:'pairs', i:[
+          ['Die Karte als PDF, das am Handy erst geladen und dann vergrößert werden muss.','Die Karte als Seite, gebaut aus den Daten. PDF höchstens zusätzlich.'],
+          ['Preise an drei Orten von Hand gepflegt.','Eine Datei oder die Gerichte-Datenbank als einzige Stelle.'],
+          ['Telefonnummer als Bild oder als Text, den man abtippen muss.','Ein Anruf-Knopf, der direkt wählt.'],
+          ['Die Buchungsmaske des Anbieters nachbauen, damit sie schöner aussieht.','Die Maske unverändert lassen. Nur sie ist mit deinem Tischplan verbunden.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Einrichtung', at:'Karte', ag:'und Tisch', steps:['Karte als Daten','Aus dem Backoffice','Zwei Knöpfe','Testbuchung'],
+      intro:'Mach diesen Schritt an einem Ruhetag. Du brauchst die aktuelle Karte, den Zugang zu deinem Reservierungssystem und dein Telefon im Betrieb.',
+      points:['Lass deine Karte als <b>Daten</b> anlegen, eine Zeile pro Gericht.','Zieh sie, wenn du das Backoffice nutzt, direkt aus der <b>Gerichte-Datenbank</b>.','Bau „Tisch reservieren“ und „Anrufen“ ein, am Handy immer erreichbar.','Mach eine <b>Testreservierung</b> und einen Testanruf vom Handy aus.']},
+    learn:['Deine Karte lebt <b>an einer Stelle</b> und baut Website, Handy und Druckkarte.','Mit dem Backoffice ist die Karte ein <b>Auszug</b> aus deiner Gerichte-Datenbank.','Reservieren und Anrufen gehen am Handy mit <b>einem Tipp</b>.','Die Buchungsmaske deines Anbieters bleibt, wie sie ist, und ist <b>getestet</b>.'],
+    next:'/lektionen/schriftarten-anpassen'
+  };
+
+  /* ================= L6.11 · Die Schrift ================= */
+  LESSONS['schriftarten-anpassen']={
+    n:'L 6.11', title:'Die <span class="g">Schrift</span>', cover:'cover-611', coverL:'Schild mit Schriftzug über dem Eingang',
+    intro:[
+      'Bis hierher läuft deine Seite mit Standardschriften. Die sind ordentlich und austauschbar, und gegen Austauschbarkeit arbeiten wir in diesem ganzen Modul. Die Schrift ist der schnellste Weg, einer Seite Charakter zu geben, und an ihr scheitern mehr Seiten als am Aufbau.',
+      'Du suchst in dieser Lektion zwei Schriften aus, eine für die Titel und eine zum Lesen. Wir prüfen, ob sie alle Zeichen haben, ob du sie gewerblich nutzen darfst, und legen sie so in dein Projekt, dass sie schnell laden und keine Daten deiner Gäste an fremde Server schicken.'
+    ],
+    anim:{key:'a611', eb:'Woher die Titelschrift kommt', h:'Die Schrift kommt aus dem <span class="g">Logo</span>.', sub:'Dein Betrieb hat schon eine Schrift: auf dem Schild, auf der Karte, im Logo. Die Titelschrift der Seite ist ihre freie Entsprechung.', foot:'Schild und Schriften sind Beispiele.'},
+    secs:[
+      {eb:'Zwei Schriften', h:'Eine für die Titel, eine zum <span class="g">Lesen</span>.', b:[
+        {t:'p', h:'Zwei Schriften reichen immer. Wer drei nimmt, hat meistens keine Entscheidung getroffen. Die Titelschrift darf Charakter haben, weil sie groß steht. Sie kommt aus deiner Wortmarke: Leg dein Logo in den Projektordner und lass dir drei frei verfügbare Schriften vorschlagen, die ihm in Form und Breite am nächsten kommen. Die Wortmarke selbst bleibt ein Bild, die Schrift ist ihre Entsprechung für alle anderen Titel.'},
+        {t:'p', h:'Die Leseschrift muss vor allem eines: auch klein und am Handy gut lesbar sein. Bewährt haben sich bei mir rund achtzehn Pixel am Rechner, sechzehn bis achtzehn am Handy, ein großzügiger Zeilenabstand und Zeilen von höchstens sechzig Zeichen. Nie eine dünne, zarte Schrift für den Lesetext, auch wenn sie elegant aussieht. Betonung entsteht über Farbe, nicht über Kursiv.'},
+        {t:'code', l:'Auftrag: Titelschrift finden', h:'Im Ordner marke/ liegt mein Logo. Schlag mir drei Schriften vor, die der Wortmarke in Form, Strichstärke und Breite am nächsten kommen. Bedingungen:\n- Lizenz erlaubt den Einsatz auf gewerblichen Websites.\n- Enthält Ä, Ö, Ü, ä, ö, ü, ß, €, „ “ und &.\n\nBau mir eine Musterseite: oben das Logo, darunter der Name meines Betriebs in jeder der drei Schriften, und eine Überschrift mit Umlauten. Nenn je Schrift die Lizenz und woher die Dateien kommen.'}
+      ]},
+      {eb:'Zeichen und Lizenz', h:'Prüfen, bevor du dich <span class="g">verliebst</span>.', b:[
+        {t:'p', h:'Prüf früh, ob deine Wunschschrift alle Zeichen hat. Ich bin selbst darüber gestolpert: Eine Schrift brachte nur einen kleinen Zeichensatz mit, einzelne Buchstaben fielen auf eine Ersatzschrift zurück, und die Überschrift sah aus, als hätte jemand zwei Schriften gemischt. Das fällt erst beim genauen Hinsehen auf und wirkt dann sofort billig.'},
+        {t:'p', h:'Dann die Lizenz. Auf vielen Schriftportalen steht „frei für den persönlichen Gebrauch“. Für deinen Betrieb ist das unbrauchbar, denn eine Restaurant-Seite ist gewerblich. Du brauchst eine Schrift, die ausdrücklich für gewerbliche Websites freigegeben ist, oder eine, die du lizenzierst. Die Schriften aus Google Fonts stehen unter offenen Lizenzen und dürfen gewerblich genutzt werden. Lies trotzdem bei jeder Schrift die Lizenzdatei, die dem Download beiliegt, und lass sie dir von Claude auf diese eine Frage zusammenfassen.'},
+        {t:'merk', h:'„Frei für den persönlichen Gebrauch“ heißt: nicht für deinen Betrieb.'}
+      ]},
+      {eb:'Im eigenen Projekt', h:'Selbst ausliefern, nicht <span class="g">nachladen</span>.', b:[
+        {t:'p', h:'Der bequeme Weg ist, eine Schrift bei jedem Aufruf von einem fremden Dienst nachzuladen. Dabei geht die Adresse deines Gastes an diesen Dienst. Das Landgericht München hat 2022 entschieden, dass genau das bei Google Fonts ohne Einwilligung unzulässig ist, und einem Besucher hundert Euro Schadensersatz zugesprochen. Danach kam eine Welle von Abmahnungen.'},
+        {t:'p', h:'Der richtige Weg ist ohnehin der bessere: Die Schriftdateien liegen in deinem Projekt und werden von deinem eigenen Server ausgeliefert. Das ist schneller, unabhängig, und es gehen keine Daten deiner Gäste nach außen. Lass Claude außerdem dafür sorgen, dass beim Laden nie kurz eine Ersatzschrift aufblitzt.'},
+        {t:'code', l:'Auftrag: Schriften einbinden', h:'Binde die gewählten Schriften [Titelschrift] und [Leseschrift] lokal ein:\n- Lade die Schriftdateien (WOFF2) aus der offiziellen Quelle in den Ordner schriften/ und leg die Lizenzdateien daneben.\n- Kein Nachladen von fremden Servern, prüf das im Netzwerk-Verlauf der Vorschau.\n- Beim Laden darf nie eine Ersatzschrift aufblitzen.\n- Prüf in der Vorschau eine Überschrift mit „Größe, Grüße, Spätzle“ und einen Preis mit Eurozeichen.\nTrag beide Schriften mit Lizenz in die CLAUDE.md ein.'}
+      ]},
+      {eb:'Schrift über Bildern', h:'Lesbar, ohne dass man den <span class="g">Kasten</span> sieht.', b:[
+        {t:'p', h:'Deine Titel stehen oft über einem Foto, und das wechselt die Helligkeit: mal liegt darunter ein dunkler Gastraum, mal eine helle Hauswand im Sonnenlicht. Ein harter Schatten direkt an den Buchstaben strengt die Augen an, und das ganze Bild abzudunkeln nimmt ihm das Licht. Was funktioniert, ist eine weiche, dunkle Fläche genau hinter dem Text, die nach außen natürlich ausläuft. Man sieht sie nicht als Kasten, und die Zeile bleibt lesbar, egal was im Bild passiert.'},
+        {t:'p', h:'Dasselbe gilt für die Leiste oben. Ein feines Menü-Symbol aus dünnen Strichen verschwindet über einem hellen Bild. Kräftigere Striche auf einer eigenen dunklen Fläche lösen das.'},
+        {t:'pairs', i:[
+          ['Eine Schrift mit dem Vermerk „nur persönlich“ auf der Restaurant-Seite.','Eine Schrift mit Lizenz für gewerbliche Websites, Lizenzdatei im Projekt.'],
+          ['Schriften bei jedem Aufruf von einem fremden Dienst nachladen.','Schriftdateien im eigenen Projekt, keine Daten nach außen.'],
+          ['Drei oder vier Schriften, weil jede so schön ist.','Zwei: eine aus der Wortmarke für die Titel, eine ruhige zum Lesen.'],
+          ['Schwarzer Schatten hart an den Buchstaben über dem Foto.','Weiche dunkle Fläche hinter dem Text, die natürlich ausläuft.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Einrichtung', at:'Die', ag:'Schrift', steps:['Aus dem Logo','Zeichen prüfen','Lizenz lesen','Lokal einbinden'],
+      intro:'Plane eine Stunde dafür. Die meiste Zeit geht in das Vergleichen, und das lohnt sich, weil die Schrift auf jeder Seite steht.',
+      points:['Leg dein Logo ins Projekt und lass dir <b>drei Titelschriften</b> daneben zeigen.','Prüf jede Schrift mit Umlauten, Eszett und Eurozeichen.','Lies die <b>Lizenz</b>: gewerbliche Websites müssen erlaubt sein.','Bind beide Schriften <b>lokal</b> ein und prüf, dass nichts von fremden Servern lädt.']},
+    learn:['Deine Titelschrift ist eine Entsprechung deiner <b>Wortmarke</b>, die Leseschrift ist ruhig und groß genug.','Du prüfst jede Schrift auf <b>alle Zeichen</b>, bevor du dich festlegst.','„Nur persönlich“ ist tabu. Deine Schriften haben eine <b>gewerbliche Lizenz</b>.','Die Schriften liegen <b>im eigenen Projekt</b>, und Titel über Fotos bleiben lesbar.'],
+    next:'/lektionen/mobil-check'
+  };
+
+  /* ================= L6.12 · Flüssig am Handy ================= */
+  LESSONS['mobil-check']={
+    n:'L 6.12', title:'Flüssig am <span class="g">Handy</span>', cover:'cover-612', coverL:'Handy in der Hand vor der Eingangstür',
+    intro:[
+      'Die meisten deiner Gäste öffnen die Seite am Handy, oft unterwegs, manchmal direkt vor deiner Tür. Seit der ersten Lektion prüft Claude jeden Schritt auch in Handybreite. Diese Lektion ist der letzte, gründliche Durchgang, bevor die Seite online geht.',
+      'Ein Gast, der noch nie bei dir war, öffnet die Seite oft nur ein einziges Mal, auf seinem eigenen Gerät. Stockt sie dort, sind Bilder und Texte umsonst. Deshalb messen wir am schwächsten Gerät, nicht an deinem neuen Laptop.'
+    ],
+    anim:{key:'a612', eb:'Was flüssig wirklich heißt', h:'Der Daumen <span class="g">entscheidet</span>.', sub:'Dieselbe Seite auf einem älteren Handy, schnell gescrollt. Vier Korrekturen, dann der Test mit dem Daumen.', foot:'Kurve schematisch.'},
+    secs:[
+      {eb:'Eine eigene Fassung', h:'Das Handy ist kein kleiner <span class="g">Bildschirm</span>.', b:[
+        {t:'p', h:'Eine Seite fürs Handy ist nicht die verkleinerte Rechner-Seite, sondern eine eigene, gleichwertige Fassung. Im ersten Bildschirm stehen nur Bild, Name, ein Satz und die zwei Knöpfe aus Lektion 6.10. Das Auftaktbild bekommt einen eigenen Zuschnitt im Hochformat, damit dein Motiv nicht an den Rändern abgeschnitten wird. Alles darunter läuft in einer Spalte.'},
+        {t:'p', h:'Lass Claude die Seite in mehreren Handygrößen prüfen, auch mit niedriger Höhe, wenn die Tastatur offen ist. Nichts darf seitlich überstehen, kein Wort darf mitten getrennt werden, und jeder Knopf ist so groß, dass ein Daumen ihn sicher trifft.'}
+      ]},
+      {eb:'Die Messlatte', h:'Am schwächsten Gerät, nicht am <span class="g">eigenen</span>.', b:[
+        {t:'p', h:'„Läuft bei mir“ ist kein Ergebnis. Dein Rechner ist schneller als das Handy der meisten Gäste, und dein WLAN schneller als ihr Netz am Bahnhof. Claude kann die Vorschau absichtlich verlangsamen, mit gedrosselter Rechenleistung und gedrosseltem Netz, und dabei messen, wie gleichmäßig die Seite beim Scrollen läuft. Gemessen wird an der fertigen Fassung, nicht im Entwicklungsmodus, der ist immer langsamer.'},
+        {t:'p', h:'Eine Erfahrung hat mich dabei überrascht: Ich hatte das Laden einer Seite aufwendig verbessert, am Rechner war sie deutlich schneller, und auf dem iPhone wurde sie dadurch schlechter. Die Browser auf dem iPhone gehen manche Wege anders. Testen heißt deshalb auch: auf einem echten Gerät, nicht nur in der verkleinerten Vorschau.'},
+        {t:'code', l:'Auftrag: Handy-Prüfung', h:'Prüf die fertige Fassung der Seite (nicht den Entwicklungsmodus) für das Handy:\n1. In 390 px und 360 px Breite, auch mit 620 px Höhe. Nichts steht seitlich über, kein Wort wird getrennt.\n2. Mit vierfach gedrosselter Rechenleistung und langsamem Mobilnetz: Miss beim schnellen Scrollen die Bilder pro Sekunde und das Ladegewicht des ersten Bildschirms.\n3. Ist im ersten Moment alles da (Bild, Name, Satz), oder lädt etwas nach?\n4. Sind alle Knöpfe mindestens 44 px hoch und gut zu treffen?\nNenn mir die Messwerte und was du ändern würdest. Ändere noch nichts.'}
+      ]},
+      {eb:'Leichter ausliefern', h:'Gleich viele Bilder, nur <span class="g">leichter</span>.', b:[
+        {t:'p', h:'Ruckelt die Seite, ist die Lösung fast nie, Bilder oder Bewegung wegzunehmen. Die Lösung ist, sie leichter auszuliefern. Jedes Bild liegt in mehreren Größen vor, und das Handy lädt nur die, die es braucht. Moderne Bildformate machen dieselben Bilder ohne sichtbaren Unterschied deutlich kleiner.'},
+        {t:'p', h:'Für den Film aus Lektion 6.8 bekommt das Handy eine eigene Bildfolge: im Hochformat zugeschnitten und mit jedem zweiten Bild, weil man den Unterschied auf dem kleinen Schirm nicht sieht. Bei meinem Bau wurden daraus statt rund hundertfünfzig Megabyte etwa dreißig. Änderst du später den Film, baust du beide Folgen neu. Schreib das in die CLAUDE.md, dann erinnert Claude dich daran.'},
+        {t:'code', l:'Auftrag: Bilder für das Handy', h:'Liefere alle Bilder der Seite in passenden Größen aus:\n- Je Bild Fassungen für Handy, Tablet und Rechner (zum Beispiel 800, 1400, 2400 px Breite) im WebP-Format, der Browser wählt selbst.\n- Das Auftaktbild bekommt am Handy einen eigenen Zuschnitt im Hochformat.\n- Bilder im ersten Bildschirm laden sofort, alle anderen rechtzeitig, bevor man hinkommt.\n- Die Anzahl der Bilder und die Bewegungen bleiben, wie sie sind.\nMiss danach dasselbe wie vorher und zeig mir den Vergleich.'}
+      ]},
+      {eb:'Was am Handy wegfällt', h:'Drei Dinge, die nur am Rechner <span class="g">funktionieren</span>.', b:[
+        {t:'p', h:'Effekte, die eine Maus brauchen, eine Bildspur hinter dem Mauszeiger oder ein Effekt beim Darüberfahren, laufen am Handy ins Leere und kosten trotzdem Rechenzeit. Sie werden auf Geräten mit Touch gar nicht erst geladen.'},
+        {t:'p', h:'Milchglas-Flächen über einem bewegten Bild sehen am Rechner edel aus und sind am Handy der teuerste Effekt überhaupt, weil das Gerät sie bei jedem Bild neu berechnet. Über Bewegtem haben sie nichts zu suchen. Und Zusatzbausteine, die erst starten, wenn die ganze Seite geladen ist, warten auf jedes einzelne Bild. Sie sollen starten, wenn das Handy gerade Luft hat.'},
+        {t:'do', l:'Der Daumen-Test, am echten Handy', i:['Scroll die ganze Seite schnell nach unten und wieder hoch. Ruckelt etwas, springt etwas?','Lies jeden Text, ohne zu zoomen.','Tipp jeden Knopf mit dem Daumen, nicht mit dem Fingernagel.','Mach eine Testreservierung mit der Handytastatur und tipp auf „Anrufen“.','Schalt das WLAN aus und mach dieselbe Runde im Mobilnetz, so wie dein Gast vor der Tür.']}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Der', ag:'Daumen-Test', steps:['Fassung prüfen','Gedrosselt messen','Leichter ausliefern','Am Gerät testen'],
+      intro:'Mach den Test mit dem ältesten Handy, das du findest, gern dem deines Kollegen in der Küche. Es ist näher an deinen Gästen als deins.',
+      points:['Lass die Seite in mehreren <b>Handygrößen</b> prüfen.','Lass sie <b>gedrosselt messen</b>, an der fertigen Fassung.','Liefere die Bilder <b>leichter</b> aus, statt Bilder oder Bewegung zu streichen.','Mach den <b>Daumen-Test</b> am echten Gerät, auch ohne WLAN.']},
+    learn:['Das Handy bekommt eine <b>eigene Fassung</b>, kein verkleinertes Abbild.','Gemessen wird <b>am schwächsten Gerät</b>, gedrosselt, an der fertigen Fassung.','Bei Ruckeln wird das Laden repariert: <b>gleich viele Bilder, nur leichter</b>.','Der <b>Daumen-Test</b> am echten Handy entscheidet, nicht die Vorschau.'],
+    next:'/lektionen/online-hosten'
+  };
+
+  /* ================= L6.13 · Online stellen ================= */
+  LESSONS['online-hosten']={
+    n:'L 6.13', title:'Online <span class="g">stellen</span>', cover:'cover-613', coverL:'Eingangstür am Abend, Schild geöffnet',
+    intro:[
+      'Deine Seite läuft auf deinem Rechner. Damit ein Gast sie aufrufen kann, muss sie auf einen Server und unter eine eigene Adresse. Der Weg dorthin ist kurz, Claude richtet ihn mit dir ein, und du bestätigst unterwegs ein paar Schritte.',
+      'Dazu kommen die Pflichten, die eine Seite deines Betriebs erfüllen muss, und der Eintrag, über den die meisten Gäste dich finden: dein Google-Profil. Am Ende dieser Lektion steht die Seite online und ist auf der echten Adresse geprüft.'
+    ],
+    anim:{key:'a613', eb:'Vom Rechner ins Netz', h:'Der Weg ins <span class="g">Netz</span>.', sub:'Was hochgeladen wird, was nicht, und was nach dem Hochladen noch geprüft werden muss.', foot:'Ordner, Größen und Adresse sind Beispiele.'},
+    secs:[
+      {eb:'Der Hoster', h:'Eine Seite ohne Datenbank, ein einfacher <span class="g">Hoster</span>.', b:[
+        {t:'p', h:'Deine Seite braucht keine Datenbank und kein Benutzerkonto. Es gibt keine Anmeldung und nichts, was sich zwischen zwei Aufrufen verändert, die Karte steht in einer Datei, die du pflegst. Reservierungen laufen über dein Reservierungssystem oder den Agenten aus Modul 5. Eine solche Seite kann jeder einfache Hoster ausliefern, sie ist schnell und geht selten kaputt.'},
+        {t:'p', h:'Wichtig bei der Wahl ist eine Frage, die viele übersehen: Erlaubt der kostenlose Tarif eine gewerbliche Seite? Deine Restaurant-Seite ist gewerblich. Diese Angaben habe ich am 1. November 2026 an den Quellen geprüft.'},
+        {t:'tab', h:['Anbieter','Kostenloser Tarif','Für deinen Betrieb'], r:[
+          ['Cloudflare Pages','bis 20.000 Dateien je Seite, bis 25 MB je Datei (Stand der Doku: September 2026)','passt für eine Seite dieser Größe. Lies vor dem Start die aktuellen Bedingungen.'],
+          ['Vercel','Hobby-Tarif nur für private, nicht gewerbliche Nutzung','gewerblich nur im kostenpflichtigen Pro-Tarif'],
+          ['GitHub Pages','kostenlos','laut GitHub nicht für Geschäftsseiten gedacht und nicht erlaubt'],
+          ['Dein bisheriger Webhoster','oft schon bezahlt, wenn du eine Seite hast','geht, Claude erklärt dir das Hochladen dorthin']
+        ]},
+        {t:'p', h:'Bedingungen ändern sich. Lass Claude vor der Entscheidung die aktuelle Seite deines Anbieters lesen und dir die Frage nach der gewerblichen Nutzung beantworten, mit Link zur Stelle.'}
+      ]},
+      {eb:'Sichern und hochladen', h:'Was mitgeht und was <span class="g">nie</span>.', b:[
+        {t:'p', h:'Bevor etwas hochgeht, kommt dein Projekt in eine Versionsverwaltung, am einfachsten ein privates Projekt bei GitHub. Jeder Stand wird dort gespeichert, und du kannst jederzeit zu einem früheren zurück. Das brauchst du spätestens in Lektion 6.14, wenn du die Seite selbst pflegst.'},
+        {t:'p', h:'Beim Bauen entstehen im Ordner Entwürfe, Originalfotos und Zwischenstände, oft um ein Vielfaches größer als die Seite selbst. Bei einem meiner Projekte wollte der Upload fünfundsiebzig Gigabyte an Zwischenständen mitnehmen, bevor ich eingegriffen habe. Eine <b>Ausschlussliste</b> im Projekt legt fest, was nie hochgeladen wird. Und weil eine Bildfolge aus Tausenden Dateien besteht, geht alles in einem Paket statt in Tausenden Einzelschritten, sonst läufst du in Mengenbegrenzungen.'},
+        {t:'code', l:'Auftrag: sichern und veröffentlichen', h:'Bereite die Veröffentlichung vor, Schritt für Schritt, und frag mich vor jedem Schritt, der etwas nach außen schickt:\n1. Leg eine Ausschlussliste an: Entwürfe, Originalfotos, Zwischenstände, Clips, alles außer der fertigen Seite. Zeig mir, was übrig bleibt und wie groß es ist.\n2. Leg ein privates GitHub-Projekt an und speichere den aktuellen Stand.\n3. Verbinde das Projekt mit [Hoster] und veröffentliche die Seite. Bilder, die sich nie ändern, dürfen lange im Browser gespeichert werden. Neue Fassungen einer Bildfolge kommen in einen neuen Ordner mit Versionsnummer.\n4. Gib mir die Adresse, unter der die Seite jetzt erreichbar ist.'},
+        {t:'merk', h:'Ändert sich eine gespeicherte Bildfolge, bekommt sie einen neuen Ordnernamen. Sonst zeigen Browser, die die alte gespeichert haben, weiter die alte.'}
+      ]},
+      {eb:'Adresse und Pflicht', h:'Eigene Adresse, <span class="g">Impressum</span>, Datenschutz.', b:[
+        {t:'p', h:'Nach dem Veröffentlichen bekommst du eine Test-Adresse des Hosters. Für deinen Betrieb willst du deine eigene Domain davor. Das ist kein technischer Akt mehr: Domain bei einem Anbieter kaufen oder die vorhandene nehmen, beim Hoster hinterlegen und beim Domain-Anbieter zwei Einträge setzen. Claude sagt dir, welche. Deine E-Mail-Adresse läuft davon unberührt weiter, wenn die Einträge stimmen.'},
+        {t:'p', h:'Jede geschäftliche Website braucht ein <b>Impressum</b>. Die Pflicht steht seit dem 14. Mai 2024 in Paragraf 5 des Digitale-Dienste-Gesetzes, vorher im Telemediengesetz. Es muss von jeder Seite aus leicht erreichbar sein, am besten im Fuß. Dazu kommt die <b>Datenschutzerklärung</b>: Sie nennt, welche Daten beim Besuch anfallen, beim Hoster, im eingebetteten Reservierungsfenster, bei einer eingebetteten Karte. Für die Reservierungsdaten selbst hast du in Modul 5 den passenden Absatz geschrieben.'},
+        {t:'p', h:'Halte die Seite schlank, dann bleibt auch die Datenschutzerklärung kurz: Schriften liegen bei dir, Tracking kommt nur, wenn du es wirklich auswertest. Lass Impressum und Datenschutzerklärung einmal von einer Fachperson prüfen. Das ist der eine Teil des Moduls, den Claude dir nicht abnehmen soll.'}
+      ]},
+      {eb:'Gefunden werden', h:'Dort, wo deine Gäste <span class="g">suchen</span>.', b:[
+        {t:'p', h:'Die meisten Gäste finden dich nicht über deine Adresse, sondern über die Suche oder die Karte auf dem Handy. Verlinke deine neue Seite in deinem Google-Unternehmensprofil und prüf, dass Öffnungszeiten und Telefon dort genau mit deinem Fakten-Block übereinstimmen.'},
+        {t:'p', h:'Hilfreich ist außerdem, wenn die Seite Suchmaschinen in ihrer Sprache sagt, was sie ist: ein Restaurant, mit Adresse, Öffnungszeiten, Küche, Link zur Karte und zur Reservierung. Dafür gibt es ein festes Format, das Claude in die Seite schreibt, ohne dass ein Gast etwas davon sieht.'},
+        {t:'code', l:'Auftrag: für Suchmaschinen lesbar machen', h:'Ergänze die Seite um strukturierte Daten nach schema.org vom Typ Restaurant: Name, Adresse, Telefon, Öffnungszeiten, Küche, Preisspanne, Link zur Karte, Link zur Reservierung. Alle Werte nur aus dem Fakten-Block. Gib jeder Seite einen eigenen Titel und eine Beschreibung in einem Satz. Prüf das Ergebnis und zeig es mir.'}
+      ]},
+      {eb:'Die Prüfrunde', h:'Auf der echten Adresse, nicht auf dem <span class="g">Rechner</span>.', b:[
+        {t:'p', h:'Der häufigste Unterschied zwischen deinem Rechner und dem Netz ist ein Bild oder eine Schrift, die lokal liegt und online nicht mitgekommen ist. Deshalb wird nach jedem Veröffentlichen auf der echten Adresse geprüft, am Rechner und am Handy.'},
+        {t:'do', i:['Öffne die Seite unter deiner Adresse in einem privaten Fenster und am Handy im Mobilnetz.','Scroll jede Seite ganz durch, klick jeden Link, öffne die Karte.','Reservier testweise und tipp auf „Anrufen“.','Öffne Impressum und Datenschutz von der Startseite und von der Karte aus.','Such deinen Betrieb bei Google und prüf, ob der Link auf die neue Seite führt.']},
+        {t:'pairs', i:[
+          ['Die Seite auf einem kostenlosen Tarif, der gewerbliche Nutzung ausschließt.','Vorher die Bedingungen lesen lassen und einen Tarif wählen, der deinen Betrieb erlaubt.'],
+          ['Alles hochladen, was im Ordner liegt.','Eine Ausschlussliste, und alles in einem Paket.'],
+          ['Impressum fehlt oder ist nur von der Startseite aus erreichbar.','Impressum und Datenschutz im Fuß jeder Seite.'],
+          ['Prüfen auf dem eigenen Rechner und „fertig“ sagen.','Prüfen auf der echten Adresse, am Handy, im Mobilnetz.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Einrichtung', at:'Online', ag:'stellen', steps:['Hoster wählen','Sichern','Adresse','Prüfrunde'],
+      intro:'Plane einen Abend und halte die Zugangsdaten zu deiner Domain bereit. Die Umstellung der Adresse kann ein paar Stunden brauchen, bis sie überall ankommt.',
+      points:['Wähle einen Hoster, dessen Tarif <b>gewerbliche Seiten</b> erlaubt.','Leg die <b>Ausschlussliste</b> an und sichere das Projekt bei GitHub.','Hinterleg deine <b>eigene Adresse</b>, Impressum und Datenschutz im Fuß.','Mach die <b>Prüfrunde</b> auf der echten Adresse und verlinke dein Google-Profil.']},
+    learn:['Deine Seite liegt bei einem Hoster, der <b>gewerbliche Seiten</b> erlaubt.','Dein Projekt ist <b>gesichert</b>, und hochgeladen wird nur, was auf die Seite gehört.','Deine Seite hat eine <b>eigene Adresse</b>, Impressum und Datenschutzerklärung.','Du prüfst <b>auf der echten Adresse</b>, und dein Google-Profil führt auf die Seite.'],
+    next:'/lektionen/website-pflegen'
+  };
+
+  /* ================= L6.14 · Die Seite pflegen (NEU) ================= */
+  LESSONS['website-pflegen']={
+    n:'L 6.14', title:'Die Seite <span class="g">pflegen</span>', cover:'cover-614', coverL:'Saisonware am Pass, Spargel und Pilze',
+    intro:[
+      'Eine Website ist nie fertig, so wenig wie eine Karte. Der Spargel kommt, die Terrasse öffnet, im Dezember sind Betriebsferien. Eine Seite, auf der im Juli noch das Wintermenü steht, kostet mehr Vertrauen als gar keine.',
+      'Der eigentliche Gewinn dieses Moduls ist, dass du deine Seite jetzt selbst ändern kannst, in einem Satz, ohne auf eine Agentur zu warten. In dieser Lektion richten wir das so ein, dass jede Änderung sicher ist: Du siehst sie vorher, und du kommst jederzeit zurück.'
+    ],
+    anim:{key:'a614', eb:'Pflege übers Jahr', h:'Ein Jahr auf deiner <span class="g">Seite</span>.', sub:'Vier Momente im Jahr, jeder mit einem Satz erledigt. Einmal geht etwas schief, und auch das ist ein Satz.', foot:'Gerichte, Preise und Daten sind Beispielwerte.'},
+    secs:[
+      {eb:'Ändern in einem Satz', h:'Du sagst, was sich <span class="g">ändert</span>.', b:[
+        {t:'p', h:'Öffne die Sitzung im Projektordner und sag Claude, was sich ändert, so wie du es einem Kollegen sagen würdest. Die CLAUDE.md sorgt dafür, dass Claude weiß, wo was steht: die Fakten im Fakten-Block, die Karte in den Daten, die Bilder in ihrem Ordner.'},
+        {t:'ul', i:['„Ab Freitag Spargel auf die Karte, weißer Spargel mit Sauce hollandaise, vierundzwanzig Euro.“','„Ab nächster Woche sonntags schon ab zwölf Uhr offen. Bitte auch im Fakten-Block ändern.“','„Tausch das Bild im Auftakt gegen das Sommerbild der Terrasse aus dem Ordner fotos/sommer.“','„Blende vom 23. Dezember bis 6. Januar oben einen Hinweis auf die Betriebsferien ein.“']},
+        {t:'p', h:'Ändern sich Fakten wie Öffnungszeiten oder Telefon, ändern sie sich zuerst im Fakten-Block und von dort auf der Seite. Und denk an deinen Google-Eintrag, der muss dasselbe sagen.'}
+      ]},
+      {eb:'Erst zeigen, dann veröffentlichen', h:'Jede Änderung siehst du <span class="g">vorher</span>.', b:[
+        {t:'p', h:'Es gilt dieselbe Prüf-Schleife wie bei deinen Datenbanken in Modul 4: Claude zeigt dir die Änderung in der Vorschau, du schaust sie dir an, am Rechner und in Handybreite, und erst auf dein Ja geht sie online. Gelöscht wird nichts ohne Nachfrage.'},
+        {t:'code', l:'Pflege-Regeln für die CLAUDE.md', h:'## Pflege\n- Jede Änderung zeigst du mir zuerst in der Vorschau, breit und in Handybreite. Veröffentlicht wird erst nach meinem Ja.\n- Fakten änderst du zuerst im Fakten-Block, dann auf der Seite.\n- Preise und Gerichte kommen nur aus daten/karte.json oder aus der Gerichte-Datenbank.\n- Vor jeder Veröffentlichung speicherst du den Stand mit einem Namen, der sagt, was sich geändert hat.\n- Du löschst keine Dateien und keine Bilder ohne Nachfrage.'}
+      ]},
+      {eb:'Der Weg zurück', h:'Jeder Stand ist <span class="g">gespeichert</span>.', b:[
+        {t:'p', h:'Seit Lektion 6.13 liegt dein Projekt in einer Versionsverwaltung. Jede veröffentlichte Änderung ist dort mit einem Namen gespeichert, „Spargel auf die Karte“ oder „Sommerbild im Auftakt“. Geht etwas schief, reicht ein Satz: „Mach die letzte Änderung rückgängig.“ Oder: „Zeig mir die Seite, wie sie vor den Betriebsferien war.“ Danach korrigierst du die Ursache an der richtigen Stelle, etwa den Preis in der Karte.'},
+        {t:'merk', h:'Keine Angst vor Änderungen. Jeder Stand ist gespeichert, und zurück ist ein Satz.'}
+      ]},
+      {eb:'Der Rhythmus', h:'Was im Laufe eines Jahres <span class="g">ansteht</span>.', b:[
+        {t:'tab', h:['Wann','Was'], r:[
+          ['bei jeder Kartenänderung','Karte neu aus dem Backoffice oder aus karte.json ziehen, Vorschau prüfen'],
+          ['zu jeder Saison','ein, zwei neue Fotos, das Auftaktbild passend zur Jahreszeit'],
+          ['vor Ferien und Feiertagen','Hinweis oben einblenden, Reservierung für die Zeit sperren, Google-Eintrag anpassen'],
+          ['einmal im Monat','Links, Öffnungszeiten, Telefon, Impressum prüfen lassen'],
+          ['im Januar','Jahreszahl im Fuß, Preise im Überblick, alte Hinweise entfernen']
+        ]},
+        {t:'p', h:'Die monatliche Prüfung muss nicht an dir hängen. Richte sie als Routine ein, so wie du es in Modul 4 kennengelernt hast. Die Regel von dort gilt auch hier: Die Routine berichtet, sie ändert nichts.'},
+        {t:'code', l:'Auftrag: monatliche Prüf-Routine', h:'Richte eine Routine ein, die am ersten Montag jedes Monats um 7 Uhr läuft und nur berichtet, nichts ändert:\n1. Öffne die Seite unter [Adresse] und prüf alle Links, die Karte und den Reservierungsknopf.\n2. Vergleich Öffnungszeiten und Telefon auf der Seite mit dem Fakten-Block.\n3. Prüf, ob alle Bilder laden und Impressum und Datenschutz erreichbar sind.\n4. Schreib mir einen kurzen Bericht mit allem, was nicht stimmt.'}
+      ]},
+      {eb:'Grenzen', h:'Was du nicht <span class="g">selbst</span> machen solltest.', b:[
+        {t:'p', h:'Fast alles an deiner Seite kannst du jetzt selbst pflegen. Drei Dinge gebe ich trotzdem aus der Hand: Rechtstexte wie Impressum und Datenschutzerklärung prüft einmal im Jahr eine Fachperson. Ein Umzug der Domain zu einem anderen Anbieter ist selten, aber er kann deine E-Mail stilllegen, wenn ein Eintrag fehlt. Und ein neues Formular, das Daten von Gästen sammelt, braucht mehr als eine Vorschau, dafür gilt alles aus Modul 5.'},
+        {t:'p', h:'Somit hast du eine Website, die aus deinem Betrieb heraus entstanden ist, mit deinen Bildern, deinen Worten und deiner Karte, und die du selbst aktuell hältst. Wenn sich ein Preis ändert, änderst du eine Zeile. Wenn eine Terrasse dazukommt, kommt ein Abschnitt dazu.'}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Die', ag:'Pflege', steps:['Ein Satz','Vorschau','Gespeichert','Monatsbericht'],
+      intro:'Pflege kleine Änderungen sofort, solange du sie im Kopf hast. Eine Seite, die immer stimmt, ist mehr wert als ein großer Umbau einmal im Jahr.',
+      points:['Sag Claude in <b>einem Satz</b>, was sich ändert, Fakten zuerst im Fakten-Block.','Schau dir jede Änderung in der <b>Vorschau</b> an, breit und am Handy, bevor sie online geht.','Lass jeden Stand mit einem klaren Namen <b>speichern</b>. Zurück ist ein Satz.','Richte die <b>monatliche Routine</b> ein, die nur berichtet.']},
+    learn:['Du änderst deine Seite <b>in einem Satz</b>, ohne auf jemanden zu warten.','Jede Änderung siehst du <b>vorher</b>, und erst dein Ja veröffentlicht sie.','Jeder Stand ist <b>gespeichert</b>, und zurück ist ein Satz.','Eine Routine prüft deine Seite <b>jeden Monat</b> und berichtet nur.'],
+    next:'/modul-6-weitere-tools-projektmanagement', nextL:'Zur Modulübersicht'
+  };
+
+  /* ================= L6.2 · Die Werkzeugkiste ================= */
+  LESSONS['website-skills-laden']={
+    n:'L 6.2', title:'Die <span class="g">Werkzeugkiste</span>', cover:'cover-62', coverL:'Messerrolle auf dunklem Holz',
+    intro:[
+      'Claude kann von Haus aus Websites bauen. Ohne Anleitung baut es aber den Durchschnitt aus allem, was es je gesehen hat, und diesen Durchschnitt erkennt man inzwischen auf den ersten Blick. Ein Gast spürt ihn, auch wenn er ihn nicht benennen kann.',
+      'In dieser Lektion legen wir drei Werkzeuge in die Kiste: eins für die Gestaltung, eins für die Bewegung und eins, mit dem Claude seine Arbeit selbst im Browser prüft. Was Skills und Plugins sind und wie man sie lädt, weißt du aus Modul 3. Hier geht es nur darum, welche für eine Website zählen.'
+    ],
+    anim:{key:'a62', eb:'Derselbe Auftrag, vier Stufen', h:'Was die Werkzeuge <span class="g">ändern</span>.', sub:'Der Auftrag ist jedes Mal derselbe: ein Seitenkopf für ein Restaurant. Nur die Werkzeuge in der Kiste wechseln.'},
+    secs:[
+      {eb:'Warum Claude Hilfe braucht', h:'Der Durchschnitt hat einen <span class="g">Look</span>.', b:[
+        {t:'p', h:'Gib einem Sprachmodell den Auftrag „bau mir eine schöne Restaurant-Website“, und du bekommst fast immer dasselbe: einen Farbverlauf in Lila oder Blau, eine Überschrift, die mit „Willkommen“ anfängt, drei runde Kacheln mit Symbolen und einen Knopf mit weichem Schatten. Das ist kein Fehler des Modells. Es macht, was im Netz am häufigsten vorkommt, weil ihm niemand sagt, wofür die Seite da ist.'},
+        {t:'p', h:'Ein Gast, der deine Seite öffnet, hat solche Seiten hundertfach gesehen. Er wird nicht denken „das ist KI“, aber er wird nichts von deinem Betrieb spüren, und das ist schlimmer. Deine Seite soll nach deinem Laden aussehen, nach deinem Holz, deinem Licht, deinen Tellern.'},
+        {t:'merk', h:'Ein Werkzeug ersetzt keine Entscheidung. Es sorgt dafür, dass Claude die richtigen Fragen stellt, bevor es baut.'}
+      ]},
+      {eb:'Was in die Kiste gehört', h:'Drei Werkzeuge für <span class="g">deine Website</span>.', b:[
+        {t:'cards', c:3, i:[
+          {e:'Gestaltung', n:'frontend-design', p:'Ein Skill von Anthropic aus dem offiziellen Plugin-Verzeichnis. Er bringt Claude bei, wie ein Gestalter zu denken: zuerst den Betrieb verstehen, dann Farben, Schrift und Aufbau daraus ableiten, und die bekannten Allerweltslösungen meiden.\n\nIch lade ihn in jedem Website-Projekt zuerst.'},
+          {e:'Bewegung', n:'GSAP-Skills', p:'Die offiziellen Skills der Entwickler von GSAP, der Bibliothek, mit der sich Bilder und Texte beim Scrollen bewegen. Sie zeigen Claude, wie man diese Bewegung sauber und sparsam baut.\n\nGSAP ist mit allen Zusatzteilen kostenlos, auch für gewerbliche Seiten wie deine.'},
+          {e:'Kontrolle', n:'Browser-Prüfung', p:'In der Desktop-App ist sie eingebaut: Claude öffnet die Seite in der Vorschau und sieht sie sich selbst an. Arbeitest du im Terminal, übernimmt das die Erweiterung Claude in Chrome oder das Playwright-Plugin aus dem offiziellen Verzeichnis.\n\nOhne Blick in den Browser rät Claude, wie die Seite aussieht.'}
+        ]},
+        {t:'code', l:'Befehle zum Kopieren (einzeln in Claude Code eingeben)', h:'/plugin install frontend-design@claude-plugins-official\n\n/plugin marketplace add greensock/gsap-skills\n/plugin install gsap-skills@gsap-skills\n\n# nur wenn du im Terminal statt in der Desktop-App arbeitest:\n/plugin install playwright@claude-plugins-official'},
+        {t:'p', h:'Danach startest du die Sitzung einmal neu, damit Claude die neuen Werkzeuge kennt. Die Namen und Wege habe ich am 1. November 2026 an den offiziellen Verzeichnissen geprüft. Verzeichnisse ändern sich, deshalb gilt: Findet <span class="tsn6-mono">/plugin</span> einen Namen nicht, such ihn im Plugin-Fenster unter <b>Discover</b>, statt irgendeine Kopie aus dem Netz zu laden.'}
+      ]},
+      {eb:'Der Test', h:'Greift das <span class="g">Werkzeug</span>?', b:[
+        {t:'p', h:'Ein installierter Skill ist noch kein arbeitender Skill. Bevor wir uns auf die Werkzeuge verlassen, geben wir Claude eine kleine Aufgabe, bei der sie anspringen müssen, und schauen in den Verlauf der Sitzung. Lädt Claude einen Skill, steht er dort mit Namen.'},
+        {t:'code', l:'Auftrag: Werkzeug-Test', h:'Bau eine Testseite test.html mit einem Seitenkopf für ein Restaurant: Name, ein Satz, ein Knopf „Tisch reservieren“. Die Seite soll hochwertig wirken und der Titel soll beim Laden ruhig von unten erscheinen.\n\nSag mir danach:\n1. Welche Skills du dafür geladen hast.\n2. Wie die Seite in der Vorschau aussieht, breit und in Handybreite. Schau sie dir dafür selbst an.\n\nLösch test.html, wenn ich es bestätige.'},
+        {t:'p', h:'Springt kein Skill an, klärst du das jetzt und nicht mitten im Projekt. Meistens fehlt nur der Neustart der Sitzung, manchmal ist ein Name falsch geschrieben. Ein Skill, der nie anspringt, ist nur ein Ordner auf deiner Festplatte.'}
+      ]},
+      {eb:'Typische Fehler', h:'Mehr Werkzeug macht keine <span class="g">bessere Seite</span>.', b:[
+        {t:'p', h:'Es ist verlockend, gleich zwanzig Skills zu laden, wenn sie nichts kosten. Jeder geladene Skill belegt aber Platz im Kontext, und den bezahlst du mit jeder Nachricht. Lade, was diese Website braucht, und lösch, was du nach dem Projekt nicht mehr nutzt.'},
+        {t:'pairs', i:[
+          ['Skills aus irgendeiner Sammlung im Netz laden, weil der Name gut klingt.','Nur aus den offiziellen Verzeichnissen der Hersteller. Ein Skill ist eine Anweisung an Claude, und fremde Anweisungen willst du kennen.'],
+          ['Nach der Installation sofort weiterarbeiten.','Sitzung neu starten, dann den Test von oben. Erst wenn die Namen im Verlauf auftauchen, gilt das Werkzeug als geladen.'],
+          ['Die Werkzeuge erst einbauen, wenn die Seite schon steht.','Die Kiste ist voll, bevor die erste Zeile entsteht. Nachträglich umzugestalten kostet mehr als von Anfang an richtig zu bauen.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Einrichtung', at:'Die', ag:'Werkzeugkiste', steps:['frontend-design','GSAP-Skills','Browser-Prüfung','Testseite'],
+      intro:'Die Einrichtung dauert eine Viertelstunde. Mach sie in der Sitzung im Projektordner, damit alles an der richtigen Stelle landet.',
+      points:['Installier <b>frontend-design</b> aus dem offiziellen Plugin-Verzeichnis.','Füg das Verzeichnis von GreenSock hinzu und installier die <b>GSAP-Skills</b>.','Prüf, dass die Vorschau in der Desktop-App aufgeht, sonst richte Claude in Chrome oder Playwright ein.','Starte neu und lass die <b>Testseite</b> bauen. Im Verlauf müssen die Skills mit Namen stehen.']},
+    learn:['Du weißt, warum Claude ohne Anleitung den <b>Durchschnitt</b> baut.','Du hast <b>frontend-design</b> und die <b>GSAP-Skills</b> aus offiziellen Verzeichnissen geladen.','Claude prüft seine Arbeit selbst im <b>Browser</b>, breit und in Handybreite.','Du testest jedes Werkzeug, bevor du dich darauf verlässt, und lädst <b>nur, was du brauchst</b>.'],
+    next:'/lektionen/struktur-ausdenken'
+  };
+
+  /* ================= L6.3 · Deine Geschichte ================= */
+  LESSONS['struktur-ausdenken']={
+    n:'L 6.3', title:'Deine <span class="g">Geschichte</span>', cover:'cover-63', coverL:'Eingedeckter Gastraum am Nachmittag',
+    intro:[
+      'Die meisten Websites entstehen falsch herum. Jemand sieht eine schöne Seite, findet sie gut und baut etwas Ähnliches. Dann steht da eine Seite, die zu einem Vorstellungsbild passt, aber nicht zu dem Betrieb, für den sie gemacht ist.',
+      'Wir fangen am anderen Ende an, bei dem, was wirklich da ist. Wir lesen deinen Betrieb aus, schreiben seine Geschichte in einen Satz und leiten daraus ab, welche Abschnitte die Seite braucht. Am Ende dieser Lektion steht ein Gerüst, das du von oben bis unten durchscrollen kannst.'
+    ],
+    anim:{key:'a63', eb:'Was ein Gast wissen will', h:'Jede Frage hat ihren <span class="g">Platz</span>.', sub:'Bevor ein Gast reserviert, hat er immer dieselben Fragen. Dein Gerüst beantwortet sie alle, und ganz oben steht, warum man zu dir kommt.'},
+    secs:[
+      {eb:'Schritt 1', h:'Auslesen, nicht <span class="g">anschauen</span>.', b:[
+        {t:'p', h:'Wenn es schon eine Website gibt, egal wie alt, ist sie deine erste Quelle. Beim Anschauen siehst du „dunkelbraun, wirkt gemütlich“. Beim Auslesen bekommst du die genauen Farbwerte, die Schriften, die Maße aller Bilder und die Technik, die darunter läuft. Das kostet nichts: Claude öffnet die Seite in der Vorschau und fragt sie direkt ab.'},
+        {t:'p', h:'Ich sage das so deutlich, weil ich beim ersten echten Bau in die Falle getreten bin und zuerst einen bezahlten Dienst angeworfen habe, der für Hunderte von Seiten gedacht ist. Für eine einzelne Website reicht der Browser, immer.'},
+        {t:'p', h:'Das Auslesen verrät oft mehr, als auf der Seite steht. Bei einem Restaurant, das ich ausgelesen habe, lief im Hintergrund das Werbe-Tracking von Google Ads. Der Betrieb kaufte also Besucher ein und schickte sie auf eine Seite, die langsam lud und seinen Sonnenuntergang hinter einem Standbild versteckte. Solche Zusammenhänge stehen nirgends geschrieben, sie stehen im Quelltext.'},
+        {t:'code', l:'Auftrag: bestehende Seite auslesen', h:'Öffne meine bisherige Website [Adresse] in der Vorschau und lies sie aus, ohne etwas zu verändern. Schreib das Ergebnis als Abschnitt „Bestand“ in die CLAUDE.md:\n\n- Alle Texte, Preise, Öffnungszeiten und Kontaktdaten, wörtlich.\n- Farben als genaue Werte, Schriften mit Schnitten.\n- Alle Bilder mit Größe in Pixeln und Format.\n- Welche Technik und welche fremden Dienste geladen werden (Tracking, Werbung, Buchungssysteme).\n- Was auf dem Handy nicht funktioniert.\n\nVergleich die Angaben mit dem Fakten-Block. Weicht etwas ab, liste es auf und frag mich, was stimmt.'},
+        {t:'p', h:'Gibt es noch keine Seite, fällt die Bestandsaufnahme kürzer aus, aber sie fällt nicht weg. Leg zusammen, was existiert: deine aktuelle Karte, den Google-Eintrag, dein Instagram, Fotos aus dem Handy, Zeitungsartikel, die Liste deiner Lieferanten. Alles wandert in den Projektordner.'},
+        {t:'merk', h:'Fertig ist dieser Schritt, wenn du deinen Betrieb vollständig beschreiben kannst, ohne die alte Seite noch einmal zu öffnen.'}
+      ]},
+      {eb:'Schritt 2', h:'Die Geschichte in <span class="g">einem Satz</span>.', b:[
+        {t:'p', h:'Jetzt kommt der Teil, den dir kein Werkzeug abnimmt. Was ist an deinem Betrieb das Eine, weswegen jemand kommt? Bei einem Lokal am Wasser ist es vielleicht die Terrasse im letzten Licht, bei einem Landgasthof der Braten am Sonntag nach dem Rezept der Großmutter. Das ist kein Detail für die Fußzeile, das ist der Grund, warum der Gast kommt.'},
+        {t:'p', h:'Schreib daraus einen Satz, der deine Seite als Erlebnis beschreibt. Bewährt hat sich bei mir die Form eines Abends: <b>„Ein Abend bei uns beginnt auf der Terrasse am Kanal, geht weiter am Tisch mit der Karte vom Markt und endet mit einem Glas an der Bar.“</b> Dieser Satz bestimmt die Reihenfolge der Abschnitte.'},
+        {t:'s', h:'Die Abschnitte fallen aus der Geschichte heraus, nicht umgekehrt.'},
+        {t:'p', h:'Wer mit einer Liste von Abschnitten anfängt, bekommt eine Seite, die aussieht wie ein ausgefülltes Formular. Wer mit der Geschichte anfängt, bekommt eine Seite, die man von oben nach unten liest wie einen Abend. Die sechs Fragen aus der Animation sind dabei deine Prüfliste: Jede muss irgendwo beantwortet sein, aber sie müssen nicht die Reihenfolge bestimmen.'},
+        {t:'code', l:'Auftrag: Abschnittsplan vorschlagen', h:'Lies die CLAUDE.md (Fakten und Bestand). Das Besondere an meinem Betrieb ist: [dein Satz].\n\nSchlag mir eine Reihenfolge von höchstens acht Abschnitten für die Startseite vor, die als ein Abend erzählt wird und mit dem Besonderen beginnt. Begründe jeden Abschnitt in einem Satz und nenn, welche dieser Gastfragen er beantwortet: Was gibt es, was kostet es, wann habt ihr offen, wo seid ihr, wie ist es dort, wie bekomme ich einen Tisch.\n\nAbschnitte, die keine Frage beantworten und nichts Besonderes zeigen, lässt du weg. Schreib noch nichts in Dateien.'},
+        {t:'p', h:'Was zurückkommt, liest du gegen deinen eigenen Kopf. Du kennst deinen Betrieb, Claude kennt nur die Datei. Wenn der Plan stimmt, lässt du ihn als Abschnitt „Aufbau“ in die CLAUDE.md schreiben.'}
+      ]},
+      {eb:'Schritt 3', h:'Das Gerüst vor den <span class="g">Bildern</span>.', b:[
+        {t:'p', h:'Jetzt bauen wir die ganze Seite, bevor ein einziges Bild existiert. Das klingt verkehrt und ist der wichtigste Kniff des Moduls. Bilder sind der langsamste und teuerste Teil, und wer auf sie wartet, steht still.'},
+        {t:'p', h:'Jede Stelle, an der später ein Bild sitzt, bekommt einen Platzhalter mit zwei Dingen: einer Beschriftung, welches Motiv dort hingehört, und einer Fläche in der Lichtstimmung des künftigen Bildes, warm für den Abend, kühler für den Vormittag. So beurteilst du das Farbklima der Seite schon jetzt, und der spätere Austausch ist ein Handgriff je Platz.'},
+        {t:'code', l:'Auftrag: Gerüst bauen', h:'Bau die Startseite nach dem Abschnitt „Aufbau“ der CLAUDE.md als Gerüst:\n\n- Jeder Abschnitt ist vorhanden und bedienbar, Navigation und Knöpfe funktionieren.\n- Wo später ein Bild oder Film sitzt, setzt du einen Platzhalter mit Beschriftung (Motiv, Seitenverhältnis) und einer Farbfläche in der Lichtstimmung des Motivs.\n- Fakten (Zeiten, Telefon, Adresse, Preise) setzt du echt aus dem Fakten-Block ein, nie als Platzhalter.\n- Noch keine Bilder erzeugen, noch kein Feinschliff.\n\nZeig mir die Seite danach in der Vorschau, breit und in Handybreite.'},
+        {t:'merk', h:'Platzhalter gibt es nur für Bilder, nie für Fakten. Telefon, Zeiten und Preise stehen ab der ersten Minute echt in der Seite.'}
+      ]},
+      {eb:'Typische Fehler', h:'Woran Gerüste <span class="g">scheitern</span>.', b:[
+        {t:'pairs', i:[
+          ['Eine bewunderte Seite als Vorlage nehmen und nachbauen lassen.','Vom eigenen Betrieb ausgehen. Wer nachbaut, übernimmt fremde Gestaltung, die einem anderen gehört, und eine Seite, die nicht zu deinem Laden passt.'],
+          ['„Willkommen auf unserer Website“ als erster Satz, darunter ein Absatz über Leidenschaft und Qualität.','Ganz oben das Eine, als Bild und mit wenigen Worten. Leidenschaft zeigt man am Teller, nicht im Absatz darüber.'],
+          ['Zwölf Unterseiten von Anfang an, für jede Kleinigkeit eine.','Eine starke Startseite und nur die Unterseiten, die ein Gast wirklich braucht, meist Karte, Reservierung und Impressum.'],
+          ['Mit dem Gerüst warten, bis die Fotos fertig sind.','Gerüst zuerst, mit beschrifteten Platzhaltern. Die Bilder kommen in Lektion 6.7 an Plätze, die schon bereitstehen.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Ein', ag:'Nachmittag', steps:['Auslesen','Das Eine','Abschnittsplan','Gerüst'],
+      intro:'Nimm dir für diese Lektion einen ruhigen Nachmittag. Der Satz über deinen Betrieb ist die wichtigste Entscheidung des ganzen Moduls.',
+      points:['Lass deine bisherige Seite auslesen oder leg dein Material in den Projektordner.','Schreib <b>das Eine</b> auf, weswegen man zu dir kommt, und frag zwei Stammgäste, ob sie es genauso sehen.','Lass dir den Abschnittsplan vorschlagen und streich alles, was keine Frage beantwortet.','Bau das <b>Gerüst</b> und scroll es einmal am Handy durch.']},
+    learn:['Du <b>liest</b> einen Betrieb aus, statt ihn nur anzuschauen, und brauchst dafür kein bezahltes Werkzeug.','Du kennst <b>das Eine</b>, weswegen man zu dir kommt, und hast deine Geschichte in einem Satz.','Deine Abschnitte folgen der Geschichte und beantworten die <b>sechs Fragen</b> des Gastes.','Deine Seite steht als <b>Gerüst</b>, mit echten Fakten und beschrifteten Bildplätzen.'],
+    next:'/lektionen/designanforderungen-definieren'
+  };
+
+  /* ================= L6.4 · Der Design-Brief ================= */
+  LESSONS['designanforderungen-definieren']={
+    n:'L 6.4', title:'Der <span class="g">Design-Brief</span>', cover:'cover-64', coverL:'Speisekarte, Papier und Stempel',
+    intro:[
+      'Hier biegen die meisten selbstgebauten Websites falsch ab. Man sucht sich zwei, drei Seiten, die einem gefallen, und sagt: so ungefähr. Heraus kommt ein Mischmasch aus fremden Entscheidungen, der nirgends richtig sitzt.',
+      'Wir schreiben stattdessen auf, wie deine Seite wirken soll, bevor gestaltet wird. Stimmung, Farben, Register und das, was sie nie sein darf. Dieser Brief kommt in die CLAUDE.md, und ab da misst Claude jeden Entwurf daran, und du auch.'
+    ],
+    anim:{key:'a64', eb:'Woher die Farben kommen', h:'Die Farben hängen schon an der <span class="g">Wand</span>.', sub:'Dein Betrieb hat längst eine Farbwelt. Sie steckt im Holz, in der Karte, im Schild über der Tür.', foot:'Farbwerte sind Beispielwerte.'},
+    secs:[
+      {eb:'Die Stimmung', h:'In deinen Worten, nicht in <span class="g">Werbewörtern</span>.', b:[
+        {t:'p', h:'„Modern und clean“, „hochwertig“, „gemütlich“ sagt jeder, und für Claude heißt es nichts. Beschreib deinen Betrieb so, wie du ihn einem Freund am Telefon beschreiben würdest, der noch nie da war. Was sieht er, wenn er reinkommt? Wie ist das Licht um neun Uhr abends? Wie klingt es? Woraus sind Tische und Wände?'},
+        {t:'pairs', i:[['„Modern, hochwertig, gemütlich, mit regionaler Küche.“','„Dunkles Eichenholz, Kerzen auf jedem Tisch, eine offene Küche, aus der man das Brett hört. Man bleibt länger, als man wollte.“'],['„Junges, frisches Konzept.“','„Hell, laut, Fliesen wie in einer alten Metzgerei, am Tresen wird geredet, und abends geht es bis Mitternacht.“']]},
+        {t:'p', h:'Dazu gehört das <b>Register</b>: Wie ruhig darf die Seite sein? Ein Haus mit Stern verträgt nichts Verspieltes, jede Bewegung und jeder Satz muss dort leise sein. Ein Bistro darf lebendiger auftreten. Beides ist richtig, solange es zu deinem Betrieb passt.'}
+      ]},
+      {eb:'Die Farben', h:'Zwei Grundtöne, ein <span class="g">Akzent</span>.', b:[
+        {t:'p', h:'Mehr braucht keine Restaurant-Seite, und mehr macht sie unruhig. Die Grundtöne sind die Flächen, ein dunkler und ein heller. Der Akzent ist sparsam: eine feine Linie, ein Knopf, ein Punkt, nie eine ganze Fläche. So bleibt er stark.'},
+        {t:'p', h:'Die Farben erfindest du nicht, du findest sie. Fotografier dein Schild, die Karte, die Wand, das Geschirr, leg die Fotos in den Projektordner und lass Claude die Werte abnehmen. Dann passt die Seite zu dem, was der Gast später vor Ort sieht, und dein Betrieb wirkt aus einem Guss.'},
+        {t:'code', l:'Auftrag: Farben aus Fotos ableiten', h:'Im Ordner farben/ liegen Fotos aus meinem Betrieb (Schild, Karte, Wand, Geschirr). Nimm aus diesen Fotos die prägenden Farben ab und schlag mir daraus zwei Grundtöne (ein dunkler, ein heller) und einen Akzent vor, mit genauen Farbwerten.\n\nPrüf, dass Text in Hell auf Dunkel und in Dunkel auf Hell gut lesbar ist. Zeig mir die drei Farben als kleine Musterseite in der Vorschau, bevor du etwas in die CLAUDE.md schreibst.'}
+      ]},
+      {eb:'Die Verbote', h:'Was deine Seite <span class="g">nie</span> sein soll.', b:[
+        {t:'p', h:'Der klarste Teil eines Briefs sind oft die Verbote. Sie halten Claude von den Lösungen fern, die überall zu sehen sind und billig wirken. Diese Liste ist mein Ausgangspunkt bei jedem Betrieb, streich, was für dich nicht gilt, und ergänz, was dich stört.'},
+        {t:'ul', i:['Keine Farbverläufe über Flächen, keine Glanzeffekte, keine Bilder aus Bilddatenbanken.','Keine Kacheln mit Symbolen, keine Emojis, keine Punkt-Etiketten über Überschriften.','Kein Ladebildschirm und kein Vorhang vor der Seite, der erste Blick zeigt sofort deinen Betrieb.','Keine Werbesätze wie „Genießen Sie …“ oder „Wir freuen uns auf Ihren Besuch“.','Keine Bewegung, die wackelt, springt oder seitwärts hereinrutscht.']}
+      ]},
+      {eb:'Der Brief im Projekt', h:'Einmal schreiben, bei jedem Schritt <span class="g">lesen</span>.', b:[
+        {t:'code', l:'Auftrag: Design-Brief in die CLAUDE.md', h:'Schreib den Abschnitt „Design-Brief“ in die CLAUDE.md mit genau diesen Angaben und frag mich, wo etwas fehlt:\n\nStimmung: [deine Beschreibung in ganzen Sätzen]\nRegister: [ruhig und leise | lebendig | dazwischen, mit Begründung]\nFarben: Grundton dunkel [Wert], Grundton hell [Wert], Akzent [Wert], Akzent nur als Linie, Knopf oder Punkt.\nBilder: echte Fotos aus dem Betrieb zuerst.\nNicht: [deine Verbote]\n\nRegel: Jeder Entwurf wird vor dem Zeigen gegen diesen Brief geprüft. Weicht etwas ab, nennst du es.'},
+        {t:'s', h:'Varianten siehst du in der echten Seite, nicht im Chat.'},
+        {t:'p', h:'Wenn Claude dir für einen Abschnitt mehrere Fassungen vorschlägt, lass sie dir in die echte Seite bauen, umschaltbar mit den Pfeiltasten und mit einer kleinen Nummer unten. So vergleichst du im richtigen Zusammenhang, auf dem Handy und am Rechner, und sagst am Ende nur noch „Nummer drei“. Beschreibungen und Bildschirmfotos im Chat täuschen, die echte Seite nicht.'},
+        {t:'code', l:'Auftrag: Fassungen zum Durchklicken', h:'Bau für den Auftakt der Startseite vier deutlich verschiedene Fassungen nach dem Design-Brief, direkt in die echte Seite. Ich will sie mit den Pfeiltasten links und rechts durchschalten, unten klein die Nummer. Fassung 0 ist der heutige Stand. Die übrige Seite bleibt unverändert.'},
+        {t:'s', h:'Zwei Arten von Rückmeldung, zwei Reaktionen.'},
+        {t:'p', h:'Sagst du „die Überschrift ist zu groß“ oder „das Beige ist zu warm“, stimmt die Richtung, und du bist beim Feinschliff. Das sind Minuten. Sagst du „das ist es insgesamt nicht“, dann ist Nachbessern falsch. Dann stimmt der Brief nicht, und du änderst ihn, statt am Ergebnis zu feilen. Wer an einer falschen Grundlage feilt, verbringt Abende damit, etwas zu verbessern, das man wegwerfen sollte.'},
+        {t:'merk', h:'Stimmt die Richtung, wird gefeilt. Stimmt sie nicht, geht es zurück in den Brief.'}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Der', ag:'Brief', steps:['Stimmung','Farben','Verbote','Fassungen'],
+      intro:'Schreib den Brief, wenn du im Betrieb bist und ihn vor Augen hast, nicht am Küchentisch zu Hause.',
+      points:['Beschreib die Stimmung in ganzen Sätzen, so wie einem Freund am Telefon.','Fotografier Schild, Karte und Wand und lass die <b>Farben</b> daraus ableiten.','Nimm die Liste der <b>Verbote</b> und pass sie an deinen Betrieb an.','Lass den Auftakt in vier <b>Fassungen</b> in die echte Seite bauen und wähle per Nummer.']},
+    learn:['Du beschreibst deinen Betrieb in <b>konkreten Sätzen</b>, nicht in Werbewörtern.','Deine Farben kommen aus dem Betrieb: <b>zwei Grundtöne, ein Akzent</b>.','Deine Verbote halten Claude von den Lösungen fern, die überall gleich aussehen.','Du vergleichst Fassungen in der <b>echten Seite</b> und trennst Richtung von Detail.'],
+    next:'/lektionen/kamerafahrt-planen'
+  };
+
+  /* ================= L6.5 · Das Drehbuch ================= */
+  LESSONS['kamerafahrt-planen']={
+    n:'L 6.5', title:'Das <span class="g">Drehbuch</span>', cover:'cover-65', coverL:'Bar im ersten Abendlicht',
+    intro:[
+      'Bis hierher könnte alles auch für eine ganz normale Website gelten. Jetzt kommt der Teil, der aus einer Seite ein Erlebnis macht: Wir planen die Startseite wie einen Abend in deinem Betrieb, Abschnitt für Abschnitt, mit Tempo und Bewegung.',
+      'Das Drehbuch entsteht auf Papier oder in der CLAUDE.md, bevor ein einziges Bild existiert. Es legt fest, was der Gast in welcher Reihenfolge sieht, wie schnell es geht und womit sich jeder Abschnitt bewegt.'
+    ],
+    anim:{key:'a65', eb:'Wie eine Startseite erzählt', h:'Ein Abend in <span class="g">Abschnitten</span>.', sub:'Jeder Abschnitt hat einen Anfang und ein Ende und braucht höchstens drei bis vier Scrollbewegungen. Dann übergibt er an den nächsten.'},
+    secs:[
+      {eb:'Die wichtigste Regel', h:'Abschnitte statt einer langen <span class="g">Fahrt</span>.', b:[
+        {t:'p', h:'Mein erster großer Restaurant-Bau hing komplett an einer einzigen Kamerafahrt. Beim Scrollen flog der Gast über die Insel, in die Bar, durch die Küche bis auf die Terrasse, sechsundzwanzig Sekunden Film über die ganze Seite. Das sah stark aus und hatte einen Haken: Ruckelte eine Stelle, ruckelte die ganze Seite, und jede Änderung am Film verschob alles dahinter.'},
+        {t:'p', h:'Seitdem baue ich jede Startseite aus Abschnitten. Jeder Abschnitt ist in sich geschlossen, hat einen Anfang und ein Ende und braucht höchstens drei bis vier Scrollbewegungen. Es läuft immer nur der Abschnitt, den der Gast gerade sieht, der Rest ruht. Macht einer Probleme, reparierst du genau diesen, und die übrige Seite bleibt, wie sie ist.'},
+        {t:'merk', h:'Ein Abschnitt, drei bis vier Scrollbewegungen, ein Anfang und ein Ende. Dann übergibt er an den nächsten.'}
+      ]},
+      {eb:'Der Auftakt', h:'Der erste Blick ist sofort <span class="g">komplett</span>.', b:[
+        {t:'p', h:'In dem Moment, in dem die Seite sichtbar wird, sind Name, Bild und Satz gleichzeitig da. Kein Ladebalken, kein schwarzer Vorhang mit deinem Logo, kein Bild, das erst unscharf ist und dann nachlädt. Ein Gast, der auf eine Wartefläche schaut, hat den ersten Eindruck schon verloren.'},
+        {t:'p', h:'Der Auftakt zeigt das Eine aus Lektion 6.3, groß, in einem echten Bild. Der Name deines Betriebs steht groß darüber, der Satz darunter ist gut lesbar. Der Auftakt geht von selbst auf: Das Bild setzt sich, der Titel steigt herein, ohne dass der Gast etwas tun muss. Wenn du einen Film willst, gehört er hierhin und nur hierhin. Wie du ihn baust, kommt in Lektion 6.8.'},
+        {t:'code', l:'Regel für die CLAUDE.md', h:'Erster Blick: Wenn die Seite sichtbar wird, sind alle Bilder im ersten Bildschirm und die Schrift gleichzeitig fertig da. Kein Ladebildschirm, kein Vorhang, kein Nachladen oder Aufblenden von Bildern. Die Seite bleibt unsichtbar, bis die Bilder des ersten Bildschirms geladen sind, und erscheint dann in einem Moment.'}
+      ]},
+      {eb:'Tempo und Bewegung', h:'Kino entsteht aus dem <span class="g">Wechsel</span>.', b:[
+        {t:'p', h:'Am Anfang habe ich den Scrollweg gleichmäßig verteilt. Technisch lief alles flüssig, und es wirkte trotzdem wie ein Bildschirmschoner. Spannung entsteht aus dem Wechsel: Der Weg in den Betrieb darf zügig sein, der Teller am Pass braucht Zeit, sonst sieht ihn niemand. Schreib deshalb neben jeden Abschnitt ein Tempo, zügig, ruhig oder langsam.'},
+        {t:'p', h:'Genauso wichtig ist, dass nicht jeder Abschnitt dieselbe Bewegung trägt. Wenn alle Bilder auf dieselbe Weise hereinkommen, wird die schönste Bewegung beim dritten Mal langweilig. Jeder Abschnitt bekommt seine eigene Anordnung und seine eigene Bewegung, und pro Blick bewegt sich nur ein Ding. Welche Bewegungen edel wirken, schauen wir uns in Lektion 6.6 an.'},
+        {t:'tab', h:['Abschnitt','Was der Gast sieht','Bewegung','Tempo'], r:[
+          ['Auftakt','die Terrasse am Kanal im letzten Licht, Name groß','Bild setzt sich, Titel steigt','zügig'],
+          ['Ankommen','Tür, Bar, das erste Glas','Bilder schweben einzeln herauf','zügig'],
+          ['Der Raum','Gastraum mit Kerzen','Fenster: Ausschnitt öffnet sich','ruhig'],
+          ['Die Küche','Pass, Hände, Teller','Bilder Wand an Wand','langsam'],
+          ['Die Karte','vier Gerichte aus der aktuellen Karte','Karten nacheinander von links','ruhig'],
+          ['Reservieren','Zeiten, Telefon, Knopf','keine','zügig']
+        ]}
+      ]},
+      {eb:'Das Drehbuch schreiben', h:'Erst die Szenen, dann die <span class="g">Worte</span>.', b:[
+        {t:'code', l:'Auftrag: Drehbuch anlegen', h:'Lies den Abschnitt „Aufbau“ und den Design-Brief in der CLAUDE.md. Schreib daraus ein Drehbuch für die Startseite als Tabelle in den Abschnitt „Drehbuch“:\n\nAbschnitt | Was der Gast sieht | welche Gastfrage oder das Besondere | Bewegung | Tempo (zügig, ruhig, langsam) | Bildbedarf (Motiv, Format, echt vorhanden oder fehlt)\n\nRegeln:\n- Höchstens acht Abschnitte, jeder mit höchstens drei bis vier Scrollbewegungen.\n- Keine zwei Abschnitte mit derselben Bewegung oder derselben Anordnung.\n- Pro Blick bewegt sich nur ein Element.\n- Noch keine Texte über Bildern festlegen.\n\nZeig mir die Tabelle, bevor du sie speicherst.'},
+        {t:'p', h:'Die Spalte Bildbedarf ist die Einkaufsliste für Lektion 6.7. Was dort als „echt vorhanden“ steht, fotografierst du oder suchst es heraus. Was „fehlt“, wird später gezielt erzeugt, und nur das.'},
+        {t:'s', h:'Texte an Szenen binden, wenn die Szenen stehen.'},
+        {t:'p', h:'Einen Fehler habe ich selbst gemacht, damit du ihn nicht machen musst. Ich hatte die Zeilen über dem Film festgelegt, als die Szenen noch nicht final waren. Bei jeder Änderung am Film saßen alle Zeilen falsch. Leg die Worte erst fest, wenn die Bilder stehen. Bis dahin bleiben beide getrennt.'}
+      ]},
+      {eb:'Typische Fehler', h:'Wo Drehbücher <span class="g">kippen</span>.', b:[
+        {t:'pairs', i:[
+          ['Die ganze Seite an eine durchgehende Kamerafahrt hängen.','Abschnitte mit Anfang und Ende. Eine Fahrt höchstens als Auftakt.'],
+          ['Die schönsten Fotos aneinanderreihen.','Eine Richtung erzählen: ankommen, hineingehen, am Tisch sitzen, reservieren. Sonst wird es eine Diashow.'],
+          ['Ein schwarzer Startbildschirm mit Logo, bis alles geladen ist.','Der erste Blick ist sofort komplett, Name über dem Bild.'],
+          ['Derselbe Einblend-Effekt in jedem Abschnitt.','Jeder Abschnitt hat seine eigene Bewegung, und pro Blick bewegt sich nur eins.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Das', ag:'Drehbuch', steps:['Abschnitte','Auftakt','Tempo','Bildbedarf'],
+      intro:'Schreib das Drehbuch an einem Abend, an dem du im Betrieb sitzt und den Ablauf eines Abends vor Augen hast.',
+      points:['Leg die Abschnitte nach deinem Satz aus Lektion 6.3 fest, <b>höchstens acht</b>.','Plane den <b>Auftakt</b> so, dass er im ersten Moment komplett ist.','Gib jedem Abschnitt ein <b>Tempo</b> und eine eigene Bewegung.','Füll die Spalte <b>Bildbedarf</b> ehrlich aus. Sie ist deine Einkaufsliste.']},
+    learn:['Deine Startseite besteht aus <b>Abschnitten</b> mit Anfang und Ende, nicht aus einer langen Fahrt.','Der <b>erste Blick</b> ist sofort komplett, ohne Ladebildschirm.','Jeder Abschnitt hat sein eigenes <b>Tempo</b> und seine eigene Bewegung.','Dein Drehbuch steht in der CLAUDE.md, mit dem <b>Bildbedarf</b> je Abschnitt.'],
+    next:'/lektionen/ui-components-laden'
+  };
+
+  /* ================= L6.6 · Bewegung mit Maß ================= */
+  LESSONS['ui-components-laden']={
+    n:'L 6.6', title:'Bewegung mit <span class="g">Maß</span>', cover:'cover-66', coverL:'Teller wird am Pass angerichtet',
+    intro:[
+      'Eine Seite, auf der sich nichts bewegt, wirkt heute wie eine Visitenkarte aus Papier, ordentlich und vergessen. Eine Seite, auf der alles hüpft und blinkt, wirkt billig. Dazwischen liegt eine Handvoll Bewegungen, die edel wirken, und die lernst du in dieser Lektion kennen.',
+      'Dazu holen wir uns fertige Bausteine für das, was jede gute Seite braucht: eine Leiste oben, ein Menü, Knöpfe, die sich richtig anfühlen. Erfinden musst du davon nichts. Wissen musst du, wo man sie herbekommt und was die Lizenz erlaubt.'
+    ],
+    anim:{key:'a66', eb:'Die Sprache der Bewegung', h:'So bewegt sich eine <span class="g">edle Seite</span>.', sub:'Alle fünf Bewegungen laufen an derselben Bühne. Danach drei, die du nie einbauen solltest.'},
+    secs:[
+      {eb:'Das Vokabular', h:'Fünf Bewegungen, beim <span class="g">Namen</span> genannt.', b:[
+        {t:'p', h:'Claude baut Bewegung viel genauer, wenn du sie beim Namen nennst. „Mach es lebendiger“ führt zu irgendwas. „Lass die Bilder in diesem Abschnitt einzeln von unten heraufschweben“ führt zu genau dem, was du meinst. Diese fünf Namen benutze ich selbst beim Bauen.'},
+        {t:'tab', h:['Bewegung','Was passiert','Wo sie hingehört'], r:[
+          ['Hochschweben','Bild oder Karte kommt deckend von unten an ihren Platz, sobald der Abschnitt den Bildschirmrand berührt.','fast überall, der Grundton deiner Seite'],
+          ['Sanft zoomen','Das Foto setzt sich aus leichter Vergrößerung in seinen Rahmen.','große Bilder, Auftakt, Teller'],
+          ['Aus der Kante','Die Überschrift steigt Zeile für Zeile aus einer unsichtbaren Kante.','Titel jedes Abschnitts'],
+          ['Nacheinander','Karten kommen kurz nacheinander von links nach rechts.','Gerichte, Angebote, alles, was man der Reihe nach liest'],
+          ['Fenster','Bild und Satz stehen, der Ausschnitt öffnet sich.','zwei bis drei Wendepunkte der Startseite']
+        ]},
+        {t:'p', h:'Bilder, die zusammen eine Fläche bilden, etwa eine Wand aus Fotos, kommen dagegen <b>gemeinsam</b> herein. Wenn jedes einzeln einschwebt, wirkt die Wand unruhig.'}
+      ]},
+      {eb:'Der Takt', h:'Zügig hinein, ruhig an den <span class="g">Platz</span>.', b:[
+        {t:'p', h:'Zu langsam ist nicht edel, zu schnell ist nicht ruhig. Bewährt hat sich bei mir etwa anderthalb Sekunden für ein Bild, mit einer Kurve, die sofort sichtbar losgeht und am Ende weich ausläuft. Eine Bewegung, die erst wartet und dann plötzlich da ist, wirkt wie ein Fehler.'},
+        {t:'p', h:'Und eine Regel steht über allem: Die Seite muss auf dem schwächsten Handy flüssig bleiben. Deshalb bewegt sich nur die Lage und die Größe eines Elements, nie seine Breite oder Höhe, und pro Blick bewegt sich nur eins. Das Scrollen selbst fasst du nie an. Es gibt Bibliotheken, die das Scrollen „glätten“ oder Abschnitte einrasten lassen. Sie fühlen sich am Rechner schick an und am Handy wie Kaugummi.'},
+        {t:'code', l:'Bewegungs-Regeln für die CLAUDE.md', h:'## Bewegung\n- Bewegt werden nur Lage, Größe und Deckkraft (transform, opacity), nie Breite, Höhe oder Abstände.\n- Pro Blick bewegt sich nur ein Element. Was nicht sichtbar ist, rechnet nicht.\n- Das native Scrollen bleibt unangetastet: kein Einrasten, kein Glätten, kein Kapern.\n- Nichts kommt seitwärts herein, nichts wackelt, nichts blinkt, nichts federt nach.\n- Takt: etwa 1,5 s je Bild, Kurve geht sofort sichtbar los und läuft weich aus.\n- Ausgelöst wird, sobald der Abschnitt den Bildschirmrand berührt, so dass man die Bewegung noch sieht.\n- Bei Ruckeln wird das Laden repariert, nicht die Bewegung entfernt.'}
+      ]},
+      {eb:'Fertige Bausteine', h:'Holen statt <span class="g">erfinden</span>.', b:[
+        {t:'p', h:'Für die Leiste, die beim Scrollen mitgeht, für ein Menü, das sich sauber öffnet, und für Knöpfe mit Tiefe gibt es gute fertige Bausteine. Menschen, die den ganzen Tag nichts anderes machen, haben an diesen Details Hunderte Stunden gefeilt. Diese Arbeit noch einmal zu machen, ist die schlechteste Verwendung deiner Abende.'},
+        {t:'cards', c:3, i:[
+          {e:'Offene Bibliotheken', n:'Kostenlos, laufen überall', p:'Code, den Claude direkt einbaut. Für die Bewegung auf deiner Seite ist das GSAP aus Lektion 6.2, kostenlos auch für gewerbliche Seiten.'},
+          {e:'Gekaufte Komponenten', n:'Schön, aber gebunden', p:'Oft sehr fertig, laufen aber nur in dem Baukasten, für den sie gemacht sind, etwa Framer oder Webflow. In deinem Projekt aus eigenem Code laufen sie nicht. Das musst du vor dem Kauf wissen.'},
+          {e:'Code-Schnipsel', n:'Nehmen, anpassen lassen', p:'Sammlungen einzelner Effekte zum Kopieren. Für uns die praktischste Sorte: Du nimmst, was du brauchst, und Claude passt es an deinen Brief an.'}
+        ]},
+        {t:'s', h:'Eine Lizenz gilt für ein Projekt.'},
+        {t:'p', h:'Bei fast allem Gekauften gilt die Lizenz für ein Projekt. Baust du die Komponente später auch bei einem befreundeten Betrieb ein, brauchst du eine zweite. Führ deshalb eine kleine Liste im Projekt: was der Baustein kann, woher er kommt, was die Lizenz erlaubt und wo er schon steckt. Die Liste hat mich mehr als einmal davor bewahrt, etwas doppelt zu kaufen.'},
+        {t:'s', h:'Zwei Fallen beim Einbau.'},
+        {t:'p', h:'Erstens: Übernimm bei einem gekauften Baustein zuerst genau die Einstellungen des Verkäufers, auch wenn dir eine seltsam vorkommt. Ich habe einmal eine einzige Einstellung „verbessert“ und einen anderen Effekt bekommen als den, für den ich bezahlt hatte. Zweitens: Bringt ein Baustein seine Einstellungen in Gruppen mit, müssen sie genauso gruppiert übergeben werden, sonst gelten still die Standardwerte. Der Baustein läuft dann sichtbar, nur anders, und man sucht den Fehler überall, außer an der richtigen Stelle.'}
+      ]},
+      {eb:'Typische Fehler', h:'Wann Bewegung <span class="g">billig</span> wirkt.', b:[
+        {t:'pairs', i:[
+          ['Alle Abschnitte tragen dieselbe Einblendung.','Jeder Abschnitt seine Bewegung, und nie mehr als eine pro Blick.'],
+          ['Eine Bibliothek, die das Scrollen weich macht, weil es am Rechner edel wirkt.','Natives Scrollen. Am Handy entscheidet es über flüssig oder zäh.'],
+          ['Bei Ruckeln die Bewegung streichen.','Das Laden reparieren: Bildgrößen, Reihenfolge, Vorladen. Die Bewegung bleibt.'],
+          ['Eine Komponente für einen Baukasten kaufen und ins eigene Projekt zwingen wollen.','Vor dem Kauf prüfen, ob sie in eigenem Code läuft. Sonst einen Schnipsel nehmen oder Claude bauen lassen.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Bewegung', ag:'mit Maß', steps:['Benennen','Regeln','Bausteine','Prüfen'],
+      intro:'Die Regeln einmal festzulegen spart dir Dutzende Korrekturen. Danach sagst du nur noch, welche Bewegung in welchen Abschnitt gehört.',
+      points:['Nenn Bewegungen <b>beim Namen</b>, wenn du Claude einen Abschnitt beschreibst.','Kopier die <b>Bewegungs-Regeln</b> in deine CLAUDE.md.','Hol Leiste, Menü und Knöpfe als fertige Bausteine und führ die <b>Lizenz-Liste</b>.','Prüf jede Bewegung am Handy. Ruckelt etwas, reparier das Laden.']},
+    learn:['Du kennst <b>fünf Bewegungen</b>, die edel wirken, und benennst sie beim Bauen.','Deine Seite bewegt sich im <b>Takt</b>: zügig hinein, ruhig an den Platz.','Das Scrollen bleibt <b>unangetastet</b>, und pro Blick bewegt sich nur eins.','Du holst fertige Bausteine und weißt: <b>eine Lizenz, ein Projekt</b>.'],
+    next:'/lektionen/bilder-generieren'
+  };
+
+  /* ================= L6.7 · Echte Bilder zuerst ================= */
+  LESSONS['bilder-generieren']={
+    n:'L 6.7', title:'Echte Bilder <span class="g">zuerst</span>', cover:'cover-67', coverL:'Hände mit Handy über einem angerichteten Teller',
+    intro:[
+      'Ein Gast, der deine Seite öffnet, will deinen Betrieb sehen. Nicht einen Betrieb, der so ähnlich aussieht. Deshalb gilt in diesem Modul eine klare Reihenfolge: zuerst deine eigenen Fotos, dann deine Fotos, mit KI verbessert, und erst ganz am Ende erzeugte Bilder für die Lücken, die bleiben.',
+      'Die Bildwerkzeuge kennst du aus Modul 2, als du die Cover für dein Backoffice erzeugt hast, und die Higgsfield-Verbindung aus Modul 3. Für die Website ändert sich vor allem, was ein Bild leisten muss: Es muss zu den anderen Bildern passen und auf einer großen Fläche bestehen, ohne dass man ihm etwas anmerkt.'
+    ],
+    anim:{key:'a67', eb:'Verbessern statt erfinden', h:'Das Foto bleibt <span class="g">deins</span>.', sub:'Dieselbe Aufnahme vor und nach der Verbesserung. Achte darauf, was sich ändert, und was nicht.'},
+    secs:[
+      {eb:'Schritt 1', h:'Selbst fotografieren, und zwar <span class="g">richtig</span>.', b:[
+        {t:'p', h:'Ein aktuelles Handy reicht völlig. Was ein Foto gut oder schlecht macht, ist fast immer das Licht, selten die Kamera. Fotografier im Tageslicht vom Fenster oder in deinem Abendlicht, wie es wirklich ist, nie mit Blitz und nie direkt unter einer Deckenleuchte.'},
+        {t:'ul', i:['<b>Teller</b> von schräg oben oder auf Augenhöhe des Gastes, nie senkrecht von oben mit Schatten des Handys. Den Rand des Nachbartellers darf man ruhig sehen, das wirkt echt.','<b>Gläser</b> allein, mittig, auf Augenhöhe, mit etwas Licht von hinten.','<b>Raum</b> aus einer Ecke, im Querformat, mit Kerzen an und gedeckten Tischen. Einmal in der Dämmerung, einmal am Tag.','<b>Menschen</b> am liebsten von hinten oder als Hände bei der Arbeit. Wer erkennbar ist, gibt vorher sein Einverständnis.','Jedes Motiv in mehreren Aufnahmen, quer und hoch. Was du nicht fotografiert hast, kannst du später nicht verbessern.']},
+        {t:'p', h:'Leg alle Fotos in einen Ordner <span class="tsn6-mono">fotos/</span> im Projekt und lass Claude sie sichten. Es kann dir sagen, welche Bilder scharf genug sind, welche zum Drehbuch passen und welche Plätze danach noch leer sind.'},
+        {t:'code', l:'Auftrag: Fotos sichten', h:'Sieh dir alle Bilder im Ordner fotos/ an und gleich sie mit der Spalte „Bildbedarf“ im Drehbuch ab. Schreib eine Liste:\n1. Welcher Platz im Drehbuch ist mit welchem Foto gut besetzt (Dateiname, Begründung in einem Satz)?\n2. Welche Fotos sind unscharf, zu klein oder passen in Licht und Stimmung nicht zum Rest?\n3. Welche Plätze bleiben leer?\nVerändere keine Dateien.'}
+      ]},
+      {eb:'Schritt 2', h:'Verbessern, ohne zu <span class="g">erfinden</span>.', b:[
+        {t:'p', h:'Viele Handyfotos sind echt, aber zu klein, zu flau oder farbstichig. Hier hilft die KI am meisten, und zwar als Bearbeiter, nicht als Erfinder. Sie rechnet das Foto größer, korrigiert Licht, Weißabgleich und Schärfe und lässt alles andere, wie es ist: denselben Raum, dieselbe Perspektive, denselben Teller.'},
+        {t:'p', h:'Die Grenze ist für mich klar. Ein Gericht wird nie verändert, weil der Gast genau dieses Gericht bestellen und bekommen wird. Gesichter, Schrift auf Schildern und Etiketten, dein Logo kommen immer aus dem Original. Und jedes verbesserte Bild legst du neben das Original, bevor es auf die Seite kommt.'},
+        {t:'code', l:'Auftrag: echtes Foto verbessern', h:'Verbessere das Foto fotos/[Datei] mit dem Bildwerkzeug aus der Higgsfield-Verbindung. Auftrag an das Modell, wörtlich:\n„Same scene, same camera angle, same plate and food. Improve only light, white balance, sharpness and resolution. Warm evening light as in the original.“\n\nWichtig: Gerichte, Gesichter, Schrift und Logos bleiben wie im Original. Speichere das Ergebnis als neue Datei in fotos/verbessert/ und zeig mir Original und Ergebnis nebeneinander. Nenn mir vorher die Kosten in Credits.'}
+      ]},
+      {eb:'Schritt 3', h:'Lücken als <span class="g">Serie</span> erzeugen.', b:[
+        {t:'p', h:'Was danach noch fehlt, erzeugen wir, aber nur das. Erzeugte Bilder sind gut für Stimmung und Orte, die man schwer fotografiert: das Haus im Abendlicht von der anderen Uferseite, ein Detail von Gläsern, die Terrasse im Sommer, wenn gerade November ist. Gerichte, die du servierst, fotografierst du immer selbst.'},
+        {t:'p', h:'Erzeugte Bilder müssen zueinander passen, sonst sieht die Seite aus wie fünf verschiedene Fotografen. Deshalb schreibt man jeden Auftrag nach demselben Muster: was zu sehen ist, aus welcher Perspektive, in welchem Licht, in welcher Stimmung. Licht und Stimmung sind für alle Bilder einer Seite gleich.'},
+        {t:'code', l:'Auftrag: Bildaufträge für die Lücken', h:'Schreib für jeden leeren Platz aus der Fotosichtung einen Bildauftrag nach diesem Muster:\nMotiv | Perspektive | Licht | Stimmung | Format\n\nLicht und Stimmung übernimmst du für alle Aufträge gleich aus dem Design-Brief. Formuliere nur, was zu sehen sein soll, nie, was fehlen soll. Erzeuge noch nichts. Zeig mir die Liste mit den geschätzten Kosten je Bild, ich gebe sie frei.'},
+        {t:'merk', l:'Die Verneinungs-Falle', h:'Bildmodelle kennen kein „nicht“. Wer schreibt, dass kein Wasser im Bild sein soll, bekommt Wasser. Beschreib immer, was da sein soll.'},
+        {t:'p', h:'Erzeugt wird in <b>einer gebündelten Runde</b>, wenn Drehbuch und Brief stehen. Ich habe an einem einzigen Tag ein dreistelliges Guthaben verbrannt, weil ich ohne festen Plan losgelaufen bin. Jeder weitere Anlauf soll eine Korrektur sein, keine neue Idee.'}
+      ]},
+      {eb:'Schritt 4', h:'Herangezoomt <span class="g">prüfen</span>.', b:[
+        {t:'p', h:'Ein Bild, das klein gut aussieht, kann groß verraten, dass es erzeugt ist. Prüf jedes Bild in voller Größe: Hände mit der richtigen Anzahl Finger, Besteck, das an der richtigen Stelle liegt, Schrift auf Flaschen, die man lesen kann oder gar nicht sieht, nichts, was schwebt. Danach legst du alle Bilder einer Seite nebeneinander: dieselbe Tageszeit, dieselbe Blickrichtung, derselbe Stil? Fällt eines heraus, korrigierst du dieses eine, nicht die anderen.'},
+        {t:'pairs', i:[
+          ['Erzeugte Teller statt echter Gerichte, weil sie schöner aussehen.','Gerichte immer echt fotografiert, höchstens verbessert. Der Gast bestellt, was er gesehen hat.'],
+          ['„Mal kurz testen“ im Bildwerkzeug, bevor das Drehbuch steht.','Eine gebündelte Runde, mit Liste und Kosten vorab.'],
+          ['Jedes Bild mit anderem Licht und anderer Stimmung beauftragen.','Licht und Stimmung für alle Bilder gleich, nur Motiv und Perspektive wechseln.'],
+          ['Bilder in der Vorschau klein ansehen und übernehmen.','Jedes Bild in voller Größe prüfen, Kanten und Hände zuerst.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Echt', ag:'zuerst', steps:['Fotografieren','Sichten','Verbessern','Lücken erzeugen'],
+      intro:'Fotografier an einem normalen Abend im Service, nicht für die Kamera aufgebaut. Echte Momente wirken auf der Seite am stärksten.',
+      points:['Fotografier Teller, Gläser, Raum und Hände in deinem echten Licht, <b>quer und hoch</b>.','Lass Claude die Fotos gegen den Bildbedarf im Drehbuch sichten.','Lass die besten Fotos <b>verbessern</b>, nie verändern, und vergleich mit dem Original.','Erzeug nur die Lücken, in <b>einer Runde</b>, mit Liste und Kosten vorab.']},
+    learn:['Deine Seite zeigt <b>deinen Betrieb</b>: eigene Fotos zuerst.','Die KI <b>verbessert</b> deine Fotos und erfindet nichts dazu.','Lücken erzeugst du als <b>Serie</b>, mit gleichem Licht und ohne Verneinungen.','Du prüfst jedes Bild <b>in voller Größe</b>, bevor es auf die Seite kommt.'],
+    next:'/lektionen/videos-generieren-und-einsetzen'
+  };
+
+  /* ================= L6.8 · Bewegtes Bild ================= */
+  LESSONS['videos-generieren-und-einsetzen']={
+    n:'L 6.8', title:'Bewegtes <span class="g">Bild</span>', cover:'cover-68', coverL:'Terrasse am Wasser im Sonnenuntergang',
+    intro:[
+      'Ein kurzer Film kann einen Auftakt tragen wie nichts anderes: der Blick über die Terrasse, während das Licht wechselt, oder die Kamera, die langsam auf den Pass zufährt. Er kann eine Seite aber auch schwer und langsam machen, und die Erzeugung ist der Teil des Moduls, bei dem am meisten Guthaben verbrennt.',
+      'In dieser Lektion klären wir, wo ein Film lohnt, wie du Clips ohne Sprünge baust und wie sie so auf die Seite kommen, dass sie am Handy flüssig laufen. Die Regeln habe ich teuer gelernt. Du bekommst sie vorab.'
+    ],
+    anim:{key:'a68', eb:'Die wichtigste Regel', h:'Wo zwei Clips sich <span class="g">treffen</span>.', sub:'Die Naht zwischen zwei Clips entscheidet, ob eine Fahrt wie ein Film wirkt oder wie ein Fehler.'},
+    secs:[
+      {eb:'Vorher entscheiden', h:'Wo ein Film sich <span class="g">lohnt</span>.', b:[
+        {t:'p', h:'Ein Film gehört an eine Stelle der Startseite, meistens in den Auftakt. Dort darf er die Hauptrolle spielen. Überall sonst reicht ein starkes Foto mit einer guten Bewegung aus Lektion 6.6, und es lädt schneller.'},
+        {t:'p', h:'Zwei Formen kommen infrage. Ein <b>kurzer Clip im Bild</b>, stumm, ein paar Sekunden, der in seinem Rahmen läuft, mit einem Standbild, bis er geladen ist. Oder eine <b>Fahrt, die dem Scrollen folgt</b>: Der Gast steuert die Kamera mit dem Finger. Die zweite Form ist eindrucksvoller und deutlich aufwendiger. Was nie geht, ist ein Film, der als Hintergrund unter einer ganzen scrollenden Seite in Dauerschleife läuft. Er macht jedes Handy langsam.'},
+        {t:'merk', h:'Ein Film, an einer Stelle, mit einem Standbild davor. Lieber ein starkes Foto als ein mittelmäßiger Film.'}
+      ]},
+      {eb:'Clips bauen', h:'Vier Regeln, die dir <span class="g">Guthaben</span> sparen.', b:[
+        {t:'s', h:'Erstens: Jeder Folgeclip startet auf dem echten letzten Bild des vorherigen.'},
+        {t:'p', h:'Du gibst dem Modell ein Startbild und ein Zielbild, und es erzeugt die Bewegung dazwischen. Kein Modell trifft das Zielbild genau. Nimmst du für den nächsten Clip wieder dein sauberes Originalbild als Start, springt der Inhalt an der Naht, so wie oben in der Animation. Claude zieht dir das tatsächlich letzte Bild aus jedem fertigen Clip, du musst nur wissen, dass es passieren muss.'},
+        {t:'s', h:'Zweitens: Nicht jedes Modell hält dein Bild.'},
+        {t:'p', h:'Manche Modelle übernehmen deine Vorlage, andere zeichnen sie neu und verlieren dabei Details. Bei einer meiner Fahrten sind reihenweise Gläser vom Tresen verschwunden. Solche Modelle können Dinge nur umverteilen, nicht hinzufügen. Die Modellauswahl in den Bildwerkzeugen ändert sich jeden Monat, deshalb nenne ich dir hier keine Namen. Lass Claude über die Higgsfield-Verbindung empfehlen, welches Modell für Start- und Zielbild gerade passt, und teste mit einem kurzen Clip, bevor du eine ganze Fahrt beauftragst.'},
+        {t:'s', h:'Drittens: Keine Verneinungen, auch hier nicht.'},
+        {t:'p', h:'Dieselbe Falle wie bei den Bildern. Wer schreibt, dass sich die Gläser nicht bewegen sollen, bekommt bewegte Gläser. Achte auch auf die Verben: Ein Wort, das eigentlich für Flüssigkeiten steht, lässt Rauch fließen wie Wasser. Beschreib lieber die Endposition, die du sehen willst.'},
+        {t:'s', h:'Viertens: Jeden Clip als Bildstreifen lesen.'},
+        {t:'p', h:'Nicht nur einmal abspielen. Lass dir aus jedem Clip einen Streifen aus Einzelbildern bauen und lies ihn wie einen Comic. Dann siehst du auf einen Blick, ob etwas verschwindet, umklappt oder springt, und du findest den Fehler, bevor er im fertigen Film steckt.'},
+        {t:'code', l:'Auftrag: Clip prüfen und anschließen', h:'Der Clip clips/[Datei] ist fertig.\n1. Bau mir daraus einen Bildstreifen aus zwölf gleichmäßig verteilten Einzelbildern und zeig ihn mir.\n2. Miss die echte Größe in Pixeln und die Bildrate.\n3. Zieh das tatsächlich letzte Bild heraus und speichere es als Startbild für den nächsten Clip.\n4. Leg das letzte Bild neben das Zielbild, das ich vorgegeben hatte, und nenn mir die sichtbaren Unterschiede.\nVerändere den Clip selbst nicht.'}
+      ]},
+      {eb:'Schärfe und Ruhe', h:'Erst messen, dann <span class="g">nachbessern</span>.', b:[
+        {t:'p', h:'Wirkt ein Film unscharf, miss zuerst die echte Größe der Datei, statt an Einstellungen zu drehen. Bei mir kamen Clips deutlich kleiner heraus, als die gewählte Qualitätsstufe versprach. Für eine Fläche über die ganze Bildschirmbreite brauchst du rund zweitausend Pixel Breite, sonst hilft kein Nachschärfen. Hochrechnen kostet Guthaben, deshalb nur, wenn die Messung es verlangt.'},
+        {t:'p', h:'Zittert das Bild leicht, steckt das im erzeugten Material selbst. Die Reihenfolge der Gegenmittel ist wichtig: erst stabilisieren, dann die Bildrate erhöhen. Wer es umgekehrt macht, rechnet das Zittern mit hoch.'}
+      ]},
+      {eb:'Auf die Seite bringen', h:'Flüssig in beide <span class="g">Richtungen</span>.', b:[
+        {t:'p', h:'Für eine Fahrt, die dem Scrollen folgt, habe ich den Film zuerst direkt an das Scrollen gekoppelt. Es ruckelte, besonders rückwärts. Ein Video an eine beliebige Stelle springen zu lassen, ist für den Browser schwer, und beim Scrollen passiert genau das bei jeder Bewegung.'},
+        {t:'p', h:'Die Lösung ist die Technik, die man von großen Produktseiten kennt: Der Film wird in Einzelbilder zerlegt, und beim Scrollen wird das passende Bild gezeichnet. Dabei gibt es eine Falle, die den Rechner lahmlegt. Werden alle Bilder vorab entpackt, landen bei dreihundert Bildern in voller Breite mehrere Gigabyte im Arbeitsspeicher. Richtig ist, die Bilder komprimiert zu lassen und nur ein paar in Scrollrichtung vorzubereiten. Nach diesem Umbau lag der Speicherbedarf bei wenigen Megabyte.'},
+        {t:'code', l:'Auftrag: Fahrt als Bildfolge einbauen', h:'Bau den Auftakt als Fahrt, die dem Scrollen folgt, aus dem Film clips/fahrt.mp4:\n- Zerleg den Film in Einzelbilder (WebP, 1920 px breit) in einen Ordner mit Versionsnummer, zum Beispiel fahrt-v1/.\n- Beim Scrollen wird das passende Bild auf eine Zeichenfläche gezeichnet, kein Springen im Video.\n- Bilder bleiben komprimiert, nur die nächsten vier in Scrollrichtung werden vorbereitet. Kein Vorab-Entpacken aller Bilder.\n- Die Fahrt dauert höchstens drei bis vier Scrollbewegungen, danach übergibt sie an den nächsten Abschnitt.\n- Erstes Bild sofort sichtbar, Name des Betriebs darüber, kein Ladebildschirm.\nMiss danach den Speicherbedarf und zeig mir die Fahrt in der Vorschau, vorwärts und rückwärts.'},
+        {t:'p', h:'Das Handy bekommt seine eigene, kleinere Bildfolge. Wie du sie baust und prüfst, steht in Lektion 6.12.'}
+      ]},
+      {eb:'Typische Fehler', h:'Was beim Film <span class="g">teuer</span> wird.', b:[
+        {t:'pairs', i:[
+          ['Den nächsten Clip wieder auf dem sauberen Originalbild starten.','Immer auf dem echten letzten Bild des Vorgängers.'],
+          ['Eine ganze Fahrt beauftragen, bevor ein kurzer Testclip gezeigt hat, dass das Modell das Bild hält.','Ein kurzer Clip zuerst, als Bildstreifen geprüft. Dann der Rest.'],
+          ['Den Film per Video an das Scrollen koppeln.','Einzelbilder auf eine Zeichenfläche, komprimiert, mit kleinem Vorlauf.'],
+          ['Ein Film als Dauerschleife hinter der ganzen Seite.','Ein Film an einer Stelle, mit Standbild davor.']
+        ]}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Ein', ag:'Film', steps:['Stelle wählen','Testclip','Bildstreifen','Einbauen'],
+      intro:'Plane für den Film einen eigenen Tag und ein festes Budget an Guthaben. Notier vor jedem Lauf den Kontostand und danach auch.',
+      points:['Entscheide, <b>wo</b> der Film steht, meistens im Auftakt, sonst nirgends.','Erzeuge zuerst einen kurzen <b>Testclip</b> und prüf, ob das Modell dein Bild hält.','Lies jeden Clip als <b>Bildstreifen</b> und schließ den nächsten am echten letzten Bild an.','Bau die Fahrt als Bildfolge ein und prüf sie <b>vorwärts und rückwärts</b>.']},
+    learn:['Ein Film steht <b>an einer Stelle</b>, meist im Auftakt, mit Standbild davor.','Jeder Folgeclip startet auf dem <b>echten letzten Bild</b> des vorherigen.','Du liest jeden Clip als <b>Bildstreifen</b> und misst, bevor du nachbesserst.','Eine Scrollfahrt läuft als <b>Bildfolge</b>, komprimiert und mit kleinem Vorlauf.'],
+    next:'/lektionen/texte-definieren'
+  };
+
+  /* ================= L6.9 · Worte, die schmecken ================= */
+  LESSONS['texte-definieren']={
+    n:'L 6.9', title:'Worte, die <span class="g">schmecken</span>', cover:'cover-69', coverL:'Kreidetafel mit dem Gericht des Tages',
+    intro:[
+      'Bilder und Bewegung stehen. Was fehlt, sind die Worte, und genau hier fangen viele plötzlich an, Werbung zu schreiben. Eine Restaurant-Seite ist aber kein Text. Der Gast liest kaum, er schaut. Die wenigen Sätze, die er liest, müssen deshalb sitzen.',
+      'In dieser Lektion schreiben wir diese Sätze: kurz, konkret und so, dass sie deinen Teller aufwerten. Und wir lernen, die Sätze zu erkennen, die nach KI klingen, bevor ein Gast sie liest.'
+    ],
+    anim:{key:'a69', eb:'Der Unterschied in einem Satz', h:'Ein Satz wird <span class="g">konkret</span>.', sub:'Derselbe Platz unter demselben Teller. Einmal mit einem Satz, der überall stehen könnte, einmal mit einem, der nur bei dir stehen kann.', foot:'Gericht und Formulierung sind Beispiele.'},
+    secs:[
+      {eb:'Die Länge', h:'So wenig wie <span class="g">möglich</span>.', b:[
+        {t:'p', h:'Ein Absatz über die Leidenschaft für regionale Zutaten wird nicht gelesen, wenn daneben ein Bild steht, das dasselbe in einer Sekunde erzählt. Lass das Bild arbeiten. Für die Startseite hat sich bei mir diese Faustregel bewährt: Im Auftakt stehen der Name und ein Satz. Jeder weitere Abschnitt bekommt eine Überschrift und höchstens zwei kurze Sätze. Über bewegten Bildern stehen einzelne Zeilen, keine Sätze.'},
+        {t:'p', h:'Schreib nie ausführlicher als nötig. Wer mehr erzählen will, hat dafür die Karte, die Unterseite zum Betrieb oder das Gespräch am Tisch.'}
+      ]},
+      {eb:'Die Wertigkeit', h:'Würde ein Gast danach mehr <span class="g">zahlen</span>?', b:[
+        {t:'p', h:'Das ist die Frage, die ich an jeden Satz stelle, bevor er auf eine Seite kommt. Jeder Satz muss das Produkt aufwerten: die Sorgfalt, die Handarbeit, den einzelnen Gast, den einzelnen Teller. Alles, was nach Menge, Wiederholung oder Abfertigung klingt, nimmt der Arbeit die Wertigkeit, auch wenn es stolz gemeint ist.'},
+        {t:'pairs', i:[
+          ['„Jeden Abend verlassen über hundert Teller unsere Küche.“','„Jeder Teller wird von Hand angerichtet, bevor er den Pass verlässt.“'],
+          ['„Schnell, frisch und lecker, für den kleinen Hunger zwischendurch.“','„Mittags eine kleine Karte, die sich nach dem Markt richtet.“'],
+          ['„Wir bieten Platz für bis zu achtzig Personen.“','„Vierzehn Plätze am Tresen, mit Blick in die Küche.“']
+        ]},
+        {t:'p', h:'Zahlen sind erlaubt, wenn sie etwas Besonderes zeigen. Vierzehn Plätze am Tresen klingen nach Nähe. Hundert Teller am Abend klingen nach Fließband.'}
+      ]},
+      {eb:'Die Quelle', h:'Deine Worte zuerst, Claudes <span class="g">danach</span>.', b:[
+        {t:'p', h:'Die besten Sätze für deine Seite hast du schon geschrieben: auf der Karte, auf der Tafel, in deinem Instagram, in der Antwort auf eine schöne Bewertung. Sammle sie in einer Datei im Projekt und lass Claude daraus arbeiten. Es darf kürzen, ordnen und glätten. Erfinden darf es nicht, keine Zutat, keinen Lieferanten, kein Jahr der Gründung. Alle Fakten kommen aus dem Fakten-Block deiner CLAUDE.md.'},
+        {t:'code', l:'Auftrag: Seitentexte schreiben', h:'Schreib die Texte für die Startseite nach dem Drehbuch. Quellen sind nur die Datei texte/meine-worte.md und der Fakten-Block der CLAUDE.md.\n\nRegeln:\n- Auftakt: Name und ein Satz. Jeder Abschnitt: Überschrift und höchstens zwei kurze Sätze.\n- Konkret statt Adjektiv: Was liegt auf dem Teller, woher kommt es, wie entsteht es.\n- Jeder Satz wertet auf. Nichts, was nach Menge oder Abfertigung klingt.\n- Keine Floskeln wie „Willkommen“, „Genießen Sie“, „Wir freuen uns auf Ihren Besuch“, „Leidenschaft“, „vielfältig“.\n- Keine Gedankenstriche, keine Dreierreihen, kein „nicht nur … sondern auch“.\n- Nichts erfinden. Fehlt dir eine Angabe, schreib OFFEN.\n\nZeig mir alle Texte als Liste je Abschnitt, bevor du sie einbaust.'},
+        {t:'s', h:'Woran man KI-Sätze erkennt.'},
+        {t:'ul', i:['Sie fangen mit „Willkommen“ an oder enden mit „Wir freuen uns auf Ihren Besuch“.','Sie stapeln Adjektive: vielfältig, liebevoll, regional, saisonal, nachhaltig, alles in einem Satz.','Sie zählen gern in Dreiergruppen auf und verbinden Gegensätze mit „nicht nur … sondern auch“.','Sie erklären, was das Bild daneben schon zeigt.']},
+        {t:'p', h:'Lies jeden Text einmal laut, so wie du ihn einem Gast am Tisch sagen würdest. Was du so nie sagen würdest, fliegt raus.'}
+      ]},
+      {eb:'Zeilen über Bildern', h:'Die Zeile folgt dem <span class="g">Bild</span>.', b:[
+        {t:'p', h:'Eine Zeile über einem Bild oder einer Fahrt benennt, wo man gerade ist, und lässt das Bild arbeiten. Schreib sie so, dass sie auch ohne das Bild Sinn ergibt, falls jemand mit schwacher Verbindung unterwegs ist.'},
+        {t:'p', h:'Bei einer Fahrt, die dem Scrollen folgt, gibt es eine technische Falle, die ich erst beim Bauen gemerkt habe. Die Kamera läuft dem Finger bewusst weich hinterher. Hängt die Zeile am Scrollwert statt am Bild, das gerade zu sehen ist, erscheint bei einem schnellen Wisch der Schlusssatz über der Anfangsszene. Sag Claude deshalb: Die Zeilen folgen dem gezeigten Bild, nicht dem Scrollwert.'},
+        {t:'p', h:'Wenn du Gäste aus anderen Ländern hast, kommen andere Sprachen ganz zum Schluss, wenn die deutschen Texte fertig sind. Die Namen deiner Gerichte bleiben dabei, wie sie auf der Karte stehen.'}
+      ]}
+    ],
+    emp:{kind:'Nutzung', at:'Deine', ag:'Worte', steps:['Sammeln','Schreiben lassen','Laut lesen','Einbauen'],
+      intro:'Schreib die Texte nicht an einem Stück. Lass einen Tag zwischen Entwurf und Freigabe, dann liest du mit den Augen eines Gastes.',
+      points:['Sammle deine eigenen Sätze aus Karte, Tafel und Instagram in <b>einer Datei</b>.','Lass Claude die Texte nach dem Auftrag oben schreiben, mit OFFEN statt Erfundenem.','Lies jeden Satz <b>laut</b> und stell die Frage: Würde ein Gast danach mehr zahlen?','Bau die Texte erst ein, wenn jeder Satz die Frage besteht.']},
+    learn:['Deine Seite hat <b>wenige Sätze</b>, und jeder davon sitzt.','Jeder Satz <b>wertet auf</b>. Nichts klingt nach Menge oder Abfertigung.','Die Worte kommen aus <b>deinen</b> Sätzen, Fakten nur aus der CLAUDE.md.','Du erkennst <b>KI-Sätze</b> und streichst sie, bevor ein Gast sie liest.'],
+    next:'/lektionen/speisekarte-und-reservierung'
+  };
+
+  /* ---------- Seitenaufbau ---------- */
+  function keyNow(){
+    var p=location.pathname.replace(/\/+$/,''); var m=p.match(/([a-z0-9-]+)$/);
+    return (m && LESSONS[m[1]]) ? m[1] : null;
+  }
+  function heroHTML(L){
+    return '<div class="tsn6-hero"><div class="tsn6-hero__frame"><img class="tsn6-hero__img" src="'+coverSrc(L.cover,L.coverL)+'" alt="'+L.coverL+'" fetchpriority="high" decoding="sync"></div>'
+      +'<div class="tsn6-hero__text"><img class="tsn6-hero__logo" alt="Tasty Studios" src="'+LOGO+'" decoding="sync">'
+      +'<div class="tsn6-hero__eyebrow">'+L.n+'</div><h1 class="tsn6-hero__title">'+L.title+'</h1></div></div>';
+  }
+  function secHTML(s){
+    return '<section class="tsn6-sec"><div class="tsn6-sh tsn6-rv">'+(s.eb?'<span class="tsn6-eb">'+s.eb+'</span>':'')+'<h3>'+s.h+'</h3></div>'
+      +'<div class="tsn6-rv">'+s.b.map(block).join('')+'</div></section>';
+  }
+  function regHTML(L){
+    return '<section class="tsn6-reg"><div class="tsn6-head tsn6-rv"><span class="tsn6-eb">'+L.reg.eb+'</span><h2>'+L.reg.h+'</h2></div><div class="rg">'
+      +L.reg.i.map(function(r){ return '<a class="rk tsn6-rv" href="'+r.href+'"><div class="ri">'+pic(r.img,r.t)+'</div><div class="rb"><span class="rn">'+r.n+'</span><p class="rt">'+r.t+'</p><p class="rd">'+r.d+'</p></div></a>'; }).join('')
+      +'</div></section>';
+  }
+  function nextHTML(href,label){ return '<a id="ts-next" href="'+href+'">'+(label||'Nächste Lektion')+' '+ARROW+'</a>'; }
+  function build(k){
+    var L=LESSONS[k], sc=document.querySelector('.super-content'); if(!sc) return;
+    var art=el('article','tsn6'); art.id='tsn6'; art.setAttribute('data-k',k);
+    var h=heroHTML(L);
+    h+='<div class="tsn6-intro tsn6-rv">'+L.intro.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>';
+    if(L.anim){
+      h+='<section class="tsn6-anim"><div class="tsn6-head tsn6-rv">'+(L.anim.eb?'<span class="tsn6-eb">'+L.anim.eb+'</span>':'')+'<h2>'+L.anim.h+'</h2>'+(L.anim.sub?'<p>'+L.anim.sub+'</p>':'')+'</div>'
+        +'<div class="tsn6-stage" id="tsn6-stage"></div><div class="tsn6-cap" aria-live="polite"></div>'
+        +'<div class="tsn6-replay"><button type="button">'+REPLAY+'Neu abspielen</button></div>'+(L.anim.foot?'<div class="tsn6-foot">'+L.anim.foot+'</div>':'')+'</section>';
+    }
+    if(L.reg) h+=regHTML(L);
+    (L.secs||[]).forEach(function(s){ h+=secHTML(s); });
+    if(L.emp) h+='<div class="tsn6-emp">'+empHTML(L.emp)+'</div>';
+    if(L.learn){
+      h+='<section class="tsn6-learn"><div class="lh"><span class="le">Was du mitnimmst</span><h2 class="lt">Learnings</h2></div><div class="lg">'
+        +L.learn.map(function(t){ return '<div class="lc"><div class="lo"><p class="lp">'+t+'</p></div></div>'; }).join('')+'</div>'
+        +'<div id="ts-next-wrap">'+nextHTML(L.next,L.nextL)+'</div></section>';
+    } else if(L.next){
+      h+='<section class="tsn6-learn in" style="margin-top:70px"><div id="ts-next-wrap">'+nextHTML(L.next,L.nextL)+'</div></section>';
+    }
+    art.innerHTML=h;
+    var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(art,nr); else sc.appendChild(art);
+    document.documentElement.classList.add('tsn6-on');
+    art.classList.add('js');
+    wireCopy(art);
+    qa(art,'.tsn6-rv').forEach(function(n){ reveal(n,function(){ n.classList.add('in'); },.08); });
+    if(L.anim && ANIM[L.anim.key]){
+      var stage=qs(art,'#tsn6-stage'), capEl=qs(art,'.tsn6-cap');
+      animCSS(L.anim.key);
+      var inst=ANIM[L.anim.key].run(stage,function(html){ capEl.innerHTML=html; });
+      reveal(stage,function(){ if(!REDUCED && inst && inst.play) inst.play(); },.25);
+      var rb=qs(art,'.tsn6-replay button'); rb.addEventListener('click',function(){ if(inst){ inst.reset(); if(!REDUCED) inst.play(); } });
+    } else { var rp=qs(art,'.tsn6-replay'); if(rp) rp.remove(); }
+    var emp=qs(art,'.tsn6-emp'); if(emp) empWire(emp);
+    var ln=qs(art,'.tsn6-learn'); if(ln) reveal(ln,function(){ ln.classList.add('in'); },.15);
+    guard();
+  }
+  /* Weiter-Knopf: fremde Wraps raus, eigenen bei Bedarf neu bauen (Katalog 09, dritte Haelfte der Falle) */
+  function guard(){
+    var host=document.getElementById('tsn6'); if(!host) return;
+    var L=LESSONS[host.getAttribute('data-k')]; if(!L || !L.next) return;
+    var all=document.querySelectorAll('#ts-next-wrap');
+    for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    if(!host.querySelector('#ts-next-wrap')){
+      var ln=host.querySelector('.tsn6-learn')||host; var w=el('div',null,nextHTML(L.next,L.nextL)); w.id='ts-next-wrap'; ln.appendChild(w);
+    }
+  }
+  function sync(){
+    var k=keyNow(), ex=document.getElementById('tsn6');
+    if(!k){ if(ex) ex.remove(); document.documentElement.classList.remove('tsn6-on'); return; }
+    if(ex && ex.getAttribute('data-k')===k && ex.parentNode && ex.parentNode.classList && ex.parentNode.classList.contains('super-content')){ guard(); return; }
+    if(ex) ex.remove();
+    build(k);
+  }
+  window.__tsn6Sync=sync;
+  sync();
+  document.addEventListener('DOMContentLoaded',sync);
+  window.__tsMO(sync).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('popstate',function(){ setTimeout(sync,60); });
+  window.addEventListener('scroll',guard,{passive:true});
+  setTimeout(sync,1500); setTimeout(sync,4000); setTimeout(sync,9000);
+})();
+
 /* <<< NEUBAU MODUL 6 — ENDE <<< */
 /* · */
 /* · */
