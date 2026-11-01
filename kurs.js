@@ -4383,6 +4383,9 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, href:'/lektionen/l17-native-automations-buttons' },
     { re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
     { re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/, href:'/mehrwert-zielbild' },
+    /* Modul 1 Neubau 01.11.2026: zwei neue Seiten (1.4, 1.9) */
+    { re:/\/(?:lektionen\/)?daten-eintragen-und-einlesen\/?$/, href:'/lektionen/l14-relationen-rollups' },
+    { re:/\/(?:lektionen\/)?rechte-teamspaces-und-sicherheit\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
     /* Modul 6 - AI Website Building, Neubau 01.11.2026 (Landing + 6.1-6.14). Gates tolerant
        (Root ODER /lektionen/-Praefix). Ohne Eintrag hier raeumt der Pager den von #tsn6 gebauten
        Weiter-Knopf wieder ab. Ende der Kette: zurueck zur Modul-Landing. */
@@ -28441,6 +28444,157 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du unterscheidest <b>Seite</b> und <b>Datenbank</b> und weißt, wann was passt.','Du erkennst den <b>Typ</b> jeder Spalte am Symbol im Spaltenkopf.','Du weißt, warum Preise in eine <b>Zahl</b> und Artikelnummern in einen <b>Text</b> gehören.','Du hast in der Probeküche deine erste <b>eigene Datenbank</b> gebaut.'],
         next:'/lektionen/l14-relationen-rollups', nextTry:['/lektionen/daten-eintragen-und-einlesen','/daten-eintragen-und-einlesen']}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.4 "Die Tabelle füllen."  (Daten eintragen und einlesen)
+   Neue Seite (Notion-Zeile "Daten eintragen und einlesen", 01.11.2026), Adresse nach Re-Sync
+   /lektionen/daten-eintragen-und-einlesen oder /daten-eintragen-und-einlesen (beide erkannt).
+   Erklaeranimation "Drei Eingaenge" — EIGENES Konzept:
+   EINE leere Tabelle mit drei Eingaengen links (Hand, Liste, Dokument). Je Eingang
+   gleiten ganze Zeilen herein, ein Zaehler steigt; nach dem Einlesen markiert sich
+   eine Zeile zum Pruefen (Einheit passt nicht). Nur transform/opacity, feste Hoehe.
+   Quellen: notion.com/de/help/import-data-into-notion (CSV, Mit CSV zusammenfuehren),
+   notion.com/help/notion-agent (PDF/CSV/XLSX lesen), Stand 01.11.2026.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L4) return; window.__tsn1L4=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a4-css',`
+      #tsn1-a4 .wrap{position:relative;width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
+      #tsn1-a4 .ins{display:flex;flex-direction:column;gap:12px}
+      #tsn1-a4 .in{position:relative;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;height:76px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a4 .in .ic{width:44px;height:44px;border-radius:11px;overflow:hidden;background:#0b0d14;display:flex;align-items:center;justify-content:center;color:#c7b489;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.06em}
+      #tsn1-a4 .in .ic img{width:100%;height:100%;object-fit:cover}
+      #tsn1-a4 .in .t{font:600 13.5px/1.25 -apple-system,sans-serif;color:#fff}
+      #tsn1-a4 .in .t small{display:block;font-weight:500;font-size:11.5px;color:rgba(255,255,255,.5);margin-top:3px}
+      #tsn1-a4 .in.on{border-color:rgba(199,180,137,.6);box-shadow:0 0 0 1px rgba(199,180,137,.18),0 18px 40px -20px rgba(199,180,137,.35)}
+      #tsn1-a4 .tb{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a4 .th{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07)}
+      #tsn1-a4 .th .n{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:18px;color:#fff}
+      #tsn1-a4 .th .c{font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55)}
+      #tsn1-a4 .th .c b{font-family:"Lineal Web","Lineal TS",sans-serif;font-size:20px;color:#c7b489;font-variant-numeric:tabular-nums;margin-right:4px}
+      #tsn1-a4 .hd,#tsn1-a4 .r{display:grid;grid-template-columns:1.7fr 1.1fr .7fr .8fr;gap:10px;align-items:center;padding:0 18px}
+      #tsn1-a4 .hd{height:34px;font:500 11px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.07)}
+      #tsn1-a4 .rows{position:relative;height:378px}
+      #tsn1-a4 .r{position:absolute;left:0;right:0;height:42px;border-bottom:1px solid rgba(255,255,255,.05);font:500 12.5px/1.2 -apple-system,sans-serif;color:#fff;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a4 .r .s{color:rgba(255,255,255,.6)}
+      #tsn1-a4 .r .p{text-align:right;font-variant-numeric:tabular-nums}
+      #tsn1-a4 .r.chk{background:rgba(199,180,137,.10)}
+      #tsn1-a4 .r .fl{display:none;margin-left:8px;font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#05060b;background:#c7b489;border-radius:4px;padding:3px 5px}
+      #tsn1-a4 .r.chk .fl{display:inline-block}
+      #tsn1-a4 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
+      #tsn1-a4 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a4 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a4 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a4 .st.on b{color:#c7b489}
+      #tsn1-a4 .note{width:min(960px,100%);margin:10px auto 0;text-align:right;font-size:10.5px;color:rgba(255,255,255,.4)}
+      #tsn1-a4 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a4 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a4 .rp button:hover{background:#c7b489;color:#05060b}
+      @media(max-width:820px){ #tsn1-a4 .wrap{grid-template-columns:1fr} #tsn1-a4 .ins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px} #tsn1-a4 .in{grid-template-columns:1fr;height:auto;padding:10px;justify-items:center;text-align:center} #tsn1-a4 .in .t small{display:none} #tsn1-a4 .hd,#tsn1-a4 .r{grid-template-columns:1.6fr .7fr .9fr;padding:0 12px} #tsn1-a4 .hd span:nth-child(2),#tsn1-a4 .r span:nth-child(2){display:none} #tsn1-a4 .rail{grid-template-columns:1fr} }
+      `);
+      /* [Produkt, Lieferant, Einheit, Preis, Quelle 0=Hand 1=Liste 2=Dokument, pruefen] — Beispielwerte */
+      var ROWS=[
+        ['Burrata 125 g','Frischdienst Nord','kg','18,90 €',0],
+        ['Olivenöl 5 l','Feinkost Lorenz','l','42,50 €',1],['Sardellen 500 g','Feinkost Lorenz','kg','11,80 €',1],['Kapern 1 kg','Feinkost Lorenz','kg','9,40 €',1],['Honig 1 kg','Feinkost Lorenz','kg','12,20 €',1],
+        ['Tomaten Ochsenherz','Gemüsehof Brandt','kg','16,00 €',2],['Basilikum Topf','Gemüsehof Brandt','Stück','7,20 €',2],['Zitronen','Gemüsehof Brandt','Stück','4,80 €',2,1],['Rucola','Gemüsehof Brandt','kg','9,90 €',2]
+      ];
+      var INS=[['Von Hand','eine Zeile, ein Artikel','<img alt="" decoding="async" src="'+IMG+'ansprechpartner/kugelschreiber.jpg">'],['Aus einer Liste','Excel als CSV, auf einmal','CSV'],['Aus einem Dokument','PDF, Notion AI liest','PDF']];
+      host.id='tsn1-a4';
+      host.innerHTML=R.head('Drei Wege in die Tabelle','Eine Zeile oder <span class="g">hundert auf einmal</span>.','Einzelne Artikel tippst du, ganze Listen holst du als Datei herein, und Dokumente liest Notion AI für dich. Geprüft wird bei allen drei Wegen.')+
+        '<div class="wrap"><div class="ins">'+INS.map(function(x,i){ return '<div class="in" data-i="'+i+'"><span class="ic">'+x[2]+'</span><span class="t">'+x[0]+'<small>'+x[1]+'</small></span></div>'; }).join('')+'</div>'+
+        '<div class="tb"><div class="th"><span class="n">Produkte</span><span class="c"><b class="cnt">0</b>Einträge</span></div>'+
+        '<div class="hd"><span>Produkt</span><span>Lieferant</span><span>Einheit</span><span style="text-align:right">Preis</span></div>'+
+        '<div class="rows">'+ROWS.map(function(x,i){ return '<div class="r" data-i="'+i+'" style="transform:translateY('+(i*42)+'px)"><span>'+x[0]+'<em class="fl">prüfen</em></span><span class="s">'+x[1]+'</span><span class="s">'+x[2]+'</span><span class="p">'+x[3]+'</span></div>'; }).join('')+'</div></div></div>'+
+        '<div class="note">Beispielwerte</div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Von Hand: ein Artikel, den du gerade in der Hand hast.</button><button class="st" data-s="1"><b>02</b>Aus einer Liste: die Preisliste deines Großhändlers in einem Zug.</button><button class="st" data-s="2"><b>03</b>Aus einem Dokument: Notion AI legt die Zeilen an, du prüfst jede.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var rows=[].slice.call(host.querySelectorAll('.r')), ins=host.querySelectorAll('.in'), sts=host.querySelectorAll('.st'), cnt=host.querySelector('.cnt');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a4Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); [].forEach.call(ins,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function show(r,on,instant){ var i=+r.getAttribute('data-i'); if(instant) r.style.transition='none';
+        r.style.opacity=on?'1':'0'; r.style.transform='translate('+(on?0:-40)+'px,'+(i*42)+'px)'; if(instant){ void r.offsetWidth; r.style.transition=''; } }
+      function count(n){ cnt.textContent=String(n); }
+      function upTo(src,instant){ var n=0; rows.forEach(function(r){ var on=ROWS[+r.getAttribute('data-i')][4]<=src; show(r,on,instant); if(on) n++; r.classList.toggle('chk',src>=2&&!!ROWS[+r.getAttribute('data-i')][5]); }); count(n); }
+      function play(){
+        clear(); upTo(-1,true); step(-1);
+        later(function(){ step(0); },500);
+        later(function(){ show(rows[0],true); count(1); },1000);
+        later(function(){ step(1); },2400);
+        rows.filter(function(r){ return ROWS[+r.getAttribute('data-i')][4]===1; }).forEach(function(r,k){ later(function(){ show(r,true); count(2+k); },2900+k*130); });
+        later(function(){ step(2); },4600);
+        rows.filter(function(r){ return ROWS[+r.getAttribute('data-i')][4]===2; }).forEach(function(r,k){ later(function(){ show(r,true); count(6+k); },5200+k*260); });
+        later(function(){ rows.forEach(function(r){ if(ROWS[+r.getAttribute('data-i')][5]) r.classList.add('chk'); }); },6800);
+      }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ clear(); var i=+s.getAttribute('data-s'); step(i); upTo(i,false); }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      upTo(2,true); step(2);
+      if(N.REDUCED) return;
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l4',
+      re:/\/(?:lektionen\/)?daten-eintragen-und-einlesen\/?$/,
+      hero:{label:'L 1.4', eyebrow:'L 1.4', title:'Die Tabelle <span class="ts-gold">füllen</span>.', alt:'Daten in Notion eintragen, importieren und mit Notion AI einlesen'},
+      intro:
+        '<p>Die Vorlage kommt leer zu dir. Bevor sie dir einen einzigen Wareneinsatz ausrechnet, müssen deine Artikel, Lieferanten und Preise hinein. Das ist die meiste Arbeit am Anfang, und hier entscheidet sich, ob die Zahlen später stimmen. Plan dafür ein paar ruhige Abende ein.</p>'+
+        '<p>Es gibt drei Wege in eine Datenbank: von Hand tippen, eine ganze Liste als Datei hereinholen oder ein Dokument von Notion AI einlesen lassen. Wir schauen uns alle drei an, legen vorher fest, wie eingetragen wird, und lernen, viele Zeilen auf einmal zu ändern.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Vor dem ersten Eintrag', title:'Erst festlegen, <span class="g">wie</span> eingetragen wird', lead:'Fünf Minuten Absprache sparen dir Stunden beim Aufräumen. Leg diese Regeln fest, bevor du oder dein Team die erste Zeile füllt.', blocks:[
+          R.tab(['Was','Die Regel','Warum'],[
+            ['Produktname','Name und Größe, wie auf dem Lieferschein: „Burrata 125 g"','Sonst gibt es nach drei Wochen „Burrata", „Burata" und „Burrata klein"'],
+            ['Preise','Immer netto und immer je Gebinde, so wie sie auf der Rechnung stehen','Die Formeln der Vorlage rechnen von dort aus weiter'],
+            ['Einheiten','Nur die Einheiten, die die Spalte vorgibt, zum Beispiel kg, l oder Stück','Eine Mischung aus Gramm und Kilo ergibt Preise, die um das Tausendfache daneben liegen'],
+            ['Zahlen','Ohne Einheit und ohne Leerzeichen in die Zahlenspalte, also 1,5 und nicht „1,5 kg"','Eine Zahlenspalte nimmt nur Zahlen'],
+            ['Neue Artikel','Erst suchen, dann anlegen','Doppelte Artikel sind der häufigste Fehler in jeder Inventur']
+          ]),
+          R.merk('Was du ungenau einträgst, rechnet die Vorlage ganz genau falsch.')
+        ]}),
+        R.sec({eb:'Weg 1', title:'Von Hand: für den <span class="g">einzelnen Artikel</span>', lead:'Für ein neues Produkt, eine Preisänderung oder die Inventur im Lager ist Tippen der schnellste Weg.', blocks:[
+          R.txt('<p><strong>Unten in der Tabelle legst du eine neue Zeile an,</strong> oder über den Button <em>Neu</em> oben rechts. Trägst du mehrere ähnliche Artikel ein, duplizierst du eine fertige Zeile über das Menü am Griff und änderst nur, was anders ist. Auf dem Handy funktioniert das genauso, die Notion-App ist für die Zählung im Kühlhaus oft bequemer als der Laptop.</p>'+
+            '<p><strong>Viele Zeilen auf einmal ändern.</strong> Markier mehrere Zeilen, indem du sie links anklickst und dabei die Umschalttaste hältst, und setz eine Eigenschaft für alle zugleich, zum Beispiel den Lagerort oder den Lieferanten. So bekommen zwanzig Artikel in einem Schritt denselben Wert.</p>')
+        ]}),
+        R.sec({eb:'Weg 2', title:'Aus einer Liste: die ganze <span class="g">Preisliste</span> auf einmal', lead:'Viele Großhändler schicken ihre Artikel als Excel-Datei. Die holst du in einem Zug in deine Datenbank, statt sie abzutippen.', blocks:[
+          R.jetzt([
+            'Speichere die Excel-Datei als <b>CSV</b>. Wähl dabei die Kodierung UTF-8, sonst werden Umlaute zu Zeichensalat.',
+            'Benenn die Spaltenköpfe in der Datei genau so wie die Spalten deiner Datenbank, also zum Beispiel <b>Produkt</b> und <b>Einkaufspreis je Gebinde</b>.',
+            'Öffne die Datenbank als ganze Seite, klick oben auf die drei Punkte und dann auf <b>Mit CSV zusammenführen</b>.',
+            'Ordne jede Spalte der Datei einer Spalte der Datenbank zu und starte den Import.',
+            'Prüf danach zehn Zeilen gegen die Originalliste, vor allem Preise und Einheiten.'
+          ],'So gehst du vor'),
+          R.txt('<p><strong>Zwei Dinge musst du wissen.</strong> Ein Zusammenführen fügt immer neue Zeilen hinzu, bestehende werden nicht aktualisiert. Wer dieselbe Liste zweimal importiert, hat jeden Artikel doppelt. Und Formeln, Rollups und Verknüpfungen entstehen beim Import nicht neu. In eine bestehende Datenbank wie die der Vorlage ist das kein Problem, weil sie dort schon angelegt sind. Eine Verknüpfung kannst du beim Zusammenführen sogar einer Spalte der Datei zuordnen.</p>'),
+          R.fund(['DB 0 : Inventurliste','•••','Mit CSV zusammenführen'],'<p>So füllst du die Inventurliste der Vorlage mit den Artikeln deines Großhändlers. Die Rechenspalten der Vorlage greifen sofort, sobald Preis und Menge drinstehen. Welche Spalten du dort genau befüllst, zeigt dir Modul 2.</p>')
+        ]}),
+        R.sec({eb:'Weg 3', title:'Aus einem Dokument: Notion AI <span class="g">liest mit</span>', lead:'Lieferscheine, Rechnungen und Preislisten kommen oft als PDF. Der Notion Agent kann PDF-, CSV- und Excel-Dateien lesen und daraus Einträge in einer Datenbank anlegen.', blocks:[
+          R.copy('Prompt für den Notion Agent','Lies die angehängte Rechnung von Frischdienst Nord. Lege für jede Position eine Zeile in der Datenbank „Produkte" an, mit Produkt, Einheit, Menge je Gebinde und Einkaufspreis je Gebinde netto. Wenn ein Produkt schon existiert, lege es nicht neu an, sondern nenne es mir. Markiere alle Zeilen, bei denen du dir bei Einheit oder Preis nicht sicher bist.','prompt','Stand November 2026: Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Als Dateien nennt die Notion-Hilfe unter anderem PDF, CSV und XLSX. Fotos, also zum Beispiel ein abfotografierter Papier-Lieferschein, stehen dort nicht. Nimm deshalb den digitalen Lieferschein oder die Rechnung als PDF.'),
+          R.txt('<p><strong>Die KI schreibt, du prüfst.</strong> Geh nach jedem Einlesen jede Zeile einmal durch, mit dem Dokument daneben. Achte besonders auf Einheiten, auf Preise je Stück gegen Preise je Kilo und auf Artikel, die es schon gab. Ein falsch eingelesener Preis wandert sonst unbemerkt bis in den Deckungsbeitrag. Bei Papier, das du nur als Foto hast, ist Abtippen meistens schneller als jede Nachkontrolle.</p>')
+        ]}),
+        R.sec({eb:'Typische Fehler', title:'Wenn nach dem Import etwas <span class="g">nicht passt</span>', wide:true, blocks:[
+          R.fehler([
+            ['Jeder Artikel steht doppelt da','Die Liste wurde zweimal zusammengeführt','Doppelte über die Suche finden und löschen, danach nur noch neue Artikel importieren'],
+            ['Umlaute sind zu Zeichensalat geworden','Die CSV wurde nicht als UTF-8 gespeichert','Datei neu als UTF-8 exportieren und erneut importieren'],
+            ['Eine Spalte aus der Datei ist nicht angekommen','Der Spaltenkopf hieß anders als die Spalte in Notion','Kopfzeile der Datei angleichen oder beim Zuordnen von Hand auswählen'],
+            ['Preise sind um das Tausendfache zu hoch','Gramm und Kilo wurden gemischt','Einheit je Spalte festlegen und die betroffenen Zeilen auf einmal korrigieren']
+          ])
+        ]}),
+        {emp:{kind:'Einrichtung', animTitle:'Sauber', animGold:'von der ersten Zeile', steps:['Regeln festlegen','Erst zehn Zeilen','Dann die Liste','Jede Zeile prüfen'],
+          intro:'Die ersten Tage mit der Vorlage entscheiden, ob du ihr später vertraust. Lieber langsamer anfangen und sauber bleiben.',
+          points:['Schreib die Eintrageregeln auf eine Seite in der Vorlage, damit das ganze Team sie findet.','Trag zuerst zehn Artikel von Hand ein. Dabei merkst du, wo deine Regeln noch Lücken haben.','Erst dann holst du ganze Listen als CSV herein, und jede Liste nur einmal.','Was Notion AI einliest, prüfst du Zeile für Zeile, bevor du damit rechnest.']}}
+      ],
+      learn:{items:['Du legst <b>Eintrageregeln</b> fest, bevor die erste Zeile gefüllt wird.','Du trägst von Hand ein und änderst <b>viele Zeilen</b> auf einmal.','Du holst eine Preisliste mit <b>Mit CSV zusammenführen</b> herein und vermeidest Doppelte.','Du lässt Dokumente von <b>Notion AI</b> einlesen und prüfst jede Zeile selbst.'],
+        next:'/lektionen/l14-relationen-rollups'}
     });
   }
   go();
