@@ -4418,12 +4418,16 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/lektionen/notion-automationen-bauen' },
     { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/lektionen/wiederkehrende-routinen-einrichten' },
     { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/modul-5-claude-code-notion' },
-    /* Modul 0 - Einleitung, seit 03.08.2026 fuenf Lektionen statt zwei (Robert-Entscheid). */
-    { re:/\/was-dich-in-diesem-kurs-erwartet\/?$/, href:'/den-tool-stack-kennenlernen' },
-    { re:/\/den-tool-stack-kennenlernen\/?$/, href:'/die-einstiegsfragen' },
-    { re:/\/die-einstiegsfragen\/?$/, href:'/die-hufigsten-sorgen-klren' },
-    { re:/\/die-h[a-z]*ufigsten-sorgen-kl[a-z]*ren\/?$/, href:'/agents-und-automatisierungen-unterscheiden' },
-    { re:/\/agents-und-automatisierungen-unterscheiden\/?$/, href:'/modul-1-notion-grundlagen-3-lernpfade' }
+    /* Modul 0 - Einfuehrung, Neubau 01.11.2026 (sieben Lektionen, Gates tolerant fuer Wurzel und /lektionen/). */
+    { re:/^\/modul-0-einleitung-was-dich-erwartet\/?$/, href:'/was-dich-in-diesem-kurs-erwartet' },
+    { re:/^\/was-dich-in-diesem-kurs-erwartet\/?$/, href:'/lektionen/wo-ki-dir-zeit-und-geld-spart' },
+    { re:/^\/(?:lektionen\/)?wo-ki-dir-zeit-und-geld-spart\/?$/, href:'/lektionen/system-und-werkzeug' },
+    { re:/^\/(?:lektionen\/)?system-und-werkzeug\/?$/, href:'/die-einstiegsfragen' },
+    { re:/^\/die-einstiegsfragen\/?$/, href:'/lektionen/deine-sorgen-ehrlich-beantwortet' },
+    { re:/^\/(?:lektionen\/)?deine-sorgen-ehrlich-beantwortet\/?$/, href:'/lektionen/agent-oder-automation' },
+    { re:/^\/(?:lektionen\/)?agent-oder-automation\/?$/, href:'/lektionen/dein-weg-durch-den-kurs' },
+    { re:/^\/(?:lektionen\/)?dein-weg-durch-den-kurs\/?$/, href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip' },
+    { re:/^\/abschluss-was-du-am-ende-kannst\/?$/, href:'/' }
   ];
   function pageHref(){
     for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i].href; }
@@ -34332,1351 +34336,8 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
-/* ============================================================
-   MODUL 0 · EINLEITUNG — fuenf Lektionen (Robert-Entscheid 03.08.2026)
-   Aus den zwei ueberfrachteten Lektionen L0.1/L0.2 werden fuenf:
-     0.1 Deine Schnittstellen erkennen        /was-dich-in-diesem-kurs-erwartet   (bestehend)
-     0.2 Den Tool-Stack kennenlernen          /den-tool-stack-kennenlernen        (NEU anzulegen)
-     0.3 Den KI-Markt einordnen               /die-einstiegsfragen                (bestehend)
-     0.4 Die haeufigsten Sorgen klaeren       /die-hufigsten-sorgen-klren         (NEU anzulegen)
-     0.5 Agents und Automatisierungen unterscheiden  /agents-und-automatisierungen-unterscheiden (NEU)
-
-   Bausteine kommen aus der Kurs-Bibliothek window.__ts3 (Hero/Body/Sektion/
-   Empfehlung/Abschluss) — erstmals in Modul 3 gebaut, hier mitgenutzt.
-   Die beiden bestehenden Seiten tragen in Notion noch das Rohskript
-   ("Kernsaetze / Skript / Video-Anleitung"). Das wird ausgeblendet, SOBALD
-   der eigene Inhalt steht — nie vorher, sonst waere die Seite bei einem
-   JS-Fehler leer.
-   ============================================================ */
-
-/* ---- gemeinsame Helfer fuer Modul 0 ---- */
-(function(){
-  if(window.__ts0) return;
-  /* Rohskript der Notion-Seite verbergen — erst wenn der eigene Inhalt steht. */
-  function hideRaw(){
-    var nr=document.querySelector('.super-content .notion-root');
-    if(nr && !nr.getAttribute('data-ts0hidden')){
-      nr.setAttribute('data-ts0hidden','1');
-      nr.style.display='none';
-    }
-  }
-  window.__ts0={ hideRaw:hideRaw };
-})();
-
-/* ============================================================
-   L0.1 · Deine Schnittstellen erkennen   /was-dich-in-diesem-kurs-erwartet
-   Erklaeranimation "Ein Tag, vier Stellen." — EIGENES Konzept:
-   ein waagerechter Tagesstrahl von morgens bis abends mit vier Marken.
-   An jeder Marke loest sich ein Zettel und faellt in den Sammelbehaelter
-   darunter, der sichtbar voller wird. Aussage: die Information ist ohnehin
-   da, sie landet nur bisher nirgends. Zeitachse + Fuellstand — in keiner
-   anderen Kurs-Animation vorhanden.
-   ============================================================ */
-(function(){
-  if(window.__ts0a) return;
-  function on(){ return /\/was-dich-in-diesem-kurs-erwartet\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 0.1'),
-      alt: 'Deine Schnittstellen erkennen: die vier Stellen im Betriebstag',
-      eyebrow: 'L 0.1',
-      title: 'Deine <span class="ts-gold">Schnittstellen</span>'
-    });
-    window.__ts3.body('ts0a-intro',
-      '<p>Ich komme aus der Gastronomie. Ich habe im Betrieb gestanden, Inventuren gemacht, Deckungsbeiträge gerechnet und mich über Wareneinsätze geärgert, die keiner sauber im Blick hatte. Deshalb erkläre ich dir KI nicht aus der Theorie, sondern an den Stellen, an denen du wirklich stehst.</p>'+
-      '<p>Eine solche Stelle nenne ich <b>Schnittstelle</b>: ein Punkt in deinem Tag, an dem Information entsteht, verarbeitet oder gebraucht wird. Genau dort kann dir KI Arbeit abnehmen.</p>'+
-      '<p>Wir gehen gleich einen ganz normalen Betriebstag durch. Danach kannst du die Stellen in deinem eigenen Laden benennen.</p>'
-    );
-    if(document.getElementById('ts0a-intro')) window.__ts0.hideRaw();
-  }
-  window.__ts0a=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0aanim) return;
-  function on(){ return /\/was-dich-in-diesem-kurs-erwartet\/?$/.test(location.pathname); }
-
-  var MARKS=[
-    {t:'07:00', k:'Lieferung',   n:'Der Lieferschein',   d:'Mengen, Preise, Artikelnummern'},
-    {t:'11:00', k:'Kalkulation', n:'Der Teller',         d:'Wareneinsatz, Deckungsbeitrag'},
-    {t:'15:00', k:'Außenwirkung',n:'Karte und Bilder',   d:'Cover, Speisekarte, Zutatenfotos'},
-    {t:'23:00', k:'Auswertung',  n:'Der Tagesabschluss', d:'Umsätze, Lieferdienste, Bewertungen'}
-  ];
-  var CAPS=[
-    'Morgens kommt die Lieferung. Auf dem Schein stehen Mengen und Preise. Normalerweise wandert er in einen Ordner und wird nie wieder angefasst.',
-    'Mittags kalkulierst du. Was kostet ein Teller wirklich, auf den Cent statt über den Daumen? Die Zahlen dafür liegen längst vor.',
-    'Nachmittags geht es um die Außenwirkung. Karte, Bilder, Cover. Hier verbrennen die meisten Betriebe am meisten Zeit und Geld.',
-    'Abends willst du wissen, wie der Tag gelaufen ist. Interne Umsätze, Lieferdienste, Bewertungen. Alles an einem Ort statt in fünf Apps.',
-    'Vier Stellen, an denen Information entsteht. Die Frage ist nur, ob sie für dich arbeitet oder liegen bleibt. <b>Genau das drehen wir um.</b>'
-  ];
-  var WALK=3800;
-
-  var CSS=`
-  #ts0aanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts0aanim *{box-sizing:border-box}
-  #ts0aanim .tg-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts0aanim .tg-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts0aanim .tg-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts0aanim h2.tg-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts0aanim h2.tg-title .ts-gold{color:#c7b489}
-  #ts0aanim .tg-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts0aanim .tg-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts0aanim .tg-scroll{overflow-x:auto;scrollbar-width:none}
-  #ts0aanim .tg-scroll::-webkit-scrollbar{display:none}
-  #ts0aanim .tg-stage{position:relative;width:min(660px,100%);min-width:560px;height:330px;margin:0 auto}
-
-  /* Tagesstrahl */
-  #ts0aanim .tg-axis{position:absolute;left:6%;right:6%;top:80px;height:1.5px;background:rgba(199,180,137,.2)}
-  #ts0aanim .tg-fill{position:absolute;left:6%;top:80px;height:1.5px;width:0;
-    background:linear-gradient(90deg,rgba(199,180,137,.3),#c7b489);transition:width .9s cubic-bezier(.16,1,.3,1)}
-  #ts0aanim .tg-daylbl{position:absolute;top:22px;font:600 9px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-  #ts0aanim .tg-daylbl.l{left:1%}
-  #ts0aanim .tg-daylbl.r{right:1%}
-
-  /* Vier gleich grosse Marken auf der Achse */
-  #ts0aanim .tg-mark{position:absolute;top:56px;width:22%;margin-left:-11%;text-align:center;cursor:pointer}
-  #ts0aanim .tg-time{display:block;font:700 10px/1 -apple-system,sans-serif;letter-spacing:.12em;color:rgba(255,255,255,.3);transition:color .5s ease}
-  #ts0aanim .tg-dot{display:block;width:11px;height:11px;border-radius:50%;margin:9px auto 0;background:#0b0d14;
-    border:1.5px solid rgba(199,180,137,.3);transition:background .5s ease,border-color .5s ease,box-shadow .5s ease}
-  #ts0aanim .tg-k{display:block;margin-top:10px;font:600 9.5px/1.2 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .5s ease}
-  #ts0aanim .tg-mark.lit .tg-time{color:#c7b489}
-  #ts0aanim .tg-mark.lit .tg-dot{background:#c7b489;border-color:#c7b489;box-shadow:0 0 14px rgba(199,180,137,.8)}
-  #ts0aanim .tg-mark.lit .tg-k{color:rgba(255,255,255,.8)}
-
-  /* Der Zettel, der sich loest und faellt */
-  #ts0aanim .tg-note{position:absolute;top:152px;width:22%;margin-left:-11%;border-radius:10px;padding:9px 8px;
-    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;
-    border:1px solid rgba(199,180,137,.3);opacity:0;transform:translateY(-8px);
-    transition:opacity .6s ease,transform .8s cubic-bezier(.16,1,.3,1)}
-  #ts0aanim .tg-mark.lit + .tg-note{opacity:1;transform:translateY(0)}
-  #ts0aanim .tg-nn{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:12px;line-height:1.25;color:#fff}
-  #ts0aanim .tg-nd{display:block;margin-top:4px;font-size:9.5px;line-height:1.3;color:rgba(255,255,255,.55)}
-
-  /* Sammelbehaelter */
-  #ts0aanim .tg-box{position:absolute;left:6%;right:6%;bottom:0;height:96px;border-radius:14px;overflow:hidden;
-    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;
-    border:1px solid rgba(255,255,255,.11);transition:border-color .6s ease,box-shadow .6s ease}
-  #ts0aanim .tg-wrap.full .tg-box{border-color:rgba(199,180,137,.5);box-shadow:0 0 40px -16px rgba(199,180,137,.55)}
-  #ts0aanim .tg-level{position:absolute;left:0;right:0;bottom:0;height:0;
-    background:linear-gradient(0deg,rgba(199,180,137,.24),rgba(199,180,137,.05));transition:height .9s cubic-bezier(.16,1,.3,1)}
-  #ts0aanim .tg-boxlbl{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;
-    font:600 11px/1.4 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.34);transition:color .6s ease}
-  #ts0aanim .tg-wrap.full .tg-boxlbl{color:#c7b489}
-
-  /* Endzustand = Default: ohne JS steht der volle Tag da */
-  #ts0aanim .tg-wrap:not(.js) .tg-mark{opacity:1}
-  #ts0aanim .tg-wrap:not(.js) .tg-fill{width:77%}
-  #ts0aanim .tg-wrap:not(.js) .tg-level{height:100%}
-  #ts0aanim .tg-wrap:not(.js) .tg-note{opacity:1;transform:none}
-  #ts0aanim .tg-wrap:not(.js) .tg-dot{background:#c7b489;border-color:#c7b489}
-  #ts0aanim .tg-wrap:not(.js) .tg-time{color:#c7b489}
-  #ts0aanim .tg-wrap:not(.js) .tg-k{color:rgba(255,255,255,.8)}
-
-  #ts0aanim .tg-cap{max-width:640px;margin:28px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts0aanim .tg-cap b{color:#c7b489;font-weight:600}
-  #ts0aanim .tg-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts0aanim .tg-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts0aanim .tg-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @media(max-width:820px){ #ts0aanim .tg-cap{min-height:130px} }
-  @media(prefers-reduced-motion:reduce){ #ts0aanim .tg-note,#ts0aanim .tg-level,#ts0aanim .tg-fill{transition:none} }
-  `;
-
-  function html(){
-    var parts='';
-    for(var i=0;i<MARKS.length;i++){
-      var x=(6+(i+0.5)*22).toFixed(2);
-      parts+='<div class="tg-mark" data-i="'+i+'" style="left:'+x+'%">'+
-        '<span class="tg-time">'+MARKS[i].t+'</span><span class="tg-dot"></span><span class="tg-k">'+MARKS[i].k+'</span>'+
-      '</div>'+
-      '<div class="tg-note" style="left:'+x+'%"><span class="tg-nn">'+MARKS[i].n+'</span><span class="tg-nd">'+MARKS[i].d+'</span></div>';
-    }
-    return `
-<div class="tg-head">
-  <span class="tg-eyebrow">Dein Betriebstag</span>
-  <h2 class="tg-title">Ein Tag, vier <span class="ts-gold">Stellen</span>.</h2>
-  <p class="tg-sub">An diesen vier Punkten entsteht in jedem Betrieb Information. Sie ist längst da. Sie landet nur bisher nirgends, wo sie für dich arbeiten könnte.</p>
-</div>
-<div class="tg-wrap">
-  <div class="tg-scroll"><div class="tg-stage">
-    <span class="tg-daylbl l">Morgens</span><span class="tg-daylbl r">Abends</span>
-    <span class="tg-axis"></span><span class="tg-fill"></span>
-    ${parts}
-    <div class="tg-box"><span class="tg-level"></span><span class="tg-boxlbl">Dein System</span></div>
-  </div></div>
-  <p class="tg-cap"></p>
-  <div class="tg-foot"><button class="tg-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function step(root,n){
-    var wrap=root.querySelector('.tg-wrap');
-    var marks=root.querySelectorAll('.tg-mark');
-    var shown=Math.min(n+1,MARKS.length);
-    for(var i=0;i<marks.length;i++) marks[i].classList.toggle('lit', i<shown);
-    root.querySelector('.tg-fill').style.width=Math.max(0,shown*22-11).toFixed(2)+'%';
-    root.querySelector('.tg-level').style.height=(shown*25)+'%';
-    wrap.classList.toggle('full', shown===MARKS.length);
-    var cap=root.querySelector('.tg-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-
-  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },WALK); }
-
-  function play(root){
-    var wrap=root.querySelector('.tg-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,CAPS.length-1); return; }
-    run(root,0);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='ts0aanim'; el.innerHTML=html();
-    el.querySelector('.tg-replay').addEventListener('click',function(){ play(el); });
-    var ms=el.querySelectorAll('.tg-mark');
-    for(var i=0;i<ms.length;i++){ (function(n){ ms[n].addEventListener('click',function(){ clear(); el.querySelector('.tg-wrap').classList.add('js'); step(el,n); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts0aanim-css'))return;
-    var s=document.createElement('style'); s.id='ts0aanim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts0aanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts0aanim')) return;
-    var anchor=document.getElementById('ts0a-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    step(el, CAPS.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.tg-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts0aanimKill=function(){ clear(); };
-  window.__ts0aanim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0arest) return;
-  function on(){ return /\/was-dich-in-diesem-kurs-erwartet\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts0aanim')) return;
-
-    window.__ts3.sec('ts0a-vier','ts0aanim',
-      '<h3>Die vier Stellen im <span class="g">Detail</span></h3>'+
-      '<p class="lead">Jede dieser Stellen kostet dich heute Zeit, und an jeder liegt der Hebel woanders. Deshalb gehen wir sie einzeln durch.</p>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Stelle 1 · morgens</span><div class="ts3-nm">Der Lieferschein</div><hr>'+
-          '<p>Mengen, Preise, Artikelnummern. Der Zettel wandert in einen Ordner und wird nie wieder angefasst.</p>'+
-          '<p>Fotografierst du ihn stattdessen ab und gibst ihn ins System, sind deine Einkaufspreise aktuell und jede Kalkulation darauf stimmt von allein. Du tippst nichts mehr ab.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Stelle 2 · mittags</span><div class="ts3-nm">Der Teller</div><hr>'+
-          '<p>Du willst wissen, was ein Gericht wirklich kostet. Nicht über den Daumen, sondern auf den Cent: Wareneinsatz in Prozent und in Euro, Deckungsbeitrag, Gemeinkosten- und Personalanteil.</p>'+
-          '<p>Sind Zutaten, Rezepturen und Kosten einmal verbunden, rechnet sich jedes neue Gericht von selbst durch.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Stelle 3 · nachmittags</span><div class="ts3-nm">Karte und Bilder</div><hr>'+
-          '<p>Speisekarte, Gerichtefotos, ein sauberes Cover für jede Datenbank. Hier verbrennen die meisten Betriebe am meisten Geld und Zeit.</p>'+
-          '<p>Mit den richtigen Werkzeugen entsteht ein Studio-Cover für eine Zutat in der Zeit, in der du früher einen Fotografen angerufen hast.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Stelle 4 · abends</span><div class="ts3-nm">Der Tagesabschluss</div><hr>'+
-          '<p>Interne Umsätze, Lieferdienste, Produktivität pro Stunde, deine Bewertungen. Heute liegt das in fünf verschiedenen Apps.</p>'+
-          '<p>Am Ende steht alles an einem Ort, und du siehst den Tag in einem Blick statt in fünf.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Diese vier Stellen gibt es in jedem Betrieb, ob Food-Truck, Café oder Restaurant mit drei Standorten. Nur der <b>Umfang</b> ist verschieden, nicht das Prinzip.</p>'
-    );
-
-    window.__ts3.sec('ts0a-wahrheit','ts0a-vier',
-      '<h3>Es gibt nicht die eine <span class="g">Wahrheit</span></h3>'+
-      '<p>Jeder Betrieb ist anders. Ein Food-Truck braucht etwas anderes als ein Restaurant mit drei Standorten, und ein Caterer denkt wieder anders als ein Café. Deshalb setze ich dir hier keinen einzigen richtigen Weg vor. Ich zeige dir, was möglich ist, damit du auswählst, was in deinen Alltag passt.</p>'+
-      '<p>Und du entscheidest, wie tief du gehst. Wie viel Zeit in die Pflege deines Systems fließt und wie viel Geld in Werkzeuge, bestimmst du. Ich sage dir an jeder Stelle ehrlich, wo Aufwand entsteht und wo Kosten entstehen. <b>Ein schlankes System, das du wirklich pflegst, ist mehr wert als ein riesiges, in dem du nach zwei Wochen den Überblick verlierst.</b></p>'+
-      '<p>Und es ist egal, auf welchem Stand du anfängst. Weil jeder Schritt an einem konkreten Beispiel aus dem Betrieb hängt, kommst du sowohl als Anfänger mit als auch dann, wenn du schon eigene Systeme gebaut hast. Was du kennst, überspringst du.</p>'+
-      '<p class="ts3-close">Am Ende hast du fertige Gerichte im System: verwendete Zutaten in Portionsgrößen, Wareneinsatz in Prozent und in Euro, Deckungsbeitrag, Allergene, Nährwerte, empfohlener Verkaufspreis. Das entsteht nicht an einem Tag, sondern wächst mit jeder Lektion.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts0aemp', anchorId:'ts0a-wahrheit', kind:'Nutzung',
-      animTitle:'Dein', animGold:'eigener Tag',
-      steps:[{n:'01',l:'Tag mitschreiben'},{n:'02',l:'Stellen markieren'},{n:'03',l:'Eine auswählen'},{n:'04',l:'Umfang schätzen'}],
-      intro:'Bevor du die erste Lektion baust, lohnt eine halbe Stunde mit deinem eigenen Tagesablauf:',
-      points:[
-        'Schreib einen <b>normalen Betriebstag</b> mit, von der Lieferung bis zum Abschluss. Nicht den idealen, den echten.',
-        'Markier die Stellen, an denen <b>Information entsteht oder gebraucht wird</b>. Bei den meisten sind es mehr als die vier von hier.',
-        'Such dir <b>eine davon</b> aus, die dich am meisten nervt. Mit der fängst du an, nicht mit der größten.',
-        'Schätz grob, wie viel <b>Zeit pro Woche</b> daran hängt. Diese Zahl brauchst du später, um zu sehen, ob sich der Aufbau gelohnt hat.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts0anext',
-      learn:[
-        'Du verstehst, was eine <b>Schnittstelle</b> ist, und findest sie in deinem eigenen Tag.',
-        'Du kennst die <b>vier Stellen</b>: Lieferung, Kalkulation, Außenwirkung, Abschluss.',
-        'Du weißt, dass du über <b>Tiefe, Zeit und Geld</b> selbst entscheidest.',
-        'Du hast das <b>Endbild</b> vor Augen: ein fertig durchgerechnetes Gericht.'
-      ],
-      next:'/den-tool-stack-kennenlernen'
-    });
-  }
-  window.__ts0arest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   L0.2 · Den Tool-Stack kennenlernen   /den-tool-stack-kennenlernen  (Seite NEU anzulegen)
-   Erklaeranimation "Eine Zutat, sieben Stationen." — EIGENES Konzept:
-   ein Fliessband. EIN Objekt (die Zutat "Tomate") wandert von links nach
-   rechts durch sieben Stationen; an jeder Station leuchtet das zustaendige
-   Werkzeug auf und das Objekt veraendert sichtbar seinen Zustand
-   (Zeile -> mit Preis -> mit Bild -> mit Cover -> im Dashboard).
-   Aussage: jedes Werkzeug hat genau eine Aufgabe an genau einer Stelle.
-   ============================================================ */
-(function(){
-  if(window.__ts0b) return;
-  function on(){ return /\/den-tool-stack-kennenlernen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 0.2'),
-      alt: 'Den Tool-Stack kennenlernen: sieben Werkzeuge, sieben Aufgaben',
-      eyebrow: 'L 0.2',
-      title: 'Dein <span class="ts-gold">Tool-Stack</span>'
-    });
-    window.__ts3.body('ts0b-intro',
-      '<p>Jetzt der erste Blick auf die Werkzeuge, die uns den ganzen Kurs über begleiten. Du musst dir jetzt nichts merken, und du musst auch nichts sofort kaufen.</p>'+
-      '<p>Wichtig ist nur eins: <b>jedes Werkzeug hat genau eine Aufgabe.</b> Wir kippen nicht alles in dasselbe Programm, sondern nehmen für jeden Handgriff das, was ihn am besten kann. Genau daran erkennst du später professionelles Arbeiten.</p>'+
-      '<p>An jeder Stelle im Kurs sage ich dir noch einmal, warum wir gerade dieses Werkzeug nehmen und ob du es überhaupt brauchst. Manche wirst du täglich benutzen, andere zweimal im ganzen Kurs.</p>'
-    );
-    if(document.getElementById('ts0b-intro')) window.__ts0.hideRaw();
-  }
-  window.__ts0b=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0banim) return;
-  function on(){ return /\/den-tool-stack-kennenlernen\/?$/.test(location.pathname); }
-
-  var ST=[
-    {tool:'Notion',            job:'Struktur',   state:'Tomate'},
-    {tool:'Notion AI',         job:'Daten',      state:'Tomate · 2,40 €'},
-    {tool:'ChatGPT',           job:'Prompt',     state:'Tomate · 2,40 € · Prompt'},
-    {tool:'Gemini',            job:'Bild',       state:'Tomate · Bild'},
-    {tool:'Midjourney',        job:'Alternative',state:'Tomate · Bild (Variante)'},
-    {tool:'Canva',             job:'Cover',      state:'Tomate · Cover'},
-    {tool:'Claude Code',       job:'Steuerung',  state:'Tomate · im Dashboard'}
-  ];
-  var CAPS=[
-    '<b>Notion</b> ist das Fundament. Eine Datenbank, die sich bedient wie ein Dokument. Hier bekommt die Zutat überhaupt erst eine Zeile.',
-    '<b>Notion AI</b> ist die Intelligenz im System. Sie liest den Lieferschein aus und trägt den Preis ein, statt dass du tippst.',
-    '<b>ChatGPT</b> ist stark im Formulieren. Es schreibt die genaue Beschreibung dessen, was wir auf dem Bild sehen wollen.',
-    '<b>Gemini</b> mit Nano Banana Pro macht aus dieser Beschreibung ein sauberes Bild. Das eine schreibt den Auftrag, das andere liefert.',
-    '<b>Midjourney</b> zeigen wir daneben, weil es eine eigene Bildsprache hat. Du siehst beide Wege und entscheidest selbst.',
-    '<b>Canva</b> veredelt. Aus dem Bild wird ein fertiges Cover mit Schrift. Ein System, das gut aussieht, benutzt du am Ende auch.',
-    'Und über allem <b>Claude Code</b>. Es steuert Dateien, dein Notion und die Auswertungen. Der taktische Teil, den du dazuwählen kannst.'
-  ];
-  var WALK=3600;
-
-  var CSS=`
-  #ts0banim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts0banim *{box-sizing:border-box}
-  #ts0banim .fb-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts0banim .fb-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts0banim .fb-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts0banim h2.fb-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts0banim h2.fb-title .ts-gold{color:#c7b489}
-  #ts0banim .fb-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts0banim .fb-wrap{max-width:900px;margin:0 auto;padding:0 24px}
-  #ts0banim .fb-scroll{overflow-x:auto;scrollbar-width:none}
-  #ts0banim .fb-scroll::-webkit-scrollbar{display:none}
-  #ts0banim .fb-stage{position:relative;width:min(760px,100%);min-width:700px;margin:0 auto;padding-top:96px}
-
-  /* das wandernde Objekt */
-  #ts0banim .fb-item{position:absolute;top:8px;left:0;width:200px;margin-left:-100px;border-radius:12px;padding:11px 13px;text-align:center;
-    background:linear-gradient(rgba(199,180,137,.10),rgba(199,180,137,.10)),#05060b;
-    border:1px solid rgba(199,180,137,.45);box-shadow:0 18px 40px -20px rgba(0,0,0,.9);
-    transition:left .95s cubic-bezier(.16,1,.3,1)}
-  #ts0banim .fb-ilbl{display:block;font:600 8.5px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:6px}
-  #ts0banim .fb-ival{display:block;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;line-height:1.3;color:#fff;
-    transition:opacity .35s ease}
-  #ts0banim .fb-wrap.swap .fb-ival{opacity:0}
-  #ts0banim .fb-drop{position:absolute;top:62px;left:0;width:1.5px;height:26px;margin-left:-.75px;background:rgba(199,180,137,.45);
-    transition:left .95s cubic-bezier(.16,1,.3,1)}
-
-  /* Band + sieben gleich grosse Stationen */
-  #ts0banim .fb-belt{position:relative;height:6px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden}
-  #ts0banim .fb-belt i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px;
-    background:linear-gradient(90deg,rgba(199,180,137,.35),#c7b489);transition:width .95s cubic-bezier(.16,1,.3,1)}
-  #ts0banim .fb-tools{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px}
-  #ts0banim .fb-t{height:78px;border-radius:12px;padding:0 6px;text-align:center;cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.10);transition:border-color .5s ease,box-shadow .5s ease,transform .5s cubic-bezier(.16,1,.3,1)}
-  #ts0banim .fb-t .n{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:11.5px;line-height:1.2;color:rgba(255,255,255,.5);
-    overflow-wrap:anywhere;transition:color .5s ease}
-  #ts0banim .fb-t .j{font:600 8.5px/1.2 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);transition:color .5s ease}
-  #ts0banim .fb-t.done{border-color:rgba(199,180,137,.32)}
-  #ts0banim .fb-t.done .n{color:rgba(255,255,255,.8)}
-  #ts0banim .fb-t.on{border-color:rgba(199,180,137,.85);box-shadow:0 0 34px -12px rgba(199,180,137,.6);transform:translateY(-3px)}
-  #ts0banim .fb-t.on .n{color:#fff}
-  #ts0banim .fb-t.on .j{color:#c7b489}
-
-  /* Endzustand = Default */
-  #ts0banim .fb-wrap:not(.js) .fb-belt i{width:100%}
-  #ts0banim .fb-wrap:not(.js) .fb-t{border-color:rgba(199,180,137,.32)}
-  #ts0banim .fb-wrap:not(.js) .fb-t .n{color:rgba(255,255,255,.8)}
-
-  #ts0banim .fb-cap{max-width:640px;margin:26px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts0banim .fb-cap b{color:#c7b489;font-weight:600}
-  #ts0banim .fb-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts0banim .fb-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts0banim .fb-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @media(max-width:820px){ #ts0banim .fb-cap{min-height:130px} }
-  @media(prefers-reduced-motion:reduce){ #ts0banim .fb-item,#ts0banim .fb-drop,#ts0banim .fb-belt i{transition:none} }
-  `;
-
-  function html(){
-    var tools=ST.map(function(s,i){
-      return '<div class="fb-t" data-i="'+i+'"><span class="n">'+s.tool+'</span><span class="j">'+s.job+'</span></div>';
-    }).join('');
-    return `
-<div class="fb-head">
-  <span class="fb-eyebrow">Sieben Handgriffe</span>
-  <h2 class="fb-title">Eine Zutat, sieben <span class="ts-gold">Stationen</span>.</h2>
-  <p class="fb-sub">Wir schicken eine einzige Tomate einmal quer durch den Kurs. An jeder Station macht genau ein Werkzeug genau eine Sache mit ihr.</p>
-</div>
-<div class="fb-wrap">
-  <div class="fb-scroll"><div class="fb-stage">
-    <div class="fb-item"><span class="fb-ilbl">Im System</span><span class="fb-ival"></span></div>
-    <span class="fb-drop"></span>
-    <div class="fb-belt"><i></i></div>
-    <div class="fb-tools">${tools}</div>
-  </div></div>
-  <p class="fb-cap"></p>
-  <div class="fb-foot"><button class="fb-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function step(root,n){
-    var wrap=root.querySelector('.fb-wrap'), ts=root.querySelectorAll('.fb-t');
-    for(var i=0;i<ts.length;i++){ ts[i].classList.toggle('on', i===n); ts[i].classList.toggle('done', i<n); }
-    var pct=(100/ST.length)*(n+0.5);
-    root.querySelector('.fb-item').style.left=pct+'%';
-    root.querySelector('.fb-drop').style.left=pct+'%';
-    root.querySelector('.fb-belt i').style.width=pct+'%';
-    wrap.classList.add('swap');
-    later(function(){ root.querySelector('.fb-ival').textContent=ST[n].state; wrap.classList.remove('swap'); },320);
-    var cap=root.querySelector('.fb-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-  function run(root,i){ clear(); step(root,i); if(i<ST.length-1) later(function(){ run(root,i+1); },WALK); }
-  function play(root){
-    var wrap=root.querySelector('.fb-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,ST.length-1); return; }
-    run(root,0);
-  }
-  function build(){
-    var el=document.createElement('div'); el.id='ts0banim'; el.innerHTML=html();
-    el.querySelector('.fb-replay').addEventListener('click',function(){ play(el); });
-    var ts=el.querySelectorAll('.fb-t');
-    for(var i=0;i<ts.length;i++){ (function(n){ ts[n].addEventListener('click',function(){ clear(); el.querySelector('.fb-wrap').classList.add('js'); step(el,n); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts0banim-css'))return;
-    var s=document.createElement('style'); s.id='ts0banim-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts0banim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts0banim')) return;
-    var anchor=document.getElementById('ts0b-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    step(el, ST.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.fb-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts0banimKill=function(){ clear(); };
-  window.__ts0banim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0brest) return;
-  function on(){ return /\/den-tool-stack-kennenlernen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts0banim')) return;
-
-    window.__ts3.sec('ts0b-fund','ts0banim',
-      '<h3>Das <span class="g">Fundament</span></h3>'+
-      '<p class="lead">Zwei Werkzeuge, ohne die nichts von dem funktioniert, was danach kommt. Hier verbringst du den größten Teil des Kurses.</p>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Werkzeug 1</span><div class="ts3-nm">Notion</div><hr>'+
-          '<p>Hier lebt dein System. Im Kern eine Datenbank, die sich bedient wie ein Dokument: Du baust Tabellen, die miteinander reden.</p>'+
-          '<p>Deine Inventarliste weiß, welcher Lieferant zu welchem Produkt gehört. Dein Gericht weiß, aus welchen Zutaten es besteht und was die kosten. Genau diese Verbindungen sorgen später dafür, dass sich eine Preisänderung bis zum Deckungsbeitrag durchzieht.</p>'+
-          '<p class="ts3-foot">Wir fangen bewusst ohne KI an. Wer dieses Fundament überspringt, baut auf Sand.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Werkzeug 2</span><div class="ts3-nm">Notion AI</div><hr>'+
-          '<p>Die Intelligenz, die in diesem System arbeitet. Sie schreibt Formeln, leitet Zusammenhänge ab und füllt eine Tabelle aus einem Foto.</p>'+
-          '<p>Lädst du den Lieferschein hoch, ist es Notion AI, die Mengen und Preise herausliest und in deine Inventur einträgt.</p>'+
-          '<p class="ts3-foot">Wir nutzen sie für zweierlei: im System arbeiten und das System mitbauen.</p></div>'+
-      '</div>'
-    );
-
-    window.__ts3.sec('ts0b-bild','ts0b-fund',
-      '<h3>Die <span class="g">Bildwelt</span></h3>'+
-      '<p class="lead">Drei Wege zum selben Ziel. Du musst dich nicht für einen entscheiden, aber du sollst alle drei gesehen haben.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 1</span><div class="ts3-nm">ChatGPT und Gemini</div><hr>'+
-          '<p>Zwei Schritte. ChatGPT ist stark darin, die genaue Beschreibung dessen zu formulieren, was wir sehen wollen. Gemini erzeugt daraus mit Nano Banana Pro das Bild.</p>'+
-          '<p>Wir lassen uns also vom einen den Auftrag schreiben und vom anderen das Bild liefern.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 2</span><div class="ts3-nm">ChatGPT und Midjourney</div><hr>'+
-          '<p>Derselbe Aufbau, andere Bildsprache. Midjourney hat einen eigenen Charakter, der für manche Designvorgaben besser harmoniert.</p>'+
-          '<p>Du siehst beide Wege nebeneinander und entscheidest, was zu deinem Betrieb passt.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Weg 3</span><div class="ts3-nm">Claude Code und Higgsfield</div><hr>'+
-          '<p>Klingt technisch, heißt aber nur: wir steuern die Bildgenerierung direkt aus dem zentralen Werkzeug, ohne zwischen Programmen zu springen.</p>'+
-          '<p>Warum das später Sinn ergibt, wird klar, sobald dein System wächst.</p></div>'+
-      '</div>'
-    );
-
-    window.__ts3.sec('ts0b-rest','ts0b-bild',
-      '<h3>Veredelung und <span class="g">Steuerung</span></h3>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Werkzeug 6</span><div class="ts3-nm">Canva Pro</div><hr>'+
-          '<p>Hier wird aus einem generierten Bild ein fertiges Cover, ein Banner oder ein Sticker mit Schrift.</p>'+
-          '<p>Das ist der Schritt, der dafür sorgt, dass deine Datenbanken sich nicht nur bedienen lassen, sondern auch gut aussehen. Ein System, das gut aussieht, benutzt du am Ende wirklich.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Werkzeug 7</span><div class="ts3-nm">Claude Code</div><hr>'+
-          '<p>Damit orchestrieren und verwalten wir am Ende alles: Zugriff auf deine Dateien, Steuerung deines Notion-Systems, Auswertungen, Automatisierungen im Hintergrund.</p>'+
-          '<p>Das ist der taktische Teil des Kurses. Das System funktioniert auch ohne ihn, mit ihm wird aus deinem Backoffice ein echter Arbeitspartner.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Sieben Werkzeuge klingt nach viel. In der Praxis brauchst du am Anfang <b>zwei davon</b>, und die restlichen kommen genau dann dazu, wenn eine Lektion sie braucht. Kaufen musst du jetzt noch gar nichts.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts0bemp', anchorId:'ts0b-rest', kind:'Einrichtung',
-      animTitle:'Dein', animGold:'Einkaufszettel',
-      steps:[{n:'01',l:'Mit Notion starten'},{n:'02',l:'Notion AI dazu'},{n:'03',l:'Bildweg später'},{n:'04',l:'Claude zuletzt'}],
-      intro:'Damit du nicht sieben Abos gleichzeitig abschließt, hier die Reihenfolge, in der ich sie wirklich brauchen würde:',
-      points:[
-        'Fang mit <b>Notion</b> an, kostenlos. Das reicht für die komplette Grundlagen-Strecke und du merkst schnell, ob dir die Denkweise liegt.',
-        'Nimm <b>Notion AI</b> dazu, sobald wir anfangen, Lieferscheine auszulesen und Formeln schreiben zu lassen. Vorher liegt es brach.',
-        'Den <b>Bildweg</b> brauchst du erst, wenn deine Datenbanken stehen. Bis dahin entscheidest du in Ruhe, welcher der drei dir liegt.',
-        '<b>Claude Code</b> kommt zuletzt und ist zuwählbar. Wenn dein System läuft, weißt du selbst, ob du es willst.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts0bnext',
-      learn:[
-        'Du kennst alle <b>sieben Werkzeuge</b> und weißt, welche Aufgabe jedes hat.',
-        'Du verstehst, warum wir <b>nicht alles in ein Programm</b> kippen.',
-        'Du weißt, dass <b>Notion das Fundament</b> ist und ohne KI beginnt.',
-        'Du hast eine <b>Reihenfolge</b>, in der du die Werkzeuge dazunimmst.'
-      ],
-      next:'/die-einstiegsfragen'
-    });
-  }
-  window.__ts0brest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   L0.3 · Den KI-Markt einordnen   /die-einstiegsfragen  (bestehende Seite)
-   Erklaeranimation "Die Landkarte." — EIGENES Konzept: eine Positions-Karte
-   mit zwei Achsen (Sprache <-> Bild, antwortet <-> arbeitet mit). Die vier
-   Anbieter erscheinen nacheinander als Punkte an ihrem Platz; zuletzt wird
-   das Dreieck der drei gezogen, die wir im Kurs kombinieren.
-   Eine Verortungs-Karte gibt es im ganzen Kurs sonst nicht.
-   ============================================================ */
-(function(){
-  if(window.__ts0c) return;
-  function on(){ return /\/die-einstiegsfragen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 0.3'),
-      alt: 'Den KI-Markt einordnen: vier Anbieter, vier Staerken',
-      eyebrow: 'L 0.3',
-      title: 'Der <span class="ts-gold">KI-Markt</span>'
-    });
-    window.__ts3.body('ts0c-intro',
-      '<p>Die KI-Welt ist voll, und sie wird jede Woche voller. Jeden Tag liest du von einem neuen Modell, das angeblich alles verändert, und in den sozialen Medien klingt es, als wärst du schon abgehängt.</p>'+
-      '<p>Diesen Druck nehme ich dir gleich weg, weil er nur lähmt. Du musst nicht alles kennen und brauchst auch nicht das neueste Modell. Was du brauchst, ist ein <b>Grundverständnis, das sich nicht jede Woche ändert</b>.</p>'+
-      '<p>Wir gehen die vier großen Namen durch, ihre Stärken, und was sie kosten. Danach ist aus dem Rauschen eine überschaubare Landkarte geworden.</p>'
-    );
-    if(document.getElementById('ts0c-intro')) window.__ts0.hideRaw();
-  }
-  window.__ts0c=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0canim) return;
-  function on(){ return /\/die-einstiegsfragen\/?$/.test(location.pathname); }
-
-  var P=[
-    {n:'Claude',  f:'Anthropic', x:20, y:80, use:1},
-    {n:'ChatGPT', f:'OpenAI',    x:40, y:40, use:1},
-    {n:'Gemini',  f:'Google',    x:80, y:44, use:1},
-    {n:'Grok',    f:'xAI',       x:58, y:14, use:0}
-  ];
-  var CAPS=[
-    '<b>Anthropic mit Claude.</b> Legt seit dem ersten Tag Wert auf sauberes, nachvollziehbares Arbeiten. Es hält sich an Anweisungen und bricht auch bei der dritten zusammenhängenden Aufgabe nicht aus der Spur. Deshalb ist es hier das zentrale Werkzeug.',
-    '<b>OpenAI mit ChatGPT.</b> Der bekannteste Allrounder, besonders stark im Formulieren und darin, aus einer vagen Idee eine präzise Anweisung zu machen. Genau dafür setzen wir es ein.',
-    '<b>Google mit Gemini.</b> Stark bei Bildern und eng mit Gmail, Drive und Tabellen verzahnt. Bei uns erzeugt es aus der fertigen Beschreibung das Cover.',
-    '<b>xAI mit Grok.</b> Eng mit der Plattform X verbunden, stark bei aktuellen öffentlichen Informationen. Für ein Backoffice, das ruhig und stabil laufen soll, spielt es die kleinste Rolle.',
-    'Und hier die eigentliche Antwort auf die Frage nach dem besten Modell: Es gibt <b>keines</b>. Es gibt das passende je Aufgabe. Wir kombinieren die drei bewusst, statt alles in dasselbe Werkzeug zu kippen.'
-  ];
-  var WALK=4600;
-
-  var CSS=`
-  #ts0canim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts0canim *{box-sizing:border-box}
-  #ts0canim .mp-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts0canim .mp-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts0canim .mp-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts0canim h2.mp-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts0canim h2.mp-title .ts-gold{color:#c7b489}
-  #ts0canim .mp-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts0canim .mp-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts0canim .mp-stage{position:relative;width:min(620px,100%);aspect-ratio:1/.78;margin:0 auto;border-radius:16px;
-    background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b;border:1px solid rgba(255,255,255,.10)}
-  #ts0canim .mp-ax{position:absolute;background:rgba(255,255,255,.09)}
-  #ts0canim .mp-ax.h{left:8%;right:8%;top:50%;height:1px}
-  #ts0canim .mp-ax.v{top:8%;bottom:8%;left:50%;width:1px}
-  #ts0canim .mp-axl{position:absolute;font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-  #ts0canim .mp-axl.l{left:3%;top:48%}
-  #ts0canim .mp-axl.r{right:3%;top:48%;text-align:right}
-  #ts0canim .mp-axl.t{top:3%;left:50%;transform:translateX(-50%)}
-  #ts0canim .mp-axl.b{bottom:3%;left:50%;transform:translateX(-50%)}
-
-  #ts0canim svg.mp-tri{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-  #ts0canim .mp-tri polygon{fill:rgba(199,180,137,.07);stroke:rgba(199,180,137,.55);stroke-width:1.3;vector-effect:non-scaling-stroke;
-    opacity:0;transition:opacity .8s ease}
-  #ts0canim .mp-wrap.combo .mp-tri polygon{opacity:1}
-
-  #ts0canim .mp-p{position:absolute;transform:translate(-50%,50%);text-align:center;cursor:pointer;
-    opacity:0;transition:opacity .7s ease}
-  #ts0canim .mp-p.on{opacity:1}
-  #ts0canim .mp-dot{width:13px;height:13px;border-radius:50%;margin:0 auto;background:#0b0d14;
-    border:1.5px solid rgba(199,180,137,.5);transition:background .5s ease,box-shadow .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
-  #ts0canim .mp-p.lit .mp-dot{background:#c7b489;box-shadow:0 0 18px rgba(199,180,137,.85);transform:scale(1.25)}
-  #ts0canim .mp-p.off .mp-dot{border-color:rgba(255,255,255,.22)}
-  #ts0canim .mp-n{display:block;margin-top:7px;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13px;color:rgba(255,255,255,.6);transition:color .5s ease;white-space:nowrap}
-  #ts0canim .mp-f{display:block;font:600 8.5px/1.3 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);white-space:nowrap}
-  #ts0canim .mp-p.lit .mp-n{color:#fff}
-  #ts0canim .mp-p.lit .mp-f{color:#c7b489}
-
-  /* Endzustand = Default */
-  #ts0canim .mp-wrap:not(.js) .mp-p{opacity:1}
-  #ts0canim .mp-wrap:not(.js) .mp-tri polygon{opacity:1}
-
-  #ts0canim .mp-cap{max-width:660px;margin:26px auto 0;min-height:100px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts0canim .mp-cap b{color:#c7b489;font-weight:600}
-  #ts0canim .mp-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts0canim .mp-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts0canim .mp-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @media(max-width:820px){ #ts0canim .mp-cap{min-height:150px} #ts0canim .mp-n{font-size:11.5px} }
-  @media(prefers-reduced-motion:reduce){ #ts0canim .mp-dot{transition:none} }
-  `;
-
-  function html(){
-    var pts=P.map(function(p,i){
-      return '<div class="mp-p'+(p.use?'':' off')+'" data-i="'+i+'" style="left:'+p.x+'%;bottom:'+p.y+'%">'+
-        '<span class="mp-dot"></span><span class="mp-n">'+p.n+'</span><span class="mp-f">'+p.f+'</span></div>';
-    }).join('');
-    var tri=P.filter(function(p){return p.use;}).map(function(p){ return p.x+','+(100-p.y); }).join(' ');
-    return `
-<div class="mp-head">
-  <span class="mp-eyebrow">Die vier grossen Namen</span>
-  <h2 class="mp-title">Vier Anbieter, eine <span class="ts-gold">Landkarte</span>.</h2>
-  <p class="mp-sub">Statt einer Rangliste eine Verortung. Links geht es um Sprache, rechts um Bilder. Unten wird geantwortet, oben wird mitgearbeitet.</p>
-</div>
-<div class="mp-wrap">
-  <div class="mp-stage">
-    <span class="mp-ax h"></span><span class="mp-ax v"></span>
-    <span class="mp-axl l">Sprache</span><span class="mp-axl r">Bild</span>
-    <span class="mp-axl t">arbeitet mit</span><span class="mp-axl b">antwortet</span>
-    <svg class="mp-tri" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="${tri}"/></svg>
-    ${pts}
-  </div>
-  <p class="mp-cap"></p>
-  <div class="mp-foot"><button class="mp-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function step(root,n){
-    var wrap=root.querySelector('.mp-wrap'), ps=root.querySelectorAll('.mp-p');
-    for(var i=0;i<ps.length;i++){ ps[i].classList.toggle('on', i<=n || n>=P.length); ps[i].classList.toggle('lit', i===n); }
-    wrap.classList.toggle('combo', n>=P.length);
-    var cap=root.querySelector('.mp-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },WALK); }
-  function play(root){
-    var wrap=root.querySelector('.mp-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,CAPS.length-1); return; }
-    run(root,0);
-  }
-  function build(){
-    var el=document.createElement('div'); el.id='ts0canim'; el.innerHTML=html();
-    el.querySelector('.mp-replay').addEventListener('click',function(){ play(el); });
-    var ps=el.querySelectorAll('.mp-p');
-    for(var i=0;i<ps.length;i++){ (function(n){ ps[n].addEventListener('click',function(){ clear(); el.querySelector('.mp-wrap').classList.add('js'); step(el,n); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts0canim-css'))return;
-    var s=document.createElement('style'); s.id='ts0canim-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts0canim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts0canim')) return;
-    var anchor=document.getElementById('ts0c-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    step(el, CAPS.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.mp-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts0canimKill=function(){ clear(); };
-  window.__ts0canim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0crest) return;
-  function on(){ return /\/die-einstiegsfragen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts0canim')) return;
-
-    window.__ts3.sec('ts0c-was','ts0canim',
-      '<h3>Was diese KI eigentlich ist, einmal <span class="g">ohne Zauber</span></h3>'+
-      '<p>Im Kern ist sie ein sehr gut trainiertes Sprachmodell. Sie hat über eine unvorstellbare Menge Text gelernt und ist gut darin geworden vorherzusagen, welches Wort als Nächstes sinnvoll passt. Daraus entsteht etwas, das sich anfühlt wie ein Gespräch mit einem klugen Gegenüber.</p>'+
-      '<p>Dahinter steckt aber kein Bewusstsein und keine Magie, sondern ein Werkzeug, das du mit guten Anweisungen führst. <b>Du sitzt am Steuer, nicht die Maschine.</b> Das ist die Grundhaltung für den ganzen Kurs.</p>'+
-      '<p class="ts3-close">Und noch ein Gedanke, der vieles leichter macht: Die Hersteller verkaufen ihre Modelle wie Smartphones, mit neuen Versionsnummern und dem Gefühl, das alte sei wertlos. In der Praxis ist das selten so. Was deine Aufgabe heute zuverlässig löst, löst sie auch in einem halben Jahr.</p>'
-    );
-
-    window.__ts3.sec('ts0c-kosten','ts0c-was',
-      '<h3>Was sie dich <span class="g">kosten</span></h3>'+
-      '<p class="lead">Beim Geld bleibe ich ehrlich, weil du echtes Geld investierst. Die Zahlen sind Stand Juni 2026 und ändern sich alle paar Monate. Sieh sie als Größenordnung, im Video schauen wir live nach.</p>'+
-      '<p>Das Grundmuster ist bei allen vier gleich und deshalb leicht zu merken: Es gibt fast überall eine kostenlose Stufe zum Ausprobieren, darüber eine Standardstufe um die zwanzig US-Dollar im Monat, und darüber Power-Stufen für Vielnutzer, die in die Hunderte gehen.</p>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Anthropic</span><div class="ts3-nm">Claude</div><hr>'+
-          '<p>Einstieg für ernsthaftes Arbeiten ist Pro für rund zwanzig US-Dollar im Monat, jährlich etwas günstiger. Wer intensiver arbeitet, wechselt zu Max ab rund hundert.</p>'+
-          '<p class="ts3-foot">Genaue Zahlen und die Empfehlung stehen in Modul 3.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">OpenAI</span><div class="ts3-nm">ChatGPT</div><hr>'+
-          '<p>Neben der kostenlosen Stufe eine günstige um acht US-Dollar und die Standardstufe Plus um zwanzig im Monat. Darüber zwei Power-Stufen um hundert und zweihundert.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Google</span><div class="ts3-nm">Gemini</div><hr>'+
-          '<p>Feiner gestaffelt: eine günstige Stufe um acht US-Dollar, Pro um zwanzig im Monat samt großzügigem Speicher, Ultra ab rund hundert.</p>'+
-          '<p class="ts3-foot">Für unseren Bildeinsatz reicht die mittlere Stufe locker.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">xAI</span><div class="ts3-nm">Grok</div><hr>'+
-          '<p>Der Zugang läuft teils direkt, teils über ein X-Abo. Günstiger Einstieg um zehn US-Dollar, volle Stufe um dreißig, ganz oben um dreihundert.</p>'+
-          '<p class="ts3-foot">Für unser Backoffice ohnehin nebensächlich.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Lass dich von den hohen Stufen nicht beeindrucken. Die sind für Menschen gebaut, die den ganzen Tag pausenlos mit KI arbeiten. Für deinen Start reicht fast immer die <b>mittlere Stufe um zwanzig US-Dollar</b>, und auch nur bei den Anbietern, die du wirklich einsetzt.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts0cemp', anchorId:'ts0c-kosten', kind:'Nutzung',
-      animTitle:'Deine', animGold:'Werkzeugwahl',
-      steps:[{n:'01',l:'Aufgabe zuerst'},{n:'02',l:'Stärke zuordnen'},{n:'03',l:'Kombinieren'},{n:'04',l:'Mittlere Stufe'}],
-      intro:'Vier Punkte, die dir das Vergleichen im Netz komplett ersparen:',
-      points:[
-        'Frag immer zuerst nach der <b>Aufgabe</b>, nie nach dem besten Modell. Die Rangliste ändert sich monatlich, die Aufgabe nicht.',
-        'Ordne jeder Aufgabe die <b>Stärke</b> zu: bauen und verwalten zu Claude, formulieren zu ChatGPT, Bilder zu Gemini.',
-        'Du musst dich für <b>keinen Anbieter</b> entscheiden. Der Vorteil liegt in der Kombination, die die meisten nicht nutzen, weil sie alles in dasselbe Werkzeug kippen.',
-        'Bleib bei der <b>mittleren Stufe</b>, solange dich nichts ausbremst. Aufwärts geht jederzeit, und du merkst selbst, wann es soweit ist.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts0cnext',
-      learn:[
-        'Du kannst die <b>vier Anbieter</b> einordnen und ihre Stärken benennen.',
-        'Du weißt, dass es <b>nicht das eine beste Modell</b> gibt, sondern das passende.',
-        'Du kennst die <b>Größenordnung der Kosten</b> und dass die mittlere Stufe fast immer reicht.',
-        'Du lässt dich von <b>neuen Versionsnummern</b> nicht mehr aus der Ruhe bringen.'
-      ],
-      next:'/die-hufigsten-sorgen-klren'
-    });
-  }
-  window.__ts0crest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   L0.4 · Die haeufigsten Sorgen klaeren   (Seite NEU anzulegen)
-   Slug-Gate tolerant, weil super.so Umlaute aus dem Titel wirft:
-   /die-hufigsten-sorgen-klren  (und Schreibvarianten)
-   Erklaeranimation "Fuenf Sorgen, fuenf Antworten." — EIGENES Konzept:
-   fuenf gleich grosse Karten, die nacheinander UMKLAPPEN (3D-Flip) und auf
-   der Rueckseite die ehrliche Antwort zeigen. Ein Flip gibt es im Kurs sonst
-   nirgends.
-   ============================================================ */
-(function(){
-  if(window.__ts0d) return;
-  function on(){ return /\/die-h[a-z]*ufigsten-sorgen-kl[a-z]*ren\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 0.4'),
-      alt: 'Die haeufigsten Sorgen klaeren: Daten, Ersatz, Verlaesslichkeit, Technik, Lohnt sich das',
-      eyebrow: 'L 0.4',
-      title: 'Deine <span class="ts-gold">Sorgen</span>'
-    });
-    window.__ts3.body('ts0d-intro',
-      '<p>Bevor wir zu den Begriffen kommen, gehe ich auf die Fragen ein, die sich fast jeder Betreiber stellt und über die selten jemand ehrlich redet.</p>'+
-      '<p>Es sind fünf, und ich beantworte sie so, wie ich sie einem Kollegen am Tresen beantworten würde. <b>Ohne Schönreden</b>, und mit dem Teil, der wirklich stimmt, auch wenn er unbequem ist.</p>'+
-      '<p>Wenn eine davon dich bisher abgehalten hat, ist das kein schlechtes Zeichen. Es heißt nur, dass du dir Gedanken machst, und das ist mir lieber als jemand, der ohne Nachzudenken alles hochlädt, was in seinem Betrieb an Zahlen anfällt.</p>'
-    );
-    if(document.getElementById('ts0d-intro')) window.__ts0.hideRaw();
-  }
-  window.__ts0d=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0danim) return;
-  function on(){ return /\/die-h[a-z]*ufigsten-sorgen-kl[a-z]*ren\/?$/.test(location.pathname); }
-
-  var S=[
-    {q:'Was passiert mit meinen Daten?', a:'Du kannst steuern, was mit ihnen passiert.'},
-    {q:'Ersetzt mich das am Ende?',      a:'Es nimmt dir das Büro ab, nicht das Handwerk.'},
-    {q:'Erfindet die manchmal was?',     a:'Ja. Deshalb rechnet dein System, statt zu raten.'},
-    {q:'Muss ich programmieren können?', a:'Nein. Du schreibst Sätze, sonst nichts.'},
-    {q:'Lohnt sich das für meinen Laden?', a:'Gerade für deinen. Du hast kein Controlling.'}
-  ];
-  var CAPS=[
-    'Die wichtigste zuerst. Bei privaten Abos können deine Eingaben je nach Anbieter zur Verbesserung der Modelle verwendet werden, deshalb solltest du diese Einstellung kennen und bewusst setzen. Für Betriebe gibt es geschäftliche Stufen mit klarer Zusage und Wege über europäische Server.',
-    'Die KI nimmt dir die Arbeit ab, die dich ohnehin vom Handwerk abhält: Zettelwirtschaft, stundenlanges Kalkulieren, Zahlen aus fünf Apps zusammensuchen. Sie kocht nicht, sie steht nicht am Gast, sie spürt nicht, wenn die Stimmung kippt.',
-    'Eine KI kann Dinge behaupten, die plausibel klingen und trotzdem falsch sind. Deshalb bauen wir dein System so, dass sie mit deinen echten hinterlegten Daten arbeitet. Ein Wareneinsatz, der aus deinen Preisen berechnet wird, stimmt, weil er auf einer Formel steht.',
-    'Du gibst deine Anweisungen in normaler Sprache, so wie einem neuen Mitarbeiter. Wenn du einen Satz formulieren kannst, kannst du mit diesen Werkzeugen arbeiten.',
-    'Die große Kette hat eine Controlling-Abteilung, die ihr jeden Deckungsbeitrag ausrechnet. Du hast die nicht, und genau diese Lücke schließt dein Backoffice. Ehrlich dazu: ein paar Abende Einarbeitung kostet es. Danach arbeitet es jeden Tag, ohne Gehalt und ohne Urlaub.'
-  ];
-  var WALK=5200;
-
-  var CSS=`
-  #ts0danim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts0danim *{box-sizing:border-box}
-  #ts0danim .so-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts0danim .so-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts0danim .so-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts0danim h2.so-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts0danim h2.so-title .ts-gold{color:#c7b489}
-  #ts0danim .so-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts0danim .so-wrap{max-width:900px;margin:0 auto;padding:0 24px}
-  #ts0danim .so-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;width:min(820px,100%);margin:0 auto;perspective:1200px}
-  #ts0danim .so-c{position:relative;height:170px;cursor:pointer;transform-style:preserve-3d;
-    transition:transform .85s cubic-bezier(.16,1,.3,1)}
-  #ts0danim .so-c.flip{transform:rotateY(180deg)}
-  #ts0danim .so-f,#ts0danim .so-b{position:absolute;inset:0;border-radius:14px;padding:14px 12px;backface-visibility:hidden;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px}
-  #ts0danim .so-f{background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.11)}
-  #ts0danim .so-b{transform:rotateY(180deg);
-    background:linear-gradient(rgba(199,180,137,.10),rgba(199,180,137,.10)),#05060b;border:1px solid rgba(199,180,137,.5)}
-  #ts0danim .so-num{font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.18em;color:rgba(255,255,255,.3)}
-  #ts0danim .so-b .so-num{color:#c7b489}
-  #ts0danim .so-q{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.7)}
-  #ts0danim .so-a{font-size:12.5px;line-height:1.45;color:#fff}
-  #ts0danim .so-c.on .so-b{box-shadow:0 0 36px -12px rgba(199,180,137,.65)}
-
-  /* Endzustand = Default: ohne JS liegen alle Antworten offen */
-  #ts0danim .so-wrap:not(.js) .so-c{transform:rotateY(180deg)}
-
-  #ts0danim .so-cap{max-width:680px;margin:30px auto 0;min-height:104px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts0danim .so-cap b{color:#c7b489;font-weight:600}
-  #ts0danim .so-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts0danim .so-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts0danim .so-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @media(max-width:820px){
-    #ts0danim .so-grid{grid-template-columns:repeat(2,1fr)}
-    #ts0danim .so-c{height:150px}
-    #ts0danim .so-cap{min-height:170px}
-  }
-  @media(prefers-reduced-motion:reduce){ #ts0danim .so-c{transition:none} }
-  `;
-
-  function html(){
-    var cs=S.map(function(s,i){
-      var n='0'+(i+1);
-      return '<div class="so-c" data-i="'+i+'">'+
-        '<div class="so-f"><span class="so-num">'+n+'</span><span class="so-q">'+s.q+'</span></div>'+
-        '<div class="so-b"><span class="so-num">'+n+'</span><span class="so-a">'+s.a+'</span></div>'+
-      '</div>';
-    }).join('');
-    return `
-<div class="so-head">
-  <span class="so-eyebrow">Ehrlich beantwortet</span>
-  <h2 class="so-title">Fünf Sorgen, fünf <span class="ts-gold">Antworten</span>.</h2>
-  <p class="so-sub">Klick auf eine Karte, dann siehst du die kurze Antwort. Die ausführliche steht darunter.</p>
-</div>
-<div class="so-wrap">
-  <div class="so-grid">${cs}</div>
-  <p class="so-cap"></p>
-  <div class="so-foot"><button class="so-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function step(root,n){
-    var cs=root.querySelectorAll('.so-c');
-    for(var i=0;i<cs.length;i++){ cs[i].classList.toggle('flip', i<=n); cs[i].classList.toggle('on', i===n); }
-    var cap=root.querySelector('.so-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-  function run(root,i){ clear(); step(root,i); if(i<S.length-1) later(function(){ run(root,i+1); },WALK); }
-  function play(root){
-    var wrap=root.querySelector('.so-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,S.length-1); return; }
-    run(root,0);
-  }
-  function build(){
-    var el=document.createElement('div'); el.id='ts0danim'; el.innerHTML=html();
-    el.querySelector('.so-replay').addEventListener('click',function(){ play(el); });
-    var cs=el.querySelectorAll('.so-c');
-    for(var i=0;i<cs.length;i++){ (function(n){ cs[n].addEventListener('click',function(){ clear(); el.querySelector('.so-wrap').classList.add('js'); step(el,n); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts0danim-css'))return;
-    var s=document.createElement('style'); s.id='ts0danim-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts0danim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts0danim')) return;
-    var anchor=document.getElementById('ts0d-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    step(el, S.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.so-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts0danimKill=function(){ clear(); };
-  window.__ts0danim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0drest) return;
-  function on(){ return /\/die-h[a-z]*ufigsten-sorgen-kl[a-z]*ren\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts0danim')) return;
-
-    window.__ts3.sec('ts0d-daten','ts0danim',
-      '<h3>Die zwei Sorgen, die am <span class="g">meisten wiegen</span></h3>'+
-      '<p class="lead">Bei diesen beiden lohnt es sich, genauer hinzuschauen, weil die kurze Antwort zu kurz greift.</p>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Sorge 1</span><div class="ts3-nm">Deine Daten</div><hr>'+
-          '<p>Du gibst dort Rezepturen ein, Einkaufspreise, Umsätze, vielleicht Personalkosten. Dinge, die niemanden etwas angehen.</p>'+
-          '<p>Die Antwort hat zwei Seiten. Bei privaten Abos kann es je nach Anbieter und Einstellung passieren, dass deine Eingaben zur Verbesserung der Modelle verwendet werden. Diese Einstellung solltest du kennen und bewusst setzen.</p>'+
-          '<p>Für einen Betrieb, der auf Nummer sicher gehen will, gibt es geschäftliche Stufen mit der klaren Zusage, dass nicht trainiert wird, und es gibt Wege über europäische Server. Wie das geht, gehört in den Claude-Teil, dort schauen wir es uns an.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Sorge 3</span><div class="ts3-nm">Kann ich mich darauf verlassen?</div><hr>'+
-          '<p>Eine KI kann Dinge behaupten, die plausibel klingen und trotzdem falsch sind, weil sie im Kern Wahrscheinlichkeiten für das nächste Wort berechnet. Das musst du wissen.</p>'+
-          '<p>Deshalb bauen wir dein System bewusst so, dass die KI mit deinen echten hinterlegten Daten arbeitet statt aus dem Gedächtnis zu raten. Wird dein Wareneinsatz aus deinen eingetragenen Preisen berechnet, dann stimmt er, weil eine Formel dahintersteht.</p>'+
-          '<p>Und bei allem, was wirklich zählt, schaust du einmal drüber. Diese kurze Kontrolle gehört zum Handwerk und ist der Grund, warum dein System verlässlich bleibt.</p></div>'+
-      '</div>'
-    );
-
-    window.__ts3.sec('ts0d-rest','ts0d-daten',
-      '<h3>Und die drei <span class="g">anderen</span></h3>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Sorge 2</span><div class="ts3-nm">Ersetzt mich das?</div><hr>'+
-          '<p>Sie nimmt dir die Arbeit ab, die dich vom eigentlichen Handwerk abhält. Zeit zurück, die du gerade im Büro verlierst.</p>'+
-          '<p>Dasselbe gilt fürs Team. Niemand muss Angst haben, weil du eine saubere Kalkulation hast. Eher im Gegenteil: ein Betrieb, der seine Zahlen kennt, steht sicherer.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Sorge 4</span><div class="ts3-nm">Muss ich das können?</div><hr>'+
-          '<p>Nein. Du gibst deine Anweisungen in ganz normaler Sprache, so wie einem neuen Mitarbeiter.</p>'+
-          '<p>Den Rest zeige ich Schritt für Schritt, und wir gehen kein Tempo, bei dem du abgehängt wirst.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Sorge 5</span><div class="ts3-nm">Lohnt sich das?</div><hr>'+
-          '<p>Gerade für kleinere Betriebe, und zwar aus einem einfachen Grund: Die große Kette hat eine Controlling-Abteilung. Du hast die nicht.</p>'+
-          '<p>Ehrlich dazu: ein paar Abende Einarbeitung kostet es, bis das Fundament steht. Danach arbeitet es jeden Tag für dich.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Wenn dich eine dieser fünf bisher abgehalten hat, weißt du jetzt, woran es lag. <b>Keine davon ist ein Grund, es nicht zu versuchen</b>, aber jede ist ein Grund, es sauber zu machen.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts0demp', anchorId:'ts0d-rest', kind:'Einrichtung',
-      animTitle:'Deine', animGold:'Absicherung',
-      steps:[{n:'01',l:'Einstellung prüfen'},{n:'02',l:'Sensibles trennen'},{n:'03',l:'Zahlen rechnen lassen'},{n:'04',l:'Kritisches gegenlesen'}],
-      intro:'Vier Handgriffe, mit denen du die Punkte oben von vornherein sauber löst:',
-      points:[
-        'Geh einmal in die <b>Datenschutz-Einstellung</b> deines Anbieters und setz sie bewusst, statt sie auf dem Standard zu lassen.',
-        'Halte <b>Personaldaten und Namen</b> aus dem System heraus, solange du privat abgerechnet bist. Zahlen brauchen keine Klarnamen.',
-        'Lass Zahlen <b>rechnen statt schätzen</b>. Alles, was aus deinen eingetragenen Werten kommt, ist belastbar. Alles, was die KI aus dem Kopf sagt, ist es nicht.',
-        'Lies <b>kritische Zahlen einmal gegen</b>, bevor du danach entscheidest. Das dauert eine Minute und ist der Unterschied zwischen Werkzeug und Glücksspiel.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts0dnext',
-      learn:[
-        'Du weißt, dass du <b>steuern kannst</b>, was mit deinen Daten passiert.',
-        'Du kennst den Unterschied zwischen <b>Büroarbeit und Handwerk</b> und was die KI davon übernimmt.',
-        'Du weißt, warum dein System <b>rechnet statt rät</b>.',
-        'Du hast erkannt, dass gerade <b>kleine Betriebe</b> am meisten gewinnen.'
-      ],
-      next:'/agents-und-automatisierungen-unterscheiden'
-    });
-  }
-  window.__ts0drest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   L0.5 · Agents und Automatisierungen unterscheiden   (Seite NEU anzulegen)
-   /agents-und-automatisierungen-unterscheiden
-   Erklaeranimation "Der Ausloeser." — EIGENES Konzept: EINE Kette aus vier
-   Arbeitsschritten in der Mitte. Darueber zwei moegliche Ausloeser (deine
-   Hand / eine Uhr). Je Beat startet ein anderer Ausloeser dieselbe Kette.
-   Aussage: die Arbeit ist identisch, nur der Startknopf ist ein anderer.
-   Ein Objekt mit zwei Eingaengen — im Kurs sonst nirgends.
-   ============================================================ */
-(function(){
-  if(window.__ts0e) return;
-  function on(){ return /\/agents-und-automatisierungen-unterscheiden\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 0.5'),
-      alt: 'Agents und Automatisierungen unterscheiden: der Ausloeser macht den Unterschied',
-      eyebrow: 'L 0.5',
-      title: 'Der <span class="ts-gold">Auslöser</span>'
-    });
-    window.__ts3.body('ts0e-intro',
-      '<p>Zwei Begriffe begegnen dir im Kurs immer wieder, und beide klingen technischer, als sie sind. Ich erkläre sie dir an deinem eigenen Alltag, dann vergisst du sie nie wieder.</p>'+
-      '<p>Der Trick dabei: Beide erledigen <b>dieselbe Art von Arbeit</b>. Der einzige Unterschied liegt darin, wer den Startknopf drückt.</p>'+
-      '<p>Am Ende dieser Lektion weißt du außerdem, mit welchem schlanken Aufbau du in diesen Kurs startest und was getrost warten kann. Damit ist die Einleitung durch, und wir fangen an zu bauen.</p>'
-    );
-    if(document.getElementById('ts0e-intro')) window.__ts0.hideRaw();
-  }
-  window.__ts0e=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0eanim) return;
-  function on(){ return /\/agents-und-automatisierungen-unterscheiden\/?$/.test(location.pathname); }
-
-  var CHAIN=['Umsätze holen','Zuordnen','Eintragen','Melden'];
-  var CAPS=[
-    'Dieselbe Kette aus vier Schritten. Wer sie anstößt, entscheidet, ob wir von einem Agenten oder von einer Automatisierung sprechen.',
-    'Du drückst. Das ist der <b>Agent</b>: Du gibst ihm den Auftrag, er erledigt die ganze Kette selbstständig und bringt dir das fertige Ergebnis zurück. Wie ein guter Mitarbeiter, dem du eine Aufgabe in die Hand drückst.',
-    'Die Uhr drückt. Das ist die <b>Automatisierung</b>: Du richtest sie einmal ein, danach wartet sie auf ein Ereignis oder eine Uhrzeit und läuft von allein. Auch wenn dein Rechner aus ist und du schläfst.',
-    'Gleiche Arbeit, gleiches Ergebnis. <b>Der Unterschied liegt allein im Auslöser</b>, und der bist beim Agenten du und bei der Automatisierung ein Ereignis oder eine Uhrzeit.'
-  ];
-  var WALK=5200;
-
-  var CSS=`
-  #ts0eanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts0eanim *{box-sizing:border-box}
-  #ts0eanim .au-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts0eanim .au-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts0eanim .au-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts0eanim h2.au-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts0eanim h2.au-title .ts-gold{color:#c7b489}
-  #ts0eanim .au-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts0eanim .au-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts0eanim .au-stage{width:min(620px,100%);margin:0 auto}
-
-  /* zwei gleich grosse Ausloeser auf derselben Achse */
-  #ts0eanim .au-trig{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  #ts0eanim .au-t{height:92px;border-radius:14px;padding:0 12px;cursor:pointer;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.11);transition:border-color .5s ease,box-shadow .5s ease,transform .5s cubic-bezier(.16,1,.3,1)}
-  #ts0eanim .au-t .ic{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);position:relative;transition:border-color .5s ease,box-shadow .5s ease}
-  #ts0eanim .au-t .ic::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgba(255,255,255,.22);transition:background .5s ease}
-  #ts0eanim .au-t .ic.uhr::before{content:"";position:absolute;left:50%;top:4px;width:1.5px;height:6px;margin-left:-.75px;background:rgba(255,255,255,.22);transform-origin:bottom center;transition:background .5s ease}
-  #ts0eanim .au-t .n{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:14px;color:rgba(255,255,255,.55);transition:color .5s ease}
-  #ts0eanim .au-t .s{font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);transition:color .5s ease}
-  #ts0eanim .au-t.on{border-color:rgba(199,180,137,.85);box-shadow:0 0 36px -12px rgba(199,180,137,.6);transform:translateY(-3px)}
-  #ts0eanim .au-t.on .ic{border-color:rgba(199,180,137,.85);box-shadow:0 0 16px -4px rgba(199,180,137,.7)}
-  #ts0eanim .au-t.on .ic::after{background:#c7b489}
-  #ts0eanim .au-t.on .ic.uhr::before{background:#c7b489}
-  #ts0eanim .au-t.on .n{color:#fff}
-  #ts0eanim .au-t.on .s{color:#c7b489}
-
-  /* Zufuehrung im Zwischenraum — nie unter den Kacheln */
-  #ts0eanim .au-feed{position:relative;height:40px}
-  #ts0eanim .au-feed span{position:absolute;top:0;width:1.5px;height:40px;background:rgba(199,180,137,.16);transition:background .5s ease}
-  #ts0eanim .au-feed span.a{left:25%}
-  #ts0eanim .au-feed span.b{left:75%}
-  #ts0eanim .au-feed span.lit{background:rgba(199,180,137,.75)}
-  #ts0eanim .au-feed i{position:absolute;top:0;width:7px;height:7px;margin-left:-2.75px;border-radius:50%;background:#c7b489;
-    box-shadow:0 0 12px rgba(199,180,137,.9);opacity:0}
-  #ts0eanim .au-feed i.a{left:25%}
-  #ts0eanim .au-feed i.b{left:75%}
-  #ts0eanim .au-feed i.run{animation:auDrop 1.1s cubic-bezier(.45,0,.55,1) infinite}
-
-  /* die eine Kette */
-  #ts0eanim .au-chain{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  #ts0eanim .au-s{height:74px;border-radius:12px;padding:0 8px;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;
-    border:1px solid rgba(255,255,255,.10);transition:border-color .5s ease,box-shadow .5s ease}
-  #ts0eanim .au-s .k{font:700 9px/1 -apple-system,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.28);transition:color .5s ease}
-  #ts0eanim .au-s .l{font-size:11.5px;line-height:1.25;color:rgba(255,255,255,.5);transition:color .5s ease}
-  #ts0eanim .au-s.lit{border-color:rgba(199,180,137,.55);box-shadow:0 0 26px -12px rgba(199,180,137,.5)}
-  #ts0eanim .au-s.lit .k{color:#c7b489}
-  #ts0eanim .au-s.lit .l{color:#fff}
-  #ts0eanim .au-out{margin-top:12px;border-radius:12px;padding:12px 14px;text-align:center;
-    background:linear-gradient(rgba(199,180,137,.08),rgba(199,180,137,.08)),#05060b;border:1px solid rgba(199,180,137,.3);
-    font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.55);transition:color .5s ease,border-color .5s ease}
-  #ts0eanim .au-out b{color:#c7b489;font-weight:600}
-  #ts0eanim .au-wrap.done .au-out{color:#fff;border-color:rgba(199,180,137,.6)}
-
-  /* Endzustand = Default */
-  #ts0eanim .au-wrap:not(.js) .au-s{border-color:rgba(199,180,137,.55)}
-  #ts0eanim .au-wrap:not(.js) .au-s .l{color:#fff}
-  #ts0eanim .au-wrap:not(.js) .au-t{border-color:rgba(199,180,137,.4)}
-
-  #ts0eanim .au-cap{max-width:660px;margin:28px auto 0;min-height:100px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts0eanim .au-cap b{color:#c7b489;font-weight:600}
-  #ts0eanim .au-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts0eanim .au-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts0eanim .au-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  @keyframes auDrop{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1;top:33px}100%{opacity:0;top:33px}}
-  @media(max-width:820px){
-    #ts0eanim .au-chain{grid-template-columns:repeat(2,1fr)}
-    #ts0eanim .au-cap{min-height:150px}
-  }
-  @media(prefers-reduced-motion:reduce){ #ts0eanim .au-feed i.run{animation:none;opacity:1;top:16px} }
-  `;
-
-  function html(){
-    var steps=CHAIN.map(function(c,i){
-      return '<div class="au-s" data-i="'+i+'"><span class="k">0'+(i+1)+'</span><span class="l">'+c+'</span></div>';
-    }).join('');
-    return `
-<div class="au-head">
-  <span class="au-eyebrow">Zwei Begriffe, ein Unterschied</span>
-  <h2 class="au-title">Wer drückt den <span class="ts-gold">Startknopf</span>?</h2>
-  <p class="au-sub">Unten läuft immer dieselbe Kette: Umsätze holen, zuordnen, eintragen, melden. Oben stehen die zwei Möglichkeiten, sie in Gang zu setzen.</p>
-</div>
-<div class="au-wrap">
-  <div class="au-stage">
-    <div class="au-trig">
-      <div class="au-t" data-i="0"><span class="ic"></span><span class="n">Du</span><span class="s">Agent</span></div>
-      <div class="au-t" data-i="1"><span class="ic uhr"></span><span class="n">02:00 Uhr</span><span class="s">Automatisierung</span></div>
-    </div>
-    <div class="au-feed"><span class="a"></span><span class="b"></span><i class="a"></i><i class="b"></i></div>
-    <div class="au-chain">${steps}</div>
-    <div class="au-out">Ergebnis: <b>Umsätze stehen in deiner Kennzahlen-Übersicht.</b></div>
-  </div>
-  <p class="au-cap"></p>
-  <div class="au-foot"><button class="au-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function setChain(root,active){
-    var ss=root.querySelectorAll('.au-s');
-    for(var i=0;i<ss.length;i++) ss[i].classList.toggle('lit', active);
-  }
-  function step(root,n){
-    var wrap=root.querySelector('.au-wrap');
-    var ts=root.querySelectorAll('.au-t');
-    var lines=root.querySelectorAll('.au-feed span'), dots=root.querySelectorAll('.au-feed i');
-    ts[0].classList.toggle('on', n===1);
-    ts[1].classList.toggle('on', n===2);
-    lines[0].classList.toggle('lit', n===1); lines[1].classList.toggle('lit', n===2);
-    dots[0].classList.toggle('run', n===1); dots[1].classList.toggle('run', n===2);
-    setChain(root, n>=1);
-    wrap.classList.toggle('done', n>=3);
-    if(n>=3){ ts[0].classList.add('on'); ts[1].classList.add('on'); }
-    var cap=root.querySelector('.au-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },WALK); }
-  function play(root){
-    var wrap=root.querySelector('.au-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clear(); step(root,CAPS.length-1); return; }
-    run(root,0);
-  }
-  function build(){
-    var el=document.createElement('div'); el.id='ts0eanim'; el.innerHTML=html();
-    el.querySelector('.au-replay').addEventListener('click',function(){ play(el); });
-    var ts=el.querySelectorAll('.au-t');
-    for(var i=0;i<ts.length;i++){ (function(n){ ts[n].addEventListener('click',function(){ clear(); el.querySelector('.au-wrap').classList.add('js'); step(el,n+1); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts0eanim-css'))return;
-    var s=document.createElement('style'); s.id='ts0eanim-css'; s.textContent=CSS; document.head.appendChild(s); }
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts0eanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts0eanim')) return;
-    var anchor=document.getElementById('ts0e-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    step(el, CAPS.length-1);
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.au-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts0eanimKill=function(){ clear(); };
-  window.__ts0eanim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-(function(){
-  if(window.__ts0erest) return;
-  function on(){ return /\/agents-und-automatisierungen-unterscheiden\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts0eanim')) return;
-
-    window.__ts3.sec('ts0e-zwei','ts0eanim',
-      '<h3>Die zwei Begriffe an deinem <span class="g">Alltag</span></h3>'+
-      '<div class="ts3-cards c2">'+
-        '<div class="ts3-card"><span class="ts3-eb">Begriff 1</span><div class="ts3-nm">Der Agent</div><hr>'+
-          '<p>Ein Helfer, der eine mehrstufige Aufgabe übernimmt statt nur eine einzelne Frage zu beantworten. Das ist der Unterschied zum normalen Chat: der antwortet, der Agent handelt.</p>'+
-          '<p>Du gibst ihm den Auftrag, deine Inventur zu aktualisieren. Ein Chat würde erklären, wie man eine Inventur macht. Der Agent macht sie: Mengen und Preise vom Lieferschein lesen, Produkte in der Datenbank finden, neue Preise eintragen, dir melden, was sich geändert hat.</p>'+
-          '<p class="ts3-foot">Merkregel: Den Agenten beauftragst du, und er bringt das Ergebnis fertig zurück.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Begriff 2</span><div class="ts3-nm">Die Automatisierung</div><hr>'+
-          '<p>Ein Ablauf, der von selbst läuft, ohne dass du ihn jedes Mal anstößt. Inhaltlich passiert dasselbe, nur der Auslöser ist ein anderer.</p>'+
-          '<p>Jede Nacht um zwei zieht sie deine Umsätze von den Lieferdiensten zusammen und schreibt sie in deine Kennzahlen. Du machst nichts, du schläfst. Wenn du morgens aufschließt, stehen die Zahlen da.</p>'+
-          '<p class="ts3-foot">Merkregel: Die Automatisierung richtest du einmal ein, danach läuft sie auch bei ausgeschaltetem Rechner.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Beide nehmen dir Arbeit ab. Der Agent ist der Mitarbeiter, dem du eine Aufgabe in die Hand drückst. Die Automatisierung ist die Zeitschaltuhr, die das Licht jeden Abend anschaltet, ohne dass du daran denkst.</p>'
-    );
-
-    window.__ts3.sec('ts0e-start','ts0e-zwei',
-      '<h3>Womit du wirklich <span class="g">startest</span></h3>'+
-      '<p class="lead">Und damit zu der Frage, auf die es für dich am meisten ankommt. Du brauchst nicht alles, was der Markt hergibt, sondern das Richtige für deinen Zweck.</p>'+
-      '<div class="ts3-do">'+
-        '<span class="ts3-eb">Dein Startgepäck</span>'+
-        '<ol>'+
-          '<li>Für den <b>Kern deines Systems</b>, also das Bauen und Verwalten, reicht ein gut gewähltes Hauptwerkzeug. In diesem Kurs ist das Notion zusammen mit Notion AI. Hier verbringst du die meiste Zeit, hier entsteht der Wert.</li>'+
-          '<li>Für die <b>Bildwelt</b> kommen ChatGPT und Gemini dazu, das eine für die Beschreibungen, das andere für die Bilder. Ein überschaubarer, klar umrissener Zusatz.</li>'+
-          '<li>Alles Weitere ist <b>Erweiterung, kein Startgepäck</b>. Der tiefere Claude-Teil und ein Automatisierungs-Werkzeug sind großartig, aber du gehst sie an, wenn dein Betrieb danach verlangt. Nicht vorher.</li>'+
-        '</ol>'+
-      '</div>'+
-      '<p class="ts3-close">Mein dringender Rat, und das ist einer der wichtigsten Sätze in diesem Modul: <b>Fang schlank an.</b> Ein überladenes Setup bremst dich mehr, als es hilft. Ausbauen kannst du jederzeit, und du wirst es tun, sobald es sich lohnt. Der Weg führt vom Einfachen zum Komplexen, nie umgekehrt.</p>'
-    );
-
-    window.__ts3.sec('ts0e-ende','ts0e-start',
-      '<h3>Was du jetzt <span class="g">hast</span></h3>'+
-      '<p>Du kennst die vier Stellen in deinem Tag, an denen Information entsteht. Du weißt, welches Werkzeug wofür da ist und in welcher Reihenfolge du sie dazunimmst. Du kannst die vier Anbieter einordnen und weißt, was sie ungefähr kosten. Du hast ehrliche Antworten auf die fünf Fragen bekommen, die fast jeder hat. Und du kannst Agent und Automatisierung an deinem eigenen Betrieb unterscheiden.</p>'+
-      '<p>Das Rauschen da draußen geht weiter. Du stehst jetzt nur nicht mehr mittendrin, sondern schaust mit ruhigem Blick darauf.</p>'+
-      '<p class="ts3-close">Und genau aus dieser Position heraus starten wir jetzt damit, dein eigenes <b>Notion AI Backoffice</b> zu bauen.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts0eemp', anchorId:'ts0e-ende', kind:'Nutzung',
-      animTitle:'Deine', animGold:'erste Entscheidung',
-      steps:[{n:'01',l:'Muss es ohne dich laufen?'},{n:'02',l:'Nein: Agent'},{n:'03',l:'Ja: Automatisierung'},{n:'04',l:'Schlank starten'}],
-      intro:'Eine Frage genügt, um bei jeder Aufgabe zu wissen, was du eigentlich bauen willst:',
-      points:[
-        'Frag dich: <b>Muss das laufen, wenn mein Rechner aus ist?</b> Diese eine Frage trennt die beiden zuverlässig.',
-        'Lautet die Antwort nein, brauchst du einen <b>Agenten</b>. Du stößt ihn an, wenn du das Ergebnis brauchst, und sparst dir die ganze Einrichtung.',
-        'Lautet sie ja, brauchst du eine <b>Automatisierung</b>. Die kostet einmal Aufbau und läuft danach ohne dich weiter.',
-        'Und im Zweifel: <b>schlank starten</b>. Was du wirklich brauchst, meldet sich von selbst, wenn dein System wächst.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts0enext',
-      learn:[
-        'Du kannst <b>Agent und Automatisierung</b> an deinem eigenen Betrieb unterscheiden.',
-        'Du weißt, dass der Unterschied allein im <b>Auslöser</b> liegt.',
-        'Du kennst dein <b>Startgepäck</b>: Notion plus Notion AI, Bildwelt danach.',
-        'Du hast die Haltung: <b>schlank anfangen</b> und ausbauen, wenn es sich lohnt.'
-      ],
-      next:'/modul-1-notion-grundlagen-3-lernpfade'
-    });
-  }
-  window.__ts0erest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
+/* MODUL 0 alt (03.08.2026, __ts0*): am 01.11.2026 durch die Zone
+   NEUBAU MODUL 0 (window.__tsn0) ersetzt. Alter Stand in git (bc6eb4a). */
 
 /* ================================================================
    NEUBAU-ZONEN (01.11.2026) — je Modul-Chat eine eigene Zone.
@@ -35686,6 +34347,1237 @@ var TSISL_TEAM_ONB_V2=[
    ================================================================ */
 
 /* >>> NEUBAU MODUL 0 (Einleitung, Startseite, Abschluss) — ANFANG >>> */
+/* ============================================================
+   NEUBAU MODUL 0 · Einfuehrung + Startseite + Abschluss (01.11.2026)
+   Eigene Bibliothek window.__tsn0 (Namensraum tsn0-), unabhaengig von
+   __ts3/__ts4. Werte fuer Hero, Einleitung, Sektionskopf, Empfehlung und
+   Learnings 1:1 nach Abschnitts-Katalog 01/02/07/09.
+   Robustheit: Endzustand = Default (Start haengt an .js), Reveal nach
+   tsReveal-Muster (IO + Scroll + Intervall + 9-s-Notbremse), Zahlen mit
+   rAF-unabhaengigem Hart-Setzer, Observer nur ueber window.__tsMO.
+   Erster Blick komplett: die Seite erscheint erst, wenn das Hero-Bild
+   geladen ist (load, 2,5-s-Failsafe), dann alles in einem Zug.
+   ============================================================ */
+(function(){
+  if(window.__tsn0) return;
+  var BASE='https://tastyrob123.github.io/kurs-code/';
+  var LOGO=BASE+'assets/au80tp.png';
+
+  function tsReveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check,true); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.86 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true,capture:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+
+  function h(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+
+  /* ---- Abschnitt 01: Hero ---- */
+  function hero(cfg){
+    var x=h('div','ts-hero tsn0-hero');
+    x.innerHTML=
+      '<img class="tsn0-hero__img" alt="'+cfg.alt+'" src="'+cfg.img+'" fetchpriority="high" decoding="sync">'+
+      '<div class="tsn0-hero__text">'+
+        '<img class="tsn0-hero__logo" alt="Tasty Studios" src="'+LOGO+'" decoding="sync">'+
+        '<div class="tsn0-hero__eyebrow">'+cfg.eyebrow+'</div>'+
+        '<h1 class="tsn0-hero__title">'+cfg.title+'</h1>'+
+      '</div>';
+    return x;
+  }
+  /* ---- Abschnitt 01: Einleitung ---- */
+  function intro(html){ return h('div','tsn0-body',html); }
+  /* ---- Sektionskopf (Katalog 02, Kette-Groesse) ---- */
+  function head(eb, title, sub){
+    return '<div class="tsn0-head">'+(eb?'<div class="tsn0-eb">'+eb+'</div>':'')+
+      '<h2 class="tsn0-h2">'+title+'</h2>'+(sub?'<p class="tsn0-sub">'+sub+'</p>':'')+'</div>';
+  }
+  /* ---- Inhalts-Sektion ---- */
+  function sec(id, html){ var s=h('section','tsn0-sec',html); s.id=id; return s; }
+  /* ---- Replay-Knopf ---- */
+  function replayBtn(){ return '<button type="button" class="tsn0-replay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v6h6"/></svg>Neu abspielen</button>'; }
+
+  /* ---- Abschnitt 07: Empfehlungs-Kachel (Verhalten 1:1 aus #tszein/#tspkemp) ---- */
+  function emp(cfg){
+    var el=h('div','tsn0-emp'); el.id=cfg.id;
+    var steps=cfg.steps.map(function(s,i){ return '<div class="emp-step"><span class="emp-step-n">'+(i<9?'0':'')+(i+1)+'</span><span class="emp-step-l">'+s+'</span></div>'; }).join('');
+    var pts=cfg.points.map(function(p){ return '<li>'+p+'</li>'; }).join('');
+    el.innerHTML='<div class="emp-grid">'+
+      '<svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+      '<div class="emp-anim"><div class="emp-anim-hd">'+cfg.animTitle+' <span>'+cfg.animGold+'</span></div>'+steps+'</div>'+
+      '<div class="emp-text"><h3 class="emp-h">Empfehlung zur <span class="eg">'+cfg.kind+'</span></h3>'+
+      '<p class="emp-intro">'+cfg.intro+'</p><ol class="emp-ol">'+pts+'</ol></div></div>';
+    return el;
+  }
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit||getComputedStyle(svg).display==='none'){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2, dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+      void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function empArm(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li'), idx=-1, iv=null;
+    el.classList.add('js');
+    function tick(){
+      if(!el.isConnected){ stop(); return; }
+      idx=(idx+1)%steps.length;
+      for(var i=0;i<steps.length;i++){ steps[i].classList.toggle('on',i===idx); if(lis[i]) lis[i].classList.toggle('lit',i===idx); }
+      setTimeout(function(){ empDraw(el); },30);
+    }
+    function start(){ if(iv) return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    tsReveal(el,function(){ el.classList.add('in'); if(!reduced) start(); else { steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); } });
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(el.classList.contains('in')&&!reduced) start(); });
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ empDraw(el); });
+  }
+
+  /* ---- Abschnitt 09: Learnings-Orbs + Weiter-Knopf ---- */
+  function learn(cfg){
+    var el=h('div','tsn0-learn'); el.id='tsn0-learn';
+    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+cfg.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'+
+      '<div id="ts-next-wrap">'+nextHTML(cfg)+'</div>';
+    return el;
+  }
+  function nextHTML(cfg){
+    return '<a id="ts-next" href="'+cfg.next+'">'+(cfg.nextLabel||'Nächste Lektion')+' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+  }
+  function learnArm(el){ el.classList.add('js'); tsReveal(el,function(){ el.classList.add('in'); }); }
+
+  /* ---- Zahlen: Count-up mit rAF-unabhaengigem Hart-Setzer (Katalog Regel 15b) ---- */
+  function countUp(node, to, dec, suffix, dur, delay){
+    dec=dec||0; suffix=suffix||''; dur=dur||1100; delay=delay||0;
+    var done=false;
+    function fmt(v){ return v.toFixed(dec).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')+suffix; }
+    function fin(){ if(done) return; done=true; node.textContent=fmt(to); }
+    if(reduced){ fin(); return; }
+    setTimeout(function(){
+      var t0=null;
+      function step(t){ if(done) return; if(!t0) t0=t; var p=Math.min(1,(t-t0)/dur); p=1-Math.pow(1-p,3);
+        node.textContent=fmt(to*p); if(p<1) requestAnimationFrame(step); else fin(); }
+      requestAnimationFrame(step);
+    },delay);
+    setTimeout(fin, delay+dur+400);
+  }
+
+  /* ---- Seiten-Register + Mount ---- */
+  var PAGES=[];
+  function path(){ return location.pathname.replace(/\/+$/,'')||'/'; }
+  function cur(){ var p=path(); for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(p)) return PAGES[i]; } return null; }
+
+  function unmount(){
+    var ex=document.getElementById('tsn0-page'); if(ex&&ex.parentNode) ex.parentNode.removeChild(ex);
+    var nr=document.querySelector('.notion-root[data-tsn0hidden]'); if(nr){ nr.style.display=''; nr.removeAttribute('data-tsn0hidden'); }
+    document.body && document.body.classList.remove('tsn0-on');
+    document.documentElement.removeAttribute('data-tsn0');
+  }
+
+  function mount(){
+    var p=cur(), ex=document.getElementById('tsn0-page');
+    if(ex && (!p || ex.getAttribute('data-k')!==p.key)) unmount();
+    if(!p) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    var nr=sc.querySelector('.notion-root'); if(!nr) return;
+    if(document.getElementById('tsn0-page')){ keep(p,sc,nr); return; }
+    var page=h('div','tsn0-page'); page.id='tsn0-page'; page.setAttribute('data-k',p.key);
+    var parts;
+    try{ parts=p.build(); }catch(e){ if(window.console) console.warn('tsn0',p.key,e); return; }
+    if(p.hero) page.appendChild(hero(p.hero));
+    parts.forEach(function(x){ if(x) page.appendChild(x); });
+    if(p.learn) page.appendChild(learn(p.learn));
+    if(p.place) p.place(sc,nr,page); else sc.insertBefore(page, nr);
+    document.documentElement.setAttribute('data-tsn0',p.key);
+    document.body.classList.add('tsn0-on');
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+    keep(p,sc,nr);
+    /* Erster Blick komplett: erst zeigen, wenn das Hero-Bild da ist */
+    var img=page.querySelector('.tsn0-hero__img');
+    function show(){ page.classList.add('go'); }
+    if(!img || img.complete) show();
+    else { img.addEventListener('load',show); img.addEventListener('error',show); setTimeout(show,2500); }
+    page.querySelectorAll('.tsn0-emp').forEach(empArm);
+    var ln=page.querySelector('.tsn0-learn'); if(ln) learnArm(ln);
+    if(p.after){ try{ p.after(page); }catch(e){ if(window.console) console.warn('tsn0 after',p.key,e); } }
+  }
+  /* Laufende Pflege: Notion-Rohinhalt verborgen halten, Weiter-Knopf nur einmal und in unserem Block */
+  function keep(p,sc,nr){
+    if(p.hideRaw!==false && !nr.getAttribute('data-tsn0hidden')){ nr.setAttribute('data-tsn0hidden','1'); nr.style.display='none'; }
+    if(p.keep) try{ p.keep(sc,nr); }catch(e){}
+    var host=document.getElementById('tsn0-learn');
+    if(host && p.learn){
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')){ var w=h('div',null,nextHTML(p.learn)); w.id='ts-next-wrap'; host.appendChild(w); }
+    }
+  }
+
+  window.__tsn0={ BASE:BASE, LOGO:LOGO, h:h, head:head, sec:sec, intro:intro, emp:emp, replayBtn:replayBtn,
+    reveal:tsReveal, reduced:reduced, countUp:countUp, page:function(p){ PAGES.push(p); } };
+
+  /* Seiten registrieren sich weiter unten, Mount laeuft danach an (s. Ende der Zone). */
+  window.__tsn0mount=mount;
+})();
+
+/* ============================================================
+   NEUBAU MODUL 0 · Adressen (eine Stelle fuer alle Links)
+   Neue Lektionen liegen nach dem super.so-Abgleich unter /lektionen/<slug>,
+   die Gates akzeptieren beide Formen (Wurzel und /lektionen/).
+   ============================================================ */
+(function(){
+  if(window.__tsn0L) return;
+  window.__tsn0L={
+    m0:'/modul-0-einleitung-was-dich-erwartet',
+    l01:'/was-dich-in-diesem-kurs-erwartet',
+    l02:'/lektionen/wo-ki-dir-zeit-und-geld-spart',
+    l03:'/lektionen/system-und-werkzeug',
+    l04:'/die-einstiegsfragen',
+    l05:'/lektionen/deine-sorgen-ehrlich-beantwortet',
+    l06:'/lektionen/agent-oder-automation',
+    l07:'/lektionen/dein-weg-durch-den-kurs',
+    abschluss:'/abschluss-was-du-am-ende-kannst',
+    /* erste Lektion je Modul (Stand Navigation 01.11.2026) */
+    m1:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip',
+    m2:'/mehrwert-zielbild',
+    m3:'/was-ist-claude-genau',
+    m4:'/lektionen/notion-mit-claude-code-verbinden',
+    m5:'/lektionen/reservierungen-ohne-anruf',
+    m6:'/lektionen/claude-startklar-machen'
+  };
+  /* Platzhalter-Cover (Abschnitts-Katalog 01: "BILD FOLGT"), bis das echte Cover steht */
+  window.__tsn0ph=function(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600"><rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/><circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text></svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  };
+  window.__tsn0re=function(slug){ return new RegExp('^/(?:lektionen/)?'+slug+'$'); };
+})();
+
+/* ============================================================
+   STARTSEITE (/)  — der bestehende Hero (Head-Block .page__index) bleibt.
+   Neu darunter: Einleitung, "Die Linie" (System + Werkzeug), "Die Karte"
+   (Kursaufbau als Menuekarte, Zeilen schreiben sich nacheinander ein),
+   Einstiegs-Knopf. Der alte Notion-Text (Intro, vier Spalten, Modul-
+   Galerie mit veralteten Titeln) wird erst verborgen, wenn unser Inhalt
+   steht. "Weiterfuehrende Infos" + "Die Plattformen" bleiben.
+   ============================================================ */
+(function(){
+  if(window.__tsn0home) return; window.__tsn0home=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var NOTION='<svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" aria-hidden="true"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>';
+  var CLAUDE='<svg viewBox="0 0 24 24" width="30" height="30" fill="#D97757" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>';
+  window.__tsn0svg={ NOTION:NOTION, CLAUDE:CLAUDE };
+
+  var MENU=[
+    ['Modul 0','Einführung','Was dich erwartet, wo KI dir Zeit spart und mit welchen Werkzeugen wir arbeiten.',L.l01],
+    ['Modul 1','Notion-Grundlagen','So viel Notion, wie du brauchst, um sicher mit deinem Backoffice zu arbeiten.',L.m1],
+    ['Modul 2','Das Notion AI Backoffice System','Die Vorlage holen, deine Daten eintragen und verstehen, woher jede Zahl kommt.',L.m2],
+    ['Modul 3','Claude Grundlagen','Was Claude ist, welchen Zugang du wann nimmst und wie du ihn einrichtest.',L.m3],
+    ['Modul 4','Claude Code + Notion Agents','Claude mit deinem Backoffice verbinden, Fragen an deine Zahlen stellen, Routinen laufen lassen.',L.m4],
+    ['Modul 5','AI Reservation Agent','Anfragen per Mail, Nachricht und Telefon, die ein Agent für dich annimmt.',L.m5],
+    ['Modul 6','AI Website Building','Deine eigene Website mit Claude bauen und online stellen.',L.m6]
+  ];
+
+  function build(){
+    var N=window.__tsn0, out=[];
+    out.push(N.intro(
+      '<p>Diese Masterclass ist für Menschen, die einen Betrieb führen. Für Inhaber, Küchenchefs und Betriebsleiter, die wissen wollen, an welchen Stellen ihnen KI im Alltag wirklich Arbeit abnimmt.</p>'+
+      '<p>Du bekommst dafür ein fertiges System: das <b>Notion AI Backoffice</b>, als leere Vorlage für deinen eigenen Betrieb. Du trägst deine Lieferanten, Preise und Rezepturen ein, und ab da rechnet das System für dich. Wareneinsatz, Deckungsbeitrag, Allergene und Bestände stehen dann an einem Ort.</p>'+
+      '<p>Dazu lernst du, wie du dieses System mit <b>Claude</b> bedienst und erweiterst. In ganz normalen Sätzen, ohne eine Zeile Code.</p>'));
+
+    var line=N.h('div','tsn0-anim'); line.id='tsn0-hline';
+    line.innerHTML=N.head('Die Linie des Kurses','Notion ist das <span class="g">System.</span> Claude das <span class="g">Werkzeug.</span>',
+      'In Notion lebt dein Betrieb, mit allen Daten und Berechnungen. Claude arbeitet mit diesem System, beantwortet deine Fragen und baut es mit dir weiter aus.')+
+      '<div class="hl-stage">'+
+        '<div class="hl-card hl-n"><div class="hl-ic">'+NOTION+'</div><span class="hl-k">Das System</span><div class="hl-nm">Notion + Notion AI</div><hr>'+
+          '<p>Deine Datenbanken, verbunden und durchgerechnet. Notion AI arbeitet direkt darin und liest dir zum Beispiel einen Lieferschein aus.</p></div>'+
+        '<div class="hl-bridge" aria-hidden="true"><span class="hl-rail"></span><span class="hl-dot"></span><span class="hl-dot d2"></span></div>'+
+        '<div class="hl-card hl-c"><div class="hl-ic">'+CLAUDE+'</div><span class="hl-k">Das Werkzeug</span><div class="hl-nm">Claude</div><hr>'+
+          '<p>Verbindet sich mit deinem Notion, wertet deine Zahlen aus und übernimmt Aufgaben, die immer wiederkommen.</p></div>'+
+      '</div>';
+    out.push(line);
+
+    var menu=N.h('div','tsn0-anim'); menu.id='tsn0-menu';
+    menu.innerHTML=N.head('Der Aufbau','Die <span class="g">Karte.</span>',
+      'Sieben Module und ein Abschluss. Jedes Modul baut auf dem vorigen auf, und aus jedem nimmst du etwas mit, das du am nächsten Tag im Betrieb nutzt.')+
+      '<div class="mc-card"><div class="mc-top"><span class="mc-brand">Gastronomie AI Master<span class="r">Class</span></span><span class="mc-rule"></span><span class="mc-sub">Die Karte</span></div>'+
+      '<ol class="mc-list">'+MENU.map(function(m,i){
+        return '<li class="mc-row" style="--i:'+i+'"><a href="'+m[3]+'"><span class="mc-no">'+m[0]+'</span>'+
+          '<span class="mc-main"><span class="mc-tline"><span class="mc-t">'+m[1]+'</span><span class="mc-lead"></span><span class="mc-go" aria-hidden="true">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>'+
+          '<span class="mc-d">'+m[2]+'</span></span></a></li>';
+      }).join('')+'</ol>'+
+      '<div class="mc-end" style="--i:'+MENU.length+'"><a href="'+L.abschluss+'"><span class="mc-no">Zum Schluss</span><span class="mc-t">Abschluss</span><span class="mc-d">Was du jetzt kannst und wie es danach weitergeht.</span></a></div>'+
+      '</div>';
+    out.push(menu);
+
+    var cta=N.h('div','tsn0-cta'); cta.id='tsn0-hcta';
+    cta.innerHTML='<p>Fang ganz vorne an. In Modul 0 zeige ich dir in sieben Lektionen, worauf du dich einlässt, bevor wir mit Notion loslegen.</p>'+
+      '<a class="tsn0-btn" href="'+L.l01+'">Mit Lektion 0.1 starten <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+    out.push(cta);
+    return out;
+  }
+  function after(page){
+    var N=window.__tsn0;
+    var line=page.querySelector('#tsn0-hline'); line.classList.add('js'); N.reveal(line,function(){ line.classList.add('in'); });
+    var menu=page.querySelector('#tsn0-menu'); menu.classList.add('js'); N.reveal(menu.querySelector('.mc-card'),function(){ menu.classList.add('in'); });
+    var cta=page.querySelector('#tsn0-hcta'); cta.classList.add('js'); N.reveal(cta,function(){ cta.classList.add('in'); });
+  }
+  N.page({ key:'home', re:/^\/$/, hero:null, hideRaw:false, build:build, after:after,
+    /* eigener Inhalt sitzt direkt unter dem bestehenden Hero */
+    place:function(sc,nr,page){ var hh=sc.querySelector('.ts-hero'); if(hh&&hh.parentNode===sc) sc.insertBefore(page, hh.nextSibling); else sc.insertBefore(page,nr); },
+    keep:function(){ document.documentElement.setAttribute('data-tsn0','home'); } });
+})();
+
+/* ============================================================
+   MODUL 0 · UEBERSICHT (/modul-0-einleitung-was-dich-erwartet)
+   ============================================================ */
+(function(){
+  if(window.__tsn0m0) return; window.__tsn0m0=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var LES=[
+    ['0.1','Was dich erwartet','Was du bekommst, wie wir arbeiten und für wen dieser Kurs gemacht ist.',L.l01],
+    ['0.2','Wo KI dir Zeit und Geld spart','Ein ganz normaler Tag im Betrieb und die Stellen, an denen Arbeit liegen bleibt.',L.l02],
+    ['0.3','System und Werkzeug','Notion, Notion AI, Claude und die Bildwerkzeuge: wer welche Aufgabe übernimmt.',L.l03],
+    ['0.4','Der KI-Markt','Die großen Anbieter im Überblick, Stand November 2026.',L.l04],
+    ['0.5','Deine Sorgen, ehrlich beantwortet','Daten, Verlässlichkeit, dein Team und die Frage, ob sich das für dich lohnt.',L.l05],
+    ['0.6','Agent oder Automation','Zwei Begriffe, die du im Kurs ständig hörst, sauber auseinandergehalten.',L.l06],
+    ['0.7','Dein Weg durch den Kurs','In welcher Reihenfolge du vorgehst und was du vorher vorbereitest.',L.l07]
+  ];
+  function build(){
+    var out=[];
+    out.push(N.intro('<p>Bevor wir in Notion einsteigen, nehmen wir uns sieben kurze Lektionen Zeit für den Rahmen. Du erfährst, was dich erwartet, wo KI in deinem Betrieb wirklich etwas bringt und mit welchen Werkzeugen wir arbeiten.</p>'+
+      '<p>Am Ende von Modul 0 weißt du, worauf du dich einlässt, kennst die Begriffe, die dir im ganzen Kurs begegnen, und hast deine ersten Unterlagen für das Backoffice beisammen.</p>'));
+    var w=N.h('div','tsn0-anim'); w.id='tsn0-m0list';
+    w.innerHTML=N.head('Modul 0','Sieben Lektionen, <span class="g">ein Rahmen.</span>','Geh sie der Reihe nach durch. Jede Lektion baut auf der vorigen auf.')+
+      '<ol class="ml-list">'+LES.map(function(l,i){
+        return '<li class="ml-row" style="--i:'+i+'"><a href="'+l[3]+'"><span class="ml-no">'+l[0]+'</span><span class="ml-main"><span class="ml-t">'+l[1]+'</span><span class="ml-d">'+l[2]+'</span></span>'+
+          '<span class="ml-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>';
+      }).join('')+'</ol>';
+    out.push(w);
+    return out;
+  }
+  function after(page){ var w=page.querySelector('#tsn0-m0list'); w.classList.add('js'); N.reveal(w.querySelector('.ml-list'),function(){ w.classList.add('in'); }); }
+  N.page({ key:'m0', re:/^\/modul-0-einleitung-was-dich-erwartet$/, build:build, after:after,
+    hero:{ img:window.__tsn0ph('MODUL 0'), alt:'Modul 0: Einführung in die Gastronomy AI Masterclass', eyebrow:'Modul 0', title:'Die <span class="ts-gold">Einführung</span>' },
+    learn:{ learn:[
+      'Du weißt, <b>was dich erwartet</b> und wie der Kurs aufgebaut ist.',
+      'Du findest die <b>Stellen in deinem Betrieb</b>, an denen KI sich lohnt.',
+      'Du kennst die <b>Werkzeuge</b> und den <b>Markt</b>, Stand November 2026.',
+      'Du gehst mit <b>vorbereiteten Unterlagen</b> in Modul 1.'],
+      next:L.l01, nextLabel:'Mit Lektion 0.1 starten' } });
+})();
+
+/* ============================================================
+   L0.1 · Was dich erwartet  (/was-dich-in-diesem-kurs-erwartet)
+   Erklaeranimation #tsn0-a01 "Fertig geliefert, von dir gefuellt."
+   EIGENES Konzept: EIN Arbeitsfenster (Notion-artig) bleibt stehen, nur
+   der Inhalt wechselt in drei Beats: (1) die leere Vorlage mit fertigen
+   Spalten und Formeln, (2) deine Eintraege, die Formelspalte rechnet mit,
+   (3) eine Frage an Claude, die Antwort kommt aus deinen Zahlen.
+   Schwerpunkt: 4 von 4 Sektionen der Seite drehen sich um "was bekommst du
+   und wie arbeitest du damit"; die Animation zeigt den Ablauf, die
+   Sektionen danach erklaeren Inhalt, Haltung und Zielgruppe.
+   Zahlen = Beispielwerte aus der Kurs-SSOT (Lektion 2.0/3.2, DISHES).
+   ============================================================ */
+(function(){
+  if(window.__tsn0l01) return; window.__tsn0l01=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  /* Beispielwerte = Rezeptur-Rechner #tsd5 (Basilikum-Pesto, /rezepturen): Menge x Einkaufspreis */
+  var ROWS=[
+    ['Basilikum','24,00 €','50 g','1,20 €'],
+    ['Parmesan','18,00 €','40 g','0,72 €'],
+    ['Pinienkerne','42,00 €','30 g','1,26 €'],
+    ['Olivenöl','9,80 €','90 g','0,88 €'],
+    ['Knoblauch','6,00 €','8 g','0,05 €'],
+    ['Meersalz','2,90 €','2 g','0,01 €']
+  ];
+  var CAPS=[
+    'Die Vorlage kommt fertig: Datenbanken, Verbindungen und Formeln stehen schon. Leer sind nur die Zeilen.',
+    'Du trägst deine Einkaufspreise und Mengen ein. Ab dem ersten Eintrag rechnet die Formelspalte mit, <b>Zeile für Zeile</b>.',
+    'Claude arbeitet mit deinen Zahlen. Du fragst in einem normalen Satz, und die Antwort kommt aus <b>deinem eigenen System</b>.'
+  ];
+  var Q='Welches Gericht hat den schwächsten Deckungsbeitrag?';
+  var A='Das <b>Lammkarree</b>. Nach Ware, Gemeinkosten und Personal bleiben <b>−0,90 €</b> je Teller. Das Rote-Bete-Risotto liegt bei <b>3,20 €</b>.';
+
+  function stage(){
+    var side=['Lieferpartner','Inventur','Zutaten','Rezepturen','Gerichte','Kennzahlen'];
+    return '<div class="a1-win">'+
+      '<div class="a1-bar"><i></i><i></i><i></i><span class="a1-crumb"><span class="a1-ws">Rezepturen</span> <span class="a1-sl">/</span> <span class="a1-ttl">Basilikum-Pesto</span></span><span class="a1-badge"><span class="a1-b1">Vorlage</span><span class="a1-b2">Dein Betrieb</span></span></div>'+
+      '<div class="a1-body">'+
+        '<aside class="a1-side">'+side.map(function(s){ return '<span class="a1-si'+(s==='Rezepturen'?' on':'')+'">'+s+'</span>'; }).join('')+'</aside>'+
+        '<div class="a1-main">'+
+          '<div class="a1-th"><span>Zutat</span><span>Einkauf / kg</span><span>Menge</span><span class="f">Kosten <i>ƒ</i></span></div>'+
+          ROWS.map(function(r,i){ return '<div class="a1-tr" style="--r:'+i+'">'+r.map(function(c,j){ return '<span class="c'+j+'"><em>'+c+'</em><u></u></span>'; }).join('')+'</div>'; }).join('')+
+          '<div class="a1-sum"><span>Rohstoffkosten je Ansatz · 220 g</span><b class="a1-tot">4,12 €</b></div>'+
+          '<div class="a1-ask"><span class="a1-cl">'+window.__tsn0svg.CLAUDE+'</span><span class="a1-q"></span><span class="a1-caret"></span></div>'+
+          '<div class="a1-ans"><span class="a1-cl">'+window.__tsn0svg.CLAUDE+'</span><p>'+A+'</p></div>'+
+        '</div>'+
+      '</div></div>';
+  }
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Schön, dass du da bist. Ich komme aus der Gastronomie. Ich habe Inventuren gezählt, Deckungsbeiträge gerechnet und Dienstpläne geschrieben, oft spät abends im Büro, wenn der Service längst vorbei war.</p>'+
+      '<p>Genau deshalb ist dieser Kurs so aufgebaut, wie er aufgebaut ist: an den Stellen, an denen du im Betrieb wirklich stehst. In dieser Lektion zeige ich dir, worauf du dich einlässt, was du bekommst und wie wir gemeinsam damit arbeiten.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a01';
+    a.innerHTML=N.head('So arbeiten wir','Fertig geliefert, <span class="g">von dir gefüllt.</span>','Drei Schritte, die du im Kurs immer wieder gehst. Einmal am Stück gezeigt, damit du weißt, worauf alles hinausläuft.')+
+      '<div class="a1-stage">'+stage()+'</div>'+
+      '<div class="tsn0-steps">'+['01 Die Vorlage','02 Deine Daten','03 Claude fragt mit'].map(function(s,i){ return '<button type="button" class="tsn0-step" data-b="'+(i+1)+'">'+s+'</button>'; }).join('')+'</div>'+
+      '<p class="tsn0-cap">'+CAPS[2]+'</p><p class="tsn0-note">Alle Zahlen sind Beispielwerte.</p>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l01s1',
+      '<h3>Du bekommst es <span class="g">fertig.</span></h3>'+
+      '<p>Das Herzstück dieses Kurses ist das <b>Notion AI Backoffice</b>. Ein System aus verbundenen Datenbanken, in dem dein ganzer Betrieb Platz hat: Lieferpartner und Inventur, Zutaten und Rezepturen, Gerichte und Getränke, Gemeinkosten, Löhne und Kennzahlen. Ich habe es über Monate gebaut und im eigenen Alltag auf Herz und Nieren geprüft.</p>'+
+      '<p>Du bekommst es als leere Vorlage. Du musst nichts nachbauen, keine Formel abtippen und keine Verbindung selbst ziehen. Du übernimmst die Vorlage in dein Notion, trägst deine Daten ein, und ab da rechnet das System für dich.</p>'+
+      '<p>Wie es gebaut ist, zeige ich dir trotzdem, Spalte für Spalte. Du sollst wissen, woher jede Zahl kommt. Dann verlässt du dich auf sie, und wenn du später etwas anpassen oder erweitern willst, weißt du genau, wo du ansetzt.</p>'));
+
+    out.push(N.sec('tsn0-l01s2',
+      '<h3>Wie wir <span class="g">arbeiten.</span></h3>'+
+      '<p>Durch den ganzen Kurs zieht sich eine Linie: <b>Notion ist das System, Claude ist das Werkzeug.</b> In Notion liegen deine Daten und Berechnungen, an einem Ort und für dein ganzes Team gleich. Notion AI arbeitet direkt darin. Claude kommt dazu, wenn du dein System bedienen, auswerten oder erweitern willst, und zwar in ganz normalen Sätzen.</p>'+
+      '<p>Welche Rolle jedes Werkzeug genau spielt, schauen wir uns in Lektion 0.3 an. Für den Moment reicht dir: Du arbeitest nie gegen leere Seiten, sondern immer mit einem System, das schon steht.</p>'));
+
+    out.push(N.sec('tsn0-l01s3',
+      '<h3>Für wen dieser Kurs <span class="g">gemacht ist.</span></h3>'+
+      '<div class="tsn0-cards c3">'+
+        '<div class="tsn0-card"><span class="k">Inhaber</span><div class="n">Du willst wissen, was dein Betrieb verdient.</div><hr><p>Pro Gericht und pro Monat, ohne jeden Abend im Büro zu sitzen und Zahlen aus fünf Programmen zusammenzusuchen.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Küchenchef</span><div class="n">Du kalkulierst und hältst die Karte sauber.</div><hr><p>Rezepturen, Wareneinsatz und Allergene liegen an einem Ort und stimmen auch dann noch, wenn sich ein Einkaufspreis ändert.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Betriebsleiter</span><div class="n">Du hältst den Laden zusammen.</div><hr><p>Team, Lieferanten und Abläufe brauchen ein System, auf das sich alle verlassen können, auch an deinem freien Tag.</p></div>'+
+      '</div>'+
+      '<p>Führst du ein Hotel mit eigenem Restaurant, gilt alles genauso. Die Beispiele kommen aus Küche, Service und Einkauf, weil dort die meisten Zahlen entstehen.</p>'+
+      '<p>Und es ist egal, wo du gerade stehst. Ob du noch nie mit KI gearbeitet hast oder schon eigene Seiten in Notion gebaut hast: Jeder Schritt läuft an einem echten Beispiel aus dem Betrieb. Wer neu ist, geht der Reihe nach vor. Wer schon Erfahrung hat, springt an die Stellen, die für ihn neu sind.</p>'));
+
+    out.push(N.sec('tsn0-l01s4',
+      '<h3>Es gibt nicht den <span class="g">einen Weg.</span></h3>'+
+      '<p>Jeder Betrieb ist anders. Ein Café braucht etwas anderes als ein Restaurant mit drei Standorten, und ein Caterer denkt wieder anders als ein Hotel. Eine einzige Wahrheit für alle gibt es deshalb nicht. Ich zeige dir die Möglichkeiten, die dir die KI-Welt heute bietet, und sage dir ehrlich, wo etwas Zeit kostet und wo etwas Geld.</p>'+
+      '<p>Ich habe schon viele KI-Werkzeuge getestet, aber bei Weitem nicht alle. Nimm diesen Kurs deshalb als Orientierung. Wenn du heute mit Programmen arbeitest, die für dich funktionieren, behalte sie. Du entscheidest selbst, wie viel Zeit du in die Pflege deines Systems steckst und wie viel Geld du für Werkzeuge ausgibst.</p>'+
+      '<p class="tsn0-rule">Ein schlankes System, das du jeden Tag pflegst, bringt dir mehr als ein großes, das du nach <span class="g">zwei Wochen</span> nicht mehr öffnest.</p>'));
+
+    out.push(N.emp({ id:'tsn0-l01emp', kind:'Nutzung', animTitle:'Modul 0', animGold:'richtig nutzen',
+      steps:['Der Reihe nach','Mitschreiben','Noch nichts kaufen','Vorlage in Modul 2'],
+      intro:'So holst du am meisten aus der Einführung heraus, bevor es mit Notion losgeht.',
+      points:[
+        'Geh die sieben Lektionen von Modul 0 <b>der Reihe nach</b> durch. Sie sind kurz und ersparen dir später viele Fragen.',
+        'Notier dir beim Lesen die Stellen in deinem Betrieb, an denen du heute <b>am meisten Zeit</b> verlierst. In Lektion 0.2 kommen wir darauf zurück.',
+        'Schließ noch <b>keine Abos</b> ab. Welche du wirklich brauchst und ab wann, klären wir in Lektion 0.4 und 0.7.',
+        'Die Backoffice-Vorlage holst du dir in <b>Modul 2</b>. Bis dahin kennst du Notion gut genug, um sicher damit zu arbeiten.']
+    }));
+    return out;
+  }
+
+  function after(page){
+    var root=page.querySelector('#tsn0-a01'); if(!root) return;
+    var timers=[], cap=root.querySelector('.tsn0-cap'), q=root.querySelector('.a1-q');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function setCap(i){ cap.classList.add('fade'); T(function(){ cap.innerHTML=CAPS[i]; cap.classList.remove('fade'); },260); }
+    function steps(i){ root.querySelectorAll('.tsn0-step').forEach(function(b,k){ b.classList.toggle('on',k===i); }); }
+    function state(b){ root.classList.remove('b1','b2','b3'); root.classList.add('b'+b); steps(b-1); }
+    function typeQ(start){
+      q.textContent='';
+      if(N.reduced){ q.textContent=Q; return; }
+      for(var i=1;i<=Q.length;i++){ (function(n){ T(function(){ q.textContent=Q.slice(0,n); }, start+n*34); })(i); }
+      T(function(){ q.textContent=Q; }, start+Q.length*34+300);
+    }
+    function play(){
+      clear(); root.classList.remove('done');
+      state(1); setCap(0);
+      T(function(){ state(2); setCap(1); },3600);
+      T(function(){ state(3); setCap(2); typeQ(500); },8000);
+      T(function(){ root.classList.add('done'); },8000+500+Q.length*34+900);
+    }
+    function jump(b){ clear(); state(b); cap.innerHTML=CAPS[b-1]; cap.classList.remove('fade'); if(b===3){ q.textContent=Q; root.classList.add('done'); } else root.classList.remove('done'); }
+    root.classList.add('js','b3','done'); q.textContent=Q;
+    root.querySelectorAll('.tsn0-step').forEach(function(b){ b.addEventListener('click',function(){ jump(+b.getAttribute('data-b')); }); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    steps(2);
+    N.reveal(root.querySelector('.a1-stage'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+
+  N.page({ key:'l01', re:/^\/was-dich-in-diesem-kurs-erwartet$/, build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.1'), alt:'Was dich in der Gastronomy AI Masterclass erwartet', eyebrow:'L 0.1', title:'Was dich <span class="ts-gold">erwartet</span>' },
+    learn:{ learn:[
+      'Du bekommst das Backoffice <b>fertig als Vorlage</b> und trägst nur deine Daten ein.',
+      '<b>Notion</b> ist dein System, <b>Claude</b> das Werkzeug, das es bedient und erweitert.',
+      'Der Kurs passt auf <b>jeden Wissensstand</b>, weil jeder Schritt an einem echten Betriebsbeispiel läuft.',
+      '<b>Du entscheidest</b>, wie viel Zeit und Geld du einsetzt.'],
+      next:L.l02 } });
+})();
+
+/* ============================================================
+   L0.2 · Wo KI dir Zeit und Geld spart  (/lektionen/wo-ki-dir-zeit-und-geld-spart)
+   Erklaeranimation #tsn0-a02 "Die Tagesuhr" — EIGENES Konzept: ein 24-Stunden-
+   Zifferblatt, sechs Stationen auf ihrer Uhrzeit, ein Zeiger, der den Tag
+   einmal abfaehrt. In der Mitte das Foto der Station (Ueberblendung), rechts
+   daneben (im selben Rahmen) "Heute" gegen "Mit System" und das Modul.
+   Schwerpunkt: die Seite handelt vom Betriebstag und seinen Schnittstellen;
+   die Sektionen danach vertiefen Geld (Preise, Bestaende) und Zeit
+   (Abtippen, Suchen, Nachfragen) und wiederholen die Stationen nicht.
+   ============================================================ */
+(function(){
+  if(window.__tsn0l02) return; window.__tsn0l02=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var IMG=N.BASE+'img/modul-0/';
+  var ST=[
+    {t:'07:00',h:7,   n:'Die Lieferung',     img:'tag-lieferung',
+     a:'Der Lieferschein wandert in den Ordner. Ob sich ein Preis geändert hat, merkt keiner.',
+     b:'Du fotografierst den Schein, Notion AI liest Mengen und Preise aus. Deine Kalkulation ist sofort aktuell.', m:'Modul 2'},
+    {t:'10:30',h:10.5,n:'Die Kalkulation',   img:'tag-kalkulation',
+     a:'Was ein Teller kostet, weißt du ungefähr.',
+     b:'Wareneinsatz und Deckungsbeitrag stehen je Gericht auf den Cent genau, aus deinen eigenen Rezepturen.', m:'Modul 2'},
+    {t:'13:00',h:13,  n:'Karte und Bilder',  img:'tag-karte',
+     a:'Neue Karte, neue Fotos, neue Texte. Das kostet Tage oder einen teuren Termin.',
+     b:'Bilder und Texte entstehen mit KI, Preise und Allergene kommen direkt aus deinem System.', m:'Modul 2 und 6'},
+    {t:'15:30',h:15.5,n:'Team und Abläufe',  img:'tag-team',
+     a:'Wissen steckt in Köpfen und auf Zetteln. Jede Einarbeitung beginnt von vorn.',
+     b:'Checklisten, Handbücher und Einarbeitung liegen an einem Ort, für alle gleich.', m:'Modul 2'},
+    {t:'17:00',h:17,  n:'Reservierungen',    img:'tag-reservierung',
+     a:'Das Telefon klingelt mitten in der Vorbereitung, Anfragen per Mail bleiben liegen.',
+     b:'Ein Agent nimmt Anfragen an, prüft freie Tische und trägt die Reservierung ein.', m:'Modul 5'},
+    {t:'23:30',h:23.5,n:'Der Tagesabschluss',img:'tag-abschluss',
+     a:'Die Umsätze stehen in mehreren Programmen, die Auswertung kommt irgendwann.',
+     b:'Umsätze und Kennzahlen laufen an einem Ort zusammen, und du stellst Claude Fragen dazu.', m:'Modul 2 und 4'}
+  ];
+  function ang(hh){ return hh/24*360; }
+  function dial(){
+    var R=150, C=170, ticks='';
+    for(var i=0;i<24;i++){ var a=(i/24*360-90)*Math.PI/180, r1=i%6===0?R-14:R-8;
+      ticks+='<line x1="'+(C+Math.cos(a)*r1).toFixed(1)+'" y1="'+(C+Math.sin(a)*r1).toFixed(1)+'" x2="'+(C+Math.cos(a)*R).toFixed(1)+'" y2="'+(C+Math.sin(a)*R).toFixed(1)+'" class="tk'+(i%6===0?' big':'')+'"/>'; }
+    var lab=[0,6,12,18].map(function(hh){ var a=(hh/24*360-90)*Math.PI/180; return '<text x="'+(C+Math.cos(a)*(R-30)).toFixed(1)+'" y="'+(C+Math.sin(a)*(R-30)+4).toFixed(1)+'" class="hl">'+(hh<10?'0':'')+hh+'</text>'; }).join('');
+    var marks=ST.map(function(s,i){ var a=(ang(s.h)-90)*Math.PI/180;
+      return '<button type="button" class="a2-mk" data-i="'+i+'" style="left:'+((C+Math.cos(a)*(R+26))/340*100).toFixed(2)+'%;top:'+((C+Math.sin(a)*(R+26))/340*100).toFixed(2)+'%;--i:'+i+'" aria-label="'+s.t+' '+s.n+'"><span>'+s.t+'</span></button>'; }).join('');
+    var imgs=ST.map(function(s,i){ return '<div class="a2-ph" data-i="'+i+'"><img src="'+IMG+s.img+'.webp" alt="'+s.n+'" loading="lazy" decoding="async" onerror="this.style.display=\'none\'"><span class="a2-ph-l">'+s.n+'</span></div>'; }).join('');
+    return '<div class="a2-dial"><svg viewBox="0 0 340 340" class="a2-svg" aria-hidden="true">'+
+      '<circle cx="170" cy="170" r="150" class="ring"/><circle cx="170" cy="170" r="150" class="ring-fill"/>'+ticks+lab+
+      '<g class="a2-hand"><line x1="170" y1="170" x2="170" y2="34"/><circle cx="170" cy="34" r="4"/></g></svg>'+
+      '<div class="a2-face">'+imgs+'</div>'+marks+'</div>';
+  }
+  function info(){
+    return '<div class="a2-info"><div class="a2-time"><span class="a2-t">07:00</span><span class="a2-n">Die Lieferung</span></div>'+
+      '<div class="a2-row a"><span class="k">Heute</span><p class="v"></p></div>'+
+      '<div class="a2-row b"><span class="k">Mit System</span><p class="v"></p></div>'+
+      '<div class="a2-mod"><span class="a2-m"></span></div></div>';
+  }
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>KI ist kein Selbstzweck. Sie lohnt sich nur dort, wo dir im Betrieb heute Zeit verloren geht oder Geld versickert, ohne dass du es merkst.</p>'+
+      '<p>Diese Stellen nenne ich <b>Schnittstellen</b>. Gemeint ist jeder Moment im Tag, in dem eine Information entsteht, weitergegeben oder gebraucht wird. Wir gehen jetzt einen ganz normalen Tag durch und schauen, wo diese Stellen liegen. Danach weißt du, welches Modul welches Problem für dich löst.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a02';
+    a.innerHTML=N.head('Ein Tag im Betrieb','Sechs Stellen, <span class="g">ein Tag.</span>','Vom ersten Lieferschein bis zum Tagesabschluss. Tipp auf eine Uhrzeit, um eine Station noch einmal anzusehen.')+
+      '<div class="a2-frame">'+dial()+info()+'</div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l02s1',
+      '<h3>Wo das Geld <span class="g">versickert.</span></h3>'+
+      '<p class="lead">Die teuersten Schnittstellen sind die, die keiner sieht. Zwei davon gibt es in fast jedem Betrieb.</p>'+
+      '<div class="tsn0-cards c2">'+
+        '<div class="tsn0-card"><span class="k">Einkauf</span><div class="n">Preise, die nicht mitgehen.</div><hr><p>Dein Lieferant erhöht den Preis für Butter. Der neue Preis steht auf dem Lieferschein, und der Schein landet im Ordner. Deine Karte bleibt, wie sie ist, und ab jetzt verdienst du an jedem Gericht mit Butter etwas weniger.</p><p>Im Backoffice hängt jedes Gericht über seine Rezepturen an den Einkaufspreisen. Ändert sich ein Preis, siehst du, welche Gerichte betroffen sind.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Lager</span><div class="n">Ware, die keiner zählt.</div><hr><p>Was im Kühlhaus liegt, weiß meist nur einer genau. Bestellt wird nach Gefühl, und am Monatsende stimmt die Inventur nicht mit dem Einkauf überein.</p><p>Mit einer gepflegten Inventur im System siehst du, was da ist, was fehlt und wo Ware verschwindet.</p></div>'+
+      '</div>'));
+
+    out.push(N.sec('tsn0-l02s2',
+      '<h3>Wo die Zeit <span class="g">verloren geht.</span></h3>'+
+      '<p class="lead">Neben dem Geld kostet dich vor allem Kleinarbeit Zeit, die sich jeden Tag wiederholt.</p>'+
+      '<div class="tsn0-cards c3">'+
+        '<div class="tsn0-card"><span class="k">Abtippen</span><div class="n">Vom Papier in die Tabelle.</div><hr><p>Lieferscheine, Rechnungen, Bestelllisten. Das übernimmt Notion AI vom Foto, du prüfst nur noch.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Suchen</span><div class="n">Wo war noch mal die Liste?</div><hr><p>Allergene, Rezepturen, Kontakte. Im Backoffice hat jede Information genau einen Platz, und jeder im Team findet sie dort.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Nachfragen</span><div class="n">Der Anruf am freien Tag.</div><hr><p>Wie geht die Schließroutine? Wer liefert den Fisch? Eine Checkliste im System beantwortet das, ohne dass jemand dich anruft.</p></div>'+
+      '</div>'+
+      '<div class="tsn0-do"><span class="k">Jetzt du · zehn Minuten</span><ol>'+
+        '<li>Nimm dir deinen letzten Arbeitstag vor und schreib auf, wann du <b>Zahlen abgetippt</b> hast.</li>'+
+        '<li>Schreib auf, wann du etwas <b>gesucht</b> hast und wie lange es gedauert hat.</li>'+
+        '<li>Schreib auf, wann dich jemand <b>angerufen oder gefragt</b> hat, weil er etwas nicht wusste.</li>'+
+        '<li>Markier die Stelle, die dich am meisten Zeit kostet. <b>Mit ihr fängst du an.</b></li>'+
+      '</ol></div>'));
+
+    out.push(N.emp({ id:'tsn0-l02emp', kind:'Nutzung', animTitle:'Deine erste', animGold:'Schnittstelle',
+      steps:['Wiederkehrend','Eine zuerst','Vorher messen','Küche zuerst'],
+      intro:'So wählst du die Stelle, mit der du anfängst.',
+      points:[
+        'Nimm eine Stelle, die <b>jede Woche wiederkommt</b>. Für die meisten ist das die Lieferung, weil an ihr die ganze Kalkulation hängt.',
+        'Nimm dir <b>eine Stelle nach der anderen</b> vor. Eine Schnittstelle, die sauber läuft, bringt dir mehr als sechs halbe.',
+        'Schreib auf, wie lange du heute für diese Stelle brauchst. Dann siehst du später <b>schwarz auf weiß</b>, was dir das System zurückgibt.',
+        'Hotel mit eigenem Restaurant? Die Stellen sind dieselben, nur die Wege länger. Fang trotzdem <b>in der Küche</b> an.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a02'); if(!root) return;
+    var timers=[], cur=-1;
+    var hand=root.querySelector('.a2-hand'), info=root.querySelector('.a2-info');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function show(i){
+      cur=i; var s=ST[i];
+      hand.style.transform='rotate('+ang(s.h)+'deg)';
+      root.querySelectorAll('.a2-mk').forEach(function(m,k){ m.classList.toggle('on',k===i); if(k<=i) m.classList.add('seen'); });
+      root.querySelectorAll('.a2-ph').forEach(function(p,k){ p.classList.toggle('on',k===i); });
+      info.classList.add('swap');
+      setTimeout(function(){
+        info.querySelector('.a2-t').textContent=s.t; info.querySelector('.a2-n').textContent=s.n;
+        info.querySelector('.a .v').textContent=s.a; info.querySelector('.b .v').textContent=s.b;
+        info.querySelector('.a2-m').textContent=s.m; info.classList.remove('swap');
+      },240);
+    }
+    function play(){
+      clear(); root.classList.remove('built');
+      root.querySelectorAll('.a2-mk').forEach(function(m){ m.classList.remove('seen','on'); });
+      void root.offsetWidth; root.classList.add('built');
+      hand.style.transition='none'; hand.style.transform='rotate(0deg)'; void hand.getBoundingClientRect(); hand.style.transition='';
+      T(function(){ show(0); },1300);
+      for(var i=1;i<ST.length;i++){ (function(k){ T(function(){ show(k); },1300+k*3200); })(i); }
+    }
+    root.classList.add('js'); show(ST.length-1); root.querySelectorAll('.a2-mk').forEach(function(m){ m.classList.add('seen'); });
+    root.querySelectorAll('.a2-mk').forEach(function(m){ m.addEventListener('click',function(){ clear(); root.classList.add('built'); show(+m.getAttribute('data-i')); }); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    N.reveal(root.querySelector('.a2-frame'),function(){ root.classList.add('in'); if(N.reduced){ root.classList.add('built'); return; } play(); });
+  }
+  N.page({ key:'l02', re:window.__tsn0re('wo-ki-dir-zeit-und-geld-spart'), build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.2'), alt:'Wo KI dir im Betrieb Zeit und Geld spart', eyebrow:'L 0.2', title:'Wo KI <span class="ts-gold">Zeit spart</span>' },
+    learn:{ learn:[
+      'Eine <b>Schnittstelle</b> ist jede Stelle, an der Information entsteht oder gebraucht wird.',
+      'Geld versickert vor allem bei <b>Preisen</b>, die keiner nachzieht, und Ware, die keiner zählt.',
+      'Zeit verlierst du beim <b>Abtippen, Suchen und Nachfragen</b>.',
+      'Fang mit <b>einer</b> Stelle an, die jede Woche wiederkommt.'],
+      next:L.l03 } });
+})();
+
+/* ============================================================
+   L0.3 · System und Werkzeug  (/lektionen/system-und-werkzeug)
+   Erklaeranimation #tsn0-a03 "Drei Ebenen, ein Lieferschein." — EIGENES
+   Konzept: drei Ebenen als raeumlicher Stapel (Notion unten, Notion AI in
+   der Mitte, Claude oben). Ein Lieferschein faellt von oben durch den
+   Stapel; jede Ebene leuchtet mit ihrer Aufgabe auf, rechts daneben (im
+   selben Rahmen) steht, was sie tut. Zeigt die Rollenteilung, die die
+   Sektionen danach je Werkzeug ausfuehren, ohne deren Inhalt vorwegzunehmen.
+   ============================================================ */
+(function(){
+  if(window.__tsn0l03) return; window.__tsn0l03=true;
+  var N=window.__tsn0, L=window.__tsn0L, S=window.__tsn0svg;
+  var LV=[
+    {k:'Ebene 1 · das Fundament', n:'Notion', d:'Hier landet der Lieferschein am Ende: als Einträge in Inventur und Zutaten, verbunden mit jeder Rezeptur.', ic:S.NOTION},
+    {k:'Ebene 2 · im System', n:'Notion AI', d:'Liest das Foto des Scheins aus und trägt die Positionen ein, direkt in deinem Notion.', ic:S.NOTION},
+    {k:'Ebene 3 · das Werkzeug', n:'Claude', d:'Vergleicht die neuen Preise mit dem letzten Monat und schreibt dir, welche Gerichte teurer werden.', ic:S.CLAUDE}
+  ];
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Im Kurs arbeiten wir mit einer Handvoll Werkzeugen. Keines davon ist zufällig gewählt, jedes hat eine feste Aufgabe. Zusammen bilden sie ein System, das deinen Betrieb abbildet und mit dir wächst.</p>'+
+      '<p>In dieser Lektion lernst du sie kennen: was jedes Werkzeug tut, warum es dabei ist und in welchem Modul es vorkommt. Bedienen lernst du sie dort, Schritt für Schritt. Hier geht es nur darum, dass du die Rollen auseinanderhältst.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a03';
+    a.innerHTML=N.head('Wer was macht','Drei Ebenen, <span class="g">ein Lieferschein.</span>','Derselbe Schein, drei Werkzeuge. Jedes übernimmt genau seinen Teil.')+
+      '<div class="a3-frame"><div class="a3-stack">'+
+        '<div class="a3-note"><span class="a3-note-h">Lieferschein</span><i></i><i></i><i></i><i class="s"></i></div>'+
+        LV.slice().reverse().map(function(l,j){ var i=2-j; return '<div class="a3-pl p'+i+'" data-i="'+i+'"><div class="a3-top"><span class="a3-ic">'+l.ic+'</span><span class="a3-nm">'+l.n+'</span>'+(i===0?'<span class="a3-grid"><b></b><b></b><b></b><b></b><b></b><b></b></span>':'')+'</div></div>'; }).join('')+
+      '</div><div class="a3-legend">'+LV.slice().reverse().map(function(l,j){ var i=2-j; return '<div class="a3-lg" data-i="'+i+'"><span class="k">'+l.k+'</span><span class="n">'+l.n+'</span><p>'+l.d+'</p></div>'; }).join('')+'</div></div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l03s1',
+      '<h3>Notion: das <span class="g">Fundament.</span></h3>'+
+      '<p>Notion ist eine Arbeitsumgebung, in der du Seiten und Datenbanken anlegst. Für deinen Betrieb zählt vor allem die Datenbank: eine Tabelle, die mit anderen Tabellen verbunden ist. Die Zutat weiß, von welchem Lieferanten sie kommt. Das Gericht weiß, aus welchen Rezepturen es besteht und was die gerade kosten.</p>'+
+      '<p>Dein Backoffice ist genau so ein Geflecht aus verbundenen Datenbanken. Es läuft in Notion, deshalb lernst du in <b>Modul 1</b> so viel über Notion, wie du brauchst, um sicher damit zu arbeiten. Die Vorlage selbst holst du dir in <b>Modul 2</b>.</p>'));
+
+    out.push(N.sec('tsn0-l03s2',
+      '<h3>Notion AI: arbeitet <span class="g">im System.</span></h3>'+
+      '<p>Notion AI ist die KI, die direkt in Notion steckt. Sie sieht deine Seiten und Datenbanken und arbeitet dort, wo deine Daten liegen. Sie liest dir einen fotografierten Lieferschein aus und trägt ihn ein, fasst lange Seiten zusammen, beantwortet Fragen zu deinen Einträgen und hilft dir, eine Formel zu verstehen.</p>'+
+      '<p>Dazu kommen die <b>Notion Agents</b>: Helfer, die in Notion selbstständig Seiten und Einträge anlegen und bearbeiten, auf Wunsch auch nach Zeitplan. Wie du sie für dein Backoffice einsetzt, zeige ich dir in Modul 4.</p>'+
+      '<p class="tsn0-src">Stand 1. November 2026: Notion AI ist voll im Business-Tarif enthalten, im Free- und Plus-Tarif nur zum Testen. Quelle: notion.com/pricing</p>'));
+
+    out.push(N.sec('tsn0-l03s3',
+      '<h3>Claude: das <span class="g">Werkzeug.</span></h3>'+
+      '<p>Claude ist ein KI-Assistent von Anthropic. Im Kurs ist er das Werkzeug, mit dem du dein System von außen bedienst und erweiterst. Er verbindet sich mit deinem Notion, wertet deine Zahlen aus, legt neue Seiten an und übernimmt Aufgaben, die jede Woche wiederkommen. Deine Anweisungen gibst du in ganz normalen Sätzen.</p>'+
+      '<p>Was Claude genau ist und welchen Zugang du wann nimmst, klären wir in <b>Modul 3</b>. Wie Claude mit deinem Backoffice arbeitet, zeige ich dir in <b>Modul 4</b>. Für jetzt reicht dir: Notion hält deine Daten, Claude arbeitet mit ihnen.</p>'));
+
+    out.push(N.sec('tsn0-l03s4',
+      '<h3>Für deine <span class="g">Bildwelt.</span></h3>'+
+      '<p class="lead">Ein System, das gut aussieht, benutzt du jeden Tag. Deshalb bekommen deine Zutaten, Gerichte und Seiten saubere Bilder. Dafür nehmen wir Werkzeuge dazu, die genau das gut können.</p>'+
+      '<div class="tsn0-cards c2">'+
+        '<div class="tsn0-card"><span class="k">Google</span><div class="n">Gemini mit Nano Banana</div><hr><p>Erzeugt aus einer Beschreibung ein Bild, zum Beispiel ein Studiofoto einer Zutat für deine Datenbank.</p></div>'+
+        '<div class="tsn0-card"><span class="k">OpenAI</span><div class="n">ChatGPT</div><hr><p>Stark im Formulieren. Wir lassen uns von ChatGPT die genaue Bildbeschreibung schreiben, bevor ein anderes Werkzeug das Bild erzeugt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Midjourney</span><div class="n">Midjourney</div><hr><p>Hat eine eigene, sehr markante Bildsprache. Wir vergleichen es mit dem Weg über Gemini, damit du siehst, was zu deinem Betrieb passt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Canva</span><div class="n">Canva Pro</div><hr><p>Macht aus einem Bild ein fertiges Cover, ein Banner oder eine Karte mit Schrift. Hier bekommt dein System seinen letzten Schliff.</p></div>'+
+      '</div>'));
+
+    out.push(N.sec('tsn0-l03s5',
+      '<h3>Was du zum Start <span class="g">wirklich</span> brauchst.</h3>'+
+      '<p>Zum Start brauchst du nur <b>Notion</b>. Claude kommt ab Modul 3 dazu, die Bildwerkzeuge dann, wenn du deinem Backoffice Bilder geben willst. Alles andere nimmst du dazu, wenn es dir wirklich etwas bringt.</p>'+
+      '<p class="tsn0-rule">Ein Werkzeug pro Aufgabe. Und jedes erst dann, <span class="g">wenn du es brauchst.</span></p>'));
+
+    out.push(N.emp({ id:'tsn0-l03emp', kind:'Nutzung', animTitle:'Werkzeuge', animGold:'sortieren',
+      steps:['Notion zuerst','Claude ab Modul 3','Bilder bei Bedarf','Altes behalten'],
+      intro:'So gehst du mit den Werkzeugen um, ohne dich zu verzetteln.',
+      points:[
+        'Leg dir als Erstes ein <b>Notion-Konto</b> an. Damit arbeitest du ab Modul 1.',
+        'Claude brauchst du ab <b>Modul 3</b>. Welchen Tarif du dafür nimmst, klären wir in Lektion 3.3.',
+        'Die Bildwerkzeuge nimmst du erst, wenn du deinem Backoffice <b>Bilder</b> geben willst. Eines davon reicht für den Anfang.',
+        'Arbeitest du heute schon mit Programmen, die gut für dich laufen, <b>behalte sie</b>. Ersetzt wird nur, was im System besser liegt.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a03'); if(!root) return;
+    var timers=[];
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function lit(i){ root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ var k=+e.getAttribute('data-i'); e.classList.toggle('on',k===i); if(i>=0&&((i===1&&k===1)||(i===0&&k<=1)||(i===2))) e.classList.add('seen'); }); }
+    function play(){
+      clear(); root.classList.remove('built','drop','up','fin'); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.remove('on','seen'); });
+      void root.offsetWidth; root.classList.add('built');
+      T(function(){ root.classList.add('drop'); },1300);
+      T(function(){ lit(1); },2300);
+      T(function(){ lit(0); root.classList.add('rows'); },4800);
+      T(function(){ root.classList.add('up'); lit(2); },7400);
+      T(function(){ root.classList.add('fin'); lit(-1); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.add('seen'); }); },10400);
+    }
+    root.classList.add('js','built','drop','up','fin','rows'); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.add('seen'); });
+    root.querySelector('.tsn0-replay').addEventListener('click',function(){ root.classList.remove('rows'); play(); });
+    N.reveal(root.querySelector('.a3-frame'),function(){ root.classList.add('in'); if(!N.reduced){ root.classList.remove('rows'); play(); } });
+  }
+  N.page({ key:'l03', re:window.__tsn0re('system-und-werkzeug'), build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.3'), alt:'System und Werkzeug: Notion, Notion AI und Claude', eyebrow:'L 0.3', title:'System und <span class="ts-gold">Werkzeug</span>' },
+    learn:{ learn:[
+      '<b>Notion</b> ist das Fundament, in dem dein Backoffice lebt.',
+      '<b>Notion AI</b> arbeitet direkt in deinen Seiten und Datenbanken.',
+      '<b>Claude</b> bedient und erweitert dein System von außen.',
+      'Bildwerkzeuge nimmst du dazu, <b>wenn du sie brauchst</b>.'],
+      next:L.l04 } });
+})();
+
+/* ============================================================
+   L0.4 · Der KI-Markt  (/die-einstiegsfragen)
+   Erklaeranimation #tsn0-a04 "Der Faecher" — EIGENES Konzept: fuenf gleich
+   grosse Anbieter-Karten liegen gefaechert wie ein Blatt Spielkarten. Ein
+   Spot hebt jede Karte einmal an und nennt ihre Rolle im Kurs; am Ende
+   bleiben die beiden Kurs-Werkzeuge angehoben. Die Sektionen danach
+   vertiefen Anbieter, Kosten und Auswahl.
+   Fakten: Anbieterseiten, abgerufen 01.11.2026 (Recherche im Modul-0-Konzept).
+   ============================================================ */
+(function(){
+  if(window.__tsn0l04) return; window.__tsn0l04=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var P=[
+    {m:'A', c:'Anthropic', n:'Claude', d:'Dein Werkzeug für das Backoffice. Ab Modul 3.', k:1},
+    {m:'O', c:'OpenAI', n:'ChatGPT', d:'Der Allrounder. Im Kurs für Bildbeschreibungen.', k:0},
+    {m:'G', c:'Google', n:'Gemini', d:'Stark bei Bildern. Im Kurs für deine Bildwelt.', k:1},
+    {m:'x', c:'xAI', n:'Grok', d:'Nah an aktuellen Nachrichten. Im Kurs nicht nötig.', k:0},
+    {m:'M', c:'Mistral', n:'Vibe', d:'Aus Paris, Daten in der EU. Eine europäische Wahl.', k:0}
+  ];
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Jede Woche erscheint ein neues Modell, das angeblich alles verändert. Davon musst du dich nicht treiben lassen. Die Anbieter verkaufen ihre Modelle ein bisschen wie Smartphones, mit immer neuen Versionsnummern. Ein Werkzeug, das deine Aufgabe heute zuverlässig erledigt, erledigt sie aber auch in einem halben Jahr noch.</p>'+
+      '<p>Für deinen Betrieb reicht es, die großen Anbieter einordnen zu können: wer hinter welchem Werkzeug steht, wofür es stark ist und was es ungefähr kostet. Alle Angaben in dieser Lektion habe ich am <b>1. November 2026</b> an den Seiten der Anbieter geprüft.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a04';
+    a.innerHTML=N.head('Der Markt','Fünf Namen, <span class="g">zwei im Kurs.</span>','Diese Anbieter begegnen dir überall. Mit zweien arbeiten wir, die anderen solltest du einordnen können.')+
+      '<div class="a4-frame"><div class="a4-fan">'+P.map(function(p,i){ return '<div class="a4-card'+(p.k?' kurs':'')+'" style="--i:'+i+'" data-i="'+i+'"><span class="a4-m">'+p.m+'</span><span class="a4-c">'+p.c+'</span><span class="a4-n">'+p.n+'</span><span class="a4-badge">Im Kurs</span></div>'; }).join('')+'</div>'+
+      '<p class="a4-cap"></p></div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l04s1',
+      '<h3>Was KI eigentlich <span class="g">ist.</span></h3>'+
+      '<p>Die KI, von der gerade alle reden, ist ein Sprachmodell. Es hat an einer riesigen Menge Text gelernt, wie Sprache funktioniert, und ist dadurch sehr gut darin geworden, auf eine Anweisung eine passende Antwort zu formulieren. Das fühlt sich an wie ein Gespräch mit einem Gegenüber, das mitdenkt.</p>'+
+      '<p>Dahinter steckt aber kein Bewusstsein und keine Magie. Es ist ein Werkzeug, das du mit klaren Anweisungen führst. Diese Haltung brauchst du im ganzen Kurs: Du sitzt am Steuer, und die Entscheidung bleibt bei dir.</p>'));
+
+    out.push(N.sec('tsn0-l04s2',
+      '<h3>Die Anbieter im <span class="g">Überblick.</span></h3>'+
+      '<div class="tsn0-cards c2">'+
+        '<div class="tsn0-card"><span class="k">Anthropic · USA</span><div class="n">Claude</div><hr><p>Unser Werkzeug für das Backoffice. Claude gibt es als Chat, als Cowork für Aufgaben mit deinen Dateien und als Claude Code mit Zugriff auf deine Systeme. Stell dir drei Werkstätten mit demselben Meister vor, nur mit unterschiedlich viel Werkzeug an der Wand. Welche du wann nimmst, zeige ich dir in Lektion 3.2.</p></div>'+
+        '<div class="tsn0-card"><span class="k">OpenAI · USA</span><div class="n">ChatGPT</div><hr><p>Das bekannteste KI-Werkzeug und für viele der erste Kontakt mit dem Thema. Ein Allrounder, besonders stark im Formulieren. Im Kurs lassen wir uns von ChatGPT die Beschreibungen für unsere Bilder schreiben.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Google · USA</span><div class="n">Gemini</div><hr><p>Eng verzahnt mit Gmail, Drive und Google Tabellen. Mit den Bildmodellen Nano Banana und Nano Banana Pro gehört Google bei Bildern zu den Stärksten am Markt. Im Kurs erzeugen wir damit die Bilder für Zutaten und Gerichte.</p></div>'+
+        '<div class="tsn0-card"><span class="k">xAI · USA</span><div class="n">Grok</div><hr><p>Eng mit der Plattform X verbunden und stark bei allem, was gerade öffentlich diskutiert wird. Für ein ruhig laufendes Backoffice brauchst du Grok nicht. Seit Oktober 2026 läuft der Zugang über das Abo von X.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Mistral · Frankreich</span><div class="n">Vibe</div><hr><p>Der große europäische Anbieter mit Sitz in Paris, der Chat hieß bis vor Kurzem Le Chat. Daten werden standardmäßig in der EU verarbeitet. Interessant für dich, wenn dir ein europäischer Anbieter wichtig ist.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Die Modelle</span><div class="n">Namen ändern sich ständig.</div><hr><p>Stand November 2026 heißen die Spitzenmodelle zum Beispiel Claude Fable 5.1, GPT-6.1, Gemini 4 und Grok 4.7. Merk dir die Anbieter, nicht die Nummern. In ein paar Monaten stehen hier andere.</p></div>'+
+      '</div>'+
+      '<p class="tsn0-src">Quellen, abgerufen am 1. November 2026: claude.com/pricing · chatgpt.com/pricing · gemini.google/subscriptions · x.ai/news/x-subscription · mistral.ai/pricing · help.mistral.ai</p>'));
+
+    out.push(N.sec('tsn0-l04s3',
+      '<h3>Was sie dich <span class="g">kosten.</span></h3>'+
+      '<p>Das Muster ist bei allen gleich. Es gibt einen kostenlosen Einstieg zum Ausprobieren, der für ernsthaftes Arbeiten schnell zu eng wird. Darüber liegt eine Standardstufe, die für die allermeisten reicht. Und darüber gibt es Stufen für Vielnutzer, die bei rund hundert Euro im Monat anfangen.</p>'+
+      '<div class="a4-tab"><div class="a4-tr h"><span>Werkzeug</span><span>Standardstufe</span><span>Preis im Monat</span></div>'+
+        '<div class="a4-tr"><span>ChatGPT</span><span>Plus</span><span>23 € <i>inkl. MwSt.</i></span></div>'+
+        '<div class="a4-tr"><span>Gemini</span><span>Google AI Pro</span><span>21,99 € <i>inkl. MwSt.</i></span></div>'+
+        '<div class="a4-tr"><span>Vibe (Mistral)</span><span>Pro</span><span>14,99 € <i>zzgl. Steuer</i></span></div>'+
+        '<div class="a4-tr"><span>Grok</span><span>Premium (Abo von X)</span><span>30 $ <i>zzgl. Steuer</i></span></div>'+
+        '<div class="a4-tr"><span>Claude</span><span>Pro</span><span><a href="/claude-plne-preis">in Lektion 3.3</a></span></div>'+
+      '</div>'+
+      '<p>Lass dich von den hohen Stufen nicht beeindrucken. Sie sind für Menschen gebaut, die den ganzen Tag pausenlos mit KI arbeiten, und das tust du am Anfang nicht. Für deinen Start reicht die Standardstufe, und auch die nur bei den Anbietern, die du im Kurs wirklich nutzt.</p>'+
+      '<p class="tsn0-src">Preise laut Preisseiten der Anbieter für Deutschland, Stand 1. November 2026. Sie ändern sich erfahrungsgemäß alle paar Monate, prüf sie vor dem Abschluss noch einmal selbst.</p>'));
+
+    out.push(N.sec('tsn0-l04s4',
+      '<h3>Welches Modell für <span class="g">dich</span> passt.</h3>'+
+      '<p>Im Netz streiten sich Leute darüber, welches Modell das beste ist. Die ehrliche Antwort: Es gibt das passende für die jeweilige Aufgabe. Ein Tischler nimmt auch nicht ein Werkzeug für alles, er greift zur Säge, wenn er sägt, und zum Hobel, wenn er hobelt.</p>'+
+      '<p>So arbeiten wir auch. Für dein Backoffice nehmen wir <b>Claude zusammen mit Notion</b>, weil Claude sich auch bei langen, mehrteiligen Aufgaben an deine Anweisungen hält. Für die Bilder nehmen wir <b>Gemini</b>, und wer mag, lässt sich die Beschreibung dafür von ChatGPT schreiben. Du musst dich also nicht für einen Anbieter entscheiden und alle anderen verbannen.</p>'));
+
+    out.push(N.emp({ id:'tsn0-l04emp', kind:'Nutzung', animTitle:'Klug', animGold:'abschließen',
+      steps:['Kein Abo auf Vorrat','Ein Hauptwerkzeug','Preis selbst prüfen','Erst monatlich'],
+      intro:'So gibst du kein Geld für Werkzeuge aus, die du nicht nutzt.',
+      points:[
+        'Schließ <b>kein Abo auf Vorrat</b> ab. Im Kurs sage ich dir an jeder Stelle, ab wann du welches Werkzeug brauchst.',
+        'Wähl <b>ein Hauptwerkzeug</b> für dein Backoffice. Im Kurs ist das Claude zusammen mit Notion.',
+        'Prüf den Preis <b>auf der Seite des Anbieters</b>, bevor du abschließt. Steuern und Preise unterscheiden sich je nach Land.',
+        'Fang <b>monatlich</b> an. Das günstigere Jahresabo lohnt sich erst, wenn du weißt, dass du das Werkzeug wirklich jede Woche nutzt.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a04'); if(!root) return;
+    var timers=[], cap=root.querySelector('.a4-cap'), cards=root.querySelectorAll('.a4-card');
+    var END='Mit <b>Claude</b> und <b>Gemini</b> arbeiten wir im Kurs. ChatGPT nimmst du dazu, wenn du magst.';
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function spot(i){ cards.forEach(function(c,k){ c.classList.toggle('on',k===i); }); cap.classList.add('fade');
+      setTimeout(function(){ cap.innerHTML=i<0?END:'<b>'+P[i].n+'</b> · '+P[i].d; cap.classList.remove('fade'); },220); }
+    function play(){
+      clear(); root.classList.remove('fanned','fin'); spot(-2); cap.innerHTML='';
+      void root.offsetWidth; T(function(){ root.classList.add('fanned'); },150);
+      P.forEach(function(p,i){ T(function(){ spot(i); },1500+i*2200); });
+      T(function(){ spot(-1); root.classList.add('fin'); },1500+P.length*2200);
+    }
+    root.classList.add('js','fanned','fin'); cap.innerHTML=END;
+    cards.forEach(function(c){ c.addEventListener('click',function(){ clear(); root.classList.add('fanned'); root.classList.remove('fin'); spot(+c.getAttribute('data-i')); }); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    N.reveal(root.querySelector('.a4-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+  N.page({ key:'l04', re:/^\/die-einstiegsfragen$/, build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.4'), alt:'Der KI-Markt im November 2026: Anbieter, Stärken, Preise', eyebrow:'L 0.4', title:'Der <span class="ts-gold">KI-Markt</span>' },
+    learn:{ learn:[
+      'Du kannst die großen Anbieter <b>einordnen</b> und weißt, wofür jeder steht.',
+      'Du wählst das Modell <b>passend zur Aufgabe</b>.',
+      'Für den Start reicht die <b>Standardstufe</b>, und nur bei den Werkzeugen, die du nutzt.',
+      'Preise ändern sich oft: <b>vor dem Abschluss selbst prüfen</b>.'],
+      next:L.l05 } });
+})();
+
+/* ============================================================
+   L0.5 · Deine Sorgen, ehrlich beantwortet  (/lektionen/deine-sorgen-ehrlich-beantwortet)
+   Erklaeranimation #tsn0-a05 "Die Bonschiene" — EIGENES Konzept: fuenf Bons
+   haengen an einer Bonschiene wie in der Kueche, jeder Bon traegt eine Frage.
+   Einer nach dem anderen rutscht nach vorn, bekommt den Stempel "beantwortet"
+   und zeigt, in welchem Abschnitt die Antwort steht. Die Animation ist das
+   Inhaltsverzeichnis der Seite; die Antworten selbst stehen nur in den
+   Sektionen darunter (Doktrin 1a).
+   Datenschutz-Fakten: Hilfeseiten der Anbieter, abgerufen 01.11.2026.
+   ============================================================ */
+(function(){
+  if(window.__tsn0l05) return; window.__tsn0l05=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var Q=['Was passiert mit meinen Daten?','Ersetzt mich das irgendwann?','Erfindet die KI einfach etwas?','Muss ich programmieren können?','Lohnt sich das für einen kleinen Betrieb?'];
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Fast jeder, mit dem ich über KI im Betrieb spreche, hat dieselben Bedenken. Was passiert mit meinen Zahlen? Kann ich mich auf das verlassen, was da herauskommt? Und lohnt sich der Aufwand überhaupt?</p>'+
+      '<p>Diese Fragen sind berechtigt, und sie verdienen ehrliche Antworten statt Werbesprüchen. Die bekommst du hier, eine nach der anderen. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a05';
+    a.innerHTML=N.head('Fünf Fragen','Jede Frage <span class="g">bekommt ihre Antwort.</span>','Die Bedenken, die ich am häufigsten höre. Tipp auf einen Bon, um direkt zur Antwort zu springen.')+
+      '<div class="a5-frame"><div class="a5-rail"><span class="a5-bar"></span>'+
+        Q.map(function(q,i){ return '<a class="a5-bon" href="#tsn0-l05q'+(i+1)+'" style="--i:'+i+'"><span class="a5-clip"></span><span class="a5-no">Bon 0'+(i+1)+'</span><span class="a5-q">'+q+'</span><span class="a5-perf"></span><span class="a5-st">beantwortet</span></a>'; }).join('')+
+      '</div></div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l05q1',
+      '<h3>Was passiert mit <span class="g">meinen Daten?</span></h3>'+
+      '<p>Du gibst Rezepturen, Einkaufspreise und Umsätze ein, also Dinge, die niemanden etwas angehen. Die ehrliche Antwort hat zwei Seiten.</p>'+
+      '<p>Bei den privaten Tarifen der großen Anbieter können deine Eingaben zum Training künftiger Modelle verwendet werden. Jeder Anbieter hat dafür eine Einstellung, die du kennen und bewusst setzen solltest. Bei den Firmen-Tarifen ist das Training dagegen ab Werk ausgeschaltet.</p>'+
+      '<div class="a5-tab"><div class="a5-tr h"><span>Werkzeug</span><span>Einstellung in deinem Konto</span><span>Firmen-Tarif</span></div>'+
+        '<div class="a5-tr"><span>Claude</span><span>„Help improve our AI models“ unter Settings, abschaltbar</span><span>Team, Enterprise: kein Training</span></div>'+
+        '<div class="a5-tr"><span>ChatGPT</span><span>„Improve the model for everyone“, ab Werk an</span><span>Business, Enterprise: kein Training</span></div>'+
+        '<div class="a5-tr"><span>Gemini</span><span>„Keep Activity“: ist sie aus, wird nicht trainiert</span><span>eigene Regeln je Tarif</span></div>'+
+        '<div class="a5-tr"><span>Vibe (Mistral)</span><span>Training ab Werk erlaubt, abschaltbar</span><span>Enterprise: kein Training</span></div>'+
+      '</div>'+
+      '<p>Dazu kommt, wo deine Daten liegen. Mistral verarbeitet standardmäßig in der EU, Anthropic speichert bei direkter Nutzung in den USA. Für die meisten Daten deines Backoffice ist das unkritisch, solange du weißt, was du hineingibst.</p>'+
+      '<p>Und genau da liegt die wichtigste Regel: <b>Gästedaten, Gesundheitsdaten deiner Mitarbeiter, Passwörter und Bankdaten gehören in kein privates KI-Konto.</b> Welche Bereiche deines Notion Claude überhaupt sehen darf, legst du in Modul 4 selbst fest. Was für Reservierungen und Gästedaten gilt, besprechen wir in Modul 5.</p>'+
+      '<p class="tsn0-src">Quellen, abgerufen am 1. November 2026: privacy.claude.com · help.openai.com · support.google.com/gemini · help.mistral.ai · claude.com/pricing. Das hier ist keine Rechtsberatung. Im Zweifel fragst du deinen Datenschutzberater.</p>'));
+
+    out.push(N.sec('tsn0-l05q2',
+      '<h3>Ersetzt mich das <span class="g">irgendwann?</span></h3>'+
+      '<p>Nein. Die KI nimmt dir die Arbeit ab, die dich ohnehin vom Handwerk abhält: die Zettelwirtschaft, das Abtippen von Lieferscheinen, das Zusammensuchen von Zahlen. Sie kocht nicht, sie steht nicht am Gast und sie merkt nicht, wenn an einem Abend die Stimmung im Gastraum kippt.</p>'+
+      '<p>Was sie dir gibt, ist Zeit. Die Stunden, die du heute im Büro verlierst, kannst du wieder dort verbringen, wo dich kein Programm ersetzt. Das gilt genauso für dein Team. Ein Betrieb, der seine Zahlen kennt, steht sicherer, und davon haben alle etwas, die dort arbeiten.</p>'));
+
+    out.push(N.sec('tsn0-l05q3',
+      '<h3>Erfindet die KI <span class="g">einfach etwas?</span></h3>'+
+      '<p>Das kann passieren. Ein Sprachmodell formuliert Antworten, die plausibel klingen, und manchmal sind sie trotzdem falsch. Deshalb lassen wir die KI im Kurs nie im Kopf rechnen.</p>'+
+      '<p>Die Zahlen in deinem Backoffice kommen aus den <b>Formeln der Vorlage</b>. Die sind fertig, geprüft und rechnen mit deinen eingetragenen Preisen, jedes Mal gleich. Die KI liest, sortiert und formuliert, das Rechnen übernimmt das System. Bei allem, woran wirklich etwas hängt, schaust du einmal drüber. Wie du Claude beibringst, lieber nachzufragen als zu raten, zeige ich dir in Modul 4.</p>'));
+
+    out.push(N.sec('tsn0-l05q4',
+      '<h3>Muss ich <span class="g">programmieren</span> können?</h3>'+
+      '<p>Nein. Du schreibst deine Anweisungen so, wie du sie auch einer Kollegin in der Küche geben würdest, nur etwas genauer. Selbst bei Claude Code, das nach Technik klingt, arbeitest du mit ganz normalen Sätzen. Warum der Name trotzdem so heißt, erkläre ich dir in Lektion 3.7.</p>'));
+
+    out.push(N.sec('tsn0-l05q5',
+      '<h3>Lohnt sich das für einen <span class="g">kleinen Betrieb?</span></h3>'+
+      '<p>Gerade für dich. Eine große Kette hat eine eigene Abteilung, die jeden Deckungsbeitrag ausrechnet. Du hast die nicht, und genau diese Lücke schließt dein Backoffice.</p>'+
+      '<p>Ehrlich dazugesagt: Am Anfang kostet es dich ein paar Abende, bis deine Lieferanten, Preise und Rezepturen drin sind. Die Vorlage nimmt dir den Aufbau ab, das Eintragen bleibt bei dir. Danach rechnet das System jeden Tag für dich mit, und jede Preisänderung zieht sich von allein durch.</p>'+
+      '<p class="tsn0-rule">Der Aufwand liegt am Anfang. <span class="g">Der Nutzen bleibt.</span></p>'));
+
+    out.push(N.emp({ id:'tsn0-l05emp', kind:'Einrichtung', animTitle:'Deine Daten', animGold:'schützen',
+      steps:['Einstellung prüfen','Firmen-Tarif fürs Team','Sensibles draußen','Regelmäßig nachsehen'],
+      intro:'Vier Handgriffe, die du heute erledigst, bevor du mit echten Betriebsdaten arbeitest.',
+      points:[
+        'Öffne bei jedem KI-Konto, das du nutzt, die Einstellungen und setz die <b>Trainings-Einstellung</b> bewusst. Die Namen stehen in der Tabelle oben.',
+        'Arbeitet dein Team mit, nimm einen <b>Firmen-Tarif</b>. Dort ist das Training ab Werk ausgeschaltet.',
+        '<b>Gästedaten, Gesundheitsdaten, Passwörter und Bankdaten</b> gibst du nie in ein privates KI-Konto ein.',
+        'Schau alle paar Monate wieder in die Einstellungen. Die Anbieter ändern ihre Regeln, und <b>du bleibst verantwortlich</b>.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a05'); if(!root) return;
+    var timers=[], bons=root.querySelectorAll('.a5-bon');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function play(){
+      clear(); root.classList.remove('hung'); bons.forEach(function(b){ b.classList.remove('on','done'); });
+      void root.offsetWidth; T(function(){ root.classList.add('hung'); },100);
+      bons.forEach(function(b,i){
+        T(function(){ bons.forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); },1500+i*1700);
+        T(function(){ b.classList.add('done'); },1500+i*1700+900);
+      });
+      T(function(){ bons.forEach(function(x){ x.classList.remove('on'); }); },1500+bons.length*1700+400);
+    }
+    root.classList.add('js','hung'); bons.forEach(function(b){ b.classList.add('done'); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    bons.forEach(function(b){ b.addEventListener('click',function(e){ var t=document.querySelector(b.getAttribute('href')); if(t){ e.preventDefault(); t.scrollIntoView({behavior:N.reduced?'auto':'smooth',block:'start'}); } }); });
+    N.reveal(root.querySelector('.a5-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+  N.page({ key:'l05', re:window.__tsn0re('deine-sorgen-ehrlich-beantwortet'), build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.5'), alt:'Deine Sorgen beim Thema KI, ehrlich beantwortet', eyebrow:'L 0.5', title:'Deine <span class="ts-gold">Sorgen</span>' },
+    learn:{ learn:[
+      'Jeder Anbieter hat eine <b>Trainings-Einstellung</b>. Du setzt sie bewusst.',
+      '<b>Gästedaten, Gesundheitsdaten und Passwörter</b> gehören in kein privates KI-Konto.',
+      'Die Zahlen rechnet das <b>System</b>, die KI liest und formuliert.',
+      'Der Aufwand liegt am <b>Anfang</b>, danach arbeitet das System jeden Tag für dich.'],
+      next:L.l06 } });
+})();
+
+/* ============================================================
+   L0.6 · Agent oder Automation  (/lektionen/agent-oder-automation)
+   Erklaeranimation #tsn0-a06 "Die Weiche" — EIGENES Konzept: oben ein
+   Eingang, darunter eine Weiche mit zwei gleich breiten Gleisen. Eine feste
+   Meldung (Reservierung storniert) laeuft links ueber die Regel und kommt
+   immer gleich heraus. Eine freie Anfrage (Mail eines Gastes) laeuft rechts
+   zum Agenten, der sie liest und eine passende Antwort formuliert.
+   Abgrenzung nach Modul 4 (Text-Waechter 01.11.2026): Automation = feste
+   Regel, immer gleich, ohne KI. Agent = liest mit, entscheidet, formuliert.
+   Keine Formulierungen aus 4.4/4.5/4.6, kein Mitarbeiter-Bild.
+   ============================================================ */
+(function(){
+  if(window.__tsn0l06) return; window.__tsn0l06=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var MAIL='Hallo, wir wären am Freitag gegen 19 Uhr zu sechst, zwei davon Kinder. Eine Person isst vegan. Geht das?';
+  var REPLY='Gern, am Freitag um 19 Uhr haben wir einen Tisch für sechs frei. Für euren veganen Gast bereitet die Küche gern etwas vor, und zwei Kinderstühle stellen wir bereit.';
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Zwei Begriffe begegnen dir im Kurs immer wieder: <b>Agent</b> und <b>Automation</b>. Beide nehmen dir Arbeit ab, und beide werden gern durcheinandergeworfen.</p>'+
+      '<p>Dabei ist der Unterschied schnell erklärt, wenn man ihn einmal an einem echten Fall aus dem Betrieb sieht. Genau das machen wir jetzt. Danach weißt du bei jeder Aufgabe, welches der beiden du dafür brauchst.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a06';
+    a.innerHTML=N.head('Zwei Wege','Regel oder <span class="g">Urteil.</span>','Zwei Dinge kommen an. Das eine braucht immer dieselbe Antwort, das andere jedes Mal eine neue.')+
+      '<div class="a6-frame">'+
+        '<div class="a6-in"><span class="a6-in-k">Eingang</span><div class="a6-slot"><div class="a6-item i1"><span class="a6-ik">Meldung</span><b>Reservierung storniert</b><span>Tisch 12 · Samstag · 20 Uhr</span></div>'+
+          '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div></div></div>'+
+        '<svg class="a6-rails" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><path class="r0" d="M400 0 L400 22"/><path class="r1" d="M400 22 C400 60 200 40 200 90"/><path class="r2" d="M400 22 C400 60 600 40 600 90"/><circle class="dot d1" r="5"/><circle class="dot d2" r="5"/></svg>'+
+        '<div class="a6-lanes">'+
+          '<div class="a6-lane l1"><div class="a6-lh"><span class="a6-ic">⚙︎</span><span><b>Automation</b><i>feste Regel</i></span></div>'+
+            '<div class="a6-rule"><span class="k">Wenn</span>eine Reservierung storniert wird<span class="k">dann</span>wird der Tisch wieder frei</div>'+
+            '<div class="a6-out o1"><span class="a6-ok">✓</span>Tisch 12 ist wieder buchbar. <i>Jedes Mal genau so.</i></div></div>'+
+          '<div class="a6-lane l2"><div class="a6-lh"><span class="a6-ic">◎</span><span><b>Agent</b><i>liest und entscheidet</i></span></div>'+
+            '<div class="a6-read"><span>sechs Personen</span><span>zwei Kinder</span><span>vegan</span><span>Freitag 19 Uhr</span></div>'+
+            '<div class="a6-out o2"><span class="a6-ok">✎</span><span class="a6-reply">'+REPLY+'</span></div></div>'+
+        '</div>'+
+      '</div>'+
+      '<p class="tsn0-note">Ein Beispiel aus dem Reservierungsalltag.</p>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l06s1',
+      '<h3>Die Automation: eine <span class="g">feste Regel.</span></h3>'+
+      '<p>Eine Automation folgt einer Regel, die du einmal festlegst. Es passiert etwas, und daraufhin passiert immer dasselbe. Eine Reservierung wird storniert, also wird der Tisch wieder frei. Ein neuer Lieferschein ist eingetragen, also bekommt die Küche eine Nachricht. Der Monat ist zu Ende, also entsteht eine neue Inventurliste.</p>'+
+      '<p>Dafür braucht es keine KI. Die Automation denkt nicht nach und versteht keinen Text, sie führt aus. Genau das macht sie so verlässlich: Sie macht es jedes Mal genau gleich, auch um zwei Uhr nachts und auch an deinem freien Tag.</p>'));
+
+    out.push(N.sec('tsn0-l06s2',
+      '<h3>Der Agent: liest mit und <span class="g">entscheidet.</span></h3>'+
+      '<p>Ein Agent bekommt einen Auftrag und erledigt ihn in mehreren Schritten. Er liest, was ankommt, versteht, worum es geht, schaut in deinem System nach und formuliert ein Ergebnis. Die Mail aus der Animation lässt sich mit keiner festen Regel beantworten, weil jede Anfrage anders ist. Der Agent erkennt sechs Personen, zwei Kinder und einen veganen Gast und antwortet passend.</p>'+
+      '<p>Weil der Agent selbst entscheidet, schaust du am Anfang auf seine Ergebnisse. Je besser deine Anweisungen und je sauberer dein System, desto weniger musst du nachbessern.</p>'));
+
+    out.push(N.sec('tsn0-l06s3',
+      '<h3>Woran du sie <span class="g">erkennst.</span></h3>'+
+      '<div class="tsn0-cards c2 a6-cmp">'+
+        '<div class="tsn0-card"><span class="k">Automation</span><div class="n">Immer gleich.</div><hr>'+
+          '<p><b>Braucht:</b> eine Regel, die du einmal festlegst.</p><p><b>Arbeitet:</b> ohne KI, jedes Mal genau gleich.</p><p><b>Stark bei:</b> Abläufen, die sich nie ändern.</p><p><b>Du achtest auf:</b> dass die Regel stimmt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Agent</span><div class="n">Jedes Mal neu überlegt.</div><hr>'+
+          '<p><b>Braucht:</b> einen Auftrag und Zugriff auf dein System.</p><p><b>Arbeitet:</b> mit KI, liest und entscheidet.</p><p><b>Stark bei:</b> Anfragen, die jedes Mal anders sind.</p><p><b>Du achtest auf:</b> das Ergebnis, vor allem am Anfang.</p></div>'+
+      '</div>'+
+      '<p class="tsn0-rule">Die Automation folgt einer <span class="g">Regel.</span> Der Agent folgt einem <span class="g">Auftrag.</span></p>'));
+
+    out.push(N.sec('tsn0-l06s4',
+      '<h3>Wo du beiden im Kurs <span class="g">begegnest.</span></h3>'+
+      '<p>Notion AI arbeitet in deinem Backoffice ab <b>Modul 2</b> mit, zum Beispiel beim Auslesen von Lieferscheinen. In <b>Modul 4</b> richtest du Notion Agents und Notion Automationen ein und lässt Claude Aufgaben zu festen Zeiten erledigen. In <b>Modul 5</b> baust du einen Agenten, der Reservierungsanfragen per Mail, Nachricht und Telefon annimmt. Dort zeige ich dir auch, wie du für jede Aufgabe die richtige Wahl triffst.</p>'));
+
+    out.push(N.emp({ id:'tsn0-l06emp', kind:'Nutzung', animTitle:'Die richtige', animGold:'Wahl',
+      steps:['Gleich oder anders?','Regel zuerst','Agent für Text','Ergebnis prüfen'],
+      intro:'So ordnest du eine Aufgabe ein, bevor du etwas einrichtest.',
+      points:[
+        'Frag dich: Muss bei dieser Aufgabe <b>jedes Mal dasselbe</b> passieren? Dann reicht eine Automation.',
+        'Wenn eine einfache Regel reicht, nimm sie. Sie ist <b>schneller eingerichtet</b> und braucht keine KI.',
+        'Kommt ein <b>Text</b> an, den jemand lesen und verstehen muss, etwa eine Mail oder ein Lieferschein, brauchst du einen Agenten.',
+        'Schau dir die Ergebnisse eines neuen Agenten in den ersten Wochen an. <b>Erst danach</b> lässt du ihn allein arbeiten.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a06'); if(!root) return;
+    var timers=[], reply=root.querySelector('.a6-reply');
+    var d1=root.querySelector('.d1'), d2=root.querySelector('.d2'), p1=root.querySelector('.r1'), p2=root.querySelector('.r2'), p0=root.querySelector('.r0');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function run(dot,path,dur){
+      if(N.reduced) return; var L0=p0.getTotalLength(), L1=path.getTotalLength(), t0=null; dot.style.opacity=1;
+      function f(t){ if(!t0) t0=t; var p=Math.min(1,(t-t0)/dur), e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2, d=e*(L0+L1), pt=d<L0?p0.getPointAtLength(d):path.getPointAtLength(d-L0);
+        dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y); if(p<1) requestAnimationFrame(f); else dot.style.opacity=0; }
+      requestAnimationFrame(f); setTimeout(function(){ dot.style.opacity=0; },dur+300);
+    }
+    function type(start){
+      reply.textContent=''; if(N.reduced){ reply.textContent=REPLY; return; }
+      var words=REPLY.split(' ');
+      words.forEach(function(w,i){ T(function(){ reply.textContent=words.slice(0,i+1).join(' '); },start+i*70); });
+      T(function(){ reply.textContent=REPLY; },start+words.length*70+300);
+    }
+    function play(){
+      clear(); root.className='tsn0-anim js in'; reply.textContent='';
+      void root.offsetWidth;
+      T(function(){ root.classList.add('s1'); },300);
+      T(function(){ root.classList.add('go1'); run(d1,p1,1100); },1400);
+      T(function(){ root.classList.add('r1'); },2500);
+      T(function(){ root.classList.add('out1'); },3300);
+      T(function(){ root.classList.add('s2'); },4700);
+      T(function(){ root.classList.add('go2'); run(d2,p2,1100); },6200);
+      T(function(){ root.classList.add('r2'); },7300);
+      T(function(){ root.classList.add('out2'); type(800); },8900);
+    }
+    root.classList.add('js','s1','go1','r1','out1','s2','go2','r2','out2'); reply.textContent=REPLY;
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    N.reveal(root.querySelector('.a6-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+  N.page({ key:'l06', re:window.__tsn0re('agent-oder-automation'), build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.6'), alt:'Agent oder Automation: der Unterschied an einem Beispiel aus dem Betrieb', eyebrow:'L 0.6', title:'Agent oder <span class="ts-gold">Automation</span>' },
+    learn:{ learn:[
+      'Eine <b>Automation</b> folgt einer festen Regel und arbeitet jedes Mal gleich.',
+      'Ein <b>Agent</b> liest, versteht und entscheidet selbst.',
+      'Für Abläufe, die sich nie ändern, reicht eine <b>Regel</b>.',
+      'Für Texte und Anfragen brauchst du einen <b>Agenten</b>, dessen Ergebnisse du am Anfang prüfst.'],
+      next:L.l07 } });
+})();
+
+/* ============================================================
+   L0.7 · Dein Weg durch den Kurs  (/lektionen/dein-weg-durch-den-kurs)
+   Erklaeranimation #tsn0-a07 "Was du in der Hand hast" — EIGENES Konzept:
+   ein Weg aus sieben Stationen (Modul 1 bis 6 und Abschluss) zeichnet sich
+   von links nach rechts, ein Licht laeuft mit; an jeder Station steigt eine
+   Karte auf: was du nach diesem Modul in der Hand hast. Die Sektionen
+   danach behandeln Einstieg, Konten und Lernweise, nicht die Ergebnisse.
+   ============================================================ */
+(function(){
+  if(window.__tsn0l07) return; window.__tsn0l07=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var STN=[
+    ['1','Notion-Grundlagen','Du bewegst dich sicher in Notion.'],
+    ['2','Backoffice','Dein Backoffice läuft mit deinen Zahlen.'],
+    ['3','Claude Grundlagen','Claude ist eingerichtet und kennt deinen Betrieb.'],
+    ['4','Claude + Notion','Claude arbeitet direkt in deinem Backoffice.'],
+    ['5','Reservierungen','Ein Agent nimmt deine Anfragen an.'],
+    ['6','Website','Deine eigene Website ist online.'],
+    ['✓','Abschluss','Du weißt, wie es weitergeht.']
+  ];
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Jetzt weißt du, worum es geht. Bevor du loslegst, zeige ich dir den Weg durch den Kurs: in welcher Reihenfolge die Module aufeinander aufbauen, wo du einsteigst und welche Konten du vorher brauchst.</p>'+
+      '<p>Am Ende dieser Lektion hast du deine Unterlagen für das Backoffice beisammen. Damit gehst du ohne Umwege in Modul 1.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-a07';
+    a.innerHTML=N.head('Der Weg','Was du nach jedem Modul <span class="g">in der Hand hast.</span>','Sieben Stationen. An jeder bekommst du etwas, das du am nächsten Tag im Betrieb nutzt.')+
+      '<div class="a7-frame"><div class="a7-track"><span class="a7-line"></span><span class="a7-fill"></span><span class="a7-light"></span>'+
+        STN.map(function(s,i){ return '<div class="a7-st" style="--i:'+i+'"><span class="a7-dot">'+s[0]+'</span><span class="a7-name">'+s[1]+'</span><div class="a7-card"><p>'+s[2]+'</p></div></div>'; }).join('')+
+      '</div></div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-l07s1',
+      '<h3>Wo du <span class="g">einsteigst.</span></h3>'+
+      '<div class="tsn0-cards c3">'+
+        '<div class="tsn0-card"><span class="k">Neu in Notion</span><div class="n">Der Reihe nach.</div><hr><p>Geh Modul 1 vollständig durch. Danach arbeitest du in Modul 2 sicher mit deiner Vorlage.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Notion kennst du</span><div class="n">Modul 1 überfliegen.</div><hr><p>Schau dir in Modul 1 nur an, was neu für dich ist, und steig dann mit der Vorlage in Modul 2 ein.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Claude kennst du</span><div class="n">Trotzdem Modul 3.</div><hr><p>Auch wenn du Claude schon nutzt: In Modul 3 richtest du es so ein, dass es deinen Betrieb kennt. Darauf baut Modul 4 auf.</p></div>'+
+      '</div>'+
+      '<p>Modul 5 und Modul 6 kannst du in beliebiger Reihenfolge machen, sobald du Modul 4 abgeschlossen hast.</p>'));
+
+    out.push(N.sec('tsn0-l07s2',
+      '<h3>Welche Konten du <span class="g">brauchst.</span></h3>'+
+      '<p><b>Notion</b> brauchst du ab Modul 1. Das Konto ist kostenlos. Notion AI ist voll erst im Business-Tarif enthalten, in den kleineren Tarifen nur zum Testen. Welchen Tarif dein Backoffice wirklich braucht, besprechen wir in Modul 2, bevor du etwas bezahlst.</p>'+
+      '<p><b>Claude</b> brauchst du ab Modul 3. Welcher Tarif dafür reicht und was er kostet, steht in Lektion 3.3.</p>'+
+      '<p>Die <b>Bildwerkzeuge</b> nimmst du erst dazu, wenn du deinem Backoffice Bilder geben willst. Für alles Weitere sage ich dir im jeweiligen Modul, ob und ab wann du es brauchst.</p>'+
+      '<p class="tsn0-src">Notion-Tarife laut notion.com/pricing, Stand 1. November 2026.</p>'));
+
+    out.push(N.sec('tsn0-l07s3',
+      '<h3>So lernst du <span class="g">am besten.</span></h3>'+
+      '<p>Nimm dir eine Lektion vor und setz sie danach in deinem Betrieb um, bevor du die nächste anfängst. Was du einmal selbst mit deinen eigenen Zahlen gemacht hast, sitzt.</p>'+
+      '<p>Plan dir feste Zeiten ein, zum Beispiel zwei ruhige Vormittage in der Woche. Und wenn eine Lektion an einer Stelle hakt, geh weiter und komm später zurück. Der Kurs läuft dir nicht weg.</p>'));
+
+    out.push(N.emp({ id:'tsn0-l07emp', kind:'Einrichtung', animTitle:'Deine', animGold:'Vorbereitung',
+      steps:['Notion-Konto','Lieferscheine','Deine Gerichte','Rezepturen'],
+      intro:'Diese vier Dinge legst du dir bereit, bevor du in Modul 1 startest. Dann geht es in Modul 2 ohne Suchen los.',
+      points:[
+        'Leg dir ein <b>Notion-Konto</b> an. Die kostenlose Variante reicht für den Anfang.',
+        'Sammle die <b>Lieferscheine</b> der letzten zwei Wochen, als Papier oder als Foto.',
+        'Schreib deine <b>zehn wichtigsten Gerichte</b> mit Verkaufspreis auf.',
+        'Such die <b>Rezepturen</b> dazu heraus, egal ob auf Zetteln, in Excel oder nur im Kopf deiner Köche.']
+    }));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-a07'); if(!root) return;
+    var timers=[], st=root.querySelectorAll('.a7-st');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function play(){
+      clear(); root.classList.remove('run','fin'); st.forEach(function(s){ s.classList.remove('on'); });
+      void root.offsetWidth; T(function(){ root.classList.add('run'); },200);
+      st.forEach(function(s,i){ T(function(){ s.classList.add('on'); },700+i*900); });
+      T(function(){ root.classList.add('fin'); },700+st.length*900+400);
+    }
+    root.classList.add('js','run','fin'); st.forEach(function(s){ s.classList.add('on'); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    N.reveal(root.querySelector('.a7-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+  N.page({ key:'l07', re:window.__tsn0re('dein-weg-durch-den-kurs'), build:build, after:after,
+    hero:{ img:window.__tsn0ph('L 0.7'), alt:'Dein Weg durch die Gastronomy AI Masterclass', eyebrow:'L 0.7', title:'Dein <span class="ts-gold">Weg</span>' },
+    learn:{ learn:[
+      'Die Module <b>bauen aufeinander auf</b>, Modul 5 und 6 wählst du frei.',
+      'Notion brauchst du <b>ab Modul 1</b>, Claude ab Modul 3.',
+      'Du setzt jede Lektion <b>im eigenen Betrieb</b> um, bevor du weitermachst.',
+      'Deine <b>Unterlagen</b> für das Backoffice liegen bereit.'],
+      next:L.m1, nextLabel:'Weiter zu Modul 1' } });
+})();
+
+/* ============================================================
+   ABSCHLUSS · Was du jetzt kannst  (/abschluss-was-du-am-ende-kannst)
+   Erklaeranimation #tsn0-ab "Der Pass" — EIGENES Konzept: ein langer
+   Kuechenpass mit sechs Cloches. Eine nach der anderen hebt sich und gibt
+   frei, was du in diesem Modul gelernt hast; zum Schluss leuchtet die
+   Glocke am Pass ("Service"). Die Sektionen danach: Pflege, Weg danach.
+   ============================================================ */
+(function(){
+  if(window.__tsn0ab) return; window.__tsn0ab=true;
+  var N=window.__tsn0, L=window.__tsn0L;
+  var CL=[
+    ['Notion','Du baust und liest Datenbanken und findest dich in jeder Ansicht zurecht.'],
+    ['Backoffice','Dein Betrieb steht im System: Einkauf, Rezepturen, Gerichte, Kosten, Kennzahlen.'],
+    ['Claude','Du weißt, was Claude ist, und hast es für deinen Betrieb eingerichtet.'],
+    ['Claude + Notion','Claude beantwortet Fragen zu deinen Zahlen und pflegt dein Backoffice mit.'],
+    ['Reservierungen','Ein Agent nimmt Anfragen an und trägt sie ein.'],
+    ['Website','Deine Website steht und ist online.']
+  ];
+  function build(){
+    var out=[];
+    out.push(N.intro(
+      '<p>Du bist durch. Ich weiß, wie viele Abende in diesem Kurs stecken, neben einem Betrieb, der dich jeden Tag fordert. Danke, dass du drangeblieben bist.</p>'+
+      '<p>Auf dieser Seite schauen wir zurück auf das, was du jetzt kannst, und nach vorn: wie dein System lebendig bleibt und wie es für dich weitergeht.</p>'));
+    var a=N.h('div','tsn0-anim'); a.id='tsn0-ab';
+    a.innerHTML=N.head('Der Pass','Alles ist <span class="g">angerichtet.</span>','Sechs Teller, einer für jedes Modul. Je nach Tarif hast du nicht alle durchlaufen, die anderen warten auf dich.')+
+      '<div class="ab-frame"><div class="ab-bell"><span></span></div><div class="ab-pass">'+
+        CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
+      '</div><div class="ab-shelf"></div></div>'+
+      '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
+    out.push(a);
+
+    out.push(N.sec('tsn0-abs1',
+      '<h3>Was du jetzt <span class="g">kannst.</span></h3>'+
+      '<div class="tsn0-cards c3">'+
+        '<div class="tsn0-card"><span class="k">Verstehen</span><div class="n">Du ordnest ein.</div><hr><p>Du kennst die Anbieter am Markt, weißt, was sie können und kosten, und hältst Agent und Automation auseinander. Neue Schlagzeilen bringen dich nicht mehr aus der Ruhe.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Bedienen</span><div class="n">Du arbeitest im System.</div><hr><p>Dein Backoffice läuft mit deinen Zahlen. Du trägst ein, liest ab und weißt bei jeder Zahl, woher sie kommt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Erweitern</span><div class="n">Du baust weiter.</div><hr><p>Mit Claude stellst du deinem System Fragen, lässt Aufgaben erledigen und passt es an, wenn dein Betrieb sich verändert.</p></div>'+
+      '</div>'));
+
+    out.push(N.sec('tsn0-abs2',
+      '<h3>Dein System bleibt <span class="g">lebendig.</span></h3>'+
+      '<p>Ein Backoffice ist nur so gut wie seine Pflege. Das muss nicht viel sein, es muss nur regelmäßig passieren.</p>'+
+      '<div class="tsn0-do"><span class="k">Dein Rhythmus</span><ol>'+
+        '<li><b>Mit jeder Lieferung:</b> den Lieferschein eintragen, damit deine Preise stimmen.</li>'+
+        '<li><b>Einmal in der Woche:</b> einen Blick auf die Kennzahlen und auf die Gerichte, deren Deckungsbeitrag sich verändert hat.</li>'+
+        '<li><b>Einmal im Monat:</b> Inventur und ein kurzer Abgleich mit dem Einkauf.</li>'+
+        '<li><b>Wenn sich die Karte ändert:</b> neue Gerichte gleich mit Rezeptur anlegen, nicht erst später.</li>'+
+      '</ol></div>'));
+
+    out.push(N.sec('tsn0-abs3',
+      '<h3>Wie es <span class="g">weitergeht.</span></h3>'+
+      '<p>Du hast ein System, das mit deinem Betrieb wächst. Ein zweiter Standort, ein Catering-Bereich oder ein neues Konzept lassen sich auf derselben Grundlage abbilden. In Modul 2 findest du dafür die Erweiterung für mehrere Standorte.</p>'+
+      '<p>Die Werkzeuge entwickeln sich weiter, und der Kurs wächst mit. Wenn sich bei Claude oder Notion etwas Wichtiges ändert, findest du es hier. Und wenn du an einer Stelle hängst oder dein System für deinen Betrieb weiter ausbauen willst, schreib mir: <a href="mailto:robert@tasty-studios.de">robert@tasty-studios.de</a></p>'));
+    return out;
+  }
+  function after(page){
+    var root=page.querySelector('#tsn0-ab'); if(!root) return;
+    var timers=[], pl=root.querySelectorAll('.ab-pl');
+    function clear(){ timers.forEach(clearTimeout); timers=[]; }
+    function T(f,ms){ timers.push(setTimeout(f,ms)); }
+    function play(){
+      clear(); root.classList.remove('set','bell'); pl.forEach(function(p){ p.classList.remove('up'); });
+      void root.offsetWidth; T(function(){ root.classList.add('set'); },150);
+      pl.forEach(function(p,i){ T(function(){ p.classList.add('up'); },1400+i*900); });
+      T(function(){ root.classList.add('bell'); },1400+pl.length*900+300);
+    }
+    root.classList.add('js','set','bell'); pl.forEach(function(p){ p.classList.add('up'); });
+    root.querySelector('.tsn0-replay').addEventListener('click',play);
+    N.reveal(root.querySelector('.ab-frame'),function(){ root.classList.add('in'); if(!N.reduced) play(); });
+  }
+  N.page({ key:'ab', re:/^\/abschluss-was-du-am-ende-kannst$/, build:build, after:after,
+    hero:{ img:window.__tsn0ph('ABSCHLUSS'), alt:'Abschluss der Gastronomy AI Masterclass: was du jetzt kannst', eyebrow:'Abschluss', title:'Was du jetzt <span class="ts-gold">kannst</span>' },
+    learn:{ learn:[
+      'Du <b>ordnest</b> den KI-Markt ein und triffst eigene Entscheidungen.',
+      'Dein <b>Backoffice</b> läuft mit deinen Zahlen.',
+      'Mit <b>Claude</b> bedienst und erweiterst du dein System.',
+      'Ein fester <b>Pflege-Rhythmus</b> hält alles aktuell.'],
+      next:'/', nextLabel:'Zur Kursübersicht' } });
+})();
+
+/* ---- Modul 0: Mount (nach allen Seiten-Registrierungen) ---- */
+(function(){
+  var m=window.__tsn0mount; if(!m||window.__tsn0armed) return; window.__tsn0armed=true;
+  m(); document.addEventListener('DOMContentLoaded', m);
+  window.__tsMO(m).observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(m,1500); setTimeout(m,4000);
+})();
 /* <<< NEUBAU MODUL 0 — ENDE <<< */
 /* · */
 /* · */
