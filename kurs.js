@@ -31118,6 +31118,16 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
      zeigt niemand mehr: sofort auf die neue Uebersicht. Auch nach Klick innerhalb der Seite (Seitenwechsel ohne Neuladen). */
   var OLD3=/^\/(?:lektionen\/)?modul-3-dein-pers[a-z]*nlicher-workspace\/?$/, NEW3='/module/modul-3-claude-grundlagen';
   function away(){ if(OLD3.test(location.pathname)){ document.documentElement.style.visibility='hidden'; location.replace(NEW3); return true; } return false; }
+  /* Laeuft auf JEDER Seite (Kern), nicht erst mit einer Modul-3-Lektion: Direktaufruf sofort, Klick auf alte Links
+     wird abgefangen, Seitenwechsel ohne Neuladen ueber den Kopf der Seite erkannt (Live-Fund 01.11.2026). */
+  away();
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+    var u; try{ u=new URL(a.href, location.href); }catch(x){ return; }
+    if(u.origin===location.origin && OLD3.test(u.pathname)){ e.preventDefault(); e.stopPropagation(); location.assign(NEW3); }
+  }, true);
+  window.addEventListener('popstate', away);
+  if(document.head) window.__tsMO(away).observe(document.head,{childList:true,subtree:true,characterData:true});
   function mountAll(){
     if(away()) return;
     var p=location.pathname;
