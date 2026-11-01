@@ -4418,7 +4418,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/die-3-slash-commands' },
     { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/plan-mode-effort-levels' },
     { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/die-5-wichtigsten-skills' },
-    { re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, href:'/die-4-wichtigsten-mcps' },
+    { re:/\/(?:lektionen\/)?die-4-wichtigsten-mcps\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31569,7 +31570,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -33333,6 +33334,117 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du installierst Plugins über das <b>/plugin-Fenster</b> und weißt, für wen sie gelten.',
         'Du hältst den Kasten mit <b>/skill-doctor</b> schlank.'],
       next:'/die-4-wichtigsten-mcps'}
+  });
+})();
+
+/* ---- l13-verbindungen.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.13 "Verbindungen"  (/die-4-wichtigsten-mcps)
+   Fakten: Faktenblatt Punkt 8 (MCP, Konnektoren = MCP-Server, claude.ai/directory,
+   claude mcp add http/stdio, --scope local/project/user, list/get/remove, /mcp,
+   claude mcp login, Konnektoren erscheinen automatisch in Claude Code, Sicherheit,
+   ungenutzte Server abschalten spart Kontext). Abgrenzung: Notion verbinden = Modul 4,
+   Server/API = Modul 5. Modul 4/5/6 setzen voraus: Prinzip, Befehl, /mcp, Anmeldung, Bereich.
+   Erklaeranimation #tsn3-a13 "Vier Schalter, vier Faehigkeiten."
+   Links eine Schalttafel mit vier gleich hohen Schaltern, rechts das Claude-Feld mit vier
+   Plaetzen. Schalter an: eine Leitung im Zwischenraum leuchtet, rechts erscheint, was Claude
+   jetzt kann, oben steigt die Kontext-Anzeige. Zum Schluss wird ein ungenutzter Schalter
+   wieder aus. Tafel, Feld, Leitungen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var CON=[
+    {n:'Postfach',s:'Gmail oder Microsoft 365',c:'liest Reservierungsanfragen und Lieferantenmails'},
+    {n:'Kalender',s:'Google Kalender',c:'kennt Liefertermine und Veranstaltungen'},
+    {n:'Ablage',s:'Google Drive',c:'findet Preislisten und Rezepturen'},
+    {n:'Gestaltung',s:'Canva',c:'legt Aushänge in deiner Vorlage an'}
+  ];
+  var CAPS=[
+    'Der erste Schalter: das <b>Postfach</b>. Ab jetzt kann Claude Reservierungsanfragen lesen, ohne dass du sie kopierst.',
+    'Der <b>Kalender</b> kommt dazu. Claude weiß, wann der Großhändler liefert und wann die Hochzeitsgesellschaft kommt.',
+    'Die <b>Ablage</b>: Preislisten und Rezepturen liegen nicht mehr nur auf deinem Rechner.',
+    'Jede Verbindung kostet etwas <b>Platz im Kopf</b>, auch ungenutzt. Was du einen Monat nicht gebraucht hast, schaltest du wieder ab.'
+  ];
+  var stage='<div class="l13-wrap"><div class="l13-board"><div class="l13-h">Verbindungen</div>'
+    +CON.map(function(c,i){ return '<button type="button" class="l13-sw'+(i<3?' on':'')+'" data-i="'+i+'"><span class="nm">'+c.n+'</span><span class="sb">'+c.s+'</span><span class="tg"><i></i></span></button>'; }).join('')+'</div>'
+    +'<div class="l13-lines">'+CON.map(function(c,i){ return '<span class="l13-ln'+(i<3?' on':'')+'" data-i="'+i+'"><i></i></span>'; }).join('')+'</div>'
+    +'<div class="l13-claude"><div class="l13-h">Was Claude jetzt kann</div>'
+    +CON.map(function(c,i){ return '<div class="l13-cap'+(i<3?' on':'')+'" data-i="'+i+'">'+c.c+'</div>'; }).join('')+'<div class="l13-meter"><span>Platz, den die Verbindungen belegen</span><b><i style="transform:scaleX(.3)"></i></b></div></div></div>';
+  function set(el,on){
+    el.querySelectorAll('.l13-sw,.l13-ln,.l13-cap').forEach(function(n){ n.classList.toggle('on', !!on[+n.getAttribute('data-i')]); });
+    var k=on.filter(Boolean).length; el.querySelector('.l13-meter i').style.transform='scaleX('+(k*0.1)+')';
+  }
+  T3.anim('tsn3-a13',{
+    reset:function(el){ set(el,[0,0,0,0]); },
+    play:function(el, api, end){
+      var S=3000, st=[0,0,0,0];
+      [0,1,2,3].forEach(function(i){ api.T.at(400+i*S,function(){ st[i]=1; set(el,st); if(i<3) api.cap(CAPS[i]); }); });
+      api.T.at(400+4*S,function(){ api.cap(CAPS[3]); });
+      api.T.at(400+4*S+1400,function(){ st[3]=0; set(el,st); });
+      api.T.at(400+5*S+600, end);
+    },
+    end:function(el){ set(el,[1,1,1,0]); },
+    setup:function(el, api){
+      el.querySelectorAll('.l13-sw').forEach(function(b){ b.addEventListener('click',function(){
+        var k=window['__tsn3Kill_tsn3_a13']; if(k) k();
+        var st=[0,1,2,3].map(function(i){ return el.querySelector('.l13-sw[data-i="'+i+'"]').classList.contains('on')?1:0; });
+        var i=+b.getAttribute('data-i'); st[i]=st[i]?0:1; set(el,st);
+      }); });
+    }
+  });
+
+  T3.page({
+    key:'l13', re:/\/(?:lektionen\/)?die-4-wichtigsten-mcps\/?$/, tab:'L 3.13 · Verbindungen',
+    hero:{eyebrow:'L 3.13', title:'<span class="ts-gold">Verbindungen</span>', alt:'Verbindungen: MCP und Konnektoren verbinden Claude mit Postfach, Kalender und Ablage'},
+    intro:'<p>Bisher arbeitet Claude mit dem, was du hineinlegst: Dateien, Fotos, Ordner. Eine <b>Verbindung</b> öffnet ihm die Dienste, in denen dein Betrieb ohnehin läuft, dein Postfach, deinen Kalender, deine Ablage. Danach muss nichts mehr kopiert und hochgeladen werden.</p>'
+      +'<p>Hinter allen Verbindungen steckt derselbe offene Standard, das <b>Model Context Protocol</b>, kurz MCP. In der App heißen sie Konnektoren, in Claude Code MCP-Server, gemeint ist dasselbe. Wir schließen heute eine an und klären, worauf du dabei achtest.</p>',
+    anim:{id:'tsn3-a13', eb:'Was eine Verbindung bringt', title:'Vier Schalter, vier <span class="g">Fähigkeiten</span>.',
+      sub:'Jeder Schalter verbindet Claude mit einem Dienst, den du schon nutzt. Rechts steht, was dadurch möglich wird.',
+      stage:stage,
+      capEnd:CAPS[3]},
+    body:function(H){
+      return H.sec({id:'tsn3-l13-was', title:'Ein Stecker für <span class="g">alles</span>',
+          lead:'MCP ist wie eine Steckdosennorm. Jeder Dienst, der sie anbietet, passt an Claude, egal ob Postfach, Kalender oder Ablage.',
+          body:'<p><strong class="lead">Die Verbindung liefert Werkzeuge.</strong>Ein angeschlossener Dienst bringt Claude neue Möglichkeiten mit: Mails suchen, Termine lesen, Dateien finden. Claude entscheidet selbst, wann es sie braucht, so wie bei Skills.</p>'
+            +'<p><strong class="lead">Geprüfte Verbindungen findest du im Verzeichnis.</strong>Anthropic führt unter <a href="https://claude.ai/directory" target="_blank" rel="noopener">claude.ai/directory</a> eine Liste von Konnektoren, die es nach festen Kriterien aufgenommen hat, darunter Google Drive, Gmail, Google Kalender, Microsoft 365, Slack und Canva.</p>'})
+        +H.sec({id:'tsn3-l13-app', title:'Der einfachste Weg: über die <span class="g">App</span>',
+          lead:'Konnektoren, die du in der Claude-App verbindest, stehen dir automatisch auch in Claude Code zur Verfügung, sobald du dort mit demselben Konto angemeldet bist.',
+          body:H.steps([
+            'Öffne in der App <b>Anpassen › Konnektoren</b> und verbinde dein Postfach, deinen Kalender oder deine Ablage. Du meldest dich dabei beim jeweiligen Dienst an.',
+            'Starte Claude Code und gib <code>/mcp</code> ein. Dort siehst du alle Verbindungen, auch die aus der App, und ob sie angemeldet sind.',
+            'Probier sie mit einem Auftrag aus dem Alltag aus, zum Beispiel mit dem Prompt unten.'
+          ])
+          +H.prompt('Schau in meinen Kalender und in mein Postfach: Welche Lieferungen und Veranstaltungen stehen in der kommenden Woche an? Mach mir eine Liste nach Tagen, mit Uhrzeit und Absender. Ändere nichts und antworte auf keine Mail.','Prompt: Wochenüberblick aus Kalender und Postfach')})
+        +H.sec({id:'tsn3-l13-code', title:'Eine Verbindung in Claude Code <span class="g">anschließen</span>',
+          lead:'Manche Dienste gibt es nicht als Konnektor in der App. Dann schließt du sie in Claude Code mit einem Befehl an. Die Adresse findest du in der Anleitung des Anbieters.',
+          body:H.code('claude mcp add --transport http <name> <adresse-des-anbieters>','Online-Dienst anschließen','Den Befehl gibst du im Terminal ein, nicht in der Sitzung. <name> wählst du selbst, die Adresse kommt vom Anbieter.')
+            +'<p><strong class="lead">Für wen sie gilt.</strong>Mit dem Zusatz <code>--scope</code> legst du fest, wo die Verbindung gilt. Ohne Zusatz gilt sie nur für dich und nur im aktuellen Projekt.</p>'
+            +H.table(['Zusatz','Gilt für','Sinnvoll für'],[
+              ['ohne, oder <code>--scope local</code>','dich, nur dieses Projekt','zum Ausprobieren'],
+              ['<code>--scope user</code>','dich, in allen Projekten','Postfach, Kalender, Ablage'],
+              ['<code>--scope project</code>','alle, die mit diesem Projektordner arbeiten','Dienste, die das ganze Team braucht']
+            ])
+            +'<p style="margin-top:14px"><strong class="lead">Anmelden und aufräumen.</strong>Braucht der Dienst eine Anmeldung, erledigst du sie in der Sitzung über <code>/mcp</code>. Mit <code>claude mcp list</code> siehst du im Terminal alle Verbindungen, mit <code>claude mcp remove &lt;name&gt;</code> entfernst du eine.</p>'
+            +'<p class="tsn3-fn">Es gibt auch Verbindungen, die als kleines Programm auf deinem Rechner laufen. Die schließt du mit <code>--transport stdio</code> an. Das brauchst du für diesen Kurs nicht.</p>'})
+        +H.sec({id:'tsn3-l13-sicher', title:'Sicher <span class="g">verbinden</span>',
+          lead:'Eine Verbindung gibt Claude Zugriff auf echte Daten. Deshalb gelten drei Regeln, bevor du etwas anschließt.',
+          body:'<p><strong class="lead">Nur vertrauenswürdige Anbieter.</strong>Anthropic nimmt Konnektoren nach Kriterien ins Verzeichnis auf, prüft aber keinen MCP-Server auf Sicherheit. Nimm Verbindungen aus dem Verzeichnis oder direkt vom Hersteller des Dienstes.</p>'
+            +'<p><strong class="lead">Fremde Inhalte sind ein Risiko.</strong>Verbindungen, die Inhalte von außen holen, Mails oder Webseiten, können versteckte Anweisungen enthalten. Lass Claude über solche Verbindungen anfangs nur lesen, nicht senden.</p>'
+            +'<p><strong class="lead">Weniger ist schneller.</strong>Jede Verbindung belegt Platz im Kontext, auch wenn du sie nicht nutzt. In <code>/mcp</code> schaltest du ab, was du gerade nicht brauchst.</p>'
+            +H.note('Dein Notion-Backoffice verbinden wir in Modul 4, mit eigenen Regeln für das Lesen und Schreiben. Die Verbindungen für den Reservierungs-Agenten kommen in Modul 5.','Ausblick')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Deine', animGold:'erste Verbindung',
+      steps:['Ein Dienst','In der App verbinden','In /mcp prüfen','Nur lesen'],
+      intro:'So schließt du deine erste Verbindung an, ohne dir Sorgen zu machen:',
+      points:['Wähl <b>einen Dienst</b>, am besten den, in dem du täglich suchst: meist das Postfach oder den Kalender.',
+        'Verbinde ihn <b>in der App</b> unter Anpassen › Konnektoren. In Claude Code steht er dann automatisch bereit.',
+        'Prüf in <b>/mcp</b>, ob die Verbindung steht und angemeldet ist.',
+        'Lass Claude die ersten zwei Wochen nur <b>lesen und zusammenfassen</b>. Senden und Ändern kommen später.']},
+    learn:{learn:['Du weißt, dass Konnektoren und MCP-Server <b>dasselbe</b> sind.',
+        'Du verbindest Dienste <b>in der App</b> und nutzt sie in Claude Code.',
+        'Du kennst <b>claude mcp add</b> und die drei Bereiche.',
+        'Du verbindest nur <b>vertrauenswürdige</b> Dienste und schaltest Ungenutztes ab.'],
+      next:'/kontextmanagement'}
   });
 })();
 
