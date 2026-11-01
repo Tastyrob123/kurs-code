@@ -528,6 +528,8 @@ body:has(#sb-toggle-cb:checked) #sb-toggle {
 /* super.so blendet die Seitenleiste unter 860 px aus (display:none), dann schaltete der
    Menue-Knopf am Handy ins Leere. Sie bleibt im Seitenbaum und faehrt wie am Desktop herein. */
 @media (max-width: 860px) { .super-sidebar { display: block !important; } }
+/* Bei offenem Menue liegt die obere Leiste hinter der Seitenleiste (sonst verdeckte sie deren Suchfeld). */
+body:has(#sb-toggle-cb:checked) #tsnav-wrap { z-index: 50; }
 body:has(#sb-toggle-cb:checked) #sb-toggle { top: 6px; }
 
 /* Sidebar-Innenraum: dunkleres Blau als Seiten-BG. Modul-Titel UND Lektionen
