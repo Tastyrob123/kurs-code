@@ -4379,12 +4379,12 @@ window.__tsMO = function(cb){
     /* Modul 1 - Notion-Grundlagen (Lektion 1.1-1.8), Robert-Entscheid 22.07.2026 */
     { re:/\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/, href:'/lektionen/l12-layout-medien-strukturierungs-tricks' },
     { re:/\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/, href:'/lektionen/l13-einfhrung-in-datenbanken' },
-    { re:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, href:'/lektionen/l14-relationen-rollups' },
+    { re:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, href:'/lektionen/daten-eintragen-und-einlesen' },
     { re:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/, href:'/lektionen/l15-formeln-20-logik-bausteine' },
     { re:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, href:'/lektionen/l16-ansichten-self-referencing-filter' },
     { re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, href:'/lektionen/l17-native-automations-buttons' },
-    { re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
-    { re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/, href:'/mehrwert-zielbild' },
+    { re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, href:'/lektionen/rechte-teamspaces-und-sicherheit' },
+    { re:/\/(?:lektionen\/l18-system-architektur-dashboard-design|system-architektur-dashboard)\/?$/, href:'/lektionen/vorlage-holen-und-einrichten' },
     /* Modul 1 Neubau 01.11.2026: zwei neue Seiten (1.4, 1.9) */
     { re:/\/(?:lektionen\/)?daten-eintragen-und-einlesen\/?$/, href:'/lektionen/l14-relationen-rollups' },
     { re:/\/(?:lektionen\/)?rechte-teamspaces-und-sicherheit\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
@@ -27824,12 +27824,12 @@ var TSISL_TEAM_ONB_V2=[
       {n:'1.1',t:'Alles ist eine Seite',d:'Workspace, Seitenleiste und Blöcke: so findest du dich in der Vorlage zurecht.',img:'gerichte/burrata.webp',href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip'},
       {n:'1.2',t:'Lesbar im Stress',d:'Seiten gestalten, die man am Pass und im Lager im Vorbeigehen liest.',img:'gerichte/rinderfilet.webp',href:'/lektionen/l12-layout-medien-strukturierungs-tricks'},
       {n:'1.3',t:'Die Tabelle denkt mit',d:'Datenbanken und Spaltentypen. Deine erste eigene Tabelle in der Probeküche.',img:'zutaten/mozzarella.webp',href:'/lektionen/l13-einfhrung-in-datenbanken'},
-      {n:'1.4',t:'Die Tabelle füllen',d:'Eintragen, Listen importieren und Dokumente mit Notion AI einlesen.',img:'inventar/olivenoel.jpg',href:'',tr:['/lektionen/daten-eintragen-und-einlesen','/daten-eintragen-und-einlesen']},
+      {n:'1.4',t:'Die Tabelle füllen',d:'Eintragen, Listen importieren und Dokumente mit Notion AI einlesen.',img:'inventar/olivenoel.jpg',href:'/lektionen/daten-eintragen-und-einlesen'},
       {n:'1.5',t:'Der Preis wandert mit',d:'Verknüpfungen und Rollups: vom Lieferanten über das Produkt bis zum Teller.',img:'lieferpartner/kuehltransporter-sprinter.webp',href:'/lektionen/l14-relationen-rollups'},
       {n:'1.6',t:'Lies die Formel',d:'Formeln der Vorlage lesen, anpassen und Fehler finden.',img:'menuekalkulation/kosten-01.webp',href:'/lektionen/l15-formeln-20-logik-bausteine'},
       {n:'1.7',t:'Frag die Tabelle',d:'Ansichten, Filter und Vorlagen: für jede Frage aus dem Alltag eine Antwort.',img:'gerichte/jakobsmuscheln.webp',href:'/lektionen/l16-ansichten-self-referencing-filter'},
       {n:'1.8',t:'Ein Klick weniger',d:'Buttons und Automationen für die Handgriffe, die sich jeden Tag wiederholen.',img:'ansprechpartner/kugelschreiber.jpg',href:'/lektionen/l17-native-automations-buttons'},
-      {n:'1.9',t:'Wer darf was',d:'Teamspaces, Rechte und Gäste: das Team trägt ein, die Kalkulation bleibt geschützt.',img:'ansprechpartner/kochjacke.jpg',href:'',tr:['/lektionen/rechte-teamspaces-und-sicherheit','/rechte-teamspaces-und-sicherheit']},
+      {n:'1.9',t:'Wer darf was',d:'Teamspaces, Rechte und Gäste: das Team trägt ein, die Kalkulation bleibt geschützt.',img:'ansprechpartner/kochjacke.jpg',href:'/lektionen/rechte-teamspaces-und-sicherheit'},
       {n:'1.10',t:'Die Zahl stimmt nicht?',d:'Eine falsche Zahl bis zur Quelle verfolgen und reparieren.',img:'gemeinkosten/wartung-werkzeug.webp',href:'/lektionen/l18-system-architektur-dashboard-design'}
     ];
 
@@ -28553,7 +28553,7 @@ var TSISL_TEAM_ONB_V2=[
           points:['Der Titel sagt eindeutig, welcher Artikel gemeint ist, mit Größe. „Burrata 125 g", nicht „Burrata".','Leg erst den Typ fest, dann den Namen. Eine Spalte nachträglich von Text auf Zahl umzustellen kostet dich jede einzelne Zeile.','Fünf bis acht Optionen pro Auswahlfeld reichen fast immer. Jede weitere kostet Übersicht.','Eine Zahlenspalte bekommt eine feste Einheit, und die steht im Spaltennamen oder in einer eigenen Spalte.']}}
       ],
       learn:{items:['Du unterscheidest <b>Seite</b> und <b>Datenbank</b> und weißt, wann was passt.','Du erkennst den <b>Typ</b> jeder Spalte am Symbol im Spaltenkopf.','Du weißt, warum Preise in eine <b>Zahl</b> und Artikelnummern in einen <b>Text</b> gehören.','Du hast in der Probeküche deine erste <b>eigene Datenbank</b> gebaut.'],
-        next:'/lektionen/l14-relationen-rollups', nextTry:['/lektionen/daten-eintragen-und-einlesen','/daten-eintragen-und-einlesen']}
+        next:'/lektionen/daten-eintragen-und-einlesen'}
     });
   }
   go();
@@ -29455,7 +29455,7 @@ var TSISL_TEAM_ONB_V2=[
           points:['Mach den Ablauf dreimal von Hand und schreib die Handgriffe mit. Erst dann baust du den Button.','Jeder Button, der viele Zeilen ändert, bekommt als erste Aktion eine Bestätigung.','Beschrifte Buttons mit dem, was passiert: <b>Neues Produkt</b>, nicht „Los".','Teste neue Buttons und Automationen eine Woche in der Probeküche, bevor sie in die Vorlage kommen.']}}
       ],
       learn:{items:['Du unterscheidest, wann ein <b>Button</b> und wann eine <b>Automation</b> passt.','Du baust Buttons mit mehreren <b>Aktionen</b> und vorausgefüllten Spalten.','Du richtest eine Automation mit dem passenden <b>Auslöser</b> ein, zum Beispiel für Allergene.','Du weißt, welcher <b>Plan</b> was erlaubt und wer welchen Button klicken darf.'],
-        next:'/lektionen/l18-system-architektur-dashboard-design', nextTry:['/lektionen/rechte-teamspaces-und-sicherheit','/rechte-teamspaces-und-sicherheit']}
+        next:'/lektionen/rechte-teamspaces-und-sicherheit'}
     });
   }
   go();
@@ -29777,7 +29777,7 @@ var TSISL_TEAM_ONB_V2=[
           points:['Sortier deine Gerichte nach Wareneinsatz in Prozent und schau dir die drei obersten und die drei untersten an.','Alles, was dir unrealistisch vorkommt, verfolgst du mit den fünf Schritten bis zur Quelle.','Behalt die Ansicht <b>Ohne Preis</b> im Blick. Sie muss leer sein.','Wisse, wie weit dein Seitenverlauf zurückreicht, und warte mit dem Aufräumen nicht länger als das.']}}
       ],
       learn:{items:['Du verfolgst eine falsche Zahl über Formeln und Rollups bis zu ihrer <b>Quelle</b>.','Du kennst die häufigsten <b>Fehler</b> der Vorlage und weißt, wie du sie behebst.','Du <b>ergänzt</b> die Vorlage, ohne bestehende Spalten zu brechen.','Du holst über den <b>Seitenverlauf</b> einen früheren Stand zurück.'],
-        next:'/mehrwert-zielbild', nextTry:['/vorlage-holen-und-einrichten','/lektionen/vorlage-holen-und-einrichten'], label:'Weiter zu Modul 2'}
+        next:'/lektionen/vorlage-holen-und-einrichten', label:'Weiter zu Modul 2'}
     });
   }
   go();
