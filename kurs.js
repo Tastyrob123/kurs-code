@@ -6160,8 +6160,8 @@ window.__tsMO = function(cb){
    ============================================================ */
 (function(){
   if(window.__tspkres) return; window.__tspkres=true;
-  var POSTER=null;   /* <- MacBook-Vorschaubild der fertigen DB Packaging (Robert) */
-  var SHOT=null;     /* <- langer Ganzseiten-Screenshot der DB Packaging (Robert)  */
+  var POSTER="https://tastyrob123.github.io/kurs-code/assets/packaging-db-mac.webp";    /* Packaging / Co. aus der Vorlage (01.11.2026) */
+  var SHOT="https://tastyrob123.github.io/kurs-code/assets/packaging-db-screen.webp";
   var FRAME="https://tastyrob123.github.io/kurs-code/assets/oj1wa9.webp";
   (function(){ if(!/\/allergene-bersicht\/?$/.test(location.pathname)) return; var __go=function(){ [POSTER,SHOT,FRAME].forEach(function(u){ if(u){ var p=new Image(); p.src=u; } }); }; if(document.readyState==='complete'){setTimeout(__go,800);}else{window.addEventListener('load',function(){setTimeout(__go,800);},{once:true});} })();
   function on(){ return /\/allergene-bersicht\/?$/.test(location.pathname); }
@@ -6227,7 +6227,7 @@ window.__tsMO = function(cb){
   var XI='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
   function tileHtml(){
-    if(POSTER) return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><img src="'+POSTER+'" alt="DB Packaging — Paket-Übersicht" loading="lazy" decoding="async"></button>';
+    if(POSTER) return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><img src="'+POSTER+'" alt="DB Packaging aus der Vorlage: Pakete wie Bowl To-Go Standard mit ihren Artikeln" loading="lazy" decoding="async"></button>';
     return '<button type="button" class="pkr-tile" aria-label="DB Packaging im großen MacBook öffnen"><span class="pkr-ph"><i>DB Packaging · Screenshot folgt</i><img src="'+FRAME+'" alt="" loading="lazy" decoding="async"></span></button>';
   }
 
@@ -9885,6 +9885,43 @@ window.__tsMO = function(cb){
   objekt_varianten:[ {name:'Aspekt',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Ausarbeitung',wert:1,img:null} ] },
 { kachel_id:'vf_werte', kachel_name:'🎯 Visionen & Werte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
   objekt_varianten:[ {name:'Titel',wert:1,img:null}, {name:'Art',wert:1,img:null}, {name:'Essenz',wert:1,img:null}, {name:'Wirkung',wert:1,img:null}, {name:'Bezug',wert:1,img:null} ] },
+/* NEUBAU 2.15.3-2.15.13 (Vision-Inseln als Erklaerwerk, 01.11.2026) */
+{ kachel_id:'vf_teamkultur', kachel_name:'🤝 Team Kultur Guidelines', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Guideline',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Beispiele',wert:1,img:null}, {name:'Betrifft',wert:1,img:null} ] },
+{ kachel_id:'vf_interior', kachel_name:'🛋️ Interior Design Produkte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Produkt',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Bilder',wert:1,img:null}, {name:'Bezugsquelle',wert:1,img:null} ] },
+{ kachel_id:'vf_zielgruppe', kachel_name:'🎯 Zielgruppenanalyse', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Zielgruppe',wert:1,img:null}, {name:'Persona Name',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Priorität',wert:1,img:null}, {name:'Altersgruppe',wert:1,img:null} ] },
+{ kachel_id:'vf_konkurrenz', kachel_name:'🔍 Konkurrenzanalyse', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Name',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Standort',wert:1,img:null}, {name:'Website/Social',wert:1,img:null}, {name:'Preisniveau',wert:1,img:null} ] },
+{ kachel_id:'vf_lexikon', kachel_name:'📖 Gastro Lexikon', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Begriff',wert:1,img:null}, {name:'Kurzbeschreibung',wert:1,img:null}, {name:'Ausführliche Beschreibung',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Schwierigkeit',wert:1,img:null} ] },
+{ kachel_id:'vf_standort', kachel_name:'📍 Standortanalyse Restaurant-Kette', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Standortname',wert:1,img:null}, {name:'Stadt',wert:1,img:null}, {name:'Adresse',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Priorität',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_projekte', kachel_name:'🏗️ Expansionsprojekte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Projekt-ID',wert:1,img:null}, {name:'Typ',wert:1,img:null}, {name:'Phase',wert:1,img:null}, {name:'Ampelstatus',wert:1,img:null}, {name:'Entscheidungsbedarf',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_pipeline', kachel_name:'🗺️ Standorte Pipeline', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Site-ID',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Store-Modell',wert:1,img:null}, {name:'Stadt',wert:1,img:null}, {name:'Region',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_partner', kachel_name:'🤝 Partner & Betreiber', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Name',wert:1,img:null}, {name:'Rolle',wert:1,img:null}, {name:'Vertragsstatus',wert:1,img:null}, {name:'Beteiligungsmodell',wert:1,img:null}, {name:'Verantwortungsumfang',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_kosten', kachel_name:'💶 Kosten & Capex', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Kostenart',wert:1,img:null}, {name:'Kostenart Detail',wert:1,img:null}, {name:'Geplant',wert:1,img:null}, {name:'Ist',wert:1,img:null}, {name:'Abweichung €',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_risiken', kachel_name:'⚠️ Risiken', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Risiko',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Eintrittswahrscheinlichkeit',wert:1,img:null}, {name:'Schadenshöhe',wert:1,img:null}, {name:'Risiko-Score',wert:1,img:null} ] },
+{ kachel_id:'vf_exp_meilensteine', kachel_name:'🚩 Meilensteine', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Meilenstein',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Fälligkeitsdatum',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Kritisch für Launch',wert:1,img:null} ] },
+{ kachel_id:'vf_fr_regeln', kachel_name:'📘 Franchise-Regelwerk', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Regel-ID',wert:1,img:null}, {name:'Regeltext',wert:1,img:null}, {name:'Regeltyp',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Gilt für Store-Typ',wert:1,img:null} ] },
+{ kachel_id:'vf_fr_pruefungen', kachel_name:'🔎 Franchise-Prüfungen', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Standort',wert:1,img:null}, {name:'Prüfungsart',wert:1,img:null}, {name:'Prüfungsdatum',wert:1,img:null}, {name:'Prüfer',wert:1,img:null}, {name:'Referenzierte Regeln',wert:1,img:null} ] },
+{ kachel_id:'vf_events', kachel_name:'🎉 Event Konzepte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Event Name',wert:1,img:null}, {name:'Kategorie',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Zielgruppe',wert:1,img:null}, {name:'Status',wert:1,img:null} ] },
+{ kachel_id:'vf_cat_planung', kachel_name:'📋 Catering Konzept Planung', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Event / Projekt Name',wert:1,img:null}, {name:'Event Typ',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Priorität',wert:1,img:null}, {name:'Kunde / Auftraggeber',wert:1,img:null} ] },
+{ kachel_id:'vf_cat_auftrag', kachel_name:'🍽️ Catering', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Event Name',wert:1,img:null}, {name:'Event-Art',wert:1,img:null}, {name:'Status',wert:1,img:null}, {name:'Datum',wert:1,img:null}, {name:'Kunde',wert:1,img:null} ] },
+{ kachel_id:'vf_merch', kachel_name:'🛍️ Merch // Produkte', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
+  objekt_varianten:[ {name:'Name',wert:1,img:null}, {name:'Bild',wert:1,img:null}, {name:'Beschreibung',wert:1,img:null}, {name:'Produkttyp',wert:1,img:null}, {name:'Tags',wert:1,img:null} ] },
 { kachel_id:'ops_team_onb', kachel_name:'Onboarding', ist_produkt_kachel:true, einheit:'Schritte', einheit_typ:'menge',
   objekt_varianten:[ {name:'Willkommen',wert:30,img:null}, {name:'Hygiene',wert:45,img:null}, {name:'Rollen',wert:30,img:null}, {name:'SOPs',wert:60,img:null}, {name:'Einweisung',wert:120,img:null}, {name:'Sicherheit',wert:20,img:null} ] },
 { kachel_id:'ops_team_mitarbeiter', kachel_name:'👤 Mitarbeiter', ist_produkt_kachel:true, einheit:'Felder', einheit_typ:'menge',
@@ -11031,6 +11068,25 @@ var TSISL_TEAM_ONB_V2=[
 ,
 { path:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, kachel:'vf_marke', anchorSel:'#tsisl-wk-vf_marke', steps:TSISL_VF_MARKE, eyebrow:'Markenidentität', title:'Deine <span>Marke</span>. Aspekt für Aspekt.', sub:'Jede Karte ist eine Spalte deiner Marken-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt werden die gebauten Felder. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst Tabellenansicht – Datenbank.', summary:'Felder gebaut', chain:true },
 { path:/\/lektionen\/vision-werte\/?$/, kachel:'vf_werte', anchorSel:'#tsisl-wk-vf_werte', steps:TSISL_VF_WERTE, eyebrow:'Visionen & Werte', title:'Dein <span>Wertefundament</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte deiner Werte-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht aus einem Gefühl eine Struktur, an der du Entscheidungen misst. Um die Tabelle anzulegen, gehst du auf deine Seite, drückst / und wählst Tabellenansicht – Datenbank.', summary:'Visionen & Werte', chain:true },
+/* NEUBAU 2.15.3-2.15.13 (Vision-Inseln als Erklaerwerk, 01.11.2026) */
+{ path:/\/lektionen\/team-kultur-guidelines\/?$/, kachel:'vf_teamkultur', anchorSel:'#tsisl-wk-vf_teamkultur', steps:[], eyebrow:'DB : Team Kultur Guidelines', title:'Eure <span>Guidelines</span>. Regel für Regel.', sub:'Jede Karte ist eine Spalte der Team Kultur Guidelines.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/interieur-design\/?$/, kachel:'vf_interior', anchorSel:'#tsisl-wk-vf_interior', steps:[], eyebrow:'DB : Interior Design Produkte', title:'Deine <span>Einrichtung</span>. Stück für Stück.', sub:'Jede Karte ist eine Spalte der Interior Design Produkte.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/zielgruppenanalyse\/?$/, kachel:'vf_zielgruppe', anchorSel:'#tsisl-wk-vf_zielgruppe', steps:[], eyebrow:'DB : Zielgruppenanalyse', title:'Deine <span>Gäste</span>. Gruppe für Gruppe.', sub:'Jede Karte ist eine Spalte der Zielgruppenanalyse.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/konkurrenzanalyse\/?$/, kachel:'vf_konkurrenz', anchorSel:'#tsisl-wk-vf_konkurrenz', steps:[], eyebrow:'DB : Konkurrenzanalyse', title:'Deine <span>Mitbewerber</span>. Betrieb für Betrieb.', sub:'Jede Karte ist eine Spalte der Konkurrenzanalyse.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/gastronomie-lexikon\/?$/, kachel:'vf_lexikon', anchorSel:'#tsisl-wk-vf_lexikon', steps:[], eyebrow:'DB : Gastro Lexikon', title:'Dein <span>Lexikon</span>. Begriff für Begriff.', sub:'Jede Karte ist eine Spalte des Gastro Lexikons.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/standortanalyse\/?$/, kachel:'vf_standort', anchorSel:'#tsisl-wk-vf_standort', steps:[], eyebrow:'DB : Standortanalyse Restaurant-Kette', title:'Deine <span>Standorte</span>. Objekt für Objekt.', sub:'Jede Karte ist eine Spalte der Standortanalyse.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_projekte', anchorSel:'#tsisl-wk-vf_exp_projekte', steps:[], eyebrow:'DB : Expansionsprojekte', title:'Deine <span>Projekte</span>. Eröffnung für Eröffnung.', sub:'Jede Karte ist eine Spalte der Expansionsprojekte.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_pipeline', anchorSel:'#tsisl-wk-vf_exp_pipeline', steps:[], eyebrow:'DB : Standorte Pipeline', title:'Deine <span>Pipeline</span>. Ort für Ort.', sub:'Jede Karte ist eine Spalte der Standorte Pipeline.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_partner', anchorSel:'#tsisl-wk-vf_exp_partner', steps:[], eyebrow:'DB : Partner & Betreiber', title:'Deine <span>Partner</span>. Vertrag für Vertrag.', sub:'Jede Karte ist eine Spalte von Partner & Betreiber.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_kosten', anchorSel:'#tsisl-wk-vf_exp_kosten', steps:[], eyebrow:'DB : Kosten & Capex', title:'Deine <span>Investitionen</span>. Position für Position.', sub:'Jede Karte ist eine Spalte von Kosten & Capex.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_risiken', anchorSel:'#tsisl-wk-vf_exp_risiken', steps:[], eyebrow:'DB : Risiken', title:'Deine <span>Risiken</span>. Eingeordnet.', sub:'Jede Karte ist eine Spalte der Risiken.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/expansioncenter\/?$/, kachel:'vf_exp_meilensteine', anchorSel:'#tsisl-wk-vf_exp_meilensteine', steps:[], eyebrow:'DB : Meilensteine', title:'Deine <span>Meilensteine</span>. Termin für Termin.', sub:'Jede Karte ist eine Spalte der Meilensteine.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/franchise-rulebook\/?$/, kachel:'vf_fr_regeln', anchorSel:'#tsisl-wk-vf_fr_regeln', steps:[], eyebrow:'DB : Franchise-Regelwerk', title:'Dein <span>Regelwerk</span>. Regel für Regel.', sub:'Jede Karte ist eine Spalte des Franchise-Regelwerks.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/franchise-rulebook\/?$/, kachel:'vf_fr_pruefungen', anchorSel:'#tsisl-wk-vf_fr_pruefungen', steps:[], eyebrow:'DB : Franchise-Prüfungen', title:'Deine <span>Prüfungen</span>. Rundgang für Rundgang.', sub:'Jede Karte ist eine Spalte der Franchise-Prüfungen.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/eventkonzepte\/?$/, kachel:'vf_events', anchorSel:'#tsisl-wk-vf_events', steps:[], eyebrow:'DB : Event Konzepte', title:'Deine <span>Events</span>. Format für Format.', sub:'Jede Karte ist eine Spalte der Event Konzepte.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/catering\/?$/, kachel:'vf_cat_planung', anchorSel:'#tsisl-wk-vf_cat_planung', steps:[], eyebrow:'DB : Catering Konzept Planung', title:'Deine <span>Aufträge</span>. Von der Anfrage bis zum Abschluss.', sub:'Jede Karte ist eine Spalte der Catering Konzept Planung.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/catering\/?$/, kachel:'vf_cat_auftrag', anchorSel:'#tsisl-wk-vf_cat_auftrag', steps:[], eyebrow:'DB : Catering', title:'Deine <span>Catering-Rechnung</span>. Auftrag für Auftrag.', sub:'Jede Karte ist eine Spalte der Datenbank Catering.', summary:'Spalten verstanden', chain:true },
+{ path:/\/lektionen\/merch-produkte\/?$/, kachel:'vf_merch', anchorSel:'#tsisl-wk-vf_merch', steps:[], eyebrow:'DB : Merch // Produkte', title:'Deine <span>Produkte</span>. Stück für Stück.', sub:'Jede Karte ist eine Spalte von Merch // Produkte.', summary:'Spalten verstanden', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_onb', anchorSel:'#tsisl-wk-ops_team_onb', steps:TSISL_TEAM_ONB_V2, eyebrow:'DB : OnBoarding Wissensdatenbank', title:'Dein <span>Onboarding</span>. Spalte für Spalte.', sub:'Jede Karte ist eine Spalte der OnBoarding-Wissensdatenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Onboarding-Schritte.', summary:'Onboarding', chain:true },
 { path:/\/lektionen\/team-onboarding\/?$/, kachel:'ops_team_mitarbeiter', anchorSel:'#tsisl-wk-ops_team_mitarbeiter', steps:TSISL_TEAM_MITARBEITER_V2, eyebrow:'DB : 👤 Mitarbeiter', title:'Deine <span>Mitarbeiter</span>. Feld für Feld.', sub:'Jede Karte ist eine Spalte der Mitarbeiter-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — so entsteht dein sauberes Team-Stammblatt.', summary:'Mitarbeiter', chain:true },
 { path:/\/lektionen\/checklisten-produktion\/?$/, kachel:'ops_check_audit', anchorSel:'#tsisl-wk-ops_check_audit', steps:TSISL_CHECK_AUDIT, eyebrow:'DB Audit Checkliste', title:'Deine <span>Audit-Checkliste</span>. Punkt für Punkt.', sub:'Jede Karte ist eine Spalte der Audit-Datenbank. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung sind die Prüfpunkte.', summary:'Audit-Checkliste', chain:true },
@@ -11339,7 +11395,7 @@ var TSISL_TEAM_ONB_V2=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:30, menue_rechner:10, kunden_master:12, kostenaufstellung:28, db0_inventurliste:18, inventur_monat:22, db13_lieferanten:15, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db6_gemeinkosten:11, db6_gemeinkostenannahmen:7, db7_mitarbeiterloehne:15, db8_gerichte:30, db10_packaging:4, vf_werte:6, vf_marke:5, ops_team_onb:11, ops_team_mitarbeiter:15, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:13, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:13, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
+  var BACKOFFICE={ vf_teamkultur:7, vf_interior:7, vf_zielgruppe:16, vf_konkurrenz:19, vf_lexikon:5, vf_standort:22, vf_exp_projekte:11, vf_exp_pipeline:15, vf_exp_partner:7, vf_exp_kosten:9, vf_exp_risiken:10, vf_exp_meilensteine:8, vf_fr_regeln:8, vf_fr_pruefungen:11, vf_events:14, vf_cat_planung:24, vf_cat_auftrag:30, vf_merch:7, km_master:30, menue_rechner:10, kunden_master:12, kostenaufstellung:28, db0_inventurliste:18, inventur_monat:22, db13_lieferanten:15, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:23, db6_gemeinkosten:11, db6_gemeinkostenannahmen:7, db7_mitarbeiterloehne:15, db8_gerichte:30, db10_packaging:4, vf_werte:6, vf_marke:5, ops_team_onb:11, ops_team_mitarbeiter:15, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:13, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:13, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
   ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:13, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:9, ops_hyg_behoerden:11, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
@@ -14592,9 +14648,8 @@ var TSISL_TEAM_ONB_V2=[
     <p>Die Menükalkulation läuft über drei verknüpfte Datenbanken: den Menürechner, die Kunden und das Angebot. Jede baust du als eigenen Warenkorb, jede Eigenschaft wird eine Karte.</p>
   </div>
   <div class="split">
-    <div class="tsmac" id="ts11pcmac" role="button" tabindex="0" aria-label="Video abspielen (folgt)">
-      <img alt="Lektion 11 — Menükalkulation, Video-Cover" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy" decoding="async">
-      <div class="tsmac__play"><span></span></div>
+    <div class="tsmac" id="ts11pcmac" style="cursor:default">
+      <img alt="Lektion 2.11 Menükalkulation" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy" decoding="async">
     </div>
     <div class="split__text">
       <p>Hier zahlt sich die Vorarbeit aus. Zutaten, Rezepturen und Gerichte liegen als saubere
@@ -15298,6 +15353,7 @@ var TSISL_TEAM_ONB_V2=[
   var LG_HIGGS="https://tastyrob123.github.io/kurs-code/assets/nork7u.png";
   var LG_MIDJOURNEY="https://tastyrob123.github.io/kurs-code/assets/dpjfgb.svg";
   var LG_CANVA="https://tastyrob123.github.io/kurs-code/assets/qm931y.svg";
+  var IMGI="https://tastyrob123.github.io/kurs-code/img/interface/", ASSI="https://tastyrob123.github.io/kurs-code/assets/";
   var LG_OPENAI="https://tastyrob123.github.io/kurs-code/img/logos/openai.svg";
   var LG_CLAUDE="https://tastyrob123.github.io/kurs-code/img/logos/claude.svg";
   var LG_NOTION="https://tastyrob123.github.io/kurs-code/img/logos/notion.svg";
@@ -15345,6 +15401,16 @@ var TSISL_TEAM_ONB_V2=[
     #tsIface .ph{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));display:flex;align-items:center;justify-content:center;text-align:center}
     #tsIface .ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,0) 0 22px,rgba(255,255,255,.02) 22px 44px);pointer-events:none}
     #tsIface .ph .ph-in{position:relative;z-index:1;padding:14px}
+    #tsIface .ph.phx{background:#000}
+    #tsIface .ph.phx::after{display:none}
+    #tsIface .ph.phx img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    #tsIface .ph.phc img{object-fit:contain}
+    #tsIface .ftree{padding:18px 20px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.85;color:var(--tx);text-align:left}
+    #tsIface .ftree .d{color:var(--beige)}
+    #tsIface .ftree .i1{padding-left:18px}
+    #tsIface .ftree .i2{padding-left:36px}
+    #tsIface .ftree .f{color:var(--tx2)}
+    #tsIface .vid-row.novid{grid-template-columns:1fr;max-width:calc(760px * var(--ts-tx))}
     #tsIface .ph-pill{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--beige);background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.32);border-radius:999px;padding:4px 10px;font-weight:600}
     #tsIface .ph-cap{display:block;margin-top:8px;color:var(--tx2);font-size:11.5px}
 
@@ -15719,14 +15785,22 @@ var TSISL_TEAM_ONB_V2=[
     for(var i=0;i<VIEWS.length;i++){ slides+='<img class="vslide'+(i===0?' on':'')+'" src="'+VIEWS[i].src+'" alt="Ansicht: '+VIEWS[i].n+'" loading="lazy" decoding="async">'; }
     return laptop('<div class="vswitch"><span class="vbadge">Ansicht: <b>Tabelle</b></span>'+slides+'</div>');
   }
+  /* echtes Bild in einer Platzhalter-Flaeche (Bilder aus der Vorlage, 01.11.2026) */
+  function pic(src,alt,fit){ return '<div class="ph phx'+(fit==='contain'?' phc':'')+'"><img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async"></div>'; }
+  var SHOW={
+    Food:[[IMGI+'food-haehnchen.webp','Zutat aus der Vorlage: Hähnchenbrust'],[IMGI+'food-lachs.webp','Zutat: Lachsfilet'],[IMGI+'food-garnelen.webp','Zutat: Garnelen']],
+    Objekt:[[IMGI+'objekt-espresso.webp','Inventar: Espressomaschine'],[IMGI+'objekt-tuete.webp','Verpackung: Tragetasche mit Logo'],[IMGI+'objekt-lieferung.webp','Objekt: Lieferwagen mit Logo']],
+    Landscape:[[ASSI+'rf93ka.webp','Banner Food Quartier'],[ASSI+'bne5l8.webp','Banner Operations Area'],[ASSI+'m629vk.webp','Banner Finance Studio']]
+  };
   function canvaMock(){
-    return laptop('<div class="vswitch"><div class="ph"><div class="ph-in"><span class="ph-pill">Canva</span><span class="ph-cap">Canva-Ansicht · Bild folgt</span></div></div></div>');
+    return laptop('<div class="vswitch">'+pic(IMGI+'canva-thai-peanut-tofu-bowl.webp','Gericht aus der Vorlage: Thai Peanut Tofu Bowl, fertig in Canva mit Name und Logo')+'</div>');
   }
   /* Tool-Showcase-Karte: großes Logo, 3-Bild-Swipe der Stärke, Text */
   function toolShow(logo,name,spec,text,motif){
     var slides='',dots='';
     for(var i=1;i<=3;i++){
-      slides+='<div class="cmp-slide'+(i===1?' on':'')+'" data-p="Beispiel '+i+'"><div class="ph"><div class="ph-in"><span class="ph-pill">'+motif+'</span><span class="ph-cap">Beispiel '+i+' · folgt</span></div></div></div>';
+      var sh=SHOW[motif][i-1];
+      slides+='<div class="cmp-slide'+(i===1?' on':'')+'" data-p="Beispiel '+i+'">'+pic(sh[0],sh[1],motif==='Landscape'?'':'contain')+'</div>';
       dots+='<button class="cmp-dot'+(i===1?' on':'')+'" aria-label="Beispiel '+i+'"></button>';
     }
     return '<div class="tcard compare">'+
@@ -15802,10 +15876,7 @@ var TSISL_TEAM_ONB_V2=[
   /* ---------- ERKLAERVIDEO (Katalog Abschnitt 03) ---------- */
   function vidHTML(){
     return '<section class="rev" id="tsvid">'+
-      '<div class="vid-row">'+
-        '<div class="vid-pc">'+
-          laptop('<div class="vid-screen"><div class="ph"><div class="ph-in"><span class="ph-pill">Video</span><span class="ph-cap">folgt</span></div></div><span class="vid-play" role="button" aria-label="Video abspielen"></span></div>')+
-        '</div>'+
+      '<div class="vid-row novid">'+
         '<div class="vid-txt">'+
           '<h2>Erst die Ansicht, dann <span class=\"gold\">das Bild</span>.</h2>'+
           '<p>Die Lektion beginnt bei den Ansichten in Notion. Tabelle, Galerie, Board, Liste und Diagramm sind fünf Wege, dieselben Einträge zu zeigen, und du siehst gleich, wofür sich welcher eignet.</p>'+'<p>Den größten Teil der Arbeit macht danach die Galerie, denn dort braucht jeder Eintrag ein Titelbild. Die Bilder kommen von drei KI-Tools: Gemini übernimmt alles Essbare, Higgsfield die fotorealistischen Objekte wie Verpackungen und Geschirr, und für abstrakte Motive und weite Landschaften ist Midjourney zuständig.</p>'+'<p>Was danach noch fehlt, ergänzt du in Canva Pro. Text auf dem Bild, ein Schatten, dein Logo an der richtigen Stelle.</p>'+
@@ -15909,18 +15980,18 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tsif-col center">'+
         '<h2>Klingt nach <span class="gold">vielen Abos</span></h2>'+
         '<p class="tsif-sub">Auf den ersten Blick sind das einige Abos pro Monat, und dauerhaft laufen gelassen würde das mittelfristig den Rahmen sprengen. Erst der Überblick, welche du brauchst, dann der Trick, es günstig zu halten.</p>'+
-        '<p class="tsif-sub small">Midjourney, Higgsfield und Claude rechnen weltweit in Dollar ab, deshalb stehen sie hier so. Die Preise von ChatGPT, Google und Canva hängen am Land und werden ergänzt, sobald sie für Deutschland bestätigt sind.</p>'+
+        '<p class="tsif-sub small">Claude, ChatGPT, Higgsfield und Midjourney nennen ihren Preis in Dollar, Google und Canva in Euro. Stand: November 2026, die Anbieter ändern ihre Preise ab und zu.</p>'+
       '</div>'+
       '<div class="tbl abo">'+
         '<table><thead><tr><th>Tool</th><th>Wofür</th><th class="num">Abo&nbsp;(mtl.)</th></tr></thead><tbody>'+
-          '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><span class="pending">folgt</span></td></tr>'+
-          '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><span class="pending">folgt</span></td></tr>'+
+          '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>20&nbsp;$</b><span class="note">in Deutschland in Euro abgerechnet</span></td></tr>'+
+          '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>21,99&nbsp;€</b><span class="note">219,99&nbsp;€ im Jahresabo</span></td></tr>'+
           '<tr><td>Claude Pro</td><td>Objekte + automatischer Einbau in Notion</td><td class="num"><b>20&nbsp;$</b><span class="note">17&nbsp;$ im Jahresabo</span></td></tr>'+
           '<tr><td>Higgsfield <span class="tier">Starter</span></td><td>Fotorealistische Objekte</td><td class="num"><b>15&nbsp;$</b><span class="note">zzgl. MwSt.</span></td></tr>'+
           '<tr><td>Midjourney <span class="tier">Basic</span></td><td>Banner, Cover, Landscapes</td><td class="num"><b>10&nbsp;$</b><span class="note">8&nbsp;$ im Jahresabo</span></td></tr>'+
-          '<tr><td>Canva Pro</td><td>Feinschliff: Text, Logo, Mockups, Schatten</td><td class="num"><span class="pending">folgt</span></td></tr>'+
+          '<tr><td>Canva Pro</td><td>Feinschliff: Text, Logo, Mockups, Schatten</td><td class="num"><b>12&nbsp;€</b><span class="note">110&nbsp;€ im Jahresabo</span></td></tr>'+
         '</tbody>'+
-        '<tfoot><tr><td colspan="2">Belegt bisher (die drei Tools, die weltweit in Dollar abrechnen)</td><td class="num"><span class="sum">45&nbsp;$</span></td></tr></tfoot></table>'+
+        '<tfoot><tr><td colspan="2">Alle sechs zusammen, im Monat</td><td class="num"><span class="sum">65&nbsp;$ + 33,99&nbsp;€</span></td></tr></tfoot></table>'+
       '</div>'+
       '<div class="boxduo">'+
       '<div class="box good"><div class="bh">Der Trick: nur abonnieren, solange du baust</div><p>Setz dir einen Referenz-Zeitraum von <b style="color:#fff">4 Wochen</b>. In dieser Phase schließt du die Abos ab, baust dein persönliches Backoffice einmal komplett auf und erstellst alles Material, das deinem aktuellen Bedarf entspricht — danach kündigst du wieder. Brauchst du später Nachschub, sammelst du erst, was fehlt (z.&nbsp;B. neue Gerichte bis zum nächsten Menüwechsel), und buchst die Abos für einen einzigen Monat erneut. So zahlst du nie durchgehend.</p></div>'+
@@ -15947,9 +16018,9 @@ var TSISL_TEAM_ONB_V2=[
         '<p class="tsif-sub">Ein Bild muss die richtige Größe haben, sonst wirkt es in Notion abgeschnitten oder verzerrt. Für jede Bild-Art gibt es deshalb einen festen Weg und ein festes Format. Einmal gemerkt, machst du es danach immer gleich.</p>'+
       '</div>'+
       '<div class="fmt">'+
-        '<div class="fcard f-split">'+'<div class="f-media"><div class="ph"><div class="ph-in"><span class="ph-pill">Zutat</span><span class="ph-cap">Beispiel folgt</span></div></div></div>'+'<div class="f-body"><h3><span class="fn">1</span>Zutat</h3><ol class="fsteps"><li>Bild erstellen</li><li>Direkt bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>Notion-Upload: <b>3:2</b></span></div></div>'+'</div>'+
-        '<div class="fcard f-split">'+'<div class="f-media"><div class="ph"><div class="ph-in"><span class="ph-pill">Gericht</span><span class="ph-cap">Beispiel folgt</span></div></div></div>'+'<div class="f-body"><h3><span class="fn">2</span>Gericht</h3><ol class="fsteps"><li>Bild erstellen</li><li>Hintergrund freistellen (Sticker)</li><li>In Canva einfügen — Texte, Schatten &amp; Co. darüberlegen</li><li>Fertiges Bild bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>In Canva anlegen: <b>1920 × 1080 px</b></span></div></div></div>'+
-        '<div class="fcard f-wide">'+'<div class="f-banner"><div class="ph"><div class="ph-in"><span class="ph-pill">Coverdesign &amp; Landscape</span><span class="ph-cap">Banner-Beispiel folgt</span></div></div></div>'+'<h3><span class="fn">3</span>Abstraktes Coverdesign / Landscape</h3><ol class="fsteps"><li>Bild in Midjourney erstellen</li><li>Je nach Einsatzort die Zielgröße in Canva anlegen &amp; zuschneiden</li><li>Bild bei Notion hochladen</li></ol>'+
+        '<div class="fcard f-split">'+'<div class="f-media">'+pic(IMGI+'zutat-ahornsirup.webp','Zutat aus der Vorlage: Ahornsirup, Format 3:2')+'</div>'+'<div class="f-body"><h3><span class="fn">1</span>Zutat</h3><ol class="fsteps"><li>Bild erstellen</li><li>Direkt bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>Notion-Upload: <b>3:2</b></span></div></div>'+'</div>'+
+        '<div class="fcard f-split">'+'<div class="f-media">'+pic(IMGI+'gericht-cinnamon-roll.webp','Gericht aus der Vorlage: Cinnamon Roll mit Name und Logo')+'</div>'+'<div class="f-body"><h3><span class="fn">2</span>Gericht</h3><ol class="fsteps"><li>Bild erstellen</li><li>Hintergrund freistellen (Sticker)</li><li>In Canva einfügen — Texte, Schatten &amp; Co. darüberlegen</li><li>Fertiges Bild bei Notion hochladen</li></ol><div class="spec"><span>Erstellen: <b>AR 3:2</b></span><span>In Canva anlegen: <b>1920 × 1080 px</b></span></div></div></div>'+
+        '<div class="fcard f-wide">'+'<div class="f-banner">'+pic(IMGI+'banner-backoffice.webp','Banner aus der Vorlage: Notion AI Backoffice')+'</div>'+'<h3><span class="fn">3</span>Abstraktes Coverdesign / Landscape</h3><ol class="fsteps"><li>Bild in Midjourney erstellen</li><li>Je nach Einsatzort die Zielgröße in Canva anlegen &amp; zuschneiden</li><li>Bild bei Notion hochladen</li></ol>'+
           '<div class="tbl" style="margin-top:16px"><table><thead><tr><th>Wo im System</th><th class="num">Zielgröße&nbsp;(px)</th><th>Form</th><th>In Midjourney</th></tr></thead><tbody>'+
             '<tr><td>Banner ganz oben auf der Seite</td><td class="num">2000 × 400</td><td>5:1</td><td><b style="color:#c7b489">--ar 16:9</b> &rarr; zuschneiden</td></tr>'+
             '<tr><td>Titel-Banner im Text (volle Breite)</td><td class="num">1536 × 192</td><td>8:1</td><td><b style="color:#c7b489">--ar 16:9</b> &rarr; zuschneiden</td></tr>'+
@@ -15971,12 +16042,14 @@ var TSISL_TEAM_ONB_V2=[
           '<p>Benenn die Dateien so, wie der Eintrag später in Notion heißt. Aus <span class="mono">zutat-tomate.png</span> wird die Tomate in deiner Zutatenliste, und du musst beim Hochladen nicht raten, welches der vier ähnlichen Bilder das richtige war. Bei Bannern hängst du die Zielgröße an den Namen.</p>'+
           '<p>Zwei Minuten Aufwand, die sich in der Bauphase auszahlen. Da entsteht in kurzer Zeit viel Material, und du lädst es am Stück nach Notion hoch. Mit sortierten Ordnern wird daraus eine ruhige halbe Stunde statt einer Suchaktion.</p>'+
         '</div>'+
-        '<div class="s-media">'+frameSm('Ordner-Baum · Zutaten / Gerichte / Banner')+'</div>'+
+        '<div class="s-media"><div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="ftree">'+
+          '<div class="d">Backoffice-Bilder/</div>'+
+          '<div class="d i1">Zutaten/</div><div class="f i2">zutat-tomate.png</div><div class="f i2">zutat-ahornsirup.png</div>'+
+          '<div class="d i1">Gerichte/</div><div class="f i2">gericht-thai-peanut-tofu-bowl.png</div><div class="d i2">Sticker/</div>'+
+          '<div class="d i1">Banner/</div><div class="f i2">banner-backoffice-7968x960.png</div>'+
+        '</div></div></div>'+
       '</div>'+
-      '<div class="cards" style="max-width:calc(840px * var(--ts-tx));margin-top:44px">'+
-        '<div class="card" style="text-align:left"><h3 style="text-transform:none;font-size:clamp(18px,1.9vw,22px);color:#fff;letter-spacing:-.015em;margin:0 0 10px">Design-Vorlagen</h3><p class="k" style="max-width:none">Fertige Canva-Vorlagen für Cover, Banner und Sticker — einfach übernehmen und anpassen.</p><span class="who self" style="margin-top:16px">Link folgt</span></div>'+
-        '<div class="card" style="text-align:left"><h3 style="text-transform:none;font-size:clamp(18px,1.9vw,22px);color:#fff;letter-spacing:-.015em;margin:0 0 10px">Tasty-Studios-Shop</h3><p class="k" style="max-width:none">Einzelne Designs &amp; fertige Notion-Datenbanken bestellen, statt selbst zu bauen.</p><span class="who self" style="margin-top:16px">Link folgt</span></div>'+
-      '</div>'+
+      /* Karten Design-Vorlagen + Shop ausgeblendet, bis es echte Links gibt (01.11.2026) */
     '</section>'+
 
     /* Learnings */
@@ -16116,7 +16189,7 @@ var TSISL_TEAM_ONB_V2=[
     if(!scr || scr.__v) return; scr.__v=true;
     scr.addEventListener('click',function(){
       var cap=scr.querySelector('.ph-cap');
-      if(cap){ cap.textContent='Video folgt in Kürze'; setTimeout(function(){ cap.textContent='folgt'; },1800); }
+      if(cap){ cap.textContent=''; }
     });
   }
 
@@ -16602,9 +16675,9 @@ var TSISL_TEAM_ONB_V2=[
    ['07',1,'Wissen','Gastronomie Lexikon','Das Nachschlagewerk: Begriffe, Kennzahlen und Standards der Branche an einem Ort.','1 DB','/lektionen/gastronomie-lexikon'],
    ['08',2,'Standort','Standortanalyse','Lage, Frequenz, Umfeld und Potenzial — im strukturierten Check, bevor du unterschreibst.','1 DB','/lektionen/standortanalyse'],
    ['09',2,'Wachstum','Expansioncenter','Der Maschinenraum der Skalierung: Pipeline, Projekte, Partner, Meilensteine, Risiken und Capex.','6 DBs','/lektionen/expansioncenter'],
-   ['10',2,'System','Franchise Rulebook','Dein Betrieb als Blaupause: Regelwerk, Prüfungen und Maßnahmen für saubere Vervielfältigung.','3 DBs','/lektionen/franchise-rulebook'],
+   ['10',2,'System','Franchise Rulebook','Dein Betrieb als Blaupause: Regelwerk, Prüfungen und Maßnahmen für saubere Vervielfältigung.','2 DBs','/lektionen/franchise-rulebook'],
    ['11',3,'Event','Eventkonzepte','Anlässe, die verkaufen: durchdachte Eventformate als eigene Umsatzsäule.','1 DB','/lektionen/eventkonzepte'],
-   ['12',3,'Service','Catering','Deine Küche außer Haus: Catering-Angebote sauber kalkuliert und organisiert.','1 DB','/lektionen/catering'],
+   ['12',3,'Service','Catering','Deine Küche außer Haus: Catering-Angebote sauber kalkuliert und organisiert.','2 DBs','/lektionen/catering'],
    ['13',3,'Produkt','Merch // Produkte','Über den Teller hinaus: Merchandise und Eigenprodukte als zusätzliche Einnahmequelle.','1 DB','/lektionen/merch-produkte']
   ];
 
@@ -21478,6 +21551,212 @@ var TSISL_TEAM_ONB_V2=[
     duo:null,
     learn:['Du hast dein Wertefundament als Datenbank gebaut, statt es im Kopf zu behalten.','Du trennst Vision und Wert sauber — die Richtung von dem Prinzip, nach dem du handelst.','Du bringst jeden Eintrag auf eine Essenz in einem Satz und zwingst dich damit zur Klarheit.','Du verankerst jeden Wert im Alltag und im System, sodass er überprüfbar wird statt dekorativ.']
    },
+  /* NEUBAU 2.15.3-2.15.13 (Vision-Inseln als Erklaerwerk, 01.11.2026) */
+   {
+    slug:/\/lektionen\/team-kultur-guidelines\/?$/, key:'vfteam',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.3', kicker:'Vision Frame · Identität & Marke',
+    titleHTML:'Team & <span class="il-g">Kultur Guidelines</span>',
+    lead:'Kultur ist das, was dein Team tut, wenn du gerade nicht im Laden bist.',
+    intro:['Jeder Betrieb hat Regeln, die nirgends stehen. Wie man einen Gast begrüßt, wer die Spülküche übernimmt, wenn es eng wird, wie man in der Küche miteinander spricht. Neue Leute lernen das durch Abschauen, und jeder schaut sich etwas anderes ab.', 'In dieser Insel stehen diese Regeln als Guidelines in einer Datenbank. Jede hat eine Kategorie, eine Beschreibung, ein Beispiel aus dem Alltag und einen Vermerk, für wen sie gilt. So kann jemand am zweiten Arbeitstag nachlesen, was bei euch selbstverständlich ist.'],
+    anim:{type:'checklist', head:{eyebrow:'Woran du eine gute Guideline erkennst', h:'Eine Regel, die <span class="il-g">jeder versteht</span>', sub:'Eine Guideline hilft nur, wenn jemand sie im Service anwenden kann. Diese vier Fragen zeigen dir, ob sie dafür klar genug ist.'}, unit:'Fragen', rows:['Kann ich sie in einem Satz sagen?', 'Gibt es ein Beispiel aus unserem Alltag?', 'Ist klar, für wen sie gilt?', 'Würde ein neuer Kollege danach handeln können?']},
+    video:{h:'Haltung, die man <span class="il-g">nachlesen</span> kann', p:['Die Kategorie ordnet jede Guideline einem Feld zu, von Kommunikation über Führung bis zu Qualität & Standards. Daran siehst du schnell, wo eure Kultur schon beschrieben ist und wo noch nichts steht.', 'Das Feld Beispiele ist das wichtigste der ganzen Tabelle. Ein Satz wie wir gehen respektvoll miteinander um sagt niemandem etwas. Ein Beispiel wie wir unterbrechen niemanden, der gerade eine Bestellung ausruft, versteht jeder sofort.'], close:'In deiner Vorlage liegt diese Datenbank schon bereit. Jede Karte im Regal erklärt eine Spalte. Danach trägst du die drei Regeln ein, die du einem neuen Kollegen am ersten Tag sagen würdest.'},
+    wk:[
+      {id:'vf_teamkultur', eyebrow:'DB : Team Kultur Guidelines', title:'Eure <span>Guidelines</span>. Regel für Regel.'}
+    ],
+    ergebnis:[{h:'Eure Kultur, <span class="il-g">schwarz auf weiß</span>', cap:'Team Kultur Guidelines', p:['Am Ende hast du eine Liste von Guidelines, sortiert nach Kategorie und gefiltert nach Bereich. Die Küche sieht ihre Regeln, der Service seine, und was für alle gilt, steht für alle da.', 'Beim Einarbeiten zeigst du die Ansicht für neue Mitarbeitende, statt alles mündlich zu erzählen. Und wenn eine Regel nicht mehr passt, setzt du sie auf In Überprüfung, statt sie still verschwinden zu lassen.']}],
+    zweit:null,
+    empf:{dbhd:'🤝 Team Kultur Guidelines', points:['Guideline', 'Kategorie', 'Beispiele', 'Betrifft'], emph:'Schreib zu jeder Regel ein <span class="il-eg">echtes Beispiel</span>', p:'Eine Regel ohne Beispiel bleibt ein Plakat im Pausenraum. Mit Beispiel weiß jeder, was gemeint ist, auch nach dem dritten Doppeldienst.', steps:['Trag drei Regeln ein, die bei euch schon gelten.', 'Gib jeder eine Kategorie und den Bereich, den sie betrifft.', 'Schreib zu jeder ein Beispiel aus einer echten Schicht.', 'Setz neue Regeln zuerst auf Entwurf und besprich sie im Team.']},
+    duo:null,
+    learn:['Eure ungeschriebenen Regeln stehen jetzt an einer Stelle.', 'Jede Guideline hat ein Beispiel, das man im Alltag wiedererkennt.', 'Über Betrifft sieht jeder Bereich genau die Regeln, die für ihn gelten.', 'Der Status zeigt, welche Regeln schon gelten und welche noch besprochen werden.']
+   },
+   {
+    slug:/\/lektionen\/interieur-design\/?$/, key:'vfraum',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.4', kicker:'Vision Frame · Identität & Marke',
+    titleHTML:'Interieur <span class="il-g">Design</span>',
+    lead:'Der Gast sieht deinen Raum, bevor er deine Karte sieht.',
+    intro:['Leuchten, Stühle, Teller, der Stoff der Bankpolster: Jedes Teil hat einmal jemand ausgesucht, bei einem Händler bestellt und bezahlt. Zwei Jahre später bricht ein Stuhl, und keiner weiß mehr, wo er herkam.', 'Die Datenbank in deiner Vorlage hält jedes Einrichtungsstück mit Foto, Bezugsquelle und Link fest. Wenn etwas ersetzt werden muss, bestellst du dasselbe Teil nach, und der Raum bleibt so, wie du ihn gedacht hast.'],
+    anim:{type:'checklist', head:{eyebrow:'Was zu jedem Stück gehört', h:'Jedes Teil <span class="il-g">nachbestellbar</span>', sub:'Ein Eintrag ist vollständig, wenn jemand anderes das Teil ohne dich nachbestellen kann.'}, unit:'Angaben', rows:['Ein Foto des Teils im Raum', 'Die Kategorie, zu der es gehört', 'Wo es herkommt', 'Der direkte Link zum Produkt', 'Der Dienstleister, der es geliefert hat']},
+    video:{h:'Nachbestellen, ohne zu <span class="il-g">suchen</span>', p:['Die Kategorien teilen deinen Raum in Möbel, Beleuchtung, Textilien, Dekoration, Bodenbeläge, Wandgestaltung und Accessoires. Filterst du auf Beleuchtung, siehst du alle Leuchten des Hauses mit Foto nebeneinander.', 'Über die Spalte Dienstleister hängt jedes Teil an einem Eintrag aus Partner & Verträge. Dort stehen schon Ansprechpartner und Konditionen, hier musst du sie nicht noch einmal pflegen.'], close:'In deiner Vorlage ist die Datenbank schon angelegt. Jede Karte im Regal erklärt eine Spalte. Fang danach mit den Teilen an, die am häufigsten kaputtgehen, meistens Stühle und Gläser.'},
+    wk:[
+      {id:'vf_interior', eyebrow:'DB : Interior Design Produkte', title:'Deine <span>Einrichtung</span>. Stück für Stück.'}
+    ],
+    ergebnis:[{h:'Dein Raum als <span class="il-g">Inventar mit Bild</span>', cap:'Interior Design Produkte', p:['Am Ende siehst du deinen Gastraum als Galerie: jedes Stück mit Foto, Kategorie und Herkunft. Wer eine Leuchte nachbestellen soll, öffnet den Eintrag und klickt auf den Link.', 'Planst du einen Umbau oder einen zweiten Standort, hast du die Liste der Teile, die deinen Raum ausmachen, schon vor dir.']}],
+    zweit:null,
+    empf:{dbhd:'🛋️ Interior Design Produkte', points:['Produkt', 'Kategorie', 'Bilder', 'Produkt-Link'], emph:'Fotografier jedes Teil <span class="il-eg">im eigenen Raum</span>', p:'Das Katalogbild des Händlers zeigt das Teil im Studio. Dein eigenes Foto zeigt, wie es bei dir steht, und genau so soll es nach einer Nachbestellung wieder aussehen.', steps:['Trag die fünf Teile ein, die am häufigsten ersetzt werden.', 'Lade zu jedem ein Foto aus deinem Gastraum hoch.', 'Füge Bezugsquelle und Produkt-Link hinzu.', 'Verknüpf den Dienstleister, falls er schon in Partner & Verträge steht.']},
+    duo:null,
+    learn:['Jedes Einrichtungsstück hat ein Foto und eine Herkunft.', 'Nachbestellen geht über den Produkt-Link, ohne Suche.', 'Über die Kategorie siehst du alle Teile einer Art nebeneinander.', 'Der Dienstleister hängt an der Datenbank, die du schon aus Partner & Verträge kennst.']
+   },
+   {
+    slug:/\/lektionen\/zielgruppenanalyse\/?$/, key:'vfziel',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.5', kicker:'Vision Frame · Markt & Positionierung',
+    titleHTML:'Ziel<span class="il-g">gruppenanalyse</span>',
+    lead:'Wer für alle kocht, kocht am Ende für niemanden.',
+    intro:['Jeder Gastronom hat ein Bild von seinen Gästen. Die Mittagsgäste aus den Büros, die Paare am Freitagabend, die Familien am Sonntag. Dieses Bild entscheidet über Karte, Preise, Öffnungszeiten und über jeden Post auf Instagram, meistens ohne dass es jemand aufgeschrieben hat.', 'In dieser Datenbank bekommt jede Gästegruppe eine eigene Zeile, mit einer erfundenen Person als Gesicht. Du hältst fest, was diese Gäste brauchen, was sie stört, wie viel sie ausgeben und wo du sie erreichst. Dann prüfst du jede neue Idee an genau dieser Person.'],
+    anim:{type:'checklist', head:{eyebrow:'Was eine Zielgruppe greifbar macht', h:'Aus einer Ahnung wird ein <span class="il-g">Gast mit Namen</span>', sub:'Erst wenn du diese Fragen beantworten kannst, hast du eine Zielgruppe statt einer Schätzung.'}, unit:'Fragen', rows:['Wie heißt die Person, und wie alt ist sie?', 'Was will sie bei dir erledigt haben?', 'Was ärgert sie bei anderen Betrieben?', 'Wie viel gibt sie aus, und wofür?', 'Wo sieht sie deine Nachricht?']},
+    video:{h:'Eine Person statt einer <span class="il-g">Statistik</span>', p:['Die Spalte Persona Name klingt nach Spielerei und ist doch der wichtigste Kniff. Über Katrin, 41, Agenturinhaberin, die mittags 45 Minuten hat, kann dein Team reden. Über die Altersgruppe 35 bis 45 kann es das nicht.', 'Bedürfnisse und Pain Points stehen nebeneinander, weil du beides brauchst. Das Bedürfnis sagt dir, was du anbieten musst. Der Pain Point, also das, was den Gast heute stört, sagt dir, womit du dich von den anderen abhebst.'], close:'In deiner Vorlage liegt die Datenbank fertig bereit. Jede Karte im Regal erklärt eine Spalte. Beginn danach mit der Gruppe, die heute den größten Teil deines Umsatzes bringt, und setz ihre Priorität auf Primärzielgruppe.'},
+    wk:[
+      {id:'vf_zielgruppe', eyebrow:'DB : Zielgruppenanalyse', title:'Deine <span>Gäste</span>. Gruppe für Gruppe.'}
+    ],
+    ergebnis:[{h:'Deine Gäste, <span class="il-g">nach Gewicht sortiert</span>', cap:'Zielgruppenanalyse', p:['Am Ende hast du zwei bis vier Gästegruppen, jede mit Gesicht, Budget und den Kanälen, über die sie dich findet. Ganz oben steht die Primärzielgruppe.', 'Wenn du eine neue Karte planst, einen Mittagstisch einführst oder ein Event bewirbst, prüfst du es an diesen Zeilen. Passt es nicht zur Primärzielgruppe, brauchst du einen guten Grund, es trotzdem zu machen.']}],
+    zweit:null,
+    empf:{dbhd:'🎯 Zielgruppenanalyse', points:['Persona', 'Bedürfnisse', 'Pain Points', 'Budget'], emph:'Fang bei den Gästen an, <span class="il-eg">die schon kommen</span>', p:'Deine Stammgäste kennst du am besten. Beschreib zuerst sie, dann die Gruppe, die du zusätzlich gewinnen willst.', steps:['Trag deine größte Gästegruppe ein und gib ihr einen Namen.', 'Beschreib, was sie braucht und was sie anderswo stört.', 'Wähl Budget und Kanäle aus, über die du sie erreichst.', 'Setz genau eine Gruppe auf Primärzielgruppe.']},
+    duo:null,
+    learn:['Jede Gästegruppe hat ein Gesicht, über das dein Team sprechen kann.', 'Bedürfnisse zeigen dir dein Angebot, Pain Points deinen Unterschied.', 'Budget und Kanäle stehen neben der Person, nicht in einer anderen Tabelle.', 'Eine Primärzielgruppe ist der Maßstab für jede neue Idee.']
+   },
+   {
+    slug:/\/lektionen\/konkurrenzanalyse\/?$/, key:'vfkonk',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.6', kicker:'Vision Frame · Markt & Positionierung',
+    titleHTML:'Konkurrenz<span class="il-g">analyse</span>',
+    lead:'Deine Gäste vergleichen dich längst. Die Frage ist, ob du es auch tust.',
+    intro:['Jeder Gastronom kennt die Betriebe in seiner Straße. Welcher am Mittag voll ist, wer gerade neu eröffnet hat, wo die Preise gestiegen sind. Dieses Wissen bleibt meistens bei einem Gespräch am Tresen und ist eine Woche später vergessen.', 'Die Konkurrenzanalyse macht daraus eine Liste, die du pflegst. Jeder Mitbewerber bekommt eine Zeile mit Preisniveau, Durchschnittsbon, Stärken und Schwächen. Am Ende jeder Zeile steht, was du daraus machst.'],
+    anim:{type:'checklist', head:{eyebrow:'Was ein Mitbewerber-Eintrag braucht', h:'Beobachten, einordnen, <span class="il-g">handeln</span>', sub:'Ein Eintrag ist erst fertig, wenn am Ende eine Entscheidung für deinen eigenen Betrieb steht.'}, unit:'Schritte', rows:['Konzept und Preisniveau einordnen', 'Stärken ehrlich benennen', 'Schwächen als Chance lesen', 'Festhalten, worin du besser bist', 'Eine Handlungsempfehlung schreiben']},
+    video:{h:'Stärken anerkennen, <span class="il-g">Lücken nutzen</span>', p:['Die Spalten Stärken / USPs und Schwächen / Chancen stehen nebeneinander, damit du beide Seiten siehst. USP heißt Alleinstellungsmerkmal, also das, was nur dieser Betrieb so bietet. Wer bei der Konkurrenz nur Schwächen findet, hat nicht genau hingesehen.', 'Der Ø Bon-Wert ist der Durchschnittsbon, den du aus Key Metrics kennst, nur eben beim Mitbewerber. Du schätzt ihn aus Karte und Getränkepreisen. Steht er neben deinem eigenen, siehst du, ob ihr um dieselben Gäste werbt.'], close:'In deiner Vorlage ist die Datenbank schon da. Jede Karte im Regal erklärt eine Spalte. Danach trägst du die drei Betriebe ein, an die deine Gäste denken, wenn sie nicht zu dir kommen.'},
+    wk:[
+      {id:'vf_konkurrenz', eyebrow:'DB : Konkurrenzanalyse', title:'Deine <span>Mitbewerber</span>. Betrieb für Betrieb.'}
+    ],
+    ergebnis:[{h:'Dein Platz im <span class="il-g">Viertel</span>', cap:'Konkurrenzanalyse', p:['Am Ende siehst du deine Mitbewerber nach Relevanz sortiert, vom Marktführer bis zum Randbereich. Bei jedem steht, worin er stark ist, wo er Gäste verliert und worin du ihm voraus bist.', 'Die Handlungsempfehlungen werden zu deiner Liste für das nächste Quartal: ein Gericht, das es im Viertel noch nicht gibt, ein Kanal, den keiner bespielt, ein Service, der bei den anderen fehlt.']}],
+    zweit:null,
+    empf:{dbhd:'🔍 Konkurrenzanalyse', points:['Preisniveau', 'Ø Bon-Wert', 'Stärken', 'Empfehlung'], emph:'Geh <span class="il-eg">selbst essen</span>, bevor du schreibst', p:'Bewertungen im Netz zeigen dir die Stimmung. Was ein Betrieb wirklich gut macht, merkst du erst am Tisch, mit der Rechnung in der Hand.', steps:['Trag die drei Betriebe ein, die deinen Gästen als Erstes einfallen.', 'Ordne Kategorie, Preisniveau und Service-Konzept zu.', 'Schreib Stärken und Schwächen nach einem eigenen Besuch.', 'Formuliere zu jedem eine Handlungsempfehlung für deinen Betrieb.']},
+    duo:null,
+    learn:['Deine Mitbewerber stehen mit Zahlen und Beobachtungen in einer Liste.', 'Stärken und Schwächen stehen nebeneinander, damit du beide Seiten siehst.', 'Der Ø Bon-Wert zeigt dir, ob ihr um dieselben Gäste werbt.', 'Jeder Eintrag endet mit einer Entscheidung für deinen eigenen Betrieb.']
+   },
+   {
+    slug:/\/lektionen\/gastronomie-lexikon\/?$/, key:'vflex',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.7', kicker:'Vision Frame · Markt & Positionierung',
+    titleHTML:'Gastronomie <span class="il-g">Lexikon</span>',
+    lead:'Ein Team, das dieselben Wörter benutzt, macht weniger Fehler.',
+    intro:['Was der eine Wareneinsatz nennt, heißt beim anderen Foodcost, und die neue Aushilfe kennt keins von beiden. Mise en Place, Par-Bestand, Gedeckumsatz: In jedem Betrieb fallen jeden Tag Begriffe, die nicht jeder versteht und die keiner zu fragen wagt.', 'Das Lexikon sammelt diese Begriffe an einer Stelle. Jeder bekommt eine kurze Erklärung für den schnellen Blick und eine ausführliche für alle, die es genau wissen wollen. Dazu eine Kategorie und eine Stufe, die zeigt, ob es Grundwissen ist oder etwas für Fortgeschrittene.'],
+    anim:{type:'checklist', head:{eyebrow:'Was einen Lexikon-Eintrag gut macht', h:'Ein Begriff, <span class="il-g">zwei Tiefen</span>', sub:'Die kurze Erklärung reicht im Service, die lange beim Einarbeiten.'}, unit:'Angaben', rows:['Der Begriff so, wie ihn das Team benutzt', 'Eine Erklärung in einem Satz', 'Eine ausführliche Erklärung mit Beispiel', 'Die Stufe, ab der man ihn kennen sollte']},
+    video:{h:'Nachschlagen statt <span class="il-g">nachfragen</span>', p:['Die Kategorien folgen den Bereichen eines Betriebs, von Finanzen & Controlling über Küche & Produktion bis zu Getränke. Wer in der Küche anfängt, filtert auf seinen Bereich und hat die Wörter vor sich, die er in den ersten Wochen hört.', 'Die Schwierigkeit sortiert jeden Begriff in Grundlagen, Fortgeschritten oder Experte. So lernt eine neue Servicekraft zuerst, was ein Gedeck ist, und erst später, wie sich der Gedeckumsatz berechnet.'], close:'In deiner Vorlage ist das Lexikon schon angelegt. Jede Karte im Regal erklärt eine Spalte. Trag danach die zehn Begriffe ein, die bei euch am häufigsten fallen, und schick den Link an alle, die neu anfangen.'},
+    wk:[
+      {id:'vf_lexikon', eyebrow:'DB : Gastro Lexikon', title:'Dein <span>Lexikon</span>. Begriff für Begriff.'}
+    ],
+    ergebnis:[{h:'Eure Sprache, <span class="il-g">für alle gleich</span>', cap:'Gastro Lexikon', p:['Am Ende hast du ein Nachschlagewerk, das mit deinem Betrieb wächst. Jeder Begriff ist in einem Satz erklärt und, wo nötig, ausführlich mit Beispiel.', 'Neue Mitarbeitende lesen sich in ihren Bereich ein, bevor die erste Schicht beginnt. Und wenn in der Besprechung von Wareneinsatz die Rede ist, meinen alle dasselbe.']}],
+    zweit:null,
+    empf:{dbhd:'📖 Gastro Lexikon', points:['Begriff', 'Kurzbeschreibung', 'Kategorie', 'Schwierigkeit'], emph:'Schreib die Begriffe auf, <span class="il-eg">die neue Leute fragen</span>', p:'Die besten Einträge kommen aus den ersten Wochen neuer Kollegen. Jede Frage, die zweimal gestellt wird, gehört ins Lexikon.', steps:['Trag die zehn Begriffe ein, die im Alltag am häufigsten fallen.', 'Schreib zu jedem eine Erklärung in einem Satz.', 'Ergänz die ausführliche Beschreibung bei Begriffen mit Zahlen.', 'Ordne Kategorie und Schwierigkeit zu.']},
+    duo:null,
+    learn:['Die Fachbegriffe deines Betriebs stehen an einer Stelle.', 'Jeder Begriff hat eine kurze und eine ausführliche Erklärung.', 'Über Kategorie und Schwierigkeit liest sich jeder in seinen Bereich ein.', 'Im Team meinen alle dasselbe, wenn sie dasselbe Wort benutzen.']
+   },
+   {
+    slug:/\/lektionen\/standortanalyse\/?$/, key:'vfort',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.8', kicker:'Vision Frame · Standort & Skalierung',
+    titleHTML:'Standort<span class="il-g">analyse</span>',
+    lead:'Einen schlechten Standort gleicht auch die beste Küche nur schwer aus.',
+    intro:['Ein Mietvertrag läuft oft zehn Jahre. Entschieden wird er häufig nach zwei Besichtigungen und einem guten Gefühl. Wie viele Menschen am Mittag vorbeigehen, wer in der Nachbarschaft wohnt und wie viele Betriebe schon um dieselben Gäste werben, schaut man sich selten in Ruhe an.', 'Die Standortanalyse bewertet jedes Objekt nach denselben Punkten. Lage, Laufkundschaft, Erreichbarkeit, Wettbewerb und Miete stehen nebeneinander, dazu Chancen, Risiken und eine Gesamtbewertung. So vergleichst du drei Objekte, bevor du eines unterschreibst.'],
+    anim:{type:'checklist', head:{eyebrow:'Was du vor der Unterschrift prüfst', h:'Gleiche Fragen für <span class="il-g">jedes Objekt</span>', sub:'Erst wenn jedes Objekt dieselben Fragen beantwortet hat, kannst du sie ehrlich vergleichen.'}, unit:'Fragen', rows:['Wie viele Menschen kommen hier zu Fuß vorbei?', 'Wie gut ist der Ort ohne Auto erreichbar?', 'Wer wohnt und arbeitet im Umfeld?', 'Wie viele Betriebe werben schon um diese Gäste?', 'Passt die Miete zum Umsatz, den die Fläche bringen kann?']},
+    video:{h:'Bewerten, bevor du <span class="il-g">unterschreibst</span>', p:['Viele Spalten sind Auswahlfelder mit festen Stufen: Sichtbarkeit, Laufkundschaft, Einkommensniveau, Bevölkerungsdichte. Das zwingt dich, jedes Objekt mit demselben Maß zu messen, statt das schönste Ladenlokal automatisch am besten zu finden.', 'Zielgruppen-Fit und Gesamtbewertung sind Zahlen, die du selbst vergibst, zum Beispiel von 1 bis 10. Der Zielgruppen-Fit sagt, wie gut die Menschen im Umfeld zu deiner Primärzielgruppe aus der Zielgruppenanalyse passen. Die Gesamtbewertung fasst alles zusammen.'], close:'In deiner Vorlage steht die Datenbank bereit. Jede Karte im Regal erklärt eine Spalte. Trag danach dein heutiges Lokal als erstes Objekt ein. Daran siehst du, wie ein Standort aussieht, der funktioniert.'},
+    wk:[
+      {id:'vf_standort', eyebrow:'DB : Standortanalyse Restaurant-Kette', title:'Deine <span>Standorte</span>. Objekt für Objekt.'}
+    ],
+    ergebnis:[{h:'Drei Objekte, <span class="il-g">ein Maßstab</span>', cap:'Standortanalyse Restaurant-Kette', p:['Am Ende stehen alle Objekte, die du dir angesehen hast, mit demselben Raster nebeneinander. Über den Status siehst du, welche empfohlen sind und welche nicht.', 'Wenn ein Makler anruft, öffnest du einen neuen Eintrag und gehst die Spalten durch. Nach der Besichtigung weißt du, ob das Objekt besser ist als die, die du schon kennst.']}],
+    zweit:null,
+    empf:{dbhd:'📍 Standortanalyse', points:['Laufkundschaft', 'Erreichbarkeit', 'Wettbewerb', 'Miete/Monat'], emph:'Zähl die Passanten <span class="il-eg">selbst</span>', p:'Stell dich zur Mittagszeit und am Freitagabend jeweils eine Viertelstunde vor das Objekt. Was du dort siehst, ist ehrlicher als jedes Exposé.', steps:['Trag dein heutiges Lokal als Vergleichsobjekt ein.', 'Trag jedes neue Objekt mit Adresse, Fläche und Miete ein.', 'Bewerte Laufkundschaft und Sichtbarkeit nach einem eigenen Besuch.', 'Setz den Status erst nach Chancen und Risiken.']},
+    duo:null,
+    learn:['Jedes Objekt wird nach denselben Punkten bewertet.', 'Laufkundschaft, Wettbewerb und Miete stehen nebeneinander.', 'Der Zielgruppen-Fit verbindet den Standort mit deiner Zielgruppenanalyse.', 'Der Status zeigt, welche Objekte du empfiehlst und welche nicht.']
+   },
+   {
+    slug:/\/lektionen\/expansioncenter\/?$/, key:'vfexp',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.9', kicker:'Vision Frame · Standort & Skalierung',
+    titleHTML:'Expansion<span class="il-g">center</span>',
+    lead:'Ein zweiter Standort ist ein eigenes Projekt, mit eigenem Geld, eigenen Terminen und eigenen Risiken.',
+    intro:['Wer einen zweiten oder dritten Standort eröffnet, jongliert auf einmal mit Maklern, Bauplänen, Investoren, Handwerkern und Behörden. Das läuft parallel zum laufenden Betrieb, und genau da gehen Termine unter und Budgets laufen davon.', 'Das Expansioncenter ordnet das in sechs verknüpfte Datenbanken. Die Standorte Pipeline sammelt die Orte, die Expansionsprojekte steuern die Eröffnung, dazu kommen Partner & Betreiber, Kosten & Capex, Risiken und Meilensteine. Alles hängt am Projekt und am Standort, du siehst also zu jeder Eröffnung das ganze Bild.'],
+    anim:{type:'checklist', head:{eyebrow:'Wie die sechs Datenbanken zusammenhängen', h:'Ein Standort, <span class="il-g">ein Projekt</span>, alles verknüpft', sub:'Jede Datenbank beantwortet eine eigene Frage. Zusammen zeigen sie dir, ob eine Eröffnung im Plan liegt.'}, unit:'Fragen', rows:['Welche Orte kommen infrage? Standorte Pipeline', 'Wie weit ist die Eröffnung? Expansionsprojekte', 'Wer betreibt oder finanziert mit? Partner & Betreiber', 'Wo steht das Geld? Kosten & Capex', 'Was kann schiefgehen? Risiken', 'Was muss bis wann erledigt sein? Meilensteine']},
+    video:{h:'Das Projekt in der <span class="il-g">Mitte</span>', p:['Die Expansionsprojekte sind der Mittelpunkt. Kosten, Risiken und Meilensteine verweisen jeweils auf ein Projekt und einen Standort. Öffnest du ein Projekt, hast du die Rechnungen, die offenen Risiken und die nächsten Termine dieser Eröffnung zusammen vor dir.', 'Capex heißt Investitionskosten, also alles, was du einmalig für den Standort ausgibst: Umbau, Küchentechnik, Einrichtung, Gebühren. Die laufenden Kosten danach stehen in der Pipeline als Fixkosten-Forecast, also als Vorausschau auf die monatlichen Fixkosten.'], close:'In deiner Vorlage sind alle sechs Datenbanken angelegt und miteinander verknüpft. Jede Karte in den Regalen erklärt eine Spalte. Fang danach mit dem Standort an, über den du gerade am meisten nachdenkst, auch wenn er noch im Scouting ist.'},
+    wk:[
+      {id:'vf_exp_projekte', eyebrow:'DB : Expansionsprojekte', title:'Deine <span>Projekte</span>. Eröffnung für Eröffnung.'},
+      {id:'vf_exp_pipeline', eyebrow:'DB : Standorte Pipeline', title:'Deine <span>Pipeline</span>. Ort für Ort.'},
+      {id:'vf_exp_partner', eyebrow:'DB : Partner & Betreiber', title:'Deine <span>Partner</span>. Vertrag für Vertrag.'},
+      {id:'vf_exp_kosten', eyebrow:'DB : Kosten & Capex', title:'Deine <span>Investitionen</span>. Position für Position.'},
+      {id:'vf_exp_risiken', eyebrow:'DB : Risiken', title:'Deine <span>Risiken</span>. Eingeordnet.'},
+      {id:'vf_exp_meilensteine', eyebrow:'DB : Meilensteine', title:'Deine <span>Meilensteine</span>. Termin für Termin.'}
+    ],
+    ergebnis:[{h:'Jede Eröffnung mit <span class="il-g">Ampel</span>', cap:'Expansionsprojekte', p:['Am Ende siehst du alle Projekte mit Phase und Ampelstatus. Grün läuft, Gelb braucht Aufmerksamkeit, Rot braucht eine Entscheidung. Die Spalte Entscheidungsbedarf sagt dir, ob sie diese Woche fällig ist oder sofort.', 'Daneben stehen geplantes und aktuelles Budget. Weichen sie voneinander ab, gehst du in Kosten & Capex und siehst, welche Position es ist.']}, {h:'Geld und Risiko <span class="il-g">am selben Ort</span>', cap:'Kosten & Capex · Risiken', p:['In Kosten & Capex zeigt jede Position, was geplant war und was sie wirklich kostet. Die Vorlage rechnet die Abweichung aus und zeigt sie als farbigen Balken: rot, wenn es teurer wird, grün, wenn es günstiger bleibt.', 'In Risiken rechnet die Vorlage aus Eintrittswahrscheinlichkeit und Schadenshöhe einen Score zwischen 1 und 25. Die Risiken mit dem höchsten Score besprichst du zuerst.']}],
+    zweit:null,
+    empf:{dbhd:'🏗️ Expansioncenter', points:['Pipeline', 'Projekt', 'Capex', 'Meilensteine'], emph:'Trag Standorte ein, <span class="il-eg">bevor</span> sie ernst werden', p:'Ein Ort im Scouting kostet dich nur eine Zeile. Steht er erst mal in der Pipeline, vergleichst du ihn mit allen anderen und entscheidest nicht unter Zeitdruck.', steps:['Trag jeden Ort, der infrage kommt, in die Standorte Pipeline ein.', 'Starte ein Expansionsprojekt erst, wenn ein Standort in die Verhandlung geht.', 'Verknüpf jede Kostenposition mit Projekt und Standort.', 'Markier Meilensteine, ohne die nicht eröffnet werden kann, als kritisch.']},
+    duo:null,
+    learn:['Sechs verknüpfte Datenbanken zeigen dir jede Eröffnung im Ganzen.', 'Das Projekt ist der Mittelpunkt, Kosten, Risiken und Meilensteine hängen daran.', 'Plan und Ist stehen in Kosten & Capex nebeneinander, die Abweichung rechnet die Vorlage.', 'Der Risiko-Score zeigt dir, worüber du zuerst sprechen musst.']
+   },
+   {
+    slug:/\/lektionen\/franchise-rulebook\/?$/, key:'vffran',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.10', kicker:'Vision Frame · Standort & Skalierung',
+    titleHTML:'Franchise <span class="il-g">Rulebook</span>',
+    lead:'Dein Konzept lässt sich nur so gut vervielfältigen, wie es aufgeschrieben ist.',
+    intro:['Solange du selbst im Laden stehst, sorgst du dafür, dass die Bowl jeden Tag gleich aussieht und das Logo nicht verzerrt auf der Tafel landet. Führt ein Partner deinen zweiten Standort, brauchst du Regeln, die auch ohne dich gelten, und einen Weg, sie zu prüfen.', 'Das Rulebook hat dafür zwei Datenbanken. Im Franchise-Regelwerk steht jede Regel mit Typ, Kategorie und der Folge bei einem Verstoß. In den Franchise-Prüfungen hältst du jeden Rundgang fest, mit Compliance-Wert, kritischen Verstößen und einer Frist für die Maßnahmen.'],
+    anim:{type:'checklist', head:{eyebrow:'Was eine prüfbare Regel braucht', h:'Regel, Prüfung, <span class="il-g">Folge</span>', sub:'Eine Regel, die niemand prüft, gilt nach drei Monaten nicht mehr. Diese Angaben machen sie überprüfbar.'}, unit:'Angaben', rows:['Ist sie Pflicht, Verbot oder genehmigungspflichtig?', 'Für welche Art von Standort gilt sie?', 'Wie wird sie geprüft?', 'Was passiert bei einem Verstoß?']},
+    video:{h:'Regeln, die man <span class="il-g">prüfen kann</span>', p:['Der Regeltyp trennt drei Fälle. Eine Pflicht muss jeder Standort erfüllen, ein Verbot darf keiner brechen, und genehmigungspflichtig heißt, der Partner darf es nur nach deiner Zustimmung. Ein eigenes Gericht auf der Karte ist zum Beispiel oft genehmigungspflichtig.', 'Die Kontrollart sagt, wie die Regel geprüft wird: als Audit beim Rundgang, als Kennzahl oder als kurze Sichtprüfung. Daraus ergibt sich, welche Regeln beim nächsten Besuch in den Franchise-Prüfungen auf der Liste stehen.'], close:'In deiner Vorlage sind beide Datenbanken angelegt. Jede Karte in den Regalen erklärt eine Spalte. Schreib danach die fünf Regeln auf, bei denen dir ein Fehler am meisten wehtun würde.'},
+    wk:[
+      {id:'vf_fr_regeln', eyebrow:'DB : Franchise-Regelwerk', title:'Dein <span>Regelwerk</span>. Regel für Regel.'},
+      {id:'vf_fr_pruefungen', eyebrow:'DB : Franchise-Prüfungen', title:'Deine <span>Prüfungen</span>. Rundgang für Rundgang.'}
+    ],
+    ergebnis:[{h:'Dein Konzept als <span class="il-g">Regelwerk</span>', cap:'Franchise-Regelwerk', p:['Am Ende hast du ein Regelwerk, sortiert nach Kategorie, von Marke über Küche bis Finanzen. Jede Regel sagt, ob sie Pflicht, Verbot oder genehmigungspflichtig ist und was bei einem Verstoß passiert.', 'Ein neuer Partner liest das Regelwerk vor der Unterschrift. Danach weiß er, was er selbst entscheiden darf und wo er fragen muss.']}, {h:'Jeder Rundgang <span class="il-g">mit Frist</span>', cap:'Franchise-Prüfungen', p:['In den Franchise-Prüfungen steht jeder Besuch mit Datum, Prüfer und Compliance-Wert. Gibt es kritische Verstöße, stehen Maßnahmen und eine Frist daneben.', 'So siehst du über Monate, ob ein Standort besser wird und wann die nächste Prüfung fällig ist.']}],
+    zweit:null,
+    empf:{dbhd:'📘 Franchise Rulebook', points:['Regeltyp', 'Kontrollart', 'Konsequenz', 'Compliance'], emph:'Schreib zuerst die Regeln auf, <span class="il-eg">die der Gast sieht</span>', p:'Portionen, Anrichteweise, Logo und Begrüßung erkennt der Gast in jedem Standort. Mit diesen Regeln fängst du an, die internen folgen danach.', steps:['Trag fünf Regeln ein, die der Gast direkt bemerkt.', 'Gib jeder Regeltyp, Kategorie und Kontrollart.', 'Schreib zu jeder die Konsequenz bei einem Verstoß.', 'Trag nach dem nächsten Rundgang die erste Prüfung ein.']},
+    duo:null,
+    learn:['Jede Regel deines Konzepts steht mit Typ und Kategorie im Regelwerk.', 'Die Kontrollart legt fest, wie eine Regel geprüft wird.', 'Jede Prüfung hält Compliance, kritische Verstöße und eine Frist fest.', 'Partner wissen vorher, was sie selbst entscheiden dürfen.']
+   },
+   {
+    slug:/\/lektionen\/eventkonzepte\/?$/, key:'vfevent',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.11', kicker:'Vision Frame · Angebot & Umsatz',
+    titleHTML:'Event<span class="il-g">konzepte</span>',
+    lead:'Ein gutes Event bringt Umsatz an einem Abend, an dem sonst wenig los wäre.',
+    intro:['Weinabend, Pasta-Kurs, Brunch am Sonntag: Ideen für Events gibt es in jeder Küche genug. Was meistens fehlt, ist der zweite Blick. Wie viele Gäste braucht es, damit sich der Abend lohnt, was kostet er pro Person, und welche Hände braucht die Küche dafür?', 'In dieser Datenbank bekommt jedes Format eine Zeile mit Preis, Teilnehmerzahl, Dauer und geschätzter Marge. Du siehst, welche Ideen noch auf dem Zettel stehen und welche schon laufen. Ein Format, das einmal funktioniert hat, wiederholst du mit allem, was du beim ersten Mal gelernt hast.'],
+    anim:{type:'checklist', head:{eyebrow:'Was du vor dem ersten Termin klärst', h:'Eine Idee wird ein <span class="il-g">Format</span>', sub:'Erst mit diesen Angaben weißt du, ob ein Event den Abend wert ist.'}, unit:'Fragen', rows:['Für wen ist das Event gedacht?', 'Ab wie vielen Gästen lohnt es sich, und wie viele passen?', 'Was kostet es pro Person?', 'Was braucht die Küche zusätzlich?']},
+    video:{h:'Rechnen, bevor du <span class="il-g">einlädst</span>', p:['Min. Teilnehmer und Max. Teilnehmer stehen nebeneinander, weil beide Grenzen zählen. Unter der Mindestzahl verlierst du Geld, über der Höchstzahl leidet das Erlebnis. Ein Kurs mit höchstens 14 Plätzen fühlt sich für jeden Gast persönlich an.', 'Die geschätzte Marge ist deine Einschätzung, was nach allen Kosten des Events übrig bleibt, in Prozent vom Preis. Sie ist bewusst eine Schätzung. Die genaue Rechnung mit Wareneinsatz und Personal machst du für Catering-Aufträge in der Menükalkulation.'], close:'In deiner Vorlage liegt die Datenbank bereit. Jede Karte im Regal erklärt eine Spalte. Trag danach ein Event ein, das du schon einmal gemacht hast, und eines, das du ausprobieren möchtest.'},
+    wk:[
+      {id:'vf_events', eyebrow:'DB : Event Konzepte', title:'Deine <span>Events</span>. Format für Format.'}
+    ],
+    ergebnis:[{h:'Deine Formate, <span class="il-g">durchgerechnet</span>', cap:'Event Konzepte', p:['Am Ende siehst du alle Formate mit Status, von der Idee bis zum laufenden Event. Daneben stehen Preis, Teilnehmerzahl und geschätzte Marge.', 'In einer Kalender-Ansicht nach Nächster Termin siehst du, welche Events in den kommenden Wochen anstehen und ob dafür Extra-Personal oder eine externe Location gebraucht wird.']}],
+    zweit:null,
+    empf:{dbhd:'🎉 Event Konzepte', points:['Zielgruppe', 'Teilnehmer', 'Preis', 'Marge'], emph:'Leg die Mindestzahl fest, <span class="il-eg">bevor</span> du den Preis nennst', p:'Wer erst den Preis festlegt und dann rechnet, merkt oft zu spät, dass der Abend bei acht Gästen nichts übrig lässt.', steps:['Trag ein Event ein, das du schon gemacht hast.', 'Ergänz Mindest- und Höchstzahl der Teilnehmer.', 'Setz Preis pro Person und geschätzte Marge.', 'Wähl die Ressourcen, die die Küche zusätzlich braucht.']},
+    duo:null,
+    learn:['Jedes Event-Format hat Preis, Teilnehmerzahl und Dauer in einer Zeile.', 'Mindest- und Höchstzahl zeigen dir, wann ein Abend sich lohnt.', 'Die geschätzte Marge gibt dir eine erste Einschätzung vor dem Termin.', 'Der Status zeigt, welche Ideen schon laufen und welche noch warten.']
+   },
+   {
+    slug:/\/lektionen\/catering\/?$/, key:'vfcat',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.12', kicker:'Vision Frame · Angebot & Umsatz',
+    titleHTML:'<span class="il-g">Catering</span>',
+    lead:'Catering ist deine Küche an einem fremden Ort, mit allem, was dort fehlt.',
+    intro:['Ein Catering-Auftrag hat zwei Seiten. Die eine ist die Planung: Wann wird geliefert, wer baut auf, welches Geschirr muss mit, welche Allergien hat die Gruppe. Die andere ist die Rechnung: Was bleibt übrig, wenn Ware, Personal und Transport bezahlt sind?', 'Dafür gibt es zwei Datenbanken. Catering Konzept Planung begleitet einen Auftrag von der Anfrage bis zum Abschluss. Die Datenbank Catering rechnet jeden Auftrag bis zum Deckungsbeitrag III durch. Die Angebote selbst kalkulierst du wie gewohnt in der Menükalkulation aus Lektion 2.11, hier kommen die Ergebnisse zusammen.'],
+    anim:{type:'checklist', head:{eyebrow:'Was zu jedem Auftrag gehört', h:'Planen und rechnen, <span class="il-g">in zwei Tabellen</span>', sub:'Die Planung sorgt dafür, dass am Tag alles da ist. Die Rechnung zeigt dir danach, ob es sich gelohnt hat.'}, unit:'Angaben', rows:['Anlass, Datum und Gästezahl', 'Ort, Lieferung und Aufbau', 'Menü, Service-Art und Allergien', 'Verkaufspreis und Wareneinsatz', 'Personal und sonstige Kosten']},
+    video:{h:'Die Rechnung <span class="il-g">nach dem Auftrag</span>', p:['In der Datenbank Catering rechnet die Vorlage in drei Stufen. Vom finalen Verkaufspreis zieht sie zuerst den Wareneinsatz ab, das ist der Deckungsbeitrag I. Dann das Personal, das ist der Deckungsbeitrag II, also das, was nach Ware und Personal übrig bleibt. Zuletzt die sonstigen Kosten wie Transport oder Mietgeschirr. Was dann bleibt, ist der Deckungsbeitrag III.', 'Jede Stufe steht in Euro und in Prozent vom Verkaufspreis. Dazu rechnet die Vorlage Preis und Wareneinsatz pro Person. So vergleichst du ein Sommerfest für 40 Gäste mit einer Hochzeit für 120, obwohl die Summen ganz verschieden sind.'], close:'In deiner Vorlage sind beide Datenbanken angelegt. Jede Karte in den Regalen erklärt eine Spalte. Trag danach deinen letzten Catering-Auftrag nach, mit den echten Zahlen aus der Abrechnung.'},
+    wk:[
+      {id:'vf_cat_planung', eyebrow:'DB : Catering Konzept Planung', title:'Deine <span>Aufträge</span>. Von der Anfrage bis zum Abschluss.'},
+      {id:'vf_cat_auftrag', eyebrow:'DB : Catering', title:'Deine <span>Catering-Rechnung</span>. Auftrag für Auftrag.'}
+    ],
+    ergebnis:[{h:'Jeder Auftrag <span class="il-g">im Ablauf</span>', cap:'Catering Konzept Planung', p:['In der Planung siehst du alle Aufträge nach Status, von der Anfrage bis zum Abschluss. Bei jedem stehen Termin, Ort, Gästezahl und das Team.', 'Am Tag vor der Lieferung öffnet die Küche den Eintrag und hat Menü, Allergien und Equipment-Liste vor sich.']}, {h:'Was am Ende <span class="il-g">übrig bleibt</span>', cap:'Catering', p:['In der Datenbank Catering steht jeder Auftrag mit Deckungsbeitrag I bis III, in Euro und in Prozent. Sortierst du nach Deckungsbeitrag III, siehst du, welche Anlässe sich wirklich lohnen.', 'Daraus leitest du ab, welche Aufträge du annimmst und wo du beim nächsten Angebot den Preis anpasst.']}],
+    zweit:null,
+    empf:{dbhd:'🍽️ Catering', points:['Verkaufspreis', 'Wareneinsatz', 'Personal', 'DB III'], emph:'Trag nach jedem Auftrag die <span class="il-eg">echten</span> Zahlen ein', p:'Im Angebot stehen Schätzungen. Was es wirklich gekostet hat, siehst du erst nach der Abrechnung, und nur diese Zahlen sagen dir, ob du den nächsten Auftrag zu diesem Preis annehmen solltest.', steps:['Trag deinen letzten Auftrag in Catering Konzept Planung ein.', 'Übertrag Verkaufspreis und Gästezahl in die Datenbank Catering.', 'Ergänz Wareneinsatz, Personal und sonstige Kosten aus der Abrechnung.', 'Lies Deckungsbeitrag III und Wareneinsatz pro Person ab.']},
+    duo:null,
+    learn:['Planung und Rechnung eines Auftrags stehen in zwei verbundenen Tabellen.', 'Die Vorlage rechnet Deckungsbeitrag I bis III in Euro und Prozent.', 'Preis und Wareneinsatz pro Person machen Aufträge vergleichbar.', 'Die echten Zahlen nach dem Auftrag zeigen dir, welche Anlässe sich lohnen.']
+   },
+   {
+    slug:/\/lektionen\/merch-produkte\/?$/, key:'vfmerch',
+    backHref:'/vision-frame-abschluss-des-building-prozesses', backLabel:'Vision Frame',
+    eyebrow:'Lektion 2.15.13', kicker:'Vision Frame · Angebot & Umsatz',
+    titleHTML:'Merch <span class="il-g">// Produkte</span>',
+    lead:'Was Gäste mit nach Hause nehmen, erzählt deine Geschichte weiter.',
+    intro:['Das Chili-Öl, nach dem jeder fragt. Die Tasse mit eurem Logo. Die Granola, die am Sonntag zum Brunch gehört. Viele Betriebe haben solche Produkte, verkaufen sie aber nebenbei, ohne festen Preis und ohne zu wissen, was gerade vorrätig ist.', 'Diese Datenbank sammelt alles, was du außer dem Teller verkaufst. Jedes Produkt hat ein Bild, einen Preis, einen Typ und einen Status. So siehst du, was verkauft wird, was in Entwicklung ist und was gerade fehlt.'],
+    anim:{type:'checklist', head:{eyebrow:'Was ein verkaufsfertiges Produkt braucht', h:'Ein Produkt, das <span class="il-g">jeder verkaufen kann</span>', sub:'Erst mit diesen Angaben kann jeder im Team ein Produkt verkaufen, ohne nachzufragen.'}, unit:'Angaben', rows:['Ein Foto, das zeigt, was der Gast bekommt', 'Ein fester Preis', 'Eine Beschreibung in ein, zwei Sätzen', 'Der Status, ob es gerade da ist']},
+    video:{h:'Selbst gemacht oder <span class="il-g">eingekauft</span>', p:['Der Produkttyp trennt vier Fälle: Merchandise wie Tassen und Taschen, eigene Produkte, Eigenproduktion aus deiner Küche und Handelsware, die du einkaufst und weiterverkaufst. Bei Eigenproduktion steckt dein Wareneinsatz drin, bei Handelsware der Einkaufspreis.', 'Der Status geht von Geplant über In Entwicklung bis Ausverkauft. Ein Produkt im Status Bestellbar kann ein Gast vorbestellen, auch wenn es heute nicht im Regal steht.'], close:'In deiner Vorlage steht die Datenbank bereit. Jede Karte im Regal erklärt eine Spalte. Trag danach das Produkt ein, nach dem deine Gäste am häufigsten fragen.'},
+    wk:[
+      {id:'vf_merch', eyebrow:'DB : Merch // Produkte', title:'Deine <span>Produkte</span>. Stück für Stück.'}
+    ],
+    ergebnis:[{h:'Dein Regal neben der <span class="il-g">Karte</span>', cap:'Merch // Produkte', p:['Am Ende siehst du alle Produkte als Galerie mit Bild, Preis und Status. Das Service-Team weiß, was es empfehlen kann und was gerade ausverkauft ist.', 'Über die Tags gruppierst du nach Saucen & Gewürze, Kaffee & Tee oder Backwaren und siehst, welche Gruppe am meisten Platz im Regal verdient.']}],
+    zweit:null,
+    empf:{dbhd:'🛍️ Merch // Produkte', points:['Bild', 'Preis', 'Produkttyp', 'Status'], emph:'Fang mit dem an, <span class="il-eg">wonach Gäste fragen</span>', p:'Das beste erste Produkt ist eines, das es schon gibt: die Sauce, die Gäste in einem Glas mitnehmen wollen. Dafür brauchst du keine neue Rezeptur, nur ein Glas und einen Preis.', steps:['Trag das Produkt ein, nach dem am häufigsten gefragt wird.', 'Lade ein eigenes Foto hoch.', 'Setz einen festen Preis und den Produkttyp.', 'Halte den Status aktuell, sobald etwas ausverkauft ist.']},
+    duo:null,
+    learn:['Alles, was du außer dem Teller verkaufst, steht in einer Liste.', 'Der Produkttyp trennt Eigenproduktion von Handelsware.', 'Der Status zeigt dem Team, was gerade verkauft werden kann.', 'Über Tags siehst du, welche Produktgruppen am besten laufen.']
+   },
  {
     slug:/\/lektionen\/team-onboarding\/?$/, key:'team',
     eyebrow:'Lektion 2.13.1', kicker:'Operations Area · Personal',
@@ -21695,6 +21974,9 @@ var TSISL_TEAM_ONB_V2=[
   #tsisl .il-vid .il-vtext h3 .il-g{color:#c7b489}
   #tsisl .il-vid .il-vtext p{margin:0 0 14px;text-align:left;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
   #tsisl .il-vid .il-vtext p:last-child{margin-bottom:0}
+  #tsisl .il-vid.novid{grid-template-columns:1fr;width:min(calc(760px * var(--ts-tx)),92vw)}
+  #tsisl .il-erg.solo{max-width:calc(820px * var(--ts-tx));justify-content:center}
+  #tsisl .il-erg.solo .il-erg-txt h3{text-align:center}
   #tsisl .il-vidclose{width:min(calc(900px * var(--ts-tx)),92vw);margin:38px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
   /* Abschnitt 05 — Ergebnis-Blick: Text links / PC rechts (erster), danach alternierend */
   #tsisl .il-erg{display:flex;align-items:center;gap:clamp(20px,4vw,64px);max-width:var(--ts-page);width:100%;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px)}
@@ -21802,7 +22084,7 @@ var TSISL_TEAM_ONB_V2=[
       var rows=[].slice.call(cl.querySelectorAll('.il-cl-row')), n=rows.length, unit=sec.querySelector('.il-cl-cap').textContent.split(' ').slice(-1)[0];
       var fill=sec.querySelector('.il-cl-fill'), cap=sec.querySelector('.il-cl-cap'), done=0;
       rows.forEach(function(r){r.classList.remove('on');}); fill.style.width='0'; cap.textContent='0 / '+n+' '+unit;
-      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); done++; fill.style.width=(done/n*100)+'%'; cap.textContent=done+' / '+n+' '+unit; if(done===n) cap.textContent='Onboarding abgeschlossen'; }, 300+i*260); });
+      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); done++; fill.style.width=(done/n*100)+'%'; cap.textContent=done+' / '+n+' '+unit; }, 300+i*260); });
       return;
     }
     var stk=sec.querySelector('.il-stk');
@@ -21822,18 +22104,15 @@ var TSISL_TEAM_ONB_V2=[
   }
   function countTo(el,from,to,dur){ var start=null, fmt=(to>=1000); function fr(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1); var val=Math.round(from+(to-from)*p); el.textContent=fmt?val.toLocaleString('de-DE'):val; if(p<1) requestAnimationFrame(fr); } requestAnimationFrame(fr); }
 
-  function mockPH(txt){ return '<div class="il-mock"><div class="ph">'+txt+'<small>Screenshot folgt</small></div></div>'; }
+  /* Vorlagen-DBs sind leer, ein Video gibt es noch nicht: Bild- und Videoflaechen bleiben aus, der Text steht allein (01.11.2026) */
 
   function videoHTML(v){
-    return '<section class="il-sec"><div class="il-vid"><div class="il-vmock">'+mockPH('Live-Ansicht')+'</div><div class="il-vtext"><h3>'+v.h+'</h3>'+v.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div><p class="il-vidclose">'+v.close+'</p></section>';
+    return '<section class="il-sec"><div class="il-vid novid"><div class="il-vtext"><h3>'+v.h+'</h3>'+v.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div></div><p class="il-vidclose">'+v.close+'</p></section>';
   }
   /* Abschnitt 05 — ein Ergebnis-Blick. i=0 IMMER Text links / PC rechts, danach alternierend. */
   function ergHTML(r,i){
-    var pcs='<div class="il-erg-cell il-erg-pc">'+mockPH('Beispiel-Ansicht')
-      +'<p class="il-erg-cap">'+r.cap+' <span class="il-g">– Live Beispiel</span></p>'
-      +'<p class="il-erg-hint">Klicke zum Vergrößern</p></div>';
     var txt='<div class="il-erg-cell il-erg-txt"><h3>'+r.h+'</h3>'+r.p.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
-    return '<div class="il-erg'+(i%2?' flip':'')+'">'+txt+pcs+'</div>';
+    return '<div class="il-erg solo">'+txt+'</div>';
   }
   function empfHTML(e){
     var pills='<div class="il-erow">'+e.points.map(function(p,i){ return '<span class="il-tb"><span class="num">0'+(i+1)+'</span>'+p+'</span>'; }).join('')+'</div>';
@@ -23216,14 +23495,12 @@ var TSISL_TEAM_ONB_V2=[
   var HTML=
   '<div class="vd-row">'+
     '<div class="vd-pc">'+
-      '<div class="vd-mac" role="button" tabindex="0" aria-label="Video folgt">'+
+      '<div class="vd-mac" style="cursor:default" aria-hidden="true">'+
         '<div class="vd-lid"><div class="vd-screen">'+
           '<div class="vd-ph">'+
             '<div class="vd-bub me">Leg mir eine Tabelle für meine Lieferanten an — mit Kontakt, Liefertagen und Mindestbestellwert.</div>'+
             '<div class="vd-bub">Angelegt. Liefertage als Mehrfachauswahl, Mindestbestellwert als Zahl in Euro.</div>'+
           '</div>'+
-          '<div class="vd-play"><span></span></div>'+
-          '<div class="vd-soon">Video folgt</div>'+
         '</div></div>'+
         '<div class="vd-base"></div>'+
       '</div>'+
@@ -23292,6 +23569,8 @@ var TSISL_TEAM_ONB_V2=[
   #tsnai2mac .m2-row{max-width:var(--ts-page);margin:0 auto;display:flex;align-items:center;
     gap:clamp(20px,4vw,64px);padding:0 clamp(16px,3vw,40px)}
   #tsnai2mac .m2-txt{flex:1 1 50%;min-width:0}
+  #tsnai2mac .m2-row.solo{max-width:calc(760px * var(--ts-tx));justify-content:center}
+  #tsnai2mac .m2-row.solo .m2-h3{text-align:center}
   #tsnai2mac .m2-pcwrap{flex:1 1 50%;min-width:0;display:flex;flex-direction:column;align-items:center}
 
   #tsnai2mac .m2-h3{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
@@ -23366,21 +23645,22 @@ var TSISL_TEAM_ONB_V2=[
     : '<div class="m2-ph"><div class="m2-ph-ico">AI</div><div class="m2-ph-t">Screenshot folgt</div></div>';
 
   var HTML=
-  '<div class="m2-row">'+
+  '<div class="m2-row'+(POSTER?'':' solo')+'">'+
     '<div class="m2-txt">'+
       '<h3 class="m2-h3">Deine Zahlen, <span class="ts-accent">auf Zuruf</span>.</h3>'+
       '<p>Sobald dein Backoffice steht, hörst du auf, in Ansichten zu suchen, und fängst an zu fragen. Welche Gerichte enthalten Tomaten, welcher Lieferant liefert am schnellsten, und was passiert eigentlich mit dem Wareneinsatz, wenn ich diese Zutat gegen jene tausche.</p>'+
       '<p>Notion AI liest dabei die Werte, die in deinen Datenbanken stehen — <b>nicht irgendwelche aus dem Netz</b>. Deshalb bekommst du eine Antwort, die zu deinem Betrieb passt, und kannst ihr nachgehen, weil du weißt, aus welcher Spalte sie kommt.</p>'+
       '<p>Und weil du das von jeder Seite aus tun kannst, ohne vorher irgendetwas zu exportieren, wird aus dem Backoffice ein Gegenüber statt einer Ablage.</p>'+
     '</div>'+
-    '<div class="m2-pcwrap">'+
+    /* Bildschirm ohne echtes Bildschirmfoto bleibt aus, Text steht allein (01.11.2026) */
+    (POSTER?'<div class="m2-pcwrap">'+
       '<div class="m2-tile" role="button" tabindex="0" aria-label="Vergroessern">'+
         '<div class="m2-lid"><div class="m2-screen">'+TILE_INNER+'</div></div>'+
         '<div class="m2-base"></div>'+
       '</div>'+
       '<p class="m2-cap">Abfrage im Backoffice <span>– Live Beispiel</span></p>'+
       '<p class="m2-hint">Klicke zum Vergrößern</p>'+
-    '</div>'+
+    '</div>':'')+
   '</div>';
 
   function injectCSS(){ if(document.getElementById('tsnai2mac-css'))return;
@@ -23423,8 +23703,8 @@ var TSISL_TEAM_ONB_V2=[
     var el=document.createElement('section'); el.id='tsnai2mac'; el.innerHTML=HTML;
     a.parentNode.insertBefore(el, a.nextSibling);
     var tile=el.querySelector('.m2-tile');
-    tile.addEventListener('click',function(){ lightbox().classList.add('open'); });
-    tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); lightbox().classList.add('open'); } });
+    if(tile) tile.addEventListener('click',function(){ lightbox().classList.add('open'); });
+    if(tile) tile.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); lightbox().classList.add('open'); } });
     return true;
   }
   mount();
@@ -24396,14 +24676,12 @@ var TSISL_TEAM_ONB_V2=[
   var HTML=
   '<div class="msv-row">'+
     '<div class="msv-pc">'+
-      '<div class="msv-mac" role="button" tabindex="0" aria-label="Video folgt">'+
+      '<div class="msv-mac" style="cursor:default" aria-hidden="true">'+
         '<div class="msv-lid"><div class="msv-screen">'+
           '<div class="msv-ph">'+
             '<div class="msv-bub me">Rolle die Zählliste für alle fünf Standorte aus, Preise bleiben oben.</div>'+
             '<div class="msv-bub">Ausgerollt. Fünf Zähllisten aktualisiert, kein Preis mitgegeben.</div>'+
           '</div>'+
-          '<div class="msv-play"><span></span></div>'+
-          '<div class="msv-soon">Video folgt</div>'+
         '</div></div>'+
         '<div class="msv-base"></div>'+
       '</div>'+
@@ -32720,6 +32998,309 @@ var TSISL_TEAM_ONB_V2=[
       { t:'Wirkung im Alltag', d:'Woran man den Punkt im Alltag merkt.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Ein Wert ohne Wirkung bleibt ein Spruch an der Wand.', bsp:'Jedes Angebot so bauen, dass ein Einzelbetrieb es allein umsetzen kann.' },
       { t:'Bezug zum System', d:'Wo die Idee in deinem Betrieb verankert ist.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Du siehst, ob Werte und Alltag zusammenpassen.', bsp:'In der Positionierung und im Angebot.' },
       { t:'Gedanken', d:'Offene Fragen und Zweifel.', bed:'Ein Textfeld.', her:'Trägst du ein.', wozu:'Hier darf noch nichts fertig sein.', bsp:'Passt das noch, wenn wir einen zweiten Standort eröffnen?' }
+    ]) };
+
+  /* NEUBAU 2.15.3-2.15.13 (Vision-Inseln als Erklaerwerk, 01.11.2026) */
+  S.vf_teamkultur={ eyebrow:'DB : Team Kultur Guidelines', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Eure Guidelines. <span>Was jede Spalte bedeutet</span>.', sub:subI('Jede Zeile ist eine Regel, die bei euch gilt.'), relations:[],
+    steps:cards([
+      {t:'Guideline', d:'Die Regel selbst.', bed:'Der Name der Zeile, als kurzer Satz formuliert.', her:'Formulierst du selbst, so wie du es einem neuen Kollegen sagen würdest.', wozu:'Unter diesem Satz sucht das Team die Regel.', bsp:'Jeder Gast wird innerhalb einer Minute begrüßt.'},
+      {t:'Kategorie', d:'Zu welchem Feld die Regel gehört.', bed:'Eine Auswahl: Kommunikation, Zusammenarbeit, Arbeitsweise, Werte & Haltung, Führung, Qualität & Standards.', her:'Wählst du aus.', wozu:'Felder ohne Eintrag zeigen dir, worüber im Team noch nie gesprochen wurde.', bsp:'Qualität & Standards.'},
+      {t:'Beschreibung', d:'Was die Regel meint.', bed:'Zwei, drei Sätze Freitext.', her:'Schreibst du, am besten nach einem Gespräch mit dem Team.', wozu:'Hier steht, warum die Regel wichtig ist.', bsp:'Der Gast soll spüren, dass er gesehen wird, auch wenn noch kein Tisch frei ist.'},
+      {t:'Beispiele', d:'Wie die Regel in einer echten Schicht aussieht.', bed:'Freitext.', her:'Kommt aus einer Schicht, die wirklich so gelaufen ist.', wozu:'Mit Beispiel versteht jeder sofort, was gemeint ist.', bsp:'Am Pass ruft jemand Gast an Tisch 4, und wer frei ist, geht hin und sagt kurz Bescheid.'},
+      {t:'Betrifft', d:'Für wen die Regel gilt.', bed:'Eine Mehrfachauswahl: Alle Mitarbeitende, Küche, Service, Management, Neue Mitarbeitende.', her:'Wählst du aus, auch mehrere.', wozu:'Jeder Bereich filtert auf seine Regeln.', bsp:'Service, Neue Mitarbeitende.'},
+      {t:'Priorität', d:'Wie wichtig die Regel ist.', bed:'Eine Auswahl: Hoch, Mittel, Niedrig.', her:'Legst du fest.', wozu:'Beim Einarbeiten erklärst du zuerst die Regeln mit hoher Priorität.', bsp:'Hoch.'},
+      {t:'Status', d:'Ob die Regel schon gilt.', bed:'Eine Auswahl: Aktiv, Entwurf, In Überprüfung.', her:'Setzt du, sobald das Team die Regel besprochen hat.', wozu:'Nur aktive Regeln gehören in die Einarbeitung.', bsp:'Aktiv.'}
+    ]) };
+
+  S.vf_interior={ eyebrow:'DB : Interior Design Produkte', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Einrichtung. <span>Was jede Spalte festhält</span>.', sub:subI('Jede Zeile ist ein Stück aus deinem Raum.'), relations:[],
+    steps:cards([
+      {t:'Produkt', d:'Das Einrichtungsstück.', bed:'Der Name der Zeile.', her:'Benennst du so, wie das Team das Teil im Alltag nennt.', wozu:'Unter diesem Namen fragt das Team nach, wenn etwas fehlt.', bsp:'Pendelleuchte Messing über der Bar.'},
+      {t:'Kategorie', d:'Zu welcher Art das Teil gehört.', bed:'Eine Auswahl: Möbel, Beleuchtung, Textilien, Dekoration, Bodenbeläge, Wandgestaltung, Accessoires.', her:'Wählst du aus.', wozu:'Steht ein Umbau an, filterst du zum Beispiel auf Beleuchtung und hast alle Leuchten vor dir.', bsp:'Beleuchtung.'},
+      {t:'Beschreibung', d:'Was das Teil ausmacht.', bed:'Freitext für Maße, Material oder Farbe.', her:'Steht meist auf der Rechnung oder im Datenblatt des Händlers.', wozu:'Damit bestellst du beim nächsten Mal genau dasselbe.', bsp:'Durchmesser 30 cm, gebürstetes Messing, warmweißes Licht.'},
+      {t:'Bilder', d:'Fotos des Teils.', bed:'Ein Dateifeld für Bilder.', her:'Lädst du hoch, am besten ein Foto aus deinem eigenen Raum.', wozu:'In der Galerie-Ansicht erkennt jeder das Teil am Foto.', bsp:'Foto der Leuchte über dem Tresen am Abend.'},
+      {t:'Bezugsquelle', d:'Wo das Teil herkommt.', bed:'Freitext.', her:'Steht auf der Rechnung.', wozu:'Gibt es den Shop nicht mehr, weißt du trotzdem, bei wem du nachfragst.', bsp:'Leuchtenhändler in Ottensen.'},
+      {t:'Produkt-Link', d:'Die Seite des Produkts beim Händler.', bed:'Ein Link.', her:'Kopierst du aus dem Onlineshop.', wozu:'Ein Klick, und du bestellst nach.', bsp:'Die Produktseite im Onlineshop des Händlers.'},
+      {t:'Dienstleister', d:'Wer das Teil geliefert oder eingebaut hat.', bed:'Eine Verknüpfung zur Datenbank Dienstleister aus Partner & Verträge.', her:'Wählst du aus der Liste deiner Dienstleister.', wozu:'Ansprechpartner und Konditionen stehen dort schon, du pflegst sie nur einmal.', bsp:'Elektro Brandt, der die Leuchten aufgehängt hat.'}
+    ]) };
+
+  S.vf_zielgruppe={ eyebrow:'DB : Zielgruppenanalyse', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Gäste. <span>Was jede Spalte über sie sagt</span>.', sub:subI('Jede Zeile ist eine Gästegruppe.'), relations:[],
+    steps:cards([
+      {t:'Zielgruppe', d:'Die Gästegruppe.', bed:'Der Name der Zeile.', her:'Benennst du nach dem Anlass, zu dem die Gruppe kommt.', wozu:'So spricht das Team über die Gruppe, ohne lange zu erklären.', bsp:'Business-Lunch.'},
+      {t:'Persona Name', d:'Eine erfundene Person als Gesicht der Gruppe.', bed:'Freitext mit Name, Alter und Beruf.', her:'Denkst du dir aus, angelehnt an echte Stammgäste.', wozu:'Bei jeder neuen Idee fragst du: Würde Katrin das bestellen?', bsp:'Katrin, 41, Agenturinhaberin.'},
+      {t:'Beschreibung', d:'Wer diese Gäste sind.', bed:'Zwei, drei Sätze Freitext.', her:'Schreibst du aus deinen Beobachtungen im Service.', wozu:'Neue Mitarbeitende verstehen schnell, für wen ihr kocht.', bsp:'Kommt mit zwei Kollegen, hat 45 Minuten, will schnell bestellen und gut essen.'},
+      {t:'Priorität', d:'Wie wichtig die Gruppe für dich ist.', bed:'Ein Status: Niedrig, Mittel, Hoch, Primärzielgruppe.', her:'Legst du fest, meistens nach dem Anteil am Umsatz.', wozu:'Die Primärzielgruppe ist der Maßstab, wenn sich zwei Ideen widersprechen.', bsp:'Primärzielgruppe.'},
+      {t:'Altersgruppe', d:'Das typische Alter.', bed:'Eine Auswahl: 18-25, 25-35, 35-45, 45-55, 55+.', her:'Schätzt dein Service-Team aus dem Alltag.', wozu:'Beeinflusst Ansprache, Musik und den Kanal, über den du wirbst.', bsp:'35-45.'},
+      {t:'Demografische Merkmale', d:'Lebenslage und Beruf.', bed:'Freitext.', her:'Beobachtest du, oder du fragst Stammgäste im Gespräch.', wozu:'Erklärt, warum die Gruppe zu bestimmten Zeiten kommt.', bsp:'Selbstständig oder in leitender Rolle, arbeitet in den Büros rund um den Platz.'},
+      {t:'Durchschnittseinkommen', d:'Das Einkommen der Gruppe.', bed:'Eine Auswahl von unter 30.000 € bis über 100.000 € im Jahr, dazu Unternehmen variabel für Firmenkunden.', her:'Schätzt du anhand von Beruf und Wohngegend.', wozu:'Hilft dir, die Preise deiner Karte einzuordnen.', bsp:'50.000 - 75.000 €.'},
+      {t:'Wohnort/Region', d:'Woher die Gäste kommen.', bed:'Freitext.', her:'Kennst du aus Gesprächen, Reservierungen oder Lieferadressen.', wozu:'Zeigt dir, wie weit deine Werbung reichen muss.', bsp:'Arbeitet im Viertel, wohnt am Stadtrand.'},
+      {t:'Place', d:'Ein Ort auf der Karte.', bed:'Ein Ortsfeld, das Notion auf einer Karte anzeigt.', her:'Wählst du über die Ortssuche aus.', wozu:'Mehrere Gruppen auf einer Karte zeigen dir, aus welcher Richtung deine Gäste kommen.', bsp:'Das Bürohaus gegenüber.'},
+      {t:'Bedürfnisse', d:'Was die Gäste bei dir erledigt haben wollen.', bed:'Freitext.', her:'Hörst du im Service, liest du in Bewertungen.', wozu:'Daraus leitest du ab, was auf die Karte und in den Ablauf gehört.', bsp:'Pünktlich zurück im Büro sein, ohne auf die Qualität zu verzichten.'},
+      {t:'Pain Points', d:'Was diese Gäste heute anderswo stört.', bed:'Freitext. Pain Points heißt übersetzt Schmerzpunkte.', her:'Steht oft in schlechten Bewertungen bei der Konkurrenz.', wozu:'Hier entscheidest du, womit du dich abhebst.', bsp:'Wartet 20 Minuten auf die Rechnung.'},
+      {t:'Kaufverhalten', d:'Wie und was die Gäste bestellen.', bed:'Freitext.', her:'Siehst du in deinen Kassendaten.', wozu:'Zeigt dir, welche Gerichte und Zusätze diese Gruppe wirklich nimmt.', bsp:'Tagesgericht mit Wasser, freitags ein Glas Wein dazu.'},
+      {t:'Entscheidungskriterien', d:'Wonach die Gäste den Betrieb auswählen.', bed:'Freitext.', her:'Fragst du Stammgäste, warum sie wiederkommen.', wozu:'Sagt dir, was in deiner Ansprache vorne stehen muss.', bsp:'Tempo, ein ruhiger Tisch für Gespräche, Rechnung als Beleg.'},
+      {t:'Budget/Zahlungsbereitschaft', d:'Wie viel die Gruppe im Monat bei dir lassen würde.', bed:'Eine Auswahl von Niedrig (unter 50 € im Monat) bis Premium (über 500 € im Monat).', her:'Leitest du aus Durchschnittsbon und Besuchshäufigkeit ab.', wozu:'Zeigt dir, welche Gruppe wirtschaftlich am meisten wert ist.', bsp:'Mittel (50-200 €/Monat).'},
+      {t:'Erreichbarkeit', d:'Über welche Kanäle du die Gruppe erreichst.', bed:'Eine Mehrfachauswahl, zum Beispiel Instagram, Google Ads, Empfehlungen, E-Mail-Marketing oder WhatsApp/Telegram.', her:'Wählst du nach dem, was die Gruppe wirklich nutzt.', wozu:'Dein Werbebudget geht in die Kanäle, die diese Gäste sehen.', bsp:'LinkedIn, Empfehlungen, Google Ads.'},
+      {t:'Datum', d:'Wann die Analyse zuletzt angepasst wurde.', bed:'Ein Datum.', her:'Setzt du bei jeder Überarbeitung neu.', wozu:'Eine Analyse von vor drei Jahren beschreibt oft andere Gäste als heute.', bsp:'15.10.2026.'}
+    ]) };
+
+  S.vf_konkurrenz={ eyebrow:'DB : Konkurrenzanalyse', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Mitbewerber. <span>Was jede Spalte festhält</span>.', sub:subI('Jede Zeile ist ein Betrieb, mit dem du um Gäste wirbst.'), relations:[],
+    steps:cards([
+      {t:'Name', d:'Der Mitbewerber.', bed:'Der Name der Zeile.', her:'Übernimmst du vom Schild oder aus Google Maps.', wozu:'Unter diesem Namen sprichst du mit dem Team über den Betrieb.', bsp:'Trattoria am Markt.'},
+      {t:'Kategorie', d:'Welche Art von Betrieb es ist.', bed:'Eine Auswahl: Fine Dining, Casual Dining, Fast Casual, Quick Service, Café/Bistro, Bar/Lounge, Food Truck, Catering.', her:'Ordnest du nach Konzept und Service zu.', wozu:'Zeigt dir, ob der Betrieb im selben Segment spielt wie du.', bsp:'Casual Dining.'},
+      {t:'Standort', d:'Wo der Betrieb liegt.', bed:'Freitext für Straße oder Viertel.', her:'Steht im Impressum oder auf Google Maps.', wozu:'Zwei Straßen weiter ist eine andere Konkurrenz als am anderen Ende der Stadt.', bsp:'Marktplatz 4, zwei Minuten von dir.'},
+      {t:'Website/Social', d:'Der Auftritt im Netz.', bed:'Ein Link.', her:'Kopierst du von der Website oder dem Instagram-Profil.', wozu:'Du schaust regelmäßig nach, was dort neu ist.', bsp:'Das Instagram-Profil der Trattoria.'},
+      {t:'Preisniveau', d:'Wie teuer der Betrieb ist.', bed:'Eine Auswahl: € Budget, €€ Moderat, €€€ Gehoben, €€€€ Premium.', her:'Liest du an den Hauptgerichten der Karte ab.', wozu:'Zeigt dir, ob du über, unter oder auf demselben Niveau liegst.', bsp:'€€ Moderat.'},
+      {t:'Ø Bon-Wert', d:'Was ein Gast dort im Schnitt ausgibt.', bed:'Eine Zahl in Euro. Es ist der Durchschnittsbon aus Key Metrics, geschätzt für den Mitbewerber.', her:'Schätzt du aus Hauptgericht, Getränk und Dessert, am besten nach eigenem Besuch.', wozu:'Neben deinem eigenen Durchschnittsbon siehst du, ob ihr um dieselben Gäste werbt.', bsp:'32,50 €.'},
+      {t:'Service-Konzept', d:'Wie bedient wird.', bed:'Eine Auswahl: Full Service, Counter Service, Self Service, Fine Dining Service, Fast Service, Hybrid.', her:'Erlebst du beim Besuch.', wozu:'Gleiches Essen mit anderem Service spricht oft andere Gäste an.', bsp:'Full Service.'},
+      {t:'Menü-Fokus', d:'Wofür die Küche steht.', bed:'Eine Mehrfachauswahl, zum Beispiel Regional, Saisonal, Vegan/Vegetär, Fusion oder Street Food.', her:'Liest du aus der Karte.', wozu:'Zeigt dir, welche Küche im Viertel schon besetzt ist und welche fehlt.', bsp:'International, Traditionell.'},
+      {t:'Atmosphäre', d:'Wie sich der Raum anfühlt.', bed:'Eine Auswahl von Gemütlich/Cozy über Modern/Minimalistisch bis Rustikal/Traditional.', her:'Erlebst du beim Besuch.', wozu:'Manche Gäste wählen nach Stimmung, nicht nach Karte.', bsp:'Gemütlich/Cozy.'},
+      {t:'Zielgruppe', d:'Wen der Betrieb anspricht.', bed:'Eine Mehrfachauswahl, zum Beispiel Familien, Business, Touristen oder Food Enthusiasts.', her:'Beobachtest du an den Tischen.', wozu:'Überschneidet sich das mit deiner Zielgruppenanalyse, ist der Betrieb ein direkter Mitbewerber.', bsp:'Familien, Casual Diners.'},
+      {t:'Online-Bewertung', d:'Wie Gäste den Betrieb im Netz bewerten.', bed:'Eine Auswahl in Sternen, von Exzellent (4.5+) bis Schwach (unter 3.0), dazu Keine Bewertungen.', her:'Liest du bei Google oder auf Bewertungsportalen ab.', wozu:'Zeigt dir, wie zufrieden die Gäste dort sind.', bsp:'⭐⭐⭐⭐ Sehr gut (4.0-4.4).'},
+      {t:'Marketing-Stärke', d:'Wo der Betrieb gut sichtbar ist.', bed:'Eine Mehrfachauswahl, zum Beispiel Instagram, Google, Mundpropaganda, Events oder Influencer.', her:'Siehst du an Profilen, Anzeigen und Plakaten.', wozu:'Kanäle, die keiner bespielt, sind deine Chance.', bsp:'Mundpropaganda, Google.'},
+      {t:'Stärken / USPs', d:'Was der Betrieb besser macht als andere.', bed:'Freitext. USP heißt Alleinstellungsmerkmal.', her:'Schreibst du nach einem Besuch und aus guten Bewertungen.', wozu:'Wer die Stärken der anderen kennt, kopiert sie nicht aus Versehen.', bsp:'Hausgemachte Pasta, seit 20 Jahren dieselbe Köchin.'},
+      {t:'Schwächen / Chancen', d:'Wo der Betrieb Gäste verliert.', bed:'Freitext.', her:'Steht oft in den kritischen Bewertungen.', wozu:'Hier findest du die Lücke, die du füllen kannst.', bsp:'Kein vegetarisches Hauptgericht, am Wochenende lange Wartezeiten.'},
+      {t:'Unsere Überlegenheit', d:'Worin du diesem Betrieb voraus bist.', bed:'Freitext.', her:'Schreibst du ehrlich, am besten mit deinem Team.', wozu:'Daraus wird der Satz, mit dem dein Service den Unterschied erklärt.', bsp:'Saisonale Karte, die jeden Monat wechselt, und ein Tisch für große Runden.'},
+      {t:'Handlungsempfehlung', d:'Was du aus der Analyse machst.', bed:'Freitext.', her:'Leitest du aus Schwächen und deiner Überlegenheit ab.', wozu:'Ohne diese Spalte bleibt die Analyse Beobachtung.', bsp:'Zwei vegetarische Hauptgerichte auf die Wochenendkarte.'},
+      {t:'Marktführerrelevanz', d:'Wie stark der Betrieb mit dir konkurriert.', bed:'Ein Status mit Stufen wie Marktführer, Direkter Wettbewerber, Relevanter Competitor, Beobachten, Randbereich oder Irrelevant.', her:'Legst du fest, nach Zielgruppe und Entfernung.', wozu:'Du schaust zuerst auf die Betriebe, die dir wirklich Gäste abnehmen.', bsp:'Direkter Wettbewerber.'},
+      {t:'Notizen', d:'Alles, was sonst nirgends passt.', bed:'Freitext.', her:'Schreibst du nach Gesprächen oder Besuchen.', wozu:'Kleine Beobachtungen ergeben über Monate ein Bild.', bsp:'Hat im Oktober den Mittagstisch eingestellt.'},
+      {t:'Letztes Update', d:'Wann der Eintrag zuletzt geprüft wurde.', bed:'Ein Datum.', her:'Setzt du bei jeder Überarbeitung neu.', wozu:'Alte Einträge erkennst du sofort und prüfst sie nach.', bsp:'20.10.2026.'}
+    ]) };
+
+  S.vf_lexikon={ eyebrow:'DB : Gastro Lexikon', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Dein Lexikon. <span>Was jede Spalte erklärt</span>.', sub:subI('Jede Zeile ist ein Fachbegriff aus deinem Betrieb.'), relations:[],
+    steps:cards([
+      {t:'Begriff', d:'Das Fachwort.', bed:'Der Name der Zeile.', her:'Schreibst du so, wie das Wort im Betrieb fällt.', wozu:'Über die Suche findet jeder den Begriff in Sekunden.', bsp:'Wareneinsatz.'},
+      {t:'Kurzbeschreibung', d:'Der Begriff in einem Satz.', bed:'Freitext, ein Satz.', her:'Formulierst du so, dass eine Aushilfe am ersten Tag es versteht.', wozu:'Reicht für die schnelle Frage zwischen zwei Bestellungen.', bsp:'Was die Zutaten eines Gerichts kosten, im Verhältnis zum Verkaufspreis.'},
+      {t:'Ausführliche Beschreibung', d:'Der Begriff mit Beispiel.', bed:'Freitext ohne Längenbegrenzung.', her:'Schreibst du selbst, bei Kennzahlen mit einer Beispielrechnung.', wozu:'Beim Einarbeiten liest man hier nach, wie es genau gemeint ist.', bsp:'Kostet die Thai Peanut Tofu Bowl 3,95 € in der Ware und 14,90 € auf der Karte, liegt der Wareneinsatz bei 26,5 %.'},
+      {t:'Kategorie', d:'Zu welchem Bereich der Begriff gehört.', bed:'Eine Auswahl: Finanzen & Controlling, Küche & Produktion, Service & Gast, Hygiene & HACCP, Recht & Compliance, Personal & Team, Marketing & Vertrieb, Warenwirtschaft, Getränke.', her:'Ordnest du nach dem Bereich, in dem das Wort am häufigsten fällt.', wozu:'Jeder liest sich zuerst in seinen eigenen Bereich ein.', bsp:'Finanzen & Controlling.'},
+      {t:'Schwierigkeit', d:'Ab wann man den Begriff kennen sollte.', bed:'Eine Auswahl: Grundlagen, Fortgeschritten, Experte.', her:'Legst du fest.', wozu:'Neue Kollegen lernen zuerst die Grundlagen und später den Rest.', bsp:'Grundlagen.'}
+    ]) };
+
+  S.vf_standort={ eyebrow:'DB : Standortanalyse Restaurant-Kette', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Standorte. <span>Was jede Spalte bewertet</span>.', sub:subI('Jede Zeile ist ein Objekt, das du prüfst.'), relations:[],
+    steps:cards([
+      {t:'Standortname', d:'Das Objekt.', bed:'Der Name der Zeile.', her:'Benennst du nach Viertel und Straße.', wozu:'So unterscheidest du mehrere Objekte in derselben Stadt.', bsp:'Schanze, Schulterblatt.'},
+      {t:'Stadt', d:'In welcher Stadt das Objekt liegt.', bed:'Eine Auswahl großer deutscher Städte, dazu Andere.', her:'Wählst du aus.', wozu:'Bei mehreren Städten filterst du auf eine.', bsp:'Hamburg.'},
+      {t:'Adresse', d:'Die genaue Anschrift.', bed:'Freitext.', her:'Steht im Exposé.', wozu:'Damit findet jeder das Objekt für die Besichtigung.', bsp:'Schulterblatt 58, 20357 Hamburg.'},
+      {t:'Status', d:'Wie weit die Prüfung ist.', bed:'Ein Status: Neu eingegangen, Analyse läuft, Vor-Ort-Besichtigung geplant, Empfohlen, Bedingt empfohlen, Nicht empfohlen.', her:'Setzt du nach jedem Schritt weiter.', wozu:'Zeigt dir, welche Objekte noch offen sind und welche entschieden.', bsp:'Vor-Ort-Besichtigung geplant.'},
+      {t:'Priorität', d:'Wie wichtig das Objekt ist.', bed:'Eine Auswahl: Hoch, Mittel, Niedrig.', her:'Legst du fest.', wozu:'Bei mehreren Angeboten schaust du dir zuerst die mit hoher Priorität an.', bsp:'Hoch.'},
+      {t:'Analysedatum', d:'Wann das Objekt bewertet wurde.', bed:'Ein Datum.', her:'Setzt du am Tag der Besichtigung.', wozu:'Eine Lage kann sich in zwei Jahren stark verändern.', bsp:'28.10.2026.'},
+      {t:'Verantwortlich', d:'Wer die Prüfung übernimmt.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Jeder weiß, wen er zu diesem Objekt fragt.', bsp:'Die Betriebsleitung.'},
+      {t:'Fläche m²', d:'Die Größe des Lokals.', bed:'Eine Zahl in Quadratmetern.', her:'Steht im Exposé.', wozu:'Zusammen mit der Miete siehst du den Preis pro Quadratmeter.', bsp:'140.'},
+      {t:'Miete/Monat', d:'Die monatliche Miete.', bed:'Eine Zahl in Euro.', her:'Steht im Exposé oder im Mietangebot.', wozu:'Die Miete muss zu dem Umsatz passen, den du an diesem Ort erwarten kannst.', bsp:'6.300 €.'},
+      {t:'Sichtbarkeit', d:'Wie gut das Lokal von der Straße aus zu sehen ist.', bed:'Eine Auswahl von Exzellent bis Schlecht.', her:'Bewertest du vor Ort.', wozu:'Ein Lokal im Hinterhof braucht mehr Werbung als eines an der Ecke.', bsp:'Sehr gut.'},
+      {t:'Laufkundschaft', d:'Wie viele Menschen zu Fuß vorbeikommen.', bed:'Eine Auswahl von Sehr hoch bis Sehr niedrig.', her:'Zählst du selbst, mittags und abends.', wozu:'Spontane Gäste kommen nur, wenn Menschen vorbeigehen.', bsp:'Hoch.'},
+      {t:'Erreichbarkeit', d:'Wie Gäste zum Lokal kommen.', bed:'Eine Mehrfachauswahl: ÖPNV-Anbindung, Parkplätze vorhanden, Fußgängerzone, Hauptstraße, Bahnhofsnähe.', her:'Prüfst du vor Ort und auf der Karte.', wozu:'Zeigt dir, ob deine Zielgruppe ohne Umwege hinkommt.', bsp:'ÖPNV-Anbindung, Fußgängerzone.'},
+      {t:'Bevölkerungsdichte', d:'Wie viele Menschen im Umfeld wohnen.', bed:'Eine Auswahl: Sehr hoch, Hoch, Mittel, Niedrig.', her:'Schätzt du nach Bebauung, Zahlen gibt es oft bei der Stadt.', wozu:'Viele Anwohner bedeuten Gäste auch am Wochenende.', bsp:'Sehr hoch.'},
+      {t:'Einkommensniveau', d:'Wie viel die Menschen im Umfeld verdienen.', bed:'Eine Auswahl: Hoch, Gehoben, Mittel, Niedrig.', her:'Schätzt du nach Wohngegend und Geschäften in der Straße.', wozu:'Passt das Einkommen zu deinem Preisniveau?', bsp:'Gehoben.'},
+      {t:'Wettbewerb', d:'Wie viele Betriebe schon da sind.', bed:'Eine Mehrfachauswahl von Keine Konkurrenz bis Übersättigt.', her:'Zählst du in einem Umkreis von wenigen Minuten zu Fuß.', wozu:'Bei Übersättigt musst du sehr genau wissen, worin du anders bist.', bsp:'Moderate Konkurrenz.'},
+      {t:'Ankermieter', d:'Große Nachbarn, die Menschen anziehen.', bed:'Freitext.', her:'Siehst du in der Straße.', wozu:'Ein Kino oder ein großer Supermarkt bringt dir Gäste, für die du nicht werben musst.', bsp:'Programmkino schräg gegenüber, Biomarkt im Erdgeschoss.'},
+      {t:'Zielgruppen-Fit', d:'Wie gut das Umfeld zu deinen Gästen passt.', bed:'Eine Zahl, die du selbst vergibst, zum Beispiel von 1 bis 10.', her:'Vergleichst du mit deiner Primärzielgruppe aus der Zielgruppenanalyse.', wozu:'Ein günstiges Objekt am falschen Ort ist am Ende teuer.', bsp:'8.'},
+      {t:'Gesamtbewertung', d:'Dein Urteil über das Objekt.', bed:'Eine Zahl, die du selbst vergibst, zum Beispiel von 1 bis 10.', her:'Setzt du zum Schluss, wenn alle anderen Spalten gefüllt sind.', wozu:'Sortierst du danach, steht das beste Objekt oben.', bsp:'7.'},
+      {t:'Chancen', d:'Was für das Objekt spricht.', bed:'Freitext.', her:'Schreibst du nach der Besichtigung.', wozu:'Hilft dir, die Entscheidung später zu begründen.', bsp:'Terrasse zur Sonnenseite, Nachbarschaft ohne Mittagstisch.'},
+      {t:'Risiken', d:'Was gegen das Objekt spricht.', bed:'Freitext.', her:'Schreibst du nach der Besichtigung und dem Gespräch mit dem Vermieter.', wozu:'Was hier steht, klärst du vor der Unterschrift.', bsp:'Abluft nur über den Hof möglich, Baustelle bis Sommer.'},
+      {t:'Nächste Schritte', d:'Was als Nächstes passiert.', bed:'Freitext.', her:'Schreibst du nach jedem Termin.', wozu:'Kein Objekt bleibt liegen, weil keiner weiß, wer dran ist.', bsp:'Grundriss anfordern, Abluft mit dem Vermieter klären.'},
+      {t:'Notizen', d:'Alles Weitere.', bed:'Freitext.', her:'Schreibst du laufend dazu.', wozu:'Details aus Gesprächen gehen nicht verloren.', bsp:'Vermieter offen für eine Staffelmiete im ersten Jahr.'}
+    ]) };
+
+  S.vf_exp_projekte={ eyebrow:'DB : Expansionsprojekte', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Projekte. <span>Was jede Spalte steuert</span>.', sub:subI('Jede Zeile ist eine Eröffnung, eine Übernahme oder ein Umbau.'), relations:[],
+    steps:cards([
+      {t:'Projekt-ID', d:'Der Name des Projekts.', bed:'Der Name der Zeile, meist ein Kürzel mit Ort.', her:'Vergibst du beim Start des Projekts.', wozu:'Kosten, Risiken und Meilensteine verweisen auf diese Zeile.', bsp:'EXP-01 Ottensen.'},
+      {t:'Typ', d:'Welche Art von Projekt.', bed:'Eine Auswahl: Neueröffnung, Übernahme, Umbau, Re-Launch, Pop-Up.', her:'Wählst du aus.', wozu:'Eine Übernahme braucht andere Schritte als eine Neueröffnung.', bsp:'Neueröffnung.'},
+      {t:'Phase', d:'Wo das Projekt gerade steht.', bed:'Ein Status: Analyse, Verhandlung, Vertrag, Bau, Pre-Open, Launch, Stabilisierung. Pre-Open sind die Wochen vor der Eröffnung mit Probeläufen und Schulungen.', her:'Setzt du weiter, sobald eine Phase abgeschlossen ist.', wozu:'Als Board-Ansicht siehst du alle Projekte nach Phase sortiert.', bsp:'Bau.'},
+      {t:'Ampelstatus', d:'Wie es um das Projekt steht.', bed:'Eine Auswahl: 🟢 Grün, 🟡 Gelb, 🔴 Rot.', her:'Setzt du in jeder Projektbesprechung neu.', wozu:'Rot heißt: Hier musst du eingreifen.', bsp:'🟡 Gelb.'},
+      {t:'Entscheidungsbedarf', d:'Ob du etwas entscheiden musst.', bed:'Eine Auswahl: keiner, diese Woche, sofort.', her:'Setzt die Person, die das Projekt verantwortet.', wozu:'Ein Filter auf sofort zeigt dir jeden Morgen, wo du gebraucht wirst.', bsp:'diese Woche.'},
+      {t:'Projektverantwortlicher', d:'Wer das Projekt führt.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Jedes Projekt hat genau eine Person, die den Überblick hält.', bsp:'Der Betriebsleiter des ersten Standorts.'},
+      {t:'Verknüpfter Standort', d:'Der Ort, um den es geht.', bed:'Eine Verknüpfung zur Standorte Pipeline.', her:'Wählst du aus der Pipeline.', wozu:'Adresse, Capex und Partner des Standorts hängen damit am Projekt.', bsp:'HH-OTT-01.'},
+      {t:'Starttermin', d:'Wann das Projekt begonnen hat.', bed:'Ein Datum.', her:'Setzt du zum Start.', wozu:'Zusammen mit dem Zieltermin siehst du die Laufzeit.', bsp:'01.09.2026.'},
+      {t:'Zieltermin', d:'Wann eröffnet werden soll.', bed:'Ein Datum.', her:'Legst du mit Vermieter und Handwerkern fest.', wozu:'Alle Meilensteine richten sich nach diesem Tag.', bsp:'15.03.2027.'},
+      {t:'Budget geplant', d:'Was das Projekt kosten darf.', bed:'Eine Zahl in Euro.', her:'Kommt aus deiner Planung oder dem Finanzierungsgespräch.', wozu:'Der Maßstab für jede Ausgabe.', bsp:'180.000 €.'},
+      {t:'Budget aktuell', d:'Womit das Projekt heute rechnet.', bed:'Eine Zahl in Euro.', her:'Passt du an, sobald Kosten & Capex neue Zahlen zeigt.', wozu:'Neben dem geplanten Budget siehst du, ob das Projekt teurer wird.', bsp:'186.000 €.'}
+    ]) };
+
+  S.vf_exp_pipeline={ eyebrow:'DB : Standorte Pipeline', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Pipeline. <span>Was jede Spalte über den Ort sagt</span>.', sub:subI('Jede Zeile ist ein Ort, vom ersten Gedanken bis zur Eröffnung.'), relations:[],
+    steps:cards([
+      {t:'Site-ID', d:'Das Kürzel des Standorts.', bed:'Der Name der Zeile.', her:'Vergibst du, zum Beispiel aus Stadt, Viertel und Nummer.', wozu:'Projekte, Kosten und Risiken verweisen auf dieses Kürzel.', bsp:'HH-OTT-01.'},
+      {t:'Status', d:'Wie weit der Standort ist.', bed:'Ein Status: Scouting, LOI, Vertrag, Pausiert, Geschlossen, Umbau, Pre-Open, Live. LOI heißt Absichtserklärung, also die schriftliche Zusage vor dem Mietvertrag.', her:'Setzt du bei jedem Schritt weiter.', wozu:'Die Pipeline zeigt dir, wie viele Orte in welcher Stufe stecken.', bsp:'Vertrag.'},
+      {t:'Store-Modell', d:'Welche Art von Betrieb hier entsteht.', bed:'Eine Auswahl: Single Store, Multi-Unit, Ghost Kitchen, Private Chef. Ghost Kitchen heißt eine Küche nur für Lieferung, ohne Gastraum.', her:'Wählst du aus.', wozu:'Jedes Modell braucht andere Flächen, Teams und Kosten.', bsp:'Single Store.'},
+      {t:'Stadt', d:'In welcher Stadt der Ort liegt.', bed:'Freitext.', her:'Trägst du aus dem Exposé ein.', wozu:'Bei mehreren Städten filterst du auf eine.', bsp:'Hamburg.'},
+      {t:'Region', d:'Das größere Gebiet.', bed:'Freitext.', her:'Legst du nach deiner eigenen Einteilung fest.', wozu:'Hilft bei Lieferwegen und regionaler Führung.', bsp:'Hamburg West.'},
+      {t:'Adresse', d:'Die genaue Anschrift.', bed:'Freitext.', her:'Steht im Exposé oder Mietvertrag.', wozu:'Damit findet jeder den Ort für Besichtigung und Lieferung.', bsp:'Bahrenfelder Straße 112.'},
+      {t:'Betreiber / Partner', d:'Wer den Standort führt oder mitfinanziert.', bed:'Freitext.', her:'Trägst du aus dem Vertrag ein. Ausführlich steht der Partner in Partner & Betreiber.', wozu:'Bei jeder Frage zum Standort ist klar, ob du entscheidest oder dein Partner.', bsp:'Eigener Betrieb.'},
+      {t:'Ziel-Eröffnungsdatum', d:'Wann der Standort eröffnen soll.', bed:'Ein Datum.', her:'Übernimmst du aus dem Expansionsprojekt.', wozu:'Als Zeitleiste siehst du alle geplanten Eröffnungen hintereinander.', bsp:'15.03.2027.'},
+      {t:'Capex geplant', d:'Die geplanten Investitionskosten.', bed:'Eine Zahl in Euro. Capex heißt Investitionskosten, also alles Einmalige wie Umbau und Ausstattung.', her:'Kommt aus deiner Planung.', wozu:'Der Rahmen für alle Ausgaben am Standort.', bsp:'180.000 €.'},
+      {t:'Capex aktuell', d:'Die Investitionskosten nach heutigem Stand.', bed:'Eine Zahl in Euro.', her:'Passt du an, wenn Kosten & Capex neue Zahlen zeigt.', wozu:'Neben dem Plan siehst du, ob der Standort teurer wird.', bsp:'186.000 €.'},
+      {t:'Fixkosten-Forecast', d:'Die erwarteten monatlichen Fixkosten.', bed:'Eine Zahl in Euro.', her:'Rechnest du aus Miete, Nebenkosten und festen Verträgen.', wozu:'Zeigt dir, wie viel Umsatz der Standort jeden Monat mindestens braucht.', bsp:'11.400 €.'},
+      {t:'Readiness-Score (%)', d:'Wie bereit der Standort für die Eröffnung ist.', bed:'Eine Zahl in Prozent.', her:'Schätzt du anhand der erledigten Meilensteine.', wozu:'Kurz vor der Eröffnung zeigt er dir, ob der Termin hält.', bsp:'64 %.'},
+      {t:'Risiko-Score', d:'Deine Einschätzung des Gesamtrisikos.', bed:'Eine Zahl, die du hier selbst einträgst.', her:'Vergibst du nach Blick in die Datenbank Risiken. Dort rechnet die Vorlage pro Risiko einen eigenen Score.', wozu:'Standorte mit hohem Risiko bekommen mehr Aufmerksamkeit.', bsp:'12.'},
+      {t:'Verknüpfte SOP-Pakete', d:'Die Abläufe, die für diesen Standort gelten.', bed:'Eine Verknüpfung zu einer Datenbank mit Standardabläufen. SOP heißt Standard Operating Procedure, also ein festgeschriebener Ablauf.', her:'Wählst du aus der verknüpften Liste.', wozu:'Ein neues Team arbeitet von Tag eins nach denselben Abläufen wie das alte.', bsp:'Öffnen und Schließen, Wareneingang.'},
+      {t:'Verknüpfte Lieferanten', d:'Wer diesen Standort beliefert.', bed:'Eine Verknüpfung zu einer Lieferanten-Datenbank.', her:'Wählst du aus der verknüpften Liste.', wozu:'Fahren die Lieferanten des ersten Standorts den neuen nicht an, suchst du rechtzeitig Ersatz.', bsp:'Gemüsehof, Getränkehandel.'}
+    ]) };
+
+  S.vf_exp_partner={ eyebrow:'DB : Partner & Betreiber', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Partner. <span>Was jede Spalte regelt</span>.', sub:subI('Jede Zeile ist ein Betreiber, Investor oder Franchise-Partner.'), relations:[],
+    steps:cards([
+      {t:'Name', d:'Der Partner.', bed:'Der Name der Zeile.', her:'Übernimmst du aus dem Vertrag.', wozu:'Unter diesem Namen hängt der Partner an seinen Standorten.', bsp:'Nordlicht Gastro GmbH.'},
+      {t:'Rolle', d:'Was der Partner macht.', bed:'Eine Auswahl: Betreiber, Investor, Franchise-Partner.', her:'Wählst du nach dem Vertrag aus.', wozu:'Ein Investor will Zahlen sehen, ein Betreiber braucht Abläufe.', bsp:'Betreiber.'},
+      {t:'Vertragsstatus', d:'Wie weit der Vertrag ist.', bed:'Ein Status: In Verhandlung, Entwurf, Aktiv, Beendet, Gekündigt.', her:'Setzt du nach jedem Schritt mit Anwalt oder Partner.', wozu:'Kein Standort startet mit einem Partner, dessen Vertrag noch Entwurf ist.', bsp:'Aktiv.'},
+      {t:'Beteiligungsmodell', d:'Wie der Partner beteiligt ist.', bed:'Freitext.', her:'Steht im Vertrag.', wozu:'Du weißt bei jeder Zahl, wem welcher Anteil gehört.', bsp:'Umsatzpacht, 8 % vom Nettoumsatz.'},
+      {t:'Verantwortungsumfang', d:'Wofür der Partner zuständig ist.', bed:'Freitext.', her:'Steht im Vertrag.', wozu:'Klärt, wer anruft, wenn die Kühlung ausfällt.', bsp:'Personal, Einkauf und Tagesgeschäft, Marke und Karte bleiben bei dir.'},
+      {t:'Verknüpfte Standorte', d:'Welche Standorte der Partner betreut.', bed:'Eine Verknüpfung zur Standorte Pipeline.', her:'Wählst du aus der Pipeline.', wozu:'Bevor ein Partner einen weiteren Standort bekommt, schaust du auf die, die er schon führt.', bsp:'HH-OTT-01.'},
+      {t:'Performance-Score', d:'Wie gut der Partner arbeitet.', bed:'Eine Zahl, die du selbst vergibst.', her:'Vergibst du nach Zahlen und Prüfungen, zum Beispiel aus Key Metrics oder den Franchise-Prüfungen.', wozu:'Beim nächsten Standort weißt du, mit wem du weitermachst.', bsp:'8 von 10.'}
+    ]) };
+
+  S.vf_exp_kosten={ eyebrow:'DB : Kosten & Capex', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Investitionen. <span>Was jede Spalte zeigt</span>.', sub:subI('Jede Zeile ist eine Kostenposition eines Projekts.'), relations:[],
+    steps:cards([
+      {t:'Kostenart', d:'Die Position.', bed:'Der Name der Zeile.', her:'Übernimmst du aus Angebot oder Rechnung.', wozu:'So erkennst du die Position in der Liste wieder.', bsp:'Küchentechnik Kochlinie.'},
+      {t:'Kostenart Detail', d:'Zu welcher Gruppe die Position gehört.', bed:'Eine Auswahl: Bau, Technik, Ausstattung, Gebühren, Beratung.', her:'Wählst du aus.', wozu:'Gruppiert siehst du, wohin das meiste Geld fließt.', bsp:'Technik.'},
+      {t:'Geplant', d:'Was die Position kosten sollte.', bed:'Eine Zahl in Euro.', her:'Kommt aus dem Angebot.', wozu:'Der Maßstab für die echte Rechnung.', bsp:'48.000 €.'},
+      {t:'Ist', d:'Was die Position wirklich kostet.', bed:'Eine Zahl in Euro.', her:'Kommt von der Rechnung.', wozu:'Erst hier zeigt sich, ob das Budget hält.', bsp:'52.000 €.'},
+      {t:'Abweichung €', d:'Der Unterschied zwischen Plan und Ist.', bed:'Rechnet die Vorlage: Ist minus Geplant, dazu ein Balken aus Kästchen, rot bei Mehrkosten, grün bei Ersparnis. Ein Kästchen steht für rund 1.000 €.', her:'Kommt automatisch aus Geplant und Ist.', wozu:'Rote Balken springen in der Liste ins Auge, ohne dass du rechnest.', bsp:'Vier rote Kästchen, +4000 €.'},
+      {t:'Zahlungsstatus', d:'Ob die Position bezahlt ist.', bed:'Ein Status: Offen, Angefordert, Bezahlt, Storniert.', her:'Setzt du nach Rechnungseingang und Überweisung.', wozu:'Offene und angeforderte Posten zeigen dir, welches Geld in den nächsten Wochen abfließt.', bsp:'Angefordert.'},
+      {t:'Zahlungsdatum', d:'Wann bezahlt wird oder wurde.', bed:'Ein Datum.', her:'Steht auf der Rechnung oder im Kontoauszug.', wozu:'Hilft dir, die Liquidität über die Bauphase zu planen.', bsp:'30.11.2026.'},
+      {t:'Verknüpftes Projekt', d:'Zu welchem Projekt die Position gehört.', bed:'Eine Verknüpfung zu den Expansionsprojekten.', her:'Wählst du aus.', wozu:'Im Projekt siehst du alle seine Kosten zusammen.', bsp:'EXP-01 Ottensen.'},
+      {t:'Verknüpfter Standort', d:'An welchem Standort die Kosten anfallen.', bed:'Eine Verknüpfung zur Standorte Pipeline.', her:'Wählst du aus.', wozu:'Bei mehreren Projekten am selben Ort bleibt die Summe pro Standort sichtbar.', bsp:'HH-OTT-01.'}
+    ]) };
+
+  S.vf_exp_risiken={ eyebrow:'DB : Risiken', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Risiken. <span>Was jede Spalte bewertet</span>.', sub:subI('Jede Zeile ist etwas, das die Eröffnung gefährden kann.'), relations:[],
+    steps:cards([
+      {t:'Risiko', d:'Was passieren könnte.', bed:'Der Name der Zeile, als kurzer Satz.', her:'Formulierst du in der Projektbesprechung.', wozu:'Ein ausgesprochenes Risiko lässt sich planen.', bsp:'Abnahme der Abluftanlage verzögert sich.'},
+      {t:'Kategorie', d:'Zu welchem Feld das Risiko gehört.', bed:'Eine Auswahl: Rechtlich, Finanziell, Operativ, Standort, Personal, Lieferkette.', her:'Wählst du aus.', wozu:'Häufen sich Risiken in einem Feld, holst du dort früh Hilfe, etwa einen Anwalt oder Bauleiter.', bsp:'Rechtlich.'},
+      {t:'Eintrittswahrscheinlichkeit', d:'Wie wahrscheinlich das Risiko eintritt.', bed:'Eine Zahl von 1 bis 5.', her:'Schätzt du im Team.', wozu:'Fließt in den Risiko-Score.', bsp:'3.'},
+      {t:'Schadenshöhe', d:'Wie schwer es wiegt, wenn es eintritt.', bed:'Eine Zahl von 1 bis 5.', her:'Schätzt du im Team, mit Blick auf Geld und Zeitplan.', wozu:'Fließt in den Risiko-Score.', bsp:'4.'},
+      {t:'Risiko-Score', d:'Wie dringend das Risiko ist.', bed:'Rechnet die Vorlage: Eintrittswahrscheinlichkeit mal Schadenshöhe, begrenzt auf 1 bis 25.', her:'Kommt automatisch aus den beiden Zahlen davor.', wozu:'Sortiert nach Score besprichst du zuerst, was am meisten gefährdet.', bsp:'12.'},
+      {t:'Gegenmaßnahme', d:'Was du dagegen tust.', bed:'Freitext.', her:'Legst du mit der verantwortlichen Person fest.', wozu:'Ein Risiko ohne Gegenmaßnahme bleibt eine Sorge.', bsp:'Prüftermin beim Bauamt sechs Wochen vor dem Zieltermin buchen.'},
+      {t:'Status', d:'Wie es um das Risiko steht.', bed:'Ein Status: Identifiziert, In Bearbeitung, Beobachten, Mitigiert, Akzeptiert. Mitigiert heißt, das Risiko ist durch die Gegenmaßnahme deutlich kleiner geworden.', her:'Setzt die verantwortliche Person.', wozu:'Offene Risiken bleiben sichtbar, bis jemand sie erledigt.', bsp:'In Bearbeitung.'},
+      {t:'Verantwortlich', d:'Wer sich um das Risiko kümmert.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Jedes Risiko hat einen Namen daneben.', bsp:'Die Projektleitung.'},
+      {t:'Verknüpftes Projekt', d:'Welches Projekt betroffen ist.', bed:'Eine Verknüpfung zu den Expansionsprojekten.', her:'Wählst du aus.', wozu:'Im Projekt siehst du alle seine Risiken zusammen.', bsp:'EXP-01 Ottensen.'},
+      {t:'Verknüpfter Standort', d:'Welcher Standort betroffen ist.', bed:'Eine Verknüpfung zur Standorte Pipeline.', her:'Wählst du aus.', wozu:'Risiken, die am Ort hängen, bleiben auch nach dem Projekt sichtbar.', bsp:'HH-OTT-01.'}
+    ]) };
+
+  S.vf_exp_meilensteine={ eyebrow:'DB : Meilensteine', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Meilensteine. <span>Was jede Spalte festlegt</span>.', sub:subI('Jede Zeile ist ein Schritt, der bis zur Eröffnung erledigt sein muss.'), relations:[],
+    steps:cards([
+      {t:'Meilenstein', d:'Was erledigt sein muss.', bed:'Der Name der Zeile.', her:'Formulierst du als Ergebnis, das man abhaken kann.', wozu:'So weiß jeder, wann der Schritt fertig ist.', bsp:'Gaststättenerlaubnis liegt vor.'},
+      {t:'Kategorie', d:'Zu welchem Feld der Schritt gehört.', bed:'Eine Auswahl: Recht, Bau, Betrieb, Personal, Supply Chain, Marketing, Finanzen. Supply Chain heißt Lieferkette.', her:'Wählst du aus.', wozu:'Gruppiert nach Kategorie erkennst du, welches Feld die Eröffnung am ehesten verzögert.', bsp:'Recht.'},
+      {t:'Fälligkeitsdatum', d:'Bis wann der Schritt erledigt sein muss.', bed:'Ein Datum.', her:'Rechnest du vom Zieltermin der Eröffnung zurück.', wozu:'Als Zeitleiste siehst du, was diese Woche fällig ist.', bsp:'15.02.2027.'},
+      {t:'Status', d:'Wie weit der Schritt ist.', bed:'Ein Status: Offen, In Arbeit, Blockiert, Erledigt, Nicht relevant.', her:'Setzt die verantwortliche Person.', wozu:'Blockierte Schritte siehst du, bevor sie den Termin gefährden.', bsp:'In Arbeit.'},
+      {t:'Kritisch für Launch', d:'Ob ohne diesen Schritt nicht eröffnet werden kann.', bed:'Ein Häkchen.', her:'Setzt du bei allem, was gesetzlich oder technisch Pflicht ist.', wozu:'Filterst du auf kritische Schritte, siehst du, was die Eröffnung wirklich aufhält.', bsp:'Gesetzt.'},
+      {t:'Abhängigkeiten', d:'Was vorher erledigt sein muss.', bed:'Freitext.', her:'Klärst du mit den Beteiligten.', wozu:'Zeigt dir die Reihenfolge, in der die Schritte laufen müssen.', bsp:'Erst nach der Abnahme der Abluft.'},
+      {t:'Verantwortlich', d:'Wer den Schritt erledigt.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Jeder Termin hat einen Namen daneben.', bsp:'Die Geschäftsführung.'},
+      {t:'Verknüpftes Projekt', d:'Zu welchem Projekt der Schritt gehört.', bed:'Eine Verknüpfung zu den Expansionsprojekten.', her:'Wählst du aus.', wozu:'Im Projekt siehst du alle offenen Schritte bis zur Eröffnung.', bsp:'EXP-01 Ottensen.'}
+    ]) };
+
+  S.vf_fr_regeln={ eyebrow:'DB : Franchise-Regelwerk', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Dein Regelwerk. <span>Was jede Spalte festlegt</span>.', sub:subI('Jede Zeile ist eine Regel, die für deine Standorte gilt.'), relations:[],
+    steps:cards([
+      {t:'Regel-ID', d:'Das Kürzel der Regel.', bed:'Der Name der Zeile, meist Kürzel und Stichwort.', her:'Vergibst du nach Kategorie und laufender Nummer.', wozu:'In Prüfungen verweist du auf dieses Kürzel.', bsp:'MK-03 Logo-Nutzung.'},
+      {t:'Regeltext', d:'Was die Regel verlangt.', bed:'Freitext.', her:'Formulierst du so genau, dass man ihn prüfen kann.', wozu:'Hier steht, was der Partner tun oder lassen muss.', bsp:'Das Logo erscheint nur in den freigegebenen Farben und nie verzerrt.'},
+      {t:'Regeltyp', d:'Welche Art von Regel.', bed:'Eine Auswahl: Pflicht, Verbot, Genehmigungspflichtig.', her:'Wählst du aus.', wozu:'Der Partner weiß, wo er frei entscheiden darf und wo nicht.', bsp:'Pflicht.'},
+      {t:'Kategorie', d:'Zu welchem Bereich die Regel gehört.', bed:'Eine Auswahl: Marke, Betrieb, Küche, Service, Hygiene, Einkauf, Personal, Finanzen.', her:'Wählst du aus.', wozu:'Beim Rundgang gehst du die Regeln Bereich für Bereich durch.', bsp:'Marke.'},
+      {t:'Gilt für Store-Typ', d:'An welchen Standorten die Regel gilt.', bed:'Freitext.', her:'Trägst du mit den Store-Modellen aus der Standorte Pipeline ein.', wozu:'Eine Ghost Kitchen braucht keine Regel zur Begrüßung am Tisch.', bsp:'Single Store, Multi-Unit.'},
+      {t:'Kontrollart', d:'Wie die Regel geprüft wird.', bed:'Eine Auswahl: Audit, KPI, Sichtprüfung. KPI heißt Kennzahl.', her:'Wählst du nach der Art der Regel aus.', wozu:'Daraus ergibt sich die Liste für den nächsten Rundgang.', bsp:'Sichtprüfung.'},
+      {t:'Konsequenz bei Verstoß', d:'Was passiert, wenn die Regel gebrochen wird.', bed:'Freitext.', her:'Steht im Franchisevertrag oder legst du mit dem Partner fest.', wozu:'Klare Folgen machen Gespräche nach einem Verstoß kürzer.', bsp:'Korrektur innerhalb von 7 Tagen, im Wiederholungsfall Nachschulung.'},
+      {t:'Verknüpfte SOPs', d:'Welche Abläufe zur Regel gehören.', bed:'Freitext mit den Namen der Abläufe. SOP heißt Standard Operating Procedure.', her:'Trägst du aus deiner SOP-Liste der Operations Area ein.', wozu:'Wer die Regel verletzt hat, liest im Ablauf nach, wie es richtig geht.', bsp:'SOP Tafel und Aufsteller gestalten.'}
+    ]) };
+
+  S.vf_fr_pruefungen={ eyebrow:'DB : Franchise-Prüfungen', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Prüfungen. <span>Was jede Spalte festhält</span>.', sub:subI('Jede Zeile ist ein Rundgang an einem Standort.'), relations:[],
+    steps:cards([
+      {t:'Standort', d:'Welcher Standort geprüft wird.', bed:'Der Name der Zeile.', her:'Übernimmst du aus der Standorte Pipeline.', wozu:'Alle Prüfungen eines Standorts stehen untereinander.', bsp:'HH-OTT-01.'},
+      {t:'Prüfungsart', d:'Warum geprüft wird.', bed:'Eine Auswahl: Onboarding, Regelbetrieb, Sonderprüfung.', her:'Wählst du aus.', wozu:'Eine Sonderprüfung nach einer Beschwerde liest du anders als den Rundgang nach Plan.', bsp:'Regelbetrieb.'},
+      {t:'Prüfungsdatum', d:'Wann der Rundgang war.', bed:'Ein Datum.', her:'Setzt du am Tag des Besuchs.', wozu:'Liegt der letzte Rundgang zu lange zurück, planst du den nächsten.', bsp:'12.10.2026.'},
+      {t:'Prüfer', d:'Wer geprüft hat.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Bei Rückfragen weiß jeder, wen er anspricht.', bsp:'Die Regionalleitung.'},
+      {t:'Referenzierte Regeln', d:'Welche Regeln geprüft wurden.', bed:'Freitext mit den Regel-IDs aus dem Regelwerk.', her:'Trägst du aus deiner Prüfliste ein.', wozu:'Du weißt, welche Regeln beim nächsten Mal noch dran sind.', bsp:'MK-03, KÜ-01, HY-04.'},
+      {t:'Gesamt-Compliance', d:'Wie viele der geprüften Regeln eingehalten wurden.', bed:'Eine Zahl in Prozent.', her:'Rechnest du nach dem Rundgang: eingehaltene Regeln geteilt durch geprüfte Regeln.', wozu:'Über mehrere Prüfungen siehst du, ob ein Standort besser wird.', bsp:'92 %.'},
+      {t:'Kritische Verstöße', d:'Wie viele schwere Verstöße es gab.', bed:'Eine Zahl.', her:'Zählst du beim Rundgang.', wozu:'Schon ein kritischer Verstoß braucht eine Maßnahme, egal wie hoch die Compliance ist.', bsp:'1.'},
+      {t:'Maßnahmen erforderlich', d:'Ob nachgebessert werden muss.', bed:'Eine Auswahl: Ja, Nein.', her:'Entscheidest du nach dem Rundgang.', wozu:'Filterst du auf Ja, siehst du alle offenen Nacharbeiten.', bsp:'Ja.'},
+      {t:'Frist', d:'Bis wann nachgebessert sein muss.', bed:'Ein Datum.', her:'Legst du mit dem Partner fest.', wozu:'An diesem Tag prüfst du nach.', bsp:'19.10.2026.'},
+      {t:'Status', d:'Wie weit die Prüfung ist.', bed:'Ein Status: Geplant, In Prüfung, Maßnahmen laufen, Abgeschlossen, Freigegeben, Abgebrochen.', her:'Setzt der Prüfer.', wozu:'Zeigt dir, welche Standorte gerade nacharbeiten.', bsp:'Maßnahmen laufen.'},
+      {t:'Notizen', d:'Beobachtungen vom Rundgang.', bed:'Freitext.', her:'Schreibt der Prüfer direkt vor Ort.', wozu:'Details, die in keine Zahl passen, gehen nicht verloren.', bsp:'Kreidetafel mit altem Logo am Eingang, Team sehr freundlich.'}
+    ]) };
+
+  S.vf_events={ eyebrow:'DB : Event Konzepte', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Events. <span>Was jede Spalte plant</span>.', sub:subI('Jede Zeile ist ein Event-Format.'), relations:[],
+    steps:cards([
+      {t:'Event Name', d:'Das Format.', bed:'Der Name der Zeile.', her:'Benennst du so, wie du das Event bewirbst.', wozu:'Unter diesem Namen findet das Team das Format wieder.', bsp:'Pasta-Abend mit der Küche.'},
+      {t:'Kategorie', d:'Welche Art von Event.', bed:'Eine Auswahl, zum Beispiel Workshop & Kurse, Dinner Events, Verkostungen & Tastings, Business Events oder Brunch & Frühstück.', her:'Wählst du aus.', wozu:'Formate einer Art, die gut laufen, sind der beste Ausgangspunkt für das nächste.', bsp:'Workshop & Kurse.'},
+      {t:'Beschreibung', d:'Was die Gäste erleben.', bed:'Freitext.', her:'Schreibst du so, wie du es einem Gast erzählen würdest.', wozu:'Daraus entsteht später der Text für Einladung und Website.', bsp:'Drei Stunden in unserer Küche, frische Pasta von Hand, danach gemeinsames Essen am langen Tisch.'},
+      {t:'Zielgruppe', d:'Für wen das Event gedacht ist.', bed:'Eine Mehrfachauswahl, zum Beispiel Privatpersonen, Firmen/B2B, Paare oder Food-Enthusiasten.', her:'Wählst du nach deiner Zielgruppenanalyse aus.', wozu:'Bestimmt, wo du das Event bewirbst.', bsp:'Paare, Food-Enthusiasten.'},
+      {t:'Status', d:'Wie weit das Format ist.', bed:'Ein Status: Idee, In Planung, Aktiv, Wird getestet, Pausiert, Archiviert.', her:'Setzt du weiter, sobald sich etwas ändert.', wozu:'Ideen gehen nicht verloren, auch wenn sie noch warten.', bsp:'Aktiv.'},
+      {t:'Min. Teilnehmer', d:'Ab wie vielen Gästen das Event stattfindet.', bed:'Eine Zahl.', her:'Rechnest du aus Kosten und Preis pro Person.', wozu:'Unter dieser Zahl sagst du rechtzeitig ab oder legst Termine zusammen.', bsp:'8.'},
+      {t:'Max. Teilnehmer', d:'Wie viele Gäste höchstens dabei sind.', bed:'Eine Zahl.', her:'Ergibt sich aus Platz, Arbeitsplätzen in der Küche und Personal.', wozu:'Mit wenigen Plätzen bekommt jeder Gast die volle Aufmerksamkeit.', bsp:'14.'},
+      {t:'Dauer (Std.)', d:'Wie lange das Event dauert.', bed:'Eine Zahl in Stunden.', her:'Legst du fest, inklusive Essen am Ende.', wozu:'Hilft bei der Personalplanung und beim Preis.', bsp:'3.'},
+      {t:'Preis pro Person (€)', d:'Was ein Gast bezahlt.', bed:'Eine Zahl in Euro.', her:'Legst du nach Kosten, Marge und Zielgruppe fest.', wozu:'Mal der Teilnehmerzahl ergibt sich der Umsatz des Abends.', bsp:'89 €.'},
+      {t:'Geschätzte Marge (%)', d:'Was nach allen Kosten des Events übrig bleibt.', bed:'Eine Zahl in Prozent vom Preis, als Schätzung. Sie ist nicht dasselbe wie der Deckungsbeitrag I, der nur den Wareneinsatz abzieht.', her:'Schätzt du aus Ware, Personal und Extras.', wozu:'Zeigt dir vor dem Termin, ob sich das Format lohnt.', bsp:'38 %.'},
+      {t:'Benötigte Ressourcen', d:'Was zusätzlich gebraucht wird.', bed:'Eine Mehrfachauswahl: Küche, Extra Personal, Spezial-Equipment, Externe Location, Lieferanten, Marketing Support.', her:'Wählst du bei der Planung aus.', wozu:'Extra-Personal und Location buchst du so rechtzeitig vor dem Termin.', bsp:'Küche, Extra Personal.'},
+      {t:'Besondere Anforderungen', d:'Was beachtet werden muss.', bed:'Freitext.', her:'Schreibst du bei der Planung, ergänzt nach jedem Termin.', wozu:'Das Team bereitet sich vor, statt am Abend zu improvisieren.', bsp:'Allergien bei der Anmeldung abfragen, Schürzen für alle Gäste.'},
+      {t:'Marketing Highlights', d:'Womit du das Event bewirbst.', bed:'Freitext.', her:'Schreibst du aus dem, was Gäste nach dem letzten Termin erzählt haben.', wozu:'Daraus entstehen Posts und Einladungen.', bsp:'Die Pasta, die du selbst machst, isst du am Ende mit uns am Tisch.'},
+      {t:'Nächster Termin', d:'Wann das Event das nächste Mal stattfindet.', bed:'Ein Datum.', her:'Setzt du, sobald der Termin feststeht.', wozu:'In der Kalender-Ansicht siehst du alle kommenden Events.', bsp:'21.11.2026.'}
+    ]) };
+
+  S.vf_cat_planung={ eyebrow:'DB : Catering Konzept Planung', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Aufträge. <span>Was jede Spalte organisiert</span>.', sub:subI('Jede Zeile ist ein Catering-Auftrag.'), relations:[],
+    steps:cards([
+      {t:'Event / Projekt Name', d:'Der Auftrag.', bed:'Der Name der Zeile.', her:'Benennst du nach Anlass und Kunde.', wozu:'Unter diesem Namen spricht das Team über den Auftrag.', bsp:'Sommerfest Agentur Nordblick.'},
+      {t:'Event Typ', d:'Welche Art von Anlass.', bed:'Eine Auswahl, zum Beispiel Firmenveranstaltung, Hochzeit, Geburtstag, Workshop / Seminar oder Messe / Festival.', her:'Wählst du aus.', wozu:'Die häufigsten Anlässe bekommen ein festes Angebot, das du nicht jedes Mal neu schreibst.', bsp:'Firmenveranstaltung.'},
+      {t:'Status', d:'Wo der Auftrag steht.', bed:'Ein Status: Anfrage, Angebot erstellen, In Planung, Bestätigt, Vorbereitung läuft, Durchgeführt, Abgeschlossen.', her:'Setzt du bei jedem Schritt weiter.', wozu:'Als Board-Ansicht siehst du alle Aufträge nach Stand.', bsp:'Bestätigt.'},
+      {t:'Priorität', d:'Wie wichtig der Auftrag ist.', bed:'Eine Auswahl: Hoch, Mittel, Niedrig.', her:'Legst du fest.', wozu:'Bei mehreren Anfragen für denselben Tag entscheidest du schneller.', bsp:'Hoch.'},
+      {t:'Kunde / Auftraggeber', d:'Wer bucht.', bed:'Freitext.', her:'Steht in der Anfrage.', wozu:'Ausführliche Kundendaten liegen im Kunden Master aus Lektion 2.11.', bsp:'Agentur Nordblick, Frau Hansen.'},
+      {t:'Kontakt Kunde', d:'Die E-Mail-Adresse.', bed:'Ein E-Mail-Feld.', her:'Steht in der Anfrage.', wozu:'Ein Klick öffnet eine neue Mail.', bsp:'events@nordblick-agentur.de.'},
+      {t:'Telefon Kunde', d:'Die Telefonnummer.', bed:'Ein Telefonfeld.', her:'Steht in der Anfrage.', wozu:'Am Tag selbst ruft das Team direkt an.', bsp:'040 987 654 32.'},
+      {t:'Event Datum', d:'Wann das Event stattfindet.', bed:'Ein Datum.', her:'Steht in der Anfrage.', wozu:'In der Kalender-Ansicht siehst du alle Termine.', bsp:'12.06.2027.'},
+      {t:'Angebotsdatum', d:'Wann das Angebot rausging.', bed:'Ein Datum.', her:'Setzt du beim Versand.', wozu:'Nach einer Woche ohne Antwort fragst du nach.', bsp:'20.03.2027.'},
+      {t:'Bestätigungsdatum', d:'Wann der Kunde zugesagt hat.', bed:'Ein Datum.', her:'Setzt du bei der Zusage.', wozu:'Ab hier wird bestellt und geplant.', bsp:'28.03.2027.'},
+      {t:'Lieferung / Aufbau', d:'Wann geliefert und aufgebaut wird.', bed:'Ein Datum mit Uhrzeit.', her:'Klärst du mit dem Kunden und der Location.', wozu:'Danach plant die Küche Produktion und Abfahrt.', bsp:'12.06.2027, 16:00 Uhr.'},
+      {t:'Location / Veranstaltungsort', d:'Wo das Event ist.', bed:'Freitext.', her:'Steht in der Anfrage.', wozu:'Das Team kennt Adresse und Zufahrt vor der Abfahrt.', bsp:'Dachterrasse der Agentur, Lastenaufzug im Hof.'},
+      {t:'Gästezahl', d:'Wie viele Gäste kommen.', bed:'Eine Zahl.', her:'Bestätigt der Kunde, spätestens eine Woche vorher.', wozu:'Danach richten sich Menge, Geschirr und Personal.', bsp:'40.'},
+      {t:'Service-Art', d:'Wie serviert wird.', bed:'Eine Mehrfachauswahl, zum Beispiel Buffet, Flying Buffet, Menü / Tischservice, Food Stations oder Fingerfood.', her:'Wählst du mit dem Kunden aus.', wozu:'Jede Service-Art braucht anderes Personal und anderes Geschirr.', bsp:'Flying Buffet, Getränke-Catering.'},
+      {t:'Menü / Angebot', d:'Was serviert wird.', bed:'Freitext.', her:'Übernimmst du aus dem bestätigten Angebot.', wozu:'Die Küche plant danach die Produktion.', bsp:'Sechs Fingerfood-Stücke pro Gast, zwei vegetarisch.'},
+      {t:'Besonderheiten / Allergene', d:'Worauf geachtet werden muss.', bed:'Freitext.', her:'Fragst du beim Kunden ab.', wozu:'Kein Gast bekommt etwas, das er nicht verträgt.', bsp:'Zwei Gäste mit Nussallergie, ein Gast vegan.'},
+      {t:'Budget / Preis', d:'Was der Auftrag kosten darf oder kostet.', bed:'Eine Zahl in Euro.', her:'Steht im bestätigten Angebot.', wozu:'Der Rahmen, an dem sich Menü und Personal ausrichten.', bsp:'1.800 €.'},
+      {t:'Warenkosten (WE)', d:'Der Wareneinsatz des Auftrags.', bed:'Eine Zahl in Euro. WE steht für Wareneinsatz.', her:'Kommt aus der Kalkulation in der Menükalkulation.', wozu:'Zusammen mit dem Preis ergibt sich der Deckungsbeitrag I.', bsp:'560 €.'},
+      {t:'Kalkulation DB I', d:'Der Deckungsbeitrag I des Auftrags.', bed:'Eine Zahl in Euro: Preis minus Wareneinsatz.', her:'Trägst du aus deiner Kalkulation ein.', wozu:'Zeigt schon in der Planung, ob der Auftrag sich lohnen kann.', bsp:'1.240 €.'},
+      {t:'Team Planung', d:'Wer am Tag dabei ist.', bed:'Freitext.', her:'Planst du mit dem Dienstplan.', wozu:'Jeder weiß, ob er an diesem Tag eingeteilt ist.', bsp:'Zwei Köche, drei Servicekräfte, ein Fahrer.'},
+      {t:'Equipment / Material', d:'Was mitgenommen werden muss.', bed:'Freitext.', her:'Schreibst du nach Menü und Service-Art.', wozu:'Wird zur Packliste am Tag der Abfahrt.', bsp:'Chafing Dishes, 60 Teller, zwei Stehtische.'},
+      {t:'Verantwortlich', d:'Wer den Auftrag führt.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Kunde und Team haben einen festen Ansprechpartner.', bsp:'Die Küchenchefin.'},
+      {t:'Dokumente', d:'Angebot, Vertrag, Grundriss.', bed:'Ein Dateifeld.', her:'Lädst du hoch, sobald es da ist.', wozu:'Alles zum Auftrag liegt an einer Stelle.', bsp:'Angebot als PDF, Grundriss der Dachterrasse.'},
+      {t:'Notizen / Details', d:'Alles Weitere.', bed:'Freitext.', her:'Schreibst du laufend dazu.', wozu:'Absprachen am Telefon gehen nicht verloren.', bsp:'Kunde bringt eigene Getränke, wir stellen nur Gläser.'}
+    ]) };
+
+  S.vf_cat_auftrag={ eyebrow:'DB : Catering', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Catering-Rechnung. <span>Was jede Spalte rechnet</span>.', sub:subI('Jede Zeile ist ein Auftrag, durchgerechnet bis zum Deckungsbeitrag III.'), relations:[],
+    steps:cards([
+      {t:'Event Name', d:'Der Auftrag.', bed:'Der Name der Zeile.', her:'Übernimmst du aus Catering Konzept Planung.', wozu:'So findest du Planung und Rechnung desselben Auftrags.', bsp:'Sommerfest Agentur Nordblick.'},
+      {t:'Event-Art', d:'Welche Art von Anlass.', bed:'Eine Auswahl: Hochzeit, Firmenevent, Geburtstag, Privat, Messe, Workshop, Other.', her:'Wählst du aus.', wozu:'Gruppiert nach Event-Art siehst du, welche Anlässe am meisten übrig lassen.', bsp:'Firmenevent.'},
+      {t:'Status', d:'Wo der Auftrag steht.', bed:'Ein Status von Anfrage über Bestätigt und Durchgeführt bis Abgerechnet, dazu Storniert.', her:'Setzt du bei jedem Schritt weiter.', wozu:'Auswerten solltest du nur Aufträge, die abgerechnet sind.', bsp:'Abgerechnet.'},
+      {t:'Datum', d:'Wann das Event war.', bed:'Ein Datum.', her:'Übernimmst du aus der Planung.', wozu:'In ruhigen Monaten bewirbst du Catering gezielter.', bsp:'12.06.2027.'},
+      {t:'Kunde', d:'Wer gebucht hat.', bed:'Freitext.', her:'Übernimmst du aus der Planung.', wozu:'Kunden, mit denen du gut verdienst, sprichst du vor ihrem nächsten Anlass von selbst an.', bsp:'Agentur Nordblick.'},
+      {t:'Kontaktperson', d:'Wer beim Kunden zuständig ist.', bed:'Freitext.', her:'Steht in der Anfrage.', wozu:'Für Rückfragen zur Rechnung.', bsp:'Frau Hansen.'},
+      {t:'E-Mail', d:'Die E-Mail-Adresse.', bed:'Ein E-Mail-Feld.', her:'Steht in der Anfrage.', wozu:'Die Rechnung geht an diese Adresse.', bsp:'events@nordblick-agentur.de.'},
+      {t:'Telefon', d:'Die Telefonnummer.', bed:'Ein Telefonfeld.', her:'Steht in der Anfrage.', wozu:'Für kurze Absprachen.', bsp:'040 987 654 32.'},
+      {t:'Location/Lieferadresse', d:'Wohin geliefert wurde.', bed:'Freitext.', her:'Übernimmst du aus der Planung.', wozu:'Lange Anfahrten erklären oft höhere sonstige Kosten.', bsp:'Dachterrasse der Agentur, Hafenstraße 3.'},
+      {t:'Anzahl Personen', d:'Wie viele Gäste versorgt wurden.', bed:'Eine Zahl.', her:'Die endgültige Zahl vom Kunden.', wozu:'Daraus rechnet die Vorlage Preis und Wareneinsatz pro Person.', bsp:'40.'},
+      {t:'Menü-Optionen', d:'Was serviert wurde.', bed:'Eine Mehrfachauswahl, zum Beispiel Fingerfood, Buffet, Flying Buffet, Menü 3-Gänge, BBQ, Vegetarisch oder Vegan.', her:'Wählst du nach dem bestätigten Angebot aus.', wozu:'Menüformen, die sich gut rechnen, schlägst du in Angeboten zuerst vor.', bsp:'Fingerfood, Flying Buffet.'},
+      {t:'Allergien & Unverträglichkeiten', d:'Worauf geachtet wurde.', bed:'Freitext.', her:'Übernimmst du aus der Planung.', wozu:'Beim nächsten Auftrag desselben Kunden weißt du es schon.', bsp:'Zwei Gäste mit Nussallergie.'},
+      {t:'Besondere Anforderungen', d:'Was über das Übliche hinausging.', bed:'Freitext.', her:'Schreibst du nach dem Auftrag.', wozu:'Erklärt Mehraufwand, der in den Kosten steckt.', bsp:'Aufbau über den Lastenaufzug, 30 Minuten länger.'},
+      {t:'Budget (EUR)', d:'Was der Kunde ausgeben wollte.', bed:'Eine Zahl in Euro.', her:'Steht in der Anfrage.', wozu:'Neben dem finalen Preis siehst du, wie nah du am Wunsch des Kunden lagst.', bsp:'2.000 €.'},
+      {t:'Angebotspreis (EUR)', d:'Was im Angebot stand.', bed:'Eine Zahl in Euro.', her:'Übernimmst du aus dem Angebot.', wozu:'Weicht er vom finalen Preis ab, siehst du, wie viel nachverhandelt wurde.', bsp:'1.950 €.'},
+      {t:'Finaler Verkaufspreis (EUR)', d:'Was der Kunde am Ende bezahlt.', bed:'Eine Zahl in Euro.', her:'Steht auf der Rechnung.', wozu:'Von diesem Betrag rechnet die Vorlage alle Deckungsbeiträge.', bsp:'1.800 €.'},
+      {t:'Wareneinsatz gesamt (EUR)', d:'Was die Ware für den Auftrag gekostet hat.', bed:'Eine Zahl in Euro.', her:'Kommt aus der Menükalkulation, nach dem Auftrag mit den echten Einkäufen abgeglichen.', wozu:'Der erste Abzug vom Verkaufspreis.', bsp:'560 €.'},
+      {t:'Personalkosten geschätzt (EUR)', d:'Was das Personal für den Auftrag kostet.', bed:'Eine Zahl in Euro.', her:'Rechnest du aus Stunden mal Stundensatz der Mitarbeiter.', wozu:'Der zweite Abzug, daraus wird der Deckungsbeitrag II.', bsp:'480 €.'},
+      {t:'Sonstige Kosten (EUR)', d:'Alles, was weder Ware noch Personal ist.', bed:'Eine Zahl in Euro.', her:'Sammelst du aus Belegen für Transport, Mietgeschirr oder Deko.', wozu:'Der dritte Abzug, daraus wird der Deckungsbeitrag III.', bsp:'120 €.'},
+      {t:'DB I (EUR)', d:'Der Deckungsbeitrag I.', bed:'Rechnet die Vorlage: finaler Verkaufspreis minus Wareneinsatz gesamt.', her:'Kommt automatisch aus den beiden Zahlen.', wozu:'Was die Ware übrig lässt.', bsp:'1.240 €.'},
+      {t:'DB I %', d:'Der Deckungsbeitrag I in Prozent.', bed:'Rechnet die Vorlage: DB I geteilt durch den finalen Verkaufspreis.', her:'Kommt automatisch.', wozu:'Macht große und kleine Aufträge vergleichbar.', bsp:'68,9 %.'},
+      {t:'DB II (EUR)', d:'Was nach Ware und Personal übrig bleibt.', bed:'Rechnet die Vorlage: DB I minus Personalkosten geschätzt.', her:'Kommt automatisch.', wozu:'Zeigt, ob der Auftrag das Team bezahlt, das ihn umsetzt.', bsp:'760 €.'},
+      {t:'DB II %', d:'Der Deckungsbeitrag II in Prozent.', bed:'Rechnet die Vorlage: DB II geteilt durch den finalen Verkaufspreis.', her:'Kommt automatisch.', wozu:'Vergleichbar über alle Aufträge.', bsp:'42,2 %.'},
+      {t:'DB III (EUR)', d:'Was am Ende vom Auftrag übrig bleibt.', bed:'Rechnet die Vorlage: DB II minus sonstige Kosten, auf Cent gerundet.', her:'Kommt automatisch.', wozu:'Die Zahl, nach der du entscheidest, ob du so einen Auftrag wieder annimmst.', bsp:'640 €.'},
+      {t:'DB III %', d:'Der Deckungsbeitrag III in Prozent.', bed:'Rechnet die Vorlage: DB III geteilt durch den finalen Verkaufspreis.', her:'Kommt automatisch.', wozu:'Sortiert danach stehen die lohnendsten Anlässe oben.', bsp:'35,6 %.'},
+      {t:'Wareneinsatz %', d:'Der Anteil der Ware am Verkaufspreis.', bed:'Rechnet die Vorlage: Wareneinsatz gesamt geteilt durch den finalen Verkaufspreis.', her:'Kommt automatisch.', wozu:'Zeigt dir, ob dein Menü zu teuer im Einkauf ist.', bsp:'31,1 %.'},
+      {t:'Preis pro Person (EUR)', d:'Was der Kunde pro Gast bezahlt.', bed:'Rechnet die Vorlage: finaler Verkaufspreis geteilt durch Anzahl Personen.', her:'Kommt automatisch.', wozu:'Damit nennst du bei der nächsten Anfrage schnell einen Richtwert.', bsp:'45 €.'},
+      {t:'Wareneinsatz pro Person (EUR)', d:'Was die Ware pro Gast kostet.', bed:'Rechnet die Vorlage: Wareneinsatz gesamt geteilt durch Anzahl Personen.', her:'Kommt automatisch.', wozu:'Hilft dir, Menüs für verschiedene Gästezahlen zu planen.', bsp:'14 €.'},
+      {t:'Verantwortlich', d:'Wer den Auftrag geführt hat.', bed:'Eine Person aus deinem Notion-Team.', her:'Wählst du aus.', wozu:'Bei Rückfragen zur Abrechnung weißt du, wen du fragst.', bsp:'Die Küchenchefin.'},
+      {t:'Notizen', d:'Was du beim nächsten Mal anders machst.', bed:'Freitext.', her:'Schreibst du direkt nach dem Auftrag.', wozu:'Aus jedem Auftrag wird der nächste besser.', bsp:'Zu viel Brot eingeplant, beim nächsten Mal 20 % weniger.'}
+    ]) };
+
+  S.vf_merch={ eyebrow:'DB : Merch // Produkte', werte:{}, countSummary:true, summary:'Spalten verstanden', summaryType:'anzahl', title:'Deine Produkte. <span>Was jede Spalte beschreibt</span>.', sub:subI('Jede Zeile ist ein Produkt, das du außer dem Teller verkaufst.'), relations:[],
+    steps:cards([
+      {t:'Name', d:'Das Produkt.', bed:'Der Name der Zeile.', her:'Benennst du so, wie es auf dem Etikett steht.', wozu:'Unter diesem Namen fragt der Gast danach.', bsp:'Hausgemachtes Chili-Öl, 250 ml.'},
+      {t:'Bild', d:'Ein Foto des Produkts.', bed:'Ein Dateifeld.', her:'Fotografierst du selbst, am besten auf dem Tresen.', wozu:'In der Galerie erkennt jeder das Produkt am Bild.', bsp:'Das Glas vor der offenen Küche.'},
+      {t:'Beschreibung', d:'Was das Produkt ausmacht.', bed:'Freitext.', her:'Schreibst du in ein, zwei Sätzen.', wozu:'Daraus entstehen Etikett und Text im Onlineshop.', bsp:'Mit gerösteten Chilis und Knoblauch, nach dem Rezept unserer Nudelsuppe.'},
+      {t:'Produkttyp', d:'Woher das Produkt kommt.', bed:'Eine Auswahl: Merchandise, Produkt, Eigenproduktion, Handelsware.', her:'Wählst du aus.', wozu:'Bei Eigenproduktion rechnest du mit Wareneinsatz, bei Handelsware mit dem Einkaufspreis.', bsp:'Eigenproduktion.'},
+      {t:'Tags', d:'Zu welcher Gruppe das Produkt gehört.', bed:'Eine Mehrfachauswahl: Küchenutensilien, Food Items, Drinks, Saucen & Gewürze, Backwaren, Kaffee & Tee, Wein & Spirituosen.', her:'Wählst du aus, auch mehrere.', wozu:'Gruppiert nach Tags siehst du, welche Art Produkt am besten läuft.', bsp:'Saucen & Gewürze.'},
+      {t:'Preis', d:'Was der Gast bezahlt.', bed:'Eine Zahl in Euro.', her:'Legst du nach Einkauf oder Wareneinsatz fest.', wozu:'Jeder im Team nennt denselben Preis.', bsp:'9,90 €.'},
+      {t:'Status', d:'Ob das Produkt gerade erhältlich ist.', bed:'Ein Status: Geplant, In Entwicklung, Verfügbar, Bestellbar, Ausverkauft, Nicht mehr verfügbar.', her:'Setzt du, sobald sich der Bestand ändert.', wozu:'Der Service empfiehlt nur, was wirklich da ist.', bsp:'Verfügbar.'}
     ]) };
 
   /* Inseln, deren Datenbank schon eine DB-Lektion erklärt: dieselben Karten */
