@@ -12041,7 +12041,7 @@ var TSISL_TEAM_ONB_V2=[
     /* Unter "Deine Gerichte & Getränke. Spalte für Spalte." (DB XI) — Ergebnis-Blick, PC rechts, Text links. */
     { after:'tsshop--db8_gerichte', side:'right', img:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/gerichte-db-pc.webp', shot:'https://tastyrob123.github.io/kurs-code/img/gerichte-mac/scroll/gerichte-db.webp', cap:'Gerichte & Getränke',
       html:'<h3 class="ts2mac-h">Deine ganze Karte, <span class="g">durchgerechnet.</span></h3>'
-        +'<p class="ts2mac-p">In DB XI liegt jedes Gericht und jedes Getränk als eigene Karte: mit Cover, den eingehängten Zutaten und Rezepturen und der zugewiesenen Verpackung. Den Portionspreis holt sich die Datenbank selbst aus den Bausteinen, die du vorher aufgebaut hast.</p>'
+        +'<p class="ts2mac-p">In DB XI liegt jedes Gericht und jedes Getränk als eigene Karte: mit Cover, den eingehängten Zutaten und Rezepturen und der zugewiesenen Verpackung. Den Portionspreis holt sich die Datenbank selbst aus den Bausteinen, die du vorher gefüllt hast.</p>'
         +'<p class="ts2mac-p">Auf jeder Karte stehen die Kennzahlen direkt untereinander: Deckungsbeitrag I, II und III, dazu der Gemeinkosten- und Personalkosten-Anteil pro Produkt. Tauschst du oben eine Zutat, rechnen sich diese Werte sofort neu.</p>'
         +'<p class="ts2mac-p">So liest du pro Gericht auf den Cent ab, was hängen bleibt. Du erkennst sofort, welches Gericht sich trägt und wo die Marge zu dünn wird, und richtest deine Speisekarte danach aus.</p>' }
   ];
@@ -14689,7 +14689,7 @@ var TSISL_TEAM_ONB_V2=[
 </section>
 
 
-<div id="ts11hint"><b>Kommt in Kürze:</b> Die vergrößerte Ansicht zu diesem Baustein wird gerade produziert.</div>
+<div id="ts11hint" style="display:none"></div>
 `;
 
   function injectCSS(){
@@ -15934,9 +15934,9 @@ var TSISL_TEAM_ONB_V2=[
         '<p class="tsif-sub">Jedes Tool „versteht“ deine Anweisung ein bisschen anders. Damit du nicht bei null anfängst, bekommst du fertige Prompt-Vorlagen — Textbausteine, die du nur noch anpasst und einfügst. Für jedes Tool eine eigene.</p>'+
       '</div>'+
       '<div class="gal">'+
-        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Gemini-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Gemini</div><h3>Zutaten &amp; Gerichte</h3><div class="prompt">[ Prompt-Vorlage folgt ]</div></div></div>'+
-        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Higgsfield-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Higgsfield</div><h3>Fotorealistische Objekte</h3><div class="prompt">[ Prompt-Vorlage folgt ]</div></div></div>'+
-        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Midjourney-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Midjourney</div><h3>Banner &amp; Landscapes</h3><div class="prompt">[ Prompt-Vorlage folgt ]</div></div></div>'+
+        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Gemini-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Gemini</div><h3>Zutaten &amp; Gerichte</h3><div class="prompt">[Gericht oder Zutat], fertig angerichtet auf einem schwarzen Teller, von schräg oben fotografiert, auf glänzend schwarzem Untergrund mit leichter Spiegelung, reiner schwarzer Hintergrund, weiches Studiolicht von oben, fotorealistisch, Querformat 3:2, keine Schrift.</div></div></div>'+
+        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Higgsfield-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Higgsfield</div><h3>Fotorealistische Objekte</h3><div class="prompt">[Objekt, zum Beispiel eine Bowl aus Pappe mit Deckel] in der Bildmitte, auf glänzend schwarzem Untergrund mit leichter Spiegelung, reiner schwarzer Hintergrund, weiches Studiolicht von oben, fotorealistisches Produktfoto, Querformat 3:2, keine Schrift, kein Logo.</div></div></div>'+
+        '<div class="gcard"><div class="ph"><div class="ph-in"><span class="ph-pill">Cover</span><span class="ph-cap">Midjourney-Beispiel</span></div></div><div class="gbody"><div class="gtool">Prompt-Vorlage · Midjourney</div><h3>Banner &amp; Landscapes</h3><div class="prompt">[Motiv, zum Beispiel eine ruhige Küste in der Dämmerung], warmes Licht, gedeckte Farben, filmischer Look, viel ruhige Fläche für Text --ar 3:1 --style raw</div></div></div>'+
       '</div>'+
     '</section>'+
 
