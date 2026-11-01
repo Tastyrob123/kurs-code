@@ -151,6 +151,13 @@ window.__tsMO = function(cb){
       if(bg && bg.indexOf('url(')>-1){ var m=bg.match(/url\(["']?([^"')]+)["']?\)/); if(m && m[1].indexOf('data:')!==0) urls[m[1]]=1; }
     }
     Object.keys(urls).forEach(function(u){ var b=new Image(); b.src=u; if(!(b.complete && b.naturalWidth>0)) offen.push(b); });
+    /* Merken, welche Bilder diese Seite im ersten Bild braucht: beim naechsten Aufruf laedt der
+       Starter sie sofort (tools/teile-lader.js, erstbilder), noch bevor die Module laufen. */
+    try{
+      var alle=[]; for(var a=0;a<imgs.length;a++){ var ia=imgs[a], ra=ia.getBoundingClientRect(); if(ra.width<8 || ra.height<8 || ra.bottom<=0 || ra.top>=vh || ra.right<=0 || ra.left>=vw) continue; var su=ia.currentSrc||ia.src; if(su && su.indexOf('data:')!==0 && alle.indexOf(su)<0) alle.push(su); }
+      Object.keys(urls).forEach(function(u){ if(alle.indexOf(u)<0) alle.push(u); });
+      localStorage.setItem('ts-eb:'+(vw<700?'m':'d')+(location.pathname.replace(/\/+$/,'')||'/'), JSON.stringify(alle.slice(0,8)));
+    }catch(e){}
     if(!offen.length){ reveal(); return; }
     var n=offen.length;
     function eins(){ if(--n<=0) reveal(); }

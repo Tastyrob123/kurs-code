@@ -45,3 +45,17 @@ Neuladen und beim Zeigen auf einen Link). Parser: `tools/vendor/acorn.js` +
 - `teile/` ist generiert: nie von Hand ändern, nie löschen (alte Teile bleiben für Browser
   mit altem Kern im Cache erreichbar).
 - Modul-Chats schreiben weiter nur in `kurs.js`/`kurs.css` und rollen mit `./deploy.sh` aus.
+
+## Schneller Seitenstart (seit 01.11.2026, zweiter Schritt)
+
+- **Kern in mehreren Dateien** (`teile/kern-<hash>.js`, je Kern-Stück eine): Nach einem
+  Ausrollen lädt der Browser nur die Stücke neu, die sich geändert haben.
+- **Erstes Bild sofort:** `tools/erstbild.json` sagt je Seite, welche Bilder im ersten Bild
+  stehen (die Titelbilder setzen die Module erst nach der React-Übernahme ein). Der Starter
+  lädt sie beim Seitenstart vorab. Neu erzeugen nach neuen Seiten oder neuen Titelbildern:
+  `node tools/erstbild.mjs` (eine Chrome-Instanz, ~5 Min). Fehlt ein Eintrag, wird das Bild
+  wie früher später geladen; jedes Gerät merkt sich die echten Bilder je Seite zusätzlich.
+- **Nächste Lektion vorbereitet:** Steht die Seite, bereitet Chrome/Edge die Seite hinter
+  `#ts-next` unsichtbar vor (Speculation Rules, auch für jeden Link, auf dem der Zeiger kurz
+  ruht). Der Klick zeigt sie sofort. Die Module dort laufen erst beim Zeigen, damit Titel-
+  Animation und Auftritte sichtbar bleiben. Safari: Titelbild + Teile der nächsten Seite vorab.

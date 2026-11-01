@@ -3,7 +3,8 @@
    (tools/teile.cjs) als kurs.min.js ausgeliefert.
 
    1. Laedt SOFORT (parallel zu allem anderen) den Kern teile/kern-<hash>.js
-      und die Seitenteile, die diese Adresse braucht (rel=preload).
+      (seit 01.11.2026 mehrere Dateien) und die Seitenteile, die diese Adresse
+      braucht (rel=preload), dazu die Bilder im ersten Bild (tools/erstbild.json).
    2. Fuehrt sie erst aus, wenn super.so (React) die Seite uebernommen hat.
       Vorher veraendertes HTML liess React auf JEDER Seite mit Fehler #418
       abbrechen und die ganze Seite im Browser neu zeichnen (gemessen
@@ -14,12 +15,12 @@
    ============================================================ */
 (function(){
   if(window.__tsTeile) return;
-  var M=__TS_TEILE__, T=M.t;
+  var M=__TS_TEILE__, T=M.t, K=[].concat(M.k);
   var cs=document.currentScript, base='https://tastyrob123.github.io/kurs-code/';
   if(cs && cs.src && /kurs\.min\.js/.test(cs.src)) base=cs.src.replace(/kurs\.min\.js.*$/,'');
   var RE=T.map(function(t){ return t[0].map(function(r){ try{ return new RegExp(r[0],r[1]); }catch(e){ return /$^/; } }); });
   var st={}, offen=0, warte=[], frei=false, schlange=[];
-  window.__tsTeile={liste:T, kern:M.k, status:st};
+  window.__tsTeile={liste:T, kern:K, status:st};
 
   /* Ereignis-Bruecke: Code, der nach DOMContentLoaded/load ausgefuehrt wird,
      bekommt diese Ereignisse trotzdem (sonst wuerde ein Block, der darauf wartet, nie starten). */
@@ -58,6 +59,27 @@
      (z. B. window.__tsn4). Eine leere Aenderung im body loest genau diesen Aufbau aus. */
   function anstossen(){ try{ var b=document.body; if(!b) return; var c=document.createComment('ts'); b.appendChild(c); b.removeChild(c); }catch(e){} }
   function vorladen(f){ var l=document.createElement('link'); l.rel='preload'; l.as='script'; l.href=base+f; kopf.appendChild(l); }
+
+  /* Erstes Bild: Die Titelbilder setzen die Seitenmodule erst nach der React-Uebernahme ein.
+     Ohne Vorladen kam die Anfrage 0,4 bis 1,3 s zu spaet und hielt den Schleier zu (gemessen
+     01.11.2026). Quelle: was dieses Geraet auf der Seite zuletzt wirklich sah (localStorage,
+     schreibt der Seitenschleier), sonst die Liste tools/erstbild.json (M.b). */
+  var B=M.b||{}, handy=(window.innerWidth||1000)<700, bildDa={};
+  function erstbilder(p){
+    p=(p||'/').replace(/\/+$/,'')||'/';
+    var l=null; try{ l=JSON.parse(localStorage.getItem('ts-eb:'+(handy?'m':'d')+p)||'null'); }catch(e){}
+    if(!l){ var t=(handy?B.m:B.d)||{}; l=t[p]||null; }
+    return (l||[]).map(function(u){ return u.charAt(0)==='~' ? base+u.slice(1) : u; });
+  }
+  function bildVorladen(p, jetzt){
+    erstbilder(p).forEach(function(u){
+      if(bildDa[u]) return; bildDa[u]=1;
+      if(jetzt){ var l=document.createElement('link'); l.rel='preload'; l.as='image'; l.href=u; try{ l.fetchPriority='high'; }catch(e){} kopf.appendChild(l); }
+      else { var im=new Image(); try{ im.fetchPriority='low'; }catch(e){} im.decoding='async'; im.src=u; }
+    });
+  }
+  window.__tsErstbilder=erstbilder;
+  bildVorladen(location.pathname, true);
   function ausfuehren(f){
     offen++;
     var s=document.createElement('script'); s.src=base+f; s.async=true;
@@ -75,7 +97,7 @@
     fertig();
   }
   window.__tsTeileLade=lade;
-  vorladen(M.k);
+  K.forEach(vorladen);
   lade(location.pathname);
 
   /* Warten, bis React die Seite uebernommen hat (Wurzel nicht mehr "dehydriert",
@@ -90,16 +112,26 @@
   }
   if(document.readyState!=='loading') tDcl=performance.now();
   else dAdd.call(document,'DOMContentLoaded',function(){ tDcl=performance.now(); });
-  (function warte(){
+  /* Unsichtbar vorbereitete Seite (Prerender, siehe unten): React uebernimmt im Hintergrund, die
+     Module laufen aber erst im Moment des Zeigens. Sonst liefen Titel-Animation und Auftritte
+     unsichtbar ab. Bilder und Teile liegen dann schon im Speicher, die Seite steht sofort. */
+  var H0=document.documentElement;
+  if(document.prerendering){
+    H0.classList.add('ts-pre');
+    dAdd.call(document,'prerenderingchange',function(){ H0.classList.remove('ts-pre'); t0=performance.now(); warteReact(); },{once:true});
+  }
+  function warteReact(){
+    if(document.prerendering) return;
     if(uebernommen() || performance.now()-t0>5000){
       frei=true; window.__tsStartMs=Math.round(performance.now());
-      ausfuehren(M.k);
+      K.forEach(ausfuehren);
       var q=schlange; schlange=[]; for(var i=0;i<q.length;i++) ausfuehren(q[i]);
       fertig();
       return;
     }
-    setTimeout(warte, 12);
-  })();
+    setTimeout(warteReact, 12);
+  }
+  warteReact();
 
   /* Seitenwechsel ohne Neuladen (super.so/Next): pushState/replaceState/popstate + Rueckfall-Abfrage */
   var last=location.pathname;
@@ -111,10 +143,44 @@
   wAdd.call(window,'popstate',chk);
   setInterval(chk,300);
   /* Vorab: Zeigt jemand auf einen Link, liegen dessen Teile schon bereit, bevor er klickt. */
+  var vorT=null;
   function vor(ev){
     var a=ev.target && ev.target.closest ? ev.target.closest('a[href]') : null; if(!a) return;
-    try{ var u=new URL(a.href, location.href); if(u.origin===location.origin) lade(u.pathname); }catch(e){}
+    try{ var u=new URL(a.href, location.href); if(u.origin===location.origin){ lade(u.pathname);
+      /* Titelbild erst, wenn der Zeiger kurz ruht (nicht beim Ueberstreichen der Seitenleiste) */
+      clearTimeout(vorT); vorT=setTimeout(function(){ bildVorladen(u.pathname, false); }, ev.type==='pointerover' ? 150 : 0); } }catch(e){}
   }
+  dAdd.call(document,'pointerout',function(){ clearTimeout(vorT); },{passive:true,capture:true});
+
+  /* Naechste Lektion vorbereiten (01.11.2026): Jeder Seitenwechsel ist ein voller Seitenaufruf
+     (gemessen: Klick auf Weiter bis alles steht 1,6-1,8 s). Taucht der Weiter-Knopf auf, laedt der
+     Browser die naechste Seite unsichtbar komplett fertig (Chrome/Edge: Speculation Rules), der
+     Klick zeigt sie dann sofort. Safari und andere: Titelbild + Teile der naechsten Seite vorab.
+     Fuer alle anderen Links: fertig laden, sobald der Zeiger kurz darauf ruht. */
+  var spec=false, SPEC_AN=false;   /* Schritt 2 des Ausrollens schaltet die Vorbereitung ein */
+  try{ spec=SPEC_AN && !!(HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')); }catch(e){}
+  function regel(obj){ var s=document.createElement('script'); s.type='speculationrules'; s.textContent=JSON.stringify(obj); kopf.appendChild(s); }
+  /* Eine Seite, die selbst gerade unsichtbar vorbereitet wird, bereitet erst nach dem Zeigen weiter vor. */
+  function sichtbarDann(fn){ if(document.prerendering) dAdd.call(document,'prerenderingchange',fn,{once:true}); else fn(); }
+  if(spec) sichtbarDann(function(){
+    try{ regel({prerender:[{source:'document', where:{and:[{href_matches:'/*'},{not:{href_matches:'/_next/*'}},{not:{selector_matches:'[target=_blank], [download]'}}]}, eagerness:'moderate'}]}); }catch(e){}
+  });
+  var weiterFertig={};
+  function weiterVorbereiten(){
+    var a=document.getElementById('ts-next'); if(!a) return;
+    var u; try{ u=new URL(a.href, location.href); }catch(e){ return; }
+    if(u.origin!==location.origin || u.pathname===location.pathname || weiterFertig[u.pathname]) return;
+    weiterFertig[u.pathname]=1;
+    lade(u.pathname); bildVorladen(u.pathname, false);
+    if(spec){ try{ regel({prerender:[{source:'list', urls:[u.pathname], eagerness:'immediate'}]}); }catch(e){} }
+  }
+  /* erst wenn die eigene Seite steht und ihre Auftritte gelaufen sind, in einer ruhigen Pause,
+     damit die naechste ihr weder Leitung noch Rechenzeit wegnimmt */
+  function ruhigDann(fn){ setTimeout(function(){ if(window.requestIdleCallback) requestIdleCallback(fn,{timeout:2000}); else fn(); }, 1200); }
+  var wv=false;
+  function weiterStart(){ if(wv) return; wv=true; sichtbarDann(function(){ ruhigDann(function(){ weiterVorbereiten(); setInterval(weiterVorbereiten, 1500); }); }); }
+  dAdd.call(document,'ts:reveal',weiterStart);
+  if(document.documentElement.classList.contains('ts-reveal')) weiterStart();
   dAdd.call(document,'pointerover',vor,{passive:true,capture:true});
   dAdd.call(document,'touchstart',vor,{passive:true,capture:true});
   dAdd.call(document,'focusin',vor,true);

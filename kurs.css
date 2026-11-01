@@ -28,6 +28,9 @@
 html:not(.ts-reveal) main.super-content[class*="page__"] > :not(nav):not(.notion-header) { opacity:0; animation:tsVeilFail .3s 5s ease forwards; }
 html.ts-reveal main.super-content > .notion-root { opacity:1 !important; animation:none !important; }
 @keyframes tsVeilFail { to { opacity:1; } }
+/* Unsichtbar vorbereitete Seite (Prerender, tools/teile-lader.js): Der 5-s-Rueckfall darf dort nicht
+   ablaufen, die Module laufen erst beim Zeigen. html.ts-pre setzt der Starter nur in dieser Zeit. */
+html.ts-pre:not(.ts-reveal) main.super-content[class*="page__"] > :not(nav):not(.notion-header) { animation:none; }
 
 /* TS Video-Veil (Ergaenzung 02.08.2026): Die drei Roh-Video-Bloecke, die
    von den MacBook-Cover-Modulen (.tsmac) ersetzt werden, sind bis zum

@@ -1,0 +1,445 @@
+{
+ "stand": "2026-11-01",
+ "basis": "https://tastyrob123.github.io/kurs-code/",
+ "d": {
+  "/": [
+   "~assets/4ezi8i.webp"
+  ],
+  "/abschluss-was-du-am-ende-kannst": [
+   "~img/modul-0/cover-ab.webp"
+  ],
+  "/allergene-bersicht": [
+   "~assets/850o43.webp"
+  ],
+  "/die-einstiegsfragen": [
+   "~img/modul-0/cover-l04.webp"
+  ],
+  "/food-drinksquartier-inhalte-interface": [
+   "~img/food-drinks/hero.webp"
+  ],
+  "/gemeinkosten-mitarbeiterlhne": [
+   "~assets/sscg6x.webp"
+  ],
+  "/gerichte-getrnke-finaler-schritt": [
+   "~assets/sceu4c.webp"
+  ],
+  "/interface-bau-grundstruktur-widgets": [
+   "~assets/fz54d3.webp"
+  ],
+  "/inventurliste": [
+   "~assets/9ah8jn.webp"
+  ],
+  "/key-metrics": [
+   "~img/key-metrics/hero-cover-placeholder.svg"
+  ],
+  "/lektionen/agent-oder-automation": [
+   "~img/modul-0/cover-l06.webp"
+  ],
+  "/lektionen/bilder-generieren": [
+   "~img/m6/cover-67.webp"
+  ],
+  "/lektionen/checklisten-produktion": [
+   "~img/ops/checklisten/prep-table.webp",
+   "~img/ops/checklisten/kuehlvitrine.webp",
+   "~img/ops/checklisten/glaeserspueler.webp"
+  ],
+  "/lektionen/claude-startklar-machen": [
+   "~img/m6/cover-61.webp"
+  ],
+  "/lektionen/daten-eintragen-und-einlesen": [
+   "~img/modul-1/cover-l4.webp"
+  ],
+  "/lektionen/datenbanken-automatisch-aktualisieren": [
+   "~img/modul-4/cover-l44.webp"
+  ],
+  "/lektionen/datenschutz-und-recht": [
+   "~img/m5/cover-l58.webp"
+  ],
+  "/lektionen/dein-backoffice-befragen": [
+   "~img/modul-4/cover-l43.webp"
+  ],
+  "/lektionen/dein-backoffice-bekommt-hnde": [
+   "~img/modul-4/cover-l40.webp"
+  ],
+  "/lektionen/dein-reservierungs-prozess": [
+   "~img/m5/cover-l51.webp"
+  ],
+  "/lektionen/dein-weg-durch-den-kurs": [
+   "~img/modul-0/cover-l07.webp"
+  ],
+  "/lektionen/deine-sorgen-ehrlich-beantwortet": [
+   "~img/modul-0/cover-l05.webp"
+  ],
+  "/lektionen/der-schreib-agent": [
+   "~img/m5/cover-l54.webp"
+  ],
+  "/lektionen/der-telefon-agent": [
+   "~img/m5/cover-l55.webp"
+  ],
+  "/lektionen/designanforderungen-definieren": [
+   "~img/m6/cover-64.webp"
+  ],
+  "/lektionen/die-systemkarte-anlegen": [
+   "~img/modul-4/cover-l42.webp"
+  ],
+  "/lektionen/die-zentrale": [
+   "~img/m5/cover-l52.webp"
+  ],
+  "/lektionen/erinnerung-und-no-shows": [
+   "~img/m5/cover-l56.webp"
+  ],
+  "/lektionen/go-live-und-betrieb": [
+   "~img/m5/cover-l57.webp"
+  ],
+  "/lektionen/kamerafahrt-planen": [
+   "~img/m6/cover-65.webp"
+  ],
+  "/lektionen/l11-die-notion-philosophie-das-canvas-prinzip": [
+   "~img/modul-1/cover-l1.webp"
+  ],
+  "/lektionen/l12-layout-medien-strukturierungs-tricks": [
+   "~img/modul-1/cover-l2.webp"
+  ],
+  "/lektionen/l13-einfhrung-in-datenbanken": [
+   "~img/modul-1/cover-l3.webp"
+  ],
+  "/lektionen/l14-relationen-rollups": [
+   "~img/modul-1/cover-l5.webp"
+  ],
+  "/lektionen/l15-formeln-20-logik-bausteine": [
+   "~img/modul-1/cover-l6.webp"
+  ],
+  "/lektionen/l16-ansichten-self-referencing-filter": [
+   "~img/modul-1/cover-l7.webp"
+  ],
+  "/lektionen/l17-native-automations-buttons": [
+   "~img/modul-1/cover-l8.webp"
+  ],
+  "/lektionen/l18-system-architektur-dashboard-design": [
+   "~img/modul-1/cover-l10.webp"
+  ],
+  "/lektionen/lieferscheine-und-preise-einpflegen": [
+   "~img/modul-4/cover-l45.webp"
+  ],
+  "/lektionen/mobil-check": [
+   "~img/m6/cover-612.webp"
+  ],
+  "/lektionen/notion-agents-im-betrieb-einsetzen": [
+   "~img/modul-4/cover-l46.webp"
+  ],
+  "/lektionen/notion-automationen-bauen": [
+   "~img/modul-4/cover-l47.webp"
+  ],
+  "/lektionen/notion-mit-claude-code-verbinden": [
+   "~img/modul-4/cover-l41.webp"
+  ],
+  "/lektionen/online-hosten": [
+   "~img/m6/cover-613.webp"
+  ],
+  "/lektionen/rechte-teamspaces-und-sicherheit": [
+   "~img/modul-1/cover-l9.webp"
+  ],
+  "/lektionen/reservierungen-ohne-anruf": [
+   "~img/m5/cover-l50.webp"
+  ],
+  "/lektionen/schriftarten-anpassen": [
+   "~img/m6/cover-611.webp"
+  ],
+  "/lektionen/speisekarte-und-reservierung": [
+   "~img/m6/cover-610.webp"
+  ],
+  "/lektionen/struktur-ausdenken": [
+   "~img/m6/cover-63.webp"
+  ],
+  "/lektionen/system-und-werkzeug": [
+   "~img/modul-0/cover-l03.webp"
+  ],
+  "/lektionen/texte-definieren": [
+   "~img/m6/cover-69.webp"
+  ],
+  "/lektionen/ui-components-laden": [
+   "~img/m6/cover-66.webp"
+  ],
+  "/lektionen/verfuegbarkeit-und-buchung": [
+   "~img/m5/cover-l53.webp"
+  ],
+  "/lektionen/videos-generieren-und-einsetzen": [
+   "~img/m6/cover-68.webp"
+  ],
+  "/lektionen/website-pflegen": [
+   "~img/m6/cover-614.webp"
+  ],
+  "/lektionen/website-skills-laden": [
+   "~img/m6/cover-62.webp"
+  ],
+  "/lektionen/wer-macht-was-im-backoffice": [
+   "~img/modul-4/cover-l49.webp"
+  ],
+  "/lektionen/wiederkehrende-routinen-einrichten": [
+   "~img/modul-4/cover-l48.webp"
+  ],
+  "/lektionen/wo-ki-dir-zeit-und-geld-spart": [
+   "~img/modul-0/cover-l02.webp"
+  ],
+  "/lieferpartner-ansprechpartner-lieferantenvertrge": [
+   "~assets/ecvbxi.webp"
+  ],
+  "/mehrwert-zielbild": [
+   "~assets/botkum.webp"
+  ],
+  "/menkalkulation-catering-rechner": [
+   "https://tastyrob123.github.io/kurs/img/menuekalkulation/hero.webp"
+  ],
+  "/modul-0-einleitung-was-dich-erwartet": [
+   "~img/modul-0/cover-m0.webp"
+  ],
+  "/modul-1-notion-grundlagen-3-lernpfade": [
+   "~img/modul-1/cover-m1.webp"
+  ],
+  "/modul-2-das-notion-ai-backoffice-system": [
+   "~assets/d9udfg.webp"
+  ],
+  "/modul-4-claude-claude-code": [
+   "~img/modul-4/cover-m4.webp"
+  ],
+  "/modul-5-claude-code-notion": [
+   "~img/m5/cover-mod.webp"
+  ],
+  "/modul-6-weitere-tools-projektmanagement": [
+   "~img/m6/cover-60.webp"
+  ],
+  "/multistandort-erweiterung-optional": [
+   "~img/multistandort/hero-cover-placeholder.svg"
+  ],
+  "/notion-ai-fr-unser-system": [
+   "~img/notion-ai/hero-cover-placeholder.svg"
+  ],
+  "/rezepturen": [
+   "~assets/usatux.webp"
+  ],
+  "/was-dich-in-diesem-kurs-erwartet": [
+   "~img/modul-0/cover-l01.webp"
+  ],
+  "/zutatenliste": [
+   "~assets/etxqcu.webp"
+  ]
+ },
+ "m": {
+  "/": [
+   "~assets/4ezi8i.webp"
+  ],
+  "/abschluss-was-du-am-ende-kannst": [
+   "~img/modul-0/cover-ab.webp"
+  ],
+  "/allergene-bersicht": [
+   "~assets/850o43.webp"
+  ],
+  "/die-einstiegsfragen": [
+   "~img/modul-0/cover-l04.webp"
+  ],
+  "/food-drinksquartier-inhalte-interface": [
+   "~img/food-drinks/hero.webp"
+  ],
+  "/gemeinkosten-mitarbeiterlhne": [
+   "~assets/sscg6x.webp"
+  ],
+  "/gerichte-getrnke-finaler-schritt": [
+   "~assets/sceu4c.webp"
+  ],
+  "/interface-bau-grundstruktur-widgets": [
+   "~assets/fz54d3.webp"
+  ],
+  "/inventurliste": [
+   "~assets/9ah8jn.webp"
+  ],
+  "/key-metrics": [
+   "~img/key-metrics/hero-cover-placeholder.svg"
+  ],
+  "/lektionen/agent-oder-automation": [
+   "~img/modul-0/cover-l06.webp"
+  ],
+  "/lektionen/bilder-generieren": [
+   "~img/m6/cover-67.webp"
+  ],
+  "/lektionen/claude-startklar-machen": [
+   "~img/m6/cover-61.webp"
+  ],
+  "/lektionen/daten-eintragen-und-einlesen": [
+   "~img/modul-1/cover-l4.webp"
+  ],
+  "/lektionen/datenbanken-automatisch-aktualisieren": [
+   "~img/modul-4/cover-l44.webp"
+  ],
+  "/lektionen/datenschutz-und-recht": [
+   "~img/m5/cover-l58.webp"
+  ],
+  "/lektionen/dein-backoffice-befragen": [
+   "~img/modul-4/cover-l43.webp"
+  ],
+  "/lektionen/dein-backoffice-bekommt-hnde": [
+   "~img/modul-4/cover-l40.webp"
+  ],
+  "/lektionen/dein-reservierungs-prozess": [
+   "~img/m5/cover-l51.webp"
+  ],
+  "/lektionen/dein-weg-durch-den-kurs": [
+   "~img/modul-0/cover-l07.webp"
+  ],
+  "/lektionen/deine-sorgen-ehrlich-beantwortet": [
+   "~img/modul-0/cover-l05.webp"
+  ],
+  "/lektionen/der-schreib-agent": [
+   "~img/m5/cover-l54.webp"
+  ],
+  "/lektionen/der-telefon-agent": [
+   "~img/m5/cover-l55.webp"
+  ],
+  "/lektionen/designanforderungen-definieren": [
+   "~img/m6/cover-64.webp"
+  ],
+  "/lektionen/die-systemkarte-anlegen": [
+   "~img/modul-4/cover-l42.webp"
+  ],
+  "/lektionen/die-zentrale": [
+   "~img/m5/cover-l52.webp"
+  ],
+  "/lektionen/erinnerung-und-no-shows": [
+   "~img/m5/cover-l56.webp"
+  ],
+  "/lektionen/go-live-und-betrieb": [
+   "~img/m5/cover-l57.webp"
+  ],
+  "/lektionen/kamerafahrt-planen": [
+   "~img/m6/cover-65.webp"
+  ],
+  "/lektionen/l11-die-notion-philosophie-das-canvas-prinzip": [
+   "~img/modul-1/cover-l1.webp"
+  ],
+  "/lektionen/l12-layout-medien-strukturierungs-tricks": [
+   "~img/modul-1/cover-l2.webp"
+  ],
+  "/lektionen/l13-einfhrung-in-datenbanken": [
+   "~img/modul-1/cover-l3.webp"
+  ],
+  "/lektionen/l14-relationen-rollups": [
+   "~img/modul-1/cover-l5.webp"
+  ],
+  "/lektionen/l15-formeln-20-logik-bausteine": [
+   "~img/modul-1/cover-l6.webp"
+  ],
+  "/lektionen/l16-ansichten-self-referencing-filter": [
+   "~img/modul-1/cover-l7.webp"
+  ],
+  "/lektionen/l17-native-automations-buttons": [
+   "~img/modul-1/cover-l8.webp"
+  ],
+  "/lektionen/l18-system-architektur-dashboard-design": [
+   "~img/modul-1/cover-l10.webp"
+  ],
+  "/lektionen/lieferscheine-und-preise-einpflegen": [
+   "~img/modul-4/cover-l45.webp"
+  ],
+  "/lektionen/mobil-check": [
+   "~img/m6/cover-612.webp"
+  ],
+  "/lektionen/notion-agents-im-betrieb-einsetzen": [
+   "~img/modul-4/cover-l46.webp"
+  ],
+  "/lektionen/notion-automationen-bauen": [
+   "~img/modul-4/cover-l47.webp"
+  ],
+  "/lektionen/notion-mit-claude-code-verbinden": [
+   "~img/modul-4/cover-l41.webp"
+  ],
+  "/lektionen/online-hosten": [
+   "~img/m6/cover-613.webp"
+  ],
+  "/lektionen/rechte-teamspaces-und-sicherheit": [
+   "~img/modul-1/cover-l9.webp"
+  ],
+  "/lektionen/reservierungen-ohne-anruf": [
+   "~img/m5/cover-l50.webp"
+  ],
+  "/lektionen/schriftarten-anpassen": [
+   "~img/m6/cover-611.webp"
+  ],
+  "/lektionen/speisekarte-und-reservierung": [
+   "~img/m6/cover-610.webp"
+  ],
+  "/lektionen/struktur-ausdenken": [
+   "~img/m6/cover-63.webp"
+  ],
+  "/lektionen/system-und-werkzeug": [
+   "~img/modul-0/cover-l03.webp"
+  ],
+  "/lektionen/texte-definieren": [
+   "~img/m6/cover-69.webp"
+  ],
+  "/lektionen/ui-components-laden": [
+   "~img/m6/cover-66.webp"
+  ],
+  "/lektionen/verfuegbarkeit-und-buchung": [
+   "~img/m5/cover-l53.webp"
+  ],
+  "/lektionen/videos-generieren-und-einsetzen": [
+   "~img/m6/cover-68.webp"
+  ],
+  "/lektionen/website-pflegen": [
+   "~img/m6/cover-614.webp"
+  ],
+  "/lektionen/website-skills-laden": [
+   "~img/m6/cover-62.webp"
+  ],
+  "/lektionen/wer-macht-was-im-backoffice": [
+   "~img/modul-4/cover-l49.webp"
+  ],
+  "/lektionen/wiederkehrende-routinen-einrichten": [
+   "~img/modul-4/cover-l48.webp"
+  ],
+  "/lektionen/wo-ki-dir-zeit-und-geld-spart": [
+   "~img/modul-0/cover-l02.webp"
+  ],
+  "/lieferpartner-ansprechpartner-lieferantenvertrge": [
+   "~assets/ecvbxi.webp"
+  ],
+  "/mehrwert-zielbild": [
+   "~assets/botkum.webp"
+  ],
+  "/menkalkulation-catering-rechner": [
+   "https://tastyrob123.github.io/kurs/img/menuekalkulation/hero.webp"
+  ],
+  "/modul-0-einleitung-was-dich-erwartet": [
+   "~img/modul-0/cover-m0.webp"
+  ],
+  "/modul-1-notion-grundlagen-3-lernpfade": [
+   "~img/modul-1/cover-m1.webp"
+  ],
+  "/modul-2-das-notion-ai-backoffice-system": [
+   "~assets/d9udfg.webp"
+  ],
+  "/modul-4-claude-claude-code": [
+   "~img/modul-4/cover-m4.webp"
+  ],
+  "/modul-5-claude-code-notion": [
+   "~img/m5/cover-mod.webp"
+  ],
+  "/modul-6-weitere-tools-projektmanagement": [
+   "~img/m6/cover-60.webp"
+  ],
+  "/multistandort-erweiterung-optional": [
+   "~img/multistandort/hero-cover-placeholder.svg"
+  ],
+  "/notion-ai-fr-unser-system": [
+   "~img/notion-ai/hero-cover-placeholder.svg"
+  ],
+  "/rezepturen": [
+   "~assets/usatux.webp"
+  ],
+  "/was-dich-in-diesem-kurs-erwartet": [
+   "~img/modul-0/cover-l01.webp"
+  ],
+  "/zutatenliste": [
+   "~assets/etxqcu.webp"
+  ]
+ }
+}

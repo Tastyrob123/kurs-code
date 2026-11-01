@@ -181,9 +181,21 @@ for (const b of blocks) {
   if (!aktuell) { aktuell = { pos: b.pos, code: [] }; stuecke.push(aktuell); }
   aktuell.code.push(b.fcode);
 }
+/* Kern in mehreren Dateien (01.11.2026): je Kern-Stueck eine Datei mit Inhalts-Hash. Nach einem
+   Ausrollen laedt der Browser nur die Stuecke neu, die sich geaendert haben (bisher jedes Mal den
+   ganzen Kern, 556 KB). Sehr kleine Stuecke reisen mit dem naechsten mit. */
 const namen = JSON.stringify([...globaleNamen]);
-roh.kern = namen + '.forEach(function(n){ if(!(n in window)) window[n]=void 0; });\n'
-  + '(window.__tsQ=window.__tsQ||[]).push([' + stuecke.map((k) => eintrag(k.pos, k.code.join('\n'))).join(',\n') + ']);\n';
+const kernDateien = [];
+let sammel = [];
+stuecke.forEach((k, i) => {
+  sammel.push(k);
+  const laenge = sammel.reduce((a, x) => a + x.code.join('\n').length, 0);
+  if (laenge >= 6000 || i === stuecke.length - 1) { kernDateien.push(sammel); sammel = []; }
+});
+kernDateien.forEach((gruppe, i) => {
+  roh['kern' + i] = (i === 0 ? namen + '.forEach(function(n){ if(!(n in window)) window[n]=void 0; });\n' : '')
+    + '(window.__tsQ=window.__tsQ||[]).push([' + gruppe.map((k) => eintrag(k.pos, k.code.join('\n'))).join(',\n') + ']);\n';
+});
 /* Starter = kurs.min.js: Vorab-Bloecke + Lader. Manifest wird nach dem Minifizieren eingesetzt. */
 let starter = '';
 for (const b of blocks) if (b.vorab) starter += b.code + '\n';
@@ -204,16 +216,26 @@ gl.forEach((g, i) => {
   manifest.push({ first: g.first, re: g.gates.map((x) => [x.pattern, x.flags]), f: file });
 });
 manifest.sort((a, b) => a.first - b.first);
-const kernHash = crypto.createHash('sha1').update(min.kern).digest('hex').slice(0, 10);
-const kernFile = 'teile/kern-' + kernHash + '.js';
-used.add('kern-' + kernHash + '.js');
-if (!PRUEFEN) fs.writeFileSync(path.join(ROOT, kernFile), min.kern);
+const kernFiles = [];
+let kernBytes = 0;
+kernDateien.forEach((g, i) => {
+  const code = min['kern' + i];
+  const kernHash = crypto.createHash('sha1').update(code).digest('hex').slice(0, 10);
+  const kernFile = 'teile/kern-' + kernHash + '.js';
+  used.add('kern-' + kernHash + '.js');
+  if (!PRUEFEN) fs.writeFileSync(path.join(ROOT, kernFile), code);
+  kernFiles.push(kernFile); kernBytes += code.length;
+});
 if (!min.starter.includes('__TS_TEILE__')) throw new Error('Lader-Platzhalter fehlt im Starter');
-const starterMin = min.starter.replace('__TS_TEILE__', JSON.stringify({ k: kernFile, t: manifest.map((m) => [m.re, m.f]) }));
+/* Erstes Bild je Seite (tools/erstbild.json, erzeugt von tools/erstbild.mjs): der Starter laedt diese
+   Bilder sofort beim Seitenstart. Fehlt die Datei, laeuft alles wie vorher. */
+let erstbild = null;
+try { const e = JSON.parse(fs.readFileSync(path.join(__dirname, 'erstbild.json'), 'utf8')); erstbild = { d: e.d || {}, m: e.m || {} }; } catch (e) {}
+const starterMin = min.starter.replace('__TS_TEILE__', JSON.stringify(Object.assign({ k: kernFiles, t: manifest.map((m) => [m.re, m.f]) }, erstbild ? { b: erstbild } : {})));
 if (PRUEFEN) {
   /* Nur pruefen: passt das ausgelieferte kurs.min.js (+ Kern/Teile) zu kurs.js? Nichts schreiben. */
   let alt = ''; try { alt = fs.readFileSync(path.join(ROOT, 'kurs.min.js'), 'utf8'); } catch (e) {}
-  const fehlt = manifest.filter((m) => !fs.existsSync(path.join(ROOT, m.f))).length + (fs.existsSync(path.join(ROOT, kernFile)) ? 0 : 1);
+  const fehlt = manifest.filter((m) => !fs.existsSync(path.join(ROOT, m.f))).length + kernFiles.filter((f) => !fs.existsSync(path.join(ROOT, f))).length;
   process.exit(alt === starterMin && fehlt === 0 ? 0 : 3);
 }
 fs.writeFileSync(path.join(ROOT, 'kurs.min.js'), starterMin);
@@ -228,5 +250,5 @@ for (const f of fs.readdirSync(OUTDIR)) {
 }
 
 const kb = (n) => Math.round(n / 1024) + ' KB';
-console.log('   ✓ Starter kurs.min.js ' + kb(starterMin.length) + ' · Kern ' + kb(min.kern.length) + ' (' + stuecke.length + ' Stuecke) · ' + manifest.length + ' Seitenteile zusammen ' + kb(teilBytes)
+console.log('   ✓ Starter kurs.min.js ' + kb(starterMin.length) + ' · Kern ' + kb(kernBytes) + ' (' + stuecke.length + ' Stuecke in ' + kernFiles.length + ' Dateien) · ' + manifest.length + ' Seitenteile zusammen ' + kb(teilBytes)
   + ' · ' + blocks.filter((b) => b.page).length + '/' + blocks.length + ' Bloecke seitengebunden' + (geteilt ? ' (' + geteilt + ' geteilt -> Kern)' : ''));
