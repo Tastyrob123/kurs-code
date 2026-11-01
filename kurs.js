@@ -15985,7 +15985,7 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tbl abo">'+
         '<table><thead><tr><th>Tool</th><th>Wofür</th><th class="num">Abo&nbsp;(mtl.)</th></tr></thead><tbody>'+
           '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>20&nbsp;$</b><span class="note">US-Preis laut help.openai.com</span></td></tr>'+
-          '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>21,99&nbsp;€</b><span class="note">219,99&nbsp;€ im Jahresabo</span></td></tr>'+
+          '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>21,99&nbsp;€</b><span class="note">laut gemini.google/de</span></td></tr>'+
           '<tr><td>Claude Pro</td><td>Objekte + automatischer Einbau in Notion</td><td class="num"><b>20&nbsp;$</b><span class="note">17&nbsp;$ im Jahresabo</span></td></tr>'+
           '<tr><td>Higgsfield <span class="tier">Starter</span></td><td>Fotorealistische Objekte</td><td class="num"><b>15&nbsp;$</b><span class="note">zzgl. MwSt.</span></td></tr>'+
           '<tr><td>Midjourney <span class="tier">Basic</span></td><td>Banner, Cover, Landscapes</td><td class="num"><b>10&nbsp;$</b><span class="note">8&nbsp;$ im Jahresabo</span></td></tr>'+
