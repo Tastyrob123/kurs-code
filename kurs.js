@@ -29176,6 +29176,25 @@ var TSISL_TEAM_ONB_V2=[
     font:600 11px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s cubic-bezier(.45,0,.55,1),color .3s cubic-bezier(.45,0,.55,1)}
   .tsn2-replay:hover{background:#c7b489;color:#05060b}
 
+  /* Notion-Look in aelteren Nachbauten von Modul 2 (#tscover auf /zutatenliste), Regel Robert 01.11.2026:
+     innerhalb des Notion-Fensters keine Kurs-Gestaltung. Werte aus Roberts Notion (Dark Mode) abgenommen. */
+  /* #tscb-duo sitzt seit dem Umbau vor Abschnitt 03: der alte Negativ-Abstand (-100px) zog 03 in die Animation */
+  .page__zutatenliste #tscb-duo{margin-bottom:0!important}
+  .tscb .tsc-win{font-family:ui-sans-serif,-apple-system,system-ui,"Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif;color:rgb(240,239,237)}
+  .tscb .tsc-win .tsc-h1,.tscb .tsc-win .tsc-pval{color:rgb(240,239,237)}
+  .tscb .tsc-win .tsc-plabel,.tscb .tsc-win .tsc-plabel svg,.tscb .tsc-win .tsc-mi svg,.tscb .tsc-win .tscbb-chip svg{color:rgb(173,169,163)}
+  .tscb .tsc-win .tsc-meta,.tscb .tsc-win .tsc-mi .kbd{color:rgb(125,122,117)}
+  .tscb .tsc-win .tsc-mi{color:rgb(240,239,237)}
+  .tscb .tsc-win .tsc-h1.editing,.tscb .tsc-win .tsc-vbox.editing{box-shadow:0 0 0 1.5px rgba(255,255,255,.28)}
+  .tscb .tsc-win .tsc-h1 .caret,.tscb .tsc-win .tsc-vbox .caret,.tscb .tsc-win .tscbb-slash .caret{background:rgb(240,239,237)}
+  .tscb .tsc-win .tsc-mi.dup.hit,.tscb .tsc-win .tscbb-mi.hit,.tscb .tsc-win .tsc-hi.flash{background:rgba(255,255,243,.082);color:rgb(240,239,237)}
+  .tscb .tsc-win .tsc-ghost{background:rgba(255,255,255,.04);box-shadow:0 0 0 1.5px rgba(255,255,255,.3)}
+  .tscb .tsc-win .tsc-done{display:none!important}
+  .tscb .tsc-win .tscbb-neu,.tscb .tsc-win .tscbb-neuv{background:rgb(39,131,222);color:rgb(243,249,253);height:28px}
+  .tscb .tsc-win .tscbb-neu{border-radius:6px 0 0 6px;font-size:14px;font-weight:500}
+  .tscb .tsc-win .tscbb-neuv{border-radius:0 6px 6px 0}
+  .tscb .tsc-win .tscbb-slash .cmd,.tscb .tsc-win .tscbb-prev b{color:rgb(240,239,237)}
+  .tscb .tsc-win .tscbb-chip{background:rgba(255,255,243,.082);box-shadow:inset 0 0 0 1px rgba(255,255,235,.1);color:rgb(240,239,237)}
   @media(max-width:860px){
     .tsn2-way-in{grid-template-columns:1fr 1fr}
     .tsn2-way a{border-bottom:1px solid rgba(255,255,255,.07)}
