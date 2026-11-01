@@ -24300,112 +24300,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   notion-philosophie-canvas-prinzip — Hero + Einleitung "Denk in Blöcken"
-   Lektion 1.1 · Modul 1 · Notion-Grundlagen (Muster: gerichte-getrnke-finaler-schritt-Hero)
-   ============================================================ */
-(function(){
-  function phHero(){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">L 1.1</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero(); /* Platzhalter bis Robert das echte 3-Laptop-Cover liefert (weisser BG, Freisteller nach Rezept Abschnitt 01) */
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{
-    max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-    text-align:center;
-  }
-  .ts-body h3{
-    font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    font-weight:600;letter-spacing:-.015em;color:#fff;
-    font-size:clamp(25px,2.8vw,32px);line-height:1.2;
-    margin:32px 0 14px;
-  }
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 13px;
-  }
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
-  .ts-body li{
-    font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);
-    margin:0 0 10px;padding-left:22px;position:relative;
-  }
-  .ts-body li::before{
-    content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;
-    background:#c7b489;
-  }
-  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts11intro-css')) return;
-    var s=document.createElement('style'); s.id='ts11intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts11intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.1" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.1</div>'+
-        '<h1 class="ts-hero__title">Denk in <span class="ts-gold">Blöcken</span></h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts11intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts11intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Die meisten Neulinge behandeln Notion wie ein Word-Dokument — eine Seite von oben nach unten beschrieben. Genau das bremst dich aus. Notion besteht aus Blöcken: Jede Zeile, jedes Bild, jede Liste ist ein eigenständiges Teil, das du frei verschieben und neu zusammensetzen kannst.</p>
-  <p>Schau dir mein eigenes Projekt-System an: Der Startbereich oben ist nur drei Blöcke in Spalten — Fortschrittsbalken, Uhr, Wetter. Jeder Block macht eine Sache, zusammen ergeben sie ein Cockpit. Genauso baust du gleich deinen Workspace auf: Seitenleiste links, Editor in der Mitte.</p>
-  <h3>Die drei Blöcke, die du sofort brauchst</h3>
-  <ul>
-    <li>Text und Überschriften — für die Grundstruktur jeder Seite</li>
-    <li>To-Do — für alles, was am Ende abgehakt werden soll</li>
-    <li>Callouts — für Hinweise, die aus dem Text herausstechen sollen</li>
-  </ul>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    multistandort-erweiterung-optional — Abschnitt "Was im Standort liegt"
    Content-Vergleich (kein Katalog-Animationstyp; Sektions-Kopf-Spec aus Katalog 02 übernommen
    für Site-Konsistenz). DREI Spalten (Robert-Korrektur 22.07.2026, Commit-Folge nach f706a7a):
@@ -24812,333 +24706,6 @@ var TSISL_TEAM_ONB_V2=[
      Ausstieg per getElementById), das dedupe()-Element wurde bereits entfernt -> sicher, kein
      Endlos-Loop-Risiko wie beim urspruenglichen Fund. */
   window.__tsMO(function(){ mount(); }).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   notion-philosophie-canvas-prinzip — Erkläranimation "Ein Block, drei Gesichter"
-   Lektion 1.1 · Modul 1 · Notion-Grundlagen
-   Endzustand=Default: Basis zeigt das fertige Bild, .js versteckt initial, .on baut wieder auf.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts11bau{width:min(1000px,95vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts11bau .bau-head{max-width:760px;margin:0 auto 36px;padding:0 24px;text-align:center}
-  #ts11bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts11bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts11bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts11bau h2 .ts-gold{color:#c7b489}
-  #ts11bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:600px}
-  #ts11bau .bau-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:920px;margin:0 auto}
-  #ts11bau .bau-card{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:26px 22px;text-align:center;
-    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
-  /* Endzustand = Default: erst .js versteckt initial, .on baut wieder auf */
-  #ts11bau.js .bau-card{opacity:0;transform:translateY(22px) scale(.97)}
-  #ts11bau.js.on .bau-card{opacity:1;transform:none}
-  #ts11bau.js.on .bau-card:nth-child(1){transition-delay:0ms}
-  #ts11bau.js.on .bau-card:nth-child(2){transition-delay:180ms}
-  #ts11bau.js.on .bau-card:nth-child(3){transition-delay:360ms}
-  #ts11bau .bau-card.lit{border-color:rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.8),0 0 0 1px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.22)}
-  #ts11bau .bau-ico{width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.34);color:#c7b489}
-  #ts11bau .bau-cname{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px}
-  #ts11bau .bau-cdesc{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);margin:0}
-  #ts11bau .bau-foot{display:flex;justify-content:center;margin-top:28px}
-  #ts11bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts11bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  @media(max-width:820px){ #ts11bau .bau-cards{grid-template-columns:1fr} }
-  `;
-
-  var CARDS=[
-    {name:'Text', desc:'Derselbe Block, einfach als Absatz — für alles, was erklärt werden soll.', icon:'<path d="M4 6h16M4 12h16M4 18h10"/>'},
-    {name:'To-Do', desc:'Derselbe Block mit Haken davor — für alles, was abgehakt werden soll.', icon:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/>'},
-    {name:'Callout', desc:'Derselbe Block mit Rahmen und Icon — für alles, was auffallen soll.', icon:'<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M12 10v4M12 16h.01"/>'}
-  ];
-
-  function injectCSS(){
-    if(document.getElementById('ts11bau-css')) return;
-    var s=document.createElement('style'); s.id='ts11bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var cards=CARDS.map(function(c){
-      return '<div class="bau-card"><div class="bau-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+c.icon+'</svg></div><div class="bau-cname">'+c.name+'</div><p class="bau-cdesc">'+c.desc+'</p></div>';
-    }).join('');
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Ein Block, drei Gesichter</div>'+
-      '<h2>Derselbe Block sieht <span class="ts-gold">immer anders</span> aus</h2>'+
-      '<p class="bau-sub">Notion hat keine getrennten Werkzeuge für Text, Aufgaben und Hinweise — es ist derselbe Baustein, nur anders eingestellt.</p>'+
-      '</div>'+
-      '<div class="bau-cards">'+cards+'</div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts11bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    var cards=root.querySelectorAll('.bau-card');
-    cards.forEach(function(c){ c.classList.remove('lit'); });
-    if(reduced) return;
-    cards.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); }, 500+i*250); });
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts11bau')) return;
-    var anchor=document.getElementById('ts11intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts11bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    root.querySelector('#ts11bauReplay').addEventListener('click', function(){ play(root); });
-    if(reduced){ root.classList.add('on'); root.querySelectorAll('.bau-card').forEach(function(c){c.classList.add('lit');}); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   notion-philosophie-canvas-prinzip — Empfehlungs-Kachel "Empfehlung zur Nutzung"
-   Verhalten 1:1 wie Referenz #tszein: Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat,
-   Sync-Highlight + goldene Bézier-Linie. Endzustand=Default (Basis sichtbar, .js versteckt, .in baut auf).
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Erst denken, dann tippen','Blöcke klein halten','Callouts sparsam einsetzen','Seiten nach Sinn benennen'];
-  var TEXTS=[
-    'Bevor du eine Seite anlegst, überleg kurz, wofür sie später gebraucht wird.',
-    'Ein Block soll eine Sache tun — lieber drei kleine Blöcke als einen überladenen.',
-    'Ein Callout pro Seite reicht meistens, sonst fällt nichts mehr auf.',
-    'Seitennamen so wählen, dass du sie in drei Monaten noch findest.'
-  ];
-
-  var CSS=`
-  #ts11emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts11emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
-  #ts11emp.js.in{opacity:1}
-  #ts11emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts11emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts11emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts11emp:hover::before{opacity:1}
-  #ts11emp.beat{animation:ts11empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts11empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts11emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts11emp .db-hd .g{color:#c7b489}
-  #ts11emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts11emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts11emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts11emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts11emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts11emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts11emp .emp-right{position:relative;z-index:1}
-  #ts11emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts11emp .emph .eg{color:#c7b489}
-  #ts11emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts11emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts11emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts11emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts11emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts11emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts11emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts11emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts11emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts11emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts11emp{grid-template-columns:1fr} #ts11emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts11emp-css')) return;
-    var s=document.createElement('style'); s.id='ts11emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Dein <span class="g">Notion-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
-      '<p class="p">Damit dein Workspace nach der ersten Begeisterung nicht zuwächst, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts11emp')) return;
-    var anchor=document.getElementById('ts11bau'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts11emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   notion-philosophie-canvas-prinzip — Seitenabschluss (Learnings + Weiter-Button)
-   Endzustand=Default: Orbs sind Basis sichtbar, .js versteckt initial, .on baut wieder auf.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du denkst in Blöcken statt in Dokumenten.',
-    'Du kennst Seitenleiste, Editor und Notion-KI im Workspace.',
-    'Du weißt, wann Text, To-Do oder Callout der richtige Block ist.',
-    'Du hast einen Blick für ein Cockpit aus mehreren Blöcken.'
-  ];
-
-  var CSS=`
-  #ts11l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts11l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts11l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts11l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts11l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts11l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts11lFloat 7s ease-in-out infinite}
-  #ts11l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts11l .tsl-orb:nth-child(1){animation-delay:0s} #ts11l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts11l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts11l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts11l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts11l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts11l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts11l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts11l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts11l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts11l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts11l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts11lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts11l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts11l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts11l-css')) return;
-    var s=document.createElement('style'); s.id='ts11l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts11l')) return;
-    var anchor=document.getElementById('ts11emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts11l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l12-layout-medien-strukturierungs-tricks">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ============================================================
@@ -37370,6 +36937,714 @@ var TSISL_TEAM_ONB_V2=[
 /* · */
 
 /* >>> NEUBAU MODUL 1 (Notion-Grundlagen) — ANFANG >>> */
+/* ============================================================
+   NEUBAU MODUL 1 · NOTION-GRUNDLAGEN — Bibliothek window.__tsn1
+   ------------------------------------------------------------
+   Neukonzept 01.11.2026: zehn Lektionen + Modul-Uebersicht, alle Seiten
+   in Notion LEER, der komplette Inhalt wird hier injiziert. Eigene Bausteine
+   (Namensraum tsn1-), damit nichts an gemeinsamen Bibliotheken (__ts3/__ts4,
+   tsshop, ts-next) haengt oder diese veraendert.
+
+     hero(cfg)      Abschnitt 01 Hero  (CSS in kurs.css, Zone NEUBAU MODUL 1)
+     page(def)      registriert eine Seite: Slug-Regex + Teile in Reihenfolge
+     R.*            HTML-Bausteine fuer Inhalts-Sektionen (sec, karten, fundort,
+                    jetzt-du, kopier-kasten, fehlerbild, merkregel, tabelle, mock)
+     emp / learn    Abschnitt 07 Empfehlungs-Kachel / Abschnitt 09 Abschluss
+     reveal(el,cb)  tsReveal-Muster (IO .12 + scroll/resize + 400ms + 600/1600 + 9s)
+
+   Robustheit: Endzustand = Default (ohne JS alles sichtbar), Startzustand
+   haengt an .js; kein document.readyState als Gate; Observer ueber __tsMO.
+   ============================================================ */
+(function(){
+  if(window.__tsn1) return;
+
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var DISP='"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif';
+  var IMG='https://tastyrob123.github.io/kurs/img/';
+  var REDUCED=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* ---------- tsReveal (Pflicht-Muster, Katalog-Regel 15) ---------- */
+  function reveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
+  /* ---------- Platzhalter-Cover (Katalog 01: echtes Cover folgt) ---------- */
+  function phHero(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  function addCSS(id, txt){
+    if(document.getElementById(id)) return;
+    var s=document.createElement('style'); s.id=id; s.textContent=txt; document.head.appendChild(s);
+  }
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  /* ---------- gemeinsames CSS der Inhalts-Bausteine ---------- */
+  var CSS=`
+  .tsn1{width:100%;font-family:${SANS};color:#fff;-webkit-font-smoothing:antialiased;box-sizing:border-box}
+  .tsn1 *,.tsn1 *::before,.tsn1 *::after{box-sizing:border-box}
+  .tsn1 .tsn1-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+  .tsn1 .tsn1-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn1 .tsn1-body p:last-child{margin-bottom:0}
+  .tsn1 b{color:#c7b489;font-weight:600}
+  .tsn1 strong{color:#fff;font-weight:600}
+
+  /* Sektions-Kopf Erklaeranimation (Katalog 02, Standard-Spec) */
+  .tsn1 .tsn1-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
+  .tsn1 .tsn1-eb{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
+  .tsn1 .tsn1-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  .tsn1 .tsn1-h2{font-family:${DISP};font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0}
+  .tsn1 .tsn1-h2 .g,.tsn1 .tsn1-h3 .g{color:#c7b489}
+  .tsn1 .tsn1-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:14px auto 0;max-width:640px}
+  .tsn1 .tsn1-anim{width:min(1040px,95vw);margin:84px auto 0}
+
+  /* Inhalts-Sektion */
+  .tsn1 .tsn1-sec{max-width:860px;margin:88px auto 0;padding:0 clamp(24px,4vw,56px)}
+  .tsn1 .tsn1-sec.wide{max-width:1060px}
+  .tsn1 .tsn1-sec>.tsn1-eb{display:flex;justify-content:center;margin:0 auto 12px;width:max-content;max-width:100%}
+  .tsn1 .tsn1-h3{font-family:${DISP};font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:0 0 16px;text-align:center;text-wrap:balance}
+  .tsn1 .tsn1-sec p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn1 .tsn1-sec .lead{text-align:center;max-width:720px;margin:0 auto 30px}
+  .tsn1 .tsn1-sec .tsn1-txt{max-width:740px;margin:0 auto}
+  .tsn1 .tsn1-sec .tsn1-txt+.tsn1-blk,.tsn1 .tsn1-blk+.tsn1-txt,.tsn1 .tsn1-blk+.tsn1-blk{margin-top:26px}
+
+  /* Karten (Katalog 02 Karten-Anatomie, opake Basis) */
+  .tsn1 .tsn1-cards{display:grid;gap:16px}
+  .tsn1 .tsn1-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .tsn1 .tsn1-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .tsn1 .tsn1-cards.c4{grid-template-columns:repeat(4,1fr)}
+  .tsn1 .tsn1-card{position:relative;background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:20px 20px 18px;overflow:hidden;
+    transition:border-color .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
+  .tsn1 .tsn1-card:hover{border-color:rgba(199,180,137,.45);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.75),0 0 28px rgba(199,180,137,.12)}
+  .tsn1 .tsn1-card .mi{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:11px}
+  .tsn1 .tsn1-card .nm{font-family:${DISP};font-weight:600;font-size:17px;line-height:1.25;color:#fff;margin:0 0 11px}
+  .tsn1 .tsn1-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 11px}
+  .tsn1 .tsn1-card p{font-size:14px;line-height:1.58;color:rgba(255,255,255,.82);margin:0 0 8px}
+  .tsn1 .tsn1-card p:last-child{margin-bottom:0}
+  .tsn1 .tsn1-card .ph{margin:-20px -20px 16px;height:132px;overflow:hidden;background:#0b0d14}
+  .tsn1 .tsn1-card .ph img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .tsn1 .tsn1-card:hover .ph img{transform:scale(1.07)}
+
+  /* Fundort in der Vorlage */
+  .tsn1 .tsn1-fund{position:relative;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;padding:20px 22px;border-radius:16px;
+    background:linear-gradient(rgba(199,180,137,.045),rgba(199,180,137,.045)),#05060b;border:1px solid rgba(199,180,137,.26)}
+  .tsn1 .tsn1-fund .pin{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(199,180,137,.5);color:#c7b489;box-shadow:0 0 0 6px rgba(199,180,137,.05)}
+  .tsn1 .tsn1-fund .pin svg{width:17px;height:17px}
+  .tsn1 .tsn1-fund .lbl{font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:2px 0 9px}
+  .tsn1 .tsn1-fund .path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
+  .tsn1 .tsn1-fund .path span{font:600 12px/1 ${SANS};color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.3);border-radius:999px;padding:6px 10px}
+  .tsn1 .tsn1-fund .path i{font-style:normal;color:rgba(199,180,137,.7);font-size:12px}
+  .tsn1 .tsn1-fund p{font-size:14.5px;line-height:1.6;margin:0 0 8px}
+  .tsn1 .tsn1-fund p:last-child{margin-bottom:0}
+
+  /* Jetzt du */
+  .tsn1 .tsn1-do{padding:22px 24px;border-radius:16px;border:1px solid rgba(199,180,137,.32);background:linear-gradient(rgba(199,180,137,.055),rgba(199,180,137,.055)),#05060b}
+  .tsn1 .tsn1-do .lbl{font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
+  .tsn1 .tsn1-do ol{list-style:none;counter-reset:d;margin:0;padding:0}
+  .tsn1 .tsn1-do li{counter-increment:d;position:relative;padding:0 0 0 34px;margin:0 0 11px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.86)}
+  .tsn1 .tsn1-do li:last-child{margin-bottom:0}
+  .tsn1 .tsn1-do li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:2px;font:700 11px/1.5 ${SANS};color:#c7b489;font-variant-numeric:tabular-nums}
+
+  /* Kopier-Kasten (Prompt / Formel) */
+  .tsn1 .tsn1-copy{position:relative;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;overflow:hidden}
+  .tsn1 .tsn1-copy .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .tsn1 .tsn1-copy .bar span{font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  .tsn1 .tsn1-copy button{appearance:none;border:1px solid rgba(199,180,137,.45);background:transparent;color:#efe6d2;font:600 11.5px/1 ${SANS};letter-spacing:.02em;border-radius:999px;padding:7px 13px;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+  .tsn1 .tsn1-copy button:hover{background:#c7b489;color:#05060b}
+  .tsn1 .tsn1-copy button.ok{background:#c7b489;color:#05060b}
+  .tsn1 .tsn1-copy pre{margin:0;padding:16px 18px;white-space:pre-wrap;word-break:break-word;font:500 13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2}
+  .tsn1 .tsn1-copy.prompt pre{font:400 14.5px/1.65 ${SANS};color:rgba(255,255,255,.9)}
+  .tsn1 .tsn1-copy .note{padding:0 18px 14px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.5);margin:0}
+
+  /* Fehlerbild: Symptom -> Ursache -> Loesung */
+  .tsn1 .tsn1-err{border-radius:16px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#05060b}
+  .tsn1 .tsn1-err .row{display:grid;grid-template-columns:1fr 1fr 1.2fr;border-top:1px solid rgba(255,255,255,.07)}
+  .tsn1 .tsn1-err .row:first-child{border-top:0}
+  .tsn1 .tsn1-err .row>div{padding:14px 16px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+  .tsn1 .tsn1-err .row>div+div{border-left:1px solid rgba(255,255,255,.07)}
+  .tsn1 .tsn1-err .hd>div{font:600 9.5px/1.2 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;padding:13px 16px;background:rgba(199,180,137,.05)}
+  .tsn1 .tsn1-err .row:not(.hd)>div:first-child{color:#fff;font-weight:600}
+  .tsn1 .tsn1-err .row:not(.hd){transition:background .35s cubic-bezier(.16,1,.3,1)}
+  .tsn1 .tsn1-err .row:not(.hd):hover{background:rgba(199,180,137,.04)}
+
+  /* Merkregel */
+  .tsn1 .tsn1-merk{text-align:center;max-width:700px;margin:0 auto;padding:22px 26px 0;position:relative}
+  .tsn1 .tsn1-merk::before{content:"";position:absolute;top:0;left:50%;width:120px;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.8),rgba(199,180,137,0))}
+  .tsn1 .tsn1-merk .lbl{font:600 9.5px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 10px}
+  .tsn1 .tsn1-merk p{font-family:${DISP};font-weight:500;font-size:clamp(19px,2vw,23px);line-height:1.4;color:#fff;margin:0}
+
+  /* Tabelle (Eigenschaftstypen, Rechte ...) */
+  .tsn1 .tsn1-tab{border-radius:16px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#05060b}
+  .tsn1 .tsn1-tab table{width:100%;border-collapse:collapse}
+  .tsn1 .tsn1-tab th{text-align:left;font:600 9.5px/1.2 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;padding:13px 16px;background:rgba(199,180,137,.05)}
+  .tsn1 .tsn1-tab td{padding:12px 16px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.82);border-top:1px solid rgba(255,255,255,.07);vertical-align:top}
+  .tsn1 .tsn1-tab td:first-child{color:#fff;font-weight:600;white-space:nowrap}
+  .tsn1 .tsn1-tab tr{transition:background .35s cubic-bezier(.16,1,.3,1)}
+  .tsn1 .tsn1-tab tbody tr:hover{background:rgba(199,180,137,.04)}
+  .tsn1 kbd{display:inline-block;font:600 12px/1 ${SANS};color:#efe6d2;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-bottom-width:2px;border-radius:6px;padding:4px 7px;margin:0 1px}
+  .tsn1 code{font:500 .9em/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2;background:rgba(255,255,255,.06);border:1px solid rgba(199,180,137,.22);border-radius:6px;padding:2px 6px}
+
+  /* Ergebnis-Blick als gezeichnete Notion-Tabelle im Rahmen (kein Screenshot-Platzhalter) */
+  .tsn1 .tsn1-res{width:min(1100px,95vw);margin:96px auto 0;display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .tsn1 .tsn1-res.rev{grid-template-columns:1.25fr 1fr}
+  .tsn1 .tsn1-res.rev .tx{order:2}
+  .tsn1 .tsn1-res .tx .tsn1-eb{margin-bottom:12px}
+  .tsn1 .tsn1-res .tx h3{font-family:${DISP};font-weight:600;font-size:clamp(28px,3.2vw,40px);line-height:1.1;letter-spacing:-.015em;margin:0 0 16px;color:#fff}
+  .tsn1 .tsn1-res .tx h3 .g{color:#c7b489}
+  .tsn1 .tsn1-res .tx p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn1 .tsn1-mock{position:relative;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:#0b0d14;box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 0 8px rgba(255,255,255,.02);overflow:hidden}
+  .tsn1 .tsn1-mock .top{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);background:#0e1018}
+  .tsn1 .tsn1-mock .top i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+  .tsn1 .tsn1-mock .top span{margin-left:10px;font:500 11.5px/1 ${SANS};color:rgba(255,255,255,.45)}
+  .tsn1 .tsn1-mock .ttl{padding:18px 18px 6px;font-family:${DISP};font-weight:600;font-size:20px;color:#fff}
+  .tsn1 .tsn1-mock .views{display:flex;gap:4px;padding:6px 14px 10px;border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden}
+  .tsn1 .tsn1-mock .views span{font:500 11.5px/1 ${SANS};color:rgba(255,255,255,.5);padding:6px 9px;border-radius:7px;white-space:nowrap}
+  .tsn1 .tsn1-mock .views span.on{color:#fff;background:rgba(255,255,255,.07)}
+  .tsn1 .tsn1-mock .grid{overflow:hidden}
+  .tsn1 .tsn1-mock table{width:100%;border-collapse:collapse}
+  .tsn1 .tsn1-mock th{text-align:left;font:500 11px/1.2 ${SANS};color:rgba(255,255,255,.45);padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
+  .tsn1 .tsn1-mock td{font-size:12.5px;line-height:1.3;color:rgba(255,255,255,.85);padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+  .tsn1 .tsn1-mock td .t{display:inline-block;font-size:11px;padding:3px 7px;border-radius:5px;background:rgba(199,180,137,.14);color:#efe6d2}
+  .tsn1 .tsn1-mock td .t.r{background:rgba(224,87,79,.16);color:#f2b8b3}
+  .tsn1 .tsn1-mock td .t.gr{background:rgba(70,175,115,.16);color:#a9dcc0}
+  .tsn1 .tsn1-mock td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .tsn1 .tsn1-mock .cap{padding:10px 14px;font-size:11px;color:rgba(255,255,255,.35);text-align:right}
+  .tsn1.js .tsn1-mock tbody tr{opacity:0;transform:translateY(8px)}
+  .tsn1.js .tsn1-mock.in tbody tr{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+
+  /* Scroll-Reveal je Abschnitt: Endzustand ist Default, Start nur unter .js */
+  .tsn1.js .tsn1-rv{opacity:0;transform:translateY(22px)}
+  .tsn1.js .tsn1-rv.in{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+
+  @media(max-width:880px){
+    .tsn1 .tsn1-cards.c3,.tsn1 .tsn1-cards.c4{grid-template-columns:repeat(2,1fr)}
+    .tsn1 .tsn1-res,.tsn1 .tsn1-res.rev{grid-template-columns:1fr}
+    .tsn1 .tsn1-res.rev .tx{order:0}
+    .tsn1 .tsn1-err .row{grid-template-columns:1fr}
+    .tsn1 .tsn1-err .row>div+div{border-left:0;border-top:1px dashed rgba(255,255,255,.06)}
+    .tsn1 .tsn1-err .hd{display:none}
+    .tsn1 .tsn1-mock .grid{overflow-x:auto}
+  }
+  @media(max-width:600px){
+    .tsn1 .tsn1-cards.c2,.tsn1 .tsn1-cards.c3,.tsn1 .tsn1-cards.c4{grid-template-columns:1fr}
+    .tsn1 .tsn1-tab table,.tsn1 .tsn1-tab tbody,.tsn1 .tsn1-tab tr,.tsn1 .tsn1-tab td{display:block;width:100%}
+    .tsn1 .tsn1-tab thead{display:none}
+    .tsn1 .tsn1-tab tr{border-top:1px solid rgba(255,255,255,.08);padding:6px 0}
+    .tsn1 .tsn1-tab tbody tr:first-child{border-top:0}
+    .tsn1 .tsn1-tab td{border-top:0;padding:4px 16px}
+    .tsn1 .tsn1-tab td:first-child{white-space:normal;padding-top:10px;color:#c7b489}
+    .tsn1 .tsn1-tab td:last-child{padding-bottom:10px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .tsn1.js .tsn1-rv,.tsn1.js .tsn1-mock tbody tr{opacity:1;transform:none}
+  }
+  `;
+
+  /* ---------- Bausteine (geben HTML zurueck) ---------- */
+  var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>';
+  var R={
+    head:function(eb, title, sub){
+      return '<div class="tsn1-head">'+(eb?'<div class="tsn1-eb">'+eb+'</div>':'')+'<h2 class="tsn1-h2">'+title+'</h2>'+(sub?'<p class="tsn1-sub">'+sub+'</p>':'')+'</div>';
+    },
+    txt:function(html){ return '<div class="tsn1-txt">'+html+'</div>'; },
+    cards:function(list, cols){
+      return '<div class="tsn1-blk tsn1-cards c'+(cols||list.length)+'">'+list.map(function(c){
+        return '<div class="tsn1-card">'+(c.img?'<div class="ph"><img loading="lazy" decoding="async" alt="'+esc(c.nm||'')+'" src="'+c.img+'"></div>':'')+
+          (c.mi?'<span class="mi">'+c.mi+'</span>':'')+'<div class="nm">'+c.nm+'</div><hr>'+c.tx+'</div>';
+      }).join('')+'</div>';
+    },
+    fund:function(path, html){
+      return '<div class="tsn1-blk tsn1-fund"><div class="pin">'+PIN+'</div><div><div class="lbl">In deiner Vorlage</div>'+
+        '<div class="path">'+path.map(function(p,i){ return (i?'<i>›</i>':'')+'<span>'+p+'</span>'; }).join('')+'</div>'+html+'</div></div>';
+    },
+    jetzt:function(items, label){
+      return '<div class="tsn1-blk tsn1-do"><div class="lbl">'+(label||'Jetzt du')+'</div><ol>'+items.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ol></div>';
+    },
+    copy:function(label, text, kind, note){
+      return '<div class="tsn1-blk tsn1-copy '+(kind||'code')+'"><div class="bar"><span>'+label+'</span><button type="button" class="tsn1-cp">Kopieren</button></div><pre>'+esc(text)+'</pre>'+(note?'<p class="note">'+note+'</p>':'')+'</div>';
+    },
+    fehler:function(rows){
+      return '<div class="tsn1-blk tsn1-err"><div class="row hd"><div>Was du siehst</div><div>Woran es liegt</div><div>So behebst du es</div></div>'+
+        rows.map(function(r){ return '<div class="row"><div>'+r[0]+'</div><div>'+r[1]+'</div><div>'+r[2]+'</div></div>'; }).join('')+'</div>';
+    },
+    merk:function(html){ return '<div class="tsn1-blk tsn1-merk"><div class="lbl">Die Merkregel</div><p>'+html+'</p></div>'; },
+    tab:function(head, rows){
+      return '<div class="tsn1-blk tsn1-tab"><table><thead><tr>'+head.map(function(h){ return '<th>'+h+'</th>'; }).join('')+'</tr></thead><tbody>'+
+        rows.map(function(r){ return '<tr>'+r.map(function(c){ return '<td>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
+    },
+    /* Inhalts-Sektion: {id, eb, title, lead, blocks:[html], wide} */
+    sec:function(s){
+      return '<section class="tsn1-sec tsn1-rv'+(s.wide?' wide':'')+'"'+(s.id?' id="'+s.id+'"':'')+'>'+
+        (s.eb?'<div class="tsn1-eb">'+s.eb+'</div>':'')+'<h3 class="tsn1-h3">'+s.title+'</h3>'+
+        (s.lead?'<p class="lead">'+s.lead+'</p>':'')+(s.blocks||[]).join('')+'</section>';
+    },
+    /* Ergebnis-Blick: {eb,title,text:[p],mock:{tab,file,views:[..],on,cols:[..],rows:[[..]],num:[idx],cap},rev} */
+    res:function(r){
+      var m=r.mock;
+      var tb='<table><thead><tr>'+m.cols.map(function(c){ return '<th>'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+
+        m.rows.map(function(row){ return '<tr>'+row.map(function(c,i){ return '<td'+((m.num||[]).indexOf(i)>-1?' class="n"':'')+'>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
+      return '<div class="tsn1-res tsn1-rv'+(r.rev?' rev':'')+'"><div class="tx">'+(r.eb?'<div class="tsn1-eb">'+r.eb+'</div>':'')+'<h3>'+r.title+'</h3>'+r.text.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>'+
+        '<div class="tsn1-mock"><div class="top"><i></i><i></i><i></i><span>'+m.file+'</span></div><div class="ttl">'+m.tab+'</div>'+
+        '<div class="views">'+m.views.map(function(v,i){ return '<span'+(i===(m.on||0)?' class="on"':'')+'>'+v+'</span>'; }).join('')+'</div>'+
+        '<div class="grid">'+tb+'</div>'+(m.cap?'<div class="cap">'+m.cap+'</div>':'')+'</div></div>';
+    },
+    wk:function(id){ return '<div id="'+id+'" class="tsn1-wk" style="margin-top:96px"></div>'; }
+  };
+
+  /* ---------- Kopieren ---------- */
+  function wireCopy(root){
+    Array.prototype.forEach.call(root.querySelectorAll('.tsn1-cp'),function(b){
+      if(b.__w) return; b.__w=true;
+      b.addEventListener('click',function(){
+        var t=b.closest('.tsn1-copy').querySelector('pre').textContent;
+        function ok(){ b.textContent='Kopiert'; b.classList.add('ok'); setTimeout(function(){ b.textContent='Kopieren'; b.classList.remove('ok'); },1600); }
+        function fb(){ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); ok(); }
+        if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(ok,fb); } else fb();
+      });
+    });
+  }
+
+  /* ---------- Hero (Abschnitt 01) ---------- */
+  function hero(cfg){
+    var sc=document.querySelector('.super-content'); if(!sc) return null;
+    var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
+    var h=document.createElement('div');
+    h.className='ts-hero tsn1-hero'+(cfg.two?' two':'');
+    h.innerHTML=
+      '<img class="ts-hero__img" alt="'+esc(cfg.alt)+'" src="'+cfg.img+'" fetchpriority="high" decoding="sync">'+
+      '<div class="ts-hero__text">'+
+        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div>'+
+        '<h1 class="ts-hero__title">'+cfg.title+'</h1>'+
+      '</div>';
+    var nr=sc.querySelector('.notion-root');
+    if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+    return h;
+  }
+
+  /* ---------- Abschnitt 07: Empfehlungs-Kachel (Verhalten 1:1 Katalog 07) ---------- */
+  function empCSS(){
+    addCSS('tsn1-emp-css',`
+  .tsn1-emp{width:min(1000px,95vw);margin:104px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);font-family:${SANS};color:#fff}
+  .tsn1-emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp.js.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  .tsn1-emp.js.in.tilt{transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp *{box-sizing:border-box}
+  .tsn1-emp::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  .tsn1-emp::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1);background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  .tsn1-emp.glow::before{opacity:1}
+  .tsn1-emp.beat{animation:tsn1empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes tsn1empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
+  .tsn1-emp .emp-grid{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  .tsn1-emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  .tsn1-emp .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1),stroke-dashoffset .55s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp .emp-link path.on{opacity:1}
+  .tsn1-emp .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp .emp-link circle.on{opacity:1}
+  .tsn1-emp .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  .tsn1-emp .emp-anim-hd{font-family:${DISP};font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 6px}
+  .tsn1-emp .emp-anim-hd span{color:#c7b489}
+  .tsn1-emp .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp.js .emp-step{opacity:0;transform:translateX(-10px)}
+  .tsn1-emp.js.in .emp-step{opacity:1;transform:none;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp.js.in .emp-step:nth-child(2){transition-delay:.15s}.tsn1-emp.js.in .emp-step:nth-child(3){transition-delay:.28s}.tsn1-emp.js.in .emp-step:nth-child(4){transition-delay:.41s}.tsn1-emp.js.in .emp-step:nth-child(5){transition-delay:.54s}
+  .tsn1-emp .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  .tsn1-emp .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1)}
+  .tsn1-emp .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  .tsn1-emp .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  .tsn1-emp .emp-step.on .emp-step-l{color:#fff}
+  .tsn1-emp .emp-text{position:relative;z-index:2}
+  .tsn1-emp .emp-h{font-family:${DISP};font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  .tsn1-emp .emp-h .eg{color:#c7b489}
+  .tsn1-emp .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
+  .tsn1-emp .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  .tsn1-emp .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.72);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);margin-bottom:6px}
+  .tsn1-emp .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  .tsn1-emp .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  .tsn1-emp .emp-ol li b{color:#c7b489;font-weight:600}
+  @media(max-width:900px){ .tsn1-emp .emp-grid{grid-template-columns:1fr;gap:26px} .tsn1-emp svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ .tsn1-emp.js{transform:none;opacity:1} .tsn1-emp.js .emp-step{opacity:1;transform:none} }
+  `);
+  }
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit||innerWidth<=900){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2, dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+           void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  /* cfg: {kind:'Nutzung'|'Einrichtung', animTitle, animGold, steps:[label], intro, points:[html]} */
+  function emp(cfg){
+    empCSS();
+    var el=document.createElement('div'); el.className='tsn1-emp js';
+    var steps=cfg.steps.map(function(s,i){ return '<div class="emp-step"><span class="emp-step-n">'+(i+1)+'</span><span class="emp-step-l">'+s+'</span></div>'; }).join('');
+    el.innerHTML='<div class="emp-grid"><svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+      '<div class="emp-anim"><div class="emp-anim-hd">'+cfg.animTitle+' <span>'+cfg.animGold+'</span></div>'+steps+'</div>'+
+      '<div class="emp-text"><h3 class="emp-h">Empfehlung zur <span class="eg">'+cfg.kind+'</span></h3><p class="emp-intro">'+cfg.intro+'</p>'+
+      '<ol class="emp-ol">'+cfg.points.map(function(p){ return '<li>'+p+'</li>'; }).join('')+'</ol></div></div>';
+    var stepEls=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li'), idx=-1, iv=null;
+    function tick(){ idx=(idx+1)%stepEls.length;
+      Array.prototype.forEach.call(stepEls,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ empDraw(el); }); }
+    function start(){ if(iv||REDUCED) return; tick(); iv=setInterval(function(){ if(!el.isConnected){ clearInterval(iv); iv=null; return; } if(!document.hidden) tick(); },2600); }
+    setTimeout(function(){ reveal(el,function(){ el.classList.add('in'); start(); }); },0);
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ if(el.isConnected) empDraw(el); }); });
+    if(REDUCED){ el.classList.add('in'); stepEls[0]&&stepEls[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+    return el;
+  }
+
+  /* ---------- Abschnitt 09: Learnings-Orbs + Naechste Lektion ---------- */
+  function learnCSS(){
+    addCSS('tsn1-learn-css',`
+  .tsn1-learn{width:100%;margin-top:120px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  .tsn1-learn *{box-sizing:border-box}
+  .tsn1-learn .tsl-head{text-align:center;margin-bottom:66px}
+  .tsn1-learn .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  .tsn1-learn .tsl-title{font-family:${DISP};font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  .tsn1-learn .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  .tsn1-learn .tsl-cell{display:flex;justify-content:center}
+  .tsn1-learn .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
+  .tsn1-learn.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
+  .tsn1-learn .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  .tsn1-learn.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tsn1Float 7s ease-in-out infinite}
+  .tsn1-learn.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  .tsn1-learn.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  .tsn1-learn.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  .tsn1-learn .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  .tsn1-learn .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;margin:0}
+  .tsn1-learn .tsl-t b{color:#c7b489;font-weight:700}
+  .tsn1-learn #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  .tsn1-learn #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}
+  .tsn1-learn #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  .tsn1-learn #ts-next svg{width:16px;height:16px}
+  @keyframes tsn1Float{0%,100%{translate:0 0}50%{translate:0 -11px}}
+  @media(max-width:1079px){ .tsn1-learn .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ .tsn1-learn .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ .tsn1-learn.js.in .tsl-orb,.tsn1-learn .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `);
+  }
+  var ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function learn(cfg){
+    learnCSS();
+    var el=document.createElement('div'); el.className='tsn1-learn js'; el.id='tsn1-learn';
+    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+cfg.items.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'+
+      '<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">'+(cfg.label||'Nächste Lektion')+' '+ARROW+'</a></div>';
+    setTimeout(function(){ reveal(el,function(){ el.classList.add('in'); }); },0);
+    return el;
+  }
+  /* __tsNext-Falle: fremde Weiter-Wraps raus, eigener bleibt (frisch geholt, nie gecacht) */
+  function nextGuard(cfg){
+    var host=document.getElementById('tsn1-learn'); if(!host) return;
+    var all=document.querySelectorAll('#ts-next-wrap');
+    for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+    if(!host.querySelector('#ts-next-wrap')){
+      var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML='<a id="ts-next" href="'+cfg.next+'">'+(cfg.label||'Nächste Lektion')+' '+ARROW+'</a>'; host.appendChild(w);
+    }
+  }
+
+  /* ---------- Seite registrieren ----------
+     def: {key, re, hero:{label,eyebrow,title,alt,two}, intro:html,
+           parts:[ html-String | {anim:function(host)} | {emp:cfg} ], learn:{items,next,label}} */
+  var PAGES=[];
+  function current(){ for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)) return PAGES[i]; } return null; }
+  function mount(){
+    var def=current(); if(!def) return;
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    addCSS('tsn1-css',CSS);
+    var h=hero({img:def.hero.img||phHero(def.hero.label), alt:def.hero.alt, eyebrow:def.hero.eyebrow, title:def.hero.title, two:def.hero.two});
+    if(!h) return;
+    var id='tsn1-'+def.key;
+    if(!document.getElementById(id)){
+      var root=document.createElement('div'); root.id=id; root.className='tsn1 js';
+      var html='<div class="tsn1-body">'+def.intro+'</div>';
+      var hosts=[];
+      def.parts.forEach(function(p,i){
+        if(typeof p==='string'){ html+=p; return; }
+        html+='<div class="tsn1-slot" data-i="'+i+'"></div>'; hosts.push(i);
+      });
+      root.innerHTML=html;
+      h.parentNode.insertBefore(root, h.nextSibling);
+      hosts.forEach(function(i){
+        var p=def.parts[i], slot=root.querySelector('.tsn1-slot[data-i="'+i+'"]');
+        if(p.anim){ var a=document.createElement('div'); a.className='tsn1-anim'; slot.parentNode.replaceChild(a,slot); try{ p.anim(a); }catch(e){ if(window.console) console.warn('tsn1 anim',e); } }
+        else if(p.emp){ slot.parentNode.replaceChild(emp(p.emp),slot); }
+      });
+      if(def.learn) root.appendChild(learn(def.learn));
+      wireCopy(root);
+      Array.prototype.forEach.call(root.querySelectorAll('.tsn1-rv'),function(el){
+        reveal(el,function(){ el.classList.add('in'); var m=el.querySelector('.tsn1-mock'); if(m){
+          Array.prototype.forEach.call(m.querySelectorAll('tbody tr'),function(tr,j){ tr.style.transitionDelay=(.25+j*.09)+'s'; });
+          setTimeout(function(){ m.classList.add('in'); },60); } });
+      });
+    }
+    if(def.learn) nextGuard(def.learn);
+  }
+  function page(def){ PAGES.push(def); mount(); }
+
+  window.__tsn1={ R:R, IMG:IMG, SANS:SANS, DISP:DISP, REDUCED:REDUCED, reveal:reveal, addCSS:addCSS, esc:esc, phHero:phHero, page:page };
+
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  if(window.__tsMO) window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('scroll', function(){ var d=current(); if(d&&d.learn) nextGuard(d.learn); }, {passive:true});
+  setTimeout(mount,1500); setTimeout(mount,4000);
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.1 "Alles ist eine Seite"
+   Adresse: /lektionen/l11-die-notion-philosophie-das-canvas-prinzip (Alt-Slug toleriert)
+   Erklaeranimation "Das Fenster, das sich einraeumt" — EIGENES Konzept:
+   EIN Notion-Fenster (eine Achse): links waechst der Seitenbaum des Betriebs,
+   rechts stapelt sich eine Seite aus Bloecken, dann greift die Hand das Bild
+   am Griff und setzt es neben den Text (FLIP, nur transform). Drei Schritte
+   auf einer Rail, Reveal schnell, Erklaerung ruhig, Replay-Knopf.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L1) return; window.__tsn1L1=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a1-css',`
+      #tsn1-a1 .stage{position:relative;width:min(960px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);
+        background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#07080e;box-shadow:0 60px 120px -50px rgba(0,0,0,.95),0 0 0 9px rgba(255,255,255,.018);overflow:hidden}
+      #tsn1-a1 .bar{display:flex;align-items:center;gap:6px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:#0c0e16}
+      #tsn1-a1 .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+      #tsn1-a1 .bar span{margin-left:12px;font-size:11.5px;color:rgba(255,255,255,.45)}
+      #tsn1-a1 .win{display:grid;grid-template-columns:240px 1fr;min-height:430px}
+      #tsn1-a1 .side{border-right:1px solid rgba(255,255,255,.07);padding:16px 10px;background:#090a11}
+      #tsn1-a1 .ws{display:flex;align-items:center;gap:9px;padding:6px 8px 14px;font-size:13px;font-weight:600;color:#fff}
+      #tsn1-a1 .ws b{width:22px;height:22px;border-radius:6px;background:#c7b489;color:#05060b;display:flex;align-items:center;justify-content:center;font-size:11px}
+      #tsn1-a1 .grp{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:10px 8px 6px}
+      #tsn1-a1 .nd{position:relative;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;font-size:12.5px;color:rgba(255,255,255,.72);white-space:nowrap}
+      #tsn1-a1 .nd .ic{width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.3);flex:0 0 auto}
+      #tsn1-a1 .nd.db .ic{border-color:rgba(199,180,137,.7);background:repeating-linear-gradient(0deg,rgba(199,180,137,.35) 0 1px,transparent 1px 4px)}
+      #tsn1-a1 .nd.l1{padding-left:24px}#tsn1-a1 .nd.l2{padding-left:40px}
+      #tsn1-a1 .nd.l1::before,#tsn1-a1 .nd.l2::before{content:"";position:absolute;top:0;bottom:50%;width:8px;border-left:1px solid rgba(199,180,137,.3);border-bottom:1px solid rgba(199,180,137,.3);border-bottom-left-radius:4px}
+      #tsn1-a1 .nd.l1::before{left:14px}#tsn1-a1 .nd.l2::before{left:30px}
+      #tsn1-a1 .nd.cur{background:rgba(199,180,137,.12);color:#fff}
+      #tsn1-a1 .main{position:relative;padding:28px clamp(18px,3vw,40px) 30px}
+      #tsn1-a1 .crumb{font-size:11.5px;color:rgba(255,255,255,.4);margin:0 0 14px}
+      #tsn1-a1 .crumb em{font-style:normal;color:rgba(199,180,137,.85)}
+      #tsn1-a1 .blk{position:relative;margin:0 0 12px}
+      #tsn1-a1 .blk .gr{position:absolute;left:-22px;top:4px;width:14px;height:18px;display:grid;grid-template-columns:repeat(2,4px);gap:3px 3px;align-content:center;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a1 .blk .gr i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.55)}
+      #tsn1-a1 .blk.grab .gr{opacity:1}
+      #tsn1-a1 .h{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,27px);color:#fff;margin:0}
+      #tsn1-a1 .p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0}
+      #tsn1-a1 .co{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;background:rgba(199,180,137,.08);border:1px solid rgba(199,180,137,.26);font-size:13px;line-height:1.5;color:rgba(255,255,255,.86)}
+      #tsn1-a1 .co span{color:#c7b489;font-weight:700}
+      #tsn1-a1 .td{display:flex;align-items:center;gap:9px;font-size:13px;color:rgba(255,255,255,.8);margin:0 0 6px}
+      #tsn1-a1 .td i{width:13px;height:13px;border-radius:3px;border:1.4px solid rgba(255,255,255,.45);flex:0 0 auto;position:relative}
+      #tsn1-a1 .td.ok i{background:#c7b489;border-color:#c7b489}
+      #tsn1-a1 .td.ok i::after{content:"";position:absolute;left:3.5px;top:1px;width:4px;height:7px;border:solid #05060b;border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
+      #tsn1-a1 .td.ok{color:rgba(255,255,255,.45);text-decoration:line-through}
+      #tsn1-a1 .row2{display:grid;grid-template-columns:1fr;gap:14px}
+      #tsn1-a1 .row2.cols{grid-template-columns:1.15fr 1fr;align-items:start}
+      #tsn1-a1 .pic{border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,.12);height:150px;background:#0b0d14;position:relative}
+      #tsn1-a1 .pic img{width:100%;height:100%;object-fit:cover;display:block}
+      #tsn1-a1 .pic.lift{box-shadow:0 30px 60px -20px rgba(0,0,0,.9),0 0 0 2px rgba(199,180,137,.55)}
+      #tsn1-a1 .hand{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(239,230,210,.92);box-shadow:0 0 0 6px rgba(239,230,210,.16),0 8px 18px rgba(0,0,0,.6);pointer-events:none;opacity:0;z-index:5}
+      #tsn1-a1 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
+      #tsn1-a1 .st{appearance:none;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a1 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a1 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a1 .st.on b{color:#c7b489}
+      #tsn1-a1 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a1 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a1 .rp button:hover{background:#c7b489;color:#05060b}
+      /* Startzustand nur unter .js (Endzustand = Default) */
+      #tsn1-a1.js .nd,#tsn1-a1.js .blk{opacity:0;transform:translateY(10px)}
+      #tsn1-a1.js .nd.in,#tsn1-a1.js .blk.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1)}
+      @media(max-width:760px){
+        #tsn1-a1 .win{grid-template-columns:1fr}
+        #tsn1-a1 .side{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
+        #tsn1-a1 .row2.cols{grid-template-columns:1fr}
+        #tsn1-a1 .rail{grid-template-columns:1fr}
+      }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a1.js .nd,#tsn1-a1.js .blk{opacity:1;transform:none} }
+      `);
+      var TREE=[
+        ['g','Teamspaces'],['n','Küche',0],['n','Notion AI Backoffice',1],['db','DB 0 : Inventurliste',2],['db','DB IV : Zutaten',2],['db','DB XI : Gerichte &amp; Getränke',2],
+        ['n','Service',0],['n','Hygieneplan',1,'cur'],['g','Privat'],['n','Probeküche',0]
+      ];
+      var side=TREE.map(function(t){
+        if(t[0]==='g') return '<div class="grp">'+t[1]+'</div>';
+        return '<div class="nd '+(t[0]==='db'?'db ':'')+'l'+t[2]+' '+(t[3]||'')+'"><span class="ic"></span>'+t[1]+'</div>';
+      }).join('');
+      host.id='tsn1-a1';
+      host.innerHTML=R.head('Seiten und Blöcke','Jede Seite ist ein <span class="g">Stapel aus Blöcken</span>.','Links der Seitenbaum deines Betriebs, rechts eine Seite daraus. Jeder Block lässt sich greifen und neu setzen, ohne dass etwas verloren geht.')+
+        '<div class="stage"><div class="bar"><i></i><i></i><i></i><span>Notion · Dein Betrieb</span></div><div class="win">'+
+        '<div class="side"><div class="ws"><b>B</b>Dein Betrieb</div>'+side+'</div>'+
+        '<div class="main"><div class="crumb">Service › <em>Hygieneplan</em></div>'+
+          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><h4 class="h">Hygieneplan Service</h4></div>'+
+          '<div class="row2"><div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><p class="p">Gilt für Theke, Pass und Gastraum. Wer die Schicht schließt, hakt ab, bevor das Licht ausgeht.</p></div>'+
+          '<div class="blk bimg"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="pic"><img alt="Angerichteter Teller am Pass" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div></div></div>'+
+          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="co"><span>!</span>Allergen-Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen, nie geschätzt.</div></div>'+
+          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="td ok"><i></i>Kühlschranktemperaturen eintragen</div><div class="td"><i></i>Theke und Kaffeemaschine reinigen</div><div class="td"><i></i>Spülmaschine leeren, Siebe säubern</div></div>'+
+          '<span class="hand"></span>'+
+        '</div></div></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Seiten liegen im Baum, Seiten in Seiten.</button><button class="st" data-s="1"><b>02</b>Eine Seite ist ein Stapel aus Blöcken.</button><button class="st" data-s="2"><b>03</b>Am Griff ziehst du einen Block an eine neue Stelle.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var nds=host.querySelectorAll('.nd'), blks=host.querySelectorAll('.blk'), sts=host.querySelectorAll('.st');
+      var row=host.querySelector('.row2'), bimg=host.querySelector('.bimg'), pic=host.querySelector('.pic'), hand=host.querySelector('.hand'), main=host.querySelector('.main');
+      var T=[];
+      function later(fn,ms){ T.push(setTimeout(fn,ms)); }
+      function clear(){ T.forEach(clearTimeout); T=[]; }
+      function step(i){ Array.prototype.forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function placeHand(el,dx,dy){ var m=main.getBoundingClientRect(), r=el.getBoundingClientRect(); hand.style.left=(r.left-m.left+dx)+'px'; hand.style.top=(r.top-m.top+dy)+'px'; }
+      function flipCols(on){
+        var b1=bimg.getBoundingClientRect();
+        row.classList.toggle('cols',on);
+        var b2=bimg.getBoundingClientRect();
+        bimg.style.transition='none'; bimg.style.transform='translate('+(b1.left-b2.left)+'px,'+(b1.top-b2.top)+'px)';
+        void bimg.offsetWidth;
+        bimg.style.transition='transform 1.1s cubic-bezier(.16,1,.3,1)'; bimg.style.transform='';
+      }
+      function reset(){
+        clear(); host.classList.add('js'); row.classList.remove('cols'); bimg.style.transform=''; pic.classList.remove('lift');
+        hand.style.opacity='0'; hand.style.transition='none';
+        Array.prototype.forEach.call(nds,function(n){ n.classList.remove('in'); });
+        Array.prototype.forEach.call(blks,function(b){ b.classList.remove('in','grab'); });
+        step(-1);
+      }
+      function play(){
+        reset();
+        step(0);
+        Array.prototype.forEach.call(nds,function(n,i){ later(function(){ n.classList.add('in'); },120+i*110); });
+        later(function(){ step(1); },1500);
+        Array.prototype.forEach.call(blks,function(b,i){ later(function(){ b.classList.add('in'); },1600+i*170); });
+        later(function(){ step(2); bimg.classList.add('grab'); placeHand(bimg,-28,2); hand.style.transition='opacity .4s cubic-bezier(.16,1,.3,1)'; hand.style.opacity='1'; },3600);
+        later(function(){ pic.classList.add('lift'); },4300);
+        later(function(){ hand.style.opacity='0'; flipCols(true); },4700);
+        later(function(){ pic.classList.remove('lift'); bimg.classList.remove('grab'); },5900);
+      }
+      function finalState(){ clear(); host.classList.remove('js'); row.classList.add('cols'); step(2); }
+      Array.prototype.forEach.call(sts,function(s){ s.addEventListener('click',function(){
+        var i=+s.getAttribute('data-s'); clear(); host.classList.remove('js'); step(i);
+        Array.prototype.forEach.call(nds,function(n){ n.classList.add('in'); }); Array.prototype.forEach.call(blks,function(b){ b.classList.add('in'); });
+        if(i===2){ if(!row.classList.contains('cols')) flipCols(true); } else if(row.classList.contains('cols')) flipCols(false);
+      }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ finalState(); return; }
+      host.classList.add('js');
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l1',
+      re:/\/(?:lektionen\/l11-die-notion-philosophie-das-canvas-prinzip|notion-philosophie-canvas-prinzip)\/?$/,
+      hero:{label:'L 1.1', eyebrow:'L 1.1', title:'Alles ist eine <span class="ts-gold">Seite</span>.', alt:'Notion-Grundlagen: Seiten, Blöcke und der Seitenbaum deines Betriebs'},
+      intro:
+        '<p>Bevor du in der Vorlage die erste Zahl einträgst, lohnt sich ein Blick darauf, wie Notion gebaut ist. Alles, was du dort siehst, ist eine <b>Seite</b>: die Startseite deines Backoffice, die Inventurliste und jeder einzelne Artikel darin. Jede Seite wiederum besteht aus <b>Blöcken</b>, die du greifen und neu anordnen kannst.</p>'+
+        '<p>Wer dieses Prinzip einmal verstanden hat, verläuft sich nicht mehr, auch nicht in einem System mit dreißig Datenbanken. Wir richten deinen Workspace ein, lernen die Seitenleiste lesen und üben die Handgriffe, die du ab morgen jeden Tag brauchst.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Der Workspace', title:'Dein Betrieb ist ein Haus mit <span class="g">Räumen</span>', lead:'Links in Notion steht die Seitenleiste. Sie ist der Grundriss deines Betriebs, und wer sie lesen kann, findet jede Seite in zwei Klicks.', blocks:[
+          R.cards([
+            {mi:'Das Haus', nm:'Workspace', tx:'<p>Dein ganzer Betrieb in Notion. Ein Restaurant, ein Workspace. Wer mehrere Läden führt, bleibt meistens trotzdem in einem Workspace und trennt über Teamspaces.</p>'},
+            {mi:'Die Räume', nm:'Teamspaces', tx:'<p>Bereiche, die ein Team gemeinsam nutzt, zum Beispiel Küche, Service und Verwaltung. Wer in einem Teamspace Mitglied ist, sieht dessen Seiten in seiner Seitenleiste.</p>'},
+            {mi:'Dein Büro', nm:'Privat', tx:'<p>Seiten, die nur du siehst. Hier landet alles, was du für dich anlegst, und hier landet auch eine Vorlage, die du dir in deinen Workspace kopierst.</p>'}
+          ],3),
+          R.txt('<p><strong>Seiten liegen in Seiten.</strong> Jede Seite kann beliebig viele Unterseiten haben, und genau so entsteht der Baum, den du links siehst. Klappst du einen Eintrag auf, siehst du, was darunter liegt. Ganz oben im Fenster zeigt dir eine Pfadzeile, wo du gerade stehst, zum Beispiel <em>Küche › Notion AI Backoffice › DB IV : Zutaten</em>. Ein Klick auf einen Teil des Pfads bringt dich eine Ebene zurück.</p>'),
+          R.fund(['Notion AI Backoffice','DB Zutaten','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
+        ]}),
+        R.sec({eb:'Blöcke', title:'Was ein <span class="g">Block</span> ist und warum dich das freut', lead:'Ein Block ist alles, was auf einer Seite eine eigene Zeile hat. Ein Absatz, eine Überschrift, ein Bild, eine Checkliste, eine ganze Tabelle.', blocks:[
+          R.txt('<p><strong>Mit dem Schrägstrich holst du jeden Block.</strong> Tippe auf einer leeren Zeile <kbd>/</kbd> und Notion zeigt dir eine Liste aller Blöcke. Schreibst du weiter, zum Beispiel <kbd>/</kbd> und dann „Tabelle", wird die Liste kürzer, bis nur noch passt, was du suchst. Das ist der Handgriff, den du in diesem Modul am häufigsten benutzen wirst.</p>'+
+            '<p><strong>Am Griff verschiebst du ihn.</strong> Fährst du mit der Maus über einen Block, erscheint links davon ein Griff aus sechs Punkten. Daran ziehst du den Block an eine andere Stelle, auch neben einen anderen Block, dann entstehen Spalten. Ein Klick auf den Griff öffnet das Menü des Blocks: löschen, duplizieren, Farbe, in einen anderen Blocktyp umwandeln.</p>'),
+          R.tab(['Block','Wofür im Betrieb','Beispiel'],[
+            ['Überschrift','Gliedert eine Seite, damit man sie im Stress überfliegen kann','„Schichtende Theke"'],
+            ['Text','Alles, was erklärt werden muss','Wer abschließt und wer den Schlüssel hat'],
+            ['To-do','Eine Liste, die abgehakt wird','Kühlschranktemperaturen eintragen'],
+            ['Callout','Ein Hinweis, der nicht überlesen werden darf','Allergen-Ordner liegt am Pass'],
+            ['Toggle','Details, die nur bei Bedarf aufgeklappt werden','Reinigungsmittel und Dosierung'],
+            ['Bild, Datei','Fotos vom Anrichten, Lieferantenlisten als PDF','So sieht der Teller beim Rausgehen aus'],
+            ['Datenbank','Eine Tabelle mit Einträgen gleicher Art','DB 0 : Inventurliste']
+          ]),
+          R.merk('Ein Block macht eine Sache. Lieber drei kleine Blöcke als einen, in dem alles steht.')
+        ]}),
+        R.sec({eb:'Drei Handgriffe', title:'Was du jeden Tag <span class="g">brauchst</span>', lead:'Diese drei Dinge brauchst du in der Vorlage jeden Tag, und keines davon kostet extra.', blocks:[
+          R.cards([
+            {mi:'Finden', nm:'Die Suche', tx:'<p>Oben in der Seitenleiste. Sie durchsucht Titel und Inhalte aller Seiten, die du sehen darfst. Tippe „Burrata" und du findest die Zutat, die Rezeptur und das Gericht, in dem sie steckt.</p>'},
+            {mi:'Verbinden', nm:'Das @-Zeichen', tx:'<p>Mit <kbd>@</kbd> erwähnst du eine andere Seite, eine Person oder ein Datum mitten im Text. So verlinkst du im Hygieneplan direkt auf das Datenblatt des Reinigers, statt es zu beschreiben.</p>'},
+            {mi:'Zurückholen', nm:'Verlauf und Papierkorb', tx:'<p>Gelöschte Seiten liegen im Papierkorb unten in der Seitenleiste. Ältere Stände einer Seite findest du im Seitenverlauf: im Free-Plan sieben Tage zurück, bei Plus dreißig, bei Business neunzig.</p>'}
+          ],3),
+          R.txt('<p><strong>Warum das für die Vorlage zählt.</strong> In einem System, in dem Zahlen voneinander abhängen, passiert irgendwann ein falscher Klick. Wer weiß, dass er den Stand von gestern zurückholen kann, traut sich auch, etwas anzupassen. Wie du das gezielt machst, üben wir in der letzten Lektion dieses Moduls.</p>')
+        ]}),
+        R.sec({eb:'Was es kostet', title:'Welcher Plan für dein <span class="g">Backoffice</span>', lead:'Notion rechnet pro Person, die im Workspace mitarbeitet. Die Preise stehen in US-Dollar je Platz und Monat, Stand 1. November 2026.', blocks:[
+          R.tab(['Plan','Preis','Was er für dich bedeutet'],[
+            ['Free','0 $','Für dich allein ohne Grenze an Blöcken. Sobald eine zweite Person dazukommt, ist bei tausend Blöcken Schluss, und das ist mit der Vorlage schnell erreicht.'],
+            ['Plus','10 $ jährlich, 12 $ monatlich','Für ein kleines Team. Unbegrenzte Blöcke, dreißig Tage Seitenverlauf, Automationen in Datenbanken. Notion AI nur als begrenzter Test.'],
+            ['Business','20 $ jährlich, 24 $ monatlich','Notion AI ist enthalten, also auch das Einlesen von Listen und Dokumenten. Dazu private Teamspaces und Rechte bis auf einzelne Zeilen.'],
+            ['Enterprise','auf Anfrage','Für Gruppen mit vielen Standorten und eigener IT.']
+          ]),
+          R.txt('<p><strong>Meine ehrliche Empfehlung.</strong> Fang allein im Free-Plan an und lerne die Vorlage kennen. Wenn dein Souschef oder deine Betriebsleitung mitarbeiten soll, gehst du auf Plus. Business lohnt sich, sobald du Lieferscheine und Listen mit Notion AI einlesen willst, statt sie abzutippen. Die Preise ändern sich, prüf sie vor dem Abschluss auf der Preisseite von Notion.</p>')
+        ]}),
+        R.sec({eb:'Jetzt du', title:'Dein Workspace in <span class="g">zehn Minuten</span>', blocks:[
+          R.jetzt([
+            'Leg dir auf <b>notion.com</b> ein Konto an, am besten mit der E-Mail-Adresse deines Betriebs.',
+            'Nenn den Workspace wie deinen Betrieb. Den Namen siehst du später oben links in der Seitenleiste.',
+            'Leg unter <b>Privat</b> eine neue Seite an und nenn sie <b>Probeküche</b>. Hier üben wir in den nächsten Lektionen, ohne je deine echte Vorlage anzufassen.',
+            'Bau auf der Probeküche drei Blöcke mit <kbd>/</kbd>: eine Überschrift, einen Callout und eine kurze To-do-Liste.',
+            'Zieh den Callout am Griff über die Überschrift und wieder zurück. Lösch einen Block und hol ihn über <kbd>Strg</kbd> + <kbd>Z</kbd> beziehungsweise <kbd>⌘</kbd> + <kbd>Z</kbd> zurück.'
+          ])
+        ]}),
+        {emp:{kind:'Nutzung', animTitle:'Ordnung', animGold:'von Anfang an', steps:['Erst der Baum','Kurze Seitennamen','Ein Ort je Thema','Probeküche zum Üben'],
+          intro:'Ein Workspace wird nicht unordentlich, weil jemand schlampig ist, sondern weil am Anfang keiner entschieden hat, wohin etwas gehört.',
+          points:['Leg zuerst die Räume an, also Küche, Service, Verwaltung, und erst dann einzelne Seiten darin.','Nenn Seiten so, wie man im Betrieb darüber spricht: „Hygieneplan Service", nicht „Dokument 3".','Jedes Thema hat genau einen Ort. Gibt es zwei Hygienepläne, ist einer davon falsch.','Probier Neues immer zuerst in der Probeküche aus, bevor du es in die Vorlage übernimmst.']}}
+      ],
+      learn:{items:['Du weißt, dass in Notion <b>alles eine Seite</b> ist und Seiten in Seiten liegen.','Du liest die Seitenleiste als Grundriss: <b>Workspace, Teamspaces, Privat</b>.','Du holst jeden Block mit dem <b>Schrägstrich</b> und verschiebst ihn am Griff.','Du weißt, welcher <b>Plan</b> zu deinem Betrieb passt und wo du Gelöschtes zurückholst.'],
+        next:'/lektionen/l12-layout-medien-strukturierungs-tricks'}
+    });
+  }
+  go();
+})();
 /* <<< NEUBAU MODUL 1 — ENDE <<< */
 /* · */
 /* · */
