@@ -33778,7 +33778,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           '<span class="ov-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
       }).join('')+'</div>';
   }).join('')+'</div>';
-  N.addCSS('tsn4mov-list', `
+  N.addCSS('tsn4mov-list-css', `
   .tsn4-sec.tsn4-wide{max-width:1000px}
   .tsn4-ov{display:flex;flex-direction:column;gap:34px}
   .tsn4-ov .ov-gh{display:flex;align-items:center;gap:12px;margin:0 0 14px}
