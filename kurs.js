@@ -29428,7 +29428,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Eigenschaft bearbeitet','Sobald sich eine bestimmte Spalte ändert, auf Wunsch nur bei einem bestimmten Wert','Allergene eines Produkts geändert: Benachrichtigung an die Serviceleitung'],
             ['Wiederkehrend','In einem festen Rhythmus, zum Beispiel jeden Montag um sechs','Am Ersten des Monats: Erinnerung, die Datenblätter zu prüfen']
           ]),
-          R.txt('<p><strong>Das Beispiel mit den Allergenen ist mir das wichtigste.</strong> Ändert sich bei einem Produkt die Rezeptur des Herstellers und jemand trägt ein neues Allergen ein, muss der Service davon wissen, bevor der nächste Gast fragt. Mit einer Automation auf der Spalte Allergene passiert das, ohne dass jemand daran denken muss.</p>'),
+          R.txt('<p><strong>Das Beispiel mit den Allergenen ist mir das wichtigste.</strong> Ändert sich bei einem Produkt die Rezeptur des Herstellers und jemand trägt ein neues Allergen ein, muss der Service davon wissen, bevor der nächste Gast fragt. Mit einer Automation auf der Spalte Allergene passiert das, ohne dass jemand daran denken muss.</p><p><strong>Inventur und Nachbestellen</strong> automatisierst du in Modul 4, Lektion 4.5. Dort kommen Agenten und Claude Code dazu, die mehr können als eine einzelne Automation.</p>'),
           R.tab(['Plan','Buttons','Datenbank-Automationen'],[
             ['Free','Ja','Nein, laut Notion-Hilfe höchstens Slack-Benachrichtigungen'],
             ['Plus','Ja','Ja, Gmail und Webhooks inklusive'],
@@ -29777,7 +29777,7 @@ var TSISL_TEAM_ONB_V2=[
           points:['Sortier deine Gerichte nach Wareneinsatz in Prozent und schau dir die drei obersten und die drei untersten an.','Alles, was dir unrealistisch vorkommt, verfolgst du mit den fünf Schritten bis zur Quelle.','Behalt die Ansicht <b>Ohne Preis</b> im Blick. Sie muss leer sein.','Wisse, wie weit dein Seitenverlauf zurückreicht, und warte mit dem Aufräumen nicht länger als das.']}}
       ],
       learn:{items:['Du verfolgst eine falsche Zahl über Formeln und Rollups bis zu ihrer <b>Quelle</b>.','Du kennst die häufigsten <b>Fehler</b> der Vorlage und weißt, wie du sie behebst.','Du <b>ergänzt</b> die Vorlage, ohne bestehende Spalten zu brechen.','Du holst über den <b>Seitenverlauf</b> einen früheren Stand zurück.'],
-        next:'/mehrwert-zielbild', label:'Weiter zu Modul 2'}
+        next:'/mehrwert-zielbild', nextTry:['/vorlage-holen-und-einrichten','/lektionen/vorlage-holen-und-einrichten'], label:'Weiter zu Modul 2'}
     });
   }
   go();
