@@ -37424,8 +37424,8 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsn3 && __tsn3.page({
     key:'l01', re:/\/(?:lektionen\/)?was-ist-claude-genau\/?$/, tab:'L 3.1 · Was Claude ist',
     hero:{eyebrow:'L 3.1', title:'Was <span class="ts-gold">Claude</span> ist', alt:'Was Claude ist: ein Sprachmodell von Anthropic, das mit dem arbeitet, was du ihm zeigst'},
-    intro:'<p>Claude ist ein Sprachmodell von <b>Anthropic</b>. Du gibst ihm Text, Fotos oder Dateien, und es liest, rechnet, schreibt und erledigt Arbeit, so weit du es lässt. Im Betrieb heißt das: die Speisekarte überarbeiten, einen Lieferschein gegen die letzte Rechnung prüfen, einem Gast auf eine Beschwerde antworten.</p>'
-      +'<p>In dieser Lektion klären wir, was hinter dem Namen steckt, welche Modelle es gibt und wo die Grenze liegt. Die wichtigste gleich vorweg: Claude kennt deinen Betrieb nicht. Es sieht nur, was du ihm zeigst.</p>',
+    intro:'<p>Claude ist ein Sprachmodell von <b>Anthropic</b>. Du gibst ihm Text, Fotos oder Dateien, und es arbeitet damit, so weit du es lässt. Im Betrieb heißt das zum Beispiel: die Speisekarte überarbeiten oder einen Lieferschein gegen die letzte Rechnung prüfen.</p>'
+      +'<p>Bevor du damit arbeitest, gehen wir durch, wer dahintersteht und welche Modelle es gibt. Und wo die Grenze liegt, denn die ist wichtiger als jede Funktion: Claude kennt deinen Betrieb nicht. Es sieht nur, was du ihm zeigst.</p>',
     anim:{id:'tsn3-a01', eb:'Die Grenze', title:'Claude sieht nur, was im <span class="g">Licht</span> liegt.',
       sub:'Alles, was du zeigst, kann es lesen und verarbeiten. Was du nicht zeigst, gibt es für Claude nicht, egal wie wichtig es für deinen Betrieb ist.',
       stage:stage,
@@ -37448,12 +37448,12 @@ var TSISL_TEAM_ONB_V2=[
         +H.sec({id:'tsn3-l01-grenze', wide:true, title:'Was Claude im Betrieb <span class="g">kann</span>, und was nicht',
           lead:'Die Liste links wird im Lauf des Moduls länger. Die Liste rechts bleibt, egal welchen Plan du hast.',
           body:H.cards([
-            {eb:'Kann', nm:'Mit deinem Material arbeiten', p:['Lieferscheine, Rechnungen, Speisekarten und Dienstpläne lesen, auch als Foto oder PDF.','Mit deinen Zahlen rechnen: Wareneinsatz, Portionskosten, Preisvergleich zwischen zwei Lieferungen.','Texte schreiben, die zu deinem Haus passen: Karte, Stellenanzeige, Antwort auf eine Bewertung.','Mit Zugriff auch selbst handeln: Dateien anlegen, Tabellen füllen, im Browser Formulare ausfüllen.']},
-            {eb:'Grenze', nm:'Dein Urteil ersetzen', p:['Claude kennt deinen Betrieb nur so weit, wie du ihn gezeigt hast.','Es kann sich irren, auch wenn die Antwort sicher klingt. Bei Zahlen und Allergenen ist das kein Schönheitsfehler.','Es entscheidet nichts für dich. Was rausgeht, an Gäste, an Lieferanten, ans Team, prüfst du.','Gästedaten und Personalakten gehören nur dann hinein, wenn du weißt, wo sie landen. Das klären wir in Lektion 3.4.']}
+            {eb:'Kann', nm:'Mit deinem Material arbeiten', p:['Lieferscheine, Rechnungen, Speisekarten und Dienstpläne lesen, auch als Foto oder PDF.','Mit deinen Zahlen rechnen: Wareneinsatz, Portionskosten, Preisvergleich zwischen zwei Lieferungen.','Texte schreiben, die zu deinem Haus passen, von der Karte bis zur Antwort auf eine Bewertung.','Mit Zugriff auch selbst handeln: Dateien anlegen, Tabellen füllen, im Browser Formulare ausfüllen.']},
+            {eb:'Grenze', nm:'Dein Urteil ersetzen', p:['Claude kennt deinen Betrieb nur so weit, wie du ihn gezeigt hast.','Es kann sich irren, auch wenn die Antwort sicher klingt. Bei Zahlen und Allergenen ist das kein Schönheitsfehler.','Es entscheidet nichts für dich. Was an Gäste oder Lieferanten rausgeht, prüfst du vorher.','Gästedaten und Personalakten gehören nur dann hinein, wenn du weißt, wo sie landen. Das klären wir in Lektion 3.4.']}
           ],2)
-          +H.note('Alles, was Gäste essen oder bezahlen, liest du gegen: <b>Allergene, Preise, Mengen</b>. Claude nimmt dir die Arbeit ab, das Urteil darüber, ob es stimmt, bleibt bei dir.','Die Merkregel')})
+          +H.note('Alles, was Gäste essen oder bezahlen, liest du gegen, vor allem <b>Allergene und Preise</b>. Claude nimmt dir die Arbeit ab, das Urteil darüber, ob es stimmt, bleibt bei dir.','Die Merkregel')})
         +H.sec({id:'tsn3-l01-start', title:'Dein <span class="g">Zugang</span>',
-          lead:'Zwei Handgriffe, dann steht die Grundlage. Ein Abo brauchst du dafür noch nicht, das entscheidest du in Lektion 3.3.',
+          lead:'Drei Schritte, dann steht die Grundlage. Ein Abo brauchst du dafür noch nicht, das entscheidest du in Lektion 3.3.',
           body:H.steps([
             'Leg dein Konto auf <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> an. Nimm die Adresse, unter der du auch in einem Jahr noch arbeitest, Abo, Verlauf und Projekte hängen daran.',
             'Lade die Desktop-App von <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> und melde dich einmal an. Sie ist der Ort, an dem wir ab Lektion 3.4 arbeiten.',
@@ -37468,7 +37468,7 @@ var TSISL_TEAM_ONB_V2=[
         'Arbeite in der <b>Desktop-App</b>, nicht nur im Browser. Ordner, Aufgaben und Claude Code laufen über sie.',
         'Starte mit einem <b>echten Dokument</b> aus deinem Betrieb. Eine erfundene Testfrage sagt dir nichts darüber, ob dir das Werkzeug Arbeit abnimmt.',
         'Lies das erste Ergebnis <b>Zeile für Zeile</b> gegen. So lernst du schnell, wo Claude sicher ist und wo du genauer hinschauen musst.']},
-    learn:{learn:['Du weißt, dass Claude ein <b>Sprachmodell</b> von Anthropic ist, das liest, rechnet und schreibt.',
+    learn:{learn:['Du weißt, dass Claude ein <b>Sprachmodell</b> von Anthropic ist, das liest und schreibt.',
         'Du kennst die vier Modelle: <b>Haiku, Sonnet, Opus</b> und Fable.',
         'Du kennst die Grenze: Claude sieht nur, <b>was du zeigst</b>, und kann sich irren.',
         'Du hast <b>Konto und Desktop-App</b> und eine erste echte Aufgabe gestellt.'],

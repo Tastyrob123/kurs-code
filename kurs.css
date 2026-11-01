@@ -2833,6 +2833,7 @@ details > summary {
   #tsn3-a01 .l1-rail{display:none}
   #tsn3-a01 .l1-wrap{display:flex;flex-direction:column-reverse;gap:16px}
   #tsn3-a01 .l1-out li{grid-template-columns:1fr;gap:4px}
+  #tsn3-a01 .l1-out .t{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){#tsn3-a01 .l1-dot{animation:none}}
 
