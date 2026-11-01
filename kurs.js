@@ -33761,8 +33761,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
 (function(){
   var T3=window.__tsn3; if(!T3) return;
   var BEATS=[
-    {img:T3.pic('a01-speisekarte.webp','Speisekarte'), nm:'Speisekarte', out:'Liest die Karte und listet Gerichte ohne Allergenangabe.', cap:'Zeigst du Claude deine <b>Speisekarte</b>, kann es sie lesen, prüfen und neu formulieren.'},
-    {img:T3.pic('a01-lieferschein.webp','Lieferschein'), nm:'Lieferschein', out:'Vergleicht die Preise mit der letzten Lieferung.', cap:'Gibst du ihm einen <b>Lieferschein</b>, rechnet es mit genau diesen Zahlen und nicht mit geschätzten.'},
+    {img:T3.pic('a01-speisekarte.webp','Speisekarte'), nm:'Speisekarte', hy:'Speise&shy;karte', out:'Liest die Karte und listet Gerichte ohne Allergenangabe.', cap:'Zeigst du Claude deine <b>Speisekarte</b>, kann es sie lesen, prüfen und neu formulieren.'},
+    {img:T3.pic('a01-lieferschein.webp','Lieferschein'), nm:'Lieferschein', hy:'Liefer&shy;schein', out:'Vergleicht die Preise mit der letzten Lieferung.', cap:'Gibst du ihm einen <b>Lieferschein</b>, rechnet es mit genau diesen Zahlen und nicht mit geschätzten.'},
     {img:T3.pic('a01-handbuch.webp','Handbuch'), nm:'Handbuch', out:'Schreibt daraus einen Einarbeitungsplan für den Service.', cap:'Liegt dein <b>Handbuch</b> vor, wird daraus ein Einarbeitungsplan für die neue Servicekraft.'},
     {img:T3.pic('a01-kuehlhaus.webp','Kühlhaus'), nm:'Kühlhaus', out:'Kein Einblick. Hier müsste Claude raten.', cap:'Das <b>Kühlhaus</b> bleibt dunkel. Fragst du Claude trotzdem nach deinem Bestand, rät es, und genau dort entstehen Fehler.', dark:true}
   ];
@@ -33770,7 +33770,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     +'<div class="l1-panel"><div class="l1-ph"><span class="l1-dot"></span>Was Claude daraus macht</div>'
     +'<ol class="l1-out">'+BEATS.map(function(b,i){ return '<li class="show'+(b.dark?' no':'')+'"><span class="k">0'+(i+1)+'</span><span class="t">'+b.out+'</span></li>'; }).join('')+'</ol></div>'
     +'<div class="l1-rail"><span class="l1-car"><span class="l1-lamp"><i></i></span></span></div>'
-    +'<div class="l1-pass">'+BEATS.map(function(b,i){ return '<button type="button" class="l1-tile'+(b.dark?' dark':' lit')+'" data-i="'+i+'"><span class="l1-img"><img src="'+b.img+'" alt="'+b.nm+'" loading="lazy" decoding="async"></span><span class="l1-nm">'+b.nm+'</span></button>'; }).join('')+'</div>'
+    +'<div class="l1-pass">'+BEATS.map(function(b,i){ return '<button type="button" class="l1-tile'+(b.dark?' dark':' lit')+'" data-i="'+i+'"><span class="l1-img"><img src="'+b.img+'" alt="'+b.nm+'" loading="lazy" decoding="async"></span><span class="l1-nm">'+(b.hy||b.nm)+'</span></button>'; }).join('')+'</div>'
     +'</div>';
 
   function lampTo(el,i){
