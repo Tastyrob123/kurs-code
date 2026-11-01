@@ -3171,6 +3171,38 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
   #tsn3-a08 .l8-list li{height:46px}
 }
 
+/* ---- l09-claude-md.css ---- */
+/* L3.9 · #tsn3-a09 "Eine Datei, die mitwaechst." — Datei links, Sitzung rechts, Achse min(940px,100%) */
+#tsn3-a09 .l9-wrap{width:min(940px,100%);margin:0 auto;display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+#tsn3-a09 .l9-file,#tsn3-a09 .l9-chat{height:420px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;padding:16px 18px;display:flex;flex-direction:column}
+#tsn3-a09 .l9-file{border-color:rgba(199,180,137,.32)}
+#tsn3-a09 .l9-fh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+#tsn3-a09 .l9-fn{font:600 12.5px/1 var(--mono);color:#fff}
+#tsn3-a09 .l9-cnt{font:600 11px/1 var(--sans);color:rgba(255,255,255,.55)}
+#tsn3-a09 .l9-cnt b{color:var(--g);font-variant-numeric:tabular-nums}
+#tsn3-a09 .l9-gauge{height:3px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:14px}
+#tsn3-a09 .l9-gauge i{display:block;height:100%;width:100%;background:var(--g);transform-origin:left center;transition:transform .6s var(--ease)}
+#tsn3-a09 .l9-lines{list-style:none;margin:0;padding:0;counter-reset:ln;display:flex;flex-direction:column;gap:2px}
+#tsn3-a09 .l9-lines li{counter-increment:ln;position:relative;padding:3px 8px 3px 34px;border-radius:5px;font:500 13px/1.55 var(--mono);color:var(--g3);transition:opacity .45s var(--ease),transform .55s var(--ease),background .6s var(--ease)}
+#tsn3-a09 .l9-lines li::before{content:counter(ln);position:absolute;left:0;width:22px;text-align:right;color:rgba(255,255,255,.28);font-size:11px}
+#tsn3-a09 .l9-lines li.h{color:var(--g);margin-top:6px}
+#tsn3-a09 .l9-lines li.h:first-child{margin-top:0}
+#tsn3-a09 .l9-lines li.fx{background:rgba(199,180,137,.08)}
+#tsn3-a09.js .l9-lines li:not(.in){opacity:0;transform:translateX(-8px)}
+#tsn3-a09 .l9-ch{font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:14px}
+#tsn3-a09 .l9-cmd{align-self:flex-start;font:600 13px/1 var(--mono);color:#fff;padding:9px 12px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);margin-bottom:14px;transition:opacity .45s var(--ease),transform .55s var(--ease)}
+#tsn3-a09 .l9-fix{position:relative;align-self:flex-end;max-width:92%;margin-bottom:12px;padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:13.5px;line-height:1.45;color:var(--tx);transition:opacity .45s var(--ease),transform .55s var(--ease),border-color .5s var(--ease)}
+#tsn3-a09 .l9-who{display:block;font:600 9px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+#tsn3-a09 .l9-act{display:block;margin-top:7px;font:600 11px/1 var(--sans);color:var(--g);transition:opacity .45s var(--ease)}
+#tsn3-a09 .l9-fix.sent{border-color:rgba(199,180,137,.5)}
+#tsn3-a09.js .l9-fix:not(.sent) .l9-act{opacity:0}
+#tsn3-a09.js .l9-fix:not(.in),#tsn3-a09.js .l9-cmd:not(.in){opacity:0;transform:translateY(8px)}
+@media(max-width:820px){
+  #tsn3-a09 .l9-wrap{grid-template-columns:1fr}
+  #tsn3-a09 .l9-file,#tsn3-a09 .l9-chat{height:auto;min-height:0}
+  #tsn3-a09 .l9-lines li{font-size:11.5px}
+}
+
 /* <<< NEUBAU MODUL 3 — ENDE <<< */
 /* · */
 /* · */

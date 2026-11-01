@@ -4412,7 +4412,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?claude-plne-preis\/?$/, href:'/claude-interface-durchlauf' },
     { re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
     { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/installation-claude-code-vs-code-extension' },
-    { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/deine-erste-claudemd' },
+    { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -29567,7 +29568,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -30867,6 +30868,144 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du startest Claude <b>im Projektordner</b>.',
         'Du weißt, was bei den <b>häufigsten Fehlern</b> hilft.'],
       next:'/deine-erste-claudemd'}
+  });
+})();
+
+/* ---- l09-claude-md.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.9 "Die CLAUDE.md"  (/deine-erste-claudemd)
+   Fakten: code.claude.com/docs/en/memory (Speicherorte, Laden ueber Ordner-Hierarchie, /init,
+   /memory, /context, unter 200 Zeilen, konkret statt vage, wann ergaenzen, Auto-Memory,
+   "merk dir" vs. "schreib das in die CLAUDE.md", /doctor prompt-audit), Faktenblatt Punkt 5.
+   Abgrenzung: die Modul-4-Absaetze (Zahlen nur aus Feldern / erst zeigen, dann schreiben)
+   kommen hier NICHT vor; Modul 4 + 6 setzen voraus, dass hier Anlegen + Ergaenzen gelernt wird.
+   Erklaeranimation #tsn3-a09 "Eine Datei, die mitwaechst."
+   Links die CLAUDE.md, rechts das Gespraech. /init legt die ersten Zeilen an, danach wandern
+   zwei Korrekturen aus dem Gespraech als neue Zeilen in die Datei. Ein Zaehler zeigt die
+   Zeilen gegen die Grenze von 200. Datei, Gespraech und Zaehler stehen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var LINES=[
+    {g:0,t:'# Betrieb'},{g:0,t:'Bistro, 60 Plätze, Montag Ruhetag.'},{g:0,t:'Küche saisonal, Lieferanten aus der Region.'},
+    {g:1,t:'# So schreiben wir'},{g:1,t:'Karte und Aushänge in Du-Form, kurz, ohne Fremdwörter.'},
+    {g:2,t:'# Regeln'},{g:2,t:'Preise immer netto, mit zwei Nachkommastellen.',c:0},{g:2,t:'Allergene mit den Buchstaben A bis N kennzeichnen.',c:1},
+    {g:3,t:'# Ablage'},{g:3,t:'Ergebnisse in den Ordner Auswertungen, Dateiname mit Datum.'}
+  ];
+  var FIX=['Bitte Preise immer netto angeben.','Allergene bitte mit Buchstaben A bis N.'];
+  var CAPS=[
+    'Mit <b>/init</b> legt Claude eine erste Fassung an, aus dem, was es im Ordner findet.',
+    'Du ergänzt, was Claude nicht wissen kann: <b>wie ihr schreibt</b>.',
+    'Eine Korrektur, die du zum zweiten Mal tippst, wird zur <b>Zeile in der Datei</b>. Ab jetzt gilt sie in jeder Sitzung.',
+    'Dasselbe mit der nächsten. So wächst die Datei aus deinem Alltag, nicht aus einer Vorlage.',
+    'Zehn Zeilen statt hundert. Je <b>kürzer</b> die Datei, desto zuverlässiger hält sich Claude daran.'
+  ];
+  var stage='<div class="l9-wrap"><div class="l9-file"><div class="l9-fh"><span class="l9-fn">Betrieb/CLAUDE.md</span><span class="l9-cnt"><b>'+LINES.length+'</b> von 200 Zeilen</span></div>'
+    +'<div class="l9-gauge"><i style="transform:scaleX('+(LINES.length/200)+')"></i></div><ol class="l9-lines">'
+    +LINES.map(function(l,i){ return '<li class="in g'+l.g+(l.t.charAt(0)==='#'?' h':'')+(l.c!=null?' fx':'')+'" data-i="'+i+'">'+l.t+'</li>'; }).join('')+'</ol></div>'
+    +'<div class="l9-chat"><div class="l9-ch">Sitzung</div><div class="l9-cmd">/init</div>'
+    +FIX.map(function(f,i){ return '<div class="l9-fix" data-c="'+i+'"><span class="l9-who">Du, zum zweiten Mal</span>'+f+'<span class="l9-act">→ in die CLAUDE.md</span></div>'; }).join('')+'</div></div>';
+
+  function count(el){ var n=el.querySelectorAll('.l9-lines li.in').length; el.querySelector('.l9-cnt b').textContent=n; el.querySelector('.l9-gauge i').style.transform='scaleX('+(n/200)+')'; }
+  T3.anim('tsn3-a09',{
+    reset:function(el){
+      el.querySelectorAll('.l9-lines li').forEach(function(li){ li.classList.remove('in'); });
+      el.querySelectorAll('.l9-fix,.l9-cmd').forEach(function(f){ f.classList.remove('in','sent'); });
+      count(el);
+    },
+    play:function(el, api, end){
+      var lis=el.querySelectorAll('.l9-lines li'), fx=el.querySelectorAll('.l9-fix'), cmd=el.querySelector('.l9-cmd');
+      function show(gr, t){ var k=0; LINES.forEach(function(l,i){ if(l.g===gr && l.c==null){ api.T.at(t+k*260,function(){ lis[i].classList.add('in'); count(el); }); k++; } }); }
+      api.T.at(300,function(){ cmd.classList.add('in'); api.cap(CAPS[0]); });
+      show(0,1100);
+      api.T.at(3600,function(){ api.cap(CAPS[1]); }); show(1,4100);
+      [0,1].forEach(function(c){
+        var t0=6800+c*3400;
+        api.T.at(t0,function(){ fx[c].classList.add('in'); api.cap(CAPS[2+c]); });
+        api.T.at(t0+1300,function(){ fx[c].classList.add('sent'); });
+        api.T.at(t0+1700,function(){ LINES.forEach(function(l,i){ if(l.c===c){ lis[i].classList.add('in'); if(c===0){ lis[i-1].classList.add('in'); } count(el); } }); });
+      });
+      show(3,13600);
+      api.T.at(14600,function(){ api.cap(CAPS[4]); });
+      api.T.at(17400, end);
+    },
+    end:function(el){
+      el.querySelectorAll('.l9-lines li').forEach(function(li){ li.classList.add('in'); });
+      el.querySelectorAll('.l9-fix').forEach(function(f){ f.classList.add('in','sent'); });
+      el.querySelector('.l9-cmd').classList.add('in');
+      count(el);
+    }
+  });
+
+  var EX='# Betrieb\nBistro in Hamburg-Ottensen, 60 Plätze innen, 24 auf der Terrasse.\nGeöffnet Dienstag bis Sonntag, Montag Ruhetag.\nKüche: saisonal, Lieferanten aus der Region, Mittagstisch werktags.\n\n# So schreiben wir\nDu-Form auf Karte, Aushängen und in Antworten an Gäste.\nKurze Sätze, keine Fremdwörter, Herkunft der Hauptzutat nennen.\n\n# Regeln\nPreise immer netto, mit zwei Nachkommastellen.\nAllergene mit den Buchstaben A bis N kennzeichnen.\nWenn dir eine Angabe fehlt, frag nach, statt sie zu erfinden.\n\n# Ordner\nSpeisekarte/   Rezepturen und aktuelle Karte\nEinkauf/       Lieferanten, Preislisten, Lieferscheine\nAuswertungen/  Ergebnisse, Dateiname beginnt mit dem Datum';
+
+  T3.page({
+    key:'l09', re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, tab:'L 3.9 · Die CLAUDE.md',
+    hero:{eyebrow:'L 3.9', title:'Die <span class="ts-gold">CLAUDE.md</span>', alt:'Die CLAUDE.md: das Briefing, das Claude Code bei jedem Start liest'},
+    intro:'<p>Jede Sitzung in Claude Code beginnt ohne Erinnerung an die letzte. Damit du deinen Betrieb nicht jeden Morgen neu erklärst, gibt es die <b>CLAUDE.md</b>: eine schlichte Textdatei in deinem Ordner, die Claude bei jedem Start liest. Darin steht, wer du bist, wie ihr arbeitet und was immer gilt.</p>'
+      +'<p>Sie ist die wichtigste Datei, die du in diesem Kurs anlegst. Alles, was ab Modul 4 dazukommt, baut auf ihr auf, und eine gute CLAUDE.md spart dir mehr Zeit als jede Erweiterung. Wir legen deine erste heute an, in fünf Minuten.</p>',
+    anim:{id:'tsn3-a09', eb:'Wie sie entsteht', title:'Eine Datei, die <span class="g">mitwächst</span>.',
+      sub:'Die beste CLAUDE.md schreibst du nicht an einem Abend. Sie entsteht aus den Korrekturen, die du sonst immer wieder tippen würdest.',
+      stage:stage,
+      capEnd:CAPS[4]},
+    body:function(H){
+      return H.sec({id:'tsn3-l09-was', title:'Was die CLAUDE.md <span class="g">ist</span>',
+          lead:'Eine Textdatei mit festen Anweisungen. Claude behandelt sie als Kontext, also als Wissen, das es bei jeder Antwort mitdenkt.',
+          body:'<p><strong class="lead">Nicht verwechseln mit dem Gedächtnis der App.</strong>Das Gedächtnis aus Lektion 3.4 gehört zur Claude-App und füllt sich von selbst. Die CLAUDE.md gehört zu Claude Code, liegt als Datei in deinem Ordner, und du bestimmst jedes Wort darin.</p>'
+            +'<p><strong class="lead">Claude Code führt zusätzlich eigene Notizen.</strong>Das sogenannte Auto-Memory: Dinge, die Claude beim Arbeiten über dich lernt, etwa deine Vorlieben. Sagst du „Merk dir …“, landet es dort. Soll etwas fest in die CLAUDE.md, sagst du ausdrücklich: „Schreib das in die CLAUDE.md.“</p>'})
+        +H.sec({id:'tsn3-l09-wo', wide:true, title:'Wo sie <span class="g">liegt</span>',
+          lead:'Es kann mehrere geben. Claude liest beim Start alle CLAUDE.md-Dateien von deinem Arbeitsordner aufwärts, deshalb gilt eine Datei im Hauptordner auch für alle Unterordner.',
+          body:H.table(['Ort','Gilt für','Wofür im Betrieb'],[
+            ['<code>~/.claude/CLAUDE.md</code>','dich, in allen Projekten','Wie du angesprochen werden willst, deine Sprache, deine Arbeitsweise'],
+            ['<code>Betrieb/CLAUDE.md</code>','alle Ordner darunter','Dein Betrieb, euer Ton, Regeln, die überall gelten'],
+            ['<code>Betrieb/Speisekarte/CLAUDE.md</code>','nur diesen Ordner','Regeln für Kartentexte, Rezepturen, Allergene'],
+            ['<code>CLAUDE.local.md</code>','nur dich, nur dieses Projekt','Persönliche Notizen, die du nicht mit anderen teilst']
+          ])
+          +'<p style="margin-top:14px">Die Tilde <code>~</code> steht für deinen Benutzerordner. Ob eine Datei geladen wurde, siehst du in jeder Sitzung mit <code>/context</code> unter den Memory-Dateien.</p>'})
+        +H.sec({id:'tsn3-l09-anlegen', title:'Deine erste CLAUDE.md in <span class="g">fünf Minuten</span>',
+          lead:'Du musst sie nicht selbst tippen. Claude schreibt die erste Fassung, du korrigierst.',
+          body:H.steps([
+            'Starte Claude Code in deinem Hauptordner <code>Betrieb</code>, im Reiter Code der App oder im Terminal.',
+            'Gib <code>/init</code> ein. Claude sieht sich den Ordner an und legt eine erste CLAUDE.md an. Gibt es schon eine, schlägt es Verbesserungen vor, statt sie zu überschreiben.',
+            'Oder, wenn der Ordner noch fast leer ist: Lass dich mit dem Prompt unten interviewen. Das Ergebnis ist meist besser, weil Claude nach dem fragt, was es nicht sehen kann.',
+            'Öffne die Datei mit <code>/memory</code>, lies sie Zeile für Zeile und streich alles, was nicht stimmt oder nicht jedes Mal gelten soll.'
+          ])
+          +H.prompt('Ich will eine CLAUDE.md für meinen Betrieb anlegen. Stell mir nacheinander zehn kurze Fragen zu meinem Betrieb, unserer Küche, unserem Ton auf Karte und in Antworten an Gäste und zu den Regeln, die immer gelten. Schreib danach eine CLAUDE.md in diesen Ordner, höchstens 60 Zeilen, gegliedert in Betrieb, So schreiben wir, Regeln und Ordner.','Setup-Prompt')
+          +H.code(EX,'Beispiel · Betrieb/CLAUDE.md')})
+        +H.sec({id:'tsn3-l09-inhalt', wide:true, title:'Was hinein gehört, und was <span class="g">nicht</span>',
+          lead:'Die Faustregel von Anthropic: Schreib hinein, was du sonst immer wieder erklären würdest. Und bleib unter 200 Zeilen, denn jede Zeile fährt in jeder Sitzung mit.',
+          body:H.cards([
+            {eb:'Gehört hinein', nm:'Was immer gilt', p:['Fakten zu deinem Betrieb, die in jeder Sitzung gelten.','Euer Ton und eure Schreibregeln.','Fehler, die Claude zum zweiten Mal gemacht hat, als klare Regel.','Wo was liegt und wie Ergebnisse abgelegt werden.']},
+            {eb:'Gehört woanders hin', nm:'Was nur manchmal gilt', p:['Abläufe mit vielen Schritten, etwa die Monatsinventur: Das wird ein Skill, Lektion 3.12.','Regeln nur für einen Bereich: in die CLAUDE.md des Unterordners.','Gästedaten, Passwörter, Kontonummern: gar nicht.','Wünsche wie „sei gründlich“: zu vage, um sie zu befolgen.']}
+          ],2)})
+        +H.sec({id:'tsn3-l09-gut', title:'Gute <span class="g">Anweisungen</span>',
+          lead:'Was für die CLAUDE.md gilt, gilt für jeden Auftrag: Claude hält sich an das, was es überprüfen kann. Eine gute Anweisung hat drei Teile.',
+          body:'<p><strong class="lead">Was.</strong>Das Ergebnis, so konkret wie möglich: eine Tabelle, ein Aushang, eine Liste.</p>'
+            +'<p><strong class="lead">Womit.</strong>Die Dateien oder Angaben, auf denen es beruhen soll, statt dass Claude sie sich zusammensucht oder erfindet.</p>'
+            +'<p><strong class="lead">Woran du erkennst, dass es fertig ist.</strong>Jedes Gericht hat eine Zeile, jede Spalte ist gefüllt, fehlende Angaben sind markiert.</p>'
+            +H.table(['Vage','Konkret'],[
+              ['Schreib schöne Kartentexte.','Höchstens 12 Wörter je Gericht, Herkunft der Hauptzutat nennen, keine Adjektive wie „lecker“.'],
+              ['Achte auf die Preise.','Preise immer netto, mit zwei Nachkommastellen, aus der Datei Preisliste.xlsx.'],
+              ['Mach eine Übersicht.','Eine Tabelle mit Gericht, Wareneinsatz und Verkaufspreis, sortiert nach Wareneinsatz.']
+            ])})
+        +H.sec({id:'tsn3-l09-pflege', title:'Die Datei <span class="g">pflegen</span>',
+          lead:'Eine CLAUDE.md ist nie fertig. Sie wird mit jeder Woche ein bisschen besser.',
+          body:'<p><strong class="lead">Zweimal ist die Grenze.</strong>Macht Claude denselben Fehler ein zweites Mal oder tippst du dieselbe Korrektur wie in der letzten Sitzung, gehört sie als Zeile in die Datei. Sag einfach: „Schreib das in die CLAUDE.md.“</p>'
+            +'<p><strong class="lead">Widersprüche aufräumen.</strong>Stehen zwei Regeln gegeneinander, wählt Claude eine davon, und zwar nicht unbedingt die, die du meinst. Einmal im Monat lässt du <code>/doctor prompt-audit</code> laufen, das findet Veraltetes und Widersprüche.</p>'
+            +H.note('Was du zum zweiten Mal erklärst, schreibst du in die CLAUDE.md. Was nicht jedes Mal gilt, gehört nicht hinein.','Die Merkregel')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Deine', animGold:'erste CLAUDE.md',
+      steps:['Hauptordner','Interview','Kürzen','Prüfen'],
+      intro:'So steht deine CLAUDE.md heute Abend:',
+      points:['Leg sie im <b>Hauptordner Betrieb</b> an, damit sie für alle Unterordner gilt.',
+        'Lass dich von Claude <b>interviewen</b>, statt sie selbst zu tippen. Es fragt nach dem, was es nicht sehen kann.',
+        'Kürz sie auf das, was <b>in jeder Sitzung</b> gelten soll. Unter sechzig Zeilen ist ein guter Anfang.',
+        'Prüf mit <b>/context</b>, ob sie geladen wird, und trag ab jetzt jede doppelte Korrektur nach.']},
+    learn:{learn:['Du weißt, dass die CLAUDE.md bei <b>jedem Start</b> gelesen wird.',
+        'Du kennst die <b>Speicherorte</b> und weißt, dass sie nach unten gilt.',
+        'Du hast deine erste CLAUDE.md mit <b>/init</b> oder Interview angelegt.',
+        'Du schreibst Anweisungen mit <b>Was, Womit</b> und Woran-fertig.'],
+      next:'/die-3-slash-commands'}
   });
 })();
 
