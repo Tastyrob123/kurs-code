@@ -4464,6 +4464,7 @@ window.__tsMO = function(cb){
     /* Modul 3 - Claude Grundlagen (NEUBAU 01.11.2026, L3.1-L3.17, Bibliothek __tsn3).
        PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
        den Weiter-Button der Seite wieder. Kette = Lektionsfolge des Neubaus (nur lebende Seiten). */
+    { re:/\/(?:module\/|lektionen\/)?modul-3-claude-grundlagen(?:-[a-z0-9-]+)?\/?$/, href:'/was-ist-claude-genau' },
     { re:/\/(?:lektionen\/)?was-ist-claude-genau\/?$/, href:'/welches-claude-wann-chatcoworkcodeapi' },
     { re:/\/(?:lektionen\/)?welches-claude-wann-chatcoworkcodeapi\/?$/, href:'/claude-plne-preis' },
     { re:/\/(?:lektionen\/)?claude-plne-preis\/?$/, href:'/claude-interface-durchlauf' },
@@ -31011,9 +31012,11 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   }
 
   /* ---------- Abschnitt 09 ---------- */
-  function chainNext(cfg){ var C=window.__tsn3Chain||{}; return C[cfg.key]||cfg.learn.next; }
+  function chainNext(cfg){ var C=window.__tsn3Chain||{}; return C[cfg.key]||(cfg.learn&&cfg.learn.next); }
   function nextA(href){ return '<a id="ts-next" href="'+href+'">'+(href.indexOf('/modul-')===0?'Nächstes Modul':'Nächste Lektion')+' '+ICO_NEXT+'</a>'; }
   function learnHTML(l){
+    /* Modul-Uebersicht: keine Learnings, nur der Weiter-Knopf (Kettenpruefung 01.11.2026) */
+    if(!l.learn.length) return '<div class="tsn3-learn solo"><div id="ts-next-wrap">'+nextA(l.href||l.next)+'</div></div>';
     return '<div class="tsn3-learn"><div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'
       +'<div class="tsl-grid">'+l.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'
       +'<div id="ts-next-wrap">'+nextA(l.href||l.next)+'</div></div>';
@@ -31109,7 +31112,12 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     var nr=sc.querySelector('.notion-root'); if(nr && nr.style.display!=='none') nr.style.display='none';
     var nh=document.querySelector('.notion-header.page'); if(nh && nh.style.display!=='none') nh.style.display='none';
   }
+  /* Alte Notion-Seite "Modul 3 : Claude Grundlagen" (/modul-3-dein-persnlicher-workspace, Inhalt Notion-Workspace)
+     zeigt niemand mehr: sofort auf die neue Uebersicht. Auch nach Klick innerhalb der Seite (Seitenwechsel ohne Neuladen). */
+  var OLD3=/^\/(?:lektionen\/)?modul-3-dein-pers[a-z]*nlicher-workspace\/?$/, NEW3='/module/modul-3-claude-grundlagen';
+  function away(){ if(OLD3.test(location.pathname)){ document.documentElement.style.visibility='hidden'; location.replace(NEW3); return true; } return false; }
   function mountAll(){
+    if(away()) return;
     var p=location.pathname;
     for(var i=0;i<PAGES.length;i++){
       var cfg=PAGES[i], id='tsn3-'+cfg.key, ex=document.getElementById(id);
@@ -31121,6 +31129,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var booted=false;
   function boot(){
     if(booted) return; booted=true;
+    if(away()) return;
     mountAll();
     document.addEventListener('DOMContentLoaded', mountAll);
     window.addEventListener('scroll', function(){ for(var i=0;i<PAGES.length;i++) if(PAGES[i].re.test(location.pathname)) guardNext(PAGES[i]); }, {passive:true});
@@ -31140,7 +31149,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
    Neue Modul-Zeile in Notion (40bb9546-5534-81ca-9b22-d8e5c3f5c6b3), live erst nach Re-Sync.
    Gate tolerant fuer Suffixe. Opener #tsn3-a00 "Ein Menue in vier Gaengen.": eine Menuekarte,
    die Gang fuer Gang aufgeschlagen wird; jede Zeile ist zugleich der Link zur Lektion
-   (Opener und Lektions-Register in einem Objekt). Kein Weiter-Button, keine Empfehlungs-Kachel.
+   (Opener und Lektions-Register in einem Objekt). Unten nur der Weiter-Knopf auf 3.1, keine Empfehlungs-Kachel.
    ============================================================ */
 (function(){
   var T3=window.__tsn3; if(!T3) return;
@@ -31171,7 +31180,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     anim:{id:'tsn3-a00', eb:'Was dich erwartet', title:'Ein Menü in vier <span class="g">Gängen</span>.',
       sub:'Jede Zeile führt direkt in ihre Lektion. Du kannst der Reihe nach gehen oder dort einsteigen, wo du gerade stehst.',
       stage:stage,
-      capEnd:CAPS[3]}
+      capEnd:CAPS[3]},
+    learn:{learn:[], next:'/was-ist-claude-genau'}
   });
 })();
 
