@@ -4751,6 +4751,16 @@ html.tsn6-on .notion-header.page{display:none!important}
   .tsn6-reg .rg{grid-template-columns:1fr}
   .tsn6-tab{font-size:13px}.tsn6-tab th,.tsn6-tab td{padding:10px}
 }
+/* Handy: Tabelle als Karten, damit nichts seitlich ueberlaeuft (320-440 px) */
+@media(max-width:440px){
+  .tsn6-tab,.tsn6-tab tbody,.tsn6-tab tr,.tsn6-tab td{display:block;width:100%}
+  .tsn6-tab thead{display:none}
+  .tsn6-tab tr{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .tsn6-tab tr:last-child{border-bottom:0}
+  .tsn6-tab td{border-bottom:0;padding:3px 14px;overflow-wrap:break-word}
+  .tsn6-tab td:first-child{padding-bottom:5px;font-size:15px}
+  .tsn6-tab td:not(:first-child)::before{content:attr(data-l);display:block;font:600 10px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:1px}
+}
 @media(max-width:520px){.tsn6-learn .lg{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){
   .tsn6 *,.tsn6 *::before,.tsn6 *::after{animation:none!important;transition:none!important}

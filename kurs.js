@@ -37156,7 +37156,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       case 'merk': return '<div class="tsn6-merk"><span>'+(b.l||'Die Merkregel')+'</span><p>'+b.h+'</p></div>';
       case 'pairs': return '<div class="tsn6-pairs">'+b.i.map(function(x){ return '<div class="tsn6-pair"><div><i>So nicht</i>'+x[0]+'</div><div><i>So</i>'+x[1]+'</div></div>'; }).join('')+'</div>';
       case 'fig': return '<figure class="tsn6-fig"><div class="fr">'+pic(b.img,b.l,b.tone)+'</div>'+(b.cap?'<figcaption>'+b.cap+'</figcaption>':'')+'</figure>';
-      case 'tab': return '<table class="tsn6-tab"><thead><tr>'+b.h.map(function(x){ return '<th>'+x+'</th>'; }).join('')+'</tr></thead><tbody>'+b.r.map(function(r){ return '<tr>'+r.map(function(x){ return '<td>'+x+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
+      case 'tab': return '<table class="tsn6-tab"><thead><tr>'+b.h.map(function(x){ return '<th>'+x+'</th>'; }).join('')+'</tr></thead><tbody>'+b.r.map(function(r){ return '<tr>'+r.map(function(x,i){ return '<td data-l="'+String(b.h[i]).replace(/"/g,'&quot;')+'">'+x+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
     }
     return '';
   }
