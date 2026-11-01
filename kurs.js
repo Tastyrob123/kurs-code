@@ -26931,9 +26931,9 @@ var TSISL_TEAM_ONB_V2=[
     step('7. Einheit','Eigenschaft : Auswählen → kg, l, Stück.',
       E('Auswählen')+NM('Einheit')+OPT(['kg','l','Stück'])+P('Die Einheit sagt, worauf sich die nächste Spalte bezieht. Ohne sie weiß in drei Monaten niemand mehr, ob 1,5 Kilo oder Liter gemeint waren.')),
     step('8. Menge je Gebinde','Eigenschaft : Zahl → Name der Spalte : Menge je Gebinde.',
-      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Zahl')+NM('Menge je Gebinde')+EIN('wie viel von der Einheit in einem Gebinde steckt. Bei 12 × 125 g Burrata sind das <b>1,5</b> (kg).')),
+      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Zahl')+NM('Menge je Gebinde')+EIN('wie viel von der Einheit in einem Gebinde steckt. Bei 12 × 125 g Burrata sind das <b>1,5</b> (kg).')+P('In der Vorlage steht diese Angabe in <b>TB Inventory</b> als Text in der Spalte <b>Menge / Unit</b>, zum Beispiel „1,5 kg".')),
     step('9. Einkaufspreis je Gebinde','Eigenschaft : Zahl → Zahlenformat Euro.',
-      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+NM('Einkaufspreis je Gebinde')+EIN('den Nettopreis für ein ganzes Gebinde, so wie er auf der Rechnung steht.')),
+      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+NM('Einkaufspreis je Gebinde')+EIN('den Nettopreis für ein ganzes Gebinde, so wie er auf der Rechnung steht.')+P('In der Vorlage heißt diese Spalte <b>Preis pro Unit (€)</b>.')),
     step('10. Bestand (Gebinde)','Eigenschaft : Zahl → Name der Spalte : Bestand (Gebinde).',
       E('Zahl')+NM('Bestand (Gebinde)')+EIN('wie viele Gebinde gerade im Lager stehen. Angebrochene Gebinde als Kommazahl, eine halbe Kiste ist <b>0,5</b>.')),
     step('11. Mindestbestand (Gebinde)','Eigenschaft : Zahl → Name der Spalte : Mindestbestand (Gebinde).',
@@ -26993,7 +26993,7 @@ var TSISL_TEAM_ONB_V2=[
     step('1. Den Formeleditor öffnen','Neue Spalte, Eigenschaft Formel — der Editor öffnet sich.',
       P('Klick in der Tabelle rechts auf <b>+</b> und wähl als Eigenschaft <b>Formel</b>. Es öffnet sich ein Feld, in das du die Formel schreibst oder kopierst.')+P('Unter dem Feld zeigt Notion dir eine Vorschau des Ergebnisses für die erste Zeile. Stimmt die Vorschau, stimmt meistens auch der Rest.')),
     step('2. Preis je Einheit','In Produkte · Formel → Einkaufspreis geteilt durch Menge, auf zwei Stellen gerundet.',
-      IN('Produkte')+E('Formel')+NM('Preis je Einheit')+P('Trage diese Formel ein :')+CODE('if(prop("Menge je Gebinde") > 0,\n  round(prop("Einkaufspreis je Gebinde") / prop("Menge je Gebinde"), 2),\n  0\n)')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, was ein Kilo, ein Liter oder ein Stück kostet. Das <b>if</b> schützt vor einer Division durch null, solange die Menge noch leer ist.')),
+      IN('Produkte')+E('Formel')+NM('Preis je Einheit')+P('Trage diese Formel ein :')+CODE('if(prop("Menge je Gebinde") > 0,\n  round(prop("Einkaufspreis je Gebinde") / prop("Menge je Gebinde"), 2),\n  0\n)')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, was ein Kilo, ein Liter oder ein Stück kostet. Das <b>if</b> schützt vor einer Division durch null, solange die Menge noch leer ist.')+P('In der Vorlage rechnen das die Formeln <b>Preis / KG</b>, <b>Preis / Ltr.</b> und <b>Preis / Stck</b> in TB Inventory.')),
     step('3. Warenwert im Lager','In Produkte · Formel → Bestand mal Einkaufspreis je Gebinde.',
       IN('Produkte')+E('Formel')+NM('Warenwert im Lager')+P('Trage diese Formel ein :')+CODE('prop("Bestand (Gebinde)") * prop("Einkaufspreis je Gebinde")')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, wie viel Geld in diesem Artikel im Lager steht.')),
     step('4. Bestand prüfen','In Produkte · Formel → zeigt „knapp" in Rot, sobald der Mindestbestand erreicht ist.',
@@ -27185,7 +27185,7 @@ var TSISL_TEAM_ONB_V2=[
       host.id='tsn1-a0';
       host.innerHTML=R.head('Zehn Lektionen','Das Handwerk hinter deiner <span class="g">Vorlage</span>.','Jedes Teil dieses Fensters erklärt dir eine Lektion. Am Ende des Moduls liest du jede Seite der Backoffice-Vorlage so selbstverständlich wie deine Speisekarte.')+
         '<div class="win ntn"><div class="bar">Probeküche <em>/</em> Produkte</div><div class="lay">'+
-          '<div class="side pt n-side" data-k="1"><div class="n-ws"><i>B</i>Dein Betrieb</div><div class="n-gh">Teamspaces</div>'+si('Küche',0,'op')+si('Mein Notion AI Backoffice',1,'')+si('Service',0,'')+'<div class="n-gh">Privat</div>'+si('Probeküche',0,'op',true)+si('Produkte',1,'no',true)+'</div>'+
+          '<div class="side pt n-side" data-k="1"><div class="n-ws"><i>B</i>Dein Betrieb</div><div class="n-gh">Teamspaces</div>'+si('Küche',0,'op')+si('Notion AI Backoffice',1,'')+si('Service',0,'')+'<div class="n-gh">Privat</div>'+si('Probeküche',0,'op',true)+si('Produkte',1,'no',true)+'</div>'+
           '<div class="main"><div class="cov"><img alt="" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div>'+
             '<div class="ttl"><h4>Produkte</h4><span class="lock pt" data-k="9">'+nb('1.9')+LOCK+'Kann Inhalt bearbeiten</span></div>'+
             '<div class="co pt" data-k="2">'+nb('1.2')+'💡 Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
@@ -27332,7 +27332,7 @@ var TSISL_TEAM_ONB_V2=[
       var P=NN.PAGE, A=NN.ARROW;
       function si(t,lvl,arrow,on){ return '<div class="n-si'+(on?' on':'')+'" style="padding-left:'+(8+lvl*14)+'px">'+A.replace('class="ar"','class="ar'+(arrow==='op'?' op':arrow==='no'?' no':'')+'"')+P+'<span>'+t+'</span></div>'; }
       var side='<div class="n-ws"><i>B</i>Dein Betrieb</div><div class="n-gh">Teamspaces</div>'+
-        si('Küche',0,'op')+si('Mein Notion AI Backoffice',1,'op')+si('DB 0 : Inventurliste',2,'')+si('DB IV Zutaten',2,'')+si('DB Gerichte',2,'')+
+        si('Küche',0,'op')+si('Notion AI Backoffice',1,'op')+si('TB Inventory',2,'')+si('DB IV : Zutaten',2,'')+si('DB Gerichte',2,'')+
         si('Service',0,'op')+si('Hygieneplan',1,'no',true)+'<div class="n-gh">Privat</div>'+si('Probeküche',0,'');
       var HAND='<svg class="hand" viewBox="0 0 18 22"><path d="M2 1.5v16.2l4.3-4 2.7 6.3 2.8-1.2-2.7-6.2 5.9-.3z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round"/></svg>';
       var G='<span class="gr">'+NN.GRIP+'</span>';
@@ -27422,7 +27422,7 @@ var TSISL_TEAM_ONB_V2=[
             {mi:'Dein Büro', nm:'Privat', tx:'<p>Seiten, die nur du siehst. Hier landet alles, was du für dich anlegst, und hier landet auch eine Vorlage, die du dir in deinen Workspace kopierst.</p>'}
           ],3),
           R.txt('<p><strong>Seiten liegen in Seiten.</strong> Jede Seite kann beliebig viele Unterseiten haben, und genau so entsteht der Baum, den du links siehst. Klappst du einen Eintrag auf, siehst du, was darunter liegt. Ganz oben im Fenster zeigt dir eine Pfadzeile, wo du gerade stehst, zum Beispiel <em>Service › Hygieneplan</em>. Ein Klick auf einen Teil des Pfads bringt dich eine Ebene zurück.</p>'),
-          R.fund(['Mein Notion AI Backoffice','DB IV Zutaten','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
+          R.fund(['Notion AI Backoffice','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
         ]}),
         R.sec({eb:'Blöcke', title:'Was ein <span class="g">Block</span> ist und warum dich das freut', lead:'Ein Block ist alles, was auf einer Seite eine eigene Zeile hat. Ein Absatz, eine Überschrift, ein Bild, eine Checkliste, eine ganze Tabelle.', blocks:[
           R.txt('<p><strong>Mit dem Schrägstrich holst du jeden Block.</strong> Tippe auf einer leeren Zeile <kbd>/</kbd> und Notion zeigt dir eine Liste aller Blöcke. Schreibst du weiter, zum Beispiel <kbd>/</kbd> und dann „Tabelle", wird die Liste kürzer, bis nur noch passt, was du suchst. Das ist der Handgriff, den du in diesem Modul am häufigsten benutzen wirst.</p>'+
@@ -27434,7 +27434,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Callout','Ein Hinweis, der nicht überlesen werden darf','Allergen-Ordner liegt am Pass'],
             ['Toggle','Details, die nur bei Bedarf aufgeklappt werden','Reinigungsmittel und Dosierung'],
             ['Bild, Datei','Fotos vom Anrichten, Lieferantenlisten als PDF','So sieht der Teller beim Rausgehen aus'],
-            ['Datenbank','Eine Tabelle mit Einträgen gleicher Art','DB 0 : Inventurliste']
+            ['Datenbank','Eine Tabelle mit Einträgen gleicher Art','TB Inventory, die Inventurliste']
           ]),
           R.merk('Ein Block macht eine Sache. Lieber drei kleine Blöcke als einen, in dem alles steht.')
         ]}),
@@ -27601,7 +27601,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Einträge lesbar machen', title:'Auch jeder Eintrag einer Datenbank ist eine <span class="g">Seite</span>', lead:'Öffnest du in der Vorlage ein Gericht, siehst du keine Tabellenzeile, sondern eine ganze Seite mit allen Spalten untereinander. Bei dreißig Spalten wird das lang.', blocks:[
           R.txt('<p><strong>Das Layout dieser Seiten kannst du einstellen.</strong> Öffne einen Eintrag, klick oben rechts auf die drei Punkte und dann auf <em>Darstellung &amp; Layout</em> und <em>Layout anpassen</em>. Dort legst du fest, welche Eigenschaften oben angepinnt stehen und welche in einem Detailbereich verschwinden. Die Einstellung gilt für alle Einträge dieser Datenbank, du machst sie also nur einmal.</p>'),
-          R.fund(['Mein Notion AI Backoffice','DB Gerichte','ein Gericht öffnen'],'<p>Pinne oben an, was du beim Blick auf ein Gericht wirklich brauchst, zum Beispiel Verkaufspreis, Wareneinsatz in Prozent und Allergene. Die Rechenspalten dahinter bleiben vollständig erhalten, sie stehen nur weiter unten.</p>'),
+          R.fund(['Notion AI Backoffice','DB Gerichte','ein Gericht öffnen'],'<p>Pinne oben an, was du beim Blick auf ein Gericht wirklich brauchst, zum Beispiel Verkaufspreis, Wareneinsatz in Prozent und Allergene. Die Rechenspalten dahinter bleiben vollständig erhalten, sie stehen nur weiter unten.</p>'),
         ]}),
         R.sec({eb:'Jetzt du', title:'Deine erste <span class="g">Stationskarte</span>', blocks:[
           R.jetzt([
@@ -27798,13 +27798,13 @@ var TSISL_TEAM_ONB_V2=[
             ['Person','Jemand aus deinem Workspace','Wer die Inventur gezählt hat'],
             ['Dateien und Medien','PDFs, Fotos, Dokumente','Sicherheitsdatenblatt, Foto vom Teller'],
             ['Telefon, E-Mail, URL','Kontaktdaten, die man direkt anklicken kann','Bestelladresse des Lieferanten'],
-            ['Verknüpfung','Verbindet einen Eintrag mit Einträgen einer anderen Datenbank','Die Zutat kennt ihr Inventarprodukt'],
-            ['Rollup','Holt einen Wert über eine Verknüpfung herüber','Preis/Kg in den Zutaten'],
+            ['Verknüpfung','Verbindet einen Eintrag mit Einträgen einer anderen Datenbank','Die Zutat kennt ihr Inventar Produkt'],
+            ['Rollup','Holt einen Wert über eine Verknüpfung herüber','Preis pro Kg in den Zutaten'],
             ['Formel','Rechnet aus anderen Spalten einen neuen Wert','Preis / Portion in den Zutaten'],
             ['Erstellt um, Letzte Änderung um','Notion trägt das selbst ein','Wann ein Preis zuletzt geändert wurde']
           ]),
           R.txt('<p><strong>Verknüpfung, Rollup und Formel sind das Besondere.</strong> Sie füllst du nicht von Hand, sie entstehen aus anderen Spalten. Genau diese drei Typen machen aus einer Liste ein System, und jeder bekommt in diesem Modul eine eigene Lektion.</p>'),
-          R.fund(['DB IV : Zutaten','Spaltenkopf anklicken'],'<p>Klick in der Vorlage auf den Kopf einer Spalte, zum Beispiel <em>Inventarprodukt</em>. Du siehst Typ und Namen, und über <em>Eigenschaft bearbeiten</em> die Einstellungen dahinter. <em>Inventarprodukt</em> ist eine Verknüpfung, <em>Preis/Kg</em> ein Rollup, <em>Preis / Portion</em> eine Formel, <em>Kalorien ( kcal ) / 100g</em> eine Zahl. So liest du jede Datenbank der Vorlage, bevor du etwas einträgst.</p>')
+          R.fund(['DB IV : Zutaten','Spaltenkopf anklicken'],'<p>Klick in der Vorlage auf den Kopf einer Spalte, zum Beispiel <em>Inventar Produkt</em>. Du siehst Typ und Namen, und über <em>Eigenschaft bearbeiten</em> die Einstellungen dahinter. <em>Inventar Produkt</em> ist eine Verknüpfung, <em>Preis pro Kg</em> ein Rollup, <em>Preis / Portion</em> eine Formel, <em>Kalorien ( kcal ) / 100g</em> eine Zahl. So liest du jede Datenbank der Vorlage, bevor du etwas einträgst.</p>')
         ]}),
         R.sec({eb:'Typische Fehler', title:'Wenn eine Spalte nicht tut, was sie <span class="g">soll</span>', wide:true, blocks:[
           R.fehler([
@@ -27960,7 +27960,7 @@ var TSISL_TEAM_ONB_V2=[
             'Prüf danach zehn Zeilen gegen die Originalliste, vor allem Preise und Einheiten.'
           ],'So gehst du vor'),
           R.txt('<p><strong>Zwei Dinge musst du wissen.</strong> Ein Zusammenführen fügt immer neue Zeilen hinzu, bestehende werden nicht aktualisiert. Wer dieselbe Liste zweimal importiert, hat jeden Artikel doppelt. Und Formeln, Rollups und Verknüpfungen entstehen beim Import nicht neu. In eine bestehende Datenbank wie die der Vorlage ist das kein Problem, weil sie dort schon angelegt sind. Eine Verknüpfung kannst du beim Zusammenführen sogar einer Spalte der Datei zuordnen.</p>'),
-          R.fund(['DB 0 : Inventurliste','•••','Mit CSV zusammenführen'],'<p>So füllst du die Inventurliste der Vorlage mit den Artikeln deines Großhändlers. Die Rechenspalten der Vorlage greifen sofort, sobald Preis und Menge drinstehen. Welche Spalten du dort genau befüllst, zeigt dir Modul 2.</p>')
+          R.fund(['TB Inventory','•••','Mit CSV zusammenführen'],'<p>So füllst du die Inventurliste der Vorlage mit den Artikeln deines Großhändlers. Die Rechenspalten der Vorlage greifen sofort, sobald Preis und Menge drinstehen. Welche Spalten du dort genau befüllst, zeigt dir Modul 2.</p>')
         ]}),
         R.sec({eb:'Weg 3', title:'Aus einem Dokument: Notion AI <span class="g">liest mit</span>', lead:'Lieferscheine, Rechnungen und Preislisten kommen oft als PDF. Der Notion Agent kann PDF-, CSV- und Excel-Dateien lesen und daraus Einträge in einer Datenbank anlegen.', blocks:[
           R.copy('Prompt für den Notion Agent','Lies die angehängte Rechnung von Frischdienst Nord. Lege für jede Position eine Zeile in der Datenbank „Produkte" an, mit Produkt, Einheit, Menge je Gebinde und Einkaufspreis je Gebinde netto. Wenn ein Produkt schon existiert, lege es nicht neu an, sondern nenne es mir. Markiere alle Zeilen, bei denen du dir bei Einheit oder Preis nicht sicher bist.','prompt','Stand November 2026: Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Als Dateien nennt die Notion-Hilfe unter anderem PDF, CSV und XLSX. Fotos, also zum Beispiel ein abfotografierter Papier-Lieferschein, stehen dort nicht. Nimm deshalb den digitalen Lieferschein oder die Rechnung als PDF.'),
@@ -28178,7 +28178,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Prozent leer, Prozent nicht leer','Wie vollständig drüben eingetragen ist','Bei wie viel Prozent der Zutaten die Allergene gepflegt sind'],
             ['Frühestes, spätestes Datum','Den ersten oder letzten Tag','Die letzte Lieferung eines Lieferanten']
           ]),
-          R.fund(['DB IV : Zutaten','Inventarprodukt','Preis/Kg'],'<p>Genau dieses Muster steht in der Vorlage an der wichtigsten Stelle. Die Zutat ist über <em>Inventarprodukt</em> mit der Inventurliste verknüpft, und der Rollup <em>Preis/Kg</em> holt mit <em>Original anzeigen</em> den aktuellen Einkaufspreis. Ändert sich der Preis in der Inventurliste, rechnet jede Zutat sofort mit dem neuen. Wie die Vorlage das bis zum Gericht weiterführt, zeigt dir Modul 2.</p>')
+          R.fund(['DB IV : Zutaten','Inventar Produkt','Preis pro Kg'],'<p>Genau dieses Muster steht in der Vorlage an der wichtigsten Stelle. Die Zutat ist über <em>Inventar Produkt</em> mit der Inventurliste <em>TB Inventory</em> verknüpft, und der Rollup <em>Preis pro Kg</em> holt mit <em>Original anzeigen</em> den aktuellen Kilopreis. Ändert sich der Preis in der Inventurliste, rechnet jede Zutat sofort mit dem neuen. Wie die Vorlage das bis zum Gericht weiterführt, zeigt dir Modul 2.</p>')
         ]}),
         R.sec({eb:'Grenzen kennen', title:'Was Verknüpfungen <span class="g">nicht</span> können', wide:true, lead:'Drei Dinge solltest du wissen, bevor du in der Vorlage eine Verknüpfung anfasst. Alle drei stehen so in der Notion-Hilfe, Stand November 2026.', blocks:[
           R.cards([
@@ -28536,7 +28536,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Ein zweiter Ort', title:'Dieselbe Liste auf einer <span class="g">anderen Seite</span>', lead:'Die Station Kalt soll ihre Kühlhaus-Artikel sehen, ohne dass eine zweite Liste entsteht, die irgendwann nicht mehr stimmt.', blocks:[
           R.txt('<p><strong>Dafür gibt es die verknüpfte Ansicht.</strong> Du tippst auf der Stationsseite <kbd>/</kbd>, suchst nach „verknüpft" und wählst die Datenbank, die du zeigen willst. Auf der Seite erscheint eine Ansicht der Originaltabelle mit eigenen Filtern. Trägt jemand dort einen Bestand ein, steht er sofort im Original. Filter und Sortierung der verknüpften Ansicht gelten dagegen nur dort und ändern das Original nicht.</p>'),
-          R.fund(['Mein Notion AI Backoffice','eine Übersichtsseite'],'<p>Willst du dir in der Vorlage eine Übersicht bauen, zum Beispiel eine Seite für die Küche mit den knappen Artikeln und den Gerichten der Woche, holst du die Datenbanken genau so als verknüpfte Ansichten hinein. Die Originale bleiben, wo sie sind. Wie das mit den Bereichen der Vorlage zusammenspielt, zeigt dir Modul 2.</p>')
+          R.fund(['Notion AI Backoffice','eine Übersichtsseite'],'<p>Willst du dir in der Vorlage eine Übersicht bauen, zum Beispiel eine Seite für die Küche mit den knappen Artikeln und den Gerichten der Woche, holst du die Datenbanken genau so als verknüpfte Ansichten hinein. Die Originale bleiben, wo sie sind. Wie das mit den Bereichen der Vorlage zusammenspielt, zeigt dir Modul 2.</p>')
         ]}),
         R.sec({eb:'Vorlagen', title:'Jeder neue Eintrag startet <span class="g">vollständig</span>', lead:'Eine Datenbankvorlage legt fest, was in einem neuen Eintrag schon drinsteht: vorausgefüllte Spalten und eine fertige Gliederung auf der Seite.', blocks:[
           R.jetzt([
@@ -28954,11 +28954,12 @@ var TSISL_TEAM_ONB_V2=[
       @media(max-width:820px){ #tsn1-a10 .line{grid-template-columns:1fr 1fr;gap:16px} #tsn1-a10 .rule,#tsn1-a10 .imp{display:none} #tsn1-a10 .rail{grid-template-columns:1fr} }
       `);
       /* [Bereich, Bild, Kennzahl, falsch, richtig, Fussnote] — Beispielwerte, nachgerechnet:
-         Burrata 18,90 EUR / 1,5 kg = 12,60 EUR/kg; 125 g = 1,58 EUR; + 0,97 EUR Tomaten/Basilikum/Oel = 2,55 EUR;
-         2,55 / 12,61 netto = 20,2 %. Mit verrutschtem Komma 126,00 EUR/kg: 15,75 + 0,97 = 16,72 EUR = 132,6 %. */
+         Burrata: Preis pro Unit (€) 18,90 EUR, Menge / Unit 1,5 kg -> Preis / KG 12,60 EUR; 125 g = 1,58 EUR; + 0,97 EUR Tomaten/Basilikum/Oel = 2,55 EUR;
+         2,55 / 12,61 netto = 20,2 %. Mit verrutschtem Komma 189,00 EUR -> 126,00 EUR/kg: 15,75 + 0,97 = 16,72 EUR = 132,6 %.
+         Spaltennamen exakt nach der leeren Vorlage (TB Inventory, DB IV : Zutaten, DB Gerichte), Stand 01.11.2026. */
       var ST=[
-        ['DB 0 : Inventurliste','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis/Kg','126,00 €','12,60 €','Eingetragen von Hand'],
-        ['DB IV : Zutaten','zutaten/mozzarella.webp','Burrata 125 g · Preis / Portion','15,75 €','1,58 €','Rollup aus der Inventur, mal Portion'],
+        ['TB Inventory','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis pro Unit (€)','189,00 €','18,90 €','Von Hand, Menge / Unit 1,5 kg'],
+        ['DB IV : Zutaten','zutaten/mozzarella.webp','Burrata 125 g · Preis / Portion','15,75 €','1,58 €','Preis pro Kg aus der Inventur, mal Portion'],
         ['DB Gerichte','gerichte/burrata.webp','Wareneinsatz ( Eur )','16,72 €','2,55 €','Summe der Zutaten'],
         ['Formel im Gericht','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
       ];
@@ -28993,14 +28994,14 @@ var TSISL_TEAM_ONB_V2=[
         later(function(){ step(0); cls(sns[3],'bad'); lupeTo(3); cap.innerHTML='<b>132,6 % Wareneinsatz.</b> Die Spalte ist eine Formel: Wareneinsatz geteilt durch Netto-Preis.'; },700);
         later(function(){ step(1); cls(sns[3],'chk'); cls(sns[2],'bad'); lupeTo(2); cap.innerHTML='Der Wareneinsatz in Euro ist schon zu hoch. Er ist die <b>Summe der Zutaten</b>, also weiter zurück.'; },2900);
         later(function(){ cls(sns[2],'chk'); cls(sns[1],'bad'); lupeTo(1); cap.innerHTML='Die Burrata-Portion kostet angeblich 15,75 €. Der Preis kommt per <b>Rollup aus der Inventur</b>.'; },5000);
-        later(function(){ cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>126,00 €</b> pro Kilo, das Komma ist eine Stelle verrutscht. Richtig wären 12,60 €.'; },7100);
+        later(function(){ cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>189,00 €</b> für den Karton mit 1,5 kg, das Komma ist eine Stelle verrutscht. Richtig wären 18,90 €.'; },7100);
         later(function(){ step(2); lupe.style.opacity='0'; cap.innerHTML='Korrigiert an <b>einer</b> Stelle. Zutat, Gericht und Prozent rechnen sofort neu: 20,2 %.'; forward(); },9500);
       }
       function endState(){ clear(); val('good'); sns.forEach(function(sn){ cls(sn,'good'); }); cap.innerHTML='Korrigiert an <b>einer</b> Stelle. Zutat, Gericht und Prozent rechnen sofort neu: 20,2 %.'; step(2); }
       [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
         var i=+s.getAttribute('data-s'); reset(); step(i);
         if(i===0){ cls(sns[3],'bad'); lupeTo(3); cap.innerHTML='<b>132,6 % Wareneinsatz.</b> Die Spalte ist eine Formel: Wareneinsatz geteilt durch Netto-Preis.'; }
-        if(i===1){ cls(sns[3],'chk'); cls(sns[2],'chk'); cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>126,00 €</b> pro Kilo, das Komma ist eine Stelle verrutscht.'; }
+        if(i===1){ cls(sns[3],'chk'); cls(sns[2],'chk'); cls(sns[1],'chk'); cls(sns[0],'bad'); lupeTo(0); cap.innerHTML='Hier ist die Quelle: <b>189,00 €</b> für den Karton mit 1,5 kg, das Komma ist eine Stelle verrutscht.'; }
         if(i===2){ endState(); forward(); }
       }); });
       host.querySelector('.rp button').addEventListener('click',play);
@@ -29030,9 +29031,9 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Die häufigsten Fehler', title:'Was in der Vorlage am häufigsten <span class="g">schiefgeht</span>', wide:true, lead:'Diese Fälle tauchen in fast jedem Betrieb auf, der mit der Vorlage startet. Alle lassen sich in wenigen Minuten beheben, wenn man sie kennt.', blocks:[
           R.fehler([
-            ['Eine Zutat kostet 0 €','Die Verknüpfung zum Inventarprodukt ist leer','In DB IV : Zutaten das Inventarprodukt auswählen'],
-            ['Ein Preis ist zehnmal zu hoch oder zu niedrig','Komma verrutscht oder Preis je Gebinde statt je Kilo eingetragen','Den Wert in der Inventurliste korrigieren und mit dem Lieferschein vergleichen'],
-            ['Ein Rollup zeigt zwei Preise','Zwei Inventarprodukte sind mit derselben Zutat verknüpft','Das falsche entfernen, die Verknüpfung auf 1 Seite begrenzen'],
+            ['Eine Zutat kostet 0 €','Die Spalte Inventar Produkt ist leer','In DB IV : Zutaten bei Inventar Produkt den Artikel aus der Inventur auswählen'],
+            ['Ein Preis ist zehnmal zu hoch oder zu niedrig','Komma verrutscht, oder Menge / Unit passt nicht zum Preis pro Unit (€)','In TB Inventory beide Werte mit dem Lieferschein vergleichen und korrigieren'],
+            ['Ein Rollup zeigt zwei Preise','Bei Inventar Produkt sind zwei Artikel verknüpft','Das falsche entfernen, die Verknüpfung auf 1 Seite begrenzen'],
             ['Ein Artikel steht doppelt','Er wurde neu angelegt, statt den alten zu suchen','Vor jedem Neuanlegen die Suche benutzen. Den Doppelten aus allen Verknüpfungen nehmen, dann löschen'],
             ['Mehrere Formeln zeigen Fehler','Eine Spalte wurde gelöscht, aus der sie gelesen haben','Seitenverlauf öffnen und den Stand davor zurückholen'],
             ['Ein Gericht fehlt in der Übersicht','In der Ansicht ist ein Filter aktiv','Filterleiste prüfen oder die Ansicht ohne Filter öffnen'],
@@ -29048,8 +29049,8 @@ var TSISL_TEAM_ONB_V2=[
           R.txt('<p><strong>Der Seitenverlauf ist deine Versicherung.</strong> Über die drei Punkte oben rechts auf einer Seite öffnest du ihren Verlauf und holst einen früheren Stand zurück. Im Free-Plan reicht er sieben Tage zurück, bei Plus dreißig, bei Business neunzig. Ein Export als CSV sichert deine Zahlen, aber nicht die Verknüpfungen dazwischen. Er ersetzt den Verlauf deshalb nicht.</p>')
         ]}),
         R.sec({eb:'Mit Notion AI', title:'Lass die KI die <span class="g">Lücken</span> finden', lead:'Wenn du einen Plan mit Notion AI hast, kann der Agent deine Datenbanken lesen und dir sagen, wo etwas fehlt. Prüfen und korrigieren musst du selbst.', blocks:[
-          R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventarprodukt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
-          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventarprodukt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
+          R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventar Produkt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
+          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventar Produkt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
         ]}),
         {emp:{kind:'Nutzung', animTitle:'Fünf Minuten', animGold:'pro Woche', steps:['Kalkulation sortieren','Ausreißer verfolgen','Ohne-Preis-Ansicht','Verlauf kennen'],
           intro:'Eine Vorlage bleibt verlässlich, wenn du einmal pro Woche kurz hineinschaust, bevor sich ein Fehler durch die Monatszahlen zieht.',
