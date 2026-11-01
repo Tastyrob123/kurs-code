@@ -760,6 +760,21 @@ details > summary {
   background:#c7b489;color:#05060b;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;transition:filter .2s}
 #tsnav .cta:hover{filter:brightness(1.08)}
 @media(max-width:900px){#tsnav .center{display:none}}
+/* Handy (bis 480 px): Leiste passt ganz ins Bild, kein seitliches Scrollen. Schriftzug
+   zweizeilig ("Gastronomie AI" / "MasterClass"), Knopf etwas kleiner. Desktop unveraendert.
+   (Ladezeit-Chat 01.11.2026, vorher ragte "Direkt zur Vorlage" bis 474 px.) */
+@media(max-width:480px){
+  #tsnav-wrap{padding:44px 12px 0}
+  #tsnav{height:58px;padding:0 7px 0 16px}
+  #tsnav .brand{display:block;position:relative;padding-left:26px;max-width:9.4em;font-size:14px;line-height:1.12;letter-spacing:-.3px;white-space:normal}
+  #tsnav .brand img{position:absolute;left:0;top:50%;width:18px;height:18px;transform:translateY(-50%)}
+  #tsnav .cta{flex:none;height:42px;padding:0 15px;font-size:13.5px}
+}
+@media(max-width:350px){
+  #tsnav .brand{font-size:13px;padding-left:24px}
+  #tsnav .brand img{width:16px;height:16px}
+  #tsnav .cta{padding:0 12px;font-size:12.5px;height:40px}
+}
 
 /* Lektions-Stats */
 #ts-lesson-stats{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
