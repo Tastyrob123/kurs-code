@@ -4188,6 +4188,79 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
   #tsn5 .a9-core{grid-row:auto;grid-column:auto}
   #tsn5 .a9-base{grid-row:auto}
 }
+
+/* ================================================================
+   ORIGINAL-OBERFLAECHEN (Robert 01.11.2026: Nachbauten sehen aus wie
+   das Original). Werte abgenommen am 01.11.2026:
+   WhatsApp Web, Dark-Theme-Tokens (WDS): Chat #161717, eingehend #242626,
+   ausgehend #144D37, Text #FAFAFA, Nebentext rgba(255,255,255,.6),
+   Linien rgba(255,255,255,.1), Akzent/Knopftext #21C063, Lesehaken #53BDEB,
+   Blasen-Radius 18px, Innenabstand 8px 12px.
+   Notion (app.notion.com, Dark): Fläche #191919, Text #f0efed, Kopf #ada9a3,
+   Linien #fffff315, Schrift ui-sans-serif/-apple-system, Kopf 14px/36px,
+   Zeile 37px, Auswahl 14px/20px, Radius 4px, Farben grün #71ffaf56/#e8f1ec,
+   rot #ff746986/#fce9e7, blau #51a6ff7e/#e5f2fc, grau #fffceb4e/#f0efed.
+   Innerhalb dieser Fenster keine Kurs-Gestaltung.
+   ================================================================ */
+#tsn5 .wa{--wa-bg:#161717;--wa-in:#242626;--wa-out:#144D37;--wa-tx:#FAFAFA;--wa-tx2:rgba(255,255,255,.6);--wa-line:rgba(255,255,255,.1);--wa-acc:#21C063;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--wa-tx);letter-spacing:0}
+#tsn5 .wa .wa-x{white-space:normal}
+#tsn5 .wa .wa-t{float:right;display:inline-flex;align-items:center;gap:3px;margin:6px 0 -4px 10px;font-size:11px;line-height:15px;color:var(--wa-tx2)}
+#tsn5 .wa .wa-n{display:block;font-size:12.5px;font-weight:600;color:var(--wa-acc);margin-bottom:2px}
+#tsn5 .wa .wa-b{display:flex;clear:both;margin:8px -12px -8px;border-top:1px solid var(--wa-line);font-style:normal}
+#tsn5 .wa .wa-b i{flex:1;text-align:center;font-style:normal;font-size:14px;line-height:20px;padding:9px 6px;color:var(--wa-acc);transition:background .4s cubic-bezier(.22,1,.36,1)}
+#tsn5 .wa .wa-b i + i{border-left:1px solid var(--wa-line)}
+/* L5.4 Telefon */
+#tsn5 .a4-phone.wa{background:var(--wa-bg);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 0 0 5px #000,0 30px 60px -30px rgba(0,0,0,.9);padding:5px}
+#tsn5 .a4-phone.wa .a4-ph{background:var(--wa-bg);border-bottom:1px solid var(--wa-line);border-radius:25px 25px 0 0;padding:14px 14px 10px}
+#tsn5 .a4-phone.wa .a4-ph i{display:flex;align-items:center;justify-content:center;background:var(--wa-in);color:var(--wa-tx);font:600 14px/1 -apple-system,BlinkMacSystemFont,sans-serif;font-style:normal}
+#tsn5 .a4-phone.wa .a4-ph b{font-size:15px;font-weight:600;color:var(--wa-tx)}
+#tsn5 .a4-phone.wa .a4-ph span{font-size:12.5px;color:var(--wa-tx2)}
+#tsn5 .a4-phone.wa .a4-chat{gap:6px;padding:12px 10px}
+#tsn5 .a4-phone.wa .a4-m{max-width:84%;padding:8px 12px;border-radius:18px;font-size:14px;line-height:19px;border:0;box-shadow:0 1px .5px rgba(0,0,0,.13)}
+#tsn5 .a4-phone.wa .a4-m.g{background:var(--wa-out);color:var(--wa-tx);border-bottom-right-radius:18px}
+#tsn5 .a4-phone.wa .a4-m.a{background:var(--wa-in);color:var(--wa-tx);border-bottom-left-radius:18px}
+#tsn5 .a4-phone.wa .a4-typ{background:var(--wa-in);border:0;border-radius:18px}
+#tsn5 .a4-phone.wa .a4-typ i{background:var(--wa-tx2)}
+/* L5.6 Erinnerung (WhatsApp) + Belegung (Notion) */
+#tsn5 .a6-feed.wa{margin:0 14px;padding:12px 10px;border-radius:12px;background:var(--wa-bg);gap:6px}
+#tsn5 .a6-feed.wa .a6-m{max-width:88%;padding:8px 12px;border-radius:18px;font-size:13.5px;line-height:18px;border:0}
+#tsn5 .a6-feed.wa .a6-m.sys{background:var(--wa-in);color:var(--wa-tx);border-bottom-left-radius:18px}
+#tsn5 .a6-feed.wa .a6-m.gst{background:var(--wa-out);color:var(--wa-tx);border-bottom-right-radius:18px}
+#tsn5 .a6-cap{margin:10px 16px 0;font:600 9px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--tx3)}
+#tsn5 .nt{margin:0 14px;border-radius:12px;background:#191919;color:#f0efed;padding:10px 0 4px;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI Variable Display","Segoe UI",Helvetica,Arial,sans-serif;letter-spacing:0;overflow:hidden}
+#tsn5 .nt-v{display:flex;align-items:center;gap:6px;padding:0 12px 8px;font-size:14px;font-weight:500;color:#f0efed;border-bottom:1px solid #fffff315}
+#tsn5 .nt-v svg{color:#ada9a3}
+#tsn5 .nt-r{display:grid;grid-template-columns:1.2fr 1fr .82fr 1.2fr;align-items:center;height:37px;border-bottom:1px solid #fffff315;transition:background .45s cubic-bezier(.22,1,.36,1)}
+#tsn5 .nt-r:last-child{border-bottom:0}
+#tsn5 .nt-r > span{display:flex;align-items:center;gap:5px;height:100%;padding:0 8px;font-size:14px;line-height:20px;color:#f0efed;border-right:1px solid #fffff315;white-space:nowrap;overflow:hidden}
+#tsn5 .nt-r > span:last-child{border-right:0}
+#tsn5 .nt-hd{height:36px}
+#tsn5 .nt-hd > span{color:#ada9a3}
+#tsn5 .nt-hd svg{flex:0 0 auto;color:#ada9a3}
+#tsn5 .nt-r.hl{background:rgba(255,255,255,.055)}
+#tsn5 .nt-tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;font-size:14px;line-height:20px;font-style:normal;white-space:nowrap}
+#tsn5 .nt-tag.gre{background:#71ffaf56;color:#e8f1ec}
+#tsn5 .nt-tag.red{background:#ff746986;color:#fce9e7}
+#tsn5 .nt-tag.blu{background:#51a6ff7e;color:#e5f2fc}
+#tsn5 .nt-tag.gra{background:#fffceb4e;color:#f0efed}
+#tsn5 .a6-col{padding-bottom:14px}
+/* L5.7 Freigabe als WhatsApp-Nachricht */
+#tsn5 .a7-wa{border-radius:14px;background:var(--wa-bg);padding:12px 12px 14px}
+#tsn5 .a7-wa .a7-m{max-width:92%;padding:8px 12px;border-radius:18px;background:var(--wa-in);color:var(--wa-tx);font-size:14px;line-height:19px}
+#tsn5 .a7-wa .a7-cq{margin:4px 0 0;font-size:14px;line-height:19px;color:var(--wa-tx);min-height:0}
+#tsn5 .a7-wa .a7-cb i.on{background:rgba(255,255,255,.06)}
+#tsn5 .a7-card{background:transparent;border:0;padding:0}
+@media(max-width:860px){ #tsn5 .nt-r{grid-template-columns:1.2fr 1fr .5fr 1.3fr} #tsn5 .nt-r > span{padding:0 6px;font-size:13px} #tsn5 .nt-tag{font-size:13px} }
+#tsn5 .a6-feed.wa .a6-m span.wa-x{display:inline;font:inherit;letter-spacing:0;text-transform:none;color:inherit;margin:0}
+#tsn5 .a6-feed.wa .a6-m span.wa-t{display:inline-flex;font:400 11px/15px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none;color:var(--wa-tx2);margin:6px 0 -4px 10px}
+#tsn5 .a6-feed.wa .a6-m em.wa-b{display:flex;gap:0;margin:8px -12px -8px}
+#tsn5 .a6-feed.wa .a6-m em.wa-b i{font-size:13.5px;padding:8px 6px;border:0;border-radius:0;color:var(--wa-acc)}
+#tsn5 .a6-feed.wa .a6-m em.wa-b i + i{border-left:1px solid var(--wa-line)}
+#tsn5 .wa .wa-comp{margin:6px 8px 8px;height:38px;border-radius:19px;background:var(--wa-in);display:flex;align-items:center;padding:0 16px;font-size:14px;color:var(--wa-tx2)}
+#tsn5 .a7-wa .wa-t{float:none;display:flex;justify-content:flex-end;margin:2px 0 0}
+#tsn5 .a7-wa .a7-cb{gap:0}
+#tsn5 .a7-wa .a7-m{overflow:hidden}
 /* <<< NEUBAU MODUL 5 — ENDE <<< */
 /* · */
 /* · */

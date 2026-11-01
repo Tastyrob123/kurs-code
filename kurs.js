@@ -35109,7 +35109,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   /* ---------- Seite bauen ---------- */
   function build(L){
     var h='';
-    h+='<div class="ts-hero"><img class="ts-hero__img" alt="'+esc(L.alt)+'" src="'+(L.cover||ph(L.eyebrow))+'" fetchpriority="high" decoding="async">'+
+    h+='<div class="ts-hero"><img class="ts-hero__img" alt="'+esc(L.alt)+'" src="'+(L.cover||IMG+'cover-'+L.key+'.webp')+'" fetchpriority="high" decoding="async">'+
        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
        '<div class="ts-hero__eyebrow">'+L.eyebrow+'</div><h1 class="ts-hero__title">'+L.title+'</h1></div></div>';
     h+='<div class="ts-body">'+L.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
@@ -35445,12 +35445,16 @@ window.__tsn4Boot && window.__tsn4Boot();
       log:[['Nachricht lesen','„Freitag, 19 Uhr, vier Personen"'],['Werkzeug fragen','verfuegbarkeit_pruefen(06.11., 19:00, 4)'],['Antwort lesen','keine Antwort'],['Regel greift','ohne Werkzeug-Antwort keine Zusage'],['Übergeben','an_mensch_uebergeben(Lena, alle Angaben)'],['Ehrlich antworten','Anfrage notiert, Rückmeldung bis 18 Uhr']],
       steps:[[0,0],[1,0],[2,0],[3,0],[4,0],[5,1]] }
   };
+  /* WhatsApp-Nachricht im Original-Aufbau: Text + Uhrzeit (+ Lesehaken bei eigenen Nachrichten) */
+  var WA_T=['18:41','18:41','18:42','18:42'];
+  var WA_TICK='<svg viewBox="0 0 16 11" width="16" height="11" aria-hidden="true"><path d="M11.07.65 4.62 7.1 2 4.48.94 5.54l3.68 3.68 7.51-7.51z M15.06.65 8.62 7.1l-.75-.75-1.06 1.06 1.81 1.81 7.51-7.51z" fill="#53BDEB"/></svg>';
+  function waMsg(m,i){ return '<span class="wa-x">'+m[1]+'</span><span class="wa-t">'+WA_T[i%4]+(m[0]==='g'?WA_TICK:'')+'</span>'; }
   ANIM.gespraech={
     controls:'<button type="button" class="tsn5-btn a4-b0 on">Werkzeug antwortet</button><button type="button" class="tsn5-btn a4-b1">Werkzeug fällt aus</button>',
     html:function(){
       var S=A4.ok;
-      return '<div class="a4"><div class="a4-phone"><div class="a4-ph"><i></i><div><b>Restaurant Hafenblick</b><span>Reservierungs-Assistent</span></div></div><div class="a4-chat">'+
-        S.chat.map(function(m){ return '<div class="a4-m '+m[0]+' on">'+m[1]+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div></div></div>'+
+      return '<div class="a4"><div class="a4-phone wa"><div class="a4-ph"><i>H</i><div><b>Restaurant Hafenblick</b><span>online</span></div></div><div class="a4-chat">'+
+        S.chat.map(function(m,i){ return '<div class="a4-m '+m[0]+' on">'+waMsg(m,i)+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div></div><div class="wa-comp"><span>Nachricht</span></div></div>'+
         '<div class="a4-gap"><i class="a4-pulse"></i></div>'+
         '<div class="a4-log"><div class="a4-lh"><b>Was der Agent dabei tut</b><span>live mitgelesen</span></div>'+
         S.log.map(function(l,i){ return '<div class="a4-l on"><span class="a4-ln">'+('0'+(i+1)).slice(-2)+'</span><div><b>'+l[0]+'</b><code>'+esc(l[1])+'</code></div></div>'; }).join('')+'</div></div>';
@@ -35465,7 +35469,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       cls([sec.querySelector('.a4-b0')],'on',k==='ok'); cls([sec.querySelector('.a4-b1')],'on',k==='ko');
       var chat=$(st,'.a4-chat'), typ=$(st,'.a4-typ'), logs=$$(st,'.a4-l'), pulse=$(st,'.a4-pulse');
       st.classList.toggle('ko',k==='ko');
-      chat.innerHTML=S.chat.map(function(m){ return '<div class="a4-m '+m[0]+'">'+m[1]+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div>';
+      chat.innerHTML=S.chat.map(function(m,i){ return '<div class="a4-m '+m[0]+'">'+waMsg(m,i)+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div>';
       typ=$(st,'.a4-typ');
       logs.forEach(function(l,i){ l.classList.remove('on','warn'); l.querySelector('b').textContent=S.log[i][0]; l.querySelector('code').textContent=S.log[i][1]; });
       var ms=$$(st,'.a4-m'); reflow(st);
@@ -35535,40 +35539,54 @@ window.__tsn4Boot && window.__tsn4Boot();
   };
 
   /* ---------------- L5.6 · Der Abend davor ---------------- */
+  /* Notion-Eigenschafts-Icons (Tabellenkopf), Farbe aus Notion: #ada9a3 */
+  var NT_ICO={
+    tbl:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 3.5h12v9H2z M2 6.5h12 M6 6.5v6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>',
+    aa:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><text x="1" y="12" font-size="10" font-family="ui-sans-serif,-apple-system,sans-serif" fill="currentColor">Aa</text></svg>',
+    rel:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 11l6-6 M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+    num:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 2.5 5 13.5 M11 2.5l-1 11 M2.5 6h11 M2 10h11" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+    sel:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 7l2.5 2.5L10.5 7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
+  };
   ANIM.vorabend={
     html:function(){
       return '<div class="a6"><div class="a6-col a6-fri"><div class="a6-h"><b>Freitag</b><span class="a6-clk">17:00</span></div>'+
-        '<div class="a6-feed">'+
-          '<div class="a6-m sys on"><span>17:00 · Erinnerung</span>Kurze Erinnerung von Hafenblick: morgen, 20 Uhr, vier Personen auf Lindner. Bleibt es dabei?<em><i>Passt</i><i class="x">Leider absagen</i></em></div>'+
-          '<div class="a6-m gst on">Leider absagen</div>'+
-          '<div class="a6-m sys on"><span>17:04 · Warteliste</span>Für morgen 20 Uhr ist ein Tisch für vier frei geworden. Sollen wir ihn für dich buchen?</div>'+
-          '<div class="a6-m gst on">Ja, sehr gern!</div>'+
-        '</div></div>'+
+        '<div class="a6-feed wa">'+
+          '<div class="a6-m sys on"><span class="wa-x">Kurze Erinnerung vom Restaurant Hafenblick: morgen, 20 Uhr, vier Personen auf Lindner. Bleibt es dabei?</span><span class="wa-t">17:00</span><em class="wa-b"><i>Passt</i><i>Leider absagen</i></em></div>'+
+          '<div class="a6-m gst on"><span class="wa-x">Leider absagen</span><span class="wa-t">17:03'+WA_TICK+'</span></div>'+
+          '<div class="a6-m sys on"><span class="wa-x">Für morgen 20 Uhr ist ein Tisch für vier frei geworden. Sollen wir ihn für dich buchen?</span><span class="wa-t">17:04</span></div>'+
+          '<div class="a6-m gst on"><span class="wa-x">Ja, sehr gern!</span><span class="wa-t">17:06'+WA_TICK+'</span></div>'+
+        '</div><div class="a6-cap">WhatsApp auf dem Handy der Gäste</div></div>'+
         '<div class="a6-gap"><i class="a6-pulse"></i></div>'+
         '<div class="a6-col a6-sat"><div class="a6-h"><b>Samstag</b><span>Belegung 20 Uhr</span></div>'+
-          '<div class="a6-t"><b>Tisch 2</b><span>Okafor · 2</span><em>Bestätigt</em></div>'+
-          '<div class="a6-t a6-key"><b>Tisch 6</b><span class="a6-kn">Becker · 4</span><em class="a6-ks">Bestätigt</em></div>'+
-          '<div class="a6-t"><b>Tisch 8</b><span>Weiß · 6</span><em>Bestätigt</em></div>'+
-          '<div class="a6-wl"><span>Warteliste Samstag</span><div class="a6-w a6-w1 moved"><b>Becker · 4</b><em>20 Uhr</em></div><div class="a6-w"><b>Yilmaz · 2</b><em>19 Uhr</em></div></div>'+
+          '<div class="nt"><div class="nt-v">'+NT_ICO.tbl+'<span>Reservierungen</span></div><div class="nt-tab">'+
+            '<div class="nt-r nt-hd"><span>'+NT_ICO.aa+'Gastname</span><span>'+NT_ICO.rel+'Tisch</span><span>'+NT_ICO.num+'Pers.</span><span>'+NT_ICO.sel+'Status</span></div>'+
+            '<div class="nt-r"><span>Okafor</span><span>Tisch 2</span><span>2</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
+            '<div class="nt-r a6-key"><span>Lindner</span><span>Tisch 6</span><span>4</span><span><em class="nt-tag red a6-ks">Storniert</em></span></div>'+
+            '<div class="nt-r"><span>Weiß</span><span>Tisch 8</span><span>6</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
+            '<div class="nt-r a6-w1"><span>Becker</span><span class="a6-wt">Tisch 6</span><span>4</span><span><em class="nt-tag gre a6-ws">Bestätigt</em></span></div>'+
+            '<div class="nt-r"><span>Yilmaz</span><span class="nt-e"></span><span>2</span><span><em class="nt-tag blu">Warteliste</em></span></div>'+
+          '</div></div><div class="a6-cap">deine Datenbank in Notion</div>'+
         '</div></div>'+
         '<div class="a6-rail"><span class="a6-s on">Erinnerung raus</span><span class="a6-s on">Absage</span><span class="a6-s on">Tisch wieder frei</span><span class="a6-s on">Warteliste bekommt ihn</span></div>';
     },
     play:function(st){
       stop(st);
-      var m=$$(st,'.a6-m'), clk=$(st,'.a6-clk'), key=$(st,'.a6-key'), kn=$(st,'.a6-kn'), ks=$(st,'.a6-ks'), w1=$(st,'.a6-w1'), s=$$(st,'.a6-s'), p=$(st,'.a6-pulse');
-      cls(m,'on',0); cls(s,'on',0); key.classList.remove('free','cx','nw'); w1.classList.remove('moved','ping'); kn.textContent='Lindner · 4'; ks.textContent='Bestätigt'; clk.textContent='16:58';
+      var m=$$(st,'.a6-m'), clk=$(st,'.a6-clk'), key=$(st,'.a6-key'), ks=$(st,'.a6-ks'), w1=$(st,'.a6-w1'), wt=$(st,'.a6-wt'), ws=$(st,'.a6-ws'), s=$$(st,'.a6-s'), p=$(st,'.a6-pulse');
+      function tag(el,t,c){ el.className=el.className.replace(/\b(gre|red|blu|gra)\b/,c); el.textContent=t; }
+      cls(m,'on',0); cls(s,'on',0); cls([key,w1],'hl',0); tag(ks,'Bestätigt','gre'); tag(ws,'Warteliste','blu'); wt.textContent=''; clk.textContent='16:58';
       function pulse(dir){ p.classList.remove('go','back'); reflow(p); p.classList.add(dir); }
       T(st,function(){ clk.textContent='16:59'; },500);
       T(st,function(){ clk.textContent='17:00'; m[0].classList.add('on'); s[0].classList.add('on'); },1100);
       T(st,function(){ m[1].classList.add('on'); s[1].classList.add('on'); clk.textContent='17:03'; },2600);
       T(st,function(){ pulse('go'); },3000);
-      T(st,function(){ key.classList.add('cx'); ks.textContent='Storniert'; },3500);
-      T(st,function(){ key.classList.remove('cx'); key.classList.add('free'); kn.textContent='frei'; ks.textContent='frei'; s[2].classList.add('on'); },4300);
-      T(st,function(){ w1.classList.add('ping'); pulse('back'); },5000);
+      T(st,function(){ key.classList.add('hl'); tag(ks,'Storniert','red'); },3500);
+      T(st,function(){ key.classList.remove('hl'); s[2].classList.add('on'); },4300);
+      T(st,function(){ w1.classList.add('hl'); pulse('back'); },5000);
       T(st,function(){ m[2].classList.add('on'); clk.textContent='17:04'; s[3].classList.add('on'); },5500);
       T(st,function(){ m[3].classList.add('on'); clk.textContent='17:06'; },6900);
       T(st,function(){ pulse('go'); },7200);
-      T(st,function(){ key.classList.remove('free'); key.classList.add('nw'); kn.textContent='Becker · 4'; ks.textContent='Bestätigt'; w1.classList.remove('ping'); w1.classList.add('moved'); },7700);
+      T(st,function(){ wt.textContent='Tisch 6'; tag(ws,'Bestätigt','gre'); },7700);
+      T(st,function(){ w1.classList.remove('hl'); },8600);
       T(st,function(){ cls(m,'on',1); cls(s,'on',1); },8600);
     },
     end:function(st){}
@@ -35581,9 +35599,9 @@ window.__tsn4Boot && window.__tsn4Boot();
       return '<div class="a7"><div class="a7-days">'+A7.map(function(d){
           return '<div class="a7-d on" style="--v:'+(d[1]/100)+'"><span class="a7-dl">'+d[0]+'</span><div class="a7-bar"><i></i></div><b class="a7-p">'+d[1]+' %</b><span class="a7-k">'+d[2]+' korrigiert</span></div>';
         }).join('')+'</div>'+
-        '<div class="a7-card"><div class="a7-ch"><span>Freigabe auf deinem Handy</span><b class="a7-cd">Sonntag</b></div>'+
-          '<p class="a7-cq">„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"</p>'+
-          '<div class="a7-cb"><span class="a7-ok on">Freigeben</span><span class="a7-ko">Korrigieren</span></div></div>'+
+        '<div class="a7-card"><div class="a7-ch"><span>Freigabe auf deinem Handy, per WhatsApp</span><b class="a7-cd">Sonntag</b></div>'+
+          '<div class="a7-wa wa"><div class="a7-m"><span class="wa-n">Zentrale Hafenblick</span><span class="wa-x">Geplante Antwort an einen Gast:</span><p class="a7-cq">„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"</p><span class="wa-t">12:14</span>'+
+          '<em class="wa-b a7-cb"><i class="a7-ok on">Freigeben</i><i class="a7-ko">Korrigieren</i></em></div></div></div>'+
         '<div class="a7-sw on"><span class="a7-swl">Schattenmodus</span><i class="a7-tg"><b></b></i><span class="a7-sws">aus · Standardfälle laufen allein, Sonderfälle weiter über dich</span></div></div>';
     },
     play:function(st){
@@ -35844,7 +35862,7 @@ window.__tsn4Boot && window.__tsn4Boot();
 
       {t:'sec', eb:'Die Schnittstelle', h:'Warum gerade die Reservierung?',
         body:[
-          'Du kennst das Bild aus der Einleitung: Wir suchen die Stellen in deinem Betriebstag, an denen Information von außen auf dein System trifft. Der Lieferschein war so eine Stelle, der Tagesabschluss eine andere. Die Reservierungsanfrage ist die nächste, und sie hat eine Besonderheit. Sie kommt zu den unmöglichsten Zeiten: mittags, wenn du in der Küche stehst, abends um elf, wenn du längst zu Hause bist, am Ruhetag.',
+          'Du kennst den Begriff aus der Einleitung: Eine Schnittstelle ist jeder Moment im Tag, in dem eine Information entsteht oder gebraucht wird. Der Lieferschein ist so ein Moment, der Tagesabschluss ein anderer. Die Reservierungsanfrage ist der nächste, und sie hat eine Besonderheit. Sie kommt zu den unmöglichsten Zeiten: mittags, wenn du in der Küche stehst, abends um elf, wenn du längst zu Hause bist, am Ruhetag.',
           'Ein Gast entscheidet in dem Moment, in dem er Lust auf deinen Laden hat. Antwortet in diesem Moment niemand, entscheidet er sich um.',
           {kick:'Zwei Löcher, durch die jede Woche Umsatz fällt.'},
           'Das eine sind die Anfragen, die niemand annimmt. Das andere sind die Gäste, die reservieren und nicht kommen. In einer Umfrage der DEHOGA Nordrhein-Westfalen unter zweihundertfünfzig Betrieben kannten siebenundachtzig Prozent No-Shows aus eigener Erfahrung, rund vier von zehn schätzten den Schaden auf mehr als fünf Prozent ihres Jahresumsatzes<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Wie viel es bei dir ist, rechnest du hier mit deinen eigenen Zahlen aus.',
@@ -35905,7 +35923,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         [7,'Meta, WhatsApp Business Platform Pricing, gültig ab 01.10.2026','https://developers.facebook.com/docs/whatsapp/pricing']
       ]},
       {t:'learn', items:[
-        'Du siehst die Reservierung als <b>Schnittstelle</b>, durch die jede Woche unsichtbar Umsatz fällt.',
+        'Du siehst die Reservierungsanfrage als <b>Schnittstelle</b> in deinem Betriebstag, an der jede Woche unsichtbar Umsatz verloren geht.',
         'Du kennst das <b>Zielbild</b>: annehmen, prüfen, buchen, bestätigen, erinnern, abgeben.',
         'Du weißt, warum deine Reservierungen in <b>deiner eigenen Datenbank</b> liegen sollten.',
         'Du kennst die <b>Kosten</b> je Baustein und die Reihenfolge, in der wir bauen.'
@@ -35975,7 +35993,7 @@ window.__tsn4Boot && window.__tsn4Boot();
             ['Notion','einen Schlüssel deiner eigenen Integration','Notion, Einstellungen, Verbindungen. Freigeben nur für die Operations Area'],
             ['WhatsApp','Zugangsschlüssel und Nummern-Kennung','Meta für Entwickler, deine App, Bereich WhatsApp (Lektion 5.4)'],
             ['Mail','Zugang zum Reservierungs-Postfach','bei deinem Mail-Anbieter, für Empfang und Versand']],
-            foot:'Das ist eine eigene Integration für die Notion-Schnittstelle, getrennt vom Anschluss aus Modul 4. Sie sieht nur die Seiten, die du ihr ausdrücklich freigibst, also gib nur die Reservierungs-Datenbanken frei.'}}
+            foot:'Das ist eine eigene Integration für die Notion-API, getrennt vom Anschluss aus Modul 4. Sie sieht nur die Seiten, die du ihr ausdrücklich freigibst, also gib nur die Reservierungs-Datenbanken frei.'}}
         ]},
 
       {t:'sec', eb:'Claude Code als Bauhelfer', h:'Abläufe beschreiben statt klicken',
@@ -36155,15 +36173,15 @@ window.__tsn4Boot && window.__tsn4Boot();
 
       {t:'sec', eb:'Die Grundsatzfrage', h:'Fremdes System oder dein System?',
         body:[
-          'Nutzt du schon ein Reservierungssystem, ist der erste Gedanke natürlich, den Agenten dort buchen zu lassen. Prüf das an einer einzigen Frage: Hat dein System eine offene Schnittstelle, über die ein fremdes Werkzeug Verfügbarkeit lesen und Buchungen schreiben darf, und bekommst du als Betrieb den Zugang dazu?',
-          {table:{title:'Schnittstellen der verbreiteten Systeme', head:['System','offene Schnittstelle','wer den Zugang gibt'], rows:[
+          'Nutzt du schon ein Reservierungssystem, ist der erste Gedanke natürlich, den Agenten dort buchen zu lassen. Prüf das an einer einzigen Frage: Hat dein System eine offene Anbindung, über die ein fremdes Werkzeug Verfügbarkeit lesen und Buchungen schreiben darf, und bekommst du als Betrieb den Zugang dazu?',
+          {table:{title:'Anbindungen der verbreiteten Systeme', head:['System','offene Anbindung','wer den Zugang gibt'], rows:[
             ['aleno','ja, mit Verfügbarkeit und Reservierungen','du selbst, im eigenen Dashboard<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>'],
             ['TheFork Manager','ja, mit Echtzeit-Verfügbarkeit','nur nach Freigabe durch das Integrationsteam<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>'],
             ['SevenRooms','dokumentiert, aber geschlossen','nur für freigeschaltete Betriebe und Partner<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>'],
             ['Zenchef','keine öffentliche Dokumentation','auf Anfrage, je nach Paket'],
             ['OpenTable','nur für zugelassene Partner','kein Zugang für eigene Anbindungen<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>']],
             foot:'Für resmio, Gastronovi und Formitable haben wir keine öffentliche Dokumentation gefunden. Frag dort direkt nach.'}},
-          'Hat dein System eine offene Schnittstelle, ist die Anbindung der kürzeste Weg, und die Werkzeuge unten zeigen auf dein System statt auf Notion. Gibt es keine, kommt dein Agent nicht an deine Belegung. Dann gilt, was wir in Lektion 5.0 besprochen haben: Wir halten die Wahrheit dort, wo sie dir gehört.'
+          'Hat dein System eine offene Anbindung, ist sie der kürzeste Weg, und die Werkzeuge unten zeigen auf dein System statt auf Notion. Gibt es keine, kommt dein Agent nicht an deine Belegung. Dann gilt, was wir in Lektion 5.0 besprochen haben: Wir halten die Wahrheit dort, wo sie dir gehört.'
         ]},
 
       {t:'sec', eb:'Wofür sie da sind', h:'Drei Datenbanken in deiner Vorlage',
@@ -36252,7 +36270,7 @@ window.__tsn4Boot && window.__tsn4Boot();
         [4,'OpenTable, Plattform-Dokumentation (nur für Partner)','https://platform.opentable.com/documentation']
       ]},
       {t:'learn', items:[
-        'Du kannst prüfen, ob dein bisheriges System eine <b>offene Schnittstelle</b> hat, und weißt, was du tust, wenn nicht.',
+        'Du kannst prüfen, ob dein bisheriges System eine <b>offene Anbindung</b> hat, und weißt, was du tust, wenn nicht.',
         'Du kennst die <b>drei Datenbanken</b> deiner Vorlage und füllst sie richtig.',
         'Du verstehst, wie das System <b>frei</b> berechnet: passende Tische minus überschneidende Buchungen.',
         'Du hast beide <b>Werkzeuge</b> gebaut und mit einer Probe-Buchung getestet.'
@@ -36289,7 +36307,7 @@ window.__tsn4Boot && window.__tsn4Boot();
 
       {t:'sec', eb:'Das Gehirn', h:'Welches Claude für deinen Agenten?',
         body:[
-          'Der Agent nutzt Claude über die API, also nicht über dein Abo, sondern nach Verbrauch. In Modul 3 habe ich dir gesagt, dass wir die Schnittstelle erst beim Reservierungs-Agenten brauchen. Jetzt ist es so weit. Du legst in der Claude-Konsole für Entwickler einen Schlüssel an und hinterlegst eine Zahlungsart. Abgerechnet wird nach Token, das sind Wortstücke, ein bisschen wie eine Taxiuhr, die mitläuft, solange gelesen und geschrieben wird.',
+          'Der Agent nutzt Claude über die API, also nicht über dein Abo, sondern nach Verbrauch. In Modul 3 habe ich dir gesagt, dass wir die API erst beim Reservierungs-Agenten brauchen. Jetzt ist es so weit. Du legst in der Claude-Konsole für Entwickler einen Schlüssel an und hinterlegst eine Zahlungsart. Abgerechnet wird nach Token, das sind Wortstücke, ein bisschen wie eine Taxiuhr, die mitläuft, solange gelesen und geschrieben wird.',
           {table:{title:'Die zwei sinnvollen Modelle, Preise je eine Million Token', head:['Modell','Lesen','Schreiben','wofür'], rows:[
             ['Claude Sonnet 5.5','2 $','10 $','der sichere Start, hält sich zuverlässig an Regeln und Werkzeuge'],
             ['Claude Haiku 5.5','0,10 $','0,50 $','deutlich günstiger, wenn das Log zeigt, dass er sauber arbeitet']],
