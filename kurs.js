@@ -24927,323 +24927,7 @@ var TSISL_TEAM_ONB_V2=[
 /* MODUL 3 · alter Block welches-claude-wann-chatcoworkcodeapi (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* MODUL 3 · alter Block claude-plne-preis (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* MODUL 3 · alter Block claude-nutzung-erklrt-6-konzepte (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
-/* ============================================================
-   MODUL 3 · L3.6 "Stack aufräumen"  (/stack-aufrumen)
-
-   Erklaeranimation "Zwölf Werkzeuge, drei Stapel." — EIGENES Konzept:
-   eine echte SORTIER-Bewegung. Zwoelf gleich grosse Chips liegen zu Beginn
-   durcheinander im oberen Feld; die drei Zielspalten stehen als Moebel ab
-   Beat 0 ruhig da. Je Beat wandern vier Chips in ihre Spalte — es spawnt
-   nichts, es verschwindet nichts, es bewegt sich nur.
-   Kompositions-Regel: alle Chips exakt gleich gross, alle Elemente auf
-   derselben Achse (width:min(680px,100%)), feste Buehnenhoehe gegen Spruenge.
-
-   Inhaltlich bewusst OHNE die Haltungs-Predigt aus Modul 0 ("fang schlank an"):
-   hier wird sortiert, nicht gepredigt.
-   ============================================================ */
-
-/* ---- L3.6 · Abschnitt 01 ---- */
-(function(){
-  if(window.__ts3f) return;
-  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.querySelector('.super-content')) return;
-    window.__ts3.hero({
-      img: window.__ts3.phHero('L 3.6'),
-      alt: 'Werkzeug-Stack ausmisten: bleibt, macht Claude, fliegt raus',
-      eyebrow: 'L 3.6',
-      title: '<span class="ts-gold">Stack</span> ausmisten'
-    });
-    window.__ts3.body('ts3f-intro',
-      '<p>Bevor ein neues Werkzeug dazukommt, lohnt ein Blick auf die, die schon da sind. Bei vielen haben sich über die Jahre etliche Abos angesammelt, von denen die Hälfte seit Wochen niemand mehr geöffnet hat.</p>'+
-      '<p>Wir machen daraus drei Stapel, und sortiert wird nach einer einzigen Frage: Wer macht diese Arbeit ab morgen. Das ist keine Fleißaufgabe, zwanzig Minuten reichen.</p>'+
-      '<p>Ist deine Liste kurz, umso besser. Dann bist du schneller fertig und weißt trotzdem, wonach du künftig sortierst, wenn wieder ein Abo dazukommen will.</p>'
-    );
-  }
-  window.__ts3f=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.6 · Abschnitt 02 (Erklaeranimation #ts3fanim) ---- */
-(function(){
-  if(window.__ts3fanim) return;
-  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
-
-  /* g = Zielspalte (0 bleibt · 1 macht Claude · 2 fliegt raus), s = Startplatz im Feld oben */
-  var CHIPS=[
-    {t:'Kalender',            g:0, s:0},
-    {t:'Recherche-Abo',       g:1, s:1},
-    {t:'Zweites Notiz-Tool',  g:2, s:2},
-    {t:'Notiz-Tool',          g:0, s:3},
-    {t:'Text-Assistent',      g:1, s:4},
-    {t:'Mindmap-Abo',         g:2, s:5},
-    {t:'Buchhaltung',         g:0, s:6},
-    {t:'Zusammenfasser',      g:1, s:7},
-    {t:'Screenshot-Abo',      g:2, s:8},
-    {t:'Code-Editor',         g:0, s:9},
-    {t:'Übersetzer-Abo',      g:1, s:10},
-    {t:'Projekt-Tool Nr. 3',  g:2, s:11}
-  ];
-  var COLS=[
-    {t:'Bleibt',       d:'hat eine eigene Aufgabe'},
-    {t:'Macht Claude', d:'wandert in Claude Code'},
-    {t:'Fliegt raus',  d:'seit Wochen nicht geöffnet'}
-  ];
-  var CAPS=[
-    'So sieht es bei den meisten aus: ein Dutzend Werkzeuge, alle irgendwann aus einem guten Grund dazugekommen, keines je wieder überprüft.',
-    'Zuerst das, was <b>bleibt</b>. Kalender, Notizen, Buchhaltung, dein Editor: alles Dinge mit einer klaren Aufgabe, die Claude nicht übernimmt.',
-    'Dann das, was <b>Claude Code künftig selbst macht</b>. Recherchieren, Texte schreiben, zusammenfassen, übersetzen.',
-    'Und der dritte Stapel: alles, was du seit Wochen nicht geöffnet hast. Der <b>fliegt raus</b>, und mit ihm die monatliche Abbuchung.'
-  ];
-  var DWELL=4600;
-
-  /* Geometrie in Prozent der Buehnenbreite bzw. Pixeln der Buehnenhoehe */
-  var CH_W=22.5, START_X=[1.5,26.3,51.2,76], START_Y=[10,48,86], COL_X=[4.5,38.75,73], SLOT_Y=[206,244,282,320];
-
-  var CSS=`
-  #ts3fanim{width:100%;margin:72px 0 0;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts3fanim *{box-sizing:border-box}
-  #ts3fanim .sr-head{text-align:center;max-width:860px;margin:0 auto 44px;padding:0 24px}
-  #ts3fanim .sr-eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts3fanim .sr-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts3fanim h2.sr-title{margin:0;font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;
-    font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff}
-  #ts3fanim h2.sr-title .ts-gold{color:#c7b489}
-  #ts3fanim .sr-sub{margin:14px auto 0;max-width:720px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86)}
-
-  #ts3fanim .sr-wrap{max-width:860px;margin:0 auto;padding:0 24px}
-  #ts3fanim .sr-stage{position:relative;width:min(680px,100%);height:372px;margin:0 auto}
-  #ts3fanim .sr-inlbl{position:absolute;left:0;top:-22px;font:600 9.5px/1 -apple-system,sans-serif;
-    letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34)}
-  /* Das Eingangsfeld ist MOEBEL und bleibt stehen, auch wenn alle Chips heraus sind —
-     sonst klafft nach dem Sortieren ein Loch (Kompositions-Regel 1b c). */
-  #ts3fanim .sr-in{position:absolute;left:0;right:0;top:0;height:126px;border-radius:14px;
-    border:1px dashed rgba(255,255,255,.10);pointer-events:none}
-  #ts3fanim .sr-inempty{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none;
-    font:600 11px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);
-    opacity:0;transition:opacity .8s ease}
-  #ts3fanim .sr-stage.empty .sr-inempty{opacity:1}
-
-/* Zielspalten = Moebel, ab Beat 0 ruhig sichtbar */
-  #ts3fanim .sr-col{position:absolute;top:150px;height:222px;width:31.5%;border-radius:14px;padding:11px 10px 0;
-    background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b;
-    border:1px dashed rgba(255,255,255,.12);transition:border-color .6s ease,box-shadow .6s ease}
-  #ts3fanim .sr-col.act{border-style:solid;border-color:rgba(199,180,137,.5);box-shadow:0 0 34px -14px rgba(199,180,137,.5)}
-  #ts3fanim .sr-col.out.act{border-color:rgba(255,255,255,.22);box-shadow:none}
-  #ts3fanim .sr-ct{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;font-size:13.5px;color:rgba(255,255,255,.55);transition:color .6s ease}
-  #ts3fanim .sr-col.act .sr-ct{color:#fff}
-  #ts3fanim .sr-cd{font-size:10.5px;line-height:1.35;color:rgba(255,255,255,.34);margin-top:3px}
-
-  /* Zwoelf exakt gleich grosse Chips */
-  #ts3fanim .sr-chip{position:absolute;height:30px;border-radius:9px;padding:0 9px;display:flex;align-items:center;justify-content:center;
-    font-size:11px;line-height:1.2;text-align:center;color:rgba(255,255,255,.78);
-    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;
-    border:1px solid rgba(255,255,255,.14);
-    transition:left .85s cubic-bezier(.16,1,.3,1),top .85s cubic-bezier(.16,1,.3,1),border-color .6s ease,color .6s ease,box-shadow .6s ease}
-  #ts3fanim .sr-chip.keep{border-color:rgba(199,180,137,.55);color:#fff;box-shadow:0 0 22px -10px rgba(199,180,137,.55)}
-  #ts3fanim .sr-chip.gone{border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3);text-decoration:line-through}
-
-  #ts3fanim .sr-cap{max-width:640px;margin:30px auto 0;min-height:78px;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
-  #ts3fanim .sr-cap b{color:#c7b489;font-weight:600}
-  #ts3fanim .sr-foot{display:flex;justify-content:center;margin-top:8px}
-  #ts3fanim .sr-replay{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 20px;border-radius:9999px;
-    background:transparent;color:#c7b489;border:1px solid rgba(199,180,137,.45);font:600 13px/1 inherit;cursor:pointer;
-    transition:background .3s ease,border-color .3s ease}
-  #ts3fanim .sr-replay:hover{background:rgba(199,180,137,.1);border-color:rgba(199,180,137,.8)}
-  /* Mobile nach Qualitaets-Gesetz 8, Variante "overflow-x:auto + min-width":
-     die Sortier-Komposition bleibt unveraendert und wird seitlich scrollbar,
-     statt die Chips zu quetschen (Text lief sonst aus den Kacheln). */
-  #ts3fanim .sr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  #ts3fanim .sr-scroll::-webkit-scrollbar{display:none}
-  @media(max-width:820px){
-    #ts3fanim .sr-stage{width:680px;min-width:680px}
-    #ts3fanim .sr-cap{min-height:130px}
-  }
-  @media(prefers-reduced-motion:reduce){ #ts3fanim .sr-chip{transition:none} }
-  `;
-
-  function html(){
-    var cols=COLS.map(function(c,i){
-      return '<div class="sr-col'+(i===2?' out':'')+'" data-i="'+i+'" style="left:'+(i*34.25)+'%"><div class="sr-ct">'+c.t+'</div><div class="sr-cd">'+c.d+'</div></div>';
-    }).join('');
-    var chips=CHIPS.map(function(c,i){
-      var col=c.s%4, row=Math.floor(c.s/4);
-      return '<div class="sr-chip" data-i="'+i+'" style="width:'+CH_W+'%;left:'+START_X[col]+'%;top:'+START_Y[row]+'px">'+c.t+'</div>';
-    }).join('');
-    return `
-<div class="sr-head">
-  <span class="sr-eyebrow">Vor dem Aufbau</span>
-  <h2 class="sr-title">Zwölf Werkzeuge, drei <span class="ts-gold">Stapel</span>.</h2>
-  <p class="sr-sub">Nimm alles, was du im Monat bezahlst, und leg es einmal offen hin. Danach sortieren wir, und zwar nur nach einer einzigen Frage: Wer macht die Arbeit künftig?</p>
-</div>
-<div class="sr-wrap">
-  <div class="sr-scroll"><div class="sr-stage">
-    <span class="sr-inlbl">Dein Stack heute</span>
-    <span class="sr-in"></span>
-    <span class="sr-inempty">alles einsortiert</span>
-    ${cols}
-    ${chips}
-  </div></div>
-  <p class="sr-cap"></p>
-  <div class="sr-foot"><button class="sr-replay" type="button">Neu abspielen</button></div>
-</div>`;
-  }
-
-  var timers=[];
-  function clear(){ for(var i=0;i<timers.length;i++) clearTimeout(timers[i]); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-
-  function reset(root){
-    var chips=root.querySelectorAll('.sr-chip');
-    for(var i=0;i<chips.length;i++){
-      var c=CHIPS[i], col=c.s%4, row=Math.floor(c.s/4);
-      chips[i].style.left=START_X[col]+'%'; chips[i].style.top=START_Y[row]+'px';
-      chips[i].classList.remove('keep','gone');
-    }
-    var cs=root.querySelectorAll('.sr-col'); for(var k=0;k<cs.length;k++) cs[k].classList.remove('act');
-    root.querySelector('.sr-stage').classList.remove('empty');
-  }
-
-  function sortGroup(root,g){
-    var chips=root.querySelectorAll('.sr-chip'), slot=0;
-    for(var i=0;i<chips.length;i++){
-      if(CHIPS[i].g!==g) continue;
-      chips[i].style.left=COL_X[g]+'%';
-      chips[i].style.top=SLOT_Y[slot]+'px';
-      chips[i].classList.add(g===2?'gone':'keep');
-      slot++;
-    }
-    root.querySelectorAll('.sr-col')[g].classList.add('act');
-    var rest=0, all=root.querySelectorAll('.sr-chip');
-    for(var q=0;q<all.length;q++){ if(!all[q].classList.contains('keep') && !all[q].classList.contains('gone')) rest++; }
-    root.querySelector('.sr-stage').classList.toggle('empty', rest===0);
-  }
-
-  function step(root,n){
-    if(n===0) reset(root); else sortGroup(root,n-1);
-    var cap=root.querySelector('.sr-cap'); if(cap) cap.innerHTML=CAPS[n]||'';
-  }
-
-  function run(root,i){ clear(); step(root,i); if(i<CAPS.length-1) later(function(){ run(root,i+1); },DWELL); }
-
-  function play(root){
-    var wrap=root.querySelector('.sr-wrap'); if(!wrap) return;
-    wrap.classList.add('js');
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      clear(); reset(root); sortGroup(root,0); sortGroup(root,1); sortGroup(root,2);
-      var cap=root.querySelector('.sr-cap'); if(cap) cap.innerHTML=CAPS[CAPS.length-1];
-      return;
-    }
-    run(root,0);
-  }
-
-  function build(){
-    var el=document.createElement('div'); el.id='ts3fanim'; el.innerHTML=html();
-    el.querySelector('.sr-replay').addEventListener('click',function(){ play(el); });
-    var cs=el.querySelectorAll('.sr-col');
-    for(var i=0;i<cs.length;i++){ (function(n){ cs[n].addEventListener('click',function(){ clear(); step(el,n+1); }); })(i); }
-    return el;
-  }
-  function injectCSS(){ if(document.getElementById('ts3fanim-css'))return;
-    var s=document.createElement('style'); s.id='ts3fanim-css'; s.textContent=CSS; document.head.appendChild(s); }
-
-  function mount(){
-    if(!on()){ var old=document.getElementById('ts3fanim'); if(old&&old.parentNode)old.parentNode.removeChild(old); return; }
-    if(document.getElementById('ts3fanim')) return;
-    var anchor=document.getElementById('ts3f-intro'); if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var el=build(); anchor.parentNode.insertBefore(el, anchor.nextSibling);
-    /* Endzustand = Default: ohne Trigger stehen alle drei Stapel fertig sortiert da */
-    sortGroup(el,0); sortGroup(el,1); sortGroup(el,2);
-    el.querySelector('.sr-cap').innerHTML=CAPS[CAPS.length-1];
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(el); io.disconnect(); } },{threshold:.3});
-    io.observe(el);
-    var r=el.getBoundingClientRect(); if(r.top<window.innerHeight && r.bottom>0) play(el);
-    setTimeout(function(){ var w=el.querySelector('.sr-wrap'); if(w && !w.classList.contains('js')) play(el); },1500);
-  }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) clear(); });
-  window.__ts3fanimKill=function(){ clear(); };
-  window.__ts3fanim=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ---- L3.6 · Inhalt + Empfehlung + Abschluss ---- */
-(function(){
-  if(window.__ts3frest) return;
-  function on(){ return /\/stack-aufrumen\/?$/.test(location.pathname); }
-  function mount(){
-    if(!on() || !window.__ts3) return;
-    if(!document.getElementById('ts3fanim')) return;
-
-    window.__ts3.sec('ts3f-stapel','ts3fanim',
-      '<h3>Die drei <span class="g">Stapel</span></h3>'+
-      '<p class="lead">Sortiert wird nach einer einzigen Frage: Wer macht diese Arbeit ab morgen. Ob dir ein Werkzeug gefällt, spielt dabei keine Rolle.</p>'+
-      '<div class="ts3-cards c3">'+
-        '<div class="ts3-card"><span class="ts3-eb">Stapel 1</span><div class="ts3-nm">Bleibt</div><hr>'+
-          '<p>Alles mit einer eigenen Aufgabe, die Claude Code nicht übernimmt: dein Kalender, dein Notiz-Tool, die Buchhaltung, der Editor.</p>'+
-          '<p>Hierher gehört auch ein <b>Automations-Werkzeug</b>, wenn etwas laufen soll, während dein Rechner aus ist. Genau darauf baut später Modul 5 auf.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Stapel 2</span><div class="ts3-nm">Macht Claude</div><hr>'+
-          '<p>Recherche, Textarbeit, Zusammenfassungen, kleine Abläufe, Dokumente erstellen. Für all das zahlst du heute vermutlich einzeln.</p>'+
-          '<p>Kündige hier nicht sofort. Lass beides einen Monat parallel laufen und schau, was du wirklich noch aufmachst.</p></div>'+
-        '<div class="ts3-card"><span class="ts3-eb">Stapel 3</span><div class="ts3-nm">Fliegt raus</div><hr>'+
-          '<p>Alles, was du seit Wochen nicht geöffnet hast. Da hilft kein Argument, das Nutzungsverhalten hat längst entschieden.</p>'+
-          '<p>Der Stapel ist meistens größer, als einem lieb ist, und er ist der einzige, der sofort Geld zurückbringt.</p></div>'+
-      '</div>'+
-      '<p class="ts3-close">Am Ende steht ein schlanker Stack mit Claude Code in der Mitte. <b>Jedes Werkzeug, das du behältst, will bedient und bezahlt werden</b>, und das ist Zeit, die nicht in deine Arbeit fließt.</p>'
-    );
-
-    window.__ts3.sec('ts3f-uebung','ts3f-stapel',
-      '<h3>Die Übung für <span class="g">heute</span></h3>'+
-      '<p class="lead">Zwanzig Minuten, ein Blatt Papier oder eine leere Notiz. Danach weißt du zum ersten Mal genau, wofür dein Werkzeug-Budget draufgeht.</p>'+
-      '<div class="ts3-do">'+
-        '<span class="ts3-eb">Jetzt du</span>'+
-        '<ol>'+
-          '<li>Zieh dir aus deinem Konto oder deinem App-Store die <b>Liste aller laufenden Abos</b>. Aus dem Kopf vergisst jeder die Hälfte.</li>'+
-          '<li>Schreib hinter jedes den <b>letzten Tag, an dem du es geöffnet hast</b>. Wenn du es nicht mehr weißt, ist das die Antwort.</li>'+
-          '<li>Sortier in die drei Stapel. Ein Werkzeug darf nur in <b>Bleibt</b>, wenn du in einem Satz sagen kannst, was es kann, das Claude nicht kann.</li>'+
-          '<li>Kündige den dritten Stapel <b>heute</b>, nicht nächste Woche. Der zweite bekommt einen Monat Parallelbetrieb.</li>'+
-        '</ol>'+
-      '</div>'+
-      '<p class="ts3-close">Heb dir die Liste auf. Ab <b>Modul 4</b> wirst du an einigen Stellen merken, dass Claude eine Aufgabe übernimmt, für die du noch bezahlst.</p>'
-    );
-
-    window.__ts3.emp({
-      id:'ts3femp', anchorId:'ts3f-uebung', kind:'Nutzung',
-      animTitle:'Dein', animGold:'schlanker Stack',
-      steps:[{n:'01',l:'Echte Abo-Liste ziehen'},{n:'02',l:'Letzte Nutzung notieren'},{n:'03',l:'Einen Monat parallel'},{n:'04',l:'Wiedervorlage setzen'}],
-      intro:'Damit die Aufräumaktion nicht in zwei Monaten wieder von vorne losgeht, halte dich an diese vier Punkte:',
-      points:[
-        'Arbeite mit der <b>echten Abo-Liste</b> aus Konto oder App-Store, nie aus dem Gedächtnis. Genau die vergessenen Posten sind die teuren.',
-        'Entscheide nach der <b>letzten Nutzung</b>, nicht nach dem guten Vorsatz. Ein Werkzeug, das du seit acht Wochen nicht geöffnet hast, öffnest du auch nächsten Monat nicht.',
-        'Lass Stapel zwei einen <b>Monat parallel</b> laufen, bevor du kündigst. So merkst du, ob Claude die Aufgabe wirklich übernimmt.',
-        'Setz dir eine <b>Wiedervorlage in drei Monaten</b>. Neue Abos schleichen sich genauso ein, wie die alten es getan haben.'
-      ]
-    });
-
-    window.__ts3.learn({
-      id:'ts3fnext',
-      learn:[
-        'Du kennst die <b>eine Frage</b>, nach der sortiert wird: Wer macht die Arbeit?',
-        'Du hast deine Werkzeuge in <b>drei Stapel</b> geteilt.',
-        'Du weißt, warum Stapel zwei einen <b>Monat Parallelbetrieb</b> bekommt.',
-        'Du hast den dritten Stapel <b>gekündigt</b> und Geld zurück.'
-      ],
-      next:'/der-umstieg-von-chat-app-auf-claude-code'
-    });
-  }
-  window.__ts3frest=true;
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
+/* MODUL 3 · alter Block stack-aufrumen (02.08.2026) ersetzt durch NEUBAU MODUL 3 (01.11.2026); alter Stand im Git-Verlauf af3ecde + Lektions-Datei im Vault. */
 /* ============================================================
    MODUL 3 · L3.7 "Der Umstieg"  (/der-umstieg-von-chat-app-auf-claude-code)
 
@@ -31597,7 +31281,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/kontextmanagement", "l14": "/erste-echte-session-landingpage-4-modi", "l15": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/kontextmanagement", "l14": "/erste-echte-session-landingpage-4-modi", "l15": "/stack-aufrumen", "l16": "/der-umstieg-von-chat-app-auf-claude-code"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -32468,7 +32152,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     },
     play:function(el, api, end){
       var docs=el.querySelectorAll('.l5-doc'), rows=el.querySelectorAll('.l5-tr:not(.hd)'), scan=el.querySelector('.l5-scan');
-      api.cap('Du gibst den Ordner frei und sagst, <b>was am Ende entstehen soll</b>: eine Monatsliste, jede Datei mit Datum und Lieferant im Namen.');
+      api.cap('Ein Ordner, ein Satz im Gespräch. Claude nimmt sich <b>Schein für Schein</b> vor.');
       var STEP=620, t0=1800;
       ROWS.forEach(function(r,i){
         api.T.at(t0+i*STEP,function(){
@@ -32502,7 +32186,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           lead:'Der Unterschied zum reinen Gespräch: Claude darf in den Ordnern lesen, ändern und Dateien anlegen, die du freigibst. Nur dort.',
           body:'<p><strong class="lead">Du sagst, was du brauchst, nicht wie.</strong>Statt zwölf Schritte vorzugeben, beschreibst du das Ergebnis: „Eine Monatsliste aller Lieferscheine, jede Datei mit Datum und Lieferant im Namen.“ Claude plant die Schritte selbst, arbeitet sie ab und legt dir das Ergebnis zur Prüfung hin.</p>'
             +'<p><strong class="lead">Es arbeitet mit deinen Dateitypen.</strong>Word, PDF, Excel, PowerPoint, CSV und Bilder. Ein abfotografierter Lieferschein ist für Claude genauso lesbar wie ein PDF vom Lieferanten.</p>'
-            +'<p><strong class="lead">Es läuft weiter, wenn du gehst.</strong>Große Aufgaben laufen in der Cloud weiter, auch wenn du den Laptop zuklappst. Arbeitet Claude mit Dateien auf deinem Rechner, muss die Desktop-App dafür geöffnet bleiben. In der Desktop-App gibt es Cowork in allen bezahlten Plänen, im Browser und auf dem Handy ab Pro.</p>'
+            +'<p><strong class="lead">Es läuft weiter, wenn du gehst.</strong>Große Aufgaben laufen in der Cloud weiter, auch wenn du den Laptop zuklappst. Arbeitet Claude mit Dateien auf deinem Rechner, muss die Desktop-App dafür geöffnet bleiben. Cowork ist in allen bezahlten Plänen enthalten, in der Desktop-App ebenso wie im Browser und auf dem Handy.</p>'
             +H.note('Vor dem endgültigen Löschen einer Datei fragt Claude nach. Trotzdem gibst du am Anfang nur eine <b>Kopie</b> deines Ordners frei, bis du weißt, wie Claude mit deinen Dateien umgeht.','Die Merkregel')})
         +H.sec({id:'tsn3-l05-auftraege', title:'Drei Aufträge aus dem <span class="g">Betrieb</span>',
           lead:'Jeder dieser Aufträge funktioniert mit einem Ordner und einem Satz. Kopier sie, pass die Namen an und gib den Ordner frei.',
@@ -32554,14 +32238,14 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var T3=window.__tsn3; if(!T3) return;
   var OFF=[
     {nm:'Rinderhüfte · Bayern', d:'Lieferung in 2 Tagen', tag:''},
-    {nm:'Rinderhüfte · Irland', d:'Lieferung morgen', tag:'günstigster Kilopreis'},
+    {nm:'Rinderhüfte · Irland', d:'Lieferung morgen', tag:''},
     {nm:'Rinderhüfte · Uruguay', d:'Lieferung in 3 Tagen', tag:''}
   ];
   var CAPS=[
     'Claude öffnet das Portal deines Großhändlers, <b>mit deinem Login</b>, und sucht nach dem Artikel.',
     'Es liest die Angebote aus und legt sie <b>nebeneinander</b>: Herkunft, Lieferzeit, Kilopreis.',
     'Das passende Angebot kommt in den <b>Warenkorb</b>. Bis hierher ist nichts passiert, was du nicht rückgängig machen kannst.',
-    'Am Knopf zum Absenden geht <b>die Schranke runter</b>. Bestellen, bezahlen, veröffentlichen: Das gibst du selbst frei.'
+    'Am Knopf zum Absenden geht <b>die Schranke runter</b>. Claude hält an und wartet auf dich.'
   ];
   var stage='<div class="l6-win">'
     +'<div class="l6-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l6-url">grosshandel-nord.de/sortiment</span><span class="l6-ext" title="Claude in Chrome">C</span></div>'
@@ -32573,8 +32257,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
       +'<span class="l6-cur"></span>'
     +'</div>'
     +'<div class="l6-side"><div class="l6-sh">Claude · Seitenleiste</div><div class="l6-note">Vergleich Rinderhüfte</div>'
-      +OFF.map(function(o,i){ return '<div class="l6-row" data-i="'+i+'"><span>'+o.nm.split(' · ')[1]+'</span><span>'+o.d.replace('Lieferung ','')+'</span></div>'; }).join('')
-      +'<div class="l6-pick">Empfehlung: Irland, morgen da, günstigster Kilopreis</div></div>'
+      +OFF.map(function(o,i){ return '<div class="l6-row" data-i="'+i+'"><span>'+o.nm.split(' · ')[1]+'</span><span>Kilopreis Rang '+['2','1','3'][i]+'</span></div>'; }).join('')
+      +'<div class="l6-pick">Empfehlung: Irland, günstigster Kilopreis und am schnellsten da</div></div>'
     +'</div>';
   /* Zeiger-Ziele in Prozent der Seitenflaeche */
   var POS={search:[48,9], off1:[50,44], cart:[86,9], send:[50,88]};
@@ -32636,7 +32320,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
             'Melde dich in diesem Profil nur bei den Portalen an, mit denen Claude arbeiten soll: Großhändler, Buchungsseite, Bewertungsportal.'
           ],'Jetzt du')})
         +H.sec({id:'tsn3-l06-auftraege', title:'Drei Einsätze aus dem <span class="g">Betrieb</span>',
-          lead:'Alle drei lesen und bereiten vor. Keiner bestellt, bezahlt oder veröffentlicht etwas.',
+          lead:'Alle drei lesen und bereiten vor. Am Ende liegt ein Ergebnis in der Seitenleiste, und im Netz hat sich nichts verändert.',
           body:H.prompt('Öffne das Bestellportal meines ersten Großhändlers in einem Tab und das des zweiten in einem weiteren. Such in beiden nach Rinderhüfte, Kalbsrücken und Butter 82 %. Mach mir eine Tabelle mit Herkunft, Gebindegröße, Lieferzeit und Kilopreis je Portal. Leg nichts in den Warenkorb.','Einsatz 1: Preise vergleichen','Am besten nennst du die Portale beim Namen. Du musst in beiden angemeldet sein.')
             +H.prompt('Geh auf mein Bewertungsportal und lies alle Bewertungen der letzten vier Wochen. Schreib mir zu jeder einen Antwortentwurf in unserem Ton, freundlich und ohne Ausreden. Veröffentliche nichts, sondern gib mir die Entwürfe hier in der Seitenleiste.','Einsatz 2: Bewertungen beantworten','Die Antworten stellst du selbst ein, nachdem du sie gelesen hast.')
             +H.prompt('Öffne unsere Buchungsseite und lies alle Reservierungen für kommenden Samstag aus. Gib mir eine Liste mit Uhrzeit, Personenzahl und Bemerkungen, sortiert nach Uhrzeit, und markier Gruppen ab acht Personen.','Einsatz 3: Reservierungen auslesen','Praktisch, wenn deine Buchungsseite keinen Export anbietet.')})
@@ -32647,13 +32331,13 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
             +'<p><strong class="lead">Bestimmte Seiten bleiben tabu.</strong>Online-Banking, Gesundheitsdaten und Passwort-Manager haben in diesem Profil nichts verloren. Fang mit Seiten an, die du gut kennst, und mit Abläufen, die du auch selbst jeden Tag machst.</p>'
             +H.note('Bestellen, bezahlen, veröffentlichen und versenden gibst du immer selbst frei. Claude bereitet vor, du drückst den letzten Knopf.','Die Merkregel',true)})
     },
-    emp:{kind:'Einrichtung', animTitle:'Dein', animGold:'sicherer Browser',
-      steps:['Eigenes Profil','Erweiterung','Manuell freigeben','Nur lesen'],
-      intro:'So richtest du Claude in Chrome ein, damit du ruhig schlafen kannst:',
-      points:['Arbeite in einem <b>eigenen Browser-Profil</b> ohne Banking, Passwort-Manager und private Konten.',
-        'Installier die Erweiterung nur aus dem <b>Chrome Web Store</b> und melde dich mit deinem Claude-Konto an.',
-        'Stell die Freigabe am Anfang auf <b>manuell</b>. Automatisch wird es erst, wenn du die Abläufe kennst.',
-        'Beginn mit Aufgaben, die <b>nur lesen</b>: vergleichen, auslesen, Entwürfe schreiben. Handeln lässt du Claude später.']},
+    emp:{kind:'Nutzung', animTitle:'Deine', animGold:'ersten Wochen',
+      steps:['Eine Seite','Ein fester Ablauf','Zuschauen','Erweitern'],
+      intro:'So wächst Claude in Chrome in deinen Alltag hinein:',
+      points:['Fang mit <b>einer Seite</b> an, die du jede Woche ohnehin öffnest, zum Beispiel dem Portal deines wichtigsten Lieferanten.',
+        'Mach daraus einen <b>festen Ablauf</b> mit immer demselben Prompt, etwa den Preisvergleich am Montag.',
+        'Schau die ersten Male <b>bis zum Ende zu</b>. Du lernst, wo Claude sicher klickt und wo es zögert.',
+        'Nimm eine <b>zweite Seite</b> erst dazu, wenn die erste Routine ohne Überraschungen läuft.']},
     learn:{learn:['Du weißt, dass Claude in Chrome <b>mit deinen Logins</b> im Browser arbeitet.',
         'Du hast ein <b>eigenes Profil</b> und die manuelle Freigabe eingerichtet.',
         'Du kennst drei Einsätze, die <b>lesen und vorbereiten</b>.',
@@ -32679,10 +32363,10 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var ST=[{k:'Kontext sammeln',d:'liest die Dateien'},{k:'Handeln',d:'legt an, ändert'},{k:'Prüfen',d:'kontrolliert das Ergebnis'}];
   var FILES=['rezepturen.xlsx','karte-herbst.pdf','allergene.html'];
   var stage='<div class="l7-wrap"><div class="l7-ring"><svg viewBox="0 0 400 400" aria-hidden="true"><circle class="b" cx="200" cy="200" r="168"/><circle class="f" cx="200" cy="200" r="168" pathLength="100"/></svg>'
-    +'<span class="l7-car"><i></i></span>'
-    +ST.map(function(s,i){ return '<div class="l7-st s'+i+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="d">'+s.d+'</span></div>'; }).join('')
+    +'<span class="l7-car" style="--r:600"><i></i></span>'
+    +ST.map(function(s,i){ return '<div class="l7-st s'+i+(i===2?' on':'')+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="d">'+s.d+'</span></div>'; }).join('')
     +'<div class="l7-core"><div class="l7-ch">~/Betrieb/Speisekarte</div><ul class="l7-files">'
-    +FILES.map(function(f,i){ return '<li class="f'+i+'"><span class="ic"></span><span class="fn">'+f+'</span><span class="fs"></span></li>'; }).join('')+'</ul>'
+    +FILES.map(function(f,i){ return '<li class="f'+i+' on'+(i===2?' ok':'')+'"><span class="ic"></span><span class="fn">'+f+'</span><span class="fs">'+(i===2?'fertig':'gelesen')+'</span></li>'; }).join('')+'</ul>'
     +'<div class="l7-task">Auftrag: Allergen-Übersicht für jedes Gericht der Herbstkarte</div></div></div></div>';
   var BEATS=[
     {st:0, f:{0:'gelesen',1:'gelesen'}, cap:'Zuerst <b>sammelt</b> Claude Kontext: Es öffnet die Rezepturen und die Karte und verschafft sich ein Bild.'},
@@ -32698,7 +32382,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     reset:function(el){
       el.querySelectorAll('.l7-st').forEach(function(s){ s.classList.remove('on'); });
       el.querySelectorAll('.l7-files li').forEach(function(li,i){ li.className='f'+i; li.querySelector('.fs').textContent=''; });
-      el.querySelector('.l7-car').style.setProperty('--r',0); el.querySelector('.l7-ring').style.setProperty('--p',0);
+      var car=el.querySelector('.l7-car'); car.style.transition='none'; car.style.setProperty('--r',0); void car.offsetWidth; car.style.transition=''; el.querySelector('.l7-ring').style.setProperty('--p',0);
     },
     play:function(el, api, end){
       var car=el.querySelector('.l7-car'), ring=el.querySelector('.l7-ring'), S=2600, deg=0;
@@ -32751,7 +32435,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         +H.sec({id:'tsn3-l07-netz', wide:true, title:'Zwei <span class="g">Sicherheitsnetze</span>',
           lead:'Claude Code kann viel auf deinem Rechner tun. Zwei Mechanismen sorgen dafür, dass du jederzeit die Kontrolle behältst.',
           body:H.cards([
-            {eb:'Netz 1', nm:'Zurückspulen', p:['Bevor Claude eine Datei ändert, sichert es den alten Stand. Zweimal <span class="tsn3-kbd">Esc</span> bei leerer Eingabe öffnet das Menü zum Zurückspulen, oder du schreibst einfach, dass es die Änderung rückgängig machen soll.','Das gilt nur für Dateien. Was Claude außerhalb deines Rechners auslöst, eine gesendete Mail etwa, lässt sich nicht zurückspulen.']},
+            {eb:'Netz 1', nm:'Zurückspulen', p:['Bevor Claude eine Datei ändert, sichert es den alten Stand. Zweimal <span class="tsn3-kbd">Esc</span> bei leerer Eingabe öffnet das Menü zum Zurückspulen, oder du schreibst einfach, dass es die Änderung rückgängig machen soll.','Das gilt nur für Dateien, die Claude selbst bearbeitet, nicht für Befehle im Terminal und nicht für eine gesendete Mail.']},
             {eb:'Netz 2', nm:'Berechtigungen', p:['Der Modus legt fest, was Claude ohne Nachfrage darf. Standard ist seit August 2026 der Auto-Modus: Ein zweites Modell prüft im Hintergrund jede Aktion und hält riskante an. Daneben gibt es einen Modus, in dem Claude vor jeder Änderung fragt, und den Plan-Modus, in dem es nur plant.','Mit <span class="tsn3-kbd">Shift</span>+<span class="tsn3-kbd">Tab</span> wechselst du. Mehr dazu in Lektion 3.10 und 3.11.']}
           ],2)
           +H.note('Der Auto-Modus ist bequem, aber nach Anthropics eigener Aussage keine Garantie für Sicherheit. Alles, was dein Haus verlässt, siehst du vorher selbst.','Die Merkregel',true)})
@@ -32788,15 +32472,15 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
 (function(){
   var T3=window.__tsn3; if(!T3) return;
   var STEPS=[
-    {k:'Installieren', cmd:'curl -fsSL https://claude.ai/install.sh | bash', out:['Claude Code successfully installed!'], cap:'Ein Befehl installiert Claude Code. Er zeigt keinen Fortschritt, am Ende steht nur eine <b>kurze Bestätigung</b>.'},
-    {k:'Prüfen', cmd:'claude --version', out:['2.1.211 (Claude Code)'], cap:'In einem <b>neuen Terminalfenster</b> prüfst du, ob alles da ist. Eine Versionsnummer heißt: geschafft.'},
-    {k:'Ordner wählen', cmd:'cd ~/Betrieb/Speisekarte', out:[], cap:'Dann wechselst du in den <b>Ordner der Aufgabe</b>. Ab hier sieht Claude genau diesen Ordner.'},
-    {k:'Starten', cmd:'claude', out:['→ Anmeldung im Browser','→ Sitzung läuft in ~/Betrieb/Speisekarte'], cap:'<b>claude</b> startet die Sitzung. Beim ersten Mal meldest du dich im Browser an, danach geht es sofort los.'}
+    {k:'Installieren', cmd:'curl -fsSL https://claude.ai/install.sh | bash', out:['Claude Code successfully installed!'], cap:'Zeile eins holt das Programm auf den Rechner.'},
+    {k:'Prüfen', cmd:'claude --version', out:['2.1.211 (Claude Code)'], cap:'Zeile zwei fragt nach der Version. Antwortet das Terminal mit einer Nummer, ist alles an Ort und Stelle.'},
+    {k:'Ordner wählen', cmd:'cd ~/Betrieb/Speisekarte', out:[], cap:'Zeile drei führt in den <b>Projektordner</b>, die Grenze aus Lektion 3.7.'},
+    {k:'Starten', cmd:'claude', out:['→ Anmeldung im Browser','→ Sitzung läuft in ~/Betrieb/Speisekarte'], cap:'Zeile vier startet die Sitzung. Im Reiter Code der App erledigst du dasselbe mit zwei Klicks, ganz ohne diese Zeilen.'}
   ];
   var stage='<div class="l8-wrap"><div class="l8-term"><div class="l8-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l8-tt">Terminal · macOS</span></div><div class="l8-scr">'
     +STEPS.map(function(s,i){ return '<div class="l8-blk b'+i+'"><div class="l8-ln"><span class="pr">%</span><span class="cmd" data-t="'+s.cmd+'">'+s.cmd+'</span></div>'+s.out.map(function(o){ return '<div class="l8-o">'+o+'</div>'; }).join('')+'</div>'; }).join('')
-    +'<span class="l8-caret"></span></div></div>'
-    +'<ol class="l8-list">'+STEPS.map(function(s,i){ return '<li class="done" data-i="'+i+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="ck">✓</span></li>'; }).join('')+'</ol></div>';
+    +'<span class="l8-caret"></span></div>'
+    +'<ol class="l8-list">'+STEPS.map(function(s,i){ return '<li class="done" data-i="'+i+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="ck">✓</span></li>'; }).join('')+'</ol></div></div>';
 
   function type(node, txt, api, t0){
     node.textContent='';
@@ -32835,7 +32519,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     intro:'<p>Claude Code lässt sich auf drei Wegen öffnen: im Reiter <b>Code</b> der Desktop-App, im <b>Terminal</b> und als Erweiterung in <b>VS Code</b>. Alle drei arbeiten mit demselben Programm und denselben Ordnern. Du kannst heute im einen anfangen und morgen im anderen weitermachen.</p>'
       +'<p>Voraussetzung ist ein bezahlter Plan ab Pro, im kostenlosen ist Claude Code nicht enthalten. Ich zeige dir alle drei Wege mit den Befehlen, die Anthropic heute empfiehlt. Wenn dich ein Terminal abschreckt, nimm Weg 1, damit verpasst du in diesem Kurs nichts.</p>',
     anim:{id:'tsn3-a08', eb:'Die Einrichtung im Terminal', title:'Vier Zeilen bis zum ersten <span class="g">Auftrag</span>.',
-      sub:'So sieht die Einrichtung auf dem Mac aus, wenn du den Weg über das Terminal gehst. Unter Windows sind es dieselben vier Schritte mit einem anderen ersten Befehl.',
+      sub:'Der Weg über das Terminal, auf dem Mac gezeigt. Wer den Reiter Code der App nimmt, überspringt alle vier Zeilen.',
       stage:stage,
       capEnd:STEPS[3].cap},
     body:function(H){
@@ -32854,7 +32538,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
             'Lass Modus und Modell auf der Voreinstellung. Was es damit auf sich hat, klären wir in Lektion 3.10 und 3.11.',
             'Gib deinen ersten Auftrag ins Eingabefeld, zum Beispiel: „Schau dir den Ordner an und sag mir, was hier liegt.“'
           ])
-          +'<p style="margin-top:16px">Hast du eine Sitzung im Terminal begonnen und willst in der App weitermachen, holst du sie dort mit <code>/resume</code> zurück. Umgekehrt schickt <code>/desktop</code> eine Terminal-Sitzung in die App.</p>'})
+          +'<p style="margin-top:16px">Hast du eine Sitzung im Terminal begonnen und willst in der App weitermachen, gibt es zwei Wege: In der App holst du sie mit <code>/resume</code> zurück, oder du schickst sie aus dem Terminal mit <code>/desktop</code> hinüber.</p>'})
         +H.sec({id:'tsn3-l08-terminal', title:'Weg 2: im <span class="g">Terminal</span>',
           lead:'Das Terminal ist ein Fenster, in das du Befehle tippst. Auf dem Mac öffnest du es mit Cmd und Leertaste und dem Wort „Terminal“, unter Windows mit Windows-Taste und X, dann „Terminal“ oder „PowerShell“.',
           body:'<p><strong class="lead">Installieren.</strong>Kopier den Befehl für dein System, füg ihn ins Terminal ein und drück Enter. Die Installation zeigt keinen Fortschritt, warte einfach, bis die Bestätigung erscheint. Danach aktualisiert sich Claude Code im Hintergrund selbst.</p>'
@@ -32971,8 +32655,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   T3.page({
     key:'l09', re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, tab:'L 3.9 · Die CLAUDE.md',
     hero:{eyebrow:'L 3.9', title:'Die <span class="ts-gold">CLAUDE.md</span>', alt:'Die CLAUDE.md: das Briefing, das Claude Code bei jedem Start liest'},
-    intro:'<p>Jede Sitzung in Claude Code beginnt ohne Erinnerung an die letzte. Damit du deinen Betrieb nicht jeden Morgen neu erklärst, gibt es die <b>CLAUDE.md</b>: eine schlichte Textdatei in deinem Ordner, die Claude bei jedem Start liest. Darin steht, wer du bist, wie ihr arbeitet und was immer gilt.</p>'
-      +'<p>Sie ist die wichtigste Datei, die du in diesem Kurs anlegst. Alles, was ab Modul 4 dazukommt, baut auf ihr auf, und eine gute CLAUDE.md spart dir mehr Zeit als jede Erweiterung. Wir legen deine erste heute an, in fünf Minuten.</p>',
+    intro:'<p>Jede Sitzung in Claude Code beginnt ohne Erinnerung an die letzte. Damit du deinen Betrieb nicht jeden Morgen neu erklärst, gibt es die <b>CLAUDE.md</b>: eine schlichte Textdatei in deinem Ordner, die Claude bei jedem Start liest. Darin steht, was über deinen Betrieb immer gilt.</p>'
+      +'<p>Sie ist die wichtigste Datei, die du in diesem Kurs anlegst. Alles, was ab Modul 4 dazukommt, baut auf ihr auf, und eine gute CLAUDE.md spart dir mehr Zeit als jede Erweiterung. Wir legen deine erste heute an, und die erste Fassung schreibt Claude für dich.</p>',
     anim:{id:'tsn3-a09', eb:'Wie sie entsteht', title:'Eine Datei, die <span class="g">mitwächst</span>.',
       sub:'Die beste CLAUDE.md schreibst du nicht an einem Abend. Sie entsteht aus den Korrekturen, die du sonst immer wieder tippen würdest.',
       stage:stage,
@@ -33004,12 +32688,12 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         +H.sec({id:'tsn3-l09-inhalt', wide:true, title:'Was hinein gehört, und was <span class="g">nicht</span>',
           lead:'Die Faustregel von Anthropic: Schreib hinein, was du sonst immer wieder erklären würdest. Und bleib unter 200 Zeilen, denn jede Zeile fährt in jeder Sitzung mit.',
           body:H.cards([
-            {eb:'Gehört hinein', nm:'Was immer gilt', p:['Fakten zu deinem Betrieb, die in jeder Sitzung gelten.','Euer Ton und eure Schreibregeln.','Fehler, die Claude zum zweiten Mal gemacht hat, als klare Regel.','Wo was liegt und wie Ergebnisse abgelegt werden.']},
+            {eb:'Gehört hinein', nm:'Was immer gilt', p:['Fakten zu deinem Betrieb, die in jeder Sitzung gelten.','Euer Ton und eure Schreibregeln.','Fehler, die Claude wiederholt hat, als klare Regel.','Wo was liegt und wie Ergebnisse abgelegt werden.']},
             {eb:'Gehört woanders hin', nm:'Was nur manchmal gilt', p:['Abläufe mit vielen Schritten, etwa die Monatsinventur: Das wird ein Skill, Lektion 3.12.','Regeln nur für einen Bereich: in die CLAUDE.md des Unterordners.','Gästedaten, Passwörter, Kontonummern: gar nicht.','Wünsche wie „sei gründlich“: zu vage, um sie zu befolgen.']}
           ],2)})
         +H.sec({id:'tsn3-l09-gut', title:'Gute <span class="g">Anweisungen</span>',
           lead:'Was für die CLAUDE.md gilt, gilt für jeden Auftrag: Claude hält sich an das, was es überprüfen kann. Eine gute Anweisung hat drei Teile.',
-          body:'<p><strong class="lead">Was.</strong>Das Ergebnis, so konkret wie möglich: eine Tabelle, ein Aushang, eine Liste.</p>'
+          body:'<p><strong class="lead">Was.</strong>Das Ergebnis, so konkret wie möglich, zum Beispiel eine Tabelle mit festen Spalten.</p>'
             +'<p><strong class="lead">Womit.</strong>Die Dateien oder Angaben, auf denen es beruhen soll, statt dass Claude sie sich zusammensucht oder erfindet.</p>'
             +'<p><strong class="lead">Woran du erkennst, dass es fertig ist.</strong>Jedes Gericht hat eine Zeile, jede Spalte ist gefüllt, fehlende Angaben sind markiert.</p>'
             +H.table(['Vage','Konkret'],[
@@ -33019,7 +32703,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
             ])})
         +H.sec({id:'tsn3-l09-pflege', title:'Die Datei <span class="g">pflegen</span>',
           lead:'Eine CLAUDE.md ist nie fertig. Sie wird mit jeder Woche ein bisschen besser.',
-          body:'<p><strong class="lead">Zweimal ist die Grenze.</strong>Macht Claude denselben Fehler ein zweites Mal oder tippst du dieselbe Korrektur wie in der letzten Sitzung, gehört sie als Zeile in die Datei. Sag einfach: „Schreib das in die CLAUDE.md.“</p>'
+          body:'<p><strong class="lead">Aus Korrekturen werden Zeilen.</strong>Tippst du dieselbe Korrektur wie in der letzten Sitzung, ist das der Moment für eine neue Zeile. Du sagst Claude einfach, dass es sie eintragen soll, und schaust kurz drüber.</p>'
             +'<p><strong class="lead">Widersprüche aufräumen.</strong>Stehen zwei Regeln gegeneinander, wählt Claude eine davon, und zwar nicht unbedingt die, die du meinst. Einmal im Monat lässt du <code>/doctor prompt-audit</code> laufen, das findet Veraltetes und Widersprüche.</p>'
             +H.note('Was du zum zweiten Mal erklärst, schreibst du in die CLAUDE.md. Was nicht jedes Mal gilt, gehört nicht hinein.','Die Merkregel')})
     },
@@ -33033,7 +32717,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     learn:{learn:['Du weißt, dass die CLAUDE.md bei <b>jedem Start</b> gelesen wird.',
         'Du kennst die <b>Speicherorte</b> und weißt, dass sie nach unten gilt.',
         'Du hast deine erste CLAUDE.md mit <b>/init</b> oder Interview angelegt.',
-        'Du schreibst Anweisungen mit <b>Was, Womit</b> und Woran-fertig.'],
+        'Du gibst Anweisungen mit <b>Ergebnis, Material</b> und einem klaren Ende.'],
       next:'/die-3-slash-commands'}
   });
 })();
@@ -33043,61 +32727,49 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
    NEUBAU MODUL 3 · L3.10 "Die wichtigsten Befehle"  (/die-3-slash-commands)
    Fakten: Faktenblatt Punkt 9 (Berechtigungsmodi, Shift+Tab-Reihenfolge, Checkpoints) und
    Punkt 12 (Befehle, Tastenkuerzel; /cost ist nur Alias von /usage). Stand 01.11.2026.
-   Erklaeranimation #tsn3-a10 "Ein Schraegstrich, eine Sitzung im Griff."
-   Ein Terminalfenster mit Sitzungstitel, Gespraechszeilen und Eingabezeile. Vier Befehle
-   werden getippt, die Befehlsliste klappt auf, die Wirkung passiert im selben Fenster:
-   /rename benennt, /clear leert, /resume holt zurueck, Esc Esc spult eine Aenderung zurueck.
+   Erklaeranimation #tsn3-a10 "Vier Tasten, eine Woche."
+   Links vier gleich grosse Tasten-Kappen, rechts der Tisch mit der laufenden Sitzung und das
+   Regal mit gespeicherten Sitzungen. Je Taste eine Wirkung an Karte und Regal.
    ============================================================ */
 (function(){
   var T3=window.__tsn3; if(!T3) return;
-  var CONV=['Kalkulier die Wochenkarte KW 45 aus den Rezepturen.','→ kalkulation-kw45.xlsx angelegt','Setz den Preis der Rinderwange auf 24,50.','→ kalkulation-kw45.xlsx geändert'];
-  var PAL=[['/rename','Sitzung benennen'],['/clear','neues Gespräch'],['/resume','Sitzung fortsetzen'],['/rewind','zurückspulen']];
-  var BEATS=[
-    {cmd:'/rename Wochenkarte KW 45', pal:0, cap:'<b>/rename</b> gibt der Sitzung einen Namen, unter dem du sie später wiederfindest.'},
-    {cmd:'/clear', pal:1, cap:'<b>/clear</b> beginnt ein neues Gespräch. Der Verlauf ist aus dem Kopf, das Kontingent atmet auf.'},
-    {cmd:'/resume', pal:2, cap:'Zwei Tage später holt <b>/resume</b> die benannte Sitzung genau dort zurück, wo du aufgehört hast.'},
-    {cmd:'Esc Esc', pal:3, cap:'Der Preis war falsch. Zweimal <b>Esc</b> öffnet das Zurückspulen, und die Datei steht wieder wie vor der Änderung.'}
+  /* Sitzungsregal: oben die laufende Sitzung als Karte, darunter das Regal mit gespeicherten
+     Sitzungen, links vier Tasten-Kappen. Kein Terminal (das zeigt L3.8). */
+  var KEYS=[['/rename','benennen'],['/clear','leeren'],['/resume','zurückholen'],['Esc Esc','zurückspulen']];
+  var CAPS=[
+    'Montag: Die laufende Sitzung bekommt einen <b>Namen</b>. Unter dem findest du sie später wieder.',
+    'Die Wochenkarte ist fertig. <b>/clear</b> stellt die Sitzung ins Regal und macht den Tisch frei für das nächste Thema.',
+    'Mittwoch: Ein Gericht ändert sich. <b>/resume</b> holt genau diese Sitzung zurück, mit allem, was ihr besprochen habt.',
+    'Claude hat einen Preis falsch eingetragen. Zweimal <b>Esc</b>, und die Datei steht wieder wie vorher.'
   ];
-  var stage='<div class="l10-term"><div class="l10-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l10-title"><span class="old">claude · Speisekarte</span><span class="new">Wochenkarte KW 45</span></span></div>'
-    +'<div class="l10-body"><div class="l10-conv">'+CONV.map(function(c,i){ return '<div class="l10-c'+(c.charAt(0)==='→'?' r':' u')+(i===3?' l3':'')+'">'+c+'</div>'; }).join('')+'<div class="l10-c r rw">↺ kalkulation-kw45.xlsx auf den Stand vor der Änderung zurückgesetzt</div></div>'
-    +'<div class="l10-res"><div class="l10-rh">Frühere Sitzungen</div><div class="l10-ri on">Wochenkarte KW 45</div><div class="l10-ri">Allergene Herbstkarte</div><div class="l10-ri">Lieferscheine Oktober</div></div>'
-    +'<div class="l10-pal">'+PAL.map(function(p,i){ return '<div class="l10-pi" data-i="'+i+'"><span class="c">'+p[0]+'</span><span class="d">'+p[1]+'</span></div>'; }).join('')+'</div>'
-    +'<div class="l10-in"><span class="pr">›</span><span class="tx"></span><span class="car"></span></div></div></div>';
-
-  function type(node, txt, api, t0){ var per=Math.max(28,Math.min(55,900/txt.length)); for(var k=1;k<=txt.length;k++){ (function(k){ api.T.at(t0+k*per,function(){ node.textContent=txt.slice(0,k); }); })(k); } api.T.at(t0+txt.length*per+30,function(){ node.textContent=txt; }); return t0+txt.length*per; }
-  function state(el, s){ el.classList.remove('st-named','st-clear','st-res','st-rw'); s.forEach(function(c){ el.classList.add(c); }); }
+  var stage='<div class="l10-wrap"><div class="l10-keys">'+KEYS.map(function(k,i){ return '<div class="l10-key" data-i="'+i+'"><span class="cap">'+k[0]+'</span><span class="lb">'+k[1]+'</span></div>'; }).join('')+'</div>'
+    +'<div class="l10-desk"><div class="l10-now"><div class="l10-nt"><span class="old">Neue Sitzung</span><span class="new">Wochenkarte KW 45</span></div>'
+    +'<div class="l10-lines"><span>Wochenkarte KW 45 kalkuliert</span><span class="px">Rinderwange: Preis geändert</span><span class="rw">↺ Preis wieder wie vorher</span></div><span class="l10-empty">leer, bereit für das nächste Thema</span></div>'
+    +'<div class="l10-shelf"><span class="l10-sl">Regal · gespeicherte Sitzungen</span><div class="l10-saved"><span class="l10-sc wk">Wochenkarte KW 45</span><span class="l10-sc">Allergene Herbstkarte</span><span class="l10-sc">Lieferscheine Oktober</span></div></div></div></div>';
+  function st(el, c){ el.classList.remove('k-named','k-clear','k-res','k-rw','k-px'); c.forEach(function(x){ el.classList.add(x); }); }
   T3.anim('tsn3-a10',{
-    reset:function(el){ state(el,[]); el.querySelector('.l10-in .tx').textContent=''; el.querySelectorAll('.l10-pi').forEach(function(p){ p.classList.remove('on'); }); el.classList.remove('pal'); },
+    reset:function(el){ st(el,[]); el.querySelectorAll('.l10-key').forEach(function(k){ k.classList.remove('on'); }); },
     play:function(el, api, end){
-      var tx=el.querySelector('.l10-in .tx'), pis=el.querySelectorAll('.l10-pi'), t=500;
-      BEATS.forEach(function(b,i){
-        var t0=t;
-        api.T.at(t0,function(){ api.cap(b.cap); tx.textContent=''; if(i<3) el.classList.add('pal'); pis.forEach(function(p){ p.classList.remove('on'); }); });
-        var tE=type(tx, b.cmd, api, t0+300);
-        api.T.at(tE-200,function(){ pis[b.pal].classList.add('on'); });
-        api.T.at(tE+500,function(){ el.classList.remove('pal'); tx.textContent='';
-          if(i===0) state(el,['st-named']);
-          if(i===1) state(el,['st-named','st-clear']);
-          if(i===2) state(el,['st-named','st-clear','st-res']);
-          if(i===3) state(el,['st-named','st-rw']);
-        });
-        if(i===2) api.T.at(tE+2000,function(){ state(el,['st-named']); });
-        t=tE+(i===2?3300:2600);
-      });
-      api.T.at(t+700, end);
+      var keys=el.querySelectorAll('.l10-key'), S=3300;
+      function press(i,t){ api.T.at(t,function(){ keys.forEach(function(k){ k.classList.remove('on'); }); keys[i].classList.add('on'); api.cap(CAPS[i]); }); }
+      press(0,400); api.T.at(1000,function(){ st(el,['k-named']); });
+      press(1,400+S); api.T.at(1000+S,function(){ st(el,['k-named','k-clear']); });
+      press(2,400+2*S); api.T.at(1000+2*S,function(){ st(el,['k-named','k-res','k-px']); });
+      press(3,400+3*S); api.T.at(1000+3*S,function(){ st(el,['k-named','k-res','k-px','k-rw']); });
+      api.T.at(400+4*S+300, end);
     },
-    end:function(el){ el.classList.remove('pal'); el.querySelector('.l10-in .tx').textContent=''; state(el,['st-named','st-rw']); }
+    end:function(el){ st(el,['k-named','k-res','k-px','k-rw']); el.querySelectorAll('.l10-key').forEach(function(k){ k.classList.remove('on'); }); }
   });
 
   T3.page({
     key:'l10', re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, tab:'L 3.10 · Die wichtigsten Befehle',
     hero:{eyebrow:'L 3.10', title:'Die wichtigsten <span class="ts-gold">Befehle</span>', alt:'Die wichtigsten Befehle und Tasten in Claude Code'},
     intro:'<p>In Claude Code steuerst du fast alles mit einem Schrägstrich. Tippst du <code>/</code>, klappt eine Liste mit Befehlen auf, und mit jedem weiteren Buchstaben wird sie kürzer. Es gibt Dutzende davon, aber im Alltag brauchst du eine Handvoll, und die meisten lernst du in der ersten Woche nebenbei.</p>'
-      +'<p>In dieser Lektion stehen die Befehle, mit denen du deine Sitzungen im Griff behältst, die Tasten, die dir Zeit sparen, und die vier Modi, die bestimmen, wie viel Claude ohne Nachfrage tun darf.</p>',
-    anim:{id:'tsn3-a10', eb:'Die Sitzung im Griff', title:'Ein Schrägstrich, vier <span class="g">Handgriffe</span>.',
-      sub:'Eine Woche mit der Wochenkarte, in vier Befehlen: benennen, leeren, zurückholen, zurückspulen.',
+      +'<p>Am wichtigsten sind die Befehle, mit denen du deine Sitzungen ordnest, denn davon hängt ab, ob du nach drei Tagen noch weißt, wo du warst. Dazu kommen ein paar Tasten für den Alltag und die Frage, wie viel Claude ohne Nachfrage tun darf.</p>',
+    anim:{id:'tsn3-a10', eb:'Die Sitzung im Griff', title:'Vier Tasten, eine <span class="g">Woche</span>.',
+      sub:'Montag bis Mittwoch mit der Wochenkarte. Achte darauf, was mit der Karte auf dem Tisch und im Regal passiert.',
       stage:stage,
-      capEnd:BEATS[3].cap},
+      capEnd:CAPS[3]},
     body:function(H){
       return H.sec({id:'tsn3-l10-tab', wide:true, title:'Die Befehle, die du <span class="g">wirklich</span> brauchst',
           lead:'Sortiert nach dem, wofür du sie im Alltag benutzt. Alles andere findest du mit /help, wenn du es brauchst.',
@@ -33119,7 +32791,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           ])
           +'<p class="tsn3-fn">In älteren Anleitungen findest du noch <code>/cost</code>. Das ist heute nur ein anderer Name für <code>/usage</code>.</p>'})
         +H.sec({id:'tsn3-l10-tasten', title:'Tasten, die <span class="g">Zeit sparen</span>',
-          lead:'Ein paar Tasten nimmst du öfter als jeden Befehl. Sie gelten im Terminal, die meisten auch in VS Code.',
+          lead:'Ein paar Tasten nimmst du öfter als jeden Befehl. Sie gelten im Terminal.',
           body:H.table(['Taste','Wirkung'],[
             [H.kbd('Esc'),'hält Claude sofort an, die bisherige Arbeit bleibt'],
             [H.kbd('Esc')+' '+H.kbd('Esc'),'bei leerer Eingabe: das Menü zum Zurückspulen'],
@@ -33143,13 +32815,13 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           lead:'/clear kostet nichts und macht jede Sitzung wieder schnell. Damit dabei nichts verloren geht, lässt du dir vorher eine Übergabe schreiben.',
           body:H.prompt('Schreib eine kurze Übergabe in die Datei uebergabe.md in diesem Ordner: was wir heute erreicht haben, welche Dateien neu oder geändert sind und was als Nächstes offen ist. Höchstens zehn Zeilen.','Übergabe vor /clear','Nach /clear startest du mit: „Lies uebergabe.md und mach dort weiter.“')})
     },
-    emp:{kind:'Nutzung', animTitle:'Deine', animGold:'ersten Befehle',
-      steps:['Benennen','Leeren','Zurückholen','Zurückspulen'],
-      intro:'Mit diesen vier Gewohnheiten hast du jede Sitzung im Griff:',
-      points:['Gib jeder Sitzung, an der du weiterarbeiten willst, mit <b>/rename</b> einen Namen.',
-        'Beginn mit <b>/clear</b> neu, sobald ein Thema erledigt ist, nach einer kurzen Übergabe.',
-        'Hol frühere Arbeit mit <b>/resume</b> zurück, statt sie neu zu erklären.',
-        'Hat Claude etwas falsch geändert, spul mit <b>Esc Esc</b> zurück, statt es reparieren zu lassen.']},
+    emp:{kind:'Nutzung', animTitle:'Deine', animGold:'erste Woche',
+      steps:['/help lesen','Modus wählen','Übergabe üben','Tasten merken'],
+      intro:'So sitzen die Befehle nach einer Woche, ohne dass du lernst:',
+      points:['Lies am ersten Tag einmal <b>/help</b> und probier <b>/powerup</b>. Danach weißt du, wo alles steht.',
+        'Stell in Ordnern mit wichtigen Dateien bewusst einen <b>Modus</b> ein, statt einfach den voreingestellten zu nehmen.',
+        'Lass dir vor jedem Themenwechsel eine <b>Übergabe</b> schreiben, bis es zur Gewohnheit wird.',
+        'Kleb dir die <b>Esc-Taste</b> gedanklich in die Hand: anhalten und zurückspulen ersparen dir jede Reparatur.']},
     learn:{learn:['Du öffnest die Befehle mit <b>/</b> und findest sie mit /help.',
         'Du hast deine Sitzungen mit <b>/rename, /clear</b> und /resume im Griff.',
         'Du kennst die wichtigsten <b>Tasten</b>, vor allem Esc und Shift+Tab.',
@@ -33172,16 +32844,16 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
    ============================================================ */
 (function(){
   var T3=window.__tsn3; if(!T3) return;
-  var STEPS=['Neue Preisliste des Großhändlers lesen','Artikel den Rezepturen zuordnen','Wareneinsatz je Gericht neu rechnen','Gerichte über deiner Grenze markieren','Ergebnis als Tabelle ablegen'];
-  var stage='<div class="l11-wrap"><div class="l11-top"><span class="l11-mode"><i></i><span class="m1">Plan-Modus</span><span class="m2">Auto-Modus</span></span>'
-    +'<span class="l11-task">Auftrag: Herbstkarte auf die neue Preisliste umrechnen</span></div>'
+  var STEPS=['Rezepturen der Winterkarte lesen','Zutaten den 14 Allergenen zuordnen','Lücken in den Rezepturen sammeln','Übersicht je Gericht anlegen','Lücken als Liste dazulegen'];
+  var stage='<div class="l11-wrap"><div class="l11-top"><span class="l11-mode"><i></i><span class="m1">Plan-Modus</span><span class="m2">Freigegeben</span></span>'
+    +'<span class="l11-task">Auftrag: Allergen-Übersicht für die Winterkarte</span></div>'
     +'<div class="l11-board">'+STEPS.map(function(s,i){ return '<div class="l11-bowl in done" data-i="'+i+'"><span class="l11-img"><img src="'+T3.pic('a11-schale-'+(i+1)+'.webp','Schale '+(i+1),240,240)+'" alt="" loading="lazy" decoding="async"></span><span class="n">0'+(i+1)+'</span><span class="t">'+s+'</span><span class="ck">✓</span></div>'; }).join('')+'</div>'
-    +'<div class="l11-ask"><span class="l11-who">Plan freigeben?</span><span class="o on">Ja, mit Auto-Modus</span><span class="o">Ja, Änderungen einzeln bestätigen</span><span class="o">Nein, weiter planen</span></div></div>';
+    +'<div class="l11-ask"><span class="l11-who">Plan freigeben?</span><span class="o">Ja, mit Auto-Modus</span><span class="o on">Ja, Änderungen einzeln bestätigen</span><span class="o">Nein, weiter planen</span></div></div>';
   var CAPS=[
-    'Im <b>Plan-Modus</b> liest Claude die Dateien und schreibt einen Plan. Geändert wird noch nichts.',
-    'Jeder Schritt bekommt seinen Platz, wie die Schalen vor dem Service. Du siehst den <b>ganzen Weg</b>, bevor er gegangen wird.',
-    'Dann entscheidest du: <b>freigeben</b>, jede Änderung einzeln bestätigen oder weiter planen lassen.',
-    'Erst jetzt arbeitet Claude, <b>Schritt für Schritt</b> nach dem Plan, den du gesehen hast.'
+    'Erst wird <b>gelesen und gedacht</b>. Bis hierher ist im Ordner keine einzige Datei angefasst.',
+    'Fünf Schalen, fünf Schritte. Du siehst den <b>ganzen Weg</b>, bevor er gegangen wird.',
+    'Jetzt bist du dran. Am Anfang wählst du die <b>vorsichtige Freigabe</b>.',
+    'Erst jetzt wird gearbeitet, <b>Schale für Schale</b>, und jede Änderung legt Claude dir vorher hin.'
   ];
   T3.anim('tsn3-a11',{
     reset:function(el){ el.classList.remove('exec','asking'); el.querySelectorAll('.l11-bowl').forEach(function(b){ b.classList.remove('in','done'); }); },
@@ -33201,7 +32873,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   T3.page({
     key:'l11', re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, tab:'L 3.11 · Plan-Modus, Modelle & Denk-Tiefe',
     hero:{eyebrow:'L 3.11', title:'Erst <span class="ts-gold">planen</span>', alt:'Plan-Modus, Modelle und Denk-Tiefe in Claude Code'},
-    intro:'<p>Kein Koch fängt den Service an, bevor die Mise en place steht. Claude Code hat dafür einen eigenen Modus: Im <b>Plan-Modus</b> liest es, denkt nach und schreibt dir auf, was es vorhat, ohne eine einzige Datei zu ändern. Erst wenn du den Plan freigibst, wird gearbeitet.</p>'
+    intro:'<p>Kein Koch fängt den Service an, bevor die Mise en place steht. Claude Code hat dafür einen eigenen Modus: Im <b>Plan-Modus</b> liest es, denkt nach und schreibt dir auf, was es vorhat, ohne eine einzige Datei zu ändern. Erst wenn du den Plan freigibst, wird gearbeitet, und zwar genau so, wie du es gesehen hast.</p>'
       +'<p>Dazu kommen zwei Einstellungen, die bestimmen, wie gründlich Claude vorgeht: welches <b>Modell</b> arbeitet und wie tief es nachdenkt. Für die meisten Aufgaben passt die Voreinstellung. Wann sich das Umstellen lohnt, zeige ich dir hier.</p>',
     anim:{id:'tsn3-a11', eb:'Der Plan-Modus', title:'Erst Mise en place, dann <span class="g">Service</span>.',
       sub:'Ein Auftrag, der fünf Schritte braucht. Achte darauf, wann Claude zum ersten Mal etwas ändert.',
@@ -33223,12 +32895,12 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
             ['Fable 5.1','<code>/model fable</code>','die Aufgabe größer ist als eine Sitzung und sehr gründlich gedacht werden muss. Verbraucht am meisten, in Pro nur über Nutzungsguthaben.']
           ])})
         +H.sec({id:'tsn3-l11-effort', wide:true, title:'Wie tief Claude <span class="g">nachdenkt</span>',
-          lead:'Die Denk-Tiefe heißt in Claude Code Effort. Niedrig ist schneller und günstiger, hoch ist gründlicher. Voreingestellt ist bei den aktuellen Modellen die mittlere Stufe.',
+          lead:'Die Denk-Tiefe heißt in Claude Code Effort. Niedrig ist schneller und günstiger, hoch ist gründlicher. Bei Opus, Sonnet und Haiku 5.5 ist die mittlere Stufe voreingestellt.',
           body:H.table(['Stufe','Wofür'],[
             ['<code>low</code>','schnelles Hin und Her, erste Entwürfe, Ideen sammeln'],
             ['<code>medium</code>','der Alltag mit klar umrissenen Aufgaben, die Voreinstellung'],
             ['<code>high</code>','wenn es auf Prüfung ankommt, etwa bei Kalkulation und Allergenen'],
-            ['<code>xhigh</code>','für schwierige Aufgaben mit vielen Abhängigkeiten'],
+            ['<code>xhigh</code>','wenn du noch tieferes Nachdenken brauchst'],
             ['<code>max</code>','nur für sehr schwere Probleme. Neigt zum Überdenken und gilt nur für die laufende Sitzung.']
           ])
           +'<p style="margin-top:16px">Du stellst die Stufe mit <code>/effort</code> ein, zum Beispiel <code>/effort high</code>, oder im Menü von <code>/model</code> mit den Pfeiltasten. Brauchst du einmalig mehr Tiefe, schreib das Wort <code>ultrathink</code> in deine Nachricht. Dann denkt Claude nur für diese eine Antwort gründlicher nach.</p>'})
@@ -33668,6 +33340,90 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du formulierst Aufträge mit <b>Dateien, Ergebnis</b> und Regeln für Lücken.',
         'Du liest <b>jedes Ergebnis</b> gegen, bevor es den Raum verlässt.'],
       next:'/stack-aufrumen'}
+  });
+})();
+
+/* ---- l16-stack.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.16 "Stack aufraeumen"  (/stack-aufrumen)
+   Abgrenzung: Modul 0 erklaert die Rollen der Werkzeuge (Tool-Stack). Hier nur das Aufraeumen
+   der eigenen Abos nach einer Frage. Keine Betraege (keine erfundenen Zahlen).
+   Erklaeranimation #tsn3-a16 "Ein Auszug, drei Stempel."
+   Ein Abo-Auszug mit neun gleich hohen Zeilen. Zeile fuer Zeile faellt ein Stempel: Bleibt,
+   Macht Claude, Kuendigen. Unten zaehlt eine Zeile mit. Auszug und Zeilen stehen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var ST=[{k:'b',n:'Bleibt'},{k:'c',n:'Macht Claude'},{k:'x',n:'Kündigen'}];
+  var ROWS=[
+    {n:'Kassensystem',d:'täglich in Gebrauch',s:0},{n:'Buchhaltung',d:'monatlicher Abschluss',s:0},{n:'Text-Assistent',d:'für Kartentexte',s:1},
+    {n:'Übersetzungs-Abo',d:'Karte auf Englisch',s:1},{n:'Zweites Notiz-Tool',d:'zuletzt im Frühjahr geöffnet',s:2},{n:'Dienstplan-App',d:'das Team trägt sich ein',s:0},
+    {n:'PDF-Werkzeug',d:'Aushänge als PDF',s:1},{n:'Mindmap-Abo',d:'seit Monaten ungenutzt',s:2},{n:'Umfrage-Tool',d:'eine Umfrage, 2025',s:2}
+  ];
+  var CAPS=['Zuerst kommt auf die Liste, was <b>täglich gebraucht</b> wird und eine eigene Aufgabe hat. Das bleibt.','Dann alles, was du für <b>Textarbeit</b> einzeln bezahlst. Das macht künftig Claude.','Und zuletzt, was seit Wochen <b>niemand geöffnet</b> hat. Das wird heute gekündigt.'];
+  var stage='<div class="l16-sheet"><div class="l16-h"><span>Laufende Abos</span><span class="l16-src">aus Konto und App-Store</span></div>'
+    +ROWS.map(function(r,i){ return '<div class="l16-row s'+r.s+' st" data-i="'+i+'"><span class="nm">'+r.n+'</span><span class="d">'+r.d+'</span><span class="l16-stamp k'+ST[r.s].k+'">'+ST[r.s].n+'</span></div>'; }).join('')
+    +'<div class="l16-sum"><span class="sb">Bleibt <b>3</b></span><span class="sc">Macht Claude <b>3</b></span><span class="sx">Kündigen <b>3</b></span></div></div>';
+  function sum(el){ [0,1,2].forEach(function(s){ el.querySelector('.l16-sum '+['.sb','.sc','.sx'][s]+' b').textContent=el.querySelectorAll('.l16-row.s'+s+'.st').length; }); }
+  T3.anim('tsn3-a16',{
+    reset:function(el){ el.querySelectorAll('.l16-row').forEach(function(r){ r.classList.remove('st'); }); sum(el); },
+    play:function(el, api, end){
+      var rows=el.querySelectorAll('.l16-row'), t=400;
+      [0,1,2].forEach(function(s){
+        api.T.at(t,function(){ api.cap(CAPS[s]); });
+        ROWS.forEach(function(r,i){ if(r.s!==s) return; t+=650; api.T.at(t,function(){ rows[i].classList.add('st'); sum(el); }); });
+        t+=1700;
+      });
+      api.T.at(t+800, end);
+    },
+    end:function(el){ el.querySelectorAll('.l16-row').forEach(function(r){ r.classList.add('st'); }); sum(el); }
+  });
+
+  T3.page({
+    key:'l16', re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, tab:'L 3.16 · Stack aufräumen',
+    hero:{eyebrow:'L 3.16', title:'Stack <span class="ts-gold">aufräumen</span>', alt:'Stack aufräumen: laufende Abos sortieren nach bleibt, macht Claude und kündigen'},
+    intro:'<p>Mit Claude im Abo zahlst du vermutlich für einiges doppelt. In den meisten Betrieben haben sich über die Jahre Abos angesammelt, für Texte, Übersetzungen, Notizen und Dinge, die einmal wichtig waren. Die Hälfte davon hat seit Wochen niemand geöffnet, abgebucht wird trotzdem jeden Monat.</p>'
+      +'<p>Wir sortieren deine Abos heute in drei Stapel, nach einer einzigen Frage: Wer macht diese Arbeit ab morgen? Das dauert zwanzig Minuten und bringt dir als einzige Lektion in diesem Modul sofort Geld zurück.</p>',
+    anim:{id:'tsn3-a16', eb:'Die Sortierung', title:'Ein Auszug, drei <span class="g">Stempel</span>.',
+      sub:'Neun Abos, wie sie in vielen Betrieben laufen. Jedes bekommt genau einen Stempel.',
+      stage:stage,
+      capEnd:'Drei bleiben, drei übernimmt Claude, drei fliegen raus. Bei dir wird die Verteilung anders sein, die <b>Frage</b> bleibt dieselbe.'},
+    body:function(H){
+      return H.sec({id:'tsn3-l16-stapel', wide:true, title:'Drei <span class="g">Stapel</span>',
+          lead:'Ob dir ein Werkzeug gefällt, spielt keine Rolle. Es zählt nur, wer die Arbeit ab morgen macht.',
+          body:H.cards([
+            {eb:'Stapel 1', nm:'Bleibt', p:['Alles mit einer eigenen Aufgabe, die Claude nicht übernimmt: Kasse, Buchhaltung, Reservierungssystem, die App, in die sich dein Team einträgt.','Ein Werkzeug darf hier nur bleiben, wenn du in einem Satz sagen kannst, was es kann, das Claude nicht kann.']},
+            {eb:'Stapel 2', nm:'Macht Claude', p:['Texte, Übersetzungen, Zusammenfassungen, PDFs, kleine Auswertungen. Für all das zahlst du heute vermutlich einzeln.','Kündige hier nicht sofort. Lass beides einen Monat parallel laufen und schau, was du wirklich noch öffnest.']},
+            {eb:'Stapel 3', nm:'Kündigen', p:['Alles, was du seit Wochen nicht geöffnet hast. Da hilft kein guter Vorsatz, dein Verhalten hat längst entschieden.','Der Stapel ist meist größer, als man denkt, und der einzige, der sofort Geld zurückbringt.']}
+          ],3)})
+        +H.sec({id:'tsn3-l16-uebung', title:'Die Übung in <span class="g">zwanzig Minuten</span>',
+          lead:'Ein Blatt Papier oder eine leere Notiz. Und, wenn du magst, Claude als Sortierhilfe.',
+          body:H.steps([
+            'Zieh dir aus deinem Konto und deinen App-Stores die <b>Liste aller laufenden Abos</b>. Aus dem Kopf vergisst jeder die Hälfte, und genau die vergessenen sind die teuren.',
+            'Schreib hinter jedes den <b>letzten Tag, an dem du es geöffnet hast</b>. Weißt du es nicht mehr, ist das die Antwort.',
+            'Sortier in die drei Stapel und kündige den dritten <b>heute</b>. Stapel zwei bekommt einen Monat Parallelbetrieb.',
+            'Trag dir eine <b>Wiedervorlage in drei Monaten</b> ein. Neue Abos schleichen sich genauso ein wie die alten.'
+          ])
+          +H.prompt('Hier ist die Liste meiner laufenden Abos mit dem Tag, an dem ich jedes zuletzt benutzt habe. Sortier sie in drei Gruppen: was eine eigene Aufgabe hat, die du nicht übernehmen kannst, was du künftig für mich erledigen kannst, und was ich seit über vier Wochen nicht genutzt habe. Begründe jede Zuordnung in einem Satz und markier, wo du unsicher bist.','Sortierhilfe in der Claude-App','Kontoauszug oder Liste als Datei hineinziehen. Kündigen tust du selbst.')})
+        +H.sec({id:'tsn3-l16-bleibt', title:'Was Claude <span class="g">nicht</span> ersetzt',
+          lead:'Damit niemand zu viel aufräumt: Diese Systeme bleiben, und Claude arbeitet später mit ihnen zusammen.',
+          body:'<p><strong class="lead">Kasse und Buchhaltung.</strong>Sie halten Zahlen fest, für die du gesetzlich geradestehst. Claude kann ihre Auswertungen lesen und erklären, ersetzt sie aber nicht.</p>'
+            +'<p><strong class="lead">Dein Backoffice.</strong>Das Notion-Backoffice aus Modul 2 bleibt der Ort, an dem dein Betrieb geordnet liegt. In Modul 4 verbinden wir Claude damit, damit es dort liest und pflegt.</p>'
+            +'<p><strong class="lead">Reservierungen.</strong>Ein Reservierungssystem bleibt, bis du es bewusst ersetzt. Wie ein eigener Agent Anfragen annimmt, zeigt Modul 5.</p>'
+            +H.note('Jedes Werkzeug, das du behältst, will bedient und bezahlt werden. Was nichts tut, das Claude nicht kann, fliegt raus.','Die Merkregel')})
+    },
+    emp:{kind:'Nutzung', animTitle:'Dein', animGold:'schlanker Stack',
+      steps:['Echte Liste','Letzte Nutzung','Drei Stapel','Wiedervorlage'],
+      intro:'So bleibt dein Schreibtisch schlank, auch in einem Jahr noch:',
+      points:['Arbeite mit der <b>echten Abo-Liste</b> aus Konto und App-Store, nie aus dem Gedächtnis.',
+        'Entscheide nach der <b>letzten Nutzung</b>, nicht nach dem guten Vorsatz.',
+        'Lass Stapel zwei einen <b>Monat parallel</b> laufen, bevor du kündigst.',
+        'Setz dir eine <b>Wiedervorlage</b> in drei Monaten für den nächsten Durchgang.']},
+    learn:{learn:['Du sortierst Abos nach <b>einer Frage</b>: Wer macht die Arbeit ab morgen?',
+        'Du kennst die <b>drei Stapel</b> und den Monat Parallelbetrieb.',
+        'Du weißt, was Claude <b>nicht ersetzt</b>.',
+        'Dein dritter Stapel ist <b>gekündigt</b>.'],
+      next:'/der-umstieg-von-chat-app-auf-claude-code'}
   });
 })();
 
