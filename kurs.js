@@ -24326,10 +24326,10 @@ var TSISL_TEAM_ONB_V2=[
       '<h2 class="msv-h2">So funktioniert die <span class="ts-gold">Ableitung</span></h2>'+
       '<p>Die Trennung passiert vorher, rein in Notion: ein Teamspace für die Geschäftsführung mit Master-Inventur, Key Metrics und Kalkulation, einer je Standort mit nur den eigenen Listen.</p>'+
       '<p>Jeder Standort bekommt so seine eigene Zählliste und Kennzahlen-Ansicht, beide ohne Relation zur Masterliste. <b>Claude Code</b> liest Master-Inventur und Key Metrics über die API und schreibt für jeden Standort nur die eigenen Werte hinein, nie eine Verknüpfung.</p>'+
-      '<p>Ab mehr als ein, zwei Standorten ist das von Hand kaum zu pflegen — Claude Code ist hier kein Nice-to-have, sondern Teil der Lösung. Wie du sie aufbaust, zeigen wir dir in <b>Modul vier und fünf</b>.</p>'+
+      '<p>Ab mehr als ein, zwei Standorten ist das von Hand kaum zu pflegen — Claude Code ist hier kein Nice-to-have, sondern Teil der Lösung. Wie der Abgleich läuft, zeige ich dir in Modul 4, <b>Lektion 4.9 „Wer macht was im Backoffice“</b>.</p>'+
     '</div>'+
   '</div>'+
-  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur zwei Regeln ein: getrennte Teamspaces, niemals eine Relation dazwischen. Für Inventur und Key Metrics gilt dasselbe Muster — Claude Code hält die getrennten Datenbanken synchron, sobald mehr als ein Standort dazukommt. <b>Modul vier und fünf</b> zeigen dir Schritt für Schritt, wie du sie aufbaust.</p>';
+  '<p class="msv-close">Du musst diese Verbindung hier noch nicht selbst bauen. Präg dir nur zwei Regeln ein: getrennte Teamspaces, niemals eine Relation dazwischen. Für Inventur und Key Metrics gilt dasselbe Muster — Claude Code hält die getrennten Datenbanken synchron, sobald mehr als ein Standort dazukommt. <b>Lektion 4.9</b> in Modul 4 zeigt dir den Abgleich Schritt für Schritt, mit einer Vorschau vor jeder Änderung.</p>';
 
   function injectCSS(){ if(document.getElementById('tsmsv-css'))return;
     var s=document.createElement('style'); s.id='tsmsv-css'; s.textContent=CSS; document.head.appendChild(s); }
@@ -24501,7 +24501,7 @@ var TSISL_TEAM_ONB_V2=[
     'Du weißt, warum eine ausgeblendete Spalte <b>kein Schutz</b> ist, sondern nur ein Vorhang.',
     'Du kennst die <b>Rechte-Architektur</b> aus Masterliste und Standort-Zählliste.',
     'Du verstehst das <b>Ableitungsprinzip</b>: Stammdaten runter, Mengen rauf, der Preis bleibt oben.',
-    'Du weißt, dass <b>Claude Code und die Notion-API</b> diese Verbindung tragen, und wohin dich Modul vier und fünf dabei führen.'
+    'Du weißt, dass <b>Claude Code und die Notion-API</b> diese Verbindung tragen, und dass dir Lektion 4.9 den Abgleich zeigt.'
   ];
   var CSS=`
   ${P} #tsmsnext{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;content-visibility:auto;contain-intrinsic-size:auto 900px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -30304,71 +30304,86 @@ var TSISL_TEAM_ONB_V2=[
   .tsn2-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
   .tsn2-body p.big{font-family:${T.DISP};font-weight:600;font-size:clamp(19px,2.1vw,23px);line-height:1.4;color:#fff;margin-bottom:18px}
 
-  /* ---------- Erklaeranimation #tsn2dup ---------- */
+  /* ---------- Erklaeranimation #tsn2dup ----------
+     Innerhalb der Fenster echtes Notion im Dark Mode (Werte am 01.11.2026 aus Roberts Notion abgenommen):
+     Seite #191919, Seitenleiste #202020, Text rgb(240,239,237), Sekundaer rgb(173,169,163),
+     Seitenleiste rgb(188,186,182) 14px/500 bei 30px Zeilen, Rubrik/Pfeile rgb(125,122,117),
+     Linien rgba(255,255,243,.082), Knopf-Rand rgba(255,255,235,.1) Radius 6px, Titel 700, Tabellenkopf 14px mit 16px-Icons.
+     Kurs-Gestaltung nur ausserhalb der Fenster (Kopf, Takt-Leiste, Bildunterschrift). */
   #tsn2dup{max-width:1120px;margin:84px auto 0;padding:0 clamp(16px,3vw,40px)}
   #tsn2dup .rail{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 26px}
-  #tsn2dup .pill{display:inline-flex;align-items:center;gap:9px;height:36px;padding:0 16px 0 7px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.62);font:600 12.5px/1 ${T.SANS};cursor:pointer;transition:color .4s cubic-bezier(.45,0,.55,1),border-color .4s cubic-bezier(.45,0,.55,1),background .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .pill span{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.07);font-size:10.5px;font-variant-numeric:tabular-nums;transition:all .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .pill.on{color:#fff;border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.10);box-shadow:0 0 22px rgba(199,180,137,.14)}
+  #tsn2dup .pill{display:inline-flex;align-items:center;gap:9px;height:36px;padding:0 16px 0 7px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.62);font:600 12.5px/1 ${T.SANS};cursor:pointer;transition:color .4s cubic-bezier(.45,0,.55,1),border-color .4s cubic-bezier(.45,0,.55,1),background .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .pill span{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.07);font-size:10.5px;font-variant-numeric:tabular-nums}
+  #tsn2dup .pill.on{color:#fff;border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.10)}
   #tsn2dup .pill.on span{background:#c7b489;color:#05060b}
-  #tsn2dup .stage{position:relative;border-radius:24px;border:1px solid rgba(255,255,255,.09);overflow:hidden;padding:clamp(22px,3.4vw,40px);
-    background:radial-gradient(70% 90% at 78% 10%,rgba(199,180,137,.08),rgba(199,180,137,0) 60%),radial-gradient(60% 80% at 10% 100%,rgba(227,37,82,.035),rgba(227,37,82,0) 60%),#04050a;
-    box-shadow:0 50px 100px -60px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05)}
-  #tsn2dup .cols{position:relative;display:grid;grid-template-columns:1.05fr 70px .95fr;align-items:center;gap:0}
+  #tsn2dup .stage{position:relative;border-radius:24px;border:1px solid rgba(255,255,255,.09);overflow:hidden;padding:clamp(18px,3vw,34px);
+    background:radial-gradient(70% 90% at 78% 10%,rgba(199,180,137,.07),rgba(199,180,137,0) 60%),#04050a;box-shadow:0 50px 100px -60px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05)}
+  #tsn2dup .cols{position:relative;display:grid;grid-template-columns:1.25fr 56px .85fr;align-items:stretch}
   #tsn2dup .lbl{font:600 9.5px/1 ${T.SANS};letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 12px}
-  /* Vorlage (links): oeffentliche Notion-Seite */
-  #tsn2dup .tpl{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.015)),#090b12;padding:0 0 16px;overflow:hidden;
-    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-  #tsn2dup.js .tpl{opacity:0;transform:translateY(16px) scale(.98)}
-  #tsn2dup.js .tpl.in{opacity:1;transform:none}
-  #tsn2dup .bar{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02)}
-  #tsn2dup .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.14)}
-  #tsn2dup .url{flex:1;margin:0 8px;height:20px;border-radius:6px;background:rgba(255,255,255,.05);font:500 10px/20px ${T.MONO};color:rgba(255,255,255,.4);padding:0 9px;overflow:hidden;white-space:nowrap}
-  #tsn2dup .dup{position:relative;height:24px;padding:0 11px;border-radius:7px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.14);color:#efe6d2;font:600 10.5px/24px ${T.SANS};letter-spacing:.02em;transition:transform .25s cubic-bezier(.45,0,.55,1),background .25s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .dup.press{transform:scale(.92);background:#c7b489;color:#05060b;box-shadow:0 0 0 6px rgba(199,180,137,.16)}
-  #tsn2dup .dup.glow{animation:tsn2dupGlow 1.4s cubic-bezier(.45,0,.55,1) 2}
-  @keyframes tsn2dupGlow{0%,100%{box-shadow:0 0 0 0 rgba(199,180,137,0)}50%{box-shadow:0 0 0 7px rgba(199,180,137,.18)}}
-  #tsn2dup .pg{padding:18px 18px 4px}
-  #tsn2dup .pg-t{font-family:${T.DISP};font-weight:600;font-size:19px;color:#fff;margin:0 0 4px}
-  #tsn2dup .pg-s{font-size:11.5px;color:rgba(255,255,255,.45);margin:0 0 14px}
-  #tsn2dup .areas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  #tsn2dup .area{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
-  #tsn2dup .area b{width:20px;height:20px;border-radius:6px;flex:0 0 auto;background:radial-gradient(circle at 30% 30%,rgba(199,180,137,.55),rgba(199,180,137,.12));}
-  #tsn2dup .cursor{position:absolute;width:18px;height:18px;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform 1s cubic-bezier(.45,0,.2,1),opacity .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .cursor svg{width:18px;height:18px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
-  /* Pfeil-Mitte */
-  #tsn2dup .mid{position:relative;height:2px;margin:0 6px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+  #tsn2dup .nf{--n-bg:#191919;--n-side:#202020;--n-tx:rgb(240,239,237);--n-tx2:rgb(173,169,163);--n-tx3:rgb(125,122,117);--n-sb:rgb(188,186,182);--n-line:rgba(255,255,243,.082);--n-btn:rgba(255,255,235,.1);
+    font-family:ui-sans-serif,-apple-system,system-ui,"Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif;color:var(--n-tx);-webkit-font-smoothing:antialiased}
+  #tsn2dup .win{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:#191919;box-shadow:0 30px 60px -30px rgba(0,0,0,.9);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup.js .win.tpl{opacity:0;transform:translateY(14px)}
+  #tsn2dup.js .win.tpl.in{opacity:1;transform:none}
+  #tsn2dup .chrome{display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;background:#2a2a2a;border-bottom:1px solid rgba(0,0,0,.4)}
+  #tsn2dup .chrome i{width:9px;height:9px;border-radius:50%;background:#4a4a4a}
+  #tsn2dup .chrome .url{flex:1;margin:0 8px;height:18px;border-radius:5px;background:#1e1e1e;font:500 10px/18px ui-monospace,Menlo,monospace;color:#8a8a8a;padding:0 8px;white-space:nowrap;overflow:hidden}
+  #tsn2dup .ntop{display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 12px;font-size:12px;color:var(--n-tx)}
+  #tsn2dup .crumb{display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden}
+  #tsn2dup .crumb img{width:13px;height:13px}
+  #tsn2dup .crumb .sep{color:var(--n-tx3)}
+  #tsn2dup .dup{height:26px;padding:0 10px;border-radius:6px;border:1px solid var(--n-btn);background:transparent;color:var(--n-tx);font-size:12px;line-height:24px;transition:background .25s cubic-bezier(.45,0,.55,1),transform .25s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .dup.press{background:rgba(255,255,255,.08);transform:scale(.95)}
+  #tsn2dup .dup.glow{background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+  #tsn2dup .npage{position:relative;padding:14px 26px 20px;min-height:258px}
+  #tsn2dup .view{position:absolute;inset:14px 26px 20px 26px;transition:opacity .5s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .view.v2{opacity:0}
+  #tsn2dup .stage.filled .view.v1{opacity:0}
+  #tsn2dup .stage.filled .view.v2{opacity:1}
+  #tsn2dup .picon{width:30px;height:30px;margin:0 0 8px}
+  #tsn2dup .ptitle{font-size:22px;line-height:1.2;font-weight:700;color:var(--n-tx);margin:0 0 12px}
+  #tsn2dup .plink{display:flex;align-items:center;gap:7px;height:24px;font-size:13px;color:var(--n-tx)}
+  #tsn2dup .plink img{width:13px;height:13px;opacity:.9}
+  #tsn2dup .plink span{border-bottom:1px solid rgba(255,255,243,.25);line-height:1.15}
+  #tsn2dup .vtab{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:6px;background:rgba(255,255,243,.082);font-size:12px;color:var(--n-tx);margin:0 0 8px}
+  #tsn2dup .ntable{width:100%;border-collapse:collapse;font-size:12px}
+  #tsn2dup .ntable th{height:30px;text-align:left;font-weight:400;color:var(--n-tx2);border-bottom:1px solid var(--n-line);border-right:1px solid var(--n-line);padding:0 8px;white-space:nowrap}
+  #tsn2dup .ntable th:last-child,#tsn2dup .ntable td:last-child{border-right:0}
+  #tsn2dup .ntable th svg{width:13px;height:13px;fill:var(--n-tx2);vertical-align:-2px;margin-right:5px}
+  #tsn2dup .ntable td{height:30px;color:var(--n-tx);border-bottom:1px solid var(--n-line);border-right:1px solid var(--n-line);padding:0 8px;white-space:nowrap}
+  #tsn2dup .ntable td.t{font-weight:600}
+  #tsn2dup .ntable td.f{font-weight:700}
+  #tsn2dup .ntable tr.r{transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup.js .ntable tr.r{opacity:0;transform:translateY(6px)}
+  #tsn2dup.js .ntable tr.r.in{opacity:1;transform:none}
+  #tsn2dup .mid{position:relative;align-self:center;height:2px;margin:0 6px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
   #tsn2dup .mid::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(199,180,137,0),#c7b489);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.16,1,.3,1)}
   #tsn2dup .mid.on::after{transform:scaleX(1)}
-  /* Workspace (rechts): Seitenleiste */
-  #tsn2dup .ws{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.01)),#07080e;padding:16px 14px 14px;min-height:268px}
-  #tsn2dup .ws-h{display:flex;align-items:center;gap:9px;margin:0 0 14px}
-  #tsn2dup .ws-av{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#c7b489,#7d6f53);display:flex;align-items:center;justify-content:center;font:700 11px/1 ${T.SANS};color:#05060b}
-  #tsn2dup .ws-n{font:600 12.5px/1.2 ${T.SANS};color:#fff}
-  #tsn2dup .ws-sec{font:600 9.5px/1 ${T.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin:12px 4px 8px}
-  #tsn2dup .ws-ph{height:30px;border-radius:8px;border:1px dashed rgba(255,255,255,.12);margin:0 0 6px;transition:opacity .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .ws-root{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.35);font-size:12.5px;font-weight:600;color:#fff;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
-  #tsn2dup.js .ws-root{opacity:0;transform:translateY(6px)}
-  #tsn2dup.js .ws-root.in{opacity:1;transform:none}
-  #tsn2dup .ws-root img{width:16px;height:16px}
-  #tsn2dup .ws-kids{margin:6px 0 0 14px;border-left:1px solid rgba(199,180,137,.22);padding-left:10px}
-  #tsn2dup .ws-kid{display:flex;align-items:center;gap:8px;height:26px;font-size:12px;color:rgba(255,255,255,.86);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
-  #tsn2dup.js .ws-kid{opacity:0;transform:translateX(-8px)}
-  #tsn2dup.js .ws-kid.in{opacity:1;transform:none}
-  #tsn2dup .ws-c{margin-left:auto;min-width:26px;height:20px;padding:0 7px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font:700 10.5px/1 ${T.SANS};color:rgba(255,255,255,.4);background:rgba(255,255,255,.05);font-variant-numeric:tabular-nums;transition:background .4s cubic-bezier(.45,0,.55,1),color .4s cubic-bezier(.45,0,.55,1)}
-  #tsn2dup .ws-c.on{background:#c7b489;color:#05060b}
-  #tsn2dup .file{position:absolute;z-index:6;display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:9px;background:#efe6d2;color:#05060b;font:700 11px/1 ${T.SANS};box-shadow:0 14px 30px -10px rgba(0,0,0,.8);opacity:0;pointer-events:none}
-  #tsn2dup .area i{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.12);flex:1}
-  #tsn2dup .ws-kid i{width:6px;height:6px;border-radius:50%;background:#c7b489}
-  /* Flug-Geist */
-  #tsn2dup .ghost{position:absolute;z-index:4;border-radius:16px;border:1px solid rgba(199,180,137,.55);background:rgba(199,180,137,.08);box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 40px rgba(199,180,137,.2);pointer-events:none;opacity:0;transform-origin:0 0}
+  #tsn2dup .side{background:#202020;height:100%;padding:8px 6px 10px;min-height:294px}
+  #tsn2dup .ws-h{display:flex;align-items:center;gap:8px;height:30px;padding:0 8px;font-size:13px;font-weight:500;color:var(--n-sb)}
+  #tsn2dup .ws-av{width:18px;height:18px;border-radius:4px;background:#3a3a3a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--n-tx)}
+  #tsn2dup .ws-sec{height:26px;line-height:26px;padding:0 8px;margin-top:8px;font-size:11.5px;font-weight:500;color:var(--n-tx3)}
+  #tsn2dup .ti{display:flex;align-items:center;gap:6px;height:28px;padding:0 8px;border-radius:6px;font-size:13px;font-weight:500;color:var(--n-sb);white-space:nowrap;overflow:hidden;transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),background .3s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .ti svg{flex:0 0 auto;width:10px;height:10px;fill:var(--n-tx3);transition:transform .3s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .ti img{width:14px;height:14px}
+  #tsn2dup .ti.k1{padding-left:24px}
+  #tsn2dup .ti.k2{padding-left:40px}
+  #tsn2dup .ti.open svg{transform:rotate(90deg)}
+  #tsn2dup .ti.sel{background:rgba(255,255,243,.082);color:var(--n-tx)}
+  #tsn2dup.js .ti.dyn{opacity:0;transform:translateX(-6px)}
+  #tsn2dup.js .ti.dyn.in{opacity:1;transform:none}
+  #tsn2dup .ti.inv{display:none}
+  #tsn2dup .stage.filled .ti.inv{display:flex}
+  #tsn2dup .ghost{position:absolute;z-index:4;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.04);pointer-events:none;opacity:0;transform-origin:0 0}
+  #tsn2dup .file{position:absolute;z-index:6;display:flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:7px;background:#2f2f2f;border:1px solid rgba(255,255,235,.1);color:rgb(240,239,237);font:600 11px/1 ui-sans-serif,-apple-system,system-ui,Helvetica,Arial,sans-serif;box-shadow:0 14px 30px -10px rgba(0,0,0,.8);opacity:0;pointer-events:none}
+  #tsn2dup .cursor{position:absolute;width:18px;height:18px;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform 1s cubic-bezier(.45,0,.2,1),opacity .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .cursor svg{width:18px;height:18px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
   #tsn2dup .cap{min-height:24px;margin:22px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);max-width:640px;transition:opacity .35s cubic-bezier(.45,0,.55,1)}
   #tsn2dup .foot{display:flex;justify-content:center;margin:16px 0 0}
   @media(max-width:820px){
-    #tsn2dup .cols{grid-template-columns:1fr;gap:16px}
-    #tsn2dup .mid{height:28px;width:2px;margin:0 auto}
-    #tsn2dup .mid::after{background:linear-gradient(180deg,rgba(199,180,137,0),#c7b489);transform:scaleY(0);transform-origin:top}
-    #tsn2dup .mid.on::after{transform:scaleY(1)}
+    #tsn2dup .cols{grid-template-columns:1fr;gap:14px}
+    #tsn2dup .mid{height:24px;width:2px;margin:0 auto}
+    #tsn2dup .ntable th:nth-child(4),#tsn2dup .ntable td:nth-child(4){display:none}
   }
   @media(prefers-reduced-motion:reduce){ #tsn2dup *{transition:none!important;animation:none!important} }
 
@@ -30399,30 +30414,47 @@ var TSISL_TEAM_ONB_V2=[
   function heroCSS(){ if(document.getElementById('tsn2-vorlage-css')) return; var s=document.createElement('style'); s.id='tsn2-vorlage-css'; s.textContent=HERO_CSS; document.head.appendChild(s); }
 
   var AREAS=['Foodquartier','Drinksquartier','Finance Studio','Key Metrics','Operations Area','Vision Frame'];
-  var FILL=[18,6,4,0,0,0];
   var BEATS=[
     ['Öffnen','Du öffnest den Link zur Vorlage im Browser und meldest dich bei Notion an.'],
     ['Duplizieren','Ein Klick auf Duplizieren, und das ganze Backoffice liegt in deinem Workspace.'],
-    ['Füllen','Du füllst es mit deinen eigenen Daten, angefangen beim Einkauf im Foodquartier.']
+    ['Füllen','Du füllst es mit deinen eigenen Daten, angefangen bei der Inventurliste im Foodquartier.']
   ];
+  var ARR='<svg viewBox="0 0 12 12"><path d="M4 2.5 8 6 4 9.5z"/></svg>';
+  var IC={
+    t:'<svg viewBox="0 0 16 16"><path d="M2.2 12.5 5.4 3.5h1.3l3.2 9H8.6l-.8-2.4H4.3l-.8 2.4H2.2zm2.5-3.5h2.7L6 5.1 4.7 9zM12 12.6c-1 0-1.7-.6-1.7-1.5 0-1 .8-1.5 2.1-1.6l1-.1v-.3c0-.5-.3-.8-.9-.8-.5 0-.8.2-.9.6h-1.1c.1-1 .9-1.6 2-1.6 1.3 0 2 .7 2 1.8v3.4h-1.1v-.7c-.3.5-.8.8-1.4.8zm.3-1c.6 0 1.1-.4 1.1-1v-.4l-.9.1c-.6 0-.9.3-.9.7 0 .4.3.6.7.6z"/></svg>',
+    tx:'<svg viewBox="0 0 16 16"><path d="M2 3.5h12v1.3H2zm0 3.2h12V8H2zm0 3.2h8v1.3H2z"/></svg>',
+    n:'<svg viewBox="0 0 16 16"><path d="M5.6 13 6.1 10H3.6l.2-1.3h2.5l.5-2.9H4.3l.2-1.3H7L7.5 1.6h1.3L8.3 4.5h2.4l.5-2.9h1.3l-.5 2.9h2.4l-.2 1.3h-2.4l-.5 2.9h2.4L13 10h-2.4l-.5 3H8.8l.5-3H6.9l-.5 3H5.6zm1.5-4.3h2.4L10 5.8H7.6l-.5 2.9z"/></svg>',
+    f:'<svg viewBox="0 0 16 16"><path d="M3.5 2.5h9v1.6H6.4l3.4 3.9-3.4 3.9h6.1v1.6h-9v-1.4L7.6 8 3.5 3.9z"/></svg>'
+  };
 
   function animHTML(){
     var cur='<div class="cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.6L9.6 19z" fill="#fff" stroke="#05060b" stroke-width="1.2" stroke-linejoin="round"/></svg></div>';
+    var L='<img alt="" src="'+T.LOGO+'">';
     return T.head('','Vorlage statt Nachbau','Leer, aber <span class="g">komplett</span>.','Einmal duplizieren, danach füllst du sie mit deinen eigenen Daten.')+
     '<div class="rail">'+BEATS.map(function(b,i){ return '<button type="button" class="pill" data-b="'+i+'"><span>0'+(i+1)+'</span>'+b[0]+'</button>'; }).join('')+'</div>'+
     '<div class="stage">'+cur+'<div class="file">Lieferschein.pdf</div>'+
       '<div class="cols">'+
-        '<div><div class="lbl">Die Vorlage</div>'+
-          '<div class="tpl"><div class="bar"><i></i><i></i><i></i><div class="url">notion.site / notion-ai-backoffice</div><div class="dup">Duplizieren</div></div>'+
-          '<div class="pg"><div class="pg-t">Notion AI Backoffice</div><div class="pg-s">Leere Vorlage · alle Datenbanken, Verknüpfungen und Formeln</div>'+
-          '<div class="areas">'+AREAS.map(function(){ return '<div class="area"><b></b><i></i></div>'; }).join('')+'</div></div></div>'+
+        '<div><div class="lbl">Die Vorlage im Browser</div>'+
+          '<div class="win tpl nf"><div class="chrome"><i></i><i></i><i></i><div class="url">notion.site / notion-ai-backoffice</div></div>'+
+          '<div class="ntop"><div class="crumb">'+L+'<span class="cr1">Notion AI Backoffice</span><span class="cr2" style="display:none">Foodquartier <span class="sep">/</span> DB 0 : Inventurliste</span></div><div class="dup">Duplizieren</div></div>'+
+          '<div class="npage">'+
+            '<div class="view v1"><img class="picon" alt="" src="'+T.LOGO+'"><div class="ptitle">Notion AI Backoffice</div>'+AREAS.map(function(a){ return '<div class="plink">'+L+'<span>'+a+'</span></div>'; }).join('')+'</div>'+
+            '<div class="view v2"><div class="ptitle">DB 0 : Inventurliste</div><div class="vtab">Table View</div>'+
+              '<table class="ntable"><tr><th>'+IC.t+'Name</th><th>'+IC.tx+'Menge / Unit</th><th>'+IC.n+'Preis pro Unit (€)</th><th>'+IC.f+'Preis / KG</th></tr>'+
+              '<tr class="r"><td class="t">Tomaten</td><td>6 x 2,5 kg</td><td>18,90 €</td><td class="f">1,26 €</td></tr>'+
+              '<tr class="r"><td class="t">Olivenöl</td><td>10 L</td><td>28,00 €</td><td></td></tr>'+
+              '<tr class="r"><td class="t">Eier</td><td>180 Stck</td><td>39,60 €</td><td></td></tr></table></div>'+
+          '</div></div>'+
         '</div>'+
         '<div class="mid"></div>'+
-        '<div><div class="lbl">Dein Workspace</div>'+
-          '<div class="ws"><div class="ws-h"><div class="ws-av">B</div><div class="ws-n">Dein Betrieb</div></div>'+
-          '<div class="ws-sec">Privat</div><div class="ws-ph"></div>'+
-          '<div class="ws-root"><img alt="" src="'+T.LOGO+'">Notion AI Backoffice</div>'+
-          '<div class="ws-kids">'+AREAS.map(function(a,i){ return '<div class="ws-kid"><i></i>'+a+'<span class="ws-c'+(FILL[i]?' on':'')+'" data-v="'+FILL[i]+'">'+FILL[i]+'</span></div>'; }).join('')+'</div></div>'+
+        '<div><div class="lbl">Dein Notion</div>'+
+          '<div class="win nf"><div class="side">'+
+            '<div class="ws-h"><div class="ws-av">B</div>Dein Betrieb</div>'+
+            '<div class="ws-sec">Privat</div>'+
+            '<div class="ti">'+ARR+'<span>Erste Schritte</span></div>'+
+            '<div class="ti dyn root open">'+ARR+L+'<span>Notion AI Backoffice</span></div>'+
+            AREAS.map(function(a,i){ return '<div class="ti dyn k1'+(i===0?' food':'')+'">'+ARR+L+'<span>'+a+'</span></div>'+(i===0?'<div class="ti k2 inv sel">'+ARR+L+'<span>DB 0 : Inventurliste</span></div>':''); }).join('')+
+          '</div></div>'+
         '</div>'+
       '</div>'+
       '<div class="cap">'+BEATS[2][1]+'</div>'+
@@ -30432,21 +30464,22 @@ var TSISL_TEAM_ONB_V2=[
 
   function setupAnim(root){
     var q=function(s){ return root.querySelector(s); }, qa=function(s){ return root.querySelectorAll(s); };
-    var stage=q('.stage'), tpl=q('.tpl'), dupB=q('.dup'), mid=q('.mid'), wsRoot=q('.ws-root'), ph=q('.ws-ph'), kids=qa('.ws-kid'), cs=qa('.ws-c'), cap=q('.cap'), cur=q('.cursor'), file=q('.file'), pills=qa('.pill');
+    var stage=q('.stage'), tpl=q('.tpl'), dupB=q('.dup'), mid=q('.mid'), side=q('.side'), dyn=qa('.ti.dyn'), food=q('.ti.food'), rows=qa('.ntable tr.r'), cap=q('.cap'), cur=q('.cursor'), file=q('.file'), pills=qa('.pill'), cr1=q('.cr1'), cr2=q('.cr2');
     var timers=[], ghost=null;
     function T_(fn,ms){ var id=setTimeout(function(){ timers=timers.filter(function(t){return t!==id;}); fn(); },ms); timers.push(id); }
     function clear(){ timers.forEach(clearTimeout); timers=[]; if(ghost&&ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost=null; }
     function setBeat(i){ Array.prototype.forEach.call(pills,function(p,k){ p.classList.toggle('on',k===i); }); cap.style.opacity=0; setTimeout(function(){ cap.textContent=BEATS[i][1]; cap.style.opacity=1; },180); }
     function rel(el){ var a=stage.getBoundingClientRect(), b=el.getBoundingClientRect(); return {x:b.left-a.left,y:b.top-a.top,w:b.width,h:b.height}; }
-    function setCounts(zero){ Array.prototype.forEach.call(cs,function(c){ var v=+c.getAttribute('data-v'); c.textContent=zero?'0':String(v); c.classList.toggle('on',!zero && v>0); }); }
+    function filled(on){ stage.classList.toggle('filled',on); food.classList.toggle('open',on); cr1.style.display=on?'none':''; cr2.style.display=on?'':'none'; }
     function reset(){
-      clear(); tpl.classList.remove('in'); dupB.classList.remove('press','glow'); mid.classList.remove('on'); wsRoot.classList.remove('in'); ph.style.display='';
-      Array.prototype.forEach.call(kids,function(k){ k.classList.remove('in'); }); setCounts(true);
+      clear(); tpl.classList.remove('in'); dupB.classList.remove('press','glow'); mid.classList.remove('on'); filled(false);
+      Array.prototype.forEach.call(dyn,function(k){ k.classList.remove('in'); }); Array.prototype.forEach.call(rows,function(r){ r.classList.remove('in'); });
       cur.style.opacity=0; file.style.transition='none'; file.style.opacity=0;
     }
     function endState(){
-      clear(); tpl.classList.add('in'); mid.classList.add('on'); wsRoot.classList.add('in'); ph.style.display='none';
-      Array.prototype.forEach.call(kids,function(k){ k.classList.add('in'); }); setCounts(false); cur.style.opacity=0; file.style.opacity=0; setBeat(2);
+      clear(); tpl.classList.add('in'); mid.classList.add('on'); filled(true);
+      Array.prototype.forEach.call(dyn,function(k){ k.classList.add('in'); }); Array.prototype.forEach.call(rows,function(r){ r.classList.add('in'); });
+      cur.style.opacity=0; file.style.opacity=0; setBeat(2);
     }
     function b1(){
       setBeat(0); tpl.classList.add('in');
@@ -30459,29 +30492,27 @@ var TSISL_TEAM_ONB_V2=[
     }
     function b2(){
       setBeat(1); tpl.classList.add('in');
-      dupB.classList.add('press'); T_(function(){ dupB.classList.remove('press'); },260);
+      dupB.classList.add('press'); T_(function(){ dupB.classList.remove('press','glow'); },260);
       T_(function(){ cur.style.opacity=0; },500);
-      var a=rel(tpl), b=rel(wsRoot.parentNode);
+      var a=rel(tpl), b=rel(side);
       ghost=document.createElement('div'); ghost.className='ghost';
       ghost.style.left=a.x+'px'; ghost.style.top=a.y+'px'; ghost.style.width=a.w+'px'; ghost.style.height=a.h+'px';
       stage.appendChild(ghost);
-      var sx=b.w/a.w, sy=(b.h*0.6)/a.h;
+      var sx=b.w/a.w, sy=(b.h*0.55)/a.h;
       T_(function(){ ghost.style.transition='none'; ghost.style.opacity=1; void ghost.offsetWidth;
         ghost.style.transition='transform 1s cubic-bezier(.65,0,.25,1),opacity .5s cubic-bezier(.45,0,.55,1) .7s';
-        ghost.style.transform='translate('+(b.x-a.x)+'px,'+(b.y-a.y+40)+'px) scale('+sx.toFixed(3)+','+sy.toFixed(3)+')'; ghost.style.opacity=0; mid.classList.add('on'); },300);
-      T_(function(){ ph.style.display='none'; wsRoot.classList.add('in'); },1150);
+        ghost.style.transform='translate('+(b.x-a.x)+'px,'+(b.y-a.y+60)+'px) scale('+sx.toFixed(3)+','+sy.toFixed(3)+')'; ghost.style.opacity=0; mid.classList.add('on'); },300);
+      Array.prototype.forEach.call(dyn,function(k,i){ T_(function(){ k.classList.add('in'); },1150+i*130); });
       T_(function(){ if(ghost&&ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost=null; },1500);
-      Array.prototype.forEach.call(kids,function(k,i){ T_(function(){ k.classList.add('in'); },1400+i*140); });
     }
     function b3(){
-      setBeat(2);
-      var target=kids[0], t=rel(target), st=stage.getBoundingClientRect();
-      file.style.transition='none'; file.style.opacity=0; file.style.transform='translate('+(t.x-40)+'px,'+(st.height-60)+'px)'; void file.offsetWidth;
-      file.style.transition='transform 1.1s cubic-bezier(.65,0,.25,1),opacity .35s cubic-bezier(.45,0,.55,1)';
-      T_(function(){ file.style.opacity=1; file.style.transform='translate('+(t.x+t.w-150)+'px,'+(t.y-4)+'px)'; },120);
-      T_(function(){ file.style.opacity=0; },1250);
-      Array.prototype.forEach.call(cs,function(c,i){ var v=+c.getAttribute('data-v'); if(!v) return;
-        T_(function(){ c.classList.add('on'); var k=0; var iv=setInterval(function(){ k++; c.textContent=String(Math.min(v,k)); if(k>=v) clearInterval(iv); },45); setTimeout(function(){ clearInterval(iv); c.textContent=String(v); }, v*45+200); },1300+i*500); });
+      setBeat(2); filled(true);
+      var tb=rel(q('.ntable')), st=stage.getBoundingClientRect();
+      file.style.transition='none'; file.style.opacity=0; file.style.transform='translate('+(tb.x+20)+'px,'+(st.height-50)+'px)'; void file.offsetWidth;
+      file.style.transition='transform 1s cubic-bezier(.65,0,.25,1),opacity .35s cubic-bezier(.45,0,.55,1)';
+      T_(function(){ file.style.opacity=1; file.style.transform='translate('+(tb.x+tb.w*0.35)+'px,'+(tb.y+30)+'px)'; },350);
+      T_(function(){ file.style.opacity=0; },1450);
+      Array.prototype.forEach.call(rows,function(r,i){ T_(function(){ r.classList.add('in'); },1500+i*380); });
     }
     function play(from){
       reset();
@@ -30489,7 +30520,7 @@ var TSISL_TEAM_ONB_V2=[
       var at=0;
       if(from<=0){ T_(b1,0); at=2200; } else { tpl.classList.add('in'); }
       if(from<=1){ T_(b2,at); at+=2600; }
-      else { mid.classList.add('on'); wsRoot.classList.add('in'); ph.style.display='none'; Array.prototype.forEach.call(kids,function(k){ k.classList.add('in'); }); }
+      else { mid.classList.add('on'); Array.prototype.forEach.call(dyn,function(k){ k.classList.add('in'); }); }
       T_(b3,at);
     }
     Array.prototype.forEach.call(pills,function(p){ p.addEventListener('click',function(){ play(+p.getAttribute('data-b')); }); });
@@ -30552,10 +30583,10 @@ var TSISL_TEAM_ONB_V2=[
     frag.appendChild(T.make('tsn2v-hol','tsn2-sec',
       T.head('01','Duplizieren','In fünf Minuten <span class="g">bei dir</span>.','Du brauchst nur einen Browser und ein Notion-Konto.')+
       T.steps([
-        {eb:'Konto',t:'Im Browser bei Notion anmelden',html:'<p>Das Duplizieren läuft über den Browser, nicht über die App. Hast du noch kein Konto, legst du dir auf notion.com eins an. Für den Anfang reicht der kostenlose Plan, solange du allein arbeitest. Welcher Plan zu deinem Team passt, hast du in Modul 1 gesehen.</p>'},
+        {eb:'Konto',t:'Im Browser bei Notion anmelden',html:'<p>Das Duplizieren läuft über den Browser, nicht über die App. Hast du noch kein Konto, legst du dir auf notion.com eins an. Für den Anfang reicht der kostenlose Plan, solange du allein arbeitest. Welcher Plan zu deinem Team passt, hast du in Modul 1 gesehen.</p>'+T.note('Alle Formeln, Verknüpfungen und Rechnungen der Vorlage laufen in jedem Plan. Notion AI, die dir Lieferscheine und Listen einliest, gibt es im vollen Umfang nur im Business-Plan (laut notion.com 20 $ pro Platz und Monat bei jährlicher Zahlung, 24 $ monatlich), in Free und Plus nur als Testkontingent. Ohne Notion AI trägst du per CSV-Datei oder von Hand ein, das zeige ich dir in jeder Datenbank-Lektion.')},
         {eb:'Link',t:'Vorlage öffnen und duplizieren',html:'<p>Öffne den Link zur Vorlage. Oben rechts steht <span class="tsn2-path">Duplizieren</span>. Notion fragt dich danach, in welchen Workspace die Kopie soll.</p>'+goBtn()},
         {eb:'Ablage',t:'Deine Kopie finden',html:'<p>Die Vorlage landet in deiner Seitenleiste im Bereich <span class="tsn2-path">Privat</span>, mit allen Unterseiten und Datenbanken. Öffne sie einmal und gib Notion einen Moment, bis alle Datenbanken geladen sind. Markier die Startseite als Favorit, dann bist du später mit einem Klick dort.</p>'},
-        {eb:'Team',t:'In einen Teamspace verschieben',html:'<p>Arbeitet dein Team mit, gehört das Backoffice in einen Teamspace statt in deinen privaten Bereich. Zieh die Startseite in der Seitenleiste dorthin und lege fest, wer was darf.</p><p>Für Mitarbeiter, die nur Einträge machen sollen, gibt es bei Datenbanken die Stufe <span class="tsn2-path">Kann Inhalt bearbeiten</span>. Damit legen sie Zeilen an und ändern Werte, an Spalten und Formeln kommen sie nicht heran.</p>'},
+        {eb:'Team',t:'In einen Teamspace verschieben',html:'<p>Arbeitet dein Team mit, gehört das Backoffice in einen Teamspace statt in deinen privaten Bereich. Zieh die Startseite in der Seitenleiste dorthin und lege fest, wer was darf.</p><p>Für Mitarbeiter, die nur Einträge machen sollen, gibt es bei Datenbanken die Stufe <span class="tsn2-path">Kann Inhalt bearbeiten</span>. Damit legen sie Zeilen an und ändern Werte, an Spalten und Formeln kommen sie nicht heran. Wie die Stufen allgemein funktionieren, steht in Lektion 1.9.</p>'},
         {eb:'Probe',t:'Einmal testen, ob alles rechnet',html:'<p>Leg in der Inventurliste einen Probe-Eintrag an: Name <b>Testprodukt</b>, bei Menge / Unit <span class="tsn2-mono">1 kg</span>, bei Preis pro Unit (€) <span class="tsn2-mono">10</span>. Zeigt die Spalte Preis / Kg danach 10 Euro, rechnen die Formeln in deiner Kopie. Den Probe-Eintrag löschst du danach wieder.</p>'}
       ])));
 
@@ -30700,6 +30731,8 @@ var TSISL_TEAM_ONB_V2=[
           T.prompt('Prompt · Notion AI','Lege für jedes Produkt in DB 0 : Inventurliste, das noch keine Zutat hat, einen Eintrag in DB IV : Zutaten an.\nZutat Name: der Name aus der Inventurliste.\nPortionsgröße: 1 kg bei Produkten mit Preis / KG, 1 l bei Produkten mit Preis / Ltr., 1 Stck bei Produkten mit Preis / Stck.\nVerknüpfe die Zutat über Inventar Produkt mit dem Produkt und setze Hauptzutat auf X.\nLass Verpackung und Reinigungsmittel weg. Rate keine Werte.')+T.note(NOTE_BEZUG)},
         {eb:'Nährwerte',t:'Nährwerte und Allergene in die Grundzutat',html:'<p>Bevor du Portionen anlegst, trägst du bei der Grundzutat die Nährwerte pro 100 Gramm ein. Sie stehen auf der Verpackung oder im Datenblatt des Herstellers. In Allergene ( ausfüllen ) wählst du, was drinsteckt. Referenz ( g ) bleibt bei 100. Bei Stück-Zutaten trägst du dort das Gewicht eines Stücks ein, bei einem Ei zum Beispiel 60, dann stimmen auch dort die Nährwerte.</p>'},
         {eb:'Portion',t:'Auf die Portion herunterrechnen',html:'<p>Jetzt der Schritt, für den es die Zutaten gibt. Dupliziere die Grundzutat und ändere bei der Kopie den Namen, zum Beispiel <b>80 g Spinat</b>, und die Portionsgröße auf '+M('80 g')+'. Bei Hauptzutat entfernst du das X. Den Preis für die 80 Gramm rechnet die Zutat aus dem Kilopreis, und jede Preisänderung in der Inventur zieht sie mit. Weil du dupliziert hast, sind Nährwerte, Allergene und die Verknüpfung zum Produkt schon drin.</p>'},
+        {eb:'Cover',t:'Ein Titelbild für jede Grundzutat',html:'<p>Jede Zutat hat Platz für ein Titelbild. Einheitlich wird deine Datenbank, wenn alle Bilder aus demselben Stil entstehen: Claude oder ChatGPT schreiben dir die Bild-Prompts, Gemini mit dem Bildmodell Nano Banana erzeugt die Bilder, und du lädst sie als Cover der Grundzutat hoch. Die Portionen übernehmen das Bild beim Duplizieren gleich mit.</p>'+
+          T.prompt('Prompt · Claude oder ChatGPT','Schreib mir für jede der folgenden Zutaten einen Bild-Prompt für Gemini. Der Stil ist für alle gleich: die Zutat als kleines Häufchen in der Bildmitte, auf glänzend schwarzem Untergrund mit leichter Spiegelung, reiner schwarzer Hintergrund, weiches Studiolicht von oben, fotorealistisch, Querformat 3:2, keine Schrift.\nZutaten: Spinat, Tomaten, Olivenöl, Parmesan, Basilikum')+T.note('Welche Werkzeuge du dafür brauchst und in welchem Format du die Bilder anlegst, zeige ich dir in der Lektion Interface-Bau.')},
         {eb:'Verlust',t:'Schnitt- und Garverlust eintragen',html:'<p>Kaufst du 100 Gramm Spinat und landen nach dem Putzen 90 auf dem Teller, hast du 10 Prozent Schnittverlust. Den trägst du bei der Portion ein, den Garverlust genauso, etwa bei Fleisch oder Fisch. Preis / Portion ( nutzbar ) zeigt dann, was dich die Menge auf dem Teller wirklich kostet. Leere Felder zählen als null Prozent.</p>'}
       ] },
     moveUp:['tscb-duo'],
@@ -30726,6 +30759,7 @@ var TSISL_TEAM_ONB_V2=[
         {eb:'Portion',t:'Portionsgröße setzen',html:'<p>In Portionsgröße ( G / Ltr / Stck ) trägst du ein, wie viel von der Rezeptur in einem Gericht landet, beim Dressing zum Beispiel '+M('30')+'. Daraus rechnet die Rezeptur, wie viele Portionen eine Charge ergibt und was eine Portion kostet. Genau diesen Portionspreis holt sich später jedes Gericht.</p>'},
         {eb:'Zubereitung',t:'Zubereitung so aufschreiben, dass jeder sie ansetzen kann',html:'<p>Im Feld Zubereitung stehen die Arbeitsschritte mit Mengen, Reihenfolge und Haltbarkeit. Hast du ein altes Rezeptblatt, lass es von Notion AI übertragen.</p>'+
           T.prompt('Prompt · Notion AI','Übertrage das angehängte Rezeptblatt in die Rezeptur Hausdressing in DB V : Rezepturen.\nSchreib die Arbeitsschritte nummeriert in das Feld Zubereitung.\nVerknüpfe unter Zutaten die passenden Portionen aus DB IV : Zutaten.\nFehlt eine passende Portion, lege nichts an, sondern liste sie mir auf.')+T.note(NOTE_BEZUG)},
+        {eb:'Cover',t:'Bild und Sticker für die Rezeptur',html:'<p>Rezepturen bekommen ein Titelbild in derselben Bildsprache wie deine Zutaten. Dazu legst du in Canva einen Sticker mit Schrift darüber, zum Beispiel „hausgemacht“ oder „vegan“, und lädst das fertige Bild als Cover in Notion hoch. So erkennst du in der Galerie auf einen Blick, was du selbst herstellst.</p>'},
         {eb:'Optional',t:'Arbeitszeit in den Preis nehmen',html:'<p>Soll die Zeit für das Ansetzen der Charge im Preis stecken, aktivierst du den Schalter ✨ Zubereitungskosten Personal aktivieren, trägst die Zubereitungsdauer ( min ) ein und wählst, wer die Rezeptur ansetzt. Den Stundensatz holt sich die Rezeptur aus den Mitarbeiterlöhnen der nächsten Lektion.</p>'}
       ] },
     s3:{ h:'Was kostet <span class="g">eine Portion Dressing</span>?', lead:'Die Rezeptur zählt die Mengen ihrer Zutaten zusammen, teilt durch deine Portionsgröße und verteilt die Kosten der Charge auf jede Portion.', kind:null, extra:['tsd5'] },
@@ -30801,6 +30835,7 @@ var TSISL_TEAM_ONB_V2=[
         {eb:'Preis',t:'Verkaufspreis netto eintragen',html:'<p>In Verkaufspreis ( Eur ) gehört dein Kartenpreis ohne Mehrwertsteuer. Teil den Preis von der Karte durch 1,07 oder 1,19, je nachdem, welcher Steuersatz für das Gericht gilt.</p>'},
         {eb:'Personal',t:'Zubereitungszeit und Mitarbeiter',html:'<p>Zubereitungszeit ( min ) ist die Zeit, die das Gericht am Pass wirklich braucht, ohne das Vorbereiten der Rezepturen. Unter 👤 Mitarbeiter wählst du, wer es zubereitet. Aus Stundensatz und Minuten rechnet das Gericht seine Personalkosten.</p>'},
         {eb:'Gemeinkosten',t:'Den Monat verknüpfen',html:'<p>Unter GK Monat für DB III wählst du den Monat aus deinen Gemeinkostenannahmen. Daraus holt sich das Gericht seinen Gemeinkostenanteil.</p>'},
+        {eb:'Cover',t:'Ein Bild für jedes Gericht',html:'<p>Hast du gute Fotos vom Pass, nimm sie. Sonst entsteht das Titelbild wie bei Zutaten und Rezepturen, in derselben Bildsprache, und bekommt in Canva auf Wunsch einen Sticker. Die breiten Banner zwischen den Bereichen erstellst du in Midjourney und schneidest sie in Canva zu, wie in der Lektion Interface-Bau gezeigt.</p>'},
         {eb:'Neue Gerichte',t:'Preis prüfen statt raten',html:'<p>Neue Gerichte rechnest du rückwärts. Die Vorlage zeigt dir, welcher Verkaufspreis bei 10, 15, 20, 25 oder 30 Prozent Wareneinsatz herauskäme. In '+K('Eingeben : VK Wunschpreis')+' tippst du einen Preis ein und siehst sofort, welchen Wareneinsatz er ergibt.</p>'}
       ] },
     s3:{ h:'Was am Ende <span class="g">pro Teller bleibt</span>.', lead:'Aus den Bausteinen kennt das Gericht seinen Wareneinsatz. Mit Gemeinkosten und Personalkosten rechnet es die drei Deckungsbeiträge.', kind:'ger', extra:['tstarget'] },
@@ -30828,7 +30863,7 @@ var TSISL_TEAM_ONB_V2=[
     if(cfg.s1.intro) out.intro=T.make(id.intro,'tsn2-body',cfg.s1.intro);
     out.s1=T.make(id.s1,'tsn2-sec narrow',T.head('01','Wofür',cfg.s1.h,'')+(cfg.s1.html?'<div class="tsn2-txt">'+cfg.s1.html+'</div>':''));
     if(cfg.s1.after) out.s1b=T.make(id.s1b,'tsn2-body',cfg.s1.after);
-    out.s2=T.make(id.s2,'tsn2-sec',T.head('02','Deine Daten eintragen','Deine Zahlen <span class="g">in der Vorlage</span>.',cfg.s2.lead)+T.steps(cfg.s2.steps)+(cfg.s2.after?'<div style="max-width:900px;margin:0 auto">'+T.note(cfg.s2.after)+'</div>':''));
+    out.s2=T.make(id.s2,'tsn2-sec',T.head('02','Deine Daten eintragen','Deine Zahlen <span class="g">in der Vorlage</span>.',cfg.s2.lead)+T.steps(cfg.s2.steps)+'<div style="max-width:900px;margin:0 auto">'+T.note('Wie das Einlesen grundsätzlich funktioniert, mit CSV-Datei, Notion AI und Massenbearbeitung, zeigt Lektion 1.4 „Daten in die Tabelle bekommen“. Hier geht es darum, was in diese Datenbank gehört.')+(cfg.s2.after?T.note(cfg.s2.after):'')+'</div>');
     out.s3=T.make(id.s3,'tsn2-sec',T.head('03','Was das System rechnet',cfg.s3.h,cfg.s3.lead)+'<div class="tsn2-s3-slot"></div>');
     var slot=out.s3.querySelector('.tsn2-s3-slot');
     if(window.__tsn2res && cfg.s3.kind){ slot.appendChild(window.__tsn2res(id.s3+'-card', cfg.s3.kind)); }
@@ -31114,9 +31149,9 @@ var TSISL_TEAM_ONB_V2=[
     fix:[ [/Der Abschluss des Building-Prozesses — (\w)/g, function(m,a){ return a.toUpperCase(); }] ] },
 
   { key:'nai', re:/\/notion-ai-fr-unser-system\/?$/, before:'#tsnaiq', moveUp:['tsnaiemp'],
-    h:'Notion AI <span class="g">in deiner Woche</span>.', lead:'Drei Situationen, in denen Notion AI dir in der Vorlage Arbeit abnimmt. Für alles, was dauerhaft und automatisch laufen soll, gibt es Modul 4.',
+    h:'Notion AI <span class="g">in deiner Woche</span>.', lead:'Drei Situationen, in denen Notion AI dir in der Vorlage Arbeit abnimmt. Im vollen Umfang gibt es Notion AI nur im Business-Plan, in Free und Plus nur als Testkontingent. Für alles, was dauerhaft und automatisch laufen soll, gibt es Modul 4: Notion Agents in 4.6, Automationen in 4.7, Scheduled tasks in 4.8.',
     cards:[
-      {eb:'Eintragen',nm:'Ein neuer Lieferschein kommt',html:P('PDF anhängen, Datenbank als Bezug wählen, die Positionen landen in der Inventurliste. Die Prompts dafür stehen in den Datenbank-Lektionen.')},
+      {eb:'Eintragen',nm:'Ein neuer Lieferschein kommt',html:P('Lieferschein als PDF oder Preisliste als Excel-Datei anhängen, Datenbank als Bezug wählen, die Positionen landen in der Inventurliste. Für Fotos von Lieferscheinen nimmst du Claude, das zeigt Modul 4. Die Prompts stehen in den Datenbank-Lektionen.')},
       {eb:'Fragen',nm:'Was kostet mich der Basmati-Ausfall',html:P('Du fragst auf der Seite des Gerichts, was sich am Wareneinsatz ändert, wenn du Sushi-Reis statt Basmati nimmst. Die Antwort kommt aus deinen eigenen Zahlen.')},
       {eb:'Prüfen',nm:'Wo fehlen noch Angaben',html:P('Frag nach Zutaten ohne Allergene oder Gerichten ohne Verkaufspreis. So findest du Lücken, bevor sie in der Kalkulation auffallen.')}
     ],
@@ -31165,15 +31200,15 @@ var TSISL_TEAM_ONB_V2=[
   { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'Modul 2 · Ausbau', title:'Dynamisches <span class="g">System</span>', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system', anim:'__tsn2sort',
     hide:['block-38eb9546553480f88995dbe5a2f41255'],
     body:'<p class="big">Deine Vorlage rechnet, sobald du etwas einträgst. Lebendig wird sie, wenn manches ohne dich passiert.</p>'+
-      '<p>Dafür gibt es drei Wege, und jeder hat seinen Platz. Hier bekommst du den Überblick, damit du weißt, was wofür taugt. Wie du sie einrichtest, zeige ich dir Schritt für Schritt in Modul 4.</p>',
+      '<p>Dafür gibt es drei Wege, und jeder hat seinen Platz. Hier bekommst du den Überblick, damit du weißt, was wofür taugt. Wie du sie einrichtest, zeige ich dir in Modul 4: Notion Agents in Lektion 4.6, Automationen in 4.7, Scheduled tasks in 4.8 und die Aufteilung im Backoffice in 4.9.</p>',
     secs:function(){ return T.make('tsn2-dyn-wege','tsn2-sec',T.head('01','Drei Wege','Was ohne dich <span class="g">laufen kann</span>.','Die Faustregel: immer gleich, dann Automation. Mitdenken in Notion, dann Agent. Etwas von außen, dann Claude Code.')+
         T.cards('c3',[
-          {eb:'Ohne KI',nm:'Notion Automationen',html:P('Auslöser und Aktion, immer gleich. Setzt jemand bei einem Produkt den Status auf „nachbestellen“, entsteht eine Bestellaufgabe. Ein Button startet die Wocheninventur mit einem Klick. Automationen gibt es in den bezahlten Plänen.')},
-          {eb:'In Notion',nm:'Notion Agent',html:P('Ein Agent arbeitet in deinem Workspace, auch wenn dein Rechner aus ist. Er bereitet neue Rezepturen vor oder schaut jede Woche in die Waste-Erfassung. Eigene Agenten mit Zeitplan gibt es im Business-Plan.')},
-          {eb:'Von außen',nm:'Claude Code',html:P('Liegt etwas außerhalb von Notion, zum Beispiel Lieferscheine auf deinem Rechner oder Mails im Postfach, holt Claude Code es ins Backoffice. Dazu kommen Auswertungen über mehrere Datenbanken hinweg.')}
+          {eb:'Ohne KI',nm:'Notion Automationen',html:P('Auslöser und Aktion, immer gleich. Setzt jemand bei einem Produkt den Status auf „nachbestellen“, entsteht eine Bestellaufgabe. Ein Button startet die Wocheninventur mit einem Klick. Datenbank-Automationen gibt es ab dem Plus-Plan.')},
+          {eb:'In Notion',nm:'Notion Agent',html:P('Ein Agent arbeitet in deinem Workspace, auch wenn dein Rechner aus ist. Er bereitet neue Rezepturen vor oder schaut jede Woche in die Waste-Erfassung. Eigene Agenten, die Custom Agents, gibt es ab dem Business-Plan, sie verbrauchen Credits.')},
+          {eb:'Von außen',nm:'Claude Code',html:P('Liegt etwas außerhalb von Notion, zum Beispiel Lieferscheine auf deinem Rechner oder Mails im Postfach, holt Claude Code es ins Backoffice. Dazu kommen Auswertungen über mehrere Datenbanken hinweg und Scheduled tasks, die zu festen Zeiten laufen.')}
         ])+
         '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
-    learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4.'] },
+    learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4, Lektion 4.6 bis 4.9.'] },
 
   { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:null,
     hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
