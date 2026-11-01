@@ -14643,13 +14643,13 @@ var TSISL_TEAM_ONB_V2=[
 <!-- 4) SEKTIONS-KOPF „Drei Datenbanken" + PC LINKS / TEXT RECHTS -->
 <section>
   <div class="sec-head">
-    <div class="eyebrow">Die Warenkörbe · Lektion 11</div>
+    <div class="eyebrow">Die Warenkörbe · Lektion 2.11</div>
     <h2>Drei Datenbanken, <span class="ts-gold">ein Angebot</span>.</h2>
     <p>Die Menükalkulation läuft über drei verknüpfte Datenbanken: den Menürechner, die Kunden und das Angebot. Jede baust du als eigenen Warenkorb, jede Eigenschaft wird eine Karte.</p>
   </div>
   <div class="split">
     <div class="tsmac" id="ts11pcmac" style="cursor:default">
-      <img alt="Lektion 2.11 Menükalkulation" src="https://tastyrob123.github.io/kurs/img/menuekalkulation/pc-cover.webp" loading="lazy" decoding="async">
+      <img alt="Lektion 2.11 Menükalkulation" src="https://tastyrob123.github.io/kurs-code/assets/menuekalkulation-cover-2-11.webp" loading="lazy" decoding="async">
     </div>
     <div class="split__text">
       <p>Hier zahlt sich die Vorarbeit aus. Zutaten, Rezepturen und Gerichte liegen als saubere
@@ -15980,18 +15980,18 @@ var TSISL_TEAM_ONB_V2=[
       '<div class="tsif-col center">'+
         '<h2>Klingt nach <span class="gold">vielen Abos</span></h2>'+
         '<p class="tsif-sub">Auf den ersten Blick sind das einige Abos pro Monat, und dauerhaft laufen gelassen würde das mittelfristig den Rahmen sprengen. Erst der Überblick, welche du brauchst, dann der Trick, es günstig zu halten.</p>'+
-        '<p class="tsif-sub small">Claude, ChatGPT, Higgsfield und Midjourney nennen ihren Preis in Dollar, Google und Canva in Euro. Stand: November 2026, die Anbieter ändern ihre Preise ab und zu.</p>'+
+        '<p class="tsif-sub small">Claude, ChatGPT, Higgsfield, Midjourney und Canva stehen hier mit ihrem Dollar-Preis von der US-Seite des Anbieters, Google mit dem deutschen Euro-Preis. In Deutschland rechnen ChatGPT und Canva in Euro ab, der Betrag weicht deshalb leicht ab. Stand: November 2026.</p>'+
       '</div>'+
       '<div class="tbl abo">'+
         '<table><thead><tr><th>Tool</th><th>Wofür</th><th class="num">Abo&nbsp;(mtl.)</th></tr></thead><tbody>'+
-          '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>20&nbsp;$</b><span class="note">in Deutschland in Euro abgerechnet</span></td></tr>'+
+          '<tr><td>ChatGPT Plus</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>20&nbsp;$</b><span class="note">US-Preis laut help.openai.com</span></td></tr>'+
           '<tr><td>Gemini (Google&nbsp;AI&nbsp;Pro)</td><td>Zutaten &amp; Gerichte erstellen</td><td class="num"><b>21,99&nbsp;€</b><span class="note">219,99&nbsp;€ im Jahresabo</span></td></tr>'+
           '<tr><td>Claude Pro</td><td>Objekte + automatischer Einbau in Notion</td><td class="num"><b>20&nbsp;$</b><span class="note">17&nbsp;$ im Jahresabo</span></td></tr>'+
           '<tr><td>Higgsfield <span class="tier">Starter</span></td><td>Fotorealistische Objekte</td><td class="num"><b>15&nbsp;$</b><span class="note">zzgl. MwSt.</span></td></tr>'+
           '<tr><td>Midjourney <span class="tier">Basic</span></td><td>Banner, Cover, Landscapes</td><td class="num"><b>10&nbsp;$</b><span class="note">8&nbsp;$ im Jahresabo</span></td></tr>'+
-          '<tr><td>Canva Pro</td><td>Feinschliff: Text, Logo, Mockups, Schatten</td><td class="num"><b>12&nbsp;€</b><span class="note">110&nbsp;€ im Jahresabo</span></td></tr>'+
+          '<tr><td>Canva Pro</td><td>Feinschliff: Text, Logo, Mockups, Schatten</td><td class="num"><b>144&nbsp;$</b><span class="note">im Jahr, US-Preis laut canva.com</span></td></tr>'+
         '</tbody>'+
-        '<tfoot><tr><td colspan="2">Alle sechs zusammen, im Monat</td><td class="num"><span class="sum">65&nbsp;$ + 33,99&nbsp;€</span></td></tr></tfoot></table>'+
+        '<tfoot><tr><td colspan="2">Alle sechs zusammen, im Monat (Canva im Jahresabo auf den Monat gerechnet)</td><td class="num"><span class="sum">77&nbsp;$ + 21,99&nbsp;€</span></td></tr></tfoot></table>'+
       '</div>'+
       '<div class="boxduo">'+
       '<div class="box good"><div class="bh">Der Trick: nur abonnieren, solange du baust</div><p>Setz dir einen Referenz-Zeitraum von <b style="color:#fff">4 Wochen</b>. In dieser Phase schließt du die Abos ab, baust dein persönliches Backoffice einmal komplett auf und erstellst alles Material, das deinem aktuellen Bedarf entspricht — danach kündigst du wieder. Brauchst du später Nachschub, sammelst du erst, was fehlt (z.&nbsp;B. neue Gerichte bis zum nächsten Menüwechsel), und buchst die Abos für einen einzigen Monat erneut. So zahlst du nie durchgehend.</p></div>'+
@@ -21747,7 +21747,7 @@ var TSISL_TEAM_ONB_V2=[
     lead:'Was Gäste mit nach Hause nehmen, erzählt deine Geschichte weiter.',
     intro:['Das Chili-Öl, nach dem jeder fragt. Die Tasse mit eurem Logo. Die Granola, die am Sonntag zum Brunch gehört. Viele Betriebe haben solche Produkte, verkaufen sie aber nebenbei, ohne festen Preis und ohne zu wissen, was gerade vorrätig ist.', 'Diese Datenbank sammelt alles, was du außer dem Teller verkaufst. Jedes Produkt hat ein Bild, einen Preis, einen Typ und einen Status. So siehst du, was verkauft wird, was in Entwicklung ist und was gerade fehlt.'],
     anim:{type:'checklist', head:{eyebrow:'Was ein verkaufsfertiges Produkt braucht', h:'Ein Produkt, das <span class="il-g">jeder verkaufen kann</span>', sub:'Erst mit diesen Angaben kann jeder im Team ein Produkt verkaufen, ohne nachzufragen.'}, unit:'Angaben', rows:['Ein Foto, das zeigt, was der Gast bekommt', 'Ein fester Preis', 'Eine Beschreibung in ein, zwei Sätzen', 'Der Status, ob es gerade da ist']},
-    video:{h:'Selbst gemacht oder <span class="il-g">eingekauft</span>', p:['Der Produkttyp hat vier Werte: Merchandise wie Tassen und Taschen, Produkt, Eigenproduktion aus deiner Küche und Handelsware, die du einkaufst und weiterverkaufst. Bei Eigenproduktion steckt dein Wareneinsatz drin, bei Handelsware der Einkaufspreis.', 'Der Status geht von Geplant über In Entwicklung bis Ausverkauft. Ein Produkt im Status Bestellbar kann ein Gast vorbestellen, auch wenn es heute nicht im Regal steht.'], close:'In deiner Vorlage steht die Datenbank bereit. Jede Karte im Regal erklärt eine Spalte. Trag danach das Produkt ein, nach dem deine Gäste am häufigsten fragen.'},
+    video:{h:'Selbst gemacht oder <span class="il-g">eingekauft</span>', p:['Der Produkttyp hat vier Werte, und die Beispiele in der Vorlage zeigen, wie sie gemeint sind. Merchandise sind Dinge mit deinem Namen wie Cheflöffel oder Schneidebrett. Produkt sind Lebensmittel unter deiner Marke wie Chef Edition Coffee oder Pasta Chef Edition. Eigenproduktion entsteht in deiner Küche, etwa Saucen, Gewürzmischungen oder Limonaden. Handelsware kaufst du ein und verkaufst sie weiter, in der Vorlage eine Weinauswahl.', 'Der Status geht von Geplant über In Entwicklung bis Ausverkauft. Ein Produkt im Status Bestellbar kann ein Gast vorbestellen, auch wenn es heute nicht im Regal steht.'], close:'In deiner Vorlage steht die Datenbank bereit. Jede Karte im Regal erklärt eine Spalte. Trag danach das Produkt ein, nach dem deine Gäste am häufigsten fragen.'},
     wk:[
       {id:'vf_merch', eyebrow:'DB : Merch // Produkte', title:'Deine <span>Produkte</span>. Stück für Stück.'}
     ],
@@ -21755,7 +21755,7 @@ var TSISL_TEAM_ONB_V2=[
     zweit:null,
     empf:{dbhd:'🛍️ Merch // Produkte', points:['Bild', 'Preis', 'Produkttyp', 'Status'], emph:'Fang mit dem an, <span class="il-eg">wonach Gäste fragen</span>', p:'Das beste erste Produkt ist eines, das es schon gibt: die Sauce, die Gäste in einem Glas mitnehmen wollen. Dafür brauchst du keine neue Rezeptur, nur ein Glas, ein Etikett mit Zutaten und Allergenen und einen Preis.', steps:['Trag dein bekanntestes Produkt mit Namen ein.', 'Lade ein eigenes Foto hoch.', 'Setz einen festen Preis und den Produkttyp.', 'Halte den Status aktuell, sobald etwas ausverkauft ist.']},
     duo:null,
-    learn:['Alles, was du außer dem Teller verkaufst, steht in einer Liste.', 'Der Produkttyp trennt Eigenproduktion von Handelsware.', 'Der Status zeigt dem Team, was gerade verkauft werden kann.', 'Über Tags siehst du, wie dein Sortiment aufgeteilt ist.']
+    learn:['Alles, was du außer dem Teller verkaufst, steht in einer Liste.', 'Der Produkttyp zeigt, was aus deiner Küche kommt und was zugekauft ist.', 'Der Status zeigt dem Team, was gerade verkauft werden kann.', 'Über Tags siehst du, wie dein Sortiment aufgeteilt ist.']
    },
  {
     slug:/\/lektionen\/team-onboarding\/?$/, key:'team',
@@ -33297,7 +33297,7 @@ var TSISL_TEAM_ONB_V2=[
       {t:'Name', d:'Das Produkt.', bed:'Der Name der Zeile.', her:'Benennst du so, wie es auf dem Etikett steht.', wozu:'Unter diesem Namen fragt der Gast danach.', bsp:'Hausgemachtes Chili-Öl, 250 ml.'},
       {t:'Bild', d:'Ein Foto des Produkts.', bed:'Ein Dateifeld.', her:'Fotografierst du selbst, am besten auf dem Tresen.', wozu:'In der Galerie erkennt jeder das Produkt am Bild.', bsp:'Das Glas vor der offenen Küche.'},
       {t:'Beschreibung', d:'Was das Produkt ausmacht.', bed:'Freitext.', her:'Schreibst du in ein, zwei Sätzen.', wozu:'Daraus entstehen Etikett und Text im Onlineshop.', bsp:'Mit gerösteten Chilis und Knoblauch, nach dem Rezept unserer Nudelsuppe.'},
-      {t:'Produkttyp', d:'Woher das Produkt kommt.', bed:'Eine Auswahl: Merchandise, Produkt, Eigenproduktion, Handelsware.', her:'Wählst du aus.', wozu:'So trennst du in der Auswertung Eigenes von Zugekauftem.', bsp:'Eigenproduktion.'},
+      {t:'Produkttyp', d:'Woher das Produkt kommt.', bed:'Eine Auswahl: Merchandise, Produkt, Eigenproduktion, Handelsware. In der Vorlage steht unter Produkt zum Beispiel Chef Edition Coffee, unter Eigenproduktion Tasty Sauces, unter Handelsware Chefs Vino Selection.', her:'Wählst du aus.', wozu:'So trennst du in der Auswertung Eigenes von Zugekauftem.', bsp:'Eigenproduktion.'},
       {t:'Tags', d:'Zu welcher Gruppe das Produkt gehört.', bed:'Eine Mehrfachauswahl: Küchenutensilien, Food Items, Drinks, Saucen & Gewürze, Backwaren, Kaffee & Tee, Wein & Spirituosen.', her:'Wählst du aus, auch mehrere.', wozu:'Gruppiert nach Tags siehst du, wie dein Sortiment aufgeteilt ist.', bsp:'Saucen & Gewürze.'},
       {t:'Preis', d:'Was der Gast bezahlt.', bed:'Eine Zahl in Euro.', her:'Legst du nach Einkauf oder Wareneinsatz fest.', wozu:'Jeder im Team nennt denselben Preis.', bsp:'9,90 €.'},
       {t:'Status', d:'Ob das Produkt gerade erhältlich ist.', bed:'Ein Status: Geplant, In Entwicklung, Verfügbar, Bestellbar, Ausverkauft, Nicht mehr verfügbar.', her:'Setzt du, sobald sich der Bestand ändert.', wozu:'Der Service empfiehlt nur, was da ist.', bsp:'Verfügbar.'}
