@@ -37150,7 +37150,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a65-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;position:relative}
   .a65-f{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0a0a0d;transition:transform .7s var(--ez),border-color .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
   .a65-f .im{aspect-ratio:3/4;position:relative}.a65-f .im>*{position:absolute;inset:0;width:100%;height:100%}
-  .a65-f .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,11,0) 45%,rgba(5,6,11,.9))}
+  .a65-f .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,11,0) 55%,rgba(5,6,11,.82))}
   .a65-f .nm{position:absolute;left:10px;right:10px;bottom:52px;z-index:2;font-family:var(--disp);font-weight:600;font-size:14px;line-height:1.15;color:#fff}
   .a65-f .mv{position:absolute;left:10px;top:10px;z-index:2;font:600 8px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--g);background:rgba(5,6,11,.7);padding:4px 6px;border-radius:999px}
   .a65-f .ft{padding:9px 10px 10px;display:flex;flex-direction:column;gap:7px}
@@ -37161,7 +37161,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a65-f .dots i.on{background:var(--g);box-shadow:0 0 10px rgba(199,180,137,.6)}
   .a65-f.now{transform:translateY(-8px);border-color:rgba(199,180,137,.65);box-shadow:0 26px 50px -24px rgba(0,0,0,.9),0 0 0 1px rgba(199,180,137,.2)}
   .a65-f.now .im>*{animation:tsn6Zoom 2.4s var(--ez) both}
-  .a65.js .a65-f:not(.now):not(.seen){opacity:.45}
+  .a65.js .a65-f:not(.now):not(.seen){opacity:.62}
   .a65-bar{margin-top:18px;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
   .a65-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,rgba(199,180,137,.4),var(--g));transform-origin:0 50%;transition:transform .5s cubic-bezier(.22,1,.36,1)}
   @media(max-width:820px){ .a65-strip{grid-template-columns:repeat(3,1fr)} }

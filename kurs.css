@@ -3991,7 +3991,7 @@ html.tsn6-on .notion-header.page{display:none!important}
 .tsn6-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:tsn6Zoom 1200ms var(--ez) both}
 .tsn6-hero::after{content:"";position:absolute;left:50%;bottom:-4%;width:74%;height:56%;transform:translateX(-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
-.tsn6-hero__text{position:relative;z-index:2;margin-top:-21%;padding:0 16px}
+.tsn6-hero__text{position:relative;z-index:2;margin-top:-24%;padding:0 16px 7%}
 .tsn6-hero__text::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:min(940px,100%);height:134%;top:-10%;z-index:-1;pointer-events:none;filter:blur(3px);
   background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%)}
 .tsn6-hero__logo{display:block;width:58px;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsn6Rise 650ms var(--ez) 60ms both}
