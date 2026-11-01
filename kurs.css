@@ -4108,6 +4108,11 @@ html.tsn6-on .notion-header.page{display:none!important}
   --disp:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,monospace;--ez:cubic-bezier(.16,1,.3,1);
+  --fk-bg:#1E1813;--fk-ink:#EDE3CF;--fk-acc:#9C3B2A;--fk-serif:Georgia,"Times New Roman",serif;
+  --nt-bg:#191919;--nt-fg:rgb(240,239,237);--nt-mut:rgb(173,169,163);--nt-ln:rgba(255,255,243,.082);--nt-blue:rgb(35,131,226);
+  --nt-font:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --ed-bg:#1e1e1e;--ed-bar:#252526;--ed-fg:#d4d4d4;--ed-h:#569cd6;--ed-sel:#264f78;--ed-ln:#858585;--ed-font:Menlo,Monaco,"Courier New",monospace;
+  --cr-bar:#35363a;--cr-omni:#202124;--cr-fg:#e8eaed;
   font-family:var(--sans);color:#fff;width:100%;box-sizing:border-box;padding-bottom:10px}
 .tsn6 *{box-sizing:border-box}
 .tsn6 .g{color:var(--g)}
@@ -4352,7 +4357,7 @@ html.tsn6-on .notion-header.page{display:none!important}
 /* Handy-Rahmen (mehrere Animationen) */
 .tsn6-phone{position:relative;width:100%;max-width:300px;aspect-ratio:9/18.5;border-radius:38px;padding:11px;background:linear-gradient(160deg,#2a2b31,#121317 40%,#0b0c10);
   box-shadow:0 40px 80px -40px rgba(0,0,0,.95),inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 1px rgba(0,0,0,.6)}
-.tsn6-phone .scr{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:#0a0a0d}
+.tsn6-phone .scr{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:var(--fk-bg);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif}
 .tsn6-phone .scr::before{content:"";position:absolute;top:8px;left:50%;width:84px;height:22px;border-radius:12px;background:#000;transform:translateX(-50%);z-index:9}
 .tsn6-mono{display:inline-block;font:600 13px/1.5 var(--mono);letter-spacing:.01em;color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.28);border-radius:7px;padding:1px 7px}
 

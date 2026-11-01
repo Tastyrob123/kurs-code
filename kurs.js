@@ -4390,7 +4390,7 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?rechte-teamspaces-und-sicherheit\/?$/, href:'/lektionen/l18-system-architektur-dashboard-design' },
     /* Modul 6 - AI Website Building, Neubau 01.11.2026 (Landing + 6.1-6.14). Gates tolerant
        (Root ODER /lektionen/-Praefix). Ohne Eintrag hier raeumt der Pager den von #tsn6 gebauten
-       Weiter-Knopf wieder ab. Ende der Kette: zurueck zur Modul-Landing. */
+       Weiter-Knopf wieder ab. Ende der Kette: 6.14 fuehrt zum Kursabschluss (Modul 0). */
     { re:/\/(?:lektionen\/)?modul-6-weitere-tools-projektmanagement\/?$/, href:'/lektionen/claude-startklar-machen' },
     { re:/\/(?:lektionen\/)?claude-startklar-machen\/?$/, href:'/lektionen/website-skills-laden' },
     { re:/\/(?:lektionen\/)?website-skills-laden\/?$/, href:'/lektionen/struktur-ausdenken' },
@@ -4405,7 +4405,7 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?schriftarten-anpassen\/?$/, href:'/lektionen/mobil-check' },
     { re:/\/(?:lektionen\/)?mobil-check\/?$/, href:'/lektionen/online-hosten' },
     { re:/\/(?:lektionen\/)?online-hosten\/?$/, href:'/lektionen/website-pflegen' },
-    { re:/\/(?:lektionen\/)?website-pflegen\/?$/, href:'/modul-6-weitere-tools-projektmanagement' },
+    { re:/\/(?:lektionen\/)?website-pflegen\/?$/, href:'/abschluss-was-du-am-ende-kannst' },
     /* Modul 3 - Claude Grundlagen (NEUBAU 01.11.2026, L3.1-L3.17, Bibliothek __tsn3).
        PFLICHT-CHECK "__tsNext-Falle": ohne Eintrag hier entfernt der globale Pager
        den Weiter-Button der Seite wieder. Kette = Lektionsfolge des Neubaus (nur lebende Seiten). */
@@ -37342,25 +37342,25 @@ window.__tsn4Boot && window.__tsn4Boot();
      Jede Station schaltet sichtbar einen Teil der Seite im Handy frei. */
   ANIM.a60={css:`
   .a60{display:grid;grid-template-columns:300px minmax(0,560px);justify-content:center;align-items:center;gap:clamp(30px,6vw,80px)}
-  .a60 .scr{background:#0a0a0d;transition:background 1s cubic-bezier(.22,1,.36,1)}
+  .a60 .scr{background:var(--fk-bg);transition:background 1s cubic-bezier(.22,1,.36,1)}
   .a60 .scr>*{transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .9s var(--ez),filter .8s cubic-bezier(.22,1,.36,1)}
   .a60-url{position:absolute;top:38px;left:14px;right:14px;height:22px;border-radius:8px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;gap:5px;font:600 9.5px/1 var(--sans);color:rgba(255,255,255,.75);letter-spacing:.02em}
   .a60-url b{color:#7fd3a2;font-weight:700}
   .a60-hero{position:absolute;top:70px;left:12px;right:12px;height:36%;border-radius:14px;overflow:hidden}
   .a60-hero>*{width:100%;height:100%}
   .a60-play{position:absolute;left:12px;right:12px;bottom:8px;height:2px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}
-  .a60-play i{display:block;height:100%;width:62%;background:var(--g)}
+  .a60-play i{display:block;height:100%;width:62%;background:var(--fk-ink)}
   .a60-t{position:absolute;top:calc(36% + 82px);left:18px;right:18px}
-  .a60-t h5{margin:0 0 8px;font-family:var(--disp);font-weight:600;font-size:23px;line-height:1.05;color:#fff}
-  .a60-t p{margin:0;height:5px;border-radius:3px;background:rgba(255,255,255,.18);width:92%}
+  .a60-t h5{margin:0 0 8px;font-family:var(--fk-serif);font-weight:400;font-size:24px;line-height:1.05;color:var(--fk-ink);letter-spacing:.04em}
+  .a60-t p{margin:0;height:5px;border-radius:3px;background:rgba(237,227,207,.2);width:92%}
   .a60-t p+p{margin-top:6px;width:70%}
   .a60-menu{position:absolute;left:14px;right:14px;bottom:62px;display:flex;flex-direction:column;gap:6px}
-  .a60-menu div{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(255,255,255,.82);padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
-  .a60-menu span:last-child{color:var(--g);font-weight:700;font-variant-numeric:tabular-nums}
-  .a60-btn{position:absolute;left:14px;right:14px;bottom:18px;height:32px;border-radius:999px;background:var(--g);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans)}
+  .a60-menu div{display:flex;justify-content:space-between;font-family:var(--fk-serif);font-size:10.5px;color:var(--fk-ink);padding:6px 2px;border-bottom:1px solid rgba(237,227,207,.16)}
+  .a60-menu span:last-child{color:var(--fk-ink);font-variant-numeric:tabular-nums}
+  .a60-btn{position:absolute;left:14px;right:14px;bottom:18px;height:32px;border-radius:2px;background:var(--fk-acc);color:var(--fk-ink);letter-spacing:.08em;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans)}
   .a60-ok{position:absolute;top:80px;right:20px;z-index:4;padding:4px 8px;border-radius:999px;background:rgba(70,175,115,.2);border:1px solid rgba(70,175,115,.5);color:#8fe0b1;font:700 8.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase}
   .a60-sk{position:absolute;inset:70px 12px 18px;display:flex;flex-direction:column;gap:9px;pointer-events:none}
-  .a60-sk i{display:block;border-radius:10px;border:1px dashed rgba(199,180,137,.35)}
+  .a60-sk i{display:block;border-radius:10px;border:1px dashed rgba(237,227,207,.3)}
   .a60-sk i:nth-child(1){height:36%}.a60-sk i:nth-child(2){height:16%}.a60-sk i:nth-child(3){flex:1}.a60-sk i:nth-child(4){height:32px;border-radius:999px}
   .a60-rail{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
   .a60-st{display:flex;align-items:center;gap:11px;height:46px;padding:0 13px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s cubic-bezier(.22,1,.36,1),background .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
@@ -37375,14 +37375,14 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a60.js .a60-hero{transform:translateY(22px)}.a60.js .a60-t{transform:translateY(16px)}
   .a60.js.s1 .scr{background:#0a0a0d}
   .a60.js.s2 .a60-sk{opacity:1}
-  .a60.js.s3 .a60-sk i:nth-child(2){border-color:rgba(199,180,137,.75)}
-  .a60.js.s4 .scr{background:radial-gradient(120% 70% at 50% 0%,#1d1610,#0a0a0d 70%)}
+  .a60.js.s3 .a60-sk i:nth-child(2){border-color:rgba(237,227,207,.7)}
+  .a60.js.s4 .scr{background:var(--fk-bg)}
   .a60.js.s6 .a60-hero{transform:none}
   .a60.js.s7 .a60-hero{opacity:1}.a60.js.s7 .a60-sk{opacity:0}
   .a60.js.s8 .a60-play{opacity:1}
   .a60.js.s9 .a60-t{opacity:1;transform:none}
   .a60.js.s10 .a60-menu,.a60.js.s10 .a60-btn{opacity:1}
-  .a60.js:not(.s11) .a60-t h5{font-family:Georgia,serif;font-weight:400;letter-spacing:0}
+  .a60.js:not(.s11) .a60-t h5{font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:0}
   .a60.js.s12 .a60-ok{opacity:1}
   .a60.js.s13 .a60-url{opacity:1}
   @media(max-width:820px){ .a60{grid-template-columns:1fr;justify-items:center} .a60 .tsn6-phone{max-width:250px} .a60-rail{width:100%} }
@@ -37418,42 +37418,42 @@ window.__tsn4Boot && window.__tsn4Boot();
      jede Zeile schickt ihre Angabe ins Handy (gold), eine Angabe fehlt -> OFFEN. */
   ANIM.a61={css:`
   .a61{display:grid;grid-template-columns:minmax(0,380px) minmax(0,300px);justify-content:center;align-items:center;gap:clamp(28px,6vw,90px)}
-  .a61-md{border-radius:16px;border:1px solid rgba(199,180,137,.35);background:linear-gradient(rgba(199,180,137,.05),rgba(199,180,137,.05)),#07080d;overflow:hidden;
+  .a61-md{border-radius:10px;border:1px solid rgba(0,0,0,.6);background:var(--ed-bg);overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.9);
     transition:transform .9s var(--ez),opacity .7s cubic-bezier(.22,1,.36,1)}
-  .a61-md .h{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.07);font:600 11px/1 var(--mono);color:var(--g)}
-  .a61-md .h i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14);display:inline-block}
-  .a61-md .b{padding:14px 16px 16px;font:500 12.5px/1.95 var(--mono);color:rgba(255,255,255,.62)}
-  .a61-md .b .t{color:#fff}
-  .a61-md .ln{display:flex;justify-content:space-between;gap:12px;border-radius:7px;padding:0 8px;margin:0 -8px;transition:background .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
-  .a61-md .ln span:last-child{color:#efe6d2;text-align:right}
-  .a61-md .ln.off span:last-child{color:#e0574f}
-  .a61-md .ln.lit{background:rgba(199,180,137,.14)}
+  .a61-md .h{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--ed-bar);font:400 12px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:#cccccc}
+  .a61-md .h i{width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block}.a61-md .h i:nth-child(2){background:#febc2e}.a61-md .h i:nth-child(3){background:#28c840}
+  .a61-md .b{padding:12px 16px 14px;font:400 12.5px/1.9 var(--ed-font);color:var(--ed-fg)}
+  .a61-md .b .t{color:var(--ed-h);font-weight:700}
+  .a61-md .ln{display:flex;justify-content:flex-start;gap:.6em;border-radius:7px;padding:0 8px;margin:0 -8px;transition:background .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
+  .a61-md .ln span:last-child{color:var(--ed-fg)}
+  .a61-md .ln.off span:last-child{color:var(--ed-fg)}
+  .a61-md .ln.lit{background:var(--ed-sel)}
   .a61-ph .scr{display:flex;flex-direction:column}
-  .a61-top{padding:40px 16px 10px;text-align:center;font-family:var(--disp);font-weight:600;font-size:21px;letter-spacing:.02em;color:#fff}
-  .a61-top small{display:block;font:600 8.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-top:6px}
+  .a61-top{padding:40px 16px 10px;text-align:center;font-family:var(--fk-serif);font-weight:400;font-size:22px;letter-spacing:.08em;text-transform:uppercase;color:var(--fk-ink)}
+  .a61-top small{display:block;font:400 9px/1 var(--fk-serif);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,227,207,.6);margin-top:7px}
   .a61-img{margin:4px 12px 12px;height:30%;border-radius:12px;overflow:hidden}
   .a61-img>*{width:100%;height:100%}
   .a61-rows{padding:0 14px;display:flex;flex-direction:column;gap:8px}
-  .a61-row{border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:border-color .5s cubic-bezier(.22,1,.36,1),background .5s cubic-bezier(.22,1,.36,1)}
-  .a61-row .k{display:block;font:600 8px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px}
-  .a61-row .v{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12.5px;font-weight:600;color:#fff;min-height:16px}
+  .a61-row{border-radius:4px;padding:8px 10px;background:rgba(237,227,207,.05);border:1px solid rgba(237,227,207,.12);transition:border-color .5s cubic-bezier(.22,1,.36,1),background .5s cubic-bezier(.22,1,.36,1)}
+  .a61-row .k{display:block;font:400 8px/1 var(--fk-serif);letter-spacing:.16em;text-transform:uppercase;color:rgba(237,227,207,.55);margin-bottom:5px}
+  .a61-row .v{display:flex;align-items:center;justify-content:space-between;gap:6px;font-family:var(--fk-serif);font-size:12.5px;color:var(--fk-ink);min-height:16px}
   .a61-row .v em{font:700 7.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;font-style:normal;padding:3px 6px;border-radius:999px;background:rgba(70,175,115,.16);color:#7fd3a2}
   .a61-row.bad{border-color:rgba(224,87,79,.55);background:rgba(224,87,79,.08)}
   .a61-row.bad .v{color:#f0a49e}.a61-row.bad .v em{background:rgba(224,87,79,.2);color:#ff9b93}
-  .a61-row.good{border-color:rgba(199,180,137,.5);background:rgba(199,180,137,.07)}
-  .a61-row.open{border-style:dashed;border-color:rgba(199,180,137,.5)}
-  .a61-row.open .v{color:var(--g)}
-  .a61-row.open .v em{background:rgba(199,180,137,.16);color:var(--g)}
-  .a61-btn{margin:12px 14px 0;height:34px;border-radius:999px;background:var(--g);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--sans)}
+  .a61-row.good{border-color:rgba(70,175,115,.5);background:rgba(70,175,115,.06)}
+  .a61-row.open{border-style:dashed;border-color:rgba(237,227,207,.4)}
+  .a61-row.open .v{color:rgba(237,227,207,.6)}
+  .a61-row.open .v em{background:rgba(237,227,207,.12);color:var(--fk-ink)}
+  .a61-btn{margin:12px 14px 0;height:34px;border-radius:2px;background:var(--fk-acc);color:var(--fk-ink);display:flex;align-items:center;justify-content:center;font:400 11px/1 var(--fk-serif);letter-spacing:.12em;text-transform:uppercase}
   .a61.js-start .a61-md{opacity:0;transform:translateX(-26px)}
   @media(max-width:760px){ .a61{grid-template-columns:1fr;justify-items:center} .a61-md{width:100%;max-width:380px} .a61-ph{max-width:250px} }
   `,run:function(stage,cap){
     var F=[ ['Name','Feldkamp'], ['Öffnungszeiten','Mi bis So, ab 17.30 Uhr'], ['Telefon','040 / 63 21 90'], ['Adresse','Am Kanal 4'], ['E-Mail','OFFEN'] ];
     var FAKE=['Täglich 11 bis 23 Uhr','040 / 88 21 340','Hafenstraße 12','info@feldkamp.de'];
     stage.innerHTML='<div class="a61">'
-      +'<div class="a61-md"><div class="h"><i></i><i></i><i></i>&nbsp;CLAUDE.md</div><div class="b"><div class="t">## Fakten</div>'
-      +F.map(function(f,i){ return '<div class="ln'+(f[1]==='OFFEN'?' off':'')+'" data-i="'+i+'"><span>'+f[0]+':</span><span>'+f[1]+'</span></div>'; }).join('')
-      +'<div class="t" style="margin-top:10px">## Regeln</div><div>Angaben nur aus dem Fakten-Block.</div><div>Fehlt etwas: Stelle leer, OFFEN.</div></div></div>'
+      +'<div class="a61-md"><div class="h"><i></i><i></i><i></i>&nbsp;&nbsp;CLAUDE.md · website-feldkamp</div><div class="b"><div class="t">## Fakten</div>'
+      +F.map(function(f,i){ return '<div class="ln'+(f[1]==='OFFEN'?' off':'')+'" data-i="'+i+'"><span>- '+f[0]+':</span><span>'+f[1]+'</span></div>'; }).join('')
+      +'<div class="t" style="margin-top:10px">## Regeln</div><div>- Angaben nur aus dem Fakten-Block.</div><div>- Fehlt etwas: Stelle leer, OFFEN.</div></div></div>'
       +'<div class="tsn6-phone a61-ph"><div class="scr"><div class="a61-top">Feldkamp<small>Küche &amp; Wein</small></div><div class="a61-img">'+pic('m6-a61','Gastraum am Abend')+'</div>'
       +'<div class="a61-rows">'+F.slice(1).map(function(f,i){ return '<div class="a61-row" data-r="'+(i+1)+'"><span class="k">'+f[0]+'</span><span class="v"></span></div>'; }).join('')+'</div>'
       +'<div class="a61-btn">Tisch reservieren</div></div></div></div>';
@@ -37493,29 +37493,36 @@ window.__tsn4Boot && window.__tsn4Boot();
      ueberall zugleich. Danach Anruf und Reservierung mit einem Tipp. */
   ANIM.a610={css:`
   .a610{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(18px,3.5vw,40px);align-items:center}
-  .a610-db{border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#0b0c11;overflow:hidden}
-  .a610-db .h{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
-  .a610-r{display:grid;grid-template-columns:1fr 64px 22px;gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12.5px;color:rgba(255,255,255,.86);transition:background .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
-  .a610-r .p{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:#fff}
-  .a610-r .c{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(199,180,137,.6);display:flex;align-items:center;justify-content:center}
-  .a610-r .c.on::after{content:"";width:8px;height:8px;border-radius:2px;background:var(--g)}
-  .a610-r.lit{background:rgba(199,180,137,.12)}
+  .a610-db{border-radius:10px;border:1px solid rgba(255,255,255,.1);background:var(--nt-bg);overflow:hidden;font-family:var(--nt-font);color:var(--nt-fg);padding:14px 0 6px}
+  .a610-db .h{padding:0 14px 10px;font-weight:600;font-size:14px;line-height:1.3;color:var(--nt-fg)}
+  .a610-hr{display:grid;grid-template-columns:1fr 70px 70px;border-top:1px solid var(--nt-ln);border-bottom:1px solid var(--nt-ln);height:33px;align-items:center;font-size:14px;color:var(--nt-mut)}
+  .a610-hr span{padding:0 8px;display:flex;align-items:center;gap:5px;border-right:1px solid var(--nt-ln);height:100%;white-space:nowrap;overflow:hidden}
+  .a610-hr span:last-child{border-right:0}
+  .a610-hr svg{width:13px;height:13px;fill:var(--nt-mut);flex:0 0 auto}
+  .a610-r{display:grid;grid-template-columns:1fr 70px 70px;align-items:center;height:37px;border-bottom:1px solid var(--nt-ln);font-size:14px;line-height:21px;color:var(--nt-fg);transition:background .4s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1)}
+  .a610-r>span{padding:0 8px;height:100%;display:flex;align-items:center;border-right:1px solid var(--nt-ln);white-space:nowrap;overflow:hidden}
+  .a610-r>span:last-child{border-right:0;justify-content:flex-start}
+  .a610-r .p{justify-content:flex-end;font-variant-numeric:tabular-nums}
+  .a610-r .c i{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--nt-mut);display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+  .a610-r .c.on i{background:var(--nt-blue);border-color:var(--nt-blue)}
+  .a610-r .c.on i::after{content:"";width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+  .a610-r.lit{background:rgba(35,131,226,.14)}
   .a610-r.off{opacity:.42}
   .a610-out{display:grid;grid-template-columns:1.25fr .8fr 1fr;gap:12px;align-items:end}
   .a610-o .lb{font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;display:block}
   .a610-o .bx{border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:7px;transition:box-shadow .5s cubic-bezier(.22,1,.36,1)}
-  .a610-o .bx.fl{box-shadow:0 0 0 2px rgba(199,180,137,.75),0 0 30px rgba(199,180,137,.3)}
+  .a610-o .bx.fl{box-shadow:0 0 0 2px rgba(255,255,255,.55),0 0 30px rgba(255,255,255,.18)}
   .a610-o .it{display:flex;justify-content:space-between;gap:6px;font-size:11px;line-height:1.25;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
   .a610-o .it b{font-variant-numeric:tabular-nums;white-space:nowrap}
   .a610-o .it.gone{display:none}
-  .a610-web .bx{background:#101116;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.86)}
-  .a610-web .bx b{color:var(--g)}
-  .a610-ph .bx{background:#0a0a0d;border:1px solid rgba(255,255,255,.14);border-radius:18px;color:rgba(255,255,255,.86);min-height:190px}
-  .a610-ph .bx b{color:var(--g)}
+  .a610-web .bx{background:var(--fk-bg);border:1px solid rgba(237,227,207,.16);color:var(--fk-ink);font-family:var(--fk-serif)}
+  .a610-web .bx b{color:var(--fk-ink);font-weight:400}
+  .a610-ph .bx{background:var(--fk-bg);border:1px solid rgba(255,255,255,.18);border-radius:18px;color:var(--fk-ink);font-family:var(--fk-serif);min-height:190px}
+  .a610-ph .bx b{color:var(--fk-ink);font-weight:400}
   .a610-ph .bt{margin-top:auto;display:flex;flex-direction:column;gap:6px}
-  .a610-ph .bt span{position:relative;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--sans);overflow:hidden}
-  .a610-ph .bt span:first-child{background:var(--g);color:var(--bg)}
-  .a610-ph .bt span:last-child{border:1px solid rgba(199,180,137,.5);color:var(--g)}
+  .a610-ph .bt span{position:relative;height:26px;border-radius:2px;display:flex;align-items:center;justify-content:center;font:400 9.5px/1 var(--fk-serif);letter-spacing:.1em;text-transform:uppercase;overflow:hidden}
+  .a610-ph .bt span:first-child{background:var(--fk-acc);color:var(--fk-ink)}
+  .a610-ph .bt span:last-child{border:1px solid rgba(237,227,207,.45);color:var(--fk-ink)}
   .a610-ph .bt span i{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.5);opacity:0}
   .a610-ph .bt span.tap i{animation:a610Tap .8s cubic-bezier(.22,1,.36,1)}
   @keyframes a610Tap{from{opacity:.8;transform:scale(.2)}to{opacity:0;transform:scale(4)}}
@@ -37527,8 +37534,8 @@ window.__tsn4Boot && window.__tsn4Boot();
   `,run:function(stage,cap){
     var D=[['Kalbsbäckchen, Sellerie','28,00'],['Saibling, Beurre blanc','26,00'],['Rote Bete, Ziegenkäse','17,50'],['Schokolade, Kirsche','12,00']];
     function items(){ return D.map(function(d,i){ return '<div class="it" data-i="'+i+'"><span>'+d[0]+'</span><b>'+d[1]+'</b></div>'; }).join(''); }
-    stage.innerHTML='<div class="a610"><div class="a610-db"><div class="h">Gerichte · aus dem Backoffice</div>'
-      +D.map(function(d,i){ return '<div class="a610-r" data-i="'+i+'"><span>'+d[0]+'</span><span class="p">'+d[1]+' €</span><span class="c on"></span></div>'; }).join('')+'</div>'
+    stage.innerHTML='<div class="a610"><div class="a610-db"><div class="h">Gerichte &amp; Getränke</div><div class="a610-hr"><span><svg viewBox="0 0 16 16"><path d="M2 3h12v1.6H8.8V13H7.2V4.6H2z"/></svg>Gericht</span><span><svg viewBox="0 0 16 16"><path d="M5.6 2h1.5l-.5 3h3l.5-3h1.5l-.5 3H13v1.5h-2.1l-.5 3H12V11H10.2l-.5 3H8.2l.5-3h-3l-.5 3H3.7l.5-3H2.5V9.5h2.1l.5-3H3.5V5h1.8zM6.3 6.5l-.5 3h3l.5-3z"/></svg>Preis</span><span><svg viewBox="0 0 16 16"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm.5 1.5v9h9v-9zm2.3 4.2 1.4 1.4 3-3 1 1-4 4-2.4-2.4z"/></svg>Karte</span></div>'
+      +D.map(function(d,i){ return '<div class="a610-r" data-i="'+i+'"><span>'+d[0]+'</span><span class="p">'+d[1]+' €</span><span class="c on"><i></i></span></div>'; }).join('')+'</div>'
       +'<div class="a610-out"><div class="a610-o a610-web"><span class="lb">Website</span><div class="bx">'+items()+'</div></div>'
       +'<div class="a610-o a610-ph"><span class="lb">Handy</span><div class="bx">'+items()+'<div class="bt"><span><i></i>Tisch reservieren</span><span><i></i>Anrufen</span></div></div></div>'
       +'<div class="a610-o a610-pr"><span class="lb">Zum Drucken</span><div class="bx"><div class="ti">Karte</div>'+items()+'</div></div></div></div>';
@@ -37617,13 +37624,13 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a612 .tsn6-phone{max-width:260px}
   .a612-col{position:absolute;left:0;right:0;top:0;padding:40px 12px 0;display:flex;flex-direction:column;gap:10px}
   .a612-col .b{border-radius:12px;overflow:hidden;height:150px}.a612-col .b>*{width:100%;height:100%}
-  .a612-col .l{height:6px;border-radius:4px;background:rgba(255,255,255,.16)}.a612-col .l.s{width:60%}
+  .a612-col .l{height:6px;border-radius:4px;background:rgba(237,227,207,.2)}.a612-col .l.s{width:60%}
   .a612.scroll .a612-col{animation:a612Sc 5s cubic-bezier(.45,0,.55,1) infinite alternate}
   @keyframes a612Sc{from{transform:translateY(0)}to{transform:translateY(-340px)}}
   .a612-blur{position:absolute;left:0;right:0;top:46%;height:60px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.2),rgba(255,255,255,.1));z-index:3;transition:opacity .6s cubic-bezier(.22,1,.36,1)}
   .a612-bt{position:absolute;left:12px;right:12px;bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;z-index:4}
-  .a612-bt span{position:relative;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans);background:var(--g);color:var(--bg);overflow:hidden}
-  .a612-bt span:last-child{background:#15161b;color:var(--g);border:1px solid rgba(199,180,137,.5)}
+  .a612-bt span{position:relative;height:42px;border-radius:2px;display:flex;align-items:center;justify-content:center;font:400 10px/1 var(--fk-serif);letter-spacing:.1em;text-transform:uppercase;background:var(--fk-acc);color:var(--fk-ink);overflow:hidden}
+  .a612-bt span:last-child{background:var(--fk-bg);color:var(--fk-ink);border:1px solid rgba(237,227,207,.45)}
   .a612-th{position:absolute;width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(255,255,255,.12);z-index:6;opacity:0;transform:translate(-50%,-50%) scale(1.3);transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .5s var(--ez),left .8s var(--ez),top .8s var(--ez)}
   .a612-th.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
   .a612-gr{border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#0a0b10;padding:14px 14px 8px}
@@ -37671,10 +37678,13 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a613-st{min-height:230px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:#0b0c11;padding:14px;display:flex;flex-direction:column;gap:7px;transition:border-color .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
   .a613-st.lit{border-color:rgba(199,180,137,.6);box-shadow:0 0 30px rgba(199,180,137,.15)}
   .a613-st .h{font:600 9.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:4px}
-  .a613-f{display:flex;justify-content:space-between;gap:8px;font:500 11.5px/1.4 var(--mono);color:rgba(255,255,255,.8);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
-  .a613-f em{font-style:normal;color:rgba(255,255,255,.4)}
-  .a613-f.x{color:#ff9b93;text-decoration:line-through;text-decoration-color:#e0574f}
-  .a613-f.x em{color:#ff9b93}
+  .a613-f{display:flex;justify-content:space-between;gap:8px;padding:3px 6px;border-radius:4px;font:400 12px/1.45 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:rgba(255,255,255,.85);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
+  .a613-f:nth-of-type(even){background:rgba(255,255,255,.04)}
+  .a613-f em{font-style:normal;color:rgba(255,255,255,.45)}
+  .a613-f.x{color:rgba(255,255,255,.35);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.45)}
+  .a613-f.x em{color:rgba(255,255,255,.3)}
+  .a613-fd{border-radius:8px;background:#1e1e1e;border:1px solid rgba(0,0,0,.6);padding:4px 4px 6px;flex:1}
+  .a613-fh{font:600 11px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:rgba(255,255,255,.55);padding:6px 6px 7px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:4px}
   .a613-pk{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .7s var(--ez)}
   .a613-pk .bx{width:74px;height:74px;border-radius:16px;background:linear-gradient(145deg,rgba(199,180,137,.3),rgba(199,180,137,.08));border:1px solid rgba(199,180,137,.6);display:flex;align-items:center;justify-content:center;font:700 10px/1.2 var(--sans);color:var(--gl)}
   .a613-pk small{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
@@ -37683,8 +37693,9 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a613-ln.run i{animation:a613Run 1.2s cubic-bezier(.65,0,.35,1) forwards}
   @keyframes a613Run{0%{opacity:0;transform:translateX(0)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translateX(54px)}}
   .a613-br{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.12);flex:1;display:flex;flex-direction:column;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .8s var(--ez)}
-  .a613-br .u{height:24px;background:#16171c;display:flex;align-items:center;gap:6px;padding:0 9px;font:600 9.5px/1 var(--sans);color:rgba(255,255,255,.8)}
-  .a613-br .u b{color:#8fe0b1}
+  .a613-br .u{height:28px;background:var(--cr-bar);display:flex;align-items:center;gap:6px;padding:0 8px}
+  .a613-br .u span{flex:1;height:20px;border-radius:10px;background:var(--cr-omni);display:flex;align-items:center;gap:6px;padding:0 10px;font:400 10.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--cr-fg)}
+  .a613-br .u svg{width:10px;height:10px;fill:var(--cr-fg);opacity:.8}
   .a613-br .p{flex:1;position:relative;min-height:90px}.a613-br .p>*{position:absolute;inset:0;width:100%;height:100%}
   .a613-ck{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
   .a613-ck div{height:44px;border-radius:11px;display:flex;align-items:center;gap:9px;padding:0 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,.82);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s cubic-bezier(.22,1,.36,1)}
@@ -37696,10 +37707,10 @@ window.__tsn4Boot && window.__tsn4Boot();
   `,run:function(stage,cap){
     var FL=[['index.html','',0],['karte.html','',0],['bilder/','38 MB',0],['schriften/','',0],['daten/karte.json','',0],['entwuerfe/','18 GB',1],['fotos-original/','4 GB',1]];
     var K=['Impressum','Datenschutz','Google-Eintrag','Prüfrunde live'];
-    stage.innerHTML='<div class="a613"><div class="a613-row"><div class="a613-st s1"><span class="h">Projektordner</span>'
-      +FL.map(function(f){ return '<div class="a613-f" data-x="'+f[2]+'"><span>'+f[0]+'</span><em>'+f[1]+'</em></div>'; }).join('')+'</div>'
+    stage.innerHTML='<div class="a613"><div class="a613-row"><div class="a613-st s1"><span class="h">Projektordner</span><div class="a613-fd"><div class="a613-fh">website-feldkamp</div>'
+      +FL.map(function(f){ return '<div class="a613-f" data-x="'+f[2]+'"><span>'+f[0]+'</span><em>'+f[1]+'</em></div>'; }).join('')+'</div></div>'
       +'<div class="a613-ln l1"><i></i></div><div class="a613-st s2"><span class="h">Hoster</span><div class="a613-pk"><div class="bx">ein<br>Paket</div><small>nur, was auf die Seite gehört</small></div></div>'
-      +'<div class="a613-ln l2"><i></i></div><div class="a613-st s3"><span class="h">Deine Adresse</span><div class="a613-br"><div class="u"><b>●</b> www.dein-restaurant.de</div><div class="p">'+pic('cover-613','Eingangstür am Abend')+'</div></div></div></div>'
+      +'<div class="a613-ln l2"><i></i></div><div class="a613-st s3"><span class="h">Deine Adresse</span><div class="a613-br"><div class="u"><span><svg viewBox="0 0 10 12"><path d="M2 5V3.5a3 3 0 0 1 6 0V5h1v7H1V5zm1.3 0h3.4V3.5a1.7 1.7 0 0 0-3.4 0z"/></svg>dein-restaurant.de</span></div><div class="p">'+pic('cover-613','Eingangstür am Abend')+'</div></div></div></div>'
       +'<div class="a613-ck">'+K.map(function(k){ return '<div>'+k+'</div>'; }).join('')+'</div></div>';
     var root=qs(stage,'.a613'), fs=qa(stage,'.a613-f'), st=qa(stage,'.a613-st'), ls=qa(stage,'.a613-ln'), ks=qa(stage,'.a613-ck div'), tl=TL();
     function end(){ root.className='a613'; fs.forEach(function(f){ f.classList.toggle('x',f.getAttribute('data-x')==='1'); }); st.forEach(function(s){ s.classList.remove('lit'); }); ks.forEach(function(k){ k.classList.add('on'); });
@@ -37734,18 +37745,22 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a614-cd{position:absolute;left:24%;top:24%;width:52%;height:52%;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#0b0c11;display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}
   .a614-cd .im{position:relative;flex:1}.a614-cd .im>*{position:absolute;inset:0;width:100%;height:100%;transition:opacity .8s cubic-bezier(.22,1,.36,1)}
   .a614-cd .tx{padding:10px 12px 12px}
-  .a614-cd h6{margin:0 0 6px;font-family:var(--disp);font-weight:600;font-size:clamp(13px,1.6vw,17px);color:#fff;line-height:1.15}
-  .a614-cd .mn{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;color:rgba(255,255,255,.8)}
-  .a614-cd .mn b{color:var(--g);font-variant-numeric:tabular-nums;transition:color .4s cubic-bezier(.22,1,.36,1)}
+  .a614-cd h6{margin:0 0 6px;font-family:var(--fk-serif);font-weight:400;font-size:clamp(13px,1.6vw,17px);color:var(--fk-ink);line-height:1.15}
+  .a614-cd .mn{display:flex;justify-content:space-between;gap:8px;font-family:var(--fk-serif);font-size:10.5px;color:rgba(237,227,207,.85)}
+  .a614-cd .mn b{color:var(--fk-ink);font-weight:400;font-variant-numeric:tabular-nums;transition:color .4s cubic-bezier(.22,1,.36,1)}
   .a614-cd .mn b.bad{color:#ff6b61}
   .a614-cd.fl{animation:a614Fl .9s var(--ez)}
   @keyframes a614Fl{0%{box-shadow:0 0 0 0 rgba(199,180,137,.0)}30%{box-shadow:0 0 0 3px rgba(199,180,137,.7)}100%{box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}}
-  .a614-ch{display:flex;flex-direction:column;gap:10px}
-  .a614-m{max-width:420px;padding:11px 14px;border-radius:14px 14px 4px 14px;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.35);font-size:13.5px;line-height:1.5;color:#fff;align-self:flex-end;transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
-  .a614-m.c{align-self:flex-start;border-radius:14px 14px 14px 4px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.82)}
-  .a614-m small{display:block;font:600 8.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
-  .a614-m.c small{color:rgba(255,255,255,.45)}
-  .a614-m.u{border-color:rgba(70,175,115,.5);background:rgba(70,175,115,.1)}
+  .a614-ch{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:#1e1e1e;border:1px solid rgba(0,0,0,.6);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+  .a614-tb{height:28px;display:flex;align-items:center;gap:7px;padding:0 11px;background:#2d2d2d;font:400 11.5px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:#b8b8b8}
+  .a614-tb i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.a614-tb i:nth-child(2){background:#febc2e}.a614-tb i:nth-child(3){background:#28c840}
+  .a614-tb span{margin-left:8px}
+  .a614-bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px;min-height:190px}
+  .a614-m{font:400 12.5px/1.55 Menlo,Monaco,"Courier New",monospace;color:#d4d4d4;transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s var(--ez)}
+  .a614-m.c{color:#e5e5e5}
+  .a614-m small{font:inherit;color:#8a8a8a;margin-right:6px}
+  .a614-m.c small{color:#e5e5e5}
+  .a614-m.u{color:#d4d4d4}
   .a614.js .a614-m{opacity:0;transform:translateY(10px)}.a614.js .a614-m.on{opacity:1;transform:none}
   @media(max-width:780px){ .a614{grid-template-columns:1fr} .a614-rg{max-width:360px;margin:0 auto} }
   `,run:function(stage,cap){
@@ -37757,7 +37772,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     var svg='<svg viewBox="0 0 200 200">'; for(var i=0;i<12;i++){ var a=(i/12)*Math.PI*2-Math.PI/2, x1=100+Math.cos(a)*86, y1=100+Math.sin(a)*86, x2=100+Math.cos(a)*94, y2=100+Math.sin(a)*94, tx=100+Math.cos(a)*78, ty=100+Math.sin(a)*78+2.5;
       svg+='<line class="tk'+(S.some(function(s){ return s.m===i; })?' s':'')+'" x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'"/><text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle">'+MO[i]+'</text>'; } svg+='</svg>';
     stage.innerHTML='<div class="a614"><div class="a614-rg">'+svg+'<div class="a614-hd"></div><div class="a614-cd"><div class="im">'+S.map(function(s,i){ return '<div data-i="'+i+'" style="opacity:0">'+pic(s.img,s.h)+'</div>'; }).join('')+'</div><div class="tx"><h6></h6><div class="mn"><span></span><b></b></div></div></div></div>'
-      +'<div class="a614-ch"><div class="a614-m"><small>Du</small><span class="t1"></span></div><div class="a614-m c"><small>Claude</small><span class="t2"></span></div><div class="a614-m u"><small>Du</small><span class="t3">Mach das rückgängig.</span></div></div></div>';
+      +'<div class="a614-ch"><div class="a614-tb"><i></i><i></i><i></i><span>claude · website-feldkamp</span></div><div class="a614-bd"><div class="a614-m"><small>&gt;</small><span class="t1"></span></div><div class="a614-m c"><small>⏺</small><span class="t2"></span></div><div class="a614-m u"><small>&gt;</small><span class="t3">Mach das rückgängig.</span></div></div></div></div>';
     var root=qs(stage,'.a614'), hd=qs(stage,'.a614-hd'), cd=qs(stage,'.a614-cd'), ims=qa(stage,'.a614-cd .im>div'), h6=qs(stage,'.a614-cd h6'), sp=qs(stage,'.a614-cd .mn span'), pb=qs(stage,'.a614-cd .mn b'), ms=qa(stage,'.a614-m'), t1=qs(stage,'.t1'), t2=qs(stage,'.t2'), tl=TL();
     function show(i,price){ var s=S[i]; ims.forEach(function(m,j){ m.style.opacity=j===i?'1':'0'; }); h6.textContent=s.h; sp.textContent=s.d; pb.textContent=price!=null?price:(s.p?s.p+' €':''); pb.classList.remove('bad');
       root.style.setProperty('--r',(180+(s.m/12)*360)+'deg'); hd.style.transform='rotate('+(180+(s.m/12)*360)+'deg)'; cd.classList.remove('fl'); void cd.offsetWidth; cd.classList.add('fl'); }
@@ -37788,9 +37803,9 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a62-tab.on{border-color:rgba(199,180,137,.6);background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),var(--bg)}
   .a62-tab.on b{color:#fff}.a62-tab.on small{color:var(--g)}
   .a62-win{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0b0b0e;box-shadow:0 30px 70px -40px rgba(0,0,0,.95)}
-  .a62-bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#15161a;border-bottom:1px solid rgba(255,255,255,.07)}
-  .a62-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
-  .a62-bar span{margin-left:10px;flex:1;height:16px;border-radius:6px;background:rgba(255,255,255,.06);font:600 9px/16px var(--sans);color:rgba(255,255,255,.5);padding-left:10px}
+  .a62-bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 12px;background:var(--cr-bar)}
+  .a62-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.a62-bar i:nth-child(2){background:#febc2e}.a62-bar i:nth-child(3){background:#28c840}
+  .a62-bar span{margin-left:12px;flex:1;height:22px;border-radius:11px;background:var(--cr-omni);font:400 11.5px/22px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--cr-fg);padding-left:14px}
   .a62-view{position:relative;aspect-ratio:16/8.4}
   .a62-l{position:absolute;inset:0;transition:opacity .9s cubic-bezier(.22,1,.36,1)}
   .a62-gen{background:linear-gradient(135deg,#6d5dfc,#a855f7 55%,#ec4899);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8%;font-family:Arial,Helvetica,sans-serif}
@@ -37801,14 +37816,14 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a62-gen .cs i{width:clamp(48px,8vw,82px);height:clamp(34px,5vw,52px);border-radius:12px;background:rgba(255,255,255,.22);box-shadow:0 8px 20px rgba(0,0,0,.18)}
   .a62-tas{overflow:hidden}
   .a62-tas .im{position:absolute;inset:0}.a62-tas .im>*{width:100%;height:100%}
-  .a62-tas::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,11,.82),rgba(5,6,11,.2) 62%,rgba(5,6,11,0))}
+  .a62-tas::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,24,19,.85),rgba(30,24,19,.2) 62%,rgba(30,24,19,0))}
   .a62-tx{position:absolute;left:7%;bottom:12%;z-index:2}
-  .a62-tx .k{display:flex;align-items:center;gap:10px;font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
-  .a62-tx .k::before{content:"";width:26px;height:1px;background:var(--g)}
+  .a62-tx .k{display:flex;align-items:center;gap:10px;font:400 10px/1 var(--fk-serif);letter-spacing:.24em;text-transform:uppercase;color:var(--fk-ink);margin-bottom:10px}
+  .a62-tx .k::before{content:"";width:26px;height:1px;background:var(--fk-acc)}
   .a62-tx .sl{overflow:hidden}
-  .a62-tx h6{margin:0;font-family:var(--disp);font-weight:600;font-size:clamp(28px,5.6vw,58px);line-height:1;color:#fff}
-  .a62-tx p{margin:10px 0 0;font-size:clamp(10px,1.2vw,13px);color:rgba(255,255,255,.78);max-width:34ch}
-  .a62-chk{position:absolute;right:4%;top:8%;bottom:8%;width:27%;border-radius:16px;border:1.5px solid rgba(199,180,137,.7);background:rgba(5,6,11,.88);padding:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;z-index:3;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .9s var(--ez)}
+  .a62-tx h6{margin:0;font-family:var(--fk-serif);font-weight:400;font-size:clamp(28px,5.6vw,58px);line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--fk-ink)}
+  .a62-tx p{margin:10px 0 0;font-family:var(--fk-serif);font-size:clamp(10px,1.2vw,13px);color:rgba(237,227,207,.82);max-width:34ch}
+  .a62-chk{position:absolute;right:4%;top:8%;bottom:8%;width:27%;border-radius:16px;border:1.5px solid rgba(255,255,255,.35);background:rgba(20,20,22,.92);font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;z-index:3;transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .9s var(--ez)}
   .a62-chk .mi{flex:1;border-radius:10px;overflow:hidden;margin-bottom:6px}.a62-chk .mi>*{width:100%;height:100%}
   .a62-chk div.c{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.86)}
   .a62-chk div.c::before{content:"";width:12px;height:12px;border-radius:50%;background:#46af73;box-shadow:0 0 0 3px rgba(70,175,115,.2);flex:0 0 auto}
@@ -37828,7 +37843,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     stage.innerHTML='<div class="a62 st3"><div class="a62-tabs">'+T.map(function(t){ return '<div class="a62-tab"><b>'+t[0]+'</b><small>'+t[1]+'</small></div>'; }).join('')+'</div>'
       +'<div class="a62-win"><div class="a62-bar"><i></i><i></i><i></i><span>localhost · Vorschau</span></div><div class="a62-view">'
       +'<div class="a62-l a62-gen"><h6>Willkommen im Restaurant Feldkamp</h6><p>Genießen Sie leckeres Essen in gemütlicher Atmosphäre.</p><span class="bt">Jetzt reservieren</span><div class="cs"><i></i><i></i><i></i></div></div>'
-      +'<div class="a62-l a62-tas"><div class="im">'+pic('m6-a62','Gastraum, warmes Licht')+'</div><div class="a62-tx"><div class="k">Küche &amp; Wein am Kanal</div><div class="sl"><h6>Feldkamp.</h6></div><p>Abends ab halb sechs. Acht Tische, eine Karte, die sich nach dem Markt richtet.</p></div></div>'
+      +'<div class="a62-l a62-tas"><div class="im">'+pic('m6-a62','Gastraum, warmes Licht')+'</div><div class="a62-tx"><div class="k">Küche &amp; Wein am Kanal</div><div class="sl"><h6>Feldkamp</h6></div><p>Abends ab halb sechs. Acht Tische, eine Karte, die sich nach dem Markt richtet.</p></div></div>'
       +'<div class="a62-chk"><div class="mi">'+pic('m6-a62','Handyansicht')+'</div><div class="c">Handybreite geprüft</div><div class="c">Bilder geladen</div><div class="c">Keine Fehler</div></div>'
       +'</div></div></div>';
     var root=qs(stage,'.a62'), tabs=qa(stage,'.a62-tab'), tl=TL();
@@ -37904,17 +37919,17 @@ window.__tsn4Boot && window.__tsn4Boot();
   .a64-ph>.tsn6-ph,.a64-ph>img{position:absolute;inset:0;width:100%;height:100%}
   .a64-dot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 5px rgba(255,255,255,.18),0 8px 18px rgba(0,0,0,.6);transition:transform .6s var(--ez),opacity .5s cubic-bezier(.22,1,.36,1);z-index:3}
   .a64-dot::after{content:attr(data-hex);position:absolute;left:50%;top:38px;transform:translateX(-50%);font:600 10px/1 var(--mono);color:#fff;background:rgba(0,0,0,.6);padding:4px 6px;border-radius:6px;white-space:nowrap}
-  .a64-br{border-radius:16px;border:1px solid rgba(199,180,137,.35);background:linear-gradient(rgba(199,180,137,.045),rgba(199,180,137,.045)),#07080d;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
-  .a64-br .hd{font:600 9.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--g)}
+  .a64-br{border-radius:10px;border:1px solid rgba(0,0,0,.6);background:var(--ed-bg);padding:0 16px 16px;display:flex;flex-direction:column;gap:12px;font-family:var(--ed-font)}
+  .a64-br .hd{margin:0 -16px;padding:9px 14px;background:var(--ed-bar);font:400 12px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:#cccccc}
   .a64-sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
   .a64-sw div{height:70px;border-radius:10px;border:1px solid rgba(255,255,255,.12);position:relative;transition:background .6s cubic-bezier(.22,1,.36,1)}
-  .a64-sw div span{position:absolute;left:8px;bottom:7px;font:600 8.5px/1.25 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);text-shadow:0 1px 3px rgba(0,0,0,.6)}
-  .a64-row{font-size:13px;line-height:1.5;color:rgba(255,255,255,.86);min-height:20px}
-  .a64-row b{display:block;font:600 9px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px}
-  .a64-row.no span{color:#f0a49e}
+  .a64-sw div span{position:absolute;left:8px;bottom:7px;font:400 9px/1.25 var(--ed-font);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .a64-row{font:400 12.5px/1.6 var(--ed-font);color:var(--ed-fg);min-height:20px}
+  .a64-row b{display:block;font:700 12.5px/1.6 var(--ed-font);color:var(--ed-h);margin-bottom:2px}
+  .a64-row.no span{color:var(--ed-fg)}
   .a64-strip{margin-top:auto;height:58px;border-radius:10px;overflow:hidden;display:grid;grid-template-columns:2fr 1fr;border:1px solid rgba(255,255,255,.1)}
   .a64-strip .l{display:flex;flex-direction:column;justify-content:center;padding:0 14px;transition:background .8s cubic-bezier(.22,1,.36,1)}
-  .a64-strip .l i{display:block;font-family:var(--disp);font-style:normal;font-weight:600;font-size:17px;transition:color .8s cubic-bezier(.22,1,.36,1)}
+  .a64-strip .l i{display:block;font-family:var(--fk-serif);font-style:normal;font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:16px;transition:color .8s cubic-bezier(.22,1,.36,1)}
   .a64-strip .l u{display:block;width:34px;height:2px;margin-top:6px;text-decoration:none;transition:background .8s cubic-bezier(.22,1,.36,1)}
   .a64-strip .r{transition:background .8s cubic-bezier(.22,1,.36,1)}
   .a64.js .a64-dot{opacity:0;transform:scale(.4)}.a64.js .a64-dot.on{opacity:1;transform:none}
@@ -37924,9 +37939,9 @@ window.__tsn4Boot && window.__tsn4Boot();
     var MOOD='Kerzenlicht, altes Holz, ruhig. Ein Ort, an dem man länger bleibt.', NO='verspielt, Farbverläufe, Bilder aus Datenbanken';
     stage.innerHTML='<div class="a64"><div class="a64-ph">'+pic('m6-a64','Karte und Schild im Gastraum')
       +P.map(function(p,i){ return '<span class="a64-dot" data-hex="'+p.hex+'" style="left:'+p.x+'%;top:'+p.y+'%;background:'+p.hex+'"></span>'; }).join('')+'</div>'
-      +'<div class="a64-br"><span class="hd">Design-Brief · CLAUDE.md</span><div class="a64-sw">'+P.map(function(p){ return '<div><span>'+p.l+'<br>'+p.hex+'</span></div>'; }).join('')+'</div>'
-      +'<div class="a64-row"><b>Stimmung</b><span class="m"></span></div><div class="a64-row no"><b>Nicht</b><span class="n"></span></div>'
-      +'<div class="a64-strip"><div class="l"><i>Feldkamp.</i><u></u></div><div class="r"></div></div></div></div>';
+      +'<div class="a64-br"><span class="hd">CLAUDE.md · ## Design-Brief</span><div class="a64-sw">'+P.map(function(p){ return '<div><span>'+p.l+'<br>'+p.hex+'</span></div>'; }).join('')+'</div>'
+      +'<div class="a64-row"><b>### Stimmung</b><span class="m"></span></div><div class="a64-row no"><b>### Nicht</b><span class="n"></span></div>'
+      +'<div class="a64-strip"><div class="l"><i>Feldkamp</i><u></u></div><div class="r"></div></div></div></div>';
     var root=qs(stage,'.a64'), dots=qa(stage,'.a64-dot'), sw=qa(stage,'.a64-sw div'), m=qs(stage,'.m'), n=qs(stage,'.n'), l=qs(stage,'.a64-strip .l'), r=qs(stage,'.a64-strip .r'), ti=qs(stage,'.a64-strip i'), un=qs(stage,'.a64-strip u'), tl=TL();
     function paint(on){ l.style.background=on?P[0].hex:'#2a2a33'; ti.style.color=on?P[1].hex:'#cfcfe0'; un.style.background=on?P[2].hex:'#6d5dfc'; r.style.background=on?P[2].hex:'linear-gradient(135deg,#6d5dfc,#a855f7)'; }
     function end(){ root.className='a64'; sw.forEach(function(s,i){ s.style.background=P[i].hex; }); m.textContent=MOOD; n.textContent=NO; paint(true);
@@ -38005,16 +38020,16 @@ window.__tsn4Boot && window.__tsn4Boot();
      Taktleiste. Zum Schluss drei Bewegungen, die billig wirken, durchgestrichen. */
   ANIM.a66={css:`
   .a66{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center}
-  .a66-bh{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#08090d;aspect-ratio:16/11}
+  .a66-bh{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:var(--fk-bg);aspect-ratio:16/11}
   .a66-im{position:absolute;left:5%;top:7%;width:90%;height:56%;border-radius:12px;overflow:hidden}
   .a66-im .z{position:absolute;inset:0}.a66-im .z>*{width:100%;height:100%}
-  .a66-sh{position:absolute;left:0;right:0;height:50%;background:#08090d;z-index:2;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
+  .a66-sh{position:absolute;left:0;right:0;height:50%;background:var(--fk-bg);z-index:2;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
   .a66-sh.t{top:0;transform-origin:50% 0}.a66-sh.b{bottom:0;transform-origin:50% 100%}
   .a66-sh{transform:scaleY(0)}
   .a66-tt{position:absolute;left:6%;top:67%;overflow:hidden}
-  .a66-tt h6{margin:0;font-family:var(--disp);font-weight:600;font-size:clamp(18px,2.6vw,28px);line-height:1.05;color:#fff}
+  .a66-tt h6{margin:0;font-family:var(--fk-serif);font-weight:400;font-size:clamp(18px,2.6vw,28px);line-height:1.1;color:var(--fk-ink)}
   .a66-cs{position:absolute;left:5%;right:5%;bottom:6%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .a66-cs div{height:clamp(30px,4.6vw,46px);border-radius:9px;background:linear-gradient(rgba(199,180,137,.12),rgba(199,180,137,.12)),#0e0f14;border:1px solid rgba(199,180,137,.3)}
+  .a66-cs div{height:clamp(30px,4.6vw,46px);border-radius:3px;background:rgba(237,227,207,.07);border:1px solid rgba(237,227,207,.22)}
   .a66-rl{display:flex;flex-direction:column;gap:8px}
   .a66-b{height:52px;border-radius:12px;padding:0 14px;display:flex;align-items:center;gap:12px;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),var(--bg);border:1px solid rgba(255,255,255,.09);transition:border-color .5s cubic-bezier(.22,1,.36,1),background .5s cubic-bezier(.22,1,.36,1)}
   .a66-b b{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--sans);background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);transition:background .5s cubic-bezier(.22,1,.36,1),color .5s cubic-bezier(.22,1,.36,1);flex:0 0 auto}
@@ -38052,7 +38067,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       ['Fenster','Ausschnitt öffnet sich','m5','Das <b>Fenster</b>: Das Bild steht still, der Ausschnitt öffnet sich. Zwei bis drei davon auf einer Startseite, an Wendepunkten.']];
     var X=[['Wackeln','x1'],['Seitwärts hereinrutschen','x2'],['Blinken','x3']];
     stage.innerHTML='<div class="a66"><div class="a66-bh"><div class="a66-im"><div class="z">'+pic('cover-66','Am Pass')+'</div><div class="a66-sh t"></div><div class="a66-sh b"></div></div>'
-      +'<div class="a66-tt"><h6>Der Abend am Pass.</h6></div><div class="a66-cs"><div></div><div></div><div></div></div></div>'
+      +'<div class="a66-tt"><h6>Der Abend am Pass</h6></div><div class="a66-cs"><div></div><div></div><div></div></div></div>'
       +'<div class="a66-rl">'+M.map(function(m,i){ return '<div class="a66-b"><b>'+(i+1)+'</b><span>'+m[0]+'<small>'+m[1]+'</small></span></div>'; }).join('')
       +'<div class="a66-tk"><i></i></div></div></div>';
     var bh=qs(stage,'.a66-bh'), bs=qa(stage,'.a66-b'), tk=qs(stage,'.a66-tk'), tl=TL();
@@ -38273,13 +38288,13 @@ window.__tsn4Boot && window.__tsn4Boot();
         {t:'p', h:'Claude nimmt dir das Bauen ab. Die Entscheidungen bleiben bei dir, und das ist richtig so, denn du kennst deinen Betrieb und Claude kennt nur, was du ihm gibst.'}
       ]},
       {eb:'Der Arbeitsplatz', h:'Ein Ordner, eine <span class="g">Sitzung</span>.', b:[
-        {t:'p', h:'Claude Code läuft bei dir seit Modul 3. Für die Website arbeite ich mit der Desktop-App und dort im Bereich <b>Code</b>, weil sie eine eingebaute Browser-Ansicht mitbringt. Claude startet deine Seite darin, sieht sie sich selbst an, macht Bildschirmfotos und prüft seine Änderungen, bevor es dir etwas meldet. Du schaust in derselben Ansicht mit und klickst selbst herum.'},
+        {t:'p', h:'Claude Code läuft bei dir seit Lektion 3.8. Für die Website arbeite ich mit der Desktop-App und dort im Bereich <b>Code</b>, weil sie eine eingebaute Browser-Ansicht mitbringt. Claude startet deine Seite darin, sieht sie sich selbst an, macht Bildschirmfotos und prüft seine Änderungen, bevor es dir etwas meldet. Du schaust in derselben Ansicht mit und klickst selbst herum.'},
         {t:'p', h:'Leg für die Website einen eigenen Ordner an, klein geschrieben und ohne Leerzeichen, zum Beispiel <span class="tsn6-mono">website-feldkamp</span>. Alles, was zur Seite gehört, lebt darin: der Code, die Bilder, die Schriften, deine Notizen. Wähl genau diesen Ordner, wenn du die Sitzung startest, denn Claude arbeitet immer in dem Ordner, in dem die Sitzung läuft.'},
         {t:'do', i:['Leg den Ordner an, am besten in deinem Benutzerordner und nicht auf dem Schreibtisch zwischen Rechnungen und Dienstplänen.','Öffne die Desktop-App, geh in den Bereich Code und starte eine neue Sitzung in diesem Ordner.','Gib als ersten Auftrag: <b>„Lege eine leere Startseite an und zeig sie mir in der Vorschau.“</b> Wenn rechts die Browser-Ansicht mit deiner leeren Seite aufgeht, steht der Arbeitsplatz.']},
         {t:'p', h:'Wenn du lieber im Terminal arbeitest, geht alles genauso. Den Blick in den Browser bekommt Claude dort über die Erweiterung Claude in Chrome, du startest die Sitzung dann mit <span class="tsn6-mono">claude --chrome</span>.'}
       ]},
       {eb:'Das Gedächtnis des Projekts', h:'Eine CLAUDE.md für <span class="g">diese Seite</span>.', b:[
-        {t:'p', h:'Wie eine CLAUDE.md funktioniert, weißt du aus Modul 3. Hier kommt nur hinein, was diese Website braucht, und das Wichtigste zuerst: die Fakten deines Betriebs.'},
+        {t:'p', h:'Wie eine CLAUDE.md funktioniert, weißt du aus Lektion 3.9. Hier kommt nur hinein, was diese Website braucht, und das Wichtigste zuerst: die Fakten deines Betriebs.'},
         {t:'s', h:'Die Fakten stehen ab der ersten Minute drin.'},
         {t:'p', h:'Name, Adresse, Öffnungszeiten mit Ruhetagen, Telefon, die Adresse für Anfragen, der Weg zur Reservierung, Instagram, die Preisspanne deiner Hauptgerichte und deine Küche in einem Satz. Warum so früh, wenn noch gar nichts gebaut ist? Weil Claude sonst Lücken füllt, so wie du es oben in der Animation gesehen hast. Eine plausible Telefonnummer, die niemandem gehört, kostet dich Anrufe, und du merkst es erst, wenn ein Stammgast fragt, warum keiner abhebt.'},
         {t:'s', h:'Zwei Arbeitsregeln, die mir beim Bauen viele Abende gerettet haben.'},
@@ -38511,7 +38526,7 @@ window.__tsn4Boot && window.__tsn4Boot();
           ['jede Woche, automatisch','Links, Öffnungszeiten, Telefon, Impressum prüfen lassen'],
           ['im Januar','Jahreszahl im Fuß, Preise im Überblick, alte Hinweise entfernen']
         ]},
-        {t:'p', h:'Die wöchentliche Prüfung muss nicht an dir hängen. Richte sie als zeitgesteuerte Aufgabe ein, so wie in Modul 4. Die Regel von dort gilt auch hier: Berichte ja, Änderungen nein.'},
+        {t:'p', h:'Die wöchentliche Prüfung muss nicht an dir hängen. Richte sie als zeitgesteuerte Aufgabe ein, so wie in Lektion 4.8. Die Regel von dort gilt auch hier: Berichte ja, Änderungen nein.'},
         {t:'code', l:'Auftrag: wöchentliche Prüfung', h:'Richte eine zeitgesteuerte Aufgabe ein, die jeden Montag um 7.07 Uhr läuft und nur berichtet, nichts ändert:\n1. Öffne die Seite unter [Adresse] und prüf alle Links, die Karte und den Reservierungsknopf.\n2. Vergleich Öffnungszeiten und Telefon auf der Seite mit dem Fakten-Block.\n3. Prüf, ob alle Bilder laden und Impressum und Datenschutz erreichbar sind.\n4. Schreib mir einen kurzen Bericht mit allem, was nicht stimmt.'}
       ]},
       {eb:'Grenzen', h:'Was du nicht <span class="g">selbst</span> machen solltest.', b:[
@@ -38523,7 +38538,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       intro:'Pflege kleine Änderungen sofort, solange du sie im Kopf hast. Eine Seite, die immer stimmt, ist mehr wert als ein großer Umbau einmal im Jahr.',
       points:['Sag Claude in <b>einem Satz</b>, was sich ändert, Fakten zuerst im Fakten-Block.','Schau dir jede Änderung in der <b>Vorschau</b> an, breit und am Handy, bevor sie online geht.','Lass jeden Stand mit einem klaren Namen <b>speichern</b>. Zurück ist ein Satz.','Richte die <b>wöchentliche Prüfung</b> ein, die nur berichtet.']},
     learn:['Du änderst deine Seite <b>in einem Satz</b>, ohne auf jemanden zu warten.','Jede Änderung siehst du <b>vorher</b>, und erst dein Ja veröffentlicht sie.','Jeder Stand ist <b>gespeichert</b>, und zurück ist ein Satz.','Eine zeitgesteuerte Aufgabe prüft deine Seite <b>jede Woche</b> und berichtet nur.'],
-    next:'/modul-6-weitere-tools-projektmanagement', nextL:'Zur Modulübersicht'
+    next:'/abschluss-was-du-am-ende-kannst', nextL:'Zum Abschluss'
   };
 
   /* ================= L6.2 · Die Werkzeugkiste ================= */
@@ -38531,7 +38546,7 @@ window.__tsn4Boot && window.__tsn4Boot();
     n:'L 6.2', title:'Die <span class="g">Werkzeugkiste</span>', cover:'cover-62', coverL:'Messerrolle auf dunklem Holz',
     intro:[
       'Claude kann von Haus aus Websites bauen. Ohne Anleitung baut es aber den Durchschnitt aus allem, was es je gesehen hat, und diesen Durchschnitt erkennt man inzwischen auf den ersten Blick. Ein Gast spürt ihn, auch wenn er ihn nicht benennen kann.',
-      'Für die Website legen wir zwei Erweiterungen in die Kiste, eine für die Gestaltung und eine für die Bewegung, prüfen die eingebaute Browser-Prüfung und schließen Higgsfield für die Bilder an. Was Skills und Plugins sind und wie man sie lädt, weißt du aus Modul 3. Hier geht es nur darum, welche für eine Website zählen.'
+      'Für die Website legen wir zwei Erweiterungen in die Kiste, eine für die Gestaltung und eine für die Bewegung, prüfen die eingebaute Browser-Prüfung und schließen Higgsfield für die Bilder an. Was Skills und Plugins sind und wie man sie lädt, weißt du aus Lektion 3.12. Hier geht es nur darum, welche für eine Website zählen.'
     ],
     anim:{key:'a62', eb:'Derselbe Auftrag, vier Stufen', h:'Was die Werkzeuge <span class="g">ändern</span>.', sub:'Der Auftrag ist jedes Mal derselbe: ein Seitenkopf für ein Restaurant. Nur die Werkzeuge in der Kiste wechseln.'},
     secs:[
@@ -38548,7 +38563,7 @@ window.__tsn4Boot && window.__tsn4Boot();
           {e:'Bilder', n:'Higgsfield-Verbindung', p:'Über diese Verbindung erzeugt und verbessert Claude Bilder und kurze Filme direkt aus der Sitzung. Du meldest dich beim ersten Zugriff einmal mit deinem Higgsfield-Konto an.\n\nJeder Lauf kostet Guthaben. Wir legen den Anschluss jetzt an, erzeugt wird erst ab Lektion 6.7, gebündelt und mit Kosten vorab.'}
         ]},
         {t:'code', l:'Befehle zum Kopieren (einzeln in Claude Code eingeben)', h:'/plugin install frontend-design@claude-plugins-official\n\n/plugin marketplace add greensock/gsap-skills\n/plugin install gsap-skills@gsap-skills\n\n# nur wenn du im Terminal statt in der Desktop-App arbeitest:\n/plugin install playwright@claude-plugins-official\n\n# im Terminal, für die Bilder ab Lektion 6.7:\nclaude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp'},
-        {t:'p', h:'Danach startest du die Sitzung einmal neu, damit Claude die neuen Werkzeuge kennt. Die Namen und Wege habe ich am 1. November 2026 an den offiziellen Verzeichnissen und der Dokumentation von Claude Code geprüft. Die Higgsfield-Zeile gibst du im Terminal ein, nicht in der Sitzung. Verzeichnisse ändern sich, deshalb gilt: Findet <span class="tsn6-mono">/plugin</span> einen Namen nicht, such ihn im Plugin-Fenster unter <b>Discover</b>, statt irgendeine Kopie aus dem Netz zu laden.'}
+        {t:'p', h:'Danach startest du die Sitzung einmal neu, damit Claude die neuen Werkzeuge kennt. Die Namen und Wege habe ich am 1. November 2026 an den offiziellen Verzeichnissen und der Dokumentation von Claude Code geprüft. Die Higgsfield-Zeile gibst du im Terminal ein, nicht in der Sitzung. Danach prüfst du mit <span class="tsn6-mono">/mcp</span>, ob die Verbindung steht, so wie in Lektion 3.13. Higgsfield rechnet nach Verbrauch ab, jeder Lauf kostet Guthaben. Verzeichnisse ändern sich, deshalb gilt: Findet <span class="tsn6-mono">/plugin</span> einen Namen nicht, such ihn im Plugin-Fenster unter <b>Discover</b>, statt irgendeine Kopie aus dem Netz zu laden.'}
       ]},
       {eb:'Der Test', h:'Greift das <span class="g">Werkzeug</span>?', b:[
         {t:'p', h:'Ein installierter Skill ist noch kein arbeitender Skill. Bevor wir uns auf die Werkzeuge verlassen, geben wir Claude eine kleine Aufgabe, bei der sie anspringen müssen, und schauen in den Verlauf der Sitzung. Lädt Claude einen Skill, steht er dort mit Namen.'},
