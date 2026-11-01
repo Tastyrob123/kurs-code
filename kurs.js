@@ -31752,8 +31752,8 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           lead:'Der Unterschied zum reinen Gespräch: Claude darf in den Ordnern lesen, ändern und Dateien anlegen, die du freigibst. Nur dort.',
           body:'<p><strong class="lead">Du sagst, was du brauchst, nicht wie.</strong>Statt zwölf Schritte vorzugeben, beschreibst du das Ergebnis: „Eine Monatsliste aller Lieferscheine, jede Datei mit Datum und Lieferant im Namen.“ Claude plant die Schritte selbst, arbeitet sie ab und legt dir das Ergebnis zur Prüfung hin.</p>'
             +'<p><strong class="lead">Es arbeitet mit deinen Dateitypen.</strong>Word, PDF, Excel, PowerPoint, CSV und Bilder. Ein abfotografierter Lieferschein ist für Claude genauso lesbar wie ein PDF vom Lieferanten.</p>'
-            +'<p><strong class="lead">Es läuft weiter, wenn du gehst.</strong>Große Aufgaben laufen in der Cloud weiter, auch wenn du den Laptop zuklappst. Arbeitet Claude mit Dateien auf deinem Rechner, muss die Desktop-App dafür geöffnet bleiben. Cowork ist in allen bezahlten Plänen enthalten, in der Desktop-App ebenso wie im Browser und auf dem Handy.</p>'
-            +'<p><strong class="lead">Wiederkehrendes lässt sich planen.</strong>Arbeit, die jede Woche wiederkommt, kannst du in der App als geplante Aufgabe anlegen, etwa ein Briefing jeden Montag um sieben. Wie du solche Aufgaben einrichtest und mit deinem Backoffice verbindest, zeigt dir <a href="/lektionen/wiederkehrende-routinen-einrichten">Lektion 4.8</a>.</p>'
+            +'<p><strong class="lead">Es läuft weiter, wenn du gehst.</strong>Claude arbeitet in der Cloud weiter, auch wenn du den Laptop zuklappst. Arbeitet Claude mit Dateien auf deinem Rechner, muss die Desktop-App dafür geöffnet bleiben. In der Desktop-App gibt es Cowork in allen bezahlten Plänen, im Browser und auf dem Handy ab Pro.</p>'
+            +'<p><strong class="lead">Wiederkehrendes lässt sich planen.</strong>Arbeit, die jede Woche wiederkommt, kannst du in der App als zeitgesteuerte Aufgabe anlegen, etwa einen Wochenblick jeden Montag früh. Wie du solche Aufgaben einrichtest und mit deinem Backoffice verbindest, zeigt dir <a href="/lektionen/wiederkehrende-routinen-einrichten">Lektion 4.8</a>.</p>'
             +H.note('Vor dem endgültigen Löschen einer Datei fragt Claude nach. Trotzdem gibst du am Anfang nur eine <b>Kopie</b> deines Ordners frei, bis du weißt, wie Claude mit deinen Dateien umgeht.','Die Merkregel')})
         +H.sec({id:'tsn3-l05-auftraege', title:'Drei Aufträge aus dem <span class="g">Betrieb</span>',
           lead:'Jeder dieser Aufträge funktioniert mit einem Ordner und einem Satz. Kopier sie, pass die Namen an und gib den Ordner frei.',
@@ -31778,7 +31778,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Sieh das Ergebnis <b>Zeile für Zeile</b> durch, bevor du es weiterverwendest oder an jemanden schickst.']},
     learn:{learn:['Du weißt, dass Claude in <b>freigegebenen Ordnern</b> selbst arbeiten kann.',
         'Du beschreibst <b>das Ergebnis</b>, nicht die Schritte.',
-        'Du weißt, dass große Aufgaben <b>in der Cloud weiterlaufen</b>, auch bei zugeklapptem Laptop.',
+        'Du weißt, dass Claude <b>in der Cloud weiterarbeitet</b>, auch bei zugeklapptem Laptop.',
         'Du gibst am Anfang nur eine <b>Kopie</b> frei und prüfst jedes Ergebnis.'],
       next:'/lektionen/claude-in-chrome'}
   });
@@ -32454,7 +32454,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   });
 
   T3.page({
-    key:'l11', re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, tab:'L 3.11 · Plan-Modus, Modelle & Denk-Tiefe',
+    key:'l11', re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, tab:'L 3.11 · Erst planen',
     hero:{eyebrow:'L 3.11', title:'Erst <span class="ts-gold">planen</span>', alt:'Plan-Modus, Modelle und Denk-Tiefe in Claude Code'},
     intro:'<p>Kein Koch fängt den Service an, bevor die Mise en place steht. Claude Code hat dafür einen eigenen Modus: Im <b>Plan-Modus</b> liest es, denkt nach und schreibt dir auf, was es vorhat, ohne eine einzige Datei zu ändern. Erst wenn du den Plan freigibst, wird gearbeitet, und zwar genau so, wie du es gesehen hast.</p>'
       +'<p>Dazu kommen zwei Einstellungen, die bestimmen, wie gründlich Claude vorgeht: welches <b>Modell</b> arbeitet und wie tief es nachdenkt. Für die meisten Aufgaben passt die Voreinstellung. Wann sich das Umstellen lohnt, zeige ich dir hier.</p>',
@@ -32944,7 +32944,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     {n:'Übersetzungs-Abo',d:'Karte auf Englisch',s:1},{n:'Zweites Notiz-Tool',d:'doppelt zu Notion',s:2},{n:'Dienstplan-App',d:'das Team trägt sich ein',s:0},
     {n:'PDF-Werkzeug',d:'Aushänge als PDF',s:1},{n:'Mindmap-Abo',d:'seit Monaten ungenutzt',s:2},{n:'Umfrage-Tool',d:'eine Umfrage, 2025',s:2}
   ];
-  var CAPS=['Zuerst kommt auf die Liste, was <b>täglich gebraucht</b> wird und eine eigene Aufgabe hat. Das bleibt.','Dann alles, was du für <b>Textarbeit</b> einzeln bezahlst. Das macht künftig Claude.','Und zuletzt, was seit Wochen <b>niemand geöffnet</b> hat oder nur festhält, was <b>in Notion</b> schon liegt. Das wird heute gekündigt.'];
+  var CAPS=['Zuerst kommt auf die Liste, was <b>täglich gebraucht</b> wird und eine eigene Aufgabe hat. Das bleibt.','Dann alles, was du für <b>Textarbeit</b> einzeln bezahlst. Das macht künftig Claude.','Und zuletzt alles, was <b>niemand mehr öffnet</b> oder was es <b>in Notion</b> längst gibt. Das wird heute gekündigt.'];
   var stage='<div class="l16-sheet"><div class="l16-h"><span>Laufende Abos</span><span class="l16-src">aus Konto und App-Store</span></div>'
     +ROWS.map(function(r,i){ return '<div class="l16-row s'+r.s+' st" data-i="'+i+'"><span class="nm">'+r.n+'</span><span class="d">'+r.d+'</span><span class="l16-stamp k'+ST[r.s].k+'">'+ST[r.s].n+'</span></div>'; }).join('')
     +'<div class="l16-sum"><span class="sb">Bleibt <b>3</b></span><span class="sc">Macht Claude <b>3</b></span><span class="sx">Kündigen <b>3</b></span></div></div>';
@@ -32967,7 +32967,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     key:'l16', re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, tab:'L 3.16 · Stack aufräumen',
     hero:{eyebrow:'L 3.16', title:'Stack <span class="ts-gold">aufräumen</span>', alt:'Stack aufräumen: laufende Abos sortieren nach bleibt, macht Claude und kündigen'},
     intro:'<p>Mit Claude im Abo zahlst du vermutlich für einiges doppelt. In den meisten Betrieben haben sich über die Jahre Abos angesammelt, für Texte, Übersetzungen, Notizen und Dinge, die einmal wichtig waren. Die Hälfte davon hat seit Wochen niemand geöffnet, abgebucht wird trotzdem jeden Monat.</p>'
-      +'<p>Die Linie dieses Kurses macht das Sortieren einfach: Notion ist das System, in dem dein Betrieb liegt. Claude ist das Werkzeug, das darin arbeitet. Jedes andere Abo muss sich daran messen lassen.</p>'
+      +'<p>Die Linie dieses Kurses macht das Sortieren einfach: Notion ist das System, in dem dein Betrieb liegt. Claude ist das Werkzeug, das dieses System von außen bedient und erweitert. Jedes andere Abo muss sich daran messen lassen.</p>'
       +'<p>Wir sortieren deine Abos heute in drei Stapel, nach einer einzigen Frage: Wer macht diese Arbeit ab morgen? Das dauert zwanzig Minuten und bringt dir als einzige Lektion in diesem Modul sofort Geld zurück.</p>',
     anim:{id:'tsn3-a16', eb:'Die Sortierung', title:'Ein Auszug, drei <span class="g">Stempel</span>.',
       sub:'Neun Abos, wie sie in vielen Betrieben laufen. Jedes bekommt genau einen Stempel.',
@@ -32975,11 +32975,11 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
       capEnd:'Drei bleiben, drei übernimmt Claude, drei fliegen raus. Bei dir wird die Verteilung anders sein, die <b>Frage</b> bleibt dieselbe.'},
     body:function(H){
       return H.sec({id:'tsn3-l16-stapel', wide:true, title:'Drei <span class="g">Stapel</span>',
-          lead:'Ob dir ein Werkzeug gefällt, spielt keine Rolle. Dein Betrieb liegt in Notion, gearbeitet wird mit Claude. Für jedes Abo daneben zählt nur, wer die Arbeit ab morgen macht.',
+          lead:'Ob dir ein Werkzeug gefällt, spielt keine Rolle. Für jedes Abo daneben zählt nur, wer die Arbeit ab morgen macht.',
           body:H.cards([
-            {eb:'Stapel 1', nm:'Bleibt', p:['Alles mit einer eigenen Aufgabe, die weder Notion noch Claude übernimmt: Kasse, Buchhaltung, Reservierungssystem, die App, in die sich dein Team einträgt.','Ein Werkzeug darf hier nur bleiben, wenn du in einem Satz sagen kannst, was es kann, das dein System und dein Werkzeug nicht können.']},
+            {eb:'Stapel 1', nm:'Bleibt', p:['Alles mit einer eigenen Aufgabe, die weder Notion noch Claude übernimmt: Kasse, Buchhaltung, Reservierungssystem, die App, in die sich dein Team einträgt.','Ein Werkzeug darf hier nur bleiben, wenn du in einem Satz sagen kannst, was es kann, das Notion und Claude nicht können.']},
             {eb:'Stapel 2', nm:'Macht Claude', p:['Texte, Übersetzungen, Zusammenfassungen, PDFs, kleine Auswertungen. Für all das zahlst du heute vermutlich einzeln.','Kündige hier nicht sofort. Lass beides einen Monat parallel laufen und schau, was du wirklich noch öffnest.']},
-            {eb:'Stapel 3', nm:'Kündigen', p:['Alles, was du seit Wochen nicht geöffnet hast, und alles, was nur festhält, was in deinem Notion schon liegt: die zweite Notiz-App, das Listen-Tool, die Mindmap.','Da hilft kein guter Vorsatz, dein Verhalten hat längst entschieden. Der Stapel ist meist größer, als man denkt, und der einzige, der sofort Geld zurückbringt.']}
+            {eb:'Stapel 3', nm:'Kündigen', p:['Alles, was du seit Wochen nicht geöffnet hast, und alles, was nur festhält, was in deinem Notion schon liegt: das zweite Notiz-Tool, das Listen-Tool, die Mindmap.','Da hilft kein guter Vorsatz, dein Verhalten hat längst entschieden. Der Stapel ist meist größer, als man denkt.']}
           ],3)})
         +H.sec({id:'tsn3-l16-uebung', title:'Die Übung in <span class="g">zwanzig Minuten</span>',
           lead:'Ein Blatt Papier oder eine leere Notiz. Und, wenn du magst, Claude als Sortierhilfe.',
@@ -32991,11 +32991,11 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           ])
           +H.prompt('Hier ist die Liste meiner laufenden Abos mit dem Tag, an dem ich jedes zuletzt benutzt habe. Mein Betrieb liegt in Notion, du bist mein Werkzeug. Sortier die Abos in drei Gruppen: was eine eigene Aufgabe hat, die weder du noch Notion übernehmen können, was du künftig für mich erledigen kannst, und was ich seit über vier Wochen nicht genutzt habe oder was nur festhält, was schon in Notion liegt. Begründe jede Zuordnung in einem Satz und markier, wo du unsicher bist.','Sortierhilfe in der Claude-App','Kontoauszug oder Liste als Datei hineinziehen. Kündigen tust du selbst.')})
         +H.sec({id:'tsn3-l16-bleibt', title:'System und <span class="g">Werkzeug</span>',
-          lead:'Damit niemand zu viel aufräumt: Dein Backoffice ist das System, Claude das Werkzeug. Kasse, Buchhaltung und Reservierung bleiben daneben stehen.',
-          body:'<p><strong class="lead">Dein Backoffice ist das System.</strong>Das Notion-Backoffice aus Modul 2 ist der Ort, an dem dein Betrieb geordnet liegt: Zutaten, Rezepturen, Gerichte, Kalkulation. Claude ist das Werkzeug, das in diesem System liest und pflegt. Den Zugang dafür bekommt es in Modul 4.</p>'
+          lead:'Damit du nicht zu viel aufräumst: Drei Dinge bleiben auf jeden Fall, dein Backoffice, Kasse mit Buchhaltung und die Reservierung.',
+          body:'<p><strong class="lead">Dein Backoffice ist das System.</strong>Die Backoffice-Vorlage aus Modul 2 ist der Ort, an dem dein Betrieb geordnet liegt: Einkauf und Inventur, Zutaten, Rezepturen, Gerichte mit ihrer Kalkulation. Claude ist das Werkzeug, das dieses System von außen bedient, darin liest, pflegt und erweitert. Den Zugang dafür bekommt es in Modul 4.</p>'
             +'<p><strong class="lead">Kasse und Buchhaltung.</strong>Sie halten Zahlen fest, für die du gesetzlich geradestehst. Claude kann ihre Auswertungen lesen und erklären, ersetzt sie aber nicht.</p>'
             +'<p><strong class="lead">Reservierungen.</strong>Ein Reservierungssystem bleibt, bis du es bewusst ersetzt. Wie ein eigener Agent Anfragen annimmt, zeigt Modul 5.</p>'
-            +H.note('Notion hält deinen Betrieb fest, Claude arbeitet darin. Jedes Abo daneben will bedient und bezahlt werden. Was keins von beidem besser kann, fliegt raus.','Die Merkregel')})
+            +H.note('Notion hält deine Daten, Claude arbeitet mit ihnen. Jedes Abo daneben muss etwas können, das beide nicht können.','Die Merkregel')})
     },
     emp:{kind:'Nutzung', animTitle:'Dein', animGold:'schlanker Stack',
       steps:['Echte Liste','Letzte Nutzung','Drei Stapel','Wiedervorlage'],
@@ -33006,7 +33006,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Setz dir eine <b>Wiedervorlage</b> in drei Monaten für den nächsten Durchgang.']},
     learn:{learn:['Du sortierst Abos nach <b>einer Frage</b>: Wer macht die Arbeit ab morgen?',
         'Du kennst die <b>drei Stapel</b> und den Monat Parallelbetrieb.',
-        'Du misst jedes Abo an <b>System und Werkzeug</b>: Notion hält fest, Claude arbeitet.',
+        'Du misst jedes Abo an <b>System und Werkzeug</b>: Notion hält deine Daten, Claude arbeitet mit ihnen.',
         'Dein dritter Stapel ist <b>gekündigt</b>.'],
       next:'/der-umstieg-von-chat-app-auf-claude-code'}
   });
