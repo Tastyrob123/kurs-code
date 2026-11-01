@@ -31075,14 +31075,14 @@ var TSISL_TEAM_ONB_V2=[
   .tsn4-cards.c2{grid-template-columns:repeat(2,1fr)}
   .tsn4-cards.c3{grid-template-columns:repeat(3,1fr)}
   .tsn4-card{position:relative;background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px 20px 18px;
-    transition:border-color .4s ease,transform .5s ${EASE},box-shadow .4s ease}
+    transition:border-color .4s cubic-bezier(.16,1,.3,1),transform .5s ${EASE},box-shadow .4s cubic-bezier(.16,1,.3,1)}
   .tsn4-card:hover{border-color:rgba(199,180,137,.45);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.75),0 0 28px rgba(199,180,137,.12)}
   .tsn4-card .k{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:11px}
   .tsn4-card .n{font-family:${DISP};font-weight:600;font-size:17px;line-height:1.25;color:#fff;margin:0 0 11px}
   .tsn4-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 11px}
   .tsn4-card p{font-size:14px;line-height:1.58;margin:0 0 9px}
   .tsn4-card p:last-child{margin-bottom:0}
-  .tsn4-card .f{font-size:12px;line-height:1.5;color:rgba(255,255,255,.78);margin:10px 0 0}
+  .tsn4-card .f{font-size:13px;line-height:1.5;color:rgba(255,255,255,.86);margin:10px 0 0}
   .tsn4-card .ph{width:54px;height:54px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(199,180,137,.5);margin:0 0 14px;background:#0b0d14;box-shadow:0 12px 26px -12px rgba(0,0,0,.9)}
   .tsn4-card .ph img{width:100%;height:100%;object-fit:cover;display:block}
 
@@ -31100,7 +31100,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn4-cmd .bar{display:flex;align-items:center;gap:10px;padding:9px 12px 9px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
   .tsn4-cmd .bar span{font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;flex:1}
   .tsn4-cmd .bar button{height:26px;padding:0 11px;border-radius:7px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.12);color:#efe6d2;
-    font:600 10.5px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s ease,color .3s ease}
+    font:600 10.5px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
   .tsn4-cmd .bar button:hover{background:#c7b489;color:#05060b}
   .tsn4-cmd code{display:block;padding:14px 18px 15px;font:500 12.5px/1.72 ${MONO};letter-spacing:.005em;color:#efe6d2;white-space:pre-wrap;word-break:break-word}
   .tsn4-mono{display:inline-block;font:600 12.5px/1.5 ${MONO};color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.28);border-radius:7px;padding:1px 7px}
@@ -31120,7 +31120,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn4-err div::before{content:"!";position:absolute;left:16px;top:14px;width:18px;height:18px;border-radius:50%;border:1px solid rgba(227,37,82,.7);color:#e35d76;font:700 11px/16px ${SANS};text-align:center}
   .tsn4-err b{color:#fff;font-weight:600}
 
-  .tsn4-note{margin:16px 0 0;font-size:13px;line-height:1.55;color:rgba(255,255,255,.78)}
+  .tsn4-note{margin:16px 0 0;font-size:13px;line-height:1.55;color:rgba(255,255,255,.86)}
   .tsn4-note a{color:#c7b489}
   .tsn4-close{max-width:760px;margin:34px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
   .tsn4-close b{color:#c7b489;font-weight:600}
@@ -31128,6 +31128,10 @@ var TSISL_TEAM_ONB_V2=[
   @media(max-width:820px){
     .tsn4-cards.c2,.tsn4-cards.c3{grid-template-columns:1fr}
     .tsn4-tbl{font-size:13px} .tsn4-tbl th,.tsn4-tbl td{padding:10px 10px}
+  }
+  @media(max-width:620px){
+    .tsn4-tbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .tsn4-tbl td{overflow-wrap:anywhere;min-width:90px}
   }
   `;
 
@@ -31148,7 +31152,9 @@ var TSISL_TEAM_ONB_V2=[
   #${id} .a-stage{position:relative;margin:0 auto}
   #${id} [data-s]{transition:opacity .8s ${EASE},transform .9s ${EASE}}
   #${id}.js [data-s]{opacity:0;transform:translateY(14px) scale(.97)}
-  #${id} path.ln,#${id} line.ln{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.1s ${EASE},opacity .6s ease}
+  #${id} .st:not(.flow){container-type:inline-size}
+  #${id} path.ln.dash{stroke-dasharray:.012 .012!important;stroke-dashoffset:0!important}
+  #${id} path.ln,#${id} line.ln{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.1s ${EASE},opacity .6s cubic-bezier(.16,1,.3,1)}
   #${id}.js path.ln,#${id}.js line.ln{stroke-dashoffset:1}
   ${steps}
   #${id} .a-rail{display:flex;justify-content:center;gap:8px;margin:30px auto 0;flex-wrap:wrap}
@@ -31156,12 +31162,12 @@ var TSISL_TEAM_ONB_V2=[
     font:700 11px/1 ${SANS};letter-spacing:.06em;font-variant-numeric:tabular-nums;cursor:pointer;transition:all .45s ${EASE}}
   #${id} .a-step:hover{border-color:rgba(199,180,137,.5);color:#fff}
   #${id} .a-step.on{background:rgba(199,180,137,.14);border-color:rgba(199,180,137,.6);color:#efe6d2;box-shadow:0 0 18px rgba(199,180,137,.18)}
-  #${id} .a-cap{max-width:700px;min-height:78px;margin:16px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);transition:opacity .45s ease}
+  #${id} .a-cap{max-width:700px;min-height:78px;margin:16px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);transition:opacity .45s cubic-bezier(.16,1,.3,1)}
   #${id} .a-cap.fade{opacity:0}
   #${id} .a-cap b{color:#c7b489;font-weight:600}
   #${id} .a-foot{display:flex;justify-content:center;align-items:center;gap:16px;margin:12px auto 0;flex-wrap:wrap}
   #${id} .a-note{font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.62)}
-  #${id} .a-replay{height:32px;padding:0 16px;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:transparent;color:#c7b489;font:600 11px/1 ${SANS};letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .35s ease,color .35s ease}
+  #${id} .a-replay{height:32px;padding:0 16px;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:transparent;color:#c7b489;font:600 11px/1 ${SANS};letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .35s cubic-bezier(.16,1,.3,1),color .35s cubic-bezier(.16,1,.3,1)}
   #${id} .a-replay:hover{background:#c7b489;color:#05060b}
   #${id}.hid *{animation-play-state:paused!important}
   @media(max-width:820px){ #${id} .a-cap{min-height:128px} }
@@ -31184,7 +31190,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn4a path.sp{fill:none;stroke:#efe6d2;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:.05 1.05;stroke-dashoffset:.05;opacity:0;filter:drop-shadow(0 0 5px rgba(239,230,210,.85))}
   .tsn4a.built:not(.hid) path.sp{opacity:1;animation:tsn4Spark 3.8s cubic-bezier(.45,.05,.55,.95) infinite}
   .tsn4a .md{border-radius:50%;overflow:hidden;background:#0b0d14;border:1.5px solid rgba(199,180,137,.55);
-    box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);transition:border-color .6s ease,box-shadow .6s ease}
+    box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055);transition:border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
   .tsn4a .md img{width:100%;height:100%;object-fit:cover;display:block}
   .tsn4a .md.lit{border-color:rgba(199,180,137,.95);box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.12),0 0 34px rgba(199,180,137,.32)}
   .tsn4a.built:not(.hid) .md.br{animation:tsn4Breath 4.4s ease-in-out infinite}
@@ -31192,14 +31198,20 @@ var TSISL_TEAM_ONB_V2=[
   .tsn4a .pill{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:999px;background:rgba(11,13,20,.86);border:1px solid rgba(199,180,137,.4);
     font:600 11.5px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:#efe6d2;white-space:nowrap}
   .tsn4a .cardx{border-radius:15px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04)),#05060b;
-    box-shadow:0 24px 56px -30px rgba(0,0,0,.9);transition:border-color .6s ease,box-shadow .6s ease,background .6s ease}
+    box-shadow:0 24px 56px -30px rgba(0,0,0,.9);transition:border-color .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1),background .6s cubic-bezier(.16,1,.3,1)}
   .tsn4a .cardx.lit{border-color:rgba(199,180,137,.62);background:linear-gradient(rgba(199,180,137,.075),rgba(199,180,137,.075)),#05060b;box-shadow:0 24px 56px -30px rgba(0,0,0,.9),0 0 30px rgba(199,180,137,.16)}
   .tsn4a .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
   .tsn4a .ok{color:#8FCBAA}.tsn4a .no{color:#e35d76}
   @keyframes tsn4Spark{0%{stroke-dashoffset:.05}62%{stroke-dashoffset:-1.05}100%{stroke-dashoffset:-1.05}}
   @keyframes tsn4Breath{0%,100%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 7px rgba(199,180,137,.055)}50%{box-shadow:0 20px 46px -18px rgba(0,0,0,.92),0 0 0 9px rgba(199,180,137,.09),0 0 26px rgba(199,180,137,.18)}}
-  @media(prefers-reduced-motion:reduce){ .tsn4a path.sp{display:none} .tsn4a .md.br{animation:none} }
+  .tsn4a .st:not(.flow) .lbl{font-size:1cqw}
+  .tsn4a .st:not(.flow) .pill{height:2.6cqw;padding:0 1.1cqw;gap:.7cqw;font-size:1.15cqw}
+  @media(prefers-reduced-motion:reduce){ .tsn4a path.sp{display:none} .tsn4a *{animation:none!important;transition:none!important} }
   `;
+  /* Buehnen skalieren wie ein Bild: px (>2) der Seiten-CSS -> cqw des 1000er-Rasters, Media-Queries bleiben px */
+  function scale(c){ var keep=[]; c=c.replace(/@media\([^)]*\)/g,function(m){ keep.push(m); return '@@M'+(keep.length-1)+'@@'; });
+    c=c.replace(/(-?\d*\.?\d+)px/g,function(m,n){ var v=parseFloat(n); return Math.abs(v)<=2?m:(Math.round(v*1000)/10000)+'cqw'; });
+    return c.replace(/@@M(\d+)@@/g,function(m,i){ return keep[+i]; }); }
   /* Position im 1000er-Raster der Buehne -> Prozent */
   function pos(x,y,w,h,H){ return 'left:'+(x/10)+'%;top:'+(y/H*100)+'%;'+(w!=null?'width:'+(w/10)+'%;':'')+(h!=null?'height:'+(h/H*100)+'%;':''); }
 
@@ -31208,7 +31220,7 @@ var TSISL_TEAM_ONB_V2=[
     /* cfg: id, anchorId, eyebrow, title, sub, html, css, beats:[{t,cap}], note, onBeat(root,i,T), final(root), reset(root), built(root) */
     if(document.getElementById(cfg.id)) return document.getElementById(cfg.id);
     var a=document.getElementById(cfg.anchorId); if(!a||!a.parentNode) return null;
-    addCSS('tsn4-anim-shared', SHARED); addCSS(cfg.id+'-css', stageCSS(cfg.id, cfg.css));
+    addCSS('tsn4-anim-shared', SHARED); addCSS(cfg.id+'-css', stageCSS(cfg.id, cfg.flow?cfg.css:scale(cfg.css)));
     var el=document.createElement('section'); el.id=cfg.id; el.className='tsn4a';
     var rail=cfg.beats.map(function(b,i){ return '<button type="button" class="a-step" data-i="'+i+'">'+(i<9?'0':'')+(i+1)+'</button>'; }).join('');
     el.innerHTML=
@@ -31288,8 +31300,8 @@ var TSISL_TEAM_ONB_V2=[
     var ex=sc.querySelector('.ts-hero'); if(ex) return ex;
     addCSS('tsn4-base', BASE);
     var h=document.createElement('div'); h.className='ts-hero';
-    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
+    h.innerHTML='<img class="ts-hero__img" alt="'+cfg.alt+'" src="'+(cfg.img||phHero(cfg.eyebrow))+'" fetchpriority="high" decoding="sync">'+
+      '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="sync">'+
       '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div><h1 class="ts-hero__title">'+cfg.title+'</h1></div>';
     var nr=sc.querySelector('.notion-root'); if(nr) sc.insertBefore(h,nr); else sc.appendChild(h);
     var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
@@ -31326,31 +31338,31 @@ var TSISL_TEAM_ONB_V2=[
   /* ---------- Abschnitt 07 Empfehlungs-Kachel (Verhalten 1:1 Katalog, Stagger 2..5) ---------- */
   function empCSS(id){
     addCSS(id+'-css', `
-  #${id}{width:min(1000px,95vw);margin:96px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+  #${id}{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
     background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
     box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);font-family:${SANS};color:#fff;
-    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s ${EASE},opacity .9s ease}
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s ${EASE},opacity .9s cubic-bezier(.16,1,.3,1)}
   #${id}.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
-  #${id}.in.tilt{transition:transform .16s ease-out,opacity .9s ease}
+  #${id}.in.tilt{transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
   #${id} *{box-sizing:border-box}
   #${id}::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
-  #${id}::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s ease;background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #${id}::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1);background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
   #${id}.glow::before{opacity:1}
   #${id}.beat{animation:tsn4empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
   #${id} .emp-grid{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
   #${id} svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
-  #${id} .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s ease,stroke-dashoffset .55s ${EASE}}
+  #${id} .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1),stroke-dashoffset .55s ${EASE}}
   #${id} .emp-link path.on{opacity:1}
-  #${id} .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s ease}
+  #${id} .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
   #${id} .emp-link circle.on{opacity:1}
   #${id} .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
   #${id} .emp-anim-hd{font-family:${DISP};font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 6px}
   #${id} .emp-anim-hd span{color:#c7b489}
-  #${id} .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;opacity:0;transform:translateX(-10px)}
-  #${id}.in .emp-step{opacity:1;transform:none;transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,opacity .6s ease,transform .6s ease}
+  #${id} .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);opacity:0;transform:translateX(-10px)}
+  #${id}.in .emp-step{opacity:1;transform:none;transition:background .5s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
   #${id}.in .emp-step:nth-child(2){transition-delay:.15s}#${id}.in .emp-step:nth-child(3){transition-delay:.28s}#${id}.in .emp-step:nth-child(4){transition-delay:.41s}#${id}.in .emp-step:nth-child(5){transition-delay:.54s}
   #${id} .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #${id} .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s ease,color .5s ease}
+  #${id} .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1)}
   #${id} .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
   #${id} .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.86)}
   #${id} .emp-step.on .emp-step-l{color:#fff}
@@ -31359,10 +31371,11 @@ var TSISL_TEAM_ONB_V2=[
   #${id} .emp-h .eg{color:#c7b489}
   #${id} .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
   #${id} .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
-  #${id} .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.86);transition:background .5s ease,color .5s ease,box-shadow .5s ease;margin-bottom:6px}
+  #${id} .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.86);transition:background .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);margin-bottom:6px}
   #${id} .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
   #${id} .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
   #${id} .emp-ol li b{color:#c7b489;font-weight:600}
+  @keyframes tsn4empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
   @media(max-width:900px){ #${id} .emp-grid{grid-template-columns:1fr;gap:26px} #${id} svg.emp-link{display:none} }
   @media(prefers-reduced-motion:reduce){ #${id}{transform:none;opacity:1} #${id} .emp-step{opacity:1;transform:none} }
   `);
@@ -31418,7 +31431,7 @@ var TSISL_TEAM_ONB_V2=[
     var host=document.querySelector('.super-content'); if(!host||!document.querySelector('.notion-root')) return;
     var id=cfg.id;
     addCSS(id+'-css', `
-  #${id}{width:100%;margin-top:96px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  #${id}{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
   #${id} *{box-sizing:border-box}
   #${id} .tsl-head{text-align:center;margin-bottom:66px}
   #${id} .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
@@ -31428,7 +31441,7 @@ var TSISL_TEAM_ONB_V2=[
   #${id} .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
     background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
     border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
-    transition:opacity .8s ease,transform .9s ${EASE},filter .8s ease,border-color .4s ease,box-shadow .4s ease}
+    transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s ${EASE},filter .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
   #${id}.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
   #${id} .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
   #${id}.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tsn4Float 7s ease-in-out infinite;will-change:translate}
@@ -31440,11 +31453,10 @@ var TSISL_TEAM_ONB_V2=[
   #${id} .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;margin:0}
   #${id} .tsl-t b{color:#c7b489;font-weight:700}
   #${id} #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #${id} #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+  #${id} #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}
   #${id} #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
   #${id} #ts-next svg{width:16px;height:16px}
   @keyframes tsn4Float{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @keyframes tsn4empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}
   @media(max-width:1079px){ #${id} .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ #${id} .tsl-grid{grid-template-columns:1fr} }
   @media(prefers-reduced-motion:reduce){ #${id}.js.in .tsl-orb, #${id} .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
@@ -31529,26 +31541,27 @@ var TSISL_TEAM_ONB_V2=[
     {x:690,k:'Automation', t:'Macht immer exakt dasselbe', c:'c2'}
   ];
   var cards=CARDS.map(function(c){
-    return '<div class="cardx hc '+c.c+'" data-s="2" style="'+P(c.x,300,250,112)+'"><span class="hk">'+c.k+'</span><span class="ht">'+c.t+'</span></div>';
+    return '<div class="cardx hc '+c.c+'" data-s="1" style="'+P(c.x,300,250,112)+'"><span class="hk">'+c.k+'</span><span class="ht">'+c.t+'</span></div>';
   }).join('');
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/470">'+
     '<svg class="lines" viewBox="0 0 1000 470" preserveAspectRatio="none">'+chain+hl+'</svg>'+meds+cards+
     '<div class="paper" data-s="3" style="'+P(236,6,40,54)+'"><i></i><i></i><i></i><i></i></div>'+
     '<div class="pw" data-s="3" style="'+P(220,186,200,28)+'"><span class="pill">Neue Preise</span></div>'+
-    '<div class="pw" data-s="5" style="'+P(580,186,200,28)+'"><span class="pill">Vorschlag, ungeprüft</span></div>'+
-    '<div class="pw" data-s="6" style="'+P(760,186,200,28)+'"><span class="pill">Auf der Karte seit heute</span></div>'+
-    '<div class="you" data-s="7" style="'+P(392,424,216,34)+'"><b>Du</b> prüfst und gibst frei</div>'+
+    '<div class="pw" data-s="5" style="'+P(580,186,200,28)+'"><span class="pill">Vorschlag</span></div>'+
+    '<div class="pw" data-s="6" style="'+P(760,186,200,28)+'"><span class="pill">Datum gesetzt</span></div>'+
+    '<div class="you" data-s="1" style="'+P(392,424,216,34)+'"><b>Du</b> prüfst und gibst frei</div>'+
   '</div></div>';
   var css=`
   #tsn4a0anim .hc{display:flex;flex-direction:column;justify-content:center;padding:0 22px;gap:8px}
   #tsn4a0anim .hk{font-family:${N.DISP};font-weight:600;font-size:19px;color:#fff}
   #tsn4a0anim .ht{font-size:13.5px;line-height:1.4;color:rgba(255,255,255,.86)}
-  #tsn4a0anim .paper{border-radius:5px;background:linear-gradient(#f3ead4,#e6dbc0);box-shadow:0 14px 28px -10px rgba(0,0,0,.9);padding:9px 7px;display:flex;flex-direction:column;gap:5px;z-index:3}
+  #tsn4a0anim .paper{border-radius:5px;background:linear-gradient(#efe6d2,#d8c9ab);box-shadow:0 14px 28px -10px rgba(0,0,0,.9);padding:9px 7px;display:flex;flex-direction:column;gap:5px;z-index:3}
   #tsn4a0anim .paper i{display:block;height:3px;border-radius:2px;background:rgba(5,6,11,.32)}
   #tsn4a0anim .paper i:nth-child(2){width:70%}#tsn4a0anim .paper i:nth-child(4){width:55%}
   #tsn4a0anim.js .paper{transform:translate(-220px,60px) rotate(-16deg)}
   #tsn4a0anim .pw{display:flex;justify-content:center;align-items:center;z-index:4}
-  #tsn4a0anim .you{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;border:1px solid rgba(199,180,137,.6);background:rgba(199,180,137,.12);font-size:13.5px;color:#efe6d2}
+  #tsn4a0anim .you{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);font-size:13.5px;color:rgba(255,255,255,.86);transition:all .7s cubic-bezier(.16,1,.3,1)}
+  #tsn4a0anim .you.on{border-color:rgba(199,180,137,.7);background:rgba(199,180,137,.14);color:#efe6d2;box-shadow:0 0 26px rgba(199,180,137,.22)}
   #tsn4a0anim .you b{color:#c7b489;font-family:${N.DISP};font-size:15px}
   `;
   function lit(el,sel,on){ var x=el.querySelector(sel); if(x) x.classList.toggle('lit',on); }
@@ -31556,7 +31569,7 @@ var TSISL_TEAM_ONB_V2=[
     key:'tsn4a0', re:/\/(?:lektionen\/)?dein-backoffice-bekommt-h[a-z]*nde\/?$/,
     eyebrow:'L 4.0', title:'Hände für dein <span class="ts-gold">System</span>', alt:'Claude Code und Notion Agents arbeiten im Backoffice',
     intro:
-      '<p>Dein Backoffice steht. Die Vorlage aus Modul zwei ist befüllt, die Zutaten hängen an ihren Lieferanten, und jedes Gericht rechnet seinen Wareneinsatz selbst. Bis jetzt bist aber du derjenige, der jede neue Zahl einträgt, jede Auswertung zusammensucht und jeden Preis nachzieht.</p>'+
+      '<p>Dein Backoffice steht. Die Vorlage aus Modul zwei ist befüllt, die Zutaten hängen an ihren Lieferanten, und jedes Gericht rechnet seinen Wareneinsatz selbst. Bis jetzt bist aber du derjenige, der jede neue Zahl einträgt und jeden Preis nachzieht.</p>'+
       '<p>In diesem Modul bekommt dein System <b>Hände</b>. Claude Code liest und pflegt deine Datenbanken, Notion Agents erledigen Vorarbeit im Hintergrund, und Automationen übernehmen, was immer gleich abläuft. Du entscheidest weiterhin. Was sich ändert, ist deine Rolle am Rechner: Du prüfst, was vorbereitet wurde, und gibst es frei.</p>',
     anim:{
       id:'tsn4a0anim', eyebrow:'Drei Helfer, ein System', title:'Dein Backoffice, drei <span class="g">Hände</span>.',
@@ -31564,22 +31577,22 @@ var TSISL_TEAM_ONB_V2=[
       html:html, css:css, settle:1600,
       beats:[
         {t:200, s:1, cap:'Das ist dein Backoffice aus Modul zwei. Lieferanten, Inventur, Zutaten, Rezepturen und Gerichte hängen aneinander, und die Formeln rechnen jede Änderung von selbst weiter.'},
-        {t:3000, s:2, cap:'Darunter stehen die drei Helfer aus diesem Modul. Jeder arbeitet auf seine Art, und jeder hat seine eigene Stelle im System.'},
+        {t:3000, s:1, cap:'Darunter stehen die drei Helfer aus diesem Modul. Jeder arbeitet auf seine Art, und jeder hat seine eigene Stelle im System.'},
         {t:5600, s:3, cap:'<b>Claude Code</b> holt, was von außen kommt. Der Lieferschein als PDF wird zu neuen Preisen in deiner Inventur, sobald du die Vorschau freigegeben hast.'},
         {t:8600, s:4, cap:'Ab hier rechnet dein System selbst weiter. Die Formeln aus Modul zwei ziehen den neuen Einkaufspreis bis in jedes Gericht durch.'},
         {t:11400, s:5, cap:'<b>Ein Notion Agent</b> arbeitet im Hintergrund, auch wenn du schläfst. Legst du eine neue Rezeptur an, schreibt er einen ersten Vorschlag und markiert ihn als ungeprüft.'},
         {t:14400, s:6, cap:'<b>Eine Automation</b> macht jedes Mal exakt dasselbe. Wechselt ein Gericht auf die Karte, setzt sie das Datum, ohne KI und ohne Kosten je Durchlauf.'},
         {t:17400, s:7, cap:'Und du? Du bekommst Vorschauen, Vorschläge und Berichte, und du entscheidest, was davon ins System geht.'}
       ],
-      reset:function(el){ ['.m0','.m1','.m2','.m3','.m4','.c0','.c1','.c2'].forEach(function(s){ lit(el,s,false); }); },
+      reset:function(el){ ['.m0','.m1','.m2','.m3','.m4','.c0','.c1','.c2','.you'].forEach(function(s){ lit(el,s,false); }); el.querySelector('.you').classList.remove('on'); },
       onBeat:function(el,i,T){
-        if(i===2){ lit(el,'.c0',true); T.at(700,function(){ lit(el,'.m1',true); }); }
+        if(i===2){ lit(el,'.c0',true); T.at(700,function(){ lit(el,'.m0',true); lit(el,'.m1',true); }); }
         if(i===3){ T.at(0,function(){ lit(el,'.m2',true); }); T.at(450,function(){ lit(el,'.m3',true); }); T.at(900,function(){ lit(el,'.m4',true); }); }
         if(i===4){ lit(el,'.c1',true); }
         if(i===5){ lit(el,'.c2',true); }
-        if(i===6){ lit(el,'.m0',true); }
+        if(i===6){ el.querySelector('.you').classList.add('on'); }
       },
-      final:function(el){ ['.m0','.m1','.m2','.m3','.m4','.c0','.c1','.c2'].forEach(function(s){ lit(el,s,true); }); }
+      final:function(el){ ['.m0','.m1','.m2','.m3','.m4','.c0','.c1','.c2'].forEach(function(s){ lit(el,s,true); }); el.querySelector('.you').classList.add('on'); }
     },
     secs:[
       {id:'tsn4a0-was', html:
@@ -31598,7 +31611,7 @@ var TSISL_TEAM_ONB_V2=[
         '<h3>Was du für dieses Modul <span class="g">brauchst</span></h3>'+
         '<p class="lead">Modul vier baut auf zwei Dingen auf, die du schon hast. Wenn eines davon fehlt, holst du es zuerst nach, weil jede Lektion hier darauf zurückgreift.</p>'+
         '<table class="tsn4-tbl"><tr><th>Was</th><th>Woher</th><th>Wofür</th></tr>'+
-          '<tr><td><b>Deine befüllte Backoffice-Vorlage</b></td><td>Modul zwei</td><td>Claude arbeitet mit genau dieser Vorlage. Je vollständiger sie ist, desto besser die Antworten.</td></tr>'+
+          '<tr><td><b>Deine befüllte Backoffice-Vorlage</b></td><td>Modul zwei</td><td>Claude arbeitet mit dieser Vorlage. Je vollständiger sie ist, desto besser die Antworten.</td></tr>'+
           '<tr><td><b>Claude Code mit deiner CLAUDE.md</b></td><td>Modul drei</td><td>Hier legen wir einen eigenen Ordner für dein Backoffice an und schreiben die Regeln in sein Briefing.</td></tr>'+
           '<tr><td><b>Ein Notion-Tarif</b></td><td>notion.com</td><td>Verbinden und auswerten geht mit jedem Tarif. Datenbank-Automationen brauchen mindestens Plus, Notion Agents den Business-Tarif.</td></tr>'+
           '<tr><td><b>Ein Claude-Tarif</b></td><td>Modul drei</td><td>Claude Code und die zeitgesteuerten Aufgaben aus Lektion acht laufen ab dem Pro-Tarif.</td></tr>'+
@@ -31606,7 +31619,7 @@ var TSISL_TEAM_ONB_V2=[
         '<p class="tsn4-note">Stand November 2026, geprüft auf notion.com/pricing und in der Claude-Code-Dokumentation. Die aktuellen Preise der Claude-Tarife stehen in Modul drei.</p>'+
         '<h4>Wie dieses Modul <span class="g">aufgebaut ist</span>.</h4>'+
         '<p>Wir gehen in der Reihenfolge, in der du dem System Schritt für Schritt mehr zutraust. Zuerst verbinden wir Claude mit Notion und bringen ihm deine Vorlage bei. Dann lesen wir nur, und erst danach lassen wir schreiben, mit einer Vorschau vor jeder Änderung. Am Ende kommen die Helfer, die ohne dich laufen, und eine Regel, mit der du jede neue Idee dem richtigen Werkzeug zuordnest.</p>'+
-        '<ul class="tsn4-ul"><li><b>Lektion 1 und 2:</b> anschließen und die Systemkarte anlegen</li><li><b>Lektion 3 bis 5:</b> befragen, sicher schreiben, Lieferscheine einpflegen</li><li><b>Lektion 6 bis 8:</b> Notion Agents, Automationen und zeitgesteuerte Berichte</li><li><b>Lektion 9:</b> wer was macht, was es kostet, dein Wochenplan</li></ul>'
+        '<ul class="tsn4-ul"><li><b>Lektion 1 und 2</b>: anschließen und die Systemkarte anlegen</li><li><b>Lektion 3 bis 5</b>: befragen, sicher schreiben, Lieferscheine einpflegen</li><li><b>Lektion 6 bis 8</b>: Notion Agents, Automationen und zeitgesteuerte Berichte</li><li><b>Lektion 9</b>: wer was macht, was es kostet, dein Wochenplan</li></ul>'
       }
     ],
     emp:{ id:'tsn4a0emp', kind:'Einrichtung', animTitle:'Bevor du', animGold:'loslegst',
@@ -31658,23 +31671,23 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a1anim .tl .pr{color:#c7b489}
   #tsn4a1anim .st1 .c{display:none}
   #tsn4a1anim.done .st1 .w{display:none}#tsn4a1anim.done .st1 .c{display:inline}
-  #tsn4a1anim .st1 .w{color:#e9b44c}
+  #tsn4a1anim .st1 .w{color:#c7b489}
   #tsn4a1anim .lg{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 20px;gap:12px}
   #tsn4a1anim .nlogo{width:40px;height:40px;border-radius:9px;background:#fff;color:#05060b;font:700 22px/40px Georgia,serif}
   #tsn4a1anim .lgt{font-size:13px;line-height:1.5;color:#fff}
   #tsn4a1anim .ws{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.86)}
   #tsn4a1anim .ws b{color:#fff;font-weight:600}
-  #tsn4a1anim .btn{width:100%;height:36px;border-radius:9px;background:#c7b489;color:#05060b;font:700 13px/36px ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .4s ease}
+  #tsn4a1anim .btn{width:100%;height:36px;border-radius:9px;background:#c7b489;color:#05060b;font:700 13px/36px ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .4s cubic-bezier(.16,1,.3,1)}
   #tsn4a1anim.press .btn{transform:scale(.95);box-shadow:0 0 0 6px rgba(199,180,137,.2)}
-  #tsn4a1anim .lgf{font-size:11px;line-height:1.45;color:rgba(255,255,255,.7)}
+  #tsn4a1anim .lgf{font-size:11px;line-height:1.45;color:rgba(255,255,255,.86)}
   #tsn4a1anim .side{padding:12px 12px;display:flex;flex-direction:column;gap:7px}
   #tsn4a1anim .pg{display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;border-radius:8px;font-size:12.5px;color:rgba(255,255,255,.55);border:1px solid transparent;transition:all .5s ${N.EASE}}
-  #tsn4a1anim .pg .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .5s ease}
+  #tsn4a1anim .pg .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a1anim .pg em{margin-left:auto;font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#e35d76}
   #tsn4a1anim .pg.y.lit{color:#fff;border-color:rgba(199,180,137,.35);background:rgba(199,180,137,.08)}
   #tsn4a1anim .pg.y.lit .dot{background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.8)}
   #tsn4a1anim .pg.n{border-color:rgba(227,37,82,.25)}
-  #tsn4a1anim .rule{margin:auto 12px 14px;padding:9px 10px;border-radius:9px;border:1px solid rgba(227,37,82,.35);font-size:11.5px;line-height:1.4;text-align:center;color:#f3c2cb}
+  #tsn4a1anim .rule{margin:auto 12px 14px;padding:9px 10px;border-radius:9px;border:1px solid rgba(227,37,82,.35);font-size:11.5px;line-height:1.4;text-align:center;color:#fff}
   `;
   function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('lit', i<n); } }
   N.page({
@@ -31682,7 +31695,7 @@ var TSISL_TEAM_ONB_V2=[
     eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
     intro:
       '<p>Claude Code lebt auf deinem Rechner und kennt von sich aus nur den Ordner, in dem du es startest. Deine Backoffice-Vorlage liegt in der Cloud bei Notion. Damit die beiden miteinander reden, hängen wir einen Anschluss ein, und dafür gibt es von Notion einen fertigen Weg.</p>'+
-      '<p>In dieser Lektion stellen wir die Verbindung her, melden uns einmal an und prüfen, ob die Leitung steht. Und wir klären die Frage, die vor allem anderen kommt: <b>Was darf Claude in deinem Notion sehen?</b> Die Antwort ist einfacher, als viele denken, und sie hat Folgen dafür, wie du deinen Workspace ordnest.</p>',
+      '<p>In dieser Lektion stellen wir die Verbindung her, melden uns einmal an und prüfen, ob die Leitung steht. Und wir klären die Frage, die vor allem anderen kommt: <b>Was darf Claude in deinem Notion sehen</b>? Die Antwort ist einfacher, als viele denken, und sie hat Folgen dafür, wie du deinen Workspace ordnest.</p>',
     anim:{
       id:'tsn4a1anim', eyebrow:'Die Verbindung', title:'Deine Rechte sind <span class="g">seine Rechte</span>.',
       sub:'Vom Terminal über die Anmeldung bis in deinen Workspace. Am Ende sieht Claude genau das, was du mit deinem Konto auch siehst.',
@@ -31713,7 +31726,7 @@ var TSISL_TEAM_ONB_V2=[
         '<h4>Zwei weitere Wege zum <span class="g">selben Anschluss</span>.</h4>'+
         '<div class="tsn4-cards c2">'+
           '<div class="tsn4-card"><span class="k">Für Claude Code</span><div class="n">Das Notion-Plugin</div><hr><p>Notion bietet ein eigenes Plugin an. Es hängt denselben Anschluss ein und bringt fertige Befehle für die Suche und für neue Datenbankeinträge mit. Wenn du das nutzt, brauchst du die Zeile oben nicht.</p><p class="f">Danach Claude Code einmal neu starten.</p></div>'+
-          '<div class="tsn4-card"><span class="k">Für die Claude-App</span><div class="n">Die Verbindung in den Einstellungen</div><hr><p>In der Claude-App und auf claude.ai verbindest du Notion in den Einstellungen bei den Verbindungen zu anderen Diensten. Diese Verbindung brauchst du in Lektion acht, weil zeitgesteuerte Aufgaben in der Cloud laufen und dort nicht auf deinen Rechner zugreifen.</p></div>'+
+          '<div class="tsn4-card"><span class="k">Für die Claude-App</span><div class="n">Die Verbindung in den Einstellungen</div><hr><p>In der Claude-App und auf claude.ai verbindest du Notion unter <b>Anpassen</b> bei den <b>Konnektoren</b>. Diese Verbindung brauchst du in Lektion acht, weil zeitgesteuerte Aufgaben in der Cloud laufen und dort nicht auf deinen Rechner zugreifen.</p></div>'+
         '</div>'+
         N.cmd('Notion-Plugin in Claude Code', '/plugin marketplace add makenotion/claude-code-notion-plugin\n/plugin install notion-workspace-plugin@notion-plugin-marketplace')+
         '<p class="tsn4-note">Alle Befehle auf dieser Seite haben wir am 01.11.2026 mit Claude Code 2.1.245 ausgeführt. Quelle: developers.notion.com, Abschnitt Notion MCP.</p>'
@@ -31788,25 +31801,25 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a2anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
   #tsn4a2anim .grid{flex:1;display:flex;flex-direction:column;position:relative}
   #tsn4a2anim .trh,#tsn4a2anim .tr{display:grid;grid-template-columns:1.25fr 1.15fr .95fr .8fr .7fr .95fr}
-  #tsn4a2anim .th{position:relative;padding:10px 10px 30px;font:600 10.5px/1.2 ${N.SANS};color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.08);transition:background .6s ease}
+  #tsn4a2anim .th{position:relative;padding:10px 10px 30px;font:600 10.5px/1.2 ${N.SANS};color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.08);transition:background .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a2anim .tg{position:absolute;left:10px;bottom:8px;font:700 8.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:4px 6px;border-radius:5px}
   #tsn4a2anim .in .tg{color:#05060b;background:#c7b489}
   #tsn4a2anim .rel .tg{color:#efe6d2;border:1px solid rgba(199,180,137,.6)}
-  #tsn4a2anim .calc .tg{color:#a9bde0;border:1px solid rgba(169,189,224,.5)}
-  #tsn4a2anim .td{padding:15px 10px;font-size:12px;color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;transition:background .6s ease,color .6s ease}
+  #tsn4a2anim .calc .tg{color:#fff;border:1px solid rgba(255,255,255,.4)}
+  #tsn4a2anim .td{padding:15px 10px;font-size:12px;color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;transition:background .6s cubic-bezier(.16,1,.3,1),color .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a2anim .td img{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.4)}
   #tsn4a2anim.k2 .c0,#tsn4a2anim.k2 .c2,#tsn4a2anim.k2 .c3,#tsn4a2anim.k2 .c4{background:rgba(199,180,137,.07)}
   #tsn4a2anim.k3 .c1{background:rgba(199,180,137,.04)}
-  #tsn4a2anim.k4 .td.c5{color:#a9bde0;background:rgba(169,189,224,.06)}
+  #tsn4a2anim.k4 .td.c5{color:#fff;background:rgba(255,255,255,.06)}
   #tsn4a2anim .scan{position:absolute;left:0;top:44px;width:2px;height:300px;background:linear-gradient(rgba(199,180,137,0),#efe6d2,rgba(199,180,137,0));box-shadow:0 0 16px rgba(239,230,210,.7);opacity:0}
   #tsn4a2anim.scanning .scan{animation:tsn4a2scan 3.2s cubic-bezier(.45,.05,.55,.95) 1 both}
   @keyframes tsn4a2scan{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(570px)}}
-  #tsn4a2anim .tbf{margin-top:auto;padding:9px 16px;font-size:10.5px;color:rgba(255,255,255,.62)}
+  #tsn4a2anim .tbf{margin-top:auto;padding:9px 16px;font-size:10.5px;color:rgba(255,255,255,.86)}
   #tsn4a2anim .fl{display:flex;flex-direction:column;overflow:hidden}
   #tsn4a2anim .flh{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.MONO};color:#efe6d2;display:flex;justify-content:space-between}
   #tsn4a2anim .flh span{font:600 9px/1.4 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
   #tsn4a2anim .code{padding:12px 16px;font-size:11.5px;line-height:1.75;color:rgba(255,255,255,.86)}
-  #tsn4a2anim .code .k{color:#c7b489}#tsn4a2anim .code .i{padding-left:12px}#tsn4a2anim .code .r{color:#a9bde0}#tsn4a2anim .code .sp6{margin-top:8px}
+  #tsn4a2anim .code .k{color:#c7b489}#tsn4a2anim .code .i{padding-left:12px}#tsn4a2anim .code .r{color:#d8c9ab}#tsn4a2anim .code .sp6{margin-top:8px}
   #tsn4a2anim .rd{margin:auto 14px 14px;padding:8px 10px;border-radius:9px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:11.5px;text-align:center;color:#efe6d2}
   `;
   N.page({
@@ -31851,7 +31864,7 @@ var TSISL_TEAM_ONB_V2=[
         '<p class="lead">Unter die Systemkarte kommen die Regeln, die in diesem Modul für jede Arbeit gelten. Du schreibst sie einmal hinein, und Claude liest sie bei jedem Start mit.</p>'+
         N.cmd('Abschnitt für die CLAUDE.md', '## Regeln für mein Backoffice\n- Zahlen kommen ausschließlich aus den Feldern meiner Notion-Datenbanken. Fehlt ein Wert, schreibst du „fehlt“ und nennst Datenbank und Eintrag. Du schätzt nichts und ergänzt nichts aus Erfahrungswerten.\n- Zu jeder Zahl, die du nennst, gibst du Datenbank und Eintrag an.\n- Felder, die Notion rechnet (Formel, Rollup), schreibst du nie. Du liest nur ihr Ergebnis.\n- Vor jeder Änderung zeigst du mir eine Vorschau: Datenbank, Eintrag, Feld, alter Wert, neuer Wert. Geschrieben wird erst, wenn ich „Ja, schreiben“ antworte.\n- Betrifft eine Änderung mehr als zwanzig Einträge, nennst du mir vorher die Gesamtzahl.\n- Du löschst nichts. Soll etwas weg, sagst du es mir, und ich entscheide.')+
         '<p><span class="gl">Die erste Regel ist die wichtigste.</span> Ein Sprachmodell lässt ungern eine Lücke stehen. Fehlt bei drei Zutaten der Preis, liegt es nahe, einen plausiblen Wert anzunehmen und weiterzurechnen. Eine Kalkulation auf einem geratenen Einkaufspreis ist schlimmer als gar keine, weil du ihr vertraust. Deshalb muss jede Lücke als Lücke auf dem Tisch landen.</p>'+
-        '<p><span class="gl">Die Vorschau-Regel schützt dich beim Schreiben.</span> Was sie im Alltag bedeutet und wie du sie prüfst, schauen wir uns in Lektion vier genau an. Hier legen wir nur fest, dass es sie gibt.</p>'
+        '<p><span class="gl">Die Vorschau-Regel schützt dich beim Schreiben.</span> Was sie im Alltag bedeutet und wie du sie prüfst, schauen wir uns in Lektion vier an. Hier legen wir nur fest, dass es sie gibt.</p>'
       },
       {id:'tsn4a2-rechte', html:
         '<div class="tsn4-eb">Schritt drei</div>'+
@@ -31871,7 +31884,7 @@ var TSISL_TEAM_ONB_V2=[
         '</div>'
       }
     ],
-    emp:{ id:'tsn4a2emp', kind:'Einrichtung', animTitle:'Deine Vorlage in', animGold:'drei Schritten',
+    emp:{ id:'tsn4a2emp', kind:'Einrichtung', animTitle:'Deine Vorlage in', animGold:'vier Schritten',
       steps:['Ordner öffnen','Karte schreiben lassen','Regeln einfügen','Rechte festlegen'],
       intro:'Diese Einrichtung machst du einmal, und sie zahlt sich in jeder Lektion danach aus.',
       points:[
@@ -31896,16 +31909,16 @@ var TSISL_TEAM_ONB_V2=[
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG;
   /* Beispielwerte, Wareneinsatz in Prozent. Pilz-Ravioli ohne Wert: Preis der Steinpilze fehlt. */
-  var D=[{n:'Burrata, Tomate, Basilikum',img:'g-burrata',v:24.1,o:0},{n:'Lachs auf Erbsencreme',img:'g-lachs',v:28.4,o:1},
-         {n:'Pilz-Ravioli',img:'g-pilz-ravioli',v:null,o:2},{n:'Rinderfilet, Spargel',img:'g-rinderfilet',v:34.2,o:3},{n:'Jakobsmuscheln',img:'g-jakobsmuscheln',v:31.5,o:4}];
+  var D=[{n:'Burrata, Tomate, Basilikum',img:'g-burrata',v:24.1,e:'Eintrag 4'},{n:'Lachs auf Erbsencreme',img:'g-lachs',v:28.4,e:'Eintrag 11'},
+         {n:'Pilz-Ravioli',img:'g-pilz-ravioli',v:null,e:'Eintrag 7'},{n:'Rinderfilet, Spargel',img:'g-rinderfilet',v:34.2,e:'Eintrag 15'},{n:'Jakobsmuscheln',img:'g-jakobsmuscheln',v:31.5,e:'Eintrag 9'}];
   var SORT=[3,4,1,0,2];   /* Zielreihenfolge nach Wert absteigend, Luecke ans Ende */
   var rows=D.map(function(d,i){
     return '<div class="rw" data-i="'+i+'" style="--r:'+i+'"><div class="ri cardx"><span class="md"><img src="'+I+d.img+'.webp" alt="" loading="lazy"></span>'+
-      '<span class="nm">'+d.n+'<em class="src">DB XI · Gerichte &amp; Getränke</em></span>'+
+      '<span class="nm"><span class="nt2">'+d.n+'</span><em class="src">Beleg: '+d.e+'</em></span>'+
       (d.v==null?'<span class="miss">fehlt: Preis Steinpilze</span>':'<span class="bar"><i style="--w:'+(d.v/40*100)+'%"></i></span><b class="val" data-v="'+d.v+'">'+N.pct(d.v)+'</b>')+'</div></div>';
   }).join('');
   var html='<div class="st flow">'+
-    '<div class="q cardx" data-s="1"><span class="qk">Deine Frage</span><span class="qt mono">Welche Gerichte haben den höchsten Wareneinsatz in Prozent? Nimm die Werte nur aus Notion.</span></div>'+
+    '<div class="q cardx" data-s="1"><span class="qk">Deine Frage an DB XI · Gerichte &amp; Getränke</span><span class="qt mono">Welche Gerichte haben den höchsten Wareneinsatz in Prozent? Nimm die Werte nur aus Notion.</span></div>'+
     '<div class="list" data-s="1">'+rows+'</div></div>';
   var css=`
   #tsn4a3anim .st.flow{max-width:760px;margin:0 auto}
@@ -31917,14 +31930,15 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a3anim .ri{height:62px;display:flex;align-items:center;gap:14px;padding:0 18px 0 10px}
   #tsn4a3anim .ri .md{width:46px;height:46px;flex:0 0 46px;display:block}
   #tsn4a3anim .nm{flex:1;display:flex;flex-direction:column;gap:4px;font:600 14px/1.2 ${N.SANS};color:#fff;min-width:0}
-  #tsn4a3anim .src{font-style:normal;font:600 9.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;color:#c7b489;opacity:0;transition:opacity .6s ease}
+  #tsn4a3anim .nt2,#tsn4a3anim .src{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #tsn4a3anim .src{font-style:normal;font:600 9.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;color:#c7b489;opacity:0;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a3anim.k5 .src{opacity:1}
   #tsn4a3anim .bar{width:150px;height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
   #tsn4a3anim .bar i{display:block;height:100%;width:var(--w);border-radius:3px;background:linear-gradient(90deg,#d8c9ab,#c7b489);transition:width 1.1s ${N.EASE}}
   #tsn4a3anim.js:not(.k2) .bar i{width:0}
   #tsn4a3anim .val{width:72px;text-align:right;font:700 15px/1 ${N.SANS};color:#efe6d2;font-variant-numeric:tabular-nums}
   #tsn4a3anim.js:not(.k2) .val{opacity:0}
-  #tsn4a3anim .miss{padding:6px 10px;border-radius:8px;border:1px solid rgba(227,37,82,.55);background:rgba(227,37,82,.08);font:600 11.5px/1 ${N.SANS};color:#f3c2cb;transition:opacity .6s ease,box-shadow .6s ease}
+  #tsn4a3anim .miss{padding:6px 10px;border-radius:8px;border:1px solid rgba(227,37,82,.55);background:rgba(227,37,82,.08);font:600 11.5px/1 ${N.SANS};color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1),box-shadow .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a3anim.js:not(.k4) .miss{opacity:0}
   #tsn4a3anim.k4 .miss{box-shadow:0 0 22px rgba(227,37,82,.25)}
   #tsn4a3anim .rw.top .ri{border-color:rgba(199,180,137,.62);background:linear-gradient(rgba(199,180,137,.075),rgba(199,180,137,.075)),#05060b}
@@ -31941,7 +31955,7 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Dein Backoffice weiß eine Menge über deinen Betrieb. Es kennt den Preis jeder Zutat, ihren Anteil an jeder Portion, den Wareneinsatz jedes Gerichts und den Lieferanten dahinter. Nur liegt dieses Wissen über viele Datenbanken verteilt, und die Frage, die dich wirklich interessiert, steht in keiner einzelnen Ansicht.</p>'+
       '<p>In dieser Lektion stellen wir diese Fragen in normaler Sprache. Wir lesen nur, wir ändern nichts. Und wir fragen so, dass jede Zahl, die zurückkommt, <b>belegt</b> ist und keine einzige geschätzt.</p>',
     anim:{
-      id:'tsn4a3anim', eyebrow:'Eine Frage, eine Antwort', title:'Die Karte <span class="g">sortiert sich</span>.',
+      id:'tsn4a3anim', flow:true, eyebrow:'Eine Frage, eine Antwort', title:'Die Karte <span class="g">sortiert sich</span>.',
       sub:'Du stellst eine Frage in normaler Sprache. Claude liest die fertigen Werte aus deinen Gerichten, ordnet sie und meldet Lücken, statt sie zu füllen.',
       html:html, css:css, note:'Beispielwerte',
       beats:[
@@ -32010,11 +32024,11 @@ var TSISL_TEAM_ONB_V2=[
       }
     ],
     emp:{ id:'tsn4a3emp', kind:'Nutzung', animTitle:'Deine', animGold:'Fragerunde',
-      steps:['Datenbank nennen','Form vorgeben','Nur lesen','Eine Zahl prüfen'],
+      steps:['Fragen sammeln','Festen Tag wählen','Nur lesen','Eine Zahl prüfen'],
       intro:'So machst du aus einzelnen Fragen eine feste Gewohnheit, ohne dass sie dich Zeit kostet.',
       points:[
         'Sammle die Fragen, die du wirklich brauchst, in einer <b>Notiz</b>. Die vier Fragen oben sind ein guter Anfang.',
-        'Gib bei jeder Frage <b>Datenbank und Form</b> an, dann kommt die Antwort beim ersten Mal so, wie du sie brauchst.',
+        'Stell sie an einem <b>festen Tag</b>, zum Beispiel montags vor dem Service. In Lektion acht lässt du sie dann von allein laufen.',
         'Schließ jede Auswertung mit <b>„Ändere nichts“</b> ab, solange du nur liest.',
         'Prüf bei jeder neuen Frage <b>eine Zahl</b> von Hand in Notion nach. Nach ein paar Wochen weißt du, welchen Antworten du ohne Gegenprobe trauen kannst.'
       ]
@@ -32035,14 +32049,14 @@ var TSISL_TEAM_ONB_V2=[
   var I=N.IMG, P=function(x,y,w,h){ return N.pos(x,y,w,h,400); };
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/400">'+
     '<svg class="lines" viewBox="0 0 1000 400" preserveAspectRatio="none">'+
-      '<path class="ln" pathLength="1" data-s="1" d="M205 200 H232"/><path class="ln" pathLength="1" data-s="1" d="M405 200 H432"/><path class="ln" pathLength="1" data-s="1" d="M605 200 H632"/>'+
-      '<path class="ln dash" pathLength="1" data-s="5" d="M902 290 C902 352 722 352 722 292"/><path class="sp" pathLength="1" d="M902 290 C902 352 722 352 722 292"/>'+
+      '<path class="ln" pathLength="1" data-s="1" d="M205 200 H232"/><path class="ln" pathLength="1" data-s="1" d="M397 200 H432"/><path class="ln" pathLength="1" data-s="1" d="M597 200 H632"/><path class="ln" pathLength="1" data-s="1" d="M797 200 H832"/>'+
+      '<path class="ln dash" pathLength="1" data-s="5" d="M914 342 C914 388 714 388 714 342"/><path class="sp" pathLength="1" d="M914 342 C914 388 714 388 714 342"/>'+
     '</svg>'+
     '<div class="cardx src" data-s="1" style="'+P(20,120,185,160)+'"><span class="md"><img src="'+I+'z-tomate.webp" alt=""></span><span class="k">Vorschlag von Claude</span><span class="t">Tomaten, Einkaufspreis</span><span class="v mono">2,40 € → 2,65 €</span></div>'+
-    '<div class="cardx gt g1" data-s="1" style="'+P(232,60,173,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Einkaufspreis</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
-    '<div class="cardx gt g2" data-s="1" style="'+P(432,60,173,280)+'"><span class="n">02</span><span class="h">Dein Okay</span><div class="yes">Ja, schreiben</div><span class="f">Claude Code fragt zusätzlich vor jedem Schreibzugriff.</span></div>'+
-    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,180,230)+'"><span class="n">N</span><span class="h">Inventurliste</span><div class="nr"><span>Tomaten</span><b class="nv">2,40 €</b></div><span class="f">Geschrieben wird erst jetzt.</span></div>'+
-    '<div class="cardx gt g4" data-s="1" style="'+P(832,60,150,230)+'"><span class="n">03</span><span class="h">Verlauf</span><div class="clk"><i></i></div><span class="f">Jede Änderung lässt sich zurückholen.</span></div>'+
+    '<div class="cardx gt g1" data-s="1" style="'+P(232,60,165,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Einkaufspreis</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
+    '<div class="cardx gt g2" data-s="1" style="'+P(432,60,165,280)+'"><span class="n">02</span><span class="h">Dein Okay</span><div class="yes">Ja, schreiben</div><span class="f">Claude Code fragt zusätzlich vor jedem Schreibzugriff.</span></div>'+
+    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><span class="n">N</span><span class="h">Inventurliste</span><div class="nr"><span>Tomaten</span><b class="nv">2,40 €</b></div><span class="f">Geschrieben wird erst jetzt.</span></div>'+
+    '<div class="cardx gt g4" data-s="1" style="'+P(832,60,165,280)+'"><span class="n">03</span><span class="h">Verlauf</span><div class="clk"><i></i></div><span class="f">Jede Änderung lässt sich zurückholen.</span></div>'+
     '<div class="mv" style="'+P(0,0,1000,400)+'"><span class="tok mono">2,65 €</span></div>'+
   '</div></div>';
   var css=`
@@ -32054,13 +32068,13 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a4anim .gt{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 14px;text-align:center}
   #tsn4a4anim .gt .n{width:30px;height:30px;border-radius:50%;border:1px solid rgba(199,180,137,.55);font:700 11px/28px ${N.SANS};color:#c7b489}
   #tsn4a4anim .gt .h{font-family:${N.DISP};font-weight:600;font-size:17px;color:#fff}
-  #tsn4a4anim .gt .f{margin-top:auto;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.8)}
+  #tsn4a4anim .gt .f{margin-top:auto;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.86)}
   #tsn4a4anim .pv{width:100%;display:flex;flex-direction:column;gap:6px;font-size:11.5px}
   #tsn4a4anim .pv div{display:flex;justify-content:space-between;padding:6px 8px;border-radius:7px;background:rgba(255,255,255,.04)}
-  #tsn4a4anim .pv span{color:rgba(255,255,255,.62)}#tsn4a4anim .pv b{color:#efe6d2}#tsn4a4anim .pv s{color:rgba(255,255,255,.55)}
-  #tsn4a4anim .yes{margin-top:14px;padding:10px 14px;border-radius:10px;background:#c7b489;color:#05060b;font:700 13px/1 ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .5s ease}
+  #tsn4a4anim .pv span{color:rgba(255,255,255,.62)}#tsn4a4anim .pv b{color:#efe6d2}#tsn4a4anim .pv s{color:rgba(255,255,255,.62)}
+  #tsn4a4anim .yes{margin-top:14px;padding:10px 14px;border-radius:10px;background:#c7b489;color:#05060b;font:700 13px/1 ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a4anim.press .yes{transform:scale(.94);box-shadow:0 0 0 7px rgba(199,180,137,.2)}
-  #tsn4a4anim .nr{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#fff;transition:background .6s ease,border-color .6s ease}
+  #tsn4a4anim .nr{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#fff;transition:background .6s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a4anim .nr b{color:#efe6d2;font-variant-numeric:tabular-nums}
   #tsn4a4anim.k4 .nr{background:rgba(143,203,170,.1);border-color:rgba(143,203,170,.5)}
   #tsn4a4anim .row .n{font-family:Georgia,serif;background:#fff;color:#05060b;border:0}
@@ -32068,7 +32082,7 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a4anim .clk i{position:absolute;left:50%;top:50%;width:2px;height:24px;margin-left:-1px;background:#c7b489;transform-origin:50% 0;transform:rotate(180deg);transition:transform 1.4s ${N.EASE}}
   #tsn4a4anim.k5 .clk i{transform:rotate(-60deg)}
   #tsn4a4anim .mv{pointer-events:none;z-index:5;transform:translateX(var(--x,7%));transition:transform 1.3s ${N.EASE}}
-  #tsn4a4anim .tok{position:absolute;left:0;top:47%;padding:5px 9px;border-radius:999px;background:#efe6d2;color:#05060b;font-size:11.5px;font-weight:700;box-shadow:0 0 22px rgba(239,230,210,.55);opacity:0;transition:opacity .5s ease}
+  #tsn4a4anim .tok{position:absolute;left:0;top:47%;padding:5px 9px;border-radius:999px;background:#efe6d2;color:#05060b;font-size:11.5px;font-weight:700;box-shadow:0 0 22px rgba(239,230,210,.55);opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a4anim.moving .tok{opacity:1}
   `;
   function gl(el,n){ for(var i=1;i<=4;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('lit', n.indexOf(i)>-1); } }
@@ -32085,17 +32099,17 @@ var TSISL_TEAM_ONB_V2=[
       html:html, css:css, note:'Beispielwerte',
       beats:[
         {t:200, s:1, cap:'Claude schlägt eine Änderung vor: Laut Lieferschein steigt der Einkaufspreis der Tomaten von 2,40 auf 2,65 Euro je Kilo.'},
-        {t:2600, s:1, cap:'<b>Erstes Netz, die Vorschau.</b> Claude zeigt dir Datenbank, Eintrag, Feld, alten und neuen Wert. Noch ist nichts passiert.'},
-        {t:5400, s:1, cap:'<b>Zweites Netz, dein Okay.</b> Geschrieben wird erst nach „Ja, schreiben“, und Claude Code fragt dich zusätzlich, bevor es das Notion-Werkzeug benutzt.'},
+        {t:2600, s:1, cap:'<b>Erstes Netz, die Vorschau</b>. Claude zeigt dir Datenbank, Eintrag, Feld, alten und neuen Wert. Noch ist nichts passiert.'},
+        {t:5400, s:1, cap:'<b>Zweites Netz, dein Okay</b>. Geschrieben wird erst nach „Ja, schreiben“, und Claude Code fragt dich zusätzlich, bevor es das Notion-Werkzeug benutzt.'},
         {t:8200, s:1, cap:'Erst jetzt landet der neue Preis in deiner Inventurliste, und deine Formeln rechnen ihn bis ins Gericht weiter.'},
-        {t:11000, s:5, cap:'<b>Drittes Netz, der Verlauf.</b> Notion merkt sich jede Änderung, auch die von Claude, und du holst jeden früheren Stand mit ein paar Klicks zurück.'}
+        {t:11000, s:5, cap:'<b>Drittes Netz, der Verlauf</b>. Notion merkt sich jede Änderung, auch die von Claude, und du holst jeden früheren Stand mit ein paar Klicks zurück.'}
       ],
       reset:function(el){ gl(el,[]); el.classList.remove('k4','k5','press','moving'); to(el,'2%'); el.querySelector('.nv').textContent='2,40 €'; },
       onBeat:function(el,i,T,jump){
         if(i===0){ el.classList.add('moving'); to(el,'8%'); }
-        if(i===1){ el.classList.add('moving'); to(el,'27%'); gl(el,[1]); }
-        if(i===2){ el.classList.add('moving'); to(el,'47%'); gl(el,[1,2]); T.at(jump?0:1300,function(){ el.classList.add('press'); }); T.at(jump?0:1700,function(){ el.classList.remove('press'); }); }
-        if(i===3){ el.classList.add('moving'); to(el,'67.5%'); gl(el,[1,2,3]); T.at(jump?0:1200,function(){ el.classList.add('k4'); el.querySelector('.nv').textContent='2,65 €'; }); }
+        if(i===1){ el.classList.add('moving'); to(el,'28.4%'); gl(el,[1]); }
+        if(i===2){ el.classList.add('moving'); to(el,'48.4%'); gl(el,[1,2]); T.at(jump?0:1300,function(){ el.classList.add('press'); }); T.at(jump?0:1700,function(){ el.classList.remove('press'); }); }
+        if(i===3){ el.classList.add('moving'); to(el,'68.4%'); gl(el,[1,2,3]); T.at(jump?0:1200,function(){ el.classList.add('k4'); el.querySelector('.nv').textContent='2,65 €'; }); }
         if(i===4){ gl(el,[1,2,3,4]); el.classList.add('k5'); el.classList.remove('moving'); }
       },
       final:function(el){ gl(el,[1,2,3,4]); el.classList.add('k4','k5'); el.classList.remove('moving'); el.querySelector('.nv').textContent='2,65 €'; }
@@ -32180,8 +32194,8 @@ var TSISL_TEAM_ONB_V2=[
     '<div class="psum">Preise netto je Einheit</div><i class="scan"></i></div>';
   var INV=[['Tomaten','2,40 €','2,65 €','up'],['Basilikum','1,90 €','1,90 €','same'],['Parmigiano Reggiano','','offen: Name auf dem Schein anders','miss'],['Zitronen','2,80 €','3,10 €','up']];
   var inv='<div class="cardx iv" data-s="1" style="'+P(288,30,692,238)+'"><div class="ivh"><span class="nt">N</span>DB 0 · Inventurliste <em class="ok2">Freigegeben</em></div>'+
-    INV.map(function(r,i){ return '<div class="ir r'+i+' '+r[3]+'"><span class="a">'+r[0]+'</span>'+(r[3]==='miss'?'<span class="m">'+r[2]+'</span>':r[3]==='same'?'<b class="sv">'+r[1]+'</b><span class="un">unverändert</span>':'<span class="o">'+r[1]+'</span><span class="ar">→</span><b class="nw">'+r[2]+'</b>')+'</div>'; }).join('')+'</div>';
-  var CH=[{x:400,img:I+'z-tomate.webp',l:'Zutat Tomaten',v:'2,40 € je kg',v2:'2,65 € je kg'},{x:600,img:R+'zutaten.webp',l:'Portion 120 g',v:'0,29 €',v2:'0,32 €'},{x:800,img:I+'g-burrata.webp',l:'Burrata',v:'24,1 % Wareneinsatz',v2:'24,3 % Wareneinsatz'}];
+    INV.map(function(r,i){ return '<div class="ir r'+i+' '+r[3]+'"><span class="a">'+r[0]+'</span>'+(r[3]==='miss'?'<span class="m">'+r[2]+'</span>':r[3]==='same'?'<b class="sv">'+r[1]+'</b>':'<span class="o">'+r[1]+'</span><span class="ar">→</span><b class="nw">'+r[2]+'</b>')+'</div>'; }).join('')+'</div>';
+  var CH=[{x:400,img:I+'z-tomate.webp',l:'Zutat',v:'2,40 € je kg',v2:'2,65 € je kg'},{x:600,img:R+'zutaten.webp',l:'Portion 120 g',v:'0,29 €',v2:'0,32 €'},{x:800,img:I+'g-burrata.webp',l:'Burrata',v:'24,1 % Wareneinsatz',v2:'24,3 % Wareneinsatz'}];
   var chain=CH.map(function(c,i){ return '<div class="md br ch c'+i+'" data-s="1" style="'+P(c.x-46,300,92,92)+'"><img src="'+c.img+'" alt=""></div><div class="lbl" data-s="1" style="'+P(c.x-90,400,180,14)+'">'+c.l+'</div><div class="cv cvv'+i+'" data-s="1" style="'+P(c.x-90,420,180,22)+'"><span class="o">'+c.v+'</span><span class="n">'+c.v2+'</span></div>'; }).join('');
   var lines='<svg class="lines" viewBox="0 0 1000 470" preserveAspectRatio="none">'+
     '<path class="ln" pathLength="1" data-s="1" d="M252 150 H286"/><path class="sp" pathLength="1" d="M252 150 H286"/>'+
@@ -32190,26 +32204,26 @@ var TSISL_TEAM_ONB_V2=[
   var side='<div class="cardx sm" data-s="1" style="'+P(20,300,230,150)+'"><span class="k">Ergebnis</span><div class="sr"><b class="c1n">0</b><span>Preise neu</span></div><div class="sr"><b class="c2n">0</b><span>unverändert</span></div><div class="sr miss2"><b class="c3n">0</b><span>zu klären</span></div></div>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/470">'+lines+paper+inv+side+chain+'</div></div>';
   var css=`
-  #tsn4a5anim .paper{border-radius:7px;background:linear-gradient(#f5eedc,#e9dfc6);box-shadow:0 26px 50px -24px rgba(0,0,0,.95);padding:18px 16px;color:#1c1b17;overflow:hidden}
-  #tsn4a5anim .ph{display:flex;flex-direction:column;gap:3px;padding-bottom:12px;margin-bottom:10px;border-bottom:1px dashed rgba(28,27,23,.35)}
-  #tsn4a5anim .ph b{font:700 15px/1.2 Georgia,serif}#tsn4a5anim .ph span{font:600 9px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(28,27,23,.6)}
-  #tsn4a5anim .pl{display:grid;grid-template-columns:1fr auto auto;gap:8px;font:500 11.5px/1.4 ${N.MONO};padding:7px 4px;border-radius:4px;transition:background .5s ease}
+  #tsn4a5anim .paper{border-radius:7px;background:linear-gradient(#efe6d2,#d8c9ab);box-shadow:0 26px 50px -24px rgba(0,0,0,.95);padding:18px 16px;color:#05060b;overflow:hidden}
+  #tsn4a5anim .ph{display:flex;flex-direction:column;gap:3px;padding-bottom:12px;margin-bottom:10px;border-bottom:1px dashed rgba(5,6,11,.35)}
+  #tsn4a5anim .ph b{font:700 15px/1.2 Georgia,serif}#tsn4a5anim .ph span{font:600 9px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(5,6,11,.7)}
+  #tsn4a5anim .pl{display:grid;grid-template-columns:1fr auto auto;gap:8px;font:500 11.5px/1.4 ${N.MONO};padding:7px 4px;border-radius:4px;transition:background .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a5anim .pl b{font-weight:700}
   #tsn4a5anim.k2 .pl{background:rgba(199,180,137,.22)}
-  #tsn4a5anim .psum{margin-top:14px;font:500 10px/1.4 ${N.SANS};color:rgba(28,27,23,.6)}
+  #tsn4a5anim .psum{margin-top:14px;font:500 10px/1.4 ${N.SANS};color:rgba(5,6,11,.7)}
   #tsn4a5anim .scan{position:absolute;left:0;right:0;top:0;height:2px;background:#c7b489;box-shadow:0 0 18px 3px rgba(199,180,137,.75);opacity:0}
   #tsn4a5anim.scanning .scan{animation:tsn4a5scan 2.4s cubic-bezier(.45,.05,.55,.95) 1 both}
   @keyframes tsn4a5scan{0%{opacity:0;transform:translateY(60px)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(330px)}}
   #tsn4a5anim .iv{overflow:hidden}
   #tsn4a5anim .ivh{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.SANS};color:#fff}
   #tsn4a5anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a5anim .ok2{margin-left:auto;font-style:normal;font:700 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#8FCBAA;border:1px solid rgba(143,203,170,.5);padding:4px 7px;border-radius:5px;opacity:0;transition:opacity .5s ease}
+  #tsn4a5anim .ok2{margin-left:auto;font-style:normal;font:700 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#8FCBAA;border:1px solid rgba(143,203,170,.5);padding:4px 7px;border-radius:5px;opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a5anim.k4 .ok2{opacity:1}
   #tsn4a5anim .ir{display:flex;align-items:center;gap:9px;padding:13px 16px;font-size:12.5px;color:#fff;border-bottom:1px solid rgba(255,255,255,.05)}
   #tsn4a5anim .ir .a{flex:1}#tsn4a5anim .ir .o{color:rgba(255,255,255,.62)}#tsn4a5anim .ir .ar{color:#c7b489}#tsn4a5anim .ir .nw{color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tsn4a5anim .ir .m{font-size:11px;color:#f3c2cb;padding:4px 8px;border-radius:6px;border:1px solid rgba(227,37,82,.5);background:rgba(227,37,82,.08)}
+  #tsn4a5anim .ir .m{font-size:11px;color:#fff;padding:4px 8px;border-radius:6px;border:1px solid rgba(227,37,82,.5);background:rgba(227,37,82,.08)}
   #tsn4a5anim.js:not(.k3) .ir .ar,#tsn4a5anim.js:not(.k3) .ir .nw,#tsn4a5anim.js:not(.k3) .ir .m{opacity:0}
-  #tsn4a5anim .ir .ar,#tsn4a5anim .ir .nw,#tsn4a5anim .ir .m{transition:opacity .6s ease}
+  #tsn4a5anim .ir .ar,#tsn4a5anim .ir .nw,#tsn4a5anim .ir .m{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a5anim.k3:not(.k4) .ir.up .o{text-decoration:line-through}
   #tsn4a5anim.k4 .ir.up .o,#tsn4a5anim.k4 .ir.up .ar{display:none}
   #tsn4a5anim.k4 .ir.up{background:rgba(143,203,170,.07)}
@@ -32255,7 +32269,7 @@ var TSISL_TEAM_ONB_V2=[
       {id:'tsn4a5-ablauf', html:
         '<div class="tsn4-eb">Der Ablauf</div>'+
         '<h3>Ein Ordner, ein Prompt, eine <span class="g">Vorschau</span></h3>'+
-        '<p class="lead">Leg in deinem Backoffice-Ordner zwei Unterordner an: <b>Lieferscheine neu</b> und <b>Lieferscheine erledigt</b>. In den ersten kommt alles, was im Lauf der Woche reinkommt, als PDF aus der Mail oder als Foto vom Handy.</p>'+
+        '<p class="lead">Leg in deinem Backoffice-Ordner zwei Unterordner an: <b>Lieferscheine neu</b> und <b>Lieferscheine erledigt</b>. In den ersten kommt alles, was im Lauf der Woche reinkommt, als PDF aus der Mail oder als Foto vom Handy. Gerade die Fotos sind ein Fall für Claude, denn Notion AI nimmt Dateien wie PDF und Excel an, Fotos aber nicht.</p>'+
         '<p>Einmal in der Woche, oder wann immer es für dich passt, startest du Claude Code im Backoffice-Ordner und gibst diesen Auftrag:</p>'+
         N.cmd('Prompt', 'Lies alle Lieferscheine im Ordner „Lieferscheine neu“.\n\nOrdne jede Position einem Artikel meiner Inventurliste in Notion zu. Nutze dafür die Namensliste meiner Lieferanten in der CLAUDE.md. Positionen, die du nicht sicher zuordnen kannst, schreibst du auf eine eigene Liste und rätst nichts.\n\nZeig mir dann eine Vorschau aller Artikel, deren Einkaufspreis sich geändert hat: Artikel, Lieferant, alter Preis, neuer Preis, Abweichung in Prozent. Achte darauf, dass Einheit und Preis zu meiner Inventurliste passen, und nenne mir jede Abweichung bei der Einheit.\n\nSchreib erst nach meinem „Ja, schreiben“. Setz dabei bei jedem geänderten Artikel „Vorheriger Preis“ auf den alten Wert und „Preis geändert am“ auf heute. Verschieb danach die erledigten Scheine in „Lieferscheine erledigt“.')+
         '<p>Du bekommst die Vorschau, liest sie, klärst die offenen Positionen und gibst frei. Den Rest erledigt deine Vorlage: Die Zutat übernimmt den neuen Preis, jede Rezeptur und jedes Gericht rechnet neu, und dein Wareneinsatz steht aktuell da.</p>'
@@ -32317,38 +32331,39 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG, P=function(x,y,w,h){ return N.pos(x,y,w,h,450); };
-  var tl='<div class="tl" data-s="1" style="'+P(60,28,880,58)+'"><span class="moon"></span><span class="sun"></span><div class="tr"><i class="dot"></i><b class="m1" style="left:14%">23:10</b><b class="m2" style="left:86%">06:00</b></div><span class="t0">22:00</span><span class="t1">07:00</span></div>';
-  var trig='<div class="cardx tg" data-s="1" style="'+P(30,120,280,300)+'"><span class="k">Auslöser</span>'+
-    '<div class="ti x1"><i></i><span>Neue Seite in<br><b>Rezepturen</b></span></div><div class="ti x2"><i></i><span>Wiederkehrend<br><b>montags, 06:00</b></span></div>'+
+  var tl='<div class="tl" data-s="1" style="'+P(30,28,940,58)+'"><span class="moon"></span><span class="sun"></span><div class="tr"><i class="mk" style="left:14%"></i><i class="mk" style="left:88.9%"></i><span class="run"><i class="dot"></i></span></div><span class="t0">22:00</span><span class="t1">07:00</span></div>';
+  var trig='<div class="cardx tg" data-s="1" style="'+P(30,120,300,300)+'"><span class="k">Auslöser</span>'+
+    '<div class="ti x1"><i></i><span>Wenn eine neue<br><b>Rezeptur</b> entsteht</span></div><div class="ti x2"><i></i><span>Wiederkehrend<br><b>montags früh</b></span></div>'+
     '<span class="f">Der Agent startet von selbst, du musst nichts anstoßen.</span></div>';
   var ag='<div class="cardx agc" data-s="1" style="'+P(350,120,300,300)+'"><div class="av"><span>A</span></div><div class="an">Küchen-Vorarbeiter</div><div class="ad">Custom Agent in deinem Notion</div>'+
     '<div class="acc"><span class="ok">Rezepturen</span><span class="ok">Zutaten</span><span class="ok">Key Metrics</span><span class="no lk">Mitarbeiterlöhne</span></div>'+
     '<div class="cr">Notion schätzt je Aufgabe <b>5 bis 25 Credits</b></div></div>';
-  var log='<div class="cardx lg" data-s="1" style="'+P(690,120,280,300)+'"><span class="k">Aktivitätsprotokoll</span>'+
+  var log='<div class="cardx lg" data-s="1" style="'+P(670,120,300,300)+'"><span class="k">Aktivitätsprotokoll</span>'+
     '<div class="le e1"><span class="md"><img src="'+I+'g-kuerbis-veloute.webp" alt=""></span><span><b>23:10</b> Rezeptur Kürbis-Velouté: Zubereitung vorgeschlagen<em>Vorschlag, ungeprüft</em></span></div>'+
-    '<div class="le e2"><span class="md"><img src="'+N.RING+'zutaten.webp" alt=""></span><span><b>06:00</b> Pflegebericht in Key Metrics: drei Zutaten ohne Einkaufspreis</span></div>'+
-    '<div class="le e3"><span class="md"><img src="'+I+'g-lammkarree.webp" alt=""></span><span><b>08:15</b> Du prüfst beides beim ersten Kaffee</span></div></div>';
-  var lines='<svg class="lines" viewBox="0 0 1000 450" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="1" d="M312 270 H348"/><path class="ln" pathLength="1" data-s="1" d="M652 270 H688"/>'+
-    '<path class="sp" pathLength="1" d="M312 270 H348"/><path class="sp" pathLength="1" style="animation-delay:1s" d="M652 270 H688"/></svg>';
+    '<div class="le e2"><span class="md"><img src="'+N.RING+'zutaten.webp" alt=""></span><span><b>06:00</b> Pflegebericht abgelegt: drei Zutaten ohne Einkaufspreis</span></div>'+
+    '<div class="le e3"><span class="md"><img src="'+N.RING+'mitarbeiter.webp" alt=""></span><span><b>08:15</b> Du prüfst beides beim ersten Kaffee</span></div></div>';
+  var lines='<svg class="lines" viewBox="0 0 1000 450" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="1" d="M330 270 H350"/><path class="ln" pathLength="1" data-s="1" d="M650 270 H670"/>'+
+    '<path class="sp" pathLength="1" d="M330 270 H350"/><path class="sp" pathLength="1" style="animation-delay:1s" d="M650 270 H670"/></svg>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/450">'+lines+tl+trig+ag+log+'</div></div>';
   var css=`
   #tsn4a6anim .tl .tr{position:absolute;left:44px;right:44px;top:22px;height:2px;background:linear-gradient(90deg,rgba(120,140,200,.35),rgba(199,180,137,.5))}
-  #tsn4a6anim .tl .dot{position:absolute;left:0;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#efe6d2;box-shadow:0 0 16px rgba(239,230,210,.9);transform:translateX(var(--p,0px));transition:transform 1.8s ${N.EASE}}
-  #tsn4a6anim .tl b{position:absolute;top:12px;transform:translateX(-50%);font:700 10.5px/1 ${N.SANS};color:rgba(255,255,255,.86);font-variant-numeric:tabular-nums}
+  #tsn4a6anim .tl .run{position:absolute;left:0;right:0;top:0;height:0;transform:translateX(calc((var(--p,0) - 1) * 100%));transition:transform 1.8s ${N.EASE}}
+  #tsn4a6anim .tl .dot{position:absolute;left:100%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#efe6d2;box-shadow:0 0 16px rgba(239,230,210,.9)}
+  #tsn4a6anim .tl .mk{position:absolute;top:-4px;width:2px;height:10px;margin-left:-1px;background:rgba(199,180,137,.7)}
   #tsn4a6anim .tl .t0,#tsn4a6anim .tl .t1{position:absolute;top:44px;font:600 9.5px/1 ${N.SANS};letter-spacing:.1em;color:rgba(255,255,255,.62)}
   #tsn4a6anim .tl .t0{left:30px}#tsn4a6anim .tl .t1{right:30px}
   #tsn4a6anim .moon,#tsn4a6anim .sun{position:absolute;top:10px;width:24px;height:24px;border-radius:50%}
   #tsn4a6anim .moon{left:0;box-shadow:inset -6px -3px 0 0 #d8c9ab}
-  #tsn4a6anim .sun{right:0;background:radial-gradient(circle,#efe6d2,#c7b489);opacity:.35;transition:opacity 1.2s ease,box-shadow 1.2s ease}
+  #tsn4a6anim .sun{right:0;background:radial-gradient(circle,#efe6d2,#c7b489);opacity:.35;transition:opacity 1.2s cubic-bezier(.16,1,.3,1),box-shadow 1.2s cubic-bezier(.16,1,.3,1)}
   #tsn4a6anim.k6 .sun{opacity:1;box-shadow:0 0 24px rgba(239,230,210,.8)}
   #tsn4a6anim .k{display:block;font:600 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:14px}
   #tsn4a6anim .tg,#tsn4a6anim .lg{padding:18px 18px;display:flex;flex-direction:column;gap:12px}
   #tsn4a6anim .ti{display:flex;gap:12px;align-items:center;padding:12px;border-radius:11px;border:1px solid rgba(255,255,255,.1);font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.86);transition:all .6s ${N.EASE}}
   #tsn4a6anim .ti b{color:#fff}
-  #tsn4a6anim .ti i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex:0 0 10px;transition:all .6s ease}
+  #tsn4a6anim .ti i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex:0 0 10px;transition:all .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a6anim .ti.on{border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.08)}
   #tsn4a6anim .ti.on i{background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.9)}
-  #tsn4a6anim .f{margin-top:auto;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.78)}
+  #tsn4a6anim .f{margin-top:auto;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.86)}
   #tsn4a6anim .agc{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 18px;gap:8px}
   #tsn4a6anim .av{position:relative;width:76px;height:76px;border-radius:50%;border:1.5px solid rgba(199,180,137,.6);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,rgba(199,180,137,.25),#0b0d14 70%)}
   #tsn4a6anim .av span{font-family:${N.DISP};font-size:30px;color:#efe6d2}
@@ -32356,20 +32371,20 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a6anim.work:not(.hid) .av::after,#tsn4a6anim.built:not(.hid) .av::after{animation:tsn4a6halo 2.6s ease-out infinite}
   @keyframes tsn4a6halo{0%{opacity:.8;transform:scale(.9)}80%{opacity:0;transform:scale(1.25)}100%{opacity:0}}
   #tsn4a6anim .an{font-family:${N.DISP};font-weight:600;font-size:18px;color:#fff;margin-top:6px}
-  #tsn4a6anim .ad{font-size:11.5px;color:rgba(255,255,255,.78)}
+  #tsn4a6anim .ad{font-size:11.5px;color:rgba(255,255,255,.86)}
   #tsn4a6anim .acc{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px}
   #tsn4a6anim .acc span{font:600 10.5px/1 ${N.SANS};padding:6px 8px;border-radius:6px;border:1px solid rgba(143,203,170,.45)}
   #tsn4a6anim .acc .no{border-color:rgba(227,37,82,.5)}
   #tsn4a6anim.k4 .acc .lk{box-shadow:0 0 18px rgba(227,37,82,.35);background:rgba(227,37,82,.1)}
-  #tsn4a6anim .cr{margin-top:auto;font-size:11.5px;color:rgba(255,255,255,.8)}#tsn4a6anim .cr b{color:#efe6d2}
-  #tsn4a6anim .le{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:rgba(255,255,255,.86);transition:opacity .7s ease,transform .7s ${N.EASE}}
+  #tsn4a6anim .cr{margin-top:auto;font-size:11.5px;color:rgba(255,255,255,.86)}#tsn4a6anim .cr b{color:#efe6d2}
+  #tsn4a6anim .le{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:rgba(255,255,255,.86);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s ${N.EASE}}
   #tsn4a6anim .le .md{width:36px;height:36px;flex:0 0 36px;display:block}
   #tsn4a6anim .le b{color:#c7b489;margin-right:4px}
   #tsn4a6anim .le em{display:inline-block;margin-top:5px;font-style:normal;font:700 9px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;color:#05060b;background:#c7b489;padding:4px 6px;border-radius:4px}
   #tsn4a6anim.js .le{opacity:0;transform:translateY(10px)}
   #tsn4a6anim.js.k3 .e1,#tsn4a6anim.js.k5 .e2,#tsn4a6anim.js.k6 .e3{opacity:1;transform:none}
   `;
-  function dot(el,p){ var tr=el.querySelector('.tl .tr'); var w=tr?tr.getBoundingClientRect().width:0; el.querySelector('.tl .dot').style.setProperty('--p',(w*p)+'px'); }
+  function dot(el,p){ el.querySelector('.tl .run').style.setProperty('--p',p); }
   function ti(el,a,b){ el.querySelector('.x1').classList.toggle('on',a); el.querySelector('.x2').classList.toggle('on',b); }
   N.page({
     key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/,
@@ -32394,10 +32409,10 @@ var TSISL_TEAM_ONB_V2=[
         if(i===1){ dot(el,.14); T.at(jump?0:1200,function(){ ti(el,true,false); el.classList.add('work'); }); }
         if(i===2){ el.classList.add('k3'); }
         if(i===3){ el.classList.add('k4'); }
-        if(i===4){ dot(el,.86); T.at(jump?0:1300,function(){ ti(el,true,true); el.classList.add('k5'); }); }
+        if(i===4){ dot(el,.889); T.at(jump?0:1300,function(){ ti(el,true,true); el.classList.add('k5'); }); }
         if(i===5){ dot(el,1); el.classList.add('k6'); }
       },
-      final:function(el){ el.classList.add('k3','k4','k5','k6'); ti(el,true,true); setTimeout(function(){ dot(el,1); },50); }
+      final:function(el){ el.classList.add('k3','k4','k5','k6'); ti(el,true,true); dot(el,1); }
     },
     secs:[
       {id:'tsn4a6-was', html:
@@ -32483,30 +32498,30 @@ var TSISL_TEAM_ONB_V2=[
     {img:R+'mitarbeiter.webp', a:'Button „Neue Zählrunde“', b:'Zählfelder leer, Inventur-Seite neu'},
     {img:I+'i-olivenoel.webp', a:'Einkaufspreis geändert', b:'Datum gesetzt, Meldung an dich'}
   ];
-  var rows=RW.map(function(r,i){ var y=34+i*90;
-    return '<div class="cardx ra r'+i+'" data-s="1" style="'+P(40,y,360,70)+'"><span class="md"><img src="'+r.img+'" alt=""></span><span class="w">Wenn</span><span class="t">'+r.a+'</span></div>'+
+  var rows='<div class="hdr" data-s="1" style="'+P(40,8,360,22)+'">Wenn</div><div class="hdr" data-s="1" style="'+P(560,8,300,22)+'">Dann</div>'+RW.map(function(r,i){ var y=40+i*88;
+    return '<div class="cardx ra r'+i+'" data-s="1" style="'+P(40,y,360,70)+'"><span class="md"><img src="'+r.img+'" alt=""></span><span class="t">'+r.a+'</span></div>'+
            '<div class="sw sw'+i+'" data-s="1" style="'+P(424,y+21,56,28)+'"><i></i></div>'+
-           '<div class="cardx rb b'+i+'" data-s="1" style="'+P(560,y,300,70)+'"><span class="w">Dann</span><span class="t">'+r.b+'</span><span class="lamp"></span></div>';
+           '<div class="cardx rb b'+i+'" data-s="1" style="'+P(560,y,300,70)+'"><span class="t">'+r.b+'</span><span class="lamp"></span></div>';
   }).join('');
-  var lines='<svg class="lines" viewBox="0 0 1000 430" preserveAspectRatio="none">'+RW.map(function(r,i){ var y=34+i*90+35; return '<path class="ln" pathLength="1" data-s="1" d="M482 '+y+' H558"/><path class="sp pk'+i+'" pathLength="1" style="animation-delay:'+(i*0.7)+'s" d="M482 '+y+' H558"/>'; }).join('')+'</svg>';
-  var meter='<div class="cardx mt" data-s="1" style="'+P(884,34,96,340)+'"><span class="k">KI je Lauf</span><b class="z">0</b><span class="k">Kosten je Lauf</span><b class="z">0</b><span class="f">immer gleich</span></div>';
+  var lines='<svg class="lines" viewBox="0 0 1000 430" preserveAspectRatio="none">'+RW.map(function(r,i){ var y=40+i*88+35; return '<path class="ln" pathLength="1" data-s="1" d="M482 '+y+' H558"/><path class="sp pk'+i+'" pathLength="1" style="animation-delay:'+(i*0.7)+'s" d="M482 '+y+' H558"/>'; }).join('')+'</svg>';
+  var meter='<div class="cardx mt" data-s="1" style="'+P(884,40,96,334)+'"><span class="k">KI je Lauf</span><b class="z">0</b><span class="k">Kosten je Lauf</span><b class="z">0</b><span class="f">immer gleich</span></div>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/430">'+lines+rows+meter+'</div></div>';
   var css=`
   #tsn4a7anim .ra,#tsn4a7anim .rb{display:flex;align-items:center;gap:12px;padding:0 16px 0 12px}
   #tsn4a7anim .ra .md{width:46px;height:46px;flex:0 0 46px;display:block}
-  #tsn4a7anim .w{font:700 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;flex:0 0 auto}
+  #tsn4a7anim .hdr{display:flex;align-items:center;justify-content:center;font:700 10px/1 ${N.SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
   #tsn4a7anim .t{font-size:13px;line-height:1.35;color:#fff;font-weight:600}
   #tsn4a7anim .rb .t{flex:1}
-  #tsn4a7anim .lamp{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.14);transition:all .5s ease;flex:0 0 12px}
+  #tsn4a7anim .lamp{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.14);transition:all .5s cubic-bezier(.16,1,.3,1);flex:0 0 12px}
   #tsn4a7anim .rb.lit .lamp{background:#8FCBAA;box-shadow:0 0 14px rgba(143,203,170,.9)}
-  #tsn4a7anim .sw{border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .4s ease,border-color .4s ease}
+  #tsn4a7anim .sw{border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
   #tsn4a7anim .sw i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#efe6d2;transition:transform .45s ${N.BACK}}
   #tsn4a7anim .sw.on{background:rgba(199,180,137,.55);border-color:rgba(199,180,137,.8)}
   #tsn4a7anim .sw.on i{transform:translateX(28px)}
   #tsn4a7anim .mt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:12px 8px}
   #tsn4a7anim .mt .k{font:700 8.5px/1.3 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
   #tsn4a7anim .mt .z{font-family:${N.SANS};font-weight:700;font-size:38px;line-height:1;color:#efe6d2;margin-bottom:10px}
-  #tsn4a7anim .mt .f{font-size:11px;color:rgba(255,255,255,.78)}
+  #tsn4a7anim .mt .f{font-size:11px;color:rgba(255,255,255,.86)}
   #tsn4a7anim.k5 .mt{border-color:rgba(199,180,137,.62);box-shadow:0 0 30px rgba(199,180,137,.16)}
   `;
   function on(el,i,v){ var a=el.querySelector('.r'+i),w=el.querySelector('.sw'+i),b=el.querySelector('.b'+i); if(a) a.classList.toggle('lit',v); if(w) w.classList.toggle('on',v); if(b) b.classList.toggle('lit',v); }
@@ -32518,7 +32533,7 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Eine Notion-Automation ist eine Regel in einer Datenbank: Wenn das passiert, mach das. Sie interpretiert nichts, sie kostet nichts je Durchlauf, und sie tut jedes Mal <b>exakt dasselbe</b>. In dieser Lektion bauen wir vier davon für dein Backoffice und einen Button für dein Team.</p>',
     anim:{
       id:'tsn4a7anim', eyebrow:'Der Schaltschrank', title:'Wenn das, dann <span class="g">das</span>.',
-      sub:'Vier Regeln für dein Backoffice. Jede hat einen Auslöser und eine Aktion, und dazwischen sitzt kein Modell, das etwas deuten könnte.',
+      sub:'Vier Regeln für dein Backoffice. Jede hat einen Auslöser und eine Aktion, und dazwischen sitzt nur ein Schalter.',
       html:html, css:css,
       beats:[
         {t:200, s:1, cap:'Vier Regeln, jede mit einem Auslöser links und einer Aktion rechts. Dazwischen ein Schalter und sonst nichts.'},
@@ -32538,7 +32553,7 @@ var TSISL_TEAM_ONB_V2=[
         '<h3>Wie eine Automation <span class="g">gebaut ist</span></h3>'+
         '<p class="lead">Du öffnest eine Datenbank, klickst oben auf das Blitz-Symbol und legst eine neue Automation an. Sie besteht aus einem oder mehreren Auslösern und einer oder mehreren Aktionen.</p>'+
         '<div class="tsn4-cards c2">'+
-          '<div class="tsn4-card"><span class="k">Auslöser</span><div class="n">Wann sie startet</div><hr><p><b>Seite hinzugefügt:</b> ein neuer Eintrag entsteht.</p><p><b>Eigenschaft bearbeitet:</b> ein bestimmtes Feld ändert sich, etwa ein Status.</p><p><b>Wiederkehrend:</b> jeden Tag, jede Woche, jeden Monat zu einer festen Uhrzeit. Dieser Auslöser lässt sich nicht mit den anderen kombinieren.</p></div>'+
+          '<div class="tsn4-card"><span class="k">Auslöser</span><div class="n">Wann sie startet</div><hr><p><b>Seite hinzugefügt</b>: ein neuer Eintrag entsteht.</p><p><b>Eigenschaft bearbeitet</b>: ein bestimmtes Feld ändert sich, etwa ein Status.</p><p><b>Wiederkehrend</b>: jeden Tag, jede Woche, jeden Monat zu einer festen Uhrzeit. Dieser Auslöser lässt sich nicht mit den anderen kombinieren.</p></div>'+
           '<div class="tsn4-card"><span class="k">Aktion</span><div class="n">Was sie tut</div><hr><p><b>Eigenschaft bearbeiten</b> im selben Eintrag, <b>Seite hinzufügen</b> in einer anderen Datenbank oder <b>Seiten bearbeiten</b> dort.</p><p><b>Benachrichtigung</b> an bis zu zwanzig Personen, <b>E-Mail</b> über dein Gmail-Konto, Nachricht an Slack oder an eine Webadresse.</p></div>'+
         '</div>'+
         '<p style="margin-top:18px"><span class="gl">Welchen Tarif du brauchst.</span> Datenbank-Automationen gibt es in allen bezahlten Tarifen, also ab Plus. Im Free-Tarif gehen nur Benachrichtigungen an Slack und einfache Buttons. Wie Buttons grundsätzlich funktionieren, kennst du aus Modul eins.</p>'+
@@ -32603,9 +32618,9 @@ var TSISL_TEAM_ONB_V2=[
     '<div class="day"><span>Montag</span><b class="tm">00:00</b></div></div>';
   var dev='<div class="cardx dv lap" data-s="1" style="'+P(380,70,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="7" y="3" width="26" height="17" rx="2"/><path d="M3 23h34l-2 3H5z"/></svg><span class="dn">Dein Laptop</span><span class="ds">zugeklappt</span></div>'+
           '<div class="cardx dv cl" data-s="1" style="'+P(380,220,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 24h17a7 7 0 0 0 0-14 9 9 0 0 0-17-1 7 7 0 0 0 0 15z"/></svg><span class="dn">Claude in der Cloud</span><span class="ds">führt die Aufgabe aus</span></div>';
-  var BL=[['Höchster Wareneinsatz','Rinderfilet 34,2 %','Jakobsmuscheln 31,5 %'],['Preise geändert','Tomaten +10,4 %','Zitronen +10,7 %'],['Über deiner Grenze','Rinderfilet, Spargel',''],['Lücken','Pilz-Ravioli: Preis Steinpilze fehlt','']];
-  var page='<div class="cardx wb" data-s="1" style="'+P(600,30,380,390)+'"><div class="wh"><span class="nt">N</span><b>Wochenblick · Montag</b></div>'+
-    BL.map(function(b,i){ return '<div class="bk b'+i+'"><span class="bt">'+b[0]+'</span><span class="bv">'+b[1]+'</span>'+(b[2]?'<span class="bv">'+b[2]+'</span>':'')+'</div>'; }).join('')+
+  var BL=[['Höchster Wareneinsatz',['g-rinderfilet','Rinderfilet 34,2 %'],['g-jakobsmuscheln','Jakobsmuscheln 31,5 %']],['Preise geändert',['z-tomate','Tomaten +10,4 %'],['z-zitrone','Zitronen +10,7 %']],['Über deiner Grenze',null,['','Ein Gericht über 32 %']],['Lücken',['g-pilz-ravioli','Pilz-Ravioli: Preis Steinpilze fehlt'],null]];
+  var page='<div class="cardx wb" data-s="1" style="'+P(600,16,380,418)+'"><div class="wh"><span class="nt">N</span><b>Wochenblick · Montag</b></div>'+
+    BL.map(function(b,i){ function ln(x){ return x?'<span class="bv">'+(x[0]?'<img src="'+I+x[0]+'.webp" alt="">':'')+x[1]+'</span>':''; } return '<div class="bk b'+i+'"><span class="bt">'+b[0]+'</span>'+ln(b[1])+ln(b[2])+'</div>'; }).join('')+
     '<div class="ro">Nur gelesen · in den Datenbanken nichts geändert</div></div>';
   var lines='<svg class="lines" viewBox="0 0 1000 450" preserveAspectRatio="none"><path class="ln dash" pathLength="1" data-s="1" d="M332 130 H378"/><path class="ln" pathLength="1" data-s="1" d="M332 280 H378"/><path class="ln" pathLength="1" data-s="1" d="M552 280 C576 280 576 225 598 225"/>'+
     '<path class="sp" pathLength="1" d="M332 280 H378"/><path class="sp" pathLength="1" style="animation-delay:.9s" d="M552 280 C576 280 576 225 598 225"/></svg>';
@@ -32618,19 +32633,20 @@ var TSISL_TEAM_ONB_V2=[
   #tsn4a8anim .day{display:flex;gap:10px;align-items:baseline;font:600 12px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
   #tsn4a8anim .day b{font-family:${N.DISP};font-size:28px;letter-spacing:0;color:#efe6d2;font-variant-numeric:tabular-nums}
   #tsn4a8anim .dv{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
-  #tsn4a8anim .dv .ic{color:rgba(255,255,255,.45);transition:color .8s ease,filter .8s ease}
+  #tsn4a8anim .dv .ic{color:rgba(255,255,255,.45);transition:color .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1)}
   #tsn4a8anim .dv .dn{font-size:13px;font-weight:600;color:#fff}
-  #tsn4a8anim .dv .ds{font-size:11px;color:rgba(255,255,255,.78)}
+  #tsn4a8anim .dv .ds{font-size:11px;color:rgba(255,255,255,.86)}
   #tsn4a8anim .lap{border-style:dashed}
   #tsn4a8anim .cl.lit .ic{color:#efe6d2;filter:drop-shadow(0 0 8px rgba(239,230,210,.8))}
-  #tsn4a8anim .wb{padding:16px 18px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+  #tsn4a8anim .wb{padding:14px 16px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
   #tsn4a8anim .wh{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:#fff}
   #tsn4a8anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a8anim .bk{display:flex;flex-direction:column;gap:4px;padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);transition:opacity .6s ease,transform .7s ${N.EASE}}
+  #tsn4a8anim .bk{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s ${N.EASE}}
   #tsn4a8anim .bt{font:700 9.5px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
-  #tsn4a8anim .bv{font-size:12px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
-  #tsn4a8anim .b3 .bv{color:#f3c2cb}
-  #tsn4a8anim .ro{margin-top:auto;padding:8px 10px;border-radius:8px;border:1px solid rgba(143,203,170,.45);font-size:11px;text-align:center;color:#cfe8da;transition:opacity .6s ease}
+  #tsn4a8anim .bv{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
+  #tsn4a8anim .bv img{width:20px;height:20px;flex:0 0 20px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.5)}
+  #tsn4a8anim .b3 .bv{color:#fff}#tsn4a8anim .b3{border-color:rgba(227,37,82,.4)}
+  #tsn4a8anim .ro{margin-top:auto;padding:8px 10px;border-radius:8px;border:1px solid rgba(143,203,170,.45);font-size:11px;text-align:center;color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a8anim.js .bk,#tsn4a8anim.js .ro{opacity:0;transform:translateY(8px)}
   #tsn4a8anim.js.k3 .b0,#tsn4a8anim.js.k3 .b1,#tsn4a8anim.js.k4 .b2,#tsn4a8anim.js.k4 .b3,#tsn4a8anim.js.k5 .ro{opacity:1;transform:none}
   #tsn4a8anim.js.k3 .b1{transition-delay:.25s}#tsn4a8anim.js.k4 .b3{transition-delay:.25s}
@@ -32671,9 +32687,9 @@ var TSISL_TEAM_ONB_V2=[
         '<p class="lead">Claude nennt das Scheduled tasks, zeitgesteuerte Aufgaben. Bis vor Kurzem hießen sie Routinen, und an manchen Stellen steht noch der alte Name. Es ist derselbe Auftrag, den du sonst selbst startest, nur mit einem Termin.</p>'+
         '<table class="tsn4-tbl"><tr><th>Was</th><th>Stand November 2026</th></tr>'+
           '<tr><td>Wo sie läuft</td><td>In der Cloud bei Anthropic. Dein Rechner darf aus sein.</td></tr>'+
-          '<tr><td>Welcher Tarif</td><td>Pro, Max, Team und Enterprise. Jeder Lauf zählt zu deinem normalen Claude-Kontingent.</td></tr>'+
-          '<tr><td>Wo du sie anlegst</td><td>Auf claude.ai/code/routines, in der Claude-App im Bereich Code unter „Scheduled“, oder in Claude Code mit /schedule.</td></tr>'+
-          '<tr><td>Wie sie an Notion kommt</td><td>Über die Notion-Verbindung in deinem Claude-Konto, die du in Lektion eins in den Einstellungen der App angelegt hast.</td></tr>'+
+          '<tr><td>Welcher Tarif</td><td>Pro, Max, Ultra, Team und Enterprise. Jeder Lauf zählt zu deinem normalen Claude-Kontingent.</td></tr>'+
+          '<tr><td>Wo du sie anlegst</td><td>In der Claude-App in der Seitenleiste unter „Scheduled“ oder direkt im Gespräch, auf claude.ai/code/routines oder in Claude Code mit /schedule.</td></tr>'+
+          '<tr><td>Wie sie an Notion kommt</td><td>Über die Notion-Verbindung in deinem Claude-Konto, die du in Lektion eins unter Anpassen, Konnektoren angelegt hast.</td></tr>'+
           '<tr><td>Wie oft</td><td>Höchstens einmal pro Stunde. Für einen Wochenbericht spielt das keine Rolle.</td></tr>'+
         '</table>'+
         '<p class="tsn4-note">Quelle: Claude-Code-Dokumentation zu Scheduled tasks, geprüft am 01.11.2026. Die Funktion ist dort als Vorschau gekennzeichnet, Details können sich ändern.</p>'+
@@ -32684,7 +32700,7 @@ var TSISL_TEAM_ONB_V2=[
         '<h3>Die Aufgabe <span class="g">anlegen</span></h3>'+
         '<p class="lead">Für einen Bericht aus Notion brauchst du kein Code-Projekt. Legst du die Aufgabe ohne Repository an, läuft sie als Aufgabe in deinem Claude-Konto, mit deinen Verbindungen.</p>'+
         '<div class="tsn4-do"><span class="k">Schritt für Schritt</span><ol>'+
-          '<li>Prüf in den Einstellungen deiner Claude-App, dass <b>Notion verbunden</b> ist.</li>'+
+          '<li>Prüf in der Claude-App unter <b>Anpassen, Konnektoren</b>, dass Notion verbunden ist.</li>'+
           '<li>Öffne <b>claude.ai/code/routines</b> und leg eine neue Aufgabe an. Wähl kein Repository aus.</li>'+
           '<li>Gib ihr einen Namen wie „Wochenblick“ und füg den Auftrag aus dem Kasten ein.</li>'+
           '<li>Als Auslöser einen <b>Zeitplan</b> wählen: wöchentlich, Montag, 06:07 in deiner Zeitzone.</li>'+
@@ -32734,25 +32750,25 @@ var TSISL_TEAM_ONB_V2=[
 (function(){
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG, R=N.RING, P=function(x,y,w,h){ return N.pos(x,y,w,h,470); };
-  var ST=[{x:40,y:350,w:330,n:'Automation',c:'immer exakt gleich',k:'ab Notion Plus, keine Kosten je Lauf'},
-          {x:335,y:240,w:330,n:'Notion Agent',c:'mitdenken, alles in Notion',k:'Business-Tarif, Credits je Aufgabe'},
-          {x:630,y:130,w:330,n:'Claude Code',c:'etwas kommt von außen',k:'dein Claude-Tarif'}];
+  var ST=[{x:30,y:350,w:300,n:'Automation',c:'immer exakt gleich',k:'ab Notion Plus, keine Kosten je Lauf'},
+          {x:350,y:240,w:300,n:'Notion Agent',c:'mitdenken, alles in Notion',k:'Business-Tarif, Credits je Aufgabe'},
+          {x:670,y:130,w:300,n:'Claude Code',c:'etwas kommt von außen',k:'dein Claude-Tarif'}];
   var steps=ST.map(function(s,i){ return '<div class="cardx stp s'+i+'" data-s="1" style="'+P(s.x,s.y,s.w,96)+'"><span class="sn">'+(i+1)+'</span><span class="sh">'+s.n+'</span><span class="sc2">'+s.c+'</span><span class="sk">'+s.k+'</span></div>'; }).join('');
-  var TK=[{t:'Karten-Datum setzen',img:I+'g-rote-bete-risotto.webp',x:52,y:296,b:2},
-          {t:'Kartentext schreiben',img:I+'g-entenbrust.webp',x:372,y:186,b:3},
-          {t:'Lieferschein-PDF einlesen',img:R+'lieferanten.webp',x:650,y:76,b:4},
-          {t:'Meldung bei Preisänderung',img:I+'i-olivenoel.webp',x:215,y:296,b:5},
-          {t:'Kassenexport abgleichen',img:I+'g-rinderfilet.webp',x:806,y:76,b:6}];
-  var tasks=TK.map(function(t,i){ return '<div class="tk k'+i+'" data-s="'+t.b+'" style="'+P(t.x,t.y,150,48)+'"><span class="md"><img src="'+t.img+'" alt=""></span><span>'+t.t+'</span></div>'; }).join('');
+  var TK=[{t:'Karten-Datum setzen',img:I+'g-rote-bete-risotto.webp',x:40,y:296,b:2},
+          {t:'Kartentext schreiben',img:I+'g-entenbrust.webp',x:360,y:186,b:3},
+          {t:'Lieferschein-PDF einlesen',img:R+'lieferanten.webp',x:680,y:76,b:4},
+          {t:'Meldung bei Preisänderung',img:I+'i-olivenoel.webp',x:185,y:296,b:5},
+          {t:'Kassenexport abgleichen',img:I+'g-rinderfilet.webp',x:825,y:76,b:6}];
+  var tasks=TK.map(function(t,i){ return '<div class="tk k'+i+'" data-s="'+t.b+'" style="'+P(t.x,t.y,140,48)+'"><span class="md"><img src="'+t.img+'" alt=""></span><span>'+t.t+'</span></div>'; }).join('');
   var lines='';
-  var start='<div class="go" data-s="1" style="'+P(20,20,240,60)+'"><b>Fang unten an.</b><span>Jede Aufgabe steigt nur so hoch wie nötig.</span></div>';
+  var start='<div class="go" data-s="1" style="'+P(20,20,240,60)+'"><b>Fang unten an.</b><span>Mit jeder Stufe steigen Können und Kosten.</span></div>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/470">'+lines+start+steps+tasks+'</div></div>';
   var css=`
   #tsn4a9anim .stp{display:grid;grid-template-columns:34px 1fr;grid-template-rows:auto auto auto;column-gap:12px;row-gap:3px;align-content:center;padding:0 16px}
   #tsn4a9anim .sn{grid-row:1 / 4;width:34px;height:34px;border-radius:50%;border:1px solid rgba(199,180,137,.6);font:700 13px/32px ${N.SANS};text-align:center;color:#c7b489;align-self:center}
   #tsn4a9anim .sh{font-family:${N.DISP};font-weight:600;font-size:18px;color:#fff}
   #tsn4a9anim .sc2{font-size:12px;color:#efe6d2}
-  #tsn4a9anim .sk{font-size:11px;color:rgba(255,255,255,.78)}
+  #tsn4a9anim .sk{font-size:11px;color:rgba(255,255,255,.86)}
   #tsn4a9anim .tk{display:flex;align-items:center;gap:8px;padding:5px 8px 5px 5px;border-radius:12px;background:linear-gradient(rgba(199,180,137,.1),rgba(199,180,137,.1)),#05060b;border:1px solid rgba(199,180,137,.55);
     font-size:11.5px;font-weight:600;line-height:1.3;color:#fff;box-shadow:0 14px 30px -16px rgba(0,0,0,.9);z-index:4}
   #tsn4a9anim .tk .md{width:34px;height:34px;flex:0 0 34px;display:block;border-width:1px;box-shadow:none}
@@ -32763,8 +32779,8 @@ var TSISL_TEAM_ONB_V2=[
   @keyframes tsn4a9f{0%,100%{translate:0 0}50%{translate:0 -6px}}
   #tsn4a9anim .stp.lit .sn{background:#c7b489;color:#05060b}
   #tsn4a9anim .go{display:flex;flex-direction:column;gap:5px}
-  #tsn4a9anim .go b{font-family:${N.DISP};font-size:20px;color:#efe6d2;font-weight:600}
-  #tsn4a9anim .go span{font-size:12px;color:rgba(255,255,255,.8)}
+  #tsn4a9anim .go b{font-family:${N.DISP};font-size:20px;color:#fff;font-weight:600}
+  #tsn4a9anim .go span{font-size:12px;color:rgba(255,255,255,.86)}
   `;
   function litS(el,n){ for(var i=0;i<3;i++){ var s=el.querySelector('.s'+i); if(s) s.classList.toggle('lit', n.indexOf(i)>-1); } }
   N.page({
@@ -32795,9 +32811,9 @@ var TSISL_TEAM_ONB_V2=[
         '<h3>Drei Fragen, in dieser <span class="g">Reihenfolge</span></h3>'+
         '<p class="lead">Du stellst die Fragen von unten nach oben. Bei der ersten, die du mit Ja beantwortest, hast du dein Werkzeug.</p>'+
         '<div class="tsn4-do"><span class="k">Die Sortierregel</span><ol>'+
-          '<li><b>Passiert jedes Mal exakt dasselbe?</b> Dann nimm eine Notion-Automation. Sie ist in jedem bezahlten Notion-Tarif enthalten und kostet nichts je Durchlauf.</li>'+
-          '<li><b>Muss jemand mitdenken, und liegt alles in Notion?</b> Dann nimm einen Notion Agent. Er liest, formuliert und läuft im Hintergrund, im Business-Tarif und gegen Credits.</li>'+
-          '<li><b>Kommt etwas von außen dazu, eine Datei, eine Mail, ein anderes Programm?</b> Dann nimm Claude Code, im Alltag selbst gestartet oder als zeitgesteuerte Aufgabe.</li>'+
+          '<li><b>Passiert jedes Mal exakt dasselbe</b>? Dann nimm eine Notion-Automation. Sie ist in jedem bezahlten Notion-Tarif enthalten und kostet nichts je Durchlauf.</li>'+
+          '<li><b>Muss jemand mitdenken, und liegt alles in Notion</b>? Dann nimm einen Notion Agent. Er denkt mit und läuft im Hintergrund, im Business-Tarif und gegen Credits.</li>'+
+          '<li><b>Kommt etwas von außen dazu, eine Datei, eine Mail, ein anderes Programm</b>? Dann nimm Claude Code, im Alltag selbst gestartet oder als zeitgesteuerte Aufgabe.</li>'+
         '</ol></div>'+
         '<p style="margin-top:18px">Der häufigste Fehler ist, oben anzufangen. Wer ein starkes Werkzeug hat, baut damit auch die Dinge, die eine schlichte Wenn-Dann-Regel besser und günstiger erledigt. Fang unten an.</p>'+
         '<p>Eine vierte Stufe lernst du in Modul fünf kennen: Wenn Gäste von außen rund um die Uhr eine Antwort in Sekunden erwarten, etwa bei Reservierungsanfragen, braucht es einen eigenen Agenten auf einem Server. Für dein Backoffice reichen die drei Stufen hier.</p>'
@@ -32825,7 +32841,7 @@ var TSISL_TEAM_ONB_V2=[
           '<tr><td>Zubereitung für eine neue Rezeptur vorschlagen</td><td><b>Notion Agent</b></td><td>mitdenken, alles in Notion</td></tr>'+
           '<tr><td>Kartentext für ein Gericht schreiben</td><td><b>Notion Agent</b></td><td>mitdenken, alles in Notion</td></tr>'+
           '<tr><td>Lücken in den Daten jeden Montag auflisten</td><td><b>Notion Agent</b></td><td>mitdenken, alles in Notion</td></tr>'+
-          '<tr><td>Lieferscheine und Preislisten einlesen</td><td><b>Claude Code</b></td><td>Datei von außen</td></tr>'+
+          '<tr><td>Lieferscheine und Preislisten einlesen</td><td><b>Claude Code</b></td><td>Datei oder Foto von außen</td></tr>'+
           '<tr><td>Auswertung als Excel-Datei für den Steuerberater</td><td><b>Claude Code</b></td><td>Datei nach außen</td></tr>'+
           '<tr><td>Kassenexport mit dem Wareneinsatz abgleichen</td><td><b>Claude Code</b></td><td>Datei von außen</td></tr>'+
           '<tr><td>Wochenblick im Notion-Plus-Tarif</td><td><b>Claude Code</b>, zeitgesteuert</td><td>kein Agent im Tarif</td></tr>'+
