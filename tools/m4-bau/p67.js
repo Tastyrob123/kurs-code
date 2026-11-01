@@ -58,7 +58,7 @@
   function dot(el,p){ el.querySelector('.tl .run').style.setProperty('--p',p); }
   function ti(el,a,b){ el.querySelector('.x1').classList.toggle('on',a); el.querySelector('.x2').classList.toggle('on',b); }
   N.page({
-    key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/,
+    key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-(?:im-betrieb-)?einsetzen\/?$/,
     eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
     intro:
       '<p>Alles, was wir bis hierher gebaut haben, passiert, wenn du am Rechner sitzt und Claude Code startest. Notion hat inzwischen eigene Agenten, die ohne dich arbeiten. Sie sitzen in deinem Workspace, warten auf einen Auslöser und erledigen dann ihre Aufgabe, nachts, am Wochenende oder während du im Service stehst.</p>'+
@@ -131,6 +131,7 @@
         '<h3>Wann der Agent, wann <span class="g">Claude Code</span></h3>'+
         '<p class="lead">Ein Notion Agent ist stark, solange alles in Notion liegt. Sobald etwas von außen dazukommt, ist er der falsche Weg.</p>'+
         '<p>Der Lieferschein aus Lektion fünf liegt als Datei auf deinem Rechner, also kann der Agent ihn nicht lesen. Ein Bericht, der Notion-Zahlen mit dem Export deines Kassensystems vergleicht, braucht ebenfalls eine Datei von außen. Beides bleibt Aufgabe für Claude Code.</p>'+
+        '<p>Auch beim Ausbau deines Systems hat er eine Grenze. Automationen, Datenbankvorlagen und Seitenlayouts legt der Agent nicht an. Die richtest du selbst ein, die Automationen zeige ich dir in der nächsten Lektion.</p>'+
         '<p><span class="gl">Die Merkregel:</span> Bleibt die Arbeit vollständig in Notion und muss jemand mitdenken, nimm den Agenten. Kommt etwas von außen dazu, nimm Claude Code. Die vollständige Regel mit allen drei Wegen bauen wir in Lektion neun.</p>'+
         '<div class="tsn4-err">'+
           '<div><b>Zu breiter Zugriff.</b> „Seiten, die mit allen geteilt sind“ als Bereich zu wählen ist bequem, gibt dem Agenten aber fast deinen ganzen Workspace. Gib ihm nur die Datenbanken, die er für seine Aufgabe braucht.</div>'+

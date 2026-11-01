@@ -13,7 +13,7 @@ E='/* <<< NEUBAU MODUL 4 — ENDE <<< */'
 # --- Seiten, die super.so noch nicht synchronisiert hat (Weiter-Kette springt drueber)
 PENDING=[l for l in open(os.path.join(S,'pending.txt'),encoding='utf-8').read().split() if l.strip()] if os.path.exists(os.path.join(S,'pending.txt')) else []
 ORDER=['/lektionen/dein-backoffice-bekommt-hnde','/lektionen/notion-mit-claude-code-verbinden','/lektionen/die-systemkarte-anlegen','/lektionen/dein-backoffice-befragen',
-    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-einsetzen','/lektionen/notion-automationen-bauen',
+    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-im-betrieb-einsetzen','/lektionen/notion-automationen-bauen',
     '/lektionen/wiederkehrende-routinen-einrichten','/lektionen/wer-macht-was-im-backoffice','/modul-5-claude-code-notion']
 def resolve(h):
     while h in PENDING:
@@ -45,8 +45,8 @@ NEWP='''    { re:/\\/(?:lektionen\\/)?dein-backoffice-bekommt-h[a-z]*nde\\/?$/, 
     { re:/\\/(?:lektionen\\/)?die-systemkarte-anlegen\\/?$/, href:'/lektionen/dein-backoffice-befragen' },
     { re:/\\/(?:lektionen\\/)?dein-backoffice-befragen\\/?$/, href:'/lektionen/datenbanken-automatisch-aktualisieren' },
     { re:/\\/(?:lektionen\\/)?datenbanken-automatisch-aktualisieren\\/?$/, href:'/lektionen/lieferscheine-und-preise-einpflegen' },
-    { re:/\\/(?:lektionen\\/)?lieferscheine-und-preise-einpflegen\\/?$/, href:'/lektionen/notion-agents-einsetzen' },
-    { re:/\\/(?:lektionen\\/)?notion-agents-einsetzen\\/?$/, href:'/lektionen/notion-automationen-bauen' },
+    { re:/\\/(?:lektionen\\/)?lieferscheine-und-preise-einpflegen\\/?$/, href:'/lektionen/notion-agents-im-betrieb-einsetzen' },
+    { re:/\\/(?:lektionen\\/)?notion-agents-(?:im-betrieb-)?einsetzen\\/?$/, href:'/lektionen/notion-automationen-bauen' },
     { re:/\\/(?:lektionen\\/)?notion-automationen-bauen\\/?$/, href:'/lektionen/wiederkehrende-routinen-einrichten' },
     { re:/\\/(?:lektionen\\/)?wiederkehrende-routinen-einrichten\\/?$/, href:'/lektionen/wer-macht-was-im-backoffice' },
     { re:/\\/(?:lektionen\\/)?wer-macht-was-im-backoffice\\/?$/, href:'/modul-5-claude-code-notion' },

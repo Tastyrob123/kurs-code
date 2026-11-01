@@ -197,7 +197,7 @@
     key:'tsn4a5', re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/,
     eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
     intro:
-      '<p>Wie Notion AI einen einzelnen Lieferschein einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
+      '<p>Wie Notion AI einen einzelnen Lieferschein als PDF einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
       '<p>Wir bauen einen festen Ablauf, mit dem Claude Code deine Lieferscheine aus einem Ordner liest, jeden Artikel deiner Inventur zuordnet und dir die Preisänderungen als Vorschau hinlegt. Nach deiner Freigabe rechnet deine Vorlage den neuen Preis bis in jedes Gericht durch, und du siehst, <b>was dich die Erhöhung wirklich kostet</b>.</p>',
     anim:{
       id:'tsn4a5anim', eyebrow:'Ein Schein, die ganze Kette', title:'Vom Lieferschein bis in den <span class="g">Teller</span>.',
@@ -277,6 +277,6 @@
       'Du hältst mit zwei Feldern die <b>Preisgeschichte</b> deiner Inventur fest.',
       'Du siehst nach jeder Freigabe, welche <b>Gerichte</b> die Erhöhung trifft.'
     ],
-    next:'/lektionen/notion-agents-einsetzen'
+    next:'/lektionen/notion-agents-im-betrieb-einsetzen'
   });
 })();

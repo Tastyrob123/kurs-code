@@ -542,7 +542,7 @@
   /* Reihenfolge der Modul-4-Seiten. PENDING = Seiten, die super.so noch nicht synchronisiert hat
      (sonst 404). Der Weiter-Button springt bis zum Re-Sync ueber sie hinweg. Wird vom Bau-Skript gesetzt. */
   var ORDER=['/lektionen/dein-backoffice-bekommt-hnde','/lektionen/notion-mit-claude-code-verbinden','/lektionen/die-systemkarte-anlegen','/lektionen/dein-backoffice-befragen',
-    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-einsetzen','/lektionen/notion-automationen-bauen',
+    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-im-betrieb-einsetzen','/lektionen/notion-automationen-bauen',
     '/lektionen/wiederkehrende-routinen-einrichten','/lektionen/wer-macht-was-im-backoffice','/modul-5-claude-code-notion'];
   var PENDING=/*PENDING*/[]/*/PENDING*/;
   function resolve(h){ var g=0; while(PENDING.indexOf(h)>-1 && g++<12){ var i=ORDER.indexOf(h); if(i<0||i>=ORDER.length-1) break; h=ORDER[i+1]; } return h; }

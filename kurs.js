@@ -4453,8 +4453,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/, href:'/lektionen/dein-backoffice-befragen' },
     { re:/\/(?:lektionen\/)?dein-backoffice-befragen\/?$/, href:'/lektionen/datenbanken-automatisch-aktualisieren' },
     { re:/\/(?:lektionen\/)?datenbanken-automatisch-aktualisieren\/?$/, href:'/lektionen/lieferscheine-und-preise-einpflegen' },
-    { re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/, href:'/lektionen/notion-agents-einsetzen' },
-    { re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/, href:'/lektionen/notion-automationen-bauen' },
+    { re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/, href:'/lektionen/notion-agents-im-betrieb-einsetzen' },
+    { re:/\/(?:lektionen\/)?notion-agents-(?:im-betrieb-)?einsetzen\/?$/, href:'/lektionen/notion-automationen-bauen' },
     { re:/\/(?:lektionen\/)?notion-automationen-bauen\/?$/, href:'/lektionen/wiederkehrende-routinen-einrichten' },
     { re:/\/(?:lektionen\/)?wiederkehrende-routinen-einrichten\/?$/, href:'/lektionen/wer-macht-was-im-backoffice' },
     { re:/\/(?:lektionen\/)?wer-macht-was-im-backoffice\/?$/, href:'/modul-5-claude-code-notion' },
@@ -33641,7 +33641,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   /* Reihenfolge der Modul-4-Seiten. PENDING = Seiten, die super.so noch nicht synchronisiert hat
      (sonst 404). Der Weiter-Button springt bis zum Re-Sync ueber sie hinweg. Wird vom Bau-Skript gesetzt. */
   var ORDER=['/lektionen/dein-backoffice-bekommt-hnde','/lektionen/notion-mit-claude-code-verbinden','/lektionen/die-systemkarte-anlegen','/lektionen/dein-backoffice-befragen',
-    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-einsetzen','/lektionen/notion-automationen-bauen',
+    '/lektionen/datenbanken-automatisch-aktualisieren','/lektionen/lieferscheine-und-preise-einpflegen','/lektionen/notion-agents-im-betrieb-einsetzen','/lektionen/notion-automationen-bauen',
     '/lektionen/wiederkehrende-routinen-einrichten','/lektionen/wer-macht-was-im-backoffice','/modul-5-claude-code-notion'];
   var PENDING=/*PENDING*/[]/*/PENDING*/;
   function resolve(h){ var g=0; while(PENDING.indexOf(h)>-1 && g++<12){ var i=ORDER.indexOf(h); if(i<0||i>=ORDER.length-1) break; h=ORDER[i+1]; } return h; }
@@ -34392,7 +34392,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     key:'tsn4a5', re:/\/(?:lektionen\/)?lieferscheine-und-preise-einpflegen\/?$/,
     eyebrow:'L 4.5', title:'Lieferscheine <span class="ts-gold">einlesen</span>', alt:'Lieferscheine und Preislisten mit Claude in die Inventur übernehmen',
     intro:
-      '<p>Wie Notion AI einen einzelnen Lieferschein einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
+      '<p>Wie Notion AI einen einzelnen Lieferschein als PDF einliest, kennst du aus den ersten Modulen. Hier geht es um den Alltag dahinter: viele Scheine im Monat, verschiedene Lieferanten, die ihre Artikel anders nennen als du, und Preise, die sich still verändern.</p>'+
       '<p>Wir bauen einen festen Ablauf, mit dem Claude Code deine Lieferscheine aus einem Ordner liest, jeden Artikel deiner Inventur zuordnet und dir die Preisänderungen als Vorschau hinlegt. Nach deiner Freigabe rechnet deine Vorlage den neuen Preis bis in jedes Gericht durch, und du siehst, <b>was dich die Erhöhung wirklich kostet</b>.</p>',
     anim:{
       id:'tsn4a5anim', eyebrow:'Ein Schein, die ganze Kette', title:'Vom Lieferschein bis in den <span class="g">Teller</span>.',
@@ -34472,7 +34472,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
       'Du hältst mit zwei Feldern die <b>Preisgeschichte</b> deiner Inventur fest.',
       'Du siehst nach jeder Freigabe, welche <b>Gerichte</b> die Erhöhung trifft.'
     ],
-    next:'/lektionen/notion-agents-einsetzen'
+    next:'/lektionen/notion-agents-im-betrieb-einsetzen'
   });
 })();
 
@@ -34536,7 +34536,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function dot(el,p){ el.querySelector('.tl .run').style.setProperty('--p',p); }
   function ti(el,a,b){ el.querySelector('.x1').classList.toggle('on',a); el.querySelector('.x2').classList.toggle('on',b); }
   N.page({
-    key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-einsetzen\/?$/,
+    key:'tsn4a6', re:/\/(?:lektionen\/)?notion-agents-(?:im-betrieb-)?einsetzen\/?$/,
     eyebrow:'L 4.6', title:'Agenten <span class="ts-gold">beauftragen</span>', alt:'Notion Custom Agents im Backoffice einsetzen',
     intro:
       '<p>Alles, was wir bis hierher gebaut haben, passiert, wenn du am Rechner sitzt und Claude Code startest. Notion hat inzwischen eigene Agenten, die ohne dich arbeiten. Sie sitzen in deinem Workspace, warten auf einen Auslöser und erledigen dann ihre Aufgabe, nachts, am Wochenende oder während du im Service stehst.</p>'+
@@ -34609,6 +34609,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         '<h3>Wann der Agent, wann <span class="g">Claude Code</span></h3>'+
         '<p class="lead">Ein Notion Agent ist stark, solange alles in Notion liegt. Sobald etwas von außen dazukommt, ist er der falsche Weg.</p>'+
         '<p>Der Lieferschein aus Lektion fünf liegt als Datei auf deinem Rechner, also kann der Agent ihn nicht lesen. Ein Bericht, der Notion-Zahlen mit dem Export deines Kassensystems vergleicht, braucht ebenfalls eine Datei von außen. Beides bleibt Aufgabe für Claude Code.</p>'+
+        '<p>Auch beim Ausbau deines Systems hat er eine Grenze. Automationen, Datenbankvorlagen und Seitenlayouts legt der Agent nicht an. Die richtest du selbst ein, die Automationen zeige ich dir in der nächsten Lektion.</p>'+
         '<p><span class="gl">Die Merkregel:</span> Bleibt die Arbeit vollständig in Notion und muss jemand mitdenken, nimm den Agenten. Kommt etwas von außen dazu, nimm Claude Code. Die vollständige Regel mit allen drei Wegen bauen wir in Lektion neun.</p>'+
         '<div class="tsn4-err">'+
           '<div><b>Zu breiter Zugriff.</b> „Seiten, die mit allen geteilt sind“ als Bereich zu wählen ist bequem, gibt dem Agenten aber fast deinen ganzen Workspace. Gib ihm nur die Datenbanken, die er für seine Aufgabe braucht.</div>'+
