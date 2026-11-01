@@ -27480,7 +27480,7 @@ var TSISL_TEAM_ONB_V2=[
     abschluss:'/abschluss-was-du-am-ende-kannst',
     /* erste Lektion je Modul (Stand Navigation 01.11.2026) */
     m1:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip',
-    m2:'/mehrwert-zielbild',
+    m2:'/lektionen/vorlage-holen-und-einrichten',
     m3:'/was-ist-claude-genau',
     m4:'/lektionen/notion-mit-claude-code-verbinden',
     m5:'/lektionen/reservierungen-ohne-anruf',
@@ -27516,11 +27516,11 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsn0svg={ NOTION:NOTION, CLAUDE:CLAUDE };
 
   var MENU=[
-    ['Modul 0','Einführung','Was dich erwartet, wo KI dir Zeit spart und mit welchen Werkzeugen wir arbeiten.',L.l01],
+    ['Modul 0','Einführung','Der Rahmen für den ganzen Kurs, in sieben kurzen Lektionen.',L.l01],
     ['Modul 1','Notion-Grundlagen','So viel Notion, wie du brauchst, um sicher mit deinem Backoffice zu arbeiten.',L.m1],
-    ['Modul 2','Das Notion AI Backoffice System','Die Vorlage holen, deine Daten eintragen und verstehen, woher jede Zahl kommt.',L.m2],
-    ['Modul 3','Claude Grundlagen','Was Claude ist, welchen Zugang du wann nimmst und wie du ihn einrichtest.',L.m3],
-    ['Modul 4','Claude Code + Notion Agents','Claude mit deinem Backoffice verbinden, Fragen an deine Zahlen stellen, Routinen laufen lassen.',L.m4],
+    ['Modul 2','Das Notion AI Backoffice System','Die fertige Vorlage mit deinen Daten füllen und verstehen, woher jede Zahl kommt.',L.m2],
+    ['Modul 3','Claude Grundlagen','Was Claude ist und wie du es für deinen Betrieb einrichtest.',L.m3],
+    ['Modul 4','Claude Code + Notion Agents','Claude mit deinem Backoffice verbinden und Aufgaben zu festen Zeiten erledigen lassen.',L.m4],
     ['Modul 5','AI Reservation Agent','Anfragen per Mail, Nachricht und Telefon, die ein Agent für dich annimmt.',L.m5],
     ['Modul 6','AI Website Building','Deine eigene Website mit Claude bauen und online stellen.',L.m6]
   ];
@@ -27529,7 +27529,7 @@ var TSISL_TEAM_ONB_V2=[
     var N=window.__tsn0, out=[];
     out.push(N.intro(
       '<p>Diese Masterclass ist für Menschen, die einen Betrieb führen. Für Inhaber, Küchenchefs und Betriebsleiter, die wissen wollen, an welchen Stellen ihnen KI im Alltag wirklich Arbeit abnimmt.</p>'+
-      '<p>Du bekommst dafür ein fertiges System: das <b>Notion AI Backoffice</b>, als leere Vorlage für deinen eigenen Betrieb. Du trägst deine Lieferanten, Preise und Rezepturen ein, und ab da rechnet das System für dich. Wareneinsatz, Deckungsbeitrag, Allergene und Bestände stehen dann an einem Ort.</p>'+
+      '<p>Du bekommst dafür ein fertiges System: das <b>Notion AI Backoffice</b>, als leere Vorlage für deinen eigenen Betrieb. Du trägst deine Lieferanten, Preise und Rezepturen ein, den Rest rechnet die Vorlage. Wareneinsatz, Deckungsbeitrag, Allergene und Bestände stehen dann an einem Ort.</p>'+
       '<p>Dazu lernst du, wie du dieses System mit <b>Claude</b> bedienst und erweiterst. In ganz normalen Sätzen, ohne eine Zeile Code.</p>'));
 
     var line=N.h('div','tsn0-anim'); line.id='tsn0-hline';
@@ -27537,16 +27537,16 @@ var TSISL_TEAM_ONB_V2=[
       'In Notion lebt dein Betrieb, mit allen Daten und Berechnungen. Claude arbeitet mit diesem System, beantwortet deine Fragen und baut es mit dir weiter aus.')+
       '<div class="hl-stage">'+
         '<div class="hl-card hl-n"><div class="hl-ic">'+NOTION+'</div><span class="hl-k">Das System</span><div class="hl-nm">Notion + Notion AI</div><hr>'+
-          '<p>Deine Datenbanken, verbunden und durchgerechnet. Notion AI arbeitet direkt darin und liest dir zum Beispiel einen Lieferschein aus.</p></div>'+
+          '<p>Deine Datenbanken, verbunden und durchgerechnet. Notion AI arbeitet direkt darin und beantwortet dir zum Beispiel Fragen zu deinen Einträgen.</p></div>'+
         '<div class="hl-bridge" aria-hidden="true"><span class="hl-rail"></span><span class="hl-dot"></span><span class="hl-dot d2"></span></div>'+
         '<div class="hl-card hl-c"><div class="hl-ic">'+CLAUDE+'</div><span class="hl-k">Das Werkzeug</span><div class="hl-nm">Claude</div><hr>'+
-          '<p>Verbindet sich mit deinem Notion, wertet deine Zahlen aus und übernimmt Aufgaben, die immer wiederkommen.</p></div>'+
+          '<p>Verbindet sich mit deinem Notion und beantwortet dir Fragen zu deinen Zahlen. Auch den Lieferschein vom Handy liest Claude für dich ein.</p></div>'+
       '</div>';
     out.push(line);
 
     var menu=N.h('div','tsn0-anim'); menu.id='tsn0-menu';
     menu.innerHTML=N.head('Der Aufbau','Die <span class="g">Karte.</span>',
-      'Sieben Module und ein Abschluss. Jedes Modul baut auf dem vorigen auf, und aus jedem nimmst du etwas mit, das du am nächsten Tag im Betrieb nutzt.')+
+      'Sieben Module und ein Abschluss. Jedes baut auf dem vorigen auf.')+
       '<div class="mc-card"><div class="mc-top"><span class="mc-brand">Gastronomie AI Master<span class="r">Class</span></span><span class="mc-rule"></span><span class="mc-sub">Die Karte</span></div>'+
       '<ol class="mc-list">'+MENU.map(function(m,i){
         return '<li class="mc-row" style="--i:'+i+'"><a href="'+m[3]+'"><span class="mc-no">'+m[0]+'</span>'+
@@ -27559,7 +27559,7 @@ var TSISL_TEAM_ONB_V2=[
     out.push(menu);
 
     var cta=N.h('div','tsn0-cta'); cta.id='tsn0-hcta';
-    cta.innerHTML='<p>Fang ganz vorne an. In Modul 0 zeige ich dir in sieben Lektionen, worauf du dich einlässt, bevor wir mit Notion loslegen.</p>'+
+    cta.innerHTML='<p>Fang ganz vorne an. In Modul 0 zeige ich dir in sieben kurzen Lektionen, worauf du dich einlässt, bevor wir mit Notion loslegen.</p>'+
       '<a class="tsn0-btn" href="'+L.l01+'">Mit Lektion 0.1 starten <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
     out.push(cta);
     return out;
@@ -27593,10 +27593,10 @@ var TSISL_TEAM_ONB_V2=[
   ];
   function build(){
     var out=[];
-    out.push(N.intro('<p>Bevor wir in Notion einsteigen, nehmen wir uns sieben kurze Lektionen Zeit für den Rahmen. Du erfährst, was dich erwartet, wo KI in deinem Betrieb wirklich etwas bringt und mit welchen Werkzeugen wir arbeiten.</p>'+
-      '<p>Am Ende von Modul 0 weißt du, worauf du dich einlässt, kennst die Begriffe, die dir im ganzen Kurs begegnen, und hast deine ersten Unterlagen für das Backoffice beisammen.</p>'));
+    out.push(N.intro('<p>Bevor wir in Notion einsteigen, nehmen wir uns sieben kurze Lektionen Zeit für den Rahmen. Du erfährst, wo KI in deinem Betrieb etwas bringt und mit welchen Werkzeugen wir arbeiten.</p>'+
+      '<p>Am Ende von Modul 0 kennst du die Begriffe, die dir im ganzen Kurs begegnen, und hast deine ersten Unterlagen beisammen.</p>'));
     var w=N.h('div','tsn0-anim'); w.id='tsn0-m0list';
-    w.innerHTML=N.head('Modul 0','Sieben Lektionen, <span class="g">ein Rahmen.</span>','Geh sie der Reihe nach durch. Jede Lektion baut auf der vorigen auf.')+
+    w.innerHTML=N.head('Modul 0','Bevor es <span class="g">losgeht.</span>','Geh sie der Reihe nach durch.')+
       '<ol class="ml-list">'+LES.map(function(l,i){
         return '<li class="ml-row" style="--i:'+i+'"><a href="'+l[3]+'"><span class="ml-no">'+l[0]+'</span><span class="ml-main"><span class="ml-t">'+l[1]+'</span><span class="ml-d">'+l[2]+'</span></span>'+
           '<span class="ml-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>';
@@ -27645,7 +27645,7 @@ var TSISL_TEAM_ONB_V2=[
     'Claude arbeitet mit deinen Zahlen. Du fragst in einem normalen Satz, und die Antwort kommt aus <b>deinem eigenen System</b>.'
   ];
   var Q='Welches Gericht hat den schwächsten Deckungsbeitrag?';
-  var A='Das <b>Lammkarree</b>. Nach Ware, Gemeinkosten und Personal bleiben <b>−0,90 €</b> je Teller. Das Rote-Bete-Risotto liegt bei <b>3,20 €</b>.';
+  var A='Das <b>Lammkarree</b>. Nach Ware, Gemeinkosten und Personal bleiben <b>−0,90 €</b> je Teller. Das Gemüse-Steak liegt bei <b>3,60 €</b>, dem besten Wert auf deiner Karte.';
 
   function stage(){
     var side=['Lieferpartner','Inventur','Zutaten','Rezepturen','Gerichte','Kennzahlen'];
@@ -27665,40 +27665,40 @@ var TSISL_TEAM_ONB_V2=[
   function build(){
     var out=[];
     out.push(N.intro(
-      '<p>Schön, dass du da bist. Ich komme aus der Gastronomie. Ich habe Inventuren gezählt, Deckungsbeiträge gerechnet und Dienstpläne geschrieben, oft spät abends im Büro, wenn der Service längst vorbei war.</p>'+
-      '<p>Genau deshalb ist dieser Kurs so aufgebaut, wie er aufgebaut ist: an den Stellen, an denen du im Betrieb wirklich stehst. In dieser Lektion zeige ich dir, worauf du dich einlässt, was du bekommst und wie wir gemeinsam damit arbeiten.</p>'));
+      '<p>Schön, dass du da bist. Ich komme aus der Gastronomie. Ich habe Inventuren gezählt und Deckungsbeiträge gerechnet, oft spät abends im Büro, wenn der Service längst vorbei war.</p>'+
+      '<p>Genau deshalb ist dieser Kurs so aufgebaut, wie er aufgebaut ist: an den Stellen, an denen du im Betrieb wirklich stehst. In dieser Lektion zeige ich dir, was du bekommst und wie wir gemeinsam damit arbeiten.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a01';
     a.innerHTML=N.head('So arbeiten wir','Fertig geliefert, <span class="g">von dir gefüllt.</span>','Drei Schritte, die du im Kurs immer wieder gehst. Einmal am Stück gezeigt, damit du weißt, worauf alles hinausläuft.')+
       '<div class="a1-stage">'+stage()+'</div>'+
-      '<div class="tsn0-steps">'+['01 Die Vorlage','02 Deine Daten','03 Claude fragt mit'].map(function(s,i){ return '<button type="button" class="tsn0-step" data-b="'+(i+1)+'">'+s+'</button>'; }).join('')+'</div>'+
+      '<div class="tsn0-steps">'+['01 Die Vorlage','02 Deine Daten','03 Du fragst Claude'].map(function(s,i){ return '<button type="button" class="tsn0-step" data-b="'+(i+1)+'">'+s+'</button>'; }).join('')+'</div>'+
       '<p class="tsn0-cap">'+CAPS[2]+'</p><p class="tsn0-note">Alle Zahlen sind Beispielwerte.</p>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
 
     out.push(N.sec('tsn0-l01s1',
       '<h3>Du bekommst es <span class="g">fertig.</span></h3>'+
-      '<p>Das Herzstück dieses Kurses ist das <b>Notion AI Backoffice</b>. Ein System aus verbundenen Datenbanken, in dem dein ganzer Betrieb Platz hat: Lieferpartner und Inventur, Zutaten und Rezepturen, Gerichte und Getränke, Gemeinkosten, Löhne und Kennzahlen. Ich habe es über Monate gebaut und im eigenen Alltag auf Herz und Nieren geprüft.</p>'+
-      '<p>Du bekommst es als leere Vorlage. Du musst nichts nachbauen, keine Formel abtippen und keine Verbindung selbst ziehen. Du übernimmst die Vorlage in dein Notion, trägst deine Daten ein, und ab da rechnet das System für dich.</p>'+
-      '<p>Wie es gebaut ist, zeige ich dir trotzdem, Spalte für Spalte. Du sollst wissen, woher jede Zahl kommt. Dann verlässt du dich auf sie, und wenn du später etwas anpassen oder erweitern willst, weißt du genau, wo du ansetzt.</p>'));
+      '<p>Das Herzstück dieses Kurses ist das <b>Notion AI Backoffice</b>. Ein System aus verbundenen Datenbanken, in dem dein ganzer Betrieb Platz hat: Lieferpartner und Inventur, Zutaten und Rezepturen, Gerichte und Getränke, Gemeinkosten, Löhne und Kennzahlen.</p>'+
+      '<p>Du bekommst es als leere Vorlage. Du musst nichts nachbauen. Du tippst keine Formel ab und ziehst keine Verbindung selbst. Du übernimmst die Vorlage in dein Notion, trägst deine Daten ein, und ab da rechnet das System für dich.</p>'+
+      '<p>Wie es gebaut ist, siehst du in Modul 2 bei jeder Datenbank im Teil „So ist es gebaut“. Du sollst wissen, woher jede Zahl kommt. Dann verlässt du dich auf sie, und wenn du später etwas anpassen willst, weißt du, wo du ansetzt.</p>'));
 
     out.push(N.sec('tsn0-l01s2',
       '<h3>Wie wir <span class="g">arbeiten.</span></h3>'+
-      '<p>Durch den ganzen Kurs zieht sich eine Linie: <b>Notion ist das System, Claude ist das Werkzeug.</b> In Notion liegen deine Daten und Berechnungen, an einem Ort und für dein ganzes Team gleich. Notion AI arbeitet direkt darin. Claude kommt dazu, wenn du dein System bedienen, auswerten oder erweitern willst, und zwar in ganz normalen Sätzen.</p>'+
-      '<p>Welche Rolle jedes Werkzeug genau spielt, schauen wir uns in Lektion 0.3 an. Für den Moment reicht dir: Du arbeitest nie gegen leere Seiten, sondern immer mit einem System, das schon steht.</p>'));
+      '<p>Durch den ganzen Kurs zieht sich eine Linie: <b>Notion ist das System, Claude ist das Werkzeug.</b> In Notion liegen deine Daten und Berechnungen, für dein ganzes Team gleich. Notion AI arbeitet direkt darin. Claude kommt dazu, wenn du dein System auswerten oder erweitern willst.</p>'+
+      '<p>Welche Rolle jedes Werkzeug genau spielt, schauen wir uns in Lektion 0.3 an. Du fängst nie bei null an. Das System steht schon, bevor du die erste Zahl einträgst.</p>'));
 
     out.push(N.sec('tsn0-l01s3',
       '<h3>Für wen dieser Kurs <span class="g">gemacht ist.</span></h3>'+
       '<div class="tsn0-cards c3">'+
         '<div class="tsn0-card"><span class="k">Inhaber</span><div class="n">Du willst wissen, was dein Betrieb verdient.</div><hr><p>Pro Gericht und pro Monat, ohne jeden Abend im Büro zu sitzen und Zahlen aus fünf Programmen zusammenzusuchen.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Küchenchef</span><div class="n">Du kalkulierst und hältst die Karte sauber.</div><hr><p>Rezepturen, Wareneinsatz und Allergene liegen an einem Ort und stimmen auch dann noch, wenn sich ein Einkaufspreis ändert.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Betriebsleiter</span><div class="n">Du hältst den Laden zusammen.</div><hr><p>Team, Lieferanten und Abläufe brauchen ein System, auf das sich alle verlassen können, auch an deinem freien Tag.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Küchenchef</span><div class="n">Du kalkulierst und hältst die Karte sauber.</div><hr><p>Rezepturen, Wareneinsatz und Allergene hängen zusammen und stimmen auch dann noch, wenn sich ein Einkaufspreis ändert.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Betriebsleiter</span><div class="n">Du hältst den Laden zusammen.</div><hr><p>Team, Lieferanten und Abläufe brauchen ein System, auf das sich alle verlassen können, auch wenn du nicht im Haus bist.</p></div>'+
       '</div>'+
       '<p>Führst du ein Hotel mit eigenem Restaurant, gilt alles genauso. Die Beispiele kommen aus Küche, Service und Einkauf, weil dort die meisten Zahlen entstehen.</p>'+
       '<p>Und es ist egal, wo du gerade stehst. Ob du noch nie mit KI gearbeitet hast oder schon eigene Seiten in Notion gebaut hast: Jeder Schritt läuft an einem echten Beispiel aus dem Betrieb. Wer neu ist, geht der Reihe nach vor. Wer schon Erfahrung hat, springt an die Stellen, die für ihn neu sind.</p>'));
 
     out.push(N.sec('tsn0-l01s4',
       '<h3>Es gibt nicht den <span class="g">einen Weg.</span></h3>'+
-      '<p>Jeder Betrieb ist anders. Ein Café braucht etwas anderes als ein Restaurant mit drei Standorten, und ein Caterer denkt wieder anders als ein Hotel. Eine einzige Wahrheit für alle gibt es deshalb nicht. Ich zeige dir die Möglichkeiten, die dir die KI-Welt heute bietet, und sage dir ehrlich, wo etwas Zeit kostet und wo etwas Geld.</p>'+
+      '<p>Jeder Betrieb ist anders. Ein Café braucht etwas anderes als ein Restaurant mit drei Standorten, und ein Caterer denkt wieder anders als ein Hotel. Eine einzige Wahrheit für alle gibt es deshalb nicht. Ich zeige dir die Möglichkeiten, die dir die KI-Welt heute bietet, und sage dir, wo etwas Zeit kostet und wo etwas Geld.</p>'+
       '<p>Ich habe schon viele KI-Werkzeuge getestet, aber bei Weitem nicht alle. Nimm diesen Kurs deshalb als Orientierung. Wenn du heute mit Programmen arbeitest, die für dich funktionieren, behalte sie. Du entscheidest selbst, wie viel Zeit du in die Pflege deines Systems steckst und wie viel Geld du für Werkzeuge ausgibst.</p>'+
       '<p class="tsn0-rule">Ein schlankes System, das du jeden Tag pflegst, bringt dir mehr als ein großes, das du nach <span class="g">zwei Wochen</span> nicht mehr öffnest.</p>'));
 
@@ -27708,7 +27708,7 @@ var TSISL_TEAM_ONB_V2=[
       points:[
         'Geh die sieben Lektionen von Modul 0 <b>der Reihe nach</b> durch. Sie sind kurz und ersparen dir später viele Fragen.',
         'Notier dir beim Lesen die Stellen in deinem Betrieb, an denen du heute <b>am meisten Zeit</b> verlierst. In Lektion 0.2 kommen wir darauf zurück.',
-        'Schließ noch <b>keine Abos</b> ab. Welche du wirklich brauchst und ab wann, klären wir in Lektion 0.4 und 0.7.',
+        'Schließ <b>noch nichts ab</b>, bevor du Lektion 0.7 gelesen hast. Dort steht, welches Konto du wann brauchst.',
         'Die Backoffice-Vorlage holst du dir in <b>Modul 2</b>. Bis dahin kennst du Notion gut genug, um sicher damit zu arbeiten.']
     }));
     return out;
@@ -27770,7 +27770,7 @@ var TSISL_TEAM_ONB_V2=[
   var ST=[
     {t:'07:00',h:7,   n:'Die Lieferung',     img:'tag-lieferung',
      a:'Der Lieferschein wandert in den Ordner. Ob sich ein Preis geändert hat, merkt keiner.',
-     b:'Du fotografierst den Schein, Notion AI liest Mengen und Preise aus. Deine Kalkulation ist sofort aktuell.', m:'Modul 2'},
+     b:'Du fotografierst den Schein, Claude liest Mengen und Preise aus. Du prüfst die Vorschau, und deine Kalkulation ist aktuell.', m:'Modul 4'},
     {t:'10:30',h:10.5,n:'Die Kalkulation',   img:'tag-kalkulation',
      a:'Was ein Teller kostet, weißt du ungefähr.',
      b:'Wareneinsatz und Deckungsbeitrag stehen je Gericht auf den Cent genau, aus deinen eigenen Rezepturen.', m:'Modul 2'},
@@ -27779,13 +27779,13 @@ var TSISL_TEAM_ONB_V2=[
      b:'Bilder und Texte entstehen mit KI, Preise und Allergene kommen direkt aus deinem System.', m:'Modul 2 und 6'},
     {t:'15:30',h:15.5,n:'Team und Abläufe',  img:'tag-team',
      a:'Wissen steckt in Köpfen und auf Zetteln. Jede Einarbeitung beginnt von vorn.',
-     b:'Checklisten, Handbücher und Einarbeitung liegen an einem Ort, für alle gleich.', m:'Modul 2'},
+     b:'Checklisten, Handbücher und Einarbeitung liegen im System, für alle gleich.', m:'Modul 2'},
     {t:'17:00',h:17,  n:'Reservierungen',    img:'tag-reservierung',
      a:'Das Telefon klingelt mitten in der Vorbereitung, Anfragen per Mail bleiben liegen.',
-     b:'Ein Agent nimmt Anfragen an, prüft freie Tische und trägt die Reservierung ein.', m:'Modul 5'},
+     b:'Ein Agent nimmt die Anfrage an und trägt die Reservierung ein, wenn ein Tisch frei ist.', m:'Modul 5'},
     {t:'23:30',h:23.5,n:'Der Tagesabschluss',img:'tag-abschluss',
      a:'Die Umsätze stehen in mehreren Programmen, die Auswertung kommt irgendwann.',
-     b:'Umsätze und Kennzahlen laufen an einem Ort zusammen, und du stellst Claude Fragen dazu.', m:'Modul 2 und 4'}
+     b:'Umsätze und Kennzahlen laufen im Backoffice zusammen, und du stellst Claude Fragen dazu.', m:'Modul 2 und 4'}
   ];
   function ang(hh){ return hh/24*360; }
   function dial(){
@@ -27811,9 +27811,9 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>KI ist kein Selbstzweck. Sie lohnt sich nur dort, wo dir im Betrieb heute Zeit verloren geht oder Geld versickert, ohne dass du es merkst.</p>'+
-      '<p>Diese Stellen nenne ich <b>Schnittstellen</b>. Gemeint ist jeder Moment im Tag, in dem eine Information entsteht, weitergegeben oder gebraucht wird. Wir gehen jetzt einen ganz normalen Tag durch und schauen, wo diese Stellen liegen. Danach weißt du, welches Modul welches Problem für dich löst.</p>'));
+      '<p>Diese Stellen nenne ich <b>Schnittstellen</b>. Gemeint ist jeder Moment im Tag, in dem eine Information entsteht oder gebraucht wird. Wir gehen jetzt einen ganz normalen Tag durch und schauen, wo diese Stellen liegen. Danach weißt du, welches Modul welches Problem für dich löst.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a02';
-    a.innerHTML=N.head('Ein Tag im Betrieb','Sechs Stellen, <span class="g">ein Tag.</span>','Vom ersten Lieferschein bis zum Tagesabschluss. Tipp auf eine Uhrzeit, um eine Station noch einmal anzusehen.')+
+    a.innerHTML=N.head('Ein Tag im Betrieb','Ein ganz normaler <span class="g">Dienstag.</span>','Morgens um sieben kommt die Lieferung, kurz vor Mitternacht machst du die Kasse zu. Tipp auf eine Uhrzeit, um eine Station noch einmal anzusehen.')+
       '<div class="a2-frame">'+dial()+info()+'</div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
@@ -27823,15 +27823,15 @@ var TSISL_TEAM_ONB_V2=[
       '<p class="lead">Die teuersten Schnittstellen sind die, die keiner sieht. Zwei davon gibt es in fast jedem Betrieb.</p>'+
       '<div class="tsn0-cards c2">'+
         '<div class="tsn0-card"><span class="k">Einkauf</span><div class="n">Preise, die nicht mitgehen.</div><hr><p>Dein Lieferant erhöht den Preis für Butter. Der neue Preis steht auf dem Lieferschein, und der Schein landet im Ordner. Deine Karte bleibt, wie sie ist, und ab jetzt verdienst du an jedem Gericht mit Butter etwas weniger.</p><p>Im Backoffice hängt jedes Gericht über seine Rezepturen an den Einkaufspreisen. Ändert sich ein Preis, siehst du, welche Gerichte betroffen sind.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Lager</span><div class="n">Ware, die keiner zählt.</div><hr><p>Was im Kühlhaus liegt, weiß meist nur einer genau. Bestellt wird nach Gefühl, und am Monatsende stimmt die Inventur nicht mit dem Einkauf überein.</p><p>Mit einer gepflegten Inventur im System siehst du, was da ist, was fehlt und wo Ware verschwindet.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Lager</span><div class="n">Ware, die keiner zählt.</div><hr><p>Was im Kühlhaus liegt, weiß meist nur einer genau. Bestellt wird nach Gefühl, und am Monatsende stimmt die Inventur nicht mit dem Einkauf überein.</p><p>Mit einer gepflegten Inventur im System siehst du, was fehlt und wo Ware verschwindet.</p></div>'+
       '</div>'));
 
     out.push(N.sec('tsn0-l02s2',
       '<h3>Wo die Zeit <span class="g">verloren geht.</span></h3>'+
       '<p class="lead">Neben dem Geld kostet dich vor allem Kleinarbeit Zeit, die sich jeden Tag wiederholt.</p>'+
       '<div class="tsn0-cards c3">'+
-        '<div class="tsn0-card"><span class="k">Abtippen</span><div class="n">Vom Papier in die Tabelle.</div><hr><p>Lieferscheine, Rechnungen, Bestelllisten. Das übernimmt Notion AI vom Foto, du prüfst nur noch.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Suchen</span><div class="n">Wo war noch mal die Liste?</div><hr><p>Allergene, Rezepturen, Kontakte. Im Backoffice hat jede Information genau einen Platz, und jeder im Team findet sie dort.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Abtippen</span><div class="n">Zahlen, die du zweimal schreibst.</div><hr><p>Lieferscheine und Rechnungen liest Claude vom Foto aus. Du prüfst nur noch, was es eintragen will.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Suchen</span><div class="n">Wo war noch mal die Liste?</div><hr><p>Im Backoffice hat jede Information genau einen Platz, von den Allergenen bis zur Nummer des Getränkehändlers. Jeder im Team findet sie dort.</p></div>'+
         '<div class="tsn0-card"><span class="k">Nachfragen</span><div class="n">Der Anruf am freien Tag.</div><hr><p>Wie geht die Schließroutine? Wer liefert den Fisch? Eine Checkliste im System beantwortet das, ohne dass jemand dich anruft.</p></div>'+
       '</div>'+
       '<div class="tsn0-do"><span class="k">Jetzt du · zehn Minuten</span><ol>'+
@@ -27842,13 +27842,13 @@ var TSISL_TEAM_ONB_V2=[
       '</ol></div>'));
 
     out.push(N.emp({ id:'tsn0-l02emp', kind:'Nutzung', animTitle:'Deine erste', animGold:'Schnittstelle',
-      steps:['Wiederkehrend','Eine zuerst','Vorher messen','Küche zuerst'],
+      steps:['Wiederkehrend','Eine zuerst','Vorher messen','Bei dir anfangen'],
       intro:'So wählst du die Stelle, mit der du anfängst.',
       points:[
         'Nimm eine Stelle, die <b>jede Woche wiederkommt</b>. Für die meisten ist das die Lieferung, weil an ihr die ganze Kalkulation hängt.',
-        'Nimm dir <b>eine Stelle nach der anderen</b> vor. Eine Schnittstelle, die sauber läuft, bringt dir mehr als sechs halbe.',
+        'Nimm dir <b>eine Stelle nach der anderen</b> vor. Erst wenn die erste sauber läuft, kommt die nächste.',
         'Schreib auf, wie lange du heute für diese Stelle brauchst. Dann siehst du später <b>schwarz auf weiß</b>, was dir das System zurückgibt.',
-        'Hotel mit eigenem Restaurant? Die Stellen sind dieselben, nur die Wege länger. Fang trotzdem <b>in der Küche</b> an.']
+        'Nimm eine Stelle, an der <b>du selbst</b> sitzt. Was du selbst machst, kannst du sofort ändern.']
     }));
     return out;
   }
@@ -27906,17 +27906,17 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__tsn0l03) return; window.__tsn0l03=true;
   var N=window.__tsn0, L=window.__tsn0L, S=window.__tsn0svg;
   var LV=[
-    {k:'Ebene 1 · das Fundament', n:'Notion', d:'Hier landet der Lieferschein am Ende: als Einträge in Inventur und Zutaten, verbunden mit jeder Rezeptur.', ic:S.NOTION},
-    {k:'Ebene 2 · im System', n:'Notion AI', d:'Liest das Foto des Scheins aus und trägt die Positionen ein, direkt in deinem Notion.', ic:S.NOTION},
-    {k:'Ebene 3 · das Werkzeug', n:'Claude', d:'Vergleicht die neuen Preise mit dem letzten Monat und schreibt dir, welche Gerichte teurer werden.', ic:S.CLAUDE}
+    {k:'Ebene 1 · das Fundament', n:'Notion', d:'Hier landen die Positionen als Einträge in Inventur und Zutaten, verbunden mit jeder Rezeptur.', ic:S.NOTION},
+    {k:'Ebene 2 · im System', n:'Notion AI', d:'Beantwortet dir in Notion Fragen zu den neuen Einträgen, etwa welchen Zutaten noch ein Einkaufspreis fehlt.', ic:S.NOTION},
+    {k:'Ebene 3 · das Werkzeug', n:'Claude', d:'Liest das Foto des Scheins aus und trägt die Preise nach deiner Freigabe ein. Danach sagt es dir, welche Gerichte teurer werden.', ic:S.CLAUDE}
   ];
   function build(){
     var out=[];
     out.push(N.intro(
-      '<p>Im Kurs arbeiten wir mit einer Handvoll Werkzeugen. Keines davon ist zufällig gewählt, jedes hat eine feste Aufgabe. Zusammen bilden sie ein System, das deinen Betrieb abbildet und mit dir wächst.</p>'+
-      '<p>In dieser Lektion lernst du sie kennen: was jedes Werkzeug tut, warum es dabei ist und in welchem Modul es vorkommt. Bedienen lernst du sie dort, Schritt für Schritt. Hier geht es nur darum, dass du die Rollen auseinanderhältst.</p>'));
+      '<p>Im Kurs arbeiten wir mit einer Handvoll Werkzeugen. Keines davon ist zufällig gewählt, jedes hat eine feste Aufgabe. Zusammen decken sie ab, was dein Backoffice braucht.</p>'+
+      '<p>In dieser Lektion lernst du sie kennen: was jedes Werkzeug tut und in welchem Modul es vorkommt. Bedienen lernst du sie dort, Schritt für Schritt. Hier geht es nur darum, dass du die Rollen auseinanderhältst.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a03';
-    a.innerHTML=N.head('Wer was macht','Drei Ebenen, <span class="g">ein Lieferschein.</span>','Derselbe Schein, drei Werkzeuge. Jedes übernimmt genau seinen Teil.')+
+    a.innerHTML=N.head('Wer was macht','Wer den Lieferschein <span class="g">übernimmt.</span>','Ein Lieferschein am Montagmorgen. Jedes Werkzeug macht damit seinen Teil.')+
       '<div class="a3-frame"><div class="a3-stack">'+
         '<div class="a3-note"><span class="a3-note-h">Lieferschein</span><i></i><i></i><i></i><i class="s"></i></div>'+
         LV.slice().reverse().map(function(l,j){ var i=2-j; return '<div class="a3-pl p'+i+'" data-i="'+i+'"><div class="a3-top"><span class="a3-ic">'+l.ic+'</span><span class="a3-nm">'+l.n+'</span>'+(i===0?'<span class="a3-grid"><b></b><b></b><b></b><b></b><b></b><b></b></span>':'')+'</div></div>'; }).join('')+
@@ -27931,38 +27931,38 @@ var TSISL_TEAM_ONB_V2=[
 
     out.push(N.sec('tsn0-l03s2',
       '<h3>Notion AI: arbeitet <span class="g">im System.</span></h3>'+
-      '<p>Notion AI ist die KI, die direkt in Notion steckt. Sie sieht deine Seiten und Datenbanken und arbeitet dort, wo deine Daten liegen. Sie liest dir einen fotografierten Lieferschein aus und trägt ihn ein, fasst lange Seiten zusammen, beantwortet Fragen zu deinen Einträgen und hilft dir, eine Formel zu verstehen.</p>'+
-      '<p>Dazu kommen die <b>Notion Agents</b>: Helfer, die in Notion selbstständig Seiten und Einträge anlegen und bearbeiten, auf Wunsch auch nach Zeitplan. Wie du sie für dein Backoffice einsetzt, zeige ich dir in Modul 4.</p>'+
-      '<p class="tsn0-src">Stand 1. November 2026: Notion AI ist voll im Business-Tarif enthalten, im Free- und Plus-Tarif nur zum Testen. Quelle: notion.com/pricing</p>'));
+      '<p>Notion AI ist die KI, die direkt in Notion steckt. Sie sieht deine Seiten und Datenbanken und arbeitet dort, wo deine Daten liegen. Sie fasst dir lange Seiten zusammen und beantwortet Fragen zu deinen Einträgen. Hängst du an einer Formel, erklärt sie dir, was darin passiert. Listen als PDF, CSV oder Excel liest sie ein, Fotos nicht. Den Lieferschein vom Handy übernimmt deshalb Claude.</p>'+
+      '<p>Dazu kommen die <b>Notion Agents</b>: Helfer, die in Notion selbstständig Seiten und Einträge anlegen und bearbeiten, auf Wunsch auch nach Zeitplan. Wie du sie für dein Backoffice einsetzt, zeige ich dir in Modul 4. Voll nutzen kannst du Notion AI und die Agents im Business-Tarif von Notion, in den kleineren Tarifen nur zum Testen.</p>'+
+      '<p class="tsn0-src">Stand 1. November 2026, laut notion.com/pricing und der Notion-Hilfe.</p>'));
 
     out.push(N.sec('tsn0-l03s3',
       '<h3>Claude: das <span class="g">Werkzeug.</span></h3>'+
-      '<p>Claude ist ein KI-Assistent von Anthropic. Im Kurs ist er das Werkzeug, mit dem du dein System von außen bedienst und erweiterst. Er verbindet sich mit deinem Notion, wertet deine Zahlen aus, legt neue Seiten an und übernimmt Aufgaben, die jede Woche wiederkommen. Deine Anweisungen gibst du in ganz normalen Sätzen.</p>'+
-      '<p>Was Claude genau ist und welchen Zugang du wann nimmst, klären wir in <b>Modul 3</b>. Wie Claude mit deinem Backoffice arbeitet, zeige ich dir in <b>Modul 4</b>. Für jetzt reicht dir: Notion hält deine Daten, Claude arbeitet mit ihnen.</p>'));
+      '<p>Claude ist ein KI-Assistent von Anthropic. Im Kurs ist es das Werkzeug, mit dem du dein System von außen bedienst und erweiterst. Es verbindet sich mit deinem Notion, liest Lieferscheine vom Foto und wertet deine Zahlen aus. Aufgaben, die jede Woche anfallen, erledigt es zu festen Zeiten.</p>'+
+      '<p>Was Claude genau ist und welchen Zugang du wann nimmst, klären wir in <b>Modul 3</b>. Wie Claude mit deinem Backoffice arbeitet, zeige ich dir in <b>Modul 4</b>. Notion hält deine Daten, Claude arbeitet mit ihnen.</p>'));
 
     out.push(N.sec('tsn0-l03s4',
       '<h3>Für deine <span class="g">Bildwelt.</span></h3>'+
       '<p class="lead">Ein System, das gut aussieht, benutzt du jeden Tag. Deshalb bekommen deine Zutaten, Gerichte und Seiten saubere Bilder. Dafür nehmen wir Werkzeuge dazu, die genau das gut können.</p>'+
       '<div class="tsn0-cards c2">'+
         '<div class="tsn0-card"><span class="k">Google</span><div class="n">Gemini mit Nano Banana</div><hr><p>Erzeugt aus einer Beschreibung ein Bild, zum Beispiel ein Studiofoto einer Zutat für deine Datenbank.</p></div>'+
-        '<div class="tsn0-card"><span class="k">OpenAI</span><div class="n">ChatGPT</div><hr><p>Stark im Formulieren. Wir lassen uns von ChatGPT die genaue Bildbeschreibung schreiben, bevor ein anderes Werkzeug das Bild erzeugt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">OpenAI</span><div class="n">ChatGPT</div><hr><p>Stark im Formulieren. Wer mag, lässt sich von ChatGPT die genaue Bildbeschreibung schreiben. Claude kann das genauso.</p></div>'+
         '<div class="tsn0-card"><span class="k">Midjourney</span><div class="n">Midjourney</div><hr><p>Hat eine eigene, sehr markante Bildsprache. Wir vergleichen es mit dem Weg über Gemini, damit du siehst, was zu deinem Betrieb passt.</p></div>'+
         '<div class="tsn0-card"><span class="k">Canva</span><div class="n">Canva Pro</div><hr><p>Macht aus einem Bild ein fertiges Cover, ein Banner oder eine Karte mit Schrift. Hier bekommt dein System seinen letzten Schliff.</p></div>'+
       '</div>'));
 
     out.push(N.sec('tsn0-l03s5',
       '<h3>Was du zum Start <span class="g">wirklich</span> brauchst.</h3>'+
-      '<p>Zum Start brauchst du nur <b>Notion</b>. Claude kommt ab Modul 3 dazu, die Bildwerkzeuge dann, wenn du deinem Backoffice Bilder geben willst. Alles andere nimmst du dazu, wenn es dir wirklich etwas bringt.</p>'+
+      '<p>Zum Start brauchst du nur <b>Notion</b>. Claude kommt ab Modul 3 dazu, die Bildwerkzeuge in Modul 2, dort, wo du die Cover deiner Datenbanken anlegst. Alles andere nimmst du dazu, wenn es dir wirklich etwas bringt.</p>'+
       '<p class="tsn0-rule">Ein Werkzeug pro Aufgabe. Und jedes erst dann, <span class="g">wenn du es brauchst.</span></p>'));
 
     out.push(N.emp({ id:'tsn0-l03emp', kind:'Nutzung', animTitle:'Werkzeuge', animGold:'sortieren',
-      steps:['Notion zuerst','Claude ab Modul 3','Bilder bei Bedarf','Altes behalten'],
+      steps:['Nur Notion','Ein Bildwerkzeug','Bestand aufschreiben','Rolle zuerst'],
       intro:'So gehst du mit den Werkzeugen um, ohne dich zu verzetteln.',
       points:[
-        'Leg dir als Erstes ein <b>Notion-Konto</b> an. Damit arbeitest du ab Modul 1.',
-        'Claude brauchst du ab <b>Modul 3</b>. Welchen Tarif du dafür nimmst, klären wir in Lektion 3.3.',
-        'Die Bildwerkzeuge nimmst du erst, wenn du deinem Backoffice <b>Bilder</b> geben willst. Eines davon reicht für den Anfang.',
-        'Arbeitest du heute schon mit Programmen, die gut für dich laufen, <b>behalte sie</b>. Ersetzt wird nur, was im System besser liegt.']
+        'Arbeite die ersten Module <b>nur mit Notion</b>. Alles andere kommt dazu, wenn das Modul es braucht.',
+        'Für Bilder reicht dir am Anfang <b>ein</b> Werkzeug. Welches, entscheidest du in Modul 2 an deinen eigenen Zutaten.',
+        'Schreib dir auf, welche Programme du heute nutzt. Bei jedem fragst du dich später, ob es <b>im System besser liegt</b>.',
+        'Hörst du einen neuen Werkzeugnamen, frag dich zuerst, <b>welche Rolle</b> er übernehmen soll. Meist ist sie schon besetzt.']
     }));
     return out;
   }
@@ -27971,14 +27971,14 @@ var TSISL_TEAM_ONB_V2=[
     var timers=[];
     function clear(){ timers.forEach(clearTimeout); timers=[]; }
     function T(f,ms){ timers.push(setTimeout(f,ms)); }
-    function lit(i){ root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ var k=+e.getAttribute('data-i'); e.classList.toggle('on',k===i); if(i>=0&&((i===1&&k===1)||(i===0&&k<=1)||(i===2))) e.classList.add('seen'); }); }
+    function lit(i){ root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ var k=+e.getAttribute('data-i'); e.classList.toggle('on',k===i); if(i>=0&&((i===2&&k===2)||(i===0&&(k===0||k===2))||(i===1))) e.classList.add('seen'); }); }
     function play(){
       clear(); root.classList.remove('built','drop','up','fin'); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.remove('on','seen'); });
       void root.offsetWidth; root.classList.add('built');
       T(function(){ root.classList.add('drop'); },1300);
-      T(function(){ lit(1); },2300);
-      T(function(){ lit(0); root.classList.add('rows'); },4800);
-      T(function(){ root.classList.add('up'); lit(2); },7400);
+      T(function(){ lit(2); },2100);
+      T(function(){ lit(0); root.classList.add('rows'); },4700);
+      T(function(){ root.classList.add('up'); lit(1); },7300);
       T(function(){ root.classList.add('fin'); lit(-1); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.add('seen'); }); },10400);
     }
     root.classList.add('js','built','drop','up','fin','rows'); root.querySelectorAll('.a3-pl,.a3-lg').forEach(function(e){ e.classList.add('seen'); });
@@ -27990,7 +27990,7 @@ var TSISL_TEAM_ONB_V2=[
     learn:{ learn:[
       '<b>Notion</b> ist das Fundament, in dem dein Backoffice lebt.',
       '<b>Notion AI</b> arbeitet direkt in deinen Seiten und Datenbanken.',
-      '<b>Claude</b> bedient und erweitert dein System von außen.',
+      '<b>Claude</b> liest Lieferscheine vom Foto, bedient und erweitert dein System.',
       'Bildwerkzeuge nimmst du dazu, <b>wenn du sie brauchst</b>.'],
       next:L.l04 } });
 })();
@@ -28009,7 +28009,7 @@ var TSISL_TEAM_ONB_V2=[
   var N=window.__tsn0, L=window.__tsn0L;
   var P=[
     {m:'A', c:'Anthropic', n:'Claude', d:'Dein Werkzeug für das Backoffice. Ab Modul 3.', k:1},
-    {m:'O', c:'OpenAI', n:'ChatGPT', d:'Der Allrounder. Im Kurs für Bildbeschreibungen.', k:0},
+    {m:'O', c:'OpenAI', n:'ChatGPT', d:'Der Allrounder. Im Kurs freiwillig dabei.', k:0},
     {m:'G', c:'Google', n:'Gemini', d:'Stark bei Bildern. Im Kurs für deine Bildwelt.', k:1},
     {m:'x', c:'xAI', n:'Grok', d:'Nah an aktuellen Nachrichten. Im Kurs nicht nötig.', k:0},
     {m:'M', c:'Mistral', n:'Vibe', d:'Aus Paris, Daten in der EU. Eine europäische Wahl.', k:0}
@@ -28017,10 +28017,10 @@ var TSISL_TEAM_ONB_V2=[
   function build(){
     var out=[];
     out.push(N.intro(
-      '<p>Jede Woche erscheint ein neues Modell, das angeblich alles verändert. Davon musst du dich nicht treiben lassen. Die Anbieter verkaufen ihre Modelle ein bisschen wie Smartphones, mit immer neuen Versionsnummern. Ein Werkzeug, das deine Aufgabe heute zuverlässig erledigt, erledigt sie aber auch in einem halben Jahr noch.</p>'+
-      '<p>Für deinen Betrieb reicht es, die großen Anbieter einordnen zu können: wer hinter welchem Werkzeug steht, wofür es stark ist und was es ungefähr kostet. Alle Angaben in dieser Lektion habe ich am <b>1. November 2026</b> an den Seiten der Anbieter geprüft.</p>'));
+      '<p>Ständig erscheint ein neues Modell, das angeblich alles verändert. Davon musst du dich nicht treiben lassen. Die Anbieter verkaufen ihre Modelle ein bisschen wie Smartphones, mit immer neuen Versionsnummern. Ein Werkzeug, das deine Aufgabe heute zuverlässig erledigt, erledigt sie aber auch in einem halben Jahr noch.</p>'+
+      '<p>Für deinen Betrieb reicht es, die großen Anbieter einordnen zu können: wer hinter welchem Werkzeug steht und wofür es stark ist. Alle Angaben in dieser Lektion habe ich am <b>1. November 2026</b> an den Seiten der Anbieter geprüft.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a04';
-    a.innerHTML=N.head('Der Markt','Fünf Namen, <span class="g">zwei im Kurs.</span>','Diese Anbieter begegnen dir überall. Mit zweien arbeiten wir, die anderen solltest du einordnen können.')+
+    a.innerHTML=N.head('Der Markt','Wen du kennen <span class="g">solltest.</span>','Diese Anbieter begegnen dir überall. Mit zweien arbeiten wir, die anderen solltest du einordnen können.')+
       '<div class="a4-frame"><div class="a4-fan">'+P.map(function(p,i){ return '<div class="a4-card'+(p.k?' kurs':'')+'" style="--i:'+i+'" data-i="'+i+'"><span class="a4-m">'+p.m+'</span><span class="a4-c">'+p.c+'</span><span class="a4-n">'+p.n+'</span><span class="a4-badge">Im Kurs</span></div>'; }).join('')+'</div>'+
       '<p class="a4-cap"></p></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
@@ -28034,41 +28034,34 @@ var TSISL_TEAM_ONB_V2=[
     out.push(N.sec('tsn0-l04s2',
       '<h3>Die Anbieter im <span class="g">Überblick.</span></h3>'+
       '<div class="tsn0-cards c2">'+
-        '<div class="tsn0-card"><span class="k">Anthropic · USA</span><div class="n">Claude</div><hr><p>Unser Werkzeug für das Backoffice. Claude gibt es als Chat, als Cowork für Aufgaben mit deinen Dateien und als Claude Code mit Zugriff auf deine Systeme. Stell dir drei Werkstätten mit demselben Meister vor, nur mit unterschiedlich viel Werkzeug an der Wand. Welche du wann nimmst, zeige ich dir in Lektion 3.2.</p></div>'+
-        '<div class="tsn0-card"><span class="k">OpenAI · USA</span><div class="n">ChatGPT</div><hr><p>Das bekannteste KI-Werkzeug und für viele der erste Kontakt mit dem Thema. Ein Allrounder, besonders stark im Formulieren. Im Kurs lassen wir uns von ChatGPT die Beschreibungen für unsere Bilder schreiben.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Anthropic · USA</span><div class="n">Claude</div><hr><p>Unser Werkzeug für das Backoffice. Claude gibt es als App für Rechner und Handy. Für die Arbeit an deinem Backoffice nehmen wir Claude Code, das direkt mit deinen Dateien und deinem Notion arbeitet. Welchen Zugang du wann nimmst, zeige ich dir in Lektion 3.2.</p></div>'+
+        '<div class="tsn0-card"><span class="k">OpenAI · USA</span><div class="n">ChatGPT</div><hr><p>Das bekannteste KI-Werkzeug und für viele der erste Kontakt mit dem Thema. Ein Allrounder, besonders stark im Formulieren. Für deine Bilder kannst du dir von ChatGPT die Beschreibung schreiben lassen, Pflicht ist es nicht.</p></div>'+
         '<div class="tsn0-card"><span class="k">Google · USA</span><div class="n">Gemini</div><hr><p>Eng verzahnt mit Gmail, Drive und Google Tabellen. Mit den Bildmodellen Nano Banana und Nano Banana Pro gehört Google bei Bildern zu den Stärksten am Markt. Im Kurs erzeugen wir damit die Bilder für Zutaten und Gerichte.</p></div>'+
         '<div class="tsn0-card"><span class="k">xAI · USA</span><div class="n">Grok</div><hr><p>Eng mit der Plattform X verbunden und stark bei allem, was gerade öffentlich diskutiert wird. Für ein ruhig laufendes Backoffice brauchst du Grok nicht. Seit Oktober 2026 läuft der Zugang über das Abo von X.</p></div>'+
         '<div class="tsn0-card"><span class="k">Mistral · Frankreich</span><div class="n">Vibe</div><hr><p>Der große europäische Anbieter mit Sitz in Paris, der Chat hieß bis vor Kurzem Le Chat. Daten werden standardmäßig in der EU verarbeitet. Interessant für dich, wenn dir ein europäischer Anbieter wichtig ist.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Die Modelle</span><div class="n">Namen ändern sich ständig.</div><hr><p>Stand November 2026 heißen die Spitzenmodelle zum Beispiel Claude Fable 5.1, GPT-6.1, Gemini 4 und Grok 4.7. Merk dir die Anbieter, nicht die Nummern. In ein paar Monaten stehen hier andere.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Die Modelle</span><div class="n">Namen ändern sich ständig.</div><hr><p>Stand November 2026 heißen die Spitzenmodelle zum Beispiel Claude Fable 5.1, GPT-6.1, Gemini 4 und Grok 4.7. Merk dir die Anbieter. Die Nummern stehen in ein paar Monaten schon anders hier.</p></div>'+
       '</div>'+
       '<p class="tsn0-src">Quellen, abgerufen am 1. November 2026: claude.com/pricing · chatgpt.com/pricing · gemini.google/subscriptions · x.ai/news/x-subscription · mistral.ai/pricing · help.mistral.ai</p>'));
 
     out.push(N.sec('tsn0-l04s3',
       '<h3>Was sie dich <span class="g">kosten.</span></h3>'+
-      '<p>Das Muster ist bei allen gleich. Es gibt einen kostenlosen Einstieg zum Ausprobieren, der für ernsthaftes Arbeiten schnell zu eng wird. Darüber liegt eine Standardstufe, die für die allermeisten reicht. Und darüber gibt es Stufen für Vielnutzer, die bei rund hundert Euro im Monat anfangen.</p>'+
-      '<div class="a4-tab"><div class="a4-tr h"><span>Werkzeug</span><span>Standardstufe</span><span>Preis im Monat</span></div>'+
-        '<div class="a4-tr"><span>ChatGPT</span><span>Plus</span><span>23 € <i>inkl. MwSt.</i></span></div>'+
-        '<div class="a4-tr"><span>Gemini</span><span>Google AI Pro</span><span>21,99 € <i>inkl. MwSt.</i></span></div>'+
-        '<div class="a4-tr"><span>Vibe (Mistral)</span><span>Pro</span><span>14,99 € <i>zzgl. Steuer</i></span></div>'+
-        '<div class="a4-tr"><span>Grok</span><span>Premium (Abo von X)</span><span>30 $ <i>zzgl. Steuer</i></span></div>'+
-        '<div class="a4-tr"><span>Claude</span><span>Pro</span><span><a href="/claude-plne-preis">in Lektion 3.3</a></span></div>'+
-      '</div>'+
-      '<p>Lass dich von den hohen Stufen nicht beeindrucken. Sie sind für Menschen gebaut, die den ganzen Tag pausenlos mit KI arbeiten, und das tust du am Anfang nicht. Für deinen Start reicht die Standardstufe, und auch die nur bei den Anbietern, die du im Kurs wirklich nutzt.</p>'+
-      '<p class="tsn0-src">Preise laut Preisseiten der Anbieter für Deutschland, Stand 1. November 2026. Sie ändern sich erfahrungsgemäß alle paar Monate, prüf sie vor dem Abschluss noch einmal selbst.</p>'));
+      '<p>Das Muster ist bei allen gleich. Es gibt einen kostenlosen Einstieg zum Ausprobieren, der für ernsthaftes Arbeiten schnell zu eng wird. Darüber liegt eine Standardstufe, die für die allermeisten reicht. Und darüber gibt es Stufen für Vielnutzer, die ein Vielfaches kosten.</p>'+
+      '<p>Lass dich von den hohen Stufen nicht beeindrucken. Sie sind für Menschen gebaut, die den ganzen Tag pausenlos mit KI arbeiten, und das tust du am Anfang nicht. Für deinen Start reicht die Standardstufe, und auch die nur bei den Anbietern, die du im Kurs wirklich nutzt. Was Claude kostet und welcher Tarif zu dir passt, klären wir in <a href="/claude-plne-preis">Lektion 3.3</a>.</p>'+
+      '<p class="tsn0-src">Die aktuellen Preise stehen auf den Preisseiten der Anbieter. Sie ändern sich oft, prüf sie vor dem Abschluss selbst.</p>'));
 
     out.push(N.sec('tsn0-l04s4',
       '<h3>Welches Modell für <span class="g">dich</span> passt.</h3>'+
-      '<p>Im Netz streiten sich Leute darüber, welches Modell das beste ist. Die ehrliche Antwort: Es gibt das passende für die jeweilige Aufgabe. Ein Tischler nimmt auch nicht ein Werkzeug für alles, er greift zur Säge, wenn er sägt, und zum Hobel, wenn er hobelt.</p>'+
-      '<p>So arbeiten wir auch. Für dein Backoffice nehmen wir <b>Claude zusammen mit Notion</b>, weil Claude sich auch bei langen, mehrteiligen Aufgaben an deine Anweisungen hält. Für die Bilder nehmen wir <b>Gemini</b>, und wer mag, lässt sich die Beschreibung dafür von ChatGPT schreiben. Du musst dich also nicht für einen Anbieter entscheiden und alle anderen verbannen.</p>'));
+      '<p>Im Netz streiten sich Leute darüber, welches Modell das beste ist. Für deinen Betrieb zählt eine andere Frage: welches Modell zu welcher Aufgabe passt. In der Küche filetierst du auch nicht mit dem Brotmesser.</p>'+
+      '<p>So arbeiten wir auch. Für dein Backoffice nehmen wir <b>Claude zusammen mit Notion</b>, weil Claude sich auch bei langen, mehrteiligen Aufgaben an deine Anweisungen hält. Für die Bilder nehmen wir <b>Gemini</b>, und wer mag, lässt sich die Beschreibung dafür von ChatGPT oder Claude schreiben. Du musst dich also nicht für einen Anbieter entscheiden und alle anderen verbannen.</p>'));
 
     out.push(N.emp({ id:'tsn0-l04emp', kind:'Nutzung', animTitle:'Klug', animGold:'abschließen',
-      steps:['Kein Abo auf Vorrat','Ein Hauptwerkzeug','Preis selbst prüfen','Erst monatlich'],
+      steps:['Kein Abo auf Vorrat','Ein Hauptwerkzeug','Preis selbst prüfen','Aufräumen'],
       intro:'So gibst du kein Geld für Werkzeuge aus, die du nicht nutzt.',
       points:[
         'Schließ <b>kein Abo auf Vorrat</b> ab. Im Kurs sage ich dir an jeder Stelle, ab wann du welches Werkzeug brauchst.',
         'Wähl <b>ein Hauptwerkzeug</b> für dein Backoffice. Im Kurs ist das Claude zusammen mit Notion.',
         'Prüf den Preis <b>auf der Seite des Anbieters</b>, bevor du abschließt. Steuern und Preise unterscheiden sich je nach Land.',
-        'Fang <b>monatlich</b> an. Das günstigere Jahresabo lohnt sich erst, wenn du weißt, dass du das Werkzeug wirklich jede Woche nutzt.']
+        '<b>Kündige</b>, was du drei Monate nicht geöffnet hast.']
     }));
     return out;
   }
@@ -28096,17 +28089,16 @@ var TSISL_TEAM_ONB_V2=[
     learn:{ learn:[
       'Du kannst die großen Anbieter <b>einordnen</b> und weißt, wofür jeder steht.',
       'Du wählst das Modell <b>passend zur Aufgabe</b>.',
-      'Für den Start reicht die <b>Standardstufe</b>, und nur bei den Werkzeugen, die du nutzt.',
+      'Für den Start reicht die <b>Standardstufe</b>, und nur bei den Werkzeugen, die du wirklich nutzt.',
       'Preise ändern sich oft: <b>vor dem Abschluss selbst prüfen</b>.'],
       next:L.l05 } });
 })();
 
 /* ============================================================
    L0.5 · Deine Sorgen, ehrlich beantwortet  (/lektionen/deine-sorgen-ehrlich-beantwortet)
-   Erklaeranimation #tsn0-a05 "Die Bonschiene" — EIGENES Konzept: fuenf Bons
-   haengen an einer Bonschiene wie in der Kueche, jeder Bon traegt eine Frage.
-   Einer nach dem anderen rutscht nach vorn, bekommt den Stempel "beantwortet"
-   und zeigt, in welchem Abschnitt die Antwort steht. Die Animation ist das
+   Erklaeranimation #tsn0-a05 "Die Pinnwand" — EIGENES Konzept: fuenf Zettel
+   haengen an der Pinnwand im Personalraum, jeder traegt eine Frage. Einer nach
+   dem anderen kommt nach vorn und wird abgehakt (Bonschiene ist in 3.2 vergeben). Die Animation ist das
    Inhaltsverzeichnis der Seite; die Antworten selbst stehen nur in den
    Sektionen darunter (Doktrin 1a).
    Datenschutz-Fakten: Hilfeseiten der Anbieter, abgerufen 01.11.2026.
@@ -28119,18 +28111,18 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Fast jeder, mit dem ich über KI im Betrieb spreche, hat dieselben Bedenken. Was passiert mit meinen Zahlen? Kann ich mich auf das verlassen, was da herauskommt? Und lohnt sich der Aufwand überhaupt?</p>'+
-      '<p>Diese Fragen sind berechtigt, und sie verdienen ehrliche Antworten statt Werbesprüchen. Die bekommst du hier, eine nach der anderen. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
+      '<p>Diese Fragen sind berechtigt. Hier bekommst du die Antworten, eine nach der anderen. Wo ein Thema später im Kurs genauer drankommt, sage ich dir, wo.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a05';
-    a.innerHTML=N.head('Fünf Fragen','Jede Frage <span class="g">bekommt ihre Antwort.</span>','Die Bedenken, die ich am häufigsten höre. Tipp auf einen Bon, um direkt zur Antwort zu springen.')+
+    a.innerHTML=N.head('Fünf Fragen','Die Zettel an der <span class="g">Pinnwand.</span>','Die Bedenken, die ich am häufigsten höre. Tipp auf einen Zettel, um direkt zur Antwort zu springen.')+
       '<div class="a5-frame"><div class="a5-rail"><span class="a5-bar"></span>'+
-        Q.map(function(q,i){ return '<a class="a5-bon" href="#tsn0-l05q'+(i+1)+'" style="--i:'+i+'"><span class="a5-clip"></span><span class="a5-no">Bon 0'+(i+1)+'</span><span class="a5-q">'+q+'</span><span class="a5-perf"></span><span class="a5-st">beantwortet</span></a>'; }).join('')+
+        Q.map(function(q,i){ return '<a class="a5-bon" href="#tsn0-l05q'+(i+1)+'" style="--i:'+i+'"><span class="a5-clip"></span><span class="a5-no">Frage '+(i+1)+'</span><span class="a5-q">'+q+'</span><span class="a5-perf"></span><span class="a5-st">✓ beantwortet</span></a>'; }).join('')+
       '</div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
 
     out.push(N.sec('tsn0-l05q1',
       '<h3>Was passiert mit <span class="g">meinen Daten?</span></h3>'+
-      '<p>Du gibst Rezepturen, Einkaufspreise und Umsätze ein, also Dinge, die niemanden etwas angehen. Die ehrliche Antwort hat zwei Seiten.</p>'+
+      '<p>Du gibst Rezepturen, Einkaufspreise und Umsätze ein, also Dinge, die niemanden etwas angehen. Die Antwort hat zwei Seiten.</p>'+
       '<p>Bei den privaten Tarifen der großen Anbieter können deine Eingaben zum Training künftiger Modelle verwendet werden. Jeder Anbieter hat dafür eine Einstellung, die du kennen und bewusst setzen solltest. Bei den Firmen-Tarifen ist das Training dagegen ab Werk ausgeschaltet.</p>'+
       '<div class="a5-tab"><div class="a5-tr h"><span>Werkzeug</span><span>Einstellung in deinem Konto</span><span>Firmen-Tarif</span></div>'+
         '<div class="a5-tr"><span>Claude</span><span>„Help improve our AI models“ unter Settings, abschaltbar</span><span>Team, Enterprise: kein Training</span></div>'+
@@ -28138,33 +28130,33 @@ var TSISL_TEAM_ONB_V2=[
         '<div class="a5-tr"><span>Gemini</span><span>„Keep Activity“: ist sie aus, wird nicht trainiert</span><span>eigene Regeln je Tarif</span></div>'+
         '<div class="a5-tr"><span>Vibe (Mistral)</span><span>Training ab Werk erlaubt, abschaltbar</span><span>Enterprise: kein Training</span></div>'+
       '</div>'+
-      '<p>Dazu kommt, wo deine Daten liegen. Mistral verarbeitet standardmäßig in der EU, Anthropic speichert bei direkter Nutzung in den USA. Für die meisten Daten deines Backoffice ist das unkritisch, solange du weißt, was du hineingibst.</p>'+
-      '<p>Und genau da liegt die wichtigste Regel: <b>Gästedaten, Gesundheitsdaten deiner Mitarbeiter, Passwörter und Bankdaten gehören in kein privates KI-Konto.</b> Welche Bereiche deines Notion Claude überhaupt sehen darf, legst du in Modul 4 selbst fest. Was für Reservierungen und Gästedaten gilt, besprechen wir in Modul 5.</p>'+
+      '<p>Dazu kommt, wo deine Daten liegen. Mistral verarbeitet standardmäßig in der EU, Anthropic speichert bei direkter Nutzung in den USA. Rezepturen und Einkaufspreise sind keine personenbezogenen Daten. Bei Gästedaten ist das anders.</p>'+
+      '<p>Und genau da liegt die wichtigste Regel: <b>Gästedaten, Gesundheitsdaten deiner Mitarbeiter, Passwörter und Bankdaten gehören in kein privates KI-Konto.</b> Mit Notion verbunden sieht Claude alles, was du in Notion auch selbst siehst. Was es dort ohne Rückfrage tun darf, legst du in Modul 4 fest. Was für Reservierungen und Gästedaten gilt, besprechen wir in Modul 5.</p>'+
       '<p class="tsn0-src">Quellen, abgerufen am 1. November 2026: privacy.claude.com · help.openai.com · support.google.com/gemini · help.mistral.ai · claude.com/pricing. Das hier ist keine Rechtsberatung. Im Zweifel fragst du deinen Datenschutzberater.</p>'));
 
     out.push(N.sec('tsn0-l05q2',
       '<h3>Ersetzt mich das <span class="g">irgendwann?</span></h3>'+
-      '<p>Nein. Die KI nimmt dir die Arbeit ab, die dich ohnehin vom Handwerk abhält: die Zettelwirtschaft, das Abtippen von Lieferscheinen, das Zusammensuchen von Zahlen. Sie kocht nicht, sie steht nicht am Gast und sie merkt nicht, wenn an einem Abend die Stimmung im Gastraum kippt.</p>'+
-      '<p>Was sie dir gibt, ist Zeit. Die Stunden, die du heute im Büro verlierst, kannst du wieder dort verbringen, wo dich kein Programm ersetzt. Das gilt genauso für dein Team. Ein Betrieb, der seine Zahlen kennt, steht sicherer, und davon haben alle etwas, die dort arbeiten.</p>'));
+      '<p>Nein. Die KI nimmt dir die Arbeit ab, die dich ohnehin vom Handwerk abhält, die Zettelwirtschaft und das Zusammensuchen von Zahlen. Kochen kann sie nicht, und sie merkt auch nicht, wenn an einem Abend die Stimmung im Gastraum kippt.</p>'+
+      '<p>Sie gibt dir Zeit zurück. Die Stunden, die du heute im Büro verlierst, kannst du wieder dort verbringen, wo dich kein Programm ersetzt. Das gilt genauso für dein Team. Ein Betrieb, der seine Zahlen kennt, steht sicherer, und davon haben alle etwas, die dort arbeiten.</p>'));
 
     out.push(N.sec('tsn0-l05q3',
       '<h3>Erfindet die KI <span class="g">einfach etwas?</span></h3>'+
       '<p>Das kann passieren. Ein Sprachmodell formuliert Antworten, die plausibel klingen, und manchmal sind sie trotzdem falsch. Deshalb lassen wir die KI im Kurs nie im Kopf rechnen.</p>'+
-      '<p>Die Zahlen in deinem Backoffice kommen aus den <b>Formeln der Vorlage</b>. Die sind fertig, geprüft und rechnen mit deinen eingetragenen Preisen, jedes Mal gleich. Die KI liest, sortiert und formuliert, das Rechnen übernimmt das System. Bei allem, woran wirklich etwas hängt, schaust du einmal drüber. Wie du Claude beibringst, lieber nachzufragen als zu raten, zeige ich dir in Modul 4.</p>'));
+      '<p>Die Zahlen in deinem Backoffice kommen aus den <b>Formeln der Vorlage</b>. Sie sind geprüft und rechnen mit deinen eingetragenen Preisen, jedes Mal gleich. Die KI liest und formuliert, gerechnet wird im System. Bei allem, woran wirklich etwas hängt, schaust du einmal drüber. Wie du Claude beibringst, lieber nachzufragen als zu raten, zeige ich dir in Modul 4.</p>'));
 
     out.push(N.sec('tsn0-l05q4',
       '<h3>Muss ich <span class="g">programmieren</span> können?</h3>'+
-      '<p>Nein. Du schreibst deine Anweisungen so, wie du sie auch einer Kollegin in der Küche geben würdest, nur etwas genauer. Selbst bei Claude Code, das nach Technik klingt, arbeitest du mit ganz normalen Sätzen. Warum der Name trotzdem so heißt, erkläre ich dir in Lektion 3.7.</p>'));
+      '<p>Nein. Du schreibst deine Anweisungen so, wie du sie auch einer Kollegin in der Küche geben würdest, nur etwas genauer. Selbst bei Claude Code, das nach Technik klingt, arbeitest du mit ganz normalen Sätzen. Warum es trotzdem so heißt, erkläre ich dir in Modul 3.</p>'));
 
     out.push(N.sec('tsn0-l05q5',
       '<h3>Lohnt sich das für einen <span class="g">kleinen Betrieb?</span></h3>'+
       '<p>Gerade für dich. Eine große Kette hat eine eigene Abteilung, die jeden Deckungsbeitrag ausrechnet. Du hast die nicht, und genau diese Lücke schließt dein Backoffice.</p>'+
-      '<p>Ehrlich dazugesagt: Am Anfang kostet es dich ein paar Abende, bis deine Lieferanten, Preise und Rezepturen drin sind. Die Vorlage nimmt dir den Aufbau ab, das Eintragen bleibt bei dir. Danach rechnet das System jeden Tag für dich mit, und jede Preisänderung zieht sich von allein durch.</p>'+
+      '<p>Dazu gehört auch: Am Anfang kostet es dich ein paar Abende, bis deine Lieferanten, Preise und Rezepturen drin sind. Die Vorlage nimmt dir den Aufbau ab, das Eintragen bleibt bei dir. Danach rechnet das System jeden Tag für dich mit, und jede Preisänderung zieht sich von allein durch.</p>'+
       '<p class="tsn0-rule">Der Aufwand liegt am Anfang. <span class="g">Der Nutzen bleibt.</span></p>'));
 
     out.push(N.emp({ id:'tsn0-l05emp', kind:'Einrichtung', animTitle:'Deine Daten', animGold:'schützen',
       steps:['Einstellung prüfen','Firmen-Tarif fürs Team','Sensibles draußen','Regelmäßig nachsehen'],
-      intro:'Vier Handgriffe, die du heute erledigst, bevor du mit echten Betriebsdaten arbeitest.',
+      intro:'Vier Handgriffe, bevor du mit echten Betriebsdaten arbeitest.',
       points:[
         'Öffne bei jedem KI-Konto, das du nutzt, die Einstellungen und setz die <b>Trainings-Einstellung</b> bewusst. Die Namen stehen in der Tabelle oben.',
         'Arbeitet dein Team mit, nimm einen <b>Firmen-Tarif</b>. Dort ist das Training ab Werk ausgeschaltet.',
@@ -28222,12 +28214,12 @@ var TSISL_TEAM_ONB_V2=[
     var out=[];
     out.push(N.intro(
       '<p>Zwei Begriffe begegnen dir im Kurs immer wieder: <b>Agent</b> und <b>Automation</b>. Beide nehmen dir Arbeit ab, und beide werden gern durcheinandergeworfen.</p>'+
-      '<p>Dabei ist der Unterschied schnell erklärt, wenn man ihn einmal an einem echten Fall aus dem Betrieb sieht. Genau das machen wir jetzt. Danach weißt du bei jeder Aufgabe, welches der beiden du dafür brauchst.</p>'));
+      '<p>Dabei ist der Unterschied schnell erklärt, wenn man ihn einmal an einem echten Fall aus dem Betrieb sieht. Genau das machen wir jetzt. Danach erkennst du beide, sobald sie dir im Kurs begegnen.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a06';
-    a.innerHTML=N.head('Zwei Wege','Regel oder <span class="g">Urteil.</span>','Zwei Dinge kommen an. Das eine braucht immer dieselbe Antwort, das andere jedes Mal eine neue.')+
+    a.innerHTML=N.head('Zwei Wege','Regel oder <span class="g">Mitdenken.</span>','Zwei Dinge kommen an. Das eine braucht immer dieselbe Antwort, das andere jedes Mal eine neue.')+
       '<div class="a6-frame">'+
         '<div class="a6-in"><span class="a6-in-k">Eingang</span><div class="a6-slot"><div class="a6-item i1"><span class="a6-ik">Meldung</span><b>Reservierung storniert</b><span>Tisch 12 · Samstag · 20 Uhr</span></div>'+
-          '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div><div class="a6-done">Beides erledigt. Eine Regel und ein Urteil.</div></div></div>'+
+          '<div class="a6-item i2"><span class="a6-ik">Mail eines Gastes</span><span class="a6-mail">'+MAIL+'</span></div><div class="a6-done">Beides erledigt. Einmal nach Regel, einmal mitgedacht.</div></div></div>'+
         '<svg class="a6-rails" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true"><path class="r0" d="M400 0 L400 22"/><path class="r1" d="M400 22 C400 60 200 40 200 90"/><path class="r2" d="M400 22 C400 60 600 40 600 90"/><circle class="dot d1" r="5"/><circle class="dot d2" r="5"/></svg>'+
         '<div class="a6-lanes">'+
           '<div class="a6-lane l1"><div class="a6-lh"><span class="a6-ic">⚙︎</span><span><b>Automation</b><i>feste Regel</i></span></div>'+
@@ -28244,12 +28236,12 @@ var TSISL_TEAM_ONB_V2=[
 
     out.push(N.sec('tsn0-l06s1',
       '<h3>Die Automation: eine <span class="g">feste Regel.</span></h3>'+
-      '<p>Eine Automation folgt einer Regel, die du einmal festlegst. Es passiert etwas, und daraufhin passiert immer dasselbe. Eine Reservierung wird storniert, also wird der Tisch wieder frei. Ein neuer Lieferschein ist eingetragen, also bekommt die Küche eine Nachricht. Der Monat ist zu Ende, also entsteht eine neue Inventurliste.</p>'+
-      '<p>Dafür braucht es keine KI. Die Automation denkt nicht nach und versteht keinen Text, sie führt aus. Genau das macht sie so verlässlich: Sie macht es jedes Mal genau gleich, auch um zwei Uhr nachts und auch an deinem freien Tag.</p>'));
+      '<p>Eine Automation folgt einer Regel, die du einmal festlegst. Es passiert etwas, und daraufhin passiert immer dasselbe. Eine Reservierung wird storniert, also wird der Tisch wieder frei. Ist ein neuer Lieferschein eingetragen, bekommt die Küche eine Nachricht.</p>'+
+      '<p>Dafür braucht es keine KI. Die Automation denkt nicht nach und versteht keinen Text, sie führt aus. Genau das macht sie so verlässlich: Sie macht es jedes Mal genau gleich, auch um zwei Uhr nachts.</p>'));
 
     out.push(N.sec('tsn0-l06s2',
       '<h3>Der Agent: liest mit und <span class="g">entscheidet.</span></h3>'+
-      '<p>Ein Agent bekommt einen Auftrag und erledigt ihn in mehreren Schritten. Er liest, was ankommt, versteht, worum es geht, schaut in deinem System nach und formuliert ein Ergebnis. Die Mail aus der Animation lässt sich mit keiner festen Regel beantworten, weil jede Anfrage anders ist. Der Agent erkennt sechs Personen, zwei Kinder und einen veganen Gast und antwortet passend.</p>'+
+      '<p>Ein Agent liest mit und entscheidet, was zu tun ist. Er bekommt einen Auftrag und erledigt ihn in mehreren Schritten. Er liest, was ankommt, versteht, worum es geht, schaut in deinem System nach und formuliert ein Ergebnis. Die Mail aus der Animation lässt sich mit keiner festen Regel beantworten, weil jede Anfrage anders ist. Der Agent erkennt sechs Personen, zwei Kinder und einen veganen Gast und antwortet passend.</p>'+
       '<p>Weil der Agent selbst entscheidet, schaust du am Anfang auf seine Ergebnisse. Je besser deine Anweisungen und je sauberer dein System, desto weniger musst du nachbessern.</p>'));
 
     out.push(N.sec('tsn0-l06s3',
@@ -28264,16 +28256,16 @@ var TSISL_TEAM_ONB_V2=[
 
     out.push(N.sec('tsn0-l06s4',
       '<h3>Wo du beiden im Kurs <span class="g">begegnest.</span></h3>'+
-      '<p>Notion AI arbeitet in deinem Backoffice ab <b>Modul 2</b> mit, zum Beispiel beim Auslesen von Lieferscheinen. In <b>Modul 4</b> richtest du Notion Agents und Notion Automationen ein und lässt Claude Aufgaben zu festen Zeiten erledigen. In <b>Modul 5</b> baust du einen Agenten, der Reservierungsanfragen per Mail, Nachricht und Telefon annimmt. Dort zeige ich dir auch, wie du für jede Aufgabe die richtige Wahl triffst.</p>'));
+      '<p>Notion AI hilft dir schon beim Arbeiten mit der Vorlage, etwa wenn du eine Frage zu deinen Einträgen hast. In <b>Modul 4</b> richtest du Notion Agents und Notion Automationen ein und lässt Claude Aufgaben zu festen Zeiten erledigen. Welcher Helfer welche Aufgabe übernimmt, ordnest du in Lektion 4.9 zu. In <b>Modul 5</b> baust du einen Agenten, der Reservierungsanfragen per Mail, Nachricht und Telefon annimmt.</p>'));
 
     out.push(N.emp({ id:'tsn0-l06emp', kind:'Nutzung', animTitle:'Die richtige', animGold:'Wahl',
-      steps:['Gleich oder anders?','Regel zuerst','Agent für Text','Ergebnis prüfen'],
-      intro:'So ordnest du eine Aufgabe ein, bevor du etwas einrichtest.',
+      steps:['Immer gleich?','Mitdenken?','Am Anfang mitlesen','Zuordnen in 4.9'],
+      intro:'So erkennst du, womit du es zu tun hast.',
       points:[
-        'Frag dich: Muss bei dieser Aufgabe <b>jedes Mal dasselbe</b> passieren? Dann reicht eine Automation.',
-        'Wenn eine einfache Regel reicht, nimm sie. Sie ist <b>schneller eingerichtet</b> und braucht keine KI.',
-        'Kommt ein <b>Text</b> an, den jemand lesen und verstehen muss, etwa eine Mail oder ein Lieferschein, brauchst du einen Agenten.',
-        'Schau dir die Ergebnisse eines neuen Agenten in den ersten Wochen an. <b>Erst danach</b> lässt du ihn allein arbeiten.']
+        'Frag dich bei jeder Aufgabe: Passiert <b>jedes Mal dasselbe</b>? Dann ist es ein Fall für eine Automation.',
+        'Muss jemand lesen und <b>mitdenken</b>, etwa bei der Mail eines Gastes? Dann ist es ein Fall für einen Agenten.',
+        'Schau dir die Ergebnisse eines neuen Agenten in den ersten Wochen an. <b>Erst danach</b> lässt du ihn allein arbeiten.',
+        'Welcher Helfer im Backoffice welche Aufgabe übernimmt, ordnest du in <b>Lektion 4.9</b> mit einer festen Regel zu. Bis dahin reicht dir der Unterschied.']
     }));
     return out;
   }
@@ -28344,7 +28336,7 @@ var TSISL_TEAM_ONB_V2=[
   function build(){
     var out=[];
     out.push(N.intro(
-      '<p>Jetzt weißt du, worum es geht. Bevor du loslegst, zeige ich dir den Weg durch den Kurs: in welcher Reihenfolge die Module aufeinander aufbauen, wo du einsteigst und welche Konten du vorher brauchst.</p>'+
+      '<p>Jetzt weißt du, worum es geht. Bevor du loslegst, zeige ich dir, wo du einsteigst und welche Konten du vorher brauchst.</p>'+
       '<p>Am Ende dieser Lektion hast du deine Unterlagen für das Backoffice beisammen. Damit gehst du ohne Umwege in Modul 1.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-a07';
     a.innerHTML=N.head('Der Weg','Was du nach jedem Modul <span class="g">in der Hand hast.</span>','Sieben Stationen. An jeder bekommst du etwas, das du am nächsten Tag im Betrieb nutzt.')+
@@ -28361,13 +28353,13 @@ var TSISL_TEAM_ONB_V2=[
         '<div class="tsn0-card"><span class="k">Notion kennst du</span><div class="n">Modul 1 überfliegen.</div><hr><p>Schau dir in Modul 1 nur an, was neu für dich ist, und steig dann mit der Vorlage in Modul 2 ein.</p></div>'+
         '<div class="tsn0-card"><span class="k">Claude kennst du</span><div class="n">Trotzdem Modul 3.</div><hr><p>Auch wenn du Claude schon nutzt: In Modul 3 richtest du es so ein, dass es deinen Betrieb kennt. Darauf baut Modul 4 auf.</p></div>'+
       '</div>'+
-      '<p>Modul 5 und Modul 6 kannst du in beliebiger Reihenfolge machen, sobald du Modul 4 abgeschlossen hast.</p>'));
+      '<p>Modul 5 und Modul 6 kannst du in beliebiger Reihenfolge machen.</p>'));
 
     out.push(N.sec('tsn0-l07s2',
       '<h3>Welche Konten du <span class="g">brauchst.</span></h3>'+
-      '<p><b>Notion</b> brauchst du ab Modul 1. Das Konto ist kostenlos. Notion AI ist voll erst im Business-Tarif enthalten, in den kleineren Tarifen nur zum Testen. Welchen Tarif dein Backoffice wirklich braucht, besprechen wir in Modul 2, bevor du etwas bezahlst.</p>'+
+      '<p><b>Notion</b> brauchst du ab Modul 1. Das Konto ist kostenlos. Notion AI ist voll erst im Business-Tarif enthalten, in den kleineren Tarifen nur zum Testen. Welcher Tarif zu deinem Betrieb passt, siehst du in Modul 1, bevor du etwas bezahlst.</p>'+
       '<p><b>Claude</b> brauchst du ab Modul 3. Welcher Tarif dafür reicht und was er kostet, steht in Lektion 3.3.</p>'+
-      '<p>Die <b>Bildwerkzeuge</b> nimmst du erst dazu, wenn du deinem Backoffice Bilder geben willst. Für alles Weitere sage ich dir im jeweiligen Modul, ob und ab wann du es brauchst.</p>'+
+      '<p>Die <b>Bildwerkzeuge</b> kommen in Modul 2 dazu, dort, wo du die Cover deiner Datenbanken anlegst. Für alles Weitere sage ich dir im jeweiligen Modul, ob und ab wann du es brauchst.</p>'+
       '<p class="tsn0-src">Notion-Tarife laut notion.com/pricing, Stand 1. November 2026.</p>'));
 
     out.push(N.sec('tsn0-l07s3',
@@ -28404,7 +28396,7 @@ var TSISL_TEAM_ONB_V2=[
   N.page({ key:'l07', re:window.__tsn0re('dein-weg-durch-den-kurs'), build:build, after:after,
     hero:{ img:window.__tsn0cov('l07'), alt:'Dein Weg durch die Gastronomy AI Masterclass', eyebrow:'L 0.7', title:'Dein <span class="ts-gold">Weg</span>' },
     learn:{ learn:[
-      'Die Module <b>bauen aufeinander auf</b>, Modul 5 und 6 wählst du frei.',
+      'Die Module <b>bauen aufeinander auf</b>, die Reihenfolge von Modul 5 und 6 wählst du frei.',
       'Notion brauchst du <b>ab Modul 1</b>, Claude ab Modul 3.',
       'Du setzt jede Lektion <b>im eigenen Betrieb</b> um, bevor du weitermachst.',
       'Deine <b>Unterlagen</b> für das Backoffice liegen bereit.'],
@@ -28413,8 +28405,8 @@ var TSISL_TEAM_ONB_V2=[
 
 /* ============================================================
    ABSCHLUSS · Was du jetzt kannst  (/abschluss-was-du-am-ende-kannst)
-   Erklaeranimation #tsn0-ab "Der Pass" — EIGENES Konzept: ein langer
-   Kuechenpass mit sechs Cloches. Eine nach der anderen hebt sich und gibt
+   Erklaeranimation #tsn0-ab "Der Tisch" — EIGENES Konzept: ein gedeckter
+   langer Tisch mit sechs Cloches (Pass ist in 3.1/3.2 vergeben). Eine nach der anderen hebt sich und gibt
    frei, was du in diesem Modul gelernt hast; zum Schluss leuchtet die
    Glocke am Pass ("Service"). Die Sektionen danach: Pflege, Weg danach.
    ============================================================ */
@@ -28422,7 +28414,7 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__tsn0ab) return; window.__tsn0ab=true;
   var N=window.__tsn0, L=window.__tsn0L;
   var CL=[
-    ['Notion','Du baust und liest Datenbanken und findest dich in jeder Ansicht zurecht.'],
+    ['Notion','Du liest jede Datenbank deiner Vorlage und findest dich in jeder Ansicht zurecht.'],
     ['Backoffice','Dein Betrieb steht im System: Einkauf, Rezepturen, Gerichte, Kosten, Kennzahlen.'],
     ['Claude','Du weißt, was Claude ist, und hast es für deinen Betrieb eingerichtet.'],
     ['Claude + Notion','Claude beantwortet Fragen zu deinen Zahlen und pflegt dein Backoffice mit.'],
@@ -28435,8 +28427,8 @@ var TSISL_TEAM_ONB_V2=[
       '<p>Du bist durch. Ich weiß, wie viele Abende in diesem Kurs stecken, neben einem Betrieb, der dich jeden Tag fordert. Danke, dass du drangeblieben bist.</p>'+
       '<p>Auf dieser Seite schauen wir zurück auf das, was du jetzt kannst, und nach vorn: wie dein System lebendig bleibt und wie es für dich weitergeht.</p>'));
     var a=N.h('div','tsn0-anim'); a.id='tsn0-ab';
-    a.innerHTML=N.head('Der Pass','Alles ist <span class="g">angerichtet.</span>','Sechs Teller, einer für jedes Modul. Je nach Tarif hast du nicht alle durchlaufen, die anderen warten auf dich.')+
-      '<div class="ab-frame"><div class="ab-bell"><span></span></div><div class="ab-pass">'+
+    a.innerHTML=N.head('Der Tisch','Alles ist <span class="g">angerichtet.</span>','Ein Teller für jedes Modul nach der Einführung.')+
+      '<div class="ab-frame"><div class="ab-glow"></div><div class="ab-pass">'+
         CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
       '</div><div class="ab-shelf"></div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
@@ -28445,25 +28437,24 @@ var TSISL_TEAM_ONB_V2=[
     out.push(N.sec('tsn0-abs1',
       '<h3>Was du jetzt <span class="g">kannst.</span></h3>'+
       '<div class="tsn0-cards c3">'+
-        '<div class="tsn0-card"><span class="k">Verstehen</span><div class="n">Du ordnest ein.</div><hr><p>Du kennst die Anbieter am Markt, weißt, was sie können und kosten, und hältst Agent und Automation auseinander. Neue Schlagzeilen bringen dich nicht mehr aus der Ruhe.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Bedienen</span><div class="n">Du arbeitest im System.</div><hr><p>Dein Backoffice läuft mit deinen Zahlen. Du trägst ein, liest ab und weißt bei jeder Zahl, woher sie kommt.</p></div>'+
-        '<div class="tsn0-card"><span class="k">Erweitern</span><div class="n">Du baust weiter.</div><hr><p>Mit Claude stellst du deinem System Fragen, lässt Aufgaben erledigen und passt es an, wenn dein Betrieb sich verändert.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Verstehen</span><div class="n">Du ordnest ein.</div><hr><p>Du kennst die Anbieter am Markt und hältst Agent und Automation auseinander. Neue Schlagzeilen bringen dich nicht mehr aus der Ruhe.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Bedienen</span><div class="n">Du arbeitest im System.</div><hr><p>Du pflegst dein Backoffice selbst und weißt bei jeder Zahl, woher sie kommt.</p></div>'+
+        '<div class="tsn0-card"><span class="k">Erweitern</span><div class="n">Du baust weiter.</div><hr><p>Mit Claude stellst du deinem System Fragen. Ändert sich dein Betrieb, passt du es mit Claude an.</p></div>'+
       '</div>'));
 
     out.push(N.sec('tsn0-abs2',
       '<h3>Dein System bleibt <span class="g">lebendig.</span></h3>'+
-      '<p>Ein Backoffice ist nur so gut wie seine Pflege. Das muss nicht viel sein, es muss nur regelmäßig passieren.</p>'+
+      '<p>Ein Backoffice stimmt nur, solange du es pflegst. Das muss nicht viel sein, es muss nur regelmäßig passieren.</p>'+
       '<div class="tsn0-do"><span class="k">Dein Rhythmus</span><ol>'+
-        '<li><b>Mit jeder Lieferung:</b> den Lieferschein eintragen, damit deine Preise stimmen.</li>'+
-        '<li><b>Einmal in der Woche:</b> einen Blick auf die Kennzahlen und auf die Gerichte, deren Deckungsbeitrag sich verändert hat.</li>'+
+        '<li><b>Einmal in der Woche:</b> die Lieferscheine einlesen lassen und die neuen Preise freigeben. Danach ein Blick auf die Gerichte, deren Deckungsbeitrag sich verändert hat.</li>'+
         '<li><b>Einmal im Monat:</b> Inventur und ein kurzer Abgleich mit dem Einkauf.</li>'+
         '<li><b>Wenn sich die Karte ändert:</b> neue Gerichte gleich mit Rezeptur anlegen, nicht erst später.</li>'+
       '</ol></div>'));
 
     out.push(N.sec('tsn0-abs3',
       '<h3>Wie es <span class="g">weitergeht.</span></h3>'+
-      '<p>Du hast ein System, das mit deinem Betrieb wächst. Ein zweiter Standort, ein Catering-Bereich oder ein neues Konzept lassen sich auf derselben Grundlage abbilden. In Modul 2 findest du dafür die Erweiterung für mehrere Standorte.</p>'+
-      '<p>Die Werkzeuge entwickeln sich weiter, und der Kurs wächst mit. Wenn sich bei Claude oder Notion etwas Wichtiges ändert, findest du es hier. Und wenn du an einer Stelle hängst oder dein System für deinen Betrieb weiter ausbauen willst, schreib mir: <a href="mailto:robert@tasty-studios.de">robert@tasty-studios.de</a></p>'));
+      '<p>Du hast ein System, das mit deinem Betrieb wächst. Ein zweiter Standort lässt sich auf derselben Grundlage abbilden. In Modul 2 findest du dafür die Erweiterung, den Abgleich zwischen den Standorten zeigt dir Lektion 4.9.</p>'+
+      '<p>Die Werkzeuge entwickeln sich weiter. Wenn du an einer Stelle hängst oder dein System für deinen Betrieb weiter ausbauen willst, schreib mir: <a href="mailto:robert@tasty-studios.de">robert@tasty-studios.de</a></p>'));
     return out;
   }
   function after(page){
