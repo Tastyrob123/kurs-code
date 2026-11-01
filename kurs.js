@@ -4504,7 +4504,7 @@ window.__tsMO = function(cb){
     { re:/^\/die-einstiegsfragen\/?$/, href:'/lektionen/deine-sorgen-ehrlich-beantwortet' },
     { re:/^\/(?:lektionen\/)?deine-sorgen-ehrlich-beantwortet\/?$/, href:'/lektionen/agent-oder-automation' },
     { re:/^\/(?:lektionen\/)?agent-oder-automation\/?$/, href:'/lektionen/dein-weg-durch-den-kurs' },
-    { re:/^\/(?:lektionen\/)?dein-weg-durch-den-kurs\/?$/, href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip' },
+    { re:/^\/(?:lektionen\/)?dein-weg-durch-den-kurs\/?$/, href:'/modul-1-notion-grundlagen-3-lernpfade' },
     /* Modul-1-Uebersicht: eigener Weiter-Knopf in .tsn1-learn; ohne Eintrag hier loeschte der Pager ihn je nach Reihenfolge wieder (Ladezeit-Chat 01.11.2026) */
     { re:/\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/, href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip' },
     { re:/^\/abschluss-was-du-am-ende-kannst\/?$/, href:'/' }

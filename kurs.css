@@ -2462,6 +2462,8 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
 .tsn0-sec .a5-tr span:first-child{ color:#fff; font-weight:600; }
 .tsn0-sec .a5-tr.h span:first-child{ color:var(--tsn0-gold); }
 @media(max-width:640px){ .tsn0-sec .a5-tr{ grid-template-columns:1fr; gap:4px; } .tsn0-sec .a5-tr.h{ display:none; } }
+/* Startseite: Notion-Seitenlink auf das Modul-1-Archiv ist fuer Teilnehmer nicht gedacht (Projektleitung 01.11.2026) */
+.page__index a.notion-page[href*="archiv-modul-1-alte-3-lernpfade"]{ display:none !important; }
 /* <<< NEUBAU MODUL 0 — ENDE <<< */
 /* · */
 /* · */
