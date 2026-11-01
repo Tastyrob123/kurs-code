@@ -3293,7 +3293,7 @@ window.__tsMO = function(cb){
 
   var STEPS=[
    ['01','Verteilt','Wareneinsatz, Rezepturen und Zahlen liegen noch in Excel, Notizen und im Kopf verteilt.'],
-   ['02','Aufgebaut','Jeder Bereich bekommt seine Datenbanken, Schritt f&uuml;r Schritt.'],
+   ['02','Gef&uuml;llt','Du holst dir die Vorlage und tr&auml;gst Bereich f&uuml;r Bereich deine Daten ein.'],
    ['03','Vernetzt','Die sechs Bereiche greifen ineinander und aktualisieren sich gegenseitig.']
   ];
 
@@ -3452,11 +3452,11 @@ window.__tsMO = function(cb){
 
     var wrap=document.createElement('div');
     wrap.innerHTML=`
-<div class="m2h-intro"><p>In diesem Modul entsteht dein eigenes Notion AI Backoffice: die digitale Struktur, in der dein Betrieb ab jetzt lebt. Du baust sie Bereich f&uuml;r Bereich auf, bis am Ende ein System steht, das sich selbst aktuell h&auml;lt.</p></div>
+<div class="m2h-intro"><p>In diesem Modul bekommst du dein Notion AI Backoffice als fertige Vorlage: die digitale Struktur, in der dein Betrieb ab jetzt lebt. Du f&uuml;llst sie Bereich f&uuml;r Bereich mit deinen Daten, und ab da h&auml;lt sich das System selbst aktuell.</p></div>
 <div class="m2h-head">
   <div class="m2h-eyebrow">Sechs Bereiche, ein Backoffice</div>
   <h2 class="m2h-title">Aus sechs Bereichen wird dein <span>Backoffice-System</span>.</h2>
-  <p class="m2h-sub">Jeder Bereich bekommt seine eigenen Datenbanken. Zusammen ergeben sie das System, das deinen Betrieb tr&auml;gt.</p>
+  <p class="m2h-sub">Jeder Bereich hat seine eigenen Datenbanken. Zusammen ergeben sie das System, auf dem dein Betrieb l&auml;uft.</p>
 </div>
 <div class="m2h-rail">${rail}</div>
 <div class="m2h-wrap">
@@ -3476,7 +3476,7 @@ window.__tsMO = function(cb){
     </div>
   </div>
   <p class="m2h-cap"><b>03</b><span class="m2h-cap-t">${STEPS[2][2]}</span></p>
-  <p class="m2h-note">Bausteine = alle Datenbanken, Checklisten und Referenzen der sechs Bereiche. Hier siehst du je Bereich eine Auswahl &mdash; die komplette &Uuml;bersicht folgt gleich in den Kacheln.</p>
+  <p class="m2h-note">Bausteine = alle Datenbanken, Checklisten und Referenzen der sechs Bereiche, fertig in deiner Vorlage. Hier siehst du je Bereich eine Auswahl, die komplette &Uuml;bersicht folgt in den Kacheln.</p>
   <div class="m2h-foot">
     <button class="m2h-replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button>
   </div>
@@ -4350,6 +4350,7 @@ window.__tsMO = function(cb){
   window.__tsNext = true;
   /* Seiten-Map: auf welcher Lektion führt "Nächste Lektion" wohin */
   var PAGES = [
+    { re:/\/(?:lektionen\/)?vorlage-holen-und-einrichten\/?$/, href:'/mehrwert-zielbild' },
     { re:/\/mehrwert-zielbild\/?$/, href:'/inventurliste' },
     { re:/\/inventurliste\/?$/,     href:'/lieferpartner-ansprechpartner-lieferantenvertrge' },
     { re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/, href:'/zutatenliste' },
@@ -4362,6 +4363,7 @@ window.__tsMO = function(cb){
     /* Key Metrics fehlte hier -> pageHref() lieferte null und der Pager hat den von #tskmnext
        gebauten Weiter-Button wieder ENTFERNT (Robert-Meldung 21.07.2026 "Button fehlt"). */
     { re:/\/key-metrics\/?$/, href:'/modul-2-das-notion-ai-backoffice-system' },
+    { re:/\/system-lebendiger-machen\/?$/, href:'/notion-ai-fr-unser-system' },
     { re:/\/notion-ai-fr-unser-system\/?$/, href:'/allgemeine-tipps' },
     { re:/\/lektionen\/vision-werte\/?$/, href:'/lektionen/unternehmen-markenidentitt' },
     { re:/\/lektionen\/team-onboarding\/?$/, href:'/lektionen/checklisten-produktion' },
@@ -4480,7 +4482,7 @@ window.__tsMO = function(cb){
     "Du kennst die sechs Bereiche deines Backoffice und weißt, wie sie zusammenhängen.",
     "Du verstehst, warum ein Wareneinsatz pro Gericht mehr wert ist als ein Jahresschnitt.",
     "Du kannst den Deckungsbeitrag I, II und III erklären und weißt, was in jede Stufe einfließt.",
-    "Du hast das vollständige Zielbild eines fertigen Gerichts vor Augen und weißt, worauf die nächsten sieben Schritte hinarbeiten."
+    "Du hast das Zielbild eines fertigen Gerichts vor Augen und weißt, was die nächsten sieben Schritte in deiner Vorlage füllen."
   ];
 
   /* /rezepturen (DB V) — feste Learnings (keine Notion-"Learnings"-Überschrift auf der Seite) */
@@ -12114,24 +12116,24 @@ var TSISL_TEAM_ONB_V2=[
   var GLOW='199,180,137';
   var BLK='block-38fb95465534800bafb6c04f03af102b';
   var CARDS=[
-   ['01','Überblick','Mehrwert & Zielbild','Das fertige Gericht vor Augen — worauf die nächsten Schritte hinarbeiten.','/mehrwert-zielbild','mehrwert-zielbild.webp'],
-   ['02','Datenbank','DB 0 · Inventurliste','Dein Warenbestand als Basis — jede Zutat mit ihrem Preis.','/inventurliste','inventurliste.jpg'],
-   ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner & Verträge — die Quelle jeder Einkaufszeile.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.webp'],
+   ['01','Überblick','Mehrwert & Zielbild','Das fertige Gericht vor Augen: was dir deine Vorlage am Ende zeigt.','/mehrwert-zielbild','mehrwert-zielbild.webp'],
+   ['02','Datenbank','DB 0 · Inventurliste','Alles, was du einkaufst, mit Gebinde und Einkaufspreis.','/inventurliste','inventurliste.jpg'],
+   ['03','Datenbank','DB I–III · Lieferanten','Lieferanten, Ansprechpartner und Verträge an einem Ort.','/lieferpartner-ansprechpartner-lieferantenvertrge','lieferanten.webp'],
    ['04','Datenbank','DB IV · Zutaten','Zieht ihre Preise direkt aus deiner Inventurliste.','/zutatenliste','zutaten.jpg'],
-   ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus den Zutaten — automatisch.','/rezepturen','rezepturen.webp'],
+   ['05','Datenbank','DB V · Rezepturen','Jede Rezeptur rechnet sich aus ihren Zutaten selbst.','/rezepturen','rezepturen.webp'],
    ['06','Datenbank','DB VI–VIII · GK & Löhne','Gemein- und Personalkosten, sauber auf die Gerichte verteilt.','/gemeinkosten-mitarbeiterlhne','gemeinkosten-loehne.webp'],
-   ['07','Datenbank','DB IX · Allergene','Jede Zutat kennt ihre Allergene — die Kennzeichnung schreibt sich selbst.','/allergene-bersicht','allergene.jpg'],
-   ['08','Datenbank','DB XI · Gerichte & Getränke','Der finale Schritt — alles läuft im Gericht zusammen, auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.webp'],
-   ['09','Interface','Interface-Bau','Grundstruktur & Widgets — dein System bekommt ein Gesicht.','/interface-bau-grundstruktur-widgets','interface.webp'],
+   ['07','Datenbank','DB IX–X · Allergene & Packaging','Kennzeichnung an der Zutat, Verpackung mit Preis.','/allergene-bersicht','allergene.jpg'],
+   ['08','Datenbank','DB XI · Gerichte & Getränke','Hier läuft alles zusammen, Wareneinsatz und Deckungsbeitrag auf den Cent.','/gerichte-getrnke-finaler-schritt','gerichte.webp'],
+   ['09','Interface','Interface-Bau','Die Startseite deines Betriebs, mit allem, was du täglich brauchst.','/interface-bau-grundstruktur-widgets','interface.webp'],
    ['10','Interface','Food-/Drinksquartier','Inhalte und Interface für Speisen und Getränke an einem Ort.','/food-drinksquartier-inhalte-interface','food-drinks.jpg'],
-   ['11','Kalkulation','Menükalkulation','Menüs und Catering — kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.webp'],
-   ['12','Kennzahlen','Key Metrics','Deine wichtigsten Zahlen auf einen Blick — live aus dem System.','/key-metrics','key-metrics.webp'],
-   ['13','Betrieb','Operations Area','Der operative Kern — Abläufe, Checklisten, Tagesgeschäft.','/operations-area','operations.webp'],
-   ['14','Skalierung','Multistandort','Das System auf mehrere Standorte erweitern — optional.','/multistandort-erweiterung-optional','multistandort.webp'],
-   ['15','Abschluss','Vision Frame','Der Abschluss des Building-Prozesses — dein Bild vom Ganzen.','/vision-frame-abschluss-des-building-prozesses','vision-frame.webp'],
-   ['16','Dynamik','Dynamisches System','Automationen und Feinschliff — das System bleibt in Bewegung.','/system-lebendiger-machen','dynamic-system.webp'],
-   ['17','KI','Notion AI','Wie KI dein System mitdenken lässt — konkret und im Alltag.','/notion-ai-fr-unser-system','notion-ai.webp'],
-   ['18','Praxis','Allgemeine Tipps','Kniffe und Empfehlungen aus der Praxis — zum Weiterbauen.','/allgemeine-tipps','allgemeine-tipps.webp']
+   ['11','Kalkulation','Menükalkulation','Menüs und Catering, kalkuliert bis auf die letzte Position.','/menkalkulation-catering-rechner','menuekalkulation.webp'],
+   ['12','Kennzahlen','Key Metrics','Deine wichtigsten Zahlen auf einen Blick, live aus dem System.','/key-metrics','key-metrics.webp'],
+   ['13','Betrieb','Operations Area','Checklisten, Hygiene, Inventur und Team im Tagesgeschäft.','/operations-area','operations.webp'],
+   ['14','Skalierung','Multistandort','Wenn ein Manager zählt und bestellt, aber nicht kalkulieren soll.','/multistandort-erweiterung-optional','multistandort.webp'],
+   ['15','Abschluss','Vision Frame','Werte, Marke und Expansion: dein Bild vom Ganzen.','/vision-frame-abschluss-des-building-prozesses','vision-frame.webp'],
+   ['16','Dynamik','Dynamisches System','Was Automationen, Agenten und Claude Code am Backoffice tun.','/system-lebendiger-machen','dynamic-system.webp'],
+   ['17','KI','Notion AI','Notion AI als Helfer im Alltag mit deiner Vorlage.','/notion-ai-fr-unser-system','notion-ai.webp'],
+   ['18','Praxis','Allgemeine Tipps','Kniffe aus der Praxis für den Alltag mit deiner Vorlage.','/allgemeine-tipps','allgemeine-tipps.webp']
   ];
   var CSS=`
   #tslmod{width:min(1320px,95vw);margin:34px auto 30px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
@@ -21976,8 +21978,8 @@ var TSISL_TEAM_ONB_V2=[
     wrap.id='tsnai-intro';
     wrap.innerHTML=`
 <div class="ts-body">
-  <p>Ganz am Anfang habe ich dir gesagt, dass wir Notion AI für zweierlei nutzen: um <b>im System zu arbeiten</b> und um das <b>System selbst mitzubauen</b>. Bisher ging es fast nur um das Bauen.</p>
-  <p>Dein Backoffice steht jetzt, die Kalkulationen laufen und deine Datenbanken greifen ineinander. Damit wird der andere Teil interessant. In dieser Lektion zeige ich dir, was Notion AI kann, wenn es auf ein System trifft, das du selbst aufgebaut hast, und wie du es im Alltag befragst, ohne dass du dafür eine einzige Formel auswendig können musst.</p>
+  <p>Notion AI nutzt du in deinem Backoffice für zwei Dinge: um <b>Daten hineinzubekommen</b> und um <b>Fragen an deine Zahlen</b> zu stellen. Das Einlesen von Lieferscheinen und Listen hast du in den Datenbank-Lektionen schon gesehen.</p>
+  <p>Deine Vorlage ist gefüllt, die Kalkulationen laufen und deine Datenbanken greifen ineinander. In dieser Lektion zeige ich dir, was Notion AI kann, wenn es auf ein System mit deinen eigenen Zahlen trifft, und wie du es im Alltag befragst, ohne eine einzige Formel auswendig zu können.</p>
 </div>`;
     hero.parentNode.insertBefore(wrap, hero.nextSibling);
   }
@@ -23136,7 +23138,7 @@ var TSISL_TEAM_ONB_V2=[
     '</div>'+
     '<div class="vd-txt">'+
       '<h2 class="vd-h2">Sagen statt <span class="ts-gold">bauen</span>.</h2>'+
-      '<p>Bisher hast du jede Tabelle Spalte für Spalte angelegt: Feldtyp wählen, benennen, bei einer Auswahl jede Option einzeln eintragen. Bei einer Datenbank mit zwanzig Spalten ist das ein halber Abend.</p>'+
+      '<p>Brauchst du eine Tabelle, die nicht in deiner Vorlage steckt, zum Beispiel für die Weinkarte oder für Veranstaltungen, musst du sie nicht Spalte für Spalte anlegen: Feldtyp wählen, benennen, jede Option einzeln eintragen. Bei zwanzig Spalten wäre das ein halber Abend.</p>'+
       '<p>Mit Notion AI beschreibst du stattdessen, <b>was die Tabelle können soll</b>, und sie entsteht fertig — mit den passenden Feldtypen und den Auswahlmöglichkeiten, die du genannt hast. Wenn du noch nicht weißt, wie die Struktur aussehen müsste, lässt du sie dir vorher in einem Chat entwerfen und gibst das Ergebnis einfach weiter.</p>'+
       '<p>Für Formeln gilt dasselbe. Du schreibst ins Feld, was gelten soll — <b>wenn dieser Wert, dann jener</b> — und die Formel entsteht daraus.</p>'+
     '</div>'+
@@ -23582,7 +23584,7 @@ var TSISL_TEAM_ONB_V2=[
   var NEXT_URL='https://gastronomie-ai-masterclass.super.site/allgemeine-tipps';
   var LEARN=[
     'Du weißt, warum Notion AI <b>in deinen Daten sitzt</b> — und ein Chat daneben nur erklären kann, wovon es abhängt.',
-    'Du kannst <b>Tabellen und Formeln beschreiben</b>, statt sie Spalte für Spalte selbst zu bauen.',
+    'Du kannst <b>neue Tabellen und Formeln beschreiben</b>, statt sie Spalte für Spalte selbst anzulegen.',
     'Du weißt, dass <b>Abfragequalität Übung braucht</b> — und behältst dabei dein Nutzungsguthaben im Blick.',
     'Du kannst <b>Szenarien durchrechnen</b> — fällt eine Zutat aus, siehst du sofort, was das im Wareneinsatz bedeutet.'
   ];
@@ -29557,6 +29559,1678 @@ var TSISL_TEAM_ONB_V2=[
 /* · */
 
 /* >>> NEUBAU MODUL 2 (Notion AI Backoffice System) — ANFANG >>> */
+/* ============================================================
+   NEUBAU MODUL 2 · __tsn2 — Bausteine für den Umbau auf Grundsatz A
+   (Vorlage statt Nachbau, Robert-Entscheid 01.11.2026)
+   ------------------------------------------------------------
+   Eigener Namensraum tsn2-. Gemeinsame Bausteine anderer Module
+   (__ts3, __ts4, tsshop, ts-next) werden NICHT verändert, nur gelesen.
+   Reveal-Pflicht (Katalog-Regel 15): jedes Modul startet über reveal(),
+   nie allein über einen IntersectionObserver.
+   ============================================================ */
+(function(){
+  if(window.__tsn2) return;
+
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var SANS='-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif';
+  var DISP='"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif';
+  var MONO='ui-monospace,SFMono-Regular,Menlo,monospace';
+  var reduced=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+
+  function phHero(label, sub){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">'+(sub||'3-LAPTOP-COVER')+'</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  /* Reveal-Muster 1:1 nach Katalog-Regel 15 (IO .12 + Scroll/Resize + 400ms-Intervall
+     + Checks 600/1600ms + hartes fire() nach 9s). */
+  function reveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ if(!el.isConnected) return; var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
+  var CSS=`
+  .tsn2{font-family:${SANS};color:#fff;box-sizing:border-box}
+  .tsn2 *{box-sizing:border-box}
+  .tsn2-sec{max-width:980px;margin:72px auto 0;padding:0 clamp(20px,4vw,48px)}
+  .tsn2-sec.narrow{max-width:860px}
+  .tsn2-head{text-align:center;margin:0 auto 44px;max-width:980px}
+  .tsn2-kick{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 12px}
+  .tsn2-kick.dot::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  .tsn2-kick i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:22px;padding:0 7px;border-radius:999px;border:1px solid rgba(199,180,137,.45);color:#efe6d2;font-size:10.5px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+  .tsn2-h{font-family:${DISP};font-weight:600;letter-spacing:-.02em;color:#fff;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;margin:0 0 14px;text-wrap:balance}
+  .tsn2-h .g{color:#c7b489}
+  .tsn2-lead{font-size:16.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 auto;max-width:760px}
+  .tsn2-p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn2-p b,.tsn2-lead b{color:#c7b489;font-weight:600}
+  .tsn2-txt{max-width:760px;margin:0 auto;text-align:left}
+  .tsn2-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+  .tsn2-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn2-body p:last-child{margin-bottom:0}
+
+  /* Wegweiser: die fuenf Teile jeder Datenbank-Lektion */
+  .tsn2-way{max-width:1080px;margin:44px auto 0;padding:0 clamp(16px,3vw,40px)}
+  .tsn2-way-in{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.015)),#05060b}
+  .tsn2-way a{position:relative;display:block;padding:18px 18px 17px;text-decoration:none;color:#fff;border-right:1px solid rgba(255,255,255,.07);transition:background .35s cubic-bezier(.45,0,.55,1)}
+  .tsn2-way a:last-child{border-right:0}
+  .tsn2-way a:hover{background:rgba(199,180,137,.07)}
+  .tsn2-way .n{display:block;font:700 10.5px/1 ${SANS};letter-spacing:.12em;color:#c7b489;margin-bottom:9px;font-variant-numeric:tabular-nums}
+  .tsn2-way .t{display:block;font-family:${DISP};font-weight:600;font-size:15px;line-height:1.25;color:#fff}
+  .tsn2-way .s{display:block;font-size:12px;line-height:1.45;color:rgba(255,255,255,.55);margin-top:6px}
+  .tsn2-way-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,rgba(199,180,137,0),#c7b489 40%,rgba(199,180,137,0));transform-origin:left;transform:scaleX(0);transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+  .tsn2-way:not(.js) .tsn2-way-bar,.tsn2-way.in .tsn2-way-bar{transform:scaleX(1)}
+  .tsn2-way a{transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .35s cubic-bezier(.45,0,.55,1)}
+  .tsn2-way.js a{opacity:0;transform:translateY(10px)}
+  .tsn2-way.js.in a{opacity:1;transform:none}
+  .tsn2-way.in a:nth-child(2){transition-delay:.08s}.tsn2-way.in a:nth-child(3){transition-delay:.16s}.tsn2-way.in a:nth-child(4){transition-delay:.24s}.tsn2-way.in a:nth-child(5){transition-delay:.32s}
+
+  /* Schritte "Deine Daten eintragen" */
+  .tsn2-steps{position:relative;display:flex;flex-direction:column;gap:16px;margin:0 auto;max-width:900px}
+  .tsn2-step{position:relative;display:grid;grid-template-columns:62px 1fr;gap:20px;padding:24px 26px 22px;border-radius:18px;border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.02)),#05060b;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  .tsn2-steps.js .tsn2-step{opacity:0;transform:translateY(18px)}
+  .tsn2-steps.js.in .tsn2-step{opacity:1;transform:none}
+  .tsn2-step:hover{border-color:rgba(199,180,137,.4);box-shadow:0 26px 54px -30px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.10)}
+  .tsn2-step-n{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:${DISP};font-weight:600;font-size:21px;color:#efe6d2;
+    background:radial-gradient(120% 120% at 30% 25%,rgba(199,180,137,.26),rgba(199,180,137,.05) 60%);border:1px solid rgba(199,180,137,.42);font-variant-numeric:tabular-nums}
+  .tsn2-step-eb{display:block;font:600 10px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:4px 0 9px}
+  .tsn2-step-t{font-family:${DISP};font-weight:600;font-size:19px;line-height:1.25;color:#fff;margin:0 0 10px}
+  .tsn2-step p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 10px}
+  .tsn2-step p:last-child{margin-bottom:0}
+  .tsn2-step p b{color:#efe6d2;font-weight:600}
+  .tsn2-step ul{list-style:none;margin:4px 0 10px;padding:0}
+  .tsn2-step li{position:relative;padding-left:20px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.86);margin:0 0 6px}
+  .tsn2-step li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:#c7b489}
+  .tsn2-path{display:inline-block;font:600 12.5px/1.6 ${SANS};color:#efe6d2;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.28);border-radius:8px;padding:2px 9px}
+  .tsn2-mono{font:600 12.5px/1.5 ${MONO};color:#efe6d2;background:rgba(255,255,255,.05);border:1px solid rgba(199,180,137,.25);border-radius:6px;padding:1px 7px}
+
+  /* Prompt zum Kopieren */
+  .tsn2-cmd{position:relative;margin:14px 0 4px;padding:16px 58px 16px 18px;border-radius:13px;text-align:left;
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),#05060b;border:1px solid rgba(199,180,137,.30)}
+  .tsn2-cmd .lbl{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin:0 0 10px}
+  .tsn2-cmd code{display:block;font:500 12.8px/1.72 ${MONO};color:#efe6d2;white-space:pre-wrap;word-break:break-word}
+  .tsn2-cmd button{position:absolute;top:12px;right:12px;height:26px;padding:0 11px;border-radius:7px;border:1px solid rgba(199,180,137,.35);
+    background:rgba(199,180,137,.12);color:#efe6d2;font:600 10.5px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s cubic-bezier(.45,0,.55,1),color .3s cubic-bezier(.45,0,.55,1)}
+  .tsn2-cmd button:hover{background:#c7b489;color:#05060b}
+
+  /* Hinweis-Zeile */
+  .tsn2-note{display:flex;gap:12px;align-items:flex-start;margin:14px 0 0;padding:13px 16px;border-radius:12px;background:rgba(199,180,137,.06);border:1px solid rgba(199,180,137,.22);font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.86)}
+  .tsn2-note::before{content:"";flex:0 0 auto;width:7px;height:7px;margin-top:8px;border-radius:50%;background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.7)}
+  .tsn2-note b{color:#efe6d2;font-weight:600}
+
+  /* Kacheln (Plaene, Bereiche) */
+  .tsn2-cards{display:grid;gap:16px}
+  .tsn2-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .tsn2-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .tsn2-card{position:relative;padding:22px 22px 20px;border-radius:16px;border:1px solid rgba(255,255,255,.11);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.02)),#05060b;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  .tsn2-cards.js .tsn2-card{opacity:0;transform:translateY(16px)}
+  .tsn2-cards.js.in .tsn2-card{opacity:1;transform:none}
+  .tsn2-cards.in .tsn2-card:nth-child(2){transition-delay:.1s}.tsn2-cards.in .tsn2-card:nth-child(3){transition-delay:.2s}
+  .tsn2-card:hover{border-color:rgba(199,180,137,.42);box-shadow:0 24px 50px -26px rgba(0,0,0,.8),0 0 26px rgba(199,180,137,.12)}
+  .tsn2-card.hi{border-color:rgba(199,180,137,.45);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.02)),#05060b}
+  .tsn2-card .eb{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.15em;text-transform:uppercase;color:#c7b489;margin:0 0 11px}
+  .tsn2-card .nm{font-family:${DISP};font-weight:600;font-size:21px;line-height:1.2;color:#fff;margin:0 0 4px}
+  .tsn2-card .pr{font-size:13px;color:rgba(255,255,255,.6);margin:0 0 13px}
+  .tsn2-card .pr b{color:#efe6d2;font-weight:600;font-size:15px}
+  .tsn2-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 12px}
+  .tsn2-card p{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.86);margin:0 0 9px}
+  .tsn2-card p:last-child{margin-bottom:0}
+  .tsn2-card p b{color:#efe6d2;font-weight:600}
+  .tsn2-foot{font-size:11px;line-height:1.5;color:rgba(255,255,255,.42);text-align:center;margin:14px auto 0;max-width:760px}
+
+  /* Typische Fehler */
+  .tsn2-errs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .tsn2-err{position:relative;padding:22px 22px 20px 22px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.015)),#05060b;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.45,0,.55,1)}
+  .tsn2-errs.js .tsn2-err{opacity:0;transform:translateY(16px)}
+  .tsn2-errs.js.in .tsn2-err{opacity:1;transform:none}
+  .tsn2-errs.in .tsn2-err:nth-child(2){transition-delay:.08s}.tsn2-errs.in .tsn2-err:nth-child(3){transition-delay:.16s}.tsn2-errs.in .tsn2-err:nth-child(4){transition-delay:.24s}.tsn2-errs.in .tsn2-err:nth-child(5){transition-delay:.32s}.tsn2-errs.in .tsn2-err:nth-child(6){transition-delay:.4s}
+  .tsn2-err:hover{border-color:rgba(199,180,137,.35)}
+  .tsn2-err .x{display:flex;align-items:center;gap:10px;font:600 10px/1 ${SANS};letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 11px}
+  .tsn2-err .x::before{content:"";width:8px;height:8px;border-radius:50%;background:#e0574f;box-shadow:0 0 12px rgba(224,87,79,.55)}
+  .tsn2-err h4{font-family:${DISP};font-weight:600;font-size:17.5px;line-height:1.3;color:#fff;margin:0 0 9px}
+  .tsn2-err p{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.86);margin:0 0 9px}
+  .tsn2-err p.fix{margin:0;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.86)}
+  .tsn2-err p.fix b{color:#c7b489;font-weight:600}
+
+  /* Band "So ist es gebaut" */
+  .tsn2-hood{max-width:980px;margin:72px auto 0;padding:0 clamp(20px,4vw,48px);text-align:center}
+  .tsn2-hood-line{position:relative;height:1px;margin:0 auto 22px;max-width:620px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.55),rgba(199,180,137,0))}
+  .tsn2-hood-line::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#c7b489;box-shadow:0 0 16px rgba(199,180,137,.8)}
+
+  /* Ergebnis-Karte (Abschnitt 03) — Rahmen, Inhalte je Lektion eigen */
+  .tsn2-res{position:relative;margin:0 auto;max-width:980px;border-radius:22px;border:1px solid rgba(255,255,255,.10);overflow:hidden;
+    background:radial-gradient(90% 120% at 20% 0%,rgba(199,180,137,.07),rgba(199,180,137,0) 55%),linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.01)),#04050a;
+    box-shadow:0 40px 90px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05)}
+  .tsn2-res::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  .tsn2-res-in{position:relative;padding:clamp(24px,4vw,44px)}
+  .tsn2-res-cap{font-size:11px;line-height:1.5;color:rgba(255,255,255,.42);text-align:center;margin:0;padding:0 0 18px}
+  .tsn2-replay{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 15px;border-radius:999px;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.08);color:#efe6d2;
+    font:600 11px/1 ${SANS};letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .3s cubic-bezier(.45,0,.55,1),color .3s cubic-bezier(.45,0,.55,1)}
+  .tsn2-replay:hover{background:#c7b489;color:#05060b}
+
+  @media(max-width:860px){
+    .tsn2-way-in{grid-template-columns:1fr 1fr}
+    .tsn2-way a{border-bottom:1px solid rgba(255,255,255,.07)}
+    .tsn2-cards.c2,.tsn2-cards.c3,.tsn2-errs{grid-template-columns:1fr}
+    .tsn2-step{grid-template-columns:1fr;gap:12px;padding:20px 18px}
+    .tsn2-step-n{width:46px;height:46px;font-size:17px}
+  }
+  @media(max-width:520px){ .tsn2-way-in{grid-template-columns:1fr} .tsn2-way a{border-right:0} }
+  @media(prefers-reduced-motion:reduce){
+    .tsn2-step,.tsn2-card,.tsn2-err,.tsn2-way a{opacity:1!important;transform:none!important;transition:none!important}
+    .tsn2-way-bar{transform:scaleX(1)!important;transition:none!important}
+  }
+  `;
+  function css(){
+    if(document.getElementById('tsn2-css')) return;
+    var s=document.createElement('style'); s.id='tsn2-css'; s.textContent=CSS; document.head.appendChild(s);
+  }
+
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function head(n, kick, title, lead){
+    return '<div class="tsn2-head">'+
+      '<div class="tsn2-kick'+(n?'':' dot')+'">'+(n?'<i>'+n+'</i>':'')+kick+'</div>'+
+      '<h2 class="tsn2-h">'+title+'</h2>'+
+      (lead?'<p class="tsn2-lead">'+lead+'</p>':'')+
+    '</div>';
+  }
+  function prompt(label, text){
+    return '<div class="tsn2-cmd"><span class="lbl">'+label+'</span><code>'+esc(text)+'</code><button type="button">Kopieren</button></div>';
+  }
+  function note(html){ return '<div class="tsn2-note"><div>'+html+'</div></div>'; }
+
+  function steps(arr){
+    return '<div class="tsn2-steps">'+arr.map(function(s,i){
+      return '<div class="tsn2-step"><div class="tsn2-step-n">'+(s.n||('0'+(i+1)).slice(-2))+'</div><div>'+
+        (s.eb?'<span class="tsn2-step-eb">'+s.eb+'</span>':'')+
+        '<h4 class="tsn2-step-t">'+s.t+'</h4>'+s.html+
+      '</div></div>';
+    }).join('')+'</div>';
+  }
+  function errors(arr){
+    return '<div class="tsn2-errs">'+arr.map(function(e){
+      return '<div class="tsn2-err"><span class="x">Typischer Fehler</span><h4>'+e.t+'</h4><p>'+e.folge+'</p><p class="fix"><b>So vermeidest du es:</b> '+e.fix+'</p></div>';
+    }).join('')+'</div>';
+  }
+  function cards(cls, arr){
+    return '<div class="tsn2-cards '+cls+'">'+arr.map(function(c){
+      return '<div class="tsn2-card'+(c.hi?' hi':'')+'">'+(c.eb?'<span class="eb">'+c.eb+'</span>':'')+'<div class="nm">'+c.nm+'</div>'+(c.pr?'<div class="pr">'+c.pr+'</div>':'')+'<hr>'+c.html+'</div>';
+    }).join('')+'</div>';
+  }
+
+  function wireCopy(root){
+    var bs=root.querySelectorAll('.tsn2-cmd button');
+    for(var i=0;i<bs.length;i++){
+      (function(b){
+        if(b.__tsn2w) return; b.__tsn2w=true;
+        b.addEventListener('click',function(){
+          var code=b.parentNode.querySelector('code'); if(!code) return;
+          var t=code.textContent;
+          function done(){ var old='Kopieren'; b.textContent='Kopiert'; setTimeout(function(){ b.textContent=old; },1600); }
+          if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done, function(){}); }
+          else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+                 try{ document.execCommand('copy'); done(); }catch(e){} document.body.removeChild(ta); }
+        });
+      })(bs[i]);
+    }
+  }
+  /* Einblend-Gruppen (.tsn2-steps/.tsn2-cards/.tsn2-errs/.tsn2-way) ueber reveal() */
+  function wireReveal(root){
+    var g=root.querySelectorAll('.tsn2-steps,.tsn2-cards,.tsn2-errs,.tsn2-way');
+    if(root.matches && root.matches('.tsn2-way')) g=[root];
+    Array.prototype.forEach.call(g,function(el){
+      if(el.__tsn2r) return; el.__tsn2r=true;
+      if(reduced){ el.classList.add('in'); return; }
+      el.classList.add('js');
+      reveal(el,function(){ el.classList.add('in'); });
+    });
+  }
+  function make(id, cls, html){
+    css();
+    var el=document.createElement('div'); el.id=id; el.className='tsn2 '+(cls||''); el.innerHTML=html;
+    wireCopy(el); return el;
+  }
+
+  /* Wegweiser fuer Datenbank-Lektionen */
+  var WAY=[
+    ['01','Wofür','Was die Datenbank im Betrieb bringt'],
+    ['02','Eintragen','Deine Daten in die Vorlage'],
+    ['03','Was es rechnet','Was das System daraus macht'],
+    ['04','So ist es gebaut','Jede Spalte erklärt'],
+    ['05','Typische Fehler','Was beim Eintragen schiefgeht']
+  ];
+  function wayHTML(targets){
+    return '<div class="tsn2-way-in">'+WAY.map(function(w,i){
+      return '<a href="#'+targets[i]+'"><span class="n">'+w[0]+'</span><span class="t">'+w[1]+'</span><span class="s">'+w[2]+'</span></a>';
+    }).join('')+'<span class="tsn2-way-bar"></span></div>';
+  }
+
+  window.__tsn2={ LOGO:LOGO, SANS:SANS, DISP:DISP, MONO:MONO, reduced:reduced, phHero:phHero, reveal:reveal, css:css, esc:esc,
+    head:head, prompt:prompt, note:note, steps:steps, errors:errors, cards:cards, make:make, wireCopy:wireCopy, wireReveal:wireReveal, wayHTML:wayHTML };
+})();
+
+/* NEUBAU MODUL 2 · Empfehlungs-Kachel (Katalog 07) + Seitenabschluss (Katalog 09)
+   Verhalten 1:1 nach __ts4.emp/__ts4.learn, eigener Namensraum, Start ueber reveal() (Regel 15). */
+(function(){
+  if(window.__tsn2emp) return;
+  var T=window.__tsn2, SANS=T.SANS, DISP=T.DISP;
+  function empCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);font-family:${SANS};color:#fff;
+    transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.45,0,.55,1)}
+  #${id}.in{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));opacity:1}
+  #${id}.in.tilt{transition:transform .16s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.45,0,.55,1)}
+  #${id} *{box-sizing:border-box}
+  #${id}::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.7),rgba(199,180,137,0))}
+  #${id}::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;left:var(--gx,50%);top:var(--gy,50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s cubic-bezier(.45,0,.55,1);background:radial-gradient(circle,rgba(199,180,137,.10),rgba(199,180,137,0) 62%)}
+  #${id}.glow::before{opacity:1}
+  #${id}.beat{animation:tsn2empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
+  #${id} .emp-grid{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center}
+  #${id} svg.emp-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+  #${id} .emp-link path{fill:none;stroke:rgba(199,180,137,.7);stroke-width:1.4;stroke-linecap:round;opacity:0;transition:opacity .4s cubic-bezier(.45,0,.55,1),stroke-dashoffset .55s cubic-bezier(.16,1,.3,1)}
+  #${id} .emp-link path.on{opacity:1}
+  #${id} .emp-link circle{fill:#efe6d2;opacity:0;transition:opacity .4s cubic-bezier(.45,0,.55,1)}
+  #${id} .emp-link circle.on{opacity:1}
+  #${id} .emp-anim{position:relative;z-index:2;display:flex;flex-direction:column;gap:11px}
+  #${id} .emp-anim-hd{font-family:${DISP};font-weight:700;font-size:1.4rem;color:#fff;margin:0 0 6px}
+  #${id} .emp-anim-hd span{color:#c7b489}
+  #${id} .emp-step{display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:13px;padding:11px 15px;transition:background .5s cubic-bezier(.45,0,.55,1),border-color .5s cubic-bezier(.45,0,.55,1),box-shadow .5s cubic-bezier(.45,0,.55,1);opacity:0;transform:translateX(-10px)}
+  #${id}.in .emp-step{opacity:1;transform:none;transition:background .5s cubic-bezier(.45,0,.55,1),border-color .5s cubic-bezier(.45,0,.55,1),box-shadow .5s cubic-bezier(.45,0,.55,1),opacity .6s cubic-bezier(.45,0,.55,1),transform .6s cubic-bezier(.45,0,.55,1)}
+  #${id}.in .emp-step:nth-child(2){transition-delay:.15s}#${id}.in .emp-step:nth-child(3){transition-delay:.28s}#${id}.in .emp-step:nth-child(4){transition-delay:.41s}#${id}.in .emp-step:nth-child(5){transition-delay:.54s}#${id}.in .emp-step:nth-child(6){transition-delay:.67s}
+  #${id} .emp-step.on{background:rgba(199,180,137,.13);border-color:rgba(199,180,137,.5);box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
+  #${id} .emp-step-n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transition:background .5s cubic-bezier(.45,0,.55,1),color .5s cubic-bezier(.45,0,.55,1)}
+  #${id} .emp-step.on .emp-step-n{background:#c7b489;color:#05060b}
+  #${id} .emp-step-l{font-size:14px;font-weight:600;color:rgba(255,255,255,.75)}
+  #${id} .emp-step.on .emp-step-l{color:#fff}
+  #${id} .emp-text{position:relative;z-index:2}
+  #${id} .emp-h{font-family:${DISP};font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 10px}
+  #${id} .emp-h .eg{color:#c7b489}
+  #${id} .emp-intro{font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.86);margin:0 0 16px}
+  #${id} .emp-ol{list-style:none;margin:0;padding:0;counter-reset:emp}
+  #${id} .emp-ol li{position:relative;counter-increment:emp;padding:10px 14px 10px 44px;border-radius:11px;font-size:.92rem;line-height:1.55;color:rgba(255,255,255,.72);transition:background .5s cubic-bezier(.45,0,.55,1),color .5s cubic-bezier(.45,0,.55,1),box-shadow .5s cubic-bezier(.45,0,.55,1);margin-bottom:6px}
+  #${id} .emp-ol li::before{content:counter(emp,decimal-leading-zero);position:absolute;left:14px;top:10px;font-size:11px;font-weight:700;color:#c7b489;font-variant-numeric:tabular-nums}
+  #${id} .emp-ol li.lit{background:rgba(199,180,137,.10);color:#fff;box-shadow:inset 0 0 0 1px rgba(199,180,137,.22)}
+  @media(max-width:900px){ #${id} .emp-grid{grid-template-columns:1fr;gap:26px} #${id} svg.emp-link{display:none} }
+  @media(prefers-reduced-motion:reduce){ #${id}{transform:none;opacity:1} #${id} .emp-step{opacity:1;transform:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+  function empDraw(el){
+    var grid=el.querySelector('.emp-grid'), svg=el.querySelector('.emp-link');
+    var on=el.querySelector('.emp-step.on'), lit=el.querySelector('.emp-ol li.lit');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    if(!on||!lit){ path.classList.remove('on'); c1.classList.remove('on'); c2.classList.remove('on'); return; }
+    var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+    var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2;
+    var dx=(x2-x1)*0.5;
+    path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+    c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+    var L=0; try{ L=path.getTotalLength(); }catch(e){}
+    if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px';
+           void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+    path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+  }
+  function empSetup(el){
+    var steps=el.querySelectorAll('.emp-step'), lis=el.querySelectorAll('.emp-ol li');
+    var idx=-1, iv=null;
+    function tick(){
+      if(!el.isConnected){ stop(); return; }
+      var rr=el.getBoundingClientRect(); if(rr.bottom<0 || rr.top>innerHeight) return;
+      idx=(idx+1)%steps.length;
+      Array.prototype.forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      requestAnimationFrame(function(){ empDraw(el); });
+    }
+    function start(){ if(iv)return; tick(); iv=setInterval(tick,2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(el.classList.contains('in') && !T.reduced) start(); });
+    if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ requestAnimationFrame(function(){ empDraw(el); }); });
+    if(T.reduced){ el.classList.add('in'); steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); return; }
+    T.reveal(el,function(){ el.classList.add('in'); start(); });
+  }
+  window.__tsn2emp=function(cfg){
+    if(document.getElementById(cfg.id)) return document.getElementById(cfg.id);
+    var a=document.getElementById(cfg.anchorId); if(!a||!a.parentNode) return null;
+    empCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    var steps=cfg.steps.map(function(s){ return '<div class="emp-step"><span class="emp-step-n">'+s.n+'</span><span class="emp-step-l">'+s.l+'</span></div>'; }).join('');
+    var pts=cfg.points.map(function(p){ return '<li>'+p+'</li>'; }).join('');
+    el.innerHTML='<div class="emp-grid"><svg class="emp-link" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+      '<div class="emp-anim"><div class="emp-anim-hd">'+cfg.animTitle+' <span>'+cfg.animGold+'</span></div>'+steps+'</div>'+
+      '<div class="emp-text"><h3 class="emp-h">Empfehlung zur <span class="eg">'+cfg.kind+'</span></h3><p class="emp-intro">'+cfg.intro+'</p><ol class="emp-ol">'+pts+'</ol></div></div>';
+    a.parentNode.insertBefore(el, a.nextSibling);
+    empSetup(el); return el;
+  };
+  (function(){ if(document.getElementById('tsn2-kf')) return; var s=document.createElement('style'); s.id='tsn2-kf';
+    s.textContent='@keyframes tsn2empBeat{0%,100%{box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.22),inset 0 1px 0 rgba(255,255,255,.05)}}@keyframes tsn2Float{0%,100%{translate:0 0}50%{translate:0 -11px}}';
+    document.head.appendChild(s); })();
+
+  function learnCSS(id){
+    if(document.getElementById(id+'-css')) return;
+    var c=`
+  #${id}{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  #${id} *{box-sizing:border-box}
+  #${id} .tsl-head{text-align:center;margin-bottom:66px}
+  #${id} .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
+  #${id} .tsl-title{font-family:${DISP};font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
+  #${id} .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
+  #${id} .tsl-cell{display:flex;justify-content:center}
+  #${id} .tsl-orb{position:relative;width:100%;max-width:250px;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14%;
+    background:radial-gradient(120% 120% at 30% 26%,rgba(199,180,137,.20),rgba(255,255,255,.03) 46%,rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 40px rgba(199,180,137,.06);
+    transition:opacity .8s cubic-bezier(.45,0,.55,1),transform .9s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.45,0,.55,1),border-color .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  #${id}.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
+  #${id} .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
+  #${id}.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tsn2Float 7s cubic-bezier(.45,0,.55,1) infinite;will-change:translate}
+  #${id}.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
+  #${id}.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
+  #${id}.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
+  #${id} .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 34px rgba(199,180,137,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+  #${id} .tsl-t{position:relative;z-index:1;color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;margin:0}
+  #${id} #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
+  #${id} #ts-next{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 28px;border-radius:9999px;background:#c7b489;color:#05060b;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:background .3s cubic-bezier(.45,0,.55,1),transform .3s cubic-bezier(.45,0,.55,1),box-shadow .3s cubic-bezier(.45,0,.55,1)}
+  #${id} #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  #${id} #ts-next svg{width:16px;height:16px}
+  @media(max-width:1079px){ #${id} .tsl-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:520px){ #${id} .tsl-grid{grid-template-columns:1fr} }
+  @media(prefers-reduced-motion:reduce){ #${id}.js.in .tsl-orb, #${id} .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
+  `;
+    var s=document.createElement('style'); s.id=id+'-css'; s.textContent=c; document.head.appendChild(s);
+  }
+  var ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  window.__tsn2learn=function(cfg){
+    if(document.getElementById(cfg.id)) return;
+    var a=document.getElementById(cfg.anchorId); if(!a||!a.parentNode) return;
+    learnCSS(cfg.id);
+    var el=document.createElement('div'); el.id=cfg.id;
+    el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
+      '<div class="tsl-grid">'+cfg.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'+
+      (cfg.noNext?'':'<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">Nächste Lektion '+ARROW+'</a></div>');
+    a.parentNode.insertBefore(el, a.nextSibling);
+    if(cfg.noNext){ el.style.paddingBottom='24px'; if(T.reduced){ el.classList.add('in'); return el; } el.classList.add('js'); T.reveal(el,function(){ el.classList.add('in'); }); return el; }
+    function guard(){
+      var host=document.getElementById(cfg.id); if(!host) return;
+      var all=document.querySelectorAll('#ts-next-wrap');
+      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
+      if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML='<a id="ts-next" href="'+cfg.next+'">Nächste Lektion '+ARROW+'</a>'; host.appendChild(w); }
+    }
+    guard();
+    window.__tsMO(guard).observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('scroll', guard, {passive:true});
+    setTimeout(guard,1500); setTimeout(guard,4000); setTimeout(guard,9000);
+    if(T.reduced){ el.classList.add('in'); return; }
+    el.classList.add('js');
+    T.reveal(el,function(){ el.classList.add('in'); });
+  };
+})();
+
+/* NEUBAU MODUL 2 · Ergebnis-Karten (Abschnitt 03 "Was das System daraus rechnet")
+   Je Datenbank-Lektion eine eigene Darstellung, keine zweimal. Alle Zahlen = Beispielwerte,
+   nachgerechnet gegen die Formeln der Vorlage (Stand 01.11.2026). Start ueber reveal(). */
+(function(){
+  if(window.__tsn2res) return;
+  var T=window.__tsn2, SANS=T.SANS, DISP=T.DISP, MONO=T.MONO;
+  var CSS=`
+  .tsn2-res .r-cap{font-size:11px;line-height:1.5;color:rgba(255,255,255,.42);text-align:center;margin:18px 0 0}
+  .tsn2-res .r-foot{display:flex;justify-content:center;margin:16px 0 0}
+  /* INV: Gebinde -> Grundpreis */
+  .r-inv{display:flex;flex-direction:column;gap:12px}
+  .r-inv-h,.r-inv-row{display:grid;grid-template-columns:1.1fr 1.1fr .8fr 34px 1fr;align-items:center;gap:14px}
+  .r-inv-h span{font:600 9.5px/1 ${SANS};letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .r-inv-row{padding:14px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.45,0,.55,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  .r-inv-row.in{opacity:1;transform:none}
+  .r-inv-row .nm{font-family:${DISP};font-weight:600;font-size:16px;color:#fff}
+  .r-inv-row .mu{font:600 13px/1.2 ${MONO};color:rgba(255,255,255,.75)}
+  .r-inv-row .mu b{color:rgba(255,255,255,.75);font-weight:600;transition:color .4s cubic-bezier(.45,0,.55,1),text-shadow .4s cubic-bezier(.45,0,.55,1)}
+  .r-inv-row.lit .mu b{color:#c7b489;text-shadow:0 0 14px rgba(199,180,137,.6)}
+  .r-inv-row .pu{font:600 13px/1.2 ${MONO};color:rgba(255,255,255,.75)}
+  .r-inv-row .ar{width:34px;height:2px;background:rgba(255,255,255,.1);position:relative;overflow:hidden;border-radius:2px}
+  .r-inv-row .ar::after{content:"";position:absolute;inset:0;background:#c7b489;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.45,0,.55,1)}
+  .r-inv-row.lit .ar::after{transform:scaleX(1)}
+  .r-inv-row .res{justify-self:start;display:inline-flex;flex-direction:column;gap:4px;padding:8px 12px;border-radius:10px;border:1px solid rgba(199,180,137,.0);transition:border-color .5s cubic-bezier(.45,0,.55,1),background .5s cubic-bezier(.45,0,.55,1)}
+  .r-inv-row.done .res{border-color:rgba(199,180,137,.45);background:rgba(199,180,137,.08)}
+  .r-inv-row .res i{font-style:normal;font:600 9px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+  .r-inv-row .res em{font-style:normal;font-family:${DISP};font-weight:600;font-size:19px;color:#fff;font-variant-numeric:tabular-nums}
+  @media(max-width:760px){ .r-inv-h{display:none} .r-inv-row{grid-template-columns:1fr 1fr;row-gap:10px} .r-inv-row .ar{display:none} }
+
+  /* LIEF: Kontaktkarte */
+  .r-lief{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
+  .r-card{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.11);background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.015)),#090b12;padding:22px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.45,0,.55,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .r-card.in{opacity:1;transform:none}
+  .r-card .k{font:600 9.5px/1 ${SANS};letter-spacing:.15em;text-transform:uppercase;color:#c7b489;margin:0 0 10px}
+  .r-card .t{font-family:${DISP};font-weight:600;font-size:22px;color:#fff;margin:0 0 16px}
+  .r-fields{display:grid;grid-template-columns:auto 1fr;gap:9px 16px;font-size:13.5px}
+  .r-fields dt{color:rgba(255,255,255,.45)}
+  .r-fields dd{margin:0;color:rgba(255,255,255,.88);font-weight:600}
+  .r-chips{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 0}
+  .r-chip{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);font-size:12px;font-weight:600;color:rgba(255,255,255,.82);opacity:0;transform:scale(.85);transition:opacity .4s cubic-bezier(.45,0,.55,1),transform .5s cubic-bezier(.34,1.56,.64,1)}
+  .r-chip.in{opacity:1;transform:none}
+  .r-chip i{width:6px;height:6px;border-radius:50%;background:#c7b489}
+  .r-count{display:flex;align-items:baseline;gap:10px;margin:18px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+  .r-count b{font-family:${DISP};font-weight:600;font-size:34px;color:#fff;font-variant-numeric:tabular-nums}
+  .r-count span{font-size:13px;color:rgba(255,255,255,.6)}
+  .r-kk{font:500 12.5px/1.7 ${MONO};color:#efe6d2;padding:14px 16px;border-radius:12px;border:1px solid rgba(199,180,137,.3);background:rgba(199,180,137,.06);min-height:52px}
+  .r-kk .cur{display:inline-block;width:7px;height:14px;background:#c7b489;vertical-align:-2px;margin-left:2px;animation:tsn2blink 1s steps(2) infinite}
+  @keyframes tsn2blink{50%{opacity:0}}
+  @media(max-width:760px){ .r-lief{grid-template-columns:1fr} }
+
+  /* ZUT: Waage */
+  .r-zut{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+  .r-scale{position:relative;aspect-ratio:1/1;max-width:340px;width:100%;margin:0 auto;border-radius:50%;
+    background:radial-gradient(circle at 50% 40%,rgba(199,180,137,.10),rgba(199,180,137,0) 60%),#07080e;border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 0 60px rgba(0,0,0,.6)}
+  .r-scale svg{position:absolute;inset:0;width:100%;height:100%}
+  .r-scale .needle{transform-origin:50% 50%;transition:transform 1.6s cubic-bezier(.65,0,.25,1)}
+  .r-scale .w{position:absolute;left:0;right:0;top:58%;text-align:center}
+  .r-scale .w b{display:block;font-family:${DISP};font-weight:600;font-size:clamp(30px,4vw,44px);color:#fff;font-variant-numeric:tabular-nums}
+  .r-scale .w span{font:600 10px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
+  .r-zut-list{display:flex;flex-direction:column;gap:10px}
+  .r-line{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-radius:13px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);transition:border-color .5s cubic-bezier(.45,0,.55,1),background .5s cubic-bezier(.45,0,.55,1),opacity .5s cubic-bezier(.45,0,.55,1);opacity:.45}
+  .r-line.on{opacity:1;border-color:rgba(199,180,137,.45);background:rgba(199,180,137,.07)}
+  .r-line .l{font-size:13.5px;color:rgba(255,255,255,.82)}
+  .r-line .l small{display:block;font:600 9.5px/1.4 ${SANS};letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+  .r-line .v{font-family:${DISP};font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  @media(max-width:760px){ .r-zut{grid-template-columns:1fr} }
+
+  /* REZ: Charge -> Portionen */
+  .r-rez{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+  .r-bars{display:flex;flex-direction:column;gap:9px}
+  .r-bar{display:grid;grid-template-columns:150px 1fr 70px;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.8)}
+  .r-bar .tr{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
+  .r-bar .tr b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,rgba(199,180,137,.55),#c7b489);transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .r-bar .q{font:600 12px/1 ${MONO};color:#efe6d2;text-align:right}
+  .r-sum{margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6)}
+  .r-sum b{font-family:${DISP};font-weight:600;font-size:18px;color:#fff;font-variant-numeric:tabular-nums}
+  .r-dots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:230px;margin:0 auto 18px}
+  .r-dots i{aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transform:scale(.6);opacity:.3;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+  .r-dots i.in{background:radial-gradient(circle at 30% 30%,rgba(199,180,137,.6),rgba(199,180,137,.15));border-color:rgba(199,180,137,.5);transform:none;opacity:1}
+  .r-big{text-align:center}
+  .r-big b{display:block;font-family:${DISP};font-weight:600;font-size:clamp(34px,4.4vw,48px);color:#fff;font-variant-numeric:tabular-nums}
+  .r-big span{font:600 10px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
+  .r-big p{font-size:13px;color:rgba(255,255,255,.6);margin:8px 0 0}
+  @media(max-width:760px){ .r-rez{grid-template-columns:1fr} .r-bar{grid-template-columns:110px 1fr 60px} }
+
+  /* GK: zwei Rechenstreifen */
+  .r-gk{display:flex;flex-direction:column;gap:16px}
+  .r-eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.02)}
+  .r-eq .tag{flex-basis:100%;text-align:center;font:600 9.5px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 4px}
+  .r-tok{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:96px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:#090b12;opacity:0;transform:translateY(8px);transition:opacity .5s cubic-bezier(.45,0,.55,1),transform .6s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.45,0,.55,1)}
+  .r-tok.in{opacity:1;transform:none}
+  .r-tok b{font-family:${DISP};font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .r-tok small{font-size:11px;color:rgba(255,255,255,.5);text-align:center;line-height:1.3}
+  .r-tok.res{border-color:rgba(199,180,137,.55);background:linear-gradient(rgba(199,180,137,.10),rgba(199,180,137,.03)),#090b12}
+  .r-op{font-family:${DISP};font-size:22px;color:#c7b489;opacity:0;transition:opacity .4s cubic-bezier(.45,0,.55,1)}
+  .r-op.in{opacity:1}
+  /* ALG: Kennzeichnung wandert */
+  .r-alg{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:10px}
+  .r-alg-l{display:flex;flex-direction:column;gap:10px}
+  .r-zt{padding:13px 15px;border-radius:13px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);opacity:0;transform:translateX(-10px);transition:opacity .5s cubic-bezier(.45,0,.55,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  .r-zt.in{opacity:1;transform:none}
+  .r-zt .n{font-family:${DISP};font-weight:600;font-size:15px;color:#fff;margin:0 0 8px}
+  .r-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .r-tag{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font:600 11px/1 ${SANS};color:#05060b;background:#c7b489}
+  .r-tag.none{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
+  .r-alg-m{height:2px;background:rgba(255,255,255,.08);position:relative;overflow:hidden;border-radius:2px}
+  .r-alg-m::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(199,180,137,0),#c7b489);transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.45,0,.55,1)}
+  .r-alg-m.on::after{transform:scaleX(1)}
+  .r-dish{border-radius:16px;border:1px solid rgba(199,180,137,.4);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.02)),#090b12;padding:20px}
+  .r-dish .k{font:600 9.5px/1 ${SANS};letter-spacing:.15em;text-transform:uppercase;color:#c7b489;margin:0 0 9px}
+  .r-dish .t{font-family:${DISP};font-weight:600;font-size:20px;color:#fff;margin:0 0 14px}
+  .r-dish .r-tag{opacity:0;transform:scale(.6);transition:opacity .35s cubic-bezier(.45,0,.55,1),transform .45s cubic-bezier(.34,1.56,.64,1)}
+  .r-dish .r-tag.in{opacity:1;transform:none}
+  .r-dish .pk{margin:16px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.65);opacity:0;transition:opacity .5s cubic-bezier(.45,0,.55,1)}
+  .r-dish .pk.in{opacity:1}
+  .r-dish .pk b{color:#fff;font-family:${DISP};font-weight:600;font-size:16px}
+  @media(max-width:760px){ .r-alg{grid-template-columns:1fr} .r-alg-m{height:24px;width:2px;margin:0 auto} }
+
+  /* GER: Kassenbon */
+  .r-ger{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:center}
+  .r-bon{position:relative;max-width:360px;width:100%;margin:0 auto;padding:22px 22px 26px;background:#ebdbce;color:#07070d;border-radius:4px 4px 0 0;font:500 13px/1.6 ${MONO};
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.9);clip-path:inset(0 0 0 0);transition:clip-path 2.4s cubic-bezier(.45,0,.55,1)}
+  .tsn2-res.js .r-bon{clip-path:inset(0 0 100% 0)}
+  .tsn2-res.js .r-bon.in{clip-path:inset(0 0 0 0)}
+  .r-bon::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:linear-gradient(-45deg,transparent 7px,#ebdbce 0) 0 0/14px 10px,linear-gradient(45deg,transparent 7px,#ebdbce 0) 0 0/14px 10px}
+  .r-bon .hd{text-align:center;font-weight:700;letter-spacing:.12em;margin:0 0 4px}
+  .r-bon .sub{text-align:center;font-size:11px;color:rgba(7,7,13,.6);margin:0 0 12px}
+  .r-bon .ln{display:flex;justify-content:space-between;gap:10px}
+  .r-bon .ln.tot{font-weight:700;border-top:1px dashed rgba(7,7,13,.35);margin-top:6px;padding-top:6px}
+  .r-bon .ln.db3{font-weight:800;font-size:15px;border-top:2px solid #07070d;border-bottom:2px solid #07070d;margin-top:8px;padding:6px 0}
+  .r-bon .ft{text-align:center;font-size:10.5px;color:rgba(7,7,13,.6);margin:12px 0 0}
+  .r-ger-r{display:flex;flex-direction:column;gap:10px}
+  .r-ger-r .r-line{opacity:.45}
+  .r-ger-r .r-line.on{opacity:1}
+  @media(max-width:760px){ .r-ger{grid-template-columns:1fr} }
+  `;
+  function css(){ if(document.getElementById('tsn2-res-css')) return; var s=document.createElement('style'); s.id='tsn2-res-css'; s.textContent=CSS; document.head.appendChild(s); }
+
+  function eur(v){ return v.toFixed(2).replace('.',',')+' €'; }
+  /* Count-up mit rAF-unabhaengigem Endwert (Katalog-Regel 15b) */
+  function count(el, to, fmt, ms){
+    ms=ms||900; var t0=null, done=false;
+    function fin(){ if(done) return; done=true; el.textContent=fmt(to); }
+    if(T.reduced){ fin(); return; }
+    function st(ts){ if(done) return; if(t0===null) t0=ts; var k=Math.min(1,(ts-t0)/ms); k=1-Math.pow(1-k,3); el.textContent=fmt(to*k); if(k<1) requestAnimationFrame(st); else fin(); }
+    requestAnimationFrame(st); setTimeout(fin, ms+120);
+  }
+  function seq(steps){ var at=0, ids=[]; steps.forEach(function(s){ at+=s[0]; ids.push(setTimeout(s[1],at)); }); return ids; }
+
+  var R={};
+
+  /* ---------- Inventurliste ---------- */
+  R.inv=function(){
+    var rows=[['Tomaten','<b>6</b> x <b>2,5</b> kg','18,90 €','Preis / KG',1.26],['Olivenöl','<b>10</b> L','28,00 €','Preis / Ltr.',2.80],['Eier','<b>180</b> Stck','39,60 €','Preis / Stck',0.22]];
+    var html='<div class="r-inv"><div class="r-inv-h"><span>Name</span><span>Menge / Unit</span><span>Preis pro Unit (€)</span><span></span><span>rechnet die Vorlage</span></div>'+
+      rows.map(function(r){ return '<div class="r-inv-row"><span class="nm">'+r[0]+'</span><span class="mu">'+r[1]+'</span><span class="pu">'+r[2]+'</span><span class="ar"></span><span class="res"><i>'+r[3]+'</i><em data-v="'+r[4]+'">0,00 €</em></span></div>'; }).join('')+'</div>';
+    function play(root){
+      var rs=root.querySelectorAll('.r-inv-row');
+      Array.prototype.forEach.call(rs,function(r){ r.classList.remove('in','lit','done'); r.querySelector('em').textContent='0,00 €'; });
+      var st=[]; Array.prototype.forEach.call(rs,function(r,i){
+        st.push([i?500:150,function(){ r.classList.add('in'); }]);
+        st.push([500,function(){ r.classList.add('lit'); }]);
+        st.push([450,function(){ r.classList.add('done'); var em=r.querySelector('em'); count(em, +em.getAttribute('data-v'), eur, 800); }]);
+      });
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispielwerte. Gerechnet wie in den Spalten Preis / KG, Preis / Ltr. und Preis / Stck deiner Vorlage.'};
+  };
+
+  /* ---------- Lieferanten ---------- */
+  R.lief=function(){
+    var chips=['Tomaten','Gurken','Rucola','Spinat','Zucchini','Paprika','Zitronen','Basilikum','Champignons','Kartoffeln','Zwiebeln','Knoblauch'];
+    var kk='Jana Becker · Tel: 040 123 456 78 · Mail: jana@beispiel-gemuesehof.de';
+    var html='<div class="r-lief">'+
+      '<div class="r-card c1"><div class="k">DB I · Lieferpartner</div><div class="t">Gemüsehof Nord</div>'+
+        '<dl class="r-fields"><dt>Kundennummer</dt><dd>K-20418</dd><dt>Sortiment</dt><dd>Gemüse, Obst, Kräuter</dd><dt>Zahlungsbedingungen</dt><dd>14 Tage</dd><dt>Lieferzeit</dt><dd>Bestellung bis 14 Uhr, Lieferung am Morgen</dd></dl>'+
+        '<div class="r-chips">'+chips.map(function(c){ return '<span class="r-chip"><i></i>'+c+'</span>'; }).join('')+'</div>'+
+        '<div class="r-count"><b class="n">12</b><span>Produkte aus deiner Inventurliste verknüpft</span></div></div>'+
+      '<div class="r-card c2"><div class="k">DB II · Kontaktkarte</div><div class="t">Wen du anrufst</div>'+
+        '<p style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0 0 14px">Die Formel zeigt nur die Person mit dem X bei Hauptansprechpartner. Dieselbe Zeile erscheint in jeder Zutat dieses Lieferanten.</p>'+
+        '<div class="r-kk"><span class="tx">'+kk+'</span><span class="cur"></span></div></div>'+
+    '</div>';
+    function play(root){
+      var c1=root.querySelector('.c1'), c2=root.querySelector('.c2'), ch=root.querySelectorAll('.r-chip'), n=root.querySelector('.r-count .n'), tx=root.querySelector('.tx');
+      c1.classList.remove('in'); c2.classList.remove('in'); Array.prototype.forEach.call(ch,function(c){ c.classList.remove('in'); }); n.textContent='0'; tx.textContent='';
+      var st=[[100,function(){ c1.classList.add('in'); }],[300,function(){ c2.classList.add('in'); }]];
+      Array.prototype.forEach.call(ch,function(c,i){ st.push([i?110:500,function(){ c.classList.add('in'); n.textContent=String(i+1); }]); });
+      st.push([400,function(){
+        if(T.reduced){ tx.textContent=kk; return; }
+        var i=0; var iv=setInterval(function(){ i++; tx.textContent=kk.slice(0,i); if(i>=kk.length) clearInterval(iv); },28);
+        setTimeout(function(){ clearInterval(iv); tx.textContent=kk; }, kk.length*28+400);
+      }]);
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispiel. Name, Nummern und Sortiment sind ausgedacht.'};
+  };
+
+  /* ---------- Zutaten ---------- */
+  R.zut=function(){
+    var ticks=''; for(var i=0;i<40;i++){ var a=(-135+i*270/39)*Math.PI/180; var r1=44, r2=i%5?41.5:39.5; ticks+='<line x1="'+(50+r1*Math.cos(a)).toFixed(2)+'" y1="'+(50+r1*Math.sin(a)).toFixed(2)+'" x2="'+(50+r2*Math.cos(a)).toFixed(2)+'" y2="'+(50+r2*Math.sin(a)).toFixed(2)+'" stroke="rgba(255,255,255,'+(i%5?'.18':'.4')+')" stroke-width="'+(i%5?'.5':'.8')+'"/>'; }
+    var html='<div class="r-zut">'+
+      '<div class="r-scale"><svg viewBox="0 0 100 100">'+ticks+'<g class="needle"><line x1="50" y1="50" x2="50" y2="14" stroke="#c7b489" stroke-width="1.4" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="#c7b489"/></g></svg>'+
+        '<div class="w"><b class="g">80 g</b><span>Spinat</span></div></div>'+
+      '<div class="r-zut-list">'+
+        '<div class="r-line l1"><span class="l"><small>Inventur · Preis / KG</small>Spinat, frisch</span><span class="v">6,40 €</span></div>'+
+        '<div class="r-line l2"><span class="l"><small>Zutat · Portionsgröße 1 kg</small>Grundzutat Spinat</span><span class="v">6,40 €</span></div>'+
+        '<div class="r-line l3"><span class="l"><small>Portion · Portionsgröße 80 g</small>Preis / Portion</span><span class="v" data-v="0.51">0,51 €</span></div>'+
+        '<div class="r-line l4"><span class="l"><small>Schnittverlust 10 %</small>Preis / Portion ( nutzbar )</span><span class="v" data-v="0.57">0,57 €</span></div>'+
+      '</div></div>';
+    function play(root){
+      var nd=root.querySelector('.needle'), g=root.querySelector('.g'), L=function(c){ return root.querySelector('.'+c); };
+      ['l1','l2','l3','l4'].forEach(function(c){ L(c).classList.remove('on'); });
+      L('l3').querySelector('.v').textContent='0,00 €'; L('l4').querySelector('.v').textContent='0,00 €';
+      nd.style.transition='none'; nd.style.transform='rotate(225deg)'; g.textContent='1000 g'; void nd.getBoundingClientRect(); nd.style.transition='';
+      return seq([
+        [200,function(){ L('l1').classList.add('on'); }],
+        [700,function(){ L('l2').classList.add('on'); }],
+        [800,function(){ nd.style.transform='rotate('+(0.08*270-45).toFixed(1)+'deg)'; var k=0, from=1000, to=80; var t0=performance.now();
+           var iv=setInterval(function(){ var p=Math.min(1,(performance.now()-t0)/1500); p=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2; g.textContent=Math.round(from+(to-from)*p)+' g'; if(p>=1) clearInterval(iv); },40);
+           setTimeout(function(){ clearInterval(iv); g.textContent='80 g'; },1650); }],
+        [1500,function(){ L('l3').classList.add('on'); var v=L('l3').querySelector('.v'); count(v,+v.getAttribute('data-v'),eur,700); }],
+        [1100,function(){ L('l4').classList.add('on'); var v=L('l4').querySelector('.v'); count(v,+v.getAttribute('data-v'),eur,700); }]
+      ]);
+    }
+    return {html:html, play:play, cap:'Beispielwerte. 6,40 € ÷ 1000 × 80 = 0,51 €. Mit 10 % Schnittverlust: 0,51 € ÷ 0,9 = 0,57 €.'};
+  };
+
+  /* ---------- Rezepturen ---------- */
+  R.rez=function(){
+    var Z=[['500 ml Olivenöl',500,'6,45 €'],['150 ml Weißweinessig',150,'0,48 €'],['50 g Senf',50,'0,30 €'],['50 g Honig',50,'0,60 €']];
+    var dots=''; for(var i=0;i<25;i++) dots+='<i></i>';
+    var html='<div class="r-rez"><div><div class="r-bars">'+Z.map(function(z){ return '<div class="r-bar"><span>'+z[0]+'</span><span class="tr"><b data-w="'+(z[1]/500*100)+'"></b></span><span class="q">'+z[2]+'</span></div>'; }).join('')+'</div>'+
+      '<div class="r-sum"><span>Menge Zutaten Summe</span><b>750 ml / g</b></div><div class="r-sum"><span>Zutatenkosten ( nutzbar )</span><b>7,83 €</b></div></div>'+
+      '<div class="r-big"><div class="r-dots">'+dots+'</div><span>Anzahl Portionen bei 30</span><b class="np">0</b><p>Portionspreise / Summe</p><b class="pp" style="font-size:clamp(26px,3.2vw,34px)">0,00 €</b></div></div>';
+    function play(root){
+      var bs=root.querySelectorAll('.r-bar b'), ds=root.querySelectorAll('.r-dots i'), np=root.querySelector('.np'), pp=root.querySelector('.pp');
+      Array.prototype.forEach.call(bs,function(b){ b.style.width='0'; }); Array.prototype.forEach.call(ds,function(d){ d.classList.remove('in'); }); np.textContent='0'; pp.textContent='0,00 €';
+      var st=[]; Array.prototype.forEach.call(bs,function(b,i){ st.push([i?160:200,function(){ b.style.width=b.getAttribute('data-w')+'%'; }]); });
+      st.push([900,function(){ Array.prototype.forEach.call(ds,function(d,i){ setTimeout(function(){ d.classList.add('in'); np.textContent=String(i+1); }, i*45); }); setTimeout(function(){ np.textContent='25'; Array.prototype.forEach.call(ds,function(d){ d.classList.add('in'); }); },25*45+200); }]);
+      st.push([1400,function(){ count(pp,0.31,eur,700); }]);
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispielwerte. 750 ÷ 30 = 25 Portionen. 7,83 € ÷ 25 = 0,31 € pro Portion.'};
+  };
+
+  /* ---------- Gemeinkosten & Loehne ---------- */
+  R.gk=function(){
+    function tok(v,s,res){ return '<span class="r-tok'+(res?' res':'')+'"><b>'+v+'</b><small>'+s+'</small></span>'; }
+    function op(o){ return '<span class="r-op">'+o+'</span>'; }
+    var html='<div class="r-gk">'+
+      '<div class="r-eq e1"><span class="tag">DB VII · Gemeinkostenannahmen</span>'+tok('5.500 €','GK Kosten / Monat')+op('÷')+tok('5.000','Absatz pro Monat')+op('=')+tok('1,10 €','GK pro Produkt',1)+'</div>'+
+      '<div class="r-eq e2"><span class="tag">DB VIII · Mitarbeiterlöhne</span>'+tok('2.400 €','Monatsgehalt (brutto)')+op('×')+tok('1,25','AG-Kosten-Faktor')+op('÷')+tok('160 h','Vollzeit im Monat')+op('=')+tok('18,75 €','Stundensatz (AG-Kosten)',1)+'</div>'+
+      '<div class="r-eq e3"><span class="tag">DB XI · im Gericht</span>'+tok('18,75 €','Stundensatz')+op('×')+tok('8 min','Zubereitungszeit')+op('=')+tok('2,50 €','PK Pro Produkt',1)+'</div>'+
+    '</div>';
+    function play(root){
+      var all=root.querySelectorAll('.r-tok,.r-op'); Array.prototype.forEach.call(all,function(e){ e.classList.remove('in'); });
+      var st=[]; ['.e1','.e2','.e3'].forEach(function(s,k){ var items=root.querySelectorAll(s+' .r-tok,'+s+' .r-op'); Array.prototype.forEach.call(items,function(e,i){ st.push([i?170:(k?500:150),function(){ e.classList.add('in'); }]); }); });
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispielwerte. Gemeinkostenanteil und Personalkosten landen im Gericht als GK Anteil pro Produkt und PK Pro Produkt.'};
+  };
+
+  /* ---------- Allergene & Packaging ---------- */
+  R.alg=function(){
+    var Z=[['Tofu',['Soja']],['Sojasauce',['Soja','Gluten']],['Erdnüsse',['Erdnüsse']],['Sesamöl',['Sesam']],['Limettensaft',[]]];
+    var html='<div class="r-alg"><div class="r-alg-l">'+Z.map(function(z){ return '<div class="r-zt"><div class="n">'+z[0]+'</div><div class="r-tags">'+(z[1].length?z[1].map(function(t){ return '<span class="r-tag">'+t+'</span>'; }).join(''):'<span class="r-tag none">keine Allergene</span>')+'</div></div>'; }).join('')+'</div>'+
+      '<div class="r-alg-m"></div>'+
+      '<div class="r-dish"><div class="k">DB XI · Gericht · Allergene</div><div class="t">Thai Peanut Tofu Bowl</div><div class="r-tags">'+['Erdnüsse','Gluten','Sesam','Soja'].map(function(t){ return '<span class="r-tag">'+t+'</span>'; }).join('')+'</div>'+
+      '<div class="pk"><span>Packaging · Bowl To Go</span><b>0,62 €</b></div></div></div>';
+    function play(root){
+      var zs=root.querySelectorAll('.r-zt'), m=root.querySelector('.r-alg-m'), ts=root.querySelectorAll('.r-dish .r-tag'), pk=root.querySelector('.pk');
+      Array.prototype.forEach.call(zs,function(z){ z.classList.remove('in'); }); m.classList.remove('on'); Array.prototype.forEach.call(ts,function(t){ t.classList.remove('in'); }); pk.classList.remove('in');
+      var st=[]; Array.prototype.forEach.call(zs,function(z,i){ st.push([i?220:150,function(){ z.classList.add('in'); }]); });
+      st.push([500,function(){ m.classList.add('on'); }]);
+      Array.prototype.forEach.call(ts,function(t,i){ st.push([i?260:700,function(){ t.classList.add('in'); }]); });
+      st.push([700,function(){ pk.classList.add('in'); }]);
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispiel. Das Gericht sammelt die Allergene aller verknüpften Zutaten und Rezepturen, doppelte Angaben wie Soja erscheinen nur einmal.'};
+  };
+
+  /* ---------- Gerichte & Getraenke ---------- */
+  R.ger=function(){
+    var html='<div class="r-ger"><div class="r-bon"><div class="hd">THAI PEANUT TOFU BOWL</div><div class="sub">DB XI · Gerichte &amp; Getränke</div>'+
+      '<div class="ln"><span>Verkaufspreis netto</span><span>14,90</span></div>'+
+      '<div class="ln"><span>Wareneinsatz</span><span>-3,95</span></div>'+
+      '<div class="ln tot"><span>DB I</span><span>10,95</span></div>'+
+      '<div class="ln"><span>GK Anteil pro Produkt</span><span>-1,10</span></div>'+
+      '<div class="ln tot"><span>DB II</span><span>9,85</span></div>'+
+      '<div class="ln"><span>PK Pro Produkt</span><span>-2,50</span></div>'+
+      '<div class="ln db3"><span>DB III</span><span>7,35 EUR</span></div>'+
+      '<div class="ft">Wareneinsatz 26,5 %</div></div>'+
+      '<div class="r-ger-r">'+
+        '<div class="r-line g1"><span class="l"><small>Wareneinsatz ( % )</small>3,95 € ÷ 14,90 €</span><span class="v">26,5 %</span></div>'+
+        '<div class="r-line g2"><span class="l"><small>VK bei 30% Wareneinsatz</small>3,95 € ÷ 0,30</span><span class="v">13,17 €</span></div>'+
+        '<div class="r-line g3"><span class="l"><small>DB III</small>was pro Teller bleibt</span><span class="v">7,35 €</span></div>'+
+      '</div></div>';
+    function play(root){
+      var b=root.querySelector('.r-bon'), ls=root.querySelectorAll('.r-ger-r .r-line');
+      b.style.transition='none'; b.classList.remove('in'); void b.offsetWidth; b.style.transition=''; Array.prototype.forEach.call(ls,function(l){ l.classList.remove('on'); });
+      var st=[[200,function(){ b.classList.add('in'); }]];
+      Array.prototype.forEach.call(ls,function(l,i){ st.push([i?600:1200,function(){ l.classList.add('on'); }]); });
+      return seq(st);
+    }
+    return {html:html, play:play, cap:'Beispielwerte. DB I = Verkaufspreis − Wareneinsatz, DB II = DB I − Gemeinkostenanteil, DB III = DB II − Personalkosten, so wie es die Vorlage rechnet.'};
+  };
+
+  window.__tsn2res=function(id, kind){
+    css();
+    var r=R[kind](); var el=T.make(id,'tsn2-res','<div class="tsn2-res-in">'+r.html+'<p class="r-cap">'+r.cap+'</p><div class="r-foot"><button type="button" class="tsn2-replay">Neu abspielen</button></div></div>');
+    var timers=[];
+    function fin(){
+      Array.prototype.forEach.call(el.querySelectorAll('.r-inv-row,.r-card,.r-chip,.r-zt,.r-dish .r-tag,.pk,.r-tok,.r-op,.r-alg-m,.r-bon,.r-dots i'),function(x){ x.classList.add('in'); });
+      Array.prototype.forEach.call(el.querySelectorAll('.r-inv-row'),function(x){ x.classList.add('lit','done'); });
+      Array.prototype.forEach.call(el.querySelectorAll('.r-line'),function(x){ x.classList.add('on'); });
+      Array.prototype.forEach.call(el.querySelectorAll('.r-alg-m'),function(x){ x.classList.add('on'); });
+      var nd=el.querySelector('.needle'); if(nd) nd.style.transform='rotate('+(0.08*270-45).toFixed(1)+'deg)';
+    }
+    function run(){ timers.forEach(clearTimeout); timers=r.play(el)||[]; }
+    fin();
+    var rb=el.querySelector('.tsn2-replay');
+    if(T.reduced){ rb.style.display='none'; return el; }
+    rb.addEventListener('click',run);
+    el.classList.add('js');
+    T.reveal(el,run);
+    return el;
+  };
+  window.__tsn2resKinds=R;
+})();
+
+/* ============================================================
+   NEUBAU MODUL 2 · Lektion 2.0 „Vorlage holen und einrichten" (NEU 01.11.2026)
+   Seite: /lektionen/vorlage-holen-und-einrichten (Notion-Zeile 40bb9546-5534-81ad-9869-e3aa69123f03)
+   Gate tolerant (Root ODER /lektionen/-Praefix). Notion-Seite ist leer, alles wird hier gebaut.
+   Eigene Erklaeranimation #tsn2dup „Duplizieren" (Oeffnen → Duplizieren → Fuellen).
+   ============================================================ */
+(function(){
+  if(window.__tsn2vorlage) return; window.__tsn2vorlage=true;
+  var RE=/\/(?:lektionen\/)?vorlage-holen-und-einrichten\/?$/;
+  function on(){ return RE.test(location.pathname); }
+  /* Link zur leeren Vorlage. Leer = Knopf zeigt „Link folgt". */
+  var VORLAGE_URL='';
+  var NEXT='/mehrwert-zielbild';
+  var T=window.__tsn2;
+
+  var HERO_CSS=`
+  .tsn2-hero{position:relative;width:min(1180px,94vw);margin:76px auto 10px;text-align:center;isolation:isolate}
+  .tsn2-hero .ts-hero__img{position:relative;display:block;margin:0 auto;width:100%;max-width:1180px;height:auto;object-fit:contain;animation:tsMcZoom 1200ms cubic-bezier(.16,1,.3,1) both;pointer-events:none;user-select:none;z-index:0}
+  .tsn2-hero::after{content:"";position:absolute;z-index:1;pointer-events:none;left:50%;bottom:-4%;transform:translateX(-50%);width:74%;height:56%;background:radial-gradient(closest-side,rgba(4,5,10,.74) 0%,rgba(4,5,10,.42) 52%,rgba(4,5,10,0) 80%)}
+  .tsn2-hero .ts-hero__text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-17%;padding:0 24px 8px}
+  .tsn2-hero .ts-hero__text::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:-10%;transform:translateX(-50%);width:min(940px,100%);height:134%;background:radial-gradient(56% 60% at 50% 50%,rgba(4,5,10,.88) 0%,rgba(4,5,10,.68) 38%,rgba(4,5,10,.3) 64%,rgba(4,5,10,0) 82%);filter:blur(3px)}
+  .tsn2-hero .ts-hero__logo{display:block;width:58px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 28px rgba(0,0,0,.85));animation:tsRise 650ms cubic-bezier(.16,1,.3,1) 60ms both;pointer-events:none;user-select:none}
+  .tsn2-hero .ts-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px/1 ${T.SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:16px;text-shadow:0 1px 3px rgba(0,0,0,1),0 3px 18px rgba(0,0,0,.95),0 6px 40px rgba(0,0,0,.8);animation:tsRise 700ms cubic-bezier(.16,1,.3,1) 120ms both}
+  .tsn2-hero .ts-hero__eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
+  .tsn2-hero .ts-hero__title{margin:0;font-family:${T.DISP};font-weight:600;color:#fff;line-height:1.02;letter-spacing:-.02em;font-size:clamp(2.6rem,8vw,5.4rem);text-shadow:0 0 4px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,1),0 3px 16px rgba(0,0,0,1),0 6px 40px rgba(0,0,0,.98),0 10px 80px rgba(0,0,0,.9),0 18px 140px rgba(0,0,0,.78);animation:tsRise 800ms cubic-bezier(.16,1,.3,1) 220ms both}
+  .tsn2-hero .ts-hero__title .g{color:#c7b489}
+  @media(max-width:640px){ .tsn2-hero .ts-hero__text{padding:0 16px 20px} .tsn2-hero .ts-hero__title{font-size:clamp(2rem,12vw,3rem)} }
+  .tsn2-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);text-align:center}
+  .tsn2-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
+  .tsn2-body p.big{font-family:${T.DISP};font-weight:600;font-size:clamp(19px,2.1vw,23px);line-height:1.4;color:#fff;margin-bottom:18px}
+
+  /* ---------- Erklaeranimation #tsn2dup ---------- */
+  #tsn2dup{max-width:1120px;margin:84px auto 0;padding:0 clamp(16px,3vw,40px)}
+  #tsn2dup .rail{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 26px}
+  #tsn2dup .pill{display:inline-flex;align-items:center;gap:9px;height:36px;padding:0 16px 0 7px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.62);font:600 12.5px/1 ${T.SANS};cursor:pointer;transition:color .4s cubic-bezier(.45,0,.55,1),border-color .4s cubic-bezier(.45,0,.55,1),background .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .pill span{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.07);font-size:10.5px;font-variant-numeric:tabular-nums;transition:all .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .pill.on{color:#fff;border-color:rgba(199,180,137,.55);background:rgba(199,180,137,.10);box-shadow:0 0 22px rgba(199,180,137,.14)}
+  #tsn2dup .pill.on span{background:#c7b489;color:#05060b}
+  #tsn2dup .stage{position:relative;border-radius:24px;border:1px solid rgba(255,255,255,.09);overflow:hidden;padding:clamp(22px,3.4vw,40px);
+    background:radial-gradient(70% 90% at 78% 10%,rgba(199,180,137,.08),rgba(199,180,137,0) 60%),radial-gradient(60% 80% at 10% 100%,rgba(227,37,82,.035),rgba(227,37,82,0) 60%),#04050a;
+    box-shadow:0 50px 100px -60px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05)}
+  #tsn2dup .cols{position:relative;display:grid;grid-template-columns:1.05fr 70px .95fr;align-items:center;gap:0}
+  #tsn2dup .lbl{font:600 9.5px/1 ${T.SANS};letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 12px}
+  /* Vorlage (links): oeffentliche Notion-Seite */
+  #tsn2dup .tpl{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.015)),#090b12;padding:0 0 16px;overflow:hidden;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup.js .tpl{opacity:0;transform:translateY(16px) scale(.98)}
+  #tsn2dup.js .tpl.in{opacity:1;transform:none}
+  #tsn2dup .bar{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02)}
+  #tsn2dup .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.14)}
+  #tsn2dup .url{flex:1;margin:0 8px;height:20px;border-radius:6px;background:rgba(255,255,255,.05);font:500 10px/20px ${T.MONO};color:rgba(255,255,255,.4);padding:0 9px;overflow:hidden;white-space:nowrap}
+  #tsn2dup .dup{position:relative;height:24px;padding:0 11px;border-radius:7px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.14);color:#efe6d2;font:600 10.5px/24px ${T.SANS};letter-spacing:.02em;transition:transform .25s cubic-bezier(.45,0,.55,1),background .25s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .dup.press{transform:scale(.92);background:#c7b489;color:#05060b;box-shadow:0 0 0 6px rgba(199,180,137,.16)}
+  #tsn2dup .dup.glow{animation:tsn2dupGlow 1.4s cubic-bezier(.45,0,.55,1) 2}
+  @keyframes tsn2dupGlow{0%,100%{box-shadow:0 0 0 0 rgba(199,180,137,0)}50%{box-shadow:0 0 0 7px rgba(199,180,137,.18)}}
+  #tsn2dup .pg{padding:18px 18px 4px}
+  #tsn2dup .pg-t{font-family:${T.DISP};font-weight:600;font-size:19px;color:#fff;margin:0 0 4px}
+  #tsn2dup .pg-s{font-size:11.5px;color:rgba(255,255,255,.45);margin:0 0 14px}
+  #tsn2dup .areas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  #tsn2dup .area{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
+  #tsn2dup .area b{width:20px;height:20px;border-radius:6px;flex:0 0 auto;background:radial-gradient(circle at 30% 30%,rgba(199,180,137,.55),rgba(199,180,137,.12));}
+  #tsn2dup .cursor{position:absolute;width:18px;height:18px;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform 1s cubic-bezier(.45,0,.2,1),opacity .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .cursor svg{width:18px;height:18px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+  /* Pfeil-Mitte */
+  #tsn2dup .mid{position:relative;height:2px;margin:0 6px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+  #tsn2dup .mid::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(199,180,137,0),#c7b489);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup .mid.on::after{transform:scaleX(1)}
+  /* Workspace (rechts): Seitenleiste */
+  #tsn2dup .ws{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.01)),#07080e;padding:16px 14px 14px;min-height:268px}
+  #tsn2dup .ws-h{display:flex;align-items:center;gap:9px;margin:0 0 14px}
+  #tsn2dup .ws-av{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#c7b489,#7d6f53);display:flex;align-items:center;justify-content:center;font:700 11px/1 ${T.SANS};color:#05060b}
+  #tsn2dup .ws-n{font:600 12.5px/1.2 ${T.SANS};color:#fff}
+  #tsn2dup .ws-sec{font:600 9.5px/1 ${T.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin:12px 4px 8px}
+  #tsn2dup .ws-ph{height:30px;border-radius:8px;border:1px dashed rgba(255,255,255,.12);margin:0 0 6px;transition:opacity .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .ws-root{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.35);font-size:12.5px;font-weight:600;color:#fff;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup.js .ws-root{opacity:0;transform:translateY(6px)}
+  #tsn2dup.js .ws-root.in{opacity:1;transform:none}
+  #tsn2dup .ws-root img{width:16px;height:16px}
+  #tsn2dup .ws-kids{margin:6px 0 0 14px;border-left:1px solid rgba(199,180,137,.22);padding-left:10px}
+  #tsn2dup .ws-kid{display:flex;align-items:center;gap:8px;height:26px;font-size:12px;color:rgba(255,255,255,.86);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+  #tsn2dup.js .ws-kid{opacity:0;transform:translateX(-8px)}
+  #tsn2dup.js .ws-kid.in{opacity:1;transform:none}
+  #tsn2dup .ws-c{margin-left:auto;min-width:26px;height:20px;padding:0 7px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font:700 10.5px/1 ${T.SANS};color:rgba(255,255,255,.4);background:rgba(255,255,255,.05);font-variant-numeric:tabular-nums;transition:background .4s cubic-bezier(.45,0,.55,1),color .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .ws-c.on{background:#c7b489;color:#05060b}
+  #tsn2dup .file{position:absolute;z-index:6;display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:9px;background:#efe6d2;color:#05060b;font:700 11px/1 ${T.SANS};box-shadow:0 14px 30px -10px rgba(0,0,0,.8);opacity:0;pointer-events:none}
+  #tsn2dup .area i{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.12);flex:1}
+  #tsn2dup .ws-kid i{width:6px;height:6px;border-radius:50%;background:#c7b489}
+  /* Flug-Geist */
+  #tsn2dup .ghost{position:absolute;z-index:4;border-radius:16px;border:1px solid rgba(199,180,137,.55);background:rgba(199,180,137,.08);box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 40px rgba(199,180,137,.2);pointer-events:none;opacity:0;transform-origin:0 0}
+  #tsn2dup .cap{min-height:24px;margin:22px auto 0;text-align:center;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);max-width:640px;transition:opacity .35s cubic-bezier(.45,0,.55,1)}
+  #tsn2dup .foot{display:flex;justify-content:center;margin:16px 0 0}
+  @media(max-width:820px){
+    #tsn2dup .cols{grid-template-columns:1fr;gap:16px}
+    #tsn2dup .mid{height:28px;width:2px;margin:0 auto}
+    #tsn2dup .mid::after{background:linear-gradient(180deg,rgba(199,180,137,0),#c7b489);transform:scaleY(0);transform-origin:top}
+    #tsn2dup .mid.on::after{transform:scaleY(1)}
+  }
+  @media(prefers-reduced-motion:reduce){ #tsn2dup *{transition:none!important;animation:none!important} }
+
+  /* ---------- Stationen-Liste (Abschnitt 02) ---------- */
+  .tsn2-chain{position:relative;max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+  .tsn2-chain a{position:relative;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:16px;padding:15px 18px;border-radius:15px;border:1px solid rgba(255,255,255,.09);text-decoration:none;color:#fff;
+    background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.01)),#05060b;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .35s cubic-bezier(.45,0,.55,1),background .35s cubic-bezier(.45,0,.55,1)}
+  .tsn2-chain.js a{opacity:0;transform:translateX(-14px)}
+  .tsn2-chain.js.in a{opacity:1;transform:none}
+  .tsn2-chain a:hover{border-color:rgba(199,180,137,.45);background:linear-gradient(rgba(199,180,137,.06),rgba(199,180,137,.02)),#05060b}
+  .tsn2-chain .n{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:${T.DISP};font-weight:600;font-size:18px;color:#efe6d2;border:1px solid rgba(199,180,137,.35);background:rgba(199,180,137,.07)}
+  .tsn2-chain .t{font-family:${T.DISP};font-weight:600;font-size:17px;line-height:1.2;margin:0 0 4px}
+  .tsn2-chain .d{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.72)}
+  .tsn2-chain .db{font:600 9.5px/1 ${T.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;white-space:nowrap}
+  .tsn2-chain .ar{display:inline-block;margin-left:8px;transition:transform .3s cubic-bezier(.45,0,.55,1)}
+  .tsn2-chain a:hover .ar{transform:translateX(3px)}
+  @media(max-width:640px){ .tsn2-chain a{grid-template-columns:44px 1fr} .tsn2-chain .n{width:44px;height:44px} .tsn2-chain .db{grid-column:2} }
+  @media(prefers-reduced-motion:reduce){ .tsn2-chain a{opacity:1;transform:none;transition:none} }
+
+  /* ---------- Vorlage-Knopf ---------- */
+  .tsn2-go{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 26px;margin:6px 0 4px;border-radius:999px;background:#c7b489;color:#05060b!important;font:700 14px/1 ${T.SANS};text-decoration:none!important;transition:background .3s cubic-bezier(.45,0,.55,1),transform .3s cubic-bezier(.45,0,.55,1),box-shadow .3s cubic-bezier(.45,0,.55,1)}
+  .tsn2-go:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
+  .tsn2-go.off{background:rgba(199,180,137,.14);color:#efe6d2!important;border:1px solid rgba(199,180,137,.35);pointer-events:none}
+  .tsn2-go svg{width:16px;height:16px}
+  `;
+
+  window.__tsn2heroCSS=HERO_CSS;
+  function heroCSS(){ if(document.getElementById('tsn2-vorlage-css')) return; var s=document.createElement('style'); s.id='tsn2-vorlage-css'; s.textContent=HERO_CSS; document.head.appendChild(s); }
+
+  var AREAS=['Foodquartier','Drinksquartier','Finance Studio','Key Metrics','Operations Area','Vision Frame'];
+  var FILL=[18,6,4,0,0,0];
+  var BEATS=[
+    ['Öffnen','Du öffnest den Link zur Vorlage im Browser und meldest dich bei Notion an.'],
+    ['Duplizieren','Ein Klick auf Duplizieren, und das ganze Backoffice liegt in deinem Workspace.'],
+    ['Füllen','Du füllst es mit deinen eigenen Daten, angefangen beim Einkauf im Foodquartier.']
+  ];
+
+  function animHTML(){
+    var cur='<div class="cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.6L9.6 19z" fill="#fff" stroke="#05060b" stroke-width="1.2" stroke-linejoin="round"/></svg></div>';
+    return T.head('','Vorlage statt Nachbau','Leer, aber <span class="g">komplett</span>.','Einmal duplizieren, danach füllst du sie mit deinen eigenen Daten.')+
+    '<div class="rail">'+BEATS.map(function(b,i){ return '<button type="button" class="pill" data-b="'+i+'"><span>0'+(i+1)+'</span>'+b[0]+'</button>'; }).join('')+'</div>'+
+    '<div class="stage">'+cur+'<div class="file">Lieferschein.pdf</div>'+
+      '<div class="cols">'+
+        '<div><div class="lbl">Die Vorlage</div>'+
+          '<div class="tpl"><div class="bar"><i></i><i></i><i></i><div class="url">notion.site / notion-ai-backoffice</div><div class="dup">Duplizieren</div></div>'+
+          '<div class="pg"><div class="pg-t">Notion AI Backoffice</div><div class="pg-s">Leere Vorlage · alle Datenbanken, Verknüpfungen und Formeln</div>'+
+          '<div class="areas">'+AREAS.map(function(){ return '<div class="area"><b></b><i></i></div>'; }).join('')+'</div></div></div>'+
+        '</div>'+
+        '<div class="mid"></div>'+
+        '<div><div class="lbl">Dein Workspace</div>'+
+          '<div class="ws"><div class="ws-h"><div class="ws-av">B</div><div class="ws-n">Dein Betrieb</div></div>'+
+          '<div class="ws-sec">Privat</div><div class="ws-ph"></div>'+
+          '<div class="ws-root"><img alt="" src="'+T.LOGO+'">Notion AI Backoffice</div>'+
+          '<div class="ws-kids">'+AREAS.map(function(a,i){ return '<div class="ws-kid"><i></i>'+a+'<span class="ws-c'+(FILL[i]?' on':'')+'" data-v="'+FILL[i]+'">'+FILL[i]+'</span></div>'; }).join('')+'</div></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="cap">'+BEATS[2][1]+'</div>'+
+      '<div class="foot"><button type="button" class="tsn2-replay">Neu abspielen</button></div>'+
+    '</div>';
+  }
+
+  function setupAnim(root){
+    var q=function(s){ return root.querySelector(s); }, qa=function(s){ return root.querySelectorAll(s); };
+    var stage=q('.stage'), tpl=q('.tpl'), dupB=q('.dup'), mid=q('.mid'), wsRoot=q('.ws-root'), ph=q('.ws-ph'), kids=qa('.ws-kid'), cs=qa('.ws-c'), cap=q('.cap'), cur=q('.cursor'), file=q('.file'), pills=qa('.pill');
+    var timers=[], ghost=null;
+    function T_(fn,ms){ var id=setTimeout(function(){ timers=timers.filter(function(t){return t!==id;}); fn(); },ms); timers.push(id); }
+    function clear(){ timers.forEach(clearTimeout); timers=[]; if(ghost&&ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost=null; }
+    function setBeat(i){ Array.prototype.forEach.call(pills,function(p,k){ p.classList.toggle('on',k===i); }); cap.style.opacity=0; setTimeout(function(){ cap.textContent=BEATS[i][1]; cap.style.opacity=1; },180); }
+    function rel(el){ var a=stage.getBoundingClientRect(), b=el.getBoundingClientRect(); return {x:b.left-a.left,y:b.top-a.top,w:b.width,h:b.height}; }
+    function setCounts(zero){ Array.prototype.forEach.call(cs,function(c){ var v=+c.getAttribute('data-v'); c.textContent=zero?'0':String(v); c.classList.toggle('on',!zero && v>0); }); }
+    function reset(){
+      clear(); tpl.classList.remove('in'); dupB.classList.remove('press','glow'); mid.classList.remove('on'); wsRoot.classList.remove('in'); ph.style.display='';
+      Array.prototype.forEach.call(kids,function(k){ k.classList.remove('in'); }); setCounts(true);
+      cur.style.opacity=0; file.style.transition='none'; file.style.opacity=0;
+    }
+    function endState(){
+      clear(); tpl.classList.add('in'); mid.classList.add('on'); wsRoot.classList.add('in'); ph.style.display='none';
+      Array.prototype.forEach.call(kids,function(k){ k.classList.add('in'); }); setCounts(false); cur.style.opacity=0; file.style.opacity=0; setBeat(2);
+    }
+    function b1(){
+      setBeat(0); tpl.classList.add('in');
+      if(window.innerWidth>820){
+        var d=rel(dupB);
+        cur.style.transition='none'; cur.style.transform='translate('+(d.x-120)+'px,'+(d.y+150)+'px)'; void cur.offsetWidth;
+        cur.style.transition=''; T_(function(){ cur.style.opacity=1; cur.style.transform='translate('+(d.x+d.w*0.55)+'px,'+(d.y+d.h*0.55)+'px)'; },500);
+      }
+      T_(function(){ dupB.classList.add('glow'); },900);
+    }
+    function b2(){
+      setBeat(1); tpl.classList.add('in');
+      dupB.classList.add('press'); T_(function(){ dupB.classList.remove('press'); },260);
+      T_(function(){ cur.style.opacity=0; },500);
+      var a=rel(tpl), b=rel(wsRoot.parentNode);
+      ghost=document.createElement('div'); ghost.className='ghost';
+      ghost.style.left=a.x+'px'; ghost.style.top=a.y+'px'; ghost.style.width=a.w+'px'; ghost.style.height=a.h+'px';
+      stage.appendChild(ghost);
+      var sx=b.w/a.w, sy=(b.h*0.6)/a.h;
+      T_(function(){ ghost.style.transition='none'; ghost.style.opacity=1; void ghost.offsetWidth;
+        ghost.style.transition='transform 1s cubic-bezier(.65,0,.25,1),opacity .5s cubic-bezier(.45,0,.55,1) .7s';
+        ghost.style.transform='translate('+(b.x-a.x)+'px,'+(b.y-a.y+40)+'px) scale('+sx.toFixed(3)+','+sy.toFixed(3)+')'; ghost.style.opacity=0; mid.classList.add('on'); },300);
+      T_(function(){ ph.style.display='none'; wsRoot.classList.add('in'); },1150);
+      T_(function(){ if(ghost&&ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost=null; },1500);
+      Array.prototype.forEach.call(kids,function(k,i){ T_(function(){ k.classList.add('in'); },1400+i*140); });
+    }
+    function b3(){
+      setBeat(2);
+      var target=kids[0], t=rel(target), st=stage.getBoundingClientRect();
+      file.style.transition='none'; file.style.opacity=0; file.style.transform='translate('+(t.x-40)+'px,'+(st.height-60)+'px)'; void file.offsetWidth;
+      file.style.transition='transform 1.1s cubic-bezier(.65,0,.25,1),opacity .35s cubic-bezier(.45,0,.55,1)';
+      T_(function(){ file.style.opacity=1; file.style.transform='translate('+(t.x+t.w-150)+'px,'+(t.y-4)+'px)'; },120);
+      T_(function(){ file.style.opacity=0; },1250);
+      Array.prototype.forEach.call(cs,function(c,i){ var v=+c.getAttribute('data-v'); if(!v) return;
+        T_(function(){ c.classList.add('on'); var k=0; var iv=setInterval(function(){ k++; c.textContent=String(Math.min(v,k)); if(k>=v) clearInterval(iv); },45); setTimeout(function(){ clearInterval(iv); c.textContent=String(v); }, v*45+200); },1300+i*500); });
+    }
+    function play(from){
+      reset();
+      if(T.reduced){ endState(); return; }
+      var at=0;
+      if(from<=0){ T_(b1,0); at=2200; } else { tpl.classList.add('in'); }
+      if(from<=1){ T_(b2,at); at+=2600; }
+      else { mid.classList.add('on'); wsRoot.classList.add('in'); ph.style.display='none'; Array.prototype.forEach.call(kids,function(k){ k.classList.add('in'); }); }
+      T_(b3,at);
+    }
+    Array.prototype.forEach.call(pills,function(p){ p.addEventListener('click',function(){ play(+p.getAttribute('data-b')); }); });
+    q('.tsn2-replay').addEventListener('click',function(){ play(0); });
+    var lastW=window.innerWidth; window.addEventListener('resize',function(){ if(Math.abs(window.innerWidth-lastW)<40) return; lastW=window.innerWidth; if(timers.length){ endState(); } });
+    if(T.reduced){ endState(); return; }
+    root.classList.add('js'); reset();
+    T.reveal(root,function(){ play(0); });
+  }
+
+  function chainHTML(){
+    var L=[
+      ['1','Inventurliste','Was du einkaufst, mit Gebinde und Einkaufspreis.','DB 0','/inventurliste'],
+      ['2','Lieferanten','Wer liefert, wer dein Ansprechpartner ist, was vereinbart ist.','DB I–III','/lieferpartner-ansprechpartner-lieferantenvertrge'],
+      ['3','Zutaten','Aus dem Gebinde wird die Portion, die auf den Teller kommt.','DB IV','/zutatenliste'],
+      ['4','Rezepturen','Saucen, Dressings und alles Hausgemachte aus mehreren Zutaten.','DB V','/rezepturen'],
+      ['5','Gemeinkosten & Löhne','Miete, Strom und was dich eine Arbeitsstunde wirklich kostet.','DB VI–VIII','/gemeinkosten-mitarbeiterlhne'],
+      ['6','Allergene & Packaging','Kennzeichnung an der Zutat, Verpackung für Außer-Haus.','DB IX–X','/allergene-bersicht'],
+      ['7','Gerichte & Getränke','Hier läuft alles zusammen: Wareneinsatz und Deckungsbeitrag.','DB XI','/gerichte-getrnke-finaler-schritt']
+    ];
+    return '<div class="tsn2-chain">'+L.map(function(l){
+      return '<a href="'+l[4]+'"><span class="n">'+l[0]+'</span><span><span class="t" style="display:block">'+l[1]+'</span><span class="d">'+l[2]+'</span></span><span class="db">'+l[3]+'<span class="ar">→</span></span></a>';
+    }).join('')+'</div>';
+  }
+
+  function goBtn(){
+    var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    return VORLAGE_URL ? '<p><a class="tsn2-go" href="'+VORLAGE_URL+'" target="_blank" rel="noopener">Vorlage öffnen '+arrow+'</a></p>'
+                       : '<p><span class="tsn2-go off">Link zur Vorlage folgt</span></p>';
+  }
+
+  function build(){
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    var nr=sc.querySelector('.notion-root'); if(!nr) return;
+    if(document.getElementById('tsn2v-wrap')) return;
+    T.css(); heroCSS();
+
+    /* Hero */
+    if(!sc.querySelector('.ts-hero')){
+      var h=document.createElement('div'); h.className='ts-hero tsn2-hero'; h.setAttribute('data-tsn2','vorlage');
+      h.innerHTML='<img class="ts-hero__img" alt="Vorlage holen und einrichten" src="'+T.phHero('VORLAGE')+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+T.LOGO+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__eyebrow">L 2.0</div><h1 class="ts-hero__title">Deine <span class="g">Vorlage</span></h1></div>';
+      sc.insertBefore(h,nr);
+    }
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+
+    var frag=document.createElement('div'); frag.id='tsn2v-wrap';
+
+    /* Einleitung */
+    frag.appendChild(T.make('tsn2v-body','tsn2-body',
+      '<p>In dieser Lektion holst du dir das Backoffice als Vorlage in deinen eigenen Notion-Workspace. Du legst fest, wer aus deinem Team was sehen und ändern darf, und weißt danach genau, mit welcher Datenbank du anfängst und warum gerade mit dieser.</p>'+
+      '<p>Alles, was rechnet, steckt schon drin: Datenbanken, Verknüpfungen, Formeln und die Seiten der sechs Bereiche. Wie jede einzelne Spalte arbeitet, zeige ich dir in jeder Datenbank-Lektion im Teil „So ist es gebaut“, für den Fall, dass du etwas anpassen oder erweitern willst.</p>'));
+
+    /* Erklaeranimation */
+    var anim=T.make('tsn2dup','',animHTML());
+    frag.appendChild(anim);
+
+    /* 01 So holst du dir die Vorlage */
+    frag.appendChild(T.make('tsn2v-hol','tsn2-sec',
+      T.head('01','Duplizieren','In fünf Minuten <span class="g">bei dir</span>.','Du brauchst nur einen Browser und ein Notion-Konto.')+
+      T.steps([
+        {eb:'Konto',t:'Im Browser bei Notion anmelden',html:'<p>Das Duplizieren läuft über den Browser, nicht über die App. Hast du noch kein Konto, legst du dir auf notion.com eins an. Für den Anfang reicht der kostenlose Plan, solange du allein arbeitest. Welcher Plan zu deinem Team passt, hast du in Modul 1 gesehen.</p>'},
+        {eb:'Link',t:'Vorlage öffnen und duplizieren',html:'<p>Öffne den Link zur Vorlage. Oben rechts steht <span class="tsn2-path">Duplizieren</span>. Notion fragt dich danach, in welchen Workspace die Kopie soll.</p>'+goBtn()},
+        {eb:'Ablage',t:'Deine Kopie finden',html:'<p>Die Vorlage landet in deiner Seitenleiste im Bereich <span class="tsn2-path">Privat</span>, mit allen Unterseiten und Datenbanken. Öffne sie einmal und gib Notion einen Moment, bis alle Datenbanken geladen sind. Markier die Startseite als Favorit, dann bist du später mit einem Klick dort.</p>'},
+        {eb:'Team',t:'In einen Teamspace verschieben',html:'<p>Arbeitet dein Team mit, gehört das Backoffice in einen Teamspace statt in deinen privaten Bereich. Zieh die Startseite in der Seitenleiste dorthin und lege fest, wer was darf.</p><p>Für Mitarbeiter, die nur Einträge machen sollen, gibt es bei Datenbanken die Stufe <span class="tsn2-path">Kann Inhalt bearbeiten</span>. Damit legen sie Zeilen an und ändern Werte, an Spalten und Formeln kommen sie nicht heran.</p>'},
+        {eb:'Probe',t:'Einmal testen, ob alles rechnet',html:'<p>Leg in der Inventurliste einen Probe-Eintrag an: Name <b>Testprodukt</b>, bei Menge / Unit <span class="tsn2-mono">1 kg</span>, bei Preis pro Unit (€) <span class="tsn2-mono">10</span>. Zeigt die Spalte Preis / Kg danach 10 Euro, rechnen die Formeln in deiner Kopie. Den Probe-Eintrag löschst du danach wieder.</p>'}
+      ])));
+
+    /* 02 Reihenfolge */
+    frag.appendChild(T.make('tsn2v-reihe','tsn2-sec',
+      T.head('02','Reihenfolge','Die Reihenfolge <span class="g">beim Füllen</span>.','Jede Station holt sich ihre Zahlen aus der Station davor. Wer hinten anfängt, sieht leere Felder.')+
+      chainHTML()+
+      '<div style="max-width:900px;margin:0 auto">'+T.note('Key Metrics, Operations Area und Vision Frame hängen nicht an dieser Kette. Die füllst du, sobald es für deinen Betrieb passt, zum Beispiel die Checklisten noch vor der ersten Kalkulation.')+'</div>'));
+
+    /* 03 Erster Tag */
+    frag.appendChild(T.make('tsn2v-tag','tsn2-sec narrow',
+      T.head('03','Der erste Tag','Fang mit <span class="g">einem Gericht</span> an.','')+
+      '<div class="tsn2-txt">'+
+      '<p class="tsn2-p">Am Anfang wollen fast alle alles auf einmal eintragen: die komplette Preisliste, alle Lieferanten, die ganze Karte. Nach zwei Abenden stehen dann hundert Zeilen da und kein einziges Gericht ist fertig gerechnet.</p>'+
+      '<p class="tsn2-p">Nimm stattdessen dein meistverkauftes Gericht und zieh es einmal komplett durch. Jedes Produkt, das darin steckt, kommt in die Inventurliste, dazu der Lieferant. Jede Zutat legst du in der Portion an, die wirklich auf den Teller kommt. Die Sauce wird eine Rezeptur. Zum Schluss das Gericht selbst, mit deinem Verkaufspreis.</p>'+
+      '<p class="tsn2-p">Danach siehst du zum ersten Mal den Wareneinsatz und die Deckungsbeiträge für dieses eine Gericht. Passt die Zahl zu deinem Gefühl, sitzen deine Eingaben. Passt sie nicht, findest du den Fehler bei einem Gericht schnell. Bei fünfzig Gerichten suchst du einen ganzen Abend.</p>'+
+      '</div>'));
+
+    /* 04 Was du nicht aenderst */
+    frag.appendChild(T.make('tsn2v-finger','tsn2-sec',
+      T.head('04','Was bleibt, wie es ist','Diese Stellen <span class="g">änderst du nicht</span>.','Neue Spalten und eigene Ansichten darfst du jederzeit dazulegen. An den folgenden Stellen hängen Formeln.')+
+      T.errors([
+        {t:'Spalten mit Formeln oder Rollups löschen',folge:'Andere Spalten rechnen mit ihnen weiter. Fehlt eine, zeigt das Gericht am Ende keinen Wareneinsatz mehr.',fix:'Spalte in der Ansicht ausblenden statt löschen, wenn sie dich stört.'},
+        {t:'Auswahl-Optionen umbenennen, mit denen Formeln rechnen',folge:'Manche Formeln prüfen auf einen festen Wert, zum Beispiel auf das „X“ bei Hauptansprechpartner. Heißt die Option anders, bleibt das Feld leer.',fix:'Vorhandene Optionen stehen lassen und eigene dazulegen.'},
+        {t:'Verknüpfungen zwischen den Datenbanken entfernen',folge:'Über die Verknüpfungen wandern Preise, Allergene und Nährwerte von der Inventur bis ins Gericht. Ohne sie bleibt die Kette stehen.',fix:'Verknüpfungs-Spalten nie löschen, nur befüllen.'},
+        {t:'Einzelne Datenbanken separat duplizieren',folge:'Beim Duplizieren einer einzelnen Datenbank macht Notion aus einer zweiseitigen Verknüpfung eine einseitige. Die Gegenseite fehlt dann.',fix:'Immer die ganze Vorlage duplizieren, nie einzelne Teile daraus.'}
+      ])));
+
+    /* Empfehlungs-Kachel + Learnings */
+    var empA=document.createElement('div'); empA.id='tsn2v-empa'; frag.appendChild(empA);
+    var learnA=document.createElement('div'); learnA.id='tsn2v-learna'; frag.appendChild(learnA);
+
+    var hero=sc.querySelector('.ts-hero');
+    hero.parentNode.insertBefore(frag, hero.nextSibling);
+    T.wireReveal(document.getElementById('tsn2v-hol')); T.wireReveal(document.getElementById('tsn2v-finger'));
+    var ch=document.querySelector('#tsn2v-reihe .tsn2-chain'); if(T.reduced) ch.classList.add('in'); else { ch.classList.add('js'); T.reveal(ch,function(){ ch.classList.add('in'); }); }
+    setupAnim(anim);
+
+    window.__tsn2emp && window.__tsn2emp({id:'tsn2v-emp', anchorId:'tsn2v-empa', animTitle:'Dein Start', animGold:'mit der Vorlage',
+      steps:[{n:'01',l:'Duplizieren'},{n:'02',l:'Teamspace'},{n:'03',l:'Ein Gericht'},{n:'04',l:'Zahl prüfen'},{n:'05',l:'Weiter füllen'}],
+      kind:'Einrichtung', intro:'So bekommst du die Vorlage am schnellsten in Betrieb:',
+      points:['Vorlage duplizieren und einmal komplett öffnen','In den Teamspace verschieben und die Rechte setzen','Dein meistverkauftes Gericht von der Inventur bis zum Teller durchziehen','Wareneinsatz und Deckungsbeiträge mit deinem Gefühl abgleichen','Die übrigen Produkte Station für Station nachziehen']});
+    window.__tsn2learn && window.__tsn2learn({id:'tsn2v-learn', anchorId:'tsn2v-learna', next:NEXT,
+      learn:['Die leere Vorlage liegt in deinem eigenen Notion-Workspace.','Du weißt, wie du dein Team mit den passenden Rechten dazuholst.','Du kennst die Reihenfolge, in der du die Datenbanken füllst.','Du fängst mit einem Gericht an und prüfst daran deine Zahlen.']});
+  }
+
+  function sweep(){
+    if(!on()){ var w=document.getElementById('tsn2v-wrap'); if(w&&w.parentNode) w.parentNode.removeChild(w);
+      var h=document.querySelector('.tsn2-hero[data-tsn2="vorlage"]'); if(h&&h.parentNode) h.parentNode.removeChild(h); return; }
+    build();
+  }
+  sweep();
+  document.addEventListener('DOMContentLoaded', sweep);
+  window.__tsMO(sweep).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   NEUBAU MODUL 2 · Seiten-Regie fuer die Datenbank-Lektionen (Grundsatz A)
+   Reihenfolge je Lektion: 01 Wofür · 02 Deine Daten eintragen · 03 Ergebnis ·
+   04 So ist es gebaut (bisheriger Warenkorb) · 05 Typische Fehler.
+   - Notion-Bloecke werden NICHT bewegt (React), nur ausgeblendet (display:none).
+   - Eigene JS-Komponenten anderer Bloecke dieser Seite (z. B. #tszein) duerfen in
+     die neue Reihenfolge verschoben werden; ihre Mount-Guards pruefen nur die ID.
+   - Texte in den Warenkoerben werden auf Vorlage umgestellt (nur Textknoten).
+   ============================================================ */
+(function(){
+  if(window.__tsn2db) return; window.__tsn2db=true;
+  var T=window.__tsn2;
+
+  function P(html){ return '<p class="tsn2-p">'+html+'</p>'; }
+  function M(t){ return '<span class="tsn2-mono">'+t+'</span>'; }
+  function K(t){ return '<span class="tsn2-path">'+t+'</span>'; }
+  var NOTE_AI='Notion AI liest Dateien im Business-Plan. Nach dem Einlesen gleichst du jeden Preis einmal mit dem Beleg ab. Das dauert ein paar Minuten und ist der wichtigste Handgriff beim Eintragen.';
+  var NOTE_BEZUG='Bevor du abschickst: Oben im Eingabefeld von Notion AI muss die richtige Datenbank als Bezug stehen. Sonst weiß die KI nicht, wohin die Einträge gehören.';
+  var HOOD_LEAD='Jede Spalte dieser Datenbank liegt hier als Karte. Anlegen musst du davon nichts, sie steckt fertig in deiner Vorlage. Klick eine Karte auf, wenn du wissen willst, was sie rechnet, oder wenn du die Datenbank erweitern möchtest.';
+  function shopSub(db, cur){ return 'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie macht, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von '+db+' ist '+cur+'.'; }
+
+  var PAGES=[
+
+  /* ===================== DB 0 · Inventurliste ===================== */
+  { key:'inv', re:/\/inventurliste\/?$/,
+    introBefore:'#tsflow',
+    s1:{ h:'Alles, <span class="g">was du einkaufst</span>.',
+      intro:P('Jede Zeile ist ein Produkt, so wie der Lieferant es bringt: die Kiste Tomaten, der Kanister Öl, der Sack Mehl. Gerichte stehen hier nicht. Aus diesen Zeilen holen sich Zutaten, Rezepturen und Gerichte ihre Preise, und deshalb zählt Genauigkeit hier mehr als an jeder anderen Stelle. Ist ein Einkaufspreis falsch, ist er es in jedem Gericht, in dem das Produkt steckt.')+
+           P('Im Alltag brauchst du die Liste vor allem nach jeder Lieferung: neuer Preis rein, und alles, was daran hängt, rechnet mit. Dazu siehst du für jedes Produkt, was dich ein Kilo, ein Liter oder ein Stück kostet, egal ob dein Lieferant in Kisten, Kartons oder Gebinden abrechnet. So vergleichst du zwei Lieferanten, ohne selbst zu rechnen.') },
+    before:'#tsshop--db0_inventurliste',
+    s2:{ lead:'Drei Wege, je nachdem, was du schon hast. Am schnellsten geht es mit der Preisliste deines Lieferanten.',
+      steps:[
+        {eb:'Was du einträgst',t:'Diese Spalten füllst du selbst',html:'<ul><li><b>Name</b>: dein Name für das Produkt, zum Beispiel Avocado.</li><li><b>Herstellerbezeichnung</b> und <b>Artikelnummer</b>: so, wie sie auf dem Lieferschein stehen.</li><li><b>Menge / Unit</b>: das Gebinde als Text mit Einheit, zum Beispiel '+M('12 x 770g')+' oder '+M('10 L')+'.</li><li><b>Preis pro Unit (€)</b>: der Nettopreis für genau dieses Gebinde.</li><li><b>Kategorie</b> und <b>Lagerort</b>, damit du später filtern und zählen kannst.</li></ul><p>Alles andere rechnet die Liste selbst.</p>'},
+        {eb:'Weg 1 · Preisliste',t:'Preisliste als CSV übernehmen',html:'<p>Viele Großhändler schicken ihr Sortiment als Excel-Datei. Lösch vorher alles heraus, was du nicht einkaufst, benenne die Spalten wie in der Inventurliste und speichere die Datei in Excel als CSV.</p><p>Öffne die Inventurliste als ganze Seite, klick oben auf '+K('•••')+' und dann auf '+K('Mit CSV zusammenführen')+'. Notion fragt, welche Spalte der Datei in welche Spalte der Liste gehört. Danach steht jede Zeile der Preisliste als Produkt in deiner Inventur.</p>'},
+        {eb:'Weg 2 · Lieferschein',t:'Lieferschein mit Notion AI einlesen',html:'<p>Scann den Lieferschein als PDF oder nimm die PDF-Rechnung aus der Mail. Öffne die Inventurliste, starte Notion AI und häng die Datei über die Büroklammer an.</p>'+
+          T.prompt('Prompt · Notion AI','Lies den angehängten Lieferschein und trage jede Position als neuen Eintrag in DB 0 : Inventurliste ein.\nName: kurzer Produktname auf Deutsch.\nHerstellerbezeichnung und Artikelnummer: genau wie auf dem Lieferschein.\nMenge / Unit: das Gebinde als Text mit Einheit, zum Beispiel 6 x 2,5 kg oder 10 L.\nPreis pro Unit (€): der Nettopreis für genau dieses Gebinde.\nGibt es ein Produkt schon, lege keinen zweiten Eintrag an, sondern nenne es mir.\nRate keine Werte. Fehlt etwas, lass das Feld leer und liste die Position am Ende auf.')+T.note(NOTE_BEZUG)+T.note(NOTE_AI)},
+        {eb:'Weg 3 · Von Hand',t:'Einzelne Produkte von Hand anlegen',html:'<p>Für ein paar Produkte reicht '+K('Neu')+' in der Inventurliste. Bei Menge / Unit schreibst du immer Zahl und Einheit: '+M('5 kg')+', '+M('500 g')+', '+M('0,75 L')+', '+M('6 x 1 L')+', '+M('24 Stck')+'. Genau diese Angaben lesen die Formeln.</p>'}
+      ],
+      after:'Kommen ab jetzt jede Woche neue Lieferscheine, lohnt sich ein fester Ablauf, der bestehende Preise abgleicht statt neue Zeilen anzulegen. Den baust du in Modul 4 mit Claude Code.' },
+    s3:{ h:'Was kostet <span class="g">ein Kilo wirklich</span>?', lead:'Diese drei Spalten füllst du nie selbst. Sie lesen Menge / Unit und Preis pro Unit (€) und rechnen auf ein Kilo, einen Liter oder ein Stück herunter.', kind:'inv' },
+    errs:[
+      {t:'Menge / Unit ohne Einheit',folge:'Steht dort nur 12 oder Karton, weiß die Formel nicht, ob sie in Kilo, Liter oder Stück rechnen soll. Das Preisfeld bleibt leer.',fix:'Immer Zahl und Einheit: 5 kg, 12 x 770g, 0,75 L, 24 Stck.'},
+      {t:'Bruttopreise eingetragen',folge:'Mit Mehrwertsteuer kostet jedes Produkt auf dem Papier sieben bis neunzehn Prozent mehr, als es dich wirklich kostet. Der Wareneinsatz deiner Gerichte steigt mit.',fix:'Preis pro Unit (€) immer netto, so wie auf der Rechnung vor der Mehrwertsteuer.'},
+      {t:'Kilopreis statt Gebindepreis',folge:'Bei 6 x 2,5 kg gehört der Preis für den ganzen Karton in Preis pro Unit (€). Trägst du den Kilopreis ein, rechnet die Formel ihn ein zweites Mal herunter.',fix:'Immer der Preis für genau das Gebinde, das in Menge / Unit steht.'},
+      {t:'Dasselbe Produkt doppelt angelegt',folge:'Nach der zweiten Preisliste gibt es Olivenöl zweimal. Die Zutat hängt am alten Eintrag, und der neue Preis kommt nie im Gericht an.',fix:'Vor dem Einlesen nach dem Namen suchen. Bekannte Produkte bekommen einen neuen Preis, keinen neuen Eintrag.'}
+    ],
+    hide:['block-399b9546553480d993d5ef22dd9598a6','block-399b9546553480c0ac35e72c9d8c4055','block-399b9546553480479836e0586b46d323','block-38eb9546553480d3ac7dda0fb8e1ab61','block-39bb9546553480d5b9d0d52c6f564049','block-39bb9546553480aebb7dce50c0d53c53','block-39bb9546553480d7a605dbff16f3ce7a'],
+    subs:{ 'tsshop--db0_inventurliste':shopSub('DB 0','der Preis') },
+    shopTitle:{ 'tsshop--db0_inventurliste':'Deine Inventurliste. <span>Spalte für Spalte</span>.' },
+    learn:['Die Inventurliste ist die Quelle für jeden Einkaufspreis in deinem System.','Du trägst Gebinde und Nettopreis ein, den Preis pro Kilo, Liter oder Stück rechnet die Liste selbst.','Du übernimmst Preislisten als CSV und liest Lieferscheine mit Notion AI ein.','Du kennst die Schreibweisen, die die Formeln verstehen, und prüfst jeden eingelesenen Preis.'] },
+
+  /* ===================== DB I–III · Lieferanten ===================== */
+  { key:'lief', re:/\/lieferpartner-ansprechpartner-lieferantenvertrge\/?$/,
+    after:'#block-39ab9546553480a7b16cdb56ad9de27e',
+    s1:{ h:'Wer dir <span class="g">was liefert</span>.',
+      html:'', after:P('In der Vorlage sind das drei verknüpfte Datenbanken. DB I Lieferpartner hält die Firma mit Kundennummer, Sortiment und Konditionen. DB II Ansprechpartner hält die Menschen dahinter, DB III Lieferantenverträge das, was ihr vereinbart habt. Jedes Produkt in deiner Inventurliste zeigt auf seinen Lieferanten. Steigt ein Preis oder fehlt eine Lieferung, siehst du vom Produkt aus sofort, wen du anrufst.') },
+    before:'#tsshop--db13_lieferanten',
+    s2:{ lead:'Die meisten Angaben holt sich Notion AI aus deinen Lieferscheinen. Was nur du weißt, trägst du einmal pro Lieferant nach.',
+      steps:[
+        {eb:'Mit Notion AI',t:'Lieferanten beim Einlesen gleich mit anlegen',html:'<p>Liest du in der Inventurliste einen Lieferschein mit Notion AI ein, kann die KI den Lieferanten in einem Zug mit anlegen und die Produkte mit ihm verknüpfen.</p>'+
+          T.prompt('Prompt · Notion AI','Lies den angehängten Lieferschein und trage jede Position in DB 0 : Inventurliste ein.\nIst der Lieferant noch nicht in DB I : Lieferpartner, lege ihn mit allen Angaben an, die auf dem Lieferschein stehen: Name, Kundennummer, Telefonnummer, E-Mail Adresse, Website.\nGibt es den Lieferanten schon, nutze den bestehenden Eintrag.\nVerknüpfe jede Position mit diesem Lieferanten.\nRate keine Werte. Was nicht auf dem Lieferschein steht, bleibt leer.')+T.note(NOTE_BEZUG)},
+        {eb:'Von Hand',t:'Was auf keinem Lieferschein steht',html:'<p>Bewertung, Zahlungsbedingungen und Lieferzeit setzt du einmal pro Lieferant selbst, zum Beispiel Zahlungsbedingungen '+M('14 Tage')+' und Lieferzeit „Bestellung bis 14 Uhr, Lieferung am Morgen“. Im Sortiment wählst du die Warengruppen, die er dir bringt.</p>'},
+        {eb:'DB II',t:'Ansprechpartner eintragen',html:'<p>Pro Lieferant legst du die Menschen an, mit denen du sprichst: Name, Job / Title, Telefon, E-Mail. Über Gehört zu Lieferpartner hängst du sie an die Firma. Bei der Person, die du bei Problemen zuerst anrufst, setzt du in Hauptansprechpartner das '+M('X')+'. Ihre Kontaktkarte erscheint dann überall, wo der Lieferant auftaucht, auch in deinen Zutaten.</p>'},
+        {eb:'DB III',t:'Verträge ablegen',html:'<p>Rahmenverträge, Rückvergütungen und Mindestbestellwerte gehören in die Lieferantenverträge: Vertragsbezeichnung, Lieferpartner, Vertragsbeginn und Vertrags Ende, Kündigungsfrist und Status. Das PDF hängst du bei Vertragsdokument an. Unter Key Facts notierst du das, was du im Alltag brauchst, zum Beispiel „Lieferung wöchentlich, Mindestbestellwert 400 €“.</p>'}
+      ] },
+    s3:{ h:'Wen rufst du <span class="g">als Erstes an</span>?', lead:'Was die drei Datenbanken zusammen ergeben: ein Lieferant mit allen Produkten, die du bei ihm kaufst, und eine Kontaktkarte, die genau die richtige Person zeigt.', kind:'lief' },
+    errs:[
+      {t:'Lieferant doppelt angelegt',folge:'Einmal „Metro“, einmal „METRO Cash & Carry“. Die Produkte verteilen sich auf zwei Einträge, und du siehst nicht mehr, was du bei einem Lieferanten wirklich kaufst.',fix:'Vor dem Einlesen in DB I nach dem Namen suchen und Notion AI im Prompt sagen, dass bestehende Lieferanten genutzt werden.'},
+      {t:'Kein Hauptansprechpartner gesetzt',folge:'Die Kontaktkarte bleibt leer. In den Zutaten fehlt die Nummer genau dann, wenn eine Lieferung ausfällt.',fix:'Pro Lieferant genau eine Person mit X bei Hauptansprechpartner.'},
+      {t:'Produkte ohne Lieferanten',folge:'Der Lieferant steht da, aber ohne Produkte. Fällt er aus, siehst du nicht, welche Zutaten und Gerichte betroffen sind.',fix:'Jedes Produkt in der Inventurliste bekommt seinen Lieferanten. Beim Einlesen mit Notion AI passiert das gleich mit.'},
+      {t:'Vertragsende nie eingetragen',folge:'Der Rahmenvertrag verlängert sich still, obwohl du längst bessere Konditionen hättest verhandeln können.',fix:'Bei jedem Vertrag Vertrags Ende und Kündigungsfrist setzen.'}
+    ],
+    hide:['block-39ab9546553480f1a92ee4ccdc9e0fa0','block-lieferpartner-ansprechpartner-lieferantenvertrge-lieferpartner-test-notion-ai-prompt'],
+    subs:{ 'tsshop--db13_lieferanten':shopSub('DB I','die Mindestbelieferung'), 'tsshop--db13_ansprechpartner':shopSub('DB II','die Jahresrückvergütung'), 'tsshop--db13_vertraege':shopSub('DB III','der Vertragswert') },
+    learn:['Lieferanten, Ansprechpartner und Verträge liegen in drei verknüpften Datenbanken.','Notion AI legt neue Lieferanten beim Einlesen eines Lieferscheins gleich mit an.','Pro Lieferant gibt es einen Hauptansprechpartner, dessen Nummer überall auftaucht.','Vom Produkt aus siehst du sofort, wer liefert und wen du anrufst.'] },
+
+  /* ===================== DB IV · Zutaten ===================== */
+  { key:'zut', re:/\/zutatenliste\/?$/,
+    after:'#block-395b9546553480ef8cdbd7b1c7b004ed',
+    s1:{ h:'Eine Zutat, <span class="g">jede Menge</span>.', html:'' },
+    before:'#tsshop--db4_zutaten',
+    s2:{ lead:'Erst die Grundzutat zu jedem Produkt, dann die Portionen, die du wirklich verwendest.',
+      steps:[
+        {eb:'Grundzutat',t:'Zu jedem Produkt eine Grundzutat',html:'<p>Für fast jedes Produkt aus der Inventurliste legst du genau eine Zutat in der Grundmenge an: '+M('1 kg')+' bei allem, was du wiegst, '+M('1 l')+' bei Flüssigkeiten, '+M('1 Stck')+' bei Eiern oder Brötchen. Verknüpfe sie unter Inventar Produkt mit dem Produkt und setz bei Hauptzutat das '+M('X')+'. Ab da kennt die Zutat ihren Preis.</p>'},
+        {eb:'Mit Notion AI',t:'Alle Grundzutaten in einem Zug',html:'<p>Steht deine Inventur, legt Notion AI die Grundzutaten für dich an.</p>'+
+          T.prompt('Prompt · Notion AI','Lege für jedes Produkt in DB 0 : Inventurliste, das noch keine Zutat hat, einen Eintrag in DB IV : Zutaten an.\nZutat Name: der Name aus der Inventurliste.\nPortionsgröße: 1 kg bei Produkten mit Preis / KG, 1 l bei Produkten mit Preis / Ltr., 1 Stck bei Produkten mit Preis / Stck.\nVerknüpfe die Zutat über Inventar Produkt mit dem Produkt und setze Hauptzutat auf X.\nLass Verpackung und Reinigungsmittel weg. Rate keine Werte.')+T.note(NOTE_BEZUG)},
+        {eb:'Nährwerte',t:'Nährwerte und Allergene in die Grundzutat',html:'<p>Bevor du Portionen anlegst, trägst du bei der Grundzutat die Nährwerte pro 100 Gramm ein. Sie stehen auf der Verpackung oder im Datenblatt des Herstellers. In Allergene ( ausfüllen ) wählst du, was drinsteckt. Referenz ( g ) bleibt bei 100. Bei Stück-Zutaten trägst du dort das Gewicht eines Stücks ein, bei einem Ei zum Beispiel 60, dann stimmen auch dort die Nährwerte.</p>'},
+        {eb:'Portion',t:'Auf die Portion herunterrechnen',html:'<p>Jetzt der Schritt, für den es die Zutaten gibt. Dupliziere die Grundzutat und ändere bei der Kopie den Namen, zum Beispiel <b>80 g Spinat</b>, und die Portionsgröße auf '+M('80 g')+'. Bei Hauptzutat entfernst du das X. Den Preis für die 80 Gramm rechnet die Zutat aus dem Kilopreis, und jede Preisänderung in der Inventur zieht sie mit. Weil du dupliziert hast, sind Nährwerte, Allergene und die Verknüpfung zum Produkt schon drin.</p>'},
+        {eb:'Verlust',t:'Schnitt- und Garverlust eintragen',html:'<p>Kaufst du 100 Gramm Spinat und landen nach dem Putzen 90 auf dem Teller, hast du 10 Prozent Schnittverlust. Den trägst du bei der Portion ein, den Garverlust genauso, etwa bei Fleisch oder Fisch. Preis / Portion ( nutzbar ) zeigt dann, was dich die Menge auf dem Teller wirklich kostet. Leere Felder zählen als null Prozent.</p>'}
+      ] },
+    moveUp:['tscb-duo'],
+    s3:{ h:'Was kosten <span class="g">80 Gramm Spinat</span>?', lead:'Was die Zutat aus dem Preis der Inventur macht, ohne dass du rechnest: erst die Portion, dann der Preis mit Verlust.', kind:'zut' },
+    errs:[
+      {t:'Einheit ausgeschrieben',folge:'Die Formel kennt g, kg, ml, l und Stck. Bei „0,5 Liter“ oder „1 Kilo“ rechnet sie falsch, ohne dass es auffällt.',fix:'Portionsgröße immer mit Kürzel: 80 g, 30 ml, 1 kg, 1 l, 2 Stck.'},
+      {t:'Portion neu angelegt statt dupliziert',folge:'Die neue Zeile hat keine Verknüpfung zum Produkt, keine Nährwerte und keine Allergene. Der Preis steht auf null.',fix:'Portionen immer aus der Grundzutat duplizieren.'},
+      {t:'Nährwerte erst nach dem Duplizieren',folge:'Dann stehen sie nur in der Grundzutat. Jede Portion, die du vorher angelegt hast, zeigt keine Kalorien und keine Allergene.',fix:'Erst Nährwerte und Allergene in die Grundzutat, dann duplizieren.'},
+      {t:'Verlust doppelt gerechnet',folge:'Schnittverlust an der Zutat und zusätzlich eine größere Portion im Gericht: Dann bezahlst du den Verlust zweimal.',fix:'Portionsgröße ist die Menge auf dem Teller. Den Verlust trägst du nur in den beiden Prozent-Feldern ein.'}
+    ],
+    hide:[],
+    textFix:[[/Öffne hierzu zunächst deine Notion AI Backoffice Startseite[^:]*:\s*/,'']],
+    subs:{ 'tsshop--db4_zutaten':shopSub('DB IV','die Portionsgröße') },
+    learn:['Jedes Produkt bekommt eine Grundzutat in 1 kg, 1 l oder 1 Stck.','Portionen entstehen durch Duplizieren, den Preis rechnet die Zutat selbst.','Schnitt- und Garverlust machen aus dem Portionspreis den echten Tellerpreis.','Nährwerte und Allergene pflegst du in der Grundzutat, bevor du duplizierst.'] },
+
+  /* ===================== DB V · Rezepturen ===================== */
+  { key:'rez', re:/\/rezepturen\/?$/,
+    after:'#block-2c5edc4c7d1e4c1eb2478fdea38a3535',
+    s1:{ h:'Hausgemacht, <span class="g">als Baustein</span>.', html:'' },
+    before:'#tsshop--db5_rezepturen',
+    s2:{ lead:'Eine Rezeptur ist schnell eingetragen, wenn die Portionen ihrer Zutaten schon stehen.',
+      steps:[
+        {eb:'Zutaten',t:'Rezeptur anlegen und Zutaten verknüpfen',html:'<p>Leg die Rezeptur mit ihrem Namen an, zum Beispiel <b>Hausdressing</b>. Unter Zutaten verknüpfst du die Portionen, die in eine Charge gehören: '+M('500 ml Olivenöl')+', '+M('150 ml Weißweinessig')+', '+M('50 g Senf')+', '+M('50 g Honig')+'. Fehlt eine Portion, legst du sie vorher in den Zutaten an.</p>'},
+        {eb:'Portion',t:'Portionsgröße setzen',html:'<p>In Portionsgröße ( G / Ltr / Stck ) trägst du ein, wie viel von der Rezeptur in einem Gericht landet, beim Dressing zum Beispiel '+M('30')+'. Daraus rechnet die Rezeptur, wie viele Portionen eine Charge ergibt und was eine Portion kostet. Genau diesen Portionspreis holt sich später jedes Gericht.</p>'},
+        {eb:'Zubereitung',t:'Zubereitung so aufschreiben, dass jeder sie ansetzen kann',html:'<p>Im Feld Zubereitung stehen die Arbeitsschritte mit Mengen, Reihenfolge und Haltbarkeit. Hast du ein altes Rezeptblatt, lass es von Notion AI übertragen.</p>'+
+          T.prompt('Prompt · Notion AI','Übertrage das angehängte Rezeptblatt in die Rezeptur Hausdressing in DB V : Rezepturen.\nSchreib die Arbeitsschritte nummeriert in das Feld Zubereitung.\nVerknüpfe unter Zutaten die passenden Portionen aus DB IV : Zutaten.\nFehlt eine passende Portion, lege nichts an, sondern liste sie mir auf.')+T.note(NOTE_BEZUG)},
+        {eb:'Optional',t:'Arbeitszeit in den Preis nehmen',html:'<p>Soll die Zeit für das Ansetzen der Charge im Preis stecken, aktivierst du den Schalter ✨ Zubereitungskosten Personal aktivieren, trägst die Zubereitungsdauer ( min ) ein und wählst, wer die Rezeptur ansetzt. Den Stundensatz holt sich die Rezeptur aus den Mitarbeiterlöhnen der nächsten Lektion.</p>'}
+      ] },
+    s3:{ h:'Was kostet <span class="g">eine Portion Dressing</span>?', lead:'Die Rezeptur zählt die Mengen ihrer Zutaten zusammen, teilt durch deine Portionsgröße und verteilt die Kosten der Charge auf jede Portion.', kind:null, extra:['tsd5'] },
+    errs:[
+      {t:'Zutaten in kg oder l verknüpft',folge:'Die Rezeptur zählt die Mengen ihrer Zutaten als Zahlen zusammen. Eine Zutat mit 1 kg zählt dort als 1, nicht als 1000, und die Portionen stimmen nicht mehr.',fix:'In Rezepturen nur Portionen in g oder ml verknüpfen, zum Beispiel 500 ml statt 0,5 l.'},
+      {t:'Grundzutat statt Portion verknüpft',folge:'Hängt die Grundzutat 1 kg Senf im Dressing statt 50 g Senf, bezahlt die Rezeptur das ganze Kilo.',fix:'Immer die Portion in der Menge verknüpfen, die wirklich in die Charge geht.'},
+      {t:'Portionsgröße leer gelassen',folge:'Ohne Portionsgröße weiß die Rezeptur nicht, wie viele Portionen eine Charge ergibt. Statt eines Preises steht dort „Fehlende Portionsdaten“.',fix:'Bei jeder Rezeptur die Menge pro Gericht eintragen.'},
+      {t:'Zubereitung nur im Kopf',folge:'Ist die eine Person krank, die das Dressing immer ansetzt, schmeckt es anders.',fix:'Zubereitung so aufschreiben, dass jemand Neues die Rezeptur ohne Nachfragen ansetzen kann.'}
+    ],
+    hide:[],
+    subs:{ 'tsshop--db5_rezepturen':shopSub('DB V','die Portionsgröße') },
+    learn:['Eine Rezeptur bündelt Zutaten-Portionen zu einem eigenen Baustein, etwa einer Sauce.','Aus Gesamtmenge und Portionsgröße rechnet sie Portionen und Portionspreis selbst.','Zutaten verknüpfst du in Rezepturen immer in g oder ml.','Die Zubereitung steht im System, damit jeder im Team die Rezeptur ansetzen kann.'] },
+
+  /* ===================== DB VI–VIII · Gemeinkosten & Loehne ===================== */
+  { key:'gk', re:/\/gemeinkosten-mitarbeiterlhne\/?$/,
+    after:'#block-39bb95465534808ba291feb87e70e064',
+    s1:{ h:'Was ein Teller <span class="g">sonst noch kostet</span>.', html:'',
+      afterAnchor:'#tsgk', after:P('In der Vorlage sind es drei Datenbanken. DB VI Gemeinkosten sammelt jede laufende Kostenposition mit Betrag und Monat. DB VII Gemeinkostenannahmen fasst die Posten eines Monats zusammen und teilt sie durch die Zahl der Teller, die du in diesem Monat verkaufst. Heraus kommt der Gemeinkostenanteil pro Produkt. DB VIII Mitarbeiterlöhne rechnet aus Bruttogehalt und Arbeitgeberanteil, was dich eine Arbeitsstunde wirklich kostet. Mit beiden Werten rechnet jedes Gericht später seinen Deckungsbeitrag II und III.') },
+    before:'#tsshop--db6_gemeinkosten',
+    s2:{ lead:'Einmal im Monat, mit den Rechnungen und deinem Kassensystem neben dir.',
+      steps:[
+        {eb:'DB VI',t:'Kostenpositionen eines Monats eintragen',html:'<p>Leg jede laufende Position als Zeile an: Miete, Strom, Versicherungen, Reinigung, Marketing. Vor den Namen kommt der Monat, zum Beispiel <b>01.26 Miete</b>, dazu Kostenkategorie, Zeitraum und Betrag netto. Mit Wiederkehrend und Bezahlt behältst du im Blick, was noch offen ist.</p>'+
+          T.prompt('Prompt · Notion AI','Lies die angehängten Rechnungen und trage jede als Eintrag in DB VI : Gemeinkosten ein.\nGK Position: Monat und Jahr im Format MM.JJ, dann die Bezeichnung, zum Beispiel 01.26 Miete.\nKostenkategorie: eine der vorhandenen Optionen.\nBetrag netto: der Betrag ohne Mehrwertsteuer.\nZeitraum: das Rechnungsdatum.\nLass Wareneinkäufe und Löhne weg.\nRate keine Werte. Unklare Rechnungen listest du mir am Ende auf.')+T.note(NOTE_BEZUG)},
+        {eb:'DB VII',t:'Monat zusammenfassen und Absatz eintragen',html:'<p>In den Gemeinkostenannahmen legst du pro Monat eine Zeile an, zum Beispiel <b>Januar 2026</b>, und verknüpfst unter Kostenfaktoren / Monat alle Posten dieses Monats. Die Summe rechnet die Zeile selbst. In Absatz pro Monat trägst du ein, wie viele Gerichte und Getränke du im Monat verkaufst. Die Zahl steht in deinem Kassensystem. Für einen neuen Betrieb nimmst du eine vorsichtige Schätzung, das ist die eine Stelle im System, an der eine Annahme in Ordnung ist.</p>'},
+        {eb:'DB VIII',t:'Mitarbeiter mit Gehalt anlegen',html:'<p>Pro Mitarbeiter trägst du Monatsgehalt (brutto), Art der Anstellung und den AG-Kosten-Faktor ein. Der Faktor ist das, was du als Arbeitgeber zusätzlich zum Brutto zahlst, in der Gastronomie meist zwischen 1,21 und 1,30. Daraus rechnet die Datenbank die Arbeitgeberkosten im Monat und den Stundensatz.</p>'+T.note('Löhne gehen nur dich etwas an. Wer im Team Zugriff auf die Vorlage bekommt, sollte diese Datenbank nicht sehen. Wie du Bereiche voneinander trennst, steht in der Lektion Multistandort.')}
+      ] },
+    s3:{ h:'Wie viel Miete <span class="g">steckt im Teller</span>?', lead:'Im Gericht kommen zwei Zahlen an: der Gemeinkostenanteil pro Produkt und die Personalkosten für die Minuten, die das Gericht braucht.', kind:null, extra:['tsgkflow'] },
+    errs:[
+      {t:'Bruttobeträge bei den Gemeinkosten',folge:'Die Mehrwertsteuer holst du dir als Vorsteuer zurück. Trägst du sie mit ein, wirkt jedes Gericht teurer, als es ist.',fix:'Immer Betrag netto.'},
+      {t:'Position ohne Monat im Namen',folge:'Beim Zusammenfassen verknüpfst du leicht Posten aus dem falschen Monat, und die Monatssumme stimmt nicht.',fix:'Jede Position beginnt mit Monat und Jahr, zum Beispiel 02.26 Strom.'},
+      {t:'Absatz zu optimistisch',folge:'Doppelt so viele Teller halbieren den Anteil pro Produkt. Auf dem Papier sieht dann jedes Gericht besser aus, als es ist.',fix:'Absatz aus dem Kassensystem nehmen, Schätzungen lieber vorsichtig.'},
+      {t:'AG-Kosten-Faktor vergessen',folge:'Ohne Faktor bleibt der Stundensatz leer, und deine Gerichte rechnen mit null Personalkosten.',fix:'Bei jedem Mitarbeiter den Faktor setzen, meist zwischen 1,21 und 1,30.'}
+    ],
+    hide:['block-39cb9546553480c985b4d57ad44c02b7'],
+    subs:{ 'tsshop--db6_gemeinkosten':shopSub('DB VI','der Euro'), 'tsshop--db6_gemeinkostenannahmen':shopSub('DB VII','der Euro'), 'tsshop--db7_mitarbeiterloehne':shopSub('DB VIII','das Nettogehalt') },
+    learn:['Jede laufende Kostenposition steht mit Monat und Nettobetrag in DB VI.','Monatskosten geteilt durch den Absatz ergeben den Gemeinkostenanteil pro Produkt.','Aus Bruttogehalt und AG-Kosten-Faktor wird der echte Stundensatz.','Gemeinkosten und Personalkosten machen aus dem Deckungsbeitrag I die Stufen II und III.'] }
+
+  ,
+
+  /* ===================== DB IX–X · Allergene & Packaging ===================== */
+  { key:'alg', re:/\/allergene-bersicht\/?$/,
+    after:'#tsalg',
+    s1:{ h:'Kennzeichnung <span class="g">und Verpackung</span>.', html:'' },
+    before:'#tsalgcart',
+    s2:{ lead:'Allergene wählst du an der Zutat aus, Verpackung legst du einmal mit Preis an und schnürst sie zu Paketen.',
+      steps:[
+        {eb:'DB IX',t:'Allergene an der Grundzutat auswählen',html:'<p>Die vierzehn kennzeichnungspflichtigen Allergene sind in deiner Vorlage schon angelegt. Du wählst sie nur noch aus: in jeder Grundzutat unter Allergene ( ausfüllen ). Die Angaben stehen auf der Verpackung, im Datenblatt oder auf der Website des Herstellers. Rezepturen und Gerichte sammeln sie von dort selbst ein.</p>'},
+        {eb:'Mit Notion AI',t:'Vorschläge holen, selbst entscheiden',html:'<p>Bei vielen Zutaten kann Notion AI dir einen ersten Vorschlag machen. Lass sie aber nichts eintragen, bevor du die Liste geprüft hast.</p>'+
+          T.prompt('Prompt · Notion AI','Gehe alle Einträge in DB IV : Zutaten durch, bei denen Hauptzutat auf X steht und Allergene ( ausfüllen ) leer ist.\nSchlage für jede Zutat die enthaltenen Allergene aus den vierzehn vorhandenen Optionen vor.\nSchreib mir die Vorschläge als Liste mit Zutat und Allergenen. Trage noch nichts ein.')+
+          T.note('Allergene sind Pflichtangaben. Notion AI macht einen Vorschlag, entschieden wird nach dem Datenblatt des Herstellers. Erst danach schreibst du: „Trage die Allergene so ein, wie in der Liste geprüft.“')},
+        {eb:'Inventur',t:'Verpackung wie Ware einkaufen',html:'<p>Bowl, Deckel, Serviette und Besteckset kaufst du ein wie Lebensmittel, deshalb stehen sie in der Inventurliste, jeweils mit Gebinde und Nettopreis, zum Beispiel '+M('300 Stck')+'. Bei Quartier ( Packaging ) wählst du, ob sie zum Foodquartier, zum Drinksquartier oder zur Operations Area gehören.</p>'},
+        {eb:'DB X',t:'Pakete schnüren',html:'<p>In DB X : Packaging fasst du zusammen, was zu einem Außer-Haus-Gericht gehört, zum Beispiel <b>Bowl To Go</b> mit Bowl, Deckel, Serviette und Besteckset. Das Paket kennt seinen Preis und hängt sich wie ein Baustein an das Gericht.</p>'}
+      ] },
+    s3:{ h:'Was steht <span class="g">auf der Karte</span>?', lead:'Du pflegst Allergene an der Zutat. Das Gericht zeigt am Ende alle, die in seinen Zutaten und Rezepturen stecken, und rechnet das Packaging in den Wareneinsatz.', kind:'alg' },
+    errs:[
+      {t:'Allergene nach Gefühl',folge:'Kennzeichnung ist Pflicht, und eine falsche Angabe kann einem Gast schaden.',fix:'Immer nach Herstellerangabe. Auch der Vorschlag von Notion AI wird gegen das Datenblatt geprüft.'},
+      {t:'Nur die Grundzutat geändert',folge:'Jede Portion hat ihre eigene Allergen-Auswahl. Änderst du später nur die Grundzutat, stehen in den Portionen noch die alten Angaben.',fix:'Bei einer Änderung Grundzutat und alle Portionen anpassen. In den Zutaten findest du sie über den Namen.'},
+      {t:'Neues Produkt, alte Angaben',folge:'Der Lieferant tauscht die Mayonnaise gegen eine mit Senf. In deinem System steht noch die alte Kennzeichnung.',fix:'Bei jedem Produktwechsel das Datenblatt prüfen und die Allergene der Zutat nachziehen.'},
+      {t:'Verpackung ohne Preis',folge:'Steht die Bowl nicht mit Preis in der Inventurliste, kostet das Paket nichts, und Außer-Haus sieht besser aus, als es ist.',fix:'Jeden Verpackungsartikel mit Gebinde und Nettopreis in die Inventurliste.'}
+    ],
+    hide:[],
+    subs:{ 'tsshop--db10_packaging':shopSub('DB X','der Preis pro Unit in Euro') },
+    learn:['Allergene pflegst du an der Zutat, Rezepturen und Gerichte sammeln sie selbst ein.','Notion AI darf vorschlagen, entschieden wird nach dem Datenblatt.','Verpackung steht mit Preis in der Inventurliste und wird in DB X zu Paketen geschnürt.','Ein Paket hängt am Gericht und fließt in den Wareneinsatz für Außer-Haus.'] },
+
+  /* ===================== DB XI · Gerichte & Getraenke ===================== */
+  { key:'ger', re:/\/gerichte-getrnke-finaler-schritt\/?$/,
+    after:'#ts8intro > .ts-body',
+    s1:{ h:'Hier läuft <span class="g">alles zusammen</span>.', html:'' },
+    before:'#tstarget',
+    s2:{ lead:'Ein Gericht ist keine neue Eingabe. Du stellst es aus Bausteinen zusammen, die schon da sind, und ergänzt vier Angaben.',
+      steps:[
+        {eb:'Bausteine',t:'Gericht anlegen und Bausteine verknüpfen',html:'<p>Leg das Gericht mit Namen und Kategorie an, zum Beispiel <b>Thai Peanut Tofu Bowl</b> unter Lunch. Unter Zutaten verknüpfst du die Portionen, die auf den Teller kommen, unter Produkte Inhouse Production deine Rezepturen, etwa die Erdnusssauce. Für Außer-Haus hängst du unter Packaging das passende Paket an.</p>'},
+        {eb:'Preis',t:'Verkaufspreis netto eintragen',html:'<p>In Verkaufspreis ( Eur ) gehört dein Kartenpreis ohne Mehrwertsteuer. Teil den Preis von der Karte durch 1,07 oder 1,19, je nachdem, welcher Steuersatz für das Gericht gilt.</p>'},
+        {eb:'Personal',t:'Zubereitungszeit und Mitarbeiter',html:'<p>Zubereitungszeit ( min ) ist die Zeit, die das Gericht am Pass wirklich braucht, ohne das Vorbereiten der Rezepturen. Unter 👤 Mitarbeiter wählst du, wer es zubereitet. Aus Stundensatz und Minuten rechnet das Gericht seine Personalkosten.</p>'},
+        {eb:'Gemeinkosten',t:'Den Monat verknüpfen',html:'<p>Unter GK Monat für DB III wählst du den Monat aus deinen Gemeinkostenannahmen. Daraus holt sich das Gericht seinen Gemeinkostenanteil.</p>'},
+        {eb:'Neue Gerichte',t:'Preis prüfen statt raten',html:'<p>Neue Gerichte rechnest du rückwärts. Die Vorlage zeigt dir, welcher Verkaufspreis bei 10, 15, 20, 25 oder 30 Prozent Wareneinsatz herauskäme. In '+K('Eingeben : VK Wunschpreis')+' tippst du einen Preis ein und siehst sofort, welchen Wareneinsatz er ergibt.</p>'}
+      ] },
+    s3:{ h:'Was am Ende <span class="g">pro Teller bleibt</span>.', lead:'Aus den Bausteinen kennt das Gericht seinen Wareneinsatz. Mit Gemeinkosten und Personalkosten rechnet es die drei Deckungsbeiträge.', kind:'ger', extra:['tstarget'] },
+    s5After:'#tswave',
+    errs:[
+      {t:'Bruttopreis als Verkaufspreis',folge:'Mit Mehrwertsteuer im Verkaufspreis sinkt der Wareneinsatz in Prozent, und jeder Deckungsbeitrag wirkt höher, als er ist.',fix:'Verkaufspreis ( Eur ) immer netto.'},
+      {t:'Kein Monat verknüpft',folge:'Ohne GK Monat für DB III bleibt der Gemeinkostenanteil leer. DB II ist dann genauso hoch wie DB I.',fix:'Jedes Gericht mit dem aktuellen Monat aus den Gemeinkostenannahmen verknüpfen.'},
+      {t:'Kein Mitarbeiter gewählt',folge:'Ohne Mitarbeiter gibt es keinen Stundensatz, und das Gericht rechnet ohne Personalkosten.',fix:'Bei jedem Gericht festlegen, wer es zubereitet, und die Minuten eintragen.'},
+      {t:'Grundzutat statt Portion',folge:'Hängt die Zutat 1 kg Lachs am Gericht statt 140 g Lachs, steht im Wareneinsatz der Preis für das ganze Kilo.',fix:'Ins Gericht kommen nur Portionen in der Tellermenge.'}
+    ],
+    textFix:[[/die du in diesem Kurs aufgebaut hast/g,'die du in deiner Vorlage füllst']],
+    hideSel:['.page__gerichte-getrnke-finaler-schritt .notion-root > [id^="block-"]:not(#ts-next-wrap)','.page__gerichte-getrnke-finaler-schritt .notion-root > .notion-bulleted-list'],
+    subs:{ 'tsshop--db8_gerichte':shopSub('DB XI','die Kosten pro Gericht, Getränk oder Dessert') },
+    learnNew:['Ein Gericht entsteht aus Portionen, Rezepturen und Packaging, nicht aus neuen Eingaben.','Du ergänzt Verkaufspreis netto, Zubereitungszeit, Mitarbeiter und Monat.','Das Gericht rechnet Wareneinsatz und die Deckungsbeiträge I bis III selbst.','Neue Preise prüfst du über den Wunschpreis und die Vorschläge bei 10 bis 30 Prozent.'] }
+
+  ];
+  window.__tsn2dbPages=PAGES;
+
+  /* ---------- Bausteine ---------- */
+  var IDS=function(k){ return {intro:'tsn2-'+k+'-intro', way:'tsn2-'+k+'-way', s1:'tsn2-'+k+'-s1', s1b:'tsn2-'+k+'-s1b', s2:'tsn2-'+k+'-s2', s3:'tsn2-'+k+'-s3', s4:'tsn2-'+k+'-s4', s5:'tsn2-'+k+'-s5'}; };
+
+  function build(cfg){
+    var id=IDS(cfg.key), out={};
+    out.way=T.make(id.way,'tsn2-way',T.wayHTML([id.s1,id.s2,id.s3,id.s4,id.s5]));
+    if(cfg.s1.intro) out.intro=T.make(id.intro,'tsn2-body',cfg.s1.intro);
+    out.s1=T.make(id.s1,'tsn2-sec narrow',T.head('01','Wofür',cfg.s1.h,'')+(cfg.s1.html?'<div class="tsn2-txt">'+cfg.s1.html+'</div>':''));
+    if(cfg.s1.after) out.s1b=T.make(id.s1b,'tsn2-body',cfg.s1.after);
+    out.s2=T.make(id.s2,'tsn2-sec',T.head('02','Deine Daten eintragen','Deine Zahlen <span class="g">in der Vorlage</span>.',cfg.s2.lead)+T.steps(cfg.s2.steps)+(cfg.s2.after?'<div style="max-width:900px;margin:0 auto">'+T.note(cfg.s2.after)+'</div>':''));
+    out.s3=T.make(id.s3,'tsn2-sec',T.head('03','Was das System rechnet',cfg.s3.h,cfg.s3.lead)+'<div class="tsn2-s3-slot"></div>');
+    var slot=out.s3.querySelector('.tsn2-s3-slot');
+    if(window.__tsn2res && cfg.s3.kind){ slot.appendChild(window.__tsn2res(id.s3+'-card', cfg.s3.kind)); }
+    out.s4=T.make(id.s4,'tsn2-hood','<div class="tsn2-hood-line"></div><div class="tsn2-kick"><i>04</i>So ist es gebaut</div>');
+    out.s5=T.make(id.s5,'tsn2-sec',T.head('05','Typische Fehler','Was beim Eintragen <span class="g">schiefgeht</span>.','Die vier Fehler, die mir in Betrieben am häufigsten begegnen, und wie du sie vermeidest.')+T.errors(cfg.errs));
+    Object.keys(out).forEach(function(k){ T.wireReveal(out[k]); });
+    return out;
+  }
+
+  function placeAfter(node, ref){ if(ref.nextSibling!==node) ref.parentNode.insertBefore(node, ref.nextSibling); }
+  function placeBefore(node, ref){ if(ref.previousSibling!==node) ref.parentNode.insertBefore(node, ref); }
+
+  var built={};
+  function apply(cfg){
+    var id=IDS(cfg.key);
+    var top=document.querySelector(cfg.after||cfg.introBefore), anchor=document.querySelector(cfg.before), tsl=document.getElementById('tsl');
+    if(!top||!anchor) return;
+    var el=built[cfg.key];
+    if(!el || !document.getElementById(id.s2)){ el=built[cfg.key]=build(cfg); }
+    /* 01 Wegweiser + Wofür vor dem Einstieg */
+    if(el.intro){ placeBefore(el.intro, top); placeAfter(el.way, el.intro); }
+    else placeAfter(el.way, top);
+    placeAfter(el.s1, el.way);
+    if(el.s1b){ var aa=cfg.s1.afterAnchor?document.querySelector(cfg.s1.afterAnchor):el.s1; if(aa) placeAfter(el.s1b, aa); }
+    /* 02 / 03 / 04 vor dem Warenkorb */
+    placeBefore(el.s2, anchor);
+    var cur=el.s2;
+    (cfg.moveUp||[]).forEach(function(mid){ var n=document.getElementById(mid); if(n){ placeAfter(n, cur); cur=n; } });
+    placeAfter(el.s3, cur); cur=el.s3;
+    (cfg.s3.extra||[]).forEach(function(mid){ var n=document.getElementById(mid); if(n){ placeAfter(n, cur); cur=n; } });
+    placeAfter(el.s4, cur);
+    /* 05 vor den Learnings */
+    if(tsl) placeBefore(el.s5, tsl);
+    else if(cfg.s5After){ var s5a=document.querySelector(cfg.s5After); if(s5a){ placeAfter(el.s5, s5a);
+      if(cfg.learnNew && window.__tsn2learn){ var la=document.getElementById(id.s5+'-la'); if(!la){ la=document.createElement('div'); la.id=id.s5+'-la'; } placeAfter(la, el.s5);
+        if(!document.getElementById(id.s5+'-learn')) window.__tsn2learn({id:id.s5+'-learn', anchorId:id.s5+'-la', learn:cfg.learnNew, noNext:true}); } } }
+    /* Bau-Anweisungen ausblenden */
+    hideCSS(cfg);
+    /* Warenkorb-Untertitel + Titel */
+    Object.keys(cfg.subs||{}).forEach(function(sid){ var s=document.getElementById(sid); if(!s) return; var sub=s.querySelector('.tss-sub'); if(sub && sub.getAttribute('data-tsn2')!=='1'){ sub.innerHTML=cfg.subs[sid]; sub.setAttribute('data-tsn2','1'); } });
+    Object.keys(cfg.shopTitle||{}).forEach(function(sid){ var s=document.getElementById(sid); if(!s) return; var h=s.querySelector('.tss-title'); if(h && h.getAttribute('data-tsn2')!=='1'){ h.innerHTML=cfg.shopTitle[sid]; h.setAttribute('data-tsn2','1'); } });
+    /* Learnings */
+    if(tsl && cfg.learn){ var ts=tsl.querySelectorAll('.tsl-t'); if(ts.length && tsl.getAttribute('data-tsn2')!=='1'){ for(var i=0;i<ts.length;i++){ if(cfg.learn[i]) ts[i].textContent=cfg.learn[i]; }
+        if(ts.length<cfg.learn.length){ /* fehlende Orbs nicht erfinden: nur vorhandene ueberschreiben */ }
+        tsl.setAttribute('data-tsn2','1'); } }
+    /* Textkorrekturen in eigenen Bausteinen der Seite */
+    if(fixDue()){ if(cfg.textFix) fixText(document.querySelector('.super-content'), cfg.textFix); fixShops(); }
+  }
+
+  function hideCSS(cfg){
+    var sels=[]; if(cfg){ (cfg.hide||[]).forEach(function(h){ sels.push('#'+h); }); (cfg.hideSel||[]).forEach(function(h){ sels.push(h); }); }
+    var st=document.getElementById('tsn2-hide-css'), want=sels.length?sels.join(',')+'{display:none!important}':'';
+    if(!want){ if(st) st.parentNode.removeChild(st); return; }
+    if(!st){ st=document.createElement('style'); st.id='tsn2-hide-css'; document.head.appendChild(st); }
+    if(st.textContent!==want) st.textContent=want;
+  }
+
+  /* Warenkorb-Sprache: von „leg an" auf „so ist es gebaut" */
+  var SHOP_FIX=[
+    [/(?:Du trägst hier diese Formel ein|Du trägst diese Formel ein|Trage hier diese Formel ein|Trage diese Formel ein)\s*:?/g,'Diese Formel steckt dahinter:'],
+    [/(?:Du trägst diese Auswahlmöglichkeiten ein|Trage diese Auswahlmöglichkeiten ein|Trage diese Auswahlmöglichkeit ein)\s*:?/g,'Diese Auswahlmöglichkeiten sind angelegt:'],
+    [/Wechselseitige Verbindungen hinzufügen\.?|Wechselseitige Verbindung hinzufügen\.?|Wechselseitige Verknüpfung hinzufügen\.?/g,'wechselseitig verknüpft.'],
+    [/wechselseitige Verbindung aktivieren/g,'wechselseitig verknüpft'],
+    [/^(\s*\d+\.\s*)Button anlegen/,'$1Zurück-Button'],
+    [/^(\s*\d+\.\s*)Datenbank anlegen/,'$1Die Datenbank'],
+    [/Diese Spalte legst du NICHT selbst an/g,'Diese Spalte entsteht von selbst']
+  ];
+  function fixText(root, rules){
+    if(!root) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list=[];
+    while((n=w.nextNode())) list.push(n);
+    list.forEach(function(t){ var v=t.nodeValue, o=v; rules.forEach(function(r){ v=v.replace(r[0], r[1]); }); if(v!==o) t.nodeValue=v; });
+  }
+  var __fixT0=Date.now(), __fixLast=0, __fixOv=null, __fixP=location.pathname;
+  function fixDue(){ var now=Date.now(); if(location.pathname!==__fixP){ __fixP=location.pathname; __fixT0=now; __fixLast=0; } var ov=document.getElementById('tsshop-detail'); if(ov && ov!==__fixOv){ __fixOv=ov; __fixLast=now; return true; } if(now-__fixT0>25000) return false; if(now-__fixLast<1500) return false; __fixLast=now; return true; }
+  function fixShops(){
+    var roots=document.querySelectorAll('[id^="tsshop--"],#tsshop-detail');
+    Array.prototype.forEach.call(roots,function(r){ fixText(r, SHOP_FIX); });
+  }
+
+  function sweep(){
+    var cfg=null; for(var i=0;i<PAGES.length;i++){ if(PAGES[i].re.test(location.pathname)){ cfg=PAGES[i]; break; } }
+    /* Fremdseiten: eigene Elemente entfernen */
+    PAGES.forEach(function(p){ if(p===cfg) return; var id=IDS(p.key); Object.keys(id).forEach(function(k){ var e=document.getElementById(id[k]); if(e&&e.parentNode) e.parentNode.removeChild(e); }); ['-la','-learn'].forEach(function(x){ var e=document.getElementById(id.s5+x); if(e&&e.parentNode) e.parentNode.removeChild(e); }); built[p.key]=null; });
+    if(!cfg){ hideCSS(null); return; }
+    T.css(); hideCSS(cfg); apply(cfg);
+  }
+  sweep();
+  document.addEventListener('DOMContentLoaded', sweep);
+  window.__tsMO(sweep).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* ============================================================
+   NEUBAU MODUL 2 · Interface-, Kennzahlen-, Operations- und Vision-Lektionen
+   Grundsatz A sinngemäß: Nutzen und tägliche Arbeit mit der Vorlage zuerst,
+   Aufbau danach („So ist es gebaut"). Bau-Sprache wird auf Vorlage umgestellt.
+   Dazu zwei fast leere Seiten neu: Dynamisches System, Allgemeine Tipps.
+   ============================================================ */
+(function(){
+  if(window.__tsn2use) return; window.__tsn2use=true;
+  var T=window.__tsn2;
+  function P(h){ return '<p class="tsn2-p">'+h+'</p>'; }
+  function K(t){ return '<span class="tsn2-path">'+t+'</span>'; }
+  function cap(f){ return function(m,a){ return m.replace(a, a.toUpperCase()); }; }
+  var CARE='Klick eine Karte auf, um zu sehen, was die Spalte macht, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. ';
+  var GLOBAL_FIX=[
+    [/Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — (\w)/g, function(m,a){ return CARE+a.toUpperCase(); }],
+    [/Wie bei den anderen Datenbanken bauen wir zuerst den Rahmen: /g,'In deiner Vorlage steht der Rahmen schon. So ist er gebaut: ']
+  ];
+
+  var PAGES=[
+  { key:'ifc', re:/\/interface-bau-grundstruktur-widgets\/?$/, before:'#tsIface',
+    h:'Deine Startseite, <span class="g">jeden Morgen</span>.', lead:'Das Interface ist der Teil deiner Vorlage, den du jeden Tag siehst. Von hier aus erreichst du jeden Bereich mit einem Klick.',
+    cards:[
+      {eb:'Täglich',nm:'Von der Startseite in jeden Bereich',html:P('Leg die Startseite deiner Vorlage als Favorit ab. Von dort gehst du ins Foodquartier, in die Operations Area oder zu den Key Metrics, ohne in der Seitenleiste zu suchen.')},
+      {eb:'Einmal',nm:'Zuerst deinen Betrieb eintragen',html:P('Tausch Logo, Cover und Namen gegen deine eigenen. Widgets wie Uhr und Wetter sind eingebettete Seiten: Stell sie auf deinen Ort um oder ersetze sie durch eigene.')},
+      {eb:'Nach und nach',nm:'Bilder für deine Gerichte',html:P('Jede Zutat und jedes Gericht hat einen Platz für ein Titelbild. Wie du einheitliche Cover erstellst und welche Werkzeuge dafür taugen, zeige ich dir weiter unten.')}
+    ],
+    fix:[
+      [/Bis hierhin haben wir das Fundament gebaut: /g,'Bis hierhin hast du das Fundament kennengelernt: '],
+      [/Genau das bauen wir jetzt\./g,'Genau darum geht es jetzt.'],
+      [/Bevor du das Video startest, öffne Notion und leg die Seite an, auf der dein Interface später entsteht\./g,'Bevor du das Video startest, öffne die Startseite deiner Vorlage. Dort siehst du das Interface, um das es geht.'],
+      [/nur abonnieren, solange du baust/g,'nur abonnieren, solange du Bilder erstellst'],
+      [/In dieser Phase schließt du die Abos ab, baust dein persönliches Backoffice einmal komplett auf und erstellst alles Material, das deinem aktuellen Bedarf entspricht — danach kündigst du wieder\./g,'In dieser Phase schließt du die Abos ab, gestaltest deine Vorlage einmal komplett und erstellst alles Bildmaterial, das du gerade brauchst. Danach kündigst du wieder.'],
+      [/in 4 Wochen einmal alles bauen/g,'in 4 Wochen einmal alles gestalten'],
+      [/die sich in der Bauphase auszahlen/g,'die sich beim Gestalten auszahlen']
+    ] },
+
+  { key:'fdq', re:/\/food-drinksquartier-inhalte-interface\/?$/, before:'#tsfdq',
+    h:'Am Pass <span class="g">und im Einkauf</span>.', lead:'In den beiden Quartieren arbeitest du, wenn es um Produkte geht. Drei Momente, in denen du sie öffnest.',
+    cards:[
+      {eb:'Service',nm:'Ein Gast fragt nach Allergenen',html:P('Im Quartier öffnest du das Gericht und siehst alle Allergene aus seinen Zutaten und Rezepturen. Keine Liste im Ordner, kein Nachfragen in der Küche.')},
+      {eb:'Karte',nm:'Welches Gericht verdient Geld',html:P('Die Wareneinsätze stehen im Vergleich nebeneinander. Bevor du die Karte änderst, siehst du, welches Gericht dich trägt und welches dich Geld kostet.')},
+      {eb:'Neues Gericht',nm:'Rezepte-Check vor dem Probekochen',html:P('Mit dem Rezepte-Check spielst du ein neues Gericht mit vorhandenen oder neuen Zutaten durch, bevor es auf die Karte kommt.')}
+    ],
+    fix:[
+      [/Deshalb bauen wir aus den Quartieren eine Oberfläche, die sich anfühlt wie eine App/g,'Deshalb sind die Quartiere in deiner Vorlage als Oberfläche angelegt, die sich anfühlt wie eine App'],
+      [/In den nächsten Schritten baust du dieses Interface Stück für Stück selbst zusammen\./g,'Weiter unten siehst du Stück für Stück, wie dieses Interface zusammengesetzt ist, falls du es anpassen willst.']
+    ] },
+
+  { key:'mk', re:/\/menkalkulation-catering-rechner\/?$/, before:'#ts11page',
+    h:'Eine Anfrage, <span class="g">ein Angebot</span>.', lead:'So gehst du vor, wenn eine Anfrage reinkommt. Alles Weitere rechnet die Vorlage aus deinen Gerichten.',
+    steps:[
+      {eb:'Kunde',t:'Kunden anlegen',html:'<p>In der Kunden Master Database legst du den Auftraggeber mit Ansprechpartner und Anlass an, zum Beispiel eine Firmenfeier mit 60 Gästen.</p>'},
+      {eb:'Menü',t:'Menü aus deinen Gerichten zusammenstellen',html:'<p>Im Menürechner wählst du die Gerichte, die auf das Menü sollen. Ihre Kosten kommen direkt aus deinen Gerichten, mit Wareneinsatz und Portionen.</p>'},
+      {eb:'Angebot',t:'Preis pro Person ablesen und anbieten',html:'<p>Die Kostenaufstellung zieht Menü, Personal und Gemeinkosten zusammen und zeigt dir den Stückpreis. Im Angebot passt du Personenzahl und Aufschlag an und schickst den Preis raus.</p>'}
+    ],
+    fix:[
+      [/Genau diese Kette baust du in dieser Lektion zu Ende: /g,'Genau diese Kette läuft in dieser Lektion zu Ende: '],
+      [/Jede baust du als eigenen Warenkorb, jede Eigenschaft wird eine Karte\./g,'Jede liegt unten als eigener Warenkorb, jede Spalte als Karte.']
+    ] },
+
+  { key:'km', re:/\/key-metrics\/?$/, before:'#tskm', moveUp:['tskmemp'],
+    h:'Einmal im Monat <span class="g">alle Zahlen</span>.', lead:'Key Metrics ist der Bereich, in dem du nicht täglich arbeitest, sondern einmal im Monat hinschaust. Dafür reicht eine feste halbe Stunde.',
+    cards:[
+      {eb:'Eintragen',nm:'Die Zahlen des Monats',html:P('Umsatz aus der Kasse, Umsätze von Lieferando oder Uber Eats, Personalkosten und deine Google-Bewertungen trägst du in eine Zeile für den Monat ein.')},
+      {eb:'Lesen',nm:'Was sich verändert hat',html:P('Wichtiger als die einzelne Zahl ist der Verlauf. Steigen die Personalkosten schneller als der Umsatz, siehst du es hier Monate früher als beim Steuerberater.')},
+      {eb:'Handeln',nm:'Eine Sache ändern',html:P('Such dir jeden Monat einen Ausreißer und frag dich, woher er kommt. Die Antwort liegt meistens in einem der Quartiere.')}
+    ],
+    fix:[
+      [/Leg jetzt in Notion eine leere Seite an und nenn sie Kostenauswertung Master — genau so geschrieben, den Namen brauchst du später wieder\./g,'Öffne in deiner Vorlage die Seite Kostenauswertung Master. Dort trägst du ab jetzt einmal im Monat deine Zahlen ein.'],
+      [/Alles Weitere bauen wir gemeinsam: Direkt unter diesem Abschnitt entsteht deine Datenbank Karte für Karte, und mit der ersten Spalte geht es gleich weiter\./g,'Wie sie gebaut ist, siehst du direkt unter diesem Abschnitt, Karte für Karte.'],
+      [/Du hast die Kostenauswertung Master gebaut — jeder Monat eine Zeile mit allen Kennzahlen\./g,'Die Kostenauswertung Master hält jeden Monat in einer Zeile mit allen Kennzahlen.']
+    ] },
+
+  { key:'ops', re:/\/operations-area\/?$/, before:'#tsops',
+    h:'Eine Schicht, <span class="g">ein Ort</span>.', lead:'Hier steht alles, was ein Betrieb an Ordnung braucht, damit er auch ohne dich läuft. So sieht ein Tag damit aus.',
+    steps:[
+      {eb:'Schichtstart',t:'Checkliste auf dem Tablet',html:'<p>Das Team öffnet die Checkliste für den Schichtstart auf dem iPad an der Wand und hakt ab: Kühlung, Temperaturen, Kasse, Hygiene. Du siehst später, wer wann was erledigt hat.</p>'},
+      {eb:'Lieferung',t:'Ware annehmen und Waste erfassen',html:'<p>Bei der Lieferung gilt die SOP für den Wareneingang. Was im Lauf des Tages weggeworfen wird, kommt in die Waste-Erfassung, damit du am Monatsende weißt, wo Geld im Müll landet.</p>'},
+      {eb:'Abschluss',t:'Kasse, Bank und Inventur',html:'<p>Am Abend der Kassenabschluss, einmal die Woche die Bankeinzahlungen, einmal im Monat die Inventur. Kommt die Lebensmittelkontrolle, liegen alle Nachweise an einem Ort.</p>'}
+    ],
+    fix:[] },
+
+  { key:'ms', re:/\/multistandort-erweiterung-optional\/?$/, before:'#tsmsa',
+    h:'Brauchst du <span class="g">diese Lektion</span>?', lead:'Führst du deinen Laden komplett selbst, überspringst du sie. Sobald ein angestellter Manager zählt und bestellt, ohne deine Kalkulation sehen zu sollen, wird sie wichtig, egal ob du einen Standort hast oder fünf.',
+    cards:[
+      {eb:'Überspringen',nm:'Du machst alles selbst',html:P('Dann reicht deine Vorlage, wie sie ist. Niemand außer dir sieht Preise, Löhne und Deckungsbeiträge.')},
+      {eb:'Lesen',nm:'Ein Manager arbeitet mit',html:P('Er braucht Zähllisten, Checklisten und Lieferanten, aber keine Einkaufspreise und keine Gehälter. Dafür trennst du die Vorlage in getrennte Teamspaces.')}
+    ],
+    fix:[ [/Wir bauen die Struktur so, dass Notion sie hält/g,'Die Struktur ist so angelegt, dass Notion sie hält'] ] },
+
+  { key:'vf', re:/\/vision-frame-abschluss-des-building-prozesses\/?$/, before:'#tsvf',
+    h:'Wofür du ihn <span class="g">wirklich brauchst</span>.', lead:'Der Vision Frame ist keine Tabelle für Zahlen. Er hält fest, wofür dein Betrieb steht, und genau das brauchst du öfter, als man denkt.',
+    cards:[
+      {eb:'Team',nm:'Ein neuer Mitarbeiter fängt an',html:P('Werte, Teamkultur und Markenidentität stehen an einem Ort. Neue Leute lesen am ersten Tag, wie ihr arbeitet, statt es über Wochen nebenbei aufzuschnappen.')},
+      {eb:'Partner',nm:'Eine Agentur oder ein Designer fragt',html:P('Logo, Farben, Ton und Zielgruppen gibst du als Link weiter. Alle arbeiten mit derselben Grundlage.')},
+      {eb:'Wachstum',nm:'Ein zweiter Standort, ein Catering',html:P('Standortanalyse, Konkurrenz und Expansion denkst du hier durch, bevor Geld fließt.')}
+    ],
+    fix:[ [/Der Abschluss des Building-Prozesses — (\w)/g, function(m,a){ return a.toUpperCase(); }] ] },
+
+  { key:'nai', re:/\/notion-ai-fr-unser-system\/?$/, before:'#tsnaiq', moveUp:['tsnaiemp'],
+    h:'Notion AI <span class="g">in deiner Woche</span>.', lead:'Drei Situationen, in denen Notion AI dir in der Vorlage Arbeit abnimmt. Für alles, was dauerhaft und automatisch laufen soll, gibt es Modul 4.',
+    cards:[
+      {eb:'Eintragen',nm:'Ein neuer Lieferschein kommt',html:P('PDF anhängen, Datenbank als Bezug wählen, die Positionen landen in der Inventurliste. Die Prompts dafür stehen in den Datenbank-Lektionen.')},
+      {eb:'Fragen',nm:'Was kostet mich der Basmati-Ausfall',html:P('Du fragst auf der Seite des Gerichts, was sich am Wareneinsatz ändert, wenn du Sushi-Reis statt Basmati nimmst. Die Antwort kommt aus deinen eigenen Zahlen.')},
+      {eb:'Prüfen',nm:'Wo fehlen noch Angaben',html:P('Frag nach Zutaten ohne Allergene oder Gerichten ohne Verkaufspreis. So findest du Lücken, bevor sie in der Kalkulation auffallen.')}
+    ],
+    fix:[] }
+  ];
+
+  /* Nur Textkorrekturen (Notion-Text, der erst nach einem super.so-Abgleich änderbar wäre) */
+  var TXT=[
+  { re:/\/mehrwert-zielbild\/?$/, fix:[
+      [/Ab hier bauen wir dein eigenes Notion AI Backoffice System, Schritt für Schritt\./g,'Ab hier arbeitest du mit deinem eigenen Notion AI Backoffice System.'],
+      [/Bevor wir die erste Datenbank anlegen, gehen wir einmal durch/g,'Bevor du die erste Datenbank öffnest, gehen wir einmal durch'],
+      [/Ich möchte Sie dir im folgenden gerne einmal vorstellen\./g,'Ich stelle sie dir im Folgenden vor.'],
+      [/Geimeinkosten/g,'Gemeinkosten'],
+      [/Wir bauen es nicht auf einmal, sondern in sieben klaren Schritten, und nach jedem Schritt hast du etwas Fertiges in der Hand\./g,'Du füllst es in sieben klaren Schritten, und nach jedem Schritt rechnet ein Teil mehr für dich.'],
+      [/Wir bauen es nicht auf einmal, sondern in sieben klaren Schritten/g,'Du füllst es in sieben klaren Schritten'],
+      [/Der Core des Systems : /g,'Der Kern des Systems: ']
+  ] }
+  ];
+  function build(cfg){
+    var a=T.make('tsn2-'+cfg.key+'-alltag','tsn2-sec',T.head('','Im Alltag',cfg.h,cfg.lead)+(cfg.cards?T.cards(cfg.cards.length===2?'c2':'c3',cfg.cards):T.steps(cfg.steps)));
+    var b=T.make('tsn2-'+cfg.key+'-hood','tsn2-hood','<div class="tsn2-hood-line"></div>'+T.head('','So ist es gebaut','Was <span class="g">dahintersteckt</span>.','Alles ab hier steckt fertig in deiner Vorlage. Lies es, wenn du verstehen willst, wie der Bereich funktioniert, oder wenn du ihn erweitern möchtest.'));
+    T.wireReveal(a); T.wireReveal(b);
+    return {a:a,b:b};
+  }
+  function fixText(root, rules){
+    if(!root) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list=[];
+    while((n=w.nextNode())) list.push(n);
+    list.forEach(function(t){ var v=t.nodeValue, o=v; rules.forEach(function(r){ v=v.replace(r[0], r[1]); }); if(v!==o) t.nodeValue=v; });
+  }
+  var __fixT0=Date.now(), __fixLast=0, __fixOv=null, __fixP=location.pathname;
+  function fixDue(){ var now=Date.now(); if(location.pathname!==__fixP){ __fixP=location.pathname; __fixT0=now; __fixLast=0; } var ov=document.getElementById('tsshop-detail'); if(ov && ov!==__fixOv){ __fixOv=ov; __fixLast=now; return true; } if(now-__fixT0>25000) return false; if(now-__fixLast<1500) return false; __fixLast=now; return true; }
+  var built={};
+  function apply(cfg){
+    var anchor=document.querySelector(cfg.before); if(!anchor) return;
+    var el=built[cfg.key]; if(!el || !document.getElementById('tsn2-'+cfg.key+'-alltag')) el=built[cfg.key]=build(cfg);
+    if(anchor.previousSibling!==el.b){ anchor.parentNode.insertBefore(el.b, anchor); }
+    if(el.b.previousSibling!==el.a){ el.b.parentNode.insertBefore(el.a, el.b); }
+    var cur=el.a;
+    (cfg.moveUp||[]).forEach(function(mid){ var n=document.getElementById(mid); if(n && cur.nextSibling!==n){ cur.parentNode.insertBefore(n, cur.nextSibling); } if(n) cur=n; });
+    if(fixDue()){ fixText(document.querySelector('.super-content'), GLOBAL_FIX.concat(cfg.fix||[])); var det=document.getElementById('tsshop-detail'); if(det) fixText(det, GLOBAL_FIX); }
+  }
+
+  /* ---------- Neue Seiten: Dynamisches System + Allgemeine Tipps ---------- */
+  var FULL=[
+  { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'Lektion 2.16', title:'Dynamisches System', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system',
+    hide:['block-38eb9546553480f88995dbe5a2f41255'],
+    body:'<p class="big">Deine Vorlage rechnet, sobald du etwas einträgst. Lebendig wird sie, wenn manches ohne dich passiert.</p>'+
+      '<p>Dafür gibt es drei Wege, und jeder hat seinen Platz. Hier bekommst du den Überblick, damit du weißt, was wofür taugt. Wie du sie einrichtest, zeige ich dir Schritt für Schritt in Modul 4.</p>',
+    secs:function(){ return T.make('tsn2-dyn-wege','tsn2-sec',T.head('01','Drei Wege','Was ohne dich <span class="g">laufen kann</span>.','Die Faustregel: immer gleich, dann Automation. Mitdenken in Notion, dann Agent. Etwas von außen, dann Claude Code.')+
+        T.cards('c3',[
+          {eb:'Ohne KI',nm:'Notion Automationen',html:P('Auslöser und Aktion, immer gleich. Setzt jemand bei einem Produkt den Status auf „nachbestellen“, entsteht eine Bestellaufgabe. Ein Button startet die Wocheninventur mit einem Klick. Automationen gibt es in den bezahlten Plänen.')},
+          {eb:'In Notion',nm:'Notion Agent',html:P('Ein Agent arbeitet in deinem Workspace, auch wenn dein Rechner aus ist. Er bereitet neue Rezepturen vor oder schaut jede Woche in die Waste-Erfassung. Eigene Agenten mit Zeitplan gibt es im Business-Plan.')},
+          {eb:'Von außen',nm:'Claude Code',html:P('Liegt etwas außerhalb von Notion, zum Beispiel Lieferscheine auf deinem Rechner oder Mails im Postfach, holt Claude Code es ins Backoffice. Dazu kommen Auswertungen über mehrere Datenbanken hinweg.')}
+        ])+
+        '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
+    learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4.'] },
+
+  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Lektion 2.18', title:'Allgemeine Tipps', cover:'TIPPS', next:null,
+    hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
+    body:'<p class="big">Kleine Handgriffe, die den Alltag mit deiner Vorlage leichter machen.</p>',
+    secs:function(){ return T.make('tsn2-tip-liste','tsn2-sec',T.steps([
+        {eb:'Icons',t:'Ein Icon für alle neuen Einträge',html:'<p>Legst du ein neues Produkt an, ist das Icon links neben dem Namen leer. Am saubersten ist ein gemeinsames Icon für die ganze Datenbank: Klick oben rechts auf den Pfeil neben '+K('Neu')+', dann auf '+K('+ Neue Vorlage')+', gib der Vorlage ein Icon und setz sie über die drei Punkte '+K('Als Standard')+'. Willst du gar keine Icons sehen, blendest du sie in den Layout-Einstellungen der Ansicht aus.</p>'},
+        {eb:'Spaltenköpfe',t:'Sehen, was du einträgst und was rechnet',html:'<p>Markier dir in den Spaltennamen, was du selbst pflegst und was das System rechnet, zum Beispiel mit einem Schraubenschlüssel für deine Eingaben und einem Haken für alles Errechnete. Spätestens in den Gerichten mit ihren vielen Spalten weißt du dann auf einen Blick, wo du etwas tun musst.</p>'},
+        {eb:'Erweitern',t:'Neue Datenbanken wie in der Vorlage ablegen',html:'<p>Brauchst du eine Datenbank, die nicht in der Vorlage steckt, legst du sie wie alle anderen auf eine eigene Unterseite mit einem Zurück-Button. So bleibt die Navigation in deinem Backoffice überall gleich.</p>'},
+        {eb:'Sicherheit',t:'Etwas kaputt gemacht? Versionsverlauf',html:'<p>Jede Seite in Notion hat einen Versionsverlauf, über den du einen älteren Stand zurückholst. Im kostenlosen Plan reicht er 7 Tage zurück, in Plus 30 und in Business 90 Tage. Bevor du an Spalten mit Formeln etwas änderst, lohnt sich ein Blick, wie weit dein Plan zurückreicht.</p>'}
+      ])); },
+    learn:['Ein gemeinsames Icon über eine Standard-Vorlage hält deine Datenbanken sauber.','Markierte Spaltenköpfe zeigen dir, wo du etwas einträgst.','Eigene Datenbanken legst du wie in der Vorlage auf eine Unterseite.','Der Versionsverlauf holt dir einen älteren Stand zurück.'] }
+  ];
+
+  var HERO_CSS_ID='tsn2-vorlage-css';
+  function buildFull(cfg){
+    var sc=document.querySelector('.super-content'); if(!sc) return;
+    var nr=sc.querySelector('.notion-root'); if(!nr) return;
+    var hs=[]; (cfg.hide||[]).forEach(function(h){ hs.push('#'+h); }); (cfg.hideSel||[]).forEach(function(h){ hs.push(h); });
+    var st=document.getElementById('tsn2-full-hide'); var want=hs.length?hs.join(',')+'{display:none!important}':'';
+    if(!st){ st=document.createElement('style'); st.id='tsn2-full-hide'; document.head.appendChild(st); } if(st.textContent!==want) st.textContent=want;
+    if(document.getElementById('tsn2-'+cfg.key+'-wrap')) return;
+    T.css();
+    if(!document.getElementById(HERO_CSS_ID) && window.__tsn2heroCSS){ var s=document.createElement('style'); s.id=HERO_CSS_ID; s.textContent=window.__tsn2heroCSS; document.head.appendChild(s); }
+    if(!sc.querySelector('.ts-hero')){
+      var h=document.createElement('div'); h.className='ts-hero tsn2-hero'; h.setAttribute('data-tsn2',cfg.key);
+      h.innerHTML='<img class="ts-hero__img" alt="'+cfg.title+'" src="'+T.phHero(cfg.cover)+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+T.LOGO+'" fetchpriority="high" decoding="async">'+
+        '<div class="ts-hero__eyebrow">'+cfg.eyebrow+'</div><h1 class="ts-hero__title">'+cfg.title+'</h1></div>';
+      sc.insertBefore(h,nr);
+    }
+    var nh=document.querySelector('.notion-header.page'); if(nh) nh.style.display='none';
+    var wrap=document.createElement('div'); wrap.id='tsn2-'+cfg.key+'-wrap';
+    wrap.appendChild(T.make('tsn2-'+cfg.key+'-body','tsn2-body',cfg.body));
+    var sec=cfg.secs(); wrap.appendChild(sec);
+    var la=document.createElement('div'); la.id='tsn2-'+cfg.key+'-la'; wrap.appendChild(la);
+    var hero=sc.querySelector('.ts-hero'); hero.parentNode.insertBefore(wrap, hero.nextSibling);
+    T.wireReveal(sec);
+    if(window.__tsn2learn) window.__tsn2learn({id:'tsn2-'+cfg.key+'-learn', anchorId:la.id, learn:cfg.learn, next:cfg.next||'', noNext:!cfg.next});
+  }
+
+  function sweep(){
+    var p=location.pathname, hit=null, full=null;
+    PAGES.forEach(function(c){ if(c.re.test(p)) hit=c; else { ['alltag','hood'].forEach(function(x){ var e=document.getElementById('tsn2-'+c.key+'-'+x); if(e&&e.parentNode) e.parentNode.removeChild(e); }); built[c.key]=null; } });
+    FULL.forEach(function(c){ if(c.re.test(p)) full=c; else { var w=document.getElementById('tsn2-'+c.key+'-wrap'); if(w&&w.parentNode){ w.parentNode.removeChild(w); var hh=document.querySelector('.tsn2-hero[data-tsn2="'+c.key+'"]'); if(hh&&hh.parentNode) hh.parentNode.removeChild(hh); } } });
+    if(!full){ var st=document.getElementById('tsn2-full-hide'); if(st) st.textContent=''; }
+    if(hit){ T.css(); apply(hit); }
+    TXT.forEach(function(c){ if(c.re.test(p) && fixDue()) fixText(document.querySelector('.super-content'), c.fix); });
+    if(full) buildFull(full);
+  }
+  sweep();
+  document.addEventListener('DOMContentLoaded', sweep);
+  window.__tsMO(sweep).observe(document.documentElement,{childList:true,subtree:true});
+})();
+
+/* NEUBAU MODUL 2 · Modul-Startseite: Einstieg „Lektion 2.0 · Vorlage holen" über dem Kachel-Raster.
+   Breite Karte statt 19. Kachel, damit das 3er-Raster (18 Kacheln) geschlossen bleibt. */
+(function(){
+  if(window.__tsn2start) return; window.__tsn2start=true;
+  var T=window.__tsn2;
+  var RE=/\/modul-2-das-notion-ai-backoffice-system\/?$/;
+  var HREF='/lektionen/vorlage-holen-und-einrichten';
+  var CSS=`
+  #tsn2-start{width:min(1320px,95vw);margin:46px auto 0;padding:0}
+  #tsn2-start a{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(18px,3vw,36px);padding:clamp(22px,3vw,34px) clamp(22px,3.4vw,40px);border-radius:20px;text-decoration:none;color:#fff;overflow:hidden;
+    border:1px solid rgba(199,180,137,.4);background:radial-gradient(80% 140% at 0% 50%,rgba(199,180,137,.14),rgba(199,180,137,0) 60%),linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.01)),#05060b;
+    box-shadow:0 30px 70px -40px rgba(0,0,0,.9);transition:opacity .8s cubic-bezier(.45,0,.55,1),transform .9s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.45,0,.55,1),box-shadow .4s cubic-bezier(.45,0,.55,1)}
+  #tsn2-start.js a{opacity:0;transform:translateY(16px)}
+  #tsn2-start.js.in a{opacity:1;transform:none}
+  #tsn2-start a:hover{border-color:rgba(199,180,137,.7);box-shadow:0 30px 70px -36px rgba(0,0,0,.9),0 0 44px rgba(199,180,137,.18)}
+  #tsn2-start .n{width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:${T.DISP};font-weight:600;font-size:24px;color:#05060b;background:#c7b489;box-shadow:0 0 0 8px rgba(199,180,137,.12)}
+  #tsn2-start .k{display:block;font:600 10.5px/1 ${T.SANS};letter-spacing:.17em;text-transform:uppercase;color:#c7b489;margin:0 0 10px}
+  #tsn2-start .t{display:block;font-family:${T.DISP};font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.15;margin:0 0 8px}
+  #tsn2-start .d{display:block;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);max-width:62ch}
+  #tsn2-start .go{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 24px;border-radius:999px;background:#c7b489;color:#05060b;font:700 14px/1 ${T.SANS};white-space:nowrap;transition:background .3s cubic-bezier(.45,0,.55,1),transform .3s cubic-bezier(.45,0,.55,1)}
+  #tsn2-start a:hover .go{background:#d8c9ab;transform:translateX(2px)}
+  #tsn2-start .go svg{width:16px;height:16px}
+  @media(max-width:760px){ #tsn2-start a{grid-template-columns:1fr} #tsn2-start .n{width:56px;height:56px;font-size:18px} }
+  @media(prefers-reduced-motion:reduce){ #tsn2-start a{opacity:1;transform:none;transition:none} }
+  `;
+  function mount(){
+    var ex=document.getElementById('tsn2-start');
+    if(!RE.test(location.pathname)){ if(ex&&ex.parentNode) ex.parentNode.removeChild(ex); return; }
+    var grid=document.getElementById('tslmod'); if(!grid||!grid.parentNode) return;
+    if(ex){ if(ex.nextSibling!==grid) grid.parentNode.insertBefore(ex, grid); return; }
+    if(!document.getElementById('tsn2-start-css')){ var s=document.createElement('style'); s.id='tsn2-start-css'; s.textContent=CSS; document.head.appendChild(s); }
+    var el=document.createElement('div'); el.id='tsn2-start';
+    el.innerHTML='<a href="'+HREF+'"><span class="n">2.0</span><span><span class="k">Vor dem Start</span><span class="t">Vorlage holen und einrichten</span><span class="d">Dein Backoffice bekommst du als fertige Vorlage. Hol sie dir in deinen Workspace, leg die Rechte für dein Team fest und fang mit einem Gericht an.</span></span>'+
+      '<span class="go">Zur Lektion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
+    grid.parentNode.insertBefore(el, grid);
+    if(T.reduced) el.classList.add('in'); else { el.classList.add('js'); T.reveal(el,function(){ el.classList.add('in'); }); }
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
+})();
 /* <<< NEUBAU MODUL 2 — ENDE <<< */
 /* · */
 /* · */
