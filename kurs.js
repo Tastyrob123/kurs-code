@@ -24555,111 +24555,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   modul-1-notion-grundlagen — Modul-1-Übersichtsseite (Hero + Intro + 8-Lektionen-Kachel-Register)
-   Slug-Erwartung: Notion-Seite "Modul 1 · Notion-Grundlagen" slugifiziert. Bild-Assets als Platzhalter,
-   Muster analog Modul-2-Übersicht (Hero-IIFE ~Z. 3037, Kachel-Register #tslmod ~Z. 11061 ff.), aber
-   eigens für Modul 1 vereinfacht: Text-Kacheln statt Foto-Kacheln, da noch keine Bild-Assets vorliegen.
-   ============================================================ */
-(function(){
-  function phHero(){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="640">'
-      +'<rect width="1400" height="640" fill="#0b0d14"/>'
-      +'<circle cx="700" cy="300" r="260" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="700" cy="300" r="180" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="700" cy="300" r="130" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="700" y="330" text-anchor="middle" font-family="Georgia,serif" font-size="34" letter-spacing="4" fill="rgba(216,201,171,0.75)">M 1</text>'
-      +'<text x="700" y="540" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="22" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="700" y="572" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="13" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero();
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/.test(location.pathname); }
-
-  var LEKTIONEN=[
-    {n:'1.1', t:'Die Notion-Philosophie & Das Canvas-Prinzip', d:'Blöcke statt Dokumente — die Grundhaltung.', href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip'},
-    {n:'1.2', t:'Layout, Medien & Strukturierungs-Tricks', d:'Spalten, Toggles, Embeds, Synced Blocks.', href:'/lektionen/l12-layout-medien-strukturierungs-tricks'},
-    {n:'1.3', t:'Einführung in Datenbanken', d:'Seite vs. Datenbank — deine erste eigene Tabelle.', href:'/lektionen/l13-einfhrung-in-datenbanken'},
-    {n:'1.4', t:'Relationen & Rollups', d:'Zwei Tabellen verknüpfen, Werte über die Verknüpfung ziehen.', href:'/lektionen/l14-relationen-rollups'},
-    {n:'1.5', t:'Formeln 2.0 & Logik-Bausteine', d:'prop(), ifs(), Rollups: Spalten, die sich selbst ausrechnen.', href:'/lektionen/l15-formeln-20-logik-bausteine'},
-    {n:'1.6', t:'Ansichten & Self-Referencing Filter', d:'Ansichten, Filter, Vorlagen, die sich selbst einrichten.', href:'/lektionen/l16-ansichten-self-referencing-filter'},
-    {n:'1.7', t:'Native Automations & Buttons', d:'Buttons und Automatisierungen, die Arbeit abnehmen.', href:'/lektionen/l17-native-automations-buttons'},
-    {n:'1.8', t:'System-Architektur & Dashboard-Design', d:'Alles läuft an einem Ort zusammen.', href:'/lektionen/l18-system-architektur-dashboard-design'}
-  ];
-
-  var CSS = `
-  #ts1mod-intro{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  #ts1mod-intro p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  #ts1mod-intro p:last-child{margin-bottom:0}
-  #ts1mod-intro b{color:#c7b489;font-weight:600}
-  #ts1mod-grid{width:min(1180px,95vw);margin:52px auto 80px;padding:0 clamp(16px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts1mod-grid a.card{display:block;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:22px 20px;text-decoration:none;transition:border-color .35s,transform .35s,box-shadow .35s}
-  #ts1mod-grid a.card:hover{border-color:rgba(199,180,137,.5);transform:translateY(-3px);box-shadow:0 24px 50px -24px rgba(0,0,0,.7),0 0 30px rgba(199,180,137,.14)}
-  #ts1mod-grid .card-n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(199,180,137,.12);border:1px solid rgba(199,180,137,.4);color:#c7b489;font:700 12px/1 -apple-system,sans-serif;margin-bottom:14px}
-  #ts1mod-grid .card-t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:16.5px;color:#fff;margin:0 0 8px;line-height:1.3}
-  #ts1mod-grid .card-d{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.55);margin:0}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts1mod-css')) return;
-    var s=document.createElement('style'); s.id='ts1mod-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mountHero(sc){
-    if(sc.querySelector('.ts-hero')) return;
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">Tasty Studios</div>'+
-        '<h1 class="ts-hero__title"><span class="ts-red">Modul 1</span><br>Notion-Grundlagen</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-  }
-
-  function mountIntro(sc, hero){
-    if(document.getElementById('ts1mod-intro')) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts1mod-intro';
-    wrap.innerHTML='<p>Acht Lektionen, ein durchgehendes Beispiel: mein eigenes Projektsystem. Es fängt bei Blöcken und Layout an, geht über Datenbanken, Verknüpfungen und Rollups zu Formeln, Ansichten und Buttons, und endet bei einem Dashboard, das alles an einem Ort zusammenzieht.</p><p>Fünf der acht Lektionen bauen ein <b>echtes Regal</b> mit: Du klickst jede Spalte auf, baust sie nach und legst sie in den Einkaufswagen. Am Ende steht kein Beispiel auf einer Folie, sondern ein System in deinem eigenen Notion.</p><p>Dieses Modul steht für sich. Du brauchst dafür <b>keine Vorkenntnisse</b> und keinen bestimmten Beruf — gerechnet wird durchgehend mit Projekten, Aufgaben und Terminen. Wer danach in die Gastronomie-Module geht, bringt genau das Handwerk mit, das dort vorausgesetzt wird.</p>';
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  function mountGrid(sc, anchor){
-    if(document.getElementById('ts1mod-grid')) return;
-    var grid=document.createElement('div');
-    grid.id='ts1mod-grid';
-    grid.innerHTML=LEKTIONEN.map(function(l){
-      return '<a class="card" href="'+l.href+'"><span class="card-n">'+l.n+'</span><div class="card-t">'+l.t+'</div><p class="card-d">'+l.d+'</p></a>';
-    }).join('');
-    if(anchor.nextSibling) sc.insertBefore(grid, anchor.nextSibling); else sc.appendChild(grid);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    injectCSS();
-    mountHero(sc);
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    mountIntro(sc, hero);
-    var introEl=document.getElementById('ts1mod-intro'); if(!introEl) return;
-    mountGrid(sc, introEl);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* MODUL 6 · alte Bloecke (L6.1-L6.12, Stand 02.08.2026) am 01.11.2026 entfernt: Neubau im Block "NEUBAU MODUL 6" am Dateiende. */
-/* ============================================================
    #tsres — Modul 5 (Stand 02.08.2026) ABGELOEST am 01.11.2026.
    Neubau: Zone "NEUBAU MODUL 5" am Ende dieser Datei (#tsn5).
    Alter Code im Git-Verlauf (letzter Stand bf4c8f9 / af3ecde).
@@ -27908,6 +27803,182 @@ var TSISL_TEAM_ONB_V2=[
       eyebrow:'Probeküche : Buttons & Automationen', title:'Deine Buttons. <span>Ein Klick weniger.</span>',
       sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast. Einen Button holst du mit / auf jede Seite.', summary:'Buttons' }
   };
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · Modul-Uebersicht "Modul 1 / Notion-Grundlagen"
+   Adresse: /modul-1-notion-grundlagen-3-lernpfade (Alt /modul-1-notion-grundlagen toleriert)
+   Auftakt-Animation "Das Fenster setzt sich zusammen" — EIGENES Konzept (Opener):
+   EIN Notion-Fenster der Probekueche, das sich Teil fuer Teil zusammensetzt. Jedes Teil
+   traegt die Nummer der Lektion, die es erklaert: Seitenleiste, Hinweis, Spaltentypen,
+   Zeilen, Verknuepfung, Formel, Ansichten, Button, Schloss, Lupe. Danach ein Lektions-Register.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L0) return; window.__tsn1L0=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    var LEK=[
+      {n:'1.1',t:'Alles ist eine Seite',d:'Workspace, Seitenleiste und Blöcke: so findest du dich in der Vorlage zurecht.',img:'gerichte/burrata.webp',href:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip'},
+      {n:'1.2',t:'Lesbar im Stress',d:'Seiten gestalten, die man am Pass und im Lager im Vorbeigehen liest.',img:'gerichte/rinderfilet.webp',href:'/lektionen/l12-layout-medien-strukturierungs-tricks'},
+      {n:'1.3',t:'Die Tabelle denkt mit',d:'Datenbanken und Spaltentypen. Deine erste eigene Tabelle in der Probeküche.',img:'zutaten/mozzarella.webp',href:'/lektionen/l13-einfhrung-in-datenbanken'},
+      {n:'1.4',t:'Die Tabelle füllen',d:'Eintragen, Listen importieren und Dokumente mit Notion AI einlesen.',img:'inventar/olivenoel.jpg',href:'',tr:['/lektionen/daten-eintragen-und-einlesen','/daten-eintragen-und-einlesen']},
+      {n:'1.5',t:'Der Preis wandert mit',d:'Verknüpfungen und Rollups: vom Lieferanten über das Produkt bis zum Teller.',img:'lieferpartner/kuehltransporter-sprinter.webp',href:'/lektionen/l14-relationen-rollups'},
+      {n:'1.6',t:'Lies die Formel',d:'Formeln der Vorlage lesen, anpassen und Fehler finden.',img:'menuekalkulation/kosten-01.webp',href:'/lektionen/l15-formeln-20-logik-bausteine'},
+      {n:'1.7',t:'Frag die Tabelle',d:'Ansichten, Filter und Vorlagen: für jede Frage aus dem Alltag eine Antwort.',img:'gerichte/jakobsmuscheln.webp',href:'/lektionen/l16-ansichten-self-referencing-filter'},
+      {n:'1.8',t:'Ein Klick weniger',d:'Buttons und Automationen für die Handgriffe, die sich jeden Tag wiederholen.',img:'ansprechpartner/kugelschreiber.jpg',href:'/lektionen/l17-native-automations-buttons'},
+      {n:'1.9',t:'Wer darf was',d:'Teamspaces, Rechte und Gäste: das Team trägt ein, die Kalkulation bleibt geschützt.',img:'ansprechpartner/kochjacke.jpg',href:'',tr:['/lektionen/rechte-teamspaces-und-sicherheit','/rechte-teamspaces-und-sicherheit']},
+      {n:'1.10',t:'Die Zahl stimmt nicht?',d:'Eine falsche Zahl bis zur Quelle verfolgen und reparieren.',img:'gemeinkosten/wartung-werkzeug.webp',href:'/lektionen/l18-system-architektur-dashboard-design'}
+    ];
+
+    function anim(host){
+      N.addCSS('tsn1-a0-css',`
+      #tsn1-a0 .win{position:relative;width:min(1000px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#07080e;box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 10px rgba(255,255,255,.015);overflow:hidden}
+      #tsn1-a0 .bar{display:flex;align-items:center;gap:6px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:#0c0e16}
+      #tsn1-a0 .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+      #tsn1-a0 .lay{display:grid;grid-template-columns:200px 1fr;min-height:470px}
+      #tsn1-a0 .pt{position:relative;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a0.js .pt{opacity:0;transform:translateY(12px) scale(.97)}
+      #tsn1-a0.js .pt.in{opacity:1;transform:none}
+      #tsn1-a0 .nb{position:absolute;top:-9px;left:-9px;z-index:4;min-width:26px;height:26px;padding:0 6px;border-radius:999px;background:#c7b489;color:#05060b;font:700 11px/26px -apple-system,sans-serif;text-align:center;box-shadow:0 0 0 4px rgba(199,180,137,.18),0 8px 18px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a0 .nb{opacity:0;transform:scale(.6)}
+      #tsn1-a0 .pt.hot .nb{opacity:1;transform:scale(1);box-shadow:0 0 0 6px rgba(199,180,137,.2),0 0 24px rgba(199,180,137,.55);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a0 .pt{outline:1px solid rgba(199,180,137,0);outline-offset:3px;border-radius:8px;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1),outline-color .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a0 .pt.hot{outline-color:rgba(199,180,137,.75)}
+      #tsn1-a0 .tbw{overflow:visible}
+      #tsn1-a0 .vw span.bt{color:#05060b;background:#c7b489;font-weight:700}
+      #tsn1-a0 .side{padding:18px 12px;border-right:1px solid rgba(255,255,255,.07);background:#090a11}
+      #tsn1-a0 .side .it{font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.7);padding:7px 8px;border-radius:6px;margin-bottom:2px}
+      #tsn1-a0 .side .it.l1{padding-left:20px}
+      #tsn1-a0 .side .it.on{background:rgba(199,180,137,.12);color:#fff}
+      #tsn1-a0 .side .gp{font:600 9px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:12px 8px 6px}
+      #tsn1-a0 .main{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px}
+      #tsn1-a0 .ttl{display:flex;align-items:center;justify-content:space-between;gap:12px}
+      #tsn1-a0 .ttl h4{margin:0;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:24px;color:#fff}
+      #tsn1-a0 .lock{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 -apple-system,sans-serif;color:#efe6d2;border:1px solid rgba(199,180,137,.4);border-radius:999px;padding:6px 10px}
+      #tsn1-a0 .lock svg{width:13px;height:13px}
+      #tsn1-a0 .co{padding:11px 13px;border-radius:10px;background:rgba(199,180,137,.08);border:1px solid rgba(199,180,137,.28);font:500 12.5px/1.45 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a0 .vw{display:flex;gap:6px;align-items:center}
+      #tsn1-a0 .vw span{font:500 11.5px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);padding:7px 10px;border-radius:7px}
+      #tsn1-a0 .vw span.on{background:rgba(255,255,255,.07);color:#fff}
+      #tsn1-a0 .bt{margin-left:auto;font:700 11.5px/1 -apple-system,sans-serif;color:#05060b;background:#c7b489;border-radius:8px;padding:8px 12px;box-shadow:0 4px 0 #8c7c58}
+      #tsn1-a0 .tbw{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:10px}
+      #tsn1-a0 .tr{display:grid;grid-template-columns:1.5fr 1.2fr .9fr 1fr;font:500 12px/1.2 -apple-system,sans-serif;color:#fff}
+      #tsn1-a0 .tr>span{padding:10px 11px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      #tsn1-a0 .tr.h>span{color:rgba(255,255,255,.5);font-size:11px}
+      #tsn1-a0 .tr.h i{font-style:normal;color:#c7b489;font-weight:700;margin-right:6px}
+      #tsn1-a0 .chip{display:inline-block;padding:3px 7px;border-radius:5px;background:rgba(199,180,137,.14);color:#efe6d2;font-size:11px}
+      #tsn1-a0 .amp{display:inline-block;padding:3px 7px;border-radius:5px;font-size:11px}
+      #tsn1-a0 .amp.g{background:rgba(70,175,115,.16);color:#a9dcc0}
+      #tsn1-a0 .amp.r{background:rgba(224,87,79,.16);color:#f2b8b3}
+      #tsn1-a0 .lp{position:absolute;right:16px;bottom:10px;width:42px;height:42px;border-radius:50%;border:2px solid #c7b489;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 60%);box-shadow:0 10px 24px rgba(0,0,0,.6)}
+      #tsn1-a0 .lp::after{content:"";position:absolute;right:-11px;bottom:-8px;width:15px;height:3px;border-radius:2px;background:#c7b489;transform:rotate(40deg)}
+      #tsn1-a0 .lp .nb{top:-12px;left:-12px}
+      #tsn1-a0 .cap{width:min(1000px,100%);margin:20px auto 0;min-height:50px;text-align:center;font:500 15.5px/1.6 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a0 .cap b{color:#c7b489;font-weight:600}
+      #tsn1-a0 .rp{display:flex;justify-content:center;margin-top:10px}
+      #tsn1-a0 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a0 .rp button:hover{background:#c7b489;color:#05060b}
+      @media(max-width:780px){ #tsn1-a0 .lay{grid-template-columns:1fr} #tsn1-a0 .side{display:flex;flex-wrap:wrap;gap:4px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)} #tsn1-a0 .side .gp{display:none} #tsn1-a0 .tr{grid-template-columns:1.4fr 1fr .9fr} #tsn1-a0 .tr>span:nth-child(2){display:none} #tsn1-a0 .main{padding:22px 14px} }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a0.js .pt{opacity:1;transform:none} }
+      `);
+      var LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
+      function nb(n){ return '<span class="nb">'+n+'</span>'; }
+      host.id='tsn1-a0';
+      host.innerHTML=R.head('Zehn Lektionen','Das Handwerk hinter deiner <span class="g">Vorlage</span>.','Jedes Teil dieses Fensters erklärt dir eine Lektion. Am Ende des Moduls liest du jede Seite der Backoffice-Vorlage so selbstverständlich wie deine Speisekarte.')+
+        '<div class="win"><div class="bar"><i></i><i></i><i></i></div><div class="lay">'+
+          '<div class="side pt" data-k="1">'+nb('1.1')+'<div class="gp">Teamspaces</div><div class="it">Küche</div><div class="it l1">Notion AI Backoffice</div><div class="it">Service</div><div class="gp">Privat</div><div class="it on">Probeküche</div></div>'+
+          '<div class="main">'+
+            '<div class="ttl"><h4>Produkte</h4><span class="lock pt" data-k="9">'+nb('1.9')+LOCK+'Kann Inhalt bearbeiten</span></div>'+
+            '<div class="co pt" data-k="2">'+nb('1.2')+'Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
+            '<div class="vw"><span class="pt on" data-k="7">'+nb('1.7')+'Bestellliste</span><span>Lager</span><span>Knapp</span><span class="bt pt" data-k="8">'+nb('1.8')+'+ Neues Produkt</span></div>'+
+            '<div class="tbw">'+
+              '<div class="tr h pt" data-k="3">'+nb('1.3')+'<span><i>Aa</i>Produkt</span><span><i>↗</i>Lieferant</span><span><i>#</i>Preis</span><span><i>Σ</i>Bestand prüfen</span></div>'+
+              '<div class="pt" data-k="4">'+nb('1.4')+
+                '<div class="tr"><span>Burrata 125 g</span><span class="pt" data-k="5" style="position:relative">'+nb('1.5')+'<span class="chip">Frischdienst Nord</span></span><span>18,90 €</span><span class="pt" data-k="6" style="position:relative">'+nb('1.6')+'<span class="amp r">knapp</span></span></div>'+
+                '<div class="tr"><span>Olivenöl 5 l</span><span><span class="chip">Feinkost Lorenz</span></span><span>42,50 €</span><span><span class="amp g">ok</span></span></div>'+
+                '<div class="tr"><span>Tomaten Ochsenherz</span><span><span class="chip">Gemüsehof Brandt</span></span><span>16,00 €</span><span><span class="amp r">knapp</span></span></div>'+
+                '<div class="tr"><span>Parmigiano 24 Monate</span><span><span class="chip">Frischdienst Nord</span></span><span>23,40 €</span><span><span class="amp g">ok</span></span></div>'+
+              '</div>'+
+              '<span class="lp pt" data-k="10">'+nb('1.10')+'</span>'+
+            '</div>'+
+          '</div></div></div>'+
+        '<div class="cap"></div><div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var CAP={1:'<b>1.1</b> Die Seitenleiste ist der Grundriss deines Betriebs.',2:'<b>1.2</b> Ein Hinweis, der am Pass nicht überlesen wird.',3:'<b>1.3</b> Jede Spalte hat einen Typ, und der Typ entscheidet, was sie kann.',4:'<b>1.4</b> Die Zeilen kommen von Hand, aus einer Liste oder aus einem Dokument.',5:'<b>1.5</b> Der Lieferant steht über eine Verknüpfung direkt beim Produkt.',6:'<b>1.6</b> Eine Formel prüft den Bestand und färbt, was knapp ist.',7:'<b>1.7</b> Eine Ansicht beantwortet eine Frage: Was bestelle ich bei wem?',8:'<b>1.8</b> Ein Button legt neue Artikel mit einem Klick an.',9:'<b>1.9</b> Das Team trägt ein, die Formeln bleiben geschützt.',10:'<b>1.10</b> Stimmt eine Zahl nicht, verfolgst du sie bis zur Quelle.'};
+      var pts={}; [].forEach.call(host.querySelectorAll('.pt'),function(p){ pts[p.getAttribute('data-k')]=p; });
+      var cap=host.querySelector('.cap');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a0Kill=clear;
+      function endState(){ clear(); host.classList.remove('js'); Object.keys(pts).forEach(function(k){ pts[k].classList.add('in'); pts[k].classList.remove('hot'); }); cap.innerHTML='Zehn Lektionen, ein Fenster. Am Ende kennst du <b>jedes Teil</b> davon aus eigener Hand.'; }
+      function play(){
+        clear(); host.classList.add('js'); Object.keys(pts).forEach(function(k){ pts[k].classList.remove('in','hot'); }); cap.innerHTML='';
+        /* Reveal schnell: alle Teile in ~1,6 s, dann ruhiger Durchlauf mit Erklaerung */
+        for(var k=1;k<=10;k++){ (function(k){ later(function(){ pts[k].classList.add('in'); },150+k*140); })(k); }
+        for(var j=1;j<=10;j++){ (function(j){ later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); pts[j].classList.add('hot'); cap.innerHTML=CAP[j]; },2200+(j-1)*1500); })(j); }
+        later(function(){ Object.keys(pts).forEach(function(x){ pts[x].classList.remove('hot'); }); cap.innerHTML='Zehn Lektionen, ein Fenster. Am Ende kennst du <b>jedes Teil</b> davon aus eigener Hand.'; },2200+10*1500);
+      }
+      host.querySelector('.rp button').addEventListener('click',play);
+      endState();
+      if(N.REDUCED) return;
+      N.reveal(host,play);
+    }
+
+    /* Lektions-Register: Bildkarten, neue Seiten pruefen sich selbst */
+    function reg(host){
+      N.addCSS('tsn1-reg-css',`
+      #tsn1-reg{width:min(1100px,95vw);margin:0 auto}
+      #tsn1-reg .gr{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+      #tsn1-reg a.k{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;text-decoration:none;color:#fff;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1)}
+      #tsn1-reg a.k:hover{transform:translateY(-4px);border-color:rgba(199,180,137,.5);box-shadow:0 26px 50px -24px rgba(0,0,0,.85),0 0 28px rgba(199,180,137,.14)}
+      #tsn1-reg a.k .im{aspect-ratio:1/1;overflow:hidden;background:#0b0d14}
+      #tsn1-reg a.k .im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+      #tsn1-reg a.k:hover .im img{transform:scale(1.06)}
+      #tsn1-reg a.k .bd{padding:14px 14px 16px}
+      #tsn1-reg a.k .n{font:700 11px/1 -apple-system,sans-serif;letter-spacing:.08em;color:#c7b489}
+      #tsn1-reg a.k .t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:16px;line-height:1.2;margin:8px 0 8px}
+      #tsn1-reg a.k .d{font:500 12.5px/1.5 -apple-system,sans-serif;color:rgba(255,255,255,.86);margin:0}
+      #tsn1-reg a.k.wait{pointer-events:none}
+      #tsn1-reg a.k .soon{display:none;position:absolute;top:10px;right:10px;font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#05060b;background:#efe6d2;border-radius:5px;padding:5px 7px}
+      #tsn1-reg a.k.wait .soon{display:block}
+      @media(max-width:1000px){ #tsn1-reg .gr{grid-template-columns:repeat(2,1fr)} }
+      @media(max-width:480px){ #tsn1-reg .gr{grid-template-columns:1fr} }
+      `);
+      host.id='tsn1-reg';
+      host.innerHTML='<div class="gr">'+LEK.map(function(l,i){
+        return '<a class="k'+(l.href?'':' wait')+'" data-i="'+i+'" href="'+(l.href||'#')+'"><div class="im"><img alt="" loading="lazy" decoding="async" src="'+IMG+l.img+'"></div><span class="soon">Folgt</span><div class="bd"><div class="n">L '+l.n+'</div><div class="t">'+l.t+'</div><p class="d">'+l.d+'</p></div></a>';
+      }).join('')+'</div>';
+      LEK.forEach(function(l,i){
+        if(!l.tr) return; var c=l.tr.slice(), a=host.querySelector('a.k[data-i="'+i+'"]');
+        (function one(){ var u=c.shift(); if(!u) return; try{ fetch(u,{method:'HEAD',cache:'no-store'}).then(function(r){ if(r.ok){ a.setAttribute('href',u); a.classList.remove('wait'); } else one(); },function(){ one(); }); }catch(e){} })();
+      });
+    }
+
+    N.page({
+      key:'m1',
+      re:/\/modul-1-notion-grundlagen(?:-3-lernpfade)?\/?$/,
+      hero:{label:'M 1', eyebrow:'Tasty Studios', title:'<span class="ts-red">Modul 1</span><br>Notion-Grundlagen', alt:'Modul 1: Notion-Grundlagen für die Backoffice-Vorlage', two:true},
+      intro:
+        '<p>Mit diesem Kurs bekommst du dein Backoffice als fertige Notion-Vorlage: Inventur, Zutaten, Rezepturen, Gerichte, alles schon verbunden und durchgerechnet. Damit du sie mit Zuversicht benutzt, lernst du in diesem Modul das Handwerk dahinter.</p>'+
+        '<p>In zehn Lektionen gehen wir von der ersten Seite bis zur Fehlersuche. Jede Lektion zeigt dir, wo das Gelernte in der Vorlage steckt, und geübt wird in deiner eigenen <b>Probeküche</b>, nie am Original. Vorwissen brauchst du keines.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'So arbeitest du', title:'Jede Lektion geht denselben <span class="g">Weg</span>', lead:'So weißt du immer, wo du stehst und was als Nächstes kommt.', blocks:[
+          R.cards([
+            {mi:'Lesen', nm:'Was es ist und wo es steckt', img:IMG+'ansprechpartner/notizblock.jpg', tx:'<p>Jede Lektion erklärt ein Werkzeug an einem Beispiel aus der Küche und zeigt dir, wo genau es in der Vorlage vorkommt.</p>'},
+            {mi:'Üben', nm:'In der Probeküche', img:IMG+'gerichte/pilz-ravioli.webp', tx:'<p>Drei kleine Tabellen, Lieferanten, Produkte und Gerichte, baust du Karte für Karte nach. Was dort schiefgeht, kostet dich nichts.</p>'},
+            {mi:'Anwenden', nm:'In deiner Vorlage', img:IMG+'gerichte/lammkarree.webp', tx:'<p>Mit diesem Handwerk gehst du in Modul 2, lernst die Vorlage Datenbank für Datenbank kennen und trägst deine eigenen Zahlen ein.</p>'}
+          ],3)
+        ]}),
+        R.sec({eb:'Die Lektionen', title:'Zehn Schritte bis zur <span class="g">sicheren Hand</span>', wide:true, blocks:[]}),
+        {anim:function(h){ h.className='tsn1-reghost'; h.style.marginTop='8px'; reg(h); }}
+      ],
+      learn:{items:['Du <b>liest</b> jede Spalte und jede Formel der Vorlage.','Du <b>befüllst</b> sie mit deinen eigenen Artikeln, Lieferanten und Preisen.','Du <b>passt</b> sie an deinen Betrieb an, ohne die Kette zu brechen.','Du <b>reparierst</b> eine falsche Zahl, indem du sie bis zur Quelle verfolgst.'],
+        next:'/lektionen/l11-die-notion-philosophie-das-canvas-prinzip', label:'Zur ersten Lektion'}
+    });
+  }
+  go();
 })();
 
 /* ============================================================
