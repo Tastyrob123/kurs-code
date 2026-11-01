@@ -4417,7 +4417,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/deine-erste-claudemd' },
     { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/die-3-slash-commands' },
     { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/plan-mode-effort-levels' },
-    { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/die-5-wichtigsten-skills' },
+    { re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31474,7 +31475,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -33126,6 +33127,118 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du weißt, dass <b>Opus 5.5</b> Standard ist und wann ein anderes Modell passt.',
         'Du stellst die <b>Denk-Tiefe</b> mit /effort ein, wenn es darauf ankommt.'],
       next:'/die-5-wichtigsten-skills'}
+  });
+})();
+
+/* ---- l12-skills-plugins.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.12 "Skills & Plugins"  (/die-5-wichtigsten-skills)
+   Fakten: Faktenblatt Punkt 6 + 7, code.claude.com/docs/en/skills (laedt bei Bedarf, Ordner,
+   /skills, synced skills pdf/xlsx, Live-Erkennung ohne Neustart, /reload-skills) und
+   plugins_install (/plugin-Menue, claude-plugins-official, Bereich waehlen, /reload-plugins
+   automatisch beim Schliessen, Hooks/MCP pruefen). /skill-doctor: Digest KW 36.
+   Abgrenzung: keine Website-Skills (Modul 6). Zwei Wege fuer Modul 6: Plugin-Fenster oder
+   Selbst-Install-Prompt; Neustart heute meist nicht noetig.
+   Erklaeranimation #tsn3-a12 "Ein Kasten voller Rezeptkarten."
+   Rechts der Rezeptkasten mit sechs gleich grossen Karten (nur Name + Zeile = was Claude
+   immer kennt), links das Tablett "Was Claude gerade geladen hat". Kommt ein passender
+   Auftrag, zieht Claude genau eine Karte heraus, sie oeffnet sich, danach zurueck. Zum
+   Schluss kommt ein Plugin als ganze Kiste dazu. Moebel ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var CARDS=[
+    {n:'wochenkarte',d:'Wochenkarte in unserem Stil'},{n:'inventur',d:'Monatsinventur auswerten'},{n:'bewerbung',d:'Bewerbern antworten'},
+    {n:'pdf',d:'PDFs lesen und erstellen'},{n:'xlsx',d:'Excel-Dateien bearbeiten'},{n:'aushang',d:'Aushänge fürs Team'}
+  ];
+  var OPEN={0:['Karte aus Rezepturen/ lesen','je Gericht höchstens 12 Wörter','Herkunft der Hauptzutat nennen','Allergene mit A bis N'],3:['PDF-Vorlage A5 laden','Schrift und Ränder des Hauses','Datei in Auswertungen/ ablegen','Dateiname mit Datum']};
+  var stage='<div class="l12-wrap"><div class="l12-tray"><div class="l12-th">Was Claude gerade geladen hat</div>'
+    +'<div class="l12-row full">CLAUDE.md <span>immer, ganz</span></div>'
+    +'<div class="l12-row names">Namen und Beschreibungen aller Skills <span>immer, kurz</span></div>'
+    +'<div class="l12-slot"><div class="l12-row sk" data-c="0">Skill wochenkarte <span>nur jetzt, ganz</span></div>'
+    +'<div class="l12-row sk" data-c="3">Skill pdf <span>nur jetzt, ganz</span></div></div>'
+    +'<div class="l12-task"></div></div>'
+    +'<div class="l12-box"><div class="l12-bh">Skills · Rezeptkasten</div><div class="l12-cards">'
+    +CARDS.map(function(c,i){ return '<div class="l12-card" data-i="'+i+'"><span class="n">/'+c.n+'</span><span class="d">'+c.d+'</span>'+(OPEN[i]?'<ol class="l12-open">'+OPEN[i].map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol>':'')+'</div>'; }).join('')+'</div>'
+    +'<div class="l12-crate"><span class="l12-ch">Plugin · Küchenbüro</span><span class="l12-cc">2 Skills</span><span class="l12-cc">1 Verbindung</span></div></div></div>';
+  var BEATS=[
+    {task:'', cap:'Claude kennt von jedem Skill nur den <b>Namen und eine Zeile</b>. Den Rest lädt es erst, wenn er gebraucht wird.'},
+    {task:'Schreib die Wochenkarte für KW 46.', c:0, cap:'Der Auftrag passt zur Karte <b>/wochenkarte</b>. Claude zieht sie heraus und arbeitet nach deinen Regeln.'},
+    {task:'Mach daraus ein PDF für den Aushang.', c:3, cap:'Für das PDF holt es die nächste Karte, <b>/pdf</b>. Die erste liegt wieder im Kasten.'},
+    {task:'', crate:true, cap:'Ein <b>Plugin</b> bringt gleich eine ganze Kiste: mehrere Skills und Verbindungen, mit einem Befehl installiert.'}
+  ];
+  function setT(el,t){ var n=el.querySelector('.l12-task'); n.textContent=t; n.classList.toggle('on',!!t); }
+  T3.anim('tsn3-a12',{
+    reset:function(el){ el.classList.remove('crate'); setT(el,''); el.querySelectorAll('.l12-card').forEach(function(c){ c.classList.remove('up'); }); el.querySelectorAll('.l12-row.sk').forEach(function(r){ r.classList.remove('on'); }); },
+    play:function(el, api, end){
+      var cards=el.querySelectorAll('.l12-card'), S=3600;
+      BEATS.forEach(function(b,i){
+        var t0=300+i*S;
+        api.T.at(t0,function(){ api.cap(b.cap); setT(el,b.task||''); cards.forEach(function(c){ c.classList.remove('up'); }); el.querySelectorAll('.l12-row.sk').forEach(function(r){ r.classList.remove('on'); }); });
+        if(b.c!=null) api.T.at(t0+800,function(){ cards[b.c].classList.add('up'); el.querySelector('.l12-row.sk[data-c="'+b.c+'"]').classList.add('on'); });
+        if(b.crate) api.T.at(t0+500,function(){ el.classList.add('crate'); });
+      });
+      api.T.at(300+BEATS.length*S, end);
+    },
+    end:function(el){ el.classList.add('crate'); setT(el,''); el.querySelectorAll('.l12-card').forEach(function(c){ c.classList.remove('up'); }); }
+  });
+
+  var SK='---\nname: wochenkarte\ndescription: Schreibt die Wochenkarte im Stil unseres Hauses aus den Rezepturen. Nutzen, wenn eine Wochen- oder Mittagskarte entstehen soll.\n---\n\nSo gehst du vor:\n1. Lies die Rezepturen im Ordner Speisekarte/Rezepturen.\n2. Wähl je Tag ein Hauptgericht, keine Zutat zweimal in derselben Woche.\n3. Höchstens 12 Wörter je Gericht, Herkunft der Hauptzutat nennen.\n4. Allergene mit den Buchstaben A bis N hinter jedes Gericht.\n5. Fehlt eine Rezeptur, schreib „fehlt“ statt zu raten.';
+
+  T3.page({
+    key:'l12', re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, tab:'L 3.12 · Skills & Plugins',
+    hero:{eyebrow:'L 3.12', title:'Skills & <span class="ts-gold">Plugins</span>', alt:'Skills und Plugins: Arbeitsweisen, die Claude bei Bedarf lädt'},
+    intro:'<p>Die CLAUDE.md hält fest, was immer gilt. Ein <b>Skill</b> hält fest, wie eine bestimmte Arbeit gemacht wird: die Wochenkarte schreiben, die Inventur auswerten, Bewerbern antworten. Wie eine Rezeptkarte, die erst aus dem Kasten kommt, wenn das Gericht bestellt ist.</p>'
+      +'<p>Ein <b>Plugin</b> ist eine ganze Kiste solcher Karten, oft zusammen mit Verbindungen zu anderen Diensten, mit einem Befehl installiert. In dieser Lektion legst du deinen ersten eigenen Skill an und lernst, Plugins sicher zu laden und wieder loszuwerden.</p>',
+    anim:{id:'tsn3-a12', eb:'Was Skills von der CLAUDE.md unterscheidet', title:'Ein Kasten voller <span class="g">Rezeptkarten</span>.',
+      sub:'Links steht, was Claude gerade im Kopf hat. Rechts der Kasten mit allen Skills. Achte darauf, wann eine Karte ganz geladen wird.',
+      stage:stage,
+      capEnd:BEATS[3].cap},
+    body:function(H){
+      return H.sec({id:'tsn3-l12-was', title:'Was ein <span class="g">Skill</span> ist',
+          lead:'Ein Ordner mit einer Datei namens SKILL.md. Oben stehen Name und Beschreibung, darunter die Anleitung in ganz normaler Sprache, dazu bei Bedarf Vorlagen.',
+          body:'<p><strong class="lead">Er kostet nur Platz, wenn er gebraucht wird.</strong>Von jedem Skill kennt Claude ständig nur den Namen und die Beschreibung. Passt ein Auftrag dazu, lädt es die ganze Anleitung. Deshalb gehören lange Abläufe in einen Skill und nicht in die CLAUDE.md, die in jeder Sitzung ganz mitfährt.</p>'
+            +'<p><strong class="lead">Du kannst ihn auch selbst aufrufen.</strong>Mit einem Schrägstrich und seinem Namen, zum Beispiel <code>/wochenkarte</code>. Welche Skills du hast, zeigt dir <code>/skills</code>.</p>'
+            +'<p><strong class="lead">Er läuft überall.</strong>Derselbe Skill funktioniert in der Claude-App, in Claude Code und über die Schnittstelle. Skills, die du in der App anlegst, gleicht Claude Code automatisch ab, sobald du mit deinem Konto angemeldet bist. Die Skills für PDF und Excel von Anthropic sind dabei immer schon dabei.</p>'})
+        +H.sec({id:'tsn3-l12-eigen', title:'Dein erster eigener <span class="g">Skill</span>',
+          lead:'Nimm eine Arbeit, die du jede Woche gleich machst und jedes Mal neu erklärst. Bei den meisten ist das die Wochen- oder Mittagskarte.',
+          body:H.steps([
+            'Öffne Claude Code in deinem Hauptordner Betrieb.',
+            'Lass Claude den Skill anlegen, mit dem Prompt unten. Er landet in <code>~/.claude/skills/wochenkarte/SKILL.md</code> und gilt damit in allen deinen Projekten. Soll er nur in einem Projekt gelten, liegt er in dessen Ordner unter <code>.claude/skills/</code>.',
+            'Lies die Datei und schärf die Schritte nach. Claude erkennt Änderungen an Skills sofort, ein Neustart ist nicht nötig.',
+            'Teste ihn mit <code>/wochenkarte</code> und korrigier die Anleitung, bis das Ergebnis passt.'
+          ])
+          +H.prompt('Leg mir einen persönlichen Skill namens wochenkarte an. Er soll aus den Rezepturen im Ordner Speisekarte/Rezepturen eine Wochenkarte im Stil unseres Hauses schreiben: je Tag ein Hauptgericht, keine Zutat zweimal pro Woche, höchstens 12 Wörter je Gericht, Herkunft der Hauptzutat, Allergene mit A bis N. Fehlt eine Rezeptur, soll er „fehlt“ schreiben statt zu raten. Zeig mir die SKILL.md, bevor du sie speicherst.','Selbst-Install-Prompt: Skill anlegen')
+          +H.code(SK,'Ergebnis · ~/.claude/skills/wochenkarte/SKILL.md')
+          +'<p class="tsn3-fn">In der Claude-App legst du Skills unter Anpassen an, dort kannst du einen Skill auch einfach beschreiben und von Claude bauen lassen. Wer Skills gründlich testen will, installiert das Plugin skill-creator aus dem offiziellen Marktplatz.</p>'})
+        +H.sec({id:'tsn3-l12-plugins', title:'<span class="g">Plugins</span>: die ganze Kiste',
+          lead:'Ein Plugin bündelt Skills, Verbindungen und weitere Bausteine zu einem Paket. Du holst es aus einem Marktplatz, einer Art Katalog.',
+          body:'<p><strong class="lead">Das Plugin-Fenster.</strong>Mit <code>/plugin</code> öffnest du es. Im Reiter Discover findest du, was der Marktplatz anbietet, unter Installed, was du schon hast. Der offizielle Marktplatz von Anthropic heißt <code>claude-plugins-official</code> und ist von Anfang an eingerichtet.</p>'
+            +'<p><strong class="lead">Installieren.</strong>Im Fenster auswählen oder direkt mit dem Befehl. Danach fragt Claude, für wen das Plugin gelten soll: für dich in allen Projekten, für das ganze Projekt oder nur für dich in diesem Projekt.</p>'
+            +H.code('/plugin install skill-creator@claude-plugins-official','Beispiel · Plugin installieren')
+            +'<p style="margin-top:14px"><strong class="lead">Aktivieren ohne Neustart.</strong>Schließt du das Plugin-Fenster, lädt Claude Code die Änderungen meist selbst neu. Sonst hilft <code>/reload-plugins</code> oder der nächste Start. Abschalten und entfernen geht im selben Fenster oder mit <code>/plugin disable</code> und <code>/plugin uninstall</code>.</p>'
+            +H.note('Ein Plugin kann Verbindungen herstellen und eigene Abläufe ausführen. Installier nur Plugins aus dem offiziellen Marktplatz oder von Anbietern, denen du vertraust, und lies vorher, was sie mitbringen.','Achtung',true)})
+        +H.sec({id:'tsn3-l12-ordnung', title:'<span class="g">Ordnung</span> im Kasten',
+          lead:'Jeder Skill und jedes Plugin kostet ein wenig Platz, auch wenn es nie zum Einsatz kommt. Ein voller Kasten macht jede Sitzung langsamer.',
+          body:H.steps([
+            '<code>/skill-doctor</code> zeigt dir, was jeder Skill an Platz kostet und wie oft er benutzt wird.',
+            '<code>/usage</code> schlüsselt deinen Verbrauch nach Skills, Plugins und Verbindungen auf.',
+            'Was du vier Wochen nicht benutzt hast, schaltest du ab oder löschst es. Bei einem eigenen Skill reicht es, seinen Ordner zu löschen.'
+          ],'Einmal im Monat')
+          +H.note('Fang mit einem eigenen Skill an statt mit zehn fremden. Ein Skill, der genau deine Arbeit beschreibt, bringt mehr als jedes Paket aus dem Katalog.','Die Merkregel')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Dein', animGold:'erster Skill',
+      steps:['Wiederkehrende Arbeit','Skill anlegen lassen','Testen','Aufräumen'],
+      intro:'So kommt dein Kasten in Gang, ohne dass er überquillt:',
+      points:['Such dir die eine Arbeit, die du <b>jede Woche neu erklärst</b>. Daraus wird dein erster Skill.',
+        'Lass ihn von Claude <b>anlegen</b> und lies die SKILL.md, bevor du sie speicherst.',
+        'Teste ihn mit dem <b>Schrägstrich-Aufruf</b> und schärf die Anleitung nach, bis das Ergebnis sitzt.',
+        'Installier Plugins nur aus <b>vertrauten Quellen</b> und räum einmal im Monat mit /skill-doctor auf.']},
+    learn:{learn:['Du weißt, dass ein Skill <b>nur bei Bedarf</b> ganz geladen wird.',
+        'Du hast deinen ersten <b>eigenen Skill</b> angelegt und getestet.',
+        'Du installierst Plugins über das <b>/plugin-Fenster</b> und weißt, für wen sie gelten.',
+        'Du hältst den Kasten mit <b>/skill-doctor</b> schlank.'],
+      next:'/die-4-wichtigsten-mcps'}
   });
 })();
 
