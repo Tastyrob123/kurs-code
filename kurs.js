@@ -27283,24 +27283,26 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-res .tx h3{font-family:${DISP};font-weight:600;font-size:clamp(25px,2.8vw,32px);line-height:1.2;letter-spacing:-.015em;margin:0 0 16px;color:#fff;text-wrap:balance}
   .tsn1 .tsn1-res .tx h3 .g{color:#c7b489}
   .tsn1 .tsn1-res .tx p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .tsn1 .tsn1-mock{position:relative;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:#0b0d14;box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 0 8px rgba(255,255,255,.02);overflow:hidden}
-  .tsn1 .tsn1-mock .top{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);background:#0e1018}
-  .tsn1 .tsn1-mock .top i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
-  .tsn1 .tsn1-mock .top span{margin-left:10px;font:500 11.5px/1 ${SANS};color:rgba(255,255,255,.45)}
-  .tsn1 .tsn1-mock .ttl{padding:18px 18px 6px;font-family:${DISP};font-weight:600;font-size:20px;color:#fff}
-  .tsn1 .tsn1-mock .views{display:flex;gap:4px;padding:6px 14px 10px;border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden}
-  .tsn1 .tsn1-mock .views span{font:500 11.5px/1 ${SANS};color:rgba(255,255,255,.5);padding:6px 9px;border-radius:7px;white-space:nowrap}
-  .tsn1 .tsn1-mock .views span.on{color:#fff;background:rgba(255,255,255,.07)}
-  .tsn1 .tsn1-mock .grid{overflow:hidden}
+  /* Ergebnis-Tabelle = echtes Notion im Dark Mode (Werte gemessen 01.11.2026, s. Notion-Baukasten) */
+  .tsn1 .tsn1-mock{position:relative;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgb(25,25,25);box-shadow:0 50px 100px -40px rgba(0,0,0,.95);overflow:hidden;font-family:ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock .top{display:flex;align-items:center;gap:6px;height:40px;padding:0 14px;font-size:13px;color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock .top i{display:none}
+  .tsn1 .tsn1-mock .top span{color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock .ttl{padding:10px 18px 4px;font-size:20px;font-weight:600;color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock .views{display:flex;gap:2px;padding:4px 14px 6px;border-bottom:1px solid rgba(255,255,243,.082);overflow:hidden}
+  .tsn1 .tsn1-mock .views span{font-size:13px;color:rgb(173,169,163);padding:4px 7px;border-radius:6px;white-space:nowrap}
+  .tsn1 .tsn1-mock .views span.on{color:rgb(240,239,237);box-shadow:inset 0 -2px 0 rgb(240,239,237)}
+  .tsn1 .tsn1-mock .grid{overflow:hidden;padding:0 4px}
   .tsn1 .tsn1-mock table{width:100%;border-collapse:collapse}
-  .tsn1 .tsn1-mock th{text-align:left;font:500 10.5px/1.2 ${SANS};color:rgba(255,255,255,.5);padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
-  .tsn1 .tsn1-mock td{font-size:12px;line-height:1.35;color:rgba(255,255,255,.86);padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
-  .tsn1 .tsn1-mock td .t{margin:0 3px 3px 0}
-  .tsn1 .tsn1-mock td .t{display:inline-block;font-size:11px;padding:3px 7px;border-radius:5px;background:rgba(199,180,137,.14);color:#efe6d2}
-  .tsn1 .tsn1-mock td .t.r{background:rgba(224,87,79,.16);color:#f2b8b3}
-  .tsn1 .tsn1-mock td .t.gr{background:rgba(70,175,115,.16);color:#a9dcc0}
+  .tsn1 .tsn1-mock th{text-align:left;font-size:13px;font-weight:400;color:rgb(173,169,163);padding:8px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082)}
+  .tsn1 .tsn1-mock td{font-size:13px;line-height:1.35;color:rgb(240,239,237);padding:8px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);vertical-align:top}
+  .tsn1 .tsn1-mock th:last-child,.tsn1 .tsn1-mock td:last-child{border-right:0}
+  .tsn1 .tsn1-mock td .t{display:inline-block;height:20px;line-height:20px;padding:0 6px;border-radius:4px;font-size:13px;white-space:nowrap;margin:0 3px 3px 0;background:rgba(255,252,235,.306);color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock td .t.r{background:rgba(255,116,105,.525);color:rgb(252,233,231)}
+  .tsn1 .tsn1-mock td .t.gr{background:rgba(113,255,175,.337);color:rgb(232,241,236)}
+  .tsn1 .tsn1-mock td .t.o{background:rgba(255,143,71,.482);color:rgb(251,235,222)}
   .tsn1 .tsn1-mock td.n{text-align:right;font-variant-numeric:tabular-nums}
-  .tsn1 .tsn1-mock .cap{padding:10px 14px;font-size:11px;color:rgba(255,255,255,.35);text-align:right}
+  .tsn1 .tsn1-mock .cap{padding:8px 14px;font-size:11px;color:rgb(125,122,117);text-align:right}
   .tsn1.js .tsn1-mock tbody tr{opacity:0;transform:translateY(8px)}
   .tsn1.js .tsn1-mock.in tbody tr{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
 
@@ -27318,7 +27320,9 @@ var TSISL_TEAM_ONB_V2=[
     .tsn1 .tsn1-err .row{grid-template-columns:1fr}
     .tsn1 .tsn1-err .row>div+div{border-left:0;border-top:1px dashed rgba(255,255,255,.06)}
     .tsn1 .tsn1-err .hd{display:none}
-    .tsn1 .tsn1-mock .grid{overflow-x:auto}
+    .tsn1 .tsn1-mock table{table-layout:fixed}
+    .tsn1 .tsn1-mock td,.tsn1 .tsn1-mock th{word-break:break-word;font-size:12px;padding:7px 6px}
+    .tsn1 .tsn1-mock td .t{white-space:normal;height:auto;line-height:1.3;padding:2px 5px}
   }
   @media(max-width:600px){
     .tsn1 .tsn1-cards.c2,.tsn1 .tsn1-cards.c3,.tsn1 .tsn1-cards.c4{grid-template-columns:1fr}
@@ -27379,7 +27383,7 @@ var TSISL_TEAM_ONB_V2=[
       var tb='<table><thead><tr>'+m.cols.map(function(c){ return '<th>'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+
         m.rows.map(function(row){ return '<tr>'+row.map(function(c,i){ return '<td'+((m.num||[]).indexOf(i)>-1?' class="n"':'')+'>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
       return '<div class="tsn1-res tsn1-rv'+(r.rev?' rev':'')+'"><div class="tx"><h3>'+r.title+'</h3>'+r.text.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>'+
-        '<div class="tsn1-mock"><div class="top"><i></i><i></i><i></i><span>'+m.file+'</span></div><div class="ttl">'+m.tab+'</div>'+
+        '<div class="tsn1-mock"><div class="top"><span>'+m.file.replace(/ \/ /g,' <span style="color:rgb(125,122,117)">/</span> ')+'</span></div><div class="ttl">'+m.tab+'</div>'+
         '<div class="views">'+m.views.map(function(v,i){ return '<span'+(i===(m.on||0)?' class="on"':'')+'>'+v+'</span>'; }).join('')+'</div>'+
         '<div class="grid">'+tb+'</div>'+(m.cap?'<div class="cap">'+m.cap+'</div>':'')+'</div></div>';
     },
@@ -27497,7 +27501,7 @@ var TSISL_TEAM_ONB_V2=[
     function stop(){ if(iv){ clearInterval(iv); iv=null; } }
     setTimeout(function(){
       reveal(el,function(){ el.classList.add('in'); var r=el.getBoundingClientRect(); vis=(r.top<innerHeight && r.bottom>0); start(); });
-      try{ new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&el.classList.contains('in')) start(); else if(!vis) stop(); },{threshold:.15}).observe(el); }catch(e){}
+      try{ new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&el.classList.contains('in')) start(); else if(!vis) stop(); },{threshold:.3}).observe(el); }catch(e){}
     },0);
     document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else start(); });
     if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
@@ -27624,6 +27628,86 @@ var TSISL_TEAM_ONB_V2=[
   if(window.__tsMO) window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', function(){ var d=current(); if(d&&d.learn) nextGuard(d.learn); }, {passive:true});
   setTimeout(mount,1500); setTimeout(mount,4000); setTimeout(mount,9000);
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · Notion-Dark-Baukasten (window.__tsn1N)
+   Regel Robert 01.11.2026: Jede Animation, die Notion zeigt, sieht aus wie echtes
+   Notion im Dark Mode. Innerhalb des Fensters keine Kurs-Gestaltung.
+   Werte abgenommen am 01.11.2026 aus Roberts Notion (Dark Mode, Chrome, berechnete Stile):
+   Seite rgb(25,25,25) · Seitenleiste rgb(32,32,32) · Text rgb(240,239,237) · Zweittext/Icons
+   rgb(173,169,163) · Seitenleisten-Text rgb(188,186,182) 14px/500, Zeile 30px, Radius 6 ·
+   gedaempft rgb(125,122,117) · Linien rgba(255,255,243,.082) · Button-Rand rgba(255,255,235,.1)
+   Radius 6, 14px/500, Padding 8/12 · Akzent-Blau rgb(39,131,222) / Schrift rgb(243,249,253) ·
+   Seitentitel 40px/700, Datenbank-Titel 24px/600, Tabellenkopf 14px Zweittext, Zeile 37px ·
+   Auswahl-Tags 14px, Hoehe 20, Padding 0 6, Radius 4 (Farben je Tag unten, gemessen in
+   „DB 0 : Inventurliste" und „Lektionen") · Callout blau rgb(35,56,80) Radius 10 Padding 12 ·
+   Schrift: ui-sans-serif, -apple-system, system-ui, „Segoe UI Variable Display" … ·
+   Seiten-Icon und Zieh-Griff als Original-SVG-Pfade aus Notion.
+   ============================================================ */
+(function(){
+  if(window.__tsn1N) return;
+  var F='ui-sans-serif,-apple-system,"system-ui","Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif';
+  var CSS=`
+  .ntn{--n-bg:rgb(25,25,25);--n-side:rgb(32,32,32);--n-tx:rgb(240,239,237);--n-tx2:rgb(173,169,163);--n-stx:rgb(188,186,182);--n-mut:rgb(125,122,117);--n-line:rgba(255,255,243,.082);--n-bline:rgba(255,255,235,.1);--n-blue:rgb(39,131,222);--n-bluetx:rgb(243,249,253);
+    font-family:${F};color:var(--n-tx);background:var(--n-bg);-webkit-font-smoothing:antialiased}
+  .ntn *{font-family:${F}}
+  .ntn .n-top{display:flex;align-items:center;gap:6px;height:44px;padding:0 14px;font-size:14px;color:var(--n-tx)}
+  .ntn .n-top .sep{color:var(--n-mut)}
+  .ntn .n-top .ed{margin-left:auto;color:var(--n-mut);font-size:13px}
+  .ntn .n-side{background:var(--n-side);padding:10px 8px}
+  .ntn .n-ws{display:flex;align-items:center;gap:8px;height:32px;padding:0 8px;font-size:14px;font-weight:500;color:var(--n-tx)}
+  .ntn .n-ws i{width:20px;height:20px;border-radius:4px;background:rgba(255,255,255,.1);color:var(--n-tx);font-style:normal;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .ntn .n-gh{font-size:12px;font-weight:500;color:var(--n-mut);padding:14px 8px 4px}
+  .ntn .n-si{display:flex;align-items:center;gap:6px;height:30px;padding:0 8px;border-radius:6px;font-size:14px;font-weight:500;color:var(--n-stx);white-space:nowrap;overflow:hidden}
+  .ntn .n-si span{overflow:hidden;text-overflow:ellipsis}
+  .ntn .n-si.on{background:rgba(255,255,255,.055);color:var(--n-tx)}
+  .ntn .n-si .ar{width:12px;height:12px;flex:0 0 auto;fill:var(--n-mut);transform:rotate(-90deg)}
+  .ntn .n-si .ar.op{transform:none}
+  .ntn .n-si .ar.no{visibility:hidden}
+  .ntn .n-pi{width:18px;height:18px;flex:0 0 auto;fill:var(--n-tx2)}
+  .ntn .n-h1{font-size:30px;font-weight:700;line-height:1.2;color:var(--n-tx);margin:0}
+  .ntn .n-h2{font-size:20px;font-weight:600;line-height:1.3;color:var(--n-tx);margin:0}
+  .ntn .n-dbt{font-size:20px;font-weight:600;color:var(--n-tx);margin:0}
+  .ntn .n-p{font-size:15px;line-height:1.5;color:var(--n-tx);margin:0}
+  .ntn .n-co{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:10px;background:rgb(35,56,80);font-size:15px;line-height:1.5;color:var(--n-tx)}
+  .ntn .n-co .ic{flex:0 0 auto}
+  .ntn .n-todo{display:flex;align-items:center;gap:8px;font-size:15px;line-height:1.5;color:var(--n-tx);margin:0 0 2px}
+  .ntn .n-cb{width:16px;height:16px;flex:0 0 auto;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--n-tx2);position:relative}
+  .ntn .n-cb.ok{background:var(--n-blue);box-shadow:none}
+  .ntn .n-cb.ok::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .ntn .n-todo.ok{color:var(--n-mut);text-decoration:line-through}
+  .ntn .n-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:6px;border:1px solid var(--n-bline);font-size:14px;font-weight:500;color:var(--n-tx)}
+  .ntn .n-new{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:var(--n-blue);color:var(--n-bluetx);font-size:14px;font-weight:500}
+  .ntn .n-link{display:flex;align-items:center;gap:6px;height:30px;font-size:15px;font-weight:500;color:var(--n-tx)}
+  .ntn .n-link span{border-bottom:1px solid var(--n-bline)}
+  .ntn .n-views{display:flex;gap:2px;align-items:center;border-bottom:1px solid var(--n-line);padding:0 0 6px}
+  .ntn .n-views span{font-size:14px;color:var(--n-tx2);padding:4px 8px;border-radius:6px}
+  .ntn .n-views span.on{color:var(--n-tx);box-shadow:inset 0 -2px 0 var(--n-tx)}
+  .ntn .n-tbl{width:100%;border-collapse:collapse}
+  .ntn .n-th{display:flex;align-items:center;gap:6px;height:34px;font-size:14px;color:var(--n-tx2);border-bottom:1px solid var(--n-line);border-right:1px solid var(--n-line);padding:0 8px;white-space:nowrap;overflow:hidden}
+  .ntn .n-th .ti{font-size:12.5px;font-weight:600;color:var(--n-tx2);min-width:14px;text-align:center}
+  .ntn .n-td{display:flex;align-items:center;height:37px;font-size:14px;color:var(--n-tx);border-bottom:1px solid var(--n-line);border-right:1px solid var(--n-line);padding:0 8px;white-space:nowrap;overflow:hidden}
+  .ntn .n-tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;font-size:14px;line-height:1;white-space:nowrap;background:rgba(255,255,243,.082);color:var(--n-tx)}
+  .ntn .n-tag.t-gray{background:rgba(255,252,235,.306);color:rgb(240,239,237)}
+  .ntn .n-tag.t-green{background:rgba(113,255,175,.337);color:rgb(232,241,236)}
+  .ntn .n-tag.t-blue{background:rgba(81,166,255,.494);color:rgb(229,242,252)}
+  .ntn .n-tag.t-purple{background:rgba(208,147,255,.427);color:rgb(243,235,249)}
+  .ntn .n-tag.t-orange{background:rgba(255,143,71,.482);color:rgb(251,235,222)}
+  .ntn .n-tag.t-brown{background:rgba(255,184,132,.365);color:rgb(245,237,233)}
+  .ntn .n-tag.t-red{background:rgba(255,116,105,.525);color:rgb(252,233,231)}
+  .ntn .n-tag.t-pink{background:rgba(255,133,192,.427);color:rgb(250,233,241)}
+  .ntn .n-grip{width:16px;height:16px;fill:var(--n-mut)}
+  `;
+  /* Original-Pfade aus Notion (Dark Mode, 01.11.2026) */
+  var PAGE='<svg class="n-pi" viewBox="4.12 2.37 11.75 15.25"><path d="M13.3 14.25a.55.55 0 0 1-.55.55h-5.5a.55.55 0 1 1 0-1.1h5.5a.55.55 0 0 1 .55.55m-.55-1.95a.55.55 0 1 0 0-1.1h-5.5a.55.55 0 0 0 0 1.1z"/><path d="M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z"/></svg>';
+  var ARROW='<svg class="ar" viewBox="0 0 16 16"><path d="M7.47 10.93a.75.75 0 0 0 1.06 0l4.32-4.32a.75.75 0 1 0-1.06-1.06L8 9.34 4.21 5.55a.75.75 0 0 0-1.06 1.06z"/></svg>';
+  var GRIP='<svg class="n-grip" viewBox="0 0 16 16"><path d="M4.8 3.2a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0m4 0a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0m1.2 6a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4M4.8 8a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0m5.2 6a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4m-5.2-1.2a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0"/></svg>';
+  /* Typ-Zeichen im Spaltenkopf (Notion zeigt je Typ ein eigenes Symbol) */
+  var TI={title:'Aa',text:'≡',num:'#',select:'◉',multi:'☰',status:'◌',date:'▦',check:'☑',rel:'↗',roll:'⌕',formula:'Σ',button:'▶',person:'◎',files:'⎘'};
+  function css(){ if(document.getElementById('tsn1N-css')) return; var s=document.createElement('style'); s.id='tsn1N-css'; s.textContent=CSS; document.head.appendChild(s); }
+  window.__tsn1N={css:css, PAGE:PAGE, ARROW:ARROW, GRIP:GRIP, TI:TI, F:F};
+  css();
 })();
 
 /* ============================================================
@@ -27800,7 +27884,8 @@ var TSISL_TEAM_ONB_V2=[
   var buttonsImg=['ansprechpartner/kugelschreiber.jpg','inventar/honig.jpg','lieferpartner/kuehltransporter-sprinter.webp','gerichte/lammkarree.webp','gerichte/cheesecake.webp','ansprechpartner/notizblock.jpg','gemeinkosten/telefon.webp','inventar/weissweinessig.jpg'];
 
   function vars(steps, imgs, zeroIdx){
-    return steps.map(function(s,i){ return { name:s.title.replace(/^\d+\.\s*/,''), wert:(zeroIdx.indexOf(i)>-1?0:1), img:IMG+imgs[i%imgs.length] }; });
+    /* Bilder: Platzhalter der Engine (BILD FOLGT), bis Motive abgestimmt sind. Die Listen *Img bleiben als Vorschlag. */
+    return steps.map(function(s,i){ return { name:s.title.replace(/^\d+\.\s*/,''), wert:(zeroIdx.indexOf(i)>-1?0:1) }; });
   }
 
   window.__tsn1Shop={
@@ -27809,18 +27894,20 @@ var TSISL_TEAM_ONB_V2=[
       sub:'Jede Karte ist eine Spalte deiner ersten eigenen Datenbank. Klick sie auf, bau sie in der Probeküche nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten. Um die Tabelle anzulegen, öffnest du deine Probeküche, tippst / und wählst die Tabelle.', summary:'Spalten' },
     m1_lieferanten:{ steps:lieferanten, varianten:vars(lieferanten,lieferImg,[0,8,12]),
       relations:[{ type:'ghost', name:'Lieferant', target:'Gegenspalte · in Produkte', flag:'erscheint automatisch', desc:'Gegenspalte der Verknüpfung Produkte, entsteht in Produkte von selbst.',
-        content:P('Diese Spalte legst du hier <b>nicht</b> an.')+P('Sie erscheint in <b>Produkte</b>, sobald du in Schritt 8 die Verknüpfung mit <b>Anzeigen in Produkte</b> anlegst. Du gibst ihr dort nur einen Namen: <b>Lieferant</b>.') }],
+        content:P('Diese Spalte legst du hier <b>nicht</b> an.')+P('Sie erscheint in <b>Produkte</b>, sobald du in Schritt 8 die Verknüpfung mit <b>Anzeigen in Produkte</b> anlegst. Du gibst ihr dort nur einen Namen: <b>Lieferant</b>.') },
+        { type:'ghost', name:'In Gerichten', target:'Gegenspalte · in Produkte', flag:'erscheint automatisch', desc:'Gegenspalte der Verknüpfung Produkte im Gericht, entsteht in Produkte von selbst.',
+        content:P('Diese Spalte legst du hier <b>nicht</b> an.')+P('Sie erscheint in <b>Produkte</b>, sobald du in Schritt 14 in den Gerichten die Verknüpfung mit <b>Anzeigen in Produkte</b> anlegst. Du nennst sie dort <b>In Gerichten</b>. Dann siehst du bei jedem Produkt, in welchen Gerichten es steckt.') }],
       eyebrow:'Probeküche : Lieferanten ↔ Produkte ↔ Gerichte', title:'Deine Lieferanten. <span>Mit allem verbunden.</span>',
       sub:'Jede Karte ist eine Spalte oder eine Verbindung. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten. Eine Verknüpfung legst du über + rechts in der Tabelle an, Eigenschaft : Verknüpfung.', summary:'Spalten' },
-    m1_rechnen:{ steps:rechnen, varianten:vars(rechnen,rechnenImg,[0,10,11]),
+    m1_rechnen:{ steps:rechnen, varianten:vars(rechnen,rechnenImg,[0,4,5,10,11]),
       eyebrow:'Probeküche : Rechenspalten', title:'Deine Formeln. <span>Zum Kopieren.</span>',
       sub:'Jede Karte ist eine Spalte, die rechnet. Klick sie auf, kopier die Formel, leg sie in den Einkaufswagen. Gezählt werden die Spalten, die rechnen. Eine Formelspalte legst du über + rechts in der Tabelle an, Eigenschaft : Formel.', summary:'Rechenspalten' },
     m1_ansichten:{ steps:ansichten, varianten:vars(ansichten,ansichtenImg,[0,7,9]),
       eyebrow:'Probeküche : Ansichten', title:'Deine Ansichten. <span>Für jede Frage eine.</span>',
       sub:'Jede Karte ist eine Ansicht oder ein Regler. Klick sie auf, stell sie ein, leg sie in den Einkaufswagen. Gezählt werden die Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.', summary:'Ansichten' },
     m1_buttons:{ steps:buttons, varianten:vars(buttons,buttonsImg,[0,5]),
-      eyebrow:'Probeküche : Buttons & Automationen', title:'Deine Buttons. <span>Ein Klick weniger.</span>',
-      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast. Einen Button holst du mit / auf jede Seite.', summary:'Buttons' }
+      eyebrow:'Probeküche : Buttons & Automationen', title:'Deine Buttons. <span>Weniger Handgriffe.</span>',
+      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast. Einen Button holst du mit / auf jede Seite.', summary:'Buttons & Automationen' }
   };
 })();
 
@@ -27852,10 +27939,12 @@ var TSISL_TEAM_ONB_V2=[
     ];
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a0-css',`
-      #tsn1-a0 .win{position:relative;width:min(1000px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#07080e;box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 10px rgba(255,255,255,.015);overflow:hidden}
-      #tsn1-a0 .bar{display:flex;align-items:center;gap:6px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:#0c0e16}
-      #tsn1-a0 .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+      #tsn1-a0 .win{position:relative;width:min(1000px,100%);margin:0 auto;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgb(25,25,25);box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 10px rgba(255,255,255,.015);overflow:hidden}
+      #tsn1-a0 .bar{display:flex;align-items:center;gap:6px;height:44px;padding:0 14px;font-size:14px;color:rgb(240,239,237)}
+      #tsn1-a0 .bar em{font-style:normal;color:rgb(125,122,117)}
+      
       #tsn1-a0 .lay{display:grid;grid-template-columns:200px 1fr;min-height:470px}
       #tsn1-a0 .pt{position:relative;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1)}
       #tsn1-a0.js .pt{opacity:0;transform:translateY(12px) scale(.97)}
@@ -27866,31 +27955,31 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a0 .pt{outline:1px solid rgba(199,180,137,0);outline-offset:3px;border-radius:8px;transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.34,1.56,.64,1),outline-color .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a0 .pt.hot{outline-color:rgba(199,180,137,.75)}
       #tsn1-a0 .tbw{overflow:visible}
-      #tsn1-a0 .vw span.bt{color:#05060b;background:#c7b489;font-weight:700}
-      #tsn1-a0 .side{padding:18px 12px;border-right:1px solid rgba(255,255,255,.07);background:#090a11}
-      #tsn1-a0 .side .it{font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.7);padding:7px 8px;border-radius:6px;margin-bottom:2px}
+      #tsn1-a0 .vw span.bt{color:rgb(243,249,253);background:rgb(39,131,222);box-shadow:none}
+      #tsn1-a0 .side{padding:12px 8px;background:rgb(32,32,32)}
+      #tsn1-a0 .side .it{display:flex;align-items:center;height:30px;font-size:14px;font-weight:500;color:rgb(188,186,182);padding:0 8px;border-radius:6px}
       #tsn1-a0 .side .it.l1{padding-left:20px}
-      #tsn1-a0 .side .it.on{background:rgba(199,180,137,.12);color:#fff}
-      #tsn1-a0 .side .gp{font:600 9px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:12px 8px 6px}
+      #tsn1-a0 .side .it.on{background:rgba(255,255,255,.055);color:rgb(240,239,237)}
+      #tsn1-a0 .side .gp{font-size:12px;font-weight:500;color:rgb(125,122,117);padding:12px 8px 4px}
       #tsn1-a0 .main{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px}
       #tsn1-a0 .ttl{display:flex;align-items:center;justify-content:space-between;gap:12px}
-      #tsn1-a0 .ttl h4{margin:0;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:24px;color:#fff}
-      #tsn1-a0 .lock{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 -apple-system,sans-serif;color:#efe6d2;border:1px solid rgba(199,180,137,.4);border-radius:999px;padding:6px 10px}
+      #tsn1-a0 .ttl h4{margin:0;font-weight:700;font-size:28px;color:rgb(240,239,237)}
+      #tsn1-a0 .lock{display:inline-flex;align-items:center;gap:6px;height:28px;font-size:13px;font-weight:500;color:rgb(240,239,237);border:1px solid rgba(255,255,235,.1);border-radius:6px;padding:0 10px}
       #tsn1-a0 .lock svg{width:13px;height:13px}
-      #tsn1-a0 .co{padding:11px 13px;border-radius:10px;background:rgba(199,180,137,.08);border:1px solid rgba(199,180,137,.28);font:500 12.5px/1.45 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a0 .co{padding:12px;border-radius:10px;background:rgb(35,56,80);font-size:14.5px;line-height:1.5;color:rgb(240,239,237)}
       #tsn1-a0 .vw{display:flex;gap:6px;align-items:center}
-      #tsn1-a0 .vw span{font:500 11.5px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);padding:7px 10px;border-radius:7px}
-      #tsn1-a0 .vw span.on{background:rgba(255,255,255,.07);color:#fff}
-      #tsn1-a0 .bt{margin-left:auto;font:700 11.5px/1 -apple-system,sans-serif;color:#05060b;background:#c7b489;border-radius:8px;padding:8px 12px;box-shadow:0 4px 0 #8c7c58}
-      #tsn1-a0 .tbw{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:10px}
-      #tsn1-a0 .tr{display:grid;grid-template-columns:1.5fr 1.2fr .9fr 1fr;font:500 12px/1.2 -apple-system,sans-serif;color:#fff}
-      #tsn1-a0 .tr>span{padding:10px 11px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-      #tsn1-a0 .tr.h>span{color:rgba(255,255,255,.5);font-size:11px}
-      #tsn1-a0 .tr.h i{font-style:normal;color:#c7b489;font-weight:700;margin-right:6px}
-      #tsn1-a0 .chip{display:inline-block;padding:3px 7px;border-radius:5px;background:rgba(199,180,137,.14);color:#efe6d2;font-size:11px}
-      #tsn1-a0 .amp{display:inline-block;padding:3px 7px;border-radius:5px;font-size:11px}
-      #tsn1-a0 .amp.g{background:rgba(70,175,115,.16);color:#a9dcc0}
-      #tsn1-a0 .amp.r{background:rgba(224,87,79,.16);color:#f2b8b3}
+      #tsn1-a0 .vw span{font-size:13.5px;color:rgb(173,169,163);padding:4px 8px;border-radius:6px}
+      #tsn1-a0 .vw span.on{color:rgb(240,239,237);box-shadow:inset 0 -2px 0 rgb(240,239,237)}
+      #tsn1-a0 .bt{margin-left:auto;font-size:14px;font-weight:500;color:rgb(243,249,253);background:rgb(39,131,222);border-radius:6px;padding:0 10px;height:28px;display:inline-flex;align-items:center}
+      #tsn1-a0 .tbw{position:relative}
+      #tsn1-a0 .tr{display:grid;grid-template-columns:1.5fr 1.2fr .9fr 1fr;font-size:14px;line-height:1.2;color:rgb(240,239,237)}
+      #tsn1-a0 .tr>span{padding:9px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      #tsn1-a0 .tr.h>span{color:rgb(173,169,163);font-size:13.5px}
+      #tsn1-a0 .tr.h i{font-style:normal;color:rgb(173,169,163);font-weight:600;margin-right:6px}
+      #tsn1-a0 .chip{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;background:rgba(255,252,235,.306);color:rgb(240,239,237);font-size:13.5px}
+      #tsn1-a0 .amp{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;font-size:13.5px}
+      #tsn1-a0 .amp.g{background:rgba(113,255,175,.337);color:rgb(232,241,236)}
+      #tsn1-a0 .amp.r{background:rgba(255,143,71,.482);color:rgb(251,235,222)}
       #tsn1-a0 .lp{position:absolute;right:16px;bottom:10px;width:42px;height:42px;border-radius:50%;border:2px solid #c7b489;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 60%);box-shadow:0 10px 24px rgba(0,0,0,.6)}
       #tsn1-a0 .lp::after{content:"";position:absolute;right:-11px;bottom:-8px;width:15px;height:3px;border-radius:2px;background:#c7b489;transform:rotate(40deg)}
       #tsn1-a0 .lp .nb{top:-12px;left:-12px}
@@ -27906,12 +27995,12 @@ var TSISL_TEAM_ONB_V2=[
       function nb(n){ return '<span class="nb">'+n+'</span>'; }
       host.id='tsn1-a0';
       host.innerHTML=R.head('Zehn Lektionen','Das Handwerk hinter deiner <span class="g">Vorlage</span>.','Jedes Teil dieses Fensters erklärt dir eine Lektion. Am Ende des Moduls liest du jede Seite der Backoffice-Vorlage so selbstverständlich wie deine Speisekarte.')+
-        '<div class="win"><div class="bar"><i></i><i></i><i></i></div><div class="lay">'+
+        '<div class="win ntn"><div class="bar">Probeküche <em>/</em> Produkte</div><div class="lay">'+
           '<div class="side pt" data-k="1">'+nb('1.1')+'<div class="gp">Teamspaces</div><div class="it">Küche</div><div class="it l1">Notion AI Backoffice</div><div class="it">Service</div><div class="gp">Privat</div><div class="it on">Probeküche</div></div>'+
           '<div class="main">'+
             '<div class="ttl"><h4>Produkte</h4><span class="lock pt" data-k="9">'+nb('1.9')+LOCK+'Kann Inhalt bearbeiten</span></div>'+
-            '<div class="co pt" data-k="2">'+nb('1.2')+'Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
-            '<div class="vw"><span class="pt on" data-k="7">'+nb('1.7')+'Bestellliste</span><span>Lager</span><span>Knapp</span><span class="bt pt" data-k="8">'+nb('1.8')+'+ Neues Produkt</span></div>'+
+            '<div class="co pt" data-k="2">'+nb('1.2')+'💡 Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
+            '<div class="vw"><span class="pt on" data-k="7">'+nb('1.7')+'Bestellliste</span><span>Lager</span><span>Knapp</span><span class="bt pt" data-k="8">'+nb('1.8')+'Neu</span></div>'+
             '<div class="tbw">'+
               '<div class="tr h pt" data-k="3">'+nb('1.3')+'<span><i>Aa</i>Produkt</span><span><i>↗</i>Lieferant</span><span><i>#</i>Preis</span><span><i>Σ</i>Bestand prüfen</span></div>'+
               '<div class="pt" data-k="4">'+nb('1.4')+
@@ -27925,7 +28014,7 @@ var TSISL_TEAM_ONB_V2=[
           '</div></div></div>'+
         '<div class="cap"></div><div class="rp"><button type="button">Neu abspielen</button></div>';
 
-      var CAP={1:'<b>1.1</b> Die Seitenleiste ist der Grundriss deines Betriebs.',2:'<b>1.2</b> Ein Hinweis, der am Pass nicht überlesen wird.',3:'<b>1.3</b> Jede Spalte hat einen Typ, und der Typ entscheidet, was sie kann.',4:'<b>1.4</b> Die Zeilen kommen von Hand, aus einer Liste oder aus einem Dokument.',5:'<b>1.5</b> Der Lieferant steht über eine Verknüpfung direkt beim Produkt.',6:'<b>1.6</b> Eine Formel prüft den Bestand und färbt, was knapp ist.',7:'<b>1.7</b> Eine Ansicht beantwortet eine Frage: Was bestelle ich bei wem?',8:'<b>1.8</b> Ein Button legt neue Artikel mit einem Klick an.',9:'<b>1.9</b> Das Team trägt ein, die Formeln bleiben geschützt.',10:'<b>1.10</b> Stimmt eine Zahl nicht, verfolgst du sie bis zur Quelle.'};
+      var CAP={1:'<b>1.1</b> Die Seitenleiste ist der Grundriss deines Betriebs.',2:'<b>1.2</b> Ein Hinweis, der am Pass nicht überlesen wird.',3:'<b>1.3</b> Jede Spalte hat einen Typ, und der Typ entscheidet, was sie kann.',4:'<b>1.4</b> Die Zeilen kommen von Hand, aus einer Liste oder aus einem Dokument.',5:'<b>1.5</b> Der Lieferant steht über eine Verknüpfung direkt beim Produkt.',6:'<b>1.6</b> Eine Formel prüft den Bestand und färbt, was knapp ist.',7:'<b>1.7</b> Eine Ansicht beantwortet eine Frage: Was bestelle ich bei wem?',8:'<b>1.8</b> Buttons und Automationen nehmen dir die Handgriffe ab, die sich jeden Tag wiederholen.',9:'<b>1.9</b> Das Team trägt ein, die Formeln bleiben geschützt.',10:'<b>1.10</b> Stimmt eine Zahl nicht, verfolgst du sie bis zur Quelle.'};
       var pts={}; [].forEach.call(host.querySelectorAll('.pt'),function(p){ pts[p.getAttribute('data-k')]=p; });
       var cap=host.querySelector('.cap');
       var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
@@ -28016,49 +28105,23 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      var NN=window.__tsn1N; NN.css();
       N.addCSS('tsn1-a1-css',`
-      #tsn1-a1 .stage{position:relative;width:min(960px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);
-        background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#07080e;box-shadow:0 60px 120px -50px rgba(0,0,0,.95),0 0 0 9px rgba(255,255,255,.018);overflow:hidden}
-      #tsn1-a1 .bar{display:flex;align-items:center;gap:6px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:#0c0e16}
-      #tsn1-a1 .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
-      #tsn1-a1 .bar span{margin-left:12px;font-size:11.5px;color:rgba(255,255,255,.45)}
-      #tsn1-a1 .win{display:grid;grid-template-columns:240px 1fr;min-height:430px}
-      #tsn1-a1 .side{border-right:1px solid rgba(255,255,255,.07);padding:16px 10px;background:#090a11}
-      #tsn1-a1 .ws{display:flex;align-items:center;gap:9px;padding:6px 8px 14px;font-size:13px;font-weight:600;color:#fff}
-      #tsn1-a1 .ws b{width:22px;height:22px;border-radius:6px;background:#c7b489;color:#05060b;display:flex;align-items:center;justify-content:center;font-size:11px}
-      #tsn1-a1 .grp{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:10px 8px 6px}
-      #tsn1-a1 .nd{position:relative;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;font-size:12.5px;color:rgba(255,255,255,.72);white-space:nowrap}
-      #tsn1-a1 .nd .ic{width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.3);flex:0 0 auto}
-      #tsn1-a1 .nd.db .ic{border-color:rgba(199,180,137,.7);background:repeating-linear-gradient(0deg,rgba(199,180,137,.35) 0 1px,transparent 1px 4px)}
-      #tsn1-a1 .nd.l1{padding-left:24px}#tsn1-a1 .nd.l2{padding-left:40px}
-      #tsn1-a1 .nd.l1::before,#tsn1-a1 .nd.l2::before{content:"";position:absolute;top:0;bottom:50%;width:8px;border-left:1px solid rgba(199,180,137,.3);border-bottom:1px solid rgba(199,180,137,.3);border-bottom-left-radius:4px}
-      #tsn1-a1 .nd.l1::before{left:14px}#tsn1-a1 .nd.l2::before{left:30px}
-      #tsn1-a1 .nd.cur{background:rgba(199,180,137,.12);color:#fff}
-      #tsn1-a1 .main{position:relative;padding:28px clamp(18px,3vw,40px) 30px}
-      #tsn1-a1 .crumb{font-size:11.5px;color:rgba(255,255,255,.4);margin:0 0 14px}
-      #tsn1-a1 .crumb em{font-style:normal;color:rgba(199,180,137,.85)}
-      #tsn1-a1 .blk{position:relative;margin:0 0 12px}
-      #tsn1-a1 .blk .gr{position:absolute;left:-22px;top:4px;width:14px;height:18px;display:grid;grid-template-columns:repeat(2,4px);gap:3px 3px;align-content:center;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a1 .blk .gr i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.55)}
+      #tsn1-a1 .stage{position:relative;width:min(980px,100%);margin:0 auto;border-radius:12px;border:1px solid rgba(255,255,255,.1);box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a1 .win{display:grid;grid-template-columns:240px 1fr;min-height:470px}
+      #tsn1-a1 .main{position:relative;display:flex;flex-direction:column}
+      #tsn1-a1 .doc{position:relative;padding:22px clamp(18px,4vw,56px) 30px clamp(30px,5vw,72px)}
+      #tsn1-a1 .ptitle{margin:0 0 14px}
+      #tsn1-a1 .blk{position:relative;margin:0 0 10px}
+      #tsn1-a1 .blk .gr{position:absolute;left:-24px;top:3px;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .blk.grab .gr{opacity:1}
-      #tsn1-a1 .h{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,27px);color:#fff;margin:0}
-      #tsn1-a1 .p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0}
-      #tsn1-a1 .co{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;background:rgba(199,180,137,.08);border:1px solid rgba(199,180,137,.26);font-size:13px;line-height:1.5;color:rgba(255,255,255,.86)}
-      #tsn1-a1 .co span{color:#c7b489;font-weight:700}
-      #tsn1-a1 .td{display:flex;align-items:center;gap:9px;font-size:13px;color:rgba(255,255,255,.8);margin:0 0 6px}
-      #tsn1-a1 .td i{width:13px;height:13px;border-radius:3px;border:1.4px solid rgba(255,255,255,.45);flex:0 0 auto;position:relative}
-      #tsn1-a1 .td.ok i{background:#c7b489;border-color:#c7b489}
-      #tsn1-a1 .td.ok i::after{content:"";position:absolute;left:3.5px;top:1px;width:4px;height:7px;border:solid #05060b;border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
-      #tsn1-a1 .td.ok{color:rgba(255,255,255,.45);text-decoration:line-through}
       #tsn1-a1 .row2{display:grid;grid-template-columns:1fr;gap:14px}
       #tsn1-a1 .row2.cols{grid-template-columns:1.15fr 1fr;align-items:start}
-      #tsn1-a1 .pic{border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,.12);height:150px;background:#0b0d14;position:relative}
+      #tsn1-a1 .pic{border-radius:4px;overflow:hidden;height:150px;background:rgb(32,32,32);transition:box-shadow .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .pic img{width:100%;height:100%;object-fit:cover;display:block}
-      #tsn1-a1 .pic{transition:box-shadow .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a1 .pic.lift{box-shadow:0 30px 60px -20px rgba(0,0,0,.9),0 0 0 2px rgba(199,180,137,.55)}
-      #tsn1-a1 .bimg .hand{left:-24px;top:14px}
-      #tsn1-a1 .hand{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(239,230,210,.92);box-shadow:0 0 0 6px rgba(239,230,210,.16),0 8px 18px rgba(0,0,0,.6);pointer-events:none;opacity:0;z-index:5}
-      #tsn1-a1 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
+      #tsn1-a1 .pic.lift{box-shadow:0 30px 60px -20px rgba(0,0,0,.9),0 0 0 2px rgb(39,131,222)}
+      #tsn1-a1 .hand{position:absolute;left:-18px;top:6px;width:18px;height:22px;opacity:0;z-index:5;pointer-events:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+      #tsn1-a1 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(980px,100%);margin:22px auto 0}
       #tsn1-a1 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a1 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
@@ -28066,43 +28129,42 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a1 .rp{display:flex;justify-content:center;margin-top:18px}
       #tsn1-a1 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .rp button:hover{background:#c7b489;color:#05060b}
-      /* Startzustand nur unter .js (Endzustand = Default) */
-      #tsn1-a1.js .nd,#tsn1-a1.js .blk{opacity:0;transform:translateY(10px)}
-      #tsn1-a1.js .nd.in,#tsn1-a1.js .blk.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a1.js .n-si,#tsn1-a1.js .blk{opacity:0;transform:translateY(8px)}
+      #tsn1-a1.js .n-si.in,#tsn1-a1.js .blk.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1)}
       @media(max-width:760px){
         #tsn1-a1 .win{grid-template-columns:1fr}
-        #tsn1-a1 .side{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
+        #tsn1-a1 .n-side{display:none}
         #tsn1-a1 .row2.cols{display:flex;flex-direction:column}
         #tsn1-a1 .row2.cols .bimg{order:-1}
-        #tsn1-a1 .bimg .hand{left:10px;top:10px}
+        #tsn1-a1 .hand{left:8px;top:8px}
         #tsn1-a1 .rail{grid-template-columns:1fr}
       }
-      @media(prefers-reduced-motion:reduce){ #tsn1-a1.js .nd,#tsn1-a1.js .blk{opacity:1;transform:none} }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a1.js .n-si,#tsn1-a1.js .blk{opacity:1;transform:none} }
       `);
-      var TREE=[
-        ['g','Teamspaces'],['n','Küche',0],['n','Notion AI Backoffice',1],['db','DB 0 : Inventurliste',2],['db','DB IV : Zutaten',2],['db','DB XI : Gerichte &amp; Getränke',2],
-        ['n','Service',0],['n','Hygieneplan',1,'cur'],['g','Privat'],['n','Probeküche',0]
-      ];
-      var side=TREE.map(function(t){
-        if(t[0]==='g') return '<div class="grp">'+t[1]+'</div>';
-        return '<div class="nd '+(t[0]==='db'?'db ':'')+'l'+t[2]+' '+(t[3]||'')+'"><span class="ic"></span>'+t[1]+'</div>';
-      }).join('');
+      var P=NN.PAGE, A=NN.ARROW;
+      function si(t,lvl,arrow,on){ return '<div class="n-si'+(on?' on':'')+'" style="padding-left:'+(8+lvl*14)+'px">'+A.replace('class="ar"','class="ar'+(arrow==='op'?' op':arrow==='no'?' no':'')+'"')+P+'<span>'+t+'</span></div>'; }
+      var side='<div class="n-ws"><i>B</i>Dein Betrieb</div><div class="n-gh">Teamspaces</div>'+
+        si('Küche',0,'op')+si('Mein Notion AI Backoffice',1,'op')+si('DB 0 : Inventurliste',2,'')+si('DB IV Zutaten',2,'')+si('DB Gerichte',2,'')+
+        si('Service',0,'op')+si('Hygieneplan',1,'no',true)+'<div class="n-gh">Privat</div>'+si('Probeküche',0,'');
+      var HAND='<svg class="hand" viewBox="0 0 18 22"><path d="M2 1.5v16.2l4.3-4 2.7 6.3 2.8-1.2-2.7-6.2 5.9-.3z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+      var G='<span class="gr">'+NN.GRIP+'</span>';
       host.id='tsn1-a1';
       host.innerHTML=R.head('Seiten und Blöcke','Jede Seite ist ein <span class="g">Stapel aus Blöcken</span>.','Im Fenster der Seitenbaum deines Betriebs und eine Seite daraus. Jeder Block lässt sich greifen und neu setzen, ohne dass etwas verloren geht.')+
-        '<div class="stage"><div class="bar"><i></i><i></i><i></i><span>Notion</span></div><div class="win">'+
-        '<div class="side"><div class="ws"><b>B</b>Dein Betrieb</div>'+side+'</div>'+
-        '<div class="main">'+
-          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><h4 class="h">Schichtende Service</h4></div>'+
-          '<div class="row2 cols"><div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><p class="p">Gilt für Theke, Pass und Gastraum. Wer die Schicht schließt, hakt ab, bevor das Licht ausgeht.</p></div>'+
-          '<div class="blk bimg"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="pic"><img alt="Angerichteter Teller am Pass" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div><span class="hand"></span></div></div>'+
-          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="co"><span>!</span>Allergen-Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen, nie geschätzt.</div></div>'+
-          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="td ok"><i></i>Kühlschranktemperaturen eintragen</div><div class="td"><i></i>Theke und Kaffeemaschine reinigen</div><div class="td"><i></i>Spülmaschine leeren, Siebe säubern</div></div>'+
-        '</div></div></div>'+
+        '<div class="stage ntn"><div class="win">'+
+        '<div class="n-side">'+side+'</div>'+
+        '<div class="main"><div class="n-top">Service<span class="sep">/</span>Hygieneplan<span class="ed">Bearbeitet gerade</span></div><div class="doc">'+
+          '<h4 class="n-h1 ptitle">Hygieneplan</h4>'+
+          '<div class="blk">'+G+'<h5 class="n-h2">Schichtende Service</h5></div>'+
+          '<div class="row2 cols"><div class="blk">'+G+'<p class="n-p">Gilt für Theke, Pass und Gastraum. Wer die Schicht schließt, hakt ab, bevor das Licht ausgeht.</p></div>'+
+          '<div class="blk bimg">'+G+'<div class="pic"><img alt="Angerichteter Teller am Pass" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div>'+HAND+'</div></div>'+
+          '<div class="blk">'+G+'<div class="n-co"><span class="ic">💡</span><span>Allergen-Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen, nie geschätzt.</span></div></div>'+
+          '<div class="blk">'+G+'<div class="n-todo ok"><span class="n-cb ok"></span>Kühlschranktemperaturen eintragen</div><div class="n-todo"><span class="n-cb"></span>Theke und Kaffeemaschine reinigen</div><div class="n-todo"><span class="n-cb"></span>Spülmaschine leeren, Siebe säubern</div></div>'+
+        '</div></div></div></div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Seiten liegen im Baum, Seiten in Seiten.</button><button class="st" data-s="1"><b>02</b>Überschrift, Text, Bild, Hinweis und Liste: lauter einzelne Blöcke.</button><button class="st" data-s="2"><b>03</b>Am Griff ziehst du einen Block an eine neue Stelle.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
-      var nds=host.querySelectorAll('.nd'), blks=host.querySelectorAll('.blk'), sts=host.querySelectorAll('.st');
-      var row=host.querySelector('.row2'), bimg=host.querySelector('.bimg'), pic=host.querySelector('.pic'), hand=host.querySelector('.hand'), main=host.querySelector('.main');
+      var nds=host.querySelectorAll('.n-si'), blks=host.querySelectorAll('.blk'), sts=host.querySelectorAll('.st');
+      var row=host.querySelector('.row2'), bimg=host.querySelector('.bimg'), pic=host.querySelector('.pic'), hand=host.querySelector('.hand'), main=host.querySelector('.doc');
       var T=[];
       function later(fn,ms){ T.push(setTimeout(fn,ms)); }
       function clear(){ T.forEach(clearTimeout); T=[]; }
@@ -28172,7 +28234,7 @@ var TSISL_TEAM_ONB_V2=[
             {mi:'Dein Büro', nm:'Privat', tx:'<p>Seiten, die nur du siehst. Hier landet alles, was du für dich anlegst, und hier landet auch eine Vorlage, die du dir in deinen Workspace kopierst.</p>'}
           ],3),
           R.txt('<p><strong>Seiten liegen in Seiten.</strong> Jede Seite kann beliebig viele Unterseiten haben, und genau so entsteht der Baum, den du links siehst. Klappst du einen Eintrag auf, siehst du, was darunter liegt. Ganz oben im Fenster zeigt dir eine Pfadzeile, wo du gerade stehst, zum Beispiel <em>Service › Hygieneplan</em>. Ein Klick auf einen Teil des Pfads bringt dich eine Ebene zurück.</p>'),
-          R.fund(['Notion AI Backoffice','DB Zutaten','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
+          R.fund(['Mein Notion AI Backoffice','DB IV Zutaten','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
         ]}),
         R.sec({eb:'Blöcke', title:'Was ein <span class="g">Block</span> ist und warum dich das freut', lead:'Ein Block ist alles, was auf einer Seite eine eigene Zeile hat. Ein Absatz, eine Überschrift, ein Bild, eine Checkliste, eine ganze Tabelle.', blocks:[
           R.txt('<p><strong>Mit dem Schrägstrich holst du jeden Block.</strong> Tippe auf einer leeren Zeile <kbd>/</kbd> und Notion zeigt dir eine Liste aller Blöcke. Schreibst du weiter, zum Beispiel <kbd>/</kbd> und dann „Tabelle", wird die Liste kürzer, bis nur noch passt, was du suchst. Das ist der Handgriff, den du in diesem Modul am häufigsten benutzen wirst.</p>'+
@@ -28240,20 +28302,21 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a2-css',`
-      #tsn1-a2 .stg{position:relative;width:min(760px,100%);margin:0 auto;height:600px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:#07080e;overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.95)}
+      #tsn1-a2 .stg{position:relative;width:min(760px,100%);margin:0 auto;height:600px;border-radius:12px;border:1px solid rgba(255,255,255,.1);overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.95)}
       #tsn1-a2 .scr{position:absolute;left:28px;right:28px;top:28px;height:388px;border-radius:14px;border:1.5px solid rgba(199,180,137,.75);box-shadow:0 0 0 9999px rgba(4,5,10,.62),0 0 40px rgba(199,180,137,.12);pointer-events:none;z-index:3;transition:box-shadow .8s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .scr span{position:absolute;right:12px;top:-11px;padding:3px 9px;border-radius:999px;background:#07080e;border:1px solid rgba(199,180,137,.55);font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
       #tsn1-a2 .doc{position:absolute;left:52px;right:52px;top:50px}
-      #tsn1-a2 .ttl{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(20px,2.4vw,25px);color:#fff;margin:0 0 6px}
-      #tsn1-a2 .sub{font:500 12px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.55);margin:0}
+      #tsn1-a2 .ttl{font-size:28px;font-weight:700;line-height:1.2;color:rgb(240,239,237);margin:0 0 6px}
+      #tsn1-a2 .sub{font-size:14px;line-height:1.4;color:rgb(173,169,163);margin:0}
       #tsn1-a2 .sec{position:absolute;left:52px;right:52px;top:0;will-change:transform;transition:transform .95s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a2 .hd{display:flex;align-items:center;gap:10px;height:40px;border-bottom:1px solid rgba(255,255,255,.07);font:600 14px/1 -apple-system,sans-serif;color:#fff}
-      #tsn1-a2 .hd::before{content:"";width:0;height:0;border-left:6px solid #c7b489;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;transform:rotate(90deg);transition:transform .6s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a2 .sec.cl .hd::before{transform:none}
-      #tsn1-a2 .bd{padding:9px 0 12px 16px;font:500 12.5px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.78);transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .hd{display:flex;align-items:center;gap:6px;height:40px;font-size:18px;font-weight:600;color:rgb(240,239,237)}
+      #tsn1-a2 .hd svg{width:16px;height:16px;fill:rgb(240,239,237);flex:0 0 auto;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .sec.cl .hd svg{transform:rotate(-90deg)}
+      #tsn1-a2 .bd{padding:2px 0 10px 22px;font-size:15px;line-height:1.5;color:rgb(240,239,237);transition:opacity .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .sec.cl .bd{opacity:0}
-      #tsn1-a2 .sec.al .hd{color:#c7b489}
+      #tsn1-a2 .sec.al .bd{margin-left:22px;padding:12px;border-radius:10px;background:rgb(35,56,80)}
       #tsn1-a2 .fit{position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:center;font:500 12.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
       #tsn1-a2 .fit b{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;transition:color .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .fit b.ok{color:#c7b489}
@@ -28277,8 +28340,8 @@ var TSISL_TEAM_ONB_V2=[
       ];
       host.id='tsn1-a2';
       host.innerHTML=R.head('Ein Bildschirm am Pass','Alles Wichtige auf <span class="g">einen Blick</span>.','Ein Küchenhandbuch, ganz aufgeklappt, ist zu lang für das Tablet am Pass. Mit Überschriften als Toggle passt es auf einen Bildschirm, und aufgeklappt wird nur, was gerade gebraucht wird.')+
-        '<div class="stg"><div class="doc"><p class="ttl">Küchenhandbuch</p><p class="sub">Station Kalt · gilt für alle Schichten</p></div>'+
-          SEC.map(function(x,i){ return '<div class="sec'+(x[2]?' al':'')+'" data-i="'+i+'"><div class="hd">'+x[0]+'</div><div class="bd">'+x[1]+'</div></div>'; }).join('')+
+        '<div class="stg ntn"><div class="doc"><p class="ttl">Küchenhandbuch</p><p class="sub">Station Kalt · gilt für alle Schichten</p></div>'+
+          SEC.map(function(x,i){ return '<div class="sec'+(x[2]?' al':'')+'" data-i="'+i+'"><div class="hd">'+window.__tsn1N.ARROW.replace('class="ar"','')+x[0]+'</div><div class="bd">'+(x[2]?'💡 ':'')+x[1]+'</div></div>'; }).join('')+
           '<div class="scr"><span>Ein Bildschirm</span></div>'+
           '<div class="fit"><span>Sichtbar ohne Scrollen</span><b>2 von 6</b></div></div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Alles offen: Die Hälfte liegt unter dem Bildschirmrand.</button><button class="st" data-s="1"><b>02</b>Überschriften als Toggle: alle sechs auf einen Blick.</button><button class="st" data-s="2"><b>03</b>Geöffnet wird nur, was gerade gebraucht wird.</button></div>'+
@@ -28289,7 +28352,7 @@ var TSISL_TEAM_ONB_V2=[
       function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
       /* Positionen aus gemessenen Hoehen, Bewegung nur ueber transform */
       function lay(open){
-        var y=doc.offsetTop+doc.offsetHeight+14, frameBottom=28+388, inside=0;
+        var y=doc.offsetTop+doc.offsetHeight+18, frameBottom=28+388, inside=0;
         secs.forEach(function(s,i){
           var on=open==='all'||open===i; s.classList.toggle('cl',!on);
           s.style.transform='translateY('+y+'px)';
@@ -28350,8 +28413,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Einträge lesbar machen', title:'Auch jeder Eintrag einer Datenbank ist eine <span class="g">Seite</span>', lead:'Öffnest du in der Vorlage ein Gericht, siehst du keine Tabellenzeile, sondern eine ganze Seite mit allen Spalten untereinander. Bei dreißig Spalten wird das lang.', blocks:[
           R.txt('<p><strong>Das Layout dieser Seiten kannst du einstellen.</strong> Öffne einen Eintrag, klick oben rechts auf die drei Punkte und dann auf <em>Darstellung &amp; Layout</em> und <em>Layout anpassen</em>. Dort legst du fest, welche Eigenschaften oben angepinnt stehen und welche in einem Detailbereich verschwinden. Die Einstellung gilt für alle Einträge dieser Datenbank, du machst sie also nur einmal.</p>'),
-          R.fund(['DB XI : Gerichte &amp; Getränke','ein Gericht öffnen','Layout anpassen'],'<p>Pinne oben an, was du beim Blick auf ein Gericht wirklich brauchst, zum Beispiel Verkaufspreis, Wareneinsatz in Prozent und Allergene. Die Rechenspalten dahinter bleiben vollständig erhalten, sie stehen nur weiter unten.</p>'),
-          R.fund(['Operations Area','Hygiene, Behörden &amp; Handbücher'],'<p>Die Handbuchseiten der Vorlage sind normale Seiten mit Überschriften, Callouts und Toggles. Wenn du sie an deinen Betrieb anpasst, gilt dasselbe wie oben: für den Moment schreiben, in dem gelesen wird.</p>')
+          R.fund(['Mein Notion AI Backoffice','DB Gerichte','ein Gericht öffnen'],'<p>Pinne oben an, was du beim Blick auf ein Gericht wirklich brauchst, zum Beispiel Verkaufspreis, Wareneinsatz in Prozent und Allergene. Die Rechenspalten dahinter bleiben vollständig erhalten, sie stehen nur weiter unten.</p>'),
         ]}),
         R.sec({eb:'Jetzt du', title:'Deine erste <span class="g">Stationskarte</span>', blocks:[
           R.jetzt([
@@ -28389,6 +28451,7 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a3-css',`
       #tsn1-a3 .card{position:relative;width:min(980px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#07080e;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
       #tsn1-a3 .slip{position:relative;margin:22px 22px 0;padding:16px 18px 18px;border-radius:6px;background:#efe6d2;color:#2a2620;font:500 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 18px 30px -18px rgba(0,0,0,.8)}
@@ -28397,20 +28460,22 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a3 .slip .ln{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
       #tsn1-a3 .slip .ln span{position:relative;display:inline-block}
       #tsn1-a3 .slip .ln span.out{visibility:hidden}
-      #tsn1-a3 .tbl{margin:30px 22px 22px;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+      #tsn1-a3 .tblw{background:rgb(25,25,25);margin-top:26px;padding:16px 22px 22px;border-top:1px solid rgba(255,255,255,.1)}
+      #tsn1-a3 .tbl{margin:0}
+      #tsn1-a3 .dbt{font-size:20px;font-weight:600;color:rgb(240,239,237);margin:0 0 10px}
       #tsn1-a3 .row{display:grid;grid-template-columns:1.5fr 1.05fr 1.25fr .7fr .8fr .95fr .9fr}
-      #tsn1-a3 .hd>div{display:flex;align-items:center;gap:6px;padding:10px 10px;font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.08);white-space:nowrap;overflow:hidden}
-      #tsn1-a3 .hd i{font-style:normal;font-weight:700;color:#c7b489;font-size:10.5px;min-width:16px;text-align:center}
-      #tsn1-a3 .hd>div.hit{background:rgba(199,180,137,.10);color:#fff}
-      #tsn1-a3 .bd>div{position:relative;min-height:46px;display:flex;align-items:center;padding:10px;font:500 12.5px/1.3 -apple-system,sans-serif;color:#fff;border-right:1px solid rgba(255,255,255,.05)}
+      #tsn1-a3 .hd>div{display:flex;align-items:center;gap:6px;height:34px;padding:0 8px;font-size:13.5px;color:rgb(173,169,163);border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);white-space:nowrap;overflow:hidden;transition:background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .hd i{font-style:normal;font-weight:600;color:rgb(173,169,163);font-size:12px;min-width:14px;text-align:center}
+      #tsn1-a3 .hd>div.hit{background:rgba(255,255,255,.055);color:rgb(240,239,237)}
+      #tsn1-a3 .bd>div{position:relative;min-height:37px;display:flex;align-items:center;padding:0 8px;font-size:14px;line-height:1.3;color:rgb(240,239,237);border-right:1px solid rgba(255,255,243,.082);border-bottom:1px solid rgba(255,255,243,.082)}
       #tsn1-a3 .bd>div:last-child{border-right:0}
       #tsn1-a3 .bd .v{display:inline-block;will-change:transform}
-      #tsn1-a3 .bd .chip{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(199,180,137,.16);color:#efe6d2;font-size:11.5px}
-      #tsn1-a3 .bd .cb{width:15px;height:15px;border-radius:4px;background:#c7b489;position:relative;display:inline-block}
-      #tsn1-a3 .bd .cb::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #05060b;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+      #tsn1-a3 .bd .chip{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;background:rgba(255,252,235,.306);color:rgb(240,239,237);font-size:14px}
+      #tsn1-a3 .bd .cb{width:16px;height:16px;border-radius:3px;background:rgb(39,131,222);position:relative;display:inline-block}
+      #tsn1-a3 .bd .cb::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
       #tsn1-a3 .bd .n{margin-left:auto;font-variant-numeric:tabular-nums}
       #tsn1-a3 .bd .open{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:600 10px/1 -apple-system,sans-serif;letter-spacing:.06em;color:#05060b;background:#efe6d2;border-radius:5px;padding:4px 6px;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a3 .row.bd.pk{background:rgba(199,180,137,.06)}
+      #tsn1-a3 .row.bd.pk{background:rgba(255,255,255,.035)}
       #tsn1-a3 .xpeek{position:absolute;top:0;right:0;bottom:0;width:min(330px,62%);background:#0d0f17;border-left:1px solid rgba(199,180,137,.3);box-shadow:-40px 0 80px -30px rgba(0,0,0,.9);padding:22px 22px;transform:translateX(102%);transition:transform .9s cubic-bezier(.16,1,.3,1);z-index:4}
       #tsn1-a3 .peek .pt{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;margin:4px 0 14px}
       #tsn1-a3 .peek .pi{display:grid;grid-template-columns:110px 1fr;gap:8px;font:500 12px/1.35 -apple-system,sans-serif;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
@@ -28419,14 +28484,14 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a3 .peek .ph{margin-top:14px;height:96px;border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
       #tsn1-a3 .peek .ph img{width:100%;height:100%;object-fit:cover;display:block}
       #tsn1-a3 .peek .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-      #tsn1-a3 .bd>div::before{content:attr(data-l);display:none;font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5);margin-right:auto;padding-right:12px}
+      #tsn1-a3 .bd>div::before{content:attr(data-l);display:none;font-size:14px;line-height:1.2;color:rgb(173,169,163);margin-right:auto;padding-right:12px}
       #tsn1-a3 .bd>div{will-change:transform}
       #tsn1-a3 .hd{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
       #tsn1-a3 .tblw.pg .hd{opacity:.18}
       #tsn1-a3 .tblw.pg .row.bd{grid-template-columns:1fr 1fr;column-gap:22px;padding:8px 6px}
-      #tsn1-a3 .tblw.pg .bd>div{border-right:0;border-bottom:1px dashed rgba(255,255,255,.07);min-height:40px}
+      #tsn1-a3 .tblw.pg .bd>div{border-right:0;border-bottom:0;min-height:34px}
       #tsn1-a3 .tblw.pg .bd>div::before{display:block}
-      #tsn1-a3 .tblw.pg .bd>div[data-c="0"]{grid-column:1 / -1;font-family:"Lineal Web","Lineal TS",sans-serif;font-size:20px;font-weight:600}
+      #tsn1-a3 .tblw.pg .bd>div[data-c="0"]{grid-column:1 / -1;font-size:26px;font-weight:700;min-height:44px}
       #tsn1-a3 .tblw.pg .bd>div[data-c="0"]::before{display:none}
       #tsn1-a3 .stamp{position:absolute;right:16px;bottom:12px;font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#7a2a2a;border:1.5px solid rgba(122,42,42,.6);border-radius:4px;padding:5px 7px;transform:rotate(-6deg) scale(1.3);opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
       #tsn1-a3 .stamp.on{opacity:.9;transform:rotate(-6deg) scale(1)}
@@ -28452,14 +28517,14 @@ var TSISL_TEAM_ONB_V2=[
       }
       @media(prefers-reduced-motion:reduce){ #tsn1-a3.js .hand-in{opacity:1;transform:none} }
       `);
-      var COLS=[['Aa','Produkt'],['◉','Kategorie'],['≡','Gebinde'],['#','Menge'],['#','Preis'],['☐','Im Sortiment'],['▦','Geliefert']];
+      var COLS=[['Aa','Produkt'],['◉','Kategorie'],['≡','Gebinde'],['#','Menge'],['#','Preis'],['☑','Im Sortiment'],['▦','Geliefert']];
       /* Wert vom Lieferschein -> Spalte (Index). Kategorie und Im Sortiment stehen auf keinem Lieferschein. */
       var SLIP=[['Burrata 125 g',0,'<span class="v">Burrata 125 g</span>'],['Karton 12 × 125 g',2,'<span class="v">Karton 12 × 125 g</span>'],['1,5 kg',3,'<span class="v n">1,5</span>'],['18,90 €',4,'<span class="v n">18,90 €</span>'],['03.11.2026',6,'<span class="v">3. Nov. 2026</span>']];
       host.id='tsn1-a3';
       host.innerHTML=R.head('Spalten und Typen','Jeder Wert findet seine <span class="g">Spalte</span>.','Eine Zeile vom Lieferschein wird zum Eintrag in der Datenbank. Was auf keinem Lieferschein steht, ergänzt du. Und jede Zeile ist zugleich eine eigene Seite.')+
         '<div class="card"><div class="slip"><span class="stamp">übertragen</span><div class="lh"><span>Lieferschein · Pos. 3</span><span>Art.-Nr. 040211</span></div><div class="ln">'+
           SLIP.map(function(x,i){ return '<span data-i="'+i+'">'+x[0]+'</span>'; }).join('')+'</div></div>'+
-        '<div class="tblw"><div class="tbl"><div class="row hd">'+COLS.map(function(c){ return '<div><i>'+c[0]+'</i>'+c[1]+'</div>'; }).join('')+'</div>'+
+        '<div class="tblw ntn"><div class="dbt">Produkte</div><div class="tbl"><div class="row hd">'+COLS.map(function(c){ return '<div><i>'+c[0]+'</i>'+c[1]+'</div>'; }).join('')+'</div>'+
           '<div class="row bd">'+COLS.map(function(c,ci){
             var s=SLIP.filter(function(x){ return x[1]===ci; })[0];
             if(s) return '<div data-c="'+ci+'" data-l="'+c[1]+'">'+s[2]+'</div>';
@@ -28534,7 +28599,7 @@ var TSISL_TEAM_ONB_V2=[
           R.tab(['Typ','Wofür','So sieht es im Betrieb aus'],[
             ['Titel','Der Name des Eintrags. Jede Datenbank hat genau eine Titelspalte','Burrata 125 g'],
             ['Text','Freier Text, mit dem nicht gerechnet wird','Gebinde, Artikelnummer, Notiz'],
-            ['Zahl','Mengen und Preise, mit denen gerechnet wird. Das Zahlenformat stellst du auf Euro, Prozent oder Zahl','Einkaufspreis, Schnittverlust in Prozent'],
+            ['Zahl','Mengen und Preise, mit denen gerechnet wird. Das Zahlenformat stellst du auf Euro, Prozent oder Zahl','Einkaufspreis, Kalorien je 100 Gramm'],
             ['Auswählen','Genau eine Option aus einer festen Liste','Kategorie, Lagerort'],
             ['Mehrfachauswahl','Mehrere Optionen aus einer Liste zugleich','Allergene, Liefertage'],
             ['Status','Ein Ablauf in drei Gruppen, von offen bis erledigt','Bestellung offen, unterwegs, eingegangen'],
@@ -28544,12 +28609,12 @@ var TSISL_TEAM_ONB_V2=[
             ['Dateien und Medien','PDFs, Fotos, Dokumente','Sicherheitsdatenblatt, Foto vom Teller'],
             ['Telefon, E-Mail, URL','Kontaktdaten, die man direkt anklicken kann','Bestelladresse des Lieferanten'],
             ['Verknüpfung','Verbindet einen Eintrag mit Einträgen einer anderen Datenbank','Die Zutat kennt ihr Inventarprodukt'],
-            ['Rollup','Holt einen Wert über eine Verknüpfung herüber','Preis pro Kg in den Zutaten'],
+            ['Rollup','Holt einen Wert über eine Verknüpfung herüber','Preis/Kg in den Zutaten'],
             ['Formel','Rechnet aus anderen Spalten einen neuen Wert','Preis / Portion in den Zutaten'],
             ['Erstellt um, Letzte Änderung um','Notion trägt das selbst ein','Wann ein Preis zuletzt geändert wurde']
           ]),
           R.txt('<p><strong>Verknüpfung, Rollup und Formel sind das Besondere.</strong> Sie füllst du nicht von Hand, sie entstehen aus anderen Spalten. Genau diese drei Typen machen aus einer Liste ein System, und jeder bekommt in diesem Modul eine eigene Lektion.</p>'),
-          R.fund(['DB IV : Zutaten','Spaltenkopf anklicken'],'<p>Klick in der Vorlage auf den Kopf einer Spalte, zum Beispiel <em>Portionsgröße</em>. Du siehst Typ und Namen, und über <em>Eigenschaft bearbeiten</em> die Einstellungen dahinter. <em>Portionsgröße</em> ist Text, <em>Schnittverlust ( % )</em> eine Zahl, <em>Preis pro Kg</em> ein Rollup, <em>Preis / Portion</em> eine Formel. So liest du jede Datenbank der Vorlage, bevor du etwas einträgst.</p>')
+          R.fund(['DB IV : Zutaten','Spaltenkopf anklicken'],'<p>Klick in der Vorlage auf den Kopf einer Spalte, zum Beispiel <em>Inventarprodukt</em>. Du siehst Typ und Namen, und über <em>Eigenschaft bearbeiten</em> die Einstellungen dahinter. <em>Inventarprodukt</em> ist eine Verknüpfung, <em>Preis/Kg</em> ein Rollup, <em>Preis / Portion</em> eine Formel, <em>Kalorien ( kcal ) / 100g</em> eine Zahl. So liest du jede Datenbank der Vorlage, bevor du etwas einträgst.</p>')
         ]}),
         R.sec({eb:'Typische Fehler', title:'Wenn eine Spalte nicht tut, was sie <span class="g">soll</span>', wide:true, blocks:[
           R.fehler([
@@ -28595,6 +28660,7 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a4-css',`
       #tsn1-a4 .wrap{position:relative;width:min(960px,100%);margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
       #tsn1-a4 .ins{display:flex;flex-direction:column;gap:12px}
@@ -28604,19 +28670,19 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a4 .in .t{font:600 13.5px/1.25 -apple-system,sans-serif;color:#fff}
       #tsn1-a4 .in .t small{display:block;font-weight:500;font-size:11.5px;color:rgba(255,255,255,.5);margin-top:3px}
       #tsn1-a4 .in.on{border-color:rgba(199,180,137,.6);box-shadow:0 0 0 1px rgba(199,180,137,.18),0 18px 40px -20px rgba(199,180,137,.35)}
-      #tsn1-a4 .tb{position:relative;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
-      #tsn1-a4 .th{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07)}
-      #tsn1-a4 .th .n{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:18px;color:#fff}
-      #tsn1-a4 .th .c{font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55)}
-      #tsn1-a4 .th .c b{font-family:"Lineal Web","Lineal TS",sans-serif;font-size:20px;color:#c7b489;font-variant-numeric:tabular-nums;margin-right:4px}
+      #tsn1-a4 .tb{position:relative;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgb(25,25,25);box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a4 .th{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px}
+      #tsn1-a4 .th .n{font-weight:600;font-size:20px;color:rgb(240,239,237)}
+      #tsn1-a4 .th .c{font-size:13px;color:rgb(125,122,117)}
+      #tsn1-a4 .th .c b{font-weight:500;font-size:13px;color:rgb(173,169,163);font-variant-numeric:tabular-nums;margin-right:4px}
       #tsn1-a4 .hd,#tsn1-a4 .r{display:grid;grid-template-columns:1.7fr 1.1fr .7fr .8fr;gap:10px;align-items:center;padding:0 18px}
-      #tsn1-a4 .hd{height:34px;font:500 11px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.07)}
+      #tsn1-a4 .hd{height:34px;font-size:13.5px;color:rgb(173,169,163);border-bottom:1px solid rgba(255,255,243,.082)}
       #tsn1-a4 .rows{position:relative;height:378px}
-      #tsn1-a4 .r{position:absolute;left:0;right:0;height:42px;border-bottom:1px solid rgba(255,255,255,.05);font:500 12.5px/1.2 -apple-system,sans-serif;color:#fff;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a4 .r .s{color:rgba(255,255,255,.6)}
+      #tsn1-a4 .r{position:absolute;left:0;right:0;height:42px;border-bottom:1px solid rgba(255,255,243,.082);font-size:14px;line-height:1.2;color:rgb(240,239,237);transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a4 .r .s{color:rgb(240,239,237)}
       #tsn1-a4 .r .p{text-align:right;font-variant-numeric:tabular-nums}
-      #tsn1-a4 .r.chk{background:rgba(199,180,137,.10)}
-      #tsn1-a4 .r .fl{display:none;margin-left:8px;font:700 9.5px/1 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#05060b;background:#c7b489;border-radius:4px;padding:3px 5px}
+      #tsn1-a4 .r.chk{background:rgba(255,255,255,.035)}
+      #tsn1-a4 .r .fl{display:none;margin-left:8px;font-style:normal;font-size:13px;line-height:20px;height:20px;color:rgb(251,235,222);background:rgba(255,143,71,.482);border-radius:4px;padding:0 6px}
       #tsn1-a4 .r.chk .fl{display:inline-block}
       #tsn1-a4 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
       #tsn1-a4 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
@@ -28639,9 +28705,9 @@ var TSISL_TEAM_ONB_V2=[
       host.id='tsn1-a4';
       host.innerHTML=R.head('Drei Wege in die Tabelle','Eine Zeile oder <span class="g">hundert auf einmal</span>.','Einzelne Artikel tippst du, ganze Listen holst du als Datei herein, und Dokumente liest Notion AI für dich. Geprüft wird bei allen drei Wegen.')+
         '<div class="wrap"><div class="ins">'+INS.map(function(x,i){ return '<div class="in" data-i="'+i+'"><span class="ic">'+x[2]+'</span><span class="t">'+x[0]+'<small>'+x[1]+'</small></span></div>'; }).join('')+'</div>'+
-        '<div class="tb"><div class="th"><span class="n">Produkte</span><span class="c"><b class="cnt">0</b>Einträge</span></div>'+
-        '<div class="hd"><span>Produkt</span><span>Lieferant</span><span>Einheit</span><span style="text-align:right">Preis</span></div>'+
-        '<div class="rows">'+ROWS.map(function(x,i){ return '<div class="r" data-i="'+i+'" style="transform:translateY('+(i*42)+'px)"><span>'+x[0]+'<em class="fl">prüfen</em></span><span class="s">'+x[1]+'</span><span class="s">'+x[2]+'</span><span class="p">'+x[3]+'</span></div>'; }).join('')+'</div></div></div>'+
+        '<div class="tb ntn"><div class="th"><span class="n">Produkte</span><span class="c"><b class="cnt">0</b>Einträge</span></div>'+
+        '<div class="hd"><span>Aa&nbsp; Produkt</span><span>↗&nbsp; Lieferant</span><span>◉&nbsp; Einheit</span><span style="text-align:right">#&nbsp; Preis</span></div>'+
+        '<div class="rows">'+ROWS.map(function(x,i){ return '<div class="r" data-i="'+i+'" style="transform:translateY('+(i*42)+'px)"><span>'+x[0]+'<em class="fl">Prüfen</em></span><span class="s">'+x[1]+'</span><span class="s">'+x[2]+'</span><span class="p">'+x[3]+'</span></div>'; }).join('')+'</div></div></div>'+
         '<div class="note">Beispielwerte</div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Von Hand: ein Artikel, den du gerade in der Hand hast.</button><button class="st" data-s="1"><b>02</b>Aus einer Liste: die Preisliste deines Großhändlers in einem Zug.</button><button class="st" data-s="2"><b>03</b>Aus einem Dokument: Notion AI legt die Zeilen an, du prüfst jede.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
@@ -28779,7 +28845,8 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a5.js .fill{opacity:0;transform:translateY(4px)}
       #tsn1-a5.js .fill.in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
       @media(max-width:820px){
-        #tsn1-a5 .stage{grid-template-columns:1fr;gap:46px}
+        #tsn1-a5 svg.lines{display:none}
+        #tsn1-a5 .stage{grid-template-columns:1fr;gap:22px}
         #tsn1-a5 .rail{grid-template-columns:1fr}
       }
       @media(prefers-reduced-motion:reduce){ #tsn1-a5.js .kc,#tsn1-a5.js .fill{opacity:1;transform:none} }
@@ -28885,8 +28952,8 @@ var TSISL_TEAM_ONB_V2=[
         if(i===2){ lf.classList.add('hot'); setTel('040 812 377',true); pulse('a',1000,false); }
       }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      window.addEventListener('resize',function(){ if(!host.isConnected) return; var keep=paths.map(function(x){ return x.p.style.strokeDashoffset; }); build(); paths.forEach(function(x,i){ if(keep[i]==='0'||keep[i]==='0px'||!host.classList.contains('js')) { x.p.style.strokeDasharray='none'; } else { var L=x.p.getTotalLength(); x.p.style.strokeDasharray=L; x.p.style.strokeDashoffset=L; } }); });
-      if(N.REDUCED){ endState(); step(2); return; }
+      var rz=null; window.addEventListener('resize',function(){ if(!host.isConnected) return; clearTimeout(rz); rz=setTimeout(function(){ build(); showLines(); },120); });
+      if(N.REDUCED){ endState(); step(2); setTel('040 812 377',true); return; }
       host.classList.add('js');
       setTimeout(function(){ build(); paths.forEach(function(x){ var L=x.p.getTotalLength(); x.p.style.strokeDasharray=L; x.p.style.strokeDashoffset=L; }); },0);
       N.reveal(host,play);
@@ -28897,7 +28964,7 @@ var TSISL_TEAM_ONB_V2=[
       re:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/,
       hero:{label:'L 1.5', eyebrow:'L 1.5', title:'Der Preis <span class="ts-gold">wandert mit</span>.', alt:'Verknüpfungen und Rollups in Notion am Beispiel Lieferant, Produkt und Gericht'},
       intro:
-        '<p>Bis hierher steht jede Datenbank für sich. Die Stärke deines Backoffice entsteht erst, wenn Tabellen voneinander wissen: das Produkt von seinem Lieferanten, die Zutat von ihrem Inventarprodukt, das Gericht von seinen Zutaten. Diese Verbindung heißt in Notion <b>Verknüpfung</b>, oft hörst du auch das Wort Relation.</p>'+
+        '<p>Bis hierher steht jede Datenbank für sich. Stark wird dein Backoffice erst, wenn Tabellen voneinander wissen: das Produkt von seinem Lieferanten, das Gericht von seinen Zutaten. Diese Verbindung heißt in Notion <b>Verknüpfung</b>, oft hörst du auch das Wort Relation.</p>'+
         '<p>Über eine Verknüpfung holt ein <b>Rollup</b> Werte aus der anderen Tabelle herüber, zum Beispiel die Telefonnummer des Lieferanten oder die Allergene aller Produkte in einem Gericht. Wir verbinden heute in der Probeküche drei Tabellen, und danach liest du die Kette der Vorlage vom Lieferanten bis zum Teller.</p>',
       parts:[
         {anim:anim},
@@ -28920,7 +28987,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Prozent leer, Prozent nicht leer','Wie vollständig drüben eingetragen ist','Bei wie viel Prozent der Zutaten die Allergene gepflegt sind'],
             ['Frühestes, spätestes Datum','Den ersten oder letzten Tag','Die letzte Lieferung eines Lieferanten']
           ]),
-          R.fund(['DB IV : Zutaten','Inventar Produkt','Preis pro Kg'],'<p>Genau dieses Muster steht in der Vorlage an der wichtigsten Stelle. Die Zutat ist über <em>Inventar Produkt</em> mit der Inventurliste verknüpft, und der Rollup <em>Preis pro Kg</em> holt mit <em>Original anzeigen</em> den aktuellen Einkaufspreis. Ändert sich der Preis in der Inventurliste, rechnet jede Zutat sofort mit dem neuen. Wie die Vorlage das bis zum Gericht weiterführt, zeigt dir Modul 2.</p>')
+          R.fund(['DB IV : Zutaten','Inventarprodukt','Preis/Kg'],'<p>Genau dieses Muster steht in der Vorlage an der wichtigsten Stelle. Die Zutat ist über <em>Inventarprodukt</em> mit der Inventurliste verknüpft, und der Rollup <em>Preis/Kg</em> holt mit <em>Original anzeigen</em> den aktuellen Einkaufspreis. Ändert sich der Preis in der Inventurliste, rechnet jede Zutat sofort mit dem neuen. Wie die Vorlage das bis zum Gericht weiterführt, zeigt dir Modul 2.</p>')
         ]}),
         R.sec({eb:'Grenzen kennen', title:'Was Verknüpfungen <span class="g">nicht</span> können', wide:true, lead:'Drei Dinge solltest du wissen, bevor du in der Vorlage eine Verknüpfung anfasst. Alle drei stehen so in der Notion-Hilfe, Stand November 2026.', blocks:[
           R.cards([
@@ -28968,26 +29035,27 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a6-css',`
-      #tsn1-a6 .ed{position:relative;width:min(860px,100%);margin:0 auto;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
-      #tsn1-a6 .eh{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.07);font:600 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.75)}
-      #tsn1-a6 .eh i{font-style:normal;color:#c7b489;font-weight:700}
-      #tsn1-a6 .eh span{margin-left:auto;font-weight:500;color:rgba(255,255,255,.4)}
-      #tsn1-a6 .code{position:relative;padding:26px 26px 30px;font:500 clamp(13px,1.6vw,17px)/2.05 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(239,230,210,.92);white-space:pre}
+      #tsn1-a6 .ed{position:relative;width:min(860px,100%);margin:0 auto;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgb(32,32,32);box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a6 .eh{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,243,.082);font-size:14px;font-weight:500;color:rgb(240,239,237)}
+      #tsn1-a6 .eh i{font-style:normal;color:rgb(173,169,163);font-weight:600}
+      #tsn1-a6 .eh span{margin-left:auto;font-weight:400;font-size:13px;color:rgb(125,122,117)}
+      #tsn1-a6 .code{position:relative;padding:26px 26px 30px;font:500 clamp(13px,1.6vw,17px)/2.05 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgb(240,239,237);white-space:pre;background:rgb(25,25,25)}
       #tsn1-a6 .tk{position:relative;display:inline-block;border-radius:5px;transition:color .5s cubic-bezier(.16,1,.3,1),opacity .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a6 .tk.pr{color:#9fc2e0}
-      #tsn1-a6 .tk.val{color:#fff;background:rgba(199,180,137,.14);padding:0 6px}
+      #tsn1-a6 .tk.pr{background:rgba(255,255,255,.055);padding:0 4px;border-radius:4px}
+      #tsn1-a6 .tk.val{color:rgb(229,242,252);background:rgba(81,166,255,.494);padding:0 6px}
       #tsn1-a6 .tk.dim{opacity:.28}
-      #tsn1-a6 .tk.res{color:#05060b;background:#c7b489;padding:0 7px}
-      #tsn1-a6 .mark{position:absolute;left:0;top:0;height:2px;width:100px;border-radius:2px;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.8);transform-origin:0 0;opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a6 .why{min-height:52px;padding:0 26px 18px;font:500 14px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a6 .tk.res{color:rgb(232,241,236);background:rgba(113,255,175,.337);padding:0 7px}
+      #tsn1-a6 .mark{position:absolute;left:0;top:0;height:2px;width:100px;border-radius:2px;background:rgb(39,131,222);box-shadow:0 0 10px rgba(39,131,222,.7);transform-origin:0 0;opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .why{width:min(860px,100%);margin:16px auto 0;min-height:52px;text-align:center;font:500 15px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
       #tsn1-a6 .why b{color:#c7b489;font-weight:600}
-      #tsn1-a6 .pv{display:flex;align-items:center;gap:14px;padding:14px 26px;border-top:1px solid rgba(255,255,255,.07);background:#0c0e16}
-      #tsn1-a6 .pv .k{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
-      #tsn1-a6 .pv .v{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:22px;color:#fff;font-variant-numeric:tabular-nums}
-      #tsn1-a6 .pv .v.on{color:#c7b489}
-      #tsn1-a6 .pv .row{margin-left:auto;display:flex;gap:10px;font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
-      #tsn1-a6 .pv .row b{color:#fff;font-weight:600}
+      #tsn1-a6 .pv{display:flex;align-items:center;gap:14px;padding:12px 16px;border-top:1px solid rgba(255,255,243,.082);background:rgb(32,32,32)}
+      #tsn1-a6 .pv .k{font-size:13px;color:rgb(173,169,163)}
+      #tsn1-a6 .pv .v{font-weight:600;font-size:18px;color:rgb(240,239,237);font-variant-numeric:tabular-nums}
+      #tsn1-a6 .pv .v.on{color:rgb(240,239,237)}
+      #tsn1-a6 .pv .row{margin-left:auto;display:flex;gap:10px;font-size:13px;color:rgb(173,169,163)}
+      #tsn1-a6 .pv .row b{color:rgb(240,239,237);font-weight:500}
       #tsn1-a6 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(860px,100%);margin:22px auto 0}
       #tsn1-a6 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a6 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
@@ -28998,17 +29066,16 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a6 .rp button:hover{background:#c7b489;color:#05060b}
       #tsn1-a6.js .ed{opacity:0;transform:translateY(20px) scale(.97)}
       #tsn1-a6.js.on .ed{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-      @media(max-width:700px){ #tsn1-a6 .code{overflow-x:auto;padding:20px 16px} #tsn1-a6 .rail{grid-template-columns:1fr} #tsn1-a6 .pv .row{display:none} }
+      @media(max-width:700px){ #tsn1-a6 .code{white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.9;padding:18px 14px} #tsn1-a6 .why{min-height:96px} #tsn1-a6 .rail{grid-template-columns:1fr} #tsn1-a6 .pv .row{display:none} }
       @media(prefers-reduced-motion:reduce){ #tsn1-a6.js .ed{opacity:1;transform:none} }
       `);
       /* Token: [id, Starttext, Klasse] */
       var TK=[['t0','if(',''],['m1','prop("Menge je Gebinde")','pr'],['t1',' > 0,',''],['nl1','\n  ',''],['t2','round(',''],['e','prop("Einkaufspreis je Gebinde")','pr'],['t3',' / ',''],['m2','prop("Menge je Gebinde")','pr'],['t4',', 2',''],['t5','),',''],['nl2','\n  ',''],['z','0',''],['nl3','\n',''],['t6',')','']];
       host.id='tsn1-a6';
       host.innerHTML=R.head('Eine Formel lesen','Erst die <span class="g">innerste Klammer</span>.','So liest du jede Formel der Vorlage: Spalten durch ihre Werte ersetzen, die innerste Klammer zuerst rechnen, dann Schritt für Schritt nach außen.')+
-        '<div class="ed"><div class="eh"><i>Σ</i>Preis je Einheit<span>Formel · Probeküche / Produkte</span></div>'+
+        '<div class="ed ntn"><div class="eh"><i>Σ</i>Preis je Einheit<span>Formel · Probeküche / Produkte</span></div>'+
         '<div class="code"><span class="mark"></span>'+TK.map(function(t){ return t[0].indexOf('nl')===0 ? t[1] : '<span class="tk '+t[2]+'" data-k="'+t[0]+'">'+N.esc(t[1])+'</span>'; }).join('')+'</div>'+
-        '<div class="why"></div>'+
-        '<div class="pv"><span class="k">Vorschau</span><span class="v">12,60 €</span><span class="row">Burrata 125 g · <b>18,90 €</b> je Karton · <b>1,5</b> kg</span></div></div>'+
+        '<div class="pv"><span class="k">Vorschau</span><span class="v">12,60 €</span><span class="row">Burrata 125 g · <b>18,90 €</b> je Karton · <b>1,5</b> kg</span></div></div><div class="why"></div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Jede Spalte wird durch ihren Wert in dieser Zeile ersetzt.</button><button class="st" data-s="1"><b>02</b>Die innerste Klammer zuerst: teilen, dann runden.</button><button class="st" data-s="2"><b>03</b>Zuletzt prüft das if die Bedingung und wählt den Zweig.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
@@ -29052,7 +29119,7 @@ var TSISL_TEAM_ONB_V2=[
         if(i>=2){ set('z','0','dim'); set('e','12,60','res'); at(K('t0')); pv.textContent='12,60 €'; pv.classList.add('on'); say('Die Bedingung stimmt, also gilt der mittlere Zweig.'); }
       }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      if(N.REDUCED){ final(); return; }
+      if(N.REDUCED){ final(); step(2); say('Die Bedingung stimmt, also gilt der mittlere Zweig: 12,60 € je Kilo.'); return; }
       host.classList.add('js');
       N.reveal(host,play);
     }
@@ -29089,7 +29156,7 @@ var TSISL_TEAM_ONB_V2=[
             'Ersetz die Spalten im Kopf durch die Werte einer Zeile, deren Ergebnis du kennst.',
             'Rechne von der innersten Klammer nach außen und vergleich dein Ergebnis mit der Spalte. Stimmt es, hast du die Formel verstanden.'
           ],'So gehst du vor'),
-          R.fund(['DB IV : Zutaten','Preis / Portion ( nutzbar )'],'<p>Diese Formel teilt den Portionspreis durch den Anteil, der nach Schnittverlust und Garverlust übrig bleibt. Rechne sie mit einem Beispiel aus deiner Küche nach: Wirft dein Rinderfilet beim Parieren ein Viertel ab, brauchst du für dreihundert Gramm auf dem Teller vierhundert Gramm im Einkauf, und der Portionspreis steigt um ein Drittel. Was die Formel genau prüft und warum sie an der Zutat sitzt, erklärt dir Modul 2.</p>'),
+          R.fund(['DB IV : Zutaten','Preis / Portion'],'<p>Diese Formel rechnet den Einkaufspreis auf deine Portion herunter. Sie liest die Portionsgröße und den Preis je Kilo, Liter oder Stück, der per Rollup aus der Inventurliste kommt. Rechne sie mit einem Beispiel aus deiner Küche nach: zweihundert Gramm Rinderfilet bei dreißig Euro je Kilo ergeben sechs Euro. Wie die Formel mit unterschiedlichen Einheiten umgeht, erklärt dir Modul 2.</p>'),
           R.txt('<p><strong>Einen Wert anpassen, ohne die Formel zu brechen.</strong> Die meisten Anpassungen sind Zahlen, die du austauschst: eine Grenze für die Ampel, ein Rundungswert, ein Prozentsatz. Ändere immer nur diese eine Zahl, schau auf die Vorschau unter dem Formelfeld und speichere erst, wenn kein roter Hinweis erscheint. Kopier dir die Formel vorher in eine Notiz, dann ist der alte Stand mit einem Einfügen zurück.</p>')
         ]}),
         R.sec({eb:'Notion AI', title:'Lass dir die Formel <span class="g">erklären</span>', lead:'Im Formeleditor gibt es ein Eingabefeld für Notion AI. Dort beschreibst du, was die Spalte rechnen soll, oder lässt dir eine bestehende Formel erklären.', blocks:[
@@ -29111,7 +29178,7 @@ var TSISL_TEAM_ONB_V2=[
           'Trag bei drei, vier Gerichten Netto-Verkaufspreis und Wareneinsatz ein. Die Spalten dahinter rechnen Prozent und Rohertrag aus, die Ampel färbt sich, und der Allergen-Hinweis setzt sich aus den verknüpften Produkten zusammen, fertig zum Kopieren in die Karte.',
           'Ändere danach einen Wareneinsatz und schau zu, wie Prozent, Rohertrag und Ampel nachziehen. Das ist dasselbe Verhalten wie in der Vorlage, dort nur mit mehr Stufen dazwischen: Zutat, Rezeptur, Gemeinkosten und Personal bis zum Deckungsbeitrag.'],
           mock:{file:'Probeküche / Gerichte', tab:'Gerichte', views:['Kalkulation'], cols:['Gericht','Netto-VK','Wareneinsatz','WE %','Rohertrag','Ampel'], num:[1,2,3,4],
-            rows:[['Burrata mit Tomaten','12,61 €','3,40 €','27,0','9,21 €','<span class="t gr">im Rahmen</span>'],['Pasta al pesto','13,45 €','2,90 €','21,6','10,55 €','<span class="t gr">im Rahmen</span>'],['Vitello tonnato','15,97 €','5,10 €','31,9','10,87 €','<span class="t">beobachten</span>'],['Rinderfilet','31,93 €','12,20 €','38,2','19,73 €','<span class="t r">zu teuer</span>']],
+            rows:[['Burrata mit Tomaten','12,61 €','3,40 €','27,0','9,21 €','<span class="t gr">im Rahmen</span>'],['Pasta al pesto','13,45 €','2,90 €','21,6','10,55 €','<span class="t gr">im Rahmen</span>'],['Vitello tonnato','15,97 €','5,10 €','31,9','10,87 €','<span class="t o">beobachten</span>'],['Rinderfilet','31,93 €','12,20 €','38,2','19,73 €','<span class="t r">zu teuer</span>']],
             cap:'Beispielwerte, Grenzen 28 % und 33 %'}}),
         {emp:{kind:'Nutzung', animTitle:'Formeln', animGold:'mit Sicherung', steps:['Erst lesen','Vorher kopieren','Eine Zahl ändern','An Zeilen prüfen'],
           intro:'Formeln sind der empfindlichste Teil der Vorlage. Mit vier Gewohnheiten fasst du sie trotzdem ohne Angst an.',
@@ -29139,33 +29206,41 @@ var TSISL_TEAM_ONB_V2=[
     var R=N.R, IMG=N.IMG;
 
     function anim(host){
+      window.__tsn1N.css();
       N.addCSS('tsn1-a7-css',`
-      #tsn1-a7 .box{position:relative;width:min(820px,100%);margin:0 auto;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a7 .box{position:relative;width:min(820px,100%);margin:0 auto;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgb(25,25,25);box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a7 .qq{width:min(820px,100%);margin:0 auto 14px;text-align:center;font:500 15px/1.5 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a7 .qq b{color:#c7b489;font-weight:600}
+      #tsn1-a7 .dbt{padding:16px 22px 4px;font-size:20px;font-weight:600;color:rgb(240,239,237)}
+      #tsn1-a7 .vw{display:flex;gap:2px;padding:6px 18px 6px;border-bottom:1px solid rgba(255,255,243,.082)}
+      #tsn1-a7 .vw span{font-size:13.5px;color:rgb(173,169,163);padding:4px 8px;border-radius:6px}
+      #tsn1-a7 .vw span.on{color:rgb(240,239,237);box-shadow:inset 0 -2px 0 rgb(240,239,237)}
       #tsn1-a7 .q{padding:18px 22px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
       #tsn1-a7 .q .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:8px}
       #tsn1-a7 .q .t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(17px,2vw,21px);color:#fff}
-      #tsn1-a7 .ctl{display:flex;gap:10px;flex-wrap:wrap;padding:12px 22px;border-bottom:1px solid rgba(255,255,255,.07)}
-      #tsn1-a7 .rg{display:flex;align-items:center;gap:9px;padding:7px 12px 7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font:600 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a7 .rg .sw{position:relative;width:26px;height:15px;border-radius:999px;background:rgba(255,255,255,.14);transition:background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .ctl{display:flex;gap:8px;flex-wrap:wrap;padding:10px 22px;border-bottom:1px solid rgba(255,255,243,.082)}
+      #tsn1-a7 .rg{display:flex;align-items:center;gap:8px;height:28px;padding:0 10px 0 8px;border-radius:999px;border:1px solid rgba(255,255,235,.1);font-size:13px;font-weight:500;color:rgb(173,169,163);transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .rg .sw{position:relative;width:26px;height:15px;border-radius:999px;background:rgba(255,255,243,.15);transition:background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a7 .rg .sw::after{content:"";position:absolute;left:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
-      #tsn1-a7 .rg em{font-style:normal;font-weight:500;color:rgba(255,255,255,.4)}
-      #tsn1-a7 .rg.on{border-color:rgba(199,180,137,.55);color:#fff;background:rgba(199,180,137,.08)}
-      #tsn1-a7 .rg.on .sw{background:#c7b489}
+      #tsn1-a7 .rg em{font-style:normal;font-weight:400;color:rgb(125,122,117)}
+      #tsn1-a7 .rg.on{border-color:rgba(39,131,222,.6);color:rgb(240,239,237);background:rgba(39,131,222,.12)}
+      #tsn1-a7 .rg.on .sw{background:rgb(39,131,222)}
       #tsn1-a7 .rg.on .sw::after{transform:translateX(11px)}
-      #tsn1-a7 .rg.on em{color:#efe6d2}
+      #tsn1-a7 .rg.on em{color:rgb(173,169,163)}
       #tsn1-a7 .list{position:relative;height:450px}
-      #tsn1-a7 .ac{position:absolute;left:22px;right:22px;top:0;padding:16px 18px;border-radius:12px;border:1px solid rgba(199,180,137,.4);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#090a11;opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a7 .ac .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:8px}
-      #tsn1-a7 .ac .t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(17px,2vw,20px);color:#fff}
+      #tsn1-a7 .ac{position:absolute;left:22px;right:22px;top:0;display:flex;gap:10px;padding:12px;border-radius:10px;background:rgb(35,56,80);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .ac .mi{flex:0 0 auto}
+      #tsn1-a7 .ac .t{font-size:15px;line-height:1.5;color:rgb(240,239,237)}
       #tsn1-a7 .it,#tsn1-a7 .gh{position:absolute;left:0;right:0;top:0;will-change:transform,opacity;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a7 .it{height:50px;display:grid;grid-template-columns:42px 1.6fr 1.2fr 1fr .8fr;gap:12px;align-items:center;padding:0 22px;border-bottom:1px solid rgba(255,255,255,.05);font:500 13px/1.2 -apple-system,sans-serif;color:#fff}
-      #tsn1-a7 .it img{width:34px;height:34px;border-radius:8px;object-fit:cover;display:block}
-      #tsn1-a7 .it .s{color:rgba(255,255,255,.55)}
-      #tsn1-a7 .it .k{justify-self:start;font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px}
-      #tsn1-a7 .it .k.kn{background:rgba(224,87,79,.16);color:#f2b8b3}
-      #tsn1-a7 .it .k.ok{background:rgba(70,175,115,.14);color:#a9dcc0}
-      #tsn1-a7 .gh{height:38px;display:flex;align-items:flex-end;padding:0 22px 7px;font:600 10px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;opacity:0}
-      #tsn1-a7 .gh i{font-style:normal;margin-left:8px;color:rgba(255,255,255,.4);letter-spacing:.04em}
+      #tsn1-a7 .it{height:50px;display:grid;grid-template-columns:42px 1.6fr 1.2fr 1fr .8fr;gap:12px;align-items:center;padding:0 22px;border-bottom:1px solid rgba(255,255,243,.082);font-size:14px;line-height:1.2;color:rgb(240,239,237)}
+      #tsn1-a7 .it img{width:34px;height:34px;border-radius:4px;object-fit:cover;display:block}
+      #tsn1-a7 .it .s{color:rgb(173,169,163)}
+      #tsn1-a7 .it .k{justify-self:start;font-size:13px;height:20px;line-height:20px;padding:0 6px;border-radius:4px}
+      #tsn1-a7 .it .k.kn{background:rgba(255,143,71,.482);color:rgb(251,235,222)}
+      #tsn1-a7 .it .k.ok{background:rgba(113,255,175,.337);color:rgb(232,241,236)}
+      #tsn1-a7 .gh{height:38px;display:flex;align-items:flex-end;gap:8px;padding:0 22px 7px;font-size:14px;color:rgb(240,239,237);opacity:0}
+      #tsn1-a7 .gh .gt{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:4px;background:rgba(255,252,235,.306)}
+      #tsn1-a7 .gh i{font-style:normal;color:rgb(125,122,117)}
       #tsn1-a7 .ans{display:flex;align-items:center;gap:10px;padding:13px 22px;border-top:1px solid rgba(255,255,255,.07);background:#0c0e16;font:500 13px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
       #tsn1-a7 .ans b{color:#fff;font-weight:600}
       #tsn1-a7 .ans.on b{color:#c7b489}
@@ -29193,11 +29268,11 @@ var TSISL_TEAM_ONB_V2=[
       ];
       host.id='tsn1-a7';
       host.innerHTML=R.head('Filter, Sortieren, Gruppieren','Drei Regler, und die Liste <span class="g">antwortet</span>.','Neun Artikel, eine Frage aus dem Alltag. Mit jedem Regler wird aus der langen Liste eine Antwort, ohne dass sich an den Daten etwas ändert.')+
-        '<div class="box"><div class="q"><div class="mi">Die Frage</div><div class="t">Was muss ich bei wem nachbestellen?</div></div>'+
+        '<div class="qq">Die Frage: <b>Was muss ich bei wem nachbestellen?</b></div><div class="box ntn"><div class="dbt">Produkte</div><div class="vw"><span class="on">Bestellliste</span><span>Lager</span><span>Alle</span></div>'+
         '<div class="ctl"><span class="rg" data-r="0"><span class="sw"></span>Filter <em>Bestand prüfen = knapp</em></span><span class="rg" data-r="1"><span class="sw"></span>Sortieren <em>Produkt A–Z</em></span><span class="rg" data-r="2"><span class="sw"></span>Gruppieren <em>Lieferant</em></span></div>'+
         '<div class="list">'+ITEMS.map(function(x,i){ return '<div class="it" data-i="'+i+'"><img alt="'+x[0]+'" decoding="async" src="'+IMG+x[1]+'"><span>'+x[0]+'</span><span class="s l">'+x[2]+'</span><span class="s">'+x[3]+'</span><span class="k '+(x[4]?'kn':'ok')+'">'+(x[4]?'knapp':'ok')+'</span></div>'; }).join('')+
-          ['Feinkost Lorenz','Frischdienst Nord','Gemüsehof Brandt'].map(function(g,i){ return '<div class="gh" data-g="'+i+'">'+g+'<i></i></div>'; }).join('')+
-        '<div class="ac"><div class="mi">Die Antwort</div><div class="t">Drei Bestellungen, vier Artikel.</div></div></div></div><div class="note">Beispielwerte</div>'+
+          ['Feinkost Lorenz','Frischdienst Nord','Gemüsehof Brandt'].map(function(g,i){ return '<div class="gh" data-g="'+i+'"><span class="gt">'+g+'</span><i></i></div>'; }).join('')+
+        '<div class="ac"><div class="mi">💡</div><div class="t">Drei Bestellungen, vier Artikel.</div></div></div></div><div class="note">Beispielwerte</div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Filter: nur, was knapp ist.</button><button class="st" data-s="1"><b>02</b>Sortieren: in einer festen Reihenfolge.</button><button class="st" data-s="2"><b>03</b>Gruppieren: ein Block je Lieferant, fertig ist die Bestellliste.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
@@ -29218,7 +29293,7 @@ var TSISL_TEAM_ONB_V2=[
           else { el.style.opacity='0'; }
         });
         ghs.forEach(function(el,gi){
-          if(gpos.hasOwnProperty(gi)){ el.style.opacity='1'; el.style.transform='translateY('+gpos[gi][0]+'px)'; el.querySelector('i').textContent=gpos[gi][1]+(gpos[gi][1]===1?' Artikel':' Artikel'); }
+          if(gpos.hasOwnProperty(gi)){ el.style.opacity='1'; el.style.transform='translateY('+gpos[gi][0]+'px)'; el.querySelector('i').textContent=String(gpos[gi][1]); }
           else { el.style.opacity='0'; el.style.transform='translateY('+(lvl>=3?0:-20)+'px)'; }
         });
         [].forEach.call(rgs,function(r,j){ r.classList.toggle('on',j<lvl); });
@@ -29270,7 +29345,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Ein zweiter Ort', title:'Dieselbe Liste auf einer <span class="g">anderen Seite</span>', lead:'Die Station Kalt soll ihre Kühlhaus-Artikel sehen, ohne dass eine zweite Liste entsteht, die irgendwann nicht mehr stimmt.', blocks:[
           R.txt('<p><strong>Dafür gibt es die verknüpfte Ansicht.</strong> Du tippst auf der Stationsseite <kbd>/</kbd>, suchst nach „verknüpft" und wählst die Datenbank, die du zeigen willst. Auf der Seite erscheint eine Ansicht der Originaltabelle mit eigenen Filtern. Trägt jemand dort einen Bestand ein, steht er sofort im Original. Filter und Sortierung der verknüpften Ansicht gelten dagegen nur dort und ändern das Original nicht.</p>'),
-          R.fund(['Notion AI Backoffice','Foodquartier'],'<p>Die Interface-Seiten der Vorlage sind genau so gebaut: Sie zeigen verknüpfte Ansichten der Datenbanken, jeweils gefiltert auf das, was in diesem Bereich gebraucht wird. Wie du sie an deinen Betrieb anpasst, zeigt dir Modul 2.</p>')
+          R.fund(['Mein Notion AI Backoffice','eine Übersichtsseite'],'<p>Willst du dir in der Vorlage eine Übersicht bauen, zum Beispiel eine Seite für die Küche mit den knappen Artikeln und den Gerichten der Woche, holst du die Datenbanken genau so als verknüpfte Ansichten hinein. Die Originale bleiben, wo sie sind. Wie das mit den Bereichen der Vorlage zusammenspielt, zeigt dir Modul 2.</p>')
         ]}),
         R.sec({eb:'Vorlagen', title:'Jeder neue Eintrag startet <span class="g">vollständig</span>', lead:'Eine Datenbankvorlage legt fest, was in einem neuen Eintrag schon drinsteht: vorausgefüllte Spalten und eine fertige Gliederung auf der Seite.', blocks:[
           R.jetzt([
@@ -29446,7 +29521,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Eigenschaft bearbeitet','Sobald sich eine bestimmte Spalte ändert, auf Wunsch nur bei einem bestimmten Wert','Allergene eines Produkts geändert: Benachrichtigung an die Serviceleitung'],
             ['Wiederkehrend','In einem festen Rhythmus, zum Beispiel jeden Montag um sechs','Am Ersten des Monats: Erinnerung, die Datenblätter zu prüfen']
           ]),
-          R.txt('<p><strong>Das Beispiel mit den Allergenen ist mir das wichtigste.</strong> Ändert sich bei einem Produkt die Rezeptur des Herstellers und jemand trägt ein neues Allergen ein, muss der Service davon wissen, bevor der nächste Gast fragt. Mit einer Automation auf der Spalte Allergene passiert das, ohne dass jemand daran denken muss.</p><p><strong>Inventur und Nachbestellen</strong> automatisierst du in Modul 4, Lektion 4.5. Dort kommen Agenten und Claude Code dazu, die mehr können als eine einzelne Automation.</p>'),
+          R.txt('<p><strong>Das Beispiel mit den Allergenen ist mir das wichtigste.</strong> Ändert sich bei einem Produkt die Rezeptur des Herstellers und jemand trägt ein neues Allergen ein, muss der Service davon wissen, bevor der nächste Gast fragt. Mit einer Automation auf der Spalte Allergene passiert das, ohne dass jemand daran denken muss.</p><p><strong>Inventur und Nachbestellen</strong> automatisierst du in Modul 4. Dort kommen Agenten und Claude Code dazu, die mehr können als eine einzelne Automation.</p>'),
           R.tab(['Plan','Buttons','Datenbank-Automationen'],[
             ['Free','Ja','Nein, laut Notion-Hilfe höchstens Slack-Benachrichtigungen'],
             ['Plus','Ja','Ja, Gmail und Webhooks inklusive'],
@@ -29690,10 +29765,10 @@ var TSISL_TEAM_ONB_V2=[
          Burrata 18,90 EUR / 1,5 kg = 12,60 EUR/kg; 125 g = 1,58 EUR; + 0,97 EUR Tomaten/Basilikum/Oel = 2,55 EUR;
          2,55 / 12,61 netto = 20,2 %. Mit verrutschtem Komma 126,00 EUR/kg: 15,75 + 0,97 = 16,72 EUR = 132,6 %. */
       var ST=[
-        ['DB 0 : Inventurliste','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis / Kg','126,00 €','12,60 €','Eingetragen von Hand'],
+        ['DB 0 : Inventurliste','lieferpartner/kuehltransporter-sprinter.webp','Burrata · Preis/Kg','126,00 €','12,60 €','Eingetragen von Hand'],
         ['DB IV : Zutaten','zutaten/mozzarella.webp','Burrata 125 g · Preis / Portion','15,75 €','1,58 €','Rollup aus der Inventur, mal Portion'],
-        ['DB XI : Gerichte &amp; Getränke','gerichte/burrata.webp','Wareneinsatz ( Eur )','16,72 €','2,55 €','Summe der Zutaten'],
-        ['DB XI : Gerichte &amp; Getränke','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
+        ['DB Gerichte','gerichte/burrata.webp','Wareneinsatz ( Eur )','16,72 €','2,55 €','Summe der Zutaten'],
+        ['DB Gerichte','menuekalkulation/kosten-01.webp','Wareneinsatz ( % )','132,6 %','20,2 %','Wareneinsatz geteilt durch Netto-Preis']
       ];
       host.id='tsn1-a10';
       host.innerHTML=R.head('Fehler suchen','Folge der Zahl bis zu ihrer <span class="g">Quelle</span>.','Ein Gericht mit über hundert Prozent Wareneinsatz kann nicht stimmen. Statt die Formel anzufassen, gehst du die Kette rückwärts, bis du die Stelle findest, an der die Zahl entsteht.')+
@@ -29779,7 +29854,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Mit Notion AI', title:'Lass die KI die <span class="g">Lücken</span> finden', lead:'Wenn du einen Plan mit Notion AI hast, kann der Agent deine Datenbanken lesen und dir sagen, wo etwas fehlt. Prüfen und korrigieren musst du selbst.', blocks:[
           R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventarprodukt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
-          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventar Produkt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
+          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventarprodukt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
         ]}),
         R.sec({eb:'Geschafft', title:'Was du jetzt <span class="g">kannst</span>', lead:'Mit diesem Handwerk gehst du in Modul 2. Dort lernst du die Vorlage Datenbank für Datenbank kennen und trägst deine eigenen Zahlen ein.', blocks:[
           R.tab(['Du kannst','Gelernt in'],[
