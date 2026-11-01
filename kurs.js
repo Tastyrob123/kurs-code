@@ -29388,6 +29388,164 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
+   NEUBAU MODUL 1 · L1.9 "Wer darf was?"  (Rechte, Teamspaces und Sicherheit)
+   Neue Seite (Notion-Zeile "Rechte, Teamspaces und Sicherheit", 01.11.2026), Adresse nach Re-Sync
+   /lektionen/rechte-teamspaces-und-sicherheit oder /rechte-teamspaces-und-sicherheit (beide erkannt).
+   Erklaeranimation "Das Schluesselbrett" — EIGENES Konzept:
+   EINE Matrix: vier Personen, drei Raeume. Zeile fuer Zeile streicht ein Goldbalken
+   ueber das Brett, die Schluessel (Rechte-Stufen) haengen sich ein, verschlossene
+   Felder rasten mit einem Schloss ein. Zuletzt bekommt der Gast genau eine Seite.
+   Quellen: notion.com/de/help/sharing-and-permissions, /help/intro-to-teamspaces,
+   /help/customize-your-database, /help/database-property-access (Stand 01.11.2026).
+   ============================================================ */
+(function(){
+  if(window.__tsn1L9) return; window.__tsn1L9=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a9-css',`
+      #tsn1-a9 .brd{position:relative;width:min(940px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a9 .mx{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr}
+      #tsn1-a9 .mx>div{min-height:74px;display:flex;align-items:center;justify-content:center;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);border-left:1px solid rgba(255,255,255,.06)}
+      #tsn1-a9 .mx>div:nth-child(4n+1){justify-content:flex-start;border-left:0}
+      #tsn1-a9 .hdc{min-height:62px!important;flex-direction:column;gap:4px;font:600 12.5px/1.2 -apple-system,sans-serif;color:#fff;text-align:center}
+      #tsn1-a9 .hdc small{font:600 9px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(199,180,137,.85)}
+      #tsn1-a9 .who{display:flex;align-items:center;gap:11px}
+      #tsn1-a9 .who img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.4)}
+      #tsn1-a9 .who b{display:block;font:600 13px/1.2 -apple-system,sans-serif;color:#fff}
+      #tsn1-a9 .who small{font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
+      #tsn1-a9 .key{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font:600 11.5px/1 -apple-system,sans-serif;background:rgba(199,180,137,.14);color:#efe6d2;border:1px solid rgba(199,180,137,.35);white-space:nowrap}
+      #tsn1-a9 .key.full{background:#c7b489;color:#05060b;border-color:#c7b489}
+      #tsn1-a9 .key.gst{background:rgba(159,194,224,.12);color:#cfe0ef;border-color:rgba(159,194,224,.4)}
+      #tsn1-a9 .lock{width:22px;height:22px;color:rgba(255,255,255,.35)}
+      #tsn1-a9 .scan{position:absolute;left:0;right:0;height:74px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.09),rgba(199,180,137,0));opacity:0;pointer-events:none;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a9 .cap{width:min(940px,100%);margin:16px auto 0;min-height:46px;text-align:center;font:500 15px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a9 .cap b{color:#c7b489;font-weight:600}
+      #tsn1-a9 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(940px,100%);margin:14px auto 0}
+      #tsn1-a9 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a9 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a9 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a9 .st.on b{color:#c7b489}
+      #tsn1-a9 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a9 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a9 .rp button:hover{background:#c7b489;color:#05060b}
+      #tsn1-a9.js .cell>*{opacity:0;transform:scale(.7)}
+      #tsn1-a9.js .cell.in>*{opacity:1;transform:none;transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
+      @media(max-width:760px){ #tsn1-a9 .brd{overflow-x:auto} #tsn1-a9 .mx{min-width:640px} #tsn1-a9 .rail{grid-template-columns:1fr} }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a9.js .cell>*{opacity:1;transform:none} }
+      `);
+      var LOCK='<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
+      /* [Name, Rolle, Bild, [Kueche, Service, Geschaeftsfuehrung]] ; '' = kein Zugang */
+      var P=[
+        ['Inhaberin','Mitglied','ansprechpartner/kochjacke.jpg',[['Vollzugriff','full'],['Vollzugriff','full'],['Vollzugriff','full']]],
+        ['Küchenchef','Mitglied','ansprechpartner/schuerze.jpg',[['Kann bearbeiten',''],['Kann anzeigen',''],null]],
+        ['Servicekraft','Mitglied','ansprechpartner/poloshirt.jpg',[['Kann anzeigen',''],['Kann Inhalt bearbeiten',''],null]],
+        ['Steuerberaterin','Gast','ansprechpartner/notizblock.jpg',[null,null,['Kommentieren · 1 Seite','gst']]]
+      ];
+      var COLS=[['Teamspace','Küche'],['Teamspace','Service'],['Geschlossener Teamspace','Geschäftsführung']];
+      var html='<div class="mx"><div class="hdc" style="justify-content:center;align-items:flex-start"><small>Person</small></div>'+COLS.map(function(c){ return '<div class="hdc"><small>'+c[0]+'</small>'+c[1]+'</div>'; }).join('');
+      P.forEach(function(p,r){
+        html+='<div class="who"><img alt="" decoding="async" src="'+IMG+p[2]+'"><span><b>'+p[0]+'</b><small>'+p[1]+'</small></span></div>';
+        p[3].forEach(function(k,c){ html+='<div class="cell" data-r="'+r+'" data-c="'+c+'">'+(k?'<span class="key '+k[1]+'">'+k[0]+'</span>':LOCK)+'</div>'; });
+      });
+      html+='</div>';
+      host.id='tsn1-a9';
+      host.innerHTML=R.head('Teamspaces und Rechte','Jeder bekommt den <span class="g">Schlüssel</span>, den er braucht.','Drei Räume, vier Menschen. Die Kalkulation liegt in einem geschlossenen Raum, das Team trägt ein, ohne etwas umbauen zu können, und die Steuerberaterin sieht genau eine Seite.')+
+        '<div class="brd"><span class="scan"></span>'+html+'</div><div class="cap"></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Teamspaces trennen die Räume. Die Kalkulation liegt im geschlossenen.</button><button class="st" data-s="1"><b>02</b>Jede Person bekommt die Stufe, die ihre Arbeit braucht, nicht mehr.</button><button class="st" data-s="2"><b>03</b>Gäste sehen nur die Seite, die du mit ihnen teilst.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var cells=[].slice.call(host.querySelectorAll('.cell')), scan=host.querySelector('.scan'), cap=host.querySelector('.cap'), sts=host.querySelectorAll('.st'), brd=host.querySelector('.brd');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a9Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function rowY(r){ var b=brd.getBoundingClientRect(), c=host.querySelector('.cell[data-r="'+r+'"]').getBoundingClientRect(); return c.top-b.top; }
+      function sweep(r){ scan.style.opacity='1'; scan.style.transform='translateY('+rowY(r)+'px)'; }
+      function setRow(r,on){ cells.filter(function(c){ return +c.getAttribute('data-r')===r; }).forEach(function(c,k){ later(function(){ c.classList.toggle('in',on); },k*160); }); }
+      function all(on){ cells.forEach(function(c){ c.classList.toggle('in',on); }); }
+      function play(){
+        clear(); host.classList.add('js'); all(false); scan.style.opacity='0'; cap.innerHTML=''; step(0);
+        later(function(){ sweep(0); setRow(0,true); cap.innerHTML='Die <b>Inhaberin</b> hat in allen drei Teamspaces Vollzugriff.'; },700);
+        later(function(){ step(1); sweep(1); setRow(1,true); cap.innerHTML='Der <b>Küchenchef</b> arbeitet in der Küche, liest im Service mit und kommt in die Geschäftsführung nicht hinein.'; },2600);
+        later(function(){ sweep(2); setRow(2,true); cap.innerHTML='Die <b>Servicekraft</b> trägt im Service Einträge ein, kann aber keine Spalten und Ansichten umbauen.'; },4600);
+        later(function(){ step(2); sweep(3); setRow(3,true); cap.innerHTML='Die <b>Steuerberaterin</b> ist Gast. Sie sieht nur den Monatsabschluss und kann dort kommentieren.'; },6600);
+        later(function(){ scan.style.opacity='0'; },8600);
+      }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ clear(); host.classList.remove('js'); all(true); var i=+s.getAttribute('data-s'); step(i);
+        cap.innerHTML=['Drei Teamspaces. Die <b>Geschäftsführung</b> ist geschlossen, und alle anderen haben dort keinen Zugriff.','Jede Person hat die <b>kleinste Stufe</b>, mit der sie ihre Arbeit erledigen kann.','Der <b>Gast</b> sieht nur die eine geteilte Seite, nicht den Rest des Teamspace.'][i];
+        sweep(i===0?0:i===1?2:3); }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      cap.innerHTML='Jede Person hat die <b>kleinste Stufe</b>, mit der sie ihre Arbeit erledigen kann.';
+      if(N.REDUCED){ step(1); return; }
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l9',
+      re:/\/(?:lektionen\/)?rechte-teamspaces-und-sicherheit\/?$/,
+      hero:{label:'L 1.9', eyebrow:'L 1.9', title:'Wer darf <span class="ts-gold">was</span>?', alt:'Rechte, Teamspaces und Sicherheit in Notion für den Gastronomiebetrieb'},
+      intro:
+        '<p>Sobald dein Team in der Vorlage mitarbeitet, stellt sich eine Frage, die du vorher beantworten solltest: Wer sieht was, und wer darf was ändern? Deine Servicekraft soll Bestände eintragen, aber keine Formel umbauen. Dein Küchenchef braucht die Rezepturen, nicht unbedingt deine Personalkosten. Und die Steuerberaterin soll den Monatsabschluss sehen, sonst nichts.</p>'+
+        '<p>Notion regelt das über Teamspaces und Rechte-Stufen. Wir richten beides für einen typischen Betrieb ein und schauen, wie du dich gegen den falschen Klick absicherst.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Die Stufen', title:'Sechs Stufen, vom Zuschauen bis zum <span class="g">Vollzugriff</span>', wide:true, lead:'Diese Stufen vergibst du für eine Seite oder einen Teamspace. Die Namen stehen hier so, wie du sie in Notion findest.', blocks:[
+          R.tab(['Stufe','Was die Person darf','Typisch im Betrieb'],[
+            ['Vollzugriff','Alles, auch Rechte vergeben und die Seite teilen','Du als Inhaber, deine Betriebsleitung'],
+            ['Kann bearbeiten','Inhalte und Aufbau ändern, auch Spalten und Ansichten','Küchenchef in der Küche'],
+            ['Kann Inhalt bearbeiten','Nur bei Datenbanken: Einträge anlegen und ändern, aber keine Spalten und Ansichten umbauen','Servicekraft, die Bestände einträgt'],
+            ['Kann erstellen','Nur bei Datenbanken: neue Einträge anlegen. Nur in Business und Enterprise','Aushilfen, die Bruch und Schwund melden'],
+            ['Kann kommentieren','Lesen und Kommentare hinterlassen','Steuerberaterin beim Monatsabschluss'],
+            ['Kann anzeigen','Nur lesen','Neue Kollegen im Handbuch']
+          ]),
+          R.merk('Jeder bekommt die kleinste Stufe, mit der er seine Arbeit erledigen kann.')
+        ]}),
+        R.sec({eb:'Teamspaces', title:'Räume für Küche, Service und <span class="g">Geschäftsführung</span>', lead:'Ein Teamspace ist ein Bereich in der Seitenleiste, den eine Gruppe gemeinsam nutzt. Es gibt ihn in drei Arten.', blocks:[
+          R.cards([
+            {mi:'Alle Pläne', nm:'Offen', tx:'<p>Jedes Mitglied des Workspace kann beitreten und die Inhalte sehen. Gut für das Handbuch und die Seiten, die alle betreffen.</p>'},
+            {mi:'Alle Pläne', nm:'Geschlossen', tx:'<p>Jeder sieht, dass es den Teamspace gibt, beitreten geht aber nur auf Einladung. In seinen Einstellungen legst du fest, dass alle anderen im Workspace keinen Zugriff haben. Der richtige Ort für Kalkulation und Personalkosten.</p>'},
+            {mi:'Business, Enterprise', nm:'Privat', tx:'<p>Für alle außer den Mitgliedern unsichtbar, auch in der Seitenleiste. Wer das braucht, ist meistens schon bei mehreren Standorten.</p>'}
+          ],3),
+          R.txt('<p><strong>Eine Aufteilung, die in den meisten Betrieben funktioniert:</strong> ein offener Teamspace für alle mit Handbuch, Hygieneplan und Checklisten, je ein Teamspace für Küche und Service und ein geschlossener für die Geschäftsführung, in dem die Kalkulation der Vorlage liegt. Wie du das bei mehreren Standorten aufteilst, zeigt dir Lektion 2.15.</p>')
+        ]}),
+        R.sec({eb:'Das Team trägt ein', title:'Eintragen ja, umbauen <span class="g">nein</span>', lead:'Die wichtigste Einstellung für dein Team. Sie schützt die Formeln der Vorlage, ohne dass jemand bei der Arbeit gebremst wird.', blocks:[
+          R.jetzt([
+            'Gib deinem Team für Datenbanken, in die es nur einträgt, die Stufe <b>Kann Inhalt bearbeiten</b>. Damit legen sie Zeilen an und ändern Werte, aber keine Spalten.',
+            'Sperr zusätzlich die Datenbank über die drei Punkte oben rechts und <b>Datenbank sperren</b>. Dann kann auch niemand mit höherer Stufe aus Versehen eine Ansicht oder Spalte verstellen, Einträge bleiben möglich.',
+            'Leg für die Zählung eine Button-Spalte an, wie in Lektion 1.8. Sie funktioniert auch mit der Stufe Kann Inhalt bearbeiten.',
+            'Prüf das Ganze, indem du dich in die Lage deines Teams versetzt: Teil die Seite testweise mit einer zweiten E-Mail-Adresse und schau, was dort möglich ist.'
+          ],'So richtest du es ein'),
+          R.txt('<p><strong>Rechte auf einzelne Zeilen und Spalten</strong> gibt es in Business und Enterprise. Dort kannst du festlegen, dass jeder nur die Einträge sieht, bei denen er als Person eingetragen ist, oder dass eine Spalte wie die Personalkosten für bestimmte Gruppen verborgen bleibt, bis zu zwanzig Spalten je Datenbank. Eine Spalte nur in der Ansicht auszublenden reicht dafür nicht, das erklärt Lektion 2.15 genauer.</p>')
+        ]}),
+        R.sec({eb:'Gäste', title:'Die Steuerberaterin bekommt <span class="g">eine Seite</span>', lead:'Gäste sind Menschen außerhalb deines Betriebs, mit denen du einzelne Seiten teilst. Sie zählen nicht als Mitglied.', blocks:[
+          R.txt('<p>Du teilst eine Seite über <em>Teilen</em> oben rechts und gibst die E-Mail-Adresse ein. Der Gast braucht ein eigenes Notion-Konto, das kostenlos ist, und sieht nur diese Seite mit ihren Unterseiten. Im Free-Plan sind bis zu zehn Gäste möglich. Für die Steuerberaterin reicht meistens <b>Kann kommentieren</b> auf der Seite mit dem Monatsabschluss, für eine Agentur, die deine Karte gestaltet, <b>Kann anzeigen</b> auf den Gerichten.</p>'),
+          R.fehler([
+            ['Ein Gast sieht mehr als gedacht','Unterseiten übernehmen die Rechte der Seite darüber','Nur die Seite teilen, die wirklich gemeint ist, oder die Rechte der Unterseiten einzeln anpassen'],['Die Steuerberaterin wurde als zahlendes Mitglied hinzugefügt','Ihre E-Mail-Adresse gehört zur Domain deines Betriebs','Für Gäste immer die Adresse ihrer eigenen Kanzlei verwenden'],
+            ['Ein ehemaliger Mitarbeiter hat noch Zugang','Beim Ausscheiden wurde er nicht aus dem Workspace entfernt','In den Einstellungen unter Mitglieder entfernen, am letzten Arbeitstag'],
+            ['Jemand hat eine Spalte gelöscht','Er hatte Kann bearbeiten statt Kann Inhalt bearbeiten','Über den Verlauf zurückholen, dann die Stufe senken und die Datenbank sperren']
+          ])
+        ]}),
+        R.sec({eb:'Absichern', title:'Was passiert, wenn doch etwas <span class="g">weg</span> ist', lead:'Kein Rechtekonzept verhindert jeden Fehler. Darum lohnt es sich zu wissen, wie du zurückkommst.', blocks:[
+          R.tab(['Was','Wo','Wie lange'],[
+            ['Gelöschte Seite','Papierkorb unten in der Seitenleiste','Bis jemand den Papierkorb leert'],
+            ['Früherer Stand einer Seite','Drei Punkte oben rechts, Verlauf der Seite','Free 7 Tage, Plus 30, Business 90'],
+            ['Sicherung deiner Zahlen','Export als CSV oder Markdown','Unbegrenzt, aber ohne Verknüpfungen']
+          ])
+        ]}),
+        {emp:{kind:'Einrichtung', animTitle:'Rechte,', animGold:'einmal sauber', steps:['Räume zuerst','Kleinste Stufe','Datenbanken sperren','Abgänge entfernen'],
+          intro:'Rechte nachträglich aufzuräumen ist mühsam. Einmal am Anfang durchdacht, musst du sie fast nie wieder anfassen.',
+          points:['Leg die Teamspaces an, bevor du die Vorlage hineinkopierst. Die Kalkulation zieht von Anfang an in den geschlossenen Raum.','Gib jeder Person die kleinste Stufe, mit der sie ihre Arbeit erledigt. Erhöhen geht immer.','Sperr jede Datenbank der Vorlage, sobald sie eingerichtet ist. Eintragen bleibt möglich.','Wer den Betrieb verlässt, verliert am selben Tag seinen Zugang.']}}
+      ],
+      learn:{items:['Du kennst die sechs <b>Rechte-Stufen</b> und vergibst die kleinste passende.','Du teilst deinen Betrieb in <b>Teamspaces</b> auf, die Kalkulation in einen geschlossenen.','Du lässt das Team <b>eintragen</b>, ohne dass es Formeln und Spalten umbauen kann.','Du teilst einzelne Seiten mit <b>Gästen</b> und weißt, wie du Gelöschtes zurückholst.'],
+        next:'/lektionen/l18-system-architektur-dashboard-design'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
    NEUBAU MODUL 1 · L1.10 "Die Zahl stimmt nicht?"  (Lesen, anpassen, reparieren)
    Adresse: /lektionen/l18-system-architektur-dashboard-design (Alt-Slug toleriert; Modul-1-Abschluss)
    Erklaeranimation "Die Spur zurueck" — EIGENES Konzept:
