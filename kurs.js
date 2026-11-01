@@ -30299,35 +30299,6 @@ var TSISL_TEAM_ONB_V2=[
   .r-line .v{font-family:${DISP};font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
   @media(max-width:760px){ .r-zut{grid-template-columns:1fr} }
 
-  /* REZ: Charge -> Portionen */
-  .r-rez{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
-  .r-bars{display:flex;flex-direction:column;gap:9px}
-  .r-bar{display:grid;grid-template-columns:150px 1fr 70px;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.8)}
-  .r-bar .tr{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
-  .r-bar .tr b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,rgba(199,180,137,.55),#c7b489);transition:width 1s cubic-bezier(.16,1,.3,1)}
-  .r-bar .q{font:600 12px/1 ${MONO};color:#efe6d2;text-align:right}
-  .r-sum{margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6)}
-  .r-sum b{font-family:${DISP};font-weight:600;font-size:18px;color:#fff;font-variant-numeric:tabular-nums}
-  .r-dots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:230px;margin:0 auto 18px}
-  .r-dots i{aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transform:scale(.6);opacity:.3;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
-  .r-dots i.in{background:radial-gradient(circle at 30% 30%,rgba(199,180,137,.6),rgba(199,180,137,.15));border-color:rgba(199,180,137,.5);transform:none;opacity:1}
-  .r-big{text-align:center}
-  .r-big b{display:block;font-family:${DISP};font-weight:600;font-size:clamp(34px,4.4vw,48px);color:#fff;font-variant-numeric:tabular-nums}
-  .r-big span{font:600 10px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:#c7b489}
-  .r-big p{font-size:13px;color:rgba(255,255,255,.6);margin:8px 0 0}
-  @media(max-width:760px){ .r-rez{grid-template-columns:1fr} .r-bar{grid-template-columns:110px 1fr 60px} }
-
-  /* GK: zwei Rechenstreifen */
-  .r-gk{display:flex;flex-direction:column;gap:16px}
-  .r-eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.02)}
-  .r-eq .tag{flex-basis:100%;text-align:center;font:600 9.5px/1 ${SANS};letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 4px}
-  .r-tok{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:96px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:#090b12;opacity:0;transform:translateY(8px);transition:opacity .5s cubic-bezier(.45,0,.55,1),transform .6s cubic-bezier(.16,1,.3,1),border-color .5s cubic-bezier(.45,0,.55,1)}
-  .r-tok.in{opacity:1;transform:none}
-  .r-tok b{font-family:${DISP};font-weight:600;font-size:21px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .r-tok small{font-size:11px;color:rgba(255,255,255,.5);text-align:center;line-height:1.3}
-  .r-tok.res{border-color:rgba(199,180,137,.55);background:linear-gradient(rgba(199,180,137,.10),rgba(199,180,137,.03)),#090b12}
-  .r-op{font-family:${DISP};font-size:22px;color:#c7b489;opacity:0;transition:opacity .4s cubic-bezier(.45,0,.55,1)}
-  .r-op.in{opacity:1}
   /* ALG: Kennzeichnung wandert */
   .r-alg{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:10px}
   .r-alg-l{display:flex;flex-direction:column;gap:10px}
@@ -30457,41 +30428,6 @@ var TSISL_TEAM_ONB_V2=[
       ]);
     }
     return {html:html, play:play, cap:'Beispielwerte. 6,40 € ÷ 1000 × 80 = 0,51 €. Mit 10 % Schnittverlust: 0,51 € ÷ 0,9 = 0,57 €.'};
-  };
-
-  /* ---------- Rezepturen ---------- */
-  R.rez=function(){
-    var Z=[['500 ml Olivenöl',500,'6,45 €'],['150 ml Weißweinessig',150,'0,48 €'],['50 g Senf',50,'0,30 €'],['50 g Honig',50,'0,60 €']];
-    var dots=''; for(var i=0;i<25;i++) dots+='<i></i>';
-    var html='<div class="r-rez"><div><div class="r-bars">'+Z.map(function(z){ return '<div class="r-bar"><span>'+z[0]+'</span><span class="tr"><b data-w="'+(z[1]/500*100)+'"></b></span><span class="q">'+z[2]+'</span></div>'; }).join('')+'</div>'+
-      '<div class="r-sum"><span>Menge Zutaten Summe</span><b>750 ml / g</b></div><div class="r-sum"><span>Zutatenkosten ( nutzbar )</span><b>7,83 €</b></div></div>'+
-      '<div class="r-big"><div class="r-dots">'+dots+'</div><span>Anzahl Portionen bei 30</span><b class="np">0</b><p>Portionspreise / Summe</p><b class="pp" style="font-size:clamp(26px,3.2vw,34px)">0,00 €</b></div></div>';
-    function play(root){
-      var bs=root.querySelectorAll('.r-bar b'), ds=root.querySelectorAll('.r-dots i'), np=root.querySelector('.np'), pp=root.querySelector('.pp');
-      Array.prototype.forEach.call(bs,function(b){ b.style.width='0'; }); Array.prototype.forEach.call(ds,function(d){ d.classList.remove('in'); }); np.textContent='0'; pp.textContent='0,00 €';
-      var st=[]; Array.prototype.forEach.call(bs,function(b,i){ st.push([i?160:200,function(){ b.style.width=b.getAttribute('data-w')+'%'; }]); });
-      st.push([900,function(){ Array.prototype.forEach.call(ds,function(d,i){ setTimeout(function(){ d.classList.add('in'); np.textContent=String(i+1); }, i*45); }); setTimeout(function(){ np.textContent='25'; Array.prototype.forEach.call(ds,function(d){ d.classList.add('in'); }); },25*45+200); }]);
-      st.push([1400,function(){ count(pp,0.31,eur,700); }]);
-      return seq(st);
-    }
-    return {html:html, play:play, cap:'Beispielwerte. 750 ÷ 30 = 25 Portionen. 7,83 € ÷ 25 = 0,31 € pro Portion.'};
-  };
-
-  /* ---------- Gemeinkosten & Loehne ---------- */
-  R.gk=function(){
-    function tok(v,s,res){ return '<span class="r-tok'+(res?' res':'')+'"><b>'+v+'</b><small>'+s+'</small></span>'; }
-    function op(o){ return '<span class="r-op">'+o+'</span>'; }
-    var html='<div class="r-gk">'+
-      '<div class="r-eq e1"><span class="tag">DB VII · Gemeinkostenannahmen</span>'+tok('5.500 €','GK Kosten / Monat')+op('÷')+tok('5.000','Absatz pro Monat')+op('=')+tok('1,10 €','GK pro Produkt',1)+'</div>'+
-      '<div class="r-eq e2"><span class="tag">DB VIII · Mitarbeiterlöhne</span>'+tok('2.400 €','Monatsgehalt (brutto)')+op('×')+tok('1,25','AG-Kosten-Faktor')+op('÷')+tok('160 h','Vollzeit im Monat')+op('=')+tok('18,75 €','Stundensatz (AG-Kosten)',1)+'</div>'+
-      '<div class="r-eq e3"><span class="tag">DB XI · im Gericht</span>'+tok('18,75 €','Stundensatz')+op('×')+tok('8 min','Zubereitungszeit')+op('=')+tok('2,50 €','PK Pro Produkt',1)+'</div>'+
-    '</div>';
-    function play(root){
-      var all=root.querySelectorAll('.r-tok,.r-op'); Array.prototype.forEach.call(all,function(e){ e.classList.remove('in'); });
-      var st=[]; ['.e1','.e2','.e3'].forEach(function(s,k){ var items=root.querySelectorAll(s+' .r-tok,'+s+' .r-op'); Array.prototype.forEach.call(items,function(e,i){ st.push([i?170:(k?500:150),function(){ e.classList.add('in'); }]); }); });
-      return seq(st);
-    }
-    return {html:html, play:play, cap:'Beispielwerte. Gemeinkostenanteil und Personalkosten landen im Gericht als GK Anteil pro Produkt und PK Pro Produkt.'};
   };
 
   /* ---------- Allergene & Packaging ---------- */
@@ -31451,7 +31387,7 @@ var TSISL_TEAM_ONB_V2=[
 
   /* ---------- Neue Seiten: Dynamisches System + Allgemeine Tipps ---------- */
   var FULL=[
-  { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'L 2.16', title:'Dynamisches <span class="g">System</span>', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system', anim:'__tsn2sort',
+  { key:'dyn', re:/\/system-lebendiger-machen\/?$/, eyebrow:'Modul 2 · Ausbau', title:'Dynamisches <span class="g">System</span>', cover:'DYNAMISCH', next:'/notion-ai-fr-unser-system', anim:'__tsn2sort',
     hide:['block-38eb9546553480f88995dbe5a2f41255'],
     body:'<p class="big">Deine Vorlage rechnet, sobald du etwas einträgst. Lebendig wird sie, wenn manches ohne dich passiert.</p>'+
       '<p>Dafür gibt es drei Wege, und jeder hat seinen Platz. Hier bekommst du den Überblick, damit du weißt, was wofür taugt. Wie du sie einrichtest, zeige ich dir Schritt für Schritt in Modul 4.</p>',
@@ -31464,7 +31400,7 @@ var TSISL_TEAM_ONB_V2=[
         '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
     learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4.'] },
 
-  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'L 2.18', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:null,
+  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:null,
     hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
     body:'<p class="big">Kleine Handgriffe, die den Alltag mit deiner Vorlage leichter machen.</p>',
     secs:function(){ return T.make('tsn2-tip-liste','tsn2-sec',T.steps([
