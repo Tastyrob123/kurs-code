@@ -25132,879 +25132,10 @@ var TSISL_TEAM_ONB_V2=[
 
 /* MODUL 6 · alte Bloecke (L6.1-L6.12, Stand 02.08.2026) am 01.11.2026 entfernt: Neubau im Block "NEUBAU MODUL 6" am Dateiende. */
 /* ============================================================
-   #tsres — Modul 5 · AI Reservation Agent (8 Lektionen)
-   Config-getriebenes Seiten-Modul fuer /lektionen/<slug>.
-   Aufbau je Seite: Hero -> Lead/Intro -> Signatur-Animation
-   -> Bild-Platzhalter -> Inhalts-Karten -> Bild-Platzhalter
-   -> Learnings -> Weiter-Button.
-   Jede Lektion hat eine EIGENE Choreografie (kein Recycling).
-   Bilder = bewusste Platzhalter (Robert 02.08.2026).
-   Palette/Fonts = Bestand (#c7b489, GLOW 199,180,137, Lineal Web).
-   Prefix: tsres / rs-.  Append-only, keine fremden Bloecke.
+   #tsres — Modul 5 (Stand 02.08.2026) ABGELOEST am 01.11.2026.
+   Neubau: Zone "NEUBAU MODUL 5" am Ende dieser Datei (#tsn5).
+   Alter Code im Git-Verlauf (letzter Stand bf4c8f9 / af3ecde).
    ============================================================ */
-(function(){
-  if(window.__tsres) return; window.__tsres=true;
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  var G="199,180,137";
-  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Signatur-Choreografien ---------- */
-  var CUSTOM={};
-
-  /* L5.0 — Anrufe verpuffen vs. Agent faengt sie auf */
-  CUSTOM.verpuffen=function(sec){
-    if(RM) return;
-    var lost=[].slice.call(sec.querySelectorAll('.rv-c.lost')),
-        kept=[].slice.call(sec.querySelectorAll('.rv-c.kept')),
-        box=sec.querySelector('.rv-box');
-    var all=lost.concat(kept);
-    all.forEach(function(e){e.classList.remove('go','fade','land');});
-    if(box) box.classList.remove('on');
-    all.forEach(function(e,i){ setTimeout(function(){e.classList.add('go');}, 140+i*130); });
-    setTimeout(function(){ lost.forEach(function(e,i){ setTimeout(function(){e.classList.add('fade');}, i*160); }); }, 140+all.length*130+320);
-    setTimeout(function(){ if(box) box.classList.add('on'); }, 140+all.length*130+700);
-    setTimeout(function(){ kept.forEach(function(e,i){ setTimeout(function(){e.classList.add('land');}, i*150); }); }, 140+all.length*130+960);
-  };
-
-  /* L5.1 — Drei Tore: Groesse, Zeit, Tisch -> gruen oder Mensch */
-  CUSTOM.tore=function(sec){
-    if(RM) return;
-    var gates=[].slice.call(sec.querySelectorAll('.rg-gate')),
-        ok=sec.querySelector('.rg-out.ok'), esc=sec.querySelector('.rg-out.esc'),
-        dot=sec.querySelector('.rg-dot');
-    gates.forEach(function(e){e.classList.remove('on','pass');});
-    if(ok) ok.classList.remove('on'); if(esc) esc.classList.remove('on');
-    if(dot) dot.classList.remove('run');
-    gates.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 160+i*220); });
-    setTimeout(function(){ if(dot) dot.classList.add('run'); }, 160+gates.length*220+160);
-    gates.forEach(function(e,i){ setTimeout(function(){e.classList.add('pass');}, 160+gates.length*220+380+i*420); });
-    setTimeout(function(){ if(ok) ok.classList.add('on'); }, 160+gates.length*220+380+gates.length*420+180);
-    setTimeout(function(){ if(esc) esc.classList.add('on'); }, 160+gates.length*220+380+gates.length*420+560);
-  };
-
-  /* L5.2 — Zwei Tueren, ein Gehirn */
-  CUSTOM.gehirn=function(sec){
-    if(RM) return;
-    var doors=[].slice.call(sec.querySelectorAll('.rb-door')),
-        core=sec.querySelector('.rb-core'),
-        lns=[].slice.call(sec.querySelectorAll('.rb-ln')),
-        outs=[].slice.call(sec.querySelectorAll('.rb-out'));
-    doors.concat(outs).forEach(function(e){e.classList.remove('on');});
-    if(core) core.classList.remove('on','pulse');
-    lns.forEach(function(e){e.classList.remove('flow');});
-    doors.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 140+i*200); });
-    setTimeout(function(){ if(core) core.classList.add('on'); }, 640);
-    setTimeout(function(){ lns.forEach(function(l,i){ setTimeout(function(){l.classList.add('flow');}, i*120); }); }, 900);
-    setTimeout(function(){ if(core) core.classList.add('pulse'); }, 1400);
-    outs.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 1650+i*200); });
-  };
-
-  /* L5.3 — Sprachwelle laeuft, zwei Wege heben sich */
-  CUSTOM.welle=function(sec){
-    if(RM) return;
-    var bars=[].slice.call(sec.querySelectorAll('.rw-b')),
-        ways=[].slice.call(sec.querySelectorAll('.rw-way')),
-        slim=sec.querySelector('.rw-slim');
-    bars.forEach(function(e){e.classList.remove('live');});
-    ways.forEach(function(e){e.classList.remove('on');});
-    if(slim) slim.classList.remove('on');
-    bars.forEach(function(e,i){ setTimeout(function(){e.classList.add('live');}, 90+i*45); });
-    ways.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 900+i*260); });
-    setTimeout(function(){ if(slim) slim.classList.add('on'); }, 1700);
-  };
-
-  /* L5.4 — Tischraster: belegte fallen weg, freier pulsiert */
-  CUSTOM.tische=function(sec){
-    if(RM) return;
-    var ts=[].slice.call(sec.querySelectorAll('.rt-t')),
-        res=sec.querySelector('.rt-res');
-    ts.forEach(function(e){e.classList.remove('on','busy','free');});
-    if(res) res.classList.remove('on');
-    ts.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 80+i*55); });
-    setTimeout(function(){
-      ts.forEach(function(e,i){
-        if(e.dataset.busy==='1') setTimeout(function(){e.classList.add('busy');}, i*70);
-      });
-    }, 80+ts.length*55+280);
-    setTimeout(function(){
-      ts.forEach(function(e){ if(e.dataset.busy!=='1'&&e.dataset.hit==='1') e.classList.add('free'); });
-      if(res) res.classList.add('on');
-    }, 80+ts.length*55+1250);
-  };
-
-  /* L5.5 — Kreislauf: Erinnerung -> Absage -> frei -> Warteliste */
-  CUSTOM.kreis=function(sec){
-    if(RM) return;
-    var st=[].slice.call(sec.querySelectorAll('.rk-st')),
-        ring=sec.querySelector('.rk-ring'),
-        hub=sec.querySelector('.rk-hub');
-    st.forEach(function(e){e.classList.remove('on','hot');});
-    if(ring) ring.classList.remove('spin');
-    if(hub) hub.classList.remove('on');
-    setTimeout(function(){ if(hub) hub.classList.add('on'); }, 160);
-    st.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 420+i*180); });
-    setTimeout(function(){ if(ring) ring.classList.add('spin'); }, 420+st.length*180+180);
-    var loop=function(){
-      st.forEach(function(e,i){
-        setTimeout(function(){
-          st.forEach(function(x){x.classList.remove('hot');});
-          e.classList.add('hot');
-        }, i*900);
-      });
-    };
-    setTimeout(loop, 420+st.length*180+400);
-  };
-
-  /* L5.6 — Testprotokoll hakt sich ab, dann Schattenmodus */
-  CUSTOM.pruefen=function(sec){
-    if(RM) return;
-    var rows=[].slice.call(sec.querySelectorAll('.rp-row')),
-        sw=sec.querySelector('.rp-switch'),
-        bar=sec.querySelector('.rp-fill');
-    rows.forEach(function(e){e.classList.remove('on','done');});
-    if(sw) sw.classList.remove('on');
-    if(bar) bar.style.width='0%';
-    rows.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 100+i*110); });
-    rows.forEach(function(e,i){
-      setTimeout(function(){
-        e.classList.add('done');
-        if(bar) bar.style.width=Math.round((i+1)/rows.length*100)+'%';
-      }, 100+rows.length*110+260+i*230);
-    });
-    setTimeout(function(){ if(sw) sw.classList.add('on'); }, 100+rows.length*110+260+rows.length*230+300);
-  };
-
-  /* L5.7 — Daten verblassen nach Frist, anonyme Balken bleiben */
-  CUSTOM.loeschen=function(sec){
-    if(RM) return;
-    var cards=[].slice.call(sec.querySelectorAll('.rl-card')),
-        bars=[].slice.call(sec.querySelectorAll('.rl-bar')),
-        gear=sec.querySelector('.rl-gear');
-    cards.forEach(function(e){e.classList.remove('on','gone');});
-    bars.forEach(function(e){e.classList.remove('on');});
-    if(gear) gear.classList.remove('on','turn');
-    cards.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, 120+i*130); });
-    setTimeout(function(){ if(gear){gear.classList.add('on'); setTimeout(function(){gear.classList.add('turn');},300);} }, 120+cards.length*130+300);
-    setTimeout(function(){ cards.forEach(function(e,i){ setTimeout(function(){e.classList.add('gone');}, i*140); }); }, 120+cards.length*130+900);
-    setTimeout(function(){ bars.forEach(function(e,i){ setTimeout(function(){e.classList.add('on');}, i*130); }); }, 120+cards.length*130+1500);
-  };
-
-  /* ---------- Bild-Platzhalter ---------- */
-  function ph(label, note, ratio){
-    return '<figure class="rs-ph" style="--r:'+(ratio||'16/9')+'">'+
-      '<div class="rs-ph-in"><span class="rs-ph-ic"></span>'+
-      '<span class="rs-ph-l">'+label+'</span>'+
-      '<span class="rs-ph-n">'+note+'</span></div></figure>';
-  }
-
-  /* ---------- CONTENT: 8 Lektionen ---------- */
-  /* Der Modul-Slug wandert: die Notion-Modulzeile heisst seit 02.08.2026
-     „Modul 5 · AI Reservation Agent" (vorher „Modul 5 · Claude Code + Notion").
-     super.so slugifiziert aus dem Titel, der Slug aendert sich also beim
-     naechsten Re-Sync. Deshalb wird er zur Laufzeit aus der Seiten-Navigation
-     gelesen und nur im Notfall auf den erwarteten neuen Slug zurueckgefallen. */
-  var BACK={href:'/modul-5-ai-reservation-agent', label:'Modul 5'};
-  function moduleHref(){
-    var as=document.querySelectorAll('a[href^="/modul-5"]');
-    for(var i=0;i<as.length;i++){
-      var h=as[i].getAttribute('href');
-      if(h&&h.indexOf('/lektionen/')===-1) return h;
-    }
-    return BACK.href;
-  }
-  var LEK=[
-  {
-   slug:/\/lektionen\/reservierungen-ohne-anruf\/?$/, key:'l50',
-   eyebrow:'Lektion 5.0', kicker:'AI Reservation Agent · Zielbild',
-   title:'Reservierungen ohne <span class="rs-g">Anruf</span>',
-   lead:'Das Telefon, das freitags um halb acht klingelt, wenn alle im Service sind, kostet dich jeden Abend Geld — nur siehst du es nirgends.',
-   intro:['Ein Gast wartet vier Mal Freizeichen, legt auf und ruft beim Betrieb zwei Straßen weiter an. Du hast diesen Gast nie gesehen, und genau deshalb taucht er in keiner Auswertung auf. Verlorene Reservierungen sind unsichtbarer Umsatzverlust.','In diesem Modul bauen wir den Mitarbeiter, der diesen Anruf annimmt. Rund um die Uhr, in deinem Ton, und ohne je eine Reservierung zu vergessen.'],
-   anim:{key:'verpuffen', eyebrow:'Was heute passiert', h:'Fünf Anfragen. Drei <span class="rs-g">verpuffen</span>.', sub:'Ohne jemanden, der abnimmt, entscheidet der Gast in genau dem Moment um, in dem er Lust auf deinen Laden hatte.',
-    html:'<div class="rv"><div class="rv-lane">'+
-      '<div class="rv-c lost"><b>19:31</b><span>Anruf · 4 Personen</span></div>'+
-      '<div class="rv-c kept"><b>21:08</b><span>WhatsApp · 2 Personen</span></div>'+
-      '<div class="rv-c lost"><b>23:47</b><span>Anruf · 6 Personen</span></div>'+
-      '<div class="rv-c kept"><b>08:12</b><span>Mail · 5 Personen</span></div>'+
-      '<div class="rv-c lost"><b>12:04</b><span>Anruf · 3 Personen</span></div>'+
-     '</div><div class="rv-box"><span class="rv-box-t">Deine Reservierungen</span><span class="rv-box-s">immer erreichbar</span></div></div>'},
-   img1:['Der Freitagabend-Moment','Klingelndes Telefon am Tresen im vollen Service, daneben der Gast, der schon die nächste Nummer wählt.'],
-   cards:{eyebrow:'Das Zielbild', h:'Was am Ende <span class="rs-g">läuft</span>', items:[
-     ['Annehmen','Dein Gast schreibt per Mail oder WhatsApp oder ruft an, zu jeder Tages- und Nachtzeit. Der Agent antwortet in Sekunden, in deinem Ton und mit deinen Regeln.'],
-     ['Prüfen','Er kennt deine Öffnungszeiten, deine Tische und die echte Belegung, weil er in dieselbe Datenbank schaut wie du.'],
-     ['Buchen','Ist ein Tisch frei, bucht er. Ist keiner frei, schlägt er zwei Alternativen vor statt nur abzusagen.'],
-     ['Abgeben','Bei der Zwanziger-Gruppe, beim Sonderwunsch, bei der Beschwerde gibt er an dich ab — sauber und mit allen Informationen.']]},
-   img2:['Deine Daten bleiben deine Daten','Schaubild: eigene Reservierungs-Datenbank in der Mitte, Mail, WhatsApp und Telefon als Kanäle von außen.'],
-   note:{h:'Warum das in <span class="rs-g">deiner</span> Datenbank landet', p:'Das Jahr 2026 hat gezeigt, warum das zählt. Quandoo stellt den Betrieb ein, ab September 2026 laufen dort keine neuen Reservierungen mehr. Betriebe, die ihre gesamte Gästehistorie dort liegen hatten, stehen jetzt vor der Frage, wie sie an ihre eigenen Daten kommen. Diese Abhängigkeit bauen wir von Anfang an nicht ein.'},
-   learn:['Du erkennst Reservierungen als Schnittstelle mit unsichtbarem Umsatzverlust.','Du kennst das vollständige Zielbild: annehmen, prüfen, buchen, bestätigen, erinnern, abgeben.','Du weißt, warum die eigene Datenbank strategisch zählt.','Du kennst die Baureihenfolge: erst die geschriebenen Kanäle, dann das Telefon.'],
-   next:{href:'/lektionen/dein-reservierungs-prozess', label:'Dein Reservierungs-Prozess'}
-  },
-  {
-   slug:/\/lektionen\/dein-reservierungs-prozess\/?$/, key:'l51',
-   eyebrow:'Lektion 5.1', kicker:'AI Reservation Agent · Fundament',
-   title:'Dein Reservierungs-<span class="rs-g">Prozess</span>',
-   lead:'Bevor wir ein Werkzeug anfassen, schreiben wir auf, wie Reservierungen bei dir wirklich laufen. Diese eine Seite wird später zum Gehirn deines Agenten.',
-   intro:['Ich habe viele Systeme scheitern sehen, und fast nie lag es an der Technik. Es lag daran, dass jemand einen Agenten auf einen Prozess losgelassen hat, den er selbst nie sauber aufgeschrieben hatte. Der Agent hat dann Regeln erfunden, wo keine waren.','Das verhindern wir jetzt mit Papier und einer Stunde Zeit, bevor irgendein Werkzeug geöffnet wird.'],
-   anim:{key:'tore', eyebrow:'Die Entscheidungs-Grenze', h:'Drei Tore. Dann <span class="rs-g">bucht</span> er.', sub:'Nur wenn alle drei zusammenkommen, entscheidet der Agent allein. Alles andere geht an einen Menschen.',
-    html:'<div class="rg"><div class="rg-in">Anfrage</div><div class="rg-track"><span class="rg-dot"></span>'+
-      '<div class="rg-gate"><b>1</b><span>Standardgröße<br>2 bis 6 Personen</span></div>'+
-      '<div class="rg-gate"><b>2</b><span>Innerhalb<br>der Öffnungszeit</span></div>'+
-      '<div class="rg-gate"><b>3</b><span>Tisch laut<br>Datenbank frei</span></div>'+
-      '</div><div class="rg-outs"><div class="rg-out ok"><b>Agent bucht</b><span>Bestätigung geht sofort raus</span></div>'+
-      '<div class="rg-out esc"><b>Geht an dich</b><span>Gruppe · Sonderwunsch · Beschwerde</span></div></div></div>'},
-   img1:['Dein echter Tischplan','Handgezeichneter Tischplan mit Nummern, Platzzahlen und Terrassen-Zone, daneben dieselbe Information als saubere Tabelle.'],
-   cards:{eyebrow:'Der Steckbrief', h:'Vier Blöcke, eine <span class="rs-g">Stunde</span>', items:[
-     ['Kanäle','Telefon, WhatsApp, Mail, Instagram, das Kontaktformular, der Gast an der Tür. Schreib dazu, wie oft und was heute damit passiert.'],
-     ['Kapazität','Tische, Plätze, Zonen — und die Frage, die gern vergessen wird: Wie lange bleibt ein Tisch bei dir besetzt.'],
-     ['Sonderfälle','Zwölf Personen. Gast mit Hund. Kindergeburtstag. Feiertag mit Sonderkarte. Für die meisten hast du längst eine Regel im Kopf, sie stand nur nie irgendwo.'],
-     ['Die Grenze','Was darf der Agent allein, was gibt er ab. Eng starten, später weiten — Vertrauen ist schneller verloren als aufgebaut.']]},
-   img2:['Der Prozess-Steckbrief','Ausgefülltes Formular auf dem Tisch, daneben der fertige System-Prompt am Bildschirm — dieselben Werte, andere Form.'],
-   note:{h:'Warum wir <span class="rs-g">eng</span> starten', p:'Ein Agent, der eine Zwanziger-Gruppe auf einen Dienstagabend legt, an dem nur eine Servicekraft steht, richtet mehr Schaden an als zehn verpasste Anrufe. Wir starten eng und weiten die Grenze, sobald das Log zeigt, dass der Agent sauber arbeitet.'},
-   learn:['Du hast alle Kanäle erfasst und weißt, welcher heute ins Leere läuft.','Du hast deine Kapazität als Daten aufgeschrieben, inklusive Belegungsdauer.','Du hast die unausgesprochenen Regeln hinter deinen Sonderfällen sichtbar gemacht.','Du hast die Entscheidungs-Grenze gezogen und weißt, warum sie eng startet.'],
-   next:{href:'/lektionen/der-schreib-agent', label:'Der Schreib-Agent'}
-  },
-  {
-   slug:/\/lektionen\/der-schreib-agent\/?$/, key:'l52',
-   eyebrow:'Lektion 5.2', kicker:'AI Reservation Agent · Stufe 1',
-   title:'Der Schreib-<span class="rs-g">Agent</span>',
-   lead:'Wir bauen deinen Agenten zuerst auf den geschriebenen Kanälen: E-Mail und WhatsApp. Dort ist alles nachlesbar, und Fehler fallen sofort auf.',
-   intro:['Beide Kanäle sind geschrieben, und für den Agenten ist das der entscheidende Punkt. Er liest einen Text, versteht ihn, prüft die Verfügbarkeit und schreibt zurück. Ob der Text aus einem Postfach kommt oder aus einem Messenger, ändert am Denken nichts, nur am Eingang und am Ausgang.','Wir bauen deshalb ein Gehirn und hängen zwei Türen daran. Das Telefon kommt in der nächsten Lektion und benutzt genau dasselbe Gehirn.'],
-   anim:{key:'gehirn', eyebrow:'Die Architektur', h:'Zwei Türen, ein <span class="rs-g">Gehirn</span>', sub:'Eine Regel-Änderung, und beide Kanäle verhalten sich neu. Das ist der ganze Grund, warum wir es so bauen.',
-    html:'<div class="rb"><div class="rb-col">'+
-      '<div class="rb-door"><b>E-Mail</b><span>Postfach &amp; Kontaktformular</span></div>'+
-      '<div class="rb-door"><b>WhatsApp</b><span>Business Cloud API</span></div></div>'+
-      '<div class="rb-core"><span class="rb-core-n">n8n + Claude</span><span class="rb-core-t">dein System-Prompt</span></div>'+
-      '<div class="rb-col">'+
-      '<div class="rb-out"><b>Verfügbarkeit</b><span>prüfen</span></div>'+
-      '<div class="rb-out"><b>Reservierung</b><span>anlegen</span></div>'+
-      '<div class="rb-out"><b>Übergabe</b><span>an einen Menschen</span></div></div>'+
-      '<svg class="rb-lns" viewBox="0 0 940 260" preserveAspectRatio="none">'+
-      '<path class="rb-ln" d="M300 78 C 380 78 396 130 452 130"/>'+
-      '<path class="rb-ln" d="M300 182 C 380 182 396 130 452 130"/>'+
-      '<path class="rb-ln" d="M488 130 C 550 130 560 56 640 56"/>'+
-      '<path class="rb-ln" d="M488 130 C 550 130 556 130 640 130"/>'+
-      '<path class="rb-ln" d="M488 130 C 550 130 560 204 640 204"/></svg></div>'},
-   img1:['Der Workflow in n8n','Bildschirmaufnahme: Mail-Auslöser und WhatsApp-Auslöser laufen in denselben Agenten-Baustein, dahinter die drei Werkzeuge.'],
-   cards:{eyebrow:'Die Bausteine', h:'Drei Teile, zwei hast du <span class="rs-g">schon</span>', items:[
-     ['Die Kanäle','Dein Reservierungs-Postfach, das n8n abfragen und beantworten kann, und die WhatsApp Business Cloud API — der offizielle Weg von Meta unter deiner Restaurant-Nummer.'],
-     ['Die Zentrale','n8n auf deinem eigenen Server, den du in Modul vier aufgesetzt hast. Er läuft rund um die Uhr, egal ob dein Rechner an ist.'],
-     ['Das Gehirn','Claude über einen API-Schlüssel, mit deinem Steckbrief als Regelwerk. Für den Dialog reicht das mittlere Modell.'],
-     ['Die Kosten','Der Server läuft schon. WhatsApp berechnet Antworten im Servicefenster nicht. In Summe deutlich unter zwanzig Euro im Monat, Stand August 2026 als Größenordnung.']]},
-   img2:['Die erste echte Konversation','Handy-Bildschirm: Anfrage nach einem Tisch für vier, Antwort des Agenten mit Bestätigung — in Sekunden.'],
-   note:{h:'Die eine Regel, die über <span class="rs-g">alles</span> entscheidet', p:'Ein Sprachmodell will antworten, das ist seine Natur. Fragst du es nach einem freien Tisch, ohne dass es nachsehen kann, dann behauptet es freundlich und überzeugend einen freien Tisch. Deshalb steht im System-Prompt: Verfügbarkeit ausschließlich aus der Werkzeug-Antwort. Kein Werkzeug-Ergebnis, keine Zusage. Bei Unklarheit nimmt der Agent die Anfrage auf und kündigt eine Rückmeldung an. Niemals raten.'},
-   learn:['Du kennst die drei Bausteine und weißt, welche du aus Modul vier schon hast.','Du verstehst, warum die geschriebenen Kanäle vor dem Telefon kommen.','Du kannst den Workflow benennen: Auslöser, Agent mit Prompt und Werkzeugen, Antwort.','Du kennst die Halluzinations-Regel und ihre Begründung.'],
-   next:{href:'/lektionen/der-telefon-agent', label:'Der Telefon-Agent'}
-  },
-  {
-   slug:/\/lektionen\/der-telefon-agent\/?$/, key:'l53',
-   eyebrow:'Lektion 5.3', kicker:'AI Reservation Agent · Stufe 2',
-   title:'Der Telefon-<span class="rs-g">Agent</span>',
-   lead:'Das Telefon ist der größte Reservierungskanal der Gastronomie und der anspruchsvollste für einen Agenten. Es gibt zwei Wege, ihn zu besetzen, und einen dritten, den ich nicht verschweige.',
-   intro:['Sprache ist für einen Agenten schwerer als Text. Er muss in Echtzeit zuhören, verstehen und antworten, mit Küchenlärm im Hintergrund, mit Dialekt, mit dem älteren Herrn, der langsam spricht.','Die Technik dafür ist 2026 gut geworden, aber sie ist nicht magisch. Deshalb treffen wir hier eine bewusste Werkzeug-Entscheidung.'],
-   anim:{key:'welle', eyebrow:'Die Entscheidung', h:'Zwei Wege ans <span class="rs-g">Telefon</span>', sub:'Schnell und fertig, oder souverän am eigenen Gehirn. Und ein dritter Weg, der gar nichts kostet.',
-    html:'<div class="rw"><div class="rw-wave">'+
-      '<i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i><i class="rw-b"></i>'+
-      '</div><div class="rw-ways">'+
-      '<div class="rw-way"><span class="rw-tag">Weg 1</span><b>Fertiger Assistent</b><span class="rw-p">Deutscher Anbieter, im Browser konfiguriert. In Tagen live.</span><span class="rw-cost">rund 100 bis 350 € im Monat bei einigen hundert Anrufen</span></div>'+
-      '<div class="rw-way"><span class="rw-tag">Weg 2</span><b>Baukasten am eigenen Gehirn</b><span class="rw-p">Ruft bei jedem Anruf dein n8n auf — derselbe Prompt wie im Schreib-Kanal.</span><span class="rw-cost">rund 7 bis 30 US-Cent je Gesprächsminute</span></div>'+
-      '</div><div class="rw-slim"><b>Der dritte Weg</b><span>Anrufbeantworter mit einem Satz: „Am schnellsten reservierst du per WhatsApp." Manche Betriebe fangen so den Großteil ab, ohne einen Euro für Telefon-KI.</span></div></div>'},
-   img1:['Der Probeanruf','Bildschirmaufnahme der Anbieter-Oberfläche, daneben das Telefon beim Testanruf aus der lauten Küche.'],
-   cards:{eyebrow:'Am Telefon anders', h:'Drei Dinge, die du zusätzlich <span class="rs-g">regelst</span>', items:[
-     ['Die Ansage','Der Gast muss am Anfang hören, dass er mit einem KI-Assistenten spricht und jederzeit einen Menschen bekommt. Das ist Vertrauen und Rechtsthema zugleich.'],
-     ['Die Weiterleitung','Sagt der Gast „Mitarbeiter", wird durchgestellt oder ein Rückruf notiert. Niemand darf gegen eine Maschine anreden müssen.'],
-     ['Die Rückfrage','Bei unsicher verstandenem Datum oder Personenzahl wiederholt der Agent zur Bestätigung. Ein falsch verstandenes Datum passiert am Telefon schneller als im Chat.'],
-     ['Die Rechnung','Rechne nie mit der Grundgebühr, rechne mit deinem Anrufaufkommen. Das ist der Posten, der den Preis macht.']]},
-   img2:['Die Anbieter-Prüfliste','Zehn Fragen auf einer Seite, oben die wichtigste: Kann euer Assistent per Schnittstelle in mein System buchen?'],
-   note:{h:'Meine ehrliche <span class="rs-g">Empfehlung</span>', p:'Willst du nur, dass das Telefon nicht mehr ins Leere klingelt, nimm Weg eins — du bist in Tagen live und hast einen deutschen Ansprechpartner. Willst du das System aus diesem Modul in voller Konsequenz, ein Gehirn für alle Kanäle, dann geh Weg zwei. Und wenn du erst einmal sehen willst, ob das überhaupt zu deinem Betrieb passt: Fang schlank an, mit dem dritten Weg.'},
-   learn:['Du kennst die zwei Wege und ihre ehrlichen Kosten, Stand August 2026.','Du weißt, dass die reale Rechnung über das Anrufaufkommen läuft.','Du kannst die Anbieter-Prüfliste anwenden, allen voran die Schnittstellen-Frage.','Du kennst die drei Voice-Besonderheiten: Ansage, Weiterleitung, Rückfrage-Pflicht.'],
-   next:{href:'/lektionen/verfuegbarkeit-und-buchung', label:'Verfügbarkeit und Buchung'}
-  },
-  {
-   slug:/\/lektionen\/verf[a-z]*gbarkeit-und-buchung\/?$/, key:'l54',
-   eyebrow:'Lektion 5.4', kicker:'AI Reservation Agent · Das Herzstück',
-   title:'Verfügbarkeit und <span class="rs-g">Buchung</span>',
-   lead:'Jetzt bekommt dein Agent echte Tische. Wir bauen die Reservierungs-Datenbank in die Operations Area und verdrahten sie mit dem Gehirn aus der letzten Lektion.',
-   intro:['Bis hierher konnte dein Agent reden, aber nicht handeln. Das ändern wir, und dafür klären wir zuerst die Grundsatzfrage: Wo sollen deine Reservierungen leben.','Hast du schon ein Reservierungssystem, prüf es an einer einzigen Frage: Hat es eine offene Schnittstelle, über die ein fremdes Werkzeug Verfügbarkeit lesen und Buchungen schreiben darf. Der Markt hat sich 2026 bewegt, und nicht in Richtung Offenheit.'],
-   anim:{key:'tische', eyebrow:'Die Verfügbarkeitslogik', h:'Passende Tische minus <span class="rs-g">belegte</span>', sub:'Freitag, 19 Uhr, vier Personen. So entscheidet das System, was „frei" wirklich heißt.',
-    html:'<div class="rt"><div class="rt-grid">'+
-      '<div class="rt-t" data-busy="1"><b>T1</b><span>2</span></div>'+
-      '<div class="rt-t" data-busy="0"><b>T2</b><span>2</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T3</b><span>4</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T4</b><span>4</span></div>'+
-      '<div class="rt-t" data-busy="0" data-hit="1"><b>T5</b><span>4</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T6</b><span>4</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T7</b><span>6</span></div>'+
-      '<div class="rt-t" data-busy="0"><b>T8</b><span>6</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T9</b><span>2</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T10</b><span>8</span></div>'+
-      '<div class="rt-t" data-busy="0"><b>T11</b><span>2</span></div>'+
-      '<div class="rt-t" data-busy="1"><b>T12</b><span>4</span></div>'+
-      '</div><div class="rt-res"><b>Tisch 5 ist frei</b><span>4 Plätze · Innen · 19:00 bis 21:00</span></div></div>'},
-   img1:['Die zwei Datenbanken','Schaubild: Tische &amp; Zeitfenster als ruhige Stammdaten links, Reservierungen als Arbeitstier rechts, dazwischen die Relation.'],
-   cards:{eyebrow:'Was wir anlegen', h:'Zwei Tabellen in der <span class="rs-g">Operations Area</span>', items:[
-     ['Tische &amp; Zeitfenster','Eine Zeile pro Tisch: Name, Plätze, Zone, kombinierbar, aktiv. Dazu deine Servicezeiten. Einmal befüllt, danach selten angefasst.'],
-     ['Reservierungen','Das Arbeitstier: Gastname, Telefon, Datum, Uhrzeit, Personen, Tisch als Relation, Status, Kanal, Notiz.'],
-     ['Vier Status, mehr nicht','Angefragt, Bestätigt, Storniert, No-Show. Jeder zusätzliche Status ist eine Regel, die Agent und Team verstehen müssen.'],
-     ['Zwei Werkzeuge','Verfügbarkeit prüfen und Reservierung anlegen. Ab jetzt ist die Halluzinations-Regel nicht mehr nur Text, sondern verdrahtet.']]},
-   img2:['Der Moment, in dem alles zusammenkommt','Split-Ansicht: WhatsApp-Bestätigung auf dem Handy, gleichzeitig die neue Zeile im Notion-Backoffice.'],
-   note:{h:'Warum ein „nein" immer eine <span class="rs-g">Alternative</span> braucht', p:'Bleibt kein Tisch übrig, sucht derselbe Ablauf die zwei nächstgelegenen freien Uhrzeiten. Ein „leider nein" ohne Alternative ist eine verlorene Buchung — und der Gast, der stattdessen um halb neun kommt, war nie ein Problem, er wusste nur nicht, dass es geht.'},
-   learn:['Du kannst die Grundsatzfrage beantworten: offenes Fremdsystem oder eigene Datenbank.','Du kennst beide Tabellen, ihre Rollen und die vier Status-Werte.','Du verstehst die Verfügbarkeitslogik samt Alternativvorschlag.','Du hast die komplette Kette einmal selbst ausgelöst.'],
-   next:{href:'/lektionen/erinnerung-und-no-shows', label:'Erinnerung und No-Shows'}
-  },
-  {
-   slug:/\/lektionen\/erinnerung-und-no-shows\/?$/, key:'l55',
-   eyebrow:'Lektion 5.5', kicker:'AI Reservation Agent · Nach der Buchung',
-   title:'Erinnerung und <span class="rs-g">No-Shows</span>',
-   lead:'Die Buchung ist nur die halbe Reservierung. Jetzt bauen wir den Kreislauf dahinter — den Teil, der No-Shows wirklich senkt.',
-   intro:['Erinnerst du dich an die Faustregel aus Modul vier: Claude allein, Routine oder die Automatisierungsfabrik. Die Entscheidungsfrage war, ob es laufen muss, wenn dein Rechner aus ist.','Eine Erinnerung, die am Vortag um siebzehn Uhr rausgeht, egal wo du gerade bist, beantwortet diese Frage eindeutig. Anders als der Agent wird sie nicht von einem Gast geweckt, sondern von der Uhr.'],
-   anim:{key:'kreis', eyebrow:'Der Kreislauf', h:'Die Absage füllt den Tisch <span class="rs-g">neu</span>', sub:'Vier Schritte, die ohne dich laufen. Genau hier wird aus einzelnen Bausteinen ein System.',
-    html:'<div class="rk"><div class="rk-ring"></div><div class="rk-hub"><b>Reservierungen</b><span>deine Datenbank</span></div>'+
-      '<div class="rk-st s1"><b>Erinnerung</b><span>am Vortag, 17 Uhr</span></div>'+
-      '<div class="rk-st s2"><b>Absage</b><span>ein Fingertipp für den Gast</span></div>'+
-      '<div class="rk-st s3"><b>Tisch frei</b><span>in derselben Minute</span></div>'+
-      '<div class="rk-st s4"><b>Warteliste</b><span>der Erste bekommt ihn</span></div></div>'},
-   img1:['Die Erinnerung auf dem Handy','WhatsApp-Vorlage mit einer Frage und zwei Schnellantworten: Passt oder Leider absagen.'],
-   cards:{eyebrow:'Die vier Abläufe', h:'Was hier <span class="rs-g">automatisch</span> läuft', items:[
-     ['Erinnerung am Vortag','Eine Frage, zwei Antworten, wenige Cent pro Gast. Die Wirkung kommt nicht aus dem Text, sondern aus dem Moment.'],
-     ['Absage und Freigabe','Status auf Storniert, und der Tisch ist in der Verfügbarkeitslogik sofort wieder frei. Keine Liste, kein Post-it am Tresen.'],
-     ['Warteliste','Ist nichts frei, notiert der Agent. Wird ein Tisch frei, geht die Nachricht an den Ersten. Wer zuerst bestätigt, bekommt ihn.'],
-     ['No-Show-Nachfassen','Am Vormittag danach eine freundliche Nachricht ohne Vorwurf. Die meisten No-Shows sind Vergesslichkeit, kein böser Wille.']]},
-   img2:['Der No-Show-Handgriff','Tablet nach Serviceende: nicht erschienene Reservierungen mit einem Tipp auf den vierten Status gesetzt.'],
-   note:{h:'Warum Anzahlungen hier <span class="rs-g">nicht</span> vorkommen', p:'Anzahlungen und Kreditkarten-Hinterlegung funktionieren, aber sie brauchen einen Bezahldienstleister, einen Vertrag und eine Preis-Kommunikation an den Gast, und sie verändern die Hürde beim Reservieren spürbar. Ich lasse das bewusst außerhalb dieses Moduls. Braucht dein Betrieb es, etwa bei großen Gruppen, ist es ein eigenes Projekt — und dein System hier ist dafür vorbereitet.'},
-   learn:['Du kannst die Nach-Buchungs-Abläufe mit der Faustregel aus Modul vier einordnen.','Du kennst den Erinnerungs-Ablauf und seine bewusste Schlichtheit.','Du verstehst den Kreislauf Absage, Status, freier Tisch, Warteliste.','Du kennst den freundlichen No-Show-Umgang und die Wiederkenner-Regel.'],
-   next:{href:'/lektionen/go-live-und-betrieb', label:'Go-Live und Betrieb'}
-  },
-  {
-   slug:/\/lektionen\/go-live-und-betrieb\/?$/, key:'l56',
-   eyebrow:'Lektion 5.6', kicker:'AI Reservation Agent · Betrieb',
-   title:'Go-Live und <span class="rs-g">Betrieb</span>',
-   lead:'Ein Reservierungs-Agent prägt den ersten Eindruck deines Betriebs. Deshalb geht hier nichts live, was nicht vorher mit dir gesprochen hat.',
-   intro:['In diesem Kurs gilt eine Arbeitsregel, die du schon kennst: Nichts wird als fertig gemeldet, was man nicht selbst angesehen hat. Für den Reservierungs-Agenten verschärfe ich sie.','Der Agent trägt deinen Namen. Wenn er gut ist, zahlt das auf deinen Betrieb ein. Wenn er patzt, patzt in den Augen des Gastes dein Restaurant. Also testen wir wie ein Gast, der es darauf anlegt.'],
-   anim:{key:'pruefen', eyebrow:'Vor dem Go-Live', h:'Einundzwanzig Fälle. <span class="rs-g">Alle.</span>', sub:'Erst der Normalfall dreimal sauber, dann die Härtefälle. Ich meine es ernst: alle, nicht die ersten fünf.',
-    html:'<div class="rp"><div class="rp-bar"><i class="rp-fill"></i></div><div class="rp-list">'+
-      '<div class="rp-row"><span>Einfache Buchung morgen 19:00 für 2</span><i></i></div>'+
-      '<div class="rp-row"><span>Ausgebuchter Abend — kommen zwei Alternativen?</span><i></i></div>'+
-      '<div class="rp-row"><span>Anfrage für 20 Personen — landet sie bei dir?</span><i></i></div>'+
-      '<div class="rp-row"><span>„So gegen acht" — fragt er nach oder rät er?</span><i></i></div>'+
-      '<div class="rp-row"><span>Zwei Anfragen gleichzeitig auf den letzten Tisch</span><i></i></div>'+
-      '<div class="rp-row"><span>Werkzeug getrennt — gesteht er es ein?</span><i></i></div>'+
-      '<div class="rp-row"><span>Beschwerde — bleibt sie niemals beim Agenten?</span><i></i></div>'+
-      '</div><div class="rp-switch"><span class="rp-sw"></span><b>Schattenbetrieb</b><span class="rp-swt">Eine Woche mitlesen, bevor er allein arbeitet</span></div></div>'},
-   img1:['Der Doppelbuchungs-Test','Zwei Handys nebeneinander, beide fragen im selben Moment den letzten freien Tisch an.'],
-   cards:{eyebrow:'Der Betrieb', h:'Fünf Minuten am Tag, die dein System <span class="rs-g">besser</span> machen', items:[
-     ['Der Schattenbetrieb','Eine Woche schickt der Agent dir jede geplante Zusage aufs Handy. Sind deine Freigaben nur noch Durchwinken, darf er im Standardfall allein arbeiten.'],
-     ['Das Agenten-Log','Jede Konversation landet in einer kleinen dritten Datenbank: Zeitpunkt, Kanal, Anliegen, Ergebnis. Zwei Wochen lang einmal täglich beim Kaffee lesen.'],
-     ['Zwei Fragen ans Log','Wo hat er unnötig abgegeben — dort kann die Grenze weiter. Wo klingt er nicht nach dir — das sind Sätze für den Steckbrief.'],
-     ['Die Übergabe','Der Gast bekommt eine ehrliche Ansage mit Zeithorizont, du bekommst alles, was der Agent schon weiß. Niemand fragt zweimal dasselbe.']]},
-   img2:['Das Agenten-Log','Notion-Ansicht mit den Konversationen des Tages, gefiltert auf „Übergeben" — die Kandidaten für eine weitere Grenze.'],
-   note:{h:'Ein Agent, der abgibt, und ein Team, das nicht <span class="rs-g">übernimmt</span>', p:'…ist schlimmer als gar kein Agent. Leg fest, wer im Betrieb diese Nachrichten bekommt und bis wann sie beantwortet sein müssen. Eskalation ist nur dann ein Sicherheitsnetz, wenn jemand darunter steht.'},
-   learn:['Du hast das Testprotokoll komplett durchlaufen, bis zum Doppelbuchungs-Test.','Du kennst den Schattenbetrieb und sein Ausstiegskriterium.','Du führst das Agenten-Log und nutzt es für die zwei Verbesserungs-Fragen.','Du hast die Übergabe mit Person und Antwortfrist geregelt.'],
-   next:{href:'/lektionen/datenschutz-und-recht', label:'Datenschutz und Recht'}
-  },
-  {
-   slug:/\/lektionen\/datenschutz-und-recht\/?$/, key:'l57',
-   eyebrow:'Lektion 5.7', kicker:'AI Reservation Agent · Fundament',
-   title:'Datenschutz und <span class="rs-g">Recht</span>',
-   lead:'Dein Agent verarbeitet Namen, Telefonnummern und Anrufe. Also machen wir das Fundament sauber — ohne Panik und ohne Rechtsberatung.',
-   intro:['Die Grundlagen hast du in Modul vier gelegt, in der Datenschutz-Lektion mit den zwei Wegen. Was dort gilt, gilt hier weiter, und ich wiederhole es nicht.','Wir kümmern uns nur um das, was durch den Reservierungs-Agenten neu dazukommt. Vorweg der Satz, der auch in Modul vier stand: Ich bin Praktiker und kein Anwalt, das hier ersetzt keine Rechtsberatung für deinen Betrieb.'],
-   anim:{key:'loeschen', eyebrow:'Das Löschkonzept', h:'Lösch-Automatik statt <span class="rs-g">Lösch-Vorsatz</span>', sub:'Einmal im Monat läuft die Routine durch und nimmt die persönlichen Daten raus. Was bleibt, sind Zahlen ohne Namen.',
-    html:'<div class="rl"><div class="rl-cards">'+
-      '<div class="rl-card"><b>M. Schneider</b><span>0176 · 12.05. · 4 Personen</span></div>'+
-      '<div class="rl-card"><b>A. Yilmaz</b><span>0151 · 12.05. · 2 Personen</span></div>'+
-      '<div class="rl-card"><b>P. Berger</b><span>0170 · 13.05. · 6 Personen</span></div>'+
-      '<div class="rl-card"><b>L. Kowalski</b><span>0160 · 14.05. · 3 Personen</span></div>'+
-      '</div><div class="rl-gear"><span class="rl-gear-i"></span><span class="rl-gear-t">monatliche Lösch-Routine</span></div>'+
-      '<div class="rl-bars"><div class="rl-bar" style="--h:62%"><i></i><span>Buchungen</span></div>'+
-      '<div class="rl-bar" style="--h:34%"><i></i><span>No-Shows</span></div>'+
-      '<div class="rl-bar" style="--h:78%"><i></i><span>WhatsApp</span></div>'+
-      '<div class="rl-bar" style="--h:45%"><i></i><span>Telefon</span></div></div></div>'},
-   img1:['Die KI-Ansage am Telefon','Der Begrüßungstext auf einer Seite, mit dem Ausweg „Mitarbeiter" farblich hervorgehoben.'],
-   cards:{eyebrow:'Vier Punkte', h:'Was durch den Agenten <span class="rs-g">neu</span> dazukommt', items:[
-     ['Transparenz','Am Telefon sagt die Begrüßung in einem Satz, dass ein KI-Assistent spricht, und nennt den Ausweg. Im Chat machen Profil und erste Antwort es klar.'],
-     ['Datenminimierung','Neun Felder, mehr nicht. Keine Adresse, kein Geburtstag, keine E-Mail, wenn wir sie nicht brauchen. Und der Agent fragt nie nach Gesundheitsdaten.'],
-     ['Löschen','Eine uhrgesteuerte Routine nimmt monatlich die persönlichen Daten älterer Einträge raus. Die Frist legst du fest und sprichst sie ab.'],
-     ['Verträge','Mit jedem, der Gästedaten anfasst: Meta, dein Server-Anbieter, Anthropic und, falls du es nutzt, der Telefon-Dienst. Dazu ein Absatz in der Datenschutzerklärung.']]},
-   img2:['Was bleiben darf','Vorher-Nachher: links Einträge mit Namen, rechts nach der Frist nur noch anonyme Zahlen in den Key Metrics.'],
-   note:{h:'Die Notizfeld-<span class="rs-g">Linie</span>', p:'Sagt ein Gast von sich aus, dass jemand am Tisch eine Nussallergie hat, notiert der Agent das als Hinweis für die Küche, denn das ist Service. Aber er fragt nicht danach, und wir werten es nicht aus. Gesundheitsangaben sind besonders geschützt, und eine Reservierungs-Datenbank ist nicht der Ort, sie zu sammeln.'},
-   learn:['Du weißt, was neu dazukommt und was Modul vier schon abdeckt.','Du setzt die Transparenz um: Ansage am Telefon, klarer Hinweis im Chat.','Du lebst Datenminimierung und kennst die Notizfeld-Linie.','Du hast ein automatisches Löschkonzept und weißt, mit wem Verträge nötig sind.'],
-   next:{href:'__MODUL__', label:'Zurück zum Modul'}
-  }];
-
-  /* ---------- CSS ---------- */
-  var CSS=''+
-  '#tsres{--g:#c7b489;--gl:'+G+';--bg:#05060b;position:relative;z-index:2;color:#fff;'+
-   'font-family:var(--font-sans,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);padding-bottom:40px}'+
-  '#tsres *{box-sizing:border-box}'+
-  '#tsres .rs-g{color:var(--g)}'+
-  '#tsres .rs-wrap{max-width:1080px;margin:0 auto;padding:0 24px}'+
-  /* Hero */
-  '#tsres .rs-hero{position:relative;min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;'+
-   'text-align:center;padding:120px 24px 70px;overflow:hidden}'+
-  '#tsres .rs-hero::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,120vw);height:620px;transform:translate(-50%,-50%);'+
-   'background:radial-gradient(ellipse at center,rgba(var(--gl),.16),rgba(var(--gl),.05) 42%,transparent 70%);filter:blur(8px);pointer-events:none}'+
-  '#tsres .rs-hero>*{position:relative}'+
-  '#tsres .rs-back{position:absolute;top:96px;left:50%;transform:translateX(-50%);font:500 13px/1 inherit;color:rgba(255,255,255,.48);'+
-   'text-decoration:none;transition:color .25s;z-index:3}'+
-  '#tsres .rs-back:hover{color:var(--g)}'+
-  '#tsres .rs-logo{width:44px;height:44px;object-fit:contain;opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .05s forwards}'+
-  '#tsres .rs-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font:600 11px/1 inherit;letter-spacing:.18em;'+
-   'text-transform:uppercase;color:var(--g);opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .16s forwards}'+
-  '#tsres .rs-eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 12px rgba(var(--gl),.9)}'+
-  '#tsres .rs-kicker{margin-top:9px;font:400 12.5px/1.4 inherit;letter-spacing:.05em;color:rgba(255,255,255,.42);'+
-   'opacity:0;animation:rsRise .9s cubic-bezier(.16,1,.3,1) .24s forwards}'+
-  '#tsres .rs-title{margin:16px 0 0;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
-   'font-size:clamp(2.5rem,7.4vw,5rem);line-height:1.04;letter-spacing:-.025em;color:#fff;'+
-   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .32s forwards}'+
-  '#tsres .rs-lead{max-width:660px;margin:26px auto 0;font:400 17.5px/1.62 inherit;color:rgba(255,255,255,.72);'+
-   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .44s forwards}'+
-  '#tsres .rs-scroll{margin-top:46px;width:22px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:12px;position:relative;'+
-   'opacity:0;animation:rsRise 1s cubic-bezier(.16,1,.3,1) .6s forwards}'+
-  '#tsres .rs-scroll::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:6px;border-radius:2px;background:var(--g);'+
-   'transform:translateX(-50%);animation:rsDrop 1.9s cubic-bezier(.6,0,.4,1) infinite}'+
-  '@keyframes rsRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}'+
-  '@keyframes rsDrop{0%{opacity:0;transform:translate(-50%,0)}22%{opacity:1}70%{opacity:0;transform:translate(-50%,13px)}100%{opacity:0}}'+
-  /* Intro */
-  '#tsres .rs-intro{max-width:760px;margin:0 auto;padding:8px 24px 24px}'+
-  '#tsres .rs-intro p{font:400 17px/1.72 inherit;color:rgba(255,255,255,.78);margin:0 0 20px}'+
-  /* Reveal */
-  '#tsres .rs-rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rs-rv.in{opacity:1;transform:none}'+
-  /* Sektions-Kopf */
-  '#tsres .rs-sh{text-align:center;max-width:760px;margin:0 auto 34px}'+
-  '#tsres .rs-sh .e{display:inline-flex;align-items:center;gap:8px;font:600 10.5px/1 inherit;letter-spacing:.17em;text-transform:uppercase;color:var(--g)}'+
-  '#tsres .rs-sh .e::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--g)}'+
-  '#tsres .rs-sh h2{margin:14px 0 0;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
-   'font-size:clamp(1.85rem,4.1vw,2.65rem);line-height:1.14;letter-spacing:-.02em;color:#fff}'+
-  '#tsres .rs-sh p{margin:14px 0 0;font:400 15.5px/1.66 inherit;color:rgba(255,255,255,.62)}'+
-  /* Animations-Sektion */
-  '#tsres .rs-anim{padding:78px 0 20px}'+
-  '#tsres .rs-stage{position:relative;max-width:1000px;margin:0 auto;padding:44px 26px 40px;border-radius:22px;'+
-   'background:linear-gradient(165deg,rgba(28,38,72,.42),rgba(11,15,30,.55));border:1px solid rgba(var(--gl),.17);'+
-   'box-shadow:0 50px 130px -50px rgba(0,0,0,.95);overflow:hidden}'+
-  '#tsres .rs-stage::after{content:"";position:absolute;inset:0;pointer-events:none;'+
-   'background:radial-gradient(ellipse at 50% 0%,rgba(var(--gl),.08),transparent 60%)}'+
-  '#tsres .rs-replay{position:absolute;right:16px;top:14px;z-index:4;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 13px;'+
-   'border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(var(--gl),.28);color:var(--g);'+
-   'font:600 10.5px/1 inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}'+
-  '#tsres .rs-replay:hover{background:rgba(var(--gl),.14);border-color:rgba(var(--gl),.5)}'+
-  /* Bild-Platzhalter */
-  '#tsres .rs-ph{margin:0;position:relative;width:100%;aspect-ratio:var(--r,16/9);border-radius:20px;overflow:hidden;'+
-   'background:linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid rgba(var(--gl),.2)}'+
-  '#tsres .rs-ph::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,'+
-   'rgba(255,255,255,.018) 0 2px,transparent 2px 12px)}'+
-  '#tsres .rs-ph::after{content:"";position:absolute;top:0;bottom:0;width:38%;left:-40%;'+
-   'background:linear-gradient(100deg,transparent,rgba(var(--gl),.09),transparent);animation:rsShine 5.5s ease-in-out infinite}'+
-  '@keyframes rsShine{0%{left:-45%}55%{left:105%}100%{left:105%}}'+
-  '#tsres .rs-ph-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'+
-   'gap:11px;text-align:center;padding:30px;z-index:2}'+
-  '#tsres .rs-ph-ic{width:38px;height:38px;border-radius:11px;border:1px solid rgba(var(--gl),.42);position:relative}'+
-  '#tsres .rs-ph-ic::before{content:"";position:absolute;left:8px;bottom:9px;width:9px;height:9px;border-radius:50%;background:rgba(var(--gl),.6)}'+
-  '#tsres .rs-ph-ic::after{content:"";position:absolute;right:6px;bottom:8px;width:19px;height:12px;'+
-   'background:rgba(var(--gl),.3);clip-path:polygon(0 100%,42% 22%,68% 62%,84% 40%,100% 100%)}'+
-  '#tsres .rs-ph-l{font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;font-size:clamp(1rem,2vw,1.28rem);'+
-   'letter-spacing:-.01em;color:rgba(255,255,255,.9)}'+
-  '#tsres .rs-ph-n{max-width:520px;font:400 13.5px/1.6 inherit;color:rgba(255,255,255,.44)}'+
-  '#tsres .rs-ph-tag{position:absolute;left:14px;top:13px;z-index:3;font:600 9.5px/1 inherit;letter-spacing:.15em;text-transform:uppercase;'+
-   'color:var(--g);background:rgba(5,6,11,.6);border:1px solid rgba(var(--gl),.3);border-radius:999px;padding:6px 11px}'+
-  '#tsres .rs-figs{padding:56px 0 0}'+
-  /* Karten */
-  '#tsres .rs-cards{padding:78px 0 0}'+
-  '#tsres .rs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin:0 auto}'+
-  '#tsres .rs-card{position:relative;padding:28px 26px 30px;border-radius:16px;background:rgba(255,255,255,.035);'+
-   'border:1px solid rgba(255,255,255,.09);transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,background .45s}'+
-  '#tsres .rs-card:hover{transform:translateY(-5px);border-color:rgba(var(--gl),.45);background:rgba(255,255,255,.052)}'+
-  '#tsres .rs-card .n{display:inline-block;font:600 9.5px/1 inherit;letter-spacing:.16em;color:var(--g);'+
-   'border:1px solid rgba(var(--gl),.34);border-radius:999px;padding:6px 11px}'+
-  '#tsres .rs-card h3{margin:15px 0 9px;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
-   'font-size:1.16rem;letter-spacing:-.01em;color:#fff}'+
-  '#tsres .rs-card p{margin:0;font:400 14.8px/1.66 inherit;color:rgba(255,255,255,.72)}'+
-  /* Merk-Kachel */
-  '#tsres .rs-note{max-width:860px;margin:78px auto 0;padding:38px 36px 40px;border-radius:20px;'+
-   'background:linear-gradient(165deg,rgba(28,38,72,.5),rgba(11,15,30,.62));border:1px solid rgba(var(--gl),.26);'+
-   'box-shadow:0 40px 110px -50px rgba(0,0,0,.9)}'+
-  '#tsres .rs-note h3{margin:0 0 14px;font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;'+
-   'font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.2;letter-spacing:-.02em;color:#fff}'+
-  '#tsres .rs-note p{margin:0;font:400 16px/1.74 inherit;color:rgba(255,255,255,.78)}'+
-  /* Learnings */
-  '#tsres .rs-learn{position:relative;margin-top:88px;padding:80px 24px 84px;overflow:hidden;'+
-   'background:radial-gradient(ellipse at 50% 0%,rgba(var(--gl),.07),transparent 62%)}'+
-  '#tsres .rs-learn-in{max-width:900px;margin:0 auto}'+
-  '#tsres .rs-orbs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}'+
-  '#tsres .rs-orb{display:flex;align-items:flex-start;gap:14px;padding:22px 22px 24px;border-radius:15px;'+
-   'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);animation:rsFloat 7s ease-in-out infinite}'+
-  '#tsres .rs-orb:nth-child(2){animation-delay:-1.6s}'+
-  '#tsres .rs-orb:nth-child(3){animation-delay:-3.2s}'+
-  '#tsres .rs-orb:nth-child(4){animation-delay:-4.8s}'+
-  '#tsres .rs-orb i{flex:none;margin-top:5px;width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 14px rgba(var(--gl),.85)}'+
-  '#tsres .rs-orb span{font:400 15px/1.62 inherit;color:rgba(255,255,255,.8)}'+
-  '@keyframes rsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}'+
-  /* Weiter */
-  '#tsres .rs-next{display:flex;justify-content:center;padding:6px 24px 90px}'+
-  '#tsres .rs-next a{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 32px;border-radius:999px;'+
-   'background:var(--g);color:#05060b;font:600 15px/1 inherit;text-decoration:none;transition:filter .25s,transform .35s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rs-next a:hover{filter:brightness(1.07);transform:translateY(-2px)}'+
-  '#tsres .rs-next a i{font-style:normal;transition:transform .3s}'+
-  '#tsres .rs-next a:hover i{transform:translateX(4px)}'+
-
-  /* === L5.0 verpuffen === */
-  '#tsres .rv{display:flex;flex-direction:column;align-items:center;gap:26px}'+
-  '#tsres .rv-lane{display:flex;flex-wrap:wrap;justify-content:center;gap:11px}'+
-  '#tsres .rv-c{display:flex;flex-direction:column;gap:3px;padding:13px 17px;border-radius:13px;background:rgba(255,255,255,.04);'+
-   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(-16px);'+
-   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .8s ease,border-color .6s}'+
-  '#tsres .rv-c b{font:600 13px/1.1 inherit;color:#fff}'+
-  '#tsres .rv-c span{font:400 11.5px/1.1 inherit;color:rgba(255,255,255,.5)}'+
-  '#tsres .rv-c.go{opacity:1;transform:none}'+
-  '#tsres .rv-c.fade{opacity:.16;filter:blur(1.5px);transform:translateY(16px)}'+
-  '#tsres .rv-c.land{border-color:rgba(var(--gl),.55);box-shadow:0 0 30px rgba(var(--gl),.14)}'+
-  '#tsres .rv-box{display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px 30px;border-radius:16px;'+
-   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);opacity:0;transform:scale(.94);'+
-   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rv-box.on{opacity:1;transform:none}'+
-  '#tsres .rv-box-t{font:600 15px/1.1 inherit;color:#fff}'+
-  '#tsres .rv-box-s{font:600 9.5px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}'+
-  /* === L5.1 tore === */
-  '#tsres .rg{display:flex;flex-direction:column;align-items:center;gap:24px}'+
-  '#tsres .rg-in{padding:11px 20px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);'+
-   'font:600 13px/1 inherit;color:#fff}'+
-  '#tsres .rg-track{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}'+
-  '#tsres .rg-gate{display:flex;align-items:center;gap:11px;padding:15px 19px;border-radius:14px;background:rgba(255,255,255,.035);'+
-   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(14px);'+
-   'transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}'+
-  '#tsres .rg-gate.on{opacity:1;transform:none}'+
-  '#tsres .rg-gate.pass{border-color:rgba(var(--gl),.55);box-shadow:0 0 26px rgba(var(--gl),.16)}'+
-  '#tsres .rg-gate b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;'+
-   'font:600 12px/1 inherit;color:var(--g);border:1px solid rgba(var(--gl),.4)}'+
-  '#tsres .rg-gate span{font:400 12.5px/1.35 inherit;color:rgba(255,255,255,.74)}'+
-  '#tsres .rg-dot{position:absolute;left:0;top:50%;width:8px;height:8px;border-radius:50%;background:var(--g);opacity:0;'+
-   'box-shadow:0 0 18px rgba(var(--gl),.9)}'+
-  '#tsres .rg-dot.run{animation:rgRun 2.6s cubic-bezier(.42,0,.58,1) forwards}'+
-  '@keyframes rgRun{0%{opacity:0;left:0}12%{opacity:1}92%{opacity:1;left:100%}100%{opacity:0;left:100%}}'+
-  '#tsres .rg-outs{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}'+
-  '#tsres .rg-out{display:flex;flex-direction:column;gap:4px;padding:17px 22px;border-radius:15px;opacity:0;transform:translateY(12px);'+
-   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rg-out.on{opacity:1;transform:none}'+
-  '#tsres .rg-out b{font:600 14px/1.1 inherit;color:#fff}'+
-  '#tsres .rg-out span{font:400 12px/1.3 inherit;color:rgba(255,255,255,.55)}'+
-  '#tsres .rg-out.ok{background:rgba(var(--gl),.1);border:1px solid rgba(var(--gl),.5)}'+
-  '#tsres .rg-out.esc{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.17)}'+
-  /* === L5.2 gehirn === */
-  '#tsres .rb{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;max-width:940px;margin:0 auto}'+
-  '#tsres .rb-col{display:flex;flex-direction:column;gap:13px}'+
-  '#tsres .rb-door,#tsres .rb-out{display:flex;flex-direction:column;gap:3px;padding:14px 17px;border-radius:13px;'+
-   'background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.14);opacity:0;'+
-   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .6s}'+
-  '#tsres .rb-door{transform:translateX(-18px)}'+
-  '#tsres .rb-out{transform:translateX(18px)}'+
-  '#tsres .rb-door.on,#tsres .rb-out.on{opacity:1;transform:none}'+
-  '#tsres .rb-out.on{border-color:rgba(var(--gl),.42)}'+
-  '#tsres .rb-door b,#tsres .rb-out b{font:600 13.5px/1.1 inherit;color:#fff}'+
-  '#tsres .rb-door span,#tsres .rb-out span{font:400 11.5px/1.25 inherit;color:rgba(255,255,255,.5)}'+
-  '#tsres .rb-core{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 24px;border-radius:18px;'+
-   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);box-shadow:0 24px 60px rgba(0,0,0,.45);'+
-   'opacity:0;transform:scale(.94);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rb-core.on{opacity:1;transform:none}'+
-  '#tsres .rb-core-n{font:600 15px/1.1 inherit;color:#fff}'+
-  '#tsres .rb-core-t{font:600 9.5px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}'+
-  '#tsres .rb-core.pulse{animation:rbPulse 1.6s cubic-bezier(.22,1,.36,1)}'+
-  '@keyframes rbPulse{0%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(var(--gl),.42)}'+
-   '60%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 24px rgba(var(--gl),0)}'+
-   '100%{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 0 rgba(var(--gl),0)}}'+
-  '#tsres .rb-lns{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}'+
-  '#tsres .rb-ln{stroke:rgba(var(--gl),.3);stroke-width:1.4;fill:none;stroke-linecap:round}'+
-  '#tsres .rb-ln.flow{stroke-dasharray:5 9;animation:rbFlow 3.4s cubic-bezier(.22,1,.36,1) infinite}'+
-  '@keyframes rbFlow{0%{stroke-dashoffset:150}45%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}'+
-  /* === L5.3 welle === */
-  '#tsres .rw{display:flex;flex-direction:column;align-items:center;gap:30px}'+
-  '#tsres .rw-wave{display:flex;align-items:center;gap:5px;height:66px}'+
-  '#tsres .rw-b{display:block;width:4px;height:8px;border-radius:3px;background:rgba(var(--gl),.32);transition:height .5s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rw-b.live{animation:rwB 1.5s ease-in-out infinite}'+
-  '#tsres .rw-b:nth-child(3n).live{animation-duration:1.9s}'+
-  '#tsres .rw-b:nth-child(4n).live{animation-duration:1.2s}'+
-  '@keyframes rwB{0%,100%{height:9px;background:rgba(var(--gl),.3)}50%{height:46px;background:rgba(var(--gl),.75)}}'+
-  '#tsres .rw-ways{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;width:100%}'+
-  '#tsres .rw-way{display:flex;flex-direction:column;gap:7px;padding:22px 22px 24px;border-radius:16px;background:rgba(255,255,255,.035);'+
-   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(16px);'+
-   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .6s}'+
-  '#tsres .rw-way.on{opacity:1;transform:none;border-color:rgba(var(--gl),.35)}'+
-  '#tsres .rw-tag{align-self:flex-start;font:600 9.5px/1 inherit;letter-spacing:.15em;text-transform:uppercase;color:var(--g);'+
-   'border:1px solid rgba(var(--gl),.34);border-radius:999px;padding:6px 11px}'+
-  '#tsres .rw-way b{font-family:"Lineal Web","Lineal TS",var(--font-sans,sans-serif);font-weight:600;font-size:1.06rem;color:#fff}'+
-  '#tsres .rw-p{font:400 13.5px/1.55 inherit;color:rgba(255,255,255,.7)}'+
-  '#tsres .rw-cost{font:600 12px/1.4 inherit;color:var(--g)}'+
-  '#tsres .rw-slim{display:flex;flex-direction:column;gap:6px;max-width:820px;width:100%;padding:19px 22px;border-radius:14px;'+
-   'background:rgba(255,255,255,.022);border:1px dashed rgba(var(--gl),.3);opacity:0;transform:translateY(12px);'+
-   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rw-slim.on{opacity:1;transform:none}'+
-  '#tsres .rw-slim b{font:600 13px/1.1 inherit;color:var(--g)}'+
-  '#tsres .rw-slim span{font:400 13.5px/1.55 inherit;color:rgba(255,255,255,.68)}'+
-  /* === L5.4 tische === */
-  '#tsres .rt{display:flex;flex-direction:column;align-items:center;gap:26px}'+
-  '#tsres .rt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:11px;width:100%;max-width:660px}'+
-  '#tsres .rt-t{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 6px;border-radius:12px;'+
-   'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);opacity:0;transform:scale(.9);'+
-   'transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),'+
-   'filter .7s ease,border-color .6s,box-shadow .6s}'+
-  '#tsres .rt-t.on{opacity:1;transform:none}'+
-  '#tsres .rt-t b{font:600 12.5px/1 inherit;color:#fff}'+
-  '#tsres .rt-t span{font:400 10.5px/1 inherit;color:rgba(255,255,255,.45)}'+
-  '#tsres .rt-t.busy{opacity:.2;filter:grayscale(1)}'+
-  '#tsres .rt-t.free{border-color:rgba(var(--gl),.65);background:rgba(var(--gl),.12);'+
-   'box-shadow:0 0 34px rgba(var(--gl),.22);animation:rtPulse 2.2s cubic-bezier(.22,1,.36,1) infinite}'+
-  '@keyframes rtPulse{0%,100%{box-shadow:0 0 34px rgba(var(--gl),.16)}50%{box-shadow:0 0 46px rgba(var(--gl),.34)}}'+
-  '#tsres .rt-res{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 28px;border-radius:15px;'+
-   'background:rgba(var(--gl),.09);border:1px solid rgba(var(--gl),.5);opacity:0;transform:translateY(12px);'+
-   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rt-res.on{opacity:1;transform:none}'+
-  '#tsres .rt-res b{font:600 15px/1.1 inherit;color:#fff}'+
-  '#tsres .rt-res span{font:400 12px/1.2 inherit;color:rgba(255,255,255,.6)}'+
-  /* === L5.5 kreis === */
-  '#tsres .rk{position:relative;width:min(560px,100%);aspect-ratio:1/.72;margin:0 auto}'+
-  '#tsres .rk-ring{position:absolute;left:50%;top:50%;width:min(430px,84%);aspect-ratio:1;transform:translate(-50%,-50%);'+
-   'border-radius:50%;border:1px dashed rgba(var(--gl),.28)}'+
-  '#tsres .rk-ring.spin{animation:rkSpin 26s linear infinite}'+
-  '@keyframes rkSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}'+
-  '#tsres .rk-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.94);display:flex;flex-direction:column;'+
-   'align-items:center;gap:3px;padding:16px 20px;border-radius:15px;background:rgba(var(--gl),.09);'+
-   'border:1px solid rgba(var(--gl),.5);opacity:0;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rk-hub.on{opacity:1;transform:translate(-50%,-50%) scale(1)}'+
-  '#tsres .rk-hub b{font:600 13.5px/1.1 inherit;color:#fff}'+
-  '#tsres .rk-hub span{font:600 9px/1 inherit;letter-spacing:.13em;text-transform:uppercase;color:var(--g)}'+
-  '#tsres .rk-st{position:absolute;display:flex;flex-direction:column;gap:2px;padding:11px 15px;border-radius:12px;'+
-   'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);opacity:0;'+
-   'transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s;'+
-   'white-space:nowrap}'+
-  '#tsres .rk-st.on{opacity:1}'+
-  '#tsres .rk-st.hot{border-color:rgba(var(--gl),.6);box-shadow:0 0 30px rgba(var(--gl),.2)}'+
-  '#tsres .rk-st b{font:600 12.5px/1.1 inherit;color:#fff}'+
-  '#tsres .rk-st span{font:400 11px/1.1 inherit;color:rgba(255,255,255,.5)}'+
-  '#tsres .rk-st.s1{left:50%;top:0;transform:translateX(-50%)}'+
-  '#tsres .rk-st.s2{right:0;top:50%;transform:translateY(-50%)}'+
-  '#tsres .rk-st.s3{left:50%;bottom:0;transform:translateX(-50%)}'+
-  '#tsres .rk-st.s4{left:0;top:50%;transform:translateY(-50%)}'+
-  /* === L5.6 pruefen === */
-  '#tsres .rp{display:flex;flex-direction:column;gap:22px;max-width:720px;margin:0 auto;width:100%}'+
-  '#tsres .rp-bar{height:4px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}'+
-  '#tsres .rp-fill{display:block;height:100%;width:0;border-radius:999px;background:var(--g);'+
-   'box-shadow:0 0 18px rgba(var(--gl),.6);transition:width .5s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rp-list{display:flex;flex-direction:column;gap:9px}'+
-  '#tsres .rp-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 17px;border-radius:12px;'+
-   'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);opacity:0;transform:translateX(-14px);'+
-   'transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),border-color .5s}'+
-  '#tsres .rp-row.on{opacity:1;transform:none}'+
-  '#tsres .rp-row span{font:400 13.5px/1.35 inherit;color:rgba(255,255,255,.74)}'+
-  '#tsres .rp-row i{flex:none;width:19px;height:19px;border-radius:50%;border:1px solid rgba(255,255,255,.22);position:relative;'+
-   'transition:border-color .4s,background .4s}'+
-  '#tsres .rp-row.done{border-color:rgba(var(--gl),.35)}'+
-  '#tsres .rp-row.done i{border-color:var(--g);background:rgba(var(--gl),.16)}'+
-  '#tsres .rp-row.done i::after{content:"";position:absolute;left:5px;top:4px;width:5px;height:9px;border:solid var(--g);'+
-   'border-width:0 1.6px 1.6px 0;transform:rotate(42deg)}'+
-  '#tsres .rp-switch{display:flex;align-items:center;gap:13px;padding:17px 20px;border-radius:14px;background:rgba(255,255,255,.028);'+
-   'border:1px dashed rgba(var(--gl),.3);opacity:.4;transition:opacity .7s ease,border-color .7s}'+
-  '#tsres .rp-switch.on{opacity:1;border-style:solid;border-color:rgba(var(--gl),.5)}'+
-  '#tsres .rp-sw{flex:none;width:38px;height:21px;border-radius:999px;background:rgba(255,255,255,.12);position:relative;transition:background .5s}'+
-  '#tsres .rp-sw::after{content:"";position:absolute;left:3px;top:3px;width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.5);'+
-   'transition:transform .5s cubic-bezier(.16,1,.3,1),background .5s}'+
-  '#tsres .rp-switch.on .rp-sw{background:rgba(var(--gl),.4)}'+
-  '#tsres .rp-switch.on .rp-sw::after{transform:translateX(17px);background:var(--g)}'+
-  '#tsres .rp-switch b{font:600 13.5px/1 inherit;color:#fff}'+
-  '#tsres .rp-swt{font:400 12.5px/1.3 inherit;color:rgba(255,255,255,.55)}'+
-  /* === L5.7 loeschen === */
-  '#tsres .rl{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}'+
-  '#tsres .rl-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;width:100%;max-width:740px}'+
-  '#tsres .rl-card{display:flex;flex-direction:column;gap:4px;padding:14px 15px;border-radius:12px;background:rgba(255,255,255,.04);'+
-   'border:1px solid rgba(255,255,255,.13);opacity:0;transform:translateY(12px);'+
-   'transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),filter .9s ease}'+
-  '#tsres .rl-card.on{opacity:1;transform:none}'+
-  '#tsres .rl-card.gone{opacity:.08;filter:blur(3px)}'+
-  '#tsres .rl-card b{font:600 12.5px/1.1 inherit;color:#fff}'+
-  '#tsres .rl-card span{font:400 11px/1.25 inherit;color:rgba(255,255,255,.5)}'+
-  '#tsres .rl-gear{display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.04);'+
-   'border:1px solid rgba(var(--gl),.34);opacity:0;transition:opacity .7s ease}'+
-  '#tsres .rl-gear.on{opacity:1}'+
-  '#tsres .rl-gear-i{width:15px;height:15px;border-radius:50%;border:2px dashed var(--g)}'+
-  '#tsres .rl-gear.turn .rl-gear-i{animation:rlSpin 6s linear infinite}'+
-  '@keyframes rlSpin{to{transform:rotate(360deg)}}'+
-  '#tsres .rl-gear-t{font:600 10.5px/1 inherit;letter-spacing:.13em;text-transform:uppercase;color:var(--g)}'+
-  '#tsres .rl-bars{display:flex;align-items:flex-end;justify-content:center;gap:18px;height:120px;width:100%;max-width:520px}'+
-  '#tsres .rl-bar{display:flex;flex-direction:column;align-items:center;gap:9px;flex:1;height:100%;justify-content:flex-end}'+
-  '#tsres .rl-bar i{display:block;width:100%;max-width:52px;height:0;border-radius:8px 8px 3px 3px;'+
-   'background:linear-gradient(180deg,rgba(var(--gl),.75),rgba(var(--gl),.22));'+
-   'transition:height .9s cubic-bezier(.16,1,.3,1)}'+
-  '#tsres .rl-bar.on i{height:var(--h)}'+
-  '#tsres .rl-bar span{font:400 11px/1 inherit;color:rgba(255,255,255,.45)}'+
-  /* Responsive */
-  '@media(max-width:860px){'+
-   '#tsres .rs-grid,#tsres .rs-orbs,#tsres .rw-ways{grid-template-columns:1fr}'+
-   '#tsres .rb{grid-template-columns:1fr;gap:16px}#tsres .rb-lns{display:none}'+
-   '#tsres .rb-door,#tsres .rb-out{transform:translateY(14px)}'+
-   '#tsres .rt-grid{grid-template-columns:repeat(4,1fr)}'+
-   '#tsres .rl-cards{grid-template-columns:repeat(2,1fr)}'+
-   '#tsres .rk{aspect-ratio:1/1.05}'+
-   '#tsres .rs-stage{padding:34px 16px 32px;border-radius:18px}'+
-   '#tsres .rs-hero{min-height:64vh;padding:104px 20px 54px}'+
-   '#tsres .rs-note{padding:28px 22px 30px}'+
-  '}'+
-  '@media(max-width:520px){#tsres .rt-grid{grid-template-columns:repeat(3,1fr)}#tsres .rw-wave{gap:3px}}'+
-  '@media(prefers-reduced-motion:reduce){'+
-   '#tsres *,#tsres *::before,#tsres *::after{animation:none !important;transition:none !important}'+
-   '#tsres .rs-rv{opacity:1;transform:none}'+
-   '#tsres .rv-c,#tsres .rg-gate,#tsres .rg-out,#tsres .rb-door,#tsres .rb-out,#tsres .rb-core,'+
-   '#tsres .rw-way,#tsres .rw-slim,#tsres .rt-t,#tsres .rt-res,#tsres .rk-st,#tsres .rk-hub,'+
-   '#tsres .rp-row,#tsres .rl-card,#tsres .rv-box{opacity:1 !important;transform:none !important}'+
-   '#tsres .rl-bar i{height:var(--h) !important}'+
-   '#tsres .rp-switch{opacity:1}'+
-  '}';
-
-  /* ---------- Build ---------- */
-  function esc(s){return s;}
-  function build(L){
-    var h='';
-    h+='<section class="rs-hero">'+
-       '<a class="rs-back" href="'+moduleHref()+'">&larr; '+BACK.label+'</a>'+
-       '<img class="rs-logo" src="'+LOGO+'" alt="">'+
-       '<span class="rs-eyebrow">'+L.eyebrow+'</span>'+
-       '<span class="rs-kicker">'+L.kicker+'</span>'+
-       '<h1 class="rs-title">'+L.title+'</h1>'+
-       '<p class="rs-lead">'+L.lead+'</p>'+
-       '<div class="rs-scroll"></div>'+
-       '</section>';
-    h+='<div class="rs-intro rs-rv">'+L.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
-    /* Animation */
-    h+='<section class="rs-anim rs-rv" data-anim="'+L.anim.key+'">'+
-       '<div class="rs-wrap"><div class="rs-sh"><span class="e">'+L.anim.eyebrow+'</span>'+
-       '<h2>'+L.anim.h+'</h2><p>'+L.anim.sub+'</p></div>'+
-       '<div class="rs-stage"><button class="rs-replay" type="button">nochmal</button>'+L.anim.html+'</div></div></section>';
-    /* Bild 1 */
-    h+='<section class="rs-figs rs-rv"><div class="rs-wrap">'+
-       '<div style="position:relative">'+ph(L.img1[0],L.img1[1],'16/9')+
-       '<span class="rs-ph-tag">Bild folgt</span></div></div></section>';
-    /* Karten */
-    h+='<section class="rs-cards rs-rv"><div class="rs-wrap">'+
-       '<div class="rs-sh"><span class="e">'+L.cards.eyebrow+'</span><h2>'+L.cards.h+'</h2></div>'+
-       '<div class="rs-grid">'+L.cards.items.map(function(it,i){
-         return '<article class="rs-card"><span class="n">0'+(i+1)+'</span><h3>'+it[0]+'</h3><p>'+it[1]+'</p></article>';
-       }).join('')+'</div></div></section>';
-    /* Merk-Kachel */
-    h+='<section class="rs-rv"><div class="rs-wrap"><div class="rs-note">'+
-       '<h3>'+L.note.h+'</h3><p>'+L.note.p+'</p></div></div></section>';
-    /* Bild 2 */
-    h+='<section class="rs-figs rs-rv"><div class="rs-wrap">'+
-       '<div style="position:relative">'+ph(L.img2[0],L.img2[1],'21/9')+
-       '<span class="rs-ph-tag">Bild folgt</span></div></div></section>';
-    /* Learnings */
-    h+='<section class="rs-learn rs-rv"><div class="rs-learn-in">'+
-       '<div class="rs-sh"><span class="e">Was du mitnimmst</span><h2>Learnings</h2></div>'+
-       '<div class="rs-orbs">'+L.learn.map(function(t){return '<div class="rs-orb"><i></i><span>'+t+'</span></div>';}).join('')+
-       '</div></div></section>';
-    /* Weiter */
-    h+='<div class="rs-next rs-rv"><a href="'+(L.next.href==='__MODUL__'?moduleHref():L.next.href)+'">'+L.next.label+' <i>&rarr;</i></a></div>';
-    return h;
-  }
-
-  function mount(L){
-    if(document.getElementById('tsres')) return true;
-    var host=document.querySelector('.super-content')||document.querySelector('main')||document.body;
-    if(!host) return false;
-    if(!document.getElementById('tsres-css')){
-      var st=document.createElement('style'); st.id='tsres-css'; st.textContent=CSS;
-      document.head.appendChild(st);
-    }
-    var root=document.createElement('div');
-    root.id='tsres';
-    root.innerHTML=build(L);
-    var nr=host.querySelector('.notion-root');
-    if(nr) host.insertBefore(root,nr); else host.appendChild(root);
-    /* Notion-Kopf ausblenden */
-    ['.notion-header.page','.notion-root','.notion-collection-page-properties'].forEach(function(sel){
-      var e=host.querySelector(sel); if(e) e.style.display='none';
-    });
-    /* Reveal */
-    var rvs=[].slice.call(root.querySelectorAll('.rs-rv'));
-    var fire=function(el){
-      if(el.classList.contains('in')) return;
-      el.classList.add('in');
-      var a=el.getAttribute('data-anim');
-      if(a&&CUSTOM[a]) setTimeout(function(){
-        /* Nach einem Seitenwechsel kann der Knoten schon abgehaengt sein */
-        if(el.isConnected) CUSTOM[a](el);
-      },260);
-    };
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){
-        es.forEach(function(e){ if(e.isIntersecting){ fire(e.target); io.unobserve(e.target); } });
-      },{rootMargin:'0px 0px -12% 0px',threshold:.12});
-      rvs.forEach(function(e){io.observe(e);});
-    }
-    /* Reveal-Robustheit (Design-System): der IntersectionObserver greift in
-       super.sos Scroll-Container nachweislich NICHT zuverlaessig (live gemessen
-       02.08.2026: Sektion 22px im Viewport, IO feuerte nie). Deshalb ist das
-       inView-Polling der eigentliche Motor, IO nur die schnelle Abkuerzung.
-       Zusaetzlich ein passiver scroll-Listener fuer sofortige Reaktion. */
-    var check=function(){
-      var vh=window.innerHeight||800, open=0;
-      rvs.forEach(function(e){
-        if(e.classList.contains('in')) return;
-        open++;
-        var r=e.getBoundingClientRect();
-        if(r.top<vh*1.1&&r.bottom>-vh*0.3) fire(e);
-      });
-      return open;
-    };
-    check();
-    var poll=setInterval(function(){ if(check()===0) clearInterval(poll); },350);
-    setTimeout(function(){ clearInterval(poll); },90000);
-    window.addEventListener('scroll',check,{passive:true});
-    document.addEventListener('scroll',check,{passive:true,capture:true});
-    /* Replay */
-    [].slice.call(root.querySelectorAll('.rs-replay')).forEach(function(b){
-      b.addEventListener('click',function(){
-        var sec=b.closest('.rs-anim'); if(!sec) return;
-        var a=sec.getAttribute('data-anim');
-        if(a&&CUSTOM[a]) CUSTOM[a](sec);
-      });
-    });
-    return true;
-  }
-
-  function current(){
-    var p=location.pathname;
-    for(var i=0;i<LEK.length;i++){ if(LEK[i].slug.test(p)) return LEK[i]; }
-    return null;
-  }
-
-  function run(){
-    var L=current(); if(!L) return;
-    if(mount(L)) return;
-    var tries=0, iv=setInterval(function(){
-      tries++;
-      if(mount(L)||tries>40) clearInterval(iv);
-    },150);
-  }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
-  else run();
-  /* React-Re-Render / super.so-SPA-Navigation abfangen.
-     Debounced (Design-System: Persistenz-Mount-Muster, 200 ms) und
-     re-entrancy-sicher — sonst ueberholen sich Pfadwechsel gegenseitig. */
-  var last=location.pathname, t=null, busy=false;
-  function sync(){
-    if(busy) return;
-    var p=location.pathname;
-    if(p!==last){
-      busy=true; last=p;
-      var old=document.getElementById('tsres'); if(old) old.remove();
-      busy=false;
-      run();
-    } else if(current()&&!document.getElementById('tsres')){
-      run();
-    }
-  }
-  var MOF=window.__tsMO||function(cb){return new MutationObserver(cb);};
-  MOF(function(){ clearTimeout(t); t=setTimeout(sync,200); })
-    .observe(document.documentElement,{childList:true,subtree:true});
-  window.addEventListener('popstate',function(){ clearTimeout(t); t=setTimeout(sync,60); });
-})();
-
 /* MODUL 6 · alte Bloecke (L6.1-L6.12, Stand 02.08.2026) am 01.11.2026 entfernt: Neubau im Block "NEUBAU MODUL 6" am Dateiende. */
 /* ============================================================
    MODUL 3 · CLAUDE GRUNDLAGEN — gemeinsame Bausteine (__ts3)
@@ -33767,6 +32898,1775 @@ window.__tsn4Boot && window.__tsn4Boot();
 /* · */
 
 /* >>> NEUBAU MODUL 5 (AI Reservation Agent) — ANFANG >>> */
+/* ================================================================
+   MODUL 5 · AI RESERVATION AGENT — Neubau 01.11.2026 (#tsn5, Namensraum tsn5-)
+   Config-getrieben: LEK[] haelt je Lektion Hero, Einleitung und Bloecke.
+   Jede Lektion hat ihre EIGENE Erklaeranimation (ANIM[key]), kein Recycling.
+   Reveal: tsReveal-Muster (IO .12 + scroll/resize + 400 ms + 600/1600 ms +
+   hartes fire nach 9 s), nie der IO allein. Endwerte von Zahlen setzt ein
+   rAF-unabhaengiger Timer. Ersetzt das Seiten-Modul #tsres (02.08.2026).
+   Weiter-Button mit eigener ID (#tsn5-next), damit der globale Pager
+   (PAGES-Liste) ihn nicht abraeumt.
+   ================================================================ */
+(function(){
+  if(window.__tsn5) return; window.__tsn5=true;
+  var LOGO='https://tastyrob123.github.io/kurs-code/assets/au80tp.png';
+  var IMG='https://tastyrob123.github.io/kurs-code/img/m5/';
+  var RM=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var MODUL_HREF='/modul-5-claude-code-notion';
+  var ANIM={}, CALC={}, LEK=[];
+  var timers=[];
+  function later(fn,ms){ var t=setTimeout(fn,ms); timers.push(t); return t; }
+  function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+
+  /* ---------- Reveal (Pflichtmuster, Design-System Regel a) ---------- */
+  function tsReveal(el, cb){
+    var done=false, io=null, iv=null;
+    function clean(){
+      window.removeEventListener('scroll',check,true); window.removeEventListener('resize',check);
+      if(io){ try{ io.disconnect(); }catch(e){} } if(iv) clearInterval(iv);
+    }
+    function fire(){ if(done) return; done=true; clean(); try{ cb(); }catch(e){} }
+    function check(){ if(!el.isConnected){ clean(); return; } var r=el.getBoundingClientRect(); if(r.top < innerHeight*0.88 && r.bottom > 0) fire(); }
+    try{ io=new IntersectionObserver(function(en){ if(en[0].isIntersecting) fire(); },{threshold:.12}); io.observe(el); }catch(e){}
+    window.addEventListener('scroll',check,{passive:true,capture:true});
+    window.addEventListener('resize',check,{passive:true});
+    iv=setInterval(check,400);
+    setTimeout(check,600); setTimeout(check,1600);
+    setTimeout(fire,9000);
+  }
+
+  /* ---------- kleine HTML-Helfer ---------- */
+  function ph(label){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
+      +'<rect width="1200" height="600" fill="#0b0d14"/>'
+      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
+      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
+      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
+      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
+      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var REPLAY='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>';
+  var TICK='<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
+
+  function bItem(it){
+    if(typeof it==='string') return '<p>'+it+'</p>';
+    if(it.kick) return '<p class="tsn5-kick">'+it.kick+'</p>';
+    if(it.p) return '<p>'+it.p+'</p>';
+    if(it.cards){
+      return '<div class="tsn5-cards c'+(it.cols||2)+' tsn5-rv">'+it.cards.map(function(c){
+        return '<div class="tsn5-card">'+(c.eb?'<span class="ce">'+c.eb+'</span>':'')+'<div class="cn">'+c.nm+'</div><hr>'+
+          (c.p||[]).map(function(x){return '<p>'+x+'</p>';}).join('')+(c.foot?'<p class="cf">'+c.foot+'</p>':'')+'</div>';
+      }).join('')+'</div>';
+    }
+    if(it.steps){
+      return '<div class="tsn5-do tsn5-rv"><span class="ce">'+(it.steps.eb||'Jetzt du')+'</span><ol>'+
+        it.steps.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol></div>';
+    }
+    if(it.cmd){
+      return '<div class="tsn5-cmd tsn5-rv'+(it.cmd.text?' txt':'')+'"><div class="ch"><span class="cl">'+it.cmd.label+'</span><button type="button">Kopieren</button></div><pre>'+esc(it.cmd.code)+'</pre></div>';
+    }
+    if(it.merk){
+      return '<div class="tsn5-merk tsn5-rv"><span class="ce">'+(it.merk.eb||'Die Merkregel')+'</span><p>'+it.merk.p+'</p></div>';
+    }
+    if(it.table){
+      var t=it.table;
+      return '<div class="tsn5-tab tsn5-rv">'+(t.title?'<div class="tsn5-tabh">'+t.title+'</div>':'')+'<div class="tsn5-tabw"><table><thead><tr>'+
+        t.head.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>'+
+        t.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+
+        '</tbody></table></div>'+(t.foot?'<div class="tf">'+t.foot+'</div>':'')+'</div>';
+    }
+    if(it.flow){
+      return '<div class="tsn5-flow tsn5-rv">'+it.flow.map(function(f){
+        return '<div class="tsn5-fl"><div class="fn">'+f.n+'</div><div class="ft">'+f.t+'</div><p class="fd">'+f.d+'</p></div>';
+      }).join('')+'</div>';
+    }
+    if(it.chat){
+      return '<div class="tsn5-chat tsn5-rv">'+it.chat.map(function(m){
+        return '<div class="who '+(m[0]==='g'?'g':'')+'">'+(m[0]==='g'?'Gast':'Agent')+'</div><div class="m '+m[0]+'">'+m[1]+'</div>';
+      }).join('')+'</div>';
+    }
+    if(it.fig){ return fig(it.fig); }
+    if(it.calc){ return '<div class="tsn5-tool tsn5-rv" data-calc="'+it.calc+'">'+(CALC[it.calc]?CALC[it.calc].html():'')+'</div>'; }
+    return '';
+  }
+  function fig(f){
+    var inner=f.src
+      ? '<img src="'+(f.src.indexOf('http')===0?f.src:IMG+f.src)+'" alt="'+esc(f.alt||f.label)+'" loading="lazy" decoding="async">'
+      : '<div class="ph"><i>Bild folgt · '+f.id+'</i><b>'+f.label+'</b><span>'+f.note+'</span></div>';
+    return '<figure class="tsn5-fig tsn5-rv'+(f.bleed?' bleed':'')+'"><div class="fi" style="--r:'+(f.ratio||'16/9')+'">'+inner+'</div>'+
+      (f.cap?'<figcaption>'+f.cap+'</figcaption>':'')+'</figure>';
+  }
+
+  /* ---------- Seite bauen ---------- */
+  function build(L){
+    var h='';
+    h+='<div class="ts-hero"><img class="ts-hero__img" alt="'+esc(L.alt)+'" src="'+(L.cover||ph(L.eyebrow))+'" fetchpriority="high" decoding="async">'+
+       '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
+       '<div class="ts-hero__eyebrow">'+L.eyebrow+'</div><h1 class="ts-hero__title">'+L.title+'</h1></div></div>';
+    h+='<div class="ts-body">'+L.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
+    L.blocks.forEach(function(b,bi){
+      if(b.t==='anim'){
+        h+='<section class="tsn5-anim" data-anim="'+b.key+'"><div class="tsn5-head">'+(b.eb?'<div class="tsn5-eb">'+b.eb+'</div>':'')+
+           '<h2>'+b.h+'</h2>'+(b.sub?'<p>'+b.sub+'</p>':'')+'</div>'+
+           '<div class="tsn5-stage">'+ANIM[b.key].html()+'</div>'+
+           '<div class="tsn5-replay">'+(ANIM[b.key].controls||'')+'<button type="button" class="tsn5-btn tsn5-rp">'+REPLAY+'Neu abspielen</button></div>'+
+           (b.cap?'<p class="tsn5-cap">'+b.cap+'</p>':'')+'</section>';
+      } else if(b.t==='sec'){
+        h+='<section class="tsn5-sec'+(b.wide?' wide':'')+'"'+(b.id?' id="'+b.id+'"':'')+'>'+(b.eb?'<div class="tsn5-eb">'+b.eb+'</div>':'')+
+           '<h3>'+b.h+'</h3>'+(b.lead?'<p class="lead">'+b.lead+'</p>':'')+(b.body||[]).map(bItem).join('')+'</section>';
+      } else if(b.t==='emp'){
+        h+='<div class="tsn5-emp"><div class="eg"><svg class="el" preserveAspectRatio="none"><path/><circle r="3.5" class="c1"/><circle r="3.5" class="c2"/></svg>'+
+           '<div class="ea"><div class="eah">'+b.animTitle+' <span>'+b.animGold+'</span></div>'+
+           b.steps.map(function(s,i){return '<div class="es"><span class="esn">'+('0'+(i+1)).slice(-2)+'</span><span class="esl">'+s+'</span></div>';}).join('')+'</div>'+
+           '<div class="et"><h3 class="eh">Empfehlung zur <span>'+b.kind+'</span></h3><p class="ei">'+b.intro+'</p><ol>'+
+           b.points.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ol></div></div></div>';
+      } else if(b.t==='src'){
+        h+='<div class="tsn5-src"><details><summary>Quellen und Stand <i>'+b.stand+'</i></summary><ol>'+
+           b.items.map(function(s){return '<li id="tsn5-q'+s[0]+'">'+s[1]+(s[2]?' · <a href="'+s[2]+'" target="_blank" rel="noopener">'+s[2].replace(/^https?:\/\//,'')+'</a>':'')+'</li>';}).join('')+
+           '</ol></details></div>';
+      } else if(b.t==='mods'){
+        h+='<div class="tsn5-mods">'+b.items.map(function(m){
+          return '<a class="tsn5-mod tsn5-rv" href="'+m.href+'"><span class="mn">'+m.n+'</span><span class="mt">'+m.t+'</span><p class="md">'+m.d+'</p><span class="mg">Zur Lektion</span></a>';
+        }).join('')+'</div>';
+      } else if(b.t==='learn'){
+        h+='<div class="tsn5-learn"><div class="lh"><span class="le">Was du mitnimmst</span><h2 class="lt">Learnings</h2></div><div class="lg">'+
+           b.items.map(function(t){return '<div class="lc"><div class="lo"><p class="lp">'+t+'</p></div></div>';}).join('')+'</div>'+
+           '<div class="tsn5-next"><a id="tsn5-next" href="'+b.next.href+'">'+(b.next.label||'Nächste Lektion')+' '+ARROW+'</a></div></div>';
+      }
+    });
+    return h;
+  }
+
+  /* ---------- Verhalten ---------- */
+  function copyBtns(root){
+    [].forEach.call(root.querySelectorAll('.tsn5-cmd button'),function(b){
+      b.addEventListener('click',function(){
+        var pre=b.parentNode.parentNode.querySelector('pre'); if(!pre) return;
+        var t=pre.textContent;
+        function done(){ b.textContent='Kopiert'; setTimeout(function(){ b.textContent='Kopieren'; },1600); }
+        if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,function(){}); }
+        else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch(e){} document.body.removeChild(ta); }
+      });
+    });
+  }
+  function empSetup(el){
+    var steps=el.querySelectorAll('.es'), lis=el.querySelectorAll('ol li'), grid=el.querySelector('.eg'), svg=el.querySelector('.el');
+    var path=svg.querySelector('path'), c1=svg.querySelector('.c1'), c2=svg.querySelector('.c2');
+    var idx=-1, iv=null;
+    function draw(){
+      var on=el.querySelector('.es.on'), lit=el.querySelector('ol li.lit');
+      if(!on||!lit||getComputedStyle(svg).display==='none') return;
+      var gr=grid.getBoundingClientRect(), a=on.getBoundingClientRect(), b=lit.getBoundingClientRect();
+      var x1=a.right-gr.left, y1=a.top-gr.top+a.height/2, x2=b.left-gr.left, y2=b.top-gr.top+b.height/2, dx=(x2-x1)*0.5;
+      path.setAttribute('d','M '+x1+' '+y1+' C '+(x1+dx)+' '+y1+' '+(x2-dx)+' '+y2+' '+x2+' '+y2);
+      c1.setAttribute('cx',x1); c1.setAttribute('cy',y1); c2.setAttribute('cx',x2); c2.setAttribute('cy',y2);
+      var L=0; try{ L=path.getTotalLength(); }catch(e){}
+      if(L){ path.style.transition='none'; path.style.strokeDasharray=L+'px'; path.style.strokeDashoffset=L+'px'; void path.getBoundingClientRect(); path.style.transition=''; path.style.strokeDashoffset='0px'; }
+      path.classList.add('on'); c1.classList.add('on'); c2.classList.add('on');
+    }
+    function tick(){
+      idx=(idx+1)%steps.length;
+      [].forEach.call(steps,function(s,i){ s.classList.toggle('on',i===idx); });
+      [].forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
+      setTimeout(draw,30);
+    }
+    function start(){ if(iv||RM) return; tick(); iv=setInterval(function(){ if(!el.isConnected){ clearInterval(iv); return; } if(!document.hidden) tick(); },2600); }
+    tsReveal(el,function(){ el.classList.add('in'); start(); });
+    if(RM){ steps[0]&&steps[0].classList.add('on'); lis[0]&&lis[0].classList.add('lit'); }
+    if(window.matchMedia&&window.matchMedia('(hover:hover)').matches){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
+        el.style.setProperty('--gx',(px*100).toFixed(1)+'%'); el.style.setProperty('--gy',(py*100).toFixed(1)+'%'); el.classList.add('glow','tilt'); });
+      el.addEventListener('mouseenter',function(){ el.classList.add('beat','tilt'); });
+      el.addEventListener('mouseleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); el.classList.remove('glow','beat','tilt'); });
+    }
+    window.addEventListener('resize',function(){ setTimeout(draw,30); });
+  }
+
+  function wire(root){
+    copyBtns(root);
+    [].forEach.call(root.querySelectorAll('.tsn5-rv'),function(el){ tsReveal(el,function(){ el.classList.add('in'); }); });
+    [].forEach.call(root.querySelectorAll('[data-calc]'),function(el){ var k=el.getAttribute('data-calc'); if(CALC[k]&&CALC[k].init) CALC[k].init(el); });
+    [].forEach.call(root.querySelectorAll('.tsn5-anim'),function(sec){
+      var k=sec.getAttribute('data-anim'), A=ANIM[k]; if(!A) return;
+      var stage=sec.querySelector('.tsn5-stage');
+      if(A.init) A.init(stage, sec);
+      function play(opt){ if(RM){ if(A.end) A.end(stage, sec); return; } stage.classList.add('js'); A.play(stage, sec, opt||{}); }
+      sec.__play=play;
+      tsReveal(stage,function(){ setTimeout(function(){ if(stage.isConnected) play(); },220); });
+      var rp=sec.querySelector('.tsn5-rp'); if(rp) rp.addEventListener('click',function(){ play(); });
+      if(RM&&A.end) A.end(stage, sec);
+    });
+    [].forEach.call(root.querySelectorAll('.tsn5-emp'),empSetup);
+    var ln=root.querySelector('.tsn5-learn'); if(ln) tsReveal(ln,function(){ ln.classList.add('in'); });
+  }
+
+  function current(){
+    var p=location.pathname.replace(/\/+$/,'');
+    for(var i=0;i<LEK.length;i++){ if(LEK[i].re.test(p)) return LEK[i]; }
+    return null;
+  }
+  function mount(){
+    var L=current(); if(!L) return false;
+    if(document.getElementById('tsn5')) return true;
+    var host=document.querySelector('.super-content'); if(!host) return false;
+    var nr=host.querySelector('.notion-root'); if(!nr) return false;
+    var root=document.createElement('div'); root.id='tsn5'; root.className='js'; root.setAttribute('data-l',L.key);
+    root.innerHTML=build(L);
+    host.insertBefore(root,nr);
+    ['.notion-header.page','.notion-root','.notion-collection-page-properties'].forEach(function(sel){ var e=host.querySelector(sel); if(e) e.style.display='none'; });
+    wire(root);
+    return true;
+  }
+  function run(){ if(mount()) return; var n=0, iv=setInterval(function(){ n++; if(mount()||n>60) clearInterval(iv); },150); }
+
+  window.__tsn5api={ ANIM:ANIM, CALC:CALC, LEK:LEK, later:later, tsReveal:tsReveal, RM:RM, TICK:TICK, IMG:IMG, MODUL_HREF:MODUL_HREF };
+  /* ================================================================
+     ERKLAERANIMATIONEN — je Lektion ein eigenes Konzept.
+     Muster: html() liefert die Buehne im ENDZUSTAND (ohne JS sichtbar),
+     play() setzt auf den Startzustand zurueck und spielt die Sequenz,
+     end() setzt hart den Endzustand (reduced motion, Garantie).
+     Timer je Buehne (st.__t), damit "Neu abspielen" sauber neu startet.
+     ================================================================ */
+  function T(st,fn,ms){ st.__t=st.__t||[]; st.__t.push(setTimeout(function(){ if(st.isConnected) fn(); },ms)); }
+  function stop(st){ (st.__t||[]).forEach(clearTimeout); st.__t=[]; if(st.__iv){ clearInterval(st.__iv); st.__iv=null; } }
+  function $(st,s){ return st.querySelector(s); }
+  function $$(st,s){ return [].slice.call(st.querySelectorAll(s)); }
+  function cls(list,c,on){ list.forEach(function(e){ e.classList.toggle(c,!!on); }); }
+  function reflow(el){ void el.offsetWidth; }
+  function easeT(p){ return Math.acos(1-2*p)/Math.PI; } /* Zeitanteil, an dem easeInOutSine den Weg p erreicht */
+  function hhmm(min){ min=Math.round(min); var h=Math.floor(min/60)%24, m=min%60; return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
+
+  /* ---------------- L5.0 · Ein Freitagabend in Echtzeit ---------------- */
+  var A0_CALLS=[[17,20,2],[18,5,4],[18,40,2],[19,5,6],[19,20,3],[19,35,4],[19,50,2],[20,10,5],[20,25,4],[20,50,2],[21,15,3],[22,10,2]];
+  function a0pos(c){ return ((c[0]-17)*60+c[1])/360; }
+  function a0rush(c){ var m=(c[0]-17)*60+c[1]; return m>=120 && m<=240; }
+  ANIM.abend={
+    controls:'<button type="button" class="tsn5-btn a0-b0">Heute</button><button type="button" class="tsn5-btn a0-b1 on">Mit Agent</button>',
+    html:function(){
+      var ticks='', calls='', slots='';
+      for(var h=17;h<=23;h++){ ticks+='<span class="a0-tk'+(h===17?' f':(h===23?' l':''))+'" style="left:'+((h-17)/6*100)+'%">'+h+':00</span>'; }
+      A0_CALLS.forEach(function(c,i){
+        calls+='<span class="a0-call got" data-i="'+i+'" style="left:'+(a0pos(c)*100)+'%"><i></i></span>';
+        slots+='<div class="a0-slot got"><b>'+hhmm((c[0])*60+c[1])+'</b><span>'+c[2]+' Personen</span><em>verpasst</em></div>';
+      });
+      return '<div class="a0">'+
+        '<div class="a0-top"><div class="a0-clock"><span>Freitagabend · Beispiel</span><b class="a0-time">23:00</b></div>'+
+        '<div class="a0-mode"><span class="a0-ml">Modus</span><b class="a0-mv">Mit Agent</b></div></div>'+
+        '<div class="a0-axis"><div class="a0-rush"><span>Hochbetrieb</span></div><div class="a0-line"></div>'+ticks+calls+
+        '<div class="a0-ph"><i></i></div></div>'+
+        '<div class="a0-bk"><div class="a0-bkh">Dein Reservierungsbuch</div><div class="a0-slots">'+slots+'</div></div>'+
+        '<div class="a0-sum"><div><span>Anfragen</span><b class="a0-n0">12</b></div><div><span>angenommen</span><b class="a0-n1">12</b></div><div><span>ins Leere</span><b class="a0-n2">0</b></div></div>'+
+      '</div>';
+    },
+    init:function(st,sec){
+      var b0=sec.querySelector('.a0-b0'), b1=sec.querySelector('.a0-b1');
+      b0.addEventListener('click',function(){ st.classList.add('js'); ANIM.abend.run(st,sec,0,false); });
+      b1.addEventListener('click',function(){ st.classList.add('js'); ANIM.abend.run(st,sec,1,false); });
+    },
+    run:function(st,sec,mode,chain){
+      stop(st);
+      var calls=$$(st,'.a0-call'), slots=$$(st,'.a0-slot'), ph=$(st,'.a0-ph'), tm=$(st,'.a0-time');
+      var n0=$(st,'.a0-n0'), n1=$(st,'.a0-n1'), n2=$(st,'.a0-n2');
+      cls([sec.querySelector('.a0-b0')],'on',mode===0); cls([sec.querySelector('.a0-b1')],'on',mode===1);
+      $(st,'.a0-mv').textContent=mode?'Mit Agent':'Heute';
+      st.classList.toggle('m1',!!mode);
+      calls.forEach(function(e){ e.classList.remove('got','lost','hit'); });
+      slots.forEach(function(e){ e.classList.remove('got','lost'); });
+      n0.textContent='0'; n1.textContent='0'; n2.textContent='0';
+      ph.style.transition='none'; ph.style.transform='translateX(0%)'; reflow(ph);
+      var D=5600, t0=Date.now(), a=0, g=0, l=0;
+      T(st,function(){ ph.style.transition='transform '+D+'ms cubic-bezier(.37,0,.63,1)'; ph.style.transform='translateX(100%)'; },60);
+      st.__iv=setInterval(function(){
+        var t=Math.min(1,(Date.now()-t0-60)/D); if(t<0) t=0;
+        var p=0.5-0.5*Math.cos(Math.PI*t);
+        tm.textContent=hhmm(17*60+p*360);
+        if(t>=1){ clearInterval(st.__iv); st.__iv=null; tm.textContent='23:00'; }
+      },90);
+      A0_CALLS.forEach(function(c,i){
+        var at=60+easeT(a0pos(c))*D;
+        T(st,function(){
+          var lost=(mode===0 && a0rush(c));
+          calls[i].classList.add('hit', lost?'lost':'got');
+          slots[i].classList.add(lost?'lost':'got');
+          a++; if(lost) l++; else g++;
+          n0.textContent=a; n1.textContent=g; n2.textContent=l;
+        },at);
+      });
+      /* Garantie-Endwerte, unabhaengig vom Ablauf */
+      T(st,function(){ n0.textContent='12'; n1.textContent=mode?'12':'5'; n2.textContent=mode?'0':'7'; tm.textContent='23:00'; },D+500);
+      if(chain && mode===0) T(st,function(){ ANIM.abend.run(st,sec,1,false); },D+2300);
+    },
+    play:function(st,sec){ ANIM.abend.run(st,sec,0,true); },
+    end:function(st){ /* Basis-HTML ist bereits der Endzustand "Mit Agent" */ }
+  };
+
+  /* ---------------- L5.1 · Der Steckbrief wird zum Gehirn ---------------- */
+  var A1_ROWS=[
+    ['Öffnungszeiten','Di bis Sa, 17 bis 23 Uhr','Öffnungszeiten: {{OEFFNUNGSZEITEN}}','Öffnungszeiten: Di bis Sa, 17 bis 23 Uhr'],
+    ['Ruhetage','Sonntag und Montag','Ruhetage: {{RUHETAGE}}','Ruhetage: Sonntag und Montag'],
+    ['Belegung je Tisch','120 Minuten','Belegungsdauer: {{BELEGUNGSDAUER}} Minuten','Belegungsdauer: 120 Minuten'],
+    ['Allein buchen','1 bis 6 Personen','Personen: {{MIN_PERSONEN}} bis {{MAX_PERSONEN}}','Personen: 1 bis 6'],
+    ['Übergabe','Lena, bis 18 Uhr','Übergabe: {{ESKALATIONS_PERSON}}, {{RUECKMELDE_FRIST}}','Übergabe: Lena, bis 18 Uhr'],
+    ['Ton','herzlich, kurz, hanseatisch','Ton: {{TON_BESCHREIBUNG}}','Ton: herzlich, kurz, hanseatisch']
+  ];
+  ANIM.steckbrief={
+    html:function(){
+      var l='', m='', r='';
+      A1_ROWS.forEach(function(x){
+        l+='<div class="a1-r"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';
+        m+='<div class="a1-tr"><i></i></div>';
+        r+='<div class="a1-r"><code class="a1-p">'+esc(x[2])+'</code><code class="a1-v">'+esc(x[3])+'</code></div>';
+      });
+      return '<div class="a1"><div class="a1-card a1-paper"><div class="a1-h"><b>Prozess-Steckbrief</b><span>deine Seite Papier</span></div>'+l+'</div>'+
+        '<div class="a1-mid"><div class="a1-h a1-hx"></div>'+m+'</div>'+
+        '<div class="a1-card a1-brain"><div class="a1-h"><b>System-Prompt</b><span>das Regelwerk des Agenten</span></div>'+r+'</div></div>'+
+        '<div class="a1-foot"><span class="a1-cnt">6</span> von 6 Regeln übertragen</div>';
+    },
+    play:function(st){
+      stop(st);
+      var L=$$(st,'.a1-paper .a1-r'), M=$$(st,'.a1-tr'), R=$$(st,'.a1-brain .a1-r'), c=$(st,'.a1-cnt');
+      cls(L,'lit',0); cls(L,'done',0); cls(M,'go',0); cls(R,'set',0); c.textContent='0'; st.classList.remove('fin');
+      reflow(st);
+      L.forEach(function(e,i){
+        var b=260+i*620;
+        T(st,function(){ e.classList.add('lit'); },b);
+        T(st,function(){ M[i].classList.add('go'); },b+180);
+        T(st,function(){ R[i].classList.add('set'); e.classList.remove('lit'); e.classList.add('done'); c.textContent=i+1; },b+560);
+      });
+      T(st,function(){ st.classList.add('fin'); },260+L.length*620+200);
+      T(st,function(){ c.textContent='6'; cls(R,'set',1); },260+L.length*620+900);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.2 · Die Nacht im Betrieb ---------------- */
+  var A2_MSG=[['23:14','WhatsApp','Samstag, 4 Personen, 19 Uhr?','6 Sekunden'],['02:40','Mail','Geburtstag, 10 Personen, nächste Woche','8 Sekunden · an Lena übergeben'],['07:05','WhatsApp','Heute Abend noch was frei für zwei?','5 Sekunden']];
+  ANIM.nacht={
+    html:function(){
+      var cards=A2_MSG.map(function(m){
+        return '<div class="a2-msg on"><div class="a2-mt"><b>'+m[0]+'</b><span>'+m[1]+'</span></div><p>„'+m[2]+'"</p><div class="a2-ms"><i></i><span>beantwortet nach '+m[3]+'</span></div></div>';
+      }).join('');
+      return '<div class="a2">'+
+        '<div class="a2-top">'+
+          '<div class="a2-dev a2-lap off"><svg viewBox="0 0 160 100" aria-hidden="true"><rect class="a2-scr" x="22" y="8" width="116" height="72" rx="5"/><rect x="8" y="82" width="144" height="8" rx="3" class="a2-base"/></svg><b>Dein Laptop</b><span class="a2-ls">zugeklappt seit 23:00</span></div>'+
+          '<div class="a2-clock"><span>Nacht von Freitag auf Samstag</span><b class="a2-time">07:05</b><em><i class="a2-moon"></i></em></div>'+
+          '<div class="a2-dev a2-srv"><svg viewBox="0 0 160 100" aria-hidden="true"><rect x="20" y="14" width="120" height="22" rx="4" class="a2-u"/><rect x="20" y="40" width="120" height="22" rx="4" class="a2-u"/><rect x="20" y="66" width="120" height="22" rx="4" class="a2-u"/><circle cx="124" cy="25" r="3.5" class="a2-led"/><circle cx="124" cy="51" r="3.5" class="a2-led l2"/><circle cx="124" cy="77" r="3.5" class="a2-led l3"/></svg><b>Dein Server</b><span>läuft durch · <em class="a2-cnt">3</em> Antworten</span></div>'+
+        '</div>'+
+        '<div class="a2-rail"><span class="a2-r0">22:00</span><div class="a2-rl"><i class="a2-rf"></i></div><span class="a2-r1">08:00</span></div>'+
+        '<div class="a2-msgs">'+cards+'</div></div>';
+    },
+    play:function(st){
+      stop(st);
+      var lap=$(st,'.a2-lap'), msgs=$$(st,'.a2-msg'), tm=$(st,'.a2-time'), cnt=$(st,'.a2-cnt'), rf=$(st,'.a2-rf'), ls=$(st,'.a2-ls');
+      lap.classList.remove('off'); ls.textContent='noch offen'; cls(msgs,'on',0); cls(msgs,'in',0); cnt.textContent='0'; tm.textContent='22:00';
+      rf.style.transition='none'; rf.style.transform='scaleX(0)'; reflow(rf);
+      var D=6200, marks=[[60,0],[194,1],[400,2],[545,3]]; /* Minuten ab 22:00 */
+      T(st,function(){ rf.style.transition='transform '+D+'ms cubic-bezier(.37,0,.63,1)'; rf.style.transform='scaleX(1)'; },80);
+      var t0=Date.now()+80;
+      st.__iv=setInterval(function(){ var t=Math.min(1,Math.max(0,(Date.now()-t0)/D)), p=0.5-0.5*Math.cos(Math.PI*t); tm.textContent=hhmm(22*60+p*600); if(t>=1){ clearInterval(st.__iv); st.__iv=null; tm.textContent='08:00'; } },90);
+      T(st,function(){ lap.classList.add('off'); ls.textContent='zugeklappt seit 23:00'; },80+easeT(60/600)*D);
+      [[0,194],[1,400],[2,545]].forEach(function(x){
+        var at=80+easeT(x[1]/600)*D;
+        T(st,function(){ msgs[x[0]].classList.add('in'); },at);
+        T(st,function(){ msgs[x[0]].classList.add('on'); cnt.textContent=String(x[0]+1); },at+700);
+      });
+      T(st,function(){ cnt.textContent='3'; cls(msgs,'in',1); cls(msgs,'on',1); lap.classList.add('off'); },D+900);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.3 · Der Belegungsplan rechnet ---------------- */
+  /* Zeiten in Minuten ab 17:00, Plan 17:00-23:00 (360 min) */
+  var A3_T=[['Tisch 1',2,[[60,180]]],['Tisch 2',2,[[150,270]]],['Tisch 4',4,[[90,210]]],['Tisch 5',4,[[180,300]]],['Tisch 6',4,[[0,105]]],['Tisch 8',6,[[120,240]]]];
+  ANIM.belegung={
+    controls:'<button type="button" class="tsn5-btn a3-q1">Anfrage 1</button><button type="button" class="tsn5-btn a3-q2 on">Anfrage 2</button>',
+    html:function(){
+      var rows='', ax='';
+      for(var h=0;h<=6;h++){ ax+='<span style="left:'+(h/6*100)+'%">'+(17+h)+':00</span>'; }
+      A3_T.forEach(function(r,i){
+        var bl=r[2].map(function(b){ return '<i class="a3-b" style="left:'+(b[0]/360*100)+'%;width:'+((b[1]-b[0])/360*100)+'%"></i>'; }).join('');
+        rows+='<div class="a3-row" data-i="'+i+'"><div class="a3-lab"><b>'+r[0]+'</b><span>'+r[1]+' Plätze</span></div><div class="a3-tl">'+bl+
+          '<i class="a3-new" style="left:'+(120/360*100)+'%;width:'+(120/360*100)+'%"><span>Lindner · 4</span></i><em class="a3-why"></em></div></div>';
+      });
+      return '<div class="a3">'+
+        '<div class="a3-q"><span class="a3-ql">Anfrage</span><b class="a3-qv">Freitag · 19:30 · 6 Personen</b><span class="a3-ql2">Belegung 120 Minuten</span></div>'+
+        '<div class="a3-grid"><div class="a3-ax"><div></div><div class="a3-axt">'+ax+'</div></div>'+rows+
+          '<div class="a3-bandw"><div class="a3-band"></div><div class="a3-alt a3-alt1"></div><div class="a3-alt a3-alt2"></div></div></div>'+
+        '<div class="a3-steps"><span class="a3-s">1 · Genug Plätze?</span><span class="a3-s">2 · Überschneidet sich etwas?</span><span class="a3-s">3 · Antwort an den Agenten</span></div>'+
+        '<div class="a3-res"><code class="a3-rv">frei: nein · Alternativen: 17:00 oder 21:00</code></div></div>';
+    },
+    init:function(st,sec){
+      sec.querySelector('.a3-q1').addEventListener('click',function(){ st.classList.add('js'); ANIM.belegung.run(st,sec,1,false); });
+      sec.querySelector('.a3-q2').addEventListener('click',function(){ st.classList.add('js'); ANIM.belegung.run(st,sec,2,false); });
+    },
+    run:function(st,sec,q,chain){
+      stop(st);
+      var rows=$$(st,'.a3-row'), band=$(st,'.a3-band'), steps=$$(st,'.a3-s'), rv=$(st,'.a3-rv'), qv=$(st,'.a3-qv'), a1=$(st,'.a3-alt1'), a2=$(st,'.a3-alt2');
+      cls([sec.querySelector('.a3-q1')],'on',q===1); cls([sec.querySelector('.a3-q2')],'on',q===2);
+      var start=q===1?120:150, pers=q===1?4:6;
+      qv.textContent=q===1?'Freitag · 19:00 · 4 Personen':'Freitag · 19:30 · 6 Personen';
+      rows.forEach(function(r){ r.classList.remove('small','busy','free','book'); r.querySelector('.a3-why').textContent=''; });
+      cls(steps,'on',0); cls([band,a1,a2],'on',0); rv.classList.remove('on'); rv.textContent='…';
+      band.style.left=(start/360*100)+'%'; band.style.width=(120/360*100)+'%';
+      a1.style.left='0%'; a1.style.width=(120/360*100)+'%'; a2.style.left=(240/360*100)+'%'; a2.style.width=(120/360*100)+'%';
+      st.classList.toggle('q2',q===2); st.classList.remove('alts'); reflow(st);
+      T(st,function(){ band.classList.add('on'); },200);
+      T(st,function(){ steps[0].classList.add('on');
+        A3_T.forEach(function(t,i){ if(t[1]<pers){ rows[i].classList.add('small'); rows[i].querySelector('.a3-why').textContent='zu klein'; } }); },900);
+      T(st,function(){ steps[1].classList.add('on');
+        A3_T.forEach(function(t,i){ if(t[1]<pers) return; var hit=t[2].some(function(b){ return b[0]<start+120 && b[1]>start; });
+          if(hit){ rows[i].classList.add('busy'); rows[i].querySelector('.a3-why').textContent='belegt'; } }); },2100);
+      T(st,function(){ steps[2].classList.add('on');
+        if(q===1){ rows[4].classList.add('free'); rv.textContent='frei: ja · Tisch 6 · 19:00 bis 21:00'; T(st,function(){ rows[4].classList.add('book'); },500); }
+        else { st.classList.add('alts'); a1.classList.add('on'); a2.classList.add('on'); rv.textContent='frei: nein · Alternativen: 17:00 oder 21:00'; }
+        rv.classList.add('on'); },3300);
+      if(chain && q===1) T(st,function(){ ANIM.belegung.run(st,sec,2,false); },6200);
+    },
+    play:function(st,sec){ ANIM.belegung.run(st,sec,1,true); },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.4 · Ein Gespraech, von innen gesehen ---------------- */
+  var A4={
+    ok:{ chat:[['g','Hallo, habt ihr Freitag um 19 Uhr einen Tisch für vier?'],['a','Hallo, hier ist der digitale Assistent vom Hafenblick, ein Mensch aus dem Team kann jederzeit übernehmen. Freitag, 6. November, 19 Uhr für vier Personen ist frei. Auf welchen Namen darf ich reservieren?'],['g','Auf Lindner, gern.'],['a','Gebucht: Freitag, 6. November, 19 Uhr, vier Personen auf Lindner. Am Vortag melde ich mich kurz zur Erinnerung.']],
+      log:[['Nachricht lesen','„Freitag, 19 Uhr, vier Personen"'],['Werkzeug fragen','verfuegbarkeit_pruefen(06.11., 19:00, 4)'],['Antwort lesen','frei: ja · Tisch 6'],['Name fehlt','eine Rückfrage, nicht mehr'],['Werkzeug buchen','reservierung_anlegen(Lindner, Tisch 6)'],['Bestätigen','Datum, Uhrzeit, Personen, Name wiederholt']],
+      steps:[[0,0],[1,0],[2,0],[3,1],[4,2],[5,2],[5,3]] },
+    ko:{ chat:[['g','Hallo, habt ihr Freitag um 19 Uhr einen Tisch für vier?'],['a','Hallo, hier ist der digitale Assistent vom Hafenblick, ein Mensch aus dem Team kann jederzeit übernehmen. Das kann ich gerade nicht sicher prüfen. Ich habe deine Anfrage notiert, Lena aus dem Team meldet sich bis 18 Uhr bei dir.']],
+      log:[['Nachricht lesen','„Freitag, 19 Uhr, vier Personen"'],['Werkzeug fragen','verfuegbarkeit_pruefen(06.11., 19:00, 4)'],['Antwort lesen','keine Antwort'],['Regel greift','ohne Werkzeug-Antwort keine Zusage'],['Übergeben','an_mensch_uebergeben(Lena, alle Angaben)'],['Ehrlich antworten','Anfrage notiert, Rückmeldung bis 18 Uhr']],
+      steps:[[0,0],[1,0],[2,0],[3,0],[4,0],[5,1]] }
+  };
+  ANIM.gespraech={
+    controls:'<button type="button" class="tsn5-btn a4-b0 on">Werkzeug antwortet</button><button type="button" class="tsn5-btn a4-b1">Werkzeug fällt aus</button>',
+    html:function(){
+      var S=A4.ok;
+      return '<div class="a4"><div class="a4-phone"><div class="a4-ph"><i></i><div><b>Restaurant Hafenblick</b><span>Reservierungs-Assistent</span></div></div><div class="a4-chat">'+
+        S.chat.map(function(m){ return '<div class="a4-m '+m[0]+' on">'+m[1]+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div></div></div>'+
+        '<div class="a4-gap"><i class="a4-pulse"></i></div>'+
+        '<div class="a4-log"><div class="a4-lh"><b>Was der Agent dabei tut</b><span>live mitgelesen</span></div>'+
+        S.log.map(function(l,i){ return '<div class="a4-l on"><span class="a4-ln">'+('0'+(i+1)).slice(-2)+'</span><div><b>'+l[0]+'</b><code>'+esc(l[1])+'</code></div></div>'; }).join('')+'</div></div>';
+    },
+    init:function(st,sec){
+      sec.querySelector('.a4-b0').addEventListener('click',function(){ st.classList.add('js'); ANIM.gespraech.run(st,sec,'ok'); });
+      sec.querySelector('.a4-b1').addEventListener('click',function(){ st.classList.add('js'); ANIM.gespraech.run(st,sec,'ko'); });
+    },
+    run:function(st,sec,k){
+      stop(st);
+      var S=A4[k];
+      cls([sec.querySelector('.a4-b0')],'on',k==='ok'); cls([sec.querySelector('.a4-b1')],'on',k==='ko');
+      var chat=$(st,'.a4-chat'), typ=$(st,'.a4-typ'), logs=$$(st,'.a4-l'), pulse=$(st,'.a4-pulse');
+      st.classList.toggle('ko',k==='ko');
+      chat.innerHTML=S.chat.map(function(m){ return '<div class="a4-m '+m[0]+'">'+m[1]+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div>';
+      typ=$(st,'.a4-typ');
+      logs.forEach(function(l,i){ l.classList.remove('on','warn'); l.querySelector('b').textContent=S.log[i][0]; l.querySelector('code').textContent=S.log[i][1]; });
+      var ms=$$(st,'.a4-m'); reflow(st);
+      var t=300, shown=-1;
+      S.steps.forEach(function(s){
+        var li=s[0], mi=s[1];
+        if(mi>shown){
+          var m=ms[mi];
+          if(m.classList.contains('a')){ (function(tt){ T(st,function(){ typ.classList.add('on'); },tt); })(t); t+=700; }
+          (function(m,tt){ T(st,function(){ typ.classList.remove('on'); m.classList.add('on'); chat.scrollTop=chat.scrollHeight; },tt); })(m,t);
+          shown=mi; t+=650;
+        }
+        (function(li,tt){ T(st,function(){ pulse.classList.remove('go'); reflow(pulse); pulse.classList.add('go'); logs[li].classList.add('on'); if(k==='ko' && li===2) logs[li].classList.add('warn'); },tt); })(li,t);
+        t+=620;
+      });
+      T(st,function(){ cls(logs,'on',1); cls(ms,'on',1); },t+600);
+    },
+    play:function(st,sec){ ANIM.gespraech.run(st,sec,'ok'); },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.5 · Aus Stimme wird eine Zeile ---------------- */
+  var A5_LINES=[
+    ['a','Restaurant Hafenblick, hier spricht der digitale Reservierungs-Assistent. Wenn du lieber einen Menschen möchtest, sag einfach Mitarbeiter.'],
+    ['g','Hallo, ich wollte für Samstag reservieren, so gegen acht, für fünf Leute.'],
+    ['a','Gern. Also Samstag, 7. November, um 20 Uhr für fünf Personen?'],
+    ['g','Ja genau. Auf Lindner.'],
+    ['a','Ist gebucht: Samstag, 7. November, 20 Uhr, fünf Personen auf Lindner. Am Vortag bekommst du eine kurze Erinnerung.']
+  ];
+  ANIM.stimme={
+    html:function(){
+      var bars=''; for(var i=0;i<44;i++){ bars+='<i style="--d:'+((i*37)%11)/10+'s;--h:'+(0.25+((i*53)%10)/13)+'"></i>'; }
+      return '<div class="a5"><div class="a5-top"><div class="a5-who"><span class="a5-dot"></span><b class="a5-wl">Assistent</b></div><div class="a5-wave">'+bars+'</div><div class="a5-tm">Anruf · 0:41</div></div>'+
+        '<div class="a5-tx"><p class="a5-line">„'+A5_LINES[4][1]+'"</p></div>'+
+        '<div class="a5-slots">'+
+          '<div class="a5-s on"><span>Tag</span><b>Sa, 7. November</b></div>'+
+          '<div class="a5-s on"><span>Uhrzeit</span><b class="a5-u">20:00</b></div>'+
+          '<div class="a5-s on"><span>Personen</span><b>5</b></div>'+
+          '<div class="a5-s on"><span>Name</span><b>Lindner</b></div></div>'+
+        '<div class="a5-row on"><span>Buchung</span><code>Sa 07.11. · 20:00 · 5 Personen · Lindner · Kanal Telefon</code></div></div>';
+    },
+    play:function(st){
+      stop(st);
+      var who=$(st,'.a5-wl'), line=$(st,'.a5-line'), wave=$(st,'.a5-wave'), s=$$(st,'.a5-s'), u=$(st,'.a5-u'), row=$(st,'.a5-row'), tm=$(st,'.a5-tm');
+      cls(s,'on',0); cls(s,'unsure',0); row.classList.remove('on'); st.classList.remove('g','talk');
+      s.forEach(function(e){ e.querySelector('b').textContent='…'; });
+      var t=200, sec0=0;
+      function say(i,dur){
+        var L=A5_LINES[i];
+        T(st,function(){ st.classList.add('talk'); st.classList.toggle('g',L[0]==='g'); who.textContent=L[0]==='g'?'Gast':'Assistent';
+          line.classList.remove('in'); reflow(line); line.textContent='„'+L[1]+'"'; line.classList.add('in'); sec0+=Math.round(dur/120); tm.textContent='Anruf · 0:'+('0'+Math.min(59,sec0)).slice(-2); },t);
+        T(st,function(){ st.classList.remove('talk'); },t+dur);
+        t+=dur+380;
+      }
+      function fill(i,txt,cl,at){ T(st,function(){ s[i].querySelector('b').textContent=txt; s[i].classList.add('on'); if(cl) s[i].classList.add(cl); else s[i].classList.remove('unsure'); },at); }
+      say(0,2100);
+      var g1=t; say(1,2300);
+      fill(0,'Sa, 7. November',null,g1+600); fill(1,'so gegen acht?','unsure',g1+1300); fill(2,'5',null,g1+1900);
+      say(2,1900);
+      var g2=t; say(3,1300);
+      fill(1,'20:00',null,g2+300); fill(3,'Lindner',null,g2+900);
+      say(4,1500);
+      T(st,function(){ row.classList.add('on'); },t-200);
+      T(st,function(){ ['Sa, 7. November','20:00','5','Lindner'].forEach(function(x,i){ s[i].querySelector('b').textContent=x; s[i].classList.add('on'); s[i].classList.remove('unsure'); }); row.classList.add('on'); },t+800);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.6 · Der Abend davor ---------------- */
+  ANIM.vorabend={
+    html:function(){
+      return '<div class="a6"><div class="a6-col a6-fri"><div class="a6-h"><b>Freitag</b><span class="a6-clk">17:00</span></div>'+
+        '<div class="a6-feed">'+
+          '<div class="a6-m sys on"><span>17:00 · Erinnerung</span>Kurze Erinnerung von Hafenblick: morgen, 20 Uhr, vier Personen auf Lindner. Bleibt es dabei?<em><i>Passt</i><i class="x">Leider absagen</i></em></div>'+
+          '<div class="a6-m gst on">Leider absagen</div>'+
+          '<div class="a6-m sys on"><span>17:04 · Warteliste</span>Für morgen 20 Uhr ist ein Tisch für vier frei geworden. Sollen wir ihn für dich buchen?</div>'+
+          '<div class="a6-m gst on">Ja, sehr gern!</div>'+
+        '</div></div>'+
+        '<div class="a6-gap"><i class="a6-pulse"></i></div>'+
+        '<div class="a6-col a6-sat"><div class="a6-h"><b>Samstag</b><span>Belegung 20 Uhr</span></div>'+
+          '<div class="a6-t"><b>Tisch 2</b><span>Okafor · 2</span><em>Bestätigt</em></div>'+
+          '<div class="a6-t a6-key"><b>Tisch 6</b><span class="a6-kn">Becker · 4</span><em class="a6-ks">Bestätigt</em></div>'+
+          '<div class="a6-t"><b>Tisch 8</b><span>Weiß · 6</span><em>Bestätigt</em></div>'+
+          '<div class="a6-wl"><span>Warteliste Samstag</span><div class="a6-w a6-w1 moved"><b>Becker · 4</b><em>20 Uhr</em></div><div class="a6-w"><b>Yilmaz · 2</b><em>19 Uhr</em></div></div>'+
+        '</div></div>'+
+        '<div class="a6-rail"><span class="a6-s on">Erinnerung raus</span><span class="a6-s on">Absage</span><span class="a6-s on">Tisch wieder frei</span><span class="a6-s on">Warteliste bekommt ihn</span></div>';
+    },
+    play:function(st){
+      stop(st);
+      var m=$$(st,'.a6-m'), clk=$(st,'.a6-clk'), key=$(st,'.a6-key'), kn=$(st,'.a6-kn'), ks=$(st,'.a6-ks'), w1=$(st,'.a6-w1'), s=$$(st,'.a6-s'), p=$(st,'.a6-pulse');
+      cls(m,'on',0); cls(s,'on',0); key.classList.remove('free','cx','nw'); w1.classList.remove('moved','ping'); kn.textContent='Lindner · 4'; ks.textContent='Bestätigt'; clk.textContent='16:58';
+      function pulse(dir){ p.classList.remove('go','back'); reflow(p); p.classList.add(dir); }
+      T(st,function(){ clk.textContent='16:59'; },500);
+      T(st,function(){ clk.textContent='17:00'; m[0].classList.add('on'); s[0].classList.add('on'); },1100);
+      T(st,function(){ m[1].classList.add('on'); s[1].classList.add('on'); clk.textContent='17:03'; },2600);
+      T(st,function(){ pulse('go'); },3000);
+      T(st,function(){ key.classList.add('cx'); ks.textContent='Storniert'; },3500);
+      T(st,function(){ key.classList.remove('cx'); key.classList.add('free'); kn.textContent='frei'; ks.textContent='frei'; s[2].classList.add('on'); },4300);
+      T(st,function(){ w1.classList.add('ping'); pulse('back'); },5000);
+      T(st,function(){ m[2].classList.add('on'); clk.textContent='17:04'; s[3].classList.add('on'); },5500);
+      T(st,function(){ m[3].classList.add('on'); clk.textContent='17:06'; },6900);
+      T(st,function(){ pulse('go'); },7200);
+      T(st,function(){ key.classList.remove('free'); key.classList.add('nw'); kn.textContent='Becker · 4'; ks.textContent='Bestätigt'; w1.classList.remove('ping'); w1.classList.add('moved'); },7700);
+      T(st,function(){ cls(m,'on',1); cls(s,'on',1); },8600);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.7 · Sieben Tage Schatten ---------------- */
+  var A7=[['Mo',62,5],['Di',71,4],['Mi',80,3],['Do',86,2],['Fr',93,1],['Sa',97,1],['So',100,0]];
+  ANIM.schatten={
+    html:function(){
+      return '<div class="a7"><div class="a7-days">'+A7.map(function(d){
+          return '<div class="a7-d on" style="--v:'+(d[1]/100)+'"><span class="a7-dl">'+d[0]+'</span><div class="a7-bar"><i></i></div><b class="a7-p">'+d[1]+' %</b><span class="a7-k">'+d[2]+' korrigiert</span></div>';
+        }).join('')+'</div>'+
+        '<div class="a7-card"><div class="a7-ch"><span>Freigabe auf deinem Handy</span><b class="a7-cd">Sonntag</b></div>'+
+          '<p class="a7-cq">„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"</p>'+
+          '<div class="a7-cb"><span class="a7-ok on">Freigeben</span><span class="a7-ko">Korrigieren</span></div></div>'+
+        '<div class="a7-sw on"><span class="a7-swl">Schattenmodus</span><i class="a7-tg"><b></b></i><span class="a7-sws">aus · Standardfälle laufen allein, Sonderfälle weiter über dich</span></div></div>';
+    },
+    play:function(st){
+      stop(st);
+      var d=$$(st,'.a7-d'), cd=$(st,'.a7-cd'), ok=$(st,'.a7-ok'), ko=$(st,'.a7-ko'), sw=$(st,'.a7-sw'), sws=$(st,'.a7-sws'), q=$(st,'.a7-cq');
+      var Q=['„Freitag, 20 Uhr, sechs Personen ist frei. Darf ich auf Becker buchen?"','„Tut mir leid, Montag haben wir Ruhetag. Am Dienstag ab 17 Uhr ist alles frei."','„Für zehn Personen klärt das Lena persönlich, sie meldet sich bis 18 Uhr."','„Samstag 19 Uhr ist leider voll. Ich kann dir 17:30 oder 21 Uhr anbieten."','„Danke für die Absage, der Tisch ist wieder frei. Bis bald bei uns!"','„Am Freitag ist die Terrasse geschlossen, drinnen ist um 19 Uhr frei."','„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"'];
+      cls(d,'on',0); cls(d,'cur',0); sw.classList.remove('on'); sws.textContent='an · jede Zusage geht erst über dein Handy';
+      A7.forEach(function(x,i){
+        var b=300+i*820;
+        T(st,function(){ cls(d,'cur',0); d[i].classList.add('on','cur'); cd.textContent=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'][i];
+          q.classList.remove('in'); reflow(q); q.textContent=Q[i]; q.classList.add('in');
+          var corr=x[2]>=3 && i<3; ok.classList.toggle('on',!corr); ko.classList.toggle('on',corr); },b);
+      });
+      T(st,function(){ cls(d,'cur',0); sw.classList.add('on'); sws.textContent='aus · Standardfälle laufen allein, Sonderfälle weiter über dich'; },300+7*820+300);
+      T(st,function(){ cls(d,'on',1); sw.classList.add('on'); },300+7*820+1200);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- L5.8 · Der Weg einer Telefonnummer ---------------- */
+  var A8=[['Eingang','WhatsApp','Meta'],['Zentrale','dein Server','Hetzner, Deutschland'],['Gehirn','Claude','Anthropic'],['Gedächtnis','Reservierungen','Notion']];
+  ANIM.weg={
+    html:function(){
+      return '<div class="a8"><div class="a8-lane"><div class="a8-card gone"><div class="a8-f"><span>Name</span><b>Lindner<i></i></b></div><div class="a8-f"><span>Telefon</span><b>0171 ··· 42<i></i></b></div><div class="a8-f"><span>Termin</span><b>Sa · 20:00 · 5 P.</b></div></div></div>'+
+        '<div class="a8-st">'+A8.map(function(s){
+          return '<div class="a8-s on"><span class="a8-se">'+s[0]+'</span><b>'+s[1]+'</b><span class="a8-sp">'+s[2]+'</span><em class="a8-seal">AVV</em></div>';
+        }).join('')+'</div>'+
+        '<div class="a8-after"><div class="a8-cal"><span>nach deiner Löschfrist</span><b class="a8-cv">Name und Nummer gelöscht</b></div>'+
+        '<div class="a8-km on"><span>Key Metrics</span><b>1 Reservierung · WhatsApp · erschienen</b><em>bleibt, ohne Personenbezug</em></div></div></div>';
+    },
+    play:function(st){
+      stop(st);
+      var card=$(st,'.a8-card'), s=$$(st,'.a8-s'), km=$(st,'.a8-km'), cv=$(st,'.a8-cv'), cal=$(st,'.a8-cal');
+      cls(s,'on',0); cls(s,'here',0); card.classList.remove('gone','red'); km.classList.remove('on'); cal.classList.remove('on'); cv.textContent='Frist läuft';
+      card.style.transition='none'; card.style.setProperty('--x','0'); reflow(card);
+      card.style.transition='';
+      s.forEach(function(e,i){
+        T(st,function(){ card.style.setProperty('--x',String(i)); cls(s,'here',0); e.classList.add('here'); },300+i*1150);
+        T(st,function(){ e.classList.add('on'); },300+i*1150+600);
+      });
+      var t=300+4*1150+400;
+      T(st,function(){ cls(s,'here',0); cal.classList.add('on'); },t);
+      T(st,function(){ card.classList.add('red'); cv.textContent='Name und Nummer gelöscht'; },t+900);
+      T(st,function(){ km.classList.add('on'); },t+1700);
+      T(st,function(){ card.classList.add('gone'); },t+2600);
+      T(st,function(){ cls(s,'on',1); km.classList.add('on'); cv.textContent='Name und Nummer gelöscht'; },t+3400);
+    },
+    end:function(st){}
+  };
+
+  /* ---------------- Modul-Landing · Der Bauplan ---------------- */
+  /* Ein Objekt: links drei Tueren, Mitte die Zentrale, rechts drei Ablagen,
+     unten das Fundament. Teile setzen sich in Bau-Reihenfolge ein (Lektionsnummer
+     als Plakette), danach laeuft eine Nachricht einmal durch das ganze System. */
+  var A9={L:[['5.4','Mail','Postfach und Kontaktformular'],['5.4','WhatsApp','Business Platform'],['5.5','Telefon','Ansage, Stimme, Rückfrage']],
+          R:[['5.3','Reservierungen','die Wahrheit über deine Tische'],['5.6','Erinnerung','am Vortag, 17 Uhr'],['5.7','Agenten-Log','jedes Gespräch, nachlesbar']]};
+  ANIM.bauplan={
+    html:function(){
+      function tile(x,c){ return '<div class="a9-t on '+c+'"><em>'+x[0]+'</em><b>'+x[1]+'</b><span>'+x[2]+'</span></div>'; }
+      return '<div class="a9"><div class="a9-col a9-l">'+A9.L.map(function(x){return tile(x,'a9-d');}).join('')+'</div>'+
+        '<div class="a9-gap a9-gl"><i class="a9-ln"><u></u></i><i class="a9-ln"><u></u></i><i class="a9-ln"><u></u></i></div>'+
+        '<div class="a9-core on"><em>5.2</em><span class="a9-ce">Die Zentrale</span><b>n8n auf deinem Server</b>'+
+          '<div class="a9-cr on"><em>5.1</em><span>Regelwerk aus deinem Steckbrief</span></div>'+
+          '<div class="a9-cr on"><em>5.4</em><span>Claude als Gehirn</span></div>'+
+          '<div class="a9-cr on"><em>5.3</em><span>zwei Werkzeuge: prüfen und buchen</span></div></div>'+
+        '<div class="a9-gap a9-gr"><i class="a9-ln"><u></u></i><i class="a9-ln"><u></u></i><i class="a9-ln"><u></u></i></div>'+
+        '<div class="a9-col a9-r">'+A9.R.map(function(x){return tile(x,'a9-s');}).join('')+'</div>'+
+        '<div class="a9-base on"><em>5.8</em><b>Das Fundament</b><span>KI-Hinweis, Datensparsamkeit, Löschung, ein Vertrag für jeden Baustein</span></div></div>';
+    },
+    play:function(st){
+      stop(st);
+      var core=$(st,'.a9-core'), cr=$$(st,'.a9-cr'), L=$$(st,'.a9-l .a9-t'), R=$$(st,'.a9-r .a9-t'), base=$(st,'.a9-base'),
+          ll=$$(st,'.a9-gl .a9-ln'), rl=$$(st,'.a9-gr .a9-ln');
+      var all=[core,base].concat(cr,L,R);
+      cls(all,'on',0); cls(ll.concat(rl),'go',0); cls(ll.concat(rl),'lit',0); cls(all,'hot',0); reflow(st);
+      /* Bau-Reihenfolge: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8 */
+      var seq=[[cr[0],core],[cr[2],R[0]],[cr[1],L[0],L[1]],[L[2]],[R[1]],[R[2]],[base]];
+      seq.forEach(function(g,i){ T(st,function(){ g.forEach(function(e){ e.classList.add('on'); }); },200+i*430); });
+      var t=200+seq.length*430+300;
+      T(st,function(){ cls(ll.concat(rl),'lit',1); },t);
+      /* eine Nachricht laeuft durch: WhatsApp -> Zentrale -> Reservierungen -> Log, Antwort zurueck */
+      T(st,function(){ L[1].classList.add('hot'); ll[1].classList.add('go'); },t+400);
+      T(st,function(){ core.classList.add('hot'); },t+1000);
+      T(st,function(){ rl[0].classList.add('go'); },t+1500);
+      T(st,function(){ R[0].classList.add('hot'); rl[2].classList.remove('go'); reflow(rl[2]); rl[2].classList.add('go'); },t+2000);
+      T(st,function(){ R[2].classList.add('hot'); ll[1].classList.remove('go'); reflow(ll[1]); ll[1].classList.add('go','back'); },t+2500);
+      T(st,function(){ cls(all,'hot',0); cls(all,'on',1); cls(ll.concat(rl),'lit',1); },t+4200);
+    },
+    end:function(st){}
+  };
+  /* ================================================================
+     WERKZEUGE ZUM MITMACHEN (Rechner, Tester, Protokoll)
+     Alle Startwerte sind als Beispielwerte gekennzeichnet, der
+     Teilnehmer traegt seine eigenen ein. Speicherung nur lokal und
+     nur fuer das Testprotokoll (try/catch, Seite laeuft auch ohne).
+     ================================================================ */
+  function eur(v){ return (Math.round(v)).toLocaleString('de-DE')+' €'; }
+  function eur2(v){ return v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'; }
+  function num(el){ var v=parseFloat(String(el.value).replace(',','.')); return isFinite(v)&&v>=0?v:0; }
+  function field(id,label,val,step){ return '<div class="tsn5-f"><label for="'+id+'">'+label+'</label><input type="number" inputmode="decimal" id="'+id+'" value="'+val+'" min="0" step="'+(step||1)+'"></div>'; }
+
+  /* L5.0 · Was kostet dich ein leerer Tisch */
+  CALC.tisch={
+    html:function(){
+      return '<div class="tt"><b>Was kostet dich ein leerer Tisch?</b><span>Deine Zahlen</span></div><div class="tsn5-grid2"><div class="tsn5-in">'+
+        field('tsn5-t-bon','Umsatz pro Gast, im Schnitt (€)',38,1)+
+        field('tsn5-t-gp','Gäste pro Reservierung, im Schnitt',3,0.5)+
+        field('tsn5-t-ns','Reservierungen pro Woche, die nicht kommen',2,1)+
+        field('tsn5-t-mi','Anfragen pro Woche, die niemand annimmt',4,1)+
+        '</div><div class="tsn5-out"><div class="ol">Entgangener Umsatz im Monat</div><div class="ov tsn5-t-m">0 €</div>'+
+        '<div class="orow"><span>davon durch Nichterscheinen</span><b class="tsn5-t-a">0 €</b></div><div class="orow"><span>davon durch verpasste Anfragen</span><b class="tsn5-t-b">0 €</b></div><div class="orow"><span>im Jahr</span><b class="tsn5-t-y">0 €</b></div>'+
+        '<p class="os">Rechnung: Fälle pro Woche × Gäste × Umsatz pro Gast × 4,33 Wochen. Die Startwerte sind Beispielwerte, keine Branchenzahlen. Wie viele Anfragen ins Leere laufen, siehst du, wenn du eine Woche lang die Anrufe in Abwesenheit auf dem Telefon mitzählst.</p></div></div>';
+    },
+    init:function(el){
+      var ids=['bon','gp','ns','mi'].map(function(k){ return el.querySelector('#tsn5-t-'+k); });
+      function calc(){
+        var bon=num(ids[0]), gp=num(ids[1]), a=num(ids[2])*gp*bon*4.33, b=num(ids[3])*gp*bon*4.33;
+        el.querySelector('.tsn5-t-m').textContent=eur(a+b); el.querySelector('.tsn5-t-a').textContent=eur(a);
+        el.querySelector('.tsn5-t-b').textContent=eur(b); el.querySelector('.tsn5-t-y').textContent=eur((a+b)/4.33*52);
+      }
+      ids.forEach(function(i){ i.addEventListener('input',calc); }); calc();
+    }
+  };
+
+  /* L5.1 · Die Grenze testen */
+  CALC.grenze={
+    html:function(){
+      var days=['Mo','Di','Mi','Do','Fr','Sa','So'].map(function(d,i){ return '<button type="button" class="tsn5-chip'+(i===4?' on':'')+'" data-d="'+i+'">'+d+'</button>'; }).join('');
+      return '<div class="tt"><b>Teste deine Grenze</b><span>Beispielbetrieb aus dem Steckbrief</span></div><div class="tsn5-grid2"><div class="tsn5-in">'+
+        '<div class="tsn5-f"><label>Personen <em class="tsn5-g-pv">4</em></label><input type="range" class="tsn5-g-p" min="1" max="24" value="4"></div>'+
+        '<div class="tsn5-f"><label>Tag</label><div class="tsn5-chips tsn5-g-d">'+days+'</div></div>'+
+        '<div class="tsn5-f"><label>Uhrzeit <em class="tsn5-g-uv">19:00</em></label><input type="range" class="tsn5-g-u" min="22" max="47" value="38"></div>'+
+        '<div class="tsn5-f"><label>So viele Personen bucht der Agent allein <em class="tsn5-g-mv">6</em></label><input type="range" class="tsn5-g-m" min="2" max="12" value="6"></div>'+
+        '<div class="tsn5-f"><label>Anlass</label><div class="tsn5-chips tsn5-g-a"><button type="button" class="tsn5-chip on" data-a="0">Normale Anfrage</button><button type="button" class="tsn5-chip" data-a="1">Sonderwunsch</button><button type="button" class="tsn5-chip" data-a="2">Beschwerde</button></div></div>'+
+        '</div><div><div class="tsn5-verdict tsn5-g-v"><span class="vd">✓</span><div class="vt"><b>Der Agent bucht</b><span>…</span></div></div>'+
+        '<p class="os" style="font-size:13px;color:rgba(255,255,255,.7);margin:14px 2px 0">Beispielbetrieb: Dienstag bis Samstag, buchbar von 17 bis 21 Uhr, Belegung 120 Minuten. Ob tatsächlich ein Tisch frei ist, entscheidet danach allein die Datenbank.</p></div></div>';
+    },
+    init:function(el){
+      var p=el.querySelector('.tsn5-g-p'), u=el.querySelector('.tsn5-g-u'), m=el.querySelector('.tsn5-g-m'), v=el.querySelector('.tsn5-g-v');
+      var day=4, anl=0;
+      function chips(sel,attr,set){ [].forEach.call(el.querySelectorAll(sel+' .tsn5-chip'),function(c){ c.addEventListener('click',function(){
+        [].forEach.call(el.querySelectorAll(sel+' .tsn5-chip'),function(x){ x.classList.remove('on'); }); c.classList.add('on'); set(+c.getAttribute(attr)); calc(); }); }); }
+      chips('.tsn5-g-d','data-d',function(x){ day=x; }); chips('.tsn5-g-a','data-a',function(x){ anl=x; });
+      function calc(){
+        var P=+p.value, U=+u.value*30, M=+m.value;
+        el.querySelector('.tsn5-g-pv').textContent=P; el.querySelector('.tsn5-g-mv').textContent=M; el.querySelector('.tsn5-g-uv').textContent=hhmm(U);
+        var r;
+        if(anl===2) r=['esc','Geht an dich','Beschwerden gehen immer an einen Menschen, ohne Ausnahme.'];
+        else if(anl===1) r=['esc','Geht an dich','Sonderwünsche jenseits der festen Fakten klärt dein Team.'];
+        else if(P>M) r=['esc','Geht an dich','Gruppe über deiner Grenze. Der Agent nimmt alles auf und kündigt eine Rückmeldung an.'];
+        else if(day===0||day===6) r=['ok','Der Agent antwortet selbst','Ruhetag. Er sagt freundlich ab und nennt den nächsten offenen Tag.'];
+        else if(U<17*60||U>21*60) r=['ok','Der Agent antwortet selbst','Außerhalb der buchbaren Zeit. Er nennt die erste und die letzte mögliche Uhrzeit.'];
+        else r=['ok','Der Agent bucht selbst','Alle Bedingungen erfüllt. Er fragt die Verfügbarkeit ab und bucht, wenn ein Tisch frei ist.'];
+        v.className='tsn5-verdict tsn5-g-v '+r[0];
+        v.querySelector('.vd').textContent=r[0]==='esc'?'→':'✓';
+        v.querySelector('b').textContent=r[1];
+        v.querySelector('.vt span').textContent=r[2];
+      }
+      [p,u,m].forEach(function(i){ i.addEventListener('input',calc); }); calc();
+    }
+  };
+
+  /* L5.5 · Was kostet dich das Telefon */
+  CALC.telefon={
+    html:function(){
+      return '<div class="tt"><b>Was kostet dich die Telefon-KI?</b><span>Dein Anrufaufkommen</span></div><div class="tsn5-grid2"><div class="tsn5-in">'+
+        field('tsn5-p-n','Anrufe pro Monat, die der Agent annehmen soll',300,10)+
+        field('tsn5-p-d','Minuten pro Anruf, im Schnitt',2,0.5)+
+        '<p style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c7b489;margin:8px 0 0;font-weight:600">Weg 1 · fertiger Assistent</p>'+
+        field('tsn5-p-g','Grundgebühr pro Monat (€)',__P.w1g,1)+
+        field('tsn5-p-i','Inklusiv-Minuten im Paket',__P.w1i,10)+
+        field('tsn5-p-x','Preis je weitere Minute (€)',__P.w1x,0.01)+
+        '<p style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c7b489;margin:8px 0 0;font-weight:600">Weg 2 · Baukasten</p>'+
+        field('tsn5-p-m','Preis je Gesprächsminute, alles zusammen (€)',__P.w2m,0.01)+
+        field('tsn5-p-r','Telefonnummer pro Monat (€)',__P.w2r,0.5)+
+        '</div><div class="tsn5-out"><div class="ol">Minuten im Monat</div><div class="ov tsn5-p-min">0</div>'+
+        '<div class="orow"><span>Weg 1 im Monat</span><b class="tsn5-p-1">0 €</b></div><div class="orow"><span>Weg 2 im Monat</span><b class="tsn5-p-2">0 €</b></div>'+
+        '<div class="orow"><span>Weg 1 je Anruf</span><b class="tsn5-p-1a">0 €</b></div><div class="orow"><span>Weg 2 je Anruf</span><b class="tsn5-p-2a">0 €</b></div>'+
+        '<p class="os">'+__P.note+'</p></div></div>';
+    },
+    init:function(el){
+      var g=function(k){ return num(el.querySelector('#tsn5-p-'+k)); };
+      function calc(){
+        var min=g('n')*g('d'), w1=g('g')+Math.max(0,min-g('i'))*g('x'), w2=min*g('m')+g('r');
+        el.querySelector('.tsn5-p-min').textContent=Math.round(min).toLocaleString('de-DE');
+        el.querySelector('.tsn5-p-1').textContent=eur2(w1); el.querySelector('.tsn5-p-2').textContent=eur2(w2);
+        var n=g('n')||1; el.querySelector('.tsn5-p-1a').textContent=eur2(w1/n); el.querySelector('.tsn5-p-2a').textContent=eur2(w2/n);
+      }
+      [].forEach.call(el.querySelectorAll('input'),function(i){ i.addEventListener('input',calc); }); calc();
+    }
+  };
+
+  /* L5.7 · Das Testprotokoll zum Abhaken */
+  CALC.test={
+    html:function(){
+      return '<div class="tt"><b>Dein Testprotokoll</b><span class="tsn5-x-c">0 von '+__TESTS.length+' geprüft</span></div><div class="tsn5-meter"><i class="tsn5-x-m"></i></div><ul class="tsn5-check">'+
+        __TESTS.map(function(t,i){ return '<li data-i="'+i+'"><span class="bx">'+TICK+'</span><span class="q">'+t[0]+'<span class="e">Erwartet: '+t[1]+'</span></span></li>'; }).join('')+
+        '</ul><p class="os" style="font-size:13px;color:rgba(255,255,255,.7);margin:14px 0 0">Die Haken speichert nur dein Browser auf diesem Gerät.</p>';
+    },
+    init:function(el){
+      var K='tsn5-testprotokoll', st={};
+      try{ st=JSON.parse(localStorage.getItem(K)||'{}')||{}; }catch(e){ st={}; }
+      var lis=[].slice.call(el.querySelectorAll('.tsn5-check li'));
+      function upd(){ var n=lis.filter(function(l){ return l.classList.contains('on'); }).length;
+        el.querySelector('.tsn5-x-c').textContent=n+' von '+lis.length+' geprüft'; el.querySelector('.tsn5-x-m').style.setProperty('--p',(n/lis.length).toFixed(3)); }
+      lis.forEach(function(l){ var i=l.getAttribute('data-i'); if(st[i]) l.classList.add('on');
+        l.addEventListener('click',function(){ l.classList.toggle('on'); st[i]=l.classList.contains('on'); try{ localStorage.setItem(K,JSON.stringify(st)); }catch(e){} upd(); }); });
+      upd();
+    }
+  };
+  /* ======================= Modul-Landing ======================= */
+  var STAND='Stand 1. November 2026';
+  LEK.push({
+    key:'mod', re:/\/modul-5-(?:claude-code-notion|ai-reservation-agent)$/,
+    eyebrow:'Modul 5 · AI Reservation Agent', alt:'Modul 5 · AI Reservation Agent',
+    title:'Immer <span class="ts-gold">erreichbar</span>',
+    intro:[
+      'In diesem Modul bauen wir einen Agenten, der deine Reservierungen annimmt, wenn alle im Service sind oder du schon Feierabend hast. Er schreibt auf <b>Mail und WhatsApp</b>, auf Wunsch geht er ans Telefon, und jede Buchung steht danach in deiner Backoffice-Vorlage.',
+      'Neun Lektionen, in der Reihenfolge, in der wir bauen. Zuerst die Regeln, dann die Zentrale und das Gedächtnis, dann die Türen nach außen, am Ende der Betrieb und das Recht. Du brauchst keine Programmierkenntnisse, aber zwei, drei ruhige Abende.'
+    ],
+    blocks:[
+      {t:'anim', key:'bauplan', eb:'Der Bauplan dieses Moduls', h:'Neun Lektionen, ein <span class="ts-gold">System</span>.',
+        sub:'So hängt alles zusammen, was wir in diesem Modul bauen. Jede Lektion setzt ein Teil ein, am Ende läuft die erste Nachricht einmal durch.',
+        cap:'Die Zahlen an den Teilen sind die Lektionen, in denen wir sie bauen.'},
+      {t:'mods', items:[
+        {n:'L 5.0', t:'Reservierungen ohne Anruf', d:'Was dich ein Abend mit klingelndem Telefon kostet und was am Ende läuft.', href:'/lektionen/reservierungen-ohne-anruf'},
+        {n:'L 5.1', t:'Dein Steckbrief', d:'Kanäle, Tische, Sonderfälle und die Grenze, bis zu der der Agent allein entscheidet.', href:'/lektionen/dein-reservierungs-prozess'},
+        {n:'L 5.2', t:'Die Zentrale', d:'Ein eigener Server mit n8n, der jede Anfrage sofort annimmt. An einem Abend eingerichtet.', href:'/lektionen/die-zentrale'},
+        {n:'L 5.3', t:'Ist ein Tisch frei?', d:'Die Reservierungs-Datenbanken deiner Vorlage und die zwei Werkzeuge, die fragen und buchen.', href:'/lektionen/verfuegbarkeit-und-buchung'},
+        {n:'L 5.4', t:'Der Schreib-Agent', d:'Das Regelwerk, die Tür für Mail und die Tür für WhatsApp. Dein erster echter Agent.', href:'/lektionen/der-schreib-agent'},
+        {n:'L 5.5', t:'Der Telefon-Agent', d:'Drei Wege ans Telefon, mit deiner eigenen Kostenrechnung.', href:'/lektionen/der-telefon-agent'},
+        {n:'L 5.6', t:'Der Abend davor', d:'Erinnerung am Vortag, Absage mit einem Tipp, Warteliste für volle Abende.', href:'/lektionen/erinnerung-und-no-shows'},
+        {n:'L 5.7', t:'Die Schattenwoche', d:'Testprotokoll, eine Woche mitlesen, das Log und die saubere Übergabe an dein Team.', href:'/lektionen/go-live-und-betrieb'},
+        {n:'L 5.8', t:'Die Daten deiner Gäste', d:'KI-Hinweis, Datensparsamkeit, Löschroutine und die Verträge mit jedem Baustein.', href:'/lektionen/datenschutz-und-recht'}
+      ]},
+      {t:'learn', items:[
+        'Ein Agent, der auf <b>Mail und WhatsApp</b> antwortet und in deine eigene Datenbank bucht.',
+        'Eine <b>Zentrale</b> auf deinem Server, die rund um die Uhr zuhört.',
+        'Eine <b>Erinnerung am Vortag</b>, die abgesagte Tische sofort wieder freigibt.',
+        'Ein <b>rechtlicher Rahmen</b> mit KI-Hinweis, Löschfrist und einem Vertrag für jeden Baustein.'
+      ], next:{href:'/lektionen/reservierungen-ohne-anruf', label:'Los geht es mit L 5.0'}}
+    ]
+  });
+
+  /* ======================= L5.0 · Reservierungen ohne Anruf ======================= */
+  LEK.push({
+    key:'l50', re:/\/(?:lektionen\/)?reservierungen-ohne-anruf$/,
+    eyebrow:'L 5.0', alt:'Reservierungen ohne Anruf',
+    title:'Der leere <span class="ts-gold">Tisch</span>',
+    intro:[
+      'Freitagabend, halb acht, der Laden ist voll, und das Telefon klingelt. Niemand geht ran, weil alle im Service sind. Der Gast am anderen Ende wartet vier Freizeichen, legt auf und ruft beim Betrieb zwei Straßen weiter an. Du hast ihn nie gesehen, und genau deshalb taucht er in keiner Auswertung auf.',
+      'In diesem Modul bauen wir den Mitarbeiter, der diesen Anruf annimmt. Er antwortet auf <b>Mail, WhatsApp und Telefon</b>, schaut in deine echte Belegung, bucht in deine eigene Datenbank und erinnert deine Gäste am Vortag. Alles, was nicht Standard ist, gibt er an dich ab.'
+    ],
+    blocks:[
+      {t:'anim', key:'abend', eb:'Ein Abend, zweimal erzählt', h:'Zwölf Anfragen. Wie viele <span class="ts-gold">kommen an</span>?',
+        sub:'Erst der Abend, wie er heute oft läuft, dann derselbe Abend mit Agent. Über „Heute“ und „Mit Agent“ spielst du beide einzeln ab.',
+        cap:'Beispielabend zur Anschauung, keine Messung.'},
+
+      {t:'sec', eb:'Die Schnittstelle', h:'Warum gerade die Reservierung?',
+        body:[
+          'Du kennst das Bild aus der Einleitung: Wir suchen die Stellen in deinem Betriebstag, an denen Information von außen auf dein System trifft. Der Lieferschein war so eine Stelle, der Tagesabschluss eine andere. Die Reservierungsanfrage ist die nächste, und sie hat eine Besonderheit. Sie kommt zu den unmöglichsten Zeiten: mittags, wenn du in der Küche stehst, abends um elf, wenn du längst zu Hause bist, am Ruhetag.',
+          'Ein Gast entscheidet in dem Moment, in dem er Lust auf deinen Laden hat. Antwortet in diesem Moment niemand, entscheidet er sich um.',
+          {kick:'Zwei Löcher, durch die jede Woche Umsatz fällt.'},
+          'Das eine sind die Anfragen, die niemand annimmt. Das andere sind die Gäste, die reservieren und nicht kommen. In einer Umfrage der DEHOGA Nordrhein-Westfalen unter zweihundertfünfzig Betrieben kannten siebenundachtzig Prozent No-Shows aus eigener Erfahrung, rund vier von zehn schätzten den Schaden auf mehr als fünf Prozent ihres Jahresumsatzes<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Wie viel es bei dir ist, rechnest du hier mit deinen eigenen Zahlen aus.',
+          {calc:'tisch'}
+        ]},
+
+      {t:'sec', eb:'Das Zielbild', h:'Was am Ende in deinem Betrieb läuft',
+        lead:'Damit du weißt, worauf wir hinarbeiten, gehen wir das fertige System einmal durch, so wie es nach diesem Modul bei dir läuft.',
+        body:[
+          {flow:[
+            {n:'01 · Annehmen', t:'Zu jeder Uhrzeit, in Sekunden', d:'Der Gast schreibt eine Mail, eine WhatsApp oder ruft an. Der Agent antwortet in deinem Ton und nach deinen Regeln, auch um elf Uhr nachts.'},
+            {n:'02 · Prüfen', t:'In deiner echten Belegung', d:'Er schaut in dieselbe Datenbank, in die du schaust: die Reservierungen in der Operations Area deiner Backoffice-Vorlage.'},
+            {n:'03 · Buchen', t:'Oder zwei Alternativen anbieten', d:'Ist ein Tisch frei, bucht er. Ist keiner frei, schlägt er die zwei nächsten freien Uhrzeiten vor, statt nur abzusagen.'},
+            {n:'04 · Bestätigen', t:'Sofort und schriftlich', d:'Der Gast bekommt Datum, Uhrzeit, Personenzahl und Namen noch einmal zurück. Die Zeile steht in derselben Minute in deinem Backoffice.'},
+            {n:'05 · Erinnern', t:'Am Vortag, mit einem Tipp zum Absagen', d:'Sagt der Gast ab, ist der Tisch sofort wieder frei, und die Warteliste bekommt ihn angeboten.'},
+            {n:'06 · Abgeben', t:'Alles, was nicht Standard ist', d:'Die große Gruppe, der Sonderwunsch, die Beschwerde landen bei dir oder deinem Team, mit allem, was der Gast schon gesagt hat.'}
+          ]},
+          {kick:'Agent oder Automatisierung?'},
+          'Aus der Einleitung kennst du die Merkregel: Drückst du, ist es ein Agent. Drückt die Uhr, ist es eine Automatisierung. Hier drückt der Gast. Seine Nachricht setzt alles in Gang, und alles bis zur Antwort erledigt der Agent selbst. Die Erinnerung am Vortag dagegen startet die Uhr, sie ist eine Automatisierung. Wir bauen beides, und erst zusammen wird daraus ein System.',
+          {fig:{id:'5.0-1', src:'m5-5.0-1-freitagabend-tresen.jpg', bleed:true, ratio:'21/9', label:'Freitagabend am Tresen', note:'Volles Restaurant in warmem Licht, auf dem Tresen ein Telefon, das klingelt, im Vordergrund die Hand einer Servicekraft mit drei Tellern.'}}
+        ]},
+
+      {t:'sec', eb:'Deine Daten', h:'Warum jede Buchung in deiner eigenen Datenbank steht',
+        body:[
+          'Jede Reservierung, die der Agent annimmt, steht danach in deinem System, in der Datenbank <b>Reservierungen</b> deiner Vorlage. Das Jahr 2026 hat gezeigt, warum das zählt. Quandoo, lange eine der großen Plattformen in Deutschland, hat den Betrieb eingestellt, Buchungen gingen dort nur noch bis Ende September 2026<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>. OpenTable verlangt in neuen Verträgen seit April 2026, selbst das Hauptsystem für deine Tische zu sein<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>. Und „Mit Google reservieren“ bekommst du nur über einen zugelassenen Anbieter<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>.',
+          'Das heißt nicht, dass Plattformen schlecht sind. Viele Gäste finden dich über sie, und das darf so bleiben. Es heißt nur: Die Wahrheit über deine Tische und deine Gäste sollte bei dir liegen. Dann kann dir niemand den Zugang abdrehen, und dein Agent hat immer eine Stelle, an der er nachsehen darf.'
+        ]},
+
+      {t:'sec', eb:'Aufwand und Kosten', h:'Was dich das ehrlich kostet',
+        lead:'Ich nenne dir die Zahlen vorab, damit du entscheiden kannst, wie weit du gehst. Alle Preise sind Stand 1. November 2026, die Quellen stehen unten.',
+        body:[
+          {table:{title:'Laufende Kosten je Baustein', head:['Baustein','wofür','Preis'], rows:[
+            ['Server bei Hetzner, Typ CPX22','die Zentrale, läuft rund um die Uhr','23,79 € im Monat inkl. MwSt.<sup class="tsn5-fn"><a href="#tsn5-q5">5</a></sup>'],
+            ['oder n8n Cloud, Tarif Starter','die Zentrale ohne eigenen Server','24 $ im Monat, bei Jahreszahlung 20 € im Monat<sup class="tsn5-fn"><a href="#tsn5-q6">6</a></sup>'],
+            ['Claude über die API','das Gehirn','nach Verbrauch, Rechenbeispiel in L 5.4'],
+            ['WhatsApp','Antworten und Erinnerungen','1.000 Antworten im Monat frei, danach und für jede Erinnerung 0,0456 €<sup class="tsn5-fn"><a href="#tsn5-q7">7</a></sup>'],
+            ['Telefon-KI, wenn du willst','die dritte Tür','je nach Weg, eigener Rechner in L 5.5']],
+            foot:'Ob die WhatsApp-Preise netto oder brutto sind, nennt Meta nicht. Die Software n8n selbst kostet auf dem eigenen Server nichts.'}},
+          'Dazu kommt Zeit. Die Zentrale einzurichten kostet dich einen Abend. Den Agenten auf Mail und WhatsApp zu bringen einen zweiten. Danach kommt eine Woche, in der du mitliest, bevor er allein arbeitet. Fang schlank an: erst die geschriebenen Kanäle, das Telefon erst, wenn die geschriebenen Kanäle zuverlässig laufen.'
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Vier Fragen vor dem', animGold:'Start',
+        steps:['Kanäle zählen','Leeren Tisch rechnen','Weg wählen','Abende blocken'],
+        intro:'Bevor du in die nächste Lektion gehst, beantworte dir diese vier Fragen. Sie entscheiden, wie tief du einsteigst.',
+        points:[
+          'Über welchen Kanal gehen dir heute die meisten Anfragen verloren? Mit diesem Kanal fangen wir an.',
+          'Was kostet dich ein leerer Tisch im Monat? Mit der Zahl aus dem Rechner weißt du, was der Agent einspielen muss.',
+          'Willst du den <b>eigenen Server</b> oder erst einmal die Cloud? Beides ist in Lektion 5.2 erklärt.',
+          'Trag dir <b>zwei ruhige Abende</b> und eine Woche zum Mitlesen in den Kalender. Danach läuft es.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'DEHOGA Nordrhein-Westfalen, Umfrage unter 250 Betrieben, Dezember 2025, wiedergegeben über dpa','https://www.tageskarte.io/gastronomie/detail/87-prozent-betroffen-das-no-show-dilemma-der-restaurants.html'],
+        [2,'Quandoo, Hinweis zur Einstellung der Plattform','https://www.quandoo.de/'],
+        [3,'Restaurant Dive, neue Vertragsbedingungen von OpenTable seit 16.04.2026','https://restaurantdive.com/news/open-table-client-agreement-updates-primary-table-mangement/815706/'],
+        [4,'Google, Buchungen über das Unternehmensprofil','https://support.google.com/business/answer/7475773?hl=de'],
+        [5,'Hetzner, Preise Regular Performance','https://www.hetzner.com/de/cloud/regular-performance'],
+        [6,'n8n, Preise','https://n8n.io/pricing/'],
+        [7,'Meta, WhatsApp Business Platform Pricing, gültig ab 01.10.2026','https://developers.facebook.com/docs/whatsapp/pricing']
+      ]},
+      {t:'learn', items:[
+        'Du siehst die Reservierung als <b>Schnittstelle</b>, durch die jede Woche unsichtbar Umsatz fällt.',
+        'Du kennst das <b>Zielbild</b>: annehmen, prüfen, buchen, bestätigen, erinnern, abgeben.',
+        'Du weißt, warum deine Reservierungen in <b>deiner eigenen Datenbank</b> liegen sollten.',
+        'Du kennst die <b>Kosten</b> je Baustein und die Reihenfolge, in der wir bauen.'
+      ], next:{href:'/lektionen/dein-reservierungs-prozess', label:'Weiter: Dein Steckbrief'}}
+    ]
+  });
+
+  /* ======================= L5.2 · Die Zentrale ======================= */
+  LEK.push({
+    key:'l52', re:/\/(?:lektionen\/)?die-zentrale$/,
+    eyebrow:'L 5.2', alt:'Die Zentrale: ein eigener Server mit n8n',
+    title:'Die <span class="ts-gold">Zentrale</span>',
+    intro:[
+      'Jetzt wird es zum ersten Mal technisch, und ich sage dir ehrlich: Das ist der anspruchsvollste Abend des ganzen Kurses. Wir mieten einen kleinen Server, der rund um die Uhr läuft, und setzen darauf <b>n8n</b>, eine Software, in der du Abläufe aus Bausteinen zusammensteckst. Dort wohnt später dein Agent.',
+      'Programmieren musst du dafür nicht. Du brauchst einen Abend Ruhe, diese Seite und die Bereitschaft, zwei Befehle in ein Terminal zu kopieren. Jeden Schritt gehen wir gemeinsam, und am Ende des Abends antwortet unter deiner eigenen Adresse eine Zentrale, die nie schläft.'
+    ],
+    blocks:[
+      {t:'anim', key:'nacht', eb:'Warum ein eigener Server', h:'Dein Laptop schläft. Die <span class="ts-gold">Zentrale</span> nicht.',
+        sub:'Drei Anfragen in einer Nacht, alle beantwortet, während dein Rechner zugeklappt im Büro liegt.',
+        cap:'Beispielnacht, Uhrzeiten und Antwortzeiten zur Anschauung.'},
+
+      {t:'sec', eb:'Die Frage dahinter', h:'Warum reicht mein Rechner nicht?',
+        body:[
+          'In Modul 4 hast du Werkzeuge kennengelernt, die ohne deinen Rechner laufen: Notion Agents, Automationen und Aufgaben, die Claude nach Zeitplan erledigt. Für die Reservierung reicht keines davon, und der Grund ist einfach. Ein Gast schreibt dir von außen, über WhatsApp oder per Mail, und erwartet in Sekunden eine Antwort. Dafür braucht es eine Adresse im Internet, die immer erreichbar ist und jede Nachricht sofort annimmt.',
+          'Notion Agents werden durch einen Zeitplan, durch Änderungen in Notion oder durch Slack geweckt, nicht durch eine WhatsApp-Nachricht<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Die Agenten, die Anthropic selbst betreibt, laufen nach Zeitplan und haben keinen Eingang für Mail, WhatsApp oder Telefon<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>. Also stellen wir eine kleine Maschine hin, die jede Nachricht sofort annimmt, auch nachts um drei.',
+          {merk:{p:'In Modul 4 hieß „von außen“ noch: nimm Claude Code. Will eine Anfrage aber sofort eine Antwort, auch wenn dein Rechner zu ist, braucht sie eine Zentrale, die immer erreichbar ist.'}}
+        ]},
+
+      {t:'sec', eb:'Zwei Wege', h:'Eigener Server oder n8n in der Cloud?',
+        body:[
+          {cards:[
+            {eb:'Der Weg dieses Kurses', nm:'Dein eigener Server', p:['Du mietest bei Hetzner einen Server in Nürnberg und installierst n8n darauf. Alles, was durch deine Zentrale läuft, bleibt auf einer Maschine in Deutschland, die du kontrollierst, und niemand zählt deine Abläufe.','Kosten: der Typ CPX22 mit zwei Prozessorkernen und vier Gigabyte Arbeitsspeicher für 23,79 € im Monat inklusive Mehrwertsteuer<sup class="tsn5-fn"><a href="#tsn5-q7">7</a></sup>. Den kleineren CX23 bietet Hetzner zurzeit nicht zur Bestellung an.'],
+              foot:'n8n selbst kostet auf dem eigenen Server nichts. Die Lizenz erlaubt die Nutzung für die eigenen internen Geschäftszwecke<sup class="tsn5-fn"><a href="#tsn5-q8">8</a></sup>.'},
+            {eb:'Der bequeme Einstieg', nm:'n8n Cloud', p:['n8n betreibt die Zentrale für dich. Du legst ein Konto an und musst dich um keinen Server kümmern. Dafür zählt n8n die Ausführungen: Im Tarif Starter sind 2.500 im Monat enthalten, jede eingehende Nachricht startet mindestens eine.','Kosten: 24 US-Dollar im Monat, bei jährlicher Zahlung 20 Euro im Monat<sup class="tsn5-fn"><a href="#tsn5-q8">8</a></sup>.'],
+              foot:'Gut zum Ausprobieren. Der Tarif Pro mit 10.000 Ausführungen kostet 60 US-Dollar im Monat.'}
+          ]},
+          'Ich empfehle dir den eigenen Server. Er kostet ungefähr dasselbe, du hast keine Zählung im Nacken, und du weißt genau, wo deine Abläufe laufen. Ist dir das heute Abend zu viel, fang in der Cloud an. Der Umzug auf einen eigenen Server ist später möglich.'
+        ]},
+
+      {t:'sec', eb:'Schritt für Schritt', h:'Die Zentrale an einem Abend',
+        lead:'So richten wir den eigenen Server ein. Im Video siehst du jeden Klick, hier steht die Reihenfolge zum Abhaken.',
+        body:[
+          {flow:[
+            {n:'01 · Server bestellen', t:'Hetzner Cloud, Nürnberg, CPX22', d:'Konto anlegen, in der Cloud-Konsole ein Projekt erstellen, einen Server bestellen. Standort Nürnberg, Typ CPX22, Betriebssystem Ubuntu.'},
+            {n:'02 · Vertrag gleich mit', t:'Auftragsverarbeitung im Kundenkonto', d:'Bei Hetzner kommt der Vertrag zur Auftragsverarbeitung nicht automatisch zustande. Du schließt ihn im Kundenkonto per Häkchen ab<sup class="tsn5-fn"><a href="#tsn5-q9">9</a></sup>. Mehr dazu in Lektion 5.8.'},
+            {n:'03 · Eine eigene Adresse', t:'zum Beispiel zentrale.deinrestaurant.de', d:'Bei deinem Domain-Anbieter lässt du eine Unteradresse auf die IP-Adresse des Servers zeigen. WhatsApp und Mail-Dienste brauchen später eine feste Adresse mit https.'},
+            {n:'04 · Easypanel installieren', t:'Ein Befehl im Terminal', d:'Easypanel ist eine Oberfläche, in der du Programme mit wenigen Klicks startest, statt Befehle zu tippen. Es braucht einen frischen Ubuntu-Server mit mindestens zwei Gigabyte Arbeitsspeicher<sup class="tsn5-fn"><a href="#tsn5-q10">10</a></sup>.'},
+            {n:'05 · n8n aus der Vorlage', t:'Projekt anlegen, Vorlage wählen, Adresse eintragen', d:'In Easypanel ein Projekt anlegen, die fertige Vorlage n8n wählen und deine Unteradresse eintragen. Das https-Zertifikat besorgt Easypanel selbst<sup class="tsn5-fn"><a href="#tsn5-q10">10</a></sup>.'},
+            {n:'06 · Erster Login', t:'Das Besitzerkonto gehört dir', d:'Unter deiner Adresse liegt jetzt n8n. Leg das Besitzerkonto mit einem langen Passwort an, das sonst niemand kennt.'}
+          ]},
+          {cmd:{label:'Befehl 1 · mit dem Server verbinden (IP aus der Hetzner-Konsole)', code:'ssh root@DEINE-SERVER-IP'}},
+          {cmd:{label:'Befehl 2 · Easypanel installieren', code:'curl -sSL https://get.easypanel.io | sh'}},
+          'Danach öffnest du Easypanel im Browser und legst dein Konto an, im Video zeige ich dir die Adresse. Läuft etwas schief, mach ein Bildschirmfoto vom Terminal und gib es Claude, so wie du es aus Modul 3 kennst. In den allermeisten Fällen ist es ein Tippfehler in der Adresse.'
+        ]},
+
+      {t:'sec', eb:'Was n8n eigentlich ist', h:'Abläufe zum Zusammenstecken',
+        body:[
+          'n8n sieht aus wie eine große Arbeitsfläche, auf der Kästchen mit Linien verbunden sind. Jedes Kästchen ist ein Baustein, der eine Sache kann: eine Nachricht empfangen, in Notion nachsehen, Claude fragen, eine Antwort schicken. Die Linien bestimmen die Reihenfolge. Ein fertiger Ablauf heißt <b>Workflow</b>.',
+          {cards:[
+            {eb:'Weckt den Ablauf', nm:'Auslöser', p:['Eine neue WhatsApp, eine neue Mail im Reservierungs-Postfach oder eine Uhrzeit. Jeder Workflow beginnt mit genau einem Auslöser.']},
+            {eb:'Tut etwas', nm:'Bausteine', p:['Notion lesen und schreiben, Claude fragen, eine Nachricht senden. Die Ergebnisse eines Bausteins stehen dem nächsten zur Verfügung.']},
+            {eb:'Gibt Zugang', nm:'Zugangsdaten', p:['Für jeden Dienst hinterlegst du einmal einen Schlüssel. Danach wählst du ihn in jedem Baustein nur noch aus.']}
+          ], cols:3},
+          'Für unseren Agenten brauchen wir Bausteine, die n8n alle mitbringt: den WhatsApp-Auslöser, den Mail-Auslöser, den Baustein AI Agent mit Claude als Modell, den Notion-Baustein und die Bausteine zum Senden<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>. Seit 2026 arbeitet Notion intern mit sogenannten Data Sources statt einfachen Datenbank-Kennungen. Der Notion-Baustein von n8n kann das seit Juli 2026, du musst darauf nichts anpassen<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>.',
+          {table:{title:'Die Zugangsdaten, die du einmal einträgst', head:['Dienst','was du brauchst','woher'], rows:[
+            ['Claude','einen API-Schlüssel','Claude-Konsole für Entwickler, mit hinterlegter Zahlungsart'],
+            ['Notion','einen Schlüssel deiner eigenen Integration','Notion, Einstellungen, Verbindungen. Freigeben nur für die Operations Area'],
+            ['WhatsApp','Zugangsschlüssel und Nummern-Kennung','Meta für Entwickler, deine App, Bereich WhatsApp (Lektion 5.4)'],
+            ['Mail','Zugang zum Reservierungs-Postfach','bei deinem Mail-Anbieter, für Empfang und Versand']],
+            foot:'Das ist eine eigene Integration für die Notion-Schnittstelle, getrennt vom Anschluss aus Modul 4. Sie sieht nur die Seiten, die du ihr ausdrücklich freigibst, also gib nur die Reservierungs-Datenbanken frei.'}}
+        ]},
+
+      {t:'sec', eb:'Claude Code als Bauhelfer', h:'Abläufe beschreiben statt klicken',
+        body:[
+          'Du kannst jeden Ablauf in n8n von Hand zusammenklicken. Schneller geht es, wenn du Claude Code an deine Zentrale hängst und in normaler Sprache beschreibst, was passieren soll. n8n hat dafür einen eingebauten Anschluss, über den Claude Workflows suchen, bauen und ändern kann<sup class="tsn5-fn"><a href="#tsn5-q5">5</a></sup>. Jeden Workflow, den Claude sehen darf, gibst du in n8n einzeln frei.',
+          {cmd:{label:'Claude Code mit deiner Zentrale verbinden', code:'claude mcp add --transport http n8n https://zentrale.deinrestaurant.de/mcp-server/http'}},
+          'Danach meldest du dich mit <span class="tsn5-mono">/mcp</span> einmal an. Zusätzlich gibt es eine Erweiterung aus der Community, die Claude die Bausteine von n8n im Detail beibringt, gepflegt auf GitHub unter czlonkowski<sup class="tsn5-fn"><a href="#tsn5-q6">6</a></sup>. Wie du Erweiterungen lädst, kennst du aus Modul 3.',
+          {cmd:{label:'Erweiterung mit dem n8n-Wissen laden', code:'/plugin install czlonkowski/n8n-skills'}},
+          'Die Zugangsdaten zu WhatsApp, Notion und Claude trägst du in n8n trotzdem selbst ein. Schlüssel zu deinem Betrieb gehören nicht in einen Chat.'
+        ]},
+
+      {t:'sec', eb:'Damit sie ruhig läuft', h:'Drei Gewohnheiten für deine Zentrale',
+        body:[
+          {cards:[
+            {eb:'Sicherung', nm:'Zweimal gesichert', p:['Schalte bei Hetzner die automatischen Sicherungen für den Server ein. Fertige Workflows exportierst du zusätzlich als Datei und legst sie in dein Backoffice.']},
+            {eb:'Updates', nm:'Nie mitten in der Woche', p:['n8n ist am 27. Oktober 2026 in Version 3.0 erschienen, mit Änderungen, die ältere Abläufe brechen können<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>. Aktualisiere an einem ruhigen Vormittag und teste danach mit einer Nachricht an dich selbst.']},
+            {eb:'Zugang', nm:'Ein Besitzer, klare Schlüssel', p:['Nur du hast das Besitzerkonto. Schlüssel verschickst du nie per Nachricht, und wer den Betrieb verlässt, verliert den Zugang am selben Tag.']}
+          ], cols:3}
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Ein Abend,', animGold:'vier Etappen',
+        steps:['Server bestellen','Vertrag abschließen','n8n starten','Claude Code anschließen'],
+        intro:'So würde ich den Abend einteilen. Plan zwei Stunden ein, und mach zwischen den Etappen eine Pause, statt dich durchzubeißen.',
+        points:[
+          'Bestell den Server und richte die <b>Unteradresse</b> zuerst ein. Bis sie überall bekannt ist, kann es eine Weile dauern.',
+          'Schließ den <b>Vertrag zur Auftragsverarbeitung</b> bei Hetzner gleich mit ab. Später vergisst man es.',
+          'Starte n8n aus der <b>Vorlage</b> in Easypanel und leg das Besitzerkonto mit einem neuen, langen Passwort an.',
+          'Häng zum Schluss <b>Claude Code</b> an und lass dir als Test alle Workflows auflisten. Ist die Liste leer, stimmt alles.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'Notion, Custom Agents','https://www.notion.com/help/custom-agents'],
+        [2,'Anthropic, Managed Agents','https://platform.claude.com/docs/en/managed-agents/overview'],
+        [3,'n8n, Release Notes (Version 3.0 vom 27.10.2026) und Dokumentation der Bausteine','https://docs.n8n.io/release-notes/'],
+        [4,'n8n, Notion-Baustein (Notion-API 2026-03-11, Data Sources)','https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.notion/'],
+        [5,'n8n, eingebauter MCP-Server','https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/'],
+        [6,'GitHub, czlonkowski/n8n-skills und n8n-mcp','https://github.com/czlonkowski/n8n-skills'],
+        [7,'Hetzner, Preise Regular Performance und Preisanpassung 2026','https://www.hetzner.com/de/cloud/regular-performance'],
+        [8,'n8n, Preise und Sustainable Use License','https://n8n.io/pricing/'],
+        [9,'Hetzner, Datenschutz-FAQ zur Auftragsverarbeitung','https://docs.hetzner.com/de/general/general-terms-and-conditions/data-privacy-faq/'],
+        [10,'Easypanel, Installation und Vorlage n8n','https://easypanel.io/docs/templates/n8n']
+      ]},
+      {t:'learn', items:[
+        'Du weißt, warum eine Anfrage von außen eine <b>Zentrale</b> braucht, die immer erreichbar ist.',
+        'Du kannst zwischen <b>eigenem Server</b> und n8n Cloud entscheiden und kennst die Kosten.',
+        'Du hast n8n über <b>Easypanel</b> auf deinem Server gestartet und die Zugangsdaten eingetragen.',
+        'Du kannst Abläufe mit <b>Claude Code</b> beschreiben lassen, statt sie von Hand zu klicken.'
+      ], next:{href:'/lektionen/verfuegbarkeit-und-buchung', label:'Weiter: Ist ein Tisch frei?'}}
+    ]
+  });
+  /* ======================= L5.1 · Dein Steckbrief ======================= */
+  LEK.push({
+    key:'l51', re:/\/(?:lektionen\/)?dein-reservierungs-prozess$/,
+    eyebrow:'L 5.1', alt:'Der Prozess-Steckbrief für den Reservierungs-Agenten',
+    title:'Dein <span class="ts-gold">Steckbrief</span>',
+    intro:[
+      'Bevor wir einen Server mieten oder irgendein Werkzeug öffnen, schreiben wir auf, wie Reservierungen bei dir wirklich laufen. Das klingt nach Papierkram, und trotzdem ist es die wichtigste Stunde dieses Moduls.',
+      'Ein Agent kann nur so gut entscheiden wie die Regeln, die du ihm gibst. Fehlt eine Regel, erfindet er eine. Am Ende dieser Lektion hast du deinen <b>Prozess-Steckbrief</b>: eine Seite mit deinen Kanälen, deinen Tischen, deinen Sonderfällen und einer klaren Grenze zwischen dem, was der Agent allein entscheidet, und dem, was zu dir kommt.'
+    ],
+    blocks:[
+      {t:'anim', key:'steckbrief', eb:'Was mit deiner Seite passiert', h:'Aus deinem Steckbrief wird sein <span class="ts-gold">Regelwerk</span>.',
+        sub:'Jede Zeile, die du hier ausfüllst, wird zur Regel im System-Prompt. Was du genau aufschreibst, musst du ihm nie wieder erklären.',
+        cap:'Beispielbetrieb, alle Werte sind Beispiele.'},
+
+      {t:'sec', eb:'Schritt 1 · Kanäle', h:'Wo kommen deine Anfragen heute an?',
+        lead:'Wir beginnen mit dem Ist-Zustand, so, wie er wirklich ist. Schreib jeden Weg auf, auf dem heute eine Reservierung zu dir kommt, und dahinter, wie oft und was damit passiert.',
+        body:[
+          {table:{title:'Beispiel · eine Woche in einem Restaurant mit 52 Plätzen', head:['Kanal','pro Woche','was heute damit passiert'], rows:[
+            ['Telefon','40','im Service oft nicht angenommen, kein Rückruf'],
+            ['WhatsApp','15','wird abends beantwortet, wenn Zeit ist'],
+            ['Mail und Kontaktformular','8','liegt manchmal zwei Tage im Postfach'],
+            ['Instagram-Nachricht','5','wird gesehen, selten beantwortet'],
+            ['Gast an der Tür','6','Zettel am Tresen, wird nachgetragen']],
+            foot:'Beispielwerte zur Anschauung. Deine eigenen Zahlen bekommst du, wenn du eine Woche lang mitzählst.'}},
+          'Bei den meisten Betrieben zeigt sich schon hier das erste Ergebnis. Das Telefon ist der größte Kanal und gleichzeitig der, der am häufigsten ins Leere läuft. Die Mail aus dem Kontaktformular bleibt am längsten liegen, weil sie niemand im Blick hat. Genau diese zwei Stellen nimmt dir der Agent später ab.',
+          {steps:{items:[
+            'Schreib alle Wege auf, auf denen bei dir Reservierungen ankommen, auch die, die du selten nutzt.',
+            'Zähl eine Woche lang mit: Anrufe in Abwesenheit auf dem Telefon, Nachrichten, die länger als einen Tag liegen bleiben.',
+            'Markier den Kanal, der heute am häufigsten ins Leere läuft. Mit ihm fangen wir an.']}}
+        ]},
+
+      {t:'sec', eb:'Schritt 2 · Kapazität', h:'Was heißt bei dir eigentlich frei?',
+        lead:'Ein Agent kann nur buchen, wenn er weiß, was es zu buchen gibt. Deshalb erfassen wir deine Tische so, wie du sie wirklich fährst, und nicht so, wie sie im Grundriss stehen.',
+        body:[
+          {kick:'Deine Tische.'},
+          'Wie viele Tische hast du, mit wie vielen Plätzen, und in welcher Zone stehen sie: drinnen, auf der Terrasse, an der Bar, im Nebenraum. Schreib dazu, welche sich zusammenschieben lassen. Diese Liste wird später eins zu eins die Datenbank <b>Tische &amp; Zeitfenster</b> in deiner Backoffice-Vorlage.',
+          {kick:'Die Belegungsdauer.'},
+          'Die Frage, die am häufigsten vergessen wird: Wie lange bleibt ein Tisch bei dir besetzt? Ob du mit neunzig Minuten oder mit zwei Stunden rechnest, entscheidet, ob es an einem Abend zwei Belegungen pro Tisch gibt oder drei. Bei einem Menü mit fünf Gängen sind es eher drei Stunden, beim Mittagstisch oft nur eine. Hier zählt nur deine Zahl, und genau die muss der Agent kennen.',
+          {kick:'Die buchbaren Zeiten.'},
+          'Wann ist die erste Uhrzeit, zu der ein Gast reservieren kann, und wann die letzte? Die letzte liegt nicht bei Küchenschluss. Sie liegt so, dass ein Gast in Ruhe essen kann, bevor die Küche zumacht. Wer um halb zehn bucht und um zehn Küchenschluss hat, ärgert sich zu Recht.',
+          {fig:{id:'5.1-1', src:'m5-5.1-1-tischplan.jpg', bleed:true, ratio:'21/9', label:'Der Tischplan am Pass', note:'Handgezeichneter Tischplan auf Papier, Tischnummern und Platzzahlen, die Terrasse markiert, warmes Licht am Pass.'}},
+          {cards:[
+            {eb:'Fehler 1', nm:'Den Grundriss erfassen statt den Betrieb', p:['Der Achtertisch, der nur an Feiertagen steht, gehört nicht in die Liste. Erfasst wird, was du an einem normalen Abend wirklich stellst.']},
+            {eb:'Fehler 2', nm:'Kombinierte Tische vergessen', p:['Wenn du für sechs Personen zwei Vierer zusammenschiebst, muss das in der Liste stehen. Sonst sagt der Agent einer Sechsergruppe ab, obwohl du Platz hättest.']},
+            {eb:'Fehler 3', nm:'Eine Belegungsdauer für alles', p:['Mittags sitzt ein Gast oft nur eine Stunde, abends zwei. Trag beide Werte ein, sonst verschenkst du mittags Plätze.']},
+            {eb:'Fehler 4', nm:'Die Terrasse ohne Regel', p:['Die Terrasse ist nur buchbar, wenn sie offen ist. Leg fest, wer sie ab wann freigibt, und schalte sie im Winter in der Liste einfach auf nicht buchbar.']}
+          ]}
+        ]},
+
+      {t:'sec', eb:'Schritt 3 · Sonderfälle', h:'Die Fälle, an denen Vertrauen hängt',
+        lead:'Jeder Betrieb hat sie, und dein Agent begegnet ihnen am ersten Tag. Für die meisten hast du längst eine Regel im Kopf. Sie stand nur noch nie irgendwo.',
+        body:[
+          {cards:[
+            {eb:'Feste Auskunft', nm:'Der Gast mit Hund', p:['Hunde erlaubt, drinnen und draußen, Wassernapf steht bereit. Das ist ein Fakt, den der Agent selbst beantworten darf.']},
+            {eb:'Feste Auskunft', nm:'Der Kinderwagen', p:['Zwei Hochstühle, Platz für Kinderwagen nur an Tisch 4 und 5. Steht es im Steckbrief, gibt der Agent die richtige Antwort und schlägt den passenden Tisch vor.']},
+            {eb:'Gesperrt', nm:'Der Feiertag', p:['Heiligabend geschlossen, Silvester nur Menü. Gesperrte Tage stehen in einer eigenen Liste, damit der Agent dort nie normal bucht.']},
+            {eb:'Geht an dich', nm:'Die große Gruppe', p:['Zwölf Personen am Freitag, mit Menüwunsch. Hier willst du selbst entscheiden, ob Küche und Service das schaffen.']},
+            {eb:'Notiz', nm:'Der Stammgast', p:['Sitzt immer am Fenster. Der Agent notiert den Wunsch. Ob der Fenstertisch frei ist, sagt ihm die Datenbank.']},
+            {eb:'Notiz', nm:'Die Allergie', p:['Sagt ein Gast von sich aus, dass jemand eine Nussallergie hat, notiert der Agent das für die Küche. Er fragt nie danach. Warum, klären wir in der Lektion zum Datenschutz.']}
+          ], cols:3},
+          'Schreib hinter jeden deiner Fälle, was heute passiert. Und dann entscheidest du für jeden einzeln: Ist das eine feste Auskunft, die der Agent geben darf, ein gesperrter Tag, eine Notiz für dein Team oder etwas, das ein Mensch klärt? Mehr Kategorien braucht es nicht.'
+        ]},
+
+      {t:'sec', eb:'Schritt 4 · Die Grenze', h:'Was darf der Agent allein?',
+        lead:'Das ist die wichtigste Entscheidung dieser Lektion. Ich gebe dir meine Empfehlung als Startpunkt, und du passt sie an deinen Betrieb an.',
+        body:[
+          'Der Agent entscheidet allein, wenn drei Dinge zusammenkommen. Die Gruppe liegt in deiner Standardgröße, zum Beispiel bis sechs Personen. Der Wunschtermin liegt in deinen buchbaren Zeiten und an keinem gesperrten Tag. Und die Datenbank meldet einen freien Tisch. Alles andere nimmt er auf, sagt dem Gast ehrlich, bis wann sich jemand meldet, und gibt an einen Menschen ab. <b>Beschwerden gehen immer an einen Menschen</b>, ohne Ausnahme.',
+          {calc:'grenze'},
+          {merk:{p:'Eng starten, mit Erfahrung weiten. Ein Agent, der eine Gruppe von zwanzig auf einen Dienstag legt, an dem nur eine Servicekraft da ist, schadet dir mehr als zehn verpasste Anrufe.'}},
+          'Geweitet wird später, und zwar nach Beleg und nicht nach Gefühl. Ab dem ersten Testtag schreibt der Agent jedes Gespräch in ein Log. Siehst du dort Fälle, die er abgegeben hat, obwohl er sie hätte lösen können, schiebst du die Grenze ein Stück weiter. Wie das läuft, zeige ich dir in der Lektion zur Schattenwoche.'
+        ]},
+
+      {t:'sec', eb:'Das Ergebnis', h:'Dein Prozess-Steckbrief',
+        lead:'Alles aus dieser Stunde kommt auf eine Seite. Leg sie in Notion an, am besten direkt in der Operations Area deiner Vorlage, dann liegt sie neben den Datenbanken, um die es geht.',
+        body:[
+          {table:{title:'Die Felder und wohin sie später wandern', head:['Feld','Beispiel','wird im System-Prompt zu'], rows:[
+            ['Name, Stadt, Adresse','Hafenblick, Hamburg, Elbstraße 12','{{RESTAURANT_NAME}} · {{STADT}} · {{ADRESSE}}'],
+            ['Anrede','per Du','{{ANREDE_FORM}}'],
+            ['Öffnungszeiten','Di bis Sa, 17 bis 23 Uhr','{{OEFFNUNGSZEITEN}}'],
+            ['Ruhetage','Sonntag, Montag','{{RUHETAGE}}'],
+            ['Küchenschluss','22 Uhr','{{KUECHENSCHLUSS}}'],
+            ['Belegungsdauer','120 Minuten','{{BELEGUNGSDAUER}}'],
+            ['Allein buchen','1 bis 6 Personen','{{MIN_PERSONEN}} · {{MAX_PERSONEN}}'],
+            ['Gesperrte Tage','24.12., 31.12., Betriebsferien','{{GESPERRTE_TAGE}}'],
+            ['Feste Auskünfte','Hunde erlaubt, zwei Hochstühle, kein Parkplatz','{{BESONDERHEITEN}}'],
+            ['Übergabe an','Lena, Restaurantleitung','{{ESKALATIONS_PERSON}}'],
+            ['Rückmeldung bis','am selben Tag, 18 Uhr','{{RUECKMELDE_FRIST}}'],
+            ['Ton','herzlich, kurz, hanseatisch','{{TON_BESCHREIBUNG}}'],
+            ['Datenschutz-Link','deine Website /datenschutz','{{DATENSCHUTZ_LINK}}'],
+            ['Löschfrist','legst du in Lektion 5.8 fest','Lösch-Routine']],
+            foot:'Die Tische selbst stehen nicht im Prompt. Sie leben in der Datenbank, damit eine Änderung sofort gilt.'}},
+          {cmd:{label:'Vorlage zum Kopieren · Prozess-Steckbrief', text:true, code:
+'PROZESS-STECKBRIEF RESERVIERUNGEN\n\nBetrieb: \nStadt und Adresse: \nAnrede der Gäste (Du oder Sie): \nTon in drei Worten: \n\nÖffnungszeiten je Wochentag: \nRuhetage: \nKüchenschluss: \nErste und letzte buchbare Uhrzeit (mittags / abends): \nBelegungsdauer pro Tisch in Minuten (mittags / abends): \n\nTische (Name, Plätze, Zone, kombinierbar mit): \n- \n\nGesperrte Tage (Feiertage, Events, Betriebsferien): \n\nFeste Auskünfte, die der Agent geben darf (Hunde, Kinder, Barrierefreiheit, Parken): \n\nDer Agent bucht allein: von ___ bis ___ Personen, in den buchbaren Zeiten, wenn die Datenbank einen freien Tisch meldet.\nGeht immer an einen Menschen: größere Gruppen, Sonderwünsche, Beschwerden, jede Unsicherheit.\nÜbergabe an (Name): \nRückmeldung an den Gast bis: \n\nKanäle heute (Kanal, pro Woche, was passiert): \n- \n\nLink zur Datenschutzerklärung: \nLöschfrist für Gästedaten (Lektion 5.8): '}},
+          'Ein Satz noch, warum diese Stunde so viel wert ist. Der Steckbrief ist keine Vorarbeit, die wir später wegwerfen. In Lektion 5.4 setzen wir ihn fast wortwörtlich in den System-Prompt ein, das ist das Regelwerk, nach dem dein Agent arbeitet.'
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Eine Stunde,', animGold:'vier Blöcke',
+        steps:['Kanäle zählen','Tische erfassen','Sonderfälle sammeln','Grenze ziehen'],
+        intro:'So gehe ich mit einem Betrieb durch den Steckbrief, am liebsten an einem ruhigen Vormittag und zusammen mit der Person, die heute die meisten Reservierungen annimmt.',
+        points:[
+          'Fang beim <b>Zählen</b> an, nicht beim Planen. Eine Woche echte Zahlen sagt dir mehr als jede Schätzung.',
+          'Erfass die Tische so, wie du sie an einem <b>normalen Abend</b> stellst, mit Belegungsdauer für mittags und abends.',
+          'Sammle die Sonderfälle mit deinem Team. Die besten Regeln stecken in den Köpfen der Leute, die am Telefon stehen.',
+          'Zieh die Grenze lieber <b>zu eng</b> als zu weit. Weiten geht später in einer Minute, verlorenes Vertrauen holst du erst in Wochen zurück.'
+        ]},
+
+      {t:'learn', items:[
+        'Du hast alle <b>Kanäle</b> erfasst und weißt, welcher heute am häufigsten ins Leere läuft.',
+        'Du hast deine <b>Kapazität</b> als Daten aufgeschrieben, mit Belegungsdauer und buchbaren Zeiten.',
+        'Du hast deine <b>Sonderfälle</b> sortiert: feste Auskunft, gesperrter Tag, Notiz oder Sache für einen Menschen.',
+        'Du hast die <b>Grenze</b> gezogen und weißt, warum sie eng startet und nach Beleg geweitet wird.'
+      ], next:{href:'/lektionen/die-zentrale', label:'Weiter: Die Zentrale'}}
+    ]
+  });
+  /* ======================= L5.3 · Ist ein Tisch frei? ======================= */
+  LEK.push({
+    key:'l53', re:/\/(?:lektionen\/)?verfuegbarkeit-und-buchung$/,
+    eyebrow:'L 5.3', alt:'Verfügbarkeit prüfen und buchen',
+    title:'Ist ein Tisch <span class="ts-gold">frei</span>?',
+    intro:[
+      'Die Zentrale steht, aber dein Agent hätte noch nichts, worauf er schauen kann. In dieser Lektion bekommt er sein Gedächtnis: die Reservierungs-Datenbanken in der Operations Area deiner Backoffice-Vorlage. Nutzt du schon ein Reservierungssystem, erfährst du hier auch, ob es sich anbinden lässt.',
+      'Wir schauen uns an, was in ihnen steht, was du einmal einträgst und was danach von allein entsteht. Und wir bauen die zwei Werkzeuge, mit denen der Agent später fragt und bucht. Ab dieser Lektion gibt es in deinem Betrieb <b>eine einzige Stelle</b>, die weiß, welcher Tisch wann frei ist.'
+    ],
+    blocks:[
+      {t:'anim', key:'belegung', eb:'So rechnet das System', h:'Passende Tische minus <span class="ts-gold">belegte</span>.',
+        sub:'Drei Schritte, und am Ende steht entweder ein Tisch oder zwei Alternativen. Geraten wird an keiner Stelle.',
+        cap:'Beispielbelegung eines Freitagabends, Belegung 120 Minuten. Über „Anfrage 1“ und „Anfrage 2“ spielst du beide einzeln ab.'},
+
+      {t:'sec', eb:'Die Grundsatzfrage', h:'Fremdes System oder dein System?',
+        body:[
+          'Nutzt du schon ein Reservierungssystem, ist der erste Gedanke natürlich, den Agenten dort buchen zu lassen. Prüf das an einer einzigen Frage: Hat dein System eine offene Schnittstelle, über die ein fremdes Werkzeug Verfügbarkeit lesen und Buchungen schreiben darf, und bekommst du als Betrieb den Zugang dazu?',
+          {table:{title:'Schnittstellen der verbreiteten Systeme', head:['System','offene Schnittstelle','wer den Zugang gibt'], rows:[
+            ['aleno','ja, mit Verfügbarkeit und Reservierungen','du selbst, im eigenen Dashboard<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>'],
+            ['TheFork Manager','ja, mit Echtzeit-Verfügbarkeit','nur nach Freigabe durch das Integrationsteam<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>'],
+            ['SevenRooms','dokumentiert, aber geschlossen','nur für freigeschaltete Betriebe und Partner<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>'],
+            ['Zenchef','keine öffentliche Dokumentation','auf Anfrage, je nach Paket'],
+            ['OpenTable','nur für zugelassene Partner','kein Zugang für eigene Anbindungen<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>']],
+            foot:'Für resmio, Gastronovi und Formitable haben wir keine öffentliche Dokumentation gefunden. Frag dort direkt nach.'}},
+          'Hat dein System eine offene Schnittstelle, ist die Anbindung der kürzeste Weg, und die Werkzeuge unten zeigen auf dein System statt auf Notion. Gibt es keine, kommt dein Agent nicht an deine Belegung. Dann gilt, was wir in Lektion 5.0 besprochen haben: Wir halten die Wahrheit dort, wo sie dir gehört.'
+        ]},
+
+      {t:'sec', eb:'Wofür sie da sind', h:'Drei Datenbanken in deiner Vorlage',
+        lead:'In der Operations Area deiner Backoffice-Vorlage liegen drei leere Datenbanken bereit. Du musst nichts nachbauen, du füllst sie.',
+        body:[
+          {cards:[
+            {eb:'Füllst du einmal', nm:'Tische &amp; Zeitfenster', p:['Eine Zeile pro Tisch: Name, Plätze, Zone, mit welchen Tischen er kombinierbar ist und ob er gerade buchbar ist. Dazu die Servicezeiten aus deinem Steckbrief.']},
+            {eb:'Das Arbeitstier', nm:'Reservierungen', p:['Eine Zeile pro Buchung: Gast, Telefonnummer, Datum, Uhrzeit, Personen, Tisch, Status, Kanal und eine kurze Notiz. Hier schreibt der Agent, hier schaust du.']},
+            {eb:'Das Protokoll', nm:'Agenten-Log', p:['Eine Zeile pro Gespräch: wann, über welchen Kanal, was der Gast wollte und wie es ausging. Darin liest du in der Schattenwoche mit.']}
+          ], cols:3},
+          {table:{title:'Reservierungen · die Felder', head:['Feld','Art','wozu'], rows:[
+            ['Gastname','Titel','auf diesen Namen läuft die Buchung'],
+            ['Telefonnummer','Telefon','Erinnerung, Rückfrage, Wiedererkennen'],
+            ['Datum','Datum','der Besuchstag'],
+            ['Uhrzeit','Text, Format 19:00','Beginn der Belegung'],
+            ['Personen','Zahl','Gruppengröße'],
+            ['Tisch','Verknüpfung zu Tische &amp; Zeitfenster','der vergebene Tisch'],
+            ['Status','Auswahl','Angefragt, Bestätigt, Warteliste, Storniert, No-Show'],
+            ['Kanal','Auswahl','WhatsApp, Mail, Telefon, Persönlich'],
+            ['Notiz','Text','freiwillige Hinweise des Gastes, kurz'],
+            ['Angelegt am','Erstellt am','automatisch, für Log und Löschfrist']],
+            foot:'So wenige Status wie möglich: Jeder zusätzliche ist eine Regel, die der Agent und dein Team verstehen müssen.'}},
+          {kick:'Deine Vorlage ist älter?'},
+          'Fehlen die drei Datenbanken in deiner Operations Area, weil du die Vorlage vor November 2026 geholt hast, lässt du sie von Claude Code anlegen. Den Anschluss an Notion kennst du aus Modul 4.',
+          {cmd:{label:'Rückfallweg · die drei Datenbanken anlegen lassen', text:true, code:'Lege in meinem Notion-Workspace im Bereich Operations Area drei Datenbanken an: "Tische & Zeitfenster" (Tischname, Plätze, Zone, Kombinierbar mit als Verknüpfung auf sich selbst, Buchbar als Häkchen, Servicefenster als Text), "Reservierungen" (Gastname, Telefonnummer, Datum, Uhrzeit als Text im Format 19:00, Personen, Tisch als Verknüpfung zu Tische & Zeitfenster, Status mit Angefragt, Bestätigt, Warteliste, Storniert, No-Show, Kanal mit WhatsApp, Mail, Telefon, Persönlich, Notiz, Angelegt am) und "Agenten-Log" (Zeitpunkt, Kanal, Anliegen, Ergebnis mit Gebucht, Alternative angeboten, Übergeben, Abgebrochen, Reservierung als Verknüpfung, Verlauf). Zeig mir den Aufbau, bevor du ihn anlegst. Ändere nichts an bestehenden Datenbanken.'}},
+          {kick:'Was du einträgst.'},
+          {steps:{items:[
+            'Deine Tische aus dem Steckbrief in <b>Tische &amp; Zeitfenster</b> übertragen, mit Plätzen und Zone.',
+            'Kombinierbare Tische miteinander verknüpfen, zum Beispiel Tisch 4 mit Tisch 5.',
+            'Tische, die gerade nicht buchbar sind, auf nicht buchbar stellen, statt sie zu löschen. Die Terrasse im Winter zum Beispiel.',
+            'Die Reservierungen, die du schon im Buch hast, für die nächsten zwei Wochen nachtragen. Sonst bucht der Agent auf Tische, die längst vergeben sind.']}},
+          {kick:'Was das System daraus macht.'},
+          'In der Vorlage stehen fertige Ansichten bereit: die Reservierungen von heute, sortiert nach Uhrzeit, die Woche im Kalender und eine Liste mit allen offenen Anfragen. Dein Küchenchef sieht am Tablet, wie viele Gäste um sieben kommen, und du siehst am Handy, wer auf der Warteliste steht. Es ist dieselbe Datenbank, in die der Agent schreibt.',
+          {fig:{id:'5.3-1', src:'m5-5.3-1-pass-tablet.jpg', bleed:true, ratio:'21/9', label:'Die Belegung am Pass', note:'Ein Tablet an der Wand neben dem Pass, darauf die Reservierungen des Abends, davor ein Koch, der kurz hinschaut. Warmes Licht, ruhige Küche vor dem Service.'}},
+          {cards:[
+            {eb:'Fehler 1', nm:'Nur die neuen Buchungen eintragen', p:['Fehlen die Reservierungen, die schon im Buch stehen, sieht der Agent leere Tische, die es nicht gibt. Erst nachtragen, dann einschalten.']},
+            {eb:'Fehler 2', nm:'Die Uhrzeit frei formulieren', p:['„Halb acht“ oder „19.30 Uhr“ versteht ein Mensch, die Prüfung nicht. Die Uhrzeit steht immer als 19:30 im Feld.']},
+            {eb:'Fehler 3', nm:'Stornos löschen', p:['Eine abgesagte Reservierung wird auf Storniert gesetzt, nicht gelöscht. Sonst fehlt sie später in deinen Zahlen und im Log.']},
+            {eb:'Fehler 4', nm:'Laufkundschaft vergessen', p:['Setzt du Gäste ohne Reservierung an einen Tisch, trag sie kurz mit Kanal Persönlich ein. Sonst bucht der Agent den Tisch ein zweites Mal.']}
+          ]}
+        ]},
+
+      {t:'sec', eb:'Werkzeug 1', h:'Das Werkzeug, das fragt',
+        lead:'Der Agent schaut nie selbst in deine Datenbank. Er ruft ein Werkzeug auf, einen kleinen Workflow in n8n, der eine einzige Frage beantwortet: Ist am Tag X um Y Uhr ein Tisch für Z Personen frei?',
+        body:[
+          {flow:[
+            {n:'Eingang', t:'Datum, Uhrzeit, Personen', d:'Das ist alles, was der Agent mitgibt.'},
+            {n:'Notion lesen', t:'Alle buchbaren Tische mit genug Plätzen', d:'Aus Tische &amp; Zeitfenster. Kombinierbare Tische zählen zusammen.'},
+            {n:'Notion lesen', t:'Alle bestätigten Buchungen an diesem Tag', d:'Aus Reservierungen, nur Status Bestätigt.'},
+            {n:'Abgleich', t:'Passende minus belegte', d:'Eine Buchung stört nur, wenn sie beginnt, bevor die neue endet, und endet, nachdem die neue beginnt. Die Länge ist deine Belegungsdauer.'},
+            {n:'Antwort', t:'frei: ja mit Tisch, oder frei: nein mit zwei Alternativen', d:'Die Alternativen sind die zwei nächsten freien Uhrzeiten im Viertelstunden-Raster, solange sie in den buchbaren Zeiten liegen.'}
+          ]},
+          'Am Beispiel sieht man es am besten. Am Freitag ist Tisch 4 von 18:30 bis 20:30 gebucht. Kommt eine Anfrage für 19:00 mit zwei Stunden Belegung, also bis 21:00, liegen beide Zeiträume übereinander, Tisch 4 ist belegt. Kommt die Anfrage für 20:30, beginnt sie genau, wenn die andere endet. Tisch 4 ist frei.',
+          {cmd:{label:'Bauauftrag an Claude Code · Werkzeug „verfuegbarkeit_pruefen“', text:true, code:
+'Baue in meiner n8n-Zentrale einen neuen Workflow "verfuegbarkeit_pruefen", den ein AI Agent als Werkzeug aufrufen kann.\n\nEingang: datum (JJJJ-MM-TT), uhrzeit (HH:MM), personen (Zahl).\n\n1. Lies aus der Notion-Datenbank "Tische & Zeitfenster" alle Tische mit Buchbar = ja. Berücksichtige verknüpfte kombinierbare Tische als gemeinsame Kapazität.\n2. Lies aus "Reservierungen" alle Einträge mit Status = Bestätigt und Datum = datum.\n3. Eine Buchung überschneidet sich, wenn ihr Beginn vor dem Ende der Anfrage liegt und ihr Ende nach dem Beginn der Anfrage. Ende = Beginn + 120 Minuten.\n4. Gib zurück: frei (ja/nein), tisch (Name des kleinsten passenden freien Tisches), alternativen (die zwei nächsten freien Uhrzeiten im 15-Minuten-Raster zwischen 17:00 und 21:00, wenn frei = nein).\n\nZeig mir den Workflow, bevor du ihn speicherst. Ändere nichts an anderen Workflows und schreibe nichts in Notion.'}},
+          'Die Belegungsdauer und die buchbaren Zeiten im Auftrag ersetzt du durch die Werte aus deinem Steckbrief. Und der letzte Satz bleibt immer drin. Du kennst das Prinzip aus Modul 4: erst zeigen, dann schreiben.'
+        ]},
+
+      {t:'sec', eb:'Werkzeug 2', h:'Das Werkzeug, das bucht',
+        body:[
+          'Das zweite Werkzeug legt die Reservierung an: eine neue Zeile in Reservierungen mit Status Bestätigt, dem Tisch aus Werkzeug 1 und allen Angaben des Gastes. Bevor es schreibt, fragt es Werkzeug 1 noch einmal. Das klingt doppelt, schützt dich aber vor dem einen Fall, der sonst durchrutscht: Zwei Gäste fragen fast gleichzeitig nach dem letzten Tisch, und beide bekommen ein Ja.',
+          {flow:[
+            {n:'Eingang', t:'Name, Telefon, Datum, Uhrzeit, Personen, Kanal', d:'Bei WhatsApp kommt die Telefonnummer automatisch mit der Nachricht.'},
+            {n:'Gegenprobe', t:'Werkzeug 1 noch einmal fragen', d:'Ist der Tisch inzwischen weg, gibt es kein Ja, sondern die Alternativen.'},
+            {n:'Notion schreiben', t:'Neue Zeile in Reservierungen', d:'Status Bestätigt, Tisch verknüpft, Kanal gesetzt.'},
+            {n:'Antwort', t:'gebucht: ja mit Tisch und Uhrzeit', d:'Damit bestätigt der Agent dem Gast. Die Bestätigung selbst schreibt der Agent in Lektion 5.4.'}
+          ]},
+          {merk:{p:'Keine Zusage ohne Werkzeug-Antwort. Diese Regel steht nicht nur im Regelwerk des Agenten, sie ist verdrahtet: Er hat keinen anderen Weg an deine Belegung.'}},
+          {kick:'Der erste Test, noch ohne Agent.'},
+          'Bevor ein Agent davor sitzt, testest du beide Werkzeuge direkt in n8n. Gib im ersten Werkzeug einen Abend ein, an dem du weißt, was frei ist, und vergleich das Ergebnis mit deinem Buch. Dann buchst du mit dem zweiten Werkzeug eine Probe-Reservierung auf deinen eigenen Namen und schaust, ob die Zeile in Notion erscheint. Stimmt beides, löschst du die Probe wieder, und dein System bucht.'
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Vier Schritte bis zur ersten', animGold:'Buchung',
+        steps:['Tische eintragen','Buch nachtragen','Werkzeuge bauen','Probe buchen'],
+        intro:'Die Reihenfolge ist hier wichtig, weil jedes Werkzeug auf den Daten davor aufsetzt.',
+        points:[
+          'Trag zuerst deine <b>Tische</b> ein, genau so, wie im Steckbrief festgehalten. Kombinationen gleich mit verknüpfen.',
+          'Übertrag die schon bestehenden <b>Reservierungen</b> der nächsten zwei Wochen. Ohne sie rechnet jedes Werkzeug falsch.',
+          'Lass beide <b>Werkzeuge</b> von Claude Code bauen und schau dir jeden Workflow an, bevor er gespeichert wird.',
+          'Buch eine <b>Probe</b> auf deinen Namen, vergleiche mit deinem Buch und lösch die Probe danach wieder.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'aleno, Einführung in die aleno-API','https://knowledge.aleno.me/en/kb/introduction-to-the-aleno-api'],
+        [2,'TheFork, B2B-API','https://docs.thefork.io/B2B-API/introduction'],
+        [3,'SevenRooms, API-Dokumentation','https://api-docs.sevenrooms.com'],
+        [4,'OpenTable, Plattform-Dokumentation (nur für Partner)','https://platform.opentable.com/documentation']
+      ]},
+      {t:'learn', items:[
+        'Du kannst prüfen, ob dein bisheriges System eine <b>offene Schnittstelle</b> hat, und weißt, was du tust, wenn nicht.',
+        'Du kennst die <b>drei Datenbanken</b> deiner Vorlage und füllst sie richtig.',
+        'Du verstehst, wie das System <b>frei</b> berechnet: passende Tische minus überschneidende Buchungen.',
+        'Du hast beide <b>Werkzeuge</b> gebaut und mit einer Probe-Buchung getestet.'
+      ], next:{href:'/lektionen/der-schreib-agent', label:'Weiter: Der Schreib-Agent'}}
+    ]
+  });
+
+  /* ======================= L5.4 · Der Schreib-Agent ======================= */
+  var PROMPT=
+'Du bist der digitale Reservierungs-Assistent von {{RESTAURANT_NAME}} in {{STADT}}.\nDu sprichst mit Gästen per {{KANAL}}. Du bist freundlich, natürlich und kurz.\nAnrede: {{ANREDE_FORM}}. Du gibst dich nie als Mensch aus. In deiner ersten\nNachricht sagst du, dass du der digitale Assistent von {{RESTAURANT_NAME}} bist\nund jederzeit ein Mensch aus dem Team übernehmen kann.\n\nDEINE AUFGABE\nDu nimmst Reservierungsanfragen an, prüfst die Verfügbarkeit und buchst.\nDafür brauchst du genau diese Angaben: Datum, Uhrzeit, Personenzahl, Name.\nDie Telefonnummer kommt bei WhatsApp automatisch mit, bei Mail fragst du\nnach ihr. Fehlt etwas, fragst du nach, immer nur eine Frage pro Nachricht.\n\nFESTE FAKTEN ZU DEINEM BETRIEB\n- Öffnungszeiten: {{OEFFNUNGSZEITEN}}\n- Ruhetage: {{RUHETAGE}}\n- Küchenschluss: {{KUECHENSCHLUSS}}\n- Belegungsdauer pro Tisch: {{BELEGUNGSDAUER}} Minuten\n- Adresse: {{ADRESSE}}\n- Feste Auskünfte: {{BESONDERHEITEN}}\nFragen zu diesen Fakten beantwortest du direkt. Bei allem, was hier nicht\nsteht, sagst du ehrlich, dass du es klären lässt, und übergibst.\n\nDIE VERFÜGBARKEITS-REGEL, OHNE AUSNAHME\nDu nennst freie Tische, Uhrzeiten oder Kapazitäten ausschließlich auf Basis\nder Antwort des Werkzeugs "verfuegbarkeit_pruefen". Ohne Werkzeug-Antwort\ngibt es keine Zusage. Ist das Werkzeug nicht erreichbar oder die Antwort\nunklar, schreibst du: "Das kann ich gerade nicht sicher prüfen. Ich habe\ndeine Anfrage notiert, du bekommst bis {{RUECKMELDE_FRIST}} eine Rückmeldung."\nDann rufst du "an_mensch_uebergeben" auf. Du rätst nie.\n\nDU BUCHST ALLEIN, WENN ALLE DREI PUNKTE ERFÜLLT SIND\n1. Personenzahl zwischen {{MIN_PERSONEN}} und {{MAX_PERSONEN}}.\n2. Termin in den buchbaren Zeiten, kein Ruhetag, nicht in {{GESPERRTE_TAGE}}.\n3. Das Werkzeug meldet einen freien Tisch.\nDann buchst du mit "reservierung_anlegen" und wiederholst Datum, Uhrzeit,\nPersonenzahl und Namen als Bestätigung.\n\nDU ÜBERGIBST IMMER MIT "an_mensch_uebergeben", BEI\n- Gruppen über {{MAX_PERSONEN}} Personen,\n- Sonderwünschen jenseits der festen Fakten (Menü, Deko, private Feiern),\n- Beschwerden jeder Art. Du entschuldigst dich kurz und sagst, dass sich\n  {{ESKALATIONS_PERSON}} bis {{RUECKMELDE_FRIST}} meldet,\n- jeder Unsicherheit über das, was der Gast will.\nBei der Übergabe fasst du alles zusammen, was der Gast schon gesagt hat.\n\nÄNDERUNGEN UND ABSAGEN\nBei einer Änderung suchst du die Reservierung über Name und Telefonnummer,\nprüfst die neue Verfügbarkeit mit dem Werkzeug und buchst um. Bei einer\nAbsage bedankst du dich, setzt den Status auf Storniert und fragst nicht\nnach Gründen.\n\nDATENSCHUTZ\n- Du fragst nur nach den Angaben oben. Keine Adresse, kein Geburtsdatum.\n- Du fragst nie nach Allergien oder Gesundheit. Sagt ein Gast so etwas von\n  sich aus, notierst du es wortknapp im Notizfeld für die Küche.\n- Fragen zur Datenverarbeitung beantwortest du mit dem Hinweis auf\n  {{DATENSCHUTZ_LINK}} und bietest den Kontakt zu {{ESKALATIONS_PERSON}} an.\n\nSTIL\n- Höchstens drei Sätze plus eine Rückfrage. In Mails etwas ausführlicher,\n  mit Anrede und Gruß.\n- Ton: {{TON_BESCHREIBUNG}}.\n- Keine Emojis, außer der Gast benutzt selbst welche.\n- Jede Buchung endet mit der Bestätigungszeile und dem Hinweis, dass am\n  Vortag eine kurze Erinnerung kommt.';
+
+  LEK.push({
+    key:'l54', re:/\/(?:lektionen\/)?der-schreib-agent$/,
+    eyebrow:'L 5.4', alt:'Der Schreib-Agent für Mail und WhatsApp',
+    title:'Der Schreib-<span class="ts-gold">Agent</span>',
+    intro:[
+      'Jetzt bekommt dein Agent sein Regelwerk und seine ersten zwei Türen. Wir fangen bewusst mit den geschriebenen Kanälen an, mit <b>Mail und WhatsApp</b>. Dort ist jedes Wort nachlesbar, du siehst genau, was der Agent verstanden und geantwortet hat, und ein Fehler fällt sofort auf.',
+      'Für den Agenten macht es keinen Unterschied, ob ein Text aus dem Postfach kommt oder aus dem Messenger. Er bekommt einen Text, fragt dazwischen das Werkzeug und schreibt einen zurück. Also bauen wir einen Agenten und hängen zwei Türen daran. Am Ende dieser Lektion schreibst du deiner eigenen Restaurant-Nummer und bekommst eine echte Buchung.'
+    ],
+    blocks:[
+      {t:'anim', key:'gespraech', eb:'Von innen gesehen', h:'Ein Gespräch, und was der Agent dabei <span class="ts-gold">tut</span>.',
+        sub:'Im Chat siehst du, was der Gast liest, daneben die Schritte, die der Agent dabei geht. Schalte auf „Werkzeug fällt aus“, um zu sehen, was er dann sagt.',
+        cap:'Beispielgespräch mit einem erfundenen Betrieb.'},
+
+      {t:'sec', eb:'Das Regelwerk', h:'Dein Steckbrief als System-Prompt',
+        body:[
+          'Der System-Prompt ist die Anweisung, die der Agent vor jedem Gespräch liest. Er ist für den Agenten auf deinem Server, was die CLAUDE.md aus Modul 3 für Claude Code ist: das, woran er sich hält, egal was der Gast schreibt. Wir schreiben ihn nicht aus dem Kopf, wir übertragen deinen Steckbrief aus Lektion 5.1. Jede Zeile hat dort einen Platzhalter, und hier setzt du den Wert ein.',
+          {cmd:{label:'System-Prompt · zum Kopieren, Platzhalter mit deinen Steckbrief-Werten ersetzen', code:PROMPT}},
+          {kick:'Die Regel, an der alles hängt.'},
+          'Ein Sprachmodell will antworten, das liegt in seiner Natur. Fragst du es nach einem freien Tisch und es kann nicht nachsehen, besteht die Gefahr, dass es freundlich und überzeugend einen freien Tisch behauptet. Dann stehen am Samstag sechs Personen vor deiner vollen Tür. Deshalb steht im Prompt die Verfügbarkeits-Regel, und deshalb hat der Agent in Lektion 5.3 gar keinen anderen Weg an die Belegung als das Werkzeug. Stell die Animation oben auf „Werkzeug fällt aus“, dann siehst du die ehrliche Antwort.',
+          {kick:'Der KI-Hinweis gehört in die erste Nachricht.'},
+          'Seit dem 2. August 2026 muss ein Mensch erfahren, dass er mit einer KI schreibt oder spricht, spätestens bei der ersten Nachricht<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Deshalb steht das im Prompt ganz oben. Bei Mails empfiehlt die EU-Kommission einen Hinweis oben in der Nachricht, den setzen wir gleich in der Mail-Tür. Was das rechtlich für dich bedeutet, klären wir in Lektion 5.8.'
+        ]},
+
+      {t:'sec', eb:'Das Gehirn', h:'Welches Claude für deinen Agenten?',
+        body:[
+          'Der Agent nutzt Claude über die API, also nicht über dein Abo, sondern nach Verbrauch. In Modul 3 habe ich dir gesagt, dass wir die Schnittstelle erst beim Reservierungs-Agenten brauchen. Jetzt ist es so weit. Du legst in der Claude-Konsole für Entwickler einen Schlüssel an und hinterlegst eine Zahlungsart. Abgerechnet wird nach Token, das sind Wortstücke, ein bisschen wie eine Taxiuhr, die mitläuft, solange gelesen und geschrieben wird.',
+          {table:{title:'Die zwei sinnvollen Modelle, Preise je eine Million Token', head:['Modell','Lesen','Schreiben','wofür'], rows:[
+            ['Claude Sonnet 5.5','2 $','10 $','der sichere Start, hält sich zuverlässig an Regeln und Werkzeuge'],
+            ['Claude Haiku 5.5','0,10 $','0,50 $','deutlich günstiger, wenn das Log zeigt, dass er sauber arbeitet']],
+            foot:'Preise laut Anthropic<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>. Seit den Modellen ab 4.7 zählt ein neues Verfahren für denselben Text rund 30 Prozent mehr Token.'}},
+          'Was heißt das für ein Gespräch? Ein Rechenbeispiel mit großzügigen Annahmen: Eine Reservierung braucht vier Nachrichten, der Agent liest dabei jedes Mal sein Regelwerk und den bisherigen Verlauf mit, zusammen rund zehntausend Token, und schreibt rund sechshundert. Mit Sonnet 5.5 kostet das Gespräch damit rund zweieinhalb US-Cent, mit Haiku 5.5 rund ein Zehntel Cent. Bei dreihundert Gesprächen im Monat sind das knapp acht US-Dollar oder vierzig Cent. Deine echte Zahl siehst du nach der ersten Woche in der Konsole.',
+          {merk:{p:'Starte mit Sonnet. Wechsle auf Haiku, wenn dir das Log zwei Wochen lang keinen Fehler zeigt. Gespart wird erst, wenn es läuft.'}}
+        ]},
+
+      {t:'sec', eb:'Tür 1', h:'Die Mail-Tür',
+        body:[
+          'Die Mail-Tür brauchst du auf jeden Fall. Über das Kontaktformular deiner Website und die Adresse in deinem Google-Profil kommen Anfragen, ob du willst oder nicht, und sie bleiben oft am längsten liegen. Leg dir dafür eine eigene Adresse an, zum Beispiel reservierung@deinrestaurant.de. So mischt sich nichts mit Lieferanten-Mails, und der Agent liest nur, was für ihn bestimmt ist.',
+          {flow:[
+            {n:'Auslöser', t:'Neue Mail im Reservierungs-Postfach', d:'Der Mail-Auslöser von n8n schaut regelmäßig ins Postfach.'},
+            {n:'AI Agent', t:'Claude mit deinem System-Prompt', d:'Kanal = Mail. Werkzeuge: verfuegbarkeit_pruefen, reservierung_anlegen, an_mensch_uebergeben. Gedächtnis je Absenderadresse.'},
+            {n:'Log', t:'Eine Zeile im Agenten-Log', d:'Kanal, Anliegen, Ergebnis, kurze Zusammenfassung.'},
+            {n:'Antwort', t:'Mail zurück an den Gast', d:'Mit einer Zeile ganz oben: „Diese Antwort hat der digitale Reservierungs-Assistent von Hafenblick geschrieben.“'}
+          ]}
+        ]},
+
+      {t:'sec', eb:'Tür 2', h:'Die WhatsApp-Tür',
+        body:[
+          'Die WhatsApp-Tür lohnt sich, sobald deine Gäste dir ohnehin schreiben. Wir nutzen den offiziellen Weg von Meta, die <b>WhatsApp Business Platform</b> mit der Cloud API. Damit darf dein System unter deiner Nummer Nachrichten empfangen und senden. Die normale WhatsApp-Business-App auf dem Handy reicht dafür nicht.',
+          {flow:[
+            {n:'01', t:'Meta-Konto und App', d:'Unter Meta für Entwickler eine App anlegen, mit deinem Business-Portfolio verbinden und das Produkt WhatsApp hinzufügen.'},
+            {n:'02', t:'Deine Nummer registrieren', d:'Eine Telefonnummer für die Plattform registrieren. Nutzt du sie schon in der WhatsApp-Business-App, schau dir im Video an, worauf du achten musst, bevor du sie umziehst.'},
+            {n:'03', t:'Profil ausfüllen', d:'Name, Logo, Adresse, und in der Beschreibung ein Satz: Reservierungen beantwortet unser digitaler Assistent, ein Mensch übernimmt jederzeit.'},
+            {n:'04', t:'Zentrale eintragen', d:'Den WhatsApp-Auslöser in n8n anlegen, seine Adresse bei Meta als Webhook eintragen und die Zugangsdaten in n8n hinterlegen.'},
+            {n:'05', t:'Den Workflow verbinden', d:'Derselbe AI Agent wie bei der Mail, mit Kanal = WhatsApp und kürzeren Antworten.'}
+          ]},
+          {kick:'Darf ein Restaurant das überhaupt?'},
+          'Meta hat Anfang 2026 die Regeln verschärft: KI-Anbieter dürfen WhatsApp nicht nutzen, wenn die KI selbst das Produkt ist. Erlaubt bleibt KI, die nur ein Hilfsmittel ist<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>. Du verkaufst Tische und Abende, keine KI. Nach dem Wortlaut der Bedingungen fällt dein Reservierungs-Assistent deshalb nicht unter das Verbot, die Entscheidung im Einzelfall behält sich Meta aber vor.',
+          {kick:'Was WhatsApp kostet.'},
+          'Seit Oktober 2026 rechnet Meta neu ab. Antworten auf eine Nachricht des Gastes sind bis tausend Stück im Monat und Nummer frei, danach kostet jede in Deutschland 0,0456 €. Nachrichten, die du von dir aus mit einer Vorlage schickst, zum Beispiel die Erinnerung am Vortag, kosten immer 0,0456 €<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>. Für die meisten Betriebe bleibt der Agent selbst damit im freien Bereich, bezahlt wird vor allem die Erinnerung.'
+        ]},
+
+      {t:'sec', eb:'Der Moment', h:'Die erste echte Buchung',
+        body:[
+          'Und dann kommt der Moment, für den sich die Abende gelohnt haben. Du schreibst von deinem privaten Handy an die Nummer deines Restaurants: „Habt ihr Freitag um 19 Uhr was für vier?“ Der Agent stellt sich vor, fragt das Werkzeug, findet einen Tisch, fragt nach deinem Namen und bucht. In deinem Backoffice erscheint die Zeile, während die Bestätigung auf deinem Handy aufploppt.',
+          {chat:[['g','Habt ihr Freitag um 19 Uhr was für vier?'],['a','Hallo, hier ist der digitale Reservierungs-Assistent vom Hafenblick, ein Mensch aus dem Team kann jederzeit übernehmen. Freitag, 6. November, 19 Uhr für vier Personen ist frei. Auf welchen Namen darf ich reservieren?'],['g','Auf Lindner.'],['a','Gebucht: Freitag, 6. November, 19 Uhr, vier Personen auf Lindner. Am Vortag melde ich mich kurz zur Erinnerung. Bis Freitag!']]},
+          {steps:{eb:'Jetzt du · die ersten fünf Tests',items:[
+            'Eine einfache Buchung für morgen. Stimmt die Zeile in Notion mit der Bestätigung überein?',
+            'Eine Anfrage an einem Abend, von dem du weißt, dass er voll ist. Kommen zwei Alternativen?',
+            'Eine Gruppe über deiner Grenze. Kommt die Übergabe bei dir an, mit allen Angaben?',
+            'Die Frage nach deinen Öffnungszeiten. Antwortet er richtig, ohne das Werkzeug zu fragen?',
+            'Schalte das Werkzeug in n8n kurz ab und frag erneut. Sagt er ehrlich, dass er nicht prüfen kann?']}},
+          'Das vollständige Testprotokoll mit allen Härtefällen kommt in Lektion 5.7. Bis dahin spricht der Agent nur mit dir und deinem Team.'
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Ein Agent,', animGold:'zwei Türen',
+        steps:['Prompt füllen','Modell wählen','Mail-Tür bauen','WhatsApp-Tür bauen'],
+        intro:'In dieser Reihenfolge baue ich den Schreib-Agenten. Die Mail-Tür zuerst, weil sie ohne Meta-Freigaben funktioniert und du sofort testen kannst.',
+        points:[
+          'Füll den <b>System-Prompt</b> vollständig aus dem Steckbrief. Kein Platzhalter darf übrig bleiben.',
+          'Starte mit <b>Sonnet 5.5</b> und leg in der Konsole ein Monatslimit fest, damit dich nichts überrascht.',
+          'Bau die <b>Mail-Tür</b> mit eigener Reservierungsadresse und teste sie mit deinem privaten Postfach.',
+          'Richte danach <b>WhatsApp</b> ein und schreib die erste Nachricht von deinem eigenen Handy.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'Verordnung (EU) 2024/1689, Art. 50, und Leitlinien der Kommission vom 20.07.2026','https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems'],
+        [2,'Anthropic, Preise der Modelle','https://docs.claude.com/en/docs/about-claude/pricing'],
+        [3,'Meta Terms for WhatsApp Business Platform, Abschnitt 4.7, Stand 23.09.2026','https://www.whatsapp.com/legal/business-solution-terms'],
+        [4,'Meta, WhatsApp Business Platform Pricing, gültig ab 01.10.2026','https://developers.facebook.com/docs/whatsapp/pricing']
+      ]},
+      {t:'learn', items:[
+        'Du hast deinen Steckbrief in einen vollständigen <b>System-Prompt</b> übertragen.',
+        'Du kennst die <b>Verfügbarkeits-Regel</b> und hast gesehen, was der Agent ohne Werkzeug-Antwort sagt.',
+        'Du hast die <b>Mail-Tür</b> und die <b>WhatsApp-Tür</b> an denselben Agenten gehängt.',
+        'Du weißt, was ein Gespräch mit <b>Sonnet</b> und mit <b>Haiku</b> ungefähr kostet.'
+      ], next:{href:'/lektionen/der-telefon-agent', label:'Weiter: Der Telefon-Agent'}}
+    ]
+  });
+  /* Startwerte Telefon-Rechner (Stand 01.11.2026, Quellen in L5.5) */
+  var __P={w1g:119, w1i:1000, w1x:0.15, w2m:0.15, w2r:0,
+    note:'Startwerte: Weg 1 nach fonio Solo (119 € im Monat bei monatlicher Zahlung, 1.000 Minuten inklusive, danach 0,15 € je Minute), Weg 2 nach Famulor ohne Grundgebühr (0,15 € je Minute). Beide Preise netto, Stand 1. November 2026. Trag die Preise deines Anbieters ein.'};
+
+  /* Testprotokoll L5.7 (Fall, erwartetes Ergebnis) */
+  var __TESTS=[
+    ['Einfache Buchung für morgen, 19 Uhr, zwei Personen','Buchung, Bestätigung, die Zeile in Notion stimmt mit der Bestätigung überein'],
+    ['Buchung in zwei Wochen für vier Personen','das richtige Datum in der Datenbank, nicht das von heute'],
+    ['Frage nach den Öffnungszeiten','richtige Antwort ohne Werkzeug-Aufruf'],
+    ['Erste Nachricht eines neuen Gastes','der Agent sagt, dass er der digitale Assistent ist und ein Mensch übernehmen kann'],
+    ['Ausgebuchter Abend','keine Zusage, genau zwei Alternativen'],
+    ['Gruppe über deiner Grenze','keine Buchung, Übergabe mit allen Angaben bei der zuständigen Person'],
+    ['Anfrage am Ruhetag','freundliche Absage und der nächste offene Tag'],
+    ['Anfrage an einem gesperrten Tag','wie am Ruhetag'],
+    ['„So gegen acht“','der Agent fragt nach der genauen Uhrzeit, er rät nicht'],
+    ['Uhrzeit nach der letzten buchbaren Zeit','Absage und die letzte mögliche Uhrzeit'],
+    ['Änderung von vier auf sechs Personen','Verfügbarkeit neu geprüft, alte Buchung angepasst, keine zweite Zeile'],
+    ['Absage','Status Storniert, der Tisch ist sofort wieder frei'],
+    ['Zwei Anfragen fast gleichzeitig auf den letzten Tisch, von zwei Handys','genau eine Buchung, der zweite Gast bekommt Alternativen'],
+    ['Anfrage auf Englisch','Antwort auf Englisch, dieselben Regeln'],
+    ['Beschwerde: „Letztes Mal war das Essen kalt“','keine Diskussion, kurze Entschuldigung, Übergabe'],
+    ['Gast nennt von sich aus eine Allergie','kurze Notiz für die Küche, keine Nachfrage'],
+    ['Frage nach dem Datenschutz','Hinweis auf die Datenschutzerklärung und Kontaktangebot'],
+    ['Werkzeug abgeschaltet','der Agent sagt ehrlich, dass er nicht prüfen kann, nimmt auf, übergibt, keine Zusage'],
+    ['Unsinn: „Tisch für null Personen gestern“','höfliche Rückfrage statt Buchung'],
+    ['Mail-Anfrage über das Kontaktformular','Antwort per Mail, mit dem KI-Hinweis oben'],
+    ['Telefon: „Mitarbeiter!“','sofortige Weiterleitung oder Rückrufnotiz, ohne Gegenrede'],
+    ['Erinnerung: Probe-Buchung für morgen, 17 Uhr abwarten','die Erinnerung kommt an, „Absagen“ gibt den Tisch frei'],
+    ['Lösch-Routine im Probelauf mit Testdaten','nur Einträge älter als die Frist sind betroffen, die Zahlen bleiben']
+  ];
+
+  /* ======================= L5.5 · Der Telefon-Agent ======================= */
+  LEK.push({
+    key:'l55', re:/\/(?:lektionen\/)?der-telefon-agent$/,
+    eyebrow:'L 5.5', alt:'Der Telefon-Agent',
+    title:'Der Telefon-<span class="ts-gold">Agent</span>',
+    intro:[
+      'Jetzt zum Kanal, mit dem alles angefangen hat: dem Telefon, das freitags um halb acht ins Leere klingelt. Sprache ist für einen Agenten schwerer als Text. Er muss sofort verstehen, was jemand sagt, auch mit Küchenlärm im Hintergrund oder Dialekt, egal ob der Anrufer langsam spricht oder schnell.',
+      'Die Technik ist 2026 gut geworden, trotzdem entscheiden wir hier bewusst. Es gibt <b>drei Wege</b> ans Telefon, einen schnellen, einen, der an deine Zentrale anschließt, und einen ganz schlanken. Welcher passt, rechnest du am Ende dieser Lektion mit deinen eigenen Zahlen aus.'
+    ],
+    blocks:[
+      {t:'anim', key:'stimme', eb:'Was am Telefon passiert', h:'Aus der Stimme wird eine <span class="ts-gold">Zeile</span>.',
+        sub:'Zuhören, verstehen, bei Unsicherheit nachfragen, dann buchen. Achte auf das Feld mit der Uhrzeit.',
+        cap:'Beispielanruf, der Betrieb ist erfunden.'},
+
+      {t:'sec', eb:'Weg 1', h:'Der fertige Assistent',
+        body:[
+          'Im deutschsprachigen Raum gibt es Anbieter, die genau ein Produkt bauen: einen KI-Telefonassistenten für Betriebe. Das Prinzip ist überall gleich. Du bekommst eine Nummer oder leitest deine bestehende um, stellst im Browser ein, was der Assistent wissen und tun soll, und er nimmt ab. Du bist in Tagen live und hast einen Ansprechpartner, der deine Sprache spricht.',
+          {table:{title:'Zwei Beispiele, Preise netto', head:['Anbieter','Paket','was es kostet'], rows:[
+            ['fonio','Solo, 1.000 Minuten inklusive','119 € im Monat, bei Jahreszahlung 99 €, jede weitere Minute 0,15 €<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>'],
+            ['VITAS','Basic, 500 Gespräche inklusive','98 € im Monat bei Jahreszahlung, jedes weitere Gespräch 0,25 €. Anbindung an fremde Systeme nur mit Zusatzpaket für 99 €<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>']],
+            foot:'Stand 1. November 2026. Die Liste ist eine Auswahl mit veröffentlichten Preisen, keine Empfehlung eines Anbieters.'}},
+          'Rechne mit deinem Anrufaufkommen, also Anrufe mal Minuten. Und stell jedem Anbieter vor der Unterschrift Frage 1 der Prüfliste unten.'
+        ]},
+
+      {t:'sec', eb:'Weg 2', h:'Der Baukasten an deiner Zentrale',
+        body:[
+          'Der zweite Weg nutzt Plattformen, die das Zuhören und Sprechen übernehmen, während die Logik bei dir bleibt. Bei jedem Anruf rufen sie deine Zentrale auf. Dein Telefon-Agent nutzt damit dasselbe Regelwerk und dieselben Werkzeuge wie dein Schreib-Agent. Eine Regel geändert, und beide Kanäle verhalten sich neu.',
+          {table:{title:'Baukästen und ihre Minutenpreise', head:['Plattform','Preis je Minute','Hinweis'], rows:[
+            ['Famulor','0,15 € ohne Grundgebühr','Datenregion EU wählbar, Preise ohne MwSt.<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>'],
+            ['Vapi','0,05 $ Plattform, dazu Sprachdienste','die eigene Beispielrechnung nennt 82 bis 129 $ für 1.000 Minuten<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>'],
+            ['Retell','0,07 bis 0,31 $','je nach Modell und Stimme<sup class="tsn5-fn"><a href="#tsn5-q5">5</a></sup>'],
+            ['ElevenLabs Agents','0,08 $ je Zusatzminute','Pakete mit Inklusivminuten<sup class="tsn5-fn"><a href="#tsn5-q6">6</a></sup>']],
+            foot:'Stand 1. November 2026. Synthflow bietet nur noch Jahresverträge für Unternehmen an und fällt für einzelne Betriebe raus.'}},
+          'Bei einigen hundert kurzen Gesprächen im Monat liegst du damit oft unter Weg 1. Dafür kümmerst du dich selbst um Einrichtung und Verträge, bei den US-Plattformen auch um die Frage, wo die Gespräche verarbeitet werden. Dazu mehr in Lektion 5.8.'
+        ]},
+
+      {t:'sec', eb:'Weg 3', h:'Der schlanke Weg',
+        body:[
+          'Es gibt einen dritten, leisen Weg, den ich nicht verschweigen will. Du startest nur mit WhatsApp und Mail und sprichst auf deinen Anrufbeantworter einen Satz, der die Anrufer dorthin schickt. Kein Euro für Telefon-KI, und jeder Gast, der lieber schreibt als wartet, landet bei deinem Agenten.',
+          {cmd:{label:'Ansage für den Anrufbeantworter', text:true, code:'Schön, dass du beim Hafenblick anrufst. Gerade sind alle Hände im Service. Am schnellsten reservierst du per WhatsApp unter genau dieser Nummer, du bekommst sofort eine Antwort und eine feste Bestätigung. Oder du sprichst uns nach dem Ton eine Nachricht auf.'}},
+          'Wie viele Anrufer du damit auffängst, weiß vorher niemand. Zähl es nach: Wie viele WhatsApp-Anfragen kommen in der Woche nach der neuen Ansage, verglichen mit der Woche davor?'
+        ]},
+
+      {t:'sec', eb:'Deine Rechnung', h:'Was kostet dich welcher Weg?',
+        body:[
+          {calc:'telefon'},
+          'Ein Hinweis zur Rechnung: Bei Weg 2 kommen zu den Minutenpreisen noch die Kosten für Claude über die API dazu. Sie sind im Vergleich klein, du kennst sie aus Lektion 5.4.'
+        ]},
+
+      {t:'sec', eb:'Am Telefon anders', h:'Vier Dinge, die nur für Sprache gelten',
+        body:[
+          {kick:'Die Ansage gleich zu Beginn.'},
+          'Am Telefon muss der Gast am Anfang hören, dass er mit einem KI-Assistenten spricht. Die Leitlinien der EU-Kommission empfehlen dafür eine ausdrückliche Ansage zu Beginn des Gesprächs, ein Signalton allein reicht nicht<sup class="tsn5-fn"><a href="#tsn5-q7">7</a></sup>. Sag dabei auch, für wen der Assistent spricht.',
+          {cmd:{label:'Begrüßung des Telefon-Agenten', text:true, code:'Herzlich willkommen beim Hafenblick. Hier spricht der digitale Reservierungs-Assistent des Hauses. Ich kann Tische prüfen und direkt für dich buchen. Wenn du lieber mit einem Menschen sprichst, sag einfach jederzeit „Mitarbeiter“. Wie kann ich helfen?'}},
+          {kick:'Der Ausweg zum Menschen.'},
+          'Sagt der Gast „Mitarbeiter“ oder merkt der Agent, dass er nicht weiterkommt, stellt er durch oder notiert einen Rückruf, freundlich und ohne Schleife. Ein Gast darf nie das Gefühl bekommen, gegen eine Maschine anreden zu müssen.',
+          {kick:'Nachfragen statt raten.'},
+          'Ein falsch verstandenes Datum passiert am Telefon schneller als im Chat. Hat der Agent Tag, Uhrzeit oder Personenzahl nicht sicher verstanden, wiederholt er sie zur Bestätigung, genau wie in der Animation oben. Bleibt es unklar, notiert er einen Rückruf.',
+          {kick:'Und keine Aufnahme.'},
+          'Wer ein Gespräch ohne Einwilligung auf einen Tonträger aufnimmt, macht sich nach § 201 Strafgesetzbuch strafbar. Ob schon die Mitschrift eines Sprachassistenten darunter fällt, ist unter Fachleuten umstritten. Der Datenschutzverband GDD sieht es so, sobald Ton zwischengespeichert wird<sup class="tsn5-fn"><a href="#tsn5-q8">8</a></sup>. Für eine Reservierung braucht niemand eine Aufnahme. Schalte sie beim Anbieter ab und lass dir das schriftlich bestätigen.'
+        ]},
+
+      {t:'sec', eb:'Vor der Unterschrift', h:'Die Prüfliste für jeden Anbieter',
+        body:[
+          {cmd:{label:'Zehn Fragen an jeden Telefon-Anbieter', text:true, code:
+'1. Kann euer Assistent während des Gesprächs meine Zentrale aufrufen und in mein System buchen, oder lebt er in seiner eigenen Welt?\n2. Was kostet mich mein echtes Anrufaufkommen? (Anrufe mal Minuten, nicht die Grundgebühr)\n3. Versteht er Deutsch mit Dialekt und Küchenlärm? Ich rufe zum Test aus der Küche an.\n4. Sagt er zu Beginn, dass er eine KI ist und für wen er spricht, und kann ich die Ansage anpassen?\n5. Kann der Gast jederzeit zu einem Menschen, und wohin wird durchgestellt?\n6. Gibt es einen Vertrag zur Auftragsverarbeitung, und wo werden die Gespräche verarbeitet?\n7. Wird etwas aufgezeichnet oder zwischengespeichert, und lässt sich das abschalten?\n8. Was passiert bei einem Ausfall? Klingelt dann wieder mein normales Telefon?\n9. Bekomme ich jedes Gespräch als Text-Protokoll für mein Log?\n10. Wie kündige ich, und bekomme ich meine Daten mit?'}}
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Welcher Weg', animGold:'passt?',
+        steps:['Anrufzahl holen','Rechner füllen','Prüfliste stellen','Probeanruf machen'],
+        intro:'So würde ich entscheiden. Soll das Telefon nur nicht mehr ins Leere klingeln, reicht Weg 1. Ein Regelwerk für alle Kanäle bekommst du nur mit Weg 2, und wer erst sehen will, wie viel überhaupt ankommt, fängt mit Weg 3 an.',
+        points:[
+          'Nimm die <b>Anrufzahl</b> aus deiner Zählwoche in Lektion 5.1. Hast du sie nicht, zähl jetzt eine Woche nach.',
+          'Trag dein Aufkommen in den <b>Rechner</b> ein, mit den Preisen deines Wunschanbieters.',
+          'Stell jedem Anbieter die <b>zehn Fragen</b>, schriftlich. Die Antworten auf Frage 1 und 6 entscheiden.',
+          'Mach vor der Unterschrift einen <b>Probeanruf</b> aus der laufenden Küche, nicht aus dem stillen Büro.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'fonio, Preise','https://www.fonio.ai/de/preise/'],
+        [2,'VITAS, Preise','https://www.telefonassistent.de/preise'],
+        [3,'Famulor, Preise (gültig seit 15.08.2026)','https://www.famulor.io/pricing'],
+        [4,'Vapi, Preise','https://vapi.ai/pricing'],
+        [5,'Retell AI, Preise','https://www.retellai.com/pricing'],
+        [6,'ElevenLabs, Preise für Agents','https://elevenlabs.io/pricing/agents'],
+        [7,'Leitlinien der EU-Kommission zu Art. 50 KI-Verordnung, 20.07.2026','https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems'],
+        [8,'§ 201 StGB; GDD-Kurzpapier Nr. 4 Gesprächstranskription (Januar 2026), zusammengefasst','https://www.datenschutzticker.de/2026/03/gdd-rechtliche-anforderungen-bei-der-gespraechstranskription/']
+      ]},
+      {t:'learn', items:[
+        'Du kennst die <b>drei Wege</b> ans Telefon und weißt, für welchen Betrieb welcher passt.',
+        'Du kennst die Kosten jedes Wegs für dein eigenes <b>Anrufaufkommen</b>.',
+        'Du kennst die Pflichten am Telefon: <b>Ansage</b> zu Beginn, Ausweg zum Menschen, keine Aufnahme.',
+        'Du hast eine <b>Prüfliste</b> mit zehn Fragen für jeden Anbieter.'
+      ], next:{href:'/lektionen/erinnerung-und-no-shows', label:'Weiter: Der Abend davor'}}
+    ]
+  });
+
+  /* ======================= L5.6 · Der Abend davor ======================= */
+  LEK.push({
+    key:'l56', re:/\/(?:lektionen\/)?erinnerung-und-no-shows$/,
+    eyebrow:'L 5.6', alt:'Erinnerung am Vortag und No-Shows',
+    title:'Der Abend <span class="ts-gold">davor</span>',
+    intro:[
+      'Die Buchung ist nur die halbe Reservierung. In dieser Lektion bauen wir, was danach passiert: die Erinnerung am Vortag, die Absage, die den Tisch in derselben Minute wieder freigibt, und die Warteliste, die volle Abende nachfüllt.',
+      'Das ist der Teil des Moduls, der dir am direktesten Geld spart. Denn der Gast, der vor einer Woche gebucht und es vergessen hat, erinnert sich jetzt. Und der Gast, dessen Pläne sich geändert haben, bekommt einen Weg abzusagen, der ihn <b>einen Tipp</b> kostet statt eines unangenehmen Anrufs.'
+    ],
+    blocks:[
+      {t:'anim', key:'vorabend', eb:'Ein Kreislauf ohne Zutun', h:'Die Absage am Freitag füllt den <span class="ts-gold">Samstag</span>.',
+        sub:'Erinnerung um 17 Uhr, Absage, der Tisch wird frei, die Warteliste bekommt ihn. Niemand im Team muss etwas tun.',
+        cap:'Beispielablauf, Namen und Zeiten erfunden.'},
+
+      {t:'sec', eb:'Agent oder Uhr?', h:'Wer startet die Erinnerung?',
+        body:[
+          'Die Erinnerung startet nicht der Gast, sondern die Uhr, jeden Tag um 17 Uhr. Das ist die Automatisierung, die du aus Lektion 5.0 kennst, und sie wohnt auf deiner Zentrale direkt neben dem Agenten. Antwortet der Gast, ist wieder der Agent dran.'
+        ]},
+
+      {t:'sec', eb:'Am Vortag, 17 Uhr', h:'Die Erinnerung am Vortag',
+        body:[
+          {flow:[
+            {n:'Auslöser', t:'Jeden Tag um 17 Uhr', d:'Der Zeit-Auslöser von n8n weckt den Ablauf.'},
+            {n:'Notion lesen', t:'Alle bestätigten Buchungen für morgen', d:'Aus Reservierungen, Status Bestätigt, Datum = morgen.'},
+            {n:'WhatsApp senden', t:'Eine Vorlage mit zwei Antworten zum Antippen', d:'„Passt“ und „Leider absagen“. Bei Mail-Buchungen geht dieselbe Erinnerung per Mail.'},
+            {n:'Log', t:'Eine Zeile pro Erinnerung', d:'Damit du siehst, wer erinnert wurde und wer geantwortet hat.'}
+          ]},
+          {cmd:{label:'Erinnerung · Text der WhatsApp-Vorlage', text:true, code:'Kurze Erinnerung vom {{RESTAURANT_NAME}}: morgen, {{UHRZEIT}} Uhr, {{PERSONEN}} Personen auf {{GASTNAME}}. Bleibt es dabei?\n\n[Passt]  [Leider absagen]'}},
+          'Warum so schlicht? Der Gast liest die Nachricht in zwei Sekunden und antwortet mit einem Tipp. Nachrichten, die du von dir aus schickst, laufen bei WhatsApp über Vorlagen, die Meta vorher prüft. Leg die Vorlage einmal in deinem Meta-Konto an, als reine Erinnerung an eine bestehende Buchung. Jede Erinnerung kostet in Deutschland 0,0456 €<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>.',
+          {kick:'Was die Erinnerung bewirkt.'},
+          'Eine unabhängige Studie für Restaurants haben wir nicht gefunden, nur Zahlen von Anbietern, und die lasse ich weg. Die belastbarste Zahl kommt aus Arztpraxen: Dort blieben Patienten mit digitaler Erinnerung in einer Auswertung von einundzwanzig Studien rund ein Viertel seltener weg, fünfzehn statt einundzwanzig Prozent<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>. Ein Abendessen ist kein Arzttermin, die Richtung ist aber dieselbe. Wie es bei dir wirkt, zeigt dir nach vier Wochen der Status No-Show in deiner Datenbank.',
+          {fig:{id:'5.6-1', src:'m5-5.6-1-tisch-vorabend.jpg', bleed:true, ratio:'21/9', label:'Der Tisch für morgen', note:'Ein eingedeckter Vierertisch am Vorabend, Gläser poliert, Kerze noch nicht an, durch das Fenster das letzte Tageslicht.'}}
+        ]},
+
+      {t:'sec', eb:'Absage und Warteliste', h:'Der Tisch ist in derselben Minute wieder frei',
+        body:[
+          'Tippt der Gast auf „Leider absagen“, übernimmt der Agent. Er bedankt sich, setzt den Status auf Storniert, und damit ist der Tisch für das Werkzeug aus Lektion 5.3 sofort wieder frei. Keine Liste, die jemand abarbeiten muss, kein Zettel am Tresen.',
+          {cmd:{label:'Bestätigung der Absage', text:true, code:'Danke für deine Nachricht, wir haben die Reservierung storniert. Schade, aber so kann sich jemand anderes freuen. Bis bald bei uns!'}},
+          {kick:'Die Warteliste für volle Abende.'},
+          'Bist du an guten Abenden regelmäßig voll, setzen wir eine Stufe drauf. Fragt ein Gast an, wenn nichts frei ist, bietet der Agent an, ihn auf die Warteliste zu setzen. Das ist eine Zeile in Reservierungen mit Status Warteliste. Wird ein Tisch durch eine Absage frei, bekommen die passenden Gäste auf der Liste eine Nachricht. Wer zuerst bestätigt, bekommt den Tisch, die anderen bleiben auf der Liste.',
+          {cmd:{label:'Nachricht an die Warteliste', text:true, code:'Gute Nachricht vom {{RESTAURANT_NAME}}: Für {{DATUM}} um {{UHRZEIT}} Uhr ist gerade ein Tisch für {{PERSONEN}} Personen frei geworden. Sollen wir ihn für dich buchen?'}},
+          'Diese Nachricht schickt der Agent in der Regel innerhalb des Zeitfensters, in dem der Gast ihm zuletzt geschrieben hat. Liegt die Anfrage länger als einen Tag zurück, braucht es auch hier eine Vorlage.'
+        ]},
+
+      {t:'sec', eb:'Wenn doch keiner kommt', h:'Der freundliche Umgang mit No-Shows',
+        body:[
+          'Ganz verhindern wirst du No-Shows nicht. Nach Serviceende markiert dein Team die Reservierungen, die nicht erschienen sind, mit dem Status No-Show. Das ist ein Handgriff am Tablet. Der Status sammelt dabei etwas Wertvolles: Wer dreimal nicht gekommen ist, den erkennt der Agent an der Telefonnummer, und du legst im Steckbrief fest, was dann gilt, zum Beispiel eine Bestätigung am selben Tag.',
+          'Eine Nachricht am Morgen danach mit Einladung zur nächsten Buchung lasse ich bewusst aus der Automatik heraus. So eine Nachricht kann rechtlich als Werbung gelten, und dafür brauchst du eine Einwilligung des Gastes. Willst du einem Stammgast schreiben, mach es persönlich.',
+          {kick:'Anzahlung und Kreditkarte.'},
+          'In der Umfrage der DEHOGA Nordrhein-Westfalen verlangte rund jeder zehnte Betrieb eine Anzahlung oder eine Kreditkarte, deutlich mehr setzten auf einen Anruf oder eine Mail vorab<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>. Eine Anzahlung braucht einen Zahlungsdienstleister, einen Vertrag und erhöht die Hürde beim Reservieren spürbar. Ich lasse sie bewusst außerhalb dieses Moduls. Brauchst du sie für große Gruppen oder Event-Abende, ist es ein eigenes Projekt, und dein System ist dafür vorbereitet, weil jede Buchung vollständig in deiner Datenbank liegt.'
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Vier Handgriffe für den', animGold:'Vorabend',
+        steps:['Vorlage anlegen','Erinnerung bauen','Absage verdrahten','Warteliste einschalten'],
+        intro:'Die Warteliste kommt zuletzt, weil sie erst Sinn ergibt, wenn Erinnerung und Absage zuverlässig laufen.',
+        points:[
+          'Leg die <b>Erinnerungs-Vorlage</b> bei Meta zuerst an. Die Prüfung kann etwas dauern.',
+          'Bau die <b>Erinnerung um 17 Uhr</b> und schick sie die erste Woche nur an deine Probe-Buchungen.',
+          'Verdrahte die <b>Absage</b> so, dass der Status sofort auf Storniert springt, und prüf danach das Werkzeug.',
+          'Schalte die <b>Warteliste</b> erst ein, wenn du an mindestens einem Abend pro Woche ausgebucht bist.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'Meta, WhatsApp Business Platform Pricing, gültig ab 01.10.2026','https://developers.facebook.com/docs/whatsapp/pricing'],
+        [2,'Robotham u. a., BMJ Open 2016, digitale Erinnerungen und Nichterscheinen bei Terminen','https://pubmed.ncbi.nlm.nih.gov/27798006/'],
+        [3,'DEHOGA Nordrhein-Westfalen, Umfrage Dezember 2025, wiedergegeben über dpa','https://www.tophotel.de/warum-no-shows-zum-problem-von-gastronomen-werden-377833/']
+      ]},
+      {t:'learn', items:[
+        'Du unterscheidest, was die <b>Uhr</b> startet und was der <b>Gast</b>, und lässt beide zusammenarbeiten.',
+        'Du hast die <b>Erinnerung am Vortag</b> gebaut und weißt, was sie je Nachricht kostet.',
+        'Eine Absage gibt den Tisch <b>sofort frei</b>, und die Warteliste bekommt ihn angeboten.',
+        'Du gehst mit No-Shows <b>freundlich</b> um und weißt, wo die Grenze zur Werbung liegt.'
+      ], next:{href:'/lektionen/go-live-und-betrieb', label:'Weiter: Die Schattenwoche'}}
+    ]
+  });
+
+  /* ======================= L5.7 · Die Schattenwoche ======================= */
+  LEK.push({
+    key:'l57', re:/\/(?:lektionen\/)?go-live-und-betrieb$/,
+    eyebrow:'L 5.7', alt:'Testprotokoll und Schattenwoche',
+    title:'Die <span class="ts-gold">Schattenwoche</span>',
+    intro:[
+      'Für viele Gäste ist dein Agent der erste Kontakt mit deinem Restaurant, und jeden Fehler rechnen sie deinem Haus an. Deshalb gilt hier eine einfache Regel: <b>Nichts spricht mit echten Gästen, was nicht vorher mit dir gesprochen hat.</b>',
+      'Wir fahren das System in zwei Stufen hoch. Erst prüfst du es wie ein Gast, der es darauf anlegt. Dann läuft es eine Woche im Schatten: Es führt die Gespräche, aber jede Zusage geht zuerst über dein Handy. Danach weißt du aus deinem eigenen Log, ob du ihm trauen kannst.'
+    ],
+    blocks:[
+      {t:'anim', key:'schatten', eb:'Eine Woche mitlesen', h:'Sieben Tage, bis er <span class="ts-gold">allein</span> arbeitet.',
+        sub:'Jeden Tag winkst du mehr Antworten einfach durch. Wenn du nur noch durchwinkst, ist die Woche vorbei.',
+        cap:'Beispielwoche, die Prozentwerte sind zur Anschauung.'},
+
+      {t:'sec', eb:'Stufe 1', h:'Das Testprotokoll',
+        lead:'Erst der Normalfall, mehrmals, dann die Härtefälle. Und ich meine es ernst: alle, nicht die ersten fünf.',
+        body:[
+          {calc:'test'},
+          'Zwei Fälle werden am häufigsten übersprungen, weil sie Aufwand machen: zwei Handys gleichzeitig auf den letzten Tisch und die Lösch-Routine mit Testdaten. Genau sie zeigen dir, ob dein System unter Druck hält. Den Fall mit der Lösch-Routine spielst du durch, sobald du sie in Lektion 5.8 gebaut hast.'
+        ]},
+
+      {t:'sec', eb:'Stufe 2', h:'Eine Woche im Schatten',
+        body:[
+          'In der Schattenwoche führt der Agent alle Gespräche selbst. Vor jeder verbindlichen Zusage schickt er dir die geplante Antwort aufs Handy, und du tippst auf Freigeben oder Korrigieren. Erst dann geht sie raus. n8n hat dafür einen eingebauten Freigabe-Schritt für die Werkzeuge eines Agenten. Die Anfrage kann per WhatsApp, Telegram oder Mail zu dir kommen<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>.',
+          {flow:[
+            {n:'Im Workflow', t:'Freigabe vor „reservierung_anlegen“', d:'Der Agent darf das Werkzeug erst nutzen, wenn du freigegeben hast. Alles andere läuft wie später auch.'},
+            {n:'Auf deinem Handy', t:'Geplante Antwort, Freigeben oder Korrigieren', d:'Freigeben schickt die Antwort und bucht. Korrigieren lässt dich den Satz ändern, bevor er rausgeht.'},
+            {n:'Nach sieben Tagen', t:'Der Schritt bleibt nur für Sonderfälle', d:'Für den Standardfall nimmst du die Freigabe raus. Gruppen, Sonderwünsche und Beschwerden gehen weiter über dich.'}
+          ]},
+          'Die Entscheidung am Ende der Woche ist einfach. Sind deine Freigaben nur noch Durchwinken, darf der Agent den Standardfall allein übernehmen. Korrigierst du noch regelmäßig, schärfst du den Steckbrief nach und verlängerst um ein paar Tage.',
+          {kick:'Warum er danach allein schreiben darf.'},
+          'In Modul 4 hast du die Regel gelernt: erst zeigen, dann schreiben. Die Schattenwoche ist genau das, nur über sieben Tage statt über einen Auftrag. Danach schreibt der Agent im Standardfall allein. Der Fall ist eng begrenzt, und jede Buchung steht im Log und lässt sich mit einem Status zurücknehmen. Gelöscht wird weiterhin nur, was die Lösch-Routine nach ihrem Probelauf löschen darf.'
+        ]},
+
+      {t:'sec', eb:'Fünf Minuten am Tag', h:'Das Agenten-Log',
+        body:[
+          'Das Agenten-Log ist die dritte Datenbank deiner Vorlage. Darin steht jedes Gespräch seit dem ersten Testtag: Zeitpunkt, Kanal, was der Gast wollte, was der Agent getan hat, und das Ergebnis. In den ersten zwei Wochen liest du es einmal am Tag beim Kaffee.',
+          {table:{title:'Agenten-Log · die Felder', head:['Feld','Art','wozu'], rows:[
+            ['Zeitpunkt','Erstellt am','automatisch'],
+            ['Kanal','Auswahl','WhatsApp, Mail, Telefon'],
+            ['Anliegen','Text','was der Gast wollte, in einem Satz'],
+            ['Ergebnis','Auswahl','Gebucht, Alternative angeboten, Übergeben, Abgebrochen'],
+            ['Reservierung','Verknüpfung','die Buchung, falls eine entstanden ist'],
+            ['Verlauf','Text','kurze Zusammenfassung des Gesprächs']]}},
+          'Du wirst dabei zwei Dinge finden. Fälle, die der Agent abgegeben hat, obwohl er sie hätte lösen können: Das sind Kandidaten, die Grenze aus Lektion 5.1 zu weiten. Und Sätze, die nicht nach dir klingen: Das sind Zeilen für den Steckbrief. So wird das System Woche für Woche besser, genau wie ein neuer Mitarbeiter, den du einarbeitest.',
+          {fig:{id:'5.7-1', src:'m5-5.7-1-vormittag-tresen.jpg', bleed:true, ratio:'21/9', label:'Der Vormittag am leeren Tresen', note:'Der Betreiber am Vormittag allein am Tresen, eine Tasse Kaffee, das Handy in der Hand, der Gastraum noch leer und hell.'}}
+        ]},
+
+      {t:'sec', eb:'Die Übergabe', h:'Wenn der Agent abgibt',
+        body:[
+          'Zum Schluss regeln wir den Moment der Übergabe, denn er entscheidet, ob sie ein Sicherheitsnetz ist oder ein Loch. Gibt der Agent ab, passieren zwei Dinge gleichzeitig.',
+          {cards:[
+            {eb:'An den Gast', nm:'Eine ehrliche Ansage mit Uhrzeit', p:['„Das klärt Lena aus dem Team und meldet sich bis 18 Uhr bei dir. Deine Angaben habe ich schon weitergegeben.“']},
+            {eb:'An dein Team', nm:'Alles, was der Agent schon weiß', p:['Name, Telefonnummer, Anliegen, Wunschtermin, Kanal. Niemand fragt den Gast ein zweites Mal nach Dingen, die er schon gesagt hat.']}
+          ]},
+          'Leg fest, wer im Betrieb diese Nachrichten bekommt, und bis wann sie beantwortet sein müssen. Ein Agent, der abgibt, und ein Team, das nicht übernimmt, ist schlimmer als gar kein Agent.'
+        ]},
+
+      {t:'emp', kind:'Nutzung', animTitle:'Die Routine nach dem', animGold:'Start',
+        steps:['Täglich: Log lesen','Wöchentlich: Grenze prüfen','Monatlich: Kosten ansehen','Bei Updates: Testfälle'],
+        intro:'So sieht der Betrieb aus, wenn der Agent läuft. Wenig Aufwand, aber regelmäßig, und jede Entscheidung mit Blick ins Log.',
+        points:[
+          'Lies in den ersten zwei Wochen jeden Tag fünf Minuten das <b>Log</b>, danach reicht ein Blick pro Woche.',
+          'Prüf einmal pro Woche, ob die <b>Grenze</b> ein Stück weiter darf oder der Ton nachgeschärft werden muss.',
+          'Schau einmal im Monat in die <b>Kosten</b> bei Anthropic und Meta und vergleich sie mit deinen Buchungen.',
+          'Spiel nach jedem Update von n8n die fünf <b>Tests</b> aus Lektion 5.4 durch, bevor ein Gast es merkt.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'n8n, Freigabe durch Menschen für Werkzeuge eines Agenten','https://docs.n8n.io/advanced-ai/human-in-the-loop-tools/']
+      ]},
+      {t:'learn', items:[
+        'Du hast das <b>Testprotokoll</b> vollständig abgearbeitet, mit Normalfällen und Härtefällen.',
+        'Du kennst die <b>Schattenwoche</b> und ihr klares Ende: wenn du nur noch durchwinkst.',
+        'Du liest das <b>Agenten-Log</b> und weißt, welche zwei Dinge du darin suchst.',
+        'Die <b>Übergabe</b> an dein Team ist geregelt, mit Person und Uhrzeit.'
+      ], next:{href:'/lektionen/datenschutz-und-recht', label:'Weiter: Die Daten deiner Gäste'}}
+    ]
+  });
+
+  /* ======================= L5.8 · Die Daten deiner Gäste ======================= */
+  LEK.push({
+    key:'l58', re:/\/(?:lektionen\/)?datenschutz-und-recht$/,
+    eyebrow:'L 5.8', alt:'Datenschutz und Recht beim Reservierungs-Agenten',
+    title:'Die Daten deiner <span class="ts-gold">Gäste</span>',
+    intro:[
+      'Dein Agent verarbeitet Namen, Telefonnummern und Gespräche. Deshalb regeln wir hier das Rechtliche, und zwar so, dass du heute anfangen kannst. Vorweg ein Satz, den ich ernst meine: Ich bin Praktiker und kein Anwalt. Was hier steht, ist der belegte Stand vom 1. November 2026 und ersetzt keine Beratung für deinen Betrieb.',
+      'Es sind <b>fünf Themen</b>: der Hinweis, dass eine KI spricht, der Weg, auf dem deine Daten laufen, so wenig Daten wie möglich, eine Löschung, die von allein läuft, und die Verträge mit jedem Beteiligten.'
+    ],
+    blocks:[
+      {t:'anim', key:'weg', eb:'Eine Reservierung, vier Stationen', h:'Der Weg einer <span class="ts-gold">Telefonnummer</span>.',
+        sub:'Jede Station, die Gästedaten anfasst, braucht einen Vertrag. Und nach deiner Frist bleibt nur die Zahl, nicht der Name.',
+        cap:'Beispielbuchung, Name und Nummer erfunden.'},
+
+      {t:'sec', eb:'Thema 1', h:'Der Gast muss wissen, dass er mit einer KI spricht',
+        body:[
+          'Seit dem 2. August 2026 gilt die Transparenzpflicht aus Artikel 50 der europäischen KI-Verordnung. Wer ein System anbietet, das direkt mit Menschen spricht oder schreibt, muss dafür sorgen, dass sie es spätestens beim ersten Kontakt erfahren<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Die Änderungen der KI-Verordnung vom Juli 2026 haben daran nichts verschoben<sup class="tsn5-fn"><a href="#tsn5-q2">2</a></sup>.',
+          {cards:[
+            {eb:'Wenn du selbst baust', nm:'Dann giltst du als Anbieter', p:['Die Leitlinien der EU-Kommission nennen als Beispiel einen Betrieb, der einen Chatbot selbst entwickelt und unter eigenem Namen einsetzt. Genau das tust du in diesem Modul. Die Pflicht liegt damit bei dir.']},
+            {eb:'Wenn du einen fertigen Dienst nutzt', nm:'Dann ist der Anbieter dran', p:['Bei einem fertigen Telefon-Assistenten liegt die Pflicht beim Hersteller, du bist Betreiber. Prüf trotzdem, dass die Ansage läuft. Der Gast hört dein Restaurant, nicht den Hersteller.']}
+          ]},
+          'Was das konkret heißt, steht schon in deinem System. Im Chat stellt sich der Agent in der ersten Nachricht vor, in der Mail steht der Hinweis oben, und am Telefon kommt die Ansage zu Beginn, so wie in Lektion 5.5 eingerichtet. Der Agent sagt dabei auch, für welchen Betrieb er spricht<sup class="tsn5-fn"><a href="#tsn5-q1">1</a></sup>. Zuständig für die Aufsicht ist in Deutschland die Bundesnetzagentur<sup class="tsn5-fn"><a href="#tsn5-q3">3</a></sup>.',
+          'Und mein Rat aus der Praxis: Sieh das nicht als lästige Pflicht. Weiß ein Gast, dass ein Assistent antwortet, sieht er ihm eine holprige Antwort nach. Erfährt er es erst hinterher, fühlt er sich getäuscht.'
+        ]},
+
+      {t:'sec', eb:'Thema 2', h:'Wo Claude deine Nachrichten verarbeitet',
+        body:[
+          'Dein Agent schickt jede Nachricht an Claude. Dafür gibt es zwei saubere Wege, und du entscheidest dich einmal.',
+          {cards:[
+            {eb:'Der normale Weg', nm:'Claude direkt bei Anthropic', p:['Der Vertrag zur Auftragsverarbeitung ist automatisch Teil der Geschäftsbedingungen, Vertragspartner ist Anthropic Ireland, die EU-Standardvertragsklauseln sind eingebunden<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>. Deine Inhalte werden nicht zum Training genutzt.','Verarbeitet wird weltweit oder auf Wunsch in den USA, gespeichert in den USA. Eine Datenhaltung in der EU bietet Anthropic direkt nicht an<sup class="tsn5-fn"><a href="#tsn5-q5">5</a></sup>.']},
+            {eb:'Der Weg über Europa', nm:'Claude über AWS in Frankfurt', p:['Dieselben Modelle laufen über Amazon Bedrock mit einem europäischen Profil. Angefragt wird in Frankfurt, verarbeitet in europäischen Rechenzentren. Vertragspartner für die Verarbeitung ist dann AWS<sup class="tsn5-fn"><a href="#tsn5-q6">6</a></sup>.','Aufwendiger einzurichten, abgerechnet wird über AWS.']}
+          ]},
+          'Welcher Weg für dich passt, besprich mit deinem Datenschutzberater, und schreib dir die Entscheidung auf. Du brauchst sie gleich bei den Verträgen.'
+        ]},
+
+      {t:'sec', eb:'Thema 3', h:'So wenig Daten wie möglich',
+        body:[
+          'Schau noch einmal auf deine Datenbank Reservierungen. Name, Telefonnummer, Datum, Uhrzeit, Personen, Tisch, Status, Kanal, Notiz. Mehr ist es nicht, und das ist Absicht. Der Agent fragt nicht nach der Adresse, nicht nach dem Geburtstag und bei WhatsApp nicht einmal nach der Telefonnummer, weil sie schon da ist.',
+          {kick:'Die Linie beim Notizfeld.'},
+          'Beim Notizfeld bleibt es bei der Regel aus deinem Steckbrief: Was der Gast von sich aus sagt, steht als Hinweis für die Küche drin, gefragt wird nie, und niemand wertet es aus. Gesundheitsangaben sind besonders geschützt, und eine Reservierungs-Datenbank ist nicht der Ort, sie zu sammeln. Der System-Prompt aus Lektion 5.4 enthält genau diese Regel.',
+          {kick:'Keine Aufnahmen am Telefon.'},
+          'Die Aufnahme am Telefon bleibt aus, das hast du in Lektion 5.5 schon geregelt.'
+        ]},
+
+      {t:'sec', eb:'Thema 4', h:'Die Löschung, die von allein läuft',
+        body:[
+          'Eine feste Löschfrist für Reservierungsdaten nennt keine Behörde und auch nicht der DEHOGA. Es gilt der Grundsatz der Datenschutz-Grundverordnung: so lange wie für den Zweck nötig, und der Zweck ist die Reservierung<sup class="tsn5-fn"><a href="#tsn5-q7">7</a></sup>. Ob eine Reservierung ohne Rechnung steuerlich aufbewahrt werden muss, ist nicht eindeutig geklärt. Frag deinen Steuerberater, leg die Frist mit ihm fest und trag sie in den Steckbrief ein.',
+          {flow:[
+            {n:'Auslöser', t:'Einmal im Monat, nachts', d:'Am Ersten des Monats um vier Uhr, wenn niemand bucht.'},
+            {n:'Notion lesen', t:'Alles älter als deine Frist', d:'Reservierungen und Einträge im Agenten-Log, gemessen am Besuchstag.'},
+            {n:'Zählen', t:'Die anonymen Zahlen sichern', d:'Wie viele Buchungen, über welchen Kanal, wie viele No-Shows. Ohne Namen sind das keine personenbezogenen Daten mehr.'},
+            {n:'Leeren', t:'Name, Telefonnummer und Notiz entfernen', d:'Die Zeile bleibt für deine Zahlen, die Person ist raus.'}
+          ]},
+          {merk:{p:'Lösch-Automatik statt Lösch-Vorsatz. Und der erste Lauf geht immer über Testdaten, nie direkt an echte.'}}
+        ]},
+
+      {t:'sec', eb:'Thema 5', h:'Mit jedem Beteiligten ein Vertrag',
+        body:[
+          {table:{title:'Wer deine Gästedaten anfasst', head:['Beteiligter','Vertrag zur Auftragsverarbeitung (AVV)','was du tun musst'], rows:[
+            ['Hetzner, dein Server','kommt nicht automatisch zustande','im Kundenkonto per Häkchen abschließen<sup class="tsn5-fn"><a href="#tsn5-q8">8</a></sup>'],
+            ['Meta, WhatsApp','automatisch Teil der Bedingungen','nichts, aber wissen, dass Daten in die USA gehen können<sup class="tsn5-fn"><a href="#tsn5-q9">9</a></sup>'],
+            ['Anthropic oder AWS, das Gehirn','bei Anthropic automatisch Teil der Bedingungen','den gewählten Weg aus Thema 2 dokumentieren<sup class="tsn5-fn"><a href="#tsn5-q4">4</a></sup>'],
+            ['Notion, deine Datenbank','prüfen, ob schon für dein Backoffice vorhanden','im Zweifel bei Notion anfordern'],
+            ['Telefon-Anbieter, wenn du einen nutzt','je Anbieter verschieden','Frage 6 der Prüfliste aus Lektion 5.5']]}},
+          'Dazu kommt ein Absatz in deiner Datenschutzerklärung, der den Assistenten und die Beteiligten nennt. Die Vorlage unten ist eine Arbeitsgrundlage, lass sie vor der Veröffentlichung prüfen.',
+          {cmd:{label:'Arbeitsgrundlage · Absatz für die Datenschutzerklärung', text:true, code:'Für Tischreservierungen setzen wir einen digitalen Reservierungs-Assistenten ein. Wenn Sie uns per WhatsApp, E-Mail oder Telefon kontaktieren, verarbeiten wir die für die Reservierung erforderlichen Angaben (Name, Telefonnummer, Datum, Uhrzeit, Personenzahl sowie freiwillige Hinweise) zum Zweck der Tischvergabe und der Erinnerung an Ihren Termin. Dabei setzen wir folgende Dienstleister als Auftragsverarbeiter ein: [Meta Platforms Ireland für WhatsApp, Hetzner Online für den Server, Anthropic Ireland bzw. Amazon Web Services für die Sprachverarbeitung, Notion für die Reservierungsverwaltung, ggf. Telefon-Anbieter]. Eine Übermittlung in Drittländer erfolgt auf Grundlage [Angemessenheitsbeschluss bzw. Standardvertragsklauseln]. Reservierungsdaten löschen wir [Frist] nach dem Besuchstermin. Zu Beginn jedes Gesprächs weisen wir Sie auf den Assistenten hin, und Sie können jederzeit einen Mitarbeiter verlangen.'}},
+          {kick:'Die Folgenabschätzung.'},
+          'Die Datenschutzkonferenz führt KI, die mit Kunden spricht, auf ihrer Liste der Verarbeitungen, für die eine Datenschutz-Folgenabschätzung nötig ist<sup class="tsn5-fn"><a href="#tsn5-q10">10</a></sup>. Das klingt größer, als es für eine Reservierung ist: Du beschreibst, was der Agent tut, welche Daten er nutzt, welche Risiken du siehst und was du dagegen tust. Vieles davon hast du in diesem Modul schon aufgeschrieben. Mach sie mit deinem Datenschutzberater, bevor du live gehst.'
+        ]},
+
+      {t:'sec', eb:'Vor dem Start', h:'Die Rechts-Arbeitsliste',
+        body:[
+          {steps:{eb:'Abhaken, bevor der erste echte Gast schreibt', items:[
+            'KI-Hinweis in der ersten Nachricht, oben in jeder Mail und als Ansage am Telefon, alle drei selbst getestet.',
+            'WhatsApp-Profil nennt den digitalen Assistenten.',
+            'Weg für das Gehirn gewählt und aufgeschrieben, normaler Weg oder über Europa.',
+            'Verträge zur Auftragsverarbeitung mit Hetzner, Meta, Anthropic oder AWS, Notion und gegebenenfalls dem Telefon-Anbieter.',
+            'Aufnahmen beim Telefon-Anbieter abgeschaltet, schriftlich bestätigt.',
+            'Löschfrist mit dem Steuerberater festgelegt und in der Lösch-Routine eingetragen, Probelauf mit Testdaten bestanden.',
+            'Datenschutzerklärung ergänzt und geprüft.',
+            'Datenschutz-Folgenabschätzung gemacht.',
+            'Übergabe-Person und Rückmeldefrist im Team bekannt.']}}
+        ]},
+
+      {t:'emp', kind:'Einrichtung', animTitle:'Das Rechtliche in vier', animGold:'Schritten',
+        steps:['KI-Hinweis prüfen','Weg wählen','Löschfrist festlegen','Verträge sammeln'],
+        intro:'Beim Rechtlichen fange ich mit dem an, was der Gast sieht, und gehe dann zu dem, was im Hintergrund läuft.',
+        points:[
+          'Teste den <b>KI-Hinweis</b> auf allen drei Kanälen selbst, als wärst du Gast.',
+          'Entscheide den <b>Weg</b> für das Gehirn mit deinem Datenschutzberater und schreib ihn auf.',
+          'Leg die <b>Löschfrist</b> mit deinem Steuerberater fest und lass die Routine zuerst über Testdaten laufen.',
+          'Sammle alle <b>Verträge</b> an einer Stelle in deinem Backoffice, damit du sie bei einer Frage sofort findest.'
+        ]},
+      {t:'src', stand:STAND, items:[
+        [1,'Leitlinien der EU-Kommission zu Art. 50 KI-Verordnung, 20.07.2026','https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems'],
+        [2,'Verordnung (EU) 2026/1744 (Digital Omnibus zur KI-Verordnung), in Kraft seit 27.07.2026','https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng'],
+        [3,'KI-Marktüberwachungs- und Innovationsförderungsgesetz (KI-MIG), § 2','https://www.gesetze-im-internet.de/ki-mig/BJNR0DF0B0026.html'],
+        [4,'Anthropic, Commercial Terms und Data Processing Addendum','https://www.anthropic.com/legal/data-processing-addendum'],
+        [5,'Anthropic, Datenresidenz','https://platform.claude.com/docs/en/manage-claude/data-residency'],
+        [6,'Anthropic, Claude in Amazon Bedrock, Regionen','https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock'],
+        [7,'Datenschutz-Grundverordnung, Art. 5 und 17','https://eur-lex.europa.eu/eli/reg/2016/679/oj'],
+        [8,'Hetzner, Datenschutz-FAQ zur Auftragsverarbeitung','https://docs.hetzner.com/de/general/general-terms-and-conditions/data-privacy-faq/'],
+        [9,'Meta Terms for WhatsApp Business Platform und Meta Global Processor Terms','https://www.facebook.com/legal/terms/Meta-Global-Processor-Terms'],
+        [10,'Datenschutzkonferenz, Liste der Verarbeitungen mit Folgenabschätzung, Nr. 11','https://www.datenschutzkonferenz-online.de/media/ah/20181017_ah_DSK_DSFA_Muss-Liste_Version_1.1_Deutsch.pdf']
+      ]},
+      {t:'learn', items:[
+        'Du weißt, dass der <b>KI-Hinweis</b> seit August 2026 Pflicht ist und wie er auf jedem Kanal aussieht.',
+        'Du hast entschieden, über welchen <b>Weg</b> dein Agent Claude nutzt.',
+        'Du speicherst <b>wenig</b> und löschst <b>automatisch</b>, mit einer Frist, die du begründen kannst.',
+        'Du hast mit <b>jedem Beteiligten</b> einen Vertrag und eine ergänzte Datenschutzerklärung.'
+      ], next:{href:'/modul-6-weitere-tools-projektmanagement', label:'Weiter zu Modul 6'}}
+    ]
+  });
+  /* ---------- Start + super.so-Seitenwechsel ---------- */
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  var last=location.pathname, tm=null;
+  function sync(){
+    var p=location.pathname;
+    if(p!==last){
+      last=p;
+      var old=document.getElementById('tsn5');
+      if(old){ [].forEach.call(old.querySelectorAll('.tsn5-stage'),stop); old.remove(); }
+      run();
+    } else if(current() && !document.getElementById('tsn5')){ run(); }
+  }
+  var MOF=window.__tsMO||function(cb){ return new MutationObserver(cb); };
+  MOF(function(){ clearTimeout(tm); tm=setTimeout(sync,200); }).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('popstate',function(){ clearTimeout(tm); tm=setTimeout(sync,60); });
+})();
 /* <<< NEUBAU MODUL 5 — ENDE <<< */
 /* · */
 /* · */
