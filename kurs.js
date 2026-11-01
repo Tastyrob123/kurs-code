@@ -35145,9 +35145,10 @@ window.__tsn4Boot && window.__tsn4Boot();
       }).join('')+'</div>';
     }
     if(it.chat){
-      return '<div class="tsn5-chat tsn5-rv">'+it.chat.map(function(m){
-        return '<div class="who '+(m[0]==='g'?'g':'')+'">'+(m[0]==='g'?'Gast':'Agent')+'</div><div class="m '+m[0]+'">'+m[1]+'</div>';
-      }).join('')+'</div>';
+      var tm=['19:02','19:02','19:03','19:03','19:04','19:04'];
+      return '<div class="tsn5-chat wa tsn5-rv">'+waHead('Restaurant Hafenblick','online','H')+'<div class="wa-body">'+it.chat.map(function(m,i){
+        return '<div class="m '+m[0]+'">'+waTx(m[1],tm[i%6],m[0]==='g')+'</div>';
+      }).join('')+'</div>'+waComp()+'</div>';
     }
     if(it.fig){ return fig(it.fig); }
     if(it.calc){ return '<div class="tsn5-tool tsn5-rv" data-calc="'+it.calc+'">'+(CALC[it.calc]?CALC[it.calc].html():'')+'</div>'; }
@@ -35164,7 +35165,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   /* ---------- Seite bauen ---------- */
   function build(L){
     var h='';
-    h+='<div class="ts-hero"><img class="ts-hero__img" alt="'+esc(L.alt)+'" src="'+(L.cover||IMG+'cover-'+L.key+'.webp')+'" fetchpriority="high" decoding="async">'+
+    h+='<div class="ts-hero"><img class="ts-hero__img" alt="'+esc(L.alt)+'" src="'+(L.cover||IMG+'cover-'+L.key+'.webp')+'" onerror="this.onerror=null;this.src=\''+IMG+'cover-mod.webp\'" fetchpriority="high" decoding="async">'+
        '<div class="ts-hero__text"><img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
        '<div class="ts-hero__eyebrow">'+L.eyebrow+'</div><h1 class="ts-hero__title">'+L.title+'</h1></div></div>';
     h+='<div class="ts-body">'+L.intro.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>';
@@ -35503,13 +35504,37 @@ window.__tsn4Boot && window.__tsn4Boot();
   /* WhatsApp-Nachricht im Original-Aufbau: Text + Uhrzeit (+ Lesehaken bei eigenen Nachrichten) */
   var WA_T=['18:41','18:41','18:42','18:42'];
   var WA_TICK='<svg viewBox="0 0 16 11" width="16" height="11" aria-hidden="true"><path d="M11.07.65 4.62 7.1 2 4.48.94 5.54l3.68 3.68 7.51-7.51z M15.06.65 8.62 7.1l-.75-.75-1.06 1.06 1.81 1.81 7.51-7.51z" fill="#53BDEB"/></svg>';
-  function waMsg(m,i){ return '<span class="wa-x">'+m[1]+'</span><span class="wa-t">'+WA_T[i%4]+(m[0]==='g'?WA_TICK:'')+'</span>'; }
+  /* Text und Uhrzeit: die Uhrzeit sitzt wie im Original in der letzten Textzeile, wenn dort Platz ist (Platzhalter am Textende, Uhrzeit darauf) */
+  function waTx(txt,time,tick){ return '<span class="wa-x'+(tick?' tk':'')+'">'+txt+'<span class="wa-t">'+time+(tick?WA_TICK:'')+'</span></span>'; }
+  function waMsg(m,i){ return waTx(m[1],WA_T[i%4],m[0]==='g'); }
+  /* Kopf und Eingabezeile eines WhatsApp-Chats (Dark), Symbole nachgezeichnet im WhatsApp-Aufbau: zurueck, Bild, Name, Video, Anruf · Plus, Feld mit Sticker, Kamera, Mikrofon */
+  var WA_I={
+    back:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 4.6 8 12l7.4 7.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    video:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="6.6" width="12.6" height="10.8" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m15.4 10.6 5.2-3.2v9.2l-5.2-3.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+    call:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.6h2.6l1.4 4.1-2 1.6a12 12 0 0 0 6.1 6.1l1.6-2 4.1 1.4v2.6a2 2 0 0 1-2.2 2A16.4 16.4 0 0 1 4.6 5.8a2 2 0 0 1 2-2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+    plus:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    stick:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 12.6V7.8a4.2 4.2 0 0 0-4.2-4.2H7.8a4.2 4.2 0 0 0-4.2 4.2v8.4a4.2 4.2 0 0 0 4.2 4.2h4.8z M12.6 20.4c0-4.4 3.4-7.8 7.8-7.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="10" r="1.1" fill="currentColor"/><circle cx="15" cy="10" r="1.1" fill="currentColor"/></svg>',
+    cam:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.2h3.2L9 5.6h6l1.8 2.6H20v10.6H4z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.3" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>',
+    mic:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.4" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M5.8 11.4a6.2 6.2 0 0 0 12.4 0M12 17.6v3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>'
+  };
+  function waHead(name,sub,ini){ return '<div class="wa-hd"><i class="wa-bk">'+WA_I.back+'</i><i class="wa-av">'+ini+'</i><div class="wa-who"><b>'+name+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</div><i class="wa-ic">'+WA_I.video+'</i><i class="wa-ic">'+WA_I.call+'</i></div>'; }
+  function waComp(){ return '<div class="wa-comp"><i class="wa-ic">'+WA_I.plus+'</i><span class="wa-in">Nachricht<i>'+WA_I.stick+'</i></span><i class="wa-ic">'+WA_I.cam+'</i><i class="wa-ic">'+WA_I.mic+'</i></div>'; }
+  /* Einblenden ohne Springen: Nachrichten, die schon stehen, gleiten um die Hoehe der neuen nach oben (nur transform), die neue blendet ein */
+  function waFlip(box,show){
+    var els=[].slice.call(box.children).filter(function(e){ return e.offsetParent!==null; });
+    var top=els.map(function(e){ return e.getBoundingClientRect().top; });
+    show();
+    els.forEach(function(e,i){ var d=top[i]-e.getBoundingClientRect().top; if(Math.abs(d)<.5) return; e.style.transition='none'; e.style.transform='translateY('+d+'px)'; });
+    reflow(box);
+    els.forEach(function(e){ if(e.style.transform){ e.style.transition=''; e.style.transform=''; } });
+  }
+  function waIn(el){ el.classList.add('on','wa-in0'); reflow(el); el.classList.remove('wa-in0'); }
   ANIM.gespraech={
     controls:'<button type="button" class="tsn5-btn a4-b0 on">Werkzeug antwortet</button><button type="button" class="tsn5-btn a4-b1">Werkzeug fällt aus</button>',
     html:function(){
       var S=A4.ok;
-      return '<div class="a4"><div class="a4-phone wa"><div class="a4-ph"><i>H</i><div><b>Restaurant Hafenblick</b><span>online</span></div></div><div class="a4-chat">'+
-        S.chat.map(function(m,i){ return '<div class="a4-m '+m[0]+' on">'+waMsg(m,i)+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div></div><div class="wa-comp"><span>Nachricht</span></div></div>'+
+      return '<div class="a4"><div class="a4-phone wa">'+waHead('Restaurant Hafenblick','online','H')+'<div class="a4-chat">'+
+        S.chat.map(function(m,i){ return '<div class="a4-m '+m[0]+' on">'+waMsg(m,i)+'</div>'; }).join('')+'<div class="a4-typ"><i></i><i></i><i></i></div></div>'+waComp()+'</div>'+
         '<div class="a4-gap"><i class="a4-pulse"></i></div>'+
         '<div class="a4-log"><div class="a4-lh"><b>Was der Agent dabei tut</b><span>live mitgelesen</span></div>'+
         S.log.map(function(l,i){ return '<div class="a4-l on"><span class="a4-ln">'+('0'+(i+1)).slice(-2)+'</span><div><b>'+l[0]+'</b><code>'+esc(l[1])+'</code></div></div>'; }).join('')+'</div></div>';
@@ -35533,8 +35558,8 @@ window.__tsn4Boot && window.__tsn4Boot();
         var li=s[0], mi=s[1];
         if(mi>shown){
           var m=ms[mi];
-          if(m.classList.contains('a')){ (function(tt){ T(st,function(){ typ.classList.add('on'); },tt); })(t); t+=700; }
-          (function(m,tt){ T(st,function(){ typ.classList.remove('on'); m.classList.add('on'); chat.scrollTop=chat.scrollHeight; },tt); })(m,t);
+          if(m.classList.contains('a')){ (function(tt){ T(st,function(){ waFlip(chat,function(){ waIn(typ); }); },tt); })(t); t+=700; }
+          (function(m,tt){ T(st,function(){ waFlip(chat,function(){ typ.classList.remove('on'); waIn(m); }); },tt); })(m,t);
           shown=mi; t+=650;
         }
         (function(li,tt){ T(st,function(){ pulse.classList.remove('go'); reflow(pulse); pulse.classList.add('go'); logs[li].classList.add('on'); if(k==='ko' && li===2) logs[li].classList.add('warn'); },tt); })(li,t);
@@ -35594,32 +35619,39 @@ window.__tsn4Boot && window.__tsn4Boot();
   };
 
   /* ---------------- L5.6 · Der Abend davor ---------------- */
-  /* Notion-Eigenschafts-Icons (Tabellenkopf), Farbe aus Notion: #ada9a3 */
+  /* Notion-Symbole im Original (Pfade am 01.11.2026 aus Roberts Notion abgenommen, Notizen der Chats „notion-dark-mode-werte"):
+     Titel Aa, Verknuepfung, Zahl, Tabellenansicht, Seite. Das Auswahl-Symbol ist dort nicht gemessen: nach dem Original
+     nachgezeichnet (Kreis mit Pfeil nach unten), beim naechsten Zugang zu Roberts Notion abnehmen und ersetzen. */
+  function NI(vb,d,w){ return '<svg class="nt-i" viewBox="'+vb+'" width="'+(w||14)+'" height="'+(w||14)+'" aria-hidden="true"><path d="'+d+'"/></svg>'; }
   var NT_ICO={
-    tbl:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 3.5h12v9H2z M2 6.5h12 M6 6.5v6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>',
-    aa:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><text x="1" y="12" font-size="10" font-family="ui-sans-serif,-apple-system,sans-serif" fill="currentColor">Aa</text></svg>',
-    rel:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 11l6-6 M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
-    num:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 2.5 5 13.5 M11 2.5l-1 11 M2.5 6h11 M2 10h11" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
-    sel:'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 7l2.5 2.5L10.5 7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'
+    tbl:NI('0 0 20 20','M4.5 4.125A2.125 2.125 0 0 0 2.375 6.25v7.5c0 1.174.951 2.125 2.125 2.125h11a2.125 2.125 0 0 0 2.125-2.125v-7.5A2.125 2.125 0 0 0 15.5 4.125zm11.875 7h-5.75v-2.25h5.75zm-5.75 1.25h5.75v1.375a.875.875 0 0 1-.875.875h-4.875zm-1.25-1.25h-5.75v-2.25h5.75zm-5.75 1.25h5.75v2.25H4.5a.875.875 0 0 1-.875-.875zm0-4.75V6.25c0-.483.392-.875.875-.875h4.875v2.25zm7 0v-2.25H15.5c.483 0 .875.392.875.875v1.375z',16),
+    aa:NI('0 0 20 20','M4.963 4.447H7.7l3.832 11.107H9.55l-.863-2.5h-4.71l-.862 2.5H1.13zm-.34 6.732H8.04L6.363 6.321H6.3zM16.995 9.08l.195-.467h1.68v6.94h-1.68l-.195-.796.004-.008a2.9 2.9 0 0 1-2.036.804c-1.825 0-3.28-1.513-3.28-3.635s1.455-3.635 3.28-3.635c.8 0 1.497.29 2.032.796m-3.438 2.835c0 1.145.715 1.96 1.719 1.96s1.719-.816 1.719-1.96-.715-1.96-1.72-1.96c-1.003 0-1.718.815-1.718 1.96'),
+    rel:NI('0 0 20 20','M15.313 4.688v10.625h-1.876V7.888l-8.05 8.05-1.324-1.325 8.05-8.05H4.688V4.688z'),
+    num:NI('0 0 20 20','M16.875 8.125V6.25h-2.5l.938-3.75h-1.876L12.5 6.25H9.375l.938-3.75H8.437L7.5 6.25H3.75v1.875h3.281l-.937 3.75H3.125v1.875h2.5l-.937 3.75h1.875l.937-3.75h3.125l-.937 3.75h1.874l.938-3.75h3.75v-1.875h-3.281l.937-3.75zm-5.781 3.75H7.969l.937-3.75h3.125z'),
+    sel:NI('0 0 20 20','M10 2.375a7.625 7.625 0 1 0 0 15.25 7.625 7.625 0 0 0 0-15.25M3.625 10a6.375 6.375 0 1 1 12.75 0 6.375 6.375 0 0 1-12.75 0m3.433-1.442a.625.625 0 0 1 .884 0L10 10.616l2.058-2.058a.625.625 0 1 1 .884.884l-2.5 2.5a.625.625 0 0 1-.884 0l-2.5-2.5a.625.625 0 0 1 0-.884'),
+    page:NI('4.12 2.37 11.75 15.25','M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z',12)
   };
+  /* Verknuepfte Seite wie in Notion: Seiten-Symbol vor dem unterstrichenen Namen */
+  function NREL(t){ return t?'<em class="nt-rel">'+NT_ICO.page+'<u>'+t+'</u></em>':''; }
   ANIM.vorabend={
     html:function(){
       return '<div class="a6"><div class="a6-col a6-fri"><div class="a6-h"><b>Freitag</b><span class="a6-clk">17:00</span></div>'+
-        '<div class="a6-feed wa">'+
-          '<div class="a6-m sys on"><span class="wa-x">Kurze Erinnerung vom Restaurant Hafenblick: morgen, 20 Uhr, vier Personen auf Lindner. Bleibt es dabei?</span><span class="wa-t">17:00</span><em class="wa-b"><i>Passt</i><i>Leider absagen</i></em></div>'+
-          '<div class="a6-m gst on"><span class="wa-x">Leider absagen</span><span class="wa-t">17:03'+WA_TICK+'</span></div>'+
-          '<div class="a6-m sys on"><span class="wa-x">Für morgen 20 Uhr ist ein Tisch für vier frei geworden. Sollen wir ihn für dich buchen?</span><span class="wa-t">17:04</span></div>'+
-          '<div class="a6-m gst on"><span class="wa-x">Ja, sehr gern!</span><span class="wa-t">17:06'+WA_TICK+'</span></div>'+
+        '<div class="a6-feed wa">'+waHead('Restaurant Hafenblick','','H')+
+          '<div class="a6-m sys on">'+waTx('Kurze Erinnerung vom Restaurant Hafenblick: morgen, 20 Uhr, vier Personen auf Lindner. Bleibt es dabei?','17:00')+'<em class="wa-b"><i>Passt</i><i>Leider absagen</i></em></div>'+
+          '<div class="a6-m gst on">'+waTx('Leider absagen','17:03',1)+'</div>'+
+          '<div class="a6-m sys on">'+waTx('Für morgen 20 Uhr ist ein Tisch für vier frei geworden. Sollen wir ihn für dich buchen?','17:04')+'</div>'+
+          '<div class="a6-m gst on">'+waTx('Ja, sehr gern!','17:06',1)+'</div>'+
         '</div><div class="a6-cap">WhatsApp auf dem Handy der Gäste</div></div>'+
         '<div class="a6-gap"><i class="a6-pulse"></i></div>'+
         '<div class="a6-col a6-sat"><div class="a6-h"><b>Samstag</b><span>Belegung 20 Uhr</span></div>'+
-          '<div class="nt"><div class="nt-v">'+NT_ICO.tbl+'<span>Reservierungen</span></div><div class="nt-tab">'+
-            '<div class="nt-r nt-hd"><span>'+NT_ICO.aa+'Gastname</span><span>'+NT_ICO.rel+'Tisch</span><span>'+NT_ICO.num+'Pers.</span><span>'+NT_ICO.sel+'Status</span></div>'+
-            '<div class="nt-r"><span>Okafor</span><span>Tisch 2</span><span>2</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
-            '<div class="nt-r a6-key"><span>Lindner</span><span>Tisch 6</span><span>4</span><span><em class="nt-tag red a6-ks">Storniert</em></span></div>'+
-            '<div class="nt-r"><span>Weiß</span><span>Tisch 8</span><span>6</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
-            '<div class="nt-r a6-w1"><span>Becker</span><span class="a6-wt">Tisch 6</span><span>4</span><span><em class="nt-tag gre a6-ws">Bestätigt</em></span></div>'+
-            '<div class="nt-r"><span>Yilmaz</span><span class="nt-e"></span><span>2</span><span><em class="nt-tag blu">Warteliste</em></span></div>'+
+          '<div class="nt"><div class="nt-top"><span>🍽️</span><span>Backoffice</span><span class="nt-sl">/</span><span class="nt-mid">Operations Area</span><span class="nt-dots">…</span><span class="nt-sl">/</span><span>Reservierungen</span></div>'+
+            '<div class="nt-dbt">Reservierungen</div><div class="nt-v"><span>'+NT_ICO.tbl+'Tabelle</span></div><div class="nt-tab">'+
+            '<div class="nt-r nt-hd"><span>'+NT_ICO.aa+'Gastname</span><span>'+NT_ICO.rel+'Tisch</span><span class="nt-n">'+NT_ICO.num+'Pers.</span><span>'+NT_ICO.sel+'Status</span></div>'+
+            '<div class="nt-r"><span>Okafor</span><span>'+NREL('Tisch 2')+'</span><span class="nt-n">2</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
+            '<div class="nt-r a6-key"><span>Lindner</span><span>'+NREL('Tisch 6')+'</span><span class="nt-n">4</span><span><em class="nt-tag red a6-ks">Storniert</em></span></div>'+
+            '<div class="nt-r"><span>Weiß</span><span>'+NREL('Tisch 8')+'</span><span class="nt-n">6</span><span><em class="nt-tag gre">Bestätigt</em></span></div>'+
+            '<div class="nt-r a6-w1"><span>Becker</span><span class="a6-wt">'+NREL('Tisch 6')+'</span><span class="nt-n">4</span><span><em class="nt-tag gre a6-ws">Bestätigt</em></span></div>'+
+            '<div class="nt-r"><span>Yilmaz</span><span class="nt-e"></span><span class="nt-n">2</span><span><em class="nt-tag blu">Warteliste</em></span></div>'+
           '</div></div><div class="a6-cap">deine Datenbank in Notion</div>'+
         '</div></div>'+
         '<div class="a6-rail"><span class="a6-s on">Erinnerung raus</span><span class="a6-s on">Absage</span><span class="a6-s on">Tisch wieder frei</span><span class="a6-s on">Warteliste bekommt ihn</span></div>';
@@ -35628,7 +35660,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       stop(st);
       var m=$$(st,'.a6-m'), clk=$(st,'.a6-clk'), key=$(st,'.a6-key'), ks=$(st,'.a6-ks'), w1=$(st,'.a6-w1'), wt=$(st,'.a6-wt'), ws=$(st,'.a6-ws'), s=$$(st,'.a6-s'), p=$(st,'.a6-pulse');
       function tag(el,t,c){ el.className=el.className.replace(/\b(gre|red|blu|gra)\b/,c); el.textContent=t; }
-      cls(m,'on',0); cls(s,'on',0); cls([key,w1],'hl',0); tag(ks,'Bestätigt','gre'); tag(ws,'Warteliste','blu'); wt.textContent=''; clk.textContent='16:58';
+      cls(m,'on',0); cls(s,'on',0); cls([key,w1],'hl',0); tag(ks,'Bestätigt','gre'); tag(ws,'Warteliste','blu'); wt.innerHTML=''; clk.textContent='16:58';
       function pulse(dir){ p.classList.remove('go','back'); reflow(p); p.classList.add(dir); }
       T(st,function(){ clk.textContent='16:59'; },500);
       T(st,function(){ clk.textContent='17:00'; m[0].classList.add('on'); s[0].classList.add('on'); },1100);
@@ -35640,7 +35672,7 @@ window.__tsn4Boot && window.__tsn4Boot();
       T(st,function(){ m[2].classList.add('on'); clk.textContent='17:04'; s[3].classList.add('on'); },5500);
       T(st,function(){ m[3].classList.add('on'); clk.textContent='17:06'; },6900);
       T(st,function(){ pulse('go'); },7200);
-      T(st,function(){ wt.textContent='Tisch 6'; tag(ws,'Bestätigt','gre'); },7700);
+      T(st,function(){ wt.innerHTML=NREL('Tisch 6'); tag(ws,'Bestätigt','gre'); },7700);
       T(st,function(){ w1.classList.remove('hl'); },8600);
       T(st,function(){ cls(m,'on',1); cls(s,'on',1); },8600);
     },
@@ -35655,7 +35687,7 @@ window.__tsn4Boot && window.__tsn4Boot();
           return '<div class="a7-d on" style="--v:'+(d[1]/100)+'"><span class="a7-dl">'+d[0]+'</span><div class="a7-bar"><i></i></div><b class="a7-p">'+d[1]+' %</b><span class="a7-k">'+d[2]+' korrigiert</span></div>';
         }).join('')+'</div>'+
         '<div class="a7-card"><div class="a7-ch"><span>Freigabe auf deinem Handy, per WhatsApp</span><b class="a7-cd">Sonntag</b></div>'+
-          '<div class="a7-wa wa"><div class="a7-m"><span class="wa-n">Zentrale Hafenblick</span><span class="wa-x">Geplante Antwort an einen Gast:</span><p class="a7-cq">„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"</p><span class="wa-t">12:14</span>'+
+          '<div class="a7-wa wa">'+waHead('Zentrale Hafenblick','','Z')+'<div class="a7-m"><span class="wa-x">Geplante Antwort an einen Gast:</span><p class="a7-cq">„Dienstag, 19 Uhr, zwei Personen ist frei. Auf welchen Namen darf ich reservieren?"</p><span class="wa-t">12:14</span>'+
           '<em class="wa-b a7-cb"><i class="a7-ok on">Freigeben</i><i class="a7-ko">Korrigieren</i></em></div></div></div>'+
         '<div class="a7-sw on"><span class="a7-swl">Schattenmodus</span><i class="a7-tg"><b></b></i><span class="a7-sws">aus · Standardfälle laufen allein, Sonderfälle weiter über dich</span></div></div>';
     },
@@ -36342,8 +36374,8 @@ window.__tsn4Boot && window.__tsn4Boot();
     eyebrow:'L 5.4', alt:'Der Schreib-Agent für Mail und WhatsApp',
     title:'Der Schreib-<span class="ts-gold">Agent</span>',
     intro:[
-      'Jetzt bekommt dein Agent sein Regelwerk und seine ersten zwei Türen. Wir fangen bewusst mit den geschriebenen Kanälen an, mit <b>Mail und WhatsApp</b>. Dort ist jedes Wort nachlesbar, du siehst genau, was der Agent verstanden und geantwortet hat, und ein Fehler fällt sofort auf.',
-      'Für den Agenten macht es keinen Unterschied, ob ein Text aus dem Postfach kommt oder aus dem Messenger. Er bekommt einen Text, fragt dazwischen das Werkzeug und schreibt einen zurück. Also bauen wir einen Agenten und hängen zwei Türen daran. Am Ende dieser Lektion schreibst du deiner eigenen Restaurant-Nummer und bekommst eine echte Buchung.'
+      'Jetzt bekommt dein Agent sein Regelwerk und seine ersten zwei Türen. Wir fangen mit den geschriebenen Kanälen an, mit <b>Mail und WhatsApp</b>. Dort ist jedes Wort nachlesbar, du siehst, was der Agent verstanden und geantwortet hat, und ein Fehler fällt sofort auf.',
+      'Für den Agenten macht es keinen Unterschied, ob ein Text aus dem Postfach kommt oder aus dem Messenger. Er bekommt einen Text, fragt dazwischen das Werkzeug und schreibt einen zurück. Also bauen wir einen Agenten und hängen zwei Türen daran. Am Ende dieser Lektion schreibst du deiner Restaurant-Nummer und bekommst eine echte Buchung.'
     ],
     blocks:[
       {t:'anim', key:'gespraech', eb:'Von innen gesehen', h:'Ein Gespräch, und was der Agent dabei <span class="ts-gold">tut</span>.',
