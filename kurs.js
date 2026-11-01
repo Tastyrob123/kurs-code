@@ -4419,7 +4419,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/plan-mode-effort-levels' },
     { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/die-5-wichtigsten-skills' },
     { re:/\/(?:lektionen\/)?die-5-wichtigsten-skills\/?$/, href:'/die-4-wichtigsten-mcps' },
-    { re:/\/(?:lektionen\/)?die-4-wichtigsten-mcps\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?die-4-wichtigsten-mcps\/?$/, href:'/kontextmanagement' },
+    { re:/\/(?:lektionen\/)?kontextmanagement\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31506,7 +31507,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/die-5-wichtigsten-skills", "l12": "/die-4-wichtigsten-mcps", "l13": "/kontextmanagement", "l14": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -33381,6 +33382,108 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du kennst <b>claude mcp add</b> und die drei Bereiche.',
         'Du verbindest nur <b>vertrauenswürdige</b> Dienste und schaltest Ungenutztes ab.'],
       next:'/kontextmanagement'}
+  });
+})();
+
+/* ---- l14-kontext-kosten.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.14 "Kontext & Kosten"  (/kontextmanagement)
+   Fakten: code.claude.com/docs/en/best-practices (Zeilen 490-502: jede Anfrage schickt das ganze
+   Gespraech, drei Themen werden beim vierten mitgelesen, Cache ca. eine Stunde im Abo, danach
+   voller Preis, Leerlauf ueber ca. 200K wird kompaktiert, /usage-Aufschluesselung), context-window.md
+   (automatisches Kompaktieren, /compact mit Fokus, /rewind zusammenfassen, /autocompact, /clear,
+   Subagenten, was nach dem Kompaktieren bleibt), Faktenblatt Punkt 10. Taxiuhr-Bild wird HIER
+   eingefuehrt (Modul 5 greift darauf zurueck).
+   Erklaeranimation #tsn3-a14 "Die Uhr laeuft fuer alles, was im Wagen sitzt."
+   Links der Pass (Kontext) mit Bloecken je Thema, rechts eine Taxiuhr, deren Zeiger zeigt, wie
+   viel bei jeder neuen Nachricht mitgelesen wird. Drei Themen in einer Sitzung, dann /clear.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var TH=[{k:'t1',n:'Wochenkarte',b:3},{k:'t2',n:'Lieferscheine',b:4},{k:'t3',n:'Dienstplan',b:3}];
+  var CAPS=[
+    'Jede Sitzung beginnt mit dem, was immer geladen ist: <b>CLAUDE.md</b> und die Namen deiner Skills.',
+    'Erstes Thema, die Wochenkarte. Jede Nachricht und jede gelesene Datei <b>bleibt im Kontext</b>.',
+    'Zweites Thema in derselben Sitzung. Ab jetzt liest Claude bei jeder Nachricht die Wochenkarte <b>mit</b>, obwohl sie erledigt ist.',
+    'Drittes Thema. Die Uhr läuft jetzt für <b>alle drei</b>, bei jeder einzelnen Nachricht.',
+    '<b>/clear</b>, und der Wagen ist leer. Nur die CLAUDE.md steigt wieder ein, und die Uhr steht fast still.'
+  ];
+  var blocks='<span class="l14-b base">CLAUDE.md</span>';
+  TH.forEach(function(t){ for(var i=0;i<t.b;i++) blocks+='<span class="l14-b '+t.k+(i===0?' first':'')+'">'+(i===0?t.n:'')+'</span>'; });
+  var stage='<div class="l14-wrap"><div class="l14-pass"><div class="l14-h">Kontext der Sitzung</div><div class="l14-row">'+blocks+'</div>'
+    +'<div class="l14-scale"><span>leer</span><span>1 Million Token</span></div></div>'
+    +'<div class="l14-meter"><div class="l14-h">Mitgelesen bei jeder Nachricht</div><div class="l14-dial"><svg viewBox="0 0 200 120" aria-hidden="true"><path class="arc" d="M20 110 A80 80 0 0 1 180 110"/><g class="ticks"><path d="M100 30 L100 40"/><path d="M43 53 L50 60"/><path d="M157 53 L150 60"/></g></svg>'
+    +'<span class="l14-needle" style="--a:-78"></span><span class="l14-hub"></span></div><div class="l14-lbl"><span>wenig</span><span>viel</span></div></div></div>';
+  function show(el, n, cleared){
+    el.querySelectorAll('.l14-b').forEach(function(b){
+      var on=b.classList.contains('base') || (!cleared && TH.some(function(t,i){ return i<n && b.classList.contains(t.k); }));
+      b.classList.toggle('on', on);
+    });
+    var a=cleared? -78 : [-80,-48,-6,40][n];
+    el.querySelector('.l14-needle').style.setProperty('--a',a);
+  }
+  T3.anim('tsn3-a14',{
+    reset:function(el){ show(el,0,false); el.querySelectorAll('.l14-b.base').forEach(function(b){ b.classList.remove('on'); }); },
+    play:function(el, api, end){
+      var S=3200;
+      api.T.at(300,function(){ show(el,0,false); api.cap(CAPS[0]); });
+      [1,2,3].forEach(function(n){ api.T.at(300+n*S,function(){ show(el,n,false); api.cap(CAPS[n]); }); });
+      api.T.at(300+4*S,function(){ el.classList.add('clearing'); api.cap(CAPS[4]); });
+      api.T.at(300+4*S+500,function(){ el.classList.remove('clearing'); show(el,0,true); });
+      api.T.at(300+5*S+400, end);
+    },
+    end:function(el){ show(el,0,true); }
+  });
+
+  T3.page({
+    key:'l14', re:/\/(?:lektionen\/)?kontextmanagement\/?$/, tab:'L 3.14 · Kontext & Kosten',
+    hero:{eyebrow:'L 3.14', title:'Kontext & <span class="ts-gold">Kosten</span>', alt:'Kontext und Kosten in Claude Code im Griff behalten'},
+    intro:'<p>Alles, was in einer Sitzung gesagt, gelesen und geschrieben wurde, bleibt im <b>Kontext</b>, dem Arbeitsspeicher dieser Sitzung. Die aktuellen Modelle fassen bis zu eine Million Token, und kurz vor der Grenze fasst Claude Code von selbst zusammen. Voll wird er also selten. Teuer wird er trotzdem.</p>'
+      +'<p>Denn bei jeder neuen Nachricht liest Claude das ganze bisherige Gespräch noch einmal mit, und genau das zählt gegen dein Nutzungsfenster aus Lektion 3.3. Wer das einmal verstanden hat, arbeitet mit demselben Plan deutlich länger am Stück.</p>',
+    anim:{id:'tsn3-a14', eb:'Die Taxiuhr', title:'Die Uhr läuft für alles, was im <span class="g">Wagen</span> sitzt.',
+      sub:'Drei Themen in einer Sitzung, dann ein Neuanfang. Achte auf den Zeiger.',
+      stage:stage,
+      capEnd:CAPS[4]},
+    body:function(H){
+      return H.sec({id:'tsn3-l14-taxi', title:'Warum lange Sitzungen <span class="g">teuer</span> werden',
+          lead:'Stell dir ein Taxi vor, in dem nie jemand aussteigt. Jeder neue Fahrgast fährt die ganze Strecke mit allen anderen, und die Uhr rechnet für alle.',
+          body:'<p><strong class="lead">Jede Nachricht nimmt alles mit.</strong>Eine Sitzung, in der du drei verschiedene Aufgaben erledigt hast, liest beim vierten Thema alle drei bei jeder Nachricht noch einmal. Laut Anthropic ist das günstiger, solange der Zwischenspeicher warm ist, im Abo etwa eine Stunde lang. Danach zählt der volle Preis.</p>'
+            +'<p><strong class="lead">Nach der Pause wird es zusammengefasst.</strong>Lässt du eine große Sitzung liegen, fasst Claude Code sie kurz vor Ablauf des Zwischenspeichers zusammen. Nach dem Mittagessen arbeitest du dann mit einer Zusammenfassung weiter. Brauchst du den Verlauf gar nicht, ist eine neue Sitzung noch günstiger.</p>'
+            +H.note('Ein Thema, eine Sitzung. Ist ein Auftrag erledigt, beginnst du den nächsten mit /clear.','Die Merkregel')})
+        +H.sec({id:'tsn3-l14-werkzeug', wide:true, title:'Die Werkzeuge für deinen <span class="g">Kontext</span>',
+          lead:'Fünf Befehle reichen, um jederzeit zu wissen, wo du stehst, und gegenzusteuern.',
+          body:H.table(['Befehl','Was er tut','Wann'],[
+            ['<code>/context</code>','zeigt als farbiges Raster, was den Kontext gerade füllt, mit Spartipps','wenn eine Sitzung zäh wird'],
+            ['<code>/usage</code>','zeigt dein Nutzungsfenster und den Verbrauch je Skill, Plugin und Verbindung','einmal pro Woche, oder wenn die Grenze droht'],
+            ['<code>/compact</code>','fasst das bisherige Gespräch zusammen, mit Fokus: <code>/compact Fokus auf die Wochenkarte</code>','bevor in derselben Sitzung ein großer neuer Schritt kommt'],
+            ['<code>/clear</code>','beginnt ein neues Gespräch, kostet nichts','sobald ein Thema erledigt ist'],
+            ['<code>/rewind</code>','kann auch ab einer Stelle zusammenfassen: „Summarize from here“','wenn nur ein Teil der Sitzung unnötig lang wurde']
+          ])
+          +'<p class="tsn3-fn">Kurz bevor das Fenster voll ist, fasst Claude Code automatisch zusammen. Deine CLAUDE.md, das Gedächtnis und ein Plan aus dem Plan-Modus werden danach neu eingelesen, sie gehen nicht verloren. Wann das passiert, stellst du mit <code>/autocompact</code> ein.</p>'})
+        +H.sec({id:'tsn3-l14-sparen', title:'So arbeitest du <span class="g">sparsam</span>',
+          lead:'Keine dieser Gewohnheiten macht dich langsamer. Die meisten machen die Ergebnisse sogar besser.',
+          body:H.steps([
+            'Gib <b>konkrete Aufträge</b>. „Verbessere die Karte“ lässt Claude alles lesen, „kürze die Beschreibungen der Hauptgerichte auf 12 Wörter“ nur das Nötige.',
+            'Lass größere Aufgaben im <b>Plan-Modus</b> vorbereiten. Ein Umweg, der im Plan auffällt, kostet nichts.',
+            'Korrigier <b>früh</b>. Siehst du, dass Claude falsch abbiegt, halt mit Esc an, statt es zu Ende laufen zu lassen.',
+            'Nach <b>zwei Fehlversuchen</b> beginnst du mit /clear neu und einem besseren Auftrag. Ein frischer Start schlägt jede dritte Korrektur.',
+            'Halte die <b>CLAUDE.md kurz</b>, lege Abläufe in Skills und schalte Verbindungen ab, die du nicht brauchst.',
+            'Für einfache Routine reichen <b>Sonnet</b> und eine niedrigere Denk-Tiefe.'
+          ],'Sechs Gewohnheiten')
+          +H.note('Auch Arbeit im Hintergrund verbraucht Kontingent, ohne dass du tippst, etwa Aufgaben, die Claude an Helfer verteilt. Schau bei Überraschungen zuerst in /usage.','Gut zu wissen')})
+    },
+    emp:{kind:'Nutzung', animTitle:'Deine', animGold:'sparsame Sitzung',
+      steps:['Ein Thema','Übergabe','/clear','/usage'],
+      intro:'So holst du aus deinem Plan am meisten Arbeit heraus:',
+      points:['Arbeite <b>ein Thema pro Sitzung</b> und benenne sie mit /rename.',
+        'Lass dir vor dem Wechsel eine kurze <b>Übergabe</b> schreiben, wie in Lektion 3.10.',
+        'Beginn das nächste Thema mit <b>/clear</b>, nicht in derselben Sitzung.',
+        'Schau einmal pro Woche in <b>/usage</b>, wo dein Kontingent hingeht, und räum dort auf.']},
+    learn:{learn:['Du weißt, dass jede Nachricht <b>das ganze Gespräch</b> mitliest.',
+        'Du arbeitest nach der Regel <b>ein Thema, eine Sitzung</b>.',
+        'Du kennst <b>/context, /usage</b>, /compact und /clear.',
+        'Du hast <b>sechs Gewohnheiten</b>, die Kontingent sparen.'],
+      next:'/erste-echte-session-landingpage-4-modi'}
   });
 })();
 
