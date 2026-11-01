@@ -110,33 +110,70 @@ window.__tsMO = function(cb){
    arbeitet niemand -> kollisionssicher. Bitte hier lassen.
    ============================================================ */
 
-/* TS Page-Veil Ausloeser (Gegenstueck zum Veil-Block am Anfang von kurs.css):
-   Reveal ~350ms nach DOMContentLoaded -- bis dahin haben die Seiten-Module ihren
-   ersten Mount-Durchlauf gemacht. Mehrfach abgesichert: load-Event, visibility-
-   change (hidden Tabs drosseln Timer/Animationen), harter 2,2s-Timeout. CSS-
-   Failsafe (2,5s) greift zusaetzlich, falls dieses Skript nie ausgefuehrt wird. */
+/* TS Page-Veil Ausloeser (Gegenstueck zum Veil-Block am Anfang von kurs.css).
+   Neu gefasst 01.11.2026 (Ladezeit-Chat): keine feste Mindestwartezeit mehr.
+   Ablauf: (1) DOMContentLoaded und alle Seitenteile dieser Adresse ausgefuehrt
+   (window.__tsTeileBereit, siehe tools/teile-lader.js), (2) die Module haben
+   gemountet (Inhaltsbereich 60 ms ohne Aenderung, hoechstens 350 ms), (3) jedes
+   Bild im ersten Bild ist geladen (nur load, nie decode; decoding=sync), hoechstens
+   1,5 s. Dann erscheint alles in einem Moment, und html bekommt ts-reveal.
+   Absicherung: harter Rueckfall 3 s nach Skriptstart, CSS-Failsafe (kurs.css). */
 (function(){
   if(window.__tsVeil) return; window.__tsVeil=true;
-  var lastMut = performance.now();
-  var mo = new MutationObserver(function(){ lastMut = performance.now(); });
-  mo.observe(document.documentElement, {childList:true, subtree:true, attributes:true});
+  var H=document.documentElement, done=false, T0=performance.now();
   function reveal(){
-    document.documentElement.classList.add('ts-reveal');
-    try{ mo.disconnect(); }catch(e){}
+    if(done) return; done=true;
+    H.classList.add('ts-reveal');
+    window.__tsRevealMs=Math.round(performance.now());
+    try{ document.dispatchEvent(new CustomEvent('ts:reveal')); }catch(e){}
   }
-  /* Reveal, sobald das DOM nach DOMContentLoaded 300ms lang ruhig war
-     (= Module fertig gemountet), fruehestens 400ms nach Skript-Start.
-     WICHTIG: max. 900ms warten -- Seiten mit Dauer-Animationen (tickende
-     Uhr, Tipp-Effekt) werden nie "ruhig" und sollen trotzdem zackig oeffnen. */
-  var t0 = performance.now(), dclDone = document.readyState !== 'loading';
-  document.addEventListener('DOMContentLoaded', function(){ dclDone = true; });
-  var iv = setInterval(function(){
-    var now = performance.now();
-    if(dclDone && now - t0 > 400 && (now - lastMut > 300 || now - t0 > 900)){ clearInterval(iv); reveal(); }
-  }, 100);
-  window.addEventListener('load', function(){ setTimeout(reveal, 400); });
-  document.addEventListener('visibilitychange', function(){ if(!document.hidden) setTimeout(reveal, 400); });
-  setTimeout(function(){ clearInterval(iv); reveal(); }, 2200);
+  setTimeout(reveal, 3000);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden && performance.now()-T0>3000) reveal(); });
+
+  function bilder(){
+    if(done) return;
+    var vh=window.innerHeight||800, vw=window.innerWidth||1200, offen=[];
+    var imgs=document.querySelectorAll('main.super-content img');
+    for(var i=0;i<imgs.length;i++){
+      var im=imgs[i]; var r=im.getBoundingClientRect();
+      if(r.width<8 || r.height<8 || r.bottom<=0 || r.top>=vh || r.right<=0 || r.left>=vw) continue;
+      if(im.loading==='lazy') im.loading='eager';
+      try{ im.decoding='sync'; }catch(e){}
+      if(!(im.complete && im.naturalWidth>0)) offen.push(im);
+    }
+    /* Hintergrundbilder grosser Flaechen im ersten Bild (Hero-Kacheln u. a.) */
+    var els=document.querySelectorAll('main.super-content *'), urls={};
+    for(var k=0;k<els.length && k<4000;k++){
+      var e=els[k]; if(e.tagName==='IMG' || e.tagName==='svg') continue;
+      var q=e.getBoundingClientRect();
+      if(q.width<120 || q.height<80 || q.bottom<=0 || q.top>=vh) continue;
+      var bg=getComputedStyle(e).backgroundImage;
+      if(bg && bg.indexOf('url(')>-1){ var m=bg.match(/url\(["']?([^"')]+)["']?\)/); if(m && m[1].indexOf('data:')!==0) urls[m[1]]=1; }
+    }
+    Object.keys(urls).forEach(function(u){ var b=new Image(); b.src=u; if(!(b.complete && b.naturalWidth>0)) offen.push(b); });
+    if(!offen.length){ reveal(); return; }
+    var n=offen.length;
+    function eins(){ if(--n<=0) reveal(); }
+    offen.forEach(function(im){ im.addEventListener('load',eins,{once:true}); im.addEventListener('error',eins,{once:true}); });
+    setTimeout(reveal, 1500);
+  }
+  function ruhig(){
+    if(done) return;
+    var main=document.querySelector('main.super-content') || document.body;
+    var last=performance.now(), start=last;
+    var mo=new MutationObserver(function(){ last=performance.now(); });
+    mo.observe(main,{childList:true,subtree:true});
+    (function warte(){
+      var now=performance.now();
+      if(now-last>=60 || now-start>=350){ mo.disconnect(); bilder(); return; }
+      setTimeout(warte, 20);
+    })();
+  }
+  function los(){
+    if(window.__tsTeileBereit) window.__tsTeileBereit(function(){ setTimeout(ruhig,0); });
+    else setTimeout(ruhig,0);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', los); else los();
 })();
 
 (function(){

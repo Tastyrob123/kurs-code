@@ -16,11 +16,16 @@
    super.so-Inhaltsseite -- inklusive aller kuenftigen, ohne Pflege.
    Die 404-Seite hat kein `main.super-content` und bleibt sofort sichtbar.
 
-   Failsafe doppelt: CSS-Animation blendet nach 2,5 s ein (falls
+   Failsafe doppelt: CSS-Animation blendet nach 5 s ein (falls
    kurs.js nie laeuft), zusaetzlich JS-Failsafes im Ausloeser-Modul.
+   Seit 01.11.2026 (Ladezeit-Chat) deckt der Schleier ALLE Kinder von
+   main.super-content ab, nicht nur .notion-root: die Neubau-Module setzen
+   ihre Wurzel (#tsn0-page, #tsn5, #tsn6, .tsn1-hero ...) NEBEN .notion-root
+   und erschienen sonst ungeschuetzt (Text vor Bild). Nach dem Reveal greift
+   die Regel nicht mehr, eigene Animationen der Wurzeln laufen normal.
    BEWUSST AM DATEIANFANG (kollisionssicher, Chats appenden am Ende).
    ============================================================ */
-main.super-content[class*="page__"] > .notion-root { opacity:0; animation:tsVeilFail .4s 2.5s ease forwards; }
+html:not(.ts-reveal) main.super-content[class*="page__"] > :not(nav):not(.notion-header) { opacity:0; animation:tsVeilFail .3s 5s ease forwards; }
 html.ts-reveal main.super-content > .notion-root { opacity:1 !important; animation:none !important; }
 @keyframes tsVeilFail { to { opacity:1; } }
 

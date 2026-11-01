@@ -30,3 +30,18 @@ für eine Kursseite zu bauen — auch wenn die super.site-Seite in Notion LEER i
 
 Erstbeleg: Lektion 11 (Commit 0ab5013) — 3 Regale aus Menürechner/Kunden/Angebot-Master.
 Detail-Doku: Vault -> Super-Code/Design-System.md (Sektion Warenkorb-Engine) + Lektion 11.
+
+# Kern + Seitenteile (Ladezeit, seit 01.11.2026)
+
+`tools/teile.cjs` läuft in `deploy.sh` und zerlegt `kurs.js` beim Bauen: Blöcke mit
+Seiten-Prüfung (`/\/slug\/?$/`, 1–30 Stück, am Ende mit `$`) kommen in `teile/<hash>.js`,
+alles andere in den Kern `kurs.min.js`. Ganz vorne im Kern steht `tools/teile-lader.js`,
+der für die aktuelle Adresse die passenden Teile nachlädt (auch beim Seitenwechsel ohne
+Neuladen und beim Zeigen auf einen Link). Parser: `tools/vendor/acorn.js` +
+`acorn-walk.js` (MIT, Lizenz in `vendor/acorn-LICENSE`).
+
+- Bauen von Hand: `node tools/teile.cjs` · Nur prüfen, ob Ausgeliefertes zur Quelle passt:
+  `node tools/teile.cjs --pruefen` (Exit 0 = passt).
+- `teile/` ist generiert: nie von Hand ändern, nie löschen (alte Teile bleiben für Browser
+  mit altem Kern im Cache erreichbar).
+- Modul-Chats schreiben weiter nur in `kurs.js`/`kurs.css` und rollen mit `./deploy.sh` aus.
