@@ -26719,7 +26719,7 @@ var TSISL_TEAM_ONB_V2=[
     var a=N.h('div','tsn0-anim'); a.id='tsn0-ab';
     a.innerHTML=N.head('Der Tisch','Alles ist <span class="g">angerichtet.</span>','Ein Gang für jedes Modul nach der Einführung.')+
       '<div class="ab-frame"><div class="ab-glow"></div><div class="ab-pass">'+
-        CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-dish"><img src="https://tastyrob123.github.io/kurs/img/mehrwert/'+DISH[i]+'.jpg" alt="" loading="lazy" decoding="async"></span><span class="ab-n">'+c[0]+'</span><p>'+c[1]+'</p></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
+        CL.map(function(c,i){ return '<div class="ab-pl" style="--i:'+i+'"><div class="ab-plate"><span class="ab-dish"><img src="https://tastyrob123.github.io/kurs/img/mehrwert/'+DISH[i]+'.jpg" alt="" loading="lazy" decoding="async"></span><span class="ab-k">'+c[0]+'</span><span class="ab-n">'+c[1]+'</span><span class="ab-d">'+c[2]+'</span></div><div class="ab-cl"><i></i></div></div>'; }).join('')+
       '</div><div class="ab-shelf"></div></div>'+
       '<div class="tsn0-replay-wrap">'+N.replayBtn()+'</div>';
     out.push(a);
