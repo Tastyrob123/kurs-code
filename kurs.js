@@ -26414,11 +26414,12 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-mock .views span{font-size:13px;color:rgb(173,169,163);padding:4px 7px;border-radius:6px;white-space:nowrap}
   .tsn1 .tsn1-mock .views span.on{color:rgb(240,239,237);box-shadow:inset 0 -2px 0 rgb(240,239,237)}
   .tsn1 .tsn1-mock .grid{overflow:hidden;padding:0 4px}
-  .tsn1 .tsn1-mock table{width:100%;border-collapse:collapse}
+  .tsn1 .tsn1-mock table{width:100%;border-collapse:collapse;table-layout:fixed}
   .tsn1 .tsn1-mock th{text-align:left;font-size:13px;font-weight:400;color:rgb(173,169,163);padding:8px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082)}
-  .tsn1 .tsn1-mock td{font-size:13px;line-height:1.35;color:rgb(240,239,237);padding:8px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);vertical-align:top}
+  .tsn1 .tsn1-mock td{font-size:13px;line-height:1.35;color:rgb(240,239,237);padding:8px 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);vertical-align:top;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;word-break:normal;hyphens:none}
+  .tsn1 .tsn1-mock th{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tsn1 .tsn1-mock th:last-child,.tsn1 .tsn1-mock td:last-child{border-right:0}
-  .tsn1 .tsn1-mock td .t{display:inline-block;height:20px;line-height:20px;padding:0 6px;border-radius:4px;font-size:13px;white-space:nowrap;margin:0 3px 3px 0;background:rgba(255,252,235,.306);color:rgb(240,239,237)}
+  .tsn1 .tsn1-mock td .t{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:top;height:20px;line-height:20px;padding:0 6px;border-radius:4px;font-size:13px;white-space:nowrap;margin:0 3px 3px 0;background:rgba(255,252,235,.306);color:rgb(240,239,237)}
   .tsn1 .tsn1-mock td .t.r{background:rgba(255,116,105,.525);color:rgb(252,233,231)}
   .tsn1 .tsn1-mock td .t.gr{background:rgba(113,255,175,.337);color:rgb(232,241,236)}
   .tsn1 .tsn1-mock td .t.o{background:rgba(255,143,71,.482);color:rgb(251,235,222)}
@@ -26442,8 +26443,8 @@ var TSISL_TEAM_ONB_V2=[
     .tsn1 .tsn1-err .row>div+div{border-left:0;border-top:1px dashed rgba(255,255,255,.06)}
     .tsn1 .tsn1-err .hd{display:none}
     .tsn1 .tsn1-mock table{table-layout:fixed}
-    .tsn1 .tsn1-mock td,.tsn1 .tsn1-mock th{word-break:break-word;font-size:12px;padding:7px 6px}
-    .tsn1 .tsn1-mock td .t{white-space:normal;height:auto;line-height:1.3;padding:2px 5px}
+    .tsn1 .tsn1-mock td,.tsn1 .tsn1-mock th{font-size:12px;padding:7px 5px}
+    .tsn1 .tsn1-mock td .t{font-size:12px;padding:0 4px}
   }
   @media(max-width:600px){
     .tsn1 .tsn1-cards.c2,.tsn1 .tsn1-cards.c3,.tsn1 .tsn1-cards.c4{grid-template-columns:1fr}
@@ -26502,7 +26503,7 @@ var TSISL_TEAM_ONB_V2=[
     res:function(r){
       var m=r.mock;
       var tb='<table><thead><tr>'+m.cols.map(function(c){ return '<th>'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+
-        m.rows.map(function(row){ return '<tr>'+row.map(function(c,i){ return '<td'+((m.num||[]).indexOf(i)>-1?' class="n"':'')+'>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
+        m.rows.map(function(row){ return '<tr>'+row.map(function(c,i){ return '<td'+((m.num||[]).indexOf(i)>-1?' class="n"':'')+'>'+String(c).replace(/ (€|%)/g,'&nbsp;$1')+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
       return '<div class="tsn1-res tsn1-rv'+(r.rev?' rev':'')+'"><div class="tx"><h3>'+r.title+'</h3>'+r.text.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>'+
         '<div class="tsn1-mock"><div class="top"><span>'+m.file.replace(/ \/ /g,' <span style="color:rgb(125,122,117)">/</span> ')+'</span></div><div class="ttl">'+m.tab+'</div>'+
         '<div class="views">'+m.views.map(function(v,i){ return '<span'+(i===(m.on||0)?' class="on"':'')+'>'+v+'</span>'; }).join('')+'</div>'+
@@ -27118,10 +27119,12 @@ var TSISL_TEAM_ONB_V2=[
       `);
       var LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
       function nb(n){ return ''; }
+      var P=window.__tsn1N.PAGE, A=window.__tsn1N.ARROW;
+      function si(t,lvl,arrow,on){ return '<div class="n-si'+(on&&arrow==='no'?' on':'')+'" style="padding-left:'+(8+lvl*14)+'px">'+A.replace('class="ar"','class="ar'+(arrow==='op'?' op':arrow==='no'?' no':'')+'"')+P+'<span>'+t+'</span></div>'; }
       host.id='tsn1-a0';
       host.innerHTML=R.head('Zehn Lektionen','Das Handwerk hinter deiner <span class="g">Vorlage</span>.','Jedes Teil dieses Fensters erklärt dir eine Lektion. Am Ende des Moduls liest du jede Seite der Backoffice-Vorlage so selbstverständlich wie deine Speisekarte.')+
         '<div class="win ntn"><div class="bar">Probeküche <em>/</em> Produkte</div><div class="lay">'+
-          '<div class="side pt" data-k="1">'+nb('1.1')+'<div class="gp">Teamspaces</div><div class="it">Küche</div><div class="it l1">Mein Notion AI Backoffice</div><div class="it">Service</div><div class="gp">Privat</div><div class="it on">Probeküche</div></div>'+
+          '<div class="side pt n-side" data-k="1"><div class="n-ws"><i>B</i>Dein Betrieb</div><div class="n-gh">Teamspaces</div>'+si('Küche',0,'op')+si('Mein Notion AI Backoffice',1,'')+si('Service',0,'')+'<div class="n-gh">Privat</div>'+si('Probeküche',0,'op',true)+si('Produkte',1,'no',true)+'</div>'+
           '<div class="main"><div class="cov"><img alt="" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div>'+
             '<div class="ttl"><h4>Produkte</h4><span class="lock pt" data-k="9">'+nb('1.9')+LOCK+'Kann Inhalt bearbeiten</span></div>'+
             '<div class="co pt" data-k="2">'+nb('1.2')+'💡 Neue Artikel immer mit Größe anlegen, Preise netto je Gebinde.</div>'+
@@ -27414,10 +27417,10 @@ var TSISL_TEAM_ONB_V2=[
 /* ============================================================
    NEUBAU MODUL 1 · L1.2 "Lesbar im Stress."
    Adresse: /lektionen/l12-layout-medien-strukturierungs-tricks (Alt-Slug toleriert)
-   Erklaeranimation "Aus dem Zettel wird eine Stationskarte" — EIGENES Konzept:
-   EIN Tablet am Pass. Dieselben sechs Bloecke stehen erst als Textwand da,
-   dann ordnen sie sich (FLIP, nur transform) zu Ueberschrift, zwei Spalten,
-   Hinweis und zugeklapptem Detail. Danach klappt das Detail einmal auf und zu.
+   Erklaeranimation "Ein Bildschirm am Pass" — EIGENES Konzept (seit fdf5fa0):
+   Ein Kuechenhandbuch als Notion-Seite: ganz aufgeklappt passt es nicht auf
+   den Bildschirm, mit Ueberschriften als Toggle passt es auf einen Blick,
+   dann klappt genau ein Abschnitt auf (nur transform, feste Hoehe).
    ============================================================ */
 (function(){
   if(window.__tsn1L2) return; window.__tsn1L2=true;
@@ -27428,10 +27431,11 @@ var TSISL_TEAM_ONB_V2=[
     function anim(host){
       window.__tsn1N.css();
       N.addCSS('tsn1-a2-css',`
-      #tsn1-a2 .stg{position:relative;width:min(760px,100%);margin:0 auto;height:600px;border-radius:12px;border:1px solid rgba(255,255,255,.1);overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.95)}
-      #tsn1-a2 .scr{position:absolute;left:28px;right:28px;top:28px;height:388px;border-radius:14px;border:1.5px solid rgba(199,180,137,.75);box-shadow:0 0 0 9999px rgba(4,5,10,.62),0 0 40px rgba(199,180,137,.12);pointer-events:none;z-index:3;transition:box-shadow .8s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a2 .scr span{position:absolute;right:12px;top:-11px;padding:3px 9px;border-radius:999px;background:#07080e;border:1px solid rgba(199,180,137,.55);font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-      #tsn1-a2 .doc{position:absolute;left:52px;right:52px;top:50px}
+      #tsn1-a2 .stg{position:relative;width:min(760px,100%);margin:0 auto;height:478px;border-radius:12px;border:1px solid rgba(255,255,255,.1);overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.95)}
+      #tsn1-a2 .stg .n-top{position:absolute;left:0;right:0;top:0;z-index:3;background:rgb(25,25,25)}
+
+
+      #tsn1-a2 .doc{position:absolute;left:52px;right:52px;top:62px}
       #tsn1-a2 .ttl{font-size:28px;font-weight:700;line-height:1.2;color:rgb(240,239,237);margin:0 0 6px}
       #tsn1-a2 .sub{font-size:14px;line-height:1.4;color:rgb(173,169,163);margin:0}
       #tsn1-a2 .sec{position:absolute;left:52px;right:52px;top:0;will-change:transform;transition:transform .95s cubic-bezier(.16,1,.3,1)}
@@ -27441,7 +27445,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a2 .bd{padding:2px 0 10px 22px;font-size:15px;line-height:1.5;color:rgb(240,239,237);transition:opacity .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .sec.cl .bd{opacity:0}
       #tsn1-a2 .sec.al .bd{margin-left:22px;padding:12px;border-radius:10px;background:rgb(35,56,80)}
-      #tsn1-a2 .fit{position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:center;font:500 12.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a2 .fit{width:min(760px,100%);margin:14px auto 0;display:flex;justify-content:center;gap:12px;align-items:baseline;font:500 15px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
       #tsn1-a2 .fit b{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;transition:color .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .fit b.ok{color:#c7b489}
       #tsn1-a2 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(760px,100%);margin:22px auto 0}
@@ -27452,7 +27456,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a2 .rp{display:flex;justify-content:center;margin-top:18px}
       #tsn1-a2 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .rp button:hover{background:#c7b489;color:#05060b}
-      @media(max-width:700px){ #tsn1-a2 .stg{height:640px} #tsn1-a2 .scr{left:14px;right:14px} #tsn1-a2 .doc,#tsn1-a2 .sec{left:30px;right:30px} #tsn1-a2 .fit{left:16px;right:16px} #tsn1-a2 .rail{grid-template-columns:1fr} }
+      @media(max-width:700px){ #tsn1-a2 .stg{height:600px} #tsn1-a2 .doc,#tsn1-a2 .sec{left:22px;right:22px} #tsn1-a2 .rail{grid-template-columns:1fr} }
       `);
       var SEC=[
         ['Schichtbeginn','Kühlschranktemperaturen eintragen, Lieferung prüfen, Mise-en-place-Liste der Station abarbeiten.'],
@@ -27463,11 +27467,10 @@ var TSISL_TEAM_ONB_V2=[
         ['Notfälle','Kältetechnik, Elektriker, Schlüsseldienst, Erste-Hilfe-Kasten neben dem Kühlhaus.']
       ];
       host.id='tsn1-a2';
-      host.innerHTML=R.head('Ein Bildschirm am Pass','Alles Wichtige auf <span class="g">einen Blick</span>.','Ein Küchenhandbuch, ganz aufgeklappt, ist zu lang für das Tablet am Pass. Mit Überschriften als Toggle passt es auf einen Bildschirm, und aufgeklappt wird nur, was gerade gebraucht wird.')+
-        '<div class="stg ntn"><div class="doc"><p class="ttl">Küchenhandbuch</p><p class="sub">Station Kalt · gilt für alle Schichten</p></div>'+
+      host.innerHTML=R.head('Ein Bildschirm am Pass','Alles Wichtige auf <span class="g">einen Blick</span>.','Das Fenster ist so hoch wie das Tablet am Pass. Ganz aufgeklappt ist das Küchenhandbuch zu lang dafür. Mit Überschriften als Toggle passt es auf einen Bildschirm, und aufgeklappt wird nur, was gerade gebraucht wird.')+
+        '<div class="stg ntn"><div class="n-top">Küche<span class="sep">/</span>Küchenhandbuch</div><div class="doc"><p class="ttl">Küchenhandbuch</p><p class="sub">Station Kalt · gilt für alle Schichten</p></div>'+
           SEC.map(function(x,i){ return '<div class="sec'+(x[2]?' al':'')+'" data-i="'+i+'"><div class="hd">'+window.__tsn1N.ARROW.replace('class="ar"','')+x[0]+'</div><div class="bd">'+(x[2]?'💡 ':'')+x[1]+'</div></div>'; }).join('')+
-          '<div class="scr"><span>Ein Bildschirm</span></div>'+
-          '<div class="fit"><span>Sichtbar ohne Scrollen</span><b>2 von 6</b></div></div>'+
+          '</div><div class="fit"><span>Auf dem Tablet ohne Scrollen sichtbar:</span><b>2 von 6</b></div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Alles offen: Die Hälfte liegt unter dem Bildschirmrand.</button><button class="st" data-s="1"><b>02</b>Überschriften als Toggle: alle sechs auf einen Blick.</button><button class="st" data-s="2"><b>03</b>Geöffnet wird nur, was gerade gebraucht wird.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
       var secs=[].slice.call(host.querySelectorAll('.sec')), sts=host.querySelectorAll('.st'), fit=host.querySelector('.fit b'), doc=host.querySelector('.doc');
@@ -27476,7 +27479,7 @@ var TSISL_TEAM_ONB_V2=[
       function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
       /* Positionen aus gemessenen Hoehen, Bewegung nur ueber transform */
       function lay(open){
-        var y=doc.offsetTop+doc.offsetHeight+18, frameBottom=28+388, inside=0;
+        var y=doc.offsetTop+doc.offsetHeight+18, frameBottom=host.querySelector('.stg').clientHeight, inside=0;
         secs.forEach(function(s,i){
           var on=open==='all'||open===i; s.classList.toggle('cl',!on);
           s.style.transform='translateY('+y+'px)';
@@ -27661,6 +27664,8 @@ var TSISL_TEAM_ONB_V2=[
 
       var spans=host.querySelectorAll('.slip .ln span'), vals=host.querySelectorAll('.bd .v'), hds=host.querySelectorAll('.hd>div'), hand=host.querySelectorAll('.hand-in'),
           bd=host.querySelector('.row.bd'), tblw=host.querySelector('.tblw'), cells=host.querySelectorAll('.bd>div'), stamp=host.querySelector('.stamp'), sts=host.querySelectorAll('.st');
+      function fixH(){ tblw.style.minHeight=''; var had=tblw.classList.contains('pg'); tblw.classList.add('pg'); var a=tblw.offsetHeight; tblw.classList.remove('pg'); var b=tblw.offsetHeight; tblw.classList.toggle('pg',had); tblw.style.minHeight=Math.max(a,b)+'px'; }
+      setTimeout(fixH,0); window.addEventListener('resize',function(){ if(host.isConnected) fixH(); });
       function pageMode(on){ if(tblw.classList.contains('pg')===on) return; var a=[].map.call(cells,function(e){ return e.getBoundingClientRect(); }); tblw.classList.toggle('pg',on);
         [].forEach.call(cells,function(e,i){ var b=e.getBoundingClientRect(); e.style.transition='none'; e.style.transform='translate('+(a[i].left-b.left)+'px,'+(a[i].top-b.top)+'px)'; }); void tblw.offsetWidth;
         [].forEach.call(cells,function(e,i){ e.style.transition='transform 1s cubic-bezier(.16,1,.3,1) '+(i*60)+'ms'; e.style.transform=''; }); }
@@ -28191,7 +28196,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a6 .rp button:hover{background:#c7b489;color:#05060b}
       #tsn1-a6.js .ed{opacity:0;transform:translateY(20px) scale(.97)}
       #tsn1-a6.js.on .ed{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-      @media(max-width:700px){ #tsn1-a6 .code{white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.9;padding:18px 14px} #tsn1-a6 .why{min-height:96px} #tsn1-a6 .rail{grid-template-columns:1fr} #tsn1-a6 .pv .row{display:none} }
+      @media(max-width:700px){ #tsn1-a6 .code{white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.9;padding:18px 14px;min-height:160px} #tsn1-a6 .why{min-height:96px} #tsn1-a6 .rail{grid-template-columns:1fr} #tsn1-a6 .pv .row{display:none} }
       @media(prefers-reduced-motion:reduce){ #tsn1-a6.js .ed{opacity:1;transform:none} }
       `);
       /* Token: [id, Starttext, Klasse] */
@@ -28348,7 +28353,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a7 .rg .sw{position:relative;width:26px;height:15px;border-radius:999px;background:rgba(255,255,243,.15);transition:background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a7 .rg .sw::after{content:"";position:absolute;left:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
       #tsn1-a7 .rg em{font-style:normal;font-weight:400;color:rgb(125,122,117)}
-      #tsn1-a7 .rg.on{border-color:rgba(39,131,222,.6);color:rgb(240,239,237);background:rgba(39,131,222,.12)}
+      #tsn1-a7 .rg.on{border-color:rgba(39,131,222,.6);color:rgb(39,131,222);background:rgba(39,131,222,.08)}
       #tsn1-a7 .rg.on .sw{background:rgb(39,131,222)}
       #tsn1-a7 .rg.on .sw::after{transform:translateX(11px)}
       #tsn1-a7 .rg.on em{color:rgb(173,169,163)}
@@ -28394,7 +28399,7 @@ var TSISL_TEAM_ONB_V2=[
       host.id='tsn1-a7';
       host.innerHTML=R.head('Filter, Sortieren, Gruppieren','Drei Regler, und die Liste <span class="g">antwortet</span>.','Neun Artikel, eine Frage aus dem Alltag. Mit jedem Regler wird aus der langen Liste eine Antwort, ohne dass sich an den Daten etwas ändert.')+
         '<div class="qq">Die Frage: <b>Was muss ich bei wem nachbestellen?</b></div><div class="box ntn"><div class="dbt">Produkte</div><div class="vw"><span class="on">Bestellliste</span><span>Lager</span><span>Alle</span></div>'+
-        '<div class="ctl"><span class="rg" data-r="0"><span class="sw"></span>Filter <em>Bestand prüfen = knapp</em></span><span class="rg" data-r="1"><span class="sw"></span>Sortieren <em>Produkt A–Z</em></span><span class="rg" data-r="2"><span class="sw"></span>Gruppieren <em>Lieferant</em></span></div>'+
+        '<div class="ctl"><span class="rg" data-r="0">Filter <em>Bestand prüfen = knapp</em></span><span class="rg" data-r="1">Sortieren <em>Produkt A–Z</em></span><span class="rg" data-r="2">Gruppieren <em>Lieferant</em></span></div>'+
         '<div class="list">'+ITEMS.map(function(x,i){ return '<div class="it" data-i="'+i+'"><img alt="'+x[0]+'" decoding="async" src="'+IMG+x[1]+'"><span>'+x[0]+'</span><span class="s l">'+x[2]+'</span><span class="s">'+x[3]+'</span><span class="k '+(x[4]?'kn':'ok')+'">'+(x[4]?'knapp':'ok')+'</span></div>'; }).join('')+
           ['Feinkost Lorenz','Frischdienst Nord','Gemüsehof Brandt'].map(function(g,i){ return '<div class="gh" data-g="'+i+'"><span class="gt">'+g+'</span><i></i></div>'; }).join('')+
         '<div class="ac"><div class="mi">💡</div><div class="t">Drei Bestellungen, vier Artikel.</div></div></div></div><div class="note">Beispielwerte</div>'+
@@ -28856,8 +28861,8 @@ var TSISL_TEAM_ONB_V2=[
       N.addCSS('tsn1-a10-css',`
       #tsn1-a10 .line{position:relative;width:min(1000px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:34px;padding:34px 0 10px}
       #tsn1-a10 .rule{position:absolute;left:12.5%;right:12.5%;top:96px;height:1px;background:rgba(199,180,137,.3);z-index:0}
-      #tsn1-a10 .gap{position:absolute;height:9px;margin-top:-4px;z-index:2;pointer-events:none}
-      #tsn1-a10 .gap i{position:absolute;left:0;top:0;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#7fd3a3;box-shadow:0 0 14px rgba(127,211,163,.9);opacity:0}
+      #tsn1-a10 .gap{position:absolute;height:9px;margin-top:-4px;z-index:0;pointer-events:none;overflow:hidden}
+      #tsn1-a10 .gap i{position:absolute;left:0;top:0;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#46af73;box-shadow:0 0 14px rgba(70,175,115,.9);opacity:0}
       #tsn1-a10 .sn{position:relative;z-index:1;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035)),#05060b;padding:14px 15px 15px;transition:border-color .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a10 .sn .mi{font:600 9px/1.2 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(199,180,137,.85);margin-bottom:10px;padding-right:26px}
       #tsn1-a10 .sn .im{height:64px;border-radius:9px;overflow:hidden;margin-bottom:11px;background:#0b0d14}
@@ -28868,9 +28873,9 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a10 .sn .ok{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a10 .sn.chk .ok{border-color:rgba(255,255,255,.55)}
       #tsn1-a10 .sn.bad{border-color:rgba(224,87,79,.7);box-shadow:0 0 0 1px rgba(224,87,79,.25),0 0 30px rgba(224,87,79,.16)}
-      #tsn1-a10 .sn.bad .v{color:#f2b8b3}
-      #tsn1-a10 .sn.good{border-color:rgba(127,211,163,.55)}
-      #tsn1-a10 .sn.good .v{color:#a9dcc0}
+      #tsn1-a10 .sn.bad .v{color:#e0574f}
+      #tsn1-a10 .sn.good{border-color:rgba(70,175,115,.6)}
+      #tsn1-a10 .sn.good .v{color:#46af73}
       #tsn1-a10 .sn.good .ok{background:#46af73;border-color:#46af73}
       #tsn1-a10 .lupe{position:absolute;top:8px;left:0;width:46px;height:46px;border-radius:50%;border:2px solid #c7b489;box-shadow:0 0 0 6px rgba(199,180,137,.08),0 10px 24px rgba(0,0,0,.6);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 60%);z-index:3;opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a10 .lupe::after{content:"";position:absolute;right:-12px;bottom:-9px;width:16px;height:3px;border-radius:2px;background:#c7b489;transform:rotate(40deg)}
@@ -28917,8 +28922,8 @@ var TSISL_TEAM_ONB_V2=[
       function forward(){
         placeGaps();
         gaps.forEach(function(g,i){ var d=g.firstChild, w=g.getBoundingClientRect().width;
-          later(function(){ d.style.transition='none'; d.style.opacity='1'; d.style.transform='translateX(0)'; void d.offsetWidth;
-            d.style.transition='transform .5s cubic-bezier(.22,1,.36,1),opacity .3s cubic-bezier(.16,1,.3,1) .45s'; d.style.transform='translateX('+w+'px)'; d.style.opacity='0'; },120+i*480+240); });
+          later(function(){ var x0=9, x1=Math.max(x0,w-9); d.style.transition='none'; d.style.opacity='1'; d.style.transform='translateX('+x0+'px)'; void d.offsetWidth;
+            d.style.transition='transform .5s cubic-bezier(.22,1,.36,1),opacity .2s cubic-bezier(.16,1,.3,1) .4s'; d.style.transform='translateX('+x1+'px)'; d.style.opacity='0'; },120+i*480+240); });
         sns.forEach(function(sn,i){ later(function(){ sn.querySelector('.v').textContent=ST[i][4]; cls(sn,'good'); },120+i*480); });
       }
       window.addEventListener('resize',function(){ if(host.isConnected) placeGaps(); });
