@@ -9729,17 +9729,6 @@ window.__tsMO = function(cb){
     { kachel_id:'konzept_allgemeine_tipps',  kachel_name:'Allgemeine Tipps',    ist_produkt_kachel:false },
     /* Key Metrics — Kostenauswertung Master (DB XX), Engine-generiert 2026-07-20.
        Balken zaehlt KENNZAHLEN (Spalten-Fortschritt), einheit_typ:'anzahl', wert:1 je Karte. Bilder folgen -> ph(). */
-    /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 (New To Do / Gewichtsupdate / Meeting Note) + Automations-Konzept. */
-    { kachel_id:'m1_buttons', kachel_name:'Buttons & Automationen', ist_produkt_kachel:true,
-      einheit:'Buttons', einheit_typ:'anzahl',
-      objekt_varianten:[
-        {name:'Button anlegen (Grundprinzip)', wert:0},
-        {name:'New To Do', wert:1},
-        {name:'Gewichtsupdate', wert:1},
-        {name:'Create Meeting Note', wert:1},
-        {name:'Native Automation (Trigger & Actions)', wert:1},
-        {name:'Automatisierung mit Zeit-Auslöser', wert:1}
-      ]},
     /* Modul 1 Neubau (01.11.2026): Probekueche-Regale. Inhalt liegt in der Zone NEUBAU MODUL 1
        (window.__tsn1Shop) und wird zur Laufzeit gelesen (Getter), damit dieser Block klein bleibt. */
     { kachel_id:'m1_produkte', kachel_name:'Probeküche · Produkte', ist_produkt_kachel:true, einheit:'Spalten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_produkte','varianten')||[]; } },
@@ -10580,15 +10569,6 @@ var TSISL_TEAM_ONB_V2=[
 
 
 
-  /* Lektion 1.7 (Modul 1) — Buttons aus PM Vol.1 + Automations-Konzept. */
-  var TS17_STEPS=[
-    {title:'1. Button anlegen (Grundprinzip)', desc:'/button einfügen, Aktion "Seite erstellen in" wählen, Zieldatenbank festlegen.', html:'<p class="notion-text">→ <b>/button</b> einfügen</p><p class="notion-text">→ <b>Aktion :</b> „Seite erstellen in" wählen</p><p class="notion-text">→ <b>Zieldatenbank</b> festlegen — der Button erstellt ab jetzt bei jedem Klick einen neuen Eintrag dort.</p><p class="notion-text">Darunter kannst du Felder vorausfüllen, die jeder neue Eintrag automatisch bekommt.</p>'},
-    {title:'2. New To Do', desc:'Ziel: DB II Aufgaben & ToDos → Feld "To Do of the Day" vorausgefüllt mit Haken.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> DB II : Aufgaben &amp; ToDos</p><p class="notion-text">→ <b>Vorausgefülltes Feld :</b> „To Do of the Day" → Haken</p><p class="notion-text">→ <b>Label :</b> „+ New To Do"</p><p class="notion-text">Ein Klick legt eine neue Aufgabe an, die sofort in der Daily-Tasks-Ansicht auftaucht.</p>'},
-    {title:'3. Gewichtsupdate', desc:'Ziel: Gewicht-Tracker → Felder Datum und Zeitpunkt automatisch vorausgefüllt.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Gewicht-Tracker</p><p class="notion-text">→ <b>Vorausgefüllte Felder :</b> Datum = heute, Zeitpunkt = jetzt</p><p class="notion-text">→ <b>Label :</b> „Gewichtsupdate"</p><p class="notion-text">Du trägst nur noch den Wert in Kilogramm ein — Datum und Uhrzeit stehen schon.</p>'},
-    {title:'4. Create Meeting Note', desc:'Ziel: Meeting-Notizen → öffnet direkt eine vorbereitete Notiz-Vorlage.', html:'<p class="notion-text">→ <b>Button-Ziel :</b> Meeting-Notizen</p><p class="notion-text">→ <b>Vorlage :</b> Standard-Meeting-Note-Template wird automatisch eingefügt</p><p class="notion-text">→ <b>Label :</b> „Create Meeting Note"</p><p class="notion-text">Ein Klick öffnet die neue Notiz direkt zum Tippen, ohne Struktur von Hand aufzubauen.</p>'},
-    {title:'5. Native Automation (Trigger & Actions)', desc:'Datenbank reagiert selbst auf Änderungen, ganz ohne Button-Klick.', html:'<p class="notion-text">→ <b>Trigger :</b> „Wenn Status sich ändert zu Erledigt"</p><p class="notion-text">→ <b>Aktion :</b> Erledigt-Datum setzen / Benachrichtigung senden</p><p class="notion-text">Anders als ein Button braucht eine native Automation keinen Klick — sie reagiert von selbst, sobald die Bedingung eintritt.</p>'},
-    {title:'6. Automatisierung mit Zeit-Auslöser', desc:'Läuft nach Uhrzeit über alle Zeilen, ganz ohne Klick.', html:'<p class="notion-text">Ein Button braucht immer jemanden, der ihn drückt, und zwar in jeder Zeile einzeln. Bei zwanzig Einträgen sind das zwanzig Klicks. Dafür gibt es die zweite Bauform.</p><p class="notion-text">→ In der Datenbank oben rechts auf <b>⚡</b> → <b>Neue Automatisierung</b></p><p class="notion-text">→ <b>Auslöser :</b> Jeden Monat &nbsp;·&nbsp; am 1. &nbsp;·&nbsp; 08:00 Uhr</p><p class="notion-text">→ <b>Aktion :</b> Eigenschaft bearbeiten → Status auf „Geplant" setzen</p><p class="notion-text">Es gibt zwei Familien von Auslösern. <b>Zeitgesteuert</b> heißt: jeden Tag, jede Woche, jeden Monat zu einer festen Uhrzeit. <b>Ereignisgesteuert</b> heißt: wenn eine Seite hinzugefügt wird oder wenn eine bestimmte Eigenschaft bearbeitet wird.</p><p class="notion-text">Die Faustregel für die Wahl: <b>Button</b>, wenn du selbst entscheidest, wann etwas passiert. <b>Automatisierung</b>, wenn es ohne dich laufen soll oder gleich viele Zeilen betrifft.</p><p class="notion-text">Wie du damit in einem echten Betrieb einen Monatsabschluss einfrierst, siehst du in Modul 2.</p>'}
-  ];
 
 
 
@@ -10702,13 +10682,6 @@ var TSISL_TEAM_ONB_V2=[
   ];
 
   var PAGES=[
-    /* Lektion 1.7 (Modul 1) — Buttons & Automationen, kleiner Warenkorb. Notion-Seite leer -> Config-Steps. */
-    { path:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, kachel:'m1_buttons',
-      anchorSel:'#ts17wk', steps:TS17_STEPS,
-      eyebrow:'DB : Buttons & Automationen',
-      title:'Deine Buttons. <span>Ein Klick, ein Eintrag.</span>',
-      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Um einen Button anzulegen, drücke / und wähle Button.',
-      summary:'Buttons', chain:true },
     /* Modul 1 Neubau (01.11.2026): fuenf Probekueche-Regale, Anker im Seiten-Container der Zone NEUBAU MODUL 1 */
     { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_produkte', anchorSel:'#tsn1-wk-m1_produkte', chain:true,
       get steps(){ return TSN1('m1_produkte','steps'); }, get relations(){ return TSN1('m1_produkte','relations'); },
@@ -11276,7 +11249,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:33, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_buttons:6, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24574,462 +24547,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   automations-buttons — Hero + Einleitung "Ein Klick erledigt es."
-   Lektion 1.7 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #3, klein)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.7');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts17intro-css')) return;
-    var s=document.createElement('style'); s.id='ts17intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts17intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.7" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.7</div>'+
-        '<h1 class="ts-hero__title">Ein Klick <span class="ts-gold">erledigt es</span>.</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts17intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts17intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Ein Button in Notion ist kein Deko-Element, sondern ein kleiner Automat: Ein Klick, und er legt dir einen neuen Eintrag an — mit allen Feldern schon richtig vorausgefüllt. Genau so funktionieren die drei Buttons in meinem eigenen System.</p>
-  <p>Der New-To-Do-Button setzt die Checkbox <b>To Do of the Day</b> sofort, der Gewichtsupdate-Button trägt automatisch Datum und Uhrzeit ein, der Meeting-Note-Button öffnet eine fertige Notiz-Vorlage. Native DB-Automationen gehen noch weiter: Sie reagieren auf Änderungen, ganz ohne Klick.</p>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   automations-buttons — Erkläranimation "Klick-Ripple" (Button löst Kettenreaktion aus)
-   Eigenständiges Konzept: ein Button, drei ausstrahlende Ripple-Ringe + ein Häkchen, das
-   nach dem virtuellen Klick erscheint. Endzustand=Default.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts17bau{width:min(720px,92vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff;text-align:center}
-  #ts17bau .bau-head{max-width:640px;margin:0 auto 30px;padding:0 24px}
-  #ts17bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts17bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts17bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts17bau h2 .ts-gold{color:#c7b489}
-  #ts17bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:520px}
-  #ts17bau .stage{position:relative;height:200px;display:flex;align-items:center;justify-content:center}
-  #ts17bau.js .stage{opacity:0;transform:translateY(20px)}
-  #ts17bau.js.on .stage{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-  #ts17bau .btn{position:relative;z-index:2;background:#c7b489;color:#05060b;font:700 14px/1 -apple-system,sans-serif;padding:14px 26px;border-radius:999px;box-shadow:0 20px 40px -18px rgba(0,0,0,.7)}
-  #ts17bau .ring{position:absolute;top:50%;left:50%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:1.5px solid rgba(199,180,137,.6);opacity:0}
-  #ts17bau.js.on .ring.r1{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite}
-  #ts17bau.js.on .ring.r2{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite .5s}
-  #ts17bau.js.on .ring.r3{animation:ts17ring 2.6s cubic-bezier(.22,1,.36,1) infinite 1s}
-  @keyframes ts17ring{0%{transform:scale(.6);opacity:0}10%{opacity:.7}70%{opacity:0}100%{transform:scale(2.4);opacity:0}}
-  #ts17bau .check{position:absolute;top:6%;right:22%;width:34px;height:34px;border-radius:50%;background:#8FCBAA;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5)}
-  #ts17bau.js.on .check.fire{animation:ts17check 2.6s cubic-bezier(.22,1,.36,1) infinite}
-  @keyframes ts17check{0%,55%{opacity:0;transform:scale(.5)}62%{opacity:1;transform:scale(1.1)}70%{transform:scale(1)}92%{opacity:1}100%{opacity:0}}
-  #ts17bau .check svg{width:16px;height:16px;color:#05060b}
-  #ts17bau .bau-foot{display:flex;justify-content:center;margin-top:20px}
-  #ts17bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts17bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  #ts17bau.reduced .stage{opacity:1;transform:none}
-  #ts17bau.reduced .ring{opacity:.4;transform:scale(1.4)}
-  #ts17bau.reduced .check{opacity:1;transform:scale(1)}
-  `;
-
-  function injectCSS(){
-    if(document.getElementById('ts17bau-css')) return;
-    var s=document.createElement('style'); s.id='ts17bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Ein Klick, eine Kette</div>'+
-      '<h2>Der Button <span class="ts-gold">löst etwas aus</span>.</h2>'+
-      '<p class="bau-sub">Ein Klick auf den Button legt still im Hintergrund einen fertigen Eintrag an.</p>'+
-      '</div>'+
-      '<div class="stage">'+
-        '<span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>'+
-        '<button class="btn" type="button">+ New To Do</button>'+
-        '<span class="check fire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg></span>'+
-      '</div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts17bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts17bau')) return;
-    var anchor=document.getElementById('ts17intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts17bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    root.querySelector('#ts17bauReplay').addEventListener('click', function(){ play(root); });
-
-    if(!document.getElementById('ts17wk')){
-      var wk=document.createElement('div'); wk.id='ts17wk';
-      root.parentNode.insertBefore(wk, root.nextSibling);
-    }
-
-    if(reduced){ root.classList.add('reduced'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   automations-buttons — Ergebnis-Blick "Ein Klick, keine Formulare mehr." (Text links / PC rechts)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  #ts17res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts17res .r-text{flex:1 1 0}
-  #ts17res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
-  #ts17res h3 .ts-accent{color:#c7b489}
-  #ts17res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
-  #ts17res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts17res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
-    transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts17res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
-  #ts17res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
-  #ts17res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #ts17res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
-  #ts17res .r-cap b{color:#c7b489;font-weight:600}
-  #ts17res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts17res{flex-direction:column} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts17res-css')) return;
-    var s=document.createElement('style'); s.id='ts17res-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="r-text"><h3>Ein Klick, <span class="ts-accent">keine Formulare mehr.</span></h3>'+
-      '<p>Sobald die drei Buttons stehen, fällt die Hürde des leeren Formulars weg. Niemand füllt zehn Felder von Hand aus, nur um eine Aufgabe einzutragen. Diese Kleinigkeit entscheidet, ob ein System auch an hektischen Tagen benutzt wird.</p>'+
-      '<p>Buttons und Automatisierungen greifen dabei ineinander. Der Klick legt den Eintrag an, die Automatisierung übernimmt danach: Sie setzt das Erledigt-Datum oder schickt eine Nachricht, sobald der Status umspringt. Du baust beides einmal und arbeitest ab dann nur noch mit dem Ergebnis.</p></div>'+
-      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
-      '<div class="r-cap">Buttons &amp; Automationen <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts17res')) return;
-    var anchor=document.getElementById('tsshop--m1_buttons'); if(!anchor){ anchor=document.getElementById('ts17wk'); }
-    if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts17res'; root.innerHTML=html();
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   automations-buttons — Empfehlungs-Kachel "Empfehlung zur Einrichtung" (Verhalten 1:1, Fixes bereits enthalten)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Ein Button, ein Ziel','Felder sinnvoll vorausfüllen','Automation statt Erinnerung','Label ehrlich benennen'];
-  var TEXTS=[
-    'Ein Button soll genau eine Datenbank befüllen — nicht mehrere Ziele gleichzeitig verwalten.',
-    'Fülle nur Felder vor, die bei jedem Klick wirklich denselben Wert brauchen, sonst wird der Button unehrlich.',
-    'Wiederkehrende Prüfungen gehören in eine native Automation, nicht in eine Erinnerung, die du selbst auslösen musst.',
-    'Nenne den Button so, wie er wirklich wirkt — „New To Do" ist klarer als ein generisches „Neu".'
-  ];
-
-  var CSS=`
-  #ts17emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts17emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
-  #ts17emp.js.in{opacity:1;transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry))}
-  #ts17emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts17emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts17emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts17emp:hover::before{opacity:1}
-  #ts17emp.beat{animation:ts17empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts17empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts17emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts17emp .db-hd .g{color:#c7b489}
-  #ts17emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts17emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts17emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts17emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts17emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts17emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts17emp .emp-right{position:relative;z-index:1}
-  #ts17emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts17emp .emph .eg{color:#c7b489}
-  #ts17emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts17emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts17emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts17emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts17emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts17emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts17emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts17emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts17emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts17emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts17emp{grid-template-columns:1fr} #ts17emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts17emp-css')) return;
-    var s=document.createElement('style'); s.id='ts17emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Deine <span class="g">Button-Einrichtung</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Einrichtung</span></div>'+
-      '<p class="p">Damit Buttons verlässlich bleiben, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts17emp')) return;
-    var anchor=document.getElementById('ts17res'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts17emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   automations-buttons — Seitenabschluss (Learnings + Weiter-Button)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du legst Buttons an, die neue Einträge mit vorausgefüllten Feldern erstellen.',
-    'Du weißt, welche Felder sich fürs Vorausfüllen eignen.',
-    'Du unterscheidest Button (auf Klick) von Automatisierung (läuft ohne dich).',
-    'Du kennst beide Auslöser-Familien: zeitgesteuert und ereignisgesteuert.'
-  ];
-
-  var CSS=`
-  #ts17l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts17l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts17l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts17l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts17l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts17l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts17lFloat 7s ease-in-out infinite}
-  #ts17l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts17l .tsl-orb:nth-child(1){animation-delay:0s} #ts17l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts17l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts17l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts17l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts17l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts17l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts17l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts17l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts17l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts17l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts17l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts17lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts17l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts17l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts17l-css')) return;
-    var s=document.createElement('style'); s.id='ts17l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts17l')) return;
-    var anchor=document.getElementById('ts17emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts17l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l18-system-architektur-dashboard-design">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    system-architektur-dashboard — Hero + Einleitung "Dein System, komplett."
    Lektion 1.8 · Modul 1 · Notion-Grundlagen (Wissens-Lektion, Abschluss)
    ============================================================ */
@@ -31149,6 +30666,178 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du legst jede Ansicht für eine <b>Frage</b> aus dem Alltag an.','Du stellst <b>Filter, Sortieren und Gruppieren</b> ein und verbindest Bedingungen mit UND oder ODER.','Du zeigst eine Datenbank als <b>verknüpfte Ansicht</b> auf einer anderen Seite, ohne sie zu kopieren.','Du legst <b>Vorlagen</b> an, auch solche, die sich selbst wiederholen.'],
         next:'/lektionen/l17-native-automations-buttons'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.8 "Ein Klick weniger."  (Buttons & Automationen)
+   Adresse: /lektionen/l17-native-automations-buttons (Alt-Slug toleriert; Nummer 1.8 seit Neukonzept)
+   Erklaeranimation "Vier Handgriffe in einem" — EIGENES Konzept:
+   EIN Panel mit vier Handgriffen. Erst arbeitet der Cursor sie einzeln ab,
+   dann setzt sich alles zurueck und EIN Druck auf den Button erledigt die vier
+   in einer schnellen Kaskade (Goldwisch). Zuletzt reagiert die Datenbank ganz
+   ohne Klick: der Blitz loest eine Nachricht an den Kuechenchef aus.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L8) return; window.__tsn1L8=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a8-css',`
+      #tsn1-a8 .pan{position:relative;width:min(900px,100%);margin:0 auto;display:grid;grid-template-columns:260px 1fr;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a8 .lft{padding:24px 22px;border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:18px;background:#0b0c13}
+      #tsn1-a8 .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+      #tsn1-a8 .btn{display:flex;align-items:center;justify-content:center;gap:9px;height:46px;border-radius:11px;background:#c7b489;color:#05060b;font:700 14px/1 -apple-system,sans-serif;box-shadow:0 6px 0 #8c7c58,0 18px 30px -12px rgba(199,180,137,.5);transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .btn.down{transform:translateY(5px);box-shadow:0 1px 0 #8c7c58,0 8px 16px -10px rgba(199,180,137,.5)}
+      #tsn1-a8 .bolt{display:flex;align-items:center;gap:11px;padding:12px 13px;border-radius:11px;border:1px solid rgba(255,255,255,.1);font:600 12.5px/1.35 -apple-system,sans-serif;color:rgba(255,255,255,.6);transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .bolt svg{width:18px;height:18px;flex:0 0 auto;color:#c7b489;transition:transform .5s cubic-bezier(.34,1.56,.64,1),filter .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .bolt.on{border-color:rgba(199,180,137,.55);color:#fff;background:rgba(199,180,137,.07)}
+      #tsn1-a8 .bolt.on svg{transform:scale(1.25);filter:drop-shadow(0 0 8px rgba(251,230,194,.9))}
+      #tsn1-a8 .cnt{margin-top:auto;font:500 12px/1.5 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
+      #tsn1-a8 .cnt b{display:block;font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:30px;color:#fff;line-height:1.1;font-variant-numeric:tabular-nums}
+      #tsn1-a8 .rgt{position:relative;padding:24px 24px 96px}
+      #tsn1-a8 .acts{position:relative;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+      #tsn1-a8 .ac{position:relative;display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;height:58px;padding:0 15px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;overflow:hidden;transition:border-color .45s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .ac .n{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font:700 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);transition:background .45s cubic-bezier(.16,1,.3,1),color .45s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .ac .l{font:600 13.5px/1.3 -apple-system,sans-serif;color:rgba(255,255,255,.72)}
+      #tsn1-a8 .ac .l small{display:block;font-weight:500;font-size:11.5px;color:rgba(255,255,255,.42);margin-top:3px}
+      #tsn1-a8 .ac .ck{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);position:relative;transition:background .4s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .ac .ck::after{content:"";position:absolute;left:6px;top:3px;width:5px;height:9px;border:solid #05060b;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a8 .ac.done{border-color:rgba(199,180,137,.45)}
+      #tsn1-a8 .ac.done .n{background:#c7b489;color:#05060b}
+      #tsn1-a8 .ac.done .l{color:#fff}
+      #tsn1-a8 .ac.done .ck{background:#c7b489;border-color:#c7b489}
+      #tsn1-a8 .ac.done .ck::after{transform:rotate(45deg) scale(1)}
+      #tsn1-a8 .ac::before{content:"";position:absolute;top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.22),rgba(199,180,137,0));transform:translateX(0);opacity:0}
+      #tsn1-a8 .ac.sw::before{animation:tsn1a8sw .7s cubic-bezier(.22,1,.36,1) 1}
+      @keyframes tsn1a8sw{0%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(360%)}}
+      #tsn1-a8 .cur{position:absolute;width:18px;height:18px;border-radius:50%;background:rgba(239,230,210,.92);box-shadow:0 0 0 6px rgba(239,230,210,.14),0 8px 18px rgba(0,0,0,.6);pointer-events:none;opacity:0;transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .4s cubic-bezier(.16,1,.3,1);z-index:3}
+      #tsn1-a8 .toast{position:absolute;right:24px;bottom:22px;display:flex;gap:11px;align-items:center;max-width:300px;padding:12px 14px;border-radius:12px;background:#141724;border:1px solid rgba(199,180,137,.4);box-shadow:0 24px 50px -20px rgba(0,0,0,.9);font:500 12.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.86);opacity:0;transform:translateY(16px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.34,1.56,.64,1);z-index:4}
+      #tsn1-a8 .toast img{width:38px;height:38px;border-radius:9px;object-fit:cover}
+      #tsn1-a8 .toast b{display:block;color:#fff;font-weight:600}
+      #tsn1-a8 .toast.on{opacity:1;transform:none}
+      #tsn1-a8 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(900px,100%);margin:22px auto 0}
+      #tsn1-a8 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a8 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a8 .st.on b{color:#c7b489}
+      #tsn1-a8 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a8 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .rp button:hover{background:#c7b489;color:#05060b}
+      @media(max-width:760px){ #tsn1-a8 .pan{grid-template-columns:1fr} #tsn1-a8 .lft{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)} #tsn1-a8 .rail{grid-template-columns:1fr} #tsn1-a8 .toast{left:16px;right:16px;bottom:16px} #tsn1-a8 .rgt{padding-bottom:96px} }
+      `);
+      var ACTS=[['Neue Seite in Produkte anlegen','Seite hinzufügen zu'],['Im Sortiment anhaken','Wert vorausfüllen'],['Lagerort auf Kühlhaus setzen','Wert vorausfüllen'],['Den neuen Artikel öffnen','Seite oder URL öffnen']];
+      var BOLT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2 4.5 13.4h6.1L9.8 22l8.7-11.4h-6.1z"/></svg>';
+      host.id='tsn1-a8';
+      host.innerHTML=R.head('Button und Automation','Dieselben Handgriffe, <span class="g">gebündelt</span>.','Ein neuer Artikel braucht jedes Mal dieselben vier Handgriffe. Ein Button erledigt sie in einem Klick, und eine Automation sagt dem Küchenchef Bescheid, ohne dass jemand klickt.')+
+        '<div class="pan"><div class="lft"><div class="mi">Button</div><div class="btn">+ Neues Produkt</div><div class="mi">Automation</div><div class="bolt">'+BOLT+'<span>Wenn eine Seite hinzugefügt wird: Nachricht an den Küchenchef</span></div>'+
+          '<div class="cnt"><span class="hl">Handgriffe von Hand</span><b class="hn">0</b></div></div>'+
+        '<div class="rgt"><div class="mi">Neues Produkt anlegen</div><div class="acts">'+ACTS.map(function(a,i){ return '<div class="ac"><span class="n">'+(i+1)+'</span><span class="l">'+a[0]+'<small>'+a[1]+'</small></span><span class="ck"></span></div>'; }).join('')+'</div>'+
+          '<span class="cur"></span><div class="toast"><img alt="" decoding="async" src="'+IMG+'zutaten/mozzarella.webp"><span><b>Neues Produkt</b>Burrata 125 g wurde angelegt.</span></div></div></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Von Hand: vier Handgriffe, jedes Mal.</button><button class="st" data-s="1"><b>02</b>Mit Button: ein Klick, alle vier auf einmal.</button><button class="st" data-s="2"><b>03</b>Mit Automation: die Datenbank reagiert, ganz ohne Klick.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var acs=host.querySelectorAll('.ac'), btn=host.querySelector('.btn'), bolt=host.querySelector('.bolt'), toast=host.querySelector('.toast'), cur=host.querySelector('.cur'), hn=host.querySelector('.hn'), hl=host.querySelector('.hl'), rgt=host.querySelector('.rgt'), sts=host.querySelectorAll('.st');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a8Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function curTo(el){ var a=rgt.getBoundingClientRect(), b=el.getBoundingClientRect(); cur.style.opacity='1'; cur.style.transform='translate('+(b.right-a.left-36)+'px,'+(b.top-a.top+b.height/2-9)+'px)'; }
+      function setDone(on){ [].forEach.call(acs,function(a){ a.classList.toggle('done',on); a.classList.remove('sw'); }); }
+      function cnt(l,v){ hl.textContent=l; hn.textContent=v; }
+      function reset(){ clear(); setDone(false); btn.classList.remove('down'); bolt.classList.remove('on'); toast.classList.remove('on'); cur.style.opacity='0'; cnt('Handgriffe von Hand','0'); step(-1); }
+      function play(){
+        reset(); step(0);
+        [].forEach.call(acs,function(a,i){ later(function(){ curTo(a); },400+i*900); later(function(){ a.classList.add('done'); cnt('Handgriffe von Hand',String(i+1)); },800+i*900); });
+        later(function(){ cur.style.opacity='0'; },4200);
+        later(function(){ step(1); setDone(false); cnt('Mit Button','0 Klicks'); },4900);
+        later(function(){ btn.classList.add('down'); },5600);
+        later(function(){ btn.classList.remove('down'); cnt('Mit Button','1 Klick'); },5800);
+        [].forEach.call(acs,function(a,i){ later(function(){ a.classList.add('sw','done'); },5850+i*140); });
+        later(function(){ step(2); bolt.classList.add('on'); },7300);
+        later(function(){ toast.classList.add('on'); },7800);
+        later(function(){ bolt.classList.remove('on'); },9400);
+      }
+      function endState(){ clear(); setDone(true); cnt('Mit Button','1 Klick'); cur.style.opacity='0'; toast.classList.add('on'); step(2); }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
+        var i=+s.getAttribute('data-s'); reset(); step(i);
+        if(i===0){ setDone(true); cnt('Handgriffe von Hand','4'); }
+        if(i===1){ cnt('Mit Button','1 Klick'); [].forEach.call(acs,function(a,j){ later(function(){ a.classList.add('sw','done'); },j*140); }); }
+        if(i===2){ setDone(true); cnt('Mit Button','1 Klick'); bolt.classList.add('on'); toast.classList.add('on'); }
+      }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ endState(); return; }
+      endState();
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l8',
+      re:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/,
+      hero:{label:'L 1.8', eyebrow:'L 1.8', title:'Ein Klick <span class="ts-gold">weniger</span>.', alt:'Buttons und Datenbank-Automationen in Notion'},
+      intro:
+        '<p>Manche Handgriffe machst du in der Vorlage jeden Tag gleich: einen Artikel anlegen und die immer gleichen Felder ausfüllen, das Lieferdatum setzen, jemandem Bescheid sagen. Jeder einzelne dauert nur Sekunden, über die Woche summieren sie sich trotzdem, und genau dort schleichen sich die Tippfehler ein.</p>'+
+        '<p>Ein <b>Button</b> bündelt solche Handgriffe in einem Klick. Eine <b>Automation</b> geht einen Schritt weiter: Die Datenbank reagiert selbst, sobald etwas passiert. Wir bauen beides in der Probeküche und schauen, welcher Plan was erlaubt.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Zwei Werkzeuge', title:'Du klickst, oder die Datenbank <span class="g">reagiert</span>', lead:'Der Unterschied ist einfach: Beim Button entscheidest du den Moment, bei der Automation ein Ereignis in der Datenbank.', blocks:[
+          R.cards([
+            {mi:'Du löst aus', nm:'Button', img:IMG+'ansprechpartner/kugelschreiber.jpg', tx:'<p>Ein Button steht als Block auf einer Seite oder als Spalte in jeder Zeile einer Datenbank. Er führt beim Klick eine oder mehrere Aktionen aus. Buttons gibt es in jedem Plan, auch im Free-Plan.</p>'},
+            {mi:'Die Datenbank löst aus', nm:'Automation', img:IMG+'gemeinkosten/stromzaehler.webp', tx:'<p>Eine Automation hängt an einer Datenbank und startet von selbst: wenn eine Seite hinzugefügt wird, wenn sich eine Eigenschaft ändert oder in einem festen Rhythmus. Datenbank-Automationen gibt es in den bezahlten Plänen.</p>'}
+          ],2),
+          R.txt('<p><strong>Was die beiden von einem Agenten unterscheidet,</strong> hast du in Modul 0 gesehen. Hier geht es nur um das Handwerk: Wie richtest du sie so ein, dass sie in deinem Betrieb verlässlich laufen.</p>')
+        ]}),
+        R.sec({eb:'Was ein Button kann', title:'Die Aktionen im <span class="g">Überblick</span>', wide:true, lead:'Ein Button führt seine Aktionen nacheinander aus, von oben nach unten. Die Namen stehen hier so, wie du sie in Notion findest.', blocks:[
+          R.tab(['Aktion','Was passiert','Beispiel aus dem Betrieb'],[
+            ['Seite hinzufügen zu','Legt einen neuen Eintrag in einer Datenbank an, auf Wunsch mit vorausgefüllten Spalten oder einer Vorlage','Neues Produkt, Im Sortiment schon angehakt'],
+            ['Seiten bearbeiten in','Ändert Einträge einer Datenbank, auch mehrere auf einmal','Alle Gerichte der Sommerkarte aus dem Sortiment nehmen'],
+            ['Eigenschaft bearbeiten','Nur bei der Button-Spalte: ändert die eigene Zeile','Lieferdatum auf heute setzen'],
+            ['Blöcke hinzufügen','Fügt Text oder Checklisten auf der Seite ein','Eine leere Übergabe-Checkliste für die Spätschicht'],
+            ['Seite oder URL öffnen','Öffnet eine Seite, eine Ansicht oder eine Webseite','Zurück zur Startseite, das Bestellportal des Großhändlers'],
+            ['Bestätigung anzeigen','Fragt nach, bevor die nächsten Aktionen laufen','„Wirklich alle Sommergerichte auslisten?"'],
+            ['Benachrichtigung senden an','Schickt jemandem im Workspace eine Nachricht in Notion','Der Küchenchef erfährt von einem neuen Artikel'],
+            ['E-Mail senden an, Webhook senden','Verschickt eine Mail über Gmail oder ruft ein anderes Programm auf. Nur in bezahlten Plänen','Eine Bestellung an die Bestelladresse des Lieferanten']
+          ]),
+          R.txt('<p><strong>Wer darf klicken.</strong> Einen Button auf einer Seite kann nur auslösen, wer die Seite bearbeiten darf. Eine Button-Spalte in einer Datenbank funktioniert auch für Mitarbeiter, die nur Inhalte bearbeiten dürfen. Für dein Team ist die Button-Spalte deshalb oft die bessere Wahl. Wie du Rechte vergibst, kommt in der nächsten Lektion.</p>'),
+          R.fund(['Notion AI Backoffice','jede Datenbankseite','Zurück'],'<p>Die Zurück-Buttons über jeder Datenbank der Vorlage sind Buttons mit einer einzigen Aktion: <em>Seite oder URL öffnen</em>, Ziel ist die Startseite des Backoffice. Willst du den Weg ändern, bearbeitest du den Button und wählst ein anderes Ziel.</p>')
+        ]}),
+        R.sec({eb:'Automationen', title:'Die Datenbank sagt <span class="g">Bescheid</span>', lead:'Automationen richtest du über das Blitz-Symbol oben rechts an einer Datenbank ein. Jede besteht aus einem Auslöser und einer oder mehreren Aktionen.', blocks:[
+          R.tab(['Auslöser','Wann er startet','Beispiel'],[
+            ['Seite hinzugefügt','Sobald jemand einen neuen Eintrag anlegt','Neues Produkt: Benachrichtigung an den Küchenchef'],
+            ['Eigenschaft bearbeitet','Sobald sich eine bestimmte Spalte ändert, auf Wunsch nur bei einem bestimmten Wert','Allergene eines Produkts geändert: Benachrichtigung an die Serviceleitung'],
+            ['Wiederkehrend','In einem festen Rhythmus, zum Beispiel jeden Montag um sechs','Am Ersten des Monats: Erinnerung, die Datenblätter zu prüfen']
+          ]),
+          R.txt('<p><strong>Das Beispiel mit den Allergenen ist mir das wichtigste.</strong> Ändert sich bei einem Produkt die Rezeptur des Herstellers und jemand trägt ein neues Allergen ein, muss der Service davon wissen, bevor der nächste Gast fragt. Mit einer Automation auf der Spalte Allergene passiert das, ohne dass jemand daran denken muss.</p>'),
+          R.tab(['Plan','Buttons','Datenbank-Automationen'],[
+            ['Free','Ja','Nein, laut Notion-Hilfe höchstens Slack-Benachrichtigungen'],
+            ['Plus','Ja','Ja, Gmail und Webhooks inklusive'],
+            ['Business, Enterprise','Ja','Ja']
+          ])
+        ]}),
+        R.sec({eb:'Typische Fehler', title:'Wenn der Klick <span class="g">nichts tut</span>', wide:true, blocks:[
+          R.fehler([
+            ['Beim Klick auf den Button passiert nichts','Die Person darf die Seite nur ansehen oder kommentieren','Rechte prüfen oder auf eine Button-Spalte in der Datenbank umstellen'],
+            ['Ein Artikel steht zweimal in der Tabelle','Der Button wurde zweimal geklickt','Bestätigung anzeigen als erste Aktion einbauen'],
+            ['Die Automation hat nicht ausgelöst','Der Workspace ist im Free-Plan, oder die Automation ist pausiert','Plan prüfen und im Blitz-Menü nachsehen, ob sie aktiv ist'],
+            ['Der Button legt Einträge ohne Lagerort an','Die Spalte wurde im Button nicht vorausgefüllt','Button bearbeiten und bei Seite hinzufügen zu den Wert setzen']
+          ])
+        ]}),
+        R.wk('tsn1-wk-m1_buttons2'),
+        R.res({eb:'Ergebnis', title:'Die Lieferung steht, <span class="g">bevor sie ausgepackt ist</span>.', text:[
+          'Mit der Button-Spalte Lieferung trägt jeder im Team das Lieferdatum mit einem Klick ein, direkt in der Zeile des Artikels. Neue Artikel legt der Button oben auf der Seite an, schon mit Haken bei Im Sortiment und geöffnet zum Ausfüllen.',
+          'Bau zuerst einen Button, dann lass ihn eine Woche laufen, bevor du den nächsten baust. So merkst du, welche Handgriffe sich wirklich wiederholen.'],
+          mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Tabelle','Bestellliste'], cols:['Produkt','Lieferant','Zuletzt geliefert','Lieferung'],
+            rows:[['Burrata 125 g','Frischdienst Nord','3. Nov. 2026','<span class="t">Lieferung</span>'],['Parmigiano 24 Monate','Frischdienst Nord','3. Nov. 2026','<span class="t">Lieferung</span>'],['Tomaten Ochsenherz','Gemüsehof Brandt','31. Okt. 2026','<span class="t">Lieferung</span>'],['Sardellen','Feinkost Lorenz','28. Okt. 2026','<span class="t">Lieferung</span>']],
+            cap:'Beispielwerte'}}),
+        {emp:{kind:'Einrichtung', animTitle:'Klicks,', animGold:'die sicher sind', steps:['Erst von Hand','Bestätigung davor','Klar beschriften','Eine Woche testen'],
+          intro:'Ein Button, der das Falsche tut, richtet in Sekunden mehr Schaden an als ein Tag Handarbeit. Deshalb gehst du in kleinen Schritten vor.',
+          points:['Mach den Ablauf dreimal von Hand und schreib die Handgriffe mit. Erst dann baust du den Button.','Jeder Button, der viele Zeilen ändert, bekommt als erste Aktion eine Bestätigung.','Beschrifte Buttons mit dem, was passiert: <b>Neues Produkt</b>, nicht „Los".','Teste neue Buttons und Automationen eine Woche in der Probeküche, bevor sie in die Vorlage kommen.']}}
+      ],
+      learn:{items:['Du unterscheidest, wann ein <b>Button</b> und wann eine <b>Automation</b> passt.','Du baust Buttons mit mehreren <b>Aktionen</b> und vorausgefüllten Spalten.','Du richtest eine Automation mit dem passenden <b>Auslöser</b> ein, zum Beispiel für Allergene.','Du weißt, welcher <b>Plan</b> was erlaubt und wer welchen Button klicken darf.'],
+        next:'/lektionen/l18-system-architektur-dashboard-design'}
     });
   }
   go();
