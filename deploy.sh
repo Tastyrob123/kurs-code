@@ -30,37 +30,56 @@ if [ -f kurs.min.js ]; then
   rm -f /tmp/_ts_min_check.js
 fi
 
-echo "… baue kurs.min.js / kurs.min.css …"
-if npx --yes esbuild kurs.js --minify --target=es2015 --outfile=kurs.min.js >/dev/null 2>&1 \
-   && node --check kurs.min.js >/dev/null 2>&1; then
-  echo "   ✓ kurs.min.js minifiziert"
-else
-  echo "   ⚠ esbuild fehlgeschlagen -> kurs.js unveraendert als kurs.min.js kopiert"
-  cp kurs.js kurs.min.js
-fi
-if npx --yes esbuild kurs.css --minify --outfile=kurs.min.css >/dev/null 2>&1; then
-  echo "   ✓ kurs.min.css minifiziert"
-else
-  echo "   ⚠ esbuild fehlgeschlagen -> kurs.css unveraendert als kurs.min.css kopiert"
-  cp kurs.css kurs.min.css
-fi
-
-# 1) Eigene Aenderungen committen (nur falls vorhanden)
+# 1) Eigene QUELL-Aenderungen committen (ohne die generierten .min-Dateien)
+#    Seit 01.11.2026: .min-Dateien werden ERST NACH dem Rebase gebaut. Grund: mehrere
+#    Chats bauen parallel in eigenen Worktrees; kurs.min.js ist eine einzige Zeile
+#    und wuerde bei jedem Rebase kollidieren. So kollidiert hoechstens die Quelle.
+git checkout -- kurs.min.js kurs.min.css 2>/dev/null || true
 git add -A
+git reset -q -- kurs.min.js kurs.min.css 2>/dev/null || true
 git diff --cached --quiet || git commit -m "$MSG"
 
-# 2) Auf neuesten Stand rebasen -- NIE --force.
-#    Konflikt => STOPP zur Aufloesung, nichts wird verworfen.
-git fetch origin --quiet
-if ! git rebase origin/main; then
-  echo ""
-  echo "‼  REBASE-KONFLIKT: ein anderer Chat hat dieselbe Stelle geaendert."
-  echo "   -> BEIDE Aenderungen behalten, dann:  git rebase --continue && ./deploy.sh"
-  exit 1
-fi
+build_min() {
+  echo "… baue kurs.min.js / kurs.min.css …"
+  if npx --yes esbuild kurs.js --minify --target=es2015 --outfile=kurs.min.js >/dev/null 2>&1 \
+     && node --check kurs.min.js >/dev/null 2>&1; then
+    echo "   ✓ kurs.min.js minifiziert"
+  else
+    echo "   ⚠ esbuild fehlgeschlagen -> kurs.js unveraendert als kurs.min.js kopiert"
+    cp kurs.js kurs.min.js
+  fi
+  if npx --yes esbuild kurs.css --minify --outfile=kurs.min.css >/dev/null 2>&1; then
+    echo "   ✓ kurs.min.css minifiziert"
+  else
+    echo "   ⚠ esbuild fehlgeschlagen -> kurs.css unveraendert als kurs.min.css kopiert"
+    cp kurs.css kurs.min.css
+  fi
+}
 
-# 3) Push (fast-forward, kein force -> kann fremde Commits nicht ueberschreiben)
-git push origin main
+# 2) Rebase auf origin/main -> .min bauen -> push nach main. NIE --force.
+#    Konflikt in der Quelle => STOPP zur Aufloesung, nichts wird verworfen.
+#    Push abgelehnt (anderer Chat war schneller) => .min-Commit verwerfen
+#    (ist nur generiert), neu rebasen, neu bauen, nochmal. Bis zu 6 Versuche.
+#    Funktioniert im Haupt-Checkout UND in jedem Worktree (push HEAD:main).
+ok=0
+for try in 1 2 3 4 5 6; do
+  git fetch origin --quiet
+  if ! git rebase origin/main; then
+    echo ""
+    echo "‼  REBASE-KONFLIKT: ein anderer Chat hat dieselbe Stelle geaendert."
+    echo "   -> BEIDE Aenderungen behalten, dann:  git rebase --continue && ./deploy.sh"
+    exit 1
+  fi
+  BEFORE_MIN=$(git rev-parse HEAD)
+  build_min
+  git add kurs.min.js kurs.min.css
+  git diff --cached --quiet || git commit -q -m "min: $MSG"
+  if git push origin HEAD:main; then ok=1; break; fi
+  echo "   … Push abgelehnt (anderer Chat hat gerade deployt) – neuer Versuch $try/6"
+  git reset -q --hard "$BEFORE_MIN"
+  sleep $((try*3))
+done
+[ "$ok" = 1 ] || { echo "‼  Push nach 6 Versuchen nicht moeglich."; exit 1; }
 
 # 4) Auslieferung = GitHub Pages (Loader: https://tastyrob123.github.io/kurs-code/kurs.{js,css})
 #    Pages baut nach dem Push AUTOMATISCH (~1-2 min) und purged seinen CDN-Edge selbst

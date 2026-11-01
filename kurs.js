@@ -37352,3 +37352,73 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+
+/* ================================================================
+   NEUBAU-ZONEN (01.11.2026) — je Modul-Chat eine eigene Zone.
+   Jeder Chat schreibt NEUEN Code NUR zwischen SEINE Anfang/Ende-Marken.
+   Die Abstandszeilen zwischen den Zonen verhindern Rebase-Konflikte,
+   wenn mehrere Chats parallel deployen. Marken nie loeschen.
+   ================================================================ */
+
+/* >>> NEUBAU MODUL 0 (Einleitung, Startseite, Abschluss) — ANFANG >>> */
+/* <<< NEUBAU MODUL 0 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 1 (Notion-Grundlagen) — ANFANG >>> */
+/* <<< NEUBAU MODUL 1 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 2 (Notion AI Backoffice System) — ANFANG >>> */
+/* <<< NEUBAU MODUL 2 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
+/* <<< NEUBAU MODUL 3 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 4 (Claude Code + Notion Agents) — ANFANG >>> */
+/* <<< NEUBAU MODUL 4 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 5 (AI Reservation Agent) — ANFANG >>> */
+/* <<< NEUBAU MODUL 5 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+
+/* >>> NEUBAU MODUL 6 (AI Website Building) — ANFANG >>> */
+/* <<< NEUBAU MODUL 6 — ENDE <<< */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
+/* · */
