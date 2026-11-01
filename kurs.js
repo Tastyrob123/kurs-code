@@ -24709,417 +24709,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   layout-medien-strukturierung — Hero + Einleitung "Spalten machen den Unterschied"
-   Lektion 1.2 · Modul 1 · Notion-Grundlagen (Muster: notion-philosophie-canvas-prinzip)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.2');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body ul{margin:6px auto 16px;padding:0;list-style:none;max-width:640px;text-align:left}
-  .ts-body li{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 10px;padding-left:22px;position:relative}
-  .ts-body li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#c7b489}
-  .ts-body li b, .ts-body p b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts12intro-css')) return;
-    var s=document.createElement('style'); s.id='ts12intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts12intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.2" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.2</div>'+
-        '<h1 class="ts-hero__title">Layout mit <span class="ts-gold">Absicht</span></h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts12intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts12intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Sobald eine Seite länger wird, entscheidet das Layout darüber, ob man sie noch liest. Mit Spalten legst du Inhalte nebeneinander statt untereinander — per Drag & Drop ziehst du einen Block einfach neben einen anderen, Notion baut die Spalte von selbst.</p>
-  <p>Toggle-Listen klappen Inhalt weg, bis du ihn brauchst, Trennlinien schaffen Ruhe zwischen Abschnitten. Medien-Embeds holen Bilder, PDFs und Links direkt auf die Seite, Synced Blocks halten denselben Inhalt an mehreren Stellen aktuell. Und wenn eine Seite mehrere gleichwertige Abschnitte hat, legst du sie mit <b>/Registerkarten</b> als Reiter übereinander, statt sie untereinander zu hängen: Ein Klick auf den Reiter tauscht den Inhalt aus, die Seite bleibt kurz. Genau diese drei Werkzeuge stecken in den Tabs meines Projekt-Systems, die dich durch den Einstieg führen — Synced Blocks bekommt gleich noch einen eigenen Blick.</p>
-  <h3>Drei Werkzeuge für ein aufgeräumtes Layout</h3>
-  <ul>
-    <li>Spalten — für Inhalte, die zusammengehören und nebeneinander stehen sollen</li>
-    <li>Toggles — für Details, die erst auf Klick sichtbar werden müssen</li>
-    <li>Embeds — für Bilder, PDFs und Links, die direkt auf der Seite leben</li>
-  </ul>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   layout-medien-strukturierung — Erkläranimation "Ein Layout, drei Werkzeuge"
-   Endzustand=Default: Basis zeigt fertiges Bild, .js versteckt initial, .on baut wieder auf.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts12bau{width:min(1000px,95vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts12bau .bau-head{max-width:760px;margin:0 auto 36px;padding:0 24px;text-align:center}
-  #ts12bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts12bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts12bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts12bau h2 .ts-gold{color:#c7b489}
-  #ts12bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:600px}
-  #ts12bau .bau-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:920px;margin:0 auto}
-  #ts12bau .bau-card{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:26px 22px;text-align:center;
-    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
-  #ts12bau.js .bau-card{opacity:0;transform:translateY(22px) scale(.97)}
-  #ts12bau.js.on .bau-card{opacity:1;transform:none}
-  #ts12bau.js.on .bau-card:nth-child(1){transition-delay:0ms}
-  #ts12bau.js.on .bau-card:nth-child(2){transition-delay:180ms}
-  #ts12bau.js.on .bau-card:nth-child(3){transition-delay:360ms}
-  #ts12bau .bau-card.lit{border-color:rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.8),0 0 0 1px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.22)}
-  #ts12bau .bau-ico{width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.34);color:#c7b489}
-  #ts12bau .bau-cname{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px}
-  #ts12bau .bau-cdesc{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);margin:0}
-  #ts12bau .bau-foot{display:flex;justify-content:center;margin-top:28px}
-  #ts12bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts12bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  @media(max-width:820px){ #ts12bau .bau-cards{grid-template-columns:1fr} }
-  `;
-
-  var CARDS=[
-    {name:'Spalte', desc:'Zwei Blöcke stehen nebeneinander statt untereinander — per Drag & Drop.', icon:'<rect x="4" y="4" width="7" height="16" rx="1.5"/><rect x="13" y="4" width="7" height="16" rx="1.5"/>'},
-    {name:'Toggle', desc:'Inhalt bleibt zugeklappt, bis du ihn per Klick aufdeckst.', icon:'<path d="M6 9l6 6 6-6"/>'},
-    {name:'Embed', desc:'Bild, PDF oder Link lebt direkt auf der Seite, ohne Umweg.', icon:'<rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M6 16l4-4 3 3 5-5"/>'}
-  ];
-
-  function injectCSS(){
-    if(document.getElementById('ts12bau-css')) return;
-    var s=document.createElement('style'); s.id='ts12bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var cards=CARDS.map(function(c){
-      return '<div class="bau-card"><div class="bau-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+c.icon+'</svg></div><div class="bau-cname">'+c.name+'</div><p class="bau-cdesc">'+c.desc+'</p></div>';
-    }).join('');
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Ein Layout, drei Werkzeuge</div>'+
-      '<h2>Struktur ist eine <span class="ts-gold">Entscheidung</span>, kein Zufall</h2>'+
-      '<p class="bau-sub">Spalte, Toggle und Embed lösen jeweils ein anderes Problem — zusammen ergeben sie ein Layout, das mitdenkt.</p>'+
-      '</div>'+
-      '<div class="bau-cards">'+cards+'</div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts12bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    var cards=root.querySelectorAll('.bau-card');
-    cards.forEach(function(c){ c.classList.remove('lit'); });
-    if(reduced) return;
-    cards.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); }, 500+i*250); });
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts12bau')) return;
-    var anchor=document.getElementById('ts12intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts12bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    root.querySelector('#ts12bauReplay').addEventListener('click', function(){ play(root); });
-    if(reduced){ root.classList.add('on'); root.querySelectorAll('.bau-card').forEach(function(c){c.classList.add('lit');}); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   layout-medien-strukturierung — Empfehlungs-Kachel "Empfehlung zur Nutzung"
-   Verhalten 1:1 wie Referenz: Scroll-Entrance, Cursor-Tilt, Glow-Follow, Heartbeat, Sync+Bézier-Linie.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Spalten nur bei echtem Zusammenhang','Toggles statt langer Textwüsten','Embeds bewusst dosieren','Synced Blocks für Wiederkehrendes'];
-  var TEXTS=[
-    'Zwei Blöcke gehören nur dann in eine Spalte, wenn man sie wirklich nebeneinander lesen will.',
-    'Lange Erklärungen wandern in einen Toggle, damit die Seite auf den ersten Blick ruhig bleibt.',
-    'Nicht jedes Bild braucht ein Embed — nur das, was direkt gebraucht wird, ohne Klick.',
-    'Wiederkehrende Hinweise als Synced Block anlegen, dann reicht eine Änderung für alle Stellen. Gleichwertige Abschnitte gehören dagegen in Registerkarten.'
-  ];
-
-  var CSS=`
-  #ts12emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts12emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
-  #ts12emp.js.in{opacity:1}
-  #ts12emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts12emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts12emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts12emp:hover::before{opacity:1}
-  #ts12emp.beat{animation:ts12empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts12empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts12emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts12emp .db-hd .g{color:#c7b489}
-  #ts12emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts12emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts12emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts12emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts12emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts12emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts12emp .emp-right{position:relative;z-index:1}
-  #ts12emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts12emp .emph .eg{color:#c7b489}
-  #ts12emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts12emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts12emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts12emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts12emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts12emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts12emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts12emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts12emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts12emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts12emp{grid-template-columns:1fr} #ts12emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts12emp-css')) return;
-    var s=document.createElement('style'); s.id='ts12emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Dein <span class="g">Layout-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
-      '<p class="p">Damit dein Layout nicht zur Bastelseite wird, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts12emp')) return;
-    var anchor=document.getElementById('ts12bau'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts12emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   layout-medien-strukturierung — Seitenabschluss (Learnings + Weiter-Button)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du legst Spalten per Drag & Drop an, statt sie zu erzwingen.',
-    'Du weißt, wann ein Toggle die bessere Wahl ist als Fließtext.',
-    'Du bindest Bilder, PDFs und Links direkt in die Seite ein.',
-    'Du legst gleichwertige Abschnitte als Registerkarten übereinander statt untereinander.'
-  ];
-
-  var CSS=`
-  #ts12l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts12l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts12l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts12l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts12l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts12l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts12lFloat 7s ease-in-out infinite}
-  #ts12l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts12l .tsl-orb:nth-child(1){animation-delay:0s} #ts12l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts12l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts12l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts12l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts12l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts12l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts12l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts12l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts12l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts12l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts12l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts12lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts12l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts12l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts12l-css')) return;
-    var s=document.createElement('style'); s.id='ts12l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts12l')) return;
-    var anchor=document.getElementById('ts12emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts12l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l13-einfhrung-in-datenbanken">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    einfuehrung-datenbanken — Hero + Einleitung "Seite oder Datenbank?"
    Lektion 1.3 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #1)
    ============================================================ */
@@ -37295,6 +36884,179 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du weißt, dass in Notion <b>alles eine Seite</b> ist und Seiten in Seiten liegen.','Du liest die Seitenleiste als Grundriss: <b>Workspace, Teamspaces, Privat</b>.','Du holst jeden Block mit dem <b>Schrägstrich</b> und verschiebst ihn am Griff.','Du weißt, welcher <b>Plan</b> zu deinem Betrieb passt und wo du Gelöschtes zurückholst.'],
         next:'/lektionen/l12-layout-medien-strukturierungs-tricks'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.2 "Lesbar im Stress."
+   Adresse: /lektionen/l12-layout-medien-strukturierungs-tricks (Alt-Slug toleriert)
+   Erklaeranimation "Aus dem Zettel wird eine Stationskarte" — EIGENES Konzept:
+   EIN Tablet am Pass. Dieselben sechs Bloecke stehen erst als Textwand da,
+   dann ordnen sie sich (FLIP, nur transform) zu Ueberschrift, zwei Spalten,
+   Hinweis und zugeklapptem Detail. Danach klappt das Detail einmal auf und zu.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L2) return; window.__tsn1L2=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a2-css',`
+      #tsn1-a2 .tab{position:relative;width:min(760px,100%);margin:0 auto;border-radius:34px;padding:18px;background:linear-gradient(145deg,#1a1c25,#0b0c12);border:1px solid rgba(255,255,255,.12);box-shadow:0 70px 120px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.06)}
+      #tsn1-a2 .tab::before{content:"";position:absolute;top:50%;left:8px;width:5px;height:5px;margin-top:-2px;border-radius:50%;background:rgba(255,255,255,.15)}
+      #tsn1-a2 .scr{position:relative;border-radius:20px;background:#0a0b11;border:1px solid rgba(255,255,255,.07);padding:26px clamp(18px,3vw,34px);min-height:440px;overflow:hidden}
+      #tsn1-a2 .pg{position:relative}
+      #tsn1-a2 .sg{will-change:transform;transform-origin:0 0}
+      /* Zustand A: Textwand */
+      #tsn1-a2 .pg .sg{font-size:13.5px;line-height:1.62;color:rgba(255,255,255,.72);margin:0;font-weight:400;font-family:-apple-system,sans-serif}
+      #tsn1-a2 .pg .s-pic{margin-top:10px;height:38px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+      #tsn1-a2 .pg .s-pic img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.6) brightness(.7)}
+      #tsn1-a2 .pg .s-tg .tg-h::before{content:none}
+      #tsn1-a2 .pg .s-tg .tg-b{display:block}
+      #tsn1-a2 .cols{display:block}
+      #tsn1-a2 .s-li span{display:inline}
+      #tsn1-a2 .s-li span+span::before{content:", "}
+      /* Zustand B: Stationskarte */
+      #tsn1-a2 .pg.ord .s-h{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(21px,2.5vw,28px);color:#fff;line-height:1.15;margin:0 0 16px}
+      #tsn1-a2 .pg.ord .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start;margin:0 0 16px}
+      #tsn1-a2 .pg.ord .s-li{color:rgba(255,255,255,.86)}
+      #tsn1-a2 .pg.ord .s-li span{display:flex;align-items:center;gap:9px;margin:0 0 7px}
+      #tsn1-a2 .pg.ord .s-li span+span::before{content:none}
+      #tsn1-a2 .pg.ord .s-li span i{display:inline-block}
+      #tsn1-a2 .s-li span i{display:none;width:13px;height:13px;border-radius:3px;border:1.4px solid rgba(255,255,255,.45);flex:0 0 auto}
+      #tsn1-a2 .pg.ord .s-pic{margin:0;height:160px;border-radius:12px}
+      #tsn1-a2 .pg.ord .s-pic img{filter:none}
+      #tsn1-a2 .pg.ord .s-co{display:flex;gap:10px;padding:12px 14px;border-radius:11px;background:rgba(199,180,137,.09);border:1px solid rgba(199,180,137,.3);color:rgba(255,255,255,.9);margin:0 0 12px}
+      #tsn1-a2 .s-co b{display:none;color:#c7b489;font-weight:700}
+      #tsn1-a2 .pg.ord .s-co b{display:inline}
+      #tsn1-a2 .pg.ord .s-tg{border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
+      #tsn1-a2 .pg.ord .s-tg .tg-h{display:flex;align-items:center;gap:9px;color:#fff;font-weight:600}
+      #tsn1-a2 .pg.ord .s-tg .tg-h::before{content:"";width:0;height:0;border-left:6px solid #c7b489;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .pg.ord .s-tg .tg-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .pg.ord .s-tg .tg-b>div{overflow:hidden;padding-left:15px;color:rgba(255,255,255,.66)}
+      #tsn1-a2 .pg.ord .s-tg.open .tg-h::before{transform:rotate(90deg)}
+      #tsn1-a2 .pg.ord .s-tg.open .tg-b{grid-template-rows:1fr}
+      #tsn1-a2 .pg.ord .s-tg.open .tg-b>div{padding-top:8px}
+      #tsn1-a2 .scan{position:absolute;left:0;right:0;top:0;height:70px;pointer-events:none;opacity:0;background:linear-gradient(180deg,rgba(199,180,137,0),rgba(199,180,137,.10),rgba(199,180,137,0))}
+      #tsn1-a2 .scan.run{animation:tsn1a2scan 1.4s cubic-bezier(.22,1,.36,1) 1}
+      @keyframes tsn1a2scan{0%{opacity:0;transform:translateY(-70px)}20%{opacity:1}100%{opacity:0;transform:translateY(460px)}}
+      #tsn1-a2 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(900px,100%);margin:24px auto 0}
+      #tsn1-a2 .st{appearance:none;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a2 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a2 .st.on b{color:#c7b489}
+      #tsn1-a2 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a2 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .rp button:hover{background:#c7b489;color:#05060b}
+      #tsn1-a2.js .tab{opacity:0;transform:translateY(24px) scale(.97)}
+      #tsn1-a2.js.on .tab{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+      @media(max-width:700px){ #tsn1-a2 .pg.ord .cols{grid-template-columns:1fr} #tsn1-a2 .rail{grid-template-columns:1fr} #tsn1-a2 .tab{border-radius:24px;padding:10px} }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a2.js .tab{opacity:1;transform:none} }
+      `);
+      host.id='tsn1-a2';
+      host.innerHTML=R.head('Ein Tablet am Pass','Dieselben Zeilen, <span class="g">einmal geordnet</span>.','Zuerst steht da, wie die meisten eine Stationsseite schreiben. Ohne ein Wort zu ändern, wird daraus eine Seite, die man im Vorbeigehen erfasst.')+
+        '<div class="tab"><div class="scr"><div class="scan"></div><div class="pg">'+
+          '<p class="sg s-h">Station Kalt, Mise en place für den Abend</p>'+
+          '<div class="cols"><p class="sg s-li"><span><i></i>Burrata aus der Kühlung nehmen</span><span><i></i>Tomaten in Spalten schneiden</span><span><i></i>Basilikum zupfen, feucht abdecken</span><span><i></i>Olivenöl in die Ausgießer füllen</span></p>'+
+          '<div class="sg s-pic"><img alt="Burrata mit Tomaten, angerichtet" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div></div>'+
+          '<p class="sg s-co"><b>!</b>Burrata enthält Milch. Bei jeder Nachfrage den Allergen-Ordner am Pass aufschlagen.</p>'+
+          '<div class="sg s-tg"><div class="tg-h">Reinigung nach dem Service</div><div class="tg-b"><div>Bretter in die Spülmaschine, Messer von Hand, Kühlschublade auswischen und Temperatur eintragen.</div></div></div>'+
+        '</div></div></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>So schreiben die meisten: ein Absatz für alles.</button><button class="st" data-s="1"><b>02</b>Überschrift, zwei Spalten, ein Hinweis.</button><button class="st" data-s="2"><b>03</b>Details klappen weg, bis jemand sie braucht.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var pg=host.querySelector('.pg'), sgs=host.querySelectorAll('.sg'), tg=host.querySelector('.s-tg'), scan=host.querySelector('.scan'), sts=host.querySelectorAll('.st');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      function step(i){ Array.prototype.forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function morph(toOrd){
+        if(pg.classList.contains('ord')===toOrd) return;
+        var a=[].map.call(sgs,function(e){ return e.getBoundingClientRect(); });
+        pg.classList.toggle('ord',toOrd);
+        [].forEach.call(sgs,function(e,i){
+          var b=e.getBoundingClientRect(); if(!b.width||!b.height) return;
+          var sx=a[i].width/b.width, sy=a[i].height/b.height;
+          e.style.transition='none'; e.style.transform='translate('+(a[i].left-b.left)+'px,'+(a[i].top-b.top)+'px) scale('+sx+','+sy+')';
+        });
+        void pg.offsetWidth;
+        [].forEach.call(sgs,function(e,i){ e.style.transition='transform 1.05s cubic-bezier(.16,1,.3,1) '+(i*90)+'ms'; e.style.transform=''; });
+      }
+      function play(){
+        clear(); tg.classList.remove('open'); [].forEach.call(sgs,function(e){ e.style.transition='none'; e.style.transform=''; }); pg.classList.remove('ord');
+        host.classList.add('on'); step(0);
+        later(function(){ step(1); scan.classList.remove('run'); void scan.offsetWidth; scan.classList.add('run'); morph(true); },2200);
+        later(function(){ step(2); tg.classList.add('open'); },4600);
+        later(function(){ tg.classList.remove('open'); },6800);
+      }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ var i=+s.getAttribute('data-s'); clear(); host.classList.add('on'); step(i); morph(i>0); tg.classList.toggle('open',i===2); }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ pg.classList.add('ord'); step(1); return; }
+      pg.classList.add('ord'); host.classList.add('js');
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l2',
+      re:/\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/,
+      hero:{label:'L 1.2', eyebrow:'L 1.2', title:'Lesbar im <span class="ts-gold">Stress</span>.', alt:'Notion-Seiten so gestalten, dass man sie im Service liest'},
+      intro:
+        '<p>Eine Seite in deinem Betrieb wird selten in Ruhe gelesen. Der Hygieneplan hängt als Tablet am Pass, die Mise-en-place-Liste wird mit nassen Händen auf dem Handy abgehakt, das Handbuch für neue Kollegen am ersten Tag zwischen zwei Aufgaben überflogen. Ob jemand liest, was da steht, entscheidet das Layout.</p>'+
+        '<p>In dieser Lektion lernen wir die Werkzeuge, mit denen aus einem langen Text eine Seite wird, die man im Vorbeigehen erfasst: Überschriften, Spalten, Hinweise, Klappen, Bilder und Blöcke, die an mehreren Stellen gleichzeitig stehen. Und wir schauen uns an, wie du die Seite eines einzelnen Eintrags in der Vorlage übersichtlich machst.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Für wen und wo', title:'Schreib für den <span class="g">Moment</span>, in dem gelesen wird', lead:'Bevor du eine Seite gestaltest, frag dich, wer sie in welcher Situation öffnet. Daraus ergibt sich fast jede Entscheidung von selbst.', blocks:[
+          R.cards([
+            {mi:'Am Pass', nm:'Tablet, wenig Zeit', img:IMG+'gerichte/rinderfilet.webp', tx:'<p>Große Überschriften, kurze Zeilen, ein einziger Hinweis in Farbe. Alles Wichtige auf dem ersten Bildschirm, ohne zu scrollen.</p>'},
+            {mi:'Im Lager', nm:'Handy, eine Hand frei', img:IMG+'inventar/olivenoel.jpg', tx:'<p>Listen zum Abhaken, eine Spalte, keine Tabellen mit vielen Spalten. Auf dem Handy werden Spalten ohnehin untereinander gesetzt.</p>'},
+            {mi:'Im Büro', nm:'Laptop, Zeit zum Lesen', img:IMG+'gemeinkosten/buchhaltung-rechner.webp', tx:'<p>Hier dürfen Spalten nebeneinander stehen, Tabellen breit werden und Details in Klappen liegen. Das ist der Ort für Kalkulation und Auswertung.</p>'}
+          ],3)
+        ]}),
+        R.sec({eb:'Die Werkzeuge', title:'Womit eine Seite <span class="g">Ordnung</span> bekommt', lead:'Alle diese Blöcke holst du mit dem Schrägstrich. Du musst sie nicht auswendig kennen, du musst nur wissen, dass es sie gibt.', blocks:[
+          R.tab(['Block','Was er tut','Beispiel aus dem Betrieb'],[
+            ['Überschrift 1 bis 3','Gliedert die Seite in Abschnitte, die man überfliegen kann','„Schichtbeginn", „Während des Service", „Schichtende"'],
+            ['Spalten','Setzt Blöcke nebeneinander. Du ziehst einen Block am Griff neben einen anderen','Links die Liste, rechts das Foto vom fertigen Teller'],
+            ['Trennlinie','Eine dünne Linie zwischen zwei Teilen einer Seite. Mit drei Bindestrichen am Zeilenanfang','Zwischen Küche und Service im selben Handbuch'],
+            ['Callout','Ein farbig hinterlegter Hinweis mit Symbol','„Burrata enthält Milch."'],
+            ['Toggle','Eine Zeile, die beim Klick ihren Inhalt aufklappt','Reinigungsmittel und Dosierung, nur bei Bedarf'],
+            ['Überschrift als Toggle','Eine Überschrift, unter der der ganze Abschnitt zugeklappt liegt','Ein langes Handbuch, das zugeklappt auf eine Seite passt'],
+            ['Inhaltsverzeichnis','Listet alle Überschriften der Seite als Sprungmarken','Am Anfang des Hygienehandbuchs'],
+            ['Bild, Datei, Video','Fotos, PDFs und Videos direkt auf der Seite','Das Sicherheitsdatenblatt des Reinigers als PDF']
+          ]),
+          R.txt('<p><strong>Aus jedem Block wird ein anderer.</strong> Hast du einen Absatz geschrieben, der eigentlich ein Hinweis sein soll, musst du ihn nicht neu tippen. Klick auf den Griff, wähle im Menü das Umwandeln in einen anderen Blocktyp, und der Text bleibt, nur die Form ändert sich. Genau das zeigt die Animation oben.</p>'),
+          R.merk('Was am Pass gelesen wird, passt auf einen Bildschirm.')
+        ]}),
+        R.sec({eb:'Ein Block, viele Orte', title:'Die Notfallnummern stehen <span class="g">überall gleich</span>', lead:'Manche Inhalte gehören auf viele Seiten zugleich: die Nummer des Kältetechnikers, der Hinweis zum Allergen-Ordner, die Öffnungszeiten über Feiertage.', blocks:[
+          R.txt('<p><strong>Dafür gibt es den synchronisierten Block.</strong> Du legst ihn einmal an, kopierst ihn auf andere Seiten, und an jeder Stelle steht derselbe Inhalt. Änderst du die Nummer an einer Stelle, ändert sie sich überall. Ein synchronisierter Block hat beim Bearbeiten einen farbigen Rahmen, daran erkennst du ihn.</p>'+
+            '<p>So vermeidest du den häufigsten Fehler in Betriebshandbüchern: Die Nummer wurde im Küchenhandbuch geändert, im Servicehandbuch steht noch die alte, und am Wochenende ruft jemand beim falschen Techniker an.</p>'),
+          R.jetzt([
+            'Leg auf deiner Seite <b>Probeküche</b> mit <kbd>/</kbd> einen synchronisierten Block an.',
+            'Schreib hinein: Kältetechnik, Name, Telefonnummer.',
+            'Kopier den Block über das Menü am Griff und füg ihn auf einer zweiten Seite ein.',
+            'Änder auf der zweiten Seite die Nummer und schau, was auf der ersten passiert.'
+          ],'Probier es aus')
+        ]}),
+        R.sec({eb:'Einträge lesbar machen', title:'Auch jeder Eintrag einer Datenbank ist eine <span class="g">Seite</span>', lead:'Öffnest du in der Vorlage ein Gericht, siehst du keine Tabellenzeile, sondern eine ganze Seite mit allen Spalten untereinander. Bei dreißig Spalten wird das lang.', blocks:[
+          R.txt('<p><strong>Das Layout dieser Seiten kannst du einstellen.</strong> Öffne einen Eintrag, klick oben rechts auf die drei Punkte und dann auf <em>Darstellung &amp; Layout</em> und <em>Layout anpassen</em>. Dort legst du fest, welche Eigenschaften oben angepinnt stehen und welche in einem Detailbereich verschwinden. Die Einstellung gilt für alle Einträge dieser Datenbank, du machst sie also nur einmal.</p>'),
+          R.fund(['DB XI : Gerichte &amp; Getränke','ein Gericht öffnen','Layout anpassen'],'<p>Pinne oben an, was du beim Blick auf ein Gericht wirklich brauchst, zum Beispiel Verkaufspreis, Wareneinsatz in Prozent und Allergene. Die Rechenspalten dahinter bleiben vollständig erhalten, sie stehen nur weiter unten.</p>'),
+          R.fund(['Operations Area','Hygiene, Behörden &amp; Handbücher'],'<p>Die Handbuchseiten der Vorlage sind normale Seiten mit Überschriften, Callouts und Toggles. Wenn du sie an deinen Betrieb anpasst, gilt dasselbe wie oben: für den Moment schreiben, in dem gelesen wird.</p>')
+        ]}),
+        R.sec({eb:'Jetzt du', title:'Deine erste <span class="g">Stationskarte</span>', blocks:[
+          R.jetzt([
+            'Leg in der <b>Probeküche</b> eine Unterseite für eine Station deiner Küche an, zum Beispiel „Station Kalt".',
+            'Schreib zuerst alles herunter, was dort vor dem Service passieren muss, ohne auf die Form zu achten.',
+            'Mach daraus eine Überschrift, eine To-do-Liste und einen Callout für den einen Hinweis, der nie überlesen werden darf.',
+            'Zieh ein Foto vom fertigen Teller neben die Liste, sodass zwei Spalten entstehen.',
+            'Pack alles, was nur manchmal gebraucht wird, in einen Toggle. Öffne die Seite auf dem Handy und prüf, ob das Wichtigste ohne Scrollen zu sehen ist.'
+          ])
+        ]}),
+        {emp:{kind:'Nutzung', animTitle:'Lesbar', animGold:'auf jedem Gerät', steps:['Erst schreiben, dann ordnen','Ein Hinweis je Seite','Details in Toggles','Am Handy prüfen'],
+          intro:'Eine gute Betriebsseite entsteht in zwei Durchgängen. Erst kommt alles herunter, dann wird geordnet.',
+          points:['Schreib den Inhalt zuerst vollständig auf. Wer beim Schreiben schon gestaltet, vergisst die Hälfte.','Ein Callout pro Seite. Sind es fünf, fällt keiner mehr auf.','Alles, was nur der Neue am ersten Tag braucht, kommt in einen Toggle. Die erfahrene Kollegin muss nicht daran vorbeiscrollen.','Öffne jede Seite, die am Pass oder im Lager gelesen wird, einmal auf dem Handy, bevor du sie freigibst.']}}
+      ],
+      learn:{items:['Du gestaltest eine Seite für den <b>Moment</b>, in dem sie gelesen wird.','Du setzt Blöcke mit dem Griff in <b>Spalten</b> und wandelst einen Block in einen anderen um.','Du pflegst Notfallnummern und Hinweise als <b>synchronisierten Block</b> an einem Ort.','Du stellst das <b>Layout</b> der Eintragsseiten einer Datenbank einmal für alle Einträge ein.'],
+        next:'/lektionen/l13-einfhrung-in-datenbanken'}
     });
   }
   go();
