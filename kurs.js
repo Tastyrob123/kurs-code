@@ -9300,6 +9300,8 @@ window.__tsMO = function(cb){
    ============================================================ */
 (function(){
   if(window.__tsshop) return; window.__tsshop=true;
+  /* Modul 1 Neubau: Zugriff auf die Regal-Inhalte in der Zone NEUBAU MODUL 1 */
+  function TSN1(k,f){ var o=window.__tsn1Shop&&window.__tsn1Shop[k]; return o?o[f]:undefined; }
 
   /* ---------- Datenmodell: alle Kacheln des Gastro-OS ---------- */
   var KACHELN=[
@@ -9716,23 +9718,6 @@ window.__tsMO = function(cb){
     { kachel_id:'konzept_allgemeine_tipps',  kachel_name:'Allgemeine Tipps',    ist_produkt_kachel:false },
     /* Key Metrics — Kostenauswertung Master (DB XX), Engine-generiert 2026-07-20.
        Balken zaehlt KENNZAHLEN (Spalten-Fortschritt), einheit_typ:'anzahl', wert:1 je Karte. Bilder folgen -> ph(). */
-    /* Lektion 1.3 (Modul 1) — DB II Aufgaben & ToDos, vereinfacht. wert:0 = Anleitungskarten, wert:1 = echte Spalten. */
-    { kachel_id:'m1_todo', kachel_name:'Aufgaben & ToDos (vereinfacht)', ist_produkt_kachel:true,
-      einheit:'Spalten', einheit_typ:'anzahl',
-      objekt_varianten:[
-        {name:'Button anlegen', wert:0},
-        {name:'Datenbank anlegen', wert:0},
-        {name:'Titel', wert:1},
-        {name:'Status', wert:1},
-        {name:'Priorität', wert:1},
-        {name:'Bereich', wert:1},
-        {name:'Tags', wert:1},
-        {name:'Datum', wert:1},
-        {name:'Zeitaufwand', wert:1},
-        {name:'To Do of the Day', wert:1},
-        {name:'Erledigt', wert:1},
-        {name:'Beschreibung', wert:1}
-      ]},
     /* Lektion 1.4 (Modul 1) — DB I Projekte <-> DB II Aufgaben, Relation + 2 Rollups. wert:0 = Anleitungskarten. */
     { kachel_id:'m1_projekte', kachel_name:'Projekte (verknüpft mit Aufgaben)', ist_produkt_kachel:true,
       einheit:'Aufwand (h)', einheit_typ:'anzahl',
@@ -9797,6 +9782,13 @@ window.__tsMO = function(cb){
         {name:'Self-Referencing Filter', wert:0},
         {name:'Die Ansicht an einen zweiten Ort holen', wert:1}
       ]},
+    /* Modul 1 Neubau (01.11.2026): Probekueche-Regale. Inhalt liegt in der Zone NEUBAU MODUL 1
+       (window.__tsn1Shop) und wird zur Laufzeit gelesen (Getter), damit dieser Block klein bleibt. */
+    { kachel_id:'m1_produkte', kachel_name:'Probeküche · Produkte', ist_produkt_kachel:true, einheit:'Spalten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_produkte','varianten')||[]; } },
+    { kachel_id:'m1_lieferanten', kachel_name:'Probeküche · Lieferanten', ist_produkt_kachel:true, einheit:'Spalten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_lieferanten','varianten')||[]; } },
+    { kachel_id:'m1_rechnen', kachel_name:'Probeküche · Rechenspalten', ist_produkt_kachel:true, einheit:'Rechenspalten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_rechnen','varianten')||[]; } },
+    { kachel_id:'m1_ansichten2', kachel_name:'Probeküche · Ansichten', ist_produkt_kachel:true, einheit:'Ansichten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_ansichten','varianten')||[]; } },
+    { kachel_id:'m1_buttons2', kachel_name:'Probeküche · Buttons', ist_produkt_kachel:true, einheit:'Buttons', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_buttons','varianten')||[]; } },
     { kachel_id:'km_master', kachel_name:'Kostenauswertung Master', ist_produkt_kachel:true,
       einheit:'Kennzahlen', einheit_typ:'anzahl',
       objekt_varianten:[
@@ -10628,23 +10620,6 @@ var TSISL_TEAM_ONB_V2=[
   {title:'11. Beschreibung', desc:'Eigenschaft : Text → Name der Spalte : Beschreibung', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Beschreibung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> was genau in diesem Schritt passiert.</p>'}
 ];
 
-  /* Lektion 1.3 (Modul 1, Notion-Grundlagen) — Config-Steps-Regal, echte Notion-DB "DB II : Aufgaben & ToDos"
-     aus Roberts PM Vol.1 (Basis-Eigenschaften, vereinfacht: Titel/Status/Auswahl/Mehrfachauswahl/Datum/Nummer/
-     Checkbox/Text — OHNE Projekt-Relation und Fortschritt-Formel, die gehören zu Lektion 1.4). */
-  var TS13_STEPS=[
-    {title:'1. Button anlegen', desc:'Leg auf deiner Seite einen Button an, der zur neuen Datenbank führt.', html:'<p class="notion-text">Wie bei jeder neuen Datenbank fängst du mit dem Rahmen an: Lege einen <b>Button</b> an, der dich zur neuen Tabelle führt.</p><p class="notion-text">→ <b>/button</b> einfügen → Beschriftung eintragen → Link auf die neue Seite setzen.</p>'},
-    {title:'2. Datenbank anlegen', desc:'Drücke / und wähle Tabellenansicht – Datenbank. Name: Aufgaben & ToDos.', html:'<p class="notion-text">Drücke <b>/</b> und wähle &bdquo;Tabellenansicht &ndash; Datenbank&ldquo;.</p><p class="notion-text">→ <b>Name der Datenbank :</b> Aufgaben &amp; ToDos</p><p class="notion-text">Ab jetzt ist jede Karte in diesem Regal eine Spalte dieser Tabelle.</p>'},
-    {title:'3. Titel', desc:'Eigenschaft : Titel → Name der Spalte : ToDo / Aufgabe.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Titel</p><p class="notion-text">→ <b>Name der Spalte :</b> ToDo / Aufgabe</p><p class="notion-text">→ <b>Du trägst hier ein :</b> die Aufgabe selbst, in wenigen Worten.</p>'},
-    {title:'4. Status', desc:'Eigenschaft : Status → Backlog, Nächste, In Arbeit, Wartet, Erledigt, Abgebrochen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Status</p><p class="notion-text">→ <b>Name der Spalte :</b> Status</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein (in drei Gruppen):</p><p class="notion-text">— Zu erledigen: <b>Backlog</b>, <b>Nächste</b></p><p class="notion-text">— In Arbeit: <b>In Arbeit</b>, <b>Wartet</b></p><p class="notion-text">— Erledigt: <b>Erledigt</b>, <b>Abgebrochen</b></p>'},
-    {title:'5. Priorität', desc:'Eigenschaft : Auswählen → Hoch, Mittel, Niedrig.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Priorität</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text"><b>Hoch</b> · <b>Mittel</b> · <b>Niedrig</b></p>'},
-    {title:'6. Bereich', desc:'Eigenschaft : Auswählen → Business, Privat, Food&Beverage, Reisen, Finance, Selfcare, Content, Admin.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Auswählen</p><p class="notion-text">→ <b>Name der Spalte :</b> Bereich</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text"><b>Business</b> · <b>Privat</b> · <b>Food&amp;Beverage</b> · <b>Reisen</b> · <b>Finance</b> · <b>Selfcare</b> · <b>Content</b> · <b>Admin</b></p>'},
-    {title:'7. Tags', desc:'Eigenschaft : Mehrfachauswahl → Klein, Groß, Thema, Dringend, Meeting, Planung, Entwicklung, Marketing, Finanzen.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Mehrfachauswahl</p><p class="notion-text">→ <b>Name der Spalte :</b> Tags</p><p class="notion-text">Trage diese Auswahlmöglichkeiten ein :</p><p class="notion-text"><b>Klein</b> · <b>Groß</b> · <b>Thema</b> · <b>Dringend</b> · <b>Meeting</b> · <b>Planung</b> · <b>Entwicklung</b> · <b>Marketing</b> · <b>Finanzen</b></p>'},
-    {title:'8. Datum', desc:'Eigenschaft : Datum → Name der Spalte : Datum.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Datum</p><p class="notion-text">→ <b>Name der Spalte :</b> Datum</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Fälligkeitsdatum oder geplanten Erledigungstag.</p>'},
-    {title:'9. Zeitaufwand', desc:'Eigenschaft : Nummer → Name der Spalte : Zeitaufwand ( h ).', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Nummer</p><p class="notion-text">→ Eigenschaft bearbeiten &ndash;</p><p class="notion-text">Zahlenformat : Standard</p><p class="notion-text">Nachkommastellen : Standard</p><p class="notion-text">→ <b>Name der Spalte :</b> Zeitaufwand ( h )</p><p class="notion-text">→ <b>Du trägst hier ein :</b> geschätzte oder tatsächliche Stunden.</p>'},
-    {title:'10. To Do of the Day', desc:'Eigenschaft : Checkbox → erscheint dann in der Daily-Tasks-Galerie.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Checkbox</p><p class="notion-text">→ <b>Name der Spalte :</b> To Do of the Day</p><p class="notion-text">→ <b>Du hakst ab :</b> wenn die Aufgabe heute dran ist — sie taucht dann automatisch in einer eigenen Galerie-Ansicht auf.</p>'},
-    {title:'11. Erledigt', desc:'Eigenschaft : Checkbox → Name der Spalte : Erledigt.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Checkbox</p><p class="notion-text">→ <b>Name der Spalte :</b> Erledigt</p><p class="notion-text">→ <b>Du hakst ab :</b> erst wenn die Aufgabe wirklich fertig ist — getrennt von „To Do of the Day", damit beides unabhängig funktioniert.</p>'},
-    {title:'12. Beschreibung', desc:'Eigenschaft : Text → Name der Spalte : Beschreibung.', html:'<p class="notion-text">→ <b>Eigenschaft :</b> Text</p><p class="notion-text">→ <b>Name der Spalte :</b> Beschreibung</p><p class="notion-text">→ <b>Du trägst hier ein :</b> Kontext, den der Titel allein nicht hergibt.</p>'}
-  ];
 
   /* Lektion 1.4 (Modul 1) — DB I : Projekte <-> DB II : Aufgaben, Relation + Rollups (Zeitaufwand-Summe, Prioritaeten-Liste). */
   var TS14_STEPS=[
@@ -10839,13 +10814,6 @@ var TSISL_TEAM_ONB_V2=[
       title:'Deine Projekte. <span>Verknüpft mit den Aufgaben.</span>',
       sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — die Währung ist Aufwand in Stunden. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
       summary:'Aufwand (h)', chain:true },
-    /* Lektion 1.3 (Modul 1) — DB II : Aufgaben & ToDos, vereinfacht (Basis-Eigenschaften). Notion-Seite leer -> Config-Steps. */
-    { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_todo',
-      anchorSel:'#ts13wk', steps:TS13_STEPS,
-      eyebrow:'DB : Aufgaben & ToDos (vereinfacht)',
-      title:'Deine Aufgabenliste. <span>Spalte für Spalte</span>.',
-      sub:'Jede Karte ist eine Spalte dieser Tabelle. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Spalten. Um eine neue Seite anzulegen, gehe auf deine Startseite, drücke / und wähle neue Tabelle (Datenbankansicht).',
-      summary:'Spalten', chain:true },
     /* Lektion 1.5 (Modul 1) — Formeln & Rollups auf DB I/DB II. Notion-Seite leer -> Config-Steps. */
     { path:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, kachel:'m1_formeln',
       anchorSel:'#ts15wk', steps:TS15_STEPS,
@@ -10860,6 +10828,22 @@ var TSISL_TEAM_ONB_V2=[
       title:'Deine Ansichten. <span>Blick für Blick.</span>',
       sub:'Jede Karte ist eine Ansicht oder ein Regler, mit dem du sie einstellst. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.',
       summary:'Ansichten', chain:true },
+    /* Modul 1 Neubau (01.11.2026): fuenf Probekueche-Regale, Anker im Seiten-Container der Zone NEUBAU MODUL 1 */
+    { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_produkte', anchorSel:'#tsn1-wk-m1_produkte', chain:true,
+      get steps(){ return TSN1('m1_produkte','steps'); }, get relations(){ return TSN1('m1_produkte','relations'); },
+      get eyebrow(){ return TSN1('m1_produkte','eyebrow'); }, get title(){ return TSN1('m1_produkte','title'); }, get sub(){ return TSN1('m1_produkte','sub'); }, get summary(){ return TSN1('m1_produkte','summary'); } },
+    { path:/\/(?:lektionen\/l14-relationen-rollups|relationen-rollups)\/?$/, kachel:'m1_lieferanten', anchorSel:'#tsn1-wk-m1_lieferanten', chain:true,
+      get steps(){ return TSN1('m1_lieferanten','steps'); }, get relations(){ return TSN1('m1_lieferanten','relations'); },
+      get eyebrow(){ return TSN1('m1_lieferanten','eyebrow'); }, get title(){ return TSN1('m1_lieferanten','title'); }, get sub(){ return TSN1('m1_lieferanten','sub'); }, get summary(){ return TSN1('m1_lieferanten','summary'); } },
+    { path:/\/(?:lektionen\/l15-formeln-20-logik-bausteine|formeln-logik-bausteine)\/?$/, kachel:'m1_rechnen', anchorSel:'#tsn1-wk-m1_rechnen', chain:true,
+      get steps(){ return TSN1('m1_rechnen','steps'); }, get relations(){ return TSN1('m1_rechnen','relations'); },
+      get eyebrow(){ return TSN1('m1_rechnen','eyebrow'); }, get title(){ return TSN1('m1_rechnen','title'); }, get sub(){ return TSN1('m1_rechnen','sub'); }, get summary(){ return TSN1('m1_rechnen','summary'); } },
+    { path:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, kachel:'m1_ansichten2', anchorSel:'#tsn1-wk-m1_ansichten2', chain:true,
+      get steps(){ return TSN1('m1_ansichten','steps'); }, get relations(){ return TSN1('m1_ansichten','relations'); },
+      get eyebrow(){ return TSN1('m1_ansichten','eyebrow'); }, get title(){ return TSN1('m1_ansichten','title'); }, get sub(){ return TSN1('m1_ansichten','sub'); }, get summary(){ return TSN1('m1_ansichten','summary'); } },
+    { path:/\/(?:lektionen\/l17-native-automations-buttons|automations-buttons)\/?$/, kachel:'m1_buttons2', anchorSel:'#tsn1-wk-m1_buttons2', chain:true,
+      get steps(){ return TSN1('m1_buttons','steps'); }, get relations(){ return TSN1('m1_buttons','relations'); },
+      get eyebrow(){ return TSN1('m1_buttons','eyebrow'); }, get title(){ return TSN1('m1_buttons','title'); }, get sub(){ return TSN1('m1_buttons','sub'); }, get summary(){ return TSN1('m1_buttons','summary'); } },
     /* Key Metrics — Config-Steps-Regal (Notion-Seite leer, Steps aus Config; echte DB-Schemas + Formeln). */
     { path:/\/key-metrics\/?$/, kachel:'km_master',
       anchorSel:'#tskmwk', steps:TSKM_STEPS,
@@ -11411,7 +11395,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:33, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_todo:12, m1_projekte:11, m1_buttons:6, m1_formeln:13, m1_ansichten:14, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_projekte:11, m1_buttons:6, m1_formeln:13, m1_ansichten:14, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24709,475 +24693,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   einfuehrung-datenbanken — Hero + Einleitung "Seite oder Datenbank?"
-   Lektion 1.3 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #1)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.3');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts13intro-css')) return;
-    var s=document.createElement('style'); s.id='ts13intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts13intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.3" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.3</div>'+
-        '<h1 class="ts-hero__title">Seite oder <span class="ts-gold">Datenbank</span>?</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts13intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts13intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Eine Seite ist ein einzelnes Dokument. Eine Datenbank ist ein Raster aus vielen Seiten mit denselben Eigenschaften — Titel, Status, Datum, was auch immer du brauchst. Genau diese Wiederholbarkeit macht Datenbanken zum eigentlichen Motor von Notion.</p>
-  <p>Du legst sie als eigene Unterseite an (Full Page) oder bettest sie direkt in eine bestehende Seite ein (Inline) — je nachdem, ob die Tabelle für sich stehen soll. Mein eigenes Projekt-System läuft über genau solche Datenbanken, allen voran die Aufgabenliste, die du jetzt selbst nachbaust.</p>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   einfuehrung-datenbanken — Erkläranimation "Seite vs. Datenbank" + Warenkorb-Anker
-   Endzustand=Default in der Animation. Direkt danach: leerer Anker #ts13wk, an dem der
-   globale tsshop-Warenkorb mountet (Config-Steps-Regal, TS13_STEPS/PAGES-Eintrag).
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts13bau{width:min(1000px,95vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts13bau .bau-head{max-width:760px;margin:0 auto 36px;padding:0 24px;text-align:center}
-  #ts13bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts13bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts13bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts13bau h2 .ts-gold{color:#c7b489}
-  #ts13bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:600px}
-  #ts13bau .bau-cards{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(10px,2vw,20px);max-width:760px;margin:0 auto}
-  #ts13bau .bau-conn{position:relative;width:clamp(34px,5.5vw,64px);height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(199,180,137,.06),rgba(199,180,137,.55),rgba(199,180,137,.06))}
-  #ts13bau .bau-conn::after{content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:#efe6d2;box-shadow:0 0 11px 2px rgba(199,180,137,.85);transform:translate(-50%,-50%);opacity:0}
-  #ts13bau.js.on .bau-conn::after{animation:ts13bauPulse 2.6s cubic-bezier(.22,1,.36,1) infinite}
-  @keyframes ts13bauPulse{0%{left:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:100%;opacity:0}}
-  @media(max-width:820px){ #ts13bau .bau-conn{width:2px;height:34px} #ts13bau .bau-conn::after{left:50%;top:0}
-    #ts13bau.js.on .bau-conn::after{animation:ts13bauPulseV 2.6s cubic-bezier(.22,1,.36,1) infinite} }
-  @keyframes ts13bauPulseV{0%{top:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
-  #ts13bau .bau-card{background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:26px 22px;text-align:center;
-    opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s}
-  #ts13bau.js .bau-card{opacity:0;transform:translateY(22px) scale(.97)}
-  #ts13bau.js.on .bau-card{opacity:1;transform:none}
-  #ts13bau.js.on .bau-card:nth-child(1){transition-delay:0ms}
-  #ts13bau.js.on .bau-card:nth-child(2){transition-delay:220ms}
-  #ts13bau .bau-card.lit{border-color:rgba(199,180,137,.5);box-shadow:0 20px 46px -18px rgba(0,0,0,.8),0 0 0 1px rgba(199,180,137,.16),0 0 30px rgba(199,180,137,.22)}
-  #ts13bau .bau-ico{width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.34);color:#c7b489}
-  #ts13bau .bau-cname{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px}
-  #ts13bau .bau-cdesc{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);margin:0}
-  #ts13bau .bau-foot{display:flex;justify-content:center;margin-top:28px}
-  #ts13bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts13bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  @media(max-width:820px){ #ts13bau .bau-cards{grid-template-columns:1fr;justify-items:center} }
-  `;
-
-  var CARDS=[
-    {name:'Seite', desc:'Ein einzelnes Dokument — für einmalige, individuelle Inhalte.', icon:'<path d="M6 3h9l3 3v15H6z"/><path d="M15 3v3h3"/>'},
-    {name:'Datenbank', desc:'Viele Seiten mit denselben Eigenschaften — für alles, was sich wiederholt.', icon:'<rect x="4" y="5" width="16" height="4"/><rect x="4" y="10" width="16" height="4"/><rect x="4" y="15" width="16" height="4"/>'}
-  ];
-
-  function injectCSS(){
-    if(document.getElementById('ts13bau-css')) return;
-    var s=document.createElement('style'); s.id='ts13bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var cards=CARDS.map(function(c){
-      return '<div class="bau-card"><div class="bau-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+c.icon+'</svg></div><div class="bau-cname">'+c.name+'</div><p class="bau-cdesc">'+c.desc+'</p></div>';
-    });
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Zwei Bausteine, ein Unterschied</div>'+
-      '<h2>Eine Datenbank ist eine <span class="ts-gold">Seite, die sich wiederholt</span></h2>'+
-      '<p class="bau-sub">Sobald du dieselben Fragen immer wieder beantwortest, brauchst du keine Seite mehr — du brauchst eine Datenbank.</p>'+
-      '</div>'+
-      '<div class="bau-cards">'+cards[0]+'<span class="bau-conn"></span>'+cards[1]+'</div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts13bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    var cards=root.querySelectorAll('.bau-card');
-    cards.forEach(function(c){ c.classList.remove('lit'); });
-    if(reduced) return;
-    cards.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); }, 500+i*300); });
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts13bau')) return;
-    var anchor=document.getElementById('ts13intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts13bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    root.querySelector('#ts13bauReplay').addEventListener('click', function(){ play(root); });
-
-    /* Warenkorb-Anker direkt danach (tsshop mountet an #ts13wk via PAGES-Config TS13_STEPS) */
-    if(!document.getElementById('ts13wk')){
-      var wk=document.createElement('div'); wk.id='ts13wk';
-      root.parentNode.insertBefore(wk, root.nextSibling);
-    }
-
-    if(reduced){ root.classList.add('on'); root.querySelectorAll('.bau-card').forEach(function(c){c.classList.add('lit');}); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   einfuehrung-datenbanken — Ergebnis-Blick "Zehn Spalten, eine Übersicht." (Text links / PC rechts)
-   Platzhalter-Modus (POSTER=null): gestalteter MacBook-Platzhalter statt echtem Screenshot.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  #ts13res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts13res .r-text{flex:1 1 0}
-  #ts13res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
-  #ts13res h3 .ts-accent{color:#c7b489}
-  #ts13res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
-  #ts13res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts13res .r-tile{width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
-    transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts13res .r-tile:hover{transform:translateY(-4px) scale(1.02)}
-  #ts13res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
-  #ts13res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #ts13res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
-  #ts13res .r-cap b{color:#c7b489;font-weight:600}
-  #ts13res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts13res{flex-direction:column} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts13res-css')) return;
-    var s=document.createElement('style'); s.id='ts13res-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="r-text"><h3>Zehn Spalten, <span class="ts-accent">eine Übersicht.</span></h3>'+
-      '<p>Sobald alle Spalten stehen, wird aus der leeren Tabelle ein echtes Werkzeug: Du gruppierst nach Priorität, filterst nach Bereich, und die Checkbox „To Do of the Day" zieht die wichtigsten Aufgaben automatisch in eine eigene Ansicht. Der Status läuft in drei Gruppen — zu erledigen, in Arbeit, erledigt.</p>'+
-      '<p>Genau das ist der Unterschied zur einzelnen Seite: Eine Datenbank zeigt dir dieselben Daten aus so vielen Blickwinkeln, wie du Ansichten anlegst — als Liste nach Priorität, als Galerie nur für heute, als Tabelle für den Rückblick. Die Struktur bleibt dieselbe, nur der Ausschnitt wechselt.</p></div>'+
-      '<div class="r-pc"><div class="r-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span></div>'+
-      '<div class="r-cap">Aufgaben &amp; ToDos <b>– Live Beispiel</b></div><div class="r-hint">Bild folgt</div></div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts13res')) return;
-    var anchor=document.getElementById('tsshop--m1_todo'); if(!anchor){ anchor=document.getElementById('ts13wk'); }
-    if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts13res'; root.innerHTML=html();
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   einfuehrung-datenbanken — Empfehlungs-Kachel "Empfehlung zur Einrichtung"
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Titel zuerst, Rest danach','Status statt Checkbox-Wildwuchs','Auswahllisten kurz halten','Views erst wenn Daten stehen'];
-  var TEXTS=[
-    'Ohne aussagekräftigen Titel ist jede Zeile später nur noch Rätselraten — den Rest kannst du in Ruhe ergänzen.',
-    'Ein sauberer Status-Workflow schlägt eine einzelne Erledigt-Checkbox, sobald mehr als zwei Zustände existieren.',
-    'Fünf bis acht Optionen pro Auswahlfeld reichen fast immer — jede weitere Option kostet Übersicht.',
-    'Baue erst die Spalten, dann die Ansichten darüber — sonst filterst du auf Eigenschaften, die noch fehlen.'
-  ];
-
-  var CSS=`
-  #ts13emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts13emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
-  #ts13emp.js.in{opacity:1}
-  #ts13emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts13emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts13emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts13emp:hover::before{opacity:1}
-  #ts13emp.beat{animation:ts13empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts13empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts13emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts13emp .db-hd .g{color:#c7b489}
-  #ts13emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts13emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts13emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts13emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts13emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts13emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts13emp .emp-right{position:relative;z-index:1}
-  #ts13emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts13emp .emph .eg{color:#c7b489}
-  #ts13emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts13emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts13emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts13emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts13emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts13emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts13emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts13emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts13emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts13emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts13emp{grid-template-columns:1fr} #ts13emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts13emp-css')) return;
-    var s=document.createElement('style'); s.id='ts13emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Deine <span class="g">Datenbank-Einrichtung</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Einrichtung</span></div>'+
-      '<p class="p">Damit deine erste Datenbank tragfähig bleibt, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts13emp')) return;
-    var anchor=document.getElementById('ts13res'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts13emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   einfuehrung-datenbanken — Seitenabschluss (Learnings + Weiter-Button)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du kennst den Unterschied zwischen Seite und Datenbank.',
-    'Du weißt, wann Inline und wann Full Page sinnvoll ist.',
-    'Du hast eine erste Datenbank mit Basis-Eigenschaften gebaut.',
-    'Du liest Status, Auswahl, Datum und Zahl als Bausteine, nicht als Hürden.'
-  ];
-
-  var CSS=`
-  #ts13l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts13l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts13l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts13l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts13l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts13l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts13lFloat 7s ease-in-out infinite}
-  #ts13l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts13l .tsl-orb:nth-child(1){animation-delay:0s} #ts13l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts13l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts13l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts13l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts13l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts13l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts13l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts13l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts13l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts13l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts13l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts13lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts13l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts13l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts13l-css')) return;
-    var s=document.createElement('style'); s.id='ts13l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts13l')) return;
-    var anchor=document.getElementById('ts13emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts13l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l14-relationen-rollups">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    relationen-rollups — Hero + Einleitung "Zwei Tabellen, ein System."
    Lektion 1.4 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #2, Kern-Lektion)
    ============================================================ */
@@ -36260,7 +35775,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-eb::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
   .tsn1 .tsn1-h2{font-family:${DISP};font-weight:600;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:#fff;margin:0}
   .tsn1 .tsn1-h2 .g,.tsn1 .tsn1-h3 .g{color:#c7b489}
-  .tsn1 .tsn1-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:14px auto 0;max-width:640px}
+  .tsn1 .tsn1-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.86);margin:14px auto 0;max-width:640px}
   .tsn1 .tsn1-anim{width:min(1040px,95vw);margin:84px auto 0}
 
   /* Inhalts-Sektion */
@@ -36284,7 +35799,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-card .mi{display:block;font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:11px}
   .tsn1 .tsn1-card .nm{font-family:${DISP};font-weight:600;font-size:17px;line-height:1.25;color:#fff;margin:0 0 11px}
   .tsn1 .tsn1-card hr{border:0;border-top:1px solid rgba(255,255,255,.09);margin:0 0 11px}
-  .tsn1 .tsn1-card p{font-size:14px;line-height:1.58;color:rgba(255,255,255,.82);margin:0 0 8px}
+  .tsn1 .tsn1-card p{font-size:14px;line-height:1.58;color:rgba(255,255,255,.86);margin:0 0 8px}
   .tsn1 .tsn1-card p:last-child{margin-bottom:0}
   .tsn1 .tsn1-card .ph{margin:-20px -20px 16px;height:132px;overflow:hidden;background:#0b0d14}
   .tsn1 .tsn1-card .ph img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
@@ -36306,7 +35821,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-do{padding:22px 24px;border-radius:16px;border:1px solid rgba(199,180,137,.32);background:linear-gradient(rgba(199,180,137,.055),rgba(199,180,137,.055)),#05060b}
   .tsn1 .tsn1-do .lbl{font:600 9.5px/1 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin:0 0 14px}
   .tsn1 .tsn1-do ol{list-style:none;counter-reset:d;margin:0;padding:0}
-  .tsn1 .tsn1-do li{counter-increment:d;position:relative;padding:0 0 0 34px;margin:0 0 11px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.86)}
+  .tsn1 .tsn1-do li{counter-increment:d;position:relative;padding:0 0 0 34px;margin:0 0 11px;font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86)}
   .tsn1 .tsn1-do li:last-child{margin-bottom:0}
   .tsn1 .tsn1-do li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:2px;font:700 11px/1.5 ${SANS};color:#c7b489;font-variant-numeric:tabular-nums}
 
@@ -36325,7 +35840,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-err{border-radius:16px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#05060b}
   .tsn1 .tsn1-err .row{display:grid;grid-template-columns:1fr 1fr 1.2fr;border-top:1px solid rgba(255,255,255,.07)}
   .tsn1 .tsn1-err .row:first-child{border-top:0}
-  .tsn1 .tsn1-err .row>div{padding:14px 16px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+  .tsn1 .tsn1-err .row>div{padding:14px 16px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.86)}
   .tsn1 .tsn1-err .row>div+div{border-left:1px solid rgba(255,255,255,.07)}
   .tsn1 .tsn1-err .hd>div{font:600 9.5px/1.2 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;padding:13px 16px;background:rgba(199,180,137,.05)}
   .tsn1 .tsn1-err .row:not(.hd)>div:first-child{color:#fff;font-weight:600}
@@ -36342,7 +35857,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-tab{border-radius:16px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#05060b}
   .tsn1 .tsn1-tab table{width:100%;border-collapse:collapse}
   .tsn1 .tsn1-tab th{text-align:left;font:600 9.5px/1.2 ${SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;padding:13px 16px;background:rgba(199,180,137,.05)}
-  .tsn1 .tsn1-tab td{padding:12px 16px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.82);border-top:1px solid rgba(255,255,255,.07);vertical-align:top}
+  .tsn1 .tsn1-tab td{padding:12px 16px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.86);border-top:1px solid rgba(255,255,255,.07);vertical-align:top}
   .tsn1 .tsn1-tab td:first-child{color:#fff;font-weight:600;white-space:nowrap}
   .tsn1 .tsn1-tab tr{transition:background .35s cubic-bezier(.16,1,.3,1)}
   .tsn1 .tsn1-tab tbody tr:hover{background:rgba(199,180,137,.04)}
@@ -36491,7 +36006,7 @@ var TSISL_TEAM_ONB_V2=[
   /* ---------- Abschnitt 07: Empfehlungs-Kachel (Verhalten 1:1 Katalog 07) ---------- */
   function empCSS(){
     addCSS('tsn1-emp-css',`
-  .tsn1-emp{width:min(1000px,95vw);margin:104px auto 34px;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
+  .tsn1-emp{width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;
     background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
     box-shadow:0 30px 70px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);font-family:${SANS};color:#fff}
   .tsn1-emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1)}
@@ -36562,8 +36077,14 @@ var TSISL_TEAM_ONB_V2=[
       Array.prototype.forEach.call(stepEls,function(s,i){ s.classList.toggle('on',i===idx); });
       Array.prototype.forEach.call(lis,function(s,i){ s.classList.toggle('lit',i===idx); });
       requestAnimationFrame(function(){ empDraw(el); }); }
-    function start(){ if(iv||REDUCED) return; tick(); iv=setInterval(function(){ if(!el.isConnected){ clearInterval(iv); iv=null; return; } if(!document.hidden) tick(); },2600); }
-    setTimeout(function(){ reveal(el,function(){ el.classList.add('in'); start(); }); },0);
+    var vis=false;
+    function start(){ if(iv||REDUCED||!vis) return; tick(); iv=setInterval(function(){ if(!el.isConnected||!vis){ clearInterval(iv); iv=null; return; } if(!document.hidden) tick(); },2600); }
+    function stop(){ if(iv){ clearInterval(iv); iv=null; } }
+    setTimeout(function(){
+      reveal(el,function(){ el.classList.add('in'); vis=true; start(); });
+      try{ new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&el.classList.contains('in')) start(); else if(!vis) stop(); },{threshold:.15}).observe(el); }catch(e){}
+    },0);
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else start(); });
     if(window.matchMedia && window.matchMedia('(hover:hover)').matches){
       el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
         el.style.setProperty('--ry',((px-.5)*5).toFixed(2)+'deg'); el.style.setProperty('--rx',((.5-py)*4).toFixed(2)+'deg');
@@ -36579,7 +36100,7 @@ var TSISL_TEAM_ONB_V2=[
   /* ---------- Abschnitt 09: Learnings-Orbs + Naechste Lektion ---------- */
   function learnCSS(){
     addCSS('tsn1-learn-css',`
-  .tsn1-learn{width:100%;margin-top:120px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
+  .tsn1-learn{width:100%;margin-top:44px;padding:0 clamp(20px,4vw,56px);box-sizing:border-box;font-family:${SANS};color:#fff}
   .tsn1-learn *{box-sizing:border-box}
   .tsn1-learn .tsl-head{text-align:center;margin-bottom:66px}
   .tsn1-learn .tsl-eyebrow{font-family:${DISP};font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;display:block;margin-bottom:14px}
@@ -36592,7 +36113,7 @@ var TSISL_TEAM_ONB_V2=[
     transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),border-color .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
   .tsn1-learn.js .tsl-orb{opacity:0;transform:translateY(22px);filter:blur(8px)}
   .tsn1-learn .tsl-orb::after{content:"";position:absolute;top:14%;left:16%;width:26%;height:20%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);pointer-events:none}
-  .tsn1-learn.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tsn1Float 7s ease-in-out infinite}
+  .tsn1-learn.js.in .tsl-orb{opacity:1;transform:none;filter:none;animation:tsn1Float 7s cubic-bezier(.45,0,.55,1) infinite}
   .tsn1-learn.js.in .tsl-cell:nth-child(2) .tsl-orb{transition-delay:.14s;animation-delay:-1.6s}
   .tsn1-learn.js.in .tsl-cell:nth-child(3) .tsl-orb{transition-delay:.28s;animation-delay:-3.2s}
   .tsn1-learn.js.in .tsl-cell:nth-child(4) .tsl-orb{transition-delay:.42s;animation-delay:-4.8s}
@@ -36604,6 +36125,7 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1-learn #ts-next:hover{background:#d8c9ab;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(199,180,137,.6)}
   .tsn1-learn #ts-next svg{width:16px;height:16px}
   @keyframes tsn1Float{0%,100%{translate:0 0}50%{translate:0 -11px}}
+  .tsn1-learn.js.in .tsl-orb{animation-timing-function:cubic-bezier(.45,0,.55,1)}
   @media(max-width:1079px){ .tsn1-learn .tsl-grid{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:520px){ .tsn1-learn .tsl-grid{grid-template-columns:1fr} }
   @media(prefers-reduced-motion:reduce){ .tsn1-learn.js.in .tsl-orb,.tsn1-learn .tsl-orb{opacity:1;transform:none;filter:none;animation:none} }
@@ -36674,7 +36196,205 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   if(window.__tsMO) window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
   window.addEventListener('scroll', function(){ var d=current(); if(d&&d.learn) nextGuard(d.learn); }, {passive:true});
-  setTimeout(mount,1500); setTimeout(mount,4000);
+  setTimeout(mount,1500); setTimeout(mount,4000); setTimeout(mount,9000);
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · Probekueche — Inhalte der fuenf Warenkorb-Regale (tsshop)
+   Die Engine (__tsshop) liest diese Daten zur Laufzeit ueber Getter
+   (TSN1(...) im tsshop-Block). Hier liegt nur Inhalt, keine Engine-Logik.
+   Schema der Karten: Formatierungsregeln — Spaltenbeschreibungen (Pfeil-Schema).
+   Menue- und Typnamen geprueft an notion.com/de/help (Stand 01.11.2026).
+   ============================================================ */
+(function(){
+  if(window.__tsn1Shop) return;
+  var IMG='https://tastyrob123.github.io/kurs/img/';
+  function P(t){ return '<p class="notion-text">'+t+'</p>'; }
+  function E(typ){ return P('→ <b>Eigenschaft :</b> '+typ); }
+  function NM(n){ return P('→ <b>Name der Spalte :</b> '+n); }
+  function EIN(t){ return P('→ <b>Du trägst hier ein :</b> '+t); }
+  function OPT(list){ return P('Trage diese Auswahlmöglichkeiten ein :')+P(list.map(function(o){ return '<b>'+o+'</b>'; }).join(' · ')); }
+  function CODE(c){ return '<div class="notion-code" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;line-height:1.6;white-space:normal;word-break:break-word">'+
+    c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>').replace(/ {2}/g,'&nbsp;&nbsp;')+'</div>'; }
+  function IN(db){ return P('Diese Spalte baust du in <b>'+db+'</b>.'); }
+  function step(title, desc, html){ return {title:title, desc:desc, html:html}; }
+
+  /* ---------------- Regal 1 · L1.3 · Produkte ---------------- */
+  var produkte=[
+    step('1. Seite anlegen','Leg in deiner Probeküche eine Unterseite an und nenn sie Produkte.',
+      P('Öffne deine Seite <b>Probeküche</b> aus Lektion 1.1. Tippe <b>/</b>, such nach „Seite" und leg eine Unterseite an.')+NM('Produkte')+P('Auf dieser Seite entsteht gleich deine erste Datenbank. Sie ist eine verkleinerte Ausgabe der Inventurliste aus der Vorlage.')),
+    step('2. Datenbank anlegen','Tippe / und such nach Tabelle. Name der Datenbank : Produkte.',
+      P('Tippe auf der leeren Seite <b>/</b>, such nach „Tabelle" und wähl die Datenbank in Tabellenansicht.')+P('→ <b>Name der Datenbank :</b> Produkte')+P('Ab jetzt ist jede Karte in diesem Regal eine Spalte dieser Tabelle. Die erste Spalte, der Titel, ist schon da, du benennst sie nur um.')),
+    step('3. Produkt','Eigenschaft : Titel → Name der Spalte : Produkt.',
+      E('Titel')+NM('Produkt')+EIN('den Artikel so, wie er auf dem Lieferschein steht, mit Größe. Zum Beispiel <b>Burrata 125 g</b> oder <b>Olivenöl extra vergine 5 l</b>.')),
+    step('4. Kategorie','Eigenschaft : Auswählen → Molkerei, Obst & Gemüse, Fleisch & Fisch, Trockenware, Getränke.',
+      E('Auswählen')+NM('Kategorie')+OPT(['Molkerei','Obst &amp; Gemüse','Fleisch &amp; Fisch','Trockenware','Getränke'])+P('Auswählen heißt: genau eine Option je Zeile. Ein Produkt gehört in genau eine Kategorie.')),
+    step('5. Lagerort','Eigenschaft : Auswählen → Kühlhaus, Tiefkühler, Trockenlager, Bar.',
+      E('Auswählen')+NM('Lagerort')+OPT(['Kühlhaus','Tiefkühler','Trockenlager','Bar'])+P('Später sortiert dir diese Spalte die Inventur so, wie du durch den Betrieb läufst.')),
+    step('6. Gebinde','Eigenschaft : Text → Name der Spalte : Gebinde.',
+      E('Text')+NM('Gebinde')+EIN('wie der Artikel geliefert wird, zum Beispiel <b>Karton, 12 Stück à 125 g</b>. Das ist eine Beschreibung, damit wird nicht gerechnet, deshalb reicht Text.')),
+    step('7. Einheit','Eigenschaft : Auswählen → kg, l, Stück.',
+      E('Auswählen')+NM('Einheit')+OPT(['kg','l','Stück'])+P('Die Einheit sagt, worauf sich die nächste Spalte bezieht. Ohne sie weiß in drei Monaten niemand mehr, ob 1,5 Kilo oder Liter gemeint waren.')),
+    step('8. Menge je Gebinde','Eigenschaft : Zahl → Name der Spalte : Menge je Gebinde.',
+      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Zahl')+NM('Menge je Gebinde')+EIN('wie viel von der Einheit in einem Gebinde steckt. Bei 12 × 125 g Burrata sind das <b>1,5</b> (kg).')),
+    step('9. Einkaufspreis je Gebinde','Eigenschaft : Zahl → Zahlenformat Euro.',
+      E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+NM('Einkaufspreis je Gebinde')+EIN('den Nettopreis für ein ganzes Gebinde, so wie er auf der Rechnung steht.')),
+    step('10. Bestand (Gebinde)','Eigenschaft : Zahl → Name der Spalte : Bestand (Gebinde).',
+      E('Zahl')+NM('Bestand (Gebinde)')+EIN('wie viele Gebinde gerade im Lager stehen. Angebrochene Gebinde als Kommazahl, eine halbe Kiste ist <b>0,5</b>.')),
+    step('11. Mindestbestand (Gebinde)','Eigenschaft : Zahl → Name der Spalte : Mindestbestand (Gebinde).',
+      E('Zahl')+NM('Mindestbestand (Gebinde)')+EIN('ab welcher Menge du nachkaufen willst. In Lektion 1.6 rechnet eine Formel daraus eine Warnung.')),
+    step('12. Allergene','Eigenschaft : Mehrfachauswahl → die vierzehn Hauptallergene.',
+      E('Mehrfachauswahl')+NM('Allergene')+OPT(['Glutenhaltiges Getreide','Krebstiere','Eier','Fische','Erdnüsse','Soja','Milch','Schalenfrüchte','Sellerie','Senf','Sesam','Schwefeldioxid und Sulfite','Lupinen','Weichtiere'])+P('Mehrfachauswahl heißt: mehrere Optionen je Zeile. Eine Pesto-Fertigware kann Milch und Schalenfrüchte zugleich enthalten.')),
+    step('13. Im Sortiment','Eigenschaft : Kontrollkästchen → Name der Spalte : Im Sortiment.',
+      E('Kontrollkästchen')+NM('Im Sortiment')+P('→ <b>Du hakst ab :</b> solange du den Artikel führst. Ausgelistete Artikel löschst du nicht, du nimmst nur den Haken raus, damit alte Kalkulationen nachvollziehbar bleiben.')),
+    step('14. Zuletzt geliefert','Eigenschaft : Datum → Name der Spalte : Zuletzt geliefert.',
+      E('Datum')+NM('Zuletzt geliefert')+EIN('das Datum der letzten Lieferung. In Lektion 1.8 setzt ein Button dieses Datum mit einem Klick.')),
+    step('15. Datenblatt','Eigenschaft : Dateien und Medien → Name der Spalte : Datenblatt.',
+      E('Dateien und Medien')+NM('Datenblatt')+EIN('die Produktspezifikation oder das Sicherheitsdatenblatt als PDF. Im Free-Plan sind Dateien bis fünf Megabyte möglich.')),
+    step('16. Artikelnummer','Eigenschaft : Text → Name der Spalte : Artikelnummer.',
+      E('Text')+NM('Artikelnummer')+EIN('die Bestellnummer beim Lieferanten. Bewusst als Text und nicht als Zahl, weil Artikelnummern mit Nullen beginnen können und eine Zahl die Nullen wegwirft.')),
+    step('17. Notiz','Eigenschaft : Text → Name der Spalte : Notiz.',
+      E('Text')+NM('Notiz')+EIN('alles, was der Titel nicht sagt. Zum Beispiel „nur über den Großmarkt, nicht über den Lieferdienst".'))
+  ];
+  var produkteImg=['inventar/olivenoel.jpg','inventar/balsamico.jpg','zutaten/mozzarella.webp','inventar/meersalz.webp','inventar/schwarzer-pfeffer.jpg','inventar/tomatenmark.jpg','inventar/dijon-senf.jpg','inventar/honig.jpg','inventar/sojasauce.jpg','inventar/chilisauce.jpg','inventar/mayonnaise.jpg','inventar/cornichons.jpg','inventar/sardellen.jpg','inventar/oregano.webp','inventar/paprika-edelsuess.jpg','inventar/weissweinessig.jpg','zutaten/parmesan.webp'];
+
+  /* ---------------- Regal 2 · L1.5 · Lieferanten & Gerichte ---------------- */
+  var lieferanten=[
+    step('1. Datenbank Lieferanten','In der Probeküche eine zweite Tabelle anlegen. Name : Lieferanten.',
+      P('Leg in der <b>Probeküche</b> eine zweite Unterseite an, tippe <b>/</b>, such nach „Tabelle" und wähl die Datenbank in Tabellenansicht.')+P('→ <b>Name der Datenbank :</b> Lieferanten')),
+    step('2. Lieferant','Eigenschaft : Titel → Name der Spalte : Lieferant.',
+      E('Titel')+NM('Lieferant')+EIN('den Firmennamen, so wie er auf der Rechnung steht.')),
+    step('3. Ansprechpartner','Eigenschaft : Text → Name der Spalte : Ansprechpartner.',
+      E('Text')+NM('Ansprechpartner')+EIN('die Person, die du anrufst, wenn eine Lieferung fehlt.')),
+    step('4. Telefon','Eigenschaft : Telefon → Name der Spalte : Telefon.',
+      E('Telefon')+NM('Telefon')+P('Auf dem Handy wählst du die Nummer direkt aus der Tabelle.')),
+    step('5. E-Mail','Eigenschaft : E-Mail → Name der Spalte : E-Mail.',
+      E('E-Mail')+NM('E-Mail')+EIN('die Bestelladresse, nicht die allgemeine Info-Adresse.')),
+    step('6. Liefertage','Eigenschaft : Mehrfachauswahl → Mo, Di, Mi, Do, Fr, Sa.',
+      E('Mehrfachauswahl')+NM('Liefertage')+OPT(['Mo','Di','Mi','Do','Fr','Sa'])),
+    step('7. Bestellschluss','Eigenschaft : Text → Name der Spalte : Bestellschluss.',
+      E('Text')+NM('Bestellschluss')+EIN('bis wann bestellt sein muss, zum Beispiel <b>Vortag 14 Uhr</b>.')),
+    step('8. Produkte','Eigenschaft : Verknüpfung → Produkte → Anzeigen in Produkte einschalten.',
+      E('Verknüpfung')+P('→ <b>Verknüpfen mit :</b> Produkte')+P('→ <b>Anzeigen in Produkte :</b> einschalten. Damit wird die Verknüpfung wechselseitig.')+P('→ <b>Begrenzung :</b> Unbegrenzt')+NM('Produkte')+P('Du verknüpfst hier jeden Lieferanten mit allen Produkten, die er dir liefert. Bestätige mit <b>Verknüpfung hinzufügen</b>.')+P('In deiner Tabelle Produkte taucht jetzt eine neue Spalte auf, nenne sie <b>Lieferant</b>.')),
+    step('9. Lieferant auf eine Seite begrenzen','In Produkte · Gegenspalte Lieferant → Begrenzung : 1 Seite.',
+      IN('Produkte')+P('→ Spalte <b>Lieferant</b> anklicken → Eigenschaft bearbeiten')+P('→ <b>Begrenzung :</b> 1 Seite')+P('Ein Produkt kommt bei dir von genau einem Lieferanten. Mit der Begrenzung kann niemand aus Versehen zwei eintragen, und jede Spalte, die später aus dem Lieferanten liest, liefert genau einen Wert.')),
+    step('10. Anzahl Produkte','Eigenschaft : Rollup → Verknüpfung : Produkte → Berechnen : Alle zählen.',
+      E('Rollup')+P('→ <b>Verknüpfung :</b> Produkte')+P('→ <b>Eigenschaft :</b> Produkt')+P('→ <b>Berechnen :</b> Alle zählen')+NM('Anzahl Produkte')+P('Dir wird hier angezeigt, wie viele deiner Produkte von diesem Lieferanten kommen.')),
+    step('11. Telefon Lieferant','In Produkte · Rollup → Verknüpfung : Lieferant → Telefon → Original anzeigen.',
+      IN('Produkte')+E('Rollup')+P('→ <b>Verknüpfung :</b> Lieferant')+P('→ <b>Eigenschaft :</b> Telefon')+P('→ <b>Berechnen :</b> Original anzeigen')+NM('Telefon Lieferant')+P('Dir wird hier die Nummer des Lieferanten angezeigt, direkt beim Produkt. Ändert sich die Nummer, änderst du sie einmal bei den Lieferanten.')),
+    step('12. Bestellschluss Lieferant','In Produkte · Rollup → Verknüpfung : Lieferant → Bestellschluss → Original anzeigen.',
+      IN('Produkte')+E('Rollup')+P('→ <b>Verknüpfung :</b> Lieferant')+P('→ <b>Eigenschaft :</b> Bestellschluss')+P('→ <b>Berechnen :</b> Original anzeigen')+NM('Bestellschluss Lieferant')),
+    step('13. Datenbank Gerichte','Dritte Tabelle in der Probeküche. Name : Gerichte.',
+      P('Leg in der <b>Probeküche</b> eine dritte Unterseite mit einer Tabelle an.')+P('→ <b>Name der Datenbank :</b> Gerichte')+P('→ Die Titelspalte nennst du <b>Gericht</b> und trägst zum Beispiel <b>Burrata mit Tomaten</b> ein.')),
+    step('14. Produkte im Gericht','In Gerichte · Verknüpfung → Produkte, Anzeigen in Produkte einschalten.',
+      IN('Gerichte')+E('Verknüpfung')+P('→ <b>Verknüpfen mit :</b> Produkte')+P('→ <b>Anzeigen in Produkte :</b> einschalten')+P('→ <b>Begrenzung :</b> Unbegrenzt')+NM('Produkte im Gericht')+P('Ein Gericht hat viele Produkte, und ein Produkt steckt in vielen Gerichten. Das ist die Art Verknüpfung, die dein ganzes Backoffice zusammenhält.')+P('In Produkte taucht eine neue Spalte auf, nenne sie <b>In Gerichten</b>.')),
+    step('15. Allergene','In Gerichte · Rollup → Produkte im Gericht → Allergene → Eindeutige Werte anzeigen.',
+      IN('Gerichte')+E('Rollup')+P('→ <b>Verknüpfung :</b> Produkte im Gericht')+P('→ <b>Eigenschaft :</b> Allergene')+P('→ <b>Berechnen :</b> Eindeutige Werte anzeigen')+NM('Allergene')+P('Dir wird hier jedes Allergen angezeigt, das in einem der Produkte steckt, jedes nur einmal. Trägst du beim Produkt ein Allergen nach, steht es sofort bei jedem Gericht, in dem das Produkt vorkommt.'))
+  ];
+  var lieferImg=['lieferpartner/kuehltransporter-sprinter.webp','lieferpartner/kastenwagen-transit.webp','ansprechpartner/kochjacke.jpg','gemeinkosten/telefon.webp','ansprechpartner/notizblock.jpg','lieferpartner/e-lieferwagen.webp','ansprechpartner/kugelschreiber.jpg','lieferpartner/pritschenwagen-kisten.webp','lieferpartner/stadtlieferwagen-kompakt.webp','lieferpartner/hochdach-transporter.webp','lieferpartner/lieferroller.webp','lieferpartner/getraenke-lkw.webp','gerichte/burrata.webp','zutaten/tomate.webp','zutaten/basilikum.webp'];
+
+  /* ---------------- Regal 3 · L1.6 · Rechenspalten ---------------- */
+  var rechnen=[
+    step('1. Den Formeleditor öffnen','Neue Spalte, Eigenschaft Formel — der Editor öffnet sich.',
+      P('Klick in der Tabelle rechts auf <b>+</b> und wähl als Eigenschaft <b>Formel</b>. Es öffnet sich ein Feld, in das du die Formel schreibst oder kopierst.')+P('Unter dem Feld zeigt Notion dir eine Vorschau des Ergebnisses für die erste Zeile. Stimmt die Vorschau, stimmt meistens auch der Rest.')),
+    step('2. Preis je Einheit','In Produkte · Formel → Einkaufspreis geteilt durch Menge, auf zwei Stellen gerundet.',
+      IN('Produkte')+E('Formel')+NM('Preis je Einheit')+P('Trage diese Formel ein :')+CODE('if(prop("Menge je Gebinde") > 0,\n  round(prop("Einkaufspreis je Gebinde") / prop("Menge je Gebinde"), 2),\n  0\n)')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, was ein Kilo, ein Liter oder ein Stück kostet. Das <b>if</b> schützt vor einer Division durch null, solange die Menge noch leer ist.')),
+    step('3. Warenwert im Lager','In Produkte · Formel → Bestand mal Einkaufspreis je Gebinde.',
+      IN('Produkte')+E('Formel')+NM('Warenwert im Lager')+P('Trage diese Formel ein :')+CODE('prop("Bestand (Gebinde)") * prop("Einkaufspreis je Gebinde")')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, wie viel Geld in diesem Artikel im Lager steht.')),
+    step('4. Bestand prüfen','In Produkte · Formel → zeigt „knapp" in Rot, sobald der Mindestbestand erreicht ist.',
+      IN('Produkte')+E('Formel')+NM('Bestand prüfen')+P('Trage diese Formel ein :')+CODE('if(prop("Bestand (Gebinde)") <= prop("Mindestbestand (Gebinde)"),\n  style("knapp", "b", "red"),\n  style("ok", "green")\n)')+P('<b>style</b> färbt einen Text. So siehst du in einer langen Liste sofort, wo du hinschauen musst.')),
+    step('5. Netto-Verkaufspreis (€)','In Gerichte · Eigenschaft : Zahl → Zahlenformat Euro.',
+      IN('Gerichte')+E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+NM('Netto-Verkaufspreis (€)')+EIN('den Preis von der Karte ohne Mehrwertsteuer.')),
+    step('6. Wareneinsatz (€)','In Gerichte · Eigenschaft : Zahl → Zahlenformat Euro.',
+      IN('Gerichte')+E('Zahl')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+NM('Wareneinsatz (€)')+EIN('was die Zutaten für einen Teller kosten. In der Probeküche trägst du die Zahl selbst ein. In der Vorlage rechnet sie die Kette aus Zutaten und Rezepturen, das zeigt dir Modul 2.')),
+    step('7. Wareneinsatz (%)','In Gerichte · Formel → Wareneinsatz geteilt durch Netto-Verkaufspreis mal hundert.',
+      IN('Gerichte')+E('Formel')+NM('Wareneinsatz (%)')+P('Trage diese Formel ein :')+CODE('if(prop("Netto-Verkaufspreis (€)") > 0,\n  round(prop("Wareneinsatz (€)") / prop("Netto-Verkaufspreis (€)") * 100, 1),\n  0\n)')+P('Dir wird hier angezeigt, wie viel Prozent vom Netto-Preis in der Ware stecken, auf eine Nachkommastelle.')),
+    step('8. Rohertrag (€)','In Gerichte · Formel → Netto-Verkaufspreis minus Wareneinsatz.',
+      IN('Gerichte')+E('Formel')+NM('Rohertrag (€)')+P('Trage diese Formel ein :')+CODE('prop("Netto-Verkaufspreis (€)") - prop("Wareneinsatz (€)")')+P('→ Eigenschaft bearbeiten → <b>Zahlenformat :</b> Euro')+P('Dir wird hier angezeigt, was nach der Ware vom Teller übrig bleibt. Das ist noch kein Deckungsbeitrag, Personal und Gemeinkosten fehlen. Die kommen in der Vorlage dazu.')),
+    step('9. Ampel','In Gerichte · Formel → lets() + ifs() über den Wareneinsatz.',
+      IN('Gerichte')+E('Formel')+NM('Ampel')+P('Trage diese Formel ein :')+CODE('lets(\n  we, prop("Wareneinsatz (%)"),\n  ifs(\n    we == 0, "",\n    we <= 28, style("im Rahmen", "green"),\n    we <= 33, style("beobachten", "yellow"),\n    style("zu teuer", "red")\n  )\n)')+P('<b>lets</b> gibt einem Wert einen kurzen Namen, damit du ihn nicht viermal ausschreiben musst. <b>ifs</b> prüft die Bedingungen von oben nach unten und nimmt die erste, die zutrifft.')+P('Die Grenzen 28 und 33 Prozent sind Beispielwerte. Setz die Zahlen ein, mit denen du deinen Betrieb führst.')),
+    step('10. Allergen-Hinweis','In Gerichte · Formel → holt die Allergene über die Verknüpfung als Text.',
+      IN('Gerichte')+E('Formel')+NM('Allergen-Hinweis')+P('Trage diese Formel ein :')+CODE('prop("Produkte im Gericht")\n  .map(current.prop("Allergene"))\n  .flat()\n  .unique()\n  .join(", ")')+P('Diese Formel greift direkt durch die Verknüpfung: Sie nimmt jedes Produkt im Gericht, holt dessen Allergene, legt alle Listen zusammen, streicht Doppelte und setzt ein Komma dazwischen. Das Ergebnis kannst du so in eine Speisekarte kopieren.')),
+    step('11. Wenn die Formel rot wird','Fehlermeldung lesen, statt raten.',
+      P('Steht unter dem Formelfeld ein roter Hinweis, liest Notion die Formel nicht. Fast immer ist es einer dieser drei Fälle:')+P('→ Der Spaltenname im <b>prop("…")</b> stimmt nicht genau, ein Leerzeichen oder eine Klammer fehlt.')+P('→ Eine Klammer wurde nicht geschlossen. Zähl die öffnenden und die schließenden.')+P('→ Du rechnest mit einer Spalte, die gar keine Zahl ist, zum Beispiel einem Text.')+P('Erst wenn der Hinweis weg ist, wird die Formel gespeichert.')),
+    step('12. Notion AI fragen','Im Formeleditor eine Formel beschreiben oder erklären lassen.',
+      P('Im Formeleditor gibt es ein Feld für Notion AI. Dort beschreibst du in einem Satz, was die Spalte rechnen soll, oder du bittest um eine Erklärung einer Formel, die du nicht verstehst.')+P('Das braucht einen Plan mit Notion AI, also Business oder Enterprise, und verbraucht Credits. Prüf jede Formel, die die KI schreibt, an zwei, drei Zeilen, deren Ergebnis du im Kopf kennst.'))
+  ];
+  var rechnenImg=['menuekalkulation/kosten-01.webp','zutaten/mozzarella.webp','inventar/olivenoel.jpg','inventar/cornichons.jpg','gerichte/burrata.webp','zutaten/tomate.webp','gerichte/rinderfilet.webp','gerichte/lachs.webp','gerichte/pilz-ravioli.webp','gerichte/panna-cotta.webp','menuekalkulation/kosten-02.webp','menuekalkulation/kosten-03.webp'];
+
+  /* ---------------- Regal 4 · L1.7 · Ansichten ---------------- */
+  var ansichten=[
+    step('1. Eine Ansicht anlegen','Über der Tabelle auf + klicken, Ansichtstyp wählen, benennen.',
+      P('Über jeder Datenbank steht eine Zeile mit Reitern, das sind die Ansichten. Mit <b>+</b> am Ende legst du eine neue an, wählst das Layout und gibst ihr einen Namen.')+P('Eine Ansicht ändert nie die Daten, nur was du siehst und in welcher Reihenfolge.')),
+    step('2. Bestellliste','In Produkte · Tabelle → Gruppieren : Lieferant → Filter : Im Sortiment ist aktiviert.',
+      IN('Produkte')+P('→ <b>Layout :</b> Tabelle')+P('→ <b>Gruppieren :</b> Lieferant')+P('→ <b>Filter :</b> Im Sortiment · ist aktiviert')+P('→ <b>Name der Ansicht :</b> Bestellliste')+P('Du siehst je Lieferant einen Block mit seinen Artikeln, ausgelistete Produkte sind weg. So gehst du deine Bestellung Lieferant für Lieferant durch.')),
+    step('3. Nach Lagerort','In Produkte · Board → Gruppieren : Lagerort.',
+      IN('Produkte')+P('→ <b>Layout :</b> Board')+P('→ <b>Gruppieren :</b> Lagerort')+P('→ <b>Name der Ansicht :</b> Lager')+P('Eine Spalte je Lagerort. Ziehst du eine Karte von Kühlhaus nach Tiefkühler, ändert sich der Lagerort des Produkts.')),
+    step('4. Knapp','In Produkte · Liste → Filter : Bestand prüfen enthält knapp.',
+      IN('Produkte')+P('→ <b>Layout :</b> Liste')+P('→ <b>Filter :</b> Bestand prüfen · enthält · knapp')+P('→ <b>Name der Ansicht :</b> Knapp')+P('Zeigt nur Artikel, deren Bestand den Mindestbestand erreicht hat. Die Ansicht ist leer, wenn alles im Lager ist.')),
+    step('5. Lieferungen','In Produkte · Kalender → Anzeigen nach : Zuletzt geliefert.',
+      IN('Produkte')+P('→ <b>Layout :</b> Kalender')+P('→ <b>Anzeigen nach :</b> Zuletzt geliefert')+P('→ <b>Name der Ansicht :</b> Lieferungen')),
+    step('6. Speisekarte','In Gerichte · Galerie → Kartenvorschau : Seitencover.',
+      IN('Gerichte')+P('→ <b>Layout :</b> Galerie')+P('→ <b>Kartenvorschau :</b> Seitencover')+P('→ <b>Sichtbare Eigenschaften :</b> Netto-Verkaufspreis (€), Allergen-Hinweis')+P('→ <b>Name der Ansicht :</b> Karte')+P('Gib jedem Gericht ein Foto als Seitencover. Die Galerie zeigt dann deine Karte mit Bildern.')),
+    step('7. Kalkulation','In Gerichte · Tabelle → Sortieren : Wareneinsatz (%) absteigend.',
+      IN('Gerichte')+P('→ <b>Layout :</b> Tabelle')+P('→ <b>Sortieren :</b> Wareneinsatz (%) · absteigend')+P('→ <b>Name der Ansicht :</b> Kalkulation')+P('Ganz oben steht das Gericht mit dem höchsten Wareneinsatz. Genau da schaust du zuerst hin.')),
+    step('8. Filter, Sortieren, Gruppieren','Die drei Regler, mit denen aus einer Ansicht ein Werkzeug wird.',
+      P('<b>Filter</b> blendet Zeilen aus, die eine Bedingung nicht erfüllen. <b>Sortieren</b> legt die Reihenfolge fest. <b>Gruppieren</b> fasst Zeilen mit gleichem Wert zu Blöcken zusammen.')+P('Alle drei gelten nur für die eine Ansicht, in der du sie einstellst. Ändern andere im Team etwas daran, wird es für alle gespeichert, sobald jemand auf <b>Für alle speichern</b> klickt.')),
+    step('9. Allergene Milch oder Ei','In Gerichte · Erweiterten Filter hinzufügen → Allergene enthält Milch ODER Eier.',
+      IN('Gerichte')+P('→ <b>Filter :</b> Erweiterten Filter hinzufügen')+P('→ Allergene · enthält · Milch')+P('→ <b>Oder :</b> Allergene · enthält · Eier')+P('→ <b>Name der Ansicht :</b> Milch oder Ei')+P('Mit dem erweiterten Filter verbindest du Bedingungen mit UND oder ODER. So beantwortest du am Tisch in Sekunden, welche Gerichte für einen Gast in Frage kommen.')),
+    step('10. Eigenschaften ausblenden','Je Ansicht nur die Spalten zeigen, die dort gebraucht werden.',
+      P('Über die Einstellungen der Ansicht und <b>Sichtbarkeit von Eigenschaften</b> blendest du Spalten aus, die in dieser Ansicht stören. In der Bestellliste brauchst du keine Allergene, in der Speisekarte keinen Lagerort.')+P('Ausgeblendet ist nicht gelöscht. Die Spalte rechnet weiter und taucht in jeder anderen Ansicht wieder auf.')),
+    step('11. Die Bestellliste auf einer zweiten Seite','Mit /verknüpfte Ansicht dieselbe Datenbank woanders zeigen.',
+      P('Öffne eine andere Seite, zum Beispiel deine <b>Station Kalt</b> aus Lektion 1.2. Tippe <b>/</b>, such nach „verknüpft" und wähl die verknüpfte Ansicht einer Datenquelle.')+P('→ <b>Datenquelle :</b> Produkte')+P('→ <b>Filter :</b> Lagerort · ist · Kühlhaus')+P('Die Station sieht jetzt ihre Kühlhaus-Artikel, ohne dass eine zweite Liste entsteht. Trägt jemand dort einen Bestand ein, steht er sofort in Produkte.')),
+    step('12. Vorlage Neues Gericht','In Gerichte · Pfeil neben Neu → Neue Vorlage.',
+      IN('Gerichte')+P('→ Klick auf den kleinen Pfeil neben <b>Neu</b> → <b>Neue Vorlage</b>')+P('→ <b>Name der Vorlage :</b> Neues Gericht')+P('→ Schreib in die Vorlage die Überschriften, die jede Gerichtseite haben soll: Zubereitung, Anrichten, Foto vom Pass.')+P('Jedes neue Gericht, das du mit dieser Vorlage anlegst, startet mit derselben Gliederung. Du kannst die Vorlage auch als Standard für neue Einträge festlegen.'))
+  ];
+  var ansichtenImg=['gerichte/rindertatar.webp','lieferpartner/kuehltransporter-sprinter.webp','zutaten/rindersteak.webp','inventar/sardellen.jpg','lieferpartner/e-lastenrad.webp','gerichte/jakobsmuscheln.webp','gerichte/short-rib.webp','gerichte/kuerbis-veloute.webp','gerichte/tiramisu.webp','gerichte/rote-bete-risotto.webp','zutaten/lachsfilet.webp','gerichte/entenbrust.webp'];
+
+  /* ---------------- Regal 5 · L1.8 · Buttons & Automationen ---------------- */
+  var buttons=[
+    step('1. Einen Button anlegen','Tippe / und such nach Button. Beschriftung, dann Aktionen.',
+      P('Tippe auf einer Seite <b>/</b> und such nach „Button". Du gibst ihm eine Beschriftung und legst fest, was beim Klick passiert. Ein Button kann mehrere Aktionen nacheinander ausführen.')+P('Buttons funktionieren in jedem Plan, auch im Free-Plan.')),
+    step('2. Neues Produkt','Button auf der Seite Produkte → Seite hinzufügen zu : Produkte → Seite öffnen.',
+      P('Leg auf der Seite <b>Produkte</b> über der Tabelle einen Button an.')+P('→ <b>Beschriftung :</b> Neues Produkt')+P('→ <b>Aktion :</b> Seite hinzufügen zu · Produkte')+P('→ Setz dort <b>Im Sortiment</b> auf aktiviert.')+P('→ <b>Zweite Aktion :</b> Seite oder URL öffnen · die gerade angelegte Seite')+P('Ein Klick legt den Artikel an, hakt Im Sortiment ab und öffnet ihn zum Ausfüllen.')),
+    step('3. Lieferung eingetroffen','In Produkte · Eigenschaft : Button → Eigenschaft bearbeiten : Zuletzt geliefert = heute.',
+      IN('Produkte')+E('Button')+NM('Lieferung')+P('→ <b>Aktion :</b> Eigenschaft bearbeiten · Zuletzt geliefert · heutiges Datum')+P('Der Button steht jetzt in jeder Zeile. Kommt die Burrata, klickst du in ihrer Zeile, und das Lieferdatum stimmt. Eine Button-Eigenschaft bearbeitet immer die Zeile, in der sie steht.')),
+    step('4. Neues Gericht mit Vorlage','Button auf der Seite Gerichte → Seite hinzufügen zu : Gerichte, Vorlage Neues Gericht.',
+      P('Leg auf der Seite <b>Gerichte</b> einen Button an.')+P('→ <b>Beschriftung :</b> Neues Gericht')+P('→ <b>Aktion :</b> Seite hinzufügen zu · Gerichte · Vorlage : Neues Gericht')+P('→ <b>Zweite Aktion :</b> Seite oder URL öffnen')+P('So hat jedes neue Gericht sofort die Gliederung aus Lektion 1.7.')),
+    step('5. Allergenblatt öffnen','Button → Seite oder URL öffnen : die Ansicht Milch oder Ei.',
+      P('Leg auf deiner Seite <b>Station Kalt</b> einen Button an.')+P('→ <b>Beschriftung :</b> Allergene')+P('→ <b>Aktion :</b> Seite oder URL öffnen · Link zur Ansicht <b>Milch oder Ei</b>')+P('Den Link einer Ansicht kopierst du über die Einstellungen der Ansicht. Am Pass ist die Antwort für den Gast dann einen Klick entfernt.')),
+    step('6. Erst fragen, dann ausführen','Aktion Bestätigung anzeigen vor jede Aktion setzen, die etwas ändert.',
+      P('→ <b>Aktion :</b> Bestätigung anzeigen')+P('Setz sie im Button <b>Neues Produkt</b> an die erste Stelle, mit dem Text „Wirklich ein neues Produkt anlegen?". Bei Buttons, die viele Zeilen auf einmal ändern, gehört die Bestätigung immer dazu.')),
+    step('7. Automation : neues Produkt','In Produkte · Blitz-Symbol → Auslöser : Seite hinzugefügt → Benachrichtigung senden an.',
+      IN('Produkte')+P('→ Blitz-Symbol oben rechts an der Datenbank → <b>Neue Automation</b>')+P('→ <b>Auslöser :</b> Seite hinzugefügt')+P('→ <b>Aktion :</b> Benachrichtigung senden an · dich oder deinen Küchenchef')+P('Wer einen neuen Artikel anlegt, muss niemandem mehr Bescheid sagen. Datenbank-Automationen gibt es in den bezahlten Plänen ab Plus.')),
+    step('8. Automation : ausgelistet','In Produkte · Auslöser : Eigenschaft bearbeitet, Im Sortiment → Benachrichtigung.',
+      IN('Produkte')+P('→ <b>Auslöser :</b> Eigenschaft bearbeitet · Im Sortiment · ist nicht aktiviert')+P('→ <b>Aktion :</b> Benachrichtigung senden an · dich')+P('Nimmt jemand einem Artikel den Haken, erfährst du es, bevor ein Gericht ohne seine Zutat auf der Karte steht.'))
+  ];
+  var buttonsImg=['ansprechpartner/kugelschreiber.jpg','inventar/honig.jpg','lieferpartner/kuehltransporter-sprinter.webp','gerichte/lammkarree.webp','gerichte/cheesecake.webp','ansprechpartner/notizblock.jpg','gemeinkosten/telefon.webp','inventar/weissweinessig.jpg'];
+
+  function vars(steps, imgs, zeroIdx){
+    return steps.map(function(s,i){ return { name:s.title.replace(/^\d+\.\s*/,''), wert:(zeroIdx.indexOf(i)>-1?0:1), img:IMG+imgs[i%imgs.length] }; });
+  }
+
+  window.__tsn1Shop={
+    m1_produkte:{ steps:produkte, varianten:vars(produkte,produkteImg,[0,1]),
+      eyebrow:'Probeküche : Produkte', title:'Deine Produkte. <span>Spalte für Spalte.</span>',
+      sub:'Jede Karte ist eine Spalte deiner ersten eigenen Datenbank. Klick sie auf, bau sie in der Probeküche nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten.', summary:'Spalten' },
+    m1_lieferanten:{ steps:lieferanten, varianten:vars(lieferanten,lieferImg,[0,8,12]),
+      relations:[{ type:'ghost', name:'Lieferant', target:'Gegenspalte · in Produkte', flag:'erscheint automatisch', desc:'Gegenspalte der Verknüpfung Produkte, entsteht in Produkte von selbst.',
+        content:P('Diese Spalte legst du hier <b>nicht</b> an.')+P('Sie erscheint in <b>Produkte</b>, sobald du in Schritt 8 die Verknüpfung mit <b>Anzeigen in Produkte</b> anlegst. Du gibst ihr dort nur einen Namen: <b>Lieferant</b>.') }],
+      eyebrow:'Probeküche : Lieferanten ↔ Produkte ↔ Gerichte', title:'Deine Lieferanten. <span>Mit allem verbunden.</span>',
+      sub:'Jede Karte ist eine Spalte oder eine Verbindung. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten.', summary:'Spalten' },
+    m1_rechnen:{ steps:rechnen, varianten:vars(rechnen,rechnenImg,[0,10,11]),
+      eyebrow:'Probeküche : Rechenspalten', title:'Deine Formeln. <span>Zum Kopieren.</span>',
+      sub:'Jede Karte ist eine Spalte, die rechnet. Klick sie auf, kopier die Formel, leg sie in den Einkaufswagen. Gezählt werden die Spalten, die rechnen.', summary:'Rechenspalten' },
+    m1_ansichten:{ steps:ansichten, varianten:vars(ansichten,ansichtenImg,[0,7,9]),
+      eyebrow:'Probeküche : Ansichten', title:'Deine Ansichten. <span>Für jede Frage eine.</span>',
+      sub:'Jede Karte ist eine Ansicht oder ein Regler. Klick sie auf, stell sie ein, leg sie in den Einkaufswagen. Gezählt werden die Ansichten.', summary:'Ansichten' },
+    m1_buttons:{ steps:buttons, varianten:vars(buttons,buttonsImg,[0,5]),
+      eyebrow:'Probeküche : Buttons & Automationen', title:'Deine Buttons. <span>Ein Klick weniger.</span>',
+      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast.', summary:'Buttons' }
+  };
 })();
 
 /* ============================================================
@@ -36731,10 +36451,12 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a1 .row2.cols{grid-template-columns:1.15fr 1fr;align-items:start}
       #tsn1-a1 .pic{border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,.12);height:150px;background:#0b0d14;position:relative}
       #tsn1-a1 .pic img{width:100%;height:100%;object-fit:cover;display:block}
+      #tsn1-a1 .pic{transition:box-shadow .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .pic.lift{box-shadow:0 30px 60px -20px rgba(0,0,0,.9),0 0 0 2px rgba(199,180,137,.55)}
+      #tsn1-a1 .bimg .hand{left:-24px;top:14px}
       #tsn1-a1 .hand{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(239,230,210,.92);box-shadow:0 0 0 6px rgba(239,230,210,.16),0 8px 18px rgba(0,0,0,.6);pointer-events:none;opacity:0;z-index:5}
       #tsn1-a1 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
-      #tsn1-a1 .st{appearance:none;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a1 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a1 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a1 .st.on b{color:#c7b489}
@@ -36747,7 +36469,9 @@ var TSISL_TEAM_ONB_V2=[
       @media(max-width:760px){
         #tsn1-a1 .win{grid-template-columns:1fr}
         #tsn1-a1 .side{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
-        #tsn1-a1 .row2.cols{grid-template-columns:1fr}
+        #tsn1-a1 .row2.cols{display:flex;flex-direction:column}
+        #tsn1-a1 .row2.cols .bimg{order:-1}
+        #tsn1-a1 .bimg .hand{left:10px;top:10px}
         #tsn1-a1 .rail{grid-template-columns:1fr}
       }
       @media(prefers-reduced-motion:reduce){ #tsn1-a1.js .nd,#tsn1-a1.js .blk{opacity:1;transform:none} }
@@ -36762,15 +36486,14 @@ var TSISL_TEAM_ONB_V2=[
       }).join('');
       host.id='tsn1-a1';
       host.innerHTML=R.head('Seiten und Blöcke','Jede Seite ist ein <span class="g">Stapel aus Blöcken</span>.','Links der Seitenbaum deines Betriebs, rechts eine Seite daraus. Jeder Block lässt sich greifen und neu setzen, ohne dass etwas verloren geht.')+
-        '<div class="stage"><div class="bar"><i></i><i></i><i></i><span>Notion · Dein Betrieb</span></div><div class="win">'+
+        '<div class="stage"><div class="bar"><i></i><i></i><i></i><span>Notion</span></div><div class="win">'+
         '<div class="side"><div class="ws"><b>B</b>Dein Betrieb</div>'+side+'</div>'+
-        '<div class="main"><div class="crumb">Service › <em>Hygieneplan</em></div>'+
-          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><h4 class="h">Hygieneplan Service</h4></div>'+
-          '<div class="row2"><div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><p class="p">Gilt für Theke, Pass und Gastraum. Wer die Schicht schließt, hakt ab, bevor das Licht ausgeht.</p></div>'+
-          '<div class="blk bimg"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="pic"><img alt="Angerichteter Teller am Pass" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div></div></div>'+
+        '<div class="main">'+
+          '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><h4 class="h">Schichtende Service</h4></div>'+
+          '<div class="row2 cols"><div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><p class="p">Gilt für Theke, Pass und Gastraum. Wer die Schicht schließt, hakt ab, bevor das Licht ausgeht.</p></div>'+
+          '<div class="blk bimg"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="pic"><img alt="Angerichteter Teller am Pass" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div><span class="hand"></span></div></div>'+
           '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="co"><span>!</span>Allergen-Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen, nie geschätzt.</div></div>'+
           '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="td ok"><i></i>Kühlschranktemperaturen eintragen</div><div class="td"><i></i>Theke und Kaffeemaschine reinigen</div><div class="td"><i></i>Spülmaschine leeren, Siebe säubern</div></div>'+
-          '<span class="hand"></span>'+
         '</div></div></div>'+
         '<div class="rail"><button class="st" data-s="0"><b>01</b>Seiten liegen im Baum, Seiten in Seiten.</button><button class="st" data-s="1"><b>02</b>Eine Seite ist ein Stapel aus Blöcken.</button><button class="st" data-s="2"><b>03</b>Am Griff ziehst du einen Block an eine neue Stelle.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
@@ -36780,43 +36503,53 @@ var TSISL_TEAM_ONB_V2=[
       var T=[];
       function later(fn,ms){ T.push(setTimeout(fn,ms)); }
       function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a1Kill=clear;
       function step(i){ Array.prototype.forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
-      function placeHand(el,dx,dy){ var m=main.getBoundingClientRect(), r=el.getBoundingClientRect(); hand.style.left=(r.left-m.left+dx)+'px'; hand.style.top=(r.top-m.top+dy)+'px'; }
+      /* feste Buehnenhoehe = groesserer der beiden Zustaende -> nichts darunter springt */
+      function fixHeight(){
+        main.style.minHeight=''; var had=row.classList.contains('cols');
+        row.classList.add('cols'); var h1=main.offsetHeight; row.classList.remove('cols'); var h2=main.offsetHeight;
+        row.classList.toggle('cols',had); main.style.minHeight=Math.max(h1,h2)+'px';
+      }
+      /* FLIP fuer ALLE Bloecke der Seite, nur transform */
       function flipCols(on){
-        var b1=bimg.getBoundingClientRect();
+        if(row.classList.contains('cols')===on) return;
+        var a=[].map.call(blks,function(e){ return e.getBoundingClientRect(); });
         row.classList.toggle('cols',on);
-        var b2=bimg.getBoundingClientRect();
-        bimg.style.transition='none'; bimg.style.transform='translate('+(b1.left-b2.left)+'px,'+(b1.top-b2.top)+'px)';
-        void bimg.offsetWidth;
-        bimg.style.transition='transform 1.1s cubic-bezier(.16,1,.3,1)'; bimg.style.transform='';
+        [].forEach.call(blks,function(e,i){ var b=e.getBoundingClientRect(); e.style.transition='none'; e.style.transform='translate('+(a[i].left-b.left)+'px,'+(a[i].top-b.top)+'px)'; });
+        void main.offsetWidth;
+        [].forEach.call(blks,function(e){ e.style.transition='transform 1.1s cubic-bezier(.16,1,.3,1)'; e.style.transform=''; });
+        later(function(){ [].forEach.call(blks,function(e){ e.style.transition=''; }); },1250);
       }
       function reset(){
-        clear(); host.classList.add('js'); row.classList.remove('cols'); bimg.style.transform=''; pic.classList.remove('lift');
-        hand.style.opacity='0'; hand.style.transition='none';
+        clear(); host.classList.add('js'); [].forEach.call(blks,function(e){ e.style.transition='none'; e.style.transform=''; }); void main.offsetWidth; [].forEach.call(blks,function(e){ e.style.transition=''; });
+        row.classList.remove('cols'); pic.classList.remove('lift');
+        hand.style.transition='none'; hand.style.opacity='0';
         Array.prototype.forEach.call(nds,function(n){ n.classList.remove('in'); });
         Array.prototype.forEach.call(blks,function(b){ b.classList.remove('in','grab'); });
         step(-1);
       }
       function play(){
-        reset();
+        fixHeight(); reset();
         step(0);
-        Array.prototype.forEach.call(nds,function(n,i){ later(function(){ n.classList.add('in'); },120+i*110); });
-        later(function(){ step(1); },1500);
-        Array.prototype.forEach.call(blks,function(b,i){ later(function(){ b.classList.add('in'); },1600+i*170); });
-        later(function(){ step(2); bimg.classList.add('grab'); placeHand(bimg,-28,2); hand.style.transition='opacity .4s cubic-bezier(.16,1,.3,1)'; hand.style.opacity='1'; },3600);
-        later(function(){ pic.classList.add('lift'); },4300);
-        later(function(){ hand.style.opacity='0'; flipCols(true); },4700);
-        later(function(){ pic.classList.remove('lift'); bimg.classList.remove('grab'); },5900);
+        Array.prototype.forEach.call(nds,function(n,i){ later(function(){ n.classList.add('in'); },120+i*130); });
+        later(function(){ step(1); },1600);
+        Array.prototype.forEach.call(blks,function(b,i){ later(function(){ b.classList.add('in'); },1700+i*170); });
+        later(function(){ step(2); bimg.classList.add('grab'); hand.style.transition='opacity .4s cubic-bezier(.16,1,.3,1)'; hand.style.opacity='1'; },3700);
+        later(function(){ pic.classList.add('lift'); },4200);
+        later(function(){ flipCols(true); },4600);
+        later(function(){ pic.classList.remove('lift'); hand.style.opacity='0'; },5800);
+        later(function(){ bimg.classList.remove('grab'); },6200);
       }
-      function finalState(){ clear(); host.classList.remove('js'); row.classList.add('cols'); step(2); }
       Array.prototype.forEach.call(sts,function(s){ s.addEventListener('click',function(){
-        var i=+s.getAttribute('data-s'); clear(); host.classList.remove('js'); step(i);
+        var i=+s.getAttribute('data-s'); clear(); host.classList.remove('js'); step(i); hand.style.opacity='0';
         Array.prototype.forEach.call(nds,function(n){ n.classList.add('in'); }); Array.prototype.forEach.call(blks,function(b){ b.classList.add('in'); });
-        if(i===2){ if(!row.classList.contains('cols')) flipCols(true); } else if(row.classList.contains('cols')) flipCols(false);
+        flipCols(i===2);
       }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      if(N.REDUCED){ finalState(); return; }
-      host.classList.add('js');
+      window.addEventListener('resize',function(){ if(host.isConnected) fixHeight(); });
+      if(N.REDUCED){ step(2); return; }
+      host.classList.add('js'); row.classList.remove('cols');
       N.reveal(host,play);
     }
 
@@ -36835,7 +36568,7 @@ var TSISL_TEAM_ONB_V2=[
             {mi:'Die Räume', nm:'Teamspaces', tx:'<p>Bereiche, die ein Team gemeinsam nutzt, zum Beispiel Küche, Service und Verwaltung. Wer in einem Teamspace Mitglied ist, sieht dessen Seiten in seiner Seitenleiste.</p>'},
             {mi:'Dein Büro', nm:'Privat', tx:'<p>Seiten, die nur du siehst. Hier landet alles, was du für dich anlegst, und hier landet auch eine Vorlage, die du dir in deinen Workspace kopierst.</p>'}
           ],3),
-          R.txt('<p><strong>Seiten liegen in Seiten.</strong> Jede Seite kann beliebig viele Unterseiten haben, und genau so entsteht der Baum, den du links siehst. Klappst du einen Eintrag auf, siehst du, was darunter liegt. Ganz oben im Fenster zeigt dir eine Pfadzeile, wo du gerade stehst, zum Beispiel <em>Küche › Notion AI Backoffice › DB IV : Zutaten</em>. Ein Klick auf einen Teil des Pfads bringt dich eine Ebene zurück.</p>'),
+          R.txt('<p><strong>Seiten liegen in Seiten.</strong> Jede Seite kann beliebig viele Unterseiten haben, und genau so entsteht der Baum, den du links siehst. Klappst du einen Eintrag auf, siehst du, was darunter liegt. Ganz oben im Fenster zeigt dir eine Pfadzeile, wo du gerade stehst, zum Beispiel <em>Service › Hygieneplan</em>. Ein Klick auf einen Teil des Pfads bringt dich eine Ebene zurück.</p>'),
           R.fund(['Notion AI Backoffice','DB Zutaten','DB IV : Zutaten'],'<p>Die Vorlage ist genau so ein Baum. Oben die Startseite des Backoffice, darunter je Datenbank eine eigene Seite mit Zurück-Button, darin die Tabelle. Wenn du dich in der Vorlage verläufst, schau zuerst auf die Pfadzeile oben im Fenster.</p>')
         ]}),
         R.sec({eb:'Blöcke', title:'Was ein <span class="g">Block</span> ist und warum dich das freut', lead:'Ein Block ist alles, was auf einer Seite eine eigene Zeile hat. Ein Absatz, eine Überschrift, ein Bild, eine Checkliste, eine ganze Tabelle.', blocks:[
@@ -37057,6 +36790,199 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du gestaltest eine Seite für den <b>Moment</b>, in dem sie gelesen wird.','Du setzt Blöcke mit dem Griff in <b>Spalten</b> und wandelst einen Block in einen anderen um.','Du pflegst Notfallnummern und Hinweise als <b>synchronisierten Block</b> an einem Ort.','Du stellst das <b>Layout</b> der Eintragsseiten einer Datenbank einmal für alle Einträge ein.'],
         next:'/lektionen/l13-einfhrung-in-datenbanken'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.3 "Die Tabelle denkt mit."
+   Adresse: /lektionen/l13-einfhrung-in-datenbanken (Alt-Slug toleriert)
+   Erklaeranimation "Vom Lieferschein in die Spalten" — EIGENES Konzept:
+   EINE Karte: oben eine Zeile vom Lieferschein, darunter die Tabelle.
+   Die Werte loesen sich aus dem Papier und landen (FLIP) in der Spalte
+   ihres Typs, dann fuellt die Hand, was auf keinem Lieferschein steht,
+   zuletzt oeffnet sich die Zeile als eigene Seite (Seitenvorschau rechts).
+   ============================================================ */
+(function(){
+  if(window.__tsn1L3) return; window.__tsn1L3=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a3-css',`
+      #tsn1-a3 .card{position:relative;width:min(980px,100%);margin:0 auto;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:#07080e;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a3 .slip{position:relative;margin:22px 22px 0;padding:16px 18px 18px;border-radius:6px;background:#efe6d2;color:#2a2620;font:500 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 18px 30px -18px rgba(0,0,0,.8)}
+      #tsn1-a3 .slip::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:8px;background:radial-gradient(circle at 6px -2px,transparent 6px,#efe6d2 6.5px) 0 0/12px 8px repeat-x}
+      #tsn1-a3 .slip .lh{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#7a6f5c;margin-bottom:10px}
+      #tsn1-a3 .slip .ln{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+      #tsn1-a3 .slip .ln span{position:relative;display:inline-block}
+      #tsn1-a3 .slip .ln span.out{visibility:hidden}
+      #tsn1-a3 .tbl{margin:30px 22px 22px;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+      #tsn1-a3 .row{display:grid;grid-template-columns:1.5fr 1.05fr 1.25fr .7fr .8fr .95fr .9fr}
+      #tsn1-a3 .hd>div{display:flex;align-items:center;gap:6px;padding:10px 10px;font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.08);white-space:nowrap;overflow:hidden}
+      #tsn1-a3 .hd i{font-style:normal;font-weight:700;color:#c7b489;font-size:10.5px;min-width:16px;text-align:center}
+      #tsn1-a3 .hd>div.hit{background:rgba(199,180,137,.10);color:#fff}
+      #tsn1-a3 .bd>div{position:relative;min-height:46px;display:flex;align-items:center;padding:10px;font:500 12.5px/1.3 -apple-system,sans-serif;color:#fff;border-right:1px solid rgba(255,255,255,.05)}
+      #tsn1-a3 .bd>div:last-child{border-right:0}
+      #tsn1-a3 .bd .v{display:inline-block;will-change:transform}
+      #tsn1-a3 .bd .chip{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(199,180,137,.16);color:#efe6d2;font-size:11.5px}
+      #tsn1-a3 .bd .cb{width:15px;height:15px;border-radius:4px;background:#c7b489;position:relative;display:inline-block}
+      #tsn1-a3 .bd .cb::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #05060b;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+      #tsn1-a3 .bd .n{margin-left:auto;font-variant-numeric:tabular-nums}
+      #tsn1-a3 .bd .open{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:600 10px/1 -apple-system,sans-serif;letter-spacing:.06em;color:#05060b;background:#efe6d2;border-radius:5px;padding:4px 6px;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .row.bd.pk{background:rgba(199,180,137,.06)}
+      #tsn1-a3 .peek{position:absolute;top:0;right:0;bottom:0;width:min(330px,62%);background:#0d0f17;border-left:1px solid rgba(199,180,137,.3);box-shadow:-40px 0 80px -30px rgba(0,0,0,.9);padding:22px 22px;transform:translateX(102%);transition:transform .9s cubic-bezier(.16,1,.3,1);z-index:4}
+      #tsn1-a3 .peek .pt{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;margin:4px 0 14px}
+      #tsn1-a3 .peek .pi{display:grid;grid-template-columns:110px 1fr;gap:8px;font:500 12px/1.35 -apple-system,sans-serif;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+      #tsn1-a3 .peek .pi span:first-child{color:rgba(255,255,255,.5)}
+      #tsn1-a3 .peek .pi span:last-child{color:#fff}
+      #tsn1-a3 .peek .ph{margin-top:14px;height:96px;border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+      #tsn1-a3 .peek .ph img{width:100%;height:100%;object-fit:cover;display:block}
+      #tsn1-a3 .peek .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+      #tsn1-a3.pk .peek{transform:none}
+      #tsn1-a3 .note{width:min(980px,100%);margin:10px auto 0;text-align:right;font-size:10.5px;color:rgba(255,255,255,.4)}
+      #tsn1-a3 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(980px,100%);margin:18px auto 0}
+      #tsn1-a3 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a3 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a3 .st.on b{color:#c7b489}
+      #tsn1-a3 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a3 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .rp button:hover{background:#c7b489;color:#05060b}
+      #tsn1-a3.js .hand-in{opacity:0;transform:scale(.6)}
+      #tsn1-a3.js .hand-in.in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
+      @media(max-width:820px){
+        #tsn1-a3 .tblw{overflow-x:auto;margin:30px 22px 22px}
+        #tsn1-a3 .tbl{margin:0;min-width:720px}
+        #tsn1-a3 .rail{grid-template-columns:1fr}
+        #tsn1-a3 .peek{width:78%}
+      }
+      @media(prefers-reduced-motion:reduce){ #tsn1-a3.js .hand-in{opacity:1;transform:none} }
+      `);
+      var COLS=[['Aa','Produkt'],['◉','Kategorie'],['≡','Gebinde'],['#','Menge'],['#','Preis'],['☐','Im Sortiment'],['▦','Geliefert']];
+      /* Wert vom Lieferschein -> Spalte (Index). Kategorie und Im Sortiment stehen auf keinem Lieferschein. */
+      var SLIP=[['Burrata 125 g',0,'<span class="v">Burrata 125 g</span>'],['Karton 12 × 125 g',2,'<span class="v">Karton 12 × 125 g</span>'],['1,5 kg',3,'<span class="v n">1,5</span>'],['18,90 €',4,'<span class="v n">18,90 €</span>'],['03.11.2026',6,'<span class="v">3. Nov. 2026</span>']];
+      host.id='tsn1-a3';
+      host.innerHTML=R.head('Spalten und Typen','Jeder Wert landet in der <span class="g">Spalte seines Typs</span>.','Eine Zeile vom Lieferschein wird zum Eintrag in der Datenbank. Was auf keinem Lieferschein steht, ergänzt du. Und jede Zeile ist zugleich eine eigene Seite.')+
+        '<div class="card"><div class="slip"><div class="lh"><span>Lieferschein · Pos. 3</span><span>Art.-Nr. 040211</span></div><div class="ln">'+
+          SLIP.map(function(x,i){ return '<span data-i="'+i+'">'+x[0]+'</span>'; }).join('')+'</div></div>'+
+        '<div class="tblw"><div class="tbl"><div class="row hd">'+COLS.map(function(c){ return '<div><i>'+c[0]+'</i>'+c[1]+'</div>'; }).join('')+'</div>'+
+          '<div class="row bd">'+COLS.map(function(c,ci){
+            var s=SLIP.filter(function(x){ return x[1]===ci; })[0];
+            if(s) return '<div data-c="'+ci+'">'+s[2]+(ci===0?'<span class="open">ÖFFNEN</span>':'')+'</div>';
+            if(ci===1) return '<div data-c="1"><span class="chip hand-in">Molkerei</span></div>';
+            return '<div data-c="5"><span class="cb hand-in"></span></div>';
+          }).join('')+'</div></div></div>'+
+        '<div class="peek"><div class="mi">Eintrag als Seite</div><div class="pt">Burrata 125 g</div>'+
+          '<div class="pi"><span>Kategorie</span><span>Molkerei</span></div><div class="pi"><span>Gebinde</span><span>Karton 12 × 125 g</span></div>'+
+          '<div class="pi"><span>Menge</span><span>1,5 kg</span></div><div class="pi"><span>Preis</span><span>18,90 €</span></div><div class="pi"><span>Geliefert</span><span>3. Nov. 2026</span></div>'+
+          '<div class="ph"><img alt="Burrata" decoding="async" loading="lazy" src="'+IMG+'zutaten/mozzarella.webp"></div></div>'+
+        '</div><div class="note">Beispielwerte</div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Eine Zeile vom Lieferschein.</button><button class="st" data-s="1"><b>02</b>Jeder Wert findet die Spalte seines Typs, den Rest trägst du ein.</button><button class="st" data-s="2"><b>03</b>Ein Klick auf die Zeile öffnet sie als Seite.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var spans=host.querySelectorAll('.slip .ln span'), vals=host.querySelectorAll('.bd .v'), hds=host.querySelectorAll('.hd>div'), hand=host.querySelectorAll('.hand-in'),
+          bd=host.querySelector('.row.bd'), open=host.querySelector('.bd .open'), sts=host.querySelectorAll('.st');
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a3Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      function vFor(i){ var c=SLIP[i][1]; return host.querySelector('.bd>div[data-c="'+c+'"] .v'); }
+      function fly(i){
+        var sp=spans[i], v=vFor(i), a=sp.getBoundingClientRect(), b=v.getBoundingClientRect();
+        var hd=hds[SLIP[i][1]];
+        v.style.visibility='visible'; v.style.transition='none'; v.style.transform='translate('+(a.left-b.left)+'px,'+(a.top-b.top)+'px)'; v.style.color='#2a2620';
+        sp.classList.add('out'); void v.offsetWidth;
+        v.style.transition='transform .95s cubic-bezier(.16,1,.3,1), color .6s cubic-bezier(.16,1,.3,1) .35s'; v.style.transform=''; v.style.color='';
+        hd.classList.add('hit'); later(function(){ hd.classList.remove('hit'); },1100);
+      }
+      function reset(){
+        clear(); host.classList.remove('pk'); bd.classList.remove('pk'); open.style.opacity='0';
+        [].forEach.call(spans,function(s){ s.classList.remove('out'); });
+        [].forEach.call(vals,function(v){ v.style.transition='none'; v.style.transform=''; v.style.visibility='hidden'; });
+        [].forEach.call(hand,function(h){ h.classList.remove('in'); });
+        step(0);
+      }
+      function play(){
+        host.classList.add('js'); reset();
+        SLIP.forEach(function(x,i){ later(function(){ if(i===0) step(1); fly(i); },1300+i*420); });
+        later(function(){ hand[0].classList.add('in'); },1300+SLIP.length*420+300);
+        later(function(){ hand[1].classList.add('in'); },1300+SLIP.length*420+650);
+        later(function(){ step(2); bd.classList.add('pk'); open.style.opacity='1'; },4600);
+        later(function(){ host.classList.add('pk'); },5200);
+      }
+      function endState(){ clear(); [].forEach.call(spans,function(s){ s.classList.add('out'); }); [].forEach.call(vals,function(v){ v.style.transition='none'; v.style.transform=''; v.style.visibility='visible'; }); [].forEach.call(hand,function(h){ h.classList.add('in'); }); }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
+        var i=+s.getAttribute('data-s'); clear(); step(i);
+        if(i===0){ reset(); }
+        else { endState(); host.classList.toggle('pk',i===2); bd.classList.toggle('pk',i===2); open.style.opacity=i===2?'1':'0'; }
+      }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ step(2); host.classList.add('pk'); return; }
+      host.classList.add('js'); [].forEach.call(vals,function(v){ v.style.visibility='hidden'; });
+      N.reveal(host,play);
+    }
+
+    N.page({
+      key:'l3',
+      re:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/,
+      hero:{label:'L 1.3', eyebrow:'L 1.3', title:'Die Tabelle <span class="ts-gold">denkt mit</span>.', alt:'Notion-Datenbanken und Eigenschaftstypen am Beispiel einer Produktliste'},
+      intro:
+        '<p>Die Inventurliste, die Zutaten, die Gerichte: Alles, womit die Vorlage rechnet, liegt in <b>Datenbanken</b>. Eine Datenbank ist eine Sammlung von Seiten, die alle dieselben Eigenschaften haben. Jede Zeile ist ein Artikel, jede Spalte eine Eigenschaft, also Preis, Gebinde oder Lagerort.</p>'+
+        '<p>Der Typ einer Spalte entscheidet, was du eintragen kannst und was das System daraus machen kann. Mit einer Zahl lässt sich rechnen, mit einem Text nicht. Wer die Typen kennt, liest jede Spalte der Vorlage. Am Ende dieser Lektion baust du in der Probeküche deine erste eigene Datenbank.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Seite oder Datenbank', title:'Wann eine Seite reicht und wann <span class="g">nicht</span>', lead:'Die Frage stellt sich bei jedem neuen Thema im Betrieb, und die Antwort ist fast immer schnell gefunden.', blocks:[
+          R.cards([
+            {mi:'Einmalig', nm:'Eine Seite', img:IMG+'ansprechpartner/notizblock.jpg', tx:'<p>Für Inhalte, die es genau einmal gibt: das Hygienehandbuch, die Geschichte deines Hauses, die Regeln für die Personalmahlzeit. Eine Seite liest man von oben nach unten.</p>'},
+            {mi:'Wiederkehrend', nm:'Eine Datenbank', img:IMG+'inventar/balsamico.jpg', tx:'<p>Für alles, was es viele Male in derselben Form gibt: Artikel, Lieferanten, Gerichte, Mitarbeiter, Reservierungen. Eine Datenbank kann man filtern, sortieren und durchrechnen.</p>'}
+          ],2),
+          R.merk('Schreibst du dieselbe Art Information zum dritten Mal auf, gehört sie in eine Datenbank.'),
+          R.txt('<p><strong>Ganze Seite oder eingebettet.</strong> Eine Datenbank kann eine eigene Seite füllen oder mitten auf einer anderen Seite stehen. In der Vorlage hat jede Datenbank ihre eigene Seite, damit sie Platz für viele Spalten hat. Wie du dieselbe Datenbank zusätzlich auf einer anderen Seite zeigst, ohne sie zu kopieren, lernst du in Lektion 1.7.</p>')
+        ]}),
+        R.sec({eb:'Die Typen', title:'Jede Spalte hat einen <span class="g">Typ</span>', wide:true, lead:'Das kleine Symbol links neben dem Spaltennamen verrät den Typ. Diese Typen begegnen dir in der Vorlage am häufigsten.', blocks:[
+          R.tab(['Typ','Wofür','So sieht es im Betrieb aus'],[
+            ['Titel','Der Name des Eintrags. Jede Datenbank hat genau eine Titelspalte','Burrata 125 g'],
+            ['Text','Freier Text, mit dem nicht gerechnet wird','Gebinde, Artikelnummer, Notiz'],
+            ['Zahl','Mengen und Preise, mit denen gerechnet wird. Das Zahlenformat stellst du auf Euro, Prozent oder Zahl','Einkaufspreis, Schnittverlust in Prozent'],
+            ['Auswählen','Genau eine Option aus einer festen Liste','Kategorie, Lagerort'],
+            ['Mehrfachauswahl','Mehrere Optionen aus einer Liste zugleich','Allergene, Liefertage'],
+            ['Status','Ein Ablauf in drei Gruppen, von offen bis erledigt','Bestellung offen, unterwegs, eingegangen'],
+            ['Datum','Ein Tag, auf Wunsch mit Uhrzeit oder als Zeitraum','Zuletzt geliefert, Ablaufdatum'],
+            ['Kontrollkästchen','Ja oder nein','Im Sortiment, Hauptzutat'],
+            ['Person','Jemand aus deinem Workspace','Wer die Inventur gezählt hat'],
+            ['Dateien und Medien','PDFs, Fotos, Dokumente','Sicherheitsdatenblatt, Foto vom Teller'],
+            ['Telefon, E-Mail, URL','Kontaktdaten, die man direkt anklicken kann','Bestelladresse des Lieferanten'],
+            ['Verknüpfung','Verbindet einen Eintrag mit Einträgen einer anderen Datenbank','Die Zutat kennt ihr Inventarprodukt'],
+            ['Rollup','Holt einen Wert über eine Verknüpfung herüber','Preis pro Kg in den Zutaten'],
+            ['Formel','Rechnet aus anderen Spalten einen neuen Wert','Preis / Portion in den Zutaten'],
+            ['Erstellt um, Letzte Änderung um','Notion trägt das selbst ein','Wann ein Preis zuletzt geändert wurde']
+          ]),
+          R.txt('<p><strong>Verknüpfung, Rollup und Formel sind das Besondere.</strong> Sie füllst du nicht von Hand, sie entstehen aus anderen Spalten. Genau diese drei Typen machen aus einer Liste ein System, und jeder bekommt in diesem Modul eine eigene Lektion.</p>'),
+          R.fund(['DB IV : Zutaten','Spaltenkopf anklicken'],'<p>Klick in der Vorlage auf den Kopf einer Spalte, zum Beispiel <em>Portionsgröße</em>. Du siehst Typ und Namen, und über <em>Eigenschaft bearbeiten</em> die Einstellungen dahinter. <em>Portionsgröße</em> ist Text, <em>Schnittverlust ( % )</em> eine Zahl, <em>Preis pro Kg</em> ein Rollup, <em>Preis / Portion</em> eine Formel. So liest du jede Datenbank der Vorlage, bevor du etwas einträgst.</p>')
+        ]}),
+        R.sec({eb:'Typische Fehler', title:'Wenn eine Spalte nicht tut, was sie <span class="g">soll</span>', wide:true, blocks:[
+          R.fehler([
+            ['Eine Formel rechnet mit einem Preis nicht','Der Preis steht in einer Textspalte, nicht in einer Zahlenspalte','Spaltentyp auf Zahl stellen und die Werte prüfen. In der Vorlage den Typ nie ändern, ohne zu wissen, welche Formel darauf zugreift'],
+            ['Dieselbe Kategorie steht dreimal da: Molkerei, Molkereiprodukte, molkerei','Jeder hat beim Eintragen eine neue Option angelegt','In Eigenschaft bearbeiten die Doppelten löschen und die Einträge der verbliebenen Option zuordnen'],
+            ['Die Artikelnummer 040211 heißt plötzlich 40211','Sie steht in einer Zahlenspalte, die führende Nullen weglässt','Artikelnummern immer als Text anlegen'],
+            ['„1,5 kg" lässt sich in die Zahlenspalte nicht eintragen','Eine Zahlenspalte nimmt nur Zahlen, keine Einheiten','Die Einheit gehört in eine eigene Spalte, in die Zahl nur 1,5']
+          ])
+        ]}),
+        R.wk('tsn1-wk-m1_produkte'),
+        R.res({eb:'Ergebnis', title:'Deine Produkte, <span class="g">sauber getippt</span>.', text:[
+          'Wenn alle Spalten stehen, trägst du fünf, sechs Artikel aus deinem eigenen Lager ein. Nimm echte Lieferscheine, damit du merkst, wo eine Angabe fehlt und wo du dich für eine Schreibweise entscheiden musst.',
+          'Genau so ist die Inventurliste der Vorlage aufgebaut, nur mit mehr Spalten. Wer diese kleine Tabelle einmal selbst getippt hat, liest die große ohne Mühe.'],
+          mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Tabelle'], cols:['Produkt','Kategorie','Lagerort','Menge','Preis','Im Sortiment'], num:[3,4],
+            rows:[['Burrata 125 g','<span class="t">Molkerei</span>','Kühlhaus','1,5','18,90 €','✓'],['Olivenöl extra vergine 5 l','<span class="t">Trockenware</span>','Trockenlager','5','42,50 €','✓'],['Tomaten Ochsenherz','<span class="t">Obst &amp; Gemüse</span>','Kühlhaus','5','16,00 €','✓'],['Parmigiano 24 Monate','<span class="t">Molkerei</span>','Kühlhaus','1','23,40 €','✓'],['Basilikum Topf','<span class="t">Obst &amp; Gemüse</span>','Kühlhaus','6','7,20 €','']],
+            cap:'Beispielwerte'}}),
+        {emp:{kind:'Einrichtung', animTitle:'Erst die Spalten,', animGold:'dann die Daten', steps:['Titel eindeutig','Typ vor Name','Auswahl kurz halten','Eine Einheit je Spalte'],
+          intro:'Eine Datenbank wird nicht schlecht, weil zu wenig Spalten da sind, sondern weil am Anfang niemand festgelegt hat, wie eingetragen wird.',
+          points:['Der Titel sagt eindeutig, welcher Artikel gemeint ist, mit Größe. „Burrata 125 g", nicht „Burrata".','Leg erst den Typ fest, dann den Namen. Eine Spalte nachträglich von Text auf Zahl umzustellen kostet dich jede einzelne Zeile.','Fünf bis acht Optionen pro Auswahlfeld reichen fast immer. Jede weitere kostet Übersicht.','Eine Zahlenspalte bekommt eine feste Einheit, und die steht im Spaltennamen oder in einer eigenen Spalte.']}}
+      ],
+      learn:{items:['Du unterscheidest <b>Seite</b> und <b>Datenbank</b> und weißt, wann was passt.','Du erkennst den <b>Typ</b> jeder Spalte am Symbol im Spaltenkopf.','Du weißt, warum Preise in eine <b>Zahl</b> und Artikelnummern in einen <b>Text</b> gehören.','Du hast in der Probeküche deine erste <b>eigene Datenbank</b> gebaut.'],
+        next:'/lektionen/l14-relationen-rollups'}
     });
   }
   go();
