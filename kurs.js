@@ -4415,7 +4415,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
     { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/installation-claude-code-vs-code-extension' },
     { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/deine-erste-claudemd' },
-    { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/die-3-slash-commands' },
+    { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31401,7 +31402,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -32839,6 +32840,126 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du hast deine erste CLAUDE.md mit <b>/init</b> oder Interview angelegt.',
         'Du schreibst Anweisungen mit <b>Was, Womit</b> und Woran-fertig.'],
       next:'/die-3-slash-commands'}
+  });
+})();
+
+/* ---- l10-befehle.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.10 "Die wichtigsten Befehle"  (/die-3-slash-commands)
+   Fakten: Faktenblatt Punkt 9 (Berechtigungsmodi, Shift+Tab-Reihenfolge, Checkpoints) und
+   Punkt 12 (Befehle, Tastenkuerzel; /cost ist nur Alias von /usage). Stand 01.11.2026.
+   Erklaeranimation #tsn3-a10 "Ein Schraegstrich, eine Sitzung im Griff."
+   Ein Terminalfenster mit Sitzungstitel, Gespraechszeilen und Eingabezeile. Vier Befehle
+   werden getippt, die Befehlsliste klappt auf, die Wirkung passiert im selben Fenster:
+   /rename benennt, /clear leert, /resume holt zurueck, Esc Esc spult eine Aenderung zurueck.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var CONV=['Kalkulier die Wochenkarte KW 45 aus den Rezepturen.','→ kalkulation-kw45.xlsx angelegt','Setz den Preis der Rinderwange auf 24,50.','→ kalkulation-kw45.xlsx geändert'];
+  var PAL=[['/rename','Sitzung benennen'],['/clear','neues Gespräch'],['/resume','Sitzung fortsetzen'],['/rewind','zurückspulen']];
+  var BEATS=[
+    {cmd:'/rename Wochenkarte KW 45', pal:0, cap:'<b>/rename</b> gibt der Sitzung einen Namen, unter dem du sie später wiederfindest.'},
+    {cmd:'/clear', pal:1, cap:'<b>/clear</b> beginnt ein neues Gespräch. Der Verlauf ist aus dem Kopf, das Kontingent atmet auf.'},
+    {cmd:'/resume', pal:2, cap:'Zwei Tage später holt <b>/resume</b> die benannte Sitzung genau dort zurück, wo du aufgehört hast.'},
+    {cmd:'Esc Esc', pal:3, cap:'Der Preis war falsch. Zweimal <b>Esc</b> öffnet das Zurückspulen, und die Datei steht wieder wie vor der Änderung.'}
+  ];
+  var stage='<div class="l10-term"><div class="l10-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l10-title"><span class="old">claude · Speisekarte</span><span class="new">Wochenkarte KW 45</span></span></div>'
+    +'<div class="l10-body"><div class="l10-conv">'+CONV.map(function(c,i){ return '<div class="l10-c'+(c.charAt(0)==='→'?' r':' u')+(i===3?' l3':'')+'">'+c+'</div>'; }).join('')+'<div class="l10-c r rw">↺ kalkulation-kw45.xlsx auf den Stand vor der Änderung zurückgesetzt</div></div>'
+    +'<div class="l10-res"><div class="l10-rh">Frühere Sitzungen</div><div class="l10-ri on">Wochenkarte KW 45</div><div class="l10-ri">Allergene Herbstkarte</div><div class="l10-ri">Lieferscheine Oktober</div></div>'
+    +'<div class="l10-pal">'+PAL.map(function(p,i){ return '<div class="l10-pi" data-i="'+i+'"><span class="c">'+p[0]+'</span><span class="d">'+p[1]+'</span></div>'; }).join('')+'</div>'
+    +'<div class="l10-in"><span class="pr">›</span><span class="tx"></span><span class="car"></span></div></div></div>';
+
+  function type(node, txt, api, t0){ var per=Math.max(28,Math.min(55,900/txt.length)); for(var k=1;k<=txt.length;k++){ (function(k){ api.T.at(t0+k*per,function(){ node.textContent=txt.slice(0,k); }); })(k); } api.T.at(t0+txt.length*per+30,function(){ node.textContent=txt; }); return t0+txt.length*per; }
+  function state(el, s){ el.classList.remove('st-named','st-clear','st-res','st-rw'); s.forEach(function(c){ el.classList.add(c); }); }
+  T3.anim('tsn3-a10',{
+    reset:function(el){ state(el,[]); el.querySelector('.l10-in .tx').textContent=''; el.querySelectorAll('.l10-pi').forEach(function(p){ p.classList.remove('on'); }); el.classList.remove('pal'); },
+    play:function(el, api, end){
+      var tx=el.querySelector('.l10-in .tx'), pis=el.querySelectorAll('.l10-pi'), t=500;
+      BEATS.forEach(function(b,i){
+        var t0=t;
+        api.T.at(t0,function(){ api.cap(b.cap); tx.textContent=''; if(i<3) el.classList.add('pal'); pis.forEach(function(p){ p.classList.remove('on'); }); });
+        var tE=type(tx, b.cmd, api, t0+300);
+        api.T.at(tE-200,function(){ pis[b.pal].classList.add('on'); });
+        api.T.at(tE+500,function(){ el.classList.remove('pal'); tx.textContent='';
+          if(i===0) state(el,['st-named']);
+          if(i===1) state(el,['st-named','st-clear']);
+          if(i===2) state(el,['st-named','st-clear','st-res']);
+          if(i===3) state(el,['st-named','st-rw']);
+        });
+        if(i===2) api.T.at(tE+2000,function(){ state(el,['st-named']); });
+        t=tE+(i===2?3300:2600);
+      });
+      api.T.at(t+700, end);
+    },
+    end:function(el){ el.classList.remove('pal'); el.querySelector('.l10-in .tx').textContent=''; state(el,['st-named','st-rw']); }
+  });
+
+  T3.page({
+    key:'l10', re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, tab:'L 3.10 · Die wichtigsten Befehle',
+    hero:{eyebrow:'L 3.10', title:'Die wichtigsten <span class="ts-gold">Befehle</span>', alt:'Die wichtigsten Befehle und Tasten in Claude Code'},
+    intro:'<p>In Claude Code steuerst du fast alles mit einem Schrägstrich. Tippst du <code>/</code>, klappt eine Liste mit Befehlen auf, und mit jedem weiteren Buchstaben wird sie kürzer. Es gibt Dutzende davon, aber im Alltag brauchst du eine Handvoll, und die meisten lernst du in der ersten Woche nebenbei.</p>'
+      +'<p>In dieser Lektion stehen die Befehle, mit denen du deine Sitzungen im Griff behältst, die Tasten, die dir Zeit sparen, und die vier Modi, die bestimmen, wie viel Claude ohne Nachfrage tun darf.</p>',
+    anim:{id:'tsn3-a10', eb:'Die Sitzung im Griff', title:'Ein Schrägstrich, vier <span class="g">Handgriffe</span>.',
+      sub:'Eine Woche mit der Wochenkarte, in vier Befehlen: benennen, leeren, zurückholen, zurückspulen.',
+      stage:stage,
+      capEnd:BEATS[3].cap},
+    body:function(H){
+      return H.sec({id:'tsn3-l10-tab', wide:true, title:'Die Befehle, die du <span class="g">wirklich</span> brauchst',
+          lead:'Sortiert nach dem, wofür du sie im Alltag benutzt. Alles andere findest du mit /help, wenn du es brauchst.',
+          body:H.table(['Befehl','Was er tut','Wann du ihn brauchst'],[
+            ['<code>/clear</code>','beginnt ein neues Gespräch','wenn ein Thema erledigt ist und das nächste anfängt'],
+            ['<code>/rename</code>','gibt der Sitzung einen Namen','bei allem, woran du später weiterarbeiten willst'],
+            ['<code>/resume</code>','setzt eine frühere Sitzung fort','am nächsten Tag, am selben Thema'],
+            ['<code>/rewind</code>','spult Gespräch und Dateien zurück','wenn Claude eine Datei falsch geändert hat'],
+            ['<code>/init</code>','legt eine erste CLAUDE.md an','einmal je Projektordner (Lektion 3.9)'],
+            ['<code>/memory</code>','öffnet CLAUDE.md und Gedächtnis','wenn du eine Regel nachtragen willst'],
+            ['<code>/model</code> · <code>/effort</code>','Modell und Denk-Tiefe','bei sehr einfachen oder sehr schweren Aufgaben (Lektion 3.11)'],
+            ['<code>/plan</code>','schaltet in den Plan-Modus','vor jeder größeren Aufgabe (Lektion 3.11)'],
+            ['<code>/skills</code> · <code>/plugin</code> · <code>/mcp</code>','Erweiterungen ansehen und verwalten','Lektion 3.12 und 3.13'],
+            ['<code>/context</code> · <code>/usage</code>','zeigt Auslastung und Verbrauch','wenn eine Sitzung zäh wird (Lektion 3.14)'],
+            ['<code>/btw</code>','stellt eine Nebenfrage, ohne den Verlauf zu belasten','für eine schnelle Frage zwischendurch'],
+            ['<code>/doctor</code>','prüft und repariert die Einrichtung','wenn etwas nicht funktioniert'],
+            ['<code>/help</code> · <code>/powerup</code>','zeigt alle Befehle, führt durch kurze Übungen','am ersten Tag'],
+            ['<code>/exit</code>','beendet Claude Code','am Feierabend']
+          ])
+          +'<p class="tsn3-fn">In älteren Anleitungen findest du noch <code>/cost</code>. Das ist heute nur ein anderer Name für <code>/usage</code>.</p>'})
+        +H.sec({id:'tsn3-l10-tasten', title:'Tasten, die <span class="g">Zeit sparen</span>',
+          lead:'Ein paar Tasten nimmst du öfter als jeden Befehl. Sie gelten im Terminal, die meisten auch in VS Code.',
+          body:H.table(['Taste','Wirkung'],[
+            [H.kbd('Esc'),'hält Claude sofort an, die bisherige Arbeit bleibt'],
+            [H.kbd('Esc')+' '+H.kbd('Esc'),'bei leerer Eingabe: das Menü zum Zurückspulen'],
+            [H.kbd('Shift')+'+'+H.kbd('Tab'),'wechselt den Modus (siehe unten)'],
+            [H.kbd('@'),'erwähnt eine Datei, zum Beispiel <code>@rezepturen.xlsx</code>'],
+            [H.kbd('!'),'am Zeilenanfang: führt einen Befehl im Terminal direkt aus'],
+            [H.kbd('Shift')+'+'+H.kbd('Enter'),'neue Zeile, ohne abzuschicken (in vielen Terminals, sonst '+H.kbd('\\')+' und Enter)'],
+            [H.kbd('Ctrl')+'+'+H.kbd('R'),'sucht in deinen früheren Eingaben'],
+            [H.kbd('?'),'bei leerer Eingabe: alle Tastenkürzel']
+          ])})
+        +H.sec({id:'tsn3-l10-modi', wide:true, title:'Die vier <span class="g">Modi</span>',
+          lead:'Der Modus bestimmt, wie viel Claude tun darf, ohne dich zu fragen. Mit Shift und Tab wechselst du der Reihe nach, in der Desktop-App wählst du ihn unter dem Eingabefeld.',
+          body:H.cards([
+            {eb:'Standard', nm:'Auto', p:'Claude arbeitet ohne Routine-Nachfragen. Ein zweites Modell prüft im Hintergrund jede Aktion und hält riskante an. Anthropic sagt ausdrücklich: Das ist keine Garantie für Sicherheit.'},
+            {eb:'Vorsichtig', nm:'Manual', p:'Claude fragt vor jeder Änderung an einer Datei und vor jedem Befehl. Lesen darf es frei. Langsamer, dafür siehst du jeden Schritt.'},
+            {eb:'Für Dateiarbeit', nm:'Accept edits', p:'Dateien ändern und einfache Dateibefehle wie Anlegen oder Verschieben laufen ohne Nachfrage, alles andere fragt weiter.'},
+            {eb:'Vor großen Aufgaben', nm:'Plan', p:'Claude liest, denkt nach und schreibt einen Plan, ändert aber nichts, bis du ihn freigibst. Damit beschäftigen wir uns in der nächsten Lektion.'}
+          ],2)
+          +H.note('In Ordnern mit wichtigen Betriebsdateien arbeitest du die ersten Tage im Modus Manual. Sobald du weißt, wie Claude vorgeht, wechselst du auf Auto.','Mein Rat')})
+        +H.sec({id:'tsn3-l10-uebergabe', title:'Vor dem <span class="g">Leeren</span> eine Übergabe',
+          lead:'/clear kostet nichts und macht jede Sitzung wieder schnell. Damit dabei nichts verloren geht, lässt du dir vorher eine Übergabe schreiben.',
+          body:H.prompt('Schreib eine kurze Übergabe in die Datei uebergabe.md in diesem Ordner: was wir heute erreicht haben, welche Dateien neu oder geändert sind und was als Nächstes offen ist. Höchstens zehn Zeilen.','Übergabe vor /clear','Nach /clear startest du mit: „Lies uebergabe.md und mach dort weiter.“')})
+    },
+    emp:{kind:'Nutzung', animTitle:'Deine', animGold:'ersten Befehle',
+      steps:['Benennen','Leeren','Zurückholen','Zurückspulen'],
+      intro:'Mit diesen vier Gewohnheiten hast du jede Sitzung im Griff:',
+      points:['Gib jeder Sitzung, an der du weiterarbeiten willst, mit <b>/rename</b> einen Namen.',
+        'Beginn mit <b>/clear</b> neu, sobald ein Thema erledigt ist, nach einer kurzen Übergabe.',
+        'Hol frühere Arbeit mit <b>/resume</b> zurück, statt sie neu zu erklären.',
+        'Hat Claude etwas falsch geändert, spul mit <b>Esc Esc</b> zurück, statt es reparieren zu lassen.']},
+    learn:{learn:['Du öffnest die Befehle mit <b>/</b> und findest sie mit /help.',
+        'Du hast deine Sitzungen mit <b>/rename, /clear</b> und /resume im Griff.',
+        'Du kennst die wichtigsten <b>Tasten</b>, vor allem Esc und Shift+Tab.',
+        'Du kennst die <b>vier Modi</b> und weißt, wann du welchen nimmst.'],
+      next:'/plan-mode-effort-levels'}
   });
 })();
 
