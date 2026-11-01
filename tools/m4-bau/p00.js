@@ -1,27 +1,27 @@
 /* ---------- Modul 4 · Uebersicht (/modul-4-claude-claude-code) ---------- */
 (function(){
   var N=window.__tsn4; if(!N) return;
-  var P=function(x,y,w,h){ return N.pos(x,y,w,h,430); };
+  var P=function(x,y,w,h){ return N.pos(x,y,w,h,372); };
   /* Opener: eine Woche im Backoffice nach Modul 4. Sieben Tage, darunter das Fundament,
      dann faellt jede Aufgabe auf ihren Tag, mit der Lektion, in der sie gebaut wird. */
   var DAYS=['Mo','Di','Mi','Do','Fr','Sa','So'];
   var cols=DAYS.map(function(d,i){
-    return '<div class="dy'+(i>4?' off':'')+'" data-s="1" style="'+P(14+i*140,20,132,300)+'"><span class="dn">'+d+'</span></div>';
+    return '<div class="dy'+(i>4?' off':'')+'" data-s="1" style="'+P(14+i*140,20,132,252)+'"><span class="dn">'+d+'</span></div>';
   }).join('');
   var TASKS=[
-    {d:0,s:3,l:'L 4.8',t:'Der Wochenblick liegt bereit',h:'Zeitplan, 6:00 Uhr'},
+    {d:0,s:3,l:'L 4.8',t:'Der Wochenblick liegt bereit',h:'Zeitplan, 6 Uhr'},
     {d:1,s:4,l:'L 4.5',t:'Lieferscheine der Woche einlesen',h:'Claude Code'},
     {d:2,s:5,l:'L 4.7',t:'Preis geändert, Datum gesetzt',h:'Automation'},
     {d:3,s:6,l:'L 4.6',t:'Neue Rezeptur, erster Vorschlag',h:'Notion Agent'},
     {d:4,s:6,l:'L 4.3',t:'Welches Gericht liegt über dem Ziel?',h:'Claude Code'}
   ];
   var tasks=TASKS.map(function(k,i){
-    return '<div class="tk t'+i+'" data-s="'+k.s+'" style="'+P(22+k.d*140,78,116,190)+'"><span class="tl">'+k.l+'</span><span class="tt">'+k.t+'</span><span class="th">'+k.h+'</span></div>';
+    return '<div class="tk t'+i+'" data-s="'+k.s+'" style="'+P(22+k.d*140,72,116,184)+'"><span class="tl">'+k.l+'</span><span class="tt">'+k.t+'</span><span class="th">'+k.h+'</span></div>';
   }).join('');
-  var rest='<div class="rs" data-s="2" style="'+P(14+5*140,150,272,40)+'">Service. Das Backoffice läuft ohne dich.</div>';
-  var base='<div class="fd" data-s="2" style="'+P(14,340,972,64)+'"><span class="fk">Fundament</span>'+
+  var rest='<div class="rs" data-s="2" style="'+P(14+5*140,126,272,40)+'">Service. Das Backoffice läuft ohne dich.</div>';
+  var base='<div class="fd" data-s="2" style="'+P(14,292,972,62)+'"><span class="fk">Fundament</span>'+
     '<span class="fc">L 4.1 Verbindung</span><span class="fc">L 4.2 Systemkarte</span><span class="fc">L 4.4 Vorschau vor jeder Änderung</span><span class="fc">L 4.9 Wer macht was</span></div>';
-  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/430">'+cols+rest+tasks+base+'</div></div>';
+  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/372">'+cols+rest+tasks+base+'</div></div>';
   var css=`
   #tsn4movanim .dy{border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),#05060b}
   #tsn4movanim .dy.off{border-style:dashed;border-color:rgba(255,255,255,.08);background:transparent}
