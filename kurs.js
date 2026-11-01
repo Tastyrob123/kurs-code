@@ -22678,9 +22678,9 @@ var TSISL_TEAM_ONB_V2=[
   }
   var CHART={
     "3a2b9546553480cb9516ef6275ba4f50":{ t:"Das Wareneinsatz-Diagramm",
-      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz (%)","Kategorie = Sweet Treats") },
+      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz ( % )","Kategorie = Sweet Treats") },
     "3a2b954655348075baced92bf0e5f0fa":{ t:"Das Wareneinsatz-Diagramm",
-      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz (%)",null) },
+      steps:chartSteps("DB Gerichte","Balken","X = Gericht, Y = Wareneinsatz ( % )",null) },
     "3a2b9546553480d58281fc63406c6a47":{ t:"Das DB-I-Diagramm",
       steps:chartSteps("DB Gerichte","Ring","Wert = DB I, Mitte = Durchschnitt",null) },
     "3a2b95465534808fb952fde414fe7678":{ t:"Das DB-II-Diagramm",
@@ -29048,8 +29048,8 @@ var TSISL_TEAM_ONB_V2=[
           R.txt('<p><strong>Der Seitenverlauf ist deine Versicherung.</strong> Über die drei Punkte oben rechts auf einer Seite öffnest du ihren Verlauf und holst einen früheren Stand zurück. Im Free-Plan reicht er sieben Tage zurück, bei Plus dreißig, bei Business neunzig. Ein Export als CSV sichert deine Zahlen, aber nicht die Verknüpfungen dazwischen. Er ersetzt den Verlauf deshalb nicht.</p>')
         ]}),
         R.sec({eb:'Mit Notion AI', title:'Lass die KI die <span class="g">Lücken</span> finden', lead:'Wenn du einen Plan mit Notion AI hast, kann der Agent deine Datenbanken lesen und dir sagen, wo etwas fehlt. Prüfen und korrigieren musst du selbst.', blocks:[
-          R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen kein Inventarprodukt verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
-          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventarprodukt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
+          R.copy('Prompt für den Notion Agent','Prüfe die Datenbank „DB IV : Zutaten". Liste mir alle Zutaten auf, bei denen in der Spalte Inventar Produkt nichts verknüpft ist oder die Spalte Preis / Portion 0 € zeigt. Ändere nichts, zeig mir nur die Liste mit dem Namen der Zutat.','prompt','Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Das „Ändere nichts" im Prompt ist Absicht: Erst schaust du dir die Liste an, dann entscheidest du.'),
+          R.txt('<p><strong>Dasselbe geht ohne KI.</strong> Leg in den Zutaten eine Ansicht <em>Ohne Preis</em> an, mit dem Filter Inventar Produkt ist leer. Sie bleibt leer, solange alles stimmt, und zeigt dir jeden neuen Fehler sofort. Das ist die verlässlichste Kontrolle, die es gibt, und sie kostet nichts.</p>')
         ]}),
         {emp:{kind:'Nutzung', animTitle:'Fünf Minuten', animGold:'pro Woche', steps:['Kalkulation sortieren','Ausreißer verfolgen','Ohne-Preis-Ansicht','Verlauf kennen'],
           intro:'Eine Vorlage bleibt verlässlich, wenn du einmal pro Woche kurz hineinschaust, bevor sich ein Fehler durch die Monatszahlen zieht.',
@@ -30108,7 +30108,7 @@ var TSISL_TEAM_ONB_V2=[
         {eb:'Link',t:'Vorlage öffnen und duplizieren',html:'<p>Öffne den Link zur Vorlage. Oben rechts steht <span class="tsn2-path">Duplizieren</span>. Notion fragt dich danach, in welchen Workspace die Kopie soll.</p>'+goBtn()},
         {eb:'Ablage',t:'Deine Kopie finden',html:'<p>Die Vorlage landet in deiner Seitenleiste im Bereich <span class="tsn2-path">Privat</span>, mit allen Unterseiten und Datenbanken. Öffne sie einmal und gib Notion einen Moment, bis alle Datenbanken geladen sind. Markier die Startseite als Favorit, dann bist du später mit einem Klick dort.</p>'},
         {eb:'Team',t:'In einen Teamspace verschieben',html:'<p>Arbeitet dein Team mit, gehört das Backoffice in einen Teamspace statt in deinen privaten Bereich. Zieh die Startseite in der Seitenleiste dorthin und lege fest, wer was darf.</p><p>Für Mitarbeiter, die nur Einträge machen sollen, gibt es bei Datenbanken die Stufe <span class="tsn2-path">Kann Inhalt bearbeiten</span>. Damit legen sie Zeilen an und ändern Werte, an Spalten und Formeln kommen sie nicht heran. Wie die Stufen allgemein funktionieren, steht in Lektion 1.9.</p>'},
-        {eb:'Probe',t:'Einmal testen, ob alles rechnet',html:'<p>Leg in der Inventurliste einen Probe-Eintrag an: Name <b>Testprodukt</b>, bei Menge / Unit <span class="tsn2-mono">1 kg</span>, bei Preis pro Unit (€) <span class="tsn2-mono">10</span>. Zeigt die Spalte Preis / Kg danach 10 Euro, rechnen die Formeln in deiner Kopie. Den Probe-Eintrag löschst du danach wieder.</p>'}
+        {eb:'Probe',t:'Einmal testen, ob alles rechnet',html:'<p>Leg in der Inventurliste einen Probe-Eintrag an: Name <b>Testprodukt</b>, bei Menge / Unit <span class="tsn2-mono">1 kg</span>, bei Preis pro Unit (€) <span class="tsn2-mono">10</span>. Zeigt die Spalte Preis / KG danach 10 Euro, rechnen die Formeln in deiner Kopie. Den Probe-Eintrag löschst du danach wieder.</p>'}
       ])));
 
     /* 02 Reihenfolge */
