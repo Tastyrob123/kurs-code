@@ -132,50 +132,46 @@
 (function(){
   var N=window.__tsn4; if(!N) return;
   var P=function(x,y,w,h){ return N.pos(x,y,w,h,430); };
-  var term='<div class="cardx pn t0" data-s="1" style="'+P(30,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div>'+
-    '<div class="tl mono" data-s="2"><span class="pr">$</span> claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp</div>'+
-    '<div class="tl mono ok" data-s="2">Added HTTP MCP server notion</div>'+
-    '<div class="tl mono" data-s="3"><span class="pr">$</span> claude mcp list</div>'+
-    '<div class="tl mono st1" data-s="3"><span class="w">notion · ! Needs authentication</span><span class="ok c">notion · ✔ Connected</span></div></div>';
-  var login='<div class="cardx pn t1" data-s="1" style="'+P(355,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Browser · Anmeldung</span></div>'+
+  var term='<div class="tw pn" data-s="1" style="'+P(30,40,290,330)+'"><div class="tbar"><i></i><i></i><i></i><span>Backoffice — zsh</span></div>'+
+    '<div class="tl" data-s="2">~/Backoffice % claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp</div>'+
+    '<div class="tl" data-s="2">Added HTTP MCP server notion with URL: https://mcp.notion.com/mcp to user config</div>'+
+    '<div class="tl" data-s="3">~/Backoffice % claude mcp list</div>'+
+    '<div class="tl st1" data-s="3"><span class="w">notion: https://mcp.notion.com/mcp (HTTP) - ! Needs authentication</span><span class="c">notion: https://mcp.notion.com/mcp (HTTP) - ✔ Connected</span></div></div>';
+  var login='<div class="nw pn lgw" data-s="1" style="'+P(355,40,290,330)+'"><div class="url"><i></i><i></i><i></i><span>notion.com</span></div>'+
     '<div class="lg" data-s="3"><div class="nlogo">N</div><div class="lgt">Claude Code möchte auf deinen Notion-Workspace zugreifen.</div>'+
-    '<div class="ws"><span>Workspace</span><b>Trattoria Lindenhof</b></div><div class="btn">Zugriff erlauben</div><div class="lgf">Einmalig. Danach merkt sich Claude Code die Anmeldung.</div></div></div>';
-  var PAGES=[['Foodquartier',1],['Drinksquartier',1],['Finance Studio',1],['Key Metrics',1],['Operations Area',1],['Gesellschafter · privat',0]];
-  var ws='<div class="cardx pn t2" data-s="1" style="'+P(680,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Dein Notion</span></div><div class="side">'+
-    PAGES.map(function(p,i){ return '<div class="pg '+(p[1]?'y':'n')+' g'+i+'"><span class="dot"></span>'+p[0]+(p[1]?'':'<em>gesperrt</em>')+'</div>'; }).join('')+'</div>'+
-    '<div class="rule" data-s="5">Für dich gesperrt, also auch für Claude</div></div>';
+    '<div class="ws"><span>Workspace</span><b>Trattoria Lindenhof</b></div><div class="nbtn btn">Zugriff erlauben</div><div class="lgf">Einmal anmelden, danach bleibt die Verbindung bestehen.</div></div></div>';
+  var PAGES=['Foodquartier','Drinksquartier','Finance Studio','Key Metrics','Operations Area'];
+  var ws='<div class="nw pn wsw" data-s="1" style="'+P(680,40,290,330)+'"><div class="nside">'+
+    '<div class="nrow wsn"><span class="wsl">T</span>Trattoria Lindenhof</div><div class="nsec">Teamspaces</div>'+
+    PAGES.map(function(p,i){ return '<div class="nrow g'+i+'">'+N.NCHEV+N.NPAGE+'<span>'+p+'</span></div>'; }).join('')+
+    '<div class="nsec">Privat</div><div class="nrow">'+N.NCHEV+N.NPAGE+'<span>Notizen</span></div></div></div>'+
+    '<div class="rule" data-s="5" style="'+P(680,382,290,34)+'">Was dein Konto nicht sieht, sieht Claude nicht</div>';
   var lines='<svg class="lines" viewBox="0 0 1000 430" preserveAspectRatio="none">'+
     '<path class="ln" pathLength="1" data-s="3" d="M322 205 H353"/><path class="sp" pathLength="1" d="M322 205 H353"/>'+
     '<path class="ln" pathLength="1" data-s="4" d="M647 205 H678"/><path class="sp" pathLength="1" style="animation-delay:1.2s" d="M647 205 H678"/></svg>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/430">'+lines+term+login+ws+'</div></div>';
-  var css=`
-  #tsn4a1anim .pn{overflow:hidden;display:flex;flex-direction:column}
-  #tsn4a1anim .bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
-  #tsn4a1anim .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
-  #tsn4a1anim .bar span{margin-left:8px;font:600 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-  #tsn4a1anim .tl{font-size:11.5px;line-height:1.6;color:#efe6d2;padding:8px 14px 0;word-break:break-all}
-  #tsn4a1anim .tl .pr{color:#c7b489}
+  var css=N.nCSS('tsn4a1anim')+`
+  #tsn4a1anim .pn{transition:box-shadow .7s cubic-bezier(.16,1,.3,1),border-color .7s cubic-bezier(.16,1,.3,1)}
+  #tsn4a1anim .pn.lit{border-color:rgba(199,180,137,.7);box-shadow:0 30px 70px -30px rgba(0,0,0,.95),0 0 0 4px rgba(199,180,137,.12),0 0 40px rgba(199,180,137,.2)}
   #tsn4a1anim .st1 .c{display:none}
   #tsn4a1anim.done .st1 .w{display:none}#tsn4a1anim.done .st1 .c{display:inline}
-  #tsn4a1anim .st1 .w{color:#c7b489}
-  #tsn4a1anim .lg{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 20px;gap:12px}
-  #tsn4a1anim .nlogo{width:40px;height:40px;border-radius:9px;background:#fff;color:#05060b;font:700 22px/40px Georgia,serif}
-  #tsn4a1anim .lgt{font-size:13px;line-height:1.5;color:#fff}
-  #tsn4a1anim .ws{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.86)}
-  #tsn4a1anim .ws b{color:#fff;font-weight:600}
-  #tsn4a1anim .btn{width:100%;height:36px;border-radius:9px;background:#c7b489;color:#05060b;font:700 13px/36px ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .4s cubic-bezier(.16,1,.3,1)}
-  #tsn4a1anim.press .btn{transform:scale(.95);box-shadow:0 0 0 6px rgba(199,180,137,.2)}
-  #tsn4a1anim .lgf{font-size:11px;line-height:1.45;color:rgba(255,255,255,.86)}
-  #tsn4a1anim .side{padding:12px 12px;display:flex;flex-direction:column;gap:7px}
-  #tsn4a1anim .pg{display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;border-radius:8px;font-size:12.5px;color:rgba(255,255,255,.55);border:1px solid transparent;transition:all .5s ${N.EASE}}
-  #tsn4a1anim .pg .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .5s cubic-bezier(.16,1,.3,1)}
-  #tsn4a1anim .pg em{margin-left:auto;font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#e35d76}
-  #tsn4a1anim .pg.y.lit{color:#fff;border-color:rgba(199,180,137,.35);background:rgba(199,180,137,.08)}
-  #tsn4a1anim .pg.y.lit .dot{background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.8)}
-  #tsn4a1anim .pg.n{border-color:rgba(227,37,82,.25)}
-  #tsn4a1anim .rule{margin:auto 12px 14px;padding:9px 10px;border-radius:9px;border:1px solid rgba(227,37,82,.35);font-size:11.5px;line-height:1.4;text-align:center;color:#fff}
+  #tsn4a1anim .lgw .url{height:28px;flex:0 0 28px;display:flex;align-items:center;gap:7px;padding:0 10px;background:#2b2b2b}
+  #tsn4a1anim .lgw .url i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.18)}
+  #tsn4a1anim .lgw .url span{flex:1;margin:0 30px 0 6px;height:18px;border-radius:5px;background:#1e1e1e;font:500 11px/18px -apple-system,BlinkMacSystemFont,sans-serif;color:rgba(255,255,255,.7);text-align:center}
+  #tsn4a1anim .lg{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 22px;gap:14px}
+  #tsn4a1anim .nlogo{width:40px;height:40px;border-radius:8px;background:#fff;color:#191919;font:700 24px/40px Georgia,serif}
+  #tsn4a1anim .lgt{font-size:14px;line-height:21px;color:rgb(240,239,237)}
+  #tsn4a1anim .ws{width:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,243,.082);font-size:14px;color:rgb(173,169,163)}
+  #tsn4a1anim .ws b{color:rgb(240,239,237);font-weight:500}
+  #tsn4a1anim .btn{width:100%;justify-content:center;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+  #tsn4a1anim.press .btn{transform:scale(.95)}
+  #tsn4a1anim .lgf{font-size:12px;line-height:18px;color:rgb(173,169,163)}
+  #tsn4a1anim .wsw .nside{flex:1}
+  #tsn4a1anim .nrow.wsn{font-weight:500;color:rgb(240,239,237)}
+  #tsn4a1anim .wsl{width:20px;height:20px;border-radius:4px;background:rgb(173,169,163);color:#191919;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;margin-right:4px}
+  #tsn4a1anim .rule{display:flex;align-items:center;justify-content:center;padding:0 10px;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:12px;color:#efe6d2;text-align:center}
   `;
-  function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('lit', i<n); } }
+  function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('on', i<n); } var w=el.querySelector('.wsw'); if(w) w.classList.toggle('lit', n>0); }
   N.page({
     key:'tsn4a1', re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/,
     eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
@@ -196,7 +192,7 @@
       reset:function(el){ setG(el,0); el.classList.remove('done','press'); },
       onBeat:function(el,i,T,jump){
         if(i===2){ T.at(jump?0:1500,function(){ el.classList.add('press'); }); T.at(jump?0:1900,function(){ el.classList.remove('press'); }); }
-        if(i===3){ el.classList.add('done'); for(var k=0;k<5;k++){ (function(k){ T.at(jump?0:k*260,function(){ var g=el.querySelector('.g'+k); if(g) g.classList.add('lit'); }); })(k); } }
+        if(i===3){ el.classList.add('done'); for(var k=0;k<5;k++){ (function(k){ T.at(jump?0:k*260,function(){ setG(el,k+1); }); })(k); } }
       },
       final:function(el){ setG(el,5); el.classList.add('done'); }
     },

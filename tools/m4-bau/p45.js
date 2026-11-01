@@ -10,11 +10,18 @@
     '<div class="cardx src" data-s="1" style="'+P(20,120,185,160)+'"><span class="md"><img src="'+I+'z-tomate.webp" alt=""></span><span class="k">Vorschlag von Claude</span><span class="t">Tomaten, Einkaufspreis</span><span class="v mono">2,40 € → 2,65 €</span></div>'+
     '<div class="cardx gt g1" data-s="1" style="'+P(232,60,165,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Einkaufspreis</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
     '<div class="cardx gt g2" data-s="1" style="'+P(432,60,165,280)+'"><span class="n">02</span><span class="h">Dein Okay</span><div class="yes">Ja, schreiben</div><span class="f">Claude Code fragt zusätzlich vor jedem Schreibzugriff.</span></div>'+
-    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><span class="n">N</span><span class="h">Inventurliste</span><div class="nr"><span>Tomaten</span><b class="nv">2,40 €</b></div><span class="f">Geschrieben wird erst jetzt.</span></div>'+
+    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><div class="nw mini"><div class="nbar">'+N.nic('table')+'<span>Inventurliste</span></div><table class="nt"><colgroup><col style="width:42%"><col style="width:58%"></colgroup><tr><th><span>'+N.nic('title')+'Name</span></th><th><span>'+N.nic('rollup')+'Preis / KG</span></th></tr><tr><td>Tomaten</td><td class="r nv">2,40 €</td></tr></table></div><span class="f">Geschrieben wird erst nach deinem Okay.</span></div>'+
     '<div class="cardx gt g4" data-s="1" style="'+P(832,60,165,280)+'"><span class="n">03</span><span class="h">Verlauf</span><div class="clk"><i></i></div><span class="f">Jede Änderung lässt sich zurückholen.</span></div>'+
     '<div class="mv" style="'+P(0,0,1000,400)+'"><span class="tok mono">2,65 €</span></div>'+
   '</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a4anim')+`
+  #tsn4a4anim .mini{width:100%;margin-top:6px}
+  #tsn4a4anim .mini .nbar{height:34px;flex-basis:34px;font-size:12px;padding:0 10px}
+  #tsn4a4anim .mini table.nt{font-size:11px;table-layout:fixed}
+  #tsn4a4anim .mini table.nt th{height:28px;font-size:10px;padding:0 4px}
+  #tsn4a4anim .mini table.nt th>span{gap:4px}
+  #tsn4a4anim .mini table.nt td{height:32px;padding:0 5px}
+  #tsn4a4anim .mini .ni{width:12px;height:12px;flex-basis:12px}
   #tsn4a4anim .src{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center}
   #tsn4a4anim .src .md{width:54px;height:54px;display:block}
   #tsn4a4anim .src .k{font:600 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
@@ -29,10 +36,6 @@
   #tsn4a4anim .pv span{color:rgba(255,255,255,.62)}#tsn4a4anim .pv b{color:#efe6d2}#tsn4a4anim .pv s{color:rgba(255,255,255,.62)}
   #tsn4a4anim .yes{margin-top:14px;padding:10px 14px;border-radius:10px;background:#c7b489;color:#05060b;font:700 13px/1 ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a4anim.press .yes{transform:scale(.94);box-shadow:0 0 0 7px rgba(199,180,137,.2)}
-  #tsn4a4anim .nr{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#fff;transition:background .6s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a4anim .nr b{color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tsn4a4anim.k4 .nr{background:rgba(143,203,170,.1);border-color:rgba(143,203,170,.5)}
-  #tsn4a4anim .row .n{font-family:Georgia,serif;background:#fff;color:#05060b;border:0}
   #tsn4a4anim .clk{position:relative;width:62px;height:62px;border-radius:50%;border:1.5px solid rgba(199,180,137,.5)}
   #tsn4a4anim .clk i{position:absolute;left:50%;top:50%;width:2px;height:24px;margin-left:-1px;background:#c7b489;transform-origin:50% 0;transform:rotate(180deg);transition:transform 1.4s ${N.EASE}}
   #tsn4a4anim.k5 .clk i{transform:rotate(-60deg)}
@@ -147,9 +150,16 @@
   var paper='<div class="paper" data-s="1" style="'+P(20,30,230,238)+'"><div class="ph"><b>Gemüse Bauer</b><span>Lieferschein</span></div>'+
     SL.map(function(r,i){ return '<div class="pl l'+i+'"><span>'+r[0]+'</span><span>'+r[1]+'</span><b>'+r[2]+'</b></div>'; }).join('')+
     '<div class="psum">Preise netto je Einheit</div><i class="scan"></i></div>';
-  var INV=[['Tomaten','2,40 €','2,65 €','up'],['Basilikum','1,90 €','1,90 €','same'],['Parmigiano Reggiano','','offen: Name auf dem Schein anders','miss'],['Zitronen','2,80 €','3,10 €','up']];
-  var inv='<div class="cardx iv" data-s="1" style="'+P(288,30,692,238)+'"><div class="ivh"><span class="nt">N</span>DB 0 · Inventurliste <em class="ok2">Freigegeben</em></div>'+
-    INV.map(function(r,i){ return '<div class="ir r'+i+' '+r[3]+'"><span class="a">'+r[0]+'</span>'+(r[3]==='miss'?'<span class="m">'+r[2]+'</span>':r[3]==='same'?'<b class="sv">'+r[1]+'</b>':'<span class="o">'+r[1]+'</span><span class="ar">→</span><b class="nw">'+r[2]+'</b>')+'</div>'; }).join('')+'</div>';
+  var inv='<div class="tw iv" data-s="1" style="'+P(288,30,692,238)+'"><div class="tbar"><i></i><i></i><i></i><span>Backoffice — claude</span></div>'+
+    '<div class="tl dim">&gt; Lies alle Lieferscheine im Ordner „Lieferscheine neu“ …</div>'+
+    '<div class="tl p3">Vorschau · Gemüse Bauer, Lieferschein</div>'+
+    '<div class="tl p3 dim">Artikel            alt       neu       Abweichung</div>'+
+    '<div class="tl p3">Tomaten            2,40 €    2,65 €    +10,4 %</div>'+
+    '<div class="tl p3">Basilikum          1,90 €    1,90 €    unverändert</div>'+
+    '<div class="tl p3">Zitronen           2,80 €    3,10 €    +10,7 %</div>'+
+    '<div class="tl p3">Nicht sicher zugeordnet: „Parm. Regg. 24M“</div>'+
+    '<div class="tl p4">&gt; Ja, schreiben</div>'+
+    '<div class="tl p4">Zwei Preise aktualisiert. Eine Position wartet auf dich.</div></div>';
   var CH=[{x:400,img:I+'z-tomate.webp',l:'Zutat',v:'2,40 € je kg',v2:'2,65 € je kg'},{x:600,img:R+'zutaten.webp',l:'Portion 120 g',v:'0,29 €',v2:'0,32 €'},{x:800,img:I+'g-burrata.webp',l:'Burrata',v:'24,1 % Wareneinsatz',v2:'24,3 % Wareneinsatz'}];
   var chain=CH.map(function(c,i){ return '<div class="md br ch c'+i+'" data-s="1" style="'+P(c.x-46,300,92,92)+'"><img src="'+c.img+'" alt=""></div><div class="lbl" data-s="1" style="'+P(c.x-90,400,180,14)+'">'+c.l+'</div><div class="cv cvv'+i+'" data-s="1" style="'+P(c.x-90,420,180,22)+'"><span class="o">'+c.v+'</span><span class="n">'+c.v2+'</span></div>'; }).join('');
   var lines='<svg class="lines" viewBox="0 0 1000 470" preserveAspectRatio="none">'+
@@ -158,7 +168,10 @@
     '<path class="sp" pathLength="1" style="animation-delay:.6s" d="M448 346 H552"/><path class="sp" pathLength="1" style="animation-delay:1.2s" d="M648 346 H752"/></svg>';
   var side='<div class="cardx sm" data-s="1" style="'+P(20,300,230,150)+'"><span class="k">Ergebnis</span><div class="sr"><b class="c1n">0</b><span>Preise neu</span></div><div class="sr"><b class="c2n">0</b><span>unverändert</span></div><div class="sr miss2"><b class="c3n">0</b><span>zu klären</span></div></div>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/470">'+lines+paper+inv+side+chain+'</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a5anim')+`
+  #tsn4a5anim .iv .tl{font-size:11.5px;line-height:1.7;white-space:pre}
+  #tsn4a5anim.js:not(.k3) .iv .p3,#tsn4a5anim.js:not(.k4) .iv .p4{opacity:0}
+  #tsn4a5anim .iv .p3,#tsn4a5anim .iv .p4{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a5anim .paper{border-radius:7px;background:linear-gradient(#efe6d2,#d8c9ab);box-shadow:0 26px 50px -24px rgba(0,0,0,.95);padding:18px 16px;color:#05060b;overflow:hidden}
   #tsn4a5anim .ph{display:flex;flex-direction:column;gap:3px;padding-bottom:12px;margin-bottom:10px;border-bottom:1px dashed rgba(5,6,11,.35)}
   #tsn4a5anim .ph b{font:700 15px/1.2 Georgia,serif}#tsn4a5anim .ph span{font:600 9px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(5,6,11,.7)}
@@ -169,21 +182,7 @@
   #tsn4a5anim .scan{position:absolute;left:0;right:0;top:0;height:2px;background:#c7b489;box-shadow:0 0 18px 3px rgba(199,180,137,.75);opacity:0}
   #tsn4a5anim.scanning .scan{animation:tsn4a5scan 2.4s cubic-bezier(.45,.05,.55,.95) 1 both}
   @keyframes tsn4a5scan{0%{opacity:0;transform:translateY(60px)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(330px)}}
-  #tsn4a5anim .iv{overflow:hidden}
-  #tsn4a5anim .ivh{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.SANS};color:#fff}
-  #tsn4a5anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a5anim .ok2{margin-left:auto;font-style:normal;font:700 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#8FCBAA;border:1px solid rgba(143,203,170,.5);padding:4px 7px;border-radius:5px;opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
-  #tsn4a5anim.k4 .ok2{opacity:1}
-  #tsn4a5anim .ir{display:flex;align-items:center;gap:9px;padding:13px 16px;font-size:12.5px;color:#fff;border-bottom:1px solid rgba(255,255,255,.05)}
-  #tsn4a5anim .ir .a{flex:1}#tsn4a5anim .ir .o{color:rgba(255,255,255,.62)}#tsn4a5anim .ir .ar{color:#c7b489}#tsn4a5anim .ir .nw{color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tsn4a5anim .ir .m{font-size:11px;color:#fff;padding:4px 8px;border-radius:6px;border:1px solid rgba(227,37,82,.5);background:rgba(227,37,82,.08)}
-  #tsn4a5anim.js:not(.k3) .ir .ar,#tsn4a5anim.js:not(.k3) .ir .nw,#tsn4a5anim.js:not(.k3) .ir .m{opacity:0}
-  #tsn4a5anim .ir .ar,#tsn4a5anim .ir .nw,#tsn4a5anim .ir .m{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a5anim.k3:not(.k4) .ir.up .o{text-decoration:line-through}
-  #tsn4a5anim.k4 .ir.up .o,#tsn4a5anim.k4 .ir.up .ar{display:none}
-  #tsn4a5anim.k4 .ir.up{background:rgba(143,203,170,.07)}
   #tsn4a5anim .sm{display:flex;flex-direction:column;gap:6px;padding:14px 18px}
-  #tsn4a5anim .ir .sv{color:#efe6d2}#tsn4a5anim .ir .un{font-size:10.5px;letter-spacing:.06em;color:rgba(255,255,255,.62)}
   #tsn4a5anim .sm .k{font:600 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:4px}
   #tsn4a5anim .sr{display:flex;align-items:baseline;gap:10px;font-size:13px;color:rgba(255,255,255,.86)}
   #tsn4a5anim .sr b{font-family:${N.DISP};font-size:24px;line-height:1;color:#efe6d2;min-width:30px;font-variant-numeric:tabular-nums}
@@ -226,18 +225,18 @@
         '<h3>Ein Ordner, ein Prompt, eine <span class="g">Vorschau</span></h3>'+
         '<p class="lead">Leg in deinem Backoffice-Ordner zwei Unterordner an: <b>Lieferscheine neu</b> und <b>Lieferscheine erledigt</b>. In den ersten kommt alles, was im Lauf der Woche reinkommt, als PDF aus der Mail oder als Foto vom Handy. Gerade die Fotos sind ein Fall für Claude, denn Notion AI nimmt Dateien wie PDF und Excel an, Fotos aber nicht.</p>'+
         '<p>Einmal in der Woche, oder wann immer es für dich passt, startest du Claude Code im Backoffice-Ordner und gibst diesen Auftrag:</p>'+
-        N.cmd('Prompt', 'Lies alle Lieferscheine im Ordner „Lieferscheine neu“.\n\nOrdne jede Position einem Artikel meiner Inventurliste in Notion zu. Nutze dafür die Namensliste meiner Lieferanten in der CLAUDE.md. Positionen, die du nicht sicher zuordnen kannst, schreibst du auf eine eigene Liste und rätst nichts.\n\nZeig mir dann eine Vorschau aller Artikel, deren Einkaufspreis sich geändert hat: Artikel, Lieferant, alter Preis, neuer Preis, Abweichung in Prozent. Achte darauf, dass Einheit und Preis zu meiner Inventurliste passen, und nenne mir jede Abweichung bei der Einheit.\n\nSchreib erst nach meinem „Ja, schreiben“. Setz dabei bei jedem geänderten Artikel „Vorheriger Preis“ auf den alten Wert und „Preis geändert am“ auf heute. Verschieb danach die erledigten Scheine in „Lieferscheine erledigt“.')+
+        N.cmd('Prompt', 'Lies alle Lieferscheine im Ordner „Lieferscheine neu“.\n\nOrdne jede Position dem passenden Artikel in meinem Backoffice zu. Nutze dafür die Namensliste meiner Lieferanten in der CLAUDE.md. Positionen, die du nicht sicher zuordnen kannst, schreibst du auf eine eigene Liste und rätst nichts.\n\nZeig mir dann eine Vorschau aller Artikel, deren Einkaufspreis sich geändert hat: Artikel, Lieferant, alter Preis, neuer Preis, Abweichung in Prozent. Achte darauf, dass Einheit und Preis zu meiner Inventurliste passen, und nenne mir jede Abweichung bei der Einheit.\n\nSchreib erst nach meinem „Ja, schreiben“. Trag den neuen Preis dort ein, wo er laut Systemkarte gepflegt wird, und setz bei jedem geänderten Artikel „Vorheriger Preis“ auf den alten Wert und „Preis geändert am“ auf heute. Verschieb danach die erledigten Scheine in „Lieferscheine erledigt“.')+
         '<p>Du bekommst die Vorschau, liest sie, klärst die offenen Positionen und gibst frei. Den Rest erledigt deine Vorlage: Die Zutat übernimmt den neuen Preis, jede Rezeptur und jedes Gericht rechnet neu, und dein Wareneinsatz steht aktuell da.</p>'
       },
       {id:'tsn4a5-felder', html:
         '<div class="tsn4-eb">Einmal vorbereiten</div>'+
         '<h3>Zwei Felder für die <span class="g">Preisgeschichte</span></h3>'+
-        '<p class="lead">Damit du später sehen kannst, was sich wann verändert hat, braucht deine Inventurliste ein Gedächtnis für den alten Preis. Das sind zwei zusätzliche Felder, die du einmal anlegst.</p>'+
+        '<p class="lead">Damit du später sehen kannst, was sich wann verändert hat, braucht die Datenbank, in der deine Einkaufspreise gepflegt werden, ein Gedächtnis für den alten Preis. Welche das in deiner Vorlage ist, steht in deiner Systemkarte. Das sind zwei zusätzliche Felder, die du einmal anlegst.</p>'+
         '<div class="tsn4-cards c2">'+
           '<div class="tsn4-card"><span class="k">Zahl</span><div class="n">Vorheriger Preis</div><hr><p>Hier schreibt Claude beim Aktualisieren den bisherigen Einkaufspreis hinein. So lässt sich jede Erhöhung in Euro und Prozent nachvollziehen.</p></div>'+
           '<div class="tsn4-card"><span class="k">Datum</span><div class="n">Preis geändert am</div><hr><p>Das Datum der letzten Änderung. Darauf greifen die Automation in Lektion sieben und der Wochenbericht in Lektion acht zurück.</p></div>'+
         '</div>'+
-        N.cmd('Prompt', 'Leg in meiner Inventurliste zwei neue Felder an: „Vorheriger Preis“ als Zahl im Euro-Format und „Preis geändert am“ als Datum. Zeig mir vorher, was du anlegst. Ergänze danach die Systemkarte in der CLAUDE.md um beide Felder.')
+        N.cmd('Prompt', 'Leg in der Datenbank, in der laut Systemkarte meine Einkaufspreise stehen, zwei neue Felder an: „Vorheriger Preis“ als Zahl im Euro-Format und „Preis geändert am“ als Datum. Zeig mir vorher, was du anlegst. Ergänze danach die Systemkarte in der CLAUDE.md um beide Felder.')
       },
       {id:'tsn4a5-namen', html:
         '<div class="tsn4-eb">Die eigentliche Arbeit</div>'+

@@ -237,7 +237,7 @@
         '<table class="tsn4-tbl"><tr><th>Datenbank</th><th>Wenn</th><th>Dann</th></tr>'+
           '<tr><td><b>Inventurliste</b></td><td>das Auswahlfeld Bestand auf „Nachbestellen“ gesetzt wird</td><td>Benachrichtigung an die Person, die bestellt, mit dem Artikel und dem Lieferpartner</td></tr>'+
           '<tr><td><b>Gerichte & Getränke</b></td><td>der Status auf „Auf der Karte“ wechselt</td><td>Eigenschaft „Auf der Karte seit“ auf das heutige Datum setzen</td></tr>'+
-          '<tr><td><b>Inventurliste</b></td><td>das Feld Einkaufspreis bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
+          '<tr><td><b>Datenbank mit deinen Einkaufspreisen</b></td><td>der Einkaufspreis bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
           '<tr><td><b>Key Metrics</b></td><td>wiederkehrend, am ersten Tag des Monats</td><td>Seite für die Monatsauswertung anlegen, mit Datum im Titel</td></tr>'+
         '</table>'+
         '<p>Die dritte Automation arbeitet mit den Feldern aus Lektion fünf zusammen. Trägt Claude einen Preis ein, setzt es das Datum ohnehin. Ändert jemand den Preis von Hand, sorgt die Automation dafür, dass das Datum trotzdem stimmt.</p>'+

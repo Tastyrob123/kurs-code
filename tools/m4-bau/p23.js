@@ -2,46 +2,43 @@
 (function(){
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG, P=function(x,y,w,h){ return N.pos(x,y,w,h,440); };
-  var COLS=[{n:'Name',t:'in'},{n:'Lieferpartner',t:'rel'},{n:'Einkaufspreis',t:'in'},{n:'Einheit',t:'in'},{n:'Gezählt',t:'in'},{n:'Wert gesamt',t:'calc'}];
-  var ROWS=[[I+'i-olivenoel.webp','Olivenöl','Feinkost Rossi','9,80','Flasche','6','58,80'],
-            [I+'i-balsamico.webp','Balsamico','Feinkost Rossi','7,90','Flasche','4','31,60'],
-            [I+'i-meersalz.webp','Meersalz','Metro','2,90','Glas','9','26,10'],
-            [I+'z-tomate.webp','Tomaten','Gemüse Bauer','2,40','kg','12','28,80']];
-  var head=COLS.map(function(c,i){ return '<div class="th c'+i+' '+c.t+'"><span>'+c.n+'</span><em class="tg" data-s="'+(c.t==='in'?2:c.t==='rel'?3:4)+'">'+(c.t==='in'?'Eingabe':c.t==='rel'?'Verknüpfung':'Rechnet')+'</em></div>'; }).join('');
-  var rows=ROWS.map(function(r){ return '<div class="tr"><div class="td c0"><img src="'+r[0]+'" alt="" loading="lazy">'+r[1]+'</div><div class="td c1">'+r[2]+'</div><div class="td c2">'+r[3]+' €</div><div class="td c3">'+r[4]+'</div><div class="td c4">'+r[5]+'</div><div class="td c5">'+r[6]+' €</div></div>'; }).join('');
-  var table='<div class="cardx tb" data-s="1" style="'+P(20,40,590,350)+'"><div class="tbh"><span class="nt">N</span>DB 0 · Inventurliste<i class="scan"></i></div><div class="grid"><div class="trh">'+head+'</div>'+rows+'</div><div class="tbf">Beispielwerte</div></div>';
-  var file='<div class="cardx fl" data-s="1" style="'+P(650,40,330,350)+'"><div class="flh">CLAUDE.md <span>Ordner Backoffice</span></div><div class="code mono">'+
-    '<div data-s="5" class="k">## Systemkarte</div><div data-s="5">DB 0 Inventurliste</div><div data-s="5" class="i">Eingabe: Name, Einkaufspreis, Einheit, Gezählt</div><div data-s="5" class="i">Verknüpfung: Lieferpartner</div><div data-s="5" class="i r">Rechnet: Wert gesamt, nie schreiben</div>'+
-    '<div data-s="6" class="k sp6">## Regeln</div><div data-s="6">Zahlen nur aus Notion-Feldern</div><div data-s="6">Vorschau vor jeder Änderung</div><div data-s="6">Nichts löschen</div></div>'+
-    '<div class="rd" data-s="7">Wird bei jedem Start gelesen</div></div>';
-  var lines='<svg class="lines" viewBox="0 0 1000 440" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="5" d="M612 215 H648"/><path class="sp" pathLength="1" d="M612 215 H648"/></svg>';
-  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/440">'+lines+table+file+'</div></div>';
-  var css=`
-  #tsn4a2anim .tb{overflow:hidden;display:flex;flex-direction:column}
-  #tsn4a2anim .tbh{position:relative;display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.SANS};color:#fff}
-  #tsn4a2anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a2anim .grid{flex:1;display:flex;flex-direction:column;position:relative}
-  #tsn4a2anim .trh,#tsn4a2anim .tr{display:grid;grid-template-columns:1.25fr 1.15fr .95fr .8fr .7fr .95fr}
-  #tsn4a2anim .th{position:relative;padding:10px 10px 30px;font:600 10.5px/1.2 ${N.SANS};color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.08);transition:background .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a2anim .tg{position:absolute;left:10px;bottom:8px;font:700 8.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:4px 6px;border-radius:5px}
-  #tsn4a2anim .in .tg{color:#05060b;background:#c7b489}
-  #tsn4a2anim .rel .tg{color:#efe6d2;border:1px solid rgba(199,180,137,.6)}
-  #tsn4a2anim .calc .tg{color:#fff;border:1px solid rgba(255,255,255,.4)}
-  #tsn4a2anim .td{padding:15px 10px;font-size:12px;color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;transition:background .6s cubic-bezier(.16,1,.3,1),color .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a2anim .td img{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.4)}
-  #tsn4a2anim.k2 .c0,#tsn4a2anim.k2 .c2,#tsn4a2anim.k2 .c3,#tsn4a2anim.k2 .c4{background:rgba(199,180,137,.07)}
-  #tsn4a2anim.k3 .c1{background:rgba(199,180,137,.04)}
-  #tsn4a2anim.k4 .td.c5{color:#fff;background:rgba(255,255,255,.06)}
-  #tsn4a2anim .scan{position:absolute;left:0;top:44px;width:2px;height:300px;background:linear-gradient(rgba(199,180,137,0),#efe6d2,rgba(199,180,137,0));box-shadow:0 0 16px rgba(239,230,210,.7);opacity:0}
+  /* Echte Spalten der Inventurliste (Notion-API 01.11.2026), Werte = Beispielwerte */
+  var COLS=[{n:'Name',i:'title',t:'in',w:27},{n:'Lieferant',i:'rel',t:'rel',w:21},{n:'Gezählt Ltr./KG',i:'num',t:'in',w:18},{n:'Preis / KG',i:'rollup',t:'calc',w:15},{n:'Summe Monat',i:'formula',t:'calc',w:19}];
+  var ROWS=[['z-tomate','Tomaten','Gemüse Bauer','12','2,40 €','28,80 €'],['z-parmesan','Parmesan','Feinkost Rossi','3','21,40 €','64,20 €'],
+            ['z-mozzarella','Mozzarella','Feinkost Rossi','4','9,80 €','39,20 €'],['z-kartoffel','Kartoffeln','Gemüse Bauer','20','1,10 €','22,00 €']];
+  var TX=20, TW=590, x=TX+0, tags='';
+  COLS.forEach(function(c){ var w=TW*c.w/100; tags+='<div class="tgw" data-s="'+(c.t==='in'?2:c.t==='rel'?3:4)+'" style="'+P(x,40,w,24)+'"><em class="tg '+c.t+'">'+(c.t==='in'?'Eingabe':c.t==='rel'?'Verknüpfung':'Rechnet')+'</em></div>'; x+=w; });
+  var table='<div class="nw tb" data-s="1" style="'+P(TX,74,TW,316)+'"><div class="nbar">'+N.nic('table')+'<span>Backoffice</span><span class="sep">/</span><span>Inventurliste</span></div>'+
+    '<div class="dbt ntitle">Inventurliste</div>'+
+    '<table class="nt"><colgroup>'+COLS.map(function(c){ return '<col style="width:'+c.w+'%">'; }).join('')+'</colgroup><tr>'+COLS.map(function(c){ return '<th><span>'+N.nic(c.i)+c.n+'</span></th>'; }).join('')+'</tr>'+
+    ROWS.map(function(r){ return '<tr><td><span class="nm"><img src="'+I+r[0]+'.webp" alt="">'+r[1]+'</span></td><td class="lk">'+r[2]+'</td><td class="r">'+r[3]+'</td><td class="r">'+r[4]+'</td><td class="r">'+r[5]+'</td></tr>'; }).join('')+
+    '</table><i class="scan"></i></div>';
+  var file='<div class="tw fl" data-s="1" style="'+P(650,74,330,316)+'"><div class="tbar"><i></i><i></i><i></i><span>CLAUDE.md — Backoffice</span></div>'+
+    '<div class="tl h" data-s="5">## Systemkarte</div><div class="tl" data-s="5">Inventurliste</div><div class="tl" data-s="5">  Eingabe: Name, Gezählt Ltr./KG</div><div class="tl" data-s="5">  Verknüpfung: Lieferant</div><div class="tl" data-s="5">  Rechnet: Preis / KG (Rollup),</div><div class="tl" data-s="5">  Summe Monat (Formel), nie schreiben</div>'+
+    '<div class="tl h sp6" data-s="6">## Regeln</div><div class="tl" data-s="6">- Zahlen nur aus Notion-Feldern</div><div class="tl" data-s="6">- Vorschau vor jeder Änderung</div><div class="tl" data-s="6">- Nichts löschen</div></div>'+
+    '<div class="rd" data-s="7" style="'+P(650,400,330,30)+'">Wird bei jedem Start gelesen</div>';
+  var lines='<svg class="lines" viewBox="0 0 1000 440" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="5" d="M612 230 H648"/><path class="sp" pathLength="1" d="M612 230 H648"/></svg>';
+  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/440">'+lines+tags+table+file+'</div></div>';
+  var css=N.nCSS('tsn4a2anim')+`
+  #tsn4a2anim .tb{position:relative}
+  #tsn4a2anim .dbt{font-size:24px;line-height:30px;padding:2px 14px 10px}
+  #tsn4a2anim table.nt{font-size:12.5px}
+  #tsn4a2anim table.nt th{height:32px;font-size:12.5px}
+  #tsn4a2anim table.nt td{height:34px}
+  #tsn4a2anim .nm{display:inline-flex;align-items:center;gap:7px}
+  #tsn4a2anim .nm img{width:18px;height:18px;border-radius:4px;object-fit:cover}
+  #tsn4a2anim td.lk{text-decoration:underline;text-decoration-color:rgba(255,255,243,.25);text-underline-offset:3px}
+  #tsn4a2anim .tgw{display:flex;justify-content:center;align-items:center}
+  #tsn4a2anim .tg{font:700 9.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:5px 7px;border-radius:5px}
+  #tsn4a2anim .tg.in{color:#05060b;background:#c7b489}
+  #tsn4a2anim .tg.rel{color:#efe6d2;border:1px solid rgba(199,180,137,.6)}
+  #tsn4a2anim .tg.calc{color:#fff;border:1px solid rgba(255,255,255,.4)}
+  #tsn4a2anim .scan{position:absolute;left:0;top:44px;width:2px;height:270px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));opacity:0}
   #tsn4a2anim.scanning .scan{animation:tsn4a2scan 3.2s cubic-bezier(.45,.05,.55,.95) 1 both}
-  @keyframes tsn4a2scan{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(570px)}}
-  #tsn4a2anim .tbf{margin-top:auto;padding:9px 16px;font-size:10.5px;color:rgba(255,255,255,.86)}
-  #tsn4a2anim .fl{display:flex;flex-direction:column;overflow:hidden}
-  #tsn4a2anim .flh{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.MONO};color:#efe6d2;display:flex;justify-content:space-between}
-  #tsn4a2anim .flh span{font:600 9px/1.4 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
-  #tsn4a2anim .code{padding:12px 16px;font-size:11.5px;line-height:1.75;color:rgba(255,255,255,.86)}
-  #tsn4a2anim .code .k{color:#c7b489}#tsn4a2anim .code .i{padding-left:12px}#tsn4a2anim .code .r{color:#d8c9ab}#tsn4a2anim .code .sp6{margin-top:8px}
-  #tsn4a2anim .rd{margin:auto 14px 14px;padding:8px 10px;border-radius:9px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:11.5px;text-align:center;color:#efe6d2}
+  @keyframes tsn4a2scan{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(586px)}}
+  #tsn4a2anim .fl .tl{font-size:11.5px;line-height:1.75}
+  #tsn4a2anim .fl .h{font-weight:700}#tsn4a2anim .fl .sp6{margin-top:8px}
+  #tsn4a2anim .rd{display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:12px;color:#efe6d2}
   `;
   N.page({
     key:'tsn4a2', re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/,
@@ -54,10 +51,10 @@
       sub:'Claude geht jede Spalte deiner Vorlage durch und schreibt auf, welche du füllst und welche Notion selbst berechnet.',
       html:html, css:css,
       beats:[
-        {t:200, s:1, cap:'Links eine Datenbank aus deiner Vorlage, hier die Inventurliste. Rechts die CLAUDE.md, das Briefing, das Claude bei jedem Start in deinem Backoffice-Ordner liest.'},
-        {t:2800, s:2, cap:'Claude liest jede Spalte. <b>Eingabefelder</b> sind die, die du von Hand füllst: Name, Einkaufspreis, Einheit, gezählte Menge.'},
-        {t:5600, s:3, cap:'<b>Verknüpfungen</b> verbinden die Datenbanken miteinander, hier die Inventur mit dem Lieferpartner. Sie schreibt Claude nur nach deiner Freigabe.'},
-        {t:8000, s:4, cap:'Alles, was eine Formel oder ein Rollup ist, <b>rechnet Notion selbst</b>. Diese Felder fasst Claude nie an, es liest nur ihr Ergebnis.'},
+        {t:200, s:1, cap:'Links eine Datenbank aus deiner Vorlage, die Inventurliste, so wie sie in Notion aussieht. Rechts die CLAUDE.md, das Briefing, das Claude bei jedem Start in deinem Backoffice-Ordner liest.'},
+        {t:2800, s:2, cap:'Claude liest jede Spalte. <b>Eingabefelder</b> sind die, die du von Hand füllst, hier der Name und die gezählte Menge.'},
+        {t:5600, s:3, cap:'<b>Verknüpfungen</b> verbinden die Datenbanken miteinander, hier die Inventur mit dem Lieferanten. Sie schreibt Claude nur nach deiner Freigabe.'},
+        {t:8000, s:4, cap:'Alles, was eine Formel oder ein Rollup ist, <b>rechnet Notion selbst</b>. Der Preis je Kilo kommt per Rollup aus einer anderen Datenbank, die Summe aus einer Formel. Diese Felder liest Claude nur.'},
         {t:10600, s:5, cap:'Daraus entsteht die Systemkarte: je Datenbank eine kurze Liste, was Eingabe ist, was verknüpft ist und was rechnet.'},
         {t:13200, s:6, cap:'Darunter stehen deine Regeln. Zahlen kommen nur aus Notion, vor jeder Änderung gibt es eine Vorschau, und gelöscht wird nichts.'},
         {t:15600, s:7, cap:'Die Datei liegt in deinem Backoffice-Ordner und wird bei jedem Start gelesen. Du erklärst dein System ein einziges Mal.'}

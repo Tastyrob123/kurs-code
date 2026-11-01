@@ -8,14 +8,26 @@
     '<div class="day"><span>Montag</span><b class="tm">00:00</b></div></div>';
   var dev='<div class="cardx dv lap" data-s="1" style="'+P(380,70,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="7" y="3" width="26" height="17" rx="2"/><path d="M3 23h34l-2 3H5z"/></svg><span class="dn">Dein Laptop</span><span class="ds">zugeklappt</span></div>'+
           '<div class="cardx dv cl" data-s="1" style="'+P(380,220,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 24h17a7 7 0 0 0 0-14 9 9 0 0 0-17-1 7 7 0 0 0 0 15z"/></svg><span class="dn">Claude in der Cloud</span><span class="ds">führt die Aufgabe aus</span></div>';
-  var BL=[['Höchster Wareneinsatz',['g-rinderfilet','Rinderfilet 34,2 %'],['g-jakobsmuscheln','Jakobsmuscheln 31,5 %']],['Preise geändert',['z-tomate','Tomaten +10,4 %'],['z-zitrone','Zitronen +10,7 %']],['Über deiner Grenze',null,['','Ein Gericht über 32 %']],['Lücken',['g-pilz-ravioli','Pilz-Ravioli: Preis Steinpilze fehlt'],null]];
-  var page='<div class="cardx wb" data-s="1" style="'+P(600,16,380,418)+'"><div class="wh"><span class="nt">N</span><b>Wochenblick · Montag</b></div>'+
-    BL.map(function(b,i){ function ln(x){ return x?'<span class="bv">'+(x[0]?'<img src="'+I+x[0]+'.webp" alt="">':'')+x[1]+'</span>':''; } return '<div class="bk b'+i+'"><span class="bt">'+b[0]+'</span>'+ln(b[1])+ln(b[2])+'</div>'; }).join('')+
-    '<div class="ro">Nur gelesen · in den Datenbanken nichts geändert</div></div>';
+  var BL=[['Höchster Wareneinsatz',['g-rinderfilet','Rinderfilet 34,2 %'],['g-jakobsmuscheln','Jakobsmuscheln 31,5 %']],['Preise geändert',['z-tomate','Tomaten +10,4 %'],['z-zitrone','Zitronen +10,7 %']],['Über deiner Grenze',null,['','Ein Gericht über 32 %']],['Lücken',['g-pilz-ravioli','Pilz-Ravioli Steinpilze ohne Preis'],null]];
+  var page='<div class="nw wb" data-s="1" style="'+P(600,16,380,390)+'"><div class="nbar">'+N.NPAGE+'<span>Key Metrics</span><span class="sep">/</span><span>Wochenblick</span></div>'+
+    '<div class="pt ntitle">Wochenblick · Montag</div>'+
+    BL.map(function(b,i){ function ln(x){ return x?'<div class="bv">'+(x[0]?'<span class="mn"><img src="'+I+x[0]+'.webp" alt=""><u>'+x[1].split(' ')[0].replace(/:$/,'')+'</u></span> '+x[1].split(' ').slice(1).join(' '):x[1])+'</div>':''; } return '<div class="bk b'+i+'"><div class="bt">'+b[0]+'</div>'+ln(b[1])+ln(b[2])+'</div>'; }).join('')+
+    '</div><div class="ro" data-s="1" style="'+P(600,414,380,28)+'">Nur gelesen · in den Datenbanken nichts geändert</div>';
   var lines='<svg class="lines" viewBox="0 0 1000 450" preserveAspectRatio="none"><path class="ln dash" pathLength="1" data-s="1" d="M332 130 H378"/><path class="ln" pathLength="1" data-s="1" d="M332 280 H378"/><path class="ln" pathLength="1" data-s="1" d="M552 280 C576 280 576 225 598 225"/>'+
     '<path class="sp" pathLength="1" d="M332 280 H378"/><path class="sp" pathLength="1" style="animation-delay:.9s" d="M552 280 C576 280 576 225 598 225"/></svg>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/450">'+lines+clock+dev+page+'</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a8anim')+`
+  #tsn4a8anim .wb .pt{font-size:26px;line-height:32px;padding:4px 22px 8px}
+  #tsn4a8anim .bk{padding:4px 22px 6px;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  #tsn4a8anim .bt{font-size:14px;font-weight:600;line-height:22px;color:rgb(240,239,237)}
+  #tsn4a8anim .bv{font-size:13.5px;line-height:22px;color:rgb(240,239,237);font-variant-numeric:tabular-nums}
+  #tsn4a8anim .mn{display:inline-flex;align-items:center;gap:5px}
+  #tsn4a8anim .mn img{width:16px;height:16px;border-radius:3px;object-fit:cover}
+  #tsn4a8anim .mn u{text-decoration-color:rgba(255,255,243,.25);text-underline-offset:3px}
+  #tsn4a8anim .ro{display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(143,203,170,.5);font-size:11.5px;color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+  #tsn4a8anim.js .bk,#tsn4a8anim.js .ro{opacity:0;transform:translateY(8px)}
+  #tsn4a8anim.js.k3 .b0,#tsn4a8anim.js.k3 .b1,#tsn4a8anim.js.k4 .b2,#tsn4a8anim.js.k4 .b3,#tsn4a8anim.js.k5 .ro{opacity:1;transform:none}
+  #tsn4a8anim.js.k3 .b1{transition-delay:.25s}
   #tsn4a8anim .ck{display:flex;flex-direction:column;align-items:center;gap:14px}
   #tsn4a8anim .ck svg{width:78%;height:auto;overflow:visible;filter:drop-shadow(0 26px 40px rgba(0,0,0,.8))}
   #tsn4a8anim .ck .hh,#tsn4a8anim .ck .mh{transform-origin:100px 100px;transition:transform 2.2s ${N.EASE}}
@@ -28,18 +40,6 @@
   #tsn4a8anim .dv .ds{font-size:11px;color:rgba(255,255,255,.86)}
   #tsn4a8anim .lap{border-style:dashed}
   #tsn4a8anim .cl.lit .ic{color:#efe6d2;filter:drop-shadow(0 0 8px rgba(239,230,210,.8))}
-  #tsn4a8anim .wb{padding:14px 16px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
-  #tsn4a8anim .wh{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:#fff}
-  #tsn4a8anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a8anim .bk{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s ${N.EASE}}
-  #tsn4a8anim .bt{font:700 9.5px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
-  #tsn4a8anim .bv{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
-  #tsn4a8anim .bv img{width:20px;height:20px;flex:0 0 20px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.5)}
-  #tsn4a8anim .b3 .bv{color:#fff}#tsn4a8anim .b3{border-color:rgba(227,37,82,.4)}
-  #tsn4a8anim .ro{margin-top:auto;padding:8px 10px;border-radius:8px;border:1px solid rgba(143,203,170,.45);font-size:11px;text-align:center;color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a8anim.js .bk,#tsn4a8anim.js .ro{opacity:0;transform:translateY(8px)}
-  #tsn4a8anim.js.k3 .b0,#tsn4a8anim.js.k3 .b1,#tsn4a8anim.js.k4 .b2,#tsn4a8anim.js.k4 .b3,#tsn4a8anim.js.k5 .ro{opacity:1;transform:none}
-  #tsn4a8anim.js.k3 .b1{transition-delay:.25s}#tsn4a8anim.js.k4 .b3{transition-delay:.25s}
   `;
   function hands(el,h,m,label){ var ck=el.querySelector('.ck'); ck.style.setProperty('--h',h+'deg'); ck.style.setProperty('--m',m+'deg'); el.querySelector('.tm').textContent=label; }
   N.page({
@@ -97,7 +97,7 @@
           '<li>Unter den Verbindungen alles außer <b>Notion</b> entfernen. Sie sind standardmäßig alle eingeschlossen.</li>'+
           '<li>Speichern und mit <b>Run now</b> einmal sofort auslösen, statt bis Montag zu warten.</li>'+
         '</ol></div>'+
-        N.cmd('Auftrag für den Wochenblick', 'Lies mein Backoffice in Notion und leg im Bereich Key Metrics eine neue Seite an, Titel „Wochenblick“ mit dem heutigen Datum.\n\nNimm ausschließlich Zahlen aus den Feldern der Datenbanken. Schätze nichts und nenne zu jeder Zahl den Eintrag, aus dem sie stammt.\n\nInhalt:\n1. Die fünf Gerichte mit dem höchsten Wareneinsatz in Prozent.\n2. Alle Artikel der Inventurliste, deren „Preis geändert am“ in den letzten sieben Tagen liegt, mit vorherigem und aktuellem Preis.\n3. Alle Gerichte mit einem Wareneinsatz über [deine Grenze] Prozent.\n4. Alle Zutaten ohne Einkaufspreis und alle Gerichte ohne Verkaufspreis.\n\nÄndere in keiner Datenbank etwas. Die neue Seite ist das Einzige, was du anlegst.')
+        N.cmd('Auftrag für den Wochenblick', 'Lies mein Backoffice in Notion und leg im Bereich Key Metrics eine neue Seite an, Titel „Wochenblick“ mit dem heutigen Datum.\n\nNimm ausschließlich Zahlen aus den Feldern der Datenbanken. Schätze nichts und nenne zu jeder Zahl den Eintrag, aus dem sie stammt.\n\nInhalt:\n1. Die fünf Gerichte mit dem höchsten Wareneinsatz in Prozent.\n2. Alle Artikel, deren „Preis geändert am“ in den letzten sieben Tagen liegt, mit vorherigem und aktuellem Preis.\n3. Alle Gerichte mit einem Wareneinsatz über [deine Grenze] Prozent.\n4. Alle Zutaten ohne Einkaufspreis und alle Gerichte ohne Verkaufspreis.\n\nÄndere in keiner Datenbank etwas. Die neue Seite ist das Einzige, was du anlegst.')
       },
       {id:'tsn4a8-regel', html:
         '<div class="tsn4-eb">Die Regel</div>'+

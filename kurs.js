@@ -33829,6 +33829,57 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   /* Position im 1000er-Raster der Buehne -> Prozent */
   function pos(x,y,w,h,H){ return 'left:'+(x/10)+'%;top:'+(y/H*100)+'%;'+(w!=null?'width:'+(w/10)+'%;':'')+(h!=null?'height:'+(h/H*100)+'%;':''); }
 
+
+  /* ---------- Echtes Notion (Dark Mode) und echtes Terminal fuer Nachbauten ----------
+     Werte am 01.11.2026 in echtem Notion abgenommen (getComputedStyle, Original-Icon-Masken).
+     Innerhalb dieser Fenster keine Kurs-Gestaltung. Liefert CSS-Text fuer die Seiten-CSS
+     (wird dort mitskaliert). Klassen: .nw (Notion-Fenster), .tw (Terminal), .ed (Editor). */
+  var NFONT='ui-sans-serif,-apple-system,"system-ui","Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif';
+  var NI={
+    title:'M4.963 4.447H7.7l3.832 11.107H9.55l-.863-2.5h-4.71l-.862 2.5H1.13zm-.34 6.732H8.04L6.363 6.321H6.3zM16.995 9.08l.195-.467h1.68v6.94h-1.68l-.195-.796.004-.008a2.9 2.9 0 0 1-2.036.804c-1.825 0-3.28-1.513-3.28-3.635s1.455-3.635 3.28-3.635c.8 0 1.497.29 2.032.796m-3.438 2.835c0 1.145.715 1.96 1.719 1.96s1.719-.816 1.719-1.96-.715-1.96-1.72-1.96c-1.003 0-1.718.815-1.718 1.96',
+    text:'M17.5 4.063v1.875h-15V4.063zm-15 6.875h15V9.062h-15zm0 5h7.875v-1.876H2.5z',
+    rel:'M15.313 4.688v10.625h-1.876V7.888l-8.05 8.05-1.324-1.325 8.05-8.05H4.688V4.688z',
+    num:'M16.875 8.125V6.25h-2.5l.938-3.75h-1.876L12.5 6.25H9.375l.938-3.75H8.437L7.5 6.25H3.75v1.875h3.281l-.937 3.75H3.125v1.875h2.5l-.937 3.75h1.875l.937-3.75h3.125l-.937 3.75h1.874l.938-3.75h3.75v-1.875h-3.281l.937-3.75zm-5.781 3.75H7.969l.937-3.75h3.125z',
+    formula:'M5.375 16.688h9.25v-1.875H8.002L13.153 10 8.002 5.188h6.623V3.313h-9.25v1.986L10.407 10l-5.032 4.7z',
+    rollup:'M13.963 12.194A6.248 6.248 0 0 0 8.75 2.5a6.25 6.25 0 0 0-6.251 6.25 6.248 6.248 0 0 0 9.694 5.213L15.73 17.5l1.769-1.769zm-5.213.931a4.376 4.376 0 1 1 .002-8.752 4.376 4.376 0 0 1-.002 8.752',
+    date:'M15 3.75V1.875h-1.875V3.75h-6.25V1.875H5V3.75H2.5v12.5h15V3.75zm.625 10.938H4.375V8.75h11.25z',
+    table:'M4.5 4.125A2.125 2.125 0 0 0 2.375 6.25v7.5c0 1.174.951 2.125 2.125 2.125h11a2.125 2.125 0 0 0 2.125-2.125v-7.5A2.125 2.125 0 0 0 15.5 4.125zm11.875 7h-5.75v-2.25h5.75zm-5.75 1.25h5.75v1.375a.875.875 0 0 1-.875.875h-4.875zm-1.25-1.25h-5.75v-2.25h5.75zm-5.75 1.25h5.75v2.25H4.5a.875.875 0 0 1-.875-.875zm0-4.75V6.25c0-.483.392-.875.875-.875h4.875v2.25zm7 0v-2.25H15.5c.483 0 .875.392.875.875v1.375z'
+  };
+  var NPAGE='<svg class="pg" viewBox="4.12 2.37 11.75 15.25"><path d="M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z"/></svg>';
+  var NCHEV='<svg class="cv" viewBox="0 0 16 16"><path d="M7.47 10.93a.75.75 0 0 0 1.06 0l4.32-4.32a.75.75 0 1 0-1.06-1.06L8 9.34 4.21 5.55a.75.75 0 0 0-1.06 1.06z"/></svg>';
+  function nic(k){ return '<svg class="ni" viewBox="0 0 20 20"><path d="'+NI[k]+'"/></svg>'; }
+  function nCSS(id){ var r='#'+id; return `
+  ${r} .nw{background:#191919;border:1px solid rgba(255,255,243,.082);border-radius:10px;overflow:hidden;font-family:${NFONT};color:rgb(240,239,237);box-shadow:0 30px 70px -30px rgba(0,0,0,.95);display:flex;flex-direction:column}
+  ${r} .nw .nbar{height:44px;flex:0 0 44px;display:flex;align-items:center;gap:6px;padding:0 14px;font-size:14px;color:rgb(240,239,237);white-space:nowrap;overflow:hidden}
+  ${r} .nw .nbar .sep{color:rgb(125,122,117)}
+  ${r} .nw .ni{width:16px;height:16px;flex:0 0 16px;fill:rgb(173,169,163)}
+  ${r} .nw .pg{width:16px;height:18px;flex:0 0 16px;fill:rgb(155,155,155)}
+  ${r} .nw .cv{width:12px;height:12px;flex:0 0 12px;fill:rgb(125,122,117);transform:rotate(-90deg)}
+  ${r} .nw .cv.open{transform:none}
+  ${r} .nw .ntitle{font-weight:700;color:rgb(240,239,237);letter-spacing:normal}
+  ${r} .nw .nside{background:#202020;padding:10px 8px}
+  ${r} .nw .nsec{font-size:12px;font-weight:500;color:rgb(125,122,117);padding:12px 8px 6px}
+  ${r} .nw .nrow{height:30px;display:flex;align-items:center;gap:6px;padding:0 8px;border-radius:6px;font-size:14px;line-height:21px;color:rgb(188,186,182);white-space:nowrap;overflow:hidden;transition:color .5s cubic-bezier(.16,1,.3,1)}
+  ${r} .nw .nrow.on{color:rgb(240,239,237)}
+  ${r} .nw .nrow.ws{font-weight:500;color:rgb(240,239,237)}
+  ${r} .nw table.nt{border-collapse:collapse;width:100%;font-size:14px;line-height:21px;color:rgb(240,239,237)}
+  ${r} .nw table.nt th{height:36px;padding:0 8px;text-align:left;font-weight:400;color:rgb(173,169,163);border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);white-space:nowrap}
+  ${r} .nw table.nt th>span{display:inline-flex;align-items:center;gap:6px}
+  ${r} .nw table.nt td{height:37px;padding:0 8px;border-bottom:1px solid rgba(255,255,243,.082);border-right:1px solid rgba(255,255,243,.082);white-space:nowrap;overflow:hidden}
+  ${r} .nw table.nt th:last-child,${r} .nw table.nt td:last-child{border-right:0}
+  ${r} .nw table.nt td.r{text-align:right;font-variant-numeric:tabular-nums}
+  ${r} .nw .np{font-size:16px;line-height:24px;color:rgb(240,239,237)}
+  ${r} .nw .nbtn{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:rgb(39,131,222);color:rgb(243,249,253);font-size:14px;font-weight:500}
+  ${r} .tw{background:#1e1e1e;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.95);display:flex;flex-direction:column;font-family:Menlo,ui-monospace,SFMono-Regular,monospace;color:#e6e6e6}
+  ${r} .tw .tbar{height:28px;flex:0 0 28px;display:flex;align-items:center;gap:7px;padding:0 10px;background:#2b2b2b;border-bottom:1px solid rgba(0,0,0,.6)}
+  ${r} .tw .tbar i{width:11px;height:11px;border-radius:50%}
+  ${r} .tw .tbar i:nth-child(1){background:#ff5f57}${r} .tw .tbar i:nth-child(2){background:#febc2e}${r} .tw .tbar i:nth-child(3){background:#28c840}
+  ${r} .tw .tbar span{flex:1;text-align:center;margin-right:40px;font:500 12px/1 -apple-system,BlinkMacSystemFont,sans-serif;color:rgba(255,255,255,.7)}
+  ${r} .tw .tl{font-size:12px;line-height:1.6;padding:0 12px;white-space:pre-wrap;word-break:break-word}
+  ${r} .tw .tl:first-of-type{padding-top:10px}
+  ${r} .tw .dim{color:rgba(230,230,230,.6)}
+  `; }
+
   var ACTIVE=[];   /* laufende Buehnen fuer Kill/Hidden */
   function anim(cfg){
     /* cfg: id, anchorId, eyebrow, title, sub, html, css, beats:[{t,cap}], note, onBeat(root,i,T), final(root), reset(root), built(root) */
@@ -34121,7 +34172,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   function boot(){ if(!document.body){ return setTimeout(boot,50); } mount(); window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true}); }
 
   window.__tsn4={ SANS:SANS, DISP:DISP, MONO:MONO, IMG:IMG, RING:RING, EASE:EASE, BACK:BACK, addCSS:addCSS, reduced:reduced, tsReveal:tsReveal,
-    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, esc:esc, page:page, mount:mount };
+    count:count, eur:eur, pct:pct, cmd:cmd, pos:pos, nic:nic, nCSS:nCSS, NPAGE:NPAGE, NCHEV:NCHEV, esc:esc, page:page, mount:mount };
   /* Boot erst nach dem Seiten-Register (am Ende der Zone). */
   window.__tsn4Boot=boot;
 })();
@@ -34260,50 +34311,46 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
 (function(){
   var N=window.__tsn4; if(!N) return;
   var P=function(x,y,w,h){ return N.pos(x,y,w,h,430); };
-  var term='<div class="cardx pn t0" data-s="1" style="'+P(30,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div>'+
-    '<div class="tl mono" data-s="2"><span class="pr">$</span> claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp</div>'+
-    '<div class="tl mono ok" data-s="2">Added HTTP MCP server notion</div>'+
-    '<div class="tl mono" data-s="3"><span class="pr">$</span> claude mcp list</div>'+
-    '<div class="tl mono st1" data-s="3"><span class="w">notion · ! Needs authentication</span><span class="ok c">notion · ✔ Connected</span></div></div>';
-  var login='<div class="cardx pn t1" data-s="1" style="'+P(355,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Browser · Anmeldung</span></div>'+
+  var term='<div class="tw pn" data-s="1" style="'+P(30,40,290,330)+'"><div class="tbar"><i></i><i></i><i></i><span>Backoffice — zsh</span></div>'+
+    '<div class="tl" data-s="2">~/Backoffice % claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp</div>'+
+    '<div class="tl" data-s="2">Added HTTP MCP server notion with URL: https://mcp.notion.com/mcp to user config</div>'+
+    '<div class="tl" data-s="3">~/Backoffice % claude mcp list</div>'+
+    '<div class="tl st1" data-s="3"><span class="w">notion: https://mcp.notion.com/mcp (HTTP) - ! Needs authentication</span><span class="c">notion: https://mcp.notion.com/mcp (HTTP) - ✔ Connected</span></div></div>';
+  var login='<div class="nw pn lgw" data-s="1" style="'+P(355,40,290,330)+'"><div class="url"><i></i><i></i><i></i><span>notion.com</span></div>'+
     '<div class="lg" data-s="3"><div class="nlogo">N</div><div class="lgt">Claude Code möchte auf deinen Notion-Workspace zugreifen.</div>'+
-    '<div class="ws"><span>Workspace</span><b>Trattoria Lindenhof</b></div><div class="btn">Zugriff erlauben</div><div class="lgf">Einmalig. Danach merkt sich Claude Code die Anmeldung.</div></div></div>';
-  var PAGES=[['Foodquartier',1],['Drinksquartier',1],['Finance Studio',1],['Key Metrics',1],['Operations Area',1],['Gesellschafter · privat',0]];
-  var ws='<div class="cardx pn t2" data-s="1" style="'+P(680,40,290,330)+'"><div class="bar"><i></i><i></i><i></i><span>Dein Notion</span></div><div class="side">'+
-    PAGES.map(function(p,i){ return '<div class="pg '+(p[1]?'y':'n')+' g'+i+'"><span class="dot"></span>'+p[0]+(p[1]?'':'<em>gesperrt</em>')+'</div>'; }).join('')+'</div>'+
-    '<div class="rule" data-s="5">Für dich gesperrt, also auch für Claude</div></div>';
+    '<div class="ws"><span>Workspace</span><b>Trattoria Lindenhof</b></div><div class="nbtn btn">Zugriff erlauben</div><div class="lgf">Einmal anmelden, danach bleibt die Verbindung bestehen.</div></div></div>';
+  var PAGES=['Foodquartier','Drinksquartier','Finance Studio','Key Metrics','Operations Area'];
+  var ws='<div class="nw pn wsw" data-s="1" style="'+P(680,40,290,330)+'"><div class="nside">'+
+    '<div class="nrow wsn"><span class="wsl">T</span>Trattoria Lindenhof</div><div class="nsec">Teamspaces</div>'+
+    PAGES.map(function(p,i){ return '<div class="nrow g'+i+'">'+N.NCHEV+N.NPAGE+'<span>'+p+'</span></div>'; }).join('')+
+    '<div class="nsec">Privat</div><div class="nrow">'+N.NCHEV+N.NPAGE+'<span>Notizen</span></div></div></div>'+
+    '<div class="rule" data-s="5" style="'+P(680,382,290,34)+'">Was dein Konto nicht sieht, sieht Claude nicht</div>';
   var lines='<svg class="lines" viewBox="0 0 1000 430" preserveAspectRatio="none">'+
     '<path class="ln" pathLength="1" data-s="3" d="M322 205 H353"/><path class="sp" pathLength="1" d="M322 205 H353"/>'+
     '<path class="ln" pathLength="1" data-s="4" d="M647 205 H678"/><path class="sp" pathLength="1" style="animation-delay:1.2s" d="M647 205 H678"/></svg>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/430">'+lines+term+login+ws+'</div></div>';
-  var css=`
-  #tsn4a1anim .pn{overflow:hidden;display:flex;flex-direction:column}
-  #tsn4a1anim .bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
-  #tsn4a1anim .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
-  #tsn4a1anim .bar span{margin-left:8px;font:600 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-  #tsn4a1anim .tl{font-size:11.5px;line-height:1.6;color:#efe6d2;padding:8px 14px 0;word-break:break-all}
-  #tsn4a1anim .tl .pr{color:#c7b489}
+  var css=N.nCSS('tsn4a1anim')+`
+  #tsn4a1anim .pn{transition:box-shadow .7s cubic-bezier(.16,1,.3,1),border-color .7s cubic-bezier(.16,1,.3,1)}
+  #tsn4a1anim .pn.lit{border-color:rgba(199,180,137,.7);box-shadow:0 30px 70px -30px rgba(0,0,0,.95),0 0 0 4px rgba(199,180,137,.12),0 0 40px rgba(199,180,137,.2)}
   #tsn4a1anim .st1 .c{display:none}
   #tsn4a1anim.done .st1 .w{display:none}#tsn4a1anim.done .st1 .c{display:inline}
-  #tsn4a1anim .st1 .w{color:#c7b489}
-  #tsn4a1anim .lg{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 20px;gap:12px}
-  #tsn4a1anim .nlogo{width:40px;height:40px;border-radius:9px;background:#fff;color:#05060b;font:700 22px/40px Georgia,serif}
-  #tsn4a1anim .lgt{font-size:13px;line-height:1.5;color:#fff}
-  #tsn4a1anim .ws{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.86)}
-  #tsn4a1anim .ws b{color:#fff;font-weight:600}
-  #tsn4a1anim .btn{width:100%;height:36px;border-radius:9px;background:#c7b489;color:#05060b;font:700 13px/36px ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .4s cubic-bezier(.16,1,.3,1)}
-  #tsn4a1anim.press .btn{transform:scale(.95);box-shadow:0 0 0 6px rgba(199,180,137,.2)}
-  #tsn4a1anim .lgf{font-size:11px;line-height:1.45;color:rgba(255,255,255,.86)}
-  #tsn4a1anim .side{padding:12px 12px;display:flex;flex-direction:column;gap:7px}
-  #tsn4a1anim .pg{display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;border-radius:8px;font-size:12.5px;color:rgba(255,255,255,.55);border:1px solid transparent;transition:all .5s ${N.EASE}}
-  #tsn4a1anim .pg .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .5s cubic-bezier(.16,1,.3,1)}
-  #tsn4a1anim .pg em{margin-left:auto;font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#e35d76}
-  #tsn4a1anim .pg.y.lit{color:#fff;border-color:rgba(199,180,137,.35);background:rgba(199,180,137,.08)}
-  #tsn4a1anim .pg.y.lit .dot{background:#c7b489;box-shadow:0 0 10px rgba(199,180,137,.8)}
-  #tsn4a1anim .pg.n{border-color:rgba(227,37,82,.25)}
-  #tsn4a1anim .rule{margin:auto 12px 14px;padding:9px 10px;border-radius:9px;border:1px solid rgba(227,37,82,.35);font-size:11.5px;line-height:1.4;text-align:center;color:#fff}
+  #tsn4a1anim .lgw .url{height:28px;flex:0 0 28px;display:flex;align-items:center;gap:7px;padding:0 10px;background:#2b2b2b}
+  #tsn4a1anim .lgw .url i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.18)}
+  #tsn4a1anim .lgw .url span{flex:1;margin:0 30px 0 6px;height:18px;border-radius:5px;background:#1e1e1e;font:500 11px/18px -apple-system,BlinkMacSystemFont,sans-serif;color:rgba(255,255,255,.7);text-align:center}
+  #tsn4a1anim .lg{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 22px;gap:14px}
+  #tsn4a1anim .nlogo{width:40px;height:40px;border-radius:8px;background:#fff;color:#191919;font:700 24px/40px Georgia,serif}
+  #tsn4a1anim .lgt{font-size:14px;line-height:21px;color:rgb(240,239,237)}
+  #tsn4a1anim .ws{width:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,243,.082);font-size:14px;color:rgb(173,169,163)}
+  #tsn4a1anim .ws b{color:rgb(240,239,237);font-weight:500}
+  #tsn4a1anim .btn{width:100%;justify-content:center;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+  #tsn4a1anim.press .btn{transform:scale(.95)}
+  #tsn4a1anim .lgf{font-size:12px;line-height:18px;color:rgb(173,169,163)}
+  #tsn4a1anim .wsw .nside{flex:1}
+  #tsn4a1anim .nrow.wsn{font-weight:500;color:rgb(240,239,237)}
+  #tsn4a1anim .wsl{width:20px;height:20px;border-radius:4px;background:rgb(173,169,163);color:#191919;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;margin-right:4px}
+  #tsn4a1anim .rule{display:flex;align-items:center;justify-content:center;padding:0 10px;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:12px;color:#efe6d2;text-align:center}
   `;
-  function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('lit', i<n); } }
+  function setG(el,n){ for(var i=0;i<5;i++){ var g=el.querySelector('.g'+i); if(g) g.classList.toggle('on', i<n); } var w=el.querySelector('.wsw'); if(w) w.classList.toggle('lit', n>0); }
   N.page({
     key:'tsn4a1', re:/\/(?:lektionen\/)?notion-mit-claude-code-verbinden\/?$/,
     eyebrow:'L 4.1', title:'Notion <span class="ts-gold">anschließen</span>', alt:'Claude Code mit dem Notion-Backoffice verbinden',
@@ -34324,7 +34371,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
       reset:function(el){ setG(el,0); el.classList.remove('done','press'); },
       onBeat:function(el,i,T,jump){
         if(i===2){ T.at(jump?0:1500,function(){ el.classList.add('press'); }); T.at(jump?0:1900,function(){ el.classList.remove('press'); }); }
-        if(i===3){ el.classList.add('done'); for(var k=0;k<5;k++){ (function(k){ T.at(jump?0:k*260,function(){ var g=el.querySelector('.g'+k); if(g) g.classList.add('lit'); }); })(k); } }
+        if(i===3){ el.classList.add('done'); for(var k=0;k<5;k++){ (function(k){ T.at(jump?0:k*260,function(){ setG(el,k+1); }); })(k); } }
       },
       final:function(el){ setG(el,5); el.classList.add('done'); }
     },
@@ -34395,46 +34442,43 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
 (function(){
   var N=window.__tsn4; if(!N) return;
   var I=N.IMG, P=function(x,y,w,h){ return N.pos(x,y,w,h,440); };
-  var COLS=[{n:'Name',t:'in'},{n:'Lieferpartner',t:'rel'},{n:'Einkaufspreis',t:'in'},{n:'Einheit',t:'in'},{n:'Gezählt',t:'in'},{n:'Wert gesamt',t:'calc'}];
-  var ROWS=[[I+'i-olivenoel.webp','Olivenöl','Feinkost Rossi','9,80','Flasche','6','58,80'],
-            [I+'i-balsamico.webp','Balsamico','Feinkost Rossi','7,90','Flasche','4','31,60'],
-            [I+'i-meersalz.webp','Meersalz','Metro','2,90','Glas','9','26,10'],
-            [I+'z-tomate.webp','Tomaten','Gemüse Bauer','2,40','kg','12','28,80']];
-  var head=COLS.map(function(c,i){ return '<div class="th c'+i+' '+c.t+'"><span>'+c.n+'</span><em class="tg" data-s="'+(c.t==='in'?2:c.t==='rel'?3:4)+'">'+(c.t==='in'?'Eingabe':c.t==='rel'?'Verknüpfung':'Rechnet')+'</em></div>'; }).join('');
-  var rows=ROWS.map(function(r){ return '<div class="tr"><div class="td c0"><img src="'+r[0]+'" alt="" loading="lazy">'+r[1]+'</div><div class="td c1">'+r[2]+'</div><div class="td c2">'+r[3]+' €</div><div class="td c3">'+r[4]+'</div><div class="td c4">'+r[5]+'</div><div class="td c5">'+r[6]+' €</div></div>'; }).join('');
-  var table='<div class="cardx tb" data-s="1" style="'+P(20,40,590,350)+'"><div class="tbh"><span class="nt">N</span>DB 0 · Inventurliste<i class="scan"></i></div><div class="grid"><div class="trh">'+head+'</div>'+rows+'</div><div class="tbf">Beispielwerte</div></div>';
-  var file='<div class="cardx fl" data-s="1" style="'+P(650,40,330,350)+'"><div class="flh">CLAUDE.md <span>Ordner Backoffice</span></div><div class="code mono">'+
-    '<div data-s="5" class="k">## Systemkarte</div><div data-s="5">DB 0 Inventurliste</div><div data-s="5" class="i">Eingabe: Name, Einkaufspreis, Einheit, Gezählt</div><div data-s="5" class="i">Verknüpfung: Lieferpartner</div><div data-s="5" class="i r">Rechnet: Wert gesamt, nie schreiben</div>'+
-    '<div data-s="6" class="k sp6">## Regeln</div><div data-s="6">Zahlen nur aus Notion-Feldern</div><div data-s="6">Vorschau vor jeder Änderung</div><div data-s="6">Nichts löschen</div></div>'+
-    '<div class="rd" data-s="7">Wird bei jedem Start gelesen</div></div>';
-  var lines='<svg class="lines" viewBox="0 0 1000 440" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="5" d="M612 215 H648"/><path class="sp" pathLength="1" d="M612 215 H648"/></svg>';
-  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/440">'+lines+table+file+'</div></div>';
-  var css=`
-  #tsn4a2anim .tb{overflow:hidden;display:flex;flex-direction:column}
-  #tsn4a2anim .tbh{position:relative;display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.SANS};color:#fff}
-  #tsn4a2anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a2anim .grid{flex:1;display:flex;flex-direction:column;position:relative}
-  #tsn4a2anim .trh,#tsn4a2anim .tr{display:grid;grid-template-columns:1.25fr 1.15fr .95fr .8fr .7fr .95fr}
-  #tsn4a2anim .th{position:relative;padding:10px 10px 30px;font:600 10.5px/1.2 ${N.SANS};color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.08);transition:background .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a2anim .tg{position:absolute;left:10px;bottom:8px;font:700 8.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:4px 6px;border-radius:5px}
-  #tsn4a2anim .in .tg{color:#05060b;background:#c7b489}
-  #tsn4a2anim .rel .tg{color:#efe6d2;border:1px solid rgba(199,180,137,.6)}
-  #tsn4a2anim .calc .tg{color:#fff;border:1px solid rgba(255,255,255,.4)}
-  #tsn4a2anim .td{padding:15px 10px;font-size:12px;color:rgba(255,255,255,.86);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;transition:background .6s cubic-bezier(.16,1,.3,1),color .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a2anim .td img{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.4)}
-  #tsn4a2anim.k2 .c0,#tsn4a2anim.k2 .c2,#tsn4a2anim.k2 .c3,#tsn4a2anim.k2 .c4{background:rgba(199,180,137,.07)}
-  #tsn4a2anim.k3 .c1{background:rgba(199,180,137,.04)}
-  #tsn4a2anim.k4 .td.c5{color:#fff;background:rgba(255,255,255,.06)}
-  #tsn4a2anim .scan{position:absolute;left:0;top:44px;width:2px;height:300px;background:linear-gradient(rgba(199,180,137,0),#efe6d2,rgba(199,180,137,0));box-shadow:0 0 16px rgba(239,230,210,.7);opacity:0}
+  /* Echte Spalten der Inventurliste (Notion-API 01.11.2026), Werte = Beispielwerte */
+  var COLS=[{n:'Name',i:'title',t:'in',w:27},{n:'Lieferant',i:'rel',t:'rel',w:21},{n:'Gezählt Ltr./KG',i:'num',t:'in',w:18},{n:'Preis / KG',i:'rollup',t:'calc',w:15},{n:'Summe Monat',i:'formula',t:'calc',w:19}];
+  var ROWS=[['z-tomate','Tomaten','Gemüse Bauer','12','2,40 €','28,80 €'],['z-parmesan','Parmesan','Feinkost Rossi','3','21,40 €','64,20 €'],
+            ['z-mozzarella','Mozzarella','Feinkost Rossi','4','9,80 €','39,20 €'],['z-kartoffel','Kartoffeln','Gemüse Bauer','20','1,10 €','22,00 €']];
+  var TX=20, TW=590, x=TX+0, tags='';
+  COLS.forEach(function(c){ var w=TW*c.w/100; tags+='<div class="tgw" data-s="'+(c.t==='in'?2:c.t==='rel'?3:4)+'" style="'+P(x,40,w,24)+'"><em class="tg '+c.t+'">'+(c.t==='in'?'Eingabe':c.t==='rel'?'Verknüpfung':'Rechnet')+'</em></div>'; x+=w; });
+  var table='<div class="nw tb" data-s="1" style="'+P(TX,74,TW,316)+'"><div class="nbar">'+N.nic('table')+'<span>Backoffice</span><span class="sep">/</span><span>Inventurliste</span></div>'+
+    '<div class="dbt ntitle">Inventurliste</div>'+
+    '<table class="nt"><colgroup>'+COLS.map(function(c){ return '<col style="width:'+c.w+'%">'; }).join('')+'</colgroup><tr>'+COLS.map(function(c){ return '<th><span>'+N.nic(c.i)+c.n+'</span></th>'; }).join('')+'</tr>'+
+    ROWS.map(function(r){ return '<tr><td><span class="nm"><img src="'+I+r[0]+'.webp" alt="">'+r[1]+'</span></td><td class="lk">'+r[2]+'</td><td class="r">'+r[3]+'</td><td class="r">'+r[4]+'</td><td class="r">'+r[5]+'</td></tr>'; }).join('')+
+    '</table><i class="scan"></i></div>';
+  var file='<div class="tw fl" data-s="1" style="'+P(650,74,330,316)+'"><div class="tbar"><i></i><i></i><i></i><span>CLAUDE.md — Backoffice</span></div>'+
+    '<div class="tl h" data-s="5">## Systemkarte</div><div class="tl" data-s="5">Inventurliste</div><div class="tl" data-s="5">  Eingabe: Name, Gezählt Ltr./KG</div><div class="tl" data-s="5">  Verknüpfung: Lieferant</div><div class="tl" data-s="5">  Rechnet: Preis / KG (Rollup),</div><div class="tl" data-s="5">  Summe Monat (Formel), nie schreiben</div>'+
+    '<div class="tl h sp6" data-s="6">## Regeln</div><div class="tl" data-s="6">- Zahlen nur aus Notion-Feldern</div><div class="tl" data-s="6">- Vorschau vor jeder Änderung</div><div class="tl" data-s="6">- Nichts löschen</div></div>'+
+    '<div class="rd" data-s="7" style="'+P(650,400,330,30)+'">Wird bei jedem Start gelesen</div>';
+  var lines='<svg class="lines" viewBox="0 0 1000 440" preserveAspectRatio="none"><path class="ln" pathLength="1" data-s="5" d="M612 230 H648"/><path class="sp" pathLength="1" d="M612 230 H648"/></svg>';
+  var html='<div class="sc"><div class="st" style="aspect-ratio:1000/440">'+lines+tags+table+file+'</div></div>';
+  var css=N.nCSS('tsn4a2anim')+`
+  #tsn4a2anim .tb{position:relative}
+  #tsn4a2anim .dbt{font-size:24px;line-height:30px;padding:2px 14px 10px}
+  #tsn4a2anim table.nt{font-size:12.5px}
+  #tsn4a2anim table.nt th{height:32px;font-size:12.5px}
+  #tsn4a2anim table.nt td{height:34px}
+  #tsn4a2anim .nm{display:inline-flex;align-items:center;gap:7px}
+  #tsn4a2anim .nm img{width:18px;height:18px;border-radius:4px;object-fit:cover}
+  #tsn4a2anim td.lk{text-decoration:underline;text-decoration-color:rgba(255,255,243,.25);text-underline-offset:3px}
+  #tsn4a2anim .tgw{display:flex;justify-content:center;align-items:center}
+  #tsn4a2anim .tg{font:700 9.5px/1 ${N.SANS};letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:5px 7px;border-radius:5px}
+  #tsn4a2anim .tg.in{color:#05060b;background:#c7b489}
+  #tsn4a2anim .tg.rel{color:#efe6d2;border:1px solid rgba(199,180,137,.6)}
+  #tsn4a2anim .tg.calc{color:#fff;border:1px solid rgba(255,255,255,.4)}
+  #tsn4a2anim .scan{position:absolute;left:0;top:44px;width:2px;height:270px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));opacity:0}
   #tsn4a2anim.scanning .scan{animation:tsn4a2scan 3.2s cubic-bezier(.45,.05,.55,.95) 1 both}
-  @keyframes tsn4a2scan{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(570px)}}
-  #tsn4a2anim .tbf{margin-top:auto;padding:9px 16px;font-size:10.5px;color:rgba(255,255,255,.86)}
-  #tsn4a2anim .fl{display:flex;flex-direction:column;overflow:hidden}
-  #tsn4a2anim .flh{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.MONO};color:#efe6d2;display:flex;justify-content:space-between}
-  #tsn4a2anim .flh span{font:600 9px/1.4 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
-  #tsn4a2anim .code{padding:12px 16px;font-size:11.5px;line-height:1.75;color:rgba(255,255,255,.86)}
-  #tsn4a2anim .code .k{color:#c7b489}#tsn4a2anim .code .i{padding-left:12px}#tsn4a2anim .code .r{color:#d8c9ab}#tsn4a2anim .code .sp6{margin-top:8px}
-  #tsn4a2anim .rd{margin:auto 14px 14px;padding:8px 10px;border-radius:9px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:11.5px;text-align:center;color:#efe6d2}
+  @keyframes tsn4a2scan{0%{opacity:0;transform:translateX(0)}8%{opacity:1}92%{opacity:1}100%{opacity:0;transform:translateX(586px)}}
+  #tsn4a2anim .fl .tl{font-size:11.5px;line-height:1.75}
+  #tsn4a2anim .fl .h{font-weight:700}#tsn4a2anim .fl .sp6{margin-top:8px}
+  #tsn4a2anim .rd{display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(199,180,137,.5);background:rgba(199,180,137,.1);font-size:12px;color:#efe6d2}
   `;
   N.page({
     key:'tsn4a2', re:/\/(?:lektionen\/)?die-systemkarte-anlegen\/?$/,
@@ -34447,10 +34491,10 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
       sub:'Claude geht jede Spalte deiner Vorlage durch und schreibt auf, welche du füllst und welche Notion selbst berechnet.',
       html:html, css:css,
       beats:[
-        {t:200, s:1, cap:'Links eine Datenbank aus deiner Vorlage, hier die Inventurliste. Rechts die CLAUDE.md, das Briefing, das Claude bei jedem Start in deinem Backoffice-Ordner liest.'},
-        {t:2800, s:2, cap:'Claude liest jede Spalte. <b>Eingabefelder</b> sind die, die du von Hand füllst: Name, Einkaufspreis, Einheit, gezählte Menge.'},
-        {t:5600, s:3, cap:'<b>Verknüpfungen</b> verbinden die Datenbanken miteinander, hier die Inventur mit dem Lieferpartner. Sie schreibt Claude nur nach deiner Freigabe.'},
-        {t:8000, s:4, cap:'Alles, was eine Formel oder ein Rollup ist, <b>rechnet Notion selbst</b>. Diese Felder fasst Claude nie an, es liest nur ihr Ergebnis.'},
+        {t:200, s:1, cap:'Links eine Datenbank aus deiner Vorlage, die Inventurliste, so wie sie in Notion aussieht. Rechts die CLAUDE.md, das Briefing, das Claude bei jedem Start in deinem Backoffice-Ordner liest.'},
+        {t:2800, s:2, cap:'Claude liest jede Spalte. <b>Eingabefelder</b> sind die, die du von Hand füllst, hier der Name und die gezählte Menge.'},
+        {t:5600, s:3, cap:'<b>Verknüpfungen</b> verbinden die Datenbanken miteinander, hier die Inventur mit dem Lieferanten. Sie schreibt Claude nur nach deiner Freigabe.'},
+        {t:8000, s:4, cap:'Alles, was eine Formel oder ein Rollup ist, <b>rechnet Notion selbst</b>. Der Preis je Kilo kommt per Rollup aus einer anderen Datenbank, die Summe aus einer Formel. Diese Felder liest Claude nur.'},
         {t:10600, s:5, cap:'Daraus entsteht die Systemkarte: je Datenbank eine kurze Liste, was Eingabe ist, was verknüpft ist und was rechnet.'},
         {t:13200, s:6, cap:'Darunter stehen deine Regeln. Zahlen kommen nur aus Notion, vor jeder Änderung gibt es eine Vorschau, und gelöscht wird nichts.'},
         {t:15600, s:7, cap:'Die Datei liegt in deinem Backoffice-Ordner und wird bei jedem Start gelesen. Du erklärst dein System ein einziges Mal.'}
@@ -34669,11 +34713,18 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     '<div class="cardx src" data-s="1" style="'+P(20,120,185,160)+'"><span class="md"><img src="'+I+'z-tomate.webp" alt=""></span><span class="k">Vorschlag von Claude</span><span class="t">Tomaten, Einkaufspreis</span><span class="v mono">2,40 € → 2,65 €</span></div>'+
     '<div class="cardx gt g1" data-s="1" style="'+P(232,60,165,280)+'"><span class="n">01</span><span class="h">Vorschau</span><div class="pv"><div><span>Feld</span><b>Einkaufspreis</b></div><div><span>Alt</span><s>2,40 €</s></div><div><span>Neu</span><b>2,65 €</b></div></div><span class="f">Du siehst jede Änderung, bevor sie passiert.</span></div>'+
     '<div class="cardx gt g2" data-s="1" style="'+P(432,60,165,280)+'"><span class="n">02</span><span class="h">Dein Okay</span><div class="yes">Ja, schreiben</div><span class="f">Claude Code fragt zusätzlich vor jedem Schreibzugriff.</span></div>'+
-    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><span class="n">N</span><span class="h">Inventurliste</span><div class="nr"><span>Tomaten</span><b class="nv">2,40 €</b></div><span class="f">Geschrieben wird erst jetzt.</span></div>'+
+    '<div class="cardx gt g3 row" data-s="1" style="'+P(632,60,165,280)+'"><div class="nw mini"><div class="nbar">'+N.nic('table')+'<span>Inventurliste</span></div><table class="nt"><colgroup><col style="width:42%"><col style="width:58%"></colgroup><tr><th><span>'+N.nic('title')+'Name</span></th><th><span>'+N.nic('rollup')+'Preis / KG</span></th></tr><tr><td>Tomaten</td><td class="r nv">2,40 €</td></tr></table></div><span class="f">Geschrieben wird erst nach deinem Okay.</span></div>'+
     '<div class="cardx gt g4" data-s="1" style="'+P(832,60,165,280)+'"><span class="n">03</span><span class="h">Verlauf</span><div class="clk"><i></i></div><span class="f">Jede Änderung lässt sich zurückholen.</span></div>'+
     '<div class="mv" style="'+P(0,0,1000,400)+'"><span class="tok mono">2,65 €</span></div>'+
   '</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a4anim')+`
+  #tsn4a4anim .mini{width:100%;margin-top:6px}
+  #tsn4a4anim .mini .nbar{height:34px;flex-basis:34px;font-size:12px;padding:0 10px}
+  #tsn4a4anim .mini table.nt{font-size:11px;table-layout:fixed}
+  #tsn4a4anim .mini table.nt th{height:28px;font-size:10px;padding:0 4px}
+  #tsn4a4anim .mini table.nt th>span{gap:4px}
+  #tsn4a4anim .mini table.nt td{height:32px;padding:0 5px}
+  #tsn4a4anim .mini .ni{width:12px;height:12px;flex-basis:12px}
   #tsn4a4anim .src{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center}
   #tsn4a4anim .src .md{width:54px;height:54px;display:block}
   #tsn4a4anim .src .k{font:600 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
@@ -34688,10 +34739,6 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   #tsn4a4anim .pv span{color:rgba(255,255,255,.62)}#tsn4a4anim .pv b{color:#efe6d2}#tsn4a4anim .pv s{color:rgba(255,255,255,.62)}
   #tsn4a4anim .yes{margin-top:14px;padding:10px 14px;border-radius:10px;background:#c7b489;color:#05060b;font:700 13px/1 ${N.SANS};transition:transform .25s ${N.BACK},box-shadow .5s cubic-bezier(.16,1,.3,1)}
   #tsn4a4anim.press .yes{transform:scale(.94);box-shadow:0 0 0 7px rgba(199,180,137,.2)}
-  #tsn4a4anim .nr{width:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#fff;transition:background .6s cubic-bezier(.16,1,.3,1),border-color .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a4anim .nr b{color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tsn4a4anim.k4 .nr{background:rgba(143,203,170,.1);border-color:rgba(143,203,170,.5)}
-  #tsn4a4anim .row .n{font-family:Georgia,serif;background:#fff;color:#05060b;border:0}
   #tsn4a4anim .clk{position:relative;width:62px;height:62px;border-radius:50%;border:1.5px solid rgba(199,180,137,.5)}
   #tsn4a4anim .clk i{position:absolute;left:50%;top:50%;width:2px;height:24px;margin-left:-1px;background:#c7b489;transform-origin:50% 0;transform:rotate(180deg);transition:transform 1.4s ${N.EASE}}
   #tsn4a4anim.k5 .clk i{transform:rotate(-60deg)}
@@ -34806,9 +34853,16 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   var paper='<div class="paper" data-s="1" style="'+P(20,30,230,238)+'"><div class="ph"><b>Gemüse Bauer</b><span>Lieferschein</span></div>'+
     SL.map(function(r,i){ return '<div class="pl l'+i+'"><span>'+r[0]+'</span><span>'+r[1]+'</span><b>'+r[2]+'</b></div>'; }).join('')+
     '<div class="psum">Preise netto je Einheit</div><i class="scan"></i></div>';
-  var INV=[['Tomaten','2,40 €','2,65 €','up'],['Basilikum','1,90 €','1,90 €','same'],['Parmigiano Reggiano','','offen: Name auf dem Schein anders','miss'],['Zitronen','2,80 €','3,10 €','up']];
-  var inv='<div class="cardx iv" data-s="1" style="'+P(288,30,692,238)+'"><div class="ivh"><span class="nt">N</span>DB 0 · Inventurliste <em class="ok2">Freigegeben</em></div>'+
-    INV.map(function(r,i){ return '<div class="ir r'+i+' '+r[3]+'"><span class="a">'+r[0]+'</span>'+(r[3]==='miss'?'<span class="m">'+r[2]+'</span>':r[3]==='same'?'<b class="sv">'+r[1]+'</b>':'<span class="o">'+r[1]+'</span><span class="ar">→</span><b class="nw">'+r[2]+'</b>')+'</div>'; }).join('')+'</div>';
+  var inv='<div class="tw iv" data-s="1" style="'+P(288,30,692,238)+'"><div class="tbar"><i></i><i></i><i></i><span>Backoffice — claude</span></div>'+
+    '<div class="tl dim">&gt; Lies alle Lieferscheine im Ordner „Lieferscheine neu“ …</div>'+
+    '<div class="tl p3">Vorschau · Gemüse Bauer, Lieferschein</div>'+
+    '<div class="tl p3 dim">Artikel            alt       neu       Abweichung</div>'+
+    '<div class="tl p3">Tomaten            2,40 €    2,65 €    +10,4 %</div>'+
+    '<div class="tl p3">Basilikum          1,90 €    1,90 €    unverändert</div>'+
+    '<div class="tl p3">Zitronen           2,80 €    3,10 €    +10,7 %</div>'+
+    '<div class="tl p3">Nicht sicher zugeordnet: „Parm. Regg. 24M“</div>'+
+    '<div class="tl p4">&gt; Ja, schreiben</div>'+
+    '<div class="tl p4">Zwei Preise aktualisiert. Eine Position wartet auf dich.</div></div>';
   var CH=[{x:400,img:I+'z-tomate.webp',l:'Zutat',v:'2,40 € je kg',v2:'2,65 € je kg'},{x:600,img:R+'zutaten.webp',l:'Portion 120 g',v:'0,29 €',v2:'0,32 €'},{x:800,img:I+'g-burrata.webp',l:'Burrata',v:'24,1 % Wareneinsatz',v2:'24,3 % Wareneinsatz'}];
   var chain=CH.map(function(c,i){ return '<div class="md br ch c'+i+'" data-s="1" style="'+P(c.x-46,300,92,92)+'"><img src="'+c.img+'" alt=""></div><div class="lbl" data-s="1" style="'+P(c.x-90,400,180,14)+'">'+c.l+'</div><div class="cv cvv'+i+'" data-s="1" style="'+P(c.x-90,420,180,22)+'"><span class="o">'+c.v+'</span><span class="n">'+c.v2+'</span></div>'; }).join('');
   var lines='<svg class="lines" viewBox="0 0 1000 470" preserveAspectRatio="none">'+
@@ -34817,7 +34871,10 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     '<path class="sp" pathLength="1" style="animation-delay:.6s" d="M448 346 H552"/><path class="sp" pathLength="1" style="animation-delay:1.2s" d="M648 346 H752"/></svg>';
   var side='<div class="cardx sm" data-s="1" style="'+P(20,300,230,150)+'"><span class="k">Ergebnis</span><div class="sr"><b class="c1n">0</b><span>Preise neu</span></div><div class="sr"><b class="c2n">0</b><span>unverändert</span></div><div class="sr miss2"><b class="c3n">0</b><span>zu klären</span></div></div>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/470">'+lines+paper+inv+side+chain+'</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a5anim')+`
+  #tsn4a5anim .iv .tl{font-size:11.5px;line-height:1.7;white-space:pre}
+  #tsn4a5anim.js:not(.k3) .iv .p3,#tsn4a5anim.js:not(.k4) .iv .p4{opacity:0}
+  #tsn4a5anim .iv .p3,#tsn4a5anim .iv .p4{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
   #tsn4a5anim .paper{border-radius:7px;background:linear-gradient(#efe6d2,#d8c9ab);box-shadow:0 26px 50px -24px rgba(0,0,0,.95);padding:18px 16px;color:#05060b;overflow:hidden}
   #tsn4a5anim .ph{display:flex;flex-direction:column;gap:3px;padding-bottom:12px;margin-bottom:10px;border-bottom:1px dashed rgba(5,6,11,.35)}
   #tsn4a5anim .ph b{font:700 15px/1.2 Georgia,serif}#tsn4a5anim .ph span{font:600 9px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:rgba(5,6,11,.7)}
@@ -34828,21 +34885,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   #tsn4a5anim .scan{position:absolute;left:0;right:0;top:0;height:2px;background:#c7b489;box-shadow:0 0 18px 3px rgba(199,180,137,.75);opacity:0}
   #tsn4a5anim.scanning .scan{animation:tsn4a5scan 2.4s cubic-bezier(.45,.05,.55,.95) 1 both}
   @keyframes tsn4a5scan{0%{opacity:0;transform:translateY(60px)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(330px)}}
-  #tsn4a5anim .iv{overflow:hidden}
-  #tsn4a5anim .ivh{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);font:600 13px/1 ${N.SANS};color:#fff}
-  #tsn4a5anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a5anim .ok2{margin-left:auto;font-style:normal;font:700 9px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#8FCBAA;border:1px solid rgba(143,203,170,.5);padding:4px 7px;border-radius:5px;opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
-  #tsn4a5anim.k4 .ok2{opacity:1}
-  #tsn4a5anim .ir{display:flex;align-items:center;gap:9px;padding:13px 16px;font-size:12.5px;color:#fff;border-bottom:1px solid rgba(255,255,255,.05)}
-  #tsn4a5anim .ir .a{flex:1}#tsn4a5anim .ir .o{color:rgba(255,255,255,.62)}#tsn4a5anim .ir .ar{color:#c7b489}#tsn4a5anim .ir .nw{color:#efe6d2;font-variant-numeric:tabular-nums}
-  #tsn4a5anim .ir .m{font-size:11px;color:#fff;padding:4px 8px;border-radius:6px;border:1px solid rgba(227,37,82,.5);background:rgba(227,37,82,.08)}
-  #tsn4a5anim.js:not(.k3) .ir .ar,#tsn4a5anim.js:not(.k3) .ir .nw,#tsn4a5anim.js:not(.k3) .ir .m{opacity:0}
-  #tsn4a5anim .ir .ar,#tsn4a5anim .ir .nw,#tsn4a5anim .ir .m{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a5anim.k3:not(.k4) .ir.up .o{text-decoration:line-through}
-  #tsn4a5anim.k4 .ir.up .o,#tsn4a5anim.k4 .ir.up .ar{display:none}
-  #tsn4a5anim.k4 .ir.up{background:rgba(143,203,170,.07)}
   #tsn4a5anim .sm{display:flex;flex-direction:column;gap:6px;padding:14px 18px}
-  #tsn4a5anim .ir .sv{color:#efe6d2}#tsn4a5anim .ir .un{font-size:10.5px;letter-spacing:.06em;color:rgba(255,255,255,.62)}
   #tsn4a5anim .sm .k{font:600 9.5px/1 ${N.SANS};letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:4px}
   #tsn4a5anim .sr{display:flex;align-items:baseline;gap:10px;font-size:13px;color:rgba(255,255,255,.86)}
   #tsn4a5anim .sr b{font-family:${N.DISP};font-size:24px;line-height:1;color:#efe6d2;min-width:30px;font-variant-numeric:tabular-nums}
@@ -34885,18 +34928,18 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         '<h3>Ein Ordner, ein Prompt, eine <span class="g">Vorschau</span></h3>'+
         '<p class="lead">Leg in deinem Backoffice-Ordner zwei Unterordner an: <b>Lieferscheine neu</b> und <b>Lieferscheine erledigt</b>. In den ersten kommt alles, was im Lauf der Woche reinkommt, als PDF aus der Mail oder als Foto vom Handy. Gerade die Fotos sind ein Fall für Claude, denn Notion AI nimmt Dateien wie PDF und Excel an, Fotos aber nicht.</p>'+
         '<p>Einmal in der Woche, oder wann immer es für dich passt, startest du Claude Code im Backoffice-Ordner und gibst diesen Auftrag:</p>'+
-        N.cmd('Prompt', 'Lies alle Lieferscheine im Ordner „Lieferscheine neu“.\n\nOrdne jede Position einem Artikel meiner Inventurliste in Notion zu. Nutze dafür die Namensliste meiner Lieferanten in der CLAUDE.md. Positionen, die du nicht sicher zuordnen kannst, schreibst du auf eine eigene Liste und rätst nichts.\n\nZeig mir dann eine Vorschau aller Artikel, deren Einkaufspreis sich geändert hat: Artikel, Lieferant, alter Preis, neuer Preis, Abweichung in Prozent. Achte darauf, dass Einheit und Preis zu meiner Inventurliste passen, und nenne mir jede Abweichung bei der Einheit.\n\nSchreib erst nach meinem „Ja, schreiben“. Setz dabei bei jedem geänderten Artikel „Vorheriger Preis“ auf den alten Wert und „Preis geändert am“ auf heute. Verschieb danach die erledigten Scheine in „Lieferscheine erledigt“.')+
+        N.cmd('Prompt', 'Lies alle Lieferscheine im Ordner „Lieferscheine neu“.\n\nOrdne jede Position dem passenden Artikel in meinem Backoffice zu. Nutze dafür die Namensliste meiner Lieferanten in der CLAUDE.md. Positionen, die du nicht sicher zuordnen kannst, schreibst du auf eine eigene Liste und rätst nichts.\n\nZeig mir dann eine Vorschau aller Artikel, deren Einkaufspreis sich geändert hat: Artikel, Lieferant, alter Preis, neuer Preis, Abweichung in Prozent. Achte darauf, dass Einheit und Preis zu meiner Inventurliste passen, und nenne mir jede Abweichung bei der Einheit.\n\nSchreib erst nach meinem „Ja, schreiben“. Trag den neuen Preis dort ein, wo er laut Systemkarte gepflegt wird, und setz bei jedem geänderten Artikel „Vorheriger Preis“ auf den alten Wert und „Preis geändert am“ auf heute. Verschieb danach die erledigten Scheine in „Lieferscheine erledigt“.')+
         '<p>Du bekommst die Vorschau, liest sie, klärst die offenen Positionen und gibst frei. Den Rest erledigt deine Vorlage: Die Zutat übernimmt den neuen Preis, jede Rezeptur und jedes Gericht rechnet neu, und dein Wareneinsatz steht aktuell da.</p>'
       },
       {id:'tsn4a5-felder', html:
         '<div class="tsn4-eb">Einmal vorbereiten</div>'+
         '<h3>Zwei Felder für die <span class="g">Preisgeschichte</span></h3>'+
-        '<p class="lead">Damit du später sehen kannst, was sich wann verändert hat, braucht deine Inventurliste ein Gedächtnis für den alten Preis. Das sind zwei zusätzliche Felder, die du einmal anlegst.</p>'+
+        '<p class="lead">Damit du später sehen kannst, was sich wann verändert hat, braucht die Datenbank, in der deine Einkaufspreise gepflegt werden, ein Gedächtnis für den alten Preis. Welche das in deiner Vorlage ist, steht in deiner Systemkarte. Das sind zwei zusätzliche Felder, die du einmal anlegst.</p>'+
         '<div class="tsn4-cards c2">'+
           '<div class="tsn4-card"><span class="k">Zahl</span><div class="n">Vorheriger Preis</div><hr><p>Hier schreibt Claude beim Aktualisieren den bisherigen Einkaufspreis hinein. So lässt sich jede Erhöhung in Euro und Prozent nachvollziehen.</p></div>'+
           '<div class="tsn4-card"><span class="k">Datum</span><div class="n">Preis geändert am</div><hr><p>Das Datum der letzten Änderung. Darauf greifen die Automation in Lektion sieben und der Wochenbericht in Lektion acht zurück.</p></div>'+
         '</div>'+
-        N.cmd('Prompt', 'Leg in meiner Inventurliste zwei neue Felder an: „Vorheriger Preis“ als Zahl im Euro-Format und „Preis geändert am“ als Datum. Zeig mir vorher, was du anlegst. Ergänze danach die Systemkarte in der CLAUDE.md um beide Felder.')
+        N.cmd('Prompt', 'Leg in der Datenbank, in der laut Systemkarte meine Einkaufspreise stehen, zwei neue Felder an: „Vorheriger Preis“ als Zahl im Euro-Format und „Preis geändert am“ als Datum. Zeig mir vorher, was du anlegst. Ergänze danach die Systemkarte in der CLAUDE.md um beide Felder.')
       },
       {id:'tsn4a5-namen', html:
         '<div class="tsn4-eb">Die eigentliche Arbeit</div>'+
@@ -35180,7 +35223,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         '<table class="tsn4-tbl"><tr><th>Datenbank</th><th>Wenn</th><th>Dann</th></tr>'+
           '<tr><td><b>Inventurliste</b></td><td>das Auswahlfeld Bestand auf „Nachbestellen“ gesetzt wird</td><td>Benachrichtigung an die Person, die bestellt, mit dem Artikel und dem Lieferpartner</td></tr>'+
           '<tr><td><b>Gerichte & Getränke</b></td><td>der Status auf „Auf der Karte“ wechselt</td><td>Eigenschaft „Auf der Karte seit“ auf das heutige Datum setzen</td></tr>'+
-          '<tr><td><b>Inventurliste</b></td><td>das Feld Einkaufspreis bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
+          '<tr><td><b>Datenbank mit deinen Einkaufspreisen</b></td><td>der Einkaufspreis bearbeitet wird</td><td>„Preis geändert am“ auf heute setzen und dich benachrichtigen</td></tr>'+
           '<tr><td><b>Key Metrics</b></td><td>wiederkehrend, am ersten Tag des Monats</td><td>Seite für die Monatsauswertung anlegen, mit Datum im Titel</td></tr>'+
         '</table>'+
         '<p>Die dritte Automation arbeitet mit den Feldern aus Lektion fünf zusammen. Trägt Claude einen Preis ein, setzt es das Datum ohnehin. Ändert jemand den Preis von Hand, sorgt die Automation dafür, dass das Datum trotzdem stimmt.</p>'+
@@ -35232,14 +35275,26 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
     '<div class="day"><span>Montag</span><b class="tm">00:00</b></div></div>';
   var dev='<div class="cardx dv lap" data-s="1" style="'+P(380,70,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="7" y="3" width="26" height="17" rx="2"/><path d="M3 23h34l-2 3H5z"/></svg><span class="dn">Dein Laptop</span><span class="ds">zugeklappt</span></div>'+
           '<div class="cardx dv cl" data-s="1" style="'+P(380,220,170,120)+'"><svg class="ic" viewBox="0 0 40 28" width="40" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 24h17a7 7 0 0 0 0-14 9 9 0 0 0-17-1 7 7 0 0 0 0 15z"/></svg><span class="dn">Claude in der Cloud</span><span class="ds">führt die Aufgabe aus</span></div>';
-  var BL=[['Höchster Wareneinsatz',['g-rinderfilet','Rinderfilet 34,2 %'],['g-jakobsmuscheln','Jakobsmuscheln 31,5 %']],['Preise geändert',['z-tomate','Tomaten +10,4 %'],['z-zitrone','Zitronen +10,7 %']],['Über deiner Grenze',null,['','Ein Gericht über 32 %']],['Lücken',['g-pilz-ravioli','Pilz-Ravioli: Preis Steinpilze fehlt'],null]];
-  var page='<div class="cardx wb" data-s="1" style="'+P(600,16,380,418)+'"><div class="wh"><span class="nt">N</span><b>Wochenblick · Montag</b></div>'+
-    BL.map(function(b,i){ function ln(x){ return x?'<span class="bv">'+(x[0]?'<img src="'+I+x[0]+'.webp" alt="">':'')+x[1]+'</span>':''; } return '<div class="bk b'+i+'"><span class="bt">'+b[0]+'</span>'+ln(b[1])+ln(b[2])+'</div>'; }).join('')+
-    '<div class="ro">Nur gelesen · in den Datenbanken nichts geändert</div></div>';
+  var BL=[['Höchster Wareneinsatz',['g-rinderfilet','Rinderfilet 34,2 %'],['g-jakobsmuscheln','Jakobsmuscheln 31,5 %']],['Preise geändert',['z-tomate','Tomaten +10,4 %'],['z-zitrone','Zitronen +10,7 %']],['Über deiner Grenze',null,['','Ein Gericht über 32 %']],['Lücken',['g-pilz-ravioli','Pilz-Ravioli Steinpilze ohne Preis'],null]];
+  var page='<div class="nw wb" data-s="1" style="'+P(600,16,380,390)+'"><div class="nbar">'+N.NPAGE+'<span>Key Metrics</span><span class="sep">/</span><span>Wochenblick</span></div>'+
+    '<div class="pt ntitle">Wochenblick · Montag</div>'+
+    BL.map(function(b,i){ function ln(x){ return x?'<div class="bv">'+(x[0]?'<span class="mn"><img src="'+I+x[0]+'.webp" alt=""><u>'+x[1].split(' ')[0].replace(/:$/,'')+'</u></span> '+x[1].split(' ').slice(1).join(' '):x[1])+'</div>':''; } return '<div class="bk b'+i+'"><div class="bt">'+b[0]+'</div>'+ln(b[1])+ln(b[2])+'</div>'; }).join('')+
+    '</div><div class="ro" data-s="1" style="'+P(600,414,380,28)+'">Nur gelesen · in den Datenbanken nichts geändert</div>';
   var lines='<svg class="lines" viewBox="0 0 1000 450" preserveAspectRatio="none"><path class="ln dash" pathLength="1" data-s="1" d="M332 130 H378"/><path class="ln" pathLength="1" data-s="1" d="M332 280 H378"/><path class="ln" pathLength="1" data-s="1" d="M552 280 C576 280 576 225 598 225"/>'+
     '<path class="sp" pathLength="1" d="M332 280 H378"/><path class="sp" pathLength="1" style="animation-delay:.9s" d="M552 280 C576 280 576 225 598 225"/></svg>';
   var html='<div class="sc"><div class="st" style="aspect-ratio:1000/450">'+lines+clock+dev+page+'</div></div>';
-  var css=`
+  var css=N.nCSS('tsn4a8anim')+`
+  #tsn4a8anim .wb .pt{font-size:26px;line-height:32px;padding:4px 22px 8px}
+  #tsn4a8anim .bk{padding:4px 22px 6px;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  #tsn4a8anim .bt{font-size:14px;font-weight:600;line-height:22px;color:rgb(240,239,237)}
+  #tsn4a8anim .bv{font-size:13.5px;line-height:22px;color:rgb(240,239,237);font-variant-numeric:tabular-nums}
+  #tsn4a8anim .mn{display:inline-flex;align-items:center;gap:5px}
+  #tsn4a8anim .mn img{width:16px;height:16px;border-radius:3px;object-fit:cover}
+  #tsn4a8anim .mn u{text-decoration-color:rgba(255,255,243,.25);text-underline-offset:3px}
+  #tsn4a8anim .ro{display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(143,203,170,.5);font-size:11.5px;color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+  #tsn4a8anim.js .bk,#tsn4a8anim.js .ro{opacity:0;transform:translateY(8px)}
+  #tsn4a8anim.js.k3 .b0,#tsn4a8anim.js.k3 .b1,#tsn4a8anim.js.k4 .b2,#tsn4a8anim.js.k4 .b3,#tsn4a8anim.js.k5 .ro{opacity:1;transform:none}
+  #tsn4a8anim.js.k3 .b1{transition-delay:.25s}
   #tsn4a8anim .ck{display:flex;flex-direction:column;align-items:center;gap:14px}
   #tsn4a8anim .ck svg{width:78%;height:auto;overflow:visible;filter:drop-shadow(0 26px 40px rgba(0,0,0,.8))}
   #tsn4a8anim .ck .hh,#tsn4a8anim .ck .mh{transform-origin:100px 100px;transition:transform 2.2s ${N.EASE}}
@@ -35252,18 +35307,6 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
   #tsn4a8anim .dv .ds{font-size:11px;color:rgba(255,255,255,.86)}
   #tsn4a8anim .lap{border-style:dashed}
   #tsn4a8anim .cl.lit .ic{color:#efe6d2;filter:drop-shadow(0 0 8px rgba(239,230,210,.8))}
-  #tsn4a8anim .wb{padding:14px 16px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
-  #tsn4a8anim .wh{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:#fff}
-  #tsn4a8anim .nt{width:20px;height:20px;border-radius:5px;background:#fff;color:#05060b;font:700 12px/20px Georgia,serif;text-align:center}
-  #tsn4a8anim .bk{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s ${N.EASE}}
-  #tsn4a8anim .bt{font:700 9.5px/1 ${N.SANS};letter-spacing:.12em;text-transform:uppercase;color:#c7b489}
-  #tsn4a8anim .bv{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
-  #tsn4a8anim .bv img{width:20px;height:20px;flex:0 0 20px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,180,137,.5)}
-  #tsn4a8anim .b3 .bv{color:#fff}#tsn4a8anim .b3{border-color:rgba(227,37,82,.4)}
-  #tsn4a8anim .ro{margin-top:auto;padding:8px 10px;border-radius:8px;border:1px solid rgba(143,203,170,.45);font-size:11px;text-align:center;color:#fff;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
-  #tsn4a8anim.js .bk,#tsn4a8anim.js .ro{opacity:0;transform:translateY(8px)}
-  #tsn4a8anim.js.k3 .b0,#tsn4a8anim.js.k3 .b1,#tsn4a8anim.js.k4 .b2,#tsn4a8anim.js.k4 .b3,#tsn4a8anim.js.k5 .ro{opacity:1;transform:none}
-  #tsn4a8anim.js.k3 .b1{transition-delay:.25s}#tsn4a8anim.js.k4 .b3{transition-delay:.25s}
   `;
   function hands(el,h,m,label){ var ck=el.querySelector('.ck'); ck.style.setProperty('--h',h+'deg'); ck.style.setProperty('--m',m+'deg'); el.querySelector('.tm').textContent=label; }
   N.page({
@@ -35321,7 +35364,7 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
           '<li>Unter den Verbindungen alles außer <b>Notion</b> entfernen. Sie sind standardmäßig alle eingeschlossen.</li>'+
           '<li>Speichern und mit <b>Run now</b> einmal sofort auslösen, statt bis Montag zu warten.</li>'+
         '</ol></div>'+
-        N.cmd('Auftrag für den Wochenblick', 'Lies mein Backoffice in Notion und leg im Bereich Key Metrics eine neue Seite an, Titel „Wochenblick“ mit dem heutigen Datum.\n\nNimm ausschließlich Zahlen aus den Feldern der Datenbanken. Schätze nichts und nenne zu jeder Zahl den Eintrag, aus dem sie stammt.\n\nInhalt:\n1. Die fünf Gerichte mit dem höchsten Wareneinsatz in Prozent.\n2. Alle Artikel der Inventurliste, deren „Preis geändert am“ in den letzten sieben Tagen liegt, mit vorherigem und aktuellem Preis.\n3. Alle Gerichte mit einem Wareneinsatz über [deine Grenze] Prozent.\n4. Alle Zutaten ohne Einkaufspreis und alle Gerichte ohne Verkaufspreis.\n\nÄndere in keiner Datenbank etwas. Die neue Seite ist das Einzige, was du anlegst.')
+        N.cmd('Auftrag für den Wochenblick', 'Lies mein Backoffice in Notion und leg im Bereich Key Metrics eine neue Seite an, Titel „Wochenblick“ mit dem heutigen Datum.\n\nNimm ausschließlich Zahlen aus den Feldern der Datenbanken. Schätze nichts und nenne zu jeder Zahl den Eintrag, aus dem sie stammt.\n\nInhalt:\n1. Die fünf Gerichte mit dem höchsten Wareneinsatz in Prozent.\n2. Alle Artikel, deren „Preis geändert am“ in den letzten sieben Tagen liegt, mit vorherigem und aktuellem Preis.\n3. Alle Gerichte mit einem Wareneinsatz über [deine Grenze] Prozent.\n4. Alle Zutaten ohne Einkaufspreis und alle Gerichte ohne Verkaufspreis.\n\nÄndere in keiner Datenbank etwas. Die neue Seite ist das Einzige, was du anlegst.')
       },
       {id:'tsn4a8-regel', html:
         '<div class="tsn4-eb">Die Regel</div>'+
