@@ -33878,6 +33878,233 @@ var TSISL_TEAM_ONB_V2=[
   });
 })();
 
+/* ---- l05-cowork.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.5 "Aufgaben uebergeben"  (/claude-cowork, neue Notion-Zeile, Re-Sync noetig)
+   Fakten: Faktenblatt Punkt 2 (Cowork, Plaene, Cloud, eingebauter Browser, Computer-Nutzung,
+   Dateitypen, Limits), Punkt 11 (geplante Aufgaben), Punkt 14 (Berechtigungen).
+   Abgrenzung: nur Datei-Ebene, kein Eintragen in Notion (Modul 4), Rueckgriff Agent vs. Automation (L0.5).
+   Erklaeranimation #tsn3-a05 "Ein Ordner, eine Liste."
+   Links ein Ordner mit zwoelf Lieferscheinen (gleich grosse Kacheln), rechts die Monatsliste.
+   Eine Leselinie faehrt (transform) ueber den aktuellen Schein, er bekommt ein Haekchen, rechts
+   erscheint seine Zeile. Schein 07 ist unleserlich und wird markiert statt geraten.
+   Keine Geldbetraege (keine erfundenen Zahlen): Datum, Lieferant, neuer Dateiname, Status.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var SUP=['Metzgerei Hansen','Fischhaus Nord','Gemüsehof Brandt','Molkerei am Deich','Getränke Kühn','Bäckerei Lohse'];
+  var ROWS=[];
+  for(var i=0;i<12;i++){ var d=(3+i*2), s=SUP[i%6]; ROWS.push({d:(d<10?'0':'')+d+'.11.', s:s, f:'2026-11-'+((d<10?'0':'')+d)+'_'+s.split(' ').pop()+'.pdf', bad:i===6}); }
+  var stage='<div class="l5-wrap">'
+    +'<div class="l5-folder"><div class="l5-h"><span class="l5-ic"></span>Lieferscheine November<span class="l5-cnt">12 Dateien</span></div>'
+    +'<div class="l5-docs"><span class="l5-scan"></span>'+ROWS.map(function(r,i){ return '<div class="l5-doc'+(r.bad?' bad':' ok')+'"><span class="l5-ln"></span><span class="l5-ln s"></span><span class="l5-ln"></span><span class="l5-mk">'+(r.bad?'?':'✓')+'</span><span class="l5-no">'+(i<9?'0':'')+(i+1)+'</span></div>'; }).join('')+'</div></div>'
+    +'<div class="l5-sheet"><div class="l5-h"><span class="l5-ic x"></span>Monatsliste_November.xlsx</div>'
+    +'<div class="l5-tbl"><div class="l5-tr hd"><span>Datum</span><span>Lieferant</span><span>Neuer Dateiname</span><span>Status</span></div>'
+    +ROWS.map(function(r){ return '<div class="l5-tr'+(r.bad?' bad':'')+'"><span>'+(r.bad?'?':r.d)+'</span><span>'+(r.bad?'nicht lesbar':r.s)+'</span><span class="mono">'+(r.bad?'nicht umbenannt':r.f)+'</span><span class="st">'+(r.bad?'prüfen':'erfasst')+'</span></div>'; }).join('')
+    +'</div></div></div>';
+
+  T3.anim('tsn3-a05',{
+    reset:function(el){
+      el.querySelectorAll('.l5-doc').forEach(function(d){ d.classList.remove('done','cur'); });
+      el.querySelectorAll('.l5-tr:not(.hd)').forEach(function(r){ r.classList.remove('in'); });
+      el.querySelector('.l5-scan').classList.remove('on');
+    },
+    play:function(el, api, end){
+      var docs=el.querySelectorAll('.l5-doc'), rows=el.querySelectorAll('.l5-tr:not(.hd)'), scan=el.querySelector('.l5-scan');
+      api.cap('Du gibst den Ordner frei und sagst, <b>was am Ende entstehen soll</b>: eine Monatsliste, jede Datei mit Datum und Lieferant im Namen.');
+      var STEP=620, t0=1800;
+      ROWS.forEach(function(r,i){
+        api.T.at(t0+i*STEP,function(){
+          docs.forEach(function(d){ d.classList.remove('cur'); }); docs[i].classList.add('cur');
+          scan.style.setProperty('--c',i%4); scan.style.setProperty('--r',Math.floor(i/4)); scan.classList.add('on');
+        });
+        api.T.at(t0+i*STEP+360,function(){ docs[i].classList.add('done'); rows[i].classList.add('in'); });
+        if(i===6) api.T.at(t0+i*STEP+380,function(){ api.cap('Schein 07 ist <b>unleserlich</b>. Claude rät kein Datum, sondern markiert ihn, damit du nachsiehst.'); });
+      });
+      api.T.at(t0+12*STEP+500,function(){ scan.classList.remove('on'); docs.forEach(function(d){ d.classList.remove('cur'); }); api.cap('Elf Scheine erfasst und umbenannt, einer zum Prüfen. Die Liste liegt im selben Ordner, <b>du siehst sie durch</b>, bevor du weiterarbeitest.'); });
+      api.T.at(t0+12*STEP+3600, end);
+    },
+    end:function(el){
+      el.querySelectorAll('.l5-doc').forEach(function(d){ d.classList.add('done'); d.classList.remove('cur'); });
+      el.querySelectorAll('.l5-tr').forEach(function(r){ r.classList.add('in'); });
+      el.querySelector('.l5-scan').classList.remove('on');
+    }
+  });
+
+  T3.page({
+    key:'l05', re:/\/(?:lektionen\/)?claude-cowork\/?$/, tab:'L 3.5 · Aufgaben übergeben',
+    hero:{eyebrow:'L 3.5', title:'Aufgaben <span class="ts-gold">übergeben</span>', alt:'Claude Cowork: Aufgaben übergeben und in freigegebenen Ordnern arbeiten lassen'},
+    intro:'<p>Bis hierher hat Claude geantwortet. Jetzt arbeitet es. Du gibst einen Ordner frei, sagst, was am Ende entstehen soll, und Claude geht die Dateien selbst durch, legt Ergebnisse an und meldet sich, wenn es fertig ist. Anthropic nennt das <b>Cowork</b>, und seit September 2026 passiert es im selben Gespräch wie jede kurze Frage.</p>'
+      +'<p>Für einen Betrieb heißt das: der Stapel Lieferscheine vom Monat, die fotografierten Temperaturlisten, die Wunschzettel fürs Dienstplan-Wochenende. Arbeit, die du sonst abends am Küchentisch erledigst.</p>',
+    anim:{id:'tsn3-a05', eb:'Was beim Übergeben passiert', title:'Ein Ordner, eine <span class="g">Liste</span>.',
+      sub:'Zwölf Lieferscheine im Ordner, ein Auftrag im Gespräch. Achte auf Schein 07.',
+      stage:stage,
+      capEnd:'Elf Scheine erfasst und umbenannt, einer zum Prüfen. Die Liste liegt im selben Ordner, <b>du siehst sie durch</b>, bevor du weiterarbeitest.'},
+    body:function(H){
+      return H.sec({id:'tsn3-l05-was', title:'Was Cowork mit deinem <span class="g">Ordner</span> macht',
+          lead:'Der Unterschied zum reinen Gespräch: Claude darf in den Ordnern lesen, ändern und Dateien anlegen, die du freigibst. Nur dort.',
+          body:'<p><strong class="lead">Du sagst, was du brauchst, nicht wie.</strong>Statt zwölf Schritte vorzugeben, beschreibst du das Ergebnis: „Eine Monatsliste aller Lieferscheine, jede Datei mit Datum und Lieferant im Namen.“ Claude plant die Schritte selbst, arbeitet sie ab und legt dir das Ergebnis zur Prüfung hin.</p>'
+            +'<p><strong class="lead">Es arbeitet mit deinen Dateitypen.</strong>Word, PDF, Excel, PowerPoint, CSV und Bilder. Ein abfotografierter Lieferschein ist für Claude genauso lesbar wie ein PDF vom Lieferanten.</p>'
+            +'<p><strong class="lead">Es läuft weiter, wenn du gehst.</strong>Große Aufgaben laufen in der Cloud weiter, auch wenn du den Laptop zuklappst. Arbeitet Claude mit Dateien auf deinem Rechner, muss die Desktop-App dafür geöffnet bleiben. In der Desktop-App gibt es Cowork in allen bezahlten Plänen, im Browser und auf dem Handy ab Pro.</p>'
+            +H.note('Vor dem endgültigen Löschen einer Datei fragt Claude nach. Trotzdem gibst du am Anfang nur eine <b>Kopie</b> deines Ordners frei, bis du weißt, wie Claude mit deinen Dateien umgeht.','Die Merkregel')})
+        +H.sec({id:'tsn3-l05-auftraege', title:'Drei Aufträge aus dem <span class="g">Betrieb</span>',
+          lead:'Jeder dieser Aufträge funktioniert mit einem Ordner und einem Satz. Kopier sie, pass die Namen an und gib den Ordner frei.',
+          body:H.prompt('Im Ordner „Lieferscheine November“ liegen die Lieferscheine dieses Monats, teils als PDF, teils als Foto. Leg eine Excel-Liste mit Datum, Lieferant und Dateiname an und benenne jede Datei nach dem Muster JJJJ-MM-TT_Lieferant. Wenn du ein Datum oder einen Lieferanten nicht sicher lesen kannst, rate nicht, sondern markiere die Zeile mit „prüfen“.','Auftrag 1: Lieferscheine ordnen','Das Eintragen der Preise in dein Backoffice kommt in Modul 4. Hier geht es nur um Ordnung im Ordner.')
+            +H.prompt('Im Ordner „Temperaturlisten Oktober“ liegen Fotos unserer Kühlhaus- und Kühlschranklisten. Übertrag alle Werte in eine Tabelle mit Datum, Gerät, Uhrzeit und Temperatur. Markier jeden Wert über 7 Grad und jeden Tag ohne Eintrag. Ändere an den Fotos nichts.','Auftrag 2: Temperaturlisten übertragen','Den Grenzwert setzt du nach deinem HACCP-Konzept.')
+            +H.prompt('Im Ordner „Wünsche Dezember“ liegen die Urlaubs- und Freiwünsche des Teams als Fotos und Nachrichten. Mach mir eine Übersicht, wer an welchem Tag nicht kann, und markier die Tage, an denen in Küche oder Service weniger als zwei Leute übrig bleiben.','Auftrag 3: Dienstplan-Wünsche sammeln','Den Plan selbst schreibst du. Die Übersicht spart dir das Zusammensuchen.')})
+        +H.sec({id:'tsn3-l05-geplant', title:'Aufgaben, die von <span class="g">selbst</span> laufen',
+          lead:'Manche Arbeit kommt jede Woche wieder. Die musst du nicht jedes Mal neu anstoßen.',
+          body:'<p>In der App kannst du eine Aufgabe <b>planen</b>: stündlich, täglich, wöchentlich, an Werktagen oder nur auf Abruf. Du beschreibst sie einfach im Gespräch oder legst sie in der Seitenleiste unter den geplanten Aufgaben an. Sie laufen in der Cloud, dein Rechner darf dabei aus sein, solange die Aufgabe keine Dateien von deiner Festplatte braucht. Geplante Aufgaben gibt es in allen bezahlten Plänen.</p>'
+            +H.prompt('Jeden Montag um 7 Uhr: Lies meine Mails und meinen Kalender der kommenden Woche. Schreib mir ein kurzes Wochenbriefing mit allen Lieferterminen, Veranstaltungen und Gruppenreservierungen, sortiert nach Tagen.','Geplante Aufgabe: Wochenbriefing','Setzt verbundenes Postfach und Kalender voraus (Lektion 3.4).')
+            +'<p style="margin-top:16px">Du kennst den Unterschied aus Modul 0: Eine Automatisierung macht immer dasselbe, ein Agent denkt mit. Eine geplante Aufgabe ist ein Agent mit festem Termin. Wie solche Aufgaben mit deinem Backoffice zusammenarbeiten, bauen wir in Modul 4.</p>'})
+        +H.sec({id:'tsn3-l05-sicher', wide:true, title:'Sicher <span class="g">übergeben</span>',
+          lead:'Je mehr Claude selbst tut, desto wichtiger wird, was du freigibst.',
+          body:H.cards([
+            {eb:'Freigabe', nm:'Nur den Arbeitsordner', p:'Gib einen eigenen Ordner für die Aufgabe frei, nie deine ganze Festplatte. Was nicht darin liegt, kann Claude nicht anfassen.'},
+            {eb:'Prüfen', nm:'Ergebnis vor Weitergabe', p:'Claude legt das Ergebnis zur Prüfung hin. Bei allem, was echte Folgen hat, Mails an Lieferanten oder Dateien, die du weitergibst, bleibst du dabei.'},
+            {eb:'Kontingent', nm:'Große Aufgaben kosten mehr', p:'Arbeit in Ordnern verbraucht dein Nutzungsfenster schneller als ein kurzes Gespräch. Plane große Aufträge nicht direkt vor einer langen Sitzung in Claude Code.'},
+            {eb:'Im Notfall', nm:'Bildschirm-Steuerung', p:'Claude kann als Vorschau auch Programme auf deinem Bildschirm bedienen. Es nimmt aber zuerst Konnektoren, dann den Browser und den Bildschirm nur, wenn es nicht anders geht, und fragt für jedes Programm.'}
+          ],2)})
+    },
+    emp:{kind:'Nutzung', animTitle:'Dein', animGold:'erster Auftrag',
+      steps:['Ordner kopieren','Ergebnis beschreiben','Unsicheres markieren','Prüfen'],
+      intro:'So übergibst du die erste Aufgabe, ohne dir Sorgen um deine Dateien zu machen:',
+      points:['Leg eine <b>Kopie</b> des Ordners an und gib nur die frei. Das Original bleibt unberührt, bis du dem Ergebnis traust.',
+        'Beschreib das <b>Ergebnis</b>, nicht die Schritte: welche Datei, welche Spalten, welche Benennung.',
+        'Schreib in jeden Auftrag, dass Claude bei Unsicherheit <b>markieren statt raten</b> soll. Das spart dir die Fehlersuche.',
+        'Sieh das Ergebnis <b>Zeile für Zeile</b> durch, bevor du es weiterverwendest oder an jemanden schickst.']},
+    learn:{learn:['Du weißt, dass Claude in <b>freigegebenen Ordnern</b> selbst arbeiten kann.',
+        'Du beschreibst <b>das Ergebnis</b>, nicht die Schritte.',
+        'Du kennst <b>geplante Aufgaben</b>, die ohne deinen Rechner laufen.',
+        'Du gibst am Anfang nur eine <b>Kopie</b> frei und prüfst jedes Ergebnis.'],
+      next:'/claude-in-chrome'}
+  });
+})();
+
+/* ---- l06-chrome.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.6 "Claude in Chrome"  (/claude-in-chrome, neue Notion-Zeile, Re-Sync noetig)
+   Fakten: Faktenblatt Punkt 2 (Claude in Chrome, Plaene, Installation) und Punkt 14
+   (Sicherheit: Nachfrage vor heiklen Schritten, eigenes Profil, Freigabe-Einstellung,
+   Anmeldeseiten/CAPTCHA, Prompt-Injection).
+   Erklaeranimation #tsn3-a06 "Bis zur Schranke."
+   Ein Browserfenster mit einem erfundenen Grosshandels-Portal. Claudes Zeiger (transform)
+   sucht, liest drei Angebote in eine Vergleichskarte, legt eins in den Warenkorb. Am Knopf
+   "Bestellung absenden" senkt sich die Schranke: Claude haelt an und fragt. Keine Preise
+   (keine erfundenen Zahlen): verglichen wird ueber Herkunft, Lieferzeit, Kennzeichnung.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var OFF=[
+    {nm:'Rinderhüfte · Bayern', d:'Lieferung in 2 Tagen', tag:''},
+    {nm:'Rinderhüfte · Irland', d:'Lieferung morgen', tag:'günstigster Kilopreis'},
+    {nm:'Rinderhüfte · Uruguay', d:'Lieferung in 3 Tagen', tag:''}
+  ];
+  var CAPS=[
+    'Claude öffnet das Portal deines Großhändlers, <b>mit deinem Login</b>, und sucht nach dem Artikel.',
+    'Es liest die Angebote aus und legt sie <b>nebeneinander</b>: Herkunft, Lieferzeit, Kilopreis.',
+    'Das passende Angebot kommt in den <b>Warenkorb</b>. Bis hierher ist nichts passiert, was du nicht rückgängig machen kannst.',
+    'Am Knopf zum Absenden geht <b>die Schranke runter</b>. Bestellen, bezahlen, veröffentlichen: Das gibst du selbst frei.'
+  ];
+  var stage='<div class="l6-win">'
+    +'<div class="l6-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l6-url">grosshandel-nord.de/sortiment</span><span class="l6-ext" title="Claude in Chrome">C</span></div>'
+    +'<div class="l6-page">'
+      +'<div class="l6-top"><span class="l6-logo">Großhandel Nord</span><span class="l6-search"><span class="l6-q">Rinderhüfte</span></span><span class="l6-cart">Warenkorb <b>1</b></span></div>'
+      +'<div class="l6-grid">'+OFF.map(function(o,i){ return '<div class="l6-off" data-i="'+i+'"><span class="l6-img"><img src="'+T3.pic('a06-fleisch-'+(i+1)+'.webp','Angebot '+(i+1),300,200)+'" alt="" loading="lazy" decoding="async"></span><span class="l6-on">'+o.nm+'</span><span class="l6-od">'+o.d+'</span>'+(o.tag?'<span class="l6-tag">'+o.tag+'</span>':'')+'</div>'; }).join('')+'</div>'
+      +'<div class="l6-foot"><span class="l6-send">Bestellung absenden</span><span class="l6-gate"><i></i></span></div>'
+      +'<div class="l6-ask"><span class="l6-who">Claude fragt</span>Bestellung über 1 Position absenden?<span class="l6-btns"><span class="no">Abbrechen</span><span class="ok">Freigeben</span></span></div>'
+      +'<span class="l6-cur"></span>'
+    +'</div>'
+    +'<div class="l6-side"><div class="l6-sh">Claude · Seitenleiste</div><div class="l6-note">Vergleich Rinderhüfte</div>'
+      +OFF.map(function(o,i){ return '<div class="l6-row" data-i="'+i+'"><span>'+o.nm.split(' · ')[1]+'</span><span>'+o.d.replace('Lieferung ','')+'</span></div>'; }).join('')
+      +'<div class="l6-pick">Empfehlung: Irland, morgen da, günstigster Kilopreis</div></div>'
+    +'</div>';
+  /* Zeiger-Ziele in Prozent der Seitenflaeche */
+  var POS={search:[48,9], off1:[50,44], cart:[86,9], send:[50,88]};
+  function cur(el,p){ var c=el.querySelector('.l6-cur'); c.style.setProperty('--x',p[0]); c.style.setProperty('--y',p[1]); }
+
+  T3.anim('tsn3-a06',{
+    reset:function(el){
+      el.classList.remove('s1','s2','s3','s4');
+      el.querySelectorAll('.l6-off,.l6-row').forEach(function(n){ n.classList.remove('in','pick'); });
+      cur(el,[20,60]);
+    },
+    play:function(el, api, end){
+      var S=3300;
+      api.T.at(300,function(){ api.cap(CAPS[0]); cur(el,POS.search); });
+      api.T.at(1200,function(){ el.classList.add('s1'); });
+      api.T.at(300+S,function(){ api.cap(CAPS[1]); });
+      [0,1,2].forEach(function(i){ api.T.at(300+S+400+i*600,function(){ el.querySelector('.l6-off[data-i="'+i+'"]').classList.add('in'); el.querySelector('.l6-row[data-i="'+i+'"]').classList.add('in'); cur(el,[18+i*32,44]); }); });
+      api.T.at(300+S+2400,function(){ el.classList.add('s2'); el.querySelector('.l6-off[data-i="1"]').classList.add('pick'); el.querySelector('.l6-row[data-i="1"]').classList.add('pick'); cur(el,POS.off1); });
+      api.T.at(300+2*S,function(){ api.cap(CAPS[2]); cur(el,POS.cart); });
+      api.T.at(300+2*S+800,function(){ el.classList.add('s3'); });
+      api.T.at(300+3*S,function(){ api.cap(CAPS[3]); cur(el,POS.send); });
+      api.T.at(300+3*S+900,function(){ el.classList.add('s4'); });
+      api.T.at(300+4*S+600, end);
+    },
+    end:function(el){
+      el.classList.add('s1','s2','s3','s4');
+      el.querySelectorAll('.l6-off,.l6-row').forEach(function(n){ n.classList.add('in'); });
+      el.querySelector('.l6-off[data-i="1"]').classList.add('pick'); el.querySelector('.l6-row[data-i="1"]').classList.add('pick');
+      cur(el,POS.send);
+    }
+  });
+
+  T3.page({
+    key:'l06', re:/\/(?:lektionen\/)?claude-in-chrome\/?$/, tab:'L 3.6 · Claude in Chrome',
+    hero:{eyebrow:'L 3.6', title:'Claude in <span class="ts-gold">Chrome</span>', alt:'Claude in Chrome: Webseiten lesen, vergleichen und Formulare ausfüllen, mit Freigabe vor jeder Bestellung'},
+    intro:'<p>Vieles, was du im Betrieb brauchst, steht nicht in einer Datei, sondern auf einer Webseite hinter deinem Login: das Bestellportal des Großhändlers, die Buchungsseite für Reservierungen, die Bewertungen deiner Gäste. <b>Claude in Chrome</b> arbeitet genau dort, in deinem Browser und mit den Anmeldungen, die du dort ohnehin hast.</p>'
+      +'<p>Damit bekommt Claude Hände im Netz. Es liest, vergleicht, klickt und füllt Formulare aus. Deshalb ist diese Lektion zur Hälfte eine Lektion über Sicherheit: was du Claude im Browser überlässt und wo du selbst den letzten Klick machst.</p>',
+    anim:{id:'tsn3-a06', eb:'Wo Claude anhält', title:'Bis zur <span class="g">Schranke</span>.',
+      sub:'Ein Einkauf im Bestellportal, vom Suchfeld bis zum Warenkorb. Den letzten Schritt macht Claude nicht allein.',
+      stage:stage,
+      capEnd:CAPS[3]},
+    body:function(H){
+      return H.sec({id:'tsn3-l06-kann', wide:true, title:'Was Claude im <span class="g">Browser</span> kann',
+          lead:'Claude in Chrome ist eine Erweiterung für deinen Browser. Sie sitzt als Seitenleiste neben der Seite, die du gerade offen hast.',
+          body:H.cards([
+            {eb:'Lesen', nm:'Seiten auslesen', p:'Angebote, Bewertungen, Buchungslisten. Claude liest, was auf der Seite steht, und fasst es zusammen oder legt es in eine Tabelle.'},
+            {eb:'Handeln', nm:'Klicken und ausfüllen', p:'Claude navigiert, klickt sich durch Menüs und füllt Formulare aus, zum Beispiel eine Bestellung oder eine Anfrage an einen Lieferanten.'},
+            {eb:'Anmeldung', nm:'Mit deinen Logins', p:'Es arbeitet in deinen Tabs, mit den Konten, in denen du angemeldet bist. Bei Anmeldeseiten und Sicherheitsabfragen hält es an und gibt an dich ab.'},
+            {eb:'Mehrere Seiten', nm:'Tabs als Gruppe', p:'Für Vergleiche öffnet Claude mehrere Tabs in einer Gruppe, etwa die Portale von drei Lieferanten nebeneinander.'}
+          ],2)
+          +'<p style="margin-top:16px">Claude in Chrome ist in allen bezahlten Plänen enthalten. In Max, Ultra und Team steckt in der Seitenleiste außerdem eine vollständige Arbeitssitzung mit deinen Skills und Konnektoren, für Pro ist das angekündigt.</p>'})
+        +H.sec({id:'tsn3-l06-install', title:'Einrichten in fünf <span class="g">Minuten</span>',
+          lead:'Bevor du die Erweiterung installierst, triffst du eine Entscheidung, die dir später viel Ärger erspart: in welchem Browser-Profil Claude arbeitet.',
+          body:H.steps([
+            'Leg in Chrome ein <b>eigenes Profil</b> für die Arbeit mit Claude an, ohne Online-Banking, Passwort-Manager und private Konten. Anthropic empfiehlt genau das.',
+            'Installier in diesem Profil die Erweiterung „Claude“ aus dem <a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target="_blank" rel="noopener">Chrome Web Store</a>. Sie läuft auch in Edge und anderen Browsern auf Chrome-Basis.',
+            'Melde dich mit deinem Claude-Konto an und hefte die Erweiterung an die Leiste, damit du sie mit einem Klick öffnest.',
+            'Stell in der Seitenleiste die Freigabe von <b>„Automatisch freigeben“ auf „Manuell freigeben“</b>. So siehst du am Anfang jeden Schritt, bevor er passiert.',
+            'Melde dich in diesem Profil nur bei den Portalen an, mit denen Claude arbeiten soll: Großhändler, Buchungsseite, Bewertungsportal.'
+          ],'Jetzt du')})
+        +H.sec({id:'tsn3-l06-auftraege', title:'Drei Einsätze aus dem <span class="g">Betrieb</span>',
+          lead:'Alle drei lesen und bereiten vor. Keiner bestellt, bezahlt oder veröffentlicht etwas.',
+          body:H.prompt('Öffne das Bestellportal meines ersten Großhändlers in einem Tab und das des zweiten in einem weiteren. Such in beiden nach Rinderhüfte, Kalbsrücken und Butter 82 %. Mach mir eine Tabelle mit Herkunft, Gebindegröße, Lieferzeit und Kilopreis je Portal. Leg nichts in den Warenkorb.','Einsatz 1: Preise vergleichen','Am besten nennst du die Portale beim Namen. Du musst in beiden angemeldet sein.')
+            +H.prompt('Geh auf mein Bewertungsportal und lies alle Bewertungen der letzten vier Wochen. Schreib mir zu jeder einen Antwortentwurf in unserem Ton, freundlich und ohne Ausreden. Veröffentliche nichts, sondern gib mir die Entwürfe hier in der Seitenleiste.','Einsatz 2: Bewertungen beantworten','Die Antworten stellst du selbst ein, nachdem du sie gelesen hast.')
+            +H.prompt('Öffne unsere Buchungsseite und lies alle Reservierungen für kommenden Samstag aus. Gib mir eine Liste mit Uhrzeit, Personenzahl und Bemerkungen, sortiert nach Uhrzeit, und markier Gruppen ab acht Personen.','Einsatz 3: Reservierungen auslesen','Praktisch, wenn deine Buchungsseite keinen Export anbietet.')})
+        +H.sec({id:'tsn3-l06-sicher', title:'Was du im Browser <span class="g">nie</span> abgibst',
+          lead:'Claude fragt von sich aus vor finanziellen, persönlichen oder geschäftskritischen Schritten und bevor es Seiten mit Finanzdaten öffnet. Darauf allein verlässt du dich trotzdem nicht.',
+          body:'<p><strong class="lead">Alles, was du siehst, sieht Claude auch.</strong>Die Erweiterung macht Bildschirmfotos der Tabs, in denen sie arbeitet, und alles darauf wird Teil des Gesprächs. Deshalb das eigene Profil: Was dort nicht offen ist, kann auch nicht versehentlich mitgelesen werden.</p>'
+            +'<p><strong class="lead">Webseiten können Anweisungen verstecken.</strong>In einer Seite, einer Mail oder einem Dokument kann unsichtbarer Text stehen, der Claude zu etwas anderem bringen will, als du beauftragt hast. Anthropic schützt dagegen mit mehreren Prüfungen und nennt das Restrisiko selbst ausdrücklich nicht null. Verhält sich Claude unerwartet, hältst du an und siehst nach.</p>'
+            +'<p><strong class="lead">Bestimmte Seiten bleiben tabu.</strong>Online-Banking, Gesundheitsdaten und Passwort-Manager haben in diesem Profil nichts verloren. Fang mit Seiten an, die du gut kennst, und mit Abläufen, die du auch selbst jeden Tag machst.</p>'
+            +H.note('Bestellen, bezahlen, veröffentlichen und versenden gibst du immer selbst frei. Claude bereitet vor, du drückst den letzten Knopf.','Die Merkregel',true)})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Dein', animGold:'sicherer Browser',
+      steps:['Eigenes Profil','Erweiterung','Manuell freigeben','Nur lesen'],
+      intro:'So richtest du Claude in Chrome ein, damit du ruhig schlafen kannst:',
+      points:['Arbeite in einem <b>eigenen Browser-Profil</b> ohne Banking, Passwort-Manager und private Konten.',
+        'Installier die Erweiterung nur aus dem <b>Chrome Web Store</b> und melde dich mit deinem Claude-Konto an.',
+        'Stell die Freigabe am Anfang auf <b>manuell</b>. Automatisch wird es erst, wenn du die Abläufe kennst.',
+        'Beginn mit Aufgaben, die <b>nur lesen</b>: vergleichen, auslesen, Entwürfe schreiben. Handeln lässt du Claude später.']},
+    learn:{learn:['Du weißt, dass Claude in Chrome <b>mit deinen Logins</b> im Browser arbeitet.',
+        'Du hast ein <b>eigenes Profil</b> und die manuelle Freigabe eingerichtet.',
+        'Du kennst drei Einsätze, die <b>lesen und vorbereiten</b>.',
+        'Den letzten Klick bei <b>Bestellen und Bezahlen</b> machst du selbst.'],
+      next:'/claude-nutzung-erklrt-6-konzepte'}
+  });
+})();
+
 /* <<< NEUBAU MODUL 3 — ENDE <<< */
 /* · */
 /* · */
