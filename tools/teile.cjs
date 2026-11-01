@@ -108,7 +108,37 @@ for (const st of ast.body) {
   const pinned = IMMER_KERN.some((m) => code.includes(m + '=') || code.includes(m + ' =') || code.includes('if(' + m + ')') || code.includes('if (' + m + ')'));
   const vorab = VORAB.some((m) => code.includes(m + '=') || code.includes(m + ' =') || code.includes('if(' + m + ')') || code.includes('if (' + m + ')'));
   const page = !vorab && st.type === 'ExpressionStatement' && !pinned && otherPath === 0 && uniq.length >= 1 && uniq.length <= MAX_GATES;
-  blocks.push({ code, fcode, pos, page, vorab, gates: uniq, line: src.slice(0, st.start).split('\n').length });
+  /* window-Namen, die der Block setzt bzw. liest (fuer die Teilen-Sicherung unten) */
+  const setzt = new Set(), liest = new Set();
+  walk.full(st, (n) => {
+    if (n.type === 'MemberExpression' && n.object.type === 'Identifier' && n.object.name === 'window') {
+      const k = n.computed ? (n.property.type === 'Literal' ? n.property.value : null) : n.property.name;
+      if (k) liest.add(k);
+    }
+    if (n.type === 'AssignmentExpression' && n.left.type === 'MemberExpression' && n.left.object.type === 'Identifier' && n.left.object.name === 'window') {
+      const k = n.left.computed ? (n.left.property.type === 'Literal' ? n.left.property.value : null) : n.left.property.name;
+      if (k) setzt.add(k);
+    }
+    if (n.type === 'Identifier') liest.add(n.name);
+  });
+  blocks.push({ code, fcode, pos, page, vorab, gates: uniq, setzt, liest, line: src.slice(0, st.start).split('\n').length });
+}
+
+/* Teilen-Sicherung (01.11.2026, Fund Modul 2: Kopf-Styles von L2.0 fehlten auf anderen Seiten):
+   Setzt ein seitengebundener Block einen window-Namen, den ein Block mit anderen Seiten-
+   Pruefungen (oder der Kern) benutzt, bleibt er im Kern und laeuft wie frueher ueberall. */
+const gateKey = (b) => b.gates.map((g) => '/' + g.pattern + '/' + g.flags).sort().join(' ');
+let geteilt = 0;
+for (let runde = 0; runde < 5; runde++) {
+  let neu = 0;
+  for (const b of blocks) {
+    if (!b.page) continue;
+    const k = gateKey(b);
+    for (const name of b.setzt) {
+      if (blocks.some((o) => o !== b && (!o.page || gateKey(o) !== k) && o.liest.has(name))) { b.page = false; neu++; geteilt++; break; }
+    }
+  }
+  if (!neu) break;
 }
 const rest = src.slice(prevEnd);
 
@@ -199,4 +229,4 @@ for (const f of fs.readdirSync(OUTDIR)) {
 
 const kb = (n) => Math.round(n / 1024) + ' KB';
 console.log('   ✓ Starter kurs.min.js ' + kb(starterMin.length) + ' · Kern ' + kb(min.kern.length) + ' (' + stuecke.length + ' Stuecke) · ' + manifest.length + ' Seitenteile zusammen ' + kb(teilBytes)
-  + ' · ' + blocks.filter((b) => b.page).length + '/' + blocks.length + ' Bloecke seitengebunden');
+  + ' · ' + blocks.filter((b) => b.page).length + '/' + blocks.length + ' Bloecke seitengebunden' + (geteilt ? ' (' + geteilt + ' geteilt -> Kern)' : ''));
