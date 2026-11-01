@@ -2587,6 +2587,10 @@ html.tsn0-hid #tsn0-hline .hl-mv, html.tsn0-hid #tsn0-hline .hl-dot{ animation-p
   .page__key-metrics .kv-title,
   .page__multistandort-erweiterung-optional .msv-h2{ white-space:normal; text-wrap:balance; }
 }
+/* Erklaer-Karten im Regal (window.__tsn2Shop): Etikett ueber jedem Absatz, gut lesbare Schrift */
+#tsshop-detail .tsn2-ex p.notion-text{ font-size:15.5px; line-height:1.62; margin:0 0 16px; color:rgba(255,255,255,.86); }
+#tsshop-detail .tsn2-ex p.notion-text:last-child{ margin-bottom:0; }
+#tsshop-detail .tsn2-ex p.notion-text b{ display:block; margin:0 0 4px; font-size:10.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#c7b489; }
 /* <<< NEUBAU MODUL 2 — ENDE <<< */
 /* · */
 /* · */

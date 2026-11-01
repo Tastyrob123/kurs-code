@@ -9410,7 +9410,11 @@ window.__tsMO = function(cb){
         { name:'Sardellen',         wert:5.90, img:'https://tastyrob123.github.io/kurs/img/inventar/sardellen.jpg' },
         { name:'Oregano',           wert:2.40, img:'https://tastyrob123.github.io/kurs/img/inventar/oregano.webp' },
         { name:'Paprika Edelsüß',   wert:3.10, img:'https://tastyrob123.github.io/kurs/img/inventar/paprika-edelsuess.jpg' },
-        { name:'Weißweinessig',     wert:3.60, img:'https://tastyrob123.github.io/kurs/img/inventar/weissweinessig.jpg' }
+        { name:'Weißweinessig',     wert:3.60, img:'https://tastyrob123.github.io/kurs/img/inventar/weissweinessig.jpg' },
+        /* Modul 2 Neubau: 18 Spalten-Karten, daher drei Motive mehr (sonst wiederholen sich Bild 1-3) */
+        { name:'Tomate',            wert:2.20, img:'https://tastyrob123.github.io/kurs/img/zutaten/tomate.webp' },
+        { name:'Zitrone',           wert:1.60, img:'https://tastyrob123.github.io/kurs/img/zutaten/zitrone.webp' },
+        { name:'Kartoffel',         wert:1.40, img:'https://tastyrob123.github.io/kurs/img/zutaten/kartoffel.webp' }
       ]},
     { kachel_id:'inventur_monat', kachel_name:'Monatliche Inventurliste', ist_produkt_kachel:true,
       einheit:'Inventurwert (€)', einheit_typ:'preis',
@@ -11324,7 +11328,7 @@ var TSISL_TEAM_ONB_V2=[
      Nenner = Summe der bekannten Schrittzahlen (auch noch nicht besuchte Seiten
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
-  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:33, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
+  var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:18, inventur_monat:22, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
   ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
@@ -11620,6 +11624,9 @@ var TSISL_TEAM_ONB_V2=[
     /* Config-Steps (Engine, seit 17.07.2026): Seiten ohne Notion-Inhalt — die Schritte kommen
        direkt aus PAGES.steps, Mount-Punkt = page.anchorSel (leeres Anker-Div eines Seiten-Moduls).
        done-Keys mit Kachel-Präfix (Titel wie „1. Button anlegen" sonst seitenübergreifend kollidierend). */
+    /* Modul 2 Neubau (Grundsatz A, 01.11.2026): Erklaer-Karten aus der Modul-2-Zone
+       (window.__tsn2Shop[kachel]) ersetzen Bau-Schritte, Titel und Untertitel dieses Regals. */
+    var o2=window.__tsn2Shop&&window.__tsn2Shop[page.kachel]; if(o2){ page=Object.assign({},page,o2); }
     if(page.steps){
       var anchorEl=document.querySelector(page.anchorSel||''); if(!anchorEl) return;
       if(document.getElementById(rootIdFor(page))) return;
@@ -29372,7 +29379,7 @@ var TSISL_TEAM_ONB_V2=[
     ['01','Wofür','Was die Datenbank im Betrieb bringt'],
     ['02','Eintragen','Deine Daten in die Vorlage'],
     ['03','Was es rechnet','Was das System daraus macht'],
-    ['04','So ist es gebaut','Jede Spalte erklärt'],
+    ['04','Spalte für Spalte','Was jede Spalte bedeutet'],
     ['05','Typische Fehler','Was beim Eintragen schiefgeht']
   ];
   function wayHTML(targets){
@@ -30218,9 +30225,17 @@ var TSISL_TEAM_ONB_V2=[
       {t:'Kilopreis statt Gebindepreis',folge:'Bei 6 x 2,5 kg gehört der Preis für den ganzen Karton in Preis pro Unit (€). Trägst du den Kilopreis ein, rechnet die Formel ihn ein zweites Mal herunter.',fix:'Immer der Preis für genau das Gebinde, das in Menge / Unit steht.'},
       {t:'Dasselbe Produkt doppelt angelegt',folge:'Nach der zweiten Preisliste gibt es Olivenöl zweimal. Die Zutat hängt am alten Eintrag, und der neue Preis kommt nie im Gericht an.',fix:'Vor dem Einlesen nach dem Namen suchen. Bekannte Produkte bekommen einen neuen Preis, keinen neuen Eintrag.'}
     ],
-    hide:['block-399b9546553480d993d5ef22dd9598a6','block-399b9546553480c0ac35e72c9d8c4055','block-399b9546553480479836e0586b46d323','block-38eb9546553480d3ac7dda0fb8e1ab61','block-39bb9546553480d5b9d0d52c6f564049','block-39bb9546553480aebb7dce50c0d53c53','block-39bb9546553480d7a605dbff16f3ce7a'],
-    subs:{ 'tsshop--db0_inventurliste':shopSub('DB 0','der Preis') },
-    shopTitle:{ 'tsshop--db0_inventurliste':'Deine Inventurliste. <span>Spalte für Spalte</span>.' },
+    /* Erklaer-Regal (window.__tsn2Shop): Anker vor den alten Notion-Bauphasen, die ausgeblendet werden */
+    shopAnchor:{ id:'tsn2-inv-shopa', before:'#block-399b9546553480f8a96fcd814a6e6243' },
+    hideIds:['tsmiss','tsinvsync'],
+    fixIds:{ ids:['tsinvres','tsinvaus'], test:/01-2026|trägst du aus dem eingefrorenen|Zahl · €| — / },
+    ivaArtikel:true,
+    textFix:[[/Inventurliste 01-2026/g,'Inventurliste 01.1'],[/^Zahl · €$/,'Rollup · €'],[/aus der Reihe tanzt — und/,'aus der Reihe tanzt, und'],[/gerechnet auch — und sobald/,'gerechnet auch, und sobald'],[/zur Monatstabelle — dann kommst/,'zur Monatstabelle, dann kommst'],[/vier Diagrammen — eines pro Warengruppe/,'vier Diagrammen, eines pro Warengruppe'],[/Die vier Warengruppen-Summen trägst du aus dem eingefrorenen Monat ein, Gesamt rechnet sich daraus selbst\./,'Die vier Warengruppen-Summen holt sich jede Zeile über die Spalte Artikel aus dem eingefrorenen Monat, Gesamt rechnet sich daraus selbst.']],
+    ivText:'<p class="tsiv-lead">Deine fertige <span class="tsiv-accent">Datenbank.</span></p>'+
+      '<p>So sieht die Inventurliste in deiner Vorlage aus, wenn deine Produkte drin sind. In der Tabelle stehen alle Produkte untereinander, mit Gebinde, Nettopreis und den drei Preisspalten daneben. Klickst du eine Zeile an, öffnet sich das Produkt mit jeder Spalte, die du oben im Regal kennengelernt hast.</p>'+
+      '<p>Gefüllt wird die Liste vor allem nach Lieferungen. Ein neuer Lieferschein, ein geänderter Preis, und alles, was an dem Produkt hängt, rechnet ab dann mit der neuen Zahl. Mehr Arbeit macht die Liste im Alltag nicht.</p>'+
+      '<p>Für die Inventur am Monatsende hat die Vorlage eine eigene Liste, die sich ihre Produkte von hier holt. Ihre Spalten liegen direkt darunter.</p>',
+    hide:['block-39bb9546553480f6bb64d44edfc7a88c','block-39bb95465534806493f0fd96d5d1edcd','block-38eb9546553480808deff3c7f3c0b8a4','block-399b95465534803cb13ef626ce83cc17','block-399b9546553480f8a96fcd814a6e6243','block-399b9546553480d993d5ef22dd9598a6','block-399b9546553480c0ac35e72c9d8c4055','block-399b9546553480479836e0586b46d323','block-38eb9546553480d3ac7dda0fb8e1ab61','block-39bb9546553480d5b9d0d52c6f564049','block-39bb9546553480aebb7dce50c0d53c53','block-39bb9546553480d7a605dbff16f3ce7a'],
     learn:['Die Inventurliste ist die Quelle für jeden Einkaufspreis in deinem System.','Du trägst Gebinde und Nettopreis ein, den Preis pro Kilo, Liter oder Stück rechnet die Liste selbst.','Du übernimmst Preislisten als CSV und liest Lieferscheine mit Notion AI ein.','Du kennst die Schreibweisen, die die Formeln verstehen, und prüfst jeden eingelesenen Preis.'] },
 
   /* ===================== DB I–III · Lieferanten ===================== */
@@ -30396,7 +30411,7 @@ var TSISL_TEAM_ONB_V2=[
     out.s3=T.make(id.s3,'tsn2-sec',T.head('03','Was das System rechnet',cfg.s3.h,cfg.s3.lead)+'<div class="tsn2-s3-slot"></div>');
     var slot=out.s3.querySelector('.tsn2-s3-slot');
     if(window.__tsn2res && cfg.s3.kind){ slot.appendChild(window.__tsn2res(id.s3+'-card', cfg.s3.kind)); }
-    out.s4=T.make(id.s4,'tsn2-hood','<div class="tsn2-hood-line"></div><div class="tsn2-kick"><i>04</i>So ist es gebaut</div>');
+    out.s4=T.make(id.s4,'tsn2-hood','<div class="tsn2-hood-line"></div><div class="tsn2-kick"><i>04</i>Spalte für Spalte</div>');
     out.s5=T.make(id.s5,'tsn2-sec',T.head('05','Typische Fehler','Was beim Eintragen <span class="g">schiefgeht</span>.','Die vier Fehler, die mir in Betrieben am häufigsten begegnen, und wie du sie vermeidest.')+T.errors(cfg.errs));
     Object.keys(out).forEach(function(k){ T.wireReveal(out[k]); });
     return out;
@@ -30408,6 +30423,12 @@ var TSISL_TEAM_ONB_V2=[
   var built={};
   function apply(cfg){
     var id=IDS(cfg.key);
+    /* Erklaer-Regale: leere Anker vor den alten Notion-Bauphasen (die per hide verschwinden) */
+    [].concat(cfg.shopAnchor||[], cfg.shopAnchors||[]).forEach(function(an){ if(document.getElementById(an.id)) return; var sb=document.querySelector(an.before); if(sb&&sb.parentNode){ var sa=document.createElement('div'); sa.id=an.id; sb.parentNode.insertBefore(sa, sb); } });
+    if(cfg.fixIds && cfg.textFix) cfg.fixIds.ids.forEach(function(fid){ var fe=document.getElementById(fid); if(fe && cfg.fixIds.test.test(fe.textContent)) fixText(fe, cfg.textFix); });
+    if(cfg.ivaArtikel){ var ivc=document.querySelector('#tsinvaus .iva-cols'); if(ivc && !ivc.querySelector('[data-tsn2-art]')){ var c0=ivc.children[1]; if(c0){ var ac=document.createElement('div'); ac.className='iva-col'; ac.setAttribute('data-tsn2-art','1'); ac.innerHTML='<b>Artikel</b><span>Verknüpfung</span>'; ivc.insertBefore(ac, c0.nextSibling); } } }
+    (cfg.hideIds||[]).forEach(function(hid){ var hn=document.getElementById(hid); if(hn && hn.style.display!=='none') hn.style.display='none'; });
+    if(cfg.ivText){ var ivs=document.querySelector('#tsiv-root .tsiv-textslot'); if(ivs && ivs.__filled && ivs.getAttribute('data-tsn2')!=='1'){ ivs.innerHTML=cfg.ivText; ivs.setAttribute('data-tsn2','1'); } }
     var top=document.querySelector(cfg.after||cfg.introBefore), anchor=document.querySelector(cfg.before), tsl=document.getElementById('tsl');
     if(!top||!anchor) return;
     var el=built[cfg.key];
@@ -30834,6 +30855,249 @@ var TSISL_TEAM_ONB_V2=[
   document.addEventListener('DOMContentLoaded', mount);
   window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
 })();
+/* ============================================================
+   NEUBAU MODUL 2 · Erklaer-Regale (Grundsatz A, 01.11.2026)
+   Eine Karte je Spalte der leeren Vorlage, Namen exakt wie dort.
+   Jede Karte: was die Spalte bedeutet, woher der Wert kommt,
+   wozu du sie brauchst, ein Beispiel aus dem Betrieb. Keine Bau-Schritte.
+   Der tsshop liest das ueber window.__tsn2Shop[kachel] (Hook in mountPage).
+   Bewusst ohne Adress-Pruefung: bleibt im Kern, damit die Karten vor dem
+   ersten Regal-Aufbau da sind.
+   ============================================================ */
+(function(){
+  if(window.__tsn2Shop) return;
+  function row(l,t){ return t?'<p class="notion-text"><b>'+l+'</b>'+t+'</p>':''; }
+  /* c = { t:Spaltenname, d:Kurztext auf der Karte, bed, her, wozu, bsp } */
+  function cards(list){
+    return list.map(function(c,i){
+      return { title:(i+1)+'. '+c.t, desc:c.d,
+        html:'<div class="tsn2-ex">'+row('Was sie bedeutet',c.bed)+row('Woher der Wert kommt',c.her)+row('Wozu du sie brauchst',c.wozu)+row('Aus dem Betrieb',c.bsp)+'</div>' };
+    });
+  }
+  var S={};
+
+  /* ---------- DB 0 · Inventurliste (TB Inventory) ---------- */
+  S.db0_inventurliste={
+    eyebrow:'DB 0 : Inventurliste',
+    title:'Deine Inventurliste. <span>Was jede Spalte zeigt</span>.',
+    sub:'Jede Spalte deiner Vorlage liegt hier als Karte. Klick sie auf, um zu sehen, was sie bedeutet und woher ihr Wert kommt, und leg sie in den Einkaufswagen, sobald du sie verstanden hast. Die Währung von DB 0 ist der Preis.',
+    anchorSel:'#tsn2-inv-shopa', relations:[],
+    steps:cards([
+      { t:'Name', d:'Dein Name für das Produkt, so wie ihr es in der Küche nennt.',
+        bed:'Der Name, unter dem du das Produkt überall im System wiederfindest, in den Zutaten genauso wie beim Zählen. Er darf kurz sein und so klingen, wie ihr in der Küche sprecht.',
+        her:'Trägst du selbst ein. Liest du einen Lieferschein mit Notion AI ein, setzt die KI einen kurzen deutschen Namen, den du jederzeit änderst.',
+        wozu:'Wählst du in den Zutaten ein Produkt aus, suchst du nach diesem Namen. Ein klarer Name verhindert, dass du dort das falsche Produkt erwischst.',
+        bsp:'Auf dem Lieferschein steht „Avocado Hass Kal. 18 Peru“. Bei dir heißt sie Avocado.' },
+      { t:'Artikelnummer', d:'Die Nummer, unter der dein Lieferant das Produkt führt.',
+        bed:'Die Bestellnummer deines Lieferanten für genau dieses Produkt.',
+        her:'Trägst du ein oder liest sie mit dem Lieferschein ein, Zeichen für Zeichen wie auf dem Beleg.',
+        wozu:'Beim Bestellen und beim Abgleich mit der Rechnung ist die Nummer eindeutig, auch wenn zwei Produkte fast gleich heißen. Kommt ein neuer Lieferschein, findest du darüber das richtige Produkt und änderst nur den Preis.',
+        bsp:'Tomaten passiert gibt es beim selben Großhändler in der 2,5-kg-Dose und in der 400-g-Dose. Über die Artikelnummer verwechselst du sie nicht.' },
+      { t:'Herstellerbezeichnung', d:'Die volle Bezeichnung, wie sie auf Lieferschein und Rechnung steht.',
+        bed:'Die lange Bezeichnung, so wie der Hersteller oder Lieferant das Produkt nennt, meist mit Marke und Gebinde.',
+        her:'Trägst du ein oder kommt beim Einlesen direkt vom Lieferschein.',
+        wozu:'Dein Name bleibt kurz, hier steht, was genau du kaufst. Wechselt der Lieferant die Marke, siehst du es an dieser Stelle. Beim Zählen erkennst du daran das richtige Gebinde im Regal.',
+        bsp:'Name: Olivenöl. Herstellerbezeichnung: Olio extra vergine di oliva, Kanister 10 L.' },
+      { t:'Menge / Unit', d:'Das Gebinde als Text, immer mit Zahl und Einheit.',
+        bed:'Die Menge, die du für einen Preis bekommst, also das ganze Gebinde.',
+        her:'Trägst du selbst ein, immer als Zahl mit Einheit, zum Beispiel 5 kg, 12 x 770g, 0,75 L oder 180 Stck.',
+        wozu:'Aus diesem Feld lesen die drei Preisspalten ab, wie viel Kilo, Liter oder Stück im Gebinde stecken. Die Vorlage versteht g und kg, ml und L (auch Ltr. oder Liter) und Zählwörter wie Stck, Flasche, Dose oder Karton. Ein x zwischen zwei Zahlen multipliziert sie: 6 x 2,5 kg sind 15 kg. Steht hier nur „Karton“, bleiben die Preisspalten leer.',
+        bsp:'Der Karton Tomaten mit sechs Beuteln zu je 2,5 kg steht hier als 6 x 2,5 kg.' },
+      { t:'Preis pro Unit (€)', d:'Der Nettopreis für genau dieses Gebinde.',
+        bed:'Was du für das Gebinde aus Menge / Unit bezahlst, ohne Mehrwertsteuer.',
+        her:'Trägst du ein, von Rechnung, Lieferschein oder Preisliste. Ändert sich der Preis, überschreibst du nur diese Zahl.',
+        wozu:'An dieser einen Zahl hängen alle Kosten deines Systems. Aus ihr rechnen die Preisspalten daneben, und von dort holen sich Zutaten, Rezepturen und Gerichte ihre Kosten. Änderst du sie, stimmt der Wareneinsatz jedes Gerichts, in dem das Produkt steckt, sofort wieder.',
+        bsp:'Der Karton Tomaten (6 x 2,5 kg) kostet 18,90 € netto. Genau diese 18,90 € stehen hier, nicht der Kilopreis.' },
+      { t:'Preis / KG', d:'Was dich ein Kilo kostet. Rechnet die Vorlage.',
+        bed:'Der Preis für ein Kilo, egal in welchem Gebinde du kaufst.',
+        her:'Rechnet die Vorlage. Sie teilt Preis pro Unit (€) durch die Kilomenge aus Menge / Unit, Grammangaben rechnet sie vorher in Kilo um. Steht in Menge / Unit kein Gewicht, bleibt das Feld leer. Ergibt die Menge null, steht dort Ungültige Menge.',
+        wozu:'Du vergleichst Lieferanten und Gebinde direkt, ohne Taschenrechner. Die Zutaten rechnen mit diesem Kilopreis aus, was dich eine Portion kostet.',
+        bsp:'6 x 2,5 kg für 18,90 €: Im Karton sind 15 kg, ein Kilo kostet 1,26 €.' },
+      { t:'Preis / Ltr.', d:'Was dich ein Liter kostet. Rechnet die Vorlage.',
+        bed:'Der Preis für einen Liter, egal ob Kanister, Flasche oder Bag-in-Box.',
+        her:'Rechnet die Vorlage, sobald in Menge / Unit Liter oder Milliliter stehen (L, Ltr., Liter, ml). Milliliter rechnet sie vorher in Liter um.',
+        wozu:'Für alles Flüssige: Öl, Sahne, Fond, Sirup, Wein. Du siehst sofort, ob der 10-Liter-Kanister günstiger ist als sechs Flaschen zu je einem Liter.',
+        bsp:'Olivenöl, 10 L für 28,00 €: Der Liter kostet 2,80 €.' },
+      { t:'Preis / Stck', d:'Was dich ein Stück kostet. Rechnet die Vorlage.',
+        bed:'Der Preis für ein einzelnes Stück aus dem Gebinde.',
+        her:'Rechnet die Vorlage. Sie sucht in Menge / Unit nach einer Stückzahl, entweder die Zahl vor einem x oder die Zahl vor einem Zählwort wie Stck, Flasche, Dose, Karton oder Bund, und teilt Preis pro Unit (€) durch diese Zahl.',
+        wozu:'Für alles, was du einzeln verarbeitest oder verkaufst: Eier, Brötchen, Flaschen, Becher. Bei einem Gebinde wie 6 x 2,5 kg zeigt die Spalte den Preis pro Beutel.',
+        bsp:'Eier, 180 Stck für 39,60 €: Ein Ei kostet 0,22 €.' },
+      { t:'Kategorie', d:'Die Warengruppe, in die das Produkt gehört.',
+        bed:'Eine Auswahl mit festen Warengruppen: Gemüse & Obst, Fleisch & Fisch, Brot & Getreide, Öle & Essige, Kräuter & Gewürze, Trockenprodukte, Molkereiprodukte, Saucen & Pasten, Getränke & Flüssigkeiten.',
+        her:'Wählst du selbst aus. Fehlt dir eine Gruppe, legst du sie im Auswahlfeld dazu.',
+        wozu:'Mit der Kategorie filterst und gruppierst du die Liste. Steigt der Milchpreis, filterst du nach Molkereiprodukte und hast alle betroffenen Produkte untereinander.',
+        bsp:'Sahne, Butter und Crème fraîche stehen unter Molkereiprodukte, Fond und Tomatenmark unter Saucen & Pasten.' },
+      { t:'Lagerort', d:'Wo das Produkt bei dir steht.',
+        bed:'Der Platz im Betrieb, an dem das Produkt lagert.',
+        her:'Trägst du selbst ein, als freien Text.',
+        wozu:'Wer eine Lieferung annimmt, sieht am Produkt, wohin es gehört. Wer neu im Team ist, findet die Ware, ohne zu fragen.',
+        bsp:'Kühlhaus Regal 3.' },
+      { t:'Lieferant', d:'Bei wem du das Produkt kaufst. Verknüpft mit DB I : Lieferpartner.',
+        bed:'Die Verbindung zu deinem Lieferanten in DB I : Lieferpartner.',
+        her:'Du wählst den Lieferanten aus deinen Lieferpartnern. Ist er noch nicht angelegt, legst du ihn in DB I an oder lässt ihn beim Einlesen eines Lieferscheins von Notion AI mit anlegen.',
+        wozu:'Beim Lieferanten in DB I siehst du dadurch jedes Produkt, das du bei ihm kaufst. Und hier im Produkt erscheinen seine Ansprechpartner und sein Hauptkontakt, ohne dass du etwas tun musst.',
+        bsp:'Die Tomaten hängen am Großhändler, die Eier am Hof aus der Region.' },
+      { t:'Ansprechpartner Lieferant', d:'Die Menschen beim Lieferanten. Kommt aus DB I.',
+        bed:'Alle Ansprechpartner, die beim verknüpften Lieferanten hinterlegt sind.',
+        her:'Füllst du nie selbst. Die Spalte holt sich über Lieferant die Ansprechpartner aus DB I : Lieferpartner. Dort stehen die Personen aus DB II : Ansprechpartner.',
+        wozu:'Du siehst direkt am Produkt, wen du anrufen kannst, ohne erst zum Lieferanten zu wechseln.',
+        bsp:'Bei den Tomaten stehen hier der Außendienst und die Disposition deines Großhändlers.' },
+      { t:'Hauptkontakt Lieferant', d:'Die Person, die du bei Problemen zuerst anrufst.',
+        bed:'Die Kontaktkarte der einen Person, die beim Lieferanten für dich zuständig ist.',
+        her:'Rechnet die Vorlage. Sie liest beim verknüpften Lieferanten die Spalte Hauptkontakt. Dort steht die Kontaktkarte der Person, die in DB II : Ansprechpartner das X bei Hauptansprechpartner hat. Fehlt das X, bleibt das Feld leer.',
+        wozu:'Fehlt etwas in der Lieferung oder stimmt die Qualität nicht, steht der richtige Kontakt direkt am Produkt.',
+        bsp:'Die Avocados sind zu hart. Ein Klick ins Produkt, und du hast Name und Nummer der Person, die das klärt.' },
+      { t:'Ist Zutat', d:'In welchen Zutaten das Produkt steckt. Kommt aus DB IV.',
+        bed:'Die Gegenseite der Spalte Inventar Produkt in DB IV : Zutaten.',
+        her:'Die Verbindung setzt du in den Zutaten: Wählst du dort ein Produkt aus der Inventurliste aus, erscheint die Zutat hier von selbst.',
+        wozu:'Du siehst, wofür ein Produkt verwendet wird. Steigt ein Preis, weißt du, welche Zutaten und damit welche Gerichte betroffen sind. Ist ein Lebensmittel hier leer, steckt es in keiner Zutat. Verpackung und Reinigungsmittel bleiben immer leer, sie bekommen keine Zutat.',
+        bsp:'Bei Avocado stehen die Grundzutat Avocado 1 kg und jede Portion, die du daraus dupliziert hast, zum Beispiel Avocado 60 g.' },
+      { t:'Packaging / Co.', d:'Verknüpft mit DB X : Packaging. Nur für Verpackung und Material.',
+        bed:'Die Verbindung zu einem Eintrag in DB X : Packaging. Sie betrifft Produkte, die du verpackst statt kochst: Schalen, Becher, Deckel, Besteck.',
+        her:'Die Verbindung entsteht in DB X : Packaging über die Spalte Inventory Product und erscheint hier von selbst.',
+        wozu:'So kennt das Packaging seinen Stückpreis aus der Inventurliste. Verkaufst du außer Haus, rechnen die Gerichte die Verpackung damit in ihre Kosten ein.',
+        bsp:'Die Bowl-Schale mit Deckel kaufst du im Karton zu 300 Stück. In der Inventurliste steht der Karton, im Packaging die einzelne Schale.' },
+      { t:'Quartier ( Packaging )', d:'Für welchen Bereich du Verpackung und Material brauchst.',
+        bed:'Eine Auswahl mit drei Bereichen: Foodquartier, Drinksquartier, Operations Area.',
+        her:'Wählst du selbst. Gedacht ist die Spalte für Verpackung und Verbrauchsmaterial.',
+        wozu:'Du trennst das Material der Küche von dem der Bar. Was der ganze Betrieb braucht, steht unter Operations Area. So filterst du zum Beispiel nur die Becher und Deckel der Bar heraus.',
+        bsp:'Kaffeebecher: Drinksquartier. Pizzakarton: Foodquartier. Müllbeutel und Handschuhe: Operations Area.' },
+      { t:'Zuletzt aktualisiert', d:'Wann du den Preis zuletzt geprüft hast.',
+        bed:'Ein Datum, das zeigt, wie aktuell der Eintrag ist.',
+        her:'Setzt du selbst, jedes Mal, wenn du einen Preis von einem neuen Beleg übernimmst.',
+        wozu:'Sortierst du danach, siehst du sofort, welche Preise seit Monaten niemand angefasst hat. Genau dort stimmt dein Wareneinsatz am ehesten nicht mehr.',
+        bsp:'Steht bei Butter noch der März, obwohl der Großhändler seitdem zweimal erhöht hat, rechnen alle Gerichte mit Butter zu günstig.' },
+      { t:'Notizen', d:'Alles, was in keine andere Spalte passt.',
+        bed:'Ein freies Textfeld zum Produkt.',
+        her:'Trägst du selbst ein.',
+        wozu:'Für Absprachen und Besonderheiten, die sonst nur im Kopf einer Person stehen.',
+        bsp:'Nur bis 10 Uhr bestellbar. Ab Oktober neue Ernte, Preis neu verhandeln.' }
+    ])
+  };
+
+  /* ---------- Monats-Inventur · Inventurliste 01.1 (volle Monatsliste der Vorlage, Januar) ---------- */
+  S.inventur_monat={
+    eyebrow:'Monats-Inventur : Inventurliste 01.1',
+    title:'Deine Monats-Inventur. <span>Eine Liste pro Monat</span>.',
+    sub:'Am Monatsende zählst du in einer eigenen Liste, die sich ihre Produkte aus der Inventurliste holt. Jede Spalte liegt hier als Karte. Klick sie auf, um zu sehen, was du beim Zählen einträgst und was die Vorlage daraus rechnet. Die Währung ist der Inventurwert in Euro.',
+    steps:cards([
+      { t:'Name', d:'Das Produkt, das du zählst.',
+        bed:'Der Name des Produkts, derselbe wie in der Inventurliste.',
+        her:'Trägst du ein oder übernimmst die Namen aus der Inventurliste.',
+        wozu:'Danach suchst und sortierst du beim Zählen.',
+        bsp:'Olivenöl, genau wie in der Inventurliste.' },
+      { t:'Verknüpfung', d:'Die Verbindung zum Produkt in der Inventurliste.',
+        bed:'Die Spalte heißt wirklich so. Sie verbindet die Zeile mit ihrem Produkt in DB 0 : Inventurliste.',
+        her:'Setzt du einmal pro Produkt, danach bleibt sie.',
+        wozu:'Über diese Verbindung kommen Herstellerbezeichnung, Artikelnummer, Menge / Unit und die vier Preise aus der Inventurliste. Du pflegst sie nur dort, die Monatsliste zeigt sie mit an.',
+        bsp:'Die Zeile Olivenöl zeigt auf das Olivenöl in der Inventurliste und weiß dadurch, dass ein Kanister 10 L enthält und 28,00 € kostet.' },
+      { t:'Herstellerbezeichnung', d:'Kommt aus der Inventurliste.',
+        bed:'Die volle Bezeichnung des Produkts mit Marke und Gebinde.',
+        her:'Füllst du nie selbst. Die Spalte zeigt über die Verknüpfung die Herstellerbezeichnung aus der Inventurliste.',
+        wozu:'Am Regal erkennst du sofort, ob du das richtige Produkt vor dir hast.',
+        bsp:'Zwei Sorten Reis im Lager: Die Herstellerbezeichnung sagt dir, welche Zeile zu welchem Sack gehört.' },
+      { t:'Artikelnummer', d:'Kommt aus der Inventurliste.',
+        bed:'Die Bestellnummer deines Lieferanten.',
+        her:'Füllst du nie selbst. Sie kommt über die Verknüpfung aus der Inventurliste.',
+        wozu:'Hilft bei Produkten, die sich zum Verwechseln ähnlich sehen.',
+        bsp:'Zwei Dosen Tomaten, gleiche Marke, andere Größe: Die Nummer auf dem Etikett sagt dir, welche Zeile es ist.' },
+      { t:'Menge / Unit', d:'Das Gebinde. Kommt aus der Inventurliste.',
+        bed:'Was ein volles Gebinde ist, zum Beispiel 10 kg oder 180 Stck.',
+        her:'Füllst du nie selbst. Sie kommt über die Verknüpfung aus der Inventurliste.',
+        wozu:'Du weißt, was als volles Gebinde zählt, und trägst in der richtigen Spalte ein: ganze Gebinde in Gezählt Unit, Angebrochenes in Gezählt Ltr./KG oder Gezählt Stck.',
+        bsp:'Reis, 10 kg: Zwei volle Säcke und ein halber sind 2 in Gezählt Unit und 5 in Gezählt Ltr./KG.' },
+      { t:'Preis pro Unit (€)', d:'Der Gebindepreis. Kommt aus der Inventurliste.',
+        bed:'Der Nettopreis für ein volles Gebinde.',
+        her:'Füllst du nie selbst. Er kommt über die Verknüpfung aus der Inventurliste, immer der Preis, der dort gerade steht.',
+        wozu:'Mit ihm rechnet die Monatsliste die vollen Gebinde in Euro um.',
+        bsp:'Reis, 10 kg für 15,50 €: Zwei volle Säcke sind 31,00 € wert.' },
+      { t:'Preis / KG', d:'Der Kilopreis. Kommt aus der Inventurliste.',
+        bed:'Was ein Kilo des Produkts kostet.',
+        her:'Füllst du nie selbst. Die Inventurliste rechnet ihn aus Gebinde und Preis, die Monatsliste holt ihn über die Verknüpfung.',
+        wozu:'Mit ihm rechnet die Vorlage angebrochene Ware nach Gewicht in Euro um.',
+        bsp:'Reis kostet 1,55 € pro Kilo. Die 5 kg aus dem angebrochenen Sack sind 7,75 € wert.' },
+      { t:'Preis / Ltr.', d:'Der Literpreis. Kommt aus der Inventurliste.',
+        bed:'Was ein Liter des Produkts kostet.',
+        her:'Füllst du nie selbst. Er kommt über die Verknüpfung aus der Inventurliste.',
+        wozu:'Mit ihm rechnet die Vorlage angebrochene Flüssigkeiten in Euro um.',
+        bsp:'Olivenöl kostet 2,80 € pro Liter. Ein Viertel vom Kanister, also 2,5 L, sind 7,00 € wert.' },
+      { t:'Preis / Stck', d:'Der Stückpreis. Kommt aus der Inventurliste.',
+        bed:'Was ein einzelnes Stück aus dem Gebinde kostet.',
+        her:'Füllst du nie selbst. Er kommt über die Verknüpfung aus der Inventurliste.',
+        wozu:'Mit ihm rechnet die Vorlage einzelne Stücke in Euro um.',
+        bsp:'Ein Ei kostet 0,22 €. Die 42 Eier aus dem angebrochenen Karton sind 9,24 € wert.' },
+      { t:'Gezählt Unit', d:'Volle Gebinde, die du beim Zählen findest.',
+        bed:'Die Zahl der ungeöffneten Kartons, Kanister oder Säcke.',
+        her:'Trägst du beim Zählen ein.',
+        wozu:'Die Vorlage multipliziert sie mit dem Preis pro Unit (€).',
+        bsp:'Drei ungeöffnete Kanister Olivenöl: 3.' },
+      { t:'Gezählt Ltr./KG', d:'Angebrochene Ware, in Kilo oder Liter.',
+        bed:'Was von einem angebrochenen Gebinde noch übrig ist, gewogen oder abgelesen.',
+        her:'Trägst du beim Zählen ein.',
+        wozu:'Für alles Angebrochene, das du nach Gewicht oder Menge verbrauchst. Die Vorlage rechnet es mit dem Kilo- oder Literpreis in Euro um.',
+        bsp:'Der angebrochene Kanister Olivenöl ist noch zu einem Viertel voll: 2,5.' },
+      { t:'Gezählt Stck', d:'Einzelne Stücke aus einem angebrochenen Gebinde.',
+        bed:'Die Zahl der einzelnen Stücke, die noch da sind.',
+        her:'Trägst du beim Zählen ein.',
+        wozu:'Für alles, was du stückweise verbrauchst. Die Vorlage rechnet es mit dem Stückpreis in Euro um.',
+        bsp:'Aus dem Karton mit 180 Eiern sind noch 42 übrig: 42.' },
+      { t:'Summe Monat 01.26', d:'Der Warenwert dieses Produkts am Zähltag. Rechnet die Vorlage.',
+        bed:'Was das gezählte Produkt in Euro wert ist. Die Zahl im Spaltennamen ist der Monat, für den du zählst.',
+        her:'Rechnet die Vorlage: Gezählt Unit mal Preis pro Unit (€), dazu Gezählt Ltr./KG mal Kilo- oder Literpreis, dazu Gezählt Stck mal Stückpreis. Zählst du dieselbe Ware in zwei Spalten, steht sie doppelt im Wert.',
+        wozu:'Über alle Zeilen zusammengezählt ist das dein Warenbestand in Euro zum Monatsende. Solange der Monat offen ist, rechnet die Summe mit dem Preis, der gerade in der Inventurliste steht.',
+        bsp:'Zwei Säcke Reis zu je 15,50 € und 5 kg aus dem angebrochenen Sack zu 1,55 € pro Kilo ergeben 38,75 €.' },
+      { t:'Wert 01.26 (fix)', d:'Der eingefrorene Wert, der sich nicht mehr ändert.',
+        bed:'Die Summe des Monats als feste Zahl.',
+        her:'Hier steht die Summe Monat 01.26 als feste Zahl, sobald der Monat gezählt ist. Ist das Feld in einer Zeile leer, überträgst du die Summe von Hand.',
+        wozu:'Die Summe holt sich ihre Preise immer frisch aus der Inventurliste. Steigt im Februar der Preis für Reis, würde sich sonst auch dein Januar ändern. Der feste Wert hält den Monat so fest, wie er am Zähltag war.',
+        bsp:'Am 31. Januar steht beim Reis 38,75 €. Diese Zahl kommt in Wert 01.26 (fix) und bleibt dort, egal was der Reis im Februar kostet.' },
+      { t:'Kategorie', d:'Food, Beverage, Packaging oder Hygiene.',
+        bed:'Eine Auswahl mit vier Bereichen: Food, Beverage, Packaging, Hygiene. Sie ist ein eigenes Feld der Monatsliste und nicht die Kategorie aus der Inventurliste.',
+        her:'Wählst du selbst aus.',
+        wozu:'Nach ihr verteilt die Vorlage den festen Wert auf die vier Warengruppen.',
+        bsp:'Espressobohnen: Beverage. Spülmittel: Hygiene.' },
+      { t:'Food € · Beverage € · Packaging € · Hygiene €', d:'Der feste Wert, aufgeteilt auf die vier Warengruppen.',
+        bed:'Vier Spalten, die denselben Wert zeigen, jede nur für ihre Warengruppe.',
+        her:'Rechnet die Vorlage. Steht in Kategorie Food, zeigt Food € den Wert 01.26 (fix) und die anderen drei zeigen 0. Bei Beverage, Packaging und Hygiene genauso.',
+        wozu:'Der Monatsabschluss zählt diese Spalten über alle Produkte zusammen. So siehst du, wie viel Geld im Monat in Lebensmitteln, Getränken, Verpackung und Hygieneartikeln liegt.',
+        bsp:'Reis, Kategorie Food, Wert 38,75 €: Food € zeigt 38,75 €, Beverage €, Packaging € und Hygiene € zeigen 0.' },
+      { t:'Monatsabschluss', d:'Verknüpft mit Inventur Monatsabschlüsse.',
+        bed:'Die Verbindung zur Zeile des Monats in der Datenbank Inventur Monatsabschlüsse.',
+        her:'Setzt du beim Abschluss für alle Produkte des Monats. Dort erscheinen sie in der Spalte Artikel.',
+        wozu:'Über diese Verbindung holt sich der Monatsabschluss die vier Warengruppen-Summen und rechnet daraus den Gesamtwert des Monats.',
+        bsp:'Alle Zeilen der Januar-Liste hängen an der Zeile 01.2026 in den Monatsabschlüssen.' },
+      { t:'Lagerort', d:'Wo du das Produkt beim Zählen findest.',
+        bed:'Der Platz im Betrieb, an dem das Produkt lagert. Ein eigenes Textfeld der Monatsliste.',
+        her:'Trägst du selbst ein.',
+        wozu:'Gruppierst du die Monatsliste nach Lagerort, hast du pro Raum eine eigene Zählliste.',
+        bsp:'Eine Gruppe Kühlhaus, eine Gruppe Trockenlager: Jede Person im Team zählt ihren Raum.' },
+      { t:'Lieferant', d:'Verknüpft mit DB I : Lieferpartner.',
+        bed:'Die Verbindung zum Lieferanten des Produkts, als eigenes Feld der Monatsliste.',
+        her:'Wählst du aus deinen Lieferpartnern.',
+        wozu:'Fällt dir beim Zählen auf, dass etwas knapp wird, siehst du gleich, wo du nachbestellst.',
+        bsp:'Nur noch ein Sack Mehl im Lager: Der Lieferant steht in derselben Zeile.' },
+      { t:'Ist Zutat', d:'Verknüpft mit DB IV : Zutaten.',
+        bed:'Die Zutaten, in denen das Produkt steckt, als eigenes Feld der Monatsliste.',
+        her:'Wählst du aus deinen Zutaten.',
+        wozu:'Du siehst beim Zählen, für welche Zutaten das Produkt gebraucht wird.',
+        bsp:'Beim Reis stehen die Grundzutat Reis 1 kg und ihre Portionen.' },
+      { t:'Zuletzt aktualisiert', d:'Der Tag, an dem du die Zeile gezählt hast.',
+        bed:'Ein Datum pro Zeile.',
+        her:'Setzt du beim Zählen.',
+        wozu:'Wirst du beim Zählen unterbrochen, siehst du, wo du weitermachst.',
+        bsp:'Alle Zeilen im Kühlhaus tragen den 31., im Trockenlager fehlt das Datum noch: Dort geht es weiter.' },
+      { t:'Notizen', d:'Was dir beim Zählen auffällt.',
+        bed:'Ein freies Textfeld pro Zeile.',
+        her:'Trägst du beim Zählen ein.',
+        wozu:'Für alles, was der Zahl allein nicht anzusehen ist.',
+        bsp:'Zwei Packungen abgelaufen. Karton beschädigt, beim Lieferanten reklamiert.' }
+    ])
+  };
+
+  window.__tsn2Shop=S;
+})();
+
 /* <<< NEUBAU MODUL 2 — ENDE <<< */
 /* · */
 /* · */
