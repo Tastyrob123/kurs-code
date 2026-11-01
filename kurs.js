@@ -27799,11 +27799,12 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 code{font:500 .9em/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#efe6d2;background:rgba(255,255,255,.06);border:1px solid rgba(199,180,137,.22);border-radius:6px;padding:2px 6px}
 
   /* Ergebnis-Blick als gezeichnete Notion-Tabelle im Rahmen (kein Screenshot-Platzhalter) */
-  .tsn1 .tsn1-res{width:min(1100px,95vw);margin:96px auto 0;display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(28px,4vw,56px);align-items:center}
-  .tsn1 .tsn1-res.rev{grid-template-columns:1.25fr 1fr}
+  .tsn1 .tsn1-res{width:min(1100px,95vw);margin:clamp(30px,4vh,58px) auto 0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .tsn1 .tsn1-res .tsn1-mock{width:100%;max-width:520px;justify-self:center}
+  .tsn1 .tsn1-res.rev{grid-template-columns:1fr 1fr}
   .tsn1 .tsn1-res.rev .tx{order:2}
   .tsn1 .tsn1-res .tx .tsn1-eb{margin-bottom:12px}
-  .tsn1 .tsn1-res .tx h3{font-family:${DISP};font-weight:600;font-size:clamp(28px,3.2vw,40px);line-height:1.1;letter-spacing:-.015em;margin:0 0 16px;color:#fff}
+  .tsn1 .tsn1-res .tx h3{font-family:${DISP};font-weight:600;font-size:clamp(25px,2.8vw,32px);line-height:1.2;letter-spacing:-.015em;margin:0 0 16px;color:#fff;text-wrap:balance}
   .tsn1 .tsn1-res .tx h3 .g{color:#c7b489}
   .tsn1 .tsn1-res .tx p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
   .tsn1 .tsn1-mock{position:relative;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:#0b0d14;box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 0 8px rgba(255,255,255,.02);overflow:hidden}
@@ -27816,8 +27817,9 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-mock .views span.on{color:#fff;background:rgba(255,255,255,.07)}
   .tsn1 .tsn1-mock .grid{overflow:hidden}
   .tsn1 .tsn1-mock table{width:100%;border-collapse:collapse}
-  .tsn1 .tsn1-mock th{text-align:left;font:500 11px/1.2 ${SANS};color:rgba(255,255,255,.45);padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
-  .tsn1 .tsn1-mock td{font-size:12.5px;line-height:1.3;color:rgba(255,255,255,.85);padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+  .tsn1 .tsn1-mock th{text-align:left;font:500 10.5px/1.2 ${SANS};color:rgba(255,255,255,.5);padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .tsn1 .tsn1-mock td{font-size:12px;line-height:1.35;color:rgba(255,255,255,.86);padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+  .tsn1 .tsn1-mock td .t{margin:0 3px 3px 0}
   .tsn1 .tsn1-mock td .t{display:inline-block;font-size:11px;padding:3px 7px;border-radius:5px;background:rgba(199,180,137,.14);color:#efe6d2}
   .tsn1 .tsn1-mock td .t.r{background:rgba(224,87,79,.16);color:#f2b8b3}
   .tsn1 .tsn1-mock td .t.gr{background:rgba(70,175,115,.16);color:#a9dcc0}
@@ -27825,6 +27827,8 @@ var TSISL_TEAM_ONB_V2=[
   .tsn1 .tsn1-mock .cap{padding:10px 14px;font-size:11px;color:rgba(255,255,255,.35);text-align:right}
   .tsn1.js .tsn1-mock tbody tr{opacity:0;transform:translateY(8px)}
   .tsn1.js .tsn1-mock.in tbody tr{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+
+  .tsn1 [id^="tsn1-wk-"] .tss-title.tss-title{font-family:${DISP}}
 
   /* Scroll-Reveal je Abschnitt: Endzustand ist Default, Start nur unter .js */
   .tsn1.js .tsn1-rv{opacity:0;transform:translateY(22px)}
@@ -27834,6 +27838,7 @@ var TSISL_TEAM_ONB_V2=[
     .tsn1 .tsn1-cards.c3,.tsn1 .tsn1-cards.c4{grid-template-columns:repeat(2,1fr)}
     .tsn1 .tsn1-res,.tsn1 .tsn1-res.rev{grid-template-columns:1fr}
     .tsn1 .tsn1-res.rev .tx{order:0}
+    .tsn1 .tsn1-res .tsn1-mock{order:-1}
     .tsn1 .tsn1-err .row{grid-template-columns:1fr}
     .tsn1 .tsn1-err .row>div+div{border-left:0;border-top:1px dashed rgba(255,255,255,.06)}
     .tsn1 .tsn1-err .hd{display:none}
@@ -27897,7 +27902,7 @@ var TSISL_TEAM_ONB_V2=[
       var m=r.mock;
       var tb='<table><thead><tr>'+m.cols.map(function(c){ return '<th>'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+
         m.rows.map(function(row){ return '<tr>'+row.map(function(c,i){ return '<td'+((m.num||[]).indexOf(i)>-1?' class="n"':'')+'>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
-      return '<div class="tsn1-res tsn1-rv'+(r.rev?' rev':'')+'"><div class="tx">'+(r.eb?'<div class="tsn1-eb">'+r.eb+'</div>':'')+'<h3>'+r.title+'</h3>'+r.text.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>'+
+      return '<div class="tsn1-res tsn1-rv'+(r.rev?' rev':'')+'"><div class="tx"><h3>'+r.title+'</h3>'+r.text.map(function(p){ return '<p>'+p+'</p>'; }).join('')+'</div>'+
         '<div class="tsn1-mock"><div class="top"><i></i><i></i><i></i><span>'+m.file+'</span></div><div class="ttl">'+m.tab+'</div>'+
         '<div class="views">'+m.views.map(function(v,i){ return '<span'+(i===(m.on||0)?' class="on"':'')+'>'+v+'</span>'; }).join('')+'</div>'+
         '<div class="grid">'+tb+'</div>'+(m.cap?'<div class="cap">'+m.cap+'</div>':'')+'</div></div>';
@@ -28015,7 +28020,7 @@ var TSISL_TEAM_ONB_V2=[
     function start(){ if(iv||REDUCED||!vis) return; tick(); iv=setInterval(function(){ if(!el.isConnected||!vis){ clearInterval(iv); iv=null; return; } if(!document.hidden) tick(); },2600); }
     function stop(){ if(iv){ clearInterval(iv); iv=null; } }
     setTimeout(function(){
-      reveal(el,function(){ el.classList.add('in'); vis=true; start(); });
+      reveal(el,function(){ el.classList.add('in'); var r=el.getBoundingClientRect(); vis=(r.top<innerHeight && r.bottom>0); start(); });
       try{ new IntersectionObserver(function(en){ vis=en[0].isIntersecting; if(vis&&el.classList.contains('in')) start(); else if(!vis) stop(); },{threshold:.15}).observe(el); }catch(e){}
     },0);
     document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else start(); });
@@ -28190,7 +28195,7 @@ var TSISL_TEAM_ONB_V2=[
     step('17. Notiz','Eigenschaft : Text → Name der Spalte : Notiz.',
       E('Text')+NM('Notiz')+EIN('alles, was der Titel nicht sagt. Zum Beispiel „nur über den Großmarkt, nicht über den Lieferdienst".'))
   ];
-  var produkteImg=['inventar/olivenoel.jpg','inventar/balsamico.jpg','zutaten/mozzarella.webp','inventar/meersalz.webp','inventar/schwarzer-pfeffer.jpg','inventar/tomatenmark.jpg','inventar/dijon-senf.jpg','inventar/honig.jpg','inventar/sojasauce.jpg','inventar/chilisauce.jpg','inventar/mayonnaise.jpg','inventar/cornichons.jpg','inventar/sardellen.jpg','inventar/oregano.webp','inventar/paprika-edelsuess.jpg','inventar/weissweinessig.jpg','zutaten/parmesan.webp'];
+  var produkteImg=['inventar/olivenoel.jpg','inventar/weissweinessig.jpg','zutaten/mozzarella.webp','inventar/meersalz.webp','inventar/schwarzer-pfeffer.jpg','inventar/tomatenmark.jpg','inventar/dijon-senf.jpg','inventar/honig.jpg','inventar/sojasauce.jpg','inventar/chilisauce.jpg','inventar/mayonnaise.jpg','inventar/cornichons.jpg','inventar/sardellen.jpg','inventar/oregano.webp','inventar/paprika-edelsuess.jpg','inventar/weissweinessig.jpg','zutaten/parmesan.webp'];
 
   /* ---------------- Regal 2 · L1.5 · Lieferanten & Gerichte ---------------- */
   var lieferanten=[
@@ -28313,21 +28318,21 @@ var TSISL_TEAM_ONB_V2=[
   window.__tsn1Shop={
     m1_produkte:{ steps:produkte, varianten:vars(produkte,produkteImg,[0,1]),
       eyebrow:'Probeküche : Produkte', title:'Deine Produkte. <span>Spalte für Spalte.</span>',
-      sub:'Jede Karte ist eine Spalte deiner ersten eigenen Datenbank. Klick sie auf, bau sie in der Probeküche nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten.', summary:'Spalten' },
+      sub:'Jede Karte ist eine Spalte deiner ersten eigenen Datenbank. Klick sie auf, bau sie in der Probeküche nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten. Um die Tabelle anzulegen, öffnest du deine Probeküche, tippst / und wählst die Tabelle.', summary:'Spalten' },
     m1_lieferanten:{ steps:lieferanten, varianten:vars(lieferanten,lieferImg,[0,8,12]),
       relations:[{ type:'ghost', name:'Lieferant', target:'Gegenspalte · in Produkte', flag:'erscheint automatisch', desc:'Gegenspalte der Verknüpfung Produkte, entsteht in Produkte von selbst.',
         content:P('Diese Spalte legst du hier <b>nicht</b> an.')+P('Sie erscheint in <b>Produkte</b>, sobald du in Schritt 8 die Verknüpfung mit <b>Anzeigen in Produkte</b> anlegst. Du gibst ihr dort nur einen Namen: <b>Lieferant</b>.') }],
       eyebrow:'Probeküche : Lieferanten ↔ Produkte ↔ Gerichte', title:'Deine Lieferanten. <span>Mit allem verbunden.</span>',
-      sub:'Jede Karte ist eine Spalte oder eine Verbindung. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten.', summary:'Spalten' },
+      sub:'Jede Karte ist eine Spalte oder eine Verbindung. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird in Spalten. Eine Verknüpfung legst du über + rechts in der Tabelle an, Eigenschaft : Verknüpfung.', summary:'Spalten' },
     m1_rechnen:{ steps:rechnen, varianten:vars(rechnen,rechnenImg,[0,10,11]),
       eyebrow:'Probeküche : Rechenspalten', title:'Deine Formeln. <span>Zum Kopieren.</span>',
-      sub:'Jede Karte ist eine Spalte, die rechnet. Klick sie auf, kopier die Formel, leg sie in den Einkaufswagen. Gezählt werden die Spalten, die rechnen.', summary:'Rechenspalten' },
+      sub:'Jede Karte ist eine Spalte, die rechnet. Klick sie auf, kopier die Formel, leg sie in den Einkaufswagen. Gezählt werden die Spalten, die rechnen. Eine Formelspalte legst du über + rechts in der Tabelle an, Eigenschaft : Formel.', summary:'Rechenspalten' },
     m1_ansichten:{ steps:ansichten, varianten:vars(ansichten,ansichtenImg,[0,7,9]),
       eyebrow:'Probeküche : Ansichten', title:'Deine Ansichten. <span>Für jede Frage eine.</span>',
-      sub:'Jede Karte ist eine Ansicht oder ein Regler. Klick sie auf, stell sie ein, leg sie in den Einkaufswagen. Gezählt werden die Ansichten.', summary:'Ansichten' },
+      sub:'Jede Karte ist eine Ansicht oder ein Regler. Klick sie auf, stell sie ein, leg sie in den Einkaufswagen. Gezählt werden die Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.', summary:'Ansichten' },
     m1_buttons:{ steps:buttons, varianten:vars(buttons,buttonsImg,[0,5]),
       eyebrow:'Probeküche : Buttons & Automationen', title:'Deine Buttons. <span>Ein Klick weniger.</span>',
-      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast.', summary:'Buttons' }
+      sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Gezählt wird, was du gebaut hast. Einen Button holst du mit / auf jede Seite.', summary:'Buttons' }
   };
 })();
 
@@ -28390,7 +28395,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a1 .bimg .hand{left:-24px;top:14px}
       #tsn1-a1 .hand{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(239,230,210,.92);box-shadow:0 0 0 6px rgba(239,230,210,.16),0 8px 18px rgba(0,0,0,.6);pointer-events:none;opacity:0;z-index:5}
       #tsn1-a1 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%);margin:22px auto 0}
-      #tsn1-a1 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a1 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a1 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a1 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a1 .st.on b{color:#c7b489}
@@ -28419,7 +28424,7 @@ var TSISL_TEAM_ONB_V2=[
         return '<div class="nd '+(t[0]==='db'?'db ':'')+'l'+t[2]+' '+(t[3]||'')+'"><span class="ic"></span>'+t[1]+'</div>';
       }).join('');
       host.id='tsn1-a1';
-      host.innerHTML=R.head('Seiten und Blöcke','Jede Seite ist ein <span class="g">Stapel aus Blöcken</span>.','Links der Seitenbaum deines Betriebs, rechts eine Seite daraus. Jeder Block lässt sich greifen und neu setzen, ohne dass etwas verloren geht.')+
+      host.innerHTML=R.head('Seiten und Blöcke','Jede Seite ist ein <span class="g">Stapel aus Blöcken</span>.','Im Fenster der Seitenbaum deines Betriebs und eine Seite daraus. Jeder Block lässt sich greifen und neu setzen, ohne dass etwas verloren geht.')+
         '<div class="stage"><div class="bar"><i></i><i></i><i></i><span>Notion</span></div><div class="win">'+
         '<div class="side"><div class="ws"><b>B</b>Dein Betrieb</div>'+side+'</div>'+
         '<div class="main">'+
@@ -28429,7 +28434,7 @@ var TSISL_TEAM_ONB_V2=[
           '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="co"><span>!</span>Allergen-Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen, nie geschätzt.</div></div>'+
           '<div class="blk"><span class="gr"><i></i><i></i><i></i><i></i><i></i><i></i></span><div class="td ok"><i></i>Kühlschranktemperaturen eintragen</div><div class="td"><i></i>Theke und Kaffeemaschine reinigen</div><div class="td"><i></i>Spülmaschine leeren, Siebe säubern</div></div>'+
         '</div></div></div>'+
-        '<div class="rail"><button class="st" data-s="0"><b>01</b>Seiten liegen im Baum, Seiten in Seiten.</button><button class="st" data-s="1"><b>02</b>Eine Seite ist ein Stapel aus Blöcken.</button><button class="st" data-s="2"><b>03</b>Am Griff ziehst du einen Block an eine neue Stelle.</button></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Seiten liegen im Baum, Seiten in Seiten.</button><button class="st" data-s="1"><b>02</b>Überschrift, Text, Bild, Hinweis und Liste: lauter einzelne Blöcke.</button><button class="st" data-s="2"><b>03</b>Am Griff ziehst du einen Block an eine neue Stelle.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
       var nds=host.querySelectorAll('.nd'), blks=host.querySelectorAll('.blk'), sts=host.querySelectorAll('.st');
@@ -28572,96 +28577,71 @@ var TSISL_TEAM_ONB_V2=[
 
     function anim(host){
       N.addCSS('tsn1-a2-css',`
-      #tsn1-a2 .tab{position:relative;width:min(760px,100%);margin:0 auto;border-radius:34px;padding:18px;background:linear-gradient(145deg,#1a1c25,#0b0c12);border:1px solid rgba(255,255,255,.12);box-shadow:0 70px 120px -50px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.06)}
-      #tsn1-a2 .tab::before{content:"";position:absolute;top:50%;left:8px;width:5px;height:5px;margin-top:-2px;border-radius:50%;background:rgba(255,255,255,.15)}
-      #tsn1-a2 .scr{position:relative;border-radius:20px;background:#0a0b11;border:1px solid rgba(255,255,255,.07);padding:26px clamp(18px,3vw,34px);min-height:440px;overflow:hidden}
-      #tsn1-a2 .pg{position:relative}
-      #tsn1-a2 .sg{will-change:transform;transform-origin:0 0}
-      /* Zustand A: Textwand */
-      #tsn1-a2 .pg .sg{font-size:13.5px;line-height:1.62;color:rgba(255,255,255,.72);margin:0;font-weight:400;font-family:-apple-system,sans-serif}
-      #tsn1-a2 .pg .s-pic{margin-top:10px;height:38px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
-      #tsn1-a2 .pg .s-pic img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.6) brightness(.7)}
-      #tsn1-a2 .pg .s-tg .tg-h::before{content:none}
-      #tsn1-a2 .pg .s-tg .tg-b{display:block}
-      #tsn1-a2 .cols{display:block}
-      #tsn1-a2 .s-li span{display:inline}
-      #tsn1-a2 .s-li span+span::before{content:", "}
-      /* Zustand B: Stationskarte */
-      #tsn1-a2 .pg.ord .s-h{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(21px,2.5vw,28px);color:#fff;line-height:1.15;margin:0 0 16px}
-      #tsn1-a2 .pg.ord .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start;margin:0 0 16px}
-      #tsn1-a2 .pg.ord .s-li{color:rgba(255,255,255,.86)}
-      #tsn1-a2 .pg.ord .s-li span{display:flex;align-items:center;gap:9px;margin:0 0 7px}
-      #tsn1-a2 .pg.ord .s-li span+span::before{content:none}
-      #tsn1-a2 .pg.ord .s-li span i{display:inline-block}
-      #tsn1-a2 .s-li span i{display:none;width:13px;height:13px;border-radius:3px;border:1.4px solid rgba(255,255,255,.45);flex:0 0 auto}
-      #tsn1-a2 .pg.ord .s-pic{margin:0;height:160px;border-radius:12px}
-      #tsn1-a2 .pg.ord .s-pic img{filter:none}
-      #tsn1-a2 .pg.ord .s-co{display:flex;gap:10px;padding:12px 14px;border-radius:11px;background:rgba(199,180,137,.09);border:1px solid rgba(199,180,137,.3);color:rgba(255,255,255,.9);margin:0 0 12px}
-      #tsn1-a2 .s-co b{display:none;color:#c7b489;font-weight:700}
-      #tsn1-a2 .pg.ord .s-co b{display:inline}
-      #tsn1-a2 .pg.ord .s-tg{border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
-      #tsn1-a2 .pg.ord .s-tg .tg-h{display:flex;align-items:center;gap:9px;color:#fff;font-weight:600}
-      #tsn1-a2 .pg.ord .s-tg .tg-h::before{content:"";width:0;height:0;border-left:6px solid #c7b489;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a2 .pg.ord .s-tg .tg-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.16,1,.3,1)}
-      #tsn1-a2 .pg.ord .s-tg .tg-b>div{overflow:hidden;padding-left:15px;color:rgba(255,255,255,.66)}
-      #tsn1-a2 .pg.ord .s-tg.open .tg-h::before{transform:rotate(90deg)}
-      #tsn1-a2 .pg.ord .s-tg.open .tg-b{grid-template-rows:1fr}
-      #tsn1-a2 .pg.ord .s-tg.open .tg-b>div{padding-top:8px}
-      #tsn1-a2 .scan{position:absolute;left:0;right:0;top:0;height:70px;pointer-events:none;opacity:0;background:linear-gradient(180deg,rgba(199,180,137,0),rgba(199,180,137,.10),rgba(199,180,137,0))}
-      #tsn1-a2 .scan.run{animation:tsn1a2scan 1.4s cubic-bezier(.22,1,.36,1) 1}
-      @keyframes tsn1a2scan{0%{opacity:0;transform:translateY(-70px)}20%{opacity:1}100%{opacity:0;transform:translateY(460px)}}
-      #tsn1-a2 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(900px,100%);margin:24px auto 0}
-      #tsn1-a2 .st{appearance:none;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .stg{position:relative;width:min(760px,100%);margin:0 auto;height:600px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:#07080e;overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.95)}
+      #tsn1-a2 .scr{position:absolute;left:28px;right:28px;top:28px;height:388px;border-radius:14px;border:1.5px solid rgba(199,180,137,.75);box-shadow:0 0 0 9999px rgba(4,5,10,.62),0 0 40px rgba(199,180,137,.12);pointer-events:none;z-index:3;transition:box-shadow .8s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .scr span{position:absolute;right:12px;top:-11px;padding:3px 9px;border-radius:999px;background:#07080e;border:1px solid rgba(199,180,137,.55);font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
+      #tsn1-a2 .doc{position:absolute;left:52px;right:52px;top:50px}
+      #tsn1-a2 .ttl{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(20px,2.4vw,25px);color:#fff;margin:0 0 6px}
+      #tsn1-a2 .sub{font:500 12px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.55);margin:0}
+      #tsn1-a2 .sec{position:absolute;left:52px;right:52px;top:0;will-change:transform;transition:transform .95s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .hd{display:flex;align-items:center;gap:10px;height:40px;border-bottom:1px solid rgba(255,255,255,.07);font:600 14px/1 -apple-system,sans-serif;color:#fff}
+      #tsn1-a2 .hd::before{content:"";width:0;height:0;border-left:6px solid #c7b489;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;transform:rotate(90deg);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .sec.cl .hd::before{transform:none}
+      #tsn1-a2 .bd{padding:9px 0 12px 16px;font:500 12.5px/1.55 -apple-system,sans-serif;color:rgba(255,255,255,.78);transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .sec.cl .bd{opacity:0}
+      #tsn1-a2 .sec.al .hd{color:#c7b489}
+      #tsn1-a2 .fit{position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:center;font:500 12.5px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.86)}
+      #tsn1-a2 .fit b{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;transition:color .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a2 .fit b.ok{color:#c7b489}
+      #tsn1-a2 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(760px,100%);margin:22px auto 0}
+      #tsn1-a2 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a2 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a2 .st.on b{color:#c7b489}
       #tsn1-a2 .rp{display:flex;justify-content:center;margin-top:18px}
       #tsn1-a2 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
       #tsn1-a2 .rp button:hover{background:#c7b489;color:#05060b}
-      #tsn1-a2.js .tab{opacity:0;transform:translateY(24px) scale(.97)}
-      #tsn1-a2.js.on .tab{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-      @media(max-width:700px){ #tsn1-a2 .pg.ord .cols{grid-template-columns:1fr} #tsn1-a2 .rail{grid-template-columns:1fr} #tsn1-a2 .tab{border-radius:24px;padding:10px} }
-      @media(prefers-reduced-motion:reduce){ #tsn1-a2.js .tab{opacity:1;transform:none} }
+      @media(max-width:700px){ #tsn1-a2 .stg{height:640px} #tsn1-a2 .scr{left:14px;right:14px} #tsn1-a2 .doc,#tsn1-a2 .sec{left:30px;right:30px} #tsn1-a2 .fit{left:16px;right:16px} #tsn1-a2 .rail{grid-template-columns:1fr} }
       `);
+      var SEC=[
+        ['Schichtbeginn','Kühlschranktemperaturen eintragen, Lieferung prüfen, Mise-en-place-Liste der Station abarbeiten.'],
+        ['Allergene','Ordner liegt am Pass. Jede Frage vom Gast wird dort nachgeschlagen und mit der Küche abgestimmt.',1],
+        ['Während des Service','Bons laut ansagen, Rückfragen nur über den Pass, Teller erst mit Freigabe raus.'],
+        ['Schichtende','Bretter in die Spülmaschine, Kühlschubladen auswischen, Temperaturen eintragen.'],
+        ['Reinigung','Mittel und Dosierung je Fläche, Wochenplan für Haube und Kühlhaus.'],
+        ['Notfälle','Kältetechnik, Elektriker, Schlüsseldienst, Erste-Hilfe-Kasten neben dem Kühlhaus.']
+      ];
       host.id='tsn1-a2';
-      host.innerHTML=R.head('Ein Tablet am Pass','Dieselben Zeilen, <span class="g">einmal geordnet</span>.','Zuerst steht da, wie die meisten eine Stationsseite schreiben. Ohne ein Wort zu ändern, wird daraus eine Seite, die man im Vorbeigehen erfasst.')+
-        '<div class="tab"><div class="scr"><div class="scan"></div><div class="pg">'+
-          '<p class="sg s-h">Station Kalt, Mise en place für den Abend</p>'+
-          '<div class="cols"><p class="sg s-li"><span><i></i>Burrata aus der Kühlung nehmen</span><span><i></i>Tomaten in Spalten schneiden</span><span><i></i>Basilikum zupfen, feucht abdecken</span><span><i></i>Olivenöl in die Ausgießer füllen</span></p>'+
-          '<div class="sg s-pic"><img alt="Burrata mit Tomaten, angerichtet" decoding="async" src="'+IMG+'gerichte/burrata.webp"></div></div>'+
-          '<p class="sg s-co"><b>!</b>Burrata enthält Milch. Bei jeder Nachfrage den Allergen-Ordner am Pass aufschlagen.</p>'+
-          '<div class="sg s-tg"><div class="tg-h">Reinigung nach dem Service</div><div class="tg-b"><div>Bretter in die Spülmaschine, Messer von Hand, Kühlschublade auswischen und Temperatur eintragen.</div></div></div>'+
-        '</div></div></div>'+
-        '<div class="rail"><button class="st" data-s="0"><b>01</b>So schreiben die meisten: ein Absatz für alles.</button><button class="st" data-s="1"><b>02</b>Überschrift, zwei Spalten, ein Hinweis.</button><button class="st" data-s="2"><b>03</b>Details klappen weg, bis jemand sie braucht.</button></div>'+
+      host.innerHTML=R.head('Ein Bildschirm am Pass','Alles Wichtige auf <span class="g">einen Blick</span>.','Ein Küchenhandbuch, ganz aufgeklappt, ist zu lang für das Tablet am Pass. Mit Überschriften als Toggle passt es auf einen Bildschirm, und aufgeklappt wird nur, was gerade gebraucht wird.')+
+        '<div class="stg"><div class="doc"><p class="ttl">Küchenhandbuch</p><p class="sub">Station Kalt · gilt für alle Schichten</p></div>'+
+          SEC.map(function(x,i){ return '<div class="sec'+(x[2]?' al':'')+'" data-i="'+i+'"><div class="hd">'+x[0]+'</div><div class="bd">'+x[1]+'</div></div>'; }).join('')+
+          '<div class="scr"><span>Ein Bildschirm</span></div>'+
+          '<div class="fit"><span>Sichtbar ohne Scrollen</span><b>2 von 6</b></div></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Alles offen: Die Hälfte liegt unter dem Bildschirmrand.</button><button class="st" data-s="1"><b>02</b>Überschriften als Toggle: alle sechs auf einen Blick.</button><button class="st" data-s="2"><b>03</b>Geöffnet wird nur, was gerade gebraucht wird.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
-
-      var pg=host.querySelector('.pg'), sgs=host.querySelectorAll('.sg'), tg=host.querySelector('.s-tg'), scan=host.querySelector('.scan'), sts=host.querySelectorAll('.st');
+      var secs=[].slice.call(host.querySelectorAll('.sec')), sts=host.querySelectorAll('.st'), fit=host.querySelector('.fit b'), doc=host.querySelector('.doc');
       var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
-      function step(i){ Array.prototype.forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
-      function morph(toOrd){
-        if(pg.classList.contains('ord')===toOrd) return;
-        var a=[].map.call(sgs,function(e){ return e.getBoundingClientRect(); });
-        pg.classList.toggle('ord',toOrd);
-        [].forEach.call(sgs,function(e,i){
-          var b=e.getBoundingClientRect(); if(!b.width||!b.height) return;
-          var sx=a[i].width/b.width, sy=a[i].height/b.height;
-          e.style.transition='none'; e.style.transform='translate('+(a[i].left-b.left)+'px,'+(a[i].top-b.top)+'px) scale('+sx+','+sy+')';
+      window.__tsn1a2Kill=clear;
+      function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
+      /* Positionen aus gemessenen Hoehen, Bewegung nur ueber transform */
+      function lay(open){
+        var y=doc.offsetTop+doc.offsetHeight+14, frameBottom=28+388, inside=0;
+        secs.forEach(function(s,i){
+          var on=open==='all'||open===i; s.classList.toggle('cl',!on);
+          s.style.transform='translateY('+y+'px)';
+          var h=40+(on?s.querySelector('.bd').offsetHeight:0);
+          if(y+h<=frameBottom) inside++;
+          y+=h;
         });
-        void pg.offsetWidth;
-        [].forEach.call(sgs,function(e,i){ e.style.transition='transform 1.05s cubic-bezier(.16,1,.3,1) '+(i*90)+'ms'; e.style.transform=''; });
+        fit.textContent=inside+' von 6'; fit.classList.toggle('ok',inside===6);
       }
-      function play(){
-        clear(); tg.classList.remove('open'); [].forEach.call(sgs,function(e){ e.style.transition='none'; e.style.transform=''; }); pg.classList.remove('ord');
-        host.classList.add('on'); step(0);
-        later(function(){ step(1); scan.classList.remove('run'); void scan.offsetWidth; scan.classList.add('run'); morph(true); },2200);
-        later(function(){ step(2); tg.classList.add('open'); },4600);
-        later(function(){ tg.classList.remove('open'); },6800);
-      }
-      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ var i=+s.getAttribute('data-s'); clear(); host.classList.add('on'); step(i); morph(i>0); tg.classList.toggle('open',i===2); }); });
+      function play(){ clear(); step(0); lay('all'); later(function(){ step(1); lay('none'); },2600); later(function(){ step(2); lay(1); },5000); }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ clear(); var i=+s.getAttribute('data-s'); step(i); lay(i===0?'all':i===1?'none':1); }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      if(N.REDUCED){ pg.classList.add('ord'); step(1); return; }
-      pg.classList.add('ord'); host.classList.add('js');
-      N.reveal(host,play);
+      window.addEventListener('resize',function(){ if(!host.isConnected) return; var on=host.querySelector('.st.on'); var i=on?+on.getAttribute('data-s'):2; lay(i===0?'all':i===1?'none':1); });
+      lay(1); step(2);
+      if(N.REDUCED) return;
+      N.reveal(host,function(){ secs.forEach(function(s){ s.style.transition='none'; }); lay('all'); step(0); void host.offsetWidth; secs.forEach(function(s){ s.style.transition=''; }); later(function(){ play(); },300); });
     }
 
     N.page({
@@ -28669,8 +28649,8 @@ var TSISL_TEAM_ONB_V2=[
       re:/\/(?:lektionen\/l12-layout-medien-strukturierungs-tricks|layout-medien-strukturierung)\/?$/,
       hero:{label:'L 1.2', eyebrow:'L 1.2', title:'Lesbar im <span class="ts-gold">Stress</span>.', alt:'Notion-Seiten so gestalten, dass man sie im Service liest'},
       intro:
-        '<p>Eine Seite in deinem Betrieb wird selten in Ruhe gelesen. Der Hygieneplan hängt als Tablet am Pass, die Mise-en-place-Liste wird mit nassen Händen auf dem Handy abgehakt, das Handbuch für neue Kollegen am ersten Tag zwischen zwei Aufgaben überflogen. Ob jemand liest, was da steht, entscheidet das Layout.</p>'+
-        '<p>In dieser Lektion lernen wir die Werkzeuge, mit denen aus einem langen Text eine Seite wird, die man im Vorbeigehen erfasst: Überschriften, Spalten, Hinweise, Klappen, Bilder und Blöcke, die an mehreren Stellen gleichzeitig stehen. Und wir schauen uns an, wie du die Seite eines einzelnen Eintrags in der Vorlage übersichtlich machst.</p>',
+        '<p>Eine Seite in deinem Betrieb wird selten in Ruhe gelesen. Der Hygieneplan hängt als Tablet am Pass, die Mise-en-place-Liste wird mit nassen Händen auf dem Handy abgehakt. Ob jemand liest, was da steht, entscheidet das Layout.</p>'+
+        '<p>Wir lernen die Werkzeuge, mit denen aus einem langen Text eine Seite wird, die man im Vorbeigehen erfasst: Überschriften, Spalten, Hinweise, Klappen und Blöcke, die an mehreren Stellen zugleich stehen. Dazu machst du die Eintragsseiten der Vorlage übersichtlich, damit jeder im Team in Sekunden findet, was er gerade braucht.</p>',
       parts:[
         {anim:anim},
         R.sec({eb:'Für wen und wo', title:'Schreib für den <span class="g">Moment</span>, in dem gelesen wird', lead:'Bevor du eine Seite gestaltest, frag dich, wer sie in welcher Situation öffnet. Daraus ergibt sich fast jede Entscheidung von selbst.', blocks:[
@@ -28691,7 +28671,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Inhaltsverzeichnis','Listet alle Überschriften der Seite als Sprungmarken','Am Anfang des Hygienehandbuchs'],
             ['Bild, Datei, Video','Fotos, PDFs und Videos direkt auf der Seite','Das Sicherheitsdatenblatt des Reinigers als PDF']
           ]),
-          R.txt('<p><strong>Aus jedem Block wird ein anderer.</strong> Hast du einen Absatz geschrieben, der eigentlich ein Hinweis sein soll, musst du ihn nicht neu tippen. Klick auf den Griff, wähle im Menü das Umwandeln in einen anderen Blocktyp, und der Text bleibt, nur die Form ändert sich. Genau das zeigt die Animation oben.</p>'),
+          R.txt('<p><strong>Aus jedem Block wird ein anderer.</strong> Hast du einen Absatz geschrieben, der eigentlich ein Hinweis sein soll, musst du ihn nicht neu tippen. Klick auf den Griff, wähle im Menü das Umwandeln in einen anderen Blocktyp, und der Text bleibt, nur die Form ändert sich. So wird aus einem Absatz ein Hinweis oder aus einer Überschrift ein Toggle.</p>'),
           R.merk('Was am Pass gelesen wird, passt auf einen Bildschirm.')
         ]}),
         R.sec({eb:'Ein Block, viele Orte', title:'Die Notfallnummern stehen <span class="g">überall gleich</span>', lead:'Manche Inhalte gehören auf viele Seiten zugleich: die Nummer des Kältetechnikers, der Hinweis zum Allergen-Ordner, die Öffnungszeiten über Feiertage.', blocks:[
@@ -28767,7 +28747,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a3 .bd .n{margin-left:auto;font-variant-numeric:tabular-nums}
       #tsn1-a3 .bd .open{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:600 10px/1 -apple-system,sans-serif;letter-spacing:.06em;color:#05060b;background:#efe6d2;border-radius:5px;padding:4px 6px;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
       #tsn1-a3 .row.bd.pk{background:rgba(199,180,137,.06)}
-      #tsn1-a3 .peek{position:absolute;top:0;right:0;bottom:0;width:min(330px,62%);background:#0d0f17;border-left:1px solid rgba(199,180,137,.3);box-shadow:-40px 0 80px -30px rgba(0,0,0,.9);padding:22px 22px;transform:translateX(102%);transition:transform .9s cubic-bezier(.16,1,.3,1);z-index:4}
+      #tsn1-a3 .xpeek{position:absolute;top:0;right:0;bottom:0;width:min(330px,62%);background:#0d0f17;border-left:1px solid rgba(199,180,137,.3);box-shadow:-40px 0 80px -30px rgba(0,0,0,.9);padding:22px 22px;transform:translateX(102%);transition:transform .9s cubic-bezier(.16,1,.3,1);z-index:4}
       #tsn1-a3 .peek .pt{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:20px;color:#fff;margin:4px 0 14px}
       #tsn1-a3 .peek .pi{display:grid;grid-template-columns:110px 1fr;gap:8px;font:500 12px/1.35 -apple-system,sans-serif;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
       #tsn1-a3 .peek .pi span:first-child{color:rgba(255,255,255,.5)}
@@ -28775,10 +28755,20 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a3 .peek .ph{margin-top:14px;height:96px;border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
       #tsn1-a3 .peek .ph img{width:100%;height:100%;object-fit:cover;display:block}
       #tsn1-a3 .peek .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489}
-      #tsn1-a3.pk .peek{transform:none}
+      #tsn1-a3 .bd>div::before{content:attr(data-l);display:none;font:500 11px/1.2 -apple-system,sans-serif;color:rgba(255,255,255,.5);margin-right:auto;padding-right:12px}
+      #tsn1-a3 .bd>div{will-change:transform}
+      #tsn1-a3 .hd{transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .tblw.pg .hd{opacity:.18}
+      #tsn1-a3 .tblw.pg .row.bd{grid-template-columns:1fr 1fr;column-gap:22px;padding:8px 6px}
+      #tsn1-a3 .tblw.pg .bd>div{border-right:0;border-bottom:1px dashed rgba(255,255,255,.07);min-height:40px}
+      #tsn1-a3 .tblw.pg .bd>div::before{display:block}
+      #tsn1-a3 .tblw.pg .bd>div[data-c="0"]{grid-column:1 / -1;font-family:"Lineal Web","Lineal TS",sans-serif;font-size:20px;font-weight:600}
+      #tsn1-a3 .tblw.pg .bd>div[data-c="0"]::before{display:none}
+      #tsn1-a3 .stamp{position:absolute;right:16px;bottom:12px;font:700 10px/1 -apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#7a2a2a;border:1.5px solid rgba(122,42,42,.6);border-radius:4px;padding:5px 7px;transform:rotate(-6deg) scale(1.3);opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a3 .stamp.on{opacity:.9;transform:rotate(-6deg) scale(1)}
       #tsn1-a3 .note{width:min(980px,100%);margin:10px auto 0;text-align:right;font-size:10.5px;color:rgba(255,255,255,.4)}
       #tsn1-a3 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(980px,100%);margin:18px auto 0}
-      #tsn1-a3 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a3 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a3 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a3 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a3 .st.on b{color:#c7b489}
@@ -28788,10 +28778,13 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a3.js .hand-in{opacity:0;transform:scale(.6)}
       #tsn1-a3.js .hand-in.in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.34,1.56,.64,1)}
       @media(max-width:820px){
-        #tsn1-a3 .tblw{overflow-x:auto;margin:30px 22px 22px}
-        #tsn1-a3 .tbl{margin:0;min-width:720px}
+        #tsn1-a3 .slip,#tsn1-a3 .tbl{margin-left:14px;margin-right:14px}
+        #tsn1-a3 .hd{display:none}
+        #tsn1-a3 .row.bd,#tsn1-a3 .tblw.pg .row.bd{grid-template-columns:1fr}
+        #tsn1-a3 .bd>div{border-right:0;border-bottom:1px solid rgba(255,255,255,.05);min-height:40px}
+        #tsn1-a3 .bd>div::before{display:block}
         #tsn1-a3 .rail{grid-template-columns:1fr}
-        #tsn1-a3 .peek{width:78%}
+        #tsn1-a3 .bd>div[data-c="0"]{min-height:60px}
       }
       @media(prefers-reduced-motion:reduce){ #tsn1-a3.js .hand-in{opacity:1;transform:none} }
       `);
@@ -28799,26 +28792,25 @@ var TSISL_TEAM_ONB_V2=[
       /* Wert vom Lieferschein -> Spalte (Index). Kategorie und Im Sortiment stehen auf keinem Lieferschein. */
       var SLIP=[['Burrata 125 g',0,'<span class="v">Burrata 125 g</span>'],['Karton 12 × 125 g',2,'<span class="v">Karton 12 × 125 g</span>'],['1,5 kg',3,'<span class="v n">1,5</span>'],['18,90 €',4,'<span class="v n">18,90 €</span>'],['03.11.2026',6,'<span class="v">3. Nov. 2026</span>']];
       host.id='tsn1-a3';
-      host.innerHTML=R.head('Spalten und Typen','Jeder Wert landet in der <span class="g">Spalte seines Typs</span>.','Eine Zeile vom Lieferschein wird zum Eintrag in der Datenbank. Was auf keinem Lieferschein steht, ergänzt du. Und jede Zeile ist zugleich eine eigene Seite.')+
-        '<div class="card"><div class="slip"><div class="lh"><span>Lieferschein · Pos. 3</span><span>Art.-Nr. 040211</span></div><div class="ln">'+
+      host.innerHTML=R.head('Spalten und Typen','Jeder Wert findet seine <span class="g">Spalte</span>.','Eine Zeile vom Lieferschein wird zum Eintrag in der Datenbank. Was auf keinem Lieferschein steht, ergänzt du. Und jede Zeile ist zugleich eine eigene Seite.')+
+        '<div class="card"><div class="slip"><span class="stamp">übertragen</span><div class="lh"><span>Lieferschein · Pos. 3</span><span>Art.-Nr. 040211</span></div><div class="ln">'+
           SLIP.map(function(x,i){ return '<span data-i="'+i+'">'+x[0]+'</span>'; }).join('')+'</div></div>'+
         '<div class="tblw"><div class="tbl"><div class="row hd">'+COLS.map(function(c){ return '<div><i>'+c[0]+'</i>'+c[1]+'</div>'; }).join('')+'</div>'+
           '<div class="row bd">'+COLS.map(function(c,ci){
             var s=SLIP.filter(function(x){ return x[1]===ci; })[0];
-            if(s) return '<div data-c="'+ci+'">'+s[2]+(ci===0?'<span class="open">ÖFFNEN</span>':'')+'</div>';
-            if(ci===1) return '<div data-c="1"><span class="chip hand-in">Molkerei</span></div>';
-            return '<div data-c="5"><span class="cb hand-in"></span></div>';
+            if(s) return '<div data-c="'+ci+'" data-l="'+c[1]+'">'+s[2]+'</div>';
+            if(ci===1) return '<div data-c="1" data-l="Kategorie"><span class="chip hand-in">Molkerei</span></div>';
+            return '<div data-c="5" data-l="Im Sortiment"><span class="cb hand-in"></span></div>';
           }).join('')+'</div></div></div>'+
-        '<div class="peek"><div class="mi">Eintrag als Seite</div><div class="pt">Burrata 125 g</div>'+
-          '<div class="pi"><span>Kategorie</span><span>Molkerei</span></div><div class="pi"><span>Gebinde</span><span>Karton 12 × 125 g</span></div>'+
-          '<div class="pi"><span>Menge</span><span>1,5 kg</span></div><div class="pi"><span>Preis</span><span>18,90 €</span></div><div class="pi"><span>Geliefert</span><span>3. Nov. 2026</span></div>'+
-          '<div class="ph"><img alt="Burrata" decoding="async" loading="lazy" src="'+IMG+'zutaten/mozzarella.webp"></div></div>'+
         '</div><div class="note">Beispielwerte</div>'+
-        '<div class="rail"><button class="st" data-s="0"><b>01</b>Eine Zeile vom Lieferschein.</button><button class="st" data-s="1"><b>02</b>Jeder Wert findet die Spalte seines Typs, den Rest trägst du ein.</button><button class="st" data-s="2"><b>03</b>Ein Klick auf die Zeile öffnet sie als Seite.</button></div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Eine Zeile vom Lieferschein.</button><button class="st" data-s="1"><b>02</b>Gebinde, Menge, Preis und Datum landen bei ihrem Typ. Kategorie und Haken setzt du selbst.</button><button class="st" data-s="2"><b>03</b>Ein Klick auf die Zeile, und dieselben Werte stehen als Seite untereinander.</button></div>'+
         '<div class="rp"><button type="button">Neu abspielen</button></div>';
 
       var spans=host.querySelectorAll('.slip .ln span'), vals=host.querySelectorAll('.bd .v'), hds=host.querySelectorAll('.hd>div'), hand=host.querySelectorAll('.hand-in'),
-          bd=host.querySelector('.row.bd'), open=host.querySelector('.bd .open'), sts=host.querySelectorAll('.st');
+          bd=host.querySelector('.row.bd'), tblw=host.querySelector('.tblw'), cells=host.querySelectorAll('.bd>div'), stamp=host.querySelector('.stamp'), sts=host.querySelectorAll('.st');
+      function pageMode(on){ if(tblw.classList.contains('pg')===on) return; var a=[].map.call(cells,function(e){ return e.getBoundingClientRect(); }); tblw.classList.toggle('pg',on);
+        [].forEach.call(cells,function(e,i){ var b=e.getBoundingClientRect(); e.style.transition='none'; e.style.transform='translate('+(a[i].left-b.left)+'px,'+(a[i].top-b.top)+'px)'; }); void tblw.offsetWidth;
+        [].forEach.call(cells,function(e,i){ e.style.transition='transform 1s cubic-bezier(.16,1,.3,1) '+(i*60)+'ms'; e.style.transform=''; }); }
       var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
       window.__tsn1a3Kill=clear;
       function step(i){ [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===i); }); }
@@ -28832,7 +28824,7 @@ var TSISL_TEAM_ONB_V2=[
         hd.classList.add('hit'); later(function(){ hd.classList.remove('hit'); },1100);
       }
       function reset(){
-        clear(); host.classList.remove('pk'); bd.classList.remove('pk'); open.style.opacity='0';
+        clear(); pageMode(false); stamp.classList.remove('on');
         [].forEach.call(spans,function(s){ s.classList.remove('out'); });
         [].forEach.call(vals,function(v){ v.style.transition='none'; v.style.transform=''; v.style.visibility='hidden'; });
         [].forEach.call(hand,function(h){ h.classList.remove('in'); });
@@ -28840,20 +28832,19 @@ var TSISL_TEAM_ONB_V2=[
       }
       function play(){
         host.classList.add('js'); reset();
-        SLIP.forEach(function(x,i){ later(function(){ if(i===0) step(1); fly(i); },1300+i*420); });
-        later(function(){ hand[0].classList.add('in'); },1300+SLIP.length*420+300);
-        later(function(){ hand[1].classList.add('in'); },1300+SLIP.length*420+650);
-        later(function(){ step(2); bd.classList.add('pk'); open.style.opacity='1'; },4600);
-        later(function(){ host.classList.add('pk'); },5200);
+        SLIP.forEach(function(x,i){ later(function(){ if(i===0) step(1); fly(i); },1300+i*480); });
+        later(function(){ hand[0].classList.add('in'); stamp.classList.add('on'); },1300+SLIP.length*480+300);
+        later(function(){ hand[1].classList.add('in'); },1300+SLIP.length*480+650);
+        later(function(){ step(2); pageMode(true); },5400);
       }
-      function endState(){ clear(); [].forEach.call(spans,function(s){ s.classList.add('out'); }); [].forEach.call(vals,function(v){ v.style.transition='none'; v.style.transform=''; v.style.visibility='visible'; }); [].forEach.call(hand,function(h){ h.classList.add('in'); }); }
+      function endState(){ clear(); stamp.classList.add('on'); [].forEach.call(spans,function(s){ s.classList.add('out'); }); [].forEach.call(vals,function(v){ v.style.transition='none'; v.style.transform=''; v.style.visibility='visible'; }); [].forEach.call(hand,function(h){ h.classList.add('in'); }); }
       [].forEach.call(sts,function(s){ s.addEventListener('click',function(){
         var i=+s.getAttribute('data-s'); clear(); step(i);
         if(i===0){ reset(); }
-        else { endState(); host.classList.toggle('pk',i===2); bd.classList.toggle('pk',i===2); open.style.opacity=i===2?'1':'0'; }
+        else { endState(); pageMode(i===2); }
       }); });
       host.querySelector('.rp button').addEventListener('click',play);
-      if(N.REDUCED){ step(2); host.classList.add('pk'); return; }
+      if(N.REDUCED){ step(2); tblw.classList.add('pg'); stamp.classList.add('on'); [].forEach.call(spans,function(s){ s.classList.add('out'); }); return; }
       host.classList.add('js'); [].forEach.call(vals,function(v){ v.style.visibility='hidden'; });
       N.reveal(host,play);
     }
@@ -28870,7 +28861,7 @@ var TSISL_TEAM_ONB_V2=[
         R.sec({eb:'Seite oder Datenbank', title:'Wann eine Seite reicht und wann <span class="g">nicht</span>', lead:'Die Frage stellt sich bei jedem neuen Thema im Betrieb, und die Antwort ist fast immer schnell gefunden.', blocks:[
           R.cards([
             {mi:'Einmalig', nm:'Eine Seite', img:IMG+'ansprechpartner/notizblock.jpg', tx:'<p>Für Inhalte, die es genau einmal gibt: das Hygienehandbuch, die Geschichte deines Hauses, die Regeln für die Personalmahlzeit. Eine Seite liest man von oben nach unten.</p>'},
-            {mi:'Wiederkehrend', nm:'Eine Datenbank', img:IMG+'inventar/balsamico.jpg', tx:'<p>Für alles, was es viele Male in derselben Form gibt: Artikel, Lieferanten, Gerichte, Mitarbeiter, Reservierungen. Eine Datenbank kann man filtern, sortieren und durchrechnen.</p>'}
+            {mi:'Wiederkehrend', nm:'Eine Datenbank', img:IMG+'inventar/meersalz.webp', tx:'<p>Für alles, was es viele Male in derselben Form gibt: Artikel, Lieferanten, Gerichte, Mitarbeiter, Reservierungen. Eine Datenbank kann man filtern, sortieren und durchrechnen.</p>'}
           ],2),
           R.merk('Schreibst du dieselbe Art Information zum dritten Mal auf, gehört sie in eine Datenbank.'),
           R.txt('<p><strong>Ganze Seite oder eingebettet.</strong> Eine Datenbank kann eine eigene Seite füllen oder mitten auf einer anderen Seite stehen. In der Vorlage hat jede Datenbank ihre eigene Seite, damit sie Platz für viele Spalten hat. Wie du dieselbe Datenbank zusätzlich auf einer anderen Seite zeigst, ohne sie zu kopieren, lernst du in Lektion 1.7.</p>')
@@ -28906,8 +28897,8 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.wk('tsn1-wk-m1_produkte'),
         R.res({eb:'Ergebnis', title:'Deine Produkte, <span class="g">sauber getippt</span>.', text:[
-          'Wenn alle Spalten stehen, trägst du fünf, sechs Artikel aus deinem eigenen Lager ein. Nimm echte Lieferscheine, damit du merkst, wo eine Angabe fehlt und wo du dich für eine Schreibweise entscheiden musst.',
-          'Genau so ist die Inventurliste der Vorlage aufgebaut, nur mit mehr Spalten. Wer diese kleine Tabelle einmal selbst getippt hat, liest die große ohne Mühe.'],
+          'Wenn alle Spalten stehen, trägst du fünf, sechs Artikel aus deinem eigenen Lager ein. Nimm dafür echte Lieferscheine aus der letzten Woche, damit du merkst, wo eine Angabe fehlt, wo der Lieferant eine andere Einheit benutzt und wo du dich für eine Schreibweise entscheiden musst.',
+          'Genau so ist die Inventurliste der Vorlage aufgebaut, nur mit mehr Spalten und mit Formeln dahinter. Wer diese kleine Tabelle einmal selbst getippt hat, erkennt in der großen jede Spalte wieder und weiß, welcher Wert von Hand kommt und welcher berechnet wird.'],
           mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Tabelle'], cols:['Produkt','Kategorie','Lagerort','Menge','Preis','Im Sortiment'], num:[3,4],
             rows:[['Burrata 125 g','<span class="t">Molkerei</span>','Kühlhaus','1,5','18,90 €','✓'],['Olivenöl extra vergine 5 l','<span class="t">Trockenware</span>','Trockenlager','5','42,50 €','✓'],['Tomaten Ochsenherz','<span class="t">Obst &amp; Gemüse</span>','Kühlhaus','5','16,00 €','✓'],['Parmigiano 24 Monate','<span class="t">Molkerei</span>','Kühlhaus','1','23,40 €','✓'],['Basilikum Topf','<span class="t">Obst &amp; Gemüse</span>','Kühlhaus','6','7,20 €','']],
             cap:'Beispielwerte'}}),
@@ -28959,7 +28950,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a5 .tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
       #tsn1-a5 .tag{display:inline-block;font:600 10.5px/1 -apple-system,sans-serif;padding:4px 7px;border-radius:5px;background:rgba(199,180,137,.16);color:#efe6d2}
       #tsn1-a5 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(1000px,100%);margin:34px auto 0}
-      #tsn1-a5 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a5 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a5 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a5 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a5 .st.on b{color:#c7b489}
@@ -29130,9 +29121,9 @@ var TSISL_TEAM_ONB_V2=[
           ])
         ]}),
         R.wk('tsn1-wk-m1_lieferanten'),
-        R.res({eb:'Ergebnis', title:'Allergene, die <span class="g">sich selbst</span> eintragen.', text:[
-          'Trag bei einem Produkt ein Allergen nach und schau in die Gerichte. Jedes Gericht, in dem das Produkt steckt, zeigt das Allergen sofort, ohne dass du dort etwas angefasst hast.',
-          'Das ist die Arbeitsweise der ganzen Vorlage. Du pflegst eine Angabe dort, wo sie entsteht, und alle Tabellen, die sie brauchen, holen sie sich über die Verknüpfung.'],
+        R.res({eb:'Ergebnis', title:'Allergene, die <span class="g">nachziehen</span>.', text:[
+          'Trag bei einem Produkt ein Allergen nach und schau danach in die Gerichte. Jedes Gericht, in dem das Produkt steckt, zeigt das Allergen sofort an, ohne dass du dort etwas angefasst hast. Stellt dein Lieferant eine Rezeptur um, änderst du genau eine Zeile.',
+          'Das ist die Arbeitsweise der ganzen Vorlage. Du pflegst eine Angabe dort, wo sie entsteht, also den Preis bei der Inventur und das Allergen beim Produkt, und alle Tabellen, die sie brauchen, holen sie sich über die Verknüpfung. Doppelt gepflegt wird nichts.'],
           mock:{file:'Probeküche / Gerichte', tab:'Gerichte', views:['Tabelle'], cols:['Gericht','Produkte im Gericht','Allergene'],
             rows:[['Burrata mit Tomaten','Burrata 125 g, Tomaten Ochsenherz, Basilikum Topf','<span class="t">Milch</span>'],['Pasta al pesto','Linguine, Parmigiano 24 Monate, Basilikum Topf','<span class="t">Glutenhaltiges Getreide</span> <span class="t">Milch</span>'],['Vitello tonnato','Kalbsnuss, Thunfisch, Kapern, Eigelb','<span class="t">Fische</span> <span class="t">Eier</span>'],['Panna cotta','Sahne, Vanille, Beeren','<span class="t">Milch</span>']],
             cap:'Beispielwerte'}}),
@@ -29183,7 +29174,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a6 .pv .row{margin-left:auto;display:flex;gap:10px;font:500 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
       #tsn1-a6 .pv .row b{color:#fff;font-weight:600}
       #tsn1-a6 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(860px,100%);margin:22px auto 0}
-      #tsn1-a6 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a6 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a6 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a6 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a6 .st.on b{color:#c7b489}
@@ -29301,9 +29292,9 @@ var TSISL_TEAM_ONB_V2=[
           ])
         ]}),
         R.wk('tsn1-wk-m1_rechnen'),
-        R.res({eb:'Ergebnis', title:'Die Ampel steht <span class="g">neben jedem Gericht</span>.', rev:false, text:[
-          'Trag bei drei, vier Gerichten Netto-Verkaufspreis und Wareneinsatz ein. Die Spalten dahinter rechnen Prozent und Rohertrag aus, die Ampel färbt sich, und der Allergen-Hinweis setzt sich aus den verknüpften Produkten zusammen.',
-          'Ändere einen Wareneinsatz und schau zu, wie Prozent, Rohertrag und Ampel nachziehen. Das ist dasselbe Verhalten wie in der Vorlage, dort nur mit mehr Stufen dazwischen.'],
+        R.res({eb:'Ergebnis', title:'Die Ampel neben <span class="g">jedem Gericht</span>.', rev:false, text:[
+          'Trag bei drei, vier Gerichten Netto-Verkaufspreis und Wareneinsatz ein. Die Spalten dahinter rechnen Prozent und Rohertrag aus, die Ampel färbt sich, und der Allergen-Hinweis setzt sich aus den verknüpften Produkten zusammen, fertig zum Kopieren in die Karte.',
+          'Ändere danach einen Wareneinsatz und schau zu, wie Prozent, Rohertrag und Ampel nachziehen. Das ist dasselbe Verhalten wie in der Vorlage, dort nur mit mehr Stufen dazwischen: Zutat, Rezeptur, Gemeinkosten und Personal bis zum Deckungsbeitrag.'],
           mock:{file:'Probeküche / Gerichte', tab:'Gerichte', views:['Kalkulation'], cols:['Gericht','Netto-VK','Wareneinsatz','WE %','Rohertrag','Ampel'], num:[1,2,3,4],
             rows:[['Burrata mit Tomaten','12,61 €','3,40 €','27,0','9,21 €','<span class="t gr">im Rahmen</span>'],['Pasta al pesto','13,45 €','2,90 €','21,6','10,55 €','<span class="t gr">im Rahmen</span>'],['Vitello tonnato','15,97 €','5,10 €','31,9','10,87 €','<span class="t">beobachten</span>'],['Rinderfilet','31,93 €','12,20 €','38,2','19,73 €','<span class="t r">zu teuer</span>']],
             cap:'Beispielwerte, Grenzen 28 % und 33 %'}}),
@@ -29364,7 +29355,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a7 .ans b{color:#fff;font-weight:600}
       #tsn1-a7 .ans.on b{color:#c7b489}
       #tsn1-a7 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(820px,100%);margin:22px auto 0}
-      #tsn1-a7 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a7 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a7 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a7 .st.on b{color:#c7b489}
@@ -29485,8 +29476,8 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.wk('tsn1-wk-m1_ansichten2'),
         R.res({eb:'Ergebnis', title:'Die Bestellliste, <span class="g">nach Lieferant</span>.', text:[
-          'Mit den Ansichten aus dem Regal hast du für jede Frage deines Alltags einen eigenen Blick auf dieselben drei Tabellen. Nichts davon ist eine Kopie, alles bleibt eine Liste.',
-          'Leg dir die Bestellliste als Lesezeichen ab oder hol sie als verknüpfte Ansicht auf deine Startseite. Dann bist du am Abend vor dem Bestellen mit einem Klick dort.'],
+          'Mit den Ansichten aus dem Regal hast du für jede Frage deines Alltags einen eigenen Blick auf dieselben drei Tabellen. Nichts davon ist eine Kopie. Trägst du in der Lageransicht einen Bestand ein, steht er sofort in der Bestellliste, in der Liste Knapp und überall sonst.',
+          'Leg dir die Bestellliste als Lesezeichen ab oder hol sie als verknüpfte Ansicht auf deine Startseite. Dann bist du am Abend vor dem Bestellen mit einem Klick dort, gehst Lieferant für Lieferant durch und siehst bei jedem gleich den Bestellschluss daneben.'],
           mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Bestellliste','Lager','Knapp','Lieferungen'], cols:['Lieferant','Produkt','Bestand','Mindestbestand','Bestand prüfen'], num:[2,3],
             rows:[['Feinkost Lorenz','Sardellen','1','2','<span class="t r">knapp</span>'],['Frischdienst Nord','Burrata 125 g','0,5','1','<span class="t r">knapp</span>'],['Frischdienst Nord','Parmigiano 24 Monate','1','1','<span class="t r">knapp</span>'],['Gemüsehof Brandt','Tomaten Ochsenherz','0','2','<span class="t r">knapp</span>']],
             cap:'Beispielwerte'}}),
@@ -29551,7 +29542,7 @@ var TSISL_TEAM_ONB_V2=[
       #tsn1-a8 .toast b{display:block;color:#fff;font-weight:600}
       #tsn1-a8 .toast.on{opacity:1;transform:none}
       #tsn1-a8 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(900px,100%);margin:22px auto 0}
-      #tsn1-a8 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a8 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.86);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
       #tsn1-a8 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
       #tsn1-a8 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
       #tsn1-a8 .st.on b{color:#c7b489}
@@ -29656,9 +29647,9 @@ var TSISL_TEAM_ONB_V2=[
           ])
         ]}),
         R.wk('tsn1-wk-m1_buttons2'),
-        R.res({eb:'Ergebnis', title:'Die Lieferung steht, <span class="g">bevor sie ausgepackt ist</span>.', text:[
-          'Mit der Button-Spalte Lieferung trägt jeder im Team das Lieferdatum mit einem Klick ein, direkt in der Zeile des Artikels. Neue Artikel legt der Button oben auf der Seite an, schon mit Haken bei Im Sortiment und geöffnet zum Ausfüllen.',
-          'Bau zuerst einen Button, dann lass ihn eine Woche laufen, bevor du den nächsten baust. So merkst du, welche Handgriffe sich wirklich wiederholen.'],
+        R.res({eb:'Ergebnis', title:'Geliefert, <span class="g">mit einem Klick</span>.', text:[
+          'Mit der Button-Spalte Lieferung trägt jeder im Team das Lieferdatum mit einem Klick ein, direkt in der Zeile des Artikels, auch wer nur Inhalte bearbeiten darf. Neue Artikel legt der Button oben auf der Seite an, schon mit Haken bei Im Sortiment und geöffnet zum Ausfüllen.',
+          'Bau zuerst einen Button und lass ihn eine Woche laufen, bevor du den nächsten baust. So merkst du, welche Handgriffe sich wirklich wiederholen und wo dein Team anders arbeitet, als du dachtest. Erst was sich bewährt hat, übernimmst du in die Vorlage.'],
           mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Tabelle','Bestellliste'], cols:['Produkt','Lieferant','Zuletzt geliefert','Lieferung'],
             rows:[['Burrata 125 g','Frischdienst Nord','3. Nov. 2026','<span class="t">Lieferung</span>'],['Parmigiano 24 Monate','Frischdienst Nord','3. Nov. 2026','<span class="t">Lieferung</span>'],['Tomaten Ochsenherz','Gemüsehof Brandt','31. Okt. 2026','<span class="t">Lieferung</span>'],['Sardellen','Feinkost Lorenz','28. Okt. 2026','<span class="t">Lieferung</span>']],
             cap:'Beispielwerte'}}),
