@@ -32987,7 +32987,7 @@ window.__tsn4Boot && window.__tsn4Boot();
   }
   function fig(f){
     var inner=f.src
-      ? '<img src="'+(f.src.indexOf('http')===0?f.src:IMG+f.src)+'" alt="'+esc(f.alt||f.label)+'" loading="lazy" decoding="async">'
+      ? '<img src="'+(f.src.indexOf('http')===0?f.src:IMG+f.src)+'" alt="'+esc(f.alt||f.label)+'" loading="eager" decoding="async">'
       : '<div class="ph"><i>Bild folgt · '+f.id+'</i><b>'+f.label+'</b><span>'+f.note+'</span></div>';
     return '<figure class="tsn5-fig tsn5-rv'+(f.bleed?' bleed':'')+'"><div class="fi" style="--r:'+(f.ratio||'16/9')+'">'+inner+'</div>'+
       (f.cap?'<figcaption>'+f.cap+'</figcaption>':'')+'</figure>';
