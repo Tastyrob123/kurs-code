@@ -4408,7 +4408,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?welches-claude-wann-chatcoworkcodeapi\/?$/, href:'/claude-plne-preis' },
     { re:/\/(?:lektionen\/)?claude-plne-preis\/?$/, href:'/claude-interface-durchlauf' },
     { re:/\/(?:lektionen\/)?claude-interface-durchlauf\/?$/, href:'/claude-nutzung-erklrt-6-konzepte' },
-    { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/installation-claude-code-vs-code-extension' },
+    { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31740,6 +31741,131 @@ var TSISL_TEAM_ONB_V2=[
         'Du kennst <b>Zurückspulen</b> und Berechtigungen als Sicherheitsnetze.',
         'Du beauftragst mit dem <b>Ergebnis</b>, nicht mit den Schritten.'],
       next:'/installation-claude-code-vs-code-extension'}
+  });
+})();
+
+/* ---- l08-einrichten.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.8 "Claude Code einrichten"  (/installation-claude-code-vs-code-extension)
+   Fakten: Faktenblatt Punkt 3 + 4 (code.claude.com/docs/en/setup, quickstart, terminal-guide,
+   desktop, vs-code). Befehle 1:1 aus der Doku, Stand 01.11.2026.
+   Erklaeranimation #tsn3-a08 "Vier Zeilen bis zum ersten Auftrag."
+   Ein Terminalfenster, das die Einrichtung auf dem Mac selbst tippt: Installation, Pruefung,
+   in den Projektordner wechseln, Claude starten. Rechts eine Leiste mit den vier Schritten,
+   die sich der Reihe nach abhaken. Fenster und Leiste stehen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var STEPS=[
+    {k:'Installieren', cmd:'curl -fsSL https://claude.ai/install.sh | bash', out:['Claude Code successfully installed!'], cap:'Ein Befehl installiert Claude Code. Er zeigt keinen Fortschritt, am Ende steht nur eine <b>kurze Bestätigung</b>.'},
+    {k:'Prüfen', cmd:'claude --version', out:['2.1.211 (Claude Code)'], cap:'In einem <b>neuen Terminalfenster</b> prüfst du, ob alles da ist. Eine Versionsnummer heißt: geschafft.'},
+    {k:'Ordner wählen', cmd:'cd ~/Betrieb/Speisekarte', out:[], cap:'Dann wechselst du in den <b>Ordner der Aufgabe</b>. Ab hier sieht Claude genau diesen Ordner.'},
+    {k:'Starten', cmd:'claude', out:['→ Anmeldung im Browser','→ Sitzung läuft in ~/Betrieb/Speisekarte'], cap:'<b>claude</b> startet die Sitzung. Beim ersten Mal meldest du dich im Browser an, danach geht es sofort los.'}
+  ];
+  var stage='<div class="l8-wrap"><div class="l8-term"><div class="l8-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="l8-tt">Terminal · macOS</span></div><div class="l8-scr">'
+    +STEPS.map(function(s,i){ return '<div class="l8-blk b'+i+'"><div class="l8-ln"><span class="pr">%</span><span class="cmd" data-t="'+s.cmd+'">'+s.cmd+'</span></div>'+s.out.map(function(o){ return '<div class="l8-o">'+o+'</div>'; }).join('')+'</div>'; }).join('')
+    +'<span class="l8-caret"></span></div></div>'
+    +'<ol class="l8-list">'+STEPS.map(function(s,i){ return '<li class="done" data-i="'+i+'"><span class="n">0'+(i+1)+'</span><span class="k">'+s.k+'</span><span class="ck">✓</span></li>'; }).join('')+'</ol></div>';
+
+  function type(node, txt, api, t0){
+    node.textContent='';
+    var per=Math.max(18, Math.min(34, 1100/txt.length));
+    for(var k=1;k<=txt.length;k++){ (function(k){ api.T.at(t0+k*per,function(){ node.textContent=txt.slice(0,k); }); })(k); }
+    api.T.at(t0+txt.length*per+40,function(){ node.textContent=txt; });
+    return t0+txt.length*per;
+  }
+  T3.anim('tsn3-a08',{
+    reset:function(el){
+      el.querySelectorAll('.l8-blk').forEach(function(b){ b.classList.remove('in'); b.querySelectorAll('.l8-o').forEach(function(o){ o.classList.remove('in'); }); b.querySelector('.cmd').textContent=''; });
+      el.querySelectorAll('.l8-list li').forEach(function(li){ li.classList.remove('done','on'); });
+    },
+    play:function(el, api, end){
+      var t=400, blks=el.querySelectorAll('.l8-blk'), lis=el.querySelectorAll('.l8-list li');
+      STEPS.forEach(function(s,i){
+        var t0=t;
+        api.T.at(t0,function(){ blks[i].classList.add('in'); lis.forEach(function(l){ l.classList.remove('on'); }); lis[i].classList.add('on'); api.cap(s.cap); });
+        var tEnd=type(blks[i].querySelector('.cmd'), s.cmd, api, t0+300);
+        var outs=blks[i].querySelectorAll('.l8-o');
+        outs.forEach(function(o,k){ api.T.at(tEnd+600+k*700,function(){ o.classList.add('in'); }); });
+        api.T.at(tEnd+700+outs.length*700,function(){ lis[i].classList.add('done'); });
+        t=tEnd+1500+outs.length*700;
+      });
+      api.T.at(t+900, end);
+    },
+    end:function(el){
+      el.querySelectorAll('.l8-blk').forEach(function(b,i){ b.classList.add('in'); b.querySelector('.cmd').textContent=STEPS[i].cmd; b.querySelectorAll('.l8-o').forEach(function(o){ o.classList.add('in'); }); });
+      el.querySelectorAll('.l8-list li').forEach(function(li){ li.classList.add('done'); li.classList.remove('on'); });
+    }
+  });
+
+  T3.page({
+    key:'l08', re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, tab:'L 3.8 · Claude Code einrichten',
+    hero:{eyebrow:'L 3.8', title:'Claude Code <span class="ts-gold">einrichten</span>', alt:'Claude Code einrichten: in der Desktop-App, im Terminal oder in VS Code'},
+    intro:'<p>Claude Code lässt sich auf drei Wegen öffnen: im Reiter <b>Code</b> der Desktop-App, im <b>Terminal</b> und als Erweiterung in <b>VS Code</b>. Alle drei arbeiten mit demselben Programm und denselben Ordnern. Du kannst heute im einen anfangen und morgen im anderen weitermachen.</p>'
+      +'<p>Voraussetzung ist ein bezahlter Plan ab Pro, im kostenlosen ist Claude Code nicht enthalten. Ich zeige dir alle drei Wege mit den Befehlen, die Anthropic heute empfiehlt. Wenn dich ein Terminal abschreckt, nimm Weg 1, damit verpasst du in diesem Kurs nichts.</p>',
+    anim:{id:'tsn3-a08', eb:'Die Einrichtung im Terminal', title:'Vier Zeilen bis zum ersten <span class="g">Auftrag</span>.',
+      sub:'So sieht die Einrichtung auf dem Mac aus, wenn du den Weg über das Terminal gehst. Unter Windows sind es dieselben vier Schritte mit einem anderen ersten Befehl.',
+      stage:stage,
+      capEnd:STEPS[3].cap},
+    body:function(H){
+      return H.sec({id:'tsn3-l08-wege', wide:true, title:'Welcher <span class="g">Weg</span> für dich',
+          lead:'Alle drei Wege führen zum selben Claude Code. Sie unterscheiden sich darin, wie viel du drumherum siehst.',
+          body:H.cards([
+            {eb:'Weg 1 · zum Start', nm:'Reiter Code in der Desktop-App', p:'Kein Terminal, keine Installation zusätzlicher Programme. Du wählst einen Ordner, gibst den Auftrag ins Eingabefeld und siehst die Änderungen in der App.', ft:'Am leichtesten'},
+            {eb:'Weg 2 · für viele Sitzungen', nm:'Im Terminal', p:'Ein Befehl zum Installieren, danach startest du Claude in jedem Ordner mit einem Wort. Ideal, wenn du mehrere Sitzungen nebeneinander laufen lassen willst.', ft:'Am flexibelsten'},
+            {eb:'Weg 3 · mit Dateibaum', nm:'In VS Code', p:'Ein kostenloser Editor, links deine Ordner und Dateien, rechts Claude. Du siehst jede Datei, die entsteht, in dem Moment, in dem sie entsteht.', ft:'Am übersichtlichsten'}
+          ],3)})
+        +H.sec({id:'tsn3-l08-desktop', title:'Weg 1: der Reiter <span class="g">Code</span>',
+          lead:'Du hast die Desktop-App seit Lektion 3.1. Mehr brauchst du für diesen Weg nicht.',
+          body:H.steps([
+            'Öffne die Desktop-App und wechsle oben in den Reiter <b>Code</b>.',
+            'Wähl als Umgebung <b>Lokal</b>, damit Claude auf deinem Rechner arbeitet, und such den Projektordner aus, zum Beispiel <code>Betrieb/Speisekarte</code>.',
+            'Lass Modus und Modell auf der Voreinstellung. Was es damit auf sich hat, klären wir in Lektion 3.10 und 3.11.',
+            'Gib deinen ersten Auftrag ins Eingabefeld, zum Beispiel: „Schau dir den Ordner an und sag mir, was hier liegt.“'
+          ])
+          +'<p style="margin-top:16px">Hast du eine Sitzung im Terminal begonnen und willst in der App weitermachen, holst du sie dort mit <code>/resume</code> zurück. Umgekehrt schickt <code>/desktop</code> eine Terminal-Sitzung in die App.</p>'})
+        +H.sec({id:'tsn3-l08-terminal', title:'Weg 2: im <span class="g">Terminal</span>',
+          lead:'Das Terminal ist ein Fenster, in das du Befehle tippst. Auf dem Mac öffnest du es mit Cmd und Leertaste und dem Wort „Terminal“, unter Windows mit Windows-Taste und X, dann „Terminal“ oder „PowerShell“.',
+          body:'<p><strong class="lead">Installieren.</strong>Kopier den Befehl für dein System, füg ihn ins Terminal ein und drück Enter. Die Installation zeigt keinen Fortschritt, warte einfach, bis die Bestätigung erscheint. Danach aktualisiert sich Claude Code im Hintergrund selbst.</p>'
+            +H.code('curl -fsSL https://claude.ai/install.sh | bash','macOS und Linux')
+            +H.code('irm https://claude.ai/install.ps1 | iex','Windows · PowerShell','Erkennst du an „PS C:\\“ am Zeilenanfang. Git für Windows ist empfohlen, aber nicht mehr Pflicht.')
+            +H.code('winget install Anthropic.ClaudeCode','Windows · Alternative über WinGet')
+            +'<p style="margin-top:16px"><strong class="lead">Prüfen.</strong>Öffne ein <b>neues</b> Terminalfenster und frag die Version ab. Erscheint eine Nummer, ist Claude Code installiert.</p>'
+            +H.code('claude --version','Prüfen')
+            +'<p style="margin-top:16px"><strong class="lead">Starten.</strong>Wechsle in deinen Projektordner und starte Claude. Beim ersten Start öffnet sich der Browser für die Anmeldung mit deinem Claude-Konto.</p>'
+            +H.code('cd ~/Betrieb/Speisekarte\nclaude','Im Projektordner starten')
+            +'<p style="margin-top:16px">Beenden kannst du jederzeit mit <code>/exit</code>. <code>/help</code> zeigt dir alle Befehle, und mit <code>/powerup</code> führt dich Claude Code selbst durch ein paar kurze Übungen.</p>'})
+        +H.sec({id:'tsn3-l08-vscode', title:'Weg 3: in <span class="g">VS Code</span>',
+          lead:'VS Code ist ein kostenloser Editor von Microsoft. Er zeigt dir deine Ordner wie der Finder oder Explorer und Claude direkt daneben.',
+          body:H.steps([
+            'Lade VS Code von <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a> und installier es. Du brauchst mindestens Version 1.94.',
+            'Öffne die Erweiterungen mit <span class="tsn3-kbd">Cmd</span>+<span class="tsn3-kbd">Shift</span>+<span class="tsn3-kbd">X</span> auf dem Mac oder <span class="tsn3-kbd">Ctrl</span>+<span class="tsn3-kbd">Shift</span>+<span class="tsn3-kbd">X</span> unter Windows, such nach „Claude Code“ und installier die Erweiterung von Anthropic.',
+            'Öffne über Datei › Ordner öffnen deinen Projektordner. Links siehst du jetzt die Dateien.',
+            'Öffne Claude über das Symbol in der Leiste und melde dich an. Wer lieber im Terminal arbeitet, startet dort im eingebauten Terminal von VS Code einfach <code>claude</code>.'
+          ])})
+        +H.sec({id:'tsn3-l08-hilfe', title:'Wenn etwas <span class="g">hakt</span>',
+          lead:'Die meisten Probleme bei der Einrichtung sind in zwei Minuten gelöst. Diese vier decken fast alles ab.',
+          body:H.table(['Meldung','Bedeutung','Lösung'],[
+            ['command not found: claude','Der Rechner findet Claude Code noch nicht.','Neues Terminalfenster öffnen. Hilft das nicht, den Pfad ergänzen (Befehl unten).'],
+            ['irm is not recognized','Du bist in der Eingabeaufforderung statt in PowerShell.','PowerShell öffnen und den Befehl dort einfügen.'],
+            ['Anmeldung klappt nicht','Falsches Konto oder kein bezahlter Plan.','In Claude Code <code>/login</code> eingeben und mit dem richtigen Konto anmelden.'],
+            ['Irgendetwas anderes','Einrichtung unvollständig.','<code>claude doctor</code> prüft und repariert die Einrichtung.']
+          ])
+          +H.code("echo 'export PATH=\"$HOME/.local/bin:$PATH\"' >> ~/.zshrc\nsource ~/.zshrc",'macOS · Pfad ergänzen','Unter Linux steht statt ~/.zshrc die Datei ~/.bashrc.')
+          +H.note('Mach von jeder Fehlermeldung ein Bildschirmfoto und gib es in der Claude-App mit der Frage „Was bedeutet das, und was muss ich tun?“ hinein. Das ist meist schneller als jede Suche.','Mein Tipp')})
+    },
+    emp:{kind:'Einrichtung', animTitle:'Dein', animGold:'erster Start',
+      steps:['Weg wählen','Installieren','Version prüfen','Im Ordner starten'],
+      intro:'So bist du in einer Viertelstunde startklar:',
+      points:['Entscheide dich für <b>einen Weg</b>. Ohne Terminal-Erfahrung ist es der Reiter Code in der Desktop-App.',
+        'Installier nur über die <b>Befehle aus dieser Lektion</b> oder die Anthropic-Seite, nie über Anleitungen von Dritten.',
+        'Prüf die Installation in einem <b>neuen Fenster</b> mit claude --version, bevor du weitermachst.',
+        'Starte Claude Code das erste Mal im <b>Ordner Speisekarte</b> und frag, was dort liegt.']},
+    learn:{learn:['Du kennst die <b>drei Wege</b>: Desktop-App, Terminal, VS Code.',
+        'Du hast Claude Code <b>installiert und geprüft</b>.',
+        'Du startest Claude <b>im Projektordner</b>.',
+        'Du weißt, was bei den <b>häufigsten Fehlern</b> hilft.'],
+      next:'/deine-erste-claudemd'}
   });
 })();
 
