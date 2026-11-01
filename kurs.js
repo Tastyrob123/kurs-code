@@ -9733,25 +9733,6 @@ window.__tsMO = function(cb){
         {name:'Native Automation (Trigger & Actions)', wert:1},
         {name:'Automatisierung mit Zeit-Auslöser', wert:1}
       ]},
-    /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter. */
-    { kachel_id:'m1_ansichten', kachel_name:'Ansichten & Filter', ist_produkt_kachel:true,
-      einheit:'Ansichten', einheit_typ:'anzahl',
-      objekt_varianten:[
-        {name:'Eine Ansicht anlegen', wert:0},
-        {name:'Alle Aufgaben', wert:1},
-        {name:'Nach Status', wert:1},
-        {name:'Termine', wert:1},
-        {name:'Galerie & Kartenvorschau', wert:1},
-        {name:'Projektverlauf', wert:1},
-        {name:'Filter, Sortierung, Gruppierung', wert:0},
-        {name:'Heute', wert:1},
-        {name:'Diese Woche', wert:1},
-        {name:'Graveyard', wert:1},
-        {name:'Eigenschaften ein- und ausblenden', wert:0},
-        {name:'Eine Datenbank-Vorlage anlegen', wert:0},
-        {name:'Self-Referencing Filter', wert:0},
-        {name:'Die Ansicht an einen zweiten Ort holen', wert:1}
-      ]},
     /* Modul 1 Neubau (01.11.2026): Probekueche-Regale. Inhalt liegt in der Zone NEUBAU MODUL 1
        (window.__tsn1Shop) und wird zur Laufzeit gelesen (Getter), damit dieser Block klein bleibt. */
     { kachel_id:'m1_produkte', kachel_name:'Probeküche · Produkte', ist_produkt_kachel:true, einheit:'Spalten', einheit_typ:'anzahl', get objekt_varianten(){ return TSN1('m1_produkte','varianten')||[]; } },
@@ -10603,25 +10584,6 @@ var TSISL_TEAM_ONB_V2=[
   ];
 
 
-  /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen, Self-Referencing Filter.
-     Voraussetzung fuer Modul 2 (Kartenvorschau/Cover im Interface-Bau, relative
-     Datumsfilter, verknuepfte Ansichten im Dashboard). */
-  var TS16_STEPS=[
-    {title:'1. Eine Ansicht anlegen', desc:'Über der Tabelle auf + klicken, Ansichtstyp wählen, benennen.', html:'<p class="notion-text">Eine Ansicht speichert kein einziges eigenes Datenfeld. Sie speichert nur, wie du auf die Tabelle schaust: welche Sortierung gilt, welche Filter greifen, welches Layout du siehst.</p><p class="notion-text">→ Über der Datenbank links auf <b>+</b> klicken</p><p class="notion-text">→ <b>Ansichtstyp</b> wählen : Tabelle, Board, Kalender, Galerie, Liste oder Zeitleiste</p><p class="notion-text">→ Namen vergeben — der Name steht danach als Reiter über der Tabelle</p><p class="notion-text">Alles, was du in einer Ansicht änderst, gilt nur dort. Trägst du dagegen einen Wert in eine Zeile ein, ändert er sich in jeder Ansicht sofort mit.</p>'},
-    {title:'2. Alle Aufgaben', desc:'Ansichtstyp : Tabelle → die Grundansicht, in der du einträgst.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Alle Aufgaben</p><p class="notion-text">→ <b>Kein Filter</b>, sortiert nach <b>Fällig am</b> aufsteigend</p><p class="notion-text">Diese Ansicht ist dein Arbeitstisch. Hier siehst du alles, hier trägst du neue Aufgaben ein, hier korrigierst du.</p><p class="notion-text">Alle anderen Ansichten sind Ausschnitte davon. Deshalb lohnt es sich, genau eine vollständige zu behalten.</p>'},
-    {title:'3. Nach Status', desc:'Ansichtstyp : Board → Gruppieren nach : Status.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Board</p><p class="notion-text">→ <b>Name der Ansicht :</b> Nach Status</p><p class="notion-text">→ <b>Gruppieren nach :</b> Status</p><p class="notion-text">Jede Statusgruppe wird eine Spalte. Du ziehst eine Karte von „Geplant" nach „In Arbeit", und der Status in der Tabelle ändert sich mit — ohne dass du die Zeile öffnest.</p><p class="notion-text">Das ist der Moment, in dem der Unterschied zwischen Tabelle und Ansicht klick macht: Es sind dieselben Daten, nur anders angefasst.</p>'},
-    {title:'4. Termine', desc:'Ansichtstyp : Kalender → Anzeigen nach : Fällig am.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Kalender</p><p class="notion-text">→ <b>Name der Ansicht :</b> Termine</p><p class="notion-text">→ <b>Anzeigen nach :</b> Fällig am</p><p class="notion-text">Jede Aufgabe mit Datum landet auf ihrem Tag. Verschiebst du sie im Kalender, ändert sich das Datum in der Tabelle.</p><p class="notion-text">Aufgaben ohne Datum tauchen hier gar nicht auf. Das ist kein Fehler, sondern der schnellste Weg zu sehen, was noch keinen Termin hat.</p>'},
-    {title:'5. Galerie & Kartenvorschau', desc:'Ansichtstyp : Galerie → Kartenvorschau : Seitencover.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Galerie</p><p class="notion-text">→ <b>Name der Ansicht :</b> Galerie</p><p class="notion-text">→ <b>Kartenvorschau :</b> Seitencover</p><p class="notion-text">→ <b>Bild anpassen :</b> an</p><p class="notion-text">In der Galerie wird aus jeder Zeile eine Kachel. Über <b>Kartenvorschau</b> entscheidest du, was oben auf der Kachel zu sehen ist: das Cover der Seite, ein Bild aus einer Eigenschaft oder der Seiteninhalt.</p><p class="notion-text">Setzt du das Cover einer Seite, taucht es sofort in der Galerie auf. Darüber bekommt ein Bereich sein Gesicht, und du erkennst beim Scrollen, was du suchst, bevor du den Text liest.</p>'},
-    {title:'6. Projektverlauf', desc:'Ansichtstyp : Zeitleiste → Von : Startdatum, Bis : Fällig am.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Zeitleiste</p><p class="notion-text">→ <b>Name der Ansicht :</b> Projektverlauf</p><p class="notion-text">→ <b>Von :</b> Startdatum &nbsp;·&nbsp; <b>Bis :</b> Fällig am</p><p class="notion-text">Jedes Projekt wird ein Balken von Anfang bis Ende. Erst hier siehst du, wo sich Sachen überlappen und welche Woche zu voll ist.</p><p class="notion-text">Diese Ansicht legst du in <b>DB I : Projektmanagement</b> an, nicht bei den Aufgaben — sie lohnt sich für Zeiträume, nicht für einzelne Tage.</p>'},
-    {title:'7. Filter, Sortierung, Gruppierung', desc:'Die drei Regler, mit denen aus einer Ansicht ein Werkzeug wird.', html:'<p class="notion-text">Jede Ansicht hat oben rechts dieselben drei Regler :</p><p class="notion-text">— <b>Filter</b> entscheidet, welche Zeilen überhaupt auftauchen. Mehrere Filter lassen sich mit <b>und</b> beziehungsweise <b>oder</b> verbinden.</p><p class="notion-text">— <b>Sortieren</b> entscheidet die Reihenfolge. Mehrere Sortierungen greifen nacheinander — erst nach Priorität, bei Gleichstand nach Datum.</p><p class="notion-text">— <b>Gruppieren</b> zieht Trennlinien in die Ansicht, zum Beispiel nach Bereich. In der Board-Ansicht ist die Gruppierung gleich das Layout.</p><p class="notion-text">Filter arbeiten auch mit relativen Zeiten: „ist innerhalb der nächsten Woche" bleibt richtig, ohne dass du je ein Datum nachpflegst.</p>'},
-    {title:'8. Heute', desc:'Ansichtstyp : Liste → Filter : To Do of the Day ist aktiviert.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Liste</p><p class="notion-text">→ <b>Name der Ansicht :</b> Heute</p><p class="notion-text">→ <b>Filter :</b> To Do of the Day &nbsp;·&nbsp; ist &nbsp;·&nbsp; aktiviert</p><p class="notion-text">→ <b>Und :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; nicht aktiviert</p><p class="notion-text">→ <b>Sortieren :</b> Priorität absteigend</p><p class="notion-text">Diese Ansicht ist der Grund, warum die Checkbox aus Lektion 1.3 existiert. Du hakst eine Aufgabe morgens an, und sie steht in deiner Tagesliste. Ist sie erledigt, verschwindet sie von selbst.</p>'},
-    {title:'9. Diese Woche', desc:'Ansichtstyp : Tabelle → Filter : Fällig am ist innerhalb der nächsten Woche.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Diese Woche</p><p class="notion-text">→ <b>Filter :</b> Fällig am &nbsp;·&nbsp; ist innerhalb &nbsp;·&nbsp; der nächsten Woche</p><p class="notion-text">→ <b>Und :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; nicht aktiviert</p><p class="notion-text">Ein relativer Datumsfilter rechnet bei jedem Öffnen neu. Du stellst ihn einmal ein und er stimmt in einem halben Jahr immer noch.</p><p class="notion-text">Feste Datumsfilter wie „nach dem 01.03." tun das nicht — die musst du irgendwann von Hand korrigieren, und dann hast du es meistens vergessen.</p>'},
-    {title:'10. Graveyard', desc:'Ansichtstyp : Tabelle → Filter : Erledigt ist aktiviert, sortiert nach Datum absteigend.', html:'<p class="notion-text">→ <b>Ansichtstyp :</b> Tabelle</p><p class="notion-text">→ <b>Name der Ansicht :</b> Graveyard</p><p class="notion-text">→ <b>Filter :</b> Erledigt &nbsp;·&nbsp; ist &nbsp;·&nbsp; aktiviert</p><p class="notion-text">→ <b>Sortieren :</b> Datum absteigend</p><p class="notion-text">Erledigtes wird nicht gelöscht, es zieht um. Was hier landet, ist aus deinen Arbeitsansichten verschwunden, aber nicht weg.</p><p class="notion-text">Zwei Gründe: Du siehst am Monatsende, was tatsächlich passiert ist. Und du findest wieder, was du vor drei Wochen schon einmal entschieden hast.</p>'},
-    {title:'11. Eigenschaften ein- und ausblenden', desc:'In jeder Ansicht getrennt einstellbar — weniger Spalten, mehr Übersicht.', html:'<p class="notion-text">→ Oben rechts auf <b>…</b> → <b>Eigenschaften</b></p><p class="notion-text">→ Pro Ansicht ein- oder ausblenden, per Ziehen umsortieren</p><p class="notion-text">Deine Tabelle hat inzwischen über zehn Spalten. In der Tagesansicht brauchst du davon drei. Ausblenden löscht nichts — die Werte stehen weiter in der Zeile, sie stören hier nur.</p><p class="notion-text">Diese Einstellung gehört zur Ansicht, nicht zur Datenbank. Jede Ansicht darf ein anderes Set zeigen.</p>'},
-    {title:'12. Eine Datenbank-Vorlage anlegen', desc:'In der Datenbank oben rechts : Neu ▾ → Neue Vorlage.', html:'<p class="notion-text">→ In der Datenbank oben rechts neben <b>Neu</b> auf den <b>Pfeil ▾</b> klicken</p><p class="notion-text">→ <b>+ Neue Vorlage</b></p><p class="notion-text">→ Eigenschaften vorbelegen und den Seiteninhalt aufbauen, den jeder neue Eintrag bekommen soll</p><p class="notion-text">Eine Vorlage ist ein Eintrag, der beim Anlegen schon fertig ist: Status gesetzt, Bereich gesetzt, Überschriften und Checklisten stehen. Du fängst nie wieder bei einer leeren Seite an.</p><p class="notion-text">Über <b>… → Als Standard festlegen</b> wird sie automatisch für jeden neuen Eintrag verwendet.</p>'},
-    {title:'13. Self-Referencing Filter', desc:'Eine verknüpfte Ansicht in der Vorlage, gefiltert auf die Seite selbst.', html:'<p class="notion-text">Das ist der Kniff, an dem sich ein aufgeräumtes System von einer Sammlung von Tabellen unterscheidet.</p><p class="notion-text">→ In der <b>Vorlage</b> aus Karte 12 mit <b>/verknüpfte Ansicht</b> die Datenbank <b>DB II : Aufgaben &amp; ToDos</b> einfügen</p><p class="notion-text">→ <b>Filter :</b> Projekt &nbsp;·&nbsp; enthält &nbsp;·&nbsp; <b>diese Vorlage</b></p><p class="notion-text">Der Filter zeigt beim Einrichten auf die Vorlage selbst. Legst du damit ein neues Projekt an, zeigt der Filter automatisch auf dieses neue Projekt — Notion setzt ihn beim Anlegen um.</p><p class="notion-text">Ergebnis: Jede Projektseite listet ihre eigenen Aufgaben, ohne dass du je einen Filter nachstellst. Ein Mal gebaut, gilt für alle künftigen Projekte.</p>'},
-    {title:'14. Die Ansicht an einen zweiten Ort holen', desc:'Mit /verknüpfte Ansicht dieselbe Datenbank woanders zeigen.', html:'<p class="notion-text">→ Auf einer beliebigen Seite <b>/verknüpfte Ansicht der Datenbank</b> eingeben</p><p class="notion-text">→ Datenbank auswählen → eigene Filter und eigenen Ansichtstyp setzen</p><p class="notion-text">Was hier steht, liegt weiterhin in der ursprünglichen Tabelle. Du siehst sie nur an einer zweiten Stelle und mit anderem Ausschnitt. Änderst du hier einen Wert, ändert er sich überall.</p><p class="notion-text">Daraus baust du in Lektion 1.8 dein Dashboard: eine Startseite, die aus mehreren Datenbanken jeweils nur das zeigt, was heute zählt.</p>'}
-  ];
 
   /* Inventurliste — Warenkorb 2: Monatliche Inventurliste (Klon der DB 0).
      Engine-generiert 2026-08-02 aus dem echten Notion-Schema (CDP-Sniff,
@@ -10740,13 +10702,6 @@ var TSISL_TEAM_ONB_V2=[
       title:'Deine Buttons. <span>Ein Klick, ein Eintrag.</span>',
       sub:'Jede Karte ist ein Button oder eine Automation. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen. Um einen Button anzulegen, drücke / und wähle Button.',
       summary:'Buttons', chain:true },
-    /* Lektion 1.6 (Modul 1) — Ansichten, Filter, Vorlagen. Notion-Seite leer -> Config-Steps. */
-    { path:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/, kachel:'m1_ansichten',
-      anchorSel:'#ts16wk', steps:TS16_STEPS,
-      eyebrow:'DB : Ansichten & Filter',
-      title:'Deine Ansichten. <span>Blick für Blick.</span>',
-      sub:'Jede Karte ist eine Ansicht oder ein Regler, mit dem du sie einstellst. Klick sie auf, bau sie nach, leg sie in den Einkaufswagen — gezählt wird in Ansichten. Eine neue Ansicht legst du über der Tabelle mit + an.',
-      summary:'Ansichten', chain:true },
     /* Modul 1 Neubau (01.11.2026): fuenf Probekueche-Regale, Anker im Seiten-Container der Zone NEUBAU MODUL 1 */
     { path:/\/(?:lektionen\/l13-einfhrung-in-datenbanken|einfuehrung-datenbanken)\/?$/, kachel:'m1_produkte', anchorSel:'#tsn1-wk-m1_produkte', chain:true,
       get steps(){ return TSN1('m1_produkte','steps'); }, get relations(){ return TSN1('m1_produkte','relations'); },
@@ -11314,7 +11269,7 @@ var TSISL_TEAM_ONB_V2=[
      zählen mit). Zähler = erledigte Schritte = localStorage-Keys "done-…"='1'
      (dieselben Keys, die das Karten-/Checkbox-System setzt → immer aktuell). */
   var BACKOFFICE={ km_master:48, menue_rechner:11, kunden_master:18, kostenaufstellung:40, db0_inventurliste:16, inventur_monat:33, db13_lieferanten:13, db13_ansprechpartner:7, db13_vertraege:13, db4_zutaten:30, db5_rezepturen:29, db6_gemeinkosten:10, db6_gemeinkostenannahmen:5, db7_mitarbeiterloehne:15, db8_gerichte:37, db10_packaging:6, vf_werte:8, vf_marke:7, ops_team_onb:11, ops_team_mitarbeiter:20, ops_check_audit:8, ops_check_prod:14, ops_hyg_produkte:18, ops_hyg_pflicht:8, ops_inv_festwert:15, ops_part_vertraege:14, ops_part_dienstleister:8, ops_zug_bank:8, ops_zug_schluessel:7,
-  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_buttons:6, m1_ansichten:14, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
+  ops_team_kleid_ausgabe:11, ops_team_kleid_inventar:12, ops_team_kleid_stamm:4, ops_team_urlaub:9, ops_check_checklisten:11, ops_check_sops:13, ops_check_waste:10, ops_hyg_behoerden:12, ops_hyg_kontrollthemen:9, ops_team_pflichtdok:22, ops_hyg_playbook:16, ops_zug_passwords:10, m1_buttons:6, m1_produkte:17, m1_lieferanten:15, m1_rechnen:12, m1_ansichten2:12, m1_buttons2:8, };
   function backofficeTotal(){ var t=0; for(var kk in BACKOFFICE){ if(BACKOFFICE.hasOwnProperty(kk)) t+=BACKOFFICE[kk]; } return t; }
   function backofficeDone(){ var d=0; try{ for(var i=0;i<localStorage.length;i++){ var key=localStorage.key(i); if(key&&key.slice(0,5)==='done-'&&localStorage.getItem(key)==='1') d++; } }catch(e){} return d; }
   function backofficePct(){ var t=backofficeTotal(), d=Math.min(backofficeDone(),t); return t>0?Math.round(d/t*100):0; }
@@ -24612,535 +24567,6 @@ var TSISL_TEAM_ONB_V2=[
 })();
 
 /* ============================================================
-   ansichten-filter — Hero + Einleitung "Der Blick wechselt."
-   Lektion 1.6 · Modul 1 · Notion-Grundlagen (Wissens-Lektion)
-   ============================================================ */
-(function(){
-  function phHero(label){
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600">'
-      +'<rect width="1200" height="600" fill="#0b0d14"/>'
-      +'<circle cx="600" cy="270" r="220" fill="rgba(199,180,137,0.045)"/>'
-      +'<circle cx="600" cy="270" r="150" fill="rgba(199,180,137,0.05)"/>'
-      +'<circle cx="600" cy="270" r="112" fill="none" stroke="rgba(199,180,137,0.35)" stroke-width="1.5"/>'
-      +'<text x="600" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="30" letter-spacing="4" fill="rgba(216,201,171,0.75)">'+label+'</text>'
-      +'<text x="600" y="470" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="21" letter-spacing="5" fill="rgba(255,255,255,0.4)">3-LAPTOP-COVER</text>'
-      +'<text x="600" y="500" text-anchor="middle" font-family="-apple-system,Helvetica,sans-serif" font-size="12" letter-spacing="3" fill="rgba(199,180,137,0.55)">BILD FOLGT</text>'
-      +'</svg>';
-    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  }
-  var IMG=phHero('L 1.6');
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
-  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
-
-  var CSS=`
-  .ts-body{max-width:860px;margin:56px auto 0;padding:0 clamp(24px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:center}
-  .ts-body h3{font-family:"Lineal Web","Lineal TS",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-weight:600;letter-spacing:-.015em;color:#fff;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:32px 0 14px}
-  .ts-body h3:first-child{margin-top:0}
-  .ts-body p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);margin:0 0 13px}
-  .ts-body p:last-child{margin-bottom:0}
-  .ts-body b{color:#c7b489;font-weight:600}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts16intro-css')) return;
-    var s=document.createElement('style'); s.id='ts16intro-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function mount(){
-    if(!on()) return;
-    var sc=document.querySelector(".super-content");
-    if(!sc) return;
-    if(document.querySelector(".ts-hero")){
-      if(!document.getElementById('ts16intro')) mountBody(sc);
-      return;
-    }
-    var hero=document.createElement("div");
-    hero.className="ts-hero";
-    hero.innerHTML=
-      '<img class="ts-hero__img" alt="Modul 1 — Notion-Grundlagen, Lektion 1.6" src="'+IMG+'" fetchpriority="high" decoding="async">'+
-      '<div class="ts-hero__text">'+
-        '<img class="ts-hero__logo" alt="Tasty Studios" src="'+LOGO+'" fetchpriority="high" decoding="async">'+
-        '<div class="ts-hero__eyebrow">L 1.6</div>'+
-        '<h1 class="ts-hero__title">Der Blick <span class="ts-gold">wechselt</span>.</h1>'+
-      '</div>';
-    var nr=sc.querySelector(".notion-root");
-    if(nr) sc.insertBefore(hero, nr); else sc.appendChild(hero);
-    Array.prototype.forEach.call(sc.querySelectorAll('.notion-image img[src*="logo_vektor"]'),
-      function(img){ var blk=img.closest(".notion-image"); if(blk) blk.style.display="none"; });
-    var nh=document.querySelector(".notion-header.page"); if(nh) nh.style.display="none";
-    mountBody(sc);
-  }
-
-  function mountBody(sc){
-    if(document.getElementById('ts16intro')) return;
-    injectCSS();
-    var hero=sc.querySelector('.ts-hero'); if(!hero) return;
-    var wrap=document.createElement('div');
-    wrap.id='ts16intro';
-    wrap.innerHTML=`
-<div class="ts-body">
-  <p>Dieselben Aufgaben sehen als Liste anders aus als im Kanban-Board oder in der Galerie — es ist nicht dieselbe Ansicht dreimal kopiert, sondern eine Datenquelle, die du dir aus drei Blickwinkeln anschaust. Änderst du eine Aufgabe in der Liste, ändert sie sich sofort auch im Board.</p>
-  <p><b>Self-Referencing Filter</b> gehen einen Schritt weiter: Eine Datenbank filtert sich anhand ihrer eigenen Verknüpfungen selbst — zum Beispiel Unteraufgaben, die automatisch erscheinen, sobald eine Hauptaufgabe verknüpft wird, ohne dass du die Ansicht jedes Mal neu einstellst.</p>
-</div>`;
-    if(hero.nextSibling) sc.insertBefore(wrap, hero.nextSibling); else sc.appendChild(wrap);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   ansichten-filter — Erkläranimation "View-Switcher" (echter Layout-Morph)
-   Eigenständiges Konzept: dieselben 3 Chips bleiben im DOM stehen, wechseln aber per
-   animierten Positionen/Größen zwischen Liste/Board/Galerie-Layout. Endzustand=Default.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var CSS = `
-  #ts16bau{width:min(860px,94vw);margin:52px auto 12px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:#fff}
-  #ts16bau .bau-head{max-width:700px;margin:0 auto 30px;padding:0 24px;text-align:center}
-  #ts16bau .bau-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;line-height:1;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:12px}
-  #ts16bau .bau-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#c7b489;box-shadow:0 0 12px rgba(199,180,137,.7)}
-  #ts16bau h2{font-family:"Lineal Web","Lineal TS",-apple-system,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 14px;color:#fff}
-  #ts16bau h2 .ts-gold{color:#c7b489}
-  #ts16bau .bau-sub{font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto;max-width:560px}
-  #ts16bau .vs-tabs{display:flex;justify-content:center;gap:10px;margin-bottom:28px}
-  #ts16bau .vs-tab{font:600 13px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:8px 16px;border-radius:999px;transition:background .4s,border-color .4s,color .4s}
-  #ts16bau .vs-tab.on{background:rgba(199,180,137,.14);border-color:rgba(199,180,137,.5);color:#fff}
-  #ts16bau .vs-stage{position:relative;height:220px;background:linear-gradient(165deg,rgba(255,255,255,.04),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden}
-  #ts16bau .vs-sweep{position:absolute;top:0;left:-20%;width:20%;height:100%;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.16),rgba(199,180,137,0));pointer-events:none;opacity:0}
-  #ts16bau.js.on .vs-sweep.fire{animation:ts16sweep 1.1s cubic-bezier(.16,1,.3,1) 1}
-  @keyframes ts16sweep{0%{left:-20%;opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
-  #ts16bau.js .vs-stage{opacity:0;transform:translateY(20px)}
-  #ts16bau.js.on .vs-stage{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-  #ts16bau .chip{position:absolute;display:flex;align-items:center;gap:8px;background:rgba(199,180,137,.10);border:1px solid rgba(199,180,137,.35);border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#fff;
-    transition:left 1s cubic-bezier(.22,1,.36,1),top 1s cubic-bezier(.22,1,.36,1),width 1s cubic-bezier(.22,1,.36,1),height 1s cubic-bezier(.22,1,.36,1)}
-  #ts16bau .chip i{width:8px;height:8px;border-radius:50%;background:#c7b489;flex:0 0 auto}
-  #ts16bau .bau-foot{display:flex;justify-content:center;margin-top:24px}
-  #ts16bau .bau-replay{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(199,180,137,.45);color:#c7b489;font:600 13px/1 -apple-system,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .3s,border-color .3s}
-  #ts16bau .bau-replay:hover{background:rgba(199,180,137,.10);border-color:#c7b489}
-  `;
-
-  function injectCSS(){
-    if(document.getElementById('ts16bau-css')) return;
-    var s=document.createElement('style'); s.id='ts16bau-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  var NAMES=['Rechnung prüfen','Angebot rausschicken','Team-Meeting vorbereiten'];
-  var VIEWS=['list','board','gallery'];
-  var LAYOUTS={
-    list:  [ {l:'6%',t:'12%',w:'88%',h:'20%'}, {l:'6%',t:'40%',w:'88%',h:'20%'}, {l:'6%',t:'68%',w:'88%',h:'20%'} ],
-    board: [ {l:'4%',t:'14%',w:'28%',h:'72%'}, {l:'36%',t:'14%',w:'28%',h:'40%'}, {l:'68%',t:'14%',w:'28%',h:'56%'} ],
-    gallery: [ {l:'4%',t:'14%',w:'28%',h:'72%'}, {l:'36%',t:'14%',w:'28%',h:'72%'}, {l:'68%',t:'14%',w:'28%',h:'72%'} ]
-  };
-
-  function html(){
-    var tabs=['Liste','Board','Galerie'].map(function(t,i){ return '<button class="vs-tab'+(i===0?' on':'')+'" data-v="'+VIEWS[i]+'">'+t+'</button>'; }).join('');
-    var chips=NAMES.map(function(n,i){ return '<div class="chip" data-i="'+i+'"><i></i>'+n+'</div>'; }).join('');
-    return '<div class="bau-head">'+
-      '<div class="bau-eyebrow">Ein View-Switcher</div>'+
-      '<h2>Die Daten bleiben, <span class="ts-gold">das Layout wechselt</span>.</h2>'+
-      '<p class="bau-sub">Dieselben drei Aufgaben — einmal als Liste, einmal als Board, einmal als Galerie.</p>'+
-      '</div>'+
-      '<div class="vs-tabs">'+tabs+'</div>'+
-      '<div class="vs-stage">'+chips+'<span class="vs-sweep"></span></div>'+
-      '<div class="bau-foot"><button class="bau-replay" id="ts16bauReplay"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Neu abspielen</button></div>';
-  }
-
-  function applyLayout(root, view){
-    var chips=root.querySelectorAll('.chip');
-    var pos=LAYOUTS[view];
-    chips.forEach(function(c,i){
-      c.style.left=pos[i].l; c.style.top=pos[i].t; c.style.width=pos[i].w; c.style.height=pos[i].h;
-    });
-    root.querySelectorAll('.vs-tab').forEach(function(t){ t.classList.toggle('on', t.dataset.v===view); });
-    var sweep=root.querySelector('.vs-sweep');
-    if(sweep){ sweep.classList.remove('fire'); void sweep.offsetWidth; sweep.classList.add('fire'); }
-  }
-
-  var cycleTimer=null;
-  function cycle(root){
-    var idx=0;
-    applyLayout(root, VIEWS[0]);
-    if(reduced) return;
-    cycleTimer=setInterval(function(){
-      idx=(idx+1)%VIEWS.length;
-      applyLayout(root, VIEWS[idx]);
-    }, 2600);
-  }
-
-  function play(root){
-    root.classList.remove('on'); void root.offsetWidth; root.classList.add('on');
-    if(cycleTimer) clearInterval(cycleTimer);
-    cycle(root);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts16bau')) return;
-    var anchor=document.getElementById('ts16intro'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts16bau'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-    applyLayout(root, VIEWS[0]);
-    root.querySelector('#ts16bauReplay').addEventListener('click', function(){ play(root); });
-    root.querySelectorAll('.vs-tab').forEach(function(t){
-      t.addEventListener('click', function(){ if(cycleTimer) clearInterval(cycleTimer); applyLayout(root, t.dataset.v); });
-    });
-
-    /* Warenkorb-Anker direkt danach (tsshop mountet an #ts16wk via PAGES-Config TS16_STEPS) */
-    if(!document.getElementById('ts16wk')){
-      var wk=document.createElement('div'); wk.id='ts16wk';
-      root.parentNode.insertBefore(wk, root.nextSibling);
-    }
-    if(reduced){ root.classList.add('on'); cycle(root); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ play(root); io.disconnect(); } },{threshold:.3});
-    io.observe(root);
-    setTimeout(function(){ if(!root.classList.contains('on')) play(root); }, 4000);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-
-/* ============================================================
-   ansichten-filter — Ergebnis-Blick "Eine Tabelle, neun Blickwinkel." (Text links / PC rechts)
-   Lektion 1.6 · Erster Ergebnis-Blick der Seite -> Text links (Katalog 05).
-   Platzhalter-Modus: gestalteter MacBook-Platzhalter statt echtem Screenshot.
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
-
-  /* Bildtausch spaeter: NUR diese zwei Konstanten setzen (Platzhalter-Mechanik wie #tspkres).
-     POSTER = Vorschaubild der Kachel · SHOT = langer Ganzseiten-Screenshot fuer die Lightbox. */
-  var POSTER=null, SHOT=null;
-
-  var CSS=`
-  #ts16res{max-width:1180px;margin:clamp(30px,4vh,58px) auto 0;padding:0 clamp(16px,3vw,40px);display:flex;align-items:center;gap:clamp(20px,4vw,64px);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts16res .r-text{flex:1 1 0}
-  #ts16res h3{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;letter-spacing:-.015em;text-align:left;font-size:clamp(25px,2.8vw,32px);line-height:1.2;margin:28px 0 12px;color:#fff}
-  #ts16res h3 .ts-accent{color:#c7b489}
-  #ts16res p{font-size:15.5px;line-height:1.62;color:rgba(255,255,255,.86);text-align:left;margin:0 0 13px;max-width:520px}
-  #ts16res .r-pc{flex:1 1 0;display:flex;flex-direction:column;align-items:center}
-  #ts16res .r-tile{box-sizing:border-box;cursor:pointer;width:100%;max-width:520px;aspect-ratio:1366/768;border-radius:14px;background:#0b0d14;border:1px solid rgba(255,255,255,.1);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:drop-shadow(0 18px 44px rgba(0,0,0,.5));
-    transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  #ts16res .r-tile:hover{transform:translateY(-4px) scale(1.02);animation:ts16resBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts16resBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.30)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.24)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10)}}
-  #ts16res .r-tile svg{width:44px;height:44px;color:rgba(199,180,137,.6)}
-  #ts16res .r-tile span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-  #ts16res .r-cap{margin-top:14px;font-size:15px;font-weight:600;color:#fff}
-  #ts16res .r-cap b{color:#c7b489;font-weight:600}
-  #ts16res .r-hint{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-top:4px}
-  @media(max-width:820px){ #ts16res{flex-direction:column} #ts16res .r-pc{order:-1} #ts16res h3{font-size:26px} }
-  #ts16res-lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);
-    background:rgba(3,4,9,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  #ts16res-lb.on{display:flex}
-  #ts16res-lb .lb-frame{position:relative;width:min(1100px,94vw);aspect-ratio:1366/768;border-radius:16px;overflow:hidden;
-    background:#0b0d14;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px -30px rgba(0,0,0,.9)}
-  #ts16res-lb .lb-screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;
-    display:flex;align-items:center;justify-content:center}
-  #ts16res-lb .lb-screen img{display:block;width:100%;height:auto}
-  #ts16res-lb .lb-ph{display:flex;flex-direction:column;align-items:center;gap:12px;color:rgba(255,255,255,.5);
-    font:500 14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:24px}
-  #ts16res-lb .lb-ph b{color:#c7b489;font-weight:600}
-  #ts16res-lb .lb-close{position:absolute;top:-46px;right:0;background:transparent;border:1px solid rgba(255,255,255,.3);
-    color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;line-height:1;cursor:pointer}
-  #ts16res-lb .lb-close:hover{border-color:#c7b489;color:#c7b489}
-  @media(prefers-reduced-motion:reduce){ #ts16res .r-tile:hover{animation:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts16res-css')) return;
-    var s=document.createElement('style'); s.id='ts16res-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    return '<div class="r-text"><h3>Dieselben Aufgaben, <span class="ts-accent">neun Blickwinkel.</span></h3>'+
-      '<p>Deine Aufgaben liegen weiterhin an genau einer Stelle. Was sich ändert, ist der Ausschnitt: morgens die Tagesliste mit den drei Dingen für heute, im Wochenplan die Tabelle mit dem relativen Datumsfilter, für den Rückblick der Graveyard.</p>'+
-      '<p>Der eigentliche Gewinn steckt in der Vorlage. Jedes neue Projekt bringt seine eigene Aufgabenliste schon mit, weil der Filter beim Anlegen automatisch auf die neue Seite umspringt. Du baust das ein einziges Mal, und jede Projektseite danach ist von der ersten Sekunde an fertig eingerichtet, ohne dass du je wieder einen Filter nachstellst.</p>'+
-      '</div>'+
-      '<div class="r-pc"><div class="r-tile" role="button" tabindex="0" aria-label="Aufgaben in neun Ansichten vergrößern">'+
-        (POSTER?'<img src="'+POSTER+'" alt="Aufgaben in neun Ansichten" loading="lazy" decoding="async">'
-               :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 19h20"/></svg><span>Screenshot folgt</span>')+
-      '</div>'+
-      '<div class="r-cap">Aufgaben in neun Ansichten <b>– Live Beispiel</b></div><div class="r-hint">Klicke zum Vergrößern</div></div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts16res')) return;
-    var anchor=document.getElementById('tsshop--m1_ansichten'); if(!anchor){ anchor=document.getElementById('ts16wk'); }
-    if(!anchor||!anchor.parentNode) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts16res'; root.innerHTML=html();
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    /* Lightbox: Klick vergroessert, langer Screenshot scrollt im Bildschirm.
-       Solange SHOT==null steht ein gestalteter Platzhalter drin (Auto-Scroll aus). */
-    var lb=document.createElement('div'); lb.id='ts16res-lb';
-    lb.innerHTML='<div class="lb-frame"><button class="lb-close" type="button" aria-label="Schließen">&times;</button>'+
-      '<div class="lb-screen">'+(SHOT?'<img src="'+SHOT+'" alt="Aufgaben in neun Ansichten">'
-        :'<div class="lb-ph"><b>DB II : Aufgaben & ToDos</b><span>Der Screenshot dieser Datenbank folgt.</span></div>')+'</div></div>';
-    document.body.appendChild(lb);
-    function open(){ lb.classList.add('on'); document.body.style.overflow='hidden'; var sc=lb.querySelector('.lb-screen'); if(sc) sc.scrollTop=0; }
-    function close(){ lb.classList.remove('on'); document.body.style.overflow=''; }
-    var tile=root.querySelector('.r-tile');
-    tile.addEventListener('click', open);
-    tile.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
-    lb.addEventListener('click', function(e){ if(e.target===lb||e.target.classList.contains('lb-close')) close(); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   ansichten-filter — Empfehlungs-Kachel "Empfehlung zur Nutzung"
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STEPS=['Filter gehören zur Ansicht','Relative Datumsfilter nutzen','Gruppieren nach dem, was zählt','Self-Referencing sparsam einsetzen'];
-  var TEXTS=[
-    'Filter, Sortierung und sichtbare Spalten hängen an der einzelnen Ansicht. Der Wert in der Zeile ändert sich dagegen überall gleichzeitig.',
-    'Nimm „innerhalb der nächsten Woche" statt eines festen Datums. Ein relativer Filter rechnet bei jedem Öffnen neu und stimmt auch in einem halben Jahr noch.',
-    'Gruppiere nach Priorität oder Bereich, nicht nach dem Feld, das gerade zufällig zuletzt bearbeitet wurde.',
-    'Self-Referencing Filter lohnen sich für klare Fälle wie Unteraufgaben — nicht für jede Kleinigkeit.'
-  ];
-
-  var CSS=`
-  #ts16emp{position:relative;width:min(1000px,95vw);margin:34px auto;padding:clamp(26px,4vw,44px) clamp(24px,4.5vw,50px);border-radius:20px;
-    background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:clamp(28px,4.5vw,56px);align-items:center;
-    transform:none;opacity:1;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s cubic-bezier(.16,1,.3,1);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;overflow:hidden;
-    --rx:0deg;--ry:0deg;--gx:50%;--gy:50%;}
-  #ts16emp.js{transform:perspective(1100px) rotateX(9deg) translateY(34px) scale(.97);opacity:0}
-  #ts16emp.js.in{opacity:1}
-  #ts16emp:hover{transform:perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .16s ease-out,opacity .9s cubic-bezier(.16,1,.3,1)}
-  #ts16emp::after{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,rgba(199,180,137,0),rgba(199,180,137,.6),rgba(199,180,137,0));pointer-events:none}
-  #ts16emp::before{content:"";position:absolute;width:560px;height:560px;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);
-    background:radial-gradient(closest-side, rgba(199,180,137,.14), rgba(199,180,137,0) 70%);opacity:0;transition:opacity .4s;pointer-events:none;z-index:0}
-  #ts16emp:hover::before{opacity:1}
-  #ts16emp.beat{animation:ts16empBeat 2.6s cubic-bezier(.4,0,.3,1) infinite}
-  @keyframes ts16empBeat{0%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}18%{box-shadow:0 6px 22px rgba(199,180,137,.30),0 0 46px rgba(199,180,137,.34)}32%{box-shadow:0 5px 18px rgba(199,180,137,.16),0 0 26px rgba(199,180,137,.18)}46%{box-shadow:0 6px 20px rgba(199,180,137,.26),0 0 40px rgba(199,180,137,.28)}72%,100%{box-shadow:0 4px 14px rgba(199,180,137,.10),0 0 14px rgba(199,180,137,.10)}}
-  #ts16emp .db-hd{position:relative;z-index:1;font-size:1.15rem;font-weight:700;color:#fff;margin:0 0 16px}
-  #ts16emp .db-hd .g{color:#c7b489}
-  #ts16emp .db-rows{position:relative;z-index:1;display:flex;flex-direction:column;gap:9px}
-  #ts16emp .tb{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .5s,border-color .5s,color .5s,box-shadow .5s}
-  #ts16emp .tb.on{background:rgba(199,180,137,.10);border-color:rgba(199,180,137,.45);color:#fff;box-shadow:0 0 0 1px rgba(199,180,137,.14),0 14px 30px -16px rgba(199,180,137,.4)}
-  #ts16emp .tb-n{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:50%;width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-  #ts16emp .tb.on .tb-n{background:#c7b489;color:#05060b}
-  #ts16emp .tb-l{font-size:13.5px;font-weight:600}
-  #ts16emp .emp-right{position:relative;z-index:1}
-  #ts16emp .emph{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:1.45rem;color:#fff;margin:0 0 12px}
-  #ts16emp .emph .eg{color:#c7b489}
-  #ts16emp .p{color:rgba(255,255,255,.68);font-size:.96rem;line-height:1.7;margin:0 0 14px}
-  #ts16emp .tsz-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  #ts16emp .tsz-ol li{font-size:.92rem;color:rgba(255,255,255,.62);padding:8px 12px;border-radius:10px;display:flex;gap:10px;transition:background .5s,color .5s}
-  #ts16emp .tsz-ol li b{color:#c7b489;flex:0 0 auto}
-  #ts16emp .tsz-ol li.lit{background:rgba(199,180,137,.08);color:#fff}
-  #ts16emp svg.emp-link{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-  #ts16emp svg.emp-link path{fill:none;stroke:#c7b489;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .55s cubic-bezier(.16,1,.3,1);opacity:.75}
-  #ts16emp svg.emp-link path.on{stroke-dashoffset:0}
-  #ts16emp svg.emp-link circle{fill:#c7b489;opacity:0;transition:opacity .3s}
-  #ts16emp svg.emp-link circle.on{opacity:1}
-  @media(max-width:900px){ #ts16emp{grid-template-columns:1fr} #ts16emp svg.emp-link{display:none} }
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts16emp-css')) return;
-    var s=document.createElement('style'); s.id='ts16emp-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var rows=STEPS.map(function(s,i){ return '<div class="tb" data-i="'+i+'"><span class="tb-n">0'+(i+1)+'</span><span class="tb-l">'+s+'</span></div>'; }).join('');
-    var lis=STEPS.map(function(s,i){ return '<li data-i="'+i+'"><b>0'+(i+1)+'</b><span>'+TEXTS[i]+'</span></li>'; }).join('');
-    return '<svg class="emp-link"><path d="M0 0"></path><circle r="3.5"/><circle r="3.5"/></svg>'+
-      '<div><div class="db-hd">Dein <span class="g">Ansichten-Alltag</span></div><div class="db-rows">'+rows+'</div></div>'+
-      '<div class="emp-right"><div class="emph">Empfehlung zur <span class="eg">Nutzung</span></div>'+
-      '<p class="p">Damit deine Ansichten übersichtlich bleiben, halte dich an diese Reihenfolge:</p>'+
-      '<ol class="tsz-ol">'+lis+'</ol></div>';
-  }
-
-  function drawLink(root, i){
-    var svg=root.querySelector('svg.emp-link'); if(!svg) return;
-    var tb=root.querySelectorAll('.tb')[i], li=root.querySelectorAll('.tsz-ol li')[i];
-    if(!tb||!li) return;
-    var rr=root.getBoundingClientRect(), a=tb.getBoundingClientRect(), b=li.getBoundingClientRect();
-    var x1=a.right-rr.left, y1=a.top+a.height/2-rr.top, x2=b.left-rr.left, y2=b.top+b.height/2-rr.top;
-    var mx=(x1+x2)/2;
-    var path=svg.querySelector('path');
-    path.setAttribute('d','M '+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2);
-    var len = path.getTotalLength ? path.getTotalLength() : 340;
-    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
-    void path.offsetWidth;
-    path.classList.add('on'); path.style.strokeDashoffset = 0;
-    var circles=svg.querySelectorAll('circle');
-    circles[0].setAttribute('cx',x1); circles[0].setAttribute('cy',y1); circles[0].classList.add('on');
-    circles[1].setAttribute('cx',x2); circles[1].setAttribute('cy',y2); circles[1].classList.add('on');
-  }
-
-  function sync(root){
-    var tbs=root.querySelectorAll('.tb'), lis=root.querySelectorAll('.tsz-ol li');
-    var i=0, n=STEPS.length;
-    function step(){
-      tbs.forEach(function(t){ t.classList.remove('on'); });
-      lis.forEach(function(l){ l.classList.remove('lit'); });
-      tbs[i].classList.add('on'); lis[i].classList.add('lit');
-      drawLink(root, i);
-      i=(i+1)%n;
-    }
-    step();
-    if(reduced) return null;
-    return setInterval(step, 2600);
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts16emp')) return;
-    var anchor=document.getElementById('ts16res')||document.getElementById('ts16bau'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts16emp'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    if(!reduced){
-      root.addEventListener('mousemove', function(e){
-        var r=root.getBoundingClientRect();
-        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-        root.style.setProperty('--ry',((px-.5)*5)+'deg');
-        root.style.setProperty('--rx',((.5-py)*4)+'deg');
-        root.style.setProperty('--gx',(px*100)+'%');
-        root.style.setProperty('--gy',(py*100)+'%');
-      });
-      root.addEventListener('mouseenter', function(){ root.classList.add('beat'); });
-      root.addEventListener('mouseleave', function(){
-        root.classList.remove('beat');
-        root.style.setProperty('--rx','0deg'); root.style.setProperty('--ry','0deg');
-      });
-    }
-
-    var timer=null;
-    var io=new IntersectionObserver(function(ev){
-      if(ev[0].isIntersecting){ root.classList.add('in'); if(!timer) timer=sync(root); }
-      else if(timer){ clearInterval(timer); timer=null; }   /* 02.08.2026: Rotation pausiert ausserhalb des Viewports (lief vorher bis Sitzungsende weiter) */
-    },{threshold:.3});
-    io.observe(root);
-    if(reduced){ root.classList.add('in'); sync(root); }
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
-   ansichten-filter — Seitenabschluss (Learnings + Weiter-Button)
-   ============================================================ */
-(function(){
-  function on(){ return /\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/.test(location.pathname); }
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var LEARNINGS=[
-    'Du nutzt Board, Kalender, Galerie und Zeitleiste auf derselben Datenquelle.',
-    'Du filterst relativ, damit eine Ansicht ohne Nachpflege richtig bleibt.',
-    'Du gibst Kacheln über die Kartenvorschau ein Gesicht.',
-    'Du baust Vorlagen mit Self-Referencing Filter, die sich selbst einrichten.'
-  ];
-
-  var CSS=`
-  #ts16l{margin-top:44px;padding:0 clamp(20px,4vw,56px);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-  #ts16l .tsl-hd{text-align:center;margin-bottom:66px}
-  #ts16l .tsl-eyebrow{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#c7b489;margin-bottom:10px}
-  #ts16l .tsl-title{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#fff;margin:0}
-  #ts16l .tsl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,40px);max-width:1180px;margin:0 auto}
-  #ts16l .tsl-orb{position:relative;aspect-ratio:1;max-width:250px;margin:0 auto;border-radius:50%;
-    background:radial-gradient(120% 120% at 25% 20%,rgba(199,180,137,.20),rgba(11,13,20,.9) 60%);
-    border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -28px rgba(0,0,0,.85), inset 0 0 30px rgba(199,180,137,.08);
-    display:flex;align-items:center;justify-content:center;padding:24px;opacity:1;filter:none;transform:none;
-    will-change:translate;transition:opacity .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
-    animation:ts16lFloat 7s ease-in-out infinite}
-  #ts16l .tsl-orb::before{content:"";position:absolute;top:14%;left:22%;width:26%;height:16%;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(4px)}
-  #ts16l .tsl-orb:nth-child(1){animation-delay:0s} #ts16l .tsl-orb:nth-child(2){animation-delay:-1.6s}
-  #ts16l .tsl-orb:nth-child(3){animation-delay:-3.2s} #ts16l .tsl-orb:nth-child(4){animation-delay:-4.8s}
-  #ts16l.js .tsl-orb{opacity:0;filter:blur(8px);transform:translateY(22px)}
-  #ts16l.js.on .tsl-orb{opacity:1;filter:blur(0);transform:none}
-  #ts16l.js.on .tsl-orb:nth-child(1){transition-delay:0ms} #ts16l.js.on .tsl-orb:nth-child(2){transition-delay:140ms}
-  #ts16l.js.on .tsl-orb:nth-child(3){transition-delay:280ms} #ts16l.js.on .tsl-orb:nth-child(4){transition-delay:420ms}
-  #ts16l .tsl-orb:hover{border-color:rgba(199,180,137,.5);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),0 0 30px rgba(199,180,137,.25)}
-  #ts16l .tsl-t{color:rgba(255,255,255,.9);font-size:clamp(12.5px,1.15vw,15px);font-weight:500;line-height:1.5;max-width:22ch;text-align:center}
-  @keyframes ts16lFloat{0%,100%{translate:0 0}50%{translate:0 -11px}}
-  @media(max-width:1079px){ #ts16l .tsl-grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:520px){ #ts16l .tsl-grid{grid-template-columns:1fr} }
-  #ts-next-wrap{display:flex;justify-content:center;margin:48px 0 72px}
-  #ts-next{display:inline-flex;align-items:center;gap:8px;background:#c7b489;color:#05060b;height:44px;padding:0 28px;border-radius:9999px;
-    font:600 14px/1 -apple-system,sans-serif;text-decoration:none;transition:background .3s,transform .3s}
-  #ts-next:hover{background:#d8c9ab;transform:translateY(-1px)}
-  `;
-  function injectCSS(){
-    if(document.getElementById('ts16l-css')) return;
-    var s=document.createElement('style'); s.id='ts16l-css'; s.textContent=CSS;
-    document.head.appendChild(s);
-  }
-
-  function html(){
-    var orbs=LEARNINGS.map(function(t){ return '<div class="tsl-orb"><span class="tsl-t">'+t+'</span></div>'; }).join('');
-    return '<div class="tsl-hd"><div class="tsl-eyebrow">Was du mitnimmst</div><h2 class="tsl-title">Learnings</h2></div>'+
-      '<div class="tsl-grid">'+orbs+'</div>';
-  }
-
-  function mount(){
-    if(!on()) return;
-    if(document.getElementById('ts16l')) return;
-    var anchor=document.getElementById('ts16emp'); if(!anchor) return;
-    injectCSS();
-    var root=document.createElement('div'); root.id='ts16l'; root.innerHTML=html();
-    if(!reduced) root.classList.add('js');
-    anchor.parentNode.insertBefore(root, anchor.nextSibling);
-
-    var nextWrap=document.createElement('div'); nextWrap.id='ts-next-wrap';
-    nextWrap.innerHTML='<a id="ts-next" href="/lektionen/l17-native-automations-buttons">Nächste Lektion</a>';
-    root.appendChild(nextWrap);
-
-    function dedupe(){
-      /* Robert 03.08.2026: der "Nächste Lektion"-Button flackerte und war danach ganz weg.
-         Ursache war ein Ping-Pong mit super.sos Hydration (React-Fehler #418): der Button
-         lag als Fremdknoten in Next.js' eigenem Container, wurde dort abgeraeumt, per
-         Selbstheilung neu eingehaengt, wieder abgeraeumt — jeder Zyklus ein Aufblitzen.
-         Jetzt lebt er INNERHALB von #<id> (unser eigenes Element, das React nicht kennt);
-         der Host wird bei jedem Durchlauf frisch geholt, damit ein Re-Render nicht auf
-         einen abgehaengten Knoten zeigt. */
-      var host=document.getElementById(root.id); if(!host) return;
-      var all=document.querySelectorAll('#ts-next-wrap');
-      for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')) host.appendChild(nextWrap);
-    }
-    dedupe();
-    window.__tsMO(dedupe).observe(document.body,{childList:true,subtree:true});
-
-    if(reduced){ root.classList.add('on'); return; }
-    var io=new IntersectionObserver(function(ev){ if(ev[0].isIntersecting){ root.classList.add('on'); io.disconnect(); } },{threshold:.2});
-    io.observe(root);
-  }
-
-  mount();
-  document.addEventListener('DOMContentLoaded', mount);
-  window.__tsMO(mount).observe(document.documentElement,{childList:true,subtree:true});
-})();
-
-/* ============================================================
    automations-buttons — Hero + Einleitung "Ein Klick erledigt es."
    Lektion 1.7 · Modul 1 · Notion-Grundlagen (Bau-Lektion, echter Warenkorb #3, klein)
    ============================================================ */
@@ -35295,6 +34721,189 @@ var TSISL_TEAM_ONB_V2=[
       ],
       learn:{items:['Du kennst die <b>Bausteine</b>: prop, Rechenzeichen, round, if, ifs, lets.','Du liest eine Formel der Vorlage <b>von innen nach außen</b> und rechnest sie nach.','Du passt einen <b>Wert</b> in einer Formel an, ohne die Kette zu brechen.','Du lässt dir eine Formel von <b>Notion AI</b> erklären und prüfst jedes Ergebnis selbst.'],
         next:'/lektionen/l16-ansichten-self-referencing-filter'}
+    });
+  }
+  go();
+})();
+
+/* ============================================================
+   NEUBAU MODUL 1 · L1.7 "Frag die Tabelle."  (Ansichten, Filter, Vorlagen)
+   Adresse: /lektionen/l16-ansichten-self-referencing-filter (Alt-Slug toleriert; Nummer 1.7 seit Neukonzept)
+   Erklaeranimation "Drei Regler, eine Antwort" — EIGENES Konzept:
+   EINE Liste mit neun Artikeln (Fotos) unter einer Frage. Drei Regler schalten
+   nacheinander: Filter blendet aus, Sortieren ordnet um, Gruppieren teilt in
+   Bloecke je Lieferant. Alle Bewegungen nur transform/opacity, feste Hoehe.
+   ============================================================ */
+(function(){
+  if(window.__tsn1L7) return; window.__tsn1L7=true;
+  function go(){
+    var N=window.__tsn1; if(!N){ setTimeout(go,60); return; }
+    var R=N.R, IMG=N.IMG;
+
+    function anim(host){
+      N.addCSS('tsn1-a7-css',`
+      #tsn1-a7 .box{position:relative;width:min(820px,100%);margin:0 auto;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:#090a11;box-shadow:0 60px 120px -50px rgba(0,0,0,.95);overflow:hidden}
+      #tsn1-a7 .q{padding:18px 22px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
+      #tsn1-a7 .q .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:8px}
+      #tsn1-a7 .q .t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(17px,2vw,21px);color:#fff}
+      #tsn1-a7 .ctl{display:flex;gap:10px;flex-wrap:wrap;padding:12px 22px;border-bottom:1px solid rgba(255,255,255,.07)}
+      #tsn1-a7 .rg{display:flex;align-items:center;gap:9px;padding:7px 12px 7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font:600 12px/1 -apple-system,sans-serif;color:rgba(255,255,255,.55);transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .rg .sw{position:relative;width:26px;height:15px;border-radius:999px;background:rgba(255,255,255,.14);transition:background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .rg .sw::after{content:"";position:absolute;left:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+      #tsn1-a7 .rg em{font-style:normal;font-weight:500;color:rgba(255,255,255,.4)}
+      #tsn1-a7 .rg.on{border-color:rgba(199,180,137,.55);color:#fff;background:rgba(199,180,137,.08)}
+      #tsn1-a7 .rg.on .sw{background:#c7b489}
+      #tsn1-a7 .rg.on .sw::after{transform:translateX(11px)}
+      #tsn1-a7 .rg.on em{color:#efe6d2}
+      #tsn1-a7 .list{position:relative;height:450px}
+      #tsn1-a7 .ac{position:absolute;left:22px;right:22px;top:0;padding:16px 18px;border-radius:12px;border:1px solid rgba(199,180,137,.4);background:linear-gradient(rgba(199,180,137,.07),rgba(199,180,137,.07)),#090a11;opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .ac .mi{font:600 9.5px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;margin-bottom:8px}
+      #tsn1-a7 .ac .t{font-family:"Lineal Web","Lineal TS",sans-serif;font-weight:600;font-size:clamp(17px,2vw,20px);color:#fff}
+      #tsn1-a7 .it,#tsn1-a7 .gh{position:absolute;left:0;right:0;top:0;will-change:transform,opacity;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .6s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .it{height:50px;display:grid;grid-template-columns:42px 1.6fr 1.2fr 1fr .8fr;gap:12px;align-items:center;padding:0 22px;border-bottom:1px solid rgba(255,255,255,.05);font:500 13px/1.2 -apple-system,sans-serif;color:#fff}
+      #tsn1-a7 .it img{width:34px;height:34px;border-radius:8px;object-fit:cover;display:block}
+      #tsn1-a7 .it .s{color:rgba(255,255,255,.55)}
+      #tsn1-a7 .it .k{justify-self:start;font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px}
+      #tsn1-a7 .it .k.kn{background:rgba(224,87,79,.16);color:#f2b8b3}
+      #tsn1-a7 .it .k.ok{background:rgba(70,175,115,.14);color:#a9dcc0}
+      #tsn1-a7 .gh{height:38px;display:flex;align-items:flex-end;padding:0 22px 7px;font:600 10px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c7b489;opacity:0}
+      #tsn1-a7 .gh i{font-style:normal;margin-left:8px;color:rgba(255,255,255,.4);letter-spacing:.04em}
+      #tsn1-a7 .ans{display:flex;align-items:center;gap:10px;padding:13px 22px;border-top:1px solid rgba(255,255,255,.07);background:#0c0e16;font:500 13px/1.4 -apple-system,sans-serif;color:rgba(255,255,255,.5)}
+      #tsn1-a7 .ans b{color:#fff;font-weight:600}
+      #tsn1-a7 .ans.on b{color:#c7b489}
+      #tsn1-a7 .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(820px,100%);margin:22px auto 0}
+      #tsn1-a7 .st{appearance:none;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;cursor:pointer;background:linear-gradient(rgba(255,255,255,.03),rgba(255,255,255,.03)),#05060b;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;color:rgba(255,255,255,.62);font:500 13.5px/1.45 -apple-system,sans-serif;transition:border-color .5s cubic-bezier(.16,1,.3,1),color .5s cubic-bezier(.16,1,.3,1),background .5s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .st b{display:block;font:700 11px/1 -apple-system,sans-serif;color:rgba(199,180,137,.6);letter-spacing:.08em;margin-bottom:7px}
+      #tsn1-a7 .st.on{border-color:rgba(199,180,137,.55);color:#fff;background:linear-gradient(rgba(199,180,137,.09),rgba(199,180,137,.09)),#05060b}
+      #tsn1-a7 .st.on b{color:#c7b489}
+      #tsn1-a7 .rp{display:flex;justify-content:center;margin-top:18px}
+      #tsn1-a7 .rp button{appearance:none;border:1px solid rgba(199,180,137,.5);background:transparent;color:#efe6d2;border-radius:999px;padding:8px 18px;font:600 12px/1 -apple-system,sans-serif;cursor:pointer;transition:background .3s cubic-bezier(.16,1,.3,1),color .3s cubic-bezier(.16,1,.3,1)}
+      #tsn1-a7 .rp button:hover{background:#c7b489;color:#05060b}
+      #tsn1-a7 .note{width:min(820px,100%);margin:10px auto 0;text-align:right;font-size:10.5px;color:rgba(255,255,255,.4)}
+      @media(max-width:700px){ #tsn1-a7 .it{grid-template-columns:38px 1.5fr 1fr .9fr;padding:0 14px} #tsn1-a7 .it .s.l{display:none} #tsn1-a7 .rail{grid-template-columns:1fr} }
+      `);
+      var ITEMS=[
+        ['Olivenöl 5 l','inventar/olivenoel.jpg','Feinkost Lorenz','Trockenlager',0],
+        ['Burrata 125 g','zutaten/mozzarella.webp','Frischdienst Nord','Kühlhaus',1],
+        ['Tomaten Ochsenherz','zutaten/tomate.webp','Gemüsehof Brandt','Kühlhaus',1],
+        ['Balsamico 1 l','inventar/balsamico.jpg','Feinkost Lorenz','Trockenlager',0],
+        ['Parmigiano 24 M.','zutaten/parmesan.webp','Frischdienst Nord','Kühlhaus',1],
+        ['Basilikum Topf','zutaten/basilikum.webp','Gemüsehof Brandt','Kühlhaus',0],
+        ['Sardellen','inventar/sardellen.jpg','Feinkost Lorenz','Trockenlager',1],
+        ['Zitronen','zutaten/zitrone.webp','Gemüsehof Brandt','Kühlhaus',0],
+        ['Butter 250 g','zutaten/butter.webp','Frischdienst Nord','Kühlhaus',0]
+      ];
+      host.id='tsn1-a7';
+      host.innerHTML=R.head('Filter, Sortieren, Gruppieren','Drei Regler, und die Liste <span class="g">antwortet</span>.','Neun Artikel, eine Frage aus dem Alltag. Mit jedem Regler wird aus der langen Liste eine Antwort, ohne dass sich an den Daten etwas ändert.')+
+        '<div class="box"><div class="q"><div class="mi">Die Frage</div><div class="t">Was muss ich bei wem nachbestellen?</div></div>'+
+        '<div class="ctl"><span class="rg" data-r="0"><span class="sw"></span>Filter <em>Bestand prüfen = knapp</em></span><span class="rg" data-r="1"><span class="sw"></span>Sortieren <em>Produkt A–Z</em></span><span class="rg" data-r="2"><span class="sw"></span>Gruppieren <em>Lieferant</em></span></div>'+
+        '<div class="list">'+ITEMS.map(function(x,i){ return '<div class="it" data-i="'+i+'"><img alt="'+x[0]+'" decoding="async" src="'+IMG+x[1]+'"><span>'+x[0]+'</span><span class="s l">'+x[2]+'</span><span class="s">'+x[3]+'</span><span class="k '+(x[4]?'kn':'ok')+'">'+(x[4]?'knapp':'ok')+'</span></div>'; }).join('')+
+          ['Feinkost Lorenz','Frischdienst Nord','Gemüsehof Brandt'].map(function(g,i){ return '<div class="gh" data-g="'+i+'">'+g+'<i></i></div>'; }).join('')+
+        '<div class="ac"><div class="mi">Die Antwort</div><div class="t">Drei Bestellungen, vier Artikel.</div></div></div></div><div class="note">Beispielwerte</div>'+
+        '<div class="rail"><button class="st" data-s="0"><b>01</b>Filter: nur, was knapp ist.</button><button class="st" data-s="1"><b>02</b>Sortieren: in einer festen Reihenfolge.</button><button class="st" data-s="2"><b>03</b>Gruppieren: ein Block je Lieferant, fertig ist die Bestellliste.</button></div>'+
+        '<div class="rp"><button type="button">Neu abspielen</button></div>';
+
+      var its=[].slice.call(host.querySelectorAll('.it')), ghs=[].slice.call(host.querySelectorAll('.gh')), rgs=host.querySelectorAll('.rg'), sts=host.querySelectorAll('.st'), ac=host.querySelector('.ac');
+      var H=50, GH=38, GROUPS=['Feinkost Lorenz','Frischdienst Nord','Gemüsehof Brandt'];
+      var T=[]; function later(f,ms){ T.push(setTimeout(f,ms)); } function clear(){ T.forEach(clearTimeout); T=[]; }
+      window.__tsn1a7Kill=clear;
+      function layout(lvl){
+        var vis=ITEMS.map(function(x,i){ return i; });
+        if(lvl>=1) vis=vis.filter(function(i){ return ITEMS[i][4]; });
+        if(lvl>=2) vis.sort(function(a,b){ return ITEMS[a][0].localeCompare(ITEMS[b][0],'de'); });
+        var pos={}, gpos={}, y=0;
+        if(lvl>=3){
+          GROUPS.forEach(function(g,gi){ var mem=vis.filter(function(i){ return ITEMS[i][2]===g; }); if(!mem.length) return; gpos[gi]=[y,mem.length]; y+=GH; mem.forEach(function(i){ pos[i]=y; y+=H; }); });
+        } else vis.forEach(function(i){ pos[i]=y; y+=H; });
+        its.forEach(function(el,i){
+          if(pos.hasOwnProperty(i)){ el.style.opacity='1'; el.style.transform='translateY('+pos[i]+'px)'; }
+          else { el.style.opacity='0'; }
+        });
+        ghs.forEach(function(el,gi){
+          if(gpos.hasOwnProperty(gi)){ el.style.opacity='1'; el.style.transform='translateY('+gpos[gi][0]+'px)'; el.querySelector('i').textContent=gpos[gi][1]+(gpos[gi][1]===1?' Artikel':' Artikel'); }
+          else { el.style.opacity='0'; el.style.transform='translateY('+(lvl>=3?0:-20)+'px)'; }
+        });
+        [].forEach.call(rgs,function(r,j){ r.classList.toggle('on',j<lvl); });
+        [].forEach.call(sts,function(s,j){ s.classList.toggle('on',j===lvl-1); });
+        ac.style.opacity=lvl===3?'1':'0'; ac.style.transform='translateY('+(lvl===3?y+16:y+40)+'px)';
+      }
+      function play(){ clear(); layout(0); later(function(){ layout(1); },1300); later(function(){ layout(2); },3300); later(function(){ layout(3); },5300); }
+      [].forEach.call(sts,function(s){ s.addEventListener('click',function(){ clear(); layout(+s.getAttribute('data-s')+1); }); });
+      host.querySelector('.rp button').addEventListener('click',play);
+      if(N.REDUCED){ layout(3); return; }
+      layout(3); /* Endzustand als Grundzustand, bis der Reveal kommt */
+      N.reveal(host,function(){ its.forEach(function(e){ e.style.transition='none'; }); ghs.forEach(function(e){ e.style.transition='none'; }); layout(0); void host.offsetWidth;
+        its.forEach(function(e){ e.style.transition=''; }); ghs.forEach(function(e){ e.style.transition=''; }); play(); });
+    }
+
+    N.page({
+      key:'l7',
+      re:/\/(?:lektionen\/l16-ansichten-self-referencing-filter|ansichten-filter)\/?$/,
+      hero:{label:'L 1.7', eyebrow:'L 1.7', title:'Frag die <span class="ts-gold">Tabelle</span>.', alt:'Ansichten, Filter und Vorlagen in Notion-Datenbanken'},
+      intro:
+        '<p>Eine Datenbank mit hundert Artikeln ist erst einmal eine lange Liste. Nützlich wird sie, wenn sie dir eine Frage beantwortet: Was muss ich bei wem bestellen? Welche Gerichte gehen für einen Gast ohne Milch? Was steht im Kühlhaus? Für jede dieser Fragen legst du eine eigene <b>Ansicht</b> an.</p>'+
+        '<p>Eine Ansicht ändert nie die Daten, nur was du siehst und in welcher Reihenfolge. In dieser Lektion stellen wir die drei Regler ein, holen eine Liste auf eine zweite Seite und legen Vorlagen an, damit jeder neue Eintrag gleich vollständig startet.</p>',
+      parts:[
+        {anim:anim},
+        R.sec({eb:'Erst die Frage', title:'Jede Ansicht beginnt mit einem <span class="g">Satz</span>', lead:'Bevor du eine Ansicht anlegst, schreib die Frage auf, die sie beantworten soll. Aus dem Satz ergeben sich die Einstellungen.', blocks:[
+          R.cards([
+            {mi:'Einkauf', nm:'„Was bestelle ich morgen bei wem?"', img:IMG+'lieferpartner/pritschenwagen-kisten.webp', tx:'<p>Filter auf knappe Artikel, gruppiert nach Lieferant. Die Ansicht heißt <b>Bestellliste</b>.</p>'},
+            {mi:'Service', nm:'„Was geht ohne Milch?"', img:IMG+'gerichte/thunfisch-tataki.webp', tx:'<p>Filter auf Gerichte, deren Allergene Milch nicht enthalten. Die Ansicht heißt <b>Ohne Milch</b> und liegt am Pass.</p>'},
+            {mi:'Lager', nm:'„Was steht im Kühlhaus?"', img:IMG+'zutaten/lachsfilet.webp', tx:'<p>Filter auf den Lagerort Kühlhaus, sortiert nach Produkt. Die Ansicht heißt <b>Kühlhaus</b> und ist deine Zählliste für die Inventur.</p>'}
+          ],3),
+          R.merk('Eine Ansicht ohne Frage ist nur eine weitere Kopie der Liste.')
+        ]}),
+        R.sec({eb:'Die drei Regler', title:'Filter, Sortieren, Gruppieren im <span class="g">Detail</span>', wide:true, lead:'Du findest alle drei oben rechts an der Datenbank oder in den Einstellungen der Ansicht.', blocks:[
+          R.tab(['Regler','Was er kann','Worauf du achtest'],[
+            ['Filter','Blendet Zeilen aus, die eine Bedingung nicht erfüllen. Mit <em>Erweiterten Filter hinzufügen</em> verbindest du Bedingungen mit UND oder ODER, bis zu drei Ebenen tief','Ein aktiver Filter steht sichtbar über der Tabelle. Fehlt dir ein Eintrag, schau zuerst dort nach'],
+            ['Sortieren','Legt die Reihenfolge fest, auch nach mehreren Spalten nacheinander','Solange eine Sortierung aktiv ist, kannst du Zeilen nicht von Hand verschieben'],
+            ['Gruppieren','Fasst Zeilen mit gleichem Wert zu Blöcken zusammen, auf Wunsch mit einer Untergruppe darunter','<em>Leere Gruppen ausblenden</em> hält die Ansicht kurz'],
+            ['Für alle speichern','Ändert jemand eine Ansicht, sieht zunächst nur er das Ergebnis, bis jemand die Änderung für alle speichert','So verstellt niemand aus Versehen die Bestellliste des ganzen Teams']
+          ]),
+          R.tab(['Layout','Gut für'],[
+            ['Tabelle','Eintragen und Durchrechnen, die Arbeitsansicht'],
+            ['Liste','Schlanke Übersichten fürs Handy'],
+            ['Board','Abläufe in Spalten, zum Beispiel Lagerorte oder ein Status'],
+            ['Kalender, Zeitleiste','Alles mit Datum, Lieferungen, Aktionen, Saisonkarten'],
+            ['Galerie','Gerichte mit Foto, deine Karte als Bilderwand'],
+            ['Diagramm','Zahlen als Balken oder Kreis. Im Free-Plan ein Diagramm'],
+            ['Formular','Eine Eingabemaske, zum Beispiel für Bruch und Schwund aus dem Team']
+          ])
+        ]}),
+        R.sec({eb:'Ein zweiter Ort', title:'Dieselbe Liste auf einer <span class="g">anderen Seite</span>', lead:'Die Station Kalt soll ihre Kühlhaus-Artikel sehen, ohne dass eine zweite Liste entsteht, die irgendwann nicht mehr stimmt.', blocks:[
+          R.txt('<p><strong>Dafür gibt es die verknüpfte Ansicht.</strong> Du tippst auf der Stationsseite <kbd>/</kbd>, suchst nach „verknüpft" und wählst die Datenbank, die du zeigen willst. Auf der Seite erscheint eine Ansicht der Originaltabelle mit eigenen Filtern. Trägt jemand dort einen Bestand ein, steht er sofort im Original. Filter und Sortierung der verknüpften Ansicht gelten dagegen nur dort und ändern das Original nicht.</p>'),
+          R.fund(['Notion AI Backoffice','Foodquartier'],'<p>Die Interface-Seiten der Vorlage sind genau so gebaut: Sie zeigen verknüpfte Ansichten der Datenbanken, jeweils gefiltert auf das, was in diesem Bereich gebraucht wird. Wie du sie an deinen Betrieb anpasst, zeigt dir Modul 2.</p>')
+        ]}),
+        R.sec({eb:'Vorlagen', title:'Jeder neue Eintrag startet <span class="g">vollständig</span>', lead:'Eine Datenbankvorlage legt fest, was in einem neuen Eintrag schon drinsteht: vorausgefüllte Spalten und eine fertige Gliederung auf der Seite.', blocks:[
+          R.jetzt([
+            'Klick oben rechts an der Datenbank auf den kleinen Pfeil neben <b>Neu</b> und dann auf <b>Neue Vorlage</b>.',
+            'Gib der Vorlage einen Namen, zum Beispiel „Neues Gericht", und füll aus, was immer gleich ist.',
+            'Schreib auf die Seite die Überschriften, die jedes Gericht haben soll: Zubereitung, Anrichten, Foto vom Pass.',
+            'Leg die Vorlage im selben Menü als Standard fest, dann startet jeder neue Eintrag damit.'
+          ],'So legst du eine Vorlage an'),
+          R.txt('<p><strong>Vorlagen, die sich selbst wiederholen.</strong> Über das Menü einer Vorlage und <em>Wiederholen</em> legt Notion täglich, wöchentlich, monatlich oder jährlich automatisch einen neuen Eintrag an, zur gewählten Uhrzeit. In einer Checklisten-Datenbank entsteht so jeden Montag früh die Wochenreinigung des Kühlhauses, ohne dass jemand daran denken muss.</p>')
+        ]}),
+        R.sec({eb:'Typische Fehler', title:'Wenn ein Eintrag <span class="g">verschwunden</span> ist', wide:true, blocks:[
+          R.fehler([
+            ['Ein Artikel fehlt in der Tabelle','In dieser Ansicht ist ein Filter aktiv','Filterleiste über der Tabelle prüfen oder in die Ansicht ohne Filter wechseln'],
+            ['Die Bestellliste sieht heute anders aus als gestern','Jemand hat die Ansicht verstellt und für alle gespeichert','Die Einstellungen der Ansicht zurücksetzen. Wichtige Ansichten nur zu zweit ändern'],
+            ['Ein neuer Eintrag verschwindet sofort nach dem Anlegen','Er erfüllt den Filter der Ansicht nicht','In der Ansicht ohne Filter nachsehen und die Werte ergänzen'],
+            ['In der verknüpften Ansicht fehlt eine Spalte','Spalten werden je Ansicht ein- und ausgeblendet','In den Einstellungen dieser Ansicht unter <em>Sichtbarkeit von Eigenschaften</em> einblenden']
+          ])
+        ]}),
+        R.wk('tsn1-wk-m1_ansichten2'),
+        R.res({eb:'Ergebnis', title:'Die Bestellliste, <span class="g">nach Lieferant</span>.', text:[
+          'Mit den Ansichten aus dem Regal hast du für jede Frage deines Alltags einen eigenen Blick auf dieselben drei Tabellen. Nichts davon ist eine Kopie, alles bleibt eine Liste.',
+          'Leg dir die Bestellliste als Lesezeichen ab oder hol sie als verknüpfte Ansicht auf deine Startseite. Dann bist du am Abend vor dem Bestellen mit einem Klick dort.'],
+          mock:{file:'Probeküche / Produkte', tab:'Produkte', views:['Bestellliste','Lager','Knapp','Lieferungen'], cols:['Lieferant','Produkt','Bestand','Mindestbestand','Bestand prüfen'], num:[2,3],
+            rows:[['Feinkost Lorenz','Sardellen','1','2','<span class="t r">knapp</span>'],['Frischdienst Nord','Burrata 125 g','0,5','1','<span class="t r">knapp</span>'],['Frischdienst Nord','Parmigiano 24 Monate','1','1','<span class="t r">knapp</span>'],['Gemüsehof Brandt','Tomaten Ochsenherz','0','2','<span class="t r">knapp</span>']],
+            cap:'Beispielwerte'}}),
+        {emp:{kind:'Nutzung', animTitle:'Ansichten,', animGold:'die bleiben', steps:['Frage als Name','Wenige Spalten','Für alle speichern','Ausräumen'],
+          intro:'Ansichten sammeln sich schnell an. Nach drei Monaten hat jede Tabelle zwölf Reiter und keiner weiß mehr, welcher stimmt.',
+          points:['Nenn jede Ansicht nach ihrer Frage oder ihrem Zweck: <b>Bestellliste</b>, <b>Ohne Milch</b>, <b>Kühlhaus</b>.','Zeig in jeder Ansicht nur die Spalten, die für die Frage gebraucht werden. Der Rest bleibt ausgeblendet, nicht gelöscht.','Wichtige Ansichten fürs Team werden bewusst für alle gespeichert, nicht nebenbei.','Einmal im Monat räumst du auf: Ansichten, die keiner benutzt, kommen weg.']}}
+      ],
+      learn:{items:['Du legst jede Ansicht für eine <b>Frage</b> aus dem Alltag an.','Du stellst <b>Filter, Sortieren und Gruppieren</b> ein und verbindest Bedingungen mit UND oder ODER.','Du zeigst eine Datenbank als <b>verknüpfte Ansicht</b> auf einer anderen Seite, ohne sie zu kopieren.','Du legst <b>Vorlagen</b> an, auch solche, die sich selbst wiederholen.'],
+        next:'/lektionen/l17-native-automations-buttons'}
     });
   }
   go();
