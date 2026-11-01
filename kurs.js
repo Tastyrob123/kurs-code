@@ -1580,7 +1580,7 @@ window.__tsMO = function(cb){
   if(window.__tskmnext) return;
   function on(){ return /\/key-metrics\/?$/.test(location.pathname); }
   function afterAnchor(ids){ var last=null; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e) last=e; } return last; }
-  var NEXT_URL='https://gastronomie-ai-masterclass.super.site/modul-2-das-notion-ai-backoffice-system';
+  var NEXT_URL='/operations-area';
   var LEARN=[
     'Du hast die <b>Kostenauswertung Master</b> gebaut — jeder Monat eine Zeile mit allen Kennzahlen.',
     'Du verstehst <b>Deckungsbeitrag I, II und III</b> — und was zwischen den Stufen abgezogen wird.',
@@ -4358,13 +4358,31 @@ window.__tsMO = function(cb){
     { re:/\/rezepturen\/?$/,         href:'/gemeinkosten-mitarbeiterlhne' },
     { re:/\/gemeinkosten-mitarbeiterlhne\/?$/, href:'/allergene-bersicht' },
     { re:/\/allergene-bersicht\/?$/, href:'/gerichte-getrnke-finaler-schritt' },
-    { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/operations-area' },
+    { re:/\/gerichte-getrnke-finaler-schritt\/?$/, href:'/interface-bau-grundstruktur-widgets' },
+    /* Interface (#tsIfaceNext) und Menuekalkulation (.cta-btn) tragen eigene Weiter-Links, deshalb hier kein Eintrag. */
+    { re:/\/food-drinksquartier-inhalte-interface\/?$/, href:'/menkalkulation-catering-rechner' },
     { re:/\/operations-area\/?$/, href:'/lektionen/team-onboarding' },
     /* Key Metrics fehlte hier -> pageHref() lieferte null und der Pager hat den von #tskmnext
        gebauten Weiter-Button wieder ENTFERNT (Robert-Meldung 21.07.2026 "Button fehlt"). */
-    { re:/\/key-metrics\/?$/, href:'/modul-2-das-notion-ai-backoffice-system' },
+    { re:/\/key-metrics\/?$/, href:'/operations-area' },
     { re:/\/system-lebendiger-machen\/?$/, href:'/notion-ai-fr-unser-system' },
     { re:/\/notion-ai-fr-unser-system\/?$/, href:'/allgemeine-tipps' },
+    /* Modul 2 Ende -> Modul 3 (L3.1), Neubau 01.11.2026 */
+    { re:/\/allgemeine-tipps\/?$/, href:'/was-ist-claude-genau' },
+    /* Vision Frame + 13 Inseln in Kachel-Reihenfolge, danach Dynamisches System (Neubau 01.11.2026) */
+    { re:/\/vision-frame-abschluss-des-building-prozesses\/?$/, href:'/lektionen/vision-werte' },
+    { re:/\/lektionen\/unternehmen-markenidentit[a-z]*\/?$/, href:'/lektionen/team-kultur-guidelines' },
+    { re:/\/lektionen\/team-kultur-guidelines\/?$/, href:'/lektionen/interieur-design' },
+    { re:/\/lektionen\/interieur-design\/?$/, href:'/lektionen/zielgruppenanalyse' },
+    { re:/\/lektionen\/zielgruppenanalyse\/?$/, href:'/lektionen/konkurrenzanalyse' },
+    { re:/\/lektionen\/konkurrenzanalyse\/?$/, href:'/lektionen/gastronomie-lexikon' },
+    { re:/\/lektionen\/gastronomie-lexikon\/?$/, href:'/lektionen/standortanalyse' },
+    { re:/\/lektionen\/standortanalyse\/?$/, href:'/lektionen/expansioncenter' },
+    { re:/\/lektionen\/expansioncenter\/?$/, href:'/lektionen/franchise-rulebook' },
+    { re:/\/lektionen\/franchise-rulebook\/?$/, href:'/lektionen/eventkonzepte' },
+    { re:/\/lektionen\/eventkonzepte\/?$/, href:'/lektionen/catering' },
+    { re:/\/lektionen\/catering\/?$/, href:'/lektionen/merch-produkte' },
+    { re:/\/lektionen\/merch-produkte\/?$/, href:'/system-lebendiger-machen' },
     { re:/\/lektionen\/vision-werte\/?$/, href:'/lektionen/unternehmen-markenidentitt' },
     { re:/\/lektionen\/team-onboarding\/?$/, href:'/lektionen/checklisten-produktion' },
     { re:/\/lektionen\/checklisten-produktion\/?$/, href:'/lektionen/hygiene-behrden-handbcher' },
@@ -29448,14 +29466,14 @@ var TSISL_TEAM_ONB_V2=[
     var el=document.createElement('div'); el.id=cfg.id;
     el.innerHTML='<div class="tsl-head"><span class="tsl-eyebrow">Was du mitnimmst</span><h2 class="tsl-title">Learnings</h2></div>'+
       '<div class="tsl-grid">'+cfg.learn.map(function(t){ return '<div class="tsl-cell"><div class="tsl-orb"><p class="tsl-t">'+t+'</p></div></div>'; }).join('')+'</div>'+
-      (cfg.noNext?'':'<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">Nächste Lektion '+ARROW+'</a></div>');
+      (cfg.noNext?'':'<div id="ts-next-wrap"><a id="ts-next" href="'+cfg.next+'">'+(cfg.nextLabel||'Nächste Lektion')+' '+ARROW+'</a></div>');
     a.parentNode.insertBefore(el, a.nextSibling);
     if(cfg.noNext){ el.style.paddingBottom='24px'; if(T.reduced){ el.classList.add('in'); return el; } el.classList.add('js'); T.reveal(el,function(){ el.classList.add('in'); }); return el; }
     function guard(){
       var host=document.getElementById(cfg.id); if(!host) return;
       var all=document.querySelectorAll('#ts-next-wrap');
       for(var i=0;i<all.length;i++){ if(!host.contains(all[i]) && all[i].parentNode) all[i].parentNode.removeChild(all[i]); }
-      if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML='<a id="ts-next" href="'+cfg.next+'">Nächste Lektion '+ARROW+'</a>'; host.appendChild(w); }
+      if(!host.querySelector('#ts-next-wrap')){ var w=document.createElement('div'); w.id='ts-next-wrap'; w.innerHTML='<a id="ts-next" href="'+cfg.next+'">'+(cfg.nextLabel||'Nächste Lektion')+' '+ARROW+'</a>'; host.appendChild(w); }
     }
     guard();
     window.__tsMO(guard).observe(document.body,{childList:true,subtree:true});
@@ -30670,7 +30688,7 @@ var TSISL_TEAM_ONB_V2=[
         '<div style="max-width:900px;margin:0 auto">'+T.note('Fang klein an: eine Automation, die dir jede Woche zehn Minuten spart, ist mehr wert als ein Agent, den du nie fertig einrichtest.')+'</div>'); },
     learn:['Deine Vorlage kann Aufgaben übernehmen, die immer gleich ablaufen.','Automationen, Notion Agent und Claude Code haben je ihren eigenen Platz.','Die Faustregel: immer gleich, mitdenken in Notion, etwas von außen.','Wie du die drei einrichtest, lernst du in Modul 4, Lektion 4.6 bis 4.9.'] },
 
-  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:null,
+  { key:'tip', re:/\/allgemeine-tipps\/?$/, eyebrow:'Modul 2 · Praxis', title:'Allgemeine <span class="g">Tipps</span>', cover:'TIPPS', next:'/was-ist-claude-genau', nextLabel:'Weiter zu Modul 3',
     hideSel:['.page__allgemeine-tipps .notion-root > [id^="block-"]'],
     body:'<p class="big">Kleine Handgriffe, die den Alltag mit deiner Vorlage leichter machen.</p>',
     secs:function(){ return T.make('tsn2-tip-liste','tsn2-sec',T.steps([
@@ -30707,7 +30725,7 @@ var TSISL_TEAM_ONB_V2=[
     var la=document.createElement('div'); la.id='tsn2-'+cfg.key+'-la'; wrap.appendChild(la);
     var hero=sc.querySelector('.ts-hero'); hero.parentNode.insertBefore(wrap, hero.nextSibling);
     T.wireReveal(sec);
-    if(window.__tsn2learn) window.__tsn2learn({id:'tsn2-'+cfg.key+'-learn', anchorId:la.id, learn:cfg.learn, next:cfg.next||'', noNext:!cfg.next});
+    if(window.__tsn2learn) window.__tsn2learn({id:'tsn2-'+cfg.key+'-learn', anchorId:la.id, learn:cfg.learn, next:cfg.next||'', nextLabel:cfg.nextLabel, noNext:!cfg.next});
   }
 
   function sweep(){
