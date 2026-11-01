@@ -27952,7 +27952,7 @@ var TSISL_TEAM_ONB_V2=[
             ['Business','20 $ jährlich, 24 $ monatlich','Notion AI ist enthalten, also auch das Einlesen von Listen und Dokumenten. Dazu private Teamspaces und Rechte bis auf einzelne Zeilen.'],
             ['Enterprise','auf Anfrage','Für Gruppen mit vielen Standorten und eigener IT.']
           ]),
-          R.txt('<p><strong>Meine ehrliche Empfehlung.</strong> Fang allein im Free-Plan an und lerne die Vorlage kennen. Wenn dein Souschef oder deine Betriebsleitung mitarbeiten soll, gehst du auf Plus. Business lohnt sich, sobald du Lieferscheine und Listen mit Notion AI einlesen willst, statt sie abzutippen. Die Preise ändern sich, prüf sie vor dem Abschluss auf der Preisseite von Notion.</p>')
+          R.txt('<p><strong>Meine ehrliche Empfehlung.</strong> Fang allein im Free-Plan an und lerne die Vorlage kennen. Wenn dein Souschef oder deine Betriebsleitung mitarbeiten soll, gehst du auf Plus. Business lohnt sich, sobald du Lieferscheine und Preislisten als PDF oder Excel mit Notion AI einlesen willst, statt sie abzutippen. Ein Foto vom Papier-Lieferschein liest Claude, das zeige ich dir in Modul 4. Die Preise ändern sich, prüf sie vor dem Abschluss auf der Preisseite von Notion.</p>')
         ]}),
         R.sec({eb:'Jetzt du', title:'Dein Workspace in <span class="g">zehn Minuten</span>', blocks:[
           R.jetzt([
@@ -28461,7 +28461,7 @@ var TSISL_TEAM_ONB_V2=[
         ]}),
         R.sec({eb:'Weg 3', title:'Aus einem Dokument: Notion AI <span class="g">liest mit</span>', lead:'Lieferscheine, Rechnungen und Preislisten kommen oft als PDF. Der Notion Agent kann PDF-, CSV- und Excel-Dateien lesen und daraus Einträge in einer Datenbank anlegen.', blocks:[
           R.copy('Prompt für den Notion Agent','Lies die angehängte Rechnung von Frischdienst Nord. Lege für jede Position eine Zeile in der Datenbank „Produkte" an, mit Produkt, Einheit, Menge je Gebinde und Einkaufspreis je Gebinde netto. Wenn ein Produkt schon existiert, lege es nicht neu an, sondern nenne es mir. Markiere alle Zeilen, bei denen du dir bei Einheit oder Preis nicht sicher bist.','prompt','Stand November 2026: Notion AI ist in Business und Enterprise enthalten und verbraucht Credits. Als Dateien nennt die Notion-Hilfe unter anderem PDF, CSV und XLSX. Fotos, also zum Beispiel ein abfotografierter Papier-Lieferschein, stehen dort nicht. Nimm deshalb den digitalen Lieferschein oder die Rechnung als PDF.'),
-          R.txt('<p><strong>Die KI schreibt, du prüfst.</strong> Geh nach jedem Einlesen jede Zeile einmal durch, mit dem Dokument daneben. Achte besonders auf Einheiten, auf Preise je Stück gegen Preise je Kilo und auf Artikel, die es schon gab. Ein falsch eingelesener Preis wandert sonst unbemerkt bis in den Deckungsbeitrag. Bei Papier, das du nur als Foto hast, ist Abtippen meistens schneller als jede Nachkontrolle.</p>')
+          R.txt('<p><strong>Die KI schreibt, du prüfst.</strong> Geh nach jedem Einlesen jede Zeile einmal durch, mit dem Dokument daneben. Achte besonders auf Einheiten, auf Preise je Stück gegen Preise je Kilo und auf Artikel, die es schon gab. Ein falsch eingelesener Preis wandert sonst unbemerkt bis in den Deckungsbeitrag. Hast du den Lieferschein nur auf Papier, liest Claude das Foto. Wie das geht, zeige ich dir in Modul 4.</p>')
         ]}),
         R.sec({eb:'Typische Fehler', title:'Wenn nach dem Import etwas <span class="g">nicht passt</span>', wide:true, blocks:[
           R.fehler([
