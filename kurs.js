@@ -4416,7 +4416,8 @@ window.__tsMO = function(cb){
     { re:/\/(?:lektionen\/)?claude-nutzung-erklrt-6-konzepte\/?$/, href:'/installation-claude-code-vs-code-extension' },
     { re:/\/(?:lektionen\/)?installation-claude-code-vs-code-extension\/?$/, href:'/deine-erste-claudemd' },
     { re:/\/(?:lektionen\/)?deine-erste-claudemd\/?$/, href:'/die-3-slash-commands' },
-    { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/stack-aufrumen' },
+    { re:/\/(?:lektionen\/)?die-3-slash-commands\/?$/, href:'/plan-mode-effort-levels' },
+    { re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, href:'/stack-aufrumen' },
     { re:/\/(?:lektionen\/)?stack-aufrumen\/?$/, href:'/der-umstieg-von-chat-app-auf-claude-code' },
     { re:/\/(?:lektionen\/)?der-umstieg-von-chat-app-auf-claude-code\/?$/, href:'/modul-4-claude-claude-code' },
     /* Modul 4 - Claude Code + Notion Agents (L4.0-L4.9, Neubau 01.11.2026).
@@ -31473,7 +31474,7 @@ var TSISL_TEAM_ONB_V2=[
 /* >>> NEUBAU MODUL 3 (Claude Grundlagen) — ANFANG >>> */
 
 /* ---- Weiter-Kette (aus build.py) ---- */
-window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/stack-aufrumen"};
+window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/claude-plne-preis", "l03": "/claude-interface-durchlauf", "l04": "/claude-nutzung-erklrt-6-konzepte", "l07": "/installation-claude-code-vs-code-extension", "l08": "/deine-erste-claudemd", "l09": "/die-3-slash-commands", "l10": "/plan-mode-effort-levels", "l11": "/stack-aufrumen"};
 
 /* ---- lib.js ---- */
 /* ============================================================
@@ -33031,6 +33032,100 @@ window.__tsn3Chain={"l01": "/welches-claude-wann-chatcoworkcodeapi", "l02": "/cl
         'Du kennst die wichtigsten <b>Tasten</b>, vor allem Esc und Shift+Tab.',
         'Du kennst die <b>vier Modi</b> und weißt, wann du welchen nimmst.'],
       next:'/plan-mode-effort-levels'}
+  });
+})();
+
+/* ---- l11-plan-modelle.js ---- */
+/* ============================================================
+   NEUBAU MODUL 3 · L3.11 "Plan-Modus, Modelle & Denk-Tiefe"  (/plan-mode-effort-levels)
+   Fakten: Faktenblatt Punkt 1 (Modelle, Standard Opus 5.5, Aliasse inkl. opusplan, Effort-
+   Stufen low..max, Standard medium, /effort, ultrathink, max nur fuer die Sitzung) und
+   Punkt 9 (Plan-Modus: Shift+Tab oder /plan, liest/plant/aendert nichts, drei Freigabe-
+   Optionen, Ctrl+G). Kuechenbild (nur hier): Mise en place vor dem Service.
+   Erklaeranimation #tsn3-a11 "Erst Mise en place, dann Service."
+   Fuenf gleich grosse Schalen auf einem Brett = fuenf Planschritte. Im Plan-Modus fuellen sich
+   die Schalen mit den Schritten, dann die Freigabe, dann hakt Claude im Auto-Modus Schale fuer
+   Schale ab. Brett, Schalen und Modus-Anzeige stehen ab Beat 0.
+   ============================================================ */
+(function(){
+  var T3=window.__tsn3; if(!T3) return;
+  var STEPS=['Neue Preisliste des Großhändlers lesen','Artikel den Rezepturen zuordnen','Wareneinsatz je Gericht neu rechnen','Gerichte über deiner Grenze markieren','Ergebnis als Tabelle ablegen'];
+  var stage='<div class="l11-wrap"><div class="l11-top"><span class="l11-mode"><i></i><span class="m1">Plan-Modus</span><span class="m2">Auto-Modus</span></span>'
+    +'<span class="l11-task">Auftrag: Herbstkarte auf die neue Preisliste umrechnen</span></div>'
+    +'<div class="l11-board">'+STEPS.map(function(s,i){ return '<div class="l11-bowl in done" data-i="'+i+'"><span class="l11-img"><img src="'+T3.pic('a11-schale-'+(i+1)+'.webp','Schale '+(i+1),240,240)+'" alt="" loading="lazy" decoding="async"></span><span class="n">0'+(i+1)+'</span><span class="t">'+s+'</span><span class="ck">✓</span></div>'; }).join('')+'</div>'
+    +'<div class="l11-ask"><span class="l11-who">Plan freigeben?</span><span class="o on">Ja, mit Auto-Modus</span><span class="o">Ja, Änderungen einzeln bestätigen</span><span class="o">Nein, weiter planen</span></div></div>';
+  var CAPS=[
+    'Im <b>Plan-Modus</b> liest Claude die Dateien und schreibt einen Plan. Geändert wird noch nichts.',
+    'Jeder Schritt bekommt seinen Platz, wie die Schalen vor dem Service. Du siehst den <b>ganzen Weg</b>, bevor er gegangen wird.',
+    'Dann entscheidest du: <b>freigeben</b>, jede Änderung einzeln bestätigen oder weiter planen lassen.',
+    'Erst jetzt arbeitet Claude, <b>Schritt für Schritt</b> nach dem Plan, den du gesehen hast.'
+  ];
+  T3.anim('tsn3-a11',{
+    reset:function(el){ el.classList.remove('exec','asking'); el.querySelectorAll('.l11-bowl').forEach(function(b){ b.classList.remove('in','done'); }); },
+    play:function(el, api, end){
+      var bowls=el.querySelectorAll('.l11-bowl');
+      api.T.at(300,function(){ api.cap(CAPS[0]); });
+      api.T.at(2600,function(){ api.cap(CAPS[1]); });
+      bowls.forEach(function(b,i){ api.T.at(1300+i*520,function(){ b.classList.add('in'); }); });
+      api.T.at(5600,function(){ el.classList.add('asking'); api.cap(CAPS[2]); });
+      api.T.at(8600,function(){ el.classList.remove('asking'); el.classList.add('exec'); api.cap(CAPS[3]); });
+      bowls.forEach(function(b,i){ api.T.at(9400+i*700,function(){ b.classList.add('done'); }); });
+      api.T.at(9400+5*700+900, end);
+    },
+    end:function(el){ el.classList.remove('asking'); el.classList.add('exec'); el.querySelectorAll('.l11-bowl').forEach(function(b){ b.classList.add('in','done'); }); }
+  });
+
+  T3.page({
+    key:'l11', re:/\/(?:lektionen\/)?plan-mode-effort-levels\/?$/, tab:'L 3.11 · Plan-Modus, Modelle & Denk-Tiefe',
+    hero:{eyebrow:'L 3.11', title:'Erst <span class="ts-gold">planen</span>', alt:'Plan-Modus, Modelle und Denk-Tiefe in Claude Code'},
+    intro:'<p>Kein Koch fängt den Service an, bevor die Mise en place steht. Claude Code hat dafür einen eigenen Modus: Im <b>Plan-Modus</b> liest es, denkt nach und schreibt dir auf, was es vorhat, ohne eine einzige Datei zu ändern. Erst wenn du den Plan freigibst, wird gearbeitet.</p>'
+      +'<p>Dazu kommen zwei Einstellungen, die bestimmen, wie gründlich Claude vorgeht: welches <b>Modell</b> arbeitet und wie tief es nachdenkt. Für die meisten Aufgaben passt die Voreinstellung. Wann sich das Umstellen lohnt, zeige ich dir hier.</p>',
+    anim:{id:'tsn3-a11', eb:'Der Plan-Modus', title:'Erst Mise en place, dann <span class="g">Service</span>.',
+      sub:'Ein Auftrag, der fünf Schritte braucht. Achte darauf, wann Claude zum ersten Mal etwas ändert.',
+      stage:stage,
+      capEnd:CAPS[3]},
+    body:function(H){
+      return H.sec({id:'tsn3-l11-plan', title:'Wann du <span class="g">planen</span> lässt',
+          lead:'Anthropic empfiehlt, komplexe Aufgaben im Plan-Modus zu beginnen. Meine Faustregel: Sobald mehr als eine Datei betroffen ist oder die Aufgabe länger als ein paar Minuten dauert, wird geplant.',
+          body:'<p><strong class="lead">So schaltest du ihn ein.</strong>Mit <span class="tsn3-kbd">Shift</span>+<span class="tsn3-kbd">Tab</span>, bis unten „Plan“ steht, oder du beginnst deine Nachricht mit <code>/plan</code>. In der Desktop-App wählst du den Plan-Modus unter dem Eingabefeld.</p>'
+            +'<p><strong class="lead">So gibst du ihn frei.</strong>Ist der Plan fertig, fragt Claude, wie es weitergehen soll: freigeben und im Auto-Modus arbeiten, freigeben und jede Änderung einzeln bestätigen, oder weiter planen. Mit <span class="tsn3-kbd">Ctrl</span>+<span class="tsn3-kbd">G</span> öffnest du den Plan und änderst ihn selbst, bevor du freigibst.</p>'
+            +H.prompt('/plan Rechne die Herbstkarte auf die neue Preisliste in Einkauf/preisliste-november.pdf um. Ordne jeden Artikel der passenden Rezeptur zu, rechne den Wareneinsatz je Gericht neu und markier alle Gerichte, deren Wareneinsatz über 30 Prozent liegt. Leg das Ergebnis als Tabelle in Auswertungen ab. Zeig mir zuerst den Plan.','Prompt im Plan-Modus','Die 30 Prozent sind ein Beispiel. Setz deine eigene Grenze ein.')
+            +H.note('Lies den Plan wie einen Bon vor dem Service. Fehlt ein Schritt oder steht einer zu viel, sag es jetzt. Später kostet jede Korrektur mehr.','Die Merkregel')})
+        +H.sec({id:'tsn3-l11-modell', wide:true, title:'Welches <span class="g">Modell</span> arbeitet',
+          lead:'Seit Herbst 2026 ist Opus 5.5 in Claude Code voreingestellt, in allen bezahlten Plänen. Damit liegst du fast immer richtig. Mit /model wechselst du, oder mit Option+P auf dem Mac und Alt+P unter Windows.',
+          body:H.table(['Modell','Befehl','Nimm es, wenn'],[
+            ['Opus 5.5','<code>/model opus</code>','du nichts umstellen willst. Das ist der Standard und passt für den Großteil der Arbeit.'],
+            ['Sonnet 5.5','<code>/model sonnet</code>','es schnell gehen soll und die Aufgabe klar ist, etwa Routinearbeit an vielen Dateien. Spart Kontingent.'],
+            ['Haiku 5.5','<code>/model haiku</code>','es um große Mengen einfacher Arbeit geht: sortieren, auslesen, umbenennen.'],
+            ['Fable 5.1','<code>/model fable</code>','die Aufgabe größer ist als eine Sitzung und sehr gründlich gedacht werden muss. Verbraucht am meisten, in Pro nur über Nutzungsguthaben.']
+          ])})
+        +H.sec({id:'tsn3-l11-effort', wide:true, title:'Wie tief Claude <span class="g">nachdenkt</span>',
+          lead:'Die Denk-Tiefe heißt in Claude Code Effort. Niedrig ist schneller und günstiger, hoch ist gründlicher. Voreingestellt ist bei den aktuellen Modellen die mittlere Stufe.',
+          body:H.table(['Stufe','Wofür'],[
+            ['<code>low</code>','schnelles Hin und Her, erste Entwürfe, Ideen sammeln'],
+            ['<code>medium</code>','der Alltag mit klar umrissenen Aufgaben, die Voreinstellung'],
+            ['<code>high</code>','wenn es auf Prüfung ankommt, etwa bei Kalkulation und Allergenen'],
+            ['<code>xhigh</code>','für schwierige Aufgaben mit vielen Abhängigkeiten'],
+            ['<code>max</code>','nur für sehr schwere Probleme. Neigt zum Überdenken und gilt nur für die laufende Sitzung.']
+          ])
+          +'<p style="margin-top:16px">Du stellst die Stufe mit <code>/effort</code> ein, zum Beispiel <code>/effort high</code>, oder im Menü von <code>/model</code> mit den Pfeiltasten. Brauchst du einmalig mehr Tiefe, schreib das Wort <code>ultrathink</code> in deine Nachricht. Dann denkt Claude nur für diese eine Antwort gründlicher nach.</p>'})
+        +H.sec({id:'tsn3-l11-opusplan', title:'Planen mit Opus, arbeiten mit <span class="g">Sonnet</span>',
+          lead:'Eine Einstellung verbindet beides: Mit /model opusplan plant Opus, und Sonnet führt den Plan aus.',
+          body:'<p>Das lohnt sich bei großen Aufgaben, wenn dein Kontingent knapp wird. Das teure Nachdenken passiert einmal beim Planen, die vielen einzelnen Arbeitsschritte erledigt das schnellere Modell. Für den Anfang brauchst du das nicht. Merk es dir für den Tag, an dem dich die Nutzungsgrenze zum ersten Mal ärgert.</p>'
+            +H.code('/model opusplan','Planen mit Opus, ausführen mit Sonnet')})
+    },
+    emp:{kind:'Nutzung', animTitle:'Dein', animGold:'Plan vor dem Service',
+      steps:['Plan-Modus an','Plan lesen','Freigeben','Tiefe nur bei Bedarf'],
+      intro:'So arbeitest du ab heute bei jeder größeren Aufgabe:',
+      points:['Schalte mit <b>Shift+Tab</b> in den Plan-Modus, sobald mehr als eine Datei betroffen ist.',
+        'Lies den Plan <b>ganz</b>, bevor du freigibst, und ergänze, was fehlt.',
+        'Gib ihn in der ersten Zeit mit <b>einzeln bestätigen</b> frei. Auto kommt, wenn du dem Ablauf traust.',
+        'Lass Modell und Denk-Tiefe auf der Voreinstellung und dreh nur bei <b>Kalkulation und Allergenen</b> auf high.']},
+    learn:{learn:['Du lässt größere Aufgaben im <b>Plan-Modus</b> vorbereiten.',
+        'Du kennst die drei <b>Freigabe-Wege</b> nach dem Plan.',
+        'Du weißt, dass <b>Opus 5.5</b> Standard ist und wann ein anderes Modell passt.',
+        'Du stellst die <b>Denk-Tiefe</b> mit /effort ein, wenn es darauf ankommt.'],
+      next:'/die-5-wichtigsten-skills'}
   });
 })();
 
