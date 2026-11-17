@@ -3172,6 +3172,12 @@ window.__tsMO = function(cb){
 (function(){
   var IMG="https://tastyrob123.github.io/kurs-code/assets/4ezi8i.webp";
   var LOGO="https://tastyrob123.github.io/kurs-code/assets/hut-weiss.svg";
+  /* Leiste oben links: Doktorhut statt T (Leisten-HTML liegt im Super-Body-Feld) */
+  (function hutLeiste(){
+    function sw(){ var i=document.querySelector('#tsnav .brand img'); if(i && i.getAttribute('src')!==LOGO) i.setAttribute('src',LOGO); }
+    sw(); document.addEventListener('DOMContentLoaded', sw); window.addEventListener('load', sw);
+  })();
+
   function mount(){
     var sc=document.querySelector(".super-content.page__index");
     if(!sc || sc.querySelector(".ts-hero")) return;

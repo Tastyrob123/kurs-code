@@ -768,6 +768,7 @@ details > summary {
 #tsnav .brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;letter-spacing:-0.4px;
   color:#fff;text-decoration:none;white-space:nowrap}
 #tsnav .brand img{width:20px;height:20px;display:block}
+#tsnav .brand img{content:url("https://tastyrob123.github.io/kurs-code/assets/hut-weiss.svg");object-fit:contain}
 #tsnav .brand .cls{color:#e32552}
 #tsnav .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:34px}
 #tsnav .center a{font-size:15px;font-weight:400;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;white-space:nowrap}
