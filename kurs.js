@@ -3171,7 +3171,7 @@ window.__tsMO = function(cb){
 
 (function(){
   var IMG="https://tastyrob123.github.io/kurs-code/assets/4ezi8i.webp";
-  var LOGO="https://tastyrob123.github.io/kurs-code/assets/au80tp.png";
+  var LOGO="https://tastyrob123.github.io/kurs-code/assets/hut-weiss.svg";
   function mount(){
     var sc=document.querySelector(".super-content.page__index");
     if(!sc || sc.querySelector(".ts-hero")) return;
